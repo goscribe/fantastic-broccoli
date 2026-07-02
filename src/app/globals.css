@@ -1,31 +1,47 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafaf9;
-  --foreground: #1c1917;
-  --card: #ffffff;
-  --card-foreground: #1c1917;
-  --muted: #f5f5f4;
-  --muted-foreground: #78716c;
-  --accent: #6d28d9;
-  --accent-foreground: #ffffff;
-  --border: #e7e5e4;
-  --ring: #6d28d9;
-  --radius: 0.75rem;
-  --success: #16a34a;
-  --warning: #d97706;
+  --background: #0b0c0f;
+  --foreground: #ececf1;
+  --card: #131419;
+  --card-hover: #17181f;
+  --card-foreground: #ececf1;
+  --muted: #1c1d24;
+  --muted-foreground: #8b8d98;
+  --faint: #62646f;
+  --accent: #c8f542;
+  --accent-dim: #a8d42f;
+  --accent-foreground: #0b0c0f;
+  --violet: #a78bfa;
+  --sky: #7dd3fc;
+  --rose: #fda4af;
+  --amber: #fcd34d;
+  --border: #24252d;
+  --border-strong: #33343e;
+  --ring: #c8f542;
+  --radius: 1rem;
+  --success: #4ade80;
+  --warning: #fbbf24;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
   --color-card-foreground: var(--card-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-faint: var(--faint);
   --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
   --color-accent-foreground: var(--accent-foreground);
+  --color-violet: var(--violet);
+  --color-sky: var(--sky);
+  --color-rose: var(--rose);
+  --color-amber: var(--amber);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-ring: var(--ring);
   --color-success: var(--success);
   --color-warning: var(--warning);
@@ -34,56 +50,85 @@
   --radius: var(--radius);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0c0a09;
-    --foreground: #e7e5e4;
-    --card: #1c1917;
-    --card-foreground: #e7e5e4;
-    --muted: #292524;
-    --muted-foreground: #a8a29e;
-    --accent: #7c3aed;
-    --accent-foreground: #ffffff;
-    --border: #292524;
-    --ring: #7c3aed;
-    --success: #22c55e;
-    --warning: #f59e0b;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Smooth transitions */
-* {
-  transition-property: color, background-color, border-color, opacity;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+/* Subtle grain / vignette backdrop */
+.app-backdrop {
+  background:
+    radial-gradient(1200px 500px at 20% -10%, rgba(200, 245, 66, 0.05), transparent 60%),
+    radial-gradient(900px 400px at 90% 0%, rgba(167, 139, 250, 0.06), transparent 55%),
+    var(--background);
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: var(--border-strong);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--muted-foreground);
+  background: var(--faint);
 }
 
-/* Progress bar animation */
-@keyframes progress-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+::selection {
+  background: rgba(200, 245, 66, 0.25);
 }
-.animate-progress-pulse {
-  animation: progress-pulse 2s ease-in-out infinite;
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 1.2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--muted-foreground) 0%,
+    var(--foreground) 50%,
+    var(--muted-foreground) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes flip-in {
+  from { transform: rotateX(-12deg) scale(0.98); opacity: 0; }
+  to { transform: rotateX(0) scale(1); opacity: 1; }
+}
+.animate-flip-in {
+  animation: flip-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }

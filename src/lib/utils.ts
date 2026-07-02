@@ -18,6 +18,12 @@ export function formatRelativeDate(date: Date | string): string {
   const diffMs = now.getTime() - d.getTime();
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
+  if (diffDays < 0) {
+    const ahead = Math.abs(diffDays);
+    if (ahead < 7) return `in ${ahead}d`;
+    if (ahead < 30) return `in ${Math.ceil(ahead / 7)}w`;
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  }
   if (diffDays === 0) return "Today";
   if (diffDays === 1) return "Yesterday";
   if (diffDays < 7) return `${diffDays}d ago`;

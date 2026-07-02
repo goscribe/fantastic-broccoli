@@ -19,23 +19,23 @@ const typeConfig: Record<
   string,
   { icon: React.ElementType; label: string; color: string }
 > = {
-  reading: { icon: BookOpen, label: "Reading", color: "text-blue-500" },
+  reading: { icon: BookOpen, label: "Reading", color: "text-sky" },
   comprehension_check: {
     icon: Brain,
     label: "Comprehension",
-    color: "text-purple-500",
+    color: "text-violet",
   },
-  mcq: { icon: HelpCircle, label: "MCQ", color: "text-amber-500" },
+  mcq: { icon: HelpCircle, label: "MCQ", color: "text-amber" },
   flashcard_review: {
     icon: LayoutGrid,
     label: "Flashcards",
-    color: "text-emerald-500",
+    color: "text-accent",
   },
-  worksheet: { icon: FileText, label: "Worksheet", color: "text-rose-500" },
+  worksheet: { icon: FileText, label: "Worksheet", color: "text-rose" },
   interactive: {
     icon: Gamepad2,
     label: "Interactive",
-    color: "text-cyan-500",
+    color: "text-sky",
   },
 };
 
@@ -67,9 +67,9 @@ export function ActivityItem({
       type="button"
       onClick={() => onClick?.(activity.id)}
       className={cn(
-        "w-full flex items-center gap-3 p-3 rounded-lg text-left group",
+        "w-full flex items-center gap-3 p-3 rounded-xl text-left group",
         isActive
-          ? "bg-accent/5 border border-accent/20"
+          ? "bg-accent/10 border border-accent/25"
           : "hover:bg-muted/50",
         activity.status === "completed" && "opacity-70",
       )}
