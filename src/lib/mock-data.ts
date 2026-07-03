@@ -97,6 +97,77 @@ const chemActivities: SessionActivity[] = [
     status: "pending",
     estimatedMinutes: 5,
   },
+  {
+    id: "act-4b",
+    sessionId: "ses-1",
+    type: "vocab_recall",
+    title: "Active Recall — Vocabulary",
+    content: {
+      type: "vocab_recall",
+      terms: [
+        {
+          term: "Aufbau principle",
+          definition:
+            "Electrons fill the lowest available energy orbital before occupying higher-energy orbitals.",
+          result: null,
+        },
+        {
+          term: "Pauli exclusion principle",
+          definition:
+            "Each orbital can hold at most two electrons, and they must have opposite spins.",
+          result: null,
+        },
+        {
+          term: "Effective nuclear charge",
+          definition:
+            "The net positive charge experienced by an electron after accounting for shielding by inner electrons.",
+          result: null,
+        },
+      ],
+    },
+    order: 4,
+    status: "pending",
+    estimatedMinutes: 6,
+  },
+  {
+    id: "act-4c",
+    sessionId: "ses-1",
+    type: "cloze",
+    title: "Fill the Gaps — Periodic Trends",
+    content: {
+      type: "cloze",
+      passages: [
+        {
+          textWithBlanks:
+            "Across a period, atomic radius ___ because nuclear charge increases while electrons enter the same shell. First ionization energy generally ___ across a period, with dips after ___ subshells are filled.",
+          answers: ["decreases", "increases", "s"],
+        },
+      ],
+    },
+    order: 5,
+    status: "pending",
+    estimatedMinutes: 4,
+  },
+  {
+    id: "act-4d",
+    sessionId: "ses-1",
+    type: "explain_aloud",
+    title: "Teach It Back — Ionization Energy",
+    content: {
+      type: "explain_aloud",
+      prompt:
+        "Explain out loud, as if to a friend who missed class: why does first ionization energy dip between magnesium and aluminium?",
+      keyPoints: [
+        "Aluminium's outer electron is in a 3p orbital, higher in energy than magnesium's 3s",
+        "The 3p electron is further from the nucleus and better shielded",
+        "So less energy is needed to remove it, despite the higher nuclear charge",
+      ],
+      completed: false,
+    },
+    order: 6,
+    status: "pending",
+    estimatedMinutes: 5,
+  },
 ];
 
 const bioActivities: SessionActivity[] = [

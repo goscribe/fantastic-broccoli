@@ -4,7 +4,10 @@ export type ActivityType =
   | "flashcard_review"
   | "reading"
   | "worksheet"
-  | "interactive";
+  | "interactive"
+  | "vocab_recall"
+  | "cloze"
+  | "explain_aloud";
 
 export type ActivityStatus = "pending" | "in_progress" | "completed" | "skipped";
 
@@ -51,7 +54,10 @@ export type ActivityContent =
   | FlashcardContent
   | ReadingContent
   | WorksheetContent
-  | InteractiveContent;
+  | InteractiveContent
+  | VocabRecallContent
+  | ClozeContent
+  | ExplainAloudContent;
 
 export interface McqContent {
   type: "mcq";
@@ -104,6 +110,27 @@ export interface InteractiveContent {
   type: "interactive";
   componentType: string;
   config: Record<string, unknown>;
+  completed: boolean;
+}
+
+export interface VocabRecallContent {
+  type: "vocab_recall";
+  terms: { term: string; definition: string; result: boolean | null }[];
+}
+
+export interface ClozeContent {
+  type: "cloze";
+  passages: {
+    textWithBlanks: string;
+    answers: string[];
+    userAnswers?: string[];
+  }[];
+}
+
+export interface ExplainAloudContent {
+  type: "explain_aloud";
+  prompt: string;
+  keyPoints: string[];
   completed: boolean;
 }
 

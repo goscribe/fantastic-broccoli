@@ -426,11 +426,7 @@ export function Copilot({
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
-  const [width, setWidth] = useState(() =>
-    typeof window === "undefined"
-      ? 0
-      : Math.max(420, Math.round(window.innerWidth / 2)),
-  );
+  const [width, setWidth] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const resizing = useRef(false);
 
@@ -580,7 +576,7 @@ export function Copilot({
   return (
     <div
       className="relative self-stretch shrink-0 hidden sm:flex flex-col bg-card border-l border-border min-h-0"
-      style={{ width: width || "50vw" }}
+      style={width ? { width } : { width: "50vw", minWidth: 420 }}
     >
       {/* Resize handle */}
       <div

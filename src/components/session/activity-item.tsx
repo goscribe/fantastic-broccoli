@@ -2,48 +2,18 @@
 
 import { SessionActivity } from "@/types";
 import { cn, formatDuration } from "@/lib/utils";
-import {
-  BookOpen,
-  Brain,
-  LayoutGrid,
-  FileText,
-  CheckCircle2,
-  Circle,
-  Loader2,
-  SkipForward,
-  HelpCircle,
-  Gamepad2,
-} from "lucide-react";
+import { Check } from "lucide-react";
 
-const typeConfig: Record<
-  string,
-  { icon: React.ElementType; label: string; color: string }
-> = {
-  reading: { icon: BookOpen, label: "Reading", color: "text-sky" },
-  comprehension_check: {
-    icon: Brain,
-    label: "Comprehension",
-    color: "text-violet",
-  },
-  mcq: { icon: HelpCircle, label: "MCQ", color: "text-amber" },
-  flashcard_review: {
-    icon: LayoutGrid,
-    label: "Flashcards",
-    color: "text-accent",
-  },
-  worksheet: { icon: FileText, label: "Worksheet", color: "text-rose" },
-  interactive: {
-    icon: Gamepad2,
-    label: "Interactive",
-    color: "text-sky",
-  },
-};
-
-const statusIcons: Record<string, React.ElementType> = {
-  completed: CheckCircle2,
-  in_progress: Loader2,
-  pending: Circle,
-  skipped: SkipForward,
+const typeLabels: Record<string, string> = {
+  reading: "Reading",
+  comprehension_check: "Comprehension",
+  mcq: "Quiz",
+  flashcard_review: "Flashcards",
+  worksheet: "Worksheet",
+  interactive: "Interactive",
+  vocab_recall: "Recall",
+  cloze: "Fill the gaps",
+  explain_aloud: "Explain aloud",
 };
 
 interface ActivityItemProps {
@@ -55,61 +25,47 @@ interface ActivityItemProps {
 
 export function ActivityItem({
   activity,
+  index = 0,
   isActive,
   onClick,
 }: ActivityItemProps) {
-  const config = typeConfig[activity.type] || typeConfig.reading;
-  const TypeIcon = config.icon;
-  const StatusIcon = statusIcons[activity.status] || Circle;
+  const completed = activity.status === "completed";
 
   return (
     <button
       type="button"
       onClick={() => onClick?.(activity.id)}
       className={cn(
-        "w-full flex items-center gap-3 p-3 rounded-xl text-left group",
-        isActive
-          ? "bg-accent/10 border border-accent/25"
-          : "hover:bg-muted/50",
-        activity.status === "completed" && "opacity-70",
+        "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left",
+        isActive ? "bg-accent-soft" : "hover:bg-muted",
       )}
     >
-      <div className="relative flex-shrink-0 flex h-8 w-8 items-center justify-center">
-        <TypeIcon className={cn("h-4 w-4", config.color)} />
-        <StatusIcon
-          className={cn(
-            "absolute -bottom-1 -right-1 h-3.5 w-3.5 bg-card rounded-full",
-            activity.status === "completed" && "text-success",
-            activity.status === "in_progress" && "text-accent animate-spin",
-            activity.status === "pending" && "text-muted-foreground",
-            activity.status === "skipped" && "text-muted-foreground",
-          )}
-        />
-      </div>
-
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2">
-          <span
-            className={cn(
-              "text-sm font-medium truncate",
-              activity.status === "completed" && "line-through",
-            )}
-          >
-            {activity.title}
-          </span>
-          <span className="text-[11px] text-muted-foreground flex-shrink-0">
-            {config.label}
-          </span>
-        </div>
-        {activity.description && (
-          <p className="text-xs text-muted-foreground mt-0.5 truncate">
-            {activity.description}
-          </p>
+      <span
+        className={cn(
+          "flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold tabular-nums",
+          completed
+            ? "bg-accent text-accent-foreground"
+            : isActive
+              ? "bg-foreground text-background"
+              : "bg-muted text-muted-foreground border border-border-strong",
         )}
-      </div>
+      >
+        {completed ? <Check className="h-3 w-3" /> : index + 1}
+      </span>
 
-      <span className="text-xs text-muted-foreground tabular-nums flex-shrink-0">
-        {formatDuration(activity.estimatedMinutes)}
+      <span className="flex-1 min-w-0">
+        <span
+          className={cn(
+            "block text-[13px] font-medium truncate",
+            completed ? "text-faint line-through" : "text-foreground",
+          )}
+        >
+          {activity.title}
+        </span>
+        <span className="block text-[11px] text-muted-foreground">
+          {typeLabels[activity.type] ?? "Activity"} ·{" "}
+          {formatDuration(activity.estimatedMinutes)}
+        </span>
       </span>
     </button>
   );

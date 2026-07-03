@@ -9,12 +9,18 @@ import {
   McqContent,
   ReadingContent,
   FlashcardContent,
+  VocabRecallContent,
+  ClozeContent,
+  ExplainAloudContent,
 } from "@/types";
 import { ActivityItem } from "@/components/session/activity-item";
 import { ComprehensionActivity } from "@/components/session/comprehension-activity";
 import { McqActivity } from "@/components/session/mcq-activity";
 import { ReadingActivity } from "@/components/session/reading-activity";
 import { FlashcardActivity } from "@/components/session/flashcard-activity";
+import { VocabRecallActivity } from "@/components/session/vocab-recall-activity";
+import { ClozeActivity } from "@/components/session/cloze-activity";
+import { ExplainAloudActivity } from "@/components/session/explain-aloud-activity";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -53,7 +59,7 @@ export default function SessionDetailPage() {
   );
 
   const [showComments, setShowComments] = useState(false);
-  const [copilotOpen, setCopilotOpen] = useState(false);
+  const [copilotOpen, setCopilotOpen] = useState(true);
   const [newComment, setNewComment] = useState("");
 
   const activeActivity = useMemo(
@@ -129,6 +135,27 @@ export default function SessionDetailPage() {
             onComplete={goToNext}
           />
         );
+      case "vocab_recall":
+        return (
+          <VocabRecallActivity
+            content={activity.content as VocabRecallContent}
+            onComplete={goToNext}
+          />
+        );
+      case "cloze":
+        return (
+          <ClozeActivity
+            content={activity.content as ClozeContent}
+            onComplete={goToNext}
+          />
+        );
+      case "explain_aloud":
+        return (
+          <ExplainAloudActivity
+            content={activity.content as ExplainAloudContent}
+            onComplete={goToNext}
+          />
+        );
       default:
         return (
           <Card className="text-center py-6 text-sm text-muted-foreground">
@@ -143,50 +170,50 @@ export default function SessionDetailPage() {
       {/* Study column */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
       {/* Header */}
-      <header className="border-b border-border bg-card/85 backdrop-blur-md z-10">
-        <div className="px-6 py-3.5">
-          <div className="flex items-center justify-between gap-4">
-            <div className="min-w-0 flex-1">
-              <button
-                type="button"
-                onClick={() => router.push(`/workspace/${workspaceId}`)}
-                className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground mb-1.5"
-              >
-                <ArrowLeft className="h-3 w-3" />
-                {workspace.title}
-              </button>
-              <h1 className="text-lg font-bold tracking-tight truncate">
-                {session.title}
-              </h1>
-              <div className="flex items-center gap-3 mt-1.5 text-xs text-muted-foreground">
-                <Badge variant="accent" className="capitalize">
-                  {session.depth}
-                </Badge>
-                <span className="flex items-center gap-1">
-                  <Clock className="h-3 w-3" />
-                  {formatDuration(totalEstimated)}
-                </span>
-                <span>
-                  {completedCount}/{session.activities.length} done
-                </span>
-              </div>
+      <header className="border-b border-border bg-card z-10">
+        <div className="px-6 h-12 flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => router.push(`/workspace/${workspaceId}`)}
+            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground shrink-0"
+          >
+            <ArrowLeft className="h-3 w-3" />
+            {workspace.title}
+          </button>
+          <span className="text-border-strong">/</span>
+          <h1 className="text-sm font-bold tracking-tight truncate">
+            {session.title}
+          </h1>
+          <Badge variant="accent" className="capitalize shrink-0">
+            {session.depth}
+          </Badge>
+          <div className="ml-auto flex items-center gap-4 shrink-0">
+            <span className="flex items-center gap-1 text-xs text-muted-foreground">
+              <Clock className="h-3 w-3" />
+              {formatDuration(totalEstimated)}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              {completedCount}/{session.activities.length} done
+            </span>
+            <div className="w-32">
+              <ProgressBar value={session.progress} size="sm" />
             </div>
-
+            <span className="text-xs font-semibold tabular-nums">
+              {session.progress}%
+            </span>
             <button
               type="button"
               onClick={() => setShowComments(!showComments)}
-              className="relative p-2.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
+              className="relative p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
             >
               <MessageSquare className="h-4 w-4" />
               {session.comments.length > 0 && (
-                <span className="absolute top-0.5 right-0.5 h-4 w-4 rounded-full bg-accent text-[10px] font-bold text-accent-foreground flex items-center justify-center">
+                <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-accent text-[9px] font-bold text-accent-foreground flex items-center justify-center">
                   {session.comments.length}
                 </span>
               )}
             </button>
           </div>
-
-          <ProgressBar value={session.progress} className="mt-3" showLabel />
         </div>
       </header>
 
@@ -213,8 +240,8 @@ export default function SessionDetailPage() {
         </aside>
 
         {/* Main study area */}
-        <main className="flex-1 overflow-y-auto">
-          <div className="max-w-3xl px-8 py-8">
+        <main className="flex-1 overflow-y-auto bg-card">
+          <div className="max-w-3xl mx-auto px-8 py-8">
             {activeActivity ? (
               <div className="space-y-5 animate-fade-up" key={activeActivity.id}>
                 <div className="flex items-center justify-between">
