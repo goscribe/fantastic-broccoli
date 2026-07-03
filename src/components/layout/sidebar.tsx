@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { mockFolders } from "@/lib/mock-data";
+import { ScribeLogo } from "@/components/graphics/logo";
+import { mockFolders, mockSharedWorkspaces } from "@/lib/mock-data";
 import { Folder as FolderType } from "@/types";
 import { cn } from "@/lib/utils";
 import { Home, ChevronRight, Plus, Search } from "lucide-react";
@@ -113,11 +114,8 @@ export function Sidebar() {
 
   return (
     <aside className="hidden md:flex w-72 shrink-0 flex-col bg-card border-r border-border">
-      <div className="flex items-center gap-2 px-4 h-14">
-        <span className="flex h-6 w-6 items-center justify-center rounded-md bg-accent text-accent-foreground text-xs font-bold">
-          S
-        </span>
-        <span className="font-bold text-sm tracking-tight">Scribe</span>
+      <div className="flex items-center px-4 h-14">
+        <ScribeLogo />
       </div>
 
       <div className="px-3">
@@ -170,6 +168,39 @@ export function Sidebar() {
                 toggle={toggle}
               />
             ))}
+          </div>
+        </div>
+
+        <div>
+          <div className="flex items-center justify-between px-1.5 pb-1">
+            <span className="text-[11px] font-semibold text-faint">
+              Shared with me
+            </span>
+          </div>
+          <div className="space-y-px">
+            {mockSharedWorkspaces.map((ws) => {
+              const active = pathname.startsWith(`/workspace/${ws.id}`);
+              return (
+                <Link
+                  key={ws.id}
+                  href={`/workspace/${ws.id}/materials`}
+                  className={cn(
+                    "flex items-center gap-1.5 rounded-md py-1 px-1.5 text-[13px]",
+                    active
+                      ? "bg-accent-soft text-accent font-medium"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                  )}
+                >
+                  <span className="text-sm leading-none" aria-hidden>
+                    {ws.icon}
+                  </span>
+                  <span className="truncate">{ws.title}</span>
+                  <span className="ml-auto text-[10px] text-faint shrink-0">
+                    {ws.sharedBy}
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </nav>

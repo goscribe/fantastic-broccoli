@@ -2,14 +2,14 @@ export function PdfArt({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 40 40" className={className} aria-hidden>
       <path
-        d="M9 5a3 3 0 0 1 3-3h12l7 7v26a3 3 0 0 1-3 3H12a3 3 0 0 1-3-3V5z"
+        d="M6 5a3 3 0 0 1 3-3h16l9 9v24a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V5z"
         fill="#ffe4e6"
       />
-      <path d="M24 2l7 7h-5a2 2 0 0 1-2-2V2z" fill="#fda4af" />
-      <rect x="13" y="16" width="14" height="2" rx="1" fill="#fb7185" />
-      <rect x="13" y="21" width="14" height="2" rx="1" fill="#fda4af" />
-      <rect x="13" y="26" width="9" height="2" rx="1" fill="#fda4af" />
-      <rect x="6" y="29" width="17" height="8" rx="2" fill="#f43f5e" />
+      <path d="M25 2l9 9h-7a2 2 0 0 1-2-2V2z" fill="#fda4af" />
+      <rect x="11" y="16" width="18" height="2" rx="1" fill="#fb7185" />
+      <rect x="11" y="21" width="18" height="2" rx="1" fill="#fda4af" />
+      <rect x="11" y="26" width="12" height="2" rx="1" fill="#fda4af" />
+      <rect x="4" y="29" width="21" height="8" rx="2" fill="#f43f5e" />
       <text
         x="14.5"
         y="35.2"

@@ -302,6 +302,35 @@ export const mockWorkspaces: Workspace[] = [
   },
 ];
 
+export const mockSharedWorkspaces: Workspace[] = [
+  {
+    id: "ws-shared-1",
+    title: "Physics HL",
+    description: "Mechanics & waves notes",
+    icon: "🔭",
+    color: "#38bdf8",
+    course: "IB HL",
+    sessions: [],
+    materials: [],
+    totalProgress: 0,
+    createdAt: "2026-06-20T10:00:00Z",
+    sharedBy: "Maya",
+  },
+  {
+    id: "ws-shared-2",
+    title: "English Lang & Lit",
+    description: "Paper 1 practice texts",
+    icon: "📖",
+    color: "#f59e0b",
+    course: "IB SL",
+    sessions: [],
+    materials: [],
+    totalProgress: 0,
+    createdAt: "2026-06-25T10:00:00Z",
+    sharedBy: "Daniel",
+  },
+];
+
 export const mockFolders: Folder[] = [
   {
     id: "fld-1",
@@ -361,7 +390,10 @@ export function countWorkspaces(folder: Folder): number {
 }
 
 export function getWorkspace(id: string): Workspace | undefined {
-  return mockWorkspaces.find((w) => w.id === id);
+  return (
+    mockWorkspaces.find((w) => w.id === id) ??
+    mockSharedWorkspaces.find((w) => w.id === id)
+  );
 }
 
 export function getSession(id: string): StudySession | undefined {

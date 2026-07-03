@@ -75,10 +75,15 @@ export default function WorkspaceStudyPage() {
           {!workspace || workspace.sessions.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6">
               <Sparkles className="h-7 w-7 text-accent mx-auto mb-3" />
-              <p className="text-sm font-semibold">No sessions yet</p>
+              <p className="text-sm font-semibold">
+                {workspace?.sharedBy
+                  ? "Your sessions are private"
+                  : "No sessions yet"}
+              </p>
               <p className="text-xs text-muted-foreground mt-1.5 mb-5 max-w-sm mx-auto">
-                Tell Scribe what you&apos;re studying and it will build a plan
-                with readings, quizzes, and comprehension checks.
+                {workspace?.sharedBy
+                  ? `Materials in this workspace are shared by ${workspace.sharedBy}, but study sessions stay personal — create your own plan from them.`
+                  : "Tell Scribe what you're studying and it will build a plan with readings, quizzes, and comprehension checks."}
               </p>
               <Button size="sm" onClick={() => setShowCreateWizard(true)}>
                 <Sparkles className="h-3.5 w-3.5 mr-1.5" />

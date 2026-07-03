@@ -134,6 +134,7 @@ export interface Workspace {
   totalProgress: number;
   lastStudied?: string;
   createdAt: string;
+  sharedBy?: string;
 }
 
 export interface Folder {
