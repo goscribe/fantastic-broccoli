@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { getWorkspace } from "@/lib/mock-data";
 import { Material, MaterialType } from "@/types";
@@ -8,7 +9,16 @@ import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatRelativeDate } from "@/lib/utils";
-import { Plus, Square, Circle, Upload } from "lucide-react";
+import {
+  Plus,
+  Square,
+  Circle,
+  Upload,
+  Sparkles,
+  Check,
+  Loader2,
+  ArrowRight,
+} from "lucide-react";
 import {
   PdfArt,
   NoteArt,
@@ -114,6 +124,79 @@ function RecorderCard({ onStop }: { onStop: (seconds: number) => void }) {
   );
 }
 
+const convertStages = [
+  "Reading PDF…",
+  "Extracting diagrams — 3 figures captured",
+  "Writing multi-step questions with sub-parts",
+  "Worksheet ready",
+];
+
+function ConvertToWorksheet({
+  material,
+  workspaceId,
+}: {
+  material: Material;
+  workspaceId: string;
+}) {
+  const [stage, setStage] = useState(-1);
+
+  useEffect(() => {
+    if (stage < 0 || stage >= convertStages.length - 1) return;
+    const t = setTimeout(() => setStage((s) => s + 1), 1200);
+    return () => clearTimeout(t);
+  }, [stage]);
+
+  if (stage === -1) {
+    return (
+      <Button
+        size="sm"
+        variant="outline"
+        className="shrink-0"
+        onClick={(e) => {
+          e.stopPropagation();
+          setStage(0);
+        }}
+      >
+        <Sparkles className="h-3.5 w-3.5 mr-1.5 text-accent" />
+        Convert to worksheet
+      </Button>
+    );
+  }
+
+  const done = stage === convertStages.length - 1;
+  return (
+    <div
+      className="shrink-0 w-64 rounded-xl border border-border bg-muted/40 px-3.5 py-2.5 space-y-1.5"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {convertStages.slice(0, stage + 1).map((label, i) => (
+        <p
+          key={label}
+          className="flex items-center gap-1.5 text-[11px] font-medium animate-fade-up"
+        >
+          {i < stage || done ? (
+            <Check className="h-3 w-3 text-accent" />
+          ) : (
+            <Loader2 className="h-3 w-3 animate-spin text-muted-foreground" />
+          )}
+          <span className={i === stage && !done ? "text-muted-foreground" : ""}>
+            {label}
+          </span>
+        </p>
+      ))}
+      {done && (
+        <Link
+          href={`/workspace/${workspaceId}/session/ses-1`}
+          className="flex items-center gap-1 text-[11px] font-semibold text-accent-dim hover:underline pt-0.5"
+        >
+          Open “Structured Worksheet — {(material.title.split(" \u2014 ")[1] ?? material.title).replace(/\.pdf$/i, "")}”
+          <ArrowRight className="h-3 w-3" />
+        </Link>
+      )}
+    </div>
+  );
+}
+
 export default function WorkspaceMaterialsPage() {
   const params = useParams();
   const workspaceId = params.id as string;
@@ -215,6 +298,12 @@ export default function WorkspaceMaterialsPage() {
                         {formatRelativeDate(material.updatedAt)}
                       </p>
                     </div>
+                    {(material.type === "pdf" || material.type === "slides") && (
+                      <ConvertToWorksheet
+                        material={material}
+                        workspaceId={workspaceId}
+                      />
+                    )}
                   </Card>
                 );
               })}

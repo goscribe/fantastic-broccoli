@@ -12,6 +12,7 @@ import {
   VocabRecallContent,
   ClozeContent,
   ExplainAloudContent,
+  WorksheetContent,
 } from "@/types";
 import { ActivityItem } from "@/components/session/activity-item";
 import { ComprehensionActivity } from "@/components/session/comprehension-activity";
@@ -21,6 +22,7 @@ import { FlashcardActivity } from "@/components/session/flashcard-activity";
 import { VocabRecallActivity } from "@/components/session/vocab-recall-activity";
 import { ClozeActivity } from "@/components/session/cloze-activity";
 import { ExplainAloudActivity } from "@/components/session/explain-aloud-activity";
+import { WorksheetActivity } from "@/components/session/worksheet-activity";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -153,6 +155,13 @@ export default function SessionDetailPage() {
         return (
           <ClozeActivity
             content={activity.content as ClozeContent}
+            onComplete={goToNext}
+          />
+        );
+      case "worksheet":
+        return (
+          <WorksheetActivity
+            content={activity.content as WorksheetContent}
             onComplete={goToNext}
           />
         );

@@ -95,15 +95,33 @@ export interface ReadingContent {
   completed: boolean;
 }
 
+export interface WorksheetFigure {
+  figure: string;
+  title: string;
+  caption?: string;
+  source?: { file: string; page: number };
+}
+
+export interface WorksheetPart {
+  label: string;
+  prompt: string;
+  type: "text" | "numeric" | "true_false";
+  answer?: string;
+  userAnswer?: string;
+  marks?: number;
+}
+
+export interface WorksheetStep {
+  title: string;
+  intro?: string;
+  figure?: WorksheetFigure;
+  parts: WorksheetPart[];
+}
+
 export interface WorksheetContent {
   type: "worksheet";
-  questions: {
-    prompt: string;
-    type: "text" | "numeric" | "true_false";
-    answer?: string;
-    userAnswer?: string;
-    correct?: boolean;
-  }[];
+  source?: { file: string; generatedByAi?: boolean };
+  steps: WorksheetStep[];
 }
 
 export interface InteractiveContent {

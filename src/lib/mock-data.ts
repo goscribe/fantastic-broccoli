@@ -99,6 +99,122 @@ const chemActivities: SessionActivity[] = [
     estimatedMinutes: 4,
   },
   {
+    id: "act-4w",
+    sessionId: "ses-1",
+    type: "worksheet",
+    title: "Structured Worksheet — Atomic Structure",
+    content: {
+      type: "worksheet",
+      source: { file: "Topic 2 — Atomic Structure.pdf", generatedByAi: true },
+      steps: [
+        {
+          title: "Electron configuration",
+          intro:
+            "The diagram below was extracted from your notes. It shows the relative energies of the first few subshells and the order in which they fill.",
+          figure: {
+            figure: "energy-levels",
+            title: "Figure 1 — Subshell energy levels",
+            caption:
+              "Relative subshell energies with the Aufbau filling order shown dashed.",
+            source: { file: "Topic 2 — Atomic Structure.pdf", page: 12 },
+          },
+          parts: [
+            {
+              label: "a",
+              prompt: "Write the full electron configuration of phosphorus (Z = 15).",
+              type: "text",
+              answer: "1s2 2s2 2p6 3s2 3p3",
+              marks: 2,
+            },
+            {
+              label: "b",
+              prompt:
+                "Using Figure 1, state which subshell fills first: 3p or 4s? Explain in one sentence.",
+              type: "text",
+              answer: "3p",
+              marks: 2,
+            },
+            {
+              label: "c",
+              prompt: "True or false: a 2p orbital can hold up to 6 electrons.",
+              type: "true_false",
+              answer: "False",
+              marks: 1,
+            },
+          ],
+        },
+        {
+          title: "Ionization energy trends",
+          intro:
+            "This graph was captured from page 17 of your PDF. It plots first ionization energy across Period 3.",
+          figure: {
+            figure: "ionization-trend",
+            title: "Figure 2 — IE₁ across Period 3",
+            caption: "The two dips (highlighted red) are the focus of parts a–b.",
+            source: { file: "Topic 2 — Atomic Structure.pdf", page: 17 },
+          },
+          parts: [
+            {
+              label: "a",
+              prompt:
+                "Identify the element responsible for the first dip and explain it using subshell energies.",
+              type: "text",
+              answer: "aluminium",
+              marks: 3,
+            },
+            {
+              label: "b",
+              prompt:
+                "The second dip occurs at sulfur. What causes it? (Hint: electron pairing.)",
+              type: "text",
+              answer: "pair",
+              marks: 3,
+            },
+            {
+              label: "c",
+              prompt:
+                "Estimate, in kJ mol⁻¹, roughly how much larger Ar's IE₁ is than Na's (nearest 500).",
+              type: "numeric",
+              answer: "1000",
+              marks: 1,
+            },
+          ],
+        },
+        {
+          title: "Shells and shielding",
+          intro:
+            "Figure 3 shows the shell model of sodium extracted from your notes.",
+          figure: {
+            figure: "atom-shells",
+            title: "Figure 3 — Shell model of sodium",
+            source: { file: "Topic 2 — Atomic Structure.pdf", page: 8 },
+          },
+          parts: [
+            {
+              label: "a",
+              prompt:
+                "How many electrons shield the outer 3s electron from the nucleus?",
+              type: "numeric",
+              answer: "10",
+              marks: 1,
+            },
+            {
+              label: "b",
+              prompt:
+                "Predict how the shielding changes for magnesium and what this does to its IE₁ relative to sodium.",
+              type: "text",
+              answer: "increases",
+              marks: 2,
+            },
+          ],
+        },
+      ],
+    },
+    order: 4,
+    status: "pending",
+    estimatedMinutes: 8,
+  },
+  {
     id: "act-4",
     sessionId: "ses-1",
     type: "flashcard_review",
@@ -112,7 +228,7 @@ const chemActivities: SessionActivity[] = [
         { front: "Shielding Effect", back: "The reduction of nuclear charge experienced by outer electrons due to inner electrons", known: null },
       ],
     },
-    order: 4,
+    order: 5,
     status: "pending",
     estimatedMinutes: 5,
   },
@@ -144,7 +260,7 @@ const chemActivities: SessionActivity[] = [
         },
       ],
     },
-    order: 5,
+    order: 6,
     status: "pending",
     estimatedMinutes: 6,
   },
@@ -164,7 +280,7 @@ const chemActivities: SessionActivity[] = [
       ],
       completed: false,
     },
-    order: 6,
+    order: 7,
     status: "pending",
     estimatedMinutes: 5,
   },
