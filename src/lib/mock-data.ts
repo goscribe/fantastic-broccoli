@@ -582,6 +582,24 @@ export const mockSharedWorkspaces: Workspace[] = [
   },
 ];
 
+/** Study activity per day for the streak calendar, generated deterministically
+ * over the last ~10 weeks. */
+export const mockDailyActivity: { date: string; count: number }[] = (() => {
+  const days: { date: string; count: number }[] = [];
+  const today = new Date();
+  for (let i = 69; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(today.getDate() - i);
+    const seed = (d.getDate() * 7 + d.getMonth() * 3) % 11;
+    const weekend = d.getDay() === 0 || d.getDay() === 6;
+    let count = 0;
+    if (i < 6) count = 1 + (seed % 3); // current streak
+    else if (seed > (weekend ? 6 : 3)) count = 1 + (seed % 4);
+    days.push({ date: d.toISOString().split("T")[0], count });
+  }
+  return days;
+})();
+
 export const mockFolders: Folder[] = [
   {
     id: "fld-1",

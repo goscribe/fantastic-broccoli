@@ -77,14 +77,16 @@ export function TopBar({
           </div>
 
           <div className="flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={() => setInviteOpen(true)}
-              className="hidden sm:flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-[12px] font-medium text-muted-foreground hover:text-foreground hover:bg-muted"
-            >
-              <UserPlus className="h-3.5 w-3.5" />
-              Share
-            </button>
+            {pathname.startsWith("/workspace") && (
+              <button
+                type="button"
+                onClick={() => setInviteOpen(true)}
+                className="hidden sm:flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-[12px] font-medium text-muted-foreground hover:text-foreground hover:bg-muted"
+              >
+                <UserPlus className="h-3.5 w-3.5" />
+                Share
+              </button>
+            )}
             <button
               type="button"
               className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted"

@@ -167,15 +167,15 @@ export default function SettingsPage() {
             Your profile as classmates see it in shared workspaces.
           </p>
           <div className="mt-3 rounded-xl border border-border bg-card p-5">
-            <div className="flex items-start gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent-soft text-base font-semibold text-accent">
+            <div className="flex items-start gap-5">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent-soft text-lg font-semibold text-accent">
                 {(name || "?").charAt(0).toUpperCase()}
               </span>
-              <div className="flex-1 space-y-3">
+              <div className="grid flex-1 gap-4 sm:grid-cols-2">
                 <div>
                   <label
                     htmlFor="settings-name"
-                    className="text-[12px] font-medium text-muted-foreground"
+                    className="block text-[13px] font-medium"
                   >
                     Display name
                   </label>
@@ -184,13 +184,16 @@ export default function SettingsPage() {
                     type="text"
                     value={name}
                     onChange={(e) => setEditedName(e.target.value)}
-                    className="mt-1 h-9 w-full max-w-xs rounded-lg border border-border bg-background px-3 text-sm focus:outline-none focus:border-accent/50"
+                    className="mt-1.5 h-10 w-full rounded-lg border border-border bg-background px-3.5 text-sm transition-colors focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15"
                   />
+                  <p className="mt-1.5 text-[12px] text-faint">
+                    Shown to classmates in shared workspaces.
+                  </p>
                 </div>
                 <div>
                   <label
                     htmlFor="settings-email"
-                    className="text-[12px] font-medium text-muted-foreground"
+                    className="block text-[13px] font-medium"
                   >
                     Email
                   </label>
@@ -199,8 +202,11 @@ export default function SettingsPage() {
                     type="email"
                     value={user?.email ?? "alan@scribe.study"}
                     disabled
-                    className="mt-1 h-9 w-full max-w-xs rounded-lg border border-border bg-muted px-3 text-sm text-muted-foreground"
+                    className="mt-1.5 h-10 w-full rounded-lg border border-border bg-muted/60 px-3.5 text-sm text-muted-foreground"
                   />
+                  <p className="mt-1.5 text-[12px] text-faint">
+                    Used for sign-in — contact support to change it.
+                  </p>
                 </div>
               </div>
             </div>

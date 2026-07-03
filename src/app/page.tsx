@@ -9,6 +9,8 @@ import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { formatDuration } from "@/lib/utils";
 import { StreakFlame } from "@/components/graphics/streak-flame";
 import { FolderCard } from "@/components/workspace/folder-card";
+import { StudyCalendar } from "@/components/workspace/study-calendar";
+import { mockDailyActivity } from "@/lib/mock-data";
 import { Search, ArrowRight, Plus } from "lucide-react";
 
 function flattenWorkspaces(folders: Folder[], root: Workspace[]): Workspace[] {
@@ -62,6 +64,20 @@ export default function HomePage() {
     (sum, { session }) => sum + session.durationMinutes,
     0,
   );
+
+  const lastSevenDays = useMemo(() => {
+    const byDate = new Map(mockDailyActivity.map((d) => [d.date, d.count]));
+    return Array.from({ length: 7 }, (_, i) => {
+      const d = new Date();
+      d.setDate(d.getDate() - (6 - i));
+      const iso = d.toISOString().split("T")[0];
+      return {
+        label: d.toLocaleDateString("en-GB", { weekday: "narrow" }),
+        active: (byDate.get(iso) ?? 0) > 0,
+        isToday: i === 6,
+      };
+    });
+  }, []);
 
   const hour = new Date().getHours();
   const greeting =
@@ -185,6 +201,69 @@ export default function HomePage() {
                 </div>
               </div>
             )}
+          </div>
+        </section>
+
+        {/* Study overview */}
+        <section className="animate-fade-up">
+          <h2 className="text-sm font-semibold mb-3">Study overview</h2>
+          <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
+            <div className="rounded-xl border border-border bg-card p-4">
+              <StudyCalendar dailyActivity={mockDailyActivity} />
+            </div>
+            <div className="rounded-xl border border-border bg-card p-4 flex flex-col">
+              <div>
+                <p className="text-sm font-semibold">This week</p>
+                <div className="mt-3 flex items-center gap-1.5">
+                  {lastSevenDays.map(({ label, active, isToday }, i) => (
+                    <div
+                      key={i}
+                      className="flex flex-1 flex-col items-center gap-1"
+                    >
+                      <div
+                        className={`h-7 w-full rounded-md ${
+                          active ? "bg-accent" : "bg-muted"
+                        } ${isToday ? "ring-1 ring-accent ring-offset-1" : ""}`}
+                      />
+                      <span className="text-[10px] text-faint">{label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-4 grid flex-1 grid-cols-2 gap-2 sm:grid-cols-4">
+                {[
+                  {
+                    label: "Active days",
+                    value: String(
+                      mockDailyActivity.filter((d) => d.count > 0).length,
+                    ),
+                  },
+                  {
+                    label: "Sessions logged",
+                    value: String(
+                      mockDailyActivity.reduce((s, d) => s + d.count, 0),
+                    ),
+                  },
+                  { label: "Active plans", value: String(activeSessions.length) },
+                  {
+                    label: "Time planned",
+                    value: formatDuration(totalPlannedMinutes),
+                  },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-lg bg-muted/50 px-3 py-2.5 leading-tight"
+                  >
+                    <p className="text-base font-bold tabular-nums">
+                      {stat.value}
+                    </p>
+                    <p className="mt-0.5 text-[11px] font-medium text-muted-foreground">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
