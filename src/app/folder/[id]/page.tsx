@@ -60,7 +60,7 @@ export default function FolderPage({
         {folder.folders && folder.folders.length > 0 && (
           <section className="animate-fade-up">
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              <h2 className="text-sm font-semibold text-foreground">
                 Folders
               </h2>
               <button
@@ -85,7 +85,7 @@ export default function FolderPage({
 
         <section className="animate-fade-up">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            <h2 className="text-sm font-semibold text-foreground">
               Workspaces
             </h2>
             <button

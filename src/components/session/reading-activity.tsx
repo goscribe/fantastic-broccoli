@@ -183,7 +183,7 @@ export function ReadingActivity({ content, onComplete }: ReadingActivityProps) {
       <div className="flex items-center justify-between text-muted-foreground">
         <div className="flex items-center gap-2">
           <BookOpen className="h-4 w-4" />
-          <span className="text-xs font-medium uppercase tracking-wider">
+          <span className="text-xs font-medium">
             Reading Material
           </span>
         </div>

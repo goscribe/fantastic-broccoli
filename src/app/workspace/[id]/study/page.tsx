@@ -37,7 +37,7 @@ export default function WorkspaceStudyPage() {
             className="group w-full text-left rounded-3xl border border-accent/20 bg-gradient-to-br from-accent-soft via-card to-card p-6 shadow-soft hover:shadow-soft-lg hover:border-accent/40 transition-all animate-fade-up"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-accent">
+              <span className="flex items-center gap-1.5 text-xs font-semibold text-accent">
                 <Sparkles className="h-3.5 w-3.5" />
                 Continue studying
               </span>
@@ -59,7 +59,7 @@ export default function WorkspaceStudyPage() {
 
         <section className="animate-fade-up">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+            <h2 className="text-sm font-semibold text-foreground">
               Study sessions
             </h2>
             <Button
@@ -109,7 +109,7 @@ export default function WorkspaceStudyPage() {
 
         {completedSessions.length > 0 && (
           <section>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-4">
+            <h2 className="text-sm font-semibold text-foreground mb-4">
               Completed
             </h2>
             <div className="grid gap-4 opacity-60">

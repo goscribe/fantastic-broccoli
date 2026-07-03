@@ -195,7 +195,7 @@ export default function SessionDetailPage() {
         {/* Activity list sidebar on desktop */}
         <aside className="hidden lg:flex w-72 flex-shrink-0 flex-col border-r border-border overflow-y-auto">
           <div className="py-6 pr-4 pl-5">
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-[0.15em] mb-3">
+            <p className="text-xs font-semibold text-muted-foreground mb-3">
               Your plan
             </p>
             <div className="space-y-1">
@@ -253,7 +253,7 @@ export default function SessionDetailPage() {
 
             {/* Mobile activity list */}
             <div className="lg:hidden mt-10 border-t border-border pt-6">
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-[0.15em] mb-3">
+              <p className="text-xs font-semibold text-muted-foreground mb-3">
                 Your plan
               </p>
               <div className="space-y-1">

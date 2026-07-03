@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Library, GraduationCap } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 
 interface WorkspaceShellProps {
   workspace: Workspace | undefined;
@@ -62,9 +63,10 @@ export function WorkspaceShell({ workspace, children }: WorkspaceShellProps) {
           </button>
 
           <div className="flex items-center gap-3">
-            <span className="text-3xl leading-none" aria-hidden>
-              {workspace.icon}
-            </span>
+            <WorkspaceIcon
+              icon={workspace.icon}
+              className="h-10 w-10 shrink-0"
+            />
             <div>
               <div className="flex items-center gap-2.5">
                 <h1 className="text-2xl font-bold tracking-tight">

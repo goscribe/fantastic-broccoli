@@ -45,7 +45,7 @@ export default function HomePage() {
         {/* Greeting */}
         <header className="flex flex-wrap items-end justify-between gap-4 animate-fade-up">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-faint">
+            <p className="text-[11px] font-semibold text-faint">
               {new Date().toLocaleDateString("en-GB", {
                 weekday: "long",
                 day: "numeric",
@@ -61,7 +61,7 @@ export default function HomePage() {
               <StreakFlame className="h-6 w-6" />
               <div className="leading-tight">
                 <p className="text-sm font-bold tabular-nums">6</p>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-faint">
+                <p className="text-[10px] font-semibold text-faint">
                   Day streak
                 </p>
               </div>
@@ -70,7 +70,7 @@ export default function HomePage() {
               <p className="text-sm font-bold tabular-nums">
                 {activeSessions.length}
               </p>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-faint">
+              <p className="text-[10px] font-semibold text-faint">
                 Sessions
               </p>
             </div>
@@ -78,7 +78,7 @@ export default function HomePage() {
               <p className="text-sm font-bold tabular-nums">
                 {formatDuration(totalPlannedMinutes)}
               </p>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-faint">
+              <p className="text-[10px] font-semibold text-faint">
                 Planned
               </p>
             </div>
@@ -86,7 +86,7 @@ export default function HomePage() {
               <p className="text-sm font-bold tabular-nums">
                 {allWorkspaces.length}
               </p>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-faint">
+              <p className="text-[10px] font-semibold text-faint">
                 Workspaces
               </p>
             </div>
@@ -111,7 +111,7 @@ export default function HomePage() {
           />
           <div className="relative flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-lg">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-bright">
+              <p className="text-[11px] font-semibold text-accent-bright">
                 {resumable ? "Continue studying" : "Get started"}
               </p>
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight mt-2 leading-snug">
@@ -142,7 +142,7 @@ export default function HomePage() {
             {resumable && (
               <div className="hidden sm:block w-64">
                 <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-white/45">
+                  <span className="text-[10px] font-semibold text-white/45">
                     Progress
                   </span>
                   <span className="text-lg font-bold tabular-nums text-accent-bright">
@@ -191,7 +191,7 @@ export default function HomePage() {
         ) : (
           <section className="animate-fade-up">
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              <h2 className="text-sm font-semibold text-foreground">
                 Folders
               </h2>
               <button

@@ -6,6 +6,7 @@ import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { formatRelativeDate, formatDuration } from "@/lib/utils";
 import { Clock, ArrowRight } from "lucide-react";
+import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 
 interface WorkspaceCardProps {
   workspace: Workspace;
@@ -29,9 +30,7 @@ export function WorkspaceCard({ workspace, onClick }: WorkspaceCardProps) {
     >
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">
-          <span className="text-2xl leading-none" aria-hidden>
-            {workspace.icon}
-          </span>
+          <WorkspaceIcon icon={workspace.icon} className="h-8 w-8 shrink-0" />
           <div>
             <div className="flex items-center gap-2">
               <h3 className="font-semibold text-sm leading-tight">

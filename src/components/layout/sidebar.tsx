@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ScribeLogo } from "@/components/graphics/logo";
+import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { mockFolders, mockSharedWorkspaces } from "@/lib/mock-data";
 import { Folder as FolderType } from "@/types";
 import { cn } from "@/lib/utils";
@@ -93,9 +94,7 @@ function FolderNode({
                 )}
                 style={{ paddingLeft: `${(depth + 1) * 14 + 24}px` }}
               >
-                <span className="text-sm leading-none" aria-hidden>
-                  {ws.icon}
-                </span>
+                <WorkspaceIcon icon={ws.icon} className="h-4 w-4 shrink-0" />
                 <span className="truncate">{ws.title}</span>
               </button>
             );
@@ -147,7 +146,7 @@ export function Sidebar() {
 
         <div>
           <div className="flex items-center justify-between px-1.5 pb-1">
-            <span className="text-[11px] font-semibold text-faint">
+            <span className="text-xs font-semibold text-faint">
               Folders
             </span>
             <button
@@ -173,7 +172,7 @@ export function Sidebar() {
 
         <div>
           <div className="flex items-center justify-between px-1.5 pb-1">
-            <span className="text-[11px] font-semibold text-faint">
+            <span className="text-xs font-semibold text-faint">
               Shared with me
             </span>
           </div>
@@ -191,9 +190,7 @@ export function Sidebar() {
                       : "text-muted-foreground hover:bg-muted hover:text-foreground",
                   )}
                 >
-                  <span className="text-sm leading-none" aria-hidden>
-                    {ws.icon}
-                  </span>
+                  <WorkspaceIcon icon={ws.icon} className="h-4 w-4 shrink-0" />
                   <span className="truncate">{ws.title}</span>
                   <span className="ml-auto text-[10px] text-faint shrink-0">
                     {ws.sharedBy}

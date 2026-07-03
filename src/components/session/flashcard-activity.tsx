@@ -89,7 +89,7 @@ export function FlashcardActivity({
               </>
             ) : (
               <>
-                <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider">
+                <p className="text-xs text-muted-foreground mb-2">
                   Answer
                 </p>
                 <p className="text-sm leading-relaxed">{card.back}</p>

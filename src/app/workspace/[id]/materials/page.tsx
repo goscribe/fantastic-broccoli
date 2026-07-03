@@ -95,7 +95,7 @@ function RecorderCard({ onStop }: { onStop: (seconds: number) => void }) {
       </div>
 
       <div className="mt-4 rounded-xl bg-card border border-border p-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-2">
+        <p className="text-xs font-semibold text-muted-foreground mb-2">
           Live transcription
         </p>
         {lines.length === 0 ? (
@@ -168,7 +168,7 @@ export default function WorkspaceMaterialsPage() {
 
         {/* Materials list */}
         <section className="animate-fade-up">
-          <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-4">
+          <h2 className="text-sm font-semibold text-foreground mb-4">
             All materials
           </h2>
 
@@ -198,7 +198,7 @@ export default function WorkspaceMaterialsPage() {
                         <h3 className="text-sm font-semibold truncate">
                           {material.title}
                         </h3>
-                        <span className="text-[11px] text-faint uppercase tracking-wide shrink-0">
+                        <span className="text-[11px] text-faint shrink-0">
                           {config.label}
                         </span>
                       </div>
