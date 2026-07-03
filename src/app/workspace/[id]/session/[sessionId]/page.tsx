@@ -437,6 +437,7 @@ export default function SessionDetailPage() {
               </div>
             ) : (
               <SessionDebrief
+                sessionId={sessionId}
                 onBack={() => router.push(`/workspace/${workspaceId}`)}
               />
             )}

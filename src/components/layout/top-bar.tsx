@@ -2,11 +2,12 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Settings, UserPlus, Bell, Palette, LogOut, Check, X, Menu } from "lucide-react";
+import { Settings, UserPlus, Bell, Palette, LogOut, Check, X, Menu, Sparkles } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ScribeLogo } from "@/components/graphics/logo";
 import { signOut, useAuthUser } from "@/lib/api/auth";
+import { useCredits } from "@/lib/credits";
 
 export function TopBar({
   showLogo = false,
@@ -18,6 +19,7 @@ export function TopBar({
   const router = useRouter();
   const pathname = usePathname();
   const { user } = useAuthUser();
+  const credits = useCredits();
 
   const sectionLabel = pathname.startsWith("/workspace")
     ? "Workspace"
@@ -87,6 +89,13 @@ export function TopBar({
                 Share
               </button>
             )}
+            <span
+              title="Credits — earned by completing study sessions"
+              className="flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent tabular-nums"
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              {credits}
+            </span>
             <button
               type="button"
               className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted"

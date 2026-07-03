@@ -73,11 +73,13 @@ export default function HomePage() {
       const iso = d.toISOString().split("T")[0];
       return {
         label: d.toLocaleDateString("en-GB", { weekday: "narrow" }),
-        active: (byDate.get(iso) ?? 0) > 0,
+        count: byDate.get(iso) ?? 0,
         isToday: i === 6,
       };
     });
   }, []);
+
+  const maxWeekCount = Math.max(1, ...lastSevenDays.map((d) => d.count));
 
   const hour = new Date().getHours();
   const greeting =
@@ -214,18 +216,36 @@ export default function HomePage() {
             <div className="rounded-xl border border-border bg-card p-4 flex flex-col">
               <div>
                 <p className="text-sm font-semibold">This week</p>
-                <div className="mt-3 flex items-center gap-1.5">
-                  {lastSevenDays.map(({ label, active, isToday }, i) => (
+                <div className="mt-3 flex h-28 items-end gap-2.5">
+                  {lastSevenDays.map(({ label, count, isToday }, i) => (
                     <div
                       key={i}
-                      className="flex flex-1 flex-col items-center gap-1"
+                      className="flex h-full flex-1 flex-col items-center justify-end gap-1"
+                      title={`${count} session${count !== 1 ? "s" : ""}`}
                     >
+                      <span className="text-[10px] font-medium tabular-nums text-muted-foreground">
+                        {count > 0 ? count : ""}
+                      </span>
                       <div
-                        className={`h-7 w-full rounded-md ${
-                          active ? "bg-accent" : "bg-muted"
-                        } ${isToday ? "ring-1 ring-accent ring-offset-1" : ""}`}
+                        className={`w-full max-w-9 rounded-t-md ${
+                          count > 0
+                            ? isToday
+                              ? "bg-accent"
+                              : "bg-accent/70"
+                            : "bg-muted"
+                        }`}
+                        style={{
+                          height:
+                            count > 0 ? `${(count / maxWeekCount) * 100}%` : "4px",
+                        }}
                       />
-                      <span className="text-[10px] text-faint">{label}</span>
+                      <span
+                        className={`text-[10px] ${
+                          isToday ? "font-semibold text-foreground" : "text-faint"
+                        }`}
+                      >
+                        {label}
+                      </span>
                     </div>
                   ))}
                 </div>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Loader2, Check, ArrowRight, FileText } from "lucide-react";
+import { awardSessionCredits } from "@/lib/credits";
 
 const stages = [
   "Reviewing your answers",
@@ -80,8 +81,15 @@ const debrief: {
   ],
 };
 
-export function SessionDebrief({ onBack }: { onBack: () => void }) {
+export function SessionDebrief({
+  onBack,
+  sessionId,
+}: {
+  onBack: () => void;
+  sessionId: string;
+}) {
   const [stage, setStage] = useState(0);
+  const [creditsEarned] = useState(() => awardSessionCredits(sessionId));
 
   useEffect(() => {
     if (stage >= stages.length) return;
@@ -122,6 +130,11 @@ export function SessionDebrief({ onBack }: { onBack: () => void }) {
         Generated from this session&apos;s answers
       </p>
       <h2 className="text-lg font-bold tracking-tight">{debrief.headline}</h2>
+      {creditsEarned > 0 && (
+        <p className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent">
+          <Sparkles className="h-3.5 w-3.5" />+{creditsEarned} credits earned
+        </p>
+      )}
       <p className="text-sm text-muted-foreground leading-6 mt-1.5 mb-6">
         {debrief.summary}
       </p>
