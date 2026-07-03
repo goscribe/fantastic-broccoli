@@ -297,7 +297,7 @@ export default function SessionDetailPage() {
 
         {/* Main study area */}
         <main className="flex-1 overflow-y-auto bg-card">
-          <div className="max-w-3xl mx-auto px-8 py-8">
+          <div className="max-w-3xl px-8 py-2">
             {showExtendPrompt && (
               <div className="mb-5 rounded-2xl border border-accent/30 bg-accent-soft/60 px-5 py-4 flex flex-wrap items-center gap-3 animate-fade-up">
                 <div className="flex-1 min-w-56">

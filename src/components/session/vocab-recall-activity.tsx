@@ -39,7 +39,7 @@ export function VocabRecallActivity({
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-border bg-card p-8 text-center">
+      <div className="py-8 text-center">
         <p className="text-lg font-bold tracking-tight">
           {correctCount}/{content.terms.length} recalled
         </p>
@@ -57,7 +57,7 @@ export function VocabRecallActivity({
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-6">
+    <div>
       <div className="flex items-center justify-between mb-5">
         <p className="text-sm font-semibold">
           Define this term from memory

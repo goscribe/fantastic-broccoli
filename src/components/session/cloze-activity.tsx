@@ -25,7 +25,7 @@ export function ClozeActivity({ content, onComplete }: ClozeActivityProps) {
   const correctCount = passage.answers.filter((_, i) => isCorrect(i)).length;
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-6">
+    <div>
       <p className="text-sm font-semibold mb-4">
         Fill in the missing terms from memory
       </p>

@@ -40,9 +40,9 @@ export function WorksheetActivity({
   const allAnswered = step.parts.every((_, i) => (answers[key(i)] ?? "").trim());
 
   return (
-    <div className="rounded-2xl border border-border bg-card overflow-hidden">
+    <div>
       {/* Step header */}
-      <div className="px-6 pt-5 pb-4 border-b border-border">
+      <div className="pb-4 border-b border-border">
         {content.source?.generatedByAi && (
           <p className="flex items-center gap-1.5 text-[11px] font-medium text-accent-dim mb-2">
             <Sparkles className="h-3 w-3" />
@@ -74,7 +74,7 @@ export function WorksheetActivity({
         </div>
       </div>
 
-      <div className="px-6 py-5 space-y-5">
+      <div className="py-5 space-y-5">
         {step.intro && (
           <p className="text-sm leading-6 text-foreground">{step.intro}</p>
         )}

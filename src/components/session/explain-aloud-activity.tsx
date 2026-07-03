@@ -36,7 +36,7 @@ export function ExplainAloudActivity({
   }, [phase]);
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-6">
+    <div>
       <p className="text-sm font-semibold mb-1.5">
         Teach it back — out loud
       </p>
