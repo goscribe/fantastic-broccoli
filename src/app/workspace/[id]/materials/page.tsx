@@ -124,75 +124,81 @@ function RecorderCard({ onStop }: { onStop: (seconds: number) => void }) {
   );
 }
 
-const convertStages = [
-  "Reading PDF…",
+const bankStages = [
+  "Reading pages…",
   "Extracting diagrams — 3 figures captured",
-  "Writing multi-step questions with sub-parts",
-  "Worksheet ready",
+  "Precomputing worksheet bank",
 ];
 
-function ConvertToWorksheet({
+// Scribe decides to build a worksheet bank on its own after a PDF or deck
+// is added — the learner never has to trigger it.
+function WorksheetBankStatus({
   material,
   workspaceId,
+  prebuilt,
 }: {
   material: Material;
   workspaceId: string;
+  prebuilt: boolean;
 }) {
-  const [stage, setStage] = useState(-1);
+  const [stage, setStage] = useState(prebuilt ? bankStages.length : 0);
 
   useEffect(() => {
-    if (stage < 0 || stage >= convertStages.length - 1) return;
-    const t = setTimeout(() => setStage((s) => s + 1), 1200);
+    if (stage >= bankStages.length) return;
+    const t = setTimeout(() => setStage((s) => s + 1), 1400);
     return () => clearTimeout(t);
   }, [stage]);
 
-  if (stage === -1) {
+  const done = stage >= bankStages.length;
+
+  if (done) {
     return (
-      <Button
-        size="sm"
-        variant="outline"
-        className="shrink-0"
-        onClick={(e) => {
-          e.stopPropagation();
-          setStage(0);
-        }}
+      <div
+        className="shrink-0 w-60 rounded-xl border border-accent/25 bg-accent-soft/50 px-3.5 py-2.5"
+        onClick={(e) => e.stopPropagation()}
       >
-        <Sparkles className="h-3.5 w-3.5 mr-1.5 text-accent" />
-        Convert to worksheet
-      </Button>
+        <p className="flex items-center gap-1.5 text-[11px] font-semibold text-accent-dim">
+          <Sparkles className="h-3 w-3" />
+          Worksheet bank ready
+        </p>
+        <p className="text-[11px] text-muted-foreground mt-0.5">
+          3 worksheets · 3 diagrams precomputed — Scribe feeds these into your
+          plan when useful.
+        </p>
+        <Link
+          href={`/workspace/${workspaceId}/session/ses-1`}
+          className="flex items-center gap-1 text-[11px] font-semibold text-accent-dim hover:underline mt-1"
+        >
+          Preview one
+          <ArrowRight className="h-3 w-3" />
+        </Link>
+      </div>
     );
   }
 
-  const done = stage === convertStages.length - 1;
   return (
     <div
-      className="shrink-0 w-64 rounded-xl border border-border bg-muted/40 px-3.5 py-2.5 space-y-1.5"
+      className="shrink-0 w-60 rounded-xl border border-border bg-muted/40 px-3.5 py-2.5 space-y-1.5"
       onClick={(e) => e.stopPropagation()}
     >
-      {convertStages.slice(0, stage + 1).map((label, i) => (
+      <p className="text-[11px] font-semibold text-muted-foreground">
+        Building worksheet bank · {material.title.split(" \u2014 ")[0]}
+      </p>
+      {bankStages.slice(0, stage + 1).map((label, i) => (
         <p
           key={label}
           className="flex items-center gap-1.5 text-[11px] font-medium animate-fade-up"
         >
-          {i < stage || done ? (
+          {i < stage ? (
             <Check className="h-3 w-3 text-accent" />
           ) : (
             <Loader2 className="h-3 w-3 animate-spin text-muted-foreground" />
           )}
-          <span className={i === stage && !done ? "text-muted-foreground" : ""}>
+          <span className={i === stage ? "text-muted-foreground" : ""}>
             {label}
           </span>
         </p>
       ))}
-      {done && (
-        <Link
-          href={`/workspace/${workspaceId}/session/ses-1`}
-          className="flex items-center gap-1 text-[11px] font-semibold text-accent-dim hover:underline pt-0.5"
-        >
-          Open “Structured Worksheet — {(material.title.split(" \u2014 ")[1] ?? material.title).replace(/\.pdf$/i, "")}”
-          <ArrowRight className="h-3 w-3" />
-        </Link>
-      )}
     </div>
   );
 }
@@ -299,9 +305,10 @@ export default function WorkspaceMaterialsPage() {
                       </p>
                     </div>
                     {(material.type === "pdf" || material.type === "slides") && (
-                      <ConvertToWorksheet
+                      <WorksheetBankStatus
                         material={material}
                         workspaceId={workspaceId}
+                        prebuilt={material.type === "pdf"}
                       />
                     )}
                   </Card>

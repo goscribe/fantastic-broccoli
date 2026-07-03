@@ -594,3 +594,70 @@ export function getSession(id: string): StudySession | undefined {
 export function getSessionWithActivities(id: string): StudySession | undefined {
   return getSession(id);
 }
+
+// Precomputed from the workspace's worksheet bank — appended when the
+// learner opts to extend their plan near the end of a session.
+export const planExtensionActivities: SessionActivity[] = [
+  {
+    id: "act-ext-1",
+    sessionId: "ses-1",
+    type: "worksheet",
+    title: "Worksheet Bank — Successive Ionization",
+    content: {
+      type: "worksheet",
+      source: { file: "Topic 2 — Atomic Structure.pdf", generatedByAi: true },
+      steps: [
+        {
+          title: "Successive ionization energies",
+          intro:
+            "An element X has successive ionization energies (kJ mol⁻¹): 578, 1817, 2745, 11 578. Use the jump between values to reason about its group.",
+          parts: [
+            {
+              label: "a",
+              prompt:
+                "Between which ionizations does the large jump occur, and what does it tell you?",
+              type: "text",
+              answer: "third",
+              marks: 2,
+            },
+            {
+              label: "b",
+              prompt: "Which group of the periodic table is X in?",
+              type: "numeric",
+              answer: "13",
+              marks: 1,
+            },
+            {
+              label: "c",
+              prompt: "True or false: X is likely aluminium.",
+              type: "true_false",
+              answer: "True",
+              marks: 1,
+            },
+          ],
+        },
+      ],
+    },
+    order: 9,
+    status: "pending",
+    estimatedMinutes: 6,
+  },
+  {
+    id: "act-ext-2",
+    sessionId: "ses-1",
+    type: "mcq",
+    title: "Targeted Drill — Periodic Trends",
+    content: {
+      type: "mcq",
+      question:
+        "Which species has the largest ionic radius: O²⁻, F⁻, Na⁺, or Mg²⁺? (All are isoelectronic.)",
+      options: ["O²⁻", "F⁻", "Na⁺", "Mg²⁺"],
+      correctIndex: 0,
+      explanation:
+        "All four have 10 electrons, so the species with the smallest nuclear charge (O, Z = 8) holds them least tightly — giving the largest radius.",
+    },
+    order: 10,
+    status: "pending",
+    estimatedMinutes: 3,
+  },
+];

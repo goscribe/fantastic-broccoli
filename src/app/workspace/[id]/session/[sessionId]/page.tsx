@@ -2,7 +2,11 @@
 
 import { useState, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { getSessionWithActivities, getWorkspace } from "@/lib/mock-data";
+import {
+  getSessionWithActivities,
+  getWorkspace,
+  planExtensionActivities,
+} from "@/lib/mock-data";
 import {
   SessionActivity,
   ComprehensionContent,
@@ -70,10 +74,26 @@ export default function SessionDetailPage() {
   const [showComments, setShowComments] = useState(false);
   const [copilotOpen, setCopilotOpen] = useState(true);
   const [newComment, setNewComment] = useState("");
+  const [extended, setExtended] = useState(false);
+  const [extendDismissed, setExtendDismissed] = useState(false);
+
+  const extensions = useMemo(
+    () => planExtensionActivities.filter((a) => a.sessionId === sessionId),
+    [sessionId],
+  );
+  const activities = useMemo(
+    () =>
+      session
+        ? extended
+          ? [...session.activities, ...extensions]
+          : session.activities
+        : [],
+    [session, extended, extensions],
+  );
 
   const activeActivity = useMemo(
-    () => session?.activities.find((a) => a.id === activeActivityId),
-    [session, activeActivityId],
+    () => activities.find((a) => a.id === activeActivityId),
+    [activities, activeActivityId],
   );
 
   if (!session || !workspace) {
@@ -94,22 +114,31 @@ export default function SessionDetailPage() {
     );
   }
 
-  const completedCount = session.activities.filter(
+  const completedCount = activities.filter(
     (a) => a.status === "completed",
   ).length;
-  const totalEstimated = session.activities.reduce(
+  const totalEstimated = activities.reduce(
     (sum, a) => sum + a.estimatedMinutes,
     0,
   );
 
   const goToNext = () => {
     if (!activeActivity) return;
-    const idx = session.activities.findIndex(
-      (a) => a.id === activeActivity.id,
-    );
-    const next = session.activities[idx + 1];
+    const idx = activities.findIndex((a) => a.id === activeActivity.id);
+    const next = activities[idx + 1];
     setActiveActivityId(next?.id ?? null);
   };
+
+  const activeIndex = activeActivity
+    ? activities.findIndex((a) => a.id === activeActivity.id)
+    : activities.length;
+  const nearEnd = activeIndex >= activities.length - 2;
+  const showExtendPrompt =
+    nearEnd && !extended && !extendDismissed && extensions.length > 0;
+  const extensionMinutes = extensions.reduce(
+    (s, a) => s + a.estimatedMinutes,
+    0,
+  );
 
   const renderActivity = (activity: SessionActivity) => {
     switch (activity.type) {
@@ -209,7 +238,7 @@ export default function SessionDetailPage() {
               {formatDuration(totalEstimated)}
             </span>
             <span className="text-xs text-muted-foreground">
-              {completedCount}/{session.activities.length} done
+              {completedCount}/{activities.length} done
             </span>
             <div className="w-32">
               <ProgressBar value={session.progress} size="sm" />
@@ -242,10 +271,10 @@ export default function SessionDetailPage() {
               Your plan
             </p>
             <div className="space-y-1">
-              {session.activities.map((activity, i) => {
+              {activities.map((activity, i) => {
                 const phase = phaseOf(activity.type);
                 const prevPhase =
-                  i > 0 ? phaseOf(session.activities[i - 1].type) : null;
+                  i > 0 ? phaseOf(activities[i - 1].type) : null;
                 return (
                   <div key={activity.id}>
                     {phase !== prevPhase && (
@@ -269,6 +298,39 @@ export default function SessionDetailPage() {
         {/* Main study area */}
         <main className="flex-1 overflow-y-auto bg-card">
           <div className="max-w-3xl mx-auto px-8 py-8">
+            {showExtendPrompt && (
+              <div className="mb-5 rounded-2xl border border-accent/30 bg-accent-soft/60 px-5 py-4 flex flex-wrap items-center gap-3 animate-fade-up">
+                <div className="flex-1 min-w-56">
+                  <p className="text-sm font-semibold">
+                    You&apos;re almost done — keep the momentum?
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    Your quiz scores on periodic trends were shaky, so Scribe
+                    precomputed {extensions.length} more activities from your
+                    worksheet bank (+{extensionMinutes} min).
+                  </p>
+                </div>
+                <div className="flex gap-2 shrink-0">
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      setExtended(true);
+                      if (!activeActivity) setActiveActivityId(extensions[0].id);
+                    }}
+                  >
+                    Continue plan
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setExtendDismissed(true)}
+                  >
+                    Finish as planned
+                  </Button>
+                </div>
+              </div>
+            )}
+
             {activeActivity ? (
               <div className="space-y-5 animate-fade-up" key={activeActivity.id}>
                 <div className="flex items-center justify-between">
@@ -311,7 +373,7 @@ export default function SessionDetailPage() {
                 Your plan
               </p>
               <div className="space-y-1">
-                {session.activities.map((activity, i) => (
+                {activities.map((activity, i) => (
                   <ActivityItem
                     key={activity.id}
                     activity={activity}
