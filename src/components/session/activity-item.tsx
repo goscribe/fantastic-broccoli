@@ -74,15 +74,8 @@ export function ActivityItem({
         activity.status === "completed" && "opacity-70",
       )}
     >
-      <div className="relative flex-shrink-0">
-        <div
-          className={cn(
-            "flex h-8 w-8 items-center justify-center rounded-lg",
-            isActive ? "bg-accent/10" : "bg-muted",
-          )}
-        >
-          <TypeIcon className={cn("h-4 w-4", config.color)} />
-        </div>
+      <div className="relative flex-shrink-0 flex h-8 w-8 items-center justify-center">
+        <TypeIcon className={cn("h-4 w-4", config.color)} />
         <StatusIcon
           className={cn(
             "absolute -bottom-1 -right-1 h-3.5 w-3.5 bg-card rounded-full",

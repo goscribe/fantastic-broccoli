@@ -177,9 +177,7 @@ export default function WorkspaceMaterialsPage() {
 
           {materials.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft border border-accent/15 mb-4">
-                <Upload className="h-5 w-5 text-accent" />
-              </div>
+              <Upload className="h-7 w-7 text-accent mx-auto mb-3" />
               <p className="text-sm font-semibold">Nothing here yet</p>
               <p className="text-xs text-muted-foreground mt-1.5 max-w-sm mx-auto">
                 Add notes, record lectures, or upload PDFs and slides — Scribe
@@ -197,14 +195,7 @@ export default function WorkspaceMaterialsPage() {
                     interactive
                     className="flex items-start gap-3.5 p-4"
                   >
-                    <span
-                      className={cn(
-                        "flex h-9 w-9 items-center justify-center rounded-xl bg-muted shrink-0",
-                        config.color,
-                      )}
-                    >
-                      <Icon className="h-4 w-4" />
-                    </span>
+                    <Icon className={cn("h-5 w-5 mt-0.5 shrink-0", config.color)} />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <h3 className="text-sm font-semibold truncate">

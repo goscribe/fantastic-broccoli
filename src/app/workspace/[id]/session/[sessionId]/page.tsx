@@ -189,10 +189,10 @@ export default function SessionDetailPage() {
       </header>
 
       {/* Content */}
-      <div className="flex-1 flex min-h-0 overflow-hidden">
+      <div className="flex-1 flex min-h-0 overflow-hidden max-w-5xl mx-auto w-full">
         {/* Activity list sidebar on desktop */}
-        <aside className="hidden lg:flex w-80 flex-shrink-0 flex-col border-r border-border overflow-y-auto">
-          <div className="p-4">
+        <aside className="hidden lg:flex w-72 flex-shrink-0 flex-col border-r border-border overflow-y-auto">
+          <div className="py-6 pr-4 pl-5">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-[0.15em] mb-3">
               Your plan
             </p>
@@ -212,7 +212,7 @@ export default function SessionDetailPage() {
 
         {/* Main study area */}
         <main className="flex-1 overflow-y-auto">
-          <div className="max-w-2xl mx-auto px-5 py-8">
+          <div className="max-w-2xl mx-auto px-6 py-8">
             {activeActivity ? (
               <div className="space-y-5 animate-fade-up" key={activeActivity.id}>
                 <div className="flex items-center justify-between">

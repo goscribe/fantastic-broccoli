@@ -6,7 +6,8 @@ import { mockWorkspaces, mockFolders } from "@/lib/mock-data";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { formatDuration } from "@/lib/utils";
-import { Search, Flame, Clock, Zap, ArrowRight } from "lucide-react";
+import { StreakCard } from "@/components/graphics/streak-flame";
+import { Search, Clock, Zap, ArrowRight } from "lucide-react";
 
 export default function HomePage() {
   const router = useRouter();
@@ -50,12 +51,12 @@ export default function HomePage() {
             Pick up where you left off, or start something new.
           </p>
 
-          {/* Stat chips */}
-          <div className="flex items-center gap-2.5 mt-6 flex-wrap">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-medium">
-              <Flame className="h-3.5 w-3.5 text-warning" />
-              6-day streak
-            </span>
+          {/* Streak + stat chips */}
+          <div className="flex items-center gap-3 mt-6 flex-wrap">
+            <StreakCard
+              days={6}
+              doneThisWeek={[true, true, true, false, false, false, false]}
+            />
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-medium">
               <Zap className="h-3.5 w-3.5 text-energy" />
               {activeSessions.length} active session

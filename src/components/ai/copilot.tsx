@@ -18,11 +18,11 @@ import {
 import {
   EquationEmbed,
   GraphEmbed,
-  DensityWidget,
   CitationEmbed,
   GraphData,
   CitationData,
 } from "@/components/ai/embeds";
+import { InteractiveWidget, WidgetId } from "@/components/interactive";
 
 type ToolName =
   | "search_materials"
@@ -50,7 +50,7 @@ interface TextPart {
 type EmbedSpec =
   | { embed: "equation"; latex: string; caption?: string }
   | { embed: "graph"; graph: GraphData }
-  | { embed: "widget" }
+  | { embed: "widget"; widget: WidgetId; intro?: string; outro?: string }
   | { embed: "citation"; citation: CitationData };
 
 type EmbedPart = { kind: "embed"; id: string } & EmbedSpec;
@@ -78,6 +78,96 @@ interface ScriptStep {
   args?: string;
   result?: string;
   spec?: EmbedSpec;
+}
+
+const widgetTriggers: {
+  keywords: string[];
+  id: WidgetId;
+  intro: string;
+  outro: string;
+}[] = [
+  {
+    keywords: ["density"],
+    id: "density",
+    intro: "Let's make this hands-on — try it yourself:",
+    outro: "Same bottle, more particles → more mass in the same volume → higher density. ρ = m/V in action.",
+  },
+  {
+    keywords: ["gas", "pressure", "piston", "pv=nrt"],
+    id: "ideal-gas",
+    intro: "Here's a piston you can control — squeeze, heat, or add gas:",
+    outro: "Halve the volume at constant T and pressure doubles — Boyle's law falls straight out of PV = nRT.",
+  },
+  {
+    keywords: ["ohm", "circuit", "current", "resist", "voltage"],
+    id: "ohms-law",
+    intro: "Watch the electrons respond as you change the circuit:",
+    outro: "Current speeds up with voltage and slows with resistance — I = V/R.",
+  },
+  {
+    keywords: ["projectile", "trajectory", "launch"],
+    id: "projectile",
+    intro: "Try different launch angles and speeds:",
+    outro: "Notice 45° maximizes range — sin 2θ peaks at θ = 45°.",
+  },
+  {
+    keywords: ["pendulum", "oscillat"],
+    id: "pendulum",
+    intro: "A live pendulum — change its length or move it to the Moon:",
+    outro: "Period only depends on L and g — mass doesn't matter at all.",
+  },
+  {
+    keywords: ["wave", "amplitude", "frequency", "wavelength"],
+    id: "wave",
+    intro: "Shape this travelling wave yourself:",
+    outro: "Amplitude sets the height, wavelength the spacing — energy scales with A².",
+  },
+  {
+    keywords: ["decay", "half-life", "half life", "radioactive", "isotope"],
+    id: "half-life",
+    intro: "Here's a decay curve you can control:",
+    outro: "After every half-life, exactly half remains — that's why the curve never quite reaches zero.",
+  },
+  {
+    keywords: ["spring", "hooke", "elastic"],
+    id: "hooke",
+    intro: "Stretch the spring and watch the restoring force:",
+    outro: "Force grows linearly with displacement — until you exceed the elastic limit.",
+  },
+  {
+    keywords: ["function", "sine", "sin(", "parabola", "grapher"],
+    id: "function-grapher",
+    intro: "Here's a live Desmos grapher — drag a, b, and c:",
+    outro: "a scales the amplitude, b compresses the period, c shifts it vertically.",
+  },
+  {
+    keywords: ["unit circle", "trig", "sin and cos", "radian"],
+    id: "unit-circle",
+    intro: "Sweep the angle around the unit circle:",
+    outro: "sin is the vertical leg, cos the horizontal — Pythagoras keeps them locked to 1.",
+  },
+  {
+    keywords: ["normal", "distribution", "bell curve", "standard deviation"],
+    id: "normal-distribution",
+    intro: "Play with the bell curve:",
+    outro: "μ slides the peak, σ trades height for spread — the area always stays 1.",
+  },
+  {
+    keywords: ["vector"],
+    id: "vector-addition",
+    intro: "Add the vectors tip-to-tail:",
+    outro: "The dashed resultant is the diagonal of the parallelogram — order doesn't matter.",
+  },
+];
+
+function matchWidget(q: string) {
+  for (const trigger of widgetTriggers) {
+    if (trigger.keywords.some((k) => q.includes(k))) return trigger;
+  }
+  if (q.includes("interactive") || q.includes("simulat") || q.includes("play")) {
+    return widgetTriggers[0];
+  }
+  return null;
 }
 
 function scriptFor(input: string): ScriptStep[] {
@@ -129,14 +219,12 @@ function scriptFor(input: string): ScriptStep[] {
       },
     ];
   }
-  if (q.includes("density") || q.includes("interactive") || q.includes("simulat") || q.includes("play")) {
+  const widgetMatch = matchWidget(q);
+  if (widgetMatch) {
     return [
-      { type: "text", text: "Let's make this hands-on — try it yourself:" },
-      { type: "embed", spec: { embed: "widget" } },
-      {
-        type: "text",
-        text: "Same bottle, more particles → more mass in the same volume → higher density. ρ = m/V in action.",
-      },
+      { type: "text", text: widgetMatch.intro },
+      { type: "embed", spec: { embed: "widget", widget: widgetMatch.id } },
+      { type: "text", text: widgetMatch.outro },
     ];
   }
   if (q.includes("pdf") || q.includes("source") || q.includes("cite") || q.includes("where") || q.includes("notes")) {
@@ -277,16 +365,11 @@ function ToolCallChip({ part }: { part: ToolCallPart }) {
         onClick={() => part.status === "done" && setExpanded(!expanded)}
         className="w-full flex items-center gap-2.5 px-3 py-2 text-left"
       >
-        <span
-          className={cn(
-            "flex h-6 w-6 items-center justify-center rounded-lg bg-card border border-border shrink-0",
-            meta.color,
-          )}
-        >
+        <span className={cn("flex items-center justify-center shrink-0", meta.color)}>
           {part.status === "running" ? (
-            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            <Loader2 className="h-4 w-4 animate-spin" />
           ) : (
-            <Icon className="h-3.5 w-3.5" />
+            <Icon className="h-4 w-4" />
           )}
         </span>
         <span className="flex-1 min-w-0">
@@ -326,6 +409,8 @@ const suggestions = [
   "Plot the ionization energy trend",
   "Show me the energy level equation",
   "Let me play with a density simulation",
+  "Simulate the ideal gas law",
+  "Show a pendulum I can control",
   "Where do my notes cover shielding?",
 ];
 
@@ -470,9 +555,7 @@ export function Copilot({
     <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-[420px] flex flex-col bg-card border-l border-border shadow-2xl animate-fade-up">
       {/* Header */}
       <div className="flex items-center gap-2.5 px-4 py-3.5 border-b border-border">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft border border-accent/20">
-          <Sparkles className="h-4 w-4 text-accent" />
-        </span>
+        <Sparkles className="h-5 w-5 text-accent shrink-0" />
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold leading-tight">Scribe Copilot</p>
           <p className="text-[11px] text-muted-foreground truncate">
@@ -492,9 +575,7 @@ export function Copilot({
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
         {messages.length === 0 && (
           <div className="pt-8 text-center space-y-5">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft border border-accent/15">
-              <Wand2 className="h-5 w-5 text-accent" />
-            </div>
+            <Wand2 className="h-7 w-7 text-accent mx-auto" />
             <div>
               <p className="text-sm font-semibold">What do you need?</p>
               <p className="text-xs text-muted-foreground mt-1">
@@ -544,7 +625,7 @@ export function Copilot({
                   ) : part.embed === "graph" ? (
                     <GraphEmbed key={part.id} data={part.graph} />
                   ) : part.embed === "widget" ? (
-                    <DensityWidget key={part.id} />
+                    <InteractiveWidget key={part.id} id={part.widget} />
                   ) : (
                     <CitationEmbed key={part.id} data={part.citation} />
                   )

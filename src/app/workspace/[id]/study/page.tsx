@@ -74,9 +74,7 @@ export default function WorkspaceStudyPage() {
 
           {!workspace || workspace.sessions.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft border border-accent/15 mb-4">
-                <Sparkles className="h-5 w-5 text-accent" />
-              </div>
+              <Sparkles className="h-7 w-7 text-accent mx-auto mb-3" />
               <p className="text-sm font-semibold">No sessions yet</p>
               <p className="text-xs text-muted-foreground mt-1.5 mb-5 max-w-sm mx-auto">
                 Tell Scribe what you&apos;re studying and it will build a plan
