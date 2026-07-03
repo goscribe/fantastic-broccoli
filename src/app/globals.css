@@ -2,17 +2,19 @@
 @import "katex/dist/katex.min.css";
 
 :root {
-  --background: #f6f7fb;
-  --foreground: #1e1f26;
+  --background: #f7f7f4;
+  --foreground: #14170f;
   --card: #ffffff;
-  --card-hover: #fcfcfe;
-  --card-foreground: #1e1f26;
-  --muted: #f0f1f6;
-  --muted-foreground: #676a75;
-  --faint: #9ba0ad;
-  --accent: #58cc02;
-  --accent-dim: #4cb302;
-  --accent-soft: #ecf9e3;
+  --card-hover: #fcfcfa;
+  --card-foreground: #14170f;
+  --muted: #efefe9;
+  --muted-foreground: #62655c;
+  --faint: #989b90;
+  --ink: #171c12;
+  --accent: #4a9f06;
+  --accent-dim: #3d8404;
+  --accent-soft: #eaf5df;
+  --accent-bright: #6fd420;
   --accent-foreground: #ffffff;
   --energy: #58cc02;
   --energy-soft: #ecf9e3;
@@ -20,9 +22,9 @@
   --sky: #38bdf8;
   --rose: #fb7185;
   --amber: #f59e0b;
-  --border: #eaecf2;
-  --border-strong: #dcdfe8;
-  --ring: #58cc02;
+  --border: #e7e7e0;
+  --border-strong: #d7d7cd;
+  --ring: #4a9f06;
   --radius: 1rem;
   --success: #58cc02;
   --warning: #f59e0b;
@@ -40,6 +42,8 @@
   --color-accent: var(--accent);
   --color-accent-dim: var(--accent-dim);
   --color-accent-soft: var(--accent-soft);
+  --color-accent-bright: var(--accent-bright);
+  --color-ink: var(--ink);
   --color-accent-foreground: var(--accent-foreground);
   --color-energy: var(--energy);
   --color-energy-soft: var(--energy-soft);

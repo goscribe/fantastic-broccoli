@@ -45,63 +45,84 @@ export default function HomePage() {
         {/* Greeting */}
         <header className="flex flex-wrap items-end justify-between gap-4 animate-fade-up">
           <div>
-            <h1 className="text-xl font-bold tracking-tight">
-              {greeting}, Alan 👋
-            </h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              {resumable
-                ? "Pick up where you left off."
-                : "Ready to start something new?"}
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-faint">
+              {new Date().toLocaleDateString("en-GB", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+              })}
             </p>
+            <h1 className="text-2xl font-bold tracking-tight mt-1">
+              {greeting}, Alan
+            </h1>
           </div>
-          <div className="flex items-center gap-6 text-sm">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center divide-x divide-border rounded-xl border border-border bg-card shadow-soft">
+            <div className="flex items-center gap-2.5 px-4 py-2.5">
               <StreakFlame className="h-6 w-6" />
               <div className="leading-tight">
-                <p className="font-bold tabular-nums">6 days</p>
-                <p className="text-[11px] text-faint">Streak</p>
+                <p className="text-sm font-bold tabular-nums">6</p>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-faint">
+                  Day streak
+                </p>
               </div>
             </div>
-            <div className="leading-tight">
-              <p className="font-bold tabular-nums">{activeSessions.length}</p>
-              <p className="text-[11px] text-faint">Active sessions</p>
+            <div className="px-4 py-2.5 leading-tight">
+              <p className="text-sm font-bold tabular-nums">
+                {activeSessions.length}
+              </p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-faint">
+                Sessions
+              </p>
             </div>
-            <div className="leading-tight">
-              <p className="font-bold tabular-nums">
+            <div className="px-4 py-2.5 leading-tight">
+              <p className="text-sm font-bold tabular-nums">
                 {formatDuration(totalPlannedMinutes)}
               </p>
-              <p className="text-[11px] text-faint">Planned</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-faint">
+                Planned
+              </p>
             </div>
-            <div className="leading-tight">
-              <p className="font-bold tabular-nums">{allWorkspaces.length}</p>
-              <p className="text-[11px] text-faint">Workspaces</p>
+            <div className="px-4 py-2.5 leading-tight">
+              <p className="text-sm font-bold tabular-nums">
+                {allWorkspaces.length}
+              </p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-faint">
+                Workspaces
+              </p>
             </div>
           </div>
         </header>
 
         {/* Gradient banner */}
-        <section
-          className="relative overflow-hidden rounded-2xl p-6 text-white animate-fade-up"
-          style={{
-            background:
-              "linear-gradient(105deg, #46a302 0%, #58cc02 55%, #8ee53f 100%)",
-          }}
-        >
-          <div className="pointer-events-none absolute inset-0 opacity-25"
+        <section className="relative overflow-hidden rounded-2xl bg-ink p-7 text-white animate-fade-up">
+          <div
+            className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(circle at 85% 10%, rgba(255,255,255,0.8) 0%, transparent 45%)",
+                "radial-gradient(ellipse 60% 120% at 90% 0%, rgba(111,212,32,0.28) 0%, transparent 60%)",
             }}
           />
-          <div className="relative flex flex-wrap items-center justify-between gap-6">
-            <div className="max-w-md">
-              <p className="text-lg font-bold">
-                {resumable ? "Keep it up!" : "Start a session"}
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 40% 90% at 0% 100%, rgba(111,212,32,0.10) 0%, transparent 55%)",
+            }}
+          />
+          <div className="relative flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-lg">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-bright">
+                {resumable ? "Continue studying" : "Get started"}
               </p>
-              <p className="text-sm text-white/85 mt-1">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight mt-2 leading-snug">
                 {resumable
-                  ? `“${resumable.session.title}” in ${resumable.workspace.title} is ${resumable.session.progress}% done — ${resumable.session.activities.filter((a) => a.status === "completed").length}/${resumable.session.activities.length} activities finished.`
-                  : "Generate a study plan tuned to your syllabus and schedule."}
+                  ? resumable.session.title
+                  : "Start your first study session"}
+              </h2>
+              <p className="text-sm text-white/55 mt-1.5">
+                {resumable
+                  ? `${resumable.workspace.title} · ${formatDuration(resumable.session.durationMinutes)} · ${resumable.session.activities.filter((a) => a.status === "completed").length} of ${resumable.session.activities.length} activities complete`
+                  : "A plan generated around your syllabus and schedule."}
               </p>
               {resumable && (
                 <button
@@ -111,7 +132,7 @@ export default function HomePage() {
                       `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
                     )
                   }
-                  className="group mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[13px] font-semibold text-[#46a302] hover:bg-white/90 transition-colors"
+                  className="group mt-5 inline-flex items-center gap-2 rounded-lg bg-accent-bright px-4 py-2 text-[13px] font-semibold text-ink hover:bg-white transition-colors"
                 >
                   Resume session
                   <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -119,16 +140,18 @@ export default function HomePage() {
               )}
             </div>
             {resumable && (
-              <div className="hidden sm:block w-56">
-                <div className="flex items-center justify-between text-[11px] font-medium text-white/80 mb-1.5">
-                  <span>Session progress</span>
-                  <span className="tabular-nums">
+              <div className="hidden sm:block w-64">
+                <div className="flex items-baseline justify-between mb-2">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-white/45">
+                    Progress
+                  </span>
+                  <span className="text-lg font-bold tabular-nums text-accent-bright">
                     {resumable.session.progress}%
                   </span>
                 </div>
-                <div className="h-2 rounded-full bg-white/25">
+                <div className="h-1.5 rounded-full bg-white/15">
                   <div
-                    className="h-2 rounded-full bg-white"
+                    className="h-1.5 rounded-full bg-accent-bright"
                     style={{ width: `${resumable.session.progress}%` }}
                   />
                 </div>
@@ -168,7 +191,9 @@ export default function HomePage() {
         ) : (
           <section className="animate-fade-up">
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-semibold">Folders</h2>
+              <h2 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                Folders
+              </h2>
               <button
                 type="button"
                 className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground rounded-lg px-2 py-1 hover:bg-muted"
