@@ -4,10 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { mockWorkspaces, mockFolders } from "@/lib/mock-data";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
-import { ProgressBar } from "@/components/ui/progress-bar";
 import { formatDuration } from "@/lib/utils";
-import { StreakCard } from "@/components/graphics/streak-flame";
-import { Search, Clock, Zap, ArrowRight, FolderOpen, Plus } from "lucide-react";
+import { StreakFlame } from "@/components/graphics/streak-flame";
+import { Search, Clock, Zap, ArrowRight, FolderOpen, Plus, BookOpen } from "lucide-react";
 
 export default function HomePage() {
   const router = useRouter();
@@ -42,71 +41,116 @@ export default function HomePage() {
   return (
     <div className="flex-1 flex flex-col">
       <main className="flex-1 w-full max-w-6xl px-8 py-8 space-y-8">
-        {/* Header row */}
-        <header className="flex flex-wrap items-start justify-between gap-4 animate-fade-up">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight leading-[1.1]">
-              {greeting}, Alan
-            </h1>
-            <p className="text-muted-foreground mt-1">
-              Pick up where you left off, or start something new.
-            </p>
-            <div className="flex items-center gap-2.5 mt-4 flex-wrap">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-energy-soft text-[#3d8c02] px-3.5 py-1.5 text-xs font-semibold">
-                <Zap className="h-3.5 w-3.5" />
-                {activeSessions.length} active session
-                {activeSessions.length !== 1 ? "s" : ""}
-              </span>
-              {totalPlannedMinutes > 0 && (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-sky/15 text-[#0284c7] px-3.5 py-1.5 text-xs font-semibold">
-                  <Clock className="h-3.5 w-3.5" />
-                  {formatDuration(totalPlannedMinutes)} planned
-                </span>
+        {/* Hero banner */}
+        <header className="relative overflow-hidden rounded-3xl bg-[#211f33] text-white p-8 animate-fade-up">
+          <div
+            className="pointer-events-none absolute -right-16 -top-24 h-72 w-72 rounded-full opacity-30"
+            style={{
+              background:
+                "radial-gradient(circle, #7c5cfc 0%, transparent 70%)",
+            }}
+          />
+          <div
+            className="pointer-events-none absolute right-40 -bottom-28 h-64 w-64 rounded-full opacity-20"
+            style={{
+              background:
+                "radial-gradient(circle, #58cc02 0%, transparent 70%)",
+            }}
+          />
+          <div className="relative flex flex-wrap items-center justify-between gap-6">
+            <div className="max-w-lg">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b7a8ff]">
+                {greeting}
+              </p>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight leading-[1.15] mt-2">
+                {resumable
+                  ? `Keep going, Alan — “${resumable.session.title}” is ${resumable.session.progress}% done`
+                  : "Ready to study, Alan?"}
+              </h1>
+              <p className="text-sm text-white/60 mt-2">
+                {resumable
+                  ? `${resumable.workspace.title} · ${formatDuration(resumable.session.durationMinutes)} · ${resumable.session.activities.filter((a) => a.status === "completed").length}/${resumable.session.activities.length} activities done`
+                  : "Pick up where you left off, or start something new."}
+              </p>
+              {resumable && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    router.push(
+                      `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
+                    )
+                  }
+                  className="group mt-5 inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground hover:bg-accent-dim transition-colors"
+                >
+                  Resume session
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                </button>
               )}
             </div>
+            <div className="flex items-center gap-4 rounded-2xl bg-white/10 backdrop-blur px-5 py-4">
+              <StreakFlame className="h-10 w-10" />
+              <div>
+                <p className="text-lg font-bold leading-tight tabular-nums">
+                  6-day streak
+                </p>
+                <div className="flex items-center gap-1.5 mt-1.5">
+                  {[true, true, true, false, false, false, false].map(
+                    (done, i) => (
+                      <span
+                        key={i}
+                        className={
+                          done
+                            ? "h-2 w-2 rounded-full bg-gradient-to-b from-[#ffb020] to-[#f4442e]"
+                            : "h-2 w-2 rounded-full bg-white/25"
+                        }
+                      />
+                    ),
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
-          <StreakCard
-            days={6}
-            doneThisWeek={[true, true, true, false, false, false, false]}
-          />
         </header>
 
-        {/* Jump back in */}
-        {resumable && !filtered && (
-          <button
-            type="button"
-            onClick={() =>
-              router.push(
-                `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
-              )
-            }
-            className="group w-full text-left rounded-3xl border border-accent/30 bg-gradient-to-br from-accent-soft via-accent-soft/40 to-card p-6 shadow-soft hover:shadow-soft-lg hover:border-accent/50 transition-all animate-fade-up"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-semibold uppercase tracking-[0.15em] text-accent">
-                Jump back in
-              </span>
-              <span className="flex items-center gap-1.5 text-xs font-semibold text-accent-foreground bg-accent rounded-full px-3.5 py-1.5 group-hover:gap-2.5 transition-all">
-                Resume
-                <ArrowRight className="h-3.5 w-3.5" />
-              </span>
-            </div>
-            <h2 className="text-xl font-bold tracking-tight">
-              {resumable.session.title}
-            </h2>
-            <p className="text-sm text-muted-foreground mt-1">
-              {resumable.workspace.title} ·{" "}
-              {formatDuration(resumable.session.durationMinutes)} ·{" "}
-              {resumable.session.activities.filter((a) => a.status === "completed").length}
-              /{resumable.session.activities.length} activities done
+        {/* Stat tiles */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 animate-fade-up">
+          <div className="rounded-2xl bg-accent-soft p-5">
+            <Zap className="h-5 w-5 text-accent" />
+            <p className="text-2xl font-bold tabular-nums mt-3">
+              {activeSessions.length}
             </p>
-            <ProgressBar
-              value={resumable.session.progress}
-              className="mt-4"
-              showLabel
-            />
-          </button>
-        )}
+            <p className="text-xs font-medium text-muted-foreground mt-0.5">
+              Active sessions
+            </p>
+          </div>
+          <div className="rounded-2xl bg-energy-soft p-5">
+            <Clock className="h-5 w-5 text-[#3d8c02]" />
+            <p className="text-2xl font-bold tabular-nums mt-3">
+              {formatDuration(totalPlannedMinutes)}
+            </p>
+            <p className="text-xs font-medium text-muted-foreground mt-0.5">
+              Study time planned
+            </p>
+          </div>
+          <div className="rounded-2xl bg-[#fff4e0] p-5">
+            <BookOpen className="h-5 w-5 text-[#d97706]" />
+            <p className="text-2xl font-bold tabular-nums mt-3">
+              {allWorkspaces.length}
+            </p>
+            <p className="text-xs font-medium text-muted-foreground mt-0.5">
+              Workspaces
+            </p>
+          </div>
+          <div className="rounded-2xl bg-[#e5f6fd] p-5">
+            <FolderOpen className="h-5 w-5 text-[#0284c7]" />
+            <p className="text-2xl font-bold tabular-nums mt-3">
+              {folders.length}
+            </p>
+            <p className="text-xs font-medium text-muted-foreground mt-0.5">
+              Folders
+            </p>
+          </div>
+        </div>
 
         {/* Search */}
         <div className="relative max-w-md animate-fade-up">
