@@ -6,19 +6,8 @@ import { mockWorkspaces, mockFolders } from "@/lib/mock-data";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { formatDuration } from "@/lib/utils";
 import { StreakFlame } from "@/components/graphics/streak-flame";
-import { Search, ArrowRight, FolderOpen, Plus } from "lucide-react";
-import { Folder } from "@/types";
-
-function leafFolders(
-  folders: Folder[],
-  path: string[] = [],
-): { folder: Folder; path: string[] }[] {
-  return folders.flatMap((f) => {
-    const here = [...path, f.name];
-    const nested = f.folders ? leafFolders(f.folders, here) : [];
-    return f.workspaces.length > 0 ? [{ folder: f, path: here }, ...nested] : nested;
-  });
-}
+import { FolderCard } from "@/components/workspace/folder-card";
+import { Search, ArrowRight, Plus } from "lucide-react";
 
 export default function HomePage() {
   const router = useRouter();
@@ -52,7 +41,7 @@ export default function HomePage() {
 
   return (
     <div className="flex-1 flex flex-col">
-      <main className="flex-1 w-full max-w-3xl mx-auto px-6 py-10 space-y-10">
+      <main className="flex-1 w-full px-8 py-8 space-y-8">
         {/* Greeting */}
         <header className="flex flex-wrap items-end justify-between gap-4 animate-fade-up">
           <div>
@@ -166,7 +155,7 @@ export default function HomePage() {
             <p className="text-xs text-muted-foreground mb-4">
               {filtered.length} result{filtered.length !== 1 ? "s" : ""}
             </p>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filtered.map((ws) => (
                 <WorkspaceCard
                   key={ws.id}
@@ -177,55 +166,27 @@ export default function HomePage() {
             </div>
           </section>
         ) : (
-          <div className="space-y-8">
-            {leafFolders(folders).map(({ folder, path }) => (
-              <section key={folder.id} className="animate-fade-up">
-                <div className="flex items-center gap-2 mb-3">
-                  <FolderOpen
-                    className="h-4 w-4"
-                    style={{ color: folder.color }}
-                  />
-                  <h2 className="flex items-center gap-1.5 text-sm font-semibold">
-                    {path.map((name, i) => (
-                      <span key={i} className="flex items-center gap-1.5">
-                        {i > 0 && (
-                          <span className="text-faint font-normal">/</span>
-                        )}
-                        <span
-                          className={
-                            i < path.length - 1
-                              ? "text-muted-foreground font-normal"
-                              : undefined
-                          }
-                        >
-                          {name}
-                        </span>
-                      </span>
-                    ))}
-                  </h2>
-                  <span className="text-xs text-faint">
-                    {folder.workspaces.length}
-                  </span>
-                  <button
-                    type="button"
-                    className="ml-auto flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground rounded-lg px-2 py-1 hover:bg-muted"
-                  >
-                    <Plus className="h-3.5 w-3.5" />
-                    New workspace
-                  </button>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {folder.workspaces.map((ws) => (
-                    <WorkspaceCard
-                      key={ws.id}
-                      workspace={ws}
-                      onClick={(id) => router.push(`/workspace/${id}`)}
-                    />
-                  ))}
-                </div>
-              </section>
-            ))}
-          </div>
+          <section className="animate-fade-up">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-sm font-semibold">Folders</h2>
+              <button
+                type="button"
+                className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground rounded-lg px-2 py-1 hover:bg-muted"
+              >
+                <Plus className="h-3.5 w-3.5" />
+                New folder
+              </button>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {folders.map((folder) => (
+                <FolderCard
+                  key={folder.id}
+                  folder={folder}
+                  onClick={(id) => router.push(`/folder/${id}`)}
+                />
+              ))}
+            </div>
+          </section>
         )}
       </main>
     </div>

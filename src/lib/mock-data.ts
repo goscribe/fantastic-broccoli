@@ -327,6 +327,39 @@ export const mockFolders: Folder[] = [
   },
 ];
 
+export function getFolder(
+  id: string,
+  folders: Folder[] = mockFolders,
+): Folder | undefined {
+  for (const f of folders) {
+    if (f.id === id) return f;
+    const found = f.folders && getFolder(id, f.folders);
+    if (found) return found;
+  }
+  return undefined;
+}
+
+export function getFolderPath(
+  id: string,
+  folders: Folder[] = mockFolders,
+  trail: Folder[] = [],
+): Folder[] | undefined {
+  for (const f of folders) {
+    if (f.id === id) return [...trail, f];
+    const found =
+      f.folders && getFolderPath(id, f.folders, [...trail, f]);
+    if (found) return found;
+  }
+  return undefined;
+}
+
+export function countWorkspaces(folder: Folder): number {
+  return (
+    folder.workspaces.length +
+    (folder.folders?.reduce((sum, f) => sum + countWorkspaces(f), 0) ?? 0)
+  );
+}
+
 export function getWorkspace(id: string): Workspace | undefined {
   return mockWorkspaces.find((w) => w.id === id);
 }

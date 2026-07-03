@@ -22,32 +22,49 @@ function FolderNode({
   const pathname = usePathname();
   const router = useRouter();
   const isOpen = expanded[folder.id] ?? true;
+  const active = pathname === `/folder/${folder.id}`;
 
   return (
     <div>
-      <button
-        type="button"
-        onClick={() => toggle(folder.id)}
-        className="group w-full flex items-center gap-1 rounded-md py-1 pr-2 text-[13px] font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
+      <div
+        className={cn(
+          "group flex items-center gap-1 rounded-md py-1 pr-2 text-[13px] font-medium",
+          active
+            ? "bg-accent-soft text-foreground"
+            : "text-muted-foreground hover:bg-muted hover:text-foreground",
+        )}
         style={{ paddingLeft: `${depth * 14 + 6}px` }}
       >
-        <ChevronRight
-          className={cn(
-            "h-3.5 w-3.5 shrink-0 text-faint transition-transform",
-            isOpen && "rotate-90",
-          )}
-        />
-        <svg
-          viewBox="0 0 16 16"
-          className="h-4 w-4 shrink-0"
-          fill={folder.color}
-          aria-hidden
+        <button
+          type="button"
+          aria-label={isOpen ? "Collapse folder" : "Expand folder"}
+          onClick={() => toggle(folder.id)}
+          className="p-0.5 -m-0.5 rounded hover:bg-border"
         >
-          <path d="M1.5 4A1.5 1.5 0 0 1 3 2.5h3.2c.4 0 .8.16 1.06.44l.9.92c.19.19.45.3.72.3H13A1.5 1.5 0 0 1 14.5 5.7v6.3A1.5 1.5 0 0 1 13 13.5H3A1.5 1.5 0 0 1 1.5 12V4z" />
-        </svg>
-        <span className="truncate">{folder.name}</span>
-        <Plus className="ml-auto h-3.5 w-3.5 text-faint opacity-0 group-hover:opacity-100" />
-      </button>
+          <ChevronRight
+            className={cn(
+              "h-3.5 w-3.5 shrink-0 text-faint transition-transform",
+              isOpen && "rotate-90",
+            )}
+          />
+        </button>
+        <button
+          type="button"
+          onClick={() => router.push(`/folder/${folder.id}`)}
+          className="flex min-w-0 flex-1 items-center gap-1.5 text-left"
+        >
+          <svg
+            viewBox="0 0 16 16"
+            className="h-4 w-4 shrink-0"
+            fill={folder.color}
+            aria-hidden
+          >
+            <path d="M1.5 4A1.5 1.5 0 0 1 3 2.5h3.2c.4 0 .8.16 1.06.44l.9.92c.19.19.45.3.72.3H13A1.5 1.5 0 0 1 14.5 5.7v6.3A1.5 1.5 0 0 1 13 13.5H3A1.5 1.5 0 0 1 1.5 12V4z" />
+          </svg>
+          <span className="truncate">{folder.name}</span>
+        </button>
+        <Plus className="ml-auto h-3.5 w-3.5 shrink-0 text-faint opacity-0 group-hover:opacity-100" />
+      </div>
 
       {isOpen && (
         <div>
@@ -95,7 +112,7 @@ export function Sidebar() {
     setExpanded((prev) => ({ ...prev, [id]: !(prev[id] ?? true) }));
 
   return (
-    <aside className="hidden md:flex w-60 shrink-0 flex-col bg-card border-r border-border">
+    <aside className="hidden md:flex w-72 shrink-0 flex-col bg-card border-r border-border">
       <div className="flex items-center gap-2 px-4 h-14">
         <span className="flex h-6 w-6 items-center justify-center rounded-md bg-accent text-accent-foreground text-xs font-bold">
           S

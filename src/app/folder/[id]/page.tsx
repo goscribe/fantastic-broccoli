@@ -1,0 +1,114 @@
+"use client";
+
+import { use } from "react";
+import Link from "next/link";
+import { useRouter, notFound } from "next/navigation";
+import { getFolder, getFolderPath } from "@/lib/mock-data";
+import { FolderCard } from "@/components/workspace/folder-card";
+import { WorkspaceCard } from "@/components/workspace/workspace-card";
+import { ChevronRight, Plus } from "lucide-react";
+
+export default function FolderPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = use(params);
+  const router = useRouter();
+  const folder = getFolder(id);
+  const path = getFolderPath(id);
+  if (!folder || !path) notFound();
+
+  return (
+    <div className="flex-1 flex flex-col">
+      <main className="flex-1 w-full px-8 py-8 space-y-8">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-1.5 text-sm animate-fade-up">
+          <Link
+            href="/"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            Home
+          </Link>
+          {path.map((f, i) => (
+            <span key={f.id} className="flex items-center gap-1.5">
+              <ChevronRight className="h-3.5 w-3.5 text-faint" />
+              {i < path.length - 1 ? (
+                <Link
+                  href={`/folder/${f.id}`}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  {f.name}
+                </Link>
+              ) : (
+                <span className="font-semibold">{f.name}</span>
+              )}
+            </span>
+          ))}
+        </nav>
+
+        <header className="flex items-center gap-3 animate-fade-up">
+          <svg viewBox="0 0 24 24" className="h-9 w-9" aria-hidden>
+            <path
+              fill={folder.color}
+              d="M2.25 6A2.25 2.25 0 0 1 4.5 3.75h4.8c.6 0 1.17.24 1.59.66l1.35 1.38c.28.29.67.46 1.08.46h6.18A2.25 2.25 0 0 1 21.75 8.5v9.5a2.25 2.25 0 0 1-2.25 2.25h-15A2.25 2.25 0 0 1 2.25 18V6z"
+            />
+          </svg>
+          <h1 className="text-2xl font-bold tracking-tight">{folder.name}</h1>
+        </header>
+
+        {folder.folders && folder.folders.length > 0 && (
+          <section className="animate-fade-up">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-sm font-semibold">Folders</h2>
+              <button
+                type="button"
+                className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground rounded-lg px-2 py-1 hover:bg-muted"
+              >
+                <Plus className="h-3.5 w-3.5" />
+                New folder
+              </button>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {folder.folders.map((sub) => (
+                <FolderCard
+                  key={sub.id}
+                  folder={sub}
+                  onClick={(fid) => router.push(`/folder/${fid}`)}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="animate-fade-up">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-semibold">Workspaces</h2>
+            <button
+              type="button"
+              className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground rounded-lg px-2 py-1 hover:bg-muted"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              New workspace
+            </button>
+          </div>
+          {folder.workspaces.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {folder.workspaces.map((ws) => (
+                <WorkspaceCard
+                  key={ws.id}
+                  workspace={ws}
+                  onClick={(wid) => router.push(`/workspace/${wid}`)}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground rounded-xl border border-dashed border-border-strong px-4 py-8 text-center">
+              No workspaces here yet.
+            </p>
+          )}
+        </section>
+      </main>
+    </div>
+  );
+}
