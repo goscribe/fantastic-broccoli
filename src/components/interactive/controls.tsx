@@ -77,7 +77,10 @@ export function Slider({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full accent-[var(--accent)] cursor-pointer"
+        className="param-slider w-full"
+        style={{
+          background: `linear-gradient(to right, var(--accent) ${((value - min) / (max - min)) * 100}%, var(--muted) ${((value - min) / (max - min)) * 100}%)`,
+        }}
       />
     </div>
   );

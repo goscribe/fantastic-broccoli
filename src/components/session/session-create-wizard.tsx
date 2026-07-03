@@ -5,7 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { SessionDepth, ExamBoard } from "@/types";
-import { Sparkles, Clock, Brain, BookOpen, ArrowRight, ArrowLeft } from "lucide-react";
+import {
+  Sparkles,
+  Clock,
+  Brain,
+  BookOpen,
+  ArrowRight,
+  ArrowLeft,
+  Loader2,
+} from "lucide-react";
 
 interface SessionConfig {
   title: string;
@@ -19,6 +27,7 @@ interface SessionConfig {
 
 interface SessionCreateWizardProps {
   workspaceTitle: string;
+  creating?: boolean;
   onClose: () => void;
   onCreate: (config: SessionConfig) => void;
 }
@@ -57,6 +66,7 @@ const durationOptions = [15, 30, 45, 60, 90, 120];
 
 export function SessionCreateWizard({
   workspaceTitle,
+  creating = false,
   onClose,
   onCreate,
 }: SessionCreateWizardProps) {
@@ -263,10 +273,19 @@ export function SessionCreateWizard({
                 variant="primary"
                 size="sm"
                 onClick={() => onCreate(config)}
-                disabled={!canProceed}
+                disabled={!canProceed || creating}
               >
-                <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                Generate plan
+                {creating ? (
+                  <>
+                    <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
+                    Generating plan…
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="h-3.5 w-3.5 mr-1.5" />
+                    Generate plan
+                  </>
+                )}
               </Button>
             )}
           </div>

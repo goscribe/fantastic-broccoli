@@ -148,6 +148,7 @@ export default function WorkspaceStudyPage() {
       {showCreateWizard && workspace && (
         <SessionCreateWizard
           workspaceTitle={workspace.title}
+          creating={createSession.isPending}
           onClose={() => setShowCreateWizard(false)}
           onCreate={(config) =>
             createSession.mutate({
