@@ -230,7 +230,7 @@ export default function HomePage() {
                   ))}
                 </div>
               </div>
-              <div className="mt-4 grid flex-1 grid-cols-2 gap-2 sm:grid-cols-4">
+              <div className="mt-5 grid flex-1 content-end grid-cols-2 gap-2 sm:grid-cols-4">
                 {[
                   {
                     label: "Active days",
