@@ -52,7 +52,7 @@ export default function WorkspaceStudyPage() {
             onClick={() =>
               router.push(`/workspace/${workspaceId}/session/${resumable.id}`)
             }
-            className="group w-full text-left rounded-3xl border border-accent/20 bg-gradient-to-br from-accent-soft via-card to-card p-6 shadow-soft hover:shadow-soft-lg hover:border-accent/40 transition-all animate-fade-up"
+            className="group w-full text-left rounded-3xl border border-accent/20 bg-gradient-to-br from-accent-soft via-card to-card p-6 hover:border-accent/40 transition-all animate-fade-up"
           >
             <div className="flex items-center justify-between mb-3">
               <span className="flex items-center gap-1.5 text-xs font-semibold text-accent">

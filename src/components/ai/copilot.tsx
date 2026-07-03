@@ -352,7 +352,7 @@ export function CopilotTrigger({ onClick }: { onClick: () => void }) {
     <button
       type="button"
       onClick={onClick}
-      className="fixed bottom-5 right-5 z-40 flex items-center gap-2 h-11 pl-4 pr-5 rounded-full bg-accent text-accent-foreground font-semibold text-sm shadow-soft-lg hover:bg-accent-dim active:scale-95 transition-all"
+      className="fixed bottom-5 right-5 z-40 flex items-center gap-2 h-11 pl-4 pr-5 rounded-full bg-accent text-accent-foreground font-semibold text-sm hover:bg-accent-dim active:scale-95 transition-all"
     >
       <Sparkles className="h-4 w-4" />
       Ask Scribe

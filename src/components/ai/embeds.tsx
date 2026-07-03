@@ -18,7 +18,7 @@ export function EquationEmbed({ latex, caption }: { latex: string; caption?: str
   );
 
   return (
-    <div className="my-2 rounded-xl border border-border bg-card p-4 shadow-soft animate-fade-up">
+    <div className="my-2 rounded-xl border border-border bg-card p-4 animate-fade-up">
       <div
         className="text-[15px] overflow-x-auto"
         dangerouslySetInnerHTML={{ __html: html }}
@@ -62,7 +62,7 @@ export interface CitationData {
 
 export function CitationEmbed({ data }: { data: CitationData }) {
   return (
-    <div className="my-2 rounded-xl border border-border bg-card shadow-soft overflow-hidden animate-fade-up">
+    <div className="my-2 rounded-xl border border-border bg-card overflow-hidden animate-fade-up">
       <div className="flex items-center gap-2 px-3.5 py-2 bg-muted/60 border-b border-border">
         <FileText className="h-3.5 w-3.5 text-rose shrink-0" />
         <span className="text-[11px] font-semibold truncate">{data.source}</span>

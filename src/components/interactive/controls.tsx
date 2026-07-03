@@ -16,7 +16,7 @@ export function WidgetFrame({
   children: React.ReactNode;
 }) {
   return (
-    <div className="my-2 rounded-2xl border border-border bg-card p-4 shadow-soft animate-fade-up">
+    <div className="my-2 rounded-2xl border border-border bg-card p-4 animate-fade-up">
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="min-w-0">
           <p className="text-sm font-semibold">{title}</p>

@@ -44,7 +44,7 @@ export function StreakCard({
   doneThisWeek: boolean[];
 }) {
   return (
-    <div className="inline-flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-3.5 shadow-soft">
+    <div className="inline-flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-3.5">
       <StreakFlame className="h-10 w-10" />
       <div>
         <p className="text-lg font-bold leading-tight tabular-nums">

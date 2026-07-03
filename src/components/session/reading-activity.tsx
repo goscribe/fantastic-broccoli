@@ -240,7 +240,7 @@ export function ReadingActivity({
 
         {selectionMenu && (
           <div
-            className="absolute z-20 flex items-center gap-1.5 rounded-full border border-border bg-card px-2 py-1.5 shadow-soft-lg -translate-x-1/2 -translate-y-full -mt-2"
+            className="absolute z-20 flex items-center gap-1.5 rounded-full border border-border bg-card px-2 py-1.5 -translate-x-1/2 -translate-y-full -mt-2"
             style={{ left: selectionMenu.x, top: selectionMenu.y }}
           >
             {(Object.keys(highlightDotClasses) as HighlightColor[]).map((color) => (
@@ -260,7 +260,7 @@ export function ReadingActivity({
 
         {activeHighlight && (
           <div
-            className="absolute z-20 w-56 rounded-xl border border-border bg-card p-2.5 shadow-soft-lg -translate-x-1/2 -translate-y-full -mt-2"
+            className="absolute z-20 w-56 rounded-xl border border-border bg-card p-2.5 -translate-x-1/2 -translate-y-full -mt-2"
             style={{ left: activeHighlight.x, top: activeHighlight.y }}
           >
             <textarea

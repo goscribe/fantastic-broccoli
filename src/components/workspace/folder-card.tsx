@@ -17,7 +17,7 @@ export function FolderCard({ folder, onClick }: FolderCardProps) {
     <button
       type="button"
       onClick={() => onClick(folder.id)}
-      className="group flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3.5 text-left shadow-soft hover:border-border-strong transition-colors"
+      className="group flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3.5 text-left hover:border-border-strong transition-colors"
     >
       <svg viewBox="0 0 24 24" className="h-7 w-7 shrink-0" aria-hidden>
         <path

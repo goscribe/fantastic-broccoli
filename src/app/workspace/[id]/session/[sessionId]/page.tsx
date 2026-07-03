@@ -462,7 +462,7 @@ export default function SessionDetailPage() {
 
       {/* Comments panel */}
       {showComments && (
-        <div className="fixed inset-y-0 right-0 w-80 max-w-full bg-card border-l border-border shadow-2xl z-50 flex flex-col animate-fade-up">
+        <div className="fixed inset-y-0 right-0 w-[26rem] max-w-full bg-card border-l border-border z-50 flex flex-col animate-fade-up">
           <div className="flex items-center justify-between p-4 border-b border-border">
             <h3 className="text-sm font-semibold">Session notes</h3>
             <button

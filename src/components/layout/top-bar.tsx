@@ -61,7 +61,7 @@ export function TopBar({ showLogo = false }: { showLogo?: boolean }) {
               </button>
 
               {menuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-56 rounded-xl border border-border bg-card shadow-soft-lg py-1.5 animate-fade-up">
+                <div className="absolute right-0 top-full mt-2 w-56 rounded-xl border border-border bg-card py-1.5 animate-fade-up">
                   <button
                     type="button"
                     onClick={() => {
@@ -101,7 +101,7 @@ export function TopBar({ showLogo = false }: { showLogo?: boolean }) {
 
       {inviteOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/20 backdrop-blur-sm p-4">
-          <div className="w-full max-w-md rounded-2xl border border-border bg-card shadow-soft-lg p-6 animate-fade-up">
+          <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 animate-fade-up">
             <div className="flex items-center justify-between mb-1">
               <h2 className="text-lg font-bold tracking-tight">
                 Invite people

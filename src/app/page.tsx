@@ -56,7 +56,7 @@ export default function HomePage() {
               {greeting}, Alan
             </h1>
           </div>
-          <div className="flex items-center divide-x divide-border rounded-xl border border-border bg-card shadow-soft">
+          <div className="flex items-center divide-x divide-border rounded-xl border border-border bg-card">
             <div className="flex items-center gap-2.5 px-4 py-2.5">
               <StreakFlame className="h-6 w-6" />
               <div className="leading-tight">
@@ -168,7 +168,7 @@ export default function HomePage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search workspaces…"
-            className="w-full h-10 pl-11 pr-4 rounded-xl border border-border bg-card text-sm shadow-soft focus:outline-none focus:border-accent/50 placeholder:text-faint"
+            className="w-full h-10 pl-11 pr-4 rounded-xl border border-border bg-card text-sm focus:outline-none focus:border-accent/50 placeholder:text-faint"
           />
         </div>
 
