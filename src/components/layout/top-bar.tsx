@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Settings, UserPlus, Bell, Palette, LogOut, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ScribeLogo } from "@/components/graphics/logo";
 
 export function TopBar({ showLogo = false }: { showLogo?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,11 +34,8 @@ export function TopBar({ showLogo = false }: { showLogo?: boolean }) {
       <div className="sticky top-0 z-40 border-b border-border bg-card/85 backdrop-blur-md">
         <div className="px-5 h-14 flex items-center justify-between">
           {showLogo ? (
-            <Link href="/" className="flex items-center gap-2">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-accent-foreground text-sm font-bold">
-                S
-              </span>
-              <span className="font-bold tracking-tight">Scribe</span>
+            <Link href="/">
+              <ScribeLogo />
             </Link>
           ) : (
             <div />
