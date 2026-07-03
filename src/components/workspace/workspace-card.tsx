@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { formatRelativeDate, formatDuration } from "@/lib/utils";
 import { Clock, ArrowRight } from "lucide-react";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
+import { AvatarStack } from "@/components/ui/avatar-stack";
 
 interface WorkspaceCardProps {
   workspace: Workspace;
@@ -63,11 +64,16 @@ export function WorkspaceCard({ workspace, onClick }: WorkspaceCardProps) {
             {formatDuration(totalMinutes)}
           </span>
         )}
-        {workspace.lastStudied && (
-          <span className="text-xs text-muted-foreground ml-auto">
-            {formatRelativeDate(workspace.lastStudied)}
-          </span>
-        )}
+        <span className="ml-auto flex items-center gap-2">
+          {workspace.members && workspace.members.length > 1 && (
+            <AvatarStack members={workspace.members} />
+          )}
+          {workspace.lastStudied && (
+            <span className="text-xs text-muted-foreground">
+              {formatRelativeDate(workspace.lastStudied)}
+            </span>
+          )}
+        </span>
       </div>
 
       {workspace.totalProgress > 0 && (

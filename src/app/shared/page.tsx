@@ -6,6 +6,7 @@ import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { fetchSharedWorkspaces } from "@/lib/api/workspace";
 import { Workspace } from "@/types";
 import { Users } from "lucide-react";
+import { AvatarStack } from "@/components/ui/avatar-stack";
 
 export default function SharedPage() {
   const [shared, setShared] = useState<Workspace[]>([]);
@@ -59,9 +60,10 @@ export default function SharedPage() {
                 {ws.description}
               </p>
             )}
-            <p className="mt-3 text-[12px] text-faint">
-              Shared by {ws.sharedBy}
-            </p>
+            <div className="mt-3 flex items-center justify-between">
+              <p className="text-[12px] text-faint">Shared by {ws.sharedBy}</p>
+              {ws.members && <AvatarStack members={ws.members} />}
+            </div>
           </Link>
         ))}
       </div>

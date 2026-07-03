@@ -190,6 +190,13 @@ export interface Workspace {
   lastStudied?: string;
   createdAt: string;
   sharedBy?: string;
+  members?: WorkspaceMember[];
+}
+
+export interface WorkspaceMember {
+  id: string;
+  name: string;
+  color: string;
 }
 
 export interface Folder {

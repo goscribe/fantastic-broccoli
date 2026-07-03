@@ -501,6 +501,12 @@ const bioMaterials: Material[] = [
   },
 ];
 
+const me = { id: "demo-user", name: "Alan", color: "#3e8f04" };
+const maya = { id: "u-maya", name: "Maya", color: "#7c3aed" };
+const daniel = { id: "u-daniel", name: "Daniel", color: "#0ea5e9" };
+const priya = { id: "u-priya", name: "Priya", color: "#f43f5e" };
+const leo = { id: "u-leo", name: "Leo", color: "#f59e0b" };
+
 export const mockWorkspaces: Workspace[] = [
   {
     id: "ws-1",
@@ -514,6 +520,7 @@ export const mockWorkspaces: Workspace[] = [
     totalProgress: 35,
     lastStudied: now,
     createdAt: lastWeek,
+    members: [me, maya, priya, leo],
   },
   {
     id: "ws-2",
@@ -527,6 +534,7 @@ export const mockWorkspaces: Workspace[] = [
     totalProgress: 0,
     lastStudied: yesterday,
     createdAt: lastWeek,
+    members: [me, daniel],
   },
   {
     id: "ws-3",
@@ -539,6 +547,7 @@ export const mockWorkspaces: Workspace[] = [
     materials: [],
     totalProgress: 0,
     createdAt: lastWeek,
+    members: [me],
   },
 ];
 
@@ -555,6 +564,7 @@ export const mockSharedWorkspaces: Workspace[] = [
     totalProgress: 0,
     createdAt: "2026-06-20T10:00:00Z",
     sharedBy: "Maya",
+    members: [maya, me, leo],
   },
   {
     id: "ws-shared-2",
@@ -568,6 +578,7 @@ export const mockSharedWorkspaces: Workspace[] = [
     totalProgress: 0,
     createdAt: "2026-06-25T10:00:00Z",
     sharedBy: "Daniel",
+    members: [daniel, me, priya, maya, leo],
   },
 ];
 
