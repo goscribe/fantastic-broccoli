@@ -305,15 +305,25 @@ export const mockWorkspaces: Workspace[] = [
 export const mockFolders: Folder[] = [
   {
     id: "fld-1",
-    name: "Sciences",
+    name: "IB Diploma",
     color: "#7c5cfc",
-    workspaces: [mockWorkspaces[0], mockWorkspaces[1]],
-  },
-  {
-    id: "fld-2",
-    name: "Mathematics",
-    color: "#f59e0b",
-    workspaces: [mockWorkspaces[2]],
+    workspaces: [],
+    folders: [
+      {
+        id: "fld-1a",
+        name: "Sciences",
+        color: "#58cc02",
+        parentId: "fld-1",
+        workspaces: [mockWorkspaces[0], mockWorkspaces[1]],
+      },
+      {
+        id: "fld-1b",
+        name: "Mathematics",
+        color: "#f59e0b",
+        parentId: "fld-1",
+        workspaces: [mockWorkspaces[2]],
+      },
+    ],
   },
 ];
 

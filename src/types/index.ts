@@ -141,5 +141,6 @@ export interface Folder {
   name: string;
   color: string;
   workspaces: Workspace[];
+  folders?: Folder[];
   parentId?: string;
 }
