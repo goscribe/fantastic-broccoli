@@ -139,10 +139,12 @@ export default function SessionDetailPage() {
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full">
+    <div className="flex-1 flex min-h-0 h-[calc(100vh-3.5rem)] overflow-hidden">
+      {/* Study column */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
       {/* Header */}
-      <header className="border-b border-border bg-card/85 backdrop-blur-md sticky top-14 z-10">
-        <div className="max-w-5xl mx-auto px-5 py-3.5">
+      <header className="border-b border-border bg-card/85 backdrop-blur-md z-10">
+        <div className="px-6 py-3.5">
           <div className="flex items-center justify-between gap-4">
             <div className="min-w-0 flex-1">
               <button
@@ -189,7 +191,7 @@ export default function SessionDetailPage() {
       </header>
 
       {/* Content */}
-      <div className="flex-1 flex min-h-0 overflow-hidden max-w-5xl mx-auto w-full">
+      <div className="flex-1 flex min-h-0 overflow-hidden w-full">
         {/* Activity list sidebar on desktop */}
         <aside className="hidden lg:flex w-72 flex-shrink-0 flex-col border-r border-border overflow-y-auto">
           <div className="py-6 pr-4 pl-5">
@@ -212,7 +214,7 @@ export default function SessionDetailPage() {
 
         {/* Main study area */}
         <main className="flex-1 overflow-y-auto">
-          <div className="max-w-2xl mx-auto px-6 py-8">
+          <div className="max-w-3xl px-8 py-8">
             {activeActivity ? (
               <div className="space-y-5 animate-fade-up" key={activeActivity.id}>
                 <div className="flex items-center justify-between">
@@ -269,6 +271,14 @@ export default function SessionDetailPage() {
           </div>
         </main>
       </div>
+      </div>
+
+      {/* Copilot split pane */}
+      <Copilot
+        open={copilotOpen}
+        onClose={() => setCopilotOpen(false)}
+        context={`Session: ${session.title}`}
+      />
 
       {/* Comments panel */}
       {showComments && (
@@ -321,11 +331,6 @@ export default function SessionDetailPage() {
       )}
 
       {!copilotOpen && <CopilotTrigger onClick={() => setCopilotOpen(true)} />}
-      <Copilot
-        open={copilotOpen}
-        onClose={() => setCopilotOpen(false)}
-        context={`Session: ${session.title}`}
-      />
     </div>
   );
 }

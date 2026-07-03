@@ -579,7 +579,7 @@ export function Copilot({
 
   return (
     <div
-      className="fixed inset-y-0 right-0 z-50 flex flex-col bg-card border-l border-border shadow-2xl"
+      className="relative h-full shrink-0 hidden sm:flex flex-col bg-card border-l border-border min-h-0"
       style={{ width: width || "50vw" }}
     >
       {/* Resize handle */}
