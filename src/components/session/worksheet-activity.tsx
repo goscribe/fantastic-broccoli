@@ -5,7 +5,7 @@ import { WorksheetContent, WorksheetPart } from "@/types";
 import { WorksheetFigureCard } from "@/components/graphics/worksheet-figures";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface WorksheetActivityProps {
   content: WorksheetContent;
@@ -43,12 +43,6 @@ export function WorksheetActivity({
     <div>
       {/* Step header */}
       <div className="pb-4 border-b border-border">
-        {content.source?.generatedByAi && (
-          <p className="flex items-center gap-1.5 text-[11px] font-medium text-accent-dim mb-2">
-            <Sparkles className="h-3 w-3" />
-            Generated from {content.source.file}
-          </p>
-        )}
         <div className="flex items-center justify-between gap-4">
           <p className="text-sm font-semibold">
             Question {stepIndex + 1} — {step.title}

@@ -59,13 +59,17 @@ export type ActivityContent =
   | ClozeContent
   | ExplainAloudContent;
 
-export interface McqContent {
-  type: "mcq";
+export interface McqQuestion {
   question: string;
   options: string[];
   correctIndex: number;
   explanation: string;
   userAnswer?: number;
+}
+
+export interface McqContent {
+  type: "mcq";
+  questions: McqQuestion[];
 }
 
 export interface ComprehensionContent {

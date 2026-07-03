@@ -64,17 +64,42 @@ const chemActivities: SessionActivity[] = [
     title: "Periodic Trends Quiz",
     content: {
       type: "mcq",
-      question:
-        "Which of the following correctly describes the trend in atomic radius across Period 3 (Na to Ar)?",
-      options: [
-        "Atomic radius increases due to more electron shells",
-        "Atomic radius decreases due to increasing nuclear charge",
-        "Atomic radius remains constant across the period",
-        "Atomic radius increases due to electron-electron repulsion",
+      questions: [
+        {
+          question:
+            "Which of the following correctly describes the trend in atomic radius across Period 3 (Na to Ar)?",
+          options: [
+            "Atomic radius increases due to more electron shells",
+            "Atomic radius decreases due to increasing nuclear charge",
+            "Atomic radius remains constant across the period",
+            "Atomic radius increases due to electron-electron repulsion",
+          ],
+          correctIndex: 1,
+          explanation:
+            "Across a period, the number of protons increases while electrons are added to the same energy level. The increased nuclear charge pulls electrons closer, decreasing the atomic radius.",
+        },
+        {
+          question:
+            "Why is the first ionization energy of aluminium lower than that of magnesium?",
+          options: [
+            "Aluminium has a smaller nuclear charge",
+            "Aluminium's outer electron is in a 3p subshell, higher in energy than magnesium's 3s",
+            "Magnesium has more shielding",
+            "Aluminium's atoms are larger in every respect",
+          ],
+          correctIndex: 1,
+          explanation:
+            "Al's outermost electron occupies the 3p subshell, which is higher in energy and slightly better shielded than the 3s — so it is easier to remove despite the greater nuclear charge.",
+        },
+        {
+          question:
+            "Which element in Period 3 has the highest electronegativity?",
+          options: ["Sodium", "Silicon", "Chlorine", "Argon"],
+          correctIndex: 2,
+          explanation:
+            "Electronegativity rises across a period; argon is excluded because it does not typically form bonds, making chlorine the most electronegative bonding element in Period 3.",
+        },
       ],
-      correctIndex: 1,
-      explanation:
-        "Across a period, the number of protons increases while electrons are added to the same energy level. The increased nuclear charge pulls electrons closer, decreasing the atomic radius.",
     },
     order: 2,
     status: "pending",
@@ -309,16 +334,33 @@ const bioActivities: SessionActivity[] = [
     title: "Membrane Transport",
     content: {
       type: "mcq",
-      question: "Which transport mechanism requires ATP?",
-      options: [
-        "Osmosis",
-        "Facilitated diffusion",
-        "Active transport via sodium-potassium pump",
-        "Simple diffusion of oxygen",
+      questions: [
+        {
+          question: "Which transport mechanism requires ATP?",
+          options: [
+            "Osmosis",
+            "Facilitated diffusion",
+            "Active transport via sodium-potassium pump",
+            "Simple diffusion of oxygen",
+          ],
+          correctIndex: 2,
+          explanation:
+            "The sodium-potassium pump uses ATP to move 3 Na+ out and 2 K+ into the cell against their concentration gradients. All other options are passive processes.",
+        },
+        {
+          question:
+            "A red blood cell placed in pure water will swell and burst. Why?",
+          options: [
+            "Water moves in by active transport",
+            "Water moves in by osmosis down its water potential gradient",
+            "Salts move out by facilitated diffusion",
+            "The membrane actively pumps water inward",
+          ],
+          correctIndex: 1,
+          explanation:
+            "Pure water has a higher water potential than the cytoplasm, so water enters by osmosis; animal cells have no wall to resist the pressure.",
+        },
       ],
-      correctIndex: 2,
-      explanation:
-        "The sodium-potassium pump uses ATP to move 3 Na+ out and 2 K+ into the cell against their concentration gradients. All other options are passive processes.",
     },
     order: 1,
     status: "pending",
@@ -751,12 +793,29 @@ export const planExtensionActivities: SessionActivity[] = [
     title: "Targeted Drill — Periodic Trends",
     content: {
       type: "mcq",
-      question:
-        "Which species has the largest ionic radius: O²⁻, F⁻, Na⁺, or Mg²⁺? (All are isoelectronic.)",
-      options: ["O²⁻", "F⁻", "Na⁺", "Mg²⁺"],
-      correctIndex: 0,
-      explanation:
-        "All four have 10 electrons, so the species with the smallest nuclear charge (O, Z = 8) holds them least tightly — giving the largest radius.",
+      questions: [
+        {
+          question:
+            "Which species has the largest ionic radius: O²⁻, F⁻, Na⁺, or Mg²⁺? (All are isoelectronic.)",
+          options: ["O²⁻", "F⁻", "Na⁺", "Mg²⁺"],
+          correctIndex: 0,
+          explanation:
+            "All four have 10 electrons, so the species with the smallest nuclear charge (O, Z = 8) holds them least tightly — giving the largest radius.",
+        },
+        {
+          question:
+            "Moving down Group 1, first ionization energy decreases. What is the main reason?",
+          options: [
+            "Nuclear charge decreases down the group",
+            "The outer electron is further from the nucleus and more shielded",
+            "Atoms lose their metallic character",
+            "Electron-electron repulsion decreases",
+          ],
+          correctIndex: 1,
+          explanation:
+            "Each step down adds a shell: the outer electron is further away and shielded by more inner shells, outweighing the increased nuclear charge.",
+        },
+      ],
     },
     order: 11,
     status: "pending",
