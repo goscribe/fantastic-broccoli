@@ -35,6 +35,13 @@ import {
   X,
 } from "lucide-react";
 
+const phaseOf = (t: SessionActivity["type"]) =>
+  t === "reading" || t === "comprehension_check" || t === "interactive"
+    ? "Learn"
+    : t === "mcq" || t === "worksheet" || t === "cloze"
+      ? "Practice"
+      : "Recall";
+
 export default function SessionDetailPage() {
   const params = useParams();
   const router = useRouter();
@@ -226,15 +233,26 @@ export default function SessionDetailPage() {
               Your plan
             </p>
             <div className="space-y-1">
-              {session.activities.map((activity, i) => (
-                <ActivityItem
-                  key={activity.id}
-                  activity={activity}
-                  index={i}
-                  isActive={activity.id === activeActivityId}
-                  onClick={setActiveActivityId}
-                />
-              ))}
+              {session.activities.map((activity, i) => {
+                const phase = phaseOf(activity.type);
+                const prevPhase =
+                  i > 0 ? phaseOf(session.activities[i - 1].type) : null;
+                return (
+                  <div key={activity.id}>
+                    {phase !== prevPhase && (
+                      <p className="text-[11px] font-semibold text-faint px-3 pt-3 pb-1 first:pt-0">
+                        {phase}
+                      </p>
+                    )}
+                    <ActivityItem
+                      activity={activity}
+                      index={i}
+                      isActive={activity.id === activeActivityId}
+                      onClick={setActiveActivityId}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </aside>

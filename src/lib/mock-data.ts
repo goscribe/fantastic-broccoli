@@ -80,6 +80,25 @@ const chemActivities: SessionActivity[] = [
     estimatedMinutes: 3,
   },
   {
+    id: "act-4c",
+    sessionId: "ses-1",
+    type: "cloze",
+    title: "Fill the Gaps — Periodic Trends",
+    content: {
+      type: "cloze",
+      passages: [
+        {
+          textWithBlanks:
+            "Across a period, atomic radius ___ because nuclear charge increases while electrons enter the same shell. First ionization energy generally ___ across a period, with dips after ___ subshells are filled.",
+          answers: ["decreases", "increases", "s"],
+        },
+      ],
+    },
+    order: 3,
+    status: "pending",
+    estimatedMinutes: 4,
+  },
+  {
     id: "act-4",
     sessionId: "ses-1",
     type: "flashcard_review",
@@ -93,7 +112,7 @@ const chemActivities: SessionActivity[] = [
         { front: "Shielding Effect", back: "The reduction of nuclear charge experienced by outer electrons due to inner electrons", known: null },
       ],
     },
-    order: 3,
+    order: 4,
     status: "pending",
     estimatedMinutes: 5,
   },
@@ -125,28 +144,9 @@ const chemActivities: SessionActivity[] = [
         },
       ],
     },
-    order: 4,
-    status: "pending",
-    estimatedMinutes: 6,
-  },
-  {
-    id: "act-4c",
-    sessionId: "ses-1",
-    type: "cloze",
-    title: "Fill the Gaps — Periodic Trends",
-    content: {
-      type: "cloze",
-      passages: [
-        {
-          textWithBlanks:
-            "Across a period, atomic radius ___ because nuclear charge increases while electrons enter the same shell. First ionization energy generally ___ across a period, with dips after ___ subshells are filled.",
-          answers: ["decreases", "increases", "s"],
-        },
-      ],
-    },
     order: 5,
     status: "pending",
-    estimatedMinutes: 4,
+    estimatedMinutes: 6,
   },
   {
     id: "act-4d",

@@ -14,6 +14,7 @@ import {
   ChevronDown,
   FileText,
   Wand2,
+  Plus,
 } from "lucide-react";
 import {
   EquationEmbed,
@@ -59,6 +60,7 @@ type MessagePart = ToolCallPart | TextPart | EmbedPart;
 
 interface ChatMessage {
   id: string;
+  chatId?: string;
   role: "user" | "assistant";
   parts: MessagePart[];
 }
@@ -424,6 +426,8 @@ export function Copilot({
   context?: string;
 }) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [chats, setChats] = useState<string[]>(["1"]);
+  const [activeChat, setActiveChat] = useState("1");
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [width, setWidth] = useState(0);
@@ -556,6 +560,7 @@ export function Copilot({
       setBusy(true);
       const userMsg: ChatMessage = {
         id: nextId(),
+        chatId: activeChat,
         role: "user",
         parts: [{ kind: "text", id: nextId(), text, done: true }],
       };
@@ -563,20 +568,22 @@ export function Copilot({
       setMessages((prev) => [
         ...prev,
         userMsg,
-        { id: assistantId, role: "assistant", parts: [] },
+        { id: assistantId, chatId: activeChat, role: "assistant", parts: [] },
       ]);
       await runScript(scriptFor(text), assistantId);
       setBusy(false);
     },
-    [busy, runScript],
+    [busy, runScript, activeChat],
   );
+
+  const chatMessages = messages.filter((m) => (m.chatId ?? "1") === activeChat);
 
   if (!open) return null;
 
   return (
     <div
       className="relative self-stretch shrink-0 hidden sm:flex flex-col bg-card border-l border-border min-h-0"
-      style={width ? { width } : { width: "50vw", minWidth: 420 }}
+      style={width ? { width } : { width: "25vw", minWidth: 380 }}
     >
       {/* Resize handle */}
       <div
@@ -591,18 +598,41 @@ export function Copilot({
         className="absolute left-0 inset-y-0 w-1.5 -translate-x-1/2 cursor-col-resize z-10 hover:bg-accent/40 active:bg-accent/60 transition-colors"
       />
       {/* Header */}
-      <div className="flex items-center gap-2.5 px-4 py-3.5 border-b border-border">
-        <Sparkles className="h-5 w-5 text-accent shrink-0" />
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold leading-tight">Scribe Copilot</p>
-          <p className="text-[11px] text-muted-foreground truncate">
-            {context ?? "Can search, edit your plan, and add activities"}
-          </p>
+      <div className="flex items-center gap-2 px-3 h-12 border-b border-border shrink-0">
+        <p className="text-sm font-semibold shrink-0">Copilot</p>
+        <div className="flex items-center gap-1 ml-1 flex-1 min-w-0 overflow-x-auto">
+          {chats.map((c) => (
+            <button
+              key={c}
+              type="button"
+              onClick={() => setActiveChat(c)}
+              className={cn(
+                "px-2.5 py-1 rounded-full text-[11px] font-semibold shrink-0",
+                c === activeChat
+                  ? "bg-foreground text-background"
+                  : "bg-muted text-muted-foreground hover:text-foreground",
+              )}
+            >
+              Chat {c}
+            </button>
+          ))}
+          <button
+            type="button"
+            aria-label="New chat"
+            onClick={() => {
+              const next = String(chats.length + 1);
+              setChats((prev) => [...prev, next]);
+              setActiveChat(next);
+            }}
+            className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted shrink-0"
+          >
+            <Plus className="h-3.5 w-3.5" />
+          </button>
         </div>
         <button
           type="button"
           onClick={onClose}
-          className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
+          className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted shrink-0"
         >
           <X className="h-4 w-4" />
         </button>
@@ -610,13 +640,14 @@ export function Copilot({
 
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
-        {messages.length === 0 && (
+        {chatMessages.length === 0 && (
           <div className="pt-8 text-center space-y-5">
             <Wand2 className="h-7 w-7 text-accent mx-auto" />
             <div>
               <p className="text-sm font-semibold">What do you need?</p>
               <p className="text-xs text-muted-foreground mt-1">
-                I can reshape your plan, dig through your materials, or quiz you.
+                {context ? `${context} — ` : ""}I can reshape your plan, dig
+                through your materials, or quiz you.
               </p>
             </div>
             <div className="space-y-2">
@@ -634,7 +665,7 @@ export function Copilot({
           </div>
         )}
 
-        {messages.map((msg) =>
+        {chatMessages.map((msg) =>
           msg.role === "user" ? (
             <div key={msg.id} className="flex justify-end">
               <div className="max-w-[85%] rounded-2xl rounded-br-md bg-accent text-accent-foreground px-3.5 py-2 text-sm font-medium">

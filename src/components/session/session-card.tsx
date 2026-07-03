@@ -14,6 +14,18 @@ const depthLabels = {
   deep: "Deep study",
 };
 
+const activityLabels: Record<string, string> = {
+  reading: "Reading",
+  comprehension_check: "Comprehension",
+  mcq: "Quiz",
+  worksheet: "Worksheet",
+  interactive: "Interactive",
+  cloze: "Fill the gaps",
+  flashcard_review: "Flashcards",
+  vocab_recall: "Active recall",
+  explain_aloud: "Explain aloud",
+};
+
 const depthVariants = {
   light: "muted" as const,
   moderate: "accent" as const,
@@ -30,6 +42,9 @@ export function SessionCard({ session, onClick }: SessionCardProps) {
     (a) => a.status === "completed",
   ).length;
   const totalActivities = session.activities.length;
+  const activityTypes = Array.from(
+    new Set(session.activities.map((a) => a.type)),
+  );
 
   return (
     <Card
@@ -69,6 +84,19 @@ export function SessionCard({ session, onClick }: SessionCardProps) {
           </span>
         )}
       </div>
+
+      {activityTypes.length > 0 && (
+        <div className="flex items-center gap-1.5 mt-2.5 flex-wrap">
+          {activityTypes.map((t) => (
+            <span
+              key={t}
+              className="px-2 py-0.5 rounded-full bg-muted text-[11px] font-medium text-muted-foreground"
+            >
+              {activityLabels[t] ?? t}
+            </span>
+          ))}
+        </div>
+      )}
 
       {session.comments.length > 0 && (
         <p className="text-xs text-muted-foreground mt-2 italic line-clamp-1">
