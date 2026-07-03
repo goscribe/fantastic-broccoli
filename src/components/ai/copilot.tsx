@@ -426,7 +426,33 @@ export function Copilot({
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
+  const [width, setWidth] = useState(() =>
+    typeof window === "undefined"
+      ? 0
+      : Math.max(420, Math.round(window.innerWidth / 2)),
+  );
   const scrollRef = useRef<HTMLDivElement>(null);
+  const resizing = useRef(false);
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      if (!resizing.current) return;
+      e.preventDefault();
+      const w = window.innerWidth - e.clientX;
+      setWidth(Math.min(Math.max(w, 380), Math.round(window.innerWidth * 0.75)));
+    };
+    const onUp = () => {
+      resizing.current = false;
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+  }, []);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -552,7 +578,22 @@ export function Copilot({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-[420px] flex flex-col bg-card border-l border-border shadow-2xl animate-fade-up">
+    <div
+      className="fixed inset-y-0 right-0 z-50 flex flex-col bg-card border-l border-border shadow-2xl"
+      style={{ width: width || "50vw" }}
+    >
+      {/* Resize handle */}
+      <div
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="Resize copilot panel"
+        onMouseDown={() => {
+          resizing.current = true;
+          document.body.style.cursor = "col-resize";
+          document.body.style.userSelect = "none";
+        }}
+        className="absolute left-0 inset-y-0 w-1.5 -translate-x-1/2 cursor-col-resize z-10 hover:bg-accent/40 active:bg-accent/60 transition-colors"
+      />
       {/* Header */}
       <div className="flex items-center gap-2.5 px-4 py-3.5 border-b border-border">
         <Sparkles className="h-5 w-5 text-accent shrink-0" />

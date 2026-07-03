@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Settings, UserPlus, Bell, Palette, LogOut, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export function TopBar() {
+export function TopBar({ showLogo = false }: { showLogo?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [inviteOpen, setInviteOpen] = useState(false);
   const [inviteEmail, setInviteEmail] = useState("");
@@ -31,13 +31,17 @@ export function TopBar() {
   return (
     <>
       <div className="sticky top-0 z-40 border-b border-border bg-card/85 backdrop-blur-md">
-        <div className="max-w-5xl mx-auto px-5 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-accent-foreground text-sm font-bold">
-              S
-            </span>
-            <span className="font-bold tracking-tight">Scribe</span>
-          </Link>
+        <div className="px-5 h-14 flex items-center justify-between">
+          {showLogo ? (
+            <Link href="/" className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-accent-foreground text-sm font-bold">
+                S
+              </span>
+              <span className="font-bold tracking-tight">Scribe</span>
+            </Link>
+          ) : (
+            <div />
+          )}
 
           <div className="flex items-center gap-1.5">
             <button

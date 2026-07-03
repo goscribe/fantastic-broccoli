@@ -2,14 +2,14 @@
 @import "katex/dist/katex.min.css";
 
 :root {
-  --background: #fbfbf9;
-  --foreground: #26251f;
+  --background: #f7f7f2;
+  --foreground: #1f1e18;
   --card: #ffffff;
   --card-hover: #fcfcfa;
-  --card-foreground: #26251f;
-  --muted: #f3f3ef;
-  --muted-foreground: #85847d;
-  --faint: #b3b2aa;
+  --card-foreground: #1f1e18;
+  --muted: #f0f0ea;
+  --muted-foreground: #6d6c63;
+  --faint: #a3a299;
   --accent: #7c5cfc;
   --accent-dim: #6a4bea;
   --accent-soft: #f1edff;
