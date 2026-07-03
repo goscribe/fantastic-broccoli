@@ -579,7 +579,7 @@ export function Copilot({
 
   return (
     <div
-      className="relative h-full shrink-0 hidden sm:flex flex-col bg-card border-l border-border min-h-0"
+      className="relative self-stretch shrink-0 hidden sm:flex flex-col bg-card border-l border-border min-h-0"
       style={{ width: width || "50vw" }}
     >
       {/* Resize handle */}
