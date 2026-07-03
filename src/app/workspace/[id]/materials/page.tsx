@@ -8,26 +8,23 @@ import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatRelativeDate } from "@/lib/utils";
+import { Plus, Square, Circle, Upload } from "lucide-react";
 import {
-  FileText,
-  StickyNote,
-  Mic,
-  Presentation,
-  Upload,
-  Plus,
-  Square,
-  Circle,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
+  PdfArt,
+  NoteArt,
+  AudioArt,
+  SlidesArt,
+  UploadArt,
+} from "@/components/graphics/material-art";
 
 const typeConfig: Record<
   MaterialType,
-  { icon: React.ElementType; label: string; color: string }
+  { art: React.ElementType; label: string }
 > = {
-  note: { icon: StickyNote, label: "Note", color: "text-amber" },
-  pdf: { icon: FileText, label: "PDF", color: "text-rose" },
-  audio: { icon: Mic, label: "Recording", color: "text-accent" },
-  slides: { icon: Presentation, label: "Slides", color: "text-sky" },
+  note: { art: NoteArt, label: "Note" },
+  pdf: { art: PdfArt, label: "PDF" },
+  audio: { art: AudioArt, label: "Recording" },
+  slides: { art: SlidesArt, label: "Slides" },
 };
 
 const transcriptScript = [
@@ -177,7 +174,7 @@ export default function WorkspaceMaterialsPage() {
 
           {materials.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6">
-              <Upload className="h-7 w-7 text-accent mx-auto mb-3" />
+              <UploadArt className="h-12 w-12 mx-auto mb-3" />
               <p className="text-sm font-semibold">Nothing here yet</p>
               <p className="text-xs text-muted-foreground mt-1.5 max-w-sm mx-auto">
                 Add notes, record lectures, or upload PDFs and slides — Scribe
@@ -188,14 +185,14 @@ export default function WorkspaceMaterialsPage() {
             <div className="grid gap-3">
               {materials.map((material) => {
                 const config = typeConfig[material.type];
-                const Icon = config.icon;
+                const Art = config.art;
                 return (
                   <Card
                     key={material.id}
                     interactive
-                    className="flex items-start gap-3.5 p-4"
+                    className="flex items-start gap-4 p-4"
                   >
-                    <Icon className={cn("h-5 w-5 mt-0.5 shrink-0", config.color)} />
+                    <Art className="h-10 w-10 shrink-0" />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <h3 className="text-sm font-semibold truncate">

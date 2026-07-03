@@ -5,7 +5,8 @@ import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { formatDuration, formatRelativeDate } from "@/lib/utils";
-import { Clock, Play, Pause, CheckCircle2, ArrowRight } from "lucide-react";
+import { Clock, ArrowRight } from "lucide-react";
+import { SessionArt } from "@/components/graphics/material-art";
 
 const depthLabels = {
   light: "Light review",
@@ -19,19 +20,12 @@ const depthVariants = {
   deep: "warning" as const,
 };
 
-const statusIcons = {
-  active: Play,
-  paused: Pause,
-  completed: CheckCircle2,
-};
-
 interface SessionCardProps {
   session: StudySession;
   onClick: (id: string) => void;
 }
 
 export function SessionCard({ session, onClick }: SessionCardProps) {
-  const StatusIcon = statusIcons[session.status];
   const completedActivities = session.activities.filter(
     (a) => a.status === "completed",
   ).length;
@@ -44,24 +38,16 @@ export function SessionCard({ session, onClick }: SessionCardProps) {
       className="group"
     >
       <div className="flex items-start justify-between">
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2">
-            <StatusIcon
-              className={`h-4 w-4 flex-shrink-0 ${
-                session.status === "active"
-                  ? "text-accent"
-                  : session.status === "completed"
-                    ? "text-success"
-                    : "text-muted-foreground"
-              }`}
-            />
-            <h4 className="font-medium text-sm truncate">{session.title}</h4>
+        <div className="flex items-start gap-3.5 flex-1 min-w-0">
+          <SessionArt className="h-10 w-10 shrink-0" />
+          <div className="flex-1 min-w-0">
+            <h4 className="font-semibold text-sm truncate">{session.title}</h4>
+            {session.description && (
+              <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                {session.description}
+              </p>
+            )}
           </div>
-          {session.description && (
-            <p className="text-xs text-muted-foreground mt-1 line-clamp-2 ml-6">
-              {session.description}
-            </p>
-          )}
         </div>
         <ArrowRight className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 flex-shrink-0 mt-0.5" />
       </div>
