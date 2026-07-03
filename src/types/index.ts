@@ -15,6 +15,12 @@ export type SessionDepth = "light" | "moderate" | "deep";
 
 export type ExamBoard = "IB" | "AP" | "GCSE" | "A_LEVEL" | "SAT" | "OTHER";
 
+export interface SessionNote {
+  id: string;
+  content: string;
+  createdAt: string;
+}
+
 export interface StudySession {
   id: string;
   workspaceId: string;
@@ -22,7 +28,7 @@ export interface StudySession {
   description?: string;
   depth: SessionDepth;
   durationMinutes: number;
-  comments: string[];
+  comments: SessionNote[];
   activities: SessionActivity[];
   progress: number;
   status: "active" | "paused" | "completed";

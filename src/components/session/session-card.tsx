@@ -100,7 +100,7 @@ export function SessionCard({ session, onClick }: SessionCardProps) {
 
       {session.comments.length > 0 && (
         <p className="text-xs text-muted-foreground mt-2 italic line-clamp-1">
-          &ldquo;{session.comments[0]}&rdquo;
+          &ldquo;{session.comments[0].content}&rdquo;
         </p>
       )}
 

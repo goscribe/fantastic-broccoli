@@ -161,6 +161,11 @@ export const studySessionApi = {
       content,
     }),
 
+  removeComment: (commentId: string) =>
+    rpc<ApiSessionComment>("studySession.removeComment", "mutation", {
+      commentId,
+    }),
+
   updateActivityStatus: (
     activityId: string,
     status: ApiActivityStatus,
@@ -241,7 +246,11 @@ export function mapSession(s: ApiStudySession): StudySession {
     description: s.description ?? undefined,
     depth: depthFromApi[s.depth],
     durationMinutes: s.durationMinutes,
-    comments: (s.comments ?? []).map((c) => c.content),
+    comments: (s.comments ?? []).map((c) => ({
+      id: c.id,
+      content: c.content,
+      createdAt: c.createdAt.toISOString(),
+    })),
     activities: (s.activities ?? []).map(mapActivity),
     progress: s.progress,
     status: s.status.toLowerCase() as StudySession["status"],

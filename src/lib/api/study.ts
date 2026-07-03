@@ -12,6 +12,7 @@ import type {
   ExamBoard,
   SessionActivity,
   SessionDepth,
+  SessionNote,
   StudySession,
 } from "@/types";
 
@@ -74,12 +75,29 @@ export async function setActivityStatus(
   );
 }
 
-export async function addSessionComment(
+export async function addSessionNote(
   sessionId: string,
   content: string,
-): Promise<void> {
+): Promise<SessionNote> {
+  if (!isLiveApi) {
+    // Demo mode: notes live in component state only.
+    return {
+      id: `note-${Date.now()}`,
+      content,
+      createdAt: new Date().toISOString(),
+    };
+  }
+  const row = await studySessionApi.addComment(sessionId, content);
+  return {
+    id: row.id,
+    content: row.content,
+    createdAt: row.createdAt.toISOString(),
+  };
+}
+
+export async function removeSessionNote(noteId: string): Promise<void> {
   if (!isLiveApi) return;
-  await studySessionApi.addComment(sessionId, content);
+  await studySessionApi.removeComment(noteId);
 }
 
 /** Appends precomputed activities (e.g. from the worksheet bank) to a plan. */

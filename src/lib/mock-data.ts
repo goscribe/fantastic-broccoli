@@ -377,8 +377,16 @@ const sessions: StudySession[] = [
     depth: "deep",
     durationMinutes: 45,
     comments: [
-      "Focus on electron configuration notation",
-      "Review periodic trends for Paper 1 MCQs",
+      {
+        id: "note-1",
+        content: "Focus on electron configuration notation",
+        createdAt: yesterday,
+      },
+      {
+        id: "note-2",
+        content: "Review periodic trends for Paper 1 MCQs",
+        createdAt: now,
+      },
     ],
     activities: chemActivities,
     progress: 35,
@@ -417,7 +425,9 @@ const bioSessions: StudySession[] = [
     description: "Membrane structure, transport, and cell division",
     depth: "deep",
     durationMinutes: 60,
-    comments: ["Review for upcoming unit test"],
+    comments: [
+      { id: "note-3", content: "Review for upcoming unit test", createdAt: now },
+    ],
     activities: bioActivities,
     progress: 0,
     status: "active",

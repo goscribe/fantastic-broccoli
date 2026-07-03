@@ -5,13 +5,15 @@ import { useParams, useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getWorkspace, planExtensionActivities } from "@/lib/mock-data";
 import {
-  addSessionComment,
+  addSessionNote,
   appendActivities,
   fetchStudySession,
+  removeSessionNote,
   setActivityStatus,
 } from "@/lib/api/study";
 import {
   SessionActivity,
+  SessionNote,
   ComprehensionContent,
   McqContent,
   ReadingContent,
@@ -36,12 +38,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
-import { formatDuration } from "@/lib/utils";
+import { formatDuration, formatRelativeDate } from "@/lib/utils";
 import {
   ArrowLeft,
   Clock,
   SkipForward,
   MessageSquare,
+  Trash2,
   X,
 } from "lucide-react";
 
@@ -80,7 +83,10 @@ export default function SessionDetailPage() {
   const [showComments, setShowComments] = useState(false);
   const [copilotOpen, setCopilotOpen] = useState(true);
   const [newComment, setNewComment] = useState("");
-  const [localComments, setLocalComments] = useState<string[]>([]);
+  const [localNotes, setLocalNotes] = useState<SessionNote[]>([]);
+  const [removedNoteIds, setRemovedNoteIds] = useState<Set<string>>(
+    new Set(),
+  );
   const [extended, setExtended] = useState(false);
   const [extendDismissed, setExtendDismissed] = useState(false);
 
@@ -112,14 +118,32 @@ export default function SessionDetailPage() {
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["study-session", sessionId] }),
   });
-  const addComment = useMutation({
-    mutationFn: (content: string) => addSessionComment(sessionId, content),
+  const addNote = useMutation({
+    mutationFn: (content: string) => addSessionNote(sessionId, content),
+    onSuccess: (note) => setLocalNotes((n) => [...n, note]),
+  });
+  const removeNote = useMutation({
+    mutationFn: (noteId: string) => removeSessionNote(noteId),
   });
   const extendPlan = useMutation({
     mutationFn: () => appendActivities(sessionId, extensions),
   });
 
-  const comments = [...(session?.comments ?? []), ...localComments];
+  const notes = [...(session?.comments ?? []), ...localNotes].filter(
+    (n) => !removedNoteIds.has(n.id),
+  );
+
+  const submitNote = () => {
+    const content = newComment.trim();
+    if (!content) return;
+    addNote.mutate(content);
+    setNewComment("");
+  };
+
+  const deleteNote = (noteId: string) => {
+    removeNote.mutate(noteId);
+    setRemovedNoteIds((ids) => new Set(ids).add(noteId));
+  };
 
   if (!session || !workspace) {
     if (isLoading) {
@@ -285,9 +309,9 @@ export default function SessionDetailPage() {
               className="relative p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
             >
               <MessageSquare className="h-4 w-4" />
-              {comments.length > 0 && (
+              {notes.length > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-accent text-[9px] font-bold text-accent-foreground flex items-center justify-center">
-                  {comments.length}
+                  {notes.length}
                 </span>
               )}
             </button>
@@ -433,38 +457,56 @@ export default function SessionDetailPage() {
             </button>
           </div>
           <div className="flex-1 overflow-y-auto p-4 space-y-2">
-            {comments.map((comment, i) => (
+            {notes.map((note) => (
               <div
-                key={i}
-                className="p-3 rounded-xl bg-muted text-sm border border-border"
+                key={note.id}
+                className="group p-3 rounded-xl bg-muted text-sm border border-border"
               >
-                {comment}
+                <p className="whitespace-pre-wrap">{note.content}</p>
+                <div className="mt-1.5 flex items-center justify-between">
+                  <span className="text-[11px] text-muted-foreground">
+                    {formatRelativeDate(note.createdAt)}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => deleteNote(note.id)}
+                    className="opacity-0 group-hover:opacity-100 p-1 rounded text-muted-foreground hover:text-destructive transition-opacity"
+                    aria-label="Delete note"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                </div>
               </div>
             ))}
-            {comments.length === 0 && (
-              <p className="text-xs text-muted-foreground text-center py-4">
-                No notes yet
-              </p>
+            {notes.length === 0 && (
+              <div className="text-center py-8">
+                <p className="text-sm font-medium">No notes yet</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Jot down reminders while you study — they stay with this
+                  session.
+                </p>
+              </div>
             )}
           </div>
           <div className="p-3 border-t border-border">
-            <div className="flex gap-2">
-              <input
-                type="text"
+            <div className="flex items-end gap-2">
+              <textarea
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
-                placeholder="Add a note…"
-                className="flex-1 h-9 rounded-full border border-border bg-background px-4 text-sm focus:outline-none focus:border-accent/50 placeholder:text-faint"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    submitNote();
+                  }
+                }}
+                placeholder="Add a note… (Enter to save)"
+                rows={2}
+                className="flex-1 resize-none rounded-xl border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:border-accent/50 placeholder:text-faint"
               />
               <Button
                 size="sm"
                 disabled={!newComment.trim()}
-                onClick={() => {
-                  const content = newComment.trim();
-                  addComment.mutate(content);
-                  setLocalComments((c) => [...c, content]);
-                  setNewComment("");
-                }}
+                onClick={submitNote}
                 className="h-9"
               >
                 Add
