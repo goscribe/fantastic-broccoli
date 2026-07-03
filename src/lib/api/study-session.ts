@@ -182,7 +182,40 @@ export const studySessionApi = {
       sessionId,
       activities,
     }),
+
+  pullFromBank: (input: {
+    workspaceId: string;
+    count: number;
+    topic?: string;
+    kinds?: ApiArtifactKind[];
+  }) => rpc<ApiArtifactBankItem[]>("studySession.pullFromBank", "mutation", input),
 };
+
+// ---------- artifact bank (precomputed content pulled into plans) ----------
+
+export type ApiArtifactKind =
+  | "WORKSHEET"
+  | "MCQ_POOL"
+  | "FLASHCARD_DECK"
+  | "VOCAB_DECK"
+  | "CLOZE_PASSAGE"
+  | "READING_CHUNK"
+  | "FIGURE";
+
+export interface ApiArtifactBankItem {
+  id: string;
+  workspaceId: string;
+  fileId: string | null;
+  kind: ApiArtifactKind;
+  title: string;
+  topic: string | null;
+  syllabusRef: string | null;
+  difficulty: number;
+  content: Record<string, unknown>;
+  usedCount: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 // ---------- mappers (wire enums <-> frontend camel/lower types) ----------
 

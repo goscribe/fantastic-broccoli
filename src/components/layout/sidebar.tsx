@@ -1,14 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ScribeLogo } from "@/components/graphics/logo";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
-import { mockFolders, mockSharedWorkspaces } from "@/lib/mock-data";
-import { Folder as FolderType } from "@/types";
+import {
+  fetchSharedWorkspaces,
+  fetchWorkspaceTree,
+} from "@/lib/api/workspace";
+import { Folder as FolderType, Workspace } from "@/types";
 import { cn } from "@/lib/utils";
-import { Home, ChevronRight, Plus, Search } from "lucide-react";
+import { Home, ChevronRight, Plus, Search, X } from "lucide-react";
 
 function FolderNode({
   folder,
@@ -105,16 +108,59 @@ function FolderNode({
   );
 }
 
-export function Sidebar() {
+export function Sidebar({
+  mobileOpen = false,
+  onMobileClose,
+}: {
+  mobileOpen?: boolean;
+  onMobileClose?: () => void;
+}) {
   const pathname = usePathname();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [tab, setTab] = useState<"library" | "shared">("library");
+  const [folders, setFolders] = useState<FolderType[]>([]);
+  const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
+  const [shared, setShared] = useState<Workspace[]>([]);
   const toggle = (id: string) =>
     setExpanded((prev) => ({ ...prev, [id]: !(prev[id] ?? true) }));
 
+  useEffect(() => {
+    fetchWorkspaceTree()
+      .then((tree) => {
+        setFolders(tree.folders);
+        setRootWorkspaces(tree.rootWorkspaces);
+      })
+      .catch(() => {});
+    fetchSharedWorkspaces()
+      .then(setShared)
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    onMobileClose?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
   return (
-    <aside className="hidden md:flex w-72 shrink-0 flex-col bg-card border-r border-border">
+    <aside
+      className={cn(
+        "w-72 shrink-0 flex-col bg-card border-r border-border",
+        "max-md:fixed max-md:inset-y-0 max-md:left-0 max-md:z-50 max-md:transition-transform",
+        mobileOpen ? "flex" : "max-md:-translate-x-full hidden md:flex",
+      )}
+    >
       <div className="flex items-center px-4 h-14">
         <ScribeLogo />
+        {onMobileClose && (
+          <button
+            type="button"
+            aria-label="Close sidebar"
+            onClick={onMobileClose}
+            className="ml-auto p-1.5 rounded-md text-muted-foreground hover:bg-muted md:hidden"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        )}
       </div>
 
       <div className="px-3">
@@ -144,62 +190,112 @@ export function Sidebar() {
           Home
         </Link>
 
-        <div>
-          <div className="flex items-center justify-between px-1.5 pb-1">
-            <span className="text-xs font-semibold text-faint">
-              Folders
-            </span>
-            <button
-              type="button"
-              aria-label="New folder"
-              className="p-0.5 rounded text-faint hover:text-foreground hover:bg-muted"
-            >
-              <Plus className="h-3.5 w-3.5" />
-            </button>
-          </div>
-          <div className="space-y-px">
-            {mockFolders.map((folder) => (
-              <FolderNode
-                key={folder.id}
-                folder={folder}
-                depth={0}
-                expanded={expanded}
-                toggle={toggle}
-              />
-            ))}
-          </div>
+        <div className="flex rounded-lg border border-border bg-muted/50 p-0.5 text-[12px] font-medium">
+          <button
+            type="button"
+            onClick={() => setTab("library")}
+            className={cn(
+              "flex-1 rounded-md py-1",
+              tab === "library"
+                ? "bg-card text-foreground border border-border"
+                : "text-muted-foreground hover:text-foreground",
+            )}
+          >
+            My library
+          </button>
+          <button
+            type="button"
+            onClick={() => setTab("shared")}
+            className={cn(
+              "flex-1 rounded-md py-1",
+              tab === "shared"
+                ? "bg-card text-foreground border border-border"
+                : "text-muted-foreground hover:text-foreground",
+            )}
+          >
+            Shared
+          </button>
         </div>
 
-        <div>
-          <div className="flex items-center justify-between px-1.5 pb-1">
-            <span className="text-xs font-semibold text-faint">
-              Shared with me
-            </span>
+        {tab === "library" ? (
+          <div>
+            <div className="flex items-center justify-between px-1.5 pb-1">
+              <span className="text-xs font-semibold text-faint">Folders</span>
+              <button
+                type="button"
+                aria-label="New folder"
+                className="p-0.5 rounded text-faint hover:text-foreground hover:bg-muted"
+              >
+                <Plus className="h-3.5 w-3.5" />
+              </button>
+            </div>
+            <div className="space-y-px">
+              {folders.map((folder) => (
+                <FolderNode
+                  key={folder.id}
+                  folder={folder}
+                  depth={0}
+                  expanded={expanded}
+                  toggle={toggle}
+                />
+              ))}
+              {rootWorkspaces.map((ws) => {
+                const active = pathname.startsWith(`/workspace/${ws.id}`);
+                return (
+                  <Link
+                    key={ws.id}
+                    href={`/workspace/${ws.id}`}
+                    className={cn(
+                      "flex items-center gap-1.5 rounded-md py-1 px-1.5 text-[13px]",
+                      active
+                        ? "bg-accent-soft text-accent font-medium"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                    )}
+                  >
+                    <WorkspaceIcon icon={ws.icon} className="h-4 w-4 shrink-0" />
+                    <span className="truncate">{ws.title}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-          <div className="space-y-px">
-            {mockSharedWorkspaces.map((ws) => {
-              const active = pathname.startsWith(`/workspace/${ws.id}`);
-              return (
-                <Link
-                  key={ws.id}
-                  href={`/workspace/${ws.id}/materials`}
-                  className={cn(
-                    "flex items-center gap-1.5 rounded-md py-1 px-1.5 text-[13px]",
-                    active
-                      ? "bg-accent-soft text-accent font-medium"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                  )}
-                >
-                  <WorkspaceIcon icon={ws.icon} className="h-4 w-4 shrink-0" />
-                  <span className="truncate">{ws.title}</span>
-                  <span className="ml-auto text-[10px] text-faint shrink-0">
-                    {ws.sharedBy}
-                  </span>
-                </Link>
-              );
-            })}
+        ) : (
+          <div>
+            <div className="flex items-center justify-between px-1.5 pb-1">
+              <span className="text-xs font-semibold text-faint">
+                Shared with me
+              </span>
+            </div>
+            <div className="space-y-px">
+              {shared.length === 0 && (
+                <p className="px-1.5 py-2 text-[12px] text-faint">
+                  Nothing shared with you yet.
+                </p>
+              )}
+              {shared.map((ws) => {
+                const active = pathname.startsWith(`/workspace/${ws.id}`);
+                return (
+                  <Link
+                    key={ws.id}
+                    href={`/workspace/${ws.id}/materials`}
+                    className={cn(
+                      "flex items-center gap-1.5 rounded-md py-1 px-1.5 text-[13px]",
+                      active
+                        ? "bg-accent-soft text-accent font-medium"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                    )}
+                  >
+                    <WorkspaceIcon icon={ws.icon} className="h-4 w-4 shrink-0" />
+                    <span className="truncate">{ws.title}</span>
+                    <span className="ml-auto text-[10px] text-faint shrink-0">
+                      {ws.sharedBy}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </nav>
     </aside>
   );

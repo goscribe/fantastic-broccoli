@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Sidebar } from "@/components/layout/sidebar";
 import { TopBar } from "@/components/layout/top-bar";
@@ -7,6 +8,11 @@ import { TopBar } from "@/components/layout/top-bar";
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isSession = /^\/workspace\/[^/]+\/session\//.test(pathname);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  if (pathname === "/login") {
+    return <>{children}</>;
+  }
 
   if (isSession) {
     return (
@@ -19,9 +25,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="h-screen flex overflow-hidden">
-      <Sidebar />
+      <Sidebar
+        mobileOpen={sidebarOpen}
+        onMobileClose={() => setSidebarOpen(false)}
+      />
+      {sidebarOpen && (
+        <button
+          type="button"
+          aria-label="Close sidebar"
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 z-40 bg-foreground/20 md:hidden"
+        />
+      )}
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-        <TopBar />
+        <TopBar onMenuClick={() => setSidebarOpen(true)} />
         {children}
       </div>
     </div>

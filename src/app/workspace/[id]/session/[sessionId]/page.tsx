@@ -3,10 +3,11 @@
 import { useState, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getWorkspace, planExtensionActivities } from "@/lib/mock-data";
+import { fetchWorkspace } from "@/lib/api/workspace";
 import {
   addSessionNote,
   appendActivities,
+  fetchExtensionActivities,
   fetchStudySession,
   removeSessionNote,
   setActivityStatus,
@@ -65,8 +66,11 @@ export default function SessionDetailPage() {
   const workspaceId = params.id as string;
   const sessionId = params.sessionId as string;
 
-  const workspace = getWorkspace(workspaceId);
   const queryClient = useQueryClient();
+  const { data: workspace, isLoading: workspaceLoading } = useQuery({
+    queryKey: ["workspace", workspaceId],
+    queryFn: () => fetchWorkspace(workspaceId),
+  });
   const { data: session, isLoading } = useQuery({
     queryKey: ["study-session", sessionId],
     queryFn: () => fetchStudySession(sessionId),
@@ -97,10 +101,16 @@ export default function SessionDetailPage() {
   const [extended, setExtended] = useState(false);
   const [extendDismissed, setExtendDismissed] = useState(false);
 
-  const extensions = useMemo(
-    () => planExtensionActivities.filter((a) => a.sessionId === sessionId),
-    [sessionId],
-  );
+  const { data: extensions = [] } = useQuery({
+    queryKey: ["plan-extensions", sessionId],
+    queryFn: () =>
+      fetchExtensionActivities(
+        workspaceId,
+        sessionId,
+        session?.activities.length ?? 0,
+      ),
+    enabled: !!session,
+  });
   const activities = useMemo(
     () =>
       session
@@ -160,7 +170,7 @@ export default function SessionDetailPage() {
   };
 
   if (!session || !workspace) {
-    if (isLoading) {
+    if (isLoading || workspaceLoading) {
       return (
         <div className="flex-1 flex items-center justify-center">
           <p className="text-sm text-muted-foreground">Loading session…</p>
@@ -457,6 +467,7 @@ export default function SessionDetailPage() {
       <Copilot
         open={copilotOpen}
         onClose={() => setCopilotOpen(false)}
+        workspaceId={workspaceId}
         context={`Session: ${session.title}`}
       />
 

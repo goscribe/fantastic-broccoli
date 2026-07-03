@@ -13,22 +13,47 @@ import {
   suggestions,
 } from "@/components/ai/copilot-script";
 import { ToolCallChip } from "@/components/ai/tool-call-chip";
+import {
+  askCopilot,
+  createConversation,
+  listConversations,
+} from "@/lib/api/copilot";
+import { isLiveApi } from "@/lib/api/config";
 
 let idCounter = 0;
 const nextId = () => `m-${++idCounter}-${Date.now()}`;
+
+interface ChatTab {
+  id: string;
+  title: string;
+}
 
 export function Copilot({
   open,
   onClose,
   context,
+  workspaceId,
 }: {
   open: boolean;
   onClose: () => void;
   context?: string;
+  workspaceId?: string;
 }) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [chats, setChats] = useState<string[]>(["1"]);
+  const [chats, setChats] = useState<ChatTab[]>([{ id: "1", title: "Chat 1" }]);
   const [activeChat, setActiveChat] = useState("1");
+
+  useEffect(() => {
+    if (!isLiveApi || !workspaceId) return;
+    listConversations(workspaceId)
+      .then((rows) => {
+        if (rows.length > 0) {
+          setChats(rows);
+          setActiveChat(rows[0].id);
+        }
+      })
+      .catch(() => {});
+  }, [workspaceId]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [width, setWidth] = useState(0);
@@ -171,13 +196,75 @@ export function Copilot({
         userMsg,
         { id: assistantId, chatId: activeChat, role: "assistant", parts: [] },
       ]);
-      await runScript(scriptFor(text), assistantId);
+      if (isLiveApi && workspaceId) {
+        try {
+          const answer = await askCopilot({
+            workspaceId,
+            conversationId: activeChat.startsWith("local-") ? undefined : activeChat,
+            message: text,
+            documentContent: context,
+          });
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === assistantId
+                ? {
+                    ...m,
+                    parts: [
+                      { kind: "text", id: nextId(), text: answer, done: true },
+                    ],
+                  }
+                : m,
+            ),
+          );
+        } catch (err) {
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === assistantId
+                ? {
+                    ...m,
+                    parts: [
+                      {
+                        kind: "text",
+                        id: nextId(),
+                        text:
+                          err instanceof Error
+                            ? err.message
+                            : "Something went wrong — try again.",
+                        done: true,
+                      },
+                    ],
+                  }
+                : m,
+            ),
+          );
+        }
+      } else {
+        await runScript(scriptFor(text), assistantId);
+      }
       setBusy(false);
     },
-    [busy, runScript, activeChat],
+    [busy, runScript, activeChat, workspaceId, context],
   );
 
-  const chatMessages = messages.filter((m) => (m.chatId ?? "1") === activeChat);
+  const chatMessages = messages.filter(
+    (m) => (m.chatId ?? chats[0]?.id) === activeChat,
+  );
+
+  const newChat = async () => {
+    if (isLiveApi && workspaceId) {
+      try {
+        const conv = await createConversation(workspaceId);
+        setChats((prev) => [...prev, conv]);
+        setActiveChat(conv.id);
+        return;
+      } catch {
+        // fall through to local tab
+      }
+    }
+    const next = { id: `local-${Date.now()}`, title: `Chat ${chats.length + 1}` };
+    setChats((prev) => [...prev, next]);
+    setActiveChat(next.id);
+  };
 
   if (!open) return null;
 
@@ -204,27 +291,23 @@ export function Copilot({
         <div className="flex items-center gap-1 ml-1 flex-1 min-w-0 overflow-x-auto">
           {chats.map((c) => (
             <button
-              key={c}
+              key={c.id}
               type="button"
-              onClick={() => setActiveChat(c)}
+              onClick={() => setActiveChat(c.id)}
               className={cn(
                 "px-2.5 py-1 rounded-full text-[11px] font-semibold shrink-0",
-                c === activeChat
+                c.id === activeChat
                   ? "bg-foreground text-background"
                   : "bg-muted text-muted-foreground hover:text-foreground",
               )}
             >
-              Chat {c}
+              {c.title}
             </button>
           ))}
           <button
             type="button"
             aria-label="New chat"
-            onClick={() => {
-              const next = String(chats.length + 1);
-              setChats((prev) => [...prev, next]);
-              setActiveChat(next);
-            }}
+            onClick={() => void newChat()}
             className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted shrink-0"
           >
             <Plus className="h-3.5 w-3.5" />

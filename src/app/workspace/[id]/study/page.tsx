@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getWorkspace } from "@/lib/mock-data";
+import { fetchWorkspace } from "@/lib/api/workspace";
 import { createStudySession, fetchStudySessions } from "@/lib/api/study";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { SessionCard } from "@/components/session/session-card";
@@ -19,7 +19,10 @@ export default function WorkspaceStudyPage() {
   const workspaceId = params.id as string;
   const [showCreateWizard, setShowCreateWizard] = useState(false);
 
-  const workspace = getWorkspace(workspaceId);
+  const { data: workspace } = useQuery({
+    queryKey: ["workspace", workspaceId],
+    queryFn: () => fetchWorkspace(workspaceId),
+  });
   const queryClient = useQueryClient();
   const { data: sessions = [] } = useQuery({
     queryKey: ["study-sessions", workspaceId],

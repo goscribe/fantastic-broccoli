@@ -2,11 +2,19 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Settings, UserPlus, Bell, Palette, LogOut, Check, X } from "lucide-react";
+import { Settings, UserPlus, Bell, Palette, LogOut, Check, X, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScribeLogo } from "@/components/graphics/logo";
+import { signOut, useAuthUser } from "@/lib/api/auth";
 
-export function TopBar({ showLogo = false }: { showLogo?: boolean }) {
+export function TopBar({
+  showLogo = false,
+  onMenuClick,
+}: {
+  showLogo?: boolean;
+  onMenuClick?: () => void;
+}) {
+  const { user } = useAuthUser();
   const [menuOpen, setMenuOpen] = useState(false);
   const [inviteOpen, setInviteOpen] = useState(false);
   const [inviteEmail, setInviteEmail] = useState("");
@@ -33,13 +41,23 @@ export function TopBar({ showLogo = false }: { showLogo?: boolean }) {
     <>
       <div className="sticky top-0 z-40 border-b border-border bg-card/85 backdrop-blur-md">
         <div className="px-5 h-14 flex items-center justify-between">
-          {showLogo ? (
-            <Link href="/">
-              <ScribeLogo />
-            </Link>
-          ) : (
-            <div />
-          )}
+          <div className="flex items-center gap-2">
+            {onMenuClick && (
+              <button
+                type="button"
+                aria-label="Open sidebar"
+                onClick={onMenuClick}
+                className="p-2 -ml-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted md:hidden"
+              >
+                <Menu className="h-4 w-4" />
+              </button>
+            )}
+            {showLogo && (
+              <Link href="/">
+                <ScribeLogo />
+              </Link>
+            )}
+          </div>
 
           <div className="flex items-center gap-1.5">
             <button
@@ -83,6 +101,7 @@ export function TopBar({ showLogo = false }: { showLogo?: boolean }) {
                   <div className="my-1.5 border-t border-border" />
                   <button
                     type="button"
+                    onClick={() => void signOut()}
                     className="w-full flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-muted text-left text-muted-foreground"
                   >
                     <LogOut className="h-4 w-4" />
@@ -93,7 +112,7 @@ export function TopBar({ showLogo = false }: { showLogo?: boolean }) {
             </div>
 
             <div className="ml-1 h-7 w-7 rounded-full bg-accent-soft border border-accent/20 flex items-center justify-center text-xs font-bold text-accent">
-              A
+              {(user?.name ?? "?").charAt(0).toUpperCase()}
             </div>
           </div>
         </div>

@@ -1,20 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { mockWorkspaces, mockFolders } from "@/lib/mock-data";
+import { fetchWorkspaceTree } from "@/lib/api/workspace";
+import { useAuthUser } from "@/lib/api/auth";
+import type { Folder, Workspace } from "@/types";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { formatDuration } from "@/lib/utils";
 import { StreakFlame } from "@/components/graphics/streak-flame";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { Search, ArrowRight, Plus } from "lucide-react";
 
+function flattenWorkspaces(folders: Folder[], root: Workspace[]): Workspace[] {
+  const all: Workspace[] = [...root];
+  const walk = (fs: Folder[]) => {
+    for (const f of fs) {
+      all.push(...f.workspaces);
+      if (f.folders) walk(f.folders);
+    }
+  };
+  walk(folders);
+  return all;
+}
+
 export default function HomePage() {
   const router = useRouter();
+  const { user } = useAuthUser();
   const [searchQuery, setSearchQuery] = useState("");
+  const [folders, setFolders] = useState<Folder[]>([]);
+  const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
 
-  const allWorkspaces = mockWorkspaces;
-  const folders = mockFolders;
+  useEffect(() => {
+    fetchWorkspaceTree()
+      .then((tree) => {
+        setFolders(tree.folders);
+        setRootWorkspaces(tree.rootWorkspaces);
+      })
+      .catch(() => {});
+  }, []);
+
+  const allWorkspaces = useMemo(
+    () => flattenWorkspaces(folders, rootWorkspaces),
+    [folders, rootWorkspaces],
+  );
 
   const filtered = searchQuery
     ? allWorkspaces.filter(
@@ -41,7 +69,7 @@ export default function HomePage() {
 
   return (
     <div className="flex-1 flex flex-col">
-      <main className="flex-1 w-full px-8 py-8 space-y-8">
+      <main className="flex-1 w-full px-4 sm:px-8 py-6 sm:py-8 space-y-8">
         {/* Greeting */}
         <header className="flex flex-wrap items-end justify-between gap-4 animate-fade-up">
           <div>
@@ -53,7 +81,7 @@ export default function HomePage() {
               })}
             </p>
             <h1 className="text-2xl font-bold tracking-tight mt-1">
-              {greeting}, Alan
+              {greeting}{user ? `, ${user.name}` : ""}
             </h1>
           </div>
           <div className="flex items-center divide-x divide-border rounded-xl border border-border bg-card">
@@ -211,6 +239,22 @@ export default function HomePage() {
                 />
               ))}
             </div>
+            {rootWorkspaces.length > 0 && (
+              <div className="mt-6">
+                <h2 className="text-sm font-semibold text-foreground mb-3">
+                  Workspaces
+                </h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {rootWorkspaces.map((ws) => (
+                    <WorkspaceCard
+                      key={ws.id}
+                      workspace={ws}
+                      onClick={(id) => router.push(`/workspace/${id}`)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
         )}
       </main>

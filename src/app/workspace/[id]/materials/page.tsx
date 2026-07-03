@@ -1,9 +1,16 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import { useParams } from "next/navigation";
-import { getWorkspace } from "@/lib/mock-data";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { fetchWorkspace } from "@/lib/api/workspace";
+import {
+  analyzeFiles,
+  subscribeAnalysisProgress,
+  uploadFiles,
+  type AnalysisProgress,
+} from "@/lib/api/materials";
+import { isLiveApi } from "@/lib/api/config";
 import { Material, MaterialType } from "@/types";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { Card, Surface } from "@/components/ui/card";
@@ -17,7 +24,6 @@ import {
   Sparkles,
   Check,
   Loader2,
-  ArrowRight,
 } from "lucide-react";
 import {
   PdfArt,
@@ -124,82 +130,67 @@ function RecorderCard({ onStop }: { onStop: (seconds: number) => void }) {
   );
 }
 
-const bankStages = [
-  "Reading pages…",
-  "Extracting diagrams — 3 figures captured",
-  "Precomputing worksheet bank",
-];
+const stepLabels: Record<string, string> = {
+  fileUpload: "Uploading file",
+  transcription: "Transcribing audio",
+  parsing: "Parsing document",
+  generation: "Generating study materials",
+  worksheetBank: "Precomputing artifact bank",
+  figureExtraction: "Extracting figures",
+};
 
-// Scribe decides to build a worksheet bank on its own after a PDF or deck
-// is added — the learner never has to trigger it.
-function WorksheetBankStatus({
-  material,
-  workspaceId,
-  prebuilt,
-}: {
-  material: Material;
-  workspaceId: string;
-  prebuilt: boolean;
-}) {
-  const [stage, setStage] = useState(prebuilt ? bankStages.length : 0);
+// Live analysis status for the workspace, streamed from the server over
+// Pusher (workspace.analysisProgress step map).
+function AnalysisStatusCard({ progress }: { progress: AnalysisProgress }) {
+  const steps = Object.entries(progress.steps ?? {}).sort(
+    (a, b) => a[1].order - b[1].order,
+  );
+  const allDone =
+    steps.length > 0 &&
+    steps.every(([, s]) => s.status === "completed" || s.status === "skipped");
 
-  useEffect(() => {
-    if (stage >= bankStages.length) return;
-    const t = setTimeout(() => setStage((s) => s + 1), 1400);
-    return () => clearTimeout(t);
-  }, [stage]);
-
-  const done = stage >= bankStages.length;
-
-  if (done) {
+  if (allDone) {
     return (
-      <div
-        className="shrink-0 w-60 rounded-xl border border-accent/25 bg-accent-soft/50 px-3.5 py-2.5"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="rounded-xl border border-accent/25 bg-accent-soft/50 px-3.5 py-2.5 animate-fade-up">
         <p className="flex items-center gap-1.5 text-[11px] font-semibold text-accent-dim">
           <Sparkles className="h-3 w-3" />
-          Worksheet bank ready
+          Analysis complete
         </p>
         <p className="text-[11px] text-muted-foreground mt-0.5">
-          3 worksheets precomputed (data-response, calculation, concept check)
-          — Scribe feeds these into your plan when useful.
+          Artifact bank precomputed — Scribe feeds it into your study plans.
         </p>
-        <Link
-          href={`/workspace/${workspaceId}/session/ses-1`}
-          className="flex items-center gap-1 text-[11px] font-semibold text-accent-dim hover:underline mt-1"
-        >
-          Preview one
-          <ArrowRight className="h-3 w-3" />
-        </Link>
       </div>
     );
   }
 
   return (
-    <Surface
-      muted
-      className="shrink-0 w-60 px-3.5 py-2.5 space-y-1.5"
-      onClick={(e) => e.stopPropagation()}
-    >
+    <Surface muted className="px-3.5 py-2.5 space-y-1.5 animate-fade-up">
       <p className="text-[11px] font-semibold text-muted-foreground">
-        Building worksheet bank · {material.title.split(" \u2014 ")[0]}
+        Analyzing {progress.currentFile ?? "materials"}…
       </p>
-      {bankStages.slice(0, stage + 1).map((label, i) => (
-        <p
-          key={label}
-          className="flex items-center gap-1.5 text-[11px] font-medium animate-fade-up"
-        >
-          {i < stage ? (
-            <Check className="h-3 w-3 text-accent" />
-          ) : (
-            <Loader2 className="h-3 w-3 animate-spin text-muted-foreground" />
-          )}
-          <span className={i === stage ? "text-muted-foreground" : ""}>
-            {label}
-          </span>
-        </p>
-      ))}
+      {steps
+        .filter(([, s]) => s.status !== "skipped")
+        .map(([key, step]) => (
+          <p
+            key={key}
+            className="flex items-center gap-1.5 text-[11px] font-medium"
+          >
+            {step.status === "completed" ? (
+              <Check className="h-3 w-3 text-accent" />
+            ) : step.status === "in_progress" ? (
+              <Loader2 className="h-3 w-3 animate-spin text-muted-foreground" />
+            ) : (
+              <Circle className="h-2 w-2 text-faint" />
+            )}
+            <span
+              className={
+                step.status === "pending" ? "text-faint" : "text-muted-foreground"
+              }
+            >
+              {stepLabels[key] ?? key}
+            </span>
+          </p>
+        ))}
     </Surface>
   );
 }
@@ -207,16 +198,55 @@ function WorksheetBankStatus({
 export default function WorkspaceMaterialsPage() {
   const params = useParams();
   const workspaceId = params.id as string;
-  const workspace = getWorkspace(workspaceId);
+  const queryClient = useQueryClient();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { data: workspace } = useQuery({
+    queryKey: ["workspace", workspaceId],
+    queryFn: () => fetchWorkspace(workspaceId),
+  });
 
   const [recording, setRecording] = useState(false);
-  const [materials, setMaterials] = useState<Material[]>(
-    workspace?.materials ?? [],
+  const [localMaterials, setLocalMaterials] = useState<Material[]>([]);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [progress, setProgress] = useState<AnalysisProgress | null>(null);
+
+  const materials = [...localMaterials, ...(workspace?.materials ?? [])];
+
+  useEffect(
+    () =>
+      subscribeAnalysisProgress(workspaceId, (p) => {
+        setProgress(p);
+        queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
+      }),
+    [workspaceId, queryClient],
   );
+
+  const handleUpload = async (files: FileList | null) => {
+    if (!files?.length) return;
+    setUploadError(null);
+    if (!isLiveApi) {
+      setUploadError(
+        "Uploads require a configured backend (NEXT_PUBLIC_API_URL).",
+      );
+      return;
+    }
+    setUploading(true);
+    try {
+      const fileIds = await uploadFiles(workspaceId, Array.from(files));
+      await analyzeFiles(workspaceId, fileIds);
+      queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
+    } catch (err) {
+      setUploadError(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const stopRecording = (seconds: number) => {
     setRecording(false);
-    setMaterials((prev) => [
+    setLocalMaterials((prev) => [
       {
         id: `mat-new-${Date.now()}`,
         workspaceId,
@@ -248,11 +278,37 @@ export default function WorkspaceMaterialsPage() {
             <Circle className="h-3 w-3 mr-1.5 fill-rose text-rose" />
             Record audio
           </Button>
-          <Button size="sm" variant="outline">
-            <Upload className="h-3.5 w-3.5 mr-1.5" />
-            Upload files
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+          >
+            {uploading ? (
+              <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
+            ) : (
+              <Upload className="h-3.5 w-3.5 mr-1.5" />
+            )}
+            {uploading ? "Uploading…" : "Upload files"}
           </Button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            multiple
+            accept=".pdf,.ppt,.pptx,.key,audio/*"
+            className="hidden"
+            onChange={(e) => {
+              void handleUpload(e.target.files);
+              e.target.value = "";
+            }}
+          />
         </div>
+
+        {uploadError && (
+          <p className="text-xs text-rose animate-fade-up">{uploadError}</p>
+        )}
+
+        {progress && <AnalysisStatusCard progress={progress} />}
 
         {recording && <RecorderCard onStop={stopRecording} />}
 
@@ -305,13 +361,6 @@ export default function WorkspaceMaterialsPage() {
                         {formatRelativeDate(material.updatedAt)}
                       </p>
                     </div>
-                    {(material.type === "pdf" || material.type === "slides") && (
-                      <WorksheetBankStatus
-                        material={material}
-                        workspaceId={workspaceId}
-                        prebuilt={material.type === "pdf"}
-                      />
-                    )}
                   </Card>
                 );
               })}

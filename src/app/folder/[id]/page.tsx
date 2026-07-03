@@ -1,12 +1,22 @@
 "use client";
 
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter, notFound } from "next/navigation";
-import { getFolder, getFolderPath } from "@/lib/mock-data";
+import { useRouter } from "next/navigation";
+import { fetchWorkspaceTree } from "@/lib/api/workspace";
+import type { Folder } from "@/types";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { ChevronRight, Plus } from "lucide-react";
+
+function findFolderPath(folders: Folder[], id: string): Folder[] | null {
+  for (const folder of folders) {
+    if (folder.id === id) return [folder];
+    const sub = findFolderPath(folder.folders ?? [], id);
+    if (sub) return [folder, ...sub];
+  }
+  return null;
+}
 
 export default function FolderPage({
   params,
@@ -15,13 +25,31 @@ export default function FolderPage({
 }) {
   const { id } = use(params);
   const router = useRouter();
-  const folder = getFolder(id);
-  const path = getFolderPath(id);
-  if (!folder || !path) notFound();
+  const [path, setPath] = useState<Folder[] | null>(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    fetchWorkspaceTree()
+      .then((tree) => setPath(findFolderPath(tree.folders, id)))
+      .catch(() => {})
+      .finally(() => setLoaded(true));
+  }, [id]);
+
+  const folder = path?.[path.length - 1];
+
+  if (!folder || !path) {
+    return (
+      <div className="flex-1 flex items-center justify-center py-24">
+        <p className="text-sm text-muted-foreground">
+          {loaded ? "Folder not found." : "Loading…"}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 flex flex-col">
-      <main className="flex-1 w-full px-8 py-8 space-y-8">
+      <main className="flex-1 w-full px-4 sm:px-8 py-6 sm:py-8 space-y-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-sm animate-fade-up">
           <Link

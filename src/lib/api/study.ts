@@ -5,10 +5,17 @@ import {
   typeToApi,
   statusToApi,
   depthToApi,
+  type ApiArtifactKind,
 } from "./study-session";
-import { getSession, getWorkspace } from "@/lib/mock-data";
+import {
+  getSession,
+  getWorkspace,
+  planExtensionActivities,
+} from "@/lib/mock-data";
 import type {
+  ActivityContent,
   ActivityStatus,
+  ActivityType,
   ExamBoard,
   SessionActivity,
   SessionDepth,
@@ -98,6 +105,47 @@ export async function addSessionNote(
 export async function removeSessionNote(noteId: string): Promise<void> {
   if (!isLiveApi) return;
   await studySessionApi.removeComment(noteId);
+}
+
+const activityTypeFromKind: Record<ApiArtifactKind, ActivityType> = {
+  WORKSHEET: "worksheet",
+  MCQ_POOL: "mcq",
+  FLASHCARD_DECK: "flashcard_review",
+  VOCAB_DECK: "vocab_recall",
+  CLOZE_PASSAGE: "cloze",
+  READING_CHUNK: "reading",
+  FIGURE: "reading",
+};
+
+/**
+ * Precomputed activities offered when the learner nears the end of a plan.
+ * Live mode pulls a balanced mix from the workspace's artifact bank
+ * (studySession.pullFromBank); demo mode serves the sample extension set.
+ */
+export async function fetchExtensionActivities(
+  workspaceId: string,
+  sessionId: string,
+  startOrder: number,
+): Promise<SessionActivity[]> {
+  if (!isLiveApi) {
+    return planExtensionActivities.filter((a) => a.sessionId === sessionId);
+  }
+  const items = await studySessionApi.pullFromBank({
+    workspaceId,
+    count: 3,
+    kinds: ["WORKSHEET", "MCQ_POOL", "CLOZE_PASSAGE"],
+  });
+  return items.map((item, i) => ({
+    id: `bank-${item.id}`,
+    sessionId,
+    type: activityTypeFromKind[item.kind],
+    title: item.title,
+    description: item.topic ?? undefined,
+    content: item.content as unknown as ActivityContent,
+    order: startOrder + i,
+    status: "pending" as const,
+    estimatedMinutes: 8,
+  }));
 }
 
 /** Appends precomputed activities (e.g. from the worksheet bank) to a plan. */
