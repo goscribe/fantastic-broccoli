@@ -40,7 +40,7 @@ import { SessionDebrief } from "@/components/session/session-debrief";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, Surface } from "@/components/ui/card";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
 import { formatDuration, formatRelativeDate } from "@/lib/utils";
 import {
@@ -480,10 +480,7 @@ export default function SessionDetailPage() {
                   Highlights
                 </p>
                 {highlightEntries.map((h) => (
-                  <div
-                    key={h.id}
-                    className="p-3 rounded-xl bg-card text-sm border border-border"
-                  >
+                  <Surface key={h.id} className="p-3 text-sm">
                     <div className="flex items-start gap-2">
                       <span
                         className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${highlightDotClasses[h.color]}`}
@@ -498,7 +495,7 @@ export default function SessionDetailPage() {
                     <p className="mt-1.5 text-[11px] text-muted-foreground pl-4">
                       {h.activityTitle}
                     </p>
-                  </div>
+                  </Surface>
                 ))}
                 <p className="text-xs font-semibold text-muted-foreground pt-2">
                   Notes
@@ -506,10 +503,7 @@ export default function SessionDetailPage() {
               </div>
             )}
             {notes.map((note) => (
-              <div
-                key={note.id}
-                className="group p-3 rounded-xl bg-muted text-sm border border-border"
-              >
+              <Surface key={note.id} muted className="group p-3 text-sm">
                 <p className="whitespace-pre-wrap">{note.content}</p>
                 <div className="mt-1.5 flex items-center justify-between">
                   <span className="text-[11px] text-muted-foreground">
@@ -524,7 +518,7 @@ export default function SessionDetailPage() {
                     <Trash2 className="h-3.5 w-3.5" />
                   </button>
                 </div>
-              </div>
+              </Surface>
             ))}
             {panelCount === 0 && (
               <div className="text-center py-8">

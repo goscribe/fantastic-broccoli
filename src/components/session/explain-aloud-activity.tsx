@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ExplainAloudContent } from "@/types";
 import { Button } from "@/components/ui/button";
+import { Surface } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Check, ArrowRight, Square } from "lucide-react";
 
@@ -45,9 +46,9 @@ export function ExplainAloudActivity({
         exposes gaps that silent review hides.
       </p>
 
-      <div className="rounded-xl bg-muted/60 border border-border p-4 mb-5">
+      <Surface muted className="p-4 mb-5">
         <p className="text-sm text-foreground font-medium">{content.prompt}</p>
-      </div>
+      </Surface>
 
       {phase === "idle" && (
         <Button size="sm" onClick={() => setPhase("recording")}>

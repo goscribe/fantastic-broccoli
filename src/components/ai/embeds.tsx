@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import katex from "katex";
 import { FileText, ExternalLink } from "lucide-react";
+import { Surface } from "@/components/ui/card";
 import { DataSeriesGraph, SeriesPoint } from "@/components/interactive";
 
 /* ---------- Equation (LaTeX via KaTeX) ---------- */
@@ -18,7 +19,7 @@ export function EquationEmbed({ latex, caption }: { latex: string; caption?: str
   );
 
   return (
-    <div className="my-2 rounded-xl border border-border bg-card p-4 animate-fade-up">
+    <Surface className="my-2 p-4 animate-fade-up">
       <div
         className="text-[15px] overflow-x-auto"
         dangerouslySetInnerHTML={{ __html: html }}
@@ -28,7 +29,7 @@ export function EquationEmbed({ latex, caption }: { latex: string; caption?: str
           {caption}
         </p>
       )}
-    </div>
+    </Surface>
   );
 }
 
@@ -62,7 +63,7 @@ export interface CitationData {
 
 export function CitationEmbed({ data }: { data: CitationData }) {
   return (
-    <div className="my-2 rounded-xl border border-border bg-card overflow-hidden animate-fade-up">
+    <Surface className="my-2 overflow-hidden animate-fade-up">
       <div className="flex items-center gap-2 px-3.5 py-2 bg-muted/60 border-b border-border">
         <FileText className="h-3.5 w-3.5 text-rose shrink-0" />
         <span className="text-[11px] font-semibold truncate">{data.source}</span>
@@ -72,6 +73,6 @@ export function CitationEmbed({ data }: { data: CitationData }) {
       <blockquote className="px-3.5 py-2.5 text-xs text-muted-foreground border-l-2 border-accent/40 m-2 bg-accent-soft/40 rounded-r-lg">
         “{data.quote}”
       </blockquote>
-    </div>
+    </Surface>
   );
 }

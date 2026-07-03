@@ -134,7 +134,7 @@ export function ComprehensionActivity({
           </summary>
           <div className="mt-2 space-y-2">
             {content.userRewrites.map((rewrite, i) => (
-              <p key={i} className="p-2 rounded bg-muted italic">
+              <p key={i} className="p-2 rounded-lg border border-border bg-muted/50 italic">
                 &ldquo;{rewrite}&rdquo;
               </p>
             ))}

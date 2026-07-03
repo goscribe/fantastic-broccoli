@@ -38,7 +38,7 @@ export function InlineFormula({ latex }: { latex: string }) {
   );
   return (
     <span
-      className="text-sm shrink-0 rounded-lg bg-muted px-2.5 py-1"
+      className="text-sm shrink-0 text-muted-foreground"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
@@ -98,8 +98,8 @@ export function Readout({
   return (
     <div
       className={cn(
-        "rounded-lg px-2.5 py-1.5 text-center",
-        highlight ? "bg-energy-soft" : "bg-muted",
+        "rounded-lg border px-2.5 py-1.5 text-center",
+        highlight ? "border-energy/30 bg-energy-soft" : "border-border bg-muted/50",
       )}
     >
       <p className="text-[10px] text-muted-foreground">{label}</p>

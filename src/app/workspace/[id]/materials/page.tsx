@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { getWorkspace } from "@/lib/mock-data";
 import { Material, MaterialType } from "@/types";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
-import { Card } from "@/components/ui/card";
+import { Card, Surface } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatRelativeDate } from "@/lib/utils";
 import {
@@ -177,8 +177,9 @@ function WorksheetBankStatus({
   }
 
   return (
-    <div
-      className="shrink-0 w-60 rounded-xl border border-border bg-muted/40 px-3.5 py-2.5 space-y-1.5"
+    <Surface
+      muted
+      className="shrink-0 w-60 px-3.5 py-2.5 space-y-1.5"
       onClick={(e) => e.stopPropagation()}
     >
       <p className="text-[11px] font-semibold text-muted-foreground">
@@ -199,7 +200,7 @@ function WorksheetBankStatus({
           </span>
         </p>
       ))}
-    </div>
+    </Surface>
   );
 }
 

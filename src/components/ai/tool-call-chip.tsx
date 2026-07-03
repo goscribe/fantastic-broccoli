@@ -11,6 +11,7 @@ import {
   ChevronDown,
   FileText,
 } from "lucide-react";
+import { Surface } from "@/components/ui/card";
 import { ToolCallPart, ToolName } from "@/components/ai/copilot-script";
 
 const toolMeta: Record<ToolName, { icon: React.ElementType; color: string }> = {
@@ -26,7 +27,7 @@ export function ToolCallChip({ part }: { part: ToolCallPart }) {
   const Icon = meta.icon;
 
   return (
-    <div className="my-1.5 rounded-xl border border-border bg-muted/60 overflow-hidden animate-fade-up">
+    <Surface muted className="my-1.5 overflow-hidden animate-fade-up">
       <button
         type="button"
         onClick={() => part.status === "done" && setExpanded(!expanded)}
@@ -68,6 +69,6 @@ export function ToolCallChip({ part }: { part: ToolCallPart }) {
           <p className="pt-2">{part.result}</p>
         </div>
       )}
-    </div>
+    </Surface>
   );
 }

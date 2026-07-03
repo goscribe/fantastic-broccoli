@@ -26,6 +26,32 @@ export function Card({
   );
 }
 
+interface SurfaceProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+  muted?: boolean;
+}
+
+/** Bordered inline surface for nested content (notes, chips, readouts). */
+export function Surface({
+  children,
+  className,
+  muted = false,
+  ...props
+}: SurfaceProps) {
+  return (
+    <div
+      className={cn(
+        "rounded-xl border border-border",
+        muted ? "bg-muted/50" : "bg-card",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+
 export function CardHeader({
   children,
   className,
