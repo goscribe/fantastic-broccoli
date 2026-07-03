@@ -5,14 +5,12 @@ import { useRouter } from "next/navigation";
 import { mockWorkspaces, mockFolders } from "@/lib/mock-data";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { ProgressBar } from "@/components/ui/progress-bar";
-import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
 import { formatDuration } from "@/lib/utils";
 import { Search, Flame, Clock, Zap, ArrowRight } from "lucide-react";
 
 export default function HomePage() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [copilotOpen, setCopilotOpen] = useState(false);
 
   const allWorkspaces = mockWorkspaces;
   const folders = mockFolders;
@@ -45,24 +43,21 @@ export default function HomePage() {
       <main className="flex-1 max-w-4xl mx-auto w-full px-5 py-10 space-y-10">
         {/* Hero */}
         <header className="animate-fade-up">
-          <div className="flex items-center gap-2 text-accent text-xs font-semibold uppercase tracking-[0.2em] mb-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            Scribe
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.05]">
-            {greeting}.
-            <br />
-            <span className="text-muted-foreground">Ready to study?</span>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight leading-[1.1]">
+            {greeting}, Alan
           </h1>
+          <p className="text-muted-foreground mt-1.5">
+            Pick up where you left off, or start something new.
+          </p>
 
           {/* Stat chips */}
           <div className="flex items-center gap-2.5 mt-6 flex-wrap">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-medium">
-              <Flame className="h-3.5 w-3.5 text-amber" />
+              <Flame className="h-3.5 w-3.5 text-warning" />
               6-day streak
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-medium">
-              <Zap className="h-3.5 w-3.5 text-accent" />
+              <Zap className="h-3.5 w-3.5 text-energy" />
               {activeSessions.length} active session
               {activeSessions.length !== 1 ? "s" : ""}
             </span>
@@ -84,7 +79,7 @@ export default function HomePage() {
                 `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
               )
             }
-            className="group w-full text-left rounded-3xl border border-accent/25 bg-gradient-to-br from-accent/10 via-card to-card p-6 hover:border-accent/50 transition-all animate-fade-up"
+            className="group w-full text-left rounded-3xl border border-accent/20 bg-gradient-to-br from-accent-soft via-card to-card p-6 shadow-soft hover:shadow-soft-lg hover:border-accent/40 transition-all animate-fade-up"
           >
             <div className="flex items-center justify-between mb-4">
               <span className="text-xs font-semibold uppercase tracking-[0.15em] text-accent">
@@ -120,7 +115,7 @@ export default function HomePage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search workspaces…"
-            className="w-full h-11 pl-11 pr-4 rounded-full border border-border bg-card text-sm focus:outline-none focus:border-accent/50 placeholder:text-faint"
+            className="w-full h-11 pl-11 pr-4 rounded-full border border-border bg-card text-sm shadow-soft focus:outline-none focus:border-accent/50 placeholder:text-faint"
           />
         </div>
 
@@ -164,9 +159,6 @@ export default function HomePage() {
           ))
         )}
       </main>
-
-      <CopilotTrigger onClick={() => setCopilotOpen(true)} />
-      <Copilot open={copilotOpen} onClose={() => setCopilotOpen(false)} />
     </div>
   );
 }

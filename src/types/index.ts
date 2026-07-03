@@ -107,14 +107,30 @@ export interface InteractiveContent {
   completed: boolean;
 }
 
+export type MaterialType = "note" | "pdf" | "audio" | "slides";
+
+export interface Material {
+  id: string;
+  workspaceId: string;
+  type: MaterialType;
+  title: string;
+  preview?: string;
+  pages?: number;
+  durationSeconds?: number;
+  sizeLabel?: string;
+  updatedAt: string;
+}
+
 export interface Workspace {
   id: string;
   title: string;
   description?: string;
   icon: string;
   color: string;
+  course?: string;
   folderId?: string;
   sessions: StudySession[];
+  materials: Material[];
   totalProgress: number;
   lastStudied?: string;
   createdAt: string;

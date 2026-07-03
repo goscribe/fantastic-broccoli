@@ -7,7 +7,8 @@ type BadgeVariant =
   | "warning"
   | "muted"
   | "violet"
-  | "sky";
+  | "sky"
+  | "energy";
 
 interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant;
@@ -15,7 +16,8 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const variantClasses: Record<BadgeVariant, string> = {
   default: "bg-foreground/10 text-foreground",
-  accent: "bg-accent/15 text-accent border border-accent/20",
+  accent: "bg-accent-soft text-accent border border-accent/15",
+  energy: "bg-energy-soft text-energy border border-energy/20",
   success: "bg-success/10 text-success border border-success/20",
   warning: "bg-warning/10 text-warning border border-warning/20",
   violet: "bg-violet/10 text-violet border border-violet/20",

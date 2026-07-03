@@ -3,6 +3,7 @@ import {
   Folder,
   StudySession,
   SessionActivity,
+  Material,
 } from "@/types";
 
 const now = new Date().toISOString();
@@ -199,36 +200,103 @@ const bioSessions: StudySession[] = [
   },
 ];
 
+const chemMaterials: Material[] = [
+  {
+    id: "mat-1",
+    workspaceId: "ws-1",
+    type: "pdf",
+    title: "Topic 2 — Atomic Structure.pdf",
+    pages: 42,
+    sizeLabel: "3.1 MB",
+    updatedAt: yesterday,
+  },
+  {
+    id: "mat-2",
+    workspaceId: "ws-1",
+    type: "note",
+    title: "Periodic trends summary",
+    preview:
+      "Atomic radius decreases across a period because nuclear charge increases while shielding stays constant…",
+    updatedAt: now,
+  },
+  {
+    id: "mat-3",
+    workspaceId: "ws-1",
+    type: "audio",
+    title: "Lecture — Ionization energy",
+    durationSeconds: 2712,
+    preview:
+      "…so the first ionization energy of sodium is much lower than neon because the 3s electron is further from the nucleus…",
+    updatedAt: lastWeek,
+  },
+  {
+    id: "mat-4",
+    workspaceId: "ws-1",
+    type: "slides",
+    title: "Electron configuration slides",
+    pages: 18,
+    sizeLabel: "5.4 MB",
+    updatedAt: lastWeek,
+  },
+];
+
+const bioMaterials: Material[] = [
+  {
+    id: "mat-5",
+    workspaceId: "ws-2",
+    type: "pdf",
+    title: "Unit 2 — Cell Structure & Function.pdf",
+    pages: 36,
+    sizeLabel: "2.4 MB",
+    updatedAt: yesterday,
+  },
+  {
+    id: "mat-6",
+    workspaceId: "ws-2",
+    type: "note",
+    title: "Membrane transport notes",
+    preview:
+      "Fluid mosaic model: phospholipid bilayer + embedded proteins. Cholesterol regulates fluidity…",
+    updatedAt: now,
+  },
+];
+
 export const mockWorkspaces: Workspace[] = [
   {
     id: "ws-1",
-    title: "IB Chemistry HL",
-    description: "Higher Level Chemistry - May 2026 exams",
-    icon: "flask",
-    color: "#c8f542",
+    title: "Chemistry HL",
+    description: "May 2026 exams",
+    icon: "🧪",
+    color: "#7c5cfc",
+    course: "IB HL",
     sessions: sessions,
+    materials: chemMaterials,
     totalProgress: 35,
     lastStudied: now,
     createdAt: lastWeek,
   },
   {
     id: "ws-2",
-    title: "AP Biology",
-    description: "AP Bio exam prep",
-    icon: "dna",
-    color: "#7dd3fc",
+    title: "Biology",
+    description: "Exam prep",
+    icon: "🧬",
+    color: "#38bdf8",
+    course: "AP",
     sessions: bioSessions,
+    materials: bioMaterials,
     totalProgress: 0,
     lastStudied: yesterday,
     createdAt: lastWeek,
   },
   {
     id: "ws-3",
-    title: "IB Math AA HL",
-    description: "Analysis & Approaches Higher Level",
-    icon: "sigma",
-    color: "#a78bfa",
+    title: "Math AA HL",
+    description: "Analysis & Approaches",
+    icon: "📐",
+    color: "#f59e0b",
+    course: "IB HL",
     sessions: [],
+    materials: [],
     totalProgress: 0,
     createdAt: lastWeek,
   },
@@ -237,15 +305,15 @@ export const mockWorkspaces: Workspace[] = [
 export const mockFolders: Folder[] = [
   {
     id: "fld-1",
-    name: "IB Diploma",
-    color: "#c8f542",
-    workspaces: [mockWorkspaces[0], mockWorkspaces[2]],
+    name: "Sciences",
+    color: "#7c5cfc",
+    workspaces: [mockWorkspaces[0], mockWorkspaces[1]],
   },
   {
     id: "fld-2",
-    name: "AP Classes",
-    color: "#7dd3fc",
-    workspaces: [mockWorkspaces[1]],
+    name: "Mathematics",
+    color: "#f59e0b",
+    workspaces: [mockWorkspaces[2]],
   },
 ];
 

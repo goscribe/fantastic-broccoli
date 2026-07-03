@@ -141,7 +141,7 @@ export default function SessionDetailPage() {
   return (
     <div className="flex-1 flex flex-col h-full">
       {/* Header */}
-      <header className="border-b border-border bg-background/70 backdrop-blur-md sticky top-0 z-10">
+      <header className="border-b border-border bg-card/85 backdrop-blur-md sticky top-14 z-10">
         <div className="max-w-5xl mx-auto px-5 py-3.5">
           <div className="flex items-center justify-between gap-4">
             <div className="min-w-0 flex-1">

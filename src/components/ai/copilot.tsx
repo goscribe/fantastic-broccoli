@@ -15,6 +15,14 @@ import {
   FileText,
   Wand2,
 } from "lucide-react";
+import {
+  EquationEmbed,
+  GraphEmbed,
+  DensityWidget,
+  CitationEmbed,
+  GraphData,
+  CitationData,
+} from "@/components/ai/embeds";
 
 type ToolName =
   | "search_materials"
@@ -39,7 +47,15 @@ interface TextPart {
   done: boolean;
 }
 
-type MessagePart = ToolCallPart | TextPart;
+type EmbedSpec =
+  | { embed: "equation"; latex: string; caption?: string }
+  | { embed: "graph"; graph: GraphData }
+  | { embed: "widget" }
+  | { embed: "citation"; citation: CitationData };
+
+type EmbedPart = { kind: "embed"; id: string } & EmbedSpec;
+
+type MessagePart = ToolCallPart | TextPart | EmbedPart;
 
 interface ChatMessage {
   id: string;
@@ -55,16 +71,102 @@ const toolMeta: Record<ToolName, { icon: React.ElementType; color: string }> = {
 };
 
 interface ScriptStep {
-  type: "text" | "tool";
+  type: "text" | "tool" | "embed";
   text?: string;
   tool?: ToolName;
   label?: string;
   args?: string;
   result?: string;
+  spec?: EmbedSpec;
 }
 
 function scriptFor(input: string): ScriptStep[] {
   const q = input.toLowerCase();
+  if (q.includes("graph") || q.includes("plot") || q.includes("trend")) {
+    return [
+      { type: "text", text: "Here's the first ionization energy across Period 3 — note the dips at Al and S." },
+      {
+        type: "embed",
+        spec: {
+          embed: "graph",
+          graph: {
+            title: "First ionization energy — Period 3",
+            xLabel: "Element",
+            yLabel: "IE₁ (kJ/mol)",
+            points: [
+              { x: 1, y: 496, label: "Na" },
+              { x: 2, y: 738, label: "Mg" },
+              { x: 3, y: 578, label: "Al" },
+              { x: 4, y: 786, label: "Si" },
+              { x: 5, y: 1012, label: "P" },
+              { x: 6, y: 1000, label: "S" },
+              { x: 7, y: 1251, label: "Cl" },
+              { x: 8, y: 1521, label: "Ar" },
+            ],
+          },
+        },
+      },
+      {
+        type: "text",
+        text: "The Al dip happens because its 3p electron is easier to remove than Mg's 3s, and the S dip comes from paired-electron repulsion in 3p⁴. Want a quiz question on this?",
+      },
+    ];
+  }
+  if (q.includes("equation") || q.includes("formula") || q.includes("math")) {
+    return [
+      { type: "text", text: "The energy of an electron in a hydrogen-like atom is:" },
+      {
+        type: "embed",
+        spec: {
+          embed: "equation",
+          latex: "E_n = -\\frac{13.6\\,\\text{eV} \\cdot Z^2}{n^2}",
+          caption: "Z = nuclear charge, n = principal quantum number",
+        },
+      },
+      {
+        type: "text",
+        text: "Energy scales with Z² and falls off with n² — that's why removing inner-shell electrons takes dramatically more energy.",
+      },
+    ];
+  }
+  if (q.includes("density") || q.includes("interactive") || q.includes("simulat") || q.includes("play")) {
+    return [
+      { type: "text", text: "Let's make this hands-on — try it yourself:" },
+      { type: "embed", spec: { embed: "widget" } },
+      {
+        type: "text",
+        text: "Same bottle, more particles → more mass in the same volume → higher density. ρ = m/V in action.",
+      },
+    ];
+  }
+  if (q.includes("pdf") || q.includes("source") || q.includes("cite") || q.includes("where") || q.includes("notes")) {
+    return [
+      {
+        type: "tool",
+        tool: "search_materials",
+        label: "Searching your PDFs",
+        args: `query: "${input.slice(0, 50)}"`,
+        result: "Best match in 'Topic 2 — Atomic Structure.pdf', page 17.",
+      },
+      { type: "text", text: "Found it — this is straight from your uploaded notes:" },
+      {
+        type: "embed",
+        spec: {
+          embed: "citation",
+          citation: {
+            source: "Topic 2 — Atomic Structure.pdf",
+            page: 17,
+            quote:
+              "The first ionization energy decreases down a group because the outer electron is progressively further from the nucleus and increasingly shielded by inner shells.",
+          },
+        },
+      },
+      {
+        type: "text",
+        text: "Want me to turn this section into flashcards or a comprehension check?",
+      },
+    ];
+  }
   if (q.includes("search") || q.includes("find")) {
     return [
       { type: "text", text: "Let me look through your materials." },
@@ -221,9 +323,10 @@ function ToolCallChip({ part }: { part: ToolCallPart }) {
 }
 
 const suggestions = [
-  "Make today's session shorter",
-  "Add more practice on my weak topics",
-  "Search my notes for ionization energy",
+  "Plot the ionization energy trend",
+  "Show me the energy level equation",
+  "Let me play with a density simulation",
+  "Where do my notes cover shielding?",
 ];
 
 export function Copilot({
@@ -247,7 +350,17 @@ export function Copilot({
   const runScript = useCallback(async (steps: ScriptStep[], assistantId: string) => {
     const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
     for (const step of steps) {
-      if (step.type === "tool") {
+      if (step.type === "embed") {
+        await wait(400);
+        const embedPart = { kind: "embed", id: nextId(), ...step.spec! } as EmbedPart;
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === assistantId
+              ? { ...m, parts: [...m.parts, embedPart] }
+              : m,
+          ),
+        );
+      } else if (step.type === "tool") {
         const toolId = nextId();
         setMessages((prev) =>
           prev.map((m) =>
@@ -357,7 +470,7 @@ export function Copilot({
     <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-[420px] flex flex-col bg-card border-l border-border shadow-2xl animate-fade-up">
       {/* Header */}
       <div className="flex items-center gap-2.5 px-4 py-3.5 border-b border-border">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/15 border border-accent/25">
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft border border-accent/20">
           <Sparkles className="h-4 w-4 text-accent" />
         </span>
         <div className="flex-1 min-w-0">
@@ -379,7 +492,7 @@ export function Copilot({
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
         {messages.length === 0 && (
           <div className="pt-8 text-center space-y-5">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 border border-accent/20">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft border border-accent/15">
               <Wand2 className="h-5 w-5 text-accent" />
             </div>
             <div>
@@ -421,6 +534,20 @@ export function Copilot({
               {msg.parts.map((part) =>
                 part.kind === "tool" ? (
                   <ToolCallChip key={part.id} part={part} />
+                ) : part.kind === "embed" ? (
+                  part.embed === "equation" ? (
+                    <EquationEmbed
+                      key={part.id}
+                      latex={part.latex}
+                      caption={part.caption}
+                    />
+                  ) : part.embed === "graph" ? (
+                    <GraphEmbed key={part.id} data={part.graph} />
+                  ) : part.embed === "widget" ? (
+                    <DensityWidget key={part.id} />
+                  ) : (
+                    <CitationEmbed key={part.id} data={part.citation} />
+                  )
                 ) : (
                   <p key={part.id} className="text-sm leading-relaxed px-1 py-1">
                     {part.text}
@@ -475,7 +602,7 @@ export function CopilotTrigger({ onClick }: { onClick: () => void }) {
     <button
       type="button"
       onClick={onClick}
-      className="fixed bottom-5 right-5 z-40 flex items-center gap-2 h-11 pl-4 pr-5 rounded-full bg-accent text-accent-foreground font-semibold text-sm shadow-[0_8px_30px_-6px_var(--accent)] hover:bg-accent-dim active:scale-95 transition-all"
+      className="fixed bottom-5 right-5 z-40 flex items-center gap-2 h-11 pl-4 pr-5 rounded-full bg-accent text-accent-foreground font-semibold text-sm shadow-soft-lg hover:bg-accent-dim active:scale-95 transition-all"
     >
       <Sparkles className="h-4 w-4" />
       Ask Scribe
