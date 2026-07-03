@@ -51,7 +51,7 @@ export function WorkspaceShell({ workspace, children }: WorkspaceShellProps) {
   return (
     <div className="flex-1 flex flex-col">
       <div className="border-b border-border bg-card">
-        <div className="w-full max-w-6xl px-8 pt-6">
+        <div className="w-full max-w-3xl mx-auto px-6 pt-6">
           <button
             type="button"
             onClick={() => router.push("/")}
@@ -105,7 +105,7 @@ export function WorkspaceShell({ workspace, children }: WorkspaceShellProps) {
         </div>
       </div>
 
-      <main className="flex-1 w-full max-w-6xl px-8 py-8">
+      <main className="flex-1 w-full max-w-3xl mx-auto px-6 py-8">
         {children}
       </main>
     </div>

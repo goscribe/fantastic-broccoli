@@ -52,7 +52,7 @@ export default function HomePage() {
 
   return (
     <div className="flex-1 flex flex-col">
-      <main className="flex-1 w-full max-w-6xl px-8 py-8 space-y-8">
+      <main className="flex-1 w-full max-w-3xl mx-auto px-6 py-10 space-y-10">
         {/* Greeting */}
         <header className="flex flex-wrap items-end justify-between gap-4 animate-fade-up">
           <div>
@@ -95,7 +95,7 @@ export default function HomePage() {
           className="relative overflow-hidden rounded-2xl p-6 text-white animate-fade-up"
           style={{
             background:
-              "linear-gradient(105deg, #6a5cf5 0%, #8b7bf7 45%, #c99df3 80%, #f0aee0 100%)",
+              "linear-gradient(105deg, #46a302 0%, #58cc02 55%, #8ee53f 100%)",
           }}
         >
           <div className="pointer-events-none absolute inset-0 opacity-25"
@@ -122,7 +122,7 @@ export default function HomePage() {
                       `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
                     )
                   }
-                  className="group mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[13px] font-semibold text-[#6a5cf5] hover:bg-white/90 transition-colors"
+                  className="group mt-4 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[13px] font-semibold text-[#46a302] hover:bg-white/90 transition-colors"
                 >
                   Resume session
                   <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -214,7 +214,7 @@ export default function HomePage() {
                     New workspace
                   </button>
                 </div>
-                <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                <div className="grid sm:grid-cols-2 gap-4">
                   {folder.workspaces.map((ws) => (
                     <WorkspaceCard
                       key={ws.id}

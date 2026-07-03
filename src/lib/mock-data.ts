@@ -267,7 +267,7 @@ export const mockWorkspaces: Workspace[] = [
     title: "Chemistry HL",
     description: "May 2026 exams",
     icon: "🧪",
-    color: "#7c5cfc",
+    color: "#58cc02",
     course: "IB HL",
     sessions: sessions,
     materials: chemMaterials,
@@ -306,7 +306,7 @@ export const mockFolders: Folder[] = [
   {
     id: "fld-1",
     name: "IB Diploma",
-    color: "#7c5cfc",
+    color: "#58cc02",
     workspaces: [],
     folders: [
       {
