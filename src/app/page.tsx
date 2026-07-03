@@ -178,8 +178,8 @@ export default function HomePage() {
             <div className="rounded-xl border border-border bg-card p-4">
               <StudyCalendar dailyActivity={mockDailyActivity} />
             </div>
-            <div className="rounded-xl border border-border bg-card p-4">
-              <div>
+            <div className="rounded-xl border border-border bg-card p-4 flex flex-col">
+              <div className="flex flex-1 flex-col">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-semibold">This week</p>
                   <div className="flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1">
@@ -190,7 +190,7 @@ export default function HomePage() {
                     </p>
                   </div>
                 </div>
-                <div className="mt-4 flex h-28 items-end gap-2.5">
+                <div className="mt-4 flex min-h-28 flex-1 items-end gap-2.5">
                   {lastSevenDays.map(({ label, count, isToday }, i) => (
                     <div
                       key={i}
