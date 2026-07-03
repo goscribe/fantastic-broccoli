@@ -5,14 +5,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ScribeLogo } from "@/components/graphics/logo";
 import { Button } from "@/components/ui/button";
-import { signIn } from "@/lib/api/auth";
+import { signUp, signIn } from "@/lib/api/auth";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
 
 const inputClasses =
   "w-full h-10 rounded-lg border border-border bg-card px-3.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 placeholder:text-faint";
 
-export default function LoginPage() {
+export default function SignupPage() {
   const router = useRouter();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -24,11 +25,11 @@ export default function LoginPage() {
     setError(null);
     setBusy(true);
     try {
+      await signUp(name, email, password);
       await signIn(email, password);
       router.push("/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Sign in failed");
-    } finally {
+      setError(err instanceof Error ? err.message : "Sign up failed");
       setBusy(false);
     }
   };
@@ -43,18 +44,32 @@ export default function LoginPage() {
         </div>
 
         <div className="text-center space-y-1.5">
-          <h1 className="text-2xl font-bold tracking-tight">Welcome back</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Create your account</h1>
           <p className="text-sm text-muted-foreground">
-            Sign in to your account to continue
+            Start studying smarter in minutes
           </p>
         </div>
 
         <form onSubmit={submit} className="space-y-4">
           <div className="space-y-1.5">
-            <label
-              htmlFor="email"
-              className="text-[13px] font-medium text-foreground"
-            >
+            <label htmlFor="name" className="text-[13px] font-medium text-foreground">
+              Name
+            </label>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your name"
+              required
+              autoComplete="name"
+              autoFocus
+              className={inputClasses}
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label htmlFor="email" className="text-[13px] font-medium text-foreground">
               Email
             </label>
             <input
@@ -65,35 +80,27 @@ export default function LoginPage() {
               placeholder="name@school.edu"
               required
               autoComplete="email"
-              autoFocus
               className={inputClasses}
             />
           </div>
 
           <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="password"
-                className="text-[13px] font-medium text-foreground"
-              >
-                Password
-              </label>
-              <Link
-                href="/forgot-password"
-                className="text-xs text-muted-foreground hover:text-foreground"
-              >
-                Forgot password?
-              </Link>
-            </div>
+            <label
+              htmlFor="password"
+              className="text-[13px] font-medium text-foreground"
+            >
+              Password
+            </label>
             <div className="relative">
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
+                placeholder="At least 8 characters"
                 required
-                autoComplete="current-password"
+                minLength={8}
+                autoComplete="new-password"
                 className={`${inputClasses} pr-10`}
               />
               <button
@@ -114,18 +121,18 @@ export default function LoginPage() {
           {error && <p className="text-xs text-rose">{error}</p>}
 
           <Button type="submit" size="md" className="w-full gap-2" disabled={busy}>
-            {busy ? "Signing in…" : "Sign in"}
+            {busy ? "Creating account…" : "Create account"}
             {!busy && <ArrowRight className="h-4 w-4" />}
           </Button>
         </form>
 
         <p className="text-center text-sm text-muted-foreground">
-          New to Scribe?{" "}
+          Already have an account?{" "}
           <Link
-            href="/signup"
+            href="/login"
             className="font-medium text-foreground hover:underline"
           >
-            Create an account
+            Sign in
           </Link>
         </p>
       </div>

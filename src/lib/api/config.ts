@@ -1,7 +1,11 @@
 /**
- * Base URL for the goscribe/server API. When unset the app runs in demo mode
- * against the local mock data, so the prototype works without a backend.
+ * Base URL for the goscribe/server API. Required — the app always runs
+ * against the live backend.
  */
 export const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "";
 
-export const isLiveApi = apiUrl.length > 0;
+if (typeof window !== "undefined" && !apiUrl) {
+  throw new Error(
+    "NEXT_PUBLIC_API_URL is not set — point it at the goscribe/server API.",
+  );
+}

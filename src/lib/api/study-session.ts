@@ -50,8 +50,21 @@ export interface ApiSessionActivity {
   status: ApiActivityStatus;
   estimatedMinutes: number;
   timeSpentSeconds: number | null;
+  highlights?: ApiReadingHighlight[];
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface ApiReadingHighlight {
+  id: string;
+  activityId: string;
+  text: string;
+  color: string;
+  note: string | null;
+  paragraph: number;
+  startChar: number;
+  endChar: number;
+  createdAt: Date;
 }
 
 export interface ApiSessionComment {
@@ -183,6 +196,35 @@ export const studySessionApi = {
       activities,
     }),
 
+  addHighlight: (input: {
+    activityId: string;
+    text: string;
+    color: string;
+    note?: string;
+    paragraph?: number;
+    startChar?: number;
+    endChar?: number;
+  }) => rpc<ApiReadingHighlight>("studySession.addHighlight", "mutation", input),
+
+  updateHighlight: (input: {
+    highlightId: string;
+    note?: string | null;
+    color?: string;
+  }) =>
+    rpc<ApiReadingHighlight>("studySession.updateHighlight", "mutation", input),
+
+  removeHighlight: (highlightId: string) =>
+    rpc<ApiReadingHighlight>("studySession.removeHighlight", "mutation", {
+      highlightId,
+    }),
+
+  activityCalendar: (days: number) =>
+    rpc<{ date: string; count: number }[]>(
+      "studySession.activityCalendar",
+      "query",
+      { days },
+    ),
+
   pullFromBank: (input: {
     workspaceId: string;
     count: number;
@@ -268,6 +310,17 @@ export function mapActivity(a: ApiSessionActivity): SessionActivity {
     status: statusFromApi[a.status],
     estimatedMinutes: a.estimatedMinutes,
     timeSpentSeconds: a.timeSpentSeconds ?? undefined,
+    highlights: (a.highlights ?? []).map((h) => ({
+      id: h.id,
+      activityId: h.activityId,
+      text: h.text,
+      color: h.color,
+      note: h.note ?? undefined,
+      paragraph: h.paragraph,
+      startChar: h.startChar,
+      endChar: h.endChar,
+      createdAt: h.createdAt.toISOString(),
+    })),
   };
 }
 

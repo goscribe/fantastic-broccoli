@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { api } from "./trpc-client";
-import { isLiveApi } from "./config";
 
 export interface AuthUser {
   id: string;
@@ -10,19 +9,15 @@ export interface AuthUser {
   email?: string;
 }
 
-const demoUser: AuthUser = { id: "demo-user", name: "Alan" };
-
 /**
- * Current authenticated user from goscribe/server. In live mode, redirects to
- * the server's login page when there is no session; in demo mode returns the
- * demo user.
+ * Current authenticated user from goscribe/server. Redirects to the login
+ * page when there is no session.
  */
 export function useAuthUser(): { user: AuthUser | null; loading: boolean } {
-  const [user, setUser] = useState<AuthUser | null>(isLiveApi ? null : demoUser);
-  const [loading, setLoading] = useState(isLiveApi);
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!isLiveApi) return;
     api.auth.getSession
       .query()
       .then((session) => {
@@ -45,12 +40,22 @@ export function useAuthUser(): { user: AuthUser | null; loading: boolean } {
 }
 
 export async function signIn(email: string, password: string): Promise<void> {
-  if (!isLiveApi) return;
   await api.auth.login.mutate({ email, password });
 }
 
+export async function signUp(
+  name: string,
+  email: string,
+  password: string,
+): Promise<void> {
+  await api.auth.signup.mutate({ name, email, password });
+}
+
+export async function requestPasswordReset(email: string): Promise<void> {
+  await api.auth.requestPasswordReset.mutate({ email });
+}
+
 export async function signOut(): Promise<void> {
-  if (!isLiveApi) return;
   await api.auth.logout.mutate();
   window.location.href = "/login";
 }

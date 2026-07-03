@@ -10,8 +10,23 @@ import { formatDuration } from "@/lib/utils";
 import { StreakFlame } from "@/components/graphics/streak-flame";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { StudyCalendar } from "@/components/workspace/study-calendar";
-import { mockDailyActivity } from "@/lib/mock-data";
+import { CreateResourceDialog } from "@/components/workspace/create-dialog";
+import { fetchActivityCalendar, type DailyActivityPoint } from "@/lib/api/study";
 import { Search, ArrowRight, Plus } from "lucide-react";
+
+function computeStreak(daily: DailyActivityPoint[]): number {
+  const byDate = new Map(daily.map((d) => [d.date, d.count]));
+  let streak = 0;
+  const d = new Date();
+  for (;;) {
+    const iso = d.toISOString().split("T")[0];
+    const count = byDate.get(iso) ?? 0;
+    if (count > 0) streak += 1;
+    else if (streak > 0 || iso !== new Date().toISOString().split("T")[0]) break;
+    d.setDate(d.getDate() - 1);
+  }
+  return streak;
+}
 
 function flattenWorkspaces(folders: Folder[], root: Workspace[]): Workspace[] {
   const all: Workspace[] = [...root];
@@ -31,14 +46,20 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [folders, setFolders] = useState<Folder[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
+  const [dailyActivity, setDailyActivity] = useState<DailyActivityPoint[]>([]);
+  const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
 
-  useEffect(() => {
+  const loadTree = () =>
     fetchWorkspaceTree()
       .then((tree) => {
         setFolders(tree.folders);
         setRootWorkspaces(tree.rootWorkspaces);
       })
       .catch(() => {});
+
+  useEffect(() => {
+    loadTree();
+    fetchActivityCalendar().then(setDailyActivity).catch(() => {});
   }, []);
 
   const allWorkspaces = useMemo(
@@ -65,8 +86,10 @@ export default function HomePage() {
     0,
   );
 
+  const streak = useMemo(() => computeStreak(dailyActivity), [dailyActivity]);
+
   const lastSevenDays = useMemo(() => {
-    const byDate = new Map(mockDailyActivity.map((d) => [d.date, d.count]));
+    const byDate = new Map(dailyActivity.map((d) => [d.date, d.count]));
     return Array.from({ length: 7 }, (_, i) => {
       const d = new Date();
       d.setDate(d.getDate() - (6 - i));
@@ -77,7 +100,7 @@ export default function HomePage() {
         isToday: i === 6,
       };
     });
-  }, []);
+  }, [dailyActivity]);
 
   const maxWeekCount = Math.max(1, ...lastSevenDays.map((d) => d.count));
 
@@ -176,7 +199,7 @@ export default function HomePage() {
           <h2 className="text-sm font-semibold mb-3">Study overview</h2>
           <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
             <div className="rounded-xl border border-border bg-card p-4">
-              <StudyCalendar dailyActivity={mockDailyActivity} />
+              <StudyCalendar dailyActivity={dailyActivity} />
             </div>
             <div className="rounded-xl border border-border bg-card p-4 flex flex-col">
               <div className="flex flex-1 flex-col">
@@ -185,7 +208,9 @@ export default function HomePage() {
                   <div className="flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1">
                     <StreakFlame className="h-5 w-5" />
                     <p className="text-[12px] font-semibold text-amber-700">
-                      <span className="text-sm font-bold tabular-nums">6</span>{" "}
+                      <span className="text-sm font-bold tabular-nums">
+                        {streak}
+                      </span>{" "}
                       day streak
                     </p>
                   </div>
@@ -229,13 +254,13 @@ export default function HomePage() {
                   {
                     label: "Active days",
                     value: String(
-                      mockDailyActivity.filter((d) => d.count > 0).length,
+                      dailyActivity.filter((d) => d.count > 0).length,
                     ),
                   },
                   {
                     label: "Sessions logged",
                     value: String(
-                      mockDailyActivity.reduce((s, d) => s + d.count, 0),
+                      dailyActivity.reduce((s, d) => s + d.count, 0),
                     ),
                   },
                   { label: "Active plans", value: String(activeSessions.length) },
@@ -297,6 +322,7 @@ export default function HomePage() {
               </h2>
               <button
                 type="button"
+                onClick={() => setCreating("folder")}
                 className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground rounded-lg px-2 py-1 hover:bg-muted"
               >
                 <Plus className="h-3.5 w-3.5" />
@@ -314,9 +340,19 @@ export default function HomePage() {
             </div>
             {rootWorkspaces.length > 0 && (
               <div className="mt-6">
-                <h2 className="text-sm font-semibold text-foreground mb-3">
-                  Workspaces
-                </h2>
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-sm font-semibold text-foreground">
+                    Workspaces
+                  </h2>
+                  <button
+                    type="button"
+                    onClick={() => setCreating("workspace")}
+                    className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground rounded-lg px-2 py-1 hover:bg-muted"
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                    New workspace
+                  </button>
+                </div>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {rootWorkspaces.map((ws) => (
                     <WorkspaceCard
@@ -329,6 +365,17 @@ export default function HomePage() {
               </div>
             )}
           </section>
+        )}
+
+        {creating && (
+          <CreateResourceDialog
+            kind={creating}
+            onClose={() => setCreating(null)}
+            onCreated={(workspaceId) => {
+              if (workspaceId) router.push(`/workspace/${workspaceId}`);
+              else loadTree();
+            }}
+          />
         )}
       </main>
     </div>

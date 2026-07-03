@@ -1,10 +1,8 @@
 import { api } from "./trpc-client";
-import { isLiveApi } from "./config";
 
 /**
  * Data layer for the copilot chat, backed by the server's `copilot` tRPC
- * router (conversations persisted per workspace). Demo mode falls back to
- * the scripted responses in copilot-script.ts.
+ * router (conversations persisted per workspace).
  */
 
 export interface CopilotConversation {
@@ -15,7 +13,6 @@ export interface CopilotConversation {
 export async function listConversations(
   workspaceId: string,
 ): Promise<CopilotConversation[]> {
-  if (!isLiveApi) return [];
   const rows = await api.copilot.listConversations.query({ workspaceId });
   return rows.map((r) => ({ id: r.id, title: r.title }));
 }
@@ -24,9 +21,6 @@ export async function createConversation(
   workspaceId: string,
   title?: string,
 ): Promise<CopilotConversation> {
-  if (!isLiveApi) {
-    return { id: `local-${Date.now()}`, title: title ?? "New chat" };
-  }
   const row = await api.copilot.createConversation.mutate({
     workspaceId,
     title,
@@ -52,5 +46,3 @@ export async function askCopilot(input: {
   });
   return result.answer;
 }
-
-export { isLiveApi as isLiveCopilot };

@@ -51,7 +51,21 @@ export interface SessionActivity {
   status: ActivityStatus;
   estimatedMinutes: number;
   timeSpentSeconds?: number;
+  highlights?: SessionHighlight[];
   meta?: Record<string, unknown>;
+}
+
+/** A persisted reading highlight (studySession.addHighlight). */
+export interface SessionHighlight {
+  id: string;
+  activityId: string;
+  text: string;
+  color: string;
+  note?: string;
+  paragraph: number;
+  startChar: number;
+  endChar: number;
+  createdAt: string;
 }
 
 export type ActivityContent =

@@ -1,4 +1,3 @@
-import { isLiveApi } from "./config";
 import {
   studySessionApi,
   mapSession,
@@ -7,11 +6,6 @@ import {
   depthToApi,
   type ApiArtifactKind,
 } from "./study-session";
-import {
-  getSession,
-  getWorkspace,
-  planExtensionActivities,
-} from "@/lib/mock-data";
 import type {
   ActivityContent,
   ActivityStatus,
@@ -19,20 +13,16 @@ import type {
   ExamBoard,
   SessionActivity,
   SessionDepth,
+  SessionHighlight,
   SessionNote,
   StudySession,
 } from "@/types";
 
-/**
- * Data layer for study sessions. Talks to goscribe/server when
- * NEXT_PUBLIC_API_URL is configured; otherwise serves the demo mock data so
- * the prototype runs standalone.
- */
+/** Data layer for study sessions (goscribe/server studySession router). */
 
 export async function fetchStudySessions(
   workspaceId: string,
 ): Promise<StudySession[]> {
-  if (!isLiveApi) return getWorkspace(workspaceId)?.sessions ?? [];
   const rows = await studySessionApi.list(workspaceId);
   return rows.map(mapSession);
 }
@@ -40,7 +30,6 @@ export async function fetchStudySessions(
 export async function fetchStudySession(
   id: string,
 ): Promise<StudySession | undefined> {
-  if (!isLiveApi) return getSession(id);
   return mapSession(await studySessionApi.get(id));
 }
 
@@ -58,10 +47,6 @@ export interface CreateSessionInput {
 export async function createStudySession(
   input: CreateSessionInput,
 ): Promise<StudySession | undefined> {
-  if (!isLiveApi) {
-    // Demo mode: sessions aren't persisted; land on the sample session.
-    return getWorkspace(input.workspaceId)?.sessions[0];
-  }
   const row = await studySessionApi.create({
     ...input,
     depth: depthToApi[input.depth],
@@ -74,7 +59,6 @@ export async function setActivityStatus(
   status: ActivityStatus,
   timeSpentSeconds?: number,
 ): Promise<void> {
-  if (!isLiveApi) return;
   await studySessionApi.updateActivityStatus(
     activityId,
     statusToApi[status],
@@ -86,14 +70,6 @@ export async function addSessionNote(
   sessionId: string,
   content: string,
 ): Promise<SessionNote> {
-  if (!isLiveApi) {
-    // Demo mode: notes live in component state only.
-    return {
-      id: `note-${Date.now()}`,
-      content,
-      createdAt: new Date().toISOString(),
-    };
-  }
   const row = await studySessionApi.addComment(sessionId, content);
   return {
     id: row.id,
@@ -103,8 +79,54 @@ export async function addSessionNote(
 }
 
 export async function removeSessionNote(noteId: string): Promise<void> {
-  if (!isLiveApi) return;
   await studySessionApi.removeComment(noteId);
+}
+
+export async function addReadingHighlight(input: {
+  activityId: string;
+  text: string;
+  color: string;
+  note?: string;
+  paragraph?: number;
+  startChar?: number;
+  endChar?: number;
+}): Promise<SessionHighlight> {
+  const row = await studySessionApi.addHighlight(input);
+  return {
+    id: row.id,
+    activityId: row.activityId,
+    text: row.text,
+    color: row.color,
+    note: row.note ?? undefined,
+    paragraph: row.paragraph,
+    startChar: row.startChar,
+    endChar: row.endChar,
+    createdAt: row.createdAt.toISOString(),
+  };
+}
+
+export async function updateReadingHighlight(
+  highlightId: string,
+  input: { note?: string | null; color?: string },
+): Promise<void> {
+  await studySessionApi.updateHighlight({ highlightId, ...input });
+}
+
+export async function removeReadingHighlight(
+  highlightId: string,
+): Promise<void> {
+  await studySessionApi.removeHighlight(highlightId);
+}
+
+export interface DailyActivityPoint {
+  date: string;
+  count: number;
+}
+
+export async function fetchActivityCalendar(
+  days = 180,
+): Promise<DailyActivityPoint[]> {
+  return studySessionApi.activityCalendar(days);
 }
 
 const activityTypeFromKind: Record<ApiArtifactKind, ActivityType> = {
@@ -118,18 +140,14 @@ const activityTypeFromKind: Record<ApiArtifactKind, ActivityType> = {
 };
 
 /**
- * Precomputed activities offered when the learner nears the end of a plan.
- * Live mode pulls a balanced mix from the workspace's artifact bank
- * (studySession.pullFromBank); demo mode serves the sample extension set.
+ * Precomputed activities offered when the learner nears the end of a plan —
+ * a balanced mix pulled from the workspace's artifact bank.
  */
 export async function fetchExtensionActivities(
   workspaceId: string,
   sessionId: string,
   startOrder: number,
 ): Promise<SessionActivity[]> {
-  if (!isLiveApi) {
-    return planExtensionActivities.filter((a) => a.sessionId === sessionId);
-  }
   const items = await studySessionApi.pullFromBank({
     workspaceId,
     count: 3,
@@ -153,7 +171,6 @@ export async function appendActivities(
   sessionId: string,
   activities: SessionActivity[],
 ): Promise<void> {
-  if (!isLiveApi) return;
   await studySessionApi.addActivities(
     sessionId,
     activities.map((a) => ({

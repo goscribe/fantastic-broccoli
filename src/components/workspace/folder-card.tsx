@@ -1,7 +1,7 @@
 "use client";
 
 import { Folder } from "@/types";
-import { countWorkspaces } from "@/lib/mock-data";
+import { countWorkspaces } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 
 interface FolderCardProps {

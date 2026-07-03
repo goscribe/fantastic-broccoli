@@ -13,6 +13,8 @@ import {
   type AccountSummary,
 } from "@/lib/api/account";
 import { Folder as FolderType, Workspace } from "@/types";
+import { CreateResourceDialog } from "@/components/workspace/create-dialog";
+import { CommandPalette } from "@/components/layout/command-palette";
 import { cn } from "@/lib/utils";
 import {
   Home,
@@ -30,11 +32,13 @@ function FolderNode({
   depth,
   expanded,
   toggle,
+  onNewInFolder,
 }: {
   folder: FolderType;
   depth: number;
   expanded: Record<string, boolean>;
   toggle: (id: string) => void;
+  onNewInFolder: (folderId: string) => void;
 }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -80,7 +84,14 @@ function FolderNode({
           </svg>
           <span className="truncate">{folder.name}</span>
         </button>
-        <Plus className="ml-auto h-3.5 w-3.5 shrink-0 text-faint opacity-0 group-hover:opacity-100" />
+        <button
+          type="button"
+          aria-label={`New workspace in ${folder.name}`}
+          onClick={() => onNewInFolder(folder.id)}
+          className="ml-auto shrink-0 rounded p-0.5 -m-0.5 text-faint opacity-0 hover:bg-border group-hover:opacity-100"
+        >
+          <Plus className="h-3.5 w-3.5" />
+        </button>
       </div>
 
       {isOpen && (
@@ -92,6 +103,7 @@ function FolderNode({
               depth={depth + 1}
               expanded={expanded}
               toggle={toggle}
+              onNewInFolder={onNewInFolder}
             />
           ))}
           {folder.workspaces.map((ws) => {
@@ -133,19 +145,39 @@ export function Sidebar({
   const [folders, setFolders] = useState<FolderType[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [summary, setSummary] = useState<AccountSummary | null>(null);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [creating, setCreating] = useState<{
+    kind: "folder" | "workspace";
+    parentId?: string;
+  } | null>(null);
+  const router = useRouter();
   const toggle = (id: string) =>
     setExpanded((prev) => ({ ...prev, [id]: !(prev[id] ?? true) }));
 
-  useEffect(() => {
+  const loadTree = () =>
     fetchWorkspaceTree()
       .then((tree) => {
         setFolders(tree.folders);
         setRootWorkspaces(tree.rootWorkspaces);
       })
       .catch(() => {});
+
+  useEffect(() => {
+    loadTree();
     fetchAccountSummary()
       .then(setSummary)
       .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setPaletteOpen((v) => !v);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
   useEffect(() => {
@@ -178,6 +210,7 @@ export function Sidebar({
       <div className="px-3">
         <button
           type="button"
+          onClick={() => setPaletteOpen(true)}
           className="w-full flex items-center gap-2 rounded-md border border-border bg-card px-2.5 py-1.5 text-[13px] text-faint hover:border-border-strong"
         >
           <Search className="h-3.5 w-3.5" />
@@ -222,6 +255,7 @@ export function Sidebar({
               <button
                 type="button"
                 aria-label="New folder"
+                onClick={() => setCreating({ kind: "folder" })}
                 className="p-0.5 rounded text-faint hover:text-foreground hover:bg-muted"
               >
                 <Plus className="h-3.5 w-3.5" />
@@ -235,6 +269,9 @@ export function Sidebar({
                   depth={0}
                   expanded={expanded}
                   toggle={toggle}
+                  onNewInFolder={(folderId) =>
+                    setCreating({ kind: "workspace", parentId: folderId })
+                  }
                 />
               ))}
               {rootWorkspaces.map((ws) => {
@@ -315,6 +352,25 @@ export function Sidebar({
           </div>
         )}
       </div>
+
+      <CommandPalette
+        open={paletteOpen}
+        onClose={() => setPaletteOpen(false)}
+        folders={folders}
+        rootWorkspaces={rootWorkspaces}
+      />
+
+      {creating && (
+        <CreateResourceDialog
+          kind={creating.kind}
+          parentId={creating.parentId}
+          onClose={() => setCreating(null)}
+          onCreated={(workspaceId) => {
+            if (workspaceId) router.push(`/workspace/${workspaceId}`);
+            else loadTree();
+          }}
+        />
+      )}
     </aside>
   );
 }

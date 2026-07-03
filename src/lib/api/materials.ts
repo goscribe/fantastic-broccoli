@@ -1,5 +1,4 @@
 import { api } from "./trpc-client";
-import { isLiveApi } from "./config";
 
 /**
  * Upload system: request signed Supabase Storage URLs from the server, PUT
@@ -28,10 +27,6 @@ export async function uploadFiles(
   workspaceId: string,
   files: File[],
 ): Promise<string[]> {
-  if (!isLiveApi) {
-    throw new Error("Uploads require a configured backend (NEXT_PUBLIC_API_URL).");
-  }
-
   const result = (await api.workspace.uploadFiles.mutate({
     id: workspaceId,
     files: files.map((f) => ({
@@ -62,7 +57,6 @@ export async function analyzeFiles(
   workspaceId: string,
   fileIds: string[],
 ): Promise<void> {
-  if (!isLiveApi) return;
   await api.workspace.uploadAndAnalyzeMedia.mutate({
     workspaceId,
     files: fileIds.map((id) => ({ id })),
@@ -74,7 +68,7 @@ export async function analyzeFiles(
 
 /**
  * Subscribe to live analysis progress for a workspace. Returns an
- * unsubscribe function. No-op in demo mode or without Pusher config.
+ * unsubscribe function. No-op without Pusher config.
  */
 export function subscribeAnalysisProgress(
   workspaceId: string,
@@ -82,7 +76,7 @@ export function subscribeAnalysisProgress(
 ): () => void {
   const key = process.env.NEXT_PUBLIC_PUSHER_KEY;
   const cluster = process.env.NEXT_PUBLIC_PUSHER_CLUSTER;
-  if (!isLiveApi || !key || !cluster) return () => {};
+  if (!key || !cluster) return () => {};
 
   let cleanup: (() => void) | undefined;
   let cancelled = false;

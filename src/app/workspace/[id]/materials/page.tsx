@@ -10,7 +10,6 @@ import {
   uploadFiles,
   type AnalysisProgress,
 } from "@/lib/api/materials";
-import { isLiveApi } from "@/lib/api/config";
 import { Material, MaterialType } from "@/types";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { Card, Surface } from "@/components/ui/card";
@@ -226,12 +225,6 @@ export default function WorkspaceMaterialsPage() {
   const handleUpload = async (files: FileList | null) => {
     if (!files?.length) return;
     setUploadError(null);
-    if (!isLiveApi) {
-      setUploadError(
-        "Uploads require a configured backend (NEXT_PUBLIC_API_URL).",
-      );
-      return;
-    }
     setUploading(true);
     try {
       const fileIds = await uploadFiles(workspaceId, Array.from(files));

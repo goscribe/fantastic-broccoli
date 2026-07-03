@@ -1,5 +1,13 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import type { Folder } from "@/types";
+
+export function countWorkspaces(folder: Folder): number {
+  return (
+    folder.workspaces.length +
+    (folder.folders?.reduce((sum, f) => sum + countWorkspaces(f), 0) ?? 0)
+  );
+}
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

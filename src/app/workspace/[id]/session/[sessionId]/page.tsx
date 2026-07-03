@@ -149,12 +149,20 @@ export default function SessionDetailPage() {
   const notes = [...(session?.comments ?? []), ...localNotes].filter(
     (n) => !removedNoteIds.has(n.id),
   );
-  const highlightEntries = activities.flatMap((a) =>
-    (highlightsByActivity[a.id] ?? []).map((h) => ({
-      ...h,
-      activityTitle: a.title,
-    })),
-  );
+  const highlightEntries = activities.flatMap((a) => {
+    const live = highlightsByActivity[a.id];
+    const entries: ReadingHighlight[] =
+      live ??
+      (a.highlights ?? []).map((h) => ({
+        id: h.id,
+        text: h.text,
+        color: (h.color in highlightDotClasses
+          ? h.color
+          : "green") as ReadingHighlight["color"],
+        note: h.note,
+      }));
+    return entries.map((h) => ({ ...h, activityTitle: a.title }));
+  });
   const panelCount = notes.length + highlightEntries.length;
 
   const submitNote = () => {
@@ -227,6 +235,8 @@ export default function SessionDetailPage() {
         return (
           <ReadingActivity
             content={activity.content as ReadingContent}
+            activityId={activity.id}
+            initialHighlights={activity.highlights}
             onComplete={() => goToNext()}
             onHighlightsChange={(hs) =>
               setHighlightsByActivity((prev) => ({ ...prev, [activity.id]: hs }))

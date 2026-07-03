@@ -18,7 +18,6 @@ import {
   createConversation,
   listConversations,
 } from "@/lib/api/copilot";
-import { isLiveApi } from "@/lib/api/config";
 
 let idCounter = 0;
 const nextId = () => `m-${++idCounter}-${Date.now()}`;
@@ -44,7 +43,7 @@ export function Copilot({
   const [activeChat, setActiveChat] = useState("1");
 
   useEffect(() => {
-    if (!isLiveApi || !workspaceId) return;
+    if (!workspaceId) return;
     listConversations(workspaceId)
       .then((rows) => {
         if (rows.length > 0) {
@@ -196,7 +195,7 @@ export function Copilot({
         userMsg,
         { id: assistantId, chatId: activeChat, role: "assistant", parts: [] },
       ]);
-      if (isLiveApi && workspaceId) {
+      if (workspaceId) {
         try {
           const answer = await askCopilot({
             workspaceId,
@@ -251,7 +250,7 @@ export function Copilot({
   );
 
   const newChat = async () => {
-    if (isLiveApi && workspaceId) {
+    if (workspaceId) {
       try {
         const conv = await createConversation(workspaceId);
         setChats((prev) => [...prev, conv]);

@@ -1,17 +1,7 @@
 import { api } from "./trpc-client";
-import { isLiveApi } from "./config";
-import {
-  mockFolders,
-  mockSharedWorkspaces,
-  mockWorkspaces,
-  getWorkspace as getMockWorkspace,
-} from "@/lib/mock-data";
 import type { Folder, Material, MaterialType, Workspace } from "@/types";
 
-/**
- * Data layer for workspaces, folders, and materials. Talks to goscribe/server
- * when NEXT_PUBLIC_API_URL is configured; otherwise serves the demo mock data.
- */
+/** Data layer for workspaces, folders, and materials (goscribe/server). */
 
 interface TreeFolderRow {
   id: string;
@@ -117,12 +107,6 @@ export interface WorkspaceTree {
 }
 
 export async function fetchWorkspaceTree(): Promise<WorkspaceTree> {
-  if (!isLiveApi) {
-    return {
-      folders: mockFolders,
-      rootWorkspaces: mockWorkspaces.filter((w) => !w.folderId),
-    };
-  }
   const { folders, workspaces } = await api.workspace.getTree.query();
   const mapped = (workspaces as TreeWorkspaceRow[]).map(mapWorkspace);
   const { tree, rootWorkspaces } = buildFolderTree(
@@ -133,7 +117,6 @@ export async function fetchWorkspaceTree(): Promise<WorkspaceTree> {
 }
 
 export async function fetchSharedWorkspaces(): Promise<Workspace[]> {
-  if (!isLiveApi) return mockSharedWorkspaces;
   const { shared } = await api.workspace.getSharedWith.query({ id: "me" });
   return (shared as unknown as TreeWorkspaceRow[]).map((row) => ({
     ...mapWorkspace({ ...row, uploads: row.uploads ?? [] }),
@@ -142,7 +125,6 @@ export async function fetchSharedWorkspaces(): Promise<Workspace[]> {
 }
 
 export async function fetchWorkspace(id: string): Promise<Workspace | undefined> {
-  if (!isLiveApi) return getMockWorkspace(id);
   const row = await api.workspace.get.query({ id });
   if (!row) return undefined;
   return mapWorkspace(row as unknown as TreeWorkspaceRow);
@@ -152,7 +134,6 @@ export async function createFolder(
   name: string,
   parentId?: string,
 ): Promise<void> {
-  if (!isLiveApi) return;
   await api.workspace.createFolder.mutate({ name, parentId });
 }
 
@@ -160,7 +141,6 @@ export async function createWorkspace(
   name: string,
   parentId?: string,
 ): Promise<string | undefined> {
-  if (!isLiveApi) return undefined;
   const ws = await api.workspace.create.mutate({ name, parentId });
   return (ws as { id: string }).id;
 }

@@ -7,6 +7,7 @@ import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import type { Folder } from "@/types";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
+import { CreateResourceDialog } from "@/components/workspace/create-dialog";
 import { ChevronRight, Plus } from "lucide-react";
 
 function findFolderPath(folders: Folder[], id: string): Folder[] | null {
@@ -27,12 +28,17 @@ export default function FolderPage({
   const router = useRouter();
   const [path, setPath] = useState<Folder[] | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
 
-  useEffect(() => {
+  const loadTree = () =>
     fetchWorkspaceTree()
       .then((tree) => setPath(findFolderPath(tree.folders, id)))
       .catch(() => {})
       .finally(() => setLoaded(true));
+
+  useEffect(() => {
+    loadTree();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const folder = path?.[path.length - 1];
@@ -93,6 +99,7 @@ export default function FolderPage({
               </h2>
               <button
                 type="button"
+                onClick={() => setCreating("folder")}
                 className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground rounded-lg px-2 py-1 hover:bg-muted"
               >
                 <Plus className="h-3.5 w-3.5" />
@@ -118,6 +125,7 @@ export default function FolderPage({
             </h2>
             <button
               type="button"
+              onClick={() => setCreating("workspace")}
               className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground rounded-lg px-2 py-1 hover:bg-muted"
             >
               <Plus className="h-3.5 w-3.5" />
@@ -140,6 +148,18 @@ export default function FolderPage({
             </p>
           )}
         </section>
+
+        {creating && (
+          <CreateResourceDialog
+            kind={creating}
+            parentId={folder.id}
+            onClose={() => setCreating(null)}
+            onCreated={(workspaceId) => {
+              if (workspaceId) router.push(`/workspace/${workspaceId}`);
+              else loadTree();
+            }}
+          />
+        )}
       </main>
     </div>
   );

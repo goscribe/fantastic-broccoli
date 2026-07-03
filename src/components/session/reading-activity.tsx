@@ -1,7 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ReadingContent } from "@/types";
+import { ReadingContent, SessionHighlight } from "@/types";
+import {
+  addReadingHighlight,
+  removeReadingHighlight,
+  updateReadingHighlight,
+} from "@/lib/api/study";
 import { Button } from "@/components/ui/button";
 import { InteractiveWidget, WidgetId, widgetRegistry } from "@/components/interactive";
 import { cn } from "@/lib/utils";
@@ -31,7 +36,7 @@ export const highlightDotClasses: Record<HighlightColor, string> = {
 };
 
 interface Highlight {
-  id: number;
+  id: string;
   para: number;
   start: number;
   end: number;
@@ -39,7 +44,21 @@ interface Highlight {
   note?: string;
 }
 
-let highlightId = 0;
+const isColor = (c: string): c is HighlightColor =>
+  c === "amber" || c === "green" || c === "purple";
+
+function fromPersisted(h: SessionHighlight): Highlight {
+  return {
+    id: h.id,
+    para: h.paragraph,
+    start: h.startChar,
+    end: h.endChar,
+    color: isColor(h.color) ? h.color : "green",
+    note: h.note,
+  };
+}
+
+let tempId = 0;
 
 function offsetWithin(paraEl: HTMLElement, node: Node, offset: number): number {
   let total = 0;
@@ -101,17 +120,23 @@ function ParagraphView({
 
 interface ReadingActivityProps {
   content: ReadingContent;
+  activityId: string;
+  initialHighlights?: SessionHighlight[];
   onComplete: () => void;
   onHighlightsChange?: (highlights: ReadingHighlight[]) => void;
 }
 
 export function ReadingActivity({
   content,
+  activityId,
+  initialHighlights,
   onComplete,
   onHighlightsChange,
 }: ReadingActivityProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [highlights, setHighlights] = useState<Highlight[]>([]);
+  const [highlights, setHighlights] = useState<Highlight[]>(() =>
+    (initialHighlights ?? []).map(fromPersisted),
+  );
   const [selectionMenu, setSelectionMenu] = useState<{
     x: number;
     y: number;
@@ -131,7 +156,7 @@ export function ReadingActivity({
   useEffect(() => {
     onHighlightsChange?.(
       highlights.map((h) => ({
-        id: String(h.id),
+        id: h.id,
         text: blocks[h.para]?.slice(h.start, h.end) ?? "",
         color: h.color,
         note: h.note,
@@ -176,18 +201,31 @@ export function ReadingActivity({
 
   const addHighlight = (color: HighlightColor) => {
     if (!selectionMenu) return;
+    const { para, start, end } = selectionMenu;
+    const localId = `local-${++tempId}`;
     setHighlights((prev) => [
       ...prev,
-      {
-        id: ++highlightId,
-        para: selectionMenu.para,
-        start: selectionMenu.start,
-        end: selectionMenu.end,
-        color,
-      },
+      { id: localId, para, start, end, color },
     ]);
     setSelectionMenu(null);
     window.getSelection()?.removeAllRanges();
+
+    addReadingHighlight({
+      activityId,
+      text: blocks[para]?.slice(start, end) ?? "",
+      color,
+      paragraph: para,
+      startChar: start,
+      endChar: end,
+    })
+      .then((saved) => {
+        setHighlights((prev) =>
+          prev.map((h) => (h.id === localId ? { ...h, id: saved.id } : h)),
+        );
+      })
+      .catch(() => {
+        setHighlights((prev) => prev.filter((h) => h.id !== localId));
+      });
   };
 
   const openHighlight = (h: Highlight, rect: DOMRect) => {
@@ -274,10 +312,12 @@ export function ReadingActivity({
               <button
                 type="button"
                 onClick={() => {
-                  setHighlights((prev) =>
-                    prev.filter((h) => h.id !== activeHighlight.highlight.id),
-                  );
+                  const { id } = activeHighlight.highlight;
+                  setHighlights((prev) => prev.filter((h) => h.id !== id));
                   setActiveHighlight(null);
+                  if (!id.startsWith("local-")) {
+                    removeReadingHighlight(id).catch(() => {});
+                  }
                 }}
                 className="flex items-center gap-1 text-[11px] text-rose hover:opacity-80"
               >
@@ -286,14 +326,18 @@ export function ReadingActivity({
               <button
                 type="button"
                 onClick={() => {
+                  const { id } = activeHighlight.highlight;
                   setHighlights((prev) =>
                     prev.map((h) =>
-                      h.id === activeHighlight.highlight.id
-                        ? { ...h, note: noteDraft || undefined }
-                        : h,
+                      h.id === id ? { ...h, note: noteDraft || undefined } : h,
                     ),
                   );
                   setActiveHighlight(null);
+                  if (!id.startsWith("local-")) {
+                    updateReadingHighlight(id, {
+                      note: noteDraft || null,
+                    }).catch(() => {});
+                  }
                 }}
                 className="text-[11px] font-semibold text-accent hover:opacity-80"
               >
