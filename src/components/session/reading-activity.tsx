@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ReadingContent } from "@/types";
 import { Button } from "@/components/ui/button";
 import { InteractiveWidget, WidgetId, widgetRegistry } from "@/components/interactive";
@@ -9,7 +9,14 @@ import { BookOpen, ArrowRight, Highlighter, Trash2 } from "lucide-react";
 
 const WIDGET_TOKEN = /^\[\[widget:([a-z-]+)\]\]$/;
 
-type HighlightColor = "amber" | "green" | "purple";
+export type HighlightColor = "amber" | "green" | "purple";
+
+export interface ReadingHighlight {
+  id: string;
+  text: string;
+  color: HighlightColor;
+  note?: string;
+}
 
 const colorClasses: Record<HighlightColor, string> = {
   amber: "bg-amber/25",
@@ -17,7 +24,7 @@ const colorClasses: Record<HighlightColor, string> = {
   purple: "bg-accent/15",
 };
 
-const colorDots: Record<HighlightColor, string> = {
+export const highlightDotClasses: Record<HighlightColor, string> = {
   amber: "bg-amber",
   green: "bg-energy",
   purple: "bg-accent",
@@ -95,9 +102,14 @@ function ParagraphView({
 interface ReadingActivityProps {
   content: ReadingContent;
   onComplete: () => void;
+  onHighlightsChange?: (highlights: ReadingHighlight[]) => void;
 }
 
-export function ReadingActivity({ content, onComplete }: ReadingActivityProps) {
+export function ReadingActivity({
+  content,
+  onComplete,
+  onHighlightsChange,
+}: ReadingActivityProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [highlights, setHighlights] = useState<Highlight[]>([]);
   const [selectionMenu, setSelectionMenu] = useState<{
@@ -115,6 +127,18 @@ export function ReadingActivity({ content, onComplete }: ReadingActivityProps) {
   const [noteDraft, setNoteDraft] = useState("");
 
   const blocks = content.text.split("\n\n");
+
+  useEffect(() => {
+    onHighlightsChange?.(
+      highlights.map((h) => ({
+        id: String(h.id),
+        text: blocks[h.para]?.slice(h.start, h.end) ?? "",
+        color: h.color,
+        note: h.note,
+      })),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [highlights]);
 
   const handleMouseUp = useCallback(() => {
     const sel = window.getSelection();
@@ -219,7 +243,7 @@ export function ReadingActivity({ content, onComplete }: ReadingActivityProps) {
             className="absolute z-20 flex items-center gap-1.5 rounded-full border border-border bg-card px-2 py-1.5 shadow-soft-lg -translate-x-1/2 -translate-y-full -mt-2"
             style={{ left: selectionMenu.x, top: selectionMenu.y }}
           >
-            {(Object.keys(colorDots) as HighlightColor[]).map((color) => (
+            {(Object.keys(highlightDotClasses) as HighlightColor[]).map((color) => (
               <button
                 key={color}
                 type="button"
@@ -227,7 +251,7 @@ export function ReadingActivity({ content, onComplete }: ReadingActivityProps) {
                 onClick={() => addHighlight(color)}
                 className={cn(
                   "h-5 w-5 rounded-full hover:scale-110 transition-transform",
-                  colorDots[color],
+                  highlightDotClasses[color],
                 )}
               />
             ))}

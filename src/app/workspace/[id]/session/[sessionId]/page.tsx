@@ -26,7 +26,11 @@ import {
 import { ActivityItem } from "@/components/session/activity-item";
 import { ComprehensionActivity } from "@/components/session/comprehension-activity";
 import { McqActivity } from "@/components/session/mcq-activity";
-import { ReadingActivity } from "@/components/session/reading-activity";
+import {
+  ReadingActivity,
+  ReadingHighlight,
+  highlightDotClasses,
+} from "@/components/session/reading-activity";
 import { FlashcardActivity } from "@/components/session/flashcard-activity";
 import { VocabRecallActivity } from "@/components/session/vocab-recall-activity";
 import { ClozeActivity } from "@/components/session/cloze-activity";
@@ -87,6 +91,9 @@ export default function SessionDetailPage() {
   const [removedNoteIds, setRemovedNoteIds] = useState<Set<string>>(
     new Set(),
   );
+  const [highlightsByActivity, setHighlightsByActivity] = useState<
+    Record<string, ReadingHighlight[]>
+  >({});
   const [extended, setExtended] = useState(false);
   const [extendDismissed, setExtendDismissed] = useState(false);
 
@@ -132,6 +139,13 @@ export default function SessionDetailPage() {
   const notes = [...(session?.comments ?? []), ...localNotes].filter(
     (n) => !removedNoteIds.has(n.id),
   );
+  const highlightEntries = activities.flatMap((a) =>
+    (highlightsByActivity[a.id] ?? []).map((h) => ({
+      ...h,
+      activityTitle: a.title,
+    })),
+  );
+  const panelCount = notes.length + highlightEntries.length;
 
   const submitNote = () => {
     const content = newComment.trim();
@@ -204,6 +218,9 @@ export default function SessionDetailPage() {
           <ReadingActivity
             content={activity.content as ReadingContent}
             onComplete={() => goToNext()}
+            onHighlightsChange={(hs) =>
+              setHighlightsByActivity((prev) => ({ ...prev, [activity.id]: hs }))
+            }
           />
         );
       case "comprehension_check":
@@ -309,9 +326,9 @@ export default function SessionDetailPage() {
               className="relative p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
             >
               <MessageSquare className="h-4 w-4" />
-              {notes.length > 0 && (
+              {panelCount > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-accent text-[9px] font-bold text-accent-foreground flex items-center justify-center">
-                  {notes.length}
+                  {panelCount}
                 </span>
               )}
             </button>
@@ -457,6 +474,37 @@ export default function SessionDetailPage() {
             </button>
           </div>
           <div className="flex-1 overflow-y-auto p-4 space-y-2">
+            {highlightEntries.length > 0 && (
+              <div className="space-y-2 pb-2">
+                <p className="text-xs font-semibold text-muted-foreground">
+                  Highlights
+                </p>
+                {highlightEntries.map((h) => (
+                  <div
+                    key={h.id}
+                    className="p-3 rounded-xl bg-card text-sm border border-border"
+                  >
+                    <div className="flex items-start gap-2">
+                      <span
+                        className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${highlightDotClasses[h.color]}`}
+                      />
+                      <p className="italic">&ldquo;{h.text}&rdquo;</p>
+                    </div>
+                    {h.note && (
+                      <p className="mt-1.5 text-xs text-foreground/80 pl-4">
+                        {h.note}
+                      </p>
+                    )}
+                    <p className="mt-1.5 text-[11px] text-muted-foreground pl-4">
+                      {h.activityTitle}
+                    </p>
+                  </div>
+                ))}
+                <p className="text-xs font-semibold text-muted-foreground pt-2">
+                  Notes
+                </p>
+              </div>
+            )}
             {notes.map((note) => (
               <div
                 key={note.id}
@@ -478,12 +526,12 @@ export default function SessionDetailPage() {
                 </div>
               </div>
             ))}
-            {notes.length === 0 && (
+            {panelCount === 0 && (
               <div className="text-center py-8">
                 <p className="text-sm font-medium">No notes yet</p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Jot down reminders while you study — they stay with this
-                  session.
+                  Jot down reminders or highlight the reading — both show up
+                  here.
                 </p>
               </div>
             )}
