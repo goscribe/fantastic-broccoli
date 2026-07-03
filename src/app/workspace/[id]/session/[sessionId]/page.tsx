@@ -2,11 +2,14 @@
 
 import { useState, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getWorkspace, planExtensionActivities } from "@/lib/mock-data";
 import {
-  getSessionWithActivities,
-  getWorkspace,
-  planExtensionActivities,
-} from "@/lib/mock-data";
+  addSessionComment,
+  appendActivities,
+  fetchStudySession,
+  setActivityStatus,
+} from "@/lib/api/study";
 import {
   SessionActivity,
   ComprehensionContent,
@@ -56,25 +59,28 @@ export default function SessionDetailPage() {
   const sessionId = params.sessionId as string;
 
   const workspace = getWorkspace(workspaceId);
-  const session = getSessionWithActivities(sessionId);
+  const queryClient = useQueryClient();
+  const { data: session, isLoading } = useQuery({
+    queryKey: ["study-session", sessionId],
+    queryFn: () => fetchStudySession(sessionId),
+  });
 
-  const [activeActivityId, setActiveActivityId] = useState<string | null>(
-    () => {
-      if (!session) return null;
-      const inProgress = session.activities.find(
-        (a) => a.status === "in_progress",
-      );
-      if (inProgress) return inProgress.id;
-      const firstPending = session.activities.find(
-        (a) => a.status === "pending",
-      );
-      return firstPending?.id ?? null;
-    },
-  );
+  // undefined = not chosen yet (default to first unfinished); null = plan done (debrief)
+  const [chosenActivityId, setChosenActivityId] = useState<
+    string | null | undefined
+  >(undefined);
+  const activeActivityId =
+    chosenActivityId !== undefined
+      ? chosenActivityId
+      : (session?.activities.find((a) => a.status === "in_progress")?.id ??
+        session?.activities.find((a) => a.status === "pending")?.id ??
+        null);
+  const setActiveActivityId = setChosenActivityId;
 
   const [showComments, setShowComments] = useState(false);
   const [copilotOpen, setCopilotOpen] = useState(true);
   const [newComment, setNewComment] = useState("");
+  const [localComments, setLocalComments] = useState<string[]>([]);
   const [extended, setExtended] = useState(false);
   const [extendDismissed, setExtendDismissed] = useState(false);
 
@@ -97,7 +103,32 @@ export default function SessionDetailPage() {
     [activities, activeActivityId],
   );
 
+  const completeActivity = useMutation({
+    mutationFn: (input: { activityId: string; skipped?: boolean }) =>
+      setActivityStatus(
+        input.activityId,
+        input.skipped ? "skipped" : "completed",
+      ),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["study-session", sessionId] }),
+  });
+  const addComment = useMutation({
+    mutationFn: (content: string) => addSessionComment(sessionId, content),
+  });
+  const extendPlan = useMutation({
+    mutationFn: () => appendActivities(sessionId, extensions),
+  });
+
+  const comments = [...(session?.comments ?? []), ...localComments];
+
   if (!session || !workspace) {
+    if (isLoading) {
+      return (
+        <div className="flex-1 flex items-center justify-center">
+          <p className="text-sm text-muted-foreground">Loading session…</p>
+        </div>
+      );
+    }
     return (
       <div className="flex-1 flex items-center justify-center">
         <div className="text-center">
@@ -123,8 +154,9 @@ export default function SessionDetailPage() {
     0,
   );
 
-  const goToNext = () => {
+  const goToNext = (skipped = false) => {
     if (!activeActivity) return;
+    completeActivity.mutate({ activityId: activeActivity.id, skipped });
     const idx = activities.findIndex((a) => a.id === activeActivity.id);
     const next = activities[idx + 1];
     setActiveActivityId(next?.id ?? null);
@@ -147,7 +179,7 @@ export default function SessionDetailPage() {
         return (
           <ReadingActivity
             content={activity.content as ReadingContent}
-            onComplete={goToNext}
+            onComplete={() => goToNext()}
           />
         );
       case "comprehension_check":
@@ -155,7 +187,7 @@ export default function SessionDetailPage() {
           <ComprehensionActivity
             content={activity.content as ComprehensionContent}
             onSubmitRewrite={() => {}}
-            onComplete={goToNext}
+            onComplete={() => goToNext()}
           />
         );
       case "mcq":
@@ -163,7 +195,7 @@ export default function SessionDetailPage() {
           <McqActivity
             content={activity.content as McqContent}
             onAnswer={() => {}}
-            onComplete={goToNext}
+            onComplete={() => goToNext()}
           />
         );
       case "flashcard_review":
@@ -171,35 +203,35 @@ export default function SessionDetailPage() {
           <FlashcardActivity
             content={activity.content as FlashcardContent}
             onCardResult={() => {}}
-            onComplete={goToNext}
+            onComplete={() => goToNext()}
           />
         );
       case "vocab_recall":
         return (
           <VocabRecallActivity
             content={activity.content as VocabRecallContent}
-            onComplete={goToNext}
+            onComplete={() => goToNext()}
           />
         );
       case "cloze":
         return (
           <ClozeActivity
             content={activity.content as ClozeContent}
-            onComplete={goToNext}
+            onComplete={() => goToNext()}
           />
         );
       case "worksheet":
         return (
           <WorksheetActivity
             content={activity.content as WorksheetContent}
-            onComplete={goToNext}
+            onComplete={() => goToNext()}
           />
         );
       case "explain_aloud":
         return (
           <ExplainAloudActivity
             content={activity.content as ExplainAloudContent}
-            onComplete={goToNext}
+            onComplete={() => goToNext()}
           />
         );
       default:
@@ -253,9 +285,9 @@ export default function SessionDetailPage() {
               className="relative p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
             >
               <MessageSquare className="h-4 w-4" />
-              {session.comments.length > 0 && (
+              {comments.length > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-accent text-[9px] font-bold text-accent-foreground flex items-center justify-center">
-                  {session.comments.length}
+                  {comments.length}
                 </span>
               )}
             </button>
@@ -316,6 +348,7 @@ export default function SessionDetailPage() {
                     size="sm"
                     onClick={() => {
                       setExtended(true);
+                      extendPlan.mutate();
                       if (!activeActivity) setActiveActivityId(extensions[0].id);
                     }}
                   >
@@ -341,7 +374,7 @@ export default function SessionDetailPage() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={goToNext}
+                    onClick={() => goToNext(true)}
                     className="text-xs"
                   >
                     <SkipForward className="h-3 w-3 mr-1" />
@@ -400,7 +433,7 @@ export default function SessionDetailPage() {
             </button>
           </div>
           <div className="flex-1 overflow-y-auto p-4 space-y-2">
-            {session.comments.map((comment, i) => (
+            {comments.map((comment, i) => (
               <div
                 key={i}
                 className="p-3 rounded-xl bg-muted text-sm border border-border"
@@ -408,7 +441,7 @@ export default function SessionDetailPage() {
                 {comment}
               </div>
             ))}
-            {session.comments.length === 0 && (
+            {comments.length === 0 && (
               <p className="text-xs text-muted-foreground text-center py-4">
                 No notes yet
               </p>
@@ -426,7 +459,12 @@ export default function SessionDetailPage() {
               <Button
                 size="sm"
                 disabled={!newComment.trim()}
-                onClick={() => setNewComment("")}
+                onClick={() => {
+                  const content = newComment.trim();
+                  addComment.mutate(content);
+                  setLocalComments((c) => [...c, content]);
+                  setNewComment("");
+                }}
                 className="h-9"
               >
                 Add

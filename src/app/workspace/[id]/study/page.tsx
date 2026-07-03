@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getWorkspace } from "@/lib/mock-data";
+import { createStudySession, fetchStudySessions } from "@/lib/api/study";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { SessionCard } from "@/components/session/session-card";
 import { SessionCreateWizard } from "@/components/session/session-create-wizard";
@@ -18,10 +20,26 @@ export default function WorkspaceStudyPage() {
   const [showCreateWizard, setShowCreateWizard] = useState(false);
 
   const workspace = getWorkspace(workspaceId);
-  const activeSessions =
-    workspace?.sessions.filter((s) => s.status === "active") ?? [];
-  const completedSessions =
-    workspace?.sessions.filter((s) => s.status === "completed") ?? [];
+  const queryClient = useQueryClient();
+  const { data: sessions = [] } = useQuery({
+    queryKey: ["study-sessions", workspaceId],
+    queryFn: () => fetchStudySessions(workspaceId),
+  });
+  const createSession = useMutation({
+    mutationFn: createStudySession,
+    onSuccess: (created) => {
+      queryClient.invalidateQueries({
+        queryKey: ["study-sessions", workspaceId],
+      });
+      setShowCreateWizard(false);
+      if (created) {
+        router.push(`/workspace/${workspaceId}/session/${created.id}`);
+      }
+    },
+  });
+
+  const activeSessions = sessions.filter((s) => s.status === "active");
+  const completedSessions = sessions.filter((s) => s.status === "completed");
   const resumable =
     activeSessions.find((s) => s.progress > 0) ?? activeSessions[0];
 
@@ -72,7 +90,7 @@ export default function WorkspaceStudyPage() {
             </Button>
           </div>
 
-          {!workspace || workspace.sessions.length === 0 ? (
+          {!workspace || sessions.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6">
               <Sparkles className="h-7 w-7 text-accent mx-auto mb-3" />
               <p className="text-sm font-semibold">
@@ -92,7 +110,7 @@ export default function WorkspaceStudyPage() {
             </div>
           ) : (
             <div className="grid gap-4">
-              {workspace.sessions
+              {sessions
                 .filter((s) => s.status !== "completed")
                 .map((session) => (
                   <SessionCard
@@ -131,9 +149,18 @@ export default function WorkspaceStudyPage() {
         <SessionCreateWizard
           workspaceTitle={workspace.title}
           onClose={() => setShowCreateWizard(false)}
-          onCreate={() => {
-            setShowCreateWizard(false);
-          }}
+          onCreate={(config) =>
+            createSession.mutate({
+              workspaceId,
+              title: config.title,
+              description: config.description || undefined,
+              depth: config.depth,
+              durationMinutes: config.durationMinutes,
+              examBoard: config.examBoard || undefined,
+              syllabus: config.syllabus || undefined,
+              topics: config.topics || undefined,
+            })
+          }
         />
       )}
     </WorkspaceShell>
