@@ -4,6 +4,7 @@ import {
   StudySession,
   SessionActivity,
   Material,
+  WorksheetContent,
 } from "@/types";
 
 const now = new Date().toISOString();
@@ -595,14 +596,57 @@ export function getSessionWithActivities(id: string): StudySession | undefined {
   return getSession(id);
 }
 
-// Precomputed from the workspace's worksheet bank — appended when the
-// learner opts to extend their plan near the end of a session.
-export const planExtensionActivities: SessionActivity[] = [
+// Worksheet bank — precomputed from uploaded PDFs, deliberately balanced
+// across question styles so appended practice isn't monotonous.
+export const worksheetBank: {
+  kind: "data-response" | "calculation" | "concept";
+  content: WorksheetContent;
+  title: string;
+  estimatedMinutes: number;
+}[] = [
   {
-    id: "act-ext-1",
-    sessionId: "ses-1",
-    type: "worksheet",
+    kind: "data-response",
+    title: "Worksheet Bank — Reading the IE Graph",
+    estimatedMinutes: 5,
+    content: {
+      type: "worksheet",
+      source: { file: "Topic 2 — Atomic Structure.pdf", generatedByAi: true },
+      steps: [
+        {
+          title: "Data response — IE₁ across Period 3",
+          intro:
+            "Use the graph captured from your notes to answer the parts below.",
+          figure: {
+            figure: "ionization-trend",
+            title: "Figure — IE₁ across Period 3",
+            source: { file: "Topic 2 — Atomic Structure.pdf", page: 17 },
+          },
+          parts: [
+            {
+              label: "a",
+              prompt:
+                "Describe the overall trend in IE₁ from Na to Ar in one sentence.",
+              type: "text",
+              answer: "increases",
+              marks: 2,
+            },
+            {
+              label: "b",
+              prompt:
+                "Which element would you predict starts the next period, and roughly where would its IE₁ sit on this axis?",
+              type: "text",
+              answer: "potassium",
+              marks: 2,
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    kind: "calculation",
     title: "Worksheet Bank — Successive Ionization",
+    estimatedMinutes: 6,
     content: {
       type: "worksheet",
       source: { file: "Topic 2 — Atomic Structure.pdf", generatedByAi: true },
@@ -638,9 +682,67 @@ export const planExtensionActivities: SessionActivity[] = [
         },
       ],
     },
+  },
+  {
+    kind: "concept",
+    title: "Worksheet Bank — Shielding Concepts",
+    estimatedMinutes: 4,
+    content: {
+      type: "worksheet",
+      source: { file: "Topic 2 — Atomic Structure.pdf", generatedByAi: true },
+      steps: [
+        {
+          title: "Concept check — shielding",
+          figure: {
+            figure: "atom-shells",
+            title: "Figure — Shell model of sodium",
+            source: { file: "Topic 2 — Atomic Structure.pdf", page: 8 },
+          },
+          parts: [
+            {
+              label: "a",
+              prompt: "Define effective nuclear charge in your own words.",
+              type: "text",
+              answer: "shielding",
+              marks: 2,
+            },
+            {
+              label: "b",
+              prompt:
+                "True or false: electrons in the same shell shield each other as effectively as inner-shell electrons do.",
+              type: "true_false",
+              answer: "False",
+              marks: 1,
+            },
+          ],
+        },
+      ],
+    },
+  },
+];
+
+// Appended when the learner opts to extend their plan near the end of a
+// session — drawn from the bank with a balanced mix of styles.
+export const planExtensionActivities: SessionActivity[] = [
+  {
+    id: "act-ext-1",
+    sessionId: "ses-1",
+    type: "worksheet",
+    title: worksheetBank[1].title,
+    content: worksheetBank[1].content,
     order: 9,
     status: "pending",
-    estimatedMinutes: 6,
+    estimatedMinutes: worksheetBank[1].estimatedMinutes,
+  },
+  {
+    id: "act-ext-1b",
+    sessionId: "ses-1",
+    type: "worksheet",
+    title: worksheetBank[0].title,
+    content: worksheetBank[0].content,
+    order: 10,
+    status: "pending",
+    estimatedMinutes: worksheetBank[0].estimatedMinutes,
   },
   {
     id: "act-ext-2",
@@ -656,7 +758,7 @@ export const planExtensionActivities: SessionActivity[] = [
       explanation:
         "All four have 10 electrons, so the species with the smallest nuclear charge (O, Z = 8) holds them least tightly — giving the largest radius.",
     },
-    order: 10,
+    order: 11,
     status: "pending",
     estimatedMinutes: 3,
   },

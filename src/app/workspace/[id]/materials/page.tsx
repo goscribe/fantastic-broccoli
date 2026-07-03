@@ -162,8 +162,8 @@ function WorksheetBankStatus({
           Worksheet bank ready
         </p>
         <p className="text-[11px] text-muted-foreground mt-0.5">
-          3 worksheets · 3 diagrams precomputed — Scribe feeds these into your
-          plan when useful.
+          3 worksheets precomputed (data-response, calculation, concept check)
+          — Scribe feeds these into your plan when useful.
         </p>
         <Link
           href={`/workspace/${workspaceId}/session/ses-1`}
