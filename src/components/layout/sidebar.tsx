@@ -5,13 +5,25 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ScribeLogo } from "@/components/graphics/logo";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
+import { fetchWorkspaceTree } from "@/lib/api/workspace";
+import { signOut, useAuthUser } from "@/lib/api/auth";
 import {
-  fetchSharedWorkspaces,
-  fetchWorkspaceTree,
-} from "@/lib/api/workspace";
+  fetchAccountSummary,
+  formatBytes,
+  type AccountSummary,
+} from "@/lib/api/account";
 import { Folder as FolderType, Workspace } from "@/types";
 import { cn } from "@/lib/utils";
-import { Home, ChevronRight, Plus, Search, X } from "lucide-react";
+import {
+  Home,
+  ChevronRight,
+  Plus,
+  Search,
+  X,
+  Users,
+  Settings,
+  LogOut,
+} from "lucide-react";
 
 function FolderNode({
   folder,
@@ -116,11 +128,11 @@ export function Sidebar({
   onMobileClose?: () => void;
 }) {
   const pathname = usePathname();
+  const { user } = useAuthUser();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
-  const [tab, setTab] = useState<"library" | "shared">("library");
   const [folders, setFolders] = useState<FolderType[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
-  const [shared, setShared] = useState<Workspace[]>([]);
+  const [summary, setSummary] = useState<AccountSummary | null>(null);
   const toggle = (id: string) =>
     setExpanded((prev) => ({ ...prev, [id]: !(prev[id] ?? true) }));
 
@@ -131,8 +143,8 @@ export function Sidebar({
         setRootWorkspaces(tree.rootWorkspaces);
       })
       .catch(() => {});
-    fetchSharedWorkspaces()
-      .then(setShared)
+    fetchAccountSummary()
+      .then(setSummary)
       .catch(() => {});
   }, []);
 
@@ -177,48 +189,34 @@ export function Sidebar({
       </div>
 
       <nav className="flex-1 overflow-y-auto px-3 py-3 space-y-4">
-        <Link
-          href="/"
-          className={cn(
-            "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
-            pathname === "/"
-              ? "bg-accent-soft text-accent"
-              : "text-muted-foreground hover:bg-muted hover:text-foreground",
-          )}
-        >
-          <Home className="h-4 w-4" />
-          Home
-        </Link>
-
-        <div className="flex rounded-lg border border-border bg-muted/50 p-0.5 text-[12px] font-medium">
-          <button
-            type="button"
-            onClick={() => setTab("library")}
+        <div className="space-y-px">
+          <Link
+            href="/"
             className={cn(
-              "flex-1 rounded-md py-1",
-              tab === "library"
-                ? "bg-card text-foreground border border-border"
-                : "text-muted-foreground hover:text-foreground",
+              "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+              pathname === "/"
+                ? "bg-accent-soft text-accent"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            My library
-          </button>
-          <button
-            type="button"
-            onClick={() => setTab("shared")}
+            <Home className="h-4 w-4" />
+            Home
+          </Link>
+          <Link
+            href="/shared"
             className={cn(
-              "flex-1 rounded-md py-1",
-              tab === "shared"
-                ? "bg-card text-foreground border border-border"
-                : "text-muted-foreground hover:text-foreground",
+              "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+              pathname.startsWith("/shared")
+                ? "bg-accent-soft text-accent"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
+            <Users className="h-4 w-4" />
             Shared
-          </button>
+          </Link>
         </div>
 
-        {tab === "library" ? (
-          <div>
+        <div>
             <div className="flex items-center justify-between px-1.5 pb-1">
               <span className="text-xs font-semibold text-faint">Folders</span>
               <button
@@ -259,44 +257,64 @@ export function Sidebar({
               })}
             </div>
           </div>
-        ) : (
-          <div>
-            <div className="flex items-center justify-between px-1.5 pb-1">
-              <span className="text-xs font-semibold text-faint">
-                Shared with me
+      </nav>
+
+      <div className="shrink-0 border-t border-border px-3 py-3 space-y-2">
+        {summary && (
+          <div className="rounded-md border border-border bg-muted/40 px-2.5 py-2">
+            <div className="flex items-center justify-between text-[11px]">
+              <span className="font-semibold text-muted-foreground">
+                {summary.planName} plan
+              </span>
+              <span className="text-faint">
+                {formatBytes(summary.storageUsedBytes)} /{" "}
+                {formatBytes(summary.storageLimitBytes)}
               </span>
             </div>
-            <div className="space-y-px">
-              {shared.length === 0 && (
-                <p className="px-1.5 py-2 text-[12px] text-faint">
-                  Nothing shared with you yet.
-                </p>
-              )}
-              {shared.map((ws) => {
-                const active = pathname.startsWith(`/workspace/${ws.id}`);
-                return (
-                  <Link
-                    key={ws.id}
-                    href={`/workspace/${ws.id}/materials`}
-                    className={cn(
-                      "flex items-center gap-1.5 rounded-md py-1 px-1.5 text-[13px]",
-                      active
-                        ? "bg-accent-soft text-accent font-medium"
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                    )}
-                  >
-                    <WorkspaceIcon icon={ws.icon} className="h-4 w-4 shrink-0" />
-                    <span className="truncate">{ws.title}</span>
-                    <span className="ml-auto text-[10px] text-faint shrink-0">
-                      {ws.sharedBy}
-                    </span>
-                  </Link>
-                );
-              })}
+            <div className="mt-1.5 h-1 rounded-full bg-border overflow-hidden">
+              <div
+                className="h-full rounded-full bg-accent"
+                style={{
+                  width: `${Math.min(100, (summary.storageUsedBytes / summary.storageLimitBytes) * 100)}%`,
+                }}
+              />
             </div>
           </div>
         )}
-      </nav>
+        <Link
+          href="/settings"
+          className={cn(
+            "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+            pathname.startsWith("/settings")
+              ? "bg-accent-soft text-accent"
+              : "text-muted-foreground hover:bg-muted hover:text-foreground",
+          )}
+        >
+          <Settings className="h-4 w-4" />
+          Settings
+        </Link>
+        {user && (
+          <div className="flex items-center gap-2 px-1.5 pt-1">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-soft text-[12px] font-semibold text-accent">
+              {user.name.charAt(0).toUpperCase()}
+            </span>
+            <div className="min-w-0 flex-1 leading-tight">
+              <p className="truncate text-[13px] font-medium">{user.name}</p>
+              <p className="truncate text-[11px] text-faint">
+                {user.email ?? "Personal workspace"}
+              </p>
+            </div>
+            <button
+              type="button"
+              aria-label="Sign out"
+              onClick={() => signOut()}
+              className="p-1.5 rounded-md text-faint hover:text-foreground hover:bg-muted"
+            >
+              <LogOut className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+      </div>
     </aside>
   );
 }
