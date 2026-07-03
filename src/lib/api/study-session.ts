@@ -123,7 +123,7 @@ interface TrpcEnvelope {
   error?: { message?: string };
 }
 
-async function rpc<T>(
+export async function rpc<T>(
   path: string,
   kind: "query" | "mutation",
   input: unknown,

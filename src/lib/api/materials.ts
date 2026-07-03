@@ -1,4 +1,5 @@
 import { api } from "./trpc-client";
+import { rpc } from "./study-session";
 
 /**
  * Upload system: request signed Supabase Storage URLs from the server, PUT
@@ -15,7 +16,15 @@ export interface AnalysisStep {
 export interface AnalysisProgress {
   status: string;
   currentFile?: string;
+  fileId?: string;
   steps?: Record<string, AnalysisStep>;
+}
+
+interface FileAnalysisEvent {
+  fileId: string;
+  status: string;
+  filename?: string;
+  error?: string;
 }
 
 interface SignedUpload {
@@ -57,12 +66,11 @@ export async function analyzeFiles(
   workspaceId: string,
   fileIds: string[],
 ): Promise<void> {
-  await api.workspace.uploadAndAnalyzeMedia.mutate({
+  // New concurrent pipeline: files are processed in parallel with per-file
+  // progress, then the artifact bank is precomputed from the transcriptions.
+  await rpc("workspace.uploadAndAnalyzeMediaConcurrent", "mutation", {
     workspaceId,
     files: fileIds.map((id) => ({ id })),
-    generateStudyGuide: true,
-    generateFlashcards: true,
-    generateWorksheet: true,
   });
 }
 
@@ -85,9 +93,17 @@ export function subscribeAnalysisProgress(
     if (cancelled) return;
     const pusher = new Pusher(key, { cluster });
     const channel = pusher.subscribe(`workspace_${workspaceId}`);
+    const onFileProgress = (event: FileAnalysisEvent) =>
+      onProgress({
+        status: event.status,
+        currentFile: event.filename,
+        fileId: event.fileId,
+      });
     channel.bind("analysis_progress", onProgress);
+    channel.bind("file_analysis_progress", onFileProgress);
     cleanup = () => {
       channel.unbind("analysis_progress", onProgress);
+      channel.unbind("file_analysis_progress", onFileProgress);
       pusher.unsubscribe(`workspace_${workspaceId}`);
       pusher.disconnect();
     };
