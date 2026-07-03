@@ -27,6 +27,7 @@ import { VocabRecallActivity } from "@/components/session/vocab-recall-activity"
 import { ClozeActivity } from "@/components/session/cloze-activity";
 import { ExplainAloudActivity } from "@/components/session/explain-aloud-activity";
 import { WorksheetActivity } from "@/components/session/worksheet-activity";
+import { SessionDebrief } from "@/components/session/session-debrief";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -351,20 +352,9 @@ export default function SessionDetailPage() {
                 {renderActivity(activeActivity)}
               </div>
             ) : (
-              <div className="rounded-3xl border border-accent/25 bg-gradient-to-br from-accent/10 via-card to-card text-center py-14 px-6">
-                <p className="text-lg font-bold tracking-tight mb-1">
-                  All done — nice work.
-                </p>
-                <p className="text-sm text-muted-foreground mb-6">
-                  You&apos;ve completed every activity in this session.
-                </p>
-                <Button
-                  size="sm"
-                  onClick={() => router.push(`/workspace/${workspaceId}`)}
-                >
-                  Back to workspace
-                </Button>
-              </div>
+              <SessionDebrief
+                onBack={() => router.push(`/workspace/${workspaceId}`)}
+              />
             )}
 
             {/* Mobile activity list */}
