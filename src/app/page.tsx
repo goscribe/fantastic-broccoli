@@ -102,41 +102,6 @@ export default function HomePage() {
               {greeting}{user ? `, ${user.name}` : ""}
             </h1>
           </div>
-          <div className="flex items-center divide-x divide-border rounded-xl border border-border bg-card">
-            <div className="flex items-center gap-2.5 px-4 py-2.5">
-              <StreakFlame className="h-6 w-6" />
-              <div className="leading-tight">
-                <p className="text-sm font-bold tabular-nums">6</p>
-                <p className="text-[10px] font-semibold text-faint">
-                  Day streak
-                </p>
-              </div>
-            </div>
-            <div className="px-4 py-2.5 leading-tight">
-              <p className="text-sm font-bold tabular-nums">
-                {activeSessions.length}
-              </p>
-              <p className="text-[10px] font-semibold text-faint">
-                Sessions
-              </p>
-            </div>
-            <div className="px-4 py-2.5 leading-tight">
-              <p className="text-sm font-bold tabular-nums">
-                {formatDuration(totalPlannedMinutes)}
-              </p>
-              <p className="text-[10px] font-semibold text-faint">
-                Planned
-              </p>
-            </div>
-            <div className="px-4 py-2.5 leading-tight">
-              <p className="text-sm font-bold tabular-nums">
-                {allWorkspaces.length}
-              </p>
-              <p className="text-[10px] font-semibold text-faint">
-                Workspaces
-              </p>
-            </div>
-          </div>
         </header>
 
         {/* Gradient banner */}
@@ -213,10 +178,19 @@ export default function HomePage() {
             <div className="rounded-xl border border-border bg-card p-4">
               <StudyCalendar dailyActivity={mockDailyActivity} />
             </div>
-            <div className="rounded-xl border border-border bg-card p-4 flex flex-col">
+            <div className="rounded-xl border border-border bg-card p-4">
               <div>
-                <p className="text-sm font-semibold">This week</p>
-                <div className="mt-3 flex h-28 items-end gap-2.5">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-semibold">This week</p>
+                  <div className="flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1">
+                    <StreakFlame className="h-5 w-5" />
+                    <p className="text-[12px] font-semibold text-amber-700">
+                      <span className="text-sm font-bold tabular-nums">6</span>{" "}
+                      day streak
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-4 flex h-28 items-end gap-2.5">
                   {lastSevenDays.map(({ label, count, isToday }, i) => (
                     <div
                       key={i}
@@ -250,7 +224,7 @@ export default function HomePage() {
                   ))}
                 </div>
               </div>
-              <div className="mt-5 grid flex-1 content-end grid-cols-2 gap-2 sm:grid-cols-4">
+              <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
                 {[
                   {
                     label: "Active days",
