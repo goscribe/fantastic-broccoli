@@ -1,0 +1,288 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { signOut, useAuthUser } from "@/lib/api/auth";
+import {
+  fetchAccountSummary,
+  fetchPlanOptions,
+  formatBytes,
+  switchPlan,
+  updateProfile,
+  type AccountSummary,
+  type PlanOption,
+} from "@/lib/api/account";
+
+function UsageBar({
+  label,
+  used,
+  limit,
+  usedLabel,
+  limitLabel,
+}: {
+  label: string;
+  used: number;
+  limit: number;
+  usedLabel: string;
+  limitLabel: string;
+}) {
+  const pct = limit > 0 ? Math.min(100, (used / limit) * 100) : 0;
+  return (
+    <div className="py-3">
+      <div className="flex items-baseline justify-between text-sm">
+        <span className="text-muted-foreground">{label}</span>
+        <span className="font-medium tabular-nums">
+          {usedLabel} <span className="text-faint">/ {limitLabel}</span>
+        </span>
+      </div>
+      <div className="mt-2 h-1.5 rounded-full bg-muted overflow-hidden">
+        <div
+          className="h-full rounded-full bg-accent"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function PlanCard({
+  plan,
+  onSelect,
+  switching,
+}: {
+  plan: PlanOption;
+  onSelect: (id: string) => void;
+  switching: boolean;
+}) {
+  return (
+    <div
+      className={`flex flex-col rounded-xl border p-4 ${
+        plan.isActive ? "border-accent bg-accent-soft/40" : "border-border bg-card"
+      }`}
+    >
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-semibold">{plan.name}</p>
+        {plan.isActive && (
+          <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold text-white">
+            Current
+          </span>
+        )}
+      </div>
+      <p className="mt-1 text-[12px] text-muted-foreground">
+        {plan.description}
+      </p>
+      <p className="mt-3 text-lg font-bold tabular-nums">
+        {plan.priceCents === 0 ? "Free" : `$${(plan.priceCents / 100).toFixed(2)}`}
+        {plan.priceCents > 0 && (
+          <span className="text-[12px] font-normal text-faint"> / month</span>
+        )}
+      </p>
+      <ul className="mt-3 space-y-1.5 text-[12px] text-muted-foreground">
+        <li className="flex items-center gap-1.5">
+          <Check className="h-3 w-3 text-accent" />
+          {formatBytes(plan.storageLimitBytes)} storage
+        </li>
+        <li className="flex items-center gap-1.5">
+          <Check className="h-3 w-3 text-accent" />
+          {plan.worksheetsLimit} worksheets
+        </li>
+        <li className="flex items-center gap-1.5">
+          <Check className="h-3 w-3 text-accent" />
+          {plan.flashcardsLimit} flashcard sets
+        </li>
+      </ul>
+      <div className="mt-auto pt-4">
+        {plan.isActive ? (
+          <Button variant="outline" size="sm" className="w-full" disabled>
+            Your plan
+          </Button>
+        ) : (
+          <Button
+            size="sm"
+            className="w-full"
+            disabled={switching}
+            onClick={() => onSelect(plan.id)}
+          >
+            {plan.priceCents === 0 ? "Downgrade" : `Switch to ${plan.name}`}
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function SettingsPage() {
+  const { user } = useAuthUser();
+  const [summary, setSummary] = useState<AccountSummary | null>(null);
+  const [plans, setPlans] = useState<PlanOption[]>([]);
+  const [editedName, setEditedName] = useState<string | null>(null);
+  const name = editedName ?? user?.name ?? "";
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [switching, setSwitching] = useState(false);
+
+  useEffect(() => {
+    fetchAccountSummary()
+      .then(setSummary)
+      .catch(() => {});
+    fetchPlanOptions()
+      .then(setPlans)
+      .catch(() => {});
+  }, []);
+
+  const handleSave = async () => {
+    if (!name.trim()) return;
+    setSaving(true);
+    try {
+      await updateProfile(name.trim());
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleSwitch = async (planId: string) => {
+    setSwitching(true);
+    try {
+      await switchPlan(planId);
+    } finally {
+      setSwitching(false);
+    }
+  };
+
+  return (
+    <main className="flex-1 px-6 py-8 md:px-10">
+      <div className="mx-auto w-full max-w-3xl">
+        <h1 className="text-xl font-bold tracking-tight">Settings</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Manage your account, plan, and usage.
+        </p>
+
+        {/* Account */}
+        <section className="mt-8">
+          <h2 className="text-sm font-semibold">Account</h2>
+          <p className="mt-0.5 text-[13px] text-muted-foreground">
+            Your profile as classmates see it in shared workspaces.
+          </p>
+          <div className="mt-3 rounded-xl border border-border bg-card p-5">
+            <div className="flex items-start gap-5">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent-soft text-lg font-semibold text-accent">
+                {(name || "?").charAt(0).toUpperCase()}
+              </span>
+              <div className="grid flex-1 gap-4 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="settings-name"
+                    className="block text-[13px] font-medium"
+                  >
+                    Display name
+                  </label>
+                  <input
+                    id="settings-name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setEditedName(e.target.value)}
+                    className="mt-1.5 h-10 w-full rounded-lg border border-border bg-background px-3.5 text-sm transition-colors focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15"
+                  />
+                  <p className="mt-1.5 text-[12px] text-faint">
+                    Shown to classmates in shared workspaces.
+                  </p>
+                </div>
+                <div>
+                  <label
+                    htmlFor="settings-email"
+                    className="block text-[13px] font-medium"
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="settings-email"
+                    type="email"
+                    value={user?.email ?? "alan@scribe.study"}
+                    disabled
+                    className="mt-1.5 h-10 w-full rounded-lg border border-border bg-muted/60 px-3.5 text-sm text-muted-foreground"
+                  />
+                  <p className="mt-1.5 text-[12px] text-faint">
+                    Used for sign-in — contact support to change it.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
+              <Button variant="outline" size="sm" onClick={() => signOut()}>
+                Sign out
+              </Button>
+              <div className="flex items-center gap-2">
+                {saved && (
+                  <span className="text-[12px] text-accent font-medium">
+                    Saved
+                  </span>
+                )}
+                <Button
+                  size="sm"
+                  onClick={handleSave}
+                  disabled={saving || !name.trim() || name === user?.name}
+                >
+                  {saving ? "Saving…" : "Save changes"}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Plan */}
+        <section className="mt-8">
+          <h2 className="text-sm font-semibold">Plan</h2>
+          <p className="mt-0.5 text-[13px] text-muted-foreground">
+            Switch plans anytime — changes take effect immediately.
+          </p>
+          <div className="mt-3 grid gap-3 sm:grid-cols-3">
+            {plans.map((plan) => (
+              <PlanCard
+                key={plan.id}
+                plan={plan}
+                onSelect={handleSwitch}
+                switching={switching}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Usage */}
+        {summary && (
+          <section className="mt-8">
+            <h2 className="text-sm font-semibold">Usage</h2>
+            <p className="mt-0.5 text-[13px] text-muted-foreground">
+              What you&apos;ve used on the {summary.planName} plan this cycle.
+            </p>
+            <div className="mt-3 rounded-xl border border-border bg-card px-5 py-2 divide-y divide-border">
+              <UsageBar
+                label="Storage"
+                used={summary.storageUsedBytes}
+                limit={summary.storageLimitBytes}
+                usedLabel={formatBytes(summary.storageUsedBytes)}
+                limitLabel={formatBytes(summary.storageLimitBytes)}
+              />
+              <UsageBar
+                label="Worksheets"
+                used={summary.worksheetsUsed}
+                limit={summary.worksheetsLimit}
+                usedLabel={String(summary.worksheetsUsed)}
+                limitLabel={String(summary.worksheetsLimit)}
+              />
+              <UsageBar
+                label="Flashcard sets"
+                used={summary.flashcardsUsed}
+                limit={summary.flashcardsLimit}
+                usedLabel={String(summary.flashcardsUsed)}
+                limitLabel={String(summary.flashcardsLimit)}
+              />
+            </div>
+          </section>
+        )}
+      </div>
+    </main>
+  );
+}

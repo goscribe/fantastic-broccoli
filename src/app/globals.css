@@ -1,0 +1,173 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+
+:root {
+  --background: #f7f7f4;
+  --foreground: #14170f;
+  --card: #ffffff;
+  --card-hover: #fcfcfa;
+  --card-foreground: #14170f;
+  --muted: #efefe9;
+  --muted-foreground: #62655c;
+  --faint: #989b90;
+  --ink: #171c12;
+  --accent: #4a9f06;
+  --accent-dim: #3d8404;
+  --accent-soft: #eaf5df;
+  --accent-bright: #6fd420;
+  --accent-foreground: #ffffff;
+  --energy: #58cc02;
+  --energy-soft: #ecf9e3;
+  --violet: #7c5cfc;
+  --sky: #38bdf8;
+  --rose: #fb7185;
+  --amber: #f59e0b;
+  --border: #e7e7e0;
+  --border-strong: #d7d7cd;
+  --ring: #4a9f06;
+  --radius: 1rem;
+  --success: #58cc02;
+  --warning: #f59e0b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-bright: var(--accent-bright);
+  --color-ink: var(--ink);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-energy: var(--energy);
+  --color-energy-soft: var(--energy-soft);
+  --color-violet: var(--violet);
+  --color-sky: var(--sky);
+  --color-rose: var(--rose);
+  --color-amber: var(--amber);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --radius: var(--radius);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Parameter sliders */
+input[type="range"].param-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"].param-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 9999px;
+  background: var(--card);
+  border: 2px solid var(--accent);
+  transition: transform 0.1s ease;
+}
+input[type="range"].param-slider::-webkit-slider-thumb:hover,
+input[type="range"].param-slider:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+input[type="range"].param-slider::-moz-range-thumb {
+  height: 12px;
+  width: 12px;
+  border-radius: 9999px;
+  background: var(--card);
+  border: 2px solid var(--accent);
+  transition: transform 0.1s ease;
+}
+input[type="range"].param-slider::-moz-range-thumb:hover,
+input[type="range"].param-slider:active::-moz-range-thumb {
+  transform: scale(1.2);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--faint);
+}
+
+::selection {
+  background: rgba(88, 204, 2, 0.2);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 1.2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--muted-foreground) 0%,
+    var(--foreground) 50%,
+    var(--muted-foreground) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+.animate-wave {
+  animation: wave 1s ease-in-out infinite;
+}
