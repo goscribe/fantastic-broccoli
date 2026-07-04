@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import {
   fetchAccountSummary,
@@ -121,14 +122,18 @@ export default function SettingsPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [switching, setSwitching] = useState(false);
+  const [summaryLoading, setSummaryLoading] = useState(true);
+  const [plansLoading, setPlansLoading] = useState(true);
 
   useEffect(() => {
     fetchAccountSummary()
       .then(setSummary)
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setSummaryLoading(false));
     fetchPlanOptions()
       .then(setPlans)
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setPlansLoading(false));
   }, []);
 
   const handleSave = async () => {
@@ -239,19 +244,47 @@ export default function SettingsPage() {
             Switch plans anytime — changes take effect immediately.
           </p>
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
-            {plans.map((plan) => (
-              <PlanCard
-                key={plan.id}
-                plan={plan}
-                onSelect={handleSwitch}
-                switching={switching}
-              />
-            ))}
+            {plansLoading
+              ? Array.from({ length: 3 }, (_, i) => (
+                  <div
+                    key={i}
+                    className="rounded-xl border border-border bg-card p-4 space-y-3"
+                  >
+                    <Skeleton className="h-4 w-16" />
+                    <Skeleton className="h-3 w-full" />
+                    <Skeleton className="h-6 w-20" />
+                    <Skeleton className="h-8 w-full" />
+                  </div>
+                ))
+              : plans.map((plan) => (
+                  <PlanCard
+                    key={plan.id}
+                    plan={plan}
+                    onSelect={handleSwitch}
+                    switching={switching}
+                  />
+                ))}
           </div>
         </section>
 
         {/* Usage */}
-        {summary && (
+        {summaryLoading && (
+          <section className="mt-8">
+            <h2 className="text-sm font-semibold">Usage</h2>
+            <div className="mt-3 rounded-xl border border-border bg-card px-5 py-2 divide-y divide-border">
+              {Array.from({ length: 3 }, (_, i) => (
+                <div key={i} className="py-3 space-y-2">
+                  <div className="flex justify-between">
+                    <Skeleton className="h-3.5 w-24" />
+                    <Skeleton className="h-3.5 w-16" />
+                  </div>
+                  <Skeleton className="h-1.5 w-full rounded-full" />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+        {!summaryLoading && summary && (
           <section className="mt-8">
             <h2 className="text-sm font-semibold">Usage</h2>
             <p className="mt-0.5 text-[13px] text-muted-foreground">

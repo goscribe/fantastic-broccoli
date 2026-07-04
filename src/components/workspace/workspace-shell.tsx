@@ -8,15 +8,47 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Library, GraduationCap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface WorkspaceShellProps {
   workspace: Workspace | undefined;
+  loading?: boolean;
   children: React.ReactNode;
 }
 
-export function WorkspaceShell({ workspace, children }: WorkspaceShellProps) {
+export function WorkspaceShell({
+  workspace,
+  loading,
+  children,
+}: WorkspaceShellProps) {
   const router = useRouter();
   const pathname = usePathname();
+
+  if (!workspace && loading) {
+    return (
+      <div className="flex-1 flex flex-col">
+        <div className="border-b border-border bg-card">
+          <div className="w-full px-4 sm:px-8 pt-6">
+            <Skeleton className="h-3.5 w-24 mb-4" />
+            <div className="flex items-center gap-3">
+              <Skeleton className="h-10 w-10" />
+              <div className="space-y-2">
+                <Skeleton className="h-6 w-56" />
+                <Skeleton className="h-3.5 w-40" />
+              </div>
+            </div>
+            <div className="flex gap-1 mt-5 pb-3">
+              <Skeleton className="h-8 w-28" />
+              <Skeleton className="h-8 w-24" />
+            </div>
+          </div>
+        </div>
+        <main className="flex-1 w-full px-4 sm:px-8 py-6 sm:py-8">
+          {children}
+        </main>
+      </div>
+    );
+  }
 
   if (!workspace) {
     return (

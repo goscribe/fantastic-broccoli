@@ -9,6 +9,7 @@ import { FolderCard } from "@/components/workspace/folder-card";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { CreateResourceDialog } from "@/components/workspace/create-dialog";
 import { ChevronRight, Plus } from "lucide-react";
+import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
 
 function findFolderPath(folders: Folder[], id: string): Folder[] | null {
   for (const folder of folders) {
@@ -44,11 +45,26 @@ export default function FolderPage({
   const folder = path?.[path.length - 1];
 
   if (!folder || !path) {
+    if (!loaded) {
+      return (
+        <div className="flex-1 flex flex-col">
+          <main className="flex-1 w-full px-4 sm:px-8 py-6 sm:py-8 space-y-8">
+            <Skeleton className="h-4 w-48" />
+            <div className="flex items-center gap-3">
+              <Skeleton className="h-9 w-9" />
+              <Skeleton className="h-7 w-56" />
+            </div>
+            <div className="space-y-3">
+              <Skeleton className="h-4 w-24" />
+              <CardGridSkeleton count={6} />
+            </div>
+          </main>
+        </div>
+      );
+    }
     return (
       <div className="flex-1 flex items-center justify-center py-24">
-        <p className="text-sm text-muted-foreground">
-          {loaded ? "Folder not found." : "Loading…"}
-        </p>
+        <p className="text-sm text-muted-foreground">Folder not found.</p>
       </div>
     );
   }

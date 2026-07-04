@@ -15,6 +15,7 @@ import {
 import { Folder as FolderType, Workspace } from "@/types";
 import { CreateResourceDialog } from "@/components/workspace/create-dialog";
 import { CommandPalette } from "@/components/layout/command-palette";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import {
   Home,
@@ -145,6 +146,7 @@ export function Sidebar({
   const [folders, setFolders] = useState<FolderType[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [summary, setSummary] = useState<AccountSummary | null>(null);
+  const [treeLoading, setTreeLoading] = useState(true);
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [creating, setCreating] = useState<{
     kind: "folder" | "workspace";
@@ -160,7 +162,8 @@ export function Sidebar({
         setFolders(tree.folders);
         setRootWorkspaces(tree.rootWorkspaces);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setTreeLoading(false));
 
   useEffect(() => {
     loadTree();
@@ -262,6 +265,16 @@ export function Sidebar({
               </button>
             </div>
             <div className="space-y-px">
+              {treeLoading &&
+                Array.from({ length: 5 }, (_, i) => (
+                  <div key={i} className="flex items-center gap-1.5 px-1.5 py-1">
+                    <Skeleton className="h-4 w-4 rounded shrink-0" />
+                    <Skeleton
+                      className="h-3.5 rounded"
+                      style={{ width: `${55 + ((i * 17) % 30)}%` }}
+                    />
+                  </div>
+                ))}
               {folders.map((folder) => (
                 <FolderNode
                   key={folder.id}
