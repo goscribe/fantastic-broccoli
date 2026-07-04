@@ -198,32 +198,61 @@ export function WorksheetActivity({
 
                   {/* Markscheme breakdown (LLM-marked parts) */}
                   {checked && marking && marking.points.length > 0 && (
-                    <div className="mt-2 rounded-lg border border-border bg-muted/40 divide-y divide-border">
-                      {marking.points.map((point, j) => {
-                        const earned = point.achievedPoints >= point.point;
-                        return (
-                          <div key={j} className="flex gap-2 px-3 py-2">
-                            {earned ? (
-                              <Check className="h-3.5 w-3.5 mt-0.5 shrink-0 text-accent" />
-                            ) : (
-                              <X className="h-3.5 w-3.5 mt-0.5 shrink-0 text-rose" />
-                            )}
-                            <div className="min-w-0">
-                              <p className="text-xs leading-5">
-                                <span className="font-semibold tabular-nums">
+                    <div className="mt-2 rounded-lg border border-border overflow-hidden">
+                      <div className="flex items-center justify-between bg-muted/60 px-3 py-1.5 border-b border-border">
+                        <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                          Mark scheme
+                        </p>
+                        <span
+                          className={cn(
+                            "text-[11px] font-bold tabular-nums rounded-full px-2 py-0.5",
+                            correct
+                              ? "bg-accent-soft text-accent-dim"
+                              : partial
+                                ? "bg-amber/10 text-amber"
+                                : "bg-rose/10 text-rose",
+                          )}
+                        >
+                          {marking.achievedPoints}/{marking.totalPoints} marks
+                        </span>
+                      </div>
+                      <div className="divide-y divide-border bg-card">
+                        {marking.points.map((point, j) => {
+                          const earned = point.achievedPoints >= point.point;
+                          return (
+                            <div key={j} className="px-3 py-2">
+                              <div className="flex items-start gap-2.5">
+                                <span
+                                  className={cn(
+                                    "mt-0.5 shrink-0 h-4.5 rounded px-1.5 text-[10px] font-bold tabular-nums flex items-center",
+                                    earned
+                                      ? "bg-accent-soft text-accent-dim"
+                                      : "bg-rose/10 text-rose",
+                                  )}
+                                >
+                                  M{j + 1}
+                                </span>
+                                <p className="flex-1 min-w-0 text-xs leading-5">
+                                  {point.requirements}
+                                </p>
+                                <span className="shrink-0 flex items-center gap-1 text-[11px] font-semibold tabular-nums">
+                                  {earned ? (
+                                    <Check className="h-3.5 w-3.5 text-accent" />
+                                  ) : (
+                                    <X className="h-3.5 w-3.5 text-rose" />
+                                  )}
                                   {point.achievedPoints}/{point.point}
-                                </span>{" "}
-                                — {point.requirements}
-                              </p>
+                                </span>
+                              </div>
                               {point.feedback && !earned && (
-                                <p className="text-[11px] leading-4 text-muted-foreground mt-0.5">
+                                <p className="mt-1 pl-8 text-[11px] leading-4 text-muted-foreground">
                                   {point.feedback}
                                 </p>
                               )}
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
                     </div>
                   )}
 
