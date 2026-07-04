@@ -1,5 +1,6 @@
 import superjson from "superjson";
 import { apiUrl } from "./config";
+import { normalizeActivityContent } from "./activity-content";
 import type {
   ActivityContent,
   ActivityStatus,
@@ -306,7 +307,7 @@ export function mapActivity(a: ApiSessionActivity): SessionActivity {
     type: typeFromApi[a.type],
     title: a.title,
     description: a.description ?? undefined,
-    content: a.content as unknown as ActivityContent,
+    content: normalizeActivityContent(typeFromApi[a.type], a.content),
     order: a.order,
     status: statusFromApi[a.status],
     estimatedMinutes: a.estimatedMinutes,
