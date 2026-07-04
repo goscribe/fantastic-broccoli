@@ -28,32 +28,51 @@ type ReadingBlock =
   | { kind: "list"; items: string[] }
   | { kind: "paragraph"; text: string };
 
-function parseBlock(raw: string): ReadingBlock {
+const MAX_HEADING_CHARS = 80;
+
+function parseBlocks(raw: string): ReadingBlock[] {
   const trimmed = raw.trim();
   const widgetMatch = trimmed.match(WIDGET_TOKEN);
-  if (widgetMatch) return { kind: "widget", widget: widgetMatch[1] };
+  if (widgetMatch) return [{ kind: "widget", widget: widgetMatch[1] }];
 
   const figureMatch = trimmed.match(FIGURE_TOKEN);
-  if (figureMatch) return { kind: "figure", figureId: figureMatch[1] };
+  if (figureMatch) return [{ kind: "figure", figureId: figureMatch[1] }];
 
-  const headingMatch = trimmed.match(/^(#{1,4})\s+(.*)$/);
-  if (headingMatch && !headingMatch[2].includes("\n")) {
-    return {
-      kind: "heading",
-      level: headingMatch[1].length,
-      text: stripInlineMarkdown(headingMatch[2]),
-    };
+  const headingMatch = trimmed.match(/^(#{1,4})\s+([^\n]*)([\s\S]*)$/);
+  if (headingMatch) {
+    const headingLine = headingMatch[2].trim();
+    const rest = headingMatch[3].trim();
+    if (headingLine.length <= MAX_HEADING_CHARS) {
+      const heading: ReadingBlock = {
+        kind: "heading",
+        level: headingMatch[1].length,
+        text: stripInlineMarkdown(headingLine),
+      };
+      return rest ? [heading, ...parseBlocks(rest)] : [heading];
+    }
+    // Heading marker crammed together with paragraph text on one line —
+    // render as a paragraph rather than showing literal '##'.
+    return [
+      {
+        kind: "paragraph",
+        text: stripInlineMarkdown(
+          `${headingLine}${rest ? `\n${rest}` : ""}`,
+        ),
+      },
+    ];
   }
 
   const lines = trimmed.split("\n").map((l) => l.trim()).filter(Boolean);
   if (lines.length > 0 && lines.every((l) => /^[-*]\s+/.test(l))) {
-    return {
-      kind: "list",
-      items: lines.map((l) => stripInlineMarkdown(l.replace(/^[-*]\s+/, ""))),
-    };
+    return [
+      {
+        kind: "list",
+        items: lines.map((l) => stripInlineMarkdown(l.replace(/^[-*]\s+/, ""))),
+      },
+    ];
   }
 
-  return { kind: "paragraph", text: stripInlineMarkdown(trimmed) };
+  return [{ kind: "paragraph", text: stripInlineMarkdown(trimmed) }];
 }
 
 export type HighlightColor = "amber" | "green" | "purple";
@@ -221,7 +240,7 @@ export function ReadingActivity({
   } | null>(null);
   const [noteDraft, setNoteDraft] = useState("");
 
-  const parsedBlocks = content.text.split("\n\n").map(parseBlock);
+  const parsedBlocks = content.text.split("\n\n").flatMap(parseBlocks);
   const figuresById = new Map(
     (content.figures ?? []).map((figure) => [figure.id, figure]),
   );

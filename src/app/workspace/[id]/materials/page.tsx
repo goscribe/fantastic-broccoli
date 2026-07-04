@@ -141,13 +141,53 @@ const stepLabels: Record<string, string> = {
 
 // Live analysis status for the workspace, streamed from the server over
 // Pusher (workspace.analysisProgress step map).
+function analysisInFlight(progress: AnalysisProgress | null): boolean {
+  if (!progress) return false;
+  const steps = Object.values(progress.steps ?? {});
+  return (
+    steps.length > 0 &&
+    steps.some((s) => s.status === "in_progress" || s.status === "pending")
+  );
+}
+
+function MaterialStatusBadge({
+  material,
+  analyzing,
+}: {
+  material: Material;
+  analyzing: boolean;
+}) {
+  if (material.analyzed) {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-full bg-energy-soft text-accent-dim px-2 py-0.5 text-[10px] font-semibold shrink-0">
+        <Check className="h-2.5 w-2.5" />
+        Analyzed
+      </span>
+    );
+  }
+  if (analyzing) {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft text-accent-dim px-2 py-0.5 text-[10px] font-semibold shrink-0">
+        <Loader2 className="h-2.5 w-2.5 animate-spin" />
+        Analyzing…
+      </span>
+    );
+  }
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full bg-muted text-muted-foreground px-2 py-0.5 text-[10px] font-semibold shrink-0">
+      Not analyzed
+    </span>
+  );
+}
+
 function AnalysisStatusCard({ progress }: { progress: AnalysisProgress }) {
   const steps = Object.entries(progress.steps ?? {}).sort(
     (a, b) => a[1].order - b[1].order,
   );
-  const allDone =
-    steps.length > 0 &&
-    steps.every(([, s]) => s.status === "completed" || s.status === "skipped");
+  const done = steps.filter(
+    ([, s]) => s.status === "completed" || s.status === "skipped",
+  ).length;
+  const allDone = steps.length > 0 && done === steps.length;
 
   if (allDone) {
     return (
@@ -164,10 +204,24 @@ function AnalysisStatusCard({ progress }: { progress: AnalysisProgress }) {
   }
 
   return (
-    <Surface muted className="px-3.5 py-2.5 space-y-1.5 animate-fade-up">
-      <p className="text-[11px] font-semibold text-muted-foreground">
-        Analyzing {progress.currentFile ?? "materials"}…
-      </p>
+    <Surface muted className="px-3.5 py-3 space-y-2 animate-fade-up">
+      <div className="flex items-center justify-between gap-3">
+        <p className="flex items-center gap-1.5 text-xs font-semibold">
+          <Loader2 className="h-3.5 w-3.5 animate-spin text-accent" />
+          <span className="truncate">
+            Analyzing {progress.currentFile ?? "materials"}…
+          </span>
+        </p>
+        <span className="text-[11px] text-muted-foreground tabular-nums shrink-0">
+          {done}/{steps.length} steps
+        </span>
+      </div>
+      <div className="h-1 rounded-full bg-border overflow-hidden" aria-hidden>
+        <div
+          className="h-full rounded-full bg-accent transition-all duration-500"
+          style={{ width: `${steps.length ? (done / steps.length) * 100 : 0}%` }}
+        />
+      </div>
       {steps
         .filter(([, s]) => s.status !== "skipped")
         .map(([key, step]) => (
@@ -213,6 +267,7 @@ export default function WorkspaceMaterialsPage() {
   const [progress, setProgress] = useState<AnalysisProgress | null>(null);
 
   const materials = [...localMaterials, ...(workspace?.materials ?? [])];
+  const inFlight = analysisInFlight(progress);
 
   useEffect(
     () =>
@@ -359,6 +414,10 @@ export default function WorkspaceMaterialsPage() {
                         <span className="text-[11px] text-faint shrink-0">
                           {config.label}
                         </span>
+                        <MaterialStatusBadge
+                          material={material}
+                          analyzing={!material.analyzed && inFlight}
+                        />
                       </div>
                       {material.preview && (
                         <p className="text-xs text-muted-foreground mt-1 line-clamp-2">

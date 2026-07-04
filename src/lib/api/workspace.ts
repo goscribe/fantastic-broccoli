@@ -25,6 +25,7 @@ interface UploadRow {
   name: string;
   mimeType: string | null;
   createdAt: Date | string;
+  analyzed?: boolean;
 }
 
 function mimeToMaterialType(mimeType: string | null, name: string): MaterialType {
@@ -44,6 +45,7 @@ export function mapUploadToMaterial(
     workspaceId,
     type: mimeToMaterialType(upload.mimeType, upload.name),
     title: upload.name,
+    analyzed: upload.analyzed,
     updatedAt: new Date(upload.createdAt).toISOString(),
   };
 }
