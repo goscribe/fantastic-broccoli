@@ -45,8 +45,10 @@ export function Copilot({
   workspaceId: string;
 }) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [chats, setChats] = useState<ChatTab[]>([{ id: "1", title: "Chat 1" }]);
-  const [activeChat, setActiveChat] = useState("1");
+  const [chats, setChats] = useState<ChatTab[]>([
+    { id: "local-default", title: "Chat 1" },
+  ]);
+  const [activeChat, setActiveChat] = useState("local-default");
 
   useEffect(() => {
     listConversations(workspaceId)
@@ -106,9 +108,27 @@ export function Copilot({
         { id: assistantId, chatId: activeChat, role: "assistant", parts: [] },
       ]);
       try {
+        let conversationId = activeChat;
+        if (activeChat.startsWith("local-")) {
+          // Promote the local tab to a persisted conversation so history
+          // survives and follow-up messages share context.
+          const conv = await createConversation(workspaceId);
+          conversationId = conv.id;
+          setChats((prev) =>
+            prev.map((c) =>
+              c.id === activeChat ? { ...c, id: conv.id } : c,
+            ),
+          );
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.chatId === activeChat ? { ...m, chatId: conv.id } : m,
+            ),
+          );
+          setActiveChat(conv.id);
+        }
         const result = await askCopilot({
           workspaceId,
-          conversationId: activeChat.startsWith("local-") ? undefined : activeChat,
+          conversationId,
           message: text,
           documentContent: context,
           availableWidgets,
