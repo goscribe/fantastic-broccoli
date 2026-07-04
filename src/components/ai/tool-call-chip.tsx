@@ -12,7 +12,7 @@ import {
   FileText,
 } from "lucide-react";
 import { Surface } from "@/components/ui/card";
-import { ToolCallPart, ToolName } from "@/components/ai/copilot-script";
+import { ToolCallPart, ToolName } from "@/components/ai/chat-types";
 
 const toolMeta: Record<ToolName, { icon: React.ElementType; color: string }> = {
   search_materials: { icon: Search, color: "text-sky" },

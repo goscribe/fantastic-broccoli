@@ -144,3 +144,10 @@ export async function createWorkspace(
   const ws = await api.workspace.create.mutate({ name, parentId });
   return (ws as { id: string }).id;
 }
+
+export async function inviteMember(
+  workspaceId: string,
+  email: string,
+): Promise<void> {
+  await api.workspace.members.inviteMember.mutate({ workspaceId, email, role: "member" });
+}
