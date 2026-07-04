@@ -343,7 +343,7 @@ export function TopBar({
               </Button>
             </div>
             {inviteError && (
-              <p className="mt-3 text-sm text-destructive">{inviteError}</p>
+              <p className="mt-3 text-sm text-rose">{inviteError}</p>
             )}
             {invited.length > 0 && (
               <div className="mt-4 space-y-1.5">

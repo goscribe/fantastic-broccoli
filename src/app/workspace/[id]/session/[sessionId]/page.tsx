@@ -83,13 +83,19 @@ export default function SessionDetailPage() {
   });
 
   const generating = session?.generating ?? false;
+  const [planError, setPlanError] = useState<string | null>(null);
   useEffect(() => {
     if (!generating) return;
     return subscribePlanGeneration(workspaceId, (event) => {
       if (event.sessionId !== sessionId) return;
+      if (event.error) setPlanError(event.error);
       queryClient.invalidateQueries({ queryKey: ["study-session", sessionId] });
     });
   }, [generating, workspaceId, sessionId, queryClient]);
+  // Generation finished but produced nothing — the plan job failed.
+  const planFailed =
+    !!planError ||
+    (!!session && !generating && session.activities.length === 0);
 
   // undefined = not chosen yet (default to first unfinished); null = plan done (debrief)
   const [chosenActivityId, setChosenActivityId] = useState<
@@ -469,7 +475,28 @@ export default function SessionDetailPage() {
               </div>
             )}
 
-            {generating ? (
+            {planFailed ? (
+              <div className="flex flex-col items-center justify-center py-24 text-center animate-fade-up">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-rose/10">
+                  <X className="h-5 w-5 text-rose" />
+                </div>
+                <p className="mt-4 text-sm font-semibold">
+                  Plan generation failed
+                </p>
+                <p className="mt-1 max-w-sm text-xs text-muted-foreground">
+                  {planError ??
+                    "Scribe couldn't build a study plan for this session. Delete it and create a new one to retry."}
+                </p>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="mt-5"
+                  onClick={() => router.push(`/workspace/${workspaceId}`)}
+                >
+                  Back to workspace
+                </Button>
+              </div>
+            ) : generating ? (
               <div className="flex flex-col items-center justify-center py-24 text-center animate-fade-up">
                 <div className="h-8 w-8 rounded-full border-2 border-accent border-t-transparent animate-spin" />
                 <p className="mt-4 text-sm font-semibold">
@@ -588,7 +615,7 @@ export default function SessionDetailPage() {
                   <button
                     type="button"
                     onClick={() => deleteNote(note.id)}
-                    className="opacity-0 group-hover:opacity-100 p-1 rounded text-muted-foreground hover:text-destructive transition-opacity"
+                    className="opacity-0 group-hover:opacity-100 p-1 rounded text-muted-foreground hover:text-rose transition-opacity"
                     aria-label="Delete note"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
