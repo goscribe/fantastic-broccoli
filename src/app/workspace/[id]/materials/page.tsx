@@ -13,6 +13,7 @@ import {
 import { Material, MaterialType } from "@/types";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { Card, Surface } from "@/components/ui/card";
+import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { formatRelativeDate } from "@/lib/utils";
 import {
@@ -200,7 +201,7 @@ export default function WorkspaceMaterialsPage() {
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { data: workspace } = useQuery({
+  const { data: workspace, isLoading: workspaceLoading } = useQuery({
     queryKey: ["workspace", workspaceId],
     queryFn: () => fetchWorkspace(workspaceId),
   });
@@ -252,6 +253,24 @@ export default function WorkspaceMaterialsPage() {
       ...prev,
     ]);
   };
+
+  if (workspaceLoading) {
+    return (
+      <WorkspaceShell workspace={workspace} loading>
+        <div className="space-y-6">
+          <div className="flex flex-wrap gap-2.5">
+            <Skeleton className="h-8 w-28" />
+            <Skeleton className="h-8 w-32" />
+            <Skeleton className="h-8 w-32" />
+          </div>
+          <div className="space-y-4">
+            <Skeleton className="h-4 w-28" />
+            <ListRowsSkeleton count={4} />
+          </div>
+        </div>
+      </WorkspaceShell>
+    );
+  }
 
   return (
     <WorkspaceShell workspace={workspace}>

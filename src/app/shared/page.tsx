@@ -7,6 +7,7 @@ import { fetchSharedWorkspaces } from "@/lib/api/workspace";
 import { Workspace } from "@/types";
 import { Users } from "lucide-react";
 import { AvatarStack } from "@/components/ui/avatar-stack";
+import { CardGridSkeleton } from "@/components/ui/skeleton";
 
 export default function SharedPage() {
   const [shared, setShared] = useState<Workspace[]>([]);
@@ -28,6 +29,8 @@ export default function SharedPage() {
           plans stay personal.
         </p>
       </div>
+
+      {loading && <CardGridSkeleton count={6} />}
 
       {!loading && shared.length === 0 && (
         <div className="rounded-xl border border-border bg-card px-6 py-12 text-center">

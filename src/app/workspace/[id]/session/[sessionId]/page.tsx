@@ -43,6 +43,7 @@ import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, Surface } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
 import { formatDuration, formatRelativeDate } from "@/lib/utils";
 import {
@@ -194,8 +195,36 @@ export default function SessionDetailPage() {
   if (!session || !workspace) {
     if (isLoading || workspaceLoading) {
       return (
-        <div className="flex-1 flex items-center justify-center">
-          <p className="text-sm text-muted-foreground">Loading session…</p>
+        <div className="flex-1 flex flex-col">
+          <div className="flex h-14 items-center justify-between border-b border-border bg-card px-4">
+            <div className="flex items-center gap-3">
+              <Skeleton className="h-8 w-8" />
+              <Skeleton className="h-4 w-48" />
+            </div>
+            <div className="flex items-center gap-2">
+              <Skeleton className="h-8 w-24" />
+              <Skeleton className="h-8 w-8" />
+            </div>
+          </div>
+          <div className="flex flex-1 overflow-hidden">
+            <div className="hidden w-72 shrink-0 border-r border-border bg-card p-4 space-y-3 lg:block">
+              <Skeleton className="h-3.5 w-24" />
+              {Array.from({ length: 6 }, (_, i) => (
+                <Skeleton key={i} className="h-12 w-full" />
+              ))}
+            </div>
+            <div className="flex-1 p-6 sm:p-10">
+              <div className="mx-auto max-w-2xl space-y-4">
+                <Skeleton className="h-6 w-2/3" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-5/6" />
+                <Skeleton className="h-40 w-full" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-3/4" />
+              </div>
+            </div>
+          </div>
         </div>
       );
     }

@@ -13,6 +13,7 @@ import { StudyCalendar } from "@/components/workspace/study-calendar";
 import { CreateResourceDialog } from "@/components/workspace/create-dialog";
 import { fetchActivityCalendar, type DailyActivityPoint } from "@/lib/api/study";
 import { Search, ArrowRight, Plus } from "lucide-react";
+import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
 
 function computeStreak(daily: DailyActivityPoint[]): number {
   const byDate = new Map(daily.map((d) => [d.date, d.count]));
@@ -48,6 +49,8 @@ export default function HomePage() {
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [dailyActivity, setDailyActivity] = useState<DailyActivityPoint[]>([]);
   const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
+  const [treeLoading, setTreeLoading] = useState(true);
+  const [calendarLoading, setCalendarLoading] = useState(true);
 
   const loadTree = () =>
     fetchWorkspaceTree()
@@ -55,11 +58,15 @@ export default function HomePage() {
         setFolders(tree.folders);
         setRootWorkspaces(tree.rootWorkspaces);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setTreeLoading(false));
 
   useEffect(() => {
     loadTree();
-    fetchActivityCalendar().then(setDailyActivity).catch(() => {});
+    fetchActivityCalendar()
+      .then(setDailyActivity)
+      .catch(() => {})
+      .finally(() => setCalendarLoading(false));
   }, []);
 
   const allWorkspaces = useMemo(
@@ -197,6 +204,34 @@ export default function HomePage() {
         {/* Study overview */}
         <section className="animate-fade-up">
           <h2 className="text-sm font-semibold mb-3">Study overview</h2>
+          {calendarLoading || treeLoading ? (
+            <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
+              <div className="rounded-xl border border-border bg-card p-4 space-y-3">
+                <Skeleton className="h-4 w-28" />
+                <Skeleton className="h-40 w-full" />
+              </div>
+              <div className="rounded-xl border border-border bg-card p-4 flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <Skeleton className="h-4 w-20" />
+                  <Skeleton className="h-7 w-28 rounded-full" />
+                </div>
+                <div className="flex flex-1 items-end gap-2.5 min-h-28">
+                  {[40, 65, 30, 80, 55, 70, 45].map((h, i) => (
+                    <Skeleton
+                      key={i}
+                      className="flex-1 max-w-9 rounded-t-md"
+                      style={{ height: `${h}%` }}
+                    />
+                  ))}
+                </div>
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <Skeleton key={i} className="h-14" />
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
           <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
             <div className="rounded-xl border border-border bg-card p-4">
               <StudyCalendar dailyActivity={dailyActivity} />
@@ -284,6 +319,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+          )}
         </section>
 
         {/* Search */}
@@ -313,6 +349,11 @@ export default function HomePage() {
                 />
               ))}
             </div>
+          </section>
+        ) : treeLoading ? (
+          <section className="animate-fade-up space-y-3">
+            <Skeleton className="h-4 w-16" />
+            <CardGridSkeleton count={6} className="xl:grid-cols-4" />
           </section>
         ) : (
           <section className="animate-fade-up">

@@ -12,6 +12,7 @@ import { ProgressBar } from "@/components/ui/progress-bar";
 import { Button } from "@/components/ui/button";
 import { formatDuration } from "@/lib/utils";
 import { Plus, Sparkles, ArrowRight } from "lucide-react";
+import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 
 export default function WorkspaceStudyPage() {
   const params = useParams();
@@ -19,12 +20,12 @@ export default function WorkspaceStudyPage() {
   const workspaceId = params.id as string;
   const [showCreateWizard, setShowCreateWizard] = useState(false);
 
-  const { data: workspace } = useQuery({
+  const { data: workspace, isLoading: workspaceLoading } = useQuery({
     queryKey: ["workspace", workspaceId],
     queryFn: () => fetchWorkspace(workspaceId),
   });
   const queryClient = useQueryClient();
-  const { data: sessions = [] } = useQuery({
+  const { data: sessions = [], isLoading: sessionsLoading } = useQuery({
     queryKey: ["study-sessions", workspaceId],
     queryFn: () => fetchStudySessions(workspaceId),
   });
@@ -45,6 +46,23 @@ export default function WorkspaceStudyPage() {
   const completedSessions = sessions.filter((s) => s.status === "completed");
   const resumable =
     activeSessions.find((s) => s.progress > 0) ?? activeSessions[0];
+
+  if (workspaceLoading || sessionsLoading) {
+    return (
+      <WorkspaceShell workspace={workspace} loading>
+        <div className="space-y-8">
+          <Skeleton className="h-36 w-full rounded-3xl" />
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <Skeleton className="h-4 w-28" />
+              <Skeleton className="h-8 w-28" />
+            </div>
+            <ListRowsSkeleton count={3} className="gap-4" />
+          </div>
+        </div>
+      </WorkspaceShell>
+    );
+  }
 
   return (
     <WorkspaceShell workspace={workspace}>
