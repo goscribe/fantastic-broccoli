@@ -31,6 +31,7 @@ export interface StudySession {
   comments: SessionNote[];
   activities: SessionActivity[];
   progress: number;
+  generating: boolean;
   status: "active" | "paused" | "completed";
   startDate: string;
   endDate?: string;

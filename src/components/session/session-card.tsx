@@ -78,6 +78,12 @@ export function SessionCard({ session, onClick }: SessionCardProps) {
         {session.examBoard && (
           <Badge variant="muted">{session.examBoard}</Badge>
         )}
+        {session.generating && (
+          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <span className="h-3 w-3 rounded-full border-[1.5px] border-accent border-t-transparent animate-spin" />
+            Generating plan…
+          </span>
+        )}
         {totalActivities > 0 && (
           <span className="text-xs text-muted-foreground ml-auto">
             {completedActivities}/{totalActivities} activities
