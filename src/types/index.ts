@@ -113,9 +113,33 @@ export interface FlashcardContent {
   cards: { front: string; back: string; known: boolean | null }[];
 }
 
+export interface GraphFigureExpression {
+  latex: string;
+  label?: string | null;
+}
+
+export interface ReadingGraphFigure {
+  id: string;
+  type: "graph";
+  title: string;
+  xLabel: string;
+  yLabel: string;
+  expressions: GraphFigureExpression[];
+}
+
+export interface ReadingImageFigure {
+  id: string;
+  type: "image";
+  url: string;
+  caption: string;
+}
+
+export type ReadingFigure = ReadingGraphFigure | ReadingImageFigure;
+
 export interface ReadingContent {
   type: "reading";
   text: string;
+  figures?: ReadingFigure[];
   highlights?: { start: number; end: number; note: string }[];
   completed: boolean;
 }

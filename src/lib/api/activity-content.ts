@@ -10,6 +10,7 @@ import type {
   McqContent,
   McqQuestion,
   ReadingContent,
+  ReadingFigure,
   VocabRecallContent,
   WorksheetContent,
   WorksheetPart,
@@ -84,10 +85,49 @@ function normalizeFlashcards(raw: Raw): FlashcardContent {
   };
 }
 
+function normalizeFigure(raw: Raw): ReadingFigure | null {
+  const type = str(raw.type);
+  if (type === "graph") {
+    const expressions = arr(raw.expressions)
+      .map((e) => {
+        const expr = obj(e);
+        return {
+          latex: str(expr.latex),
+          label: typeof expr.label === "string" ? expr.label : null,
+        };
+      })
+      .filter((e) => e.latex);
+    if (expressions.length === 0) return null;
+    return {
+      id: str(raw.id),
+      type: "graph",
+      title: str(raw.title),
+      xLabel: str(raw.xLabel),
+      yLabel: str(raw.yLabel),
+      expressions,
+    };
+  }
+  if (type === "image") {
+    const url = str(raw.url);
+    if (!url) return null;
+    return {
+      id: str(raw.id),
+      type: "image",
+      url,
+      caption: str(raw.caption),
+    };
+  }
+  return null;
+}
+
 function normalizeReading(raw: Raw): ReadingContent {
+  const figures = arr(raw.figures)
+    .map((f) => normalizeFigure(obj(f)))
+    .filter((f): f is ReadingFigure => f !== null);
   return {
     type: "reading",
     text: str(raw.text),
+    figures: figures.length > 0 ? figures : undefined,
     highlights: Array.isArray(raw.highlights)
       ? (raw.highlights as ReadingContent["highlights"])
       : undefined,
