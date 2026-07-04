@@ -212,6 +212,7 @@ export interface Material {
   pages?: number;
   durationSeconds?: number;
   sizeLabel?: string;
+  analyzed?: boolean;
   updatedAt: string;
 }
 

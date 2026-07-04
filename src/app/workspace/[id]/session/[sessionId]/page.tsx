@@ -48,6 +48,7 @@ import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
 import { formatDuration, formatRelativeDate } from "@/lib/utils";
 import {
   ArrowLeft,
+  Check,
   Clock,
   SkipForward,
   MessageSquare,
@@ -497,16 +498,7 @@ export default function SessionDetailPage() {
                 </Button>
               </div>
             ) : generating ? (
-              <div className="flex flex-col items-center justify-center py-24 text-center animate-fade-up">
-                <div className="h-8 w-8 rounded-full border-2 border-accent border-t-transparent animate-spin" />
-                <p className="mt-4 text-sm font-semibold">
-                  Generating your study plan…
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Scribe is building activities from your materials. This
-                  usually takes under a minute.
-                </p>
-              </div>
+              <GeneratingPlanCard title={session.title} />
             ) : activeActivity ? (
               <div className="space-y-5 animate-fade-up" key={activeActivity.id}>
                 <div className="flex items-center justify-between">
@@ -662,6 +654,70 @@ export default function SessionDetailPage() {
       )}
 
       {!copilotOpen && <CopilotTrigger onClick={() => setCopilotOpen(true)} />}
+    </div>
+  );
+}
+
+const GENERATION_STAGES = [
+  { label: "Gathering your materials", after: 0 },
+  { label: "Outlining the session", after: 6 },
+  { label: "Writing activities", after: 18 },
+  { label: "Finishing up", after: 45 },
+];
+
+/**
+ * Shown while the plan is generated in the background. Progress stages are
+ * time-based estimates (the server only reports done/failed via Pusher).
+ */
+function GeneratingPlanCard({ title }: { title: string }) {
+  const [elapsed, setElapsed] = useState(0);
+
+  useEffect(() => {
+    const tick = setInterval(() => setElapsed((s) => s + 1), 1000);
+    return () => clearInterval(tick);
+  }, []);
+
+  const currentStage = GENERATION_STAGES.reduce(
+    (acc, stage, i) => (elapsed >= stage.after ? i : acc),
+    0,
+  );
+
+  return (
+    <div className="flex flex-col items-center justify-center py-20 text-center animate-fade-up">
+      <div className="h-8 w-8 rounded-full border-2 border-accent border-t-transparent animate-spin" />
+      <p className="mt-4 text-sm font-semibold">
+        Building &ldquo;{title}&rdquo;…
+      </p>
+      <p className="mt-1 text-xs text-muted-foreground">
+        Scribe is generating a study plan grounded in your materials. This
+        usually takes under a minute — you can leave and come back.
+      </p>
+      <div className="mt-6 w-full max-w-xs space-y-2 text-left">
+        {GENERATION_STAGES.map((stage, i) => (
+          <p
+            key={stage.label}
+            className="flex items-center gap-2 text-xs font-medium"
+          >
+            {i < currentStage ? (
+              <Check className="h-3.5 w-3.5 text-accent" />
+            ) : i === currentStage ? (
+              <span className="h-3.5 w-3.5 rounded-full border-[1.5px] border-accent border-t-transparent animate-spin" />
+            ) : (
+              <span className="h-1.5 w-1.5 mx-1 rounded-full bg-border-strong" />
+            )}
+            <span
+              className={
+                i <= currentStage ? "text-foreground" : "text-faint"
+              }
+            >
+              {stage.label}
+            </span>
+          </p>
+        ))}
+      </div>
+      <p className="mt-5 text-[11px] text-faint tabular-nums">
+        {elapsed}s elapsed
+      </p>
     </div>
   );
 }
