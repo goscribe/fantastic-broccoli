@@ -14,6 +14,42 @@ import { BookOpen, ArrowRight, Highlighter, Trash2 } from "lucide-react";
 
 const WIDGET_TOKEN = /^\[\[widget:([a-z-]+)\]\]$/;
 
+/** Strips inline markdown markers so highlight offsets match displayed text. */
+function stripInlineMarkdown(text: string): string {
+  return text.replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1");
+}
+
+type ReadingBlock =
+  | { kind: "widget"; widget: string }
+  | { kind: "heading"; level: number; text: string }
+  | { kind: "list"; items: string[] }
+  | { kind: "paragraph"; text: string };
+
+function parseBlock(raw: string): ReadingBlock {
+  const trimmed = raw.trim();
+  const widgetMatch = trimmed.match(WIDGET_TOKEN);
+  if (widgetMatch) return { kind: "widget", widget: widgetMatch[1] };
+
+  const headingMatch = trimmed.match(/^(#{1,4})\s+(.*)$/);
+  if (headingMatch && !headingMatch[2].includes("\n")) {
+    return {
+      kind: "heading",
+      level: headingMatch[1].length,
+      text: stripInlineMarkdown(headingMatch[2]),
+    };
+  }
+
+  const lines = trimmed.split("\n").map((l) => l.trim()).filter(Boolean);
+  if (lines.length > 0 && lines.every((l) => /^[-*]\s+/.test(l))) {
+    return {
+      kind: "list",
+      items: lines.map((l) => stripInlineMarkdown(l.replace(/^[-*]\s+/, ""))),
+    };
+  }
+
+  return { kind: "paragraph", text: stripInlineMarkdown(trimmed) };
+}
+
 export type HighlightColor = "amber" | "green" | "purple";
 
 export interface ReadingHighlight {
@@ -112,7 +148,7 @@ function ParagraphView({
   if (cursor < text.length) segments.push(text.slice(cursor));
 
   return (
-    <p data-para={para} className="text-sm leading-relaxed">
+    <p data-para={para} className="text-[15px] leading-7">
       {segments}
     </p>
   );
@@ -151,13 +187,17 @@ export function ReadingActivity({
   } | null>(null);
   const [noteDraft, setNoteDraft] = useState("");
 
-  const blocks = content.text.split("\n\n");
+  const parsedBlocks = content.text.split("\n\n").map(parseBlock);
+  const paraText = (i: number) => {
+    const block = parsedBlocks[i];
+    return block?.kind === "paragraph" ? block.text : "";
+  };
 
   useEffect(() => {
     onHighlightsChange?.(
       highlights.map((h) => ({
         id: h.id,
-        text: blocks[h.para]?.slice(h.start, h.end) ?? "",
+        text: paraText(h.para).slice(h.start, h.end),
         color: h.color,
         note: h.note,
       })),
@@ -212,7 +252,7 @@ export function ReadingActivity({
 
     addReadingHighlight({
       activityId,
-      text: blocks[para]?.slice(start, end) ?? "",
+      text: paraText(para).slice(start, end),
       color,
       paragraph: para,
       startChar: start,
@@ -260,15 +300,38 @@ export function ReadingActivity({
         onMouseUp={handleMouseUp}
         className="relative space-y-4 select-text"
       >
-        {blocks.map((block, i) => {
-          const widgetMatch = block.trim().match(WIDGET_TOKEN);
-          if (widgetMatch && widgetMatch[1] in widgetRegistry) {
-            return <InteractiveWidget key={i} id={widgetMatch[1] as WidgetId} />;
+        {parsedBlocks.map((block, i) => {
+          if (block.kind === "widget") {
+            return block.widget in widgetRegistry ? (
+              <InteractiveWidget key={i} id={block.widget as WidgetId} />
+            ) : null;
+          }
+          if (block.kind === "heading") {
+            return (
+              <h3
+                key={i}
+                className={cn(
+                  "font-semibold tracking-tight",
+                  block.level <= 2 ? "text-lg pt-2" : "text-base pt-1",
+                )}
+              >
+                {block.text}
+              </h3>
+            );
+          }
+          if (block.kind === "list") {
+            return (
+              <ul key={i} className="list-disc pl-5 space-y-1.5 text-[15px] leading-7">
+                {block.items.map((item, j) => (
+                  <li key={j}>{item}</li>
+                ))}
+              </ul>
+            );
           }
           return (
             <ParagraphView
               key={i}
-              text={block}
+              text={block.text}
               para={i}
               highlights={highlights}
               onHighlightClick={openHighlight}

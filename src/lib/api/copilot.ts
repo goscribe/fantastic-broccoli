@@ -28,21 +28,34 @@ export async function createConversation(
   return { id: row.id, title: row.title };
 }
 
+export interface CopilotAnswer {
+  answer: string;
+  widgets: string[];
+}
+
 export async function askCopilot(input: {
   workspaceId: string;
   conversationId?: string;
   message: string;
   documentContent?: string;
-}): Promise<string> {
+  availableWidgets?: { id: string; description: string }[];
+}): Promise<CopilotAnswer> {
+  type AskInput = Parameters<typeof api.copilot.ask.mutate>[0];
+  // availableWidgets is newer than the published @goscribe/server types.
+  const context = {
+    workspaceId: input.workspaceId,
+    artifactId: input.workspaceId,
+    artifactType: "study-guide",
+    documentContent: input.documentContent ?? "",
+    availableWidgets: input.availableWidgets,
+  } as AskInput["context"];
   const result = await api.copilot.ask.mutate({
-    context: {
-      workspaceId: input.workspaceId,
-      artifactId: input.workspaceId,
-      artifactType: "study-guide",
-      documentContent: input.documentContent ?? "",
-    },
+    context,
     message: input.message,
     conversationId: input.conversationId,
   });
-  return result.answer;
+  return {
+    answer: result.answer,
+    widgets: (result as { widgets?: string[] }).widgets ?? [],
+  };
 }
