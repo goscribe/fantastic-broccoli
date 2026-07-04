@@ -45,20 +45,18 @@ export function Copilot({
   workspaceId: string;
 }) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [chats, setChats] = useState<ChatTab[]>([
-    { id: "local-default", title: "Chat 1" },
-  ]);
-  const [activeChat, setActiveChat] = useState("local-default");
+  const [chats, setChats] = useState<ChatTab[]>([]);
+  const [activeChat, setActiveChat] = useState<string | null>(null);
+  const [chatsLoading, setChatsLoading] = useState(true);
 
   useEffect(() => {
     listConversations(workspaceId)
       .then((rows) => {
-        if (rows.length > 0) {
-          setChats(rows);
-          setActiveChat(rows[0].id);
-        }
+        setChats(rows);
+        setActiveChat(rows[0]?.id ?? null);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setChatsLoading(false));
   }, [workspaceId]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -95,9 +93,10 @@ export function Copilot({
       if (!text.trim() || busy) return;
       setInput("");
       setBusy(true);
+      const pendingChatId = activeChat ?? "pending";
       const userMsg: ChatMessage = {
         id: nextId(),
-        chatId: activeChat,
+        chatId: pendingChatId,
         role: "user",
         parts: [{ kind: "text", id: nextId(), text, done: true }],
       };
@@ -105,23 +104,17 @@ export function Copilot({
       setMessages((prev) => [
         ...prev,
         userMsg,
-        { id: assistantId, chatId: activeChat, role: "assistant", parts: [] },
+        { id: assistantId, chatId: pendingChatId, role: "assistant", parts: [] },
       ]);
       try {
         let conversationId = activeChat;
-        if (activeChat.startsWith("local-")) {
-          // Promote the local tab to a persisted conversation so history
-          // survives and follow-up messages share context.
+        if (!conversationId) {
           const conv = await createConversation(workspaceId);
           conversationId = conv.id;
-          setChats((prev) =>
-            prev.map((c) =>
-              c.id === activeChat ? { ...c, id: conv.id } : c,
-            ),
-          );
+          setChats((prev) => [...prev, conv]);
           setMessages((prev) =>
             prev.map((m) =>
-              m.chatId === activeChat ? { ...m, chatId: conv.id } : m,
+              m.chatId === pendingChatId ? { ...m, chatId: conv.id } : m,
             ),
           );
           setActiveChat(conv.id);
@@ -189,7 +182,7 @@ export function Copilot({
   );
 
   const chatMessages = messages.filter(
-    (m) => (m.chatId ?? chats[0]?.id) === activeChat,
+    (m) => (m.chatId ?? "pending") === (activeChat ?? "pending"),
   );
 
   const newChat = async () => {
@@ -198,9 +191,7 @@ export function Copilot({
       setChats((prev) => [...prev, conv]);
       setActiveChat(conv.id);
     } catch {
-      const next = { id: `local-${Date.now()}`, title: `Chat ${chats.length + 1}` };
-      setChats((prev) => [...prev, next]);
-      setActiveChat(next.id);
+      // keep current chat; the next send retries conversation creation
     }
   };
 
@@ -227,6 +218,13 @@ export function Copilot({
       <div className="flex items-center gap-2 px-3 h-12 border-b border-border shrink-0">
         <p className="text-sm font-semibold shrink-0">Copilot</p>
         <div className="flex items-center gap-1 ml-1 flex-1 min-w-0 overflow-x-auto">
+          {chatsLoading &&
+            [0, 1].map((i) => (
+              <span
+                key={i}
+                className="h-5 w-14 rounded-full bg-muted animate-pulse shrink-0"
+              />
+            ))}
           {chats.map((c) => (
             <button
               key={c.id}

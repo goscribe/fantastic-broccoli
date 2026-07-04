@@ -2,8 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 
-/** Credits earned for completing study sessions. Persisted locally in demo
- * mode; a live backend would track this server-side. */
+/** Credits earned for completing study sessions, persisted locally. */
 
 const STORAGE_KEY = "scribe-credits";
 const AWARDED_KEY = "scribe-credits-awarded";
@@ -15,7 +14,7 @@ function read(): number {
   if (typeof window === "undefined") return 0;
   const raw = window.localStorage.getItem(STORAGE_KEY);
   const value = raw ? parseInt(raw, 10) : NaN;
-  return Number.isFinite(value) ? value : 120;
+  return Number.isFinite(value) ? value : 0;
 }
 
 function emit() {

@@ -14,6 +14,7 @@ import {
   markNotificationRead,
   type AppNotification,
 } from "@/lib/api/notifications";
+import { inviteMember } from "@/lib/api/workspace";
 import { formatRelativeDate } from "@/lib/utils";
 import { useCredits } from "@/lib/credits";
 
@@ -42,8 +43,11 @@ export function TopBar({
   const [inviteOpen, setInviteOpen] = useState(false);
   const [inviteEmail, setInviteEmail] = useState("");
   const [invited, setInvited] = useState<string[]>([]);
+  const [inviting, setInviting] = useState(false);
+  const [inviteError, setInviteError] = useState<string | null>(null);
   const [notifOpen, setNotifOpen] = useState(false);
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
+  const [notifLoading, setNotifLoading] = useState(false);
   const [unread, setUnread] = useState(0);
   const menuRef = useRef<HTMLDivElement>(null);
   const notifRef = useRef<HTMLDivElement>(null);
@@ -68,7 +72,11 @@ export function TopBar({
   const openNotifications = () => {
     setNotifOpen((v) => !v);
     if (!notifOpen) {
-      fetchNotifications().then(setNotifications).catch(() => {});
+      setNotifLoading(true);
+      fetchNotifications()
+        .then(setNotifications)
+        .catch(() => {})
+        .finally(() => setNotifLoading(false));
     }
   };
 
@@ -86,10 +94,23 @@ export function TopBar({
     }
   };
 
-  const sendInvite = () => {
-    if (!inviteEmail.trim()) return;
-    setInvited((prev) => [...prev, inviteEmail.trim()]);
-    setInviteEmail("");
+  const workspaceId = pathname.match(/^\/workspace\/([^/]+)/)?.[1];
+
+  const sendInvite = async () => {
+    const email = inviteEmail.trim();
+    if (!email || !workspaceId || inviting) return;
+    setInviting(true);
+    setInviteError(null);
+    try {
+      await inviteMember(workspaceId, email);
+      setInvited((prev) => [...prev, email]);
+      setInviteEmail("");
+    } catch (err) {
+      setInviteError(
+        err instanceof Error ? err.message : "Failed to send invite.",
+      );
+    }
+    setInviting(false);
   };
 
   return (
@@ -172,7 +193,19 @@ export function TopBar({
                     )}
                   </div>
                   <div className="max-h-80 overflow-y-auto">
-                    {notifications.length === 0 ? (
+                    {notifLoading ? (
+                      <div className="space-y-3 px-3.5 py-3">
+                        {[0, 1, 2].map((i) => (
+                          <div key={i} className="flex items-start gap-2.5">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted animate-pulse" />
+                            <div className="flex-1 space-y-1.5">
+                              <div className="h-3 w-3/4 rounded bg-muted animate-pulse" />
+                              <div className="h-2.5 w-1/2 rounded bg-muted animate-pulse" />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : notifications.length === 0 ? (
                       <p className="px-3.5 py-6 text-center text-sm text-muted-foreground">
                         You&apos;re all caught up.
                       </p>
@@ -226,17 +259,19 @@ export function TopBar({
                       {user?.email ?? "Personal workspace"}
                     </p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMenuOpen(false);
-                      setInviteOpen(true);
-                    }}
-                    className="w-full flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-muted text-left"
-                  >
-                    <UserPlus className="h-4 w-4 text-muted-foreground" />
-                    Invite people
-                  </button>
+                  {workspaceId && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMenuOpen(false);
+                        setInviteOpen(true);
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-muted text-left"
+                    >
+                      <UserPlus className="h-4 w-4 text-muted-foreground" />
+                      Invite people
+                    </button>
+                  )}
                   <button
                     type="button"
                     className="w-full flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-muted text-left"
@@ -295,14 +330,21 @@ export function TopBar({
                 type="email"
                 value={inviteEmail}
                 onChange={(e) => setInviteEmail(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && sendInvite()}
+                onKeyDown={(e) => e.key === "Enter" && void sendInvite()}
                 placeholder="name@school.edu"
                 className="flex-1 h-10 rounded-xl border border-border bg-background px-3.5 text-sm focus:outline-none focus:border-accent/50 placeholder:text-faint"
               />
-              <Button size="md" onClick={sendInvite} disabled={!inviteEmail.trim()}>
-                Invite
+              <Button
+                size="md"
+                onClick={() => void sendInvite()}
+                disabled={!inviteEmail.trim() || !workspaceId || inviting}
+              >
+                {inviting ? "Inviting…" : "Invite"}
               </Button>
             </div>
+            {inviteError && (
+              <p className="mt-3 text-sm text-destructive">{inviteError}</p>
+            )}
             {invited.length > 0 && (
               <div className="mt-4 space-y-1.5">
                 {invited.map((email) => (
