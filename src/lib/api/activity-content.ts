@@ -7,6 +7,7 @@ import type {
   ExplainAloudContent,
   FlashcardContent,
   InteractiveContent,
+  MarkScheme,
   McqContent,
   McqQuestion,
   ReadingContent,
@@ -135,6 +136,27 @@ function normalizeReading(raw: Raw): ReadingContent {
   };
 }
 
+function markScheme(raw: unknown): MarkScheme | undefined {
+  const scheme = obj(raw);
+  const points = arr(scheme.points)
+    .map((p) => {
+      const point = obj(p);
+      return {
+        point: typeof point.point === "number" ? point.point : 1,
+        requirements: str(point.requirements),
+      };
+    })
+    .filter((p) => p.requirements);
+  if (points.length === 0) return undefined;
+  return {
+    points,
+    totalPoints:
+      typeof scheme.totalPoints === "number"
+        ? scheme.totalPoints
+        : points.reduce((s, p) => s + p.point, 0),
+  };
+}
+
 function worksheetPart(raw: Raw): WorksheetPart {
   const type = str(raw.type);
   return {
@@ -144,6 +166,7 @@ function worksheetPart(raw: Raw): WorksheetPart {
     answer: typeof raw.answer === "string" ? raw.answer : undefined,
     userAnswer: typeof raw.userAnswer === "string" ? raw.userAnswer : undefined,
     marks: typeof raw.marks === "number" ? raw.marks : undefined,
+    markScheme: markScheme(raw.markScheme ?? raw.mark_scheme),
   };
 }
 

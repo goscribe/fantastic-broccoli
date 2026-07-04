@@ -151,6 +151,28 @@ export interface WorksheetFigure {
   source?: { file: string; page: number };
 }
 
+export interface MarkSchemePoint {
+  point: number;
+  requirements: string;
+}
+
+export interface MarkScheme {
+  points: MarkSchemePoint[];
+  totalPoints: number;
+}
+
+export interface MarkedPoint extends MarkSchemePoint {
+  achievedPoints: number;
+  feedback: string;
+}
+
+export interface PartMarking {
+  points: MarkedPoint[];
+  achievedPoints: number;
+  totalPoints: number;
+  correct: boolean;
+}
+
 export interface WorksheetPart {
   label: string;
   prompt: string;
@@ -158,6 +180,7 @@ export interface WorksheetPart {
   answer?: string;
   userAnswer?: string;
   marks?: number;
+  markScheme?: MarkScheme;
 }
 
 export interface WorksheetStep {
