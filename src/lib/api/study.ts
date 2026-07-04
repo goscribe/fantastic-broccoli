@@ -118,6 +118,49 @@ export async function removeReadingHighlight(
   await studySessionApi.removeHighlight(highlightId);
 }
 
+export interface PlanGenerationEvent {
+  sessionId: string;
+  error?: string;
+}
+
+/**
+ * Subscribe to background plan-generation events for a workspace. The server
+ * generates session plans on its job queue and emits `study_plan_complete` /
+ * `study_plan_error` on the workspace's Pusher channel when done. Returns an
+ * unsubscribe function. No-op without Pusher config (callers should also poll
+ * while a session is generating).
+ */
+export function subscribePlanGeneration(
+  workspaceId: string,
+  onEvent: (event: PlanGenerationEvent) => void,
+): () => void {
+  const key = process.env.NEXT_PUBLIC_PUSHER_KEY;
+  const cluster = process.env.NEXT_PUBLIC_PUSHER_CLUSTER;
+  if (!key || !cluster) return () => {};
+
+  let cleanup: (() => void) | undefined;
+  let cancelled = false;
+
+  import("pusher-js").then(({ default: Pusher }) => {
+    if (cancelled) return;
+    const pusher = new Pusher(key, { cluster });
+    const channel = pusher.subscribe(`workspace_${workspaceId}`);
+    channel.bind("study_plan_complete", onEvent);
+    channel.bind("study_plan_error", onEvent);
+    cleanup = () => {
+      channel.unbind("study_plan_complete", onEvent);
+      channel.unbind("study_plan_error", onEvent);
+      pusher.unsubscribe(`workspace_${workspaceId}`);
+      pusher.disconnect();
+    };
+  });
+
+  return () => {
+    cancelled = true;
+    cleanup?.();
+  };
+}
+
 export interface DailyActivityPoint {
   date: string;
   count: number;

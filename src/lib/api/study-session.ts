@@ -84,6 +84,7 @@ export interface ApiStudySession {
   durationMinutes: number;
   status: ApiSessionStatus;
   progress: number;
+  generating?: boolean;
   examBoard: ExamBoard | null;
   syllabus: string | null;
   topics: string | null;
@@ -339,6 +340,7 @@ export function mapSession(s: ApiStudySession): StudySession {
     })),
     activities: (s.activities ?? []).map(mapActivity),
     progress: s.progress,
+    generating: s.generating ?? false,
     status: s.status.toLowerCase() as StudySession["status"],
     startDate: s.startDate.toISOString(),
     endDate: s.endDate?.toISOString(),

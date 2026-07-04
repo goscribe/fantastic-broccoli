@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
@@ -11,6 +11,7 @@ import {
   fetchStudySession,
   removeSessionNote,
   setActivityStatus,
+  subscribePlanGeneration,
 } from "@/lib/api/study";
 import {
   SessionActivity,
@@ -74,7 +75,20 @@ export default function SessionDetailPage() {
   const { data: session, isLoading } = useQuery({
     queryKey: ["study-session", sessionId],
     queryFn: () => fetchStudySession(sessionId),
+    // Plans are generated in the background — poll while generating as a
+    // fallback for when Pusher isn't configured.
+    refetchInterval: (query) =>
+      query.state.data?.generating ? 4000 : false,
   });
+
+  const generating = session?.generating ?? false;
+  useEffect(() => {
+    if (!generating) return;
+    return subscribePlanGeneration(workspaceId, (event) => {
+      if (event.sessionId !== sessionId) return;
+      queryClient.invalidateQueries({ queryKey: ["study-session", sessionId] });
+    });
+  }, [generating, workspaceId, sessionId, queryClient]);
 
   // undefined = not chosen yet (default to first unfinished); null = plan done (debrief)
   const [chosenActivityId, setChosenActivityId] = useState<
@@ -426,7 +440,18 @@ export default function SessionDetailPage() {
               </div>
             )}
 
-            {activeActivity ? (
+            {generating ? (
+              <div className="flex flex-col items-center justify-center py-24 text-center animate-fade-up">
+                <div className="h-8 w-8 rounded-full border-2 border-accent border-t-transparent animate-spin" />
+                <p className="mt-4 text-sm font-semibold">
+                  Generating your study plan…
+                </p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Scribe is building activities from your materials. This
+                  usually takes under a minute.
+                </p>
+              </div>
+            ) : activeActivity ? (
               <div className="space-y-5 animate-fade-up" key={activeActivity.id}>
                 <div className="flex items-center justify-between">
                   <h2 className="text-base font-bold tracking-tight">
