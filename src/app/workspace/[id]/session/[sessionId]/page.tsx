@@ -97,6 +97,8 @@ export default function SessionDetailPage() {
   const planFailed =
     !!planError ||
     (!!session && !generating && session.activities.length === 0);
+  // No study features until the plan actually exists.
+  const planReady = !!session && !generating && !planFailed;
 
   // undefined = not chosen yet (default to first unfinished); null = plan done (debrief)
   const [chosenActivityId, setChosenActivityId] = useState<
@@ -131,7 +133,7 @@ export default function SessionDetailPage() {
         sessionId,
         session?.activities.length ?? 0,
       ),
-    enabled: !!session,
+    enabled: planReady,
   });
   const activities = useMemo(
     () =>
@@ -273,7 +275,7 @@ export default function SessionDetailPage() {
     : activities.length;
   const nearEnd = activeIndex >= activities.length - 2;
   const showExtendPrompt =
-    nearEnd && !extended && !extendDismissed && extensions.length > 0;
+    planReady && nearEnd && !extended && !extendDismissed && extensions.length > 0;
   const extensionMinutes = extensions.reduce(
     (s, a) => s + a.estimatedMinutes,
     0,
@@ -377,39 +379,42 @@ export default function SessionDetailPage() {
           <Badge variant="accent" className="capitalize shrink-0">
             {session.depth}
           </Badge>
-          <div className="ml-auto flex items-center gap-4 shrink-0">
-            <span className="flex items-center gap-1 text-xs text-muted-foreground">
-              <Clock className="h-3 w-3" />
-              {formatDuration(totalEstimated)}
-            </span>
-            <span className="text-xs text-muted-foreground">
-              {completedCount}/{activities.length} done
-            </span>
-            <div className="w-32">
-              <ProgressBar value={session.progress} size="sm" />
+          {planReady && (
+            <div className="ml-auto flex items-center gap-4 shrink-0">
+              <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Clock className="h-3 w-3" />
+                {formatDuration(totalEstimated)}
+              </span>
+              <span className="text-xs text-muted-foreground">
+                {completedCount}/{activities.length} done
+              </span>
+              <div className="w-32">
+                <ProgressBar value={session.progress} size="sm" />
+              </div>
+              <span className="text-xs font-semibold tabular-nums">
+                {session.progress}%
+              </span>
+              <button
+                type="button"
+                onClick={() => setShowComments(!showComments)}
+                className="relative p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
+              >
+                <MessageSquare className="h-4 w-4" />
+                {panelCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-accent text-[9px] font-bold text-accent-foreground flex items-center justify-center">
+                    {panelCount}
+                  </span>
+                )}
+              </button>
             </div>
-            <span className="text-xs font-semibold tabular-nums">
-              {session.progress}%
-            </span>
-            <button
-              type="button"
-              onClick={() => setShowComments(!showComments)}
-              className="relative p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
-            >
-              <MessageSquare className="h-4 w-4" />
-              {panelCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-accent text-[9px] font-bold text-accent-foreground flex items-center justify-center">
-                  {panelCount}
-                </span>
-              )}
-            </button>
-          </div>
+          )}
         </div>
       </header>
 
       {/* Content */}
       <div className="flex-1 flex min-h-0 overflow-hidden w-full">
         {/* Activity list sidebar on desktop */}
+        {planReady && (
         <aside className="hidden lg:flex w-72 flex-shrink-0 flex-col border-r border-border overflow-y-auto">
           <div className="py-6 pr-4 pl-5">
             <p className="text-xs font-semibold text-muted-foreground mb-3">
@@ -439,6 +444,7 @@ export default function SessionDetailPage() {
             </div>
           </div>
         </aside>
+        )}
 
         {/* Main study area */}
         <main className="flex-1 overflow-y-auto bg-card">
@@ -527,6 +533,7 @@ export default function SessionDetailPage() {
             )}
 
             {/* Mobile activity list */}
+            {planReady && (
             <div className="lg:hidden mt-10 border-t border-border pt-6">
               <p className="text-xs font-semibold text-muted-foreground mb-3">
                 Your plan
@@ -543,6 +550,7 @@ export default function SessionDetailPage() {
                 ))}
               </div>
             </div>
+            )}
           </div>
         </main>
       </div>
@@ -550,14 +558,14 @@ export default function SessionDetailPage() {
 
       {/* Copilot split pane */}
       <Copilot
-        open={copilotOpen}
+        open={planReady && copilotOpen}
         onClose={() => setCopilotOpen(false)}
         workspaceId={workspaceId}
         context={`Session: ${session.title}`}
       />
 
       {/* Comments panel */}
-      {showComments && (
+      {planReady && showComments && (
         <div className="fixed inset-y-0 right-0 w-[26rem] max-w-full bg-card border-l border-border z-50 flex flex-col animate-fade-up">
           <div className="flex items-center justify-between h-14 px-4 border-b border-border shrink-0">
             <h3 className="text-sm font-semibold">Session notes</h3>
@@ -654,7 +662,9 @@ export default function SessionDetailPage() {
         </div>
       )}
 
-      {!copilotOpen && <CopilotTrigger onClick={() => setCopilotOpen(true)} />}
+      {planReady && !copilotOpen && (
+        <CopilotTrigger onClick={() => setCopilotOpen(true)} />
+      )}
     </div>
   );
 }
