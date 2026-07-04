@@ -6,6 +6,7 @@ import {
   depthToApi,
   type ApiArtifactKind,
 } from "./study-session";
+import { normalizeActivityContent } from "./activity-content";
 import type {
   ActivityContent,
   ActivityStatus,
@@ -202,7 +203,10 @@ export async function fetchExtensionActivities(
     type: activityTypeFromKind[item.kind],
     title: item.title,
     description: item.topic ?? undefined,
-    content: item.content as unknown as ActivityContent,
+    content: normalizeActivityContent(
+      activityTypeFromKind[item.kind],
+      item.content,
+    ),
     order: startOrder + i,
     status: "pending" as const,
     estimatedMinutes: 8,
