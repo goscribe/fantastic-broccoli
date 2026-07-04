@@ -334,6 +334,7 @@ export default function SessionDetailPage() {
       case "worksheet":
         return (
           <WorksheetActivity
+            activityId={activity.id}
             content={activity.content as WorksheetContent}
             onComplete={() => goToNext()}
           />

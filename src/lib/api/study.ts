@@ -11,6 +11,7 @@ import type {
   ActivityStatus,
   ActivityType,
   ExamBoard,
+  PartMarking,
   SessionActivity,
   SessionDepth,
   SessionHighlight,
@@ -52,6 +53,21 @@ export async function createStudySession(
     depth: depthToApi[input.depth],
   });
   return mapSession(row);
+}
+
+export async function markWorksheetAnswer(input: {
+  activityId: string;
+  stepIndex: number;
+  partIndex: number;
+  answer: string;
+}): Promise<PartMarking> {
+  const result = await studySessionApi.markWorksheetAnswer(input);
+  return {
+    points: result.marking.points,
+    achievedPoints: result.achievedPoints,
+    totalPoints: result.totalPoints,
+    correct: result.correct,
+  };
 }
 
 export async function setActivityStatus(

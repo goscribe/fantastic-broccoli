@@ -39,6 +39,21 @@ export type ApiActivityType =
   | "CLOZE"
   | "EXPLAIN_ALOUD";
 
+export interface ApiPartMarking {
+  marking: {
+    points: Array<{
+      point: number;
+      requirements: string;
+      achievedPoints: number;
+      feedback: string;
+    }>;
+    totalPoints: number;
+  };
+  achievedPoints: number;
+  totalPoints: number;
+  correct: boolean;
+}
+
 export interface ApiSessionActivity {
   id: string;
   sessionId: string;
@@ -190,6 +205,14 @@ export const studySessionApi = {
       status,
       timeSpentSeconds,
     }),
+
+  markWorksheetAnswer: (input: {
+    activityId: string;
+    stepIndex: number;
+    partIndex: number;
+    answer: string;
+  }) =>
+    rpc<ApiPartMarking>("studySession.markWorksheetAnswer", "mutation", input),
 
   addActivities: (sessionId: string, activities: AddActivityInput[]) =>
     rpc<{ count: number }>("studySession.addActivities", "mutation", {
