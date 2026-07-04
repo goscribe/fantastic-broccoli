@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ReadingContent, SessionHighlight } from "@/types";
+import { ReadingContent, ReadingFigure, SessionHighlight } from "@/types";
 import {
   addReadingHighlight,
   removeReadingHighlight,
@@ -9,10 +9,12 @@ import {
 } from "@/lib/api/study";
 import { Button } from "@/components/ui/button";
 import { InteractiveWidget, WidgetId, widgetRegistry } from "@/components/interactive";
+import { ExpressionGraph } from "@/components/interactive/desmos";
 import { cn } from "@/lib/utils";
 import { BookOpen, ArrowRight, Highlighter, Trash2 } from "lucide-react";
 
 const WIDGET_TOKEN = /^\[\[widget:([a-z-]+)\]\]$/;
+const FIGURE_TOKEN = /^\[\[figure:([^\]]+)\]\]$/;
 
 /** Strips inline markdown markers so highlight offsets match displayed text. */
 function stripInlineMarkdown(text: string): string {
@@ -21,6 +23,7 @@ function stripInlineMarkdown(text: string): string {
 
 type ReadingBlock =
   | { kind: "widget"; widget: string }
+  | { kind: "figure"; figureId: string }
   | { kind: "heading"; level: number; text: string }
   | { kind: "list"; items: string[] }
   | { kind: "paragraph"; text: string };
@@ -29,6 +32,9 @@ function parseBlock(raw: string): ReadingBlock {
   const trimmed = raw.trim();
   const widgetMatch = trimmed.match(WIDGET_TOKEN);
   if (widgetMatch) return { kind: "widget", widget: widgetMatch[1] };
+
+  const figureMatch = trimmed.match(FIGURE_TOKEN);
+  if (figureMatch) return { kind: "figure", figureId: figureMatch[1] };
 
   const headingMatch = trimmed.match(/^(#{1,4})\s+(.*)$/);
   if (headingMatch && !headingMatch[2].includes("\n")) {
@@ -95,6 +101,34 @@ function fromPersisted(h: SessionHighlight): Highlight {
 }
 
 let tempId = 0;
+
+function FigureView({ figure }: { figure: ReadingFigure }) {
+  if (figure.type === "graph") {
+    return (
+      <ExpressionGraph
+        title={figure.title}
+        xLabel={figure.xLabel}
+        yLabel={figure.yLabel}
+        expressions={figure.expressions}
+      />
+    );
+  }
+  return (
+    <figure className="my-2 overflow-hidden rounded-xl border border-border bg-card animate-fade-up">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={figure.url}
+        alt={figure.caption}
+        className="w-full max-h-96 object-contain bg-muted/40"
+      />
+      {figure.caption && (
+        <figcaption className="px-3.5 py-2 text-[11px] text-muted-foreground border-t border-border">
+          {figure.caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
 
 function offsetWithin(paraEl: HTMLElement, node: Node, offset: number): number {
   let total = 0;
@@ -188,6 +222,9 @@ export function ReadingActivity({
   const [noteDraft, setNoteDraft] = useState("");
 
   const parsedBlocks = content.text.split("\n\n").map(parseBlock);
+  const figuresById = new Map(
+    (content.figures ?? []).map((figure) => [figure.id, figure]),
+  );
   const paraText = (i: number) => {
     const block = parsedBlocks[i];
     return block?.kind === "paragraph" ? block.text : "";
@@ -305,6 +342,10 @@ export function ReadingActivity({
             return block.widget in widgetRegistry ? (
               <InteractiveWidget key={i} id={block.widget as WidgetId} />
             ) : null;
+          }
+          if (block.kind === "figure") {
+            const figure = figuresById.get(block.figureId);
+            return figure ? <FigureView key={i} figure={figure} /> : null;
           }
           if (block.kind === "heading") {
             return (

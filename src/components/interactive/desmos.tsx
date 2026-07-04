@@ -12,6 +12,8 @@ interface DesmosExpression {
   lines?: boolean;
   points?: boolean;
   hidden?: boolean;
+  label?: string;
+  showLabel?: boolean;
 }
 
 interface DesmosCalculator {
@@ -198,6 +200,56 @@ export function DataSeriesGraph({
         </p>
       ) : (
         <div ref={containerRef} className="h-52 w-full rounded-xl overflow-hidden border border-border" />
+      )}
+    </WidgetFrame>
+  );
+}
+
+/* --------------------- Expression graph (Desmos) -------------------- */
+
+const EXPRESSION_COLORS = ["#7c5cfc", "#12b981", "#f59e0b", "#ef4444", "#0ea5e9"];
+
+export interface GraphExpression {
+  latex: string;
+  label?: string | null;
+}
+
+export function ExpressionGraph({
+  title,
+  xLabel,
+  yLabel,
+  expressions,
+}: {
+  title: string;
+  xLabel: string;
+  yLabel: string;
+  expressions: GraphExpression[];
+}) {
+  const key = useMemo(() => JSON.stringify(expressions), [expressions]);
+
+  const { containerRef, failed } = useDesmos(
+    (calc) => {
+      expressions.forEach((expr, i) => {
+        calc.setExpression({
+          id: `expr-${i}`,
+          latex: expr.latex,
+          color: EXPRESSION_COLORS[i % EXPRESSION_COLORS.length],
+          ...(expr.label ? { label: expr.label, showLabel: true } : {}),
+        });
+      });
+      calc.setMathBounds({ left: -10, right: 10, bottom: -6, top: 6 });
+    },
+    [key],
+  );
+
+  return (
+    <WidgetFrame title={title} hint={`${yLabel} vs ${xLabel} — pan and zoom to explore.`}>
+      {failed ? (
+        <p className="text-xs text-muted-foreground py-6 text-center">
+          Couldn&apos;t load Desmos — check your connection.
+        </p>
+      ) : (
+        <div ref={containerRef} className="h-56 w-full rounded-xl overflow-hidden border border-border" />
       )}
     </WidgetFrame>
   );
