@@ -12,10 +12,8 @@ import {
 import {
   ChatMessage,
   EmbedPart,
-  ScriptStep,
-  scriptFor,
   suggestions,
-} from "@/components/ai/copilot-script";
+} from "@/components/ai/chat-types";
 import { ToolCallChip } from "@/components/ai/tool-call-chip";
 import {
   askCopilot,
@@ -44,14 +42,13 @@ export function Copilot({
   open: boolean;
   onClose: () => void;
   context?: string;
-  workspaceId?: string;
+  workspaceId: string;
 }) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [chats, setChats] = useState<ChatTab[]>([{ id: "1", title: "Chat 1" }]);
   const [activeChat, setActiveChat] = useState("1");
 
   useEffect(() => {
-    if (!workspaceId) return;
     listConversations(workspaceId)
       .then((rows) => {
         if (rows.length > 0) {
@@ -91,101 +88,6 @@ export function Copilot({
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages]);
 
-  const runScript = useCallback(async (steps: ScriptStep[], assistantId: string) => {
-    const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
-    for (const step of steps) {
-      if (step.type === "embed") {
-        await wait(400);
-        const embedPart = { kind: "embed", id: nextId(), ...step.spec! } as EmbedPart;
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.id === assistantId
-              ? { ...m, parts: [...m.parts, embedPart] }
-              : m,
-          ),
-        );
-      } else if (step.type === "tool") {
-        const toolId = nextId();
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.id === assistantId
-              ? {
-                  ...m,
-                  parts: [
-                    ...m.parts,
-                    {
-                      kind: "tool",
-                      id: toolId,
-                      tool: step.tool!,
-                      label: step.label!,
-                      args: step.args!,
-                      result: step.result!,
-                      status: "running",
-                    },
-                  ],
-                }
-              : m,
-          ),
-        );
-        await wait(1100 + Math.random() * 600);
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.id === assistantId
-              ? {
-                  ...m,
-                  parts: m.parts.map((p) =>
-                    p.id === toolId ? { ...p, status: "done" as const } : p,
-                  ),
-                }
-              : m,
-          ),
-        );
-      } else {
-        const textId = nextId();
-        const full = step.text!;
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.id === assistantId
-              ? {
-                  ...m,
-                  parts: [...m.parts, { kind: "text", id: textId, text: "", done: false }],
-                }
-              : m,
-          ),
-        );
-        const words = full.split(" ");
-        for (let i = 0; i < words.length; i += 3) {
-          await wait(60);
-          const chunk = words.slice(0, i + 3).join(" ");
-          setMessages((prev) =>
-            prev.map((m) =>
-              m.id === assistantId
-                ? {
-                    ...m,
-                    parts: m.parts.map((p) =>
-                      p.id === textId ? { ...p, text: chunk } : p,
-                    ),
-                  }
-                : m,
-            ),
-          );
-        }
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.id === assistantId
-              ? {
-                  ...m,
-                  parts: m.parts.map((p) =>
-                    p.id === textId ? { ...p, text: full, done: true } : p,
-                  ),
-                }
-              : m,
-          ),
-        );
-      }
-    }
-  }, []);
-
   const send = useCallback(
     async (text: string) => {
       if (!text.trim() || busy) return;
@@ -203,71 +105,67 @@ export function Copilot({
         userMsg,
         { id: assistantId, chatId: activeChat, role: "assistant", parts: [] },
       ]);
-      if (workspaceId) {
-        try {
-          const result = await askCopilot({
-            workspaceId,
-            conversationId: activeChat.startsWith("local-") ? undefined : activeChat,
-            message: text,
-            documentContent: context,
-            availableWidgets,
-          });
-          setMessages((prev) =>
-            prev.map((m) =>
-              m.id === assistantId
-                ? {
-                    ...m,
-                    parts: [
-                      {
-                        kind: "text",
-                        id: nextId(),
-                        text: result.answer,
-                        done: true,
-                      },
-                      ...result.widgets
-                        .filter((id): id is WidgetId => id in widgetRegistry)
-                        .map(
-                          (id) =>
-                            ({
-                              kind: "embed",
-                              id: nextId(),
-                              embed: "widget",
-                              widget: id,
-                            }) as EmbedPart,
-                        ),
-                    ],
-                  }
-                : m,
-            ),
-          );
-        } catch (err) {
-          setMessages((prev) =>
-            prev.map((m) =>
-              m.id === assistantId
-                ? {
-                    ...m,
-                    parts: [
-                      {
-                        kind: "text",
-                        id: nextId(),
-                        text:
-                          err instanceof Error
-                            ? err.message
-                            : "Something went wrong — try again.",
-                        done: true,
-                      },
-                    ],
-                  }
-                : m,
-            ),
-          );
-        }
-      } else {
-        await runScript(scriptFor(text), assistantId);
+      try {
+        const result = await askCopilot({
+          workspaceId,
+          conversationId: activeChat.startsWith("local-") ? undefined : activeChat,
+          message: text,
+          documentContent: context,
+          availableWidgets,
+        });
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === assistantId
+              ? {
+                  ...m,
+                  parts: [
+                    {
+                      kind: "text",
+                      id: nextId(),
+                      text: result.answer,
+                      done: true,
+                    },
+                    ...result.widgets
+                      .filter((id): id is WidgetId => id in widgetRegistry)
+                      .map(
+                        (id) =>
+                          ({
+                            kind: "embed",
+                            id: nextId(),
+                            embed: "widget",
+                            widget: id,
+                          }) as EmbedPart,
+                      ),
+                  ],
+                }
+              : m,
+          ),
+        );
+      } catch (err) {
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === assistantId
+              ? {
+                  ...m,
+                  parts: [
+                    {
+                      kind: "text",
+                      id: nextId(),
+                      text:
+                        err instanceof Error
+                          ? err.message
+                          : "Something went wrong — try again.",
+                      done: true,
+                    },
+                  ],
+                }
+              : m,
+          ),
+        );
       }
       setBusy(false);
     },
-    [busy, runScript, activeChat, workspaceId, context],
+    [busy, activeChat, workspaceId, context],
   );
 
   const chatMessages = messages.filter(
@@ -275,19 +173,15 @@ export function Copilot({
   );
 
   const newChat = async () => {
-    if (workspaceId) {
-      try {
-        const conv = await createConversation(workspaceId);
-        setChats((prev) => [...prev, conv]);
-        setActiveChat(conv.id);
-        return;
-      } catch {
-        // fall through to local tab
-      }
+    try {
+      const conv = await createConversation(workspaceId);
+      setChats((prev) => [...prev, conv]);
+      setActiveChat(conv.id);
+    } catch {
+      const next = { id: `local-${Date.now()}`, title: `Chat ${chats.length + 1}` };
+      setChats((prev) => [...prev, next]);
+      setActiveChat(next.id);
     }
-    const next = { id: `local-${Date.now()}`, title: `Chat ${chats.length + 1}` };
-    setChats((prev) => [...prev, next]);
-    setActiveChat(next.id);
   };
 
   if (!open) return null;

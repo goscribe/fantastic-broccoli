@@ -2,7 +2,6 @@ import superjson from "superjson";
 import { apiUrl } from "./config";
 import { normalizeActivityContent } from "./activity-content";
 import type {
-  ActivityContent,
   ActivityStatus,
   ActivityType,
   ExamBoard,

@@ -8,7 +8,6 @@ import {
 } from "./study-session";
 import { normalizeActivityContent } from "./activity-content";
 import type {
-  ActivityContent,
   ActivityStatus,
   ActivityType,
   ExamBoard,
