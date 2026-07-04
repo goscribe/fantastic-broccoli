@@ -70,6 +70,15 @@ export async function markWorksheetAnswer(input: {
   };
 }
 
+export async function markClozeAnswers(input: {
+  activityId: string;
+  passageIndex: number;
+  answers: string[];
+}): Promise<Array<{ correct: boolean; feedback: string }>> {
+  const result = await studySessionApi.markClozeAnswers(input);
+  return result.results;
+}
+
 export async function setActivityStatus(
   activityId: string,
   status: ActivityStatus,
