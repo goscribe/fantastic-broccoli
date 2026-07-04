@@ -329,6 +329,7 @@ export default function SessionDetailPage() {
       case "cloze":
         return (
           <ClozeActivity
+            activityId={activity.id}
             content={activity.content as ClozeContent}
             onComplete={() => goToNext()}
           />

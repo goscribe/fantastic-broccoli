@@ -214,6 +214,17 @@ export const studySessionApi = {
   }) =>
     rpc<ApiPartMarking>("studySession.markWorksheetAnswer", "mutation", input),
 
+  markClozeAnswers: (input: {
+    activityId: string;
+    passageIndex: number;
+    answers: string[];
+  }) =>
+    rpc<{ results: Array<{ correct: boolean; feedback: string }> }>(
+      "studySession.markClozeAnswers",
+      "mutation",
+      input,
+    ),
+
   addActivities: (sessionId: string, activities: AddActivityInput[]) =>
     rpc<{ count: number }>("studySession.addActivities", "mutation", {
       sessionId,

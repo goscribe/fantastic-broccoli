@@ -2,27 +2,62 @@
 
 import { useState } from "react";
 import { ClozeContent } from "@/types";
+import { markClozeAnswers } from "@/lib/api/study";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 
 interface ClozeActivityProps {
+  activityId: string;
   content: ClozeContent;
   onComplete: () => void;
 }
 
-export function ClozeActivity({ content, onComplete }: ClozeActivityProps) {
+interface BlankResult {
+  correct: boolean;
+  feedback: string;
+}
+
+export function ClozeActivity({
+  activityId,
+  content,
+  onComplete,
+}: ClozeActivityProps) {
   const passage = content.passages[0];
   const parts = passage.textWithBlanks.split("___");
   const [answers, setAnswers] = useState<string[]>(
     passage.answers.map(() => ""),
   );
-  const [checked, setChecked] = useState(false);
+  const [results, setResults] = useState<BlankResult[] | null>(null);
+  const [marking, setMarking] = useState(false);
 
-  const isCorrect = (i: number) =>
-    answers[i].trim().toLowerCase() === passage.answers[i].toLowerCase();
-  const allCorrect = passage.answers.every((_, i) => isCorrect(i));
+  const localResult = (i: number): BlankResult => ({
+    correct:
+      answers[i].trim().toLowerCase() === passage.answers[i].toLowerCase(),
+    feedback: "",
+  });
+
+  const checkAnswers = async () => {
+    setMarking(true);
+    try {
+      const marked = await markClozeAnswers({
+        activityId,
+        passageIndex: 0,
+        answers,
+      });
+      setResults(marked);
+    } catch {
+      setResults(passage.answers.map((_, i) => localResult(i)));
+    } finally {
+      setMarking(false);
+    }
+  };
+
+  const checked = results !== null;
+  const isCorrect = (i: number) => results?.[i]?.correct ?? false;
+  const allCorrect = checked && passage.answers.every((_, i) => isCorrect(i));
   const correctCount = passage.answers.filter((_, i) => isCorrect(i)).length;
+  const feedbacks = (results ?? []).filter((r) => !r.correct && r.feedback);
 
   return (
     <div>
@@ -43,7 +78,7 @@ export function ClozeActivity({ content, onComplete }: ClozeActivityProps) {
                   next[i] = e.target.value;
                   setAnswers(next);
                 }}
-                disabled={checked && isCorrect(i)}
+                disabled={marking || (checked && isCorrect(i))}
                 className={cn(
                   "mx-1 inline-block w-32 rounded-lg border px-2.5 py-1 text-sm text-center font-medium focus:outline-none",
                   checked
@@ -59,10 +94,17 @@ export function ClozeActivity({ content, onComplete }: ClozeActivityProps) {
       </p>
 
       {checked && !allCorrect && (
-        <p className="text-xs text-muted-foreground mt-4">
-          {correctCount}/{passage.answers.length} correct — fix the red ones
-          and check again.
-        </p>
+        <div className="mt-4 space-y-1.5">
+          <p className="text-xs text-muted-foreground">
+            {correctCount}/{passage.answers.length} correct — fix the red ones
+            and check again.
+          </p>
+          {feedbacks.map((r, i) => (
+            <p key={i} className="text-xs text-rose">
+              {r.feedback}
+            </p>
+          ))}
+        </div>
       )}
 
       <div className="flex justify-end mt-5">
@@ -74,10 +116,11 @@ export function ClozeActivity({ content, onComplete }: ClozeActivityProps) {
         ) : (
           <Button
             size="sm"
-            onClick={() => setChecked(true)}
-            disabled={answers.some((a) => !a.trim())}
+            onClick={checkAnswers}
+            disabled={marking || answers.some((a) => !a.trim())}
           >
-            Check answers
+            {marking && <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />}
+            {marking ? "Marking…" : "Check answers"}
           </Button>
         )}
       </div>
