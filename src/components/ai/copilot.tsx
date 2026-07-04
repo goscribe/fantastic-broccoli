@@ -4,7 +4,11 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { Sparkles, X, ArrowUp, Wand2, Plus } from "lucide-react";
 import { EquationEmbed, GraphEmbed, CitationEmbed } from "@/components/ai/embeds";
-import { InteractiveWidget } from "@/components/interactive";
+import {
+  InteractiveWidget,
+  WidgetId,
+  widgetRegistry,
+} from "@/components/interactive";
 import {
   ChatMessage,
   EmbedPart,
@@ -21,6 +25,10 @@ import {
 
 let idCounter = 0;
 const nextId = () => `m-${++idCounter}-${Date.now()}`;
+
+const availableWidgets = (
+  Object.keys(widgetRegistry) as WidgetId[]
+).map((id) => ({ id, description: widgetRegistry[id].label }));
 
 interface ChatTab {
   id: string;
@@ -197,11 +205,12 @@ export function Copilot({
       ]);
       if (workspaceId) {
         try {
-          const answer = await askCopilot({
+          const result = await askCopilot({
             workspaceId,
             conversationId: activeChat.startsWith("local-") ? undefined : activeChat,
             message: text,
             documentContent: context,
+            availableWidgets,
           });
           setMessages((prev) =>
             prev.map((m) =>
@@ -209,7 +218,23 @@ export function Copilot({
                 ? {
                     ...m,
                     parts: [
-                      { kind: "text", id: nextId(), text: answer, done: true },
+                      {
+                        kind: "text",
+                        id: nextId(),
+                        text: result.answer,
+                        done: true,
+                      },
+                      ...result.widgets
+                        .filter((id): id is WidgetId => id in widgetRegistry)
+                        .map(
+                          (id) =>
+                            ({
+                              kind: "embed",
+                              id: nextId(),
+                              embed: "widget",
+                              widget: id,
+                            }) as EmbedPart,
+                        ),
                     ],
                   }
                 : m,
