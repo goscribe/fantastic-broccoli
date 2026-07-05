@@ -1,29 +1,58 @@
 "use client";
 
 import { useState } from "react";
-import { ComprehensionContent } from "@/types";
+import { ComprehensionContent, ComprehensionEvaluation } from "@/types";
+import { submitComprehensionRewrite } from "@/lib/api/study";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
+import { MarkdownText } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
-import { Brain, Send, CheckCircle2, RotateCcw } from "lucide-react";
+import { Brain, Send, CheckCircle2, RotateCcw, Loader2 } from "lucide-react";
 
 interface ComprehensionActivityProps {
+  activityId: string;
   content: ComprehensionContent;
-  onSubmitRewrite: (text: string) => void;
   onComplete: () => void;
 }
 
 export function ComprehensionActivity({
+  activityId,
   content,
-  onSubmitRewrite,
   onComplete,
 }: ComprehensionActivityProps) {
   const [userText, setUserText] = useState("");
   const [showOriginal, setShowOriginal] = useState(true);
-  const latestEval = content.evaluations[content.evaluations.length - 1];
+  const [evaluating, setEvaluating] = useState(false);
+  const [error, setError] = useState("");
+  const [localEvals, setLocalEvals] = useState<ComprehensionEvaluation[]>([]);
+  const [localRewrites, setLocalRewrites] = useState<string[]>([]);
+
+  const evaluations = [...content.evaluations, ...localEvals];
+  const userRewrites = [...content.userRewrites, ...localRewrites];
+  const latestEval = evaluations[evaluations.length - 1];
   const hasPassed = latestEval?.passed || !!content.passedAt;
-  const attemptNumber = content.evaluations.length + 1;
+  const attemptNumber = evaluations.length + 1;
+
+  const handleSubmit = async () => {
+    const text = userText.trim();
+    if (!text) return;
+    setEvaluating(true);
+    setError("");
+    try {
+      const evaluation = await submitComprehensionRewrite({
+        activityId,
+        rewrite: text,
+      });
+      setLocalEvals((prev) => [...prev, evaluation]);
+      setLocalRewrites((prev) => [...prev, text]);
+      setUserText("");
+    } catch {
+      setError("Evaluation failed — please try again.");
+    } finally {
+      setEvaluating(false);
+    }
+  };
 
   return (
     <div className="space-y-4">
@@ -38,7 +67,7 @@ export function ComprehensionActivity({
           </div>
           <div className="prose prose-sm max-w-none">
             <p className="text-sm leading-relaxed whitespace-pre-wrap">
-              {content.originalText}
+              <MarkdownText text={content.originalText} />
             </p>
           </div>
           <div className="mt-4 flex justify-end">
@@ -77,27 +106,29 @@ export function ComprehensionActivity({
             className="w-full h-32 rounded-lg border border-border bg-card p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
           />
 
-          <div className="flex justify-end">
+          <div className="flex items-center justify-end gap-3">
+            {error && <span className="text-xs text-destructive">{error}</span>}
             <Button
               variant="primary"
               size="sm"
-              onClick={() => {
-                onSubmitRewrite(userText);
-                setUserText("");
-              }}
-              disabled={userText.trim().length < 20}
+              onClick={handleSubmit}
+              disabled={userText.trim().length < 20 || evaluating}
             >
-              <Send className="h-3.5 w-3.5 mr-1.5" />
-              Submit
+              {evaluating ? (
+                <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
+              ) : (
+                <Send className="h-3.5 w-3.5 mr-1.5" />
+              )}
+              {evaluating ? "Evaluating…" : "Submit"}
             </Button>
           </div>
         </div>
       )}
 
       {/* Previous evaluations */}
-      {content.evaluations.length > 0 && (
+      {evaluations.length > 0 && (
         <div className="space-y-2">
-          {content.evaluations.map((evaluation, i) => (
+          {evaluations.map((evaluation, i) => (
             <Card
               key={i}
               className={cn(
@@ -119,7 +150,7 @@ export function ComprehensionActivity({
                 />
               </div>
               <p className="text-xs text-muted-foreground">
-                {evaluation.feedback}
+                <MarkdownText text={evaluation.feedback} />
               </p>
             </Card>
           ))}
@@ -127,13 +158,13 @@ export function ComprehensionActivity({
       )}
 
       {/* User's previous rewrites */}
-      {content.userRewrites.length > 0 && !hasPassed && (
+      {userRewrites.length > 0 && !hasPassed && (
         <details className="text-xs text-muted-foreground">
           <summary className="cursor-pointer hover:text-foreground">
-            Your previous {content.userRewrites.length === 1 ? "attempt" : "attempts"}
+            Your previous {userRewrites.length === 1 ? "attempt" : "attempts"}
           </summary>
           <div className="mt-2 space-y-2">
-            {content.userRewrites.map((rewrite, i) => (
+            {userRewrites.map((rewrite, i) => (
               <p key={i} className="p-2 rounded-lg border border-border bg-muted/50 italic">
                 &ldquo;{rewrite}&rdquo;
               </p>
@@ -148,8 +179,8 @@ export function ComprehensionActivity({
           <CheckCircle2 className="h-8 w-8 text-success mx-auto mb-2" />
           <p className="text-sm font-medium">Comprehension confirmed</p>
           <p className="text-xs text-muted-foreground mt-1">
-            You demonstrated understanding in {content.evaluations.length}{" "}
-            {content.evaluations.length === 1 ? "attempt" : "attempts"}
+            You demonstrated understanding in {evaluations.length}{" "}
+            {evaluations.length === 1 ? "attempt" : "attempts"}
           </p>
           <Button
             variant="ghost"

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { McqContent } from "@/types";
 import { Button } from "@/components/ui/button";
+import { MarkdownText } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, XCircle, ArrowRight } from "lucide-react";
 
@@ -63,7 +64,9 @@ export function McqActivity({
         </div>
       </div>
 
-      <p className="text-sm font-medium leading-relaxed">{question.question}</p>
+      <p className="text-sm font-medium leading-relaxed">
+        <MarkdownText text={question.question} />
+      </p>
 
       <div className="space-y-2">
         {question.options.map((option, i) => (
@@ -93,7 +96,9 @@ export function McqActivity({
               >
                 {String.fromCharCode(65 + i)}
               </span>
-              <span className="flex-1">{option}</span>
+              <span className="flex-1">
+                <MarkdownText text={option} />
+              </span>
               {revealed && i === question.correctIndex && (
                 <CheckCircle2 className="h-4 w-4 text-success flex-shrink-0" />
               )}
@@ -129,7 +134,7 @@ export function McqActivity({
             {isCorrect ? "Correct!" : "Not quite"}
           </p>
           <p className="text-xs text-muted-foreground leading-5">
-            {question.explanation}
+            <MarkdownText text={question.explanation} />
           </p>
           <div className="flex justify-end mt-3">
             <Button variant="ghost" size="sm" onClick={handleNext}>

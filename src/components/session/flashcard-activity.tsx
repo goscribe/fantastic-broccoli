@@ -5,6 +5,7 @@ import { FlashcardContent } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
+import { MarkdownText } from "@/components/ui/markdown-text";
 import { progressPercent } from "@/lib/utils";
 import { ThumbsUp, ThumbsDown, ArrowRight } from "lucide-react";
 
@@ -82,7 +83,9 @@ export function FlashcardActivity({
           <div className="text-center px-4">
             {!flipped ? (
               <>
-                <p className="text-base font-medium">{card.front}</p>
+                <p className="text-base font-medium">
+                  <MarkdownText text={card.front} />
+                </p>
                 <p className="text-xs text-muted-foreground mt-3">
                   Tap to reveal
                 </p>
@@ -92,7 +95,9 @@ export function FlashcardActivity({
                 <p className="text-xs text-muted-foreground mb-2">
                   Answer
                 </p>
-                <p className="text-sm leading-relaxed">{card.back}</p>
+                <p className="text-sm leading-relaxed">
+                  <MarkdownText text={card.back} />
+                </p>
               </>
             )}
           </div>

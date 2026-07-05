@@ -60,6 +60,7 @@ export async function markWorksheetAnswer(input: {
   stepIndex: number;
   partIndex: number;
   answer: string;
+  answerImage?: string;
 }): Promise<PartMarking> {
   const result = await studySessionApi.markWorksheetAnswer(input);
   return {
@@ -77,6 +78,19 @@ export async function markClozeAnswers(input: {
 }): Promise<Array<{ correct: boolean; feedback: string }>> {
   const result = await studySessionApi.markClozeAnswers(input);
   return result.results;
+}
+
+export async function submitComprehensionRewrite(input: {
+  activityId: string;
+  rewrite: string;
+}): Promise<{
+  attempt: number;
+  score: number;
+  feedback: string;
+  passed: boolean;
+}> {
+  const result = await studySessionApi.submitComprehensionRewrite(input);
+  return result.evaluation;
 }
 
 export async function setActivityStatus(
