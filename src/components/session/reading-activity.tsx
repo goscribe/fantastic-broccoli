@@ -1,7 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ReadingContent, ReadingFigure, SessionHighlight } from "@/types";
+import {
+  ReadingContent,
+  ReadingFigure,
+  ReadingImageFigure,
+  SessionHighlight,
+} from "@/types";
 import {
   addReadingHighlight,
   removeReadingHighlight,
@@ -10,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { InteractiveWidget, WidgetId, widgetRegistry } from "@/components/interactive";
 import { ExpressionGraph } from "@/components/interactive/desmos";
+import { useResolvedFigureUrl } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
 import { BookOpen, ArrowRight, Highlighter, Trash2 } from "lucide-react";
 
@@ -121,6 +127,26 @@ function fromPersisted(h: SessionHighlight): Highlight {
 
 let tempId = 0;
 
+function ImageFigure({ figure }: { figure: ReadingImageFigure }) {
+  const resolved = useResolvedFigureUrl(figure.url);
+  if (!resolved) return null;
+  return (
+    <figure className="my-2 overflow-hidden rounded-xl border border-border bg-card animate-fade-up">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={resolved}
+        alt={figure.caption}
+        className="w-full max-h-96 object-contain bg-muted/40"
+      />
+      {figure.caption && (
+        <figcaption className="px-3.5 py-2 text-[11px] text-muted-foreground border-t border-border">
+          {figure.caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
 function FigureView({ figure }: { figure: ReadingFigure }) {
   if (figure.type === "graph") {
     return (
@@ -132,21 +158,7 @@ function FigureView({ figure }: { figure: ReadingFigure }) {
       />
     );
   }
-  return (
-    <figure className="my-2 overflow-hidden rounded-xl border border-border bg-card animate-fade-up">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={figure.url}
-        alt={figure.caption}
-        className="w-full max-h-96 object-contain bg-muted/40"
-      />
-      {figure.caption && (
-        <figcaption className="px-3.5 py-2 text-[11px] text-muted-foreground border-t border-border">
-          {figure.caption}
-        </figcaption>
-      )}
-    </figure>
-  );
+  return <ImageFigure figure={figure} />;
 }
 
 function offsetWithin(paraEl: HTMLElement, node: Node, offset: number): number {
