@@ -298,8 +298,8 @@ export default function SessionDetailPage() {
       case "comprehension_check":
         return (
           <ComprehensionActivity
+            activityId={activity.id}
             content={activity.content as ComprehensionContent}
-            onSubmitRewrite={() => {}}
             onComplete={() => goToNext()}
           />
         );

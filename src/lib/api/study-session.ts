@@ -211,6 +211,7 @@ export const studySessionApi = {
     stepIndex: number;
     partIndex: number;
     answer: string;
+    answerImage?: string;
   }) =>
     rpc<ApiPartMarking>("studySession.markWorksheetAnswer", "mutation", input),
 
@@ -224,6 +225,20 @@ export const studySessionApi = {
       "mutation",
       input,
     ),
+
+  submitComprehensionRewrite: (input: {
+    activityId: string;
+    rewrite: string;
+  }) =>
+    rpc<{
+      evaluation: {
+        attempt: number;
+        score: number;
+        feedback: string;
+        passed: boolean;
+      };
+      content: Record<string, unknown>;
+    }>("studySession.submitComprehensionRewrite", "mutation", input),
 
   addActivities: (sessionId: string, activities: AddActivityInput[]) =>
     rpc<{ count: number }>("studySession.addActivities", "mutation", {

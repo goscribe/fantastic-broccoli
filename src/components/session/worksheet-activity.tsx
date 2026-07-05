@@ -4,9 +4,11 @@ import { useState } from "react";
 import { PartMarking, WorksheetContent, WorksheetPart } from "@/types";
 import { markWorksheetAnswer } from "@/lib/api/study";
 import { WorksheetFigureCard } from "@/components/graphics/worksheet-figures";
+import { MarkdownText } from "@/components/ui/markdown-text";
+import { DrawingCanvas } from "@/components/ui/drawing-canvas";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Check, Loader2, X } from "lucide-react";
+import { ArrowRight, Check, Loader2, PenLine, X } from "lucide-react";
 
 interface WorksheetActivityProps {
   activityId: string;
@@ -40,6 +42,8 @@ export function WorksheetActivity({
 }: WorksheetActivityProps) {
   const [stepIndex, setStepIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [drawings, setDrawings] = useState<Record<string, string | null>>({});
+  const [drawingOpen, setDrawingOpen] = useState<Record<string, boolean>>({});
   const [markings, setMarkings] = useState<Record<string, PartMarking>>({});
   const [checkedSteps, setCheckedSteps] = useState<Record<number, boolean>>({});
   const [markingInFlight, setMarkingInFlight] = useState(false);
@@ -54,16 +58,22 @@ export function WorksheetActivity({
     (s, _, i) => s + (markings[key(i)]?.achievedPoints ?? 0),
     0,
   );
-  const allAnswered = step.parts.every((_, i) => (answers[key(i)] ?? "").trim());
+  const allAnswered = step.parts.every(
+    (_, i) => (answers[key(i)] ?? "").trim() || drawings[key(i)],
+  );
 
   const checkStep = async () => {
     setMarkingInFlight(true);
     const results = await Promise.all(
       step.parts.map(async (part, i) => {
         const value = answers[key(i)] ?? "";
-        // Only free-text parts with a markscheme go through LLM marking;
-        // numeric / true-false parts are checked locally.
-        if (part.type !== "text" || !part.markScheme?.points.length) {
+        const drawing = drawings[key(i)] ?? undefined;
+        // Free-text parts with a markscheme (or a drawing attached) go
+        // through LLM marking; numeric / true-false parts are checked locally.
+        if (
+          part.type !== "text" ||
+          (!part.markScheme?.points.length && !drawing)
+        ) {
           return localMarking(part, value);
         }
         try {
@@ -72,6 +82,7 @@ export function WorksheetActivity({
             stepIndex,
             partIndex: i,
             answer: value,
+            answerImage: drawing,
           });
         } catch {
           return localMarking(part, value);
@@ -118,7 +129,9 @@ export function WorksheetActivity({
 
       <div className="py-5 space-y-5">
         {step.intro && (
-          <p className="text-sm leading-6 text-foreground">{step.intro}</p>
+          <p className="text-sm leading-6 text-foreground">
+            <MarkdownText text={step.intro} />
+          </p>
         )}
 
         {step.figure && <WorksheetFigureCard data={step.figure} />}
@@ -138,7 +151,9 @@ export function WorksheetActivity({
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline justify-between gap-3">
-                    <p className="text-sm leading-6">{part.prompt}</p>
+                    <p className="text-sm leading-6">
+                      <MarkdownText text={part.prompt} />
+                    </p>
                     <span className="text-[11px] text-faint shrink-0 tabular-nums">
                       {checked && marking
                         ? `${marking.achievedPoints}/${marking.totalPoints}`
@@ -196,6 +211,28 @@ export function WorksheetActivity({
                     />
                   )}
 
+                  {part.type === "text" && !drawingOpen[key(i)] && !checked && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setDrawingOpen((d) => ({ ...d, [key(i)]: true }))
+                      }
+                      className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+                    >
+                      <PenLine className="h-3 w-3" />
+                      Add a drawing
+                    </button>
+                  )}
+                  {part.type === "text" && drawingOpen[key(i)] && (
+                    <DrawingCanvas
+                      className="mt-2"
+                      disabled={(checked && correct) || markingInFlight}
+                      onChange={(dataUrl) =>
+                        setDrawings((d) => ({ ...d, [key(i)]: dataUrl }))
+                      }
+                    />
+                  )}
+
                   {/* Markscheme breakdown (LLM-marked parts) */}
                   {checked && marking && marking.points.length > 0 && (
                     <div className="mt-2 rounded-lg border border-border overflow-hidden">
@@ -233,7 +270,7 @@ export function WorksheetActivity({
                                   M{j + 1}
                                 </span>
                                 <p className="flex-1 min-w-0 text-xs leading-5">
-                                  {point.requirements}
+                                  <MarkdownText text={point.requirements} />
                                 </p>
                                 <span className="shrink-0 flex items-center gap-1 text-[11px] font-semibold tabular-nums">
                                   {earned ? (
@@ -246,7 +283,7 @@ export function WorksheetActivity({
                               </div>
                               {point.feedback && !earned && (
                                 <p className="mt-1 pl-8 text-[11px] leading-4 text-muted-foreground">
-                                  {point.feedback}
+                                  <MarkdownText text={point.feedback} />
                                 </p>
                               )}
                             </div>
