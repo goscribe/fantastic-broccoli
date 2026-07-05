@@ -6,6 +6,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
 import {
   analyzeFiles,
+  fetchFileDetails,
+  reanalyzeFile,
   subscribeAnalysisProgress,
   uploadFiles,
   type AnalysisProgress,
@@ -24,6 +26,12 @@ import {
   Sparkles,
   Check,
   Loader2,
+  ChevronDown,
+  ChevronRight,
+  RefreshCw,
+  Image as ImageIcon,
+  Layers,
+  FileText,
 } from "lucide-react";
 import {
   PdfArt,
@@ -43,37 +51,49 @@ const typeConfig: Record<
   slides: { art: SlidesArt, label: "Slides" },
 };
 
-const transcriptScript = [
-  "…okay so today we're covering ionization energy trends…",
-  "remember, first ionization energy is the energy to remove one mole of electrons…",
-  "…from one mole of gaseous atoms in their ground state.",
-  "Notice the dip between magnesium and aluminium — that's the 3p electron…",
-];
-
 function formatAudioDuration(seconds: number) {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
-function RecorderCard({ onStop }: { onStop: (seconds: number) => void }) {
+function RecorderCard({
+  onStop,
+  onError,
+}: {
+  onStop: (seconds: number) => void;
+  onError: (msg: string) => void;
+}) {
   const [seconds, setSeconds] = useState(0);
-  const [lines, setLines] = useState<string[]>([]);
   const secondsRef = useRef(0);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
 
   useEffect(() => {
-    const tick = setInterval(() => {
-      secondsRef.current += 1;
-      setSeconds(secondsRef.current);
-      if (
-        secondsRef.current % 3 === 0 &&
-        secondsRef.current / 3 <= transcriptScript.length
-      ) {
-        setLines(transcriptScript.slice(0, secondsRef.current / 3));
-      }
-    }, 1000);
-    return () => clearInterval(tick);
-  }, []);
+    let tick: ReturnType<typeof setInterval>;
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then((stream) => {
+        const recorder = new MediaRecorder(stream);
+        mediaRecorderRef.current = recorder;
+        chunksRef.current = [];
+        recorder.ondataavailable = (e) => {
+          if (e.data.size > 0) chunksRef.current.push(e.data);
+        };
+        recorder.start(1000);
+        tick = setInterval(() => {
+          secondsRef.current += 1;
+          setSeconds(secondsRef.current);
+        }, 1000);
+      })
+      .catch(() => onError("Microphone access denied"));
+    return () => {
+      clearInterval(tick);
+      mediaRecorderRef.current?.stream
+        .getTracks()
+        .forEach((t) => t.stop());
+    };
+  }, [onError]);
 
   return (
     <Card className="border-accent/25 bg-gradient-to-br from-accent-soft via-card to-card animate-fade-up">
@@ -90,7 +110,10 @@ function RecorderCard({ onStop }: { onStop: (seconds: number) => void }) {
         <Button
           size="sm"
           variant="danger"
-          onClick={() => onStop(secondsRef.current)}
+          onClick={() => {
+            mediaRecorderRef.current?.stop();
+            onStop(secondsRef.current);
+          }}
         >
           <Square className="h-3 w-3 mr-1.5 fill-current" />
           Stop
@@ -109,23 +132,6 @@ function RecorderCard({ onStop }: { onStop: (seconds: number) => void }) {
           />
         ))}
       </div>
-
-      <div className="mt-4 rounded-xl bg-card border border-border p-4">
-        <p className="text-xs font-semibold text-muted-foreground mb-2">
-          Live transcription
-        </p>
-        {lines.length === 0 ? (
-          <p className="text-sm text-faint">Listening…</p>
-        ) : (
-          <div className="space-y-1.5">
-            {lines.map((line) => (
-              <p key={line} className="text-sm animate-fade-up">
-                {line}
-              </p>
-            ))}
-          </div>
-        )}
-      </div>
     </Card>
   );
 }
@@ -139,8 +145,6 @@ const stepLabels: Record<string, string> = {
   figureExtraction: "Extracting figures",
 };
 
-// Live analysis status for the workspace, streamed from the server over
-// Pusher (workspace.analysisProgress step map).
 function analysisInFlight(progress: AnalysisProgress | null): boolean {
   if (!progress) return false;
   const steps = Object.values(progress.steps ?? {});
@@ -169,7 +173,7 @@ function MaterialStatusBadge({
     return (
       <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft text-accent-dim px-2 py-0.5 text-[10px] font-semibold shrink-0">
         <Loader2 className="h-2.5 w-2.5 animate-spin" />
-        Analyzing…
+        Analyzing...
       </span>
     );
   }
@@ -209,7 +213,7 @@ function AnalysisStatusCard({ progress }: { progress: AnalysisProgress }) {
         <p className="flex items-center gap-1.5 text-xs font-semibold">
           <Loader2 className="h-3.5 w-3.5 animate-spin text-accent" />
           <span className="truncate">
-            Analyzing {progress.currentFile ?? "materials"}…
+            Analyzing {progress.currentFile ?? "materials"}...
           </span>
         </p>
         <span className="text-[11px] text-muted-foreground tabular-nums shrink-0">
@@ -249,6 +253,115 @@ function AnalysisStatusCard({ progress }: { progress: AnalysisProgress }) {
   );
 }
 
+function FileDetailsPanel({
+  workspaceId,
+  fileId,
+}: {
+  workspaceId: string;
+  fileId: string;
+}) {
+  const { data, isLoading } = useQuery({
+    queryKey: ["fileDetails", workspaceId, fileId],
+    queryFn: () => fetchFileDetails(workspaceId, fileId),
+  });
+
+  if (isLoading) {
+    return (
+      <div className="p-4 space-y-3">
+        <Skeleton className="h-3 w-40" />
+        <Skeleton className="h-20 w-full" />
+        <Skeleton className="h-3 w-32" />
+        <Skeleton className="h-16 w-full" />
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div className="p-4 text-xs text-muted-foreground">
+        Could not load file details.
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-4 pt-0 space-y-4 border-t border-border mt-3">
+      {/* Extracted images */}
+      {data.images.length > 0 && (
+        <div>
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold text-muted-foreground mb-2">
+            <ImageIcon className="h-3 w-3" />
+            Extracted images ({data.images.length})
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {data.images.map((img, i) => (
+              <div
+                key={i}
+                className="rounded-lg border border-border overflow-hidden bg-muted/30"
+              >
+                <img
+                  src={img.url}
+                  alt={img.description}
+                  className="w-full h-24 object-cover"
+                />
+                <p className="px-2 py-1.5 text-[10px] text-muted-foreground line-clamp-2">
+                  p.{img.page} — {img.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* KB Chunks */}
+      {data.chunks.length > 0 && (
+        <div>
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold text-muted-foreground mb-2">
+            <Layers className="h-3 w-3" />
+            Knowledge base chunks ({data.chunks.length})
+          </p>
+          <div className="space-y-2 max-h-64 overflow-y-auto">
+            {data.chunks.map((chunk) => (
+              <div
+                key={chunk.index}
+                className="rounded-lg border border-border bg-muted/30 px-3 py-2"
+              >
+                <span className="text-[10px] font-semibold text-faint">
+                  Chunk {chunk.index + 1}
+                </span>
+                <p className="text-xs text-muted-foreground mt-1 whitespace-pre-wrap line-clamp-4">
+                  {chunk.content}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Raw text preview */}
+      {data.textContent && data.chunks.length === 0 && (
+        <div>
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold text-muted-foreground mb-2">
+            <FileText className="h-3 w-3" />
+            Extracted text
+          </p>
+          <div className="rounded-lg border border-border bg-muted/30 px-3 py-2 max-h-40 overflow-y-auto">
+            <p className="text-xs text-muted-foreground whitespace-pre-wrap line-clamp-[12]">
+              {data.textContent.slice(0, 2000)}
+              {data.textContent.length > 2000 && "..."}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* No data state */}
+      {!data.textContent && data.images.length === 0 && data.chunks.length === 0 && (
+        <p className="text-xs text-faint">No parsed content available yet.</p>
+      )}
+    </div>
+  );
+}
+
 export default function WorkspaceMaterialsPage() {
   const params = useParams();
   const workspaceId = params.id as string;
@@ -265,6 +378,8 @@ export default function WorkspaceMaterialsPage() {
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [progress, setProgress] = useState<AnalysisProgress | null>(null);
+  const [expandedFiles, setExpandedFiles] = useState<Set<string>>(new Set());
+  const [reanalyzing, setReanalyzing] = useState<Set<string>>(new Set());
 
   const materials = [...localMaterials, ...(workspace?.materials ?? [])];
   const inFlight = analysisInFlight(progress);
@@ -293,6 +408,32 @@ export default function WorkspaceMaterialsPage() {
     }
   };
 
+  const handleReanalyze = async (fileId: string) => {
+    setReanalyzing((prev) => new Set(prev).add(fileId));
+    try {
+      await reanalyzeFile(workspaceId, fileId);
+      queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
+      queryClient.invalidateQueries({ queryKey: ["fileDetails", workspaceId, fileId] });
+    } catch {
+      // swallow — analysis status comes via Pusher
+    } finally {
+      setReanalyzing((prev) => {
+        const next = new Set(prev);
+        next.delete(fileId);
+        return next;
+      });
+    }
+  };
+
+  const toggleExpanded = (id: string) => {
+    setExpandedFiles((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
   const stopRecording = (seconds: number) => {
     setRecording(false);
     setLocalMaterials((prev) => [
@@ -302,7 +443,6 @@ export default function WorkspaceMaterialsPage() {
         type: "audio",
         title: "New recording",
         durationSeconds: seconds,
-        preview: transcriptScript.join(" "),
         updatedAt: new Date().toISOString(),
       },
       ...prev,
@@ -356,7 +496,7 @@ export default function WorkspaceMaterialsPage() {
             ) : (
               <Upload className="h-3.5 w-3.5 mr-1.5" />
             )}
-            {uploading ? "Uploading…" : "Upload files"}
+            {uploading ? "Uploading..." : "Upload files"}
           </Button>
           <input
             ref={fileInputRef}
@@ -375,9 +515,19 @@ export default function WorkspaceMaterialsPage() {
           <p className="text-xs text-rose animate-fade-up">{uploadError}</p>
         )}
 
-        {progress && <AnalysisStatusCard progress={progress} />}
+        {progress && !!progress.steps && (
+          <AnalysisStatusCard progress={progress} />
+        )}
 
-        {recording && <RecorderCard onStop={stopRecording} />}
+        {recording && (
+          <RecorderCard
+            onStop={stopRecording}
+            onError={(message) => {
+              setRecording(false);
+              setUploadError(message);
+            }}
+          />
+        )}
 
         {/* Materials list */}
         <section className="animate-fade-up">
@@ -399,39 +549,77 @@ export default function WorkspaceMaterialsPage() {
               {materials.map((material) => {
                 const config = typeConfig[material.type];
                 const Art = config.art;
+                const expanded = expandedFiles.has(material.id);
+                const isReanalyzing = reanalyzing.has(material.id);
                 return (
                   <Card
                     key={material.id}
-                    interactive
-                    className="flex items-start gap-4 p-4"
+                    className="p-0 overflow-hidden"
                   >
-                    <Art className="h-10 w-10 shrink-0" />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-sm font-semibold truncate">
-                          {material.title}
-                        </h3>
-                        <span className="text-[11px] text-faint shrink-0">
-                          {config.label}
-                        </span>
-                        <MaterialStatusBadge
-                          material={material}
-                          analyzing={!material.analyzed && inFlight}
-                        />
-                      </div>
-                      {material.preview && (
-                        <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-                          {material.preview}
+                    {/* Header row — clickable to expand */}
+                    <div
+                      className="flex items-start gap-4 p-4 cursor-pointer hover:bg-muted/30 transition-colors"
+                      onClick={() => toggleExpanded(material.id)}
+                    >
+                      <Art className="h-10 w-10 shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-sm font-semibold truncate">
+                            {material.title}
+                          </h3>
+                          <span className="text-[11px] text-faint shrink-0">
+                            {config.label}
+                          </span>
+                          <MaterialStatusBadge
+                            material={material}
+                            analyzing={
+                              (!material.analyzed && inFlight) || isReanalyzing
+                            }
+                          />
+                        </div>
+                        {material.preview && (
+                          <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+                            {material.preview}
+                          </p>
+                        )}
+                        <p className="text-[11px] text-faint mt-1.5">
+                          {material.pages && `${material.pages} pages \u00b7 `}
+                          {material.durationSeconds !== undefined &&
+                            `${formatAudioDuration(material.durationSeconds)} \u00b7 `}
+                          {material.sizeLabel && `${material.sizeLabel} \u00b7 `}
+                          {formatRelativeDate(material.updatedAt)}
                         </p>
-                      )}
-                      <p className="text-[11px] text-faint mt-1.5">
-                        {material.pages && `${material.pages} pages · `}
-                        {material.durationSeconds !== undefined &&
-                          `${formatAudioDuration(material.durationSeconds)} · `}
-                        {material.sizeLabel && `${material.sizeLabel} · `}
-                        {formatRelativeDate(material.updatedAt)}
-                      </p>
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <button
+                          type="button"
+                          title="Re-analyse"
+                          disabled={isReanalyzing}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            void handleReanalyze(material.id);
+                          }}
+                          className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors disabled:opacity-50"
+                        >
+                          <RefreshCw
+                            className={`h-3.5 w-3.5 ${isReanalyzing ? "animate-spin" : ""}`}
+                          />
+                        </button>
+                        {expanded ? (
+                          <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                        ) : (
+                          <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                        )}
+                      </div>
                     </div>
+
+                    {/* Expanded details */}
+                    {expanded && (
+                      <FileDetailsPanel
+                        workspaceId={workspaceId}
+                        fileId={material.id}
+                      />
+                    )}
                   </Card>
                 );
               })}

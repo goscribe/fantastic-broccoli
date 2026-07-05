@@ -1,6 +1,28 @@
 import { api } from "./trpc-client";
 import { rpc } from "./study-session";
 
+export interface FileImage {
+  url: string;
+  page: number;
+  description: string;
+}
+
+export interface FileChunk {
+  index: number;
+  content: string;
+}
+
+export interface FileDetails {
+  id: string;
+  name: string;
+  mimeType: string | null;
+  size: number | null;
+  createdAt: string;
+  textContent: string | null;
+  images: FileImage[];
+  chunks: FileChunk[];
+}
+
 /**
  * Upload system: request signed Supabase Storage URLs from the server, PUT
  * the raw bytes directly to storage, then kick the analysis pipeline
@@ -113,4 +135,21 @@ export function subscribeAnalysisProgress(
     cancelled = true;
     cleanup?.();
   };
+}
+
+export async function fetchFileDetails(
+  workspaceId: string,
+  fileId: string,
+): Promise<FileDetails> {
+  return rpc<FileDetails>("workspace.getFileDetails", "query", {
+    workspaceId,
+    fileId,
+  });
+}
+
+export async function reanalyzeFile(
+  workspaceId: string,
+  fileId: string,
+): Promise<void> {
+  await rpc("workspace.reanalyzeFile", "mutation", { workspaceId, fileId });
 }
