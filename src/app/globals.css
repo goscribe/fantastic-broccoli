@@ -30,6 +30,26 @@
   --warning: #f59e0b;
 }
 
+.dark {
+  --background: #131610;
+  --foreground: #eef0ea;
+  --card: #1b1f16;
+  --card-hover: #20241a;
+  --card-foreground: #eef0ea;
+  --muted: #242920;
+  --muted-foreground: #a2a698;
+  --faint: #6e7267;
+  --ink: #0d0f0a;
+  --accent: #7edd35;
+  --accent-dim: #6fd420;
+  --accent-soft: #26331a;
+  --accent-bright: #8fe94b;
+  --accent-foreground: #10140b;
+  --border: #2a2f24;
+  --border-strong: #3a4032;
+  --ring: #7edd35;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -136,6 +156,14 @@ input[type="range"].param-slider:active::-moz-range-thumb {
 }
 .animate-fade-up {
   animation: fade-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-float {
+  animation: float-y 5s ease-in-out infinite;
 }
 
 @keyframes pulse-dot {
