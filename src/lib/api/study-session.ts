@@ -281,6 +281,25 @@ export const studySessionApi = {
     topic?: string;
     kinds?: ApiArtifactKind[];
   }) => rpc<ApiArtifactBankItem[]>("studySession.pullFromBank", "mutation", input),
+
+  listBank: (input: { workspaceId: string; kind?: ApiArtifactKind }) =>
+    rpc<ApiArtifactBankItem[]>("studySession.listBank", "query", input),
+
+  updateBankItem: (input: {
+    workspaceId: string;
+    id: string;
+    title?: string;
+    topic?: string | null;
+    syllabusRef?: string | null;
+    difficulty?: number;
+    content?: Record<string, unknown>;
+  }) => rpc<ApiArtifactBankItem>("studySession.updateBankItem", "mutation", input),
+
+  deleteBankItem: (input: { workspaceId: string; id: string }) =>
+    rpc<{ deleted: boolean }>("studySession.deleteBankItem", "mutation", input),
+
+  generateBank: (input: { workspaceId: string; fileIds?: string[] }) =>
+    rpc<{ started: boolean }>("studySession.generateBank", "mutation", input),
 };
 
 // ---------- artifact bank (precomputed content pulled into plans) ----------

@@ -5,7 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { Workspace } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Library, GraduationCap } from "lucide-react";
+import { ArrowLeft, Library, GraduationCap, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -78,6 +78,11 @@ export function WorkspaceShell({
       href: `/workspace/${workspace.id}/study`,
       label: "Study",
       icon: GraduationCap,
+    },
+    {
+      href: `/workspace/${workspace.id}/bank`,
+      label: "Bank",
+      icon: Layers,
     },
   ];
 
