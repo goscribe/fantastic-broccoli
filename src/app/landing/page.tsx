@@ -205,7 +205,7 @@ export default function LandingPage() {
             {/* Session preview card */}
             <div className="relative hidden animate-fade-up lg:block">
               {/* Floating flashcard */}
-              <div className="animate-float absolute -left-16 -top-8 z-10 w-44 rounded-xl border border-border bg-card p-3 shadow-sm">
+              <div className="animate-float absolute -bottom-10 -left-16 z-10 w-44 rounded-xl border border-border bg-card p-3 shadow-sm">
                 <p className="text-[10px] font-semibold text-faint">
                   FLASHCARD 7/18
                 </p>
@@ -218,7 +218,7 @@ export default function LandingPage() {
               </div>
               {/* Floating marking chip */}
               <div
-                className="animate-float absolute -bottom-6 -right-8 z-10 flex items-center gap-2 rounded-full border border-border bg-card py-1.5 pl-1.5 pr-3.5 shadow-sm"
+                className="animate-float absolute -right-6 -top-5 z-10 flex items-center gap-2 rounded-full border border-border bg-card py-1.5 pl-1.5 pr-3.5 shadow-sm"
                 style={{ animationDelay: "-2.5s" }}
               >
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-soft text-accent">
