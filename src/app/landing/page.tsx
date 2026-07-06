@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ScribeLogo } from "@/components/graphics/logo";
 import { Button } from "@/components/ui/button";
@@ -13,7 +14,9 @@ import {
   ListChecks,
   MessageSquare,
   Mic,
+  Moon,
   Sparkles,
+  Sun,
   TextCursorInput,
   Upload,
 } from "lucide-react";
@@ -79,20 +82,63 @@ const features = [
 ];
 
 const sessionPreview = [
-  { icon: BookOpen, label: "Reading: Enzyme kinetics", meta: "12 min", done: true },
-  { icon: ListChecks, label: "Comprehension check", meta: "4 questions", done: true },
-  { icon: ClipboardCheck, label: "Worksheet: Rate equations", meta: "AI-marked", done: false },
-  { icon: Layers, label: "Flashcards: Key definitions", meta: "18 cards", done: false },
-  { icon: TextCursorInput, label: "Cloze: Michaelis–Menten", meta: "1 passage", done: false },
+  { icon: BookOpen, label: "Reading: Enzyme kinetics", meta: "12 min" },
+  { icon: ListChecks, label: "Comprehension check", meta: "4 questions" },
+  { icon: ClipboardCheck, label: "Worksheet: Rate equations", meta: "AI-marked" },
+  { icon: Layers, label: "Flashcards: Key definitions", meta: "18 cards" },
+  { icon: TextCursorInput, label: "Cloze: Michaelis–Menten", meta: "1 passage" },
 ];
 
 export default function LandingPage() {
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window === "undefined") return "light";
+    const stored = window.localStorage.getItem("scribe-theme");
+    if (stored === "dark" || stored === "light") return stored;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
+  const [doneCount, setDoneCount] = useState(2);
+
+  useEffect(() => {
+    const id = window.setInterval(
+      () => setDoneCount((c) => (c >= sessionPreview.length ? 0 : c + 1)),
+      2200,
+    );
+    return () => window.clearInterval(id);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    window.localStorage.setItem("scribe-theme", next);
+  };
+
+  const progress = Math.round((doneCount / sessionPreview.length) * 100);
+
   return (
-    <div className="min-h-screen bg-background">
+    <div
+      suppressHydrationWarning
+      className={`min-h-screen bg-background text-foreground transition-colors duration-300 ${
+        theme === "dark" ? "dark" : ""
+      }`}
+    >
       <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <ScribeLogo />
           <nav className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            >
+              {theme === "dark" ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
+            </button>
             <Link
               href="/login"
               className="rounded-full px-4 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground"
@@ -108,9 +154,22 @@ export default function LandingPage() {
 
       <main>
         {/* Hero */}
-        <section className="mx-auto max-w-6xl px-6 pb-20 pt-16 md:pt-24">
-          <div className="grid items-center gap-12 lg:grid-cols-[1fr_minmax(0,420px)]">
-            <div>
+        <section className="relative mx-auto max-w-6xl overflow-hidden px-6 pb-20 pt-16 md:pt-24">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 lg:block"
+            style={{
+              backgroundImage:
+                "radial-gradient(var(--border-strong) 1px, transparent 1px)",
+              backgroundSize: "20px 20px",
+              maskImage:
+                "radial-gradient(ellipse 70% 70% at 70% 40%, black, transparent 70%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 70% 70% at 70% 40%, black, transparent 70%)",
+            }}
+          />
+          <div className="relative grid items-center gap-12 lg:grid-cols-[1fr_minmax(0,420px)]">
+            <div className="animate-fade-up">
               <p className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
                 <Sparkles className="h-3.5 w-3.5 text-accent" />
                 AI-powered study sessions
@@ -144,7 +203,7 @@ export default function LandingPage() {
             </div>
 
             {/* Session preview card */}
-            <div className="hidden lg:block">
+            <div className="hidden animate-fade-up lg:block">
               <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
                 <div className="flex items-center justify-between">
                   <div>
@@ -155,41 +214,55 @@ export default function LandingPage() {
                       Biochemistry · Week 4
                     </p>
                   </div>
-                  <span className="rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold text-accent">
-                    45 min
+                  <span className="rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold tabular-nums text-accent">
+                    {progress}% done
                   </span>
                 </div>
+                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
+                  <div
+                    className="h-full rounded-full bg-accent transition-all duration-700 ease-out"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
                 <ul className="mt-4 space-y-2">
-                  {sessionPreview.map((item) => (
-                    <li
-                      key={item.label}
-                      className="flex items-center gap-3 rounded-xl border border-border bg-background px-3 py-2.5"
-                    >
-                      <span
-                        className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${
-                          item.done
-                            ? "bg-accent-soft text-accent"
-                            : "bg-muted text-muted-foreground"
+                  {sessionPreview.map((item, i) => {
+                    const done = i < doneCount;
+                    const active = i === doneCount;
+                    return (
+                      <li
+                        key={item.label}
+                        className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 transition-colors duration-500 ${
+                          active
+                            ? "border-accent/40 bg-background"
+                            : "border-border bg-background"
                         }`}
                       >
-                        {item.done ? (
-                          <Check className="h-3.5 w-3.5" />
-                        ) : (
-                          <item.icon className="h-3.5 w-3.5" />
-                        )}
-                      </span>
-                      <span
-                        className={`flex-1 truncate text-[13px] font-medium ${
-                          item.done ? "text-muted-foreground line-through" : ""
-                        }`}
-                      >
-                        {item.label}
-                      </span>
-                      <span className="shrink-0 text-[11px] text-faint">
-                        {item.meta}
-                      </span>
-                    </li>
-                  ))}
+                        <span
+                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg transition-colors duration-500 ${
+                            done
+                              ? "bg-accent-soft text-accent"
+                              : "bg-muted text-muted-foreground"
+                          }`}
+                        >
+                          {done ? (
+                            <Check className="h-3.5 w-3.5" />
+                          ) : (
+                            <item.icon className="h-3.5 w-3.5" />
+                          )}
+                        </span>
+                        <span
+                          className={`flex-1 truncate text-[13px] font-medium transition-colors duration-500 ${
+                            done ? "text-muted-foreground line-through" : ""
+                          }`}
+                        >
+                          {item.label}
+                        </span>
+                        <span className="shrink-0 text-[11px] text-faint">
+                          {item.meta}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </div>
@@ -232,9 +305,9 @@ export default function LandingPage() {
               {features.map((feature) => (
                 <li
                   key={feature.title}
-                  className="rounded-xl border border-border bg-card p-5 transition-colors hover:border-border-strong"
+                  className="group rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm"
                 >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft text-accent">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft text-accent transition-transform duration-200 group-hover:scale-110">
                     <feature.icon className="h-4.5 w-4.5" />
                   </span>
                   <h3 className="mt-3 text-sm font-semibold">
@@ -282,9 +355,9 @@ export default function LandingPage() {
                 ].map((item) => (
                   <div
                     key={item.label}
-                    className="flex flex-col items-center gap-2.5 rounded-xl border border-border bg-card px-4 py-6"
+                    className="group flex flex-col items-center gap-2.5 rounded-xl border border-border bg-card px-4 py-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40"
                   >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft text-accent">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-200 group-hover:scale-110">
                       <item.icon className="h-4.5 w-4.5" />
                     </span>
                     <span className="text-center text-[13px] font-medium">
