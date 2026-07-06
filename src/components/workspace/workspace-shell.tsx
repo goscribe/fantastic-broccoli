@@ -3,11 +3,9 @@
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { Workspace } from "@/types";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Library, GraduationCap, Layers } from "lucide-react";
+import { Library, GraduationCap, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface WorkspaceShellProps {
@@ -28,18 +26,11 @@ export function WorkspaceShell({
     return (
       <div className="flex-1 flex flex-col">
         <div className="border-b border-border bg-card">
-          <div className="w-full px-4 sm:px-8 pt-6">
-            <Skeleton className="h-3.5 w-24 mb-4" />
-            <div className="flex items-center gap-3">
-              <Skeleton className="h-10 w-10" />
-              <div className="space-y-2">
-                <Skeleton className="h-6 w-56" />
-                <Skeleton className="h-3.5 w-40" />
-              </div>
-            </div>
-            <div className="flex gap-1 mt-5 pb-3">
+          <div className="w-full px-4 sm:px-8 py-2.5">
+            <div className="flex gap-1">
               <Skeleton className="h-8 w-28" />
               <Skeleton className="h-8 w-24" />
+              <Skeleton className="h-8 w-20" />
             </div>
           </div>
         </div>
@@ -89,32 +80,8 @@ export function WorkspaceShell({
   return (
     <div className="flex-1 flex flex-col">
       <div className="border-b border-border bg-card">
-        <div className="w-full px-4 sm:px-8 pt-4">
-          <div className="flex items-center gap-2 text-sm">
-            <button
-              type="button"
-              onClick={() => router.push("/")}
-              className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              Workspaces
-            </button>
-            <span className="text-border-strong">/</span>
-            <WorkspaceIcon icon={workspace.icon} className="h-5 w-5 shrink-0" />
-            <h1 className="font-semibold tracking-tight truncate">
-              {workspace.title}
-            </h1>
-            {workspace.course && (
-              <Badge variant="accent">{workspace.course}</Badge>
-            )}
-            {workspace.description && (
-              <span className="hidden sm:inline text-xs text-muted-foreground truncate">
-                {workspace.description}
-              </span>
-            )}
-          </div>
-
-          <nav className="flex gap-1 mt-3 -mb-px">
+        <div className="w-full px-4 sm:px-8">
+          <nav className="flex gap-1 -mb-px">
             {tabs.map((tab) => {
               const active = pathname.startsWith(tab.href);
               return (

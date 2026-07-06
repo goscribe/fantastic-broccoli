@@ -12,8 +12,11 @@ import {
   Sparkles,
   UserPlus,
 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import { ScribeLogo } from "@/components/graphics/logo";
+import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
+import { fetchWorkspace } from "@/lib/api/workspace";
 import { useCredits } from "@/lib/credits";
 import { resendVerification, signOut, useAuthUser } from "@/lib/api/auth";
 import {
@@ -59,6 +62,12 @@ export function TopBar({
 
   const emailVerified = user?.emailVerified ?? true;
   const workspaceId = pathname.match(/^\/workspace\/([^/]+)/)?.[1] ?? null;
+
+  const { data: workspace } = useQuery({
+    queryKey: ["workspace", workspaceId],
+    queryFn: () => fetchWorkspace(workspaceId!),
+    enabled: !!workspaceId,
+  });
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -124,7 +133,30 @@ export function TopBar({
             )}
             <span className="hidden items-center gap-2 text-[13px] text-muted-foreground sm:flex">
               {showLogo && <span className="text-faint">/</span>}
-              {sectionLabel}
+              {workspaceId ? (
+                <>
+                  <Link href="/" className="hover:text-foreground">
+                    Workspaces
+                  </Link>
+                  {workspace && (
+                    <>
+                      <span className="text-faint">/</span>
+                      <WorkspaceIcon
+                        icon={workspace.icon}
+                        className="h-4 w-4 shrink-0"
+                      />
+                      <Link
+                        href={`/workspace/${workspaceId}`}
+                        className="max-w-48 truncate font-medium text-foreground"
+                      >
+                        {workspace.title}
+                      </Link>
+                    </>
+                  )}
+                </>
+              ) : (
+                sectionLabel
+              )}
             </span>
           </div>
 

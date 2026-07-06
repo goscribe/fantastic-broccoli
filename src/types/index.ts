@@ -110,7 +110,13 @@ export interface ComprehensionEvaluation {
 
 export interface FlashcardContent {
   type: "flashcard_review";
-  cards: { front: string; back: string; known: boolean | null }[];
+  cards: {
+    front: string;
+    back: string;
+    known: boolean | null;
+    /** Backing relational `Flashcard` row for SRS progress tracking. */
+    flashcardId?: string;
+  }[];
 }
 
 export interface GraphFigureExpression {
@@ -181,6 +187,8 @@ export interface WorksheetPart {
   userAnswer?: string;
   marks?: number;
   markScheme?: MarkScheme;
+  /** Backing relational `WorksheetQuestion` row for progress tracking. */
+  worksheetQuestionId?: string;
 }
 
 export interface WorksheetStep {

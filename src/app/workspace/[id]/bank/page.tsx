@@ -9,6 +9,14 @@ import {
   type ApiArtifactBankItem,
   type ApiArtifactKind,
 } from "@/lib/api/study-session";
+import { normalizeActivityContent } from "@/lib/api/activity-content";
+import type {
+  ActivityType,
+  ClozeContent,
+  McqContent,
+  ReadingContent,
+  WorksheetContent,
+} from "@/types";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -47,11 +55,16 @@ const kindConfig: Record<
 const kinds = Object.keys(kindConfig) as ApiArtifactKind[];
 
 const str = (v: unknown): string => (typeof v === "string" ? v : "");
-const arr = (v: unknown): unknown[] => (Array.isArray(v) ? v : []);
-const obj = (v: unknown): Record<string, unknown> =>
-  v && typeof v === "object" && !Array.isArray(v)
-    ? (v as Record<string, unknown>)
-    : {};
+
+const activityTypeFromKind: Record<ApiArtifactKind, ActivityType> = {
+  WORKSHEET: "worksheet",
+  MCQ_POOL: "mcq",
+  FLASHCARD_DECK: "flashcard_review",
+  VOCAB_DECK: "vocab_recall",
+  CLOZE_PASSAGE: "cloze",
+  READING_CHUNK: "reading",
+  FIGURE: "reading",
+};
 
 function RawJson({ content }: { content: Record<string, unknown> }) {
   return (
@@ -66,119 +79,146 @@ function RawJson({ content }: { content: Record<string, unknown> }) {
   );
 }
 
-function WorksheetPreview({ content }: { content: Record<string, unknown> }) {
-  const steps = arr(content.steps).length > 0 ? arr(content.steps) : [content];
+function WorksheetPreview({ content }: { content: WorksheetContent }) {
   return (
     <div className="space-y-3">
-      {steps.map((s, i) => {
-        const step = obj(s);
-        const parts = arr(step.parts);
-        return (
-          <div
-            key={i}
-            className="rounded-lg border border-border bg-muted/20 p-3 space-y-2"
-          >
-            {str(step.title) && (
-              <p className="text-xs font-semibold">{str(step.title)}</p>
+      {content.steps.map((step, i) => (
+        <div
+          key={i}
+          className="rounded-xl border border-border bg-background overflow-hidden"
+        >
+          <div className="flex items-center justify-between gap-3 border-b border-border bg-muted/40 px-3.5 py-2">
+            <p className="text-xs font-semibold truncate">
+              {step.title || `Question ${i + 1}`}
+            </p>
+            <span className="shrink-0 text-[10px] font-semibold text-faint tabular-nums">
+              {step.parts.reduce((s, p) => s + (p.marks ?? 1), 0)} marks
+            </span>
+          </div>
+          <div className="px-3.5 py-3 space-y-3">
+            {step.intro && (
+              <p className="text-[13px] leading-5 text-muted-foreground">
+                <MarkdownText text={step.intro} />
+              </p>
             )}
-            {str(step.intro) && (
-              <MarkdownText text={str(step.intro)} className="text-xs" />
-            )}
-            {parts.map((p, j) => {
-              const part = obj(p);
-              const prompt = str(part.prompt ?? part.question);
-              if (!prompt) return null;
-              return (
-                <div key={j} className="flex items-start gap-2 text-xs">
-                  <span className="shrink-0 font-semibold text-muted-foreground">
-                    {str(part.label) || String.fromCharCode(97 + j)})
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <MarkdownText text={prompt} className="text-xs" />
-                  </div>
-                  {typeof part.marks === "number" && (
-                    <span className="shrink-0 rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
-                      {part.marks} mark{part.marks === 1 ? "" : "s"}
-                    </span>
+            {step.parts.map((part, j) => (
+              <div key={j} className="flex items-start gap-2.5">
+                <span className="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-muted text-[10px] font-bold flex items-center justify-center">
+                  {part.label || String.fromCharCode(97 + j)}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[13px] leading-5">
+                    <MarkdownText text={part.prompt} />
+                  </p>
+                  {part.answer && (
+                    <p className="mt-1 text-[11px] text-accent-dim">
+                      Answer: {part.answer}
+                    </p>
                   )}
                 </div>
-              );
-            })}
+                <span className="shrink-0 text-[10px] font-semibold text-faint tabular-nums">
+                  [{part.marks ?? 1}]
+                </span>
+              </div>
+            ))}
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
   );
 }
 
-function McqPreview({ content }: { content: Record<string, unknown> }) {
-  const questions =
-    arr(content.questions).length > 0 ? arr(content.questions) : [content];
+function McqPreview({ content }: { content: McqContent }) {
   return (
     <div className="space-y-3">
-      {questions.map((q, i) => {
-        const question = obj(q);
-        const options = arr(question.options).map(str);
-        const correct =
-          typeof question.correctIndex === "number"
-            ? question.correctIndex
-            : typeof question.correct_index === "number"
-              ? question.correct_index
-              : -1;
-        if (!str(question.question)) return null;
-        return (
-          <div
-            key={i}
-            className="rounded-lg border border-border bg-muted/20 p-3 space-y-1.5"
-          >
-            <MarkdownText
-              text={str(question.question)}
-              className="text-xs font-medium"
-            />
-            <ul className="space-y-1">
-              {options.map((option, j) => (
+      {content.questions.map((question, i) => (
+        <div
+          key={i}
+          className="rounded-xl border border-border bg-background px-3.5 py-3 space-y-2"
+        >
+          <p className="text-[13px] font-medium leading-5">
+            <MarkdownText text={question.question} />
+          </p>
+          <ul className="space-y-1">
+            {question.options.map((option, j) => {
+              const correct = j === question.correctIndex;
+              return (
                 <li
                   key={j}
                   className={cn(
-                    "flex items-center gap-1.5 text-xs",
-                    j === correct
-                      ? "font-semibold text-accent-dim"
-                      : "text-muted-foreground",
+                    "flex items-start gap-2 rounded-lg border px-2.5 py-1.5 text-xs leading-5",
+                    correct
+                      ? "border-accent/40 bg-accent-soft/60 font-medium text-accent-dim"
+                      : "border-border/60 text-muted-foreground",
                   )}
                 >
-                  {j === correct ? (
-                    <Check className="h-3 w-3 shrink-0" />
-                  ) : (
-                    <span className="h-3 w-3 shrink-0" />
-                  )}
-                  {option}
+                  <span className="mt-0.5 shrink-0 text-[10px] font-bold">
+                    {String.fromCharCode(65 + j)}
+                  </span>
+                  <span className="flex-1 min-w-0">{option}</span>
+                  {correct && <Check className="mt-0.5 h-3.5 w-3.5 shrink-0" />}
                 </li>
-              ))}
-            </ul>
-          </div>
-        );
-      })}
+              );
+            })}
+          </ul>
+          {question.explanation && (
+            <p className="text-[11px] leading-4 text-faint">
+              <MarkdownText text={question.explanation} />
+            </p>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
 
-function DeckPreview({ content }: { content: Record<string, unknown> }) {
-  const entries =
-    arr(content.cards).length > 0 ? arr(content.cards) : arr(content.terms);
+function DeckPreview({
+  entries,
+}: {
+  entries: { front: string; back: string }[];
+}) {
   return (
     <div className="grid gap-2 sm:grid-cols-2">
-      {entries.map((c, i) => {
-        const card = obj(c);
-        const front = str(card.front ?? card.term);
-        const back = str(card.back ?? card.definition);
-        if (!front && !back) return null;
+      {entries.map((card, i) => (
+        <div
+          key={i}
+          className="rounded-xl border border-border bg-background overflow-hidden"
+        >
+          <p className="px-3 py-2 text-[13px] font-semibold leading-5">
+            <MarkdownText text={card.front} />
+          </p>
+          <p className="border-t border-dashed border-border px-3 py-2 text-xs leading-5 text-muted-foreground">
+            <MarkdownText text={card.back} />
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** Renders a cloze passage with its blanks filled in as answer chips. */
+function ClozePreview({ content }: { content: ClozeContent }) {
+  return (
+    <div className="space-y-3">
+      {content.passages.map((passage, i) => {
+        const segments = passage.textWithBlanks.split(/_{2,}|\{\{blank\}\}/g);
         return (
           <div
             key={i}
-            className="rounded-lg border border-border bg-muted/20 p-3"
+            className="rounded-xl border border-border bg-background px-3.5 py-3"
           >
-            <p className="text-xs font-semibold">{front}</p>
-            <p className="text-xs text-muted-foreground mt-1">{back}</p>
+            <p className="text-[13px] leading-6">
+              {segments.map((segment, j) => (
+                <span key={j}>
+                  <MarkdownText text={segment} />
+                  {j < segments.length - 1 && (
+                    <span className="mx-0.5 rounded-md bg-accent-soft px-1.5 py-0.5 text-xs font-semibold text-accent-dim">
+                      {passage.answers[j] ?? "…"}
+                    </span>
+                  )}
+                </span>
+              ))}
+            </p>
           </div>
         );
       })}
@@ -186,30 +226,13 @@ function DeckPreview({ content }: { content: Record<string, unknown> }) {
   );
 }
 
-function ClozePreview({ content }: { content: Record<string, unknown> }) {
-  const text = str(content.textWithBlanks ?? content.text);
-  const gaps = arr(content.gaps).map(obj);
-  const answers =
-    gaps.length > 0 ? gaps.map((g) => str(g.answer)) : arr(content.answers).map(str);
+function ReadingPreview({ content }: { content: ReadingContent }) {
+  if (!content.text) return null;
   return (
-    <div className="space-y-2">
-      {text && (
-        <div className="rounded-lg border border-border bg-muted/20 p-3">
-          <MarkdownText text={text} className="text-xs" />
-        </div>
-      )}
-      {answers.filter(Boolean).length > 0 && (
-        <div className="flex flex-wrap gap-1.5">
-          {answers.filter(Boolean).map((answer, i) => (
-            <span
-              key={i}
-              className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-semibold text-accent-dim"
-            >
-              {answer}
-            </span>
-          ))}
-        </div>
-      )}
+    <div className="rounded-xl border border-border bg-background px-3.5 py-3">
+      <p className="text-[13px] leading-6">
+        <MarkdownText text={content.text} />
+      </p>
     </div>
   );
 }
@@ -217,20 +240,18 @@ function ClozePreview({ content }: { content: Record<string, unknown> }) {
 function FigurePreview({ content }: { content: Record<string, unknown> }) {
   const url = str(content.url);
   const caption = str(content.caption ?? content.title);
-  if (url) {
-    return (
-      <figure className="rounded-lg border border-border overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={url} alt={caption || "Figure"} className="w-full" />
-        {caption && (
-          <figcaption className="px-3 py-2 text-[11px] text-muted-foreground">
-            {caption}
-          </figcaption>
-        )}
-      </figure>
-    );
-  }
-  return null;
+  if (!url) return null;
+  return (
+    <figure className="rounded-xl border border-border overflow-hidden bg-background">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={url} alt={caption || "Figure"} className="w-full" />
+      {caption && (
+        <figcaption className="px-3 py-2 text-[11px] text-muted-foreground">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
 }
 
 function BankContentPreview({
@@ -241,69 +262,89 @@ function BankContentPreview({
   content: Record<string, unknown>;
 }) {
   let preview: React.ReactNode = null;
-  switch (kind) {
-    case "WORKSHEET":
-      preview = <WorksheetPreview content={content} />;
-      break;
-    case "MCQ_POOL":
-      preview = <McqPreview content={content} />;
-      break;
-    case "FLASHCARD_DECK":
-    case "VOCAB_DECK":
-      preview = <DeckPreview content={content} />;
-      break;
-    case "CLOZE_PASSAGE":
-      preview = <ClozePreview content={content} />;
-      break;
-    case "READING_CHUNK":
-      preview = str(content.text) ? (
-        <div className="rounded-lg border border-border bg-muted/20 p-3">
-          <MarkdownText text={str(content.text)} className="text-xs" />
-        </div>
-      ) : null;
-      break;
-    case "FIGURE":
-      preview = <FigurePreview content={content} />;
-      break;
+  if (kind === "FIGURE") {
+    preview = <FigurePreview content={content} />;
+  } else {
+    const normalized = normalizeActivityContent(
+      activityTypeFromKind[kind],
+      content,
+    );
+    switch (normalized.type) {
+      case "worksheet":
+        preview = <WorksheetPreview content={normalized} />;
+        break;
+      case "mcq":
+        preview = <McqPreview content={normalized} />;
+        break;
+      case "flashcard_review":
+        preview = <DeckPreview entries={normalized.cards} />;
+        break;
+      case "vocab_recall":
+        preview = (
+          <DeckPreview
+            entries={normalized.terms.map((t) => ({
+              front: t.term,
+              back: t.definition,
+            }))}
+          />
+        );
+        break;
+      case "cloze":
+        preview = <ClozePreview content={normalized} />;
+        break;
+      case "reading":
+        preview = <ReadingPreview content={normalized} />;
+        break;
+      default:
+        preview = null;
+    }
   }
   return (
     <div className="space-y-3">
-      {preview}
+      {preview ?? (
+        <p className="text-xs text-faint">No preview available for this item.</p>
+      )}
       <RawJson content={content} />
     </div>
   );
 }
 
 function bankItemSummary(item: ApiArtifactBankItem): string | null {
-  const content = item.content;
-  switch (item.kind) {
-    case "WORKSHEET": {
-      const steps = arr(content.steps);
-      const parts = steps.reduce(
-        (sum: number, s) => sum + arr(obj(s).parts).length,
-        0,
-      );
+  if (item.kind === "FIGURE") {
+    return str(item.content.caption ?? item.content.title) || null;
+  }
+  const normalized = normalizeActivityContent(
+    activityTypeFromKind[item.kind],
+    item.content,
+  );
+  switch (normalized.type) {
+    case "worksheet": {
+      const parts = normalized.steps.reduce((s, st) => s + st.parts.length, 0);
       return parts > 0 ? `${parts} question${parts === 1 ? "" : "s"}` : null;
     }
-    case "MCQ_POOL": {
-      const count = arr(content.questions).length || (str(content.question) ? 1 : 0);
+    case "mcq": {
+      const count = normalized.questions.length;
       return count > 0 ? `${count} MCQ${count === 1 ? "" : "s"}` : null;
     }
-    case "FLASHCARD_DECK":
-    case "VOCAB_DECK": {
-      const count = arr(content.cards).length || arr(content.terms).length;
+    case "flashcard_review": {
+      const count = normalized.cards.length;
       return count > 0 ? `${count} card${count === 1 ? "" : "s"}` : null;
     }
-    case "CLOZE_PASSAGE": {
-      const count = arr(content.gaps).length;
+    case "vocab_recall": {
+      const count = normalized.terms.length;
+      return count > 0 ? `${count} term${count === 1 ? "" : "s"}` : null;
+    }
+    case "cloze": {
+      const count = normalized.passages.reduce(
+        (s, p) => s + p.answers.length,
+        0,
+      );
       return count > 0 ? `${count} blank${count === 1 ? "" : "s"}` : null;
     }
-    case "READING_CHUNK": {
-      const words = str(content.text).split(/\s+/).filter(Boolean).length;
+    case "reading": {
+      const words = normalized.text.split(/\s+/).filter(Boolean).length;
       return words > 0 ? `${words} words` : null;
     }
-    case "FIGURE":
-      return str(content.caption ?? content.title) || null;
     default:
       return null;
   }

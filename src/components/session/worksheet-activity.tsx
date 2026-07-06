@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { PartMarking, WorksheetContent, WorksheetPart } from "@/types";
 import { markWorksheetAnswer } from "@/lib/api/study";
+import { recordWorksheetQuestionProgress } from "@/lib/api/study-session";
 import { WorksheetFigureCard } from "@/components/graphics/worksheet-figures";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { DrawingCanvas } from "@/components/ui/drawing-canvas";
@@ -93,6 +94,15 @@ export function WorksheetActivity({
       const next = { ...m };
       results.forEach((r, i) => (next[key(i)] = r));
       return next;
+    });
+    step.parts.forEach((part, i) => {
+      if (!part.worksheetQuestionId) return;
+      recordWorksheetQuestionProgress({
+        problemId: part.worksheetQuestionId,
+        completed: true,
+        answer: answers[key(i)] ?? "",
+        correct: results[i]?.correct ?? false,
+      }).catch(() => {});
     });
     setCheckedSteps((c) => ({ ...c, [stepIndex]: true }));
     setMarkingInFlight(false);

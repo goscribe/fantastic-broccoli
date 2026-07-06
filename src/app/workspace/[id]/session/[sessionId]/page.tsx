@@ -13,6 +13,7 @@ import {
   setActivityStatus,
   subscribePlanGeneration,
 } from "@/lib/api/study";
+import { recordFlashcardAttempt } from "@/lib/api/study-session";
 import {
   SessionActivity,
   SessionNote,
@@ -315,7 +316,15 @@ export default function SessionDetailPage() {
         return (
           <FlashcardActivity
             content={activity.content as FlashcardContent}
-            onCardResult={() => {}}
+            onCardResult={(index, known) => {
+              const card = (activity.content as FlashcardContent).cards[index];
+              if (card?.flashcardId) {
+                recordFlashcardAttempt({
+                  flashcardId: card.flashcardId,
+                  isCorrect: known,
+                }).catch(() => {});
+              }
+            }}
             onComplete={() => goToNext()}
           />
         );

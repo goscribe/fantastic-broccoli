@@ -302,6 +302,23 @@ export const studySessionApi = {
     rpc<{ started: boolean }>("studySession.generateBank", "mutation", input),
 };
 
+// ---------- artifact progress (session activities backed by pools) ----------
+
+/** Records an SRS study attempt against a pooled `Flashcard` row. */
+export const recordFlashcardAttempt = (input: {
+  flashcardId: string;
+  isCorrect: boolean;
+  timeSpentMs?: number;
+}) => rpc<unknown>("flashcards.recordStudyAttempt", "mutation", input);
+
+/** Records answer/correctness progress against a pooled `WorksheetQuestion`. */
+export const recordWorksheetQuestionProgress = (input: {
+  problemId: string;
+  completed: boolean;
+  answer?: string;
+  correct?: boolean;
+}) => rpc<unknown>("worksheets.updateProblemStatus", "mutation", input);
+
 // ---------- artifact bank (precomputed content pulled into plans) ----------
 
 export type ApiArtifactKind =

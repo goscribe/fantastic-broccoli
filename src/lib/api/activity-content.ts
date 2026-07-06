@@ -81,6 +81,8 @@ function normalizeFlashcards(raw: Raw): FlashcardContent {
         front: str(card.front),
         back: str(card.back),
         known: typeof card.known === "boolean" ? card.known : null,
+        flashcardId:
+          typeof card.flashcardId === "string" ? card.flashcardId : undefined,
       };
     }),
   };
@@ -167,6 +169,10 @@ function worksheetPart(raw: Raw): WorksheetPart {
     userAnswer: typeof raw.userAnswer === "string" ? raw.userAnswer : undefined,
     marks: typeof raw.marks === "number" ? raw.marks : undefined,
     markScheme: markScheme(raw.markScheme ?? raw.mark_scheme),
+    worksheetQuestionId:
+      typeof raw.worksheetQuestionId === "string"
+        ? raw.worksheetQuestionId
+        : undefined,
   };
 }
 
