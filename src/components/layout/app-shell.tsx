@@ -74,7 +74,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   if (isSession) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="h-screen flex flex-col overflow-hidden">
         <TopBar showLogo />
         {!hasCredits && (
           <div className="border-b border-amber-500/20 bg-amber-500/10 px-5 py-2 text-sm text-amber-950 dark:text-amber-100">

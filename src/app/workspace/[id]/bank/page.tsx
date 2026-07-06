@@ -46,13 +46,267 @@ const kindConfig: Record<
 
 const kinds = Object.keys(kindConfig) as ApiArtifactKind[];
 
-function ContentPreview({ content }: { content: Record<string, unknown> }) {
-  const text = JSON.stringify(content, null, 2);
+const str = (v: unknown): string => (typeof v === "string" ? v : "");
+const arr = (v: unknown): unknown[] => (Array.isArray(v) ? v : []);
+const obj = (v: unknown): Record<string, unknown> =>
+  v && typeof v === "object" && !Array.isArray(v)
+    ? (v as Record<string, unknown>)
+    : {};
+
+function RawJson({ content }: { content: Record<string, unknown> }) {
   return (
-    <pre className="rounded-lg border border-border bg-muted/30 px-3 py-2 text-[11px] text-muted-foreground whitespace-pre-wrap max-h-72 overflow-y-auto">
-      {text}
-    </pre>
+    <details className="group">
+      <summary className="cursor-pointer text-[11px] font-semibold text-faint hover:text-muted-foreground">
+        Raw JSON
+      </summary>
+      <pre className="mt-2 rounded-lg border border-border bg-muted/30 px-3 py-2 text-[11px] text-muted-foreground whitespace-pre-wrap max-h-72 overflow-y-auto">
+        {JSON.stringify(content, null, 2)}
+      </pre>
+    </details>
   );
+}
+
+function WorksheetPreview({ content }: { content: Record<string, unknown> }) {
+  const steps = arr(content.steps).length > 0 ? arr(content.steps) : [content];
+  return (
+    <div className="space-y-3">
+      {steps.map((s, i) => {
+        const step = obj(s);
+        const parts = arr(step.parts);
+        return (
+          <div
+            key={i}
+            className="rounded-lg border border-border bg-muted/20 p-3 space-y-2"
+          >
+            {str(step.title) && (
+              <p className="text-xs font-semibold">{str(step.title)}</p>
+            )}
+            {str(step.intro) && (
+              <MarkdownText text={str(step.intro)} className="text-xs" />
+            )}
+            {parts.map((p, j) => {
+              const part = obj(p);
+              const prompt = str(part.prompt ?? part.question);
+              if (!prompt) return null;
+              return (
+                <div key={j} className="flex items-start gap-2 text-xs">
+                  <span className="shrink-0 font-semibold text-muted-foreground">
+                    {str(part.label) || String.fromCharCode(97 + j)})
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <MarkdownText text={prompt} className="text-xs" />
+                  </div>
+                  {typeof part.marks === "number" && (
+                    <span className="shrink-0 rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
+                      {part.marks} mark{part.marks === 1 ? "" : "s"}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function McqPreview({ content }: { content: Record<string, unknown> }) {
+  const questions =
+    arr(content.questions).length > 0 ? arr(content.questions) : [content];
+  return (
+    <div className="space-y-3">
+      {questions.map((q, i) => {
+        const question = obj(q);
+        const options = arr(question.options).map(str);
+        const correct =
+          typeof question.correctIndex === "number"
+            ? question.correctIndex
+            : typeof question.correct_index === "number"
+              ? question.correct_index
+              : -1;
+        if (!str(question.question)) return null;
+        return (
+          <div
+            key={i}
+            className="rounded-lg border border-border bg-muted/20 p-3 space-y-1.5"
+          >
+            <MarkdownText
+              text={str(question.question)}
+              className="text-xs font-medium"
+            />
+            <ul className="space-y-1">
+              {options.map((option, j) => (
+                <li
+                  key={j}
+                  className={cn(
+                    "flex items-center gap-1.5 text-xs",
+                    j === correct
+                      ? "font-semibold text-accent-dim"
+                      : "text-muted-foreground",
+                  )}
+                >
+                  {j === correct ? (
+                    <Check className="h-3 w-3 shrink-0" />
+                  ) : (
+                    <span className="h-3 w-3 shrink-0" />
+                  )}
+                  {option}
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function DeckPreview({ content }: { content: Record<string, unknown> }) {
+  const entries =
+    arr(content.cards).length > 0 ? arr(content.cards) : arr(content.terms);
+  return (
+    <div className="grid gap-2 sm:grid-cols-2">
+      {entries.map((c, i) => {
+        const card = obj(c);
+        const front = str(card.front ?? card.term);
+        const back = str(card.back ?? card.definition);
+        if (!front && !back) return null;
+        return (
+          <div
+            key={i}
+            className="rounded-lg border border-border bg-muted/20 p-3"
+          >
+            <p className="text-xs font-semibold">{front}</p>
+            <p className="text-xs text-muted-foreground mt-1">{back}</p>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function ClozePreview({ content }: { content: Record<string, unknown> }) {
+  const text = str(content.textWithBlanks ?? content.text);
+  const gaps = arr(content.gaps).map(obj);
+  const answers =
+    gaps.length > 0 ? gaps.map((g) => str(g.answer)) : arr(content.answers).map(str);
+  return (
+    <div className="space-y-2">
+      {text && (
+        <div className="rounded-lg border border-border bg-muted/20 p-3">
+          <MarkdownText text={text} className="text-xs" />
+        </div>
+      )}
+      {answers.filter(Boolean).length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {answers.filter(Boolean).map((answer, i) => (
+            <span
+              key={i}
+              className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-semibold text-accent-dim"
+            >
+              {answer}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FigurePreview({ content }: { content: Record<string, unknown> }) {
+  const url = str(content.url);
+  const caption = str(content.caption ?? content.title);
+  if (url) {
+    return (
+      <figure className="rounded-lg border border-border overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={url} alt={caption || "Figure"} className="w-full" />
+        {caption && (
+          <figcaption className="px-3 py-2 text-[11px] text-muted-foreground">
+            {caption}
+          </figcaption>
+        )}
+      </figure>
+    );
+  }
+  return null;
+}
+
+function BankContentPreview({
+  kind,
+  content,
+}: {
+  kind: ApiArtifactKind;
+  content: Record<string, unknown>;
+}) {
+  let preview: React.ReactNode = null;
+  switch (kind) {
+    case "WORKSHEET":
+      preview = <WorksheetPreview content={content} />;
+      break;
+    case "MCQ_POOL":
+      preview = <McqPreview content={content} />;
+      break;
+    case "FLASHCARD_DECK":
+    case "VOCAB_DECK":
+      preview = <DeckPreview content={content} />;
+      break;
+    case "CLOZE_PASSAGE":
+      preview = <ClozePreview content={content} />;
+      break;
+    case "READING_CHUNK":
+      preview = str(content.text) ? (
+        <div className="rounded-lg border border-border bg-muted/20 p-3">
+          <MarkdownText text={str(content.text)} className="text-xs" />
+        </div>
+      ) : null;
+      break;
+    case "FIGURE":
+      preview = <FigurePreview content={content} />;
+      break;
+  }
+  return (
+    <div className="space-y-3">
+      {preview}
+      <RawJson content={content} />
+    </div>
+  );
+}
+
+function bankItemSummary(item: ApiArtifactBankItem): string | null {
+  const content = item.content;
+  switch (item.kind) {
+    case "WORKSHEET": {
+      const steps = arr(content.steps);
+      const parts = steps.reduce(
+        (sum: number, s) => sum + arr(obj(s).parts).length,
+        0,
+      );
+      return parts > 0 ? `${parts} question${parts === 1 ? "" : "s"}` : null;
+    }
+    case "MCQ_POOL": {
+      const count = arr(content.questions).length || (str(content.question) ? 1 : 0);
+      return count > 0 ? `${count} MCQ${count === 1 ? "" : "s"}` : null;
+    }
+    case "FLASHCARD_DECK":
+    case "VOCAB_DECK": {
+      const count = arr(content.cards).length || arr(content.terms).length;
+      return count > 0 ? `${count} card${count === 1 ? "" : "s"}` : null;
+    }
+    case "CLOZE_PASSAGE": {
+      const count = arr(content.gaps).length;
+      return count > 0 ? `${count} blank${count === 1 ? "" : "s"}` : null;
+    }
+    case "READING_CHUNK": {
+      const words = str(content.text).split(/\s+/).filter(Boolean).length;
+      return words > 0 ? `${words} words` : null;
+    }
+    case "FIGURE":
+      return str(content.caption ?? content.title) || null;
+    default:
+      return null;
+  }
 }
 
 function BankItemCard({
@@ -139,6 +393,7 @@ function BankItemCard({
               {config.label}
             </span>
             <span className="text-[10px] text-faint shrink-0">
+              {bankItemSummary(item) ? `${bankItemSummary(item)} · ` : ""}
               difficulty {item.difficulty}/5 · used {item.usedCount}×
             </span>
           </div>
@@ -266,12 +521,7 @@ function BankItemCard({
               </div>
             </>
           ) : (
-            <>
-              {typeof item.content.text === "string" ? (
-                <MarkdownText text={item.content.text} />
-              ) : null}
-              <ContentPreview content={item.content} />
-            </>
+            <BankContentPreview kind={item.kind} content={item.content} />
           )}
         </div>
       )}
