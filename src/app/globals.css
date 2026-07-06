@@ -158,6 +158,14 @@ input[type="range"].param-slider:active::-moz-range-thumb {
   animation: fade-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-float {
+  animation: float-y 5s ease-in-out infinite;
+}
+
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.3; }

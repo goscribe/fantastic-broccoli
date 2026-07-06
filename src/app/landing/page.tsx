@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ScribeLogo } from "@/components/graphics/logo";
+import { ScribeLogo, ScribeMark } from "@/components/graphics/logo";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
@@ -203,7 +203,31 @@ export default function LandingPage() {
             </div>
 
             {/* Session preview card */}
-            <div className="hidden animate-fade-up lg:block">
+            <div className="relative hidden animate-fade-up lg:block">
+              {/* Floating flashcard */}
+              <div className="animate-float absolute -left-16 -top-8 z-10 w-44 rounded-xl border border-border bg-card p-3 shadow-sm">
+                <p className="text-[10px] font-semibold text-faint">
+                  FLASHCARD 7/18
+                </p>
+                <p className="mt-1 text-[13px] font-semibold">
+                  What does K<sub>m</sub> represent?
+                </p>
+                <p className="mt-1.5 text-[11px] text-muted-foreground">
+                  Tap to reveal answer
+                </p>
+              </div>
+              {/* Floating marking chip */}
+              <div
+                className="animate-float absolute -bottom-6 -right-8 z-10 flex items-center gap-2 rounded-full border border-border bg-card py-1.5 pl-1.5 pr-3.5 shadow-sm"
+                style={{ animationDelay: "-2.5s" }}
+              >
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-soft text-accent">
+                  <Check className="h-3.5 w-3.5" />
+                </span>
+                <span className="text-[12px] font-semibold">
+                  Worksheet marked · 5/6
+                </span>
+              </div>
               <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
                 <div className="flex items-center justify-between">
                   <div>
@@ -275,10 +299,14 @@ export default function LandingPage() {
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
               How it works
             </h2>
-            <ol className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6">
+            <ol className="relative mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6">
+              <div
+                aria-hidden
+                className="absolute left-4 right-1/4 top-4 hidden border-t border-dashed border-border-strong sm:block"
+              />
               {steps.map((step) => (
-                <li key={step.num}>
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-sm font-bold text-accent">
+                <li key={step.num} className="relative">
+                  <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-sm font-bold text-accent ring-4 ring-background">
                     {step.num}
                   </span>
                   <h3 className="mt-3 text-base font-semibold">{step.title}</h3>
@@ -319,6 +347,72 @@ export default function LandingPage() {
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+
+        {/* Copilot */}
+        <section className="border-t border-border bg-card/40 py-16 md:py-20">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="grid items-center gap-10 lg:grid-cols-2">
+              <div>
+                <p className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
+                  <MessageSquare className="h-3.5 w-3.5 text-accent" />
+                  AI copilot
+                </p>
+                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                  Stuck? Ask mid-session.
+                </h2>
+                <p className="mt-3 max-w-lg text-muted-foreground">
+                  The copilot answers from your own materials — with citations
+                  back to the exact page — and can extend your plan with extra
+                  practice when you need it.
+                </p>
+                <ul className="mt-6 space-y-3">
+                  {[
+                    "Answers cite your PDFs, page by page",
+                    "Explains worksheet feedback step by step",
+                    "Adds targeted practice when a topic feels shaky",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                      <span className="text-muted-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {/* Chat mock */}
+              <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+                <div className="flex items-center gap-2 border-b border-border pb-3">
+                  <ScribeMark className="h-5 w-5" />
+                  <span className="text-[13px] font-semibold">Copilot</span>
+                  <span className="ml-auto rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-semibold text-accent">
+                    Session 4
+                  </span>
+                </div>
+                <div className="mt-4 space-y-3">
+                  <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-md bg-accent px-3.5 py-2.5 text-[13px] font-medium text-accent-foreground">
+                    Why did I lose a mark on part (b)?
+                  </div>
+                  <div className="max-w-[90%] rounded-2xl rounded-bl-md border border-border bg-background px-3.5 py-2.5 text-[13px] text-muted-foreground">
+                    You stated the rate doubles but didn&apos;t link it to the
+                    enzyme concentration — the markscheme wants the causal step.
+                    <span className="mt-2 flex items-center gap-1.5 text-[11px] font-medium text-accent">
+                      <FileText className="h-3 w-3" />
+                      lecture-04.pdf · p.12
+                    </span>
+                  </div>
+                  <div className="flex w-fit items-center gap-1 rounded-2xl rounded-bl-md border border-border bg-background px-3.5 py-3">
+                    {[0, 1, 2].map((i) => (
+                      <span
+                        key={i}
+                        className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-faint"
+                        style={{ animationDelay: `${i * 0.2}s` }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -371,8 +465,14 @@ export default function LandingPage() {
         </section>
 
         {/* Final CTA */}
-        <section className="border-t border-border py-16 md:py-24">
-          <div className="mx-auto max-w-6xl px-6 text-center">
+        <section className="relative overflow-hidden border-t border-border py-16 md:py-24">
+          <span aria-hidden className="pointer-events-none absolute -left-10 top-1/2 -translate-y-1/2">
+            <ScribeMark className="h-40 w-40 opacity-[0.07]" />
+          </span>
+          <span aria-hidden className="pointer-events-none absolute -right-10 top-1/2 -translate-y-1/2">
+            <ScribeMark className="h-56 w-56 opacity-[0.07]" />
+          </span>
+          <div className="relative mx-auto max-w-6xl px-6 text-center">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
               Ready to study smarter?
             </h2>
