@@ -359,7 +359,7 @@ export default function SessionDetailPage() {
   };
 
   return (
-    <div className="flex-1 flex min-h-0 h-[calc(100vh-3.5rem)] overflow-hidden">
+    <div className="flex-1 flex min-h-0 overflow-hidden">
       {/* Study column */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
       {/* Header */}

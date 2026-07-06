@@ -89,39 +89,32 @@ export function WorkspaceShell({
   return (
     <div className="flex-1 flex flex-col">
       <div className="border-b border-border bg-card">
-        <div className="w-full px-4 sm:px-8 pt-6">
-          <button
-            type="button"
-            onClick={() => router.push("/")}
-            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground mb-4"
-          >
-            <ArrowLeft className="h-3 w-3" />
-            Workspaces
-          </button>
-
-          <div className="flex items-center gap-3">
-            <WorkspaceIcon
-              icon={workspace.icon}
-              className="h-10 w-10 shrink-0"
-            />
-            <div>
-              <div className="flex items-center gap-2.5">
-                <h1 className="text-2xl font-bold tracking-tight">
-                  {workspace.title}
-                </h1>
-                {workspace.course && (
-                  <Badge variant="accent">{workspace.course}</Badge>
-                )}
-              </div>
-              {workspace.description && (
-                <p className="text-sm text-muted-foreground mt-0.5">
-                  {workspace.description}
-                </p>
-              )}
-            </div>
+        <div className="w-full px-4 sm:px-8 pt-4">
+          <div className="flex items-center gap-2 text-sm">
+            <button
+              type="button"
+              onClick={() => router.push("/")}
+              className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" />
+              Workspaces
+            </button>
+            <span className="text-border-strong">/</span>
+            <WorkspaceIcon icon={workspace.icon} className="h-5 w-5 shrink-0" />
+            <h1 className="font-semibold tracking-tight truncate">
+              {workspace.title}
+            </h1>
+            {workspace.course && (
+              <Badge variant="accent">{workspace.course}</Badge>
+            )}
+            {workspace.description && (
+              <span className="hidden sm:inline text-xs text-muted-foreground truncate">
+                {workspace.description}
+              </span>
+            )}
           </div>
 
-          <nav className="flex gap-1 mt-5 -mb-px">
+          <nav className="flex gap-1 mt-3 -mb-px">
             {tabs.map((tab) => {
               const active = pathname.startsWith(tab.href);
               return (
