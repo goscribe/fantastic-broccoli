@@ -7,6 +7,7 @@ export interface AuthUser {
   id: string;
   name: string;
   email?: string;
+  emailVerified?: boolean;
 }
 
 /**
@@ -21,9 +22,14 @@ export function useAuthUser(): { user: AuthUser | null; loading: boolean } {
     api.auth.getSession
       .query()
       .then((session) => {
-        const u = (session as { user?: { id: string; name?: string | null; email?: string | null } } | null)?.user;
+        const u = (session as { user?: { id: string; name?: string | null; email?: string | null; emailVerified?: boolean } } | null)?.user;
         if (u) {
-          setUser({ id: u.id, name: u.name ?? u.email ?? "You", email: u.email ?? undefined });
+          setUser({
+            id: u.id,
+            name: u.name ?? u.email ?? "You",
+            email: u.email ?? undefined,
+            emailVerified: u.emailVerified,
+          });
         } else {
           window.location.href = "/login";
         }
@@ -53,6 +59,10 @@ export async function signUp(
 
 export async function requestPasswordReset(email: string): Promise<void> {
   await api.auth.requestPasswordReset.mutate({ email });
+}
+
+export async function resendVerification(): Promise<void> {
+  await api.auth.resendVerification.mutate();
 }
 
 export async function signOut(): Promise<void> {

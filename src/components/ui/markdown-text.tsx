@@ -1,6 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { rpc } from "@/lib/api/study-session";
+
+// Signed-URL cache for figure object keys (keys are permanent; signed URLs
+// expire, so content stores keys and we sign on render).
+const signedUrlCache = new Map<string, Promise<string>>();
+
+function signObjectKey(objectKey: string): Promise<string> {
+  let promise = signedUrlCache.get(objectKey);
+  if (!promise) {
+    promise = rpc<{ url: string }>("workspace.getFigureUrl", "query", {
+      objectKey,
+    }).then((r) => r.url);
+    promise.catch(() => signedUrlCache.delete(objectKey));
+    signedUrlCache.set(objectKey, promise);
+  }
+  return promise;
+}
 
 // [Figure: <url-or-key> — <description>] tokens baked into generated content.
 const FIGURE_TOKEN =
@@ -54,9 +71,38 @@ function renderInline(text: string): React.ReactNode[] {
   return nodes;
 }
 
+/**
+ * Resolves a figure source to a displayable URL: http(s) URLs pass through,
+ * storage object keys are signed on demand (null while pending/failed).
+ */
+export function useResolvedFigureUrl(src: string): string | null {
+  const isKey = !/^https?:\/\//.test(src);
+  const [signed, setSigned] = useState<{ src: string; url: string } | null>(
+    null,
+  );
+
+  useEffect(() => {
+    if (!isKey) return;
+    let cancelled = false;
+    signObjectKey(src)
+      .then((url) => {
+        if (!cancelled) setSigned({ src, url });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [src, isKey]);
+
+  if (!isKey) return src;
+  return signed?.src === src ? signed.url : null;
+}
+
 function FigureImage({ src, caption }: { src: string; caption?: string }) {
-  if (!/^https?:\/\//.test(src)) {
-    // Bare object key we can't sign client-side — show the caption only.
+  const resolved = useResolvedFigureUrl(src);
+
+  if (!resolved) {
+    // Object key not signed yet (or signing failed) — show the caption only.
     return caption ? (
       <span className="block my-1 text-xs italic text-muted-foreground">
         [Figure: {caption}]
@@ -67,7 +113,7 @@ function FigureImage({ src, caption }: { src: string; caption?: string }) {
     <span className="block my-2 overflow-hidden rounded-lg border border-border bg-card">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={src}
+        src={resolved}
         alt={caption ?? "Figure"}
         className="w-full max-h-72 object-contain bg-muted/40"
       />

@@ -150,6 +150,78 @@ export async function createWorkspace(
 export async function inviteMember(
   workspaceId: string,
   email: string,
+  role: "admin" | "member" = "member",
 ): Promise<void> {
-  await api.workspace.members.inviteMember.mutate({ workspaceId, email, role: "member" });
+  await api.workspace.members.inviteMember.mutate({ workspaceId, email, role });
+}
+
+export interface WorkspaceMemberRecord {
+  id: string;
+  name: string;
+  email: string;
+  role: "owner" | "admin" | "member";
+  joinedAt: string;
+}
+
+export interface WorkspaceInvitationRecord {
+  id: string;
+  email: string;
+  role: "admin" | "member" | string;
+  expiresAt: string;
+  createdAt: string;
+  invitedByName: string | null;
+}
+
+export async function fetchWorkspaceMembers(
+  workspaceId: string,
+): Promise<WorkspaceMemberRecord[]> {
+  const members = await api.workspace.members.getMembers.query({ workspaceId });
+  return members.map((member) => ({
+    id: member.id,
+    name: member.name,
+    email: member.email,
+    role: member.role,
+    joinedAt: new Date(member.joinedAt).toISOString(),
+  }));
+}
+
+export async function fetchCurrentWorkspaceRole(
+  workspaceId: string,
+): Promise<"owner" | "admin" | "member"> {
+  return api.workspace.members.getCurrentUserRole.query({ workspaceId });
+}
+
+export async function fetchPendingInvitations(
+  workspaceId: string,
+): Promise<WorkspaceInvitationRecord[]> {
+  const invites = await api.workspace.members.getPendingInvitations.query({
+    workspaceId,
+  });
+  return invites.map((invite) => ({
+    id: invite.id,
+    email: invite.email,
+    role: invite.role,
+    expiresAt: new Date(invite.expiresAt).toISOString(),
+    createdAt: new Date(invite.createdAt).toISOString(),
+    invitedByName: invite.invitedByName,
+  }));
+}
+
+export async function changeWorkspaceMemberRole(
+  workspaceId: string,
+  memberId: string,
+  role: "admin" | "member",
+): Promise<void> {
+  await api.workspace.members.changeMemberRole.mutate({
+    workspaceId,
+    memberId,
+    role,
+  });
+}
+
+export async function removeWorkspaceMember(
+  workspaceId: string,
+  memberId: string,
+): Promise<void> {
+  await api.workspace.members.removeMember.mutate({ workspaceId, memberId });
 }
