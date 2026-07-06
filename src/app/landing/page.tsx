@@ -205,7 +205,7 @@ export default function LandingPage() {
             {/* Session preview card */}
             <div className="relative hidden animate-fade-up lg:block">
               {/* Floating flashcard */}
-              <div className="animate-float absolute -bottom-10 -left-16 z-10 w-44 rounded-xl border border-border bg-card p-3 shadow-sm">
+              <div className="animate-float absolute -bottom-14 -left-24 z-10 w-44 rounded-xl border border-border bg-card p-3 shadow-sm">
                 <p className="text-[10px] font-semibold text-faint">
                   FLASHCARD 7/18
                 </p>
