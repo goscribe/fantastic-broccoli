@@ -1,12 +1,21 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Settings, UserPlus, Bell, Palette, LogOut, Check, X, Menu, Sparkles } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import {
+  Bell,
+  LogOut,
+  Menu,
+  Palette,
+  Settings,
+  Sparkles,
+  UserPlus,
+} from "lucide-react";
 import { ScribeLogo } from "@/components/graphics/logo";
-import { signOut, useAuthUser } from "@/lib/api/auth";
+import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
+import { useCredits } from "@/lib/credits";
+import { resendVerification, signOut, useAuthUser } from "@/lib/api/auth";
 import {
   fetchNotifications,
   fetchUnreadCount,
@@ -14,9 +23,7 @@ import {
   markNotificationRead,
   type AppNotification,
 } from "@/lib/api/notifications";
-import { inviteMember } from "@/lib/api/workspace";
 import { formatRelativeDate } from "@/lib/utils";
-import { useCredits } from "@/lib/credits";
 
 export function TopBar({
   showLogo = false,
@@ -29,6 +36,14 @@ export function TopBar({
   const pathname = usePathname();
   const { user } = useAuthUser();
   const credits = useCredits();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const notifRef = useRef<HTMLDivElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [membersOpen, setMembersOpen] = useState(false);
+  const [notifOpen, setNotifOpen] = useState(false);
+  const [notifications, setNotifications] = useState<AppNotification[]>([]);
+  const [notifLoading, setNotifLoading] = useState(false);
+  const [unread, setUnread] = useState(0);
 
   const sectionLabel = pathname.startsWith("/workspace")
     ? "Workspace"
@@ -38,19 +53,12 @@ export function TopBar({
         ? "Shared with me"
         : pathname === "/settings"
           ? "Settings"
-          : "Home";
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [inviteOpen, setInviteOpen] = useState(false);
-  const [inviteEmail, setInviteEmail] = useState("");
-  const [invited, setInvited] = useState<string[]>([]);
-  const [inviting, setInviting] = useState(false);
-  const [inviteError, setInviteError] = useState<string | null>(null);
-  const [notifOpen, setNotifOpen] = useState(false);
-  const [notifications, setNotifications] = useState<AppNotification[]>([]);
-  const [notifLoading, setNotifLoading] = useState(false);
-  const [unread, setUnread] = useState(0);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const notifRef = useRef<HTMLDivElement>(null);
+          : pathname === "/pricing"
+            ? "Pricing"
+            : "Home";
+
+  const emailVerified = user?.emailVerified ?? true;
+  const workspaceId = pathname.match(/^\/workspace\/([^/]+)/)?.[1] ?? null;
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -94,36 +102,17 @@ export function TopBar({
     }
   };
 
-  const workspaceId = pathname.match(/^\/workspace\/([^/]+)/)?.[1];
-
-  const sendInvite = async () => {
-    const email = inviteEmail.trim();
-    if (!email || !workspaceId || inviting) return;
-    setInviting(true);
-    setInviteError(null);
-    try {
-      await inviteMember(workspaceId, email);
-      setInvited((prev) => [...prev, email]);
-      setInviteEmail("");
-    } catch (err) {
-      setInviteError(
-        err instanceof Error ? err.message : "Failed to send invite.",
-      );
-    }
-    setInviting(false);
-  };
-
   return (
     <>
       <div className="sticky top-0 z-40 border-b border-border bg-card/85 backdrop-blur-md">
-        <div className="px-5 h-14 flex items-center justify-between">
+        <div className="flex h-14 items-center justify-between px-5">
           <div className="flex items-center gap-2">
             {onMenuClick && (
               <button
                 type="button"
                 aria-label="Open sidebar"
                 onClick={onMenuClick}
-                className="p-2 -ml-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted md:hidden"
+                className="-ml-2 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground md:hidden"
               >
                 <Menu className="h-4 w-4" />
               </button>
@@ -133,7 +122,7 @@ export function TopBar({
                 <ScribeLogo />
               </Link>
             )}
-            <span className="hidden sm:flex items-center gap-2 text-[13px] text-muted-foreground">
+            <span className="hidden items-center gap-2 text-[13px] text-muted-foreground sm:flex">
               {showLogo && <span className="text-faint">/</span>}
               {sectionLabel}
             </span>
@@ -143,25 +132,26 @@ export function TopBar({
             {pathname.startsWith("/workspace") && (
               <button
                 type="button"
-                onClick={() => setInviteOpen(true)}
-                className="hidden sm:flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-[12px] font-medium text-muted-foreground hover:text-foreground hover:bg-muted"
+                onClick={() => setMembersOpen(true)}
+                className="hidden items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-[12px] font-medium text-muted-foreground hover:bg-muted hover:text-foreground sm:flex"
               >
                 <UserPlus className="h-3.5 w-3.5" />
-                Share
+                Members
               </button>
             )}
-            <span
-              title="Credits — earned by completing study sessions"
-              className="flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent tabular-nums"
+            <Link
+              href="/pricing"
+              title="Credits and pricing"
+              className="flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold tabular-nums text-accent hover:border-accent/50"
             >
               <Sparkles className="h-3.5 w-3.5" />
-              {credits}
-            </span>
+              {credits > 0 ? `${credits} credits` : "Out of credits"}
+            </Link>
             <div className="relative" ref={notifRef}>
               <button
                 type="button"
                 onClick={openNotifications}
-                className="relative p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted"
+                className="relative rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
                 aria-label="Notifications"
               >
                 <Bell className="h-4 w-4" />
@@ -226,7 +216,7 @@ export function TopBar({
                             <span className="block truncate text-[13px] font-medium">
                               {n.title}
                             </span>
-                            <span className="block text-xs text-muted-foreground line-clamp-2">
+                            <span className="block line-clamp-2 text-xs text-muted-foreground">
                               {n.body}
                             </span>
                             <span className="mt-0.5 block text-[10px] text-faint">
@@ -244,37 +234,35 @@ export function TopBar({
             <div className="relative" ref={menuRef}>
               <button
                 type="button"
-                onClick={() => setMenuOpen(!menuOpen)}
+                onClick={() => setMenuOpen((v) => !v)}
                 aria-label="Account menu"
-                className="ml-1 h-7 w-7 rounded-full bg-accent-soft border border-accent/20 flex items-center justify-center text-xs font-bold text-accent hover:border-accent/50"
+                className="ml-1 flex h-7 w-7 items-center justify-center rounded-full border border-accent/20 bg-accent-soft text-xs font-bold text-accent hover:border-accent/50"
               >
                 {(user?.name ?? "?").charAt(0).toUpperCase()}
               </button>
 
               {menuOpen && (
                 <div className="absolute right-0 top-full mt-2 w-56 rounded-xl border border-border bg-card py-1.5 animate-fade-up">
-                  <div className="px-3.5 py-2 border-b border-border mb-1.5">
+                  <div className="mb-1.5 border-b border-border px-3.5 py-2">
                     <p className="text-sm font-medium">{user?.name}</p>
-                    <p className="text-[11px] text-faint">
-                      {user?.email ?? "Personal workspace"}
-                    </p>
+                    <p className="text-[11px] text-faint">{user?.email ?? "Personal workspace"}</p>
                   </div>
                   {workspaceId && (
                     <button
                       type="button"
                       onClick={() => {
                         setMenuOpen(false);
-                        setInviteOpen(true);
+                        setMembersOpen(true);
                       }}
-                      className="w-full flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-muted text-left"
+                      className="flex w-full items-center gap-2.5 px-3.5 py-2 text-left text-sm hover:bg-muted"
                     >
                       <UserPlus className="h-4 w-4 text-muted-foreground" />
-                      Invite people
+                      Members
                     </button>
                   )}
                   <button
                     type="button"
-                    className="w-full flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-muted text-left"
+                    className="flex w-full items-center gap-2.5 px-3.5 py-2 text-left text-sm hover:bg-muted"
                   >
                     <Palette className="h-4 w-4 text-muted-foreground" />
                     Appearance
@@ -285,7 +273,7 @@ export function TopBar({
                       setMenuOpen(false);
                       router.push("/settings");
                     }}
-                    className="w-full flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-muted text-left"
+                    className="flex w-full items-center gap-2.5 px-3.5 py-2 text-left text-sm hover:bg-muted"
                   >
                     <Settings className="h-4 w-4 text-muted-foreground" />
                     Settings
@@ -294,7 +282,7 @@ export function TopBar({
                   <button
                     type="button"
                     onClick={() => void signOut()}
-                    className="w-full flex items-center gap-2.5 px-3.5 py-2 text-sm hover:bg-muted text-left text-muted-foreground"
+                    className="flex w-full items-center gap-2.5 px-3.5 py-2 text-left text-sm text-muted-foreground hover:bg-muted"
                   >
                     <LogOut className="h-4 w-4" />
                     Sign out
@@ -306,61 +294,28 @@ export function TopBar({
         </div>
       </div>
 
-      {inviteOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/20 backdrop-blur-sm p-4">
-          <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 animate-fade-up">
-            <div className="flex items-center justify-between mb-1">
-              <h2 className="text-lg font-bold tracking-tight">
-                Invite people
-              </h2>
-              <button
-                type="button"
-                onClick={() => setInviteOpen(false)}
-                className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted"
-                aria-label="Close"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-            <p className="text-sm text-muted-foreground mb-4">
-              Invite classmates to study together and share materials.
-            </p>
-            <div className="flex gap-2">
-              <input
-                type="email"
-                value={inviteEmail}
-                onChange={(e) => setInviteEmail(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && void sendInvite()}
-                placeholder="name@school.edu"
-                className="flex-1 h-10 rounded-xl border border-border bg-background px-3.5 text-sm focus:outline-none focus:border-accent/50 placeholder:text-faint"
-              />
-              <Button
-                size="md"
-                onClick={() => void sendInvite()}
-                disabled={!inviteEmail.trim() || !workspaceId || inviting}
-              >
-                {inviting ? "Inviting…" : "Invite"}
-              </Button>
-            </div>
-            {inviteError && (
-              <p className="mt-3 text-sm text-rose">{inviteError}</p>
-            )}
-            {invited.length > 0 && (
-              <div className="mt-4 space-y-1.5">
-                {invited.map((email) => (
-                  <div
-                    key={email}
-                    className="flex items-center gap-2 text-sm text-muted-foreground"
-                  >
-                    <Check className="h-3.5 w-3.5 text-success" />
-                    Invited {email}
-                  </div>
-                ))}
-              </div>
-            )}
+      {!emailVerified && (
+        <div className="border-b border-amber-500/20 bg-amber-500/10 px-5 py-2 text-[12px] text-amber-900 dark:text-amber-100">
+          <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
+            <span className="font-medium">
+              Verify your email to unlock study tools and billing actions.
+            </span>
+            <button
+              type="button"
+              onClick={() => void resendVerification()}
+              className="rounded-full border border-amber-500/30 bg-card px-3 py-1 font-semibold text-foreground hover:bg-muted"
+            >
+              Resend verification
+            </button>
           </div>
         </div>
       )}
+
+      <WorkspaceMembersDialog
+        workspaceId={workspaceId}
+        open={membersOpen}
+        onClose={() => setMembersOpen(false)}
+      />
     </>
   );
 }
