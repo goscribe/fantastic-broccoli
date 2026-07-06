@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: fantastic-broccoli
+    env: node
+    plan: starter
+    autoDeploy: true
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: https://api.scribe.study
+      - key: NEXT_PUBLIC_BACKEND_URL
+        value: https://api.scribe.study
+      - key: NEXT_PUBLIC_PUSHER_APP_ID
+        value: "2042683"
+      - key: NEXT_PUBLIC_PUSHER_KEY
+        value: 673d4b8b7bdac9d68ac0
+      - key: NEXT_PUBLIC_PUSHER_CLUSTER
+        value: ap3
