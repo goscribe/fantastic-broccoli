@@ -308,7 +308,17 @@ export default function SessionDetailPage() {
         return (
           <McqActivity
             content={activity.content as McqContent}
-            onAnswer={() => {}}
+            onAnswer={(questionIndex, selectedIndex) => {
+              const question = (activity.content as McqContent).questions[
+                questionIndex
+              ];
+              if (question?.sourceFlashcardId) {
+                recordFlashcardAttempt({
+                  flashcardId: question.sourceFlashcardId,
+                  isCorrect: selectedIndex === question.correctIndex,
+                }).catch(() => {});
+              }
+            }}
             onComplete={() => goToNext()}
           />
         );

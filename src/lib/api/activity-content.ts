@@ -47,6 +47,10 @@ function mcqQuestion(raw: Raw): McqQuestion {
     explanation: str(raw.explanation),
     userAnswer:
       typeof raw.userAnswer === "number" ? raw.userAnswer : undefined,
+    sourceFlashcardId:
+      typeof raw.sourceFlashcardId === "string"
+        ? raw.sourceFlashcardId
+        : undefined,
   };
 }
 

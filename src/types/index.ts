@@ -86,6 +86,8 @@ export interface McqQuestion {
   correctIndex: number;
   explanation: string;
   userAnswer?: number;
+  /** `Flashcard` row this question tests; answers record SM-2 attempts on it. */
+  sourceFlashcardId?: string;
 }
 
 export interface McqContent {
