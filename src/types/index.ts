@@ -86,6 +86,8 @@ export interface McqQuestion {
   correctIndex: number;
   explanation: string;
   userAnswer?: number;
+  /** `Flashcard` row this question tests; answers record SM-2 attempts on it. */
+  sourceFlashcardId?: string;
 }
 
 export interface McqContent {
@@ -110,7 +112,13 @@ export interface ComprehensionEvaluation {
 
 export interface FlashcardContent {
   type: "flashcard_review";
-  cards: { front: string; back: string; known: boolean | null }[];
+  cards: {
+    front: string;
+    back: string;
+    known: boolean | null;
+    /** Backing relational `Flashcard` row for SRS progress tracking. */
+    flashcardId?: string;
+  }[];
 }
 
 export interface GraphFigureExpression {
@@ -181,6 +189,8 @@ export interface WorksheetPart {
   userAnswer?: string;
   marks?: number;
   markScheme?: MarkScheme;
+  /** Backing relational `WorksheetQuestion` row for progress tracking. */
+  worksheetQuestionId?: string;
 }
 
 export interface WorksheetStep {
@@ -205,7 +215,13 @@ export interface InteractiveContent {
 
 export interface VocabRecallContent {
   type: "vocab_recall";
-  terms: { term: string; definition: string; result: boolean | null }[];
+  terms: {
+    term: string;
+    definition: string;
+    result: boolean | null;
+    /** Backing relational `Flashcard` row for SRS progress tracking. */
+    flashcardId?: string;
+  }[];
 }
 
 export interface ClozeContent {
@@ -214,6 +230,8 @@ export interface ClozeContent {
     textWithBlanks: string;
     answers: string[];
     userAnswers?: string[];
+    /** Backing relational `Flashcard` rows (one per blank) for SRS tracking. */
+    flashcardIds?: string[];
   }[];
 }
 

@@ -13,6 +13,7 @@ import {
   setActivityStatus,
   subscribePlanGeneration,
 } from "@/lib/api/study";
+import { recordFlashcardAttempt } from "@/lib/api/study-session";
 import {
   SessionActivity,
   SessionNote,
@@ -307,7 +308,17 @@ export default function SessionDetailPage() {
         return (
           <McqActivity
             content={activity.content as McqContent}
-            onAnswer={() => {}}
+            onAnswer={(questionIndex, selectedIndex) => {
+              const question = (activity.content as McqContent).questions[
+                questionIndex
+              ];
+              if (question?.sourceFlashcardId) {
+                recordFlashcardAttempt({
+                  flashcardId: question.sourceFlashcardId,
+                  isCorrect: selectedIndex === question.correctIndex,
+                }).catch(() => {});
+              }
+            }}
             onComplete={() => goToNext()}
           />
         );
@@ -315,7 +326,15 @@ export default function SessionDetailPage() {
         return (
           <FlashcardActivity
             content={activity.content as FlashcardContent}
-            onCardResult={() => {}}
+            onCardResult={(index, known) => {
+              const card = (activity.content as FlashcardContent).cards[index];
+              if (card?.flashcardId) {
+                recordFlashcardAttempt({
+                  flashcardId: card.flashcardId,
+                  isCorrect: known,
+                }).catch(() => {});
+              }
+            }}
             onComplete={() => goToNext()}
           />
         );
@@ -323,6 +342,17 @@ export default function SessionDetailPage() {
         return (
           <VocabRecallActivity
             content={activity.content as VocabRecallContent}
+            onTermResult={(index, correct) => {
+              const term = (activity.content as VocabRecallContent).terms[
+                index
+              ];
+              if (term?.flashcardId) {
+                recordFlashcardAttempt({
+                  flashcardId: term.flashcardId,
+                  isCorrect: correct,
+                }).catch(() => {});
+              }
+            }}
             onComplete={() => goToNext()}
           />
         );

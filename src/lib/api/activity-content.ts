@@ -47,6 +47,10 @@ function mcqQuestion(raw: Raw): McqQuestion {
     explanation: str(raw.explanation),
     userAnswer:
       typeof raw.userAnswer === "number" ? raw.userAnswer : undefined,
+    sourceFlashcardId:
+      typeof raw.sourceFlashcardId === "string"
+        ? raw.sourceFlashcardId
+        : undefined,
   };
 }
 
@@ -81,6 +85,8 @@ function normalizeFlashcards(raw: Raw): FlashcardContent {
         front: str(card.front),
         back: str(card.back),
         known: typeof card.known === "boolean" ? card.known : null,
+        flashcardId:
+          typeof card.flashcardId === "string" ? card.flashcardId : undefined,
       };
     }),
   };
@@ -167,6 +173,10 @@ function worksheetPart(raw: Raw): WorksheetPart {
     userAnswer: typeof raw.userAnswer === "string" ? raw.userAnswer : undefined,
     marks: typeof raw.marks === "number" ? raw.marks : undefined,
     markScheme: markScheme(raw.markScheme ?? raw.mark_scheme),
+    worksheetQuestionId:
+      typeof raw.worksheetQuestionId === "string"
+        ? raw.worksheetQuestionId
+        : undefined,
   };
 }
 
@@ -197,6 +207,8 @@ function normalizeVocab(raw: Raw): VocabRecallContent {
         term: str(entry.term ?? entry.front),
         definition: str(entry.definition ?? entry.back),
         result: typeof entry.result === "boolean" ? entry.result : null,
+        flashcardId:
+          typeof entry.flashcardId === "string" ? entry.flashcardId : undefined,
       };
     }),
   };
@@ -214,6 +226,9 @@ function normalizeCloze(raw: Raw): ClozeContent {
           userAnswers: Array.isArray(passage.userAnswers)
             ? passage.userAnswers.map(str)
             : undefined,
+          flashcardIds: Array.isArray(passage.flashcardIds)
+            ? passage.flashcardIds.map(str)
+            : undefined,
         };
       }),
     };
@@ -228,6 +243,9 @@ function normalizeCloze(raw: Raw): ClozeContent {
       {
         textWithBlanks: str(raw.textWithBlanks ?? raw.text),
         answers: gaps.map((g) => str(g.answer)),
+        flashcardIds: Array.isArray(raw.flashcardIds)
+          ? raw.flashcardIds.map(str)
+          : undefined,
       },
     ],
   };

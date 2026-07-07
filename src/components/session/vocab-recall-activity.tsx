@@ -8,11 +8,13 @@ import { Check, X, ArrowRight } from "lucide-react";
 
 interface VocabRecallActivityProps {
   content: VocabRecallContent;
+  onTermResult?: (index: number, correct: boolean) => void;
   onComplete: () => void;
 }
 
 export function VocabRecallActivity({
   content,
+  onTermResult,
   onComplete,
 }: VocabRecallActivityProps) {
   const [index, setIndex] = useState(0);
@@ -30,6 +32,7 @@ export function VocabRecallActivity({
     const next = [...results];
     next[index] = correct;
     setResults(next);
+    onTermResult?.(index, correct);
     if (index < content.terms.length - 1) {
       setIndex(index + 1);
       setAnswer("");
