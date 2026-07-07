@@ -213,7 +213,13 @@ export interface InteractiveContent {
 
 export interface VocabRecallContent {
   type: "vocab_recall";
-  terms: { term: string; definition: string; result: boolean | null }[];
+  terms: {
+    term: string;
+    definition: string;
+    result: boolean | null;
+    /** Backing relational `Flashcard` row for SRS progress tracking. */
+    flashcardId?: string;
+  }[];
 }
 
 export interface ClozeContent {
@@ -222,6 +228,8 @@ export interface ClozeContent {
     textWithBlanks: string;
     answers: string[];
     userAnswers?: string[];
+    /** Backing relational `Flashcard` rows (one per blank) for SRS tracking. */
+    flashcardIds?: string[];
   }[];
 }
 

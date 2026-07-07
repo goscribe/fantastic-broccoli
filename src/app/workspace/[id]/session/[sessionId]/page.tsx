@@ -332,6 +332,17 @@ export default function SessionDetailPage() {
         return (
           <VocabRecallActivity
             content={activity.content as VocabRecallContent}
+            onTermResult={(index, correct) => {
+              const term = (activity.content as VocabRecallContent).terms[
+                index
+              ];
+              if (term?.flashcardId) {
+                recordFlashcardAttempt({
+                  flashcardId: term.flashcardId,
+                  isCorrect: correct,
+                }).catch(() => {});
+              }
+            }}
             onComplete={() => goToNext()}
           />
         );

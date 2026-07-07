@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ClozeContent } from "@/types";
 import { markClozeAnswers } from "@/lib/api/study";
+import { recordFlashcardAttempt } from "@/lib/api/study-session";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Loader2 } from "lucide-react";
@@ -37,20 +38,31 @@ export function ClozeActivity({
     feedback: "",
   });
 
+  const recordProgress = (marked: BlankResult[]) => {
+    passage.flashcardIds?.forEach((flashcardId, i) => {
+      if (!flashcardId) return;
+      recordFlashcardAttempt({
+        flashcardId,
+        isCorrect: marked[i]?.correct ?? false,
+      }).catch(() => {});
+    });
+  };
+
   const checkAnswers = async () => {
     setMarking(true);
+    let marked: BlankResult[];
     try {
-      const marked = await markClozeAnswers({
+      marked = await markClozeAnswers({
         activityId,
         passageIndex: 0,
         answers,
       });
-      setResults(marked);
     } catch {
-      setResults(passage.answers.map((_, i) => localResult(i)));
-    } finally {
-      setMarking(false);
+      marked = passage.answers.map((_, i) => localResult(i));
     }
+    setResults(marked);
+    recordProgress(marked);
+    setMarking(false);
   };
 
   const checked = results !== null;

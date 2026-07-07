@@ -203,6 +203,8 @@ function normalizeVocab(raw: Raw): VocabRecallContent {
         term: str(entry.term ?? entry.front),
         definition: str(entry.definition ?? entry.back),
         result: typeof entry.result === "boolean" ? entry.result : null,
+        flashcardId:
+          typeof entry.flashcardId === "string" ? entry.flashcardId : undefined,
       };
     }),
   };
@@ -220,6 +222,9 @@ function normalizeCloze(raw: Raw): ClozeContent {
           userAnswers: Array.isArray(passage.userAnswers)
             ? passage.userAnswers.map(str)
             : undefined,
+          flashcardIds: Array.isArray(passage.flashcardIds)
+            ? passage.flashcardIds.map(str)
+            : undefined,
         };
       }),
     };
@@ -234,6 +239,9 @@ function normalizeCloze(raw: Raw): ClozeContent {
       {
         textWithBlanks: str(raw.textWithBlanks ?? raw.text),
         answers: gaps.map((g) => str(g.answer)),
+        flashcardIds: Array.isArray(raw.flashcardIds)
+          ? raw.flashcardIds.map(str)
+          : undefined,
       },
     ],
   };
