@@ -83,10 +83,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="h-screen flex flex-col overflow-hidden">
         <TopBar showLogo />
         {!hasCredits && (
-          <div className="px-4 pt-3 sm:px-5">
+          <div>
             <Banner
               variant="warning"
               action={{ label: "View pricing", href: "/pricing" }}
+              className="rounded-none border-x-0 border-t-0 px-4 sm:px-5"
             >
               You&apos;re out of credits. Upgrade to keep generating study
               sessions.
@@ -115,10 +116,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         <TopBar onMenuClick={() => setSidebarOpen(true)} />
         {!hasCredits && (
-          <div className="px-4 pt-3 sm:px-8">
+          <div>
             <Banner
               variant="warning"
               action={{ label: "View pricing", href: "/pricing" }}
+              className="rounded-none border-x-0 border-t-0 px-4 sm:px-8"
             >
               You&apos;re out of credits. Upgrade to keep generating study
               sessions.
