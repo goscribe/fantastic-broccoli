@@ -118,16 +118,15 @@ export default function HomePage() {
 
   return (
     <div className="flex-1 flex flex-col">
+      <Banner
+        variant="accent"
+        dismissKey="upgrade-promo"
+        action={{ label: "Upgrade Now", href: "/pricing" }}
+        className="rounded-none border-x-0 border-t-0 px-4 sm:px-8"
+      >
+        Upgrade your plan today to access premium features!
+      </Banner>
       <main className="flex-1 w-full px-4 sm:px-8 py-6 sm:py-8 space-y-8">
-        <Banner
-          variant="accent"
-          dismissKey="upgrade-promo"
-          action={{ label: "Upgrade Now", href: "/pricing" }}
-          className="animate-fade-up"
-        >
-          Upgrade your plan today to access premium features!
-        </Banner>
-
         {/* Greeting */}
         <header className="flex flex-wrap items-end justify-between gap-4 animate-fade-up">
           <div>
