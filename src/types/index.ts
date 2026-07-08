@@ -32,7 +32,7 @@ export interface StudySession {
   activities: SessionActivity[];
   progress: number;
   generating: boolean;
-  status: "active" | "paused" | "completed";
+  status: "active" | "paused" | "completed" | "failed";
   startDate: string;
   endDate?: string;
   examBoard?: ExamBoard;

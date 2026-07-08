@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { formatDuration, formatRelativeDate } from "@/lib/utils";
-import { Clock, ArrowRight } from "lucide-react";
+import { Clock, ArrowRight, AlertTriangle, RefreshCw, Trash2, Loader2 } from "lucide-react";
 import { SessionArt } from "@/components/graphics/material-art";
 
 const depthLabels = {
@@ -35,9 +35,75 @@ const depthVariants = {
 interface SessionCardProps {
   session: StudySession;
   onClick: (id: string) => void;
+  onRetry?: (id: string) => void;
+  onDelete?: (id: string) => void;
+  retrying?: boolean;
+  deleting?: boolean;
 }
 
-export function SessionCard({ session, onClick }: SessionCardProps) {
+export function SessionCard({
+  session,
+  onClick,
+  onRetry,
+  onDelete,
+  retrying,
+  deleting,
+}: SessionCardProps) {
+  if (session.status === "failed") {
+    return (
+      <Card className="border-rose/30">
+        <div className="flex items-start gap-3.5">
+          <SessionArt className="h-10 w-10 shrink-0 opacity-60" />
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2">
+              <h4 className="font-semibold text-sm truncate">{session.title}</h4>
+              <span className="inline-flex items-center gap-1 rounded-full bg-rose/10 text-rose px-2 py-0.5 text-[10px] font-semibold shrink-0">
+                <AlertTriangle className="h-2.5 w-2.5" />
+                Generation failed
+              </span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Scribe couldn&apos;t generate this study plan. You can retry with
+              the same settings, or delete the session.
+            </p>
+            <div className="flex items-center gap-2 mt-3">
+              {onRetry && (
+                <button
+                  type="button"
+                  disabled={retrying || deleting}
+                  onClick={() => onRetry(session.id)}
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-accent text-accent-foreground px-3 py-1.5 text-xs font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+                >
+                  {retrying ? (
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                  ) : (
+                    <RefreshCw className="h-3 w-3" />
+                  )}
+                  Retry
+                </button>
+              )}
+              {onDelete && (
+                <button
+                  type="button"
+                  disabled={retrying || deleting}
+                  onClick={() => onDelete(session.id)}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:text-rose hover:border-rose/40 transition-colors disabled:opacity-50"
+                >
+                  {deleting ? (
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                  ) : (
+                    <Trash2 className="h-3 w-3" />
+                  )}
+                  Delete
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
   const completedActivities = session.activities.filter(
     (a) => a.status === "completed",
   ).length;

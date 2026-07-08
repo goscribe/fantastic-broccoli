@@ -7,9 +7,11 @@ import { fetchWorkspace } from "@/lib/api/workspace";
 import {
   addSessionNote,
   appendActivities,
+  deleteStudySession,
   fetchExtensionActivities,
   fetchStudySession,
   removeSessionNote,
+  retryStudySession,
   setActivityStatus,
   subscribePlanGeneration,
 } from "@/lib/api/study";
@@ -53,6 +55,7 @@ import {
   Clock,
   SkipForward,
   MessageSquare,
+  RefreshCw,
   Trash2,
   X,
 } from "lucide-react";
@@ -97,7 +100,26 @@ export default function SessionDetailPage() {
   // Generation finished but produced nothing — the plan job failed.
   const planFailed =
     !!planError ||
-    (!!session && !generating && session.activities.length === 0);
+    (!!session &&
+      !generating &&
+      (session.status === "failed" || session.activities.length === 0));
+
+  const retryPlan = useMutation({
+    mutationFn: () => retryStudySession(sessionId),
+    onSuccess: () => {
+      setPlanError(null);
+      queryClient.invalidateQueries({ queryKey: ["study-session", sessionId] });
+    },
+  });
+  const deleteSession = useMutation({
+    mutationFn: () => deleteStudySession(sessionId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["study-sessions", workspaceId],
+      });
+      router.push(`/workspace/${workspaceId}/study`);
+    },
+  });
   // No study features until the plan actually exists.
   const planReady = !!session && !generating && !planFailed;
 
@@ -524,16 +546,36 @@ export default function SessionDetailPage() {
                 </p>
                 <p className="mt-1 max-w-sm text-xs text-muted-foreground">
                   {planError ??
-                    "Scribe couldn't build a study plan for this session. Delete it and create a new one to retry."}
+                    "Scribe couldn't build a study plan for this session. Retry with the same settings, or delete it."}
                 </p>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="mt-5"
-                  onClick={() => router.push(`/workspace/${workspaceId}`)}
-                >
-                  Back to workspace
-                </Button>
+                <div className="mt-5 flex items-center gap-2">
+                  <Button
+                    size="sm"
+                    disabled={retryPlan.isPending || deleteSession.isPending}
+                    onClick={() => retryPlan.mutate()}
+                  >
+                    <RefreshCw
+                      className={`mr-1.5 h-3.5 w-3.5 ${retryPlan.isPending ? "animate-spin" : ""}`}
+                    />
+                    Retry generation
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    disabled={retryPlan.isPending || deleteSession.isPending}
+                    onClick={() => deleteSession.mutate()}
+                  >
+                    <Trash2 className="mr-1.5 h-3.5 w-3.5" />
+                    Delete session
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => router.push(`/workspace/${workspaceId}`)}
+                  >
+                    Back to workspace
+                  </Button>
+                </div>
               </div>
             ) : generating ? (
               <GeneratingPlanCard title={session.title} />

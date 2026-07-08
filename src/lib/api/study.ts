@@ -55,6 +55,14 @@ export async function createStudySession(
   return mapSession(row);
 }
 
+export async function retryStudySession(id: string): Promise<StudySession> {
+  return mapSession(await studySessionApi.retryGeneration(id));
+}
+
+export async function deleteStudySession(id: string): Promise<void> {
+  await studySessionApi.remove(id);
+}
+
 export async function markWorksheetAnswer(input: {
   activityId: string;
   stepIndex: number;
