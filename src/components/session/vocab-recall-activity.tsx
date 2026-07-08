@@ -4,7 +4,7 @@ import { useState } from "react";
 import { VocabRecallContent } from "@/types";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Check, X, ArrowRight } from "lucide-react";
+import { Check, X, ArrowRight, RotateCcw } from "lucide-react";
 
 interface VocabRecallActivityProps {
   content: VocabRecallContent;
@@ -12,31 +12,52 @@ interface VocabRecallActivityProps {
   onComplete: () => void;
 }
 
+/**
+ * Loops through the vocabulary until every term is recalled: terms marked
+ * "missed" are re-queued into another round, and the activity only
+ * completes once all terms have been recalled correctly at least once.
+ */
 export function VocabRecallActivity({
   content,
   onTermResult,
   onComplete,
 }: VocabRecallActivityProps) {
-  const [index, setIndex] = useState(0);
+  const allIndices = content.terms.map((_, i) => i);
+  const [queue, setQueue] = useState<number[]>(allIndices);
+  const [position, setPosition] = useState(0);
+  const [missed, setMissed] = useState<number[]>([]);
+  const [learned, setLearned] = useState<Set<number>>(new Set());
+  const [round, setRound] = useState(1);
+  const [attempts, setAttempts] = useState(0);
   const [answer, setAnswer] = useState("");
   const [revealed, setRevealed] = useState(false);
-  const [results, setResults] = useState<(boolean | null)[]>(
-    content.terms.map(() => null),
-  );
 
-  const term = content.terms[index];
-  const done = results.every((r) => r !== null);
-  const correctCount = results.filter((r) => r === true).length;
+  const total = content.terms.length;
+  const done = learned.size === total;
+  const termIndex = queue[position];
+  const term = content.terms[termIndex];
 
   const mark = (correct: boolean) => {
-    const next = [...results];
-    next[index] = correct;
-    setResults(next);
-    onTermResult?.(index, correct);
-    if (index < content.terms.length - 1) {
-      setIndex(index + 1);
-      setAnswer("");
-      setRevealed(false);
+    onTermResult?.(termIndex, correct);
+    setAttempts((n) => n + 1);
+
+    const nextMissed = correct ? missed : [...missed, termIndex];
+    if (correct) {
+      setLearned((prev) => new Set(prev).add(termIndex));
+    } else {
+      setMissed(nextMissed);
+    }
+
+    setAnswer("");
+    setRevealed(false);
+
+    if (position < queue.length - 1) {
+      setPosition(position + 1);
+    } else if (nextMissed.length > 0) {
+      setQueue(nextMissed);
+      setMissed([]);
+      setPosition(0);
+      setRound((r) => r + 1);
     }
   };
 
@@ -44,12 +65,12 @@ export function VocabRecallActivity({
     return (
       <div className="py-8 text-center">
         <p className="text-lg font-bold tracking-tight">
-          {correctCount}/{content.terms.length} recalled
+          All {total} terms recalled
         </p>
         <p className="text-sm text-muted-foreground mt-1 mb-6">
-          {correctCount === content.terms.length
-            ? "Perfect recall — these are locked in."
-            : "The ones you missed will come back in your next session."}
+          {attempts === total
+            ? "Perfect recall — every term on the first try."
+            : `Took ${attempts} attempts across ${round} round${round > 1 ? "s" : ""} — the tricky ones will resurface in future sessions.`}
         </p>
         <Button size="sm" onClick={onComplete}>
           Continue
@@ -65,9 +86,17 @@ export function VocabRecallActivity({
         <p className="text-sm font-semibold">
           Define this term from memory
         </p>
-        <span className="text-xs text-muted-foreground tabular-nums">
-          {index + 1} / {content.terms.length}
-        </span>
+        <div className="flex items-center gap-3">
+          {round > 1 && (
+            <span className="flex items-center gap-1 text-xs font-semibold text-accent">
+              <RotateCcw className="h-3 w-3" />
+              Round {round}
+            </span>
+          )}
+          <span className="text-xs text-muted-foreground tabular-nums">
+            {learned.size} / {total} learnt
+          </span>
+        </div>
       </div>
 
       <p className="text-xl font-bold tracking-tight mb-4">{term.term}</p>
