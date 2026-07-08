@@ -10,9 +10,18 @@ export interface AuthUser {
   emailVerified?: boolean;
 }
 
+const PUBLIC_PATHS = ["/landing", "/login", "/signup", "/forgot-password"];
+
+function redirectUnauthenticated() {
+  const path = window.location.pathname;
+  if (PUBLIC_PATHS.some((p) => path === p || path.startsWith(`${p}/`))) return;
+  window.location.href = path === "/" ? "/landing" : "/login";
+}
+
 /**
- * Current authenticated user from goscribe/server. Redirects to the login
- * page when there is no session.
+ * Current authenticated user from goscribe/server. Redirects to the landing
+ * page (from /) or login page when there is no session, except on public
+ * pages.
  */
 export function useAuthUser(): { user: AuthUser | null; loading: boolean } {
   const [user, setUser] = useState<AuthUser | null>(null);
@@ -31,13 +40,11 @@ export function useAuthUser(): { user: AuthUser | null; loading: boolean } {
             emailVerified: u.emailVerified,
           });
         } else {
-          window.location.href = "/login";
+          redirectUnauthenticated();
         }
       })
       .catch(() => {
-        if (window.location.pathname !== "/login") {
-          window.location.href = "/login";
-        }
+        redirectUnauthenticated();
       })
       .finally(() => setLoading(false));
   }, []);

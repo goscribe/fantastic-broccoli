@@ -16,7 +16,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const isSession = /^\/workspace\/[^/]+\/session\//.test(pathname);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  if (pathname === "/login" || pathname === "/landing") {
+  if (
+    pathname === "/login" ||
+    pathname === "/landing" ||
+    pathname === "/signup" ||
+    pathname === "/forgot-password"
+  ) {
     return <>{children}</>;
   }
 
