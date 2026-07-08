@@ -64,6 +64,19 @@ const examBoards: { value: ExamBoard; label: string }[] = [
 
 const durationOptions = [15, 30, 45, 60, 90, 120];
 
+function defaultSessionTitle(): string {
+  const now = new Date();
+  const date = now.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+  });
+  const time = now.toLocaleTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  return `${date} ${time} Study session`;
+}
+
 export function SessionCreateWizard({
   workspaceTitle,
   creating = false,
@@ -72,7 +85,7 @@ export function SessionCreateWizard({
 }: SessionCreateWizardProps) {
   const [step, setStep] = useState(0);
   const [config, setConfig] = useState<SessionConfig>({
-    title: "",
+    title: defaultSessionTitle(),
     description: "",
     depth: "moderate",
     durationMinutes: 30,
@@ -222,12 +235,9 @@ export function SessionCreateWizard({
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm">
       <Card className="w-full max-w-lg sm:rounded-xl rounded-t-xl rounded-b-none sm:rounded-b-xl max-h-[85vh] overflow-y-auto p-6">
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-accent" />
-            <span className="text-sm font-medium text-muted-foreground">
-              New study session
-            </span>
-          </div>
+          <span className="text-sm font-medium text-muted-foreground">
+            New study session
+          </span>
           <button
             type="button"
             onClick={onClose}
