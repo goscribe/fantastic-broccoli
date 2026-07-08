@@ -12,10 +12,24 @@ export interface AuthUser {
 
 const PUBLIC_PATHS = ["/landing", "/login", "/signup", "/forgot-password"];
 
-function redirectUnauthenticated() {
+/** Returns true when a redirect was initiated. */
+function redirectUnauthenticated(): boolean {
   const path = window.location.pathname;
-  if (PUBLIC_PATHS.some((p) => path === p || path.startsWith(`${p}/`))) return;
+  if (PUBLIC_PATHS.some((p) => path === p || path.startsWith(`${p}/`))) {
+    return false;
+  }
   window.location.href = path === "/" ? "/landing" : "/login";
+  return true;
+}
+
+type SessionResult = Awaited<ReturnType<typeof api.auth.getSession.query>>;
+
+// One in-flight session fetch shared by every useAuthUser instance, so the
+// shell, top bar, and page all resolve auth at the same moment.
+let sessionPromise: Promise<SessionResult> | null = null;
+function getSessionOnce(): Promise<SessionResult> {
+  sessionPromise ??= api.auth.getSession.query();
+  return sessionPromise;
 }
 
 /**
@@ -28,8 +42,9 @@ export function useAuthUser(): { user: AuthUser | null; loading: boolean } {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.auth.getSession
-      .query()
+    // While an unauthenticated redirect is navigating, stay in the loading
+    // state so protected content never flashes before the browser leaves.
+    getSessionOnce()
       .then((session) => {
         const u = (session as { user?: { id: string; name?: string | null; email?: string | null; emailVerified?: boolean } } | null)?.user;
         if (u) {
@@ -39,14 +54,15 @@ export function useAuthUser(): { user: AuthUser | null; loading: boolean } {
             email: u.email ?? undefined,
             emailVerified: u.emailVerified,
           });
-        } else {
-          redirectUnauthenticated();
+          setLoading(false);
+        } else if (!redirectUnauthenticated()) {
+          setLoading(false);
         }
       })
       .catch(() => {
-        redirectUnauthenticated();
-      })
-      .finally(() => setLoading(false));
+        sessionPromise = null;
+        if (!redirectUnauthenticated()) setLoading(false);
+      });
   }, []);
 
   return { user, loading };
