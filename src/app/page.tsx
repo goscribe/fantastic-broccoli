@@ -14,6 +14,7 @@ import { CreateResourceDialog } from "@/components/workspace/create-dialog";
 import { fetchActivityCalendar, type DailyActivityPoint } from "@/lib/api/study";
 import { Search, ArrowRight, Plus } from "lucide-react";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
+import { Banner } from "@/components/ui/banner";
 
 function computeStreak(daily: DailyActivityPoint[]): number {
   const byDate = new Map(daily.map((d) => [d.date, d.count]));
@@ -118,6 +119,15 @@ export default function HomePage() {
   return (
     <div className="flex-1 flex flex-col">
       <main className="flex-1 w-full px-4 sm:px-8 py-6 sm:py-8 space-y-8">
+        <Banner
+          variant="accent"
+          dismissKey="upgrade-promo"
+          action={{ label: "Upgrade Now", href: "/pricing" }}
+          className="animate-fade-up"
+        >
+          Upgrade your plan today to access premium features!
+        </Banner>
+
         {/* Greeting */}
         <header className="flex flex-wrap items-end justify-between gap-4 animate-fade-up">
           <div>

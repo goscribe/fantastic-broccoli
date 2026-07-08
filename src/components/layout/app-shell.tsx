@@ -4,6 +4,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Sidebar } from "@/components/layout/sidebar";
+import { Banner } from "@/components/ui/banner";
 import { TopBar } from "@/components/layout/top-bar";
 import { useAuthUser } from "@/lib/api/auth";
 import { useCredits } from "@/lib/credits";
@@ -82,16 +83,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="h-screen flex flex-col overflow-hidden">
         <TopBar showLogo />
         {!hasCredits && (
-          <div className="border-b border-amber-500/20 bg-amber-500/10 px-5 py-2 text-sm text-amber-950 dark:text-amber-100">
-            <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
-              <span>You&apos;re out of credits. Upgrade to keep generating study sessions.</span>
-              <Link
-                href="/pricing"
-                className="rounded-full border border-amber-500/30 bg-card px-3 py-1.5 text-sm font-medium text-foreground hover:bg-muted"
-              >
-                View pricing
-              </Link>
-            </div>
+          <div className="px-4 pt-3 sm:px-5">
+            <Banner
+              variant="warning"
+              action={{ label: "View pricing", href: "/pricing" }}
+            >
+              You&apos;re out of credits. Upgrade to keep generating study
+              sessions.
+            </Banner>
           </div>
         )}
         {children}
@@ -116,16 +115,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         <TopBar onMenuClick={() => setSidebarOpen(true)} />
         {!hasCredits && (
-          <div className="border-b border-amber-500/20 bg-amber-500/10 px-5 py-2 text-sm text-amber-950 dark:text-amber-100">
-            <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
-              <span>You&apos;re out of credits. Upgrade to keep generating study sessions.</span>
-              <Link
-                href="/pricing"
-                className="rounded-full border border-amber-500/30 bg-card px-3 py-1.5 text-sm font-medium text-foreground hover:bg-muted"
-              >
-                View pricing
-              </Link>
-            </div>
+          <div className="px-4 pt-3 sm:px-8">
+            <Banner
+              variant="warning"
+              action={{ label: "View pricing", href: "/pricing" }}
+            >
+              You&apos;re out of credits. Upgrade to keep generating study
+              sessions.
+            </Banner>
           </div>
         )}
         {children}
