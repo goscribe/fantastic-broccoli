@@ -22,7 +22,7 @@ import type {
 // ---------- wire types (server enums are SCREAMING_SNAKE) ----------
 
 export type ApiSessionDepth = "LIGHT" | "MODERATE" | "DEEP";
-export type ApiSessionStatus = "ACTIVE" | "PAUSED" | "COMPLETED";
+export type ApiSessionStatus = "ACTIVE" | "PAUSED" | "COMPLETED" | "FAILED";
 export type ApiActivityStatus =
   | "PENDING"
   | "IN_PROGRESS"
@@ -183,6 +183,9 @@ export const studySessionApi = {
 
   remove: (id: string) =>
     rpc<ApiStudySession>("studySession.remove", "mutation", { id }),
+
+  retryGeneration: (id: string) =>
+    rpc<ApiStudySession>("studySession.retryGeneration", "mutation", { id }),
 
   addComment: (sessionId: string, content: string) =>
     rpc<ApiSessionComment>("studySession.addComment", "mutation", {

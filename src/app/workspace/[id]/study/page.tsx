@@ -4,7 +4,12 @@ import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
-import { createStudySession, fetchStudySessions } from "@/lib/api/study";
+import {
+  createStudySession,
+  deleteStudySession,
+  fetchStudySessions,
+  retryStudySession,
+} from "@/lib/api/study";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { SessionCard } from "@/components/session/session-card";
 import { SessionCreateWizard } from "@/components/session/session-create-wizard";
@@ -39,6 +44,23 @@ export default function WorkspaceStudyPage() {
       if (created) {
         router.push(`/workspace/${workspaceId}/session/${created.id}`);
       }
+    },
+  });
+
+  const retrySession = useMutation({
+    mutationFn: retryStudySession,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["study-sessions", workspaceId],
+      });
+    },
+  });
+  const deleteSession = useMutation({
+    mutationFn: deleteStudySession,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["study-sessions", workspaceId],
+      });
     },
   });
 
@@ -139,6 +161,16 @@ export default function WorkspaceStudyPage() {
                     session={session}
                     onClick={(id) =>
                       router.push(`/workspace/${workspaceId}/session/${id}`)
+                    }
+                    onRetry={(id) => retrySession.mutate(id)}
+                    onDelete={(id) => deleteSession.mutate(id)}
+                    retrying={
+                      retrySession.isPending &&
+                      retrySession.variables === session.id
+                    }
+                    deleting={
+                      deleteSession.isPending &&
+                      deleteSession.variables === session.id
                     }
                   />
                 ))}

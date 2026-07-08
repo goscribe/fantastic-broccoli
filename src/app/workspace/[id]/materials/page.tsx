@@ -29,6 +29,7 @@ import {
   ChevronDown,
   ChevronRight,
   RefreshCw,
+  Clock3,
   Image as ImageIcon,
   Layers,
   FileText,
@@ -154,13 +155,41 @@ function analysisInFlight(progress: AnalysisProgress | null): boolean {
   );
 }
 
+/** Per-file pipeline status derived from `file_analysis_progress` events. */
+type FileAnalysisStatus = "queued" | "processing" | "completed" | "error";
+
 function MaterialStatusBadge({
   material,
   analyzing,
+  fileStatus,
 }: {
   material: Material;
   analyzing: boolean;
+  fileStatus?: FileAnalysisStatus;
 }) {
+  if (fileStatus === "queued") {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-full bg-muted text-muted-foreground px-2 py-0.5 text-[10px] font-semibold shrink-0">
+        <Clock3 className="h-2.5 w-2.5" />
+        Pending
+      </span>
+    );
+  }
+  if (fileStatus === "processing") {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft text-accent-dim px-2 py-0.5 text-[10px] font-semibold shrink-0">
+        <Loader2 className="h-2.5 w-2.5 animate-spin" />
+        Analyzing...
+      </span>
+    );
+  }
+  if (fileStatus === "error") {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-full bg-rose/10 text-rose px-2 py-0.5 text-[10px] font-semibold shrink-0">
+        Analysis failed
+      </span>
+    );
+  }
   if (material.analyzed) {
     return (
       <span className="inline-flex items-center gap-1 rounded-full bg-energy-soft text-accent-dim px-2 py-0.5 text-[10px] font-semibold shrink-0">
@@ -378,6 +407,9 @@ export default function WorkspaceMaterialsPage() {
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [progress, setProgress] = useState<AnalysisProgress | null>(null);
+  const [fileStatuses, setFileStatuses] = useState<
+    Record<string, FileAnalysisStatus>
+  >({});
   const [expandedFiles, setExpandedFiles] = useState<Set<string>>(new Set());
   const [reanalyzing, setReanalyzing] = useState<Set<string>>(new Set());
 
@@ -388,6 +420,17 @@ export default function WorkspaceMaterialsPage() {
     () =>
       subscribeAnalysisProgress(workspaceId, (p) => {
         setProgress(p);
+        if (p.fileId) {
+          const status: FileAnalysisStatus =
+            p.status === "queued"
+              ? "queued"
+              : p.status === "completed"
+                ? "completed"
+                : p.status === "error"
+                  ? "error"
+                  : "processing";
+          setFileStatuses((prev) => ({ ...prev, [p.fileId!]: status }));
+        }
         queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
       }),
     [workspaceId, queryClient],
@@ -400,6 +443,11 @@ export default function WorkspaceMaterialsPage() {
     try {
       const fileIds = await uploadFiles(workspaceId, Array.from(files));
       await analyzeFiles(workspaceId, fileIds);
+      // Show a pending badge immediately; Pusher events take over from here.
+      setFileStatuses((prev) => ({
+        ...prev,
+        ...Object.fromEntries(fileIds.map((id) => [id, "queued" as const])),
+      }));
       queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
     } catch (err) {
       setUploadError(err instanceof Error ? err.message : "Upload failed");
@@ -575,6 +623,7 @@ export default function WorkspaceMaterialsPage() {
                             analyzing={
                               (!material.analyzed && inFlight) || isReanalyzing
                             }
+                            fileStatus={fileStatuses[material.id]}
                           />
                         </div>
                         {material.preview && (
