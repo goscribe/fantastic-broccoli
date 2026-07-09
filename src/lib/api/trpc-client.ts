@@ -1,4 +1,4 @@
-import { createTRPCClient, httpBatchLink } from "@trpc/client";
+import { createTRPCClient, httpBatchLink, httpLink } from "@trpc/client";
 import type { AppRouter } from "@goscribe/server";
 import superjson from "superjson";
 import { apiUrl } from "./config";
@@ -10,9 +10,13 @@ import { apiUrl } from "./config";
  * The studySession router is newer than the published @goscribe/server
  * types — see study-session.ts for its typed client.
  */
+// msw-trpc (used by the vitest suite) can't parse batched requests, so tests
+// run on the equivalent non-batching link.
+const link = process.env.NODE_ENV === "test" ? httpLink : httpBatchLink;
+
 export const api = createTRPCClient<AppRouter>({
   links: [
-    httpBatchLink({
+    link({
       url: `${apiUrl}/trpc`,
       transformer: superjson,
       fetch(input, init) {
