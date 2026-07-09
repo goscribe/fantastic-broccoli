@@ -1,19 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Check } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Check, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { signOut, useAuthUser } from "@/lib/api/auth";
+import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
 import {
   fetchAccountSummary,
   fetchPlanOptions,
   formatBytes,
   switchPlan,
   updateProfile,
+  uploadProfilePicture,
   type AccountSummary,
   type PlanOption,
 } from "@/lib/api/account";
+
+const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
 
 function UsageBar({
   label,
@@ -124,6 +127,9 @@ export default function SettingsPage() {
   const [switching, setSwitching] = useState(false);
   const [summaryLoading, setSummaryLoading] = useState(true);
   const [plansLoading, setPlansLoading] = useState(true);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [photoError, setPhotoError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchAccountSummary()
@@ -145,6 +151,32 @@ export default function SettingsPage() {
       setTimeout(() => setSaved(false), 2000);
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handlePhotoSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    setPhotoError(null);
+    if (!file.type.startsWith("image/")) {
+      setPhotoError("Please choose an image file.");
+      return;
+    }
+    if (file.size > MAX_AVATAR_BYTES) {
+      setPhotoError("Image must be under 5 MB.");
+      return;
+    }
+    setUploadingPhoto(true);
+    try {
+      await uploadProfilePicture(file);
+      await refreshSession();
+    } catch (err) {
+      setPhotoError(
+        err instanceof Error ? err.message : "Failed to upload image.",
+      );
+    } finally {
+      setUploadingPhoto(false);
     }
   };
 
@@ -173,9 +205,47 @@ export default function SettingsPage() {
           </p>
           <div className="mt-3 rounded-xl border border-border bg-card p-5">
             <div className="flex items-start gap-5">
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent-soft text-lg font-semibold text-accent">
-                {(name || "?").charAt(0).toUpperCase()}
-              </span>
+              <div className="shrink-0">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handlePhotoSelect}
+                />
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploadingPhoto}
+                  aria-label="Change profile picture"
+                  className="group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-accent-soft text-lg font-semibold text-accent transition-opacity disabled:opacity-60"
+                >
+                  {user?.profilePicture ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={user.profilePicture}
+                      alt="Profile"
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    (name || "?").charAt(0).toUpperCase()
+                  )}
+                  <span className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
+                    <Camera className="h-4 w-4 text-white" />
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploadingPhoto}
+                  className="mt-2 block w-14 text-center text-[11px] font-medium text-accent hover:underline disabled:opacity-60"
+                >
+                  {uploadingPhoto ? "Uploading…" : "Change"}
+                </button>
+                {photoError && (
+                  <p className="mt-1 w-14 text-[11px] text-red-500">{photoError}</p>
+                )}
+              </div>
               <div className="grid flex-1 gap-4 sm:grid-cols-2">
                 <div>
                   <label
