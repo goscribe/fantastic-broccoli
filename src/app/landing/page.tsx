@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ScribeLogo, ScribeMark } from "@/components/graphics/logo";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/lib/theme";
 import {
   ArrowRight,
   BookOpen,
@@ -90,14 +91,7 @@ const sessionPreview = [
 ];
 
 export default function LandingPage() {
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    if (typeof window === "undefined") return "light";
-    const stored = window.localStorage.getItem("scribe-theme");
-    if (stored === "dark" || stored === "light") return stored;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  });
+  const { theme, toggleTheme } = useTheme();
   const [doneCount, setDoneCount] = useState(2);
 
   useEffect(() => {
@@ -108,21 +102,10 @@ export default function LandingPage() {
     return () => window.clearInterval(id);
   }, []);
 
-  const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    window.localStorage.setItem("scribe-theme", next);
-  };
-
   const progress = Math.round((doneCount / sessionPreview.length) * 100);
 
   return (
-    <div
-      suppressHydrationWarning
-      className={`min-h-screen bg-background text-foreground transition-colors duration-300 ${
-        theme === "dark" ? "dark" : ""
-      }`}
-    >
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <ScribeLogo />

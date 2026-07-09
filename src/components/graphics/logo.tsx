@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export function ScribeMark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" className={className} aria-label="Scribe logo">
@@ -10,9 +12,9 @@ export function ScribeMark({ className }: { className?: string }) {
 
 export function ScribeLogo({ className }: { className?: string }) {
   return (
-    <span className={`flex items-center gap-2 ${className ?? ""}`}>
-      <ScribeMark className="h-6 w-6" />
-      <span className="font-bold text-sm tracking-tight">Scribe</span>
+    <span className={`flex items-center gap-2 ${className ?? ""} hover:cursor-pointer`}>
+      <Image src="/logo.png" height={26} width={26} alt="S" />
+      <span className="text-sm font-medium tracking-tight">Scribe</span>
     </span>
   );
 }

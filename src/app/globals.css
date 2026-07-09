@@ -31,23 +31,25 @@
 }
 
 .dark {
-  --background: #131610;
-  --foreground: #eef0ea;
-  --card: #1b1f16;
-  --card-hover: #20241a;
-  --card-foreground: #eef0ea;
-  --muted: #242920;
-  --muted-foreground: #a2a698;
-  --faint: #6e7267;
-  --ink: #0d0f0a;
-  --accent: #7edd35;
-  --accent-dim: #6fd420;
-  --accent-soft: #26331a;
-  --accent-bright: #8fe94b;
-  --accent-foreground: #10140b;
-  --border: #2a2f24;
-  --border-strong: #3a4032;
-  --ring: #7edd35;
+  --background: #0b0d08;
+  --foreground: #f4f6ef;
+  --card: #161a10;
+  --card-hover: #1c2114;
+  --card-foreground: #f4f6ef;
+  --muted: #232919;
+  --muted-foreground: #b2b8a5;
+  --faint: #7a8070;
+  --ink: #090b06;
+  --accent: #8ae63f;
+  --accent-dim: #79d92c;
+  --accent-soft: #1f2c12;
+  --accent-bright: #9bf055;
+  --accent-foreground: #0c1106;
+  --energy: #6fdb1a;
+  --energy-soft: #1d2a11;
+  --border: #2b3121;
+  --border-strong: #454d38;
+  --ring: #8ae63f;
 }
 
 @theme inline {

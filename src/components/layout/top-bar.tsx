@@ -7,9 +7,10 @@ import {
   Bell,
   LogOut,
   Menu,
-  Palette,
+  Moon,
   Settings,
   Sparkles,
+  Sun,
   UserPlus,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -27,6 +28,7 @@ import {
   type AppNotification,
 } from "@/lib/api/notifications";
 import { formatRelativeDate } from "@/lib/utils";
+import { useTheme } from "@/lib/theme";
 
 export function TopBar({
   showLogo = false,
@@ -39,6 +41,7 @@ export function TopBar({
   const pathname = usePathname();
   const { user } = useAuthUser();
   const credits = useCredits();
+  const { theme, toggleTheme } = useTheme();
   const menuRef = useRef<HTMLDivElement>(null);
   const notifRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -294,10 +297,15 @@ export function TopBar({
                   )}
                   <button
                     type="button"
+                    onClick={toggleTheme}
                     className="flex w-full items-center gap-2.5 px-3.5 py-2 text-left text-sm hover:bg-muted"
                   >
-                    <Palette className="h-4 w-4 text-muted-foreground" />
-                    Appearance
+                    {theme === "dark" ? (
+                      <Sun className="h-4 w-4 text-muted-foreground" />
+                    ) : (
+                      <Moon className="h-4 w-4 text-muted-foreground" />
+                    )}
+                    {theme === "dark" ? "Light mode" : "Dark mode"}
                   </button>
                   <button
                     type="button"
