@@ -52,7 +52,52 @@ const kindConfig: Record<
   FIGURE: { label: "Figure", icon: ImageIcon },
 };
 
-const kinds = Object.keys(kindConfig) as ApiArtifactKind[];
+type BankFamily = "worksheets" | "flashcards" | "guides" | "figures";
+
+const familyOfKind: Record<ApiArtifactKind, BankFamily> = {
+  WORKSHEET: "worksheets",
+  MCQ_POOL: "worksheets",
+  FLASHCARD_DECK: "flashcards",
+  VOCAB_DECK: "flashcards",
+  CLOZE_PASSAGE: "guides",
+  READING_CHUNK: "guides",
+  FIGURE: "figures",
+};
+
+const familyConfig: Record<
+  BankFamily,
+  { label: string; icon: React.ElementType; blurb: string }
+> = {
+  worksheets: {
+    label: "Worksheets & quizzes",
+    icon: FileQuestion,
+    blurb: "Exam-style worksheets and MCQ pools.",
+  },
+  flashcards: {
+    label: "Flashcard sets",
+    icon: WalletCards,
+    blurb: "Flashcard and vocabulary decks.",
+  },
+  guides: {
+    label: "Study guides",
+    icon: BookOpen,
+    blurb: "Readings and cloze passages.",
+  },
+  figures: {
+    label: "Figures",
+    icon: ImageIcon,
+    blurb: "Diagrams and images from your materials.",
+  },
+};
+
+const familyOrder: BankFamily[] = [
+  "worksheets",
+  "flashcards",
+  "guides",
+  "figures",
+];
+
+const UNTAGGED_TOPIC = "General";
 
 const str = (v: unknown): string => (typeof v === "string" ? v : "");
 
@@ -574,7 +619,7 @@ export default function WorkspaceBankPage() {
   const params = useParams();
   const workspaceId = params.id as string;
   const queryClient = useQueryClient();
-  const [kindFilter, setKindFilter] = useState<ApiArtifactKind | null>(null);
+  const [familyFilter, setFamilyFilter] = useState<BankFamily | null>(null);
 
   const { data: workspace, isLoading: workspaceLoading } = useQuery({
     queryKey: ["workspace", workspaceId],
@@ -592,12 +637,36 @@ export default function WorkspaceBankPage() {
       queryClient.invalidateQueries({ queryKey: ["bank", workspaceId] }),
   });
 
-  const filtered = (items ?? []).filter(
-    (item) => !kindFilter || item.kind === kindFilter,
+  const allItems = items ?? [];
+  const presentFamilies = familyOrder.filter((f) =>
+    allItems.some((item) => familyOfKind[item.kind] === f),
   );
-  const presentKinds = kinds.filter((k) =>
-    (items ?? []).some((item) => item.kind === k),
+  const filtered = allItems.filter(
+    (item) => !familyFilter || familyOfKind[item.kind] === familyFilter,
   );
+
+  // Group the visible items by family, then by topic within each family.
+  const groups = familyOrder
+    .map((family) => {
+      const familyItems = filtered.filter(
+        (item) => familyOfKind[item.kind] === family,
+      );
+      const topicMap = new Map<string, ApiArtifactBankItem[]>();
+      for (const item of familyItems) {
+        const topic = item.topic?.trim() || UNTAGGED_TOPIC;
+        const bucket = topicMap.get(topic);
+        if (bucket) bucket.push(item);
+        else topicMap.set(topic, [item]);
+      }
+      // Topics sorted alphabetically, with the catch-all bucket last.
+      const topics = [...topicMap.entries()].sort(([a], [b]) => {
+        if (a === UNTAGGED_TOPIC) return 1;
+        if (b === UNTAGGED_TOPIC) return -1;
+        return a.localeCompare(b);
+      });
+      return { family, count: familyItems.length, topics };
+    })
+    .filter((group) => group.count > 0);
 
   if (workspaceLoading || isLoading) {
     return (
@@ -636,40 +705,42 @@ export default function WorkspaceBankPage() {
           </Button>
         </div>
 
-        {presentKinds.length > 1 && (
+        {presentFamilies.length > 1 && (
           <div className="flex flex-wrap gap-1.5 animate-fade-up">
             <button
               type="button"
-              onClick={() => setKindFilter(null)}
+              onClick={() => setFamilyFilter(null)}
               className={cn(
                 "rounded-full px-3 py-1 text-[11px] font-semibold border",
-                !kindFilter
+                !familyFilter
                   ? "border-accent bg-accent-soft text-accent-dim"
                   : "border-border text-muted-foreground hover:bg-muted",
               )}
             >
-              All ({items?.length ?? 0})
+              All ({allItems.length})
             </button>
-            {presentKinds.map((k) => (
+            {presentFamilies.map((f) => (
               <button
-                key={k}
+                key={f}
                 type="button"
-                onClick={() => setKindFilter(kindFilter === k ? null : k)}
+                onClick={() => setFamilyFilter(familyFilter === f ? null : f)}
                 className={cn(
                   "rounded-full px-3 py-1 text-[11px] font-semibold border",
-                  kindFilter === k
+                  familyFilter === f
                     ? "border-accent bg-accent-soft text-accent-dim"
                     : "border-border text-muted-foreground hover:bg-muted",
                 )}
               >
-                {kindConfig[k].label} (
-                {(items ?? []).filter((item) => item.kind === k).length})
+                {familyConfig[f].label} (
+                {allItems.filter((item) => familyOfKind[item.kind] === f)
+                  .length}
+                )
               </button>
             ))}
           </div>
         )}
 
-        {filtered.length === 0 ? (
+        {groups.length === 0 ? (
           <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6 animate-fade-up">
             <Layers className="h-10 w-10 mx-auto mb-3 text-faint" />
             <p className="text-sm font-semibold">Bank is empty</p>
@@ -679,14 +750,55 @@ export default function WorkspaceBankPage() {
             </p>
           </div>
         ) : (
-          <div className="grid gap-3 animate-fade-up">
-            {filtered.map((item) => (
-              <BankItemCard
-                key={item.id}
-                workspaceId={workspaceId}
-                item={item}
-              />
-            ))}
+          <div className="space-y-8">
+            {groups.map(({ family, count, topics }) => {
+              const fc = familyConfig[family];
+              const FamilyIcon = fc.icon;
+              return (
+                <section key={family} className="space-y-3 animate-fade-up">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-soft shrink-0">
+                      <FamilyIcon className="h-4 w-4 text-accent-dim" />
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-semibold leading-tight">
+                        {fc.label}
+                        <span className="ml-1.5 text-[11px] font-medium text-faint">
+                          {count}
+                        </span>
+                      </h3>
+                      <p className="text-[11px] text-faint leading-tight">
+                        {fc.blurb}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="space-y-4 sm:pl-10">
+                    {topics.map(([topic, topicItems]) => (
+                      <div key={topic} className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                            {topic}
+                          </span>
+                          <span className="text-[10px] text-faint tabular-nums">
+                            {topicItems.length}
+                          </span>
+                          <span className="h-px flex-1 bg-border/70" />
+                        </div>
+                        <div className="grid gap-3">
+                          {topicItems.map((item) => (
+                            <BankItemCard
+                              key={item.id}
+                              workspaceId={workspaceId}
+                              item={item}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
           </div>
         )}
       </div>
