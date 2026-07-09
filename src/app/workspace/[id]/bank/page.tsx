@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
@@ -9,53 +10,26 @@ import {
   type ApiArtifactBankItem,
   type ApiArtifactKind,
 } from "@/lib/api/study-session";
-import { normalizeActivityContent } from "@/lib/api/activity-content";
-import type {
-  ActivityType,
-  ClozeContent,
-  McqContent,
-  ReadingContent,
-  WorksheetContent,
-} from "@/types";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
-import { ReadingBody } from "@/components/session/reading-activity";
-import { DeckViewer } from "@/components/bank/deck-viewer";
+import {
+  bankItemSummary,
+  kindConfig,
+} from "@/components/bank/bank-content";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
-import {
-  MarkdownText,
-  useResolvedFigureUrl,
-} from "@/components/ui/markdown-text";
 import { formatRelativeDate, cn } from "@/lib/utils";
 import {
   BookOpen,
-  Check,
-  ChevronDown,
   ChevronRight,
   FileQuestion,
   Image as ImageIcon,
   Layers,
   Loader2,
-  Pencil,
   RefreshCw,
   Trash2,
   WalletCards,
-  X,
 } from "lucide-react";
-
-const kindConfig: Record<
-  ApiArtifactKind,
-  { label: string; icon: React.ElementType }
-> = {
-  WORKSHEET: { label: "Worksheet", icon: FileQuestion },
-  MCQ_POOL: { label: "MCQ pool", icon: FileQuestion },
-  FLASHCARD_DECK: { label: "Flashcards", icon: WalletCards },
-  VOCAB_DECK: { label: "Vocab", icon: WalletCards },
-  CLOZE_PASSAGE: { label: "Cloze", icon: BookOpen },
-  READING_CHUNK: { label: "Reading", icon: BookOpen },
-  FIGURE: { label: "Figure", icon: ImageIcon },
-};
 
 type BankFamily = "worksheets" | "flashcards" | "guides" | "figures";
 
@@ -104,434 +78,7 @@ const familyOrder: BankFamily[] = [
 
 const UNTAGGED_TOPIC = "General";
 
-const str = (v: unknown): string => (typeof v === "string" ? v : "");
-
-const activityTypeFromKind: Record<ApiArtifactKind, ActivityType> = {
-  WORKSHEET: "worksheet",
-  MCQ_POOL: "mcq",
-  FLASHCARD_DECK: "flashcard_review",
-  VOCAB_DECK: "vocab_recall",
-  CLOZE_PASSAGE: "cloze",
-  READING_CHUNK: "reading",
-  FIGURE: "reading",
-};
-
-function RawJson({ content }: { content: Record<string, unknown> }) {
-  return (
-    <details className="group">
-      <summary className="cursor-pointer text-[11px] font-semibold text-faint hover:text-muted-foreground">
-        Raw JSON
-      </summary>
-      <pre className="mt-2 rounded-lg border border-border bg-muted/30 px-3 py-2 text-[11px] text-muted-foreground whitespace-pre-wrap max-h-72 overflow-y-auto">
-        {JSON.stringify(content, null, 2)}
-      </pre>
-    </details>
-  );
-}
-
-function WorksheetPreview({ content }: { content: WorksheetContent }) {
-  return (
-    <div className="space-y-3">
-      {content.steps.map((step, i) => (
-        <div
-          key={i}
-          className="rounded-xl border border-border bg-background overflow-hidden"
-        >
-          <div className="flex items-center justify-between gap-3 border-b border-border bg-muted/40 px-3.5 py-2">
-            <p className="text-xs font-semibold truncate">
-              {step.title || `Question ${i + 1}`}
-            </p>
-            <span className="shrink-0 text-[10px] font-semibold text-faint tabular-nums">
-              {step.parts.reduce((s, p) => s + (p.marks ?? 1), 0)} marks
-            </span>
-          </div>
-          <div className="px-3.5 py-3 space-y-3">
-            {step.intro && (
-              <p className="text-[13px] leading-5 text-muted-foreground">
-                <MarkdownText text={step.intro} />
-              </p>
-            )}
-            {step.parts.map((part, j) => (
-              <div key={j} className="flex items-start gap-2.5">
-                <span className="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-muted text-[10px] font-bold flex items-center justify-center">
-                  {part.label || String.fromCharCode(97 + j)}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-[13px] leading-5">
-                    <MarkdownText text={part.prompt} />
-                  </p>
-                  {part.answer && (
-                    <p className="mt-1 text-[11px] text-accent-dim">
-                      Answer: {part.answer}
-                    </p>
-                  )}
-                </div>
-                <span className="shrink-0 text-[10px] font-semibold text-faint tabular-nums">
-                  [{part.marks ?? 1}]
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function McqPreview({ content }: { content: McqContent }) {
-  return (
-    <div className="space-y-3">
-      {content.questions.map((question, i) => (
-        <div
-          key={i}
-          className="rounded-xl border border-border bg-background px-3.5 py-3 space-y-2"
-        >
-          <p className="text-[13px] font-medium leading-5">
-            <MarkdownText text={question.question} />
-          </p>
-          <ul className="space-y-1">
-            {question.options.map((option, j) => {
-              const correct = j === question.correctIndex;
-              return (
-                <li
-                  key={j}
-                  className={cn(
-                    "flex items-start gap-2 rounded-lg border px-2.5 py-1.5 text-xs leading-5",
-                    correct
-                      ? "border-accent/40 bg-accent-soft/60 font-medium text-accent-dim"
-                      : "border-border/60 text-muted-foreground",
-                  )}
-                >
-                  <span className="mt-0.5 shrink-0 text-[10px] font-bold">
-                    {String.fromCharCode(65 + j)}
-                  </span>
-                  <span className="flex-1 min-w-0">{option}</span>
-                  {correct && <Check className="mt-0.5 h-3.5 w-3.5 shrink-0" />}
-                </li>
-              );
-            })}
-          </ul>
-          {question.explanation && (
-            <p className="text-[11px] leading-4 text-faint">
-              <MarkdownText text={question.explanation} />
-            </p>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function DeckPreview({
-  entries,
-  frontLabel = "Question",
-  backLabel = "Answer",
-}: {
-  entries: { front: string; back: string }[];
-  frontLabel?: string;
-  backLabel?: string;
-}) {
-  return (
-    <div className="space-y-2">
-      {entries.map((card, i) => (
-        <div
-          key={i}
-          className="group rounded-xl border border-border bg-background px-4 py-3 hover:bg-muted/30 transition-colors"
-        >
-          <div className="grid gap-1.5 sm:grid-cols-2 sm:gap-6">
-            <div className="min-w-0">
-              <span className="text-[10px] font-medium uppercase tracking-widest text-faint">
-                {frontLabel}
-              </span>
-              <p className="mt-0.5 text-sm font-semibold leading-6">
-                <MarkdownText text={card.front} />
-              </p>
-            </div>
-            <div className="min-w-0 sm:border-l sm:border-border sm:pl-6">
-              <span className="text-[10px] font-medium uppercase tracking-widest text-faint">
-                {backLabel}
-              </span>
-              <p className="mt-0.5 text-[13px] leading-6 text-muted-foreground">
-                <MarkdownText text={card.back} />
-              </p>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-/** Renders a cloze passage with its blanks filled in as answer chips. */
-function ClozePreview({ content }: { content: ClozeContent }) {
-  return (
-    <div className="space-y-3">
-      {content.passages.map((passage, i) => {
-        const segments = passage.textWithBlanks.split(/_{2,}|\{\{blank\}\}/g);
-        return (
-          <div
-            key={i}
-            className="rounded-xl border border-border bg-background px-3.5 py-3"
-          >
-            <p className="text-[13px] leading-6">
-              {segments.map((segment, j) => (
-                <span key={j}>
-                  <MarkdownText text={segment} />
-                  {j < segments.length - 1 && (
-                    <span className="mx-0.5 rounded-md bg-accent-soft px-1.5 py-0.5 text-xs font-semibold text-accent-dim">
-                      {passage.answers[j] ?? "…"}
-                    </span>
-                  )}
-                </span>
-              ))}
-            </p>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function ReadingPreview({ content }: { content: ReadingContent }) {
-  if (!content.text) return null;
-  return (
-    <div className="rounded-xl border border-border bg-background px-4 py-3.5">
-      <ReadingBody content={content} />
-    </div>
-  );
-}
-
-function FigurePreview({ content }: { content: Record<string, unknown> }) {
-  const url = useResolvedFigureUrl(str(content.url));
-  const caption = str(content.caption ?? content.title);
-  if (!url) return null;
-  return (
-    <figure className="rounded-xl border border-border overflow-hidden bg-background">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={url} alt={caption || "Figure"} className="w-full" />
-      {caption && (
-        <figcaption className="px-3 py-2 text-[11px] text-muted-foreground">
-          {caption}
-        </figcaption>
-      )}
-    </figure>
-  );
-}
-
-function BankContentPreview({
-  kind,
-  content,
-}: {
-  kind: ApiArtifactKind;
-  content: Record<string, unknown>;
-}) {
-  let preview: React.ReactNode = null;
-  if (kind === "FIGURE") {
-    preview = <FigurePreview content={content} />;
-  } else {
-    const normalized = normalizeActivityContent(
-      activityTypeFromKind[kind],
-      content,
-    );
-    switch (normalized.type) {
-      case "worksheet":
-        preview = <WorksheetPreview content={normalized} />;
-        break;
-      case "mcq":
-        preview = <McqPreview content={normalized} />;
-        break;
-      case "flashcard_review":
-        preview = <DeckPreview entries={normalized.cards} />;
-        break;
-      case "vocab_recall":
-        preview = (
-          <DeckPreview
-            frontLabel="Term"
-            backLabel="Definition"
-            entries={normalized.terms.map((t) => ({
-              front: t.term,
-              back: t.definition,
-            }))}
-          />
-        );
-        break;
-      case "cloze":
-        preview = <ClozePreview content={normalized} />;
-        break;
-      case "reading":
-        preview = <ReadingPreview content={normalized} />;
-        break;
-      default:
-        preview = null;
-    }
-  }
-  return (
-    <div className="space-y-3">
-      {preview ?? (
-        <p className="text-xs text-faint">No preview available for this item.</p>
-      )}
-      <RawJson content={content} />
-    </div>
-  );
-}
-
-/** Front/back pairs for flashcard and vocab decks, null for other kinds. */
-function deckEntries(
-  item: ApiArtifactBankItem,
-): { entries: { front: string; back: string }[]; frontLabel: string; backLabel: string } | null {
-  if (item.kind !== "FLASHCARD_DECK" && item.kind !== "VOCAB_DECK") return null;
-  const normalized = normalizeActivityContent(
-    activityTypeFromKind[item.kind],
-    item.content,
-  );
-  if (normalized.type === "flashcard_review") {
-    return {
-      entries: normalized.cards,
-      frontLabel: "Question",
-      backLabel: "Answer",
-    };
-  }
-  if (normalized.type === "vocab_recall") {
-    return {
-      entries: normalized.terms.map((t) => ({
-        front: t.term,
-        back: t.definition,
-      })),
-      frontLabel: "Term",
-      backLabel: "Definition",
-    };
-  }
-  return null;
-}
-
-function BankItemDialog({
-  item,
-  onClose,
-}: {
-  item: ApiArtifactBankItem;
-  onClose: () => void;
-}) {
-  const config = kindConfig[item.kind];
-  const Icon = config.icon;
-  const deck = deckEntries(item);
-
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
-
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/20 p-4 backdrop-blur-sm sm:items-center"
-      onClick={onClose}
-    >
-      <div
-        role="dialog"
-        aria-modal="true"
-        className="flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-border bg-card animate-fade-up"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-start gap-3 border-b border-border px-5 py-4">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft shrink-0">
-            <Icon className="h-4 w-4 text-accent-dim" />
-          </span>
-          <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-semibold leading-tight">
-              {item.title}
-            </h3>
-            <p className="text-[11px] text-faint mt-0.5">
-              {config.label}
-              {item.topic && ` · ${item.topic}`}
-              {" · "}difficulty {item.difficulty}/5
-              {bankItemSummary(item) && ` · ${bankItemSummary(item)}`}
-            </p>
-          </div>
-          <button
-            type="button"
-            aria-label="Close"
-            onClick={onClose}
-            className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground hover:bg-muted shrink-0"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        </div>
-        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
-          {deck && deck.entries.length > 0 ? (
-            <>
-              <DeckViewer
-                entries={deck.entries}
-                frontLabel={deck.frontLabel}
-                backLabel={deck.backLabel}
-              />
-              <div className="space-y-2">
-                <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                  All cards
-                </p>
-                <DeckPreview
-                  entries={deck.entries}
-                  frontLabel={deck.frontLabel}
-                  backLabel={deck.backLabel}
-                />
-              </div>
-            </>
-          ) : (
-            <BankContentPreview kind={item.kind} content={item.content} />
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function bankItemSummary(item: ApiArtifactBankItem): string | null {
-  if (item.kind === "FIGURE") {
-    return str(item.content.caption ?? item.content.title) || null;
-  }
-  const normalized = normalizeActivityContent(
-    activityTypeFromKind[item.kind],
-    item.content,
-  );
-  switch (normalized.type) {
-    case "worksheet": {
-      const parts = normalized.steps.reduce((s, st) => s + st.parts.length, 0);
-      return parts > 0 ? `${parts} question${parts === 1 ? "" : "s"}` : null;
-    }
-    case "mcq": {
-      const count = normalized.questions.length;
-      return count > 0 ? `${count} MCQ${count === 1 ? "" : "s"}` : null;
-    }
-    case "flashcard_review": {
-      const count = normalized.cards.length;
-      return count > 0 ? `${count} card${count === 1 ? "" : "s"}` : null;
-    }
-    case "vocab_recall": {
-      const count = normalized.terms.length;
-      return count > 0 ? `${count} term${count === 1 ? "" : "s"}` : null;
-    }
-    case "cloze": {
-      const count = normalized.passages.reduce(
-        (s, p) => s + p.answers.length,
-        0,
-      );
-      return count > 0 ? `${count} blank${count === 1 ? "" : "s"}` : null;
-    }
-    case "reading": {
-      const words = normalized.text.split(/\s+/).filter(Boolean).length;
-      return words > 0 ? `${words} words` : null;
-    }
-    default:
-      return null;
-  }
-}
-
-function BankItemCard({
+function BankItemRow({
   workspaceId,
   item,
 }: {
@@ -539,72 +86,23 @@ function BankItemCard({
   item: ApiArtifactBankItem;
 }) {
   const queryClient = useQueryClient();
-  const [expanded, setExpanded] = useState(false);
-  const [viewing, setViewing] = useState(false);
-  const [editing, setEditing] = useState(false);
-  const [title, setTitle] = useState(item.title);
-  const [topic, setTopic] = useState(item.topic ?? "");
-  const [difficulty, setDifficulty] = useState(item.difficulty);
-  const [contentDraft, setContentDraft] = useState("");
-  const [contentError, setContentError] = useState<string | null>(null);
-
-  const invalidate = () =>
-    queryClient.invalidateQueries({ queryKey: ["bank", workspaceId] });
-
-  const updateMutation = useMutation({
-    mutationFn: () => {
-      let content: Record<string, unknown> | undefined;
-      if (contentDraft.trim()) {
-        content = JSON.parse(contentDraft) as Record<string, unknown>;
-      }
-      return studySessionApi.updateBankItem({
-        workspaceId,
-        id: item.id,
-        title: title.trim() || item.title,
-        topic: topic.trim() || null,
-        difficulty,
-        ...(content ? { content } : {}),
-      });
-    },
-    onSuccess: () => {
-      setEditing(false);
-      setContentError(null);
-      invalidate();
-    },
-    onError: (err) =>
-      setContentError(
-        err instanceof SyntaxError
-          ? "Content must be valid JSON"
-          : err instanceof Error
-            ? err.message
-            : "Update failed",
-      ),
-  });
 
   const deleteMutation = useMutation({
     mutationFn: () =>
       studySessionApi.deleteBankItem({ workspaceId, id: item.id }),
-    onSuccess: invalidate,
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["bank", workspaceId] }),
   });
 
   const config = kindConfig[item.kind];
   const Icon = config.icon;
-
-  const startEditing = () => {
-    setTitle(item.title);
-    setTopic(item.topic ?? "");
-    setDifficulty(item.difficulty);
-    setContentDraft(JSON.stringify(item.content, null, 2));
-    setContentError(null);
-    setEditing(true);
-    setExpanded(true);
-  };
+  const summary = bankItemSummary(item);
 
   return (
     <Card className="p-0 overflow-hidden">
-      <div
-        className="flex items-start gap-3 p-4 cursor-pointer hover:bg-muted/30 transition-colors"
-        onClick={() => setViewing(true)}
+      <Link
+        href={`/workspace/${workspaceId}/bank/${item.id}`}
+        className="flex items-start gap-3 p-4 hover:bg-muted/30 transition-colors"
       >
         <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted shrink-0">
           <Icon className="h-4 w-4 text-muted-foreground" />
@@ -616,7 +114,7 @@ function BankItemCard({
               {config.label}
             </span>
             <span className="text-[10px] text-faint shrink-0">
-              {bankItemSummary(item) ? `${bankItemSummary(item)} · ` : ""}
+              {summary ? `${summary} · ` : ""}
               difficulty {item.difficulty}/5 · used {item.usedCount}×
             </span>
           </div>
@@ -632,20 +130,10 @@ function BankItemCard({
         <div className="flex items-center gap-1.5 shrink-0">
           <button
             type="button"
-            title="Edit"
-            onClick={(e) => {
-              e.stopPropagation();
-              startEditing();
-            }}
-            className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground hover:bg-muted"
-          >
-            <Pencil className="h-3.5 w-3.5" />
-          </button>
-          <button
-            type="button"
             title="Delete"
             disabled={deleteMutation.isPending}
             onClick={(e) => {
+              e.preventDefault();
               e.stopPropagation();
               if (confirm("Delete this bank item?")) deleteMutation.mutate();
             }}
@@ -657,111 +145,9 @@ function BankItemCard({
               <Trash2 className="h-3.5 w-3.5" />
             )}
           </button>
-          <button
-            type="button"
-            title={expanded ? "Collapse preview" : "Expand preview"}
-            onClick={(e) => {
-              e.stopPropagation();
-              setExpanded((v) => !v);
-            }}
-            className="flex h-7 w-7 items-center justify-center rounded-md text-faint hover:bg-muted hover:text-muted-foreground"
-          >
-            {expanded ? (
-              <ChevronDown className="h-4 w-4" />
-            ) : (
-              <ChevronRight className="h-4 w-4" />
-            )}
-          </button>
+          <ChevronRight className="h-4 w-4 text-faint" />
         </div>
-      </div>
-
-      {viewing && (
-        <BankItemDialog item={item} onClose={() => setViewing(false)} />
-      )}
-
-      {expanded && (
-        <div className="border-t border-border p-4 space-y-3">
-          {editing ? (
-            <>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <label className="text-[11px] font-semibold text-muted-foreground">
-                  Title
-                  <input
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className="mt-1 w-full rounded-md border border-border bg-background px-2.5 py-1.5 text-xs font-normal text-foreground"
-                  />
-                </label>
-                <label className="text-[11px] font-semibold text-muted-foreground">
-                  Topic
-                  <input
-                    value={topic}
-                    onChange={(e) => setTopic(e.target.value)}
-                    className="mt-1 w-full rounded-md border border-border bg-background px-2.5 py-1.5 text-xs font-normal text-foreground"
-                  />
-                </label>
-              </div>
-              <label className="block text-[11px] font-semibold text-muted-foreground">
-                Difficulty
-                <div className="mt-1 flex gap-1">
-                  {[1, 2, 3, 4, 5].map((d) => (
-                    <button
-                      key={d}
-                      type="button"
-                      onClick={() => setDifficulty(d)}
-                      className={cn(
-                        "h-7 w-7 rounded-md border text-xs font-semibold",
-                        difficulty === d
-                          ? "border-accent bg-accent-soft text-accent-dim"
-                          : "border-border text-muted-foreground hover:bg-muted",
-                      )}
-                    >
-                      {d}
-                    </button>
-                  ))}
-                </div>
-              </label>
-              <label className="block text-[11px] font-semibold text-muted-foreground">
-                Content (JSON)
-                <textarea
-                  value={contentDraft}
-                  onChange={(e) => setContentDraft(e.target.value)}
-                  rows={12}
-                  spellCheck={false}
-                  className="mt-1 w-full rounded-md border border-border bg-background px-2.5 py-1.5 font-mono text-[11px] font-normal text-foreground"
-                />
-              </label>
-              {contentError && (
-                <p className="text-[11px] text-rose">{contentError}</p>
-              )}
-              <div className="flex gap-2">
-                <Button
-                  size="sm"
-                  disabled={updateMutation.isPending}
-                  onClick={() => updateMutation.mutate()}
-                >
-                  {updateMutation.isPending ? (
-                    <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
-                  ) : (
-                    <Check className="h-3.5 w-3.5 mr-1.5" />
-                  )}
-                  Save
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => setEditing(false)}
-                >
-                  <X className="h-3.5 w-3.5 mr-1.5" />
-                  Cancel
-                </Button>
-              </div>
-            </>
-          ) : (
-            <BankContentPreview kind={item.kind} content={item.content} />
-          )}
-        </div>
-      )}
+      </Link>
     </Card>
   );
 }
@@ -837,8 +223,8 @@ export default function WorkspaceBankPage() {
           <div>
             <h2 className="text-sm font-semibold">Artifact bank</h2>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Precomputed study material pulled into your sessions. Edit or
-              remove anything that looks off.
+              Precomputed study material pulled into your sessions. Open an
+              item to view or edit it.
             </p>
           </div>
           <Button
@@ -937,7 +323,7 @@ export default function WorkspaceBankPage() {
                         </div>
                         <div className="grid gap-3">
                           {topicItems.map((item) => (
-                            <BankItemCard
+                            <BankItemRow
                               key={item.id}
                               workspaceId={workspaceId}
                               item={item}
