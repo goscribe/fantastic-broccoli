@@ -134,7 +134,7 @@ export default function BankItemPage() {
   }
 
   const config = kindConfig[item.kind];
-  const Icon = config.icon;
+  const Art = config.art;
   const deck = deckEntries(item);
   const summary = bankItemSummary(item);
 
@@ -161,9 +161,7 @@ export default function BankItemPage() {
         </div>
 
         <div className="flex items-start gap-3 animate-fade-up">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft shrink-0">
-            <Icon className="h-5 w-5 text-accent-dim" />
-          </span>
+          <Art className="h-10 w-10 shrink-0" />
           <div className="flex-1 min-w-0">
             <h2 className="text-base font-semibold leading-tight">
               {item.title}
@@ -291,7 +289,7 @@ export default function BankItemPage() {
               backLabel={deck.backLabel}
             />
             <div className="space-y-2">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+              <p className="text-xs font-semibold text-muted-foreground">
                 All cards
               </p>
               <DeckPreview

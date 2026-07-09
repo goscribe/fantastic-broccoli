@@ -20,16 +20,18 @@ import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { formatRelativeDate, cn } from "@/lib/utils";
 import {
-  BookOpen,
   ChevronRight,
-  FileQuestion,
-  Image as ImageIcon,
   Layers,
   Loader2,
   RefreshCw,
   Trash2,
-  WalletCards,
 } from "lucide-react";
+import {
+  FigureArt,
+  FlashcardsArt,
+  GuideArt,
+  WorksheetArt,
+} from "@/components/graphics/bank-art";
 
 type BankFamily = "worksheets" | "flashcards" | "guides" | "figures";
 
@@ -45,26 +47,26 @@ const familyOfKind: Record<ApiArtifactKind, BankFamily> = {
 
 const familyConfig: Record<
   BankFamily,
-  { label: string; icon: React.ElementType; blurb: string }
+  { label: string; art: React.ElementType; blurb: string }
 > = {
   worksheets: {
     label: "Worksheets & quizzes",
-    icon: FileQuestion,
+    art: WorksheetArt,
     blurb: "Exam-style worksheets and MCQ pools.",
   },
   flashcards: {
     label: "Flashcard sets",
-    icon: WalletCards,
+    art: FlashcardsArt,
     blurb: "Flashcard and vocabulary decks.",
   },
   guides: {
     label: "Study guides",
-    icon: BookOpen,
+    art: GuideArt,
     blurb: "Readings and cloze passages.",
   },
   figures: {
     label: "Figures",
-    icon: ImageIcon,
+    art: FigureArt,
     blurb: "Diagrams and images from your materials.",
   },
 };
@@ -95,7 +97,7 @@ function BankItemRow({
   });
 
   const config = kindConfig[item.kind];
-  const Icon = config.icon;
+  const Art = config.art;
   const summary = bankItemSummary(item);
 
   return (
@@ -104,9 +106,7 @@ function BankItemRow({
         href={`/workspace/${workspaceId}/bank/${item.id}`}
         className="flex items-start gap-3 p-4 hover:bg-muted/30 transition-colors"
       >
-        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted shrink-0">
-          <Icon className="h-4 w-4 text-muted-foreground" />
-        </span>
+        <Art className="h-9 w-9 shrink-0" />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <h3 className="text-sm font-semibold truncate">{item.title}</h3>
@@ -290,13 +290,11 @@ export default function WorkspaceBankPage() {
           <div className="space-y-8">
             {groups.map(({ family, count, topics }) => {
               const fc = familyConfig[family];
-              const FamilyIcon = fc.icon;
+              const FamilyArt = fc.art;
               return (
                 <section key={family} className="space-y-3 animate-fade-up">
                   <div className="flex items-center gap-2.5">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-soft shrink-0">
-                      <FamilyIcon className="h-4 w-4 text-accent-dim" />
-                    </span>
+                    <FamilyArt className="h-8 w-8 shrink-0" />
                     <div className="min-w-0">
                       <h3 className="text-sm font-semibold leading-tight">
                         {fc.label}
@@ -313,7 +311,7 @@ export default function WorkspaceBankPage() {
                     {topics.map(([topic, topicItems]) => (
                       <div key={topic} className="space-y-2">
                         <div className="flex items-center gap-2">
-                          <span className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                          <span className="text-xs font-semibold text-muted-foreground">
                             {topic}
                           </span>
                           <span className="text-[10px] text-faint tabular-nums">

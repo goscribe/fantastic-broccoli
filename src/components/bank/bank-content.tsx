@@ -18,19 +18,24 @@ import {
   useResolvedFigureUrl,
 } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
-import { BookOpen, FileQuestion, Image as ImageIcon, WalletCards } from "lucide-react";
+import {
+  FigureArt,
+  FlashcardsArt,
+  GuideArt,
+  WorksheetArt,
+} from "@/components/graphics/bank-art";
 
 export const kindConfig: Record<
   ApiArtifactKind,
-  { label: string; icon: React.ElementType }
+  { label: string; art: React.ElementType }
 > = {
-  WORKSHEET: { label: "Worksheet", icon: FileQuestion },
-  MCQ_POOL: { label: "MCQ pool", icon: FileQuestion },
-  FLASHCARD_DECK: { label: "Flashcards", icon: WalletCards },
-  VOCAB_DECK: { label: "Vocab", icon: WalletCards },
-  CLOZE_PASSAGE: { label: "Cloze", icon: BookOpen },
-  READING_CHUNK: { label: "Reading", icon: BookOpen },
-  FIGURE: { label: "Figure", icon: ImageIcon },
+  WORKSHEET: { label: "Worksheet", art: WorksheetArt },
+  MCQ_POOL: { label: "MCQ pool", art: WorksheetArt },
+  FLASHCARD_DECK: { label: "Flashcards", art: FlashcardsArt },
+  VOCAB_DECK: { label: "Vocab", art: FlashcardsArt },
+  CLOZE_PASSAGE: { label: "Cloze", art: GuideArt },
+  READING_CHUNK: { label: "Reading", art: GuideArt },
+  FIGURE: { label: "Figure", art: FigureArt },
 };
 
 export const activityTypeFromKind: Record<ApiArtifactKind, ActivityType> = {
@@ -64,7 +69,7 @@ function WorksheetPreview({ content }: { content: WorksheetContent }) {
       {content.steps.map((step, i) => (
         <div
           key={i}
-          className="rounded-xl border border-border bg-background overflow-hidden"
+          className="rounded-xl border border-border bg-card overflow-hidden"
         >
           <div className="flex items-center justify-between gap-3 border-b border-border bg-muted/40 px-3.5 py-2">
             <p className="text-xs font-semibold truncate">
@@ -116,7 +121,7 @@ function McqPreview({ content }: { content: McqContent }) {
       {content.questions.map((q, i) => (
         <div
           key={i}
-          className="rounded-xl border border-border bg-background px-3.5 py-3"
+          className="rounded-xl border border-border bg-card px-3.5 py-3"
         >
           <p className="text-[13px] font-medium leading-5">
             <span className="text-faint mr-1.5">{i + 1}.</span>
@@ -165,11 +170,11 @@ export function DeckPreview({
       {entries.map((card, i) => (
         <div
           key={i}
-          className="group rounded-xl border border-border bg-background px-4 py-3 hover:bg-muted/30 transition-colors"
+          className="group rounded-xl border border-border bg-card px-4 py-3 hover:bg-muted/30 transition-colors"
         >
           <div className="grid gap-1.5 sm:grid-cols-2 sm:gap-6">
             <div className="min-w-0">
-              <span className="text-[10px] font-medium uppercase tracking-widest text-faint">
+              <span className="text-[11px] font-medium text-faint">
                 {frontLabel}
               </span>
               <p className="mt-0.5 text-sm font-semibold leading-6">
@@ -177,7 +182,7 @@ export function DeckPreview({
               </p>
             </div>
             <div className="min-w-0 sm:border-l sm:border-border sm:pl-6">
-              <span className="text-[10px] font-medium uppercase tracking-widest text-faint">
+              <span className="text-[11px] font-medium text-faint">
                 {backLabel}
               </span>
               <p className="mt-0.5 text-[13px] leading-6 text-muted-foreground">
@@ -200,7 +205,7 @@ function ClozePreview({ content }: { content: ClozeContent }) {
         return (
           <div
             key={i}
-            className="rounded-xl border border-border bg-background px-3.5 py-3"
+            className="rounded-xl border border-border bg-card px-3.5 py-3"
           >
             <p className="text-[13px] leading-6">
               {segments.map((segment, j) => (
@@ -224,7 +229,7 @@ function ClozePreview({ content }: { content: ClozeContent }) {
 function ReadingPreview({ content }: { content: ReadingContent }) {
   if (!content.text) return null;
   return (
-    <div className="rounded-xl border border-border bg-background px-4 py-3.5">
+    <div className="rounded-xl border border-border bg-card px-4 py-3.5">
       <ReadingBody content={content} />
     </div>
   );
@@ -235,7 +240,7 @@ function FigurePreview({ content }: { content: Record<string, unknown> }) {
   const caption = str(content.caption ?? content.title);
   if (!url) return null;
   return (
-    <figure className="rounded-xl border border-border overflow-hidden bg-background">
+    <figure className="rounded-xl border border-border overflow-hidden bg-card">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={url} alt={caption || "Figure"} className="w-full" />
       {caption && (

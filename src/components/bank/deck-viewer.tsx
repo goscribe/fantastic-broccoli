@@ -84,7 +84,7 @@ export function DeckViewer({
           >
             <div className="p-10 flex flex-col justify-center items-center min-h-[220px]">
               <div className="text-center w-full space-y-3">
-                <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
+                <span className="text-[11px] font-medium text-muted-foreground">
                   {frontLabel}
                 </span>
                 <p className="text-lg font-semibold leading-relaxed">
@@ -103,7 +103,7 @@ export function DeckViewer({
           >
             <div className="p-10 flex flex-col justify-center items-center min-h-[220px] h-full overflow-y-auto">
               <div className="text-center w-full space-y-3">
-                <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
+                <span className="text-[11px] font-medium text-muted-foreground">
                   {backLabel}
                 </span>
                 <p className="text-lg font-semibold leading-relaxed">
