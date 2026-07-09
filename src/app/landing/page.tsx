@@ -3,6 +3,21 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ScribeLogo, ScribeMark } from "@/components/graphics/logo";
+import {
+  DotGrid,
+  GlowField,
+  SparkCluster,
+  StepCopilotArt,
+  StepPlanArt,
+  StepUploadArt,
+} from "@/components/graphics/landing-art";
+import {
+  AudioArt,
+  NoteArt,
+  PdfArt,
+  SlidesArt,
+} from "@/components/graphics/material-art";
+import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/lib/theme";
 import {
@@ -14,12 +29,10 @@ import {
   Layers,
   ListChecks,
   MessageSquare,
-  Mic,
   Moon,
   Sparkles,
   Sun,
   TextCursorInput,
-  Upload,
 } from "lucide-react";
 
 const steps = [
@@ -28,19 +41,30 @@ const steps = [
     title: "Upload your materials",
     description:
       "Drop in PDFs, lecture slides, or audio recordings. Scribe parses everything — text, figures, and diagrams included.",
+    art: StepUploadArt,
   },
   {
     num: "2",
     title: "Get a personalized session",
     description:
       "Scribe turns your materials into a guided study plan: readings, worksheets, flashcards, and comprehension checks.",
+    art: StepPlanArt,
   },
   {
     num: "3",
     title: "Study with a copilot",
     description:
       "Ask Scribe anything mid-session. It answers from your own materials and adapts your plan as you go.",
+    art: StepCopilotArt,
   },
+];
+
+const subjects = [
+  { icon: "chemistry", label: "Chemistry" },
+  { icon: "biology", label: "Biology" },
+  { icon: "physics", label: "Physics" },
+  { icon: "math", label: "Math" },
+  { icon: "english", label: "English" },
 ];
 
 const features = [
@@ -138,19 +162,8 @@ export default function LandingPage() {
       <main>
         {/* Hero */}
         <section className="relative mx-auto max-w-6xl overflow-hidden px-6 pb-20 pt-16 md:pt-24">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 lg:block"
-            style={{
-              backgroundImage:
-                "radial-gradient(var(--border-strong) 1px, transparent 1px)",
-              backgroundSize: "20px 20px",
-              maskImage:
-                "radial-gradient(ellipse 70% 70% at 70% 40%, black, transparent 70%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 70% 70% at 70% 40%, black, transparent 70%)",
-            }}
-          />
+          <GlowField />
+          <DotGrid className="inset-y-0 right-0 hidden w-1/2 lg:block" />
           <div className="relative grid items-center gap-12 lg:grid-cols-[1fr_minmax(0,420px)]">
             <div className="animate-fade-up">
               <p className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
@@ -210,6 +223,23 @@ export default function LandingPage() {
                 <span className="text-[12px] font-semibold">
                   Worksheet marked · 5/6
                 </span>
+              </div>
+              {/* Floating sources card */}
+              <div
+                className="animate-float absolute -left-20 -top-8 z-10 w-40 rounded-xl border border-border bg-card p-3 shadow-sm"
+                style={{ animationDelay: "-1.2s" }}
+              >
+                <p className="text-[10px] font-semibold text-faint">
+                  SOURCES · 3
+                </p>
+                <div className="mt-2 flex items-center -space-x-2">
+                  <PdfArt className="h-8 w-8 rounded-md bg-card ring-2 ring-card" />
+                  <SlidesArt className="h-8 w-8 rounded-md bg-card ring-2 ring-card" />
+                  <AudioArt className="h-8 w-8 rounded-md bg-card ring-2 ring-card" />
+                </div>
+                <p className="mt-2 text-[11px] text-muted-foreground">
+                  Parsed &amp; ready
+                </p>
               </div>
               <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
                 <div className="flex items-center justify-between">
@@ -274,6 +304,24 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
+
+          {/* Subjects strip */}
+          <div className="relative mt-16 border-t border-border pt-10">
+            <p className="text-center text-xs font-medium uppercase tracking-wider text-faint">
+              Built for every subject you study
+            </p>
+            <ul className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              {subjects.map((subject) => (
+                <li
+                  key={subject.label}
+                  className="flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:border-border-strong hover:text-foreground"
+                >
+                  <WorkspaceIcon icon={subject.icon} className="h-5 w-5" />
+                  {subject.label}
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
         {/* How it works */}
@@ -283,13 +331,12 @@ export default function LandingPage() {
               How it works
             </h2>
             <ol className="relative mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6">
-              <div
-                aria-hidden
-                className="absolute left-4 right-1/4 top-4 hidden border-t border-dashed border-border-strong sm:block"
-              />
               {steps.map((step) => (
                 <li key={step.num} className="relative">
-                  <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-sm font-bold text-accent ring-4 ring-background">
+                  <div className="mb-5 overflow-hidden rounded-2xl border border-border bg-background shadow-sm">
+                    <step.art className="h-full w-full" />
+                  </div>
+                  <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-sm font-bold text-accent ring-4 ring-card">
                     {step.num}
                   </span>
                   <h3 className="mt-3 text-base font-semibold">{step.title}</h3>
@@ -303,22 +350,33 @@ export default function LandingPage() {
         </section>
 
         {/* Features */}
-        <section className="py-16 md:py-20">
-          <div className="mx-auto max-w-6xl px-6">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Everything you need to actually learn
-            </h2>
-            <p className="mt-3 max-w-xl text-muted-foreground">
-              Every session is built from your own materials — not generic
-              question banks.
-            </p>
+        <section className="relative overflow-hidden py-16 md:py-20">
+          <DotGrid className="left-1/2 top-0 h-64 w-[120%] -translate-x-1/2 opacity-60" />
+          <div className="relative mx-auto max-w-6xl px-6">
+            <div className="flex items-start gap-3">
+              <SparkCluster className="mt-1 hidden h-7 w-7 shrink-0 sm:block" />
+              <div>
+                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                  Everything you need to actually learn
+                </h2>
+                <p className="mt-3 max-w-xl text-muted-foreground">
+                  Every session is built from your own materials — not generic
+                  question banks.
+                </p>
+              </div>
+            </div>
             <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {features.map((feature) => (
                 <li
                   key={feature.title}
-                  className="group rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm"
+                  className="group relative overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm"
                 >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft text-accent transition-transform duration-200 group-hover:scale-110">
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute -right-8 -top-8 h-20 w-20 rounded-full opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
+                    style={{ background: "radial-gradient(circle, var(--accent-bright), transparent 70%)" }}
+                  />
+                  <span className="relative flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft text-accent transition-transform duration-200 group-hover:scale-110">
                     <feature.icon className="h-4.5 w-4.5" />
                   </span>
                   <h3 className="mt-3 text-sm font-semibold">
@@ -424,20 +482,19 @@ export default function LandingPage() {
                   ))}
                 </ul>
               </div>
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div className="grid gap-3 sm:grid-cols-2">
                 {[
-                  { icon: FileText, label: "PDFs & slides" },
-                  { icon: Mic, label: "Lecture audio" },
-                  { icon: Upload, label: "Notes & handouts" },
+                  { art: PdfArt, label: "Textbook PDFs" },
+                  { art: SlidesArt, label: "Lecture slides" },
+                  { art: AudioArt, label: "Lecture audio" },
+                  { art: NoteArt, label: "Notes & handouts" },
                 ].map((item) => (
                   <div
                     key={item.label}
-                    className="group flex flex-col items-center gap-2.5 rounded-xl border border-border bg-card px-4 py-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40"
+                    className="group flex items-center gap-3.5 rounded-xl border border-border bg-card px-4 py-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-sm"
                   >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-200 group-hover:scale-110">
-                      <item.icon className="h-4.5 w-4.5" />
-                    </span>
-                    <span className="text-center text-[13px] font-medium">
+                    <item.art className="h-11 w-11 shrink-0 transition-transform duration-200 group-hover:scale-110" />
+                    <span className="text-[14px] font-medium">
                       {item.label}
                     </span>
                   </div>
@@ -449,6 +506,7 @@ export default function LandingPage() {
 
         {/* Final CTA */}
         <section className="relative overflow-hidden border-t border-border py-16 md:py-24">
+          <GlowField />
           <span aria-hidden className="pointer-events-none absolute -left-10 top-1/2 -translate-y-1/2">
             <ScribeMark className="h-40 w-40 opacity-[0.07]" />
           </span>
