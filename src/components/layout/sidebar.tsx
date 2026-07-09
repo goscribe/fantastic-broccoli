@@ -345,8 +345,17 @@ export function Sidebar({
         </Link>
         {user && (
           <div className="flex items-center gap-2 px-1.5 pt-1">
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent-soft text-[12px] font-semibold text-accent">
-              {user.name.charAt(0).toUpperCase()}
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent-soft text-[12px] font-semibold text-accent">
+              {user.profilePicture ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={user.profilePicture}
+                  alt="Profile"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                user.name.charAt(0).toUpperCase()
+              )}
             </span>
             <div className="min-w-0 flex-1 leading-tight">
               <p className="truncate text-[13px] font-medium">{user.name}</p>

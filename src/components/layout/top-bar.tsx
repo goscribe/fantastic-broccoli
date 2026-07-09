@@ -268,9 +268,18 @@ export function TopBar({
                 type="button"
                 onClick={() => setMenuOpen((v) => !v)}
                 aria-label="Account menu"
-                className="ml-1 flex h-7 w-7 items-center justify-center rounded-full border border-accent/20 bg-accent-soft text-xs font-bold text-accent hover:border-accent/50"
+                className="ml-1 flex h-7 w-7 items-center justify-center overflow-hidden rounded-full border border-accent/20 bg-accent-soft text-xs font-bold text-accent hover:border-accent/50"
               >
-                {(user?.name ?? "?").charAt(0).toUpperCase()}
+                {user?.profilePicture ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={user.profilePicture}
+                    alt="Profile"
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  (user?.name ?? "?").charAt(0).toUpperCase()
+                )}
               </button>
 
               {menuOpen && (
