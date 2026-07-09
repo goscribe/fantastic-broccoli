@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
@@ -18,10 +18,15 @@ import type {
   WorksheetContent,
 } from "@/types";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
+import { ReadingBody } from "@/components/session/reading-activity";
+import { DeckViewer } from "@/components/bank/deck-viewer";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
-import { MarkdownText } from "@/components/ui/markdown-text";
+import {
+  MarkdownText,
+  useResolvedFigureUrl,
+} from "@/components/ui/markdown-text";
 import { formatRelativeDate, cn } from "@/lib/utils";
 import {
   BookOpen,
@@ -219,22 +224,38 @@ function McqPreview({ content }: { content: McqContent }) {
 
 function DeckPreview({
   entries,
+  frontLabel = "Question",
+  backLabel = "Answer",
 }: {
   entries: { front: string; back: string }[];
+  frontLabel?: string;
+  backLabel?: string;
 }) {
   return (
-    <div className="grid gap-2 sm:grid-cols-2">
+    <div className="space-y-2">
       {entries.map((card, i) => (
         <div
           key={i}
-          className="rounded-xl border border-border bg-background overflow-hidden"
+          className="group rounded-xl border border-border bg-background px-4 py-3 hover:bg-muted/30 transition-colors"
         >
-          <p className="px-3 py-2 text-[13px] font-semibold leading-5">
-            <MarkdownText text={card.front} />
-          </p>
-          <p className="border-t border-dashed border-border px-3 py-2 text-xs leading-5 text-muted-foreground">
-            <MarkdownText text={card.back} />
-          </p>
+          <div className="grid gap-1.5 sm:grid-cols-2 sm:gap-6">
+            <div className="min-w-0">
+              <span className="text-[10px] font-medium uppercase tracking-widest text-faint">
+                {frontLabel}
+              </span>
+              <p className="mt-0.5 text-sm font-semibold leading-6">
+                <MarkdownText text={card.front} />
+              </p>
+            </div>
+            <div className="min-w-0 sm:border-l sm:border-border sm:pl-6">
+              <span className="text-[10px] font-medium uppercase tracking-widest text-faint">
+                {backLabel}
+              </span>
+              <p className="mt-0.5 text-[13px] leading-6 text-muted-foreground">
+                <MarkdownText text={card.back} />
+              </p>
+            </div>
+          </div>
         </div>
       ))}
     </div>
@@ -274,16 +295,14 @@ function ClozePreview({ content }: { content: ClozeContent }) {
 function ReadingPreview({ content }: { content: ReadingContent }) {
   if (!content.text) return null;
   return (
-    <div className="rounded-xl border border-border bg-background px-3.5 py-3">
-      <p className="text-[13px] leading-6">
-        <MarkdownText text={content.text} />
-      </p>
+    <div className="rounded-xl border border-border bg-background px-4 py-3.5">
+      <ReadingBody content={content} />
     </div>
   );
 }
 
 function FigurePreview({ content }: { content: Record<string, unknown> }) {
-  const url = str(content.url);
+  const url = useResolvedFigureUrl(str(content.url));
   const caption = str(content.caption ?? content.title);
   if (!url) return null;
   return (
@@ -327,6 +346,8 @@ function BankContentPreview({
       case "vocab_recall":
         preview = (
           <DeckPreview
+            frontLabel="Term"
+            backLabel="Definition"
             entries={normalized.terms.map((t) => ({
               front: t.term,
               back: t.definition,
@@ -350,6 +371,121 @@ function BankContentPreview({
         <p className="text-xs text-faint">No preview available for this item.</p>
       )}
       <RawJson content={content} />
+    </div>
+  );
+}
+
+/** Front/back pairs for flashcard and vocab decks, null for other kinds. */
+function deckEntries(
+  item: ApiArtifactBankItem,
+): { entries: { front: string; back: string }[]; frontLabel: string; backLabel: string } | null {
+  if (item.kind !== "FLASHCARD_DECK" && item.kind !== "VOCAB_DECK") return null;
+  const normalized = normalizeActivityContent(
+    activityTypeFromKind[item.kind],
+    item.content,
+  );
+  if (normalized.type === "flashcard_review") {
+    return {
+      entries: normalized.cards,
+      frontLabel: "Question",
+      backLabel: "Answer",
+    };
+  }
+  if (normalized.type === "vocab_recall") {
+    return {
+      entries: normalized.terms.map((t) => ({
+        front: t.term,
+        back: t.definition,
+      })),
+      frontLabel: "Term",
+      backLabel: "Definition",
+    };
+  }
+  return null;
+}
+
+function BankItemDialog({
+  item,
+  onClose,
+}: {
+  item: ApiArtifactBankItem;
+  onClose: () => void;
+}) {
+  const config = kindConfig[item.kind];
+  const Icon = config.icon;
+  const deck = deckEntries(item);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/20 p-4 backdrop-blur-sm sm:items-center"
+      onClick={onClose}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        className="flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-border bg-card animate-fade-up"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start gap-3 border-b border-border px-5 py-4">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft shrink-0">
+            <Icon className="h-4 w-4 text-accent-dim" />
+          </span>
+          <div className="flex-1 min-w-0">
+            <h3 className="text-sm font-semibold leading-tight">
+              {item.title}
+            </h3>
+            <p className="text-[11px] text-faint mt-0.5">
+              {config.label}
+              {item.topic && ` · ${item.topic}`}
+              {" · "}difficulty {item.difficulty}/5
+              {bankItemSummary(item) && ` · ${bankItemSummary(item)}`}
+            </p>
+          </div>
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={onClose}
+            className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground hover:bg-muted shrink-0"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+          {deck && deck.entries.length > 0 ? (
+            <>
+              <DeckViewer
+                entries={deck.entries}
+                frontLabel={deck.frontLabel}
+                backLabel={deck.backLabel}
+              />
+              <div className="space-y-2">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                  All cards
+                </p>
+                <DeckPreview
+                  entries={deck.entries}
+                  frontLabel={deck.frontLabel}
+                  backLabel={deck.backLabel}
+                />
+              </div>
+            </>
+          ) : (
+            <BankContentPreview kind={item.kind} content={item.content} />
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -404,6 +540,7 @@ function BankItemCard({
 }) {
   const queryClient = useQueryClient();
   const [expanded, setExpanded] = useState(false);
+  const [viewing, setViewing] = useState(false);
   const [editing, setEditing] = useState(false);
   const [title, setTitle] = useState(item.title);
   const [topic, setTopic] = useState(item.topic ?? "");
@@ -467,7 +604,7 @@ function BankItemCard({
     <Card className="p-0 overflow-hidden">
       <div
         className="flex items-start gap-3 p-4 cursor-pointer hover:bg-muted/30 transition-colors"
-        onClick={() => setExpanded((e) => !e)}
+        onClick={() => setViewing(true)}
       >
         <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-muted shrink-0">
           <Icon className="h-4 w-4 text-muted-foreground" />
@@ -520,13 +657,27 @@ function BankItemCard({
               <Trash2 className="h-3.5 w-3.5" />
             )}
           </button>
-          {expanded ? (
-            <ChevronDown className="h-4 w-4 text-faint" />
-          ) : (
-            <ChevronRight className="h-4 w-4 text-faint" />
-          )}
+          <button
+            type="button"
+            title={expanded ? "Collapse preview" : "Expand preview"}
+            onClick={(e) => {
+              e.stopPropagation();
+              setExpanded((v) => !v);
+            }}
+            className="flex h-7 w-7 items-center justify-center rounded-md text-faint hover:bg-muted hover:text-muted-foreground"
+          >
+            {expanded ? (
+              <ChevronDown className="h-4 w-4" />
+            ) : (
+              <ChevronRight className="h-4 w-4" />
+            )}
+          </button>
         </div>
       </div>
+
+      {viewing && (
+        <BankItemDialog item={item} onClose={() => setViewing(false)} />
+      )}
 
       {expanded && (
         <div className="border-t border-border p-4 space-y-3">

@@ -161,6 +161,63 @@ function FigureView({ figure }: { figure: ReadingFigure }) {
   return <ImageFigure figure={figure} />;
 }
 
+/**
+ * Read-only reading renderer: headings, lists, paragraphs and embedded
+ * figures, without highlighting or completion controls. Used for previews
+ * (e.g. the artifact bank).
+ */
+export function ReadingBody({ content }: { content: ReadingContent }) {
+  const parsedBlocks = content.text.split("\n\n").flatMap(parseBlocks);
+  const figuresById = new Map(
+    (content.figures ?? []).map((figure) => [figure.id, figure]),
+  );
+  return (
+    <div className="space-y-4">
+      {parsedBlocks.map((block, i) => {
+        if (block.kind === "widget") {
+          return block.widget in widgetRegistry ? (
+            <InteractiveWidget key={i} id={block.widget as WidgetId} />
+          ) : null;
+        }
+        if (block.kind === "figure") {
+          const figure = figuresById.get(block.figureId);
+          return figure ? <FigureView key={i} figure={figure} /> : null;
+        }
+        if (block.kind === "heading") {
+          return (
+            <h3
+              key={i}
+              className={cn(
+                "font-semibold tracking-tight",
+                block.level <= 2 ? "text-lg pt-2" : "text-base pt-1",
+              )}
+            >
+              {block.text}
+            </h3>
+          );
+        }
+        if (block.kind === "list") {
+          return (
+            <ul
+              key={i}
+              className="list-disc pl-5 space-y-1.5 text-[15px] leading-7"
+            >
+              {block.items.map((item, j) => (
+                <li key={j}>{item}</li>
+              ))}
+            </ul>
+          );
+        }
+        return (
+          <p key={i} className="text-[15px] leading-7">
+            {block.text}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
 function offsetWithin(paraEl: HTMLElement, node: Node, offset: number): number {
   let total = 0;
   const walker = document.createTreeWalker(paraEl, NodeFilter.SHOW_TEXT);
