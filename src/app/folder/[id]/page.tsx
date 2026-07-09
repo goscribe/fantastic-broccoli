@@ -205,6 +205,7 @@ export default function FolderPage({
                         id: ws.id,
                         name: ws.title,
                         description: ws.description,
+                        icon: ws.icon,
                       }),
                     onMembers: () => setMembersFor(ws.id),
                     onDelete: () =>

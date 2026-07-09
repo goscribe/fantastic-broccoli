@@ -365,6 +365,23 @@ export default function HomePage() {
                   key={ws.id}
                   workspace={ws}
                   onClick={(id) => router.push(`/workspace/${id}`)}
+                  actions={{
+                    onRename: () =>
+                      setEditing({
+                        kind: "workspace",
+                        id: ws.id,
+                        name: ws.title,
+                        description: ws.description,
+                        icon: ws.icon,
+                      }),
+                    onMembers: () => setMembersFor(ws.id),
+                    onDelete: () =>
+                      setDeleting({
+                        kind: "workspace",
+                        id: ws.id,
+                        name: ws.title,
+                      }),
+                  }}
                 />
               ))}
             </div>

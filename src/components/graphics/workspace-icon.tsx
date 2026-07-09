@@ -104,6 +104,14 @@ const icons: Record<string, React.ElementType> = {
   english: EnglishIcon,
 };
 
+export const WORKSPACE_ICONS: { key: string; label: string }[] = [
+  { key: "chemistry", label: "Chemistry" },
+  { key: "biology", label: "Biology" },
+  { key: "math", label: "Math" },
+  { key: "physics", label: "Physics" },
+  { key: "english", label: "English" },
+];
+
 export function WorkspaceIcon({
   icon,
   className,
