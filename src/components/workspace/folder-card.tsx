@@ -3,21 +3,30 @@
 import { Folder } from "@/types";
 import { countWorkspaces } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
+import {
+  ResourceActionsMenu,
+  type ResourceActions,
+} from "@/components/workspace/resource-actions";
 
 interface FolderCardProps {
   folder: Folder;
   onClick: (id: string) => void;
+  actions?: ResourceActions;
 }
 
-export function FolderCard({ folder, onClick }: FolderCardProps) {
+export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
   const wsCount = countWorkspaces(folder);
   const subCount = folder.folders?.length ?? 0;
 
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
       onClick={() => onClick(folder.id)}
-      className="group flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3.5 text-left hover:border-border-strong transition-colors"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") onClick(folder.id);
+      }}
+      className="group flex cursor-pointer items-center gap-3 rounded-xl border border-border bg-card px-4 py-3.5 text-left hover:border-border-strong transition-colors"
     >
       <svg viewBox="0 0 24 24" className="h-7 w-7 shrink-0" aria-hidden>
         <path
@@ -33,7 +42,11 @@ export function FolderCard({ folder, onClick }: FolderCardProps) {
           {wsCount} workspace{wsCount !== 1 ? "s" : ""}
         </p>
       </div>
-      <ChevronRight className="h-4 w-4 text-faint opacity-0 group-hover:opacity-100" />
-    </button>
+      {actions ? (
+        <ResourceActionsMenu actions={actions} className="shrink-0" />
+      ) : (
+        <ChevronRight className="h-4 w-4 text-faint opacity-0 group-hover:opacity-100" />
+      )}
+    </div>
   );
 }

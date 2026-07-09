@@ -8,6 +8,14 @@ import type { Folder } from "@/types";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { CreateResourceDialog } from "@/components/workspace/create-dialog";
+import {
+  DeleteResourceDialog,
+  EditResourceDialog,
+  ResourceActionsMenu,
+  type DeleteTarget,
+  type EditTarget,
+} from "@/components/workspace/resource-actions";
+import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
 import { ChevronRight, Plus } from "lucide-react";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
 
@@ -30,6 +38,9 @@ export default function FolderPage({
   const [path, setPath] = useState<Folder[] | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
+  const [editing, setEditing] = useState<EditTarget | null>(null);
+  const [deleting, setDeleting] = useState<DeleteTarget | null>(null);
+  const [membersFor, setMembersFor] = useState<string | null>(null);
 
   const loadTree = () =>
     fetchWorkspaceTree()
@@ -105,6 +116,23 @@ export default function FolderPage({
             />
           </svg>
           <h1 className="text-2xl font-bold tracking-tight">{folder.name}</h1>
+          <ResourceActionsMenu
+            actions={{
+              onRename: () =>
+                setEditing({
+                  kind: "folder",
+                  id: folder.id,
+                  name: folder.name,
+                  color: folder.color,
+                }),
+              onDelete: () =>
+                setDeleting({
+                  kind: "folder",
+                  id: folder.id,
+                  name: folder.name,
+                }),
+            }}
+          />
         </header>
 
         {folder.folders && folder.folders.length > 0 && (
@@ -128,6 +156,21 @@ export default function FolderPage({
                   key={sub.id}
                   folder={sub}
                   onClick={(fid) => router.push(`/folder/${fid}`)}
+                  actions={{
+                    onRename: () =>
+                      setEditing({
+                        kind: "folder",
+                        id: sub.id,
+                        name: sub.name,
+                        color: sub.color,
+                      }),
+                    onDelete: () =>
+                      setDeleting({
+                        kind: "folder",
+                        id: sub.id,
+                        name: sub.name,
+                      }),
+                  }}
                 />
               ))}
             </div>
@@ -155,6 +198,22 @@ export default function FolderPage({
                   key={ws.id}
                   workspace={ws}
                   onClick={(wid) => router.push(`/workspace/${wid}`)}
+                  actions={{
+                    onRename: () =>
+                      setEditing({
+                        kind: "workspace",
+                        id: ws.id,
+                        name: ws.title,
+                        description: ws.description,
+                      }),
+                    onMembers: () => setMembersFor(ws.id),
+                    onDelete: () =>
+                      setDeleting({
+                        kind: "workspace",
+                        id: ws.id,
+                        name: ws.title,
+                      }),
+                  }}
                 />
               ))}
             </div>
@@ -165,6 +224,33 @@ export default function FolderPage({
           )}
         </section>
 
+        {editing && (
+          <EditResourceDialog
+            target={editing}
+            onClose={() => setEditing(null)}
+            onSaved={loadTree}
+          />
+        )}
+        {deleting && (
+          <DeleteResourceDialog
+            target={deleting}
+            onClose={() => setDeleting(null)}
+            onDeleted={() => {
+              if (deleting.kind === "folder" && deleting.id === folder.id) {
+                router.push(
+                  path.length > 1 ? `/folder/${path[path.length - 2].id}` : "/",
+                );
+              } else {
+                void loadTree();
+              }
+            }}
+          />
+        )}
+        <WorkspaceMembersDialog
+          workspaceId={membersFor}
+          open={membersFor !== null}
+          onClose={() => setMembersFor(null)}
+        />
         {creating && (
           <CreateResourceDialog
             kind={creating}

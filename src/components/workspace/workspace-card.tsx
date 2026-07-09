@@ -7,13 +7,18 @@ import { formatRelativeDate, formatDuration } from "@/lib/utils";
 import { Clock, ArrowRight, FileText, BookOpen } from "lucide-react";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { AvatarStack } from "@/components/ui/avatar-stack";
+import {
+  ResourceActionsMenu,
+  type ResourceActions,
+} from "@/components/workspace/resource-actions";
 
 interface WorkspaceCardProps {
   workspace: Workspace;
   onClick: (id: string) => void;
+  actions?: ResourceActions;
 }
 
-export function WorkspaceCard({ workspace, onClick }: WorkspaceCardProps) {
+export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProps) {
   const activeSessions = workspace.sessions.filter(
     (s) => s.status === "active",
   );
@@ -28,7 +33,14 @@ export function WorkspaceCard({ workspace, onClick }: WorkspaceCardProps) {
       onClick={() => onClick(workspace.id)}
       className="group relative cursor-pointer rounded-2xl border border-border bg-card p-5 transition-all duration-150 hover:border-border-strong hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
     >
-      <ArrowRight className="absolute top-5 right-5 h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+      {actions ? (
+        <ResourceActionsMenu
+          actions={actions}
+          className="absolute top-3.5 right-3.5"
+        />
+      ) : (
+        <ArrowRight className="absolute top-5 right-5 h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+      )}
 
       <div className="flex items-start gap-3">
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-muted">

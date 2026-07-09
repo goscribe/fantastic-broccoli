@@ -11,6 +11,13 @@ import { StreakFlame } from "@/components/graphics/streak-flame";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { StudyCalendar } from "@/components/workspace/study-calendar";
 import { CreateResourceDialog } from "@/components/workspace/create-dialog";
+import {
+  DeleteResourceDialog,
+  EditResourceDialog,
+  type DeleteTarget,
+  type EditTarget,
+} from "@/components/workspace/resource-actions";
+import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
 import { fetchActivityCalendar, type DailyActivityPoint } from "@/lib/api/study";
 import { Search, ArrowRight, Plus } from "lucide-react";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
@@ -50,6 +57,9 @@ export default function HomePage() {
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [dailyActivity, setDailyActivity] = useState<DailyActivityPoint[]>([]);
   const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
+  const [editing, setEditing] = useState<EditTarget | null>(null);
+  const [deleting, setDeleting] = useState<DeleteTarget | null>(null);
+  const [membersFor, setMembersFor] = useState<string | null>(null);
   const [treeLoading, setTreeLoading] = useState(true);
   const [calendarLoading, setCalendarLoading] = useState(true);
 
@@ -385,6 +395,21 @@ export default function HomePage() {
                   key={folder.id}
                   folder={folder}
                   onClick={(id) => router.push(`/folder/${id}`)}
+                  actions={{
+                    onRename: () =>
+                      setEditing({
+                        kind: "folder",
+                        id: folder.id,
+                        name: folder.name,
+                        color: folder.color,
+                      }),
+                    onDelete: () =>
+                      setDeleting({
+                        kind: "folder",
+                        id: folder.id,
+                        name: folder.name,
+                      }),
+                  }}
                 />
               ))}
             </div>
@@ -409,6 +434,22 @@ export default function HomePage() {
                       key={ws.id}
                       workspace={ws}
                       onClick={(id) => router.push(`/workspace/${id}`)}
+                      actions={{
+                        onRename: () =>
+                          setEditing({
+                            kind: "workspace",
+                            id: ws.id,
+                            name: ws.title,
+                            description: ws.description,
+                          }),
+                        onMembers: () => setMembersFor(ws.id),
+                        onDelete: () =>
+                          setDeleting({
+                            kind: "workspace",
+                            id: ws.id,
+                            name: ws.title,
+                          }),
+                      }}
                     />
                   ))}
                 </div>
@@ -417,6 +458,25 @@ export default function HomePage() {
           </section>
         )}
 
+        {editing && (
+          <EditResourceDialog
+            target={editing}
+            onClose={() => setEditing(null)}
+            onSaved={loadTree}
+          />
+        )}
+        {deleting && (
+          <DeleteResourceDialog
+            target={deleting}
+            onClose={() => setDeleting(null)}
+            onDeleted={loadTree}
+          />
+        )}
+        <WorkspaceMembersDialog
+          workspaceId={membersFor}
+          open={membersFor !== null}
+          onClose={() => setMembersFor(null)}
+        />
         {creating && (
           <CreateResourceDialog
             kind={creating}
