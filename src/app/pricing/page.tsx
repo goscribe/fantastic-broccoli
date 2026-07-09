@@ -17,16 +17,14 @@ import { useAuthUser } from "@/lib/api/auth";
 
 function PlanCard({
   plan,
-  currentPlanName,
   onSelect,
   switching,
 }: {
   plan: PlanOption;
-  currentPlanName: string;
   onSelect: (id: string) => void;
   switching: boolean;
 }) {
-  const isCurrent = plan.name === currentPlanName;
+  const isCurrent = plan.isActive;
   return (
     <div
       className={`flex flex-col rounded-2xl border p-5 ${
@@ -177,7 +175,6 @@ export default function PricingPage() {
               <PlanCard
                 key={plan.id}
                 plan={plan}
-                currentPlanName={summary?.planName ?? ""}
                 onSelect={handleSwitch}
                 switching={switching}
               />
