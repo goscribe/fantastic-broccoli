@@ -4,7 +4,7 @@ import { Workspace } from "@/types";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { formatRelativeDate, formatDuration } from "@/lib/utils";
-import { Clock, ArrowRight, FileText, BookOpen } from "lucide-react";
+import { Clock, ArrowRight, FileText, BookOpen, UserPlus } from "lucide-react";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { AvatarStack } from "@/components/ui/avatar-stack";
 import {
@@ -81,8 +81,29 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
           </span>
         )}
         <span className="ml-auto flex items-center gap-2">
-          {workspace.members && workspace.members.length > 1 && (
-            <AvatarStack members={workspace.members} />
+          {actions?.onMembers ? (
+            <button
+              type="button"
+              aria-label="Manage members"
+              title="Manage members"
+              onClick={(e) => {
+                e.stopPropagation();
+                actions.onMembers?.();
+              }}
+              className="flex items-center gap-1 rounded-full px-1 py-0.5 hover:bg-muted"
+            >
+              {workspace.members && workspace.members.length > 0 ? (
+                <AvatarStack members={workspace.members} />
+              ) : null}
+              <span className="flex h-5 w-5 items-center justify-center rounded-full border border-dashed border-border text-muted-foreground">
+                <UserPlus className="h-3 w-3" />
+              </span>
+            </button>
+          ) : (
+            workspace.members &&
+            workspace.members.length > 1 && (
+              <AvatarStack members={workspace.members} />
+            )
           )}
           {workspace.lastStudied && (
             <span className="text-[10px] text-faint">

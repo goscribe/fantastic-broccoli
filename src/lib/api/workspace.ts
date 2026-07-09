@@ -10,6 +10,12 @@ interface TreeFolderRow {
   color: string | null;
 }
 
+interface MemberUserRow {
+  id: string;
+  name: string | null;
+  email: string | null;
+}
+
 interface TreeWorkspaceRow {
   id: string;
   title: string;
@@ -18,6 +24,40 @@ interface TreeWorkspaceRow {
   color: string | null;
   updatedAt: Date | string;
   uploads: UploadRow[];
+  owner?: MemberUserRow | null;
+  members?: { user: MemberUserRow }[];
+}
+
+// Deterministic avatar colour so a given member always renders the same hue.
+const MEMBER_COLORS = [
+  "#6fd420",
+  "#38bdf8",
+  "#f59e0b",
+  "#f472b6",
+  "#a78bfa",
+  "#f87171",
+  "#2dd4bf",
+  "#fb923c",
+];
+
+function memberColor(id: string): string {
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) hash = (hash * 31 + id.charCodeAt(i)) | 0;
+  return MEMBER_COLORS[Math.abs(hash) % MEMBER_COLORS.length];
+}
+
+function mapMembers(row: TreeWorkspaceRow): Workspace["members"] {
+  const users: MemberUserRow[] = [];
+  if (row.owner) users.push(row.owner);
+  for (const m of row.members ?? []) {
+    if (!users.some((u) => u.id === m.user.id)) users.push(m.user);
+  }
+  if (users.length === 0) return undefined;
+  return users.map((u) => ({
+    id: u.id,
+    name: u.name ?? u.email ?? "Member",
+    color: memberColor(u.id),
+  }));
 }
 
 interface UploadRow {
@@ -61,6 +101,7 @@ function mapWorkspace(row: TreeWorkspaceRow): Workspace {
     materials: (row.uploads ?? []).map((u) => mapUploadToMaterial(u, row.id)),
     totalProgress: 0,
     createdAt: new Date(row.updatedAt).toISOString(),
+    members: mapMembers(row),
   };
 }
 
@@ -149,7 +190,7 @@ export async function createWorkspace(
 
 export async function updateWorkspace(
   id: string,
-  updates: { name?: string; description?: string },
+  updates: { name?: string; description?: string; icon?: string },
 ): Promise<void> {
   await api.workspace.update.mutate({ id, ...updates });
 }

@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MoreHorizontal, Pencil, Trash2, Users, X } from "lucide-react";
+import { WorkspaceIcon, WORKSPACE_ICONS } from "@/components/graphics/workspace-icon";
 
 export interface ResourceActions {
   onRename: () => void;
@@ -100,7 +101,13 @@ const folderColors = [
 ];
 
 export type EditTarget =
-  | { kind: "workspace"; id: string; name: string; description?: string }
+  | {
+      kind: "workspace";
+      id: string;
+      name: string;
+      description?: string;
+      icon?: string;
+    }
   | { kind: "folder"; id: string; name: string; color?: string };
 
 export function EditResourceDialog({
@@ -118,6 +125,11 @@ export function EditResourceDialog({
   );
   const [color, setColor] = useState(
     target.kind === "folder" ? (target.color ?? folderColors[0]) : folderColors[0],
+  );
+  const [icon, setIcon] = useState(
+    target.kind === "workspace"
+      ? (target.icon ?? WORKSPACE_ICONS[0].key)
+      : WORKSPACE_ICONS[0].key,
   );
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -137,6 +149,7 @@ export function EditResourceDialog({
         await updateWorkspace(target.id, {
           name: name.trim(),
           description: description.trim() || undefined,
+          icon,
         });
       } else {
         await updateFolder(target.id, { name: name.trim(), color });
@@ -187,6 +200,32 @@ export function EditResourceDialog({
               rows={3}
               className="w-full rounded-lg border border-border bg-card px-3.5 py-2.5 text-sm placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15"
             />
+          )}
+          {target.kind === "workspace" && (
+            <div>
+              <p className="mb-1.5 text-xs font-medium text-muted-foreground">
+                Icon
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {WORKSPACE_ICONS.map((opt) => (
+                  <button
+                    key={opt.key}
+                    type="button"
+                    aria-label={opt.label}
+                    title={opt.label}
+                    onClick={() => setIcon(opt.key)}
+                    className={cn(
+                      "flex h-10 w-10 items-center justify-center rounded-lg border-2 transition-transform",
+                      icon === opt.key
+                        ? "border-accent scale-105 bg-muted"
+                        : "border-border hover:scale-105",
+                    )}
+                  >
+                    <WorkspaceIcon icon={opt.key} className="h-6 w-6" />
+                  </button>
+                ))}
+              </div>
+            </div>
           )}
           {target.kind === "folder" && (
             <div className="flex gap-1.5">
