@@ -147,6 +147,28 @@ export async function createWorkspace(
   return (ws as { id: string }).id;
 }
 
+export async function updateWorkspace(
+  id: string,
+  updates: { name?: string; description?: string },
+): Promise<void> {
+  await api.workspace.update.mutate({ id, ...updates });
+}
+
+export async function deleteWorkspace(id: string): Promise<void> {
+  await api.workspace.delete.mutate({ id });
+}
+
+export async function updateFolder(
+  id: string,
+  updates: { name?: string; color?: string | null },
+): Promise<void> {
+  await api.workspace.updateFolder.mutate({ id, ...updates });
+}
+
+export async function deleteFolder(id: string): Promise<void> {
+  await api.workspace.deleteFolder.mutate({ id });
+}
+
 export async function inviteMember(
   workspaceId: string,
   email: string,
