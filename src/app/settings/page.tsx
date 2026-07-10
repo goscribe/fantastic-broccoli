@@ -5,6 +5,7 @@ import { Check, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
+import { toast, toastError } from "@/lib/toast";
 import {
   fetchAccountSummary,
   fetchPlanOptions,
@@ -171,10 +172,9 @@ export default function SettingsPage() {
     try {
       await uploadProfilePicture(file);
       await refreshSession();
+      toast.success("Profile picture updated");
     } catch (err) {
-      setPhotoError(
-        err instanceof Error ? err.message : "Failed to upload image.",
-      );
+      setPhotoError(toastError(err, "Failed to upload image."));
     } finally {
       setUploadingPhoto(false);
     }
@@ -184,6 +184,9 @@ export default function SettingsPage() {
     setSwitching(true);
     try {
       await switchPlan(planId);
+      toast.success("Plan updated");
+    } catch (err) {
+      toastError(err, "Failed to switch plan");
     } finally {
       setSwitching(false);
     }

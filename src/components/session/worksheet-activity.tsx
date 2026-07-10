@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { PartMarking, WorksheetContent, WorksheetPart } from "@/types";
 import { markWorksheetAnswer } from "@/lib/api/study";
+import { toast } from "@/lib/toast";
 import { recordWorksheetQuestionProgress } from "@/lib/api/study-session";
 import { WorksheetFigureCard } from "@/components/graphics/worksheet-figures";
 import { MarkdownText } from "@/components/ui/markdown-text";
@@ -86,6 +87,9 @@ export function WorksheetActivity({
             answerImage: drawing,
           });
         } catch {
+          toast.error("AI marking unavailable — checked locally instead", {
+            id: "marking-fallback",
+          });
           return localMarking(part, value);
         }
       }),
