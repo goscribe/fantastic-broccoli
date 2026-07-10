@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createFolder, createWorkspace } from "@/lib/api/workspace";
+import { toast, toastError } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 
@@ -41,9 +42,10 @@ export function CreateResourceDialog({
         const id = await createWorkspace(name.trim(), parentId);
         onCreated(id);
       }
+      toast.success(kind === "folder" ? "Folder created" : "Workspace created");
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Creation failed");
+      setError(toastError(err, "Creation failed"));
       setBusy(false);
     }
   };

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { toast, toastError } from "@/lib/toast";
 import {
   changeWorkspaceMemberRole,
   fetchCurrentWorkspaceRole,
@@ -157,8 +158,9 @@ export function WorkspaceMembersDialog({
       await inviteMember(workspaceId, email.trim(), role);
       setEmail("");
       await load();
+      toast.success("Invitation sent");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to invite member.");
+      setError(toastError(err, "Failed to invite member."));
     } finally {
       setInviting(false);
     }
@@ -172,7 +174,7 @@ export function WorkspaceMembersDialog({
       await changeWorkspaceMemberRole(workspaceId, memberId, nextRole);
       await load();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to update role.");
+      setError(toastError(err, "Failed to update role."));
     } finally {
       setUpdating(false);
     }
@@ -185,8 +187,9 @@ export function WorkspaceMembersDialog({
     try {
       await removeWorkspaceMember(workspaceId, memberId);
       await load();
+      toast.success("Member removed");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to remove member.");
+      setError(toastError(err, "Failed to remove member."));
     } finally {
       setUpdating(false);
     }

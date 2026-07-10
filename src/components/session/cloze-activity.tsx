@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ClozeContent } from "@/types";
 import { markClozeAnswers } from "@/lib/api/study";
+import { toast } from "@/lib/toast";
 import { recordFlashcardAttempt } from "@/lib/api/study-session";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -58,6 +59,9 @@ export function ClozeActivity({
         answers,
       });
     } catch {
+      toast.error("AI marking unavailable — checked locally instead", {
+        id: "marking-fallback",
+      });
       marked = passage.answers.map((_, i) => localResult(i));
     }
     setResults(marked);

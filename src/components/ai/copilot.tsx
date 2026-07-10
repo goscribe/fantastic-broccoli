@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
+import { toastError } from "@/lib/toast";
 import { Sparkles, X, ArrowUp, Wand2, Plus } from "lucide-react";
 import { EquationEmbed, GraphEmbed, CitationEmbed } from "@/components/ai/embeds";
 import {
@@ -190,8 +191,9 @@ export function Copilot({
       const conv = await createConversation(workspaceId);
       setChats((prev) => [...prev, conv]);
       setActiveChat(conv.id);
-    } catch {
+    } catch (err) {
       // keep current chat; the next send retries conversation creation
+      toastError(err, "Couldn't start a new chat");
     }
   };
 

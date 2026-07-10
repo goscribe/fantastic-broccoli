@@ -136,7 +136,8 @@ export interface AddActivityInput {
 
 interface TrpcEnvelope {
   result?: { data: { json: unknown; meta?: unknown } };
-  error?: { message?: string };
+  // Error payload may be superjson-wrapped ({ json: { message } }) or plain.
+  error?: { message?: string; json?: { message?: string } };
 }
 
 export async function rpc<T>(
@@ -160,7 +161,11 @@ export async function rpc<T>(
 
   const body = (await res.json()) as TrpcEnvelope;
   if (!res.ok || body.error || !body.result) {
-    throw new Error(body.error?.message ?? `${path} failed (${res.status})`);
+    throw new Error(
+      body.error?.json?.message ??
+        body.error?.message ??
+        `${path} failed (${res.status})`,
+    );
   }
   return superjson.deserialize(
     body.result.data as Parameters<typeof superjson.deserialize>[0],

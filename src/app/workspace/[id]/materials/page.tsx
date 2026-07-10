@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
+import { toast, toastError } from "@/lib/toast";
 import {
   analyzeFiles,
   fetchFileDetails,
@@ -466,7 +467,7 @@ export default function WorkspaceMaterialsPage() {
       }));
       queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
     } catch (err) {
-      setUploadError(err instanceof Error ? err.message : "Upload failed");
+      setUploadError(toastError(err, "Upload failed"));
     } finally {
       setUploading(false);
     }
@@ -478,8 +479,9 @@ export default function WorkspaceMaterialsPage() {
       await reanalyzeFile(workspaceId, fileId);
       queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
       queryClient.invalidateQueries({ queryKey: ["fileDetails", workspaceId, fileId] });
-    } catch {
-      // swallow — analysis status comes via Pusher
+      toast.success("Re-analysis started");
+    } catch (err) {
+      toastError(err, "Failed to start re-analysis");
     } finally {
       setReanalyzing((prev) => {
         const next = new Set(prev);

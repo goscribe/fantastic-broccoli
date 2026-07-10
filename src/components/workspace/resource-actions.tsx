@@ -9,6 +9,7 @@ import {
 } from "@/lib/api/workspace";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { toast, toastError } from "@/lib/toast";
 import { MoreHorizontal, Pencil, Trash2, Users, X } from "lucide-react";
 import { WorkspaceIcon, WORKSPACE_ICONS } from "@/components/graphics/workspace-icon";
 
@@ -154,10 +155,11 @@ export function EditResourceDialog({
       } else {
         await updateFolder(target.id, { name: name.trim(), color });
       }
+      toast.success("Changes saved");
       onSaved();
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Update failed");
+      setError(toastError(err, "Update failed"));
       setBusy(false);
     }
   };
@@ -285,10 +287,11 @@ export function DeleteResourceDialog({
     try {
       if (target.kind === "workspace") await deleteWorkspace(target.id);
       else await deleteFolder(target.id);
+      toast.success("Deleted");
       onDeleted();
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Delete failed");
+      setError(toastError(err, "Delete failed"));
       setBusy(false);
     }
   };
