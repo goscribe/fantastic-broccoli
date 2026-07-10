@@ -164,16 +164,6 @@ export function TopBar({
           </div>
 
           <div className="flex items-center gap-1.5">
-            {pathname.startsWith("/workspace") && (
-              <button
-                type="button"
-                onClick={() => setMembersOpen(true)}
-                className="hidden items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-[12px] font-medium text-muted-foreground hover:bg-muted hover:text-foreground sm:flex"
-              >
-                <UserPlus className="h-3.5 w-3.5" />
-                Members
-              </button>
-            )}
             <Link
               href="/pricing"
               title="Credits and pricing"

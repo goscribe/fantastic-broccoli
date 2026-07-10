@@ -1,12 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { Workspace } from "@/types";
 import { Button } from "@/components/ui/button";
-import { Library, GraduationCap, Layers } from "lucide-react";
+import { Library, GraduationCap, Layers, UserPlus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
+import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
 
 interface WorkspaceShellProps {
   workspace: Workspace | undefined;
@@ -21,6 +23,7 @@ export function WorkspaceShell({
 }: WorkspaceShellProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const [membersOpen, setMembersOpen] = useState(false);
 
   if (!workspace && loading) {
     return (
@@ -81,7 +84,7 @@ export function WorkspaceShell({
     <div className="flex-1 flex flex-col">
       <div className="border-b border-border bg-card">
         <div className="w-full px-4 sm:px-8">
-          <nav className="flex gap-1 -mb-px">
+          <nav className="flex items-center gap-1 -mb-px">
             {tabs.map((tab) => {
               const active = pathname.startsWith(tab.href);
               return (
@@ -100,9 +103,23 @@ export function WorkspaceShell({
                 </Link>
               );
             })}
+            <button
+              type="button"
+              onClick={() => setMembersOpen(true)}
+              className="ml-auto flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium border-b-2 border-transparent -mb-px text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <UserPlus className="h-4 w-4" />
+              Members
+            </button>
           </nav>
         </div>
       </div>
+
+      <WorkspaceMembersDialog
+        workspaceId={workspace.id}
+        open={membersOpen}
+        onClose={() => setMembersOpen(false)}
+      />
 
       <main className="flex-1 w-full px-4 sm:px-8 py-6 sm:py-8">
         {children}
