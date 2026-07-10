@@ -66,6 +66,8 @@ interface UploadRow {
   mimeType: string | null;
   createdAt: Date | string;
   analyzed?: boolean;
+  analysisStatus?: Material["analysisStatus"];
+  analysisError?: string | null;
 }
 
 function mimeToMaterialType(mimeType: string | null, name: string): MaterialType {
@@ -86,6 +88,8 @@ export function mapUploadToMaterial(
     type: mimeToMaterialType(upload.mimeType, upload.name),
     title: upload.name,
     analyzed: upload.analyzed,
+    analysisStatus: upload.analysisStatus,
+    analysisError: upload.analysisError,
     updatedAt: new Date(upload.createdAt).toISOString(),
   };
 }

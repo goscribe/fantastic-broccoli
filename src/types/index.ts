@@ -254,6 +254,9 @@ export interface Material {
   durationSeconds?: number;
   sizeLabel?: string;
   analyzed?: boolean;
+  /** Persisted server-side pipeline status; survives worker restarts. */
+  analysisStatus?: "NOT_ANALYZED" | "QUEUED" | "ANALYZING" | "ANALYZED" | "FAILED";
+  analysisError?: string | null;
   updatedAt: string;
 }
 
