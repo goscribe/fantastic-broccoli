@@ -158,6 +158,22 @@ function analysisInFlight(progress: AnalysisProgress | null): boolean {
 /** Per-file pipeline status derived from `file_analysis_progress` events. */
 type FileAnalysisStatus = "queued" | "processing" | "completed" | "error";
 
+/** Maps the persisted server-side status to the live badge status. */
+function persistedFileStatus(
+  material: Material,
+): FileAnalysisStatus | undefined {
+  switch (material.analysisStatus) {
+    case "QUEUED":
+      return "queued";
+    case "ANALYZING":
+      return "processing";
+    case "FAILED":
+      return "error";
+    default:
+      return undefined;
+  }
+}
+
 function MaterialStatusBadge({
   material,
   analyzing,
@@ -623,7 +639,10 @@ export default function WorkspaceMaterialsPage() {
                             analyzing={
                               (!material.analyzed && inFlight) || isReanalyzing
                             }
-                            fileStatus={fileStatuses[material.id]}
+                            fileStatus={
+                              fileStatuses[material.id] ??
+                              persistedFileStatus(material)
+                            }
                           />
                         </div>
                         {material.preview && (
