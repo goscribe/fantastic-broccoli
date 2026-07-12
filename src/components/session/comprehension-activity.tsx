@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ComprehensionContent, ComprehensionEvaluation } from "@/types";
 import { submitComprehensionRewrite } from "@/lib/api/study";
+import { useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
@@ -13,20 +14,29 @@ import { Brain, Send, CheckCircle2, RotateCcw, Loader2 } from "lucide-react";
 interface ComprehensionActivityProps {
   activityId: string;
   content: ComprehensionContent;
+  draft?: Record<string, unknown>;
   onComplete: () => void;
 }
 
 export function ComprehensionActivity({
   activityId,
   content,
+  draft,
   onComplete,
 }: ComprehensionActivityProps) {
-  const [userText, setUserText] = useState("");
-  const [showOriginal, setShowOriginal] = useState(true);
+  const restored = draft as
+    | Partial<{ userText: string; showOriginal: boolean }>
+    | undefined;
+  const [userText, setUserText] = useState(restored?.userText ?? "");
+  const [showOriginal, setShowOriginal] = useState(
+    restored?.showOriginal ?? true,
+  );
   const [evaluating, setEvaluating] = useState(false);
   const [error, setError] = useState("");
   const [localEvals, setLocalEvals] = useState<ComprehensionEvaluation[]>([]);
   const [localRewrites, setLocalRewrites] = useState<string[]>([]);
+
+  useActivityDraft(activityId, { userText, showOriginal });
 
   const evaluations = [...content.evaluations, ...localEvals];
   const userRewrites = [...content.userRewrites, ...localRewrites];

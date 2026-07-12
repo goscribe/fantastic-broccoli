@@ -5,6 +5,7 @@ import { PartMarking, WorksheetContent, WorksheetPart } from "@/types";
 import { markWorksheetAnswer } from "@/lib/api/study";
 import { toast } from "@/lib/toast";
 import { recordWorksheetQuestionProgress } from "@/lib/api/study-session";
+import { useActivityDraft } from "@/lib/use-activity-draft";
 import { WorksheetFigureCard } from "@/components/graphics/worksheet-figures";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { DrawingCanvas } from "@/components/ui/drawing-canvas";
@@ -15,7 +16,16 @@ import { ArrowRight, Check, Loader2, PenLine, X } from "lucide-react";
 interface WorksheetActivityProps {
   activityId: string;
   content: WorksheetContent;
+  draft?: Record<string, unknown>;
   onComplete: () => void;
+}
+
+interface WorksheetDraft {
+  stepIndex: number;
+  answers: Record<string, string>;
+  drawings: Record<string, string | null>;
+  markings: Record<string, PartMarking>;
+  checkedSteps: Record<number, boolean>;
 }
 
 const isPartCorrect = (part: WorksheetPart, value: string) => {
@@ -40,15 +50,33 @@ const localMarking = (part: WorksheetPart, value: string): PartMarking => {
 export function WorksheetActivity({
   activityId,
   content,
+  draft,
   onComplete,
 }: WorksheetActivityProps) {
-  const [stepIndex, setStepIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [drawings, setDrawings] = useState<Record<string, string | null>>({});
+  const restored = draft as Partial<WorksheetDraft> | undefined;
+  const [stepIndex, setStepIndex] = useState(restored?.stepIndex ?? 0);
+  const [answers, setAnswers] = useState<Record<string, string>>(
+    restored?.answers ?? {},
+  );
+  const [drawings, setDrawings] = useState<Record<string, string | null>>(
+    restored?.drawings ?? {},
+  );
   const [drawingOpen, setDrawingOpen] = useState<Record<string, boolean>>({});
-  const [markings, setMarkings] = useState<Record<string, PartMarking>>({});
-  const [checkedSteps, setCheckedSteps] = useState<Record<number, boolean>>({});
+  const [markings, setMarkings] = useState<Record<string, PartMarking>>(
+    restored?.markings ?? {},
+  );
+  const [checkedSteps, setCheckedSteps] = useState<Record<number, boolean>>(
+    restored?.checkedSteps ?? {},
+  );
   const [markingInFlight, setMarkingInFlight] = useState(false);
+
+  useActivityDraft(activityId, {
+    stepIndex,
+    answers,
+    drawings,
+    markings,
+    checkedSteps,
+  });
 
   const step = content.steps[stepIndex];
   const checked = !!checkedSteps[stepIndex];

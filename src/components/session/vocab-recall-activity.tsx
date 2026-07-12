@@ -2,14 +2,26 @@
 
 import { useState } from "react";
 import { VocabRecallContent } from "@/types";
+import { useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Check, X, ArrowRight, RotateCcw } from "lucide-react";
 
 interface VocabRecallActivityProps {
+  activityId: string;
   content: VocabRecallContent;
+  draft?: Record<string, unknown>;
   onTermResult?: (index: number, correct: boolean) => void;
   onComplete: () => void;
+}
+
+interface VocabDraft {
+  queue: number[];
+  position: number;
+  missed: number[];
+  learned: number[];
+  round: number;
+  attempts: number;
 }
 
 /**
@@ -18,19 +30,35 @@ interface VocabRecallActivityProps {
  * completes once all terms have been recalled correctly at least once.
  */
 export function VocabRecallActivity({
+  activityId,
   content,
+  draft,
   onTermResult,
   onComplete,
 }: VocabRecallActivityProps) {
+  const restored = draft as Partial<VocabDraft> | undefined;
   const allIndices = content.terms.map((_, i) => i);
-  const [queue, setQueue] = useState<number[]>(allIndices);
-  const [position, setPosition] = useState(0);
-  const [missed, setMissed] = useState<number[]>([]);
-  const [learned, setLearned] = useState<Set<number>>(new Set());
-  const [round, setRound] = useState(1);
-  const [attempts, setAttempts] = useState(0);
+  const [queue, setQueue] = useState<number[]>(
+    restored?.queue?.length ? restored.queue : allIndices,
+  );
+  const [position, setPosition] = useState(restored?.position ?? 0);
+  const [missed, setMissed] = useState<number[]>(restored?.missed ?? []);
+  const [learned, setLearned] = useState<Set<number>>(
+    new Set(restored?.learned ?? []),
+  );
+  const [round, setRound] = useState(restored?.round ?? 1);
+  const [attempts, setAttempts] = useState(restored?.attempts ?? 0);
   const [answer, setAnswer] = useState("");
   const [revealed, setRevealed] = useState(false);
+
+  useActivityDraft(activityId, {
+    queue,
+    position,
+    missed,
+    learned: [...learned],
+    round,
+    attempts,
+  });
 
   const total = content.terms.length;
   const done = learned.size === total;

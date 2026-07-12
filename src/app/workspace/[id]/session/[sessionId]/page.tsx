@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
@@ -173,6 +173,16 @@ export default function SessionDetailPage() {
     [activities, activeActivityId],
   );
 
+  // Persist which activity the learner is on so a refresh resumes there.
+  const markedInProgress = useRef(new Set<string>());
+  useEffect(() => {
+    if (!activeActivity || activeActivity.status !== "pending") return;
+    if (activeActivity.id.startsWith("bank-")) return;
+    if (markedInProgress.current.has(activeActivity.id)) return;
+    markedInProgress.current.add(activeActivity.id);
+    setActivityStatus(activeActivity.id, "in_progress").catch(() => {});
+  }, [activeActivity]);
+
   const completeActivity = useMutation({
     mutationFn: (input: { activityId: string; skipped?: boolean }) =>
       setActivityStatus(
@@ -321,14 +331,19 @@ export default function SessionDetailPage() {
       case "comprehension_check":
         return (
           <ComprehensionActivity
+            key={activity.id}
             activityId={activity.id}
             content={activity.content as ComprehensionContent}
+            draft={activity.draft}
             onComplete={() => goToNext()}
           />
         );
       case "mcq":
         return (
           <McqActivity
+            key={activity.id}
+            activityId={activity.id}
+            draft={activity.draft}
             content={activity.content as McqContent}
             onAnswer={(questionIndex, selectedIndex) => {
               const question = (activity.content as McqContent).questions[
@@ -347,6 +362,9 @@ export default function SessionDetailPage() {
       case "flashcard_review":
         return (
           <FlashcardActivity
+            key={activity.id}
+            activityId={activity.id}
+            draft={activity.draft}
             content={activity.content as FlashcardContent}
             onCardResult={(index, known) => {
               const card = (activity.content as FlashcardContent).cards[index];
@@ -363,6 +381,9 @@ export default function SessionDetailPage() {
       case "vocab_recall":
         return (
           <VocabRecallActivity
+            key={activity.id}
+            activityId={activity.id}
+            draft={activity.draft}
             content={activity.content as VocabRecallContent}
             onTermResult={(index, correct) => {
               const term = (activity.content as VocabRecallContent).terms[
@@ -381,16 +402,20 @@ export default function SessionDetailPage() {
       case "cloze":
         return (
           <ClozeActivity
+            key={activity.id}
             activityId={activity.id}
             content={activity.content as ClozeContent}
+            draft={activity.draft}
             onComplete={() => goToNext()}
           />
         );
       case "worksheet":
         return (
           <WorksheetActivity
+            key={activity.id}
             activityId={activity.id}
             content={activity.content as WorksheetContent}
+            draft={activity.draft}
             onComplete={() => goToNext()}
           />
         );
