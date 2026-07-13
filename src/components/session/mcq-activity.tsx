@@ -2,26 +2,38 @@
 
 import { useState } from "react";
 import { McqContent } from "@/types";
+import { useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, XCircle, ArrowRight } from "lucide-react";
 
 interface McqActivityProps {
+  activityId: string;
   content: McqContent;
+  draft?: Record<string, unknown>;
   onAnswer: (questionIndex: number, selectedIndex: number) => void;
   onComplete: () => void;
 }
 
 export function McqActivity({
+  activityId,
   content,
+  draft,
   onAnswer,
   onComplete,
 }: McqActivityProps) {
-  const [index, setIndex] = useState(0);
+  const restored = draft as
+    | Partial<{ index: number; correctCount: number }>
+    | undefined;
+  const [index, setIndex] = useState(
+    Math.min(restored?.index ?? 0, content.questions.length - 1),
+  );
   const [selected, setSelected] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
-  const [correctCount, setCorrectCount] = useState(0);
+  const [correctCount, setCorrectCount] = useState(restored?.correctCount ?? 0);
+
+  useActivityDraft(activityId, { index, correctCount });
 
   const question = content.questions[index];
   const isLast = index === content.questions.length - 1;

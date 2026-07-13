@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FlashcardContent } from "@/types";
+import { useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
@@ -10,21 +11,34 @@ import { progressPercent } from "@/lib/utils";
 import { ThumbsUp, ThumbsDown, ArrowRight } from "lucide-react";
 
 interface FlashcardActivityProps {
+  activityId: string;
   content: FlashcardContent;
+  draft?: Record<string, unknown>;
   onCardResult: (index: number, known: boolean) => void;
   onComplete: () => void;
 }
 
 export function FlashcardActivity({
+  activityId,
   content,
+  draft,
   onCardResult,
   onComplete,
 }: FlashcardActivityProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const restored = draft as
+    | Partial<{ currentIndex: number; results: (boolean | null)[] }>
+    | undefined;
+  const [currentIndex, setCurrentIndex] = useState(
+    Math.min(restored?.currentIndex ?? 0, content.cards.length - 1),
+  );
   const [flipped, setFlipped] = useState(false);
   const [results, setResults] = useState<(boolean | null)[]>(
-    content.cards.map((c) => c.known),
+    restored?.results?.length === content.cards.length
+      ? restored.results
+      : content.cards.map((c) => c.known),
   );
+
+  useActivityDraft(activityId, { currentIndex, results });
 
   const card = content.cards[currentIndex];
   const reviewed = results.filter((r) => r !== null).length;

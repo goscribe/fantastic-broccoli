@@ -65,6 +65,7 @@ export interface ApiSessionActivity {
   status: ApiActivityStatus;
   estimatedMinutes: number;
   timeSpentSeconds: number | null;
+  meta?: { draft?: Record<string, unknown> } | null;
   highlights?: ApiReadingHighlight[];
   createdAt: Date;
   updatedAt: Date;
@@ -214,6 +215,12 @@ export const studySessionApi = {
       timeSpentSeconds,
     }),
 
+  saveActivityDraft: (activityId: string, draft: Record<string, unknown>) =>
+    rpc<ApiSessionActivity>("studySession.saveActivityDraft", "mutation", {
+      activityId,
+      draft,
+    }),
+
   markWorksheetAnswer: (input: {
     activityId: string;
     stepIndex: number;
@@ -310,6 +317,26 @@ export const studySessionApi = {
     rpc<{ started: boolean }>("studySession.generateBank", "mutation", input),
 };
 
+/**
+ * Best-effort draft save during page unload — `keepalive` lets the request
+ * outlive the document. Browsers cap keepalive bodies at ~64KB, so oversized
+ * drafts (e.g. with drawings) are skipped; the debounced save covers those.
+ */
+export function saveActivityDraftKeepalive(
+  activityId: string,
+  draft: Record<string, unknown>,
+) {
+  const body = JSON.stringify(superjson.serialize({ activityId, draft }));
+  if (body.length > 60_000) return;
+  fetch(`${apiUrl}/trpc/studySession.saveActivityDraft`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "content-type": "application/json" },
+    body,
+    keepalive: true,
+  }).catch(() => {});
+}
+
 // ---------- artifact progress (session activities backed by pools) ----------
 
 /** Records an SRS study attempt against a pooled `Flashcard` row. */
@@ -404,6 +431,7 @@ export function mapActivity(a: ApiSessionActivity): SessionActivity {
     status: statusFromApi[a.status],
     estimatedMinutes: a.estimatedMinutes,
     timeSpentSeconds: a.timeSpentSeconds ?? undefined,
+    draft: a.meta?.draft,
     highlights: (a.highlights ?? []).map((h) => ({
       id: h.id,
       activityId: h.activityId,

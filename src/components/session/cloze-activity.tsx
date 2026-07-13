@@ -5,6 +5,7 @@ import { ClozeContent } from "@/types";
 import { markClozeAnswers } from "@/lib/api/study";
 import { toast } from "@/lib/toast";
 import { recordFlashcardAttempt } from "@/lib/api/study-session";
+import { useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Loader2 } from "lucide-react";
@@ -12,6 +13,7 @@ import { ArrowRight, Loader2 } from "lucide-react";
 interface ClozeActivityProps {
   activityId: string;
   content: ClozeContent;
+  draft?: Record<string, unknown>;
   onComplete: () => void;
 }
 
@@ -23,15 +25,25 @@ interface BlankResult {
 export function ClozeActivity({
   activityId,
   content,
+  draft,
   onComplete,
 }: ClozeActivityProps) {
   const passage = content.passages[0];
   const parts = passage.textWithBlanks.split("___");
+  const restored = draft as
+    | Partial<{ answers: string[]; results: BlankResult[] | null }>
+    | undefined;
   const [answers, setAnswers] = useState<string[]>(
-    passage.answers.map(() => ""),
+    restored?.answers?.length === passage.answers.length
+      ? restored.answers
+      : passage.answers.map(() => ""),
   );
-  const [results, setResults] = useState<BlankResult[] | null>(null);
+  const [results, setResults] = useState<BlankResult[] | null>(
+    restored?.results ?? null,
+  );
   const [marking, setMarking] = useState(false);
+
+  useActivityDraft(activityId, { answers, results });
 
   const localResult = (i: number): BlankResult => ({
     correct:

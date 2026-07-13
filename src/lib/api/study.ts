@@ -113,6 +113,13 @@ export async function setActivityStatus(
   );
 }
 
+export async function saveActivityDraft(
+  activityId: string,
+  draft: Record<string, unknown>,
+): Promise<void> {
+  await studySessionApi.saveActivityDraft(activityId, draft);
+}
+
 export async function addSessionNote(
   sessionId: string,
   content: string,

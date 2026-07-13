@@ -54,6 +54,8 @@ export interface SessionActivity {
   timeSpentSeconds?: number;
   highlights?: SessionHighlight[];
   meta?: Record<string, unknown>;
+  /** Autosaved in-progress state (answers, position) for resuming. */
+  draft?: Record<string, unknown>;
 }
 
 /** A persisted reading highlight (studySession.addHighlight). */
