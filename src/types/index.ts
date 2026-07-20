@@ -144,7 +144,18 @@ export interface ReadingImageFigure {
   caption: string;
 }
 
-export type ReadingFigure = ReadingGraphFigure | ReadingImageFigure;
+/** LLM-authored self-contained HTML/JS visualizer, rendered sandboxed. */
+export interface ReadingHtmlFigure {
+  id: string;
+  type: "html";
+  title: string;
+  html: string;
+}
+
+export type ReadingFigure =
+  | ReadingGraphFigure
+  | ReadingImageFigure
+  | ReadingHtmlFigure;
 
 export interface ReadingContent {
   type: "reading";

@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { InteractiveWidget, WidgetId, widgetRegistry } from "@/components/interactive";
 import { ExpressionGraph } from "@/components/interactive/desmos";
+import { HtmlWidget } from "@/components/interactive/html-widget";
 import { useResolvedFigureUrl } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
 import { BookOpen, ArrowRight, Highlighter, Trash2 } from "lucide-react";
@@ -157,6 +158,9 @@ function FigureView({ figure }: { figure: ReadingFigure }) {
         expressions={figure.expressions}
       />
     );
+  }
+  if (figure.type === "html") {
+    return <HtmlWidget html={figure.html} title={figure.title} />;
   }
   return <ImageFigure figure={figure} />;
 }
