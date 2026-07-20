@@ -381,7 +381,7 @@ function MatrixView({
         r.map((v, j) => (
           <div
             key={`${i}-${j}`}
-            className={`w-8 h-8 grid place-items-center rounded text-sm font-mono ${
+            className={`w-10 h-10 sm:w-12 sm:h-12 grid place-items-center rounded text-sm sm:text-base font-mono ${
               i === hlRow || j === hlCol
                 ? "bg-accent text-accent-foreground"
                 : "bg-muted"
@@ -422,11 +422,11 @@ export function MatrixMultiplicationWidget() {
       formula="C_{ij} = \sum_k A_{ik} B_{kj}"
     >
       <div className="space-y-3">
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 py-2">
           <MatrixView m={a} hlRow={row} />
-          <span className="text-muted-foreground">×</span>
+          <span className="text-lg text-muted-foreground">×</span>
           <MatrixView m={b} hlCol={col} />
-          <span className="text-muted-foreground">=</span>
+          <span className="text-lg text-muted-foreground">=</span>
           <div
             className="grid gap-1 rounded-lg border border-border p-1.5 bg-card"
             style={{ gridTemplateColumns: `repeat(${size}, minmax(0, 1fr))` }}
@@ -435,7 +435,7 @@ export function MatrixMultiplicationWidget() {
               r.map((v, j) => (
                 <div
                   key={`${i}-${j}`}
-                  className={`w-8 h-8 grid place-items-center rounded text-sm font-mono ${
+                  className={`w-10 h-10 sm:w-12 sm:h-12 grid place-items-center rounded text-sm sm:text-base font-mono ${
                     i === row && j === col
                       ? "bg-energy/30 font-semibold"
                       : "bg-muted"
@@ -447,11 +447,11 @@ export function MatrixMultiplicationWidget() {
             )}
           </div>
         </div>
-        <div className="text-sm font-mono text-muted-foreground">
+        <div className="text-sm font-mono text-muted-foreground text-center">
           C[{row + 1},{col + 1}] = {terms.join(" + ")} ={" "}
           <span className="text-foreground font-semibold">{value}</span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="grid grid-cols-2 gap-6">
           <Slider
             label="Step"
             value={step + 1}
