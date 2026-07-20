@@ -17,6 +17,7 @@ import {
 } from "@/lib/api/study";
 import { recordFlashcardAttempt } from "@/lib/api/study-session";
 import {
+  StudySession,
   SessionActivity,
   SessionNote,
   ComprehensionContent,
@@ -189,7 +190,38 @@ export default function SessionDetailPage() {
         input.activityId,
         input.skipped ? "skipped" : "completed",
       ),
-    onSuccess: () =>
+    onMutate: async (input) => {
+      await queryClient.cancelQueries({
+        queryKey: ["study-session", sessionId],
+      });
+      const previous = queryClient.getQueryData<StudySession>([
+        "study-session",
+        sessionId,
+      ]);
+      if (previous) {
+        queryClient.setQueryData<StudySession>(
+          ["study-session", sessionId],
+          {
+            ...previous,
+            activities: previous.activities.map((a) =>
+              a.id === input.activityId
+                ? { ...a, status: input.skipped ? "skipped" : "completed" }
+                : a,
+            ),
+          },
+        );
+      }
+      return { previous };
+    },
+    onError: (_err, _input, context) => {
+      if (context?.previous) {
+        queryClient.setQueryData(
+          ["study-session", sessionId],
+          context.previous,
+        );
+      }
+    },
+    onSettled: () =>
       queryClient.invalidateQueries({ queryKey: ["study-session", sessionId] }),
   });
   const addNote = useMutation({
