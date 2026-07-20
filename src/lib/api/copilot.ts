@@ -28,9 +28,15 @@ export async function createConversation(
   return { id: row.id, title: row.title };
 }
 
+export interface CopilotVisualization {
+  title?: string;
+  html: string;
+}
+
 export interface CopilotAnswer {
   answer: string;
   widgets: string[];
+  visualizations: CopilotVisualization[];
 }
 
 export async function askCopilot(input: {
@@ -57,5 +63,8 @@ export async function askCopilot(input: {
   return {
     answer: result.answer,
     widgets: (result as { widgets?: string[] }).widgets ?? [],
+    visualizations:
+      (result as { visualizations?: CopilotVisualization[] }).visualizations ??
+      [],
   };
 }

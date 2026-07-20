@@ -10,6 +10,7 @@ import {
   WidgetId,
   widgetRegistry,
 } from "@/components/interactive";
+import { HtmlWidget } from "@/components/interactive/html-widget";
 import {
   ChatMessage,
   EmbedPart,
@@ -150,6 +151,16 @@ export function Copilot({
                             widget: id,
                           }) as EmbedPart,
                       ),
+                    ...result.visualizations.map(
+                      (v) =>
+                        ({
+                          kind: "embed",
+                          id: nextId(),
+                          embed: "html",
+                          html: v.html,
+                          title: v.title,
+                        }) as EmbedPart,
+                    ),
                   ],
                 }
               : m,
@@ -316,6 +327,8 @@ export function Copilot({
                     <GraphEmbed key={part.id} data={part.graph} />
                   ) : part.embed === "widget" ? (
                     <InteractiveWidget key={part.id} id={part.widget} />
+                  ) : part.embed === "html" ? (
+                    <HtmlWidget key={part.id} html={part.html} title={part.title} />
                   ) : (
                     <CitationEmbed key={part.id} data={part.citation} />
                   )
