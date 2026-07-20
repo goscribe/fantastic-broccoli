@@ -76,7 +76,7 @@ export async function uploadFiles(
     })),
   })) as unknown as SignedUpload[];
 
-  await Promise.all(
+  const outcomes = await Promise.allSettled(
     result.map((signed, i) =>
       fetch(signed.uploadUrl, {
         method: "PUT",
@@ -89,6 +89,23 @@ export async function uploadFiles(
       }),
     ),
   );
+
+  const failedIndexes = outcomes.flatMap((o, i) =>
+    o.status === "rejected" ? [i] : [],
+  );
+  if (failedIndexes.length > 0) {
+    // Remove the orphaned file records so the names can be re-uploaded.
+    await api.workspace.deleteFiles
+      .mutate({
+        id: workspaceId,
+        fileId: failedIndexes.map((i) => result[i].fileId),
+      })
+      .catch(() => {});
+    const firstFailure = outcomes[failedIndexes[0]] as PromiseRejectedResult;
+    throw firstFailure.reason instanceof Error
+      ? firstFailure.reason
+      : new Error(`Upload failed for ${files[failedIndexes[0]].name}`);
+  }
 
   return result.map((r) => r.fileId);
 }
