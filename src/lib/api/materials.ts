@@ -54,10 +54,19 @@ interface SignedUpload {
   uploadUrl: string;
 }
 
+export const MAX_UPLOAD_BYTES = 100 * 1024 * 1024;
+
 export async function uploadFiles(
   workspaceId: string,
   files: File[],
 ): Promise<string[]> {
+  const oversized = files.find((f) => f.size > MAX_UPLOAD_BYTES);
+  if (oversized) {
+    throw new Error(
+      `"${oversized.name}" is ${(oversized.size / (1024 * 1024)).toFixed(1)}MB — files must be under 100MB.`,
+    );
+  }
+
   const result = (await api.workspace.uploadFiles.mutate({
     id: workspaceId,
     files: files.map((f) => ({
