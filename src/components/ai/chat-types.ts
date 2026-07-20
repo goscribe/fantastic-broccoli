@@ -28,6 +28,7 @@ export type EmbedSpec =
   | { embed: "equation"; latex: string; caption?: string }
   | { embed: "graph"; graph: GraphData }
   | { embed: "widget"; widget: WidgetId; intro?: string; outro?: string }
+  | { embed: "html"; html: string; title?: string }
   | { embed: "citation"; citation: CitationData };
 
 export type EmbedPart = { kind: "embed"; id: string } & EmbedSpec;
