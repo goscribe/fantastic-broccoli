@@ -5,6 +5,42 @@ import { useEffect, useId, useMemo, useState } from "react";
 const MIN_HEIGHT = 120;
 const MAX_HEIGHT = 900;
 
+// Design tokens forwarded into the sandboxed iframe so LLM-authored
+// visualizers can style themselves with the app's palette via var(--token).
+const THEME_TOKENS = [
+  "background",
+  "foreground",
+  "card",
+  "muted",
+  "muted-foreground",
+  "accent",
+  "accent-dim",
+  "accent-soft",
+  "accent-bright",
+  "accent-foreground",
+  "energy",
+  "energy-soft",
+  "violet",
+  "sky",
+  "rose",
+  "amber",
+  "border",
+  "border-strong",
+  "radius",
+] as const;
+
+function themeStyle(): string {
+  const root = getComputedStyle(document.documentElement);
+  const vars = THEME_TOKENS.map(
+    (t) => `--${t}:${root.getPropertyValue(`--${t}`).trim()};`,
+  ).join("");
+  return `<style>:root{${vars}}
+body{margin:0;font-family:ui-sans-serif,system-ui,sans-serif;color:var(--foreground);background:var(--card);}
+input[type=range]{accent-color:var(--accent);}
+button{font:inherit;border:1px solid var(--border);border-radius:8px;background:var(--muted);color:var(--foreground);padding:4px 10px;cursor:pointer;}
+button:hover{border-color:var(--border-strong);}</style>`;
+}
+
 function resizeScript(id: string) {
   return `<script>(function(){
   function post(){parent.postMessage({type:"scribe-widget-height",id:${JSON.stringify(id)},height:document.documentElement.scrollHeight},"*");}
@@ -49,7 +85,10 @@ export function HtmlWidget({ html, title }: HtmlWidgetProps) {
     return () => window.removeEventListener("message", onMessage);
   }, [frameId]);
 
-  const srcDoc = useMemo(() => html + resizeScript(frameId), [html, frameId]);
+  const srcDoc = useMemo(
+    () => themeStyle() + html + resizeScript(frameId),
+    [html, frameId],
+  );
 
   return (
     <figure className="my-2 overflow-hidden rounded-xl border border-border bg-card animate-fade-up">
@@ -58,7 +97,7 @@ export function HtmlWidget({ html, title }: HtmlWidgetProps) {
         sandbox="allow-scripts"
         srcDoc={srcDoc}
         style={{ height }}
-        className="w-full border-0 bg-white"
+        className="w-full border-0 bg-card"
       />
       {title && (
         <figcaption className="px-3.5 py-2 text-[11px] text-muted-foreground border-t border-border">
