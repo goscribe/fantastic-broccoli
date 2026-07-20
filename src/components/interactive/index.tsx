@@ -9,6 +9,7 @@ import {
   WaveWidget,
   HalfLifeWidget,
   HookeWidget,
+  MatrixMultiplicationWidget,
 } from "./widgets";
 import {
   FunctionGrapher,
@@ -30,7 +31,8 @@ export type WidgetId =
   | "function-grapher"
   | "unit-circle"
   | "normal-distribution"
-  | "vector-addition";
+  | "vector-addition"
+  | "matrix-multiplication";
 
 export const widgetRegistry: Record<
   WidgetId,
@@ -53,6 +55,10 @@ export const widgetRegistry: Record<
   "vector-addition": {
     label: "Vector addition",
     component: VectorAdditionWidget,
+  },
+  "matrix-multiplication": {
+    label: "Matrix multiplication visualiser",
+    component: MatrixMultiplicationWidget,
   },
 };
 

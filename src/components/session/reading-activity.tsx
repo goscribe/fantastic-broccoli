@@ -15,7 +15,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { InteractiveWidget, WidgetId, widgetRegistry } from "@/components/interactive";
 import { ExpressionGraph } from "@/components/interactive/desmos";
-import { useResolvedFigureUrl } from "@/components/ui/markdown-text";
+import { HtmlWidget } from "@/components/interactive/html-widget";
+import {
+  MathSpan,
+  MathText,
+  splitMathSegments,
+  useResolvedFigureUrl,
+} from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
 import { BookOpen, ArrowRight, Highlighter, Trash2 } from "lucide-react";
 
@@ -158,6 +164,9 @@ function FigureView({ figure }: { figure: ReadingFigure }) {
       />
     );
   }
+  if (figure.type === "html") {
+    return <HtmlWidget html={figure.html} title={figure.title} />;
+  }
   return <ImageFigure figure={figure} />;
 }
 
@@ -192,7 +201,7 @@ export function ReadingBody({ content }: { content: ReadingContent }) {
                 block.level <= 2 ? "text-lg pt-2" : "text-base pt-1",
               )}
             >
-              {block.text}
+              <MathText text={block.text} />
             </h3>
           );
         }
@@ -203,14 +212,16 @@ export function ReadingBody({ content }: { content: ReadingContent }) {
               className="list-disc pl-5 space-y-1.5 text-[15px] leading-7"
             >
               {block.items.map((item, j) => (
-                <li key={j}>{item}</li>
+                <li key={j}>
+                  <MathText text={item} />
+                </li>
               ))}
             </ul>
           );
         }
         return (
           <p key={i} className="text-[15px] leading-7">
-            {block.text}
+            <MathText text={block.text} />
           </p>
         );
       })}
@@ -218,16 +229,29 @@ export function ReadingBody({ content }: { content: ReadingContent }) {
   );
 }
 
+// Maps a DOM position back to an offset in the paragraph's raw text.
+// Rendered math counts as its raw source length (data-math-len) so
+// highlight offsets stay aligned with the underlying text.
 function offsetWithin(paraEl: HTMLElement, node: Node, offset: number): number {
   let total = 0;
-  const walker = document.createTreeWalker(paraEl, NodeFilter.SHOW_TEXT);
-  let current = walker.nextNode();
-  while (current) {
-    if (current === node) return total + offset;
-    total += current.textContent?.length ?? 0;
-    current = walker.nextNode();
-  }
-  return total;
+  const walk = (parent: Node): number | null => {
+    for (const child of Array.from(parent.childNodes)) {
+      if (child === node) return total + offset;
+      if (child instanceof HTMLElement && child.dataset.mathLen) {
+        if (child.contains(node)) return total;
+        total += Number(child.dataset.mathLen);
+        continue;
+      }
+      if (child.nodeType === Node.TEXT_NODE) {
+        total += child.textContent?.length ?? 0;
+        continue;
+      }
+      const found = walk(child);
+      if (found !== null) return found;
+    }
+    return null;
+  };
+  return walk(paraEl) ?? total;
 }
 
 function ParagraphView({
@@ -246,28 +270,41 @@ function ParagraphView({
     .sort((a, b) => a.start - b.start);
 
   const segments: React.ReactNode[] = [];
-  let cursor = 0;
-  for (const h of own) {
-    if (h.start > cursor) segments.push(text.slice(cursor, h.start));
-    segments.push(
-      <mark
-        key={h.id}
-        className={cn(
-          "rounded-sm px-0.5 cursor-pointer transition-colors",
-          colorClasses[h.color],
-          h.note && "underline decoration-dotted underline-offset-2",
-        )}
-        onClick={(e) => {
-          e.stopPropagation();
-          onHighlightClick(h, (e.target as HTMLElement).getBoundingClientRect());
-        }}
-      >
-        {text.slice(h.start, h.end)}
-      </mark>,
-    );
-    cursor = h.end;
+  for (const seg of splitMathSegments(text)) {
+    if (seg.kind === "math") {
+      segments.push(
+        <span key={`m-${seg.start}`} data-math-len={seg.raw.length}>
+          <MathSpan latex={seg.latex} display={seg.display} />
+        </span>,
+      );
+      continue;
+    }
+    let cursor = seg.start;
+    for (const h of own) {
+      const start = Math.max(h.start, seg.start);
+      const end = Math.min(h.end, seg.end);
+      if (end <= start) continue;
+      if (start > cursor) segments.push(text.slice(cursor, start));
+      segments.push(
+        <mark
+          key={`${h.id}-${start}`}
+          className={cn(
+            "rounded-sm px-0.5 cursor-pointer transition-colors",
+            colorClasses[h.color],
+            h.note && "underline decoration-dotted underline-offset-2",
+          )}
+          onClick={(e) => {
+            e.stopPropagation();
+            onHighlightClick(h, (e.target as HTMLElement).getBoundingClientRect());
+          }}
+        >
+          {text.slice(start, end)}
+        </mark>,
+      );
+      cursor = end;
+    }
+    if (cursor < seg.end) segments.push(text.slice(cursor, seg.end));
   }
-  if (cursor < text.length) segments.push(text.slice(cursor));
 
   return (
     <p data-para={para} className="text-[15px] leading-7">
@@ -444,7 +481,7 @@ export function ReadingActivity({
                   block.level <= 2 ? "text-lg pt-2" : "text-base pt-1",
                 )}
               >
-                {block.text}
+                <MathText text={block.text} />
               </h3>
             );
           }
@@ -452,7 +489,9 @@ export function ReadingActivity({
             return (
               <ul key={i} className="list-disc pl-5 space-y-1.5 text-[15px] leading-7">
                 {block.items.map((item, j) => (
-                  <li key={j}>{item}</li>
+                  <li key={j}>
+                  <MathText text={item} />
+                </li>
                 ))}
               </ul>
             );

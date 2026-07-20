@@ -355,3 +355,122 @@ export function HookeWidget() {
     </WidgetFrame>
   );
 }
+
+/* ---------------------- Matrix multiplication ----------------------- */
+
+const randMatrix = (rows: number, cols: number, seedBase: number) =>
+  Array.from({ length: rows }, (_, i) =>
+    Array.from({ length: cols }, (_, j) => ((seedBase + i * 7 + j * 3) % 9) - 4),
+  );
+
+function MatrixView({
+  m,
+  hlRow,
+  hlCol,
+}: {
+  m: number[][];
+  hlRow?: number;
+  hlCol?: number;
+}) {
+  return (
+    <div
+      className="grid gap-1 rounded-lg border border-border p-1.5 bg-card"
+      style={{ gridTemplateColumns: `repeat(${m[0].length}, minmax(0, 1fr))` }}
+    >
+      {m.map((r, i) =>
+        r.map((v, j) => (
+          <div
+            key={`${i}-${j}`}
+            className={`w-8 h-8 grid place-items-center rounded text-sm font-mono ${
+              i === hlRow || j === hlCol
+                ? "bg-accent text-accent-foreground"
+                : "bg-muted"
+            }`}
+          >
+            {v}
+          </div>
+        )),
+      )}
+    </div>
+  );
+}
+
+export function MatrixMultiplicationWidget() {
+  const [size, setSize] = useState(2);
+  const [step, setStep] = useState(0);
+  const a = useMemo(() => randMatrix(size, size, 5), [size]);
+  const b = useMemo(() => randMatrix(size, size, 8), [size]);
+
+  const cells = size * size;
+  const row = Math.floor(step / size);
+  const col = step % size;
+  const terms = a[row].map((v, k) => `${v}×${b[k][col]}`);
+  const value = a[row].reduce((acc, v, k) => acc + v * b[k][col], 0);
+
+  const result = Array.from({ length: size }, (_, i) =>
+    Array.from({ length: size }, (_, j) =>
+      i * size + j <= step
+        ? a[i].reduce((acc, v, k) => acc + v * b[k][j], 0)
+        : NaN,
+    ),
+  );
+
+  return (
+    <WidgetFrame
+      title="Matrix multiplication"
+      hint="Step through: each result cell is a row·column dot product."
+      formula="C_{ij} = \sum_k A_{ik} B_{kj}"
+    >
+      <div className="space-y-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <MatrixView m={a} hlRow={row} />
+          <span className="text-muted-foreground">×</span>
+          <MatrixView m={b} hlCol={col} />
+          <span className="text-muted-foreground">=</span>
+          <div
+            className="grid gap-1 rounded-lg border border-border p-1.5 bg-card"
+            style={{ gridTemplateColumns: `repeat(${size}, minmax(0, 1fr))` }}
+          >
+            {result.map((r, i) =>
+              r.map((v, j) => (
+                <div
+                  key={`${i}-${j}`}
+                  className={`w-8 h-8 grid place-items-center rounded text-sm font-mono ${
+                    i === row && j === col
+                      ? "bg-energy/30 font-semibold"
+                      : "bg-muted"
+                  }`}
+                >
+                  {Number.isNaN(v) ? "·" : v}
+                </div>
+              )),
+            )}
+          </div>
+        </div>
+        <div className="text-sm font-mono text-muted-foreground">
+          C[{row + 1},{col + 1}] = {terms.join(" + ")} ={" "}
+          <span className="text-foreground font-semibold">{value}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <Slider
+            label="Step"
+            value={step + 1}
+            min={1}
+            max={cells}
+            onChange={(v) => setStep(v - 1)}
+          />
+          <Slider
+            label="Size"
+            value={size}
+            min={2}
+            max={3}
+            onChange={(v) => {
+              setSize(v);
+              setStep(0);
+            }}
+          />
+        </div>
+      </div>
+    </WidgetFrame>
+  );
+}

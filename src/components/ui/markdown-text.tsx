@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import katex from "katex";
 import { rpc } from "@/lib/api/study-session";
 
 // Signed-URL cache for figure object keys (keys are permanent; signed URLs
@@ -31,7 +32,102 @@ const BARE_IMAGE_URL =
 const INLINE_RE =
   /(\*\*[^*]+\*\*|\*[^*\s][^*]*\*|`[^`]+`|\[([^\]]+)\]\((https?:\/\/[^)\s]+)\))/g;
 
+// LaTeX math: $$display$$, \[display\], $inline$, \(inline\).
+const MATH_RE =
+  /(\$\$[\s\S]+?\$\$|\\\[[\s\S]+?\\\]|\$[^$\n]+\$|\\\([\s\S]+?\\\))/g;
+
+export function MathSpan({ latex, display }: { latex: string; display: boolean }) {
+  const html = useMemo(
+    () =>
+      katex.renderToString(latex, { throwOnError: false, displayMode: display }),
+    [latex, display],
+  );
+  return (
+    <span
+      className={display ? "block my-2 overflow-x-auto" : undefined}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}
+
+export type MathTextSegment =
+  | { kind: "text"; text: string; start: number; end: number }
+  | {
+      kind: "math";
+      raw: string;
+      latex: string;
+      display: boolean;
+      start: number;
+      end: number;
+    };
+
+/** Splits text into plain-text and LaTeX math segments with raw offsets. */
+export function splitMathSegments(text: string): MathTextSegment[] {
+  const segments: MathTextSegment[] = [];
+  let last = 0;
+  for (const m of text.matchAll(MATH_RE)) {
+    const idx = m.index ?? 0;
+    if (idx > last)
+      segments.push({ kind: "text", text: text.slice(last, idx), start: last, end: idx });
+    const token = m[0];
+    const display = token.startsWith("$$") || token.startsWith("\\[");
+    const latex = token.startsWith("$$")
+      ? token.slice(2, -2)
+      : token.startsWith("$")
+        ? token.slice(1, -1)
+        : token.slice(2, -2);
+    segments.push({
+      kind: "math",
+      raw: token,
+      latex,
+      display,
+      start: idx,
+      end: idx + token.length,
+    });
+    last = idx + token.length;
+  }
+  if (last < text.length)
+    segments.push({ kind: "text", text: text.slice(last), start: last, end: text.length });
+  return segments;
+}
+
+/** Renders text with LaTeX math typeset (no other markdown handling). */
+export function MathText({ text }: { text: string }) {
+  return (
+    <>
+      {splitMathSegments(text).map((seg, i) =>
+        seg.kind === "math" ? (
+          <MathSpan key={i} latex={seg.latex} display={seg.display} />
+        ) : (
+          seg.text
+        ),
+      )}
+    </>
+  );
+}
+
 function renderInline(text: string): React.ReactNode[] {
+  const nodes: React.ReactNode[] = [];
+  let last = 0;
+  let key = 0;
+  for (const m of text.matchAll(MATH_RE)) {
+    const idx = m.index ?? 0;
+    if (idx > last) nodes.push(...renderFormatting(text.slice(last, idx)));
+    const token = m[0];
+    const display = token.startsWith("$$") || token.startsWith("\\[");
+    const latex = token.startsWith("$$")
+      ? token.slice(2, -2)
+      : token.startsWith("$")
+        ? token.slice(1, -1)
+        : token.slice(2, -2);
+    nodes.push(<MathSpan key={`math-${key++}`} latex={latex} display={display} />);
+    last = idx + token.length;
+  }
+  if (last < text.length) nodes.push(...renderFormatting(text.slice(last)));
+  return nodes;
+}
+
+function renderFormatting(text: string): React.ReactNode[] {
   const nodes: React.ReactNode[] = [];
   let last = 0;
   let key = 0;

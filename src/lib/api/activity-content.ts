@@ -124,6 +124,16 @@ function normalizeFigure(raw: Raw): ReadingFigure | null {
       caption: str(raw.caption),
     };
   }
+  if (type === "html") {
+    const html = str(raw.html);
+    if (!html) return null;
+    return {
+      id: str(raw.id),
+      type: "html",
+      title: str(raw.title),
+      html,
+    };
+  }
   return null;
 }
 
