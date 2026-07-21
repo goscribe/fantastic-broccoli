@@ -82,8 +82,8 @@ select,input[type=text],input[type=number]{font:inherit;border:1px solid var(--b
 .viz-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:8px 0;}
 .viz-controls label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted-foreground);}
 .viz-badge{display:inline-flex;align-items:center;border-radius:999px;background:var(--accent-soft);color:var(--accent-dim);font-size:12px;font-weight:500;padding:2px 10px;}
-.text-small{font-size:12px;}
-.text-muted{color:var(--muted-foreground);}</style>`;
+.viz-small{font-size:12px;}
+.viz-muted{color:var(--muted-foreground);}</style>`;
 }
 
 function resizeScript(id: string) {
