@@ -31,6 +31,62 @@ export interface PodcastVoice {
   description: string;
 }
 
+export interface PodcastCharacter {
+  id: string;
+  name: string;
+  voiceId: string;
+  tagline: string;
+  imageUrl: string | null;
+  persona?: string;
+}
+
+/** Local presets mirrored from the server, used when the deployed server
+ * doesn't expose `podcast.getCharacters` yet. */
+const FALLBACK_CHARACTERS: PodcastCharacter[] = [
+  {
+    id: "professor-sage",
+    name: "Professor Sage",
+    voiceId: "onyx",
+    tagline: "Deep-dive lecturer",
+    imageUrl: null,
+  },
+  {
+    id: "nova-spark",
+    name: "Nova",
+    voiceId: "nova",
+    tagline: "Upbeat study buddy",
+    imageUrl: null,
+  },
+  {
+    id: "captain-recall",
+    name: "Captain Recall",
+    voiceId: "echo",
+    tagline: "Quiz-master drills",
+    imageUrl: null,
+  },
+  {
+    id: "luna-fable",
+    name: "Luna",
+    voiceId: "fable",
+    tagline: "Storyteller",
+    imageUrl: null,
+  },
+  {
+    id: "dr-atlas",
+    name: "Dr. Atlas",
+    voiceId: "alloy",
+    tagline: "Structured explainer",
+    imageUrl: null,
+  },
+  {
+    id: "ziggy-volt",
+    name: "Ziggy",
+    voiceId: "shimmer",
+    tagline: "High-energy hype",
+    imageUrl: null,
+  },
+];
+
 interface EpisodeRow {
   id: string;
   title: string;
@@ -69,25 +125,36 @@ export async function fetchPodcastVoices(): Promise<PodcastVoice[]> {
   return (await api.podcast.getAvailableVoices.query()) as PodcastVoice[];
 }
 
+export async function fetchPodcastCharacters(): Promise<PodcastCharacter[]> {
+  try {
+    // `podcast.getCharacters` is newer than the published @goscribe/server types.
+    return await rpc<PodcastCharacter[]>(
+      "podcast.getCharacters",
+      "query",
+      undefined,
+    );
+  } catch {
+    return FALLBACK_CHARACTERS;
+  }
+}
+
 export async function generatePodcastEpisode(input: {
   workspaceId: string;
-  title?: string;
-  userPrompt?: string;
-  hostVoiceId: string;
-  guestVoiceId?: string;
+  character: PodcastCharacter;
 }): Promise<void> {
-  const speakers: { id: string; role: "host" | "guest" }[] = [
-    { id: input.hostVoiceId, role: "host" },
-    ...(input.guestVoiceId
-      ? [{ id: input.guestVoiceId, role: "guest" as const }]
-      : []),
-  ];
   await api.podcast.generateEpisode.mutate({
     workspaceId: input.workspaceId,
     podcastData: {
-      title: input.title?.trim() || undefined,
-      userPrompt: input.userPrompt?.trim() || undefined,
-      speakers,
+      speakers: [
+        {
+          id: input.character.voiceId,
+          role: "host",
+          name: input.character.name,
+          ...(input.character.persona
+            ? { persona: input.character.persona }
+            : {}),
+        },
+      ],
       speed: 1.0,
       generateIntro: true,
       generateOutro: true,
