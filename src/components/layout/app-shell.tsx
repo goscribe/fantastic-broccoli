@@ -3,17 +3,14 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Sidebar } from "@/components/layout/sidebar";
-import { Banner } from "@/components/ui/banner";
 import { TopBar } from "@/components/layout/top-bar";
 import { useAuthUser } from "@/lib/api/auth";
-import { useCredits } from "@/lib/credits";
 import { ScribeMark } from "@/components/graphics/logo";
 import { Loader2 } from "lucide-react";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { loading } = useAuthUser();
-  const credits = useCredits();
   const isSession = /^\/workspace\/[^/]+\/session\//.test(pathname);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -37,24 +34,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     );
   }
 
-  const hasCredits = credits > 0;
-
   if (isSession) {
     return (
       <div className="h-screen flex flex-col overflow-hidden">
         <TopBar showLogo />
-        {!hasCredits && (
-          <div>
-            <Banner
-              variant="warning"
-              action={{ label: "View pricing", href: "/pricing" }}
-              className="rounded-none border-x-0 border-t-0 px-4 sm:px-5"
-            >
-              You&apos;re out of credits. Upgrade to keep generating study
-              sessions.
-            </Banner>
-          </div>
-        )}
         {children}
       </div>
     );
@@ -76,18 +59,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       )}
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         <TopBar onMenuClick={() => setSidebarOpen(true)} />
-        {!hasCredits && (
-          <div>
-            <Banner
-              variant="warning"
-              action={{ label: "View pricing", href: "/pricing" }}
-              className="rounded-none border-x-0 border-t-0 px-4 sm:px-8"
-            >
-              You&apos;re out of credits. Upgrade to keep generating study
-              sessions.
-            </Banner>
-          </div>
-        )}
         {children}
       </div>
     </div>
