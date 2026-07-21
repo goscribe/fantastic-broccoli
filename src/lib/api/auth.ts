@@ -12,7 +12,14 @@ export interface AuthUser {
   profilePicture?: string | null;
 }
 
-const PUBLIC_PATHS = ["/landing", "/login", "/signup", "/forgot-password"];
+const PUBLIC_PATHS = [
+  "/landing",
+  "/login",
+  "/signup",
+  "/forgot-password",
+  "/privacy",
+  "/terms",
+];
 
 /** Returns true when a redirect was initiated. */
 function redirectUnauthenticated(): boolean {

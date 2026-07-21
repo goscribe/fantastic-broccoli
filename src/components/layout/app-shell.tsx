@@ -21,7 +21,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     pathname === "/login" ||
     pathname === "/landing" ||
     pathname === "/signup" ||
-    pathname === "/forgot-password"
+    pathname === "/forgot-password" ||
+    pathname === "/privacy" ||
+    pathname === "/terms"
   ) {
     return <>{children}</>;
   }
