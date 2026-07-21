@@ -71,7 +71,19 @@ function themeStyle(): string {
 body{margin:0;font-family:ui-sans-serif,system-ui,sans-serif;color:var(--foreground);background:var(--card);}
 input[type=range]{accent-color:var(--accent);}
 button{font:inherit;border:1px solid var(--border);border-radius:8px;background:var(--muted);color:var(--foreground);padding:4px 10px;cursor:pointer;}
-button:hover{border-color:var(--border-strong);}</style>`;
+button:hover{border-color:var(--border-strong);}
+button[aria-pressed=true],button.is-selected{background:var(--accent);border-color:var(--accent);color:var(--accent-foreground);}
+select,input[type=text],input[type=number]{font:inherit;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--foreground);padding:4px 8px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
+.viz-stat{display:flex;flex-direction:column;gap:2px;}
+.viz-stat-value{font-size:20px;font-weight:500;font-variant-numeric:tabular-nums;}
+.viz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;}
+.viz-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+.viz-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:8px 0;}
+.viz-controls label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted-foreground);}
+.viz-badge{display:inline-flex;align-items:center;border-radius:999px;background:var(--accent-soft);color:var(--accent-dim);font-size:12px;font-weight:500;padding:2px 10px;}
+.text-small{font-size:12px;}
+.text-muted{color:var(--muted-foreground);}</style>`;
 }
 
 function resizeScript(id: string) {
