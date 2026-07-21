@@ -32,9 +32,23 @@ const BARE_IMAGE_URL =
 const INLINE_RE =
   /(\*\*[^*]+\*\*|\*[^*\s][^*]*\*|`[^`]+`|\[([^\]]+)\]\((https?:\/\/[^)\s]+)\))/g;
 
-// LaTeX math: $$display$$, \[display\], $inline$, \(inline\).
-const MATH_RE =
-  /(\$\$[\s\S]+?\$\$|\\\[[\s\S]+?\\\]|\$[^$\n]+\$|\\\([\s\S]+?\\\))/g;
+// LaTeX math: $$display$$, \[display\], $inline$, \(inline\), plus bare
+// undelimited fragments like `e^{i x}`, `lim_{n→∞}` or `\frac{a}{b}` that
+// generated content sometimes emits without $ delimiters.
+const BARE_MATH_SRC =
+  "[A-Za-z0-9()\\[\\]+\\-=/]*(?:[\\^_]\\{[^{}]*\\}|\\\\[a-zA-Z]+\\{[^{}]*\\})(?:[A-Za-z0-9^_+\\-=/()\\[\\]]|\\{[^{}]*\\}|\\\\[a-zA-Z]+)*";
+const MATH_RE = new RegExp(
+  `(\\$\\$[\\s\\S]+?\\$\\$|\\\\\\[[\\s\\S]+?\\\\\\]|\\$[^$\\n]+\\$|\\\\\\([\\s\\S]+?\\\\\\)|${BARE_MATH_SRC})`,
+  "g",
+);
+
+function parseMathToken(token: string): { latex: string; display: boolean } {
+  if (token.startsWith("$$") || token.startsWith("\\["))
+    return { latex: token.slice(2, -2), display: true };
+  if (token.startsWith("$")) return { latex: token.slice(1, -1), display: false };
+  if (token.startsWith("\\(")) return { latex: token.slice(2, -2), display: false };
+  return { latex: token, display: false };
+}
 
 export function MathSpan({ latex, display }: { latex: string; display: boolean }) {
   const html = useMemo(
@@ -70,12 +84,7 @@ export function splitMathSegments(text: string): MathTextSegment[] {
     if (idx > last)
       segments.push({ kind: "text", text: text.slice(last, idx), start: last, end: idx });
     const token = m[0];
-    const display = token.startsWith("$$") || token.startsWith("\\[");
-    const latex = token.startsWith("$$")
-      ? token.slice(2, -2)
-      : token.startsWith("$")
-        ? token.slice(1, -1)
-        : token.slice(2, -2);
+    const { latex, display } = parseMathToken(token);
     segments.push({
       kind: "math",
       raw: token,
@@ -114,12 +123,7 @@ function renderInline(text: string): React.ReactNode[] {
     const idx = m.index ?? 0;
     if (idx > last) nodes.push(...renderFormatting(text.slice(last, idx)));
     const token = m[0];
-    const display = token.startsWith("$$") || token.startsWith("\\[");
-    const latex = token.startsWith("$$")
-      ? token.slice(2, -2)
-      : token.startsWith("$")
-        ? token.slice(1, -1)
-        : token.slice(2, -2);
+    const { latex, display } = parseMathToken(token);
     nodes.push(<MathSpan key={`math-${key++}`} latex={latex} display={display} />);
     last = idx + token.length;
   }
