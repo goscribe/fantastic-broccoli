@@ -2,9 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
 import {
+  deleteStudyGuide,
   fetchStudyGuides,
   regenerateStudyGuides,
   StudyGuide,
@@ -25,6 +26,7 @@ import {
   ChevronRight,
   Loader2,
   RefreshCw,
+  Trash2,
   XCircle,
 } from "lucide-react";
 
@@ -191,11 +193,15 @@ const SWIPE_THRESHOLD = 60;
 function GuideDeck({
   guides,
   regenerating,
+  deleting,
   onRegenerate,
+  onDelete,
 }: {
   guides: StudyGuide[];
   regenerating: boolean;
+  deleting: boolean;
   onRegenerate: (artifactId?: string) => void;
+  onDelete: (artifactId: string) => void;
 }) {
   const [index, setIndex] = useState(0);
   const [dragX, setDragX] = useState(0);
@@ -235,7 +241,10 @@ function GuideDeck({
     dragStart.current = null;
   };
 
-  const guide = guides[index];
+  // Deleting the last guide can leave the stored index out of range;
+  // render from the clamped value instead of resetting state.
+  const current = Math.min(index, guides.length - 1);
+  const guide = guides[current];
 
   return (
     <div className="space-y-4">
@@ -264,26 +273,42 @@ function GuideDeck({
               Regenerate all
             </button>
           )}
+          <button
+            type="button"
+            disabled={deleting || regenerating}
+            onClick={() => {
+              if (confirm(`Delete "${guide.title}"? This cannot be undone.`))
+                onDelete(guide.artifactId);
+            }}
+            className="flex items-center gap-1.5 rounded-lg border border-border bg-card px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition hover:border-rose/40 hover:bg-rose/10 hover:text-rose disabled:opacity-50"
+          >
+            {deleting ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            ) : (
+              <Trash2 className="h-3.5 w-3.5" />
+            )}
+            Delete
+          </button>
         </div>
         {guides.length > 1 && (
           <div className="flex items-center gap-1">
             <button
               type="button"
               aria-label="Previous guide"
-              disabled={index === 0}
-              onClick={() => goTo(index - 1)}
+              disabled={current === 0}
+              onClick={() => goTo(current - 1)}
               className="rounded-lg border border-border bg-card p-1.5 text-muted-foreground transition hover:bg-muted disabled:opacity-40"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
             <span className="min-w-14 text-center text-xs font-medium text-muted-foreground tabular-nums">
-              {index + 1} / {guides.length}
+              {current + 1} / {guides.length}
             </span>
             <button
               type="button"
               aria-label="Next guide"
-              disabled={index === guides.length - 1}
-              onClick={() => goTo(index + 1)}
+              disabled={current === guides.length - 1}
+              onClick={() => goTo(current + 1)}
               className="rounded-lg border border-border bg-card p-1.5 text-muted-foreground transition hover:bg-muted disabled:opacity-40"
             >
               <ChevronRight className="h-4 w-4" />
@@ -317,7 +342,7 @@ function GuideDeck({
               </div>
               {guides.length > 1 && (
                 <span className="shrink-0 rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold text-accent-dim">
-                  Page {index + 1}
+                  Page {current + 1}
                 </span>
               )}
             </div>
@@ -338,7 +363,7 @@ function GuideDeck({
               onClick={() => goTo(i)}
               className={cn(
                 "h-1.5 rounded-full transition-all",
-                i === index ? "w-6 bg-accent" : "w-1.5 bg-border-strong hover:bg-faint",
+                i === current ? "w-6 bg-accent" : "w-1.5 bg-border-strong hover:bg-faint",
               )}
             />
           ))}
@@ -351,6 +376,7 @@ function GuideDeck({
 export default function WorkspaceGuidePage() {
   const params = useParams();
   const workspaceId = params.id as string;
+  const queryClient = useQueryClient();
 
   const { data: workspace, isLoading: workspaceLoading } = useQuery({
     queryKey: ["workspace", workspaceId],
@@ -377,6 +403,25 @@ export default function WorkspaceGuidePage() {
       toast.success("Study guide regenerated");
     }
   }, [guides, regenerating]);
+
+  const [deleting, setDeleting] = useState(false);
+  const onDelete = useCallback(
+    async (artifactId: string) => {
+      setDeleting(true);
+      try {
+        await deleteStudyGuide(workspaceId, artifactId);
+        await queryClient.invalidateQueries({
+          queryKey: ["study-guides", workspaceId],
+        });
+        toast.success("Study guide deleted");
+      } catch (err) {
+        toastError(err, "Couldn't delete the study guide");
+      } finally {
+        setDeleting(false);
+      }
+    },
+    [workspaceId, queryClient],
+  );
 
   const onRegenerate = useCallback(
     async (artifactId?: string) => {
@@ -428,7 +473,9 @@ export default function WorkspaceGuidePage() {
           <GuideDeck
             guides={guides}
             regenerating={regenerating}
+            deleting={deleting}
             onRegenerate={(artifactId) => void onRegenerate(artifactId)}
+            onDelete={(artifactId) => void onDelete(artifactId)}
           />
         )}
       </div>
