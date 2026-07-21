@@ -72,6 +72,17 @@ function lucideScript(): string {
   );
 }
 
+// KaTeX for LaTeX inside visualizers. Elements with class "math" (inline)
+// or "math-display" (block) are rendered from their text content on load;
+// generated scripts can call window.renderMath() after dynamic updates.
+function katexScript(): string {
+  return (
+    `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">` +
+    `<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>` +
+    `<script>window.renderMath=function(){if(!window.katex)return;document.querySelectorAll(".math,.math-display").forEach(function(el){if(el.dataset.mathRendered)return;el.dataset.mathRendered="1";try{katex.render(el.textContent||"",el,{displayMode:el.classList.contains("math-display"),throwOnError:false});}catch(e){}});};window.addEventListener("load",window.renderMath);</script>`
+  );
+}
+
 function themeStyle(): string {
   const root = getComputedStyle(document.documentElement);
   const vars = THEME_TOKENS.map(
@@ -152,7 +163,7 @@ export function HtmlWidget({ html, title }: HtmlWidgetProps) {
   }, [frameId]);
 
   const srcDoc = useMemo(
-    () => tailwindScript() + lucideScript() + themeStyle() + html + resizeScript(frameId),
+    () => tailwindScript() + lucideScript() + katexScript() + themeStyle() + html + resizeScript(frameId),
     [html, frameId],
   );
 

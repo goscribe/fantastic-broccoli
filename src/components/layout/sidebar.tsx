@@ -20,6 +20,8 @@ import { cn } from "@/lib/utils";
 import {
   Home,
   ChevronRight,
+  FilePlus2,
+  FolderPlus,
   Plus,
   Search,
   X,
@@ -255,14 +257,26 @@ export function Sidebar({
         <div>
             <div className="flex items-center justify-between px-1.5 pb-1">
               <span className="text-xs font-semibold text-faint">Folders</span>
-              <button
-                type="button"
-                aria-label="New folder"
-                onClick={() => setCreating({ kind: "folder" })}
-                className="p-0.5 rounded text-faint hover:text-foreground hover:bg-muted"
-              >
-                <Plus className="h-3.5 w-3.5" />
-              </button>
+              <div className="flex items-center gap-0.5">
+                <button
+                  type="button"
+                  aria-label="New workspace"
+                  title="New workspace"
+                  onClick={() => setCreating({ kind: "workspace" })}
+                  className="p-0.5 rounded text-faint hover:text-foreground hover:bg-muted"
+                >
+                  <FilePlus2 className="h-3.5 w-3.5" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="New folder"
+                  title="New folder"
+                  onClick={() => setCreating({ kind: "folder" })}
+                  className="p-0.5 rounded text-faint hover:text-foreground hover:bg-muted"
+                >
+                  <FolderPlus className="h-3.5 w-3.5" />
+                </button>
+              </div>
             </div>
             <div className="space-y-px">
               {treeLoading &&

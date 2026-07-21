@@ -180,15 +180,23 @@ export async function fetchWorkspace(id: string): Promise<Workspace | undefined>
 export async function createFolder(
   name: string,
   parentId?: string,
+  color?: string,
 ): Promise<void> {
-  await api.workspace.createFolder.mutate({ name, parentId });
+  await api.workspace.createFolder.mutate({ name, parentId, color });
 }
 
 export async function createWorkspace(
   name: string,
   parentId?: string,
+  options?: { description?: string; icon?: string },
 ): Promise<string | undefined> {
-  const ws = await api.workspace.create.mutate({ name, parentId });
+  // `icon` is newer than the published @goscribe/server input types.
+  const ws = await api.workspace.create.mutate({
+    name,
+    parentId,
+    description: options?.description,
+    icon: options?.icon,
+  } as Parameters<typeof api.workspace.create.mutate>[0]);
   return (ws as { id: string }).id;
 }
 
