@@ -62,6 +62,16 @@ function tailwindScript(): string {
   );
 }
 
+// Lucide icon library (same icon set as the app). Markup uses
+// <i data-lucide="name"></i>; createIcons runs on load and is re-runnable
+// from generated scripts after dynamic DOM updates.
+function lucideScript(): string {
+  return (
+    `<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>` +
+    `<script>window.addEventListener("load",function(){if(window.lucide)window.lucide.createIcons();});</script>`
+  );
+}
+
 function themeStyle(): string {
   const root = getComputedStyle(document.documentElement);
   const vars = THEME_TOKENS.map(
@@ -82,8 +92,19 @@ select,input[type=text],input[type=number]{font:inherit;border:1px solid var(--b
 .viz-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:8px 0;}
 .viz-controls label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted-foreground);}
 .viz-badge{display:inline-flex;align-items:center;border-radius:999px;background:var(--accent-soft);color:var(--accent-dim);font-size:12px;font-weight:500;padding:2px 10px;}
-.text-small{font-size:12px;}
-.text-muted{color:var(--muted-foreground);}</style>`;
+.viz-small{font-size:12px;}
+.viz-muted{color:var(--muted-foreground);}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:inherit;font-size:13px;font-weight:500;border:1px solid var(--border);border-radius:8px;background:var(--muted);color:var(--foreground);padding:5px 12px;cursor:pointer;}
+.btn:hover{border-color:var(--border-strong);}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--accent-foreground);}
+.btn-primary:hover{background:var(--accent-dim);border-color:var(--accent-dim);}
+.btn-ghost{background:transparent;border-color:transparent;}
+.btn-ghost:hover{background:var(--muted);border-color:transparent;}
+.form-label{display:block;font-size:13px;color:var(--muted-foreground);margin-bottom:4px;}
+.form-control,.form-select{font:inherit;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--foreground);padding:4px 8px;}
+.form-range{accent-color:var(--accent);width:100%;}
+.separator{border:0;border-top:1px solid var(--border);margin:10px 0;}
+svg.lucide{width:16px;height:16px;stroke-width:2;vertical-align:-2px;}</style>`;
 }
 
 function resizeScript(id: string) {
@@ -131,7 +152,7 @@ export function HtmlWidget({ html, title }: HtmlWidgetProps) {
   }, [frameId]);
 
   const srcDoc = useMemo(
-    () => tailwindScript() + themeStyle() + html + resizeScript(frameId),
+    () => tailwindScript() + lucideScript() + themeStyle() + html + resizeScript(frameId),
     [html, frameId],
   );
 
