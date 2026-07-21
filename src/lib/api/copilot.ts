@@ -34,10 +34,16 @@ export interface CopilotVisualization {
   html: string;
 }
 
+export interface CopilotHighlight {
+  text: string;
+  label?: string;
+}
+
 export interface CopilotAnswer {
   answer: string;
   widgets: string[];
   visualizations: CopilotVisualization[];
+  highlights: CopilotHighlight[];
 }
 
 export async function askCopilot(input: {
@@ -67,6 +73,7 @@ export async function askCopilot(input: {
     visualizations:
       (result as { visualizations?: CopilotVisualization[] }).visualizations ??
       [],
+    highlights: (result as { highlights?: CopilotHighlight[] }).highlights ?? [],
   };
 }
 
@@ -134,6 +141,7 @@ export async function askCopilotStream(
         answer: event.answer,
         widgets: event.widgets ?? [],
         visualizations: event.visualizations ?? [],
+        highlights: event.highlights ?? [],
       };
     else if (event.type === "error") throw new Error(event.message);
   };

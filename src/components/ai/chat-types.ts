@@ -5,7 +5,8 @@ export type ToolName =
   | "search_materials"
   | "update_plan"
   | "add_activity"
-  | "generate_summary";
+  | "generate_summary"
+  | "attach_study_aids";
 
 export interface ToolCallPart {
   kind: "tool";

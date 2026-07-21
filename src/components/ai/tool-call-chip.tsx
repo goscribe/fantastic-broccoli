@@ -10,6 +10,7 @@ import {
   Loader2,
   ChevronDown,
   FileText,
+  Paperclip,
 } from "lucide-react";
 import { Surface } from "@/components/ui/card";
 import { ToolCallPart, ToolName } from "@/components/ai/chat-types";
@@ -19,6 +20,7 @@ const toolMeta: Record<ToolName, { icon: React.ElementType; color: string }> = {
   update_plan: { icon: CalendarClock, color: "text-violet" },
   add_activity: { icon: ListPlus, color: "text-accent" },
   generate_summary: { icon: FileText, color: "text-amber" },
+  attach_study_aids: { icon: Paperclip, color: "text-accent" },
 };
 
 export function ToolCallChip({ part }: { part: ToolCallPart }) {

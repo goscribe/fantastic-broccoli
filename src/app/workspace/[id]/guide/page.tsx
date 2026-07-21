@@ -4,7 +4,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
-import { fetchStudyGuides, StudyGuide } from "@/lib/api/podcast";
+import {
+  fetchStudyGuides,
+  regenerateStudyGuides,
+  StudyGuide,
+} from "@/lib/api/podcast";
+import { toastError } from "@/lib/toast";
+import { toast } from "sonner";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { ReadingBody } from "@/components/session/reading-activity";
@@ -12,7 +18,15 @@ import { normalizeActivityContent } from "@/lib/api/activity-content";
 import type { McqContent, ReadingContent } from "@/types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { BookOpen, CheckCircle2, ChevronLeft, ChevronRight, XCircle } from "lucide-react";
+import {
+  BookOpen,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  Loader2,
+  RefreshCw,
+  XCircle,
+} from "lucide-react";
 
 interface EditorJsBlock {
   id?: string;
@@ -174,7 +188,15 @@ function EditorJsContent({ blocks }: { blocks: EditorJsBlock[] }) {
 
 const SWIPE_THRESHOLD = 60;
 
-function GuideDeck({ guides }: { guides: StudyGuide[] }) {
+function GuideDeck({
+  guides,
+  regenerating,
+  onRegenerate,
+}: {
+  guides: StudyGuide[];
+  regenerating: boolean;
+  onRegenerate: (artifactId?: string) => void;
+}) {
   const [index, setIndex] = useState(0);
   const [dragX, setDragX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -217,8 +239,33 @@ function GuideDeck({ guides }: { guides: StudyGuide[] }) {
 
   return (
     <div className="space-y-4">
-      {guides.length > 1 && (
-        <div className="flex items-center justify-end">
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-1.5">
+          <button
+            type="button"
+            disabled={regenerating}
+            onClick={() => onRegenerate(guide.artifactId)}
+            className="flex items-center gap-1.5 rounded-lg border border-border bg-card px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground disabled:opacity-50"
+          >
+            {regenerating ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            ) : (
+              <RefreshCw className="h-3.5 w-3.5" />
+            )}
+            {regenerating ? "Regenerating…" : "Regenerate this guide"}
+          </button>
+          {guides.length > 1 && (
+            <button
+              type="button"
+              disabled={regenerating}
+              onClick={() => onRegenerate()}
+              className="rounded-lg border border-border bg-card px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground disabled:opacity-50"
+            >
+              Regenerate all
+            </button>
+          )}
+        </div>
+        {guides.length > 1 && (
           <div className="flex items-center gap-1">
             <button
               type="button"
@@ -242,8 +289,8 @@ function GuideDeck({ guides }: { guides: StudyGuide[] }) {
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       <div className="relative mx-auto w-full max-w-2xl pb-3">
         {/* A4 sheets fanned out behind the active one */}
@@ -325,6 +372,8 @@ export default function WorkspaceGuidePage() {
     queryKey: ["workspace", workspaceId],
     queryFn: () => fetchWorkspace(workspaceId),
   });
+  const [regenerating, setRegenerating] = useState(false);
+  const baseline = useRef<string | null>(null);
   const {
     data: guides,
     isLoading: guidesLoading,
@@ -332,7 +381,38 @@ export default function WorkspaceGuidePage() {
   } = useQuery({
     queryKey: ["study-guides", workspaceId],
     queryFn: () => fetchStudyGuides(workspaceId),
+    refetchInterval: regenerating ? 5000 : false,
   });
+
+  // Regeneration runs in the background — poll until the guide content changes.
+  useEffect(() => {
+    if (!regenerating || !guides || baseline.current === null) return;
+    if (JSON.stringify(guides) !== baseline.current) {
+      setRegenerating(false);
+      baseline.current = null;
+      toast.success("Study guide regenerated");
+    }
+  }, [guides, regenerating]);
+
+  const onRegenerate = useCallback(
+    async (artifactId?: string) => {
+      try {
+        baseline.current = JSON.stringify(guides ?? []);
+        setRegenerating(true);
+        await regenerateStudyGuides(workspaceId, artifactId);
+        toast.info(
+          artifactId
+            ? "Regenerating this guide — it will refresh when ready."
+            : "Regenerating all guides — they will refresh when ready.",
+        );
+      } catch (err) {
+        setRegenerating(false);
+        baseline.current = null;
+        toastError(err, "Couldn't start regeneration");
+      }
+    },
+    [workspaceId, guides],
+  );
 
   if (workspaceLoading || guidesLoading) {
     return (
@@ -361,7 +441,11 @@ export default function WorkspaceGuidePage() {
             </p>
           </div>
         ) : (
-          <GuideDeck guides={guides} />
+          <GuideDeck
+            guides={guides}
+            regenerating={regenerating}
+            onRegenerate={(artifactId) => void onRegenerate(artifactId)}
+          />
         )}
       </div>
     </WorkspaceShell>

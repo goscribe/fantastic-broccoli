@@ -14,6 +14,7 @@ import { HtmlWidget } from "@/components/interactive/html-widget";
 import {
   ChatMessage,
   EmbedPart,
+  ToolCallPart,
   suggestions,
 } from "@/components/ai/chat-types";
 import { ToolCallChip } from "@/components/ai/tool-call-chip";
@@ -154,6 +155,32 @@ export function Copilot({
             );
           },
         );
+        const aidBits = [
+          result.visualizations.length &&
+            `${result.visualizations.length} visualization${result.visualizations.length > 1 ? "s" : ""}`,
+          result.widgets.length &&
+            `${result.widgets.length} widget${result.widgets.length > 1 ? "s" : ""}`,
+          result.highlights.length &&
+            `${result.highlights.length} highlight${result.highlights.length > 1 ? "s" : ""}`,
+        ].filter((b): b is string => Boolean(b));
+        const aidDetails = [
+          ...result.visualizations.map((v) => v.title ?? "Custom visualization"),
+          ...result.widgets,
+          ...result.highlights.map((h) => h.label ?? `"${h.text.slice(0, 60)}"`),
+        ].join(" · ");
+        const toolParts: ToolCallPart[] = aidBits.length
+          ? [
+              {
+                kind: "tool",
+                id: nextId(),
+                tool: "attach_study_aids",
+                label: "Attached study aids",
+                args: aidBits.join(" · "),
+                result: aidDetails,
+                status: "done",
+              },
+            ]
+          : [];
         setMessages((prev) =>
           prev.map((m) =>
             m.id === assistantId
@@ -166,6 +193,7 @@ export function Copilot({
                       text: result.answer,
                       done: true,
                     },
+                    ...toolParts,
                     ...result.widgets
                       .filter((id): id is WidgetId => id in widgetRegistry)
                       .map(
