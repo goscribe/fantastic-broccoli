@@ -164,23 +164,23 @@ function GuideDeck({ guides }: { guides: StudyGuide[] }) {
         )}
       </div>
 
-      <div className="relative">
-        {/* layered pages behind the active one */}
-        {guides.slice(index + 1, index + 3).map((g, depth) => (
+      <div className="relative mx-auto w-full max-w-2xl pb-3">
+        {/* A4 sheets fanned out behind the active one */}
+        {guides.slice(index + 1, index + 4).map((g, depth) => (
           <div
             key={g.artifactId}
             aria-hidden
-            className="absolute inset-x-0 top-0 h-full rounded-2xl border border-border bg-card"
+            className="absolute inset-0 rounded-sm border border-border-strong/60 bg-white shadow-md"
             style={{
-              transform: `translateY(${(depth + 1) * 10}px) scale(${1 - (depth + 1) * 0.02})`,
+              transform: `translateY(${(depth + 1) * 5}px) rotate(${(depth % 2 === 0 ? 1 : -1) * (depth + 1) * 0.9}deg)`,
               zIndex: -(depth + 1),
-              opacity: 0.7 - depth * 0.25,
             }}
           />
         ))}
         <article
           className={cn(
-            "relative touch-pan-y select-none rounded-2xl border border-border bg-card px-6 py-6 shadow-sm",
+            "relative flex touch-pan-y select-none flex-col overflow-hidden rounded-sm border border-border-strong/60 bg-white shadow-lg",
+            "aspect-[210/297] w-full",
             guides.length > 1 && "cursor-grab active:cursor-grabbing",
             !isDragging && "transition-transform duration-200",
           )}
@@ -190,24 +190,29 @@ function GuideDeck({ guides }: { guides: StudyGuide[] }) {
           onPointerUp={endDrag}
           onPointerLeave={endDrag}
         >
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <h2 className="text-xl font-semibold">{guide.title}</h2>
-              {guide.topic && (
-                <p className="mt-0.5 text-xs font-medium text-accent-dim">
-                  {guide.topic}
-                </p>
+          <div className="flex-1 overflow-y-auto px-10 py-10 sm:px-12">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h2 className="text-xl font-semibold">{guide.title}</h2>
+                {guide.topic && (
+                  <p className="mt-0.5 text-xs font-medium text-accent-dim">
+                    {guide.topic}
+                  </p>
+                )}
+              </div>
+              {guides.length > 1 && (
+                <span className="shrink-0 rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold text-accent-dim">
+                  Page {index + 1}
+                </span>
               )}
             </div>
-            {guides.length > 1 && (
-              <span className="shrink-0 rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold text-accent-dim">
-                Page {index + 1}
-              </span>
-            )}
+            <div className="mt-5">
+              <GuideContent content={guide.content ?? ""} />
+            </div>
           </div>
-          <div className="mt-4">
-            <GuideContent content={guide.content ?? ""} />
-          </div>
+          <p className="pb-4 text-center text-[10px] tracking-wide text-faint">
+            {index + 1} / {guides.length}
+          </p>
         </article>
       </div>
 
