@@ -15,7 +15,6 @@ import {
   bankItemSummary,
   kindConfig,
 } from "@/components/bank/bank-content";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { formatRelativeDate, cn } from "@/lib/utils";
@@ -101,7 +100,7 @@ function BankItemRow({
   const summary = bankItemSummary(item);
 
   return (
-    <Card className="p-0 overflow-hidden">
+    <div className="overflow-hidden rounded-sm border border-border-strong/60 bg-paper shadow-sm transition-shadow hover:shadow-md">
       <Link
         href={`/workspace/${workspaceId}/bank/${item.id}`}
         className="flex items-start gap-3 p-4 hover:bg-muted/30 transition-colors"
@@ -148,7 +147,7 @@ function BankItemRow({
           <ChevronRight className="h-4 w-4 text-faint" />
         </div>
       </Link>
-    </Card>
+    </div>
   );
 }
 

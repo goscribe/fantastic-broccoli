@@ -15,6 +15,7 @@ import {
   kindConfig,
 } from "@/components/bank/bank-content";
 import { DeckViewer } from "@/components/bank/deck-viewer";
+import { PaperStack } from "@/components/ui/paper-sheet";
 import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { formatRelativeDate, cn } from "@/lib/utils";
@@ -301,7 +302,13 @@ export default function BankItemPage() {
           </div>
         ) : (
           <div className="animate-fade-up">
-            <BankContentPreview kind={item.kind} content={item.content} />
+            <PaperStack
+              depth={2}
+              className="mx-auto w-full max-w-2xl pb-3"
+              sheetClassName="px-8 py-8 sm:px-10 sm:py-10"
+            >
+              <BankContentPreview kind={item.kind} content={item.content} />
+            </PaperStack>
           </div>
         )}
       </div>

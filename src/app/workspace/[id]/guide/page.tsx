@@ -21,6 +21,8 @@ import { cn } from "@/lib/utils";
 import {
   BookOpen,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
   Loader2,
   RefreshCw,
   XCircle,
@@ -184,7 +186,9 @@ function EditorJsContent({ blocks }: { blocks: EditorJsBlock[] }) {
   );
 }
 
-function GuideArticles({
+const SWIPE_THRESHOLD = 60;
+
+function GuideDeck({
   guides,
   regenerating,
   onRegenerate,
@@ -194,33 +198,48 @@ function GuideArticles({
   onRegenerate: (artifactId?: string) => void;
 }) {
   const [index, setIndex] = useState(0);
-  const guide = guides[Math.min(index, guides.length - 1)];
+  const [dragX, setDragX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStart = useRef<number | null>(null);
+
+  const goTo = useCallback(
+    (next: number) => {
+      setIndex(Math.max(0, Math.min(guides.length - 1, next)));
+    },
+    [guides.length],
+  );
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") goTo(index - 1);
+      if (e.key === "ArrowRight") goTo(index + 1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [index, goTo]);
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    dragStart.current = e.clientX;
+    setIsDragging(true);
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!isDragging || dragStart.current === null) return;
+    setDragX(e.clientX - dragStart.current);
+  };
+  const endDrag = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    if (dragX <= -SWIPE_THRESHOLD) goTo(index + 1);
+    else if (dragX >= SWIPE_THRESHOLD) goTo(index - 1);
+    setDragX(0);
+    dragStart.current = null;
+  };
+
+  const guide = guides[index];
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        {guides.length > 1 ? (
-          <div className="flex max-w-full flex-wrap items-center gap-1.5">
-            {guides.map((g, i) => (
-              <button
-                key={g.artifactId}
-                type="button"
-                aria-label={`Open guide: ${g.title}`}
-                onClick={() => setIndex(i)}
-                className={cn(
-                  "max-w-56 truncate rounded-full border px-3 py-1.5 text-xs font-medium transition",
-                  i === index
-                    ? "border-accent bg-accent-soft text-accent-dim"
-                    : "border-border bg-card text-muted-foreground hover:bg-muted hover:text-foreground",
-                )}
-              >
-                {g.topic ?? g.title}
-              </button>
-            ))}
-          </div>
-        ) : (
-          <div />
-        )}
+      <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-1.5">
           <button
             type="button"
@@ -246,21 +265,101 @@ function GuideArticles({
             </button>
           )}
         </div>
+        {guides.length > 1 && (
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              aria-label="Previous guide"
+              disabled={index === 0}
+              onClick={() => goTo(index - 1)}
+              className="rounded-lg border border-border bg-card p-1.5 text-muted-foreground transition hover:bg-muted disabled:opacity-40"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <span className="min-w-14 text-center text-xs font-medium text-muted-foreground tabular-nums">
+              {index + 1} / {guides.length}
+            </span>
+            <button
+              type="button"
+              aria-label="Next guide"
+              disabled={index === guides.length - 1}
+              onClick={() => goTo(index + 1)}
+              className="rounded-lg border border-border bg-card p-1.5 text-muted-foreground transition hover:bg-muted disabled:opacity-40"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        )}
       </div>
 
-      <article className="mx-auto w-full max-w-3xl py-6">
-        <header className="border-b border-border pb-5">
-          <h2 className="text-2xl font-semibold leading-tight">{guide.title}</h2>
-          {guide.topic && (
-            <p className="mt-1 text-sm font-medium text-accent-dim">
-              {guide.topic}
-            </p>
+      <div className="relative mx-auto w-full max-w-2xl pb-3">
+        {/* A4 sheets fanned out behind the active one */}
+        {guides.slice(index + 1, index + 4).map((g, depth) => (
+          <div
+            key={g.artifactId}
+            aria-hidden
+            className="absolute inset-0 rounded-sm border border-border-strong/60 bg-paper shadow-md"
+            style={{
+              transform: `translateY(${(depth + 1) * 5}px) rotate(${(depth % 2 === 0 ? 1 : -1) * (depth + 1) * 0.9}deg)`,
+              zIndex: -(depth + 1),
+            }}
+          />
+        ))}
+        <article
+          className={cn(
+            "relative flex touch-pan-y select-none flex-col overflow-hidden rounded-sm border border-border-strong/60 bg-paper shadow-lg",
+            "aspect-[210/297] w-full",
+            guides.length > 1 && "cursor-grab active:cursor-grabbing",
+            !isDragging && "transition-transform duration-200",
           )}
-        </header>
-        <div className="mt-6">
-          <GuideContent content={guide.content ?? ""} />
+          style={{ transform: `translateX(${dragX}px) rotate(${dragX / 60}deg)` }}
+          onPointerDown={guides.length > 1 ? onPointerDown : undefined}
+          onPointerMove={guides.length > 1 ? onPointerMove : undefined}
+          onPointerUp={endDrag}
+          onPointerLeave={endDrag}
+        >
+          <div className="flex-1 overflow-y-auto px-10 py-10 sm:px-12">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h2 className="text-xl font-semibold">{guide.title}</h2>
+                {guide.topic && (
+                  <p className="mt-0.5 text-xs font-medium text-accent-dim">
+                    {guide.topic}
+                  </p>
+                )}
+              </div>
+              {guides.length > 1 && (
+                <span className="shrink-0 rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold text-accent-dim">
+                  Page {index + 1}
+                </span>
+              )}
+            </div>
+            <div className="mt-5">
+              <GuideContent content={guide.content ?? ""} />
+            </div>
+          </div>
+          <p className="pb-4 text-center text-[10px] tracking-wide text-faint">
+            {index + 1} / {guides.length}
+          </p>
+        </article>
+      </div>
+
+      {guides.length > 1 && (
+        <div className="flex items-center justify-center gap-1.5">
+          {guides.map((g, i) => (
+            <button
+              key={g.artifactId}
+              type="button"
+              aria-label={`Go to guide ${i + 1}: ${g.title}`}
+              onClick={() => goTo(i)}
+              className={cn(
+                "h-1.5 rounded-full transition-all",
+                i === index ? "w-6 bg-accent" : "w-1.5 bg-border-strong hover:bg-faint",
+              )}
+            />
+          ))}
         </div>
-      </article>
+      )}
     </div>
   );
 }
@@ -331,7 +430,7 @@ export default function WorkspaceGuidePage() {
 
   return (
     <WorkspaceShell workspace={workspace}>
-      <div className="animate-fade-up">
+      <div className="animate-fade-up -mx-4 -my-6 min-h-full bg-paper px-4 py-6 sm:-mx-8 sm:-my-8 sm:px-8 sm:py-8">
         {error || !guides || guides.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border py-16 text-center">
             <BookOpen className="h-8 w-8 text-faint" />
@@ -342,7 +441,7 @@ export default function WorkspaceGuidePage() {
             </p>
           </div>
         ) : (
-          <GuideArticles
+          <GuideDeck
             guides={guides}
             regenerating={regenerating}
             onRegenerate={(artifactId) => void onRegenerate(artifactId)}

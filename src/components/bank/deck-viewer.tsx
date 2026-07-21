@@ -68,10 +68,22 @@ export function DeckViewer({
       </p>
 
       <div
-        className="w-full cursor-pointer"
+        className="relative w-full cursor-pointer"
         style={{ perspective: "1000px" }}
         onClick={() => setFlipped((prev) => !prev)}
       >
+        {/* Remaining cards fanned out behind, like the study-guide paper stack */}
+        {entries.slice(index + 1, index + 4).map((_, depth) => (
+          <div
+            key={depth}
+            aria-hidden
+            className="absolute inset-0 rounded-sm border border-border-strong/60 bg-paper shadow-md"
+            style={{
+              transform: `translateY(${(depth + 1) * 5}px) rotate(${(depth % 2 === 0 ? 1 : -1) * (depth + 1) * 0.9}deg)`,
+              zIndex: -(depth + 1),
+            }}
+          />
+        ))}
         <div
           className={`relative transition-transform duration-500 ${
             flipped ? "[transform:rotateY(180deg)]" : ""
@@ -79,7 +91,7 @@ export function DeckViewer({
           style={{ transformStyle: "preserve-3d" }}
         >
           <div
-            className="rounded-2xl border border-border bg-card"
+            className="rounded-sm border border-border-strong/60 bg-paper shadow-lg"
             style={{ backfaceVisibility: "hidden" }}
           >
             <div className="p-10 flex flex-col justify-center items-center min-h-[220px]">
@@ -98,7 +110,7 @@ export function DeckViewer({
           </div>
 
           <div
-            className="absolute inset-0 rounded-2xl border border-border bg-card [transform:rotateY(180deg)]"
+            className="absolute inset-0 rounded-sm border border-border-strong/60 bg-paper shadow-lg [transform:rotateY(180deg)]"
             style={{ backfaceVisibility: "hidden" }}
           >
             <div className="p-10 flex flex-col justify-center items-center min-h-[220px] h-full overflow-y-auto">

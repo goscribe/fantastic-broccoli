@@ -20,6 +20,8 @@ import { cn, formatRelativeDate } from "@/lib/utils";
 import Image from "next/image";
 import {
   AudioLines,
+  ChevronDown,
+  ChevronUp,
   Headphones,
   Loader2,
   Mic,
@@ -130,7 +132,8 @@ function EpisodeCover({
   );
 }
 
-function EpisodeCard({
+/** Spotify-style tracklist row: number, cover thumb, title, meta, expandable chapters. */
+function EpisodeRow({
   episode,
   episodeNumber,
   onDelete,
@@ -142,91 +145,82 @@ function EpisodeCard({
   const [expanded, setExpanded] = useState(false);
   const playable = episode.segments.filter((s) => s.audioUrl);
   const duration = episodeDuration(episode);
+  const canExpand = playable.length > 0 && !episode.generating;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-card">
-      <div className="flex items-stretch gap-4 px-5 py-4">
-        <div className="relative h-24 w-24 shrink-0 sm:h-28 sm:w-28">
+    <div className="group rounded-lg transition-colors hover:bg-muted/50">
+      <div className="flex items-center">
+        <button
+          type="button"
+          disabled={!canExpand}
+          onClick={() => setExpanded((v) => !v)}
+          className="flex min-w-0 flex-1 items-center gap-3 px-3 py-2.5 text-left sm:gap-4 sm:px-4"
+        >
+        <span className="w-5 shrink-0 text-center text-sm tabular-nums text-muted-foreground">
+          {episodeNumber}
+        </span>
+        <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-md">
           <EpisodeCover episode={episode} episodeNumber={episodeNumber} />
           {episode.generating && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-ink/50">
-              <Loader2 className="h-5 w-5 animate-spin text-white" />
-            </div>
+            <span className="absolute inset-0 flex items-center justify-center bg-ink/50">
+              <Loader2 className="h-4 w-4 animate-spin text-white" />
+            </span>
           )}
-        </div>
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-dim">
-              Ep. {episodeNumber}
-            </span>
-            <span className="text-[11px] text-faint">
-              {formatRelativeDate(episode.createdAt)}
-              {duration && ` · ${duration}`}
-            </span>
-          </div>
-          <p className="mt-1.5 truncate text-base font-semibold">
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block truncate text-sm font-semibold">
             {episode.title}
-          </p>
-          {episode.description && (
-            <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
-              {episode.description}
-            </p>
-          )}
-          {episode.generating ? (
-            <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-accent-dim">
-              <AudioLines className="h-3.5 w-3.5 animate-pulse" />
-              Generating episode…
-            </p>
-          ) : (
-            playable.length > 0 && (
-              <p className="mt-2 inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-                <AudioLines className="h-3.5 w-3.5 text-accent" />
-                {playable.length}{" "}
-                {playable.length === 1 ? "chapter" : "chapters"}
-              </p>
-            )
-          )}
-        </div>
+          </span>
+          <span className="mt-0.5 block truncate text-xs text-muted-foreground">
+            {episode.generating ? (
+              <span className="inline-flex items-center gap-1.5 font-medium text-accent-dim">
+                <AudioLines className="h-3 w-3 animate-pulse" />
+                Generating episode…
+              </span>
+            ) : (
+              (episode.description ??
+                `${playable.length} ${playable.length === 1 ? "chapter" : "chapters"}`)
+            )}
+          </span>
+        </span>
+        <span className="hidden shrink-0 text-xs tabular-nums text-muted-foreground sm:block">
+          {formatRelativeDate(episode.createdAt)}
+          {duration && ` · ${duration}`}
+        </span>
+          {canExpand &&
+            (expanded ? (
+              <ChevronUp className="h-4 w-4 shrink-0 text-muted-foreground" />
+            ) : (
+              <ChevronDown className="h-4 w-4 shrink-0 text-faint" />
+            ))}
+        </button>
         <button
           type="button"
           aria-label="Delete episode"
           onClick={onDelete}
-          className="self-start rounded p-1.5 text-faint hover:bg-muted hover:text-rose"
+          className="mr-2 shrink-0 rounded p-1.5 text-faint opacity-0 transition-opacity hover:bg-muted hover:text-rose group-hover:opacity-100"
         >
-          <Trash2 className="h-4 w-4" />
+          <Trash2 className="h-3.5 w-3.5" />
         </button>
       </div>
-      {playable.length > 0 && (
-        <div className="border-t border-border bg-muted/40 px-5 py-3">
-          <div className="space-y-2.5">
-            {(expanded ? playable : playable.slice(0, 1)).map((segment, i) => (
-              <div key={segment.id} className="space-y-1">
-                <p className="text-[11px] font-medium text-muted-foreground">
-                  <span className="mr-1.5 tabular-nums text-faint">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  {segment.title || `Chapter ${i + 1}`}
-                </p>
-                <audio
-                  controls
-                  preload="none"
-                  src={segment.audioUrl ?? undefined}
-                  className="h-9 w-full"
-                />
-              </div>
-            ))}
-          </div>
-          {playable.length > 1 && (
-            <button
-              type="button"
-              onClick={() => setExpanded((v) => !v)}
-              className="mt-2 text-xs font-medium text-accent hover:text-accent-dim"
-            >
-              {expanded
-                ? "Show less"
-                : `Show all ${playable.length} chapters`}
-            </button>
-          )}
+      {expanded && playable.length > 0 && (
+        <div className="space-y-2.5 border-t border-border/60 px-4 py-3 sm:pl-[4.75rem]">
+          {playable.map((segment, i) => (
+            <div key={segment.id} className="space-y-1">
+              <p className="text-[11px] font-medium text-muted-foreground">
+                <span className="mr-1.5 tabular-nums text-faint">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {segment.title || `Chapter ${i + 1}`}
+              </p>
+              <audio
+                controls
+                preload="none"
+                src={segment.audioUrl ?? undefined}
+                className="h-9 w-full"
+              />
+            </div>
+          ))}
         </div>
       )}
     </div>
@@ -310,50 +304,80 @@ export default function WorkspaceRecallPage() {
 
   return (
     <WorkspaceShell workspace={workspace}>
-      <div className="space-y-5 animate-fade-up">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-lg font-semibold">Passive recall</h1>
-            <p className="mt-0.5 text-xs text-muted-foreground">
-              Podcast episodes generated from your materials — listen back to
-              revise passively.
-            </p>
+      <div className="animate-fade-up -mx-4 -my-6 sm:-mx-8 sm:-my-8">
+        {/* Spotify-style show header */}
+        <div className="bg-gradient-to-b from-accent-soft via-accent-soft/40 to-transparent px-4 pb-6 pt-8 sm:px-8">
+          <div className="flex items-end gap-5">
+            <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-bright text-accent-foreground shadow-xl sm:h-40 sm:w-40">
+              <div className="flex flex-col items-center">
+                <Headphones className="h-10 w-10 sm:h-14 sm:w-14" />
+                <span className="mt-1.5 text-[10px] font-bold uppercase tracking-widest opacity-80 sm:text-xs">
+                  Scribe FM
+                </span>
+              </div>
+            </div>
+            <div className="min-w-0 pb-1">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                Podcast
+              </p>
+              <h1 className="mt-1 truncate text-2xl font-extrabold tracking-tight sm:text-4xl">
+                Passive Recall
+              </h1>
+              <p className="mt-1.5 line-clamp-2 text-xs text-muted-foreground sm:text-sm">
+                Episodes generated from {workspace?.title ?? "this workspace"}
+                &apos;s materials — revise while you walk, commute, or wind
+                down.
+              </p>
+              <p className="mt-2 text-xs font-medium text-muted-foreground">
+                {episodes.length}{" "}
+                {episodes.length === 1 ? "episode" : "episodes"}
+              </p>
+            </div>
           </div>
-          <Button size="sm" onClick={() => setShowChooser(true)}>
-            <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-            Generate podcast
-          </Button>
+          <div className="mt-5 flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setShowChooser(true)}
+              className="flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-accent-foreground shadow-md transition hover:scale-[1.03] hover:bg-accent-bright"
+            >
+              <Sparkles className="h-4 w-4" />
+              Generate episode
+            </button>
+          </div>
         </div>
 
-        {episodes.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border py-16 text-center">
-            <Mic className="h-8 w-8 text-faint" />
-            <p className="mt-3 text-sm font-medium">No episodes yet</p>
-            <p className="mt-1 max-w-sm text-xs text-muted-foreground">
-              Generate a podcast episode from this workspace&apos;s materials
-              — revise while you walk, commute, or wind down.
-            </p>
-            <Button
-              size="sm"
-              className="mt-4"
-              onClick={() => setShowChooser(true)}
-            >
-              <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-              Generate podcast
-            </Button>
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {episodes.map((episode, i) => (
-              <EpisodeCard
-                key={episode.id}
-                episode={episode}
-                episodeNumber={episodes.length - i}
-                onDelete={() => remove.mutate(episode.id)}
-              />
-            ))}
-          </div>
-        )}
+        <div className="px-2 pb-8 sm:px-6">
+
+          {episodes.length === 0 ? (
+            <div className="mx-2 flex flex-col items-center justify-center rounded-2xl border border-dashed border-border py-16 text-center">
+              <Mic className="h-8 w-8 text-faint" />
+              <p className="mt-3 text-sm font-medium">No episodes yet</p>
+              <p className="mt-1 max-w-sm text-xs text-muted-foreground">
+                Generate a podcast episode from this workspace&apos;s
+                materials — revise while you walk, commute, or wind down.
+              </p>
+            </div>
+          ) : (
+            <div>
+              <div className="flex items-center gap-3 border-b border-border px-3 pb-2 text-[11px] font-medium uppercase tracking-wide text-faint sm:gap-4 sm:px-4">
+                <span className="w-5 text-center">#</span>
+                <span className="w-12" />
+                <span className="flex-1">Title</span>
+                <span className="hidden sm:block">Released</span>
+              </div>
+              <div className="mt-1 space-y-0.5">
+                {episodes.map((episode, i) => (
+                  <EpisodeRow
+                    key={episode.id}
+                    episode={episode}
+                    episodeNumber={episodes.length - i}
+                    onDelete={() => remove.mutate(episode.id)}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {showChooser && (
