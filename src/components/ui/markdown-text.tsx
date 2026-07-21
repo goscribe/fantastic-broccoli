@@ -38,9 +38,15 @@ const INLINE_RE =
 const BARE_MATH_SRC =
   "[A-Za-z0-9()\\[\\]+\\-=/]*(?:[\\^_]\\{[^{}]*\\}|\\\\[a-zA-Z]+\\{[^{}]*\\})(?:[A-Za-z0-9^_+\\-=/()\\[\\]]|\\{[^{}]*\\}|\\\\[a-zA-Z]+)*";
 const MATH_RE = new RegExp(
-  `(\\$\\$[\\s\\S]+?\\$\\$|\\\\\\[[\\s\\S]+?\\\\\\]|\\$[^$\\n]+\\$|\\\\\\([\\s\\S]+?\\\\\\)|${BARE_MATH_SRC})`,
+  `(\\$\\$[\\s\\S]+?\\$\\$|\\\\\\[[\\s\\S]+?\\\\\\]|(?<!\\\\)\\$(?:\\\\\\$|[^$\\n])+?(?<!\\\\)\\$|\\\\\\([\\s\\S]+?\\\\\\)|${BARE_MATH_SRC})`,
   "g",
 );
+
+// Escaped literal characters like \% \$ \& \# \_ in generated prose render
+// as the character itself rather than showing the backslash.
+function unescapeChars(text: string): string {
+  return text.replace(/\\([%$&#_{}])/g, "$1");
+}
 
 function parseMathToken(token: string): { latex: string; display: boolean } {
   if (token.startsWith("$$") || token.startsWith("\\["))
@@ -58,7 +64,11 @@ export function MathSpan({ latex, display }: { latex: string; display: boolean }
   );
   return (
     <span
-      className={display ? "block my-2 overflow-x-auto" : undefined}
+      className={
+        display
+          ? "block my-2 max-w-full overflow-x-auto"
+          : "inline-block max-w-full overflow-x-auto align-middle"
+      }
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
@@ -108,7 +118,7 @@ export function MathText({ text }: { text: string }) {
         seg.kind === "math" ? (
           <MathSpan key={i} latex={seg.latex} display={seg.display} />
         ) : (
-          seg.text
+          unescapeChars(seg.text)
         ),
       )}
     </>
@@ -131,7 +141,8 @@ function renderInline(text: string): React.ReactNode[] {
   return nodes;
 }
 
-function renderFormatting(text: string): React.ReactNode[] {
+function renderFormatting(rawText: string): React.ReactNode[] {
+  const text = unescapeChars(rawText);
   const nodes: React.ReactNode[] = [];
   let last = 0;
   let key = 0;

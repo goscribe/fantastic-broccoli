@@ -8,6 +8,14 @@ import { Button } from "@/components/ui/button";
 import { signIn } from "@/lib/api/auth";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
 
+function safeRedirect(): string {
+  const target = new URLSearchParams(window.location.search).get("redirect");
+  if (target && target.startsWith("/") && !target.startsWith("//")) {
+    return target;
+  }
+  return "/";
+}
+
 const inputClasses =
   "w-full h-10 rounded-lg border border-border bg-card px-3.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 placeholder:text-faint";
 
@@ -25,7 +33,7 @@ export default function LoginPage() {
     setBusy(true);
     try {
       await signIn(email, password);
-      router.push("/");
+      router.push(safeRedirect());
     } catch (err) {
       setError(err instanceof Error ? err.message : "Sign in failed");
     } finally {
