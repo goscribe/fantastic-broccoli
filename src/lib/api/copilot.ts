@@ -11,21 +11,35 @@ export interface CopilotConversation {
   title: string;
 }
 
+type ListConversationsInput = Parameters<
+  typeof api.copilot.listConversations.query
+>[0];
+type CreateConversationInput = Parameters<
+  typeof api.copilot.createConversation.mutate
+>[0];
+
 export async function listConversations(
   workspaceId: string,
+  studySessionId?: string,
 ): Promise<CopilotConversation[]> {
-  const rows = await api.copilot.listConversations.query({ workspaceId });
+  // studySessionId is newer than the published @goscribe/server types.
+  const rows = await api.copilot.listConversations.query({
+    workspaceId,
+    studySessionId,
+  } as ListConversationsInput);
   return rows.map((r) => ({ id: r.id, title: r.title }));
 }
 
 export async function createConversation(
   workspaceId: string,
   title?: string,
+  studySessionId?: string,
 ): Promise<CopilotConversation> {
   const row = await api.copilot.createConversation.mutate({
     workspaceId,
     title,
-  });
+    studySessionId,
+  } as CreateConversationInput);
   return { id: row.id, title: row.title };
 }
 
@@ -33,6 +47,9 @@ export interface CopilotHistoryMessage {
   id: string;
   role: "user" | "assistant";
   content: string;
+  widgets: string[];
+  visualizations: CopilotVisualization[];
+  highlights: CopilotHighlight[];
 }
 
 export async function getConversationMessages(
@@ -43,11 +60,22 @@ export async function getConversationMessages(
     workspaceId,
     conversationId,
   });
-  return conv.messages.map((m) => ({
-    id: m.id,
-    role: m.role === "user" ? "user" : "assistant",
-    content: m.content,
-  }));
+  // The aids fields are newer than the published @goscribe/server types.
+  return conv.messages.map((m) => {
+    const aids = m as unknown as {
+      widgets?: string[];
+      visualizations?: CopilotVisualization[];
+      highlights?: CopilotHighlight[];
+    };
+    return {
+      id: m.id,
+      role: m.role === "user" ? "user" : "assistant",
+      content: m.content,
+      widgets: aids.widgets ?? [],
+      visualizations: aids.visualizations ?? [],
+      highlights: aids.highlights ?? [],
+    };
+  });
 }
 
 export interface CopilotVisualization {
