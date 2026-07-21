@@ -207,6 +207,18 @@ export async function fetchStudyGuides(
   }
 }
 
+export async function regenerateStudyGuides(
+  workspaceId: string,
+  artifactId?: string,
+): Promise<{ started: boolean; count: number }> {
+  // `studyguide.regenerate` is newer than the published @goscribe/server types.
+  return rpc<{ started: boolean; count: number }>(
+    "studyguide.regenerate",
+    "mutation",
+    { workspaceId, ...(artifactId ? { artifactId } : {}) },
+  );
+}
+
 export async function fetchStudyGuide(
   workspaceId: string,
 ): Promise<StudyGuide> {
