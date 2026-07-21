@@ -248,7 +248,7 @@ function GuideArticles({
         </div>
       </div>
 
-      <article className="mx-auto w-full max-w-3xl rounded-2xl border border-border bg-card px-6 py-8 sm:px-10 sm:py-10">
+      <article className="mx-auto w-full max-w-3xl py-6">
         <header className="border-b border-border pb-5">
           <h2 className="text-2xl font-semibold leading-tight">{guide.title}</h2>
           {guide.topic && (
