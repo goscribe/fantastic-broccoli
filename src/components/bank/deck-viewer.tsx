@@ -68,7 +68,7 @@ export function DeckViewer({
       </p>
 
       <div
-        className="w-full cursor-pointer"
+        className="relative w-full cursor-pointer"
         style={{ perspective: "1000px" }}
         onClick={() => setFlipped((prev) => !prev)}
       >

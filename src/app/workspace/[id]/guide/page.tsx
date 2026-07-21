@@ -293,32 +293,19 @@ function GuideDeck({
       </div>
 
       <div className="relative mx-auto w-full max-w-2xl pb-3">
-        {/* A4 sheets fanned out behind the active one */}
-        {guides.slice(index + 1, index + 4).map((g, depth) => (
-          <div
-            key={g.artifactId}
-            aria-hidden
-            className="absolute inset-0 rounded-sm border border-border-strong/60 bg-white shadow-md"
-            style={{
-              transform: `translateY(${(depth + 1) * 5}px) rotate(${(depth % 2 === 0 ? 1 : -1) * (depth + 1) * 0.9}deg)`,
-              zIndex: -(depth + 1),
-            }}
-          />
-        ))}
         <article
           className={cn(
-            "relative flex touch-pan-y select-none flex-col overflow-hidden rounded-sm border border-border-strong/60 bg-white shadow-lg",
-            "aspect-[210/297] w-full",
+            "relative flex touch-pan-y select-none flex-col",
             guides.length > 1 && "cursor-grab active:cursor-grabbing",
             !isDragging && "transition-transform duration-200",
           )}
-          style={{ transform: `translateX(${dragX}px) rotate(${dragX / 60}deg)` }}
+          style={{ transform: `translateX(${dragX}px)` }}
           onPointerDown={guides.length > 1 ? onPointerDown : undefined}
           onPointerMove={guides.length > 1 ? onPointerMove : undefined}
           onPointerUp={endDrag}
           onPointerLeave={endDrag}
         >
-          <div className="flex-1 overflow-y-auto px-10 py-10 sm:px-12">
+          <div className="flex-1 px-2 py-4 sm:px-4">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h2 className="text-xl font-semibold">{guide.title}</h2>
@@ -338,9 +325,6 @@ function GuideDeck({
               <GuideContent content={guide.content ?? ""} />
             </div>
           </div>
-          <p className="pb-4 text-center text-[10px] tracking-wide text-faint">
-            {index + 1} / {guides.length}
-          </p>
         </article>
       </div>
 
@@ -430,7 +414,7 @@ export default function WorkspaceGuidePage() {
 
   return (
     <WorkspaceShell workspace={workspace}>
-      <div className="animate-fade-up">
+      <div className="animate-fade-up -mx-4 -my-6 min-h-full bg-paper px-4 py-6 sm:-mx-8 sm:-my-8 sm:px-8 sm:py-8">
         {error || !guides || guides.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border py-16 text-center">
             <BookOpen className="h-8 w-8 text-faint" />

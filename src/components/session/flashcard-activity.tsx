@@ -91,9 +91,9 @@ export function FlashcardActivity({
       <button
         type="button"
         onClick={() => setFlipped(!flipped)}
-        className="w-full"
+        className="relative w-full"
       >
-        <Card className="min-h-[160px] flex items-center justify-center cursor-pointer hover:border-accent/20">
+        <span className="relative flex min-h-[160px] w-full cursor-pointer items-center justify-center rounded-2xl border border-border bg-card p-6">
           <div className="text-center px-4">
             {!flipped ? (
               <>
@@ -115,7 +115,7 @@ export function FlashcardActivity({
               </>
             )}
           </div>
-        </Card>
+        </span>
       </button>
 
       {flipped && (
