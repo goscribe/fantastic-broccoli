@@ -1,4 +1,5 @@
 import { api } from "./trpc-client";
+import { rpc } from "./study-session";
 
 /**
  * Data layer for Passive Recall (podcast episodes) and the workspace study
@@ -104,7 +105,39 @@ export async function deletePodcastEpisode(episodeId: string): Promise<void> {
 export interface StudyGuide {
   artifactId: string;
   title: string;
+  topic: string | null;
   content: string | null;
+}
+
+interface GuideRow {
+  artifactId: string;
+  title: string;
+  topic?: string | null;
+  latestVersion: { content: string | null } | null;
+}
+
+function toGuide(row: GuideRow): StudyGuide {
+  return {
+    artifactId: row.artifactId,
+    title: row.title,
+    topic: row.topic ?? null,
+    content: row.latestVersion?.content ?? null,
+  };
+}
+
+export async function fetchStudyGuides(
+  workspaceId: string,
+): Promise<StudyGuide[]> {
+  try {
+    // `studyguide.list` is newer than the published @goscribe/server types.
+    const rows = await rpc<GuideRow[]>("studyguide.list", "query", {
+      workspaceId,
+    });
+    return rows.map(toGuide);
+  } catch {
+    // Older servers only expose studyguide.get — fall back to a single guide.
+    return [await fetchStudyGuide(workspaceId)];
+  }
 }
 
 export async function fetchStudyGuide(
@@ -112,14 +145,6 @@ export async function fetchStudyGuide(
 ): Promise<StudyGuide> {
   const result = (await api.studyguide.get.query({
     workspaceId,
-  })) as unknown as {
-    artifactId: string;
-    title: string;
-    latestVersion: { content: string | null } | null;
-  };
-  return {
-    artifactId: result.artifactId,
-    title: result.title,
-    content: result.latestVersion?.content ?? null,
-  };
+  })) as unknown as GuideRow;
+  return toGuide(result);
 }

@@ -1,13 +1,15 @@
 "use client";
 
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
-import { fetchStudyGuide } from "@/lib/api/podcast";
+import { fetchStudyGuides, StudyGuide } from "@/lib/api/podcast";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { Skeleton } from "@/components/ui/skeleton";
-import { BookOpen } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface EditorJsBlock {
   id?: string;
@@ -81,6 +83,154 @@ function GuideContent({ content }: { content: string }) {
   );
 }
 
+const SWIPE_THRESHOLD = 60;
+
+function GuideDeck({ guides }: { guides: StudyGuide[] }) {
+  const [index, setIndex] = useState(0);
+  const [dragX, setDragX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStart = useRef<number | null>(null);
+
+  const goTo = useCallback(
+    (next: number) => {
+      setIndex(Math.max(0, Math.min(guides.length - 1, next)));
+    },
+    [guides.length],
+  );
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") goTo(index - 1);
+      if (e.key === "ArrowRight") goTo(index + 1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [index, goTo]);
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    dragStart.current = e.clientX;
+    setIsDragging(true);
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!isDragging || dragStart.current === null) return;
+    setDragX(e.clientX - dragStart.current);
+  };
+  const endDrag = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    if (dragX <= -SWIPE_THRESHOLD) goTo(index + 1);
+    else if (dragX >= SWIPE_THRESHOLD) goTo(index - 1);
+    setDragX(0);
+    dragStart.current = null;
+  };
+
+  const guide = guides[index];
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-lg font-semibold">Study guides</h1>
+          <p className="mt-0.5 text-xs text-muted-foreground">
+            {guides.length > 1
+              ? `${guides.length} guides — swipe or use the arrows to flip through.`
+              : "Built automatically from your uploaded materials."}
+          </p>
+        </div>
+        {guides.length > 1 && (
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              aria-label="Previous guide"
+              disabled={index === 0}
+              onClick={() => goTo(index - 1)}
+              className="rounded-lg border border-border bg-card p-1.5 text-muted-foreground transition hover:bg-muted disabled:opacity-40"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <span className="min-w-14 text-center text-xs font-medium text-muted-foreground tabular-nums">
+              {index + 1} / {guides.length}
+            </span>
+            <button
+              type="button"
+              aria-label="Next guide"
+              disabled={index === guides.length - 1}
+              onClick={() => goTo(index + 1)}
+              className="rounded-lg border border-border bg-card p-1.5 text-muted-foreground transition hover:bg-muted disabled:opacity-40"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div className="relative">
+        {/* layered pages behind the active one */}
+        {guides.slice(index + 1, index + 3).map((g, depth) => (
+          <div
+            key={g.artifactId}
+            aria-hidden
+            className="absolute inset-x-0 top-0 h-full rounded-2xl border border-border bg-card"
+            style={{
+              transform: `translateY(${(depth + 1) * 10}px) scale(${1 - (depth + 1) * 0.02})`,
+              zIndex: -(depth + 1),
+              opacity: 0.7 - depth * 0.25,
+            }}
+          />
+        ))}
+        <article
+          className={cn(
+            "relative touch-pan-y select-none rounded-2xl border border-border bg-card px-6 py-6 shadow-sm",
+            guides.length > 1 && "cursor-grab active:cursor-grabbing",
+            !isDragging && "transition-transform duration-200",
+          )}
+          style={{ transform: `translateX(${dragX}px) rotate(${dragX / 60}deg)` }}
+          onPointerDown={guides.length > 1 ? onPointerDown : undefined}
+          onPointerMove={guides.length > 1 ? onPointerMove : undefined}
+          onPointerUp={endDrag}
+          onPointerLeave={endDrag}
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h2 className="text-xl font-semibold">{guide.title}</h2>
+              {guide.topic && (
+                <p className="mt-0.5 text-xs font-medium text-accent-dim">
+                  {guide.topic}
+                </p>
+              )}
+            </div>
+            {guides.length > 1 && (
+              <span className="shrink-0 rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold text-accent-dim">
+                Page {index + 1}
+              </span>
+            )}
+          </div>
+          <div className="mt-4">
+            <GuideContent content={guide.content ?? ""} />
+          </div>
+        </article>
+      </div>
+
+      {guides.length > 1 && (
+        <div className="flex items-center justify-center gap-1.5">
+          {guides.map((g, i) => (
+            <button
+              key={g.artifactId}
+              type="button"
+              aria-label={`Go to guide ${i + 1}: ${g.title}`}
+              onClick={() => goTo(i)}
+              className={cn(
+                "h-1.5 rounded-full transition-all",
+                i === index ? "w-6 bg-accent" : "w-1.5 bg-border-strong hover:bg-faint",
+              )}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function WorkspaceGuidePage() {
   const params = useParams();
   const workspaceId = params.id as string;
@@ -90,15 +240,15 @@ export default function WorkspaceGuidePage() {
     queryFn: () => fetchWorkspace(workspaceId),
   });
   const {
-    data: guide,
-    isLoading: guideLoading,
+    data: guides,
+    isLoading: guidesLoading,
     error,
   } = useQuery({
-    queryKey: ["study-guide", workspaceId],
-    queryFn: () => fetchStudyGuide(workspaceId),
+    queryKey: ["study-guides", workspaceId],
+    queryFn: () => fetchStudyGuides(workspaceId),
   });
 
-  if (workspaceLoading || guideLoading) {
+  if (workspaceLoading || guidesLoading) {
     return (
       <WorkspaceShell workspace={workspace} loading>
         <div className="space-y-4">
@@ -115,22 +265,17 @@ export default function WorkspaceGuidePage() {
   return (
     <WorkspaceShell workspace={workspace}>
       <div className="animate-fade-up">
-        {error || !guide ? (
+        {error || !guides || guides.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border py-16 text-center">
             <BookOpen className="h-8 w-8 text-faint" />
-            <p className="mt-3 text-sm font-medium">No study guide yet</p>
+            <p className="mt-3 text-sm font-medium">No study guides yet</p>
             <p className="mt-1 max-w-sm text-xs text-muted-foreground">
-              Upload materials in the Materials tab — Scribe builds a study
-              guide from them automatically.
+              Upload materials in the Materials tab — Scribe builds study
+              guides from them automatically.
             </p>
           </div>
         ) : (
-          <article className="rounded-2xl border border-border bg-card px-6 py-6">
-            <h1 className="text-xl font-semibold">{guide.title}</h1>
-            <div className="mt-4">
-              <GuideContent content={guide.content ?? ""} />
-            </div>
-          </article>
+          <GuideDeck guides={guides} />
         )}
       </div>
     </WorkspaceShell>
