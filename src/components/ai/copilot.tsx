@@ -20,6 +20,7 @@ import { ToolCallChip } from "@/components/ai/tool-call-chip";
 import {
   askCopilotStream,
   createConversation,
+  getConversationMessages,
   listConversations,
 } from "@/lib/api/copilot";
 import { MarkdownText } from "@/components/ui/markdown-text";
@@ -51,6 +52,7 @@ export function Copilot({
   const [chats, setChats] = useState<ChatTab[]>([]);
   const [activeChat, setActiveChat] = useState<string | null>(null);
   const [chatsLoading, setChatsLoading] = useState(true);
+  const loadedChats = useRef(new Set<string>());
 
   useEffect(() => {
     listConversations(workspaceId)
@@ -61,6 +63,27 @@ export function Copilot({
       .catch(() => {})
       .finally(() => setChatsLoading(false));
   }, [workspaceId]);
+
+  // Hydrate persisted history the first time a conversation becomes active.
+  useEffect(() => {
+    if (!activeChat || loadedChats.current.has(activeChat)) return;
+    loadedChats.current.add(activeChat);
+    getConversationMessages(workspaceId, activeChat)
+      .then((history) => {
+        const hydrated: ChatMessage[] = history.map((m) => ({
+          id: `hist-${m.id}`,
+          chatId: activeChat,
+          role: m.role,
+          parts: [{ kind: "text", id: `hist-part-${m.id}`, text: m.content, done: true }],
+        }));
+        if (!hydrated.length) return;
+        // Prepend history; any messages sent while hydrating are newer and stay.
+        setMessages((prev) => [...hydrated, ...prev]);
+      })
+      .catch(() => {
+        loadedChats.current.delete(activeChat);
+      });
+  }, [activeChat, workspaceId]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [width, setWidth] = useState(0);
