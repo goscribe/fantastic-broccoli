@@ -25,6 +25,7 @@ import {
   Mic,
   Sparkles,
   Trash2,
+  X,
 } from "lucide-react";
 
 const COVER_GRADIENTS = [
@@ -236,6 +237,7 @@ export default function WorkspaceRecallPage() {
   const params = useParams();
   const workspaceId = params.id as string;
   const queryClient = useQueryClient();
+  const [showChooser, setShowChooser] = useState(false);
   const [selectedCharacterId, setSelectedCharacterId] = useState<string | null>(
     null,
   );
@@ -265,6 +267,7 @@ export default function WorkspaceRecallPage() {
     mutationFn: generatePodcastEpisode,
     onSuccess: () => {
       toast.success("Podcast generation started — this takes a few minutes");
+      setShowChooser(false);
       queryClient.invalidateQueries({
         queryKey: ["podcast-episodes", workspaceId],
       });
@@ -308,53 +311,18 @@ export default function WorkspaceRecallPage() {
   return (
     <WorkspaceShell workspace={workspace}>
       <div className="space-y-5 animate-fade-up">
-        <div>
-          <h1 className="text-lg font-semibold">Passive recall</h1>
-          <p className="mt-0.5 text-xs text-muted-foreground">
-            Podcast episodes generated from your materials — listen back to
-            revise passively.
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-border bg-card p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-accent-dim">
-            Pick your host
-          </p>
-          <div className="mt-3 flex gap-3 overflow-x-auto pb-1">
-            {characters.map((character, i) => (
-              <CharacterCard
-                key={character.id}
-                character={character}
-                index={i}
-                selected={selectedCharacter?.id === character.id}
-                onSelect={() => setSelectedCharacterId(character.id)}
-              />
-            ))}
-          </div>
-          <div className="mt-4 flex items-center justify-between gap-3">
-            <p className="min-w-0 truncate text-xs text-muted-foreground">
-              {selectedCharacter
-                ? `${selectedCharacter.name} — ${selectedCharacter.tagline}`
-                : "Loading hosts…"}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-lg font-semibold">Passive recall</h1>
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              Podcast episodes generated from your materials — listen back to
+              revise passively.
             </p>
-            <Button
-              size="sm"
-              onClick={startGeneration}
-              disabled={generate.isPending || !selectedCharacter}
-            >
-              {generate.isPending ? (
-                <>
-                  <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
-                  Starting…
-                </>
-              ) : (
-                <>
-                  <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                  Generate podcast
-                </>
-              )}
-            </Button>
           </div>
+          <Button size="sm" onClick={() => setShowChooser(true)}>
+            <Sparkles className="h-3.5 w-3.5 mr-1.5" />
+            Generate podcast
+          </Button>
         </div>
 
         {episodes.length === 0 ? (
@@ -362,10 +330,17 @@ export default function WorkspaceRecallPage() {
             <Mic className="h-8 w-8 text-faint" />
             <p className="mt-3 text-sm font-medium">No episodes yet</p>
             <p className="mt-1 max-w-sm text-xs text-muted-foreground">
-              Pick a host above and generate a podcast episode from this
-              workspace&apos;s materials — revise while you walk, commute, or
-              wind down.
+              Generate a podcast episode from this workspace&apos;s materials
+              — revise while you walk, commute, or wind down.
             </p>
+            <Button
+              size="sm"
+              className="mt-4"
+              onClick={() => setShowChooser(true)}
+            >
+              <Sparkles className="h-3.5 w-3.5 mr-1.5" />
+              Generate podcast
+            </Button>
           </div>
         ) : (
           <div className="space-y-3">
@@ -381,6 +356,64 @@ export default function WorkspaceRecallPage() {
         )}
       </div>
 
+      {showChooser && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
+          onClick={() => setShowChooser(false)}
+        >
+          <div
+            className="w-full max-w-lg rounded-2xl border border-border bg-card p-5"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-semibold">Pick your host</h2>
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={() => setShowChooser(false)}
+                className="rounded p-1 text-faint hover:bg-muted hover:text-foreground"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="mt-4 grid grid-cols-3 gap-3">
+              {characters.map((character, i) => (
+                <CharacterCard
+                  key={character.id}
+                  character={character}
+                  index={i}
+                  selected={selectedCharacter?.id === character.id}
+                  onSelect={() => setSelectedCharacterId(character.id)}
+                />
+              ))}
+            </div>
+            <div className="mt-4 flex items-center justify-between gap-3">
+              <p className="min-w-0 truncate text-xs text-muted-foreground">
+                {selectedCharacter
+                  ? `${selectedCharacter.name} — ${selectedCharacter.tagline}`
+                  : "Loading hosts…"}
+              </p>
+              <Button
+                size="sm"
+                onClick={startGeneration}
+                disabled={generate.isPending || !selectedCharacter}
+              >
+                {generate.isPending ? (
+                  <>
+                    <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
+                    Starting…
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="h-3.5 w-3.5 mr-1.5" />
+                    Generate podcast
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </WorkspaceShell>
   );
 }
