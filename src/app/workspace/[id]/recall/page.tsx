@@ -15,8 +15,10 @@ import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { toast, toastError } from "@/lib/toast";
-import { formatRelativeDate } from "@/lib/utils";
+import { cn, formatRelativeDate } from "@/lib/utils";
+import Image from "next/image";
 import {
+  AudioLines,
   Headphones,
   Loader2,
   Mic,
@@ -25,6 +27,13 @@ import {
   X,
 } from "lucide-react";
 
+const COVER_GRADIENTS = [
+  "from-accent to-accent-bright",
+  "from-violet to-sky",
+  "from-rose to-amber",
+  "from-sky to-accent-bright",
+];
+
 function episodeDuration(episode: PodcastEpisode): string | null {
   const total = episode.segments.reduce((sum, s) => sum + (s.duration ?? 0), 0);
   if (!total) return null;
@@ -32,11 +41,47 @@ function episodeDuration(episode: PodcastEpisode): string | null {
   return mins < 1 ? "<1 min" : `${mins} min`;
 }
 
+function EpisodeCover({
+  episode,
+  episodeNumber,
+}: {
+  episode: PodcastEpisode;
+  episodeNumber: number;
+}) {
+  if (episode.imageUrl) {
+    return (
+      <Image
+        src={episode.imageUrl}
+        alt=""
+        width={112}
+        height={112}
+        unoptimized
+        className="h-full w-full rounded-xl object-cover"
+      />
+    );
+  }
+  return (
+    <div
+      className={cn(
+        "flex h-full w-full flex-col items-center justify-center rounded-xl bg-gradient-to-br text-accent-foreground",
+        COVER_GRADIENTS[(episodeNumber - 1) % COVER_GRADIENTS.length],
+      )}
+    >
+      <Headphones className="h-7 w-7" />
+      <span className="mt-1 text-[10px] font-bold uppercase tracking-widest opacity-80">
+        Scribe FM
+      </span>
+    </div>
+  );
+}
+
 function EpisodeCard({
   episode,
+  episodeNumber,
   onDelete,
 }: {
   episode: PodcastEpisode;
+  episodeNumber: number;
   onDelete: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
@@ -44,64 +89,87 @@ function EpisodeCard({
   const duration = episodeDuration(episode);
 
   return (
-    <div className="rounded-2xl border border-border bg-card px-5 py-4">
-      <div className="flex items-start gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-dim">
-          <Headphones className="h-5 w-5" />
+    <div className="overflow-hidden rounded-2xl border border-border bg-card">
+      <div className="flex items-stretch gap-4 px-5 py-4">
+        <div className="relative h-24 w-24 shrink-0 sm:h-28 sm:w-28">
+          <EpisodeCover episode={episode} episodeNumber={episodeNumber} />
+          {episode.generating && (
+            <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-ink/50">
+              <Loader2 className="h-5 w-5 animate-spin text-white" />
+            </div>
+          )}
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-semibold">{episode.title}</p>
+          <div className="flex items-center gap-2">
+            <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-dim">
+              Ep. {episodeNumber}
+            </span>
+            <span className="text-[11px] text-faint">
+              {formatRelativeDate(episode.createdAt)}
+              {duration && ` · ${duration}`}
+            </span>
+          </div>
+          <p className="mt-1.5 truncate text-base font-semibold">
+            {episode.title}
+          </p>
           {episode.description && (
             <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
               {episode.description}
             </p>
           )}
-          <p className="mt-1 text-[11px] text-faint">
-            {formatRelativeDate(episode.createdAt)}
-            {duration && ` · ${duration}`}
-            {episode.generating && " · generating…"}
-          </p>
-        </div>
-        <div className="flex items-center gap-1">
-          {episode.generating && (
-            <Loader2 className="h-4 w-4 animate-spin text-accent" />
+          {episode.generating ? (
+            <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-accent-dim">
+              <AudioLines className="h-3.5 w-3.5 animate-pulse" />
+              Generating episode…
+            </p>
+          ) : (
+            playable.length > 0 && (
+              <p className="mt-2 inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                <AudioLines className="h-3.5 w-3.5 text-accent" />
+                {playable.length}{" "}
+                {playable.length === 1 ? "chapter" : "chapters"}
+              </p>
+            )
           )}
-          <button
-            type="button"
-            aria-label="Delete episode"
-            onClick={onDelete}
-            className="rounded p-1.5 text-faint hover:bg-muted hover:text-rose"
-          >
-            <Trash2 className="h-4 w-4" />
-          </button>
         </div>
+        <button
+          type="button"
+          aria-label="Delete episode"
+          onClick={onDelete}
+          className="self-start rounded p-1.5 text-faint hover:bg-muted hover:text-rose"
+        >
+          <Trash2 className="h-4 w-4" />
+        </button>
       </div>
       {playable.length > 0 && (
-        <div className="mt-3 space-y-2">
-          {(expanded ? playable : playable.slice(0, 1)).map((segment, i) => (
-            <div key={segment.id} className="space-y-1">
-              {playable.length > 1 && (
+        <div className="border-t border-border bg-muted/40 px-5 py-3">
+          <div className="space-y-2.5">
+            {(expanded ? playable : playable.slice(0, 1)).map((segment, i) => (
+              <div key={segment.id} className="space-y-1">
                 <p className="text-[11px] font-medium text-muted-foreground">
-                  {segment.title || `Segment ${i + 1}`}
+                  <span className="mr-1.5 tabular-nums text-faint">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {segment.title || `Chapter ${i + 1}`}
                 </p>
-              )}
-              <audio
-                controls
-                preload="none"
-                src={segment.audioUrl ?? undefined}
-                className="h-9 w-full"
-              />
-            </div>
-          ))}
+                <audio
+                  controls
+                  preload="none"
+                  src={segment.audioUrl ?? undefined}
+                  className="h-9 w-full"
+                />
+              </div>
+            ))}
+          </div>
           {playable.length > 1 && (
             <button
               type="button"
               onClick={() => setExpanded((v) => !v)}
-              className="text-xs font-medium text-accent hover:text-accent-dim"
+              className="mt-2 text-xs font-medium text-accent hover:text-accent-dim"
             >
               {expanded
                 ? "Show less"
-                : `Show all ${playable.length} segments`}
+                : `Show all ${playable.length} chapters`}
             </button>
           )}
         </div>
@@ -213,10 +281,11 @@ export default function WorkspaceRecallPage() {
           </div>
         ) : (
           <div className="space-y-3">
-            {episodes.map((episode) => (
+            {episodes.map((episode, i) => (
               <EpisodeCard
                 key={episode.id}
                 episode={episode}
+                episodeNumber={episodes.length - i}
                 onDelete={() => remove.mutate(episode.id)}
               />
             ))}
