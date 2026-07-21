@@ -93,19 +93,7 @@ export function FlashcardActivity({
         onClick={() => setFlipped(!flipped)}
         className="relative w-full"
       >
-        {/* Remaining cards fanned out behind, like the study-guide paper stack */}
-        {content.cards.slice(currentIndex + 1, currentIndex + 4).map((_, depth) => (
-          <span
-            key={depth}
-            aria-hidden
-            className="absolute inset-0 rounded-sm border border-border-strong/60 bg-paper shadow-md"
-            style={{
-              transform: `translateY(${(depth + 1) * 5}px) rotate(${(depth % 2 === 0 ? 1 : -1) * (depth + 1) * 0.9}deg)`,
-              zIndex: -(depth + 1),
-            }}
-          />
-        ))}
-        <span className="relative flex min-h-[160px] w-full cursor-pointer items-center justify-center rounded-sm border border-border-strong/60 bg-paper p-6 shadow-lg">
+        <span className="relative flex min-h-[160px] w-full cursor-pointer items-center justify-center rounded-2xl border border-border bg-card p-6">
           <div className="text-center px-4">
             {!flipped ? (
               <>

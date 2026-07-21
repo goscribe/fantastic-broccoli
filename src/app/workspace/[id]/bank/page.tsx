@@ -100,7 +100,7 @@ function BankItemRow({
   const summary = bankItemSummary(item);
 
   return (
-    <div className="overflow-hidden rounded-sm border border-border-strong/60 bg-paper shadow-sm transition-shadow hover:shadow-md">
+    <div className="overflow-hidden rounded-2xl border border-border bg-card transition-shadow hover:shadow-sm">
       <Link
         href={`/workspace/${workspaceId}/bank/${item.id}`}
         className="flex items-start gap-3 p-4 hover:bg-muted/30 transition-colors"
