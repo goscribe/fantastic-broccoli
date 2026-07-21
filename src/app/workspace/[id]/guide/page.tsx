@@ -7,9 +7,12 @@ import { fetchWorkspace } from "@/lib/api/workspace";
 import { fetchStudyGuides, StudyGuide } from "@/lib/api/podcast";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import { ReadingBody } from "@/components/session/reading-activity";
+import { normalizeActivityContent } from "@/lib/api/activity-content";
+import type { McqContent, ReadingContent } from "@/types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
+import { BookOpen, CheckCircle2, ChevronLeft, ChevronRight, XCircle } from "lucide-react";
 
 interface EditorJsBlock {
   id?: string;
@@ -17,25 +20,111 @@ interface EditorJsBlock {
   data: { text?: string; level?: number; items?: unknown[] };
 }
 
-function parseEditorJsBlocks(content: string): EditorJsBlock[] | null {
-  try {
-    const parsed = JSON.parse(content) as { blocks?: EditorJsBlock[] };
-    if (parsed && Array.isArray(parsed.blocks)) return parsed.blocks;
-  } catch {
-    // not EditorJS JSON — treat as markdown
-  }
-  return null;
-}
-
 function stripHtml(text: string): string {
   return text.replace(/<[^>]+>/g, "");
 }
 
+function MiniQuiz({ questions }: { questions: McqContent["questions"] }) {
+  const [picked, setPicked] = useState<Record<number, number>>({});
+  return (
+    <div className="mt-8 space-y-3 border-t border-border pt-6">
+      <p className="text-xs font-semibold uppercase tracking-wide text-accent-dim">
+        Check yourself
+      </p>
+      {questions.map((q, i) => {
+        const chosen = picked[i];
+        return (
+          <div key={i} className="rounded-xl border border-border bg-muted/20 px-3.5 py-3">
+            <p className="text-[13px] font-medium leading-5">
+              <span className="mr-1.5 text-faint">{i + 1}.</span>
+              <MarkdownText text={q.question} />
+            </p>
+            <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
+              {q.options.map((option, j) => {
+                const isChosen = chosen === j;
+                const isCorrect = j === q.correctIndex;
+                return (
+                  <button
+                    key={j}
+                    type="button"
+                    onClick={() => setPicked((p) => ({ ...p, [i]: j }))}
+                    className={cn(
+                      "flex items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-left text-xs leading-5 transition",
+                      chosen === undefined
+                        ? "border-border bg-card hover:bg-muted/40"
+                        : isCorrect
+                          ? "border-energy/40 bg-energy/10 font-semibold"
+                          : isChosen
+                            ? "border-rose/40 bg-rose/10"
+                            : "border-border text-muted-foreground",
+                    )}
+                  >
+                    <span className="font-semibold">{String.fromCharCode(65 + j)}.</span>
+                    <span className="min-w-0 flex-1">
+                      <MarkdownText text={option} />
+                    </span>
+                    {chosen !== undefined && isCorrect && (
+                      <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-energy" />
+                    )}
+                    {chosen !== undefined && isChosen && !isCorrect && (
+                      <XCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-rose" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+            {chosen !== undefined && q.explanation && (
+              <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+                <MarkdownText text={q.explanation} />
+              </p>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function GuideContent({ content }: { content: string }) {
-  const blocks = parseEditorJsBlocks(content);
-  if (!blocks) {
-    return <MarkdownText text={content} className="space-y-3" />;
+  let parsedJson: Record<string, unknown> | null = null;
+  try {
+    const parsed = JSON.parse(content) as unknown;
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+      parsedJson = parsed as Record<string, unknown>;
+    }
+  } catch {
+    // plain markdown
   }
+
+  if (!parsedJson) {
+    const reading = normalizeActivityContent("reading", { text: content });
+    return <ReadingBody content={reading as ReadingContent} />;
+  }
+
+  if (!Array.isArray(parsedJson.blocks)) {
+    // Reading-shaped guide content: markdown text, embedded figures/widgets,
+    // and an optional mini-quiz under `questions`.
+    const reading = normalizeActivityContent(
+      "reading",
+      parsedJson,
+    ) as ReadingContent;
+    const quiz = Array.isArray(parsedJson.questions)
+      ? (normalizeActivityContent("mcq", parsedJson) as McqContent)
+      : null;
+    return (
+      <div>
+        <ReadingBody content={reading} />
+        {quiz && quiz.questions.length > 0 && (
+          <MiniQuiz questions={quiz.questions} />
+        )}
+      </div>
+    );
+  }
+
+  return <EditorJsContent blocks={parsedJson.blocks as EditorJsBlock[]} />;
+}
+
+function EditorJsContent({ blocks }: { blocks: EditorJsBlock[] }) {
   return (
     <div className="space-y-3">
       {blocks.map((block, i) => {
@@ -128,16 +217,8 @@ function GuideDeck({ guides }: { guides: StudyGuide[] }) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-lg font-semibold">Study guides</h1>
-          <p className="mt-0.5 text-xs text-muted-foreground">
-            {guides.length > 1
-              ? `${guides.length} guides — swipe or use the arrows to flip through.`
-              : "Built automatically from your uploaded materials."}
-          </p>
-        </div>
-        {guides.length > 1 && (
+      {guides.length > 1 && (
+        <div className="flex items-center justify-end">
           <div className="flex items-center gap-1">
             <button
               type="button"
@@ -161,8 +242,8 @@ function GuideDeck({ guides }: { guides: StudyGuide[] }) {
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className="relative mx-auto w-full max-w-2xl pb-3">
         {/* A4 sheets fanned out behind the active one */}
