@@ -58,6 +58,28 @@ function formatAudioDuration(seconds: number) {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
+interface SpeechRecognitionLike {
+  continuous: boolean;
+  interimResults: boolean;
+  onresult: ((event: SpeechRecognitionEventLike) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+}
+
+interface SpeechRecognitionEventLike {
+  results: ArrayLike<{ 0: { transcript: string }; isFinal: boolean }>;
+}
+
+function createSpeechRecognition(): SpeechRecognitionLike | null {
+  const w = window as unknown as {
+    SpeechRecognition?: new () => SpeechRecognitionLike;
+    webkitSpeechRecognition?: new () => SpeechRecognitionLike;
+  };
+  const Ctor = w.SpeechRecognition ?? w.webkitSpeechRecognition;
+  return Ctor ? new Ctor() : null;
+}
+
 function RecorderCard({
   onStop,
   onError,
@@ -69,6 +91,8 @@ function RecorderCard({
   const secondsRef = useRef(0);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
+  const [liveTranscript, setLiveTranscript] = useState("");
+  const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
 
   useEffect(() => {
     let tick: ReturnType<typeof setInterval>;
@@ -86,10 +110,47 @@ function RecorderCard({
           secondsRef.current += 1;
           setSeconds(secondsRef.current);
         }, 1000);
+
+        // Live preview via the Web Speech API (Chrome); the authoritative
+        // transcript still comes from server-side transcription on upload.
+        const recognition = createSpeechRecognition();
+        if (recognition) {
+          recognitionRef.current = recognition;
+          recognition.continuous = true;
+          recognition.interimResults = true;
+          let finals = "";
+          recognition.onresult = (event) => {
+            let interim = "";
+            finals = "";
+            for (let i = 0; i < event.results.length; i++) {
+              const r = event.results[i];
+              if (r.isFinal) finals += r[0].transcript;
+              else interim += r[0].transcript;
+            }
+            setLiveTranscript((finals + interim).trim());
+          };
+          recognition.onend = () => {
+            // Chrome stops recognition after silence; keep it running while
+            // the recorder is active.
+            if (mediaRecorderRef.current?.state === "recording") {
+              try {
+                recognition.start();
+              } catch {
+                /* already restarted */
+              }
+            }
+          };
+          try {
+            recognition.start();
+          } catch {
+            recognitionRef.current = null;
+          }
+        }
       })
       .catch(() => onError("Microphone access denied"));
     return () => {
       clearInterval(tick);
+      recognitionRef.current?.stop();
       mediaRecorderRef.current?.stream
         .getTracks()
         .forEach((t) => t.stop());
@@ -117,6 +178,7 @@ function RecorderCard({
               onStop(secondsRef.current, null);
               return;
             }
+            recognitionRef.current?.stop();
             recorder.onstop = () => {
               const blob = new Blob(chunksRef.current, {
                 type: recorder.mimeType || "audio/webm",
@@ -143,6 +205,17 @@ function RecorderCard({
           />
         ))}
       </div>
+
+      {liveTranscript && (
+        <div className="mt-3 max-h-24 overflow-y-auto rounded-lg bg-muted/40 px-3 py-2">
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            {liveTranscript}
+          </p>
+          <p className="mt-1 text-[10px] text-faint">
+            Live preview — the full transcript is generated after upload.
+          </p>
+        </div>
+      )}
     </Card>
   );
 }
