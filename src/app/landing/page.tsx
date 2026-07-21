@@ -234,8 +234,9 @@ export default function LandingPage() {
 
       <main>
         {/* Hero */}
-        <section className="relative mx-auto max-w-6xl overflow-hidden px-6 pb-20 pt-16 md:pt-24">
+        <section className="relative overflow-hidden pb-20 pt-16 md:pt-24">
           <GlowField />
+          <div className="relative mx-auto max-w-6xl px-6">
           <DotGrid className="inset-y-0 right-0 hidden w-1/2 lg:block" />
           <div className="relative grid items-center gap-12 lg:grid-cols-[1fr_minmax(0,420px)]">
             <div className="animate-fade-up">
@@ -385,6 +386,7 @@ export default function LandingPage() {
                 </li>
               ))}
             </ul>
+          </div>
           </div>
         </section>
 
