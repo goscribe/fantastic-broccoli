@@ -106,6 +106,63 @@ const features = [
   },
 ];
 
+const plans = [
+  {
+    name: "Free",
+    price: "$0",
+    description: "Everything you need to try Scribe with a real course.",
+    features: [
+      "Upload PDFs, slides, and lecture audio",
+      "AI study sessions with readings & worksheets",
+      "Flashcards, cloze passages, and quizzes",
+      "Study copilot grounded in your materials",
+    ],
+    cta: "Get started free",
+    highlighted: false,
+  },
+  {
+    name: "Pro",
+    price: "Monthly",
+    priceSuffix: "subscription",
+    description: "For heavy courses — more storage and higher generation limits.",
+    features: [
+      "Everything in Free",
+      "More material storage",
+      "Higher worksheet & flashcard limits",
+      "Podcast-style passive recall episodes",
+    ],
+    cta: "Upgrade to Pro",
+    highlighted: true,
+  },
+];
+
+const faqs = [
+  {
+    q: "What can I upload?",
+    a: "Textbook PDFs, lecture slides, notes and handouts, and audio recordings of lectures. Scribe parses text, figures, and diagrams, and transcribes audio automatically.",
+  },
+  {
+    q: "Where do the questions come from?",
+    a: "From your own materials. Scribe prioritises questions extracted from your uploaded guides and past papers, and calibrates generated questions to the difficulty of what you upload.",
+  },
+  {
+    q: "Does it work for maths and physics?",
+    a: "Yes — sessions include multi-step calculations with units, symbolic manipulation, derivations, and graph interpretation, all rendered with proper mathematical notation.",
+  },
+  {
+    q: "Can I study with classmates?",
+    a: "Workspaces support members, so you can share materials, study sessions, and question banks with your class or study group.",
+  },
+  {
+    q: "Is my data private?",
+    a: "Your uploads stay in your workspaces and are only used to build your study materials. You can delete materials and generated content at any time.",
+  },
+  {
+    q: "How much does it cost?",
+    a: "Scribe is free to start — no credit card required. The Pro plan adds more storage and higher generation limits when you need them.",
+  },
+];
+
 const sessionPreview = [
   { icon: BookOpen, label: "Reading: Enzyme kinetics", meta: "12 min" },
   { icon: ListChecks, label: "Comprehension check", meta: "4 questions" },
@@ -133,6 +190,22 @@ export default function LandingPage() {
       <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <ScribeLogo />
+          <nav className="hidden items-center gap-1 md:flex">
+            {[
+              { href: "#how-it-works", label: "How it works" },
+              { href: "#features", label: "Features" },
+              { href: "#pricing", label: "Pricing" },
+              { href: "#faq", label: "FAQ" },
+            ].map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="rounded-full px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
           <nav className="flex items-center gap-2">
             <button
               type="button"
@@ -201,7 +274,7 @@ export default function LandingPage() {
             {/* Session preview card */}
             <div className="relative hidden animate-fade-up lg:block">
               {/* Floating flashcard */}
-              <div className="animate-float absolute -bottom-14 -left-24 z-10 w-44 rounded-xl border border-border bg-card p-3 shadow-sm">
+              <div className="animate-float absolute -bottom-16 -left-24 z-10 hidden w-44 rounded-xl border border-border bg-card p-3 shadow-sm xl:block">
                 <p className="text-[10px] font-semibold text-faint">
                   FLASHCARD 7/18
                 </p>
@@ -214,7 +287,7 @@ export default function LandingPage() {
               </div>
               {/* Floating marking chip */}
               <div
-                className="animate-float absolute -right-6 -top-5 z-10 flex items-center gap-2 rounded-full border border-border bg-card py-1.5 pl-1.5 pr-3.5 shadow-sm"
+                className="animate-float absolute -right-6 -top-5 z-10 hidden items-center gap-2 rounded-full border border-border bg-card py-1.5 pl-1.5 pr-3.5 shadow-sm xl:flex"
                 style={{ animationDelay: "-2.5s" }}
               >
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-soft text-accent">
@@ -224,23 +297,6 @@ export default function LandingPage() {
                   Worksheet marked · 5/6
                 </span>
               </div>
-              {/* Floating sources card */}
-              <div
-                className="animate-float absolute -left-20 -top-8 z-10 w-40 rounded-xl border border-border bg-card p-3 shadow-sm"
-                style={{ animationDelay: "-1.2s" }}
-              >
-                <p className="text-[10px] font-semibold text-faint">
-                  SOURCES · 3
-                </p>
-                <div className="mt-2 flex items-center -space-x-2">
-                  <PdfArt className="h-8 w-8 rounded-md bg-card ring-2 ring-card" />
-                  <SlidesArt className="h-8 w-8 rounded-md bg-card ring-2 ring-card" />
-                  <AudioArt className="h-8 w-8 rounded-md bg-card ring-2 ring-card" />
-                </div>
-                <p className="mt-2 text-[11px] text-muted-foreground">
-                  Parsed &amp; ready
-                </p>
-              </div>
               <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
                 <div className="flex items-center justify-between">
                   <div>
@@ -249,6 +305,14 @@ export default function LandingPage() {
                     </p>
                     <p className="mt-0.5 text-sm font-bold">
                       Biochemistry · Week 4
+                    </p>
+                    <p className="mt-1 flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                      <span className="flex items-center -space-x-1.5">
+                        <PdfArt className="h-5 w-5 rounded bg-card ring-1 ring-card" />
+                        <SlidesArt className="h-5 w-5 rounded bg-card ring-1 ring-card" />
+                        <AudioArt className="h-5 w-5 rounded bg-card ring-1 ring-card" />
+                      </span>
+                      3 sources parsed &amp; ready
                     </p>
                   </div>
                   <span className="rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold tabular-nums text-accent">
@@ -325,7 +389,7 @@ export default function LandingPage() {
         </section>
 
         {/* How it works */}
-        <section className="border-y border-border bg-card/40 py-16 md:py-20">
+        <section id="how-it-works" className="scroll-mt-20 border-y border-border bg-card/40 py-16 md:py-20">
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
               How it works
@@ -350,7 +414,7 @@ export default function LandingPage() {
         </section>
 
         {/* Features */}
-        <section className="relative overflow-hidden py-16 md:py-20">
+        <section id="features" className="relative scroll-mt-20 overflow-hidden py-16 md:py-20">
           <DotGrid className="left-1/2 top-0 h-64 w-[120%] -translate-x-1/2 opacity-60" />
           <div className="relative mx-auto max-w-6xl px-6">
             <div className="flex items-start gap-3">
@@ -504,6 +568,96 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* Pricing */}
+        <section id="pricing" className="scroll-mt-20 border-t border-border bg-card/40 py-16 md:py-20">
+          <div className="mx-auto max-w-6xl px-6">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              Simple pricing
+            </h2>
+            <p className="mt-3 max-w-xl text-muted-foreground">
+              Start free. Upgrade when your course outgrows the limits.
+            </p>
+            <div className="mx-auto mt-10 grid max-w-3xl gap-5 sm:grid-cols-2">
+              {plans.map((plan) => (
+                <div
+                  key={plan.name}
+                  className={`flex flex-col rounded-2xl border p-6 ${
+                    plan.highlighted
+                      ? "border-accent bg-card shadow-sm"
+                      : "border-border bg-card"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-semibold">{plan.name}</p>
+                    {plan.highlighted && (
+                      <span className="rounded-full bg-accent-soft px-2.5 py-0.5 text-[11px] font-semibold text-accent">
+                        Most popular
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-3 text-3xl font-bold tracking-tight">
+                    {plan.price}
+                    {plan.priceSuffix && (
+                      <span className="text-sm font-normal text-faint">
+                        {" "}
+                        {plan.priceSuffix}
+                      </span>
+                    )}
+                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    {plan.description}
+                  </p>
+                  <ul className="mt-5 flex-1 space-y-2.5">
+                    {plan.features.map((feature) => (
+                      <li
+                        key={feature}
+                        className="flex items-start gap-2.5 text-sm text-muted-foreground"
+                      >
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href="/login" className="mt-6">
+                    <Button
+                      className="w-full"
+                      variant={plan.highlighted ? "primary" : "outline"}
+                    >
+                      {plan.cta}
+                    </Button>
+                  </Link>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 text-center text-xs text-faint">
+              Full plan limits are shown on the{" "}
+              <Link href="/pricing" className="underline hover:text-foreground">
+                pricing page
+              </Link>{" "}
+              once you sign in.
+            </p>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faq" className="scroll-mt-20 border-t border-border py-16 md:py-20">
+          <div className="mx-auto max-w-6xl px-6">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              Frequently asked questions
+            </h2>
+            <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2">
+              {faqs.map((faq) => (
+                <div key={faq.q}>
+                  <h3 className="text-sm font-semibold">{faq.q}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                    {faq.a}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Final CTA */}
         <section className="relative overflow-hidden border-t border-border py-16 md:py-24">
           <GlowField />
@@ -531,10 +685,64 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer className="border-t border-border py-8">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 text-[13px] text-faint">
-          <span>© 2026 Scribe</span>
-          <span>Study smarter, not harder.</span>
+      <footer className="border-t border-border py-12">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid gap-10 sm:grid-cols-[1.5fr_1fr_1fr_1fr]">
+            <div>
+              <ScribeLogo />
+              <p className="mt-3 max-w-xs text-[13px] text-muted-foreground">
+                Your course materials, turned into personalized study sessions.
+              </p>
+            </div>
+            {[
+              {
+                heading: "Product",
+                links: [
+                  { label: "How it works", href: "#how-it-works" },
+                  { label: "Features", href: "#features" },
+                  { label: "Pricing", href: "#pricing" },
+                  { label: "FAQ", href: "#faq" },
+                ],
+              },
+              {
+                heading: "Account",
+                links: [
+                  { label: "Sign in", href: "/login" },
+                  { label: "Create account", href: "/signup" },
+                  { label: "Reset password", href: "/forgot-password" },
+                ],
+              },
+              {
+                heading: "Legal",
+                links: [
+                  { label: "Privacy policy", href: "/privacy" },
+                  { label: "Terms of service", href: "/terms" },
+                ],
+              },
+            ].map((column) => (
+              <div key={column.heading}>
+                <p className="text-xs font-semibold uppercase tracking-wider text-faint">
+                  {column.heading}
+                </p>
+                <ul className="mt-3 space-y-2">
+                  {column.links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-[13px] text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 flex items-center justify-between border-t border-border pt-6 text-[13px] text-faint">
+            <span>© 2026 Scribe</span>
+            <span>Study smarter, not harder.</span>
+          </div>
         </div>
       </footer>
     </div>
