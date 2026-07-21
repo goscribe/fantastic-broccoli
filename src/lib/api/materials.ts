@@ -110,6 +110,16 @@ export async function uploadFiles(
   return result.map((r) => r.fileId);
 }
 
+export async function deleteFiles(
+  workspaceId: string,
+  fileIds: string[],
+): Promise<void> {
+  await api.workspace.deleteFiles.mutate({
+    id: workspaceId,
+    fileId: fileIds,
+  });
+}
+
 export async function analyzeFiles(
   workspaceId: string,
   fileIds: string[],

@@ -207,6 +207,14 @@ export async function fetchStudyGuides(
   }
 }
 
+export async function deleteStudyGuide(
+  workspaceId: string,
+  artifactId: string,
+): Promise<void> {
+  // `studyguide.delete` is newer than the published @goscribe/server types.
+  await rpc("studyguide.delete", "mutation", { workspaceId, artifactId });
+}
+
 export async function regenerateStudyGuides(
   workspaceId: string,
   artifactId?: string,

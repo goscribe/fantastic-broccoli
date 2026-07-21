@@ -7,6 +7,7 @@ import { fetchWorkspace } from "@/lib/api/workspace";
 import { toast, toastError } from "@/lib/toast";
 import {
   analyzeFiles,
+  deleteFiles,
   fetchFileDetails,
   reanalyzeFile,
   subscribeAnalysisProgress,
@@ -33,6 +34,7 @@ import {
   Image as ImageIcon,
   Layers,
   FileText,
+  Trash2,
 } from "lucide-react";
 import {
   PdfArt,
@@ -510,6 +512,7 @@ export default function WorkspaceMaterialsPage() {
   >({});
   const [expandedFiles, setExpandedFiles] = useState<Set<string>>(new Set());
   const [reanalyzing, setReanalyzing] = useState<Set<string>>(new Set());
+  const [deleting, setDeleting] = useState<Set<string>>(new Set());
 
   const materials = workspace?.materials ?? [];
   const inFlight = analysisInFlight(progress);
@@ -567,6 +570,24 @@ export default function WorkspaceMaterialsPage() {
       setReanalyzing((prev) => {
         const next = new Set(prev);
         next.delete(fileId);
+        return next;
+      });
+    }
+  };
+
+  const handleDelete = async (material: Material) => {
+    if (!confirm(`Delete "${material.title}"? This cannot be undone.`)) return;
+    setDeleting((prev) => new Set(prev).add(material.id));
+    try {
+      await deleteFiles(workspaceId, [material.id]);
+      queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
+      toast.success("Material deleted");
+    } catch (err) {
+      toastError(err, "Failed to delete material");
+    } finally {
+      setDeleting((prev) => {
+        const next = new Set(prev);
+        next.delete(material.id);
         return next;
       });
     }
@@ -692,6 +713,7 @@ export default function WorkspaceMaterialsPage() {
                 const Art = config.art;
                 const expanded = expandedFiles.has(material.id);
                 const isReanalyzing = reanalyzing.has(material.id);
+                const isDeleting = deleting.has(material.id);
                 return (
                   <Card
                     key={material.id}
@@ -749,6 +771,22 @@ export default function WorkspaceMaterialsPage() {
                           <RefreshCw
                             className={`h-3.5 w-3.5 ${isReanalyzing ? "animate-spin" : ""}`}
                           />
+                        </button>
+                        <button
+                          type="button"
+                          title="Delete"
+                          disabled={isDeleting}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            void handleDelete(material);
+                          }}
+                          className="p-1.5 rounded-lg text-muted-foreground hover:text-rose hover:bg-rose/10 transition-colors disabled:opacity-50"
+                        >
+                          {isDeleting ? (
+                            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                          ) : (
+                            <Trash2 className="h-3.5 w-3.5" />
+                          )}
                         </button>
                         {expanded ? (
                           <ChevronDown className="h-4 w-4 text-muted-foreground" />
