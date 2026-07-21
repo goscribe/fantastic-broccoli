@@ -5,7 +5,14 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { Workspace } from "@/types";
 import { Button } from "@/components/ui/button";
-import { Library, GraduationCap, Layers, UserPlus } from "lucide-react";
+import {
+  Library,
+  GraduationCap,
+  Layers,
+  BookOpen,
+  Headphones,
+  UserPlus,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
@@ -77,6 +84,16 @@ export function WorkspaceShell({
       href: `/workspace/${workspace.id}/bank`,
       label: "Bank",
       icon: Layers,
+    },
+    {
+      href: `/workspace/${workspace.id}/guide`,
+      label: "Study Guide",
+      icon: BookOpen,
+    },
+    {
+      href: `/workspace/${workspace.id}/recall`,
+      label: "Passive Recall",
+      icon: Headphones,
     },
   ];
 

@@ -227,12 +227,7 @@ interface MarkdownTextProps {
   className?: string;
 }
 
-/**
- * Lightweight markdown renderer for generated activity content: inline
- * bold/italic/code/links, plus figures — `[Figure: url — caption]` tokens,
- * `![alt](url)` images, and bare image URLs all render as inline figures.
- */
-export function MarkdownText({ text, className }: MarkdownTextProps) {
+function renderInlineWithFigures(text: string): React.ReactNode[] {
   const combined = new RegExp(
     `${FIGURE_TOKEN.source}|${MD_IMAGE.source}|${BARE_IMAGE_URL.source}`,
     "g",
@@ -256,6 +251,80 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
     last = idx + token.length;
   }
   if (last < text.length) parts.push(...renderInline(text.slice(last)));
+  return parts;
+}
 
-  return <span className={className}>{parts}</span>;
+const HEADING_LINE = /^(#{1,4})\s+(.*)$/;
+const BULLET_LINE = /^[-*]\s+(.*)$/;
+
+/**
+ * Lightweight markdown renderer for generated content: headings and bullet
+ * lists at block level; inline bold/italic/code/links and LaTeX math; plus
+ * figures — `[Figure: url — caption]` tokens, `![alt](url)` images, and bare
+ * image URLs all render as inline figures.
+ */
+export function MarkdownText({ text, className }: MarkdownTextProps) {
+  const blocks: React.ReactNode[] = [];
+  const lines = text.split("\n");
+  let key = 0;
+  let paragraph: string[] = [];
+  let bullets: string[] = [];
+
+  const flushParagraph = () => {
+    if (!paragraph.length) return;
+    blocks.push(
+      <span key={key++} className="block">
+        {renderInlineWithFigures(paragraph.join("\n"))}
+      </span>,
+    );
+    paragraph = [];
+  };
+  const flushBullets = () => {
+    if (!bullets.length) return;
+    blocks.push(
+      <ul key={key++} className="my-1 list-disc space-y-0.5 pl-5">
+        {bullets.map((item, i) => (
+          <li key={i}>{renderInlineWithFigures(item)}</li>
+        ))}
+      </ul>,
+    );
+    bullets = [];
+  };
+
+  for (const line of lines) {
+    const heading = line.match(HEADING_LINE);
+    const bullet = line.match(BULLET_LINE);
+    if (heading) {
+      flushParagraph();
+      flushBullets();
+      blocks.push(
+        <span
+          key={key++}
+          className={cnHeading(heading[1].length)}
+        >
+          {renderInlineWithFigures(heading[2])}
+        </span>,
+      );
+    } else if (bullet) {
+      flushParagraph();
+      bullets.push(bullet[1]);
+    } else if (!line.trim()) {
+      flushParagraph();
+      flushBullets();
+    } else {
+      flushBullets();
+      paragraph.push(line);
+    }
+  }
+  flushParagraph();
+  flushBullets();
+
+  return <span className={className}>{blocks}</span>;
+}
+
+function cnHeading(level: number): string {
+  const base = "block font-semibold text-foreground";
+  if (level === 1) return `${base} text-base mt-2 mb-1`;
+  if (level === 2) return `${base} text-[0.95rem] mt-2 mb-1`;
+  return `${base} text-sm mt-1.5 mb-0.5`;
 }

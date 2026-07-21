@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { toast, toastError } from "@/lib/toast";
+import { emitTreeChanged } from "@/lib/tree-events";
 import { MoreHorizontal, Pencil, Trash2, Users, X } from "lucide-react";
 import { WorkspaceIcon, WORKSPACE_ICONS } from "@/components/graphics/workspace-icon";
 
@@ -156,6 +157,7 @@ export function EditResourceDialog({
         await updateFolder(target.id, { name: name.trim(), color });
       }
       toast.success("Changes saved");
+      emitTreeChanged();
       onSaved();
       onClose();
     } catch (err) {
@@ -288,6 +290,7 @@ export function DeleteResourceDialog({
       if (target.kind === "workspace") await deleteWorkspace(target.id);
       else await deleteFolder(target.id);
       toast.success("Deleted");
+      emitTreeChanged();
       onDeleted();
       onClose();
     } catch (err) {

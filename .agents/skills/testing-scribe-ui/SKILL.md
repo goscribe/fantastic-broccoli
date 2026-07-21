@@ -6,7 +6,7 @@ description: Test the Scribe study UX (fantastic-broccoli) end-to-end — demo m
 # Testing the Scribe study UX
 
 ## Modes
-- **Demo mode** (default when `NEXT_PUBLIC_API_URL` is unset): every function in `src/lib/api/*.ts` checks `isLiveApi` and serves in-memory mock data. All UI flows are testable without any backend.
+- **Demo mode** (default when `NEXT_PUBLIC_API_URL` is unset): every function in `src/lib/api/*.ts` checks `isLiveApi` and serves in-memory mock data. All UI flows are testable without any backend. Note: `src/lib/api/config.ts` may now throw if `NEXT_PUBLIC_API_URL` is unset — if so, use a local mock tRPC server instead (a plain Node http server answering `/trpc/<path>` with superjson-serialized `{result:{data}}`, e.g. on port 4600, and run `NEXT_PUBLIC_API_URL=http://localhost:4600 npm run dev`).
 - **Live mode**: set `NEXT_PUBLIC_API_URL` to a running goscribe/server. Requires Postgres, Supabase, and Pusher credentials — without them, live-branch tests must be declared untested.
 
 ## Setup
@@ -28,6 +28,14 @@ description: Test the Scribe study UX (fantastic-broccoli) end-to-end — demo m
 - After resizing the window with xdotool/wmctrl, the browser may lose focus — click inside the page before using ctrl+l, and prefer in-app links over address-bar navigation at small widths.
 - Demo highlights/notes are in-memory and reset on refresh; don't treat that as a persistence bug in demo mode.
 - ws-1/ses-1 are the richest demo fixtures; other workspaces have fewer sessions.
+- When testing reading highlights against a mock server, implement `studySession.addHighlight` in the mock — the UI adds highlights optimistically and rolls them back if the mutation errors, which can look like a highlighting bug when it's really a missing mock endpoint.
+- LaTeX/KaTeX rendering must be checked in EVERY content path separately (worksheet prompts via `MarkdownText`, reading paragraphs/headings/lists in `reading-activity.tsx`, bank previews via `ReadingBody`) — one path working doesn't prove the others.
+- Highlight offsets are raw-text offsets; math renders inside `data-math-len` spans so selection mapping stays aligned. To regression-test, highlight a phrase in a paragraph that also contains math and check the mark covers exactly the selected characters.
+- LLM-authored HTML visualizers render in `sandbox="allow-scripts"` iframes (`html-widget.tsx`); test by seeding a figure `{id, type:"html", title, html}` and a `[[figure:ID]]` token in the reading. Self-contained inline HTML/SVG/JS is the reliable path; CDN scripts may not load.
+- `html-widget.tsx` may inject the Tailwind Play CDN with design tokens mapped as color names (bg-accent, text-violet, ...). To adversarially test that injection, seed fixture markup styled ONLY with Tailwind classes (no inline CSS) — if injection is broken it renders as plain unstyled text. Note the CDN needs network access; strict CSP/offline environments fall back to unstyled classes while CSS-var styling keeps working.
+- Copilot custom visualizations (`visualizations: [{title, html}]` from `copilot.ask`) render through the same `HtmlWidget` as reading figures, so one rendering test covers both paths; the copilot-specific part to verify is the embed mapping in `copilot.tsx`.
+- `themeStyle()` in `html-widget.tsx` may inject a mini design system into the iframe (`.card`, `.viz-row`, `.viz-controls`, `.viz-stat`/`.viz-stat-value`, `.viz-badge`, `.text-small`, `.text-muted`, styled native buttons/selects, `button[aria-pressed=true]` accent state). Test the injection the same adversarial way as Tailwind: seed fixture markup using ONLY these classes — broken injection shows unstyled text/default browser buttons. Unlike the Tailwind CDN, these need no network.
+- Prompt-only changes (server copilot prompt, inference figure schema) can't be proven with mock fixtures — always report LLM output quality as untested until a live generation after deploy.
 
 ## Devin Secrets Needed
 - None for demo mode.

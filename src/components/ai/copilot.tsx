@@ -18,10 +18,11 @@ import {
 } from "@/components/ai/chat-types";
 import { ToolCallChip } from "@/components/ai/tool-call-chip";
 import {
-  askCopilot,
+  askCopilotStream,
   createConversation,
   listConversations,
 } from "@/lib/api/copilot";
+import { MarkdownText } from "@/components/ui/markdown-text";
 
 let idCounter = 0;
 const nextId = () => `m-${++idCounter}-${Date.now()}`;
@@ -121,13 +122,38 @@ export function Copilot({
           );
           setActiveChat(conv.id);
         }
-        const result = await askCopilot({
-          workspaceId,
-          conversationId,
-          message: text,
-          documentContent: context,
-          availableWidgets,
-        });
+        const streamPartId = nextId();
+        let streamed = "";
+        const result = await askCopilotStream(
+          {
+            workspaceId,
+            conversationId,
+            message: text,
+            documentContent: context,
+            availableWidgets,
+          },
+          (delta) => {
+            streamed += delta;
+            const textSoFar = streamed;
+            setMessages((prev) =>
+              prev.map((m) =>
+                m.id === assistantId
+                  ? {
+                      ...m,
+                      parts: [
+                        {
+                          kind: "text",
+                          id: streamPartId,
+                          text: textSoFar,
+                          done: false,
+                        },
+                      ],
+                    }
+                  : m,
+              ),
+            );
+          },
+        );
         setMessages((prev) =>
           prev.map((m) =>
             m.id === assistantId
@@ -136,7 +162,7 @@ export function Copilot({
                   parts: [
                     {
                       kind: "text",
-                      id: nextId(),
+                      id: streamPartId,
                       text: result.answer,
                       done: true,
                     },
@@ -333,12 +359,12 @@ export function Copilot({
                     <CitationEmbed key={part.id} data={part.citation} />
                   )
                 ) : (
-                  <p key={part.id} className="text-sm leading-relaxed px-1 py-1">
-                    {part.text}
+                  <div key={part.id} className="text-sm leading-relaxed px-1 py-1">
+                    <MarkdownText text={part.text} />
                     {!part.done && (
                       <span className="inline-block w-1.5 h-3.5 ml-0.5 bg-accent align-middle animate-pulse-dot" />
                     )}
-                  </p>
+                  </div>
                 ),
               )}
             </div>

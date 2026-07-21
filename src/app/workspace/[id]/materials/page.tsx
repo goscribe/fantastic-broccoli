@@ -20,7 +20,6 @@ import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { formatRelativeDate } from "@/lib/utils";
 import {
-  Plus,
   Square,
   Circle,
   Upload,
@@ -538,13 +537,8 @@ export default function WorkspaceMaterialsPage() {
       <div className="space-y-6">
         {/* Quick actions */}
         <div className="flex flex-wrap gap-2.5 animate-fade-up">
-          <Button size="sm">
-            <Plus className="h-3.5 w-3.5 mr-1.5" />
-            New note
-          </Button>
           <Button
             size="sm"
-            variant="outline"
             onClick={() => setRecording(true)}
             disabled={recording}
           >

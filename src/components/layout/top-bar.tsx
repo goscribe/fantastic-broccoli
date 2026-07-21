@@ -166,11 +166,11 @@ export function TopBar({
           <div className="flex items-center gap-1.5">
             <Link
               href="/pricing"
-              title="Credits and pricing"
+              title="Study points — earn 25 for each completed study session"
               className="flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold tabular-nums text-accent hover:border-accent/50"
             >
               <Sparkles className="h-3.5 w-3.5" />
-              {credits > 0 ? `${credits} credits` : "Out of credits"}
+              {credits} pts
             </Link>
             <div className="relative" ref={notifRef}>
               <button
