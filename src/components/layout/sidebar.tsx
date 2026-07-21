@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { ScribeLogo } from "@/components/graphics/logo";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
+import { onTreeChanged } from "@/lib/tree-events";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import {
   fetchAccountSummary,
@@ -172,6 +173,7 @@ export function Sidebar({
     fetchAccountSummary()
       .then(setSummary)
       .catch(() => {});
+    return onTreeChanged(loadTree);
   }, []);
 
   useEffect(() => {

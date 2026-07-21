@@ -8,6 +8,7 @@ import type { Folder } from "@/types";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { CreateResourceDialog } from "@/components/workspace/create-dialog";
+import { onTreeChanged } from "@/lib/tree-events";
 import {
   DeleteResourceDialog,
   EditResourceDialog,
@@ -50,6 +51,7 @@ export default function FolderPage({
 
   useEffect(() => {
     loadTree();
+    return onTreeChanged(loadTree);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 

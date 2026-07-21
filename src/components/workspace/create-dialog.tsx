@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createFolder, createWorkspace } from "@/lib/api/workspace";
+import { emitTreeChanged } from "@/lib/tree-events";
 import { toast, toastError } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -55,12 +56,14 @@ export function CreateResourceDialog({
     try {
       if (kind === "folder") {
         await createFolder(name.trim(), parentId, color);
+        emitTreeChanged();
         onCreated();
       } else {
         const id = await createWorkspace(name.trim(), parentId, {
           description: description.trim() || undefined,
           icon,
         });
+        emitTreeChanged();
         onCreated(id);
       }
       toast.success(kind === "folder" ? "Folder created" : "Workspace created");

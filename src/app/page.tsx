@@ -19,6 +19,7 @@ import {
 } from "@/components/workspace/resource-actions";
 import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
 import { fetchActivityCalendar, type DailyActivityPoint } from "@/lib/api/study";
+import { onTreeChanged } from "@/lib/tree-events";
 import { Search, ArrowRight, Plus } from "lucide-react";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { Banner } from "@/components/ui/banner";
@@ -78,6 +79,7 @@ export default function HomePage() {
       .then(setDailyActivity)
       .catch(() => {})
       .finally(() => setCalendarLoading(false));
+    return onTreeChanged(loadTree);
   }, []);
 
   const allWorkspaces = useMemo(
