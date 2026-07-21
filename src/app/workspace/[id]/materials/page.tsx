@@ -62,7 +62,7 @@ function RecorderCard({
   onStop,
   onError,
 }: {
-  onStop: (seconds: number) => void;
+  onStop: (seconds: number, blob: Blob | null) => void;
   onError: (msg: string) => void;
 }) {
   const [seconds, setSeconds] = useState(0);
@@ -112,8 +112,18 @@ function RecorderCard({
           size="sm"
           variant="danger"
           onClick={() => {
-            mediaRecorderRef.current?.stop();
-            onStop(secondsRef.current);
+            const recorder = mediaRecorderRef.current;
+            if (!recorder) {
+              onStop(secondsRef.current, null);
+              return;
+            }
+            recorder.onstop = () => {
+              const blob = new Blob(chunksRef.current, {
+                type: recorder.mimeType || "audio/webm",
+              });
+              onStop(secondsRef.current, blob.size > 0 ? blob : null);
+            };
+            recorder.stop();
           }}
         >
           <Square className="h-3 w-3 mr-1.5 fill-current" />
@@ -419,7 +429,6 @@ export default function WorkspaceMaterialsPage() {
   });
 
   const [recording, setRecording] = useState(false);
-  const [localMaterials, setLocalMaterials] = useState<Material[]>([]);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [progress, setProgress] = useState<AnalysisProgress | null>(null);
@@ -429,7 +438,7 @@ export default function WorkspaceMaterialsPage() {
   const [expandedFiles, setExpandedFiles] = useState<Set<string>>(new Set());
   const [reanalyzing, setReanalyzing] = useState<Set<string>>(new Set());
 
-  const materials = [...localMaterials, ...(workspace?.materials ?? [])];
+  const materials = workspace?.materials ?? [];
   const inFlight = analysisInFlight(progress);
 
   useEffect(
@@ -452,8 +461,8 @@ export default function WorkspaceMaterialsPage() {
     [workspaceId, queryClient],
   );
 
-  const handleUpload = async (files: FileList | null) => {
-    if (!files?.length) return;
+  const handleUpload = async (files: FileList | File[] | null) => {
+    if (!files || files.length === 0) return;
     setUploadError(null);
     setUploading(true);
     try {
@@ -499,19 +508,18 @@ export default function WorkspaceMaterialsPage() {
     });
   };
 
-  const stopRecording = (seconds: number) => {
+  const stopRecording = async (seconds: number, blob: Blob | null) => {
     setRecording(false);
-    setLocalMaterials((prev) => [
-      {
-        id: `mat-new-${Date.now()}`,
-        workspaceId,
-        type: "audio",
-        title: "New recording",
-        durationSeconds: seconds,
-        updatedAt: new Date().toISOString(),
-      },
-      ...prev,
-    ]);
+    if (!blob) {
+      setUploadError("Recording produced no audio");
+      return;
+    }
+    const stamp = new Date().toISOString().slice(0, 16).replace("T", " ").replace(":", ".");
+    const ext = blob.type.includes("ogg") ? "ogg" : blob.type.includes("mp4") ? "m4a" : "webm";
+    const file = new File([blob], `Recording ${stamp} (${formatAudioDuration(seconds)}).${ext}`, {
+      type: blob.type || "audio/webm",
+    });
+    await handleUpload([file]);
   };
 
   if (workspaceLoading) {
