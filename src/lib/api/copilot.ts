@@ -29,6 +29,27 @@ export async function createConversation(
   return { id: row.id, title: row.title };
 }
 
+export interface CopilotHistoryMessage {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+}
+
+export async function getConversationMessages(
+  workspaceId: string,
+  conversationId: string,
+): Promise<CopilotHistoryMessage[]> {
+  const conv = await api.copilot.getConversation.query({
+    workspaceId,
+    conversationId,
+  });
+  return conv.messages.map((m) => ({
+    id: m.id,
+    role: m.role === "user" ? "user" : "assistant",
+    content: m.content,
+  }));
+}
+
 export interface CopilotVisualization {
   title?: string;
   html: string;
