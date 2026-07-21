@@ -20,7 +20,10 @@ function redirectUnauthenticated(): boolean {
   if (PUBLIC_PATHS.some((p) => path === p || path.startsWith(`${p}/`))) {
     return false;
   }
-  window.location.href = path === "/" ? "/landing" : "/login";
+  window.location.href =
+    path === "/"
+      ? "/landing"
+      : `/login?redirect=${encodeURIComponent(path + window.location.search)}`;
   return true;
 }
 

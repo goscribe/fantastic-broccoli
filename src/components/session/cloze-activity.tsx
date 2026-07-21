@@ -29,7 +29,7 @@ export function ClozeActivity({
   onComplete,
 }: ClozeActivityProps) {
   const passage = content.passages[0];
-  const parts = passage.textWithBlanks.split("___");
+  const parts = passage.textWithBlanks.split(/_{2,}|\{\{blank\}\}/g);
   const restored = draft as
     | Partial<{ answers: string[]; results: BlankResult[] | null }>
     | undefined;
