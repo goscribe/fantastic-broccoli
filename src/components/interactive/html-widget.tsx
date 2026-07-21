@@ -29,6 +29,39 @@ const THEME_TOKENS = [
   "radius",
 ] as const;
 
+// Tailwind Play CDN configured so LLM-authored markup can use utility
+// classes with token-named colors (bg-accent, text-foreground, border-border,
+// text-violet, ...) that resolve to the app's design tokens.
+function tailwindScript(): string {
+  const colorTokens = [
+    "background",
+    "foreground",
+    "card",
+    "muted",
+    "muted-foreground",
+    "accent",
+    "accent-dim",
+    "accent-soft",
+    "accent-bright",
+    "accent-foreground",
+    "energy",
+    "energy-soft",
+    "violet",
+    "sky",
+    "rose",
+    "amber",
+    "border",
+    "border-strong",
+  ];
+  const colors = Object.fromEntries(
+    colorTokens.map((t) => [t, `var(--${t})`]),
+  );
+  return (
+    `<script src="https://cdn.tailwindcss.com"></script>` +
+    `<script>tailwind.config={theme:{extend:{colors:${JSON.stringify(colors)}}}}</script>`
+  );
+}
+
 function themeStyle(): string {
   const root = getComputedStyle(document.documentElement);
   const vars = THEME_TOKENS.map(
@@ -86,7 +119,7 @@ export function HtmlWidget({ html, title }: HtmlWidgetProps) {
   }, [frameId]);
 
   const srcDoc = useMemo(
-    () => themeStyle() + html + resizeScript(frameId),
+    () => tailwindScript() + themeStyle() + html + resizeScript(frameId),
     [html, frameId],
   );
 
