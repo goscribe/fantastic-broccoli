@@ -24,10 +24,72 @@ import {
   getConversationMessages,
   listConversations,
 } from "@/lib/api/copilot";
+import type {
+  CopilotHighlight,
+  CopilotVisualization,
+} from "@/lib/api/copilot";
 import { MarkdownText } from "@/components/ui/markdown-text";
 
 let idCounter = 0;
 const nextId = () => `m-${++idCounter}-${Date.now()}`;
+
+/** Tool chip + widget/visualization embed parts for a set of study aids. */
+function buildAidParts(aids: {
+  widgets: string[];
+  visualizations: CopilotVisualization[];
+  highlights: CopilotHighlight[];
+}): (ToolCallPart | EmbedPart)[] {
+  const aidBits = [
+    aids.visualizations.length &&
+      `${aids.visualizations.length} visualization${aids.visualizations.length > 1 ? "s" : ""}`,
+    aids.widgets.length &&
+      `${aids.widgets.length} widget${aids.widgets.length > 1 ? "s" : ""}`,
+    aids.highlights.length &&
+      `${aids.highlights.length} highlight${aids.highlights.length > 1 ? "s" : ""}`,
+  ].filter((b): b is string => Boolean(b));
+  const aidDetails = [
+    ...aids.visualizations.map((v) => v.title ?? "Custom visualization"),
+    ...aids.widgets,
+    ...aids.highlights.map((h) => h.label ?? `"${h.text.slice(0, 60)}"`),
+  ].join(" · ");
+  const toolParts: ToolCallPart[] = aidBits.length
+    ? [
+        {
+          kind: "tool",
+          id: nextId(),
+          tool: "attach_study_aids",
+          label: "Attached study aids",
+          args: aidBits.join(" · "),
+          result: aidDetails,
+          status: "done",
+        },
+      ]
+    : [];
+  return [
+    ...toolParts,
+    ...aids.widgets
+      .filter((id): id is WidgetId => id in widgetRegistry)
+      .map(
+        (id) =>
+          ({
+            kind: "embed",
+            id: nextId(),
+            embed: "widget",
+            widget: id,
+          }) as EmbedPart,
+      ),
+    ...aids.visualizations.map(
+      (v) =>
+        ({
+          kind: "embed",
+          id: nextId(),
+          embed: "html",
+          html: v.html,
+          title: v.title,
+        }) as EmbedPart,
+    ),
+  ];
+}
 
 const availableWidgets = (
   Object.keys(widgetRegistry) as WidgetId[]
@@ -43,11 +105,13 @@ export function Copilot({
   onClose,
   context,
   workspaceId,
+  studySessionId,
 }: {
   open: boolean;
   onClose: () => void;
   context?: string;
   workspaceId: string;
+  studySessionId?: string;
 }) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [chats, setChats] = useState<ChatTab[]>([]);
@@ -56,14 +120,15 @@ export function Copilot({
   const loadedChats = useRef(new Set<string>());
 
   useEffect(() => {
-    listConversations(workspaceId)
+    setChatsLoading(true);
+    listConversations(workspaceId, studySessionId)
       .then((rows) => {
         setChats(rows);
         setActiveChat(rows[0]?.id ?? null);
       })
       .catch(() => {})
       .finally(() => setChatsLoading(false));
-  }, [workspaceId]);
+  }, [workspaceId, studySessionId]);
 
   // Hydrate persisted history the first time a conversation becomes active.
   useEffect(() => {
@@ -75,7 +140,15 @@ export function Copilot({
           id: `hist-${m.id}`,
           chatId: activeChat,
           role: m.role,
-          parts: [{ kind: "text", id: `hist-part-${m.id}`, text: m.content, done: true }],
+          parts: [
+            {
+              kind: "text",
+              id: `hist-part-${m.id}`,
+              text: m.content,
+              done: true,
+            },
+            ...(m.role === "assistant" ? buildAidParts(m) : []),
+          ],
         }));
         if (!hydrated.length) return;
         // Prepend history; any messages sent while hydrating are newer and stay.
@@ -136,7 +209,11 @@ export function Copilot({
       try {
         let conversationId = activeChat;
         if (!conversationId) {
-          const conv = await createConversation(workspaceId);
+          const conv = await createConversation(
+            workspaceId,
+            undefined,
+            studySessionId,
+          );
           conversationId = conv.id;
           setChats((prev) => [...prev, conv]);
           setMessages((prev) =>
@@ -178,32 +255,6 @@ export function Copilot({
             );
           },
         );
-        const aidBits = [
-          result.visualizations.length &&
-            `${result.visualizations.length} visualization${result.visualizations.length > 1 ? "s" : ""}`,
-          result.widgets.length &&
-            `${result.widgets.length} widget${result.widgets.length > 1 ? "s" : ""}`,
-          result.highlights.length &&
-            `${result.highlights.length} highlight${result.highlights.length > 1 ? "s" : ""}`,
-        ].filter((b): b is string => Boolean(b));
-        const aidDetails = [
-          ...result.visualizations.map((v) => v.title ?? "Custom visualization"),
-          ...result.widgets,
-          ...result.highlights.map((h) => h.label ?? `"${h.text.slice(0, 60)}"`),
-        ].join(" · ");
-        const toolParts: ToolCallPart[] = aidBits.length
-          ? [
-              {
-                kind: "tool",
-                id: nextId(),
-                tool: "attach_study_aids",
-                label: "Attached study aids",
-                args: aidBits.join(" · "),
-                result: aidDetails,
-                status: "done",
-              },
-            ]
-          : [];
         setMessages((prev) =>
           prev.map((m) =>
             m.id === assistantId
@@ -216,28 +267,7 @@ export function Copilot({
                       text: result.answer,
                       done: true,
                     },
-                    ...toolParts,
-                    ...result.widgets
-                      .filter((id): id is WidgetId => id in widgetRegistry)
-                      .map(
-                        (id) =>
-                          ({
-                            kind: "embed",
-                            id: nextId(),
-                            embed: "widget",
-                            widget: id,
-                          }) as EmbedPart,
-                      ),
-                    ...result.visualizations.map(
-                      (v) =>
-                        ({
-                          kind: "embed",
-                          id: nextId(),
-                          embed: "html",
-                          html: v.html,
-                          title: v.title,
-                        }) as EmbedPart,
-                    ),
+                    ...buildAidParts(result),
                   ],
                 }
               : m,
@@ -267,7 +297,7 @@ export function Copilot({
       }
       setBusy(false);
     },
-    [busy, activeChat, workspaceId, context],
+    [busy, activeChat, workspaceId, context, studySessionId],
   );
 
   const chatMessages = messages.filter(
@@ -276,7 +306,11 @@ export function Copilot({
 
   const newChat = async () => {
     try {
-      const conv = await createConversation(workspaceId);
+      const conv = await createConversation(
+        workspaceId,
+        undefined,
+        studySessionId,
+      );
       setChats((prev) => [...prev, conv]);
       setActiveChat(conv.id);
     } catch (err) {

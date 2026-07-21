@@ -691,6 +691,7 @@ export default function SessionDetailPage() {
         open={planReady && copilotOpen}
         onClose={() => setCopilotOpen(false)}
         workspaceId={workspaceId}
+        studySessionId={sessionId}
         context={`Session: ${session.title}`}
       />
 
