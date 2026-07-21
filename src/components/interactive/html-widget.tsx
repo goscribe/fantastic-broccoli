@@ -75,11 +75,79 @@ function lucideScript(): string {
 // KaTeX for LaTeX inside visualizers. Elements with class "math" (inline)
 // or "math-display" (block) are rendered from their text content on load;
 // generated scripts can call window.renderMath() after dynamic updates.
+// renderMath also repairs common LLM output slips in plain text nodes:
+// literal "\n" escapes become <br>, and bare undelimited LaTeX fragments
+// (e.g. C_{11}, \cdot, \frac{a}{b}) are typeset even without a .math class.
 function katexScript(): string {
+  const repair = `
+window.renderMath=function(){
+  if(!window.katex)return;
+  document.querySelectorAll(".math,.math-display").forEach(function(el){
+    if(el.dataset.mathRendered)return;el.dataset.mathRendered="1";
+    try{katex.render(el.textContent||"",el,{displayMode:el.classList.contains("math-display"),throwOnError:false});}catch(e){}
+  });
+  var texts=[],w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null),n;
+  while((n=w.nextNode())){
+    var p=n.parentElement;
+    if(!p)continue;
+    var tag=p.tagName;
+    if(tag==="SCRIPT"||tag==="STYLE"||tag==="TEXTAREA")continue;
+    if(p.closest(".math,.math-display,.katex"))continue;
+    texts.push(n);
+  }
+  texts.forEach(function(node){
+    var t=node.nodeValue||"";
+    if(t.indexOf("\\\\n")<0)return;
+    var frag=document.createDocumentFragment();
+    t.split("\\\\n").forEach(function(part,i){
+      if(i)frag.appendChild(document.createElement("br"));
+      if(part)frag.appendChild(document.createTextNode(part));
+    });
+    node.parentNode.replaceChild(frag,node);
+  });
+  texts=[];w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
+  while((n=w.nextNode())){
+    var p2=n.parentElement;
+    if(!p2)continue;
+    var tag2=p2.tagName;
+    if(tag2==="SCRIPT"||tag2==="STYLE"||tag2==="TEXTAREA")continue;
+    if(p2.closest(".math,.math-display,.katex"))continue;
+    texts.push(n);
+  }
+  var ANCHOR=/\\\\[a-zA-Z]{2,}|[_^]\\{/;
+  var FRAG=/[A-Za-z0-9()\\[\\]+\\-=\\/]*(?:[\\^_]\\{[^{}]*\\}|\\\\[a-zA-Z]+\\{[^{}]*\\}|\\\\[a-zA-Z]{2,})(?:[\\s,]*(?:\\\\[a-zA-Z]+|[\\^_]\\{[^{}]*\\}|\\{[^{}]*\\}|[0-9()\\[\\]+\\-=*\\/.]+|[A-Za-z](?![A-Za-z]{2})))*/g;
+  texts.forEach(function(node){
+    var t=node.nodeValue||"";
+    if(!ANCHOR.test(t))return;
+    var stripped=t.replace(FRAG," ");
+    var prose=/[A-Za-z]{3,}(?:\\s+[A-Za-z]{3,}){2,}/.test(stripped);
+    if(!prose){
+      var span=document.createElement("span");
+      try{katex.render(t,span,{throwOnError:false});node.parentNode.replaceChild(span,node);}catch(e){}
+      return;
+    }
+    var frag=document.createDocumentFragment(),last=0,m,any=false;
+    FRAG.lastIndex=0;
+    while((m=FRAG.exec(t))){
+      if(!m[0]||!ANCHOR.test(m[0])){continue;}
+      any=true;
+      if(m.index>last)frag.appendChild(document.createTextNode(t.slice(last,m.index)));
+      var s=document.createElement("span");
+      try{katex.render(m[0].replace(/\\s+$/,""),s,{throwOnError:false});}catch(e){s.textContent=m[0];}
+      frag.appendChild(s);
+      last=m.index+m[0].length;
+    }
+    if(any){
+      if(last<t.length)frag.appendChild(document.createTextNode(t.slice(last)));
+      node.parentNode.replaceChild(frag,node);
+    }
+  });
+};
+window.addEventListener("load",window.renderMath);`;
   return (
     `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">` +
     `<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>` +
-    `<script>window.renderMath=function(){if(!window.katex)return;document.querySelectorAll(".math,.math-display").forEach(function(el){if(el.dataset.mathRendered)return;el.dataset.mathRendered="1";try{katex.render(el.textContent||"",el,{displayMode:el.classList.contains("math-display"),throwOnError:false});}catch(e){}});};window.addEventListener("load",window.renderMath);</script>`
+    `<script>${repair}</script>`
   );
 }
 
