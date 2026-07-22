@@ -261,9 +261,9 @@ export default function HomePage() {
               <div className="flex flex-1 flex-col">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-semibold">This week</p>
-                  <div className="flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1">
+                  <div className="flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 dark:border-amber-400/25 dark:bg-amber-400/10">
                     <StreakFlame className="h-5 w-5" />
-                    <p className="text-[12px] font-semibold text-amber-700">
+                    <p className="text-[12px] font-semibold text-amber-700 dark:text-amber-300">
                       <span className="text-sm font-bold tabular-nums">
                         {streak}
                       </span>{" "}

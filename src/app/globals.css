@@ -31,6 +31,8 @@
   --warning: #f59e0b;
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 .dark {
   --background: #101112;
   --foreground: #f2f3f4;
