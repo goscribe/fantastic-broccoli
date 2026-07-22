@@ -76,8 +76,9 @@ function lucideScript(): string {
 // or "math-display" (block) are rendered from their text content on load;
 // generated scripts can call window.renderMath() after dynamic updates.
 // renderMath also repairs common LLM output slips in plain text nodes:
-// literal "\n" escapes become <br>, and bare undelimited LaTeX fragments
-// (e.g. C_{11}, \cdot, \frac{a}{b}) are typeset even without a .math class.
+// literal "\n" escapes become <br>, $...$/$$...$$ delimited math is typeset,
+// and bare undelimited LaTeX fragments (e.g. C_{11}, \cdot, \frac{a}{b})
+// are typeset even without a .math class.
 function katexScript(): string {
   const repair = `
 window.renderMath=function(){
@@ -104,6 +105,35 @@ window.renderMath=function(){
       if(part)frag.appendChild(document.createTextNode(part));
     });
     node.parentNode.replaceChild(frag,node);
+  });
+  texts=[];w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
+  while((n=w.nextNode())){
+    var pd=n.parentElement;
+    if(!pd)continue;
+    var tagd=pd.tagName;
+    if(tagd==="SCRIPT"||tagd==="STYLE"||tagd==="TEXTAREA")continue;
+    if(pd.closest(".math,.math-display,.katex"))continue;
+    texts.push(n);
+  }
+  var DOLLAR=/\\$\\$([\\s\\S]+?)\\$\\$|\\$([^$\\n]+?)\\$/g;
+  texts.forEach(function(node){
+    var t=node.nodeValue||"";
+    if(t.indexOf("$")<0)return;
+    DOLLAR.lastIndex=0;
+    var frag=document.createDocumentFragment(),last=0,m,any=false;
+    while((m=DOLLAR.exec(t))){
+      any=true;
+      if(m.index>last)frag.appendChild(document.createTextNode(t.slice(last,m.index)));
+      var s=document.createElement("span");
+      var latex=m[1]!=null?m[1]:m[2];
+      try{katex.render(latex,s,{displayMode:m[1]!=null,throwOnError:false});}catch(e){s.textContent=m[0];}
+      frag.appendChild(s);
+      last=m.index+m[0].length;
+    }
+    if(any){
+      if(last<t.length)frag.appendChild(document.createTextNode(t.slice(last)));
+      node.parentNode.replaceChild(frag,node);
+    }
   });
   texts=[];w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
   while((n=w.nextNode())){
@@ -157,7 +187,7 @@ function themeStyle(): string {
     (t) => `--${t}:${root.getPropertyValue(`--${t}`).trim()};`,
   ).join("");
   return `<style>:root{${vars}}
-body{margin:0;font-family:ui-sans-serif,system-ui,sans-serif;color:var(--foreground);background:var(--card);}
+body{margin:0;padding:14px 16px;font-family:ui-sans-serif,system-ui,sans-serif;color:var(--foreground);background:var(--card);}
 input[type=range]{accent-color:var(--accent);}
 button{font:inherit;border:1px solid var(--border);border-radius:8px;background:var(--muted);color:var(--foreground);padding:4px 10px;cursor:pointer;}
 button:hover{border-color:var(--border-strong);}

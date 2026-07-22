@@ -7,6 +7,7 @@ import { toast } from "@/lib/toast";
 import { recordFlashcardAttempt } from "@/lib/api/study-session";
 import { useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
+import { InlineMarkdown } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Loader2 } from "lucide-react";
 
@@ -96,7 +97,7 @@ export function ClozeActivity({
       <p className="text-[15px] leading-8 text-foreground">
         {parts.map((part, i) => (
           <span key={i}>
-            {part}
+            <InlineMarkdown text={part} />
             {i < passage.answers.length && (
               <input
                 type="text"
