@@ -110,7 +110,30 @@ export function splitMathSegments(text: string): MathTextSegment[] {
   return segments;
 }
 
-/** Renders text with LaTeX math typeset (no other markdown handling). */
+const INLINE_CODE = /`[^`\n]+`/g;
+
+function renderInlineCode(text: string): React.ReactNode[] {
+  const nodes: React.ReactNode[] = [];
+  let last = 0;
+  let key = 0;
+  for (const m of text.matchAll(INLINE_CODE)) {
+    const idx = m.index ?? 0;
+    if (idx > last) nodes.push(text.slice(last, idx));
+    nodes.push(
+      <code
+        key={key++}
+        className="rounded bg-muted px-1 py-0.5 text-[0.9em] font-mono"
+      >
+        {m[0].slice(1, -1)}
+      </code>,
+    );
+    last = idx + m[0].length;
+  }
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes;
+}
+
+/** Renders text with LaTeX math typeset and `inline code` styled. */
 export function MathText({ text }: { text: string }) {
   return (
     <>
@@ -118,7 +141,9 @@ export function MathText({ text }: { text: string }) {
         seg.kind === "math" ? (
           <MathSpan key={i} latex={seg.latex} display={seg.display} />
         ) : (
-          unescapeChars(seg.text)
+          <React.Fragment key={i}>
+            {renderInlineCode(unescapeChars(seg.text))}
+          </React.Fragment>
         ),
       )}
     </>
@@ -276,10 +301,27 @@ function renderInlineWithFigures(text: string): React.ReactNode[] {
 
 const HEADING_LINE = /^(#{1,4})\s+(.*)$/;
 const BULLET_LINE = /^[-*]\s+(.*)$/;
+const CODE_FENCE = /^```(\w*)\s*$/;
+
+export function CodeBlock({ code, lang }: { code: string; lang?: string }) {
+  return (
+    <span className="block my-2 overflow-hidden rounded-lg border border-border bg-muted/50">
+      {lang && (
+        <span className="block border-b border-border px-3 py-1 text-[10px] uppercase tracking-wide text-muted-foreground">
+          {lang}
+        </span>
+      )}
+      <code className="block overflow-x-auto px-3 py-2.5 text-[12.5px] leading-relaxed font-mono whitespace-pre">
+        {code}
+      </code>
+    </span>
+  );
+}
 
 /**
- * Lightweight markdown renderer for generated content: headings and bullet
- * lists at block level; inline bold/italic/code/links and LaTeX math; plus
+ * Lightweight markdown renderer for generated content: headings, bullet
+ * lists, and fenced ``` code blocks at block level; inline
+ * bold/italic/code/links and LaTeX math; plus
  * figures — `[Figure: url — caption]` tokens, `![alt](url)` images, and bare
  * image URLs all render as inline figures.
  */
@@ -289,6 +331,8 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
   let key = 0;
   let paragraph: string[] = [];
   let bullets: string[] = [];
+  let codeLines: string[] | null = null;
+  let codeLang = "";
 
   const flushParagraph = () => {
     if (!paragraph.length) return;
@@ -312,6 +356,30 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
   };
 
   for (const line of lines) {
+    const fence = line.match(CODE_FENCE);
+    if (codeLines !== null) {
+      if (fence) {
+        blocks.push(
+          <CodeBlock
+            key={key++}
+            code={codeLines.join("\n")}
+            lang={codeLang || undefined}
+          />,
+        );
+        codeLines = null;
+        codeLang = "";
+      } else {
+        codeLines.push(line);
+      }
+      continue;
+    }
+    if (fence) {
+      flushParagraph();
+      flushBullets();
+      codeLines = [];
+      codeLang = fence[1];
+      continue;
+    }
     const heading = line.match(HEADING_LINE);
     const bullet = line.match(BULLET_LINE);
     if (heading) {
@@ -338,6 +406,14 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
   }
   flushParagraph();
   flushBullets();
+  if (codeLines !== null)
+    blocks.push(
+      <CodeBlock
+        key={key++}
+        code={codeLines.join("\n")}
+        lang={codeLang || undefined}
+      />,
+    );
 
   return <span className={className}>{blocks}</span>;
 }

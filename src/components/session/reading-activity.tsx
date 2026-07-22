@@ -17,6 +17,7 @@ import { InteractiveWidget, WidgetId, widgetRegistry } from "@/components/intera
 import { ExpressionGraph } from "@/components/interactive/desmos";
 import { HtmlWidget } from "@/components/interactive/html-widget";
 import {
+  CodeBlock,
   MathSpan,
   MathText,
   splitMathSegments,
@@ -38,7 +39,32 @@ type ReadingBlock =
   | { kind: "figure"; figureId: string }
   | { kind: "heading"; level: number; text: string }
   | { kind: "list"; items: string[] }
+  | { kind: "code"; code: string; lang?: string }
   | { kind: "paragraph"; text: string };
+
+const CODE_FENCE_RE = /```(\w*)[ \t]*\n([\s\S]*?)```/g;
+
+/** Splits reading text into blocks, keeping fenced code blocks intact. */
+function parseReadingBlocks(text: string): ReadingBlock[] {
+  const blocks: ReadingBlock[] = [];
+  let last = 0;
+  const pushPlain = (chunk: string) => {
+    if (chunk.trim())
+      blocks.push(...chunk.split("\n\n").flatMap(parseBlocks));
+  };
+  for (const m of text.matchAll(CODE_FENCE_RE)) {
+    const idx = m.index ?? 0;
+    pushPlain(text.slice(last, idx));
+    blocks.push({
+      kind: "code",
+      code: m[2].replace(/\n$/, ""),
+      lang: m[1] || undefined,
+    });
+    last = idx + m[0].length;
+  }
+  pushPlain(text.slice(last));
+  return blocks;
+}
 
 const MAX_HEADING_CHARS = 80;
 
@@ -176,7 +202,7 @@ function FigureView({ figure }: { figure: ReadingFigure }) {
  * (e.g. the artifact bank).
  */
 export function ReadingBody({ content }: { content: ReadingContent }) {
-  const parsedBlocks = content.text.split("\n\n").flatMap(parseBlocks);
+  const parsedBlocks = parseReadingBlocks(content.text);
   const figuresById = new Map(
     (content.figures ?? []).map((figure) => [figure.id, figure]),
   );
@@ -204,6 +230,9 @@ export function ReadingBody({ content }: { content: ReadingContent }) {
               <MathText text={block.text} />
             </h3>
           );
+        }
+        if (block.kind === "code") {
+          return <CodeBlock key={i} code={block.code} lang={block.lang} />;
         }
         if (block.kind === "list") {
           return (
@@ -279,6 +308,24 @@ function ParagraphView({
       );
       continue;
     }
+    if (seg.kind === "text" && !own.length) {
+      const t = seg.text;
+      let last = 0;
+      for (const m of t.matchAll(/`[^`\n]+`/g)) {
+        const idx = m.index ?? 0;
+        if (idx > last) segments.push(t.slice(last, idx));
+        segments.push(
+          <span key={`c-${seg.start + idx}`} data-math-len={m[0].length}>
+            <code className="rounded bg-muted px-1 py-0.5 text-[0.9em] font-mono">
+              {m[0].slice(1, -1)}
+            </code>
+          </span>,
+        );
+        last = idx + m[0].length;
+      }
+      if (last < t.length) segments.push(t.slice(last));
+      continue;
+    }
     let cursor = seg.start;
     for (const h of own) {
       const start = Math.max(h.start, seg.start);
@@ -346,7 +393,7 @@ export function ReadingActivity({
   } | null>(null);
   const [noteDraft, setNoteDraft] = useState("");
 
-  const parsedBlocks = content.text.split("\n\n").flatMap(parseBlocks);
+  const parsedBlocks = parseReadingBlocks(content.text);
   const figuresById = new Map(
     (content.figures ?? []).map((figure) => [figure.id, figure]),
   );
@@ -484,6 +531,9 @@ export function ReadingActivity({
                 <MathText text={block.text} />
               </h3>
             );
+          }
+          if (block.kind === "code") {
+            return <CodeBlock key={i} code={block.code} lang={block.lang} />;
           }
           if (block.kind === "list") {
             return (
