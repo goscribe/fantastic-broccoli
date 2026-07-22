@@ -98,14 +98,20 @@ function RecorderCard({
 
   useEffect(() => {
     let tick: ReturnType<typeof setInterval>;
+    let cancelled = false;
     navigator.mediaDevices
       .getUserMedia({ audio: true })
       .then((stream) => {
+        if (cancelled || mediaRecorderRef.current) {
+          stream.getTracks().forEach((t) => t.stop());
+          return;
+        }
         const recorder = new MediaRecorder(stream);
         mediaRecorderRef.current = recorder;
-        chunksRef.current = [];
+        const chunks: Blob[] = [];
+        chunksRef.current = chunks;
         recorder.ondataavailable = (e) => {
-          if (e.data.size > 0) chunksRef.current.push(e.data);
+          if (e.data.size > 0) chunks.push(e.data);
         };
         recorder.start(1000);
         tick = setInterval(() => {
@@ -151,11 +157,15 @@ function RecorderCard({
       })
       .catch(() => onError("Microphone access denied"));
     return () => {
+      cancelled = true;
       clearInterval(tick);
       recognitionRef.current?.stop();
-      mediaRecorderRef.current?.stream
-        .getTracks()
-        .forEach((t) => t.stop());
+      const recorder = mediaRecorderRef.current;
+      if (recorder) {
+        if (recorder.state !== "inactive") recorder.stop();
+        recorder.stream.getTracks().forEach((t) => t.stop());
+        mediaRecorderRef.current = null;
+      }
     };
   }, [onError]);
 

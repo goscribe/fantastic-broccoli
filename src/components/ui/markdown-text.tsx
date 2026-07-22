@@ -125,6 +125,11 @@ export function MathText({ text }: { text: string }) {
   );
 }
 
+/** Renders inline content: LaTeX math, bold/italic/code/links, escapes. */
+export function InlineMarkdown({ text }: { text: string }) {
+  return <>{renderInline(text)}</>;
+}
+
 function renderInline(text: string): React.ReactNode[] {
   const nodes: React.ReactNode[] = [];
   let last = 0;
