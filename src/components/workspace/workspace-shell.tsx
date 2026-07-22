@@ -99,7 +99,7 @@ export function WorkspaceShell({
 
   return (
     <div className="flex-1 flex flex-col">
-      <div className="border-b border-border bg-card">
+      <div className="sticky top-14 z-30 border-b border-border bg-card">
         <div className="w-full px-4 sm:px-8">
           <nav className="flex items-center gap-1 -mb-px">
             {tabs.map((tab) => {
