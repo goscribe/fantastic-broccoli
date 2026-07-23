@@ -188,6 +188,11 @@ function themeStyle(): string {
   ).join("");
   return `<style>:root{${vars}}
 body{margin:0;padding:14px 16px;font-family:ui-sans-serif,system-ui,sans-serif;color:var(--foreground);background:var(--card);}
+.katex{max-width:100%;}
+.katex-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding-bottom:2px;}
+span:has(>.katex):not(.math):not(.math-display){display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle;}
+.math,.math-display{display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle;}
+.math-display{display:block;}
 input[type=range]{accent-color:var(--accent);}
 button{font:inherit;border:1px solid var(--border);border-radius:8px;background:var(--muted);color:var(--foreground);padding:4px 10px;cursor:pointer;}
 button:hover{border-color:var(--border-strong);}
