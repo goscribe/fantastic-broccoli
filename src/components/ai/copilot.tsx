@@ -228,7 +228,7 @@ export function Copilot({
         let toolStatus = "";
         const paintStream = () => {
           const textSoFar =
-            streamed + (toolStatus ? `\n\n_${toolStatus}…_` : "");
+            streamed + (toolStatus ? `\n\n*${toolStatus}…*` : "");
           setMessages((prev) =>
             prev.map((m) =>
               m.id === assistantId
