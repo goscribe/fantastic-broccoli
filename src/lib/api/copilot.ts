@@ -128,6 +128,7 @@ export async function askCopilot(input: {
 
 type StreamEvent =
   | { type: "delta"; text: string }
+  | { type: "tool"; label: string }
   | ({ type: "final" } & CopilotAnswer)
   | { type: "error"; message: string };
 
@@ -140,6 +141,7 @@ type StreamEvent =
 export async function askCopilotStream(
   input: Parameters<typeof askCopilot>[0],
   onDelta: (text: string) => void,
+  onTool?: (label: string) => void,
 ): Promise<CopilotAnswer> {
   let res: Response;
   try {
@@ -185,6 +187,7 @@ export async function askCopilotStream(
       return;
     }
     if (event.type === "delta") onDelta(event.text);
+    else if (event.type === "tool") onTool?.(event.label);
     else if (event.type === "final")
       final = {
         answer: event.answer,

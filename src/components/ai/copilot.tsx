@@ -225,6 +225,28 @@ export function Copilot({
         }
         const streamPartId = nextId();
         let streamed = "";
+        let toolStatus = "";
+        const paintStream = () => {
+          const textSoFar =
+            streamed + (toolStatus ? `\n\n*${toolStatus}…*` : "");
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === assistantId
+                ? {
+                    ...m,
+                    parts: [
+                      {
+                        kind: "text",
+                        id: streamPartId,
+                        text: textSoFar,
+                        done: false,
+                      },
+                    ],
+                  }
+                : m,
+            ),
+          );
+        };
         const result = await askCopilotStream(
           {
             workspaceId,
@@ -235,24 +257,12 @@ export function Copilot({
           },
           (delta) => {
             streamed += delta;
-            const textSoFar = streamed;
-            setMessages((prev) =>
-              prev.map((m) =>
-                m.id === assistantId
-                  ? {
-                      ...m,
-                      parts: [
-                        {
-                          kind: "text",
-                          id: streamPartId,
-                          text: textSoFar,
-                          done: false,
-                        },
-                      ],
-                    }
-                  : m,
-              ),
-            );
+            toolStatus = "";
+            paintStream();
+          },
+          (label) => {
+            toolStatus = label;
+            paintStream();
           },
         );
         setMessages((prev) =>
