@@ -7,6 +7,7 @@ import { TopBar } from "@/components/layout/top-bar";
 import { useAuthUser } from "@/lib/api/auth";
 import { ScribeMark } from "@/components/graphics/logo";
 import { Loader2 } from "lucide-react";
+import { OnboardingTour } from "@/components/onboarding/onboarding-tour";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -39,6 +40,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="h-screen flex flex-col overflow-hidden">
         <TopBar showLogo />
         {children}
+        <OnboardingTour />
       </div>
     );
   }
@@ -61,6 +63,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <TopBar onMenuClick={() => setSidebarOpen(true)} />
         {children}
       </div>
+      <OnboardingTour />
     </div>
   );
 }
