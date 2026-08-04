@@ -139,9 +139,7 @@ export function OnboardingTour() {
         <div className="flex w-full flex-col justify-between p-8 md:w-[420px] md:p-10">
           <div>
             <div className="flex items-center gap-2 text-accent">
-              <span className="text-xs font-bold uppercase tracking-widest">
-                What&apos;s new
-              </span>
+              <span className="text-xs font-semibold">What&apos;s new</span>
               <span className="ml-auto text-[11px] text-muted-foreground">
                 {ONBOARDING_DATE}
               </span>
@@ -318,14 +316,14 @@ function LegacyAnimation() {
         legacy.scribe.study
       </div>
       <div className="mt-4 grid grid-cols-2 gap-3 text-center text-xs">
-        <div className="rounded-xl border border-accent/40 bg-accent-soft/50 p-4">
+        <div className="rounded-xl border border-accent/40 bg-accent-soft p-4">
           <p className="font-semibold text-accent">New Scribe</p>
           <p className="mt-1 text-[11px] text-muted-foreground">
             Sessions, tokens, new features
           </p>
         </div>
-        <div className="rounded-xl border border-border bg-muted/40 p-4">
-          <p className="font-semibold">Classic Scribe</p>
+        <div className="rounded-xl border border-border bg-card p-4">
+          <p className="font-semibold text-foreground">Classic Scribe</p>
           <p className="mt-1 text-[11px] text-muted-foreground">
             Same account &amp; data
           </p>
