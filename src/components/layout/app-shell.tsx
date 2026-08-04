@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Sidebar } from "@/components/layout/sidebar";
 import { TopBar } from "@/components/layout/top-bar";
 import { useAuthUser } from "@/lib/api/auth";
-import { ScribeMark } from "@/components/graphics/logo";
+import { FullScreenLoader } from "@/components/layout/full-screen-loader";
 import { OnboardingTour } from "@/components/onboarding/onboarding-tour";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -26,18 +26,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }
 
   if (loading) {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background">
-        <div className="relative animate-float">
-          <div className="absolute inset-0 rounded-full bg-accent/40 blur-2xl animate-loader-glow" />
-          <ScribeMark className="relative h-12 w-12" />
-        </div>
-        <span className="text-lg font-bold tracking-tight">Scribe</span>
-        <div className="relative h-1 w-40 overflow-hidden rounded-full bg-muted">
-          <div className="absolute inset-y-0 rounded-full bg-accent animate-loader-bar" />
-        </div>
-      </div>
-    );
+    return <FullScreenLoader />;
   }
 
   if (isSession) {
