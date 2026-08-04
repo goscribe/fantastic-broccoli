@@ -45,12 +45,12 @@ export function NoteArt({ className }: { className?: string }) {
 export function AudioArt({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 40 40" className={className} aria-hidden>
-      <circle cx="20" cy="20" r="17" fill="#eaf5df" />
-      <rect x="9" y="16" width="2.5" height="8" rx="1.25" fill="#79c94c" />
+      <circle cx="20" cy="20" r="17" fill="#ede9fe" />
+      <rect x="9" y="16" width="2.5" height="8" rx="1.25" fill="#a78bfa" />
       <rect x="13.5" y="12" width="2.5" height="16" rx="1.25" fill="var(--accent)" />
-      <rect x="18" y="8" width="2.5" height="24" rx="1.25" fill="#3d8404" />
+      <rect x="18" y="8" width="2.5" height="24" rx="1.25" fill="#6d28d9" />
       <rect x="22.5" y="13" width="2.5" height="14" rx="1.25" fill="var(--accent)" />
-      <rect x="27" y="17" width="2.5" height="6" rx="1.25" fill="#79c94c" />
+      <rect x="27" y="17" width="2.5" height="6" rx="1.25" fill="#a78bfa" />
       <circle cx="31" cy="10" r="5" fill="#f43f5e" />
       <circle cx="31" cy="10" r="2" fill="#fff" />
     </svg>
@@ -76,18 +76,18 @@ export function SessionArt({ className }: { className?: string }) {
     <svg viewBox="0 0 40 40" className={className} aria-hidden>
       <path
         d="M6 10a3 3 0 0 1 3-3h9v26H9a3 3 0 0 1-3-3V10z"
-        fill="#eaf5df"
+        fill="#ede9fe"
       />
       <path
         d="M34 10a3 3 0 0 0-3-3h-9v26h9a3 3 0 0 0 3-3V10z"
-        fill="#d3ecba"
+        fill="#ddd6fe"
       />
       <rect x="9" y="12" width="6" height="1.8" rx="0.9" fill="var(--accent)" />
-      <rect x="9" y="16" width="6" height="1.8" rx="0.9" fill="#79c94c" />
+      <rect x="9" y="16" width="6" height="1.8" rx="0.9" fill="#a78bfa" />
       <rect x="25" y="12" width="6" height="1.8" rx="0.9" fill="var(--accent)" />
-      <rect x="25" y="16" width="6" height="1.8" rx="0.9" fill="#79c94c" />
-      <rect x="18" y="7" width="4" height="26" rx="1" fill="#3d8404" />
-      <circle cx="31" cy="30" r="7" fill="#171c12" />
+      <rect x="25" y="16" width="6" height="1.8" rx="0.9" fill="#a78bfa" />
+      <rect x="18" y="7" width="4" height="26" rx="1" fill="#6d28d9" />
+      <circle cx="31" cy="30" r="7" fill="#1e1b2e" />
       <path d="M29 27l5 3-5 3v-6z" fill="var(--accent-bright)" />
     </svg>
   );
@@ -98,7 +98,7 @@ export function UploadArt({ className }: { className?: string }) {
     <svg viewBox="0 0 40 40" className={className} aria-hidden>
       <path
         d="M11 30a8 8 0 0 1-1.5-15.9A10 10 0 0 1 29 12a7.5 7.5 0 0 1 2 14.7"
-        fill="#eaf5df"
+        fill="#ede9fe"
       />
       <path
         d="M20 18l6 6h-3.8v8h-4.4v-8H14l6-6z"

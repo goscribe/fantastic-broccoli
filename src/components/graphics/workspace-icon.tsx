@@ -10,8 +10,8 @@ function ChemistryIcon({ className }: { className?: string }) {
         strokeLinejoin="round"
       />
       <path d="M8.1 14.5h7.8l2 3.7a1.6 1.6 0 0 1-1.4 2.4h-9a1.6 1.6 0 0 1-1.4-2.4l2-3.7z" fill="var(--accent-bright)" />
-      <circle cx="10.5" cy="17.5" r="0.9" fill="#eaf5df" />
-      <circle cx="13.8" cy="18.6" r="0.7" fill="#eaf5df" />
+      <circle cx="10.5" cy="17.5" r="0.9" fill="#ede9fe" />
+      <circle cx="13.8" cy="18.6" r="0.7" fill="#ede9fe" />
     </svg>
   );
 }
