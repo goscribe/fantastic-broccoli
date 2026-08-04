@@ -276,7 +276,7 @@ function heat(v: number): string {
 
 function FeaturesAnimation() {
   return (
-    <div className="rounded-2xl border border-border bg-card p-5 shadow-lg">
+    <div className="mx-auto max-w-[240px] rounded-2xl border border-border bg-card p-4 shadow-lg">
       <p className="text-xs font-semibold">Rerank matrix</p>
       <div className="mt-3 grid grid-cols-10 gap-[3px]">
         {rerankMatrix.flatMap((row, i) =>
