@@ -253,51 +253,52 @@ function SessionAnimation() {
   );
 }
 
-const rerankMatrix = [
-  [0.92, 0.31, 0.12, 0.05, 0.44],
-  [0.28, 0.85, 0.4, 0.18, 0.09],
-  [0.15, 0.37, 0.78, 0.52, 0.22],
-  [0.07, 0.2, 0.49, 0.88, 0.34],
-  [0.41, 0.11, 0.26, 0.3, 0.81],
-];
+/** Smooth rank-2 pattern: block-structured like an SVD compression figure. */
+const rerankMatrix = Array.from({ length: 10 }, (_, i) =>
+  Array.from({ length: 10 }, (_, j) => {
+    const u = i < 5 ? 1 - i * 0.18 : -(1 - (i - 5) * 0.18);
+    const v = j < 5 ? 1 - j * 0.18 : -(1 - (j - 5) * 0.18);
+    return -u * v;
+  }),
+);
 
-/** 0 → blue, 1 → red. */
+/** Diverging pastel palette: -1 → sky blue, 0 → white, 1 → soft red. */
 function heat(v: number): string {
-  const r = Math.round(59 + v * (220 - 59));
-  const g = Math.round(76 + (1 - Math.abs(v - 0.5) * 2) * 40);
-  const b = Math.round(220 - v * (220 - 56));
-  return `rgb(${r} ${g} ${b})`;
+  const t = Math.max(-1, Math.min(1, v));
+  if (t < 0) {
+    // white → rgb(94 188 240)
+    const a = -t;
+    return `rgb(${Math.round(255 - a * (255 - 94))} ${Math.round(255 - a * (255 - 188))} ${Math.round(255 - a * (255 - 240))})`;
+  }
+  // white → rgb(224 122 133)
+  return `rgb(${Math.round(255 - t * (255 - 224))} ${Math.round(255 - t * (255 - 122))} ${Math.round(255 - t * (255 - 133))})`;
 }
 
 function FeaturesAnimation() {
   return (
     <div className="rounded-2xl border border-border bg-card p-5 shadow-lg">
-      <p className="text-xs font-semibold text-muted-foreground">
-        Figure 3 — Rerank matrix
-      </p>
-      <div className="mt-3 grid grid-cols-5 gap-1">
+      <p className="text-xs font-semibold">Rerank matrix</p>
+      <div className="mt-3 grid grid-cols-10 gap-[3px]">
         {rerankMatrix.flatMap((row, i) =>
           row.map((v, j) => (
             <div
               key={`${i}-${j}`}
-              className="flex aspect-square items-center justify-center rounded-[4px] text-[9px] font-medium text-white/90"
+              className="aspect-square rounded-[3px]"
               style={{
                 backgroundColor: heat(v),
-                animation: `fade-up 0.4s ease-out ${(i * 5 + j) * 0.03}s both`,
+                animation: `fade-up 0.4s ease-out ${(i + j) * 0.04}s both`,
               }}
-            >
-              {v.toFixed(2)}
-            </div>
+            />
           )),
         )}
       </div>
       <div className="mt-3 flex items-center justify-between text-[10px] text-muted-foreground">
-        <span className="flex items-center gap-1">
-          <span className="h-2 w-2 rounded-full" style={{ backgroundColor: heat(0) }} />
+        <span className="flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-[3px]" style={{ backgroundColor: heat(-1) }} />
           Low relevance
         </span>
-        <span className="flex items-center gap-1">
-          <span className="h-2 w-2 rounded-full" style={{ backgroundColor: heat(1) }} />
+        <span className="flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-[3px]" style={{ backgroundColor: heat(1) }} />
           High relevance
         </span>
       </div>
