@@ -15,7 +15,7 @@ import {
   type WorkspaceMemberRecord,
 } from "@/lib/api/workspace";
 import { cn } from "@/lib/utils";
-import { Mail, Plus, Shield, Trash2, X } from "lucide-react";
+import { Trash2, X } from "lucide-react";
 
 function RowSkeleton() {
   return (
@@ -73,8 +73,7 @@ function MemberRow({
         </div>
       </div>
       <div className="flex flex-wrap items-center gap-2">
-        <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold capitalize text-accent">
-          <Shield className="h-3 w-3" />
+        <span className="inline-flex items-center rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold capitalize text-accent">
           {member.role}
         </span>
         {canManage && (
@@ -197,13 +196,15 @@ export function WorkspaceMembersDialog({
 
   if (!open) return null;
 
+  const canInvite = currentRole === "owner" || currentRole === "admin";
+
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/20 p-4 backdrop-blur-sm sm:items-center">
-      <div className="w-full max-w-3xl overflow-hidden rounded-2xl border border-border bg-card shadow-xl animate-fade-up">
-        <div className="flex items-center justify-between border-b border-border px-5 py-4">
+      <div className="w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-card shadow-xl animate-fade-up">
+        <div className="flex items-center justify-between px-6 pt-5 pb-4">
           <div>
-            <p className="text-lg font-bold tracking-tight">Workspace members</p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-lg font-bold tracking-tight">Members</p>
+            <p className="text-[13px] text-muted-foreground">
               {workspaceMembers.length} member
               {workspaceMembers.length === 1 ? "" : "s"}
               {invitations.length > 0
@@ -223,102 +224,84 @@ export function WorkspaceMembersDialog({
           </button>
         </div>
 
-        <div className="grid gap-6 p-5 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="space-y-4">
-            <div className="rounded-xl border border-border bg-muted/30 p-4">
-              <div className="flex items-center gap-2 text-sm font-semibold">
-                <Plus className="h-4 w-4 text-accent" />
-                Invite someone
-              </div>
-              <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@school.edu"
-                  className="h-10 flex-1 rounded-lg border border-border bg-background px-3.5 text-sm focus:border-accent focus:outline-none"
-                />
-                <select
-                  value={role}
-                  onChange={(e) => setRole(e.target.value as "admin" | "member")}
-                  className="h-10 rounded-lg border border-border bg-background px-3 text-sm focus:border-accent focus:outline-none"
-                >
-                  <option value="member">Member</option>
-                  <option value="admin">Admin</option>
-                </select>
-                <Button onClick={() => void handleInvite()} disabled={inviting || !email.trim()}>
-                  {inviting ? "Inviting…" : "Invite"}
-                </Button>
-              </div>
-              <p className="mt-2 text-[12px] text-faint">
-                Owners can change roles and remove members from here.
-              </p>
+        {canInvite && (
+          <div className="border-b border-border px-6 pb-5">
+            <div className="flex flex-col gap-2.5 sm:flex-row">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") void handleInvite();
+                }}
+                placeholder="Invite by email…"
+                className="h-10 flex-1 rounded-lg border border-border bg-background px-3.5 text-sm focus:border-accent focus:outline-none"
+              />
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value as "admin" | "member")}
+                aria-label="Role for invitee"
+                className="h-10 rounded-lg border border-border bg-background px-3 text-sm focus:border-accent focus:outline-none"
+              >
+                <option value="member">Member</option>
+                <option value="admin">Admin</option>
+              </select>
+              <Button onClick={() => void handleInvite()} disabled={inviting || !email.trim()}>
+                {inviting ? "Inviting…" : "Send invite"}
+              </Button>
             </div>
-
-            {loading ? (
-              <div className="space-y-3">
-                {Array.from({ length: 3 }, (_, i) => (
-                  <RowSkeleton key={i} />
-                ))}
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {workspaceMembers.map((member) => (
-                  <MemberRow
-                    key={member.id}
-                    member={member}
-                    currentRole={currentRole}
-                    onRoleChange={(memberId, nextRole) =>
-                      void handleRoleChange(memberId, nextRole)
-                    }
-                    onRemove={(memberId) => void handleRemove(memberId)}
-                    busy={updating}
-                  />
-                ))}
-              </div>
-            )}
           </div>
+        )}
 
-          <div className="space-y-4">
-            <div className="rounded-xl border border-border bg-muted/30 p-4">
-              <p className="flex items-center gap-2 text-sm font-semibold">
-                <Mail className="h-4 w-4 text-accent" />
+        <div className="max-h-[55vh] space-y-6 overflow-y-auto px-6 py-5">
+          {loading ? (
+            <div className="space-y-3">
+              {Array.from({ length: 3 }, (_, i) => (
+                <RowSkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="space-y-2.5">
+              {workspaceMembers.map((member) => (
+                <MemberRow
+                  key={member.id}
+                  member={member}
+                  currentRole={currentRole}
+                  onRoleChange={(memberId, nextRole) =>
+                    void handleRoleChange(memberId, nextRole)
+                  }
+                  onRemove={(memberId) => void handleRemove(memberId)}
+                  busy={updating}
+                />
+              ))}
+            </div>
+          )}
+
+          {invitations.length > 0 && (
+            <div>
+              <p className="mb-2.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                 Pending invitations
               </p>
-              <div className="mt-3 space-y-2">
-                {invitations.length === 0 ? (
-                  <p className="text-sm text-muted-foreground">
-                    No pending invitations.
-                  </p>
-                ) : (
-                  invitations.map((invite) => (
-                    <div
-                      key={invite.id}
-                      className="rounded-lg border border-border bg-background px-3 py-2.5 text-sm"
-                    >
-                      <p className="font-medium">{invite.email}</p>
-                      <p className="mt-0.5 text-[12px] text-muted-foreground">
-                        Role: {invite.role} · Expires {new Date(invite.expiresAt).toLocaleDateString()}
-                      </p>
-                    </div>
-                  ))
-                )}
+              <div className="space-y-2">
+                {invitations.map((invite) => (
+                  <div
+                    key={invite.id}
+                    className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-dashed border-border px-4 py-3 text-sm"
+                  >
+                    <p className="font-medium">{invite.email}</p>
+                    <p className="text-[12px] text-muted-foreground">
+                      <span className="capitalize">{invite.role}</span> · Expires{" "}
+                      {new Date(invite.expiresAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
-
-            <div className="rounded-xl border border-border bg-accent-soft/40 p-4">
-              <p className="text-sm font-semibold text-accent-dim">Shortcuts</p>
-              <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
-                <li>Use the invite box to add classmates quickly.</li>
-                <li>Use the role select to promote members to admin.</li>
-                <li>Remove access with one click when a workspace changes.</li>
-              </ul>
-            </div>
-          </div>
+          )}
         </div>
 
         {error && (
-          <div className="border-t border-border px-5 py-3 text-sm text-rose">
+          <div className="border-t border-border px-6 py-3 text-sm text-rose">
             {error}
           </div>
         )}
