@@ -16,7 +16,7 @@ export function ScribeLogo({ className }: { className?: string }) {
   return (
     <span className={`flex items-center gap-2 ${className ?? ""} hover:cursor-pointer`}>
       <ScribeMark className="h-[26px] w-[26px]" />
-      <span className="text-sm font-medium tracking-tight">Scribe</span>
+      <span className="text-sm font-bold tracking-tight">Scribe</span>
     </span>
   );
 }
