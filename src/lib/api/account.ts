@@ -16,11 +16,11 @@ export async function fetchAccountSummary(): Promise<AccountSummary> {
   // `tokens` is newer than the published @goscribe/server types.
   const tokens = (
     overview as unknown as {
-      tokens?: { balance: number; monthlyAllowance: number };
+      tokens?: { balance: number; monthlyAllowance: number; planName?: string };
     }
   ).tokens;
   return {
-    planName: overview.hasActivePlan ? "Pro" : "Free",
+    planName: tokens?.planName ?? (overview.hasActivePlan ? "Pro" : "Free"),
     hasActivePlan: overview.hasActivePlan,
     storageUsedBytes: Number(overview.usage.storageBytes),
     storageLimitBytes: Number(overview.limits.maxStorageBytes),
@@ -32,7 +32,8 @@ export async function fetchAccountSummary(): Promise<AccountSummary> {
 export interface PlanOption {
   id: string;
   name: string;
-  priceCents: number;
+  /** Monthly price in whole dollars (matches `Plan.price` on the server). */
+  priceDollars: number;
   description: string;
   storageLimitBytes: number;
   monthlyTokens: number;
@@ -44,7 +45,7 @@ export async function fetchPlanOptions(): Promise<PlanOption[]> {
   return plans.map((plan) => ({
     id: plan.id,
     name: plan.name,
-    priceCents: plan.price,
+    priceDollars: plan.price,
     description: plan.description ?? "",
     storageLimitBytes: Number(plan.limit?.maxStorageBytes ?? 0),
     // `monthlyTokens` is newer than the published @goscribe/server types.

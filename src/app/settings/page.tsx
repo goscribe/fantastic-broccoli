@@ -78,8 +78,8 @@ function PlanCard({
         {plan.description}
       </p>
       <p className="mt-3 text-lg font-bold tabular-nums">
-        {plan.priceCents === 0 ? "Free" : `$${(plan.priceCents / 100).toFixed(2)}`}
-        {plan.priceCents > 0 && (
+        {plan.priceDollars === 0 ? "Free" : `$${plan.priceDollars}`}
+        {plan.priceDollars > 0 && (
           <span className="text-[12px] font-normal text-faint"> / month</span>
         )}
       </p>
@@ -105,7 +105,7 @@ function PlanCard({
             disabled={switching}
             onClick={() => onSelect(plan.id)}
           >
-            {plan.priceCents === 0 ? "Downgrade" : `Switch to ${plan.name}`}
+            {plan.priceDollars === 0 ? "Downgrade" : `Switch to ${plan.name}`}
           </Button>
         )}
       </div>

@@ -253,24 +253,56 @@ function SessionAnimation() {
   );
 }
 
+const rerankMatrix = [
+  [0.92, 0.31, 0.12, 0.05, 0.44],
+  [0.28, 0.85, 0.4, 0.18, 0.09],
+  [0.15, 0.37, 0.78, 0.52, 0.22],
+  [0.07, 0.2, 0.49, 0.88, 0.34],
+  [0.41, 0.11, 0.26, 0.3, 0.81],
+];
+
+/** 0 → blue, 1 → red. */
+function heat(v: number): string {
+  const r = Math.round(59 + v * (220 - 59));
+  const g = Math.round(76 + (1 - Math.abs(v - 0.5) * 2) * 40);
+  const b = Math.round(220 - v * (220 - 56));
+  return `rgb(${r} ${g} ${b})`;
+}
+
 function FeaturesAnimation() {
   return (
     <div className="rounded-2xl border border-border bg-card p-5 shadow-lg">
-      <p className="text-xs font-semibold text-muted-foreground">Figure 2 — Krebs cycle</p>
-      <svg viewBox="0 0 220 120" className="mt-3 w-full" role="img" aria-label="Diagram">
-        <circle cx="110" cy="60" r="38" fill="none" stroke="var(--accent)" strokeWidth="2" />
-        {[0, 60, 120, 180, 240, 300].map((deg) => {
-          const rad = (deg * Math.PI) / 180;
-          const x = 110 + 38 * Math.cos(rad);
-          const y = 60 + 38 * Math.sin(rad);
-          return <circle key={deg} cx={x} cy={y} r="5" fill="var(--accent)" opacity="0.85" />;
-        })}
-        <text x="110" y="64" textAnchor="middle" fontSize="10" fill="var(--accent)" fontWeight="600">
-          Acetyl-CoA
-        </text>
-      </svg>
+      <p className="text-xs font-semibold text-muted-foreground">
+        Figure 3 — Rerank matrix
+      </p>
+      <div className="mt-3 grid grid-cols-5 gap-1">
+        {rerankMatrix.flatMap((row, i) =>
+          row.map((v, j) => (
+            <div
+              key={`${i}-${j}`}
+              className="flex aspect-square items-center justify-center rounded-[4px] text-[9px] font-medium text-white/90"
+              style={{
+                backgroundColor: heat(v),
+                animation: `fade-up 0.4s ease-out ${(i * 5 + j) * 0.03}s both`,
+              }}
+            >
+              {v.toFixed(2)}
+            </div>
+          )),
+        )}
+      </div>
+      <div className="mt-3 flex items-center justify-between text-[10px] text-muted-foreground">
+        <span className="flex items-center gap-1">
+          <span className="h-2 w-2 rounded-full" style={{ backgroundColor: heat(0) }} />
+          Low relevance
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="h-2 w-2 rounded-full" style={{ backgroundColor: heat(1) }} />
+          High relevance
+        </span>
+      </div>
       <div className="mt-3 rounded-lg bg-accent-soft/50 px-3 py-2 text-[11px] text-muted-foreground">
-        Diagrams from your materials render inline, sharp at any size.
+        Figures like this now render inline, sharp at any size.
       </div>
     </div>
   );
