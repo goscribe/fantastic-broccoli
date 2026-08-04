@@ -663,12 +663,6 @@ export default function LandingPage() {
         {/* Final CTA */}
         <section className="relative overflow-hidden border-t border-border py-16 md:py-24">
           <GlowField />
-          <span aria-hidden className="pointer-events-none absolute -left-10 top-1/2 -translate-y-1/2">
-            <ScribeMark className="h-40 w-40 opacity-[0.07]" />
-          </span>
-          <span aria-hidden className="pointer-events-none absolute -right-10 top-1/2 -translate-y-1/2">
-            <ScribeMark className="h-56 w-56 opacity-[0.07]" />
-          </span>
           <div className="relative mx-auto max-w-6xl px-6 text-center">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
               Ready to study smarter?
