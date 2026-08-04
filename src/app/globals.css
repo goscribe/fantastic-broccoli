@@ -11,13 +11,13 @@
   --muted-foreground: #605c6d;
   --faint: #9a95a8;
   --ink: #171320;
-  --accent: #7c3aed;
-  --accent-dim: #6d2fd6;
-  --accent-soft: #f1eafd;
-  --accent-bright: #a78bfa;
+  --accent: #6952e0;
+  --accent-dim: #5a43d1;
+  --accent-soft: #eeebfc;
+  --accent-bright: #8270db;
   --accent-foreground: #ffffff;
-  --energy: #8b5cf6;
-  --energy-soft: #f1eafd;
+  --energy: #6952e0;
+  --energy-soft: #eeebfc;
   --violet: #7c5cfc;
   --sky: #38bdf8;
   --rose: #fb7185;
@@ -25,7 +25,7 @@
   --border: #e8e5f0;
   --border-strong: #d6d1e3;
   --paper: #ffffff;
-  --ring: #7c3aed;
+  --ring: #6952e0;
   --radius: 1rem;
   --success: #22c55e;
   --warning: #f59e0b;
@@ -43,17 +43,17 @@
   --muted-foreground: #aaa6b8;
   --faint: #716c80;
   --ink: #0a090d;
-  --accent: #a78bfa;
-  --accent-dim: #9775f5;
-  --accent-soft: #241d3d;
-  --accent-bright: #c4b0ff;
-  --accent-foreground: #140b2e;
-  --energy: #a78bfa;
-  --energy-soft: #211b38;
+  --accent: #8270db;
+  --accent-dim: #7460d2;
+  --accent-soft: #221c40;
+  --accent-bright: #a394ec;
+  --accent-foreground: #ffffff;
+  --energy: #8270db;
+  --energy-soft: #1f1a38;
   --border: #2a2833;
   --border-strong: #454153;
   --paper: #1c1b23;
-  --ring: #a78bfa;
+  --ring: #8270db;
 }
 
 @theme inline {
@@ -148,7 +148,7 @@ input[type="range"].param-slider:active::-moz-range-thumb {
 }
 
 ::selection {
-  background: rgba(124, 58, 237, 0.2);
+  background: rgba(105, 82, 224, 0.2);
 }
 
 @keyframes fade-up {
