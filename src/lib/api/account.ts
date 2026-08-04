@@ -7,23 +7,25 @@ export interface AccountSummary {
   hasActivePlan: boolean;
   storageUsedBytes: number;
   storageLimitBytes: number;
-  worksheetsUsed: number;
-  worksheetsLimit: number;
-  flashcardsUsed: number;
-  flashcardsLimit: number;
+  tokenBalance: number;
+  monthlyTokens: number;
 }
 
 export async function fetchAccountSummary(): Promise<AccountSummary> {
   const overview = await api.payment.getUsageOverview.query();
+  // `tokens` is newer than the published @goscribe/server types.
+  const tokens = (
+    overview as unknown as {
+      tokens?: { balance: number; monthlyAllowance: number };
+    }
+  ).tokens;
   return {
     planName: overview.hasActivePlan ? "Pro" : "Free",
     hasActivePlan: overview.hasActivePlan,
     storageUsedBytes: Number(overview.usage.storageBytes),
     storageLimitBytes: Number(overview.limits.maxStorageBytes),
-    worksheetsUsed: overview.usage.worksheets,
-    worksheetsLimit: overview.limits.maxWorksheets,
-    flashcardsUsed: overview.usage.flashcards,
-    flashcardsLimit: overview.limits.maxFlashcards,
+    tokenBalance: tokens?.balance ?? 0,
+    monthlyTokens: tokens?.monthlyAllowance ?? 0,
   };
 }
 
@@ -33,8 +35,7 @@ export interface PlanOption {
   priceCents: number;
   description: string;
   storageLimitBytes: number;
-  worksheetsLimit: number;
-  flashcardsLimit: number;
+  monthlyTokens: number;
   isActive: boolean;
 }
 
@@ -46,8 +47,9 @@ export async function fetchPlanOptions(): Promise<PlanOption[]> {
     priceCents: plan.price,
     description: plan.description ?? "",
     storageLimitBytes: Number(plan.limit?.maxStorageBytes ?? 0),
-    worksheetsLimit: plan.limit?.maxWorksheets ?? 0,
-    flashcardsLimit: plan.limit?.maxFlashcards ?? 0,
+    // `monthlyTokens` is newer than the published @goscribe/server types.
+    monthlyTokens:
+      (plan as unknown as { monthlyTokens?: number }).monthlyTokens ?? 0,
     isActive: plan.isActive,
   }));
 }

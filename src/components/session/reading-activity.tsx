@@ -207,7 +207,7 @@ export function ReadingBody({ content }: { content: ReadingContent }) {
     (content.figures ?? []).map((figure) => [figure.id, figure]),
   );
   return (
-    <div className="max-w-[68ch] space-y-5">
+    <div className="mx-auto max-w-[75ch] space-y-5">
       {parsedBlocks.map((block, i) => {
         if (block.kind === "widget") {
           return block.widget in widgetRegistry ? (
@@ -507,7 +507,7 @@ export function ReadingActivity({
       <div
         ref={containerRef}
         onMouseUp={handleMouseUp}
-        className="relative max-w-[68ch] space-y-5 select-text"
+        className="relative mx-auto max-w-[75ch] space-y-5 select-text"
       >
         {parsedBlocks.map((block, i) => {
           if (block.kind === "widget") {

@@ -333,6 +333,24 @@ export function Sidebar({
                 {summary.planName} plan
               </span>
               <span className="text-faint">
+                {summary.tokenBalance} / {summary.monthlyTokens} tokens
+              </span>
+            </div>
+            <div className="mt-1.5 h-1 rounded-full bg-border overflow-hidden">
+              <div
+                className="h-full rounded-full bg-accent"
+                style={{
+                  width: `${
+                    summary.monthlyTokens > 0
+                      ? Math.min(100, (summary.tokenBalance / summary.monthlyTokens) * 100)
+                      : 0
+                  }%`,
+                }}
+              />
+            </div>
+            <div className="mt-2 flex items-center justify-between text-[11px]">
+              <span className="text-faint">Storage</span>
+              <span className="text-faint">
                 {formatBytes(summary.storageUsedBytes)} /{" "}
                 {formatBytes(summary.storageLimitBytes)}
               </span>
