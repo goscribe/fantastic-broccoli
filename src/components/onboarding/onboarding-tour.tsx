@@ -9,7 +9,7 @@ import {
   ONBOARDING_DATE,
 } from "@/lib/onboarding";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ArrowLeft, Sparkles, Search, Palette, Coins } from "lucide-react";
+import { ArrowRight, ArrowLeft, Sparkles, Search, Palette, Coins, Globe } from "lucide-react";
 
 type Slide = {
   id: string;
@@ -52,6 +52,14 @@ const slides: Slide[] = [
     bullets: ["Monthly token allowance", "Storage stays separate", "Top-ups when you need them"],
     icon: <Coins className="h-5 w-5" />,
     animation: <TokensAnimation />,
+  },
+  {
+    id: "legacy",
+    title: "Legacy access",
+    body: "The original Scribe at legacy.scribe.study is still available whenever you need it.",
+    bullets: ["Switch back anytime", "Your data is safe", "This new experience is where updates land"],
+    icon: <Globe className="h-5 w-5" />,
+    animation: <LegacyAnimation />,
   },
 ];
 
@@ -306,6 +314,30 @@ function TokensAnimation() {
             <Coins className="h-6 w-6 text-accent" />
           </div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+function LegacyAnimation() {
+  return (
+    <div className="relative rounded-2xl border border-border bg-card p-6 shadow-lg">
+      <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2">
+        <Globe className="h-4 w-4 text-accent" />
+        <div className="h-2 w-40 rounded bg-muted" />
+      </div>
+      <div className="mt-5 flex items-stretch gap-3">
+        <div className="flex flex-1 flex-col items-center justify-center rounded-xl bg-accent-soft/50 p-4">
+          <span className="text-xs font-semibold text-accent">New</span>
+          <div className="mt-2 h-16 w-16 animate-float rounded-2xl bg-accent" />
+        </div>
+        <div className="flex items-center text-muted-foreground">
+          <span className="text-lg">↔</span>
+        </div>
+        <div className="flex flex-1 flex-col items-center justify-center rounded-xl bg-muted/40 p-4">
+          <span className="text-xs font-medium text-muted-foreground">legacy.scribe.study</span>
+          <div className="mt-2 h-16 w-16 animate-float rounded-2xl bg-muted" style={{ animationDelay: "0.3s" }} />
+        </div>
       </div>
     </div>
   );
