@@ -207,7 +207,7 @@ export function ReadingBody({ content }: { content: ReadingContent }) {
     (content.figures ?? []).map((figure) => [figure.id, figure]),
   );
   return (
-    <div className="space-y-4">
+    <div className="max-w-[68ch] space-y-5">
       {parsedBlocks.map((block, i) => {
         if (block.kind === "widget") {
           return block.widget in widgetRegistry ? (
@@ -224,7 +224,7 @@ export function ReadingBody({ content }: { content: ReadingContent }) {
               key={i}
               className={cn(
                 "font-semibold tracking-tight",
-                block.level <= 2 ? "text-lg pt-2" : "text-base pt-1",
+                block.level <= 2 ? "text-lg pt-4" : "text-base pt-3",
               )}
             >
               <MathText text={block.text} />
@@ -238,10 +238,10 @@ export function ReadingBody({ content }: { content: ReadingContent }) {
           return (
             <ul
               key={i}
-              className="list-disc pl-5 space-y-1.5 text-[15px] leading-7"
+              className="list-disc pl-5 space-y-2 text-[15px] leading-[1.9]"
             >
               {block.items.map((item, j) => (
-                <li key={j}>
+                <li key={j} className="pl-1">
                   <MathText text={item} />
                 </li>
               ))}
@@ -249,7 +249,7 @@ export function ReadingBody({ content }: { content: ReadingContent }) {
           );
         }
         return (
-          <p key={i} className="text-[15px] leading-7">
+          <p key={i} className="text-[15px] leading-[1.9]">
             <MathText text={block.text} />
           </p>
         );
@@ -354,7 +354,7 @@ function ParagraphView({
   }
 
   return (
-    <p data-para={para} className="text-[15px] leading-7">
+    <p data-para={para} className="text-[15px] leading-[1.9]">
       {segments}
     </p>
   );
@@ -507,7 +507,7 @@ export function ReadingActivity({
       <div
         ref={containerRef}
         onMouseUp={handleMouseUp}
-        className="relative space-y-4 select-text"
+        className="relative max-w-[68ch] space-y-5 select-text"
       >
         {parsedBlocks.map((block, i) => {
           if (block.kind === "widget") {
@@ -525,7 +525,7 @@ export function ReadingActivity({
                 key={i}
                 className={cn(
                   "font-semibold tracking-tight",
-                  block.level <= 2 ? "text-lg pt-2" : "text-base pt-1",
+                  block.level <= 2 ? "text-lg pt-4" : "text-base pt-3",
                 )}
               >
                 <MathText text={block.text} />
@@ -537,9 +537,9 @@ export function ReadingActivity({
           }
           if (block.kind === "list") {
             return (
-              <ul key={i} className="list-disc pl-5 space-y-1.5 text-[15px] leading-7">
+              <ul key={i} className="list-disc pl-5 space-y-2 text-[15px] leading-[1.9]">
                 {block.items.map((item, j) => (
-                  <li key={j}>
+                  <li key={j} className="pl-1">
                   <MathText text={item} />
                 </li>
                 ))}

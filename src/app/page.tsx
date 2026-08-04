@@ -161,14 +161,14 @@ export default function HomePage() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 60% 120% at 90% 0%, rgba(111,212,32,0.28) 0%, transparent 60%)",
+                "radial-gradient(ellipse 60% 120% at 90% 0%, rgba(105,82,224,0.35) 0%, transparent 60%)",
             }}
           />
           <div
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 40% 90% at 0% 100%, rgba(111,212,32,0.10) 0%, transparent 55%)",
+                "radial-gradient(ellipse 40% 90% at 0% 100%, rgba(105,82,224,0.12) 0%, transparent 55%)",
             }}
           />
           <div className="relative flex flex-wrap items-end justify-between gap-6">
