@@ -2,58 +2,58 @@
 @import "katex/dist/katex.min.css";
 
 :root {
-  --background: #f7f7f4;
-  --foreground: #14170f;
+  --background: #faf9fc;
+  --foreground: #131118;
   --card: #ffffff;
-  --card-hover: #fcfcfa;
-  --card-foreground: #14170f;
-  --muted: #efefe9;
-  --muted-foreground: #62655c;
-  --faint: #989b90;
-  --ink: #171c12;
-  --accent: #4a9f06;
-  --accent-dim: #3d8404;
-  --accent-soft: #eaf5df;
-  --accent-bright: #6fd420;
+  --card-hover: #fcfcfe;
+  --card-foreground: #131118;
+  --muted: #f0eef6;
+  --muted-foreground: #605c6d;
+  --faint: #9a95a8;
+  --ink: #171320;
+  --accent: #7c3aed;
+  --accent-dim: #6d2fd6;
+  --accent-soft: #f1eafd;
+  --accent-bright: #a78bfa;
   --accent-foreground: #ffffff;
-  --energy: #58cc02;
-  --energy-soft: #ecf9e3;
+  --energy: #8b5cf6;
+  --energy-soft: #f1eafd;
   --violet: #7c5cfc;
   --sky: #38bdf8;
   --rose: #fb7185;
   --amber: #f59e0b;
-  --border: #e7e7e0;
-  --border-strong: #d7d7cd;
+  --border: #e8e5f0;
+  --border-strong: #d6d1e3;
   --paper: #ffffff;
-  --ring: #4a9f06;
+  --ring: #7c3aed;
   --radius: 1rem;
-  --success: #58cc02;
+  --success: #22c55e;
   --warning: #f59e0b;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 .dark {
-  --background: #101112;
-  --foreground: #f2f3f4;
-  --card: #191b1d;
-  --card-hover: #1f2224;
-  --card-foreground: #f2f3f4;
-  --muted: #242728;
-  --muted-foreground: #a9aeb2;
-  --faint: #70767b;
-  --ink: #0a0b0c;
-  --accent: #8ae63f;
-  --accent-dim: #79d92c;
-  --accent-soft: #1e2717;
-  --accent-bright: #9bf055;
-  --accent-foreground: #0c1106;
-  --energy: #6fdb1a;
-  --energy-soft: #1c2513;
-  --border: #2a2d30;
-  --border-strong: #45494e;
-  --paper: #1d1f21;
-  --ring: #8ae63f;
+  --background: #101014;
+  --foreground: #f2f1f5;
+  --card: #18171e;
+  --card-hover: #1e1d26;
+  --card-foreground: #f2f1f5;
+  --muted: #232230;
+  --muted-foreground: #aaa6b8;
+  --faint: #716c80;
+  --ink: #0a090d;
+  --accent: #a78bfa;
+  --accent-dim: #9775f5;
+  --accent-soft: #241d3d;
+  --accent-bright: #c4b0ff;
+  --accent-foreground: #140b2e;
+  --energy: #a78bfa;
+  --energy-soft: #211b38;
+  --border: #2a2833;
+  --border-strong: #454153;
+  --paper: #1c1b23;
+  --ring: #a78bfa;
 }
 
 @theme inline {
@@ -148,7 +148,7 @@ input[type="range"].param-slider:active::-moz-range-thumb {
 }
 
 ::selection {
-  background: rgba(88, 204, 2, 0.2);
+  background: rgba(124, 58, 237, 0.2);
 }
 
 @keyframes fade-up {

@@ -26,23 +26,23 @@ function EnergyLevelsDiagram() {
         </g>
       ))}
       {/* electrons on 1s, 2s, partial 2p */}
-      <path d="M70 128v-9M70 119l-3 4M70 119l3 4" stroke="#4a9f06" strokeWidth="1.6" fill="none" />
-      <path d="M84 136v9M84 145l-3-4M84 145l3-4" stroke="#4a9f06" strokeWidth="1.6" fill="none" />
-      <path d="M70 100v-9M70 91l-3 4M70 91l3 4" stroke="#4a9f06" strokeWidth="1.6" fill="none" />
-      <path d="M84 108v9M84 117l-3-4M84 117l3-4" stroke="#4a9f06" strokeWidth="1.6" fill="none" />
-      <path d="M70 84v-9M70 75l-3 4M70 75l3 4" stroke="#6fd420" strokeWidth="1.6" fill="none" />
-      <path d="M98 84v-9M98 75l-3 4M98 75l3 4" stroke="#6fd420" strokeWidth="1.6" fill="none" />
-      <path d="M126 84v-9M126 75l-3 4M126 75l3 4" stroke="#6fd420" strokeWidth="1.6" fill="none" />
+      <path d="M70 128v-9M70 119l-3 4M70 119l3 4" stroke="var(--accent)" strokeWidth="1.6" fill="none" />
+      <path d="M84 136v9M84 145l-3-4M84 145l3-4" stroke="var(--accent)" strokeWidth="1.6" fill="none" />
+      <path d="M70 100v-9M70 91l-3 4M70 91l3 4" stroke="var(--accent)" strokeWidth="1.6" fill="none" />
+      <path d="M84 108v9M84 117l-3-4M84 117l3-4" stroke="var(--accent)" strokeWidth="1.6" fill="none" />
+      <path d="M70 84v-9M70 75l-3 4M70 75l3 4" stroke="var(--accent-bright)" strokeWidth="1.6" fill="none" />
+      <path d="M98 84v-9M98 75l-3 4M98 75l3 4" stroke="var(--accent-bright)" strokeWidth="1.6" fill="none" />
+      <path d="M126 84v-9M126 75l-3 4M126 75l3 4" stroke="var(--accent-bright)" strokeWidth="1.6" fill="none" />
       {/* aufbau arrow */}
       <path
         d="M226 140 C 258 120, 258 60, 230 34"
         fill="none"
-        stroke="#4a9f06"
+        stroke="var(--accent)"
         strokeWidth="1.6"
         strokeDasharray="4 3"
       />
-      <path d="M230 34l8 1.5-4.5 6.5z" fill="#4a9f06" />
-      <text x="238" y="146" fontSize="9" fill="#4a9f06" fontWeight="600">
+      <path d="M230 34l8 1.5-4.5 6.5z" fill="var(--accent)" />
+      <text x="238" y="146" fontSize="9" fill="var(--accent)" fontWeight="600">
         filling order
       </text>
     </svg>
@@ -76,11 +76,11 @@ function IonizationTrendDiagram() {
       <polyline
         points={pts.map((p) => p.join(",")).join(" ")}
         fill="none"
-        stroke="#4a9f06"
+        stroke="var(--accent)"
         strokeWidth="2"
       />
       {pts.map((p, i) => (
-        <circle key={i} cx={p[0]} cy={p[1]} r="3.5" fill={i === 2 || i === 4 ? "#e05252" : "#4a9f06"} />
+        <circle key={i} cx={p[0]} cy={p[1]} r="3.5" fill={i === 2 || i === 4 ? "#e05252" : "var(--accent)"} />
       ))}
       <text x="96" y="126" fontSize="9" fill="#e05252" fontWeight="600">
         dip
@@ -110,7 +110,7 @@ function AtomShellsDiagram() {
           cx={150 + 30 * Math.cos((a * Math.PI) / 180)}
           cy={85 + 30 * Math.sin((a * Math.PI) / 180)}
           r="4"
-          fill="#4a9f06"
+          fill="var(--accent)"
         />
       ))}
       {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
@@ -119,7 +119,7 @@ function AtomShellsDiagram() {
           cx={150 + 52 * Math.cos((a * Math.PI) / 180)}
           cy={85 + 52 * Math.sin((a * Math.PI) / 180)}
           r="4"
-          fill="#6fd420"
+          fill="var(--accent-bright)"
         />
       ))}
       <circle cx="150" cy="11" r="4.5" fill="#e0a852" />

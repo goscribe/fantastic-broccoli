@@ -75,11 +75,11 @@ export function GuideArt({ className }: { className?: string }) {
         d="M6 8a3 3 0 0 1 3-3h8a4 4 0 0 1 3 1.4A4 4 0 0 1 23 5h8a3 3 0 0 1 3 3v22a3 3 0 0 1-3 3h-9a2 2 0 0 0-2 2 2 2 0 0 0-2-2H9a3 3 0 0 1-3-3V8z"
         fill="#eaf5df"
       />
-      <path d="M20 6.4V35a2 2 0 0 0-.5-.6V6a4 4 0 0 1 .5.4z" fill="#4a9f06" />
-      <rect x="10" y="11" width="7" height="1.8" rx="0.9" fill="#4a9f06" />
+      <path d="M20 6.4V35a2 2 0 0 0-.5-.6V6a4 4 0 0 1 .5.4z" fill="var(--accent)" />
+      <rect x="10" y="11" width="7" height="1.8" rx="0.9" fill="var(--accent)" />
       <rect x="10" y="15" width="7" height="1.8" rx="0.9" fill="#79c94c" />
       <rect x="10" y="19" width="5" height="1.8" rx="0.9" fill="#79c94c" />
-      <rect x="23" y="11" width="7" height="1.8" rx="0.9" fill="#4a9f06" />
+      <rect x="23" y="11" width="7" height="1.8" rx="0.9" fill="var(--accent)" />
       <rect x="23" y="15" width="7" height="1.8" rx="0.9" fill="#79c94c" />
       <rect x="23" y="19" width="5" height="1.8" rx="0.9" fill="#79c94c" />
       <circle cx="31" cy="31" r="6.5" fill="#3d8404" />
