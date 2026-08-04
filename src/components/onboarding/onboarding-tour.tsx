@@ -122,7 +122,7 @@ export function OnboardingTour() {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-foreground/30 p-4 backdrop-blur-sm">
-      <div className="relative flex w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-2xl animate-fade-up md:h-[520px] md:flex-row">
+      <div className="relative flex w-full max-w-3xl flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-2xl animate-fade-up md:h-[460px] md:flex-row">
         <div className="absolute inset-x-0 top-0 z-10 h-1 bg-muted">
           <div
             className="h-full bg-accent transition-[width] duration-500 ease-out"
@@ -131,12 +131,12 @@ export function OnboardingTour() {
         </div>
 
         <div className="relative flex flex-1 items-center justify-center overflow-hidden bg-gradient-to-br from-accent-soft to-background p-8">
-          <div key={slide.id} className="relative w-full max-w-sm animate-fade-up">
+          <div key={slide.id} className="relative w-full max-w-[300px] animate-fade-up">
             {slide.animation}
           </div>
         </div>
 
-        <div className="flex w-full flex-col justify-between p-8 md:w-[420px] md:p-10">
+        <div className="flex w-full flex-col justify-between p-6 md:w-[360px] md:p-8">
           <div>
             <div className="flex items-center gap-2 text-accent">
               <span className="text-xs font-semibold">What&apos;s new</span>
@@ -149,7 +149,7 @@ export function OnboardingTour() {
               <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent">
                 {slide.icon}
               </div>
-              <h2 className="text-2xl font-bold tracking-tight">{slide.title}</h2>
+              <h2 className="text-xl font-bold tracking-tight">{slide.title}</h2>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {slide.body}
               </p>
@@ -354,7 +354,7 @@ function LegacyAnimation() {
             Sessions, tokens, new features
           </p>
         </div>
-        <div className="rounded-xl border border-border bg-card p-4">
+        <div className="rounded-xl border border-accent/20 bg-background p-4">
           <p className="font-semibold text-foreground">Classic Scribe</p>
           <p className="mt-1 text-[11px] text-muted-foreground">
             Same account &amp; data
