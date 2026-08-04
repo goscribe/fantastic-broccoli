@@ -2,14 +2,24 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { ScribeMark } from "@/components/graphics/logo";
 import {
   hasCompletedOnboarding,
   markOnboarding,
   ONBOARDING_DATE,
 } from "@/lib/onboarding";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ArrowLeft, Sparkles, Search, Palette, Coins, Globe } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowLeft,
+  BookOpen,
+  Layers,
+  Coins,
+  Globe,
+  FileText,
+  ListChecks,
+  Shapes,
+  Mic,
+} from "lucide-react";
 
 type Slide = {
   id: string;
@@ -22,42 +32,50 @@ type Slide = {
 
 const slides: Slide[] = [
   {
-    id: "welcome",
-    title: "Meet the new Scribe",
-    body: "August 4th release — a cleaner, smarter study experience.",
-    bullets: ["Fresh new look", "Tokens power everything", "Search across sessions"],
-    icon: <Sparkles className="h-5 w-5" />,
-    animation: <WelcomeAnimation />,
+    id: "sessions",
+    title: "Study sessions",
+    body: "A session is one curated block of studying — readings, flashcards, worksheets, and quizzes generated together, so you don't have to keep switching around to generate content.",
+    bullets: [
+      "One prompt plans the whole session",
+      "Activities are ordered for you",
+      "Pick up where you left off",
+    ],
+    icon: <BookOpen className="h-5 w-5" />,
+    animation: <SessionAnimation />,
   },
   {
-    id: "search",
-    title: "Ask across every session",
-    body: "Copilot now searches all your study sessions, not only the one you’re in.",
-    bullets: ["Session-aware answers", "Find facts across readings / worksheets", "No more losing context"],
-    icon: <Search className="h-5 w-5" />,
-    animation: <SearchAnimation />,
-  },
-  {
-    id: "theme",
-    title: "A unified purple look",
-    body: "Scribe and Fantastic Broccoli now share a consistent primary palette.",
-    bullets: ["No leftover green gradients", "Cleaner members modal", "Easier-to-read passages"],
-    icon: <Palette className="h-5 w-5" />,
-    animation: <ThemeAnimation />,
+    id: "features",
+    title: "New features & improved diagrams",
+    body: "Diagrams and figures from your materials now render cleaner inside readings and worksheets, and Copilot can search across every session in your workspace.",
+    bullets: [
+      "Sharper figures in readings",
+      "Search all sessions from Copilot",
+      "Redesigned members & sharing",
+    ],
+    icon: <Shapes className="h-5 w-5" />,
+    animation: <FeaturesAnimation />,
   },
   {
     id: "tokens",
-    title: "Tokens, not limits",
-    body: "One balance covers flashcards, worksheets, study guides, and podcasts.",
-    bullets: ["Monthly token allowance", "Storage stays separate", "Top-ups when you need them"],
+    title: "Token limits",
+    body: "Generation now draws from a monthly token balance instead of per-type caps. Your balance is always visible in the sidebar.",
+    bullets: [
+      "100 tokens / month on the free plan",
+      "Sessions ~20, flashcards & worksheets ~5",
+      "Storage is tracked separately",
+    ],
     icon: <Coins className="h-5 w-5" />,
     animation: <TokensAnimation />,
   },
   {
     id: "legacy",
-    title: "Legacy access",
-    body: "The original Scribe at legacy.scribe.study is still available whenever you need it.",
-    bullets: ["Switch back anytime", "Your data is safe", "This new experience is where updates land"],
+    title: "The classic Scribe still exists",
+    body: "Prefer the previous experience? It lives on at legacy.scribe.study with the same account and data.",
+    bullets: [
+      "Same login, same workspaces",
+      "Nothing was deleted or migrated away",
+      "New features land here first",
+    ],
     icon: <Globe className="h-5 w-5" />,
     animation: <LegacyAnimation />,
   },
@@ -66,7 +84,6 @@ const slides: Slide[] = [
 export function OnboardingTour() {
   const [open, setOpen] = useState(() => !hasCompletedOnboarding());
   const [step, setStep] = useState(0);
-  const [dir, setDir] = useState<"next" | "prev">("next");
   const [autoplay, setAutoplay] = useState(true);
 
   useEffect(() => {
@@ -78,33 +95,22 @@ export function OnboardingTour() {
   useEffect(() => {
     if (!open || !autoplay) return;
     const timer = setInterval(() => {
-      setStep((s) => {
-        if (s >= slides.length - 1) return 0;
-        setDir("next");
-        return s + 1;
-      });
+      setStep((s) => (s >= slides.length - 1 ? 0 : s + 1));
     }, 5200);
     return () => clearInterval(timer);
   }, [open, autoplay]);
 
   const goNext = useCallback(() => {
     setAutoplay(false);
-    setDir("next");
     setStep((s) => Math.min(slides.length - 1, s + 1));
   }, []);
 
   const goPrev = useCallback(() => {
     setAutoplay(false);
-    setDir("prev");
     setStep((s) => Math.max(0, s - 1));
   }, []);
 
   const finish = useCallback(() => {
-    markOnboarding("completed");
-    setOpen(false);
-  }, []);
-
-  const skip = useCallback(() => {
     markOnboarding("completed");
     setOpen(false);
   }, []);
@@ -117,7 +123,6 @@ export function OnboardingTour() {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-foreground/30 p-4 backdrop-blur-sm">
       <div className="relative flex w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-2xl animate-fade-up md:h-[520px] md:flex-row">
-        {/* Progress bar */}
         <div className="absolute inset-x-0 top-0 z-10 h-1 bg-muted">
           <div
             className="h-full bg-accent transition-[width] duration-500 ease-out"
@@ -125,30 +130,21 @@ export function OnboardingTour() {
           />
         </div>
 
-        {/* Animated stage */}
         <div className="relative flex flex-1 items-center justify-center overflow-hidden bg-gradient-to-br from-accent-soft to-background p-8">
-          <div className="absolute inset-0 opacity-40">
-            <div className="absolute left-[10%] top-[15%] h-32 w-32 rounded-full bg-accent/20 blur-3xl" />
-            <div className="absolute bottom-[10%] right-[15%] h-40 w-40 rounded-full bg-accent/15 blur-3xl" />
-          </div>
-          <div
-            key={slide.id}
-            className={cn(
-              "relative w-full max-w-sm transition-all duration-500",
-              dir === "next" ? "animate-fade-up" : "animate-fade-up",
-            )}
-          >
+          <div key={slide.id} className="relative w-full max-w-sm animate-fade-up">
             {slide.animation}
           </div>
         </div>
 
-        {/* Copy */}
         <div className="flex w-full flex-col justify-between p-8 md:w-[420px] md:p-10">
           <div>
             <div className="flex items-center gap-2 text-accent">
-              <ScribeMark className="h-6 w-6" />
-              <span className="text-xs font-bold uppercase tracking-widest">What&apos;s new</span>
-              <span className="ml-auto text-[11px] text-muted-foreground">{ONBOARDING_DATE}</span>
+              <span className="text-xs font-bold uppercase tracking-widest">
+                What&apos;s new
+              </span>
+              <span className="ml-auto text-[11px] text-muted-foreground">
+                {ONBOARDING_DATE}
+              </span>
             </div>
 
             <div key={slide.id} className="mt-6 animate-fade-up">
@@ -156,10 +152,15 @@ export function OnboardingTour() {
                 {slide.icon}
               </div>
               <h2 className="text-2xl font-bold tracking-tight">{slide.title}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{slide.body}</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {slide.body}
+              </p>
               <ul className="mt-4 space-y-2">
                 {slide.bullets.map((b) => (
-                  <li key={b} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <li
+                    key={b}
+                    className="flex items-start gap-2 text-sm text-muted-foreground"
+                  >
                     <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent" />
                     {b}
                   </li>
@@ -176,12 +177,13 @@ export function OnboardingTour() {
                   type="button"
                   onClick={() => {
                     setAutoplay(false);
-                    setDir(i > step ? "next" : "prev");
                     setStep(i);
                   }}
                   className={cn(
                     "h-2 rounded-full transition-all duration-300",
-                    i === step ? "w-6 bg-accent" : "w-2 bg-border hover:bg-border-strong",
+                    i === step
+                      ? "w-6 bg-accent"
+                      : "w-2 bg-border hover:bg-border-strong",
                   )}
                   aria-label={`Go to slide ${i + 1}`}
                 />
@@ -194,7 +196,7 @@ export function OnboardingTour() {
                   <ArrowLeft className="mr-2 h-4 w-4" /> Back
                 </Button>
               ) : (
-                <Button variant="outline" size="md" className="flex-1" onClick={skip}>
+                <Button variant="outline" size="md" className="flex-1" onClick={finish}>
                   Skip
                 </Button>
               )}
@@ -215,53 +217,37 @@ export function OnboardingTour() {
   );
 }
 
-function WelcomeAnimation() {
-  return (
-    <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-lg">
-      <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-accent/10" />
-      <div className="flex items-center gap-3">
-        <div className="h-10 w-10 rounded-xl bg-accent-soft animate-float" />
-        <div className="space-y-2">
-          <div className="h-3 w-32 rounded bg-accent/20" />
-          <div className="h-2 w-20 rounded bg-muted" />
-        </div>
-      </div>
-      <div className="mt-6 space-y-3">
-        <div className="h-24 rounded-xl bg-muted/60" />
-        <div className="h-24 rounded-xl bg-accent-soft/40" />
-      </div>
-      <div className="mt-2 flex gap-2">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div
-            key={i}
-            className="h-8 flex-1 rounded-lg bg-accent/15"
-            style={{ animationDelay: `${i * 120}ms` }}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
+const sessionActivities = [
+  { icon: FileText, label: "Reading", meta: "Cell respiration overview" },
+  { icon: Layers, label: "Flashcards", meta: "18 cards" },
+  { icon: ListChecks, label: "Worksheet", meta: "10 problems" },
+  { icon: Mic, label: "Podcast", meta: "8 min recap" },
+];
 
-function SearchAnimation() {
+function SessionAnimation() {
   return (
     <div className="rounded-2xl border border-border bg-card p-5 shadow-lg">
-      <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2">
-        <Search className="h-4 w-4 text-accent" />
-        <div className="h-2 w-32 rounded bg-muted" />
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-semibold">Cellular Respiration</p>
+        <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-semibold text-accent">
+          Session
+        </span>
       </div>
-      <div className="mt-4 space-y-3">
-        {Array.from({ length: 3 }).map((_, i) => (
+      <div className="mt-4 space-y-2">
+        {sessionActivities.map(({ icon: Icon, label, meta }, i) => (
           <div
-            key={i}
-            className={cn(
-              "rounded-xl p-3 transition-opacity duration-500",
-              i === 1 ? "bg-accent-soft/50" : "bg-muted/40",
-            )}
-            style={{ animation: `fade-up 0.6s ease-out ${i * 0.25}s both` }}
+            key={label}
+            className="flex items-center gap-3 rounded-xl border border-border bg-background px-3 py-2.5"
+            style={{ animation: `fade-up 0.5s ease-out ${i * 0.15}s both` }}
           >
-            <div className="h-2 w-3/4 rounded bg-accent/20" />
-            <div className="mt-2 h-2 w-1/2 rounded bg-muted" />
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent-soft text-accent">
+              <Icon className="h-3.5 w-3.5" />
+            </span>
+            <div className="min-w-0">
+              <p className="text-xs font-medium">{label}</p>
+              <p className="truncate text-[11px] text-muted-foreground">{meta}</p>
+            </div>
+            <span className="ml-auto text-[10px] text-faint">{i + 1}</span>
           </div>
         ))}
       </div>
@@ -269,24 +255,24 @@ function SearchAnimation() {
   );
 }
 
-function ThemeAnimation() {
+function FeaturesAnimation() {
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-center gap-4">
-        <div className="h-20 w-20 animate-float rounded-2xl bg-accent shadow-lg" />
-        <div className="h-20 w-20 animate-float rounded-2xl bg-accent-soft shadow-lg" style={{ animationDelay: "0.2s" }} />
-      </div>
-      <div className="rounded-2xl border border-border bg-card p-4 shadow-lg">
-        <div className="flex gap-2">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <div
-              key={i}
-              className="h-8 flex-1 rounded-lg bg-muted transition-colors duration-700"
-              style={{ animation: `pulse-dot 1.2s ease-in-out ${i * 0.15}s infinite` }}
-            />
-          ))}
-        </div>
-        <div className="mt-3 h-2 w-full rounded bg-accent/10" />
+    <div className="rounded-2xl border border-border bg-card p-5 shadow-lg">
+      <p className="text-xs font-semibold text-muted-foreground">Figure 2 — Krebs cycle</p>
+      <svg viewBox="0 0 220 120" className="mt-3 w-full" role="img" aria-label="Diagram">
+        <circle cx="110" cy="60" r="38" fill="none" stroke="var(--accent)" strokeWidth="2" />
+        {[0, 60, 120, 180, 240, 300].map((deg) => {
+          const rad = (deg * Math.PI) / 180;
+          const x = 110 + 38 * Math.cos(rad);
+          const y = 60 + 38 * Math.sin(rad);
+          return <circle key={deg} cx={x} cy={y} r="5" fill="var(--accent)" opacity="0.85" />;
+        })}
+        <text x="110" y="64" textAnchor="middle" fontSize="10" fill="var(--accent)" fontWeight="600">
+          Acetyl-CoA
+        </text>
+      </svg>
+      <div className="mt-3 rounded-lg bg-accent-soft/50 px-3 py-2 text-[11px] text-muted-foreground">
+        Diagrams from your materials render inline, sharp at any size.
       </div>
     </div>
   );
@@ -294,24 +280,29 @@ function ThemeAnimation() {
 
 function TokensAnimation() {
   return (
-    <div className="rounded-2xl border border-border bg-card p-6 shadow-lg">
+    <div className="rounded-2xl border border-border bg-card p-5 shadow-lg">
       <div className="flex items-center justify-between">
-        <div className="h-3 w-24 rounded bg-muted" />
-        <div className="rounded-full bg-accent px-3 py-1 text-[10px] font-semibold text-white animate-pulse-dot">
-          100 tokens / mo
-        </div>
+        <p className="text-sm font-semibold">Monthly tokens</p>
+        <span className="rounded-full bg-accent px-2.5 py-0.5 text-[10px] font-semibold text-white">
+          62 / 100 left
+        </span>
       </div>
-      <div className="mt-6 h-3 rounded-full bg-border overflow-hidden">
-        <div className="h-full w-2/3 rounded-full bg-accent" />
+      <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-border">
+        <div className="h-full w-[62%] rounded-full bg-accent" />
       </div>
-      <div className="mt-5 grid grid-cols-3 gap-3">
-        {Array.from({ length: 3 }).map((_, i) => (
+      <div className="mt-4 space-y-2 text-xs">
+        {[
+          { label: "Study session", cost: "20" },
+          { label: "Worksheet", cost: "5" },
+          { label: "Flashcard set", cost: "5" },
+          { label: "Podcast episode", cost: "25" },
+        ].map(({ label, cost }) => (
           <div
-            key={i}
-            className="flex aspect-square flex-col items-center justify-center rounded-xl bg-accent-soft/50"
-            style={{ animation: `float-y 3s ease-in-out ${i * 0.2}s infinite` }}
+            key={label}
+            className="flex items-center justify-between rounded-lg bg-muted/40 px-3 py-2"
           >
-            <Coins className="h-6 w-6 text-accent" />
+            <span className="text-muted-foreground">{label}</span>
+            <span className="font-semibold text-accent">{cost} tokens</span>
           </div>
         ))}
       </div>
@@ -321,24 +312,28 @@ function TokensAnimation() {
 
 function LegacyAnimation() {
   return (
-    <div className="relative rounded-2xl border border-border bg-card p-6 shadow-lg">
-      <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2">
-        <Globe className="h-4 w-4 text-accent" />
-        <div className="h-2 w-40 rounded bg-muted" />
+    <div className="rounded-2xl border border-border bg-card p-5 shadow-lg">
+      <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-2 text-xs text-muted-foreground">
+        <Globe className="h-3.5 w-3.5 text-accent" />
+        legacy.scribe.study
       </div>
-      <div className="mt-5 flex items-stretch gap-3">
-        <div className="flex flex-1 flex-col items-center justify-center rounded-xl bg-accent-soft/50 p-4">
-          <span className="text-xs font-semibold text-accent">New</span>
-          <div className="mt-2 h-16 w-16 animate-float rounded-2xl bg-accent" />
+      <div className="mt-4 grid grid-cols-2 gap-3 text-center text-xs">
+        <div className="rounded-xl border border-accent/40 bg-accent-soft/50 p-4">
+          <p className="font-semibold text-accent">New Scribe</p>
+          <p className="mt-1 text-[11px] text-muted-foreground">
+            Sessions, tokens, new features
+          </p>
         </div>
-        <div className="flex items-center text-muted-foreground">
-          <span className="text-lg">↔</span>
-        </div>
-        <div className="flex flex-1 flex-col items-center justify-center rounded-xl bg-muted/40 p-4">
-          <span className="text-xs font-medium text-muted-foreground">legacy.scribe.study</span>
-          <div className="mt-2 h-16 w-16 animate-float rounded-2xl bg-muted" style={{ animationDelay: "0.3s" }} />
+        <div className="rounded-xl border border-border bg-muted/40 p-4">
+          <p className="font-semibold">Classic Scribe</p>
+          <p className="mt-1 text-[11px] text-muted-foreground">
+            Same account &amp; data
+          </p>
         </div>
       </div>
+      <p className="mt-3 text-center text-[11px] text-muted-foreground">
+        Switch back anytime — your workspaces stay in sync.
+      </p>
     </div>
   );
 }
