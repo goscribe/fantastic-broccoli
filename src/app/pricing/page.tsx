@@ -53,11 +53,7 @@ function PlanCard({
         </li>
         <li className="flex items-center gap-2">
           <Check className="h-4 w-4 text-accent" />
-          {plan.worksheetsLimit} worksheets
-        </li>
-        <li className="flex items-center gap-2">
-          <Check className="h-4 w-4 text-accent" />
-          {plan.flashcardsLimit} flashcard sets
+          {plan.monthlyTokens} tokens / month
         </li>
       </ul>
       <div className="mt-5">
@@ -109,10 +105,10 @@ export default function PricingPage() {
         <div>
           <p className="text-sm font-medium text-accent">Pricing</p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight">
-            Pick a plan when you need more credits
+            Pick a plan when you need more tokens
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Plans control your storage, worksheet limits, and flashcards.
+            Plans control your storage and monthly token allowance.
             Upgrade from here or from the credits badge in the top bar.
           </p>
         </div>
@@ -144,17 +140,10 @@ export default function PricingPage() {
               </p>
             </div>
             <div className="rounded-xl border border-border bg-background p-4">
-              <p className="text-[12px] text-faint">Worksheets</p>
-              <p className="mt-1 text-lg font-semibold">{summary.worksheetsUsed}</p>
+              <p className="text-[12px] text-faint">Tokens</p>
+              <p className="mt-1 text-lg font-semibold">{summary.tokenBalance}</p>
               <p className="text-[12px] text-muted-foreground">
-                of {summary.worksheetsLimit}
-              </p>
-            </div>
-            <div className="rounded-xl border border-border bg-background p-4">
-              <p className="text-[12px] text-faint">Flashcards</p>
-              <p className="mt-1 text-lg font-semibold">{summary.flashcardsUsed}</p>
-              <p className="text-[12px] text-muted-foreground">
-                of {summary.flashcardsLimit}
+                of {summary.monthlyTokens} / month
               </p>
             </div>
           </div>

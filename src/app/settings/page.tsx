@@ -90,11 +90,7 @@ function PlanCard({
         </li>
         <li className="flex items-center gap-1.5">
           <Check className="h-3 w-3 text-accent" />
-          {plan.worksheetsLimit} worksheets
-        </li>
-        <li className="flex items-center gap-1.5">
-          <Check className="h-3 w-3 text-accent" />
-          {plan.flashcardsLimit} flashcard sets
+          {plan.monthlyTokens} tokens / month
         </li>
       </ul>
       <div className="mt-auto pt-4">
@@ -372,18 +368,11 @@ export default function SettingsPage() {
                 limitLabel={formatBytes(summary.storageLimitBytes)}
               />
               <UsageBar
-                label="Worksheets"
-                used={summary.worksheetsUsed}
-                limit={summary.worksheetsLimit}
-                usedLabel={String(summary.worksheetsUsed)}
-                limitLabel={String(summary.worksheetsLimit)}
-              />
-              <UsageBar
-                label="Flashcard sets"
-                used={summary.flashcardsUsed}
-                limit={summary.flashcardsLimit}
-                usedLabel={String(summary.flashcardsUsed)}
-                limitLabel={String(summary.flashcardsLimit)}
+                label="Tokens"
+                used={Math.max(0, summary.monthlyTokens - summary.tokenBalance)}
+                limit={summary.monthlyTokens}
+                usedLabel={`${summary.tokenBalance} left`}
+                limitLabel={`${summary.monthlyTokens} / month`}
               />
             </div>
           </section>
