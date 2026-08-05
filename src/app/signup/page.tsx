@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { ScribeLogo } from "@/components/graphics/logo";
 import { signUp, signIn } from "@/lib/api/auth";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
 
@@ -36,6 +37,12 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-sm space-y-8">
+        <div className="flex justify-center">
+          <Link href="/landing" aria-label="Scribe home">
+            <ScribeLogo />
+          </Link>
+        </div>
+
         <div className="text-center space-y-1.5">
           <h1 className="text-2xl font-bold tracking-tight">Create your account</h1>
           <p className="text-sm text-muted-foreground">
@@ -117,6 +124,17 @@ export default function SignupPage() {
             {busy ? "Creating account…" : "Create account"}
             {!busy && <ArrowRight className="h-4 w-4" />}
           </Button>
+          <p className="text-center text-xs text-faint">
+            By creating an account you agree to our{" "}
+            <Link href="/terms" className="underline hover:text-foreground">
+              Terms of service
+            </Link>{" "}
+            and{" "}
+            <Link href="/privacy" className="underline hover:text-foreground">
+              Privacy policy
+            </Link>
+            .
+          </p>
         </form>
 
         <p className="text-center text-sm text-muted-foreground">
