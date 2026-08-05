@@ -103,20 +103,19 @@ export default function PricingPage() {
     <main className="mx-auto w-full max-w-6xl px-6 py-10">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-sm font-medium text-accent">Pricing</p>
+          <p className="text-sm font-medium text-accent">Plan</p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight">
-            Pick a plan when you need more tokens
+            Scribe is free for now
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Plans control your storage and monthly token allowance.
-            Upgrade from here or from the credits badge in the top bar.
+            Your storage and monthly token allowance are shown below. Paid plans will be available later.
           </p>
         </div>
         <Link
           href="/settings"
           className="rounded-full border border-border px-4 py-2 text-sm font-medium hover:bg-muted"
         >
-          Billing settings
+          Settings
         </Link>
       </div>
 
@@ -150,9 +149,9 @@ export default function PricingPage() {
         ) : null}
       </section>
 
-      <section className="mt-8 grid gap-4 lg:grid-cols-3">
+      <section className="mx-auto mt-8 grid max-w-xl gap-4 sm:grid-cols-1">
         {loading
-          ? Array.from({ length: 3 }, (_, i) => (
+          ? Array.from({ length: 1 }, (_, i) => (
               <div key={i} className="rounded-2xl border border-border bg-card p-5 space-y-3">
                 <Skeleton className="h-4 w-20" />
                 <Skeleton className="h-4 w-full" />

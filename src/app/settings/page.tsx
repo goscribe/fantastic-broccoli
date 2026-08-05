@@ -310,11 +310,11 @@ export default function SettingsPage() {
         <section className="mt-8">
           <h2 className="text-sm font-semibold">Plan</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
-            Switch plans anytime — changes take effect immediately.
+            Your current plan. Paid upgrades are paused for now.
           </p>
-          <div className="mt-3 grid gap-3 sm:grid-cols-3">
+          <div className="mt-3 grid max-w-xl gap-3 sm:grid-cols-1">
             {plansLoading
-              ? Array.from({ length: 3 }, (_, i) => (
+              ? Array.from({ length: 1 }, (_, i) => (
                   <div
                     key={i}
                     className="rounded-xl border border-border bg-card p-4 space-y-3"

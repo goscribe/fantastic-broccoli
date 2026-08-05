@@ -120,20 +120,6 @@ const plans = [
     cta: "Get started free",
     highlighted: false,
   },
-  {
-    name: "Pro",
-    price: "Monthly",
-    priceSuffix: "subscription",
-    description: "For heavy courses — more storage and higher generation limits.",
-    features: [
-      "Everything in Free",
-      "More material storage",
-      "Higher worksheet & flashcard limits",
-      "Podcast-style passive recall episodes",
-    ],
-    cta: "Upgrade to Pro",
-    highlighted: true,
-  },
 ];
 
 const faqs = [
@@ -159,7 +145,7 @@ const faqs = [
   },
   {
     q: "How much does it cost?",
-    a: "Scribe is free to start — no credit card required. The Pro plan adds more storage and higher generation limits when you need them.",
+    a: "Scribe is free to start — no credit card required. Paid plans will be available later with more storage and higher generation limits.",
   },
 ];
 
@@ -270,6 +256,21 @@ export default function LandingPage() {
               <p className="mt-4 text-xs text-faint">
                 Free to use · No credit card required
               </p>
+              <div className="mt-5 flex justify-center lg:justify-start">
+                <a
+                  href="https://www.producthunt.com/products/scribe-19?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-scribe-1273"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1191678&amp;theme=light&amp;t=1785953007734"
+                    alt="Scribe - Upload anything. Get personalized study sessions in seconds. | Product Hunt"
+                    width={250}
+                    height={54}
+                  />
+                </a>
+              </div>
             </div>
 
             {/* Session preview card */}
@@ -574,12 +575,12 @@ export default function LandingPage() {
         <section id="pricing" className="scroll-mt-20 border-t border-border bg-card/40 py-16 md:py-20">
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Simple pricing
+              Free to use
             </h2>
             <p className="mt-3 max-w-xl text-muted-foreground">
-              Start free. Upgrade when your course outgrows the limits.
+              Scribe is free while we&apos;re building. No credit card required.
             </p>
-            <div className="mx-auto mt-10 grid max-w-3xl gap-5 sm:grid-cols-2">
+            <div className="mx-auto mt-10 grid max-w-xl gap-5 sm:grid-cols-1">
               {plans.map((plan) => (
                 <div
                   key={plan.name}
@@ -599,12 +600,6 @@ export default function LandingPage() {
                   </div>
                   <p className="mt-3 text-3xl font-bold tracking-tight">
                     {plan.price}
-                    {plan.priceSuffix && (
-                      <span className="text-sm font-normal text-faint">
-                        {" "}
-                        {plan.priceSuffix}
-                      </span>
-                    )}
                   </p>
                   <p className="mt-2 text-sm text-muted-foreground">
                     {plan.description}
