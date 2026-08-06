@@ -5,6 +5,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { signIn } from "@/lib/api/auth";
+import {
+  GoogleSignInButton,
+  AuthDivider,
+} from "@/components/auth/google-sign-in-button";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
 
 function safeRedirect(): string {
@@ -23,7 +27,12 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  // Surface Google OAuth errors passed back as /login?error=...
+  const [error, setError] = useState<string | null>(() =>
+    typeof window === "undefined"
+      ? null
+      : new URLSearchParams(window.location.search).get("error"),
+  );
   const [busy, setBusy] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
@@ -119,6 +128,10 @@ export default function LoginPage() {
             {!busy && <ArrowRight className="h-4 w-4" />}
           </Button>
         </form>
+
+        <AuthDivider />
+
+        <GoogleSignInButton label="Continue with Google" />
 
         <p className="text-center text-sm text-muted-foreground">
           New to Scribe?{" "}

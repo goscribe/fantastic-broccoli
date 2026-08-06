@@ -5,6 +5,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { signUp, signIn } from "@/lib/api/auth";
+import {
+  GoogleSignInButton,
+  AuthDivider,
+} from "@/components/auth/google-sign-in-button";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
 
 const inputClasses =
@@ -118,6 +122,10 @@ export default function SignupPage() {
             {!busy && <ArrowRight className="h-4 w-4" />}
           </Button>
         </form>
+
+        <AuthDivider />
+
+        <GoogleSignInButton label="Sign up with Google" />
 
         <p className="text-center text-sm text-muted-foreground">
           Already have an account?{" "}
