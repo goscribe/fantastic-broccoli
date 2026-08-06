@@ -142,7 +142,12 @@ export default function SessionDetailPage() {
   const setActiveActivityId = setChosenActivityId;
 
   const [showComments, setShowComments] = useState(false);
-  const [copilotOpen, setCopilotOpen] = useState(true);
+  // Copilot defaults open on desktop; on mobile it covers the screen, so start closed.
+  const [copilotOpen, setCopilotOpen] = useState(
+    () =>
+      typeof window === "undefined" ||
+      window.matchMedia("(min-width: 640px)").matches,
+  );
   const [newComment, setNewComment] = useState("");
   const [localNotes, setLocalNotes] = useState<SessionNote[]>([]);
   const [removedNoteIds, setRemovedNoteIds] = useState<Set<string>>(
@@ -478,32 +483,34 @@ export default function SessionDetailPage() {
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
       {/* Header */}
       <header className="border-b border-border bg-card z-10">
-        <div className="px-6 h-12 flex items-center gap-3">
+        <div className="px-4 sm:px-6 h-12 flex items-center gap-2 sm:gap-3">
           <button
             type="button"
             onClick={() => router.push(`/workspace/${workspaceId}`)}
             className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground shrink-0"
           >
             <ArrowLeft className="h-3 w-3" />
-            {workspace.title}
+            <span className="hidden sm:inline max-w-40 truncate">
+              {workspace.title}
+            </span>
           </button>
-          <span className="text-border-strong">/</span>
+          <span className="hidden sm:inline text-border-strong">/</span>
           <h1 className="text-sm font-bold tracking-tight truncate">
             {session.title}
           </h1>
-          <Badge variant="accent" className="capitalize shrink-0">
+          <Badge variant="accent" className="capitalize shrink-0 max-sm:hidden">
             {session.depth}
           </Badge>
           {planReady && (
-            <div className="ml-auto flex items-center gap-4 shrink-0">
-              <span className="flex items-center gap-1 text-xs text-muted-foreground">
+            <div className="ml-auto flex items-center gap-2.5 sm:gap-4 shrink-0">
+              <span className="hidden md:flex items-center gap-1 text-xs text-muted-foreground">
                 <Clock className="h-3 w-3" />
                 {formatDuration(totalEstimated)}
               </span>
-              <span className="text-xs text-muted-foreground">
+              <span className="hidden sm:inline text-xs text-muted-foreground">
                 {completedCount}/{activities.length} done
               </span>
-              <div className="w-32">
+              <div className="hidden sm:block w-32">
                 <ProgressBar value={session.progress} size="sm" />
               </div>
               <span className="text-xs font-semibold tabular-nums">
@@ -563,7 +570,7 @@ export default function SessionDetailPage() {
 
         {/* Main study area */}
         <main className="flex-1 overflow-y-auto bg-card">
-          <div className="px-8 py-2">
+          <div className="px-4 sm:px-8 py-2">
             {showExtendPrompt && (
               <div className="mb-5 rounded-2xl border border-accent/30 bg-accent-soft/60 px-5 py-4 flex flex-wrap items-center gap-3 animate-fade-up">
                 <div className="flex-1 min-w-56">

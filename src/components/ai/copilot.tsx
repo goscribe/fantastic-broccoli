@@ -333,8 +333,8 @@ export function Copilot({
 
   return (
     <div
-      className="relative self-stretch shrink-0 hidden sm:flex flex-col bg-card border-l border-border min-h-0"
-      style={width ? { width } : { width: "25vw", minWidth: 380 }}
+      className="flex flex-col bg-card border-border min-h-0 max-sm:fixed max-sm:inset-0 max-sm:z-50 max-sm:w-full sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]"
+      style={{ "--copilot-width": width ? `${width}px` : "25vw" } as React.CSSProperties}
     >
       {/* Resize handle */}
       <div
@@ -346,7 +346,7 @@ export function Copilot({
           document.body.style.cursor = "col-resize";
           document.body.style.userSelect = "none";
         }}
-        className="absolute left-0 inset-y-0 w-1.5 -translate-x-1/2 cursor-col-resize z-10 hover:bg-accent/40 active:bg-accent/60 transition-colors"
+        className="absolute left-0 inset-y-0 w-1.5 -translate-x-1/2 cursor-col-resize z-10 hover:bg-accent/40 active:bg-accent/60 transition-colors max-sm:hidden"
       />
       {/* Header */}
       <div className="flex items-center gap-2 px-3 h-12 border-b border-border shrink-0">

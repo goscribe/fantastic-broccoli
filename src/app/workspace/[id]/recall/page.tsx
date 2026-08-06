@@ -376,7 +376,7 @@ export default function WorkspaceRecallPage() {
                 <X className="h-4 w-4" />
               </button>
             </div>
-            <div className="mt-4 grid grid-cols-3 gap-3">
+            <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {characters.map((character, i) => (
                 <CharacterCard
                   key={character.id}
