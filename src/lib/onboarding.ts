@@ -36,3 +36,18 @@ export function markOnboarding(status: "started" | "completed"): void {
 export function getOnboardingState(): OnboardingState | null {
   return parseCookie();
 }
+
+export const GUIDED_TOUR_COOKIE = "scribe_tour_v1";
+
+export function hasCompletedGuidedTour(): boolean {
+  if (typeof document === "undefined") return true;
+  return new RegExp(`(?:^|; )${GUIDED_TOUR_COOKIE}=completed`).test(
+    document.cookie,
+  );
+}
+
+export function markGuidedTourCompleted(): void {
+  if (typeof document === "undefined") return;
+  const maxAge = 60 * 60 * 24 * 365; // 1 year
+  document.cookie = `${GUIDED_TOUR_COOKIE}=completed; Path=/; Max-Age=${maxAge}; SameSite=Lax`;
+}

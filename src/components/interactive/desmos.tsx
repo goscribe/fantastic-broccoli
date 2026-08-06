@@ -61,6 +61,16 @@ function loadDesmos(): Promise<DesmosAPI> {
   return desmosPromise;
 }
 
+/**
+ * Desmos renders label text verbatim unless math segments are wrapped in
+ * backticks. Labels that contain LaTeX commands are wrapped so they render
+ * as math instead of raw source.
+ */
+function formatLabel(label: string): string {
+  if (label.includes("`") || !label.includes("\\")) return label;
+  return `\`${label}\``;
+}
+
 const CALC_OPTIONS: Record<string, boolean | string> = {
   expressions: false,
   settingsMenu: false,
@@ -234,7 +244,9 @@ export function ExpressionGraph({
           id: `expr-${i}`,
           latex: expr.latex,
           color: EXPRESSION_COLORS[i % EXPRESSION_COLORS.length],
-          ...(expr.label ? { label: expr.label, showLabel: true } : {}),
+          ...(expr.label
+            ? { label: formatLabel(expr.label), showLabel: true }
+            : {}),
         });
       });
       calc.setMathBounds({ left: -10, right: 10, bottom: -6, top: 6 });

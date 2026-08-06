@@ -156,7 +156,10 @@ export default function HomePage() {
         </header>
 
         {/* Gradient banner */}
-        <section className="relative overflow-hidden rounded-2xl bg-ink p-7 text-white animate-fade-up">
+        <section
+          data-tour="home-banner"
+          className="relative overflow-hidden rounded-2xl bg-ink p-7 text-white animate-fade-up"
+        >
           <div
             className="pointer-events-none absolute inset-0"
             style={{
