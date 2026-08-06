@@ -17,6 +17,7 @@ const PUBLIC_PATHS = [
   "/login",
   "/signup",
   "/forgot-password",
+  "/verify-email",
   "/privacy",
   "/terms",
 ];
@@ -137,6 +138,10 @@ export async function requestPasswordReset(email: string): Promise<void> {
 
 export async function resendVerification(): Promise<void> {
   await api.auth.resendVerification.mutate();
+}
+
+export async function verifyEmail(token: string): Promise<void> {
+  await api.auth.verifyEmail.mutate({ token });
 }
 
 export async function signOut(): Promise<void> {
