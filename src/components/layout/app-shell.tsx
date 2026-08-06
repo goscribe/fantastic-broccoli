@@ -7,6 +7,7 @@ import { TopBar } from "@/components/layout/top-bar";
 import { useAuthUser } from "@/lib/api/auth";
 import { FullScreenLoader } from "@/components/layout/full-screen-loader";
 import { OnboardingTour } from "@/components/onboarding/onboarding-tour";
+import { GuidedTour } from "@/components/onboarding/guided-tour";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -59,6 +60,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {children}
       </div>
       <OnboardingTour />
+      <GuidedTour />
     </div>
   );
 }
