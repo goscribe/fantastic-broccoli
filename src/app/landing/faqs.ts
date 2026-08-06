@@ -21,6 +21,6 @@ export const faqs = [
   },
   {
     q: "How much does it cost?",
-    a: "Scribe is free to start — no credit card required. Paid plans will be available later with more storage and higher generation limits.",
+    a: "Scribe is free during early access — no credit card required. Paid plans will be available later with more storage and higher generation limits.",
   },
 ];
