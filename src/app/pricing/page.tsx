@@ -100,7 +100,7 @@ export default function PricingPage() {
   };
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-6 py-10">
+    <main className="mx-auto w-full max-w-6xl px-4 sm:px-6 py-10">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-medium text-accent">Plan</p>
