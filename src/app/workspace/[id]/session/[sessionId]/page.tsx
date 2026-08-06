@@ -16,6 +16,7 @@ import {
   subscribePlanGeneration,
 } from "@/lib/api/study";
 import { recordFlashcardAttempt } from "@/lib/api/study-session";
+import { reportStudySessionConversion } from "@/lib/gtag";
 import {
   StudySession,
   SessionActivity,
@@ -87,6 +88,10 @@ export default function SessionDetailPage() {
     refetchInterval: (query) =>
       query.state.data?.generating ? 4000 : false,
   });
+
+  useEffect(() => {
+    reportStudySessionConversion();
+  }, [sessionId]);
 
   const generating = session?.generating ?? false;
   const [planError, setPlanError] = useState<string | null>(null);
