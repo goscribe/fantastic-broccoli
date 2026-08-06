@@ -4,12 +4,17 @@ export const siteUrl =
 export const siteName = "Scribe";
 
 export const defaultTitle =
-  "Scribe — AI Study Tool for Flashcards, Worksheets & Study Sessions";
+  "Scribe — Turn PDFs & Notes into Flashcards, Quizzes & Study Guides";
 
 export const defaultDescription =
-  "Turn your PDFs, slides, notes, and lecture audio into personalized AI study sessions — readings, AI-graded worksheets, flashcards, quizzes, and a study copilot. Free AI study tool for AP, IB, university, and exam prep.";
+  "Upload your notes, slides, or PDFs and Scribe turns them into flashcards, quizzes, worksheets, and readings — one complete study session built from your own course material. Free during early access.";
 
 export const keywords = [
+  "PDF to flashcards",
+  "notes to flashcards",
+  "PDF to quiz",
+  "AI flashcard generator",
+  "AI study guide generator",
   "AI study tool",
   "AI study app",
   "study tools for students",

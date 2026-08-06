@@ -4,9 +4,9 @@ import { faqs } from "./faqs";
 
 export const metadata: Metadata = {
   title:
-    "AI Study Tool — Turn PDFs, Slides & Lectures into Study Sessions",
+    "Turn PDFs & Notes into Flashcards, Quizzes & Study Guides",
   description:
-    "Scribe turns your course materials into personalized study sessions: readings with figures, AI-graded worksheets, flashcards, cloze passages, and a copilot that knows your course. Free for AP, IB, and university students.",
+    "Upload your notes, slides, or PDFs. Scribe turns them into flashcards, quizzes, worksheets, and readings — one complete study session built from your own course material. Free during early access.",
   alternates: { canonical: "/landing" },
   openGraph: {
     url: absoluteUrl("/landing"),

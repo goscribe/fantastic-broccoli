@@ -46,16 +46,16 @@ const steps = [
   },
   {
     num: "2",
-    title: "Get a personalized session",
+    title: "Scribe builds your session",
     description:
-      "Scribe turns your materials into a guided study plan: readings, worksheets, flashcards, and comprehension checks.",
+      "Your materials become flashcards, quizzes, worksheets, and readings — organised into one guided study session.",
     art: StepPlanArt,
   },
   {
     num: "3",
-    title: "Study with a copilot",
+    title: "Study and adapt",
     description:
-      "Ask Scribe anything mid-session. It answers from your own materials and adapts your plan as you go.",
+      "Work through the session with a copilot that answers from your own materials and adjusts the plan as you go.",
     art: StepCopilotArt,
   },
 ];
@@ -109,7 +109,7 @@ const features = [
 
 const plans = [
   {
-    name: "Free",
+    name: "Early access",
     price: "$0",
     description: "Everything you need to try Scribe with a real course.",
     features: [
@@ -118,7 +118,7 @@ const plans = [
       "Flashcards, cloze passages, and quizzes",
       "Study copilot grounded in your materials",
     ],
-    cta: "Get started free",
+    cta: "Start studying",
     highlighted: false,
   },
 ];
@@ -185,8 +185,8 @@ export default function LandingPage() {
             >
               Sign in
             </Link>
-            <Link href="/login">
-              <Button size="sm">Get started</Button>
+            <Link href="/signup">
+              <Button size="sm">Start studying</Button>
             </Link>
           </nav>
         </div>
@@ -202,22 +202,22 @@ export default function LandingPage() {
             <div className="animate-fade-up">
               <p className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
                 <Sparkles className="h-3.5 w-3.5 text-accent" />
-                AI-powered study sessions
+                PDFs &rarr; flashcards, quizzes &amp; study guides
               </p>
               <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
-                Your course materials,
+                Stop re-reading.
                 <br />
-                <span className="text-accent">turned into study sessions.</span>
+                <span className="text-accent">Start learning.</span>
               </h1>
               <p className="mt-5 max-w-xl text-lg text-muted-foreground text-pretty">
-                Upload your PDFs and lecture audio. Scribe parses them and
-                builds personalized sessions — readings, AI-graded worksheets,
-                flashcards, and a copilot that knows your course.
+                Upload your notes, slides, or PDFs. Scribe turns them into
+                flashcards, quizzes, worksheets, and readings — one complete
+                study session built from your own course material.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link href="/login">
+                <Link href="/signup">
                   <Button size="lg" className="gap-2">
-                    Get started free
+                    Start studying
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
@@ -228,7 +228,7 @@ export default function LandingPage() {
                 </Link>
               </div>
               <p className="mt-4 text-xs text-faint">
-                Free to use · No credit card required
+                Free during early access · No credit card required
               </p>
               <div className="mt-5 flex justify-center lg:justify-start">
                 <a
@@ -398,10 +398,12 @@ export default function LandingPage() {
               <SparkCluster className="mt-1 hidden h-7 w-7 shrink-0 sm:block" />
               <div>
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                  Everything you need to actually learn
+                  One study session, everything in it
                 </h2>
                 <p className="mt-3 max-w-xl text-muted-foreground">
-                  Every session is built from your own materials — not generic
+                  Flashcards, quizzes, worksheets, and readings aren&apos;t
+                  separate tools — Scribe builds them together into one guided
+                  session, from your own materials rather than generic
                   question banks.
                 </p>
               </div>
@@ -429,6 +431,14 @@ export default function LandingPage() {
                 </li>
               ))}
             </ul>
+            <div className="mt-10 text-center">
+              <Link href="/signup" className="inline-block">
+                <Button size="lg" className="gap-2">
+                  Start studying
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -549,10 +559,11 @@ export default function LandingPage() {
         <section id="pricing" className="scroll-mt-20 border-t border-border bg-card/40 py-16 md:py-20">
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Free to use
+              Free during early access
             </h2>
             <p className="mt-3 max-w-xl text-muted-foreground">
-              Scribe is free while we&apos;re building. No credit card required.
+              Scribe is free while we&apos;re in early access. No credit card
+              required.
             </p>
             <div className="mx-auto mt-10 grid max-w-xl gap-5 sm:grid-cols-1">
               {plans.map((plan) => (
@@ -637,12 +648,12 @@ export default function LandingPage() {
               Ready to study smarter?
             </h2>
             <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-              Upload your first PDF and get a personalized study session in
+              Turn a lecture PDF into something you can actually study — in
               minutes.
             </p>
-            <Link href="/login" className="mt-8 inline-block">
+            <Link href="/signup" className="mt-8 inline-block">
               <Button size="lg" className="gap-2">
-                Get started free
+                Start studying
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
