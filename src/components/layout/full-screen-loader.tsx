@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ScribeMark } from "@/components/graphics/logo";
 
 const lines = [
   "Small sessions beat cramming.",
@@ -31,19 +30,11 @@ export function FullScreenLoader() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background">
-      <div className="relative flex h-24 w-24 items-center justify-center">
-        <div className="absolute inset-0 rounded-full bg-accent/25 blur-2xl animate-loader-glow" />
-        <div className="absolute inset-0 animate-loader-spin rounded-full">
-          <div className="loader-ring h-full w-full rounded-full" />
-        </div>
-        <ScribeMark className="relative h-11 w-11" />
-      </div>
-      <span className="mt-5 text-xl font-bold tracking-tight">Scribe</span>
-      <div className="relative mt-4 h-1 w-44 overflow-hidden rounded-full bg-muted">
+      <div className="relative h-1 w-48 overflow-hidden rounded-full bg-muted">
         <div className="absolute inset-y-0 rounded-full bg-accent animate-loader-bar" />
       </div>
       <p
-        className={`mt-5 flex h-10 items-center px-6 text-center text-sm text-muted-foreground transition-opacity duration-300 ${
+        className={`mt-6 flex h-10 items-center px-6 text-center text-sm text-muted-foreground transition-opacity duration-300 ${
           visible ? "opacity-100" : "opacity-0"
         }`}
       >

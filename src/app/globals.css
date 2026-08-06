@@ -224,20 +224,3 @@ input[type="range"].param-slider:active::-moz-range-thumb {
   animation: loader-bar 1.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
-@keyframes loader-spin {
-  to { transform: rotate(360deg); }
-}
-.animate-loader-spin {
-  animation: loader-spin 1.6s linear infinite;
-}
-.loader-ring {
-  background: conic-gradient(
-    from 0deg,
-    transparent 0%,
-    var(--accent) 25%,
-    transparent 50%
-  );
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px));
-  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px));
-  opacity: 0.55;
-}
