@@ -16,25 +16,36 @@ export function FullScreenLoader() {
   const [index, setIndex] = useState(() =>
     Math.floor(Math.random() * lines.length),
   );
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const t = setInterval(() => setIndex((i) => (i + 1) % lines.length), 2600);
+    const t = setInterval(() => {
+      setVisible(false);
+      window.setTimeout(() => {
+        setIndex((i) => (i + 1) % lines.length);
+        setVisible(true);
+      }, 350);
+    }, 3400);
     return () => clearInterval(t);
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background">
-      <div className="relative animate-float">
-        <div className="absolute inset-0 rounded-full bg-accent/40 blur-2xl animate-loader-glow" />
-        <ScribeMark className="relative h-12 w-12" />
+    <div className="flex min-h-screen flex-col items-center justify-center bg-background">
+      <div className="relative flex h-24 w-24 items-center justify-center">
+        <div className="absolute inset-0 rounded-full bg-accent/25 blur-2xl animate-loader-glow" />
+        <div className="absolute inset-0 animate-loader-spin rounded-full">
+          <div className="loader-ring h-full w-full rounded-full" />
+        </div>
+        <ScribeMark className="relative h-11 w-11" />
       </div>
-      <span className="text-lg font-bold tracking-tight">Scribe</span>
-      <div className="relative h-1 w-40 overflow-hidden rounded-full bg-muted">
+      <span className="mt-5 text-xl font-bold tracking-tight">Scribe</span>
+      <div className="relative mt-4 h-1 w-44 overflow-hidden rounded-full bg-muted">
         <div className="absolute inset-y-0 rounded-full bg-accent animate-loader-bar" />
       </div>
       <p
-        key={index}
-        className="animate-fade-up px-6 text-center text-sm text-muted-foreground"
+        className={`mt-5 flex h-10 items-center px-6 text-center text-sm text-muted-foreground transition-opacity duration-300 ${
+          visible ? "opacity-100" : "opacity-0"
+        }`}
       >
         {lines[index]}
       </p>
