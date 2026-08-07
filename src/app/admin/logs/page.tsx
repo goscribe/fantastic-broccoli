@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   EmptyRow,
+  IncludeAdminsToggle,
   PageHeader,
   Pagination,
   SearchInput,
@@ -126,15 +127,10 @@ export default function AdminLogsPage() {
           <option value="SUCCESS">Success</option>
           <option value="FAILURE">Failure</option>
         </select>
-        <label className="flex items-center gap-2 text-[13px] text-muted-foreground">
-          <input
-            type="checkbox"
-            checked={includeAdminActors}
-            onChange={(e) => resetTo(setIncludeAdminActors)(e.target.checked)}
-            className="h-3.5 w-3.5 accent-[var(--accent)]"
-          />
-          Include admin accounts
-        </label>
+        <IncludeAdminsToggle
+          checked={includeAdminActors}
+          onChange={resetTo(setIncludeAdminActors)}
+        />
       </div>
 
       <Table headers={["When", "Actor", "Action", "Workspace", "Outcome"]}>

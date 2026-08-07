@@ -204,6 +204,32 @@ export function SearchInput({
   );
 }
 
+/**
+ * Admin accounts' own workspaces, content and activity are hidden across the
+ * console; this opts a single view back into showing them.
+ */
+export function IncludeAdminsToggle({
+  checked,
+  onChange,
+  label = "Include admin accounts",
+}: {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  label?: string;
+}) {
+  return (
+    <label className="flex items-center gap-2 text-[13px] text-muted-foreground">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="h-3.5 w-3.5 accent-[var(--accent)]"
+      />
+      {label}
+    </label>
+  );
+}
+
 /** Read-only pretty-printed JSON, used to inspect generated payloads. */
 export function JsonBlock({ value }: { value: unknown }) {
   return (

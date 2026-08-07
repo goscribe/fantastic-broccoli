@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import {
   EmptyRow,
+  IncludeAdminsToggle,
   JsonBlock,
   PageHeader,
   Table,
@@ -212,10 +213,11 @@ export default function AdminWorkspaceDetailPage({
   const queryClient = useQueryClient();
   const [openArtifact, setOpenArtifact] = useState<string | null>(null);
   const [openSession, setOpenSession] = useState<string | null>(null);
+  const [includeAdminGenerated, setIncludeAdminGenerated] = useState(false);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["admin", "workspace", id],
-    queryFn: () => adminApi.getWorkspaceContent(id),
+    queryKey: ["admin", "workspace", id, includeAdminGenerated],
+    queryFn: () => adminApi.getWorkspaceContent(id, includeAdminGenerated),
   });
 
   const archive = useMutation({
@@ -233,6 +235,7 @@ export default function AdminWorkspaceDetailPage({
           : "Artifact restored",
       );
       queryClient.invalidateQueries({ queryKey: ["admin", "workspace", id] });
+      queryClient.invalidateQueries({ queryKey: ["admin", "artifact"] });
     },
     onError: (err) => toastError(err, "Could not update the artifact"),
   });
@@ -262,6 +265,13 @@ export default function AdminWorkspaceDetailPage({
           data
             ? `Owned by ${data.owner.email ?? data.owner.name ?? "unknown"} · created ${formatRelativeDate(data.createdAt)}`
             : undefined
+        }
+        action={
+          <IncludeAdminsToggle
+            checked={includeAdminGenerated}
+            onChange={setIncludeAdminGenerated}
+            label="Include admin-generated content"
+          />
         }
       />
 

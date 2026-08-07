@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { adminApi } from "@/lib/api/admin";
 import {
   EmptyRow,
+  IncludeAdminsToggle,
   PageHeader,
   SearchInput,
   Table,
@@ -31,17 +32,19 @@ function WorkspacesTable() {
   const initialSearch = useSearchParams().get("q") ?? "";
   const [search, setSearch] = useState(initialSearch);
   const debouncedSearch = useDebounced(search, 300);
+  const [includeAdminOwned, setIncludeAdminOwned] = useState(false);
   // Cursor stack so "Prev" can walk back through the cursor-paginated list.
   const [cursors, setCursors] = useState<Array<string | null>>([null]);
   const cursor = cursors[cursors.length - 1];
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ["admin", "workspaces", debouncedSearch, cursor],
+    queryKey: ["admin", "workspaces", debouncedSearch, includeAdminOwned, cursor],
     queryFn: () =>
       adminApi.listWorkspaces({
         limit: PAGE_SIZE,
         cursor,
         search: debouncedSearch || undefined,
+        includeAdminOwned,
       }),
     placeholderData: keepPreviousData,
   });
@@ -55,15 +58,25 @@ function WorkspacesTable() {
     <>
       <PageHeader
         title="Workspaces"
-        description="Every workspace on the platform. Open one to review its uploads and generated content."
+        description="Every user workspace on the platform. Open one to review its uploads and generated content."
       />
 
-      <SearchInput
-        value={search}
-        onChange={resetPaging}
-        placeholder="Search by title, owner email, or workspace id…"
-        className="mb-4 max-w-md"
-      />
+      <div className="mb-4 flex flex-wrap items-center gap-3">
+        <SearchInput
+          value={search}
+          onChange={resetPaging}
+          placeholder="Search by title, owner email, or workspace id…"
+          className="max-w-md"
+        />
+        <IncludeAdminsToggle
+          checked={includeAdminOwned}
+          onChange={(checked) => {
+            setIncludeAdminOwned(checked);
+            setCursors([null]);
+          }}
+          label="Include admin-owned workspaces"
+        />
+      </div>
 
       <Table
         headers={[
