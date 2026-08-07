@@ -240,6 +240,7 @@ export interface AdminActivityLogRow {
   status: ActivityLogStatus;
   durationMs: number | null;
   errorCode: string | null;
+  errorMessage: string | null;
   ipAddress: string | null;
   actor: AdminUserRef | null;
   workspace: { id: string; title: string } | null;
@@ -254,6 +255,8 @@ export interface ActivityLogFilters {
   to?: Date;
   workspaceId?: string;
   actorUserId?: string;
+  /** Narrow to one rejection reason, e.g. "FORBIDDEN". */
+  errorCode?: string;
   /** Admin accounts' own traffic is filtered out unless this is set. */
   includeAdminActors?: boolean;
 }
@@ -323,6 +326,13 @@ export const adminApi = {
   activityList: (input: ActivityLogFilters & { page: number; limit: number }) =>
     rpc<PageMeta & { items: AdminActivityLogRow[] }>(
       "admin.activityList",
+      "query",
+      input,
+    ),
+
+  activityErrorBreakdown: (input: ActivityLogFilters) =>
+    rpc<Array<{ errorCode: string; count: number }>>(
+      "admin.activityErrorBreakdown",
       "query",
       input,
     ),

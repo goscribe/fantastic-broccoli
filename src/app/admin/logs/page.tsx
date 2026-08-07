@@ -40,6 +40,7 @@ export default function AdminLogsPage() {
   const [category, setCategory] = useState<ActivityLogCategory | "">("");
   const [status, setStatus] = useState<ActivityLogStatus | "">("");
   const [includeAdminActors, setIncludeAdminActors] = useState(false);
+  const [errorCode, setErrorCode] = useState("");
   const [page, setPage] = useState(1);
   const [exporting, setExporting] = useState(false);
   const debouncedSearch = useDebounced(search, 300);
@@ -48,12 +49,21 @@ export default function AdminLogsPage() {
     search: debouncedSearch || undefined,
     category: category || undefined,
     status: status || undefined,
+    errorCode: errorCode || undefined,
     includeAdminActors,
   };
 
   const { data, isLoading } = useQuery({
     queryKey: ["admin", "logs", filters, page],
     queryFn: () => adminApi.activityList({ ...filters, page, limit: PAGE_SIZE }),
+    placeholderData: keepPreviousData,
+  });
+
+  // Breakdown ignores the error-code filter so every code stays selectable.
+  const { data: breakdown } = useQuery({
+    queryKey: ["admin", "logs", "errors", { ...filters, errorCode: undefined }],
+    queryFn: () =>
+      adminApi.activityErrorBreakdown({ ...filters, errorCode: undefined }),
     placeholderData: keepPreviousData,
   });
 
@@ -133,6 +143,26 @@ export default function AdminLogsPage() {
         />
       </div>
 
+      {breakdown && breakdown.length > 0 && (
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <span className="text-[13px] text-muted-foreground">Rejections:</span>
+          {breakdown.map(({ errorCode: code, count }) => (
+            <button
+              key={code}
+              type="button"
+              onClick={() => resetTo(setErrorCode)(errorCode === code ? "" : code)}
+              className={`rounded-full border px-3 py-1 text-[12px] transition-colors ${
+                errorCode === code
+                  ? "border-[var(--accent)] bg-[var(--accent)]/10 text-foreground"
+                  : "border-border text-muted-foreground hover:bg-muted/60"
+              }`}
+            >
+              {code} · {count}
+            </button>
+          ))}
+        </div>
+      )}
+
       <Table headers={["When", "Actor", "Action", "Workspace", "Outcome"]}>
         {isLoading ? (
           <TableSkeletonRows cols={5} />
@@ -168,9 +198,16 @@ export default function AdminLogsPage() {
                 {row.status === "SUCCESS" ? (
                   <Badge variant="success">success</Badge>
                 ) : (
-                  <Badge variant="warning">
-                    {row.errorCode ?? "failure"}
-                  </Badge>
+                  <>
+                    <Badge variant="warning">
+                      {row.errorCode ?? "failure"}
+                    </Badge>
+                    {row.errorMessage && (
+                      <p className="mt-1 max-w-[22rem] text-[12px] text-faint">
+                        {row.errorMessage}
+                      </p>
+                    )}
+                  </>
                 )}
               </Td>
             </tr>
