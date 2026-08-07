@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Bell,
+  ShieldCheck,
   LogOut,
   Menu,
   Moon,
@@ -317,6 +318,19 @@ export function TopBar({
                     <Settings className="h-4 w-4 text-muted-foreground" />
                     Settings
                   </button>
+                  {user?.isAdmin && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMenuOpen(false);
+                        router.push("/admin");
+                      }}
+                      className="flex w-full items-center gap-2.5 px-3.5 py-2 text-left text-sm hover:bg-muted"
+                    >
+                      <ShieldCheck className="h-4 w-4 text-muted-foreground" />
+                      Admin console
+                    </button>
+                  )}
                   <div className="my-1.5 border-t border-border" />
                   <button
                     type="button"
