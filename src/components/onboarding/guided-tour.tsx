@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import type { EventData, Step } from "react-joyride";
+import type { EventData, Step, TooltipRenderProps } from "react-joyride";
+import { Button } from "@/components/ui/button";
 import {
   hasCompletedGuidedTour,
   hasCompletedOnboarding,
@@ -53,6 +54,53 @@ const steps: Step[] = [
   },
 ];
 
+function TourTooltip({
+  backProps,
+  index,
+  isLastStep,
+  primaryProps,
+  size,
+  skipProps,
+  step,
+  tooltipProps,
+}: TooltipRenderProps) {
+  return (
+    <div
+      {...tooltipProps}
+      className="w-[340px] max-w-[calc(100vw-2rem)] rounded-2xl border border-border bg-card p-5 shadow-2xl"
+    >
+      {step.title != null && (
+        <h3 className="text-sm font-bold tracking-tight">{step.title}</h3>
+      )}
+      <div className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
+        {step.content}
+      </div>
+      <div className="mt-4 flex items-center gap-2">
+        <span className="text-[11px] font-medium tabular-nums text-faint">
+          {index + 1} / {size}
+        </span>
+        <button
+          {...skipProps}
+          type="button"
+          className="ml-2 text-[12px] font-medium text-faint hover:text-foreground"
+        >
+          Skip tour
+        </button>
+        <div className="ml-auto flex items-center gap-2">
+          {index > 0 && (
+            <Button {...backProps} type="button" variant="ghost" size="sm">
+              Back
+            </Button>
+          )}
+          <Button {...primaryProps} type="button" size="sm">
+            {isLastStep ? "Done" : "Next"}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function GuidedTour() {
   const pathname = usePathname();
   const [run, setRun] = useState(false);
@@ -90,22 +138,13 @@ export function GuidedTour() {
       continuous
       scrollToFirstStep
       onEvent={onEvent}
-      locale={{ last: "Done", skip: "Skip tour" }}
+      tooltipComponent={TourTooltip}
       options={{
         skipBeacon: true,
-        showProgress: true,
-        buttons: ["back", "close", "primary", "skip"],
-        primaryColor: "#7c5cfc",
+        arrowColor: "var(--card)",
         overlayColor: "rgba(20, 16, 41, 0.45)",
         spotlightRadius: 10,
         zIndex: 90,
-      }}
-      styles={{
-        tooltip: { borderRadius: 14, fontSize: 14 },
-        tooltipTitle: { fontSize: 15, fontWeight: 700 },
-        buttonPrimary: { borderRadius: 8, fontSize: 13, fontWeight: 600 },
-        buttonBack: { fontSize: 13 },
-        buttonSkip: { fontSize: 13 },
       }}
     />
   );
