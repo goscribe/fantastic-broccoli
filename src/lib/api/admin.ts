@@ -292,6 +292,8 @@ export const adminApi = {
     limit: number;
     cursor?: string | null;
     search?: string;
+    /** Admin accounts' own workspaces are hidden unless this is set. */
+    includeAdminOwned?: boolean;
   }) =>
     rpc<{
       workspaces: AdminWorkspaceRow[];
@@ -299,9 +301,10 @@ export const adminApi = {
       totalCount: number;
     }>("admin.listWorkspaces", "query", input),
 
-  getWorkspaceContent: (workspaceId: string) =>
+  getWorkspaceContent: (workspaceId: string, includeAdminGenerated = false) =>
     rpc<AdminWorkspaceContent>("admin.getWorkspaceContent", "query", {
       workspaceId,
+      includeAdminGenerated,
     }),
 
   getArtifactContent: (artifactId: string) =>
