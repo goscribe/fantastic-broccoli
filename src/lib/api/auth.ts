@@ -10,7 +10,11 @@ export interface AuthUser {
   email?: string;
   emailVerified?: boolean;
   profilePicture?: string | null;
+  role?: string | null;
+  isAdmin: boolean;
 }
+
+export const SYSTEM_ADMIN_ROLE = "System Admin";
 
 const PUBLIC_PATHS = [
   "/landing",
@@ -43,6 +47,7 @@ type SessionUser = {
   email?: string | null;
   emailVerified?: boolean;
   profilePicture?: string | null;
+  role?: { id: string; name: string } | null;
 };
 
 // getSession returns the profile picture as a path relative to the API host
@@ -55,6 +60,8 @@ function toAuthUser(session: SessionResult): AuthUser | null {
     name: u.name ?? u.email ?? "You",
     email: u.email ?? undefined,
     emailVerified: u.emailVerified,
+    role: u.role?.name ?? null,
+    isAdmin: u.role?.name === SYSTEM_ADMIN_ROLE,
     profilePicture: u.profilePicture
       ? u.profilePicture.startsWith("http")
         ? u.profilePicture

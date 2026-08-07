@@ -22,7 +22,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     pathname === "/forgot-password" ||
     pathname === "/verify-email" ||
     pathname === "/privacy" ||
-    pathname === "/terms"
+    pathname === "/terms" ||
+    pathname.startsWith("/admin")
   ) {
     return <>{children}</>;
   }
