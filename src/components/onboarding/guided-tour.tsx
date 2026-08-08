@@ -9,6 +9,7 @@ import {
   hasCompletedGuidedTour,
   hasCompletedOnboarding,
   markGuidedTourCompleted,
+  type GuidedTourPhase,
 } from "@/lib/onboarding";
 
 const Joyride = dynamic(
@@ -16,7 +17,7 @@ const Joyride = dynamic(
   { ssr: false },
 );
 
-const steps: Step[] = [
+const homeSteps: Step[] = [
   {
     target: '[data-tour="home-banner"]',
     title: "Start a study session",
@@ -49,10 +50,75 @@ const steps: Step[] = [
     target: '[data-tour="sidebar-footer"]',
     title: "Tokens, storage & settings",
     content:
-      "Generating content uses monthly tokens — keep an eye on your balance here. Settings and your account live here too.",
+      "Generating content uses monthly tokens — keep an eye on your balance here. Settings and your account live here too. Next up: open a workspace and we'll show you around inside.",
     placement: "right-end",
   },
 ];
+
+const studySteps: Step[] = [
+  {
+    target: '[data-tour="workspace-tabs"]',
+    title: "Inside a workspace",
+    content:
+      "Everything for this course lives in these tabs — your materials, study sessions, artifact bank, study guide, and podcast-style recall.",
+    placement: "bottom",
+  },
+  {
+    target: '[data-tour="tab-materials"]',
+    title: "Add your materials first",
+    content:
+      "Head to Materials to upload PDFs, slides, or lecture recordings. Scribe analyzes them and uses them to build everything else.",
+    placement: "bottom",
+  },
+  {
+    target: '[data-tour="new-session"]',
+    title: "Create a study session",
+    content:
+      "Once your materials are in, create a session — tell Scribe what to cover and it plans readings, quizzes, and comprehension checks for you.",
+    placement: "bottom",
+  },
+];
+
+const materialsSteps: Step[] = [
+  {
+    target: '[data-tour="upload-materials"]',
+    title: "Upload or record",
+    content:
+      "Upload PDFs, slides, and audio files — or record a lecture live. Scribe transcribes and analyzes everything automatically.",
+    placement: "bottom",
+  },
+  {
+    target: '[data-tour="tab-study"]',
+    title: "Then start studying",
+    content:
+      "Once your materials are analyzed, head to the Study tab and create your first study session from them.",
+    placement: "bottom",
+  },
+];
+
+type PhaseConfig = {
+  phase: GuidedTourPhase;
+  steps: Step[];
+  /** Wait for the "What's new" modal before starting. */
+  waitForOnboarding: boolean;
+};
+
+function phaseForPath(pathname: string): PhaseConfig | null {
+  if (pathname === "/") {
+    return { phase: "home", steps: homeSteps, waitForOnboarding: true };
+  }
+  if (/^\/workspace\/[^/]+\/study\/?$/.test(pathname)) {
+    return { phase: "study", steps: studySteps, waitForOnboarding: false };
+  }
+  if (/^\/workspace\/[^/]+\/materials\/?$/.test(pathname)) {
+    return {
+      phase: "materials",
+      steps: materialsSteps,
+      waitForOnboarding: false,
+    };
+  }
+  return null;
+}
 
 function TourTooltip({
   backProps,
@@ -103,17 +169,30 @@ function TourTooltip({
 
 export function GuidedTour() {
   const pathname = usePathname();
-  const [run, setRun] = useState(false);
+  const [active, setActive] = useState<PhaseConfig | null>(null);
+
+  // Reset the tour when navigating away from the phase it belongs to.
+  if (active && phaseForPath(pathname)?.phase !== active.phase) {
+    setActive(null);
+  }
 
   useEffect(() => {
-    if (pathname !== "/" || hasCompletedGuidedTour()) return;
-    // Wait until the "What's new" modal has been dismissed and only run the
-    // tour on viewports where the sidebar targets are visible.
+    const config = phaseForPath(pathname);
+    if (!config || hasCompletedGuidedTour(config.phase)) return;
+    // Wait until any blocking modal has been dismissed, the tour targets have
+    // rendered, and the viewport is wide enough for them to be visible.
     const timer = setInterval(() => {
-      if (!hasCompletedOnboarding()) return;
+      if (config.waitForOnboarding && !hasCompletedOnboarding()) return;
       if (!window.matchMedia("(min-width: 768px)").matches) return;
+      const firstTarget = config.steps[0].target;
+      if (
+        typeof firstTarget === "string" &&
+        !document.querySelector(firstTarget)
+      ) {
+        return;
+      }
       clearInterval(timer);
-      setRun(true);
+      setActive(config);
     }, 500);
     return () => clearInterval(timer);
   }, [pathname]);
@@ -124,16 +203,17 @@ export function GuidedTour() {
       data.status === "finished" ||
       data.status === "skipped"
     ) {
-      markGuidedTourCompleted();
-      setRun(false);
+      if (active) markGuidedTourCompleted(active.phase);
+      setActive(null);
     }
   };
 
-  if (!run) return null;
+  if (!active) return null;
 
   return (
     <Joyride
-      steps={steps}
+      key={active.phase}
+      steps={active.steps}
       run
       continuous
       scrollToFirstStep
