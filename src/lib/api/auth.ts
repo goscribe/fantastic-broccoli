@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { api } from "./trpc-client";
+import { rpc } from "./study-session";
 import { apiUrl } from "./config";
+import { getSignupAttribution } from "@/lib/attribution";
 
 export interface AuthUser {
   id: string;
@@ -136,7 +138,14 @@ export async function signUp(
   email: string,
   password: string,
 ): Promise<void> {
-  await api.auth.signup.mutate({ name, email, password });
+  // Raw rpc because the published @goscribe/server types predate the
+  // signup `attribution` field (see study-session.ts).
+  await rpc("auth.signup", "mutation", {
+    name,
+    email,
+    password,
+    attribution: getSignupAttribution(),
+  });
 }
 
 export async function requestPasswordReset(email: string): Promise<void> {

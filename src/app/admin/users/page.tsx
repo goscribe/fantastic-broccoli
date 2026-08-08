@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
-import { adminApi } from "@/lib/api/admin";
+import { adminApi, type AdminUser } from "@/lib/api/admin";
 import {
   EmptyRow,
   PageHeader,
@@ -19,6 +19,37 @@ import { useDebounced } from "@/lib/use-debounced";
 
 const PAGE_SIZE = 20;
 type VerifiedFilter = "all" | "yes" | "no";
+
+/** Where the account came from: utm campaign, Google Ads, or referrer host. */
+function UserSource({ user }: { user: AdminUser }) {
+  const source =
+    user.utmSource ?? (user.gclid ? "google" : null);
+  if (source) {
+    const detail = [user.utmMedium, user.utmCampaign]
+      .filter(Boolean)
+      .join(" · ");
+    return (
+      <div>
+        <Badge variant={user.gclid ? "success" : "muted"}>
+          {user.gclid ? `${source} ads` : source}
+        </Badge>
+        {detail && (
+          <p className="mt-0.5 text-[11px] text-muted-foreground">{detail}</p>
+        )}
+      </div>
+    );
+  }
+  if (user.signupReferrer) {
+    let host = user.signupReferrer;
+    try {
+      host = new URL(user.signupReferrer).hostname;
+    } catch {
+      // keep raw referrer
+    }
+    return <span className="text-muted-foreground">{host}</span>;
+  }
+  return <span className="text-faint">direct</span>;
+}
 
 export default function AdminUsersPage() {
   const [search, setSearch] = useState("");
@@ -69,11 +100,11 @@ export default function AdminUsersPage() {
         </select>
       </div>
 
-      <Table headers={["User", "Verified", "Plan", "Joined", ""]}>
+      <Table headers={["User", "Verified", "Plan", "Source", "Joined", ""]}>
         {isLoading ? (
-          <TableSkeletonRows cols={5} />
+          <TableSkeletonRows cols={6} />
         ) : !data?.users.length ? (
-          <EmptyRow colSpan={5}>No users match this search.</EmptyRow>
+          <EmptyRow colSpan={6}>No users match this search.</EmptyRow>
         ) : (
           data.users.map((user) => {
             const subscription = user.subscriptions?.[0];
@@ -94,6 +125,9 @@ export default function AdminUsersPage() {
                 </Td>
                 <Td className="text-muted-foreground">
                   {subscription?.plan?.name ?? "Free"}
+                </Td>
+                <Td>
+                  <UserSource user={user} />
                 </Td>
                 <Td className="text-muted-foreground">
                   {formatRelativeDate(user.createdAt)}

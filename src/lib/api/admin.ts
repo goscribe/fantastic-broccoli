@@ -65,6 +65,13 @@ export interface AdminUser {
   emailVerified: Date | null;
   createdAt: Date;
   profilePicture: string | null;
+  utmSource: string | null;
+  utmMedium: string | null;
+  utmCampaign: string | null;
+  utmTerm: string | null;
+  utmContent: string | null;
+  gclid: string | null;
+  signupReferrer: string | null;
   role: { id: string; name: string } | null;
   subscriptions: Array<{
     id: string;
