@@ -18,7 +18,16 @@ import {
   type EditTarget,
 } from "@/components/workspace/resource-actions";
 import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
-import { fetchActivityCalendar, type DailyActivityPoint } from "@/lib/api/study";
+import {
+  fetchActivityCalendar,
+  fetchStudySessions,
+  type DailyActivityPoint,
+} from "@/lib/api/study";
+import {
+  FirstSessionOnboarding,
+  hasSkippedFirstSessionOnboarding,
+  markFirstSessionOnboardingSkipped,
+} from "@/components/onboarding/first-session-onboarding";
 import { onTreeChanged } from "@/lib/tree-events";
 import { Search, ArrowRight, Plus } from "lucide-react";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
@@ -63,6 +72,10 @@ export default function HomePage() {
   const [membersFor, setMembersFor] = useState<string | null>(null);
   const [treeLoading, setTreeLoading] = useState(true);
   const [calendarLoading, setCalendarLoading] = useState(true);
+  // undefined = still deciding; kept sticky so the dashboard doesn't flash in.
+  const [showOnboarding, setShowOnboarding] = useState<boolean | undefined>(
+    undefined,
+  );
 
   const loadTree = () =>
     fetchWorkspaceTree()
@@ -81,6 +94,31 @@ export default function HomePage() {
       .finally(() => setCalendarLoading(false));
     return onTreeChanged(loadTree);
   }, []);
+
+  // Upload-first onboarding: users with no study sessions anywhere land on
+  // the "drop your notes" screen instead of the dashboard.
+  useEffect(() => {
+    if (treeLoading || showOnboarding !== undefined) return;
+    let cancelled = false;
+    const decide = async (): Promise<boolean> => {
+      if (hasSkippedFirstSessionOnboarding()) return false;
+      const workspaces = flattenWorkspaces(folders, rootWorkspaces);
+      if (workspaces.length === 0) return true;
+      // Established users (many workspaces) are never onboarding candidates —
+      // skip the per-workspace session queries entirely.
+      if (workspaces.length > 5) return false;
+      const lists = await Promise.all(
+        workspaces.map((w) => fetchStudySessions(w.id).catch(() => [])),
+      );
+      return lists.every((l) => l.length === 0);
+    };
+    decide().then((show) => {
+      if (!cancelled) setShowOnboarding(show);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [treeLoading, folders, rootWorkspaces, showOnboarding]);
 
   const allWorkspaces = useMemo(
     () => flattenWorkspaces(folders, rootWorkspaces),
@@ -127,6 +165,29 @@ export default function HomePage() {
   const hour = new Date().getHours();
   const greeting =
     hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+
+  if (showOnboarding === undefined && !treeLoading) {
+    // Still deciding between onboarding and the dashboard — avoid flashing
+    // the dashboard at first-time users.
+    return (
+      <div className="flex-1 flex items-center justify-center">
+        <Skeleton className="h-8 w-40" />
+      </div>
+    );
+  }
+
+  if (showOnboarding) {
+    return (
+      <div className="flex-1 flex flex-col">
+        <FirstSessionOnboarding
+          onSkip={() => {
+            markFirstSessionOnboardingSkipped();
+            setShowOnboarding(false);
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 flex flex-col">

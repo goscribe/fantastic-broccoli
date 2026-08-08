@@ -7,7 +7,6 @@ import type { EventData, Step, TooltipRenderProps } from "react-joyride";
 import { Button } from "@/components/ui/button";
 import {
   hasCompletedGuidedTour,
-  hasCompletedOnboarding,
   markGuidedTourCompleted,
   type GuidedTourPhase,
 } from "@/lib/onboarding";
@@ -126,15 +125,9 @@ const wizardSteps: Step[] = [
 type PhaseConfig = {
   phase: GuidedTourPhase;
   steps: Step[];
-  /** Wait for the "What's new" modal before starting. */
-  waitForOnboarding?: boolean;
 };
 
-const homePhase: PhaseConfig = {
-  phase: "home",
-  steps: homeSteps,
-  waitForOnboarding: true,
-};
+const homePhase: PhaseConfig = { phase: "home", steps: homeSteps };
 const studyPhase: PhaseConfig = { phase: "study", steps: studySteps };
 const wizardPhase: PhaseConfig = { phase: "wizard", steps: wizardSteps };
 const materialsPhase: PhaseConfig = {
@@ -232,8 +225,8 @@ export function GuidedTour() {
       (p) => !hasCompletedGuidedTour(p.phase),
     );
     if (candidates.length === 0) return;
-    // Wait until any blocking modal has been dismissed, the tour targets have
-    // rendered, and the viewport is wide enough for them to be visible.
+    // Wait until the tour targets have rendered and the viewport is wide
+    // enough for them to be visible.
     const timer = setInterval(() => {
       if (!window.matchMedia("(min-width: 768px)").matches) return;
       setActive((current) => {
@@ -242,7 +235,6 @@ export function GuidedTour() {
         // session" or starts an upload mid-tour.
         for (const config of candidates) {
           if (config.phase === current?.phase) return current;
-          if (config.waitForOnboarding && !hasCompletedOnboarding()) continue;
           if (!firstTargetVisible(config)) continue;
           if (current) markGuidedTourCompleted(current.phase);
           return config;
