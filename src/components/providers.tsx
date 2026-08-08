@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MutationCache,
   QueryClient,
@@ -9,6 +9,7 @@ import {
 import { Toaster } from "sonner";
 import { ThemeProvider, useTheme } from "@/lib/theme";
 import { toastError } from "@/lib/toast";
+import { captureAttribution } from "@/lib/attribution";
 
 function ThemedToaster() {
   const { theme } = useTheme();
@@ -16,6 +17,12 @@ function ThemedToaster() {
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
+  // Capture where this visitor came from (utm_*/gclid/referrer) on their
+  // first page view, so signup can attribute the account.
+  useEffect(() => {
+    captureAttribution();
+  }, []);
+
   const [queryClient] = useState(
     () =>
       new QueryClient({

@@ -1,6 +1,23 @@
 "use client";
 
 import { apiUrl } from "@/lib/api/config";
+import { getSignupAttribution } from "@/lib/attribution";
+
+/** base64url-encodes the stored attribution for the OAuth handoff. */
+function attributionParam(): string {
+  const attribution = getSignupAttribution();
+  if (!attribution) return "";
+  try {
+    const bytes = new TextEncoder().encode(JSON.stringify(attribution));
+    const b64 = btoa(String.fromCharCode(...bytes))
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=+$/, "");
+    return `&attribution=${b64}`;
+  } catch {
+    return "";
+  }
+}
 
 function GoogleLogo() {
   return (
@@ -34,7 +51,7 @@ export function GoogleSignInButton({ label }: { label: string }) {
     const target = new URLSearchParams(window.location.search).get("redirect");
     const redirect =
       target && target.startsWith("/") && !target.startsWith("//") ? target : "/";
-    window.location.href = `${apiUrl}/auth/google?redirect=${encodeURIComponent(redirect)}`;
+    window.location.href = `${apiUrl}/auth/google?redirect=${encodeURIComponent(redirect)}${attributionParam()}`;
   };
 
   return (
