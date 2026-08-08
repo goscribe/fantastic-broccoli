@@ -40,7 +40,9 @@ export function getOnboardingState(): OnboardingState | null {
 export const GUIDED_TOUR_COOKIES = {
   home: "scribe_tour_v1",
   materials: "scribe_tour_materials_v1",
+  analysis: "scribe_tour_analysis_v1",
   study: "scribe_tour_study_v1",
+  wizard: "scribe_tour_wizard_v1",
 } as const;
 
 export type GuidedTourPhase = keyof typeof GUIDED_TOUR_COOKIES;
