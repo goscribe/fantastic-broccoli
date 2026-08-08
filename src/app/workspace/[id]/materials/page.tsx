@@ -648,7 +648,10 @@ export default function WorkspaceMaterialsPage() {
     <WorkspaceShell workspace={workspace}>
       <div className="space-y-6">
         {/* Quick actions */}
-        <div className="flex flex-wrap gap-2.5 animate-fade-up">
+        <div
+          className="flex flex-wrap gap-2.5 animate-fade-up"
+          data-tour="upload-materials"
+        >
           <Button
             size="sm"
             onClick={() => setRecording(true)}

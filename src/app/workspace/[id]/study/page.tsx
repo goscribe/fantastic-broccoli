@@ -127,6 +127,7 @@ export default function WorkspaceStudyPage() {
               variant="outline"
               size="sm"
               onClick={() => setShowCreateWizard(true)}
+              data-tour="new-session"
             >
               <Plus className="h-3.5 w-3.5 mr-1.5" />
               New session

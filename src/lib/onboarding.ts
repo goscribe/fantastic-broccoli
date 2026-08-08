@@ -37,17 +37,23 @@ export function getOnboardingState(): OnboardingState | null {
   return parseCookie();
 }
 
-export const GUIDED_TOUR_COOKIE = "scribe_tour_v1";
+export const GUIDED_TOUR_COOKIES = {
+  home: "scribe_tour_v1",
+  materials: "scribe_tour_materials_v1",
+  study: "scribe_tour_study_v1",
+} as const;
 
-export function hasCompletedGuidedTour(): boolean {
+export type GuidedTourPhase = keyof typeof GUIDED_TOUR_COOKIES;
+
+export function hasCompletedGuidedTour(phase: GuidedTourPhase): boolean {
   if (typeof document === "undefined") return true;
-  return new RegExp(`(?:^|; )${GUIDED_TOUR_COOKIE}=completed`).test(
+  return new RegExp(`(?:^|; )${GUIDED_TOUR_COOKIES[phase]}=completed`).test(
     document.cookie,
   );
 }
 
-export function markGuidedTourCompleted(): void {
+export function markGuidedTourCompleted(phase: GuidedTourPhase): void {
   if (typeof document === "undefined") return;
   const maxAge = 60 * 60 * 24 * 365; // 1 year
-  document.cookie = `${GUIDED_TOUR_COOKIE}=completed; Path=/; Max-Age=${maxAge}; SameSite=Lax`;
+  document.cookie = `${GUIDED_TOUR_COOKIES[phase]}=completed; Path=/; Max-Age=${maxAge}; SameSite=Lax`;
 }

@@ -101,13 +101,17 @@ export function WorkspaceShell({
     <div className="flex-1 flex flex-col">
       <div className="sticky top-14 z-30 border-b border-border bg-card">
         <div className="w-full px-4 sm:px-8">
-          <nav className="flex items-center gap-1 -mb-px">
+          <nav
+            className="flex items-center gap-1 -mb-px"
+            data-tour="workspace-tabs"
+          >
             {tabs.map((tab) => {
               const active = pathname.startsWith(tab.href);
               return (
                 <Link
                   key={tab.href}
                   href={tab.href}
+                  data-tour={`tab-${tab.label.toLowerCase().replace(/\s+/g, "-")}`}
                   className={cn(
                     "flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors",
                     active
