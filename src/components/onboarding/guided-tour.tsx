@@ -33,13 +33,6 @@ const homeSteps: Step[] = [
     placement: "right",
   },
   {
-    target: '[data-tour="new-workspace"]',
-    title: "Create something new",
-    content:
-      "Add a new workspace or folder any time with these buttons — or the buttons on the home page.",
-    placement: "right",
-  },
-  {
     target: '[data-tour="sidebar-search"]',
     title: "Find anything fast",
     content:
@@ -50,8 +43,15 @@ const homeSteps: Step[] = [
     target: '[data-tour="sidebar-footer"]',
     title: "Tokens, storage & settings",
     content:
-      "Generating content uses monthly tokens — keep an eye on your balance here. Settings and your account live here too. Next up: open a workspace and we'll show you around inside.",
+      "Generating content uses monthly tokens — keep an eye on your balance here. Settings and your account live here too.",
     placement: "right-end",
+  },
+  {
+    target: '[data-tour="new-workspace"]',
+    title: "Create your first workspace",
+    content:
+      "This is your next step: create a workspace for a course or topic. Open it and we'll show you how to upload materials and start a study session.",
+    placement: "right",
   },
 ];
 
@@ -82,9 +82,9 @@ const studySteps: Step[] = [
 const materialsSteps: Step[] = [
   {
     target: '[data-tour="upload-materials"]',
-    title: "Upload or record",
+    title: "Add your first material",
     content:
-      "Upload PDFs, slides, and audio files — or record a lecture live. Scribe transcribes and analyzes everything automatically.",
+      "Go ahead — click Upload files and pick a PDF, slides, or an audio file, or hit Record audio to capture a lecture live. The buttons work while this tour is open.",
     placement: "bottom",
   },
   {
@@ -96,28 +96,73 @@ const materialsSteps: Step[] = [
   },
 ];
 
+const analysisSteps: Step[] = [
+  {
+    target: '[data-tour="analysis-status"]',
+    title: "Scribe is reading your material",
+    content:
+      "Your upload is being transcribed, parsed, and turned into a knowledge base with a precomputed bank of questions. You can keep working while it runs.",
+    placement: "bottom",
+  },
+  {
+    target: '[data-tour="tab-study"]',
+    title: "Next: create a study session",
+    content:
+      "When the analysis finishes, open the Study tab and create a session built from this material.",
+    placement: "bottom",
+  },
+];
+
+const wizardSteps: Step[] = [
+  {
+    target: '[data-tour="session-wizard"]',
+    title: "Describe your session",
+    content:
+      "Give the session a title and any topics or syllabus points to cover, then pick your study depth and duration. Scribe generates a full plan — readings, quizzes, and comprehension checks — when you hit Generate plan.",
+    placement: "right",
+  },
+];
+
 type PhaseConfig = {
   phase: GuidedTourPhase;
   steps: Step[];
   /** Wait for the "What's new" modal before starting. */
-  waitForOnboarding: boolean;
+  waitForOnboarding?: boolean;
 };
 
-function phaseForPath(pathname: string): PhaseConfig | null {
-  if (pathname === "/") {
-    return { phase: "home", steps: homeSteps, waitForOnboarding: true };
-  }
+const homePhase: PhaseConfig = {
+  phase: "home",
+  steps: homeSteps,
+  waitForOnboarding: true,
+};
+const studyPhase: PhaseConfig = { phase: "study", steps: studySteps };
+const wizardPhase: PhaseConfig = { phase: "wizard", steps: wizardSteps };
+const materialsPhase: PhaseConfig = {
+  phase: "materials",
+  steps: materialsSteps,
+};
+const analysisPhase: PhaseConfig = { phase: "analysis", steps: analysisSteps };
+
+/**
+ * Candidate phases for a route, in priority order. A phase only starts once
+ * its first step's target is in the DOM, so action-driven phases (the session
+ * wizard, the upload analysis card) are listed first and take over as soon as
+ * the user acts.
+ */
+function phasesForPath(pathname: string): PhaseConfig[] {
+  if (pathname === "/") return [homePhase];
   if (/^\/workspace\/[^/]+\/study\/?$/.test(pathname)) {
-    return { phase: "study", steps: studySteps, waitForOnboarding: false };
+    return [wizardPhase, studyPhase];
   }
   if (/^\/workspace\/[^/]+\/materials\/?$/.test(pathname)) {
-    return {
-      phase: "materials",
-      steps: materialsSteps,
-      waitForOnboarding: false,
-    };
+    return [analysisPhase, materialsPhase];
   }
-  return null;
+  return [];
+}
+
+function firstTargetVisible(config: PhaseConfig): boolean {
+  const target = config.steps[0].target;
+  return typeof target !== "string" || !!document.querySelector(target);
 }
 
 function TourTooltip({
@@ -170,32 +215,43 @@ function TourTooltip({
 export function GuidedTour() {
   const pathname = usePathname();
   const [active, setActive] = useState<PhaseConfig | null>(null);
+  // Bumped when a phase ends so the effect re-arms and can start the next
+  // eligible phase on the same route (e.g. materials → analysis).
+  const [generation, setGeneration] = useState(0);
 
   // Reset the tour when navigating away from the phase it belongs to.
-  if (active && phaseForPath(pathname)?.phase !== active.phase) {
+  if (
+    active &&
+    !phasesForPath(pathname).some((p) => p.phase === active.phase)
+  ) {
     setActive(null);
   }
 
   useEffect(() => {
-    const config = phaseForPath(pathname);
-    if (!config || hasCompletedGuidedTour(config.phase)) return;
+    const candidates = phasesForPath(pathname).filter(
+      (p) => !hasCompletedGuidedTour(p.phase),
+    );
+    if (candidates.length === 0) return;
     // Wait until any blocking modal has been dismissed, the tour targets have
     // rendered, and the viewport is wide enough for them to be visible.
     const timer = setInterval(() => {
-      if (config.waitForOnboarding && !hasCompletedOnboarding()) return;
       if (!window.matchMedia("(min-width: 768px)").matches) return;
-      const firstTarget = config.steps[0].target;
-      if (
-        typeof firstTarget === "string" &&
-        !document.querySelector(firstTarget)
-      ) {
-        return;
-      }
-      clearInterval(timer);
-      setActive(config);
+      setActive((current) => {
+        // A higher-priority action-driven phase (wizard, analysis) takes over
+        // as soon as its target appears — e.g. when the user clicks "New
+        // session" or starts an upload mid-tour.
+        for (const config of candidates) {
+          if (config.phase === current?.phase) return current;
+          if (config.waitForOnboarding && !hasCompletedOnboarding()) continue;
+          if (!firstTargetVisible(config)) continue;
+          if (current) markGuidedTourCompleted(current.phase);
+          return config;
+        }
+        return current;
+      });
     }, 500);
     return () => clearInterval(timer);
-  }, [pathname]);
+  }, [pathname, generation]);
 
   const onEvent = (data: EventData) => {
     if (
@@ -205,6 +261,7 @@ export function GuidedTour() {
     ) {
       if (active) markGuidedTourCompleted(active.phase);
       setActive(null);
+      setGeneration((g) => g + 1);
     }
   };
 

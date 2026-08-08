@@ -233,7 +233,10 @@ export function SessionCreateWizard({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm">
-      <Card className="w-full max-w-lg sm:rounded-xl rounded-t-xl rounded-b-none sm:rounded-b-xl max-h-[85vh] overflow-y-auto p-6">
+      <Card
+        data-tour="session-wizard"
+        className="w-full max-w-lg sm:rounded-xl rounded-t-xl rounded-b-none sm:rounded-b-xl max-h-[85vh] overflow-y-auto p-6"
+      >
         <div className="flex items-center justify-between mb-6">
           <span className="text-sm font-medium text-muted-foreground">
             New study session

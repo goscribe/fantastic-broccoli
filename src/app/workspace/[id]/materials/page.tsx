@@ -691,7 +691,9 @@ export default function WorkspaceMaterialsPage() {
         )}
 
         {progress && !!progress.steps && (
-          <AnalysisStatusCard progress={progress} />
+          <div data-tour="analysis-status">
+            <AnalysisStatusCard progress={progress} />
+          </div>
         )}
 
         {recording && (
