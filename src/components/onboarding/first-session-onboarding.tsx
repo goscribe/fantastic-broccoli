@@ -167,8 +167,8 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
 
   if (phase === "building") {
     return (
-      <div className="flex-1 flex items-center justify-center px-4">
-        <div className="w-full max-w-md text-center animate-fade-up">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
+        <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
           <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft text-accent">
             <Sparkles className="h-6 w-6" />
           </div>
@@ -216,8 +216,8 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   }
 
   return (
-    <div className="flex-1 flex items-center justify-center px-4">
-      <div className="w-full max-w-lg text-center animate-fade-up">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
+      <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
         <p className="text-xs font-semibold text-accent">Welcome to Scribe</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight">
           What are you studying?
@@ -238,7 +238,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
             start(Array.from(e.dataTransfer.files));
           }}
           className={cn(
-            "mt-8 rounded-3xl border-2 border-dashed px-6 py-14 transition-colors",
+            "mt-6 rounded-2xl border-2 border-dashed px-6 py-10 transition-colors",
             dragOver
               ? "border-accent bg-accent-soft/40"
               : "border-border-strong bg-card",
