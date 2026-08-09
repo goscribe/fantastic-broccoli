@@ -10,8 +10,9 @@ import {
   type AnalysisProgress,
 } from "@/lib/api/materials";
 import { createStudySession } from "@/lib/api/study";
+import { refreshSession, resendVerification, useAuthUser } from "@/lib/api/auth";
 import { toastError } from "@/lib/toast";
-import { Check, Loader2, Circle, Upload, Sparkles } from "lucide-react";
+import { Check, Loader2, Circle, Upload, Sparkles, MailCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -101,7 +102,11 @@ function fileBasename(name: string): string {
 
 export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   const router = useRouter();
+  const { user } = useAuthUser();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [resendState, setResendState] = useState<"idle" | "sending" | "sent">(
+    "idle",
+  );
   const [dragOver, setDragOver] = useState(false);
   // Resume an in-progress build after a reload: the workspace/upload survive
   // server-side, so rejoin the "building" screen instead of starting over.
@@ -250,6 +255,68 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
           <p className="mt-6 text-xs text-muted-foreground">
             This can take a couple of minutes for large files — hang tight.
           </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Building a session requires a verified email server-side, so ask for
+  // verification before offering the upload instead of failing after it.
+  if (user && user.emailVerified === false) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
+        <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
+          <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft text-accent">
+            <MailCheck className="h-6 w-6" />
+          </div>
+          <p className="text-xs font-semibold text-accent">Welcome to Scribe</p>
+          <h1 className="mt-2 text-2xl font-bold tracking-tight">
+            Verify your email to get started
+          </h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            We sent a verification link to{" "}
+            <span className="font-medium text-foreground">
+              {user.email ?? "your inbox"}
+            </span>
+            . Click it, then come back here to build your first study session.
+            Don&apos;t see it? Check your spam folder.
+          </p>
+          <div className="mt-6 flex flex-col items-center gap-3">
+            <button
+              type="button"
+              onClick={() => refreshSession().catch(() => {})}
+              className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground hover:opacity-90 transition-opacity"
+            >
+              I&apos;ve verified my email
+            </button>
+            <button
+              type="button"
+              disabled={resendState !== "idle"}
+              onClick={() => {
+                setResendState("sending");
+                resendVerification()
+                  .then(() => setResendState("sent"))
+                  .catch((err) => {
+                    setResendState("idle");
+                    toastError(err, "Could not resend the email");
+                  });
+              }}
+              className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-60"
+            >
+              {resendState === "sent"
+                ? "Verification email sent — check your inbox"
+                : resendState === "sending"
+                  ? "Sending…"
+                  : "Resend verification email"}
+            </button>
+          </div>
+          <button
+            type="button"
+            onClick={onSkip}
+            className="mt-6 text-xs font-medium text-faint hover:text-foreground"
+          >
+            Skip for now — take me to my dashboard
+          </button>
         </div>
       </div>
     );
