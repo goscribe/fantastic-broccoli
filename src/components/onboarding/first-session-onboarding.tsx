@@ -21,6 +21,34 @@ import { cn } from "@/lib/utils";
  */
 
 const SKIP_KEY = "scribe_first_session_onboarding_skip";
+const PENDING_KEY = "scribe_first_session_onboarding_pending";
+
+type PendingBuild = { workspaceId: string; title: string };
+
+function readPendingBuild(): PendingBuild | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(PENDING_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Partial<PendingBuild>;
+    if (typeof parsed.workspaceId !== "string") return null;
+    return {
+      workspaceId: parsed.workspaceId,
+      title: typeof parsed.title === "string" ? parsed.title : "My first session",
+    };
+  } catch {
+    return null;
+  }
+}
+
+function writePendingBuild(pending: PendingBuild | null): void {
+  try {
+    if (pending) localStorage.setItem(PENDING_KEY, JSON.stringify(pending));
+    else localStorage.removeItem(PENDING_KEY);
+  } catch {
+    /* private mode */
+  }
+}
 
 export function hasSkippedFirstSessionOnboarding(): boolean {
   try {
@@ -75,13 +103,18 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragOver, setDragOver] = useState(false);
-  const [phase, setPhase] = useState<"upload" | "building">("upload");
+  // Resume an in-progress build after a reload: the workspace/upload survive
+  // server-side, so rejoin the "building" screen instead of starting over.
+  const [pending] = useState(readPendingBuild);
+  const [phase, setPhase] = useState<"upload" | "building">(
+    pending ? "building" : "upload",
+  );
   const [stepIndex, setStepIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
-  const startedRef = useRef(false);
+  const startedRef = useRef(!!pending);
 
-  const workspaceIdRef = useRef<string | null>(null);
-  const [title, setTitle] = useState("My first session");
+  const workspaceIdRef = useRef<string | null>(pending?.workspaceId ?? null);
+  const [title, setTitle] = useState(pending?.title ?? "My first session");
   const creatingSessionRef = useRef(false);
   const [analysisDone, setAnalysisDone] = useState(false);
 
@@ -109,11 +142,26 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
     return () => clearInterval(timer);
   }, [phase, analysisDone]);
 
+  // Live progress subscription (covers both fresh starts and resumes).
+  useEffect(() => {
+    if (phase !== "building" || analysisDone) return;
+    const workspaceId = workspaceIdRef.current;
+    if (!workspaceId) return;
+    const unsubscribe = subscribeAnalysisProgress(workspaceId, (progress) => {
+      setStepIndex((current) =>
+        Math.max(current, stepIndexFromProgress(progress)),
+      );
+      if (analysisComplete(progress)) setAnalysisDone(true);
+    });
+    return unsubscribe;
+  }, [phase, analysisDone]);
+
   useEffect(() => {
     const workspaceId = workspaceIdRef.current;
     if (!analysisDone || !workspaceId || creatingSessionRef.current) return;
     creatingSessionRef.current = true;
     setStepIndex(3);
+    writePendingBuild(null);
     createStudySession({
       workspaceId,
       title,
@@ -146,21 +194,13 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
       if (!workspaceId) throw new Error("Could not create a workspace");
       workspaceIdRef.current = workspaceId;
 
-      const unsubscribe = subscribeAnalysisProgress(workspaceId, (progress) => {
-        setStepIndex((current) =>
-          Math.max(current, stepIndexFromProgress(progress)),
-        );
-        if (analysisComplete(progress)) {
-          unsubscribe();
-          setAnalysisDone(true);
-        }
-      });
-
       const fileIds = await uploadFiles(workspaceId, files);
       await analyzeFiles(workspaceId, fileIds);
+      writePendingBuild({ workspaceId, title: sessionTitle });
     } catch (err) {
       startedRef.current = false;
       setPhase("upload");
+      writePendingBuild(null);
       setError(toastError(err, "Upload failed"));
     }
   }, []);

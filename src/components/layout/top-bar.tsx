@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Bell,
+  HelpCircle,
   ShieldCheck,
   LogOut,
   Menu,
@@ -30,6 +31,10 @@ import {
 } from "@/lib/api/notifications";
 import { formatRelativeDate } from "@/lib/utils";
 import { useTheme } from "@/lib/theme";
+import {
+  hasGuidedTourForPath,
+  requestGuidedTour,
+} from "@/components/onboarding/guided-tour";
 
 export function TopBar({
   showLogo = false,
@@ -173,6 +178,17 @@ export function TopBar({
               <Sparkles className="h-3.5 w-3.5" />
               {credits} pts
             </Link>
+            {hasGuidedTourForPath(pathname) && (
+              <button
+                type="button"
+                onClick={requestGuidedTour}
+                title="Show me around"
+                aria-label="Start guided tour"
+                className="hidden rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground md:block"
+              >
+                <HelpCircle className="h-4 w-4" />
+              </button>
+            )}
             <div className="relative" ref={notifRef}>
               <button
                 type="button"
