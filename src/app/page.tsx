@@ -166,31 +166,16 @@ export default function HomePage() {
   const greeting =
     hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
 
-  if (showOnboarding === undefined && !treeLoading) {
-    // Still deciding between onboarding and the dashboard — avoid flashing
-    // the dashboard at first-time users.
-    return (
-      <div className="flex-1 flex items-center justify-center">
-        <Skeleton className="h-8 w-40" />
-      </div>
-    );
-  }
-
-  if (showOnboarding) {
-    return (
-      <div className="flex-1 flex flex-col">
+  return (
+    <div className="flex-1 flex flex-col">
+      {showOnboarding && (
         <FirstSessionOnboarding
           onSkip={() => {
             markFirstSessionOnboardingSkipped();
             setShowOnboarding(false);
           }}
         />
-      </div>
-    );
-  }
-
-  return (
-    <div className="flex-1 flex flex-col">
+      )}
       <Banner
         variant="accent"
         dismissKey="upgrade-promo"
