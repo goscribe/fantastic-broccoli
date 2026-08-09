@@ -6,10 +6,21 @@ import { usePathname } from "next/navigation";
 import type { EventData, Step, TooltipRenderProps } from "react-joyride";
 import { Button } from "@/components/ui/button";
 import {
-  hasCompletedGuidedTour,
   markGuidedTourCompleted,
   type GuidedTourPhase,
 } from "@/lib/onboarding";
+
+const TOUR_EVENT = "scribe:start-guided-tour";
+
+/** Starts the guided tour for the current route (wired to the "?" button). */
+export function requestGuidedTour(): void {
+  window.dispatchEvent(new Event(TOUR_EVENT));
+}
+
+/** Whether the current route has a guided tour available. */
+export function hasGuidedTourForPath(pathname: string): boolean {
+  return phasesForPath(pathname).length > 0;
+}
 
 const Joyride = dynamic(
   () => import("react-joyride").then((m) => m.Joyride),
@@ -220,29 +231,14 @@ export function GuidedTour() {
     setActive(null);
   }
 
+  // Tours only start when explicitly requested via the "?" help button.
   useEffect(() => {
-    const candidates = phasesForPath(pathname).filter(
-      (p) => !hasCompletedGuidedTour(p.phase),
-    );
-    if (candidates.length === 0) return;
-    // Wait until the tour targets have rendered and the viewport is wide
-    // enough for them to be visible.
-    const timer = setInterval(() => {
-      if (!window.matchMedia("(min-width: 768px)").matches) return;
-      setActive((current) => {
-        // A higher-priority action-driven phase (wizard, analysis) takes over
-        // as soon as its target appears — e.g. when the user clicks "New
-        // session" or starts an upload mid-tour.
-        for (const config of candidates) {
-          if (config.phase === current?.phase) return current;
-          if (!firstTargetVisible(config)) continue;
-          if (current) markGuidedTourCompleted(current.phase);
-          return config;
-        }
-        return current;
-      });
-    }, 500);
-    return () => clearInterval(timer);
+    const handler = () => {
+      const candidates = phasesForPath(pathname);
+      setActive(candidates.find(firstTargetVisible) ?? null);
+    };
+    window.addEventListener(TOUR_EVENT, handler);
+    return () => window.removeEventListener(TOUR_EVENT, handler);
   }, [pathname, generation]);
 
   const onEvent = (data: EventData) => {
