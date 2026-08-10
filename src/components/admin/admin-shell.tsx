@@ -10,6 +10,7 @@ import {
   LayoutDashboard,
   Library,
   ScrollText,
+  Sparkles,
   Users,
 } from "lucide-react";
 import { ScribeLogo } from "@/components/graphics/logo";
@@ -21,6 +22,7 @@ const NAV = [
   { href: "/admin", label: "Overview", icon: LayoutDashboard },
   { href: "/admin/workspaces", label: "Workspaces", icon: Library },
   { href: "/admin/users", label: "Users", icon: Users },
+  { href: "/admin/quality", label: "Quality", icon: Sparkles },
   { href: "/admin/logs", label: "Activity logs", icon: ScrollText },
   { href: "/admin/invoices", label: "Invoices", icon: FileText },
   { href: "/admin/plans", label: "Plans", icon: CreditCard },
