@@ -268,6 +268,52 @@ export interface ActivityLogFilters {
   includeAdminActors?: boolean;
 }
 
+export interface QualityFlag {
+  kind: string;
+  detail: string;
+}
+
+export interface QualityAssessment {
+  id: string;
+  workspaceId: string;
+  model: string;
+  materialFitScore: number;
+  materialFitNotes: string;
+  generationQualityScore: number;
+  generationQualityNotes: string;
+  flags: QualityFlag[];
+  inputStats: {
+    uploadCount: number;
+    analyzedUploadCount: number;
+    artifactCount: number;
+    studySessionCount: number;
+    materialChars: number;
+    artifactChars: number;
+  } | null;
+  createdAt: Date;
+  workspace?: { title: string; ownerId: string };
+}
+
+export interface QualitySummary {
+  sinceDays: number;
+  workspaceCount: number;
+  avgMaterialFit: number | null;
+  avgGenerationQuality: number | null;
+  lowQualityCount: number;
+  flagCounts: Record<string, number>;
+}
+
+export interface BatchAssessResult {
+  assessed: number;
+  results: Array<{
+    workspaceId: string;
+    title: string;
+    materialFitScore?: number;
+    generationQualityScore?: number;
+    error?: string;
+  }>;
+}
+
 export const adminApi = {
   getSystemStats: () => rpc<SystemStats>("admin.getSystemStats", "query", undefined),
 
@@ -346,4 +392,18 @@ export const adminApi = {
 
   activityExportCsv: (input: ActivityLogFilters & { maxRows?: number }) =>
     rpc<{ csv: string; count: number }>("admin.activityExportCsv", "query", input),
+
+  assessWorkspaceQuality: (workspaceId: string) =>
+    rpc<QualityAssessment>("admin.assessWorkspaceQuality", "mutation", {
+      workspaceId,
+    }),
+
+  assessRecentWorkspaces: (input: { limit?: number; staleDays?: number }) =>
+    rpc<BatchAssessResult>("admin.assessRecentWorkspaces", "mutation", input),
+
+  qualitySummary: (sinceDays: number) =>
+    rpc<QualitySummary>("admin.qualitySummary", "query", { sinceDays }),
+
+  listQualityAssessments: (input: { workspaceId?: string; limit?: number }) =>
+    rpc<QualityAssessment[]>("admin.listQualityAssessments", "query", input),
 };

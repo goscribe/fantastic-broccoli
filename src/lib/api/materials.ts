@@ -54,7 +54,9 @@ interface SignedUpload {
   uploadUrl: string;
 }
 
-export const MAX_UPLOAD_BYTES = 100 * 1024 * 1024;
+export const MAX_UPLOAD_BYTES = 1024 * 1024 * 1024;
+// Audio/video is transcribed via OpenAI, which caps media at 25MB.
+export const MAX_MEDIA_BYTES = 25 * 1024 * 1024;
 
 export async function uploadFiles(
   workspaceId: string,
@@ -63,7 +65,17 @@ export async function uploadFiles(
   const oversized = files.find((f) => f.size > MAX_UPLOAD_BYTES);
   if (oversized) {
     throw new Error(
-      `"${oversized.name}" is ${(oversized.size / (1024 * 1024)).toFixed(1)}MB — files must be under 100MB.`,
+      `"${oversized.name}" is ${(oversized.size / (1024 * 1024)).toFixed(1)}MB — files must be under 1GB.`,
+    );
+  }
+  const oversizedMedia = files.find(
+    (f) =>
+      (f.type.startsWith("audio/") || f.type.startsWith("video/")) &&
+      f.size > MAX_MEDIA_BYTES,
+  );
+  if (oversizedMedia) {
+    throw new Error(
+      `"${oversizedMedia.name}" is ${(oversizedMedia.size / (1024 * 1024)).toFixed(1)}MB — audio and video files must be under 25MB to analyze. Try compressing it or splitting it into shorter parts.`,
     );
   }
 
