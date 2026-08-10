@@ -43,6 +43,7 @@ export interface CreateSessionInput {
   examBoard?: ExamBoard;
   syllabus?: string;
   topics?: string;
+  subject?: string;
 }
 
 export async function createStudySession(
