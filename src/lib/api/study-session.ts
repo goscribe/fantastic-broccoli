@@ -344,6 +344,7 @@ export const recordFlashcardAttempt = (input: {
   flashcardId: string;
   isCorrect: boolean;
   timeSpentMs?: number;
+  studySessionId?: string;
 }) => rpc<unknown>("flashcards.recordStudyAttempt", "mutation", input);
 
 /** Records answer/correctness progress against a pooled `WorksheetQuestion`. */

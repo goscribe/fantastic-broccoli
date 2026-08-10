@@ -395,6 +395,7 @@ export default function SessionDetailPage() {
                 recordFlashcardAttempt({
                   flashcardId: question.sourceFlashcardId,
                   isCorrect: selectedIndex === question.correctIndex,
+                  studySessionId: sessionId,
                 }).catch(() => {});
               }
             }}
@@ -414,6 +415,7 @@ export default function SessionDetailPage() {
                 recordFlashcardAttempt({
                   flashcardId: card.flashcardId,
                   isCorrect: known,
+                  studySessionId: sessionId,
                 }).catch(() => {});
               }
             }}
@@ -435,6 +437,7 @@ export default function SessionDetailPage() {
                 recordFlashcardAttempt({
                   flashcardId: term.flashcardId,
                   isCorrect: correct,
+                  studySessionId: sessionId,
                 }).catch(() => {});
               }
             }}
@@ -446,6 +449,7 @@ export default function SessionDetailPage() {
           <ClozeActivity
             key={activity.id}
             activityId={activity.id}
+            sessionId={sessionId}
             content={activity.content as ClozeContent}
             draft={activity.draft}
             onComplete={() => goToNext()}

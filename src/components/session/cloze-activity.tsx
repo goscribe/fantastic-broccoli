@@ -13,6 +13,7 @@ import { ArrowRight, Loader2 } from "lucide-react";
 
 interface ClozeActivityProps {
   activityId: string;
+  sessionId?: string;
   content: ClozeContent;
   draft?: Record<string, unknown>;
   onComplete: () => void;
@@ -25,6 +26,7 @@ interface BlankResult {
 
 export function ClozeActivity({
   activityId,
+  sessionId,
   content,
   draft,
   onComplete,
@@ -58,6 +60,7 @@ export function ClozeActivity({
       recordFlashcardAttempt({
         flashcardId,
         isCorrect: marked[i]?.correct ?? false,
+        studySessionId: sessionId,
       }).catch(() => {});
     });
   };
