@@ -202,6 +202,7 @@ export default function WorkspaceStudyPage() {
       {showCreateWizard && workspace && (
         <SessionCreateWizard
           workspaceTitle={workspace.title}
+          hasMaterials={(workspace.materials ?? []).some((m) => m.analyzed)}
           creating={createSession.isPending}
           onClose={() => setShowCreateWizard(false)}
           onCreate={(config) =>
@@ -214,6 +215,7 @@ export default function WorkspaceStudyPage() {
               examBoard: config.examBoard || undefined,
               syllabus: config.syllabus || undefined,
               topics: config.topics || undefined,
+              subject: config.subject || undefined,
             })
           }
         />

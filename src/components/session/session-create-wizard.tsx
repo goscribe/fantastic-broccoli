@@ -23,14 +23,30 @@ interface SessionConfig {
   examBoard: ExamBoard | "";
   syllabus: string;
   topics: string;
+  subject: string;
 }
 
 interface SessionCreateWizardProps {
   workspaceTitle: string;
+  /** Whether the workspace has any analyzed materials to plan from. */
+  hasMaterials?: boolean;
   creating?: boolean;
   onClose: () => void;
   onCreate: (config: SessionConfig) => void;
 }
+
+const subjectSuggestions = [
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+  "Biology",
+  "Economics",
+  "History",
+  "Geography",
+  "English",
+  "Computer Science",
+  "Psychology",
+];
 
 const depthOptions: { value: SessionDepth; label: string; description: string; icon: React.ElementType }[] = [
   {
@@ -79,6 +95,7 @@ function defaultSessionTitle(): string {
 
 export function SessionCreateWizard({
   workspaceTitle,
+  hasMaterials = true,
   creating = false,
   onClose,
   onCreate,
@@ -92,6 +109,7 @@ export function SessionCreateWizard({
     examBoard: "",
     syllabus: "",
     topics: "",
+    subject: "",
   });
 
   const steps = [
@@ -115,6 +133,46 @@ export function SessionCreateWizard({
             placeholder="e.g., Atomic Structure & Periodicity"
             className="w-full h-10 rounded-lg border border-border bg-card px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
           />
+        </div>
+        <div>
+          <label className="text-xs font-medium text-muted-foreground block mb-1.5">
+            Subject{hasMaterials ? " (optional)" : ""}
+          </label>
+          <input
+            type="text"
+            value={config.subject}
+            onChange={(e) => setConfig({ ...config, subject: e.target.value })}
+            placeholder="e.g., Chemistry"
+            className="w-full h-10 rounded-lg border border-border bg-card px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
+          />
+          <div className="flex flex-wrap gap-1.5 mt-2">
+            {subjectSuggestions.map((subject) => (
+              <button
+                key={subject}
+                type="button"
+                onClick={() =>
+                  setConfig({
+                    ...config,
+                    subject: config.subject === subject ? "" : subject,
+                  })
+                }
+                className={cn(
+                  "px-2.5 py-1 rounded-lg text-xs border",
+                  config.subject === subject
+                    ? "border-accent bg-accent/10 text-accent font-medium"
+                    : "border-border hover:border-accent/30 text-muted-foreground",
+                )}
+              >
+                {subject}
+              </button>
+            ))}
+          </div>
+          {!hasMaterials && (
+            <p className="text-xs text-muted-foreground mt-2">
+              This workspace has no materials yet, so pick a subject (or list
+              topics below) for the session to be planned around.
+            </p>
+          )}
         </div>
         <div>
           <label className="text-xs font-medium text-muted-foreground block mb-1.5">
@@ -229,7 +287,13 @@ export function SessionCreateWizard({
   ];
 
   const isLastStep = step === steps.length - 1;
-  const canProceed = step === 0 ? config.title.trim().length > 0 : true;
+  const canProceed =
+    step === 0
+      ? config.title.trim().length > 0 &&
+        (hasMaterials ||
+          config.subject.trim().length > 0 ||
+          config.topics.trim().length > 0)
+      : true;
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm">

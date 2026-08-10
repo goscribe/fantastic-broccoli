@@ -121,6 +121,7 @@ export interface CreateStudySessionInput {
   examBoard?: ExamBoard;
   syllabus?: string;
   topics?: string;
+  subject?: string;
   endDate?: Date;
 }
 
