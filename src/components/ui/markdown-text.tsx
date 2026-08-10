@@ -217,7 +217,9 @@ function renderFormatting(rawText: string): React.ReactNode[] {
  * storage object keys are signed on demand (null while pending/failed).
  */
 export function useResolvedFigureUrl(src: string): string | null {
-  const isKey = !/^https?:\/\//.test(src);
+  // Only `extracted/` keys are signable storage objects; other non-URL
+  // strings (e.g. plain filenames in generated text) cannot be resolved.
+  const isKey = /^extracted\//.test(src);
   const [signed, setSigned] = useState<{ src: string; url: string } | null>(
     null,
   );
@@ -235,7 +237,7 @@ export function useResolvedFigureUrl(src: string): string | null {
     };
   }, [src, isKey]);
 
-  if (!isKey) return src;
+  if (/^https?:\/\//.test(src)) return src;
   return signed?.src === src ? signed.url : null;
 }
 
