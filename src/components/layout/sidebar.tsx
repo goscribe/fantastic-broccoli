@@ -20,6 +20,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import {
   Home,
+  Layers,
   ChevronRight,
   FilePlus2,
   FolderPlus,
@@ -245,6 +246,18 @@ export function Sidebar({
           >
             <Home className="h-4 w-4" />
             Home
+          </Link>
+          <Link
+            href="/flashcards"
+            className={cn(
+              "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+              pathname.startsWith("/flashcards")
+                ? "bg-accent-soft text-accent"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground",
+            )}
+          >
+            <Layers className="h-4 w-4" />
+            Flashcards
           </Link>
           <Link
             href="/shared"
