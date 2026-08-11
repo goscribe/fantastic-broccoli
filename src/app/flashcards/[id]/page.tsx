@@ -1,18 +1,37 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import Link from "next/link";
-import { useParams, useSearchParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { studySessionApi } from "@/lib/api/study-session";
-import { deckEntries } from "@/components/bank/bank-content";
-import { MarkdownText } from "@/components/ui/markdown-text";
+import { createStudySession } from "@/lib/api/study";
 import { Button } from "@/components/ui/button";
+import { deckEntries } from "@/components/bank/bank-content";
+import { DeckCardsView } from "@/components/flashcards/deck-cards-view";
+import { DeckLearnView } from "@/components/flashcards/deck-learn-view";
+import { DeckTestView } from "@/components/flashcards/deck-test-view";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft, ChevronLeft, ChevronRight, Layers } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+  ArrowLeft,
+  ClipboardCheck,
+  GraduationCap,
+  Layers,
+  Sparkles,
+} from "lucide-react";
 
-function FlashcardViewer() {
+type DeckMode = "cards" | "learn" | "test";
+
+const MODES: { id: DeckMode; label: string; icon: typeof Layers }[] = [
+  { id: "cards", label: "Cards", icon: Layers },
+  { id: "learn", label: "Learn", icon: GraduationCap },
+  { id: "test", label: "Test", icon: ClipboardCheck },
+];
+
+function FlashcardDeck() {
   const params = useParams();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const deckId = params.id as string;
   const workspaceId = searchParams.get("ws") ?? "";
@@ -26,44 +45,40 @@ function FlashcardViewer() {
   const item = items?.find((i) => i.id === deckId);
   const deck = useMemo(() => (item ? deckEntries(item) : null), [item]);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [flipped, setFlipped] = useState(false);
+  const [mode, setMode] = useState<DeckMode>("cards");
 
-  const cardCount = deck?.entries.length ?? 0;
-
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.code === "Space") {
-        e.preventDefault();
-        setFlipped((prev) => !prev);
-      } else if (e.code === "ArrowLeft") {
-        e.preventDefault();
-        setCurrentIndex((prev) => (prev > 0 ? prev - 1 : prev));
-        setFlipped(false);
-      } else if (e.code === "ArrowRight") {
-        e.preventDefault();
-        setCurrentIndex((prev) => (prev < cardCount - 1 ? prev + 1 : prev));
-        setFlipped(false);
+  const startSession = useMutation({
+    mutationFn: () =>
+      createStudySession({
+        workspaceId,
+        title: item!.title,
+        depth: "moderate",
+        durationMinutes: 30,
+        topics: item!.topic ?? item!.title,
+      }),
+    onSuccess: (session) => {
+      if (session) {
+        router.push(`/workspace/${workspaceId}/session/${session.id}`);
       }
-    };
-    window.addEventListener("keydown", handleKeyPress);
-    return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [cardCount]);
+    },
+  });
 
   if (isLoading) {
     return (
       <div className="mx-auto w-full max-w-3xl space-y-4">
         <Skeleton className="h-8 w-40" />
-        <Skeleton className="h-[300px] w-full rounded-2xl" />
+        <Skeleton className="h-[380px] w-full rounded-3xl" />
       </div>
     );
   }
 
-  if (!item || !deck) {
+  if (!item || !deck || deck.entries.length === 0) {
     return (
-      <div className="mx-auto w-full max-w-3xl rounded-xl border border-border bg-card px-6 py-12 text-center">
+      <div className="mx-auto w-full max-w-3xl rounded-2xl border border-border bg-card px-6 py-12 text-center">
         <Layers className="mx-auto h-6 w-6 text-faint" />
-        <p className="mt-3 text-sm font-medium">Deck not found</p>
+        <p className="mt-3 text-sm font-medium">
+          {item ? "This deck has no cards yet" : "Deck not found"}
+        </p>
         <Link
           href="/flashcards"
           className="mt-3 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
@@ -75,7 +90,7 @@ function FlashcardViewer() {
     );
   }
 
-  const current = deck.entries[currentIndex];
+  const cardCount = deck.entries.length;
 
   return (
     <div className="mx-auto w-full max-w-3xl space-y-6">
@@ -87,101 +102,81 @@ function FlashcardViewer() {
           <ArrowLeft className="h-3.5 w-3.5" />
           Back to Flashcards
         </Link>
-        <h1 className="mt-3 text-3xl font-bold tracking-tight">{item.title}</h1>
-        <p className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
-          <span>
-            {cardCount} card{cardCount === 1 ? "" : "s"}
-          </span>
-          {item.topic && (
-            <>
-              <span>·</span>
-              <span>{item.topic}</span>
-            </>
-          )}
-        </p>
-      </div>
+        <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">{item.title}</h1>
+            <p className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
+              <span>
+                {cardCount} card{cardCount === 1 ? "" : "s"}
+              </span>
+              {item.topic && (
+                <>
+                  <span>·</span>
+                  <span>{item.topic}</span>
+                </>
+              )}
+            </p>
+          </div>
 
-      <div
-        role="button"
-        tabIndex={0}
-        aria-label="Flip card"
-        onClick={() => setFlipped((prev) => !prev)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") setFlipped((prev) => !prev);
-        }}
-        className="rounded-2xl border border-border bg-card p-6 cursor-pointer transition-all duration-500 hover:shadow-lg"
-        style={{
-          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
-          transformStyle: "preserve-3d",
-          transition: "transform 0.5s",
-        }}
-      >
-        {current ? (
-          <div className="flex min-h-[300px] items-center justify-center text-center">
-            <div
-              className="w-full"
-              style={{
-                transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
-                transformStyle: "preserve-3d",
-                transition: "transform 0.5s",
-              }}
-            >
-              <p className="text-xs font-medium text-faint mb-3">
-                {flipped ? deck.backLabel : deck.frontLabel}
-              </p>
-              <p className="text-2xl leading-relaxed">
-                <MarkdownText
-                  text={flipped ? current.back : current.front}
-                />
-              </p>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 rounded-full border border-border bg-card p-1">
+            {MODES.map(({ id, label, icon: Icon }) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => setMode(id)}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors",
+                  mode === id
+                    ? "bg-accent-soft text-accent"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                <Icon className="h-3.5 w-3.5" />
+                {label}
+              </button>
+            ))}
             </div>
+            <Button
+              size="sm"
+              onClick={() => startSession.mutate()}
+              disabled={startSession.isPending}
+            >
+              <Sparkles className="mr-1.5 h-3.5 w-3.5" />
+              {startSession.isPending ? "Starting…" : "Study"}
+            </Button>
           </div>
-        ) : (
-          <div className="flex min-h-[300px] items-center justify-center text-center text-muted-foreground">
-            No flashcards in this deck yet.
-          </div>
+        </div>
+        {startSession.isError && (
+          <p className="mt-2 text-sm text-rose">
+            {startSession.error instanceof Error
+              ? startSession.error.message
+              : "Could not start a study session."}
+          </p>
         )}
       </div>
 
-      {cardCount > 0 && (
-        <div className="flex items-center justify-between">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              setCurrentIndex((prev) => (prev > 0 ? prev - 1 : prev));
-              setFlipped(false);
-            }}
-            disabled={currentIndex === 0}
-          >
-            <ChevronLeft className="mr-1.5 h-4 w-4" />
-            Previous
-          </Button>
-
-          <div className="text-sm text-muted-foreground">
-            {currentIndex + 1} of {cardCount}
-          </div>
-
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              setCurrentIndex((prev) =>
-                prev < cardCount - 1 ? prev + 1 : prev,
-              );
-              setFlipped(false);
-            }}
-            disabled={currentIndex === cardCount - 1}
-          >
-            Next
-            <ChevronRight className="ml-1.5 h-4 w-4" />
-          </Button>
-        </div>
+      {mode === "cards" && (
+        <DeckCardsView
+          entries={deck.entries}
+          frontLabel={deck.frontLabel}
+          backLabel={deck.backLabel}
+        />
       )}
-
-      <p className="text-center text-xs text-faint">
-        Tap the card or press Space to flip · Use ← → to navigate
-      </p>
+      {mode === "learn" && (
+        <DeckLearnView
+          entries={deck.entries}
+          frontLabel={deck.frontLabel}
+          backLabel={deck.backLabel}
+        />
+      )}
+      {mode === "test" && (
+        <DeckTestView
+          entries={deck.entries}
+          frontLabel={deck.frontLabel}
+          backLabel={deck.backLabel}
+        />
+      )}
     </div>
   );
 }
@@ -190,7 +185,7 @@ export default function FlashcardDeckPage() {
   return (
     <main className="flex-1 px-6 py-6 md:px-10">
       <Suspense fallback={null}>
-        <FlashcardViewer />
+        <FlashcardDeck />
       </Suspense>
     </main>
   );

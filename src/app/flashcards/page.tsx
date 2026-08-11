@@ -6,6 +6,7 @@ import {
   type DeckWithWorkspace,
 } from "@/lib/flashcard-decks";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
+import { FlashcardsArt } from "@/components/graphics/bank-art";
 import { Layers } from "lucide-react";
 
 function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
@@ -13,32 +14,32 @@ function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
   return (
     <Link
       href={`/flashcards/${item.id}?ws=${workspace.id}`}
-      className="block rounded-2xl border border-border bg-card p-5 cursor-pointer transition-all duration-300 hover:bg-muted/50"
+      className="group flex items-start gap-4 rounded-2xl border border-border bg-card p-5 transition-all duration-150 hover:border-border-strong hover:-translate-y-0.5 active:translate-y-0"
     >
-      <div className="flex items-start justify-between">
-        <h3 className="text-lg font-semibold leading-tight tracking-tight">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent-soft">
+        <FlashcardsArt className="h-8 w-8" />
+      </div>
+      <div className="min-w-0 flex-1">
+        <h3 className="truncate text-[15px] font-semibold leading-tight tracking-tight group-hover:text-accent transition-colors">
           {item.title}
         </h3>
-        <Layers className="h-5 w-5 shrink-0 text-faint" />
-      </div>
-      <p className="flex items-center gap-2 pt-1 text-sm text-muted-foreground">
-        <span>
-          {cardCount} card{cardCount === 1 ? "" : "s"}
-        </span>
-        <span>·</span>
-        <span className="truncate">{workspace.title}</span>
-      </p>
-      <div className="flex flex-wrap items-center gap-1 pt-2 min-h-[30px]">
-        {item.topic ? (
-          <span className="rounded-full bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
-            {item.topic}
+        <p className="mt-1 flex items-center gap-1.5 text-[13px] text-muted-foreground">
+          <span className="shrink-0">
+            {cardCount} card{cardCount === 1 ? "" : "s"}
           </span>
-        ) : (
-          <span className="text-xs italic text-muted-foreground">No topic</span>
-        )}
-        <span className="rounded-full bg-accent-soft px-1.5 py-0.5 text-xs text-accent-dim">
-          {item.kind === "VOCAB_DECK" ? "Vocab" : "Flashcards"}
-        </span>
+          <span>·</span>
+          <span className="truncate">{workspace.title}</span>
+        </p>
+        <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
+          <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-medium text-accent-dim">
+            {item.kind === "VOCAB_DECK" ? "Vocab" : "Flashcards"}
+          </span>
+          {item.topic && (
+            <span className="max-w-[160px] truncate rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
+              {item.topic}
+            </span>
+          )}
+        </div>
       </div>
     </Link>
   );
