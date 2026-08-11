@@ -2,9 +2,11 @@
 
 import { Suspense, useMemo, useState } from "react";
 import Link from "next/link";
-import { useParams, useSearchParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { studySessionApi } from "@/lib/api/study-session";
+import { createStudySession } from "@/lib/api/study";
+import { Button } from "@/components/ui/button";
 import { deckEntries } from "@/components/bank/bank-content";
 import { DeckCardsView } from "@/components/flashcards/deck-cards-view";
 import { DeckLearnView } from "@/components/flashcards/deck-learn-view";
@@ -16,6 +18,7 @@ import {
   ClipboardCheck,
   GraduationCap,
   Layers,
+  Sparkles,
 } from "lucide-react";
 
 type DeckMode = "cards" | "learn" | "test";
@@ -28,6 +31,7 @@ const MODES: { id: DeckMode; label: string; icon: typeof Layers }[] = [
 
 function FlashcardDeck() {
   const params = useParams();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const deckId = params.id as string;
   const workspaceId = searchParams.get("ws") ?? "";
@@ -42,6 +46,22 @@ function FlashcardDeck() {
   const deck = useMemo(() => (item ? deckEntries(item) : null), [item]);
 
   const [mode, setMode] = useState<DeckMode>("cards");
+
+  const startSession = useMutation({
+    mutationFn: () =>
+      createStudySession({
+        workspaceId,
+        title: item!.title,
+        depth: "moderate",
+        durationMinutes: 30,
+        topics: item!.topic ?? item!.title,
+      }),
+    onSuccess: (session) => {
+      if (session) {
+        router.push(`/workspace/${workspaceId}/session/${session.id}`);
+      }
+    },
+  });
 
   if (isLoading) {
     return (
@@ -98,7 +118,8 @@ function FlashcardDeck() {
             </p>
           </div>
 
-          <div className="flex items-center gap-1 rounded-full border border-border bg-card p-1">
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 rounded-full border border-border bg-card p-1">
             {MODES.map(({ id, label, icon: Icon }) => (
               <button
                 key={id}
@@ -115,8 +136,24 @@ function FlashcardDeck() {
                 {label}
               </button>
             ))}
+            </div>
+            <Button
+              size="sm"
+              onClick={() => startSession.mutate()}
+              disabled={startSession.isPending}
+            >
+              <Sparkles className="mr-1.5 h-3.5 w-3.5" />
+              {startSession.isPending ? "Starting…" : "Study"}
+            </Button>
           </div>
         </div>
+        {startSession.isError && (
+          <p className="mt-2 text-sm text-rose">
+            {startSession.error instanceof Error
+              ? startSession.error.message
+              : "Could not start a study session."}
+          </p>
+        )}
       </div>
 
       {mode === "cards" && (
