@@ -13,10 +13,19 @@ import {
 } from "@/components/admin/admin-ui";
 import { formatRelativeDate } from "@/lib/utils";
 
+function retentionPct(part: number, whole: number): string {
+  return whole === 0 ? "n/a" : `${Math.round((part / whole) * 100)}%`;
+}
+
 export default function AdminOverviewPage() {
   const { data: stats, isLoading } = useQuery({
     queryKey: ["admin", "stats"],
     queryFn: adminApi.getSystemStats,
+  });
+
+  const { data: retention, isLoading: retentionLoading } = useQuery({
+    queryKey: ["admin", "retention"],
+    queryFn: () => adminApi.getRetentionStats(),
   });
 
   const { data: workspaces, isLoading: workspacesLoading } = useQuery({
@@ -61,6 +70,42 @@ export default function AdminOverviewPage() {
           loading={isLoading}
         />
       </div>
+
+      <section className="mt-10">
+        <h2 className="mb-3 text-lg font-semibold">Retention</h2>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <StatCard
+            label="Signups"
+            value={(retention?.signups ?? 0).toLocaleString()}
+            hint={retention ? `${retentionPct(retention.verified, retention.signups)} verified email` : undefined}
+            loading={retentionLoading}
+          />
+          <StatCard
+            label="Activated"
+            value={retention ? retentionPct(retention.activated, retention.signups) : "—"}
+            hint={retention ? `${retention.activated} generated 1+ artifact/session` : undefined}
+            loading={retentionLoading}
+          />
+          <StatCard
+            label="2+ generations"
+            value={retention ? retentionPct(retention.multiGeneration, retention.signups) : "—"}
+            hint={retention ? `${retention.multiGeneration} users` : undefined}
+            loading={retentionLoading}
+          />
+          <StatCard
+            label="Active 2+ days"
+            value={retention ? retentionPct(retention.multiDayActive, retention.signups) : "—"}
+            hint={retention ? `${retention.multiDayActive} users` : undefined}
+            loading={retentionLoading}
+          />
+          <StatCard
+            label="Generated 2+ days"
+            value={retention ? retentionPct(retention.multiDayGenerated, retention.signups) : "—"}
+            hint={retention ? `${retention.multiDayGenerated} users` : undefined}
+            loading={retentionLoading}
+          />
+        </div>
+      </section>
 
       <section className="mt-10">
         <div className="mb-3 flex items-center justify-between">
