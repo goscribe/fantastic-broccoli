@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect, useRef } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
 import {
@@ -129,6 +129,9 @@ export default function SessionDetailPage() {
   // No study features until the plan actually exists.
   const planReady = !!session && !generating && !planFailed;
 
+  // Deep links (e.g. reminder emails) can point at a specific activity.
+  const searchParams = useSearchParams();
+  const linkedActivityId = searchParams.get("activity");
   // undefined = not chosen yet (default to first unfinished); null = plan done (debrief)
   const [chosenActivityId, setChosenActivityId] = useState<
     string | null | undefined
@@ -136,9 +139,11 @@ export default function SessionDetailPage() {
   const activeActivityId =
     chosenActivityId !== undefined
       ? chosenActivityId
-      : (session?.activities.find((a) => a.status === "in_progress")?.id ??
-        session?.activities.find((a) => a.status === "pending")?.id ??
-        null);
+      : ((linkedActivityId &&
+          session?.activities.find((a) => a.id === linkedActivityId)?.id) ||
+        (session?.activities.find((a) => a.status === "in_progress")?.id ??
+          session?.activities.find((a) => a.status === "pending")?.id ??
+          null));
   const setActiveActivityId = setChosenActivityId;
 
   const [showComments, setShowComments] = useState(false);

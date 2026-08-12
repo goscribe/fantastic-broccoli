@@ -17,6 +17,12 @@ function retentionPct(part: number, whole: number): string {
   return whole === 0 ? "n/a" : `${Math.round((part / whole) * 100)}%`;
 }
 
+function windowCell(w: { eligible: number; retained: number }): string {
+  return w.eligible === 0
+    ? "—"
+    : `${retentionPct(w.retained, w.eligible)} (${w.retained}/${w.eligible})`;
+}
+
 export default function AdminOverviewPage() {
   const { data: stats, isLoading } = useQuery({
     queryKey: ["admin", "stats"],
@@ -73,7 +79,7 @@ export default function AdminOverviewPage() {
 
       <section className="mt-10">
         <h2 className="mb-3 text-lg font-semibold">Retention</h2>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-2">
           <StatCard
             label="Signups"
             value={(retention?.signups ?? 0).toLocaleString()}
@@ -86,25 +92,31 @@ export default function AdminOverviewPage() {
             hint={retention ? `${retention.activated} generated 1+ artifact/session` : undefined}
             loading={retentionLoading}
           />
-          <StatCard
-            label="2+ generations"
-            value={retention ? retentionPct(retention.multiGeneration, retention.signups) : "—"}
-            hint={retention ? `${retention.multiGeneration} users` : undefined}
-            loading={retentionLoading}
-          />
-          <StatCard
-            label="Active 2+ days"
-            value={retention ? retentionPct(retention.multiDayActive, retention.signups) : "—"}
-            hint={retention ? `${retention.multiDayActive} users` : undefined}
-            loading={retentionLoading}
-          />
-          <StatCard
-            label="Generated 2+ days"
-            value={retention ? retentionPct(retention.multiDayGenerated, retention.signups) : "—"}
-            hint={retention ? `${retention.multiDayGenerated} users` : undefined}
-            loading={retentionLoading}
-          />
         </div>
+        <Table headers={["Channel", "Signups", "Activated", "D1", "D3", "D7"]}>
+          {retentionLoading ? (
+            <TableSkeletonRows cols={6} rows={4} />
+          ) : !retention?.channels.length ? (
+            <EmptyRow colSpan={6}>No signups yet.</EmptyRow>
+          ) : (
+            retention.channels.map((row) => (
+              <tr key={row.channel} className="hover:bg-muted/40">
+                <Td>
+                  <span className="font-medium">{row.channel}</span>
+                </Td>
+                <Td>{row.signups}</Td>
+                <Td>{retentionPct(row.activated, row.signups)}</Td>
+                <Td>{windowCell(row.d1)}</Td>
+                <Td>{windowCell(row.d3)}</Td>
+                <Td>{windowCell(row.d7)}</Td>
+              </tr>
+            ))
+          )}
+        </Table>
+        <p className="mt-2 text-[12px] text-muted-foreground">
+          D1/D3/D7 count only users signed up at least that many full days ago
+          (eligible cohort); retained = any activity on or after that day.
+        </p>
       </section>
 
       <section className="mt-10">
