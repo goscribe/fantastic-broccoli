@@ -58,13 +58,25 @@ export interface SystemStats {
   topupRevenue: number;
 }
 
+export interface RetentionWindow {
+  eligible: number;
+  retained: number;
+}
+
+export interface RetentionChannelRow {
+  channel: string;
+  signups: number;
+  activated: number;
+  d1: RetentionWindow;
+  d3: RetentionWindow;
+  d7: RetentionWindow;
+}
+
 export interface RetentionStats {
   signups: number;
   verified: number;
   activated: number;
-  multiGeneration: number;
-  multiDayActive: number;
-  multiDayGenerated: number;
+  channels: RetentionChannelRow[];
 }
 
 export interface AdminUser {
