@@ -58,6 +58,15 @@ export interface SystemStats {
   topupRevenue: number;
 }
 
+export interface RetentionStats {
+  signups: number;
+  verified: number;
+  activated: number;
+  multiGeneration: number;
+  multiDayActive: number;
+  multiDayGenerated: number;
+}
+
 export interface AdminUser {
   id: string;
   name: string | null;
@@ -316,6 +325,9 @@ export interface BatchAssessResult {
 
 export const adminApi = {
   getSystemStats: () => rpc<SystemStats>("admin.getSystemStats", "query", undefined),
+
+  getRetentionStats: (since?: Date) =>
+    rpc<RetentionStats>("admin.getRetentionStats", "query", since ? { since } : undefined),
 
   listUsers: (input: {
     page: number;
