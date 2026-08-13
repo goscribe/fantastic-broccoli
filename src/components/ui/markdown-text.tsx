@@ -304,6 +304,62 @@ function renderInlineWithFigures(text: string): React.ReactNode[] {
 const HEADING_LINE = /^(#{1,4})\s+(.*)$/;
 const BULLET_LINE = /^[-*]\s+(.*)$/;
 const CODE_FENCE = /^```(\w*)\s*$/;
+const TABLE_LINE = /^\s*\|.*\|\s*$/;
+const TABLE_SEPARATOR = /^\s*\|(?:\s*:?-{2,}:?\s*\|)+\s*$/;
+
+function splitTableRow(line: string): string[] {
+  const trimmed = line.trim().replace(/^\|/, "").replace(/\|$/, "");
+  const cells: string[] = [];
+  let current = "";
+  let inMath = false;
+  for (let i = 0; i < trimmed.length; i++) {
+    const ch = trimmed[i];
+    if (ch === "$") inMath = !inMath;
+    if (ch === "|" && !inMath) {
+      cells.push(current.trim());
+      current = "";
+    } else {
+      current += ch;
+    }
+  }
+  cells.push(current.trim());
+  return cells;
+}
+
+function MarkdownTable({ lines }: { lines: string[] }) {
+  const [header, ...rest] = lines;
+  const body = rest.filter((l) => !TABLE_SEPARATOR.test(l));
+  const headerCells = splitTableRow(header);
+  return (
+    <div className="my-2 max-w-full overflow-x-auto">
+      <table className="w-full border-collapse text-sm">
+        <thead>
+          <tr>
+            {headerCells.map((cell, i) => (
+              <th
+                key={i}
+                className="border border-border bg-muted/50 px-2.5 py-1.5 text-left font-semibold"
+              >
+                {renderInline(cell)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {body.map((row, r) => (
+            <tr key={r}>
+              {splitTableRow(row).map((cell, c) => (
+                <td key={c} className="border border-border px-2.5 py-1.5 align-top">
+                  {renderInline(cell)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 export function CodeBlock({ code, lang }: { code: string; lang?: string }) {
   return (
@@ -333,6 +389,7 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
   let key = 0;
   let paragraph: string[] = [];
   let bullets: string[] = [];
+  let tableLines: string[] = [];
   let codeLines: string[] | null = null;
   let codeLang = "";
 
@@ -344,6 +401,20 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
       </span>,
     );
     paragraph = [];
+  };
+  const flushTable = () => {
+    if (!tableLines.length) return;
+    if (tableLines.length >= 2 && TABLE_SEPARATOR.test(tableLines[1])) {
+      blocks.push(<MarkdownTable key={key++} lines={tableLines} />);
+    } else {
+      // Not a real table — render the lines as a paragraph.
+      blocks.push(
+        <span key={key++} className="block">
+          {renderInlineWithFigures(tableLines.join("\n"))}
+        </span>,
+      );
+    }
+    tableLines = [];
   };
   const flushBullets = () => {
     if (!bullets.length) return;
@@ -384,6 +455,13 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
     }
     const heading = line.match(HEADING_LINE);
     const bullet = line.match(BULLET_LINE);
+    if (TABLE_LINE.test(line)) {
+      flushParagraph();
+      flushBullets();
+      tableLines.push(line);
+      continue;
+    }
+    flushTable();
     if (heading) {
       flushParagraph();
       flushBullets();
@@ -408,6 +486,7 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
   }
   flushParagraph();
   flushBullets();
+  flushTable();
   if (codeLines !== null)
     blocks.push(
       <CodeBlock
