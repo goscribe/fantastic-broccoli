@@ -348,6 +348,21 @@ export const recordFlashcardAttempt = (input: {
   studySessionId?: string;
 }) => rpc<unknown>("flashcards.recordStudyAttempt", "mutation", input);
 
+export interface MasteryMatrixRow {
+  topic: string;
+  /** 0-100, or null when the topic has never been studied. */
+  proficiency: number | null;
+  cardsTotal: number;
+  cardsStudied: number;
+  attempts: number;
+}
+
+/** Per-topic proficiency matrix for a workspace, weakest first. */
+export const fetchMasteryMatrix = (workspaceId: string) =>
+  rpc<MasteryMatrixRow[]>("flashcards.getMasteryMatrix", "query", {
+    workspaceId,
+  });
+
 /** Records answer/correctness progress against a pooled `WorksheetQuestion`. */
 export const recordWorksheetQuestionProgress = (input: {
   problemId: string;
