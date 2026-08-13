@@ -331,7 +331,7 @@ function MarkdownTable({ lines }: { lines: string[] }) {
   const body = rest.filter((l) => !TABLE_SEPARATOR.test(l));
   const headerCells = splitTableRow(header);
   return (
-    <span className="block my-2 max-w-full overflow-x-auto">
+    <div className="my-2 max-w-full overflow-x-auto">
       <table className="w-full border-collapse text-sm">
         <thead>
           <tr>
@@ -357,7 +357,7 @@ function MarkdownTable({ lines }: { lines: string[] }) {
           ))}
         </tbody>
       </table>
-    </span>
+    </div>
   );
 }
 
