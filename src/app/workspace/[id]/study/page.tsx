@@ -11,6 +11,7 @@ import {
   retryStudySession,
 } from "@/lib/api/study";
 import { fetchMasteryMatrix } from "@/lib/api/study-session";
+import { MasteryRadar } from "@/components/graphics/mastery-radar";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { SessionCard } from "@/components/session/session-card";
 import { SessionCreateWizard } from "@/components/session/session-create-wizard";
@@ -128,51 +129,45 @@ export default function WorkspaceStudyPage() {
             <h2 className="text-sm font-semibold text-foreground mb-4">
               Proficiency by topic
             </h2>
-            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-              {masteryMatrix.map((row) => {
-                const p = row.proficiency;
-                const tone =
-                  p === null
-                    ? "border-border bg-card"
-                    : p < 40
-                      ? "border-red-500/25 bg-red-500/5"
-                      : p < 70
-                        ? "border-amber-500/25 bg-amber-500/5"
-                        : "border-emerald-500/25 bg-emerald-500/5";
-                const barTone =
-                  p === null
-                    ? "bg-muted"
-                    : p < 40
-                      ? "bg-red-500"
-                      : p < 70
-                        ? "bg-amber-500"
-                        : "bg-emerald-500";
-                return (
-                  <div
-                    key={row.topic}
-                    className={`rounded-xl border p-3.5 ${tone}`}
-                  >
-                    <div className="flex items-baseline justify-between gap-2">
-                      <p className="text-[12px] font-medium truncate">
-                        {row.topic}
-                      </p>
+            <div className="rounded-3xl border border-border bg-card p-6 flex flex-col sm:flex-row items-center gap-8">
+              <MasteryRadar data={masteryMatrix} />
+              <div className="flex-1 w-full space-y-2.5">
+                {masteryMatrix.slice(0, 8).map((row) => {
+                  const p = row.proficiency;
+                  const dotTone =
+                    p === null
+                      ? "bg-muted"
+                      : p < 40
+                        ? "bg-red-500"
+                        : p < 70
+                          ? "bg-amber-500"
+                          : "bg-emerald-500";
+                  return (
+                    <div
+                      key={row.topic}
+                      className="flex items-center gap-3"
+                    >
+                      <span
+                        className={`h-2 w-2 rounded-full shrink-0 ${dotTone}`}
+                      />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[12px] font-medium truncate">
+                          {row.topic}
+                        </p>
+                        <p className="text-[10px] text-muted-foreground">
+                          {row.cardsStudied} of {row.cardsTotal} cards studied
+                          {row.attempts > 0
+                            ? ` · ${row.attempts} attempts`
+                            : ""}
+                        </p>
+                      </div>
                       <span className="text-sm font-bold tabular-nums shrink-0">
                         {p === null ? "—" : `${p}%`}
                       </span>
                     </div>
-                    <div className="mt-2.5 h-1.5 rounded-full bg-muted">
-                      <div
-                        className={`h-1.5 rounded-full ${barTone}`}
-                        style={{ width: `${p ?? 0}%` }}
-                      />
-                    </div>
-                    <p className="text-[10px] text-muted-foreground mt-2">
-                      {row.cardsStudied} of {row.cardsTotal} cards studied
-                      {row.attempts > 0 ? ` · ${row.attempts} attempts` : ""}
-                    </p>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </section>
         )}
