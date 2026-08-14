@@ -52,7 +52,7 @@ const str = (v: unknown): string => (typeof v === "string" ? v : "");
 
 function RawJson({ content }: { content: Record<string, unknown> }) {
   return (
-    <details className="group">
+    <details className="group print-hidden">
       <summary className="cursor-pointer text-[11px] font-semibold text-faint hover:text-muted-foreground">
         Raw JSON
       </summary>

@@ -15,6 +15,7 @@ import {
   kindConfig,
 } from "@/components/bank/bank-content";
 import { DeckViewer } from "@/components/bank/deck-viewer";
+import { MarkdownText } from "@/components/ui/markdown-text";
 import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { formatRelativeDate, cn } from "@/lib/utils";
@@ -294,46 +295,89 @@ export default function BankItemPage() {
           </div>
         ) : deck && deck.entries.length > 0 ? (
           <div className="space-y-6 animate-fade-up">
-            <DeckViewer
-              entries={deck.entries}
-              frontLabel={deck.frontLabel}
-              backLabel={deck.backLabel}
-            />
-            <div className="space-y-2">
-              <p className="text-xs font-semibold text-muted-foreground">
-                All cards
-              </p>
-              <DeckPreview
+            <div className="print-hidden space-y-6">
+              <DeckViewer
                 entries={deck.entries}
                 frontLabel={deck.frontLabel}
                 backLabel={deck.backLabel}
               />
+              <div className="space-y-2">
+                <p className="text-xs font-semibold text-muted-foreground">
+                  All cards
+                </p>
+                <DeckPreview
+                  entries={deck.entries}
+                  frontLabel={deck.frontLabel}
+                  backLabel={deck.backLabel}
+                />
+              </div>
+            </div>
+            {/* Print-only cut-out sheet: fold along the center line, cut along
+                the dashed card outlines (see globals.css @media print). */}
+            <div className="print-sheet hidden">
+              <div className="print-watermark hidden">
+                <span>Scribe · scribe.study</span>
+              </div>
+              <div className="mx-auto max-w-2xl space-y-4 p-8">
+                <div className="border-b border-border pb-3">
+                  <h1 className="text-xl font-bold">{item.title}</h1>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {config.label}
+                    {item.topic && ` · ${item.topic}`}
+                    {summary && ` · ${summary}`}
+                    {" · Generated with Scribe — scribe.study"}
+                  </p>
+                  <p className="mt-1 text-[11px] text-muted-foreground">
+                    ✂ Cut along the dashed lines, then fold each card down the
+                    middle so the {deck.frontLabel.toLowerCase()} is on the
+                    front and the {deck.backLabel.toLowerCase()} is on the
+                    back.
+                  </p>
+                </div>
+                <div className="space-y-3">
+                  {deck.entries.map((card, i) => (
+                    <div key={i} className="cutout-card grid grid-cols-2">
+                      <div className="border-r border-dashed border-border-strong p-4 text-center">
+                        <p className="text-[9px] font-semibold uppercase tracking-wide text-muted-foreground">
+                          {deck.frontLabel}
+                        </p>
+                        <p className="mt-1.5 text-sm font-semibold leading-5">
+                          <MarkdownText text={card.front} />
+                        </p>
+                      </div>
+                      <div className="p-4 text-center">
+                        <p className="text-[9px] font-semibold uppercase tracking-wide text-muted-foreground">
+                          {deck.backLabel}
+                        </p>
+                        <p className="mt-1.5 text-[13px] leading-5">
+                          <MarkdownText text={card.back} />
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         ) : (
-          <div className="animate-fade-up">
+          /* Document-page look: the live sheet is also what gets printed, so
+             embedded figures/visualizers print at their real rendered size. */
+          <div className="print-sheet mx-auto max-w-3xl rounded-2xl border border-border bg-card p-6 shadow-sm animate-fade-up sm:p-10 print:mt-0 print:max-w-none print:rounded-none print:border-0 print:shadow-none">
+            <div className="print-watermark hidden">
+              <span>Scribe · scribe.study</span>
+            </div>
+            <div className="mb-6 border-b border-border pb-4">
+              <h1 className="text-xl font-bold">{item.title}</h1>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {config.label}
+                {item.topic && ` · ${item.topic}`}
+                {summary && ` · ${summary}`}
+                {" · Generated with Scribe — scribe.study"}
+              </p>
+            </div>
             <BankContentPreview kind={item.kind} content={item.content} />
           </div>
         )}
-      </div>
-
-      {/* Print-only sheet (see globals.css @media print) with Scribe watermark. */}
-      <div className="print-sheet hidden">
-        <div className="print-watermark hidden">
-          <span>Scribe · scribe.study</span>
-        </div>
-        <div className="mx-auto max-w-2xl space-y-4 p-8">
-          <div className="border-b border-border pb-3">
-            <h1 className="text-xl font-bold">{item.title}</h1>
-            <p className="mt-1 text-xs text-muted-foreground">
-              {config.label}
-              {item.topic && ` · ${item.topic}`}
-              {summary && ` · ${summary}`}
-              {" · Generated with Scribe — scribe.study"}
-            </p>
-          </div>
-          <BankContentPreview kind={item.kind} content={item.content} />
-        </div>
       </div>
     </WorkspaceShell>
   );
