@@ -4,7 +4,7 @@ import { absoluteUrl } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Scribe is free during early access — upload PDFs, slides, and lecture audio and get AI study sessions, flashcards, and worksheets. No credit card required.",
+    "Start free, upgrade when you need more — upload PDFs, slides, and lecture audio and get AI study sessions, flashcards, and worksheets. No credit card required to start.",
   alternates: { canonical: "/pricing" },
   openGraph: { url: absoluteUrl("/pricing"), title: "Scribe Pricing" },
 };
