@@ -1,7 +1,6 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
@@ -75,11 +74,7 @@ function ExportEditor() {
   if (ids.length === 0) {
     return (
       <main className="flex-1 px-6 py-10 text-center text-sm text-muted-foreground">
-        Nothing selected — pick artifacts in the{" "}
-        <Link href="/marketplace" className="text-accent underline">
-          marketplace
-        </Link>{" "}
-        or a workspace bank first.
+        Nothing selected — pick artifacts in a workspace bank first.
       </main>
     );
   }

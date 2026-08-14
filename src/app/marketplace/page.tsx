@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -129,8 +129,14 @@ function ArtifactTile({
   );
 }
 
+/** Disabled while sharing permissions are being scoped. */
+const MARKETPLACE_ENABLED = false;
+
 export default function MarketplacePage() {
   const router = useRouter();
+  useEffect(() => {
+    if (!MARKETPLACE_ENABLED) router.replace("/");
+  }, [router]);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("all");
   const [aiResults, setAiResults] = useState<ApiArtifactFinderResult[] | null>(
@@ -141,6 +147,7 @@ export default function MarketplacePage() {
   const { data: browse, isLoading } = useQuery({
     queryKey: ["marketplace"],
     queryFn: () => marketplaceArtifacts(96),
+    enabled: MARKETPLACE_ENABLED,
   });
 
   const search = useMutation({
@@ -191,6 +198,8 @@ export default function MarketplacePage() {
     if (q.length < 2 || search.isPending) return;
     search.mutate(q);
   };
+
+  if (!MARKETPLACE_ENABLED) return null;
 
   return (
     <main className="flex-1 px-6 py-6 md:px-10">

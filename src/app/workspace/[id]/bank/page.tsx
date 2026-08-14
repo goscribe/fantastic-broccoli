@@ -21,7 +21,6 @@ import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { formatRelativeDate, cn } from "@/lib/utils";
 import {
   Check,
-  Globe,
   Layers,
   Loader2,
   Printer,
@@ -296,8 +295,7 @@ export default function WorkspaceBankPage() {
               </div>
               <p className="text-xs text-muted-foreground">
                 New study materials can be visible to everyone in this
-                workspace, shared publicly on the Scribe marketplace, or kept
-                just for you.
+                workspace, or kept just for you.
               </p>
               <div className="grid gap-2 pt-1">
                 <Button
@@ -309,17 +307,6 @@ export default function WorkspaceBankPage() {
                 >
                   <Users className="h-3.5 w-3.5 mr-1.5" />
                   Share with workspace
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => {
-                    setSharePromptOpen(false);
-                    regenerate.mutate("public");
-                  }}
-                >
-                  <Globe className="h-3.5 w-3.5 mr-1.5" />
-                  Share publicly on the marketplace
                 </Button>
                 <Button
                   size="sm"
