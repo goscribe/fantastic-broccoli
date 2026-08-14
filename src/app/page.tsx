@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { useAuthUser } from "@/lib/api/auth";
-import type { Folder, Workspace } from "@/types";
+import type { Folder, StudySession, Workspace } from "@/types";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { formatDuration } from "@/lib/utils";
 import { StreakFlame } from "@/components/graphics/streak-flame";
@@ -66,6 +66,9 @@ export default function HomePage() {
   const [folders, setFolders] = useState<Folder[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [dailyActivity, setDailyActivity] = useState<DailyActivityPoint[]>([]);
+  const [sessionsByWorkspace, setSessionsByWorkspace] = useState<
+    Map<string, StudySession[]>
+  >(new Map());
   const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
   const [editing, setEditing] = useState<EditTarget | null>(null);
   const [deleting, setDeleting] = useState<DeleteTarget | null>(null);
@@ -125,6 +128,26 @@ export default function HomePage() {
     [folders, rootWorkspaces],
   );
 
+  // The workspace tree endpoint doesn't include sessions; fetch them per
+  // workspace so the resume banner and revision progress reflect real data.
+  useEffect(() => {
+    if (treeLoading) return;
+    let cancelled = false;
+    Promise.all(
+      allWorkspaces.slice(0, 20).map(async (w) => {
+        const sessions = await fetchStudySessions(w.id).catch(
+          () => [] as StudySession[],
+        );
+        return [w.id, sessions] as const;
+      }),
+    ).then((entries) => {
+      if (!cancelled) setSessionsByWorkspace(new Map(entries));
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [treeLoading, allWorkspaces]);
+
   const filtered = searchQuery
     ? allWorkspaces.filter(
         (w) =>
@@ -133,16 +156,38 @@ export default function HomePage() {
       )
     : null;
 
-  const activeSessions = allWorkspaces.flatMap((w) =>
-    w.sessions
+  const activeSessions = allWorkspaces.flatMap((w) => {
+    const sessions = sessionsByWorkspace.get(w.id) ?? w.sessions;
+    return sessions
       .filter((s) => s.status === "active" && s.activities.length > 0)
-      .map((s) => ({ session: s, workspace: w })),
-  );
+      .map((s) => ({ session: s, workspace: w }));
+  });
   const resumable = activeSessions.find(({ session }) => session.progress > 0);
   const totalPlannedMinutes = activeSessions.reduce(
     (sum, { session }) => sum + session.durationMinutes,
     0,
   );
+
+  const revisionActivities = activeSessions.flatMap(({ session }) =>
+    session.activities,
+  );
+  const revisionDone = revisionActivities.filter(
+    (a) => a.status === "completed",
+  ).length;
+  const revisionPercent = revisionActivities.length
+    ? Math.round((revisionDone / revisionActivities.length) * 100)
+    : 0;
+  const revisionBySession = activeSessions
+    .map(({ session, workspace }) => ({
+      id: session.id,
+      workspaceId: workspace.id,
+      title: session.title,
+      done: session.activities.filter((a) => a.status === "completed").length,
+      total: session.activities.length,
+      progress: session.progress,
+    }))
+    .sort((a, b) => b.progress - a.progress)
+    .slice(0, 4);
 
   const streak = useMemo(() => computeStreak(dailyActivity), [dailyActivity]);
 
@@ -391,6 +436,60 @@ export default function HomePage() {
           </div>
           )}
         </section>
+
+        {/* Revision progress */}
+        {revisionActivities.length > 0 && (
+          <section className="animate-fade-up">
+            <h2 className="text-sm font-semibold mb-3">Revision progress</h2>
+            <div className="rounded-xl border border-border bg-card p-4 space-y-4">
+              <div>
+                <div className="flex items-baseline justify-between mb-2">
+                  <p className="text-[11px] font-semibold text-muted-foreground">
+                    {revisionDone} of {revisionActivities.length} activities
+                    complete across {activeSessions.length} active plan
+                    {activeSessions.length !== 1 ? "s" : ""}
+                  </p>
+                  <span className="text-lg font-bold tabular-nums text-accent">
+                    {revisionPercent}%
+                  </span>
+                </div>
+                <div className="h-2 rounded-full bg-muted">
+                  <div
+                    className="h-2 rounded-full bg-accent transition-all"
+                    style={{ width: `${revisionPercent}%` }}
+                  />
+                </div>
+              </div>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {revisionBySession.map((s) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() =>
+                      router.push(`/workspace/${s.workspaceId}/session/${s.id}`)
+                    }
+                    className="rounded-lg bg-muted/50 px-3 py-2.5 text-left hover:bg-muted transition-colors"
+                  >
+                    <div className="flex items-baseline justify-between gap-2">
+                      <p className="text-[12px] font-medium truncate">
+                        {s.title}
+                      </p>
+                      <span className="text-[11px] font-semibold tabular-nums text-muted-foreground shrink-0">
+                        {s.done}/{s.total}
+                      </span>
+                    </div>
+                    <div className="mt-2 h-1.5 rounded-full bg-muted">
+                      <div
+                        className="h-1.5 rounded-full bg-accent/80"
+                        style={{ width: `${s.progress}%` }}
+                      />
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Search */}
         <div className="relative max-w-md animate-fade-up">
