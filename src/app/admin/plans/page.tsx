@@ -11,9 +11,9 @@ import {
   Td,
 } from "@/components/admin/admin-ui";
 
-function formatStorage(bytes: number | null | undefined): string {
+function formatStorage(bytes: number | bigint | null | undefined): string {
   if (!bytes) return "—";
-  return `${(bytes / 1024 ** 3).toFixed(1)} GB`;
+  return `${(Number(bytes) / 1024 ** 3).toFixed(1)} GB`;
 }
 
 export default function AdminPlansPage() {

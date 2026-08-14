@@ -130,7 +130,7 @@ export interface AdminPlan {
   active: boolean;
   monthlyTokens: number;
   stripePriceId: string | null;
-  limit: { maxStorageBytes: number } | null;
+  limit: { maxStorageBytes: number | bigint } | null;
 }
 
 export interface AdminWorkspaceRow {
