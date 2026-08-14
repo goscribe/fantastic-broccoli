@@ -145,7 +145,7 @@ export default function WorkspaceStudyPage() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              {bankItems.slice(0, 8).map((item) => (
+              {bankItems.slice(0, 4).map((item) => (
                 <Link
                   key={item.id}
                   href={`/workspace/${workspaceId}/bank/${item.id}`}

@@ -179,7 +179,7 @@ function ImageFigure({ figure }: { figure: ReadingImageFigure }) {
   );
 }
 
-function FigureView({ figure }: { figure: ReadingFigure }) {
+export function FigureView({ figure }: { figure: ReadingFigure }) {
   if (figure.type === "graph") {
     return (
       <ExpressionGraph

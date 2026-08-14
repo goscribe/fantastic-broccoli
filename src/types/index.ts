@@ -210,6 +210,8 @@ export interface WorksheetStep {
   title: string;
   intro?: string;
   figure?: WorksheetFigure;
+  /** LLM-generated static figures (graph / image / static html diagram). */
+  figures?: ReadingFigure[];
   parts: WorksheetPart[];
 }
 

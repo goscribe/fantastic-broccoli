@@ -137,6 +137,13 @@ export function artifactToMarkdown(artifact: ApiExportArtifact): string {
         .map((step, i) => {
           const lines: string[] = [`### ${step.title || `Question ${i + 1}`}`];
           if (step.intro) lines.push("", step.intro);
+          step.figures?.forEach((figure) => {
+            const label =
+              figure.type === "image"
+                ? `[Figure: ${figure.url}${figure.caption ? ` — ${figure.caption}` : ""}]`
+                : `[Figure: ${figure.title}]`;
+            lines.push("", label);
+          });
           step.parts.forEach((part, j) => {
             const label = part.label || `(${String.fromCharCode(97 + j)})`;
             const marks =
@@ -193,6 +200,18 @@ export function artifactToMarkdown(artifact: ApiExportArtifact): string {
     default:
       return "";
   }
+}
+
+/**
+ * Removes answer/answer-key blockquote lines (`> **Answer:** …`) so a
+ * student copy can be previewed/printed without answers.
+ */
+export function stripAnswerLines(body: string): string {
+  return body
+    .split("\n")
+    .filter((line) => !/^>\s*\*\*Answers?:?\*\*/.test(line.trim()))
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n");
 }
 
 /** Builds the initial export document from the selected artifacts. */
