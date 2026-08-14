@@ -53,7 +53,7 @@ export default function AdminPlansPage() {
                 </p>
               </Td>
               <Td className="tabular-nums font-medium">
-                {plan.price === 0 ? "Free" : `$${(plan.price / 100).toFixed(2)}`}
+                {plan.price === 0 ? "Free" : `$${plan.price}`}
               </Td>
               <Td className="text-muted-foreground">{plan.interval ?? "—"}</Td>
               <Td className="tabular-nums">{plan.monthlyTokens}</Td>

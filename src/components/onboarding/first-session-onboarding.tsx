@@ -11,8 +11,21 @@ import {
 } from "@/lib/api/materials";
 import { createStudySession } from "@/lib/api/study";
 import { refreshSession, resendVerification, useAuthUser } from "@/lib/api/auth";
+import {
+  fetchPlanOptions,
+  switchPlan,
+  type PlanOption,
+} from "@/lib/api/account";
 import { toastError } from "@/lib/toast";
-import { Check, Loader2, Circle, Upload, Sparkles, MailCheck } from "lucide-react";
+import {
+  Check,
+  Loader2,
+  Circle,
+  Upload,
+  Sparkles,
+  MailCheck,
+  Zap,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -98,6 +111,61 @@ function analysisComplete(progress: AnalysisProgress | null): boolean {
 
 function fileBasename(name: string): string {
   return name.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ").trim();
+}
+
+/** Paid-plan pitch shown while the first session builds: upgrading here means
+ * more tokens from day one. */
+function PlanUpsell() {
+  const [plans, setPlans] = useState<PlanOption[]>([]);
+  const [upgrading, setUpgrading] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchPlanOptions()
+      .then((all) => setPlans(all.filter((p) => p.priceDollars > 0)))
+      .catch(() => {});
+  }, []);
+
+  if (plans.length === 0) return null;
+
+  return (
+    <div className="mt-6 rounded-xl border border-accent/25 bg-accent-soft/30 p-4 text-left">
+      <p className="flex items-center gap-1.5 text-[13px] font-semibold">
+        <Zap className="h-3.5 w-3.5 text-accent" />
+        Study more with a Scribe plan
+      </p>
+      <p className="mt-1 text-xs text-muted-foreground">
+        More monthly tokens for study sessions, flashcards, and worksheets —
+        starting from day one.
+      </p>
+      <div className="mt-3 grid gap-2 sm:grid-cols-2">
+        {plans.map((plan) => (
+          <button
+            key={plan.id}
+            type="button"
+            disabled={upgrading !== null}
+            onClick={() => {
+              setUpgrading(plan.id);
+              switchPlan(plan.id).catch((err) => {
+                setUpgrading(null);
+                toastError(err, "Could not start checkout");
+              });
+            }}
+            className="rounded-lg border border-border bg-card px-3 py-2.5 text-left transition-colors hover:border-accent disabled:opacity-60"
+          >
+            <span className="flex items-center justify-between text-[13px] font-semibold capitalize">
+              {plan.name}
+              {upgrading === plan.id && (
+                <Loader2 className="h-3.5 w-3.5 animate-spin text-accent" />
+              )}
+            </span>
+            <span className="mt-0.5 block text-xs text-muted-foreground">
+              ${plan.priceDollars}/mo · {plan.monthlyTokens} tokens
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
@@ -252,6 +320,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
               </div>
             ))}
           </div>
+          <PlanUpsell />
           <p className="mt-6 text-xs text-muted-foreground">
             This can take a couple of minutes for large files — hang tight.
           </p>
