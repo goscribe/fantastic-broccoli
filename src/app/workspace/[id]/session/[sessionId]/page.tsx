@@ -189,6 +189,17 @@ export default function SessionDetailPage() {
     [activities, activeActivityId],
   );
 
+  // Mirror the active activity into the URL so a refresh or shared link
+  // reopens the same section. history.replaceState avoids a navigation.
+  useEffect(() => {
+    if (!planReady || activeActivityId === undefined) return;
+    const url = new URL(window.location.href);
+    if (activeActivityId) url.searchParams.set("activity", activeActivityId);
+    else url.searchParams.delete("activity");
+    if (url.href !== window.location.href)
+      window.history.replaceState(null, "", url);
+  }, [planReady, activeActivityId]);
+
   // Persist which activity the learner is on so a refresh resumes there.
   const markedInProgress = useRef(new Set<string>());
   useEffect(() => {
@@ -713,7 +724,11 @@ export default function SessionDetailPage() {
         onClose={() => setCopilotOpen(false)}
         workspaceId={workspaceId}
         studySessionId={sessionId}
-        context={`Session: ${session.title}`}
+        context={`Session: ${session.title}${
+          activeActivity
+            ? `\nThe learner is currently on activity "${activeActivity.title}" (${activeActivity.type}).`
+            : ""
+        }`}
       />
 
       {/* Comments panel */}
