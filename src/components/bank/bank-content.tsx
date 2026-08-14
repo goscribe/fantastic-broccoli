@@ -252,13 +252,11 @@ function FigurePreview({ content }: { content: Record<string, unknown> }) {
   );
 }
 
-export function BankContentPreview({
-  kind,
-  content,
-}: {
-  kind: ApiArtifactKind;
-  content: Record<string, unknown>;
-}) {
+/** The rendered inner content for a bank item, without any chrome. */
+export function bankPreviewNode(
+  kind: ApiArtifactKind,
+  content: Record<string, unknown>,
+): React.ReactNode {
   let preview: React.ReactNode = null;
   if (kind === "FIGURE") {
     preview = <FigurePreview content={content} />;
@@ -299,12 +297,53 @@ export function BankContentPreview({
         preview = null;
     }
   }
+  return preview;
+}
+
+export function BankContentPreview({
+  kind,
+  content,
+}: {
+  kind: ApiArtifactKind;
+  content: Record<string, unknown>;
+}) {
+  const preview = bankPreviewNode(kind, content);
   return (
     <div className="space-y-3">
       {preview ?? (
         <p className="text-xs text-faint">No preview available for this item.</p>
       )}
       <RawJson content={content} />
+    </div>
+  );
+}
+
+/**
+ * Docs-style paper thumbnail: the item's real content rendered small inside
+ * a fixed-height "sheet", like a Google Docs grid tile.
+ */
+export function BankDocThumb({
+  item,
+  className,
+}: {
+  item: ApiArtifactBankItem;
+  className?: string;
+}) {
+  const preview = bankPreviewNode(item.kind, item.content);
+  return (
+    <div
+      aria-hidden
+      className={cn(
+        "relative shrink-0 overflow-hidden rounded-lg border border-border bg-background shadow-sm",
+        className,
+      )}
+    >
+      <div className="pointer-events-none w-[250%] origin-top-left scale-[0.4] select-none p-3">
+        {preview ?? (
+          <p className="text-xs text-faint">No preview available.</p>
+        )}
+      </div>
+      <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-background to-transparent" />
     </div>
   );
 }
