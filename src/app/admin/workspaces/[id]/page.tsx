@@ -18,6 +18,8 @@ import {
   Td,
 } from "@/components/admin/admin-ui";
 import { adminApi } from "@/lib/api/admin";
+import { bankPreviewNode } from "@/components/bank/bank-content";
+import type { ApiArtifactKind } from "@/lib/api/study-session";
 import { formatRelativeDate } from "@/lib/utils";
 import { toast, toastError } from "@/lib/toast";
 
@@ -137,9 +139,26 @@ function ArtifactPreview({ artifactId }: { artifactId: string }) {
       {data.content != null && (
         <div>
           <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-faint">
-            Bank payload
+            Bank content
           </p>
-          <JsonBlock value={data.content} />
+          {data.kind && typeof data.content === "object" && (
+            <div className="mb-2 max-h-96 overflow-auto rounded-lg border border-border bg-muted/20 p-3">
+              {bankPreviewNode(
+                data.kind as ApiArtifactKind,
+                data.content as Record<string, unknown>,
+              ) ?? (
+                <p className="text-xs text-faint">No preview available.</p>
+              )}
+            </div>
+          )}
+          <details>
+            <summary className="cursor-pointer text-[12px] text-accent">
+              Raw payload
+            </summary>
+            <div className="mt-2">
+              <JsonBlock value={data.content} />
+            </div>
+          </details>
         </div>
       )}
     </div>

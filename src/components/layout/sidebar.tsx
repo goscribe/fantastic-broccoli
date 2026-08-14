@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 import {
   Home,
   Layers,
+  Store,
   ChevronRight,
   FilePlus2,
   FolderPlus,
@@ -258,6 +259,18 @@ export function Sidebar({
           >
             <Layers className="h-4 w-4" />
             Flashcards
+          </Link>
+          <Link
+            href="/marketplace"
+            className={cn(
+              "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+              pathname.startsWith("/marketplace")
+                ? "bg-accent-soft text-accent"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground",
+            )}
+          >
+            <Store className="h-4 w-4" />
+            Marketplace
           </Link>
           <Link
             href="/shared"

@@ -10,7 +10,9 @@ import {
   fetchStudySessions,
   retryStudySession,
 } from "@/lib/api/study";
-import { fetchMasteryMatrix } from "@/lib/api/study-session";
+import Link from "next/link";
+import { fetchMasteryMatrix, studySessionApi } from "@/lib/api/study-session";
+import { BankDocThumb, kindConfig } from "@/components/bank/bank-content";
 import { MasteryRadar } from "@/components/graphics/mastery-radar";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { SessionCard } from "@/components/session/session-card";
@@ -39,6 +41,10 @@ export default function WorkspaceStudyPage() {
   const { data: masteryMatrix = [] } = useQuery({
     queryKey: ["mastery-matrix", workspaceId],
     queryFn: () => fetchMasteryMatrix(workspaceId),
+  });
+  const { data: bankItems = [] } = useQuery({
+    queryKey: ["bank", workspaceId],
+    queryFn: () => studySessionApi.listBank({ workspaceId }),
   });
   const createSession = useMutation({
     mutationFn: createStudySession,
@@ -122,6 +128,47 @@ export default function WorkspaceStudyPage() {
             </p>
             <ProgressBar value={resumable.progress} className="mt-3.5" />
           </button>
+        )}
+
+        {bankItems.length > 0 && (
+          <section className="animate-fade-up">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-sm font-semibold text-foreground">
+                Study materials
+              </h2>
+              <Link
+                href={`/workspace/${workspaceId}/bank`}
+                className="flex items-center gap-1 text-xs font-semibold text-accent hover:underline"
+              >
+                View all {bankItems.length}
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+              {bankItems.slice(0, 8).map((item) => (
+                <Link
+                  key={item.id}
+                  href={`/workspace/${workspaceId}/bank/${item.id}`}
+                  className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-150 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-md"
+                >
+                  <BankDocThumb
+                    kind={item.kind}
+                    content={item.content}
+                    className="aspect-square w-full rounded-none border-0 border-b border-border"
+                  />
+                  <div className="space-y-0.5 p-3">
+                    <p className="truncate text-[13px] font-semibold leading-tight group-hover:text-accent transition-colors">
+                      {item.title}
+                    </p>
+                    <p className="truncate text-[11px] text-faint">
+                      {kindConfig[item.kind].label}
+                      {item.topic ? ` · ${item.topic}` : ""}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
         )}
 
         {masteryMatrix.length > 0 && (

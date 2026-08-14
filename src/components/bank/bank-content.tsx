@@ -323,13 +323,15 @@ export function BankContentPreview({
  * a fixed-height "sheet", like a Google Docs grid tile.
  */
 export function BankDocThumb({
-  item,
+  kind,
+  content,
   className,
 }: {
-  item: ApiArtifactBankItem;
+  kind: ApiArtifactKind;
+  content: Record<string, unknown>;
   className?: string;
 }) {
-  const preview = bankPreviewNode(item.kind, item.content);
+  const preview = bankPreviewNode(kind, content);
   return (
     <div
       aria-hidden
