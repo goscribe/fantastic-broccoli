@@ -442,6 +442,7 @@ export interface MasteryMatrixRow {
   topic: string;
   /** 0-100, or null when the topic has never been studied. */
   proficiency: number | null;
+  /** Graded items (flashcards + worksheet questions) under this topic. */
   cardsTotal: number;
   cardsStudied: number;
   attempts: number;

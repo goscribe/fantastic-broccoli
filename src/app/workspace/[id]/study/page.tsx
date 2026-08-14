@@ -202,7 +202,7 @@ export default function WorkspaceStudyPage() {
                           {row.topic}
                         </p>
                         <p className="text-[10px] text-muted-foreground">
-                          {row.cardsStudied} of {row.cardsTotal} cards studied
+                          {row.cardsStudied} of {row.cardsTotal} items studied
                           {row.attempts > 0
                             ? ` · ${row.attempts} attempts`
                             : ""}
