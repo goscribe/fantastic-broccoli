@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
-import { Check, SkipForward, X } from "lucide-react";
+import { Check, RotateCcw, SkipForward, X } from "lucide-react";
 
 type QuestionMode = "mcq" | "type";
 
@@ -175,6 +175,15 @@ export function DeckLearnView({
             Question {currentIndex + 1} of {cards.length}
           </span>
           <span className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={restart}
+              className="inline-flex items-center gap-1 font-semibold text-muted-foreground hover:text-foreground transition-colors"
+              title="Start a new session with a fresh shuffle"
+            >
+              <RotateCcw className="h-3 w-3" />
+              New session
+            </button>
             {score.total > 0 && (
               <>
                 <span className="inline-flex items-center gap-1 font-medium text-energy">
@@ -249,7 +258,7 @@ export function DeckLearnView({
                     >
                       {String.fromCharCode(65 + index)}
                     </span>
-                    <span className="flex-1 leading-relaxed">
+                    <span className="flex-1 min-w-0 leading-relaxed">
                       <MarkdownText text={option} />
                     </span>
                     {isCorrectOption && (

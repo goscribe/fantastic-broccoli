@@ -1,6 +1,15 @@
 @import "tailwindcss";
 @import "katex/dist/katex.min.css";
 
+/* Long equations scroll inside their container instead of overflowing it. */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding: 2px 0;
+}
+
+
 :root {
   --background: #faf9fc;
   --foreground: #131118;
