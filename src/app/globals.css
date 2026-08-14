@@ -261,6 +261,18 @@ input[type="range"].param-slider:active::-moz-range-thumb {
     justify-content: center;
     pointer-events: none;
   }
+  .print-sheet,
+  .print-sheet * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-hidden {
+    display: none !important;
+  }
+  .cutout-card {
+    border: 1.5px dashed #9ca3af;
+    break-inside: avoid;
+  }
   .print-watermark span {
     transform: rotate(-30deg);
     font-size: 72px;

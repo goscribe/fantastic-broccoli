@@ -188,6 +188,7 @@ function themeStyle(): string {
   ).join("");
   return `<style>:root{${vars}}
 body{margin:0;padding:14px 16px;font-family:ui-sans-serif,system-ui,sans-serif;color:var(--foreground);background:var(--card);}
+@media print{*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
 .katex{max-width:100%;}
 .katex-display{max-width:100%;overflow-x:auto;overflow-y:hidden;padding-bottom:2px;}
 span:has(>.katex):not(.math):not(.math-display){display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle;}
