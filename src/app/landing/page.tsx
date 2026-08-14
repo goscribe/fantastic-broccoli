@@ -109,16 +109,42 @@ const features = [
 
 const plans = [
   {
-    name: "Early access",
+    name: "Free",
     price: "$0",
     description: "Everything you need to try Scribe with a real course.",
     features: [
       "Upload PDFs, slides, and lecture audio",
       "AI study sessions with readings & worksheets",
-      "Flashcards, cloze passages, and quizzes",
-      "Study copilot grounded in your materials",
+      "300 tokens per month",
+      "2 GB storage",
     ],
     cta: "Start studying",
+    highlighted: false,
+  },
+  {
+    name: "Starter",
+    price: "$9/mo",
+    description: "Great for getting started with focused study sessions.",
+    features: [
+      "Everything in Free",
+      "500 tokens per month",
+      "2 GB storage",
+      "Study copilot grounded in your materials",
+    ],
+    cta: "Get Starter",
+    highlighted: true,
+  },
+  {
+    name: "Pro",
+    price: "$19/mo",
+    description: "Best for power users with higher content generation limits.",
+    features: [
+      "Everything in Starter",
+      "700 tokens per month",
+      "10 GB storage",
+      "Higher generation limits",
+    ],
+    cta: "Go Pro",
     highlighted: false,
   },
 ];
@@ -228,7 +254,7 @@ export default function LandingPage() {
                 </Link>
               </div>
               <p className="mt-4 text-xs text-faint">
-                Free during early access · No credit card required
+                Free to start · No credit card required
               </p>
               <div className="mt-5 flex justify-center lg:justify-start">
                 <a
@@ -559,13 +585,13 @@ export default function LandingPage() {
         <section id="pricing" className="scroll-mt-20 border-t border-border bg-card/40 py-16 md:py-20">
           <div className="mx-auto max-w-6xl px-6">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Free during early access
+              Simple, student-friendly pricing
             </h2>
             <p className="mt-3 max-w-xl text-muted-foreground">
-              Scribe is free while we&apos;re in early access. No credit card
-              required.
+              Start free — no credit card required. Upgrade when you need more
+              study sessions.
             </p>
-            <div className="mx-auto mt-10 grid max-w-xl gap-5 sm:grid-cols-1">
+            <div className="mx-auto mt-10 grid gap-5 sm:grid-cols-3">
               {plans.map((plan) => (
                 <div
                   key={plan.name}
@@ -612,7 +638,7 @@ export default function LandingPage() {
               ))}
             </div>
             <p className="mt-6 text-center text-xs text-faint">
-              Full plan limits are shown on the{" "}
+              Manage or switch plans anytime from the{" "}
               <Link href="/pricing" className="underline hover:text-foreground">
                 pricing page
               </Link>{" "}

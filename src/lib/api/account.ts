@@ -53,10 +53,7 @@ export async function fetchPlanOptions(): Promise<PlanOption[]> {
       monthlyTokens:
         (plan as unknown as { monthlyTokens?: number }).monthlyTokens ?? 0,
       isActive: plan.isActive,
-    }))
-    // Hide paid tier options while paid checkout is paused. Keep an active paid
-    // plan visible so existing subscribers still see their current plan.
-    .filter((plan) => plan.priceDollars === 0 || plan.isActive);
+    }));
 }
 
 /** Redirects to Stripe checkout for the chosen plan. */

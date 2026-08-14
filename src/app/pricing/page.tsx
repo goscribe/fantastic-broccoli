@@ -105,10 +105,10 @@ export default function PricingPage() {
         <div>
           <p className="text-sm font-medium text-accent">Plan</p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight">
-            Scribe is free for now
+            Choose your plan
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Your storage and monthly token allowance are shown below. Paid plans will be available later.
+            Your storage and monthly token allowance are shown below. Upgrade anytime — checkout is handled securely by Stripe.
           </p>
         </div>
         <Link
