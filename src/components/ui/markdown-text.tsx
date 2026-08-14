@@ -361,6 +361,61 @@ function MarkdownTable({ lines }: { lines: string[] }) {
   );
 }
 
+let mermaidLoader: Promise<typeof import("mermaid").default> | null = null;
+let mermaidSeq = 0;
+
+function loadMermaid() {
+  if (!mermaidLoader) {
+    mermaidLoader = import("mermaid").then((m) => {
+      m.default.initialize({ startOnLoad: false, securityLevel: "strict" });
+      return m.default;
+    });
+  }
+  return mermaidLoader;
+}
+
+/** Renders a ```mermaid fenced block as an SVG diagram (code on failure). */
+export function MermaidBlock({ code }: { code: string }) {
+  // Result is keyed by the source code so a code change shows the pending
+  // state without needing a synchronous reset inside the effect.
+  const [result, setResult] = useState<{
+    code: string;
+    svg: string | null;
+  } | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    loadMermaid()
+      .then((mermaid) => mermaid.render(`mermaid-${mermaidSeq++}`, code))
+      .then(({ svg: rendered }) => {
+        if (!cancelled) setResult({ code, svg: rendered });
+      })
+      .catch(() => {
+        if (!cancelled) setResult({ code, svg: null });
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [code]);
+
+  const current = result?.code === code ? result : null;
+  if (current && current.svg === null)
+    return <CodeBlock code={code} lang="mermaid" />;
+  const svg = current?.svg;
+  if (!svg)
+    return (
+      <span className="block my-2 rounded-lg border border-border bg-muted/30 px-3 py-6 text-center text-[11px] text-faint">
+        Rendering diagram…
+      </span>
+    );
+  return (
+    <span
+      className="block my-2 overflow-x-auto rounded-lg border border-border bg-card p-3 [&_svg]:mx-auto [&_svg]:max-w-full"
+      dangerouslySetInnerHTML={{ __html: svg }}
+    />
+  );
+}
+
 export function CodeBlock({ code, lang }: { code: string; lang?: string }) {
   return (
     <span className="block my-2 overflow-hidden rounded-lg border border-border bg-muted/50">
@@ -433,11 +488,15 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
     if (codeLines !== null) {
       if (fence) {
         blocks.push(
-          <CodeBlock
-            key={key++}
-            code={codeLines.join("\n")}
-            lang={codeLang || undefined}
-          />,
+          codeLang === "mermaid" ? (
+            <MermaidBlock key={key++} code={codeLines.join("\n")} />
+          ) : (
+            <CodeBlock
+              key={key++}
+              code={codeLines.join("\n")}
+              lang={codeLang || undefined}
+            />
+          ),
         );
         codeLines = null;
         codeLang = "";
@@ -489,11 +548,15 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
   flushTable();
   if (codeLines !== null)
     blocks.push(
-      <CodeBlock
-        key={key++}
-        code={codeLines.join("\n")}
-        lang={codeLang || undefined}
-      />,
+      codeLang === "mermaid" ? (
+        <MermaidBlock key={key++} code={codeLines.join("\n")} />
+      ) : (
+        <CodeBlock
+          key={key++}
+          code={codeLines.join("\n")}
+          lang={codeLang || undefined}
+        />
+      ),
     );
 
   return <span className={className}>{blocks}</span>;

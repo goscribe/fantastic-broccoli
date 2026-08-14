@@ -20,13 +20,17 @@ import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { formatRelativeDate, cn } from "@/lib/utils";
 import {
+  Check,
   ChevronRight,
+  Globe,
   Layers,
   Loader2,
+  Printer,
   RefreshCw,
   Trash2,
   Users,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import {
   FigureArt,
   FlashcardsArt,
@@ -84,9 +88,13 @@ const UNTAGGED_TOPIC = "General";
 function BankItemRow({
   workspaceId,
   item,
+  selected,
+  onToggleSelect,
 }: {
   workspaceId: string;
   item: ApiArtifactBankItem;
+  selected: boolean;
+  onToggleSelect: () => void;
 }) {
   const queryClient = useQueryClient();
 
@@ -107,7 +115,11 @@ function BankItemRow({
         href={`/workspace/${workspaceId}/bank/${item.id}`}
         className="flex items-start gap-3 p-4 hover:bg-muted/30 transition-colors"
       >
-        <BankDocThumb item={item} className="hidden sm:block h-24 w-20" />
+        <BankDocThumb
+          kind={item.kind}
+          content={item.content}
+          className="hidden sm:block h-24 w-24"
+        />
         <Art className="h-9 w-9 shrink-0 sm:hidden" />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
@@ -130,6 +142,24 @@ function BankItemRow({
           </p>
         </div>
         <div className="flex items-center gap-1.5 shrink-0">
+          <button
+            type="button"
+            title={selected ? "Remove from selection" : "Select for export"}
+            aria-pressed={selected}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onToggleSelect();
+            }}
+            className={cn(
+              "flex h-5 w-5 items-center justify-center rounded border transition-colors",
+              selected
+                ? "border-accent bg-accent text-accent-foreground"
+                : "border-border-strong text-transparent hover:border-accent",
+            )}
+          >
+            <Check className="h-3.5 w-3.5" />
+          </button>
           <button
             type="button"
             title="Delete"
@@ -158,8 +188,15 @@ export default function WorkspaceBankPage() {
   const params = useParams();
   const workspaceId = params.id as string;
   const queryClient = useQueryClient();
+  const router = useRouter();
   const [familyFilter, setFamilyFilter] = useState<BankFamily | null>(null);
   const [sharePromptOpen, setSharePromptOpen] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+  const toggleSelect = (id: string) =>
+    setSelectedIds((ids) =>
+      ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id],
+    );
 
   const { data: workspace, isLoading: workspaceLoading } = useQuery({
     queryKey: ["workspace", workspaceId],
@@ -172,7 +209,7 @@ export default function WorkspaceBankPage() {
   });
 
   const regenerate = useMutation({
-    mutationFn: (visibility: "workspace" | "private") =>
+    mutationFn: (visibility: "workspace" | "private" | "public") =>
       studySessionApi.generateBank({ workspaceId, visibility }),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["bank", workspaceId] }),
@@ -263,23 +300,34 @@ export default function WorkspaceBankPage() {
               </div>
               <p className="text-xs text-muted-foreground">
                 New study materials can be visible to everyone in this
-                workspace, or kept just for you.
+                workspace, shared publicly on the Scribe marketplace, or kept
+                just for you.
               </p>
-              <div className="flex gap-2 pt-1">
+              <div className="grid gap-2 pt-1">
                 <Button
                   size="sm"
-                  className="flex-1"
                   onClick={() => {
                     setSharePromptOpen(false);
                     regenerate.mutate("workspace");
                   }}
                 >
+                  <Users className="h-3.5 w-3.5 mr-1.5" />
                   Share with workspace
                 </Button>
                 <Button
                   size="sm"
                   variant="outline"
-                  className="flex-1"
+                  onClick={() => {
+                    setSharePromptOpen(false);
+                    regenerate.mutate("public");
+                  }}
+                >
+                  <Globe className="h-3.5 w-3.5 mr-1.5" />
+                  Share publicly on the marketplace
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
                   onClick={() => {
                     setSharePromptOpen(false);
                     regenerate.mutate("private");
@@ -375,6 +423,8 @@ export default function WorkspaceBankPage() {
                               key={item.id}
                               workspaceId={workspaceId}
                               item={item}
+                              selected={selectedIds.includes(item.id)}
+                              onToggleSelect={() => toggleSelect(item.id)}
                             />
                           ))}
                         </div>
@@ -384,6 +434,32 @@ export default function WorkspaceBankPage() {
                 </section>
               );
             })}
+          </div>
+        )}
+
+        {selectedIds.length > 0 && (
+          <div className="fixed inset-x-0 bottom-5 z-40 flex justify-center px-4 print:hidden">
+            <div className="flex items-center gap-3 rounded-full border border-border bg-card px-4 py-2 shadow-lg animate-fade-up">
+              <span className="text-xs font-semibold">
+                {selectedIds.length} selected
+              </span>
+              <Button
+                size="sm"
+                onClick={() =>
+                  router.push(`/export?ids=${selectedIds.join(",")}`)
+                }
+              >
+                <Printer className="h-3.5 w-3.5 mr-1.5" />
+                Export with Scribe
+              </Button>
+              <button
+                type="button"
+                onClick={() => setSelectedIds([])}
+                className="text-[11px] font-semibold text-muted-foreground hover:text-foreground"
+              >
+                Clear
+              </button>
+            </div>
           </div>
         )}
       </div>

@@ -328,7 +328,7 @@ export const studySessionApi = {
     rpc<{ updated: number }>("studySession.setBankVisibility", "mutation", input),
 };
 
-export type ApiArtifactVisibility = "workspace" | "private";
+export type ApiArtifactVisibility = "workspace" | "private" | "public";
 
 export interface ApiArtifactFinderResult {
   id: string;
@@ -340,6 +340,7 @@ export interface ApiArtifactFinderResult {
   topic: string | null;
   snippet: string;
   reason: string;
+  source: "mine" | "community";
 }
 
 /** RAG + LLM search across the user's artifacts. Costs 1 token per search. */
@@ -347,6 +348,64 @@ export function findArtifacts(query: string) {
   return rpc<ApiArtifactFinderResult[]>("workspace.findArtifacts", "mutation", {
     query,
   });
+}
+
+export interface ApiMarketplaceArtifact {
+  id: string;
+  workspaceId: string;
+  workspaceTitle: string;
+  title: string;
+  type: string;
+  kind: ApiArtifactKind | null;
+  topic: string | null;
+  content: Record<string, unknown> | null;
+  visibility: ApiArtifactVisibility;
+  createdAt: string;
+  source: "mine" | "community";
+}
+
+/** Recent artifacts for the marketplace browse grid (own + public). Free. */
+export function marketplaceArtifacts(limit?: number) {
+  return rpc<ApiMarketplaceArtifact[]>("workspace.marketplaceArtifacts", "query", {
+    limit,
+  });
+}
+
+export interface ApiExportArtifact {
+  id: string;
+  workspaceId: string;
+  workspaceTitle: string;
+  title: string;
+  type: string;
+  kind: ApiArtifactKind | null;
+  topic: string | null;
+  content: Record<string, unknown> | null;
+}
+
+/** Full content for selected artifacts (multi-select export). */
+export function getArtifactsForExport(ids: string[]) {
+  return rpc<ApiExportArtifact[]>("workspace.getArtifactsForExport", "query", {
+    ids,
+  });
+}
+
+export interface ExportDoc {
+  title: string;
+  themeId: string;
+  sections: { heading: string; body: string }[];
+}
+
+/** AI edit/restyle of the export editor document. Costs 2 tokens. */
+export function assistExport(input: {
+  instruction: string;
+  doc: ExportDoc;
+  themeIds: string[];
+}) {
+  return rpc<ExportDoc & { note: string }>(
+    "workspace.assistExport",
+    "mutation",
+    input,
+  );
 }
 
 /**
