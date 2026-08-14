@@ -73,6 +73,20 @@ export function DeckTestView({
 
   return (
     <div className="space-y-5">
+      {!submitted && (
+        <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
+          <span>{questions.length} questions</span>
+          <button
+            type="button"
+            onClick={retake}
+            className="inline-flex items-center gap-1 font-semibold hover:text-foreground transition-colors"
+            title="Start a new test with a fresh shuffle"
+          >
+            <RotateCcw className="h-3 w-3" />
+            New session
+          </button>
+        </div>
+      )}
       {submitted && (
         <div className="rounded-3xl border border-border bg-card px-6 py-8 text-center space-y-4">
           <h2 className="text-2xl font-semibold tracking-tight">
@@ -92,7 +106,7 @@ export function DeckTestView({
           <ProgressBar value={accuracy} className="max-w-xs mx-auto" showLabel />
           <Button variant="outline" size="sm" onClick={retake}>
             <RotateCcw className="mr-1.5 h-3.5 w-3.5" />
-            Retake test
+            New session
           </Button>
         </div>
       )}
@@ -176,7 +190,7 @@ export function DeckTestView({
                             >
                               {String.fromCharCode(65 + j)}
                             </span>
-                            <span className="flex-1 leading-relaxed">
+                            <span className="flex-1 min-w-0 leading-relaxed">
                               <MarkdownText text={option} />
                             </span>
                           </button>

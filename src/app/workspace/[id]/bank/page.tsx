@@ -21,7 +21,6 @@ import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { formatRelativeDate, cn } from "@/lib/utils";
 import {
   Check,
-  ChevronRight,
   Globe,
   Layers,
   Loader2,
@@ -85,7 +84,7 @@ const familyOrder: BankFamily[] = [
 
 const UNTAGGED_TOPIC = "General";
 
-function BankItemRow({
+function BankItemTile({
   workspaceId,
   item,
   selected,
@@ -106,80 +105,77 @@ function BankItemRow({
   });
 
   const config = kindConfig[item.kind];
-  const Art = config.art;
   const summary = bankItemSummary(item);
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-card transition-shadow hover:shadow-sm">
+    <div className="group relative">
       <Link
         href={`/workspace/${workspaceId}/bank/${item.id}`}
-        className="flex items-start gap-3 p-4 hover:bg-muted/30 transition-colors"
+        className={cn(
+          "block overflow-hidden rounded-2xl border bg-card transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md",
+          selected
+            ? "border-accent"
+            : "border-border hover:border-border-strong",
+        )}
       >
         <BankDocThumb
           kind={item.kind}
           content={item.content}
-          className="hidden sm:block h-24 w-24"
+          className="aspect-square w-full rounded-none border-0 border-b border-border"
         />
-        <Art className="h-9 w-9 shrink-0 sm:hidden" />
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="text-sm font-semibold truncate">{item.title}</h3>
-            <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground shrink-0">
-              {config.label}
-            </span>
-            <span className="text-[10px] text-faint shrink-0">
-              {summary ? `${summary} · ` : ""}
-              difficulty {item.difficulty}/5 · used {item.usedCount}×
-            </span>
-          </div>
-          <p className="text-[11px] text-faint mt-1">
-            {item.topic && `${item.topic} · `}
+        <div className="space-y-1 p-3">
+          <p className="truncate text-[13px] font-semibold leading-tight group-hover:text-accent transition-colors">
+            {item.title}
+          </p>
+          <p className="truncate text-[11px] text-faint">
+            {summary ? `${summary} · ` : ""}
             {formatRelativeDate(
               typeof item.updatedAt === "string"
                 ? item.updatedAt
                 : item.updatedAt.toISOString(),
             )}
           </p>
-        </div>
-        <div className="flex items-center gap-1.5 shrink-0">
-          <button
-            type="button"
-            title={selected ? "Remove from selection" : "Select for export"}
-            aria-pressed={selected}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              onToggleSelect();
-            }}
-            className={cn(
-              "flex h-5 w-5 items-center justify-center rounded border transition-colors",
-              selected
-                ? "border-accent bg-accent text-accent-foreground"
-                : "border-border-strong text-transparent hover:border-accent",
-            )}
-          >
-            <Check className="h-3.5 w-3.5" />
-          </button>
-          <button
-            type="button"
-            title="Delete"
-            disabled={deleteMutation.isPending}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              if (confirm("Delete this bank item?")) deleteMutation.mutate();
-            }}
-            className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground hover:bg-rose/10 hover:text-rose disabled:opacity-40"
-          >
-            {deleteMutation.isPending ? (
-              <Loader2 className="h-3.5 w-3.5 animate-spin" />
-            ) : (
-              <Trash2 className="h-3.5 w-3.5" />
-            )}
-          </button>
-          <ChevronRight className="h-4 w-4 text-faint" />
+          <div className="flex flex-wrap items-center gap-1 pt-0.5">
+            <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
+              {config.label}
+            </span>
+            <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
+              difficulty {item.difficulty}/5
+            </span>
+          </div>
         </div>
       </Link>
+      <div className="absolute right-2 top-2 flex items-center gap-1.5">
+        <button
+          type="button"
+          title={selected ? "Remove from selection" : "Select for export"}
+          aria-pressed={selected}
+          onClick={onToggleSelect}
+          className={cn(
+            "flex h-6 w-6 items-center justify-center rounded-md border shadow-sm transition-colors",
+            selected
+              ? "border-accent bg-accent text-accent-foreground"
+              : "border-border-strong bg-card text-transparent hover:border-accent",
+          )}
+        >
+          <Check className="h-3.5 w-3.5" />
+        </button>
+        <button
+          type="button"
+          title="Delete"
+          disabled={deleteMutation.isPending}
+          onClick={() => {
+            if (confirm("Delete this bank item?")) deleteMutation.mutate();
+          }}
+          className="flex h-6 w-6 items-center justify-center rounded-md border border-border-strong bg-card text-muted-foreground shadow-sm opacity-0 transition-opacity group-hover:opacity-100 hover:text-rose hover:border-rose/50 disabled:opacity-40"
+        >
+          {deleteMutation.isPending ? (
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          ) : (
+            <Trash2 className="h-3.5 w-3.5" />
+          )}
+        </button>
+      </div>
     </div>
   );
 }
@@ -417,9 +413,9 @@ export default function WorkspaceBankPage() {
                           </span>
                           <span className="h-px flex-1 bg-border/70" />
                         </div>
-                        <div className="grid gap-3">
+                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                           {topicItems.map((item) => (
-                            <BankItemRow
+                            <BankItemTile
                               key={item.id}
                               workspaceId={workspaceId}
                               item={item}

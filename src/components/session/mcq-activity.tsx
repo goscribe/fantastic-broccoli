@@ -108,7 +108,7 @@ export function McqActivity({
               >
                 {String.fromCharCode(65 + i)}
               </span>
-              <span className="flex-1">
+              <span className="flex-1 min-w-0">
                 <MarkdownText text={option} />
               </span>
               {revealed && i === question.correctIndex && (
