@@ -314,9 +314,40 @@ export const studySessionApi = {
   deleteBankItem: (input: { workspaceId: string; id: string }) =>
     rpc<{ deleted: boolean }>("studySession.deleteBankItem", "mutation", input),
 
-  generateBank: (input: { workspaceId: string; fileIds?: string[] }) =>
-    rpc<{ started: boolean }>("studySession.generateBank", "mutation", input),
+  generateBank: (input: {
+    workspaceId: string;
+    fileIds?: string[];
+    visibility?: ApiArtifactVisibility;
+  }) => rpc<{ started: boolean }>("studySession.generateBank", "mutation", input),
+
+  setBankVisibility: (input: {
+    workspaceId: string;
+    ids: string[];
+    visibility: ApiArtifactVisibility;
+  }) =>
+    rpc<{ updated: number }>("studySession.setBankVisibility", "mutation", input),
 };
+
+export type ApiArtifactVisibility = "workspace" | "private";
+
+export interface ApiArtifactFinderResult {
+  id: string;
+  workspaceId: string;
+  workspaceTitle: string;
+  title: string;
+  type: string;
+  kind: ApiArtifactKind | null;
+  topic: string | null;
+  snippet: string;
+  reason: string;
+}
+
+/** RAG + LLM search across the user's artifacts. Costs 1 token per search. */
+export function findArtifacts(query: string) {
+  return rpc<ApiArtifactFinderResult[]>("workspace.findArtifacts", "mutation", {
+    query,
+  });
+}
 
 /**
  * Best-effort draft save during page unload — `keepalive` lets the request
@@ -393,6 +424,8 @@ export interface ApiArtifactBankItem {
   difficulty: number;
   content: Record<string, unknown>;
   usedCount: number;
+  visibility?: ApiArtifactVisibility;
+  createdById?: string | null;
   createdAt: Date;
   updatedAt: Date;
 }

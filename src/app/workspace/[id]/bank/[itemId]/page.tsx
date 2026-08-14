@@ -24,6 +24,7 @@ import {
   Layers,
   Loader2,
   Pencil,
+  Printer,
   Trash2,
   X,
 } from "lucide-react";
@@ -182,6 +183,16 @@ export default function BankItemPage() {
           </div>
           <div className="flex items-center gap-1.5 shrink-0">
             {!editing && (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => window.print()}
+              >
+                <Printer className="h-3.5 w-3.5 mr-1.5" />
+                Print
+              </Button>
+            )}
+            {!editing && (
               <Button size="sm" variant="outline" onClick={startEditing}>
                 <Pencil className="h-3.5 w-3.5 mr-1.5" />
                 Edit
@@ -304,6 +315,25 @@ export default function BankItemPage() {
             <BankContentPreview kind={item.kind} content={item.content} />
           </div>
         )}
+      </div>
+
+      {/* Print-only sheet (see globals.css @media print) with Scribe watermark. */}
+      <div className="print-sheet hidden">
+        <div className="print-watermark hidden">
+          <span>Scribe · scribe.study</span>
+        </div>
+        <div className="mx-auto max-w-2xl space-y-4 p-8">
+          <div className="border-b border-border pb-3">
+            <h1 className="text-xl font-bold">{item.title}</h1>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {config.label}
+              {item.topic && ` · ${item.topic}`}
+              {summary && ` · ${summary}`}
+              {" · Generated with Scribe — scribe.study"}
+            </p>
+          </div>
+          <BankContentPreview kind={item.kind} content={item.content} />
+        </div>
       </div>
     </WorkspaceShell>
   );

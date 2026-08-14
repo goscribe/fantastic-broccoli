@@ -12,6 +12,7 @@ import {
 } from "@/lib/api/study-session";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import {
+  BankDocThumb,
   bankItemSummary,
   kindConfig,
 } from "@/components/bank/bank-content";
@@ -24,6 +25,7 @@ import {
   Loader2,
   RefreshCw,
   Trash2,
+  Users,
 } from "lucide-react";
 import {
   FigureArt,
@@ -105,7 +107,8 @@ function BankItemRow({
         href={`/workspace/${workspaceId}/bank/${item.id}`}
         className="flex items-start gap-3 p-4 hover:bg-muted/30 transition-colors"
       >
-        <Art className="h-9 w-9 shrink-0" />
+        <BankDocThumb item={item} className="hidden sm:block h-24 w-20" />
+        <Art className="h-9 w-9 shrink-0 sm:hidden" />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <h3 className="text-sm font-semibold truncate">{item.title}</h3>
@@ -156,6 +159,7 @@ export default function WorkspaceBankPage() {
   const workspaceId = params.id as string;
   const queryClient = useQueryClient();
   const [familyFilter, setFamilyFilter] = useState<BankFamily | null>(null);
+  const [sharePromptOpen, setSharePromptOpen] = useState(false);
 
   const { data: workspace, isLoading: workspaceLoading } = useQuery({
     queryKey: ["workspace", workspaceId],
@@ -168,7 +172,8 @@ export default function WorkspaceBankPage() {
   });
 
   const regenerate = useMutation({
-    mutationFn: () => studySessionApi.generateBank({ workspaceId }),
+    mutationFn: (visibility: "workspace" | "private") =>
+      studySessionApi.generateBank({ workspaceId, visibility }),
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["bank", workspaceId] }),
   });
@@ -230,7 +235,7 @@ export default function WorkspaceBankPage() {
             size="sm"
             variant="outline"
             disabled={regenerate.isPending}
-            onClick={() => regenerate.mutate()}
+            onClick={() => setSharePromptOpen(true)}
           >
             {regenerate.isPending ? (
               <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
@@ -240,6 +245,52 @@ export default function WorkspaceBankPage() {
             Regenerate from materials
           </Button>
         </div>
+
+        {sharePromptOpen && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
+            onClick={() => setSharePromptOpen(false)}
+          >
+            <div
+              className="w-full max-w-sm rounded-2xl border border-border bg-card p-5 space-y-3"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center gap-2">
+                <Users className="h-4 w-4 text-accent" />
+                <p className="text-sm font-semibold">
+                  Share what you generate?
+                </p>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                New study materials can be visible to everyone in this
+                workspace, or kept just for you.
+              </p>
+              <div className="flex gap-2 pt-1">
+                <Button
+                  size="sm"
+                  className="flex-1"
+                  onClick={() => {
+                    setSharePromptOpen(false);
+                    regenerate.mutate("workspace");
+                  }}
+                >
+                  Share with workspace
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => {
+                    setSharePromptOpen(false);
+                    regenerate.mutate("private");
+                  }}
+                >
+                  Keep private
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {presentFamilies.length > 1 && (
           <div className="flex flex-wrap gap-1.5 animate-fade-up">

@@ -223,3 +223,41 @@ input[type="range"].param-slider:active::-moz-range-thumb {
 .animate-loader-bar {
   animation: loader-bar 1.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
+
+/* Printable artifact sheets: only the .print-sheet subtree is printed, with
+   a Scribe watermark overlaid on every page. */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-sheet,
+  .print-sheet * {
+    visibility: visible;
+  }
+  .print-sheet {
+    display: block !important;
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    padding: 0;
+    background: white;
+    color: #111;
+  }
+  .print-watermark {
+    display: flex !important;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .print-watermark span {
+    transform: rotate(-30deg);
+    font-size: 72px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: rgba(80, 80, 80, 0.08);
+    white-space: nowrap;
+  }
+}
