@@ -203,6 +203,11 @@ export default function WorkspaceStudyPage() {
                         </p>
                         <p className="text-[10px] text-muted-foreground">
                           {row.cardsStudied} of {row.cardsTotal} items studied
+                          {row.cardsTotal > 0
+                            ? ` (${Math.round(
+                                (row.cardsStudied / row.cardsTotal) * 100,
+                              )}%)`
+                            : ""}
                           {row.attempts > 0
                             ? ` · ${row.attempts} attempts`
                             : ""}
