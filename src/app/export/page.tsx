@@ -14,6 +14,7 @@ import {
   exportThemeById,
   exportThemeIds,
   exportThemes,
+  stripAnswerLines,
 } from "@/lib/export-doc";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import {
   ArrowLeft,
+  Eye,
+  EyeOff,
   Loader2,
   Pencil,
   Printer,
@@ -44,6 +47,7 @@ function ExportEditor() {
   const [editing, setEditing] = useState<number | null>(null);
   const [instruction, setInstruction] = useState("");
   const [assistNote, setAssistNote] = useState("");
+  const [showAnswers, setShowAnswers] = useState(true);
 
   const { data: artifacts, isLoading } = useQuery({
     queryKey: ["export", ids.join(",")],
@@ -125,10 +129,29 @@ function ExportEditor() {
               </p>
             </div>
           </div>
-          <Button size="sm" onClick={() => window.print()}>
-            <Printer className="h-3.5 w-3.5 mr-1.5" />
-            Print / Save PDF
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowAnswers((v) => !v)}
+              title={
+                showAnswers
+                  ? "Hide answers (student copy)"
+                  : "Show answers (teacher copy)"
+              }
+            >
+              {showAnswers ? (
+                <Eye className="h-3.5 w-3.5 mr-1.5" />
+              ) : (
+                <EyeOff className="h-3.5 w-3.5 mr-1.5" />
+              )}
+              {showAnswers ? "Answers shown" : "Answers hidden"}
+            </Button>
+            <Button size="sm" onClick={() => window.print()}>
+              <Printer className="h-3.5 w-3.5 mr-1.5" />
+              Print / Save PDF
+            </Button>
+          </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5">
@@ -208,26 +231,56 @@ function ExportEditor() {
           <span>Scribe · scribe.study</span>
         </div>
 
-        <div className="mb-6 flex items-start justify-between gap-4">
+        {/* Document header */}
+        <header className="mb-8">
+          <div className="mb-4 flex items-center justify-between gap-4 text-[11px] font-bold uppercase tracking-[0.18em] opacity-60">
+            <span>{theme.emoji} Scribe study pack</span>
+            <span>
+              {new Date().toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
+          </div>
           <input
             value={doc.title}
             onChange={(e) => setDoc({ ...doc, title: e.target.value })}
             className={cn(
-              "w-full bg-transparent pb-2 text-2xl font-bold tracking-tight outline-none",
+              "w-full bg-transparent pb-2 text-center text-3xl font-bold tracking-tight outline-none",
               theme.heading,
             )}
             aria-label="Document title"
           />
-          <span className="shrink-0 pt-1 text-[11px] font-semibold opacity-60">
-            {theme.emoji} Scribe · scribe.study
-          </span>
-        </div>
+          <p className="mt-1 text-center text-xs font-semibold opacity-60">
+            {doc.sections.length}{" "}
+            {doc.sections.length === 1 ? "section" : "sections"} · made with
+            Scribe · scribe.study
+          </p>
+          <div className="mt-6 flex flex-wrap items-end gap-x-8 gap-y-3 text-sm font-semibold">
+            <span className="flex flex-1 min-w-40 items-baseline gap-2">
+              Name
+              <span className="flex-1 border-b border-current/40" />
+            </span>
+            <span className="flex flex-1 min-w-32 items-baseline gap-2">
+              Class
+              <span className="flex-1 border-b border-current/40" />
+            </span>
+            <span className="flex flex-1 min-w-32 items-baseline gap-2">
+              Date
+              <span className="flex-1 border-b border-current/40" />
+            </span>
+          </div>
+        </header>
 
         <div className="space-y-5">
           {doc.sections.map((section, i) => (
             <section
               key={i}
-              className={cn("overflow-hidden", theme.section)}
+              className={cn(
+                "overflow-hidden break-inside-avoid",
+                theme.section,
+              )}
             >
               <div
                 className={cn(
@@ -235,6 +288,9 @@ function ExportEditor() {
                   theme.sectionHeading,
                 )}
               >
+                <span className="shrink-0 text-sm font-bold opacity-60">
+                  {i + 1}.
+                </span>
                 <input
                   value={section.heading}
                   onChange={(e) =>
@@ -282,16 +338,23 @@ function ExportEditor() {
                     aria-label={`Section ${i + 1} content`}
                   />
                 ) : (
-                  <MarkdownText text={section.body} />
+                  <MarkdownText
+                    text={
+                      showAnswers
+                        ? section.body
+                        : stripAnswerLines(section.body)
+                    }
+                  />
                 )}
               </div>
             </section>
           ))}
         </div>
 
-        <p className="mt-8 border-t border-current/20 pt-3 text-center text-[10px] opacity-50">
-          Made with Scribe — scribe.study
-        </p>
+        <footer className="mt-10 flex items-center justify-between border-t border-current/20 pt-3 text-[10px] font-semibold uppercase tracking-widest opacity-50">
+          <span>{doc.title}</span>
+          <span>Made with Scribe — scribe.study</span>
+        </footer>
       </div>
     </main>
   );

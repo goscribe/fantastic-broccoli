@@ -12,7 +12,7 @@ import type {
   ReadingContent,
   WorksheetContent,
 } from "@/types";
-import { ReadingBody } from "@/components/session/reading-activity";
+import { FigureView, ReadingBody } from "@/components/session/reading-activity";
 import {
   MarkdownText,
   useResolvedFigureUrl,
@@ -85,6 +85,9 @@ function WorksheetPreview({ content }: { content: WorksheetContent }) {
                 <MarkdownText text={step.intro} />
               </p>
             )}
+            {step.figures?.map((figure) => (
+              <FigureView key={figure.id} figure={figure} />
+            ))}
             {step.parts.map((part, j) => (
               <div key={j} className="flex items-start gap-2.5">
                 <span className="shrink-0 mt-0.5 text-[11px] font-bold text-accent-dim">

@@ -7,6 +7,7 @@ import { toast } from "@/lib/toast";
 import { recordWorksheetQuestionProgress } from "@/lib/api/study-session";
 import { useActivityDraft } from "@/lib/use-activity-draft";
 import { WorksheetFigureCard } from "@/components/graphics/worksheet-figures";
+import { FigureView } from "@/components/session/reading-activity";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { DrawingCanvas } from "@/components/ui/drawing-canvas";
 import { Button } from "@/components/ui/button";
@@ -177,6 +178,9 @@ export function WorksheetActivity({
         )}
 
         {step.figure && <WorksheetFigureCard data={step.figure} />}
+        {step.figures?.map((figure) => (
+          <FigureView key={figure.id} figure={figure} />
+        ))}
 
         {/* Sub-questions */}
         <div className="space-y-4">
