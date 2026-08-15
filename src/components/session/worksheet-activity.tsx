@@ -8,7 +8,7 @@ import { recordWorksheetQuestionProgress } from "@/lib/api/study-session";
 import { useActivityDraft } from "@/lib/use-activity-draft";
 import { WorksheetFigureCard } from "@/components/graphics/worksheet-figures";
 import { FigureView } from "@/components/session/reading-activity";
-import { MarkdownText } from "@/components/ui/markdown-text";
+import { MarkdownText, MathText } from "@/components/ui/markdown-text";
 import { DrawingCanvas } from "@/components/ui/drawing-canvas";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -147,7 +147,7 @@ export function WorksheetActivity({
       <div className="pb-4 border-b border-border">
         <div className="flex items-center justify-between gap-4">
           <p className="text-sm font-semibold">
-            Question {stepIndex + 1} — {step.title}
+            Question {stepIndex + 1} — <MathText text={step.title} />
           </p>
           <span className="text-xs text-muted-foreground shrink-0 tabular-nums">
             {stepIndex + 1} of {content.steps.length} · {totalMarks} marks

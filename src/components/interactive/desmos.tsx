@@ -67,7 +67,11 @@ function loadDesmos(): Promise<DesmosAPI> {
  * as math instead of raw source.
  */
 function formatLabel(label: string): string {
-  if (label.includes("`") || !label.includes("\\")) return label;
+  if (label.includes("`")) return label;
+  if (/\$[^$]+\$/.test(label)) {
+    return label.replace(/\$([^$]+)\$/g, "`$1`");
+  }
+  if (!label.includes("\\")) return label;
   return `\`${label}\``;
 }
 

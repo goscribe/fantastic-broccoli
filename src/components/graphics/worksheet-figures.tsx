@@ -1,4 +1,5 @@
 import { WorksheetFigure } from "@/types";
+import { MathText } from "@/components/ui/markdown-text";
 
 function EnergyLevelsDiagram() {
   return (
@@ -145,7 +146,9 @@ export function WorksheetFigureCard({ data }: { data: WorksheetFigure }) {
   return (
     <figure className="rounded-xl border border-border overflow-hidden bg-card">
       <div className="border-b border-border bg-muted/40 px-3.5 py-2 flex items-center justify-between gap-3">
-        <span className="text-xs font-semibold">{data.title}</span>
+        <span className="text-xs font-semibold">
+          <MathText text={data.title} />
+        </span>
         {data.source && (
           <span className="text-[11px] text-faint shrink-0">
             from {data.source.file} · p. {data.source.page}
@@ -157,7 +160,7 @@ export function WorksheetFigureCard({ data }: { data: WorksheetFigure }) {
       </div>
       {data.caption && (
         <figcaption className="px-4 pb-3 text-xs text-muted-foreground">
-          {data.caption}
+          <MathText text={data.caption} />
         </figcaption>
       )}
     </figure>

@@ -73,7 +73,7 @@ function WorksheetPreview({ content }: { content: WorksheetContent }) {
         >
           <div className="flex items-center justify-between gap-3 border-b border-border bg-muted/40 px-3.5 py-2">
             <p className="text-xs font-semibold truncate">
-              {step.title || `Question ${i + 1}`}
+              <MarkdownText text={step.title || `Question ${i + 1}`} />
             </p>
             <span className="shrink-0 text-[10px] font-semibold text-faint tabular-nums">
               {step.parts.reduce((s, p) => s + (p.marks ?? 1), 0)} marks
@@ -248,7 +248,7 @@ function FigurePreview({ content }: { content: Record<string, unknown> }) {
       <img src={url} alt={caption || "Figure"} className="w-full" />
       {caption && (
         <figcaption className="px-3 py-2 text-[11px] text-muted-foreground">
-          {caption}
+          <MarkdownText text={caption} />
         </figcaption>
       )}
     </figure>

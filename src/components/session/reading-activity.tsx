@@ -172,7 +172,7 @@ function ImageFigure({ figure }: { figure: ReadingImageFigure }) {
       />
       {figure.caption && (
         <figcaption className="px-3.5 py-2 text-[11px] text-muted-foreground border-t border-border">
-          {figure.caption}
+          <MathText text={figure.caption} />
         </figcaption>
       )}
     </figure>
