@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 import { toastError } from "@/lib/toast";
 import { Sparkles, X, ArrowUp, Wand2, Plus } from "lucide-react";
@@ -118,6 +119,7 @@ export function Copilot({
   const [activeChat, setActiveChat] = useState<string | null>(null);
   const [chatsLoading, setChatsLoading] = useState(true);
   const loadedChats = useRef(new Set<string>());
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     setChatsLoading(true);
@@ -283,6 +285,11 @@ export function Copilot({
               : m,
           ),
         );
+        if (result.sessionModified && studySessionId) {
+          queryClient.invalidateQueries({
+            queryKey: ["study-session", studySessionId],
+          });
+        }
       } catch (err) {
         setMessages((prev) =>
           prev.map((m) =>
@@ -307,7 +314,7 @@ export function Copilot({
       }
       setBusy(false);
     },
-    [busy, activeChat, workspaceId, context, studySessionId],
+    [busy, activeChat, workspaceId, context, studySessionId, queryClient],
   );
 
   const chatMessages = messages.filter(

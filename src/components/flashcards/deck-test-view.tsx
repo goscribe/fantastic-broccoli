@@ -4,23 +4,30 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import { recordFlashcardStudySession } from "@/lib/api/study-session";
 import { cn } from "@/lib/utils";
 import { Check, RotateCcw, X } from "lucide-react";
 
-interface TestQuestion {
+interface DeckEntry {
   front: string;
   back: string;
+  flashcardId?: string;
+}
+
+interface TestQuestion extends DeckEntry {
   type: "mcq" | "fill";
   options?: string[];
 }
 
 interface DeckTestViewProps {
-  entries: { front: string; back: string }[];
+  entries: DeckEntry[];
   frontLabel: string;
   backLabel: string;
+  /** Called after test attempts are persisted so callers can refetch progress. */
+  onAttemptRecorded?: () => void;
 }
 
-function buildTest(entries: { front: string; back: string }[]): TestQuestion[] {
+function buildTest(entries: DeckEntry[]): TestQuestion[] {
   const shuffled = [...entries].sort(() => Math.random() - 0.5);
   return shuffled.map((card) => {
     const type: TestQuestion["type"] =
@@ -43,6 +50,7 @@ export function DeckTestView({
   entries,
   frontLabel,
   backLabel,
+  onAttemptRecorded,
 }: DeckTestViewProps) {
   const [round, setRound] = useState(0);
   const questions = useMemo(
@@ -69,6 +77,23 @@ export function DeckTestView({
     setAnswers({});
     setSubmitted(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const submit = () => {
+    setSubmitted(true);
+    // Persist the whole round as SRS study attempts (old-scribe behavior).
+    const attempts = questions
+      .map((q, i) =>
+        q.flashcardId
+          ? { flashcardId: q.flashcardId, isCorrect: isCorrect(i) }
+          : null,
+      )
+      .filter((a): a is { flashcardId: string; isCorrect: boolean } => !!a);
+    if (attempts.length > 0) {
+      recordFlashcardStudySession({ attempts })
+        .then(() => onAttemptRecorded?.())
+        .catch(() => {});
+    }
   };
 
   return (
@@ -233,7 +258,7 @@ export function DeckTestView({
 
       {!submitted && (
         <div className="flex justify-center">
-          <Button onClick={() => setSubmitted(true)}>Submit test</Button>
+          <Button onClick={submit}>Submit test</Button>
         </div>
       )}
     </div>

@@ -127,7 +127,7 @@ const plans = [
     description: "Great for getting started with focused study sessions.",
     features: [
       "Everything in Free",
-      "500 tokens per month",
+      "5,000 tokens per month",
       "2 GB storage",
       "Study copilot grounded in your materials",
     ],
@@ -140,7 +140,7 @@ const plans = [
     description: "Best for power users with higher content generation limits.",
     features: [
       "Everything in Starter",
-      "700 tokens per month",
+      "10,000 tokens per month",
       "10 GB storage",
       "Higher generation limits",
     ],
