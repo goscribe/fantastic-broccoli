@@ -93,6 +93,8 @@ export interface CopilotAnswer {
   widgets: string[];
   visualizations: CopilotVisualization[];
   highlights: CopilotHighlight[];
+  /** True when the copilot modified the study session via a tool call. */
+  sessionModified?: boolean;
 }
 
 export async function askCopilot(input: {
@@ -123,13 +125,15 @@ export async function askCopilot(input: {
       (result as { visualizations?: CopilotVisualization[] }).visualizations ??
       [],
     highlights: (result as { highlights?: CopilotHighlight[] }).highlights ?? [],
+    sessionModified:
+      (result as { sessionModified?: boolean }).sessionModified ?? false,
   };
 }
 
 type StreamEvent =
   | { type: "delta"; text: string }
   | { type: "tool"; label: string }
-  | ({ type: "final" } & CopilotAnswer)
+  | ({ type: "final" } & CopilotAnswer & { sessionModified?: boolean })
   | { type: "error"; message: string };
 
 /**
@@ -194,6 +198,7 @@ export async function askCopilotStream(
         widgets: event.widgets ?? [],
         visualizations: event.visualizations ?? [],
         highlights: event.highlights ?? [],
+        sessionModified: event.sessionModified ?? false,
       };
     else if (event.type === "error") throw new Error(event.message);
   };
