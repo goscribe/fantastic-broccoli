@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useState } from "react";
+import { MathText } from "@/components/ui/markdown-text";
 
 const MIN_HEIGHT = 120;
 const MAX_HEIGHT = 900;
@@ -282,7 +283,7 @@ export function HtmlWidget({ html, title }: HtmlWidgetProps) {
       />
       {title && (
         <figcaption className="px-3.5 py-2 text-[11px] text-muted-foreground border-t border-border">
-          {title}
+          <MathText text={title} />
         </figcaption>
       )}
     </figure>

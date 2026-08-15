@@ -118,7 +118,7 @@ export function FlashcardActivity({
         </span>
       </button>
 
-      {flipped && (
+      {flipped ? (
         <div className="flex justify-center gap-3">
           <Button
             variant="secondary"
@@ -135,6 +135,20 @@ export function FlashcardActivity({
           >
             <ThumbsUp className="h-3.5 w-3.5 mr-1.5" />
             Knew it
+          </Button>
+        </div>
+      ) : (
+        <div className="flex justify-center">
+          <Button
+            variant="secondary"
+            size="sm"
+            disabled={currentIndex >= content.cards.length - 1}
+            onClick={() => {
+              setFlipped(false);
+              setCurrentIndex(currentIndex + 1);
+            }}
+          >
+            Next card <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
           </Button>
         </div>
       )}

@@ -1,6 +1,7 @@
 "use client";
 
 import { SessionActivity } from "@/types";
+import { MathText } from "@/components/ui/markdown-text";
 import { cn, formatDuration } from "@/lib/utils";
 import { Check } from "lucide-react";
 
@@ -60,7 +61,7 @@ export function ActivityItem({
             completed ? "text-faint line-through" : "text-foreground",
           )}
         >
-          {activity.title}
+          <MathText text={activity.title} />
         </span>
         <span className="block text-[11px] text-muted-foreground">
           {typeLabels[activity.type] ?? "Activity"} ·{" "}

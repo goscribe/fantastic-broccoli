@@ -6,7 +6,7 @@ import {
   type DeckWithWorkspace,
 } from "@/lib/flashcard-decks";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
-import { FlashcardsArt } from "@/components/graphics/bank-art";
+import { BankDocThumb } from "@/components/bank/bank-content";
 import { Layers } from "lucide-react";
 
 function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
@@ -14,23 +14,25 @@ function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
   return (
     <Link
       href={`/flashcards/${item.id}?ws=${workspace.id}`}
-      className="group flex items-start gap-4 rounded-2xl border border-border bg-card p-5 transition-all duration-150 hover:border-border-strong hover:-translate-y-0.5 active:translate-y-0"
+      className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-150 hover:border-border-strong hover:-translate-y-0.5 active:translate-y-0"
     >
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent-soft">
-        <FlashcardsArt className="h-8 w-8" />
-      </div>
-      <div className="min-w-0 flex-1">
-        <h3 className="truncate text-[15px] font-semibold leading-tight tracking-tight group-hover:text-accent transition-colors">
+      <BankDocThumb
+        kind={item.kind}
+        content={item.content}
+        className="aspect-square w-full rounded-none border-0 border-b border-border"
+      />
+      <div className="p-4">
+        <h3 className="truncate text-sm font-semibold leading-tight tracking-tight group-hover:text-accent transition-colors">
           {item.title}
         </h3>
-        <p className="mt-1 flex items-center gap-1.5 text-[13px] text-muted-foreground">
+        <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
           <span className="shrink-0">
             {cardCount} card{cardCount === 1 ? "" : "s"}
           </span>
           <span>·</span>
           <span className="truncate">{workspace.title}</span>
         </p>
-        <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
+        <div className="mt-2 flex flex-wrap items-center gap-1.5">
           <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-medium text-accent-dim">
             {item.kind === "VOCAB_DECK" ? "Vocab" : "Flashcards"}
           </span>
@@ -70,7 +72,7 @@ export default function FlashcardsPage() {
         </div>
       )}
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
         {(decks ?? []).map((deck) => (
           <DeckCard key={deck.item.id} deck={deck} />
         ))}
