@@ -302,6 +302,9 @@ function renderInlineWithFigures(text: string): React.ReactNode[] {
 }
 
 const HEADING_LINE = /^(#{1,4})\s+(.*)$/;
+const DETAILS_OPEN = /<details[^>]*>/i;
+const DETAILS_CLOSE = /<\/details>/i;
+const SUMMARY_TAG = /<summary[^>]*>([\s\S]*?)<\/summary>/i;
 const BULLET_LINE = /^[-*]\s+(.*)$/;
 const CODE_FENCE = /^```(\w*)\s*$/;
 const TABLE_LINE = /^\s*\|.*\|\s*$/;
@@ -358,6 +361,20 @@ function MarkdownTable({ lines }: { lines: string[] }) {
         </tbody>
       </table>
     </div>
+  );
+}
+
+/** Renders a raw `<details>`/`<summary>` block as a styled collapsible. */
+function DetailsBlock({ summary, body }: { summary: string; body: string }) {
+  return (
+    <details className="my-2 block rounded-lg border border-border bg-muted/30 px-3 py-2">
+      <summary className="cursor-pointer select-none text-sm font-medium text-foreground">
+        {renderInline(summary)}
+      </summary>
+      <span className="mt-1.5 block">
+        <MarkdownText text={body} />
+      </span>
+    </details>
   );
 }
 
@@ -447,6 +464,7 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
   let tableLines: string[] = [];
   let codeLines: string[] | null = null;
   let codeLang = "";
+  let detailsLines: string[] | null = null;
 
   const flushParagraph = () => {
     if (!paragraph.length) return;
@@ -483,7 +501,39 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
     bullets = [];
   };
 
+  const flushDetails = () => {
+    if (detailsLines === null) return;
+    const raw = detailsLines.join("\n");
+    const summaryMatch = raw.match(SUMMARY_TAG);
+    const body = raw
+      .replace(SUMMARY_TAG, "")
+      .replace(DETAILS_OPEN, "")
+      .replace(DETAILS_CLOSE, "")
+      .trim();
+    blocks.push(
+      <DetailsBlock
+        key={key++}
+        summary={summaryMatch?.[1]?.trim() || "Show more"}
+        body={body}
+      />,
+    );
+    detailsLines = null;
+  };
+
   for (const line of lines) {
+    if (detailsLines !== null) {
+      detailsLines.push(line);
+      if (DETAILS_CLOSE.test(line)) flushDetails();
+      continue;
+    }
+    if (DETAILS_OPEN.test(line)) {
+      flushParagraph();
+      flushBullets();
+      flushTable();
+      detailsLines = [line];
+      if (DETAILS_CLOSE.test(line)) flushDetails();
+      continue;
+    }
     const fence = line.match(CODE_FENCE);
     if (codeLines !== null) {
       if (fence) {
@@ -546,6 +596,7 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
   flushParagraph();
   flushBullets();
   flushTable();
+  flushDetails();
   if (codeLines !== null)
     blocks.push(
       codeLang === "mermaid" ? (

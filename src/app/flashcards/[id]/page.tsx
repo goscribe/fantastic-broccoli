@@ -4,7 +4,7 @@ import { Suspense, useMemo, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { studySessionApi } from "@/lib/api/study-session";
+import { fetchDeckProgress, studySessionApi } from "@/lib/api/study-session";
 import { createStudySession } from "@/lib/api/study";
 import { Button } from "@/components/ui/button";
 import { deckEntries } from "@/components/bank/bank-content";
@@ -44,6 +44,21 @@ function FlashcardDeck() {
 
   const item = items?.find((i) => i.id === deckId);
   const deck = useMemo(() => (item ? deckEntries(item) : null), [item]);
+
+  const hasPooledCards = !!deck?.entries.some((e) => e.flashcardId);
+  const { data: progress, refetch: refetchProgress } = useQuery({
+    queryKey: ["deck-progress", deckId],
+    queryFn: () => fetchDeckProgress(deckId),
+    enabled: hasPooledCards,
+  });
+
+  const masteredCount = useMemo(
+    () =>
+      (progress ?? []).filter(
+        (p) => (p.progress?.masteryLevel ?? 0) >= 80,
+      ).length,
+    [progress],
+  );
 
   const [mode, setMode] = useState<DeckMode>("cards");
 
@@ -115,6 +130,12 @@ function FlashcardDeck() {
                   <span>{item.topic}</span>
                 </>
               )}
+              {hasPooledCards && progress && (
+                <>
+                  <span>·</span>
+                  <span>{masteredCount} mastered</span>
+                </>
+              )}
             </p>
           </div>
 
@@ -168,6 +189,8 @@ function FlashcardDeck() {
           entries={deck.entries}
           frontLabel={deck.frontLabel}
           backLabel={deck.backLabel}
+          progress={progress}
+          onAttemptRecorded={() => refetchProgress()}
         />
       )}
       {mode === "test" && (
@@ -175,6 +198,7 @@ function FlashcardDeck() {
           entries={deck.entries}
           frontLabel={deck.frontLabel}
           backLabel={deck.backLabel}
+          onAttemptRecorded={() => refetchProgress()}
         />
       )}
     </div>

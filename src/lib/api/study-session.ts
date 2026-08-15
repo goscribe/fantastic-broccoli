@@ -438,6 +438,37 @@ export const recordFlashcardAttempt = (input: {
   studySessionId?: string;
 }) => rpc<unknown>("flashcards.recordStudyAttempt", "mutation", input);
 
+export interface DeckCardProgress {
+  flashcardId: string;
+  progress: {
+    timesStudied: number;
+    masteryLevel: number;
+    nextReviewAt: string | Date | null;
+  } | null;
+}
+
+/** Per-card SRS progress for a flashcard deck artifact. */
+export const fetchDeckProgress = (artifactId: string) =>
+  rpc<DeckCardProgress[]>("flashcards.getSetProgress", "query", {
+    artifactId,
+  });
+
+/** AI-grades a typed answer against a pooled `Flashcard` row. */
+export const gradeFlashcardTypedAnswer = (input: {
+  flashcardId: string;
+  userAnswer: string;
+}) =>
+  rpc<{ isCorrect: boolean; reason: string }>(
+    "flashcards.gradeTypedAnswer",
+    "mutation",
+    input,
+  );
+
+/** Records a batch of SRS study attempts (one full study round). */
+export const recordFlashcardStudySession = (input: {
+  attempts: { flashcardId: string; isCorrect: boolean; timeSpentMs?: number }[];
+}) => rpc<unknown>("flashcards.recordStudySession", "mutation", input);
+
 export interface MasteryMatrixRow {
   topic: string;
   /** 0-100, or null when the topic has never been studied. */

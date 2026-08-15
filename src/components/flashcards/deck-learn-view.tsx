@@ -4,28 +4,81 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import {
+  gradeFlashcardTypedAnswer,
+  recordFlashcardAttempt,
+  type DeckCardProgress,
+} from "@/lib/api/study-session";
 import { cn } from "@/lib/utils";
 import { Check, RotateCcw, SkipForward, X } from "lucide-react";
 
 type QuestionMode = "mcq" | "type";
 
-interface LearnCard {
+interface DeckEntry {
   front: string;
   back: string;
+  flashcardId?: string;
+}
+
+interface LearnCard extends DeckEntry {
   mode: QuestionMode;
   options?: string[];
 }
 
 interface DeckLearnViewProps {
-  entries: { front: string; back: string }[];
+  entries: DeckEntry[];
   frontLabel: string;
   backLabel: string;
+  /** Per-card SRS progress, when the deck is backed by pooled flashcards. */
+  progress?: DeckCardProgress[];
+  /** Called after an attempt is persisted so callers can refetch progress. */
+  onAttemptRecorded?: () => void;
+}
+
+type CardStatus = "new" | "learning" | "reviewing" | "mastered";
+
+function cardStatus(
+  progress: DeckCardProgress["progress"] | undefined,
+): CardStatus {
+  if (!progress || progress.timesStudied === 0) return "new";
+  if (progress.masteryLevel >= 80) return "mastered";
+  if (progress.masteryLevel >= 40) return "reviewing";
+  return "learning";
+}
+
+const STATUS_LABEL: Record<CardStatus, string> = {
+  new: "New",
+  learning: "Learning",
+  reviewing: "Reviewing",
+  mastered: "Mastered",
+};
+
+const STATUS_CLASS: Record<CardStatus, string> = {
+  new: "bg-accent-soft text-accent",
+  learning: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+  reviewing: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
+  mastered: "bg-energy-soft text-energy",
+};
+
+function isDue(progress: DeckCardProgress["progress"] | undefined): boolean {
+  if (!progress || progress.timesStudied === 0) return true;
+  if (!progress.nextReviewAt) return true;
+  return new Date(progress.nextReviewAt).getTime() <= Date.now();
 }
 
 function buildLearnCards(
-  entries: { front: string; back: string }[],
+  entries: DeckEntry[],
+  progressByCard: Map<string, DeckCardProgress["progress"]>,
 ): LearnCard[] {
-  const shuffled = [...entries].sort(() => Math.random() - 0.5);
+  // Due cards first (never studied or past their SRS review date), like the
+  // old scribe learn flow; shuffled within each group.
+  const shuffled = [...entries]
+    .sort(() => Math.random() - 0.5)
+    .sort((a, b) => {
+      const dueA = isDue(a.flashcardId ? progressByCard.get(a.flashcardId) : undefined);
+      const dueB = isDue(b.flashcardId ? progressByCard.get(b.flashcardId) : undefined);
+      return Number(dueB) - Number(dueA);
+    });
   return shuffled.map((card) => {
     const mode: QuestionMode =
       entries.length >= 4 && Math.random() < 0.6 ? "mcq" : "type";
@@ -47,11 +100,22 @@ export function DeckLearnView({
   entries,
   frontLabel,
   backLabel,
+  progress,
+  onAttemptRecorded,
 }: DeckLearnViewProps) {
+  const progressByCard = useMemo(
+    () =>
+      new Map(
+        (progress ?? []).map((p) => [p.flashcardId, p.progress] as const),
+      ),
+    [progress],
+  );
+
   const [round, setRound] = useState(0);
   const cards = useMemo(
-    () => buildLearnCards(entries),
-    // Rebuild on restart and when the deck changes.
+    () => buildLearnCards(entries, progressByCard),
+    // Rebuild on restart and when the deck changes (not on progress refetch,
+    // which would reshuffle mid-session).
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [entries, round],
   );
@@ -61,16 +125,24 @@ export function DeckLearnView({
   const [typedAnswer, setTypedAnswer] = useState("");
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [gradingReason, setGradingReason] = useState("");
+  const [grading, setGrading] = useState(false);
   const [score, setScore] = useState({ correct: 0, total: 0 });
   const [finished, setFinished] = useState(false);
+  const [cardStartTime, setCardStartTime] = useState(() => Date.now());
 
   const card = cards[currentIndex];
+  const status = card?.flashcardId
+    ? cardStatus(progressByCard.get(card.flashcardId))
+    : null;
 
   const resetCard = () => {
     setSelectedOption(null);
     setTypedAnswer("");
     setShowFeedback(false);
     setIsCorrect(false);
+    setGradingReason("");
+    setCardStartTime(Date.now());
   };
 
   const restart = () => {
@@ -81,23 +153,51 @@ export function DeckLearnView({
     resetCard();
   };
 
-  const checkAnswer = () => {
-    if (!card || showFeedback) return;
+  const checkAnswer = async () => {
+    if (!card || showFeedback || grading) return;
     let correct = false;
+    let reason = "";
     if (card.mode === "mcq") {
       if (selectedOption === null) return;
       correct = card.options![selectedOption] === card.back;
     } else {
       if (!typedAnswer.trim()) return;
-      correct =
-        typedAnswer.trim().toLowerCase() === card.back.trim().toLowerCase();
+      if (card.flashcardId) {
+        setGrading(true);
+        try {
+          const result = await gradeFlashcardTypedAnswer({
+            flashcardId: card.flashcardId,
+            userAnswer: typedAnswer,
+          });
+          correct = result.isCorrect;
+          reason = result.reason;
+        } catch {
+          correct =
+            typedAnswer.trim().toLowerCase() === card.back.trim().toLowerCase();
+        } finally {
+          setGrading(false);
+        }
+      } else {
+        correct =
+          typedAnswer.trim().toLowerCase() === card.back.trim().toLowerCase();
+      }
     }
     setIsCorrect(correct);
+    setGradingReason(reason);
     setShowFeedback(true);
     setScore((prev) => ({
       correct: prev.correct + (correct ? 1 : 0),
       total: prev.total + 1,
     }));
+    if (card.flashcardId) {
+      recordFlashcardAttempt({
+        flashcardId: card.flashcardId,
+        isCorrect: correct,
+        timeSpentMs: Date.now() - cardStartTime,
+      })
+        .then(() => onAttemptRecorded?.())
+        .catch(() => {});
+    }
   };
 
   const nextCard = () => {
@@ -171,8 +271,20 @@ export function DeckLearnView({
     <div className="space-y-5">
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
-          <span>
-            Question {currentIndex + 1} of {cards.length}
+          <span className="flex items-center gap-2">
+            <span>
+              Question {currentIndex + 1} of {cards.length}
+            </span>
+            {status && (
+              <span
+                className={cn(
+                  "rounded-full px-2 py-0.5 text-[10px] font-semibold",
+                  STATUS_CLASS[status],
+                )}
+              >
+                {STATUS_LABEL[status]}
+              </span>
+            )}
           </span>
           <span className="flex items-center gap-3">
             <button
@@ -315,6 +427,11 @@ export function DeckLearnView({
             )}
           >
             {isCorrect ? "Correct — nice work." : "Not quite — keep going."}
+            {gradingReason && (
+              <p className="mt-1.5 text-xs font-normal opacity-90">
+                {gradingReason}
+              </p>
+            )}
           </div>
         )}
       </div>
@@ -326,12 +443,13 @@ export function DeckLearnView({
               className="flex-1"
               onClick={checkAnswer}
               disabled={
-                card.mode === "mcq"
+                grading ||
+                (card.mode === "mcq"
                   ? selectedOption === null
-                  : !typedAnswer.trim()
+                  : !typedAnswer.trim())
               }
             >
-              Check answer
+              {grading ? "Checking…" : "Check answer"}
             </Button>
             <Button
               variant="outline"

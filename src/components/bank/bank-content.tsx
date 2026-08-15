@@ -355,7 +355,7 @@ export function BankDocThumb({
 
 /** Front/back pairs for flashcard and vocab decks, null for other kinds. */
 export function deckEntries(item: ApiArtifactBankItem): {
-  entries: { front: string; back: string }[];
+  entries: { front: string; back: string; flashcardId?: string }[];
   frontLabel: string;
   backLabel: string;
 } | null {
@@ -376,6 +376,7 @@ export function deckEntries(item: ApiArtifactBankItem): {
       entries: normalized.terms.map((t) => ({
         front: t.term,
         back: t.definition,
+        flashcardId: t.flashcardId,
       })),
       frontLabel: "Term",
       backLabel: "Definition",
