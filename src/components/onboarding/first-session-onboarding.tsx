@@ -33,6 +33,7 @@ import {
   CURRICULUM_PRESETS,
   type CurriculumPreset,
 } from "./curriculum-presets";
+import { WarmupQuiz } from "./warmup-quiz";
 
 /**
  * Upload-first onboarding for users who have never started a study session:
@@ -194,6 +195,10 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   const startedRef = useRef(!!pending);
 
   const workspaceIdRef = useRef<string | null>(pending?.workspaceId ?? null);
+  // Mirrors workspaceIdRef for render use (the warm-up quiz needs it).
+  const [warmupWorkspaceId, setWarmupWorkspaceId] = useState<string | null>(
+    pending?.workspaceId ?? null,
+  );
   const [title, setTitle] = useState(pending?.title ?? "My first session");
   const creatingSessionRef = useRef(false);
   const [analysisDone, setAnalysisDone] = useState(false);
@@ -284,6 +289,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
         const workspaceId = await createWorkspace(sessionTitle);
         if (!workspaceId) throw new Error("Could not create a workspace");
         workspaceIdRef.current = workspaceId;
+        setWarmupWorkspaceId(workspaceId);
         const session = await createStudySession({
           workspaceId,
           title: sessionTitle,
@@ -318,6 +324,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
       const workspaceId = await createWorkspace(sessionTitle);
       if (!workspaceId) throw new Error("Could not create a workspace");
       workspaceIdRef.current = workspaceId;
+      setWarmupWorkspaceId(workspaceId);
 
       const fileIds = await uploadFiles(workspaceId, files);
       await analyzeFiles(workspaceId, fileIds);
@@ -372,6 +379,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
               </div>
             ))}
           </div>
+          {warmupWorkspaceId && <WarmupQuiz workspaceId={warmupWorkspaceId} />}
           <PlanUpsell />
           <p className="mt-6 text-xs text-muted-foreground">
             This can take a couple of minutes for large files — hang tight.
