@@ -153,12 +153,21 @@ export default function AdminQualityPage() {
       )}
 
       <Table
-        headers={["Workspace", "Fit", "Quality", "Flags", "Model", "Assessed", ""]}
+        headers={[
+          "Workspace",
+          "Fit",
+          "Quality",
+          "Flags",
+          "Model",
+          "Last activity",
+          "Assessed",
+          "",
+        ]}
       >
         {isLoading ? (
-          <TableSkeletonRows cols={7} />
+          <TableSkeletonRows cols={8} />
         ) : !assessments || assessments.length === 0 ? (
-          <EmptyRow colSpan={7}>
+          <EmptyRow colSpan={8}>
             No assessments yet — run &ldquo;Assess recent workspaces&rdquo; to grade
             the latest generated content.
           </EmptyRow>
@@ -237,6 +246,11 @@ function AssessmentRow({
         </Td>
         <Td className="text-xs text-muted-foreground">{assessment.model}</Td>
         <Td className="whitespace-nowrap text-xs text-muted-foreground">
+          {assessment.workspace?.updatedAt
+            ? formatRelativeDate(assessment.workspace.updatedAt)
+            : "—"}
+        </Td>
+        <Td className="whitespace-nowrap text-xs text-muted-foreground">
           {formatRelativeDate(assessment.createdAt)}
         </Td>
         <Td>
@@ -259,7 +273,7 @@ function AssessmentRow({
       </tr>
       {expanded && (
         <tr>
-          <td colSpan={7} className="bg-muted/30 px-4 py-3">
+          <td colSpan={8} className="bg-muted/30 px-4 py-3">
             <div className="grid gap-3 text-sm md:grid-cols-2">
               <div>
                 <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-faint">
