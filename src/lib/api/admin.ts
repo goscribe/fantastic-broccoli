@@ -380,7 +380,7 @@ export interface QualityAssessment {
     artifactChars: number;
   } | null;
   createdAt: Date;
-  workspace?: { title: string; ownerId: string };
+  workspace?: { title: string; ownerId: string; updatedAt: Date };
 }
 
 export interface QualitySummary {
