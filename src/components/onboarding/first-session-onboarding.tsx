@@ -515,7 +515,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
                   className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground disabled:opacity-40 hover:opacity-90 transition-opacity"
                 >
                   <Sparkles className="h-3.5 w-3.5" />
-                  Generate session
+                  Generate session · 20 tokens
                 </button>
               </div>
             </>

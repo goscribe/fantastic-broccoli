@@ -239,17 +239,19 @@ export default function HomePage() {
         {/* Gradient banner */}
         <section
           data-tour="home-banner"
-          className="relative overflow-hidden rounded-2xl bg-ink p-7 text-white animate-fade-up"
+          className="relative rounded-2xl bg-ink p-7 text-white animate-fade-up"
         >
+          {/* Gradients are clipped individually (not via overflow-hidden on the
+              section) so the New-workspace dropdown can extend past the banner. */}
           <div
-            className="pointer-events-none absolute inset-0"
+            className="pointer-events-none absolute inset-0 rounded-2xl"
             style={{
               background:
                 "radial-gradient(ellipse 60% 120% at 90% 0%, rgba(105,82,224,0.35) 0%, transparent 60%)",
             }}
           />
           <div
-            className="pointer-events-none absolute inset-0"
+            className="pointer-events-none absolute inset-0 rounded-2xl"
             style={{
               background:
                 "radial-gradient(ellipse 40% 90% at 0% 100%, rgba(105,82,224,0.12) 0%, transparent 55%)",
