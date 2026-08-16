@@ -39,6 +39,10 @@ const INTAKE_BRIEF = `You are Scribe's study intake bot. The user is setting up 
 - Once you know the subject and at least one concrete topic, tell them you have enough and that they should press "Start study session" to begin.
 Do not generate study content yourself — the session generator does that.`;
 
+// The intake brief instructs the bot to mention "Start study session" once it
+// has enough to go on; that mention is what surfaces the embedded CTA.
+const READY_RE = /start (your |the |a )?(study )?session/i;
+
 const SUGGESTIONS = [
   "Practice IB Math AA integration by parts",
   "Quiz me on AP Bio cellular respiration",
@@ -62,6 +66,7 @@ export default function StudyBotPage() {
   const [hasWorkspace, setHasWorkspace] = useState(false);
 
   const started = messages.length > 0;
+  const botReplies = messages.filter((m) => m.role === "bot" && m.text).length;
 
   const scrollDown = () =>
     setTimeout(
@@ -309,32 +314,9 @@ export default function StudyBotPage() {
   return (
     <main className="flex flex-1 flex-col">
       <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-5">
-        <div className="mb-4 flex items-center justify-between gap-3 rounded-2xl border border-border bg-card px-4 py-3">
-          <div className="flex items-center gap-2">
-            <MessageCircle className="h-4 w-4 text-accent" />
-            <h1 className="text-sm font-semibold">Study bot</h1>
-          </div>
-          {hasWorkspace && (
-            <Button
-              size="sm"
-              onClick={() => void startSession()}
-              disabled={starting}
-              className="shrink-0"
-            >
-              {starting ? (
-                <>
-                  <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
-                  Building your session…
-                </>
-              ) : (
-                <>
-                  <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                  Start session · 20 tokens
-                  <ArrowRight className="h-3.5 w-3.5 ml-1" />
-                </>
-              )}
-            </Button>
-          )}
+        <div className="mb-4 flex items-center gap-2 rounded-2xl border border-border bg-card px-4 py-3">
+          <MessageCircle className="h-4 w-4 text-accent" />
+          <h1 className="text-sm font-semibold">Study bot</h1>
         </div>
         <div className="flex flex-1 flex-col gap-4 overflow-y-auto pb-4">
           {/* Spacer pushes a short conversation down next to the composer
@@ -366,6 +348,33 @@ export default function StudyBotPage() {
                     Thinking…
                   </span>
                 )}
+                {m.role === "bot" &&
+                  i === messages.length - 1 &&
+                  hasWorkspace &&
+                  !busy &&
+                  // Fallback after a few turns so the CTA can't get stuck
+                  // behind the bot never saying the magic phrase.
+                  (READY_RE.test(m.text) || botReplies >= 3) && (
+                    <Button
+                      size="sm"
+                      onClick={() => void startSession()}
+                      disabled={starting}
+                      className="mt-2.5 flex"
+                    >
+                      {starting ? (
+                        <>
+                          <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
+                          Building your session…
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="h-3.5 w-3.5 mr-1.5" />
+                          Start study session · 20 tokens
+                          <ArrowRight className="h-3.5 w-3.5 ml-1" />
+                        </>
+                      )}
+                    </Button>
+                  )}
                 {m.files && m.files.length > 0 && (
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {m.files.map((name, j) => (
