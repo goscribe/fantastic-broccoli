@@ -190,6 +190,8 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   const [title, setTitle] = useState(pending?.title ?? "My first session");
   const creatingSessionRef = useRef(false);
   const [analysisDone, setAnalysisDone] = useState(false);
+  /** False when every uploaded file failed analysis — nothing to plan from. */
+  const anyMaterialAnalyzedRef = useRef(true);
 
   // Fallback for missing/unreliable Pusher config: poll the workspace until
   // every uploaded material is analyzed.
@@ -207,6 +209,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
               (m) => m.analyzed || m.analysisStatus === "FAILED",
             )
           ) {
+            anyMaterialAnalyzedRef.current = materials.some((m) => m.analyzed);
             setAnalysisDone(true);
           }
         })
@@ -240,6 +243,9 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
       title,
       depth: "moderate",
       durationMinutes: 30,
+      // Nothing was readable, so give the planner the title to work from
+      // rather than failing with "no analyzed materials".
+      ...(anyMaterialAnalyzedRef.current ? {} : { topics: title }),
     })
       .then((session) => {
         if (session) {
