@@ -20,6 +20,7 @@ import { askCopilotStream, createConversation } from "@/lib/api/copilot";
 import { emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
+import { MarkdownText } from "@/components/ui/markdown-text";
 
 interface ChatMessage {
   role: "user" | "bot";
@@ -185,7 +186,7 @@ export default function StudyBotPage() {
   };
 
   const composer = (
-    <div className="w-full rounded-2xl border border-border bg-card p-2.5 shadow-sm transition-shadow focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15">
+    <div className="w-full rounded-2xl border border-border bg-card p-2.5 focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15">
       {pendingFiles.length > 0 && (
         <div className="mb-2 flex flex-wrap gap-1.5 px-1 pt-1">
           {pendingFiles.map((f, i) => (
@@ -308,7 +309,7 @@ export default function StudyBotPage() {
   return (
     <main className="flex flex-1 flex-col">
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 py-5">
-        <div className="mb-4 flex items-center justify-between gap-3 rounded-2xl border border-border bg-card px-4 py-3 shadow-sm">
+        <div className="mb-4 flex items-center justify-between gap-3 rounded-2xl border border-border bg-card px-4 py-3">
           <div className="flex items-center gap-2">
             <MessageCircle className="h-4 w-4 text-accent" />
             <h1 className="text-sm font-semibold">Study bot</h1>
@@ -346,19 +347,22 @@ export default function StudyBotPage() {
             >
               <div
                 className={cn(
-                  "max-w-[85%] px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap",
+                  "max-w-[85%] px-3.5 py-2.5 text-sm leading-relaxed",
                   m.role === "user"
-                    ? "rounded-2xl rounded-br-md bg-accent text-accent-foreground shadow-sm"
-                    : "rounded-2xl rounded-bl-md border border-border bg-card shadow-sm",
+                    ? "rounded-2xl rounded-br-md bg-accent text-accent-foreground whitespace-pre-wrap"
+                    : "rounded-2xl rounded-bl-md border border-border bg-card",
                 )}
               >
-                {m.text ||
-                  (m.role === "bot" && (
-                    <span className="inline-flex items-center gap-1.5 text-faint">
-                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                      Thinking…
-                    </span>
-                  ))}
+                {m.role === "bot" && m.text ? (
+                  <MarkdownText text={m.text} />
+                ) : null}
+                {m.role !== "bot" && m.text}
+                {!m.text && m.role === "bot" && (
+                  <span className="inline-flex items-center gap-1.5 text-faint">
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    Thinking…
+                  </span>
+                )}
                 {m.files && m.files.length > 0 && (
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {m.files.map((name, j) => (
