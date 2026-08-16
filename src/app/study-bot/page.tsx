@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import {
   ArrowRight,
   ArrowUp,
+  FileText,
   Loader2,
-  MessageCircle,
   Paperclip,
   Sparkles,
   X,
@@ -39,6 +39,13 @@ Do not generate study content yourself — the session generator does that.`;
 
 const READY_RE = /enough|start study session|ready to (start|go|begin)/i;
 
+const SUGGESTIONS = [
+  "Practice IB Math AA integration by parts",
+  "Quiz me on AP Bio cellular respiration",
+  "Help me revise GCSE chemistry bonding",
+  "Drill Spanish preterite vs imperfect",
+];
+
 export default function StudyBotPage() {
   const router = useRouter();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -67,8 +74,8 @@ export default function StudyBotPage() {
       50,
     );
 
-  const send = async () => {
-    const text = input.trim();
+  const send = async (preset?: string) => {
+    const text = (preset ?? input).trim();
     if ((!text && pendingFiles.length === 0) || busy) return;
     const files = pendingFiles;
     setInput("");
@@ -185,15 +192,16 @@ export default function StudyBotPage() {
   };
 
   const composer = (
-    <div className="w-full">
+    <div className="w-full rounded-2xl border border-border bg-card p-2.5 shadow-sm transition-shadow focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15">
       {pendingFiles.length > 0 && (
-        <div className="mb-2 flex flex-wrap gap-1.5">
+        <div className="mb-2 flex flex-wrap gap-1.5 px-1 pt-1">
           {pendingFiles.map((f, i) => (
             <span
               key={`${f.name}-${i}`}
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-muted px-2.5 py-1 text-[11px] font-medium"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted px-2.5 py-1 text-[11px] font-medium"
             >
-              {f.name}
+              <FileText className="h-3 w-3 text-accent" />
+              <span className="max-w-[10rem] truncate">{f.name}</span>
               <button
                 type="button"
                 aria-label={`Remove ${f.name}`}
@@ -213,51 +221,59 @@ export default function StudyBotPage() {
           e.preventDefault();
           void send();
         }}
-        className="relative"
       >
-        <input
-          ref={fileInputRef}
-          type="file"
-          multiple
-          accept="application/pdf,image/*,audio/*,video/*,.doc,.docx,.ppt,.pptx,.txt,.md"
-          className="hidden"
-          onChange={(e) => {
-            const chosen = Array.from(e.target.files ?? []);
-            e.target.value = "";
-            if (chosen.length > 0)
-              setPendingFiles((prev) => [...prev, ...chosen]);
-          }}
-        />
-        <button
-          type="button"
-          aria-label="Attach files"
-          onClick={() => fileInputRef.current?.click()}
-          className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-faint hover:bg-muted hover:text-foreground"
-        >
-          <Paperclip className="h-4 w-4" />
-        </button>
-        <input
+        <textarea
           value={input}
+          rows={started ? 1 : 2}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              void send();
+            }
+          }}
           placeholder={
             started
               ? "Reply to the study bot…"
               : "I need to practice IB Math AA integration by parts…"
           }
-          className="h-12 w-full rounded-full border border-border bg-card pl-11 pr-12 text-sm shadow-sm placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15"
+          className="block w-full resize-none bg-transparent px-2 py-1.5 text-sm placeholder:text-faint focus:outline-none"
         />
-        <button
-          type="submit"
-          aria-label="Send"
-          disabled={busy || (!input.trim() && pendingFiles.length === 0)}
-          className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-accent text-white disabled:opacity-40"
-        >
-          {busy ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <ArrowUp className="h-4 w-4" />
-          )}
-        </button>
+        <div className="flex items-center justify-between pt-1">
+          <input
+            ref={fileInputRef}
+            type="file"
+            multiple
+            accept="application/pdf,image/*,audio/*,video/*,.doc,.docx,.ppt,.pptx,.txt,.md"
+            className="hidden"
+            onChange={(e) => {
+              const chosen = Array.from(e.target.files ?? []);
+              e.target.value = "";
+              if (chosen.length > 0)
+                setPendingFiles((prev) => [...prev, ...chosen]);
+            }}
+          />
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[12px] font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
+          >
+            <Paperclip className="h-3.5 w-3.5" />
+            Attach notes
+          </button>
+          <button
+            type="submit"
+            aria-label="Send"
+            disabled={busy || (!input.trim() && pendingFiles.length === 0)}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
+          >
+            {busy ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <ArrowUp className="h-4 w-4" />
+            )}
+          </button>
+        </div>
       </form>
     </div>
   );
@@ -265,19 +281,33 @@ export default function StudyBotPage() {
   if (!started) {
     return (
       <main className="flex flex-1 flex-col items-center justify-center px-6 py-10">
-        <div className="w-full max-w-xl text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft">
-            <MessageCircle className="h-6 w-6 text-accent" />
+        <div className="w-full max-w-xl animate-fade-up">
+          <div className="text-center">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-ink text-white shadow-md">
+              <Sparkles className="h-5 w-5 text-accent-bright" />
+            </div>
+            <h1 className="mt-5 text-[26px] font-bold tracking-tight sm:text-3xl">
+              What do you need to study?
+            </h1>
+            <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+              Tell the bot your subject and topics, or drop in notes and past
+              papers — it&apos;ll set up a study session for you.
+            </p>
           </div>
-          <h1 className="mt-4 text-2xl font-bold tracking-tight">
-            What do you need to study?
-          </h1>
-          <p className="mt-1.5 text-sm text-muted-foreground">
-            Tell the bot your subject and topics, drop in notes or past papers
-            — it&apos;ll set up a study session for you.
-          </p>
-          <div className="mt-6">{composer}</div>
-          <p className="mt-3 text-[11px] text-faint">
+          <div className="mt-7">{composer}</div>
+          <div className="mt-4 flex flex-wrap justify-center gap-1.5">
+            {SUGGESTIONS.map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => void send(s)}
+                className="rounded-full border border-border bg-card px-3 py-1.5 text-[12px] font-medium text-muted-foreground transition-colors hover:border-accent hover:bg-accent-soft hover:text-accent-dim"
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+          <p className="mt-5 text-center text-[11px] text-faint">
             Chatting is free · generating the session costs 20 tokens
           </p>
         </div>
@@ -287,18 +317,30 @@ export default function StudyBotPage() {
 
   return (
     <main className="flex flex-1 flex-col">
-      <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 py-6">
-        <div className="flex items-center justify-between gap-3 pb-4">
-          <div className="flex items-center gap-2">
-            <MessageCircle className="h-4 w-4 text-accent" />
-            <h1 className="text-sm font-semibold">Study bot</h1>
+      <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 py-5">
+        <div className="sticky top-0 z-10 -mx-4 flex items-center justify-between gap-3 border-b border-border bg-background/95 px-4 pb-3 backdrop-blur">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-ink text-white">
+              <Sparkles className="h-4 w-4 text-accent-bright" />
+            </div>
+            <div>
+              <h1 className="text-sm font-semibold leading-tight">Study bot</h1>
+              <p className="text-[11px] leading-tight text-faint">
+                {ready
+                  ? "Ready when you are"
+                  : "Figuring out what to build for you"}
+              </p>
+            </div>
           </div>
           {hasWorkspace && (
             <Button
               size="sm"
               onClick={() => void startSession()}
               disabled={starting}
-              className={cn(ready && !starting && "animate-pulse")}
+              className={cn(
+                "shrink-0",
+                ready && !starting && "shadow-md shadow-accent/30",
+              )}
             >
               {starting ? (
                 <>
@@ -308,50 +350,66 @@ export default function StudyBotPage() {
               ) : (
                 <>
                   <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                  Start study session · 20 tokens
+                  Start session · 20 tokens
                   <ArrowRight className="h-3.5 w-3.5 ml-1" />
                 </>
               )}
             </Button>
           )}
         </div>
-        <div className="flex-1 space-y-3 overflow-y-auto pb-4">
+        <div className="flex-1 space-y-4 overflow-y-auto py-5">
           {messages.map((m, i) => (
             <div
               key={i}
               className={cn(
-                "flex",
+                "flex items-end gap-2",
                 m.role === "user" ? "justify-end" : "justify-start",
               )}
             >
+              {m.role === "bot" && (
+                <div className="mb-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-ink text-white">
+                  <Sparkles className="h-3 w-3 text-accent-bright" />
+                </div>
+              )}
               <div
                 className={cn(
-                  "max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm whitespace-pre-wrap",
+                  "max-w-[85%] px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap",
                   m.role === "user"
-                    ? "bg-accent text-white"
-                    : "border border-border bg-card",
+                    ? "rounded-2xl rounded-br-md bg-accent text-accent-foreground shadow-sm"
+                    : "rounded-2xl rounded-bl-md border border-border bg-card shadow-sm",
                 )}
               >
                 {m.text ||
                   (m.role === "bot" && (
-                    <Loader2 className="h-4 w-4 animate-spin text-faint" />
+                    <span className="inline-flex items-center gap-1.5 text-faint">
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                      Thinking…
+                    </span>
                   ))}
                 {m.files && m.files.length > 0 && (
-                  <p
-                    className={cn(
-                      "mt-1 text-[11px]",
-                      m.role === "user" ? "text-white/70" : "text-faint",
-                    )}
-                  >
-                    {m.files.join(", ")}
-                  </p>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {m.files.map((name, j) => (
+                      <span
+                        key={`${name}-${j}`}
+                        className={cn(
+                          "inline-flex max-w-[12rem] items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-medium",
+                          m.role === "user"
+                            ? "bg-white/15 text-white"
+                            : "bg-muted text-muted-foreground",
+                        )}
+                      >
+                        <FileText className="h-3 w-3 shrink-0" />
+                        <span className="truncate">{name}</span>
+                      </span>
+                    ))}
+                  </div>
                 )}
               </div>
             </div>
           ))}
           <div ref={bottomRef} />
         </div>
-        <div className="sticky bottom-0 bg-background pb-2 pt-2">
+        <div className="sticky bottom-0 bg-background pb-2 pt-1.5">
           {composer}
         </div>
       </div>
