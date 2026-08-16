@@ -31,6 +31,7 @@ import { cn } from "@/lib/utils";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import {
   CURRICULUM_PRESETS,
+  unitsFor,
   type CurriculumPreset,
 } from "./curriculum-presets";
 import { WarmupQuiz } from "./warmup-quiz";
@@ -273,11 +274,14 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   }, [analysisDone, router, title]);
 
   const [preset, setPreset] = useState<CurriculumPreset | null>(null);
+  const [presetSubject, setPresetSubject] = useState<string | null>(null);
+  const [presetUnits, setPresetUnits] = useState<string[]>([]);
 
-  // Curriculum path: two taps (curriculum → subject) and the planner builds a
-  // session from the subject + exam board alone — no upload needed.
+  // Curriculum path: curriculum → subject → units (multi-select where the
+  // subject has them) and the planner builds a session from board + subject +
+  // chosen units — no upload needed.
   const startFromPreset = useCallback(
-    async (chosen: CurriculumPreset, subject: string) => {
+    async (chosen: CurriculumPreset, subject: string, units: string[]) => {
       if (startedRef.current) return;
       startedRef.current = true;
       setError(null);
@@ -292,10 +296,14 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
         setWarmupWorkspaceId(workspaceId);
         const session = await createStudySession({
           workspaceId,
-          title: sessionTitle,
+          title:
+            units.length > 0
+              ? `${sessionTitle}: ${units.slice(0, 2).join(", ")}${units.length > 2 ? "…" : ""}`
+              : sessionTitle,
           depth: "moderate",
           durationMinutes: 30,
           subject,
+          topics: units.join(", ").slice(0, 2000) || undefined,
           examBoard: chosen.board,
         });
         if (session) {
@@ -395,36 +403,123 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   const unverified = user?.emailVerified === false;
 
   if (preset) {
+    const units = presetSubject ? unitsFor(preset.board, presetSubject) : [];
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
         <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
           <button
             type="button"
-            onClick={() => setPreset(null)}
+            onClick={() => {
+              if (presetSubject) {
+                setPresetSubject(null);
+                setPresetUnits([]);
+              } else {
+                setPreset(null);
+              }
+            }}
             className="float-left text-xs font-medium text-muted-foreground hover:text-foreground"
           >
             ← Back
           </button>
-          <p className="text-xs font-semibold text-accent">{preset.label}</p>
-          <h1 className="mt-2 text-2xl font-bold tracking-tight">
-            Pick a subject
-          </h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            One tap — Scribe builds your first {preset.label} study session
-            around it.
+          <p className="text-xs font-semibold text-accent">
+            {preset.label}
+            {presetSubject ? ` ${presetSubject}` : ""}
           </p>
-          <div className="mt-6 grid grid-cols-2 gap-2">
-            {preset.subjects.map((subject) => (
-              <button
-                key={subject}
-                type="button"
-                onClick={() => startFromPreset(preset, subject)}
-                className="rounded-xl border border-border bg-card px-3 py-3 text-sm font-medium hover:border-accent hover:bg-accent-soft/40 transition-colors"
-              >
-                {subject}
-              </button>
-            ))}
-          </div>
+          {!presetSubject ? (
+            <>
+              <h1 className="mt-2 text-2xl font-bold tracking-tight">
+                Pick a subject
+              </h1>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Scribe builds your first {preset.label} study session around
+                it.
+              </p>
+              <div className="mt-6 grid max-h-80 grid-cols-2 gap-2 overflow-y-auto">
+                {preset.subjects.map((subject) => (
+                  <button
+                    key={subject}
+                    type="button"
+                    onClick={() => {
+                      if (unitsFor(preset.board, subject).length > 0) {
+                        setPresetSubject(subject);
+                        setPresetUnits([]);
+                      } else {
+                        void startFromPreset(preset, subject, []);
+                      }
+                    }}
+                    className="rounded-xl border border-border bg-card px-3 py-3 text-sm font-medium hover:border-accent hover:bg-accent-soft/40 transition-colors"
+                  >
+                    {subject}
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <h1 className="mt-2 text-2xl font-bold tracking-tight">
+                Which units?
+              </h1>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Pick one or several — your session focuses on what you choose.
+              </p>
+              <div className="mt-5 max-h-72 space-y-1.5 overflow-y-auto text-left">
+                {units.map((unit) => {
+                  const selected = presetUnits.includes(unit);
+                  return (
+                    <button
+                      key={unit}
+                      type="button"
+                      onClick={() =>
+                        setPresetUnits((prev) =>
+                          selected
+                            ? prev.filter((u) => u !== unit)
+                            : [...prev, unit],
+                        )
+                      }
+                      className={cn(
+                        "flex w-full items-center gap-2.5 rounded-xl border px-3.5 py-2.5 text-sm font-medium transition-colors",
+                        selected
+                          ? "border-accent bg-accent-soft/40"
+                          : "border-border bg-card hover:border-accent/50",
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          "flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-md border",
+                          selected
+                            ? "border-accent bg-accent text-white"
+                            : "border-border",
+                        )}
+                      >
+                        {selected && <Check className="h-3 w-3" />}
+                      </span>
+                      {unit}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="mt-4 flex items-center justify-between gap-2">
+                <button
+                  type="button"
+                  onClick={() => void startFromPreset(preset, presetSubject, [])}
+                  className="text-xs font-medium text-muted-foreground hover:text-foreground"
+                >
+                  Cover everything
+                </button>
+                <button
+                  type="button"
+                  disabled={presetUnits.length === 0}
+                  onClick={() =>
+                    void startFromPreset(preset, presetSubject, presetUnits)
+                  }
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground disabled:opacity-40 hover:opacity-90 transition-opacity"
+                >
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Generate session
+                </button>
+              </div>
+            </>
+          )}
           {error && <p className="mt-3 text-xs text-rose">{error}</p>}
         </div>
       </div>

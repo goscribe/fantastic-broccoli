@@ -73,10 +73,12 @@ export default function HomePage() {
     Map<string, StudySession[]>
   >(new Map());
   const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
-  const [createMode, setCreateMode] = useState<"empty" | "curated" | undefined>();
 
-  const openWorkspaceCreate = (mode: "empty" | "curated") => {
-    setCreateMode(mode);
+  const openWorkspaceCreate = (choice: "workspace" | "bot") => {
+    if (choice === "bot") {
+      router.push("/study-bot");
+      return;
+    }
     setCreating("workspace");
   };
   const [editing, setEditing] = useState<EditTarget | null>(null);
@@ -536,7 +538,7 @@ export default function HomePage() {
                   <h2 className="text-sm font-semibold text-foreground">
                     Workspaces
                   </h2>
-                  <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
+                  <NewWorkspaceMenu align="right" onSelect={openWorkspaceCreate}>
                     {(toggle) => (
                       <button
                         type="button"
@@ -600,11 +602,7 @@ export default function HomePage() {
         {creating && (
           <CreateResourceDialog
             kind={creating}
-            initialMode={creating === "workspace" ? createMode : undefined}
-            onClose={() => {
-              setCreating(null);
-              setCreateMode(undefined);
-            }}
+            onClose={() => setCreating(null)}
             onCreated={(workspaceId) => {
               if (workspaceId) router.push(`/workspace/${workspaceId}`);
               else loadTree();
