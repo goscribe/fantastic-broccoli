@@ -329,67 +329,10 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
     );
   }
 
-  // Building a session requires a verified email server-side, so ask for
-  // verification before offering the upload instead of failing after it.
-  if (user && user.emailVerified === false) {
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
-        <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
-          <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft text-accent">
-            <MailCheck className="h-6 w-6" />
-          </div>
-          <p className="text-xs font-semibold text-accent">Welcome to Scribe</p>
-          <h1 className="mt-2 text-2xl font-bold tracking-tight">
-            Verify your email to get started
-          </h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            We sent a verification link to{" "}
-            <span className="font-medium text-foreground">
-              {user.email ?? "your inbox"}
-            </span>
-            . Click it, then come back here to build your first study session.
-            Don&apos;t see it? Check your spam folder.
-          </p>
-          <div className="mt-6 flex flex-col items-center gap-3">
-            <button
-              type="button"
-              onClick={() => refreshSession().catch(() => {})}
-              className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground hover:opacity-90 transition-opacity"
-            >
-              I&apos;ve verified my email
-            </button>
-            <button
-              type="button"
-              disabled={resendState !== "idle"}
-              onClick={() => {
-                setResendState("sending");
-                resendVerification()
-                  .then(() => setResendState("sent"))
-                  .catch((err) => {
-                    setResendState("idle");
-                    toastError(err, "Could not resend the email");
-                  });
-              }}
-              className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-60"
-            >
-              {resendState === "sent"
-                ? "Verification email sent — check your inbox"
-                : resendState === "sending"
-                  ? "Sending…"
-                  : "Resend verification email"}
-            </button>
-          </div>
-          <button
-            type="button"
-            onClick={onSkip}
-            className="mt-6 text-xs font-medium text-faint hover:text-foreground"
-          >
-            Skip for now — take me to my dashboard
-          </button>
-        </div>
-      </div>
-    );
-  }
+  // Unverified users get their first study session for free (the server
+  // allows generation until they own one), so this screen only nudges them
+  // to verify instead of blocking the upload.
+  const unverified = user?.emailVerified === false;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
@@ -446,6 +389,51 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
         </div>
 
         {error && <p className="mt-3 text-xs text-rose">{error}</p>}
+
+        {unverified && (
+          <div className="mt-4 rounded-xl border border-border bg-muted/40 px-4 py-3 text-left">
+            <p className="flex items-center gap-2 text-xs font-semibold">
+              <MailCheck className="h-3.5 w-3.5 text-accent" />
+              Your first session is free
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Verify{" "}
+              <span className="font-medium text-foreground">
+                {user?.email ?? "your email"}
+              </span>{" "}
+              to keep generating after this one.
+            </p>
+            <div className="mt-2 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => refreshSession().catch(() => {})}
+                className="text-xs font-semibold text-accent hover:underline"
+              >
+                I&apos;ve verified
+              </button>
+              <button
+                type="button"
+                disabled={resendState !== "idle"}
+                onClick={() => {
+                  setResendState("sending");
+                  resendVerification()
+                    .then(() => setResendState("sent"))
+                    .catch((err) => {
+                      setResendState("idle");
+                      toastError(err, "Could not resend the email");
+                    });
+                }}
+                className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-60"
+              >
+                {resendState === "sent"
+                  ? "Email sent — check your inbox"
+                  : resendState === "sending"
+                    ? "Sending…"
+                    : "Resend verification email"}
+              </button>
+            </div>
+          </div>
+        )}
 
         <button
           type="button"
