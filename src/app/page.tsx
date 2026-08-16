@@ -73,10 +73,12 @@ export default function HomePage() {
     Map<string, StudySession[]>
   >(new Map());
   const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
-  const [createMode, setCreateMode] = useState<"empty" | "curated" | undefined>();
 
-  const openWorkspaceCreate = (mode: "empty" | "curated") => {
-    setCreateMode(mode);
+  const openWorkspaceCreate = (choice: "workspace" | "bot") => {
+    if (choice === "bot") {
+      router.push("/study-bot");
+      return;
+    }
     setCreating("workspace");
   };
   const [editing, setEditing] = useState<EditTarget | null>(null);
@@ -237,17 +239,19 @@ export default function HomePage() {
         {/* Gradient banner */}
         <section
           data-tour="home-banner"
-          className="relative overflow-hidden rounded-2xl bg-ink p-7 text-white animate-fade-up"
+          className="relative z-10 rounded-2xl bg-ink p-7 text-white animate-fade-up"
         >
+          {/* Gradients are clipped individually (not via overflow-hidden on the
+              section) so the New-workspace dropdown can extend past the banner. */}
           <div
-            className="pointer-events-none absolute inset-0"
+            className="pointer-events-none absolute inset-0 rounded-2xl"
             style={{
               background:
                 "radial-gradient(ellipse 60% 120% at 90% 0%, rgba(105,82,224,0.35) 0%, transparent 60%)",
             }}
           />
           <div
-            className="pointer-events-none absolute inset-0"
+            className="pointer-events-none absolute inset-0 rounded-2xl"
             style={{
               background:
                 "radial-gradient(ellipse 40% 90% at 0% 100%, rgba(105,82,224,0.12) 0%, transparent 55%)",
@@ -276,7 +280,7 @@ export default function HomePage() {
                       `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
                     )
                   }
-                  className="group mt-5 inline-flex items-center gap-2 rounded-lg bg-accent-bright px-4 py-2 text-[13px] font-semibold text-ink hover:bg-white transition-colors"
+                  className="group mt-5 inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-[13px] font-semibold text-ink hover:bg-white/90 transition-colors"
                 >
                   Resume session
                   <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -287,7 +291,7 @@ export default function HomePage() {
                     <button
                       type="button"
                       onClick={toggle}
-                      className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent-bright px-4 py-3 text-sm font-semibold text-ink hover:bg-white transition-colors sm:w-auto sm:py-2 sm:text-[13px]"
+                      className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-semibold text-ink hover:bg-white/90 transition-colors sm:w-auto sm:py-2 sm:text-[13px]"
                     >
                       <Plus className="h-4 w-4" />
                       New workspace
@@ -536,7 +540,7 @@ export default function HomePage() {
                   <h2 className="text-sm font-semibold text-foreground">
                     Workspaces
                   </h2>
-                  <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
+                  <NewWorkspaceMenu align="right" onSelect={openWorkspaceCreate}>
                     {(toggle) => (
                       <button
                         type="button"
@@ -600,11 +604,7 @@ export default function HomePage() {
         {creating && (
           <CreateResourceDialog
             kind={creating}
-            initialMode={creating === "workspace" ? createMode : undefined}
-            onClose={() => {
-              setCreating(null);
-              setCreateMode(undefined);
-            }}
+            onClose={() => setCreating(null)}
             onCreated={(workspaceId) => {
               if (workspaceId) router.push(`/workspace/${workspaceId}`);
               else loadTree();

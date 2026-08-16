@@ -156,10 +156,7 @@ const analysisPhase: PhaseConfig = { phase: "analysis", steps: analysisSteps };
 function phasesForPath(pathname: string): PhaseConfig[] {
   if (pathname === "/") return [homePhase];
   if (/^\/workspace\/[^/]+\/study\/?$/.test(pathname)) {
-    return [wizardPhase, studyPhase];
-  }
-  if (/^\/workspace\/[^/]+\/materials\/?$/.test(pathname)) {
-    return [analysisPhase, materialsPhase];
+    return [wizardPhase, analysisPhase, materialsPhase, studyPhase];
   }
   return [];
 }

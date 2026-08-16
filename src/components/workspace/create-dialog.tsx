@@ -8,9 +8,18 @@ import { emitTreeChanged } from "@/lib/tree-events";
 import { toast, toastError } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, FilePlus2, GraduationCap, X } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  FilePlus2,
+  GraduationCap,
+  MessageCircle,
+  Sparkles,
+  X,
+} from "lucide-react";
 import {
   CURRICULUM_PRESETS,
+  unitsFor,
   type CurriculumPreset,
 } from "@/components/onboarding/curriculum-presets";
 import {
@@ -29,22 +38,26 @@ const folderColors = [
 ];
 
 /**
- * Dropdown for a "New workspace" trigger: Empty vs Curated, each with a
- * one-line explanation. The trigger is supplied as `children` of the
- * render-prop so callers keep their own button styling.
+ * Dropdown for a "New workspace" trigger: create a workspace (empty or
+ * curated, chosen inside the dialog) or chat with the study bot. The trigger
+ * is supplied as `children` of the render-prop so callers keep their own
+ * button styling. `align` controls which edge the panel hugs so it never
+ * overflows the viewport horizontally.
  */
 export function NewWorkspaceMenu({
   onSelect,
+  align = "left",
   children,
 }: {
-  onSelect: (mode: "empty" | "curated") => void;
+  onSelect: (choice: "workspace" | "bot") => void;
+  align?: "left" | "right";
   children: (toggle: () => void) => React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);
 
-  const pick = (mode: "empty" | "curated") => {
+  const pick = (choice: "workspace" | "bot") => {
     setOpen(false);
-    onSelect(mode);
+    onSelect(choice);
   };
 
   return (
@@ -56,35 +69,41 @@ export function NewWorkspaceMenu({
             className="fixed inset-0 z-40"
             onClick={() => setOpen(false)}
           />
-          <div className="absolute left-0 z-50 mt-2 w-72 rounded-xl border border-border bg-card p-1.5 shadow-lg">
+          <div
+            className={cn(
+              "absolute z-50 mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-xl border border-border bg-card p-1.5 shadow-lg",
+              align === "right" ? "right-0" : "left-0",
+            )}
+          >
             <button
               type="button"
-              onClick={() => pick("empty")}
+              onClick={() => pick("workspace")}
               className="flex w-full items-start gap-2.5 rounded-lg p-2.5 text-left hover:bg-muted"
             >
               <FilePlus2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-              <span>
+              <span className="min-w-0">
                 <span className="block text-[13px] font-semibold text-foreground">
-                  Empty workspace
+                  Create a workspace
                 </span>
                 <span className="block text-xs text-muted-foreground">
-                  Start blank and add your own materials.
+                  Start blank, or pick a curriculum &amp; units for a curated
+                  starter session.
                 </span>
               </span>
             </button>
             <button
               type="button"
-              onClick={() => pick("curated")}
+              onClick={() => pick("bot")}
               className="flex w-full items-start gap-2.5 rounded-lg p-2.5 text-left hover:bg-muted"
             >
-              <GraduationCap className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-              <span>
+              <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+              <span className="min-w-0">
                 <span className="block text-[13px] font-semibold text-foreground">
-                  Curated
+                  Chat with the study bot
                 </span>
                 <span className="block text-xs text-muted-foreground">
-                  Pick a curriculum &amp; subject — Scribe builds a starter
-                  study session.
+                  Tell it what you need to study, drop in files — it builds
+                  the session for you.
                 </span>
               </span>
             </button>
@@ -119,6 +138,8 @@ export function CreateResourceDialog({
     kind === "workspace" ? (initialMode ?? "choose") : "empty",
   );
   const [curriculum, setCurriculum] = useState<CurriculumPreset | null>(null);
+  const [subject, setSubject] = useState<string | null>(null);
+  const [units, setUnits] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState(WORKSPACE_ICONS[0].key);
@@ -131,23 +152,31 @@ export function CreateResourceDialog({
     if (mode === "empty") inputRef.current?.focus();
   }, [mode]);
 
-  // Curated path: workspace + a starter session generated from the
-  // subject + exam board alone, then straight into that session.
-  const startCurated = async (chosen: CurriculumPreset, subject: string) => {
+  // Curated path: workspace + a starter session generated from the exam
+  // board + subject + chosen units, then straight into that session.
+  const startCurated = async (
+    chosen: CurriculumPreset,
+    chosenSubject: string,
+    chosenUnits: string[],
+  ) => {
     if (busy) return;
     setBusy(true);
     setError(null);
     try {
-      const title = `${chosen.label} ${subject}`;
+      const title = `${chosen.label} ${chosenSubject}`;
       const workspaceId = await createWorkspace(title, parentId);
       if (!workspaceId) throw new Error("Could not create a workspace");
       emitTreeChanged();
       const session = await createStudySession({
         workspaceId,
-        title,
+        title:
+          chosenUnits.length > 0
+            ? `${title}: ${chosenUnits.slice(0, 2).join(", ")}${chosenUnits.length > 2 ? "…" : ""}`
+            : title,
         depth: "moderate",
         durationMinutes: 30,
-        subject,
+        subject: chosenSubject,
+        topics: chosenUnits.join(", ").slice(0, 2000) || undefined,
         examBoard: chosen.board,
       });
       toast.success("Workspace created");
@@ -204,9 +233,16 @@ export function CreateResourceDialog({
               <button
                 type="button"
                 aria-label="Back"
-                onClick={() =>
-                  curriculum ? setCurriculum(null) : setMode("choose")
-                }
+                onClick={() => {
+                  if (subject) {
+                    setSubject(null);
+                    setUnits([]);
+                  } else if (curriculum) {
+                    setCurriculum(null);
+                  } else {
+                    setMode("choose");
+                  }
+                }}
                 className="rounded p-1 text-faint hover:bg-muted hover:text-foreground"
               >
                 <ArrowLeft className="h-4 w-4" />
@@ -216,9 +252,11 @@ export function CreateResourceDialog({
               {kind === "folder"
                 ? "New folder"
                 : mode === "curated"
-                  ? curriculum
-                    ? `${curriculum.label} — pick a subject`
-                    : "Pick a curriculum"
+                  ? subject && curriculum
+                    ? `${curriculum.label} ${subject}`
+                    : curriculum
+                      ? `${curriculum.label} — pick a subject`
+                      : "Pick a curriculum"
                   : "New workspace"}
             </h2>
           </div>
@@ -267,35 +305,112 @@ export function CreateResourceDialog({
         {kind === "workspace" && mode === "curated" && (
           <div className="mt-4">
             {busy ? (
-              <p className="py-6 text-center text-sm text-muted-foreground">
-                Creating your workspace…
-              </p>
+              <div className="flex flex-col items-center gap-2 py-8 text-center">
+                <Sparkles className="h-5 w-5 animate-pulse text-accent" />
+                <p className="text-sm font-medium">
+                  Building your starter session…
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  This takes a few seconds — you&apos;ll land right in it.
+                </p>
+              </div>
             ) : !curriculum ? (
-              <div className="flex flex-wrap gap-2">
-                {CURRICULUM_PRESETS.map((p) => (
+              <>
+                <p className="mb-3 text-xs text-muted-foreground">
+                  Which exam system are you studying for?
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {CURRICULUM_PRESETS.map((p) => (
+                    <button
+                      key={p.board}
+                      type="button"
+                      onClick={() => setCurriculum(p)}
+                      className="rounded-full border border-border px-4 py-2 text-sm font-semibold hover:border-accent hover:bg-accent-soft/40 transition-colors"
+                    >
+                      {p.label}
+                    </button>
+                  ))}
+                </div>
+              </>
+            ) : !subject ? (
+              <div className="grid max-h-72 grid-cols-2 gap-2 overflow-y-auto">
+                {curriculum.subjects.map((s) => (
                   <button
-                    key={p.board}
+                    key={s}
                     type="button"
-                    onClick={() => setCurriculum(p)}
-                    className="rounded-full border border-border px-4 py-2 text-sm font-semibold hover:border-accent hover:bg-accent-soft/40 transition-colors"
+                    onClick={() => {
+                      if (unitsFor(curriculum.board, s).length > 0) {
+                        setSubject(s);
+                        setUnits([]);
+                      } else {
+                        void startCurated(curriculum, s, []);
+                      }
+                    }}
+                    className="rounded-xl border border-border bg-card px-3 py-2.5 text-sm font-medium hover:border-accent hover:bg-accent-soft/40 transition-colors"
                   >
-                    {p.label}
+                    {s}
                   </button>
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-2">
-                {curriculum.subjects.map((subject) => (
+              <>
+                <p className="mb-3 text-xs text-muted-foreground">
+                  Pick the units to focus on — choose one or several.
+                </p>
+                <div className="max-h-64 space-y-1.5 overflow-y-auto">
+                  {unitsFor(curriculum.board, subject).map((unit) => {
+                    const selected = units.includes(unit);
+                    return (
+                      <button
+                        key={unit}
+                        type="button"
+                        onClick={() =>
+                          setUnits((prev) =>
+                            selected
+                              ? prev.filter((u) => u !== unit)
+                              : [...prev, unit],
+                          )
+                        }
+                        className={cn(
+                          "flex w-full items-center gap-2.5 rounded-xl border px-3 py-2.5 text-left text-sm font-medium transition-colors",
+                          selected
+                            ? "border-accent bg-accent-soft/40"
+                            : "border-border bg-card hover:border-accent/50",
+                        )}
+                      >
+                        <span
+                          className={cn(
+                            "flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-md border",
+                            selected
+                              ? "border-accent bg-accent text-white"
+                              : "border-border",
+                          )}
+                        >
+                          {selected && <Check className="h-3 w-3" />}
+                        </span>
+                        {unit}
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="mt-3 flex items-center justify-between gap-2">
                   <button
-                    key={subject}
                     type="button"
-                    onClick={() => startCurated(curriculum, subject)}
-                    className="rounded-xl border border-border bg-card px-3 py-2.5 text-sm font-medium hover:border-accent hover:bg-accent-soft/40 transition-colors"
+                    onClick={() => void startCurated(curriculum, subject, [])}
+                    className="text-xs font-medium text-muted-foreground hover:text-foreground"
                   >
-                    {subject}
+                    Cover everything
                   </button>
-                ))}
-              </div>
+                  <Button
+                    size="sm"
+                    disabled={units.length === 0}
+                    onClick={() => void startCurated(curriculum, subject, units)}
+                  >
+                    <Sparkles className="h-3.5 w-3.5 mr-1.5" />
+                    Generate session · 20 tokens
+                  </Button>
+                </div>
+              </>
             )}
             {error && <p className="mt-2 text-xs text-rose">{error}</p>}
           </div>
