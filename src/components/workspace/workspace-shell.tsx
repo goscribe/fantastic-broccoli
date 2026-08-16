@@ -6,7 +6,6 @@ import { useRouter, usePathname } from "next/navigation";
 import { Workspace } from "@/types";
 import { Button } from "@/components/ui/button";
 import {
-  Library,
   GraduationCap,
   Layers,
   BookOpen,
@@ -70,11 +69,6 @@ export function WorkspaceShell({
   }
 
   const tabs = [
-    {
-      href: `/workspace/${workspace.id}/materials`,
-      label: "Materials",
-      icon: Library,
-    },
     {
       href: `/workspace/${workspace.id}/study`,
       label: "Study",

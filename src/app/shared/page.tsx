@@ -46,7 +46,7 @@ export default function SharedPage() {
         {shared.map((ws) => (
           <Link
             key={ws.id}
-            href={`/workspace/${ws.id}/materials`}
+            href={`/workspace/${ws.id}/study`}
             className="rounded-xl border border-border bg-card p-4 transition-colors hover:border-accent/40"
           >
             <div className="flex items-center gap-3">

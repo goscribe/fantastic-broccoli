@@ -276,10 +276,7 @@ export default function StudyBotPage() {
       <main className="flex flex-1 flex-col items-center justify-center px-6 py-10">
         <div className="w-full max-w-xl animate-fade-up">
           <div className="text-center">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft">
-              <MessageCircle className="h-6 w-6 text-accent" />
-            </div>
-            <h1 className="mt-5 text-[26px] font-bold tracking-tight sm:text-3xl">
+            <h1 className="text-[26px] font-bold tracking-tight sm:text-3xl">
               What do you need to study?
             </h1>
             <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
@@ -311,7 +308,7 @@ export default function StudyBotPage() {
   return (
     <main className="flex flex-1 flex-col">
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 py-5">
-        <div className="flex items-center justify-between gap-3 pb-4">
+        <div className="mb-4 flex items-center justify-between gap-3 rounded-2xl border border-border bg-card px-4 py-3 shadow-sm">
           <div className="flex items-center gap-2">
             <MessageCircle className="h-4 w-4 text-accent" />
             <h1 className="text-sm font-semibold">Study bot</h1>

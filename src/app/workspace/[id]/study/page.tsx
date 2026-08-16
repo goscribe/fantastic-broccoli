@@ -15,6 +15,7 @@ import { fetchMasteryMatrix, studySessionApi } from "@/lib/api/study-session";
 import { BankDocThumb, kindConfig } from "@/components/bank/bank-content";
 import { MasteryRadar } from "@/components/graphics/mastery-radar";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
+import { MaterialsSection } from "@/components/workspace/materials-section";
 import { SessionCard } from "@/components/session/session-card";
 import { SessionCreateWizard } from "@/components/session/session-create-wizard";
 import { ProgressBar } from "@/components/ui/progress-bar";
@@ -130,11 +131,16 @@ export default function WorkspaceStudyPage() {
           </button>
         )}
 
+        <MaterialsSection
+          workspaceId={workspaceId}
+          materials={workspace?.materials ?? []}
+        />
+
         {bankItems.length > 0 && (
           <section className="animate-fade-up">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-sm font-semibold text-foreground">
-                Study materials
+                Artifacts
               </h2>
               <Link
                 href={`/workspace/${workspaceId}/bank`}
