@@ -27,6 +27,8 @@ import {
   Clock3,
   Camera,
   Trash2,
+  ChevronDown,
+  ChevronRight,
 } from "lucide-react";
 import {
   PdfArt,
@@ -408,6 +410,7 @@ export function MaterialsSection({
   >({});
   const [reanalyzing, setReanalyzing] = useState<Set<string>>(new Set());
   const [deleting, setDeleting] = useState<Set<string>>(new Set());
+  const [open, setOpen] = useState(false);
 
   const inFlight = analysisInFlight(progress);
 
@@ -503,7 +506,23 @@ export function MaterialsSection({
   return (
     <section className="animate-fade-up space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-sm font-semibold text-foreground">Materials</h2>
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="flex items-center gap-1.5 text-sm font-semibold text-foreground"
+        >
+          {open ? (
+            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+          ) : (
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          )}
+          Materials
+          {materials.length > 0 && (
+            <span className="text-xs font-medium text-faint">
+              {materials.length}
+            </span>
+          )}
+        </button>
         <div
           className="flex flex-wrap gap-2"
           data-tour="upload-materials"
@@ -585,7 +604,7 @@ export function MaterialsSection({
         />
       )}
 
-      {materials.length === 0 ? (
+      {!open ? null : materials.length === 0 ? (
         <div className="rounded-2xl border border-dashed border-border-strong bg-card text-center py-8 px-6">
           <p className="text-sm font-semibold">No materials yet</p>
           <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
