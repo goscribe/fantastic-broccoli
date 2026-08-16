@@ -503,7 +503,7 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => setCreating("folder")}
-                className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
+                className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-semibold hover:border-accent/40 hover:bg-muted"
               >
                 <Plus className="h-3.5 w-3.5" />
                 New folder
