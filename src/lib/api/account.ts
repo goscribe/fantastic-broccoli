@@ -1,6 +1,7 @@
 "use client";
 
 import { api } from "./trpc-client";
+import { rpc } from "./study-session";
 
 export interface AccountSummary {
   planName: string;
@@ -27,6 +28,70 @@ export async function fetchAccountSummary(): Promise<AccountSummary> {
     tokenBalance: tokens?.balance ?? 0,
     monthlyTokens: tokens?.monthlyAllowance ?? 0,
   };
+}
+
+/** Server token cost table, keyed by operation (see server TOKEN_COSTS). */
+export interface TokenCosts {
+  GENERATION: number;
+  FLASHCARD_SET: number;
+  WORKSHEET: number;
+  STUDY_GUIDE: number;
+  PODCAST_EPISODE: number;
+  ARTIFACT_SEARCH: number;
+  EXPORT_ASSIST: number;
+}
+
+export interface TokenOverview {
+  balance: number;
+  monthlyAllowance: number;
+  planName: string;
+  costs: TokenCosts;
+}
+
+export type TokenTransactionType =
+  | "MONTHLY_GRANT"
+  | "TOPUP"
+  | "SPEND"
+  | "ADJUSTMENT";
+
+export interface TokenLedgerEntry {
+  id: string;
+  amount: number;
+  type: TokenTransactionType;
+  description: string | null;
+  createdAt: string | Date;
+}
+
+export function fetchTokenOverview(): Promise<TokenOverview> {
+  return rpc<TokenOverview>("payment.getTokenOverview", "query", undefined);
+}
+
+export function fetchTokenHistory(limit = 50): Promise<TokenLedgerEntry[]> {
+  return rpc<TokenLedgerEntry[]>("payment.getTokenHistory", "query", {
+    limit,
+  });
+}
+
+/** Human label for a ledger entry (spend descriptions are tRPC paths). */
+export function describeLedgerEntry(entry: TokenLedgerEntry): string {
+  if (entry.type === "MONTHLY_GRANT") return "Monthly plan tokens";
+  if (entry.type === "TOPUP") return "Token top-up";
+  if (entry.type === "ADJUSTMENT")
+    return entry.description ?? "Balance adjustment";
+  const s = (entry.description ?? "").toLowerCase();
+  if (s.includes("generatebank")) return "Question bank generation";
+  if (s.includes("retrygeneration") || s.includes("regenerate"))
+    return "Study session · retry";
+  if (s.includes("studysession")) return "Study session";
+  if (s.includes("upload") || s.includes("analyze") || s.includes("analysis"))
+    return "Material upload & analysis";
+  if (s.includes("podcast")) return "Podcast episode";
+  if (s.includes("flashcard")) return "Flashcard set";
+  if (s.includes("worksheet")) return "Worksheet";
+  if (s.includes("guide")) return "Study guide";
+  if (s.includes("search") || s.includes("finder")) return "AI artifact search";
+  if (s.includes("export")) return "AI export assist";
+  return entry.description ?? "AI generation";
 }
 
 export interface PlanOption {
