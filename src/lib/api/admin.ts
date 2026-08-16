@@ -96,6 +96,57 @@ export interface ClientStats {
   browsers: ClientSegmentRow[];
 }
 
+export interface CostOperationRow {
+  /** Ledger description of the billable action, e.g. "studySession.create". */
+  label: string;
+  count: number;
+  tokens: number;
+  estCostUsd: number;
+}
+
+export interface CostUserRow {
+  userId: string;
+  email: string | null;
+  plan: string;
+  monthlyRevenueUsd: number;
+  tokensSpent: number;
+  operations: number;
+  estCostUsd: number;
+  marginUsd: number;
+}
+
+export interface CostAnalytics {
+  since: string;
+  /** Cost figures are per-operation estimates, not measured provider usage. */
+  estimated: boolean;
+  revenue: {
+    mrrUsd: number;
+    activePaidSubs: number;
+    collectedUsd: number;
+    topupCollectedUsd: number;
+    plans: Array<{
+      name: string;
+      priceUsd: number;
+      monthlyTokens: number;
+      activeSubs: number;
+      totalSubs: number;
+    }>;
+  };
+  tokens: {
+    granted: number;
+    spent: number;
+    spenders: number;
+    p50: number;
+    p90: number;
+    p99: number;
+    max: number;
+  };
+  operations: CostOperationRow[];
+  estCostUsd: number;
+  grossMarginUsd: number;
+  topSpenders: CostUserRow[];
+}
+
 export interface AdminUser {
   id: string;
   name: string | null;
@@ -360,6 +411,9 @@ export const adminApi = {
 
   getClientStats: (since?: Date) =>
     rpc<ClientStats>("admin.getClientStats", "query", since ? { since } : undefined),
+
+  getCostAnalytics: (since?: Date) =>
+    rpc<CostAnalytics>("admin.getCostAnalytics", "query", since ? { since } : undefined),
 
   listUsers: (input: {
     page: number;

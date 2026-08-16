@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import {
   ArrowLeft,
   CreditCard,
+  DollarSign,
   FileText,
   LayoutDashboard,
   Library,
@@ -26,6 +27,7 @@ const NAV = [
   { href: "/admin/logs", label: "Activity logs", icon: ScrollText },
   { href: "/admin/invoices", label: "Invoices", icon: FileText },
   { href: "/admin/plans", label: "Plans", icon: CreditCard },
+  { href: "/admin/costs", label: "Costs", icon: DollarSign },
 ];
 
 /**
