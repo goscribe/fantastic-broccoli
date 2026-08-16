@@ -7,14 +7,19 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import {
+  describeLedgerEntry,
   fetchAccountSummary,
   fetchPlanOptions,
+  fetchTokenHistory,
+  fetchTokenOverview,
   formatBytes,
   switchPlan,
   updateProfile,
   uploadProfilePicture,
   type AccountSummary,
   type PlanOption,
+  type TokenLedgerEntry,
+  type TokenOverview,
 } from "@/lib/api/account";
 
 const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
@@ -127,6 +132,9 @@ export default function SettingsPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [photoError, setPhotoError] = useState<string | null>(null);
+  const [tokens, setTokens] = useState<TokenOverview | null>(null);
+  const [ledger, setLedger] = useState<TokenLedgerEntry[] | null>(null);
+  const [showAllLedger, setShowAllLedger] = useState(false);
 
   useEffect(() => {
     fetchAccountSummary()
@@ -137,6 +145,12 @@ export default function SettingsPage() {
       .then(setPlans)
       .catch(() => {})
       .finally(() => setPlansLoading(false));
+    fetchTokenOverview()
+      .then(setTokens)
+      .catch(() => {});
+    fetchTokenHistory(100)
+      .then(setLedger)
+      .catch(() => {});
   }, []);
 
   const handleSave = async () => {
@@ -367,16 +381,133 @@ export default function SettingsPage() {
                 usedLabel={formatBytes(summary.storageUsedBytes)}
                 limitLabel={formatBytes(summary.storageLimitBytes)}
               />
-              <UsageBar
-                label="Tokens"
-                used={Math.max(0, summary.monthlyTokens - summary.tokenBalance)}
-                limit={summary.monthlyTokens}
-                usedLabel={`${summary.tokenBalance} left`}
-                limitLabel={`${summary.monthlyTokens} / month`}
-              />
             </div>
           </section>
         )}
+
+        {/* Tokens */}
+        <section className="mt-8">
+          <h2 className="text-sm font-semibold">Tokens</h2>
+          <p className="mt-0.5 text-[13px] text-muted-foreground">
+            Tokens pay for AI generation. Unused tokens roll over — your
+            balance never resets.
+          </p>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-border bg-card p-4">
+              <p className="text-[12px] text-muted-foreground">Balance</p>
+              {tokens ? (
+                <p className="mt-1 text-2xl font-bold tabular-nums">
+                  {tokens.balance.toLocaleString()}
+                  <span className="ml-1.5 text-[12px] font-normal text-faint">
+                    tokens
+                  </span>
+                </p>
+              ) : (
+                <Skeleton className="mt-2 h-7 w-24" />
+              )}
+              {tokens && (
+                <p className="mt-1 text-[12px] text-muted-foreground">
+                  +{tokens.monthlyAllowance.toLocaleString()} added each month
+                  on the {tokens.planName} plan
+                </p>
+              )}
+            </div>
+            <div className="rounded-xl border border-border bg-card p-4">
+              <p className="text-[12px] text-muted-foreground">
+                What things cost
+              </p>
+              {tokens ? (
+                <ul className="mt-2 space-y-1 text-[12px]">
+                  {(
+                    [
+                      ["Study session", tokens.costs.GENERATION],
+                      ["Material upload & analysis", tokens.costs.GENERATION],
+                      ["Podcast episode", tokens.costs.PODCAST_EPISODE],
+                      ["Study guide", tokens.costs.STUDY_GUIDE],
+                      ["Flashcard set / worksheet", tokens.costs.FLASHCARD_SET],
+                      ["AI artifact search", tokens.costs.ARTIFACT_SEARCH],
+                      ["Copilot chat", 0],
+                    ] as const
+                  ).map(([label, cost]) => (
+                    <li
+                      key={label}
+                      className="flex items-baseline justify-between gap-3"
+                    >
+                      <span className="text-muted-foreground">{label}</span>
+                      <span className="font-medium tabular-nums">
+                        {cost === 0 ? "Free" : `${cost} tokens`}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <Skeleton className="mt-2 h-24 w-full" />
+              )}
+            </div>
+          </div>
+
+          {/* Ledger */}
+          <div className="mt-3 rounded-xl border border-border bg-card">
+            <p className="px-4 pt-3 text-[12px] font-medium text-muted-foreground">
+              Recent activity
+            </p>
+            {!ledger && (
+              <div className="space-y-2 p-4">
+                {Array.from({ length: 3 }, (_, i) => (
+                  <Skeleton key={i} className="h-4 w-full" />
+                ))}
+              </div>
+            )}
+            {ledger && ledger.length === 0 && (
+              <p className="px-4 pb-4 pt-1 text-[13px] text-muted-foreground">
+                No token activity yet.
+              </p>
+            )}
+            {ledger && ledger.length > 0 && (
+              <ul className="mt-1 divide-y divide-border">
+                {(showAllLedger ? ledger : ledger.slice(0, 8)).map((entry) => (
+                  <li
+                    key={entry.id}
+                    className="flex items-baseline justify-between gap-3 px-4 py-2 text-[13px]"
+                  >
+                    <span className="min-w-0 truncate">
+                      {describeLedgerEntry(entry)}
+                    </span>
+                    <span className="flex shrink-0 items-baseline gap-3">
+                      <span className="text-[11px] text-faint">
+                        {new Date(entry.createdAt).toLocaleDateString(
+                          undefined,
+                          { month: "short", day: "numeric" },
+                        )}
+                      </span>
+                      <span
+                        className={`font-medium tabular-nums ${
+                          entry.amount >= 0
+                            ? "text-emerald-600"
+                            : "text-foreground"
+                        }`}
+                      >
+                        {entry.amount >= 0 ? "+" : ""}
+                        {entry.amount.toLocaleString()}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {ledger && ledger.length > 8 && (
+              <button
+                type="button"
+                onClick={() => setShowAllLedger((v) => !v)}
+                className="w-full border-t border-border px-4 py-2 text-[12px] font-medium text-muted-foreground hover:text-foreground"
+              >
+                {showAllLedger
+                  ? "Show less"
+                  : `Show all ${ledger.length} entries`}
+              </button>
+            )}
+          </div>
+        </section>
       </div>
     </main>
   );

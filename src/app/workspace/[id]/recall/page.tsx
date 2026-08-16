@@ -406,7 +406,7 @@ export default function WorkspaceRecallPage() {
                 ) : (
                   <>
                     <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                    Generate podcast
+                    Generate podcast · 25 tokens
                   </>
                 )}
               </Button>

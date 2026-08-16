@@ -274,7 +274,7 @@ export default function WorkspaceBankPage() {
             ) : (
               <RefreshCw className="h-3.5 w-3.5 mr-1.5" />
             )}
-            Regenerate from materials
+            Regenerate from materials · 20 tokens
           </Button>
         </div>
 
