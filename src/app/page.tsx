@@ -10,7 +10,10 @@ import { formatDuration } from "@/lib/utils";
 import { StreakFlame } from "@/components/graphics/streak-flame";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { StudyCalendar } from "@/components/workspace/study-calendar";
-import { CreateResourceDialog } from "@/components/workspace/create-dialog";
+import {
+  CreateResourceDialog,
+  NewWorkspaceMenu,
+} from "@/components/workspace/create-dialog";
 import {
   DeleteResourceDialog,
   EditResourceDialog,
@@ -70,6 +73,12 @@ export default function HomePage() {
     Map<string, StudySession[]>
   >(new Map());
   const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
+  const [createMode, setCreateMode] = useState<"empty" | "curated" | undefined>();
+
+  const openWorkspaceCreate = (mode: "empty" | "curated") => {
+    setCreateMode(mode);
+    setCreating("workspace");
+  };
   const [editing, setEditing] = useState<EditTarget | null>(null);
   const [deleting, setDeleting] = useState<DeleteTarget | null>(null);
   const [membersFor, setMembersFor] = useState<string | null>(null);
@@ -273,14 +282,18 @@ export default function HomePage() {
                   <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </button>
               ) : (
-                <button
-                  type="button"
-                  onClick={() => setCreating("workspace")}
-                  className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent-bright px-4 py-3 text-sm font-semibold text-ink hover:bg-white transition-colors sm:w-auto sm:py-2 sm:text-[13px]"
-                >
-                  <Plus className="h-4 w-4" />
-                  New workspace
-                </button>
+                <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
+                  {(toggle) => (
+                    <button
+                      type="button"
+                      onClick={toggle}
+                      className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent-bright px-4 py-3 text-sm font-semibold text-ink hover:bg-white transition-colors sm:w-auto sm:py-2 sm:text-[13px]"
+                    >
+                      <Plus className="h-4 w-4" />
+                      New workspace
+                    </button>
+                  )}
+                </NewWorkspaceMenu>
               )}
             </div>
             {resumable && (
@@ -523,14 +536,18 @@ export default function HomePage() {
                   <h2 className="text-sm font-semibold text-foreground">
                     Workspaces
                   </h2>
-                  <button
-                    type="button"
-                    onClick={() => setCreating("workspace")}
-                    className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-semibold hover:border-accent/40 hover:bg-muted"
-                  >
-                    <Plus className="h-3.5 w-3.5" />
-                    New workspace
-                  </button>
+                  <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
+                    {(toggle) => (
+                      <button
+                        type="button"
+                        onClick={toggle}
+                        className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-semibold hover:border-accent/40 hover:bg-muted"
+                      >
+                        <Plus className="h-3.5 w-3.5" />
+                        New workspace
+                      </button>
+                    )}
+                  </NewWorkspaceMenu>
                 </div>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {rootWorkspaces.map((ws) => (
@@ -583,7 +600,11 @@ export default function HomePage() {
         {creating && (
           <CreateResourceDialog
             kind={creating}
-            onClose={() => setCreating(null)}
+            initialMode={creating === "workspace" ? createMode : undefined}
+            onClose={() => {
+              setCreating(null);
+              setCreateMode(undefined);
+            }}
             onCreated={(workspaceId) => {
               if (workspaceId) router.push(`/workspace/${workspaceId}`);
               else loadTree();
