@@ -320,9 +320,6 @@ export default function StudyBotPage() {
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 py-5">
         <div className="sticky top-0 z-10 -mx-4 flex items-center justify-between gap-3 border-b border-border bg-background/95 px-4 pb-3 backdrop-blur">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-ink text-white">
-              <Sparkles className="h-4 w-4 text-accent-bright" />
-            </div>
             <div>
               <h1 className="text-sm font-semibold leading-tight">Study bot</h1>
               <p className="text-[11px] leading-tight text-faint">
@@ -337,10 +334,7 @@ export default function StudyBotPage() {
               size="sm"
               onClick={() => void startSession()}
               disabled={starting}
-              className={cn(
-                "shrink-0",
-                ready && !starting && "shadow-md shadow-accent/30",
-              )}
+              className="shrink-0"
             >
               {starting ? (
                 <>
@@ -362,15 +356,10 @@ export default function StudyBotPage() {
             <div
               key={i}
               className={cn(
-                "flex items-end gap-2",
+                "flex",
                 m.role === "user" ? "justify-end" : "justify-start",
               )}
             >
-              {m.role === "bot" && (
-                <div className="mb-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-ink text-white">
-                  <Sparkles className="h-3 w-3 text-accent-bright" />
-                </div>
-              )}
               <div
                 className={cn(
                   "max-w-[85%] px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap",
