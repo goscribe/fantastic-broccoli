@@ -308,7 +308,7 @@ export default function StudyBotPage() {
 
   return (
     <main className="flex flex-1 flex-col">
-      <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 py-5">
+      <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-5">
         <div className="mb-4 flex items-center justify-between gap-3 rounded-2xl border border-border bg-card px-4 py-3">
           <div className="flex items-center gap-2">
             <MessageCircle className="h-4 w-4 text-accent" />
@@ -336,7 +336,10 @@ export default function StudyBotPage() {
             </Button>
           )}
         </div>
-        <div className="flex-1 space-y-4 overflow-y-auto pb-4">
+        <div className="flex flex-1 flex-col gap-4 overflow-y-auto pb-4">
+          {/* Spacer pushes a short conversation down next to the composer
+              without breaking scroll-to-top when it overflows. */}
+          <div aria-hidden className="flex-1" />
           {messages.map((m, i) => (
             <div
               key={i}

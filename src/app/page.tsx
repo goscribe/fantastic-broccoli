@@ -273,18 +273,32 @@ export default function HomePage() {
                   : "A plan generated around your syllabus and schedule."}
               </p>
               {resumable ? (
-                <button
-                  type="button"
-                  onClick={() =>
-                    router.push(
-                      `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
-                    )
-                  }
-                  className="group mt-5 inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-[13px] font-semibold text-ink hover:bg-white/90 transition-colors"
-                >
-                  Resume session
-                  <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </button>
+                <div className="mt-5 flex flex-wrap items-center gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      router.push(
+                        `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
+                      )
+                    }
+                    className="group inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-[13px] font-semibold text-ink hover:bg-white/90 transition-colors"
+                  >
+                    Resume session
+                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </button>
+                  <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
+                    {(toggle) => (
+                      <button
+                        type="button"
+                        onClick={toggle}
+                        className="inline-flex items-center gap-2 rounded-lg border border-white/25 px-4 py-2 text-[13px] font-semibold text-white hover:bg-white/10 transition-colors"
+                      >
+                        <Plus className="h-3.5 w-3.5" />
+                        New workspace
+                      </button>
+                    )}
+                  </NewWorkspaceMenu>
+                </div>
               ) : (
                 <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
                   {(toggle) => (
