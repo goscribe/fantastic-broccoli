@@ -79,6 +79,23 @@ export interface RetentionStats {
   channels: RetentionChannelRow[];
 }
 
+export interface ClientSegmentRow {
+  label: string;
+  users: number;
+  calls: number;
+  /** Share of calls that failed, 0-100. */
+  errorRate: number;
+}
+
+export interface ClientStats {
+  since: string;
+  totalUsers: number;
+  totalCalls: number;
+  devices: ClientSegmentRow[];
+  operatingSystems: ClientSegmentRow[];
+  browsers: ClientSegmentRow[];
+}
+
 export interface AdminUser {
   id: string;
   name: string | null;
@@ -340,6 +357,9 @@ export const adminApi = {
 
   getRetentionStats: (since?: Date) =>
     rpc<RetentionStats>("admin.getRetentionStats", "query", since ? { since } : undefined),
+
+  getClientStats: (since?: Date) =>
+    rpc<ClientStats>("admin.getClientStats", "query", since ? { since } : undefined),
 
   listUsers: (input: {
     page: number;
