@@ -239,7 +239,7 @@ export default function HomePage() {
         {/* Gradient banner */}
         <section
           data-tour="home-banner"
-          className="relative rounded-2xl bg-ink p-7 text-white animate-fade-up"
+          className="relative z-10 rounded-2xl bg-ink p-7 text-white animate-fade-up"
         >
           {/* Gradients are clipped individually (not via overflow-hidden on the
               section) so the New-workspace dropdown can extend past the banner. */}
