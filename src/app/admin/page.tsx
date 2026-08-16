@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { adminApi } from "@/lib/api/admin";
+import { adminApi, type ClientSegmentRow } from "@/lib/api/admin";
 import {
   EmptyRow,
   PageHeader,
@@ -23,6 +23,52 @@ function windowCell(w: { eligible: number; retained: number }): string {
     : `${retentionPct(w.retained, w.eligible)} (${w.retained}/${w.eligible})`;
 }
 
+function ClientSegmentTable({
+  title,
+  rows,
+  totalUsers,
+  totalCalls,
+  loading,
+}: {
+  title: string;
+  rows: ClientSegmentRow[] | undefined;
+  totalUsers: number;
+  totalCalls: number;
+  loading: boolean;
+}) {
+  return (
+    <div>
+      <h3 className="mb-2 text-[13px] font-semibold text-muted-foreground">
+        {title}
+      </h3>
+      <Table headers={[title, "Users", "Calls", "Errors"]}>
+        {loading ? (
+          <TableSkeletonRows cols={4} rows={3} />
+        ) : !rows?.length ? (
+          <EmptyRow colSpan={4}>No traffic recorded.</EmptyRow>
+        ) : (
+          rows.map((row) => (
+            <tr key={row.label} className="hover:bg-muted/40">
+              <Td>
+                <span className="font-medium">{row.label}</span>
+              </Td>
+              <Td className="tabular-nums">
+                {row.users} ({retentionPct(row.users, totalUsers)})
+              </Td>
+              <Td className="tabular-nums text-muted-foreground">
+                {row.calls.toLocaleString()} ({retentionPct(row.calls, totalCalls)})
+              </Td>
+              <Td className="tabular-nums text-muted-foreground">
+                {row.errorRate.toFixed(2)}%
+              </Td>
+            </tr>
+          ))
+        )}
+      </Table>
+    </div>
+  );
+}
+
 export default function AdminOverviewPage() {
   const { data: stats, isLoading } = useQuery({
     queryKey: ["admin", "stats"],
@@ -32,6 +78,11 @@ export default function AdminOverviewPage() {
   const { data: retention, isLoading: retentionLoading } = useQuery({
     queryKey: ["admin", "retention"],
     queryFn: () => adminApi.getRetentionStats(),
+  });
+
+  const { data: clients, isLoading: clientsLoading } = useQuery({
+    queryKey: ["admin", "clients"],
+    queryFn: () => adminApi.getClientStats(),
   });
 
   const { data: workspaces, isLoading: workspacesLoading } = useQuery({
@@ -117,6 +168,39 @@ export default function AdminOverviewPage() {
           D1/D3/D7 count only users signed up at least that many full days ago
           (eligible cohort); retained = any activity on or after that day.
         </p>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="mb-1 text-lg font-semibold">Devices &amp; browsers</h2>
+        <p className="mb-4 text-[12px] text-muted-foreground">
+          Last 30 days of real user traffic (admins excluded):{" "}
+          {(clients?.totalUsers ?? 0).toLocaleString()} users ·{" "}
+          {(clients?.totalCalls ?? 0).toLocaleString()} API calls. Users are
+          counted in every segment they appear in, so columns can exceed 100%.
+        </p>
+        <div className="grid gap-6 lg:grid-cols-3">
+          <ClientSegmentTable
+            title="Device"
+            rows={clients?.devices}
+            totalUsers={clients?.totalUsers ?? 0}
+            totalCalls={clients?.totalCalls ?? 0}
+            loading={clientsLoading}
+          />
+          <ClientSegmentTable
+            title="OS"
+            rows={clients?.operatingSystems}
+            totalUsers={clients?.totalUsers ?? 0}
+            totalCalls={clients?.totalCalls ?? 0}
+            loading={clientsLoading}
+          />
+          <ClientSegmentTable
+            title="Browser"
+            rows={clients?.browsers}
+            totalUsers={clients?.totalUsers ?? 0}
+            totalCalls={clients?.totalCalls ?? 0}
+            loading={clientsLoading}
+          />
+        </div>
       </section>
 
       <section className="mt-10">

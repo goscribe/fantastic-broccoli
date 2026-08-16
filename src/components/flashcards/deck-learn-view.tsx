@@ -264,7 +264,7 @@ export function DeckLearnView({
 
   if (!card) return null;
 
-  const progress =
+  const percentComplete =
     ((currentIndex + (showFeedback ? 1 : 0)) / cards.length) * 100;
 
   return (
@@ -306,10 +306,10 @@ export function DeckLearnView({
                 </span>
               </>
             )}
-            <span>{Math.round(progress)}%</span>
+            <span>{Math.round(percentComplete)}%</span>
           </span>
         </div>
-        <ProgressBar value={progress} size="sm" />
+        <ProgressBar value={percentComplete} size="sm" />
       </div>
 
       <div className="rounded-3xl border border-border bg-card p-6 md:p-8 space-y-6">

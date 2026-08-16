@@ -22,11 +22,17 @@ import {
   Loader2,
   Circle,
   Upload,
+  Camera,
   Sparkles,
   MailCheck,
   Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { UPLOAD_ACCEPT } from "@/lib/uploads";
+import {
+  CURRICULUM_PRESETS,
+  type CurriculumPreset,
+} from "./curriculum-presets";
 
 /**
  * Upload-first onboarding for users who have never started a study session:
@@ -172,6 +178,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   const router = useRouter();
   const { user } = useAuthUser();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
   const [resendState, setResendState] = useState<"idle" | "sending" | "sent">(
     "idle",
   );
@@ -190,6 +197,8 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   const [title, setTitle] = useState(pending?.title ?? "My first session");
   const creatingSessionRef = useRef(false);
   const [analysisDone, setAnalysisDone] = useState(false);
+  /** False when every uploaded file failed analysis — nothing to plan from. */
+  const anyMaterialAnalyzedRef = useRef(true);
 
   // Fallback for missing/unreliable Pusher config: poll the workspace until
   // every uploaded material is analyzed.
@@ -207,6 +216,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
               (m) => m.analyzed || m.analysisStatus === "FAILED",
             )
           ) {
+            anyMaterialAnalyzedRef.current = materials.some((m) => m.analyzed);
             setAnalysisDone(true);
           }
         })
@@ -240,6 +250,9 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
       title,
       depth: "moderate",
       durationMinutes: 30,
+      // Nothing was readable, so give the planner the title to work from
+      // rather than failing with "no analyzed materials".
+      ...(anyMaterialAnalyzedRef.current ? {} : { topics: title }),
     })
       .then((session) => {
         if (session) {
@@ -253,6 +266,45 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
         router.push(`/workspace/${workspaceId}/study`);
       });
   }, [analysisDone, router, title]);
+
+  const [preset, setPreset] = useState<CurriculumPreset | null>(null);
+
+  // Curriculum path: two taps (curriculum → subject) and the planner builds a
+  // session from the subject + exam board alone — no upload needed.
+  const startFromPreset = useCallback(
+    async (chosen: CurriculumPreset, subject: string) => {
+      if (startedRef.current) return;
+      startedRef.current = true;
+      setError(null);
+      setPhase("building");
+      setStepIndex(3);
+      const sessionTitle = `${chosen.label} ${subject}`;
+      setTitle(sessionTitle);
+      try {
+        const workspaceId = await createWorkspace(sessionTitle);
+        if (!workspaceId) throw new Error("Could not create a workspace");
+        workspaceIdRef.current = workspaceId;
+        const session = await createStudySession({
+          workspaceId,
+          title: sessionTitle,
+          depth: "moderate",
+          durationMinutes: 30,
+          subject,
+          examBoard: chosen.board,
+        });
+        if (session) {
+          router.push(`/workspace/${workspaceId}/session/${session.id}`);
+        } else {
+          router.push(`/workspace/${workspaceId}/study`);
+        }
+      } catch (err) {
+        startedRef.current = false;
+        setPhase("upload");
+        setError(toastError(err, "Could not create your session"));
+      }
+    },
+    [router],
+  );
 
   const start = useCallback(async (files: File[]) => {
     if (files.length === 0 || startedRef.current) return;
@@ -329,63 +381,43 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
     );
   }
 
-  // Building a session requires a verified email server-side, so ask for
-  // verification before offering the upload instead of failing after it.
-  if (user && user.emailVerified === false) {
+  // Unverified users get their first study session for free (the server
+  // allows generation until they own one), so this screen only nudges them
+  // to verify instead of blocking the upload.
+  const unverified = user?.emailVerified === false;
+
+  if (preset) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
         <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
-          <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft text-accent">
-            <MailCheck className="h-6 w-6" />
-          </div>
-          <p className="text-xs font-semibold text-accent">Welcome to Scribe</p>
-          <h1 className="mt-2 text-2xl font-bold tracking-tight">
-            Verify your email to get started
-          </h1>
-          <p className="mt-2 text-sm text-muted-foreground">
-            We sent a verification link to{" "}
-            <span className="font-medium text-foreground">
-              {user.email ?? "your inbox"}
-            </span>
-            . Click it, then come back here to build your first study session.
-            Don&apos;t see it? Check your spam folder.
-          </p>
-          <div className="mt-6 flex flex-col items-center gap-3">
-            <button
-              type="button"
-              onClick={() => refreshSession().catch(() => {})}
-              className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground hover:opacity-90 transition-opacity"
-            >
-              I&apos;ve verified my email
-            </button>
-            <button
-              type="button"
-              disabled={resendState !== "idle"}
-              onClick={() => {
-                setResendState("sending");
-                resendVerification()
-                  .then(() => setResendState("sent"))
-                  .catch((err) => {
-                    setResendState("idle");
-                    toastError(err, "Could not resend the email");
-                  });
-              }}
-              className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-60"
-            >
-              {resendState === "sent"
-                ? "Verification email sent — check your inbox"
-                : resendState === "sending"
-                  ? "Sending…"
-                  : "Resend verification email"}
-            </button>
-          </div>
           <button
             type="button"
-            onClick={onSkip}
-            className="mt-6 text-xs font-medium text-faint hover:text-foreground"
+            onClick={() => setPreset(null)}
+            className="float-left text-xs font-medium text-muted-foreground hover:text-foreground"
           >
-            Skip for now — take me to my dashboard
+            ← Back
           </button>
+          <p className="text-xs font-semibold text-accent">{preset.label}</p>
+          <h1 className="mt-2 text-2xl font-bold tracking-tight">
+            Pick a subject
+          </h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            One tap — Scribe builds your first {preset.label} study session
+            around it.
+          </p>
+          <div className="mt-6 grid grid-cols-2 gap-2">
+            {preset.subjects.map((subject) => (
+              <button
+                key={subject}
+                type="button"
+                onClick={() => startFromPreset(preset, subject)}
+                className="rounded-xl border border-border bg-card px-3 py-3 text-sm font-medium hover:border-accent hover:bg-accent-soft/40 transition-colors"
+              >
+                {subject}
+              </button>
+            ))}
+          </div>
+          {error && <p className="mt-3 text-xs text-rose">{error}</p>}
         </div>
       </div>
     );
@@ -422,21 +454,42 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
         >
           <Upload className="mx-auto h-8 w-8 text-accent" />
           <p className="mt-4 text-sm font-semibold">
-            Drop your notes, slides, or PDF here
+            Drop your notes, slides, PDF, or a photo here
           </p>
-          <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-            className="mt-5 inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground hover:opacity-90 transition-opacity"
-          >
-            <Upload className="h-4 w-4" />
-            Upload material
-          </button>
+          <div className="mt-5 flex flex-col items-stretch gap-2 sm:flex-row sm:justify-center">
+            <button
+              type="button"
+              onClick={() => cameraInputRef.current?.click()}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground hover:opacity-90 transition-opacity sm:hidden"
+            >
+              <Camera className="h-4 w-4" />
+              Take a photo of your notes
+            </button>
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-semibold hover:border-accent/40 transition-colors sm:border-0 sm:bg-accent sm:py-2.5 sm:text-accent-foreground sm:hover:opacity-90"
+            >
+              <Upload className="h-4 w-4" />
+              Upload material
+            </button>
+          </div>
           <input
             ref={fileInputRef}
             type="file"
             multiple
-            accept=".pdf,.doc,.docx,.ppt,.pptx,.key,.txt,.md,audio/*"
+            accept={UPLOAD_ACCEPT}
+            className="hidden"
+            onChange={(e) => {
+              start(Array.from(e.target.files ?? []));
+              e.target.value = "";
+            }}
+          />
+          <input
+            ref={cameraInputRef}
+            type="file"
+            accept="image/*"
+            capture="environment"
             className="hidden"
             onChange={(e) => {
               start(Array.from(e.target.files ?? []));
@@ -445,7 +498,72 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
           />
         </div>
 
+        <div className="mt-5 flex items-center gap-3">
+          <div className="h-px flex-1 bg-border" />
+          <span className="text-[11px] font-medium text-muted-foreground">
+            or start from your curriculum
+          </span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+        <div className="mt-3 flex flex-wrap justify-center gap-2">
+          {CURRICULUM_PRESETS.map((p) => (
+            <button
+              key={p.board}
+              type="button"
+              onClick={() => setPreset(p)}
+              className="rounded-full border border-border px-4 py-2 text-sm font-semibold hover:border-accent hover:bg-accent-soft/40 transition-colors"
+            >
+              {p.label}
+            </button>
+          ))}
+        </div>
+
         {error && <p className="mt-3 text-xs text-rose">{error}</p>}
+
+        {unverified && (
+          <div className="mt-4 rounded-xl border border-border bg-muted/40 px-4 py-3 text-left">
+            <p className="flex items-center gap-2 text-xs font-semibold">
+              <MailCheck className="h-3.5 w-3.5 text-accent" />
+              Your first session is free
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Verify{" "}
+              <span className="font-medium text-foreground">
+                {user?.email ?? "your email"}
+              </span>{" "}
+              to keep generating after this one.
+            </p>
+            <div className="mt-2 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => refreshSession().catch(() => {})}
+                className="text-xs font-semibold text-accent hover:underline"
+              >
+                I&apos;ve verified
+              </button>
+              <button
+                type="button"
+                disabled={resendState !== "idle"}
+                onClick={() => {
+                  setResendState("sending");
+                  resendVerification()
+                    .then(() => setResendState("sent"))
+                    .catch((err) => {
+                      setResendState("idle");
+                      toastError(err, "Could not resend the email");
+                    });
+                }}
+                className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-60"
+              >
+                {resendState === "sent"
+                  ? "Email sent — check your inbox"
+                  : resendState === "sending"
+                    ? "Sending…"
+                    : "Resend verification email"}
+              </button>
+            </div>
+          </div>
+        )}
 
         <button
           type="button"

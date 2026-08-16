@@ -35,6 +35,9 @@ interface SessionCreateWizardProps {
   onCreate: (config: SessionConfig) => void;
 }
 
+/** Matches the server's `topics` input limit on `studySession.create`. */
+const TOPICS_MAX_LENGTH = 2000;
+
 const subjectSuggestions = [
   "Mathematics",
   "Physics",
@@ -180,10 +183,16 @@ export function SessionCreateWizard({
           </label>
           <textarea
             value={config.topics}
+            maxLength={TOPICS_MAX_LENGTH}
             onChange={(e) => setConfig({ ...config, topics: e.target.value })}
             placeholder="e.g., Electron configuration, periodic trends, ionization energy..."
             className="w-full h-20 rounded-lg border border-border bg-card p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
           />
+          {config.topics.length > TOPICS_MAX_LENGTH - 200 && (
+            <p className="mt-1 text-right text-[11px] text-muted-foreground">
+              {config.topics.length} / {TOPICS_MAX_LENGTH}
+            </p>
+          )}
         </div>
         <div>
           <label className="text-xs font-medium text-muted-foreground block mb-1.5">
