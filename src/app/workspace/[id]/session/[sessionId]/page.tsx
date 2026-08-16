@@ -50,6 +50,7 @@ import { Button } from "@/components/ui/button";
 import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
+import { WarmupQuiz } from "@/components/onboarding/warmup-quiz";
 import { formatDuration, formatRelativeDate } from "@/lib/utils";
 import {
   ArrowLeft,
@@ -667,7 +668,10 @@ export default function SessionDetailPage() {
                 </div>
               </div>
             ) : generating ? (
-              <GeneratingPlanCard title={session.title} />
+              <GeneratingPlanCard
+                title={session.title}
+                workspaceId={workspaceId}
+              />
             ) : activeActivity ? (
               <div className="space-y-5 animate-fade-up" key={activeActivity.id}>
                 <div className="flex items-center justify-between">
@@ -847,7 +851,13 @@ const GENERATION_STAGES = [
  * Shown while the plan is generated in the background. Progress stages are
  * time-based estimates (the server only reports done/failed via Pusher).
  */
-function GeneratingPlanCard({ title }: { title: string }) {
+function GeneratingPlanCard({
+  title,
+  workspaceId,
+}: {
+  title: string;
+  workspaceId: string;
+}) {
   const [elapsed, setElapsed] = useState(0);
 
   useEffect(() => {
@@ -870,6 +880,9 @@ function GeneratingPlanCard({ title }: { title: string }) {
         Scribe is generating a study plan grounded in your materials. This
         usually takes under a minute — you can leave and come back.
       </p>
+      <div className="w-full max-w-md">
+        <WarmupQuiz workspaceId={workspaceId} />
+      </div>
       <div className="mt-6 w-full max-w-xs space-y-2 text-left">
         {GENERATION_STAGES.map((stage, i) => (
           <p
