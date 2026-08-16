@@ -280,7 +280,7 @@ export default function HomePage() {
                       `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
                     )
                   }
-                  className="group mt-5 inline-flex items-center gap-2 rounded-lg bg-accent-bright px-4 py-2 text-[13px] font-semibold text-ink hover:bg-white transition-colors"
+                  className="group mt-5 inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-[13px] font-semibold text-ink hover:bg-white/90 transition-colors"
                 >
                   Resume session
                   <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -291,7 +291,7 @@ export default function HomePage() {
                     <button
                       type="button"
                       onClick={toggle}
-                      className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent-bright px-4 py-3 text-sm font-semibold text-ink hover:bg-white transition-colors sm:w-auto sm:py-2 sm:text-[13px]"
+                      className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-semibold text-ink hover:bg-white/90 transition-colors sm:w-auto sm:py-2 sm:text-[13px]"
                     >
                       <Plus className="h-4 w-4" />
                       New workspace

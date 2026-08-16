@@ -7,6 +7,7 @@ import {
   ArrowUp,
   FileText,
   Loader2,
+  MessageCircle,
   Paperclip,
   Sparkles,
   X,
@@ -37,8 +38,6 @@ const INTAKE_BRIEF = `You are Scribe's study intake bot. The user is setting up 
 - Once you know the subject and at least one concrete topic, tell them you have enough and that they should press "Start study session" to begin.
 Do not generate study content yourself — the session generator does that.`;
 
-const READY_RE = /enough|start study session|ready to (start|go|begin)/i;
-
 const SUGGESTIONS = [
   "Practice IB Math AA integration by parts",
   "Quiz me on AP Bio cellular respiration",
@@ -60,13 +59,8 @@ export default function StudyBotPage() {
   const conversationIdRef = useRef<string | undefined>(undefined);
   const workspaceTitleRef = useRef<string>("");
   const [hasWorkspace, setHasWorkspace] = useState(false);
-  const [uploadedCount, setUploadedCount] = useState(0);
 
   const started = messages.length > 0;
-  const lastBot = [...messages].reverse().find((m) => m.role === "bot");
-  const botSaysReady = !!lastBot && READY_RE.test(lastBot.text);
-  const userTurns = messages.filter((m) => m.role === "user").length;
-  const ready = botSaysReady || userTurns >= 2 || uploadedCount > 0;
 
   const scrollDown = () =>
     setTimeout(
@@ -109,7 +103,6 @@ export default function StudyBotPage() {
         const fileIds = await uploadFiles(workspaceId, files);
         // Analysis runs in the background; the bot can keep chatting.
         analyzeFiles(workspaceId, fileIds).catch(() => {});
-        setUploadedCount((n) => n + files.length);
       }
 
       if (!conversationIdRef.current) {
@@ -283,8 +276,8 @@ export default function StudyBotPage() {
       <main className="flex flex-1 flex-col items-center justify-center px-6 py-10">
         <div className="w-full max-w-xl animate-fade-up">
           <div className="text-center">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-ink text-white shadow-md">
-              <Sparkles className="h-5 w-5 text-accent-bright" />
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft">
+              <MessageCircle className="h-6 w-6 text-accent" />
             </div>
             <h1 className="mt-5 text-[26px] font-bold tracking-tight sm:text-3xl">
               What do you need to study?
@@ -318,16 +311,10 @@ export default function StudyBotPage() {
   return (
     <main className="flex flex-1 flex-col">
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 py-5">
-        <div className="sticky top-0 z-10 -mx-4 flex items-center justify-between gap-3 border-b border-border bg-background/95 px-4 pb-3 backdrop-blur">
-          <div className="flex items-center gap-2.5">
-            <div>
-              <h1 className="text-sm font-semibold leading-tight">Study bot</h1>
-              <p className="text-[11px] leading-tight text-faint">
-                {ready
-                  ? "Ready when you are"
-                  : "Figuring out what to build for you"}
-              </p>
-            </div>
+        <div className="flex items-center justify-between gap-3 pb-4">
+          <div className="flex items-center gap-2">
+            <MessageCircle className="h-4 w-4 text-accent" />
+            <h1 className="text-sm font-semibold">Study bot</h1>
           </div>
           {hasWorkspace && (
             <Button
@@ -351,7 +338,7 @@ export default function StudyBotPage() {
             </Button>
           )}
         </div>
-        <div className="flex-1 space-y-4 overflow-y-auto py-5">
+        <div className="flex-1 space-y-4 overflow-y-auto pb-4">
           {messages.map((m, i) => (
             <div
               key={i}
