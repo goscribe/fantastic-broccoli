@@ -259,7 +259,7 @@ export default function HomePage() {
                   ? `${resumable.workspace.title} · ${formatDuration(resumable.session.durationMinutes)} · ${resumable.session.activities.filter((a) => a.status === "completed").length} of ${resumable.session.activities.length} activities complete`
                   : "A plan generated around your syllabus and schedule."}
               </p>
-              {resumable && (
+              {resumable ? (
                 <button
                   type="button"
                   onClick={() =>
@@ -271,6 +271,15 @@ export default function HomePage() {
                 >
                   Resume session
                   <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setCreating("workspace")}
+                  className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent-bright px-4 py-3 text-sm font-semibold text-ink hover:bg-white transition-colors sm:w-auto sm:py-2 sm:text-[13px]"
+                >
+                  <Plus className="h-4 w-4" />
+                  New workspace
                 </button>
               )}
             </div>
@@ -300,16 +309,16 @@ export default function HomePage() {
           <h2 className="text-sm font-semibold mb-3">Study overview</h2>
           {calendarLoading || treeLoading ? (
             <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
-              <div className="rounded-xl border border-border bg-card p-4 space-y-3">
+              <div className="hidden rounded-xl border border-border bg-card p-4 space-y-3 lg:block">
                 <Skeleton className="h-4 w-28" />
                 <Skeleton className="h-40 w-full" />
               </div>
               <div className="rounded-xl border border-border bg-card p-4 flex flex-col gap-4">
                 <div className="flex items-center justify-between">
                   <Skeleton className="h-4 w-20" />
-                  <Skeleton className="h-7 w-28 rounded-full" />
+                  <Skeleton className="h-6 w-24 rounded-full" />
                 </div>
-                <div className="flex flex-1 items-end gap-2.5 min-h-28">
+                <div className="hidden flex-1 items-end gap-2.5 min-h-28 lg:flex">
                   {[40, 65, 30, 80, 55, 70, 45].map((h, i) => (
                     <Skeleton
                       key={i}
@@ -327,24 +336,26 @@ export default function HomePage() {
             </div>
           ) : (
           <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
-            <div className="rounded-xl border border-border bg-card p-4">
+            {/* The calendar and weekly chart are reference views, not actions:
+                on phones they pushed the real content below the fold. */}
+            <div className="hidden rounded-xl border border-border bg-card p-4 lg:block">
               <StudyCalendar dailyActivity={dailyActivity} />
             </div>
             <div className="rounded-xl border border-border bg-card p-4 flex flex-col">
               <div className="flex flex-1 flex-col">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-semibold">This week</p>
-                  <div className="flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 dark:border-amber-400/25 dark:bg-amber-400/10">
-                    <StreakFlame className="h-5 w-5" />
-                    <p className="text-[12px] font-semibold text-amber-700 dark:text-amber-300">
-                      <span className="text-sm font-bold tabular-nums">
+                  <div className="flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 dark:border-amber-400/25 dark:bg-amber-400/10">
+                    <StreakFlame className="h-4 w-4" />
+                    <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-300">
+                      <span className="text-[13px] font-bold tabular-nums">
                         {streak}
                       </span>{" "}
                       day streak
                     </p>
                   </div>
                 </div>
-                <div className="mt-4 flex min-h-28 flex-1 items-end gap-2.5">
+                <div className="mt-4 hidden min-h-28 flex-1 items-end gap-2.5 lg:flex">
                   {lastSevenDays.map(({ label, count, isToday }, i) => (
                     <div
                       key={i}
@@ -378,7 +389,7 @@ export default function HomePage() {
                   ))}
                 </div>
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+              <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:mt-4">
                 {[
                   {
                     label: "Active days",
@@ -475,7 +486,7 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => setCreating("folder")}
-                className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground rounded-lg px-2 py-1 hover:bg-muted"
+                className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
               >
                 <Plus className="h-3.5 w-3.5" />
                 New folder
@@ -505,8 +516,9 @@ export default function HomePage() {
                 />
               ))}
             </div>
-            {rootWorkspaces.length > 0 && (
-              <div className="mt-6">
+            {/* Always offered: with only folders (or nothing) there was no
+                visible way to create a workspace outside the sidebar. */}
+            <div className="mt-6">
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-sm font-semibold text-foreground">
                     Workspaces
@@ -514,7 +526,7 @@ export default function HomePage() {
                   <button
                     type="button"
                     onClick={() => setCreating("workspace")}
-                    className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground rounded-lg px-2 py-1 hover:bg-muted"
+                    className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-semibold hover:border-accent/40 hover:bg-muted"
                   >
                     <Plus className="h-3.5 w-3.5" />
                     New workspace
@@ -546,7 +558,6 @@ export default function HomePage() {
                   ))}
                 </div>
               </div>
-            )}
           </section>
         )}
 

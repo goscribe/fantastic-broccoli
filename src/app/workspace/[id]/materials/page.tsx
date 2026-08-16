@@ -20,6 +20,7 @@ import { Card, Surface } from "@/components/ui/card";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { formatRelativeDate } from "@/lib/utils";
+import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import {
   Square,
   Circle,
@@ -32,6 +33,7 @@ import {
   RefreshCw,
   Clock3,
   Image as ImageIcon,
+  Camera,
   Layers,
   FileText,
   Trash2,
@@ -507,6 +509,7 @@ export default function WorkspaceMaterialsPage() {
   const workspaceId = params.id as string;
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
 
   const { data: workspace, isLoading: workspaceLoading } = useQuery({
     queryKey: ["workspace", workspaceId],
@@ -673,11 +676,32 @@ export default function WorkspaceMaterialsPage() {
             )}
             {uploading ? "Uploading..." : "Upload files"}
           </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            className="sm:hidden"
+            onClick={() => cameraInputRef.current?.click()}
+            disabled={uploading}
+          >
+            <Camera className="h-3.5 w-3.5 mr-1.5" />
+            Scan notes
+          </Button>
           <input
             ref={fileInputRef}
             type="file"
             multiple
-            accept=".pdf,.ppt,.pptx,.key,audio/*"
+            accept={UPLOAD_ACCEPT}
+            className="hidden"
+            onChange={(e) => {
+              void handleUpload(e.target.files);
+              e.target.value = "";
+            }}
+          />
+          <input
+            ref={cameraInputRef}
+            type="file"
+            accept="image/*"
+            capture="environment"
             className="hidden"
             onChange={(e) => {
               void handleUpload(e.target.files);
