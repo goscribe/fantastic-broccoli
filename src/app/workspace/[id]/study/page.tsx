@@ -108,28 +108,26 @@ export default function WorkspaceStudyPage() {
             onClick={() =>
               router.push(`/workspace/${workspaceId}/session/${resumable.id}`)
             }
-            className="group w-full text-left rounded-3xl border border-border bg-card p-6 hover:border-border-strong transition-all animate-fade-up"
+            className="group w-full text-left rounded-3xl border border-accent/20 bg-gradient-to-br from-accent-soft via-card to-card p-6 hover:border-accent/40 transition-all animate-fade-up"
           >
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <span className="flex items-center gap-1.5 text-xs font-semibold text-accent">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  Continue studying
-                </span>
-                <h2 className="text-lg font-bold tracking-tight mt-1">
-                  {resumable.title}
-                </h2>
-                <p className="text-sm text-muted-foreground mt-0.5">
-                  {resumable.progress}% complete ·{" "}
-                  {formatDuration(resumable.durationMinutes)}
-                </p>
-              </div>
-              <span className="flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-1.5 text-xs font-semibold text-white group-hover:opacity-90 transition-opacity shrink-0">
+            <div className="flex items-center justify-between mb-3">
+              <span className="flex items-center gap-1.5 text-xs font-semibold text-accent">
+                <Sparkles className="h-3.5 w-3.5" />
+                Continue studying
+              </span>
+              <span className="flex items-center gap-1.5 text-xs font-semibold text-accent-foreground bg-accent rounded-full px-3.5 py-1.5 group-hover:gap-2.5 transition-all">
                 Resume
                 <ArrowRight className="h-3.5 w-3.5" />
               </span>
             </div>
-            <ProgressBar value={resumable.progress} className="mt-4" />
+            <h2 className="text-lg font-bold tracking-tight">
+              {resumable.title}
+            </h2>
+            <p className="text-sm text-muted-foreground mt-0.5">
+              {resumable.progress}% complete ·{" "}
+              {formatDuration(resumable.durationMinutes)}
+            </p>
+            <ProgressBar value={resumable.progress} className="mt-3.5" />
           </button>
         )}
 
@@ -249,11 +247,9 @@ export default function WorkspaceStudyPage() {
           </div>
 
           {!workspace || sessions.length === 0 ? (
-            <div className="rounded-3xl border border-border bg-card p-8 text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft text-accent">
-                <Sparkles className="h-5 w-5" />
-              </div>
-              <p className="mt-4 text-sm font-semibold">
+            <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6">
+              <Sparkles className="h-7 w-7 text-accent mx-auto mb-3" />
+              <p className="text-sm font-semibold">
                 {workspace?.sharedBy
                   ? "Your sessions are private"
                   : "No sessions yet"}

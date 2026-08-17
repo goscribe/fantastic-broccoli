@@ -31,7 +31,7 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
   return (
     <div
       onClick={() => onClick(workspace.id)}
-      className="group relative cursor-pointer rounded-2xl border border-border bg-card p-5 transition-all duration-150 hover:border-border-strong hover:-translate-y-0.5 hover:shadow-sm active:translate-y-0"
+      className="group relative cursor-pointer rounded-2xl border border-border bg-card p-5 transition-all duration-150 hover:border-border-strong hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
     >
       {actions ? (
         <ResourceActionsMenu

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { faqs } from "./faqs";
 import { ScribeLogo, ScribeMark } from "@/components/graphics/logo";
@@ -149,8 +149,27 @@ const plans = [
   },
 ];
 
+const sessionPreview = [
+  { icon: BookOpen, label: "Reading: Enzyme kinetics", meta: "12 min" },
+  { icon: ListChecks, label: "Comprehension check", meta: "4 questions" },
+  { icon: ClipboardCheck, label: "Worksheet: Rate equations", meta: "AI-marked" },
+  { icon: Layers, label: "Flashcards: Key definitions", meta: "18 cards" },
+  { icon: TextCursorInput, label: "Cloze: Michaelis–Menten", meta: "1 passage" },
+];
+
 export default function LandingPage() {
   const { theme, toggleTheme } = useTheme();
+  const [doneCount, setDoneCount] = useState(2);
+
+  useEffect(() => {
+    const id = window.setInterval(
+      () => setDoneCount((c) => (c >= sessionPreview.length ? 0 : c + 1)),
+      2200,
+    );
+    return () => window.clearInterval(id);
+  }, []);
+
+  const progress = Math.round((doneCount / sessionPreview.length) * 100);
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
@@ -204,67 +223,168 @@ export default function LandingPage() {
         <section className="relative overflow-hidden pb-20 pt-16 md:pt-24">
           <GlowField />
           <div className="relative mx-auto max-w-6xl px-6">
-            <DotGrid className="inset-y-0 right-0 hidden w-1/2 lg:block" />
-            <div className="relative grid items-center gap-12 lg:grid-cols-[1fr_minmax(0,620px)]">
-              <div className="animate-fade-up">
-                <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-accent">
-                  Turn any course material into a study session
-                </p>
-                <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
-                  Stop re-reading. Start learning.
-                </h1>
-                <p className="mt-5 max-w-xl text-lg text-muted-foreground text-pretty">
-                  Upload your notes, slides, or PDFs. Scribe turns them into
-                  flashcards, quizzes, worksheets, and readings — one complete
-                  study session built from your own course material.
-                </p>
-                <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <Link href="/signup">
-                    <Button size="lg" className="gap-2">
-                      Start studying
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                  <Link href="/login">
-                    <Button size="lg" variant="outline">
-                      Sign in
-                    </Button>
-                  </Link>
-                </div>
-                <p className="mt-4 text-xs text-faint">
-                  Free to start · No credit card required
-                </p>
-              </div>
-
-              <div className="relative hidden animate-fade-up lg:block">
-                <Image
-                  src="/graphics/landing-hero.jpg"
-                  alt="Scribe study session preview"
-                  width={1240}
-                  height={827}
-                  className="rounded-3xl border border-border bg-card shadow-sm"
-                  priority
-                />
-              </div>
-            </div>
-
-            {/* Subjects strip */}
-            <div className="relative mt-16 border-t border-border pt-10">
-              <p className="text-center text-xs font-medium uppercase tracking-wider text-faint">
-                Built for every subject you study
+          <DotGrid className="inset-y-0 right-0 hidden w-1/2 lg:block" />
+          <div className="relative flex flex-col items-center">
+            <div className="animate-fade-up flex max-w-2xl flex-col items-center text-center">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-accent">
+                Turn any course material into a study session
               </p>
-              <ul className="mt-6 flex flex-wrap items-center justify-center gap-3">
-                {subjects.map((subject) => (
-                  <li
-                    key={subject.label}
-                    className="flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:border-border-strong hover:text-foreground"
-                  >
-                    <WorkspaceIcon icon={subject.icon} className="h-5 w-5" />
-                    {subject.label}
-                  </li>
-                ))}
-              </ul>
+              <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
+                Stop re-reading. Start learning.
+              </h1>
+              <p className="mt-5 max-w-xl text-lg text-muted-foreground text-pretty">
+                Upload your notes, slides, or PDFs. Scribe turns them into
+                flashcards, quizzes, worksheets, and readings — one complete
+                study session built from your own course material.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+                <Link href="/signup">
+                  <Button size="lg" className="gap-2">
+                    Start studying
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/login">
+                  <Button size="lg" variant="outline">
+                    Sign in
+                  </Button>
+                </Link>
+              </div>
+              <p className="mt-4 text-xs text-faint">
+                Free to start · No credit card required
+              </p>
+              <div className="mt-5 flex justify-center">
+                <a
+                  href="https://www.producthunt.com/products/scribe-19?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-scribe-1273"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1191678&amp;theme=light&amp;t=1785953007734"
+                    alt="Scribe - Upload anything. Get personalized study sessions in seconds. | Product Hunt"
+                    width={250}
+                    height={54}
+                  />
+                </a>
+              </div>
             </div>
+
+            {/* Session preview card */}
+            <div className="relative mt-14 hidden w-full max-w-md animate-fade-up lg:block">
+              {/* Floating flashcard */}
+              <div className="animate-float absolute -bottom-16 -left-24 z-10 hidden w-44 rounded-xl border border-border bg-card p-3 shadow-sm xl:block">
+                <p className="text-[10px] font-semibold text-faint">
+                  FLASHCARD 7/18
+                </p>
+                <p className="mt-1 text-[13px] font-semibold">
+                  What does K<sub>m</sub> represent?
+                </p>
+                <p className="mt-1.5 text-[11px] text-muted-foreground">
+                  Tap to reveal answer
+                </p>
+              </div>
+              {/* Floating marking chip */}
+              <div
+                className="animate-float absolute -right-6 -top-5 z-10 hidden items-center gap-2 rounded-full border border-border bg-card py-1.5 pl-1.5 pr-3.5 shadow-sm xl:flex"
+                style={{ animationDelay: "-2.5s" }}
+              >
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-soft text-accent">
+                  <Check className="h-3.5 w-3.5" />
+                </span>
+                <span className="text-[12px] font-semibold">
+                  Worksheet marked · 5/6
+                </span>
+              </div>
+              <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-[11px] font-semibold text-accent">
+                      Today&apos;s session
+                    </p>
+                    <p className="mt-0.5 text-sm font-bold">
+                      Biochemistry · Week 4
+                    </p>
+                    <p className="mt-1 flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                      <span className="flex items-center -space-x-1.5">
+                        <PdfArt className="h-5 w-5 rounded bg-card ring-1 ring-card" />
+                        <SlidesArt className="h-5 w-5 rounded bg-card ring-1 ring-card" />
+                        <AudioArt className="h-5 w-5 rounded bg-card ring-1 ring-card" />
+                      </span>
+                      3 sources parsed &amp; ready
+                    </p>
+                  </div>
+                  <span className="rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold tabular-nums text-accent">
+                    {progress}% done
+                  </span>
+                </div>
+                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
+                  <div
+                    className="h-full rounded-full bg-accent transition-all duration-700 ease-out"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+                <ul className="mt-4 space-y-2">
+                  {sessionPreview.map((item, i) => {
+                    const done = i < doneCount;
+                    const active = i === doneCount;
+                    return (
+                      <li
+                        key={item.label}
+                        className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 transition-colors duration-500 ${
+                          active
+                            ? "border-accent/40 bg-background"
+                            : "border-border bg-background"
+                        }`}
+                      >
+                        <span
+                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg transition-colors duration-500 ${
+                            done
+                              ? "bg-accent-soft text-accent"
+                              : "bg-muted text-muted-foreground"
+                          }`}
+                        >
+                          {done ? (
+                            <Check className="h-3.5 w-3.5" />
+                          ) : (
+                            <item.icon className="h-3.5 w-3.5" />
+                          )}
+                        </span>
+                        <span
+                          className={`flex-1 truncate text-[13px] font-medium transition-colors duration-500 ${
+                            done ? "text-muted-foreground line-through" : ""
+                          }`}
+                        >
+                          {item.label}
+                        </span>
+                        <span className="shrink-0 text-[11px] text-faint">
+                          {item.meta}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Subjects strip */}
+          <div className="relative mt-16 border-t border-border pt-10">
+            <p className="text-center text-xs font-medium uppercase tracking-wider text-faint">
+              Built for every subject you study
+            </p>
+            <ul className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              {subjects.map((subject) => (
+                <li
+                  key={subject.label}
+                  className="flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:border-border-strong hover:text-foreground"
+                >
+                  <WorkspaceIcon icon={subject.icon} className="h-5 w-5" />
+                  {subject.label}
+                </li>
+              ))}
+            </ul>
+          </div>
           </div>
         </section>
 
