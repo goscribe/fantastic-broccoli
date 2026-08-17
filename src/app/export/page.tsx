@@ -199,7 +199,7 @@ function ExportEditor() {
             ) : (
               <Sparkles className="h-3.5 w-3.5 mr-1.5" />
             )}
-            Apply · 2 tokens
+            Apply · 4 tokens
           </Button>
         </form>
         {assist.isError && (

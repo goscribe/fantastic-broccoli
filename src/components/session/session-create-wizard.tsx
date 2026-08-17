@@ -369,7 +369,7 @@ export function SessionCreateWizard({
                 ) : (
                   <>
                     <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                    Generate plan · 20 tokens
+                    Generate plan · 40 tokens
                   </>
                 )}
               </Button>

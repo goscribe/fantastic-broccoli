@@ -409,7 +409,7 @@ export interface ExportDoc {
   sections: { heading: string; body: string }[];
 }
 
-/** AI edit/restyle of the export editor document. Costs 2 tokens. */
+/** AI edit/restyle of the export editor document. Costs 4 tokens. */
 export function assistExport(input: {
   instruction: string;
   doc: ExportDoc;

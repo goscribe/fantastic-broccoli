@@ -303,7 +303,7 @@ export default function StudyBotPage() {
             ))}
           </div>
           <p className="mt-5 text-center text-[11px] text-faint">
-            Chatting is free · generating the session costs 20 tokens
+            Chatting is free · generating the session costs 40 tokens
           </p>
         </div>
       </main>
@@ -364,7 +364,7 @@ export default function StudyBotPage() {
                       ) : (
                         <>
                           <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                          Start study session · 20 tokens
+                          Start study session · 40 tokens
                           <ArrowRight className="h-3.5 w-3.5 ml-1" />
                         </>
                       )}

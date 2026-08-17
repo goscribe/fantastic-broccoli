@@ -407,7 +407,7 @@ export function CreateResourceDialog({
                     onClick={() => void startCurated(curriculum, subject, units)}
                   >
                     <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                    Generate session · 20 tokens
+                    Generate session · 40 tokens
                   </Button>
                 </div>
               </>
