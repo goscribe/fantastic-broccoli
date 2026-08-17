@@ -7,7 +7,6 @@ import {
   ArrowUp,
   FileText,
   Loader2,
-  MessageCircle,
   Paperclip,
   Sparkles,
   X,
@@ -279,7 +278,7 @@ export default function StudyBotPage() {
 
   if (!started) {
     return (
-      <main className="flex flex-1 flex-col items-center justify-center px-6 py-10">
+      <main className="flex flex-1 flex-col items-center justify-center bg-white px-6 py-10">
         <div className="w-full max-w-xl animate-fade-up">
           <div className="text-center">
             <h1 className="text-[26px] font-bold tracking-tight sm:text-3xl">
@@ -312,12 +311,8 @@ export default function StudyBotPage() {
   }
 
   return (
-    <main className="flex flex-1 flex-col">
+    <main className="flex flex-1 flex-col bg-white">
       <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-5">
-        <div className="mb-4 flex items-center gap-2 rounded-2xl border border-border bg-card px-4 py-3">
-          <MessageCircle className="h-4 w-4 text-accent" />
-          <h1 className="text-sm font-semibold">Study bot</h1>
-        </div>
         <div className="flex flex-1 flex-col gap-4 overflow-y-auto pb-4">
           {/* Spacer pushes a short conversation down next to the composer
               without breaking scroll-to-top when it overflows. */}
@@ -398,7 +393,7 @@ export default function StudyBotPage() {
           ))}
           <div ref={bottomRef} />
         </div>
-        <div className="sticky bottom-0 bg-background pb-2 pt-1.5">
+        <div className="sticky bottom-0 bg-white pb-2 pt-1.5">
           {composer}
         </div>
       </div>
