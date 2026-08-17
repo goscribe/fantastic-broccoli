@@ -32,7 +32,10 @@ import {
   markFirstSessionOnboardingSkipped,
 } from "@/components/onboarding/first-session-onboarding";
 import { onTreeChanged } from "@/lib/tree-events";
-import { Search, ArrowRight, Plus } from "lucide-react";
+import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
+import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { fetchDueReview } from "@/lib/api/study-session";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { Banner } from "@/components/ui/banner";
 
@@ -73,6 +76,12 @@ export default function HomePage() {
     Map<string, StudySession[]>
   >(new Map());
   const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
+
+  const { data: dueReview } = useQuery({
+    queryKey: ["due-review-count"],
+    queryFn: fetchDueReview,
+    staleTime: 60_000,
+  });
 
   const openWorkspaceCreate = (choice: "workspace" | "bot") => {
     if (choice === "bot") {
@@ -334,6 +343,32 @@ export default function HomePage() {
             )}
           </div>
         </section>
+
+        {dueReview && dueReview.total > 0 && (
+          <Link
+            href="/flashcards/review"
+            className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-card px-5 py-4 animate-fade-up hover:border-accent/40 transition-colors"
+          >
+            <div className="flex items-center gap-3.5">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-accent">
+                <RotateCcw className="h-4 w-4" />
+              </span>
+              <div>
+                <p className="text-sm font-semibold">
+                  {dueReview.total} card{dueReview.total === 1 ? "" : "s"} due
+                  for review
+                </p>
+                <p className="text-[13px] text-muted-foreground">
+                  A quick review today keeps them in memory.
+                </p>
+              </div>
+            </div>
+            <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent">
+              Review now
+              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+            </span>
+          </Link>
+        )}
 
         {/* Study overview */}
         <section className="animate-fade-up">

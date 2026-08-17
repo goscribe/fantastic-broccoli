@@ -871,44 +871,50 @@ function GeneratingPlanCard({
   );
 
   return (
-    <div className="flex flex-col items-center justify-center py-20 text-center animate-fade-up">
-      <div className="h-8 w-8 rounded-full border-2 border-accent border-t-transparent animate-spin" />
-      <p className="mt-4 text-sm font-semibold">
-        Building &ldquo;{title}&rdquo;…
-      </p>
-      <p className="mt-1 text-xs text-muted-foreground">
-        Scribe is generating a study plan grounded in your materials. This
-        usually takes under a minute — you can leave and come back.
-      </p>
-      <div className="w-full max-w-md">
+    <div className="flex justify-center px-4 py-12 animate-fade-up">
+      <div className="w-full max-w-lg">
+        <div className="rounded-2xl border border-border bg-card p-6">
+          <div className="flex items-start gap-4">
+            <div className="mt-0.5 h-7 w-7 shrink-0 rounded-full border-2 border-accent border-t-transparent animate-spin" />
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-semibold">
+                Building &ldquo;{title}&rdquo;…
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                A study plan grounded in your materials — usually under a
+                minute. You can leave and come back.
+              </p>
+            </div>
+            <p className="shrink-0 text-[11px] text-faint tabular-nums">
+              {elapsed}s
+            </p>
+          </div>
+          <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2 border-t border-border pt-4">
+            {GENERATION_STAGES.map((stage, i) => (
+              <p
+                key={stage.label}
+                className="flex items-center gap-2 text-xs font-medium"
+              >
+                {i < currentStage ? (
+                  <Check className="h-3.5 w-3.5 text-accent" />
+                ) : i === currentStage ? (
+                  <span className="h-3.5 w-3.5 rounded-full border-[1.5px] border-accent border-t-transparent animate-spin" />
+                ) : (
+                  <span className="h-1.5 w-1.5 mx-1 rounded-full bg-border-strong" />
+                )}
+                <span
+                  className={
+                    i <= currentStage ? "text-foreground" : "text-faint"
+                  }
+                >
+                  {stage.label}
+                </span>
+              </p>
+            ))}
+          </div>
+        </div>
         <WarmupQuiz workspaceId={workspaceId} />
       </div>
-      <div className="mt-6 w-full max-w-xs space-y-2 text-left">
-        {GENERATION_STAGES.map((stage, i) => (
-          <p
-            key={stage.label}
-            className="flex items-center gap-2 text-xs font-medium"
-          >
-            {i < currentStage ? (
-              <Check className="h-3.5 w-3.5 text-accent" />
-            ) : i === currentStage ? (
-              <span className="h-3.5 w-3.5 rounded-full border-[1.5px] border-accent border-t-transparent animate-spin" />
-            ) : (
-              <span className="h-1.5 w-1.5 mx-1 rounded-full bg-border-strong" />
-            )}
-            <span
-              className={
-                i <= currentStage ? "text-foreground" : "text-faint"
-              }
-            >
-              {stage.label}
-            </span>
-          </p>
-        ))}
-      </div>
-      <p className="mt-5 text-[11px] text-faint tabular-nums">
-        {elapsed}s elapsed
-      </p>
     </div>
   );
 }
