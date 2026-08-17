@@ -7,7 +7,9 @@ import {
 } from "@/lib/flashcard-decks";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
 import { BankDocThumb } from "@/components/bank/bank-content";
-import { Layers } from "lucide-react";
+import { Layers, RotateCcw } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchDueReview } from "@/lib/api/study-session";
 
 function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
   const { item, workspace, cardCount } = deck;
@@ -49,14 +51,30 @@ function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
 
 export default function FlashcardsPage() {
   const { data: decks, isLoading } = useFlashcardDecks();
+  const { data: dueReview } = useQuery({
+    queryKey: ["due-review-count"],
+    queryFn: fetchDueReview,
+    staleTime: 60_000,
+  });
 
   return (
     <main className="flex-1 px-6 py-6 md:px-10">
-      <div className="mb-6">
-        <h1 className="text-xl font-bold tracking-tight">Flashcards</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          All flashcard and vocab decks from your workspaces, in one place.
-        </p>
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="text-xl font-bold tracking-tight">Flashcards</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            All flashcard and vocab decks from your workspaces, in one place.
+          </p>
+        </div>
+        {dueReview && dueReview.total > 0 && (
+          <Link
+            href="/flashcards/review"
+            className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-[13px] font-semibold text-white hover:bg-accent/90 transition-colors"
+          >
+            <RotateCcw className="h-3.5 w-3.5" />
+            Review {dueReview.total} due card{dueReview.total === 1 ? "" : "s"}
+          </Link>
+        )}
       </div>
 
       {isLoading && <CardGridSkeleton count={6} />}

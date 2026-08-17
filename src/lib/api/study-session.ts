@@ -461,6 +461,28 @@ export interface DeckCardProgress {
   } | null;
 }
 
+export interface DueReviewCard {
+  flashcardId: string;
+  front: string;
+  back: string;
+  deckId: string;
+  deckTitle: string;
+  workspaceId: string | null;
+  progress: {
+    timesStudied: number;
+    masteryLevel: number;
+    nextReviewAt: string | Date | null;
+  };
+}
+
+/** Cards due for spaced review across all the user's workspaces. */
+export const fetchDueReview = () =>
+  rpc<{ total: number; cards: DueReviewCard[] }>(
+    "flashcards.getDueReview",
+    "query",
+    {},
+  );
+
 /** Per-card SRS progress for a flashcard deck artifact. */
 export const fetchDeckProgress = (artifactId: string) =>
   rpc<DeckCardProgress[]>("flashcards.getSetProgress", "query", {
