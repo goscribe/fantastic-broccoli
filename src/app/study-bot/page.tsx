@@ -347,9 +347,11 @@ export default function StudyBotPage() {
                   i === messages.length - 1 &&
                   hasWorkspace &&
                   !busy &&
-                  // Fallback after a few turns so the CTA can't get stuck
-                  // behind the bot never saying the magic phrase.
-                  (READY_RE.test(m.text) || botReplies >= 3) && (
+                  // Fallback after a longer conversation so the CTA can't get
+                  // stuck behind the bot never saying the magic phrase — but
+                  // never while the bot is still asking a question.
+                  (READY_RE.test(m.text) ||
+                    (botReplies >= 6 && !m.text.trimEnd().endsWith("?"))) && (
                     <Button
                       size="sm"
                       onClick={() => void startSession()}
