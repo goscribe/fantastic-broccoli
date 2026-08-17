@@ -31,7 +31,7 @@ import {
   ListChecks,
   MessageSquare,
   Moon,
-  Sparkles,
+  Plus,
   Sun,
   TextCursorInput,
 } from "lucide-react";
@@ -224,23 +224,20 @@ export default function LandingPage() {
           <GlowField />
           <div className="relative mx-auto max-w-6xl px-6">
           <DotGrid className="inset-y-0 right-0 hidden w-1/2 lg:block" />
-          <div className="relative grid items-center gap-12 lg:grid-cols-[1fr_minmax(0,420px)]">
-            <div className="animate-fade-up">
-              <p className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
-                <Sparkles className="h-3.5 w-3.5 text-accent" />
-                PDFs &rarr; flashcards, quizzes &amp; study guides
+          <div className="relative flex flex-col items-center">
+            <div className="animate-fade-up flex max-w-2xl flex-col items-center text-center">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-accent">
+                Turn any course material into a study session
               </p>
               <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
-                Stop re-reading.
-                <br />
-                <span className="text-accent">Start learning.</span>
+                Stop re-reading. Start learning.
               </h1>
               <p className="mt-5 max-w-xl text-lg text-muted-foreground text-pretty">
                 Upload your notes, slides, or PDFs. Scribe turns them into
                 flashcards, quizzes, worksheets, and readings — one complete
                 study session built from your own course material.
               </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <Link href="/signup">
                   <Button size="lg" className="gap-2">
                     Start studying
@@ -256,7 +253,7 @@ export default function LandingPage() {
               <p className="mt-4 text-xs text-faint">
                 Free to start · No credit card required
               </p>
-              <div className="mt-5 flex justify-center lg:justify-start">
+              <div className="mt-5 flex justify-center">
                 <a
                   href="https://www.producthunt.com/products/scribe-19?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-scribe-1273"
                   target="_blank"
@@ -274,7 +271,7 @@ export default function LandingPage() {
             </div>
 
             {/* Session preview card */}
-            <div className="relative hidden animate-fade-up lg:block">
+            <div className="relative mt-14 hidden w-full max-w-md animate-fade-up lg:block">
               {/* Floating flashcard */}
               <div className="animate-float absolute -bottom-16 -left-24 z-10 hidden w-44 rounded-xl border border-border bg-card p-3 shadow-sm xl:block">
                 <p className="text-[10px] font-semibold text-faint">
@@ -434,26 +431,21 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
-            <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="mt-10 grid gap-3 sm:grid-cols-2">
               {features.map((feature) => (
                 <li
                   key={feature.title}
-                  className="group relative overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm"
+                  className="flex items-start gap-4 rounded-2xl border border-border bg-card px-5 py-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm"
                 >
-                  <span
-                    aria-hidden
-                    className="pointer-events-none absolute -right-8 -top-8 h-20 w-20 rounded-full opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
-                    style={{ background: "radial-gradient(circle, var(--accent-bright), transparent 70%)" }}
-                  />
-                  <span className="relative flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft text-accent transition-transform duration-200 group-hover:scale-110">
+                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
                     <feature.icon className="h-4.5 w-4.5" />
                   </span>
-                  <h3 className="mt-3 text-sm font-semibold">
-                    {feature.title}
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                    {feature.description}
-                  </p>
+                  <span>
+                    <h3 className="text-sm font-semibold">{feature.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                      {feature.description}
+                    </p>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -653,36 +645,48 @@ export default function LandingPage() {
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
               Frequently asked questions
             </h2>
-            <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2">
-              {faqs.map((faq) => (
-                <div key={faq.q}>
-                  <h3 className="text-sm font-semibold">{faq.q}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+            <div className="mx-auto mt-10 max-w-3xl space-y-3">
+              {faqs.map((faq, i) => (
+                <details
+                  key={faq.q}
+                  open={i === 0}
+                  className="group rounded-2xl border border-border bg-card px-5 py-4"
+                >
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold [&::-webkit-details-marker]:hidden">
+                    {faq.q}
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-transform duration-200 group-open:rotate-45">
+                      <Plus className="h-3.5 w-3.5" />
+                    </span>
+                  </summary>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                     {faq.a}
                   </p>
-                </div>
+                </details>
               ))}
             </div>
           </div>
         </section>
 
         {/* Final CTA */}
-        <section className="relative overflow-hidden border-t border-border py-16 md:py-24">
-          <GlowField />
-          <div className="relative mx-auto max-w-6xl px-6 text-center">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Ready to study smarter?
-            </h2>
-            <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-              Turn a lecture PDF into something you can actually study — in
-              minutes.
-            </p>
-            <Link href="/signup" className="mt-8 inline-block">
-              <Button size="lg" className="gap-2">
-                Start studying
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
+        <section className="border-t border-border py-16 md:py-20">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="flex flex-col items-start justify-between gap-6 rounded-3xl border border-border bg-card p-8 sm:flex-row sm:items-center md:p-10">
+              <div>
+                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                  Ready to study smarter?
+                </h2>
+                <p className="mt-2 max-w-md text-muted-foreground">
+                  Turn a lecture PDF into something you can actually study —
+                  in minutes.
+                </p>
+              </div>
+              <Link href="/signup" className="shrink-0">
+                <Button size="lg" className="gap-2">
+                  Start studying
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
       </main>
