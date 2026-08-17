@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo, useEffect, useRef } from "react";
-import Image from "next/image";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
@@ -874,14 +873,6 @@ function GeneratingPlanCard({
   return (
     <div className="flex justify-center px-4 py-12 animate-fade-up">
       <div className="w-full max-w-lg">
-        <Image
-          src="/graphics/generating.jpg"
-          alt=""
-          width={220}
-          height={220}
-          className="mx-auto mb-4 h-36 w-36 rounded-3xl object-cover"
-          priority
-        />
         <div className="rounded-2xl border border-border bg-card p-6">
           <div className="flex items-start gap-4">
             <div className="mt-0.5 h-7 w-7 shrink-0 rounded-full border-2 border-accent border-t-transparent animate-spin" />
