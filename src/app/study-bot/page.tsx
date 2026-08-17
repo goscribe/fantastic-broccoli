@@ -278,7 +278,7 @@ export default function StudyBotPage() {
 
   if (!started) {
     return (
-      <main className="flex flex-1 flex-col items-center justify-center bg-white px-6 py-10">
+      <main className="flex flex-1 flex-col items-center justify-center bg-card px-6 py-10">
         <div className="w-full max-w-xl animate-fade-up">
           <div className="text-center">
             <h1 className="text-[26px] font-bold tracking-tight sm:text-3xl">
@@ -311,7 +311,7 @@ export default function StudyBotPage() {
   }
 
   return (
-    <main className="flex flex-1 flex-col bg-white">
+    <main className="flex flex-1 flex-col bg-card">
       <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-5">
         <div className="flex flex-1 flex-col gap-4 overflow-y-auto pb-4">
           {/* Spacer pushes a short conversation down next to the composer
@@ -393,7 +393,7 @@ export default function StudyBotPage() {
           ))}
           <div ref={bottomRef} />
         </div>
-        <div className="sticky bottom-0 bg-white pb-2 pt-1.5">
+        <div className="sticky bottom-0 bg-card pb-2 pt-1.5">
           {composer}
         </div>
       </div>
