@@ -38,6 +38,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { Banner } from "@/components/ui/banner";
+import { Button } from "@/components/ui/button";
 
 function computeStreak(daily: DailyActivityPoint[]): number {
   const byDate = new Map(daily.map((d) => [d.date, d.count]));
@@ -245,30 +246,14 @@ export default function HomePage() {
           </div>
         </header>
 
-        {/* Gradient banner */}
+        {/* Primary action card */}
         <section
           data-tour="home-banner"
-          className="relative z-10 rounded-2xl bg-ink p-7 text-white animate-fade-up"
+          className="relative z-10 rounded-3xl border border-border bg-card p-7 animate-fade-up"
         >
-          {/* Gradients are clipped individually (not via overflow-hidden on the
-              section) so the New-workspace dropdown can extend past the banner. */}
-          <div
-            className="pointer-events-none absolute inset-0 rounded-2xl"
-            style={{
-              background:
-                "radial-gradient(ellipse 60% 120% at 90% 0%, rgba(105,82,224,0.35) 0%, transparent 60%)",
-            }}
-          />
-          <div
-            className="pointer-events-none absolute inset-0 rounded-2xl"
-            style={{
-              background:
-                "radial-gradient(ellipse 40% 90% at 0% 100%, rgba(105,82,224,0.12) 0%, transparent 55%)",
-            }}
-          />
           <div className="relative flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-lg">
-              <p className="text-[11px] font-semibold text-accent-bright">
+              <p className="text-[11px] font-semibold text-accent">
                 {resumable ? "Continue studying" : "Get started"}
               </p>
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight mt-2 leading-snug">
@@ -276,49 +261,45 @@ export default function HomePage() {
                   ? resumable.session.title
                   : "Start your first study session"}
               </h2>
-              <p className="text-sm text-white/55 mt-1.5">
+              <p className="text-sm text-muted-foreground mt-1.5">
                 {resumable
                   ? `${resumable.workspace.title} · ${formatDuration(resumable.session.durationMinutes)} · ${resumable.session.activities.filter((a) => a.status === "completed").length} of ${resumable.session.activities.length} activities complete`
                   : "A plan generated around your syllabus and schedule."}
               </p>
               {resumable ? (
                 <div className="mt-5 flex flex-wrap items-center gap-2.5">
-                  <button
-                    type="button"
+                  <Button
+                    size="sm"
                     onClick={() =>
                       router.push(
                         `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
                       )
                     }
-                    className="group inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-[13px] font-semibold text-ink hover:bg-white/90 transition-colors"
+                    className="gap-2"
                   >
                     Resume session
-                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-                  </button>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Button>
                   <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
                     {(toggle) => (
-                      <button
-                        type="button"
+                      <Button
+                        size="sm"
+                        variant="outline"
                         onClick={toggle}
-                        className="inline-flex items-center gap-2 rounded-lg border border-white/25 px-4 py-2 text-[13px] font-semibold text-white hover:bg-white/10 transition-colors"
                       >
-                        <Plus className="h-3.5 w-3.5" />
+                        <Plus className="h-3.5 w-3.5 mr-1.5" />
                         New workspace
-                      </button>
+                      </Button>
                     )}
                   </NewWorkspaceMenu>
                 </div>
               ) : (
                 <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
                   {(toggle) => (
-                    <button
-                      type="button"
-                      onClick={toggle}
-                      className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-semibold text-ink hover:bg-white/90 transition-colors sm:w-auto sm:py-2 sm:text-[13px]"
-                    >
+                    <Button size="sm" className="mt-5 gap-2" onClick={toggle}>
                       <Plus className="h-4 w-4" />
                       New workspace
-                    </button>
+                    </Button>
                   )}
                 </NewWorkspaceMenu>
               )}
@@ -326,16 +307,16 @@ export default function HomePage() {
             {resumable && (
               <div className="hidden sm:block w-64">
                 <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-[10px] font-semibold text-white/45">
+                  <span className="text-[10px] font-semibold text-muted-foreground">
                     Progress
                   </span>
-                  <span className="text-lg font-bold tabular-nums text-accent-bright">
+                  <span className="text-lg font-bold tabular-nums text-accent">
                     {resumable.session.progress}%
                   </span>
                 </div>
-                <div className="h-1.5 rounded-full bg-white/15">
+                <div className="h-1.5 rounded-full bg-muted">
                   <div
-                    className="h-1.5 rounded-full bg-accent-bright"
+                    className="h-1.5 rounded-full bg-accent"
                     style={{ width: `${resumable.session.progress}%` }}
                   />
                 </div>
