@@ -12,6 +12,7 @@ import {
   type AnalysisProgress,
 } from "@/lib/api/materials";
 import { Material, MaterialType } from "@/types";
+import { notifyFirstFileUploaded } from "@/components/onboarding/guided-tour";
 import { Card, Surface } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatRelativeDate } from "@/lib/utils";
@@ -439,8 +440,10 @@ export function MaterialsSection({
     setUploadError(null);
     setUploading(true);
     try {
+      const isFirstFile = materials.length === 0;
       const fileIds = await uploadFiles(workspaceId, Array.from(files));
       await analyzeFiles(workspaceId, fileIds);
+      if (isFirstFile) notifyFirstFileUploaded();
       // Show a pending badge immediately; Pusher events take over from here.
       setFileStatuses((prev) => ({
         ...prev,

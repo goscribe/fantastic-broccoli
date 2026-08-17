@@ -6,6 +6,7 @@ export const GUIDED_TOUR_COOKIES = {
   analysis: "scribe_tour_analysis_v1",
   study: "scribe_tour_study_v1",
   wizard: "scribe_tour_wizard_v1",
+  firstFile: "scribe_tour_first_file_v1",
 } as const;
 
 export type GuidedTourPhase = keyof typeof GUIDED_TOUR_COOKIES;

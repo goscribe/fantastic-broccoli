@@ -6,11 +6,21 @@ import { usePathname } from "next/navigation";
 import type { EventData, Step, TooltipRenderProps } from "react-joyride";
 import { Button } from "@/components/ui/button";
 import {
+  hasCompletedGuidedTour,
   markGuidedTourCompleted,
   type GuidedTourPhase,
 } from "@/lib/onboarding";
 
 const TOUR_EVENT = "scribe:start-guided-tour";
+const FIRST_FILE_EVENT = "scribe:first-file-uploaded";
+
+/**
+ * Fired after a user's very first file upload: auto-starts a one-step tour
+ * pointing at the "New session" button (shown once, cookie-guarded).
+ */
+export function notifyFirstFileUploaded(): void {
+  window.dispatchEvent(new Event(FIRST_FILE_EVENT));
+}
 
 /** Starts the guided tour for the current route (wired to the "?" button). */
 export function requestGuidedTour(): void {
@@ -123,6 +133,16 @@ const analysisSteps: Step[] = [
   },
 ];
 
+const firstFileSteps: Step[] = [
+  {
+    target: '[data-tour="new-session"]',
+    title: "Your file is in — now study it",
+    content:
+      "Scribe is analyzing your material. Create a study session and it'll build readings, quizzes, and flashcards from it.",
+    placement: "bottom",
+  },
+];
+
 const wizardSteps: Step[] = [
   {
     target: '[data-tour="session-wizard"]',
@@ -146,6 +166,10 @@ const materialsPhase: PhaseConfig = {
   steps: materialsSteps,
 };
 const analysisPhase: PhaseConfig = { phase: "analysis", steps: analysisSteps };
+const firstFilePhase: PhaseConfig = {
+  phase: "firstFile",
+  steps: firstFileSteps,
+};
 
 /**
  * Candidate phases for a route, in priority order. A phase only starts once
@@ -156,7 +180,10 @@ const analysisPhase: PhaseConfig = { phase: "analysis", steps: analysisSteps };
 function phasesForPath(pathname: string): PhaseConfig[] {
   if (pathname === "/") return [homePhase];
   if (/^\/workspace\/[^/]+\/study\/?$/.test(pathname)) {
-    return [wizardPhase, analysisPhase, materialsPhase, studyPhase];
+    // firstFilePhase is last so the "?" button never picks it; it's only
+    // auto-started via notifyFirstFileUploaded, but must be listed here so
+    // the route-change reset doesn't cancel it.
+    return [wizardPhase, analysisPhase, materialsPhase, studyPhase, firstFilePhase];
   }
   return [];
 }
@@ -234,8 +261,18 @@ export function GuidedTour() {
       const candidates = phasesForPath(pathname);
       setActive(candidates.find(firstTargetVisible) ?? null);
     };
+    const firstFileHandler = () => {
+      if (hasCompletedGuidedTour("firstFile")) return;
+      if (!firstTargetVisible(firstFilePhase)) return;
+      markGuidedTourCompleted("firstFile");
+      setActive(firstFilePhase);
+    };
     window.addEventListener(TOUR_EVENT, handler);
-    return () => window.removeEventListener(TOUR_EVENT, handler);
+    window.addEventListener(FIRST_FILE_EVENT, firstFileHandler);
+    return () => {
+      window.removeEventListener(TOUR_EVENT, handler);
+      window.removeEventListener(FIRST_FILE_EVENT, firstFileHandler);
+    };
   }, [pathname, generation]);
 
   const onEvent = (data: EventData) => {
