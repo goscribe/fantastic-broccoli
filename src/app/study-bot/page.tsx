@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
   ArrowRight,
@@ -281,6 +282,14 @@ export default function StudyBotPage() {
       <main className="flex flex-1 flex-col items-center justify-center bg-card px-6 py-10">
         <div className="w-full max-w-xl animate-fade-up">
           <div className="text-center">
+            <Image
+              src="/graphics/study-bot.jpg"
+              alt=""
+              width={160}
+              height={160}
+              className="mx-auto mb-4 h-28 w-28 rounded-3xl object-cover"
+              priority
+            />
             <h1 className="text-[26px] font-bold tracking-tight sm:text-3xl">
               What do you need to study?
             </h1>
