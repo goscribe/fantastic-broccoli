@@ -8,6 +8,7 @@ import type { Folder, StudySession, Workspace } from "@/types";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { formatDuration } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/misc";
 import { StreakFlame } from "@/components/graphics/streak-flame";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { StudyCalendar } from "@/components/workspace/study-calendar";
@@ -210,7 +211,11 @@ export default function HomePage() {
 
   const hour = new Date().getHours();
   const greeting =
-    hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+    hour < 12
+      ? t("misc.goodMorning")
+      : hour < 18
+        ? t("misc.goodAfternoon")
+        : t("misc.goodEvening");
 
   return (
     <div className="flex-1 flex flex-col">
@@ -225,10 +230,10 @@ export default function HomePage() {
       <Banner
         variant="accent"
         dismissKey="upgrade-promo"
-        action={{ label: "Upgrade Now", href: "/pricing" }}
+        action={{ label: t("misc.upgradeNow"), href: "/pricing" }}
         className="rounded-none border-x-0 border-t-0 px-4 sm:px-8"
       >
-        Upgrade your plan today to access premium features!
+        {t("misc.upgradeBanner")}
       </Banner>
       <main className="flex-1 w-full px-4 sm:px-8 py-6 sm:py-8 space-y-8">
         {/* Greeting */}
@@ -276,12 +281,12 @@ export default function HomePage() {
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight mt-2 leading-snug">
                 {resumable
                   ? resumable.session.title
-                  : "Start your first study session"}
+                  : t("misc.startFirstSession")}
               </h2>
               <p className="text-sm text-white/55 mt-1.5">
                 {resumable
                   ? `${resumable.workspace.title} · ${formatDuration(resumable.session.durationMinutes)} · ${resumable.session.activities.filter((a) => a.status === "completed").length} of ${resumable.session.activities.length} activities complete`
-                  : "A plan generated around your syllabus and schedule."}
+                  : t("misc.planBlurb")}
               </p>
               {resumable ? (
                 <div className="mt-5 flex flex-wrap items-center gap-2.5">
@@ -329,7 +334,7 @@ export default function HomePage() {
               <div className="hidden sm:block w-64">
                 <div className="flex items-baseline justify-between mb-2">
                   <span className="text-[10px] font-semibold text-white/45">
-                    Progress
+                    {t("misc.progress")}
                   </span>
                   <span className="text-lg font-bold tabular-nums text-accent-bright">
                     {resumable.session.progress}%
@@ -357,11 +362,12 @@ export default function HomePage() {
               </span>
               <div>
                 <p className="text-sm font-semibold">
-                  {dueReview.total} card{dueReview.total === 1 ? "" : "s"} due
-                  for review
+                  {t(
+                    dueReview.total === 1 ? "misc.cardDue" : "misc.cardsDue",
+                  ).replace("{count}", String(dueReview.total))}
                 </p>
                 <p className="text-[13px] text-muted-foreground">
-                  A quick review today keeps them in memory.
+                  {t("misc.quickReviewBlurb")}
                 </p>
               </div>
             </div>
@@ -374,7 +380,9 @@ export default function HomePage() {
 
         {/* Study overview */}
         <section className="animate-fade-up">
-          <h2 className="text-sm font-semibold mb-3">Study overview</h2>
+          <h2 className="text-sm font-semibold mb-3">
+            {t("misc.studyOverview")}
+          </h2>
           {calendarLoading || treeLoading ? (
             <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
               <div className="hidden rounded-xl border border-border bg-card p-4 space-y-3 lg:block">
@@ -412,14 +420,14 @@ export default function HomePage() {
             <div className="rounded-xl border border-border bg-card p-4 flex flex-col">
               <div className="flex flex-1 flex-col">
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-semibold">This week</p>
+                  <p className="text-sm font-semibold">{t("misc.thisWeek")}</p>
                   <div className="flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 dark:border-amber-400/25 dark:bg-amber-400/10">
                     <StreakFlame className="h-4 w-4" />
                     <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-300">
                       <span className="text-[13px] font-bold tabular-nums">
                         {streak}
                       </span>{" "}
-                      day streak
+                      {t("misc.dayStreak")}
                     </p>
                   </div>
                 </div>
@@ -428,7 +436,11 @@ export default function HomePage() {
                     <div
                       key={i}
                       className="flex h-full flex-1 flex-col items-center justify-end gap-1"
-                      title={`${count} session${count !== 1 ? "s" : ""}`}
+                      title={t(
+                        count === 1
+                          ? "misc.sessionTooltip"
+                          : "misc.sessionsTooltip",
+                      ).replace("{count}", String(count))}
                     >
                       <span className="text-[10px] font-medium tabular-nums text-muted-foreground">
                         {count > 0 ? count : ""}
@@ -460,20 +472,23 @@ export default function HomePage() {
               <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:mt-4">
                 {[
                   {
-                    label: "Active days",
+                    label: t("misc.activeDays"),
                     value: String(
                       dailyActivity.filter((d) => d.count > 0).length,
                     ),
                   },
                   {
-                    label: "Sessions logged",
+                    label: t("misc.sessionsLogged"),
                     value: String(
                       dailyActivity.reduce((s, d) => s + d.count, 0),
                     ),
                   },
-                  { label: "Active plans", value: String(activeSessions.length) },
                   {
-                    label: "Time planned",
+                    label: t("misc.activePlans"),
+                    value: String(activeSessions.length),
+                  },
+                  {
+                    label: t("misc.timePlanned"),
                     value: formatDuration(totalPlannedMinutes),
                   },
                 ].map((stat) => (
@@ -502,7 +517,7 @@ export default function HomePage() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search workspaces…"
+            placeholder={t("misc.searchWorkspaces")}
             className="w-full h-10 pl-11 pr-4 rounded-xl border border-border bg-card text-sm focus:outline-none focus:border-accent/50 placeholder:text-faint"
           />
         </div>
@@ -511,7 +526,11 @@ export default function HomePage() {
         {filtered ? (
           <section>
             <p className="text-xs text-muted-foreground mb-4">
-              {filtered.length} result{filtered.length !== 1 ? "s" : ""}
+              {t(
+                filtered.length === 1
+                  ? "misc.resultCount"
+                  : "misc.resultsCount",
+              ).replace("{count}", String(filtered.length))}
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filtered.map((ws) => (
@@ -549,7 +568,7 @@ export default function HomePage() {
           <section className="animate-fade-up">
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-sm font-semibold text-foreground">
-                Folders
+                {t("misc.folders")}
               </h2>
               <button
                 type="button"
@@ -557,7 +576,7 @@ export default function HomePage() {
                 className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-semibold hover:border-accent/40 hover:bg-muted"
               >
                 <Plus className="h-3.5 w-3.5" />
-                New folder
+                {t("misc.newFolder")}
               </button>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -589,7 +608,7 @@ export default function HomePage() {
             <div className="mt-6">
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-sm font-semibold text-foreground">
-                    Workspaces
+                    {t("misc.workspaces")}
                   </h2>
                   <NewWorkspaceMenu align="right" onSelect={openWorkspaceCreate}>
                     {(toggle) => (
