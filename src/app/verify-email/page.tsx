@@ -4,25 +4,29 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { verifyEmail } from "@/lib/api/auth";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/misc";
 import { api } from "@/lib/api/trpc-client";
 import { ArrowRight, CheckCircle2, XCircle } from "lucide-react";
 
 export default function VerifyEmailPage() {
+  const { t } = useI18n();
   const [status, setStatus] = useState<"verifying" | "success" | "error">(
     "verifying",
   );
-  const [message, setMessage] = useState("Verifying your email…");
+  // Holds either a translation key ("misc.…") or raw server error text.
+  const [message, setMessage] = useState("misc.verifyingEmailProgress");
 
   useEffect(() => {
     const run = async () => {
       const token = new URLSearchParams(window.location.search).get("token");
       if (!token) {
-        throw new Error("This verification link is missing a token.");
+        throw new Error("misc.linkMissingToken");
       }
 
       await verifyEmail(token);
       setStatus("success");
-      setMessage("Your email has been verified.");
+      setMessage("misc.emailVerified");
 
       let next = "/login";
       try {
@@ -37,7 +41,7 @@ export default function VerifyEmailPage() {
     void run().catch((err: unknown) => {
       setStatus("error");
       setMessage(
-        err instanceof Error ? err.message : "Email verification failed.",
+        err instanceof Error ? err.message : "misc.emailVerificationFailed",
       );
     });
   }, []);
@@ -47,9 +51,13 @@ export default function VerifyEmailPage() {
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center space-y-1.5">
           <h1 className="text-2xl font-bold tracking-tight">
-            {status === "error" ? "Verification failed" : "Verifying your email"}
+            {status === "error"
+              ? t("misc.verificationFailed")
+              : t("misc.verifyingEmail")}
           </h1>
-          <p className="text-sm text-muted-foreground">{message}</p>
+          <p className="text-sm text-muted-foreground">
+            {message.startsWith("misc.") ? t(message) : message}
+          </p>
         </div>
 
         {status === "verifying" && (
@@ -62,7 +70,7 @@ export default function VerifyEmailPage() {
           <div className="flex flex-col items-center gap-4">
             <CheckCircle2 className="h-10 w-10 text-emerald-500" />
             <p className="text-center text-sm text-muted-foreground">
-              Redirecting you now…
+              {t("misc.redirecting")}
             </p>
           </div>
         )}
@@ -72,12 +80,12 @@ export default function VerifyEmailPage() {
             <div className="flex flex-col items-center gap-4">
               <XCircle className="h-10 w-10 text-rose-500" />
               <p className="text-center text-sm text-muted-foreground">
-                The link may have expired or already been used.
+                {t("misc.linkExpired")}
               </p>
             </div>
             <Link href="/login">
               <Button size="md" className="w-full gap-2">
-                Back to sign in
+                {t("misc.backToSignIn")}
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>

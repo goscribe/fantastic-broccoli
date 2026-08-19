@@ -19,6 +19,8 @@ import { MarkdownText, MathText } from "@/components/ui/markdown-text";
 import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { formatRelativeDate, cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/workspace";
 import {
   ArrowLeft,
   Check,
@@ -33,6 +35,7 @@ import {
 export default function BankItemPage() {
   const params = useParams();
   const router = useRouter();
+  const { t } = useI18n();
   const workspaceId = params.id as string;
   const itemId = params.itemId as string;
   const queryClient = useQueryClient();
@@ -83,10 +86,10 @@ export default function BankItemPage() {
     onError: (err) =>
       setContentError(
         err instanceof SyntaxError
-          ? "Content must be valid JSON"
+          ? t("ws.contentJsonError")
           : err instanceof Error
             ? err.message
-            : "Update failed",
+            : t("ws.updateFailed"),
       ),
   });
 
@@ -117,9 +120,9 @@ export default function BankItemPage() {
       <WorkspaceShell workspace={workspace}>
         <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6 animate-fade-up">
           <Layers className="h-10 w-10 mx-auto mb-3 text-faint" />
-          <p className="text-sm font-semibold">Item not found</p>
+          <p className="text-sm font-semibold">{t("ws.itemNotFound")}</p>
           <p className="text-xs text-muted-foreground mt-1.5">
-            This bank item may have been deleted.
+            {t("ws.itemNotFoundHint")}
           </p>
           <Button
             size="sm"
@@ -128,7 +131,7 @@ export default function BankItemPage() {
             onClick={() => router.push(`/workspace/${workspaceId}/bank`)}
           >
             <ArrowLeft className="h-3.5 w-3.5 mr-1.5" />
-            Back to bank
+            {t("ws.backToBank")}
           </Button>
         </div>
       </WorkspaceShell>
@@ -158,7 +161,7 @@ export default function BankItemPage() {
             className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            Artifact bank
+            {t("ws.artifactBank")}
           </Link>
         </div>
 
@@ -171,10 +174,11 @@ export default function BankItemPage() {
             <p className="text-[11px] text-faint mt-1">
               {config.label}
               {item.topic && ` · ${item.topic}`}
-              {" · "}difficulty {item.difficulty}/5
+              {" · "}
+              {t("ws.difficulty")} {item.difficulty}/5
               {summary && ` · ${summary}`}
-              {" · used "}
-              {item.usedCount}× ·{" "}
+              {" · "}
+              {t("ws.used")} {item.usedCount}× ·{" "}
               {formatRelativeDate(
                 typeof item.updatedAt === "string"
                   ? item.updatedAt
@@ -190,13 +194,13 @@ export default function BankItemPage() {
                 onClick={() => window.print()}
               >
                 <Printer className="h-3.5 w-3.5 mr-1.5" />
-                Print
+                {t("ws.print")}
               </Button>
             )}
             {!editing && (
               <Button size="sm" variant="outline" onClick={startEditing}>
                 <Pencil className="h-3.5 w-3.5 mr-1.5" />
-                Edit
+                {t("ws.edit")}
               </Button>
             )}
             <Button
@@ -204,7 +208,8 @@ export default function BankItemPage() {
               variant="danger"
               disabled={deleteMutation.isPending}
               onClick={() => {
-                if (confirm("Delete this bank item?")) deleteMutation.mutate();
+                if (confirm(t("ws.confirmDeleteBankItem")))
+                  deleteMutation.mutate();
               }}
             >
               {deleteMutation.isPending ? (
@@ -212,7 +217,7 @@ export default function BankItemPage() {
               ) : (
                 <Trash2 className="h-3.5 w-3.5 mr-1.5" />
               )}
-              Delete
+              {t("ws.delete")}
             </Button>
           </div>
         </div>
@@ -221,7 +226,7 @@ export default function BankItemPage() {
           <div className="rounded-2xl border border-border bg-card p-4 space-y-3 animate-fade-up">
             <div className="grid gap-3 sm:grid-cols-2">
               <label className="text-[11px] font-semibold text-muted-foreground">
-                Title
+                {t("ws.title")}
                 <input
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
@@ -229,7 +234,7 @@ export default function BankItemPage() {
                 />
               </label>
               <label className="text-[11px] font-semibold text-muted-foreground">
-                Topic
+                {t("ws.topic")}
                 <input
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
@@ -238,7 +243,7 @@ export default function BankItemPage() {
               </label>
             </div>
             <label className="block text-[11px] font-semibold text-muted-foreground">
-              Difficulty
+              {t("ws.difficultyLabel")}
               <div className="mt-1 flex gap-1">
                 {[1, 2, 3, 4, 5].map((d) => (
                   <button
@@ -258,7 +263,7 @@ export default function BankItemPage() {
               </div>
             </label>
             <label className="block text-[11px] font-semibold text-muted-foreground">
-              Content (JSON)
+              {t("ws.contentJson")}
               <textarea
                 value={contentDraft}
                 onChange={(e) => setContentDraft(e.target.value)}
@@ -281,7 +286,7 @@ export default function BankItemPage() {
                 ) : (
                   <Check className="h-3.5 w-3.5 mr-1.5" />
                 )}
-                Save
+                {t("ws.save")}
               </Button>
               <Button
                 size="sm"
@@ -289,7 +294,7 @@ export default function BankItemPage() {
                 onClick={() => setEditing(false)}
               >
                 <X className="h-3.5 w-3.5 mr-1.5" />
-                Cancel
+                {t("ws.cancel")}
               </Button>
             </div>
           </div>
@@ -303,7 +308,7 @@ export default function BankItemPage() {
               />
               <div className="space-y-2">
                 <p className="text-xs font-semibold text-muted-foreground">
-                  All cards
+                  {t("ws.allCards")}
                 </p>
                 <DeckPreview
                   entries={deck.entries}
@@ -327,13 +332,13 @@ export default function BankItemPage() {
                     {config.label}
                     {item.topic && ` · ${item.topic}`}
                     {summary && ` · ${summary}`}
-                    {" · Generated with Scribe — scribe.study"}
+                    {" · "}
+                    {t("ws.generatedWithScribe")}
                   </p>
                   <p className="mt-1 text-[11px] text-muted-foreground">
-                    ✂ Cut along the dashed lines, then fold each card down the
-                    middle so the {deck.frontLabel.toLowerCase()} is on the
-                    front and the {deck.backLabel.toLowerCase()} is on the
-                    back.
+                    {t("ws.cutInstructions")
+                      .replace("{front}", deck.frontLabel.toLowerCase())
+                      .replace("{back}", deck.backLabel.toLowerCase())}
                   </p>
                 </div>
                 <div className="space-y-3">
@@ -376,7 +381,8 @@ export default function BankItemPage() {
                 {config.label}
                 {item.topic && ` · ${item.topic}`}
                 {summary && ` · ${summary}`}
-                {" · Generated with Scribe — scribe.study"}
+                {" · "}
+                {t("ws.generatedWithScribe")}
               </p>
             </div>
             <BankContentPreview kind={item.kind} content={item.content} />

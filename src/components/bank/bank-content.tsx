@@ -1,5 +1,6 @@
 "use client";
 
+import "@/lib/i18n/flashcards";
 import {
   type ApiArtifactBankItem,
   type ApiArtifactKind,
@@ -18,6 +19,7 @@ import {
   useResolvedFigureUrl,
 } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
 import {
   FigureArt,
   FlashcardsArt,
@@ -51,10 +53,11 @@ export const activityTypeFromKind: Record<ApiArtifactKind, ActivityType> = {
 const str = (v: unknown): string => (typeof v === "string" ? v : "");
 
 function RawJson({ content }: { content: Record<string, unknown> }) {
+  const { t } = useI18n();
   return (
     <details className="group print-hidden">
       <summary className="cursor-pointer text-[11px] font-semibold text-faint hover:text-muted-foreground">
-        Raw JSON
+        {t("fc.rawJson")}
       </summary>
       <pre className="mt-2 rounded-lg border border-border bg-muted/30 px-3 py-2 text-[11px] text-muted-foreground whitespace-pre-wrap max-h-72 overflow-y-auto">
         {JSON.stringify(content, null, 2)}
@@ -64,6 +67,7 @@ function RawJson({ content }: { content: Record<string, unknown> }) {
 }
 
 function WorksheetPreview({ content }: { content: WorksheetContent }) {
+  const { t } = useI18n();
   return (
     <div className="space-y-3">
       {content.steps.map((step, i) => (
@@ -73,10 +77,15 @@ function WorksheetPreview({ content }: { content: WorksheetContent }) {
         >
           <div className="flex items-center justify-between gap-3 border-b border-border bg-muted/40 px-3.5 py-2">
             <p className="text-xs font-semibold truncate">
-              <MarkdownText text={step.title || `Question ${i + 1}`} />
+              <MarkdownText
+                text={
+                  step.title || t("fc.questionN").replace("{n}", String(i + 1))
+                }
+              />
             </p>
             <span className="shrink-0 text-[10px] font-semibold text-faint tabular-nums">
-              {step.parts.reduce((s, p) => s + (p.marks ?? 1), 0)} marks
+              {step.parts.reduce((s, p) => s + (p.marks ?? 1), 0)}{" "}
+              {t("fc.marks")}
             </span>
           </div>
           <div className="px-3.5 py-3 space-y-3">
@@ -99,7 +108,9 @@ function WorksheetPreview({ content }: { content: WorksheetContent }) {
                   </p>
                   {part.answer && (
                     <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                      <span className="font-semibold text-energy">Answer:</span>{" "}
+                      <span className="font-semibold text-energy">
+                        {t("fc.answerPrefix")}
+                      </span>{" "}
                       <MarkdownText text={part.answer} />
                     </p>
                   )}
@@ -310,11 +321,12 @@ export function BankContentPreview({
   kind: ApiArtifactKind;
   content: Record<string, unknown>;
 }) {
+  const { t } = useI18n();
   const preview = bankPreviewNode(kind, content);
   return (
     <div className="space-y-3">
       {preview ?? (
-        <p className="text-xs text-faint">No preview available for this item.</p>
+        <p className="text-xs text-faint">{t("fc.noPreviewItem")}</p>
       )}
       <RawJson content={content} />
     </div>
@@ -334,6 +346,7 @@ export function BankDocThumb({
   content: Record<string, unknown>;
   className?: string;
 }) {
+  const { t } = useI18n();
   const preview = bankPreviewNode(kind, content);
   return (
     <div
@@ -345,7 +358,7 @@ export function BankDocThumb({
     >
       <div className="pointer-events-none w-[250%] origin-top-left scale-[0.4] select-none p-3">
         {preview ?? (
-          <p className="text-xs text-faint">No preview available.</p>
+          <p className="text-xs text-faint">{t("fc.noPreview")}</p>
         )}
       </div>
       <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-background to-transparent" />

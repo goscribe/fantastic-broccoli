@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Loader2, Check, ArrowRight, FileText } from "lucide-react";
 import { awardSessionCredits } from "@/lib/credits";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 
 const stages = [
-  "Reviewing your answers",
-  "Comparing against past sessions",
-  "Writing your study guide",
+  "session.debriefReviewing",
+  "session.debriefComparing",
+  "session.debriefWriting",
 ];
 
 interface DebriefSection {
@@ -89,20 +91,21 @@ export function SessionDebrief({
   onBack: () => void;
   sessionId: string;
 }) {
+  const { t } = useI18n();
   const [stage, setStage] = useState(0);
   const [creditsEarned] = useState(() => awardSessionCredits(sessionId));
 
   useEffect(() => {
     if (stage >= stages.length) return;
-    const t = setTimeout(() => setStage((s) => s + 1), 1100);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setStage((s) => s + 1), 1100);
+    return () => clearTimeout(timer);
   }, [stage]);
 
   if (stage < stages.length) {
     return (
       <div className="py-14 text-center space-y-4 animate-fade-up">
         <FileText className="h-7 w-7 text-accent mx-auto" />
-        <p className="text-sm font-semibold">Putting together your debrief</p>
+        <p className="text-sm font-semibold">{t("session.debriefPreparing")}</p>
         <div className="inline-block text-left space-y-1.5">
           {stages.slice(0, stage + 1).map((label, i) => (
             <p
@@ -115,7 +118,7 @@ export function SessionDebrief({
                 <Loader2 className="h-3.5 w-3.5 animate-spin text-muted-foreground" />
               )}
               <span className={i === stage ? "text-muted-foreground" : ""}>
-                {label}
+                {t(label)}
               </span>
             </p>
           ))}
@@ -128,14 +131,15 @@ export function SessionDebrief({
     <div className="animate-fade-up pb-10">
       <p className="flex items-center gap-1.5 text-[11px] font-medium text-accent-dim mb-2">
         <Sparkles className="h-3 w-3" />
-        Generated from this session&apos;s answers
+        {t("session.debriefGenerated")}
       </p>
       <h2 className="text-lg font-bold tracking-tight">
         <MathText text={debrief.headline} />
       </h2>
       {creditsEarned > 0 && (
         <p className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent">
-          <Sparkles className="h-3.5 w-3.5" />+{creditsEarned} credits earned
+          <Sparkles className="h-3.5 w-3.5" />+{creditsEarned}{" "}
+          {t("session.creditsEarned")}
         </p>
       )}
       <p className="text-sm text-muted-foreground leading-6 mt-1.5 mb-6">
@@ -183,7 +187,7 @@ export function SessionDebrief({
 
       <div className="flex gap-2 mt-8">
         <Button size="sm" onClick={onBack}>
-          Back to workspace
+          {t("session.backToWorkspace")}
           <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
         </Button>
       </div>

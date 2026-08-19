@@ -2,6 +2,8 @@
 
 import { Folder } from "@/types";
 import { countWorkspaces } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/workspace";
 import { ChevronRight } from "lucide-react";
 import {
   ResourceActionsMenu,
@@ -15,6 +17,7 @@ interface FolderCardProps {
 }
 
 export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
+  const { t } = useI18n();
   const wsCount = countWorkspaces(folder);
   const subCount = folder.folders?.length ?? 0;
 
@@ -38,8 +41,9 @@ export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
         <p className="font-semibold text-sm truncate">{folder.name}</p>
         <p className="text-xs text-muted-foreground mt-0.5">
           {subCount > 0 &&
-            `${subCount} folder${subCount !== 1 ? "s" : ""} · `}
-          {wsCount} workspace{wsCount !== 1 ? "s" : ""}
+            `${subCount} ${subCount === 1 ? t("ws.folderWord") : t("ws.foldersWord")} · `}
+          {wsCount}{" "}
+          {wsCount === 1 ? t("ws.workspaceWord") : t("ws.workspacesWord")}
         </p>
       </div>
       {actions ? (

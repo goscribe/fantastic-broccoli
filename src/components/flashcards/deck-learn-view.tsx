@@ -1,5 +1,6 @@
 "use client";
 
+import { DECK_LABEL_KEYS } from "@/lib/i18n/flashcards";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ProgressBar } from "@/components/ui/progress-bar";
@@ -10,6 +11,7 @@ import {
   type DeckCardProgress,
 } from "@/lib/api/study-session";
 import { cn } from "@/lib/utils";
+import { useI18n, type TranslationKey } from "@/lib/i18n";
 import { Check, RotateCcw, SkipForward, X } from "lucide-react";
 
 type QuestionMode = "mcq" | "type";
@@ -46,11 +48,11 @@ function cardStatus(
   return "learning";
 }
 
-const STATUS_LABEL: Record<CardStatus, string> = {
-  new: "New",
-  learning: "Learning",
-  reviewing: "Reviewing",
-  mastered: "Mastered",
+const STATUS_LABEL_KEY: Record<CardStatus, TranslationKey> = {
+  new: "fc.statusNew",
+  learning: "fc.statusLearning",
+  reviewing: "fc.statusReviewing",
+  mastered: "fc.statusMastered",
 };
 
 const STATUS_CLASS: Record<CardStatus, string> = {
@@ -103,6 +105,9 @@ export function DeckLearnView({
   progress,
   onAttemptRecorded,
 }: DeckLearnViewProps) {
+  const { t } = useI18n();
+  const front = t(DECK_LABEL_KEYS[frontLabel] ?? frontLabel);
+  const back = t(DECK_LABEL_KEYS[backLabel] ?? backLabel);
   const progressByCard = useMemo(
     () =>
       new Map(
@@ -239,13 +244,15 @@ export function DeckLearnView({
             {percentage >= 80 ? "🎉" : percentage >= 60 ? "👏" : "💪"}
           </p>
           <h2 className="text-2xl font-semibold tracking-tight">
-            {percentage >= 80
-              ? "Excellent work"
-              : percentage >= 60
-                ? "Good job"
-                : "Keep practicing"}
+            {t(
+              percentage >= 80
+                ? "fc.excellent"
+                : percentage >= 60
+                  ? "fc.goodJob"
+                  : "fc.keepPracticing",
+            )}
           </h2>
-          <p className="text-sm text-muted-foreground">Round complete</p>
+          <p className="text-sm text-muted-foreground">{t("fc.roundComplete")}</p>
         </div>
         <div>
           <p className="text-5xl font-semibold tabular-nums tracking-tight">
@@ -253,11 +260,11 @@ export function DeckLearnView({
             <span className="text-muted-foreground"> / {score.total}</span>
           </p>
           <p className="mt-1 text-sm text-muted-foreground">
-            {percentage}% correct
+            {t("fc.percentCorrect").replace("{pct}", String(percentage))}
           </p>
         </div>
         <ProgressBar value={percentage} className="max-w-xs mx-auto" />
-        <Button onClick={restart}>Study again</Button>
+        <Button onClick={restart}>{t("fc.studyAgain")}</Button>
       </div>
     );
   }
@@ -273,7 +280,9 @@ export function DeckLearnView({
         <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
           <span className="flex items-center gap-2">
             <span>
-              Question {currentIndex + 1} of {cards.length}
+              {t("fc.questionOf")
+                .replace("{n}", String(currentIndex + 1))
+                .replace("{total}", String(cards.length))}
             </span>
             {status && (
               <span
@@ -282,7 +291,7 @@ export function DeckLearnView({
                   STATUS_CLASS[status],
                 )}
               >
-                {STATUS_LABEL[status]}
+                {t(STATUS_LABEL_KEY[status])}
               </span>
             )}
           </span>
@@ -291,10 +300,10 @@ export function DeckLearnView({
               type="button"
               onClick={restart}
               className="inline-flex items-center gap-1 font-semibold text-muted-foreground hover:text-foreground transition-colors"
-              title="Start a new session with a fresh shuffle"
+              title={t("fc.newSessionTitle")}
             >
               <RotateCcw className="h-3 w-3" />
-              New session
+              {t("fc.newSession")}
             </button>
             {score.total > 0 && (
               <>
@@ -315,7 +324,7 @@ export function DeckLearnView({
       <div className="rounded-3xl border border-border bg-card p-6 md:p-8 space-y-6">
         <div className="space-y-2">
           <p className="text-[11px] font-semibold uppercase tracking-wider text-faint">
-            {frontLabel}
+            {front}
           </p>
           <p className="text-lg md:text-xl font-medium leading-relaxed">
             <MarkdownText text={card.front} />
@@ -324,7 +333,9 @@ export function DeckLearnView({
 
         <div className="space-y-3">
           <p className="text-[11px] font-semibold uppercase tracking-wider text-faint">
-            {card.mode === "mcq" ? "Choose one" : `Type the ${backLabel.toLowerCase()}`}
+            {card.mode === "mcq"
+              ? t("fc.chooseOne")
+              : t("fc.typeThe").replace("{label}", back.toLowerCase())}
           </p>
 
           {card.mode === "mcq" ? (
@@ -396,7 +407,7 @@ export function DeckLearnView({
                     else checkAnswer();
                   }
                 }}
-                placeholder="Type your answer…"
+                placeholder={t("fc.typeAnswerPlaceholder")}
                 disabled={showFeedback}
                 autoFocus
                 className={cn(
@@ -410,7 +421,10 @@ export function DeckLearnView({
               {showFeedback && !isCorrect && (
                 <div className="rounded-xl bg-energy-soft px-4 py-3 text-sm">
                   <span className="font-semibold text-energy">
-                    Correct {backLabel.toLowerCase()}:{" "}
+                    {t("fc.correctLabel").replace(
+                      "{label}",
+                      back.toLowerCase(),
+                    )}{" "}
                   </span>
                   <MarkdownText text={card.back} />
                 </div>
@@ -426,7 +440,7 @@ export function DeckLearnView({
               isCorrect ? "bg-energy-soft text-energy" : "bg-rose/10 text-rose",
             )}
           >
-            {isCorrect ? "Correct — nice work." : "Not quite — keep going."}
+            {t(isCorrect ? "fc.correctFeedback" : "fc.incorrectFeedback")}
             {gradingReason && (
               <p className="mt-1.5 text-xs font-normal opacity-90">
                 {gradingReason}
@@ -449,12 +463,12 @@ export function DeckLearnView({
                   : !typedAnswer.trim())
               }
             >
-              {grading ? "Checking…" : "Check answer"}
+              {t(grading ? "fc.checking" : "fc.checkAnswer")}
             </Button>
             <Button
               variant="outline"
               size="icon"
-              title="Skip card"
+              title={t("fc.skipCard")}
               onClick={nextCard}
             >
               <SkipForward className="h-4 w-4" />
@@ -462,7 +476,7 @@ export function DeckLearnView({
           </>
         ) : (
           <Button className="flex-1" onClick={nextCard}>
-            {currentIndex < cards.length - 1 ? "Next question" : "Finish"}
+            {t(currentIndex < cards.length - 1 ? "fc.nextQuestion" : "fc.finish")}
           </Button>
         )}
       </div>
@@ -471,13 +485,13 @@ export function DeckLearnView({
         <kbd className="rounded border border-border bg-muted px-1 py-0.5 text-[10px]">
           Enter
         </kbd>
-        <span className="mx-1.5">check / next</span>
+        <span className="mx-1.5">{t("fc.kbCheckNext")}</span>
         {card.mode === "mcq" && (
           <>
             <kbd className="rounded border border-border bg-muted px-1 py-0.5 text-[10px]">
               1–4
             </kbd>
-            <span className="ml-1.5">select</span>
+            <span className="ml-1.5">{t("fc.kbSelect")}</span>
           </>
         )}
       </p>

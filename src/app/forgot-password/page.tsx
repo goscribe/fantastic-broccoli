@@ -4,12 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { requestPasswordReset } from "@/lib/api/auth";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/misc";
 import { ArrowRight } from "lucide-react";
 
 const inputClasses =
   "w-full h-10 rounded-lg border border-border bg-card px-3.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 placeholder:text-faint";
 
 export default function ForgotPasswordPage() {
+  const { t } = useI18n();
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +26,7 @@ export default function ForgotPasswordPage() {
       await requestPasswordReset(email);
       setSent(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Request failed");
+      setError(err instanceof Error ? err.message : t("misc.requestFailed"));
     } finally {
       setBusy(false);
     }
@@ -33,16 +36,19 @@ export default function ForgotPasswordPage() {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center space-y-1.5">
-          <h1 className="text-2xl font-bold tracking-tight">Reset your password</h1>
+          <h1 className="text-2xl font-bold tracking-tight">
+            {t("misc.resetPassword")}
+          </h1>
           <p className="text-sm text-muted-foreground">
-            We&apos;ll email you a link to reset it
+            {t("misc.resetSubtitle")}
           </p>
         </div>
 
         {sent ? (
           <p className="rounded-xl border border-border bg-muted/40 px-4 py-5 text-center text-sm text-muted-foreground">
-            If an account exists for <span className="font-medium">{email}</span>,
-            a reset link is on its way.
+            {t("misc.resetSent").split("{email}")[0]}
+            <span className="font-medium">{email}</span>
+            {t("misc.resetSent").split("{email}")[1]}
           </p>
         ) : (
           <form onSubmit={submit} className="space-y-4">
@@ -51,7 +57,7 @@ export default function ForgotPasswordPage() {
                 htmlFor="email"
                 className="text-[13px] font-medium text-foreground"
               >
-                Email
+                {t("misc.email")}
               </label>
               <input
                 id="email"
@@ -69,19 +75,19 @@ export default function ForgotPasswordPage() {
             {error && <p className="text-xs text-rose">{error}</p>}
 
             <Button type="submit" size="md" className="w-full gap-2" disabled={busy}>
-              {busy ? "Sending…" : "Send reset link"}
+              {busy ? t("misc.sending") : t("misc.sendResetLink")}
               {!busy && <ArrowRight className="h-4 w-4" />}
             </Button>
           </form>
         )}
 
         <p className="text-center text-sm text-muted-foreground">
-          Remembered it?{" "}
+          {t("misc.rememberedIt")}{" "}
           <Link
             href="/login"
             className="font-medium text-foreground hover:underline"
           >
-            Back to sign in
+            {t("misc.backToSignIn")}
           </Link>
         </p>
       </div>

@@ -52,6 +52,8 @@ import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
 import { WarmupQuiz } from "@/components/onboarding/warmup-quiz";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 import { formatDuration, formatRelativeDate } from "@/lib/utils";
 import {
   ArrowLeft,
@@ -72,6 +74,7 @@ const phaseOf = (t: SessionActivity["type"]) =>
       : "Recall";
 
 export default function SessionDetailPage() {
+  const { t } = useI18n();
   const params = useParams();
   const router = useRouter();
   const workspaceId = params.id as string;
@@ -333,14 +336,14 @@ export default function SessionDetailPage() {
     return (
       <div className="flex-1 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-muted-foreground">Session not found</p>
+          <p className="text-muted-foreground">{t("session.notFound")}</p>
           <Button
             variant="ghost"
             size="sm"
             onClick={() => router.push(`/workspace/${workspaceId}`)}
             className="mt-2"
           >
-            Go back
+            {t("session.goBack")}
           </Button>
         </div>
       </div>
@@ -520,8 +523,14 @@ export default function SessionDetailPage() {
           <h1 className="text-sm font-bold tracking-tight truncate">
             <MathText text={session.title} />
           </h1>
-          <Badge variant="accent" className="capitalize shrink-0 max-sm:hidden">
-            {session.depth}
+          <Badge variant="accent" className="shrink-0 max-sm:hidden">
+            {t(
+              session.depth === "light"
+                ? "session.depthLight"
+                : session.depth === "deep"
+                  ? "session.depthDeep"
+                  : "session.depthModerate",
+            )}
           </Badge>
           {planReady && (
             <div className="ml-auto flex items-center gap-2.5 sm:gap-4 shrink-0">
@@ -530,7 +539,7 @@ export default function SessionDetailPage() {
                 {formatDuration(totalEstimated)}
               </span>
               <span className="hidden sm:inline text-xs text-muted-foreground">
-                {completedCount}/{activities.length} done
+                {completedCount}/{activities.length} {t("session.doneCount")}
               </span>
               <div className="hidden sm:block w-32">
                 <ProgressBar value={session.progress} size="sm" />
@@ -562,7 +571,7 @@ export default function SessionDetailPage() {
         <aside className="hidden lg:flex w-72 flex-shrink-0 flex-col border-r border-border overflow-y-auto">
           <div className="py-6 pr-4 pl-5">
             <p className="text-xs font-semibold text-muted-foreground mb-3">
-              Your plan
+              {t("session.yourPlan")}
             </p>
             <div className="space-y-1">
               {activities.map((activity, i) => {
@@ -573,7 +582,7 @@ export default function SessionDetailPage() {
                   <div key={activity.id}>
                     {phase !== prevPhase && (
                       <p className="text-[11px] font-semibold text-faint px-3 pt-3 pb-1 first:pt-0">
-                        {phase}
+                        {t(`session.phase${phase}`)}
                       </p>
                     )}
                     <ActivityItem
@@ -597,12 +606,12 @@ export default function SessionDetailPage() {
               <div className="mb-5 rounded-2xl border border-accent/30 bg-accent-soft/60 px-5 py-4 flex flex-wrap items-center gap-3 animate-fade-up">
                 <div className="flex-1 min-w-56">
                   <p className="text-sm font-semibold">
-                    You&apos;re almost done — keep the momentum?
+                    {t("session.extendTitle")}
                   </p>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    Your quiz scores on periodic trends were shaky, so Scribe
-                    precomputed {extensions.length} more activities from your
-                    worksheet bank (+{extensionMinutes} min).
+                    {t("session.extendBefore")} {extensions.length}{" "}
+                    {t("session.extendAfter")} (+{extensionMinutes}{" "}
+                    {t("session.min")}).
                   </p>
                 </div>
                 <div className="flex gap-2 shrink-0">
@@ -614,14 +623,14 @@ export default function SessionDetailPage() {
                       if (!activeActivity) setActiveActivityId(extensions[0].id);
                     }}
                   >
-                    Continue plan
+                    {t("session.continuePlan")}
                   </Button>
                   <Button
                     size="sm"
                     variant="ghost"
                     onClick={() => setExtendDismissed(true)}
                   >
-                    Finish as planned
+                    {t("session.finishAsPlanned")}
                   </Button>
                 </div>
               </div>
@@ -633,11 +642,10 @@ export default function SessionDetailPage() {
                   <X className="h-5 w-5 text-rose" />
                 </div>
                 <p className="mt-4 text-sm font-semibold">
-                  Plan generation failed
+                  {t("session.planFailedTitle")}
                 </p>
                 <p className="mt-1 max-w-sm text-xs text-muted-foreground">
-                  {planError ??
-                    "Scribe couldn't build a study plan for this session. Retry with the same settings, or delete it."}
+                  {planError ?? t("session.planFailedBody")}
                 </p>
                 <div className="mt-5 flex items-center gap-2">
                   <Button
@@ -648,7 +656,7 @@ export default function SessionDetailPage() {
                     <RefreshCw
                       className={`mr-1.5 h-3.5 w-3.5 ${retryPlan.isPending ? "animate-spin" : ""}`}
                     />
-                    Retry generation
+                    {t("session.retryGeneration")}
                   </Button>
                   <Button
                     size="sm"
@@ -657,14 +665,14 @@ export default function SessionDetailPage() {
                     onClick={() => deleteSession.mutate()}
                   >
                     <Trash2 className="mr-1.5 h-3.5 w-3.5" />
-                    Delete session
+                    {t("session.deleteSession")}
                   </Button>
                   <Button
                     size="sm"
                     variant="ghost"
                     onClick={() => router.push(`/workspace/${workspaceId}`)}
                   >
-                    Back to workspace
+                    {t("session.backToWorkspace")}
                   </Button>
                 </div>
               </div>
@@ -686,7 +694,7 @@ export default function SessionDetailPage() {
                     className="text-xs"
                   >
                     <SkipForward className="h-3 w-3 mr-1" />
-                    Skip
+                    {t("session.skip")}
                   </Button>
                 </div>
 
@@ -703,7 +711,7 @@ export default function SessionDetailPage() {
             {planReady && (
             <div className="lg:hidden mt-10 border-t border-border pt-6">
               <p className="text-xs font-semibold text-muted-foreground mb-3">
-                Your plan
+                {t("session.yourPlan")}
               </p>
               <div className="space-y-1">
                 {activities.map((activity, i) => (
@@ -740,7 +748,7 @@ export default function SessionDetailPage() {
       {planReady && showComments && (
         <div className="fixed inset-y-0 right-0 w-[26rem] max-w-full bg-card border-l border-border z-50 flex flex-col animate-fade-up">
           <div className="flex items-center justify-between h-14 px-4 border-b border-border shrink-0">
-            <h3 className="text-sm font-semibold">Session notes</h3>
+            <h3 className="text-sm font-semibold">{t("session.sessionNotes")}</h3>
             <button
               type="button"
               onClick={() => setShowComments(false)}
@@ -753,7 +761,7 @@ export default function SessionDetailPage() {
             {highlightEntries.length > 0 && (
               <div className="space-y-2 pb-2">
                 <p className="text-xs font-semibold text-muted-foreground">
-                  Highlights
+                  {t("session.highlights")}
                 </p>
                 {highlightEntries.map((h) => (
                   <Surface key={h.id} className="p-3 text-sm">
@@ -774,7 +782,7 @@ export default function SessionDetailPage() {
                   </Surface>
                 ))}
                 <p className="text-xs font-semibold text-muted-foreground pt-2">
-                  Notes
+                  {t("session.notes")}
                 </p>
               </div>
             )}
@@ -789,7 +797,7 @@ export default function SessionDetailPage() {
                     type="button"
                     onClick={() => deleteNote(note.id)}
                     className="opacity-0 group-hover:opacity-100 p-1 rounded text-muted-foreground hover:text-rose transition-opacity"
-                    aria-label="Delete note"
+                    aria-label={t("session.deleteNote")}
                   >
                     <Trash2 className="h-3.5 w-3.5" />
                   </button>
@@ -798,10 +806,9 @@ export default function SessionDetailPage() {
             ))}
             {panelCount === 0 && (
               <div className="text-center py-8">
-                <p className="text-sm font-medium">No notes yet</p>
+                <p className="text-sm font-medium">{t("session.noNotesYet")}</p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Jot down reminders or highlight the reading — both show up
-                  here.
+                  {t("session.noNotesHint")}
                 </p>
               </div>
             )}
@@ -817,7 +824,7 @@ export default function SessionDetailPage() {
                     submitNote();
                   }
                 }}
-                placeholder="Add a note… (Enter to save)"
+                placeholder={t("session.addNotePlaceholder")}
                 rows={2}
                 className="flex-1 resize-none rounded-xl border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:border-accent/50 placeholder:text-faint"
               />
@@ -827,7 +834,7 @@ export default function SessionDetailPage() {
                 onClick={submitNote}
                 className="h-9"
               >
-                Add
+                {t("session.add")}
               </Button>
             </div>
           </div>
@@ -842,10 +849,10 @@ export default function SessionDetailPage() {
 }
 
 const GENERATION_STAGES = [
-  { label: "Gathering your materials", after: 0 },
-  { label: "Outlining the session", after: 6 },
-  { label: "Writing activities", after: 18 },
-  { label: "Finishing up", after: 45 },
+  { label: "session.stageGathering", after: 0 },
+  { label: "session.stageOutlining", after: 6 },
+  { label: "session.stageWriting", after: 18 },
+  { label: "session.stageFinishing", after: 45 },
 ];
 
 /**
@@ -859,6 +866,7 @@ function GeneratingPlanCard({
   title: string;
   workspaceId: string;
 }) {
+  const { t } = useI18n();
   const [elapsed, setElapsed] = useState(0);
 
   useEffect(() => {
@@ -879,11 +887,10 @@ function GeneratingPlanCard({
             <div className="mt-0.5 h-7 w-7 shrink-0 rounded-full border-2 border-accent border-t-transparent animate-spin" />
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold">
-                Building &ldquo;{title}&rdquo;…
+                {t("session.building")} &ldquo;{title}&rdquo;…
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                A study plan grounded in your materials — usually under a
-                minute. You can leave and come back.
+                {t("session.generatingHint")}
               </p>
             </div>
             <p className="shrink-0 text-[11px] text-faint tabular-nums">
@@ -908,7 +915,7 @@ function GeneratingPlanCard({
                     i <= currentStage ? "text-foreground" : "text-faint"
                   }
                 >
-                  {stage.label}
+                  {t(stage.label)}
                 </span>
               </p>
             ))}

@@ -9,6 +9,8 @@ import {
 } from "@/lib/api/study-session";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/misc";
 import {
   Search,
   Folder as FolderIcon,
@@ -31,13 +33,17 @@ interface PaletteItem {
   icon: React.ReactNode;
 }
 
-function flatten(folders: Folder[], root: Workspace[]): PaletteItem[] {
+function flatten(
+  folders: Folder[],
+  root: Workspace[],
+  hints: { workspace: string; folder: string },
+): PaletteItem[] {
   const items: PaletteItem[] = [];
   const walkWs = (ws: Workspace) =>
     items.push({
       id: `ws-${ws.id}`,
       label: ws.title,
-      hint: "Workspace",
+      hint: hints.workspace,
       href: `/workspace/${ws.id}`,
       icon: <WorkspaceIcon icon={ws.icon} className="h-4 w-4" />,
     });
@@ -46,7 +52,7 @@ function flatten(folders: Folder[], root: Workspace[]): PaletteItem[] {
       items.push({
         id: `folder-${f.id}`,
         label: f.name,
-        hint: "Folder",
+        hint: hints.folder,
         href: `/folder/${f.id}`,
         icon: <FolderIcon className="h-4 w-4" />,
       });
@@ -59,11 +65,7 @@ function flatten(folders: Folder[], root: Workspace[]): PaletteItem[] {
   return items;
 }
 
-const pages: PaletteItem[] = [
-  { id: "page-home", label: "Home", hint: "Page", href: "/", icon: <Home className="h-4 w-4" /> },
-  { id: "page-shared", label: "Shared", hint: "Page", href: "/shared", icon: <Users className="h-4 w-4" /> },
-  { id: "page-settings", label: "Settings", hint: "Page", href: "/settings", icon: <Settings className="h-4 w-4" /> },
-];
+
 
 function artifactIcon(kind: string | null) {
   switch (kind) {
@@ -117,6 +119,7 @@ function PalettePanel({
   rootWorkspaces: Workspace[];
 }) {
   const router = useRouter();
+  const { t } = useI18n();
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(0);
   const [aiLoading, setAiLoading] = useState(false);
@@ -125,10 +128,39 @@ function PalettePanel({
     null,
   );
 
-  const items = useMemo(
-    () => [...flatten(folders, rootWorkspaces), ...pages],
-    [folders, rootWorkspaces],
-  );
+  const items = useMemo(() => {
+    const pageHint = t("misc.page");
+    const pages: PaletteItem[] = [
+      {
+        id: "page-home",
+        label: t("misc.home"),
+        hint: pageHint,
+        href: "/",
+        icon: <Home className="h-4 w-4" />,
+      },
+      {
+        id: "page-shared",
+        label: t("misc.shared"),
+        hint: pageHint,
+        href: "/shared",
+        icon: <Users className="h-4 w-4" />,
+      },
+      {
+        id: "page-settings",
+        label: t("misc.settings"),
+        hint: pageHint,
+        href: "/settings",
+        icon: <Settings className="h-4 w-4" />,
+      },
+    ];
+    return [
+      ...flatten(folders, rootWorkspaces, {
+        workspace: t("misc.workspace"),
+        folder: t("misc.folder"),
+      }),
+      ...pages,
+    ];
+  }, [folders, rootWorkspaces, t]);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -154,7 +186,7 @@ function PalettePanel({
       setAiResults(await findArtifacts(query.trim()));
     } catch (err) {
       setAiError(
-        err instanceof Error ? err.message : "Search failed — try again.",
+        err instanceof Error ? err.message : t("misc.searchFailed"),
       );
     } finally {
       setAiLoading(false);
@@ -201,7 +233,7 @@ function PalettePanel({
                 activate(selected);
               }
             }}
-            placeholder="Search, or describe what you want to study…"
+            placeholder={t("misc.palettePlaceholder")}
             className="flex-1 bg-transparent text-sm outline-none placeholder:text-faint"
           />
           <kbd className="rounded border border-border px-1 text-[10px] text-faint">
@@ -230,16 +262,17 @@ function PalettePanel({
               <span className="flex-1 truncate font-medium">
                 {aiLoading ? (
                   <span className="animate-pulse">
-                    Finding “{query.trim()}” in your study materials…
+                    {t("misc.findingInMaterials").replace(
+                      "{query}",
+                      query.trim(),
+                    )}
                   </span>
                 ) : (
-                  <>
-                    Find “{query.trim()}” with AI
-                  </>
+                  <>{t("misc.findWithAi").replace("{query}", query.trim())}</>
                 )}
               </span>
               <span className="shrink-0 rounded-full border border-accent/30 bg-accent-soft px-2 py-0.5 text-[10px] font-semibold text-accent-dim">
-                1 token
+                {t("misc.oneToken")}
               </span>
             </button>
           )}
@@ -252,11 +285,11 @@ function PalettePanel({
             <div className="mt-1 space-y-px">
               <p className="flex items-center gap-1.5 px-3 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wide text-faint">
                 <Sparkles className="h-3 w-3 text-accent" />
-                Best matches
+                {t("misc.bestMatches")}
               </p>
               {aiResults.length === 0 ? (
                 <p className="px-3 py-3 text-sm text-muted-foreground">
-                  Nothing in your materials matches that — try rewording it.
+                  {t("misc.noMaterialMatches")}
                 </p>
               ) : (
                 aiResults.map((r) => (
@@ -288,7 +321,7 @@ function PalettePanel({
 
           {results.length === 0 && !aiRowVisible ? (
             <p className="px-3 py-6 text-center text-sm text-muted-foreground">
-              No results for “{query}”
+              {t("misc.noResultsFor").replace("{query}", query)}
             </p>
           ) : (
             results.map((item, i) => {

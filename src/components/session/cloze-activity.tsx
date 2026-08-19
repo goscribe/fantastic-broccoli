@@ -8,6 +8,8 @@ import { recordFlashcardAttempt } from "@/lib/api/study-session";
 import { useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
 import { InlineMarkdown, MathText } from "@/components/ui/markdown-text";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Loader2 } from "lucide-react";
 
@@ -31,6 +33,7 @@ export function ClozeActivity({
   draft,
   onComplete,
 }: ClozeActivityProps) {
+  const { t } = useI18n();
   const passage = content.passages[0];
   const parts = passage.textWithBlanks.split(/_{2,}|\{\{blank\}\}/g);
   const restored = draft as
@@ -75,7 +78,7 @@ export function ClozeActivity({
         answers,
       });
     } catch {
-      toast.error("AI marking unavailable — checked locally instead", {
+      toast.error(t("session.markingFallback"), {
         id: "marking-fallback",
       });
       marked = passage.answers.map((_, i) => localResult(i));
@@ -94,7 +97,7 @@ export function ClozeActivity({
   return (
     <div>
       <p className="text-sm font-semibold mb-4">
-        Fill in the missing terms from memory
+        {t("session.clozeInstruction")}
       </p>
 
       <p className="text-[15px] leading-8 text-foreground">
@@ -128,8 +131,7 @@ export function ClozeActivity({
       {checked && !allCorrect && (
         <div className="mt-4 space-y-1.5">
           <p className="text-xs text-muted-foreground">
-            {correctCount}/{passage.answers.length} correct — fix the red ones
-            and check again.
+            {correctCount}/{passage.answers.length} {t("session.clozeFixHint")}
           </p>
           {feedbacks.map((r, i) => (
             <p key={i} className="text-xs text-rose">
@@ -142,7 +144,7 @@ export function ClozeActivity({
       <div className="flex justify-end mt-5">
         {checked && allCorrect ? (
           <Button size="sm" onClick={onComplete}>
-            Continue
+            {t("session.continue")}
             <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
           </Button>
         ) : (
@@ -152,7 +154,7 @@ export function ClozeActivity({
             disabled={marking || answers.some((a) => !a.trim())}
           >
             {marking && <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />}
-            {marking ? "Marking…" : "Check answers"}
+            {marking ? t("session.marking") : t("session.checkAnswers")}
           </Button>
         )}
       </div>

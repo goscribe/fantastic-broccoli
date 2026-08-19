@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { signIn } from "@/lib/api/auth";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/misc";
 import {
   GoogleSignInButton,
   AuthDivider,
@@ -24,6 +26,7 @@ const inputClasses =
 
 export default function LoginPage() {
   const router = useRouter();
+  const { t } = useI18n();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -43,7 +46,7 @@ export default function LoginPage() {
       await signIn(email, password);
       router.push(safeRedirect());
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Sign in failed");
+      setError(err instanceof Error ? err.message : t("misc.signInFailed"));
     } finally {
       setBusy(false);
     }
@@ -53,9 +56,11 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center space-y-1.5">
-          <h1 className="text-2xl font-bold tracking-tight">Welcome back</h1>
+          <h1 className="text-2xl font-bold tracking-tight">
+            {t("misc.welcomeBack")}
+          </h1>
           <p className="text-sm text-muted-foreground">
-            Sign in to your account to continue
+            {t("misc.signInSubtitle")}
           </p>
         </div>
 
@@ -65,7 +70,7 @@ export default function LoginPage() {
               htmlFor="email"
               className="text-[13px] font-medium text-foreground"
             >
-              Email
+              {t("misc.email")}
             </label>
             <input
               id="email"
@@ -86,13 +91,13 @@ export default function LoginPage() {
                 htmlFor="password"
                 className="text-[13px] font-medium text-foreground"
               >
-                Password
+                {t("misc.password")}
               </label>
               <Link
                 href="/forgot-password"
                 className="text-xs text-muted-foreground hover:text-foreground"
               >
-                Forgot password?
+                {t("misc.forgotPassword")}
               </Link>
             </div>
             <div className="relative">
@@ -101,7 +106,7 @@ export default function LoginPage() {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
+                placeholder={t("misc.enterPassword")}
                 required
                 autoComplete="current-password"
                 className={`${inputClasses} pr-10`}
@@ -109,7 +114,9 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
-                aria-label={showPassword ? "Hide password" : "Show password"}
+                aria-label={
+                  showPassword ? t("misc.hidePassword") : t("misc.showPassword")
+                }
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-faint hover:text-foreground"
               >
                 {showPassword ? (
@@ -124,22 +131,22 @@ export default function LoginPage() {
           {error && <p className="text-xs text-rose">{error}</p>}
 
           <Button type="submit" size="md" className="w-full gap-2" disabled={busy}>
-            {busy ? "Signing in…" : "Sign in"}
+            {busy ? t("misc.signingIn") : t("misc.signIn")}
             {!busy && <ArrowRight className="h-4 w-4" />}
           </Button>
         </form>
 
         <AuthDivider />
 
-        <GoogleSignInButton label="Continue with Google" />
+        <GoogleSignInButton label={t("misc.continueWithGoogle")} />
 
         <p className="text-center text-sm text-muted-foreground">
-          New to Scribe?{" "}
+          {t("misc.newToScribe")}{" "}
           <Link
             href="/signup"
             className="font-medium text-foreground hover:underline"
           >
-            Create an account
+            {t("misc.createAnAccount")}
           </Link>
         </p>
       </div>

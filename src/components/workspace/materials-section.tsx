@@ -16,6 +16,8 @@ import { notifyFirstFileUploaded } from "@/components/onboarding/guided-tour";
 import { Card, Surface } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatRelativeDate } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/workspace";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import {
   Square,
@@ -40,12 +42,12 @@ import {
 
 const typeConfig: Record<
   MaterialType,
-  { art: React.ElementType; label: string }
+  { art: React.ElementType; labelKey: string }
 > = {
-  note: { art: NoteArt, label: "Note" },
-  pdf: { art: PdfArt, label: "PDF" },
-  audio: { art: AudioArt, label: "Recording" },
-  slides: { art: SlidesArt, label: "Slides" },
+  note: { art: NoteArt, labelKey: "ws.type.note" },
+  pdf: { art: PdfArt, labelKey: "ws.type.pdf" },
+  audio: { art: AudioArt, labelKey: "ws.type.audio" },
+  slides: { art: SlidesArt, labelKey: "ws.type.slides" },
 };
 
 function formatAudioDuration(seconds: number) {
@@ -83,6 +85,7 @@ function RecorderCard({
   onStop: (seconds: number, blob: Blob | null) => void;
   onError: (msg: string) => void;
 }) {
+  const { t } = useI18n();
   const [seconds, setSeconds] = useState(0);
   const secondsRef = useRef(0);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -149,7 +152,7 @@ function RecorderCard({
           }
         }
       })
-      .catch(() => onError("Microphone access denied"));
+      .catch(() => onError(t("ws.micDenied")));
     return () => {
       cancelled = true;
       clearInterval(tick);
@@ -161,6 +164,7 @@ function RecorderCard({
         mediaRecorderRef.current = null;
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onError]);
 
   return (
@@ -170,7 +174,9 @@ function RecorderCard({
           <span className="relative flex h-2.5 w-2.5">
             <span className="absolute inline-flex h-full w-full rounded-full bg-rose animate-pulse-dot" />
           </span>
-          <span className="text-sm font-semibold">Recording</span>
+          <span className="text-sm font-semibold">
+            {t("ws.recordingLabel")}
+          </span>
           <span className="text-sm text-muted-foreground tabular-nums">
             {formatAudioDuration(seconds)}
           </span>
@@ -195,7 +201,7 @@ function RecorderCard({
           }}
         >
           <Square className="h-3 w-3 mr-1.5 fill-current" />
-          Stop
+          {t("ws.stop")}
         </Button>
       </div>
 
@@ -218,7 +224,7 @@ function RecorderCard({
             {liveTranscript}
           </p>
           <p className="mt-1 text-[10px] text-faint">
-            Live preview — the full transcript is generated after upload.
+            {t("ws.livePreviewNote")}
           </p>
         </div>
       )}
@@ -226,13 +232,13 @@ function RecorderCard({
   );
 }
 
-const stepLabels: Record<string, string> = {
-  fileUpload: "Uploading file",
-  transcription: "Transcribing audio",
-  parsing: "Parsing document",
-  generation: "Generating study materials",
-  worksheetBank: "Precomputing artifact bank",
-  figureExtraction: "Extracting figures",
+const stepLabelKeys: Record<string, string> = {
+  fileUpload: "ws.step.fileUpload",
+  transcription: "ws.step.transcription",
+  parsing: "ws.step.parsing",
+  generation: "ws.step.generation",
+  worksheetBank: "ws.step.worksheetBank",
+  figureExtraction: "ws.step.figureExtraction",
 };
 
 function analysisInFlight(progress: AnalysisProgress | null): boolean {
@@ -272,11 +278,12 @@ function MaterialStatusBadge({
   analyzing: boolean;
   fileStatus?: FileAnalysisStatus;
 }) {
+  const { t } = useI18n();
   if (fileStatus === "queued") {
     return (
       <span className="inline-flex items-center gap-1 rounded-full bg-muted text-muted-foreground px-2 py-0.5 text-[10px] font-semibold shrink-0">
         <Clock3 className="h-2.5 w-2.5" />
-        Pending
+        {t("ws.pendingBadge")}
       </span>
     );
   }
@@ -284,14 +291,14 @@ function MaterialStatusBadge({
     return (
       <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft text-accent-dim px-2 py-0.5 text-[10px] font-semibold shrink-0">
         <Loader2 className="h-2.5 w-2.5 animate-spin" />
-        Analyzing...
+        {t("ws.analyzing")}
       </span>
     );
   }
   if (fileStatus === "error") {
     return (
       <span className="inline-flex items-center gap-1 rounded-full bg-rose/10 text-rose px-2 py-0.5 text-[10px] font-semibold shrink-0">
-        Analysis failed
+        {t("ws.analysisFailed")}
       </span>
     );
   }
@@ -299,7 +306,7 @@ function MaterialStatusBadge({
     return (
       <span className="inline-flex items-center gap-1 rounded-full bg-energy-soft text-accent-dim px-2 py-0.5 text-[10px] font-semibold shrink-0">
         <Check className="h-2.5 w-2.5" />
-        Analyzed
+        {t("ws.analyzed")}
       </span>
     );
   }
@@ -307,18 +314,19 @@ function MaterialStatusBadge({
     return (
       <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft text-accent-dim px-2 py-0.5 text-[10px] font-semibold shrink-0">
         <Loader2 className="h-2.5 w-2.5 animate-spin" />
-        Analyzing...
+        {t("ws.analyzing")}
       </span>
     );
   }
   return (
     <span className="inline-flex items-center gap-1 rounded-full bg-muted text-muted-foreground px-2 py-0.5 text-[10px] font-semibold shrink-0">
-      Not analyzed
+      {t("ws.notAnalyzed")}
     </span>
   );
 }
 
 function AnalysisStatusCard({ progress }: { progress: AnalysisProgress }) {
+  const { t } = useI18n();
   const steps = Object.entries(progress.steps ?? {}).sort(
     (a, b) => a[1].order - b[1].order,
   );
@@ -332,10 +340,10 @@ function AnalysisStatusCard({ progress }: { progress: AnalysisProgress }) {
       <div className="rounded-xl border border-accent/25 bg-accent-soft/50 px-3.5 py-2.5 animate-fade-up">
         <p className="flex items-center gap-1.5 text-[11px] font-semibold text-accent-dim">
           <Sparkles className="h-3 w-3" />
-          Analysis complete
+          {t("ws.analysisComplete")}
         </p>
         <p className="text-[11px] text-muted-foreground mt-0.5">
-          Artifact bank precomputed — Scribe feeds it into your study plans.
+          {t("ws.analysisCompleteHint")}
         </p>
       </div>
     );
@@ -347,11 +355,14 @@ function AnalysisStatusCard({ progress }: { progress: AnalysisProgress }) {
         <p className="flex items-center gap-1.5 text-xs font-semibold">
           <Loader2 className="h-3.5 w-3.5 animate-spin text-accent" />
           <span className="truncate">
-            Analyzing {progress.currentFile ?? "materials"}...
+            {t("ws.analyzingItem").replace(
+              "{name}",
+              progress.currentFile ?? t("ws.materialsWord"),
+            )}
           </span>
         </p>
         <span className="text-[11px] text-muted-foreground tabular-nums shrink-0">
-          {done}/{steps.length} steps
+          {done}/{steps.length} {t("ws.steps")}
         </span>
       </div>
       <div className="h-1 rounded-full bg-border overflow-hidden" aria-hidden>
@@ -379,7 +390,7 @@ function AnalysisStatusCard({ progress }: { progress: AnalysisProgress }) {
                 step.status === "pending" ? "text-faint" : "text-muted-foreground"
               }
             >
-              {stepLabels[key] ?? key}
+              {stepLabelKeys[key] ? t(stepLabelKeys[key]) : key}
             </span>
           </p>
         ))}
@@ -398,6 +409,7 @@ export function MaterialsSection({
   workspaceId: string;
   materials: Material[];
 }) {
+  const { t } = useI18n();
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
@@ -451,7 +463,7 @@ export function MaterialsSection({
       }));
       queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
     } catch (err) {
-      setUploadError(toastError(err, "Upload failed"));
+      setUploadError(toastError(err, t("ws.uploadFailed")));
     } finally {
       setUploading(false);
     }
@@ -462,9 +474,9 @@ export function MaterialsSection({
     try {
       await reanalyzeFile(workspaceId, fileId);
       queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
-      toast.success("Re-analysis started");
+      toast.success(t("ws.reanalysisStarted"));
     } catch (err) {
-      toastError(err, "Failed to start re-analysis");
+      toastError(err, t("ws.reanalysisFailed"));
     } finally {
       setReanalyzing((prev) => {
         const next = new Set(prev);
@@ -475,14 +487,15 @@ export function MaterialsSection({
   };
 
   const handleDelete = async (material: Material) => {
-    if (!confirm(`Delete "${material.title}"? This cannot be undone.`)) return;
+    if (!confirm(t("ws.confirmDeleteMaterial").replace("{name}", material.title)))
+      return;
     setDeleting((prev) => new Set(prev).add(material.id));
     try {
       await deleteFiles(workspaceId, [material.id]);
       queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
-      toast.success("Material deleted");
+      toast.success(t("ws.materialDeleted"));
     } catch (err) {
-      toastError(err, "Failed to delete material");
+      toastError(err, t("ws.materialDeleteFailed"));
     } finally {
       setDeleting((prev) => {
         const next = new Set(prev);
@@ -495,7 +508,7 @@ export function MaterialsSection({
   const stopRecording = async (seconds: number, blob: Blob | null) => {
     setRecording(false);
     if (!blob) {
-      setUploadError("Recording produced no audio");
+      setUploadError(t("ws.recordingNoAudio"));
       return;
     }
     const stamp = new Date().toISOString().slice(0, 16).replace("T", " ").replace(":", ".");
@@ -519,7 +532,7 @@ export function MaterialsSection({
           ) : (
             <ChevronRight className="h-4 w-4 text-muted-foreground" />
           )}
-          Materials
+          {t("ws.materials")}
           {materials.length > 0 && (
             <span className="text-xs font-medium text-faint">
               {materials.length}
@@ -537,7 +550,7 @@ export function MaterialsSection({
             disabled={recording}
           >
             <Circle className="h-3 w-3 mr-1.5 fill-rose text-rose" />
-            Record
+            {t("ws.record")}
           </Button>
           <Button
             size="sm"
@@ -550,7 +563,7 @@ export function MaterialsSection({
             ) : (
               <Upload className="h-3.5 w-3.5 mr-1.5" />
             )}
-            {uploading ? "Uploading..." : "Upload"}
+            {uploading ? t("ws.uploading") : t("ws.upload")}
           </Button>
           <Button
             size="sm"
@@ -560,7 +573,7 @@ export function MaterialsSection({
             disabled={uploading}
           >
             <Camera className="h-3.5 w-3.5 mr-1.5" />
-            Scan
+            {t("ws.scan")}
           </Button>
           <input
             ref={fileInputRef}
@@ -609,10 +622,9 @@ export function MaterialsSection({
 
       {!open ? null : materials.length === 0 ? (
         <div className="rounded-2xl border border-dashed border-border-strong bg-card text-center py-8 px-6">
-          <p className="text-sm font-semibold">No materials yet</p>
+          <p className="text-sm font-semibold">{t("ws.noMaterialsYet")}</p>
           <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
-            Add notes, record lectures, or upload PDFs and slides — Scribe uses
-            them to build your study sessions.
+            {t("ws.noMaterialsHint")}
           </p>
         </div>
       ) : (
@@ -645,8 +657,10 @@ export function MaterialsSection({
                     />
                   </div>
                   <p className="text-[11px] text-faint mt-0.5 truncate">
-                    {config.label}
-                    {material.pages ? ` \u00b7 ${material.pages} pages` : ""}
+                    {t(config.labelKey)}
+                    {material.pages
+                      ? ` \u00b7 ${material.pages} ${t("ws.pages")}`
+                      : ""}
                     {material.durationSeconds !== undefined
                       ? ` \u00b7 ${formatAudioDuration(material.durationSeconds)}`
                       : ""}
@@ -657,7 +671,7 @@ export function MaterialsSection({
                 <div className="flex items-center gap-1 shrink-0">
                   <button
                     type="button"
-                    title="Re-analyse"
+                    title={t("ws.reanalyse")}
                     disabled={isReanalyzing}
                     onClick={() => void handleReanalyze(material.id)}
                     className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors disabled:opacity-50"
@@ -668,7 +682,7 @@ export function MaterialsSection({
                   </button>
                   <button
                     type="button"
-                    title="Delete"
+                    title={t("ws.delete")}
                     disabled={isDeleting}
                     onClick={() => void handleDelete(material)}
                     className="p-1.5 rounded-lg text-muted-foreground hover:text-rose hover:bg-rose/10 transition-colors disabled:opacity-50"

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { SessionDepth, ExamBoard } from "@/types";
 import {
@@ -39,35 +41,35 @@ interface SessionCreateWizardProps {
 const TOPICS_MAX_LENGTH = 2000;
 
 const subjectSuggestions = [
-  "Mathematics",
-  "Physics",
-  "Chemistry",
-  "Biology",
-  "Economics",
-  "History",
-  "Geography",
-  "English",
-  "Computer Science",
-  "Psychology",
+  "session.subjMathematics",
+  "session.subjPhysics",
+  "session.subjChemistry",
+  "session.subjBiology",
+  "session.subjEconomics",
+  "session.subjHistory",
+  "session.subjGeography",
+  "session.subjEnglish",
+  "session.subjComputerScience",
+  "session.subjPsychology",
 ];
 
 const depthOptions: { value: SessionDepth; label: string; description: string; icon: React.ElementType }[] = [
   {
     value: "light",
-    label: "Light review",
-    description: "Quick pass — flashcards, key terms, short MCQs",
+    label: "session.depthLight",
+    description: "session.depthLightDesc",
     icon: BookOpen,
   },
   {
     value: "moderate",
-    label: "Moderate",
-    description: "Balanced mix of reading, MCQs, and comprehension checks",
+    label: "session.depthModerate",
+    description: "session.depthModerateDesc",
     icon: Clock,
   },
   {
     value: "deep",
-    label: "Deep study",
-    description: "Thorough coverage with extended comprehension loops and harder questions",
+    label: "session.depthDeep",
+    description: "session.depthDeepDesc",
     icon: Brain,
   },
 ];
@@ -78,12 +80,12 @@ const examBoards: { value: ExamBoard; label: string }[] = [
   { value: "GCSE", label: "GCSE" },
   { value: "A_LEVEL", label: "A-Level" },
   { value: "SAT", label: "SAT" },
-  { value: "OTHER", label: "Other" },
+  { value: "OTHER", label: "session.other" },
 ];
 
 const durationOptions = [15, 30, 45, 60, 90, 120];
 
-function defaultSessionTitle(): string {
+function defaultSessionTitle(suffix: string): string {
   const now = new Date();
   const date = now.toLocaleDateString("en-GB", {
     day: "numeric",
@@ -93,7 +95,7 @@ function defaultSessionTitle(): string {
     hour: "2-digit",
     minute: "2-digit",
   });
-  return `${date} ${time} Study session`;
+  return `${date} ${time} ${suffix}`;
 }
 
 export function SessionCreateWizard({
@@ -103,9 +105,10 @@ export function SessionCreateWizard({
   onClose,
   onCreate,
 }: SessionCreateWizardProps) {
+  const { t } = useI18n();
   const [step, setStep] = useState(0);
-  const [config, setConfig] = useState<SessionConfig>({
-    title: defaultSessionTitle(),
+  const [config, setConfig] = useState<SessionConfig>(() => ({
+    title: defaultSessionTitle(t("session.defaultTitle")),
     description: "",
     depth: "moderate",
     durationMinutes: 30,
@@ -113,79 +116,82 @@ export function SessionCreateWizard({
     syllabus: "",
     topics: "",
     subject: "",
-  });
+  }));
 
   const steps = [
     // Step 0: What to study
     <div key="what" className="space-y-4">
       <div>
-        <p className="text-lg font-semibold">What are you studying?</p>
+        <p className="text-lg font-semibold">{t("session.wizardWhatTitle")}</p>
         <p className="text-sm text-muted-foreground mt-1">
-          Tell us about the topic for {workspaceTitle}
+          {t("session.wizardWhatHint")} {workspaceTitle}
         </p>
       </div>
       <div className="space-y-3">
         <div>
           <label className="text-xs font-medium text-muted-foreground block mb-1.5">
-            Session title
+            {t("session.wizardTitleLabel")}
           </label>
           <input
             type="text"
             value={config.title}
             onChange={(e) => setConfig({ ...config, title: e.target.value })}
-            placeholder="e.g., Atomic Structure & Periodicity"
+            placeholder={t("session.wizardTitlePlaceholder")}
             className="w-full h-10 rounded-lg border border-border bg-card px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
           />
         </div>
         <div>
           <label className="text-xs font-medium text-muted-foreground block mb-1.5">
-            Subject{hasMaterials ? " (optional)" : ""}
+            {t("session.subject")}
+            {hasMaterials ? ` ${t("session.optionalSuffix")}` : ""}
           </label>
           <input
             type="text"
             value={config.subject}
             onChange={(e) => setConfig({ ...config, subject: e.target.value })}
-            placeholder="e.g., Chemistry"
+            placeholder={t("session.wizardSubjectPlaceholder")}
             className="w-full h-10 rounded-lg border border-border bg-card px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
           />
           <div className="flex flex-wrap gap-1.5 mt-2">
-            {subjectSuggestions.map((subject) => (
-              <button
-                key={subject}
-                type="button"
-                onClick={() =>
-                  setConfig({
-                    ...config,
-                    subject: config.subject === subject ? "" : subject,
-                  })
-                }
-                className={cn(
-                  "px-2.5 py-1 rounded-lg text-xs border",
-                  config.subject === subject
-                    ? "border-accent bg-accent/10 text-accent font-medium"
-                    : "border-border hover:border-accent/30 text-muted-foreground",
-                )}
-              >
-                {subject}
-              </button>
-            ))}
+            {subjectSuggestions.map((subjectKey) => {
+              const subject = t(subjectKey);
+              return (
+                <button
+                  key={subjectKey}
+                  type="button"
+                  onClick={() =>
+                    setConfig({
+                      ...config,
+                      subject: config.subject === subject ? "" : subject,
+                    })
+                  }
+                  className={cn(
+                    "px-2.5 py-1 rounded-lg text-xs border",
+                    config.subject === subject
+                      ? "border-accent bg-accent/10 text-accent font-medium"
+                      : "border-border hover:border-accent/30 text-muted-foreground",
+                  )}
+                >
+                  {subject}
+                </button>
+              );
+            })}
           </div>
           {!hasMaterials && (
             <p className="text-xs text-muted-foreground mt-2">
-              This workspace has no materials yet, so pick a subject (or list
-              topics below) for the session to be planned around.
+              {t("session.wizardNoMaterialsHint")}
             </p>
           )}
         </div>
         <div>
           <label className="text-xs font-medium text-muted-foreground block mb-1.5">
-            Topics or syllabus points (optional)
+            {t("session.wizardTopicsLabel")}
           </label>
           <textarea
             value={config.topics}
             maxLength={TOPICS_MAX_LENGTH}
             onChange={(e) => setConfig({ ...config, topics: e.target.value })}
-            placeholder="e.g., Electron configuration, periodic trends, ionization energy..."
+            placeholder={t("session.wizardTopicsPlaceholder")}
             className="w-full h-20 rounded-lg border border-border bg-card p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
           />
           {config.topics.length > TOPICS_MAX_LENGTH - 200 && (
@@ -196,7 +202,7 @@ export function SessionCreateWizard({
         </div>
         <div>
           <label className="text-xs font-medium text-muted-foreground block mb-1.5">
-            Exam board
+            {t("session.examBoard")}
           </label>
           <div className="flex flex-wrap gap-2">
             {examBoards.map((board) => (
@@ -216,7 +222,7 @@ export function SessionCreateWizard({
                     : "border-border hover:border-accent/30 text-muted-foreground",
                 )}
               >
-                {board.label}
+                {board.value === "OTHER" ? t(board.label) : board.label}
               </button>
             ))}
           </div>
@@ -227,15 +233,15 @@ export function SessionCreateWizard({
     // Step 1: How to study
     <div key="how" className="space-y-4">
       <div>
-        <p className="text-lg font-semibold">How do you want to study?</p>
+        <p className="text-lg font-semibold">{t("session.wizardHowTitle")}</p>
         <p className="text-sm text-muted-foreground mt-1">
-          Choose your intensity and time
+          {t("session.wizardHowHint")}
         </p>
       </div>
 
       <div className="space-y-2">
         <label className="text-xs font-medium text-muted-foreground block mb-1.5">
-          Study depth
+          {t("session.studyDepth")}
         </label>
         {depthOptions.map((opt) => {
           const Icon = opt.icon;
@@ -260,9 +266,9 @@ export function SessionCreateWizard({
                 )}
               />
               <div>
-                <span className="text-sm font-medium">{opt.label}</span>
+                <span className="text-sm font-medium">{t(opt.label)}</span>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  {opt.description}
+                  {t(opt.description)}
                 </p>
               </div>
             </button>
@@ -272,7 +278,7 @@ export function SessionCreateWizard({
 
       <div>
         <label className="text-xs font-medium text-muted-foreground block mb-1.5">
-          Session duration
+          {t("session.sessionDuration")}
         </label>
         <div className="flex flex-wrap gap-2">
           {durationOptions.map((mins) => (
@@ -312,14 +318,14 @@ export function SessionCreateWizard({
       >
         <div className="flex items-center justify-between mb-6">
           <span className="text-sm font-medium text-muted-foreground">
-            New study session
+            {t("session.newStudySession")}
           </span>
           <button
             type="button"
             onClick={onClose}
             className="text-muted-foreground hover:text-foreground text-sm"
           >
-            Cancel
+            {t("session.cancel")}
           </button>
         </div>
 
@@ -341,7 +347,7 @@ export function SessionCreateWizard({
             {step > 0 && (
               <Button variant="ghost" size="sm" onClick={() => setStep(step - 1)}>
                 <ArrowLeft className="h-3 w-3 mr-1" />
-                Back
+                {t("session.back")}
               </Button>
             )}
             {!isLastStep ? (
@@ -351,7 +357,7 @@ export function SessionCreateWizard({
                 onClick={() => setStep(step + 1)}
                 disabled={!canProceed}
               >
-                Next
+                {t("session.next")}
                 <ArrowRight className="h-3 w-3 ml-1" />
               </Button>
             ) : (
@@ -364,12 +370,12 @@ export function SessionCreateWizard({
                 {creating ? (
                   <>
                     <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
-                    Generating plan…
+                    {t("session.generatingPlan")}
                   </>
                 ) : (
                   <>
                     <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                    Generate plan · 40 tokens
+                    {t("session.generatePlanTokens")}
                   </>
                 )}
               </Button>

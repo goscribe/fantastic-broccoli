@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 import { progressPercent } from "@/lib/utils";
 import { ThumbsUp, ThumbsDown, ArrowRight } from "lucide-react";
 
@@ -25,6 +27,7 @@ export function FlashcardActivity({
   onCardResult,
   onComplete,
 }: FlashcardActivityProps) {
+  const { t } = useI18n();
   const restored = draft as
     | Partial<{ currentIndex: number; results: (boolean | null)[] }>
     | undefined;
@@ -48,9 +51,11 @@ export function FlashcardActivity({
     const correct = results.filter((r) => r === true).length;
     return (
       <Card className="text-center py-6">
-        <p className="text-lg font-semibold mb-1">Session complete</p>
+        <p className="text-lg font-semibold mb-1">
+          {t("session.flashcardsComplete")}
+        </p>
         <p className="text-sm text-muted-foreground mb-4">
-          {correct}/{content.cards.length} cards known
+          {correct}/{content.cards.length} {t("session.cardsKnown")}
         </p>
         <ProgressBar
           value={progressPercent(correct, content.cards.length)}
@@ -58,7 +63,7 @@ export function FlashcardActivity({
           showLabel
         />
         <Button variant="primary" size="sm" onClick={onComplete}>
-          Continue <ArrowRight className="h-3 w-3 ml-1" />
+          {t("session.continue")} <ArrowRight className="h-3 w-3 ml-1" />
         </Button>
       </Card>
     );
@@ -79,7 +84,8 @@ export function FlashcardActivity({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <span className="text-xs text-muted-foreground">
-          Card {currentIndex + 1} of {content.cards.length}
+          {t("session.card")} {currentIndex + 1} {t("session.of")}{" "}
+          {content.cards.length}
         </span>
         <ProgressBar
           value={progressPercent(reviewed, content.cards.length)}
@@ -101,13 +107,13 @@ export function FlashcardActivity({
                   <MarkdownText text={card.front} />
                 </p>
                 <p className="text-xs text-muted-foreground mt-3">
-                  Tap to reveal
+                  {t("session.tapToReveal")}
                 </p>
               </>
             ) : (
               <>
                 <p className="text-xs text-muted-foreground mb-2">
-                  Answer
+                  {t("session.answer")}
                 </p>
                 <p className="text-sm leading-relaxed">
                   <MarkdownText text={card.back} />
@@ -126,7 +132,7 @@ export function FlashcardActivity({
             onClick={() => handleResult(false)}
           >
             <ThumbsDown className="h-3.5 w-3.5 mr-1.5" />
-            Didn&apos;t know
+            {t("session.didntKnow")}
           </Button>
           <Button
             variant="primary"
@@ -134,7 +140,7 @@ export function FlashcardActivity({
             onClick={() => handleResult(true)}
           >
             <ThumbsUp className="h-3.5 w-3.5 mr-1.5" />
-            Knew it
+            {t("session.knewIt")}
           </Button>
         </div>
       ) : (
@@ -148,7 +154,7 @@ export function FlashcardActivity({
               setCurrentIndex(currentIndex + 1);
             }}
           >
-            Next card <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
+            {t("session.nextCard")} <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
           </Button>
         </div>
       )}
