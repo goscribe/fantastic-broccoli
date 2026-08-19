@@ -21,6 +21,7 @@ import {
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/lib/theme";
+import { rpc } from "@/lib/api/study-session";
 import {
   ArrowRight,
   BookOpen,
@@ -157,9 +158,34 @@ const sessionPreview = [
   { icon: TextCursorInput, label: "Cloze: Michaelis–Menten", meta: "1 passage" },
 ];
 
+interface PublicStats {
+  artifacts: number;
+  activities: number;
+  countries: number;
+}
+
+/** Snapshot fallback shown until (or if) the live counts load. */
+const FALLBACK_STATS: PublicStats = {
+  artifacts: 1717,
+  activities: 796,
+  countries: 27,
+};
+
+const roundedDown = (n: number, step: number) =>
+  Math.floor(n / step) * step;
+
 export default function LandingPage() {
   const { theme, toggleTheme } = useTheme();
   const [doneCount, setDoneCount] = useState(2);
+  const [stats, setStats] = useState<PublicStats>(FALLBACK_STATS);
+
+  useEffect(() => {
+    rpc<PublicStats>("stats.public", "query", undefined)
+      .then((s) => setStats(s))
+      .catch(() => {
+        /* keep fallback */
+      });
+  }, []);
 
   useEffect(() => {
     const id = window.setInterval(
@@ -375,9 +401,18 @@ export default function LandingPage() {
           <div className="relative mt-16 border-t border-border pt-10">
             <dl className="grid grid-cols-1 gap-6 text-center sm:grid-cols-3">
               {[
-                { value: "1,700+", label: "practice artifacts generated" },
-                { value: "790+", label: "study activities built" },
-                { value: "27", label: "countries studying with Scribe" },
+                {
+                  value: `${roundedDown(stats.artifacts, 100).toLocaleString()}+`,
+                  label: "practice artifacts generated",
+                },
+                {
+                  value: `${roundedDown(stats.activities, 10).toLocaleString()}+`,
+                  label: "study activities built",
+                },
+                {
+                  value: `${stats.countries}`,
+                  label: "countries studying with Scribe",
+                },
               ].map((stat) => (
                 <div key={stat.label}>
                   <dt className="sr-only">{stat.label}</dt>
