@@ -35,6 +35,25 @@ export const UI_LOCALES = {
 
 export type Locale = keyof typeof UI_LOCALES;
 
+export const UI_LOCALE_FLAGS: Record<Locale, string> = {
+  en: "🇺🇸",
+  es: "🇪🇸",
+  fr: "🇫🇷",
+  de: "🇩🇪",
+  zh: "🇨🇳",
+  hi: "🇮🇳",
+  tl: "🇵🇭",
+  ja: "🇯🇵",
+  ko: "🇰🇷",
+  pt: "🇵🇹",
+  it: "🇮🇹",
+  ar: "🇸🇦",
+  ru: "🇷🇺",
+  vi: "🇻🇳",
+  id: "🇮🇩",
+  tr: "🇹🇷",
+};
+
 const en = {
   "nav.home": "Home",
   "nav.flashcards": "Flashcards",
@@ -58,6 +77,7 @@ const en = {
   "settings.language": "Language",
   "settings.languageHint":
     "Used for the app and for generated study content (sessions, flashcards, podcasts).",
+  "settings.languageSaved": "Language saved",
   "common.save": "Save",
   "common.cancel": "Cancel",
   "common.delete": "Delete",
@@ -93,6 +113,7 @@ const dictionaries: Partial<Record<Locale, Dictionary>> = {
     "settings.language": "Idioma",
     "settings.languageHint":
       "Se usa para la aplicación y para el contenido de estudio generado (sesiones, tarjetas, pódcasts).",
+    "settings.languageSaved": "Idioma guardado",
     "common.save": "Guardar",
     "common.cancel": "Cancelar",
     "common.delete": "Eliminar",
@@ -121,6 +142,7 @@ const dictionaries: Partial<Record<Locale, Dictionary>> = {
     "settings.language": "Langue",
     "settings.languageHint":
       "Utilisée pour l'application et pour le contenu d'étude généré (sessions, cartes, podcasts).",
+    "settings.languageSaved": "Langue enregistrée",
     "common.save": "Enregistrer",
     "common.cancel": "Annuler",
     "common.delete": "Supprimer",
@@ -149,6 +171,7 @@ const dictionaries: Partial<Record<Locale, Dictionary>> = {
     "settings.language": "Sprache",
     "settings.languageHint":
       "Gilt für die App und für generierte Lerninhalte (Sitzungen, Karteikarten, Podcasts).",
+    "settings.languageSaved": "Sprache gespeichert",
     "common.save": "Speichern",
     "common.cancel": "Abbrechen",
     "common.delete": "Löschen",
@@ -177,6 +200,7 @@ const dictionaries: Partial<Record<Locale, Dictionary>> = {
     "settings.language": "语言",
     "settings.languageHint":
       "用于应用界面和生成的学习内容（学习会话、闪卡、播客）。",
+    "settings.languageSaved": "语言已保存",
     "common.save": "保存",
     "common.cancel": "取消",
     "common.delete": "删除",
@@ -205,6 +229,7 @@ const dictionaries: Partial<Record<Locale, Dictionary>> = {
     "settings.language": "भाषा",
     "settings.languageHint":
       "ऐप और जनरेट की गई अध्ययन सामग्री (सत्र, फ़्लैशकार्ड, पॉडकास्ट) के लिए उपयोग होती है।",
+    "settings.languageSaved": "भाषा सहेजी गई",
     "common.save": "सहेजें",
     "common.cancel": "रद्द करें",
     "common.delete": "हटाएँ",
@@ -233,6 +258,7 @@ const dictionaries: Partial<Record<Locale, Dictionary>> = {
     "settings.language": "Wika",
     "settings.languageHint":
       "Ginagamit para sa app at sa mga ginawang study content (sessions, flashcards, podcasts).",
+    "settings.languageSaved": "Nai-save ang wika",
     "common.save": "I-save",
     "common.cancel": "Kanselahin",
     "common.delete": "Burahin",
