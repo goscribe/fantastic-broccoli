@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { signUp, signIn } from "@/lib/api/auth";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/misc";
 import {
   GoogleSignInButton,
   AuthDivider,
@@ -16,6 +18,7 @@ const inputClasses =
 
 export default function SignupPage() {
   const router = useRouter();
+  const { t } = useI18n();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +35,7 @@ export default function SignupPage() {
       await signIn(email, password);
       router.push("/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Sign up failed");
+      setError(err instanceof Error ? err.message : t("misc.signUpFailed"));
       setBusy(false);
     }
   };
@@ -41,23 +44,25 @@ export default function SignupPage() {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center space-y-1.5">
-          <h1 className="text-2xl font-bold tracking-tight">Create your account</h1>
+          <h1 className="text-2xl font-bold tracking-tight">
+            {t("misc.createYourAccount")}
+          </h1>
           <p className="text-sm text-muted-foreground">
-            Start studying smarter in minutes
+            {t("misc.signupSubtitle")}
           </p>
         </div>
 
         <form onSubmit={submit} className="space-y-4">
           <div className="space-y-1.5">
             <label htmlFor="name" className="text-[13px] font-medium text-foreground">
-              Name
+              {t("misc.name")}
             </label>
             <input
               id="name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
+              placeholder={t("misc.yourName")}
               required
               autoComplete="name"
               autoFocus
@@ -67,7 +72,7 @@ export default function SignupPage() {
 
           <div className="space-y-1.5">
             <label htmlFor="email" className="text-[13px] font-medium text-foreground">
-              Email
+              {t("misc.email")}
             </label>
             <input
               id="email"
@@ -86,7 +91,7 @@ export default function SignupPage() {
               htmlFor="password"
               className="text-[13px] font-medium text-foreground"
             >
-              Password
+              {t("misc.password")}
             </label>
             <div className="relative">
               <input
@@ -94,7 +99,7 @@ export default function SignupPage() {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="At least 8 characters"
+                placeholder={t("misc.atLeast8Chars")}
                 required
                 minLength={8}
                 autoComplete="new-password"
@@ -103,7 +108,9 @@ export default function SignupPage() {
               <button
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
-                aria-label={showPassword ? "Hide password" : "Show password"}
+                aria-label={
+                  showPassword ? t("misc.hidePassword") : t("misc.showPassword")
+                }
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-faint hover:text-foreground"
               >
                 {showPassword ? (
@@ -118,22 +125,22 @@ export default function SignupPage() {
           {error && <p className="text-xs text-rose">{error}</p>}
 
           <Button type="submit" size="md" className="w-full gap-2" disabled={busy}>
-            {busy ? "Creating account…" : "Create account"}
+            {busy ? t("misc.creatingAccount") : t("misc.createAccount")}
             {!busy && <ArrowRight className="h-4 w-4" />}
           </Button>
         </form>
 
         <AuthDivider />
 
-        <GoogleSignInButton label="Sign up with Google" />
+        <GoogleSignInButton label={t("misc.signUpWithGoogle")} />
 
         <p className="text-center text-sm text-muted-foreground">
-          Already have an account?{" "}
+          {t("misc.alreadyHaveAccount")}{" "}
           <Link
             href="/login"
             className="font-medium text-foreground hover:underline"
           >
-            Sign in
+            {t("misc.signIn")}
           </Link>
         </p>
       </div>

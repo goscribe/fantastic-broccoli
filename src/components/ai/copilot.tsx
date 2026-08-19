@@ -30,6 +30,8 @@ import type {
   CopilotVisualization,
 } from "@/lib/api/copilot";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/misc";
 
 let idCounter = 0;
 const nextId = () => `m-${++idCounter}-${Date.now()}`;
@@ -114,6 +116,7 @@ export function Copilot({
   workspaceId: string;
   studySessionId?: string;
 }) {
+  const { t } = useI18n();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [chats, setChats] = useState<ChatTab[]>([]);
   const [activeChat, setActiveChat] = useState<string | null>(null);
@@ -303,7 +306,7 @@ export function Copilot({
                       text:
                         err instanceof Error
                           ? err.message
-                          : "Something went wrong — try again.",
+                          : t("misc.somethingWentWrong"),
                       done: true,
                     },
                   ],
@@ -314,7 +317,7 @@ export function Copilot({
       }
       setBusy(false);
     },
-    [busy, activeChat, workspaceId, context, studySessionId, queryClient],
+    [busy, activeChat, workspaceId, context, studySessionId, queryClient, t],
   );
 
   const chatMessages = messages.filter(
@@ -332,7 +335,7 @@ export function Copilot({
       setActiveChat(conv.id);
     } catch (err) {
       // keep current chat; the next send retries conversation creation
-      toastError(err, "Couldn't start a new chat");
+      toastError(err, t("misc.couldntStartChat"));
     }
   };
 
@@ -347,7 +350,7 @@ export function Copilot({
       <div
         role="separator"
         aria-orientation="vertical"
-        aria-label="Resize copilot panel"
+        aria-label={t("misc.resizeCopilot")}
         onMouseDown={() => {
           resizing.current = true;
           document.body.style.cursor = "col-resize";
@@ -357,7 +360,7 @@ export function Copilot({
       />
       {/* Header */}
       <div className="flex items-center gap-2 px-3 h-12 border-b border-border shrink-0">
-        <p className="text-sm font-semibold shrink-0">Copilot</p>
+        <p className="text-sm font-semibold shrink-0">{t("misc.copilot")}</p>
         <div className="flex items-center gap-1 ml-1 flex-1 min-w-0 overflow-x-auto">
           {chatsLoading &&
             [0, 1].map((i) => (
@@ -383,7 +386,7 @@ export function Copilot({
           ))}
           <button
             type="button"
-            aria-label="New chat"
+            aria-label={t("misc.newChat")}
             onClick={() => void newChat()}
             className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted shrink-0"
           >
@@ -405,10 +408,12 @@ export function Copilot({
           <div className="pt-8 text-center space-y-5">
             <Wand2 className="h-7 w-7 text-accent mx-auto" />
             <div>
-              <p className="text-sm font-semibold">What do you need?</p>
+              <p className="text-sm font-semibold">
+                {t("misc.copilotEmptyTitle")}
+              </p>
               <p className="text-xs text-muted-foreground mt-1">
-                {context ? `${context} — ` : ""}I can reshape your plan, dig
-                through your materials, or quiz you.
+                {context ? `${context} — ` : ""}
+                {t("misc.copilotEmptyBlurb")}
               </p>
             </div>
             <div className="space-y-2">
@@ -438,7 +443,7 @@ export function Copilot({
               {msg.parts.length === 0 && (
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground px-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse-dot" />
-                  Thinking…
+                  {t("misc.thinking")}
                 </div>
               )}
               {msg.parts.map((part) =>
@@ -493,7 +498,7 @@ export function Copilot({
               }
             }}
             rows={1}
-            placeholder="Ask, search, or change your plan…"
+            placeholder={t("misc.copilotPlaceholder")}
             className="flex-1 resize-none bg-transparent text-sm focus:outline-none placeholder:text-faint py-1"
           />
           <button
@@ -510,6 +515,7 @@ export function Copilot({
 }
 
 export function CopilotTrigger({ onClick }: { onClick: () => void }) {
+  const { t } = useI18n();
   return (
     <button
       type="button"
@@ -517,7 +523,7 @@ export function CopilotTrigger({ onClick }: { onClick: () => void }) {
       className="fixed bottom-5 right-5 z-40 flex items-center gap-2 h-11 pl-4 pr-5 rounded-full bg-accent text-accent-foreground font-semibold text-sm hover:bg-accent-dim active:scale-95 transition-all"
     >
       <Sparkles className="h-4 w-4" />
-      Ask Scribe
+      {t("misc.askScribe")}
     </button>
   );
 }

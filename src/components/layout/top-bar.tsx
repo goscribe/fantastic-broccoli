@@ -31,6 +31,8 @@ import {
 } from "@/lib/api/notifications";
 import { formatRelativeDate } from "@/lib/utils";
 import { useTheme } from "@/lib/theme";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/misc";
 import {
   hasGuidedTourForPath,
   requestGuidedTour,
@@ -45,6 +47,7 @@ export function TopBar({
 }) {
   const router = useRouter();
   const pathname = usePathname();
+  const { t } = useI18n();
   const { user } = useAuthUser();
   const credits = useCredits();
   const { theme, toggleTheme } = useTheme();
@@ -58,16 +61,16 @@ export function TopBar({
   const [unread, setUnread] = useState(0);
 
   const sectionLabel = pathname.startsWith("/workspace")
-    ? "Workspace"
+    ? t("misc.workspace")
     : pathname.startsWith("/folder")
-      ? "Folders"
+      ? t("misc.folders")
       : pathname === "/shared"
-        ? "Shared with me"
+        ? t("misc.sharedWithMe")
         : pathname === "/settings"
-          ? "Settings"
+          ? t("misc.settings")
           : pathname === "/pricing"
-            ? "Pricing"
-            : "Home";
+            ? t("misc.pricing")
+            : t("misc.home");
 
   const emailVerified = user?.emailVerified ?? true;
   const workspaceId = pathname.match(/^\/workspace\/([^/]+)/)?.[1] ?? null;
@@ -128,7 +131,7 @@ export function TopBar({
             {onMenuClick && (
               <button
                 type="button"
-                aria-label="Open sidebar"
+                aria-label={t("misc.openSidebar")}
                 onClick={onMenuClick}
                 className="-ml-2 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground md:hidden"
               >
@@ -145,7 +148,7 @@ export function TopBar({
               {workspaceId ? (
                 <>
                   <Link href="/" className="hover:text-foreground">
-                    Workspaces
+                    {t("misc.workspaces")}
                   </Link>
                   {workspace && (
                     <>
@@ -172,18 +175,18 @@ export function TopBar({
           <div className="flex items-center gap-1.5">
             <Link
               href="/pricing"
-              title="Study points — earn 25 for each completed study session"
+              title={t("misc.studyPointsTooltip")}
               className="flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold tabular-nums text-accent hover:border-accent/50"
             >
               <Sparkles className="h-3.5 w-3.5" />
-              {credits} pts
+              {credits} {t("misc.pts")}
             </Link>
             {hasGuidedTourForPath(pathname) && (
               <button
                 type="button"
                 onClick={requestGuidedTour}
-                title="Show me around"
-                aria-label="Start guided tour"
+                title={t("misc.showMeAround")}
+                aria-label={t("misc.startGuidedTour")}
                 className="hidden rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground md:block"
               >
                 <HelpCircle className="h-4 w-4" />
@@ -194,7 +197,7 @@ export function TopBar({
                 type="button"
                 onClick={openNotifications}
                 className="relative rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
-                aria-label="Notifications"
+                aria-label={t("misc.notifications")}
               >
                 <Bell className="h-4 w-4" />
                 {unread > 0 && (
@@ -207,7 +210,9 @@ export function TopBar({
               {notifOpen && (
                 <div className="absolute right-0 top-full mt-2 w-80 rounded-xl border border-border bg-card py-1.5 animate-fade-up">
                   <div className="flex items-center justify-between border-b border-border px-3.5 py-2">
-                    <p className="text-sm font-semibold">Notifications</p>
+                    <p className="text-sm font-semibold">
+                      {t("misc.notifications")}
+                    </p>
                     {unread > 0 && (
                       <button
                         type="button"
@@ -220,7 +225,7 @@ export function TopBar({
                         }}
                         className="text-[11px] font-medium text-muted-foreground hover:text-foreground"
                       >
-                        Mark all read
+                        {t("misc.markAllRead")}
                       </button>
                     )}
                   </div>
@@ -239,7 +244,7 @@ export function TopBar({
                       </div>
                     ) : notifications.length === 0 ? (
                       <p className="px-3.5 py-6 text-center text-sm text-muted-foreground">
-                        You&apos;re all caught up.
+                        {t("misc.allCaughtUp")}
                       </p>
                     ) : (
                       notifications.map((n) => (
@@ -277,14 +282,14 @@ export function TopBar({
               <button
                 type="button"
                 onClick={() => setMenuOpen((v) => !v)}
-                aria-label="Account menu"
+                aria-label={t("misc.accountMenu")}
                 className="ml-1 flex h-7 w-7 items-center justify-center overflow-hidden rounded-full border border-accent/20 bg-accent-soft text-xs font-bold text-accent hover:border-accent/50"
               >
                 {user?.profilePicture ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={user.profilePicture}
-                    alt="Profile"
+                    alt={t("misc.profile")}
                     className="h-full w-full object-cover"
                   />
                 ) : (
@@ -296,7 +301,9 @@ export function TopBar({
                 <div className="absolute right-0 top-full mt-2 w-56 rounded-xl border border-border bg-card py-1.5 animate-fade-up">
                   <div className="mb-1.5 border-b border-border px-3.5 py-2">
                     <p className="text-sm font-medium">{user?.name}</p>
-                    <p className="text-[11px] text-faint">{user?.email ?? "Personal workspace"}</p>
+                    <p className="text-[11px] text-faint">
+                      {user?.email ?? t("misc.personalWorkspace")}
+                    </p>
                   </div>
                   {workspaceId && (
                     <button
@@ -308,7 +315,7 @@ export function TopBar({
                       className="flex w-full items-center gap-2.5 px-3.5 py-2 text-left text-sm hover:bg-muted"
                     >
                       <UserPlus className="h-4 w-4 text-muted-foreground" />
-                      Members
+                      {t("misc.members")}
                     </button>
                   )}
                   <button
@@ -321,7 +328,7 @@ export function TopBar({
                     ) : (
                       <Moon className="h-4 w-4 text-muted-foreground" />
                     )}
-                    {theme === "dark" ? "Light mode" : "Dark mode"}
+                    {theme === "dark" ? t("misc.lightMode") : t("misc.darkMode")}
                   </button>
                   <button
                     type="button"
@@ -332,7 +339,7 @@ export function TopBar({
                     className="flex w-full items-center gap-2.5 px-3.5 py-2 text-left text-sm hover:bg-muted"
                   >
                     <Settings className="h-4 w-4 text-muted-foreground" />
-                    Settings
+                    {t("misc.settings")}
                   </button>
                   {user?.isAdmin && (
                     <button
@@ -344,7 +351,7 @@ export function TopBar({
                       className="flex w-full items-center gap-2.5 px-3.5 py-2 text-left text-sm hover:bg-muted"
                     >
                       <ShieldCheck className="h-4 w-4 text-muted-foreground" />
-                      Admin console
+                      {t("misc.adminConsole")}
                     </button>
                   )}
                   <div className="my-1.5 border-t border-border" />
@@ -354,7 +361,7 @@ export function TopBar({
                     className="flex w-full items-center gap-2.5 px-3.5 py-2 text-left text-sm text-muted-foreground hover:bg-muted"
                   >
                     <LogOut className="h-4 w-4" />
-                    Sign out
+                    {t("misc.signOut")}
                   </button>
                 </div>
               )}
@@ -366,15 +373,13 @@ export function TopBar({
       {!emailVerified && (
         <div className="border-b border-amber-500/20 bg-amber-500/10 px-5 py-2 text-[12px] text-amber-900 dark:text-amber-100">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
-            <span className="font-medium">
-              Verify your email to unlock study tools and billing actions.
-            </span>
+            <span className="font-medium">{t("misc.verifyEmailBanner")}</span>
             <button
               type="button"
               onClick={() => void resendVerification()}
               className="rounded-full border border-amber-500/30 bg-card px-3 py-1 font-semibold text-foreground hover:bg-muted"
             >
-              Resend verification
+              {t("misc.resendVerification")}
             </button>
           </div>
         </div>

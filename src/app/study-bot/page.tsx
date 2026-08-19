@@ -17,6 +17,8 @@ import { createStudySession } from "@/lib/api/study";
 import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
 import { askCopilotStream, createConversation } from "@/lib/api/copilot";
 import { emitTreeChanged } from "@/lib/tree-events";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/misc";
 import { toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 import { MarkdownText } from "@/components/ui/markdown-text";
@@ -42,15 +44,16 @@ Do not generate study content yourself — the session generator does that.`;
 // has enough to go on; that mention is what surfaces the embedded CTA.
 const READY_RE = /start (your |the |a )?(study )?session/i;
 
-const SUGGESTIONS = [
-  "Practice IB Math AA integration by parts",
-  "Quiz me on AP Bio cellular respiration",
-  "Help me revise GCSE chemistry bonding",
-  "Drill Spanish preterite vs imperfect",
+const SUGGESTION_KEYS = [
+  "misc.suggestionIntegration",
+  "misc.suggestionBio",
+  "misc.suggestionChem",
+  "misc.suggestionSpanish",
 ];
 
 export default function StudyBotPage() {
   const router = useRouter();
+  const { t } = useI18n();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [pendingFiles, setPendingFiles] = useState<File[]>([]);
@@ -84,7 +87,7 @@ export default function StudyBotPage() {
       ...prev,
       {
         role: "user",
-        text: text || "(uploaded files)",
+        text: text || t("misc.uploadedFiles"),
         files: files.map((f) => f.name),
       },
     ]);
@@ -96,7 +99,7 @@ export default function StudyBotPage() {
             ? text.slice(0, 60)
             : files[0]?.name.replace(/\.[^.]+$/, "").slice(0, 60) || "Study session";
         const id = await createWorkspace(title);
-        if (!id) throw new Error("Could not create a workspace");
+        if (!id) throw new Error(t("misc.couldNotCreateWorkspace"));
         workspaceIdRef.current = id;
         workspaceTitleRef.current = title;
         setHasWorkspace(true);
@@ -149,7 +152,7 @@ export default function StudyBotPage() {
       });
       scrollDown();
     } catch (err) {
-      toastError(err, "The study bot hit an error — try again.");
+      toastError(err, t("misc.studyBotError"));
       setMessages((prev) =>
         prev[prev.length - 1]?.role === "bot" &&
         prev[prev.length - 1]?.text === ""
@@ -184,7 +187,7 @@ export default function StudyBotPage() {
         router.push(`/workspace/${workspaceId}`);
       }
     } catch (err) {
-      toastError(err, "Could not start the session");
+      toastError(err, t("misc.couldNotStartSession"));
       setStarting(false);
     }
   };
@@ -202,7 +205,7 @@ export default function StudyBotPage() {
               <span className="max-w-[10rem] truncate">{f.name}</span>
               <button
                 type="button"
-                aria-label={`Remove ${f.name}`}
+                aria-label={`${t("misc.remove")} ${f.name}`}
                 onClick={() =>
                   setPendingFiles((prev) => prev.filter((_, j) => j !== i))
                 }
@@ -231,9 +234,7 @@ export default function StudyBotPage() {
             }
           }}
           placeholder={
-            started
-              ? "Reply to the study bot…"
-              : "I need to practice IB Math AA integration by parts…"
+            started ? t("misc.replyToBot") : t("misc.studyBotExample")
           }
           className="block w-full resize-none bg-transparent px-2 py-1.5 text-sm placeholder:text-faint focus:outline-none"
         />
@@ -257,11 +258,11 @@ export default function StudyBotPage() {
             className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[12px] font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
           >
             <Paperclip className="h-3.5 w-3.5" />
-            Attach notes
+            {t("misc.attachNotes")}
           </button>
           <button
             type="submit"
-            aria-label="Send"
+            aria-label={t("misc.send")}
             disabled={busy || (!input.trim() && pendingFiles.length === 0)}
             className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
           >
@@ -282,28 +283,30 @@ export default function StudyBotPage() {
         <div className="w-full max-w-xl animate-fade-up">
           <div className="text-center">
             <h1 className="text-[26px] font-bold tracking-tight sm:text-3xl">
-              What do you need to study?
+              {t("misc.studyBotTitle")}
             </h1>
             <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-              Tell the bot your subject and topics, or drop in notes and past
-              papers — it&apos;ll set up a study session for you.
+              {t("misc.studyBotSubtitle")}
             </p>
           </div>
           <div className="mt-7">{composer}</div>
           <div className="mt-4 flex flex-wrap justify-center gap-1.5">
-            {SUGGESTIONS.map((s) => (
+            {SUGGESTION_KEYS.map((key) => {
+              const s = t(key);
+              return (
               <button
-                key={s}
+                key={key}
                 type="button"
                 onClick={() => void send(s)}
                 className="rounded-full border border-border bg-card px-3 py-1.5 text-[12px] font-medium text-muted-foreground transition-colors hover:border-accent hover:bg-accent-soft hover:text-accent-dim"
               >
                 {s}
               </button>
-            ))}
+              );
+            })}
           </div>
           <p className="mt-5 text-center text-[11px] text-faint">
-            Chatting is free · generating the session costs 40 tokens
+            {t("misc.studyBotFooter")}
           </p>
         </div>
       </main>
@@ -340,7 +343,7 @@ export default function StudyBotPage() {
                 {!m.text && m.role === "bot" && (
                   <span className="inline-flex items-center gap-1.5 text-faint">
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                    Thinking…
+                    {t("misc.thinking")}
                   </span>
                 )}
                 {m.role === "bot" &&
@@ -361,12 +364,12 @@ export default function StudyBotPage() {
                       {starting ? (
                         <>
                           <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
-                          Building your session…
+                          {t("misc.buildingSession")}
                         </>
                       ) : (
                         <>
                           <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                          Start study session · 40 tokens
+                          {t("misc.startStudySession")}
                           <ArrowRight className="h-3.5 w-3.5 ml-1" />
                         </>
                       )}
