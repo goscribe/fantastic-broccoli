@@ -1,5 +1,6 @@
 "use client";
 
+import "@/lib/i18n/flashcards";
 import { MathText } from "@/components/ui/markdown-text";
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
@@ -15,6 +16,7 @@ import { BankDocThumb, kindConfig } from "@/components/bank/bank-content";
 import { Button } from "@/components/ui/button";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { useI18n, type TranslationKey } from "@/lib/i18n";
 import {
   Check,
   Globe,
@@ -34,10 +36,11 @@ function TileCheckbox({
   selected: boolean;
   onToggle: () => void;
 }) {
+  const { t } = useI18n();
   return (
     <button
       type="button"
-      title={selected ? "Remove from selection" : "Select for export"}
+      title={t(selected ? "fc.mkRemoveFromSelection" : "fc.mkSelectForExport")}
       aria-pressed={selected}
       onClick={(e) => {
         e.preventDefault();
@@ -67,6 +70,7 @@ function ArtifactTile({
   selected: boolean;
   onToggle: () => void;
 }) {
+  const { t } = useI18n();
   const label = artifact.kind ? kindConfig[artifact.kind].label : artifact.type;
   return (
     <div className="group relative animate-fade-up">
@@ -120,7 +124,7 @@ function ArtifactTile({
               )}
             >
               {artifact.source === "community"
-                ? "Community"
+                ? t("fc.mkCommunity")
                 : artifact.workspaceTitle}
             </span>
           </div>
@@ -134,6 +138,7 @@ function ArtifactTile({
 const MARKETPLACE_ENABLED = false;
 
 export default function MarketplacePage() {
+  const { t } = useI18n();
   const router = useRouter();
   useEffect(() => {
     if (!MARKETPLACE_ENABLED) router.replace("/");
@@ -206,10 +211,11 @@ export default function MarketplacePage() {
     <main className="flex-1 px-6 py-6 md:px-10">
       <div className="mx-auto max-w-5xl">
         <div className="py-8 text-center">
-          <h1 className="text-2xl font-bold tracking-tight">Marketplace</h1>
+          <h1 className="text-2xl font-bold tracking-tight">
+            {t("fc.mkTitle")}
+          </h1>
           <p className="mx-auto mt-1.5 max-w-md text-sm text-muted-foreground">
-            Search everything you and the community have generated — then pick
-            what you need and export it with Scribe.
+            {t("fc.mkSubtitle")}
           </p>
           <form
             className="relative mx-auto mt-6 max-w-xl"
@@ -225,14 +231,14 @@ export default function MarketplacePage() {
                 setQuery(e.target.value);
                 if (!e.target.value.trim()) setAiResults(null);
               }}
-              placeholder="i need to practice trigonometry…"
+              placeholder={t("fc.mkSearchPlaceholder")}
               className="h-12 w-full rounded-full border border-border bg-card pl-11 pr-32 text-sm shadow-sm outline-none transition-colors focus:border-accent"
             />
             <div className="absolute right-1.5 top-1/2 flex -translate-y-1/2 items-center gap-1.5">
               {aiResults !== null && (
                 <button
                   type="button"
-                  title="Clear search"
+                  title={t("fc.mkClearSearch")}
                   onClick={() => {
                     setQuery("");
                     setAiResults(null);
@@ -253,14 +259,12 @@ export default function MarketplacePage() {
                 ) : (
                   <Sparkles className="h-3.5 w-3.5 mr-1.5" />
                 )}
-                AI search · 1 token
+                {t("fc.mkAiSearch")}
               </Button>
             </div>
           </form>
           {search.isError && (
-            <p className="mt-2 text-xs text-rose">
-              Search failed — check your token balance and try again.
-            </p>
+            <p className="mt-2 text-xs text-rose">{t("fc.mkSearchFailed")}</p>
           )}
         </div>
 
@@ -268,11 +272,11 @@ export default function MarketplacePage() {
           <div className="flex gap-1.5">
             {(
               [
-                ["all", "All"],
-                ["mine", "My workspaces"],
-                ["community", "Community"],
-              ] as [Filter, string][]
-            ).map(([value, label]) => (
+                ["all", "fc.mkFilterAll"],
+                ["mine", "fc.mkFilterMine"],
+                ["community", "fc.mkFilterCommunity"],
+              ] as [Filter, TranslationKey][]
+            ).map(([value, labelKey]) => (
               <button
                 key={value}
                 type="button"
@@ -284,14 +288,15 @@ export default function MarketplacePage() {
                     : "border-border text-muted-foreground hover:bg-muted",
                 )}
               >
-                {label}
+                {t(labelKey)}
               </button>
             ))}
           </div>
           {aiResults !== null && (
             <p className="text-xs text-muted-foreground">
-              {aiResults.length} match{aiResults.length === 1 ? "" : "es"} for
-              “{query.trim()}”
+              {t(aiResults.length === 1 ? "fc.mkMatchOne" : "fc.mkMatchMany")
+                .replace("{count}", String(aiResults.length))
+                .replace("{query}", query.trim())}
             </p>
           )}
         </div>
@@ -302,12 +307,10 @@ export default function MarketplacePage() {
           <div className="rounded-3xl border border-dashed border-border-strong bg-card px-6 py-14 text-center">
             <Globe className="mx-auto mb-3 h-10 w-10 text-faint" />
             <p className="text-sm font-semibold">
-              {aiResults !== null ? "No matches" : "Nothing here yet"}
+              {t(aiResults !== null ? "fc.mkNoMatches" : "fc.mkNothingHere")}
             </p>
             <p className="mx-auto mt-1.5 max-w-sm text-xs text-muted-foreground">
-              {aiResults !== null
-                ? "Try describing what you want to study differently."
-                : "Artifacts you generate — and anything the community shares publicly — show up here."}
+              {t(aiResults !== null ? "fc.mkTryDifferent" : "fc.mkEmptyBody")}
             </p>
           </div>
         ) : (
@@ -328,7 +331,10 @@ export default function MarketplacePage() {
           <div className="fixed inset-x-0 bottom-5 z-40 flex justify-center px-4">
             <div className="flex items-center gap-3 rounded-full border border-border bg-card px-4 py-2 shadow-lg animate-fade-up">
               <span className="text-xs font-semibold">
-                {selectedIds.length} selected
+                {t("fc.mkSelected").replace(
+                  "{count}",
+                  String(selectedIds.length),
+                )}
               </span>
               <Button
                 size="sm"
@@ -337,14 +343,14 @@ export default function MarketplacePage() {
                 }
               >
                 <Printer className="h-3.5 w-3.5 mr-1.5" />
-                Export with Scribe
+                {t("fc.exportWithScribe")}
               </Button>
               <button
                 type="button"
                 onClick={() => setSelectedIds([])}
                 className="text-[11px] font-semibold text-muted-foreground hover:text-foreground"
               >
-                Clear
+                {t("fc.mkClear")}
               </button>
             </div>
           </div>

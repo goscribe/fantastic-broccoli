@@ -1,9 +1,11 @@
 "use client";
 
+import { DECK_LABEL_KEYS } from "@/lib/i18n/flashcards";
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Shuffle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import { useI18n } from "@/lib/i18n";
 
 export interface DeckEntry {
   front: string;
@@ -23,6 +25,9 @@ export function DeckViewer({
   frontLabel?: string;
   backLabel?: string;
 }) {
+  const { t } = useI18n();
+  const front = t(DECK_LABEL_KEYS[frontLabel] ?? frontLabel);
+  const back = t(DECK_LABEL_KEYS[backLabel] ?? backLabel);
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
 
@@ -64,7 +69,9 @@ export function DeckViewer({
   return (
     <div className="space-y-3">
       <p className="text-center text-[11px] font-medium text-muted-foreground tabular-nums">
-        Card {index + 1} of {entries.length}
+        {t("fc.cardOf")
+          .replace("{n}", String(index + 1))
+          .replace("{total}", String(entries.length))}
       </p>
 
       <div
@@ -85,13 +92,13 @@ export function DeckViewer({
             <div className="p-10 flex flex-col justify-center items-center min-h-[220px]">
               <div className="text-center w-full space-y-3">
                 <span className="text-[11px] font-medium text-muted-foreground">
-                  {frontLabel}
+                  {front}
                 </span>
                 <p className="text-lg font-semibold leading-relaxed">
                   <MarkdownText text={card.front} />
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Click or press Space to flip
+                  {t("fc.clickSpaceFlip")}
                 </p>
               </div>
             </div>
@@ -104,7 +111,7 @@ export function DeckViewer({
             <div className="p-10 flex flex-col justify-center items-center min-h-[220px] h-full overflow-y-auto">
               <div className="text-center w-full space-y-3">
                 <span className="text-[11px] font-medium text-muted-foreground">
-                  {backLabel}
+                  {back}
                 </span>
                 <p className="text-lg font-semibold leading-relaxed">
                   <MarkdownText text={card.back} />
@@ -128,14 +135,14 @@ export function DeckViewer({
             className="h-8"
           >
             <ChevronLeft className="h-4 w-4 mr-1" />
-            Prev
+            {t("fc.prev")}
           </Button>
           <Button
             variant="ghost"
             size="sm"
             className="h-8 w-8 px-0"
             onClick={shuffle}
-            title="Random card"
+            title={t("fc.randomCard")}
           >
             <Shuffle className="h-3.5 w-3.5" />
           </Button>
@@ -149,7 +156,7 @@ export function DeckViewer({
             disabled={index === entries.length - 1}
             className="h-8"
           >
-            Next
+            {t("fc.next")}
             <ChevronRight className="h-4 w-4 ml-1" />
           </Button>
         </div>
@@ -160,11 +167,11 @@ export function DeckViewer({
           <kbd className="px-1 py-0.5 rounded border border-border bg-muted text-[10px] ml-0.5">
             →
           </kbd>
-          <span className="mx-1.5">navigate</span>
+          <span className="mx-1.5">{t("fc.navigate")}</span>
           <kbd className="px-1.5 py-0.5 rounded border border-border bg-muted text-[10px]">
             Space
           </kbd>
-          <span className="ml-1.5">flip</span>
+          <span className="ml-1.5">{t("fc.flip")}</span>
         </p>
       </div>
     </div>

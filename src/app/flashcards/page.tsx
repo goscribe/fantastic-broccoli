@@ -1,5 +1,6 @@
 "use client";
 
+import "@/lib/i18n/flashcards";
 import { MathText } from "@/components/ui/markdown-text";
 import Link from "next/link";
 import {
@@ -11,8 +12,10 @@ import { BankDocThumb } from "@/components/bank/bank-content";
 import { Layers, RotateCcw } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
+import { useI18n } from "@/lib/i18n";
 
 function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
+  const { t } = useI18n();
   const { item, workspace, cardCount } = deck;
   return (
     <Link
@@ -30,14 +33,14 @@ function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
         </h3>
         <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
           <span className="shrink-0">
-            {cardCount} card{cardCount === 1 ? "" : "s"}
+            {cardCount} {t(cardCount === 1 ? "fc.card" : "fc.cards")}
           </span>
           <span>·</span>
           <span className="truncate">{workspace.title}</span>
         </p>
         <div className="mt-2 flex flex-wrap items-center gap-1.5">
           <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-medium text-accent-dim">
-            {item.kind === "VOCAB_DECK" ? "Vocab" : "Flashcards"}
+            {t(item.kind === "VOCAB_DECK" ? "fc.kindVocab" : "fc.kindFlashcards")}
           </span>
           {item.topic && (
             <span className="max-w-[160px] truncate rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
@@ -51,6 +54,7 @@ function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
 }
 
 export default function FlashcardsPage() {
+  const { t } = useI18n();
   const { data: decks, isLoading } = useFlashcardDecks();
   const { data: dueReview } = useQuery({
     queryKey: ["due-review-count"],
@@ -62,9 +66,9 @@ export default function FlashcardsPage() {
     <main className="flex-1 px-6 py-6 md:px-10">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold tracking-tight">Flashcards</h1>
+          <h1 className="text-xl font-bold tracking-tight">{t("fc.title")}</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            All flashcard and vocab decks from your workspaces, in one place.
+            {t("fc.subtitle")}
           </p>
         </div>
         {dueReview && dueReview.total > 0 && (
@@ -73,7 +77,9 @@ export default function FlashcardsPage() {
             className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-[13px] font-semibold text-white hover:bg-accent/90 transition-colors"
           >
             <RotateCcw className="h-3.5 w-3.5" />
-            Review {dueReview.total} due card{dueReview.total === 1 ? "" : "s"}
+            {t(
+              dueReview.total === 1 ? "fc.reviewDueOne" : "fc.reviewDueMany",
+            ).replace("{count}", String(dueReview.total))}
           </Link>
         )}
       </div>
@@ -83,10 +89,9 @@ export default function FlashcardsPage() {
       {!isLoading && (decks ?? []).length === 0 && (
         <div className="rounded-xl border border-border bg-card px-6 py-12 text-center">
           <Layers className="mx-auto h-6 w-6 text-faint" />
-          <p className="mt-3 text-sm font-medium">No flashcard decks yet</p>
+          <p className="mt-3 text-sm font-medium">{t("fc.noDecksTitle")}</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Upload and analyse materials in a workspace — Scribe precomputes
-            flashcard decks from them.
+            {t("fc.noDecksBody")}
           </p>
         </div>
       )}
