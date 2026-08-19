@@ -1,5 +1,6 @@
 "use client";
 
+import { MathText } from "@/components/ui/markdown-text";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Loader2, Check, ArrowRight, FileText } from "lucide-react";
@@ -129,14 +130,16 @@ export function SessionDebrief({
         <Sparkles className="h-3 w-3" />
         Generated from this session&apos;s answers
       </p>
-      <h2 className="text-lg font-bold tracking-tight">{debrief.headline}</h2>
+      <h2 className="text-lg font-bold tracking-tight">
+        <MathText text={debrief.headline} />
+      </h2>
       {creditsEarned > 0 && (
         <p className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent">
           <Sparkles className="h-3.5 w-3.5" />+{creditsEarned} credits earned
         </p>
       )}
       <p className="text-sm text-muted-foreground leading-6 mt-1.5 mb-6">
-        {debrief.summary}
+        <MathText text={debrief.summary} />
       </p>
 
       <div className="space-y-6">
@@ -146,7 +149,9 @@ export function SessionDebrief({
               {section.heading}
             </h3>
             {section.body && (
-              <p className="text-sm leading-6 text-foreground">{section.body}</p>
+              <p className="text-sm leading-6 text-foreground">
+                <MathText text={section.body} />
+              </p>
             )}
             {section.bullets && (
               <ul className="space-y-2.5">
@@ -154,10 +159,12 @@ export function SessionDebrief({
                   <li key={b.text} className="flex gap-2.5">
                     <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
                     <div>
-                      <p className="text-sm font-medium leading-6">{b.text}</p>
+                      <p className="text-sm font-medium leading-6">
+                        <MathText text={b.text} />
+                      </p>
                       {b.detail && (
                         <p className="text-sm text-muted-foreground leading-6">
-                          {b.detail}
+                          <MathText text={b.detail} />
                         </p>
                       )}
                       {b.source && (

@@ -44,6 +44,7 @@ import { ClozeActivity } from "@/components/session/cloze-activity";
 import { ExplainAloudActivity } from "@/components/session/explain-aloud-activity";
 import { WorksheetActivity } from "@/components/session/worksheet-activity";
 import { SessionDebrief } from "@/components/session/session-debrief";
+import { MathText } from "@/components/ui/markdown-text";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -517,7 +518,7 @@ export default function SessionDetailPage() {
           </button>
           <span className="hidden sm:inline text-border-strong">/</span>
           <h1 className="text-sm font-bold tracking-tight truncate">
-            {session.title}
+            <MathText text={session.title} />
           </h1>
           <Badge variant="accent" className="capitalize shrink-0 max-sm:hidden">
             {session.depth}
@@ -676,7 +677,7 @@ export default function SessionDetailPage() {
               <div className="space-y-5 animate-fade-up" key={activeActivity.id}>
                 <div className="flex items-center justify-between">
                   <h2 className="text-base font-bold tracking-tight">
-                    {activeActivity.title}
+                    <MathText text={activeActivity.title} />
                   </h2>
                   <Button
                     variant="ghost"

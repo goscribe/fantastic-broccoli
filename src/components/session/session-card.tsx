@@ -1,6 +1,7 @@
 "use client";
 
 import { StudySession } from "@/types";
+import { MathText } from "@/components/ui/markdown-text";
 import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
@@ -56,7 +57,7 @@ export function SessionCard({
           <SessionArt className="h-10 w-10 shrink-0 opacity-60" />
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <h4 className="font-semibold text-sm truncate">{session.title}</h4>
+              <h4 className="font-semibold text-sm truncate"><MathText text={session.title} /></h4>
               <span className="inline-flex items-center gap-1 rounded-full bg-rose/10 text-rose px-2 py-0.5 text-[10px] font-semibold shrink-0">
                 <AlertTriangle className="h-2.5 w-2.5" />
                 Generation failed
@@ -122,10 +123,10 @@ export function SessionCard({
         <div className="flex items-start gap-3.5 flex-1 min-w-0">
           <SessionArt className="h-10 w-10 shrink-0" />
           <div className="flex-1 min-w-0">
-            <h4 className="font-semibold text-sm truncate">{session.title}</h4>
+            <h4 className="font-semibold text-sm truncate"><MathText text={session.title} /></h4>
             {session.description && (
               <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-                {session.description}
+                <MathText text={session.description} />
               </p>
             )}
           </div>

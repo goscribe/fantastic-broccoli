@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { VocabRecallContent } from "@/types";
 import { useActivityDraft } from "@/lib/use-activity-draft";
+import { MathText } from "@/components/ui/markdown-text";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Check, X, ArrowRight, RotateCcw } from "lucide-react";
@@ -127,7 +128,9 @@ export function VocabRecallActivity({
         </div>
       </div>
 
-      <p className="text-xl font-bold tracking-tight mb-4">{term.term}</p>
+      <p className="text-xl font-bold tracking-tight mb-4">
+        <MathText text={term.term} />
+      </p>
 
       <textarea
         value={answer}
@@ -154,7 +157,9 @@ export function VocabRecallActivity({
             <p className="text-xs font-semibold text-accent mb-1.5">
               Model definition
             </p>
-            <p className="text-sm text-foreground">{term.definition}</p>
+            <p className="text-sm text-foreground">
+              <MathText text={term.definition} />
+            </p>
           </div>
           <div className="flex items-center justify-between">
             <p className="text-xs text-muted-foreground">

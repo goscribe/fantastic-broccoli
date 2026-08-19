@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ExplainAloudContent } from "@/types";
+import { MathText } from "@/components/ui/markdown-text";
 import { Button } from "@/components/ui/button";
 import { Surface } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -47,7 +48,9 @@ export function ExplainAloudActivity({
       </p>
 
       <Surface muted className="p-4 mb-5">
-        <p className="text-sm text-foreground font-medium">{content.prompt}</p>
+        <p className="text-sm text-foreground font-medium">
+          <MathText text={content.prompt} />
+        </p>
       </Surface>
 
       {phase === "idle" && (
@@ -119,7 +122,7 @@ export function ExplainAloudActivity({
                 >
                   {covered[i] && <Check className="h-3 w-3" />}
                 </span>
-                {point}
+                <MathText text={point} />
               </button>
             ))}
           </div>
