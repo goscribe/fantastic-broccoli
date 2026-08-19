@@ -132,6 +132,15 @@ export async function updateProfile(name: string): Promise<void> {
 }
 
 /**
+ * Persists the user's preferred language (UI + generated study content).
+ * Raw rpc because the published @goscribe/server types predate the
+ * `preferredLanguage` field on auth.updateProfile.
+ */
+export async function updatePreferredLanguage(code: string): Promise<void> {
+  await rpc("auth.updateProfile", "mutation", { preferredLanguage: code });
+}
+
+/**
  * Uploads a new profile picture: asks the server for a signed upload URL,
  * PUTs the file straight to storage, then tells the server to broadcast the
  * change. Callers should refreshSession() afterwards to pick up the new URL.

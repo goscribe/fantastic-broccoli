@@ -14,6 +14,7 @@ import {
   fetchTokenOverview,
   formatBytes,
   switchPlan,
+  updatePreferredLanguage,
   updateProfile,
   uploadProfilePicture,
   type AccountSummary,
@@ -21,6 +22,7 @@ import {
   type TokenLedgerEntry,
   type TokenOverview,
 } from "@/lib/api/account";
+import { setUiLocale, useI18n, UI_LOCALES, type Locale } from "@/lib/i18n";
 
 const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
 
@@ -120,6 +122,7 @@ function PlanCard({
 
 export default function SettingsPage() {
   const { user } = useAuthUser();
+  const { t, locale } = useI18n();
   const [summary, setSummary] = useState<AccountSummary | null>(null);
   const [plans, setPlans] = useState<PlanOption[]>([]);
   const [editedName, setEditedName] = useState<string | null>(null);
@@ -187,6 +190,16 @@ export default function SettingsPage() {
       setPhotoError(toastError(err, "Failed to upload image."));
     } finally {
       setUploadingPhoto(false);
+    }
+  };
+
+  const handleLanguageChange = async (code: Locale) => {
+    setUiLocale(code);
+    try {
+      await updatePreferredLanguage(code);
+      toast.success(t("settings.language"));
+    } catch (err) {
+      toastError(err, "Failed to save language");
     }
   };
 
@@ -317,6 +330,27 @@ export default function SettingsPage() {
                 </Button>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Language */}
+        <section className="mt-8">
+          <h2 className="text-sm font-semibold">{t("settings.language")}</h2>
+          <p className="mt-0.5 text-[13px] text-muted-foreground">
+            {t("settings.languageHint")}
+          </p>
+          <div className="mt-3 rounded-xl border border-border bg-card p-5">
+            <select
+              value={locale}
+              onChange={(e) => handleLanguageChange(e.target.value as Locale)}
+              className="w-full max-w-xs rounded-md border border-border bg-card px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+            >
+              {Object.entries(UI_LOCALES).map(([code, label]) => (
+                <option key={code} value={code}>
+                  {label}
+                </option>
+              ))}
+            </select>
           </div>
         </section>
 

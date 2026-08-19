@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-query";
 import { Toaster } from "sonner";
 import { ThemeProvider, useTheme } from "@/lib/theme";
+import { I18nProvider } from "@/lib/i18n";
 import { toastError } from "@/lib/toast";
 import { captureAttribution } from "@/lib/attribution";
 
@@ -41,10 +42,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeProvider>
-      <QueryClientProvider client={queryClient}>
-        {children}
-        <ThemedToaster />
-      </QueryClientProvider>
+      <I18nProvider>
+        <QueryClientProvider client={queryClient}>
+          {children}
+          <ThemedToaster />
+        </QueryClientProvider>
+      </I18nProvider>
     </ThemeProvider>
   );
 }
