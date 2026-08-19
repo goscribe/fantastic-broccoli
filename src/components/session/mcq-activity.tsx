@@ -5,6 +5,8 @@ import { McqContent } from "@/types";
 import { useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, XCircle, ArrowRight } from "lucide-react";
 
@@ -23,6 +25,7 @@ export function McqActivity({
   onAnswer,
   onComplete,
 }: McqActivityProps) {
+  const { t } = useI18n();
   const restored = draft as
     | Partial<{ index: number; correctCount: number }>
     | undefined;
@@ -60,8 +63,9 @@ export function McqActivity({
     <div className="space-y-4">
       <div className="flex items-center justify-between gap-4">
         <span className="text-xs text-muted-foreground tabular-nums">
-          Question {index + 1} of {content.questions.length}
-          {index > 0 && ` · ${correctCount} correct so far`}
+          {t("session.question")} {index + 1} {t("session.of")}{" "}
+          {content.questions.length}
+          {index > 0 && ` · ${correctCount} ${t("session.correctSoFar")}`}
         </span>
         <div className="flex gap-1 w-32">
           {content.questions.map((_, i) => (
@@ -130,7 +134,7 @@ export function McqActivity({
             onClick={handleSubmit}
             disabled={selected === null}
           >
-            Check answer
+            {t("session.checkAnswer")}
           </Button>
         </div>
       )}
@@ -143,14 +147,14 @@ export function McqActivity({
               isCorrect ? "text-success" : "text-red-500",
             )}
           >
-            {isCorrect ? "Correct!" : "Not quite"}
+            {isCorrect ? t("session.correct") : t("session.notQuite")}
           </p>
           <p className="text-xs text-muted-foreground leading-5">
             <MarkdownText text={question.explanation} />
           </p>
           <div className="flex justify-end mt-3">
             <Button variant="ghost" size="sm" onClick={handleNext}>
-              {isLast ? "Finish quiz" : "Next question"}
+              {isLast ? t("session.finishQuiz") : t("session.nextQuestion")}
               <ArrowRight className="h-3 w-3 ml-1" />
             </Button>
           </div>

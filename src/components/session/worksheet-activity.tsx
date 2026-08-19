@@ -11,6 +11,8 @@ import { FigureView } from "@/components/session/reading-activity";
 import { MarkdownText, MathText } from "@/components/ui/markdown-text";
 import { DrawingCanvas } from "@/components/ui/drawing-canvas";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Check, Loader2, PenLine, X } from "lucide-react";
 
@@ -54,6 +56,7 @@ export function WorksheetActivity({
   draft,
   onComplete,
 }: WorksheetActivityProps) {
+  const { t } = useI18n();
   const restored = draft as Partial<WorksheetDraft> | undefined;
   const [stepIndex, setStepIndex] = useState(restored?.stepIndex ?? 0);
   const [answers, setAnswers] = useState<Record<string, string>>(
@@ -116,7 +119,7 @@ export function WorksheetActivity({
             answerImage: drawing,
           });
         } catch {
-          toast.error("AI marking unavailable — checked locally instead", {
+          toast.error(t("session.markingFallback"), {
             id: "marking-fallback",
           });
           return localMarking(part, value);
@@ -147,10 +150,12 @@ export function WorksheetActivity({
       <div className="pb-4 border-b border-border">
         <div className="flex items-center justify-between gap-4">
           <p className="text-sm font-semibold">
-            Question {stepIndex + 1} — <MathText text={step.title} />
+            {t("session.question")} {stepIndex + 1} —{" "}
+            <MathText text={step.title} />
           </p>
           <span className="text-xs text-muted-foreground shrink-0 tabular-nums">
-            {stepIndex + 1} of {content.steps.length} · {totalMarks} marks
+            {stepIndex + 1} {t("session.of")} {content.steps.length} ·{" "}
+            {totalMarks} {t("session.marks")}
           </span>
         </div>
         <div className="flex gap-1 mt-3">
@@ -227,7 +232,9 @@ export function WorksheetActivity({
                               : "border-border-strong bg-background hover:border-foreground/40",
                           )}
                         >
-                          {opt}
+                          {opt === "True"
+                            ? t("session.true")
+                            : t("session.false")}
                         </button>
                       ))}
                     </div>
@@ -241,8 +248,8 @@ export function WorksheetActivity({
                       }
                       placeholder={
                         part.type === "numeric"
-                          ? "Your value…"
-                          : "Your working and answer…"
+                          ? t("session.numericPlaceholder")
+                          : t("session.textPlaceholder")
                       }
                       className={cn(
                         "mt-2 w-full rounded-lg border px-3 py-2 text-sm resize-none focus:outline-none",
@@ -266,7 +273,7 @@ export function WorksheetActivity({
                       className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
                     >
                       <PenLine className="h-3 w-3" />
-                      Add a drawing
+                      {t("session.addDrawing")}
                     </button>
                   )}
                   {part.type === "text" && drawingOpen[key(i)] && (
@@ -284,7 +291,7 @@ export function WorksheetActivity({
                     <div className="mt-2 rounded-lg border border-border overflow-hidden">
                       <div className="flex items-center justify-between bg-muted/60 px-3 py-1.5 border-b border-border">
                         <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                          Mark scheme
+                          {t("session.markScheme")}
                         </p>
                         <span
                           className={cn(
@@ -296,7 +303,8 @@ export function WorksheetActivity({
                                 : "bg-rose/10 text-rose",
                           )}
                         >
-                          {marking.achievedPoints}/{marking.totalPoints} marks
+                          {marking.achievedPoints}/{marking.totalPoints}{" "}
+                          {t("session.marks")}
                         </span>
                       </div>
                       <div className="divide-y divide-border bg-card">
@@ -345,7 +353,7 @@ export function WorksheetActivity({
                     !correct &&
                     part.answer && (
                       <p className="text-xs text-rose mt-1.5">
-                        Expected: {part.answer}
+                        {t("session.expected")} {part.answer}
                       </p>
                     )}
                 </div>
@@ -357,7 +365,7 @@ export function WorksheetActivity({
         <div className="flex items-center justify-between pt-1">
           {checked ? (
             <p className="text-xs text-muted-foreground tabular-nums">
-              {earnedMarks}/{totalMarks} marks on this question
+              {earnedMarks}/{totalMarks} {t("session.marksOnQuestion")}
             </p>
           ) : (
             <span />
@@ -365,12 +373,12 @@ export function WorksheetActivity({
           {checked ? (
             isLastStep ? (
               <Button size="sm" onClick={onComplete}>
-                Finish worksheet
+                {t("session.finishWorksheet")}
                 <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
               </Button>
             ) : (
               <Button size="sm" onClick={() => setStepIndex((s) => s + 1)}>
-                Next question
+                {t("session.nextQuestion")}
                 <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
               </Button>
             )
@@ -383,10 +391,10 @@ export function WorksheetActivity({
               {markingInFlight ? (
                 <>
                   <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
-                  Marking…
+                  {t("session.marking")}
                 </>
               ) : (
-                "Check answers"
+                t("session.checkAnswers")
               )}
             </Button>
           )}

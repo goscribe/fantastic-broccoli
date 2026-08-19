@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { Brain, Send, CheckCircle2, RotateCcw, Loader2 } from "lucide-react";
 
@@ -24,6 +26,7 @@ export function ComprehensionActivity({
   draft,
   onComplete,
 }: ComprehensionActivityProps) {
+  const { t } = useI18n();
   const restored = draft as
     | Partial<{ userText: string; showOriginal: boolean }>
     | undefined;
@@ -58,7 +61,7 @@ export function ComprehensionActivity({
       setLocalRewrites((prev) => [...prev, text]);
       setUserText("");
     } catch {
-      setError("Evaluation failed — please try again.");
+      setError(t("session.evaluationFailed"));
     } finally {
       setEvaluating(false);
     }
@@ -72,7 +75,7 @@ export function ComprehensionActivity({
           <div className="flex items-center gap-2 mb-3">
             <Brain className="h-4 w-4 text-accent" />
             <span className="text-sm font-medium text-accent">
-              Read carefully, then rewrite in your own words
+              {t("session.compReadInstruction")}
             </span>
           </div>
           <div className="prose prose-sm max-w-none">
@@ -86,7 +89,7 @@ export function ComprehensionActivity({
               size="sm"
               onClick={() => setShowOriginal(false)}
             >
-              I&apos;ve read it — let me rewrite
+              {t("session.compReadDone")}
             </Button>
           </div>
         </Card>
@@ -97,7 +100,7 @@ export function ComprehensionActivity({
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">
-              Attempt {attemptNumber}: Write it back in your own words
+              {t("session.attempt")} {attemptNumber}: {t("session.compWriteBack")}
             </span>
             <button
               type="button"
@@ -105,14 +108,14 @@ export function ComprehensionActivity({
               className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
             >
               <RotateCcw className="h-3 w-3" />
-              Re-read original
+              {t("session.reReadOriginal")}
             </button>
           </div>
 
           <textarea
             value={userText}
             onChange={(e) => setUserText(e.target.value)}
-            placeholder="Explain the concept in your own words..."
+            placeholder={t("session.compPlaceholder")}
             className="w-full h-32 rounded-lg border border-border bg-card p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
           />
 
@@ -129,7 +132,7 @@ export function ComprehensionActivity({
               ) : (
                 <Send className="h-3.5 w-3.5 mr-1.5" />
               )}
-              {evaluating ? "Evaluating…" : "Submit"}
+              {evaluating ? t("session.evaluating") : t("session.submit")}
             </Button>
           </div>
         </div>
@@ -150,7 +153,7 @@ export function ComprehensionActivity({
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="font-medium text-xs">
-                  Attempt {evaluation.attempt}
+                  {t("session.attempt")} {evaluation.attempt}
                 </span>
                 <ProgressBar
                   value={evaluation.score}
@@ -171,7 +174,9 @@ export function ComprehensionActivity({
       {userRewrites.length > 0 && !hasPassed && (
         <details className="text-xs text-muted-foreground">
           <summary className="cursor-pointer hover:text-foreground">
-            Your previous {userRewrites.length === 1 ? "attempt" : "attempts"}
+            {userRewrites.length === 1
+              ? t("session.yourPreviousAttempt")
+              : t("session.yourPreviousAttempts")}
           </summary>
           <div className="mt-2 space-y-2">
             {userRewrites.map((rewrite, i) => (
@@ -187,10 +192,12 @@ export function ComprehensionActivity({
       {hasPassed && (
         <Card className="border-success/20 bg-success/5 text-center">
           <CheckCircle2 className="h-8 w-8 text-success mx-auto mb-2" />
-          <p className="text-sm font-medium">Comprehension confirmed</p>
+          <p className="text-sm font-medium">{t("session.compConfirmed")}</p>
           <p className="text-xs text-muted-foreground mt-1">
-            You demonstrated understanding in {evaluations.length}{" "}
-            {evaluations.length === 1 ? "attempt" : "attempts"}
+            {t("session.compUnderstoodIn")} {evaluations.length}{" "}
+            {evaluations.length === 1
+              ? t("session.attemptNoun")
+              : t("session.attemptsNoun")}
           </p>
           <Button
             variant="ghost"
@@ -198,7 +205,7 @@ export function ComprehensionActivity({
             onClick={onComplete}
             className="mt-3"
           >
-            Continue to next activity
+            {t("session.continueNext")}
           </Button>
         </Card>
       )}
