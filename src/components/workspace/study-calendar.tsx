@@ -3,6 +3,8 @@
 import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/workspace";
 
 type DailyActivity = { date: string; count: number };
 
@@ -17,8 +19,6 @@ function intensityClass(count: number): string {
   return "bg-accent";
 }
 
-const WEEKDAY_LABELS = ["M", "T", "W", "T", "F", "S", "S"];
-
 export function StudyCalendar({
   dailyActivity,
   className,
@@ -26,6 +26,8 @@ export function StudyCalendar({
   dailyActivity: DailyActivity[];
   className?: string;
 }) {
+  const { t } = useI18n();
+  const weekdayLabels = t("ws.weekdayLetters").split(",");
   const activityMap = useMemo(
     () => new Map(dailyActivity.map((entry) => [entry.date, entry.count])),
     [dailyActivity],
@@ -93,7 +95,8 @@ export function StudyCalendar({
         <div className="min-w-0 leading-tight">
           <p className="truncate text-sm font-semibold">{monthLabel}</p>
           <p className="text-[11px] text-muted-foreground">
-            {activeDays} active day{activeDays !== 1 ? "s" : ""}
+            {activeDays}{" "}
+            {activeDays === 1 ? t("ws.activeDay") : t("ws.activeDays")}
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-0.5">
@@ -101,7 +104,7 @@ export function StudyCalendar({
             type="button"
             disabled={!canGoPrev}
             onClick={() => setViewDate(new Date(year, month - 1, 1))}
-            aria-label="Previous month"
+            aria-label={t("ws.prevMonth")}
             className="rounded-md p-1 text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-30"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -110,7 +113,7 @@ export function StudyCalendar({
             type="button"
             disabled={!canGoNext}
             onClick={() => setViewDate(new Date(year, month + 1, 1))}
-            aria-label="Next month"
+            aria-label={t("ws.nextMonth")}
             className="rounded-md p-1 text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-30"
           >
             <ChevronRight className="h-4 w-4" />
@@ -119,7 +122,7 @@ export function StudyCalendar({
       </div>
 
       <div className="mt-3 grid grid-cols-7 gap-1">
-        {WEEKDAY_LABELS.map((label, index) => (
+        {weekdayLabels.map((label, index) => (
           <div
             key={`${label}-${index}`}
             className="pb-0.5 text-center text-[10px] font-medium text-faint"
@@ -133,7 +136,9 @@ export function StudyCalendar({
           ) : (
             <div
               key={cell.key}
-              title={`${cell.count} session${cell.count !== 1 ? "s" : ""}`}
+              title={`${cell.count} ${
+                cell.count === 1 ? t("ws.sessionWord") : t("ws.sessionsWord")
+              }`}
               className={cn(
                 "flex aspect-square items-center justify-center rounded-md text-[10px] font-medium tabular-nums",
                 intensityClass(cell.count),
@@ -152,12 +157,12 @@ export function StudyCalendar({
       </div>
 
       <div className="mt-3 flex items-center justify-end gap-1.5 text-[10px] text-faint">
-        <span>Less</span>
+        <span>{t("ws.less")}</span>
         <div className="h-2.5 w-2.5 rounded-sm bg-muted" />
         <div className="h-2.5 w-2.5 rounded-sm bg-accent/30" />
         <div className="h-2.5 w-2.5 rounded-sm bg-accent/60" />
         <div className="h-2.5 w-2.5 rounded-sm bg-accent" />
-        <span>More</span>
+        <span>{t("ws.more")}</span>
       </div>
     </div>
   );

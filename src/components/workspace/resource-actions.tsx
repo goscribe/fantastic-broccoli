@@ -9,6 +9,8 @@ import {
 } from "@/lib/api/workspace";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/workspace";
 import { toast, toastError } from "@/lib/toast";
 import { emitTreeChanged } from "@/lib/tree-events";
 import { MoreHorizontal, Pencil, Trash2, Users, X } from "lucide-react";
@@ -27,6 +29,7 @@ export function ResourceActionsMenu({
   actions: ResourceActions;
   className?: string;
 }) {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -40,11 +43,16 @@ export function ResourceActionsMenu({
   }, [open]);
 
   const items = [
-    { label: "Rename", icon: Pencil, onSelect: actions.onRename },
+    { label: t("ws.rename"), icon: Pencil, onSelect: actions.onRename },
     ...(actions.onMembers
-      ? [{ label: "Members", icon: Users, onSelect: actions.onMembers }]
+      ? [{ label: t("ws.members"), icon: Users, onSelect: actions.onMembers }]
       : []),
-    { label: "Delete", icon: Trash2, onSelect: actions.onDelete, danger: true },
+    {
+      label: t("ws.delete"),
+      icon: Trash2,
+      onSelect: actions.onDelete,
+      danger: true,
+    },
   ];
 
   return (
@@ -55,7 +63,7 @@ export function ResourceActionsMenu({
     >
       <button
         type="button"
-        aria-label="More actions"
+        aria-label={t("ws.moreActions")}
         onClick={() => setOpen((o) => !o)}
         className={cn(
           "flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground",
@@ -121,6 +129,7 @@ export function EditResourceDialog({
   onClose: () => void;
   onSaved: () => void;
 }) {
+  const { t } = useI18n();
   const [name, setName] = useState(target.name);
   const [description, setDescription] = useState(
     target.kind === "workspace" ? (target.description ?? "") : "",
@@ -156,12 +165,12 @@ export function EditResourceDialog({
       } else {
         await updateFolder(target.id, { name: name.trim(), color });
       }
-      toast.success("Changes saved");
+      toast.success(t("ws.changesSaved"));
       emitTreeChanged();
       onSaved();
       onClose();
     } catch (err) {
-      setError(toastError(err, "Update failed"));
+      setError(toastError(err, t("ws.updateFailed")));
       setBusy(false);
     }
   };
@@ -177,11 +186,13 @@ export function EditResourceDialog({
       >
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-semibold">
-            Edit {target.kind === "folder" ? "folder" : "workspace"}
+            {target.kind === "folder"
+              ? t("ws.editFolder")
+              : t("ws.editWorkspace")}
           </h2>
           <button
             type="button"
-            aria-label="Close"
+            aria-label={t("ws.close")}
             onClick={onClose}
             className="rounded p-1 text-faint hover:bg-muted hover:text-foreground"
           >
@@ -193,14 +204,14 @@ export function EditResourceDialog({
             ref={inputRef}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Name"
+            placeholder={t("ws.namePlaceholder")}
             className="h-10 w-full rounded-lg border border-border bg-card px-3.5 text-sm placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15"
           />
           {target.kind === "workspace" && (
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Description (optional)"
+              placeholder={t("ws.descriptionPlaceholder")}
               rows={3}
               className="w-full rounded-lg border border-border bg-card px-3.5 py-2.5 text-sm placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15"
             />
@@ -208,7 +219,7 @@ export function EditResourceDialog({
           {target.kind === "workspace" && (
             <div>
               <p className="mb-1.5 text-xs font-medium text-muted-foreground">
-                Icon
+                {t("ws.icon")}
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {WORKSPACE_ICONS.map((opt) => (
@@ -237,7 +248,7 @@ export function EditResourceDialog({
                 <button
                   key={c}
                   type="button"
-                  aria-label={`Colour ${c}`}
+                  aria-label={`${t("ws.colour")} ${c}`}
                   onClick={() => setColor(c)}
                   className={cn(
                     "h-7 w-7 rounded-full border-2 transition-transform",
@@ -253,10 +264,10 @@ export function EditResourceDialog({
           {error && <p className="text-xs text-rose">{error}</p>}
           <div className="flex justify-end gap-2">
             <Button type="button" variant="ghost" size="sm" onClick={onClose}>
-              Cancel
+              {t("ws.cancel")}
             </Button>
             <Button type="submit" size="sm" disabled={busy || !name.trim()}>
-              {busy ? "Saving…" : "Save"}
+              {busy ? t("ws.saving") : t("ws.save")}
             </Button>
           </div>
         </form>
@@ -280,6 +291,7 @@ export function DeleteResourceDialog({
   onClose: () => void;
   onDeleted: () => void;
 }) {
+  const { t } = useI18n();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -289,12 +301,12 @@ export function DeleteResourceDialog({
     try {
       if (target.kind === "workspace") await deleteWorkspace(target.id);
       else await deleteFolder(target.id);
-      toast.success("Deleted");
+      toast.success(t("ws.deleted"));
       emitTreeChanged();
       onDeleted();
       onClose();
     } catch (err) {
-      setError(toastError(err, "Delete failed"));
+      setError(toastError(err, t("ws.deleteFailed")));
       setBusy(false);
     }
   };
@@ -309,16 +321,17 @@ export function DeleteResourceDialog({
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-sm font-semibold">
-          Delete {target.kind === "folder" ? "folder" : "workspace"}?
+          {target.kind === "folder"
+            ? t("ws.deleteFolderQ")
+            : t("ws.deleteWorkspaceQ")}
         </h2>
         <p className="mt-2 text-xs text-muted-foreground">
-          &ldquo;{target.name}&rdquo; and everything inside it will be
-          permanently deleted. This cannot be undone.
+          {t("ws.deleteWarning").replace("{name}", target.name)}
         </p>
         {error && <p className="mt-2 text-xs text-rose">{error}</p>}
         <div className="mt-4 flex justify-end gap-2">
           <Button type="button" variant="ghost" size="sm" onClick={onClose}>
-            Cancel
+            {t("ws.cancel")}
           </Button>
           <Button
             type="button"
@@ -327,7 +340,7 @@ export function DeleteResourceDialog({
             disabled={busy}
             onClick={() => void confirmDelete()}
           >
-            {busy ? "Deleting…" : "Delete"}
+            {busy ? t("ws.deleting") : t("ws.delete")}
           </Button>
         </div>
       </div>

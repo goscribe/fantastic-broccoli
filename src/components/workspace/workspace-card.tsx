@@ -4,6 +4,8 @@ import { Workspace } from "@/types";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { formatRelativeDate, formatDuration } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/workspace";
 import { Clock, ArrowRight, FileText, BookOpen, UserPlus } from "lucide-react";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { AvatarStack } from "@/components/ui/avatar-stack";
@@ -19,6 +21,7 @@ interface WorkspaceCardProps {
 }
 
 export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProps) {
+  const { t } = useI18n();
   const activeSessions = workspace.sessions.filter(
     (s) => s.status === "active",
   );
@@ -27,6 +30,20 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
     0,
   );
   const materialCount = workspace.materials?.length ?? 0;
+  const materialsSummary =
+    materialCount > 0
+      ? t(
+          materialCount === 1 ? "ws.materialUploaded" : "ws.materialsUploaded",
+        ).replace("{n}", String(materialCount))
+      : t("ws.noMaterialsYet");
+  const sessionsSummary =
+    activeSessions.length > 0
+      ? t(
+          activeSessions.length === 1
+            ? "ws.sessionInProgress"
+            : "ws.sessionsInProgress",
+        ).replace("{n}", String(activeSessions.length))
+      : t("ws.noActiveSessions");
 
   return (
     <div
@@ -57,7 +74,7 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
           </div>
           <p className="text-xs text-muted-foreground mt-1 line-clamp-1">
             {workspace.description ||
-              `${materialCount > 0 ? `${materialCount} material${materialCount !== 1 ? "s" : ""} uploaded` : "No materials yet"} · ${activeSessions.length > 0 ? `${activeSessions.length} session${activeSessions.length !== 1 ? "s" : ""} in progress` : "no active sessions"}`}
+              `${materialsSummary} · ${sessionsSummary}`}
           </p>
         </div>
       </div>
@@ -66,12 +83,12 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
       <div className="mt-4 flex items-center gap-3 text-[11px] text-muted-foreground">
         <span className="flex items-center gap-1">
           <FileText className="h-3 w-3" />
-          {materialCount} file{materialCount !== 1 ? "s" : ""}
+          {materialCount} {materialCount === 1 ? t("ws.file") : t("ws.files")}
         </span>
         {activeSessions.length > 0 && (
           <span className="flex items-center gap-1">
             <BookOpen className="h-3 w-3" />
-            {activeSessions.length} active
+            {activeSessions.length} {t("ws.active")}
           </span>
         )}
         {totalMinutes > 0 && (
@@ -84,8 +101,8 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
           {actions?.onMembers ? (
             <button
               type="button"
-              aria-label="Manage members"
-              title="Manage members"
+              aria-label={t("ws.manageMembers")}
+              title={t("ws.manageMembers")}
               onClick={(e) => {
                 e.stopPropagation();
                 actions.onMembers?.();

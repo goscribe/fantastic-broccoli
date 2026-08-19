@@ -8,6 +8,8 @@ import { emitTreeChanged } from "@/lib/tree-events";
 import { toast, toastError } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/workspace";
 import {
   ArrowLeft,
   Check,
@@ -53,6 +55,7 @@ export function NewWorkspaceMenu({
   align?: "left" | "right";
   children: (toggle: () => void) => React.ReactNode;
 }) {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
 
   const pick = (choice: "workspace" | "bot") => {
@@ -83,11 +86,10 @@ export function NewWorkspaceMenu({
               <FilePlus2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
               <span className="min-w-0">
                 <span className="block text-[13px] font-semibold text-foreground">
-                  Create a workspace
+                  {t("ws.createWorkspace")}
                 </span>
                 <span className="block text-xs text-muted-foreground">
-                  Start blank, or pick a curriculum &amp; units for a curated
-                  starter session.
+                  {t("ws.createWorkspaceHint")}
                 </span>
               </span>
             </button>
@@ -99,11 +101,10 @@ export function NewWorkspaceMenu({
               <MessageCircle className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
               <span className="min-w-0">
                 <span className="block text-[13px] font-semibold text-foreground">
-                  Chat with the study bot
+                  {t("ws.chatStudyBot")}
                 </span>
                 <span className="block text-xs text-muted-foreground">
-                  Tell it what you need to study, drop in files — it builds
-                  the session for you.
+                  {t("ws.chatStudyBotHint")}
                 </span>
               </span>
             </button>
@@ -134,6 +135,7 @@ export function CreateResourceDialog({
   onCreated,
 }: CreateResourceDialogProps) {
   const router = useRouter();
+  const { t } = useI18n();
   const [mode, setMode] = useState<WorkspaceMode>(
     kind === "workspace" ? (initialMode ?? "choose") : "empty",
   );
@@ -179,7 +181,7 @@ export function CreateResourceDialog({
         topics: chosenUnits.join(", ").slice(0, 2000) || undefined,
         examBoard: chosen.board,
       });
-      toast.success("Workspace created");
+      toast.success(t("ws.workspaceCreated"));
       onClose();
       if (session) {
         router.push(`/workspace/${workspaceId}/session/${session.id}`);
@@ -187,7 +189,7 @@ export function CreateResourceDialog({
         router.push(`/workspace/${workspaceId}`);
       }
     } catch (err) {
-      setError(toastError(err, "Creation failed"));
+      setError(toastError(err, t("ws.creationFailed")));
       setBusy(false);
     }
   };
@@ -210,10 +212,12 @@ export function CreateResourceDialog({
         emitTreeChanged();
         onCreated(id);
       }
-      toast.success(kind === "folder" ? "Folder created" : "Workspace created");
+      toast.success(
+        kind === "folder" ? t("ws.folderCreated") : t("ws.workspaceCreated"),
+      );
       onClose();
     } catch (err) {
-      setError(toastError(err, "Creation failed"));
+      setError(toastError(err, t("ws.creationFailed")));
       setBusy(false);
     }
   };
@@ -232,7 +236,7 @@ export function CreateResourceDialog({
             {kind === "workspace" && mode === "curated" && (
               <button
                 type="button"
-                aria-label="Back"
+                aria-label={t("ws.back")}
                 onClick={() => {
                   if (subject) {
                     setSubject(null);
@@ -250,19 +254,22 @@ export function CreateResourceDialog({
             )}
             <h2 className="text-sm font-semibold">
               {kind === "folder"
-                ? "New folder"
+                ? t("ws.newFolder")
                 : mode === "curated"
                   ? subject && curriculum
                     ? `${curriculum.label} ${subject}`
                     : curriculum
-                      ? `${curriculum.label} — pick a subject`
-                      : "Pick a curriculum"
-                  : "New workspace"}
+                      ? t("ws.pickSubject").replace(
+                          "{curriculum}",
+                          curriculum.label,
+                        )
+                      : t("ws.pickCurriculum")
+                  : t("ws.newWorkspace")}
             </h2>
           </div>
           <button
             type="button"
-            aria-label="Close"
+            aria-label={t("ws.close")}
             onClick={onClose}
             className="rounded p-1 text-faint hover:bg-muted hover:text-foreground"
           >
@@ -279,10 +286,10 @@ export function CreateResourceDialog({
               <FilePlus2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
               <span>
                 <span className="block text-sm font-semibold">
-                  Empty workspace
+                  {t("ws.emptyWorkspace")}
                 </span>
                 <span className="block text-xs text-muted-foreground">
-                  Start blank and add your own materials.
+                  {t("ws.emptyWorkspaceHint")}
                 </span>
               </span>
             </button>
@@ -293,10 +300,11 @@ export function CreateResourceDialog({
             >
               <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
               <span>
-                <span className="block text-sm font-semibold">Curated</span>
+                <span className="block text-sm font-semibold">
+                  {t("ws.curated")}
+                </span>
                 <span className="block text-xs text-muted-foreground">
-                  Pick a curriculum &amp; subject — Scribe builds a starter
-                  study session for you.
+                  {t("ws.curatedHint")}
                 </span>
               </span>
             </button>
@@ -308,16 +316,16 @@ export function CreateResourceDialog({
               <div className="flex flex-col items-center gap-2 py-8 text-center">
                 <Sparkles className="h-5 w-5 animate-pulse text-accent" />
                 <p className="text-sm font-medium">
-                  Building your starter session…
+                  {t("ws.buildingSession")}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  This takes a few seconds — you&apos;ll land right in it.
+                  {t("ws.buildingSessionHint")}
                 </p>
               </div>
             ) : !curriculum ? (
               <>
                 <p className="mb-3 text-xs text-muted-foreground">
-                  Which exam system are you studying for?
+                  {t("ws.whichExam")}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {CURRICULUM_PRESETS.map((p) => (
@@ -355,7 +363,7 @@ export function CreateResourceDialog({
             ) : (
               <>
                 <p className="mb-3 text-xs text-muted-foreground">
-                  Pick the units to focus on — choose one or several.
+                  {t("ws.pickUnits")}
                 </p>
                 <div className="max-h-64 space-y-1.5 overflow-y-auto">
                   {unitsFor(curriculum.board, subject).map((unit) => {
@@ -399,7 +407,7 @@ export function CreateResourceDialog({
                     onClick={() => void startCurated(curriculum, subject, [])}
                     className="text-xs font-medium text-muted-foreground hover:text-foreground"
                   >
-                    Cover everything
+                    {t("ws.coverEverything")}
                   </button>
                   <Button
                     size="sm"
@@ -407,7 +415,7 @@ export function CreateResourceDialog({
                     onClick={() => void startCurated(curriculum, subject, units)}
                   >
                     <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                    Generate session · 40 tokens
+                    {t("ws.generateSessionTokens")}
                   </Button>
                 </div>
               </>
@@ -421,14 +429,18 @@ export function CreateResourceDialog({
             ref={inputRef}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder={kind === "folder" ? "e.g. Sciences" : "e.g. Chemistry HL"}
+            placeholder={
+              kind === "folder"
+                ? t("ws.folderNamePlaceholder")
+                : t("ws.workspaceNamePlaceholder")
+            }
             className="h-10 w-full rounded-lg border border-border bg-card px-3.5 text-sm placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15"
           />
           {kind === "workspace" && (
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Description (optional)"
+              placeholder={t("ws.descriptionPlaceholder")}
               rows={2}
               className="w-full rounded-lg border border-border bg-card px-3.5 py-2.5 text-sm placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15"
             />
@@ -436,7 +448,7 @@ export function CreateResourceDialog({
           {kind === "workspace" && (
             <div>
               <p className="mb-1.5 text-xs font-medium text-muted-foreground">
-                Icon
+                {t("ws.icon")}
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {WORKSPACE_ICONS.map((opt) => (
@@ -465,7 +477,7 @@ export function CreateResourceDialog({
                 <button
                   key={c}
                   type="button"
-                  aria-label={`Colour ${c}`}
+                  aria-label={`${t("ws.colour")} ${c}`}
                   onClick={() => setColor(c)}
                   className={cn(
                     "h-7 w-7 rounded-full border-2 transition-transform",
@@ -481,10 +493,10 @@ export function CreateResourceDialog({
           {error && <p className="text-xs text-rose">{error}</p>}
           <div className="flex justify-end gap-2">
             <Button type="button" variant="ghost" size="sm" onClick={onClose}>
-              Cancel
+              {t("ws.cancel")}
             </Button>
             <Button type="submit" size="sm" disabled={busy || !name.trim()}>
-              {busy ? "Creating…" : "Create"}
+              {busy ? t("ws.creating") : t("ws.create")}
             </Button>
           </div>
         </form>

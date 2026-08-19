@@ -20,6 +20,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { formatRelativeDate, cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/workspace";
 import {
   Check,
   Layers,
@@ -51,27 +53,27 @@ const familyOfKind: Record<ApiArtifactKind, BankFamily> = {
 
 const familyConfig: Record<
   BankFamily,
-  { label: string; art: React.ElementType; blurb: string }
+  { labelKey: string; art: React.ElementType; blurbKey: string }
 > = {
   worksheets: {
-    label: "Worksheets & quizzes",
+    labelKey: "ws.family.worksheets",
     art: WorksheetArt,
-    blurb: "Exam-style worksheets and MCQ pools.",
+    blurbKey: "ws.family.worksheetsBlurb",
   },
   flashcards: {
-    label: "Flashcard sets",
+    labelKey: "ws.family.flashcards",
     art: FlashcardsArt,
-    blurb: "Flashcard and vocabulary decks.",
+    blurbKey: "ws.family.flashcardsBlurb",
   },
   guides: {
-    label: "Study guides",
+    labelKey: "ws.family.guides",
     art: GuideArt,
-    blurb: "Readings and cloze passages.",
+    blurbKey: "ws.family.guidesBlurb",
   },
   figures: {
-    label: "Figures",
+    labelKey: "ws.family.figures",
     art: FigureArt,
-    blurb: "Diagrams and images from your materials.",
+    blurbKey: "ws.family.figuresBlurb",
   },
 };
 
@@ -96,6 +98,7 @@ function BankItemTile({
   onToggleSelect: () => void;
 }) {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   const deleteMutation = useMutation({
     mutationFn: () =>
@@ -140,7 +143,7 @@ function BankItemTile({
               {config.label}
             </span>
             <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
-              difficulty {item.difficulty}/5
+              {t("ws.difficulty")} {item.difficulty}/5
             </span>
           </div>
         </div>
@@ -148,7 +151,9 @@ function BankItemTile({
       <div className="absolute right-2 top-2 flex items-center gap-1.5">
         <button
           type="button"
-          title={selected ? "Remove from selection" : "Select for export"}
+          title={
+            selected ? t("ws.removeFromSelection") : t("ws.selectForExport")
+          }
           aria-pressed={selected}
           onClick={onToggleSelect}
           className={cn(
@@ -162,10 +167,10 @@ function BankItemTile({
         </button>
         <button
           type="button"
-          title="Delete"
+          title={t("ws.delete")}
           disabled={deleteMutation.isPending}
           onClick={() => {
-            if (confirm("Delete this bank item?")) deleteMutation.mutate();
+            if (confirm(t("ws.confirmDeleteBankItem"))) deleteMutation.mutate();
           }}
           className="flex h-6 w-6 items-center justify-center rounded-md border border-border-strong bg-card text-muted-foreground shadow-sm opacity-0 transition-opacity group-hover:opacity-100 hover:text-rose hover:border-rose/50 disabled:opacity-40"
         >
@@ -182,6 +187,7 @@ function BankItemTile({
 
 export default function WorkspaceBankPage() {
   const params = useParams();
+  const { t } = useI18n();
   const workspaceId = params.id as string;
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -258,10 +264,9 @@ export default function WorkspaceBankPage() {
       <div className="space-y-5">
         <div className="flex flex-wrap items-center justify-between gap-3 animate-fade-up">
           <div>
-            <h2 className="text-sm font-semibold">Artifact bank</h2>
+            <h2 className="text-sm font-semibold">{t("ws.artifactBank")}</h2>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Precomputed study material pulled into your sessions. Open an
-              item to view or edit it.
+              {t("ws.artifactBankHint")}
             </p>
           </div>
           <Button
@@ -275,7 +280,7 @@ export default function WorkspaceBankPage() {
             ) : (
               <RefreshCw className="h-3.5 w-3.5 mr-1.5" />
             )}
-            Regenerate from materials · 40 tokens
+            {t("ws.regenerateTokens")}
           </Button>
         </div>
 
@@ -291,12 +296,11 @@ export default function WorkspaceBankPage() {
               <div className="flex items-center gap-2">
                 <Users className="h-4 w-4 text-accent" />
                 <p className="text-sm font-semibold">
-                  Share what you generate?
+                  {t("ws.shareGenerate")}
                 </p>
               </div>
               <p className="text-xs text-muted-foreground">
-                New study materials can be visible to everyone in this
-                workspace, or kept just for you.
+                {t("ws.shareGenerateHint")}
               </p>
               <div className="grid gap-2 pt-1">
                 <Button
@@ -307,7 +311,7 @@ export default function WorkspaceBankPage() {
                   }}
                 >
                   <Users className="h-3.5 w-3.5 mr-1.5" />
-                  Share with workspace
+                  {t("ws.shareWithWorkspace")}
                 </Button>
                 <Button
                   size="sm"
@@ -317,7 +321,7 @@ export default function WorkspaceBankPage() {
                     regenerate.mutate("private");
                   }}
                 >
-                  Keep private
+                  {t("ws.keepPrivate")}
                 </Button>
               </div>
             </div>
@@ -336,7 +340,7 @@ export default function WorkspaceBankPage() {
                   : "border-border text-muted-foreground hover:bg-muted",
               )}
             >
-              All ({allItems.length})
+              {t("ws.all")} ({allItems.length})
             </button>
             {presentFamilies.map((f) => (
               <button
@@ -350,7 +354,7 @@ export default function WorkspaceBankPage() {
                     : "border-border text-muted-foreground hover:bg-muted",
                 )}
               >
-                {familyConfig[f].label} (
+                {t(familyConfig[f].labelKey)} (
                 {allItems.filter((item) => familyOfKind[item.kind] === f)
                   .length}
                 )
@@ -362,10 +366,9 @@ export default function WorkspaceBankPage() {
         {groups.length === 0 ? (
           <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6 animate-fade-up">
             <Layers className="h-10 w-10 mx-auto mb-3 text-faint" />
-            <p className="text-sm font-semibold">Bank is empty</p>
+            <p className="text-sm font-semibold">{t("ws.bankEmpty")}</p>
             <p className="text-xs text-muted-foreground mt-1.5 max-w-sm mx-auto">
-              Upload and analyse materials — Scribe precomputes worksheets,
-              flashcards, readings and more from them.
+              {t("ws.bankEmptyHint")}
             </p>
           </div>
         ) : (
@@ -379,13 +382,13 @@ export default function WorkspaceBankPage() {
                     <FamilyArt className="h-8 w-8 shrink-0" />
                     <div className="min-w-0">
                       <h3 className="text-sm font-semibold leading-tight">
-                        {fc.label}
+                        {t(fc.labelKey)}
                         <span className="ml-1.5 text-[11px] font-medium text-faint">
                           {count}
                         </span>
                       </h3>
                       <p className="text-[11px] text-faint leading-tight">
-                        {fc.blurb}
+                        {t(fc.blurbKey)}
                       </p>
                     </div>
                   </div>
@@ -394,7 +397,9 @@ export default function WorkspaceBankPage() {
                       <div key={topic} className="space-y-2">
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-semibold text-muted-foreground">
-                            {topic}
+                            {topic === UNTAGGED_TOPIC
+                              ? t("ws.topicGeneral")
+                              : topic}
                           </span>
                           <span className="text-[10px] text-faint tabular-nums">
                             {topicItems.length}
@@ -425,7 +430,7 @@ export default function WorkspaceBankPage() {
           <div className="fixed inset-x-0 bottom-5 z-40 flex justify-center px-4 print:hidden">
             <div className="flex items-center gap-3 rounded-full border border-border bg-card px-4 py-2 shadow-lg animate-fade-up">
               <span className="text-xs font-semibold">
-                {selectedIds.length} selected
+                {selectedIds.length} {t("ws.selected")}
               </span>
               <Button
                 size="sm"
@@ -434,14 +439,14 @@ export default function WorkspaceBankPage() {
                 }
               >
                 <Printer className="h-3.5 w-3.5 mr-1.5" />
-                Export with Scribe
+                {t("ws.exportWithScribe")}
               </Button>
               <button
                 type="button"
                 onClick={() => setSelectedIds([])}
                 className="text-[11px] font-semibold text-muted-foreground hover:text-foreground"
               >
-                Clear
+                {t("ws.clear")}
               </button>
             </div>
           </div>

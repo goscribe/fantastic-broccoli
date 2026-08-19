@@ -13,6 +13,8 @@ import {
   UserPlus,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/workspace";
 import { Skeleton } from "@/components/ui/skeleton";
 import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
 
@@ -29,6 +31,7 @@ export function WorkspaceShell({
 }: WorkspaceShellProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const { t } = useI18n();
   const [membersOpen, setMembersOpen] = useState(false);
 
   if (!workspace && loading) {
@@ -54,14 +57,14 @@ export function WorkspaceShell({
     return (
       <div className="flex-1 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-muted-foreground">Workspace not found</p>
+          <p className="text-muted-foreground">{t("ws.notFound")}</p>
           <Button
             variant="ghost"
             size="sm"
             onClick={() => router.push("/")}
             className="mt-2"
           >
-            Go back
+            {t("ws.goBack")}
           </Button>
         </div>
       </div>
@@ -71,22 +74,26 @@ export function WorkspaceShell({
   const tabs = [
     {
       href: `/workspace/${workspace.id}/study`,
-      label: "Study",
+      label: t("ws.tab.study"),
+      tourId: "tab-study",
       icon: GraduationCap,
     },
     {
       href: `/workspace/${workspace.id}/bank`,
-      label: "Bank",
+      label: t("ws.tab.bank"),
+      tourId: "tab-bank",
       icon: Layers,
     },
     {
       href: `/workspace/${workspace.id}/guide`,
-      label: "Study Guide",
+      label: t("ws.tab.guide"),
+      tourId: "tab-study-guide",
       icon: BookOpen,
     },
     {
       href: `/workspace/${workspace.id}/recall`,
-      label: "Passive Recall",
+      label: t("ws.tab.recall"),
+      tourId: "tab-passive-recall",
       icon: Headphones,
     },
   ];
@@ -105,7 +112,7 @@ export function WorkspaceShell({
                 <Link
                   key={tab.href}
                   href={tab.href}
-                  data-tour={`tab-${tab.label.toLowerCase().replace(/\s+/g, "-")}`}
+                  data-tour={tab.tourId}
                   className={cn(
                     "flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors",
                     active
@@ -124,7 +131,7 @@ export function WorkspaceShell({
               className="ml-auto flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium border-b-2 border-transparent -mb-px text-muted-foreground transition-colors hover:text-foreground"
             >
               <UserPlus className="h-4 w-4" />
-              Members
+              {t("ws.members")}
             </button>
           </nav>
         </div>

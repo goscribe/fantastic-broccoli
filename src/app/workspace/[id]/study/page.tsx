@@ -22,12 +22,15 @@ import { SessionCreateWizard } from "@/components/session/session-create-wizard"
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Button } from "@/components/ui/button";
 import { formatDuration } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/workspace";
 import { Plus, Sparkles, ArrowRight } from "lucide-react";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 
 export default function WorkspaceStudyPage() {
   const params = useParams();
   const router = useRouter();
+  const { t } = useI18n();
   const workspaceId = params.id as string;
   const [showCreateWizard, setShowCreateWizard] = useState(false);
 
@@ -114,10 +117,10 @@ export default function WorkspaceStudyPage() {
             <div className="flex items-center justify-between mb-3">
               <span className="flex items-center gap-1.5 text-xs font-semibold text-accent">
                 <Sparkles className="h-3.5 w-3.5" />
-                Continue studying
+                {t("ws.continueStudying")}
               </span>
               <span className="flex items-center gap-1.5 text-xs font-semibold text-accent-foreground bg-accent rounded-full px-3.5 py-1.5 group-hover:gap-2.5 transition-all">
-                Resume
+                {t("ws.resume")}
                 <ArrowRight className="h-3.5 w-3.5" />
               </span>
             </div>
@@ -125,7 +128,7 @@ export default function WorkspaceStudyPage() {
               {resumable.title}
             </h2>
             <p className="text-sm text-muted-foreground mt-0.5">
-              {resumable.progress}% complete ·{" "}
+              {resumable.progress}% {t("ws.complete")} ·{" "}
               {formatDuration(resumable.durationMinutes)}
             </p>
             <ProgressBar value={resumable.progress} className="mt-3.5" />
@@ -141,13 +144,13 @@ export default function WorkspaceStudyPage() {
           <section className="animate-fade-up">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-sm font-semibold text-foreground">
-                Artifacts
+                {t("ws.artifacts")}
               </h2>
               <Link
                 href={`/workspace/${workspaceId}/bank`}
                 className="flex items-center gap-1 text-xs font-semibold text-accent hover:underline"
               >
-                View all {bankItems.length}
+                {t("ws.viewAll")} {bankItems.length}
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
@@ -181,7 +184,7 @@ export default function WorkspaceStudyPage() {
         {masteryMatrix.length > 0 && (
           <section className="animate-fade-up">
             <h2 className="text-sm font-semibold text-foreground mb-4">
-              Proficiency by topic
+              {t("ws.proficiencyByTopic")}
             </h2>
             <div className="rounded-3xl border border-border bg-card p-6 flex flex-col sm:flex-row items-center gap-8">
               <MasteryRadar data={masteryMatrix} />
@@ -209,14 +212,16 @@ export default function WorkspaceStudyPage() {
                           {row.topic}
                         </p>
                         <p className="text-[10px] text-muted-foreground">
-                          {row.cardsStudied} of {row.cardsTotal} items studied
+                          {t("ws.itemsStudied")
+                            .replace("{done}", String(row.cardsStudied))
+                            .replace("{total}", String(row.cardsTotal))}
                           {row.cardsTotal > 0
                             ? ` (${Math.round(
                                 (row.cardsStudied / row.cardsTotal) * 100,
                               )}%)`
                             : ""}
                           {row.attempts > 0
-                            ? ` · ${row.attempts} attempts`
+                            ? ` · ${row.attempts} ${t("ws.attempts")}`
                             : ""}
                         </p>
                       </div>
@@ -234,7 +239,7 @@ export default function WorkspaceStudyPage() {
         <section className="animate-fade-up">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-semibold text-foreground">
-              Study sessions
+              {t("ws.studySessions")}
             </h2>
             <Button
               variant="outline"
@@ -243,7 +248,7 @@ export default function WorkspaceStudyPage() {
               data-tour="new-session"
             >
               <Plus className="h-3.5 w-3.5 mr-1.5" />
-              New session
+              {t("ws.newSession")}
             </Button>
           </div>
 
@@ -252,17 +257,20 @@ export default function WorkspaceStudyPage() {
               <Sparkles className="h-7 w-7 text-accent mx-auto mb-3" />
               <p className="text-sm font-semibold">
                 {workspace?.sharedBy
-                  ? "Your sessions are private"
-                  : "No sessions yet"}
+                  ? t("ws.sessionsPrivate")
+                  : t("ws.noSessions")}
               </p>
               <p className="text-xs text-muted-foreground mt-1.5 mb-5 max-w-sm mx-auto">
                 {workspace?.sharedBy
-                  ? `Materials in this workspace are shared by ${workspace.sharedBy}, but study sessions stay personal — create your own plan from them.`
-                  : "Tell Scribe what you're studying and it will build a plan with readings, quizzes, and comprehension checks."}
+                  ? t("ws.sessionsPrivateHint").replace(
+                      "{name}",
+                      workspace.sharedBy,
+                    )
+                  : t("ws.noSessionsHint")}
               </p>
               <Button size="sm" onClick={() => setShowCreateWizard(true)}>
                 <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                Create first session
+                {t("ws.createFirstSession")}
               </Button>
             </div>
           ) : (
@@ -295,7 +303,7 @@ export default function WorkspaceStudyPage() {
         {completedSessions.length > 0 && (
           <section>
             <h2 className="text-sm font-semibold text-foreground mb-4">
-              Completed
+              {t("ws.completedSection")}
             </h2>
             <div className="grid gap-4 opacity-60">
               {completedSessions.map((session) => (

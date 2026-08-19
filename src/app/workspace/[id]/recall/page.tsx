@@ -18,6 +18,8 @@ import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { toast, toastError } from "@/lib/toast";
 import { cn, formatRelativeDate } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/workspace";
 import Image from "next/image";
 import {
   AudioLines,
@@ -92,7 +94,8 @@ function CharacterCard({
 
 /** Stage label + progress bar for an episode that is still generating. */
 function GenerationStatus({ message }: { message: string | null }) {
-  const label = message || "Generating episode…";
+  const { t } = useI18n();
+  const label = message || t("ws.generatingEpisode");
   const progress = message ? stageProgress(message) : null;
   return (
     <div className="mt-2 space-y-1.5">
@@ -176,6 +179,7 @@ function EpisodeCard({
   episodeNumber: number;
   onDelete: () => void;
 }) {
+  const { t } = useI18n();
   const [expanded, setExpanded] = useState(false);
   const playable = episode.segments.filter((s) => s.audioUrl);
   const duration = episodeDuration(episode);
@@ -205,7 +209,7 @@ function EpisodeCard({
             <MathText
               text={
                 episode.generating && episode.title === "----"
-                  ? "New episode"
+                  ? t("ws.newEpisode")
                   : episode.title
               }
             />
@@ -222,14 +226,14 @@ function EpisodeCard({
               <p className="mt-2 inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                 <AudioLines className="h-3.5 w-3.5 text-accent" />
                 {playable.length}{" "}
-                {playable.length === 1 ? "chapter" : "chapters"}
+                {playable.length === 1 ? t("ws.chapter") : t("ws.chapters")}
               </p>
             )
           )}
         </div>
         <button
           type="button"
-          aria-label="Delete episode"
+          aria-label={t("ws.deleteEpisode")}
           onClick={onDelete}
           className="self-start rounded p-1.5 text-faint hover:bg-muted hover:text-rose"
         >
@@ -245,7 +249,12 @@ function EpisodeCard({
                   <span className="mr-1.5 tabular-nums text-faint">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <MathText text={segment.title || `Chapter ${i + 1}`} />
+                  <MathText
+                    text={
+                      segment.title ||
+                      t("ws.chapterN").replace("{n}", String(i + 1))
+                    }
+                  />
                 </p>
                 <audio
                   controls
@@ -263,8 +272,11 @@ function EpisodeCard({
               className="mt-2 text-xs font-medium text-accent hover:text-accent-dim"
             >
               {expanded
-                ? "Show less"
-                : `Show all ${playable.length} chapters`}
+                ? t("ws.showLess")
+                : t("ws.showAllChapters").replace(
+                    "{n}",
+                    String(playable.length),
+                  )}
             </button>
           )}
         </div>
@@ -275,6 +287,7 @@ function EpisodeCard({
 
 export default function WorkspaceRecallPage() {
   const params = useParams();
+  const { t } = useI18n();
   const workspaceId = params.id as string;
   const queryClient = useQueryClient();
   const [showChooser, setShowChooser] = useState(false);
@@ -306,7 +319,7 @@ export default function WorkspaceRecallPage() {
   const generate = useMutation({
     mutationFn: generatePodcastEpisode,
     onSuccess: () => {
-      toast.success("Podcast generation started — this takes a few minutes");
+      toast.success(t("ws.podcastStarted"));
       setShowChooser(false);
       queryClient.invalidateQueries({
         queryKey: ["podcast-episodes", workspaceId],
@@ -318,18 +331,18 @@ export default function WorkspaceRecallPage() {
         });
       }, 5000);
     },
-    onError: (err) => toastError(err, "Podcast generation failed"),
+    onError: (err) => toastError(err, t("ws.podcastFailed")),
   });
 
   const remove = useMutation({
     mutationFn: deletePodcastEpisode,
     onSuccess: () => {
-      toast.success("Episode deleted");
+      toast.success(t("ws.episodeDeleted"));
       queryClient.invalidateQueries({
         queryKey: ["podcast-episodes", workspaceId],
       });
     },
-    onError: (err) => toastError(err, "Delete failed"),
+    onError: (err) => toastError(err, t("ws.deleteFailed")),
   });
 
   if (workspaceLoading || episodesLoading) {
@@ -353,25 +366,23 @@ export default function WorkspaceRecallPage() {
       <div className="space-y-5 animate-fade-up">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-lg font-semibold">Passive recall</h1>
+            <h1 className="text-lg font-semibold">{t("ws.passiveRecall")}</h1>
             <p className="mt-0.5 text-xs text-muted-foreground">
-              Podcast episodes generated from your materials — listen back to
-              revise passively.
+              {t("ws.passiveRecallHint")}
             </p>
           </div>
           <Button size="sm" onClick={() => setShowChooser(true)}>
             <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-            Generate podcast
+            {t("ws.generatePodcast")}
           </Button>
         </div>
 
         {episodes.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border py-16 text-center">
             <Mic className="h-8 w-8 text-faint" />
-            <p className="mt-3 text-sm font-medium">No episodes yet</p>
+            <p className="mt-3 text-sm font-medium">{t("ws.noEpisodes")}</p>
             <p className="mt-1 max-w-sm text-xs text-muted-foreground">
-              Generate a podcast episode from this workspace&apos;s materials
-              — revise while you walk, commute, or wind down.
+              {t("ws.noEpisodesHint")}
             </p>
             <Button
               size="sm"
@@ -379,7 +390,7 @@ export default function WorkspaceRecallPage() {
               onClick={() => setShowChooser(true)}
             >
               <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-              Generate podcast
+              {t("ws.generatePodcast")}
             </Button>
           </div>
         ) : (
@@ -406,10 +417,10 @@ export default function WorkspaceRecallPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-semibold">Pick your host</h2>
+              <h2 className="text-sm font-semibold">{t("ws.pickHost")}</h2>
               <button
                 type="button"
-                aria-label="Close"
+                aria-label={t("ws.close")}
                 onClick={() => setShowChooser(false)}
                 className="rounded p-1 text-faint hover:bg-muted hover:text-foreground"
               >
@@ -431,7 +442,7 @@ export default function WorkspaceRecallPage() {
               <p className="min-w-0 truncate text-xs text-muted-foreground">
                 {selectedCharacter
                   ? `${selectedCharacter.name} — ${selectedCharacter.tagline}`
-                  : "Loading hosts…"}
+                  : t("ws.loadingHosts")}
               </p>
               <Button
                 size="sm"
@@ -441,12 +452,12 @@ export default function WorkspaceRecallPage() {
                 {generate.isPending ? (
                   <>
                     <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
-                    Starting…
+                    {t("ws.starting")}
                   </>
                 ) : (
                   <>
                     <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                    Generate podcast · 50 tokens
+                    {t("ws.generatePodcastTokens")}
                   </>
                 )}
               </Button>

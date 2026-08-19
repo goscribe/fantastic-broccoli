@@ -15,6 +15,8 @@ import {
   type WorkspaceMemberRecord,
 } from "@/lib/api/workspace";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/workspace";
 import { Trash2, X } from "lucide-react";
 
 function RowSkeleton() {
@@ -43,6 +45,7 @@ function MemberRow({
   onRemove: (memberId: string) => void;
   busy: boolean;
 }) {
+  const { t } = useI18n();
   const canManage = currentRole === "owner" && member.role !== "owner" && !busy;
 
   return (
@@ -68,7 +71,7 @@ function MemberRow({
             {member.email}
           </p>
           <p className="text-[11px] text-faint">
-            Joined {new Date(member.joinedAt).toLocaleDateString()}
+            {t("ws.joined")} {new Date(member.joinedAt).toLocaleDateString()}
           </p>
         </div>
       </div>
@@ -79,15 +82,15 @@ function MemberRow({
         {canManage && (
           <>
             <select
-              aria-label={`Role for ${member.name}`}
+              aria-label={`${t("ws.roleFor")} ${member.name}`}
               defaultValue={member.role}
               onChange={(e) =>
                 onRoleChange(member.id, e.target.value as "admin" | "member")
               }
               className="h-9 rounded-lg border border-border bg-background px-2.5 text-[12px] focus:border-accent focus:outline-none"
             >
-              <option value="member">Member</option>
-              <option value="admin">Admin</option>
+              <option value="member">{t("ws.roleMember")}</option>
+              <option value="admin">{t("ws.roleAdmin")}</option>
             </select>
             <Button
               variant="outline"
@@ -96,7 +99,7 @@ function MemberRow({
               className="h-9 px-3 text-rose hover:text-rose"
             >
               <Trash2 className="mr-1.5 h-3.5 w-3.5" />
-              Remove
+              {t("ws.remove")}
             </Button>
           </>
         )}
@@ -114,6 +117,7 @@ export function WorkspaceMembersDialog({
   open: boolean;
   onClose: () => void;
 }) {
+  const { t } = useI18n();
   const [workspaceMembers, setWorkspaceMembers] = useState<WorkspaceMemberRecord[]>([]);
   const [invitations, setInvitations] = useState<WorkspaceInvitationRecord[]>([]);
   const [currentRole, setCurrentRole] = useState<"owner" | "admin" | "member" | null>(null);
@@ -138,11 +142,11 @@ export function WorkspaceMembersDialog({
       setInvitations(pending);
       setCurrentRole(current);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load members.");
+      setError(err instanceof Error ? err.message : t("ws.loadMembersFailed"));
     } finally {
       setLoading(false);
     }
-  }, [workspaceId]);
+  }, [workspaceId, t]);
 
   useEffect(() => {
     if (!open || !workspaceId) return;
@@ -157,9 +161,9 @@ export function WorkspaceMembersDialog({
       await inviteMember(workspaceId, email.trim(), role);
       setEmail("");
       await load();
-      toast.success("Invitation sent");
+      toast.success(t("ws.invitationSent"));
     } catch (err) {
-      setError(toastError(err, "Failed to invite member."));
+      setError(toastError(err, t("ws.inviteFailed")));
     } finally {
       setInviting(false);
     }
@@ -173,7 +177,7 @@ export function WorkspaceMembersDialog({
       await changeWorkspaceMemberRole(workspaceId, memberId, nextRole);
       await load();
     } catch (err) {
-      setError(toastError(err, "Failed to update role."));
+      setError(toastError(err, t("ws.roleUpdateFailed")));
     } finally {
       setUpdating(false);
     }
@@ -186,9 +190,9 @@ export function WorkspaceMembersDialog({
     try {
       await removeWorkspaceMember(workspaceId, memberId);
       await load();
-      toast.success("Member removed");
+      toast.success(t("ws.memberRemoved"));
     } catch (err) {
-      setError(toastError(err, "Failed to remove member."));
+      setError(toastError(err, t("ws.removeMemberFailed")));
     } finally {
       setUpdating(false);
     }
@@ -203,13 +207,19 @@ export function WorkspaceMembersDialog({
       <div className="w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-card shadow-xl animate-fade-up">
         <div className="flex items-center justify-between px-6 pt-5 pb-4">
           <div>
-            <p className="text-lg font-bold tracking-tight">Members</p>
+            <p className="text-lg font-bold tracking-tight">
+              {t("ws.members")}
+            </p>
             <p className="text-[13px] text-muted-foreground">
-              {workspaceMembers.length} member
-              {workspaceMembers.length === 1 ? "" : "s"}
+              {workspaceMembers.length}{" "}
+              {workspaceMembers.length === 1
+                ? t("ws.memberWord")
+                : t("ws.membersWord")}
               {invitations.length > 0
-                ? ` · ${invitations.length} pending invite${
-                    invitations.length === 1 ? "" : "s"
+                ? ` · ${invitations.length} ${
+                    invitations.length === 1
+                      ? t("ws.pendingInvite")
+                      : t("ws.pendingInvites")
                   }`
                 : ""}
             </p>
@@ -218,7 +228,7 @@ export function WorkspaceMembersDialog({
             type="button"
             onClick={onClose}
             className="rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
-            aria-label="Close"
+            aria-label={t("ws.close")}
           >
             <X className="h-4 w-4" />
           </button>
@@ -234,20 +244,20 @@ export function WorkspaceMembersDialog({
                 onKeyDown={(e) => {
                   if (e.key === "Enter") void handleInvite();
                 }}
-                placeholder="Invite by email…"
+                placeholder={t("ws.inviteByEmail")}
                 className="h-10 flex-1 rounded-lg border border-border bg-background px-3.5 text-sm focus:border-accent focus:outline-none"
               />
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value as "admin" | "member")}
-                aria-label="Role for invitee"
+                aria-label={t("ws.roleForInvitee")}
                 className="h-10 rounded-lg border border-border bg-background px-3 text-sm focus:border-accent focus:outline-none"
               >
-                <option value="member">Member</option>
-                <option value="admin">Admin</option>
+                <option value="member">{t("ws.roleMember")}</option>
+                <option value="admin">{t("ws.roleAdmin")}</option>
               </select>
               <Button onClick={() => void handleInvite()} disabled={inviting || !email.trim()}>
-                {inviting ? "Inviting…" : "Send invite"}
+                {inviting ? t("ws.inviting") : t("ws.sendInvite")}
               </Button>
             </div>
           </div>
@@ -280,7 +290,7 @@ export function WorkspaceMembersDialog({
           {invitations.length > 0 && (
             <div>
               <p className="mb-2.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                Pending invitations
+                {t("ws.pendingInvitations")}
               </p>
               <div className="space-y-2">
                 {invitations.map((invite) => (
@@ -290,7 +300,8 @@ export function WorkspaceMembersDialog({
                   >
                     <p className="font-medium">{invite.email}</p>
                     <p className="text-[12px] text-muted-foreground">
-                      <span className="capitalize">{invite.role}</span> · Expires{" "}
+                      <span className="capitalize">{invite.role}</span> ·{" "}
+                      {t("ws.expires")}{" "}
                       {new Date(invite.expiresAt).toLocaleDateString()}
                     </p>
                   </div>
