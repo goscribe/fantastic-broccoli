@@ -22,7 +22,13 @@ import {
   type TokenLedgerEntry,
   type TokenOverview,
 } from "@/lib/api/account";
-import { setUiLocale, useI18n, UI_LOCALES, type Locale } from "@/lib/i18n";
+import {
+  setUiLocale,
+  useI18n,
+  UI_LOCALES,
+  UI_LOCALE_FLAGS,
+  type Locale,
+} from "@/lib/i18n";
 
 const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
 
@@ -138,6 +144,8 @@ export default function SettingsPage() {
   const [tokens, setTokens] = useState<TokenOverview | null>(null);
   const [ledger, setLedger] = useState<TokenLedgerEntry[] | null>(null);
   const [showAllLedger, setShowAllLedger] = useState(false);
+  const [savingLanguage, setSavingLanguage] = useState(false);
+  const [languageSaved, setLanguageSaved] = useState(false);
 
   useEffect(() => {
     fetchAccountSummary()
@@ -194,12 +202,19 @@ export default function SettingsPage() {
   };
 
   const handleLanguageChange = async (code: Locale) => {
+    const previous = locale;
     setUiLocale(code);
+    setLanguageSaved(false);
+    setSavingLanguage(true);
     try {
       await updatePreferredLanguage(code);
-      toast.success(t("settings.language"));
+      setLanguageSaved(true);
+      setTimeout(() => setLanguageSaved(false), 2500);
     } catch (err) {
+      setUiLocale(previous);
       toastError(err, "Failed to save language");
+    } finally {
+      setSavingLanguage(false);
     }
   };
 
@@ -340,17 +355,40 @@ export default function SettingsPage() {
             {t("settings.languageHint")}
           </p>
           <div className="mt-3 rounded-xl border border-border bg-card p-5">
-            <select
-              value={locale}
-              onChange={(e) => handleLanguageChange(e.target.value as Locale)}
-              className="w-full max-w-xs rounded-md border border-border bg-card px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+              {(Object.keys(UI_LOCALES) as Locale[]).map((code) => {
+                const active = code === locale;
+                return (
+                  <button
+                    key={code}
+                    type="button"
+                    disabled={savingLanguage}
+                    onClick={() => handleLanguageChange(code)}
+                    aria-pressed={active}
+                    className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-left text-[13px] font-medium transition-colors ${
+                      active
+                        ? "border-accent bg-accent-soft text-accent"
+                        : "border-border text-muted-foreground hover:border-border-strong hover:text-foreground"
+                    }`}
+                  >
+                    <span className="text-base leading-none">
+                      {UI_LOCALE_FLAGS[code]}
+                    </span>
+                    <span className="truncate">{UI_LOCALES[code]}</span>
+                    {active && (
+                      <Check className="ml-auto h-3.5 w-3.5 shrink-0" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+            <p
+              className={`mt-3 text-[12px] font-medium text-accent transition-opacity ${
+                languageSaved ? "opacity-100" : "opacity-0"
+              }`}
             >
-              {Object.entries(UI_LOCALES).map(([code, label]) => (
-                <option key={code} value={code}>
-                  {label}
-                </option>
-              ))}
-            </select>
+              {t("settings.languageSaved")}
+            </p>
           </div>
         </section>
 
