@@ -1,5 +1,6 @@
 "use client";
 
+import { MathText } from "@/components/ui/markdown-text";
 import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -124,7 +125,7 @@ function BankItemTile({
         />
         <div className="space-y-1 p-3">
           <p className="truncate text-[13px] font-semibold leading-tight group-hover:text-accent transition-colors">
-            {item.title}
+            <MathText text={item.title} />
           </p>
           <p className="truncate text-[11px] text-faint">
             {summary ? `${summary} · ` : ""}

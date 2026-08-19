@@ -15,7 +15,7 @@ import {
   kindConfig,
 } from "@/components/bank/bank-content";
 import { DeckViewer } from "@/components/bank/deck-viewer";
-import { MarkdownText } from "@/components/ui/markdown-text";
+import { MarkdownText, MathText } from "@/components/ui/markdown-text";
 import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { formatRelativeDate, cn } from "@/lib/utils";
@@ -166,7 +166,7 @@ export default function BankItemPage() {
           <Art className="h-10 w-10 shrink-0" />
           <div className="flex-1 min-w-0">
             <h2 className="text-base font-semibold leading-tight">
-              {item.title}
+              <MathText text={item.title} />
             </h2>
             <p className="text-[11px] text-faint mt-1">
               {config.label}
@@ -320,7 +320,9 @@ export default function BankItemPage() {
               </div>
               <div className="mx-auto max-w-2xl space-y-4 p-8">
                 <div className="border-b border-border pb-3">
-                  <h1 className="text-xl font-bold">{item.title}</h1>
+                  <h1 className="text-xl font-bold">
+                    <MathText text={item.title} />
+                  </h1>
                   <p className="mt-1 text-xs text-muted-foreground">
                     {config.label}
                     {item.topic && ` · ${item.topic}`}
@@ -367,7 +369,9 @@ export default function BankItemPage() {
               <span>Scribe · scribe.study</span>
             </div>
             <div className="mb-6 border-b border-border pb-4">
-              <h1 className="text-xl font-bold">{item.title}</h1>
+              <h1 className="text-xl font-bold">
+                <MathText text={item.title} />
+              </h1>
               <p className="mt-1 text-xs text-muted-foreground">
                 {config.label}
                 {item.topic && ` · ${item.topic}`}
