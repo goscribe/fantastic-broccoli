@@ -371,8 +371,29 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Subjects strip */}
+          {/* Stats strip */}
           <div className="relative mt-16 border-t border-border pt-10">
+            <dl className="grid grid-cols-1 gap-6 text-center sm:grid-cols-3">
+              {[
+                { value: "1,700+", label: "practice artifacts generated" },
+                { value: "790+", label: "study activities built" },
+                { value: "27", label: "countries studying with Scribe" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <dt className="sr-only">{stat.label}</dt>
+                  <dd className="text-3xl font-bold tracking-tight tabular-nums">
+                    {stat.value}
+                  </dd>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          {/* Subjects strip */}
+          <div className="relative mt-12 border-t border-border pt-10">
             <p className="text-center text-xs font-medium uppercase tracking-wider text-faint">
               Built for every subject you study
             </p>
