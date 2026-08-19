@@ -28,7 +28,9 @@ import {
   UI_LOCALES,
   UI_LOCALE_FLAGS,
   type Locale,
+  type TranslationKey,
 } from "@/lib/i18n";
+import "@/lib/i18n/settings";
 
 const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
 
@@ -73,6 +75,7 @@ function PlanCard({
   onSelect: (id: string) => void;
   switching: boolean;
 }) {
+  const { t } = useI18n();
   return (
     <div
       className={`flex flex-col rounded-xl border p-4 ${
@@ -83,7 +86,7 @@ function PlanCard({
         <p className="text-sm font-semibold">{plan.name}</p>
         {plan.isActive && (
           <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold text-white">
-            Current
+            {t("set.current")}
           </span>
         )}
       </div>
@@ -91,25 +94,34 @@ function PlanCard({
         {plan.description}
       </p>
       <p className="mt-3 text-lg font-bold tabular-nums">
-        {plan.priceDollars === 0 ? "Free" : `$${plan.priceDollars}`}
+        {plan.priceDollars === 0 ? t("set.free") : `$${plan.priceDollars}`}
         {plan.priceDollars > 0 && (
-          <span className="text-[12px] font-normal text-faint"> / month</span>
+          <span className="text-[12px] font-normal text-faint">
+            {" "}
+            {t("set.perMonth")}
+          </span>
         )}
       </p>
       <ul className="mt-3 space-y-1.5 text-[12px] text-muted-foreground">
         <li className="flex items-center gap-1.5">
           <Check className="h-3 w-3 text-accent" />
-          {formatBytes(plan.storageLimitBytes)} storage
+          {t("set.storageAmount").replace(
+            "{amount}",
+            formatBytes(plan.storageLimitBytes),
+          )}
         </li>
         <li className="flex items-center gap-1.5">
           <Check className="h-3 w-3 text-accent" />
-          {plan.monthlyTokens} tokens / month
+          {t("set.tokensPerMonth").replace(
+            "{count}",
+            String(plan.monthlyTokens),
+          )}
         </li>
       </ul>
       <div className="mt-auto pt-4">
         {plan.isActive ? (
           <Button variant="outline" size="sm" className="w-full" disabled>
-            Your plan
+            {t("set.yourPlan")}
           </Button>
         ) : (
           <Button
@@ -118,7 +130,9 @@ function PlanCard({
             disabled={switching}
             onClick={() => onSelect(plan.id)}
           >
-            {plan.priceDollars === 0 ? "Downgrade" : `Switch to ${plan.name}`}
+            {plan.priceDollars === 0
+              ? t("set.downgrade")
+              : t("set.switchTo").replace("{name}", plan.name)}
           </Button>
         )}
       </div>
@@ -233,16 +247,18 @@ export default function SettingsPage() {
   return (
     <main className="flex-1 px-6 py-8 md:px-10">
       <div className="mx-auto w-full max-w-3xl">
-        <h1 className="text-xl font-bold tracking-tight">Settings</h1>
+        <h1 className="text-xl font-bold tracking-tight">
+          {t("settings.title")}
+        </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Manage your account, plan, and usage.
+          {t("set.subtitle")}
         </p>
 
         {/* Account */}
         <section className="mt-8">
-          <h2 className="text-sm font-semibold">Account</h2>
+          <h2 className="text-sm font-semibold">{t("settings.account")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
-            Your profile as classmates see it in shared workspaces.
+            {t("set.accountHint")}
           </p>
           <div className="mt-3 rounded-xl border border-border bg-card p-5">
             <div className="flex items-start gap-5">
@@ -281,7 +297,7 @@ export default function SettingsPage() {
                   disabled={uploadingPhoto}
                   className="mt-2 block w-14 text-center text-[11px] font-medium text-accent hover:underline disabled:opacity-60"
                 >
-                  {uploadingPhoto ? "Uploading…" : "Change"}
+                  {uploadingPhoto ? t("set.uploading") : t("set.change")}
                 </button>
                 {photoError && (
                   <p className="mt-1 w-14 text-[11px] text-red-500">{photoError}</p>
@@ -293,7 +309,7 @@ export default function SettingsPage() {
                     htmlFor="settings-name"
                     className="block text-[13px] font-medium"
                   >
-                    Display name
+                    {t("set.displayName")}
                   </label>
                   <input
                     id="settings-name"
@@ -303,7 +319,7 @@ export default function SettingsPage() {
                     className="mt-1.5 h-10 w-full rounded-lg border border-border bg-background px-3.5 text-sm transition-colors focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15"
                   />
                   <p className="mt-1.5 text-[12px] text-faint">
-                    Shown to classmates in shared workspaces.
+                    {t("set.displayNameHint")}
                   </p>
                 </div>
                 <div>
@@ -311,7 +327,7 @@ export default function SettingsPage() {
                     htmlFor="settings-email"
                     className="block text-[13px] font-medium"
                   >
-                    Email
+                    {t("set.email")}
                   </label>
                   <input
                     id="settings-email"
@@ -321,19 +337,19 @@ export default function SettingsPage() {
                     className="mt-1.5 h-10 w-full rounded-lg border border-border bg-muted/60 px-3.5 text-sm text-muted-foreground"
                   />
                   <p className="mt-1.5 text-[12px] text-faint">
-                    Used for sign-in — contact support to change it.
+                    {t("set.emailHint")}
                   </p>
                 </div>
               </div>
             </div>
             <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
               <Button variant="outline" size="sm" onClick={() => signOut()}>
-                Sign out
+                {t("nav.signOut")}
               </Button>
               <div className="flex items-center gap-2">
                 {saved && (
                   <span className="text-[12px] text-accent font-medium">
-                    Saved
+                    {t("set.saved")}
                   </span>
                 )}
                 <Button
@@ -341,7 +357,7 @@ export default function SettingsPage() {
                   onClick={handleSave}
                   disabled={saving || !name.trim() || name === user?.name}
                 >
-                  {saving ? "Saving…" : "Save changes"}
+                  {saving ? t("set.saving") : t("set.saveChanges")}
                 </Button>
               </div>
             </div>
@@ -394,9 +410,9 @@ export default function SettingsPage() {
 
         {/* Plan */}
         <section className="mt-8">
-          <h2 className="text-sm font-semibold">Plan</h2>
+          <h2 className="text-sm font-semibold">{t("settings.plan")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
-            Pick the plan that fits how much you study.
+            {t("set.planHint")}
           </p>
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             {plansLoading
@@ -425,7 +441,7 @@ export default function SettingsPage() {
         {/* Usage */}
         {summaryLoading && (
           <section className="mt-8">
-            <h2 className="text-sm font-semibold">Usage</h2>
+            <h2 className="text-sm font-semibold">{t("settings.usage")}</h2>
             <div className="mt-3 rounded-xl border border-border bg-card px-5 py-2 divide-y divide-border">
               {Array.from({ length: 3 }, (_, i) => (
                 <div key={i} className="py-3 space-y-2">
@@ -441,13 +457,13 @@ export default function SettingsPage() {
         )}
         {!summaryLoading && summary && (
           <section className="mt-8">
-            <h2 className="text-sm font-semibold">Usage</h2>
+            <h2 className="text-sm font-semibold">{t("settings.usage")}</h2>
             <p className="mt-0.5 text-[13px] text-muted-foreground">
-              What you&apos;ve used on the {summary.planName} plan this cycle.
+              {t("set.usageHint").replace("{plan}", summary.planName)}
             </p>
             <div className="mt-3 rounded-xl border border-border bg-card px-5 py-2 divide-y divide-border">
               <UsageBar
-                label="Storage"
+                label={t("set.storage")}
                 used={summary.storageUsedBytes}
                 limit={summary.storageLimitBytes}
                 usedLabel={formatBytes(summary.storageUsedBytes)}
@@ -459,14 +475,15 @@ export default function SettingsPage() {
 
         {/* Tokens */}
         <section className="mt-8">
-          <h2 className="text-sm font-semibold">Tokens</h2>
+          <h2 className="text-sm font-semibold">{t("set.tokensTitle")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
-            Tokens pay for AI generation. Unused tokens roll over — your
-            balance never resets.
+            {t("set.tokensHint")}
           </p>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <div className="rounded-xl border border-border bg-card p-4">
-              <p className="text-[12px] text-muted-foreground">Balance</p>
+              <p className="text-[12px] text-muted-foreground">
+                {t("set.balance")}
+              </p>
               {tokens ? (
                 <p className="mt-1 text-2xl font-bold tabular-nums">
                   {tokens.balance.toLocaleString()}
@@ -479,35 +496,40 @@ export default function SettingsPage() {
               )}
               {tokens && (
                 <p className="mt-1 text-[12px] text-muted-foreground">
-                  +{tokens.monthlyAllowance.toLocaleString()} added each month
-                  on the {tokens.planName} plan
+                  {t("set.monthlyAllowance")
+                    .replace("{count}", tokens.monthlyAllowance.toLocaleString())
+                    .replace("{plan}", tokens.planName)}
                 </p>
               )}
             </div>
             <div className="rounded-xl border border-border bg-card p-4">
               <p className="text-[12px] text-muted-foreground">
-                What things cost
+                {t("set.whatThingsCost")}
               </p>
               {tokens ? (
                 <ul className="mt-2 space-y-1 text-[12px]">
                   {(
                     [
-                      ["Study session", tokens.costs.GENERATION],
-                      ["Material upload & analysis", tokens.costs.GENERATION],
-                      ["Podcast episode", tokens.costs.PODCAST_EPISODE],
-                      ["Study guide", tokens.costs.STUDY_GUIDE],
-                      ["Flashcard set / worksheet", tokens.costs.FLASHCARD_SET],
-                      ["AI artifact search", tokens.costs.ARTIFACT_SEARCH],
-                      ["Copilot chat", 0],
+                      ["set.costStudySession", tokens.costs.GENERATION],
+                      ["set.costUpload", tokens.costs.GENERATION],
+                      ["set.costPodcast", tokens.costs.PODCAST_EPISODE],
+                      ["set.costStudyGuide", tokens.costs.STUDY_GUIDE],
+                      ["set.costFlashcards", tokens.costs.FLASHCARD_SET],
+                      ["set.costArtifactSearch", tokens.costs.ARTIFACT_SEARCH],
+                      ["set.costCopilot", 0],
                     ] as const
                   ).map(([label, cost]) => (
                     <li
                       key={label}
                       className="flex items-baseline justify-between gap-3"
                     >
-                      <span className="text-muted-foreground">{label}</span>
+                      <span className="text-muted-foreground">
+                        {t(label as TranslationKey)}
+                      </span>
                       <span className="font-medium tabular-nums">
-                        {cost === 0 ? "Free" : `${cost} tokens`}
+                        {cost === 0
+                          ? t("set.free")
+                          : t("set.nTokens").replace("{count}", String(cost))}
                       </span>
                     </li>
                   ))}
@@ -521,7 +543,7 @@ export default function SettingsPage() {
           {/* Ledger */}
           <div className="mt-3 rounded-xl border border-border bg-card">
             <p className="px-4 pt-3 text-[12px] font-medium text-muted-foreground">
-              Recent activity
+              {t("set.recentActivity")}
             </p>
             {!ledger && (
               <div className="space-y-2 p-4">
@@ -532,7 +554,7 @@ export default function SettingsPage() {
             )}
             {ledger && ledger.length === 0 && (
               <p className="px-4 pb-4 pt-1 text-[13px] text-muted-foreground">
-                No token activity yet.
+                {t("set.noTokenActivity")}
               </p>
             )}
             {ledger && ledger.length > 0 && (
@@ -574,8 +596,8 @@ export default function SettingsPage() {
                 className="w-full border-t border-border px-4 py-2 text-[12px] font-medium text-muted-foreground hover:text-foreground"
               >
                 {showAllLedger
-                  ? "Show less"
-                  : `Show all ${ledger.length} entries`}
+                  ? t("set.showLess")
+                  : t("set.showAll").replace("{count}", String(ledger.length))}
               </button>
             )}
           </div>
