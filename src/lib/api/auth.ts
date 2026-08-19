@@ -5,6 +5,7 @@ import { api } from "./trpc-client";
 import { rpc } from "./study-session";
 import { apiUrl } from "./config";
 import { getSignupAttribution } from "@/lib/attribution";
+import { syncUiLocale } from "@/lib/i18n";
 
 export interface AuthUser {
   id: string;
@@ -14,6 +15,7 @@ export interface AuthUser {
   profilePicture?: string | null;
   role?: string | null;
   isAdmin: boolean;
+  preferredLanguage?: string;
 }
 
 export const SYSTEM_ADMIN_ROLE = "System Admin";
@@ -50,6 +52,7 @@ type SessionUser = {
   emailVerified?: boolean;
   profilePicture?: string | null;
   role?: { id: string; name: string } | null;
+  preferredLanguage?: string;
 };
 
 // getSession returns the profile picture as a path relative to the API host
@@ -57,6 +60,8 @@ type SessionUser = {
 function toAuthUser(session: SessionResult): AuthUser | null {
   const u = (session as { user?: SessionUser } | null)?.user;
   if (!u) return null;
+  // Cross-device sync: adopt the server-side language preference for the UI.
+  syncUiLocale(u.preferredLanguage);
   return {
     id: u.id,
     name: u.name ?? u.email ?? "You",
@@ -64,6 +69,7 @@ function toAuthUser(session: SessionResult): AuthUser | null {
     emailVerified: u.emailVerified,
     role: u.role?.name ?? null,
     isAdmin: u.role?.name === SYSTEM_ADMIN_ROLE,
+    preferredLanguage: u.preferredLanguage,
     profilePicture: u.profilePicture
       ? u.profilePicture.startsWith("http")
         ? u.profilePicture

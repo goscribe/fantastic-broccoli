@@ -18,6 +18,7 @@ import { CreateResourceDialog } from "@/components/workspace/create-dialog";
 import { CommandPalette } from "@/components/layout/command-palette";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
 import {
   Home,
   Layers,
@@ -146,6 +147,7 @@ export function Sidebar({
 }) {
   const pathname = usePathname();
   const { user } = useAuthUser();
+  const { t } = useI18n();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [folders, setFolders] = useState<FolderType[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
@@ -245,7 +247,7 @@ export function Sidebar({
             )}
           >
             <Home className="h-4 w-4" />
-            Home
+            {t("nav.home")}
           </Link>
           <Link
             href="/flashcards"
@@ -257,7 +259,7 @@ export function Sidebar({
             )}
           >
             <Layers className="h-4 w-4" />
-            Flashcards
+            {t("nav.flashcards")}
           </Link>
           <Link
             href="/shared"
@@ -269,18 +271,18 @@ export function Sidebar({
             )}
           >
             <Users className="h-4 w-4" />
-            Shared
+            {t("nav.shared")}
           </Link>
         </div>
 
         <div>
             <div className="flex items-center justify-between px-1.5 pb-1">
-              <span className="text-xs font-semibold text-faint">Folders</span>
+              <span className="text-xs font-semibold text-faint">{t("nav.folders")}</span>
               <div className="flex items-center gap-0.5" data-tour="new-workspace">
                 <button
                   type="button"
-                  aria-label="New workspace"
-                  title="New workspace"
+                  aria-label={t("nav.newWorkspace")}
+                  title={t("nav.newWorkspace")}
                   onClick={() => setCreating({ kind: "workspace" })}
                   className="p-0.5 rounded text-faint hover:text-foreground hover:bg-muted"
                 >
@@ -288,8 +290,8 @@ export function Sidebar({
                 </button>
                 <button
                   type="button"
-                  aria-label="New folder"
-                  title="New folder"
+                  aria-label={t("nav.newFolder")}
+                  title={t("nav.newFolder")}
                   onClick={() => setCreating({ kind: "folder" })}
                   className="p-0.5 rounded text-faint hover:text-foreground hover:bg-muted"
                 >
@@ -369,7 +371,7 @@ export function Sidebar({
               />
             </div>
             <div className="mt-2 flex items-center justify-between text-[11px]">
-              <span className="text-faint">Storage</span>
+              <span className="text-faint">{t("nav.storage")}</span>
               <span className="text-faint">
                 {formatBytes(summary.storageUsedBytes)} /{" "}
                 {formatBytes(summary.storageLimitBytes)}
@@ -395,7 +397,7 @@ export function Sidebar({
           )}
         >
           <Settings className="h-4 w-4" />
-          Settings
+          {t("nav.settings")}
         </Link>
         {user && (
           <div className="flex items-center gap-2 px-1.5 pt-1">
@@ -419,7 +421,7 @@ export function Sidebar({
             </div>
             <button
               type="button"
-              aria-label="Sign out"
+              aria-label={t("nav.signOut")}
               onClick={() => signOut()}
               className="p-1.5 rounded-md text-faint hover:text-foreground hover:bg-muted"
             >

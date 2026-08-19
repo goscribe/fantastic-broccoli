@@ -7,6 +7,7 @@ import { useAuthUser } from "@/lib/api/auth";
 import type { Folder, StudySession, Workspace } from "@/types";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { formatDuration } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
 import { StreakFlame } from "@/components/graphics/streak-flame";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { StudyCalendar } from "@/components/workspace/study-calendar";
@@ -67,6 +68,7 @@ function flattenWorkspaces(folders: Folder[], root: Workspace[]): Workspace[] {
 
 export default function HomePage() {
   const router = useRouter();
+  const { t } = useI18n();
   const { user } = useAuthUser();
   const [searchQuery, setSearchQuery] = useState("");
   const [folders, setFolders] = useState<Folder[]>([]);
@@ -269,7 +271,7 @@ export default function HomePage() {
           <div className="relative flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-lg">
               <p className="text-[11px] font-semibold text-accent-bright">
-                {resumable ? "Continue studying" : "Get started"}
+                {resumable ? t("home.continueStudying") : t("home.getStarted")}
               </p>
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight mt-2 leading-snug">
                 {resumable
@@ -292,7 +294,7 @@ export default function HomePage() {
                     }
                     className="group inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-[13px] font-semibold text-ink hover:bg-white/90 transition-colors"
                   >
-                    Resume session
+                    {t("home.resumeSession")}
                     <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
                   </button>
                   <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
@@ -303,7 +305,7 @@ export default function HomePage() {
                         className="inline-flex items-center gap-2 rounded-lg border border-white/25 px-4 py-2 text-[13px] font-semibold text-white hover:bg-white/10 transition-colors"
                       >
                         <Plus className="h-3.5 w-3.5" />
-                        New workspace
+                        {t("nav.newWorkspace")}
                       </button>
                     )}
                   </NewWorkspaceMenu>
@@ -317,7 +319,7 @@ export default function HomePage() {
                       className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-semibold text-ink hover:bg-white/90 transition-colors sm:w-auto sm:py-2 sm:text-[13px]"
                     >
                       <Plus className="h-4 w-4" />
-                      New workspace
+                      {t("nav.newWorkspace")}
                     </button>
                   )}
                 </NewWorkspaceMenu>
@@ -364,7 +366,7 @@ export default function HomePage() {
               </div>
             </div>
             <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent">
-              Review now
+              {t("home.reviewNow")}
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
             </span>
           </Link>
@@ -597,7 +599,7 @@ export default function HomePage() {
                         className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-semibold hover:border-accent/40 hover:bg-muted"
                       >
                         <Plus className="h-3.5 w-3.5" />
-                        New workspace
+                        {t("nav.newWorkspace")}
                       </button>
                     )}
                   </NewWorkspaceMenu>
