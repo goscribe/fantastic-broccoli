@@ -1,5 +1,6 @@
 "use client";
 
+import { MathText } from "@/components/ui/markdown-text";
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -164,7 +165,7 @@ export default function WorkspaceStudyPage() {
                   />
                   <div className="space-y-0.5 p-3">
                     <p className="truncate text-[13px] font-semibold leading-tight group-hover:text-accent transition-colors">
-                      {item.title}
+                      <MathText text={item.title} />
                     </p>
                     <p className="truncate text-[11px] text-faint">
                       {kindConfig[item.kind].label}

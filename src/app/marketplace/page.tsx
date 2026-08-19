@@ -1,5 +1,6 @@
 "use client";
 
+import { MathText } from "@/components/ui/markdown-text";
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -94,7 +95,7 @@ function ArtifactTile({
         )}
         <div className="space-y-1 p-3">
           <p className="truncate text-[13px] font-semibold leading-tight">
-            {artifact.title}
+            <MathText text={artifact.title} />
           </p>
           {reason ? (
             <p className="line-clamp-2 text-[11px] leading-4 text-accent-dim">

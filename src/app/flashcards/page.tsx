@@ -1,5 +1,6 @@
 "use client";
 
+import { MathText } from "@/components/ui/markdown-text";
 import Link from "next/link";
 import {
   useFlashcardDecks,
@@ -25,7 +26,7 @@ function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
       />
       <div className="p-4">
         <h3 className="truncate text-sm font-semibold leading-tight tracking-tight group-hover:text-accent transition-colors">
-          {item.title}
+          <MathText text={item.title} />
         </h3>
         <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
           <span className="shrink-0">

@@ -1,5 +1,6 @@
 "use client";
 
+import { MathText } from "@/components/ui/markdown-text";
 import { Suspense, useMemo, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
@@ -119,7 +120,9 @@ function FlashcardDeck() {
         </Link>
         <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">{item.title}</h1>
+            <h1 className="text-2xl font-bold tracking-tight">
+              <MathText text={item.title} />
+            </h1>
             <p className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
               <span>
                 {cardCount} card{cardCount === 1 ? "" : "s"}
