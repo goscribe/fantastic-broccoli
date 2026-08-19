@@ -90,6 +90,42 @@ function CharacterCard({
   );
 }
 
+/** Stage label + progress bar for an episode that is still generating. */
+function GenerationStatus({ message }: { message: string | null }) {
+  const label = message || "Generating episode…";
+  const progress = message ? stageProgress(message) : null;
+  return (
+    <div className="mt-2 space-y-1.5">
+      <p className="inline-flex items-center gap-1.5 text-xs font-medium text-accent-dim">
+        <AudioLines className="h-3.5 w-3.5 animate-pulse" />
+        {label}
+      </p>
+      {progress && (
+        <div className="flex items-center gap-2">
+          <div className="h-1.5 w-40 max-w-full overflow-hidden rounded-full bg-muted">
+            <div
+              className="h-full rounded-full bg-accent transition-all duration-500"
+              style={{
+                width: `${Math.round((progress.done / progress.total) * 100)}%`,
+              }}
+            />
+          </div>
+          <span className="text-[11px] tabular-nums text-faint">
+            {progress.done}/{progress.total}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Parses "(i of n)" out of a server stage message to drive the progress bar. */
+function stageProgress(message: string): { done: number; total: number } | null {
+  const m = message.match(/\((\d+) of (\d+)\)/);
+  if (!m) return null;
+  return { done: Number(m[1]), total: Number(m[2]) };
+}
+
 function episodeDuration(episode: PodcastEpisode): string | null {
   const total = episode.segments.reduce((sum, s) => sum + (s.duration ?? 0), 0);
   if (!total) return null;
@@ -166,7 +202,13 @@ function EpisodeCard({
             </span>
           </div>
           <p className="mt-1.5 truncate text-base font-semibold">
-            <MathText text={episode.title} />
+            <MathText
+              text={
+                episode.generating && episode.title === "----"
+                  ? "New episode"
+                  : episode.title
+              }
+            />
           </p>
           {episode.description && (
             <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
@@ -174,10 +216,7 @@ function EpisodeCard({
             </p>
           )}
           {episode.generating ? (
-            <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-accent-dim">
-              <AudioLines className="h-3.5 w-3.5 animate-pulse" />
-              Generating episode…
-            </p>
+            <GenerationStatus message={episode.generatingMessage} />
           ) : (
             playable.length > 0 && (
               <p className="mt-2 inline-flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -251,7 +290,7 @@ export default function WorkspaceRecallPage() {
     queryKey: ["podcast-episodes", workspaceId],
     queryFn: () => fetchPodcastEpisodes(workspaceId),
     refetchInterval: (query) =>
-      query.state.data?.some((e) => e.generating) ? 5000 : false,
+      query.state.data?.some((e) => e.generating) ? 3000 : false,
   });
   const { data: characters = [] } = useQuery({
     queryKey: ["podcast-characters"],

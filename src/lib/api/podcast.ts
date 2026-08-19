@@ -23,6 +23,8 @@ export interface PodcastEpisode {
   segments: PodcastSegment[];
   createdAt: string | Date;
   generating: boolean;
+  /** Server-reported stage of an in-flight generation, e.g. "Generating audio for \"X\" (2 of 5)..." */
+  generatingMessage: string | null;
 }
 
 export interface PodcastVoice {
@@ -102,6 +104,7 @@ interface EpisodeRow {
   }[];
   createdAt: string | Date;
   generating: boolean;
+  generatingMetadata?: { message?: string } | null;
 }
 
 export async function fetchPodcastEpisodes(
@@ -118,6 +121,7 @@ export async function fetchPodcastEpisodes(
     segments: [...row.segments].sort((a, b) => a.order - b.order),
     createdAt: row.createdAt,
     generating: row.generating,
+    generatingMessage: row.generatingMetadata?.message ?? null,
   }));
 }
 
