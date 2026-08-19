@@ -1,5 +1,6 @@
 "use client";
 
+import "@/lib/i18n/flashcards";
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -19,6 +20,7 @@ import { MarkdownText } from "@/components/ui/markdown-text";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
 import {
   ArrowLeft,
   Eye,
@@ -39,6 +41,7 @@ export default function ExportPage() {
 }
 
 function ExportEditor() {
+  const { t } = useI18n();
   const ids = (useSearchParams().get("ids") ?? "")
     .split(",")
     .filter(Boolean);
@@ -74,7 +77,7 @@ function ExportEditor() {
   if (ids.length === 0) {
     return (
       <main className="flex-1 px-6 py-10 text-center text-sm text-muted-foreground">
-        Nothing selected — pick artifacts in a workspace bank first.
+        {t("fc.exNothingSelected")}
       </main>
     );
   }
@@ -110,17 +113,16 @@ function ExportEditor() {
               type="button"
               onClick={() => history.back()}
               className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-muted-foreground hover:bg-muted"
-              title="Back"
+              title={t("fc.exBack")}
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
             <div>
               <h1 className="text-lg font-bold tracking-tight">
-                Export with Scribe
+                {t("fc.exportWithScribe")}
               </h1>
               <p className="text-xs text-muted-foreground">
-                Edit anything, pick a theme, then print — Scribe branding
-                included.
+                {t("fc.exSubtitle")}
               </p>
             </div>
           </div>
@@ -129,22 +131,18 @@ function ExportEditor() {
               variant="outline"
               size="sm"
               onClick={() => setShowAnswers((v) => !v)}
-              title={
-                showAnswers
-                  ? "Hide answers (student copy)"
-                  : "Show answers (teacher copy)"
-              }
+              title={t(showAnswers ? "fc.exHideAnswers" : "fc.exShowAnswers")}
             >
               {showAnswers ? (
                 <Eye className="h-3.5 w-3.5 mr-1.5" />
               ) : (
                 <EyeOff className="h-3.5 w-3.5 mr-1.5" />
               )}
-              {showAnswers ? "Answers shown" : "Answers hidden"}
+              {t(showAnswers ? "fc.exAnswersShown" : "fc.exAnswersHidden")}
             </Button>
             <Button size="sm" onClick={() => window.print()}>
               <Printer className="h-3.5 w-3.5 mr-1.5" />
-              Print / Save PDF
+              {t("fc.exPrint")}
             </Button>
           </div>
         </div>
@@ -185,7 +183,7 @@ function ExportEditor() {
           <input
             value={instruction}
             onChange={(e) => setInstruction(e.target.value)}
-            placeholder="Ask AI: “make it space themed and more fun”, “simplify question 2”…"
+            placeholder={t("fc.exAskAiPlaceholder")}
             className="h-10 w-full rounded-full border border-border bg-card pl-10 pr-28 text-[13px] outline-none transition-colors focus:border-accent"
           />
           <Button
@@ -199,13 +197,11 @@ function ExportEditor() {
             ) : (
               <Sparkles className="h-3.5 w-3.5 mr-1.5" />
             )}
-            Apply · 4 tokens
+            {t("fc.exApply")}
           </Button>
         </form>
         {assist.isError && (
-          <p className="text-xs text-rose">
-            AI edit failed — check your token balance and try again.
-          </p>
+          <p className="text-xs text-rose">{t("fc.exAiEditFailed")}</p>
         )}
         {assistNote && !assist.isPending && (
           <p className="text-xs text-accent-dim">
@@ -229,7 +225,9 @@ function ExportEditor() {
         {/* Document header */}
         <header className="mb-8">
           <div className="mb-4 flex items-center justify-between gap-4 text-[11px] font-bold uppercase tracking-[0.18em] opacity-60">
-            <span>{theme.emoji} Scribe study pack</span>
+            <span>
+              {theme.emoji} {t("fc.exStudyPack")}
+            </span>
             <span>
               {new Date().toLocaleDateString(undefined, {
                 year: "numeric",
@@ -245,24 +243,26 @@ function ExportEditor() {
               "w-full bg-transparent pb-2 text-center text-3xl font-bold tracking-tight outline-none",
               theme.heading,
             )}
-            aria-label="Document title"
+            aria-label={t("fc.exDocTitleAria")}
           />
           <p className="mt-1 text-center text-xs font-semibold opacity-60">
             {doc.sections.length}{" "}
-            {doc.sections.length === 1 ? "section" : "sections"} · made with
-            Scribe · scribe.study
+            {t(
+              doc.sections.length === 1 ? "fc.exSectionOne" : "fc.exSectionMany",
+            )}{" "}
+            · {t("fc.exMadeWith")}
           </p>
           <div className="mt-6 flex flex-wrap items-end gap-x-8 gap-y-3 text-sm font-semibold">
             <span className="flex flex-1 min-w-40 items-baseline gap-2">
-              Name
+              {t("fc.exName")}
               <span className="flex-1 border-b border-current/40" />
             </span>
             <span className="flex flex-1 min-w-32 items-baseline gap-2">
-              Class
+              {t("fc.exClass")}
               <span className="flex-1 border-b border-current/40" />
             </span>
             <span className="flex flex-1 min-w-32 items-baseline gap-2">
-              Date
+              {t("fc.exDate")}
               <span className="flex-1 border-b border-current/40" />
             </span>
           </div>
@@ -292,12 +292,17 @@ function ExportEditor() {
                     updateSection(i, { heading: e.target.value })
                   }
                   className="w-full bg-transparent text-sm font-bold outline-none"
-                  aria-label={`Section ${i + 1} heading`}
+                  aria-label={t("fc.exSectionHeadingAria").replace(
+                    "{n}",
+                    String(i + 1),
+                  )}
                 />
                 <div className="flex items-center gap-1 print:hidden">
                   <button
                     type="button"
-                    title={editing === i ? "Done editing" : "Edit content"}
+                    title={t(
+                      editing === i ? "fc.exDoneEditing" : "fc.exEditContent",
+                    )}
                     onClick={() => setEditing(editing === i ? null : i)}
                     className="flex h-6 w-6 items-center justify-center rounded opacity-60 hover:opacity-100"
                   >
@@ -306,7 +311,7 @@ function ExportEditor() {
                   {doc.sections.length > 1 && (
                     <button
                       type="button"
-                      title="Remove section"
+                      title={t("fc.exRemoveSection")}
                       onClick={() =>
                         setDoc({
                           ...doc,
@@ -330,7 +335,10 @@ function ExportEditor() {
                       Math.max(6, section.body.split("\n").length + 2),
                     )}
                     className="w-full resize-y rounded-lg border border-border bg-white/70 p-3 font-mono text-[12px] leading-5 text-neutral-900 outline-none focus:border-accent"
-                    aria-label={`Section ${i + 1} content`}
+                    aria-label={t("fc.exSectionContentAria").replace(
+                      "{n}",
+                      String(i + 1),
+                    )}
                   />
                 ) : (
                   <MarkdownText
@@ -348,7 +356,7 @@ function ExportEditor() {
 
         <footer className="mt-10 flex items-center justify-between border-t border-current/20 pt-3 text-[10px] font-semibold uppercase tracking-widest opacity-50">
           <span>{doc.title}</span>
-          <span>Made with Scribe — scribe.study</span>
+          <span>{t("fc.exMadeWithFooter")}</span>
         </footer>
       </div>
     </main>

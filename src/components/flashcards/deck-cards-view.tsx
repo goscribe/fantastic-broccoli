@@ -1,9 +1,11 @@
 "use client";
 
+import { DECK_LABEL_KEYS } from "@/lib/i18n/flashcards";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { MarkdownText } from "@/components/ui/markdown-text";
+import { useI18n } from "@/lib/i18n";
 import { ChevronLeft, ChevronRight, RotateCcw, Shuffle } from "lucide-react";
 
 interface DeckCardsViewProps {
@@ -18,6 +20,9 @@ export function DeckCardsView({
   frontLabel,
   backLabel,
 }: DeckCardsViewProps) {
+  const { t } = useI18n();
+  const front = t(DECK_LABEL_KEYS[frontLabel] ?? frontLabel);
+  const back = t(DECK_LABEL_KEYS[backLabel] ?? backLabel);
   const [shuffledOrder, setShuffledOrder] = useState<number[] | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -63,7 +68,7 @@ export function DeckCardsView({
       <div style={{ perspective: "1200px" }}>
         <button
           type="button"
-          aria-label="Flip card"
+          aria-label={t("fc.flipCard")}
           onClick={() => setFlipped((prev) => !prev)}
           className="relative block w-full cursor-pointer"
           style={{
@@ -77,12 +82,12 @@ export function DeckCardsView({
             style={{ backfaceVisibility: "hidden" }}
           >
             <span className="text-[11px] font-semibold uppercase tracking-wider text-faint">
-              {frontLabel}
+              {front}
             </span>
             <span className="text-2xl md:text-3xl font-semibold leading-snug text-center">
               <MarkdownText text={card.front} />
             </span>
-            <span className="text-xs text-faint">Click to reveal</span>
+            <span className="text-xs text-faint">{t("fc.clickToReveal")}</span>
           </span>
           <span
             className="absolute inset-0 flex min-h-[380px] w-full flex-col items-center justify-center gap-5 rounded-3xl border border-accent/30 bg-accent-soft/40 p-10 shadow-sm"
@@ -92,7 +97,7 @@ export function DeckCardsView({
             }}
           >
             <span className="text-[11px] font-semibold uppercase tracking-wider text-accent-dim">
-              {backLabel}
+              {back}
             </span>
             <span className="text-xl md:text-2xl leading-relaxed text-center">
               <MarkdownText text={card.back} />
@@ -109,7 +114,7 @@ export function DeckCardsView({
           disabled={currentIndex === 0}
         >
           <ChevronLeft className="mr-1.5 h-4 w-4" />
-          Previous
+          {t("fc.previous")}
         </Button>
 
         <div className="flex flex-1 items-center justify-center gap-3">
@@ -129,7 +134,7 @@ export function DeckCardsView({
           onClick={goNext}
           disabled={currentIndex === count - 1}
         >
-          Next
+          {t("fc.next")}
           <ChevronRight className="ml-1.5 h-4 w-4" />
         </Button>
       </div>
@@ -145,7 +150,7 @@ export function DeckCardsView({
             }}
           >
             <RotateCcw className="mr-1.5 h-3.5 w-3.5" />
-            Restart
+            {t("fc.restart")}
           </Button>
           <Button
             variant="ghost"
@@ -159,12 +164,10 @@ export function DeckCardsView({
             }}
           >
             <Shuffle className="mr-1.5 h-3.5 w-3.5" />
-            Shuffle
+            {t("fc.shuffle")}
           </Button>
         </div>
-        <p className="text-xs text-faint">
-          Use ← → to navigate · Space to flip
-        </p>
+        <p className="text-xs text-faint">{t("fc.kbHint")}</p>
       </div>
     </div>
   );

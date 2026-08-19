@@ -1,11 +1,13 @@
 "use client";
 
+import { DECK_LABEL_KEYS } from "@/lib/i18n/flashcards";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { recordFlashcardStudySession } from "@/lib/api/study-session";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n";
 import { Check, RotateCcw, X } from "lucide-react";
 
 interface DeckEntry {
@@ -52,6 +54,9 @@ export function DeckTestView({
   backLabel,
   onAttemptRecorded,
 }: DeckTestViewProps) {
+  const { t } = useI18n();
+  const front = t(DECK_LABEL_KEYS[frontLabel] ?? frontLabel);
+  const back = t(DECK_LABEL_KEYS[backLabel] ?? backLabel);
   const [round, setRound] = useState(0);
   const questions = useMemo(
     () => buildTest(entries),
@@ -100,15 +105,20 @@ export function DeckTestView({
     <div className="space-y-5">
       {!submitted && (
         <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground">
-          <span>{questions.length} questions</span>
+          <span>
+            {t("fc.questionsCount").replace(
+              "{count}",
+              String(questions.length),
+            )}
+          </span>
           <button
             type="button"
             onClick={retake}
             className="inline-flex items-center gap-1 font-semibold hover:text-foreground transition-colors"
-            title="Start a new test with a fresh shuffle"
+            title={t("fc.newTestTitle")}
           >
             <RotateCcw className="h-3 w-3" />
-            New session
+            {t("fc.newSession")}
           </button>
         </div>
       )}
@@ -116,10 +126,10 @@ export function DeckTestView({
         <div className="rounded-3xl border border-border bg-card px-6 py-8 text-center space-y-4">
           <h2 className="text-2xl font-semibold tracking-tight">
             {accuracy >= 80
-              ? "Excellent work 🎉"
+              ? `${t("fc.excellent")} 🎉`
               : accuracy >= 60
-                ? "Good job 👏"
-                : "Keep practicing 💪"}
+                ? `${t("fc.goodJob")} 👏`
+                : `${t("fc.keepPracticing")} 💪`}
           </h2>
           <p className="text-5xl font-semibold tabular-nums tracking-tight">
             {correctCount}
@@ -131,7 +141,7 @@ export function DeckTestView({
           <ProgressBar value={accuracy} className="max-w-xs mx-auto" showLabel />
           <Button variant="outline" size="sm" onClick={retake}>
             <RotateCcw className="mr-1.5 h-3.5 w-3.5" />
-            New session
+            {t("fc.newSession")}
           </Button>
         </div>
       )}
@@ -165,7 +175,7 @@ export function DeckTestView({
                 <div className="min-w-0 flex-1 space-y-3">
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-wider text-faint">
-                      {frontLabel}
+                      {front}
                     </p>
                     <p className="mt-1 text-base font-medium leading-relaxed">
                       <MarkdownText text={q.front} />
@@ -230,7 +240,10 @@ export function DeckTestView({
                       onChange={(e) =>
                         setAnswers((prev) => ({ ...prev, [i]: e.target.value }))
                       }
-                      placeholder={`Type the ${backLabel.toLowerCase()}…`}
+                      placeholder={`${t("fc.typeThe").replace(
+                        "{label}",
+                        back.toLowerCase(),
+                      )}…`}
                       className={cn(
                         "w-full rounded-xl border bg-card px-4 py-2.5 text-sm outline-none transition-colors",
                         "focus-visible:ring-2 focus-visible:ring-ring/30",
@@ -244,7 +257,10 @@ export function DeckTestView({
                   {wrong && (
                     <p className="rounded-xl bg-energy-soft px-3.5 py-2.5 text-sm">
                       <span className="font-semibold text-energy">
-                        Correct {backLabel.toLowerCase()}:{" "}
+                        {t("fc.correctLabel").replace(
+                          "{label}",
+                          back.toLowerCase(),
+                        )}{" "}
                       </span>
                       <MarkdownText text={q.back} />
                     </p>
@@ -258,7 +274,7 @@ export function DeckTestView({
 
       {!submitted && (
         <div className="flex justify-center">
-          <Button onClick={submit}>Submit test</Button>
+          <Button onClick={submit}>{t("fc.submitTest")}</Button>
         </div>
       )}
     </div>

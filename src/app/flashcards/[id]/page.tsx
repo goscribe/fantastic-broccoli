@@ -1,5 +1,6 @@
 "use client";
 
+import "@/lib/i18n/flashcards";
 import { MathText } from "@/components/ui/markdown-text";
 import { Suspense, useMemo, useState } from "react";
 import Link from "next/link";
@@ -14,6 +15,7 @@ import { DeckLearnView } from "@/components/flashcards/deck-learn-view";
 import { DeckTestView } from "@/components/flashcards/deck-test-view";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { useI18n, type TranslationKey } from "@/lib/i18n";
 import {
   ArrowLeft,
   ClipboardCheck,
@@ -24,13 +26,14 @@ import {
 
 type DeckMode = "cards" | "learn" | "test";
 
-const MODES: { id: DeckMode; label: string; icon: typeof Layers }[] = [
-  { id: "cards", label: "Cards", icon: Layers },
-  { id: "learn", label: "Learn", icon: GraduationCap },
-  { id: "test", label: "Test", icon: ClipboardCheck },
+const MODES: { id: DeckMode; labelKey: TranslationKey; icon: typeof Layers }[] = [
+  { id: "cards", labelKey: "fc.modeCards", icon: Layers },
+  { id: "learn", labelKey: "fc.modeLearn", icon: GraduationCap },
+  { id: "test", labelKey: "fc.modeTest", icon: ClipboardCheck },
 ];
 
 function FlashcardDeck() {
+  const { t } = useI18n();
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -93,14 +96,14 @@ function FlashcardDeck() {
       <div className="mx-auto w-full max-w-3xl rounded-2xl border border-border bg-card px-6 py-12 text-center">
         <Layers className="mx-auto h-6 w-6 text-faint" />
         <p className="mt-3 text-sm font-medium">
-          {item ? "This deck has no cards yet" : "Deck not found"}
+          {t(item ? "fc.emptyDeck" : "fc.deckNotFound")}
         </p>
         <Link
           href="/flashcards"
           className="mt-3 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
-          Back to Flashcards
+          {t("fc.backToFlashcards")}
         </Link>
       </div>
     );
@@ -116,7 +119,7 @@ function FlashcardDeck() {
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
-          Back to Flashcards
+          {t("fc.backToFlashcards")}
         </Link>
         <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -125,7 +128,7 @@ function FlashcardDeck() {
             </h1>
             <p className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
               <span>
-                {cardCount} card{cardCount === 1 ? "" : "s"}
+                {cardCount} {t(cardCount === 1 ? "fc.card" : "fc.cards")}
               </span>
               {item.topic && (
                 <>
@@ -136,7 +139,12 @@ function FlashcardDeck() {
               {hasPooledCards && progress && (
                 <>
                   <span>·</span>
-                  <span>{masteredCount} mastered</span>
+                  <span>
+                    {t("fc.masteredCount").replace(
+                      "{count}",
+                      String(masteredCount),
+                    )}
+                  </span>
                 </>
               )}
             </p>
@@ -144,7 +152,7 @@ function FlashcardDeck() {
 
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1 rounded-full border border-border bg-card p-1">
-            {MODES.map(({ id, label, icon: Icon }) => (
+            {MODES.map(({ id, labelKey, icon: Icon }) => (
               <button
                 key={id}
                 type="button"
@@ -157,7 +165,7 @@ function FlashcardDeck() {
                 )}
               >
                 <Icon className="h-3.5 w-3.5" />
-                {label}
+                {t(labelKey)}
               </button>
             ))}
             </div>
@@ -167,7 +175,7 @@ function FlashcardDeck() {
               disabled={startSession.isPending}
             >
               <Sparkles className="mr-1.5 h-3.5 w-3.5" />
-              {startSession.isPending ? "Starting…" : "Study"}
+              {t(startSession.isPending ? "fc.starting" : "fc.study")}
             </Button>
           </div>
         </div>
@@ -175,7 +183,7 @@ function FlashcardDeck() {
           <p className="mt-2 text-sm text-rose">
             {startSession.error instanceof Error
               ? startSession.error.message
-              : "Could not start a study session."}
+              : t("fc.startSessionError")}
           </p>
         )}
       </div>
