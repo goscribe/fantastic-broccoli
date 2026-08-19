@@ -2,19 +2,21 @@
 
 import { SessionActivity } from "@/types";
 import { MathText } from "@/components/ui/markdown-text";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 import { cn, formatDuration } from "@/lib/utils";
 import { Check } from "lucide-react";
 
 const typeLabels: Record<string, string> = {
-  reading: "Reading",
-  comprehension_check: "Comprehension",
-  mcq: "Quiz",
-  flashcard_review: "Flashcards",
-  worksheet: "Worksheet",
-  interactive: "Interactive",
-  vocab_recall: "Recall",
-  cloze: "Fill the gaps",
-  explain_aloud: "Explain aloud",
+  reading: "session.typeReading",
+  comprehension_check: "session.typeComprehension",
+  mcq: "session.typeQuiz",
+  flashcard_review: "session.typeFlashcards",
+  worksheet: "session.typeWorksheet",
+  interactive: "session.typeInteractive",
+  vocab_recall: "session.typeRecall",
+  cloze: "session.typeCloze",
+  explain_aloud: "session.typeExplainAloud",
 };
 
 interface ActivityItemProps {
@@ -30,6 +32,7 @@ export function ActivityItem({
   isActive,
   onClick,
 }: ActivityItemProps) {
+  const { t } = useI18n();
   const completed = activity.status === "completed";
 
   return (
@@ -64,7 +67,7 @@ export function ActivityItem({
           <MathText text={activity.title} />
         </span>
         <span className="block text-[11px] text-muted-foreground">
-          {typeLabels[activity.type] ?? "Activity"} ·{" "}
+          {t(typeLabels[activity.type] ?? "session.typeActivity")} ·{" "}
           {formatDuration(activity.estimatedMinutes)}
         </span>
       </span>

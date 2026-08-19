@@ -5,26 +5,28 @@ import { MathText } from "@/components/ui/markdown-text";
 import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 import { formatDuration, formatRelativeDate } from "@/lib/utils";
 import { Clock, ArrowRight, AlertTriangle, RefreshCw, Trash2, Loader2 } from "lucide-react";
 import { SessionArt } from "@/components/graphics/material-art";
 
 const depthLabels = {
-  light: "Light review",
-  moderate: "Moderate",
-  deep: "Deep study",
+  light: "session.depthLight",
+  moderate: "session.depthModerate",
+  deep: "session.depthDeep",
 };
 
 const activityLabels: Record<string, string> = {
-  reading: "Reading",
-  comprehension_check: "Comprehension",
-  mcq: "Quiz",
-  worksheet: "Worksheet",
-  interactive: "Interactive",
-  cloze: "Fill the gaps",
-  flashcard_review: "Flashcards",
-  vocab_recall: "Active recall",
-  explain_aloud: "Explain aloud",
+  reading: "session.typeReading",
+  comprehension_check: "session.typeComprehension",
+  mcq: "session.typeQuiz",
+  worksheet: "session.typeWorksheet",
+  interactive: "session.typeInteractive",
+  cloze: "session.typeCloze",
+  flashcard_review: "session.typeFlashcards",
+  vocab_recall: "session.typeActiveRecall",
+  explain_aloud: "session.typeExplainAloud",
 };
 
 const depthVariants = {
@@ -50,6 +52,7 @@ export function SessionCard({
   retrying,
   deleting,
 }: SessionCardProps) {
+  const { t } = useI18n();
   if (session.status === "failed") {
     return (
       <Card className="border-rose/30">
@@ -60,12 +63,11 @@ export function SessionCard({
               <h4 className="font-semibold text-sm truncate"><MathText text={session.title} /></h4>
               <span className="inline-flex items-center gap-1 rounded-full bg-rose/10 text-rose px-2 py-0.5 text-[10px] font-semibold shrink-0">
                 <AlertTriangle className="h-2.5 w-2.5" />
-                Generation failed
+                {t("session.generationFailed")}
               </span>
             </div>
             <p className="text-xs text-muted-foreground mt-1">
-              Scribe couldn&apos;t generate this study plan. You can retry with
-              the same settings, or delete the session.
+              {t("session.cardFailedBody")}
             </p>
             <div className="flex items-center gap-2 mt-3">
               {onRetry && (
@@ -80,7 +82,7 @@ export function SessionCard({
                   ) : (
                     <RefreshCw className="h-3 w-3" />
                   )}
-                  Retry
+                  {t("session.retry")}
                 </button>
               )}
               {onDelete && (
@@ -95,7 +97,7 @@ export function SessionCard({
                   ) : (
                     <Trash2 className="h-3 w-3" />
                   )}
-                  Delete
+                  {t("session.delete")}
                 </button>
               )}
             </div>
@@ -136,7 +138,7 @@ export function SessionCard({
 
       <div className="flex items-center gap-2 mt-3 flex-wrap">
         <Badge variant={depthVariants[session.depth]}>
-          {depthLabels[session.depth]}
+          {t(depthLabels[session.depth])}
         </Badge>
         <span className="flex items-center gap-1 text-xs text-muted-foreground">
           <Clock className="h-3 w-3" />
@@ -148,24 +150,25 @@ export function SessionCard({
         {session.generating && (
           <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <span className="h-3 w-3 rounded-full border-[1.5px] border-accent border-t-transparent animate-spin" />
-            Generating plan…
+            {t("session.generatingPlan")}
           </span>
         )}
         {totalActivities > 0 && (
           <span className="text-xs text-muted-foreground ml-auto">
-            {completedActivities}/{totalActivities} activities
+            {completedActivities}/{totalActivities}{" "}
+            {t("session.activitiesCount")}
           </span>
         )}
       </div>
 
       {activityTypes.length > 0 && (
         <div className="flex items-center gap-1.5 mt-2.5 flex-wrap">
-          {activityTypes.map((t) => (
+          {activityTypes.map((type) => (
             <span
-              key={t}
+              key={type}
               className="px-2 py-0.5 rounded-full bg-muted text-[11px] font-medium text-muted-foreground"
             >
-              {activityLabels[t] ?? t}
+              {activityLabels[type] ? t(activityLabels[type]) : type}
             </span>
           ))}
         </div>
@@ -187,10 +190,10 @@ export function SessionCard({
       {session.endDate && (
         <div className="flex justify-between mt-2">
           <span className="text-[11px] text-muted-foreground">
-            Started {formatRelativeDate(session.startDate)}
+            {t("session.started")} {formatRelativeDate(session.startDate)}
           </span>
           <span className="text-[11px] text-muted-foreground">
-            Due {formatRelativeDate(session.endDate)}
+            {t("session.due")} {formatRelativeDate(session.endDate)}
           </span>
         </div>
       )}

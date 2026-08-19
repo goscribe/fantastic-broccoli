@@ -5,6 +5,8 @@ import { VocabRecallContent } from "@/types";
 import { useActivityDraft } from "@/lib/use-activity-draft";
 import { MathText } from "@/components/ui/markdown-text";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { Check, X, ArrowRight, RotateCcw } from "lucide-react";
 
@@ -37,6 +39,7 @@ export function VocabRecallActivity({
   onTermResult,
   onComplete,
 }: VocabRecallActivityProps) {
+  const { t } = useI18n();
   const restored = draft as Partial<VocabDraft> | undefined;
   const allIndices = content.terms.map((_, i) => i);
   const [queue, setQueue] = useState<number[]>(
@@ -94,15 +97,15 @@ export function VocabRecallActivity({
     return (
       <div className="py-8 text-center">
         <p className="text-lg font-bold tracking-tight">
-          All {total} terms recalled
+          {t("session.allPrefix")} {total} {t("session.termsRecalled")}
         </p>
         <p className="text-sm text-muted-foreground mt-1 mb-6">
           {attempts === total
-            ? "Perfect recall — every term on the first try."
-            : `Took ${attempts} attempts across ${round} round${round > 1 ? "s" : ""} — the tricky ones will resurface in future sessions.`}
+            ? t("session.perfectRecall")
+            : `${t("session.took")} ${attempts} ${t("session.attemptsAcross")} ${round} ${round > 1 ? t("session.roundsNoun") : t("session.roundNoun")} ${t("session.trickyResurface")}`}
         </p>
         <Button size="sm" onClick={onComplete}>
-          Continue
+          {t("session.continue")}
           <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
         </Button>
       </div>
@@ -113,17 +116,17 @@ export function VocabRecallActivity({
     <div>
       <div className="flex items-center justify-between mb-5">
         <p className="text-sm font-semibold">
-          Define this term from memory
+          {t("session.defineFromMemory")}
         </p>
         <div className="flex items-center gap-3">
           {round > 1 && (
             <span className="flex items-center gap-1 text-xs font-semibold text-accent">
               <RotateCcw className="h-3 w-3" />
-              Round {round}
+              {t("session.round")} {round}
             </span>
           )}
           <span className="text-xs text-muted-foreground tabular-nums">
-            {learned.size} / {total} learnt
+            {learned.size} / {total} {t("session.learnt")}
           </span>
         </div>
       </div>
@@ -135,7 +138,7 @@ export function VocabRecallActivity({
       <textarea
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
-        placeholder="Write the definition in your own words…"
+        placeholder={t("session.definitionPlaceholder")}
         rows={3}
         disabled={revealed}
         className="w-full rounded-xl border border-border bg-background p-3.5 text-sm text-foreground focus:outline-none focus:border-accent/50 placeholder:text-faint resize-none"
@@ -148,14 +151,14 @@ export function VocabRecallActivity({
             onClick={() => setRevealed(true)}
             disabled={!answer.trim()}
           >
-            Check my answer
+            {t("session.checkMyAnswer")}
           </Button>
         </div>
       ) : (
         <div className="mt-4 space-y-4">
           <div className="rounded-xl bg-accent-soft border border-accent/20 p-4">
             <p className="text-xs font-semibold text-accent mb-1.5">
-              Model definition
+              {t("session.modelDefinition")}
             </p>
             <p className="text-sm text-foreground">
               <MathText text={term.definition} />
@@ -163,7 +166,7 @@ export function VocabRecallActivity({
           </div>
           <div className="flex items-center justify-between">
             <p className="text-xs text-muted-foreground">
-              Compare — did you capture the key idea?
+              {t("session.compareHint")}
             </p>
             <div className="flex gap-2">
               <button
@@ -175,7 +178,7 @@ export function VocabRecallActivity({
                 )}
               >
                 <X className="h-3.5 w-3.5" />
-                Missed it
+                {t("session.missedIt")}
               </button>
               <button
                 type="button"
@@ -183,7 +186,7 @@ export function VocabRecallActivity({
                 className="flex items-center gap-1.5 rounded-full bg-accent px-3.5 py-1.5 text-xs font-semibold text-accent-foreground hover:bg-accent-dim"
               >
                 <Check className="h-3.5 w-3.5" />
-                Got it
+                {t("session.gotIt")}
               </button>
             </div>
           </div>

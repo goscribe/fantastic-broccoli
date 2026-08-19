@@ -5,6 +5,8 @@ import { ExplainAloudContent } from "@/types";
 import { MathText } from "@/components/ui/markdown-text";
 import { Button } from "@/components/ui/button";
 import { Surface } from "@/components/ui/card";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { Check, ArrowRight, Square } from "lucide-react";
 
@@ -21,6 +23,7 @@ export function ExplainAloudActivity({
   content,
   onComplete,
 }: ExplainAloudActivityProps) {
+  const { t } = useI18n();
   const [phase, setPhase] = useState<"idle" | "recording" | "review">("idle");
   const [seconds, setSeconds] = useState(0);
   const [covered, setCovered] = useState<boolean[]>(
@@ -40,11 +43,10 @@ export function ExplainAloudActivity({
   return (
     <div>
       <p className="text-sm font-semibold mb-1.5">
-        Teach it back — out loud
+        {t("session.explainTitle")}
       </p>
       <p className="text-xs text-muted-foreground mb-5">
-        Explaining a concept aloud in simple words (the Feynman technique)
-        exposes gaps that silent review hides.
+        {t("session.explainHint")}
       </p>
 
       <Surface muted className="p-4 mb-5">
@@ -56,7 +58,7 @@ export function ExplainAloudActivity({
       {phase === "idle" && (
         <Button size="sm" onClick={() => setPhase("recording")}>
           <span className="h-2 w-2 rounded-full bg-rose mr-2" />
-          Start explaining
+          {t("session.startExplaining")}
         </Button>
       )}
 
@@ -65,14 +67,14 @@ export function ExplainAloudActivity({
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2.5">
               <span className="h-2.5 w-2.5 rounded-full bg-rose animate-pulse-dot" />
-              <span className="text-sm font-semibold">Listening</span>
+              <span className="text-sm font-semibold">{t("session.listening")}</span>
               <span className="text-sm text-muted-foreground tabular-nums">
                 {formatTime(seconds)}
               </span>
             </div>
             <Button size="sm" variant="danger" onClick={() => setPhase("review")}>
               <Square className="h-3 w-3 mr-1.5 fill-current" />
-              Done
+              {t("session.done")}
             </Button>
           </div>
           <div className="flex items-end gap-[3px] h-8" aria-hidden>
@@ -93,7 +95,7 @@ export function ExplainAloudActivity({
       {phase === "review" && (
         <div>
           <p className="text-sm font-semibold mb-3">
-            Did you cover these key points?
+            {t("session.keyPointsQuestion")}
           </p>
           <div className="space-y-2 mb-5">
             {content.keyPoints.map((point, i) => (
@@ -135,10 +137,10 @@ export function ExplainAloudActivity({
               }}
               className="text-xs font-medium text-muted-foreground hover:text-foreground"
             >
-              Explain again
+              {t("session.explainAgain")}
             </button>
             <Button size="sm" onClick={onComplete}>
-              Continue
+              {t("session.continue")}
               <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
             </Button>
           </div>

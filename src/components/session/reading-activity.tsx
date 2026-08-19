@@ -23,6 +23,8 @@ import {
   splitMathSegments,
   useResolvedFigureUrl,
 } from "@/components/ui/markdown-text";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { BookOpen, ArrowRight, Highlighter, Trash2 } from "lucide-react";
 
@@ -375,6 +377,7 @@ export function ReadingActivity({
   onComplete,
   onHighlightsChange,
 }: ReadingActivityProps) {
+  const { t } = useI18n();
   const containerRef = useRef<HTMLDivElement>(null);
   const [highlights, setHighlights] = useState<Highlight[]>(() =>
     (initialHighlights ?? []).map(fromPersisted),
@@ -495,12 +498,12 @@ export function ReadingActivity({
         <div className="flex items-center gap-2">
           <BookOpen className="h-4 w-4" />
           <span className="text-xs font-medium">
-            Reading Material
+            {t("session.readingMaterial")}
           </span>
         </div>
         <span className="flex items-center gap-1.5 text-[11px]">
           <Highlighter className="h-3.5 w-3.5" />
-          Select text to highlight
+          {t("session.selectToHighlight")}
         </span>
       </div>
 
@@ -566,7 +569,7 @@ export function ReadingActivity({
               <button
                 key={color}
                 type="button"
-                aria-label={`Highlight ${color}`}
+                aria-label={`${t("session.highlightColor")} ${color}`}
                 onClick={() => addHighlight(color)}
                 className={cn(
                   "h-5 w-5 rounded-full hover:scale-110 transition-transform",
@@ -585,7 +588,7 @@ export function ReadingActivity({
             <textarea
               value={noteDraft}
               onChange={(e) => setNoteDraft(e.target.value)}
-              placeholder="Add a note…"
+              placeholder={t("session.addNoteShort")}
               rows={2}
               className="w-full resize-none rounded-lg border border-border bg-muted/40 px-2 py-1.5 text-xs outline-none focus:border-accent/50"
             />
@@ -602,7 +605,7 @@ export function ReadingActivity({
                 }}
                 className="flex items-center gap-1 text-[11px] text-rose hover:opacity-80"
               >
-                <Trash2 className="h-3 w-3" /> Remove
+                <Trash2 className="h-3 w-3" /> {t("session.remove")}
               </button>
               <button
                 type="button"
@@ -622,7 +625,7 @@ export function ReadingActivity({
                 }}
                 className="text-[11px] font-semibold text-accent hover:opacity-80"
               >
-                Save
+                {t("session.save")}
               </button>
             </div>
           </div>
@@ -631,7 +634,7 @@ export function ReadingActivity({
 
       <div className="flex justify-end pt-2">
         <Button variant="primary" size="sm" onClick={onComplete}>
-          Done reading <ArrowRight className="h-3 w-3 ml-1" />
+          {t("session.doneReading")} <ArrowRight className="h-3 w-3 ml-1" />
         </Button>
       </div>
     </div>
