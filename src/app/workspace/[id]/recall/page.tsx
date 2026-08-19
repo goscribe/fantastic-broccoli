@@ -12,6 +12,7 @@ import {
   PodcastCharacter,
   PodcastEpisode,
 } from "@/lib/api/podcast";
+import { MathText } from "@/components/ui/markdown-text";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { Button } from "@/components/ui/button";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
@@ -165,11 +166,11 @@ function EpisodeCard({
             </span>
           </div>
           <p className="mt-1.5 truncate text-base font-semibold">
-            {episode.title}
+            <MathText text={episode.title} />
           </p>
           {episode.description && (
             <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
-              {episode.description}
+              <MathText text={episode.description} />
             </p>
           )}
           {episode.generating ? (
@@ -205,7 +206,7 @@ function EpisodeCard({
                   <span className="mr-1.5 tabular-nums text-faint">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  {segment.title || `Chapter ${i + 1}`}
+                  <MathText text={segment.title || `Chapter ${i + 1}`} />
                 </p>
                 <audio
                   controls

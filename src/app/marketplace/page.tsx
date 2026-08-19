@@ -100,7 +100,7 @@ function ArtifactTile({
           {reason ? (
             <p className="line-clamp-2 text-[11px] leading-4 text-accent-dim">
               <Sparkles className="mr-1 inline h-3 w-3" />
-              {reason}
+              <MathText text={reason} />
             </p>
           ) : (
             <p className="truncate text-[11px] text-faint">

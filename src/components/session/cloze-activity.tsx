@@ -7,7 +7,7 @@ import { toast } from "@/lib/toast";
 import { recordFlashcardAttempt } from "@/lib/api/study-session";
 import { useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
-import { InlineMarkdown } from "@/components/ui/markdown-text";
+import { InlineMarkdown, MathText } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Loader2 } from "lucide-react";
 
@@ -133,7 +133,7 @@ export function ClozeActivity({
           </p>
           {feedbacks.map((r, i) => (
             <p key={i} className="text-xs text-rose">
-              {r.feedback}
+              <MathText text={r.feedback} />
             </p>
           ))}
         </div>
