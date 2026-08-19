@@ -84,11 +84,14 @@ const en = {
   "common.loading": "Loading…",
 } as const;
 
-export type TranslationKey = keyof typeof en;
+export type TranslationKey = keyof typeof en | (string & {});
 
-type Dictionary = Partial<Record<TranslationKey, string>>;
+type Dictionary = Record<string, string>;
 
-const dictionaries: Partial<Record<Locale, Dictionary>> = {
+// Base (chrome) dictionaries. Feature areas register their own key sets via
+// registerTranslations() from files under src/lib/i18n/, imported for side
+// effect by the components that use them.
+const dictionaries: Partial<Record<Locale, Partial<Record<keyof typeof en, string>>>> = {
   en,
   es: {
     "nav.home": "Inicio",
@@ -291,6 +294,34 @@ export function syncUiLocale(preferredLanguage: string | undefined): void {
   if (locale !== readStoredLocale()) setUiLocale(locale);
 }
 
+// Merged store: base dictionaries + everything registered by feature areas.
+const enStore: Dictionary = { ...en };
+const localeStores: Partial<Record<Locale, Dictionary>> = Object.fromEntries(
+  Object.entries(dictionaries).map(([code, dict]) => [code, { ...dict }]),
+);
+
+/**
+ * Registers a feature area's strings. `english` maps key → English source
+ * text; `translations` maps locale → key → translated text. Call at module
+ * scope in a file under src/lib/i18n/ and import it for side effect from the
+ * components that use the keys.
+ */
+export function registerTranslations(
+  english: Dictionary,
+  translations: Partial<Record<Locale, Dictionary>>,
+): void {
+  Object.assign(enStore, english);
+  for (const [code, dict] of Object.entries(translations)) {
+    if (!dict) continue;
+    const store = (localeStores[code as Locale] ??= {});
+    Object.assign(store, dict);
+  }
+}
+
+function translate(locale: Locale, key: TranslationKey): string {
+  return localeStores[locale]?.[key] ?? enStore[key] ?? key;
+}
+
 interface I18nValue {
   locale: Locale;
   t: (key: TranslationKey) => string;
@@ -298,7 +329,7 @@ interface I18nValue {
 
 const I18nContext = createContext<I18nValue>({
   locale: "en",
-  t: (key) => en[key],
+  t: (key) => translate("en", key),
 });
 
 function subscribeToLocale(onChange: () => void): () => void {
@@ -316,8 +347,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     () => "en" as Locale,
   );
 
-  const t = (key: TranslationKey): string =>
-    dictionaries[locale]?.[key] ?? en[key];
+  const t = (key: TranslationKey): string => translate(locale, key);
 
   return (
     <I18nContext.Provider value={{ locale, t }}>
