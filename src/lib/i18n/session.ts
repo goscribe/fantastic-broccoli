@@ -155,6 +155,10 @@ const en = {
   "session.debriefPreparing": "Putting together your debrief",
   "session.debriefGenerated": "Generated from this session's answers",
   "session.creditsEarned": "credits earned",
+  "session.nextStepTitle": "Keep it going tomorrow",
+  "session.nextStepBody":
+    "Scribe will build a short recall session from what you missed today and email you when it's ready. The cards you studied come due tomorrow too.",
+  "session.reviewDueCards": "Review due cards",
   // Session card
   "session.generationFailed": "Generation failed",
   "session.cardFailedBody":
@@ -352,6 +356,9 @@ registerTranslations(en, {
     "session.debriefWriting": "Redactando tu guía de estudio",
     "session.debriefPreparing": "Preparando tu resumen",
     "session.debriefGenerated": "Generado a partir de las respuestas de esta sesión",
+    "session.nextStepTitle": "Sigue mañana",
+    "session.nextStepBody": "Scribe creará una breve sesión de repaso con lo que fallaste hoy y te avisará por correo cuando esté lista. Las tarjetas que estudiaste también vencen mañana.",
+    "session.reviewDueCards": "Repasar tarjetas pendientes",
     "session.creditsEarned": "créditos ganados",
     "session.generationFailed": "Generación fallida",
     "session.cardFailedBody":
@@ -547,6 +554,9 @@ registerTranslations(en, {
     "session.debriefWriting": "Rédaction de votre guide d'étude",
     "session.debriefPreparing": "Préparation de votre bilan",
     "session.debriefGenerated": "Généré à partir des réponses de cette session",
+    "session.nextStepTitle": "Continuez demain",
+    "session.nextStepBody": "Scribe créera une courte session de rappel à partir de vos erreurs d'aujourd'hui et vous enverra un e-mail quand elle sera prête. Les cartes étudiées seront aussi à revoir demain.",
+    "session.reviewDueCards": "Réviser les cartes dues",
     "session.creditsEarned": "crédits gagnés",
     "session.generationFailed": "Échec de la génération",
     "session.cardFailedBody":
@@ -747,6 +757,9 @@ registerTranslations(en, {
     "session.debriefWriting": "Dein Lernleitfaden wird erstellt",
     "session.debriefPreparing": "Deine Auswertung wird zusammengestellt",
     "session.debriefGenerated": "Aus den Antworten dieser Sitzung erstellt",
+    "session.nextStepTitle": "Morgen weitermachen",
+    "session.nextStepBody": "Scribe erstellt aus deinen heutigen Fehlern eine kurze Wiederholungssitzung und benachrichtigt dich per E-Mail, sobald sie bereit ist. Deine gelernten Karten sind morgen ebenfalls fällig.",
+    "session.reviewDueCards": "Fällige Karten wiederholen",
     "session.creditsEarned": "Credits verdient",
     "session.generationFailed": "Generierung fehlgeschlagen",
     "session.cardFailedBody":
@@ -935,6 +948,9 @@ registerTranslations(en, {
     "session.debriefWriting": "正在撰写你的学习指南",
     "session.debriefPreparing": "正在整理你的总结",
     "session.debriefGenerated": "根据本次会话的答案生成",
+    "session.nextStepTitle": "明天继续",
+    "session.nextStepBody": "Scribe 会根据你今天的错误生成一个简短的回顾学习，准备好后会发邮件通知你。你学过的卡片明天也将到期复习。",
+    "session.reviewDueCards": "复习到期卡片",
     "session.creditsEarned": "积分已获得",
     "session.generationFailed": "生成失败",
     "session.cardFailedBody":
@@ -1126,6 +1142,9 @@ registerTranslations(en, {
     "session.debriefWriting": "आपकी अध्ययन गाइड लिखी जा रही है",
     "session.debriefPreparing": "आपका सारांश तैयार हो रहा है",
     "session.debriefGenerated": "इस सत्र के उत्तरों से बनाया गया",
+    "session.nextStepTitle": "कल भी जारी रखें",
+    "session.nextStepBody": "Scribe आज की गलतियों से एक छोटा रिकॉल सत्र बनाएगा और तैयार होने पर आपको ईमेल करेगा। आपके पढ़े हुए कार्ड भी कल रिव्यू के लिए ड्यू होंगे।",
+    "session.reviewDueCards": "ड्यू कार्ड रिव्यू करें",
     "session.creditsEarned": "क्रेडिट अर्जित",
     "session.generationFailed": "बनाना विफल रहा",
     "session.cardFailedBody":
@@ -1324,6 +1343,9 @@ registerTranslations(en, {
     "session.debriefWriting": "Sinusulat ang iyong study guide",
     "session.debriefPreparing": "Inihahanda ang iyong debrief",
     "session.debriefGenerated": "Mula sa mga sagot ng session na ito",
+    "session.nextStepTitle": "Ituloy bukas",
+    "session.nextStepBody": "Gagawa ang Scribe ng maikling recall session mula sa mga pagkakamali mo ngayon at mag-eemail kapag handa na. Due na rin bukas ang mga card na inaral mo.",
+    "session.reviewDueCards": "I-review ang mga due card",
     "session.creditsEarned": "credits ang nakuha",
     "session.generationFailed": "Nabigo ang paggawa",
     "session.cardFailedBody":
