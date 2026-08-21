@@ -21,6 +21,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import {
+  Home,
+  Layers,
   ChevronRight,
   FilePlus2,
   FolderPlus,
@@ -266,7 +268,7 @@ export function Sidebar({
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            <ClayIcon src="/illustrations/journey.png" className="h-7 w-7" />
+            <Home className="h-4 w-4" />
             {t("nav.home")}
           </Link>
           <Link
@@ -278,7 +280,7 @@ export function Sidebar({
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            <ClayIcon src="/illustrations/cards.png" className="h-7 w-7" />
+            <Layers className="h-4 w-4" />
             {t("nav.flashcards")}
           </Link>
           <Link
