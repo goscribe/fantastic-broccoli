@@ -278,10 +278,7 @@ export default function HomePage() {
               </>
             )}
             <div className="relative max-w-lg">
-              <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-accent-foreground">
-                {resumable ? t("home.continueStudying") : t("home.getStarted")}
-              </span>
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight mt-3 leading-snug">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight leading-snug">
                 {resumable
                   ? resumable.session.title
                   : t("misc.firstWinTitle")}

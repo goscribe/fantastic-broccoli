@@ -21,16 +21,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import {
-  Home,
-  Layers,
   ChevronRight,
   FilePlus2,
   FolderPlus,
   Plus,
   Search,
   X,
-  Users,
-  Settings,
   LogOut,
 } from "lucide-react";
 
@@ -246,37 +242,55 @@ export function Sidebar({
           <Link
             href="/"
             className={cn(
-              "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+              "flex items-center gap-2 rounded-md px-1.5 py-1.5 text-[13px] font-medium",
               pathname === "/"
                 ? "bg-accent-soft text-accent"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            <Home className="h-4 w-4" />
+            <Image
+              src="/illustrations/icons/nav-home.png"
+              alt=""
+              width={40}
+              height={40}
+              className="pointer-events-none h-[18px] w-[18px] shrink-0 select-none object-contain"
+            />
             {t("nav.home")}
           </Link>
           <Link
             href="/flashcards"
             className={cn(
-              "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+              "flex items-center gap-2 rounded-md px-1.5 py-1.5 text-[13px] font-medium",
               pathname.startsWith("/flashcards")
                 ? "bg-accent-soft text-accent"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            <Layers className="h-4 w-4" />
+            <Image
+              src="/illustrations/icons/nav-cards.png"
+              alt=""
+              width={40}
+              height={40}
+              className="pointer-events-none h-[18px] w-[18px] shrink-0 select-none object-contain"
+            />
             {t("nav.flashcards")}
           </Link>
           <Link
             href="/shared"
             className={cn(
-              "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+              "flex items-center gap-2 rounded-md px-1.5 py-1.5 text-[13px] font-medium",
               pathname.startsWith("/shared")
                 ? "bg-accent-soft text-accent"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            <Users className="h-4 w-4" />
+            <Image
+              src="/illustrations/icons/nav-shared.png"
+              alt=""
+              width={40}
+              height={40}
+              className="pointer-events-none h-[18px] w-[18px] shrink-0 select-none object-contain"
+            />
             {t("nav.shared")}
           </Link>
         </div>
@@ -402,13 +416,19 @@ export function Sidebar({
         <Link
           href="/settings"
           className={cn(
-            "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+            "flex items-center gap-2 rounded-md px-1.5 py-1.5 text-[13px] font-medium",
             pathname.startsWith("/settings")
               ? "bg-accent-soft text-accent"
               : "text-muted-foreground hover:bg-muted hover:text-foreground",
           )}
         >
-          <Settings className="h-4 w-4" />
+          <Image
+            src="/illustrations/icons/nav-settings.png"
+            alt=""
+            width={40}
+            height={40}
+            className="pointer-events-none h-[18px] w-[18px] shrink-0 select-none object-contain"
+          />
           {t("nav.settings")}
         </Link>
         {user && (
