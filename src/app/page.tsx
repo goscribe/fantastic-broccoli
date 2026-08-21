@@ -36,6 +36,7 @@ import {
 import { onTreeChanged } from "@/lib/tree-events";
 import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
@@ -273,6 +274,14 @@ export default function HomePage() {
                 "radial-gradient(ellipse 40% 90% at 0% 100%, rgba(105,82,224,0.12) 0%, transparent 55%)",
             }}
           />
+          <Image
+            src="/illustrations/flag.png"
+            alt=""
+            width={220}
+            height={220}
+            priority
+            className="pointer-events-none absolute -top-10 right-6 hidden w-44 select-none drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] md:block lg:right-10 lg:w-52"
+          />
           <div className="relative flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-lg">
               <p className="text-[11px] font-semibold text-accent-bright">
@@ -331,7 +340,7 @@ export default function HomePage() {
               )}
             </div>
             {resumable && (
-              <div className="hidden sm:block w-64">
+              <div className="hidden sm:block w-64 md:mr-48 lg:mr-56">
                 <div className="flex items-baseline justify-between mb-2">
                   <span className="text-[10px] font-semibold text-white/45">
                     {t("misc.progress")}
