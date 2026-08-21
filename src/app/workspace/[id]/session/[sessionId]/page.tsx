@@ -52,7 +52,8 @@ import { WarmupQuiz } from "@/components/onboarding/warmup-quiz";
 import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
-import { formatDuration, formatRelativeDate } from "@/lib/utils";
+import { ACTIVITY_TYPE_LABELS } from "@/components/session/activity-item";
+import { cn, formatDuration, formatRelativeDate } from "@/lib/utils";
 import {
   ArrowLeft,
   Check,
@@ -524,9 +525,9 @@ export default function SessionDetailPage() {
   };
 
   return (
-    <div className="flex-1 flex min-h-0 overflow-hidden">
+    <div className="flex-1 flex min-h-0">
       {/* Study column */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 min-h-0">
       {/* Header */}
       <header className="border-b border-border bg-card z-10">
         <div className="px-4 sm:px-6 h-12 flex items-center gap-2 sm:gap-3">
@@ -704,55 +705,70 @@ export default function SessionDetailPage() {
 
       {/* Journey waypoints pinned to the bottom */}
       {planReady && (
-        <footer className="shrink-0 border-t border-border bg-card px-4 sm:px-22 pb-3 pt-4">
-          <div className="flex w-full items-center gap-5">
+        <footer className="relative z-20 shrink-0 border-t border-border bg-card px-4 pb-3 pt-3 sm:px-22">
+          <div className="flex w-full items-center gap-4">
             <span className="shrink-0 text-xs text-muted-foreground tabular-nums">
               {completedCount}/{activities.length} {t("session.doneCount")}
             </span>
             <div className="relative flex-1">
-              <div className="absolute left-0 right-0 top-1/2 h-2.5 -translate-y-1/2 rounded-full bg-muted" />
+              <div className="absolute left-0 right-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-muted" />
               <div
-                className="absolute left-0 top-1/2 h-2.5 -translate-y-1/2 rounded-full bg-accent transition-all duration-700 ease-out"
+                className="absolute left-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-accent transition-all duration-700 ease-out"
                 style={{ width: `${session.progress}%` }}
               />
               <div className="relative flex items-center justify-between">
                 {activities.map((activity, i) => {
                   const done = activity.status === "completed";
                   const isActive = activity.id === activeActivityId;
+                  const typeLabel = t(
+                    ACTIVITY_TYPE_LABELS[activity.type] ??
+                      "session.typeActivity",
+                  );
                   return (
                     <button
                       key={activity.id}
                       type="button"
                       onClick={() => setActiveActivityId(activity.id)}
                       className="group relative flex items-center justify-center"
+                      aria-current={isActive ? "step" : undefined}
+                      aria-label={`${typeLabel}: ${activity.title}`}
                     >
-                      <Image
-                        src={ACTIVITY_ICON[activity.type]}
-                        alt=""
-                        width={64}
-                        height={64}
-                        className={`pointer-events-none select-none object-contain transition-all duration-300 ${
+                      <span
+                        className={cn(
+                          "flex h-9 w-9 items-center justify-center rounded-xl border bg-card shadow-sm transition-all duration-200",
                           isActive
-                            ? "h-12 w-12 drop-shadow-md"
+                            ? "scale-105 border-accent ring-2 ring-accent/25"
                             : done
-                              ? "h-10 w-10"
-                              : "h-10 w-10 opacity-45 grayscale-[35%] group-hover:opacity-90 group-hover:grayscale-0"
-                        }`}
-                      />
+                              ? "border-border"
+                              : "border-border opacity-70 group-hover:opacity-100",
+                        )}
+                      >
+                        <Image
+                          src={ACTIVITY_ICON[activity.type]}
+                          alt=""
+                          width={28}
+                          height={28}
+                          className="pointer-events-none h-6 w-6 select-none object-contain"
+                        />
+                      </span>
                       {done && (
-                        <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                          <Check className="h-3 w-3" />
+                        <span className="absolute -right-1 -top-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                          <Check className="h-2.5 w-2.5" />
                         </span>
                       )}
-                      <div className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 hidden w-max max-w-52 -translate-x-1/2 rounded-xl border border-border bg-card px-3 py-2 text-left shadow-lg group-hover:block">
-                        <p className="text-[11px] font-semibold text-muted-foreground tabular-nums">
-                          {t("session.activityWord")} {i + 1} ·{" "}
-                          {t(`session.phase${phaseOf(activity.type)}`)}
+                      <div className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-2 hidden w-max max-w-56 -translate-x-1/2 rounded-xl border border-border bg-card px-3 py-2 text-left shadow-lg group-hover:block group-focus-visible:block">
+                        <p className="text-[11px] font-semibold text-accent">
+                          {typeLabel}
+                          <span className="font-medium text-muted-foreground">
+                            {" "}
+                            · {t(`session.phase${phaseOf(activity.type)}`)}
+                          </span>
                         </p>
-                        <p className="mt-0.5 truncate text-xs font-semibold">
+                        <p className="mt-0.5 text-xs font-semibold">
                           <MathText text={activity.title} />
                         </p>
                         <p className="mt-0.5 text-[11px] text-muted-foreground">
+                          {t("session.activityWord")} {i + 1} ·{" "}
                           {formatDuration(activity.estimatedMinutes)}
                         </p>
                       </div>

@@ -2,17 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { GlowField } from "@/components/graphics/landing-art";
-import { ConfettiDots } from "@/components/graphics/floating-decor";
+import { DotGrid, GlowField } from "@/components/graphics/landing-art";
 import {
+  ArtStage,
   CtaBand,
   FeatureSplit,
-  GlossyArt,
 } from "@/components/graphics/marketing-art";
-import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { Button } from "@/components/ui/button";
 import { HeroPreview, StatsStrip } from "./hero-preview";
-import { homeScenes, howItWorks, subjects, testimonials } from "./data";
+import { features, homeScenes, howItWorks, subjects, testimonials } from "./data";
 
 export const metadata: Metadata = {
   title: "Turn PDFs & Notes into Flashcards, Quizzes & Study Guides",
@@ -22,15 +20,17 @@ export const metadata: Metadata = {
 };
 
 export default function LandingPage() {
+  const [featured, ...restQuotes] = testimonials;
+
   return (
     <>
       <section className="relative overflow-hidden pb-16 pt-12 md:pb-24 md:pt-20">
         <GlowField />
-        <ConfettiDots className="hidden md:block" />
         <div className="relative mx-auto max-w-6xl px-6">
-          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+          <DotGrid className="inset-y-0 right-0 hidden w-1/2 lg:block" />
+          <div className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
             <div className="animate-fade-up">
-              <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
+              <h1 className="text-4xl tracking-tight text-balance sm:text-5xl md:text-6xl">
                 Stop re-reading.
                 <br />
                 <span className="text-accent">Start learning.</span>
@@ -57,18 +57,15 @@ export default function LandingPage() {
                 Free to start · No credit card required
               </p>
             </div>
-            <div className="hidden animate-fade-up lg:block">
-              <HeroPreview />
-            </div>
-          </div>
-
-          <div className="mt-16 overflow-hidden rounded-3xl border border-border bg-card/60 px-4 py-6 sm:hidden">
-            <GlossyArt
+            <ArtStage
               src="/illustrations/marketing/mkt-hero.png"
-              priority
-              width={880}
-              height={594}
-            />
+              tint="accent"
+              side="right"
+              size="lg"
+              className="animate-fade-up p-5 sm:p-6"
+            >
+              <HeroPreview />
+            </ArtStage>
           </div>
 
           <div className="relative mt-16 border-t border-border pt-10">
@@ -79,14 +76,13 @@ export default function LandingPage() {
             <p className="text-center text-sm text-muted-foreground">
               Built for every subject you study
             </p>
-            <ul className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <ul className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
               {subjects.map((subject) => (
                 <li
-                  key={subject.label}
-                  className="flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-sm font-medium text-muted-foreground"
+                  key={subject}
+                  className="rounded-full border border-border bg-card px-3.5 py-1.5 text-sm font-medium text-muted-foreground"
                 >
-                  <WorkspaceIcon icon={subject.icon} className="h-5 w-5" />
-                  {subject.label}
+                  {subject}
                 </li>
               ))}
             </ul>
@@ -96,25 +92,20 @@ export default function LandingPage() {
 
       <section className="border-y border-border bg-card/40 py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            Upload anything. Study the fun way.
-          </h2>
-          <ol className="mt-10 grid gap-10 sm:grid-cols-3 sm:gap-8">
+          <h2 className="text-2xl tracking-tight sm:text-3xl">How it works</h2>
+          <ol className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6">
             {howItWorks.map((step) => (
               <li key={step.num}>
-                <div className="mb-5 flex h-44 items-end justify-center overflow-hidden rounded-2xl border border-border bg-background">
-                  <Image
-                    src={step.art}
-                    alt=""
-                    width={280}
-                    height={220}
-                    className="h-40 w-auto object-contain drop-shadow-[0_12px_24px_rgba(105,82,224,0.2)]"
-                  />
-                </div>
-                <span className="text-[11px] font-bold tabular-nums text-accent">
+                <ArtStage
+                  src={step.art}
+                  tint={step.tint}
+                  side={step.side}
+                  size="sm"
+                />
+                <span className="mt-5 flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-sm font-bold text-accent">
                   {step.num}
                 </span>
-                <h3 className="mt-1 text-base font-semibold">{step.title}</h3>
+                <h3 className="mt-3 text-base font-semibold">{step.title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                   {step.description}
                 </p>
@@ -124,10 +115,55 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 className="text-2xl tracking-tight sm:text-3xl">
+                One study session, everything in it
+              </h2>
+              <p className="mt-3 max-w-xl text-muted-foreground">
+                Flashcards, quizzes, worksheets, and readings aren’t separate
+                tools — Scribe builds them together into one guided session.
+              </p>
+            </div>
+            <Link
+              href="/landing/features"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline"
+            >
+              Explore all features
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {features.slice(0, 3).map((feature) => (
+              <li
+                key={feature.title}
+                className="rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm"
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted/50">
+                  <Image
+                    src={feature.icon}
+                    alt=""
+                    width={32}
+                    height={32}
+                    className="h-7 w-7 object-contain"
+                  />
+                </span>
+                <h3 className="mt-3 text-sm font-semibold">{feature.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                  {feature.description}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {homeScenes.map((scene, i) => (
         <section
           key={scene.title}
-          className={`py-16 md:py-24 ${i % 2 === 1 ? "border-y border-border bg-card/40" : ""}`}
+          className={`py-16 md:py-24 ${i % 2 === 0 ? "border-y border-border bg-card/40" : ""}`}
         >
           <div className="mx-auto max-w-6xl px-6">
             <FeatureSplit scene={scene} />
@@ -137,33 +173,44 @@ export default function LandingPage() {
 
       <section className="border-y border-border py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                What studying with Scribe feels like
-              </h2>
-            </div>
-            <GlossyArt
-              src="/illustrations/marketing/mkt-quiz.png"
-              className="hidden w-28 sm:block"
-              width={808}
-              height={828}
-            />
-          </div>
-          <ul className="mt-10 grid gap-5 sm:grid-cols-2">
-            {testimonials.map((t) => (
-              <li
-                key={t.name}
-                className="rounded-2xl border border-border bg-card p-6"
-              >
-                <p className="text-sm leading-relaxed text-pretty">
-                  “{t.quote}”
+          <h2 className="text-2xl tracking-tight sm:text-3xl">
+            What studying with Scribe feels like
+          </h2>
+          <div className="mt-10 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+            <ArtStage
+              src="/illustrations/marketing/mkt-worksheet.png"
+              tint="sky"
+              side="right"
+              size="md"
+              className="p-6 sm:p-8"
+            >
+              <blockquote className="relative z-10 max-w-md">
+                <p className="text-base leading-relaxed text-pretty sm:text-lg">
+                  “{featured.quote}”
                 </p>
-                <p className="mt-4 text-sm font-semibold">{t.name}</p>
-                <p className="text-[12px] text-muted-foreground">{t.role}</p>
-              </li>
-            ))}
-          </ul>
+                <footer className="mt-5">
+                  <p className="text-sm font-semibold">{featured.name}</p>
+                  <p className="text-[12px] text-muted-foreground">
+                    {featured.role}
+                  </p>
+                </footer>
+              </blockquote>
+            </ArtStage>
+            <ul className="grid gap-5">
+              {restQuotes.map((t) => (
+                <li
+                  key={t.name}
+                  className="rounded-2xl border border-border bg-card p-5"
+                >
+                  <p className="text-sm leading-relaxed text-pretty">
+                    “{t.quote}”
+                  </p>
+                  <p className="mt-3 text-sm font-semibold">{t.name}</p>
+                  <p className="text-[12px] text-muted-foreground">{t.role}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 

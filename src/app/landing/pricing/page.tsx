@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { absoluteUrl } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
-import { CtaBand, GlossyArt } from "@/components/graphics/marketing-art";
+import { CtaBand } from "@/components/graphics/marketing-art";
 import { GlowField } from "@/components/graphics/landing-art";
 import { plans } from "../data";
-import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -24,24 +24,14 @@ export default function LandingPricingPage() {
       <section className="relative overflow-hidden py-16 md:py-20">
         <GlowField />
         <div className="relative mx-auto max-w-6xl px-6">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-                Simple, student-friendly pricing
-              </h1>
-              <p className="mt-4 max-w-xl text-lg text-muted-foreground">
-                Start free — no credit card required. Upgrade when you need more
-                study sessions. Every plan includes the full toolkit: readings,
-                worksheets, flashcards, and the copilot.
-              </p>
-            </div>
-            <GlossyArt
-              src="/illustrations/marketing/mkt-quiz.png"
-              className="mx-auto hidden w-56 lg:block"
-              width={808}
-              height={828}
-            />
-          </div>
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            Simple, student-friendly pricing
+          </h1>
+          <p className="mt-4 max-w-xl text-lg text-muted-foreground">
+            Start free — no credit card required. Upgrade when you need more
+            study sessions. Every plan includes the full toolkit: readings,
+            worksheets, flashcards, and the copilot.
+          </p>
 
           <div className="mx-auto mt-12 grid gap-5 sm:grid-cols-3">
             {plans.map((plan) => (
