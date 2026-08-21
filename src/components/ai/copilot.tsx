@@ -345,7 +345,7 @@ export function Copilot({
   return (
     <div
       className="flex flex-col bg-card border-border min-h-0 max-sm:fixed max-sm:inset-0 max-sm:z-50 max-sm:w-full sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]"
-      style={{ "--copilot-width": width ? `${width}px` : "25vw" } as React.CSSProperties}
+      style={{ "--copilot-width": width ? `${width}px` : "40vw" } as React.CSSProperties}
     >
       {/* Resize handle */}
       <div
