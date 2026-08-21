@@ -1,43 +1,87 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Image from "next/image";
 import { ScribeMark } from "@/components/graphics/logo";
+import {
+  ConfettiDots,
+  Sticker,
+} from "@/components/graphics/floating-decor";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/misc";
 
-const lines = [
-  "Small sessions beat cramming.",
-  "Recall it before you reread it.",
-  "Twenty focused minutes counts.",
-  "Spaced practice sticks.",
-  "Test yourself — it's the fastest way to learn.",
-  "Consistency over intensity.",
-];
-
+/**
+ * Boot splash while auth resolves. Keep this light — it sits in front of
+ * every signed-in page — and keep the first paint deterministic so it
+ * does not trip a hydration mismatch.
+ */
 export function FullScreenLoader() {
-  const [index, setIndex] = useState(() =>
-    Math.floor(Math.random() * lines.length),
-  );
-
-  useEffect(() => {
-    const t = setInterval(() => setIndex((i) => (i + 1) % lines.length), 2600);
-    return () => clearInterval(t);
-  }, []);
+  const { t } = useI18n();
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-background">
-      <div className="relative animate-float">
-        <div className="absolute inset-0 rounded-full bg-accent/40 blur-2xl animate-loader-glow" />
-        <ScribeMark className="relative h-12 w-12" />
+    <div
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+      className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-background px-6"
+    >
+      <ConfettiDots className="opacity-60" />
+      <Sticker
+        src="/illustrations/props/star-gold.png"
+        className="right-[11%] top-[16%] hidden w-10 sm:block"
+        delay="-0.4s"
+      />
+      <Sticker
+        src="/illustrations/props/pencil.png"
+        className="bottom-[18%] left-[10%] hidden w-12 rotate-[-18deg] sm:block"
+        delay="-1.2s"
+      />
+      <Sticker
+        src="/illustrations/props/book-blue.png"
+        className="right-[14%] bottom-[20%] hidden w-11 sm:block"
+        delay="-0.8s"
+      />
+
+      <div className="relative z-10 flex flex-col items-center">
+        <div className="relative flex h-36 w-44 items-end justify-center sm:h-40 sm:w-48">
+          <div
+            aria-hidden
+            className="absolute left-1/2 top-[42%] h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/35 blur-3xl motion-reduce:animate-none animate-loader-glow"
+          />
+          <span
+            aria-hidden
+            className="absolute bottom-1 left-1/2 h-2.5 w-[4.25rem] -translate-x-1/2 rounded-full bg-foreground/25 blur-[3px] motion-reduce:animate-none animate-blob-shadow"
+          />
+          <Image
+            src="/illustrations/bot.png"
+            alt=""
+            width={280}
+            height={204}
+            priority
+            unoptimized
+            className="relative h-28 w-auto origin-bottom select-none motion-reduce:animate-none animate-blob-hop sm:h-32"
+          />
+        </div>
+
+        <div className="mt-5 flex items-center gap-2">
+          <ScribeMark className="h-7 w-7" />
+          <span className="text-lg font-bold tracking-tight">Scribe</span>
+        </div>
+
+        <div className="mt-5 flex items-center gap-1.5" aria-hidden>
+          {[0, 1, 2].map((i) => (
+            <span
+              key={i}
+              className="h-2 w-2 rounded-full bg-accent motion-reduce:animate-none animate-loader-dot"
+              style={{ animationDelay: `${i * 0.16}s` }}
+            />
+          ))}
+        </div>
+
+        <p className="mt-3 text-center text-sm text-muted-foreground">
+          {t("misc.gettingReady")}
+        </p>
+        <span className="sr-only">{t("common.loading")}</span>
       </div>
-      <span className="text-lg font-bold tracking-tight">Scribe</span>
-      <div className="relative h-1 w-40 overflow-hidden rounded-full bg-muted">
-        <div className="absolute inset-y-0 rounded-full bg-accent animate-loader-bar" />
-      </div>
-      <p
-        key={index}
-        className="animate-fade-up px-6 text-center text-sm text-muted-foreground"
-      >
-        {lines[index]}
-      </p>
     </div>
   );
 }
