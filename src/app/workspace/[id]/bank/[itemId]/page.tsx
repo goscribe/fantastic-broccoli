@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
@@ -24,7 +25,6 @@ import "@/lib/i18n/workspace";
 import {
   ArrowLeft,
   Check,
-  Layers,
   Loader2,
   Pencil,
   Printer,
@@ -119,7 +119,13 @@ export default function BankItemPage() {
     return (
       <WorkspaceShell workspace={workspace}>
         <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6 animate-fade-up">
-          <Layers className="h-10 w-10 mx-auto mb-3 text-faint" />
+          <Image
+            src="/illustrations/icons/target.png"
+            alt=""
+            width={160}
+            height={171}
+            className="pointer-events-none mx-auto mb-3 h-20 w-auto select-none"
+          />
           <p className="text-sm font-semibold">{t("ws.itemNotFound")}</p>
           <p className="text-xs text-muted-foreground mt-1.5">
             {t("ws.itemNotFoundHint")}

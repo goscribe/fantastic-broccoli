@@ -30,7 +30,6 @@ import {
   ExplainAloudContent,
   WorksheetContent,
 } from "@/types";
-import { ActivityItem } from "@/components/session/activity-item";
 import { ComprehensionActivity } from "@/components/session/comprehension-activity";
 import { McqActivity } from "@/components/session/mcq-activity";
 import {
@@ -45,13 +44,12 @@ import { ExplainAloudActivity } from "@/components/session/explain-aloud-activit
 import { WorksheetActivity } from "@/components/session/worksheet-activity";
 import { SessionDebrief } from "@/components/session/session-debrief";
 import { MathText } from "@/components/ui/markdown-text";
-import { ProgressBar } from "@/components/ui/progress-bar";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
 import { WarmupQuiz } from "@/components/onboarding/warmup-quiz";
+import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { formatDuration, formatRelativeDate } from "@/lib/utils";
@@ -65,6 +63,18 @@ import {
   Trash2,
   X,
 } from "lucide-react";
+
+const ACTIVITY_ICON: Record<SessionActivity["type"], string> = {
+  reading: "/illustrations/icons/act-reading.png",
+  comprehension_check: "/illustrations/icons/act-comprehension.png",
+  mcq: "/illustrations/icons/act-mcq.png",
+  flashcard_review: "/illustrations/icons/act-flashcards.png",
+  worksheet: "/illustrations/icons/act-worksheet.png",
+  interactive: "/illustrations/icons/act-interactive.png",
+  vocab_recall: "/illustrations/icons/act-vocab.png",
+  cloze: "/illustrations/icons/act-cloze.png",
+  explain_aloud: "/illustrations/icons/act-explain.png",
+};
 
 const phaseOf = (t: SessionActivity["type"]) =>
   t === "reading" || t === "comprehension_check" || t === "interactive"
@@ -366,6 +376,17 @@ export default function SessionDetailPage() {
     setActiveActivityId(next?.id ?? null);
   };
 
+  const cheerKey =
+    !planReady || completedCount === 0 || !activeActivity
+      ? null
+      : completedCount >= activities.length - 1
+        ? "session.cheerAlmost"
+        : completedCount === 1
+          ? "session.cheerFirst"
+          : completedCount >= activities.length / 2
+            ? "session.cheerHalf"
+            : "session.cheerKeepGoing";
+
   const activeIndex = activeActivity
     ? activities.findIndex((a) => a.id === activeActivity.id)
     : activities.length;
@@ -523,29 +544,11 @@ export default function SessionDetailPage() {
           <h1 className="text-sm font-bold tracking-tight truncate">
             <MathText text={session.title} />
           </h1>
-          <Badge variant="accent" className="shrink-0 max-sm:hidden">
-            {t(
-              session.depth === "light"
-                ? "session.depthLight"
-                : session.depth === "deep"
-                  ? "session.depthDeep"
-                  : "session.depthModerate",
-            )}
-          </Badge>
           {planReady && (
             <div className="ml-auto flex items-center gap-2.5 sm:gap-4 shrink-0">
               <span className="hidden md:flex items-center gap-1 text-xs text-muted-foreground">
                 <Clock className="h-3 w-3" />
                 {formatDuration(totalEstimated)}
-              </span>
-              <span className="hidden sm:inline text-xs text-muted-foreground">
-                {completedCount}/{activities.length} {t("session.doneCount")}
-              </span>
-              <div className="hidden sm:block w-32">
-                <ProgressBar value={session.progress} size="sm" />
-              </div>
-              <span className="text-xs font-semibold tabular-nums">
-                {session.progress}%
               </span>
               <button
                 type="button"
@@ -566,42 +569,9 @@ export default function SessionDetailPage() {
 
       {/* Content */}
       <div className="flex-1 flex min-h-0 overflow-hidden w-full">
-        {/* Activity list sidebar on desktop */}
-        {planReady && (
-        <aside className="hidden lg:flex w-72 flex-shrink-0 flex-col border-r border-border overflow-y-auto">
-          <div className="py-6 pr-4 pl-5">
-            <p className="text-xs font-semibold text-muted-foreground mb-3">
-              {t("session.yourPlan")}
-            </p>
-            <div className="space-y-1">
-              {activities.map((activity, i) => {
-                const phase = phaseOf(activity.type);
-                const prevPhase =
-                  i > 0 ? phaseOf(activities[i - 1].type) : null;
-                return (
-                  <div key={activity.id}>
-                    {phase !== prevPhase && (
-                      <p className="text-[11px] font-semibold text-faint px-3 pt-3 pb-1 first:pt-0">
-                        {t(`session.phase${phase}`)}
-                      </p>
-                    )}
-                    <ActivityItem
-                      activity={activity}
-                      index={i}
-                      isActive={activity.id === activeActivityId}
-                      onClick={setActiveActivityId}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </aside>
-        )}
-
         {/* Main study area */}
         <main className="flex-1 overflow-y-auto bg-card">
-          <div className="px-4 sm:px-8 py-2">
+          <div className="mx-auto w-full max-w-3xl px-5 sm:px-10 py-6">
             {showExtendPrompt && (
               <div className="mb-5 rounded-2xl border border-accent/30 bg-accent-soft/60 px-5 py-4 flex flex-wrap items-center gap-3 animate-fade-up">
                 <div className="flex-1 min-w-56">
@@ -683,10 +653,31 @@ export default function SessionDetailPage() {
               />
             ) : activeActivity ? (
               <div className="space-y-5 animate-fade-up" key={activeActivity.id}>
+                {cheerKey && (
+                  <div className="flex items-center gap-2">
+                    <Image
+                      src="/illustrations/props/star-gold.png"
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="pointer-events-none h-5 w-5 shrink-0 select-none object-contain"
+                    />
+                    <p className="text-xs font-semibold text-accent">
+                      {t(cheerKey)}
+                    </p>
+                  </div>
+                )}
                 <div className="flex items-center justify-between">
-                  <h2 className="text-base font-bold tracking-tight">
-                    <MathText text={activeActivity.title} />
-                  </h2>
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-semibold text-muted-foreground tabular-nums">
+                      {t("session.activityWord")} {activeIndex + 1}{" "}
+                      {t("session.of")} {activities.length} ·{" "}
+                      {t(`session.phase${phaseOf(activeActivity.type)}`)}
+                    </p>
+                    <h2 className="mt-1 text-base font-bold tracking-tight">
+                      <MathText text={activeActivity.title} />
+                    </h2>
+                  </div>
                   <Button
                     variant="ghost"
                     size="sm"
@@ -707,28 +698,75 @@ export default function SessionDetailPage() {
               />
             )}
 
-            {/* Mobile activity list */}
-            {planReady && (
-            <div className="lg:hidden mt-10 border-t border-border pt-6">
-              <p className="text-xs font-semibold text-muted-foreground mb-3">
-                {t("session.yourPlan")}
-              </p>
-              <div className="space-y-1">
-                {activities.map((activity, i) => (
-                  <ActivityItem
-                    key={activity.id}
-                    activity={activity}
-                    index={i}
-                    isActive={activity.id === activeActivityId}
-                    onClick={setActiveActivityId}
-                  />
-                ))}
-              </div>
-            </div>
-            )}
           </div>
         </main>
       </div>
+
+      {/* Journey waypoints pinned to the bottom */}
+      {planReady && (
+        <footer className="shrink-0 border-t border-border bg-card px-4 sm:px-22 pb-3 pt-4">
+          <div className="flex w-full items-center gap-5">
+            <span className="shrink-0 text-xs text-muted-foreground tabular-nums">
+              {completedCount}/{activities.length} {t("session.doneCount")}
+            </span>
+            <div className="relative flex-1">
+              <div className="absolute left-0 right-0 top-1/2 h-2.5 -translate-y-1/2 rounded-full bg-muted" />
+              <div
+                className="absolute left-0 top-1/2 h-2.5 -translate-y-1/2 rounded-full bg-accent transition-all duration-700 ease-out"
+                style={{ width: `${session.progress}%` }}
+              />
+              <div className="relative flex items-center justify-between">
+                {activities.map((activity, i) => {
+                  const done = activity.status === "completed";
+                  const isActive = activity.id === activeActivityId;
+                  return (
+                    <button
+                      key={activity.id}
+                      type="button"
+                      onClick={() => setActiveActivityId(activity.id)}
+                      className="group relative flex items-center justify-center"
+                    >
+                      <Image
+                        src={ACTIVITY_ICON[activity.type]}
+                        alt=""
+                        width={64}
+                        height={64}
+                        className={`pointer-events-none select-none object-contain transition-all duration-300 ${
+                          isActive
+                            ? "h-12 w-12 drop-shadow-md"
+                            : done
+                              ? "h-10 w-10"
+                              : "h-10 w-10 opacity-45 grayscale-[35%] group-hover:opacity-90 group-hover:grayscale-0"
+                        }`}
+                      />
+                      {done && (
+                        <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                          <Check className="h-3 w-3" />
+                        </span>
+                      )}
+                      <div className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 hidden w-max max-w-52 -translate-x-1/2 rounded-xl border border-border bg-card px-3 py-2 text-left shadow-lg group-hover:block">
+                        <p className="text-[11px] font-semibold text-muted-foreground tabular-nums">
+                          {t("session.activityWord")} {i + 1} ·{" "}
+                          {t(`session.phase${phaseOf(activity.type)}`)}
+                        </p>
+                        <p className="mt-0.5 truncate text-xs font-semibold">
+                          <MathText text={activity.title} />
+                        </p>
+                        <p className="mt-0.5 text-[11px] text-muted-foreground">
+                          {formatDuration(activity.estimatedMinutes)}
+                        </p>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            <span className="shrink-0 text-xs font-semibold tabular-nums">
+              {session.progress}%
+            </span>
+          </div>
+        </footer>
+      )}
       </div>
 
       {/* Copilot split pane */}
@@ -883,6 +921,14 @@ function GeneratingPlanCard({
     <div className="flex justify-center px-4 py-12 animate-fade-up">
       <div className="w-full max-w-lg">
         <div className="rounded-2xl border border-border bg-card p-6">
+          <video
+            src="/illustrations/loading.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="pointer-events-none mx-auto mb-5 h-32 w-auto select-none rounded-xl"
+          />
           <div className="flex items-start gap-4">
             <div className="mt-0.5 h-7 w-7 shrink-0 rounded-full border-2 border-accent border-t-transparent animate-spin" />
             <div className="min-w-0 flex-1">

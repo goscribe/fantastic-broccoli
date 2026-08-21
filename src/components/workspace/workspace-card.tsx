@@ -4,10 +4,11 @@ import { Workspace } from "@/types";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { formatRelativeDate, formatDuration } from "@/lib/utils";
+import { accentNameForId } from "@/lib/accent-palette";
+import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import { Clock, ArrowRight, FileText, BookOpen, UserPlus } from "lucide-react";
-import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { AvatarStack } from "@/components/ui/avatar-stack";
 import {
   ResourceActionsMenu,
@@ -44,6 +45,7 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
             : "ws.sessionsInProgress",
         ).replace("{n}", String(activeSessions.length))
       : t("ws.noActiveSessions");
+  const accent = accentNameForId(workspace.id);
 
   return (
     <div
@@ -60,9 +62,13 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
       )}
 
       <div className="flex items-start gap-3">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-muted">
-          <WorkspaceIcon icon={workspace.icon} className="h-6 w-6" />
-        </span>
+        <Image
+          src={`/illustrations/icons/ws-${accent}.png`}
+          alt=""
+          width={80}
+          height={80}
+          className="pointer-events-none h-10 w-10 shrink-0 select-none object-contain"
+        />
         <div className="min-w-0 flex-1 pr-5">
           <div className="flex items-center gap-2">
             <h3 className="font-semibold text-sm leading-tight truncate">

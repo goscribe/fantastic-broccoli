@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
   ArrowRight,
   ArrowUp,
@@ -282,6 +283,14 @@ export default function StudyBotPage() {
       <main className="flex flex-1 flex-col items-center justify-center bg-card px-6 py-10">
         <div className="w-full max-w-xl animate-fade-up">
           <div className="text-center">
+            <Image
+              src="/illustrations/bot.png"
+              alt=""
+              width={200}
+              height={200}
+              priority
+              className="pointer-events-none mx-auto mb-5 h-28 w-auto select-none"
+            />
             <h1 className="text-[26px] font-bold tracking-tight sm:text-3xl">
               {t("misc.studyBotTitle")}
             </h1>

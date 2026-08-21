@@ -4,6 +4,7 @@ import "@/lib/i18n/flashcards";
 import { MathText } from "@/components/ui/markdown-text";
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { EmptyScene } from "@/components/graphics/floating-decor";
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
@@ -304,15 +305,14 @@ export default function MarketplacePage() {
         {isLoading ? (
           <CardGridSkeleton count={8} />
         ) : filtered.length === 0 ? (
-          <div className="rounded-3xl border border-dashed border-border-strong bg-card px-6 py-14 text-center">
-            <Globe className="mx-auto mb-3 h-10 w-10 text-faint" />
-            <p className="text-sm font-semibold">
+          <EmptyScene image="/illustrations/search.png">
+            <p className="text-base font-semibold">
               {t(aiResults !== null ? "fc.mkNoMatches" : "fc.mkNothingHere")}
             </p>
-            <p className="mx-auto mt-1.5 max-w-sm text-xs text-muted-foreground">
+            <p className="mt-1.5 text-sm text-muted-foreground">
               {t(aiResults !== null ? "fc.mkTryDifferent" : "fc.mkEmptyBody")}
             </p>
-          </div>
+          </EmptyScene>
         ) : (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {filtered.map(({ artifact, reason }) => (

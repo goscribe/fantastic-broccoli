@@ -16,7 +16,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   if (
     pathname === "/login" ||
-    pathname === "/landing" ||
+    pathname.startsWith("/landing") ||
     pathname === "/signup" ||
     pathname === "/forgot-password" ||
     pathname === "/verify-email" ||

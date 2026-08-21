@@ -6,10 +6,13 @@ import Link from "next/link";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { fetchSharedWorkspaces } from "@/lib/api/workspace";
 import { Workspace } from "@/types";
-import { Users } from "lucide-react";
 import { AvatarStack } from "@/components/ui/avatar-stack";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
+import {
+  EmptyScene,
+  HeaderDecor,
+} from "@/components/graphics/floating-decor";
 
 export default function SharedPage() {
   const { t } = useI18n();
@@ -25,25 +28,29 @@ export default function SharedPage() {
 
   return (
     <main className="flex-1 px-6 py-6 md:px-10">
-      <div className="mb-6">
-        <h1 className="text-xl font-bold tracking-tight">
-          {t("fc.sharedTitle")}
-        </h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {t("fc.sharedSubtitle")}
-        </p>
+      <div className="mb-6 flex items-center gap-4">
+        <div>
+          <h1 className="text-xl font-bold tracking-tight">
+            {t("fc.sharedTitle")}
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {t("fc.sharedSubtitle")}
+          </p>
+        </div>
+        {shared.length > 0 && (
+          <HeaderDecor image="/illustrations/shared.png" />
+        )}
       </div>
 
       {loading && <CardGridSkeleton count={6} />}
 
       {!loading && shared.length === 0 && (
-        <div className="rounded-xl border border-border bg-card px-6 py-12 text-center">
-          <Users className="mx-auto h-6 w-6 text-faint" />
-          <p className="mt-3 text-sm font-medium">{t("fc.nothingShared")}</p>
-          <p className="mt-1 text-sm text-muted-foreground">
+        <EmptyScene image="/illustrations/shared.png">
+          <p className="text-base font-semibold">{t("fc.nothingShared")}</p>
+          <p className="mt-1.5 text-sm text-muted-foreground">
             {t("fc.nothingSharedBody")}
           </p>
-        </div>
+        </EmptyScene>
       )}
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

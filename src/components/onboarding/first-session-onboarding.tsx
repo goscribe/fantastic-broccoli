@@ -27,6 +27,7 @@ import {
   MailCheck,
   Zap,
 } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import {
@@ -349,9 +350,14 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
         <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
-          <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft text-accent">
-            <Sparkles className="h-6 w-6" />
-          </div>
+          <video
+            src="/illustrations/loading.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="pointer-events-none mx-auto mb-4 h-36 w-auto select-none rounded-xl"
+          />
           <h1 className="text-2xl font-bold tracking-tight">
             Building your study session…
           </h1>
@@ -529,6 +535,16 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
       <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
+        <div className="relative -mx-6 -mt-6 mb-5 overflow-hidden rounded-t-2xl bg-gradient-to-br from-accent-soft via-accent-soft/40 to-transparent px-6 pt-6">
+          <Image
+            src="/illustrations/welcome.png"
+            alt=""
+            width={340}
+            height={255}
+            priority
+            className="pointer-events-none mx-auto h-36 w-auto select-none"
+          />
+        </div>
         <p className="text-xs font-semibold text-accent">Welcome to Scribe</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight">
           What are you studying?

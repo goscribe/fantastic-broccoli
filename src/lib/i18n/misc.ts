@@ -93,6 +93,7 @@ const english = {
   "misc.upgradeNow": "Upgrade Now",
   "misc.startFirstSession": "Start your first study session",
   "misc.planBlurb": "A plan generated around your syllabus and schedule.",
+  "misc.firstWinTitle": "Let's make your first win happen.",
   "misc.progress": "Progress",
   "misc.quickReviewBlurb": "A quick review today keeps them in memory.",
   "misc.studyOverview": "Study overview",
@@ -254,6 +255,7 @@ registerTranslations(english, {
     "misc.upgradeNow": "Mejorar ahora",
     "misc.startFirstSession": "Inicia tu primera sesión de estudio",
     "misc.planBlurb": "Un plan generado según tu temario y tu horario.",
+    "misc.firstWinTitle": "Consigamos tu primera victoria.",
     "misc.progress": "Progreso",
     "misc.quickReviewBlurb": "Un repaso rápido hoy las mantiene en la memoria.",
     "misc.studyOverview": "Resumen de estudio",
@@ -415,6 +417,7 @@ registerTranslations(english, {
     "misc.startFirstSession": "Démarrez votre première session d'étude",
     "misc.planBlurb":
       "Un plan généré autour de votre programme et de votre emploi du temps.",
+    "misc.firstWinTitle": "Remportons votre première victoire.",
     "misc.progress": "Progression",
     "misc.quickReviewBlurb":
       "Une révision rapide aujourd'hui les garde en mémoire.",
@@ -580,6 +583,7 @@ registerTranslations(english, {
     "misc.startFirstSession": "Starte deine erste Lernsitzung",
     "misc.planBlurb":
       "Ein Plan, erstellt rund um deinen Lehrplan und Zeitplan.",
+    "misc.firstWinTitle": "Holen wir deinen ersten Erfolg.",
     "misc.progress": "Fortschritt",
     "misc.quickReviewBlurb":
       "Eine kurze Wiederholung heute hält sie im Gedächtnis.",
@@ -734,6 +738,7 @@ registerTranslations(english, {
     "misc.upgradeNow": "立即升级",
     "misc.startFirstSession": "开始你的第一次学习会话",
     "misc.planBlurb": "根据你的教学大纲和日程生成的计划。",
+    "misc.firstWinTitle": "迎接你的第一次胜利。",
     "misc.progress": "进度",
     "misc.quickReviewBlurb": "今天快速复习一下，让记忆更牢固。",
     "misc.studyOverview": "学习概览",
@@ -889,6 +894,7 @@ registerTranslations(english, {
     "misc.startFirstSession": "अपना पहला स्टडी सेशन शुरू करें",
     "misc.planBlurb":
       "आपके सिलेबस और शेड्यूल के अनुसार बनाया गया प्लान।",
+    "misc.firstWinTitle": "आइए आपकी पहली जीत हासिल करें।",
     "misc.progress": "प्रगति",
     "misc.quickReviewBlurb": "आज की एक छोटी समीक्षा उन्हें याद रखती है।",
     "misc.studyOverview": "अध्ययन का सारांश",
@@ -1048,6 +1054,7 @@ registerTranslations(english, {
     "misc.startFirstSession": "Simulan ang iyong unang study session",
     "misc.planBlurb":
       "Isang planong ginawa batay sa iyong syllabus at iskedyul.",
+    "misc.firstWinTitle": "Simulan natin ang iyong unang tagumpay.",
     "misc.progress": "Progreso",
     "misc.quickReviewBlurb":
       "Ang mabilis na review ngayon ay nagpapanatili sa kanila sa memorya.",

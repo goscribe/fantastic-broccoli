@@ -1,5 +1,6 @@
 "use client";
 
+import { EmptyScene } from "@/components/graphics/floating-decor";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -20,7 +21,6 @@ import type { McqContent, ReadingContent } from "@/types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import {
-  BookOpen,
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
@@ -461,14 +461,13 @@ export default function WorkspaceGuidePage() {
     <WorkspaceShell workspace={workspace}>
       <div className="animate-fade-up -mx-4 -my-6 min-h-full bg-paper px-4 py-6 sm:-mx-8 sm:-my-8 sm:px-8 sm:py-8">
         {error || !guides || guides.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border py-16 text-center">
-            <BookOpen className="h-8 w-8 text-faint" />
-            <p className="mt-3 text-sm font-medium">No study guides yet</p>
-            <p className="mt-1 max-w-sm text-xs text-muted-foreground">
+          <EmptyScene image="/illustrations/props/book-blue.png">
+            <p className="text-base font-semibold">No study guides yet</p>
+            <p className="mt-1.5 text-sm text-muted-foreground">
               Upload materials in the Materials tab — Scribe builds study
               guides from them automatically.
             </p>
-          </div>
+          </EmptyScene>
         ) : (
           <GuideDeck
             guides={guides}

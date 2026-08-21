@@ -4,6 +4,7 @@ import { useState } from "react";
 import { McqContent } from "@/types";
 import { useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
+import { ConfettiBurst } from "@/components/graphics/confetti-burst";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
@@ -35,6 +36,7 @@ export function McqActivity({
   const [selected, setSelected] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [correctCount, setCorrectCount] = useState(restored?.correctCount ?? 0);
+  const [burst, setBurst] = useState(0);
 
   useActivityDraft(activityId, { index, correctCount });
 
@@ -45,7 +47,10 @@ export function McqActivity({
   const handleSubmit = () => {
     if (selected === null) return;
     onAnswer(index, selected);
-    if (selected === question.correctIndex) setCorrectCount((c) => c + 1);
+    if (selected === question.correctIndex) {
+      setCorrectCount((c) => c + 1);
+      setBurst((b) => b + 1);
+    }
     setRevealed(true);
   };
 
@@ -61,6 +66,7 @@ export function McqActivity({
 
   return (
     <div className="space-y-4">
+      <ConfettiBurst burst={burst} />
       <div className="flex items-center justify-between gap-4">
         <span className="text-xs text-muted-foreground tabular-nums">
           {t("session.question")} {index + 1} {t("session.of")}{" "}

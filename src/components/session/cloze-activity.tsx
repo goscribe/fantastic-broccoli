@@ -7,6 +7,7 @@ import { toast } from "@/lib/toast";
 import { recordFlashcardAttempt } from "@/lib/api/study-session";
 import { useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
+import { ConfettiBurst } from "@/components/graphics/confetti-burst";
 import { InlineMarkdown, MathText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
@@ -48,6 +49,7 @@ export function ClozeActivity({
     restored?.results ?? null,
   );
   const [marking, setMarking] = useState(false);
+  const [burst, setBurst] = useState(0);
 
   useActivityDraft(activityId, { answers, results });
 
@@ -85,6 +87,9 @@ export function ClozeActivity({
     }
     setResults(marked);
     recordProgress(marked);
+    if (marked.length > 0 && marked.every((r) => r.correct)) {
+      setBurst((b) => b + 1);
+    }
     setMarking(false);
   };
 
@@ -96,6 +101,7 @@ export function ClozeActivity({
 
   return (
     <div>
+      <ConfettiBurst burst={burst} />
       <p className="text-sm font-semibold mb-4">
         {t("session.clozeInstruction")}
       </p>

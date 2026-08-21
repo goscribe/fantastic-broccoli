@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { absoluteUrl, jsonLdScriptProps } from "@/lib/seo";
-import { faqs } from "./faqs";
+import { absoluteUrl } from "@/lib/seo";
+import { LandingHeader, LandingFooter } from "./chrome";
 
 export const metadata: Metadata = {
   title:
@@ -14,25 +14,16 @@ export const metadata: Metadata = {
   },
 };
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.q,
-    acceptedAnswer: { "@type": "Answer", text: faq.a },
-  })),
-};
-
 export default function LandingLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <script {...jsonLdScriptProps(faqJsonLd)} />
-      {children}
-    </>
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+      <LandingHeader />
+      <main>{children}</main>
+      <LandingFooter />
+    </div>
   );
 }

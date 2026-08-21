@@ -9,7 +9,6 @@ import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { formatDuration } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
-import { StreakFlame } from "@/components/graphics/streak-flame";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { StudyCalendar } from "@/components/workspace/study-calendar";
 import {
@@ -34,11 +33,13 @@ import {
   markFirstSessionOnboardingSkipped,
 } from "@/components/onboarding/first-session-onboarding";
 import { onTreeChanged } from "@/lib/tree-events";
-import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
+import { Search, ArrowRight, Plus, RotateCcw, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
+import { HeroScene, ConfettiDots } from "@/components/graphics/floating-decor";
 import { Banner } from "@/components/ui/banner";
 
 function computeStreak(daily: DailyActivityPoint[]): number {
@@ -79,6 +80,7 @@ export default function HomePage() {
     Map<string, StudySession[]>
   >(new Map());
   const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
+  const [overviewOpen, setOverviewOpen] = useState(false);
 
   const { data: dueReview } = useQuery({
     queryKey: ["due-review-count"],
@@ -193,6 +195,8 @@ export default function HomePage() {
 
   const streak = useMemo(() => computeStreak(dailyActivity), [dailyActivity]);
 
+  const heroProgress = resumable ? resumable.session.progress : 0;
+
   const lastSevenDays = useMemo(() => {
     const byDate = new Map(dailyActivity.map((d) => [d.date, d.count]));
     return Array.from({ length: 7 }, (_, i) => {
@@ -252,38 +256,34 @@ export default function HomePage() {
           </div>
         </header>
 
-        {/* Gradient banner */}
+        {/* Hero */}
         <section
           data-tour="home-banner"
-          className="relative z-10 rounded-2xl bg-ink p-7 text-white animate-fade-up"
+          className="relative z-10 grid gap-4 animate-fade-up lg:grid-cols-[1fr_250px]"
         >
-          {/* Gradients are clipped individually (not via overflow-hidden on the
-              section) so the New-workspace dropdown can extend past the banner. */}
-          <div
-            className="pointer-events-none absolute inset-0 rounded-2xl"
-            style={{
-              background:
-                "radial-gradient(ellipse 60% 120% at 90% 0%, rgba(105,82,224,0.35) 0%, transparent 60%)",
-            }}
-          />
-          <div
-            className="pointer-events-none absolute inset-0 rounded-2xl"
-            style={{
-              background:
-                "radial-gradient(ellipse 40% 90% at 0% 100%, rgba(105,82,224,0.12) 0%, transparent 55%)",
-            }}
-          />
-          <div className="relative flex flex-wrap items-end justify-between gap-6">
-            <div className="max-w-lg">
-              <p className="text-[11px] font-semibold text-accent-bright">
-                {resumable ? t("home.continueStudying") : t("home.getStarted")}
-              </p>
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight mt-2 leading-snug">
+          <div className="relative rounded-2xl border border-border bg-card p-7">
+            {resumable ? (
+              <HeroScene />
+            ) : (
+              <>
+                <Image
+                  src="/illustrations/welcome.png"
+                  alt=""
+                  width={220}
+                  height={220}
+                  priority
+                  className="pointer-events-none absolute bottom-2 right-6 hidden w-44 select-none md:block lg:right-10 lg:w-52"
+                />
+                <ConfettiDots className="hidden md:block" />
+              </>
+            )}
+            <div className="relative max-w-lg">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight leading-snug">
                 {resumable
                   ? resumable.session.title
-                  : t("misc.startFirstSession")}
+                  : t("misc.firstWinTitle")}
               </h2>
-              <p className="text-sm text-white/55 mt-1.5">
+              <p className="text-sm text-muted-foreground mt-1.5">
                 {resumable
                   ? `${resumable.workspace.title} · ${formatDuration(resumable.session.durationMinutes)} · ${resumable.session.activities.filter((a) => a.status === "completed").length} of ${resumable.session.activities.length} activities complete`
                   : t("misc.planBlurb")}
@@ -297,7 +297,7 @@ export default function HomePage() {
                         `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
                       )
                     }
-                    className="group inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-[13px] font-semibold text-ink hover:bg-white/90 transition-colors"
+                    className="group inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-[13px] font-semibold text-accent-foreground hover:opacity-90 transition-opacity"
                   >
                     {t("home.resumeSession")}
                     <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -307,7 +307,7 @@ export default function HomePage() {
                       <button
                         type="button"
                         onClick={toggle}
-                        className="inline-flex items-center gap-2 rounded-lg border border-white/25 px-4 py-2 text-[13px] font-semibold text-white hover:bg-white/10 transition-colors"
+                        className="inline-flex items-center gap-2 rounded-lg border border-border-strong bg-card px-4 py-2 text-[13px] font-semibold hover:border-accent/50 transition-colors"
                       >
                         <Plus className="h-3.5 w-3.5" />
                         {t("nav.newWorkspace")}
@@ -321,7 +321,7 @@ export default function HomePage() {
                     <button
                       type="button"
                       onClick={toggle}
-                      className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-semibold text-ink hover:bg-white/90 transition-colors sm:w-auto sm:py-2 sm:text-[13px]"
+                      className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-accent-foreground hover:opacity-90 transition-opacity sm:w-auto sm:py-2 sm:text-[13px]"
                     >
                       <Plus className="h-4 w-4" />
                       {t("nav.newWorkspace")}
@@ -330,24 +330,31 @@ export default function HomePage() {
                 </NewWorkspaceMenu>
               )}
             </div>
-            {resumable && (
-              <div className="hidden sm:block w-64">
-                <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-[10px] font-semibold text-white/45">
-                    {t("misc.progress")}
-                  </span>
-                  <span className="text-lg font-bold tabular-nums text-accent-bright">
-                    {resumable.session.progress}%
-                  </span>
-                </div>
-                <div className="h-1.5 rounded-full bg-white/15">
-                  <div
-                    className="h-1.5 rounded-full bg-accent-bright"
-                    style={{ width: `${resumable.session.progress}%` }}
-                  />
-                </div>
-              </div>
-            )}
+          </div>
+
+          {/* Progress scene */}
+          <div className="relative hidden overflow-hidden rounded-2xl border border-border bg-card p-5 lg:block">
+            <ConfettiDots />
+            <p className="relative text-3xl font-bold tabular-nums">
+              {heroProgress}%
+            </p>
+            <p className="relative mt-0.5 text-[11px] font-semibold text-muted-foreground">
+              {t("misc.progress")}
+            </p>
+            <Image
+              src="/illustrations/journey.png"
+              alt=""
+              width={220}
+              height={220}
+              className="pointer-events-none absolute -bottom-3 -right-3 w-36 select-none"
+            />
+            <Image
+              src="/illustrations/props/star-gold.png"
+              alt=""
+              width={60}
+              height={60}
+              className="pointer-events-none absolute right-4 top-4 w-7 rotate-12 select-none"
+            />
           </div>
         </section>
 
@@ -378,135 +385,141 @@ export default function HomePage() {
           </Link>
         )}
 
-        {/* Study overview */}
+        {/* Study overview: slim strip; calendar + weekly chart live behind a toggle
+            so they never push real content below the fold. */}
         <section className="animate-fade-up">
-          <h2 className="text-sm font-semibold mb-3">
-            {t("misc.studyOverview")}
-          </h2>
           {calendarLoading || treeLoading ? (
-            <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
-              <div className="hidden rounded-xl border border-border bg-card p-4 space-y-3 lg:block">
-                <Skeleton className="h-4 w-28" />
-                <Skeleton className="h-40 w-full" />
-              </div>
-              <div className="rounded-xl border border-border bg-card p-4 flex flex-col gap-4">
-                <div className="flex items-center justify-between">
-                  <Skeleton className="h-4 w-20" />
-                  <Skeleton className="h-6 w-24 rounded-full" />
-                </div>
-                <div className="hidden flex-1 items-end gap-2.5 min-h-28 lg:flex">
-                  {[40, 65, 30, 80, 55, 70, 45].map((h, i) => (
-                    <Skeleton
-                      key={i}
-                      className="flex-1 max-w-9 rounded-t-md"
-                      style={{ height: `${h}%` }}
-                    />
-                  ))}
-                </div>
-                <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-                  {Array.from({ length: 4 }, (_, i) => (
-                    <Skeleton key={i} className="h-14" />
-                  ))}
-                </div>
-              </div>
-            </div>
+            <Skeleton className="h-12 w-full rounded-xl" />
           ) : (
-          <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
-            {/* The calendar and weekly chart are reference views, not actions:
-                on phones they pushed the real content below the fold. */}
-            <div className="hidden rounded-xl border border-border bg-card p-4 lg:block">
-              <StudyCalendar dailyActivity={dailyActivity} />
-            </div>
-            <div className="rounded-xl border border-border bg-card p-4 flex flex-col">
-              <div className="flex flex-1 flex-col">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-semibold">{t("misc.thisWeek")}</p>
-                  <div className="flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 dark:border-amber-400/25 dark:bg-amber-400/10">
-                    <StreakFlame className="h-4 w-4" />
-                    <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-300">
-                      <span className="text-[13px] font-bold tabular-nums">
-                        {streak}
-                      </span>{" "}
-                      {t("misc.dayStreak")}
-                    </p>
-                  </div>
+            <div className="rounded-xl border border-border bg-card">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-3 py-2">
+                <div className="flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 py-0.5 pl-1 pr-2.5 dark:border-amber-400/25 dark:bg-amber-400/10">
+                  <Image
+                    src="/illustrations/icons/stat-flame.png"
+                    alt=""
+                    width={48}
+                    height={48}
+                    className="pointer-events-none h-5 w-5 shrink-0 select-none object-contain"
+                  />
+                  <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-300">
+                    <span className="text-[13px] font-bold tabular-nums">
+                      {streak}
+                    </span>{" "}
+                    {t("misc.dayStreak")}
+                  </p>
                 </div>
-                <div className="mt-4 hidden min-h-28 flex-1 items-end gap-2.5 lg:flex">
-                  {lastSevenDays.map(({ label, count, isToday }, i) => (
-                    <div
-                      key={i}
-                      className="flex h-full flex-1 flex-col items-center justify-end gap-1"
-                      title={t(
-                        count === 1
-                          ? "misc.sessionTooltip"
-                          : "misc.sessionsTooltip",
-                      ).replace("{count}", String(count))}
-                    >
-                      <span className="text-[10px] font-medium tabular-nums text-muted-foreground">
-                        {count > 0 ? count : ""}
-                      </span>
-                      <div
-                        className={`w-full max-w-9 rounded-t-md ${
-                          count > 0
-                            ? isToday
-                              ? "bg-accent"
-                              : "bg-accent/70"
-                            : "bg-muted"
-                        }`}
-                        style={{
-                          height:
-                            count > 0 ? `${(count / maxWeekCount) * 100}%` : "4px",
-                        }}
-                      />
-                      <span
-                        className={`text-[10px] ${
-                          isToday ? "font-semibold text-foreground" : "text-faint"
-                        }`}
-                      >
-                        {label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:mt-4">
                 {[
                   {
                     label: t("misc.activeDays"),
                     value: String(
                       dailyActivity.filter((d) => d.count > 0).length,
                     ),
+                    icon: "/illustrations/icons/stat-calendar.png",
                   },
                   {
                     label: t("misc.sessionsLogged"),
                     value: String(
                       dailyActivity.reduce((s, d) => s + d.count, 0),
                     ),
+                    icon: "/illustrations/icons/stat-bolt.png",
                   },
                   {
                     label: t("misc.activePlans"),
                     value: String(activeSessions.length),
+                    icon: "/illustrations/props/flag-mini.png",
                   },
                   {
                     label: t("misc.timePlanned"),
                     value: formatDuration(totalPlannedMinutes),
+                    icon: "/illustrations/icons/stat-clock.png",
                   },
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="rounded-lg bg-muted/50 px-3 py-2.5 leading-tight"
+                    className="flex items-center gap-1.5 leading-none"
+                    title={stat.label}
                   >
-                    <p className="text-base font-bold tabular-nums">
+                    <Image
+                      src={stat.icon}
+                      alt=""
+                      width={64}
+                      height={64}
+                      className="pointer-events-none h-5 w-5 shrink-0 select-none object-contain"
+                    />
+                    <p className="text-[13px] font-bold tabular-nums">
                       {stat.value}
                     </p>
-                    <p className="mt-0.5 text-[11px] font-medium text-muted-foreground">
+                    <p className="hidden text-[11px] font-medium text-muted-foreground sm:block">
                       {stat.label}
                     </p>
                   </div>
                 ))}
+                <button
+                  type="button"
+                  onClick={() => setOverviewOpen((o) => !o)}
+                  className="ml-auto flex items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-semibold text-muted-foreground hover:bg-muted/60 transition-colors"
+                  aria-expanded={overviewOpen}
+                >
+                  {t("misc.studyOverview")}
+                  <ChevronDown
+                    className={`h-3.5 w-3.5 transition-transform ${overviewOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
               </div>
+              {overviewOpen && (
+                <div className="grid gap-4 border-t border-border p-3.5 lg:grid-cols-[320px_1fr]">
+                  <div className="hidden lg:block">
+                    <StudyCalendar dailyActivity={dailyActivity} />
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="text-sm font-semibold">
+                      {t("misc.thisWeek")}
+                    </p>
+                    <div className="mt-3 flex min-h-20 flex-1 items-end gap-2.5">
+                      {lastSevenDays.map(({ label, count, isToday }, i) => (
+                        <div
+                          key={i}
+                          className="flex h-full flex-1 flex-col items-center justify-end gap-1"
+                          title={t(
+                            count === 1
+                              ? "misc.sessionTooltip"
+                              : "misc.sessionsTooltip",
+                          ).replace("{count}", String(count))}
+                        >
+                          <span className="text-[10px] font-medium tabular-nums text-muted-foreground">
+                            {count > 0 ? count : ""}
+                          </span>
+                          <div
+                            className={`w-full max-w-9 rounded-t-md ${
+                              count > 0
+                                ? isToday
+                                  ? "bg-accent"
+                                  : "bg-accent/70"
+                                : "bg-muted"
+                            }`}
+                            style={{
+                              height:
+                                count > 0
+                                  ? `${(count / maxWeekCount) * 100}%`
+                                  : "4px",
+                            }}
+                          />
+                          <span
+                            className={`text-[10px] ${
+                              isToday
+                                ? "font-semibold text-foreground"
+                                : "text-faint"
+                            }`}
+                          >
+                            {label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
           )}
         </section>
 

@@ -4,7 +4,8 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 import { toastError } from "@/lib/toast";
-import { Sparkles, X, ArrowUp, Wand2, Plus } from "lucide-react";
+import { Sparkles, X, ArrowUp, Plus } from "lucide-react";
+import Image from "next/image";
 import { EquationEmbed, GraphEmbed, CitationEmbed } from "@/components/ai/embeds";
 import {
   InteractiveWidget,
@@ -344,7 +345,7 @@ export function Copilot({
   return (
     <div
       className="flex flex-col bg-card border-border min-h-0 max-sm:fixed max-sm:inset-0 max-sm:z-50 max-sm:w-full sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]"
-      style={{ "--copilot-width": width ? `${width}px` : "25vw" } as React.CSSProperties}
+      style={{ "--copilot-width": width ? `${width}px` : "40vw" } as React.CSSProperties}
     >
       {/* Resize handle */}
       <div
@@ -406,7 +407,13 @@ export function Copilot({
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
         {chatMessages.length === 0 && (
           <div className="pt-8 text-center space-y-5">
-            <Wand2 className="h-7 w-7 text-accent mx-auto" />
+            <Image
+              src="/illustrations/bot.png"
+              alt=""
+              width={160}
+              height={160}
+              className="pointer-events-none mx-auto h-20 w-20 select-none object-contain"
+            />
             <div>
               <p className="text-sm font-semibold">
                 {t("misc.copilotEmptyTitle")}

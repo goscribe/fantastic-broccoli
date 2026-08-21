@@ -1,6 +1,7 @@
 "use client";
 
 import { MathText } from "@/components/ui/markdown-text";
+import { EmptyScene } from "@/components/graphics/floating-decor";
 import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -24,7 +25,6 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import {
   Check,
-  Layers,
   Loader2,
   Printer,
   RefreshCw,
@@ -364,13 +364,15 @@ export default function WorkspaceBankPage() {
         )}
 
         {groups.length === 0 ? (
-          <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6 animate-fade-up">
-            <Layers className="h-10 w-10 mx-auto mb-3 text-faint" />
-            <p className="text-sm font-semibold">{t("ws.bankEmpty")}</p>
-            <p className="text-xs text-muted-foreground mt-1.5 max-w-sm mx-auto">
+          <EmptyScene
+            image="/illustrations/icons/target.png"
+            className="animate-fade-up"
+          >
+            <p className="text-base font-semibold">{t("ws.bankEmpty")}</p>
+            <p className="text-sm text-muted-foreground mt-1.5">
               {t("ws.bankEmptyHint")}
             </p>
-          </div>
+          </EmptyScene>
         ) : (
           <div className="space-y-8">
             {groups.map(({ family, count, topics }) => {

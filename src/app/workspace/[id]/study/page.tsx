@@ -26,6 +26,8 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import { Plus, Sparkles, ArrowRight } from "lucide-react";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
+import { ConfettiDots, EmptyScene } from "@/components/graphics/floating-decor";
+import Image from "next/image";
 
 export default function WorkspaceStudyPage() {
   const params = useParams();
@@ -112,26 +114,44 @@ export default function WorkspaceStudyPage() {
             onClick={() =>
               router.push(`/workspace/${workspaceId}/session/${resumable.id}`)
             }
-            className="group w-full text-left rounded-3xl border border-accent/20 bg-gradient-to-br from-accent-soft via-card to-card p-6 hover:border-accent/40 transition-all animate-fade-up"
+            className="group relative w-full overflow-hidden text-left rounded-3xl border border-border bg-card p-6 hover:border-border-strong hover:shadow-md transition-all animate-fade-up"
           >
-            <div className="flex items-center justify-between mb-3">
-              <span className="flex items-center gap-1.5 text-xs font-semibold text-accent">
-                <Sparkles className="h-3.5 w-3.5" />
-                {t("ws.continueStudying")}
-              </span>
-              <span className="flex items-center gap-1.5 text-xs font-semibold text-accent-foreground bg-accent rounded-full px-3.5 py-1.5 group-hover:gap-2.5 transition-all">
+            <div
+              className="pointer-events-none absolute inset-y-0 right-24 hidden w-40 select-none sm:block"
+              aria-hidden
+            >
+              <Image
+                src="/illustrations/flag.png"
+                alt=""
+                width={200}
+                height={200}
+                className="absolute -bottom-3 right-0 w-24"
+              />
+              <ConfettiDots />
+            </div>
+            <div className="relative flex items-center justify-between gap-4">
+              <h2 className="text-lg font-bold tracking-tight">
+                {resumable.title}
+              </h2>
+              <span className="flex shrink-0 items-center gap-1.5 text-xs font-semibold text-accent-foreground bg-accent rounded-full px-3.5 py-1.5 group-hover:gap-2.5 transition-all">
                 {t("ws.resume")}
                 <ArrowRight className="h-3.5 w-3.5" />
               </span>
             </div>
-            <h2 className="text-lg font-bold tracking-tight">
-              {resumable.title}
-            </h2>
-            <p className="text-sm text-muted-foreground mt-0.5">
+            <p className="relative text-sm text-muted-foreground mt-0.5">
               {resumable.progress}% {t("ws.complete")} ·{" "}
-              {formatDuration(resumable.durationMinutes)}
+              {formatDuration(resumable.durationMinutes)} ·{" "}
+              <span className="font-semibold text-accent">
+                {t(
+                  resumable.progress >= 75
+                    ? "ws.cheerNearlyDone"
+                    : resumable.progress >= 25
+                      ? "ws.cheerGoodPace"
+                      : "ws.cheerJustStarted",
+                )}
+              </span>
             </p>
-            <ProgressBar value={resumable.progress} className="mt-3.5" />
+            <ProgressBar value={resumable.progress} className="relative mt-3.5 sm:max-w-md" />
           </button>
         )}
 
@@ -253,14 +273,13 @@ export default function WorkspaceStudyPage() {
           </div>
 
           {!workspace || sessions.length === 0 ? (
-            <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6">
-              <Sparkles className="h-7 w-7 text-accent mx-auto mb-3" />
-              <p className="text-sm font-semibold">
+            <EmptyScene image="/illustrations/flag.png">
+              <p className="text-base font-semibold">
                 {workspace?.sharedBy
                   ? t("ws.sessionsPrivate")
                   : t("ws.noSessions")}
               </p>
-              <p className="text-xs text-muted-foreground mt-1.5 mb-5 max-w-sm mx-auto">
+              <p className="text-sm text-muted-foreground mt-1.5 mb-5">
                 {workspace?.sharedBy
                   ? t("ws.sessionsPrivateHint").replace(
                       "{name}",
@@ -272,7 +291,7 @@ export default function WorkspaceStudyPage() {
                 <Sparkles className="h-3.5 w-3.5 mr-1.5" />
                 {t("ws.createFirstSession")}
               </Button>
-            </div>
+            </EmptyScene>
           ) : (
             <div className="grid gap-4">
               {sessions

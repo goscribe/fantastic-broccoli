@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 import { ScribeLogo } from "@/components/graphics/logo";
-import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
+import { accentNameForColor, accentNameForId } from "@/lib/accent-palette";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { onTreeChanged } from "@/lib/tree-events";
 import { signOut, useAuthUser } from "@/lib/api/auth";
@@ -80,14 +81,13 @@ function FolderNode({
           onClick={() => router.push(`/folder/${folder.id}`)}
           className="flex min-w-0 flex-1 items-center gap-1.5 text-left"
         >
-          <svg
-            viewBox="0 0 16 16"
-            className="h-4 w-4 shrink-0"
-            fill={folder.color}
-            aria-hidden
-          >
-            <path d="M1.5 4A1.5 1.5 0 0 1 3 2.5h3.2c.4 0 .8.16 1.06.44l.9.92c.19.19.45.3.72.3H13A1.5 1.5 0 0 1 14.5 5.7v6.3A1.5 1.5 0 0 1 13 13.5H3A1.5 1.5 0 0 1 1.5 12V4z" />
-          </svg>
+          <Image
+            src={`/illustrations/icons/folder-${accentNameForColor(folder.color, folder.id)}.png`}
+            alt=""
+            width={40}
+            height={40}
+            className="pointer-events-none h-4 w-4 shrink-0 select-none object-contain"
+          />
           <span className="truncate">{folder.name}</span>
         </button>
         <button
@@ -127,7 +127,13 @@ function FolderNode({
                 )}
                 style={{ paddingLeft: `${(depth + 1) * 14 + 24}px` }}
               >
-                <WorkspaceIcon icon={ws.icon} className="h-4 w-4 shrink-0" />
+                <Image
+                  src={`/illustrations/icons/ws-${accentNameForId(ws.id)}.png`}
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="pointer-events-none h-4 w-4 shrink-0 select-none object-contain"
+                />
                 <span className="truncate">{ws.title}</span>
               </button>
             );
@@ -240,7 +246,7 @@ export function Sidebar({
           <Link
             href="/"
             className={cn(
-              "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+              "flex items-center gap-2 rounded-md px-1.5 py-1.5 text-[13px] font-medium",
               pathname === "/"
                 ? "bg-accent-soft text-accent"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -252,7 +258,7 @@ export function Sidebar({
           <Link
             href="/flashcards"
             className={cn(
-              "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+              "flex items-center gap-2 rounded-md px-1.5 py-1.5 text-[13px] font-medium",
               pathname.startsWith("/flashcards")
                 ? "bg-accent-soft text-accent"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -264,7 +270,7 @@ export function Sidebar({
           <Link
             href="/shared"
             className={cn(
-              "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+              "flex items-center gap-2 rounded-md px-1.5 py-1.5 text-[13px] font-medium",
               pathname.startsWith("/shared")
                 ? "bg-accent-soft text-accent"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -335,7 +341,13 @@ export function Sidebar({
                         : "text-muted-foreground hover:bg-muted hover:text-foreground",
                     )}
                   >
-                    <WorkspaceIcon icon={ws.icon} className="h-4 w-4 shrink-0" />
+                    <Image
+                      src={`/illustrations/icons/ws-${accentNameForId(ws.id)}.png`}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="pointer-events-none h-4 w-4 shrink-0 select-none object-contain"
+                    />
                     <span className="truncate">{ws.title}</span>
                   </Link>
                 );
@@ -390,7 +402,7 @@ export function Sidebar({
         <Link
           href="/settings"
           className={cn(
-            "flex items-center gap-2 rounded-md px-1.5 py-1 text-[13px] font-medium",
+            "flex items-center gap-2 rounded-md px-1.5 py-1.5 text-[13px] font-medium",
             pathname.startsWith("/settings")
               ? "bg-accent-soft text-accent"
               : "text-muted-foreground hover:bg-muted hover:text-foreground",

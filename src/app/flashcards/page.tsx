@@ -9,10 +9,14 @@ import {
 } from "@/lib/flashcard-decks";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
 import { BankDocThumb } from "@/components/bank/bank-content";
-import { Layers, RotateCcw } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { useI18n } from "@/lib/i18n";
+import {
+  EmptyScene,
+  HeaderDecor,
+} from "@/components/graphics/floating-decor";
 
 function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
   const { t } = useI18n();
@@ -65,11 +69,16 @@ export default function FlashcardsPage() {
   return (
     <main className="flex-1 px-6 py-6 md:px-10">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="text-xl font-bold tracking-tight">{t("fc.title")}</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {t("fc.subtitle")}
-          </p>
+        <div className="flex items-center gap-4">
+          <div>
+            <h1 className="text-xl font-bold tracking-tight">{t("fc.title")}</h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {t("fc.subtitle")}
+            </p>
+          </div>
+          {(decks ?? []).length > 0 && (
+            <HeaderDecor image="/illustrations/cards.png" />
+          )}
         </div>
         {dueReview && dueReview.total > 0 && (
           <Link
@@ -87,13 +96,12 @@ export default function FlashcardsPage() {
       {isLoading && <CardGridSkeleton count={6} />}
 
       {!isLoading && (decks ?? []).length === 0 && (
-        <div className="rounded-xl border border-border bg-card px-6 py-12 text-center">
-          <Layers className="mx-auto h-6 w-6 text-faint" />
-          <p className="mt-3 text-sm font-medium">{t("fc.noDecksTitle")}</p>
-          <p className="mt-1 text-sm text-muted-foreground">
+        <EmptyScene image="/illustrations/cards.png">
+          <p className="text-base font-semibold">{t("fc.noDecksTitle")}</p>
+          <p className="mt-1.5 text-sm text-muted-foreground">
             {t("fc.noDecksBody")}
           </p>
-        </div>
+        </EmptyScene>
       )}
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">

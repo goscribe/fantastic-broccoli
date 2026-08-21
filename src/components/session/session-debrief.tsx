@@ -4,6 +4,8 @@ import { MathText } from "@/components/ui/markdown-text";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
+import { ConfettiDots } from "@/components/graphics/floating-decor";
 import {
   Sparkles,
   Loader2,
@@ -137,22 +139,39 @@ export function SessionDebrief({
 
   return (
     <div className="animate-fade-up pb-10">
-      <p className="flex items-center gap-1.5 text-[11px] font-medium text-accent-dim mb-2">
-        <Sparkles className="h-3 w-3" />
-        {t("session.debriefGenerated")}
-      </p>
-      <h2 className="text-lg font-bold tracking-tight">
-        <MathText text={debrief.headline} />
-      </h2>
+      <div className="relative mb-6 overflow-hidden rounded-3xl border border-border bg-card px-6 py-6">
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 hidden w-48 select-none sm:block"
+          aria-hidden
+        >
+          <Image
+            src="/illustrations/props/trophy.png"
+            alt=""
+            width={160}
+            height={160}
+            className="absolute -bottom-3 right-6 w-24"
+          />
+          <ConfettiDots />
+        </div>
+        <div className="relative sm:max-w-[calc(100%-11rem)]">
+          <p className="flex items-center gap-1.5 text-[11px] font-medium text-accent-dim mb-2">
+            <Sparkles className="h-3 w-3" />
+            {t("session.debriefGenerated")}
+          </p>
+          <h2 className="text-lg font-bold tracking-tight">
+            <MathText text={debrief.headline} />
+          </h2>
       {creditsEarned > 0 && (
         <p className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent">
           <Sparkles className="h-3.5 w-3.5" />+{creditsEarned}{" "}
           {t("session.creditsEarned")}
         </p>
       )}
-      <p className="text-sm text-muted-foreground leading-6 mt-1.5 mb-6">
-        <MathText text={debrief.summary} />
-      </p>
+          <p className="text-sm text-muted-foreground leading-6 mt-1.5">
+            <MathText text={debrief.summary} />
+          </p>
+        </div>
+      </div>
 
       <div className="space-y-6">
         {debrief.sections.map((section) => (

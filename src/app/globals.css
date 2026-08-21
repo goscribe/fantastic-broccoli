@@ -233,6 +233,23 @@ input[type="range"].param-slider:active::-moz-range-thumb {
   animation: loader-bar 1.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-8vh) rotate(0deg);
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) rotate(660deg);
+    opacity: 0;
+  }
+}
+.animate-confetti-fall {
+  animation: confetti-fall var(--confetti-duration, 1.6s) ease-in both;
+}
+
 /* Printable artifact sheets: only the .print-sheet subtree is printed, with
    a Scribe watermark overlaid on every page. */
 @media print {
