@@ -2,7 +2,7 @@
 
 import { Folder } from "@/types";
 import { countWorkspaces } from "@/lib/utils";
-import { accentNameForId } from "@/lib/accent-palette";
+import { accentNameForColor } from "@/lib/accent-palette";
 import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
@@ -22,7 +22,7 @@ export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
   const { t } = useI18n();
   const wsCount = countWorkspaces(folder);
   const subCount = folder.folders?.length ?? 0;
-  const accent = accentNameForId(folder.id);
+  const accent = accentNameForColor(folder.color, folder.id);
 
   return (
     <div

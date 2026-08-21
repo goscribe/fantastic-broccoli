@@ -46,49 +46,63 @@ export function HeroScene() {
       aria-hidden
     >
       <Image
-        src="/illustrations/flag.png"
+        src="/illustrations/hero-scene.png"
         alt=""
-        width={220}
-        height={220}
+        width={720}
+        height={423}
         priority
-        className="absolute right-20 top-1/2 w-36 -translate-y-1/2 lg:w-40"
-      />
-      <Image
-        src="/illustrations/props/book-blue.png"
-        alt=""
-        width={120}
-        height={120}
-        className="absolute right-4 top-5 w-14 rotate-12"
-      />
-      <Image
-        src="/illustrations/props/book-pink.png"
-        alt=""
-        width={120}
-        height={120}
-        className="absolute bottom-4 right-60 w-12 -rotate-6"
-      />
-      <Image
-        src="/illustrations/props/flag-mini.png"
-        alt=""
-        width={100}
-        height={100}
-        className="absolute right-64 top-4 w-11 -rotate-12"
-      />
-      <Image
-        src="/illustrations/props/star-gold.png"
-        alt=""
-        width={80}
-        height={80}
-        className="absolute bottom-7 right-8 w-8 rotate-12"
-      />
-      <Image
-        src="/illustrations/props/pencil.png"
-        alt=""
-        width={100}
-        height={100}
-        className="absolute bottom-16 right-44 w-10 rotate-45"
+        className="absolute bottom-0 right-2 w-72 lg:w-80"
       />
       <ConfettiDots />
+    </div>
+  );
+}
+
+/**
+ * Composed empty-state scene: big art bleeding off the right edge, floating
+ * props, confetti, and left-aligned content.
+ */
+export function EmptyScene({
+  image,
+  imageClassName,
+  children,
+  className,
+}: {
+  image: string;
+  imageClassName?: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "relative overflow-hidden rounded-3xl border border-border bg-card",
+        className,
+      )}
+    >
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 hidden w-72 select-none sm:block"
+        aria-hidden
+      >
+        <Image
+          src={image}
+          alt=""
+          width={280}
+          height={240}
+          className={cn("absolute -bottom-4 right-6 w-48", imageClassName)}
+        />
+      </div>
+      <ConfettiDots className="hidden sm:block" />
+      <div className="relative max-w-md px-6 py-10 sm:px-8 sm:py-12">
+        {children}
+      </div>
+      <Image
+        src={image}
+        alt=""
+        width={200}
+        height={160}
+        className="pointer-events-none mx-auto -mt-4 mb-6 h-24 w-auto select-none sm:hidden"
+      />
     </div>
   );
 }

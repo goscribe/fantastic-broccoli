@@ -1,10 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import type { Folder } from "@/types";
+import { accentNameForColor } from "@/lib/accent-palette";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { CreateResourceDialog } from "@/components/workspace/create-dialog";
@@ -111,12 +113,13 @@ export default function FolderPage({
         </nav>
 
         <header className="flex items-center gap-3 animate-fade-up">
-          <svg viewBox="0 0 24 24" className="h-9 w-9" aria-hidden>
-            <path
-              fill={folder.color}
-              d="M2.25 6A2.25 2.25 0 0 1 4.5 3.75h4.8c.6 0 1.17.24 1.59.66l1.35 1.38c.28.29.67.46 1.08.46h6.18A2.25 2.25 0 0 1 21.75 8.5v9.5a2.25 2.25 0 0 1-2.25 2.25h-15A2.25 2.25 0 0 1 2.25 18V6z"
-            />
-          </svg>
+          <Image
+            src={`/illustrations/icons/folder-${accentNameForColor(folder.color, folder.id)}.png`}
+            alt=""
+            width={96}
+            height={96}
+            className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
+          />
           <h1 className="text-2xl font-bold tracking-tight">{folder.name}</h1>
           <ResourceActionsMenu
             actions={{
@@ -221,9 +224,18 @@ export default function FolderPage({
               ))}
             </div>
           ) : (
-            <p className="text-sm text-muted-foreground rounded-xl border border-dashed border-border-strong px-4 py-8 text-center">
-              No workspaces here yet.
-            </p>
+            <div className="rounded-xl border border-dashed border-border-strong px-4 py-8 text-center">
+              <Image
+                src={`/illustrations/icons/folder-${accentNameForColor(folder.color, folder.id)}.png`}
+                alt=""
+                width={128}
+                height={115}
+                className="pointer-events-none mx-auto mb-2 h-14 w-auto select-none"
+              />
+              <p className="text-sm text-muted-foreground">
+                No workspaces here yet.
+              </p>
+            </div>
           )}
         </section>
 

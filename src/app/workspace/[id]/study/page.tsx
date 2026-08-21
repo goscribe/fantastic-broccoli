@@ -26,6 +26,7 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import { Plus, Sparkles, ArrowRight } from "lucide-react";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
+import { EmptyScene } from "@/components/graphics/floating-decor";
 
 export default function WorkspaceStudyPage() {
   const params = useParams();
@@ -253,14 +254,13 @@ export default function WorkspaceStudyPage() {
           </div>
 
           {!workspace || sessions.length === 0 ? (
-            <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6">
-              <Sparkles className="h-7 w-7 text-accent mx-auto mb-3" />
-              <p className="text-sm font-semibold">
+            <EmptyScene image="/illustrations/flag.png">
+              <p className="text-base font-semibold">
                 {workspace?.sharedBy
                   ? t("ws.sessionsPrivate")
                   : t("ws.noSessions")}
               </p>
-              <p className="text-xs text-muted-foreground mt-1.5 mb-5 max-w-sm mx-auto">
+              <p className="text-sm text-muted-foreground mt-1.5 mb-5">
                 {workspace?.sharedBy
                   ? t("ws.sessionsPrivateHint").replace(
                       "{name}",
@@ -272,7 +272,7 @@ export default function WorkspaceStudyPage() {
                 <Sparkles className="h-3.5 w-3.5 mr-1.5" />
                 {t("ws.createFirstSession")}
               </Button>
-            </div>
+            </EmptyScene>
           ) : (
             <div className="grid gap-4">
               {sessions

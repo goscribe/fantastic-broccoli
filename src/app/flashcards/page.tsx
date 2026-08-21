@@ -3,7 +3,6 @@
 import "@/lib/i18n/flashcards";
 import { MathText } from "@/components/ui/markdown-text";
 import Link from "next/link";
-import Image from "next/image";
 import {
   useFlashcardDecks,
   type DeckWithWorkspace,
@@ -14,7 +13,10 @@ import { RotateCcw } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { useI18n } from "@/lib/i18n";
-import { HeaderDecor } from "@/components/graphics/floating-decor";
+import {
+  EmptyScene,
+  HeaderDecor,
+} from "@/components/graphics/floating-decor";
 
 function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
   const { t } = useI18n();
@@ -94,19 +96,12 @@ export default function FlashcardsPage() {
       {isLoading && <CardGridSkeleton count={6} />}
 
       {!isLoading && (decks ?? []).length === 0 && (
-        <div className="rounded-2xl border border-border bg-card px-6 py-12 text-center">
-          <Image
-            src="/illustrations/cards.png"
-            alt=""
-            width={200}
-            height={150}
-            className="pointer-events-none mx-auto h-24 w-auto select-none"
-          />
-          <p className="mt-4 text-sm font-medium">{t("fc.noDecksTitle")}</p>
-          <p className="mt-1 text-sm text-muted-foreground">
+        <EmptyScene image="/illustrations/cards.png">
+          <p className="text-base font-semibold">{t("fc.noDecksTitle")}</p>
+          <p className="mt-1.5 text-sm text-muted-foreground">
             {t("fc.noDecksBody")}
           </p>
-        </div>
+        </EmptyScene>
       )}
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">

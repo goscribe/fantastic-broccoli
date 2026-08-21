@@ -35,6 +35,34 @@ const workspaces = [
     owner: user,
     members: [],
   },
+  {
+    id: "ws-3",
+    title: "Spanish B Vocab",
+    folderId: null,
+    icon: "book",
+    color: "green",
+    updatedAt: new Date().toISOString(),
+    uploads: [],
+    owner: user,
+    members: [],
+  },
+  {
+    id: "ws-4",
+    title: "Physics Mechanics",
+    folderId: "folder-1",
+    icon: "book",
+    color: "green",
+    updatedAt: new Date().toISOString(),
+    uploads: [],
+    owner: user,
+    members: [],
+  },
+];
+
+const folders = [
+  { id: "folder-1", name: "IB Sciences", color: "#0ea5e9", parentId: null },
+  { id: "folder-2", name: "Humanities", color: "#ec4899", parentId: null },
+  { id: "folder-abc", name: "Languages", color: "#f59e0b", parentId: null },
 ];
 
 let wsCounter = 10;
@@ -46,7 +74,7 @@ function handleProc(path, input) {
     case "workspace.getTree":
       // EMPTY=1 simulates a brand-new user (triggers first-session onboarding).
       if (process.env.EMPTY === "1") return { folders: [], workspaces: [] };
-      return { folders: [], workspaces };
+      return { folders, workspaces };
     case "workspace.getSharedWith":
       return { shared: [] };
     case "workspace.create": {
@@ -197,11 +225,40 @@ function handleProc(path, input) {
       return { ok: true };
     case "studySession.pullFromBank":
       return [];
-    case "studySession.listBank":
+    case "studySession.listBank": {
+      // DECKS=1: one flashcard deck in ws-1 so /flashcards shows a deck grid.
+      if (process.env.DECKS === "1" && input && input.workspaceId === "ws-1")
+        return [
+          {
+            id: "bank-deck-1",
+            kind: "FLASHCARD_DECK",
+            title: "Energetics key terms",
+            topic: "Thermochemistry",
+            content: {
+              type: "flashcard_review",
+              cards: [
+                { front: "Define enthalpy", back: "Heat content at constant pressure" },
+                { front: "Exothermic ΔH sign?", back: "Negative" },
+                { front: "Hess's law", back: "Total ΔH is path-independent" },
+              ],
+            },
+          },
+        ];
+      return [];
+    }
+    case "flashcards.getDueReview":
+      return { total: 0, cards: [] };
+    case "podcast.listEpisodes":
+      return [];
+    case "podcast.getAvailableVoices":
+      return [];
+    case "podcast.getCharacters":
       return [];
     case "flashcards.getMasteryMatrix":
       return [];
     case "studySession.activityCalendar":
+      return [];
+    case "workspace.marketplaceArtifacts":
       return [];
     case "payment.getPlans":
       return [];

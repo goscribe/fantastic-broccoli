@@ -21,6 +21,7 @@ import { cn, formatRelativeDate } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import Image from "next/image";
+import { EmptyScene } from "@/components/graphics/floating-decor";
 import {
   AudioLines,
   Headphones,
@@ -378,16 +379,9 @@ export default function WorkspaceRecallPage() {
         </div>
 
         {episodes.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border py-16 text-center">
-            <Image
-              src="/illustrations/icons/headphones.png"
-              alt=""
-              width={160}
-              height={160}
-              className="pointer-events-none h-20 w-auto select-none"
-            />
-            <p className="mt-3 text-sm font-medium">{t("ws.noEpisodes")}</p>
-            <p className="mt-1 max-w-sm text-xs text-muted-foreground">
+          <EmptyScene image="/illustrations/icons/headphones.png">
+            <p className="text-base font-semibold">{t("ws.noEpisodes")}</p>
+            <p className="mt-1.5 text-sm text-muted-foreground">
               {t("ws.noEpisodesHint")}
             </p>
             <Button
@@ -398,7 +392,7 @@ export default function WorkspaceRecallPage() {
               <Sparkles className="h-3.5 w-3.5 mr-1.5" />
               {t("ws.generatePodcast")}
             </Button>
-          </div>
+          </EmptyScene>
         ) : (
           <div className="space-y-3">
             {episodes.map((episode, i) => (
