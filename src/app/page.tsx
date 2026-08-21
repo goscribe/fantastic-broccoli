@@ -395,21 +395,8 @@ export default function HomePage() {
           {calendarLoading || treeLoading ? (
             <Skeleton className="h-24 w-full rounded-2xl" />
           ) : (
-            <div className="relative rounded-2xl border border-border bg-card">
-              <div className="flex justify-end px-3 pt-3 sm:absolute sm:right-3 sm:top-3 sm:z-10 sm:p-0">
-                <button
-                  type="button"
-                  onClick={() => setOverviewOpen((o) => !o)}
-                  className="flex items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-semibold text-muted-foreground transition-colors hover:bg-muted/60"
-                  aria-expanded={overviewOpen}
-                >
-                  {t("misc.studyOverview")}
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform ${overviewOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
-              </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-4 px-4 pb-4 pt-1 sm:grid-cols-3 sm:py-4 lg:grid-cols-5 lg:pr-36">
+            <div className="rounded-2xl border border-border bg-card">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-4 px-4 py-4 sm:grid-cols-3 lg:grid-cols-5">
                 {[
                   {
                     label: t("misc.dayStreak"),
@@ -472,8 +459,19 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
+              <button
+                type="button"
+                onClick={() => setOverviewOpen((o) => !o)}
+                className="flex w-full items-center justify-center gap-1 border-t border-border px-3 py-2 text-[11px] font-semibold text-muted-foreground transition-colors hover:bg-muted/60"
+                aria-expanded={overviewOpen}
+              >
+                {t("misc.studyOverview")}
+                <ChevronDown
+                  className={`h-3.5 w-3.5 transition-transform ${overviewOpen ? "rotate-180" : ""}`}
+                />
+              </button>
               {overviewOpen && (
-                <div className="grid gap-4 border-t border-border p-3.5 lg:grid-cols-[320px_1fr]">
+                <div className="grid gap-4 p-3.5 lg:grid-cols-[320px_1fr]">
                   <div className="hidden lg:block">
                     <StudyCalendar dailyActivity={dailyActivity} />
                   </div>

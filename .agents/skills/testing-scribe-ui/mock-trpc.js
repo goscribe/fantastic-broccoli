@@ -297,24 +297,24 @@ function handleProc(path, input) {
     case "flashcards.getMasteryMatrix":
       return [
         {
-          topic: "Flashcard Review: TOEFL Vocabulary",
-          proficiency: 0,
-          cardsStudied: 0,
-          cardsTotal: 24,
-          attempts: 0,
+          topic: "Thermochemistry",
+          proficiency: 42,
+          cardsStudied: 8,
+          cardsTotal: 20,
+          attempts: 8,
         },
         {
-          topic: "Sheet: Reading Skills",
-          proficiency: 0,
-          cardsStudied: 0,
+          topic: "Hess's law",
+          proficiency: 18,
+          cardsStudied: 2,
           cardsTotal: 12,
-          attempts: 0,
+          attempts: 3,
         },
         {
-          topic: "Practice: TOEFL Reading",
+          topic: "Bond enthalpies",
           proficiency: 0,
           cardsStudied: 0,
-          cardsTotal: 18,
+          cardsTotal: 10,
           attempts: 0,
         },
       ];
