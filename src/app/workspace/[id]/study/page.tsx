@@ -107,14 +107,14 @@ export default function WorkspaceStudyPage() {
 
   return (
     <WorkspaceShell workspace={workspace}>
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
         {resumable && (
           <button
             type="button"
             onClick={() =>
               router.push(`/workspace/${workspaceId}/session/${resumable.id}`)
             }
-            className="group relative w-full overflow-hidden text-left rounded-3xl border border-border bg-card p-6 hover:border-border-strong hover:shadow-md transition-all animate-fade-up"
+            className="group relative w-full overflow-hidden rounded-2xl border border-border bg-card p-4 text-left transition-all animate-fade-up hover:border-border-strong hover:shadow-md sm:rounded-3xl sm:p-6"
           >
             <div
               className="pointer-events-none absolute inset-y-0 right-24 hidden w-40 select-none sm:block"
@@ -130,11 +130,11 @@ export default function WorkspaceStudyPage() {
               />
               <ConfettiDots />
             </div>
-            <div className="relative flex items-center justify-between gap-4">
-              <h2 className="text-lg font-bold tracking-tight">
+            <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+              <h2 className="text-base font-bold tracking-tight sm:text-lg">
                 {resumable.title}
               </h2>
-              <span className="flex shrink-0 items-center gap-1.5 text-xs font-semibold text-accent-foreground bg-accent rounded-full px-3.5 py-1.5 group-hover:gap-2.5 transition-all">
+              <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-accent px-3.5 py-1.5 text-xs font-semibold text-accent-foreground transition-all group-hover:gap-2.5">
                 {t("ws.resume")}
                 <ArrowRight className="h-3.5 w-3.5" />
               </span>
@@ -163,8 +163,8 @@ export default function WorkspaceStudyPage() {
 
         {bankItems.length > 0 && (
           <section className="animate-fade-up">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-sm font-semibold text-foreground">
+            <div className="mb-4 flex items-center justify-between gap-2">
+              <h2 className="min-w-0 truncate text-sm font-semibold text-foreground">
                 {t("ws.artifacts")}
               </h2>
               <Link
@@ -203,7 +203,7 @@ export default function WorkspaceStudyPage() {
         )}
 
         {masteryMatrix.length > 0 && (
-          <section className="animate-fade-up">
+          <section className="hidden animate-fade-up sm:block">
             <h2 className="text-sm font-semibold text-foreground mb-4">
               {t("ws.proficiencyByTopic")}
             </h2>
@@ -258,13 +258,14 @@ export default function WorkspaceStudyPage() {
         )}
 
         <section className="animate-fade-up">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold text-foreground">
+          <div className="mb-4 flex items-center justify-between gap-2">
+            <h2 className="min-w-0 truncate text-sm font-semibold text-foreground">
               {t("ws.studySessions")}
             </h2>
             <Button
               variant="outline"
               size="sm"
+              className="shrink-0"
               onClick={() => setShowCreateWizard(true)}
               data-tour="new-session"
             >

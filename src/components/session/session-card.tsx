@@ -119,11 +119,11 @@ export function SessionCard({
     <Card
       interactive
       onClick={() => onClick(session.id)}
-      className="group"
+      className="group p-4 sm:p-5"
     >
       <div className="flex items-start justify-between">
         <div className="flex items-start gap-3.5 flex-1 min-w-0">
-          <SessionArt className="h-10 w-10 shrink-0" />
+          <SessionArt className="hidden h-10 w-10 shrink-0 sm:block" />
           <div className="flex-1 min-w-0">
             <h4 className="font-semibold text-sm truncate"><MathText text={session.title} /></h4>
             {session.description && (

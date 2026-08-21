@@ -295,7 +295,29 @@ function handleProc(path, input) {
     case "podcast.getCharacters":
       return [];
     case "flashcards.getMasteryMatrix":
-      return [];
+      return [
+        {
+          topic: "Flashcard Review: TOEFL Vocabulary",
+          proficiency: 0,
+          cardsStudied: 0,
+          cardsTotal: 24,
+          attempts: 0,
+        },
+        {
+          topic: "Sheet: Reading Skills",
+          proficiency: 0,
+          cardsStudied: 0,
+          cardsTotal: 12,
+          attempts: 0,
+        },
+        {
+          topic: "Practice: TOEFL Reading",
+          proficiency: 0,
+          cardsStudied: 0,
+          cardsTotal: 18,
+          attempts: 0,
+        },
+      ];
     case "studySession.activityCalendar":
       return [];
     case "workspace.marketplaceArtifacts":

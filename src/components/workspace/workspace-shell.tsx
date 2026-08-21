@@ -46,7 +46,7 @@ export function WorkspaceShell({
             </div>
           </div>
         </div>
-        <main className="flex-1 w-full px-4 sm:px-8 py-6 sm:py-8">
+        <main className="flex-1 w-full px-4 py-5 sm:px-8 sm:py-8">
           {children}
         </main>
       </div>
@@ -99,11 +99,11 @@ export function WorkspaceShell({
   ];
 
   return (
-    <div className="flex-1 flex flex-col">
-      <div className="sticky top-14 z-30 border-b border-border bg-card">
-        <div className="w-full px-4 sm:px-8">
+    <div className="flex min-w-0 flex-1 flex-col overflow-x-hidden">
+      <div className="sticky top-[calc(3.5rem+env(safe-area-inset-top))] z-30 border-b border-border bg-card">
+        <div className="w-full px-2 sm:px-8">
           <nav
-            className="flex items-center gap-1 -mb-px"
+            className="flex items-center gap-0.5 -mb-px overflow-x-auto overscroll-x-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             data-tour="workspace-tabs"
           >
             {tabs.map((tab) => {
@@ -114,13 +114,13 @@ export function WorkspaceShell({
                   href={tab.href}
                   data-tour={tab.tourId}
                   className={cn(
-                    "flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors",
+                    "flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b-2 -mb-px px-2.5 py-2 text-[13px] font-medium transition-colors sm:px-4 sm:py-2.5 sm:text-sm",
                     active
                       ? "border-accent text-accent"
                       : "border-transparent text-muted-foreground hover:text-foreground",
                   )}
                 >
-                  <tab.icon className="h-4 w-4" />
+                  <tab.icon className="h-4 w-4 shrink-0" />
                   {tab.label}
                 </Link>
               );
@@ -128,9 +128,9 @@ export function WorkspaceShell({
             <button
               type="button"
               onClick={() => setMembersOpen(true)}
-              className="ml-auto flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium border-b-2 border-transparent -mb-px text-muted-foreground transition-colors hover:text-foreground"
+              className="ml-1 flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b-2 border-transparent -mb-px px-2.5 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground sm:ml-auto sm:px-4 sm:py-2.5 sm:text-sm"
             >
-              <UserPlus className="h-4 w-4" />
+              <UserPlus className="h-4 w-4 shrink-0" />
               {t("ws.members")}
             </button>
           </nav>
@@ -143,7 +143,7 @@ export function WorkspaceShell({
         onClose={() => setMembersOpen(false)}
       />
 
-      <main className="flex-1 w-full px-4 sm:px-8 py-6 sm:py-8">
+      <main className="w-full min-w-0 flex-1 px-4 py-5 sm:px-8 sm:py-8">
         {children}
       </main>
     </div>
