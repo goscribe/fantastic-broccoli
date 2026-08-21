@@ -704,15 +704,15 @@ export default function SessionDetailPage() {
 
       {/* Journey waypoints pinned to the bottom */}
       {planReady && (
-        <footer className="shrink-0 border-t border-border bg-card px-4 sm:px-6 pb-2.5 pt-3">
-          <div className="mx-auto flex max-w-3xl items-center gap-4">
+        <footer className="shrink-0 border-t border-border bg-card px-4 sm:px-22 pb-3 pt-4">
+          <div className="flex w-full items-center gap-5">
             <span className="shrink-0 text-xs text-muted-foreground tabular-nums">
               {completedCount}/{activities.length} {t("session.doneCount")}
             </span>
             <div className="relative flex-1">
-              <div className="absolute left-0 right-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-muted" />
+              <div className="absolute left-0 right-0 top-1/2 h-2.5 -translate-y-1/2 rounded-full bg-muted" />
               <div
-                className="absolute left-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-accent transition-all duration-700 ease-out"
+                className="absolute left-0 top-1/2 h-2.5 -translate-y-1/2 rounded-full bg-accent transition-all duration-700 ease-out"
                 style={{ width: `${session.progress}%` }}
               />
               <div className="relative flex items-center justify-between">
@@ -733,15 +733,15 @@ export default function SessionDetailPage() {
                         height={64}
                         className={`pointer-events-none select-none object-contain transition-all duration-300 ${
                           isActive
-                            ? "h-9 w-9 drop-shadow-md"
+                            ? "h-12 w-12 drop-shadow-md"
                             : done
-                              ? "h-7 w-7"
-                              : "h-7 w-7 opacity-45 grayscale-[35%] group-hover:opacity-90 group-hover:grayscale-0"
+                              ? "h-10 w-10"
+                              : "h-10 w-10 opacity-45 grayscale-[35%] group-hover:opacity-90 group-hover:grayscale-0"
                         }`}
                       />
                       {done && (
-                        <span className="absolute -right-0.5 -top-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                          <Check className="h-2.5 w-2.5" />
+                        <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                          <Check className="h-3 w-3" />
                         </span>
                       )}
                       <div className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 hidden w-max max-w-52 -translate-x-1/2 rounded-xl border border-border bg-card px-3 py-2 text-left shadow-lg group-hover:block">
