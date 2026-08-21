@@ -304,6 +304,11 @@ function handleProc(path, input) {
       return [];
     case "payment.getTokenBalance":
       return { balance: 120 };
+    case "stats.public":
+      // Landing page stats strip (set STATS_FAIL=1 to test the fallback path)
+      if (process.env.STATS_FAIL) throw new Error("stats unavailable");
+      if (process.env.STATS_NULL) return null;
+      return { artifacts: 2345, activities: 512, countries: 23, minutes: 8900 };
     default:
       return null; // generic fallback
   }
