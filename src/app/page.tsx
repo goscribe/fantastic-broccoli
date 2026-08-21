@@ -40,6 +40,7 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
+import { HeroScene, ConfettiDots } from "@/components/graphics/floating-decor";
 import { Banner } from "@/components/ui/banner";
 
 function computeStreak(daily: DailyActivityPoint[]): number {
@@ -261,37 +262,21 @@ export default function HomePage() {
           className="relative z-10 grid gap-4 animate-fade-up lg:grid-cols-[1fr_250px]"
         >
           <div className="relative rounded-2xl border border-border bg-card p-7">
-            {/* Gradients are clipped individually (not via overflow-hidden on the
-                card) so the New-workspace dropdown can extend past it. */}
-            <div
-              className="pointer-events-none absolute inset-0 rounded-2xl"
-              style={{
-                background:
-                  "radial-gradient(ellipse 60% 130% at 92% 0%, rgba(105,82,224,0.18) 0%, transparent 60%)",
-              }}
-            />
-            <div
-              className="pointer-events-none absolute inset-0 rounded-2xl"
-              style={{
-                background:
-                  "radial-gradient(ellipse 45% 100% at 0% 100%, rgba(244,114,182,0.12) 0%, transparent 55%)",
-              }}
-            />
-            <div
-              className="pointer-events-none absolute inset-0 rounded-2xl"
-              style={{
-                background:
-                  "radial-gradient(ellipse 30% 70% at 55% 100%, rgba(251,191,36,0.10) 0%, transparent 60%)",
-              }}
-            />
-            <Image
-              src={resumable ? "/illustrations/flag.png" : "/illustrations/welcome.png"}
-              alt=""
-              width={220}
-              height={220}
-              priority
-              className="pointer-events-none absolute bottom-2 right-6 hidden w-44 select-none md:block lg:right-10 lg:w-52"
-            />
+            {resumable ? (
+              <HeroScene />
+            ) : (
+              <>
+                <Image
+                  src="/illustrations/welcome.png"
+                  alt=""
+                  width={220}
+                  height={220}
+                  priority
+                  className="pointer-events-none absolute bottom-2 right-6 hidden w-44 select-none md:block lg:right-10 lg:w-52"
+                />
+                <ConfettiDots className="hidden md:block" />
+              </>
+            )}
             <div className="relative max-w-lg">
               <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-accent-foreground">
                 {resumable ? t("home.continueStudying") : t("home.getStarted")}
@@ -350,38 +335,29 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Progress gauge */}
-          <div className="hidden flex-col items-center justify-center rounded-2xl border border-amber-200/80 bg-gradient-to-b from-amber-50 to-card p-5 lg:flex dark:border-amber-400/20 dark:from-amber-400/10 dark:to-card">
-            <svg viewBox="0 0 120 120" className="h-28 w-28 -rotate-90">
-              <circle
-                cx="60"
-                cy="60"
-                r="50"
-                fill="none"
-                strokeWidth="11"
-                strokeLinecap="round"
-                className="stroke-amber-200/60 dark:stroke-amber-400/15"
-              />
-              <circle
-                cx="60"
-                cy="60"
-                r="50"
-                fill="none"
-                strokeWidth="11"
-                strokeLinecap="round"
-                strokeDasharray={2 * Math.PI * 50}
-                strokeDashoffset={
-                  2 * Math.PI * 50 * (1 - heroProgress / 100)
-                }
-                className="stroke-amber-500 transition-[stroke-dashoffset] duration-700 dark:stroke-amber-400"
-              />
-            </svg>
-            <p className="-mt-[4.75rem] text-2xl font-bold tabular-nums">
+          {/* Progress scene */}
+          <div className="relative hidden overflow-hidden rounded-2xl border border-border bg-card p-5 lg:block">
+            <ConfettiDots />
+            <p className="relative text-3xl font-bold tabular-nums">
               {heroProgress}%
             </p>
-            <p className="mt-9 text-[11px] font-semibold text-amber-700 dark:text-amber-300">
+            <p className="relative mt-0.5 text-[11px] font-semibold text-muted-foreground">
               {t("misc.progress")}
             </p>
+            <Image
+              src="/illustrations/journey.png"
+              alt=""
+              width={220}
+              height={220}
+              className="pointer-events-none absolute -bottom-3 -right-3 w-36 select-none"
+            />
+            <Image
+              src="/illustrations/props/star-gold.png"
+              alt=""
+              width={60}
+              height={60}
+              className="pointer-events-none absolute right-4 top-4 w-7 rotate-12 select-none"
+            />
           </div>
         </section>
 

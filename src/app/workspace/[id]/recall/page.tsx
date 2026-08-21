@@ -379,7 +379,13 @@ export default function WorkspaceRecallPage() {
 
         {episodes.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border py-16 text-center">
-            <Mic className="h-8 w-8 text-faint" />
+            <Image
+              src="/illustrations/icons/headphones.png"
+              alt=""
+              width={160}
+              height={160}
+              className="pointer-events-none h-20 w-auto select-none"
+            />
             <p className="mt-3 text-sm font-medium">{t("ws.noEpisodes")}</p>
             <p className="mt-1 max-w-sm text-xs text-muted-foreground">
               {t("ws.noEpisodesHint")}

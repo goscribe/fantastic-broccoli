@@ -10,6 +10,7 @@ import { Workspace } from "@/types";
 import { AvatarStack } from "@/components/ui/avatar-stack";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
+import { HeaderDecor } from "@/components/graphics/floating-decor";
 
 export default function SharedPage() {
   const { t } = useI18n();
@@ -25,13 +26,18 @@ export default function SharedPage() {
 
   return (
     <main className="flex-1 px-6 py-6 md:px-10">
-      <div className="mb-6">
-        <h1 className="text-xl font-bold tracking-tight">
-          {t("fc.sharedTitle")}
-        </h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {t("fc.sharedSubtitle")}
-        </p>
+      <div className="mb-6 flex items-center gap-4">
+        <div>
+          <h1 className="text-xl font-bold tracking-tight">
+            {t("fc.sharedTitle")}
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {t("fc.sharedSubtitle")}
+          </p>
+        </div>
+        {shared.length > 0 && (
+          <HeaderDecor image="/illustrations/shared.png" />
+        )}
       </div>
 
       {loading && <CardGridSkeleton count={6} />}

@@ -14,6 +14,7 @@ import { RotateCcw } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { useI18n } from "@/lib/i18n";
+import { HeaderDecor } from "@/components/graphics/floating-decor";
 
 function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
   const { t } = useI18n();
@@ -66,11 +67,16 @@ export default function FlashcardsPage() {
   return (
     <main className="flex-1 px-6 py-6 md:px-10">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="text-xl font-bold tracking-tight">{t("fc.title")}</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {t("fc.subtitle")}
-          </p>
+        <div className="flex items-center gap-4">
+          <div>
+            <h1 className="text-xl font-bold tracking-tight">{t("fc.title")}</h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {t("fc.subtitle")}
+            </p>
+          </div>
+          {(decks ?? []).length > 0 && (
+            <HeaderDecor image="/illustrations/cards.png" />
+          )}
         </div>
         {dueReview && dueReview.total > 0 && (
           <Link

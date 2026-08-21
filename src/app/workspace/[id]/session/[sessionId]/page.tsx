@@ -883,6 +883,14 @@ function GeneratingPlanCard({
     <div className="flex justify-center px-4 py-12 animate-fade-up">
       <div className="w-full max-w-lg">
         <div className="rounded-2xl border border-border bg-card p-6">
+          <video
+            src="/illustrations/loading.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="pointer-events-none mx-auto mb-5 h-32 w-auto select-none rounded-xl"
+          />
           <div className="flex items-start gap-4">
             <div className="mt-0.5 h-7 w-7 shrink-0 rounded-full border-2 border-accent border-t-transparent animate-spin" />
             <div className="min-w-0 flex-1">
