@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ScribeLogo } from "@/components/graphics/logo";
 import { requestPasswordReset } from "@/lib/api/auth";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
@@ -35,6 +36,12 @@ export default function ForgotPasswordPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-sm space-y-8">
+        <div className="flex justify-center">
+          <Link href="/landing" aria-label="Scribe home">
+            <ScribeLogo />
+          </Link>
+        </div>
+
         <div className="text-center space-y-1.5">
           <h1 className="text-2xl font-bold tracking-tight">
             {t("misc.resetPassword")}
