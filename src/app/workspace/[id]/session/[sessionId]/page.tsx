@@ -45,7 +45,6 @@ import { ExplainAloudActivity } from "@/components/session/explain-aloud-activit
 import { WorksheetActivity } from "@/components/session/worksheet-activity";
 import { SessionDebrief } from "@/components/session/session-debrief";
 import { MathText } from "@/components/ui/markdown-text";
-import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, Surface } from "@/components/ui/card";
@@ -554,15 +553,6 @@ export default function SessionDetailPage() {
                 <Clock className="h-3 w-3" />
                 {formatDuration(totalEstimated)}
               </span>
-              <span className="hidden sm:inline text-xs text-muted-foreground">
-                {completedCount}/{activities.length} {t("session.doneCount")}
-              </span>
-              <div className="hidden sm:block w-32">
-                <ProgressBar value={session.progress} size="sm" />
-              </div>
-              <span className="text-xs font-semibold tabular-nums">
-                {session.progress}%
-              </span>
               <button
                 type="button"
                 onClick={() => setShowComments(!showComments)}
@@ -784,6 +774,43 @@ export default function SessionDetailPage() {
           </div>
         </main>
       </div>
+
+      {/* Journey progress bar pinned to the bottom */}
+      {planReady && (
+        <footer className="shrink-0 border-t border-border bg-card px-4 sm:px-6 pb-3 pt-5">
+          <div className="mx-auto flex max-w-3xl items-center gap-3">
+            <span className="shrink-0 text-xs text-muted-foreground tabular-nums">
+              {completedCount}/{activities.length} {t("session.doneCount")}
+            </span>
+            <div className="relative h-2.5 flex-1 rounded-full bg-muted">
+              <div
+                className="absolute inset-y-0 left-0 rounded-full bg-accent transition-all duration-700 ease-out"
+                style={{ width: `${session.progress}%` }}
+              />
+              <Image
+                src="/illustrations/props/flag-mini.png"
+                alt=""
+                width={56}
+                height={56}
+                className="pointer-events-none absolute -top-[18px] h-7 w-7 -translate-x-1/2 select-none object-contain transition-all duration-700 ease-out"
+                style={{ left: `${Math.max(session.progress, 2)}%` }}
+              />
+              <Image
+                src="/illustrations/props/trophy.png"
+                alt=""
+                width={48}
+                height={48}
+                className={`pointer-events-none absolute -right-1.5 -top-[15px] h-6 w-6 select-none object-contain transition-all duration-500 ${
+                  session.progress >= 100 ? "scale-125" : "opacity-70"
+                }`}
+              />
+            </div>
+            <span className="shrink-0 text-xs font-semibold tabular-nums">
+              {session.progress}%
+            </span>
+          </div>
+        </footer>
+      )}
       </div>
 
       {/* Copilot split pane */}
