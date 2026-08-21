@@ -24,10 +24,7 @@ export default function FeaturesPage() {
         <div className="relative mx-auto max-w-6xl px-6">
           <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent">
-                Features
-              </p>
-              <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
                 One study session, everything in it
               </h1>
               <p className="mt-4 max-w-xl text-lg text-muted-foreground text-pretty">

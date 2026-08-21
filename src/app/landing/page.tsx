@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { GlowField } from "@/components/graphics/landing-art";
 import { ConfettiDots } from "@/components/graphics/floating-decor";
 import {
@@ -30,10 +30,6 @@ export default function LandingPage() {
         <div className="relative mx-auto max-w-6xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
             <div className="animate-fade-up">
-              <p className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
-                <Sparkles className="h-3.5 w-3.5 text-accent" />
-                PDFs → flashcards, quizzes &amp; study guides
-              </p>
               <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
                 Stop re-reading.
                 <br />
@@ -60,21 +56,6 @@ export default function LandingPage() {
               <p className="mt-4 text-xs text-faint">
                 Free to start · No credit card required
               </p>
-              <div className="mt-5">
-                <a
-                  href="https://www.producthunt.com/products/scribe-19?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-scribe-1273"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1191678&amp;theme=light&amp;t=1785953007734"
-                    alt="Scribe - Upload anything. Get personalized study sessions in seconds. | Product Hunt"
-                    width={250}
-                    height={54}
-                  />
-                </a>
-              </div>
             </div>
             <div className="hidden animate-fade-up lg:block">
               <HeroPreview />
@@ -95,7 +76,7 @@ export default function LandingPage() {
           </div>
 
           <div className="relative mt-12 border-t border-border pt-10">
-            <p className="text-center text-xs font-medium uppercase tracking-wider text-faint">
+            <p className="text-center text-sm text-muted-foreground">
               Built for every subject you study
             </p>
             <ul className="mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -115,10 +96,7 @@ export default function LandingPage() {
 
       <section className="border-y border-border bg-card/40 py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-accent">
-            How it works
-          </p>
-          <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Upload anything. Study the fun way.
           </h2>
           <ol className="mt-10 grid gap-10 sm:grid-cols-3 sm:gap-8">
@@ -161,10 +139,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent">
-                From students
-              </p>
-              <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
+              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                 What studying with Scribe feels like
               </h2>
             </div>

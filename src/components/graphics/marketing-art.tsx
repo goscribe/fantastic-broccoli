@@ -140,9 +140,7 @@ export function SessionMock({ className }: { className?: string }) {
 function QuizMock() {
   return (
     <div className="space-y-3 bg-background p-5">
-      <p className="text-[11px] font-semibold uppercase tracking-wider text-faint">
-        Worksheet · part (b)
-      </p>
+      <p className="text-[11px] font-semibold text-faint">Worksheet · part (b)</p>
       <p className="text-sm font-semibold">
         Explain why doubling [E] doubles the observed rate.
       </p>
@@ -236,7 +234,7 @@ function UploadMock() {
 function FlashcardMock() {
   return (
     <div className="flex flex-col items-center bg-background px-5 py-7">
-      <p className="text-[11px] font-semibold text-faint">FLASHCARD 7 / 18</p>
+      <p className="text-[11px] font-semibold text-faint">Card 7 of 18</p>
       <div className="relative mt-4 w-full max-w-xs">
         <div className="absolute inset-x-3 top-2 h-full rounded-2xl border border-border bg-muted" />
         <div className="relative rounded-2xl border border-border bg-card px-5 py-8 text-center shadow-sm">
@@ -278,10 +276,7 @@ export function FeatureSplit({ scene }: { scene: FeatureScene }) {
   );
   const copy = (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-widest text-accent">
-        {scene.kicker}
-      </p>
-      <h2 className="mt-2 text-2xl font-bold tracking-tight text-balance sm:text-3xl">
+      <h2 className="text-2xl font-bold tracking-tight text-balance sm:text-3xl">
         {scene.title}
       </h2>
       <p className="mt-3 max-w-lg text-muted-foreground text-pretty">

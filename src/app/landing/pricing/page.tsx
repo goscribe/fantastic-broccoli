@@ -26,10 +26,7 @@ export default function LandingPricingPage() {
         <div className="relative mx-auto max-w-6xl px-6">
           <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent">
-                Pricing
-              </p>
-              <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
                 Simple, student-friendly pricing
               </h1>
               <p className="mt-4 max-w-xl text-lg text-muted-foreground">
@@ -56,14 +53,7 @@ export default function LandingPricingPage() {
                     : "border-border bg-card"
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-semibold">{plan.name}</p>
-                  {plan.highlighted && (
-                    <span className="rounded-full bg-accent-soft px-2.5 py-0.5 text-[11px] font-semibold text-accent">
-                      Most popular
-                    </span>
-                  )}
-                </div>
+                <p className="text-sm font-semibold">{plan.name}</p>
                 <p className="mt-3 text-3xl font-bold tracking-tight">
                   {plan.price}
                 </p>

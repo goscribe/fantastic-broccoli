@@ -34,10 +34,7 @@ export default function LandingFaqPage() {
         <div className="relative mx-auto max-w-6xl px-6">
           <div className="grid items-end gap-8 lg:grid-cols-[1.2fr_0.8fr]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent">
-                FAQ
-              </p>
-              <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
                 Questions, answered
               </h1>
               <p className="mt-4 max-w-xl text-muted-foreground">

@@ -51,15 +51,6 @@ export function HeroPreview() {
           height={594}
         />
       </div>
-      <div
-        className="animate-float absolute -right-4 -top-6 z-10 hidden items-center gap-2 rounded-full border border-border bg-card py-1.5 pl-1.5 pr-3.5 shadow-sm xl:flex"
-        style={{ animationDelay: "-2.5s" }}
-      >
-        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-soft text-accent">
-          <Check className="h-3.5 w-3.5" />
-        </span>
-        <span className="text-[12px] font-semibold">Nice — that’s the one</span>
-      </div>
       <DeviceFrame url="scribe.study — Biochemistry · Week 4">
         <div className="bg-background p-5">
           <div className="flex items-center justify-between">
@@ -77,7 +68,7 @@ export function HeroPreview() {
                 3 sources parsed &amp; ready
               </p>
             </div>
-            <span className="rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold tabular-nums text-accent">
+            <span className="text-[12px] font-semibold tabular-nums text-muted-foreground">
               {progress}% done
             </span>
           </div>

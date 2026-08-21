@@ -145,9 +145,7 @@ export function LandingFooter() {
             },
           ].map((column) => (
             <div key={column.heading}>
-              <p className="text-xs font-semibold uppercase tracking-wider text-faint">
-                {column.heading}
-              </p>
+              <p className="text-xs font-semibold text-faint">{column.heading}</p>
               <ul className="mt-3 space-y-2">
                 {column.links.map((link) => (
                   <li key={link.label}>
