@@ -342,8 +342,8 @@ export function FeatureSplit({ scene }: { scene: FeatureScene }) {
       <ul className="mt-6 space-y-3">
         {scene.bullets.map((item) => (
           <li key={item} className="flex items-start gap-2.5 text-sm">
-            <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-[0_2px_0_0_var(--accent-dim)]">
-              <Check className="h-3.5 w-3.5" />
+            <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-accent-soft">
+              <Check className="h-3 w-3 text-accent" />
             </span>
             <span className="text-muted-foreground">{item}</span>
           </li>

@@ -11,21 +11,19 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-accent text-accent-foreground font-bold shadow-[0_4px_0_0_var(--accent-dim)] hover:brightness-110 active:translate-y-[3px] active:shadow-none",
-  secondary:
-    "bg-muted text-foreground font-bold border border-border-strong shadow-[0_3px_0_0_var(--border-strong)] hover:bg-border active:translate-y-[3px] active:shadow-none",
+    "bg-accent text-accent-foreground hover:bg-accent-dim font-semibold",
+  secondary: "bg-muted text-foreground hover:bg-border border border-border-strong",
   outline:
-    "bg-card text-foreground font-bold border-2 border-border-strong shadow-[0_3px_0_0_var(--border-strong)] hover:border-accent hover:text-accent active:translate-y-[3px] active:shadow-none",
+    "bg-card text-foreground border border-border-strong hover:border-accent/50 hover:text-accent",
   ghost: "text-muted-foreground hover:text-foreground hover:bg-muted",
-  danger:
-    "bg-rose/10 text-rose font-bold border border-rose/30 shadow-[0_3px_0_0_color-mix(in_srgb,var(--rose)_45%,transparent)] hover:bg-rose/20 active:translate-y-[3px] active:shadow-none",
+  danger: "bg-rose/10 text-rose border border-rose/30 hover:bg-rose/20",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "h-9 px-3.5 text-sm rounded-2xl",
-  md: "h-11 px-5 text-sm rounded-2xl",
-  lg: "h-12 px-7 text-base rounded-2xl",
-  icon: "h-10 w-10 rounded-2xl",
+  sm: "h-8 px-3 text-sm rounded-full",
+  md: "h-10 px-5 text-sm rounded-full",
+  lg: "h-12 px-7 text-base rounded-full",
+  icon: "h-9 w-9 rounded-full",
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -34,9 +32,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "inline-flex items-center justify-center font-medium transition-[transform,box-shadow,filter,background-color,border-color,color] duration-150",
+          "inline-flex items-center justify-center font-medium transition-all duration-150",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-          "disabled:opacity-40 disabled:pointer-events-none",
+          "disabled:opacity-40 disabled:pointer-events-none active:scale-[0.98]",
           variantClasses[variant],
           sizeClasses[size],
           className,

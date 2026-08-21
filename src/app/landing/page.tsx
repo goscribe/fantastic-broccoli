@@ -113,25 +113,17 @@ export default function LandingPage() {
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">How it works</h2>
           <ol className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6">
             {howItWorks.map((step) => (
-              <li key={step.num} className="group">
+              <li key={step.num}>
                 <ArtStage
                   src={step.art}
                   tint={step.tint}
                   side={step.side}
                   size="md"
                 />
-                <span
-                  className={`mt-5 flex h-9 w-9 items-center justify-center rounded-2xl text-sm font-extrabold text-white shadow-[0_3px_0_0_rgba(0,0,0,0.12)] ${
-                    step.tint === "sky"
-                      ? "bg-sky"
-                      : step.tint === "rose"
-                        ? "bg-rose"
-                        : "bg-accent"
-                  }`}
-                >
+                <span className="mt-5 flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-sm font-bold text-accent">
                   {step.num}
                 </span>
-                <h3 className="mt-3 text-base font-bold">{step.title}</h3>
+                <h3 className="mt-3 text-base font-semibold">{step.title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                   {step.description}
                 </p>
