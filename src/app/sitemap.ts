@@ -17,6 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${siteUrl}/landing/how-it-works`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
       url: `${siteUrl}/landing/pricing`,
       lastModified,
       changeFrequency: "monthly",

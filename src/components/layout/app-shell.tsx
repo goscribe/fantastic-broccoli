@@ -41,7 +41,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="h-screen flex overflow-hidden">
+    <div className="h-screen flex overflow-hidden bg-background">
       <Sidebar
         mobileOpen={sidebarOpen}
         onMobileClose={() => setSidebarOpen(false)}

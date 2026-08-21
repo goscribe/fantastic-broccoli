@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Check } from "lucide-react";
 import { ProductCard } from "@/components/graphics/marketing-art";
 import {
@@ -71,7 +72,6 @@ export function HeroPreview() {
             {sessionPreview.map((item, i) => {
               const done = i < doneCount;
               const active = i === doneCount;
-              const Icon = item.icon;
               return (
                 <li
                   key={item.label}
@@ -82,16 +82,21 @@ export function HeroPreview() {
                   }`}
                 >
                   <span
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${
-                      done
-                        ? "bg-accent-soft text-accent"
-                        : "bg-muted text-muted-foreground"
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl ${
+                      done ? "bg-accent-soft" : "bg-muted/60"
                     }`}
                   >
                     {done ? (
-                      <Check className="h-3.5 w-3.5" />
+                      <Check className="h-4 w-4 text-accent" />
                     ) : (
-                      <Icon className="h-3.5 w-3.5" />
+                      <Image
+                        src={item.art}
+                        alt=""
+                        width={28}
+                        height={28}
+                        unoptimized
+                        className="h-6 w-6 object-contain"
+                      />
                     )}
                   </span>
                   <span
@@ -133,19 +138,30 @@ export function StatsStrip() {
         {
           value: `${roundedDown(stats.artifacts, 100).toLocaleString()}+`,
           label: "practice artifacts generated",
+          icon: "/illustrations/icons/stat-bolt.png",
         },
         {
           value: `${roundedDown(stats.activities, 10).toLocaleString()}+`,
           label: "study activities built",
+          icon: "/illustrations/icons/act-flashcards.png",
         },
         {
           value: `${stats.countries}`,
           label: "countries studying with Scribe",
+          icon: "/illustrations/flag.png",
         },
       ].map((stat) => (
-        <div key={stat.label}>
+        <div key={stat.label} className="flex flex-col items-center">
           <dt className="sr-only">{stat.label}</dt>
-          <dd className="text-3xl font-bold tracking-tight tabular-nums">
+          <Image
+            src={stat.icon}
+            alt=""
+            width={80}
+            height={80}
+            unoptimized
+            className="mb-2 h-14 w-14 object-contain"
+          />
+          <dd className="text-4xl font-extrabold tracking-tight tabular-nums">
             {stat.value}
           </dd>
           <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>

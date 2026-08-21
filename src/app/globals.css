@@ -92,9 +92,8 @@
   --color-ring: var(--ring);
   --color-success: var(--success);
   --color-warning: var(--warning);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-nunito);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
   --radius: var(--radius);
 }
 
@@ -103,14 +102,6 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   -webkit-font-smoothing: antialiased;
-}
-
-/* Landing headlines — a soft serif so the 3D art sits in an editorial frame. */
-.landing-type h1,
-.landing-type h2 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.03em;
 }
 
 /* Parameter sliders */
@@ -189,6 +180,30 @@ input[type="range"].param-slider:active::-moz-range-thumb {
 }
 .animate-float {
   animation: float-y 5s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-12px) rotate(4deg); }
+}
+.animate-bob {
+  animation: bob 4.2s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-4deg) scale(1); }
+  50% { transform: rotate(5deg) scale(1.06); }
+}
+.animate-wiggle {
+  animation: wiggle 2.8s ease-in-out infinite;
+}
+
+.sticker-3d {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.group:hover .sticker-3d,
+.sticker-3d:hover {
+  transform: scale(1.12) rotate(-8deg);
 }
 
 @keyframes pulse-dot {

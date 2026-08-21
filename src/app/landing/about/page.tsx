@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/seo";
 import { ArtStage, CtaBand } from "@/components/graphics/marketing-art";
 import { GlowField } from "@/components/graphics/landing-art";
+import { testimonials } from "../data";
 
 export const metadata: Metadata = {
   title: "About",
@@ -15,13 +16,15 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const [featured, ...restQuotes] = testimonials;
+
   return (
     <>
       <section className="relative overflow-hidden py-16 md:py-24">
         <GlowField />
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <h1 className="text-3xl tracking-tight sm:text-4xl md:text-5xl">
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
               The pre-scribed learning tool
             </h1>
             <p className="mt-5 text-lg text-muted-foreground text-pretty">
@@ -40,7 +43,7 @@ export default function AboutPage() {
             src="/illustrations/marketing/mkt-clip.png"
             tint="rose"
             side="bottom"
-            size="md"
+            size="lg"
           />
         </div>
       </section>
@@ -67,6 +70,48 @@ export default function AboutPage() {
               </p>
             </div>
           ))}
+        </div>
+      </section>
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            What studying with Scribe feels like
+          </h2>
+          <div className="mt-10 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+            <ArtStage
+              src="/illustrations/marketing/mkt-worksheet.png"
+              tint="sky"
+              side="right"
+              size="md"
+              className="p-6 sm:p-8"
+            >
+              <blockquote className="relative z-10 max-w-md">
+                <p className="text-base leading-relaxed text-pretty sm:text-lg">
+                  “{featured.quote}”
+                </p>
+                <footer className="mt-5">
+                  <p className="text-sm font-semibold">{featured.name}</p>
+                  <p className="text-[12px] text-muted-foreground">
+                    {featured.role}
+                  </p>
+                </footer>
+              </blockquote>
+            </ArtStage>
+            <ul className="grid gap-5">
+              {restQuotes.map((t) => (
+                <li
+                  key={t.name}
+                  className="rounded-2xl border border-border bg-card p-5"
+                >
+                  <p className="text-sm leading-relaxed text-pretty">
+                    “{t.quote}”
+                  </p>
+                  <p className="mt-3 text-sm font-semibold">{t.name}</p>
+                  <p className="text-[12px] text-muted-foreground">{t.role}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
       <CtaBand />

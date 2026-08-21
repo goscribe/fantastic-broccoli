@@ -125,7 +125,7 @@ export function TopBar({
 
   return (
     <>
-      <div className="sticky top-0 z-40 border-b border-border bg-card/85 backdrop-blur-md">
+      <div className="sticky top-0 z-40 border-b border-border bg-white dark:bg-card">
         <div className="flex h-14 items-center justify-between px-5">
           <div className="flex items-center gap-2">
             {onMenuClick && (
@@ -133,7 +133,7 @@ export function TopBar({
                 type="button"
                 aria-label={t("misc.openSidebar")}
                 onClick={onMenuClick}
-                className="-ml-2 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground md:hidden"
+                className="-ml-2 rounded-xl p-2 text-muted-foreground hover:bg-muted hover:text-foreground md:hidden"
               >
                 <Menu className="h-4 w-4" />
               </button>
@@ -143,11 +143,11 @@ export function TopBar({
                 <ScribeLogo />
               </Link>
             )}
-            <span className="hidden items-center gap-2 text-[13px] text-muted-foreground sm:flex">
+            <span className="hidden items-center gap-2 text-sm font-semibold text-foreground sm:flex">
               {showLogo && <span className="text-faint">/</span>}
               {workspaceId ? (
                 <>
-                  <Link href="/" className="hover:text-foreground">
+                  <Link href="/" className="font-medium text-muted-foreground hover:text-foreground">
                     {t("misc.workspaces")}
                   </Link>
                   {workspace && (
@@ -187,7 +187,7 @@ export function TopBar({
                 onClick={requestGuidedTour}
                 title={t("misc.showMeAround")}
                 aria-label={t("misc.startGuidedTour")}
-                className="hidden rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground md:block"
+                className="hidden rounded-xl p-2 text-muted-foreground hover:bg-muted hover:text-foreground md:block"
               >
                 <HelpCircle className="h-4 w-4" />
               </button>
@@ -196,7 +196,7 @@ export function TopBar({
               <button
                 type="button"
                 onClick={openNotifications}
-                className="relative rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+                className="relative rounded-xl p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
                 aria-label={t("misc.notifications")}
               >
                 <Bell className="h-4 w-4" />
@@ -283,7 +283,7 @@ export function TopBar({
                 type="button"
                 onClick={() => setMenuOpen((v) => !v)}
                 aria-label={t("misc.accountMenu")}
-                className="ml-1 flex h-7 w-7 items-center justify-center overflow-hidden rounded-full border border-accent/20 bg-accent-soft text-xs font-bold text-accent hover:border-accent/50"
+                className="ml-1 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-accent/20 bg-accent-soft text-xs font-bold text-accent hover:border-accent/50"
               >
                 {user?.profilePicture ? (
                   // eslint-disable-next-line @next/next/no-img-element

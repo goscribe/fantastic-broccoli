@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Check, FileText, MessageSquare } from "lucide-react";
 import { absoluteUrl } from "@/lib/seo";
-import { ArtStage, CtaBand, ProductCard } from "@/components/graphics/marketing-art";
+import {
+  ArtStage,
+  CtaBand,
+  FunFeatureCard,
+  ProductCard,
+} from "@/components/graphics/marketing-art";
 import { DotGrid, GlowField } from "@/components/graphics/landing-art";
 import { ScribeMark } from "@/components/graphics/logo";
 import {
@@ -33,7 +37,7 @@ export default function FeaturesPage() {
         <div className="relative mx-auto max-w-6xl px-6">
           <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
-              <h1 className="text-3xl tracking-tight sm:text-4xl md:text-5xl">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
                 One study session, everything in it
               </h1>
               <p className="mt-4 max-w-xl text-lg text-muted-foreground text-pretty">
@@ -46,37 +50,12 @@ export default function FeaturesPage() {
               src="/illustrations/marketing/mkt-reading.png"
               tint="sky"
               side="right"
-              size="md"
+              size="lg"
             />
           </div>
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature) => (
-              <li
-                key={feature.title}
-                className="group relative overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm"
-              >
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute -right-8 -top-8 h-20 w-20 rounded-full opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
-                  style={{
-                    background:
-                      "radial-gradient(circle, var(--accent-bright), transparent 70%)",
-                  }}
-                />
-                <span className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted/50">
-                  <Image
-                    src={feature.icon}
-                    alt=""
-                    width={32}
-                    height={32}
-                    className="h-7 w-7 object-contain"
-                  />
-                </span>
-                <h2 className="mt-3 text-sm font-semibold">{feature.title}</h2>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                  {feature.description}
-                </p>
-              </li>
+              <FunFeatureCard key={feature.title} heading="h2" {...feature} />
             ))}
           </ul>
         </div>

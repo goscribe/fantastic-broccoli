@@ -11,8 +11,9 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 const navLinks = [
   { href: "/landing", label: "Home" },
   { href: "/landing/features", label: "Features" },
+  { href: "/landing/how-it-works", label: "How it works" },
   { href: "/landing/pricing", label: "Pricing" },
-  { href: "/landing/faq", label: "Questions" },
+  { href: "/landing/about", label: "About" },
 ];
 
 export function LandingHeader() {
@@ -21,19 +22,19 @@ export function LandingHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-border bg-white dark:bg-card">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/landing" onClick={() => setOpen(false)}>
           <ScribeLogo />
         </Link>
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-0.5 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+              className={`rounded-full px-3.5 py-1.5 text-sm font-bold transition-colors ${
                 pathname === link.href
-                  ? "bg-muted text-foreground"
+                  ? "bg-accent-soft text-accent"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -65,7 +66,7 @@ export function LandingHeader() {
           </Link>
           <button
             type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground hover:bg-muted md:hidden"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground hover:bg-muted lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
           >
@@ -74,7 +75,7 @@ export function LandingHeader() {
         </nav>
       </div>
       {open && (
-        <div className="border-t border-border px-6 py-4 md:hidden">
+        <div className="border-t border-border px-6 py-4 lg:hidden">
           <nav className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link
@@ -125,7 +126,7 @@ export function LandingFooter() {
               heading: "Product",
               links: [
                 ...navLinks.filter((l) => l.href !== "/landing"),
-                { label: "About", href: "/landing/about" },
+                { label: "Questions", href: "/landing/faq" },
               ],
             },
             {

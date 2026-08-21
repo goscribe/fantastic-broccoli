@@ -13,22 +13,29 @@ import type { ArtSide, ArtTint, FeatureScene, SceneMock } from "@/app/landing/da
 import { cn } from "@/lib/utils";
 
 const TINTS: Record<ArtTint, string> = {
-  accent: "bg-accent-soft/80",
-  sky: "bg-sky/15",
-  rose: "bg-rose/12",
-  amber: "bg-amber/15",
+  accent: "bg-accent-soft",
+  sky: "bg-sky/25",
+  rose: "bg-rose/20",
+  amber: "bg-amber/25",
 };
 
 const ART_POS: Record<ArtSide, string> = {
-  right: "-bottom-8 -right-6 sm:-bottom-10 sm:-right-10",
-  left: "-bottom-8 -left-6 sm:-bottom-10 sm:-left-10",
-  bottom: "-bottom-10 left-1/2 -translate-x-1/2",
+  right: "-bottom-10 -right-8 sm:-bottom-14 sm:-right-12",
+  left: "-bottom-10 -left-8 sm:-bottom-14 sm:-left-12",
+  bottom: "-bottom-14 left-1/2 -translate-x-1/2",
 };
 
 const ART_SIZE = {
-  sm: "w-32 sm:w-40",
-  md: "w-44 sm:w-56",
-  lg: "w-56 sm:w-72",
+  sm: "w-40 sm:w-52",
+  md: "w-56 sm:w-72",
+  lg: "w-72 sm:w-96",
+  xl: "w-80 sm:w-[28rem]",
+};
+
+const CHILD_PAD: Record<ArtSide, string> = {
+  right: "pr-16 sm:pr-28 md:pr-36",
+  left: "pl-16 sm:pl-28 md:pl-36",
+  bottom: "pb-20 sm:pb-28",
 };
 
 /** Tinted panel the 3D art bleeds off — same idea as the in-app empty states. */
@@ -50,28 +57,65 @@ export function ArtStage({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-3xl",
+        "relative overflow-hidden rounded-[1.75rem]",
         TINTS[tint],
         className,
       )}
     >
       {children ? (
-        <div className="relative z-10">{children}</div>
+        <div className={cn("relative z-10", CHILD_PAD[side])}>{children}</div>
       ) : (
-        <div className="h-44 sm:h-48" />
+        <div className="h-52 sm:h-56" />
       )}
-      <Image
-        src={src}
-        alt=""
-        width={880}
-        height={880}
+      <div
         className={cn(
-          "pointer-events-none absolute select-none object-contain drop-shadow-[0_18px_36px_rgba(105,82,224,0.18)]",
+          "pointer-events-none absolute",
           ART_POS[side],
           ART_SIZE[size],
         )}
-      />
+      >
+        <Image
+          src={src}
+          alt=""
+          width={880}
+          height={880}
+          unoptimized
+          className="w-full select-none object-contain drop-shadow-[0_22px_40px_rgba(105,82,224,0.28)] animate-bob"
+        />
+      </div>
     </div>
+  );
+}
+
+export function FunFeatureCard({
+  icon,
+  title,
+  description,
+  heading: Heading = "h3",
+}: {
+  icon: string;
+  title: string;
+  description: string;
+  tint?: ArtTint;
+  heading?: "h2" | "h3";
+}) {
+  return (
+    <li className="group relative overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm">
+      <span className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted/50">
+        <Image
+          src={icon}
+          alt=""
+          width={32}
+          height={32}
+          unoptimized
+          className="h-7 w-7 object-contain"
+        />
+      </span>
+      <Heading className="mt-3 text-sm font-semibold">{title}</Heading>
+      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+        {description}
+      </p>
+    </li>
   );
 }
 
@@ -330,7 +374,7 @@ export function CtaBand({
           src="/illustrations/marketing/mkt-celebrate.png"
           tint="accent"
           side="right"
-          size="lg"
+          size="xl"
           className="px-8 py-12 sm:px-12 sm:py-16"
         >
           <div className="relative z-10 max-w-lg">

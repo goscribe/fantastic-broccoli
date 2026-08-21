@@ -39,8 +39,9 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
-import { HeroScene, ConfettiDots } from "@/components/graphics/floating-decor";
+import { HeroScene, ConfettiDots, Sticker } from "@/components/graphics/floating-decor";
 import { Banner } from "@/components/ui/banner";
+import { Button } from "@/components/ui/button";
 
 function computeStreak(daily: DailyActivityPoint[]): number {
   const byDate = new Map(daily.map((d) => [d.date, d.count]));
@@ -261,7 +262,7 @@ export default function HomePage() {
           data-tour="home-banner"
           className="relative z-10 grid gap-4 animate-fade-up lg:grid-cols-[1fr_250px]"
         >
-          <div className="relative rounded-2xl border border-border bg-card p-7">
+          <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-7">
             {resumable ? (
               <HeroScene />
             ) : (
@@ -269,16 +270,21 @@ export default function HomePage() {
                 <Image
                   src="/illustrations/welcome.png"
                   alt=""
-                  width={220}
-                  height={220}
+                  width={280}
+                  height={280}
                   priority
-                  className="pointer-events-none absolute bottom-2 right-6 hidden w-44 select-none md:block lg:right-10 lg:w-52"
+                  unoptimized
+                  className="pointer-events-none absolute -bottom-6 right-2 hidden w-52 select-none animate-bob md:block lg:right-6 lg:w-64"
+                />
+                <Sticker
+                  src="/illustrations/props/star-gold.png"
+                  className="right-36 top-4 hidden w-9 rotate-12 md:block"
                 />
                 <ConfettiDots className="hidden md:block" />
               </>
             )}
             <div className="relative max-w-lg">
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight leading-snug">
+              <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight leading-snug">
                 {resumable
                   ? resumable.session.title
                   : t("misc.firstWinTitle")}
@@ -290,42 +296,38 @@ export default function HomePage() {
               </p>
               {resumable ? (
                 <div className="mt-5 flex flex-wrap items-center gap-2.5">
-                  <button
+                  <Button
                     type="button"
                     onClick={() =>
                       router.push(
                         `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
                       )
                     }
-                    className="group inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-[13px] font-semibold text-accent-foreground hover:opacity-90 transition-opacity"
+                    className="gap-2"
                   >
                     {t("home.resumeSession")}
-                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-                  </button>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Button>
                   <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
                     {(toggle) => (
-                      <button
-                        type="button"
-                        onClick={toggle}
-                        className="inline-flex items-center gap-2 rounded-lg border border-border-strong bg-card px-4 py-2 text-[13px] font-semibold hover:border-accent/50 transition-colors"
-                      >
+                      <Button type="button" variant="outline" onClick={toggle} className="gap-2">
                         <Plus className="h-3.5 w-3.5" />
                         {t("nav.newWorkspace")}
-                      </button>
+                      </Button>
                     )}
                   </NewWorkspaceMenu>
                 </div>
               ) : (
                 <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
                   {(toggle) => (
-                    <button
+                    <Button
                       type="button"
                       onClick={toggle}
-                      className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-accent-foreground hover:opacity-90 transition-opacity sm:w-auto sm:py-2 sm:text-[13px]"
+                      className="mt-5 gap-2 w-full sm:w-auto"
                     >
                       <Plus className="h-4 w-4" />
                       {t("nav.newWorkspace")}
-                    </button>
+                    </Button>
                   )}
                 </NewWorkspaceMenu>
               )}
@@ -335,10 +337,10 @@ export default function HomePage() {
           {/* Progress scene */}
           <div className="relative hidden overflow-hidden rounded-2xl border border-border bg-card p-5 lg:block">
             <ConfettiDots />
-            <p className="relative text-3xl font-bold tabular-nums">
+            <p className="relative text-4xl font-extrabold tabular-nums">
               {heroProgress}%
             </p>
-            <p className="relative mt-0.5 text-[11px] font-semibold text-muted-foreground">
+            <p className="relative mt-0.5 text-[11px] font-bold text-muted-foreground">
               {t("misc.progress")}
             </p>
             <Image
@@ -346,14 +348,16 @@ export default function HomePage() {
               alt=""
               width={220}
               height={220}
-              className="pointer-events-none absolute -bottom-3 -right-3 w-36 select-none"
+              unoptimized
+              className="pointer-events-none absolute -bottom-4 -right-3 w-40 select-none animate-bob"
             />
             <Image
               src="/illustrations/props/star-gold.png"
               alt=""
               width={60}
               height={60}
-              className="pointer-events-none absolute right-4 top-4 w-7 rotate-12 select-none"
+              unoptimized
+              className="pointer-events-none absolute right-4 top-4 w-9 rotate-12 select-none animate-wiggle"
             />
           </div>
         </section>
@@ -385,30 +389,31 @@ export default function HomePage() {
           </Link>
         )}
 
-        {/* Study overview: slim strip; calendar + weekly chart live behind a toggle
-            so they never push real content below the fold. */}
+        {/* Study overview: stats stay visible; calendar + weekly chart live
+            behind a toggle so they never push real content below the fold. */}
         <section className="animate-fade-up">
           {calendarLoading || treeLoading ? (
-            <Skeleton className="h-12 w-full rounded-xl" />
+            <Skeleton className="h-24 w-full rounded-2xl" />
           ) : (
-            <div className="rounded-xl border border-border bg-card">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-3 py-2">
-                <div className="flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 py-0.5 pl-1 pr-2.5 dark:border-amber-400/25 dark:bg-amber-400/10">
-                  <Image
-                    src="/illustrations/icons/stat-flame.png"
-                    alt=""
-                    width={48}
-                    height={48}
-                    className="pointer-events-none h-5 w-5 shrink-0 select-none object-contain"
-                  />
-                  <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-300">
-                    <span className="text-[13px] font-bold tabular-nums">
-                      {streak}
-                    </span>{" "}
-                    {t("misc.dayStreak")}
-                  </p>
-                </div>
+            <div className="relative rounded-2xl border border-border bg-card">
+              <button
+                type="button"
+                onClick={() => setOverviewOpen((o) => !o)}
+                className="absolute right-3 top-3 z-10 flex items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-semibold text-muted-foreground hover:bg-muted/60 transition-colors"
+                aria-expanded={overviewOpen}
+              >
+                {t("misc.studyOverview")}
+                <ChevronDown
+                  className={`h-3.5 w-3.5 transition-transform ${overviewOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-4 px-4 py-4 sm:grid-cols-3 lg:grid-cols-5 lg:pr-36">
                 {[
+                  {
+                    label: t("misc.dayStreak"),
+                    value: String(streak),
+                    icon: "/illustrations/icons/stat-flame.png",
+                  },
                   {
                     label: t("misc.activeDays"),
                     value: String(
@@ -426,7 +431,7 @@ export default function HomePage() {
                   {
                     label: t("misc.activePlans"),
                     value: String(activeSessions.length),
-                    icon: "/illustrations/props/flag-mini.png",
+                    icon: "/illustrations/flag.png",
                   },
                   {
                     label: t("misc.timePlanned"),
@@ -436,35 +441,27 @@ export default function HomePage() {
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="flex items-center gap-1.5 leading-none"
+                    className="flex min-w-0 items-center gap-3"
                     title={stat.label}
                   >
                     <Image
                       src={stat.icon}
                       alt=""
-                      width={64}
-                      height={64}
-                      className="pointer-events-none h-5 w-5 shrink-0 select-none object-contain"
+                      width={96}
+                      height={96}
+                      unoptimized
+                      className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
                     />
-                    <p className="text-[13px] font-bold tabular-nums">
-                      {stat.value}
-                    </p>
-                    <p className="hidden text-[11px] font-medium text-muted-foreground sm:block">
-                      {stat.label}
-                    </p>
+                    <div className="min-w-0">
+                      <p className="text-xl font-bold tabular-nums leading-none tracking-tight">
+                        {stat.value}
+                      </p>
+                      <p className="mt-1 truncate text-xs font-medium text-muted-foreground">
+                        {stat.label}
+                      </p>
+                    </div>
                   </div>
                 ))}
-                <button
-                  type="button"
-                  onClick={() => setOverviewOpen((o) => !o)}
-                  className="ml-auto flex items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-semibold text-muted-foreground hover:bg-muted/60 transition-colors"
-                  aria-expanded={overviewOpen}
-                >
-                  {t("misc.studyOverview")}
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform ${overviewOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
               </div>
               {overviewOpen && (
                 <div className="grid gap-4 border-t border-border p-3.5 lg:grid-cols-[320px_1fr]">

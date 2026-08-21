@@ -125,7 +125,8 @@ export default function WorkspaceStudyPage() {
                 alt=""
                 width={200}
                 height={200}
-                className="absolute -bottom-3 right-0 w-24"
+                unoptimized
+                className="absolute -bottom-4 right-0 w-32 animate-bob"
               />
               <ConfettiDots />
             </div>
