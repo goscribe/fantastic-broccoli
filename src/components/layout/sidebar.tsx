@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import { ScribeLogo } from "@/components/graphics/logo";
+import { ScribeMark } from "@/components/graphics/logo";
 import { accentNameForColor, accentNameForId } from "@/lib/accent-palette";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { onTreeChanged } from "@/lib/tree-events";
@@ -21,18 +21,37 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import {
-  Home,
-  Layers,
   ChevronRight,
   FilePlus2,
   FolderPlus,
   Plus,
   Search,
   X,
-  Users,
   Settings,
   LogOut,
 } from "lucide-react";
+
+function ClayIcon({
+  src,
+  className,
+}: {
+  src: string;
+  className?: string;
+}) {
+  return (
+    <Image
+      src={src}
+      alt=""
+      width={64}
+      height={64}
+      unoptimized
+      className={cn(
+        "pointer-events-none shrink-0 select-none object-contain",
+        className,
+      )}
+    />
+  );
+}
 
 function FolderNode({
   folder,
@@ -56,7 +75,7 @@ function FolderNode({
     <div>
       <div
         className={cn(
-          "group flex items-center gap-1 rounded-md py-1 pr-2 text-[13px] font-medium",
+          "group flex items-center gap-1 rounded-xl py-1.5 pr-2 text-[13px] font-medium",
           active
             ? "bg-accent-soft text-foreground"
             : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -81,12 +100,9 @@ function FolderNode({
           onClick={() => router.push(`/folder/${folder.id}`)}
           className="flex min-w-0 flex-1 items-center gap-1.5 text-left"
         >
-          <Image
+          <ClayIcon
             src={`/illustrations/icons/folder-${accentNameForColor(folder.color, folder.id)}.png`}
-            alt=""
-            width={40}
-            height={40}
-            className="pointer-events-none h-4 w-4 shrink-0 select-none object-contain"
+            className="h-6 w-6"
           />
           <span className="truncate">{folder.name}</span>
         </button>
@@ -120,19 +136,16 @@ function FolderNode({
                 type="button"
                 onClick={() => router.push(`/workspace/${ws.id}`)}
                 className={cn(
-                  "w-full flex items-center gap-1.5 rounded-md py-1 pr-2 text-[13px] text-left",
+                  "w-full flex items-center gap-2 rounded-xl py-1.5 pr-2 text-[13px] text-left",
                   active
                     ? "bg-accent-soft text-accent font-medium"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground",
                 )}
                 style={{ paddingLeft: `${(depth + 1) * 14 + 24}px` }}
               >
-                <Image
+                <ClayIcon
                   src={`/illustrations/icons/ws-${accentNameForId(ws.id)}.png`}
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="pointer-events-none h-4 w-4 shrink-0 select-none object-contain"
+                  className="h-6 w-6"
                 />
                 <span className="truncate">{ws.title}</span>
               </button>
@@ -204,13 +217,14 @@ export function Sidebar({
   return (
     <aside
       className={cn(
-        "w-72 shrink-0 flex-col bg-card border-r border-border",
+        "w-72 shrink-0 flex-col bg-background border-r border-border",
         "max-md:fixed max-md:inset-y-0 max-md:left-0 max-md:z-50 max-md:transition-transform",
         mobileOpen ? "flex" : "max-md:-translate-x-full hidden md:flex",
       )}
     >
-      <div className="flex items-center px-4 h-14">
-        <ScribeLogo />
+      <div className="flex items-center gap-2 px-4 h-14">
+        <ScribeMark className="h-8 w-8" />
+        <span className="text-base font-bold tracking-tight">Scribe</span>
         {onMobileClose && (
           <button
             type="button"
@@ -228,7 +242,7 @@ export function Sidebar({
           type="button"
           data-tour="sidebar-search"
           onClick={() => setPaletteOpen(true)}
-          className="w-full flex items-center gap-2 rounded-md border border-border bg-card px-2.5 py-1.5 text-[13px] text-faint hover:border-border-strong"
+          className="w-full flex items-center gap-2 rounded-xl border border-border bg-card px-2.5 py-2 text-[13px] text-faint hover:border-border-strong"
         >
           <Search className="h-3.5 w-3.5" />
           Search…
@@ -246,37 +260,37 @@ export function Sidebar({
           <Link
             href="/"
             className={cn(
-              "flex items-center gap-2 rounded-md px-1.5 py-1.5 text-[13px] font-medium",
+              "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-semibold",
               pathname === "/"
                 ? "bg-accent-soft text-accent"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            <Home className="h-4 w-4" />
+            <ClayIcon src="/illustrations/journey.png" className="h-7 w-7" />
             {t("nav.home")}
           </Link>
           <Link
             href="/flashcards"
             className={cn(
-              "flex items-center gap-2 rounded-md px-1.5 py-1.5 text-[13px] font-medium",
+              "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-semibold",
               pathname.startsWith("/flashcards")
                 ? "bg-accent-soft text-accent"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            <Layers className="h-4 w-4" />
+            <ClayIcon src="/illustrations/cards.png" className="h-7 w-7" />
             {t("nav.flashcards")}
           </Link>
           <Link
             href="/shared"
             className={cn(
-              "flex items-center gap-2 rounded-md px-1.5 py-1.5 text-[13px] font-medium",
+              "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-semibold",
               pathname.startsWith("/shared")
                 ? "bg-accent-soft text-accent"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            <Users className="h-4 w-4" />
+            <ClayIcon src="/illustrations/shared.png" className="h-7 w-7" />
             {t("nav.shared")}
           </Link>
         </div>
@@ -308,8 +322,8 @@ export function Sidebar({
             <div className="space-y-px">
               {treeLoading &&
                 Array.from({ length: 5 }, (_, i) => (
-                  <div key={i} className="flex items-center gap-1.5 px-1.5 py-1">
-                    <Skeleton className="h-4 w-4 rounded shrink-0" />
+                  <div key={i} className="flex items-center gap-2 px-2 py-1.5">
+                    <Skeleton className="h-6 w-6 rounded shrink-0" />
                     <Skeleton
                       className="h-3.5 rounded"
                       style={{ width: `${55 + ((i * 17) % 30)}%` }}
@@ -335,18 +349,15 @@ export function Sidebar({
                     key={ws.id}
                     href={`/workspace/${ws.id}`}
                     className={cn(
-                      "flex items-center gap-1.5 rounded-md py-1 px-1.5 text-[13px]",
+                      "flex items-center gap-2 rounded-xl py-1.5 px-2 text-[13px]",
                       active
                         ? "bg-accent-soft text-accent font-medium"
                         : "text-muted-foreground hover:bg-muted hover:text-foreground",
                     )}
                   >
-                    <Image
+                    <ClayIcon
                       src={`/illustrations/icons/ws-${accentNameForId(ws.id)}.png`}
-                      alt=""
-                      width={40}
-                      height={40}
-                      className="pointer-events-none h-4 w-4 shrink-0 select-none object-contain"
+                      className="h-6 w-6"
                     />
                     <span className="truncate">{ws.title}</span>
                   </Link>
@@ -361,7 +372,7 @@ export function Sidebar({
         data-tour="sidebar-footer"
       >
         {summary && (
-          <div className="rounded-md border border-border bg-muted/40 px-2.5 py-2">
+          <div className="rounded-xl border border-border bg-card px-2.5 py-2.5">
             <div className="flex items-center justify-between text-[11px]">
               <span className="font-semibold text-muted-foreground">
                 {summary.planName} plan
@@ -402,7 +413,7 @@ export function Sidebar({
         <Link
           href="/settings"
           className={cn(
-            "flex items-center gap-2 rounded-md px-1.5 py-1.5 text-[13px] font-medium",
+            "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-semibold",
             pathname.startsWith("/settings")
               ? "bg-accent-soft text-accent"
               : "text-muted-foreground hover:bg-muted hover:text-foreground",

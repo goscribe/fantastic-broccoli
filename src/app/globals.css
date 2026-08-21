@@ -99,11 +99,6 @@
 
 body {
   background: var(--background);
-  background-image:
-    radial-gradient(ellipse 80% 50% at 8% -8%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
-    radial-gradient(ellipse 55% 40% at 96% 4%, color-mix(in srgb, var(--sky) 16%, transparent), transparent 72%),
-    radial-gradient(ellipse 45% 35% at 70% -5%, color-mix(in srgb, var(--rose) 10%, transparent), transparent 70%);
-  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   -webkit-font-smoothing: antialiased;
