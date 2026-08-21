@@ -193,8 +193,8 @@ function handleProc(path, input) {
             description: "Hess's law and bond enthalpies",
             depth: "MODERATE",
             durationMinutes: 15,
-            status: "ACTIVE",
-            progress: 0,
+            status: process.env.DONE ? "COMPLETED" : "ACTIVE",
+            progress: process.env.DONE ? 100 : 40,
             generating: false,
             examBoard: null,
             syllabus: null,
@@ -204,11 +204,51 @@ function handleProc(path, input) {
             createdAt: "2026-02-16T10:00:00.000Z",
             updatedAt: "2026-02-16T10:00:00.000Z",
             activities: [
-              act(0, "Read: Hess's law essentials",
+              // One COMPLETED reading (drives the cheer pill: completedCount >= 1)
+              { ...act(0, "Read: Hess's law essentials",
                 "Hess's law states that the total enthalpy change of a reaction is independent of the route taken. Enthalpy is a state function, so cycles let you compute unknown enthalpies from known ones."),
-              act(1, "Read: Bond enthalpies",
+                status: "COMPLETED" },
+              // An MCQ activity so correct answers can fire the confetti burst.
+              { ...act(1, "Quiz: Hess's law", ""),
+                type: "MCQ",
+                content: {
+                  type: "mcq",
+                  questions: [
+                    {
+                      question: "Hess's law works because enthalpy is a…",
+                      options: ["path function", "state function", "rate constant", "unit of heat"],
+                      correctIndex: 1,
+                      explanation: "Enthalpy depends only on the state, not the route.",
+                    },
+                    {
+                      question: "Bond enthalpy values are…",
+                      options: ["exact", "averages over many molecules"],
+                      correctIndex: 1,
+                      explanation: "Tabulated bond enthalpies are averages, so results are approximate.",
+                    },
+                  ],
+                } },
+              // Vocab recall + cloze so their confetti paths are reachable too.
+              { ...act(2, "Recall: key terms", ""),
+                type: "VOCAB_RECALL",
+                content: {
+                  type: "vocab_recall",
+                  terms: [
+                    { term: "Enthalpy", definition: "Heat content of a system at constant pressure.", result: null },
+                    { term: "State function", definition: "A property that depends only on the current state.", result: null },
+                  ],
+                } },
+              { ...act(3, "Cloze: fill the blanks", ""),
+                type: "CLOZE",
+                content: {
+                  type: "cloze",
+                  passages: [
+                    { textWithBlanks: "Hess's law works because enthalpy is a {{blank}} function.", answers: ["state"] },
+                  ],
+                } },
+              act(4, "Read: Bond enthalpies",
                 "Bond enthalpy is the energy needed to break one mole of a bond in gaseous molecules. Reaction enthalpy ≈ bonds broken minus bonds formed; values are averages, so results are approximate."),
-            ],
+            ].map((a) => (process.env.DONE ? { ...a, status: "COMPLETED" } : a)),
             comments: [],
           },
           meta: {
