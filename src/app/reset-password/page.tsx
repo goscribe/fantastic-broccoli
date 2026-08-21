@@ -4,11 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ScribeLogo } from "@/components/graphics/logo";
-import { AuthScene } from "@/components/auth/auth-scene";
+import { AuthFigure, AuthScene } from "@/components/auth/auth-scene";
 import { api } from "@/lib/api/trpc-client";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
-import { CheckCircle2, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 
 const inputClasses =
   "w-full h-10 rounded-lg border border-border bg-card px-3.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 placeholder:text-faint";
@@ -50,12 +50,20 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <AuthScene>
+    <AuthScene mood="mail">
       <div className="flex justify-center">
         <Link href="/landing" aria-label="Scribe home">
           <ScribeLogo />
         </Link>
       </div>
+
+      <AuthFigure
+        src={
+          done
+            ? "/illustrations/props/trophy.png"
+            : "/illustrations/bot.png"
+        }
+      />
 
       <div className="space-y-1.5 text-center">
         <h1 className="text-2xl font-bold tracking-tight">
@@ -67,12 +75,9 @@ export default function ResetPasswordPage() {
       </div>
 
       {done ? (
-        <div className="flex flex-col items-center gap-4">
-          <CheckCircle2 className="h-10 w-10 text-emerald-500" />
-          <p className="text-center text-sm text-muted-foreground">
-            {t("misc.redirecting")}
-          </p>
-        </div>
+        <p className="text-center text-sm text-muted-foreground">
+          {t("misc.redirecting")}
+        </p>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">

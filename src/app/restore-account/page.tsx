@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ScribeLogo } from "@/components/graphics/logo";
-import { AuthScene } from "@/components/auth/auth-scene";
+import { AuthFigure, AuthScene } from "@/components/auth/auth-scene";
 import { api } from "@/lib/api/trpc-client";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
-import { CheckCircle2, XCircle } from "lucide-react";
 
 export default function RestoreAccountPage() {
   const { t } = useI18n();
@@ -40,12 +39,22 @@ export default function RestoreAccountPage() {
   }, []);
 
   return (
-    <AuthScene>
+    <AuthScene mood="mail">
       <div className="flex justify-center">
         <Link href="/landing" aria-label="Scribe home">
           <ScribeLogo />
         </Link>
       </div>
+
+      <AuthFigure
+        src={
+          status === "success"
+            ? "/illustrations/props/trophy.png"
+            : status === "error"
+              ? "/illustrations/flag.png"
+              : "/illustrations/bot.png"
+        }
+      />
 
       <div className="space-y-1.5 text-center">
         <h1 className="text-2xl font-bold tracking-tight">
@@ -58,24 +67,14 @@ export default function RestoreAccountPage() {
         </p>
       </div>
 
-      {status === "working" && (
-        <div className="flex justify-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-accent border-t-transparent" />
-        </div>
-      )}
-
       {status === "success" && (
-        <div className="flex flex-col items-center gap-4">
-          <CheckCircle2 className="h-10 w-10 text-emerald-500" />
-          <p className="text-center text-sm text-muted-foreground">
-            {t("misc.redirecting")}
-          </p>
-        </div>
+        <p className="text-center text-sm text-muted-foreground">
+          {t("misc.redirecting")}
+        </p>
       )}
 
       {status === "error" && (
         <div className="flex flex-col items-center gap-4">
-          <XCircle className="h-10 w-10 text-destructive" />
           <Link href="/login">
             <Button variant="outline" size="sm">
               {t("misc.signIn")}
