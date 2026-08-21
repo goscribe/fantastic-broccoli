@@ -104,6 +104,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* iOS zooms focused inputs below 16px; keep forms readable without zoom. */
+@media (max-width: 639px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
 /* Parameter sliders */
 input[type="range"].param-slider {
   -webkit-appearance: none;

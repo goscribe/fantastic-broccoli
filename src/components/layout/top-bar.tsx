@@ -22,6 +22,7 @@ import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members
 import { fetchWorkspace } from "@/lib/api/workspace";
 import { useCredits } from "@/lib/credits";
 import { resendVerification, signOut, useAuthUser } from "@/lib/api/auth";
+import { toast, toastError } from "@/lib/toast";
 import {
   fetchNotifications,
   fetchUnreadCount,
@@ -98,6 +99,12 @@ export function TopBar({
     fetchUnreadCount().then(setUnread).catch(() => {});
   }, []);
 
+  const onResendVerification = () => {
+    void resendVerification()
+      .then(() => toast.success(t("misc.verificationEmailSent")))
+      .catch((err) => toastError(err, t("misc.verificationEmailFailed")));
+  };
+
   const openNotifications = () => {
     setNotifOpen((v) => !v);
     if (!notifOpen) {
@@ -125,17 +132,17 @@ export function TopBar({
 
   return (
     <>
-      <div className="sticky top-0 z-40 border-b border-border bg-white dark:bg-card">
-        <div className="flex h-14 items-center justify-between px-5">
-          <div className="flex items-center gap-2">
+      <div className="sticky top-0 z-40 border-b border-border bg-white pt-[env(safe-area-inset-top)] dark:bg-card">
+        <div className="flex h-14 items-center justify-between px-3 sm:px-5">
+          <div className="flex min-w-0 items-center gap-1 sm:gap-2">
             {onMenuClick && (
               <button
                 type="button"
                 aria-label={t("misc.openSidebar")}
                 onClick={onMenuClick}
-                className="-ml-2 rounded-xl p-2 text-muted-foreground hover:bg-muted hover:text-foreground md:hidden"
+                className="-ml-1 rounded-xl p-2.5 text-muted-foreground hover:bg-muted hover:text-foreground md:hidden"
               >
-                <Menu className="h-4 w-4" />
+                <Menu className="h-5 w-5" />
               </button>
             )}
             {showLogo && (
@@ -143,23 +150,26 @@ export function TopBar({
                 <ScribeLogo />
               </Link>
             )}
-            <span className="hidden items-center gap-2 text-sm font-semibold text-foreground sm:flex">
-              {showLogo && <span className="text-faint">/</span>}
+            <span className="flex min-w-0 items-center gap-2 text-sm font-semibold text-foreground">
+              {showLogo && <span className="hidden text-faint sm:inline">/</span>}
               {workspaceId ? (
                 <>
-                  <Link href="/" className="font-medium text-muted-foreground hover:text-foreground">
+                  <Link
+                    href="/"
+                    className="hidden font-medium text-muted-foreground hover:text-foreground sm:inline"
+                  >
                     {t("misc.workspaces")}
                   </Link>
                   {workspace && (
                     <>
-                      <span className="text-faint">/</span>
+                      <span className="hidden text-faint sm:inline">/</span>
                       <WorkspaceIcon
                         icon={workspace.icon}
                         className="h-4 w-4 shrink-0"
                       />
                       <Link
                         href={`/workspace/${workspaceId}`}
-                        className="max-w-48 truncate font-medium text-foreground"
+                        className="max-w-[40vw] truncate font-medium text-foreground sm:max-w-48"
                       >
                         {workspace.title}
                       </Link>
@@ -167,19 +177,20 @@ export function TopBar({
                   )}
                 </>
               ) : (
-                sectionLabel
+                <span className="truncate">{sectionLabel}</span>
               )}
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex shrink-0 items-center gap-1 sm:gap-1.5">
             <Link
               href="/pricing"
               title={t("misc.studyPointsTooltip")}
-              className="flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold tabular-nums text-accent hover:border-accent/50"
+              className="flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2 py-1 text-[12px] font-semibold tabular-nums text-accent hover:border-accent/50 sm:px-2.5"
             >
               <Sparkles className="h-3.5 w-3.5" />
-              {credits} {t("misc.pts")}
+              {credits}
+              <span className="hidden sm:inline">{t("misc.pts")}</span>
             </Link>
             {hasGuidedTourForPath(pathname) && (
               <button
@@ -208,7 +219,7 @@ export function TopBar({
               </button>
 
               {notifOpen && (
-                <div className="absolute right-0 top-full mt-2 w-80 rounded-xl border border-border bg-card py-1.5 animate-fade-up">
+                <div className="absolute right-0 top-full mt-2 w-80 max-w-[calc(100vw-1.5rem)] rounded-xl border border-border bg-card py-1.5 animate-fade-up">
                   <div className="flex items-center justify-between border-b border-border px-3.5 py-2">
                     <p className="text-sm font-semibold">
                       {t("misc.notifications")}
@@ -298,7 +309,7 @@ export function TopBar({
               </button>
 
               {menuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-56 rounded-xl border border-border bg-card py-1.5 animate-fade-up">
+                <div className="absolute right-0 top-full mt-2 w-56 max-w-[calc(100vw-1.5rem)] rounded-xl border border-border bg-card py-1.5 animate-fade-up">
                   <div className="mb-1.5 border-b border-border px-3.5 py-2">
                     <p className="text-sm font-medium">{user?.name}</p>
                     <p className="text-[11px] text-faint">
@@ -371,13 +382,18 @@ export function TopBar({
       </div>
 
       {!emailVerified && (
-        <div className="border-b border-amber-500/20 bg-amber-500/10 px-5 py-2 text-[12px] text-amber-900 dark:text-amber-100">
-          <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
-            <span className="font-medium">{t("misc.verifyEmailBanner")}</span>
+        <div className="border-b border-amber-500/20 bg-amber-500/10 px-3 py-2 text-[12px] text-amber-900 sm:px-5 dark:text-amber-100">
+          <div className="mx-auto flex max-w-6xl flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+            <span className="min-w-0 font-medium break-words">
+              {t("misc.verifyEmailBanner").replace(
+                "{email}",
+                user?.email ?? t("misc.email"),
+              )}
+            </span>
             <button
               type="button"
-              onClick={() => void resendVerification()}
-              className="rounded-full border border-amber-500/30 bg-card px-3 py-1 font-semibold text-foreground hover:bg-muted"
+              onClick={onResendVerification}
+              className="rounded-full border border-amber-500/30 bg-card px-3 py-1.5 font-semibold text-foreground hover:bg-muted"
             >
               {t("misc.resendVerification")}
             </button>

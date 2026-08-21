@@ -4,7 +4,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Sidebar } from "@/components/layout/sidebar";
 import { TopBar } from "@/components/layout/top-bar";
-import { useAuthUser } from "@/lib/api/auth";
+import { isPublicPath, useAuthUser } from "@/lib/api/auth";
 import { FullScreenLoader } from "@/components/layout/full-screen-loader";
 import { GuidedTour } from "@/components/onboarding/guided-tour";
 
@@ -14,16 +14,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const isSession = /^\/workspace\/[^/]+\/session\//.test(pathname);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  if (
-    pathname === "/login" ||
-    pathname.startsWith("/landing") ||
-    pathname === "/signup" ||
-    pathname === "/forgot-password" ||
-    pathname === "/verify-email" ||
-    pathname === "/privacy" ||
-    pathname === "/terms" ||
-    pathname.startsWith("/admin")
-  ) {
+  if (isPublicPath(pathname) || pathname.startsWith("/admin")) {
     return <>{children}</>;
   }
 
@@ -33,7 +24,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   if (isSession) {
     return (
-      <div className="h-screen flex flex-col overflow-hidden">
+      <div className="h-dvh flex flex-col overflow-hidden">
         <TopBar showLogo />
         {children}
       </div>
@@ -41,7 +32,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="h-screen flex overflow-hidden bg-background">
+    <div className="flex h-dvh overflow-hidden bg-background">
       <Sidebar
         mobileOpen={sidebarOpen}
         onMobileClose={() => setSidebarOpen(false)}

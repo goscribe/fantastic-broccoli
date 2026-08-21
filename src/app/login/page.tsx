@@ -12,8 +12,8 @@ import {
   GoogleSignInButton,
   AuthDivider,
 } from "@/components/auth/google-sign-in-button";
+import { AuthScene } from "@/components/auth/auth-scene";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
-import Image from "next/image";
 
 function safeRedirect(): string {
   const target = new URLSearchParams(window.location.search).get("redirect");
@@ -55,29 +55,12 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-background p-4 overflow-hidden">
-      <Image
-        src="/illustrations/marketing/mkt-hero.png"
-        alt=""
-        width={420}
-        height={420}
-        unoptimized
-        className="pointer-events-none absolute -bottom-16 -right-10 hidden w-72 select-none animate-bob sm:block lg:w-96"
-      />
-      <Image
-        src="/illustrations/props/star-gold.png"
-        alt=""
-        width={80}
-        height={80}
-        unoptimized
-        className="pointer-events-none absolute left-[12%] top-16 hidden w-12 rotate-12 select-none animate-wiggle sm:block"
-      />
-      <div className="relative w-full max-w-sm space-y-8">
-        <div className="flex justify-center">
-          <Link href="/landing" aria-label="Scribe home">
-            <ScribeLogo />
-          </Link>
-        </div>
+    <AuthScene>
+      <div className="flex justify-center">
+        <Link href="/landing" aria-label="Scribe home">
+          <ScribeLogo />
+        </Link>
+      </div>
 
         <div className="text-center space-y-1.5">
           <h1 className="text-2xl font-bold tracking-tight">
@@ -173,7 +156,6 @@ export default function LoginPage() {
             {t("misc.createAnAccount")}
           </Link>
         </p>
-      </div>
-    </div>
+    </AuthScene>
   );
 }
