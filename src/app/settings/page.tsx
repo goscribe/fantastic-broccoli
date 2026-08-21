@@ -247,7 +247,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <main className="flex-1 px-6 py-8 md:px-10">
+    <main className="flex-1 px-4 py-5 sm:px-8 sm:py-8 md:px-10">
       <div className="mx-auto w-full max-w-3xl">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -339,7 +339,7 @@ export default function SettingsPage() {
                   <input
                     id="settings-email"
                     type="email"
-                    value={user?.email ?? "alan@scribe.study"}
+                    value={user?.email ?? ""}
                     disabled
                     className="mt-1.5 h-10 w-full rounded-xl border border-border bg-muted/60 px-3.5 text-sm text-muted-foreground"
                   />
@@ -349,7 +349,7 @@ export default function SettingsPage() {
                 </div>
               </div>
             </div>
-            <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
               <Button variant="outline" size="sm" onClick={() => signOut()}>
                 {t("nav.signOut")}
               </Button>

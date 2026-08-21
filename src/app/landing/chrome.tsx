@@ -22,8 +22,8 @@ export function LandingHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-20 border-b border-border bg-white dark:bg-card">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <header className="sticky top-0 z-20 border-b border-border bg-white pt-[env(safe-area-inset-top)] dark:bg-card">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
         <Link href="/landing" onClick={() => setOpen(false)}>
           <ScribeLogo />
         </Link>
@@ -66,7 +66,7 @@ export function LandingHeader() {
           </Link>
           <button
             type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground hover:bg-muted lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-muted-foreground hover:bg-muted lg:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((v) => !v)}
           >
@@ -75,7 +75,7 @@ export function LandingHeader() {
         </nav>
       </div>
       {open && (
-        <div className="border-t border-border px-6 py-4 lg:hidden">
+        <div className="border-t border-border px-4 py-4 sm:px-6 lg:hidden">
           <nav className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link

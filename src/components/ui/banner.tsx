@@ -97,7 +97,7 @@ export function Banner({
     <div
       role="status"
       className={cn(
-        "flex items-center gap-3 rounded-xl border px-4 py-2.5 text-sm",
+        "flex items-start gap-3 rounded-xl border px-4 py-2.5 text-xs sm:items-center sm:text-sm",
         variantClasses[variant],
         className,
       )}

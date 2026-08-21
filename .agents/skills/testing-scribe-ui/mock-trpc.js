@@ -295,7 +295,29 @@ function handleProc(path, input) {
     case "podcast.getCharacters":
       return [];
     case "flashcards.getMasteryMatrix":
-      return [];
+      return [
+        {
+          topic: "Thermochemistry",
+          proficiency: 42,
+          cardsStudied: 8,
+          cardsTotal: 20,
+          attempts: 8,
+        },
+        {
+          topic: "Hess's law",
+          proficiency: 18,
+          cardsStudied: 2,
+          cardsTotal: 12,
+          attempts: 3,
+        },
+        {
+          topic: "Bond enthalpies",
+          proficiency: 0,
+          cardsStudied: 0,
+          cardsTotal: 10,
+          attempts: 0,
+        },
+      ];
     case "studySession.activityCalendar":
       return [];
     case "workspace.marketplaceArtifacts":

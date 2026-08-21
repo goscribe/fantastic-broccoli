@@ -240,7 +240,7 @@ export default function HomePage() {
       >
         {t("misc.upgradeBanner")}
       </Banner>
-      <main className="flex-1 w-full px-4 sm:px-8 py-6 sm:py-8 space-y-8">
+      <main className="w-full flex-1 space-y-6 px-4 py-5 sm:space-y-8 sm:px-8 sm:py-8">
         {/* Greeting */}
         <header className="flex flex-wrap items-end justify-between gap-4 animate-fade-up">
           <div>
@@ -251,7 +251,7 @@ export default function HomePage() {
                 month: "long",
               })}
             </p>
-            <h1 className="text-2xl font-bold tracking-tight mt-1">
+            <h1 className="mt-1 text-xl font-bold tracking-tight sm:text-2xl">
               {greeting}{user ? `, ${user.name}` : ""}
             </h1>
           </div>
@@ -262,7 +262,7 @@ export default function HomePage() {
           data-tour="home-banner"
           className="relative z-10 grid gap-4 animate-fade-up lg:grid-cols-[1fr_250px]"
         >
-          <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-7">
+          <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-5 sm:p-7">
             {resumable ? (
               <HeroScene />
             ) : (
@@ -365,7 +365,7 @@ export default function HomePage() {
         {dueReview && dueReview.total > 0 && (
           <Link
             href="/flashcards/review"
-            className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-card px-5 py-4 animate-fade-up hover:border-accent/40 transition-colors"
+            className="group flex flex-col items-start gap-3 rounded-2xl border border-border bg-card px-4 py-3.5 transition-colors animate-fade-up hover:border-accent/40 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-5 sm:py-4"
           >
             <div className="flex items-center gap-3.5">
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-accent">
@@ -395,24 +395,14 @@ export default function HomePage() {
           {calendarLoading || treeLoading ? (
             <Skeleton className="h-24 w-full rounded-2xl" />
           ) : (
-            <div className="relative rounded-2xl border border-border bg-card">
-              <button
-                type="button"
-                onClick={() => setOverviewOpen((o) => !o)}
-                className="absolute right-3 top-3 z-10 flex items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-semibold text-muted-foreground hover:bg-muted/60 transition-colors"
-                aria-expanded={overviewOpen}
-              >
-                {t("misc.studyOverview")}
-                <ChevronDown
-                  className={`h-3.5 w-3.5 transition-transform ${overviewOpen ? "rotate-180" : ""}`}
-                />
-              </button>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-4 px-4 py-4 sm:grid-cols-3 lg:grid-cols-5 lg:pr-36">
+            <div className="rounded-2xl border border-border bg-card">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-4 px-4 py-4 sm:grid-cols-3 lg:grid-cols-5">
                 {[
                   {
                     label: t("misc.dayStreak"),
                     value: String(streak),
                     icon: "/illustrations/icons/stat-flame.png",
+                    hideOnMobile: true,
                   },
                   {
                     label: t("misc.activeDays"),
@@ -420,6 +410,7 @@ export default function HomePage() {
                       dailyActivity.filter((d) => d.count > 0).length,
                     ),
                     icon: "/illustrations/icons/stat-calendar.png",
+                    hideOnMobile: false,
                   },
                   {
                     label: t("misc.sessionsLogged"),
@@ -427,21 +418,26 @@ export default function HomePage() {
                       dailyActivity.reduce((s, d) => s + d.count, 0),
                     ),
                     icon: "/illustrations/icons/stat-bolt.png",
+                    hideOnMobile: false,
                   },
                   {
                     label: t("misc.activePlans"),
                     value: String(activeSessions.length),
                     icon: "/illustrations/flag.png",
+                    hideOnMobile: false,
                   },
                   {
                     label: t("misc.timePlanned"),
                     value: formatDuration(totalPlannedMinutes),
                     icon: "/illustrations/icons/stat-clock.png",
+                    hideOnMobile: false,
                   },
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="flex min-w-0 items-center gap-3"
+                    className={`min-w-0 items-center gap-2.5 sm:gap-3 ${
+                      stat.hideOnMobile ? "hidden sm:flex" : "flex"
+                    }`}
                     title={stat.label}
                   >
                     <Image
@@ -450,21 +446,32 @@ export default function HomePage() {
                       width={96}
                       height={96}
                       unoptimized
-                      className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
+                      className="pointer-events-none h-9 w-9 shrink-0 select-none object-contain sm:h-12 sm:w-12"
                     />
                     <div className="min-w-0">
-                      <p className="text-xl font-bold tabular-nums leading-none tracking-tight">
+                      <p className="text-lg font-bold tabular-nums leading-none tracking-tight sm:text-xl">
                         {stat.value}
                       </p>
-                      <p className="mt-1 truncate text-xs font-medium text-muted-foreground">
+                      <p className="mt-1 truncate text-[11px] font-medium text-muted-foreground sm:text-xs">
                         {stat.label}
                       </p>
                     </div>
                   </div>
                 ))}
               </div>
+              <button
+                type="button"
+                onClick={() => setOverviewOpen((o) => !o)}
+                className="flex w-full items-center justify-center gap-1 border-t border-border px-3 py-2 text-[11px] font-semibold text-muted-foreground transition-colors hover:bg-muted/60"
+                aria-expanded={overviewOpen}
+              >
+                {t("misc.studyOverview")}
+                <ChevronDown
+                  className={`h-3.5 w-3.5 transition-transform ${overviewOpen ? "rotate-180" : ""}`}
+                />
+              </button>
               {overviewOpen && (
-                <div className="grid gap-4 border-t border-border p-3.5 lg:grid-cols-[320px_1fr]">
+                <div className="grid gap-4 p-3.5 lg:grid-cols-[320px_1fr]">
                   <div className="hidden lg:block">
                     <StudyCalendar dailyActivity={dailyActivity} />
                   </div>
