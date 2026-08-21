@@ -66,7 +66,9 @@ export default function LandingPage() {
 
   useEffect(() => {
     rpc<PublicStats>("stats.public", "query", undefined)
-      .then((s) => setStats(s))
+      .then((s) => {
+        if (s) setStats(s);
+      })
       .catch(() => {
         /* keep fallback */
       });
