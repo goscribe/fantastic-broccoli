@@ -91,7 +91,6 @@ export function FunFeatureCard({
   icon,
   title,
   description,
-  tint = "accent",
   heading: Heading = "h3",
 }: {
   icon: string;
@@ -101,21 +100,18 @@ export function FunFeatureCard({
   heading?: "h2" | "h3";
 }) {
   return (
-    <li
-      className={cn(
-        "group relative overflow-hidden rounded-3xl p-5 transition-transform duration-200 hover:-translate-y-1 hover:shadow-[0_10px_0_0_rgba(105,82,224,0.12)]",
-        TINTS[tint],
-      )}
-    >
-      <Image
-        src={icon}
-        alt=""
-        width={64}
-        height={64}
-        unoptimized
-        className="sticker-3d h-14 w-14 object-contain drop-shadow-md"
-      />
-      <Heading className="mt-3 text-sm font-bold">{title}</Heading>
+    <li className="group relative overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm">
+      <span className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted/50">
+        <Image
+          src={icon}
+          alt=""
+          width={32}
+          height={32}
+          unoptimized
+          className="h-7 w-7 object-contain"
+        />
+      </span>
+      <Heading className="mt-3 text-sm font-semibold">{title}</Heading>
       <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
         {description}
       </p>

@@ -16,14 +16,6 @@ export const ACCENT_NAMES = [
 
 export type AccentName = (typeof ACCENT_NAMES)[number];
 
-export const ACCENT_WASH: Record<AccentName, string> = {
-  purple: "bg-accent-soft",
-  sky: "bg-sky/20",
-  pink: "bg-rose/20",
-  amber: "bg-amber/20",
-  emerald: "bg-emerald-500/15",
-};
-
 function hashId(id: string): number {
   let h = 0;
   for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;

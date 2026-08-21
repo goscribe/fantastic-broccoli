@@ -50,24 +50,18 @@ export default function AboutPage() {
             {
               title: "Retention first",
               body: "Every activity is there to make you retrieve something — not to summarise it again in nicer prose.",
-              tint: "bg-accent-soft",
             },
             {
               title: "Your materials",
               body: "Questions and readings are generated from what you upload, with citations back to the page they came from.",
-              tint: "bg-sky/20",
             },
             {
               title: "One sitting",
               body: "A session is a path, not a dashboard of five products. Open it, work through the waypoints, done.",
-              tint: "bg-amber/20",
             },
           ].map((item) => (
-            <div
-              key={item.title}
-              className={`rounded-3xl p-5 ${item.tint}`}
-            >
-              <h2 className="text-base font-bold">{item.title}</h2>
+            <div key={item.title}>
+              <h2 className="text-base font-semibold">{item.title}</h2>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {item.body}
               </p>

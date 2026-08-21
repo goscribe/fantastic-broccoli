@@ -114,7 +114,7 @@ export default function WorkspaceStudyPage() {
             onClick={() =>
               router.push(`/workspace/${workspaceId}/session/${resumable.id}`)
             }
-            className="group relative w-full overflow-hidden text-left rounded-[1.75rem] bg-accent-soft p-6 hover:-translate-y-0.5 hover:shadow-[0_8px_0_0_rgba(105,82,224,0.16)] transition-all animate-fade-up"
+            className="group relative w-full overflow-hidden text-left rounded-3xl border border-border bg-card p-6 hover:border-border-strong hover:shadow-md transition-all animate-fade-up"
           >
             <div
               className="pointer-events-none absolute inset-y-0 right-24 hidden w-40 select-none sm:block"
@@ -134,7 +134,7 @@ export default function WorkspaceStudyPage() {
               <h2 className="text-lg font-bold tracking-tight">
                 {resumable.title}
               </h2>
-              <span className="flex shrink-0 items-center gap-1.5 text-xs font-bold text-accent-foreground bg-accent rounded-2xl px-3.5 py-2 shadow-[0_3px_0_0_var(--accent-dim)] group-hover:gap-2.5 transition-all">
+              <span className="flex shrink-0 items-center gap-1.5 text-xs font-semibold text-accent-foreground bg-accent rounded-full px-3.5 py-1.5 group-hover:gap-2.5 transition-all">
                 {t("ws.resume")}
                 <ArrowRight className="h-3.5 w-3.5" />
               </span>

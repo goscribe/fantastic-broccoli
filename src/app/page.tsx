@@ -262,7 +262,7 @@ export default function HomePage() {
           data-tour="home-banner"
           className="relative z-10 grid gap-4 animate-fade-up lg:grid-cols-[1fr_250px]"
         >
-          <div className="relative overflow-hidden rounded-[1.75rem] bg-accent-soft p-7 min-h-[220px]">
+          <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-7">
             {resumable ? (
               <HeroScene />
             ) : (
@@ -335,7 +335,7 @@ export default function HomePage() {
           </div>
 
           {/* Progress scene */}
-          <div className="relative hidden overflow-hidden rounded-[1.75rem] bg-amber/20 p-5 lg:block">
+          <div className="relative hidden overflow-hidden rounded-2xl border border-border bg-card p-5 lg:block">
             <ConfettiDots />
             <p className="relative text-4xl font-extrabold tabular-nums">
               {heroProgress}%
@@ -365,7 +365,7 @@ export default function HomePage() {
         {dueReview && dueReview.total > 0 && (
           <Link
             href="/flashcards/review"
-            className="group flex items-center justify-between gap-4 rounded-3xl bg-sky/20 px-5 py-4 animate-fade-up hover:-translate-y-0.5 transition-transform"
+            className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-card px-5 py-4 animate-fade-up hover:border-accent/40 transition-colors"
           >
             <div className="flex items-center gap-3.5">
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-accent">
@@ -395,16 +395,16 @@ export default function HomePage() {
           {calendarLoading || treeLoading ? (
             <Skeleton className="h-12 w-full rounded-xl" />
           ) : (
-            <div className="rounded-2xl bg-card/80 px-3 py-2 shadow-[0_3px_0_0_var(--border)]">
+            <div className="rounded-xl border border-border bg-card">
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-3 py-2">
-                <div className="flex items-center gap-2 rounded-full bg-amber/20 py-1 pl-1.5 pr-3 dark:bg-amber/15">
+                <div className="flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 py-0.5 pl-1 pr-2.5 dark:border-amber-400/25 dark:bg-amber-400/10">
                   <Image
                     src="/illustrations/icons/stat-flame.png"
                     alt=""
                     width={48}
                     height={48}
                     unoptimized
-                    className="pointer-events-none h-7 w-7 shrink-0 select-none object-contain animate-wiggle"
+                    className="pointer-events-none h-5 w-5 shrink-0 select-none object-contain"
                   />
                   <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-300">
                     <span className="text-[13px] font-bold tabular-nums">

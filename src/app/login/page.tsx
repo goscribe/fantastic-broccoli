@@ -72,7 +72,7 @@ export default function LoginPage() {
         unoptimized
         className="pointer-events-none absolute left-[12%] top-16 hidden w-12 rotate-12 select-none animate-wiggle sm:block"
       />
-      <div className="relative w-full max-w-sm space-y-8 rounded-[1.75rem] bg-card/80 p-6 shadow-[0_6px_0_0_var(--border)] backdrop-blur-sm sm:p-8">
+      <div className="relative w-full max-w-sm space-y-8">
         <div className="flex justify-center">
           <Link href="/landing" aria-label="Scribe home">
             <ScribeLogo />

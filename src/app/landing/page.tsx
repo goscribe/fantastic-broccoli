@@ -209,7 +209,7 @@ export default function LandingPage() {
               {restQuotes.map((t) => (
                 <li
                   key={t.name}
-                  className="rounded-3xl bg-card p-5 shadow-[0_4px_0_0_var(--border)]"
+                  className="rounded-2xl border border-border bg-card p-5"
                 >
                   <p className="text-sm leading-relaxed text-pretty">
                     “{t.quote}”

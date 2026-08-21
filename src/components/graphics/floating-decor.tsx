@@ -98,19 +98,16 @@ export function EmptyScene({
   imageClassName,
   children,
   className,
-  tint = "bg-accent-soft",
 }: {
   image: string;
   imageClassName?: string;
   children: React.ReactNode;
   className?: string;
-  tint?: string;
 }) {
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-[1.75rem]",
-        tint,
+        "relative overflow-hidden rounded-3xl border border-border bg-card",
         className,
       )}
     >
