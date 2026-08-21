@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces } from "next/font/google";
 import { LandingHeader, LandingFooter } from "./chrome";
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-fraunces",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -26,7 +19,7 @@ export default function LandingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={`${fraunces.variable} landing-type min-h-screen bg-background text-foreground transition-colors duration-300`}>
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <LandingHeader />
       <main>{children}</main>
       <LandingFooter />
