@@ -5,6 +5,7 @@ import { VocabRecallContent } from "@/types";
 import { useActivityDraft } from "@/lib/use-activity-draft";
 import { MathText } from "@/components/ui/markdown-text";
 import { Button } from "@/components/ui/button";
+import { ConfettiBurst } from "@/components/graphics/confetti-burst";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
@@ -54,6 +55,7 @@ export function VocabRecallActivity({
   const [attempts, setAttempts] = useState(restored?.attempts ?? 0);
   const [answer, setAnswer] = useState("");
   const [revealed, setRevealed] = useState(false);
+  const [burst, setBurst] = useState(0);
 
   useActivityDraft(activityId, {
     queue,
@@ -76,6 +78,7 @@ export function VocabRecallActivity({
     const nextMissed = correct ? missed : [...missed, termIndex];
     if (correct) {
       setLearned((prev) => new Set(prev).add(termIndex));
+      setBurst((b) => b + 1);
     } else {
       setMissed(nextMissed);
     }
@@ -96,6 +99,7 @@ export function VocabRecallActivity({
   if (done) {
     return (
       <div className="py-8 text-center">
+        <ConfettiBurst burst={burst} />
         <p className="text-lg font-bold tracking-tight">
           {t("session.allPrefix")} {total} {t("session.termsRecalled")}
         </p>
@@ -114,6 +118,7 @@ export function VocabRecallActivity({
 
   return (
     <div>
+      <ConfettiBurst burst={burst} />
       <div className="flex items-center justify-between mb-5">
         <p className="text-sm font-semibold">
           {t("session.defineFromMemory")}

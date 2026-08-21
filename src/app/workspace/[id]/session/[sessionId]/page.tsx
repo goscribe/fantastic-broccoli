@@ -62,6 +62,8 @@ import {
   Clock,
   SkipForward,
   MessageSquare,
+  PanelLeftClose,
+  PanelLeftOpen,
   RefreshCw,
   Trash2,
   X,
@@ -153,6 +155,8 @@ export default function SessionDetailPage() {
   const setActiveActivityId = setChosenActivityId;
 
   const [showComments, setShowComments] = useState(false);
+  // Question-focused by default: the plan sidebar starts collapsed.
+  const [planOpen, setPlanOpen] = useState(false);
   // Copilot defaults open on desktop; on mobile it covers the screen, so start closed.
   const [copilotOpen, setCopilotOpen] = useState(
     () =>
@@ -578,13 +582,38 @@ export default function SessionDetailPage() {
 
       {/* Content */}
       <div className="flex-1 flex min-h-0 overflow-hidden w-full">
-        {/* Activity list sidebar on desktop */}
-        {planReady && (
+        {/* Activity list sidebar on desktop: collapsed to a slim rail by default */}
+        {planReady && !planOpen && (
+        <aside className="hidden lg:flex w-12 flex-shrink-0 flex-col items-center border-r border-border pt-5">
+          <button
+            type="button"
+            onClick={() => setPlanOpen(true)}
+            title={t("session.yourPlan")}
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-colors"
+          >
+            <PanelLeftOpen className="h-4 w-4" />
+          </button>
+          <span className="mt-3 text-[10px] font-semibold tabular-nums text-muted-foreground">
+            {completedCount}/{activities.length}
+          </span>
+        </aside>
+        )}
+        {planReady && planOpen && (
         <aside className="hidden lg:flex w-72 flex-shrink-0 flex-col border-r border-border overflow-y-auto">
           <div className="py-6 pr-4 pl-5">
-            <p className="text-xs font-semibold text-muted-foreground mb-3">
-              {t("session.yourPlan")}
-            </p>
+            <div className="mb-3 flex items-center justify-between">
+              <p className="text-xs font-semibold text-muted-foreground">
+                {t("session.yourPlan")}
+              </p>
+              <button
+                type="button"
+                onClick={() => setPlanOpen(false)}
+                title={t("session.yourPlan")}
+                className="flex h-6 w-6 items-center justify-center rounded-md text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-colors"
+              >
+                <PanelLeftClose className="h-3.5 w-3.5" />
+              </button>
+            </div>
             <div className="space-y-1">
               {activities.map((activity, i) => {
                 const phase = phaseOf(activity.type);
@@ -613,7 +642,7 @@ export default function SessionDetailPage() {
 
         {/* Main study area */}
         <main className="flex-1 overflow-y-auto bg-card">
-          <div className="px-4 sm:px-8 py-2">
+          <div className="mx-auto w-full max-w-3xl px-4 sm:px-8 py-2">
             {showExtendPrompt && (
               <div className="mb-5 rounded-2xl border border-accent/30 bg-accent-soft/60 px-5 py-4 flex flex-wrap items-center gap-3 animate-fade-up">
                 <div className="flex-1 min-w-56">
