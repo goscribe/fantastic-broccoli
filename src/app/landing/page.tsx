@@ -30,7 +30,7 @@ export default function LandingPage() {
           <DotGrid className="inset-y-0 right-0 hidden w-1/2 lg:block" />
           <div className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
             <div className="animate-fade-up">
-              <h1 className="text-4xl tracking-tight text-balance sm:text-5xl md:text-6xl">
+              <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
                 Stop re-reading.
                 <br />
                 <span className="text-accent">Start learning.</span>
@@ -92,7 +92,7 @@ export default function LandingPage() {
 
       <section className="border-y border-border bg-card/40 py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-2xl tracking-tight sm:text-3xl">How it works</h2>
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">How it works</h2>
           <ol className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6">
             {howItWorks.map((step) => (
               <li key={step.num}>
@@ -119,7 +119,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <h2 className="text-2xl tracking-tight sm:text-3xl">
+              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                 One study session, everything in it
               </h2>
               <p className="mt-3 max-w-xl text-muted-foreground">
@@ -173,7 +173,7 @@ export default function LandingPage() {
 
       <section className="border-y border-border py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-2xl tracking-tight sm:text-3xl">
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
             What studying with Scribe feels like
           </h2>
           <div className="mt-10 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">

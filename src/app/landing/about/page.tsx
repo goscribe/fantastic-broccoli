@@ -21,7 +21,7 @@ export default function AboutPage() {
         <GlowField />
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <h1 className="text-3xl tracking-tight sm:text-4xl md:text-5xl">
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
               The pre-scribed learning tool
             </h1>
             <p className="mt-5 text-lg text-muted-foreground text-pretty">
