@@ -7,7 +7,7 @@ import { ScribeLogo } from "@/components/graphics/logo";
 import { requestPasswordReset } from "@/lib/api/auth";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
-import { AuthScene } from "@/components/auth/auth-scene";
+import { AuthFigure, AuthScene } from "@/components/auth/auth-scene";
 import { ArrowRight } from "lucide-react";
 
 const inputClasses =
@@ -35,12 +35,20 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <AuthScene>
+    <AuthScene mood="mail">
       <div className="flex justify-center">
         <Link href="/landing" aria-label="Scribe home">
           <ScribeLogo />
         </Link>
       </div>
+
+      <AuthFigure
+        src={
+          sent
+            ? "/illustrations/welcome.png"
+            : "/illustrations/search.png"
+        }
+      />
 
         <div className="text-center space-y-1.5">
           <h1 className="text-2xl font-bold tracking-tight">
@@ -52,9 +60,9 @@ export default function ForgotPasswordPage() {
         </div>
 
         {sent ? (
-          <p className="rounded-xl border border-border bg-muted/40 px-4 py-5 text-center text-sm text-muted-foreground">
+          <p className="rounded-2xl border border-border bg-card px-4 py-5 text-center text-sm text-muted-foreground">
             {t("misc.resetSent").split("{email}")[0]}
-            <span className="font-medium">{email}</span>
+            <span className="font-medium text-foreground">{email}</span>
             {t("misc.resetSent").split("{email}")[1]}
           </p>
         ) : (
