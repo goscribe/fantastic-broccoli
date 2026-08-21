@@ -10,7 +10,6 @@ import { formatDuration } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
 import { FolderCard } from "@/components/workspace/folder-card";
-import { StudyCalendar } from "@/components/workspace/study-calendar";
 import {
   CreateResourceDialog,
   NewWorkspaceMenu,
@@ -33,7 +32,7 @@ import {
   markFirstSessionOnboardingSkipped,
 } from "@/components/onboarding/first-session-onboarding";
 import { onTreeChanged } from "@/lib/tree-events";
-import { Search, ArrowRight, Plus, RotateCcw, ChevronDown } from "lucide-react";
+import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
@@ -42,6 +41,7 @@ import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { HeroScene, ConfettiDots, Sticker } from "@/components/graphics/floating-decor";
 import { Banner } from "@/components/ui/banner";
 import { Button } from "@/components/ui/button";
+import { HomeUploadRow } from "@/components/workspace/home-upload-row";
 
 function computeStreak(daily: DailyActivityPoint[]): number {
   const byDate = new Map(daily.map((d) => [d.date, d.count]));
@@ -81,7 +81,6 @@ export default function HomePage() {
     Map<string, StudySession[]>
   >(new Map());
   const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
-  const [overviewOpen, setOverviewOpen] = useState(false);
 
   const { data: dueReview } = useQuery({
     queryKey: ["due-review-count"],
@@ -262,28 +261,34 @@ export default function HomePage() {
           data-tour="home-banner"
           className="relative z-10 grid gap-4 animate-fade-up lg:grid-cols-[1fr_250px]"
         >
-          <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-5 sm:p-7">
-            {resumable ? (
-              <HeroScene />
-            ) : (
-              <>
-                <Image
-                  src="/illustrations/welcome.png"
-                  alt=""
-                  width={280}
-                  height={280}
-                  priority
-                  unoptimized
-                  className="pointer-events-none absolute -bottom-6 right-2 hidden w-52 select-none animate-bob md:block lg:right-6 lg:w-64"
-                />
-                <Sticker
-                  src="/illustrations/props/star-gold.png"
-                  className="right-36 top-4 hidden w-9 rotate-12 md:block"
-                />
-                <ConfettiDots className="hidden md:block" />
-              </>
-            )}
-            <div className="relative max-w-lg">
+          <div className="relative rounded-2xl border border-border bg-card p-5 sm:p-7">
+            {/* Clip the 3D props, not the New-workspace menu. */}
+            <div
+              className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
+              aria-hidden
+            >
+              {resumable ? (
+                <HeroScene />
+              ) : (
+                <>
+                  <Image
+                    src="/illustrations/welcome.png"
+                    alt=""
+                    width={280}
+                    height={280}
+                    priority
+                    unoptimized
+                    className="absolute -bottom-6 right-2 hidden w-52 select-none animate-bob md:block lg:right-6 lg:w-64"
+                  />
+                  <Sticker
+                    src="/illustrations/props/star-gold.png"
+                    className="right-36 top-4 hidden w-9 rotate-12 md:block"
+                  />
+                  <ConfettiDots className="hidden md:block" />
+                </>
+              )}
+            </div>
+            <div className="relative z-10 max-w-lg">
               <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight leading-snug">
                 {resumable
                   ? resumable.session.title
@@ -389,13 +394,13 @@ export default function HomePage() {
           </Link>
         )}
 
-        {/* Study overview: stats stay visible; calendar + weekly chart live
-            behind a toggle so they never push real content below the fold. */}
+        {/* Stats + upload. Week bars stay on tablet/desktop so they never
+            overlay a figure; phones skip the extra chart. */}
         <section className="animate-fade-up">
           {calendarLoading || treeLoading ? (
             <Skeleton className="h-24 w-full rounded-2xl" />
           ) : (
-            <div className="rounded-2xl border border-border bg-card">
+            <div className="overflow-hidden rounded-2xl border border-border bg-card">
               <div className="grid grid-cols-2 gap-x-4 gap-y-4 px-4 py-4 sm:grid-cols-3 lg:grid-cols-5">
                 {[
                   {
@@ -459,70 +464,50 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-              <button
-                type="button"
-                onClick={() => setOverviewOpen((o) => !o)}
-                className="flex w-full items-center justify-center gap-1 border-t border-border px-3 py-2 text-[11px] font-semibold text-muted-foreground transition-colors hover:bg-muted/60"
-                aria-expanded={overviewOpen}
-              >
-                {t("misc.studyOverview")}
-                <ChevronDown
-                  className={`h-3.5 w-3.5 transition-transform ${overviewOpen ? "rotate-180" : ""}`}
-                />
-              </button>
-              {overviewOpen && (
-                <div className="grid gap-4 p-3.5 lg:grid-cols-[320px_1fr]">
-                  <div className="hidden lg:block">
-                    <StudyCalendar dailyActivity={dailyActivity} />
-                  </div>
-                  <div className="flex flex-col">
-                    <p className="text-sm font-semibold">
-                      {t("misc.thisWeek")}
-                    </p>
-                    <div className="mt-3 flex min-h-20 flex-1 items-end gap-2.5">
-                      {lastSevenDays.map(({ label, count, isToday }, i) => (
-                        <div
-                          key={i}
-                          className="flex h-full flex-1 flex-col items-center justify-end gap-1"
-                          title={t(
-                            count === 1
-                              ? "misc.sessionTooltip"
-                              : "misc.sessionsTooltip",
-                          ).replace("{count}", String(count))}
-                        >
-                          <span className="text-[10px] font-medium tabular-nums text-muted-foreground">
-                            {count > 0 ? count : ""}
-                          </span>
-                          <div
-                            className={`w-full max-w-9 rounded-t-md ${
-                              count > 0
-                                ? isToday
-                                  ? "bg-accent"
-                                  : "bg-accent/70"
-                                : "bg-muted"
-                            }`}
-                            style={{
-                              height:
-                                count > 0
-                                  ? `${(count / maxWeekCount) * 100}%`
-                                  : "4px",
-                            }}
-                          />
-                          <span
-                            className={`text-[10px] ${
-                              isToday
-                                ? "font-semibold text-foreground"
-                                : "text-faint"
-                            }`}
-                          >
-                            {label}
-                          </span>
-                        </div>
-                      ))}
+              <HomeUploadRow />
+              <div className="hidden border-t border-border px-4 py-3 sm:block">
+                <p className="text-[11px] font-semibold text-muted-foreground">
+                  {t("misc.thisWeek")}
+                </p>
+                <div className="mt-2 flex min-h-14 items-end gap-2">
+                  {lastSevenDays.map(({ label, count, isToday }, i) => (
+                    <div
+                      key={i}
+                      className="flex h-14 flex-1 flex-col items-center justify-end gap-1"
+                      title={t(
+                        count === 1
+                          ? "misc.sessionTooltip"
+                          : "misc.sessionsTooltip",
+                      ).replace("{count}", String(count))}
+                    >
+                      <div
+                        className={`w-full max-w-9 rounded-t-md ${
+                          count > 0
+                            ? isToday
+                              ? "bg-accent"
+                              : "bg-accent/70"
+                            : "bg-muted"
+                        }`}
+                        style={{
+                          height:
+                            count > 0
+                              ? `${Math.max(12, (count / maxWeekCount) * 100)}%`
+                              : "4px",
+                        }}
+                      />
+                      <span
+                        className={`text-[10px] ${
+                          isToday
+                            ? "font-semibold text-foreground"
+                            : "text-faint"
+                        }`}
+                      >
+                        {label}
+                      </span>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              )}
+              </div>
             </div>
           )}
         </section>

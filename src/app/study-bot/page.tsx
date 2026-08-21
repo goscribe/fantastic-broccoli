@@ -41,10 +41,6 @@ const INTAKE_BRIEF = `You are Scribe's study intake bot. The user is setting up 
 - Once you know the subject and at least one concrete topic, tell them you have enough and that they should press "Start study session" to begin.
 Do not generate study content yourself — the session generator does that.`;
 
-// The intake brief instructs the bot to mention "Start study session" once it
-// has enough to go on; that mention is what surfaces the embedded CTA.
-const READY_RE = /start (your |the |a )?(study )?session/i;
-
 const SUGGESTION_KEYS = [
   "misc.suggestionIntegration",
   "misc.suggestionBio",
@@ -69,7 +65,6 @@ export default function StudyBotPage() {
   const [hasWorkspace, setHasWorkspace] = useState(false);
 
   const started = messages.length > 0;
-  const botReplies = messages.filter((m) => m.role === "bot" && m.text).length;
 
   const scrollDown = () =>
     setTimeout(
@@ -358,12 +353,7 @@ export default function StudyBotPage() {
                 {m.role === "bot" &&
                   i === messages.length - 1 &&
                   hasWorkspace &&
-                  !busy &&
-                  // Fallback after a longer conversation so the CTA can't get
-                  // stuck behind the bot never saying the magic phrase — but
-                  // never while the bot is still asking a question.
-                  (READY_RE.test(m.text) ||
-                    (botReplies >= 6 && !m.text.trimEnd().endsWith("?"))) && (
+                  !!m.text && (
                     <Button
                       size="sm"
                       onClick={() => void startSession()}
@@ -408,6 +398,29 @@ export default function StudyBotPage() {
           <div ref={bottomRef} />
         </div>
         <div className="sticky bottom-0 bg-card pb-2 pt-1.5">
+          {hasWorkspace && (
+            <div className="mb-2">
+              <Button
+                size="sm"
+                onClick={() => void startSession()}
+                disabled={starting}
+                className="w-full sm:w-auto"
+              >
+                {starting ? (
+                  <>
+                    <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
+                    {t("misc.buildingSession")}
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="h-3.5 w-3.5 mr-1.5" />
+                    {t("misc.startStudySession")}
+                    <ArrowRight className="h-3.5 w-3.5 ml-1" />
+                  </>
+                )}
+              </Button>
+            </div>
+          )}
           {composer}
         </div>
       </div>
