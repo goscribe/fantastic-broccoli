@@ -64,6 +64,7 @@ const en = {
   // Shared
   "session.continue": "Continue",
   "session.of": "of",
+  "session.activityWord": "Activity",
   "session.marking": "Marking…",
   "session.checkAnswers": "Check answers",
   "session.markingFallback": "AI marking unavailable — checked locally instead",
@@ -275,6 +276,7 @@ registerTranslations(en, {
     "session.typeActivity": "Actividad",
     "session.continue": "Continuar",
     "session.of": "de",
+    "session.activityWord": "Actividad",
     "session.marking": "Corrigiendo…",
     "session.checkAnswers": "Comprobar respuestas",
     "session.markingFallback":
@@ -477,6 +479,7 @@ registerTranslations(en, {
     "session.typeActivity": "Activité",
     "session.continue": "Continuer",
     "session.of": "sur",
+    "session.activityWord": "Activité",
     "session.marking": "Correction…",
     "session.checkAnswers": "Vérifier les réponses",
     "session.markingFallback":
@@ -680,6 +683,7 @@ registerTranslations(en, {
     "session.typeActivity": "Aktivität",
     "session.continue": "Weiter",
     "session.of": "von",
+    "session.activityWord": "Aktivität",
     "session.marking": "Korrektur…",
     "session.checkAnswers": "Antworten prüfen",
     "session.markingFallback":
@@ -885,6 +889,7 @@ registerTranslations(en, {
     "session.typeActivity": "活动",
     "session.continue": "继续",
     "session.of": "/",
+    "session.activityWord": "活动",
     "session.marking": "批改中…",
     "session.checkAnswers": "检查答案",
     "session.markingFallback": "AI 批改不可用 — 已改为本地检查",
@@ -1077,6 +1082,7 @@ registerTranslations(en, {
     "session.typeActivity": "गतिविधि",
     "session.continue": "जारी रखें",
     "session.of": "में से",
+    "session.activityWord": "गतिविधि",
     "session.marking": "जाँच हो रही है…",
     "session.checkAnswers": "उत्तर जाँचें",
     "session.markingFallback":
@@ -1279,6 +1285,7 @@ registerTranslations(en, {
     "session.typeActivity": "Aktibidad",
     "session.continue": "Magpatuloy",
     "session.of": "sa",
+    "session.activityWord": "Aktibidad",
     "session.marking": "Minamarkahan…",
     "session.checkAnswers": "Suriin ang mga sagot",
     "session.markingFallback":
