@@ -21,12 +21,16 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import {
+  Home,
+  Layers,
   ChevronRight,
   FilePlus2,
   FolderPlus,
   Plus,
   Search,
   X,
+  Users,
+  Settings,
   LogOut,
 } from "lucide-react";
 
@@ -248,13 +252,7 @@ export function Sidebar({
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            <Image
-              src="/illustrations/icons/nav-home.png"
-              alt=""
-              width={40}
-              height={40}
-              className="pointer-events-none h-[18px] w-[18px] shrink-0 select-none object-contain"
-            />
+            <Home className="h-4 w-4" />
             {t("nav.home")}
           </Link>
           <Link
@@ -266,13 +264,7 @@ export function Sidebar({
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            <Image
-              src="/illustrations/icons/nav-cards.png"
-              alt=""
-              width={40}
-              height={40}
-              className="pointer-events-none h-[18px] w-[18px] shrink-0 select-none object-contain"
-            />
+            <Layers className="h-4 w-4" />
             {t("nav.flashcards")}
           </Link>
           <Link
@@ -284,13 +276,7 @@ export function Sidebar({
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            <Image
-              src="/illustrations/icons/nav-shared.png"
-              alt=""
-              width={40}
-              height={40}
-              className="pointer-events-none h-[18px] w-[18px] shrink-0 select-none object-contain"
-            />
+            <Users className="h-4 w-4" />
             {t("nav.shared")}
           </Link>
         </div>
@@ -422,13 +408,7 @@ export function Sidebar({
               : "text-muted-foreground hover:bg-muted hover:text-foreground",
           )}
         >
-          <Image
-            src="/illustrations/icons/nav-settings.png"
-            alt=""
-            width={40}
-            height={40}
-            className="pointer-events-none h-[18px] w-[18px] shrink-0 select-none object-contain"
-          />
+          <Settings className="h-4 w-4" />
           {t("nav.settings")}
         </Link>
         {user && (

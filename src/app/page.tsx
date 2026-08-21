@@ -9,7 +9,6 @@ import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { formatDuration } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
-import { StreakFlame } from "@/components/graphics/streak-flame";
 import { FolderCard } from "@/components/workspace/folder-card";
 import { StudyCalendar } from "@/components/workspace/study-calendar";
 import {
@@ -428,10 +427,16 @@ export default function HomePage() {
               <div className="flex flex-1 flex-col">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-semibold">{t("misc.thisWeek")}</p>
-                  <div className="flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 dark:border-amber-400/25 dark:bg-amber-400/10">
-                    <StreakFlame className="h-4 w-4" />
+                  <div className="flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 py-1 pl-1.5 pr-3 dark:border-amber-400/25 dark:bg-amber-400/10">
+                    <Image
+                      src="/illustrations/icons/stat-flame.png"
+                      alt=""
+                      width={48}
+                      height={48}
+                      className="pointer-events-none h-6 w-6 shrink-0 select-none object-contain"
+                    />
                     <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-300">
-                      <span className="text-[13px] font-bold tabular-nums">
+                      <span className="text-[15px] font-bold tabular-nums">
                         {streak}
                       </span>{" "}
                       {t("misc.dayStreak")}
@@ -483,32 +488,45 @@ export default function HomePage() {
                     value: String(
                       dailyActivity.filter((d) => d.count > 0).length,
                     ),
+                    icon: "/illustrations/icons/stat-calendar.png",
                   },
                   {
                     label: t("misc.sessionsLogged"),
                     value: String(
                       dailyActivity.reduce((s, d) => s + d.count, 0),
                     ),
+                    icon: "/illustrations/icons/stat-bolt.png",
                   },
                   {
                     label: t("misc.activePlans"),
                     value: String(activeSessions.length),
+                    icon: "/illustrations/props/flag-mini.png",
                   },
                   {
                     label: t("misc.timePlanned"),
                     value: formatDuration(totalPlannedMinutes),
+                    icon: "/illustrations/icons/stat-clock.png",
                   },
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="rounded-lg bg-muted/50 px-3 py-2.5 leading-tight"
+                    className="flex items-center gap-3 rounded-xl bg-muted/50 px-3 py-2.5 leading-tight"
                   >
-                    <p className="text-base font-bold tabular-nums">
-                      {stat.value}
-                    </p>
-                    <p className="mt-0.5 text-[11px] font-medium text-muted-foreground">
-                      {stat.label}
-                    </p>
+                    <Image
+                      src={stat.icon}
+                      alt=""
+                      width={64}
+                      height={64}
+                      className="pointer-events-none h-8 w-8 shrink-0 select-none object-contain"
+                    />
+                    <div>
+                      <p className="text-base font-bold tabular-nums">
+                        {stat.value}
+                      </p>
+                      <p className="mt-0.5 text-[11px] font-medium text-muted-foreground">
+                        {stat.label}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
