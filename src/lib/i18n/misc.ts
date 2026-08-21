@@ -81,6 +81,10 @@ const english = {
   "misc.studyBotError": "The study bot hit an error — try again.",
   "misc.couldNotStartSession": "Could not start the session",
   "misc.couldNotCreateWorkspace": "Could not create a workspace",
+  "misc.uploadNotes": "Upload notes",
+  "misc.uploadNotesHint":
+    "Drop files — we'll name a workspace from them and start a session.",
+  "misc.buildingFromFiles": "Building your study session…",
   "misc.suggestionIntegration": "Practice IB Math AA integration by parts",
   "misc.suggestionBio": "Quiz me on AP Bio cellular respiration",
   "misc.suggestionChem": "Help me revise GCSE chemistry bonding",
@@ -243,7 +247,11 @@ registerTranslations(english, {
     "misc.uploadedFiles": "(archivos subidos)",
     "misc.studyBotError": "El bot de estudio tuvo un error — inténtalo de nuevo.",
     "misc.couldNotStartSession": "No se pudo iniciar la sesión",
-    "misc.couldNotCreateWorkspace": "No se pudo crear un espacio de trabajo",
+    "misc.couldNotCreateWorkspace": "No se pudo crear el espacio",
+    "misc.uploadNotes": "Subir apuntes",
+    "misc.uploadNotesHint":
+      "Suelta archivos — nombraremos el espacio con ellos y crearemos una sesión.",
+    "misc.buildingFromFiles": "Creando tu sesión de estudio…",
     "misc.suggestionIntegration":
       "Practicar integración por partes de IB Math AA",
     "misc.suggestionBio": "Hazme preguntas de respiración celular de AP Bio",
@@ -403,7 +411,11 @@ registerTranslations(english, {
     "misc.uploadedFiles": "(fichiers téléversés)",
     "misc.studyBotError": "Le bot d'étude a rencontré une erreur — réessayez.",
     "misc.couldNotStartSession": "Impossible de démarrer la session",
-    "misc.couldNotCreateWorkspace": "Impossible de créer un espace de travail",
+    "misc.couldNotCreateWorkspace": "Impossible de créer l'espace",
+    "misc.uploadNotes": "Importer des notes",
+    "misc.uploadNotesHint":
+      "Déposez des fichiers — nous nommerons l'espace et lancerons une session.",
+    "misc.buildingFromFiles": "Création de votre session d'étude…",
     "misc.suggestionIntegration":
       "Pratiquer l'intégration par parties en IB Math AA",
     "misc.suggestionBio":
@@ -571,8 +583,11 @@ registerTranslations(english, {
     "misc.studyBotError":
       "Der Lern-Bot hatte einen Fehler — versuch es erneut.",
     "misc.couldNotStartSession": "Sitzung konnte nicht gestartet werden",
-    "misc.couldNotCreateWorkspace":
-      "Arbeitsbereich konnte nicht erstellt werden",
+    "misc.couldNotCreateWorkspace": "Arbeitsbereich konnte nicht erstellt werden",
+    "misc.uploadNotes": "Notizen hochladen",
+    "misc.uploadNotesHint":
+      "Dateien ablegen — wir benennen den Arbeitsbereich danach und starten eine Sitzung.",
+    "misc.buildingFromFiles": "Lernsitzung wird erstellt…",
     "misc.suggestionIntegration":
       "Partielle Integration für IB Math AA üben",
     "misc.suggestionBio": "Frag mich Zellatmung aus AP Bio ab",
@@ -735,6 +750,9 @@ registerTranslations(english, {
     "misc.studyBotError": "学习机器人出错了——请重试。",
     "misc.couldNotStartSession": "无法开始学习会话",
     "misc.couldNotCreateWorkspace": "无法创建工作区",
+    "misc.uploadNotes": "上传笔记",
+    "misc.uploadNotesHint": "拖入文件——我们会用文件名命名工作区并生成学习会话。",
+    "misc.buildingFromFiles": "正在生成学习会话…",
     "misc.suggestionIntegration": "练习 IB Math AA 分部积分",
     "misc.suggestionBio": "考我 AP 生物的细胞呼吸",
     "misc.suggestionChem": "帮我复习 GCSE 化学键",
@@ -888,7 +906,11 @@ registerTranslations(english, {
     "misc.uploadedFiles": "(फ़ाइलें अपलोड कीं)",
     "misc.studyBotError": "स्टडी बॉट में त्रुटि आई — फिर से कोशिश करें।",
     "misc.couldNotStartSession": "सेशन शुरू नहीं हो सका",
-    "misc.couldNotCreateWorkspace": "वर्कस्पेस नहीं बनाया जा सका",
+    "misc.couldNotCreateWorkspace": "वर्कस्पेस नहीं बन सका",
+    "misc.uploadNotes": "नोट्स अपलोड करें",
+    "misc.uploadNotesHint":
+      "फ़ाइलें छोड़ें — हम उनसे वर्कस्पेस का नाम लेंगे और एक सेशन शुरू करेंगे।",
+    "misc.buildingFromFiles": "आपका स्टडी सेशन बन रहा है…",
     "misc.suggestionIntegration":
       "IB Math AA integration by parts का अभ्यास",
     "misc.suggestionBio": "AP Bio cellular respiration पर क्विज़ लो",
@@ -1050,7 +1072,11 @@ registerTranslations(english, {
     "misc.uploadedFiles": "(mga na-upload na file)",
     "misc.studyBotError": "Nagka-error ang study bot — subukan muli.",
     "misc.couldNotStartSession": "Hindi masimulan ang session",
-    "misc.couldNotCreateWorkspace": "Hindi makagawa ng workspace",
+    "misc.couldNotCreateWorkspace": "Hindi malikha ang workspace",
+    "misc.uploadNotes": "Mag-upload ng notes",
+    "misc.uploadNotesHint":
+      "I-drop ang files — pangalanan namin ang workspace at magsisimula ng session.",
+    "misc.buildingFromFiles": "Binubuo ang iyong study session…",
     "misc.suggestionIntegration":
       "Mag-practice ng IB Math AA integration by parts",
     "misc.suggestionBio": "I-quiz ako sa AP Bio cellular respiration",

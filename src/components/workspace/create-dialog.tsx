@@ -10,6 +10,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
+import "@/lib/i18n/misc";
+import { UPLOAD_ACCEPT } from "@/lib/uploads";
+import { startWorkspaceFromUploads } from "@/lib/start-from-uploads";
 import {
   ArrowLeft,
   Check,
@@ -17,6 +20,7 @@ import {
   GraduationCap,
   MessageCircle,
   Sparkles,
+  Upload,
   X,
 } from "lucide-react";
 import {
@@ -40,11 +44,11 @@ const folderColors = [
 ];
 
 /**
- * Dropdown for a "New workspace" trigger: create a workspace (empty or
- * curated, chosen inside the dialog) or chat with the study bot. The trigger
- * is supplied as `children` of the render-prop so callers keep their own
- * button styling. `align` controls which edge the panel hugs so it never
- * overflows the viewport horizontally.
+ * Dropdown for a "New workspace" trigger: upload notes (names a workspace
+ * from the files and starts a session), create empty/curated, or chat with
+ * the study bot. The trigger is supplied as `children` of the render-prop so
+ * callers keep their own button styling. `align` controls which edge the
+ * panel hugs so it never overflows the viewport horizontally.
  */
 export function NewWorkspaceMenu({
   onSelect,
@@ -56,11 +60,30 @@ export function NewWorkspaceMenu({
   children: (toggle: () => void) => React.ReactNode;
 }) {
   const { t } = useI18n();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const pick = (choice: "workspace" | "bot") => {
     setOpen(false);
     onSelect(choice);
+  };
+
+  const startFromFiles = async (files: File[]) => {
+    if (files.length === 0 || uploading) return;
+    setUploading(true);
+    try {
+      const { workspaceId, session } = await startWorkspaceFromUploads(files);
+      if (session) {
+        router.push(`/workspace/${workspaceId}/session/${session.id}`);
+      } else {
+        router.push(`/workspace/${workspaceId}`);
+      }
+    } catch (err) {
+      toastError(err, t("misc.couldNotStartSession"));
+      setUploading(false);
+    }
   };
 
   return (
@@ -78,6 +101,37 @@ export function NewWorkspaceMenu({
               align === "right" ? "right-0" : "left-0",
             )}
           >
+            <input
+              ref={fileRef}
+              type="file"
+              multiple
+              accept={UPLOAD_ACCEPT}
+              className="hidden"
+              onChange={(e) => {
+                const files = Array.from(e.target.files ?? []);
+                e.target.value = "";
+                setOpen(false);
+                void startFromFiles(files);
+              }}
+            />
+            <button
+              type="button"
+              disabled={uploading}
+              onClick={() => fileRef.current?.click()}
+              className="flex w-full items-start gap-2.5 rounded-lg p-2.5 text-left hover:bg-muted disabled:opacity-60"
+            >
+              <Upload className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+              <span className="min-w-0">
+                <span className="block text-[13px] font-semibold text-foreground">
+                  {uploading
+                    ? t("misc.buildingFromFiles")
+                    : t("misc.uploadNotes")}
+                </span>
+                <span className="block text-xs text-muted-foreground">
+                  {t("misc.uploadNotesHint")}
+                </span>
+              </span>
+            </button>
             <button
               type="button"
               onClick={() => pick("workspace")}
