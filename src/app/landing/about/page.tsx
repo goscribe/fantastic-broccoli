@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/seo";
-import { CtaBand, GlossyArt } from "@/components/graphics/marketing-art";
+import { ArtStage, CtaBand } from "@/components/graphics/marketing-art";
 import { GlowField } from "@/components/graphics/landing-art";
-import { ConfettiDots } from "@/components/graphics/floating-decor";
 
 export const metadata: Metadata = {
   title: "About",
@@ -20,30 +19,28 @@ export default function AboutPage() {
     <>
       <section className="relative overflow-hidden py-16 md:py-24">
         <GlowField />
-        <ConfettiDots className="hidden md:block" />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-2">
+        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            <h1 className="text-3xl tracking-tight sm:text-4xl md:text-5xl">
               The pre-scribed learning tool
             </h1>
             <p className="mt-5 text-lg text-muted-foreground text-pretty">
-              Scribe exists because re-reading is a trap. Highlighting a PDF
-              feels like work and doesn’t stick. We built a session that takes
-              the materials you already have and turns them into the activities
-              that actually move memory: recall, explanation, and marked
-              practice.
+              Scribe exists because re-reading is a trap. Highlighting a PDF feels
+              like work and doesn’t stick. We built a session that takes the
+              materials you already have and turns them into the activities that
+              actually move memory: recall, explanation, and marked practice.
             </p>
             <p className="mt-4 text-muted-foreground text-pretty">
               Not a generic chatbot. Not a question bank from someone else’s
-              course. Your slides, your figures, your past papers — organised
-              into one path you can finish.
+              course. Your slides, your figures, your past papers — organised into
+              one path you can finish.
             </p>
           </div>
-          <GlossyArt
-            src="/illustrations/marketing/mkt-celebrate.png"
-            className="mx-auto max-w-md"
-            width={880}
-            height={485}
+          <ArtStage
+            src="/illustrations/marketing/mkt-clip.png"
+            tint="rose"
+            side="bottom"
+            size="md"
           />
         </div>
       </section>

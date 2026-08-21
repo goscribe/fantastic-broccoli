@@ -94,6 +94,7 @@
   --color-warning: var(--warning);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
   --radius: var(--radius);
 }
 
@@ -102,6 +103,14 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Landing headlines — a soft serif so the 3D art sits in an editorial frame. */
+.landing-type h1,
+.landing-type h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
 }
 
 /* Parameter sliders */

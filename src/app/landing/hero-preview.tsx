@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { Check } from "lucide-react";
-import { DeviceFrame, GlossyArt } from "@/components/graphics/marketing-art";
+import { ProductCard } from "@/components/graphics/marketing-art";
 import {
   AudioArt,
   PdfArt,
@@ -41,17 +40,7 @@ export function HeroPreview() {
 
   return (
     <div className="relative">
-      <div
-        className="animate-float absolute -bottom-10 -left-16 z-10 hidden w-40 xl:block"
-        style={{ animationDelay: "-1.4s" }}
-      >
-        <GlossyArt
-          src="/illustrations/marketing/mkt-hero.png"
-          width={880}
-          height={594}
-        />
-      </div>
-      <DeviceFrame url="scribe.study — Biochemistry · Week 4">
+      <ProductCard eyebrow="Biochemistry · Week 4">
         <div className="bg-background p-5">
           <div className="flex items-center justify-between">
             <div>
@@ -82,6 +71,7 @@ export function HeroPreview() {
             {sessionPreview.map((item, i) => {
               const done = i < doneCount;
               const active = i === doneCount;
+              const Icon = item.icon;
               return (
                 <li
                   key={item.label}
@@ -91,19 +81,19 @@ export function HeroPreview() {
                       : "border-border bg-card"
                   }`}
                 >
-                  {done ? (
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent">
+                  <span
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${
+                      done
+                        ? "bg-accent-soft text-accent"
+                        : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    {done ? (
                       <Check className="h-3.5 w-3.5" />
-                    </span>
-                  ) : (
-                    <Image
-                      src={item.icon}
-                      alt=""
-                      width={28}
-                      height={28}
-                      className="h-7 w-7 shrink-0 object-contain"
-                    />
-                  )}
+                    ) : (
+                      <Icon className="h-3.5 w-3.5" />
+                    )}
+                  </span>
                   <span
                     className={`flex-1 truncate text-[13px] font-medium transition-colors duration-500 ${
                       done ? "text-muted-foreground line-through" : ""
@@ -119,7 +109,7 @@ export function HeroPreview() {
             })}
           </ul>
         </div>
-      </DeviceFrame>
+      </ProductCard>
     </div>
   );
 }

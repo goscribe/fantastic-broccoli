@@ -7,7 +7,7 @@ import "@/lib/i18n/session";
 import { cn, formatDuration } from "@/lib/utils";
 import { Check } from "lucide-react";
 
-const typeLabels: Record<string, string> = {
+export const ACTIVITY_TYPE_LABELS: Record<string, string> = {
   reading: "session.typeReading",
   comprehension_check: "session.typeComprehension",
   mcq: "session.typeQuiz",
@@ -67,7 +67,7 @@ export function ActivityItem({
           <MathText text={activity.title} />
         </span>
         <span className="block text-[11px] text-muted-foreground">
-          {t(typeLabels[activity.type] ?? "session.typeActivity")} ·{" "}
+          {t(ACTIVITY_TYPE_LABELS[activity.type] ?? "session.typeActivity")} ·{" "}
           {formatDuration(activity.estimatedMinutes)}
         </span>
       </span>
