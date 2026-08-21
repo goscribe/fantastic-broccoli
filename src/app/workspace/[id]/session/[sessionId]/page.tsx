@@ -52,6 +52,7 @@ import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
 import { WarmupQuiz } from "@/components/onboarding/warmup-quiz";
+import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { formatDuration, formatRelativeDate } from "@/lib/utils";
@@ -365,6 +366,17 @@ export default function SessionDetailPage() {
     const next = activities[idx + 1];
     setActiveActivityId(next?.id ?? null);
   };
+
+  const cheerKey =
+    !planReady || completedCount === 0 || !activeActivity
+      ? null
+      : completedCount >= activities.length - 1
+        ? "session.cheerAlmost"
+        : completedCount === 1
+          ? "session.cheerFirst"
+          : completedCount >= activities.length / 2
+            ? "session.cheerHalf"
+            : "session.cheerKeepGoing";
 
   const activeIndex = activeActivity
     ? activities.findIndex((a) => a.id === activeActivity.id)
@@ -683,6 +695,20 @@ export default function SessionDetailPage() {
               />
             ) : activeActivity ? (
               <div className="space-y-5 animate-fade-up" key={activeActivity.id}>
+                {cheerKey && (
+                  <div className="flex items-center gap-2 rounded-full border border-accent/20 bg-accent-soft/60 py-1 pl-1.5 pr-3.5 w-fit">
+                    <Image
+                      src="/illustrations/props/star-gold.png"
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="pointer-events-none h-5 w-5 shrink-0 select-none object-contain"
+                    />
+                    <p className="text-xs font-semibold text-accent">
+                      {t(cheerKey)}
+                    </p>
+                  </div>
+                )}
                 <div className="flex items-center justify-between">
                   <h2 className="text-base font-bold tracking-tight">
                     <MathText text={activeActivity.title} />

@@ -140,7 +140,16 @@ export default function WorkspaceStudyPage() {
             </div>
             <p className="relative text-sm text-muted-foreground mt-0.5">
               {resumable.progress}% {t("ws.complete")} ·{" "}
-              {formatDuration(resumable.durationMinutes)}
+              {formatDuration(resumable.durationMinutes)} ·{" "}
+              <span className="font-semibold text-accent">
+                {t(
+                  resumable.progress >= 75
+                    ? "ws.cheerNearlyDone"
+                    : resumable.progress >= 25
+                      ? "ws.cheerGoodPace"
+                      : "ws.cheerJustStarted",
+                )}
+              </span>
             </p>
             <ProgressBar value={resumable.progress} className="relative mt-3.5 sm:max-w-md" />
           </button>
