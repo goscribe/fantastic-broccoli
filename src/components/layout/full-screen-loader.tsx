@@ -22,7 +22,7 @@ export function FullScreenLoader() {
       role="status"
       aria-live="polite"
       aria-busy="true"
-      className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-background px-6"
+      className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-[#f3f1fe] px-6"
     >
       <ConfettiDots className="opacity-60" />
       <Sticker
@@ -43,10 +43,6 @@ export function FullScreenLoader() {
 
       <div className="relative z-10 flex flex-col items-center">
         <div className="relative flex h-44 w-44 items-center justify-center sm:h-52 sm:w-52">
-          <div
-            aria-hidden
-            className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/35 blur-3xl motion-reduce:animate-none animate-loader-glow"
-          />
           <video
             autoPlay
             loop
@@ -56,7 +52,7 @@ export function FullScreenLoader() {
             poster="/illustrations/blob-hello-poster.jpg"
             disablePictureInPicture
             aria-hidden
-            className="relative h-40 w-40 select-none object-contain motion-reduce:hidden sm:h-48 sm:w-48"
+            className="relative h-44 w-44 select-none object-contain motion-reduce:hidden sm:h-52 sm:w-52 [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]"
           >
             <source src="/illustrations/blob-hello.mp4" type="video/mp4" />
           </video>
