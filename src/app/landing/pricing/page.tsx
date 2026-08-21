@@ -37,10 +37,10 @@ export default function LandingPricingPage() {
             {plans.map((plan) => (
               <div
                 key={plan.name}
-                className={`flex flex-col rounded-2xl border p-6 ${
+                className={`flex flex-col rounded-3xl p-6 ${
                   plan.highlighted
-                    ? "border-accent bg-card shadow-sm"
-                    : "border-border bg-card"
+                    ? "bg-accent-soft shadow-[0_6px_0_0_var(--accent-dim)]"
+                    : "bg-card shadow-[0_4px_0_0_var(--border)]"
                 }`}
               >
                 <p className="text-sm font-semibold">{plan.name}</p>

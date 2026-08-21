@@ -10,12 +10,20 @@ export function GlowField({ className }: { className?: string }) {
   return (
     <div aria-hidden className={`pointer-events-none absolute inset-0 overflow-hidden ${className ?? ""}`}>
       <div
-        className="absolute -left-24 -top-24 h-72 w-72 rounded-full opacity-20 blur-3xl"
+        className="absolute -left-24 -top-24 h-[22rem] w-[22rem] rounded-full opacity-40 blur-3xl"
         style={{ background: "radial-gradient(circle, var(--accent-bright), transparent 70%)" }}
       />
       <div
-        className="absolute -right-16 top-1/3 h-80 w-80 rounded-full opacity-[0.12] blur-3xl"
-        style={{ background: "radial-gradient(circle, var(--accent), transparent 70%)" }}
+        className="absolute -right-16 top-1/4 h-80 w-80 rounded-full opacity-30 blur-3xl"
+        style={{ background: "radial-gradient(circle, var(--sky), transparent 70%)" }}
+      />
+      <div
+        className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full opacity-25 blur-3xl"
+        style={{ background: "radial-gradient(circle, var(--rose), transparent 70%)" }}
+      />
+      <div
+        className="absolute right-1/4 top-0 h-56 w-56 rounded-full opacity-20 blur-3xl"
+        style={{ background: "radial-gradient(circle, var(--amber), transparent 70%)" }}
       />
     </div>
   );

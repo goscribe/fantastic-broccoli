@@ -2,7 +2,7 @@
 
 import { Folder } from "@/types";
 import { countWorkspaces } from "@/lib/utils";
-import { accentNameForColor } from "@/lib/accent-palette";
+import { accentNameForColor, ACCENT_WASH } from "@/lib/accent-palette";
 import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
@@ -32,15 +32,20 @@ export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") onClick(folder.id);
       }}
-      className="group relative flex cursor-pointer items-center gap-3 rounded-2xl border border-border bg-card px-4 py-4 text-left transition-all hover:-translate-y-0.5 hover:shadow-md"
+      className="group relative flex cursor-pointer items-center gap-3 overflow-hidden rounded-3xl bg-card px-4 py-3.5 text-left shadow-[0_4px_0_0_var(--border)] transition-all hover:-translate-y-1 hover:shadow-[0_8px_0_0_rgba(105,82,224,0.18)]"
     >
-      <Image
-        src={`/illustrations/icons/folder-${accent}.png`}
-        alt=""
-        width={88}
-        height={88}
-        className="pointer-events-none h-11 w-11 shrink-0 select-none object-contain"
-      />
+      <span
+        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${ACCENT_WASH[accent]}`}
+      >
+        <Image
+          src={`/illustrations/icons/folder-${accent}.png`}
+          alt=""
+          width={88}
+          height={88}
+          unoptimized
+          className="sticker-3d pointer-events-none h-10 w-10 select-none object-contain"
+        />
+      </span>
       <div className="relative min-w-0 flex-1">
         <p className="font-semibold text-sm truncate">{folder.name}</p>
         <p className="text-xs text-muted-foreground mt-0.5">

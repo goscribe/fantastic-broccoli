@@ -31,9 +31,9 @@ export function LandingHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+              className={`rounded-full px-3.5 py-1.5 text-sm font-bold transition-colors ${
                 pathname === link.href
-                  ? "bg-muted text-foreground"
+                  ? "bg-accent-soft text-accent"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >

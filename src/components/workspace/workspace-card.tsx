@@ -4,7 +4,7 @@ import { Workspace } from "@/types";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { formatRelativeDate, formatDuration } from "@/lib/utils";
-import { accentNameForId } from "@/lib/accent-palette";
+import { accentNameForId, ACCENT_WASH } from "@/lib/accent-palette";
 import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
@@ -50,8 +50,18 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
   return (
     <div
       onClick={() => onClick(workspace.id)}
-      className="group relative cursor-pointer rounded-2xl border border-border bg-card p-5 transition-all duration-150 hover:border-border-strong hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
+      className="group relative cursor-pointer overflow-hidden rounded-3xl bg-card shadow-[0_4px_0_0_var(--border)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_0_0_rgba(105,82,224,0.18)] active:translate-y-0"
     >
+      <div className={`flex h-16 items-end px-4 ${ACCENT_WASH[accent]}`}>
+        <Image
+          src={`/illustrations/icons/ws-${accent}.png`}
+          alt=""
+          width={96}
+          height={96}
+          unoptimized
+          className="sticker-3d pointer-events-none h-14 w-14 shrink-0 translate-y-2 select-none object-contain"
+        />
+      </div>
       {actions ? (
         <ResourceActionsMenu
           actions={actions}
@@ -60,15 +70,8 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
       ) : (
         <ArrowRight className="absolute top-5 right-5 h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
       )}
-
+      <div className="p-5 pt-4">
       <div className="flex items-start gap-3">
-        <Image
-          src={`/illustrations/icons/ws-${accent}.png`}
-          alt=""
-          width={80}
-          height={80}
-          className="pointer-events-none h-10 w-10 shrink-0 select-none object-contain"
-        />
         <div className="min-w-0 flex-1 pr-5">
           <div className="flex items-center gap-2">
             <h3 className="font-semibold text-sm leading-tight truncate">
@@ -144,6 +147,7 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
           showLabel
         />
       )}
+      </div>
     </div>
   );
 }

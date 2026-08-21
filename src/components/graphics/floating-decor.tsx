@@ -38,11 +38,37 @@ export function ConfettiDots({ className }: { className?: string }) {
   );
 }
 
+/** Floating 3D prop sticker. */
+export function Sticker({
+  src,
+  className,
+  delay,
+}: {
+  src: string;
+  className?: string;
+  delay?: string;
+}) {
+  return (
+    <Image
+      src={src}
+      alt=""
+      width={160}
+      height={160}
+      unoptimized
+      className={cn(
+        "pointer-events-none absolute select-none object-contain drop-shadow-md animate-bob",
+        className,
+      )}
+      style={delay ? { animationDelay: delay } : undefined}
+    />
+  );
+}
+
 /** Flying 3D props scene for the dashboard hero. Parent must be `relative`. */
 export function HeroScene() {
   return (
     <div
-      className="pointer-events-none absolute inset-y-0 right-0 hidden w-80 select-none md:block"
+      className="pointer-events-none absolute inset-y-0 right-0 hidden w-[22rem] select-none md:block"
       aria-hidden
     >
       <Image
@@ -51,7 +77,12 @@ export function HeroScene() {
         width={720}
         height={423}
         priority
-        className="absolute bottom-0 right-2 w-72 lg:w-80"
+        unoptimized
+        className="absolute -bottom-4 right-0 w-80 animate-bob lg:w-96"
+      />
+      <Sticker
+        src="/illustrations/props/star-gold.png"
+        className="right-8 top-4 w-10 rotate-12"
       />
       <ConfettiDots />
     </div>
@@ -67,21 +98,24 @@ export function EmptyScene({
   imageClassName,
   children,
   className,
+  tint = "bg-accent-soft",
 }: {
   image: string;
   imageClassName?: string;
   children: React.ReactNode;
   className?: string;
+  tint?: string;
 }) {
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-3xl border border-border bg-card",
+        "relative overflow-hidden rounded-[1.75rem]",
+        tint,
         className,
       )}
     >
       <div
-        className="pointer-events-none absolute inset-y-0 right-0 hidden w-72 select-none sm:block"
+        className="pointer-events-none absolute inset-y-0 right-0 hidden w-80 select-none sm:block"
         aria-hidden
       >
         <Image
@@ -89,7 +123,11 @@ export function EmptyScene({
           alt=""
           width={280}
           height={240}
-          className={cn("absolute -bottom-4 right-6 w-48", imageClassName)}
+          unoptimized
+          className={cn(
+            "absolute -bottom-6 right-4 w-56 animate-bob",
+            imageClassName,
+          )}
         />
       </div>
       <ConfettiDots className="hidden sm:block" />
@@ -101,7 +139,8 @@ export function EmptyScene({
         alt=""
         width={200}
         height={160}
-        className="pointer-events-none mx-auto -mt-4 mb-6 h-24 w-auto select-none sm:hidden"
+        unoptimized
+        className="pointer-events-none mx-auto -mt-4 mb-6 h-28 w-auto select-none sm:hidden"
       />
     </div>
   );
@@ -118,7 +157,7 @@ export function HeaderDecor({
   return (
     <div
       className={cn(
-        "pointer-events-none relative hidden h-20 w-40 select-none sm:block",
+        "pointer-events-none relative hidden h-24 w-44 select-none sm:block",
         className,
       )}
       aria-hidden
@@ -128,7 +167,8 @@ export function HeaderDecor({
         alt=""
         width={160}
         height={120}
-        className="absolute right-6 top-1/2 h-16 w-auto -translate-y-1/2"
+        unoptimized
+        className="absolute right-4 top-1/2 h-20 w-auto -translate-y-1/2 animate-wiggle"
       />
       <ConfettiDots />
     </div>

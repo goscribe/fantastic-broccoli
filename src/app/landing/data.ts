@@ -1,25 +1,45 @@
-import {
-  BookOpen,
-  ClipboardCheck,
-  Layers,
-  ListChecks,
-  TextCursorInput,
-  type LucideIcon,
-} from "lucide-react";
-
 export const subjects = [
-  "Chemistry",
-  "Biology",
-  "Physics",
-  "Math",
-  "English",
-  "History",
+  {
+    name: "Chemistry",
+    icon: "/illustrations/icons/ws-purple.png",
+    tint: "bg-accent-soft",
+  },
+  {
+    name: "Biology",
+    icon: "/illustrations/icons/ws-emerald.png",
+    tint: "bg-emerald-500/15",
+  },
+  {
+    name: "Physics",
+    icon: "/illustrations/icons/ws-sky.png",
+    tint: "bg-sky/20",
+  },
+  {
+    name: "Math",
+    icon: "/illustrations/icons/ws-amber.png",
+    tint: "bg-amber/20",
+  },
+  {
+    name: "English",
+    icon: "/illustrations/icons/ws-pink.png",
+    tint: "bg-rose/20",
+  },
+  {
+    name: "History",
+    icon: "/illustrations/props/book-blue.png",
+    tint: "bg-sky/15",
+  },
 ];
+
+export type SceneMock = "session" | "quiz" | "copilot" | "upload" | "flashcards";
+export type ArtTint = "accent" | "sky" | "rose" | "amber";
+export type ArtSide = "right" | "left" | "bottom";
 
 export interface Feature {
   icon: string;
   title: string;
   description: string;
+  tint: ArtTint;
 }
 
 export const features: Feature[] = [
@@ -28,42 +48,44 @@ export const features: Feature[] = [
     title: "Readings with figures",
     description:
       "Focused readings generated from your materials, with the original figures and diagrams pulled straight from your PDFs.",
+    tint: "accent",
   },
   {
     icon: "/illustrations/icons/act-worksheet.png",
     title: "Worksheets with AI grading",
     description:
       "Exam-style questions marked against an AI markscheme — with per-part feedback, not just right or wrong.",
+    tint: "sky",
   },
   {
     icon: "/illustrations/icons/act-flashcards.png",
     title: "Flashcards",
     description:
       "Auto-generated decks that target the definitions, formulas, and concepts you actually need to memorise.",
+    tint: "amber",
   },
   {
     icon: "/illustrations/icons/act-cloze.png",
     title: "Cloze passages",
     description:
       "Fill-in-the-blank passages built from your notes that force real recall instead of passive recognition.",
+    tint: "rose",
   },
   {
     icon: "/illustrations/icons/act-comprehension.png",
     title: "Comprehension checks",
     description:
       "Quick checkpoints after each reading to confirm you understood it — before you move on.",
+    tint: "sky",
   },
   {
     icon: "/illustrations/icons/act-explain.png",
     title: "AI copilot",
     description:
       "A study partner that knows your course. Ask questions, get explanations, and dig deeper without leaving your session.",
+    tint: "accent",
   },
 ];
-
-export type SceneMock = "session" | "quiz" | "copilot" | "upload" | "flashcards";
-export type ArtTint = "accent" | "sky" | "rose" | "amber";
-export type ArtSide = "right" | "left" | "bottom";
 
 export interface FeatureScene {
   title: string;
@@ -182,15 +204,35 @@ export const plans = [
 ];
 
 export const sessionPreview: {
-  icon: LucideIcon;
+  art: string;
   label: string;
   meta: string;
 }[] = [
-  { icon: BookOpen, label: "Reading: Enzyme kinetics", meta: "12 min" },
-  { icon: ListChecks, label: "Comprehension check", meta: "4 questions" },
-  { icon: ClipboardCheck, label: "Worksheet: Rate equations", meta: "6 parts" },
-  { icon: Layers, label: "Flashcards: Key definitions", meta: "18 cards" },
-  { icon: TextCursorInput, label: "Cloze: Michaelis–Menten", meta: "1 passage" },
+  {
+    art: "/illustrations/icons/act-reading.png",
+    label: "Reading: Enzyme kinetics",
+    meta: "12 min",
+  },
+  {
+    art: "/illustrations/icons/act-comprehension.png",
+    label: "Comprehension check",
+    meta: "4 questions",
+  },
+  {
+    art: "/illustrations/icons/act-worksheet.png",
+    label: "Worksheet: Rate equations",
+    meta: "6 parts",
+  },
+  {
+    art: "/illustrations/icons/act-flashcards.png",
+    label: "Flashcards: Key definitions",
+    meta: "18 cards",
+  },
+  {
+    art: "/illustrations/icons/act-cloze.png",
+    label: "Cloze: Michaelis–Menten",
+    meta: "1 passage",
+  },
 ];
 
 export const testimonials = [

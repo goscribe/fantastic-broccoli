@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { DotGrid, GlowField } from "@/components/graphics/landing-art";
 import {
   ArtStage,
   CtaBand,
   FeatureSplit,
+  FunFeatureCard,
 } from "@/components/graphics/marketing-art";
+import { Sticker } from "@/components/graphics/floating-decor";
 import { Button } from "@/components/ui/button";
 import { HeroPreview, StatsStrip } from "./hero-preview";
 import { features, homeScenes, howItWorks, subjects, testimonials } from "./data";
@@ -30,7 +31,7 @@ export default function LandingPage() {
           <DotGrid className="inset-y-0 right-0 hidden w-1/2 lg:block" />
           <div className="relative grid items-center gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
             <div className="animate-fade-up">
-              <h1 className="text-4xl font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
+              <h1 className="text-4xl font-extrabold tracking-tight text-balance sm:text-5xl md:text-6xl">
                 Stop re-reading.
                 <br />
                 <span className="text-accent">Start learning.</span>
@@ -57,15 +58,26 @@ export default function LandingPage() {
                 Free to start · No credit card required
               </p>
             </div>
-            <ArtStage
-              src="/illustrations/marketing/mkt-hero.png"
-              tint="accent"
-              side="right"
-              size="lg"
-              className="animate-fade-up p-5 sm:p-6"
-            >
-              <HeroPreview />
-            </ArtStage>
+            <div className="relative animate-fade-up">
+              <Sticker
+                src="/illustrations/props/star-gold.png"
+                className="-top-6 right-8 z-20 hidden w-12 rotate-12 sm:block"
+              />
+              <Sticker
+                src="/illustrations/props/pencil.png"
+                className="-bottom-4 -left-6 z-20 hidden w-14 -rotate-12 lg:block"
+                delay="0.7s"
+              />
+              <ArtStage
+                src="/illustrations/marketing/mkt-hero.png"
+                tint="accent"
+                side="right"
+                size="xl"
+                className="p-5 sm:p-6"
+              >
+                <HeroPreview />
+              </ArtStage>
+            </div>
           </div>
 
           <div className="relative mt-16 border-t border-border pt-10">
@@ -79,10 +91,16 @@ export default function LandingPage() {
             <ul className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
               {subjects.map((subject) => (
                 <li
-                  key={subject}
-                  className="rounded-full border border-border bg-card px-3.5 py-1.5 text-sm font-medium text-muted-foreground"
+                  key={subject.name}
+                  className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-bold ${subject.tint}`}
                 >
-                  {subject}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={subject.icon}
+                    alt=""
+                    className="h-6 w-6 object-contain"
+                  />
+                  {subject.name}
                 </li>
               ))}
             </ul>
@@ -95,17 +113,25 @@ export default function LandingPage() {
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">How it works</h2>
           <ol className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6">
             {howItWorks.map((step) => (
-              <li key={step.num}>
+              <li key={step.num} className="group">
                 <ArtStage
                   src={step.art}
                   tint={step.tint}
                   side={step.side}
-                  size="sm"
+                  size="md"
                 />
-                <span className="mt-5 flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-sm font-bold text-accent">
+                <span
+                  className={`mt-5 flex h-9 w-9 items-center justify-center rounded-2xl text-sm font-extrabold text-white shadow-[0_3px_0_0_rgba(0,0,0,0.12)] ${
+                    step.tint === "sky"
+                      ? "bg-sky"
+                      : step.tint === "rose"
+                        ? "bg-rose"
+                        : "bg-accent"
+                  }`}
+                >
                   {step.num}
                 </span>
-                <h3 className="mt-3 text-base font-semibold">{step.title}</h3>
+                <h3 className="mt-3 text-base font-bold">{step.title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                   {step.description}
                 </p>
@@ -137,24 +163,7 @@ export default function LandingPage() {
           </div>
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {features.slice(0, 3).map((feature) => (
-              <li
-                key={feature.title}
-                className="rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm"
-              >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted/50">
-                  <Image
-                    src={feature.icon}
-                    alt=""
-                    width={32}
-                    height={32}
-                    className="h-7 w-7 object-contain"
-                  />
-                </span>
-                <h3 className="mt-3 text-sm font-semibold">{feature.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                  {feature.description}
-                </p>
-              </li>
+              <FunFeatureCard key={feature.title} {...feature} />
             ))}
           </ul>
         </div>
@@ -200,7 +209,7 @@ export default function LandingPage() {
               {restQuotes.map((t) => (
                 <li
                   key={t.name}
-                  className="rounded-2xl border border-border bg-card p-5"
+                  className="rounded-3xl bg-card p-5 shadow-[0_4px_0_0_var(--border)]"
                 >
                   <p className="text-sm leading-relaxed text-pretty">
                     “{t.quote}”
