@@ -33,7 +33,7 @@ import {
   markFirstSessionOnboardingSkipped,
 } from "@/components/onboarding/first-session-onboarding";
 import { onTreeChanged } from "@/lib/tree-events";
-import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
+import { Search, ArrowRight, Plus, RotateCcw, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
@@ -80,6 +80,7 @@ export default function HomePage() {
     Map<string, StudySession[]>
   >(new Map());
   const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
+  const [overviewOpen, setOverviewOpen] = useState(false);
 
   const { data: dueReview } = useQuery({
     queryKey: ["due-review-count"],
@@ -384,104 +385,29 @@ export default function HomePage() {
           </Link>
         )}
 
-        {/* Study overview */}
+        {/* Study overview: slim strip; calendar + weekly chart live behind a toggle
+            so they never push real content below the fold. */}
         <section className="animate-fade-up">
-          <h2 className="text-sm font-semibold mb-3">
-            {t("misc.studyOverview")}
-          </h2>
           {calendarLoading || treeLoading ? (
-            <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
-              <div className="hidden rounded-xl border border-border bg-card p-4 space-y-3 lg:block">
-                <Skeleton className="h-4 w-28" />
-                <Skeleton className="h-40 w-full" />
-              </div>
-              <div className="rounded-xl border border-border bg-card p-4 flex flex-col gap-4">
-                <div className="flex items-center justify-between">
-                  <Skeleton className="h-4 w-20" />
-                  <Skeleton className="h-6 w-24 rounded-full" />
-                </div>
-                <div className="hidden flex-1 items-end gap-2.5 min-h-28 lg:flex">
-                  {[40, 65, 30, 80, 55, 70, 45].map((h, i) => (
-                    <Skeleton
-                      key={i}
-                      className="flex-1 max-w-9 rounded-t-md"
-                      style={{ height: `${h}%` }}
-                    />
-                  ))}
-                </div>
-                <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-                  {Array.from({ length: 4 }, (_, i) => (
-                    <Skeleton key={i} className="h-14" />
-                  ))}
-                </div>
-              </div>
-            </div>
+            <Skeleton className="h-12 w-full rounded-xl" />
           ) : (
-          <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
-            {/* The calendar and weekly chart are reference views, not actions:
-                on phones they pushed the real content below the fold. */}
-            <div className="hidden rounded-xl border border-border bg-card p-4 lg:block">
-              <StudyCalendar dailyActivity={dailyActivity} />
-            </div>
-            <div className="rounded-xl border border-border bg-card p-3.5 flex flex-col">
-              <div className="flex flex-1 flex-col">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-semibold">{t("misc.thisWeek")}</p>
-                  <div className="flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 py-1 pl-1.5 pr-3 dark:border-amber-400/25 dark:bg-amber-400/10">
-                    <Image
-                      src="/illustrations/icons/stat-flame.png"
-                      alt=""
-                      width={48}
-                      height={48}
-                      className="pointer-events-none h-6 w-6 shrink-0 select-none object-contain"
-                    />
-                    <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-300">
-                      <span className="text-[15px] font-bold tabular-nums">
-                        {streak}
-                      </span>{" "}
-                      {t("misc.dayStreak")}
-                    </p>
-                  </div>
+            <div className="rounded-xl border border-border bg-card">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-3 py-2">
+                <div className="flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 py-0.5 pl-1 pr-2.5 dark:border-amber-400/25 dark:bg-amber-400/10">
+                  <Image
+                    src="/illustrations/icons/stat-flame.png"
+                    alt=""
+                    width={48}
+                    height={48}
+                    className="pointer-events-none h-5 w-5 shrink-0 select-none object-contain"
+                  />
+                  <p className="text-[11px] font-semibold text-amber-700 dark:text-amber-300">
+                    <span className="text-[13px] font-bold tabular-nums">
+                      {streak}
+                    </span>{" "}
+                    {t("misc.dayStreak")}
+                  </p>
                 </div>
-                <div className="mt-3 hidden min-h-20 flex-1 items-end gap-2.5 lg:flex">
-                  {lastSevenDays.map(({ label, count, isToday }, i) => (
-                    <div
-                      key={i}
-                      className="flex h-full flex-1 flex-col items-center justify-end gap-1"
-                      title={t(
-                        count === 1
-                          ? "misc.sessionTooltip"
-                          : "misc.sessionsTooltip",
-                      ).replace("{count}", String(count))}
-                    >
-                      <span className="text-[10px] font-medium tabular-nums text-muted-foreground">
-                        {count > 0 ? count : ""}
-                      </span>
-                      <div
-                        className={`w-full max-w-9 rounded-t-md ${
-                          count > 0
-                            ? isToday
-                              ? "bg-accent"
-                              : "bg-accent/70"
-                            : "bg-muted"
-                        }`}
-                        style={{
-                          height:
-                            count > 0 ? `${(count / maxWeekCount) * 100}%` : "4px",
-                        }}
-                      />
-                      <span
-                        className={`text-[10px] ${
-                          isToday ? "font-semibold text-foreground" : "text-faint"
-                        }`}
-                      >
-                        {label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:mt-4">
                 {[
                   {
                     label: t("misc.activeDays"),
@@ -510,28 +436,90 @@ export default function HomePage() {
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="flex items-center gap-2.5 rounded-xl bg-muted/50 px-2.5 py-2 leading-tight"
+                    className="flex items-center gap-1.5 leading-none"
+                    title={stat.label}
                   >
                     <Image
                       src={stat.icon}
                       alt=""
                       width={64}
                       height={64}
-                      className="pointer-events-none h-6 w-6 shrink-0 select-none object-contain"
+                      className="pointer-events-none h-5 w-5 shrink-0 select-none object-contain"
                     />
-                    <div>
-                      <p className="text-sm font-bold tabular-nums">
-                        {stat.value}
-                      </p>
-                      <p className="text-[10px] font-medium text-muted-foreground">
-                        {stat.label}
-                      </p>
-                    </div>
+                    <p className="text-[13px] font-bold tabular-nums">
+                      {stat.value}
+                    </p>
+                    <p className="hidden text-[11px] font-medium text-muted-foreground sm:block">
+                      {stat.label}
+                    </p>
                   </div>
                 ))}
+                <button
+                  type="button"
+                  onClick={() => setOverviewOpen((o) => !o)}
+                  className="ml-auto flex items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-semibold text-muted-foreground hover:bg-muted/60 transition-colors"
+                  aria-expanded={overviewOpen}
+                >
+                  {t("misc.studyOverview")}
+                  <ChevronDown
+                    className={`h-3.5 w-3.5 transition-transform ${overviewOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
               </div>
+              {overviewOpen && (
+                <div className="grid gap-4 border-t border-border p-3.5 lg:grid-cols-[320px_1fr]">
+                  <div className="hidden lg:block">
+                    <StudyCalendar dailyActivity={dailyActivity} />
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="text-sm font-semibold">
+                      {t("misc.thisWeek")}
+                    </p>
+                    <div className="mt-3 flex min-h-20 flex-1 items-end gap-2.5">
+                      {lastSevenDays.map(({ label, count, isToday }, i) => (
+                        <div
+                          key={i}
+                          className="flex h-full flex-1 flex-col items-center justify-end gap-1"
+                          title={t(
+                            count === 1
+                              ? "misc.sessionTooltip"
+                              : "misc.sessionsTooltip",
+                          ).replace("{count}", String(count))}
+                        >
+                          <span className="text-[10px] font-medium tabular-nums text-muted-foreground">
+                            {count > 0 ? count : ""}
+                          </span>
+                          <div
+                            className={`w-full max-w-9 rounded-t-md ${
+                              count > 0
+                                ? isToday
+                                  ? "bg-accent"
+                                  : "bg-accent/70"
+                                : "bg-muted"
+                            }`}
+                            style={{
+                              height:
+                                count > 0
+                                  ? `${(count / maxWeekCount) * 100}%`
+                                  : "4px",
+                            }}
+                          />
+                          <span
+                            className={`text-[10px] ${
+                              isToday
+                                ? "font-semibold text-foreground"
+                                : "text-faint"
+                            }`}
+                          >
+                            {label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
           )}
         </section>
 
