@@ -42,15 +42,24 @@ export function FullScreenLoader() {
       />
 
       <div className="relative z-10 flex flex-col items-center">
-        <div className="relative flex h-36 w-44 items-end justify-center sm:h-40 sm:w-48">
+        <div className="relative flex h-44 w-44 items-center justify-center sm:h-52 sm:w-52">
           <div
             aria-hidden
-            className="absolute left-1/2 top-[42%] h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/35 blur-3xl motion-reduce:animate-none animate-loader-glow"
+            className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/35 blur-3xl motion-reduce:animate-none animate-loader-glow"
           />
-          <span
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            poster="/illustrations/blob-hello-poster.jpg"
+            disablePictureInPicture
             aria-hidden
-            className="absolute bottom-1 left-1/2 h-2.5 w-[4.25rem] -translate-x-1/2 rounded-full bg-foreground/25 blur-[3px] motion-reduce:animate-none animate-blob-shadow"
-          />
+            className="relative h-40 w-40 select-none object-contain motion-reduce:hidden sm:h-48 sm:w-48"
+          >
+            <source src="/illustrations/blob-hello.mp4" type="video/mp4" />
+          </video>
           <Image
             src="/illustrations/bot.png"
             alt=""
@@ -58,7 +67,7 @@ export function FullScreenLoader() {
             height={204}
             priority
             unoptimized
-            className="relative h-28 w-auto origin-bottom select-none motion-reduce:animate-none animate-blob-hop sm:h-32"
+            className="relative hidden h-28 w-auto select-none motion-reduce:block sm:h-32"
           />
         </div>
 
