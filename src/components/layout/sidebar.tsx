@@ -220,7 +220,7 @@ export function Sidebar({
   return (
     <aside
       className={cn(
-        "w-72 shrink-0 flex-col bg-card border-r border-border",
+        "w-72 shrink-0 flex-col bg-white dark:bg-card border-r border-border",
         "max-md:fixed max-md:inset-y-0 max-md:left-0 max-md:z-50 max-md:transition-transform",
         mobileOpen ? "flex" : "max-md:-translate-x-full hidden md:flex",
       )}

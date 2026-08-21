@@ -22,7 +22,7 @@ export function LandingHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-20 border-b border-border bg-card">
+    <header className="sticky top-0 z-20 border-b border-border bg-white dark:bg-card">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/landing" onClick={() => setOpen(false)}>
           <ScribeLogo />

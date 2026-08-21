@@ -125,7 +125,7 @@ export function TopBar({
 
   return (
     <>
-      <div className="sticky top-0 z-40 border-b border-border bg-card">
+      <div className="sticky top-0 z-40 border-b border-border bg-white dark:bg-card">
         <div className="flex h-14 items-center justify-between px-5">
           <div className="flex items-center gap-2">
             {onMenuClick && (
