@@ -25,15 +25,22 @@ const PUBLIC_PATHS = [
   "/login",
   "/signup",
   "/forgot-password",
+  "/reset-password",
   "/verify-email",
+  "/restore-account",
+  "/accept-invite",
   "/privacy",
   "/terms",
 ];
 
+export function isPublicPath(path: string): boolean {
+  return PUBLIC_PATHS.some((p) => path === p || path.startsWith(`${p}/`));
+}
+
 /** Returns true when a redirect was initiated. */
 function redirectUnauthenticated(): boolean {
   const path = window.location.pathname;
-  if (PUBLIC_PATHS.some((p) => path === p || path.startsWith(`${p}/`))) {
+  if (isPublicPath(path)) {
     return false;
   }
   window.location.href =

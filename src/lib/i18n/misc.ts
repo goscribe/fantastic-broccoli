@@ -138,8 +138,10 @@ const english = {
   "misc.darkMode": "Dark mode",
   "misc.adminConsole": "Admin console",
   "misc.verifyEmailBanner":
-    "Verify your email to unlock study tools and billing actions.",
+    "Verify {email} to unlock study tools and billing actions.",
   "misc.resendVerification": "Resend verification",
+  "misc.verificationEmailSent": "Verification email sent.",
+  "misc.verificationEmailFailed": "Could not resend the email.",
   // Command palette
   "misc.page": "Page",
   "misc.folder": "Folder",
@@ -299,8 +301,10 @@ registerTranslations(english, {
     "misc.darkMode": "Modo oscuro",
     "misc.adminConsole": "Consola de administración",
     "misc.verifyEmailBanner":
-      "Verifica tu correo para desbloquear las herramientas de estudio y la facturación.",
+      "Verifica {email} para desbloquear las herramientas de estudio y la facturación.",
     "misc.resendVerification": "Reenviar verificación",
+    "misc.verificationEmailSent": "Correo de verificación enviado.",
+    "misc.verificationEmailFailed": "No se pudo reenviar el correo.",
     "misc.page": "Página",
     "misc.folder": "Carpeta",
     "misc.palettePlaceholder": "Busca, o describe lo que quieres estudiar…",
@@ -462,8 +466,10 @@ registerTranslations(english, {
     "misc.darkMode": "Mode sombre",
     "misc.adminConsole": "Console d'administration",
     "misc.verifyEmailBanner":
-      "Vérifiez votre e-mail pour débloquer les outils d'étude et la facturation.",
+      "Vérifiez {email} pour débloquer les outils d'étude et la facturation.",
     "misc.resendVerification": "Renvoyer la vérification",
+    "misc.verificationEmailSent": "E-mail de vérification envoyé.",
+    "misc.verificationEmailFailed": "Impossible de renvoyer l'e-mail.",
     "misc.page": "Page",
     "misc.folder": "Dossier",
     "misc.palettePlaceholder":
@@ -628,8 +634,10 @@ registerTranslations(english, {
     "misc.darkMode": "Dunkler Modus",
     "misc.adminConsole": "Admin-Konsole",
     "misc.verifyEmailBanner":
-      "Bestätige deine E-Mail, um Lernwerkzeuge und Abrechnungsaktionen freizuschalten.",
+      "Bestätige {email}, um Lernwerkzeuge und Abrechnungsaktionen freizuschalten.",
     "misc.resendVerification": "Bestätigung erneut senden",
+    "misc.verificationEmailSent": "Bestätigungs-E-Mail gesendet.",
+    "misc.verificationEmailFailed": "Die E-Mail konnte nicht erneut gesendet werden.",
     "misc.page": "Seite",
     "misc.folder": "Ordner",
     "misc.palettePlaceholder":
@@ -780,8 +788,10 @@ registerTranslations(english, {
     "misc.lightMode": "浅色模式",
     "misc.darkMode": "深色模式",
     "misc.adminConsole": "管理控制台",
-    "misc.verifyEmailBanner": "验证你的邮箱以解锁学习工具和账单操作。",
+    "misc.verifyEmailBanner": "验证 {email} 以解锁学习工具和账单操作。",
     "misc.resendVerification": "重新发送验证邮件",
+    "misc.verificationEmailSent": "验证邮件已发送。",
+    "misc.verificationEmailFailed": "无法重新发送验证邮件。",
     "misc.page": "页面",
     "misc.folder": "文件夹",
     "misc.palettePlaceholder": "搜索，或描述你想学习的内容…",
@@ -938,8 +948,10 @@ registerTranslations(english, {
     "misc.darkMode": "डार्क मोड",
     "misc.adminConsole": "एडमिन कंसोल",
     "misc.verifyEmailBanner":
-      "स्टडी टूल और बिलिंग के लिए अपना ईमेल सत्यापित करें।",
+      "स्टडी टूल और बिलिंग के लिए {email} सत्यापित करें।",
     "misc.resendVerification": "सत्यापन फिर भेजें",
+    "misc.verificationEmailSent": "सत्यापन ईमेल भेज दिया गया है।",
+    "misc.verificationEmailFailed": "ईमेल फिर से नहीं भेजा जा सका।",
     "misc.page": "पेज",
     "misc.folder": "फ़ोल्डर",
     "misc.palettePlaceholder":
@@ -1099,8 +1111,10 @@ registerTranslations(english, {
     "misc.darkMode": "Dark mode",
     "misc.adminConsole": "Admin console",
     "misc.verifyEmailBanner":
-      "I-verify ang iyong email para ma-unlock ang study tools at billing.",
+      "I-verify ang {email} para ma-unlock ang study tools at billing.",
     "misc.resendVerification": "Ipadala muli ang verification",
+    "misc.verificationEmailSent": "Naipadala na ang verification email.",
+    "misc.verificationEmailFailed": "Hindi maipadala muli ang email.",
     "misc.page": "Pahina",
     "misc.folder": "Folder",
     "misc.palettePlaceholder":

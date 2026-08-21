@@ -222,6 +222,7 @@ export function Sidebar({
       className={cn(
         "w-72 shrink-0 flex-col bg-white dark:bg-card border-r border-border",
         "max-md:fixed max-md:inset-y-0 max-md:left-0 max-md:z-50 max-md:transition-transform",
+        "pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]",
         mobileOpen ? "flex" : "max-md:-translate-x-full hidden md:flex",
       )}
     >
@@ -233,7 +234,7 @@ export function Sidebar({
             type="button"
             aria-label="Close sidebar"
             onClick={onMobileClose}
-            className="ml-auto p-1.5 rounded-md text-muted-foreground hover:bg-muted md:hidden"
+            className="ml-auto rounded-md p-2.5 text-muted-foreground hover:bg-muted md:hidden"
           >
             <X className="h-4 w-4" />
           </button>
