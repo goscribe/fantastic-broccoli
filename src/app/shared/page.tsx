@@ -3,10 +3,10 @@
 import "@/lib/i18n/flashcards";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { fetchSharedWorkspaces } from "@/lib/api/workspace";
 import { Workspace } from "@/types";
-import { Users } from "lucide-react";
 import { AvatarStack } from "@/components/ui/avatar-stack";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
@@ -37,9 +37,15 @@ export default function SharedPage() {
       {loading && <CardGridSkeleton count={6} />}
 
       {!loading && shared.length === 0 && (
-        <div className="rounded-xl border border-border bg-card px-6 py-12 text-center">
-          <Users className="mx-auto h-6 w-6 text-faint" />
-          <p className="mt-3 text-sm font-medium">{t("fc.nothingShared")}</p>
+        <div className="rounded-2xl border border-border bg-card px-6 py-12 text-center">
+          <Image
+            src="/illustrations/shared.png"
+            alt=""
+            width={200}
+            height={150}
+            className="pointer-events-none mx-auto h-24 w-auto select-none"
+          />
+          <p className="mt-4 text-sm font-medium">{t("fc.nothingShared")}</p>
           <p className="mt-1 text-sm text-muted-foreground">
             {t("fc.nothingSharedBody")}
           </p>

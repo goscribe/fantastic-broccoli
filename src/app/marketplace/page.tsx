@@ -4,6 +4,7 @@ import "@/lib/i18n/flashcards";
 import { MathText } from "@/components/ui/markdown-text";
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
@@ -305,7 +306,13 @@ export default function MarketplacePage() {
           <CardGridSkeleton count={8} />
         ) : filtered.length === 0 ? (
           <div className="rounded-3xl border border-dashed border-border-strong bg-card px-6 py-14 text-center">
-            <Globe className="mx-auto mb-3 h-10 w-10 text-faint" />
+            <Image
+              src="/illustrations/search.png"
+              alt=""
+              width={200}
+              height={150}
+              className="pointer-events-none mx-auto mb-4 h-24 w-auto select-none"
+            />
             <p className="text-sm font-semibold">
               {t(aiResults !== null ? "fc.mkNoMatches" : "fc.mkNothingHere")}
             </p>

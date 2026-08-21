@@ -44,6 +44,8 @@ function handleProc(path, input) {
     case "auth.getSession":
       return { user };
     case "workspace.getTree":
+      // EMPTY=1 simulates a brand-new user (triggers first-session onboarding).
+      if (process.env.EMPTY === "1") return { folders: [], workspaces: [] };
       return { folders: [], workspaces };
     case "workspace.getSharedWith":
       return { shared: [] };
@@ -77,7 +79,123 @@ function handleProc(path, input) {
       const id = input && input.id;
       return workspaces.find((w) => w.id === id) || workspaces[0];
     }
-    case "studySession.list":
+    case "studySession.list": {
+      if (process.env.EMPTY === "1" || !input || input.workspaceId !== "ws-1")
+        return [];
+      // One resumable session so the dashboard hero shows the progress block.
+      const listAct = (n, title, status) => ({
+        id: `act-${n}`,
+        sessionId: "ses-1",
+        type: "READING",
+        title,
+        description: null,
+        content: { text: "…" },
+        order: n,
+        status,
+        estimatedMinutes: 5,
+        timeSpentSeconds: null,
+        meta: null,
+        highlights: [],
+        createdAt: "2026-02-16T10:00:00.000Z",
+        updatedAt: "2026-02-16T10:00:00.000Z",
+      });
+      return {
+        __superjson: {
+          json: [
+            {
+              id: "ses-1",
+              workspaceId: "ws-1",
+              userId: "u1",
+              title: "Energetics recap",
+              description: "Hess's law and bond enthalpies",
+              depth: "MODERATE",
+              durationMinutes: 15,
+              status: "ACTIVE",
+              progress: 40,
+              generating: false,
+              examBoard: null,
+              syllabus: null,
+              topics: null,
+              startDate: "2026-02-16T10:00:00.000Z",
+              endDate: null,
+              createdAt: "2026-02-16T10:00:00.000Z",
+              updatedAt: "2026-02-16T10:00:00.000Z",
+              activities: [
+                listAct(0, "Read: Hess's law essentials", "COMPLETED"),
+                listAct(1, "Read: Bond enthalpies", "PENDING"),
+              ],
+              comments: [],
+            },
+          ],
+          meta: {
+            values: {
+              "0.startDate": ["Date"],
+              "0.createdAt": ["Date"],
+              "0.updatedAt": ["Date"],
+            },
+          },
+        },
+      };
+    }
+    case "studySession.get": {
+      const id = (input && input.id) || "ses-1";
+      const act = (n, title, text) => ({
+        id: `act-${n}`,
+        sessionId: id,
+        type: "READING",
+        title,
+        description: null,
+        content: { text },
+        order: n,
+        status: "PENDING",
+        estimatedMinutes: 5,
+        timeSpentSeconds: null,
+        meta: null,
+        highlights: [],
+        createdAt: "2026-02-16T10:00:00.000Z",
+        updatedAt: "2026-02-16T10:00:00.000Z",
+      });
+      return {
+        __superjson: {
+          json: {
+            id,
+            workspaceId: "ws-1",
+            userId: "u1",
+            title: "Energetics recap",
+            description: "Hess's law and bond enthalpies",
+            depth: "MODERATE",
+            durationMinutes: 15,
+            status: "ACTIVE",
+            progress: 0,
+            generating: false,
+            examBoard: null,
+            syllabus: null,
+            topics: null,
+            startDate: "2026-02-16T10:00:00.000Z",
+            endDate: null,
+            createdAt: "2026-02-16T10:00:00.000Z",
+            updatedAt: "2026-02-16T10:00:00.000Z",
+            activities: [
+              act(0, "Read: Hess's law essentials",
+                "Hess's law states that the total enthalpy change of a reaction is independent of the route taken. Enthalpy is a state function, so cycles let you compute unknown enthalpies from known ones."),
+              act(1, "Read: Bond enthalpies",
+                "Bond enthalpy is the energy needed to break one mole of a bond in gaseous molecules. Reaction enthalpy ≈ bonds broken minus bonds formed; values are averages, so results are approximate."),
+            ],
+            comments: [],
+          },
+          meta: {
+            values: {
+              startDate: ["Date"],
+              createdAt: ["Date"],
+              updatedAt: ["Date"],
+            },
+          },
+        },
+      };
+    }
+    case "studySession.updateActivityStatus":
+      return { ok: true };
+    case "studySession.pullFromBank":
       return [];
     case "studySession.listBank":
       return [];
@@ -154,7 +272,9 @@ const server = http.createServer((req, res) => {
     const respond = (inputs) => {
       const results = procs.map((p, i) => {
         const data = handleProc(p, inputs[i]);
-        return { result: { data: sj(data) } };
+        return {
+          result: { data: data && data.__superjson ? data.__superjson : sj(data) },
+        };
       });
       res.writeHead(200, { "content-type": "application/json" });
       res.end(JSON.stringify(isBatch ? results : results[0]));

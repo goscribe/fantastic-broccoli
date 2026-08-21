@@ -4,6 +4,7 @@ import { Workspace } from "@/types";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { formatRelativeDate, formatDuration } from "@/lib/utils";
+import { accentForId } from "@/lib/accent-palette";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import { Clock, ArrowRight, FileText, BookOpen, UserPlus } from "lucide-react";
@@ -44,12 +45,17 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
             : "ws.sessionsInProgress",
         ).replace("{n}", String(activeSessions.length))
       : t("ws.noActiveSessions");
+  const color = accentForId(workspace.id);
 
   return (
     <div
       onClick={() => onClick(workspace.id)}
-      className="group relative cursor-pointer rounded-2xl border border-border bg-card p-5 transition-all duration-150 hover:border-border-strong hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
+      className="group relative cursor-pointer rounded-2xl border border-border bg-card p-5 pt-6 transition-all duration-150 hover:border-border-strong hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
     >
+      <div
+        className="absolute inset-x-0 top-0 h-1.5 rounded-t-2xl"
+        style={{ background: `linear-gradient(90deg, ${color}, ${color}66)` }}
+      />
       {actions ? (
         <ResourceActionsMenu
           actions={actions}
@@ -60,7 +66,10 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
       )}
 
       <div className="flex items-start gap-3">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-muted">
+        <span
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+          style={{ backgroundColor: `${color}1f`, color }}
+        >
           <WorkspaceIcon icon={workspace.icon} className="h-6 w-6" />
         </span>
         <div className="min-w-0 flex-1 pr-5">

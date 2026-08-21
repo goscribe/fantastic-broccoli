@@ -194,6 +194,8 @@ export default function HomePage() {
 
   const streak = useMemo(() => computeStreak(dailyActivity), [dailyActivity]);
 
+  const heroProgress = resumable ? resumable.session.progress : 0;
+
   const lastSevenDays = useMemo(() => {
     const byDate = new Map(dailyActivity.map((d) => [d.date, d.count]));
     return Array.from({ length: 7 }, (_, i) => {
@@ -253,46 +255,53 @@ export default function HomePage() {
           </div>
         </header>
 
-        {/* Gradient banner */}
+        {/* Hero */}
         <section
           data-tour="home-banner"
-          className="relative z-10 rounded-2xl bg-ink p-7 text-white animate-fade-up"
+          className="relative z-10 grid gap-4 animate-fade-up lg:grid-cols-[1fr_250px]"
         >
-          {/* Gradients are clipped individually (not via overflow-hidden on the
-              section) so the New-workspace dropdown can extend past the banner. */}
-          <div
-            className="pointer-events-none absolute inset-0 rounded-2xl"
-            style={{
-              background:
-                "radial-gradient(ellipse 60% 120% at 90% 0%, rgba(105,82,224,0.35) 0%, transparent 60%)",
-            }}
-          />
-          <div
-            className="pointer-events-none absolute inset-0 rounded-2xl"
-            style={{
-              background:
-                "radial-gradient(ellipse 40% 90% at 0% 100%, rgba(105,82,224,0.12) 0%, transparent 55%)",
-            }}
-          />
-          <Image
-            src="/illustrations/flag.png"
-            alt=""
-            width={220}
-            height={220}
-            priority
-            className="pointer-events-none absolute -top-10 right-6 hidden w-44 select-none drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] md:block lg:right-10 lg:w-52"
-          />
-          <div className="relative flex flex-wrap items-end justify-between gap-6">
-            <div className="max-w-lg">
-              <p className="text-[11px] font-semibold text-accent-bright">
+          <div className="relative rounded-2xl border border-border bg-card p-7">
+            {/* Gradients are clipped individually (not via overflow-hidden on the
+                card) so the New-workspace dropdown can extend past it. */}
+            <div
+              className="pointer-events-none absolute inset-0 rounded-2xl"
+              style={{
+                background:
+                  "radial-gradient(ellipse 60% 130% at 92% 0%, rgba(105,82,224,0.18) 0%, transparent 60%)",
+              }}
+            />
+            <div
+              className="pointer-events-none absolute inset-0 rounded-2xl"
+              style={{
+                background:
+                  "radial-gradient(ellipse 45% 100% at 0% 100%, rgba(244,114,182,0.12) 0%, transparent 55%)",
+              }}
+            />
+            <div
+              className="pointer-events-none absolute inset-0 rounded-2xl"
+              style={{
+                background:
+                  "radial-gradient(ellipse 30% 70% at 55% 100%, rgba(251,191,36,0.10) 0%, transparent 60%)",
+              }}
+            />
+            <Image
+              src={resumable ? "/illustrations/flag.png" : "/illustrations/welcome.png"}
+              alt=""
+              width={220}
+              height={220}
+              priority
+              className="pointer-events-none absolute bottom-2 right-6 hidden w-44 select-none md:block lg:right-10 lg:w-52"
+            />
+            <div className="relative max-w-lg">
+              <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-accent-foreground">
                 {resumable ? t("home.continueStudying") : t("home.getStarted")}
-              </p>
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight mt-2 leading-snug">
+              </span>
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight mt-3 leading-snug">
                 {resumable
                   ? resumable.session.title
-                  : t("misc.startFirstSession")}
+                  : t("misc.firstWinTitle")}
               </h2>
-              <p className="text-sm text-white/55 mt-1.5">
+              <p className="text-sm text-muted-foreground mt-1.5">
                 {resumable
                   ? `${resumable.workspace.title} · ${formatDuration(resumable.session.durationMinutes)} · ${resumable.session.activities.filter((a) => a.status === "completed").length} of ${resumable.session.activities.length} activities complete`
                   : t("misc.planBlurb")}
@@ -306,7 +315,7 @@ export default function HomePage() {
                         `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
                       )
                     }
-                    className="group inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-[13px] font-semibold text-ink hover:bg-white/90 transition-colors"
+                    className="group inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-[13px] font-semibold text-accent-foreground hover:opacity-90 transition-opacity"
                   >
                     {t("home.resumeSession")}
                     <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -316,7 +325,7 @@ export default function HomePage() {
                       <button
                         type="button"
                         onClick={toggle}
-                        className="inline-flex items-center gap-2 rounded-lg border border-white/25 px-4 py-2 text-[13px] font-semibold text-white hover:bg-white/10 transition-colors"
+                        className="inline-flex items-center gap-2 rounded-lg border border-border-strong bg-card px-4 py-2 text-[13px] font-semibold hover:border-accent/50 transition-colors"
                       >
                         <Plus className="h-3.5 w-3.5" />
                         {t("nav.newWorkspace")}
@@ -330,7 +339,7 @@ export default function HomePage() {
                     <button
                       type="button"
                       onClick={toggle}
-                      className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-semibold text-ink hover:bg-white/90 transition-colors sm:w-auto sm:py-2 sm:text-[13px]"
+                      className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-accent-foreground hover:opacity-90 transition-opacity sm:w-auto sm:py-2 sm:text-[13px]"
                     >
                       <Plus className="h-4 w-4" />
                       {t("nav.newWorkspace")}
@@ -339,24 +348,40 @@ export default function HomePage() {
                 </NewWorkspaceMenu>
               )}
             </div>
-            {resumable && (
-              <div className="hidden sm:block w-64 md:mr-48 lg:mr-56">
-                <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-[10px] font-semibold text-white/45">
-                    {t("misc.progress")}
-                  </span>
-                  <span className="text-lg font-bold tabular-nums text-accent-bright">
-                    {resumable.session.progress}%
-                  </span>
-                </div>
-                <div className="h-1.5 rounded-full bg-white/15">
-                  <div
-                    className="h-1.5 rounded-full bg-accent-bright"
-                    style={{ width: `${resumable.session.progress}%` }}
-                  />
-                </div>
-              </div>
-            )}
+          </div>
+
+          {/* Progress gauge */}
+          <div className="hidden flex-col items-center justify-center rounded-2xl border border-amber-200/80 bg-gradient-to-b from-amber-50 to-card p-5 lg:flex dark:border-amber-400/20 dark:from-amber-400/10 dark:to-card">
+            <svg viewBox="0 0 120 120" className="h-28 w-28 -rotate-90">
+              <circle
+                cx="60"
+                cy="60"
+                r="50"
+                fill="none"
+                strokeWidth="11"
+                strokeLinecap="round"
+                className="stroke-amber-200/60 dark:stroke-amber-400/15"
+              />
+              <circle
+                cx="60"
+                cy="60"
+                r="50"
+                fill="none"
+                strokeWidth="11"
+                strokeLinecap="round"
+                strokeDasharray={2 * Math.PI * 50}
+                strokeDashoffset={
+                  2 * Math.PI * 50 * (1 - heroProgress / 100)
+                }
+                className="stroke-amber-500 transition-[stroke-dashoffset] duration-700 dark:stroke-amber-400"
+              />
+            </svg>
+            <p className="-mt-[4.75rem] text-2xl font-bold tabular-nums">
+              {heroProgress}%
+            </p>
+            <p className="mt-9 text-[11px] font-semibold text-amber-700 dark:text-amber-300">
+              {t("misc.progress")}
+            </p>
           </div>
         </section>
 
