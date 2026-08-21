@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { ScribeLogo } from "@/components/graphics/logo";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/lib/theme";
-import { Moon, Sun } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 
 const navLinks = [
   { href: "/landing", label: "Home" },
@@ -17,11 +18,12 @@ const navLinks = [
 export function LandingHeader() {
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/landing">
+        <Link href="/landing" onClick={() => setOpen(false)}>
           <ScribeLogo />
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
@@ -54,15 +56,55 @@ export function LandingHeader() {
           </button>
           <Link
             href="/login"
-            className="rounded-full px-4 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground"
+            className="hidden rounded-full px-4 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground sm:inline"
           >
             Sign in
           </Link>
-          <Link href="/signup">
+          <Link href="/signup" className="hidden sm:inline">
             <Button size="sm">Start studying</Button>
           </Link>
+          <button
+            type="button"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground hover:bg-muted md:hidden"
+            aria-label={open ? "Close menu" : "Open menu"}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
         </nav>
       </div>
+      {open && (
+        <div className="border-t border-border px-6 py-4 md:hidden">
+          <nav className="flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className={`rounded-xl px-3 py-2 text-sm font-medium ${
+                  pathname === link.href
+                    ? "bg-muted text-foreground"
+                    : "text-muted-foreground"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              href="/login"
+              onClick={() => setOpen(false)}
+              className="rounded-xl px-3 py-2 text-sm font-medium text-muted-foreground"
+            >
+              Sign in
+            </Link>
+            <Link href="/signup" onClick={() => setOpen(false)} className="pt-2">
+              <Button size="sm" className="w-full">
+                Start studying
+              </Button>
+            </Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
@@ -81,7 +123,10 @@ export function LandingFooter() {
           {[
             {
               heading: "Product",
-              links: navLinks.filter((l) => l.href !== "/landing"),
+              links: [
+                ...navLinks.filter((l) => l.href !== "/landing"),
+                { label: "About", href: "/landing/about" },
+              ],
             },
             {
               heading: "Account",

@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { absoluteUrl, jsonLdScriptProps } from "@/lib/seo";
-import { Button } from "@/components/ui/button";
+import { CtaBand, GlossyArt } from "@/components/graphics/marketing-art";
+import { GlowField } from "@/components/graphics/landing-art";
 import { faqs } from "../faqs";
-import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "FAQ — Scribe",
+  title: "FAQ",
   description:
     "Frequently asked questions about Scribe: uploads, study sessions, flashcards, pricing, and more.",
   alternates: { canonical: "/landing/faq" },
@@ -28,34 +27,54 @@ const faqJsonLd = {
 
 export default function LandingFaqPage() {
   return (
-    <section className="py-16 md:py-20">
+    <>
       <script {...jsonLdScriptProps(faqJsonLd)} />
-      <div className="mx-auto max-w-6xl px-6">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Frequently asked questions
-        </h1>
-        <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2">
-          {faqs.map((faq) => (
-            <div key={faq.q}>
-              <h2 className="text-sm font-semibold">{faq.q}</h2>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                {faq.a}
+      <section className="relative overflow-hidden py-16 md:py-20">
+        <GlowField />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="grid items-end gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-accent">
+                FAQ
+              </p>
+              <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+                Questions, answered
+              </h1>
+              <p className="mt-4 max-w-xl text-muted-foreground">
+                How uploads work, where the questions come from, and what it
+                costs — the things students actually ask before they try it.
               </p>
             </div>
-          ))}
+            <GlossyArt
+              src="/illustrations/marketing/mkt-worksheet.png"
+              className="mx-auto hidden w-48 lg:block"
+              width={690}
+              height={880}
+            />
+          </div>
+          <div className="mt-12 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+            {faqs.map((faq) => (
+              <details key={faq.q} className="group px-5 py-1">
+                <summary className="cursor-pointer list-none py-4 text-sm font-semibold marker:content-none [&::-webkit-details-marker]:hidden">
+                  <span className="flex items-center justify-between gap-4">
+                    {faq.q}
+                    <span className="text-lg font-normal text-faint transition group-open:rotate-45">
+                      +
+                    </span>
+                  </span>
+                </summary>
+                <p className="pb-4 text-sm leading-relaxed text-muted-foreground">
+                  {faq.a}
+                </p>
+              </details>
+            ))}
+          </div>
         </div>
-        <div className="mt-14 border-t border-border pt-10 text-center">
-          <p className="text-muted-foreground">
-            Still curious? The fastest answer is trying it.
-          </p>
-          <Link href="/signup" className="mt-5 inline-block">
-            <Button size="lg" className="gap-2">
-              Start studying
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </Link>
-        </div>
-      </div>
-    </section>
+      </section>
+      <CtaBand
+        title="Still curious? Try a real PDF."
+        subtitle="The fastest answer is a session built from your own lecture."
+      />
+    </>
   );
 }
