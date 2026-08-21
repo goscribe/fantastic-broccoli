@@ -12,7 +12,7 @@ const navLinks = [
   { href: "/landing", label: "Home" },
   { href: "/landing/features", label: "Features" },
   { href: "/landing/pricing", label: "Pricing" },
-  { href: "/landing/faq", label: "FAQ" },
+  { href: "/landing/faq", label: "Questions" },
 ];
 
 export function LandingHeader() {

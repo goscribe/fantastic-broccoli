@@ -239,7 +239,7 @@ export const sessionPreview = [
   {
     icon: "/illustrations/icons/act-worksheet.png",
     label: "Worksheet: Rate equations",
-    meta: "AI-marked",
+    meta: "6 parts",
   },
   {
     icon: "/illustrations/icons/act-flashcards.png",
