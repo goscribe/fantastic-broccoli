@@ -423,7 +423,7 @@ export default function HomePage() {
             <div className="hidden rounded-xl border border-border bg-card p-4 lg:block">
               <StudyCalendar dailyActivity={dailyActivity} />
             </div>
-            <div className="rounded-xl border border-border bg-card p-4 flex flex-col">
+            <div className="rounded-xl border border-border bg-card p-3.5 flex flex-col">
               <div className="flex flex-1 flex-col">
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-semibold">{t("misc.thisWeek")}</p>
@@ -443,7 +443,7 @@ export default function HomePage() {
                     </p>
                   </div>
                 </div>
-                <div className="mt-4 hidden min-h-28 flex-1 items-end gap-2.5 lg:flex">
+                <div className="mt-3 hidden min-h-20 flex-1 items-end gap-2.5 lg:flex">
                   {lastSevenDays.map(({ label, count, isToday }, i) => (
                     <div
                       key={i}
@@ -510,20 +510,20 @@ export default function HomePage() {
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="flex items-center gap-3 rounded-xl bg-muted/50 px-3 py-2.5 leading-tight"
+                    className="flex items-center gap-2.5 rounded-xl bg-muted/50 px-2.5 py-2 leading-tight"
                   >
                     <Image
                       src={stat.icon}
                       alt=""
                       width={64}
                       height={64}
-                      className="pointer-events-none h-8 w-8 shrink-0 select-none object-contain"
+                      className="pointer-events-none h-6 w-6 shrink-0 select-none object-contain"
                     />
                     <div>
-                      <p className="text-base font-bold tabular-nums">
+                      <p className="text-sm font-bold tabular-nums">
                         {stat.value}
                       </p>
-                      <p className="mt-0.5 text-[11px] font-medium text-muted-foreground">
+                      <p className="text-[10px] font-medium text-muted-foreground">
                         {stat.label}
                       </p>
                     </div>
