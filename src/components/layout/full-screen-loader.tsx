@@ -42,10 +42,14 @@ export function FullScreenLoader() {
       />
 
       <div className="relative z-10 flex flex-col items-center">
-        <div className="relative">
+        <div className="relative flex h-36 w-44 items-end justify-center sm:h-40 sm:w-48">
           <div
             aria-hidden
-            className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/35 blur-3xl motion-reduce:animate-none animate-loader-glow"
+            className="absolute left-1/2 top-[42%] h-36 w-36 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/35 blur-3xl motion-reduce:animate-none animate-loader-glow"
+          />
+          <span
+            aria-hidden
+            className="absolute bottom-1 left-1/2 h-2.5 w-[4.25rem] -translate-x-1/2 rounded-full bg-foreground/25 blur-[3px] motion-reduce:animate-none animate-blob-shadow"
           />
           <Image
             src="/illustrations/bot.png"
@@ -54,7 +58,7 @@ export function FullScreenLoader() {
             height={204}
             priority
             unoptimized
-            className="relative h-28 w-auto select-none motion-reduce:animate-none animate-bob sm:h-32"
+            className="relative h-28 w-auto origin-bottom select-none motion-reduce:animate-none animate-blob-hop sm:h-32"
           />
         </div>
 
