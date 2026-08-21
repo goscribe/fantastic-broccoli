@@ -23,6 +23,7 @@ import { useI18n } from "@/lib/i18n";
 import {
   Home,
   Layers,
+  Users,
   ChevronRight,
   FilePlus2,
   FolderPlus,
@@ -77,7 +78,7 @@ function FolderNode({
     <div>
       <div
         className={cn(
-          "group flex items-center gap-1 rounded-xl py-1.5 pr-2 text-[13px] font-medium",
+          "group flex items-center gap-1 rounded-xl py-1 pr-2 text-[13px] font-medium",
           active
             ? "bg-accent-soft text-foreground"
             : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -104,7 +105,7 @@ function FolderNode({
         >
           <ClayIcon
             src={`/illustrations/icons/folder-${accentNameForColor(folder.color, folder.id)}.png`}
-            className="h-6 w-6"
+            className="h-5 w-5"
           />
           <span className="truncate">{folder.name}</span>
         </button>
@@ -138,7 +139,7 @@ function FolderNode({
                 type="button"
                 onClick={() => router.push(`/workspace/${ws.id}`)}
                 className={cn(
-                  "w-full flex items-center gap-2 rounded-xl py-1.5 pr-2 text-[13px] text-left",
+                  "w-full flex items-center gap-2 rounded-xl py-1 pr-2 text-[13px] text-left",
                   active
                     ? "bg-accent-soft text-accent font-medium"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -147,7 +148,7 @@ function FolderNode({
               >
                 <ClayIcon
                   src={`/illustrations/icons/ws-${accentNameForId(ws.id)}.png`}
-                  className="h-6 w-6"
+                  className="h-5 w-5"
                 />
                 <span className="truncate">{ws.title}</span>
               </button>
@@ -219,7 +220,7 @@ export function Sidebar({
   return (
     <aside
       className={cn(
-        "w-72 shrink-0 flex-col bg-background border-r border-border",
+        "w-72 shrink-0 flex-col bg-card border-r border-border",
         "max-md:fixed max-md:inset-y-0 max-md:left-0 max-md:z-50 max-md:transition-transform",
         mobileOpen ? "flex" : "max-md:-translate-x-full hidden md:flex",
       )}
@@ -244,7 +245,7 @@ export function Sidebar({
           type="button"
           data-tour="sidebar-search"
           onClick={() => setPaletteOpen(true)}
-          className="w-full flex items-center gap-2 rounded-xl border border-border bg-card px-2.5 py-2 text-[13px] text-faint hover:border-border-strong"
+          className="w-full flex items-center gap-2 rounded-xl border border-border bg-muted/40 px-2.5 py-2 text-[13px] text-faint hover:border-border-strong"
         >
           <Search className="h-3.5 w-3.5" />
           Search…
@@ -292,7 +293,7 @@ export function Sidebar({
                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
           >
-            <ClayIcon src="/illustrations/shared.png" className="h-7 w-7" />
+            <Users className="h-4 w-4" />
             {t("nav.shared")}
           </Link>
         </div>
@@ -324,8 +325,8 @@ export function Sidebar({
             <div className="space-y-px">
               {treeLoading &&
                 Array.from({ length: 5 }, (_, i) => (
-                  <div key={i} className="flex items-center gap-2 px-2 py-1.5">
-                    <Skeleton className="h-6 w-6 rounded shrink-0" />
+                  <div key={i} className="flex items-center gap-2 px-2 py-1">
+                    <Skeleton className="h-5 w-5 rounded shrink-0" />
                     <Skeleton
                       className="h-3.5 rounded"
                       style={{ width: `${55 + ((i * 17) % 30)}%` }}
@@ -351,7 +352,7 @@ export function Sidebar({
                     key={ws.id}
                     href={`/workspace/${ws.id}`}
                     className={cn(
-                      "flex items-center gap-2 rounded-xl py-1.5 px-2 text-[13px]",
+                      "flex items-center gap-2 rounded-xl py-1 px-2 text-[13px]",
                       active
                         ? "bg-accent-soft text-accent font-medium"
                         : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -359,7 +360,7 @@ export function Sidebar({
                   >
                     <ClayIcon
                       src={`/illustrations/icons/ws-${accentNameForId(ws.id)}.png`}
-                      className="h-6 w-6"
+                      className="h-5 w-5"
                     />
                     <span className="truncate">{ws.title}</span>
                   </Link>
@@ -374,7 +375,7 @@ export function Sidebar({
         data-tour="sidebar-footer"
       >
         {summary && (
-          <div className="rounded-xl border border-border bg-card px-2.5 py-2.5">
+          <div className="rounded-xl border border-border bg-muted/40 px-2.5 py-2.5">
             <div className="flex items-center justify-between text-[11px]">
               <span className="font-semibold text-muted-foreground">
                 {summary.planName} plan

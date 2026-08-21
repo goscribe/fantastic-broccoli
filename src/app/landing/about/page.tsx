@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/seo";
 import { ArtStage, CtaBand } from "@/components/graphics/marketing-art";
 import { GlowField } from "@/components/graphics/landing-art";
+import { testimonials } from "../data";
 
 export const metadata: Metadata = {
   title: "About",
@@ -15,6 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const [featured, ...restQuotes] = testimonials;
+
   return (
     <>
       <section className="relative overflow-hidden py-16 md:py-24">
@@ -67,6 +70,48 @@ export default function AboutPage() {
               </p>
             </div>
           ))}
+        </div>
+      </section>
+      <section className="py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            What studying with Scribe feels like
+          </h2>
+          <div className="mt-10 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+            <ArtStage
+              src="/illustrations/marketing/mkt-worksheet.png"
+              tint="sky"
+              side="right"
+              size="md"
+              className="p-6 sm:p-8"
+            >
+              <blockquote className="relative z-10 max-w-md">
+                <p className="text-base leading-relaxed text-pretty sm:text-lg">
+                  “{featured.quote}”
+                </p>
+                <footer className="mt-5">
+                  <p className="text-sm font-semibold">{featured.name}</p>
+                  <p className="text-[12px] text-muted-foreground">
+                    {featured.role}
+                  </p>
+                </footer>
+              </blockquote>
+            </ArtStage>
+            <ul className="grid gap-5">
+              {restQuotes.map((t) => (
+                <li
+                  key={t.name}
+                  className="rounded-2xl border border-border bg-card p-5"
+                >
+                  <p className="text-sm leading-relaxed text-pretty">
+                    “{t.quote}”
+                  </p>
+                  <p className="mt-3 text-sm font-semibold">{t.name}</p>
+                  <p className="text-[12px] text-muted-foreground">{t.role}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
       <CtaBand />

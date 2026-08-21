@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Check, Camera } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { HeaderDecor } from "@/components/graphics/floating-decor";
 import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import {
@@ -78,7 +80,7 @@ function PlanCard({
   const { t } = useI18n();
   return (
     <div
-      className={`flex flex-col rounded-xl border p-4 ${
+      className={`flex flex-col rounded-2xl border p-5 ${
         plan.isActive ? "border-accent bg-accent-soft/40" : "border-border bg-card"
       }`}
     >
@@ -247,12 +249,17 @@ export default function SettingsPage() {
   return (
     <main className="flex-1 px-6 py-8 md:px-10">
       <div className="mx-auto w-full max-w-3xl">
-        <h1 className="text-xl font-bold tracking-tight">
-          {t("settings.title")}
-        </h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {t("set.subtitle")}
-        </p>
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">
+              {t("settings.title")}
+            </h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {t("set.subtitle")}
+            </p>
+          </div>
+          <HeaderDecor image="/illustrations/icons/target.png" />
+        </div>
 
         {/* Account */}
         <section className="mt-8">
@@ -260,7 +267,7 @@ export default function SettingsPage() {
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("set.accountHint")}
           </p>
-          <div className="mt-3 rounded-xl border border-border bg-card p-5">
+          <div className="mt-3 rounded-2xl border border-border bg-card p-5">
             <div className="flex items-start gap-5">
               <div className="shrink-0">
                 <input
@@ -275,7 +282,7 @@ export default function SettingsPage() {
                   onClick={() => fileInputRef.current?.click()}
                   disabled={uploadingPhoto}
                   aria-label="Change profile picture"
-                  className="group relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-accent-soft text-lg font-semibold text-accent transition-opacity disabled:opacity-60"
+                  className="group relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-accent-soft text-lg font-semibold text-accent transition-opacity disabled:opacity-60"
                 >
                   {user?.profilePicture ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -295,7 +302,7 @@ export default function SettingsPage() {
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                   disabled={uploadingPhoto}
-                  className="mt-2 block w-14 text-center text-[11px] font-medium text-accent hover:underline disabled:opacity-60"
+                  className="mt-2 block w-16 text-center text-[11px] font-medium text-accent hover:underline disabled:opacity-60"
                 >
                   {uploadingPhoto ? t("set.uploading") : t("set.change")}
                 </button>
@@ -316,7 +323,7 @@ export default function SettingsPage() {
                     type="text"
                     value={name}
                     onChange={(e) => setEditedName(e.target.value)}
-                    className="mt-1.5 h-10 w-full rounded-lg border border-border bg-background px-3.5 text-sm transition-colors focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15"
+                    className="mt-1.5 h-10 w-full rounded-xl border border-border bg-background px-3.5 text-sm transition-colors focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15"
                   />
                   <p className="mt-1.5 text-[12px] text-faint">
                     {t("set.displayNameHint")}
@@ -334,7 +341,7 @@ export default function SettingsPage() {
                     type="email"
                     value={user?.email ?? "alan@scribe.study"}
                     disabled
-                    className="mt-1.5 h-10 w-full rounded-lg border border-border bg-muted/60 px-3.5 text-sm text-muted-foreground"
+                    className="mt-1.5 h-10 w-full rounded-xl border border-border bg-muted/60 px-3.5 text-sm text-muted-foreground"
                   />
                   <p className="mt-1.5 text-[12px] text-faint">
                     {t("set.emailHint")}
@@ -370,7 +377,7 @@ export default function SettingsPage() {
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("settings.languageHint")}
           </p>
-          <div className="mt-3 rounded-xl border border-border bg-card p-5">
+          <div className="mt-3 rounded-2xl border border-border bg-card p-5">
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
               {(Object.keys(UI_LOCALES) as Locale[]).map((code) => {
                 const active = code === locale;
@@ -381,7 +388,7 @@ export default function SettingsPage() {
                     disabled={savingLanguage}
                     onClick={() => handleLanguageChange(code)}
                     aria-pressed={active}
-                    className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-left text-[13px] font-medium transition-colors ${
+                    className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-left text-[13px] font-medium transition-colors ${
                       active
                         ? "border-accent bg-accent-soft text-accent"
                         : "border-border text-muted-foreground hover:border-border-strong hover:text-foreground"
@@ -419,7 +426,7 @@ export default function SettingsPage() {
               ? Array.from({ length: 3 }, (_, i) => (
                   <div
                     key={i}
-                    className="rounded-xl border border-border bg-card p-4 space-y-3"
+                    className="rounded-2xl border border-border bg-card p-4 space-y-3"
                   >
                     <Skeleton className="h-4 w-16" />
                     <Skeleton className="h-3 w-full" />
@@ -442,7 +449,7 @@ export default function SettingsPage() {
         {summaryLoading && (
           <section className="mt-8">
             <h2 className="text-sm font-semibold">{t("settings.usage")}</h2>
-            <div className="mt-3 rounded-xl border border-border bg-card px-5 py-2 divide-y divide-border">
+            <div className="mt-3 rounded-2xl border border-border bg-card px-5 py-2 divide-y divide-border">
               {Array.from({ length: 3 }, (_, i) => (
                 <div key={i} className="py-3 space-y-2">
                   <div className="flex justify-between">
@@ -461,7 +468,7 @@ export default function SettingsPage() {
             <p className="mt-0.5 text-[13px] text-muted-foreground">
               {t("set.usageHint").replace("{plan}", summary.planName)}
             </p>
-            <div className="mt-3 rounded-xl border border-border bg-card px-5 py-2 divide-y divide-border">
+            <div className="mt-3 rounded-2xl border border-border bg-card px-5 py-2 divide-y divide-border">
               <UsageBar
                 label={t("set.storage")}
                 used={summary.storageUsedBytes}
@@ -480,7 +487,16 @@ export default function SettingsPage() {
             {t("set.tokensHint")}
           </p>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-border bg-card p-4">
+            <div className="flex items-start gap-3 rounded-2xl border border-border bg-card p-4">
+              <Image
+                src="/illustrations/icons/stat-bolt.png"
+                alt=""
+                width={64}
+                height={64}
+                unoptimized
+                className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
+              />
+              <div className="min-w-0">
               <p className="text-[12px] text-muted-foreground">
                 {t("set.balance")}
               </p>
@@ -501,8 +517,9 @@ export default function SettingsPage() {
                     .replace("{plan}", tokens.planName)}
                 </p>
               )}
+              </div>
             </div>
-            <div className="rounded-xl border border-border bg-card p-4">
+            <div className="rounded-2xl border border-border bg-card p-4">
               <p className="text-[12px] text-muted-foreground">
                 {t("set.whatThingsCost")}
               </p>
@@ -541,7 +558,7 @@ export default function SettingsPage() {
           </div>
 
           {/* Ledger */}
-          <div className="mt-3 rounded-xl border border-border bg-card">
+          <div className="mt-3 rounded-2xl border border-border bg-card">
             <p className="px-4 pt-3 text-[12px] font-medium text-muted-foreground">
               {t("set.recentActivity")}
             </p>
