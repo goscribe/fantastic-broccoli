@@ -53,6 +53,7 @@ export async function createStudySession(
     ...input,
     depth: depthToApi[input.depth],
   });
+  if (!row) return undefined;
   return mapSession(row);
 }
 

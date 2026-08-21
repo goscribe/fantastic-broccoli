@@ -66,6 +66,20 @@ const folders = [
 ];
 
 let wsCounter = 10;
+const createdSessions = {};
+
+function sessionEnvelope(session) {
+  const meta = {
+    startDate: ["Date"],
+    createdAt: ["Date"],
+    updatedAt: ["Date"],
+  };
+  (session.activities || []).forEach((_, i) => {
+    meta[`activities.${i}.createdAt`] = ["Date"];
+    meta[`activities.${i}.updatedAt`] = ["Date"];
+  });
+  return { __superjson: { json: session, meta: { values: meta } } };
+}
 
 function handleProc(path, input) {
   switch (path) {
@@ -165,8 +179,59 @@ function handleProc(path, input) {
         },
       };
     }
+    case "studySession.create": {
+      const now = new Date().toISOString();
+      const id = `ses-new-${Date.now()}`;
+      const title = (input && input.title) || "Study session";
+      const topics = (input && input.topics) || "";
+      const session = {
+        id,
+        workspaceId: (input && input.workspaceId) || "ws-1",
+        userId: "u1",
+        title,
+        description: null,
+        depth: (input && input.depth) || "MODERATE",
+        durationMinutes: (input && input.durationMinutes) || 30,
+        status: "ACTIVE",
+        progress: 0,
+        generating: false,
+        examBoard: (input && input.examBoard) || null,
+        syllabus: (input && input.syllabus) || null,
+        topics: topics || null,
+        startDate: now,
+        endDate: null,
+        createdAt: now,
+        updatedAt: now,
+        comments: [],
+        activities: [
+          {
+            id: `${id}-act-0`,
+            sessionId: id,
+            type: "READING",
+            title: `Read: ${title}`,
+            description: null,
+            content: {
+              text:
+                topics ||
+                "Your notes are in. This mock plan is a stand-in until the real generator runs.",
+            },
+            order: 0,
+            status: "PENDING",
+            estimatedMinutes: 10,
+            timeSpentSeconds: null,
+            meta: null,
+            highlights: [],
+            createdAt: now,
+            updatedAt: now,
+          },
+        ],
+      };
+      createdSessions[id] = session;
+      return sessionEnvelope(session);
+    }
     case "studySession.get": {
       const id = (input && input.id) || "ses-1";
+      if (createdSessions[id]) return sessionEnvelope(createdSessions[id]);
       const act = (n, title, text) => ({
         id: `act-${n}`,
         sessionId: id,
@@ -362,7 +427,7 @@ const server = http.createServer((req, res) => {
     req.on("end", () => {
       res.writeHead(200, { "content-type": "text/event-stream" });
       const answer =
-        "Got it — IB Chemistry HL, focusing on energetics. Which topics trip you up most: Hess's law, bond enthalpies, or entropy and spontaneity?";
+        "Got it — IB Chemistry HL, focusing on energetics. Press Start study session when you are ready, or tell me which topic to weight first: Hess's law, bond enthalpies, or entropy.";
       const words = answer.split(" ");
       let i = 0;
       const tick = setInterval(() => {
