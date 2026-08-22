@@ -198,9 +198,12 @@ export default function WorkspaceChatPage() {
       }
 
       setMessages((prev) => [...prev, { role: "bot", text: "" }]);
-      const message =
-        text ||
-        `I just uploaded ${files.length} file(s): ${files.map((f) => f.name).join(", ")}`;
+      const fileNames = files.map((f) => f.name).join(", ");
+      const message = text
+        ? files.length > 0
+          ? `${text}\n\n[Attached: ${fileNames}]`
+          : text
+        : `I just uploaded ${files.length} file(s): ${fileNames}`;
       const result = await askCopilotStream(
         {
           workspaceId,

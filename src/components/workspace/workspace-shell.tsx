@@ -102,7 +102,8 @@ export function WorkspaceShell({
   ];
 
   return (
-    <div className="flex min-w-0 flex-1 flex-col overflow-x-hidden">
+    // overflow-x-clip (not -hidden) so this doesn't become the sticky tab bar's scroll container
+    <div className="flex min-w-0 flex-1 flex-col overflow-x-clip">
       <div className="sticky top-[calc(3.5rem+env(safe-area-inset-top))] z-30 border-b border-border bg-card">
         <div className="w-full px-2 sm:px-8">
           <nav
