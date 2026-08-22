@@ -73,7 +73,7 @@ export default function StudyBotPage() {
             width={200}
             height={200}
             priority
-            className="pointer-events-none mx-auto mb-5 h-28 w-28 select-none rounded-full object-cover"
+            className="pointer-events-none mx-auto mb-5 h-28 w-28 select-none object-cover mix-blend-multiply [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]"
           />
           <h1 className="text-[26px] font-bold tracking-tight sm:text-3xl">
             {t("misc.studyBotTitle")}
