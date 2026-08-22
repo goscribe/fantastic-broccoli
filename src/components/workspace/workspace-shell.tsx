@@ -7,7 +7,7 @@ import { Workspace } from "@/types";
 import { Button } from "@/components/ui/button";
 import {
   GraduationCap,
-  Layers,
+  MessageCircle,
   BookOpen,
   Headphones,
   UserPlus,
@@ -21,12 +21,15 @@ import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members
 interface WorkspaceShellProps {
   workspace: Workspace | undefined;
   loading?: boolean;
+  /** Renders the main area without padding (full-height surfaces like chat). */
+  flush?: boolean;
   children: React.ReactNode;
 }
 
 export function WorkspaceShell({
   workspace,
   loading,
+  flush,
   children,
 }: WorkspaceShellProps) {
   const router = useRouter();
@@ -73,16 +76,16 @@ export function WorkspaceShell({
 
   const tabs = [
     {
-      href: `/workspace/${workspace.id}/study`,
-      label: t("ws.tab.study"),
-      tourId: "tab-study",
-      icon: GraduationCap,
+      href: `/workspace/${workspace.id}/chat`,
+      label: t("ws.tab.chat"),
+      tourId: "tab-chat",
+      icon: MessageCircle,
     },
     {
-      href: `/workspace/${workspace.id}/bank`,
-      label: t("ws.tab.bank"),
-      tourId: "tab-bank",
-      icon: Layers,
+      href: `/workspace/${workspace.id}/study`,
+      label: t("ws.tab.contents"),
+      tourId: "tab-study",
+      icon: GraduationCap,
     },
     {
       href: `/workspace/${workspace.id}/guide`,
@@ -143,7 +146,12 @@ export function WorkspaceShell({
         onClose={() => setMembersOpen(false)}
       />
 
-      <main className="w-full min-w-0 flex-1 px-4 py-5 sm:px-8 sm:py-8">
+      <main
+        className={cn(
+          "flex w-full min-w-0 flex-1 flex-col",
+          !flush && "px-4 py-5 sm:px-8 sm:py-8",
+        )}
+      >
         {children}
       </main>
     </div>

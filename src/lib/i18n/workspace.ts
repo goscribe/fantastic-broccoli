@@ -5,8 +5,24 @@ import { registerTranslations } from "@/lib/i18n";
 
 const english = {
   // Shell
-  "ws.tab.study": "Study",
-  "ws.tab.bank": "Bank",
+  "ws.tab.chat": "Chat",
+  "ws.tab.contents": "Contents",
+
+  // Workspace chat assistant
+  "ws.chat.placeholder": "Ask anything, upload notes, or ask me to build a session…",
+  "ws.chat.openSession": "Open study session",
+  "ws.chat.suggestQuiz": "Quiz me on my weak topics",
+  "ws.chat.suggestSession": "Build me a study session",
+  "ws.chat.suggestReview": "Review what I studied last time",
+  "ws.chat.suggestExplain": "Explain something from my notes",
+  "ws.chat.welcomeResume":
+    "Welcome back! How about we finish \"{title}\" first? You're {progress}% through.",
+  "ws.chat.welcomeWeakTopic":
+    "Welcome back! How about we review {topic} first? It's been your trickiest topic.",
+  "ws.chat.welcomeFirstSession":
+    "Welcome! I've got your materials — how about I build your first study session?",
+  "ws.chat.welcomeEmpty":
+    "Welcome! Upload some notes or tell me what you're studying, and we'll get going.",
   "ws.tab.guide": "Study Guide",
   "ws.tab.recall": "Passive Recall",
   "ws.members": "Members",
@@ -268,8 +284,23 @@ const english = {
 
 registerTranslations(english, {
   es: {
-    "ws.tab.study": "Estudio",
-    "ws.tab.bank": "Banco",
+    "ws.tab.chat": "Chat",
+    "ws.tab.contents": "Contenido",
+    "ws.chat.placeholder":
+      "Pregunta lo que sea, sube apuntes o pídeme crear una sesión…",
+    "ws.chat.openSession": "Abrir sesión de estudio",
+    "ws.chat.suggestQuiz": "Ponme a prueba en mis temas débiles",
+    "ws.chat.suggestSession": "Créame una sesión de estudio",
+    "ws.chat.suggestReview": "Repasar lo que estudié la última vez",
+    "ws.chat.suggestExplain": "Explícame algo de mis apuntes",
+    "ws.chat.welcomeResume":
+      "¡Bienvenido de nuevo! ¿Qué tal si terminamos \"{title}\" primero? Llevas un {progress}%.",
+    "ws.chat.welcomeWeakTopic":
+      "¡Bienvenido de nuevo! ¿Qué tal si repasamos {topic} primero? Ha sido tu tema más difícil.",
+    "ws.chat.welcomeFirstSession":
+      "¡Bienvenido! Ya tengo tus materiales — ¿qué tal si creo tu primera sesión de estudio?",
+    "ws.chat.welcomeEmpty":
+      "¡Bienvenido! Sube unos apuntes o dime qué estás estudiando y empezamos.",
     "ws.tab.guide": "Guía de estudio",
     "ws.tab.recall": "Repaso pasivo",
     "ws.members": "Miembros",
@@ -507,8 +538,23 @@ registerTranslations(english, {
     "ws.pages": "páginas",
   },
   fr: {
-    "ws.tab.study": "Étude",
-    "ws.tab.bank": "Banque",
+    "ws.tab.chat": "Chat",
+    "ws.tab.contents": "Contenu",
+    "ws.chat.placeholder":
+      "Pose une question, envoie tes notes ou demande-moi de créer une session…",
+    "ws.chat.openSession": "Ouvrir la session d'étude",
+    "ws.chat.suggestQuiz": "Interroge-moi sur mes points faibles",
+    "ws.chat.suggestSession": "Crée-moi une session d'étude",
+    "ws.chat.suggestReview": "Réviser ce que j'ai étudié la dernière fois",
+    "ws.chat.suggestExplain": "Explique-moi quelque chose de mes notes",
+    "ws.chat.welcomeResume":
+      "Bon retour ! Et si on terminait d'abord \"{title}\" ? Tu en es à {progress} %.",
+    "ws.chat.welcomeWeakTopic":
+      "Bon retour ! Et si on révisait d'abord {topic} ? C'est ton sujet le plus difficile.",
+    "ws.chat.welcomeFirstSession":
+      "Bienvenue ! J'ai tes documents — et si je créais ta première session d'étude ?",
+    "ws.chat.welcomeEmpty":
+      "Bienvenue ! Envoie des notes ou dis-moi ce que tu étudies, et on commence.",
     "ws.tab.guide": "Guide d'étude",
     "ws.tab.recall": "Révision passive",
     "ws.members": "Membres",
@@ -748,8 +794,23 @@ registerTranslations(english, {
     "ws.pages": "pages",
   },
   de: {
-    "ws.tab.study": "Lernen",
-    "ws.tab.bank": "Bank",
+    "ws.tab.chat": "Chat",
+    "ws.tab.contents": "Inhalte",
+    "ws.chat.placeholder":
+      "Frag etwas, lade Notizen hoch oder bitte mich um eine Session…",
+    "ws.chat.openSession": "Lernsession öffnen",
+    "ws.chat.suggestQuiz": "Frag mich zu meinen Schwachstellen ab",
+    "ws.chat.suggestSession": "Erstelle mir eine Lernsession",
+    "ws.chat.suggestReview": "Wiederholen, was ich zuletzt gelernt habe",
+    "ws.chat.suggestExplain": "Erklär mir etwas aus meinen Notizen",
+    "ws.chat.welcomeResume":
+      "Willkommen zurück! Wie wäre es, wenn wir zuerst \"{title}\" abschließen? Du bist bei {progress} %.",
+    "ws.chat.welcomeWeakTopic":
+      "Willkommen zurück! Wie wäre es, wenn wir zuerst {topic} wiederholen? Das war dein schwierigstes Thema.",
+    "ws.chat.welcomeFirstSession":
+      "Willkommen! Ich habe deine Materialien — wie wäre es, wenn ich deine erste Lernsession erstelle?",
+    "ws.chat.welcomeEmpty":
+      "Willkommen! Lade Notizen hoch oder sag mir, was du lernst, und wir legen los.",
     "ws.tab.guide": "Lernleitfaden",
     "ws.tab.recall": "Passives Wiederholen",
     "ws.members": "Mitglieder",
@@ -990,8 +1051,22 @@ registerTranslations(english, {
     "ws.pages": "Seiten",
   },
   zh: {
-    "ws.tab.study": "学习",
-    "ws.tab.bank": "素材库",
+    "ws.tab.chat": "聊天",
+    "ws.tab.contents": "内容",
+    "ws.chat.placeholder": "随便问、上传笔记，或让我帮你创建学习课程…",
+    "ws.chat.openSession": "打开学习课程",
+    "ws.chat.suggestQuiz": "考考我薄弱的知识点",
+    "ws.chat.suggestSession": "帮我创建一个学习课程",
+    "ws.chat.suggestReview": "复习我上次学的内容",
+    "ws.chat.suggestExplain": "讲解我笔记里的内容",
+    "ws.chat.welcomeResume":
+      "欢迎回来！要不要先完成“{title}”？你已经完成了 {progress}%。",
+    "ws.chat.welcomeWeakTopic":
+      "欢迎回来！要不要先复习一下 {topic}？这是你最薄弱的知识点。",
+    "ws.chat.welcomeFirstSession":
+      "欢迎！你的资料我已经准备好了——要不要我帮你创建第一个学习课程？",
+    "ws.chat.welcomeEmpty":
+      "欢迎！上传一些笔记或告诉我你在学什么，我们就开始吧。",
     "ws.tab.guide": "学习指南",
     "ws.tab.recall": "被动复习",
     "ws.members": "成员",
@@ -1224,8 +1299,23 @@ registerTranslations(english, {
     "ws.pages": "页",
   },
   hi: {
-    "ws.tab.study": "अध्ययन",
-    "ws.tab.bank": "बैंक",
+    "ws.tab.chat": "चैट",
+    "ws.tab.contents": "सामग्री",
+    "ws.chat.placeholder":
+      "कुछ भी पूछें, नोट्स अपलोड करें, या मुझसे सेशन बनाने को कहें…",
+    "ws.chat.openSession": "स्टडी सेशन खोलें",
+    "ws.chat.suggestQuiz": "मेरे कमज़ोर विषयों पर क्विज़ लो",
+    "ws.chat.suggestSession": "मेरे लिए एक स्टडी सेशन बनाओ",
+    "ws.chat.suggestReview": "पिछली बार पढ़ा हुआ दोहराएँ",
+    "ws.chat.suggestExplain": "मेरे नोट्स से कुछ समझाओ",
+    "ws.chat.welcomeResume":
+      "वापसी पर स्वागत है! पहले \"{title}\" पूरा करें? आप {progress}% कर चुके हैं।",
+    "ws.chat.welcomeWeakTopic":
+      "वापसी पर स्वागत है! पहले {topic} दोहराएँ? यह आपका सबसे कठिन विषय रहा है।",
+    "ws.chat.welcomeFirstSession":
+      "स्वागत है! आपकी सामग्री मेरे पास है — आपका पहला स्टडी सेशन बना दूँ?",
+    "ws.chat.welcomeEmpty":
+      "स्वागत है! कुछ नोट्स अपलोड करें या बताएं कि आप क्या पढ़ रहे हैं, और शुरू करते हैं।",
     "ws.tab.guide": "अध्ययन गाइड",
     "ws.tab.recall": "पैसिव रिकॉल",
     "ws.members": "सदस्य",
@@ -1464,8 +1554,23 @@ registerTranslations(english, {
     "ws.pages": "पृष्ठ",
   },
   tl: {
-    "ws.tab.study": "Pag-aaral",
-    "ws.tab.bank": "Bank",
+    "ws.tab.chat": "Chat",
+    "ws.tab.contents": "Nilalaman",
+    "ws.chat.placeholder":
+      "Magtanong, mag-upload ng notes, o hilingin sa akin na gumawa ng session…",
+    "ws.chat.openSession": "Buksan ang study session",
+    "ws.chat.suggestQuiz": "I-quiz mo ako sa mahihina kong paksa",
+    "ws.chat.suggestSession": "Gumawa ka ng study session para sa akin",
+    "ws.chat.suggestReview": "Balikan ang huling pinag-aralan ko",
+    "ws.chat.suggestExplain": "Ipaliwanag ang isang bagay mula sa notes ko",
+    "ws.chat.welcomeResume":
+      "Welcome back! Paano kung tapusin muna natin ang \"{title}\"? Nasa {progress}% ka na.",
+    "ws.chat.welcomeWeakTopic":
+      "Welcome back! Paano kung balikan muna natin ang {topic}? Iyan ang pinakamahirap mong paksa.",
+    "ws.chat.welcomeFirstSession":
+      "Welcome! Nasa akin na ang mga materyales mo — paano kung gawan kita ng unang study session?",
+    "ws.chat.welcomeEmpty":
+      "Welcome! Mag-upload ng notes o sabihin kung ano ang pinag-aaralan mo, at magsisimula tayo.",
     "ws.tab.guide": "Gabay sa Pag-aaral",
     "ws.tab.recall": "Passive Recall",
     "ws.members": "Mga Miyembro",

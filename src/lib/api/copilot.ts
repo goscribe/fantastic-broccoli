@@ -95,6 +95,10 @@ export interface CopilotAnswer {
   highlights: CopilotHighlight[];
   /** True when the copilot modified the study session via a tool call. */
   sessionModified?: boolean;
+  /** Set when the copilot created a study session via a tool call. */
+  createdSessionId?: string;
+  /** True when the copilot changed workspace metadata via a tool call. */
+  workspaceModified?: boolean;
 }
 
 export async function askCopilot(input: {
@@ -103,6 +107,8 @@ export async function askCopilot(input: {
   message: string;
   documentContent?: string;
   availableWidgets?: { id: string; description: string }[];
+  /** Enables workspace-assistant tools (rename, proficiency, create session). */
+  workspaceAgent?: boolean;
 }): Promise<CopilotAnswer> {
   type AskInput = Parameters<typeof api.copilot.ask.mutate>[0];
   // availableWidgets is newer than the published @goscribe/server types.
@@ -112,6 +118,7 @@ export async function askCopilot(input: {
     artifactType: "study-guide",
     documentContent: input.documentContent ?? "",
     availableWidgets: input.availableWidgets,
+    workspaceAgent: input.workspaceAgent,
   } as AskInput["context"];
   const result = await api.copilot.ask.mutate({
     context,
@@ -127,6 +134,9 @@ export async function askCopilot(input: {
     highlights: (result as { highlights?: CopilotHighlight[] }).highlights ?? [],
     sessionModified:
       (result as { sessionModified?: boolean }).sessionModified ?? false,
+    createdSessionId: (result as { createdSessionId?: string }).createdSessionId,
+    workspaceModified:
+      (result as { workspaceModified?: boolean }).workspaceModified ?? false,
   };
 }
 
@@ -160,6 +170,7 @@ export async function askCopilotStream(
           artifactType: "study-guide",
           documentContent: input.documentContent ?? "",
           availableWidgets: input.availableWidgets,
+          workspaceAgent: input.workspaceAgent,
         },
         message: input.message,
         conversationId: input.conversationId,
@@ -199,6 +210,8 @@ export async function askCopilotStream(
         visualizations: event.visualizations ?? [],
         highlights: event.highlights ?? [],
         sessionModified: event.sessionModified ?? false,
+        createdSessionId: event.createdSessionId,
+        workspaceModified: event.workspaceModified ?? false,
       };
     else if (event.type === "error") throw new Error(event.message);
   };
