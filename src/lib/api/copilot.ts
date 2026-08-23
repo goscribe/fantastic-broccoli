@@ -97,6 +97,8 @@ export interface CopilotAnswer {
   sessionModified?: boolean;
   /** Set when the copilot created a study session via a tool call. */
   createdSessionId?: string;
+  /** Existing study sessions the copilot attached to its reply. */
+  attachedSessionIds?: string[];
   /** True when the copilot changed workspace metadata via a tool call. */
   workspaceModified?: boolean;
 }
@@ -135,6 +137,8 @@ export async function askCopilot(input: {
     sessionModified:
       (result as { sessionModified?: boolean }).sessionModified ?? false,
     createdSessionId: (result as { createdSessionId?: string }).createdSessionId,
+    attachedSessionIds:
+      (result as { attachedSessionIds?: string[] }).attachedSessionIds ?? [],
     workspaceModified:
       (result as { workspaceModified?: boolean }).workspaceModified ?? false,
   };
@@ -211,6 +215,7 @@ export async function askCopilotStream(
         highlights: event.highlights ?? [],
         sessionModified: event.sessionModified ?? false,
         createdSessionId: event.createdSessionId,
+        attachedSessionIds: event.attachedSessionIds ?? [],
         workspaceModified: event.workspaceModified ?? false,
       };
     else if (event.type === "error") throw new Error(event.message);

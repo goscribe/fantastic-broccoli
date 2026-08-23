@@ -36,8 +36,8 @@ interface ChatMessage {
   role: "user" | "bot";
   text: string;
   files?: string[];
-  /** Study session created by the bot in this turn (renders an open CTA). */
-  sessionId?: string;
+  /** Study sessions created/attached by the bot in this turn (render open CTAs). */
+  sessionIds?: string[];
 }
 
 /** Title used to find/create the persistent workspace-assistant conversation. */
@@ -51,6 +51,7 @@ const ASSISTANT_BRIEF = `You are Scribe's workspace study assistant — the stud
 - Help them review: quiz them with short questions on their materials (one question at a time, grade their answer, explain), summarize topics, and answer questions grounded in their uploads and sessions.
 - Keep momentum: suggest a concrete next step based on WORKSPACE_STATUS (finish an in-progress session, review a weak topic, or start something new).
 - When a full session would serve them better than chat, offer to build one with create_study_session — and let them choose between opening it or practising the questions with you right here.
+- When you point them to a specific existing session (finish it, redo it, review it), call attach_study_session with its id from WORKSPACE_STATUS so they get an openable card.
 - When they upload files, acknowledge them and ask what to focus on.
 - Use manage_workspace when they ask to rename the workspace, change its description, or tell you how confident they feel about a topic.
 - Keep replies short (under 4 sentences unless explaining or quizzing).`;
@@ -143,7 +144,7 @@ export default function WorkspaceChatPage() {
       .slice(0, 12)
       .map(
         (s) =>
-          `- "${s.title}": ${s.status}, ${s.progress}% complete${s.generating ? " (generating)" : ""}`,
+          `- [id: ${s.id}] "${s.title}": ${s.status}, ${s.progress}% complete${s.generating ? " (generating)" : ""}`,
       )
       .join("\n");
     const weak = masteryMatrix
@@ -230,7 +231,12 @@ export default function WorkspaceChatPage() {
           next[next.length - 1] = {
             ...last,
             text: result.answer,
-            sessionId: result.createdSessionId,
+            sessionIds: [
+              ...(result.createdSessionId ? [result.createdSessionId] : []),
+              ...(result.attachedSessionIds ?? []).filter(
+                (id) => id !== result.createdSessionId,
+              ),
+            ],
           };
         return next;
       });
@@ -445,20 +451,28 @@ export default function WorkspaceChatPage() {
                     {t("misc.thinking")}
                   </span>
                 )}
-                {m.role === "bot" && m.sessionId && (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      router.push(
-                        `/workspace/${workspaceId}/session/${m.sessionId}`,
-                      )
-                    }
-                    className="mt-2.5 inline-flex items-center gap-1.5 rounded-full bg-accent px-3.5 py-1.5 text-xs font-semibold text-accent-foreground transition-opacity hover:opacity-90"
-                  >
-                    <Sparkles className="h-3.5 w-3.5" />
-                    {t("ws.chat.openSession")}
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </button>
+                {m.role === "bot" && m.sessionIds && m.sessionIds.length > 0 && (
+                  <div className="mt-2.5 flex flex-wrap gap-2">
+                    {m.sessionIds.map((sid) => {
+                      const session = sessions.find((s) => s.id === sid);
+                      return (
+                        <button
+                          key={sid}
+                          type="button"
+                          onClick={() =>
+                            router.push(`/workspace/${workspaceId}/session/${sid}`)
+                          }
+                          className="inline-flex max-w-full items-center gap-1.5 rounded-full bg-accent px-3.5 py-1.5 text-xs font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+                        >
+                          <Sparkles className="h-3.5 w-3.5 shrink-0" />
+                          <span className="truncate">
+                            {session?.title ?? t("ws.chat.openSession")}
+                          </span>
+                          <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                        </button>
+                      );
+                    })}
+                  </div>
                 )}
                 {m.files && m.files.length > 0 && (
                   <div className="mt-2 flex flex-wrap gap-1.5">
