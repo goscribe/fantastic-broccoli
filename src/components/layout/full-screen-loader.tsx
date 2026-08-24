@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { ScribeMark } from "@/components/graphics/logo";
 import {
   ConfettiDots,
   Sticker,
@@ -42,37 +41,18 @@ export function FullScreenLoader() {
       />
 
       <div className="relative z-10 flex flex-col items-center">
-        <div className="relative flex h-44 w-44 items-center justify-center sm:h-52 sm:w-52">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            poster="/illustrations/blob-hello-poster.jpg"
-            disablePictureInPicture
-            aria-hidden
-            className="relative h-44 w-44 select-none object-contain motion-reduce:hidden sm:h-52 sm:w-52 [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]"
-          >
-            <source src="/illustrations/blob-hello.mp4" type="video/mp4" />
-          </video>
-          <Image
-            src="/illustrations/bot.png"
-            alt=""
-            width={280}
-            height={204}
-            priority
-            unoptimized
-            className="relative hidden h-28 w-auto select-none motion-reduce:block sm:h-32"
-          />
-        </div>
+        <Image
+          src="/illustrations/blobs-playing.png"
+          alt=""
+          width={785}
+          height={503}
+          priority
+          unoptimized
+          aria-hidden
+          className="h-40 w-auto select-none animate-bob motion-reduce:animate-none sm:h-48"
+        />
 
-        <div className="mt-5 flex items-center gap-2">
-          <ScribeMark className="h-7 w-7" />
-          <span className="text-lg font-bold tracking-tight">Scribe</span>
-        </div>
-
-        <div className="mt-5 flex items-center gap-1.5" aria-hidden>
+        <div className="mt-6 flex items-center gap-1.5" aria-hidden>
           {[0, 1, 2].map((i) => (
             <span
               key={i}
