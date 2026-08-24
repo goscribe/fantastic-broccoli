@@ -3,13 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowRight,
   ArrowUp,
   FileText,
   Loader2,
   Paperclip,
+  Plus,
   Sparkles,
+  Upload,
   X,
 } from "lucide-react";
 import { fetchWorkspace } from "@/lib/api/workspace";
@@ -55,6 +59,116 @@ const ASSISTANT_BRIEF = `You are Scribe's workspace study assistant — the stud
 - When they upload files, acknowledge them and ask what to focus on.
 - Use manage_workspace when they ask to rename the workspace, change its description, or tell you how confident they feel about a topic.
 - Keep replies short (under 4 sentences unless explaining or quizzing).`;
+
+/**
+ * Blob mascot: plays the hello video, but falls back to the still poster
+ * when autoplay is blocked (mobile low-power mode shows a play glyph
+ * over a paused inline video otherwise).
+ */
+function BlobHello() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [usePoster, setUsePoster] = useState(false);
+  const blendClass =
+    "pointer-events-none mx-auto mb-4 h-32 w-32 select-none object-cover mix-blend-multiply [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]";
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.play().catch(() => setUsePoster(true));
+  }, [usePoster]);
+
+  if (usePoster) {
+    return (
+      <Image
+        src="/illustrations/blob-hello-poster.jpg"
+        alt=""
+        width={200}
+        height={200}
+        priority
+        aria-hidden
+        className={blendClass}
+      />
+    );
+  }
+  return (
+    <video
+      ref={videoRef}
+      src="/illustrations/blob-hello.mp4"
+      poster="/illustrations/blob-hello-poster.jpg"
+      autoPlay
+      loop
+      muted
+      playsInline
+      disablePictureInPicture
+      aria-hidden
+      className={blendClass}
+    />
+  );
+}
+
+/** File chip shown on pending uploads and inside chat messages. */
+function FileChip({
+  name,
+  variant,
+  onRemove,
+  removeLabel,
+}: {
+  name: string;
+  variant: "user" | "bot" | "pending";
+  onRemove?: () => void;
+  removeLabel?: string;
+}) {
+  const dot = name.lastIndexOf(".");
+  const stem = dot > 0 ? name.slice(0, dot) : name;
+  const ext = dot > 0 ? name.slice(dot + 1).toUpperCase() : "FILE";
+  return (
+    <span
+      className={cn(
+        "inline-flex max-w-[14rem] items-center gap-2 rounded-xl px-2 py-1.5",
+        variant === "user"
+          ? "bg-white/15"
+          : "border border-border bg-muted/60",
+      )}
+    >
+      <span
+        className={cn(
+          "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg",
+          variant === "user" ? "bg-white/20 text-white" : "bg-accent-soft text-accent",
+        )}
+      >
+        <FileText className="h-3.5 w-3.5" />
+      </span>
+      <span className="min-w-0">
+        <span
+          className={cn(
+            "block truncate text-[12px] font-semibold leading-tight",
+            variant === "user" ? "text-white" : "text-foreground",
+          )}
+        >
+          {stem}
+        </span>
+        <span
+          className={cn(
+            "block text-[10px] font-medium leading-tight",
+            variant === "user" ? "text-white/70" : "text-faint",
+          )}
+        >
+          {ext}
+        </span>
+      </span>
+      {onRemove && (
+        <button
+          type="button"
+          aria-label={removeLabel}
+          onClick={onRemove}
+          className="ml-0.5 shrink-0 text-faint hover:text-foreground"
+        >
+          <X className="h-3.5 w-3.5" />
+        </button>
+      )}
+    </span>
+  );
+}
 
 const SUGGESTION_KEYS = [
   "ws.chat.suggestQuiz",
@@ -301,23 +415,15 @@ export default function WorkspaceChatPage() {
       {pendingFiles.length > 0 && (
         <div className="mb-2 flex flex-wrap gap-1.5 px-1 pt-1">
           {pendingFiles.map((f, i) => (
-            <span
+            <FileChip
               key={`${f.name}-${i}`}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-muted px-2.5 py-1 text-[11px] font-medium"
-            >
-              <FileText className="h-3 w-3 text-accent" />
-              <span className="max-w-[10rem] truncate">{f.name}</span>
-              <button
-                type="button"
-                aria-label={`${t("misc.remove")} ${f.name}`}
-                onClick={() =>
-                  setPendingFiles((prev) => prev.filter((_, j) => j !== i))
-                }
-                className="text-faint hover:text-foreground"
-              >
-                <X className="h-3 w-3" />
-              </button>
-            </span>
+              name={f.name}
+              variant="pending"
+              removeLabel={`${t("misc.remove")} ${f.name}`}
+              onRemove={() =>
+                setPendingFiles((prev) => prev.filter((_, j) => j !== i))
+              }
+            />
           ))}
         </div>
       )}
@@ -382,18 +488,129 @@ export default function WorkspaceChatPage() {
   if (workspaceLoading || !historyLoaded) {
     return (
       <WorkspaceShell workspace={workspace} loading>
-        <div className="mx-auto w-full max-w-3xl space-y-4">
-          <Skeleton className="h-24 w-full rounded-2xl" />
-          <Skeleton className="h-10 w-2/3 rounded-2xl" />
-          <Skeleton className="h-14 w-full rounded-2xl" />
+        <div className="flex h-full min-h-[60vh] w-full flex-col items-center justify-center gap-3">
+          <Image
+            src="/illustrations/blob-hello-poster.jpg"
+            alt=""
+            width={112}
+            height={112}
+            priority
+            aria-hidden
+            className="pointer-events-none h-20 w-20 select-none object-cover opacity-80 mix-blend-multiply [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]"
+          />
+          <Skeleton className="h-4 w-40 rounded-full" />
+          <Skeleton className="h-3 w-56 rounded-full" />
         </div>
       </WorkspaceShell>
     );
   }
 
+  const latestMaterials = [...(workspace?.materials ?? [])]
+    .sort(
+      (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+    )
+    .slice(0, 6);
+  const latestSessions = sessions.slice(0, 5);
+
+  const sidebar = (
+    <aside className="sticky top-24 hidden w-72 shrink-0 flex-col gap-4 self-start py-5 pr-4 min-[1360px]:flex">
+      <section className="rounded-2xl border border-border bg-card p-4">
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="text-[13px] font-semibold">{t("ws.materials")}</h2>
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="inline-flex items-center gap-1 rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            <Upload className="h-3 w-3" />
+            {t("ws.upload")}
+          </button>
+        </div>
+        {latestMaterials.length === 0 ? (
+          <p className="text-[12px] text-faint">{t("ws.chat.noMaterials")}</p>
+        ) : (
+          <ul className="space-y-1">
+            {latestMaterials.map((m) => (
+              <li key={m.id}>
+                <Link
+                  href={`/workspace/${workspaceId}/study`}
+                  className="group flex items-center gap-2.5 rounded-xl px-2 py-1.5 transition-colors hover:bg-muted"
+                >
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent">
+                    <FileText className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block truncate text-[12px] font-medium">
+                      {m.title}
+                    </span>
+                    {!m.analyzed && (
+                      <span className="block text-[10px] text-faint">
+                        {t("ws.chat.analyzing")}
+                      </span>
+                    )}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="rounded-2xl border border-border bg-card p-4">
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="text-[13px] font-semibold">{t("ws.studySessions")}</h2>
+          <Link
+            href={`/workspace/${workspaceId}/study?create=1`}
+            className="inline-flex items-center gap-1 rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            <Plus className="h-3 w-3" />
+            {t("ws.newSession")}
+          </Link>
+        </div>
+        {latestSessions.length === 0 ? (
+          <p className="text-[12px] text-faint">{t("ws.chat.noSessions")}</p>
+        ) : (
+          <ul className="space-y-1">
+            {latestSessions.map((s) => (
+              <li key={s.id}>
+                <Link
+                  href={`/workspace/${workspaceId}/session/${s.id}`}
+                  className="group flex items-center gap-2.5 rounded-xl px-2 py-1.5 transition-colors hover:bg-muted"
+                >
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent">
+                    <Sparkles className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-[12px] font-medium">
+                      {s.title}
+                    </span>
+                    <span className="block text-[10px] text-faint">
+                      {s.generating
+                        ? t("ws.chat.generating")
+                        : `${s.progress}%`}
+                    </span>
+                  </span>
+                  <ArrowRight className="h-3.5 w-3.5 shrink-0 text-faint opacity-0 transition-opacity group-hover:opacity-100" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+        <Link
+          href={`/workspace/${workspaceId}/study`}
+          className="mt-2 inline-flex items-center gap-1 px-2 text-[11px] font-semibold text-accent hover:underline"
+        >
+          {t("ws.viewAll")}
+          <ArrowRight className="h-3 w-3" />
+        </Link>
+      </section>
+    </aside>
+  );
+
   return (
     <WorkspaceShell workspace={workspace} flush>
-      <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-5">
+      <div className="mx-auto flex w-full max-w-6xl flex-1 items-stretch justify-center gap-2">
+        <div className="flex w-full min-w-0 max-w-3xl flex-1 flex-col px-4 py-5">
         <div className="flex flex-1 flex-col gap-4 overflow-y-auto pb-4">
           {/* Spacer pushes a short conversation down next to the composer
               without breaking scroll-to-top when it overflows. */}
@@ -401,16 +618,7 @@ export default function WorkspaceChatPage() {
 
           {messages.length === 0 && (
             <div className="mb-2 text-center animate-fade-up">
-              <video
-                src="/illustrations/blob-hello.mp4"
-                poster="/illustrations/blob-hello-poster.jpg"
-                autoPlay
-                loop
-                muted
-                playsInline
-                aria-hidden
-                className="pointer-events-none mx-auto mb-4 h-32 w-32 select-none object-cover mix-blend-multiply [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]"
-              />
+              <BlobHello />
               <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
                 {workspace?.title}
               </h1>
@@ -477,18 +685,11 @@ export default function WorkspaceChatPage() {
                 {m.files && m.files.length > 0 && (
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {m.files.map((name, j) => (
-                      <span
+                      <FileChip
                         key={`${name}-${j}`}
-                        className={cn(
-                          "inline-flex max-w-[12rem] items-center gap-1 rounded-lg px-2 py-1 text-[11px] font-medium",
-                          m.role === "user"
-                            ? "bg-white/15 text-white"
-                            : "bg-muted text-muted-foreground",
-                        )}
-                      >
-                        <FileText className="h-3 w-3 shrink-0" />
-                        <span className="truncate">{name}</span>
-                      </span>
+                        name={name}
+                        variant={m.role === "user" ? "user" : "bot"}
+                      />
                     ))}
                   </div>
                 )}
@@ -518,6 +719,8 @@ export default function WorkspaceChatPage() {
           )}
           {composer}
         </div>
+        </div>
+        {sidebar}
       </div>
     </WorkspaceShell>
   );

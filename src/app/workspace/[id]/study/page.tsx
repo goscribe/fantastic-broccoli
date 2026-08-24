@@ -2,7 +2,7 @@
 
 import { MathText } from "@/components/ui/markdown-text";
 import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
 import {
@@ -33,8 +33,12 @@ export default function WorkspaceStudyPage() {
   const params = useParams();
   const router = useRouter();
   const { t } = useI18n();
+  const searchParams = useSearchParams();
   const workspaceId = params.id as string;
-  const [showCreateWizard, setShowCreateWizard] = useState(false);
+  // ?create=1 opens the session wizard directly (e.g. from the chat sidebar).
+  const [showCreateWizard, setShowCreateWizard] = useState(
+    searchParams.get("create") === "1",
+  );
 
   const { data: workspace, isLoading: workspaceLoading } = useQuery({
     queryKey: ["workspace", workspaceId],
