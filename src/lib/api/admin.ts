@@ -430,6 +430,28 @@ export interface BatchAssessResult {
   }>;
 }
 
+export interface RatingMonth {
+  period: string;
+  total: number;
+  average: number;
+  /** Counts for 1..5 stars (index 0 = 1 star). */
+  counts: number[];
+}
+
+export interface RatingComment {
+  id: string;
+  period: string;
+  stars: number;
+  comment: string | null;
+  updatedAt: Date;
+  user: { email: string | null; name: string | null };
+}
+
+export interface RatingStats {
+  months: RatingMonth[];
+  comments: RatingComment[];
+}
+
 export const adminApi = {
   getSystemStats: () => rpc<SystemStats>("admin.getSystemStats", "query", undefined),
 
@@ -543,4 +565,6 @@ export const adminApi = {
 
   setFrustrationFlagResolved: (input: { id: string; resolved: boolean }) =>
     rpc<FrustrationFlag>("admin.setFrustrationFlagResolved", "mutation", input),
+
+  getRatingStats: () => rpc<RatingStats>("admin.getRatingStats", "query", undefined),
 };

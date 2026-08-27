@@ -13,6 +13,7 @@ import {
   Library,
   ScrollText,
   Sparkles,
+  Star,
   Users,
 } from "lucide-react";
 import { ScribeLogo } from "@/components/graphics/logo";
@@ -26,6 +27,7 @@ const NAV = [
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/quality", label: "Quality", icon: Sparkles },
   { href: "/admin/frustration", label: "Frustration", icon: Flame },
+  { href: "/admin/ratings", label: "Ratings", icon: Star },
   { href: "/admin/logs", label: "Activity logs", icon: ScrollText },
   { href: "/admin/invoices", label: "Invoices", icon: FileText },
   { href: "/admin/plans", label: "Plans", icon: CreditCard },
