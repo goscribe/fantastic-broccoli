@@ -392,6 +392,33 @@ export interface QualitySummary {
   flagCounts: Record<string, number>;
 }
 
+export interface FrustrationFlag {
+  id: string;
+  workspaceId: string;
+  userId: string;
+  messageId: string;
+  severity: number;
+  category: string;
+  summary: string;
+  excerpt: string;
+  resolved: boolean;
+  messageAt: Date;
+  createdAt: Date;
+  workspace: { title: string };
+  user: { email: string | null; name: string | null };
+}
+
+export interface FrustrationFlagList {
+  flags: FrustrationFlag[];
+  openByCategory: Record<string, number>;
+}
+
+export interface FrustrationScanResult {
+  scanned: number;
+  candidates: number;
+  flagged: number;
+}
+
 export interface BatchAssessResult {
   assessed: number;
   results: Array<{
@@ -504,4 +531,16 @@ export const adminApi = {
 
   listQualityAssessments: (input: { workspaceId?: string; limit?: number }) =>
     rpc<QualityAssessment[]>("admin.listQualityAssessments", "query", input),
+
+  scanFrustration: (input: { sinceDays?: number; limit?: number }) =>
+    rpc<FrustrationScanResult>("admin.scanFrustration", "mutation", input),
+
+  listFrustrationFlags: (input: {
+    resolved?: boolean;
+    workspaceId?: string;
+    limit?: number;
+  }) => rpc<FrustrationFlagList>("admin.listFrustrationFlags", "query", input),
+
+  setFrustrationFlagResolved: (input: { id: string; resolved: boolean }) =>
+    rpc<FrustrationFlag>("admin.setFrustrationFlagResolved", "mutation", input),
 };
