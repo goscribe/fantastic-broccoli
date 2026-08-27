@@ -7,6 +7,7 @@ import { TopBar } from "@/components/layout/top-bar";
 import { isPublicPath, useAuthUser } from "@/lib/api/auth";
 import { FullScreenLoader } from "@/components/layout/full-screen-loader";
 import { GuidedTour } from "@/components/onboarding/guided-tour";
+import { MonthlyRatingPrompt } from "@/components/rating/monthly-rating-prompt";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -50,6 +51,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {children}
       </div>
       <GuidedTour />
+      <MonthlyRatingPrompt />
     </div>
   );
 }
