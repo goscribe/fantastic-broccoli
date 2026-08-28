@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/landing/features", label: "Features" },
   { href: "/landing/how-it-works", label: "How it works" },
   { href: "/landing/pricing", label: "Pricing" },
+  { href: "/landing/blog", label: "Blog" },
   { href: "/landing/about", label: "About" },
 ];
 
