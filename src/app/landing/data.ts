@@ -169,7 +169,7 @@ export const plans = [
     features: [
       "Upload PDFs, slides, and lecture audio",
       "AI study sessions with readings & worksheets",
-      "300 tokens per month",
+      "150 tokens per month",
       "2 GB storage",
     ],
     cta: "Start studying",
