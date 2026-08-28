@@ -1,9 +1,16 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
 import { GlowField } from "@/components/graphics/landing-art";
-import { blogApi, BLOG_AUTHORS } from "@/lib/api/blog";
+import { blogApi, BLOG_AUTHORS, type BlogList } from "@/lib/api/blog";
+
+export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: "The Scribe Blog — Daily Study Tips, Trends & Topic Deep-Dives",
+  description:
+    "Daily study tips, learning-science techniques, and topic deep-dives — written from what students are actually studying on Scribe.",
+  alternates: { canonical: "/landing/blog" },
+};
 
 function AuthorBadge({ author }: { author: string }) {
   const persona = BLOG_AUTHORS[author] ?? {
@@ -36,11 +43,13 @@ function formatDay(day: string): string {
   });
 }
 
-export default function BlogIndexPage() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["blog", "list"],
-    queryFn: () => blogApi.list({ limit: 30 }),
-  });
+export default async function BlogIndexPage() {
+  let data: BlogList | null = null;
+  try {
+    data = await blogApi.list({ limit: 30 });
+  } catch {
+    data = null;
+  }
 
   return (
     <section className="relative overflow-hidden py-16 md:py-20">
@@ -54,16 +63,7 @@ export default function BlogIndexPage() {
           authors from what students are actually studying.
         </p>
 
-        {isLoading ? (
-          <div className="mt-12 space-y-4">
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className="h-32 animate-pulse rounded-2xl border border-border bg-card"
-              />
-            ))}
-          </div>
-        ) : !data || data.posts.length === 0 ? (
+        {!data || data.posts.length === 0 ? (
           <p className="mt-12 text-sm text-muted-foreground">
             No posts yet — check back tomorrow.
           </p>
