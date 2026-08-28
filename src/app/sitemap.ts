@@ -1,9 +1,31 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/seo";
+import { blogApi } from "@/lib/api/blog";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
+
+  let blogEntries: MetadataRoute.Sitemap = [];
+  try {
+    const { posts } = await blogApi.list({ limit: 50 });
+    blogEntries = posts.map((post) => ({
+      url: `${siteUrl}/landing/blog/${post.slug}`,
+      lastModified: new Date(post.createdAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }));
+  } catch {
+    blogEntries = [];
+  }
+
   return [
+    {
+      url: `${siteUrl}/landing/blog`,
+      lastModified,
+      changeFrequency: "daily",
+      priority: 0.8,
+    },
+    ...blogEntries,
     {
       url: `${siteUrl}/landing`,
       lastModified,

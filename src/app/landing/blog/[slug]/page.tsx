@@ -1,11 +1,11 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
-import { use } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { MarkdownText } from "@/components/ui/markdown-text";
-import { blogApi, BLOG_AUTHORS } from "@/lib/api/blog";
+import { blogApi, BLOG_AUTHORS, type BlogPostFull } from "@/lib/api/blog";
+
+export const revalidate = 3600;
 
 function formatDay(day: string): string {
   const date = new Date(`${day}T00:00:00Z`);
@@ -17,25 +17,51 @@ function formatDay(day: string): string {
   });
 }
 
-export default function BlogPostPage({
+async function fetchPost(slug: string): Promise<BlogPostFull | null> {
+  try {
+    return await blogApi.get(slug);
+  } catch {
+    return null;
+  }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await fetchPost(slug);
+  if (!post) return { title: "Post not found" };
+  const persona = BLOG_AUTHORS[post.author];
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/landing/blog/${post.slug}` },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      publishedTime: `${post.day}T09:00:00Z`,
+      authors: persona ? [`${persona.name} (Scribe AI)`] : undefined,
+    },
+  };
+}
+
+export default async function BlogPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = use(params);
-  const { data: post, isLoading, isError } = useQuery({
-    queryKey: ["blog", "post", slug],
-    queryFn: () => blogApi.get(slug),
-    retry: false,
-  });
+  const { slug } = await params;
+  const post = await fetchPost(slug);
+  if (!post) notFound();
 
-  const persona = post
-    ? BLOG_AUTHORS[post.author] ?? {
-        name: post.author,
-        role: "Scribe AI",
-        color: "bg-accent",
-      }
-    : null;
+  const persona = BLOG_AUTHORS[post.author] ?? {
+    name: post.author,
+    role: "Scribe AI",
+    color: "bg-accent",
+  };
 
   return (
     <section className="py-14 md:py-18">
@@ -48,44 +74,31 @@ export default function BlogPostPage({
           All posts
         </Link>
 
-        {isLoading ? (
-          <div className="mt-8 space-y-4">
-            <div className="h-10 w-3/4 animate-pulse rounded-lg bg-muted" />
-            <div className="h-64 animate-pulse rounded-2xl bg-muted" />
-          </div>
-        ) : isError || !post ? (
-          <p className="mt-8 text-sm text-muted-foreground">
-            This post doesn&apos;t exist (or was unpublished).
-          </p>
-        ) : (
-          <article className="mt-8">
-            <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
-              {post.title}
-            </h1>
-            <div className="mt-5 flex items-center gap-3 border-b border-border pb-6">
-              {persona && (
-                <span
-                  className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white ${persona.color}`}
-                >
-                  {persona.name[0]}
-                </span>
-              )}
-              <div className="text-sm">
-                <p className="font-semibold">
-                  {persona?.name}{" "}
-                  <span className="font-normal text-faint">· Scribe AI</span>
-                </p>
-                <p className="text-xs text-faint">
-                  {persona?.role} · {formatDay(post.day)}
-                </p>
-              </div>
+        <article className="mt-8">
+          <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+            {post.title}
+          </h1>
+          <div className="mt-5 flex items-center gap-3 border-b border-border pb-6">
+            <span
+              className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white ${persona.color}`}
+            >
+              {persona.name[0]}
+            </span>
+            <div className="text-sm">
+              <p className="font-semibold">
+                {persona.name}{" "}
+                <span className="font-normal text-faint">· Scribe AI</span>
+              </p>
+              <p className="text-xs text-faint">
+                {persona.role} · {formatDay(post.day)}
+              </p>
             </div>
-            <MarkdownText
-              text={post.content}
-              className="mt-8 text-[15px] leading-relaxed"
-            />
-          </article>
-        )}
+          </div>
+          <MarkdownText
+            text={post.content}
+            className="mt-8 text-[15px] leading-relaxed"
+          />
+        </article>
       </div>
     </section>
   );
