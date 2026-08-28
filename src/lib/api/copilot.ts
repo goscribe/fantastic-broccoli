@@ -88,6 +88,13 @@ export interface CopilotHighlight {
   label?: string;
 }
 
+export interface CopilotAttachedArtifact {
+  id: string;
+  title: string;
+  type: string;
+  kind: string | null;
+}
+
 export interface CopilotAnswer {
   answer: string;
   widgets: string[];
@@ -99,6 +106,8 @@ export interface CopilotAnswer {
   createdSessionId?: string;
   /** Existing study sessions the copilot attached to its reply. */
   attachedSessionIds?: string[];
+  /** Artifacts (flashcards/guides/podcasts) the copilot attached to its reply. */
+  attachedArtifacts?: CopilotAttachedArtifact[];
   /** True when the copilot changed workspace metadata via a tool call. */
   workspaceModified?: boolean;
 }
@@ -139,6 +148,9 @@ export async function askCopilot(input: {
     createdSessionId: (result as { createdSessionId?: string }).createdSessionId,
     attachedSessionIds:
       (result as { attachedSessionIds?: string[] }).attachedSessionIds ?? [],
+    attachedArtifacts:
+      (result as { attachedArtifacts?: CopilotAttachedArtifact[] })
+        .attachedArtifacts ?? [],
     workspaceModified:
       (result as { workspaceModified?: boolean }).workspaceModified ?? false,
   };
@@ -216,6 +228,7 @@ export async function askCopilotStream(
         sessionModified: event.sessionModified ?? false,
         createdSessionId: event.createdSessionId,
         attachedSessionIds: event.attachedSessionIds ?? [],
+        attachedArtifacts: event.attachedArtifacts ?? [],
         workspaceModified: event.workspaceModified ?? false,
       };
     else if (event.type === "error") throw new Error(event.message);

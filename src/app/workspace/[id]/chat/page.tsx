@@ -8,7 +8,10 @@ import Link from "next/link";
 import {
   ArrowRight,
   ArrowUp,
+  BookOpen,
   FileText,
+  Headphones,
+  Layers,
   Loader2,
   Paperclip,
   Plus,
@@ -18,13 +21,15 @@ import {
 } from "lucide-react";
 import { fetchWorkspace } from "@/lib/api/workspace";
 import { fetchStudySessions } from "@/lib/api/study";
-import { fetchMasteryMatrix } from "@/lib/api/study-session";
+import { fetchMasteryMatrix, studySessionApi } from "@/lib/api/study-session";
+import { fetchPodcastEpisodes } from "@/lib/api/podcast";
 import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
 import {
   askCopilotStream,
   createConversation,
   getConversationMessages,
   listConversations,
+  type CopilotAttachedArtifact,
 } from "@/lib/api/copilot";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { MarkdownText } from "@/components/ui/markdown-text";
@@ -42,6 +47,8 @@ interface ChatMessage {
   files?: string[];
   /** Study sessions created/attached by the bot in this turn (render open CTAs). */
   sessionIds?: string[];
+  /** Artifacts (flashcards/guides/podcasts) the bot attached in this turn. */
+  artifacts?: CopilotAttachedArtifact[];
 }
 
 /** Title used to find/create the persistent workspace-assistant conversation. */
@@ -52,10 +59,11 @@ const CHAT_CONVERSATION_TITLE = "Workspace chat";
  * turns the workspace copilot into the ongoing workspace study assistant.
  */
 const ASSISTANT_BRIEF = `You are Scribe's workspace study assistant — the student's ongoing study partner inside this workspace. Your job:
-- Help them review: quiz them with short questions on their materials (one question at a time, grade their answer, explain), summarize topics, and answer questions grounded in their uploads and sessions.
-- Keep momentum: suggest a concrete next step based on WORKSPACE_STATUS (finish an in-progress session, review a weak topic, or start something new).
+- Always give them something concrete to work on: an existing flashcard set / study guide / podcast (attach_artifact), an existing study session (attach_study_session), or a practice question right here in the chat. Pick whichever fits their current need best — don't just answer and stop.
+- Help them review: quiz them with short questions on their materials (one question at a time, grade their answer, explain why), and answer questions grounded in their uploads and sessions.
+- Every time you grade an answer they gave in chat, call record_mastery with the topic and whether they got it right, so their mastery tracking stays current.
+- When you point them to a specific artifact or session, attach it with its id from WORKSPACE_STATUS so they get an openable card — never paste raw ids or links.
 - When a full session would serve them better than chat, offer to build one with create_study_session — and let them choose between opening it or practising the questions with you right here.
-- When you point them to a specific existing session (finish it, redo it, review it), call attach_study_session with its id from WORKSPACE_STATUS so they get an openable card.
 - When they upload files, acknowledge them and ask what to focus on.
 - Use manage_workspace when they ask to rename the workspace, change its description, or tell you how confident they feel about a topic.
 - Keep replies short (under 4 sentences unless explaining or quizzing).`;
@@ -197,6 +205,14 @@ export default function WorkspaceChatPage() {
     queryKey: ["mastery-matrix", workspaceId],
     queryFn: () => fetchMasteryMatrix(workspaceId),
   });
+  const { data: bankItems = [] } = useQuery({
+    queryKey: ["bank", workspaceId],
+    queryFn: () => studySessionApi.listBank({ workspaceId }),
+  });
+  const { data: podcasts = [] } = useQuery({
+    queryKey: ["podcasts", workspaceId],
+    queryFn: () => fetchPodcastEpisodes(workspaceId),
+  });
 
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [historyLoaded, setHistoryLoaded] = useState(false);
@@ -261,6 +277,24 @@ export default function WorkspaceChatPage() {
           `- [id: ${s.id}] "${s.title}": ${s.status}, ${s.progress}% complete${s.generating ? " (generating)" : ""}`,
       )
       .join("\n");
+    const kindLabels: Record<string, string> = {
+      FLASHCARD_DECK: "flashcards",
+      VOCAB_DECK: "vocab deck",
+      CLOZE_PASSAGE: "cloze passage",
+      READING_CHUNK: "study guide",
+    };
+    const artifactLines = [
+      ...bankItems
+        .filter((b) => b.kind in kindLabels)
+        .slice(0, 20)
+        .map(
+          (b) =>
+            `- [artifact id: ${b.id}] "${b.title}" (${kindLabels[b.kind]}${b.topic ? `, topic: ${b.topic}` : ""})`,
+        ),
+      ...podcasts
+        .slice(0, 6)
+        .map((p) => `- [artifact id: ${p.id}] "${p.title}" (podcast episode)`),
+    ].join("\n");
     const weak = masteryMatrix
       .filter((r) => r.proficiency !== null)
       .sort((a, b) => (a.proficiency ?? 0) - (b.proficiency ?? 0))
@@ -274,6 +308,9 @@ export default function WorkspaceChatPage() {
       sessionLines
         ? `Study sessions:\n${sessionLines}`
         : "Study sessions: none yet.",
+      artifactLines
+        ? `Attachable artifacts (flashcards / study guides / podcasts):\n${artifactLines}`
+        : "Attachable artifacts: none yet.",
       weak ? `Weakest topics (proficiency):\n${weak}` : "",
     ]
       .filter(Boolean)
@@ -351,6 +388,7 @@ export default function WorkspaceChatPage() {
                 (id) => id !== result.createdSessionId,
               ),
             ],
+            artifacts: result.attachedArtifacts ?? [],
           };
         return next;
       });
@@ -676,6 +714,33 @@ export default function WorkspaceChatPage() {
                           <span className="truncate">
                             {session?.title ?? t("ws.chat.openSession")}
                           </span>
+                          <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+                {m.role === "bot" && m.artifacts && m.artifacts.length > 0 && (
+                  <div className="mt-2.5 flex flex-wrap gap-2">
+                    {m.artifacts.map((a) => {
+                      const Icon =
+                        a.type === "PODCAST_EPISODE"
+                          ? Headphones
+                          : a.type === "STUDY_GUIDE"
+                            ? BookOpen
+                            : Layers;
+                      const href = a.kind
+                        ? `/workspace/${workspaceId}/bank/${a.id}`
+                        : `/workspace/${workspaceId}/guide`;
+                      return (
+                        <button
+                          key={a.id}
+                          type="button"
+                          onClick={() => router.push(href)}
+                          className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-accent bg-accent-soft px-3.5 py-1.5 text-xs font-semibold text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
+                        >
+                          <Icon className="h-3.5 w-3.5 shrink-0" />
+                          <span className="truncate">{a.title}</span>
                           <ArrowRight className="h-3.5 w-3.5 shrink-0" />
                         </button>
                       );
