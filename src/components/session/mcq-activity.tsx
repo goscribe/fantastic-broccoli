@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { McqContent } from "@/types";
-import { useActivityDraft } from "@/lib/use-activity-draft";
+import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
 import { ConfettiBurst } from "@/components/graphics/confetti-burst";
 import { MarkdownText } from "@/components/ui/markdown-text";
@@ -27,18 +27,25 @@ export function McqActivity({
   onComplete,
 }: McqActivityProps) {
   const { t } = useI18n();
-  const restored = draft as
-    | Partial<{ index: number; correctCount: number }>
+  const restored = restoredDraft(activityId, draft) as
+    | Partial<{
+        index: number;
+        correctCount: number;
+        selected: number | null;
+        revealed: boolean;
+      }>
     | undefined;
   const [index, setIndex] = useState(
     Math.min(restored?.index ?? 0, content.questions.length - 1),
   );
-  const [selected, setSelected] = useState<number | null>(null);
-  const [revealed, setRevealed] = useState(false);
+  const [selected, setSelected] = useState<number | null>(
+    restored?.selected ?? null,
+  );
+  const [revealed, setRevealed] = useState(restored?.revealed ?? false);
   const [correctCount, setCorrectCount] = useState(restored?.correctCount ?? 0);
   const [burst, setBurst] = useState(0);
 
-  useActivityDraft(activityId, { index, correctCount });
+  useActivityDraft(activityId, { index, correctCount, selected, revealed });
 
   const question = content.questions[index];
   const isLast = index === content.questions.length - 1;

@@ -56,7 +56,7 @@ export function Sticker({
       height={160}
       unoptimized
       className={cn(
-        "pointer-events-none absolute select-none object-contain drop-shadow-md animate-bob",
+        "pointer-events-none absolute select-none object-contain drop-shadow-md",
         className,
       )}
       style={delay ? { animationDelay: delay } : undefined}
@@ -78,7 +78,7 @@ export function HeroScene() {
         height={423}
         priority
         unoptimized
-        className="absolute -bottom-4 right-0 w-80 animate-bob lg:w-96"
+        className="absolute -bottom-4 right-0 w-80 lg:w-96"
       />
       <Sticker
         src="/illustrations/props/star-gold.png"
@@ -122,7 +122,7 @@ export function EmptyScene({
           height={240}
           unoptimized
           className={cn(
-            "absolute -bottom-6 right-4 w-56 animate-bob",
+            "absolute -bottom-6 right-4 w-56",
             imageClassName,
           )}
         />
@@ -165,7 +165,7 @@ export function HeaderDecor({
         width={160}
         height={120}
         unoptimized
-        className="absolute right-4 top-1/2 h-20 w-auto -translate-y-1/2 animate-wiggle"
+        className="absolute right-4 top-1/2 h-20 w-auto -translate-y-1/2"
       />
       <ConfettiDots />
     </div>

@@ -75,6 +75,8 @@ const english = {
   "misc.studyBotFooter":
     "Chatting is free · generating the session costs 40 tokens",
   "misc.thinking": "Thinking…",
+  "misc.uploadingFiles": "Uploading files…",
+  "misc.stop": "Stop",
   "misc.buildingSession": "Building your session…",
   "misc.startStudySession": "Start study session · 40 tokens",
   "misc.uploadedFiles": "(uploaded files)",
@@ -243,6 +245,8 @@ registerTranslations(english, {
     "misc.studyBotFooter":
       "Chatear es gratis · generar la sesión cuesta 40 tokens",
     "misc.thinking": "Pensando…",
+    "misc.uploadingFiles": "Subiendo archivos…",
+    "misc.stop": "Detener",
     "misc.buildingSession": "Creando tu sesión…",
     "misc.startStudySession": "Iniciar sesión de estudio · 40 tokens",
     "misc.uploadedFiles": "(archivos subidos)",
@@ -408,6 +412,8 @@ registerTranslations(english, {
     "misc.studyBotFooter":
       "Discuter est gratuit · générer la session coûte 40 jetons",
     "misc.thinking": "Réflexion…",
+    "misc.uploadingFiles": "Téléversement des fichiers…",
+    "misc.stop": "Arrêter",
     "misc.buildingSession": "Création de votre session…",
     "misc.startStudySession": "Démarrer la session d'étude · 40 jetons",
     "misc.uploadedFiles": "(fichiers téléversés)",
@@ -580,6 +586,8 @@ registerTranslations(english, {
     "misc.studyBotFooter":
       "Chatten ist kostenlos · die Sitzung zu generieren kostet 40 Tokens",
     "misc.thinking": "Denke nach…",
+    "misc.uploadingFiles": "Dateien werden hochgeladen…",
+    "misc.stop": "Stopp",
     "misc.buildingSession": "Deine Sitzung wird erstellt…",
     "misc.startStudySession": "Lernsitzung starten · 40 Tokens",
     "misc.uploadedFiles": "(Dateien hochgeladen)",
@@ -748,6 +756,8 @@ registerTranslations(english, {
     "misc.remove": "移除",
     "misc.studyBotFooter": "聊天免费 · 生成学习会话需 40 代币",
     "misc.thinking": "思考中…",
+    "misc.uploadingFiles": "正在上传文件…",
+    "misc.stop": "停止",
     "misc.buildingSession": "正在生成你的学习会话…",
     "misc.startStudySession": "开始学习会话 · 40 代币",
     "misc.uploadedFiles": "（已上传文件）",
@@ -906,6 +916,8 @@ registerTranslations(english, {
     "misc.studyBotFooter":
       "चैट मुफ़्त है · सेशन बनाने में 40 टोकन लगते हैं",
     "misc.thinking": "सोच रहा है…",
+    "misc.uploadingFiles": "फ़ाइलें अपलोड हो रही हैं…",
+    "misc.stop": "रोकें",
     "misc.buildingSession": "आपका सेशन बन रहा है…",
     "misc.startStudySession": "स्टडी सेशन शुरू करें · 40 टोकन",
     "misc.uploadedFiles": "(फ़ाइलें अपलोड कीं)",
@@ -1073,6 +1085,8 @@ registerTranslations(english, {
     "misc.studyBotFooter":
       "Libre ang chat · 40 tokens ang paggawa ng session",
     "misc.thinking": "Nag-iisip…",
+    "misc.uploadingFiles": "Ina-upload ang mga file…",
+    "misc.stop": "Ihinto",
     "misc.buildingSession": "Ginagawa ang iyong session…",
     "misc.startStudySession": "Simulan ang study session · 40 tokens",
     "misc.uploadedFiles": "(mga na-upload na file)",

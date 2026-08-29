@@ -10,6 +10,22 @@ const DEBOUNCE_MS = 1500;
 const isDraftable = (activityId: string) => !activityId.startsWith("bank-");
 
 /**
+ * Latest in-progress state per activity for the current page. The session
+ * page's server data is only fetched once, so when the learner navigates
+ * between activities the remounted component would otherwise restore from a
+ * stale server draft and appear to have lost their answers.
+ */
+const memoryDrafts = new Map<string, Record<string, unknown>>();
+
+/** Freshest known draft for an activity: in-memory first, then server. */
+export function restoredDraft(
+  activityId: string,
+  serverDraft?: Record<string, unknown>,
+): Record<string, unknown> | undefined {
+  return memoryDrafts.get(activityId) ?? serverDraft;
+}
+
+/**
  * Debounced server autosave of in-progress activity state (answers, step
  * position, etc.). Also flushes on unmount and page unload so a refresh or
  * tab close doesn't lose work. Restore by seeding component state from
@@ -25,6 +41,7 @@ export function useActivityDraft(
 
   useEffect(() => {
     latest.current = draft;
+    memoryDrafts.set(activityId, draft);
   });
 
   useEffect(() => {

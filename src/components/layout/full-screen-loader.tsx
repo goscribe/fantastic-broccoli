@@ -49,7 +49,7 @@ export function FullScreenLoader() {
           priority
           unoptimized
           aria-hidden
-          className="h-40 w-auto select-none animate-bob motion-reduce:animate-none sm:h-48"
+          className="h-40 w-auto select-none motion-reduce:animate-none sm:h-48"
         />
 
         <div className="mt-6 flex items-center gap-1.5" aria-hidden>

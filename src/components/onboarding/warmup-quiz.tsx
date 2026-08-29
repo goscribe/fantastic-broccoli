@@ -74,7 +74,17 @@ export function WarmupQuiz({ workspaceId }: { workspaceId: string }) {
     setIndex((i) => i + 1);
   }, []);
 
-  if (questions.length === 0) return null;
+  if (questions.length === 0) {
+    return (
+      <div className="mt-6 rounded-xl border border-border bg-card px-4 py-3 text-left">
+        <p className="text-sm font-semibold">Warm-up quiz incoming…</p>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Writing a few quick questions from your materials so you can practice
+          while the session builds.
+        </p>
+      </div>
+    );
+  }
 
   if (index >= questions.length) {
     return (

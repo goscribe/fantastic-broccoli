@@ -80,7 +80,7 @@ export function ArtStage({
           width={880}
           height={880}
           unoptimized
-          className="w-full select-none object-contain drop-shadow-[0_22px_40px_rgba(105,82,224,0.28)] animate-bob"
+          className="w-full select-none object-contain drop-shadow-[0_22px_40px_rgba(105,82,224,0.28)]"
         />
       </div>
     </div>

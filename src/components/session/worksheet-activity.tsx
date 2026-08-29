@@ -5,7 +5,7 @@ import { PartMarking, WorksheetContent, WorksheetPart } from "@/types";
 import { markWorksheetAnswer } from "@/lib/api/study";
 import { toast } from "@/lib/toast";
 import { recordWorksheetQuestionProgress } from "@/lib/api/study-session";
-import { useActivityDraft } from "@/lib/use-activity-draft";
+import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
 import { WorksheetFigureCard } from "@/components/graphics/worksheet-figures";
 import { FigureView } from "@/components/session/reading-activity";
 import { MarkdownText, MathText } from "@/components/ui/markdown-text";
@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Check, Loader2, PenLine, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Loader2, PenLine, X } from "lucide-react";
 
 interface WorksheetActivityProps {
   activityId: string;
@@ -57,7 +57,7 @@ export function WorksheetActivity({
   onComplete,
 }: WorksheetActivityProps) {
   const { t } = useI18n();
-  const restored = draft as Partial<WorksheetDraft> | undefined;
+  const restored = restoredDraft(activityId, draft) as Partial<WorksheetDraft> | undefined;
   const [stepIndex, setStepIndex] = useState(restored?.stepIndex ?? 0);
   const [answers, setAnswers] = useState<Record<string, string>>(
     restored?.answers ?? {},
@@ -86,6 +86,9 @@ export function WorksheetActivity({
   const checked = !!checkedSteps[stepIndex];
   const isLastStep = stepIndex === content.steps.length - 1;
   const key = (partIdx: number) => `${stepIndex}-${partIdx}`;
+  /** Questions the learner has already seen are revisitable. */
+  const visited = (i: number) =>
+    i <= stepIndex || !!checkedSteps[i] || !!checkedSteps[i - 1];
 
   const totalMarks = step.parts.reduce((s, p) => s + (p.marks ?? 1), 0);
   const earnedMarks = step.parts.reduce(
@@ -151,7 +154,9 @@ export function WorksheetActivity({
         <div className="flex items-center justify-between gap-4">
           <p className="text-sm font-semibold">
             {t("session.question")} {stepIndex + 1} —{" "}
-            <MathText text={step.title} />
+            <MathText
+              text={step.title.replace(/^question\s*\d+\s*[—–:.-]?\s*/i, "")}
+            />
           </p>
           <span className="text-xs text-muted-foreground shrink-0 tabular-nums">
             {stepIndex + 1} {t("session.of")} {content.steps.length} ·{" "}
@@ -160,17 +165,28 @@ export function WorksheetActivity({
         </div>
         <div className="flex gap-1 mt-3">
           {content.steps.map((_, i) => (
-            <div
+            <button
               key={i}
+              type="button"
+              disabled={!visited(i) || markingInFlight}
+              aria-label={`${t("session.question")} ${i + 1}`}
+              onClick={() => setStepIndex(i)}
               className={cn(
-                "h-1 flex-1 rounded-full",
-                i < stepIndex || checkedSteps[i]
-                  ? "bg-accent"
-                  : i === stepIndex
-                    ? "bg-accent/40"
-                    : "bg-muted",
+                "h-2.5 flex-1 rounded-full py-1 transition-colors",
+                visited(i) && "cursor-pointer",
               )}
-            />
+            >
+              <span
+                className={cn(
+                  "block h-1 w-full rounded-full",
+                  i < stepIndex || checkedSteps[i]
+                    ? "bg-accent"
+                    : i === stepIndex
+                      ? "bg-accent/40"
+                      : "bg-muted",
+                )}
+              />
+            </button>
           ))}
         </div>
       </div>
@@ -362,14 +378,25 @@ export function WorksheetActivity({
           })}
         </div>
 
-        <div className="flex items-center justify-between pt-1">
-          {checked ? (
-            <p className="text-xs text-muted-foreground tabular-nums">
-              {earnedMarks}/{totalMarks} {t("session.marksOnQuestion")}
-            </p>
-          ) : (
-            <span />
-          )}
+        <div className="flex items-center justify-between gap-3 pt-1">
+          <div className="flex items-center gap-3">
+            {stepIndex > 0 && (
+              <Button
+                size="sm"
+                variant="outline"
+                disabled={markingInFlight}
+                onClick={() => setStepIndex((s) => s - 1)}
+              >
+                <ArrowLeft className="h-3.5 w-3.5 mr-1.5" />
+                {t("session.back")}
+              </Button>
+            )}
+            {checked && (
+              <p className="text-xs text-muted-foreground tabular-nums">
+                {earnedMarks}/{totalMarks} {t("session.marksOnQuestion")}
+              </p>
+            )}
+          </div>
           {checked ? (
             isLastStep ? (
               <Button size="sm" onClick={onComplete}>

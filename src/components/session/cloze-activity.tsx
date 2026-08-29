@@ -5,7 +5,7 @@ import { ClozeContent } from "@/types";
 import { markClozeAnswers } from "@/lib/api/study";
 import { toast } from "@/lib/toast";
 import { recordFlashcardAttempt } from "@/lib/api/study-session";
-import { useActivityDraft } from "@/lib/use-activity-draft";
+import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
 import { ConfettiBurst } from "@/components/graphics/confetti-burst";
 import { InlineMarkdown, MathText } from "@/components/ui/markdown-text";
@@ -37,7 +37,7 @@ export function ClozeActivity({
   const { t } = useI18n();
   const passage = content.passages[0];
   const parts = passage.textWithBlanks.split(/_{2,}|\{\{blank\}\}/g);
-  const restored = draft as
+  const restored = restoredDraft(activityId, draft) as
     | Partial<{ answers: string[]; results: BlankResult[] | null }>
     | undefined;
   const [answers, setAnswers] = useState<string[]>(
