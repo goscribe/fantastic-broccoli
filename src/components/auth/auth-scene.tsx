@@ -27,7 +27,7 @@ export function AuthFigure({
       height={220}
       unoptimized
       className={cn(
-        "mx-auto h-20 w-auto select-none object-contain motion-reduce:animate-none animate-bob sm:h-24",
+        "mx-auto h-20 w-auto select-none object-contain motion-reduce:animate-none sm:h-24",
         className,
       )}
     />
@@ -87,7 +87,7 @@ export function AuthScene({
         width={420}
         height={420}
         unoptimized
-        className="pointer-events-none absolute -bottom-8 -right-8 w-36 select-none object-contain motion-reduce:animate-none animate-bob sm:-bottom-16 sm:-right-10 sm:w-72 lg:w-96"
+        className="pointer-events-none absolute -bottom-8 -right-8 w-36 select-none object-contain motion-reduce:animate-none sm:-bottom-16 sm:-right-10 sm:w-72 lg:w-96"
       />
 
       <div className="relative z-10 w-full max-w-sm space-y-6 sm:space-y-8">

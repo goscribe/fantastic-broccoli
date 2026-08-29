@@ -14,6 +14,7 @@ import {
   retryStudySession,
   setActivityStatus,
   subscribePlanGeneration,
+  subscribePlanProgress,
 } from "@/lib/api/study";
 import { recordFlashcardAttempt } from "@/lib/api/study-session";
 import { reportStudySessionConversion } from "@/lib/gtag";
@@ -651,6 +652,7 @@ export default function SessionDetailPage() {
               <GeneratingPlanCard
                 title={session.title}
                 workspaceId={workspaceId}
+                sessionId={sessionId}
               />
             ) : activeActivity ? (
               <div className="space-y-5 animate-fade-up" key={activeActivity.id}>
@@ -903,35 +905,49 @@ export default function SessionDetailPage() {
 }
 
 const GENERATION_STAGES = [
-  { label: "session.stageGathering", after: 0 },
-  { label: "session.stageOutlining", after: 6 },
-  { label: "session.stageWriting", after: 18 },
-  { label: "session.stageFinishing", after: 45 },
+  { label: "session.stageGathering", stage: "gathering", after: 0 },
+  { label: "session.stageOutlining", stage: "generating", after: 6 },
+  { label: "session.stageWriting", stage: "verifying", after: 18 },
+  { label: "session.stageFinishing", stage: "finalizing", after: 45 },
 ];
 
 /**
- * Shown while the plan is generated in the background. Progress stages are
- * time-based estimates (the server only reports done/failed via Pusher).
+ * Shown while the plan is generated in the background. Stages come from live
+ * `study_plan_progress` server events; without Pusher config it falls back to
+ * time-based estimates.
  */
 function GeneratingPlanCard({
   title,
   workspaceId,
+  sessionId,
 }: {
   title: string;
   workspaceId: string;
+  sessionId: string;
 }) {
   const { t } = useI18n();
   const [elapsed, setElapsed] = useState(0);
+  const [liveStage, setLiveStage] = useState<number | null>(null);
 
   useEffect(() => {
     const tick = setInterval(() => setElapsed((s) => s + 1), 1000);
     return () => clearInterval(tick);
   }, []);
 
-  const currentStage = GENERATION_STAGES.reduce(
-    (acc, stage, i) => (elapsed >= stage.after ? i : acc),
-    0,
-  );
+  useEffect(() => {
+    return subscribePlanProgress(workspaceId, (event) => {
+      if (event.sessionId !== sessionId) return;
+      const idx = GENERATION_STAGES.findIndex((s) => s.stage === event.stage);
+      if (idx >= 0) setLiveStage((prev) => Math.max(prev ?? 0, idx));
+    });
+  }, [workspaceId, sessionId]);
+
+  const currentStage =
+    liveStage ??
+    GENERATION_STAGES.reduce(
+      (acc, stage, i) => (elapsed >= stage.after ? i : acc),
+      0,
+    );
 
   return (
     <div className="flex justify-center px-4 py-12 animate-fade-up">

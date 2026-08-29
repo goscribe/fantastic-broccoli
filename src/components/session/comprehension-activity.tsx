@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ComprehensionContent, ComprehensionEvaluation } from "@/types";
 import { submitComprehensionRewrite } from "@/lib/api/study";
-import { useActivityDraft } from "@/lib/use-activity-draft";
+import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
@@ -27,7 +27,7 @@ export function ComprehensionActivity({
   onComplete,
 }: ComprehensionActivityProps) {
   const { t } = useI18n();
-  const restored = draft as
+  const restored = restoredDraft(activityId, draft) as
     | Partial<{ userText: string; showOriginal: boolean }>
     | undefined;
   const [userText, setUserText] = useState(restored?.userText ?? "");

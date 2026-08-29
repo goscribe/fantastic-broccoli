@@ -172,12 +172,14 @@ export async function askCopilotStream(
   input: Parameters<typeof askCopilot>[0],
   onDelta: (text: string) => void,
   onTool?: (label: string) => void,
+  signal?: AbortSignal,
 ): Promise<CopilotAnswer> {
   let res: Response;
   try {
     res = await fetch(`${apiUrl}/copilot/stream`, {
       method: "POST",
       credentials: "include",
+      signal,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         context: {
@@ -192,7 +194,8 @@ export async function askCopilotStream(
         conversationId: input.conversationId,
       }),
     });
-  } catch {
+  } catch (err) {
+    if (err instanceof DOMException && err.name === "AbortError") throw err;
     return askCopilot(input);
   }
   if (!res.ok || !res.body) {

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { VocabRecallContent } from "@/types";
-import { useActivityDraft } from "@/lib/use-activity-draft";
+import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
 import { MathText } from "@/components/ui/markdown-text";
 import { Button } from "@/components/ui/button";
 import { ConfettiBurst } from "@/components/graphics/confetti-burst";
@@ -26,6 +26,8 @@ interface VocabDraft {
   learned: number[];
   round: number;
   attempts: number;
+  answer: string;
+  revealed: boolean;
 }
 
 /**
@@ -41,7 +43,7 @@ export function VocabRecallActivity({
   onComplete,
 }: VocabRecallActivityProps) {
   const { t } = useI18n();
-  const restored = draft as Partial<VocabDraft> | undefined;
+  const restored = restoredDraft(activityId, draft) as Partial<VocabDraft> | undefined;
   const allIndices = content.terms.map((_, i) => i);
   const [queue, setQueue] = useState<number[]>(
     restored?.queue?.length ? restored.queue : allIndices,
@@ -53,8 +55,8 @@ export function VocabRecallActivity({
   );
   const [round, setRound] = useState(restored?.round ?? 1);
   const [attempts, setAttempts] = useState(restored?.attempts ?? 0);
-  const [answer, setAnswer] = useState("");
-  const [revealed, setRevealed] = useState(false);
+  const [answer, setAnswer] = useState(restored?.answer ?? "");
+  const [revealed, setRevealed] = useState(restored?.revealed ?? false);
   const [burst, setBurst] = useState(0);
 
   useActivityDraft(activityId, {
@@ -64,6 +66,8 @@ export function VocabRecallActivity({
     learned: [...learned],
     round,
     attempts,
+    answer,
+    revealed,
   });
 
   const total = content.terms.length;

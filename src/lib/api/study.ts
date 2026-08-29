@@ -179,6 +179,52 @@ export interface PlanGenerationEvent {
   error?: string;
 }
 
+export type PlanGenerationStage =
+  | "gathering"
+  | "generating"
+  | "verifying"
+  | "finalizing";
+
+export interface PlanProgressEvent {
+  sessionId: string;
+  stage: PlanGenerationStage;
+}
+
+/**
+ * Subscribe to live plan-generation stage events (`study_plan_progress`)
+ * emitted by the server as it works through gathering context, generating,
+ * verifying, and persisting. Returns an unsubscribe function; no-op without
+ * Pusher config (callers should keep a time-based fallback).
+ */
+export function subscribePlanProgress(
+  workspaceId: string,
+  onEvent: (event: PlanProgressEvent) => void,
+): () => void {
+  const key = process.env.NEXT_PUBLIC_PUSHER_KEY;
+  const cluster = process.env.NEXT_PUBLIC_PUSHER_CLUSTER;
+  if (!key || !cluster) return () => {};
+
+  let cleanup: (() => void) | undefined;
+  let cancelled = false;
+
+  import("pusher-js").then(({ default: Pusher }) => {
+    if (cancelled) return;
+    const pusher = new Pusher(key, { cluster });
+    const channel = pusher.subscribe(`workspace_${workspaceId}`);
+    channel.bind("study_plan_progress", onEvent);
+    cleanup = () => {
+      channel.unbind("study_plan_progress", onEvent);
+      pusher.unsubscribe(`workspace_${workspaceId}`);
+      pusher.disconnect();
+    };
+  });
+
+  return () => {
+    cancelled = true;
+    cleanup?.();
+  };
+}
+
 /**
  * Subscribe to background plan-generation events for a workspace. The server
  * generates session plans on its job queue and emits `study_plan_complete` /

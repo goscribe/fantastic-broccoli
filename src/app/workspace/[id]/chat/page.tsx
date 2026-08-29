@@ -16,6 +16,7 @@ import {
   Paperclip,
   Plus,
   Sparkles,
+  Square,
   Upload,
   X,
 } from "lucide-react";
@@ -65,19 +66,22 @@ const ASSISTANT_BRIEF = `You are Scribe's workspace study assistant — the stud
 - When you point them to a specific artifact or session, attach it with its id from WORKSPACE_STATUS so they get an openable card — never paste raw ids or links.
 - When a full session would serve them better than chat, offer to build one with create_study_session — and let them choose between opening it or practising the questions with you right here.
 - When they upload files, acknowledge them and ask what to focus on.
-- Use manage_workspace when they ask to rename the workspace, change its description, or tell you how confident they feel about a topic.
+- Be proactive about building study sessions: once you know what they need to study (from their message, uploads, or an exam/date they mention) and no existing session covers it, first spell out the study plan in 2-4 short bullet points (what topics, what kinds of practice, roughly how long), then call create_study_session for it in the same turn — don't wait to be asked. Always tell them what the session will contain.
+- As soon as you learn what this workspace is about, if its current title is a placeholder or doesn't describe the subject (e.g. "hello", "Untitled", a filename), immediately call manage_workspace to rename it to a short descriptive title (and set a one-line description). Do this silently alongside your reply — no need to ask permission.
+- Also use manage_workspace when they ask to rename the workspace, change its description, or tell you how confident they feel about a topic.
 - Keep replies short (under 4 sentences unless explaining or quizzing).`;
 
 /**
- * Blob mascot: plays the hello video, but falls back to the still poster
- * when autoplay is blocked (mobile low-power mode shows a play glyph
- * over a paused inline video otherwise).
+ * Blob mascot: plays the hello video (alpha webm — transparent background,
+ * so it sits cleanly on light and dark surfaces), falling back to the
+ * transparent still poster when autoplay or the format is unsupported
+ * (mobile low-power mode shows a play glyph over a paused video otherwise).
  */
 function BlobHello() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [usePoster, setUsePoster] = useState(false);
-  const blendClass =
-    "pointer-events-none mx-auto mb-4 h-32 w-32 select-none object-cover mix-blend-multiply [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]";
+  const blobClass =
+    "pointer-events-none mx-auto mb-4 h-32 w-32 select-none object-cover [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]";
 
   useEffect(() => {
     const video = videoRef.current;
@@ -88,28 +92,28 @@ function BlobHello() {
   if (usePoster) {
     return (
       <Image
-        src="/illustrations/blob-hello-poster.jpg"
+        src="/illustrations/blob-hello-poster.png"
         alt=""
         width={200}
         height={200}
         priority
         aria-hidden
-        className={blendClass}
+        className={blobClass}
       />
     );
   }
   return (
     <video
       ref={videoRef}
-      src="/illustrations/blob-hello.mp4"
-      poster="/illustrations/blob-hello-poster.jpg"
+      src="/illustrations/blob-hello.webm"
       autoPlay
       loop
       muted
       playsInline
       disablePictureInPicture
       aria-hidden
-      className={blendClass}
+      onError={() => setUsePoster(true)}
+      className={blobClass}
     />
   );
 }
@@ -219,6 +223,8 @@ export default function WorkspaceChatPage() {
   const [input, setInput] = useState("");
   const [pendingFiles, setPendingFiles] = useState<File[]>([]);
   const [busy, setBusy] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const abortRef = useRef<AbortController | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const conversationIdRef = useRef<string | undefined>(undefined);
@@ -332,13 +338,23 @@ export default function WorkspaceChatPage() {
         files: files.map((f) => f.name),
       },
     ]);
+    // Show the bot bubble immediately (uploading/thinking) so the chat
+    // never sits blank while files upload or the conversation initializes.
+    setMessages((prev) => [...prev, { role: "bot", text: "" }]);
     scrollDown();
+    const controller = new AbortController();
+    abortRef.current = controller;
     try {
       if (files.length > 0) {
-        const fileIds = await uploadFiles(workspaceId, files);
-        // Analysis runs in the background; the bot can keep chatting.
-        analyzeFiles(workspaceId, fileIds).catch(() => {});
-        queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
+        setUploading(true);
+        try {
+          const fileIds = await uploadFiles(workspaceId, files);
+          // Analysis runs in the background; the bot can keep chatting.
+          analyzeFiles(workspaceId, fileIds).catch(() => {});
+          queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
+        } finally {
+          setUploading(false);
+        }
       }
 
       if (!conversationIdRef.current) {
@@ -349,7 +365,6 @@ export default function WorkspaceChatPage() {
         conversationIdRef.current = conversation.id;
       }
 
-      setMessages((prev) => [...prev, { role: "bot", text: "" }]);
       const fileNames = files.map((f) => f.name).join(", ");
       const message = text
         ? files.length > 0
@@ -374,6 +389,8 @@ export default function WorkspaceChatPage() {
           });
           scrollDown();
         },
+        undefined,
+        controller.signal,
       );
       setMessages((prev) => {
         const next = [...prev];
@@ -404,7 +421,9 @@ export default function WorkspaceChatPage() {
       }
       scrollDown();
     } catch (err) {
-      toastError(err, t("misc.studyBotError"));
+      const aborted = err instanceof DOMException && err.name === "AbortError";
+      if (!aborted) toastError(err, t("misc.studyBotError"));
+      // Drop an empty bot bubble; keep any partial streamed text on stop.
       setMessages((prev) =>
         prev[prev.length - 1]?.role === "bot" &&
         prev[prev.length - 1]?.text === ""
@@ -412,8 +431,15 @@ export default function WorkspaceChatPage() {
           : prev,
       );
     } finally {
+      abortRef.current = null;
+      setUploading(false);
       setBusy(false);
     }
+  };
+
+  /** Stop the streaming reply so the user can steer or ask something new. */
+  const stopStreaming = () => {
+    abortRef.current?.abort();
   };
 
   // Intake handoff: /workspace/[id]/chat?q=… auto-sends the first message.
@@ -506,18 +532,25 @@ export default function WorkspaceChatPage() {
             <Paperclip className="h-3.5 w-3.5" />
             {t("misc.attachNotes")}
           </button>
-          <button
-            type="submit"
-            aria-label={t("misc.send")}
-            disabled={busy || (!input.trim() && pendingFiles.length === 0)}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
-          >
-            {busy ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
+          {busy ? (
+            <button
+              type="button"
+              aria-label={t("misc.stop")}
+              onClick={stopStreaming}
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-foreground text-background transition-opacity hover:opacity-80"
+            >
+              <Square className="h-3 w-3 fill-current" />
+            </button>
+          ) : (
+            <button
+              type="submit"
+              aria-label={t("misc.send")}
+              disabled={!input.trim() && pendingFiles.length === 0}
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
+            >
               <ArrowUp className="h-4 w-4" />
-            )}
-          </button>
+            </button>
+          )}
         </div>
       </form>
     </div>
@@ -528,13 +561,13 @@ export default function WorkspaceChatPage() {
       <WorkspaceShell workspace={workspace} loading>
         <div className="flex h-full min-h-[60vh] w-full flex-col items-center justify-center gap-3">
           <Image
-            src="/illustrations/blob-hello-poster.jpg"
+            src="/illustrations/blob-hello-poster.png"
             alt=""
             width={112}
             height={112}
             priority
             aria-hidden
-            className="pointer-events-none h-20 w-20 select-none object-cover opacity-80 mix-blend-multiply [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]"
+            className="pointer-events-none h-20 w-20 select-none object-cover opacity-80 [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]"
           />
           <Skeleton className="h-4 w-40 rounded-full" />
           <Skeleton className="h-3 w-56 rounded-full" />
@@ -694,7 +727,9 @@ export default function WorkspaceChatPage() {
                 {!m.text && m.role === "bot" && (
                   <span className="inline-flex items-center gap-1.5 text-faint">
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                    {t("misc.thinking")}
+                    {i === messages.length - 1 && uploading
+                      ? t("misc.uploadingFiles")
+                      : t("misc.thinking")}
                   </span>
                 )}
                 {m.role === "bot" && m.sessionIds && m.sessionIds.length > 0 && (

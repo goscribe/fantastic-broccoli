@@ -278,7 +278,7 @@ export default function HomePage() {
                     height={280}
                     priority
                     unoptimized
-                    className="absolute -bottom-6 right-2 hidden w-52 select-none animate-bob md:block lg:right-6 lg:w-64"
+                    className="absolute -bottom-6 right-2 hidden w-52 select-none md:block lg:right-6 lg:w-64"
                   />
                   <Sticker
                     src="/illustrations/props/star-gold.png"
@@ -354,7 +354,7 @@ export default function HomePage() {
               width={220}
               height={220}
               unoptimized
-              className="pointer-events-none absolute -bottom-4 -right-3 w-40 select-none animate-bob"
+              className="pointer-events-none absolute -bottom-4 -right-3 w-40 select-none"
             />
             <Image
               src="/illustrations/props/star-gold.png"
@@ -362,7 +362,7 @@ export default function HomePage() {
               width={60}
               height={60}
               unoptimized
-              className="pointer-events-none absolute right-4 top-4 w-9 rotate-12 select-none animate-wiggle"
+              className="pointer-events-none absolute right-4 top-4 w-9 rotate-12 select-none"
             />
           </div>
         </section>
