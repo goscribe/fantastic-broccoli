@@ -10,7 +10,7 @@ import { MarkdownText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { progressPercent } from "@/lib/utils";
-import { ThumbsUp, ThumbsDown, ArrowRight } from "lucide-react";
+import { ThumbsUp, ThumbsDown, ArrowRight, ArrowLeft } from "lucide-react";
 
 interface FlashcardActivityProps {
   activityId: string;
@@ -83,10 +83,25 @@ export function FlashcardActivity({
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <span className="text-xs text-muted-foreground">
-          {t("session.card")} {currentIndex + 1} {t("session.of")}{" "}
-          {content.cards.length}
-        </span>
+        <div className="flex items-center gap-3">
+          {currentIndex > 0 && (
+            <button
+              type="button"
+              onClick={() => {
+                setFlipped(false);
+                setCurrentIndex(currentIndex - 1);
+              }}
+              className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+            >
+              <ArrowLeft className="h-3 w-3" />
+              {t("session.back")}
+            </button>
+          )}
+          <span className="text-xs text-muted-foreground">
+            {t("session.card")} {currentIndex + 1} {t("session.of")}{" "}
+            {content.cards.length}
+          </span>
+        </div>
         <ProgressBar
           value={progressPercent(reviewed, content.cards.length)}
           className="w-24"
