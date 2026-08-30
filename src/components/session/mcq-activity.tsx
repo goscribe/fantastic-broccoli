@@ -9,7 +9,7 @@ import { MarkdownText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
-import { CheckCircle2, XCircle, ArrowRight } from "lucide-react";
+import { CheckCircle2, XCircle, ArrowRight, ArrowLeft } from "lucide-react";
 
 interface McqActivityProps {
   activityId: string;
@@ -33,6 +33,7 @@ export function McqActivity({
         correctCount: number;
         selected: number | null;
         revealed: boolean;
+        answersByQ: (number | null)[];
       }>
     | undefined;
   const [index, setIndex] = useState(
@@ -43,9 +44,20 @@ export function McqActivity({
   );
   const [revealed, setRevealed] = useState(restored?.revealed ?? false);
   const [correctCount, setCorrectCount] = useState(restored?.correctCount ?? 0);
+  const [answersByQ, setAnswersByQ] = useState<(number | null)[]>(
+    restored?.answersByQ?.length === content.questions.length
+      ? restored.answersByQ
+      : content.questions.map(() => null),
+  );
   const [burst, setBurst] = useState(0);
 
-  useActivityDraft(activityId, { index, correctCount, selected, revealed });
+  useActivityDraft(activityId, {
+    index,
+    correctCount,
+    selected,
+    revealed,
+    answersByQ,
+  });
 
   const question = content.questions[index];
   const isLast = index === content.questions.length - 1;
@@ -58,7 +70,19 @@ export function McqActivity({
       setCorrectCount((c) => c + 1);
       setBurst((b) => b + 1);
     }
+    setAnswersByQ((prev) => {
+      const next = [...prev];
+      next[index] = selected;
+      return next;
+    });
     setRevealed(true);
+  };
+
+  const goTo = (i: number) => {
+    const past = answersByQ[i] ?? null;
+    setIndex(i);
+    setSelected(past);
+    setRevealed(past !== null);
   };
 
   const handleNext = () => {
@@ -66,15 +90,23 @@ export function McqActivity({
       onComplete();
       return;
     }
-    setIndex((i) => i + 1);
-    setSelected(null);
-    setRevealed(false);
+    goTo(index + 1);
   };
 
   return (
     <div className="space-y-4">
       <ConfettiBurst burst={burst} />
       <div className="flex items-center justify-between gap-4">
+        {index > 0 && (
+          <button
+            type="button"
+            onClick={() => goTo(index - 1)}
+            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-3 w-3" />
+            {t("session.back")}
+          </button>
+        )}
         <span className="text-xs text-muted-foreground tabular-nums">
           {t("session.question")} {index + 1} {t("session.of")}{" "}
           {content.questions.length}
