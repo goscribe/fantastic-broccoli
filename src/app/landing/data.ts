@@ -182,6 +182,7 @@ export const plans = [
     features: [
       "Everything in Free",
       "5,000 tokens per month",
+      "Smarter AI model routing — strongest model on every activity",
       "2 GB storage",
       "Study copilot grounded in your materials",
     ],
@@ -195,6 +196,7 @@ export const plans = [
     features: [
       "Everything in Starter",
       "10,000 tokens per month",
+      "Smarter AI model routing — strongest model on every activity",
       "10 GB storage",
       "Higher generation limits",
     ],
