@@ -229,10 +229,13 @@ export default function SessionDetailPage() {
 
   const completeActivity = useMutation({
     mutationFn: (input: { activityId: string; skipped?: boolean }) =>
-      setActivityStatus(
-        input.activityId,
-        input.skipped ? "skipped" : "completed",
-      ),
+      // Bank-pulled activities only exist client-side; no server row to update.
+      input.activityId.startsWith("bank-")
+        ? Promise.resolve()
+        : setActivityStatus(
+            input.activityId,
+            input.skipped ? "skipped" : "completed",
+          ),
     onMutate: async (input) => {
       await queryClient.cancelQueries({
         queryKey: ["study-session", sessionId],
