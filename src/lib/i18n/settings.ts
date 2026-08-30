@@ -33,6 +33,9 @@ const english = {
   "set.balance": "Balance",
   "set.tokensUnit": "tokens",
   "set.monthlyAllowance": "+{count} added each month on the {plan} plan",
+  "set.upgradeNudge":
+    "Paid plans include a bigger monthly allowance and smarter AI model routing — every session generated with our strongest model.",
+  "set.upgradeCta": "See plans",
   "set.whatThingsCost": "What things cost",
   "set.costStudySession": "Study session",
   "set.costUpload": "Material upload & analysis",

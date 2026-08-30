@@ -55,6 +55,18 @@ function PlanCard({
           <Check className="h-4 w-4 text-accent" />
           {plan.monthlyTokens} tokens / month
         </li>
+        {plan.priceDollars > 0 && (
+          <>
+            <li className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-accent" />
+              Smarter AI model routing — strongest model on every activity
+            </li>
+            <li className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-accent" />
+              Enough tokens for daily study sessions
+            </li>
+          </>
+        )}
       </ul>
       <div className="mt-5">
         <Button
@@ -147,6 +159,16 @@ export default function PricingPage() {
             </div>
           </div>
         ) : null}
+        {!loading &&
+          summary &&
+          summary.monthlyTokens > 0 &&
+          summary.tokenBalance <= summary.monthlyTokens * 0.3 && (
+            <p className="mt-4 rounded-xl bg-accent-soft/50 px-4 py-3 text-[13px] text-muted-foreground">
+              You&apos;re running low on tokens. Paid plans come with a much
+              bigger monthly allowance and smarter AI model routing — every
+              session is generated with our strongest model.
+            </p>
+          )}
       </section>
 
       <section className="mx-auto mt-8 grid max-w-xl gap-4 sm:grid-cols-1">
