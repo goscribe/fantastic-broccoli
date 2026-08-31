@@ -79,6 +79,22 @@ export interface RetentionStats {
   channels: RetentionChannelRow[];
 }
 
+export interface CampaignRow {
+  source: string;
+  medium: string;
+  campaign: string;
+  signups: number;
+  activated: number;
+  d1: RetentionWindow;
+  d7: RetentionWindow;
+  subscribed: number;
+}
+
+export interface CampaignStats {
+  since: string | null;
+  campaigns: CampaignRow[];
+}
+
 export interface ClientSegmentRow {
   label: string;
   users: number;
@@ -457,6 +473,9 @@ export const adminApi = {
 
   getRetentionStats: (since?: Date) =>
     rpc<RetentionStats>("admin.getRetentionStats", "query", since ? { since } : undefined),
+
+  getCampaignStats: (since?: Date) =>
+    rpc<CampaignStats>("admin.getCampaignStats", "query", since ? { since } : undefined),
 
   getClientStats: (since?: Date) =>
     rpc<ClientStats>("admin.getClientStats", "query", since ? { since } : undefined),

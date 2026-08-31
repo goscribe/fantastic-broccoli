@@ -2,7 +2,7 @@
 
 /**
  * First-touch acquisition attribution. Captured from the URL (utm_* params,
- * Google Ads gclid) and document.referrer on the visitor's first page view,
+ * ad click ids) and document.referrer on the visitor's first page view,
  * persisted in localStorage, and sent to the server when they sign up so
  * each user records where they came from.
  */
@@ -16,6 +16,9 @@ export interface Attribution {
   utmTerm?: string;
   utmContent?: string;
   gclid?: string;
+  fbclid?: string;
+  ttclid?: string;
+  msclkid?: string;
   referrer?: string;
   landingPage?: string;
   capturedAt?: string;
@@ -35,13 +38,27 @@ function fromCurrentUrl(): Attribution | null {
     utmTerm: clean(params.get("utm_term")),
     utmContent: clean(params.get("utm_content")),
     gclid: clean(params.get("gclid")),
+    fbclid: clean(params.get("fbclid")),
+    ttclid: clean(params.get("ttclid")),
+    msclkid: clean(params.get("msclkid")),
   };
   const hasCampaign = Object.values(utm).some(Boolean);
 
-  // A gclid without explicit utm params still means a Google Ads click.
-  if (utm.gclid && !utm.utmSource) {
-    utm.utmSource = "google";
-    utm.utmMedium ??= "cpc";
+  // A click id without explicit utm params still means a paid ad click.
+  if (!utm.utmSource) {
+    const impliedSource = utm.gclid
+      ? "google"
+      : utm.fbclid
+        ? "facebook"
+        : utm.ttclid
+          ? "tiktok"
+          : utm.msclkid
+            ? "bing"
+            : undefined;
+    if (impliedSource) {
+      utm.utmSource = impliedSource;
+      utm.utmMedium ??= "cpc";
+    }
   }
 
   const referrer = clean(document.referrer);
@@ -71,9 +88,10 @@ export function captureAttribution(): void {
     const current = fromCurrentUrl();
     if (!current) return;
     const stored = getAttribution();
-    const storedHasCampaign =
-      !!stored && !!(stored.utmSource || stored.gclid);
-    const currentHasCampaign = !!(current.utmSource || current.gclid);
+    const hasClickId = (a: Attribution) =>
+      !!(a.utmSource || a.gclid || a.fbclid || a.ttclid || a.msclkid);
+    const storedHasCampaign = !!stored && hasClickId(stored);
+    const currentHasCampaign = hasClickId(current);
     if (stored && (storedHasCampaign || !currentHasCampaign)) return;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(current));
   } catch {
@@ -101,13 +119,40 @@ export function getSignupAttribution():
       | "utmTerm"
       | "utmContent"
       | "gclid"
+      | "fbclid"
+      | "ttclid"
+      | "msclkid"
       | "referrer"
+      | "landingPage"
     >
   | undefined {
   const stored = getAttribution();
   if (!stored) return undefined;
-  const { utmSource, utmMedium, utmCampaign, utmTerm, utmContent, gclid, referrer } =
-    stored;
-  const payload = { utmSource, utmMedium, utmCampaign, utmTerm, utmContent, gclid, referrer };
+  const {
+    utmSource,
+    utmMedium,
+    utmCampaign,
+    utmTerm,
+    utmContent,
+    gclid,
+    fbclid,
+    ttclid,
+    msclkid,
+    referrer,
+    landingPage,
+  } = stored;
+  const payload = {
+    utmSource,
+    utmMedium,
+    utmCampaign,
+    utmTerm,
+    utmContent,
+    gclid,
+    fbclid,
+    ttclid,
+    msclkid,
+    referrer,
+    landingPage,
+  };
   return Object.values(payload).some(Boolean) ? payload : undefined;
 }
