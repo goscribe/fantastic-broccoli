@@ -65,7 +65,12 @@ function FlashcardDeck() {
     [progress],
   );
 
-  const [mode, setMode] = useState<DeckMode>("cards");
+  const requestedMode = searchParams.get("mode");
+  const [mode, setMode] = useState<DeckMode>(
+    requestedMode === "learn" || requestedMode === "test"
+      ? requestedMode
+      : "cards",
+  );
 
   const startSession = useMutation({
     mutationFn: () =>
