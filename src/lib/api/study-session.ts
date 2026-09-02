@@ -174,6 +174,16 @@ export async function rpc<T>(
   ) as T;
 }
 
+export interface ApiSessionDebrief {
+  headline: string;
+  summary: string;
+  sections: {
+    heading: string;
+    body?: string;
+    bullets?: { text: string; detail?: string }[];
+  }[];
+}
+
 export interface ApiWarmupQuestion {
   question: string;
   options: string[];
@@ -193,6 +203,9 @@ export const studySessionApi = {
 
   create: (input: CreateStudySessionInput) =>
     rpc<ApiStudySession>("studySession.create", "mutation", input),
+
+  getDebrief: (id: string) =>
+    rpc<ApiSessionDebrief>("studySession.getDebrief", "query", { id }),
 
   getWarmupQuiz: (workspaceId: string) =>
     rpc<ApiWarmupQuestion[]>("studySession.getWarmupQuiz", "query", {
