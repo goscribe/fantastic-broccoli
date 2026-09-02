@@ -80,6 +80,11 @@ export default function AdminOverviewPage() {
     queryFn: () => adminApi.getRetentionStats(),
   });
 
+  const { data: campaigns, isLoading: campaignsLoading } = useQuery({
+    queryKey: ["admin", "campaigns"],
+    queryFn: () => adminApi.getCampaignStats(),
+  });
+
   const { data: clients, isLoading: clientsLoading } = useQuery({
     queryKey: ["admin", "clients"],
     queryFn: () => adminApi.getClientStats(),
@@ -168,6 +173,50 @@ export default function AdminOverviewPage() {
           D1/D3/D7 count only users signed up at least that many full days ago
           (eligible cohort); retained = any activity on or after that day.
         </p>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="mb-1 text-lg font-semibold">Ad campaigns</h2>
+        <p className="mb-4 text-[12px] text-muted-foreground">
+          Signups grouped by utm_source / utm_medium / utm_campaign (click ids
+          without utm params are mapped to their ad platform).
+        </p>
+        <Table
+          headers={[
+            "Source",
+            "Medium",
+            "Campaign",
+            "Signups",
+            "Activated",
+            "D1",
+            "D7",
+            "Paid",
+          ]}
+        >
+          {campaignsLoading ? (
+            <TableSkeletonRows cols={8} rows={4} />
+          ) : !campaigns?.campaigns.length ? (
+            <EmptyRow colSpan={8}>No signups yet.</EmptyRow>
+          ) : (
+            campaigns.campaigns.map((row) => (
+              <tr
+                key={`${row.source}|${row.medium}|${row.campaign}`}
+                className="hover:bg-muted/40"
+              >
+                <Td>
+                  <span className="font-medium">{row.source}</span>
+                </Td>
+                <Td className="text-muted-foreground">{row.medium}</Td>
+                <Td className="text-muted-foreground">{row.campaign}</Td>
+                <Td className="tabular-nums">{row.signups}</Td>
+                <Td>{retentionPct(row.activated, row.signups)}</Td>
+                <Td>{windowCell(row.d1)}</Td>
+                <Td>{windowCell(row.d7)}</Td>
+                <Td className="tabular-nums">{row.subscribed}</Td>
+              </tr>
+            ))
+          )}
+        </Table>
       </section>
 
       <section className="mt-10">
