@@ -31,7 +31,14 @@ import {
   getConversationMessages,
   listConversations,
   type CopilotAttachedArtifact,
+  type CopilotVisualization,
 } from "@/lib/api/copilot";
+import {
+  InteractiveWidget,
+  widgetRegistry,
+  type WidgetId,
+} from "@/components/interactive";
+import { HtmlWidget } from "@/components/interactive/html-widget";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -50,7 +57,15 @@ interface ChatMessage {
   sessionIds?: string[];
   /** Artifacts (flashcards/guides/podcasts) the bot attached in this turn. */
   artifacts?: CopilotAttachedArtifact[];
+  /** Built-in interactive widgets the bot attached via attach_study_aids. */
+  widgets?: string[];
+  /** Custom sandboxed HTML visualizations the bot authored. */
+  visualizations?: CopilotVisualization[];
 }
+
+const AVAILABLE_WIDGETS = (Object.keys(widgetRegistry) as WidgetId[]).map(
+  (id) => ({ id, description: widgetRegistry[id].label }),
+);
 
 /** Title used to find/create the persistent workspace-assistant conversation. */
 const CHAT_CONVERSATION_TITLE = "Workspace chat";
@@ -69,6 +84,7 @@ const ASSISTANT_BRIEF = `You are Scribe's workspace study assistant — the stud
 - Be proactive about building study sessions: once you know what they need to study (from their message, uploads, or an exam/date they mention) and no existing session covers it, first spell out the study plan in 2-4 short bullet points (what topics, what kinds of practice, roughly how long), then call create_study_session for it in the same turn — don't wait to be asked. Always tell them what the session will contain.
 - As soon as you learn what this workspace is about, if its current title is a placeholder or doesn't describe the subject (e.g. "hello", "Untitled", a filename), immediately call manage_workspace to rename it to a short descriptive title (and set a one-line description). Do this silently alongside your reply — no need to ask permission.
 - Also use manage_workspace when they ask to rename the workspace, change its description, or tell you how confident they feel about a topic.
+- When a diagram would genuinely help an explanation (processes, hierarchies, timelines, comparisons), draw it: use a fenced \`\`\`mermaid block, or attach an interactive widget / custom visualization via attach_study_aids.
 - Keep replies short (under 4 sentences unless explaining or quizzing).`;
 
 /**
@@ -250,6 +266,8 @@ export default function WorkspaceChatPage() {
             history.map((m) => ({
               role: m.role === "user" ? "user" : "bot",
               text: m.content,
+              widgets: m.widgets,
+              visualizations: m.visualizations,
             })),
           );
         }
@@ -378,6 +396,7 @@ export default function WorkspaceChatPage() {
           message,
           documentContent: `${ASSISTANT_BRIEF}\n\n${workspaceStatus()}`,
           workspaceAgent: true,
+          availableWidgets: AVAILABLE_WIDGETS,
         },
         (delta) => {
           setMessages((prev) => {
@@ -406,6 +425,8 @@ export default function WorkspaceChatPage() {
               ),
             ],
             artifacts: result.attachedArtifacts ?? [],
+            widgets: result.widgets,
+            visualizations: result.visualizations,
           };
         return next;
       });
@@ -584,8 +605,8 @@ export default function WorkspaceChatPage() {
   const latestSessions = sessions.slice(0, 5);
 
   const sidebar = (
-    <aside className="sticky top-24 hidden w-72 shrink-0 flex-col gap-4 self-start py-5 pr-4 min-[1360px]:flex">
-      <section className="rounded-2xl border border-border bg-card p-4">
+    <aside className="hidden w-80 shrink-0 flex-col gap-6 overflow-y-auto border-l border-border bg-card px-4 py-5 xl:flex">
+      <section>
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-[13px] font-semibold">{t("ws.materials")}</h2>
           <button
@@ -627,7 +648,7 @@ export default function WorkspaceChatPage() {
         )}
       </section>
 
-      <section className="rounded-2xl border border-border bg-card p-4">
+      <section>
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-[13px] font-semibold">{t("ws.studySessions")}</h2>
           <Link
@@ -680,8 +701,9 @@ export default function WorkspaceChatPage() {
 
   return (
     <WorkspaceShell workspace={workspace} flush>
-      <div className="mx-auto flex w-full max-w-6xl flex-1 items-stretch justify-center gap-2">
-        <div className="flex w-full min-w-0 max-w-3xl flex-1 flex-col px-4 py-5">
+      <div className="flex w-full flex-1 items-stretch">
+        <div className="flex min-w-0 flex-1 justify-center px-4">
+        <div className="flex w-full min-w-0 max-w-3xl flex-1 flex-col py-5">
         <div className="flex flex-1 flex-col gap-4 overflow-y-auto pb-4">
           {/* Spacer pushes a short conversation down next to the composer
               without breaking scroll-to-top when it overflows. */}
@@ -732,6 +754,20 @@ export default function WorkspaceChatPage() {
                       : t("misc.thinking")}
                   </span>
                 )}
+                {m.role === "bot" &&
+                  ((m.widgets?.length ?? 0) > 0 ||
+                    (m.visualizations?.length ?? 0) > 0) && (
+                    <div className="mt-2.5 space-y-2.5">
+                      {(m.widgets ?? [])
+                        .filter((id): id is WidgetId => id in widgetRegistry)
+                        .map((id) => (
+                          <InteractiveWidget key={id} id={id} />
+                        ))}
+                      {(m.visualizations ?? []).map((v, j) => (
+                        <HtmlWidget key={j} html={v.html} title={v.title} />
+                      ))}
+                    </div>
+                  )}
                 {m.role === "bot" && m.sessionIds && m.sessionIds.length > 0 && (
                   <div className="mt-2.5 flex flex-wrap gap-2">
                     {m.sessionIds.map((sid) => {
@@ -818,6 +854,7 @@ export default function WorkspaceChatPage() {
             </div>
           )}
           {composer}
+        </div>
         </div>
         </div>
         {sidebar}
