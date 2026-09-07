@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -22,7 +22,8 @@ import {
   X,
 } from "lucide-react";
 import { fetchWorkspace } from "@/lib/api/workspace";
-import { fetchStudySessions } from "@/lib/api/study";
+import { createStudySession, fetchStudySessions } from "@/lib/api/study";
+import { StudyNowCard } from "@/components/session/study-now-card";
 import { fetchMasteryMatrix, studySessionApi } from "@/lib/api/study-session";
 import { fetchPodcastEpisodes } from "@/lib/api/podcast";
 import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
@@ -223,6 +224,26 @@ export default function WorkspaceChatPage() {
   const { data: sessions = [] } = useQuery({
     queryKey: ["study-sessions", workspaceId],
     queryFn: () => fetchStudySessions(workspaceId),
+    // Poll while a plan generates so the Study-now strip flips to "ready".
+    refetchInterval: (query) =>
+      query.state.data?.some((s) => s.generating) ? 4000 : false,
+  });
+  const startQuick5 = useMutation({
+    mutationFn: () =>
+      createStudySession({
+        workspaceId,
+        title: workspace?.title ?? "Quick 5",
+        depth: "light",
+        durationMinutes: 5,
+        quickStart: true,
+      }),
+    onSuccess: (created) => {
+      queryClient.invalidateQueries({
+        queryKey: ["study-sessions", workspaceId],
+      });
+      if (created) router.push(`/workspace/${workspaceId}/session/${created.id}`);
+    },
+    onError: (error) => toastError(error, t("ws.studyNow.startFailed")),
   });
   const { data: masteryMatrix = [] } = useQuery({
     queryKey: ["mastery-matrix", workspaceId],
@@ -859,6 +880,19 @@ export default function WorkspaceChatPage() {
         </div>
 
         <div className="sticky bottom-0 bg-background pb-2 pt-1.5">
+          <StudyNowCard
+            compact
+            className="mb-2.5"
+            sessions={sessions}
+            hasMaterials={(workspace?.materials ?? []).length > 0}
+            analyzing={(workspace?.materials ?? []).some((m) => !m.analyzed)}
+            onOpenSession={(id) =>
+              router.push(`/workspace/${workspaceId}/session/${id}`)
+            }
+            onStartQuick5={() => startQuick5.mutate()}
+            onUpload={() => fileInputRef.current?.click()}
+            starting={startQuick5.isPending}
+          />
           {messages.length === 0 && (
             <div className="mb-2.5 flex flex-wrap gap-1.5">
               {SUGGESTION_KEYS.map((key) => {
