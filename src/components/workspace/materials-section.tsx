@@ -251,7 +251,12 @@ function analysisInFlight(progress: AnalysisProgress | null): boolean {
 }
 
 /** Per-file pipeline status derived from `file_analysis_progress` events. */
-type FileAnalysisStatus = "queued" | "processing" | "completed" | "error";
+type FileAnalysisStatus =
+  | "queued"
+  | "processing"
+  | "completed"
+  | "deferred"
+  | "error";
 
 /** Maps the persisted server-side status to the live badge status. */
 function persistedFileStatus(
@@ -264,6 +269,9 @@ function persistedFileStatus(
       return "processing";
     case "FAILED":
       return "error";
+    case "NOT_ANALYZED":
+      // Deferred by a provider capacity error; the server retries it.
+      return material.analysisError ? "deferred" : undefined;
     default:
       return undefined;
   }
@@ -292,6 +300,14 @@ function MaterialStatusBadge({
       <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft text-accent-dim px-2 py-0.5 text-[10px] font-semibold shrink-0">
         <Loader2 className="h-2.5 w-2.5 animate-spin" />
         {t("ws.analyzing")}
+      </span>
+    );
+  }
+  if (fileStatus === "deferred") {
+    return (
+      <span className="inline-flex items-center gap-1 rounded-full bg-muted text-muted-foreground px-2 py-0.5 text-[10px] font-semibold shrink-0">
+        <Clock3 className="h-2.5 w-2.5" />
+        {t("ws.analysisDeferred")}
       </span>
     );
   }
@@ -439,7 +455,9 @@ export function MaterialsSection({
                 ? "completed"
                 : p.status === "error"
                   ? "error"
-                  : "processing";
+                  : p.status === "deferred"
+                    ? "deferred"
+                    : "processing";
           setFileStatuses((prev) => ({ ...prev, [p.fileId!]: status }));
         }
         queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
