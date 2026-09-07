@@ -166,6 +166,9 @@ const en = {
   "session.nextStepBody":
     "Scribe will build a short recall session from what you missed today and email you when it's ready. The cards you studied come due tomorrow too.",
   "session.reviewDueCards": "Review due cards",
+  "session.quick5DoneTitle": "That's your 5 for today",
+  "session.quick5DoneBody":
+    "Come back tomorrow for 5 more from the same notes — we'll email you when they're ready. Small and daily beats long and once.",
   // Session card
   "session.generationFailed": "Generation failed",
   "session.cardFailedBody":

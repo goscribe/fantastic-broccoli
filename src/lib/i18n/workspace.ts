@@ -78,6 +78,34 @@ const english = {
   "ws.createFirstSession": "Create first session",
   "ws.completedSection": "Completed",
 
+  // Study-now hero (the default next click on a workspace)
+  "ws.studyNow.cta": "Study now",
+  "ws.studyNow.continue": "Continue",
+  "ws.studyNow.ready": "Ready to study",
+  "ws.studyNow.pickUp": "Pick up where you left off",
+  "ws.studyNow.readyHint": "About {minutes} min · first question is one tap away",
+  "ws.studyNow.remaining": "{count} left",
+  "ws.studyNow.quick5": "Quick 5",
+  "ws.studyNow.quick5Hint": "5 easy questions from your notes · ~5 min",
+  "ws.studyNow.building": "Building your session",
+  "ws.studyNow.buildingQuick5": "Picking your first 5 questions",
+  "ws.studyNow.buildingHint":
+    "Usually under a minute. Your first question opens the moment it's ready.",
+  "ws.studyNow.warmUp": "Warm up while you wait",
+  "ws.studyNow.fromNotesTitle": "Your notes are in — take the quiz",
+  "ws.studyNow.fromNotesHint":
+    "5 easy questions straight from what you uploaded. Then 5 more tomorrow.",
+  "ws.studyNow.fromNotesAnalyzing":
+    "Still reading your files — start now and the quiz will be ready by the time you open it.",
+  "ws.studyNow.startQuick5": "Start Quick 5",
+  "ws.studyNow.addMore": "Add more notes",
+  "ws.studyNow.step1": "Step 1 of 2",
+  "ws.studyNow.emptyTitle": "Upload notes → get a 5-question quiz",
+  "ws.studyNow.emptyHint":
+    "PDF, slides, photos of your notes, or a recording. Scribe turns it into questions you can answer right away.",
+  "ws.studyNow.uploadCta": "Upload your notes",
+  "ws.studyNow.startFailed": "Couldn't start the quiz — try again.",
+
   // Passive recall / podcasts
   "ws.generatingEpisode": "Generating episode…",
   "ws.newEpisode": "New episode",

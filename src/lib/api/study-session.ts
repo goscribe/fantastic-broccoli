@@ -101,6 +101,7 @@ export interface ApiStudySession {
   status: ApiSessionStatus;
   progress: number;
   generating?: boolean;
+  quickStart?: boolean;
   examBoard: ExamBoard | null;
   syllabus: string | null;
   topics: string | null;
@@ -123,6 +124,8 @@ export interface CreateStudySessionInput {
   topics?: string;
   subject?: string;
   endDate?: Date;
+  /** Quick 5: one easy 5-question quiz from the material instead of a full plan. */
+  quickStart?: boolean;
 }
 
 export interface AddActivityInput {
@@ -652,6 +655,7 @@ export function mapSession(s: ApiStudySession): StudySession {
     activities: (s.activities ?? []).map(mapActivity),
     progress: s.progress,
     generating: s.generating ?? false,
+    quickStart: s.quickStart ?? false,
     status: s.status.toLowerCase() as StudySession["status"],
     startDate: s.startDate.toISOString(),
     endDate: s.endDate?.toISOString(),

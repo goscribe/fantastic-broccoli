@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type MutableRefObject } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast, toastError } from "@/lib/toast";
 import {
@@ -421,14 +421,24 @@ function AnalysisStatusCard({ progress }: { progress: AnalysisProgress }) {
 export function MaterialsSection({
   workspaceId,
   materials,
+  openPickerRef,
 }: {
   workspaceId: string;
   materials: Material[];
+  /** Lets a parent (e.g. the study-now hero) open this section's file picker. */
+  openPickerRef?: MutableRefObject<(() => void) | null>;
 }) {
   const { t } = useI18n();
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (!openPickerRef) return;
+    openPickerRef.current = () => fileInputRef.current?.click();
+    return () => {
+      openPickerRef.current = null;
+    };
+  }, [openPickerRef]);
 
   const [recording, setRecording] = useState(false);
   const [uploading, setUploading] = useState(false);

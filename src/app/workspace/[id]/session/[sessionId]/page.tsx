@@ -444,8 +444,14 @@ export default function SessionDetailPage() {
     ? activities.findIndex((a) => a.id === activeActivity.id)
     : activities.length;
   const nearEnd = activeIndex >= activities.length - 2;
+  // Quick 5 ends on purpose — its "more" is tomorrow's 5, not a longer plan.
   const showExtendPrompt =
-    planReady && nearEnd && !extended && !extendDismissed && extensions.length > 0;
+    planReady &&
+    !session.quickStart &&
+    nearEnd &&
+    !extended &&
+    !extendDismissed &&
+    extensions.length > 0;
   const extensionMinutes = extensions.reduce(
     (s, a) => s + a.estimatedMinutes,
     0,
@@ -796,6 +802,7 @@ export default function SessionDetailPage() {
             ) : (
               <SessionDebrief
                 sessionId={sessionId}
+                quickStart={session.quickStart}
                 onBack={() => router.push(`/workspace/${workspaceId}`)}
               />
             )}

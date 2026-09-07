@@ -30,9 +30,12 @@ const stages = [
 export function SessionDebrief({
   onBack,
   sessionId,
+  quickStart = false,
 }: {
   onBack: () => void;
   sessionId: string;
+  /** Quick 5 sessions promise "5 more tomorrow" instead of a recall session. */
+  quickStart?: boolean;
 }) {
   const { t } = useI18n();
   const [stage, setStage] = useState(0);
@@ -156,21 +159,30 @@ export function SessionDebrief({
       <div className="mt-8 rounded-xl border border-accent/25 bg-accent-soft p-4">
         <p className="flex items-center gap-1.5 text-sm font-semibold">
           <CalendarClock className="h-4 w-4 text-accent" />
-          {t("session.nextStepTitle")}
+          {t(quickStart ? "session.quick5DoneTitle" : "session.nextStepTitle")}
         </p>
         <p className="mt-1 text-sm text-muted-foreground leading-6">
-          {t("session.nextStepBody")}
+          {t(quickStart ? "session.quick5DoneBody" : "session.nextStepBody")}
         </p>
         <div className="flex flex-wrap gap-2 mt-3">
-          <Link href="/flashcards/review">
-            <Button size="sm">
-              {t("session.reviewDueCards")}
+          {quickStart ? (
+            <Button size="sm" onClick={onBack}>
+              {t("session.backToWorkspace")}
               <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
             </Button>
-          </Link>
-          <Button size="sm" variant="outline" onClick={onBack}>
-            {t("session.backToWorkspace")}
-          </Button>
+          ) : (
+            <>
+              <Link href="/flashcards/review">
+                <Button size="sm">
+                  {t("session.reviewDueCards")}
+                  <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
+                </Button>
+              </Link>
+              <Button size="sm" variant="outline" onClick={onBack}>
+                {t("session.backToWorkspace")}
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </div>

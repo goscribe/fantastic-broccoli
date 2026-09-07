@@ -44,6 +44,7 @@ export interface CreateSessionInput {
   syllabus?: string;
   topics?: string;
   subject?: string;
+  quickStart?: boolean;
 }
 
 export async function createStudySession(
