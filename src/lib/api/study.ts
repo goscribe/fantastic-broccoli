@@ -182,6 +182,7 @@ export interface PlanGenerationEvent {
 
 export type PlanGenerationStage =
   | "gathering"
+  | "outlining"
   | "generating"
   | "verifying"
   | "finalizing";
@@ -189,13 +190,25 @@ export type PlanGenerationStage =
 export interface PlanProgressEvent {
   sessionId: string;
   stage: PlanGenerationStage;
+  /** Units finished so far within `stage` (activities written, revisions applied). */
+  completed?: number;
+  total?: number;
+  /** Title of the unit that just finished, e.g. "Ionization energy worksheet". */
+  label?: string;
+  activityType?: string;
+  /** Full outline, sent once the planner has decided what to write. */
+  activities?: { title: string; type: string }[];
+  /** Milliseconds since the server started generating this plan. */
+  elapsedMs?: number;
+  timestamp?: string;
 }
 
 /**
- * Subscribe to live plan-generation stage events (`study_plan_progress`)
- * emitted by the server as it works through gathering context, generating,
- * verifying, and persisting. Returns an unsubscribe function; no-op without
- * Pusher config (callers should keep a time-based fallback).
+ * Subscribe to live plan-generation progress (`study_plan_progress`) emitted
+ * by the server at real milestones: context gathered, outline planned (with
+ * the activity list), each activity written (n of N), verification, and
+ * persistence. Returns an unsubscribe function; no-op without Pusher config,
+ * in which case no progress is ever reported (callers must not fake it).
  */
 export function subscribePlanProgress(
   workspaceId: string,

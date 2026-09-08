@@ -15,6 +15,7 @@ import {
   setActivityStatus,
   subscribePlanGeneration,
   subscribePlanProgress,
+  type PlanGenerationStage,
 } from "@/lib/api/study";
 import { recordFlashcardAttempt } from "@/lib/api/study-session";
 import { reportStudySessionConversion } from "@/lib/gtag";
@@ -1109,17 +1110,47 @@ function FeedPeek({
   );
 }
 
-const GENERATION_STAGES = [
-  { label: "session.stageGathering", stage: "gathering", after: 0 },
-  { label: "session.stageOutlining", stage: "generating", after: 6 },
-  { label: "session.stageWriting", stage: "verifying", after: 18 },
-  { label: "session.stageFinishing", stage: "finalizing", after: 45 },
+const GENERATION_STAGES: {
+  label: string;
+  stage: PlanGenerationStage;
+  /** Cumulative share of the bar reached when this stage completes. */
+  until: number;
+}[] = [
+  { label: "session.stageGathering", stage: "gathering", until: 0.1 },
+  { label: "session.stageOutlining", stage: "outlining", until: 0.2 },
+  { label: "session.stageWriting", stage: "generating", until: 0.8 },
+  { label: "session.stageVerifying", stage: "verifying", until: 0.92 },
+  { label: "session.stageFinishing", stage: "finalizing", until: 1 },
 ];
 
+/** No progress event for this long is reported as "taking longer than usual". */
+const STALLED_AFTER_SECONDS = 45;
+
+interface PlanProgressState {
+  stageIndex: number;
+  completed?: number;
+  total?: number;
+  label?: string;
+  planned: { title: string; type: string }[];
+  finished: string[];
+  lastEventAt: number;
+}
+
+function progressFraction(state: PlanProgressState): number {
+  const stage = GENERATION_STAGES[state.stageIndex];
+  const from = state.stageIndex > 0 ? GENERATION_STAGES[state.stageIndex - 1].until : 0;
+  const within =
+    state.total && state.completed !== undefined
+      ? Math.min(1, state.completed / state.total)
+      : 0;
+  return from + (stage.until - from) * within;
+}
+
 /**
- * Shown while the plan is generated in the background. Stages come from live
- * `study_plan_progress` server events; without Pusher config it falls back to
- * time-based estimates.
+ * Shown while the plan is generated in the background. Every stage change,
+ * the progress bar and the "n of N" detail come from `study_plan_progress`
+ * server events — nothing advances on a timer, so the card only ever shows
+ * what the backend has actually finished.
  */
 function GeneratingPlanCard({
   title,
@@ -1131,11 +1162,17 @@ function GeneratingPlanCard({
   sessionId: string;
 }) {
   const { t } = useI18n();
-  const [elapsed, setElapsed] = useState(0);
-  const [liveStage, setLiveStage] = useState<number | null>(null);
+  const [now, setNow] = useState(() => Date.now());
+  const [startedAt] = useState(() => Date.now());
+  const [progress, setProgress] = useState<PlanProgressState>({
+    stageIndex: 0,
+    planned: [],
+    finished: [],
+    lastEventAt: startedAt,
+  });
 
   useEffect(() => {
-    const tick = setInterval(() => setElapsed((s) => s + 1), 1000);
+    const tick = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(tick);
   }, []);
 
@@ -1143,16 +1180,44 @@ function GeneratingPlanCard({
     return subscribePlanProgress(workspaceId, (event) => {
       if (event.sessionId !== sessionId) return;
       const idx = GENERATION_STAGES.findIndex((s) => s.stage === event.stage);
-      if (idx >= 0) setLiveStage((prev) => Math.max(prev ?? 0, idx));
+      if (idx < 0) return;
+      setProgress((prev) => {
+        const finished =
+          event.stage === "generating" && event.label
+            ? [...prev.finished, event.label]
+            : idx > 2
+              ? prev.planned.map((a) => a.title)
+              : prev.finished;
+        return {
+          stageIndex: idx,
+          completed: event.completed,
+          total: event.total,
+          label: event.label,
+          planned: event.activities ?? prev.planned,
+          finished,
+          lastEventAt: Date.now(),
+        };
+      });
     });
   }, [workspaceId, sessionId]);
 
-  const currentStage =
-    liveStage ??
-    GENERATION_STAGES.reduce(
-      (acc, stage, i) => (elapsed >= stage.after ? i : acc),
-      0,
-    );
+  const elapsed = Math.max(0, Math.floor((now - startedAt) / 1000));
+  const sinceLastEvent = Math.floor((now - progress.lastEventAt) / 1000);
+  const stalled = sinceLastEvent >= STALLED_AFTER_SECONDS;
+  const percent = Math.round(progressFraction(progress) * 100);
+  const currentStage = GENERATION_STAGES[progress.stageIndex].stage;
+  const hasCount =
+    progress.total !== undefined && progress.completed !== undefined;
+
+  let detail: string | null = null;
+  if (currentStage === "generating" && hasCount) {
+    detail =
+      progress.completed === 0
+        ? `${progress.total} ${t("session.progressPlanned")}`
+        : `${t("session.progressWriting")} ${progress.completed} ${t("session.progressOf")} ${progress.total}${progress.label ? ` — ${progress.label}` : ""}`;
+  } else if (currentStage === "verifying" && hasCount) {
+    detail = `${t("session.progressRevising")} ${progress.completed} ${t("session.progressOf")} ${progress.total}${progress.label ? ` — ${progress.label}` : ""}`;
+  }
 
   return (
     <div className="flex justify-center px-4 py-12 animate-fade-up">
@@ -1173,29 +1238,51 @@ function GeneratingPlanCard({
                 {t("session.building")} &ldquo;{title}&rdquo;…
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                {t("session.generatingHint")}
+                {stalled
+                  ? t("session.takingLonger")
+                  : t("session.generatingHint")}
               </p>
             </div>
             <p className="shrink-0 text-[11px] text-faint tabular-nums">
               {elapsed}s
             </p>
           </div>
-          <div className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2 border-t border-border pt-4">
+          <div className="mt-5">
+            <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+              <span className="min-w-0 truncate" aria-live="polite">
+                {detail ?? t(GENERATION_STAGES[progress.stageIndex].label)}
+              </span>
+              <span className="ml-3 shrink-0 tabular-nums">{percent}%</span>
+            </div>
+            <div
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={percent}
+              className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-border"
+            >
+              <div
+                className="h-full rounded-full bg-accent transition-[width] duration-500"
+                style={{ width: `${percent}%` }}
+              />
+            </div>
+          </div>
+          <div className="mt-4 flex flex-col gap-2 border-t border-border pt-4">
             {GENERATION_STAGES.map((stage, i) => (
               <p
                 key={stage.label}
                 className="flex items-center gap-2 text-xs font-medium"
               >
-                {i < currentStage ? (
+                {i < progress.stageIndex ? (
                   <Check className="h-3.5 w-3.5 text-accent" />
-                ) : i === currentStage ? (
+                ) : i === progress.stageIndex ? (
                   <span className="h-3.5 w-3.5 rounded-full border-[1.5px] border-accent border-t-transparent animate-spin" />
                 ) : (
                   <span className="h-1.5 w-1.5 mx-1 rounded-full bg-border-strong" />
                 )}
                 <span
                   className={
-                    i <= currentStage ? "text-foreground" : "text-faint"
+                    i <= progress.stageIndex ? "text-foreground" : "text-faint"
                   }
                 >
                   {t(stage.label)}
@@ -1203,6 +1290,30 @@ function GeneratingPlanCard({
               </p>
             ))}
           </div>
+          {progress.planned.length > 0 && (
+            <ul className="mt-3 flex flex-col gap-1 border-t border-border pt-3">
+              {progress.planned.map((activity, i) => {
+                const done = progress.finished.includes(activity.title);
+                return (
+                  <li
+                    key={`${activity.title}-${i}`}
+                    className="flex items-center gap-2 text-[11px]"
+                  >
+                    {done ? (
+                      <Check className="h-3 w-3 shrink-0 text-accent" />
+                    ) : (
+                      <span className="mx-1 h-1 w-1 shrink-0 rounded-full bg-border-strong" />
+                    )}
+                    <span
+                      className={`min-w-0 truncate ${done ? "text-foreground" : "text-faint"}`}
+                    >
+                      {activity.title}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
         <WarmupQuiz workspaceId={workspaceId} />
       </div>
