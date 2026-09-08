@@ -17,6 +17,7 @@ import {
 import { awardSessionCredits } from "@/lib/credits";
 import { useQuery } from "@tanstack/react-query";
 import { studySessionApi } from "@/lib/api/study-session";
+import { SESSION_COMPLETED_EVENT } from "@/lib/api/account";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 
@@ -53,6 +54,14 @@ export function SessionDebrief({
     const timer = setTimeout(() => setStage((s) => s + 1), 1100);
     return () => clearTimeout(timer);
   }, [stage]);
+
+  const debriefShown = (isError || !!debrief) && stage >= stages.length;
+  useEffect(() => {
+    if (!debriefShown) return;
+    window.dispatchEvent(
+      new CustomEvent(SESSION_COMPLETED_EVENT, { detail: { sessionId } }),
+    );
+  }, [debriefShown, sessionId]);
 
   if (!isError && (stage < stages.length || !debrief)) {
     return (

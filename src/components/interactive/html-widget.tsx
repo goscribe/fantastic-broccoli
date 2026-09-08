@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useMemo, useState } from "react";
 import { MathText } from "@/components/ui/markdown-text";
+import { BrokenBlock } from "@/components/content/content-repair";
 
 const MIN_HEIGHT = 120;
 const MAX_HEIGHT = 900;
@@ -223,6 +224,11 @@ select,input[type=text],input[type=number]{font:inherit;border:1px solid var(--b
 svg.lucide{width:16px;height:16px;stroke-width:2;vertical-align:-2px;}</style>`;
 }
 
+// Installed first so uncaught errors from generated scripts reach the parent.
+function errorScript(id: string) {
+  return `<script>window.addEventListener("error",function(e){parent.postMessage({type:"scribe-widget-error",id:${JSON.stringify(id)},message:String((e&&e.message)||"Script error")},"*");});</script>`;
+}
+
 function resizeScript(id: string) {
   return `<script>(function(){
   function post(){parent.postMessage({type:"scribe-widget-height",id:${JSON.stringify(id)},height:document.documentElement.scrollHeight},"*");}
@@ -242,9 +248,19 @@ interface HtmlWidgetProps {
  * iframe (scripts allowed, no same-origin access — the document can't reach
  * cookies, storage, or the parent app). Height auto-fits via postMessage.
  */
-export function HtmlWidget({ html, title }: HtmlWidgetProps) {
+export function HtmlWidget({ html: htmlProp, title }: HtmlWidgetProps) {
   const frameId = useId();
   const [height, setHeight] = useState(320);
+  // Agent-repaired markup replaces the original until the prop changes.
+  const [repaired, setRepaired] = useState<{ of: string; html: string } | null>(
+    null,
+  );
+  const html = repaired?.of === htmlProp ? repaired.html : htmlProp;
+  // Keyed by the markup so a new document clears the previous error.
+  const [scriptError, setScriptError] = useState<{
+    html: string;
+    message: string;
+  } | null>(null);
 
   useEffect(() => {
     const onMessage = (e: MessageEvent) => {
@@ -252,25 +268,39 @@ export function HtmlWidget({ html, title }: HtmlWidgetProps) {
         type?: string;
         id?: string;
         height?: number;
+        message?: string;
       } | null;
+      if (!d || d.id !== frameId) return;
       if (
-        d &&
         d.type === "scribe-widget-height" &&
-        d.id === frameId &&
         typeof d.height === "number" &&
         Number.isFinite(d.height)
       ) {
         setHeight(Math.min(Math.max(Math.ceil(d.height), MIN_HEIGHT), MAX_HEIGHT));
+      } else if (d.type === "scribe-widget-error") {
+        setScriptError((prev) =>
+          prev && prev.html === html
+            ? prev
+            : { html, message: typeof d.message === "string" ? d.message : "Script error" },
+        );
       }
     };
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
-  }, [frameId]);
+  }, [frameId, html]);
 
   const srcDoc = useMemo(
-    () => tailwindScript() + lucideScript() + katexScript() + themeStyle() + html + resizeScript(frameId),
+    () =>
+      errorScript(frameId) +
+      tailwindScript() +
+      lucideScript() +
+      katexScript() +
+      themeStyle() +
+      html +
+      resizeScript(frameId),
     [html, frameId],
   );
+  const error = scriptError?.html === html ? scriptError.message : null;
 
   return (
     <figure className="my-2 overflow-hidden rounded-xl border border-border bg-card animate-fade-up">
@@ -285,6 +315,17 @@ export function HtmlWidget({ html, title }: HtmlWidgetProps) {
         <figcaption className="px-3.5 py-2 text-[11px] text-muted-foreground border-t border-border">
           <MathText text={title} />
         </figcaption>
+      )}
+      {error && (
+        <div className="px-2 pb-2">
+          <BrokenBlock
+            kind="widget"
+            source={html}
+            error={error}
+            onFixed={(fixed) => setRepaired({ of: htmlProp, html: fixed })}
+            fallback={null}
+          />
+        </div>
       )}
     </figure>
   );

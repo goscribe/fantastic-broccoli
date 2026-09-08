@@ -67,6 +67,10 @@ export function PlanLimitDialog() {
           >
             Upgrade to keep going
           </Button>
+          <p className="text-center text-[11px] text-faint">
+            First-time subscribers get a 7-day free trial (card required, $0
+            today).
+          </p>
           <button
             type="button"
             onClick={close}
