@@ -516,6 +516,10 @@ export const gradeFlashcardTypedAnswer = (input: {
     input,
   );
 
+/** Opens Test mode on a deck; rejects with a plan-limit error on the free cap. */
+export const startFlashcardTest = (setId: string) =>
+  rpc<{ runId: string }>("flashcards.startTest", "mutation", { setId });
+
 /** Records a batch of SRS study attempts (one full study round). */
 export const recordFlashcardStudySession = (input: {
   attempts: { flashcardId: string; isCorrect: boolean; timeSpentMs?: number }[];

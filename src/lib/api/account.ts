@@ -30,6 +30,32 @@ export async function fetchAccountSummary(): Promise<AccountSummary> {
   };
 }
 
+/** Free-plan resource caps (see server FREE_TIER_CAPS); `caps` is null on a paid plan. */
+export interface PlanCaps {
+  paid: boolean;
+  caps: { workspaces: number; studySessions: number; flashcardTests: number } | null;
+  used: { workspaces: number; studySessions: number; flashcardTests: number };
+}
+
+export function fetchPlanCaps(): Promise<PlanCaps> {
+  return rpc<PlanCaps>("payment.getPlanCaps", "query", undefined);
+}
+
+/** Prefix the server puts on every free-plan cap error (see server PLAN_LIMIT_ERROR_PREFIX). */
+export const PLAN_LIMIT_ERROR_PREFIX = "Free plan limit reached";
+
+export function isPlanLimitError(err: unknown): err is Error {
+  return err instanceof Error && err.message.startsWith(PLAN_LIMIT_ERROR_PREFIX);
+}
+
+/** Fired on `window` when a request is refused by a free-plan cap; the upgrade dialog listens. */
+export const PLAN_LIMIT_EVENT = "scribe:plan-limit";
+
+export function announcePlanLimit(message: string): void {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent(PLAN_LIMIT_EVENT, { detail: message }));
+}
+
 /** Server token cost table, keyed by operation (see server TOKEN_COSTS). */
 export interface TokenCosts {
   GENERATION: number;

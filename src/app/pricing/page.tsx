@@ -55,8 +55,18 @@ function PlanCard({
           <Check className="h-4 w-4 text-accent" />
           {plan.monthlyTokens} tokens / month
         </li>
+        {plan.priceDollars === 0 && (
+          <li className="flex items-center gap-2">
+            <Check className="h-4 w-4 text-accent" />
+            1 workspace · 1 study session · 1 flashcard test
+          </li>
+        )}
         {plan.priceDollars > 0 && (
           <>
+            <li className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-accent" />
+              Unlimited workspaces, study sessions and tests
+            </li>
             <li className="flex items-center gap-2">
               <Check className="h-4 w-4 text-accent" />
               Smarter AI model routing — strongest model on every activity
