@@ -165,10 +165,10 @@ export const plans = [
   {
     name: "Free",
     price: "$0",
-    description: "Everything you need to try Scribe with a real course.",
+    description: "A taste of Scribe: one workspace, one session, one test.",
     features: [
+      "1 workspace · 1 study session · 1 flashcard test",
       "Upload PDFs, slides, and lecture audio",
-      "AI study sessions with readings & worksheets",
       "150 tokens per month",
       "2 GB storage",
     ],
@@ -180,7 +180,7 @@ export const plans = [
     price: "$9/mo",
     description: "Great for getting started with focused study sessions.",
     features: [
-      "Everything in Free",
+      "Unlimited workspaces, study sessions and tests",
       "5,000 tokens per month",
       "Smarter AI model routing — strongest model on every activity",
       "2 GB storage",
