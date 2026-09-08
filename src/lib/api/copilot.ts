@@ -1,5 +1,6 @@
 import { api } from "./trpc-client";
 import { apiUrl } from "./config";
+import { rpc } from "./study-session";
 
 /**
  * Data layer for the copilot chat, backed by the server's `copilot` tRPC
@@ -249,4 +250,32 @@ export async function askCopilotStream(
 
   if (!final) throw new Error("Copilot stream ended unexpectedly — try again.");
   return final;
+}
+
+export type RepairBlockKind = "mermaid" | "latex" | "widget" | "markdown";
+
+/** Where a broken generated block lives, so the server can save the fix. */
+export type RepairTarget =
+  | { kind: "activity"; id: string }
+  | { kind: "artifact"; id: string }
+  | { kind: "artifactVersion"; id: string };
+
+export interface RepairContentBlockResult {
+  source: string;
+  persisted: boolean;
+}
+
+/** Asks the workspace agent to rewrite a block that failed to render. */
+export function repairContentBlock(input: {
+  workspaceId: string;
+  target?: RepairTarget;
+  block: { kind: RepairBlockKind; source: string; error?: string };
+}): Promise<RepairContentBlockResult> {
+  // Newer than the published @goscribe/server types, so go through the raw
+  // tRPC helper.
+  return rpc<RepairContentBlockResult>(
+    "copilot.repairContentBlock",
+    "mutation",
+    input,
+  );
 }

@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import katex from "katex";
 import { rpc } from "@/lib/api/study-session";
+import { BrokenBlock } from "@/components/content/content-repair";
 
 // Signed-URL cache for figure object keys (keys are permanent; signed URLs
 // expire, so content stores keys and we sign on render).
@@ -57,11 +58,43 @@ function parseMathToken(token: string): { latex: string; display: boolean } {
 }
 
 export function MathSpan({ latex, display }: { latex: string; display: boolean }) {
-  const html = useMemo(
-    () =>
-      katex.renderToString(latex, { throwOnError: false, displayMode: display }),
-    [latex, display],
-  );
+  const rendered = useMemo<{ html: string } | { error: string }>(() => {
+    try {
+      return {
+        html: katex.renderToString(latex, {
+          throwOnError: true,
+          displayMode: display,
+        }),
+      };
+    } catch (err) {
+      return { error: err instanceof Error ? err.message : String(err) };
+    }
+  }, [latex, display]);
+  if ("error" in rendered)
+    return (
+      <BrokenBlock
+        kind="latex"
+        source={latex}
+        error={rendered.error}
+        inline={!display}
+        renderFixed={(fixed) => <MathSpan latex={fixed} display={display} />}
+        fallback={
+          <span
+            className={
+              display
+                ? "block my-2 max-w-full overflow-x-auto"
+                : "inline-block max-w-full overflow-x-auto align-middle"
+            }
+            dangerouslySetInnerHTML={{
+              __html: katex.renderToString(latex, {
+                throwOnError: false,
+                displayMode: display,
+              }),
+            }}
+          />
+        }
+      />
+    );
   return (
     <span
       className={
@@ -69,7 +102,7 @@ export function MathSpan({ latex, display }: { latex: string; display: boolean }
           ? "block my-2 max-w-full overflow-x-auto"
           : "inline-block max-w-full overflow-x-auto align-middle"
       }
-      dangerouslySetInnerHTML={{ __html: html }}
+      dangerouslySetInnerHTML={{ __html: rendered.html }}
     />
   );
 }
@@ -384,31 +417,50 @@ let mermaidSeq = 0;
 function loadMermaid() {
   if (!mermaidLoader) {
     mermaidLoader = import("mermaid").then((m) => {
-      m.default.initialize({ startOnLoad: false, securityLevel: "strict" });
+      m.default.initialize({
+        startOnLoad: false,
+        securityLevel: "strict",
+        // Keep syntax errors inside our fallback instead of mermaid appending
+        // an error SVG to <body>.
+        suppressErrorRendering: true,
+      });
       return m.default;
     });
   }
   return mermaidLoader;
 }
 
-/** Renders a ```mermaid fenced block as an SVG diagram (code on failure). */
+/**
+ * Renders a ```mermaid fenced block as an SVG diagram. On failure shows an
+ * in-place notice with a "Fix it" action (see `BrokenBlock`).
+ */
 export function MermaidBlock({ code }: { code: string }) {
   // Result is keyed by the source code so a code change shows the pending
   // state without needing a synchronous reset inside the effect.
   const [result, setResult] = useState<{
     code: string;
     svg: string | null;
+    error?: string;
   } | null>(null);
 
   useEffect(() => {
     let cancelled = false;
+    const id = `mermaid-${mermaidSeq++}`;
     loadMermaid()
-      .then((mermaid) => mermaid.render(`mermaid-${mermaidSeq++}`, code))
+      .then((mermaid) => mermaid.render(id, code))
       .then(({ svg: rendered }) => {
         if (!cancelled) setResult({ code, svg: rendered });
       })
-      .catch(() => {
-        if (!cancelled) setResult({ code, svg: null });
+      .catch((err: unknown) => {
+        // Older mermaid builds leave the failed render's element behind.
+        document.getElementById(id)?.remove();
+        document.getElementById(`d${id}`)?.remove();
+        if (!cancelled)
+          setResult({
+            code,
+            svg: null,
+            error: err instanceof Error ? err.message : String(err),
+          });
       });
     return () => {
       cancelled = true;
@@ -417,7 +469,15 @@ export function MermaidBlock({ code }: { code: string }) {
 
   const current = result?.code === code ? result : null;
   if (current && current.svg === null)
-    return <CodeBlock code={code} lang="mermaid" />;
+    return (
+      <BrokenBlock
+        kind="mermaid"
+        source={code}
+        error={current.error}
+        sourceView={<CodeBlock code={code} lang="mermaid" />}
+        renderFixed={(fixed) => <MermaidBlock code={fixed} />}
+      />
+    );
   const svg = current?.svg;
   if (!svg)
     return (

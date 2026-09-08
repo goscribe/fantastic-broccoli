@@ -45,6 +45,7 @@ import { ExplainAloudActivity } from "@/components/session/explain-aloud-activit
 import { WorksheetActivity } from "@/components/session/worksheet-activity";
 import { SessionDebrief } from "@/components/session/session-debrief";
 import { MathText } from "@/components/ui/markdown-text";
+import { ContentRepairProvider } from "@/components/content/content-repair";
 import { Button } from "@/components/ui/button";
 import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -797,7 +798,18 @@ export default function SessionDetailPage() {
                   </Button>
                 </div>
 
-                {renderActivity(activeActivity)}
+                <ContentRepairProvider
+                  scope={{
+                    workspaceId,
+                    target: { kind: "activity", id: activeActivity.id },
+                    onRepaired: () =>
+                      queryClient.invalidateQueries({
+                        queryKey: ["study-session", sessionId],
+                      }),
+                  }}
+                >
+                  {renderActivity(activeActivity)}
+                </ContentRepairProvider>
               </div>
             ) : (
               <SessionDebrief

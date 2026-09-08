@@ -35,7 +35,15 @@ export interface PlanCaps {
   paid: boolean;
   caps: { workspaces: number; studySessions: number; flashcardTests: number } | null;
   used: { workspaces: number; studySessions: number; flashcardTests: number };
+  /** Free-trial length offered at checkout; 0 once the account has used it. */
+  trialDays: number;
+  /** When the current trial converts to a paid subscription, if trialing. */
+  trialEndsAt: Date | string | null;
+  completedSessions: number;
 }
+
+/** Fired on `window` when the learner finishes a study session (debrief shown). */
+export const SESSION_COMPLETED_EVENT = "scribe:session-completed";
 
 export function fetchPlanCaps(): Promise<PlanCaps> {
   return rpc<PlanCaps>("payment.getPlanCaps", "query", undefined);
