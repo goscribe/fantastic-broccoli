@@ -5,6 +5,7 @@ import type {
   ActivityStatus,
   ActivityType,
   ExamBoard,
+  PlanGenerationSnapshot,
   SessionActivity,
   SessionDepth,
   StudySession,
@@ -101,6 +102,7 @@ export interface ApiStudySession {
   status: ApiSessionStatus;
   progress: number;
   generating?: boolean;
+  generationProgress?: PlanGenerationSnapshot | null;
   quickStart?: boolean;
   examBoard: ExamBoard | null;
   syllabus: string | null;
@@ -659,6 +661,7 @@ export function mapSession(s: ApiStudySession): StudySession {
     activities: (s.activities ?? []).map(mapActivity),
     progress: s.progress,
     generating: s.generating ?? false,
+    generationProgress: s.generationProgress ?? undefined,
     quickStart: s.quickStart ?? false,
     status: s.status.toLowerCase() as StudySession["status"],
     startDate: s.startDate.toISOString(),

@@ -31,6 +31,7 @@ import {
   ClozeContent,
   ExplainAloudContent,
   WorksheetContent,
+  PlanGenerationSnapshot,
 } from "@/types";
 import { ComprehensionActivity } from "@/components/session/comprehension-activity";
 import { McqActivity } from "@/components/session/mcq-activity";
@@ -680,6 +681,7 @@ export default function SessionDetailPage() {
                     title={session.title}
                     workspaceId={workspaceId}
                     sessionId={sessionId}
+                    initial={session.generationProgress}
                   />
                 )}
               </div>
@@ -1136,6 +1138,43 @@ interface PlanProgressState {
   lastEventAt: number;
 }
 
+/** Rebuild the live state from the server's persisted snapshot (page reload). */
+function progressFromSnapshot(
+  snapshot: PlanGenerationSnapshot | undefined,
+  fallbackStartedAt: number,
+): { progress: PlanProgressState; startedAt: number } {
+  const idx = snapshot
+    ? GENERATION_STAGES.findIndex((s) => s.stage === snapshot.stage)
+    : -1;
+  if (!snapshot || idx < 0) {
+    return {
+      progress: {
+        stageIndex: 0,
+        planned: [],
+        finished: [],
+        lastEventAt: fallbackStartedAt,
+      },
+      startedAt: fallbackStartedAt,
+    };
+  }
+  const parse = (iso: string) => {
+    const ms = Date.parse(iso);
+    return Number.isFinite(ms) ? ms : fallbackStartedAt;
+  };
+  return {
+    progress: {
+      stageIndex: idx,
+      completed: snapshot.completed,
+      total: snapshot.total,
+      label: snapshot.label,
+      planned: snapshot.activities,
+      finished: snapshot.finished,
+      lastEventAt: parse(snapshot.updatedAt),
+    },
+    startedAt: parse(snapshot.startedAt),
+  };
+}
+
 function progressFraction(state: PlanProgressState): number {
   const stage = GENERATION_STAGES[state.stageIndex];
   const from = state.stageIndex > 0 ? GENERATION_STAGES[state.stageIndex - 1].until : 0;
@@ -1156,20 +1195,21 @@ function GeneratingPlanCard({
   title,
   workspaceId,
   sessionId,
+  initial,
 }: {
   title: string;
   workspaceId: string;
   sessionId: string;
+  /** Last persisted progress, so a reload resumes instead of restarting at 0. */
+  initial?: PlanGenerationSnapshot;
 }) {
   const { t } = useI18n();
   const [now, setNow] = useState(() => Date.now());
-  const [startedAt] = useState(() => Date.now());
-  const [progress, setProgress] = useState<PlanProgressState>({
-    stageIndex: 0,
-    planned: [],
-    finished: [],
-    lastEventAt: startedAt,
-  });
+  const [hydrated] = useState(() => progressFromSnapshot(initial, Date.now()));
+  const startedAt = hydrated.startedAt;
+  const [progress, setProgress] = useState<PlanProgressState>(
+    hydrated.progress,
+  );
 
   useEffect(() => {
     const tick = setInterval(() => setNow(Date.now()), 1000);
@@ -1184,7 +1224,9 @@ function GeneratingPlanCard({
       setProgress((prev) => {
         const finished =
           event.stage === "generating" && event.label
-            ? [...prev.finished, event.label]
+            ? prev.finished.includes(event.label)
+              ? prev.finished
+              : [...prev.finished, event.label]
             : idx > 2
               ? prev.planned.map((a) => a.title)
               : prev.finished;

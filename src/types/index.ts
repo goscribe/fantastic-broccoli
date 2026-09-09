@@ -21,6 +21,18 @@ export interface SessionNote {
   createdAt: string;
 }
 
+export interface PlanGenerationSnapshot {
+  stage: "gathering" | "outlining" | "generating" | "verifying" | "finalizing";
+  completed?: number;
+  total?: number;
+  label?: string;
+  activities: { title: string; type: string }[];
+  finished: string[];
+  /** ISO time the server started generating. */
+  startedAt: string;
+  updatedAt: string;
+}
+
 export interface StudySession {
   id: string;
   workspaceId: string;
@@ -32,6 +44,8 @@ export interface StudySession {
   activities: SessionActivity[];
   progress: number;
   generating: boolean;
+  /** Where generation currently is, for resuming the loading screen on load. */
+  generationProgress?: PlanGenerationSnapshot;
   /** Quick 5: a single easy 5-question quiz (first session / daily "5 more"). */
   quickStart: boolean;
   status: "active" | "paused" | "completed" | "failed";
