@@ -25,7 +25,9 @@ import {
 } from "@/components/session/study-now-card";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
-import { toastError } from "@/lib/toast";
+import { toast, toastError } from "@/lib/toast";
+import { importYoutube } from "@/lib/api/materials";
+import { emitTreeChanged } from "@/lib/tree-events";
 import "@/lib/i18n/workspace";
 import { Plus, Sparkles, ArrowRight } from "lucide-react";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
@@ -111,6 +113,22 @@ export default function WorkspaceStudyPage() {
       durationMinutes: 5,
       quickStart: true,
     });
+  const addYoutube = async (url: string) => {
+    try {
+      const result = await importYoutube(workspaceId, url);
+      toast.success(
+        t(result.alreadyImported ? "ws.youtube.alreadyAdded" : "ws.youtube.added").replace(
+          "{title}",
+          result.title,
+        ),
+      );
+      queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
+      emitTreeChanged();
+    } catch (error) {
+      toastError(error, t("ws.youtube.failed"));
+      throw error;
+    }
+  };
 
   if (workspaceLoading || sessionsLoading) {
     return (
@@ -140,6 +158,7 @@ export default function WorkspaceStudyPage() {
             onOpenSession={openSession}
             onStartQuick5={startQuick5}
             onUpload={() => openUploadPicker.current?.()}
+            onImportYoutube={addYoutube}
             starting={createSession.isPending}
           />
         )}

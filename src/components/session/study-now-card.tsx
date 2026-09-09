@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
@@ -18,6 +19,77 @@ import {
   Upload,
   Zap,
 } from "lucide-react";
+
+function YoutubeMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+    </svg>
+  );
+}
+
+interface YoutubePasteProps {
+  onImport: (url: string) => Promise<unknown>;
+  compact?: boolean;
+  className?: string;
+}
+
+/** Inline "paste a YouTube link" field; the parent owns success/error UX. */
+export function YoutubePaste({ onImport, compact, className }: YoutubePasteProps) {
+  const { t } = useI18n();
+  const [url, setUrl] = useState("");
+  const [importing, setImporting] = useState(false);
+  const submit = async () => {
+    const trimmed = url.trim();
+    if (!trimmed || importing) return;
+    setImporting(true);
+    try {
+      await onImport(trimmed);
+      setUrl("");
+    } catch {
+      // Parent surfaces the error; keep the URL so they can fix it.
+    } finally {
+      setImporting(false);
+    }
+  };
+  return (
+    <form
+      className={cn("flex w-full items-center gap-2", className)}
+      onSubmit={(e) => {
+        e.preventDefault();
+        void submit();
+      }}
+    >
+      <label className="flex min-w-0 flex-1 items-center gap-2 rounded-full border border-border bg-card px-3 focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15">
+        <YoutubeMark className="h-4 w-4 shrink-0 text-[#ff0033]" />
+        <input
+          type="url"
+          inputMode="url"
+          value={url}
+          disabled={importing}
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder={t("ws.youtube.placeholder")}
+          aria-label={t("ws.youtube.placeholder")}
+          className={cn(
+            "min-w-0 flex-1 bg-transparent placeholder:text-faint focus:outline-none",
+            compact ? "py-1.5 text-[13px]" : "py-2 text-sm",
+          )}
+        />
+      </label>
+      <Button
+        type="submit"
+        size={compact ? "sm" : "md"}
+        variant="outline"
+        disabled={importing || !url.trim()}
+      >
+        {importing ? (
+          <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
+        ) : null}
+        {importing ? t("ws.youtube.importing") : t("ws.youtube.cta")}
+      </Button>
+    </form>
+  );
+}
 
 /** Which single session the learner should be pointed at right now. */
 export function pickStudyNowSession(
@@ -43,6 +115,8 @@ interface StudyNowCardProps {
   /** One-click Quick 5 from the uploaded material (no wizard). */
   onStartQuick5: () => void;
   onUpload: () => void;
+  /** Paste-a-YouTube-link intake; resolves once the transcript is queued. */
+  onImportYoutube?: (url: string) => Promise<unknown>;
   starting?: boolean;
   compact?: boolean;
   className?: string;
@@ -61,6 +135,7 @@ export function StudyNowCard({
   onOpenSession,
   onStartQuick5,
   onUpload,
+  onImportYoutube,
   starting = false,
   compact = false,
   className,
@@ -236,6 +311,13 @@ export function StudyNowCard({
             {t("ws.studyNow.addMore")}
           </Button>
         </div>
+        {onImportYoutube && (
+          <YoutubePaste
+            onImport={onImportYoutube}
+            compact
+            className="mt-3 sm:max-w-md"
+          />
+        )}
       </div>
     );
   }
@@ -256,6 +338,18 @@ export function StudyNowCard({
         <Upload className="mr-2 h-4 w-4" />
         {t("ws.studyNow.uploadCta")}
       </Button>
+      {onImportYoutube && (
+        <>
+          <p className="mt-4 text-[11px] font-semibold uppercase tracking-wide text-faint">
+            {t("ws.youtube.or")}
+          </p>
+          <YoutubePaste
+            onImport={onImportYoutube}
+            compact={compact}
+            className="mt-2 sm:max-w-md"
+          />
+        </>
+      )}
     </div>
   );
 }

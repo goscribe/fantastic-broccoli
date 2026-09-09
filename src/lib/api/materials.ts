@@ -182,6 +182,38 @@ export async function fetchFileDetails(
   });
 }
 
+const YOUTUBE_URL_RE =
+  /https?:\/\/(?:www\.|m\.|music\.)?(?:youtube\.com\/(?:watch\?[^\s]*v=|shorts\/|embed\/|live\/)|youtu\.be\/)[A-Za-z0-9_-]{11}[^\s<>()"']*/i;
+
+/** First YouTube video link found in free text, if any. */
+export function findYoutubeUrl(text: string): string | null {
+  const match = text.match(YOUTUBE_URL_RE);
+  return match ? match[0].replace(/[.,;:!?]+$/, "") : null;
+}
+
+export interface YoutubeImportResult {
+  fileId: string;
+  name: string;
+  title: string;
+  channel: string | null;
+  alreadyImported: boolean;
+}
+
+/**
+ * Paste a YouTube link: the server fetches the captions, stores them as a
+ * workspace material and queues the normal analysis pipeline. Errors carry
+ * learner-facing messages (no captions, private video, …).
+ */
+export async function importYoutube(
+  workspaceId: string,
+  url: string,
+): Promise<YoutubeImportResult> {
+  return rpc<YoutubeImportResult>("workspace.importYoutube", "mutation", {
+    workspaceId,
+    url,
+  });
+}
+
 export async function reanalyzeFile(
   workspaceId: string,
   fileId: string,
