@@ -26,7 +26,12 @@ import { createStudySession, fetchStudySessions } from "@/lib/api/study";
 import { StudyNowCard } from "@/components/session/study-now-card";
 import { fetchMasteryMatrix, studySessionApi } from "@/lib/api/study-session";
 import { fetchPodcastEpisodes } from "@/lib/api/podcast";
-import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
+import {
+  analyzeFiles,
+  findYoutubeUrl,
+  importYoutube,
+  uploadFiles,
+} from "@/lib/api/materials";
 import {
   askCopilotStream,
   createConversation,
@@ -48,7 +53,7 @@ import { emitTreeChanged } from "@/lib/tree-events";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import "@/lib/i18n/misc";
-import { toastError } from "@/lib/toast";
+import { toast, toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 
 interface ChatMessage {
@@ -264,6 +269,7 @@ export default function WorkspaceChatPage() {
   const [pendingFiles, setPendingFiles] = useState<File[]>([]);
   const [busy, setBusy] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [fetchingVideo, setFetchingVideo] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -399,6 +405,32 @@ export default function WorkspaceChatPage() {
         }
       }
 
+      // A pasted YouTube link is imported here, deterministically, rather
+      // than trusting the model to call its tool; the bot then just gets
+      // told what happened (or the learner-facing reason it failed).
+      const youtubeUrl = text ? findYoutubeUrl(text) : null;
+      let youtubeNote = "";
+      if (youtubeUrl) {
+        setFetchingVideo(true);
+        try {
+          const imported = await importYoutube(workspaceId, youtubeUrl);
+          queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
+          emitTreeChanged();
+          youtubeNote = imported.alreadyImported
+            ? `[The YouTube video "${imported.title}" was already in this workspace as "${imported.name}" — do not import it again.]`
+            : `[The YouTube video "${imported.title}"${imported.channel ? ` by ${imported.channel}` : ""} was just imported as the material "${imported.name}" and is being analysed now. Do not call import_youtube_video for it. Tell the student briefly, then offer a Quick 5 from it once it's ready.]`;
+        } catch (error) {
+          if (controller.signal.aborted) throw error;
+          const reason =
+            error instanceof Error && error.message
+              ? error.message
+              : t("ws.youtube.failed");
+          youtubeNote = `[Importing that YouTube link failed. Tell the student exactly this, in their language, and do not retry or call import_youtube_video: "${reason}"]`;
+        } finally {
+          setFetchingVideo(false);
+        }
+      }
+
       if (!conversationIdRef.current) {
         const conversation = await createConversation(
           workspaceId,
@@ -408,11 +440,12 @@ export default function WorkspaceChatPage() {
       }
 
       const fileNames = files.map((f) => f.name).join(", ");
-      const message = text
+      const baseMessage = text
         ? files.length > 0
           ? `${text}\n\n[Attached: ${fileNames}]`
           : text
         : `I just uploaded ${files.length} file(s): ${fileNames}`;
+      const message = youtubeNote ? `${baseMessage}\n\n${youtubeNote}` : baseMessage;
       const result = await askCopilotStream(
         {
           workspaceId,
@@ -775,7 +808,9 @@ export default function WorkspaceChatPage() {
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
                     {i === messages.length - 1 && uploading
                       ? t("misc.uploadingFiles")
-                      : t("misc.thinking")}
+                      : i === messages.length - 1 && fetchingVideo
+                        ? t("ws.youtube.chatFetching")
+                        : t("misc.thinking")}
                   </span>
                 )}
                 {m.role === "bot" &&
@@ -891,6 +926,25 @@ export default function WorkspaceChatPage() {
             }
             onStartQuick5={() => startQuick5.mutate()}
             onUpload={() => fileInputRef.current?.click()}
+            onImportYoutube={async (url) => {
+              try {
+                const result = await importYoutube(workspaceId, url);
+                toast.success(
+                  t(
+                    result.alreadyImported
+                      ? "ws.youtube.alreadyAdded"
+                      : "ws.youtube.added",
+                  ).replace("{title}", result.title),
+                );
+                queryClient.invalidateQueries({
+                  queryKey: ["workspace", workspaceId],
+                });
+                emitTreeChanged();
+              } catch (error) {
+                toastError(error, t("ws.youtube.failed"));
+                throw error;
+              }
+            }}
             starting={startQuick5.isPending}
           />
           {messages.length === 0 && (

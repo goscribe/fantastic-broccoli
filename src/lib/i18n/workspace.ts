@@ -9,7 +9,7 @@ const english = {
   "ws.tab.contents": "Contents",
 
   // Workspace chat assistant
-  "ws.chat.placeholder": "Ask anything, upload notes, or ask me to build a session…",
+  "ws.chat.placeholder": "Ask anything, upload notes, paste a YouTube link, or ask me to build a session…",
   "ws.chat.openSession": "Open study session",
   "ws.chat.noMaterials": "No materials yet — upload your notes to get started.",
   "ws.chat.noSessions": "No study sessions yet.",
@@ -102,9 +102,19 @@ const english = {
   "ws.studyNow.step1": "Step 1 of 2",
   "ws.studyNow.emptyTitle": "Upload notes → get a 5-question quiz",
   "ws.studyNow.emptyHint":
-    "PDF, slides, photos of your notes, or a recording. Scribe turns it into questions you can answer right away.",
+    "PDF, slides, photos of your notes, a recording, or a YouTube lecture. Scribe turns it into questions you can answer right away.",
   "ws.studyNow.uploadCta": "Upload your notes",
   "ws.studyNow.startFailed": "Couldn't start the quiz — try again.",
+
+  // YouTube → quiz intake
+  "ws.youtube.or": "or turn a video into a quiz",
+  "ws.youtube.placeholder": "Paste a YouTube link…",
+  "ws.youtube.cta": "Add video",
+  "ws.youtube.importing": "Getting captions…",
+  "ws.youtube.added": "Added \"{title}\" — reading the captions now.",
+  "ws.youtube.alreadyAdded": "\"{title}\" is already in this workspace.",
+  "ws.youtube.failed": "Couldn't import that video — try another link.",
+  "ws.youtube.chatFetching": "Getting the captions for that video…",
 
   // Passive recall / podcasts
   "ws.generatingEpisode": "Generating episode…",
