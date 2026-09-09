@@ -68,6 +68,8 @@ interface ChatMessage {
   widgets?: string[];
   /** Custom sandboxed HTML visualizations the bot authored. */
   visualizations?: CopilotVisualization[];
+  /** Live tool activity ("Searching your materials") while the bot works. */
+  status?: string;
 }
 
 const AVAILABLE_WIDGETS = (Object.keys(widgetRegistry) as WidgetId[]).map(
@@ -460,12 +462,25 @@ export default function WorkspaceChatPage() {
             const next = [...prev];
             const last = next[next.length - 1];
             if (last?.role === "bot")
-              next[next.length - 1] = { ...last, text: last.text + delta };
+              next[next.length - 1] = {
+                ...last,
+                text: last.text + delta,
+                status: undefined,
+              };
             return next;
           });
           scrollDown();
         },
-        undefined,
+        (label) => {
+          setMessages((prev) => {
+            const next = [...prev];
+            const last = next[next.length - 1];
+            if (last?.role === "bot")
+              next[next.length - 1] = { ...last, status: label };
+            return next;
+          });
+          scrollDown();
+        },
         controller.signal,
       );
       setMessages((prev) => {
@@ -484,6 +499,7 @@ export default function WorkspaceChatPage() {
             artifacts: result.attachedArtifacts ?? [],
             widgets: result.widgets,
             visualizations: result.visualizations,
+            status: undefined,
           };
         return next;
       });
@@ -810,9 +826,15 @@ export default function WorkspaceChatPage() {
                       ? t("misc.uploadingFiles")
                       : i === messages.length - 1 && fetchingVideo
                         ? t("ws.youtube.chatFetching")
-                        : t("misc.thinking")}
+                        : (m.status ?? t("misc.thinking"))}
                   </span>
                 )}
+                {m.role === "bot" && m.text && m.status ? (
+                  <span className="mt-1.5 flex items-center gap-1.5 text-[12px] text-faint">
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                    {m.status}
+                  </span>
+                ) : null}
                 {m.role === "bot" &&
                   ((m.widgets?.length ?? 0) > 0 ||
                     (m.visualizations?.length ?? 0) > 0) && (
