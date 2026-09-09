@@ -26,7 +26,8 @@ const EXEMPT_PREFIXES = ["/pricing", "/settings", "/verify-email"];
 const POST_SESSION_DELAY_MS = 4000;
 
 /** One dismissal per user per browser tab — the wall comes back on the next login. */
-const dismissedKey = (userId: string) => `scribe-subscribe-wall-dismissed:${userId}`;
+const dismissedKey = (userId: string) =>
+  `scribe-subscribe-wall-dismissed:${userId}`;
 /** The "you finished your first session" wall shows once per user per device. */
 const postSessionKey = (userId: string) =>
   `scribe-subscribe-wall-post-session:${userId}`;
@@ -123,7 +124,8 @@ export function SubscribeWall() {
     else if (!postSessionShown(user.id)) load("post-session");
 
     const onCompleted = () => {
-      if (!postSessionShown(user.id)) load("post-session", POST_SESSION_DELAY_MS);
+      if (!postSessionShown(user.id))
+        load("post-session", POST_SESSION_DELAY_MS);
     };
     window.addEventListener(SESSION_COMPLETED_EVENT, onCompleted);
     return () => {
@@ -197,7 +199,7 @@ export function SubscribeWall() {
             className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
           >
             {postSession
-              ? "That was your one free session. Keep the streak going?"
+              ? "Nice — your next free Quick 5 unlocks tomorrow. Want more today?"
               : trialDays > 0
                 ? `Start your ${trialDays}-day free trial`
                 : "Pick your plan to start studying"}
@@ -205,25 +207,26 @@ export function SubscribeWall() {
           <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
             {postSession ? (
               <>
-                The free plan stops here:{" "}
+                The free plan is{" "}
                 <strong className="text-foreground">
-                  {freeCaps?.studySessions ?? 1} study session,{" "}
-                  {freeCaps?.workspaces ?? 1} workspace, {freeCaps?.flashcardTests ?? 1}{" "}
-                  test
+                  one Quick 5 a day, {freeCaps?.studySessions ?? 1} full study
+                  session, {freeCaps?.workspaces ?? 1} workspace and{" "}
+                  {freeCaps?.flashcardTests ?? 1} test
                 </strong>
-                . Tomorrow&apos;s recall session, unlimited sessions and the
-                strongest AI are one tap away
+                . Unlimited sessions right now and the strongest AI are one tap
+                away
                 {trialDays > 0 ? ` — free for ${trialDays} days.` : "."}
               </>
             ) : (
               <>
                 The free plan stops at{" "}
                 <strong className="text-foreground">
-                  {freeCaps?.workspaces ?? 1} workspace, {freeCaps?.studySessions ?? 1}{" "}
-                  study session and {freeCaps?.flashcardTests ?? 1} test
+                  {freeCaps?.workspaces ?? 1} workspace,{" "}
+                  {freeCaps?.studySessions ?? 1} full study session and{" "}
+                  {freeCaps?.flashcardTests ?? 1} test
                 </strong>
-                . Serious about your grades? Go unlimited and get the strongest
-                AI on every question
+                , plus one Quick 5 a day. Serious about your grades? Go
+                unlimited and get the strongest AI on every question
                 {trialDays > 0 ? ` — try it free for ${trialDays} days.` : "."}
               </>
             )}
