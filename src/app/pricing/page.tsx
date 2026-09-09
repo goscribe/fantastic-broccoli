@@ -45,7 +45,9 @@ function PlanCard({
           </span>
         )}
       </div>
-      <p className="mt-1 text-[13px] text-muted-foreground">{plan.description}</p>
+      <p className="mt-1 text-[13px] text-muted-foreground">
+        {plan.description}
+      </p>
       <p className="mt-4 text-2xl font-bold tracking-tight">
         {plan.priceDollars === 0 ? "Free" : `$${plan.priceDollars}`}
         {plan.priceDollars > 0 && (
@@ -69,8 +71,8 @@ function PlanCard({
         </li>
         {plan.priceDollars === 0 && (
           <li className="flex items-center gap-2">
-            <Check className="h-4 w-4 text-accent" />
-            1 workspace · 1 study session · 1 flashcard test
+            <Check className="h-4 w-4 text-accent" />1 workspace · 1 full study
+            session · 1 test · a free Quick 5 every day
           </li>
         )}
         {plan.priceDollars > 0 && (
@@ -198,7 +200,9 @@ export default function PricingPage() {
             </div>
             <div className="rounded-xl border border-border bg-background p-4">
               <p className="text-[12px] text-faint">Tokens</p>
-              <p className="mt-1 text-lg font-semibold">{summary.tokenBalance}</p>
+              <p className="mt-1 text-lg font-semibold">
+                {summary.tokenBalance}
+              </p>
               <p className="text-[12px] text-muted-foreground">
                 of {summary.monthlyTokens} / month
               </p>
@@ -220,7 +224,10 @@ export default function PricingPage() {
       <section className="mx-auto mt-8 grid max-w-xl gap-4 sm:grid-cols-1">
         {loading
           ? Array.from({ length: 1 }, (_, i) => (
-              <div key={i} className="rounded-2xl border border-border bg-card p-5 space-y-3">
+              <div
+                key={i}
+                className="rounded-2xl border border-border bg-card p-5 space-y-3"
+              >
                 <Skeleton className="h-4 w-20" />
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-8 w-28" />

@@ -31,7 +31,8 @@ export const subjects = [
   },
 ];
 
-export type SceneMock = "session" | "quiz" | "copilot" | "upload" | "flashcards";
+export type SceneMock =
+  "session" | "quiz" | "copilot" | "upload" | "flashcards";
 export type ArtTint = "accent" | "sky" | "rose" | "amber";
 export type ArtSide = "right" | "left" | "bottom";
 
@@ -165,9 +166,10 @@ export const plans = [
   {
     name: "Free",
     price: "$0",
-    description: "A taste of Scribe: one workspace, one session, one test.",
+    description:
+      "A taste of Scribe: one workspace, one full session, and a free Quick 5 every day.",
     features: [
-      "1 workspace · 1 study session · 1 flashcard test",
+      "1 workspace · 1 full study session · 1 test · a free Quick 5 every day",
       "Upload PDFs, slides, and lecture audio",
       "150 tokens per month",
       "2 GB storage",
