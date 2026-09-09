@@ -163,6 +163,52 @@ export interface CostAnalytics {
   topSpenders: CostUserRow[];
 }
 
+export interface UpcomingTrialRow {
+  subscriptionId: string;
+  userId: string;
+  email: string | null;
+  plan: string;
+  firstPaymentUsd: number;
+  monthlyUsd: number;
+  interval: string | null;
+  trialEndsAt: string;
+  daysLeft: number;
+  cancelsAtEnd: boolean;
+}
+
+/**
+ * Revenue projection around the card-required free trial. `null` "expected"
+ * figures mean no trial has finished yet, so there is no observed conversion
+ * rate to apply.
+ */
+export interface ProjectedIncome {
+  asOf: string;
+  mrrUsd: number;
+  activePaidSubs: number;
+  trials: {
+    open: number;
+    cancelling: number;
+    grossMonthlyUsd: number;
+    grossFirstPaymentsUsd: number;
+  };
+  conversion: {
+    completed: number;
+    converted: number;
+    rate: number | null;
+  };
+  expectedTrialMonthlyUsd: number | null;
+  projectedMrrUsd: number | null;
+  next30d: {
+    renewalsUsd: number;
+    renewalsCount: number;
+    trialFirstPaymentsGrossUsd: number;
+    trialsEnding: number;
+    trialFirstPaymentsExpectedUsd: number | null;
+    totalExpectedUsd: number | null;
+  };
+  upcomingTrials: UpcomingTrialRow[];
+}
+
 export interface AdminUser {
   id: string;
   name: string | null;
@@ -482,6 +528,8 @@ export const adminApi = {
 
   getCostAnalytics: (since?: Date) =>
     rpc<CostAnalytics>("admin.getCostAnalytics", "query", since ? { since } : undefined),
+  getProjectedIncome: () =>
+    rpc<ProjectedIncome>("admin.getProjectedIncome", "query", undefined),
 
   listUsers: (input: {
     page: number;

@@ -26,6 +26,23 @@ function usd(value: number): string {
   })}`;
 }
 
+function pct(rate: number): string {
+  return `${Math.round(rate * 100)}%`;
+}
+
+function perInterval(interval: string | null): string {
+  switch (interval) {
+    case "year":
+      return "/yr";
+    case "week":
+      return "/wk";
+    case "day":
+      return "/day";
+    default:
+      return "/mo";
+  }
+}
+
 export default function AdminCostsPage() {
   const [days, setDays] = useState(30);
 
@@ -36,6 +53,14 @@ export default function AdminCostsPage() {
         new Date(Date.now() - days * 24 * 60 * 60 * 1000),
       ),
   });
+
+  const { data: projection, isLoading: projectionLoading } = useQuery({
+    queryKey: ["admin", "projected-income"],
+    queryFn: () => adminApi.getProjectedIncome(),
+  });
+
+  const rate = projection?.conversion.rate ?? null;
+  const hasHistory = rate !== null;
 
   const margin = data?.grossMarginUsd ?? 0;
   const costPerToken =
@@ -103,6 +128,144 @@ export default function AdminCostsPage() {
         structure (model calls and typical context size) — not measured provider
         usage. Treat them as directional.
       </p>
+
+      <section className="mt-10">
+        <h2 className="mb-1 text-lg font-semibold">Projected income</h2>
+        <p className="mb-4 text-[12px] text-muted-foreground">
+          What the open 7-day free trials are worth once they end. Trials are
+          card-required, so every trial not cancelled before it ends charges the
+          plan price on day 7. &ldquo;Expected&rdquo; applies the conversion
+          rate of trials that have already finished; &ldquo;if all convert&rdquo;
+          is the ceiling.
+        </p>
+
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <StatCard
+            label="Projected MRR"
+            value={
+              !projection
+                ? usd(0)
+                : hasHistory
+                  ? usd(projection.projectedMrrUsd ?? 0)
+                  : usd(projection.mrrUsd + projection.trials.grossMonthlyUsd)
+            }
+            hint={
+              projection
+                ? hasHistory
+                  ? `${usd(projection.mrrUsd)} today + ${usd(
+                      projection.expectedTrialMonthlyUsd ?? 0,
+                    )} expected from trials`
+                  : `${usd(projection.mrrUsd)} today + all open trials; no finished trials yet to weight by`
+                : undefined
+            }
+            loading={projectionLoading}
+          />
+          <StatCard
+            label="Trial upside (if all convert)"
+            value={usd(projection?.trials.grossMonthlyUsd ?? 0)}
+            hint={
+              projection
+                ? `${projection.trials.open} open trial${
+                    projection.trials.open === 1 ? "" : "s"
+                  }${
+                    projection.trials.cancelling > 0
+                      ? `, ${projection.trials.cancelling} set to cancel`
+                      : ""
+                  } · adds ${usd(projection.trials.grossMonthlyUsd)}/mo`
+                : undefined
+            }
+            loading={projectionLoading}
+          />
+          <StatCard
+            label="Trial conversion"
+            value={hasHistory ? pct(rate) : "—"}
+            hint={
+              projection
+                ? hasHistory
+                  ? `${projection.conversion.converted} of ${projection.conversion.completed} finished trials paid`
+                  : "No trial has reached day 7 yet"
+                : undefined
+            }
+            loading={projectionLoading}
+          />
+          <StatCard
+            label="Next 30 days"
+            value={
+              hasHistory && projection
+                ? usd(projection.next30d.totalExpectedUsd ?? 0)
+                : usd(
+                    (projection?.next30d.renewalsUsd ?? 0) +
+                      (projection?.next30d.trialFirstPaymentsGrossUsd ?? 0),
+                  )
+            }
+            hint={
+              projection
+                ? `${usd(projection.next30d.renewalsUsd)} from ${
+                    projection.next30d.renewalsCount
+                  } renewal${
+                    projection.next30d.renewalsCount === 1 ? "" : "s"
+                  } + ${
+                    hasHistory
+                      ? `${usd(
+                          projection.next30d.trialFirstPaymentsExpectedUsd ?? 0,
+                        )} expected`
+                      : `up to ${usd(
+                          projection.next30d.trialFirstPaymentsGrossUsd,
+                        )}`
+                  } from ${projection.next30d.trialsEnding} trial${
+                    projection.next30d.trialsEnding === 1 ? "" : "s"
+                  } ending`
+                : undefined
+            }
+            loading={projectionLoading}
+          />
+        </div>
+
+        <h3 className="mb-3 mt-6 text-sm font-semibold">Open trials</h3>
+        <Table
+          headers={[
+            "User",
+            "Plan",
+            "Trial ends",
+            "First charge",
+            "Adds to MRR",
+            "Status",
+          ]}
+        >
+          {projectionLoading ? (
+            <TableSkeletonRows cols={6} rows={3} />
+          ) : !projection?.upcomingTrials.length ? (
+            <EmptyRow colSpan={6}>No open trials.</EmptyRow>
+          ) : (
+            projection.upcomingTrials.map((t) => (
+              <tr key={t.subscriptionId} className="hover:bg-muted/40">
+                <Td>
+                  <span className="font-medium">{t.email ?? t.userId}</span>
+                </Td>
+                <Td className="text-muted-foreground">
+                  {t.plan} ({usd(t.firstPaymentUsd)}
+                  {perInterval(t.interval)})
+                </Td>
+                <Td className="tabular-nums">
+                  {new Date(t.trialEndsAt).toLocaleDateString()}
+                  <span className="ml-1 text-muted-foreground">
+                    ({t.daysLeft === 0 ? "today" : `${t.daysLeft}d`})
+                  </span>
+                </Td>
+                <Td className="tabular-nums">{usd(t.firstPaymentUsd)}</Td>
+                <Td className="tabular-nums">{usd(t.monthlyUsd)}/mo</Td>
+                <Td
+                  className={cn(
+                    t.cancelsAtEnd ? "text-red-500" : "text-emerald-600",
+                  )}
+                >
+                  {t.cancelsAtEnd ? "Cancels at end" : "Will convert"}
+                </Td>
+              </tr>
+            ))
+          )}
+        </Table>
+      </section>
 
       <section className="mt-10">
         <h2 className="mb-3 text-lg font-semibold">Plans</h2>
