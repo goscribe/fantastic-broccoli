@@ -7,10 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   fetchAccountSummary,
+  fetchPlanCaps,
   fetchPlanOptions,
   formatBytes,
   switchPlan,
   type AccountSummary,
+  type PlanCaps,
   type PlanOption,
 } from "@/lib/api/account";
 import { useAuthUser } from "@/lib/api/auth";
@@ -19,12 +21,16 @@ function PlanCard({
   plan,
   onSelect,
   switching,
+  trialDays,
 }: {
   plan: PlanOption;
   onSelect: (id: string) => void;
   switching: boolean;
+  /** Free-trial length offered on this paid plan; 0 when unavailable. */
+  trialDays: number;
 }) {
   const isCurrent = plan.isActive;
+  const trial = !isCurrent && plan.priceDollars > 0 && trialDays > 0;
   return (
     <div
       className={`flex flex-col rounded-2xl border p-5 ${
@@ -39,13 +45,21 @@ function PlanCard({
           </span>
         )}
       </div>
-      <p className="mt-1 text-[13px] text-muted-foreground">{plan.description}</p>
+      <p className="mt-1 text-[13px] text-muted-foreground">
+        {plan.description}
+      </p>
       <p className="mt-4 text-2xl font-bold tracking-tight">
         {plan.priceDollars === 0 ? "Free" : `$${plan.priceDollars}`}
         {plan.priceDollars > 0 && (
           <span className="text-sm font-normal text-faint"> / month</span>
         )}
       </p>
+      {trial && (
+        <p className="mt-1 text-[12px] text-muted-foreground">
+          {trialDays}-day free trial · $0 today · card required · billed $
+          {plan.priceDollars}/month after {trialDays} days unless you cancel
+        </p>
+      )}
       <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
         <li className="flex items-center gap-2">
           <Check className="h-4 w-4 text-accent" />
@@ -55,8 +69,18 @@ function PlanCard({
           <Check className="h-4 w-4 text-accent" />
           {plan.monthlyTokens} tokens / month
         </li>
+        {plan.priceDollars === 0 && (
+          <li className="flex items-center gap-2">
+            <Check className="h-4 w-4 text-accent" />1 workspace · 1 full study
+            session · 1 test · a free Quick 5 every day
+          </li>
+        )}
         {plan.priceDollars > 0 && (
           <>
+            <li className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-accent" />
+              Unlimited workspaces, study sessions and tests
+            </li>
             <li className="flex items-center gap-2">
               <Check className="h-4 w-4 text-accent" />
               Smarter AI model routing — strongest model on every activity
@@ -79,7 +103,9 @@ function PlanCard({
             ? "Your plan"
             : plan.priceDollars === 0
               ? "Switch to Free"
-              : `Switch to ${plan.name}`}
+              : trial
+                ? `Start ${trialDays}-day free trial`
+                : `Switch to ${plan.name}`}
         </Button>
       </div>
     </div>
@@ -90,17 +116,26 @@ export default function PricingPage() {
   useAuthUser();
   const [summary, setSummary] = useState<AccountSummary | null>(null);
   const [plans, setPlans] = useState<PlanOption[]>([]);
+  const [caps, setCaps] = useState<PlanCaps | null>(null);
   const [loading, setLoading] = useState(true);
   const [switching, setSwitching] = useState(false);
 
   useEffect(() => {
-    Promise.all([fetchAccountSummary(), fetchPlanOptions()])
-      .then(([acct, nextPlans]) => {
+    Promise.all([
+      fetchAccountSummary(),
+      fetchPlanOptions(),
+      fetchPlanCaps().catch(() => null),
+    ])
+      .then(([acct, nextPlans, nextCaps]) => {
         setSummary(acct);
         setPlans(nextPlans);
+        setCaps(nextCaps);
       })
       .finally(() => setLoading(false));
   }, []);
+
+  const trialDays = caps?.trialDays ?? 0;
+  const trialEndsAt = caps?.trialEndsAt ? new Date(caps.trialEndsAt) : null;
 
   const handleSwitch = async (planId: string) => {
     setSwitching(true);
@@ -120,8 +155,21 @@ export default function PricingPage() {
             Choose your plan
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Your storage and monthly token allowance are shown below. Upgrade anytime — checkout is handled securely by Stripe.
+            Your storage and monthly token allowance are shown below.{" "}
+            {trialDays > 0
+              ? `Paid plans start with a ${trialDays}-day free trial: add a card, pay $0 today, and billing begins after ${trialDays} days unless you cancel. Checkout is handled securely by Stripe.`
+              : "Upgrade anytime — checkout is handled securely by Stripe."}
           </p>
+          {trialEndsAt && (
+            <p className="mt-2 inline-flex rounded-full bg-accent-soft px-3 py-1 text-[12px] font-medium text-accent">
+              Free trial — your first charge is on{" "}
+              {trialEndsAt.toLocaleDateString(undefined, {
+                month: "short",
+                day: "numeric",
+              })}
+              . Cancel before then in Settings to pay nothing.
+            </p>
+          )}
         </div>
         <Link
           href="/settings"
@@ -152,7 +200,9 @@ export default function PricingPage() {
             </div>
             <div className="rounded-xl border border-border bg-background p-4">
               <p className="text-[12px] text-faint">Tokens</p>
-              <p className="mt-1 text-lg font-semibold">{summary.tokenBalance}</p>
+              <p className="mt-1 text-lg font-semibold">
+                {summary.tokenBalance}
+              </p>
               <p className="text-[12px] text-muted-foreground">
                 of {summary.monthlyTokens} / month
               </p>
@@ -174,7 +224,10 @@ export default function PricingPage() {
       <section className="mx-auto mt-8 grid max-w-xl gap-4 sm:grid-cols-1">
         {loading
           ? Array.from({ length: 1 }, (_, i) => (
-              <div key={i} className="rounded-2xl border border-border bg-card p-5 space-y-3">
+              <div
+                key={i}
+                className="rounded-2xl border border-border bg-card p-5 space-y-3"
+              >
                 <Skeleton className="h-4 w-20" />
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-8 w-28" />
@@ -187,6 +240,7 @@ export default function PricingPage() {
                 plan={plan}
                 onSelect={handleSwitch}
                 switching={switching}
+                trialDays={trialDays}
               />
             ))}
       </section>

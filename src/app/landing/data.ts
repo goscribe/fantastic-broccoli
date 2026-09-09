@@ -31,7 +31,8 @@ export const subjects = [
   },
 ];
 
-export type SceneMock = "session" | "quiz" | "copilot" | "upload" | "flashcards";
+export type SceneMock =
+  "session" | "quiz" | "copilot" | "upload" | "flashcards";
 export type ArtTint = "accent" | "sky" | "rose" | "amber";
 export type ArtSide = "right" | "left" | "bottom";
 
@@ -165,10 +166,11 @@ export const plans = [
   {
     name: "Free",
     price: "$0",
-    description: "Everything you need to try Scribe with a real course.",
+    description:
+      "A taste of Scribe: one workspace, one full session, and a free Quick 5 every day.",
     features: [
+      "1 workspace · 1 full study session · 1 test · a free Quick 5 every day",
       "Upload PDFs, slides, and lecture audio",
-      "AI study sessions with readings & worksheets",
       "150 tokens per month",
       "2 GB storage",
     ],
@@ -180,7 +182,7 @@ export const plans = [
     price: "$9/mo",
     description: "Great for getting started with focused study sessions.",
     features: [
-      "Everything in Free",
+      "Unlimited workspaces, study sessions and tests",
       "5,000 tokens per month",
       "Smarter AI model routing — strongest model on every activity",
       "2 GB storage",

@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
   ArrowUp,
   BookOpen,
+  ClipboardCheck,
   FileText,
   Headphones,
   Layers,
@@ -21,10 +22,16 @@ import {
   X,
 } from "lucide-react";
 import { fetchWorkspace } from "@/lib/api/workspace";
-import { fetchStudySessions } from "@/lib/api/study";
+import { createStudySession, fetchStudySessions } from "@/lib/api/study";
+import { StudyNowCard } from "@/components/session/study-now-card";
 import { fetchMasteryMatrix, studySessionApi } from "@/lib/api/study-session";
 import { fetchPodcastEpisodes } from "@/lib/api/podcast";
-import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
+import {
+  analyzeFiles,
+  findYoutubeUrl,
+  importYoutube,
+  uploadFiles,
+} from "@/lib/api/materials";
 import {
   askCopilotStream,
   createConversation,
@@ -46,7 +53,7 @@ import { emitTreeChanged } from "@/lib/tree-events";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import "@/lib/i18n/misc";
-import { toastError } from "@/lib/toast";
+import { toast, toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 
 interface ChatMessage {
@@ -83,6 +90,8 @@ const ASSISTANT_BRIEF = `You are Scribe's workspace study assistant — the stud
 - When you point them to a specific artifact or session, attach it with its id from WORKSPACE_STATUS so they get an openable card — never paste raw ids or links.
 - When a full session would serve them better than chat, offer to build one with create_study_session — and let them choose between opening it or practising the questions with you right here.
 - When they upload files, acknowledge them and ask what to focus on.
+- After a flashcard set lands (or when they ask how to test/quiz themselves), tell them every flashcard set has Learn and Test modes — attach the set and point them at the Test button on its card, or quiz them right here. Never leave them at "you have flashcards now".
+- Scribe CAN print/export: every flashcard set, study guide, and worksheet has a Print/Export view (flashcards print as cut-out index cards). If they ask for a PDF or printable, say yes, attach the artifact, and tell them to open it and hit Print/Export.
 - Be proactive about building study sessions: once you know what they need to study (from their message, uploads, or an exam/date they mention) and no existing session covers it, first spell out the study plan in 2-4 short bullet points (what topics, what kinds of practice, roughly how long), then call create_study_session for it in the same turn — don't wait to be asked. Always tell them what the session will contain.
 - As soon as you learn what this workspace is about, if its current title is a placeholder or doesn't describe the subject (e.g. "hello", "Untitled", a filename), immediately call manage_workspace to rename it to a short descriptive title (and set a one-line description). Do this silently alongside your reply — no need to ask permission.
 - Also use manage_workspace when they ask to rename the workspace, change its description, or tell you how confident they feel about a topic.
@@ -222,6 +231,26 @@ export default function WorkspaceChatPage() {
   const { data: sessions = [] } = useQuery({
     queryKey: ["study-sessions", workspaceId],
     queryFn: () => fetchStudySessions(workspaceId),
+    // Poll while a plan generates so the Study-now strip flips to "ready".
+    refetchInterval: (query) =>
+      query.state.data?.some((s) => s.generating) ? 4000 : false,
+  });
+  const startQuick5 = useMutation({
+    mutationFn: () =>
+      createStudySession({
+        workspaceId,
+        title: workspace?.title ?? "Quick 5",
+        depth: "light",
+        durationMinutes: 5,
+        quickStart: true,
+      }),
+    onSuccess: (created) => {
+      queryClient.invalidateQueries({
+        queryKey: ["study-sessions", workspaceId],
+      });
+      if (created) router.push(`/workspace/${workspaceId}/session/${created.id}`);
+    },
+    onError: (error) => toastError(error, t("ws.studyNow.startFailed")),
   });
   const { data: masteryMatrix = [] } = useQuery({
     queryKey: ["mastery-matrix", workspaceId],
@@ -242,6 +271,7 @@ export default function WorkspaceChatPage() {
   const [pendingFiles, setPendingFiles] = useState<File[]>([]);
   const [busy, setBusy] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [fetchingVideo, setFetchingVideo] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -377,6 +407,32 @@ export default function WorkspaceChatPage() {
         }
       }
 
+      // A pasted YouTube link is imported here, deterministically, rather
+      // than trusting the model to call its tool; the bot then just gets
+      // told what happened (or the learner-facing reason it failed).
+      const youtubeUrl = text ? findYoutubeUrl(text) : null;
+      let youtubeNote = "";
+      if (youtubeUrl) {
+        setFetchingVideo(true);
+        try {
+          const imported = await importYoutube(workspaceId, youtubeUrl);
+          queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
+          emitTreeChanged();
+          youtubeNote = imported.alreadyImported
+            ? `[The YouTube video "${imported.title}" was already in this workspace as "${imported.name}" — do not import it again.]`
+            : `[The YouTube video "${imported.title}"${imported.channel ? ` by ${imported.channel}` : ""} was just imported as the material "${imported.name}" and is being analysed now. Do not call import_youtube_video for it. Tell the student briefly, then offer a Quick 5 from it once it's ready.]`;
+        } catch (error) {
+          if (controller.signal.aborted) throw error;
+          const reason =
+            error instanceof Error && error.message
+              ? error.message
+              : t("ws.youtube.failed");
+          youtubeNote = `[Importing that YouTube link failed. Tell the student exactly this, in their language, and do not retry or call import_youtube_video: "${reason}"]`;
+        } finally {
+          setFetchingVideo(false);
+        }
+      }
+
       if (!conversationIdRef.current) {
         const conversation = await createConversation(
           workspaceId,
@@ -386,11 +442,12 @@ export default function WorkspaceChatPage() {
       }
 
       const fileNames = files.map((f) => f.name).join(", ");
-      const message = text
+      const baseMessage = text
         ? files.length > 0
           ? `${text}\n\n[Attached: ${fileNames}]`
           : text
         : `I just uploaded ${files.length} file(s): ${fileNames}`;
+      const message = youtubeNote ? `${baseMessage}\n\n${youtubeNote}` : baseMessage;
       const result = await askCopilotStream(
         {
           workspaceId,
@@ -767,7 +824,9 @@ export default function WorkspaceChatPage() {
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
                     {i === messages.length - 1 && uploading
                       ? t("misc.uploadingFiles")
-                      : (m.status ?? t("misc.thinking"))}
+                      : i === messages.length - 1 && fetchingVideo
+                        ? t("ws.youtube.chatFetching")
+                        : (m.status ?? t("misc.thinking"))}
                   </span>
                 )}
                 {m.role === "bot" && m.text && m.status ? (
@@ -816,26 +875,46 @@ export default function WorkspaceChatPage() {
                 {m.role === "bot" && m.artifacts && m.artifacts.length > 0 && (
                   <div className="mt-2.5 flex flex-wrap gap-2">
                     {m.artifacts.map((a) => {
+                      const isDeck =
+                        a.kind === "FLASHCARD_DECK" || a.kind === "VOCAB_DECK";
                       const Icon =
                         a.type === "PODCAST_EPISODE"
                           ? Headphones
                           : a.type === "STUDY_GUIDE"
                             ? BookOpen
                             : Layers;
-                      const href = a.kind
-                        ? `/workspace/${workspaceId}/bank/${a.id}`
-                        : `/workspace/${workspaceId}/guide`;
+                      const href = isDeck
+                        ? `/flashcards/${a.id}?ws=${workspaceId}`
+                        : a.kind
+                          ? `/workspace/${workspaceId}/bank/${a.id}`
+                          : `/workspace/${workspaceId}/guide`;
                       return (
-                        <button
+                        <span
                           key={a.id}
-                          type="button"
-                          onClick={() => router.push(href)}
-                          className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-accent bg-accent-soft px-3.5 py-1.5 text-xs font-semibold text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
+                          className="inline-flex max-w-full items-center gap-1.5"
                         >
-                          <Icon className="h-3.5 w-3.5 shrink-0" />
-                          <span className="truncate">{a.title}</span>
-                          <ArrowRight className="h-3.5 w-3.5 shrink-0" />
-                        </button>
+                          <button
+                            type="button"
+                            onClick={() => router.push(href)}
+                            className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-accent bg-accent-soft px-3.5 py-1.5 text-xs font-semibold text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
+                          >
+                            <Icon className="h-3.5 w-3.5 shrink-0" />
+                            <span className="truncate">{a.title}</span>
+                            <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                          </button>
+                          {isDeck && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                router.push(`${href}&mode=test`)
+                              }
+                              className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3.5 py-1.5 text-xs font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+                            >
+                              <ClipboardCheck className="h-3.5 w-3.5 shrink-0" />
+                              {t("misc.testMe")}
+                            </button>
+                          )}
+                        </span>
                       );
                     })}
                   </div>
@@ -858,6 +937,38 @@ export default function WorkspaceChatPage() {
         </div>
 
         <div className="sticky bottom-0 bg-background pb-2 pt-1.5">
+          <StudyNowCard
+            compact
+            className="mb-2.5"
+            sessions={sessions}
+            hasMaterials={(workspace?.materials ?? []).length > 0}
+            analyzing={(workspace?.materials ?? []).some((m) => !m.analyzed)}
+            onOpenSession={(id) =>
+              router.push(`/workspace/${workspaceId}/session/${id}`)
+            }
+            onStartQuick5={() => startQuick5.mutate()}
+            onUpload={() => fileInputRef.current?.click()}
+            onImportYoutube={async (url) => {
+              try {
+                const result = await importYoutube(workspaceId, url);
+                toast.success(
+                  t(
+                    result.alreadyImported
+                      ? "ws.youtube.alreadyAdded"
+                      : "ws.youtube.added",
+                  ).replace("{title}", result.title),
+                );
+                queryClient.invalidateQueries({
+                  queryKey: ["workspace", workspaceId],
+                });
+                emitTreeChanged();
+              } catch (error) {
+                toastError(error, t("ws.youtube.failed"));
+                throw error;
+              }
+            }}
+            starting={startQuick5.isPending}
+          />
           {messages.length === 0 && (
             <div className="mb-2.5 flex flex-wrap gap-1.5">
               {SUGGESTION_KEYS.map((key) => {

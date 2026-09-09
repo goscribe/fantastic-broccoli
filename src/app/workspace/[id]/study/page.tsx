@@ -1,7 +1,7 @@
 "use client";
 
 import { MathText } from "@/components/ui/markdown-text";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
@@ -19,15 +19,19 @@ import { WorkspaceShell } from "@/components/workspace/workspace-shell";
 import { MaterialsSection } from "@/components/workspace/materials-section";
 import { SessionCard } from "@/components/session/session-card";
 import { SessionCreateWizard } from "@/components/session/session-create-wizard";
-import { ProgressBar } from "@/components/ui/progress-bar";
+import {
+  StudyNowCard,
+  pickStudyNowSession,
+} from "@/components/session/study-now-card";
 import { Button } from "@/components/ui/button";
-import { formatDuration } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
+import { toast, toastError } from "@/lib/toast";
+import { importYoutube } from "@/lib/api/materials";
+import { emitTreeChanged } from "@/lib/tree-events";
 import "@/lib/i18n/workspace";
 import { Plus, Sparkles, ArrowRight } from "lucide-react";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
-import { ConfettiDots, EmptyScene } from "@/components/graphics/floating-decor";
-import Image from "next/image";
+import { EmptyScene } from "@/components/graphics/floating-decor";
 
 export default function WorkspaceStudyPage() {
   const params = useParams();
@@ -39,6 +43,7 @@ export default function WorkspaceStudyPage() {
   const [showCreateWizard, setShowCreateWizard] = useState(
     searchParams.get("create") === "1",
   );
+  const openUploadPicker = useRef<(() => void) | null>(null);
 
   const { data: workspace, isLoading: workspaceLoading } = useQuery({
     queryKey: ["workspace", workspaceId],
@@ -48,6 +53,10 @@ export default function WorkspaceStudyPage() {
   const { data: sessions = [], isLoading: sessionsLoading } = useQuery({
     queryKey: ["study-sessions", workspaceId],
     queryFn: () => fetchStudySessions(workspaceId),
+    // Keep the hero live while a plan generates so "Study now" appears the
+    // moment the first question exists.
+    refetchInterval: (query) =>
+      query.state.data?.some((s) => s.generating) ? 4000 : false,
   });
   const { data: masteryMatrix = [] } = useQuery({
     queryKey: ["mastery-matrix", workspaceId],
@@ -68,6 +77,7 @@ export default function WorkspaceStudyPage() {
         router.push(`/workspace/${workspaceId}/session/${created.id}`);
       }
     },
+    onError: (error) => toastError(error, t("ws.studyNow.startFailed")),
   });
 
   const retrySession = useMutation({
@@ -87,10 +97,38 @@ export default function WorkspaceStudyPage() {
     },
   });
 
-  const activeSessions = sessions.filter((s) => s.status === "active");
   const completedSessions = sessions.filter((s) => s.status === "completed");
-  const resumable =
-    activeSessions.find((s) => s.progress > 0) ?? activeSessions[0];
+  const heroSession = pickStudyNowSession(sessions);
+  const otherSessions = sessions.filter(
+    (s) => s.status !== "completed" && s.id !== heroSession?.id,
+  );
+  const materials = workspace?.materials ?? [];
+  const openSession = (id: string) =>
+    router.push(`/workspace/${workspaceId}/session/${id}`);
+  const startQuick5 = () =>
+    createSession.mutate({
+      workspaceId,
+      title: workspace?.title ?? t("ws.studyNow.quick5"),
+      depth: "light",
+      durationMinutes: 5,
+      quickStart: true,
+    });
+  const addYoutube = async (url: string) => {
+    try {
+      const result = await importYoutube(workspaceId, url);
+      toast.success(
+        t(result.alreadyImported ? "ws.youtube.alreadyAdded" : "ws.youtube.added").replace(
+          "{title}",
+          result.title,
+        ),
+      );
+      queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
+      emitTreeChanged();
+    } catch (error) {
+      toastError(error, t("ws.youtube.failed"));
+      throw error;
+    }
+  };
 
   if (workspaceLoading || sessionsLoading) {
     return (
@@ -112,57 +150,82 @@ export default function WorkspaceStudyPage() {
   return (
     <WorkspaceShell workspace={workspace}>
       <div className="space-y-6 sm:space-y-8">
-        {resumable && (
-          <button
-            type="button"
-            onClick={() =>
-              router.push(`/workspace/${workspaceId}/session/${resumable.id}`)
-            }
-            className="group relative w-full overflow-hidden rounded-2xl border border-border bg-card p-4 text-left transition-all animate-fade-up hover:border-border-strong hover:shadow-md sm:rounded-3xl sm:p-6"
-          >
-            <div
-              className="pointer-events-none absolute inset-y-0 right-24 hidden w-40 select-none sm:block"
-              aria-hidden
-            >
-              <Image
-                src="/illustrations/flag.png"
-                alt=""
-                width={200}
-                height={200}
-                unoptimized
-                className="absolute -bottom-4 right-0 w-32"
-              />
-              <ConfettiDots />
-            </div>
-            <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-              <h2 className="text-base font-bold tracking-tight sm:text-lg">
-                {resumable.title}
-              </h2>
-              <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-accent px-3.5 py-1.5 text-xs font-semibold text-accent-foreground transition-all group-hover:gap-2.5">
-                {t("ws.resume")}
-                <ArrowRight className="h-3.5 w-3.5" />
-              </span>
-            </div>
-            <p className="relative text-sm text-muted-foreground mt-0.5">
-              {resumable.progress}% {t("ws.complete")} ·{" "}
-              {formatDuration(resumable.durationMinutes)} ·{" "}
-              <span className="font-semibold text-accent">
-                {t(
-                  resumable.progress >= 75
-                    ? "ws.cheerNearlyDone"
-                    : resumable.progress >= 25
-                      ? "ws.cheerGoodPace"
-                      : "ws.cheerJustStarted",
-                )}
-              </span>
-            </p>
-            <ProgressBar value={resumable.progress} className="relative mt-3.5 sm:max-w-md" />
-          </button>
+        {!workspace?.sharedBy && (
+          <StudyNowCard
+            sessions={sessions}
+            hasMaterials={materials.length > 0}
+            analyzing={materials.some((m) => !m.analyzed)}
+            onOpenSession={openSession}
+            onStartQuick5={startQuick5}
+            onUpload={() => openUploadPicker.current?.()}
+            onImportYoutube={addYoutube}
+            starting={createSession.isPending}
+          />
         )}
+
+        <section className="animate-fade-up">
+          <div className="mb-4 flex items-center justify-between gap-2">
+            <h2 className="min-w-0 truncate text-sm font-semibold text-foreground">
+              {t("ws.studySessions")}
+            </h2>
+            <Button
+              variant="outline"
+              size="sm"
+              className="shrink-0"
+              onClick={() => setShowCreateWizard(true)}
+              data-tour="new-session"
+            >
+              <Plus className="h-3.5 w-3.5 mr-1.5" />
+              {t("ws.newSession")}
+            </Button>
+          </div>
+          {otherSessions.length > 0 ? (
+            <div className="grid gap-4">
+              {otherSessions.map((session) => (
+                <SessionCard
+                  key={session.id}
+                  session={session}
+                  onClick={openSession}
+                  onRetry={(id) => retrySession.mutate(id)}
+                  onDelete={(id) => deleteSession.mutate(id)}
+                  retrying={
+                    retrySession.isPending &&
+                    retrySession.variables === session.id
+                  }
+                  deleting={
+                    deleteSession.isPending &&
+                    deleteSession.variables === session.id
+                  }
+                />
+              ))}
+            </div>
+          ) : workspace?.sharedBy && sessions.length === 0 ? (
+            <EmptyScene image="/illustrations/flag.png">
+              <p className="text-base font-semibold">
+                {t("ws.sessionsPrivate")}
+              </p>
+              <p className="text-sm text-muted-foreground mt-1.5 mb-5">
+                {t("ws.sessionsPrivateHint").replace(
+                  "{name}",
+                  workspace.sharedBy,
+                )}
+              </p>
+              <Button size="sm" onClick={() => setShowCreateWizard(true)}>
+                <Sparkles className="h-3.5 w-3.5 mr-1.5" />
+                {t("ws.createFirstSession")}
+              </Button>
+            </EmptyScene>
+          ) : !heroSession ? (
+            <p className="text-sm text-muted-foreground">
+              {t("ws.noSessionsHint")}
+            </p>
+          ) : null}
+        </section>
 
         <MaterialsSection
           workspaceId={workspaceId}
-          materials={workspace?.materials ?? []}
+          materials={materials}
+          openPickerRef={openUploadPicker}
         />
 
         {bankItems.length > 0 && (
@@ -260,70 +323,6 @@ export default function WorkspaceStudyPage() {
             </div>
           </section>
         )}
-
-        <section className="animate-fade-up">
-          <div className="mb-4 flex items-center justify-between gap-2">
-            <h2 className="min-w-0 truncate text-sm font-semibold text-foreground">
-              {t("ws.studySessions")}
-            </h2>
-            <Button
-              variant="outline"
-              size="sm"
-              className="shrink-0"
-              onClick={() => setShowCreateWizard(true)}
-              data-tour="new-session"
-            >
-              <Plus className="h-3.5 w-3.5 mr-1.5" />
-              {t("ws.newSession")}
-            </Button>
-          </div>
-
-          {!workspace || sessions.length === 0 ? (
-            <EmptyScene image="/illustrations/flag.png">
-              <p className="text-base font-semibold">
-                {workspace?.sharedBy
-                  ? t("ws.sessionsPrivate")
-                  : t("ws.noSessions")}
-              </p>
-              <p className="text-sm text-muted-foreground mt-1.5 mb-5">
-                {workspace?.sharedBy
-                  ? t("ws.sessionsPrivateHint").replace(
-                      "{name}",
-                      workspace.sharedBy,
-                    )
-                  : t("ws.noSessionsHint")}
-              </p>
-              <Button size="sm" onClick={() => setShowCreateWizard(true)}>
-                <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                {t("ws.createFirstSession")}
-              </Button>
-            </EmptyScene>
-          ) : (
-            <div className="grid gap-4">
-              {sessions
-                .filter((s) => s.status !== "completed")
-                .map((session) => (
-                  <SessionCard
-                    key={session.id}
-                    session={session}
-                    onClick={(id) =>
-                      router.push(`/workspace/${workspaceId}/session/${id}`)
-                    }
-                    onRetry={(id) => retrySession.mutate(id)}
-                    onDelete={(id) => deleteSession.mutate(id)}
-                    retrying={
-                      retrySession.isPending &&
-                      retrySession.variables === session.id
-                    }
-                    deleting={
-                      deleteSession.isPending &&
-                      deleteSession.variables === session.id
-                    }
-                  />
-                ))}
-            </div>
-          )}
-        </section>
 
         {completedSessions.length > 0 && (
           <section>

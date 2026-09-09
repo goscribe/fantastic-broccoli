@@ -8,6 +8,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
 import { studySessionApi } from "@/lib/api/study-session";
 import { WorkspaceShell } from "@/components/workspace/workspace-shell";
+import { ContentRepairProvider } from "@/components/content/content-repair";
 import {
   BankContentPreview,
   bankItemSummary,
@@ -391,7 +392,15 @@ export default function BankItemPage() {
                 {t("ws.generatedWithScribe")}
               </p>
             </div>
-            <BankContentPreview kind={item.kind} content={item.content} />
+            <ContentRepairProvider
+              scope={{
+                workspaceId,
+                target: { kind: "artifact", id: item.id },
+                onRepaired: invalidate,
+              }}
+            >
+              <BankContentPreview kind={item.kind} content={item.content} />
+            </ContentRepairProvider>
           </div>
         )}
       </div>

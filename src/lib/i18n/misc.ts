@@ -75,6 +75,7 @@ const english = {
   "misc.studyBotFooter":
     "Chatting is free · generating the session costs 40 tokens",
   "misc.thinking": "Thinking…",
+  "misc.testMe": "Test me",
   "misc.uploadingFiles": "Uploading files…",
   "misc.stop": "Stop",
   "misc.buildingSession": "Building your session…",
@@ -245,6 +246,7 @@ registerTranslations(english, {
     "misc.studyBotFooter":
       "Chatear es gratis · generar la sesión cuesta 40 tokens",
     "misc.thinking": "Pensando…",
+    "misc.testMe": "Ponme a prueba",
     "misc.uploadingFiles": "Subiendo archivos…",
     "misc.stop": "Detener",
     "misc.buildingSession": "Creando tu sesión…",
@@ -412,6 +414,7 @@ registerTranslations(english, {
     "misc.studyBotFooter":
       "Discuter est gratuit · générer la session coûte 40 jetons",
     "misc.thinking": "Réflexion…",
+    "misc.testMe": "Teste-moi",
     "misc.uploadingFiles": "Téléversement des fichiers…",
     "misc.stop": "Arrêter",
     "misc.buildingSession": "Création de votre session…",
@@ -586,6 +589,7 @@ registerTranslations(english, {
     "misc.studyBotFooter":
       "Chatten ist kostenlos · die Sitzung zu generieren kostet 40 Tokens",
     "misc.thinking": "Denke nach…",
+    "misc.testMe": "Teste mich",
     "misc.uploadingFiles": "Dateien werden hochgeladen…",
     "misc.stop": "Stopp",
     "misc.buildingSession": "Deine Sitzung wird erstellt…",
@@ -756,6 +760,7 @@ registerTranslations(english, {
     "misc.remove": "移除",
     "misc.studyBotFooter": "聊天免费 · 生成学习会话需 40 代币",
     "misc.thinking": "思考中…",
+    "misc.testMe": "测试我",
     "misc.uploadingFiles": "正在上传文件…",
     "misc.stop": "停止",
     "misc.buildingSession": "正在生成你的学习会话…",
@@ -916,6 +921,7 @@ registerTranslations(english, {
     "misc.studyBotFooter":
       "चैट मुफ़्त है · सेशन बनाने में 40 टोकन लगते हैं",
     "misc.thinking": "सोच रहा है…",
+    "misc.testMe": "मेरा टेस्ट लो",
     "misc.uploadingFiles": "फ़ाइलें अपलोड हो रही हैं…",
     "misc.stop": "रोकें",
     "misc.buildingSession": "आपका सेशन बन रहा है…",
@@ -1085,6 +1091,7 @@ registerTranslations(english, {
     "misc.studyBotFooter":
       "Libre ang chat · 40 tokens ang paggawa ng session",
     "misc.thinking": "Nag-iisip…",
+    "misc.testMe": "Subukin mo ako",
     "misc.uploadingFiles": "Ina-upload ang mga file…",
     "misc.stop": "Ihinto",
     "misc.buildingSession": "Ginagawa ang iyong session…",

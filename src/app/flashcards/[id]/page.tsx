@@ -3,11 +3,16 @@
 import "@/lib/i18n/flashcards";
 import Image from "next/image";
 import { MathText } from "@/components/ui/markdown-text";
-import { Suspense, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { fetchDeckProgress, studySessionApi } from "@/lib/api/study-session";
+import {
+  fetchDeckProgress,
+  startFlashcardTest,
+  studySessionApi,
+} from "@/lib/api/study-session";
+import { toastError } from "@/lib/toast";
 import { createStudySession } from "@/lib/api/study";
 import { Button } from "@/components/ui/button";
 import { deckEntries } from "@/components/bank/bank-content";
@@ -65,7 +70,31 @@ function FlashcardDeck() {
     [progress],
   );
 
-  const [mode, setMode] = useState<DeckMode>("cards");
+  const requestedMode = searchParams.get("mode");
+  const [mode, setMode] = useState<DeckMode>(
+    requestedMode === "learn" ? "learn" : "cards",
+  );
+
+  // Test mode is opened server-side so the free-plan test cap is enforced.
+  const openTest = useMutation({
+    mutationFn: () => startFlashcardTest(deckId),
+    onSuccess: () => setMode("test"),
+    onError: (err) => toastError(err, t("fc.startSessionError")),
+  });
+  const selectMode = (next: DeckMode) => {
+    if (next === "test") {
+      if (mode !== "test" && !openTest.isPending) openTest.mutate();
+      return;
+    }
+    setMode(next);
+  };
+  const autoOpenedTest = useRef(false);
+  useEffect(() => {
+    if (requestedMode !== "test" || !item || autoOpenedTest.current) return;
+    autoOpenedTest.current = true;
+    openTest.mutate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [requestedMode, item?.id]);
 
   const startSession = useMutation({
     mutationFn: () =>
@@ -81,6 +110,7 @@ function FlashcardDeck() {
         router.push(`/workspace/${workspaceId}/session/${session.id}`);
       }
     },
+    onError: (err) => toastError(err, t("fc.startSessionError")),
   });
 
   if (isLoading) {
@@ -163,7 +193,8 @@ function FlashcardDeck() {
               <button
                 key={id}
                 type="button"
-                onClick={() => setMode(id)}
+                onClick={() => selectMode(id)}
+                disabled={id === "test" && openTest.isPending}
                 className={cn(
                   "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors",
                   mode === id
@@ -186,13 +217,6 @@ function FlashcardDeck() {
             </Button>
           </div>
         </div>
-        {startSession.isError && (
-          <p className="mt-2 text-sm text-rose">
-            {startSession.error instanceof Error
-              ? startSession.error.message
-              : t("fc.startSessionError")}
-          </p>
-        )}
       </div>
 
       {mode === "cards" && (

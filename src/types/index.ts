@@ -32,6 +32,8 @@ export interface StudySession {
   activities: SessionActivity[];
   progress: number;
   generating: boolean;
+  /** Quick 5: a single easy 5-question quiz (first session / daily "5 more"). */
+  quickStart: boolean;
   status: "active" | "paused" | "completed" | "failed";
   startDate: string;
   endDate?: string;

@@ -101,6 +101,7 @@ export interface ApiStudySession {
   status: ApiSessionStatus;
   progress: number;
   generating?: boolean;
+  quickStart?: boolean;
   examBoard: ExamBoard | null;
   syllabus: string | null;
   topics: string | null;
@@ -123,6 +124,8 @@ export interface CreateStudySessionInput {
   topics?: string;
   subject?: string;
   endDate?: Date;
+  /** Quick 5: one easy 5-question quiz from the material instead of a full plan. */
+  quickStart?: boolean;
 }
 
 export interface AddActivityInput {
@@ -513,6 +516,10 @@ export const gradeFlashcardTypedAnswer = (input: {
     input,
   );
 
+/** Opens Test mode on a deck; rejects with a plan-limit error on the free cap. */
+export const startFlashcardTest = (setId: string) =>
+  rpc<{ runId: string }>("flashcards.startTest", "mutation", { setId });
+
 /** Records a batch of SRS study attempts (one full study round). */
 export const recordFlashcardStudySession = (input: {
   attempts: { flashcardId: string; isCorrect: boolean; timeSpentMs?: number }[];
@@ -652,6 +659,7 @@ export function mapSession(s: ApiStudySession): StudySession {
     activities: (s.activities ?? []).map(mapActivity),
     progress: s.progress,
     generating: s.generating ?? false,
+    quickStart: s.quickStart ?? false,
     status: s.status.toLowerCase() as StudySession["status"],
     startDate: s.startDate.toISOString(),
     endDate: s.endDate?.toISOString(),
