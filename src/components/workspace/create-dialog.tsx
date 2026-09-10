@@ -18,6 +18,7 @@ import {
   Check,
   FilePlus2,
   GraduationCap,
+  Loader2,
   MessageCircle,
   Sparkles,
   Upload,
@@ -62,7 +63,7 @@ export function NewWorkspaceMenu({
   const { t } = useI18n();
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState<File[] | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const pick = (choice: "workspace" | "bot") => {
@@ -72,7 +73,7 @@ export function NewWorkspaceMenu({
 
   const startFromFiles = async (files: File[]) => {
     if (files.length === 0 || uploading) return;
-    setUploading(true);
+    setUploading(files);
     try {
       const { workspaceId, session } = await startWorkspaceFromUploads(files);
       if (session) {
@@ -82,13 +83,16 @@ export function NewWorkspaceMenu({
       }
     } catch (err) {
       toastError(err, t("misc.couldNotStartSession"));
-      setUploading(false);
+      setUploading(null);
     }
   };
 
   return (
     <div className="relative inline-block">
-      {children(() => setOpen((v) => !v))}
+      {children(() => {
+        if (!uploading) setOpen((v) => !v);
+      })}
+      {uploading && <BusyOverlay files={uploading} />}
       {open && (
         <>
           <div
@@ -116,16 +120,13 @@ export function NewWorkspaceMenu({
             />
             <button
               type="button"
-              disabled={uploading}
               onClick={() => fileRef.current?.click()}
-              className="flex w-full items-start gap-2.5 rounded-lg p-2.5 text-left hover:bg-muted disabled:opacity-60"
+              className="flex w-full items-start gap-2.5 rounded-lg p-2.5 text-left hover:bg-muted"
             >
               <Upload className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
               <span className="min-w-0">
                 <span className="block text-[13px] font-semibold text-foreground">
-                  {uploading
-                    ? t("misc.buildingFromFiles")
-                    : t("misc.uploadNotes")}
+                  {t("misc.uploadNotes")}
                 </span>
                 <span className="block text-xs text-muted-foreground">
                   {t("misc.uploadNotesHint")}
@@ -165,6 +166,32 @@ export function NewWorkspaceMenu({
           </div>
         </>
       )}
+    </div>
+  );
+}
+
+/**
+ * Full-screen "working" card shown while a workspace + first session are
+ * built from dropped files. Lives outside the menu that started it, so it
+ * stays visible after that menu closes and blocks a second submission.
+ */
+function BusyOverlay({ files }: { files: File[] }) {
+  const { t } = useI18n();
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
+    >
+      <div className="flex w-full max-w-sm flex-col items-center gap-2 rounded-2xl border border-border bg-card px-5 py-8 text-center">
+        <Loader2 className="h-5 w-5 animate-spin text-accent" />
+        <p className="text-sm font-semibold">{t("misc.buildingFromFiles")}</p>
+        <p className="max-w-full truncate text-xs text-muted-foreground">
+          {files.length === 1
+            ? files[0].name
+            : `${files.length} ${t("ws.files")}`}
+        </p>
+      </div>
     </div>
   );
 }
