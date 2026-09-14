@@ -1,17 +1,24 @@
 import { GraphData, CitationData } from "@/components/ai/embeds";
 import { WidgetId } from "@/components/interactive";
 
+/** Server copilot tool names; unknown names still render with a generic icon. */
 export type ToolName =
-  | "search_materials"
-  | "update_plan"
-  | "add_activity"
-  | "generate_summary"
-  | "attach_study_aids";
+  | "attach_study_aids"
+  | "search_workspace_knowledge"
+  | "search_study_session"
+  | "search_all_study_sessions"
+  | "modify_study_session"
+  | "manage_workspace"
+  | "create_study_session"
+  | "attach_study_session"
+  | "attach_artifact"
+  | "record_mastery"
+  | "import_youtube_video";
 
 export interface ToolCallPart {
   kind: "tool";
   id: string;
-  tool: ToolName;
+  tool: ToolName | (string & {});
   label: string;
   args: string;
   result: string;
