@@ -18,8 +18,10 @@ import { ExpressionGraph } from "@/components/interactive/desmos";
 import { HtmlWidget } from "@/components/interactive/html-widget";
 import {
   CodeBlock,
+  MarkdownTable,
   MathSpan,
   MathText,
+  isMarkdownTable,
   splitMathSegments,
   useResolvedFigureUrl,
 } from "@/components/ui/markdown-text";
@@ -42,7 +44,31 @@ type ReadingBlock =
   | { kind: "heading"; level: number; text: string }
   | { kind: "list"; items: string[] }
   | { kind: "code"; code: string; lang?: string }
+  | { kind: "table"; lines: string[] }
   | { kind: "paragraph"; text: string };
+
+const TABLE_ROW_RE = /^\s*\|.*\|\s*$/;
+
+/**
+ * Splits a chunk into a pipe table plus the prose lines around it. Returns
+ * null when the chunk holds no table so the caller falls through to the
+ * list/paragraph handling.
+ */
+function splitTableRuns(lines: string[]): ReadingBlock[] | null {
+  const runs: { table: boolean; lines: string[] }[] = [];
+  for (const line of lines) {
+    const table = TABLE_ROW_RE.test(line);
+    const last = runs[runs.length - 1];
+    if (last && last.table === table) last.lines.push(line);
+    else runs.push({ table, lines: [line] });
+  }
+  if (!runs.some((r) => r.table && isMarkdownTable(r.lines))) return null;
+  return runs.flatMap((r) =>
+    r.table && isMarkdownTable(r.lines)
+      ? [{ kind: "table" as const, lines: r.lines }]
+      : parseBlocks(r.lines.join("\n")),
+  );
+}
 
 const CODE_FENCE_RE = /```(\w*)[ \t]*\n([\s\S]*?)```/g;
 
@@ -103,6 +129,8 @@ function parseBlocks(raw: string): ReadingBlock[] {
   }
 
   const lines = trimmed.split("\n").map((l) => l.trim()).filter(Boolean);
+  const withTable = splitTableRuns(lines);
+  if (withTable) return withTable;
   if (lines.length > 0 && lines.every((l) => /^[-*]\s+/.test(l))) {
     return [
       {
@@ -235,6 +263,9 @@ export function ReadingBody({ content }: { content: ReadingContent }) {
         }
         if (block.kind === "code") {
           return <CodeBlock key={i} code={block.code} lang={block.lang} />;
+        }
+        if (block.kind === "table") {
+          return <MarkdownTable key={i} lines={block.lines} />;
         }
         if (block.kind === "list") {
           return (
@@ -537,6 +568,9 @@ export function ReadingActivity({
           }
           if (block.kind === "code") {
             return <CodeBlock key={i} code={block.code} lang={block.lang} />;
+          }
+          if (block.kind === "table") {
+            return <MarkdownTable key={i} lines={block.lines} />;
           }
           if (block.kind === "list") {
             return (

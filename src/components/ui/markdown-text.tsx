@@ -35,13 +35,50 @@ const INLINE_RE =
 
 // LaTeX math: $$display$$, \[display\], $inline$, \(inline\), plus bare
 // undelimited fragments like `e^{i x}`, `lim_{n→∞}` or `\frac{a}{b}` that
-// generated content sometimes emits without $ delimiters.
+// generated content sometimes emits without $ delimiters. A closing inline
+// `$` may not be followed by a digit, so "$800,000 … only $300,000" stays
+// prose (currency) instead of becoming one garbled math run.
 const BARE_MATH_SRC =
   "[A-Za-z0-9()\\[\\]+\\-=/]*(?:[\\^_]\\{[^{}]*\\}|\\\\[a-zA-Z]+\\{[^{}]*\\})(?:[A-Za-z0-9^_+\\-=/()\\[\\]]|\\{[^{}]*\\}|\\\\[a-zA-Z]+)*";
 const MATH_RE = new RegExp(
-  `(\\$\\$[\\s\\S]+?\\$\\$|\\\\\\[[\\s\\S]+?\\\\\\]|(?<!\\\\)\\$(?:\\\\\\$|[^$\\n])+?(?<!\\\\)\\$|\\\\\\([\\s\\S]+?\\\\\\)|${BARE_MATH_SRC})`,
+  `(\\$\\$[\\s\\S]+?\\$\\$|\\\\\\[[\\s\\S]+?\\\\\\]|(?<!\\\\)\\$(?:\\\\\\$|[^$\\n])+?(?<!\\\\)\\$(?!\\d)|\\\\\\([\\s\\S]+?\\\\\\)|${BARE_MATH_SRC})`,
   "g",
 );
+
+// Inline `$…$` whose body reads like a sentence (three or more consecutive
+// words outside \text{}) is a stray/unbalanced dollar swallowing prose, not
+// math — e.g. `$F\`. Calculate their common latency … of $18`. Such a match is
+// rejected and scanning resumes right after its opening `$`.
+const TEXT_GROUP = /\\(?:text|textbf|textit|mathrm|mathbf|operatorname|mbox)\s*\{[^{}]*\}/g;
+const LATEX_COMMAND = /\\[A-Za-z]+/g;
+const PROSE_RUN = /[A-Za-z]{2,}(?:\s+[A-Za-z]{2,}){2}/;
+
+function looksLikeProse(inner: string): boolean {
+  return PROSE_RUN.test(inner.replace(TEXT_GROUP, " ").replace(LATEX_COMMAND, " "));
+}
+
+type MathMatch = { index: number; token: string };
+
+function* matchMath(text: string): Generator<MathMatch> {
+  const re = new RegExp(MATH_RE.source, "g");
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text)) !== null) {
+    const token = m[0];
+    if (token.length === 0) {
+      re.lastIndex++;
+      continue;
+    }
+    if (
+      token.startsWith("$") &&
+      !token.startsWith("$$") &&
+      looksLikeProse(token.slice(1, -1))
+    ) {
+      re.lastIndex = m.index + 1;
+      continue;
+    }
+    yield { index: m.index, token };
+  }
+}
 
 // Escaped literal characters like \% \$ \& \# \_ in generated prose render
 // as the character itself rather than showing the backslash.
@@ -122,11 +159,9 @@ export type MathTextSegment =
 export function splitMathSegments(text: string): MathTextSegment[] {
   const segments: MathTextSegment[] = [];
   let last = 0;
-  for (const m of text.matchAll(MATH_RE)) {
-    const idx = m.index ?? 0;
+  for (const { index: idx, token } of matchMath(text)) {
     if (idx > last)
       segments.push({ kind: "text", text: text.slice(last, idx), start: last, end: idx });
-    const token = m[0];
     const { latex, display } = parseMathToken(token);
     segments.push({
       kind: "math",
@@ -192,10 +227,8 @@ function renderInline(text: string): React.ReactNode[] {
   const nodes: React.ReactNode[] = [];
   let last = 0;
   let key = 0;
-  for (const m of text.matchAll(MATH_RE)) {
-    const idx = m.index ?? 0;
+  for (const { index: idx, token } of matchMath(text)) {
     if (idx > last) nodes.push(...renderFormatting(text.slice(last, idx)));
-    const token = m[0];
     const { latex, display } = parseMathToken(token);
     nodes.push(<MathSpan key={`math-${key++}`} latex={latex} display={display} />);
     last = idx + token.length;
@@ -343,6 +376,15 @@ const CODE_FENCE = /^```(\w*)\s*$/;
 const TABLE_LINE = /^\s*\|.*\|\s*$/;
 const TABLE_SEPARATOR = /^\s*\|(?:\s*:?-{2,}:?\s*\|)+\s*$/;
 
+/** True when `lines` is a GFM pipe table (header row + separator row). */
+export function isMarkdownTable(lines: string[]): boolean {
+  return (
+    lines.length >= 2 &&
+    lines.every((l) => TABLE_LINE.test(l)) &&
+    TABLE_SEPARATOR.test(lines[1])
+  );
+}
+
 function splitTableRow(line: string): string[] {
   const trimmed = line.trim().replace(/^\|/, "").replace(/\|$/, "");
   const cells: string[] = [];
@@ -350,7 +392,18 @@ function splitTableRow(line: string): string[] {
   let inMath = false;
   for (let i = 0; i < trimmed.length; i++) {
     const ch = trimmed[i];
-    if (ch === "$") inMath = !inMath;
+    if (ch === "$") {
+      if (inMath) inMath = false;
+      else {
+        // An opener needs a closer; `$90 | $20` is currency, not a span
+        // that swallows the cell boundary.
+        const close = trimmed.indexOf("$", i + 1);
+        const currency =
+          /\d/.test(trimmed[i + 1] ?? "") &&
+          (close === -1 || trimmed.slice(i + 1, close).includes("|"));
+        if (close !== -1 && !currency) inMath = true;
+      }
+    }
     if (ch === "|" && !inMath) {
       cells.push(current.trim());
       current = "";
@@ -362,7 +415,7 @@ function splitTableRow(line: string): string[] {
   return cells;
 }
 
-function MarkdownTable({ lines }: { lines: string[] }) {
+export function MarkdownTable({ lines }: { lines: string[] }) {
   const [header, ...rest] = lines;
   const body = rest.filter((l) => !TABLE_SEPARATOR.test(l));
   const headerCells = splitTableRow(header);
