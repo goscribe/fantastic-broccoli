@@ -1262,34 +1262,33 @@ function GeneratingPlanCard({
   }
 
   return (
-    <div className="flex justify-center px-4 py-12 animate-fade-up">
+    <div className="flex justify-center px-4 py-6 animate-fade-up">
       <div className="w-full max-w-lg">
-        <div className="rounded-2xl border border-border bg-card p-6">
-          <video
-            src="/illustrations/loading.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="pointer-events-none mx-auto mb-5 h-32 w-auto select-none rounded-xl"
-          />
-          <div className="flex items-start gap-4">
-            <div className="mt-0.5 h-7 w-7 shrink-0 rounded-full border-2 border-accent border-t-transparent animate-spin" />
+        <div className="rounded-2xl border border-border bg-card p-5">
+          <div className="flex items-center gap-3">
+            <video
+              src="/illustrations/loading.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="pointer-events-none h-14 w-14 shrink-0 select-none rounded-lg object-cover"
+            />
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold">
+              <p className="truncate text-sm font-semibold">
                 {t("session.building")} &ldquo;{title}&rdquo;…
               </p>
-              <p className="mt-1 text-xs text-muted-foreground">
+              <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
                 {stalled
                   ? t("session.takingLonger")
                   : t("session.generatingHint")}
               </p>
             </div>
-            <p className="shrink-0 text-[11px] text-faint tabular-nums">
+            <p className="shrink-0 self-start text-[11px] text-faint tabular-nums">
               {elapsed}s
             </p>
           </div>
-          <div className="mt-5">
+          <div className="mt-4">
             <div className="flex items-center justify-between text-[11px] text-muted-foreground">
               <span className="min-w-0 truncate" aria-live="polite">
                 {detail ?? t(GENERATION_STAGES[progress.stageIndex].label)}
@@ -1308,49 +1307,47 @@ function GeneratingPlanCard({
                 style={{ width: `${percent}%` }}
               />
             </div>
-          </div>
-          <div className="mt-4 flex flex-col gap-2 border-t border-border pt-4">
-            {GENERATION_STAGES.map((stage, i) => (
-              <p
-                key={stage.label}
-                className="flex items-center gap-2 text-xs font-medium"
-              >
-                {i < progress.stageIndex ? (
-                  <Check className="h-3.5 w-3.5 text-accent" />
-                ) : i === progress.stageIndex ? (
-                  <span className="h-3.5 w-3.5 rounded-full border-[1.5px] border-accent border-t-transparent animate-spin" />
-                ) : (
-                  <span className="h-1.5 w-1.5 mx-1 rounded-full bg-border-strong" />
-                )}
-                <span
-                  className={
-                    i <= progress.stageIndex ? "text-foreground" : "text-faint"
-                  }
+            <ol className="mt-2 flex items-center gap-1.5" aria-label={t("session.building")}>
+              {GENERATION_STAGES.map((stage, i) => (
+                <li
+                  key={stage.label}
+                  title={t(stage.label)}
+                  className="flex min-w-0 flex-1 items-center gap-1 text-[10px] font-medium"
                 >
-                  {t(stage.label)}
-                </span>
-              </p>
-            ))}
+                  {i < progress.stageIndex ? (
+                    <Check className="h-3 w-3 shrink-0 text-accent" />
+                  ) : i === progress.stageIndex ? (
+                    <span className="h-3 w-3 shrink-0 rounded-full border-[1.5px] border-accent border-t-transparent animate-spin" />
+                  ) : (
+                    <span className="mx-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-border-strong" />
+                  )}
+                  <span
+                    className={`hidden truncate sm:inline ${
+                      i <= progress.stageIndex ? "text-foreground" : "text-faint"
+                    }`}
+                  >
+                    {t(stage.label)}
+                  </span>
+                </li>
+              ))}
+            </ol>
           </div>
           {progress.planned.length > 0 && (
-            <ul className="mt-3 flex flex-col gap-1 border-t border-border pt-3">
+            <ul className="mt-3 flex flex-wrap gap-1">
               {progress.planned.map((activity, i) => {
                 const done = progress.finished.includes(activity.title);
                 return (
                   <li
                     key={`${activity.title}-${i}`}
-                    className="flex items-center gap-2 text-[11px]"
+                    title={activity.title}
+                    className={`flex max-w-[12rem] items-center gap-1 rounded-md border px-1.5 py-0.5 text-[10px] ${
+                      done
+                        ? "border-accent/30 bg-accent-soft/40 text-foreground"
+                        : "border-border text-faint"
+                    }`}
                   >
-                    {done ? (
-                      <Check className="h-3 w-3 shrink-0 text-accent" />
-                    ) : (
-                      <span className="mx-1 h-1 w-1 shrink-0 rounded-full bg-border-strong" />
-                    )}
-                    <span
-                      className={`min-w-0 truncate ${done ? "text-foreground" : "text-faint"}`}
-                    >
-                      {activity.title}
-                    </span>
+                    {done && <Check className="h-2.5 w-2.5 shrink-0 text-accent" />}
+                    <span className="min-w-0 truncate">{activity.title}</span>
                   </li>
                 );
               })}

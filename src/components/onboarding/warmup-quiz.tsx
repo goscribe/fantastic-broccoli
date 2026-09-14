@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Check, X } from "lucide-react";
 
 /** Divider-separated section, so the quiz sits inside the caller's progress card. */
-const SECTION = "mt-5 border-t border-border pt-4 text-left";
+const SECTION = "mt-4 border-t border-border pt-3 text-left";
 
 /**
  * Warm-up quiz shown while a session generates: unseen questions from the
@@ -113,10 +113,10 @@ export function WarmupQuiz({ workspaceId }: { workspaceId: string }) {
           {score}/{answered} correct
         </p>
       </div>
-      <div className="mt-2 text-sm font-medium">
+      <div className="mt-1.5 text-sm font-medium">
         <MarkdownText text={q.question} />
       </div>
-      <div className="mt-3 space-y-2">
+      <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
         {q.options.map((option, i) => {
           const hasPicked = picked !== null;
           const isCorrect = i === q.correctIndex;
@@ -132,7 +132,7 @@ export function WarmupQuiz({ workspaceId }: { workspaceId: string }) {
                 if (isCorrect) setScore((s) => s + 1);
               }}
               className={cn(
-                "flex w-full items-center gap-2 rounded-lg border px-3 py-2 text-left text-sm transition-colors",
+                "flex w-full items-center gap-2 rounded-lg border px-2.5 py-1.5 text-left text-xs transition-colors",
                 !hasPicked && "border-border hover:border-accent hover:bg-accent-soft/40",
                 hasPicked && isCorrect && "border-accent bg-accent-soft/50",
                 hasPicked && isPicked && !isCorrect && "border-rose/50 bg-rose/10",
@@ -153,16 +153,14 @@ export function WarmupQuiz({ workspaceId }: { workspaceId: string }) {
         })}
       </div>
       {picked !== null && (
-        <div className="mt-3">
-          {q.explanation && (
-            <div className="text-xs text-muted-foreground">
-              <MarkdownText text={q.explanation} />
-            </div>
-          )}
+        <div className="mt-2 flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1 text-xs text-muted-foreground">
+            {q.explanation && <MarkdownText text={q.explanation} />}
+          </div>
           <button
             type="button"
             onClick={next}
-            className="mt-2 rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-accent-foreground hover:opacity-90 transition-opacity"
+            className="shrink-0 rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-accent-foreground hover:opacity-90 transition-opacity"
           >
             Next question
           </button>
