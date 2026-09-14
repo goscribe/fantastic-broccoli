@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Check, Camera } from "lucide-react";
+import { Check, Camera, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -10,9 +10,12 @@ import { HeaderDecor } from "@/components/graphics/floating-decor";
 import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import {
+  cancelSubscription,
   describeLedgerEntry,
   fetchAccountSummary,
+  fetchCurrentSubscription,
   fetchPlanOptions,
+  resumeSubscription,
   fetchTokenHistory,
   fetchTokenOverview,
   formatBytes,
@@ -21,6 +24,7 @@ import {
   updateProfile,
   uploadProfilePicture,
   type AccountSummary,
+  type CurrentSubscription,
   type PlanOption,
   type TokenLedgerEntry,
   type TokenOverview,
@@ -69,20 +73,39 @@ function UsageBar({
   );
 }
 
+function formatDate(value: Date | string, locale: string): string {
+  return new Date(value).toLocaleDateString(locale, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
 function PlanCard({
   plan,
+  subscription,
   onSelect,
+  onDowngrade,
+  onResume,
   switching,
 }: {
   plan: PlanOption;
+  subscription: CurrentSubscription | null;
   onSelect: (id: string) => void;
+  onDowngrade: () => void;
+  onResume: () => void;
   switching: boolean;
 }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
+  const isFree = plan.priceDollars === 0;
+  const cancelAt = subscription?.cancelAt ?? null;
+  const endsOn = cancelAt ? formatDate(cancelAt, locale) : null;
   return (
     <div
       className={`flex flex-col rounded-2xl border p-5 ${
-        plan.isActive ? "border-accent bg-accent-soft/40" : "border-border bg-card"
+        plan.isActive
+          ? "border-accent bg-accent-soft/40"
+          : "border-border bg-card"
       }`}
     >
       <div className="flex items-center justify-between">
@@ -122,9 +145,38 @@ function PlanCard({
         </li>
       </ul>
       <div className="mt-auto pt-4">
-        {plan.isActive ? (
+        {plan.isActive && !isFree && endsOn ? (
+          <div className="space-y-2">
+            <p className="text-[12px] text-muted-foreground">
+              {t("set.endsOn").replace("{date}", endsOn)}
+            </p>
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full"
+              disabled={switching}
+              onClick={onResume}
+            >
+              {t("set.keepPlan")}
+            </Button>
+          </div>
+        ) : plan.isActive ? (
           <Button variant="outline" size="sm" className="w-full" disabled>
             {t("set.yourPlan")}
+          </Button>
+        ) : isFree && endsOn ? (
+          <Button variant="outline" size="sm" className="w-full" disabled>
+            {t("set.startsOn").replace("{date}", endsOn)}
+          </Button>
+        ) : isFree ? (
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full"
+            disabled={switching}
+            onClick={onDowngrade}
+          >
+            {subscription?.isTrial ? t("set.cancelTrial") : t("set.downgrade")}
           </Button>
         ) : (
           <Button
@@ -133,9 +185,7 @@ function PlanCard({
             disabled={switching}
             onClick={() => onSelect(plan.id)}
           >
-            {plan.priceDollars === 0
-              ? t("set.downgrade")
-              : t("set.switchTo").replace("{name}", plan.name)}
+            {t("set.switchTo").replace("{name}", plan.name)}
           </Button>
         )}
       </div>
@@ -153,6 +203,10 @@ export default function SettingsPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [switching, setSwitching] = useState(false);
+  const [subscription, setSubscription] = useState<CurrentSubscription | null>(
+    null,
+  );
+  const [confirmingDowngrade, setConfirmingDowngrade] = useState(false);
   const [summaryLoading, setSummaryLoading] = useState(true);
   const [plansLoading, setPlansLoading] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -173,6 +227,9 @@ export default function SettingsPage() {
       .then(setPlans)
       .catch(() => {})
       .finally(() => setPlansLoading(false));
+    fetchCurrentSubscription()
+      .then(setSubscription)
+      .catch(() => {});
     fetchTokenOverview()
       .then(setTokens)
       .catch(() => {});
@@ -239,9 +296,66 @@ export default function SettingsPage() {
     setSwitching(true);
     try {
       await switchPlan(planId);
-      toast.success("Plan updated");
     } catch (err) {
       toastError(err, "Failed to switch plan");
+    } finally {
+      setSwitching(false);
+    }
+  };
+
+  const refreshBilling = async () => {
+    const [sub, options, acct] = await Promise.all([
+      fetchCurrentSubscription(),
+      fetchPlanOptions(),
+      fetchAccountSummary(),
+    ]);
+    setSubscription(sub);
+    setPlans(options);
+    setSummary(acct);
+  };
+
+  const openDowngrade = async () => {
+    try {
+      const sub = subscription ?? (await fetchCurrentSubscription());
+      if (!sub) {
+        toast.error("You're already on the free plan.");
+        return;
+      }
+      setSubscription(sub);
+      setConfirmingDowngrade(true);
+    } catch (err) {
+      toastError(err, "Couldn't load your plan");
+    }
+  };
+
+  const handleDowngrade = async () => {
+    setSwitching(true);
+    try {
+      const sub = await cancelSubscription();
+      setSubscription(sub);
+      setConfirmingDowngrade(false);
+      toast.success(
+        t(sub.isTrial ? "set.trialCancelled" : "set.planCancelled").replace(
+          "{date}",
+          formatDate(sub.cancelAt ?? sub.currentPeriodEnd, locale),
+        ),
+      );
+      await refreshBilling().catch(() => {});
+    } catch (err) {
+      toastError(err, "Failed to cancel plan");
+    } finally {
+      setSwitching(false);
+    }
+  };
+
+  const handleResume = async () => {
+    setSwitching(true);
+    try {
+      setSubscription(await resumeSubscription());
+      toast.success(t("set.planKept"));
+      await refreshBilling().catch(() => {});
+    } catch (err) {
+      toastError(err, "Failed to resume plan");
     } finally {
       setSwitching(false);
     }
@@ -308,7 +422,9 @@ export default function SettingsPage() {
                   {uploadingPhoto ? t("set.uploading") : t("set.change")}
                 </button>
                 {photoError && (
-                  <p className="mt-1 w-14 text-[11px] text-red-500">{photoError}</p>
+                  <p className="mt-1 w-14 text-[11px] text-red-500">
+                    {photoError}
+                  </p>
                 )}
               </div>
               <div className="grid flex-1 gap-4 sm:grid-cols-2">
@@ -417,7 +533,7 @@ export default function SettingsPage() {
         </section>
 
         {/* Plan */}
-        <section className="mt-8">
+        <section id="plan" className="mt-8">
           <h2 className="text-sm font-semibold">{t("settings.plan")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("set.planHint")}
@@ -439,7 +555,10 @@ export default function SettingsPage() {
                   <PlanCard
                     key={plan.id}
                     plan={plan}
+                    subscription={subscription}
                     onSelect={handleSwitch}
+                    onDowngrade={openDowngrade}
+                    onResume={handleResume}
                     switching={switching}
                   />
                 ))}
@@ -498,37 +617,40 @@ export default function SettingsPage() {
                 className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
               />
               <div className="min-w-0">
-              <p className="text-[12px] text-muted-foreground">
-                {t("set.balance")}
-              </p>
-              {tokens ? (
-                <p className="mt-1 text-2xl font-bold tabular-nums">
-                  {tokens.balance.toLocaleString()}
-                  <span className="ml-1.5 text-[12px] font-normal text-faint">
-                    tokens
-                  </span>
+                <p className="text-[12px] text-muted-foreground">
+                  {t("set.balance")}
                 </p>
-              ) : (
-                <Skeleton className="mt-2 h-7 w-24" />
-              )}
-              {tokens && (
-                <p className="mt-1 text-[12px] text-muted-foreground">
-                  {t("set.monthlyAllowance")
-                    .replace("{count}", tokens.monthlyAllowance.toLocaleString())
-                    .replace("{plan}", tokens.planName)}
-                </p>
-              )}
-              {tokens && tokens.planName === "Free" && (
-                <p className="mt-2 rounded-lg bg-accent-soft/50 px-3 py-2 text-[12px] text-muted-foreground">
-                  {t("set.upgradeNudge")}{" "}
-                  <Link
-                    href="/pricing"
-                    className="font-medium text-accent underline"
-                  >
-                    {t("set.upgradeCta")}
-                  </Link>
-                </p>
-              )}
+                {tokens ? (
+                  <p className="mt-1 text-2xl font-bold tabular-nums">
+                    {tokens.balance.toLocaleString()}
+                    <span className="ml-1.5 text-[12px] font-normal text-faint">
+                      tokens
+                    </span>
+                  </p>
+                ) : (
+                  <Skeleton className="mt-2 h-7 w-24" />
+                )}
+                {tokens && (
+                  <p className="mt-1 text-[12px] text-muted-foreground">
+                    {t("set.monthlyAllowance")
+                      .replace(
+                        "{count}",
+                        tokens.monthlyAllowance.toLocaleString(),
+                      )
+                      .replace("{plan}", tokens.planName)}
+                  </p>
+                )}
+                {tokens && tokens.planName === "Free" && (
+                  <p className="mt-2 rounded-lg bg-accent-soft/50 px-3 py-2 text-[12px] text-muted-foreground">
+                    {t("set.upgradeNudge")}{" "}
+                    <Link
+                      href="/pricing"
+                      className="font-medium text-accent underline"
+                    >
+                      {t("set.upgradeCta")}
+                    </Link>
+                  </p>
+                )}
               </div>
             </div>
             <div className="rounded-2xl border border-border bg-card p-4">
@@ -632,6 +754,69 @@ export default function SettingsPage() {
           </div>
         </section>
       </div>
+
+      {confirmingDowngrade && subscription && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-[150] flex items-center justify-center bg-foreground/40 px-4 backdrop-blur-sm"
+          onClick={() => !switching && setConfirmingDowngrade(false)}
+        >
+          <div
+            className="relative w-full max-w-md rounded-3xl border border-border bg-card p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setConfirmingDowngrade(false)}
+              aria-label="Close"
+              disabled={switching}
+              className="absolute right-4 top-4 rounded-full p-1 text-faint hover:bg-muted hover:text-foreground"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            <h2 className="text-xl font-bold tracking-tight">
+              {subscription.isTrial
+                ? t("set.cancelTrialTitle")
+                : t("set.downgradeTitle")}
+            </h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {t(
+                subscription.isTrial
+                  ? "set.cancelTrialBody"
+                  : "set.downgradeBody",
+              )
+                .replace("{plan}", subscription.planName)
+                .replace(
+                  "{date}",
+                  formatDate(subscription.currentPeriodEnd, locale),
+                )}
+            </p>
+            <div className="mt-6 flex flex-col gap-2">
+              <Button
+                size="lg"
+                className="w-full"
+                disabled={switching}
+                onClick={handleDowngrade}
+              >
+                {switching
+                  ? t("set.cancelling")
+                  : subscription.isTrial
+                    ? t("set.confirmCancelTrial")
+                    : t("set.confirmDowngrade")}
+              </Button>
+              <button
+                type="button"
+                disabled={switching}
+                onClick={() => setConfirmingDowngrade(false)}
+                className="text-xs text-faint hover:text-muted-foreground"
+              >
+                {t("set.keepPlan")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
