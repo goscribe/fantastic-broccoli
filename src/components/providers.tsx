@@ -11,6 +11,7 @@ import { ThemeProvider, useTheme } from "@/lib/theme";
 import { I18nProvider } from "@/lib/i18n";
 import { toastError } from "@/lib/toast";
 import { captureAttribution } from "@/lib/attribution";
+import { reportSignupConversionFromUrl } from "@/lib/gtag";
 
 function ThemedToaster() {
   const { theme } = useTheme();
@@ -22,6 +23,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   // first page view, so signup can attribute the account.
   useEffect(() => {
     captureAttribution();
+    reportSignupConversionFromUrl();
   }, []);
 
   const [queryClient] = useState(

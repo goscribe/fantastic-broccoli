@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ScribeLogo } from "@/components/graphics/logo";
 import { signUp, signIn } from "@/lib/api/auth";
+import { reportSignupConversion } from "@/lib/gtag";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
 import {
@@ -34,6 +35,7 @@ export default function SignupPage() {
     setBusy(true);
     try {
       await signUp(name, email, password);
+      reportSignupConversion();
       await signIn(email, password);
       router.push("/");
     } catch (err) {
