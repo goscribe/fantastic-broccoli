@@ -1356,8 +1356,8 @@ function GeneratingPlanCard({
               })}
             </ul>
           )}
+          <WarmupQuiz workspaceId={workspaceId} />
         </div>
-        <WarmupQuiz workspaceId={workspaceId} />
       </div>
     </div>
   );

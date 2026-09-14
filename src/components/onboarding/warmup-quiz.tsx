@@ -6,6 +6,9 @@ import { MarkdownText } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
 import { Check, X } from "lucide-react";
 
+/** Divider-separated section, so the quiz sits inside the caller's progress card. */
+const SECTION = "mt-5 border-t border-border pt-4 text-left";
+
 /**
  * Warm-up quiz shown while a session generates: unseen questions from the
  * workspace's artifact bank (free — no LLM call). The bank fills up partway
@@ -76,7 +79,7 @@ export function WarmupQuiz({ workspaceId }: { workspaceId: string }) {
 
   if (questions.length === 0) {
     return (
-      <div className="mt-6 rounded-xl border border-border bg-card px-4 py-3 text-left">
+      <div className={SECTION}>
         <p className="text-sm font-semibold">Warm-up quiz incoming…</p>
         <p className="mt-1 text-xs text-muted-foreground">
           Writing a few quick questions from your materials so you can practice
@@ -88,7 +91,7 @@ export function WarmupQuiz({ workspaceId }: { workspaceId: string }) {
 
   if (index >= questions.length) {
     return (
-      <div className="mt-6 rounded-xl border border-accent/25 bg-accent-soft/40 px-4 py-3 text-left">
+      <div className={SECTION}>
         <p className="text-sm font-semibold">
           {score}/{answered} correct so far
         </p>
@@ -101,7 +104,7 @@ export function WarmupQuiz({ workspaceId }: { workspaceId: string }) {
 
   const q = questions[index];
   return (
-    <div className="mt-6 rounded-xl border border-border bg-card px-4 py-4 text-left">
+    <div className={SECTION}>
       <div className="flex items-center justify-between">
         <p className="text-[11px] font-semibold uppercase tracking-wide text-accent">
           Warm-up while you wait
