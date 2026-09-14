@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FlashcardContent } from "@/types";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
+import { useReportCurrentItem } from "@/lib/current-item";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ProgressBar } from "@/components/ui/progress-bar";
@@ -41,6 +42,7 @@ export function FlashcardActivity({
       : content.cards.map((c) => c.known),
   );
 
+  useReportCurrentItem(activityId, currentIndex);
   useActivityDraft(activityId, { currentIndex, results });
 
   const card = content.cards[currentIndex];

@@ -461,6 +461,7 @@ export default function WorkspaceChatPage() {
           documentContent: `${ASSISTANT_BRIEF}\n\n${workspaceStatus()}`,
           workspaceAgent: true,
           availableWidgets: AVAILABLE_WIDGETS,
+          page: `Workspace chat tab for "${workspace?.title ?? ""}" — /workspace/${workspaceId}/chat (other tabs: Contents /study, Guide /guide, Recall /recall)`,
         },
         (delta) => {
           setMessages((prev) => {

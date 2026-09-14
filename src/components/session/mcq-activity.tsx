@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { McqContent } from "@/types";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
+import { useReportCurrentItem } from "@/lib/current-item";
 import { Button } from "@/components/ui/button";
 import { ConfettiBurst } from "@/components/graphics/confetti-burst";
 import { MarkdownText } from "@/components/ui/markdown-text";
@@ -51,6 +52,7 @@ export function McqActivity({
   );
   const [burst, setBurst] = useState(0);
 
+  useReportCurrentItem(activityId, index);
   useActivityDraft(activityId, {
     index,
     correctCount,

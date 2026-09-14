@@ -58,6 +58,7 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { ACTIVITY_TYPE_LABELS } from "@/components/session/activity-item";
 import { cn, formatDuration, formatRelativeDate } from "@/lib/utils";
+import { useCurrentItemIndex } from "@/lib/current-item";
 import {
   ArrowLeft,
   Check,
@@ -218,6 +219,7 @@ export default function SessionDetailPage() {
     () => activities.find((a) => a.id === activeActivityId),
     [activities, activeActivityId],
   );
+  const activeItemIndex = useCurrentItemIndex(activeActivity?.id);
 
   // Mirror the active activity into the URL so a refresh or shared link
   // reopens the same section. history.replaceState avoids a navigation.
@@ -956,9 +958,16 @@ export default function SessionDetailPage() {
         studySessionId={sessionId}
         activity={
           activeActivity && !activeActivity.id.startsWith("bank-")
-            ? { activityId: activeActivity.id }
+            ? { activityId: activeActivity.id, itemIndex: activeItemIndex }
             : undefined
         }
+        page={`Study session player — "${session.title}"${
+          activeActivity
+            ? `, activity ${activities.findIndex((a) => a.id === activeActivity.id) + 1} of ${activities.length} "${activeActivity.title}" (${activeActivity.type})${
+                activeItemIndex !== undefined ? `, item ${activeItemIndex + 1}` : ""
+              }`
+            : ", plan overview"
+        } — /workspace/${workspaceId}/session/${sessionId}`}
         context={`Session: ${session.title}${
           activeActivity
             ? `\nThe learner is currently on activity "${activeActivity.title}" (${activeActivity.type}).`

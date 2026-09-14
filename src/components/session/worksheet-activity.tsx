@@ -6,6 +6,7 @@ import { markWorksheetAnswer } from "@/lib/api/study";
 import { toast } from "@/lib/toast";
 import { recordWorksheetQuestionProgress } from "@/lib/api/study-session";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
+import { useReportCurrentItem } from "@/lib/current-item";
 import { WorksheetFigureCard } from "@/components/graphics/worksheet-figures";
 import { FigureView } from "@/components/session/reading-activity";
 import { MarkdownText, MathText } from "@/components/ui/markdown-text";
@@ -74,6 +75,7 @@ export function WorksheetActivity({
   );
   const [markingInFlight, setMarkingInFlight] = useState(false);
 
+  useReportCurrentItem(activityId, stepIndex);
   useActivityDraft(activityId, {
     stepIndex,
     answers,
