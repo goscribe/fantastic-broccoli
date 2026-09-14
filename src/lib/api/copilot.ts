@@ -135,6 +135,8 @@ export async function askCopilot(input: {
   workspaceAgent?: boolean;
   /** Session activity currently on screen (and which item within it). */
   activity?: { activityId: string; itemIndex?: number };
+  /** Human-readable description of the page the learner has open. */
+  page?: string;
 }): Promise<CopilotAnswer> {
   type AskInput = Parameters<typeof api.copilot.ask.mutate>[0];
   // availableWidgets is newer than the published @goscribe/server types.
@@ -145,7 +147,7 @@ export async function askCopilot(input: {
     documentContent: input.documentContent ?? "",
     availableWidgets: input.availableWidgets,
     workspaceAgent: input.workspaceAgent,
-    metadata: input.activity,
+    metadata: { ...input.activity, page: input.page },
   } as AskInput["context"];
   const result = await api.copilot.ask.mutate({
     context,
@@ -206,7 +208,7 @@ export async function askCopilotStream(
           documentContent: input.documentContent ?? "",
           availableWidgets: input.availableWidgets,
           workspaceAgent: input.workspaceAgent,
-          metadata: input.activity,
+          metadata: { ...input.activity, page: input.page },
         },
         message: input.message,
         conversationId: input.conversationId,

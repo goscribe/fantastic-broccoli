@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { VocabRecallContent } from "@/types";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
+import { useReportCurrentItem } from "@/lib/current-item";
 import { MathText } from "@/components/ui/markdown-text";
 import { Button } from "@/components/ui/button";
 import { ConfettiBurst } from "@/components/graphics/confetti-burst";
@@ -73,6 +74,7 @@ export function VocabRecallActivity({
   const total = content.terms.length;
   const done = learned.size === total;
   const termIndex = queue[position];
+  useReportCurrentItem(activityId, termIndex ?? 0);
   const term = content.terms[termIndex];
 
   const mark = (correct: boolean) => {

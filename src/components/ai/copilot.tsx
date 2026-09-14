@@ -125,6 +125,7 @@ export function Copilot({
   workspaceId,
   studySessionId,
   activity,
+  page,
 }: {
   open: boolean;
   onClose: () => void;
@@ -133,6 +134,8 @@ export function Copilot({
   studySessionId?: string;
   /** Activity on screen right now, so "question 2" means what the learner sees. */
   activity?: { activityId: string; itemIndex?: number };
+  /** Where the learner is in the app (page + position), for the model. */
+  page?: string;
 }) {
   const { t } = useI18n();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -279,6 +282,7 @@ export function Copilot({
             documentContent: context,
             availableWidgets,
             activity,
+            page,
           },
           (delta) => {
             streamed += delta;
@@ -345,6 +349,7 @@ export function Copilot({
       context,
       studySessionId,
       activity,
+      page,
       queryClient,
       t,
     ],
