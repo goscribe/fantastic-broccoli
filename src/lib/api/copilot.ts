@@ -44,6 +44,13 @@ export async function createConversation(
   return { id: row.id, title: row.title };
 }
 
+/** A tool the copilot ran while producing a reply (persisted with the message). */
+export interface CopilotToolCall {
+  name: string;
+  label: string;
+  detail: string;
+}
+
 export interface CopilotHistoryMessage {
   id: string;
   role: "user" | "assistant";
@@ -51,6 +58,7 @@ export interface CopilotHistoryMessage {
   widgets: string[];
   visualizations: CopilotVisualization[];
   highlights: CopilotHighlight[];
+  toolCalls: CopilotToolCall[];
 }
 
 export async function getConversationMessages(
@@ -67,6 +75,7 @@ export async function getConversationMessages(
       widgets?: string[];
       visualizations?: CopilotVisualization[];
       highlights?: CopilotHighlight[];
+      toolCalls?: CopilotToolCall[];
     };
     return {
       id: m.id,
@@ -75,6 +84,7 @@ export async function getConversationMessages(
       widgets: aids.widgets ?? [],
       visualizations: aids.visualizations ?? [],
       highlights: aids.highlights ?? [],
+      toolCalls: aids.toolCalls ?? [],
     };
   });
 }
@@ -101,6 +111,8 @@ export interface CopilotAnswer {
   widgets: string[];
   visualizations: CopilotVisualization[];
   highlights: CopilotHighlight[];
+  /** Tools the copilot ran for this reply, in call order. */
+  toolCalls: CopilotToolCall[];
   /** True when the copilot modified the study session via a tool call. */
   sessionModified?: boolean;
   /** Set when the copilot created a study session via a tool call. */
@@ -121,6 +133,8 @@ export async function askCopilot(input: {
   availableWidgets?: { id: string; description: string }[];
   /** Enables workspace-assistant tools (rename, proficiency, create session). */
   workspaceAgent?: boolean;
+  /** Session activity currently on screen (and which item within it). */
+  activity?: { activityId: string; itemIndex?: number };
 }): Promise<CopilotAnswer> {
   type AskInput = Parameters<typeof api.copilot.ask.mutate>[0];
   // availableWidgets is newer than the published @goscribe/server types.
@@ -131,6 +145,7 @@ export async function askCopilot(input: {
     documentContent: input.documentContent ?? "",
     availableWidgets: input.availableWidgets,
     workspaceAgent: input.workspaceAgent,
+    metadata: input.activity,
   } as AskInput["context"];
   const result = await api.copilot.ask.mutate({
     context,
@@ -144,6 +159,7 @@ export async function askCopilot(input: {
       (result as { visualizations?: CopilotVisualization[] }).visualizations ??
       [],
     highlights: (result as { highlights?: CopilotHighlight[] }).highlights ?? [],
+    toolCalls: (result as { toolCalls?: CopilotToolCall[] }).toolCalls ?? [],
     sessionModified:
       (result as { sessionModified?: boolean }).sessionModified ?? false,
     createdSessionId: (result as { createdSessionId?: string }).createdSessionId,
@@ -190,6 +206,7 @@ export async function askCopilotStream(
           documentContent: input.documentContent ?? "",
           availableWidgets: input.availableWidgets,
           workspaceAgent: input.workspaceAgent,
+          metadata: input.activity,
         },
         message: input.message,
         conversationId: input.conversationId,
@@ -229,6 +246,7 @@ export async function askCopilotStream(
         widgets: event.widgets ?? [],
         visualizations: event.visualizations ?? [],
         highlights: event.highlights ?? [],
+        toolCalls: event.toolCalls ?? [],
         sessionModified: event.sessionModified ?? false,
         createdSessionId: event.createdSessionId,
         attachedSessionIds: event.attachedSessionIds ?? [],

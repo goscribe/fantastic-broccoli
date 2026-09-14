@@ -28,6 +28,7 @@ import {
 } from "@/lib/api/copilot";
 import type {
   CopilotHighlight,
+  CopilotToolCall,
   CopilotVisualization,
 } from "@/lib/api/copilot";
 import { MarkdownText } from "@/components/ui/markdown-text";
@@ -36,6 +37,19 @@ import "@/lib/i18n/misc";
 
 let idCounter = 0;
 const nextId = () => `m-${++idCounter}-${Date.now()}`;
+
+/** Completed chips for the tools the server ran while answering. */
+function buildToolParts(toolCalls: CopilotToolCall[]): ToolCallPart[] {
+  return toolCalls.map((tc) => ({
+    kind: "tool",
+    id: nextId(),
+    tool: tc.name,
+    label: tc.label,
+    args: tc.detail,
+    result: "",
+    status: "done",
+  }));
+}
 
 /** Tool chip + widget/visualization embed parts for a set of study aids. */
 function buildAidParts(aids: {
@@ -110,12 +124,15 @@ export function Copilot({
   context,
   workspaceId,
   studySessionId,
+  activity,
 }: {
   open: boolean;
   onClose: () => void;
   context?: string;
   workspaceId: string;
   studySessionId?: string;
+  /** Activity on screen right now, so "question 2" means what the learner sees. */
+  activity?: { activityId: string; itemIndex?: number };
 }) {
   const { t } = useI18n();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -147,6 +164,7 @@ export function Copilot({
           chatId: activeChat,
           role: m.role,
           parts: [
+            ...(m.role === "assistant" ? buildToolParts(m.toolCalls) : []),
             {
               kind: "text",
               id: `hist-part-${m.id}`,
@@ -260,6 +278,7 @@ export function Copilot({
             message: text,
             documentContent: context,
             availableWidgets,
+            activity,
           },
           (delta) => {
             streamed += delta;
@@ -277,6 +296,7 @@ export function Copilot({
               ? {
                   ...m,
                   parts: [
+                    ...buildToolParts(result.toolCalls),
                     {
                       kind: "text",
                       id: streamPartId,
@@ -318,7 +338,16 @@ export function Copilot({
       }
       setBusy(false);
     },
-    [busy, activeChat, workspaceId, context, studySessionId, queryClient, t],
+    [
+      busy,
+      activeChat,
+      workspaceId,
+      context,
+      studySessionId,
+      activity,
+      queryClient,
+      t,
+    ],
   );
 
   const chatMessages = messages.filter(

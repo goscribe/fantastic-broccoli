@@ -4,35 +4,50 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   Search,
-  CalendarClock,
-  ListPlus,
   Check,
   Loader2,
   ChevronDown,
-  FileText,
   Paperclip,
+  BookOpen,
+  Layers,
+  Pencil,
+  FolderCog,
+  Sparkles,
+  Link2,
+  Target,
+  ListVideo,
+  Wrench,
 } from "lucide-react";
 import { Surface } from "@/components/ui/card";
 import { ToolCallPart, ToolName } from "@/components/ai/chat-types";
 
 const toolMeta: Record<ToolName, { icon: React.ElementType; color: string }> = {
-  search_materials: { icon: Search, color: "text-sky" },
-  update_plan: { icon: CalendarClock, color: "text-violet" },
-  add_activity: { icon: ListPlus, color: "text-accent" },
-  generate_summary: { icon: FileText, color: "text-amber" },
   attach_study_aids: { icon: Paperclip, color: "text-accent" },
+  search_workspace_knowledge: { icon: Search, color: "text-sky" },
+  search_study_session: { icon: BookOpen, color: "text-sky" },
+  search_all_study_sessions: { icon: Layers, color: "text-sky" },
+  modify_study_session: { icon: Pencil, color: "text-violet" },
+  manage_workspace: { icon: FolderCog, color: "text-violet" },
+  create_study_session: { icon: Sparkles, color: "text-accent" },
+  attach_study_session: { icon: Link2, color: "text-accent" },
+  attach_artifact: { icon: Paperclip, color: "text-accent" },
+  record_mastery: { icon: Target, color: "text-amber" },
+  import_youtube_video: { icon: ListVideo, color: "text-rose" },
 };
+
+const fallbackMeta = { icon: Wrench, color: "text-muted-foreground" };
 
 export function ToolCallChip({ part }: { part: ToolCallPart }) {
   const [expanded, setExpanded] = useState(false);
-  const meta = toolMeta[part.tool];
+  const meta = toolMeta[part.tool as ToolName] ?? fallbackMeta;
   const Icon = meta.icon;
+  const expandable = part.status === "done" && part.result.length > 0;
 
   return (
     <Surface muted className="my-1.5 overflow-hidden animate-fade-up">
       <button
         type="button"
-        onClick={() => part.status === "done" && setExpanded(!expanded)}
+        onClick={() => expandable && setExpanded(!expanded)}
         className="w-full flex items-center gap-2.5 px-3 py-2 text-left"
       >
         <span className={cn("flex items-center justify-center shrink-0", meta.color)}>
@@ -50,23 +65,27 @@ export function ToolCallChip({ part }: { part: ToolCallPart }) {
               part.label
             )}
           </span>
-          <span className="block text-[11px] text-muted-foreground font-mono truncate">
-            {part.args}
-          </span>
+          {part.args ? (
+            <span className="block text-[11px] text-muted-foreground font-mono truncate">
+              {part.args}
+            </span>
+          ) : null}
         </span>
         {part.status === "done" && (
           <>
             <Check className="h-3.5 w-3.5 text-success shrink-0" />
-            <ChevronDown
-              className={cn(
-                "h-3.5 w-3.5 text-faint shrink-0 transition-transform",
-                expanded && "rotate-180",
-              )}
-            />
+            {expandable && (
+              <ChevronDown
+                className={cn(
+                  "h-3.5 w-3.5 text-faint shrink-0 transition-transform",
+                  expanded && "rotate-180",
+                )}
+              />
+            )}
           </>
         )}
       </button>
-      {expanded && part.status === "done" && (
+      {expanded && expandable && (
         <div className="px-3 pb-2.5 pt-0.5 text-xs text-muted-foreground border-t border-border/60 mt-0.5">
           <p className="pt-2">{part.result}</p>
         </div>

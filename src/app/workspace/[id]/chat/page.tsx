@@ -38,8 +38,10 @@ import {
   getConversationMessages,
   listConversations,
   type CopilotAttachedArtifact,
+  type CopilotToolCall,
   type CopilotVisualization,
 } from "@/lib/api/copilot";
+import { ToolCallChip } from "@/components/ai/tool-call-chip";
 import {
   InteractiveWidget,
   widgetRegistry,
@@ -70,6 +72,8 @@ interface ChatMessage {
   visualizations?: CopilotVisualization[];
   /** Live tool activity ("Searching your materials") while the bot works. */
   status?: string;
+  /** Tools the bot ran for this reply (persisted with the message). */
+  toolCalls?: CopilotToolCall[];
 }
 
 const AVAILABLE_WIDGETS = (Object.keys(widgetRegistry) as WidgetId[]).map(
@@ -300,6 +304,7 @@ export default function WorkspaceChatPage() {
               text: m.content,
               widgets: m.widgets,
               visualizations: m.visualizations,
+              toolCalls: m.toolCalls,
             })),
           );
         }
@@ -499,6 +504,7 @@ export default function WorkspaceChatPage() {
             artifacts: result.attachedArtifacts ?? [],
             widgets: result.widgets,
             visualizations: result.visualizations,
+            toolCalls: result.toolCalls,
             status: undefined,
           };
         return next;
@@ -815,6 +821,24 @@ export default function WorkspaceChatPage() {
                     : "rounded-2xl rounded-bl-md border border-border bg-card",
                 )}
               >
+                {m.role === "bot" && (m.toolCalls?.length ?? 0) > 0 && (
+                  <div className="mb-1.5">
+                    {(m.toolCalls ?? []).map((tc, j) => (
+                      <ToolCallChip
+                        key={j}
+                        part={{
+                          kind: "tool",
+                          id: `tool-${i}-${j}`,
+                          tool: tc.name,
+                          label: tc.label,
+                          args: tc.detail,
+                          result: "",
+                          status: "done",
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
                 {m.role === "bot" && m.text ? (
                   <MarkdownText text={m.text} />
                 ) : null}

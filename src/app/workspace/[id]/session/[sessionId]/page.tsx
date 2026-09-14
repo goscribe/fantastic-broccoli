@@ -954,6 +954,11 @@ export default function SessionDetailPage() {
         onClose={() => setCopilotOpen(false)}
         workspaceId={workspaceId}
         studySessionId={sessionId}
+        activity={
+          activeActivity && !activeActivity.id.startsWith("bank-")
+            ? { activityId: activeActivity.id }
+            : undefined
+        }
         context={`Session: ${session.title}${
           activeActivity
             ? `\nThe learner is currently on activity "${activeActivity.title}" (${activeActivity.type}).`
