@@ -5,11 +5,11 @@
 import { registerTranslations } from "@/lib/i18n";
 
 const english = {
-    "set.displayName": "Display name",
-    "set.displayNameHint": "Shown to classmates in shared workspaces.",
-    "set.email": "Email",
-    "set.emailHint": "Used for sign-in — contact support to change it.",
-    "set.tokensTitle": "Tokens",
+  "set.displayName": "Display name",
+  "set.displayNameHint": "Shown to classmates in shared workspaces.",
+  "set.email": "Email",
+  "set.emailHint": "Used for sign-in — contact support to change it.",
+  "set.tokensTitle": "Tokens",
   "set.subtitle": "Manage your account, plan, and usage.",
   "set.accountHint": "Your profile as classmates see it in shared workspaces.",
   "set.change": "Change",
@@ -24,8 +24,24 @@ const english = {
   "set.storageAmount": "{amount} storage",
   "set.tokensPerMonth": "{count} tokens / month",
   "set.yourPlan": "Your plan",
-  "set.downgrade": "Downgrade",
+  "set.downgrade": "Downgrade to free",
+  "set.cancelTrial": "Cancel trial",
   "set.switchTo": "Switch to {name}",
+  "set.endsOn": "Ends {date} — you won't be charged again.",
+  "set.startsOn": "Starts {date}",
+  "set.keepPlan": "Keep my plan",
+  "set.cancelTrialTitle": "Cancel your free trial?",
+  "set.cancelTrialBody":
+    "Your {plan} trial ends on {date}. Cancel now and your card is never charged — you keep {plan} until then, and move to the free plan after.",
+  "set.downgradeTitle": "Downgrade to free?",
+  "set.downgradeBody":
+    "Your {plan} plan runs until {date}. You keep everything until then, won't be billed again, and move to the free plan after.",
+  "set.confirmCancelTrial": "Cancel trial, don't charge me",
+  "set.confirmDowngrade": "Downgrade at period end",
+  "set.cancelling": "Cancelling…",
+  "set.trialCancelled": "Trial cancelled — no charge. Free plan starts {date}.",
+  "set.planCancelled": "Plan cancelled — free plan starts {date}.",
+  "set.planKept": "Your plan will continue.",
   "set.usageHint": "What you've used on the {plan} plan this cycle.",
   "set.storage": "Storage",
   "set.tokensHint":
@@ -54,9 +70,11 @@ const english = {
 registerTranslations(english, {
   es: {
     "set.displayName": "Nombre para mostrar",
-    "set.displayNameHint": "Visible para tus compañeros en espacios compartidos.",
+    "set.displayNameHint":
+      "Visible para tus compañeros en espacios compartidos.",
     "set.email": "Correo electrónico",
-    "set.emailHint": "Se usa para iniciar sesión — contacta con soporte para cambiarlo.",
+    "set.emailHint":
+      "Se usa para iniciar sesión — contacta con soporte para cambiarlo.",
     "set.tokensTitle": "Tokens",
     "set.subtitle": "Gestiona tu cuenta, plan y uso.",
     "set.accountHint":
@@ -73,8 +91,25 @@ registerTranslations(english, {
     "set.storageAmount": "{amount} de almacenamiento",
     "set.tokensPerMonth": "{count} tokens / mes",
     "set.yourPlan": "Tu plan",
-    "set.downgrade": "Bajar de plan",
+    "set.downgrade": "Bajar al plan gratis",
+    "set.cancelTrial": "Cancelar prueba",
     "set.switchTo": "Cambiar a {name}",
+    "set.endsOn": "Termina el {date} — no se te cobrará de nuevo.",
+    "set.startsOn": "Empieza el {date}",
+    "set.keepPlan": "Mantener mi plan",
+    "set.cancelTrialTitle": "¿Cancelar tu prueba gratis?",
+    "set.cancelTrialBody":
+      "Tu prueba de {plan} termina el {date}. Si cancelas ahora, nunca se cobrará tu tarjeta — conservas {plan} hasta entonces y luego pasas al plan gratis.",
+    "set.downgradeTitle": "¿Bajar al plan gratis?",
+    "set.downgradeBody":
+      "Tu plan {plan} sigue hasta el {date}. Conservas todo hasta entonces, no se te volverá a cobrar y luego pasas al plan gratis.",
+    "set.confirmCancelTrial": "Cancelar prueba, no cobrarme",
+    "set.confirmDowngrade": "Bajar de plan al final del periodo",
+    "set.cancelling": "Cancelando…",
+    "set.trialCancelled":
+      "Prueba cancelada — sin cargo. El plan gratis empieza el {date}.",
+    "set.planCancelled": "Plan cancelado — el plan gratis empieza el {date}.",
+    "set.planKept": "Tu plan continuará.",
     "set.usageHint": "Lo que has usado en el plan {plan} este ciclo.",
     "set.storage": "Almacenamiento",
     "set.tokensHint":
@@ -98,9 +133,11 @@ registerTranslations(english, {
   },
   fr: {
     "set.displayName": "Nom affiché",
-    "set.displayNameHint": "Visible par vos camarades dans les espaces partagés.",
+    "set.displayNameHint":
+      "Visible par vos camarades dans les espaces partagés.",
     "set.email": "E-mail",
-    "set.emailHint": "Utilisé pour la connexion — contactez le support pour le changer.",
+    "set.emailHint":
+      "Utilisé pour la connexion — contactez le support pour le changer.",
     "set.tokensTitle": "Jetons",
     "set.subtitle": "Gérez votre compte, votre forfait et votre utilisation.",
     "set.accountHint":
@@ -117,16 +154,33 @@ registerTranslations(english, {
     "set.storageAmount": "{amount} de stockage",
     "set.tokensPerMonth": "{count} jetons / mois",
     "set.yourPlan": "Votre forfait",
-    "set.downgrade": "Rétrograder",
+    "set.downgrade": "Passer au forfait gratuit",
+    "set.cancelTrial": "Annuler l'essai",
     "set.switchTo": "Passer à {name}",
-    "set.usageHint":
-      "Ce que vous avez utilisé sur le forfait {plan} ce cycle.",
+    "set.endsOn": "Se termine le {date} — vous ne serez plus facturé.",
+    "set.startsOn": "Commence le {date}",
+    "set.keepPlan": "Garder mon forfait",
+    "set.cancelTrialTitle": "Annuler votre essai gratuit ?",
+    "set.cancelTrialBody":
+      "Votre essai {plan} se termine le {date}. Annulez maintenant et votre carte ne sera jamais débitée — vous gardez {plan} jusque-là, puis passez au forfait gratuit.",
+    "set.downgradeTitle": "Passer au forfait gratuit ?",
+    "set.downgradeBody":
+      "Votre forfait {plan} court jusqu'au {date}. Vous gardez tout jusque-là, ne serez plus facturé, puis passez au forfait gratuit.",
+    "set.confirmCancelTrial": "Annuler l'essai, ne pas me facturer",
+    "set.confirmDowngrade": "Rétrograder à la fin de la période",
+    "set.cancelling": "Annulation…",
+    "set.trialCancelled":
+      "Essai annulé — aucun débit. Forfait gratuit à partir du {date}.",
+    "set.planCancelled": "Forfait annulé — forfait gratuit à partir du {date}.",
+    "set.planKept": "Votre forfait continue.",
+    "set.usageHint": "Ce que vous avez utilisé sur le forfait {plan} ce cycle.",
     "set.storage": "Stockage",
     "set.tokensHint":
       "Les jetons paient la génération par IA. Les jetons inutilisés sont reportés — votre solde ne se réinitialise jamais.",
     "set.balance": "Solde",
     "set.tokensUnit": "jetons",
-    "set.monthlyAllowance": "+{count} ajoutés chaque mois avec le forfait {plan}",
+    "set.monthlyAllowance":
+      "+{count} ajoutés chaque mois avec le forfait {plan}",
     "set.whatThingsCost": "Prix des actions",
     "set.costStudySession": "Session d'étude",
     "set.costUpload": "Téléversement et analyse de matériel",
@@ -143,9 +197,11 @@ registerTranslations(english, {
   },
   de: {
     "set.displayName": "Anzeigename",
-    "set.displayNameHint": "Für Mitschüler in geteilten Arbeitsbereichen sichtbar.",
+    "set.displayNameHint":
+      "Für Mitschüler in geteilten Arbeitsbereichen sichtbar.",
     "set.email": "E-Mail",
-    "set.emailHint": "Wird zur Anmeldung verwendet — zum Ändern den Support kontaktieren.",
+    "set.emailHint":
+      "Wird zur Anmeldung verwendet — zum Ändern den Support kontaktieren.",
     "set.tokensTitle": "Tokens",
     "set.subtitle": "Verwalte dein Konto, deinen Tarif und deine Nutzung.",
     "set.accountHint":
@@ -162,10 +218,26 @@ registerTranslations(english, {
     "set.storageAmount": "{amount} Speicher",
     "set.tokensPerMonth": "{count} Tokens / Monat",
     "set.yourPlan": "Dein Tarif",
-    "set.downgrade": "Herabstufen",
+    "set.downgrade": "Zum Gratis-Tarif wechseln",
+    "set.cancelTrial": "Testphase beenden",
     "set.switchTo": "Zu {name} wechseln",
-    "set.usageHint":
-      "Was du in diesem Zyklus im Tarif {plan} verbraucht hast.",
+    "set.endsOn": "Endet am {date} — es wird nichts mehr abgebucht.",
+    "set.startsOn": "Beginnt am {date}",
+    "set.keepPlan": "Tarif behalten",
+    "set.cancelTrialTitle": "Kostenlose Testphase beenden?",
+    "set.cancelTrialBody":
+      "Deine {plan}-Testphase endet am {date}. Wenn du jetzt kündigst, wird deine Karte nie belastet — du behältst {plan} bis dahin und wechselst danach zum Gratis-Tarif.",
+    "set.downgradeTitle": "Zum Gratis-Tarif wechseln?",
+    "set.downgradeBody":
+      "Dein {plan}-Tarif läuft bis zum {date}. Bis dahin behältst du alles, es wird nichts mehr abgebucht, danach wechselst du zum Gratis-Tarif.",
+    "set.confirmCancelTrial": "Testphase beenden, nichts abbuchen",
+    "set.confirmDowngrade": "Zum Periodenende herabstufen",
+    "set.cancelling": "Wird gekündigt…",
+    "set.trialCancelled":
+      "Testphase beendet — keine Abbuchung. Gratis-Tarif ab {date}.",
+    "set.planCancelled": "Tarif gekündigt — Gratis-Tarif ab {date}.",
+    "set.planKept": "Dein Tarif läuft weiter.",
+    "set.usageHint": "Was du in diesem Zyklus im Tarif {plan} verbraucht hast.",
     "set.storage": "Speicher",
     "set.tokensHint":
       "Tokens bezahlen die KI-Generierung. Ungenutzte Tokens bleiben erhalten — dein Guthaben wird nie zurückgesetzt.",
@@ -210,7 +282,8 @@ registerTranslations(english, {
     "set.switchTo": "切换到 {name}",
     "set.usageHint": "本周期你在 {plan} 套餐中的用量。",
     "set.storage": "存储",
-    "set.tokensHint": "代币用于支付 AI 生成。未用完的代币会累积——余额永不清零。",
+    "set.tokensHint":
+      "代币用于支付 AI 生成。未用完的代币会累积——余额永不清零。",
     "set.balance": "余额",
     "set.tokensUnit": "代币",
     "set.monthlyAllowance": "{plan} 套餐每月新增 {count} 代币",
@@ -276,7 +349,8 @@ registerTranslations(english, {
     "set.displayName": "Display name",
     "set.displayNameHint": "Nakikita ng mga kaklase sa mga shared workspace.",
     "set.email": "Email",
-    "set.emailHint": "Ginagamit sa pag-sign in — makipag-ugnayan sa support para palitan.",
+    "set.emailHint":
+      "Ginagamit sa pag-sign in — makipag-ugnayan sa support para palitan.",
     "set.tokensTitle": "Mga Token",
     "set.subtitle": "Pamahalaan ang iyong account, plan, at paggamit.",
     "set.accountHint":
@@ -295,8 +369,7 @@ registerTranslations(english, {
     "set.yourPlan": "Ang plan mo",
     "set.downgrade": "Mag-downgrade",
     "set.switchTo": "Lumipat sa {name}",
-    "set.usageHint":
-      "Ang nagamit mo sa {plan} plan ngayong cycle.",
+    "set.usageHint": "Ang nagamit mo sa {plan} plan ngayong cycle.",
     "set.storage": "Storage",
     "set.tokensHint":
       "Ang mga token ang nagbabayad sa AI generation. Ang hindi nagamit ay naiipon — hindi nagre-reset ang balanse mo.",

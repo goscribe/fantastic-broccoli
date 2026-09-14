@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -16,6 +17,7 @@ import {
   type PlanOption,
 } from "@/lib/api/account";
 import { useAuthUser } from "@/lib/api/auth";
+import { toastError } from "@/lib/toast";
 
 function PlanCard({
   plan,
@@ -29,6 +31,7 @@ function PlanCard({
   /** Free-trial length offered on this paid plan; 0 when unavailable. */
   trialDays: number;
 }) {
+  const router = useRouter();
   const isCurrent = plan.isActive;
   const trial = !isCurrent && plan.priceDollars > 0 && trialDays > 0;
   return (
@@ -93,20 +96,28 @@ function PlanCard({
         )}
       </ul>
       <div className="mt-5">
-        <Button
-          className="w-full"
-          variant={isCurrent ? "outline" : "primary"}
-          disabled={isCurrent || switching}
-          onClick={() => onSelect(plan.id)}
-        >
-          {isCurrent
-            ? "Your plan"
-            : plan.priceDollars === 0
-              ? "Switch to Free"
+        {!isCurrent && plan.priceDollars === 0 ? (
+          <Button
+            className="w-full"
+            variant="outline"
+            onClick={() => router.push("/settings#plan")}
+          >
+            Downgrade to Free
+          </Button>
+        ) : (
+          <Button
+            className="w-full"
+            variant={isCurrent ? "outline" : "primary"}
+            disabled={isCurrent || switching}
+            onClick={() => onSelect(plan.id)}
+          >
+            {isCurrent
+              ? "Your plan"
               : trial
                 ? `Start ${trialDays}-day free trial`
                 : `Switch to ${plan.name}`}
-        </Button>
+          </Button>
+        )}
       </div>
     </div>
   );
@@ -141,6 +152,8 @@ export default function PricingPage() {
     setSwitching(true);
     try {
       await switchPlan(planId);
+    } catch (err) {
+      toastError(err, "Couldn't open checkout");
     } finally {
       setSwitching(false);
     }

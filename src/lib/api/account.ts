@@ -33,7 +33,11 @@ export async function fetchAccountSummary(): Promise<AccountSummary> {
 /** Free-plan resource caps (see server FREE_TIER_CAPS); `caps` is null on a paid plan. */
 export interface PlanCaps {
   paid: boolean;
-  caps: { workspaces: number; studySessions: number; flashcardTests: number } | null;
+  caps: {
+    workspaces: number;
+    studySessions: number;
+    flashcardTests: number;
+  } | null;
   used: { workspaces: number; studySessions: number; flashcardTests: number };
   /** Free-trial length offered at checkout; 0 once the account has used it. */
   trialDays: number;
@@ -53,7 +57,9 @@ export function fetchPlanCaps(): Promise<PlanCaps> {
 export const PLAN_LIMIT_ERROR_PREFIX = "Free plan limit reached";
 
 export function isPlanLimitError(err: unknown): err is Error {
-  return err instanceof Error && err.message.startsWith(PLAN_LIMIT_ERROR_PREFIX);
+  return (
+    err instanceof Error && err.message.startsWith(PLAN_LIMIT_ERROR_PREFIX)
+  );
 }
 
 /** Fired on `window` when a request is refused by a free-plan cap; the upgrade dialog listens. */
@@ -83,10 +89,7 @@ export interface TokenOverview {
 }
 
 export type TokenTransactionType =
-  | "MONTHLY_GRANT"
-  | "TOPUP"
-  | "SPEND"
-  | "ADJUSTMENT";
+  "MONTHLY_GRANT" | "TOPUP" | "SPEND" | "ADJUSTMENT";
 
 export interface TokenLedgerEntry {
   id: string;
@@ -141,24 +144,64 @@ export interface PlanOption {
 
 export async function fetchPlanOptions(): Promise<PlanOption[]> {
   const plans = await api.payment.getPlans.query();
-  return plans
-    .map((plan) => ({
-      id: plan.id,
-      name: plan.name,
-      priceDollars: plan.price,
-      description: plan.description ?? "",
-      storageLimitBytes: Number(plan.limit?.maxStorageBytes ?? 0),
-      // `monthlyTokens` is newer than the published @goscribe/server types.
-      monthlyTokens:
-        (plan as unknown as { monthlyTokens?: number }).monthlyTokens ?? 0,
-      isActive: plan.isActive,
-    }));
+  return plans.map((plan) => ({
+    id: plan.id,
+    name: plan.name,
+    priceDollars: plan.price,
+    description: plan.description ?? "",
+    storageLimitBytes: Number(plan.limit?.maxStorageBytes ?? 0),
+    // `monthlyTokens` is newer than the published @goscribe/server types.
+    monthlyTokens:
+      (plan as unknown as { monthlyTokens?: number }).monthlyTokens ?? 0,
+    isActive: plan.isActive,
+  }));
 }
 
-/** Redirects to Stripe checkout for the chosen plan. */
+/** Redirects to Stripe checkout for the chosen paid plan. */
 export async function switchPlan(planId: string): Promise<void> {
   const session = await api.payment.createCheckoutSession.mutate({ planId });
   if (session.url) window.location.href = session.url;
+}
+
+/** The learner's paid subscription; null on the free tier. */
+export interface CurrentSubscription {
+  id: string;
+  planId: string;
+  planName: string;
+  status: string;
+  isTrial: boolean;
+  /** When the trial converts / the plan renews (or ends, if cancelling). */
+  currentPeriodEnd: Date | string;
+  /** Set when the subscription is scheduled to end at the period end. */
+  cancelAt: Date | string | null;
+}
+
+export function fetchCurrentSubscription(): Promise<CurrentSubscription | null> {
+  return rpc<CurrentSubscription | null>(
+    "payment.getCurrentSubscription",
+    "query",
+    undefined,
+  );
+}
+
+/**
+ * Downgrade to free: the paid plan (or trial) ends when the current period
+ * does; nothing further is charged and access continues until then.
+ */
+export function cancelSubscription(): Promise<CurrentSubscription> {
+  return rpc<CurrentSubscription>(
+    "payment.cancelSubscription",
+    "mutation",
+    undefined,
+  );
+}
+
+export function resumeSubscription(): Promise<CurrentSubscription> {
+  return rpc<CurrentSubscription>(
+    "payment.resumeSubscription",
+    "mutation",
+    undefined,
+  );
 }
 
 export async function updateProfile(name: string): Promise<void> {
