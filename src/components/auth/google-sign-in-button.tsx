@@ -2,6 +2,7 @@
 
 import { apiUrl } from "@/lib/api/config";
 import { getSignupAttribution } from "@/lib/attribution";
+import { markPendingOAuthSignup, SIGNUP_FLAG_PARAM } from "@/lib/gtag";
 
 /** base64url-encodes the stored attribution for the OAuth handoff. */
 function attributionParam(): string {
@@ -42,15 +43,39 @@ function GoogleLogo() {
   );
 }
 
+function safeRedirectPath(): string {
+  const target = new URLSearchParams(window.location.search).get("redirect");
+  return target && target.startsWith("/") && !target.startsWith("//")
+    ? target
+    : "/";
+}
+
+/** Append `?signup=1` so the landing page can report a new-account conversion. */
+function withSignupFlag(redirect: string): string {
+  const url = new URL(redirect, window.location.origin);
+  url.searchParams.set(SIGNUP_FLAG_PARAM, "1");
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
 /**
  * Navigates to the goscribe/server Google OAuth flow; on success the server
  * sets the auth cookie and redirects back to `redirect` on the frontend.
+ *
+ * Pass `newAccount` on the signup page so a newly created Google account
+ * reports the Ads conversion even if the server does not add `?signup=1`.
  */
-export function GoogleSignInButton({ label }: { label: string }) {
+export function GoogleSignInButton({
+  label,
+  newAccount = false,
+}: {
+  label: string;
+  newAccount?: boolean;
+}) {
   const start = () => {
-    const target = new URLSearchParams(window.location.search).get("redirect");
-    const redirect =
-      target && target.startsWith("/") && !target.startsWith("//") ? target : "/";
+    const redirect = newAccount
+      ? withSignupFlag(safeRedirectPath())
+      : safeRedirectPath();
+    if (newAccount) markPendingOAuthSignup();
     window.location.href = `${apiUrl}/auth/google?redirect=${encodeURIComponent(redirect)}${attributionParam()}`;
   };
 

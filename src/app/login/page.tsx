@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ScribeLogo } from "@/components/graphics/logo";
 import { signIn } from "@/lib/api/auth";
+import { clearPendingOAuthSignup } from "@/lib/gtag";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
 import {
@@ -29,6 +30,10 @@ const inputClasses =
 export default function LoginPage() {
   const router = useRouter();
   const { t } = useI18n();
+  // Abandoned / failed Google OAuth must not convert on a later existing-user login.
+  useEffect(() => {
+    clearPendingOAuthSignup();
+  }, []);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);

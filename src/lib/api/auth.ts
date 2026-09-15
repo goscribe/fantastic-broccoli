@@ -5,6 +5,7 @@ import { api } from "./trpc-client";
 import { rpc } from "./study-session";
 import { apiUrl } from "./config";
 import { getSignupAttribution } from "@/lib/attribution";
+import { reportPendingOAuthSignupConversion } from "@/lib/gtag";
 import { syncUiLocale } from "@/lib/i18n";
 
 export interface AuthUser {
@@ -126,6 +127,7 @@ export function useAuthUser(): { user: AuthUser | null; loading: boolean } {
         if (u) {
           setUser(u);
           setLoading(false);
+          reportPendingOAuthSignupConversion();
         } else if (!redirectUnauthenticated()) {
           setLoading(false);
         }
