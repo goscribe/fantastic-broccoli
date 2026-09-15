@@ -152,7 +152,7 @@ export default function SignupPage() {
 
         <AuthDivider />
 
-        <GoogleSignInButton label={t("misc.signUpWithGoogle")} />
+        <GoogleSignInButton newAccount label={t("misc.signUpWithGoogle")} />
 
         <p className="text-center text-sm text-muted-foreground">
           {t("misc.alreadyHaveAccount")}{" "}
