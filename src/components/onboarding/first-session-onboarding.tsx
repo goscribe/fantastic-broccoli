@@ -137,16 +137,15 @@ function PlanUpsell() {
   if (plans.length === 0) return null;
 
   return (
-    <div className="mt-6 rounded-xl border border-accent/25 bg-accent-soft/30 p-4 text-left">
-      <p className="flex items-center gap-1.5 text-[13px] font-semibold">
-        <Zap className="h-3.5 w-3.5 text-accent" />
-        Study more with a Scribe plan
+    <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border pt-3 text-xs">
+      <p className="flex min-w-0 flex-1 items-center gap-1.5 text-muted-foreground">
+        <Zap className="h-3.5 w-3.5 shrink-0 text-accent" />
+        <span className="truncate">
+          <span className="font-semibold text-foreground">More tokens from day one</span>
+          {" "}with a Scribe plan
+        </span>
       </p>
-      <p className="mt-1 text-xs text-muted-foreground">
-        More monthly tokens for study sessions, flashcards, and worksheets —
-        starting from day one.
-      </p>
-      <div className="mt-3 grid gap-2 sm:grid-cols-2">
+      <div className="flex shrink-0 gap-1.5">
         {plans.map((plan) => (
           <button
             key={plan.id}
@@ -159,16 +158,14 @@ function PlanUpsell() {
                 toastError(err, "Could not start checkout");
               });
             }}
-            className="rounded-lg border border-border bg-card px-3 py-2.5 text-left transition-colors hover:border-accent disabled:opacity-60"
+            className="flex items-center gap-1 rounded-md border border-border px-2 py-1 font-medium capitalize transition-colors hover:border-accent disabled:opacity-60"
           >
-            <span className="flex items-center justify-between text-[13px] font-semibold capitalize">
-              {plan.name}
-              {upgrading === plan.id && (
-                <Loader2 className="h-3.5 w-3.5 animate-spin text-accent" />
-              )}
-            </span>
-            <span className="mt-0.5 block text-xs text-muted-foreground">
-              ${plan.priceDollars}/mo · {plan.monthlyTokens} tokens
+            {upgrading === plan.id ? (
+              <Loader2 className="h-3 w-3 animate-spin text-accent" />
+            ) : null}
+            {plan.name}
+            <span className="font-normal text-muted-foreground">
+              ${plan.priceDollars}/mo
             </span>
           </button>
         ))}
@@ -347,49 +344,70 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   }, []);
 
   if (phase === "building") {
+    const buildPercent = Math.round(
+      (Math.min(stepIndex, BUILD_STEPS.length) / BUILD_STEPS.length) * 100,
+    );
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
-        <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
-          <h1 className="text-2xl font-bold tracking-tight">
-            Building your study session…
-          </h1>
-          <p className="mt-2 text-sm text-muted-foreground">{title}</p>
-          <div className="mt-8 space-y-3 text-left">
-            {BUILD_STEPS.map((label, i) => (
+        <div className="max-h-full w-full max-w-lg overflow-y-auto rounded-2xl border border-border bg-card p-5 animate-fade-up">
+          <div className="flex items-center gap-3">
+            <Loader2 className="h-5 w-5 shrink-0 animate-spin text-accent" />
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-semibold">
+                Building &ldquo;{title}&rdquo;…
+              </p>
+              <p className="mt-0.5 text-xs text-muted-foreground">
+                This can take a couple of minutes for large files — hang tight.
+              </p>
+            </div>
+          </div>
+          <div className="mt-4">
+            <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+              <span className="min-w-0 truncate" aria-live="polite">
+                {BUILD_STEPS[Math.min(stepIndex, BUILD_STEPS.length - 1)]}
+              </span>
+              <span className="ml-3 shrink-0 tabular-nums">{buildPercent}%</span>
+            </div>
+            <div
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={buildPercent}
+              className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-border"
+            >
               <div
-                key={label}
-                className={cn(
-                  "flex items-center gap-3 rounded-xl border px-4 py-3",
-                  i < stepIndex
-                    ? "border-accent/25 bg-accent-soft/40"
-                    : i === stepIndex
-                      ? "border-border bg-card"
-                      : "border-border/60 bg-card/50",
-                )}
-              >
-                {i < stepIndex ? (
-                  <Check className="h-4 w-4 text-accent shrink-0" />
-                ) : i === stepIndex ? (
-                  <Loader2 className="h-4 w-4 animate-spin text-accent shrink-0" />
-                ) : (
-                  <Circle className="h-3 w-3 text-faint shrink-0" />
-                )}
-                <span
-                  className={cn(
-                    "text-sm font-medium",
-                    i > stepIndex && "text-faint",
-                  )}
+                className="h-full rounded-full bg-accent transition-[width] duration-500"
+                style={{ width: `${buildPercent}%` }}
+              />
+            </div>
+            <ol className="mt-2 flex items-center gap-1.5" aria-label="Build steps">
+              {BUILD_STEPS.map((label, i) => (
+                <li
+                  key={label}
+                  title={label}
+                  className="flex min-w-0 flex-1 items-center gap-1 text-[10px] font-medium"
                 >
-                  {label}
-                </span>
-              </div>
-            ))}
+                  {i < stepIndex ? (
+                    <Check className="h-3 w-3 shrink-0 text-accent" />
+                  ) : i === stepIndex ? (
+                    <span className="h-3 w-3 shrink-0 rounded-full border-[1.5px] border-accent border-t-transparent animate-spin" />
+                  ) : (
+                    <Circle className="mx-0.5 h-1.5 w-1.5 shrink-0 fill-border-strong text-border-strong" />
+                  )}
+                  <span
+                    className={cn(
+                      "hidden truncate sm:inline",
+                      i <= stepIndex ? "text-foreground" : "text-faint",
+                    )}
+                  >
+                    {label}
+                  </span>
+                </li>
+              ))}
+            </ol>
           </div>
           {warmupWorkspaceId && <WarmupQuiz workspaceId={warmupWorkspaceId} />}
           <PlanUpsell />
-          <p className="mt-6 text-xs text-muted-foreground">
-            This can take a couple of minutes for large files — hang tight.
-          </p>
         </div>
       </div>
     );
