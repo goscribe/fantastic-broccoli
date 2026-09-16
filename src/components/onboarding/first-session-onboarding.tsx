@@ -350,14 +350,6 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
         <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
-          <video
-            src="/illustrations/loading.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="pointer-events-none mx-auto mb-4 h-36 w-auto select-none rounded-xl"
-          />
           <h1 className="text-2xl font-bold tracking-tight">
             Building your study session…
           </h1>

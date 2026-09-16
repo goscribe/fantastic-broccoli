@@ -65,6 +65,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock,
+  Loader2,
   SkipForward,
   MessageSquare,
   RefreshCw,
@@ -1280,14 +1281,7 @@ function GeneratingPlanCard({
       <div className="w-full max-w-lg">
         <div className="rounded-2xl border border-border bg-card p-5">
           <div className="flex items-center gap-3">
-            <video
-              src="/illustrations/loading.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="pointer-events-none h-14 w-14 shrink-0 select-none rounded-lg object-cover"
-            />
+            <Loader2 className="h-5 w-5 shrink-0 animate-spin text-accent" />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-semibold">
                 {t("session.building")} &ldquo;{title}&rdquo;…
