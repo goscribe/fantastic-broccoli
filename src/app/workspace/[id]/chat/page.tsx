@@ -510,7 +510,7 @@ export default function WorkspaceChatPage() {
           };
         return next;
       });
-      if (result.createdSessionId) {
+      if (result.createdSessionId || result.sessionModified) {
         queryClient.invalidateQueries({
           queryKey: ["study-sessions", workspaceId],
         });
