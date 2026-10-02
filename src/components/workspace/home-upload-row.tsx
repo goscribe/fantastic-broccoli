@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { Loader2, Upload } from "lucide-react";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { startWorkspaceFromUploads } from "@/lib/start-from-uploads";
+import type { UploadMethod } from "@/lib/api/materials";
+import { ctaProps } from "@/lib/analytics";
+import { UploadFileInput } from "@/components/ui/upload-file-input";
 import { toastError } from "@/lib/toast";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
@@ -18,11 +21,14 @@ export function HomeUploadRow() {
   const [busy, setBusy] = useState(false);
   const [dragOver, setDragOver] = useState(false);
 
-  const run = async (files: File[]) => {
+  const run = async (files: File[], method: UploadMethod) => {
     if (files.length === 0 || busy) return;
     setBusy(true);
     try {
-      const { workspaceId, session } = await startWorkspaceFromUploads(files);
+      const { workspaceId, session } = await startWorkspaceFromUploads(files, {
+        source: "home_upload_row",
+        method,
+      });
       if (session) {
         router.push(`/workspace/${workspaceId}/session/${session.id}`);
       } else {
@@ -36,21 +42,22 @@ export function HomeUploadRow() {
 
   return (
     <>
-      <input
+      <UploadFileInput
         ref={inputRef}
-        type="file"
+        uploadSource="home_upload_row"
         multiple
         accept={UPLOAD_ACCEPT}
         className="hidden"
         onChange={(e) => {
           const files = Array.from(e.target.files ?? []);
           e.target.value = "";
-          void run(files);
+          void run(files, "picker");
         }}
       />
       <button
         type="button"
         disabled={busy}
+        {...ctaProps("home_upload_notes", "secondary")}
         onClick={() => inputRef.current?.click()}
         onDragOver={(e) => {
           e.preventDefault();
@@ -60,7 +67,7 @@ export function HomeUploadRow() {
         onDrop={(e) => {
           e.preventDefault();
           setDragOver(false);
-          void run(Array.from(e.dataTransfer.files ?? []));
+          void run(Array.from(e.dataTransfer.files ?? []), "drop");
         }}
         className={cn(
           "flex w-full items-center gap-3 border-t border-border px-4 py-3 text-left transition-colors",
