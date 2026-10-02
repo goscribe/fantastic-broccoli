@@ -8,7 +8,11 @@ import {
   subscribeAnalysisProgress,
   uploadFiles,
   type AnalysisProgress,
+  type UploadMethod,
 } from "@/lib/api/materials";
+import { createWorkspaceForUpload } from "@/lib/start-from-uploads";
+import { ctaProps, errorMessage, screenProps, track } from "@/lib/analytics";
+import { UploadFileInput } from "@/components/ui/upload-file-input";
 import { createStudySession } from "@/lib/api/study";
 import { refreshSession, resendVerification, useAuthUser } from "@/lib/api/auth";
 import {
@@ -151,6 +155,7 @@ function PlanUpsell() {
             key={plan.id}
             type="button"
             disabled={upgrading !== null}
+            {...ctaProps("onboarding_plan_upsell", "tertiary")}
             onClick={() => {
               setUpgrading(plan.id);
               switchPlan(plan.id).catch((err) => {
@@ -266,6 +271,12 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
         }
       })
       .catch((err) => {
+        track("pack_generation_failed", {
+          source: "first_session_onboarding",
+          stage: "create_session",
+          workspace_id: workspaceId,
+          error: errorMessage(err),
+        });
         toastError(err, "Could not create your session");
         router.push(`/workspace/${workspaceId}/study`);
       });
@@ -310,6 +321,11 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
           router.push(`/workspace/${workspaceId}/study`);
         }
       } catch (err) {
+        track("pack_generation_failed", {
+          source: "first_session_onboarding_curriculum",
+          stage: "create_session",
+          error: errorMessage(err),
+        });
         startedRef.current = false;
         setPhase("upload");
         setError(toastError(err, "Could not create your session"));
@@ -318,22 +334,34 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
     [router],
   );
 
-  const start = useCallback(async (files: File[]) => {
+  const start = useCallback(async (files: File[], method: UploadMethod) => {
     if (files.length === 0 || startedRef.current) return;
     startedRef.current = true;
     setError(null);
     setPhase("building");
     setStepIndex(0);
+    const context = { source: "first_session_onboarding", method };
     try {
       const sessionTitle = fileBasename(files[0].name) || "My study space";
       setTitle(sessionTitle);
-      const workspaceId = await createWorkspace(sessionTitle);
-      if (!workspaceId) throw new Error("Could not create a workspace");
+      const workspaceId = await createWorkspaceForUpload(
+        sessionTitle,
+        files,
+        context,
+      );
       workspaceIdRef.current = workspaceId;
       setWarmupWorkspaceId(workspaceId);
 
-      const fileIds = await uploadFiles(workspaceId, files);
-      await analyzeFiles(workspaceId, fileIds);
+      const fileIds = await uploadFiles(workspaceId, files, context);
+      await analyzeFiles(workspaceId, fileIds).catch((err) => {
+        track("pack_generation_failed", {
+          source: "first_session_onboarding",
+          stage: "analyze",
+          workspace_id: workspaceId,
+          error: errorMessage(err),
+        });
+        throw err;
+      });
       writePendingBuild({ workspaceId, title: sessionTitle });
     } catch (err) {
       startedRef.current = false;
@@ -343,12 +371,34 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
     }
   }, []);
 
+  const step =
+    phase === "building"
+      ? "building"
+      : preset
+        ? presetSubject
+          ? "units"
+          : "subject"
+        : "upload";
+  const trackedStep = useRef<string | null>(null);
+  useEffect(() => {
+    if (trackedStep.current === step) return;
+    trackedStep.current = step;
+    track("screen_viewed", {
+      screen: "first_session_onboarding",
+      step,
+      resumed: step === "building" && !!pending,
+    });
+  }, [step, pending]);
+
   if (phase === "building") {
     const buildPercent = Math.round(
       (Math.min(stepIndex, BUILD_STEPS.length) / BUILD_STEPS.length) * 100,
     );
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
+      <div
+        {...screenProps("first_session_onboarding_building")}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
+      >
         <div className="max-h-full w-full max-w-lg overflow-y-auto rounded-2xl border border-border bg-card p-5 animate-fade-up">
           <div className="flex items-center gap-3">
             <Loader2 className="h-5 w-5 shrink-0 animate-spin text-accent" />
@@ -421,10 +471,14 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   if (preset) {
     const units = presetSubject ? unitsFor(preset.board, presetSubject) : [];
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
+      <div
+        {...screenProps(`first_session_onboarding_${presetSubject ? "units" : "subject"}`)}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
+      >
         <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
           <button
             type="button"
+            {...ctaProps("onboarding_back", "tertiary")}
             onClick={() => {
               if (presetSubject) {
                 setPresetSubject(null);
@@ -455,6 +509,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
                   <button
                     key={subject}
                     type="button"
+                    {...ctaProps("onboarding_pick_subject", "primary")}
                     onClick={() => {
                       if (unitsFor(preset.board, subject).length > 0) {
                         setPresetSubject(subject);
@@ -517,6 +572,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
               <div className="mt-4 flex items-center justify-between gap-2">
                 <button
                   type="button"
+                  {...ctaProps("onboarding_cover_everything", "secondary")}
                   onClick={() => void startFromPreset(preset, presetSubject, [])}
                   className="text-xs font-medium text-muted-foreground hover:text-foreground"
                 >
@@ -525,6 +581,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
                 <button
                   type="button"
                   disabled={presetUnits.length === 0}
+                  {...ctaProps("onboarding_generate_session", "primary")}
                   onClick={() =>
                     void startFromPreset(preset, presetSubject, presetUnits)
                   }
@@ -543,7 +600,10 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
+    <div
+      {...screenProps("first_session_onboarding_upload")}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
+    >
       <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
         <div className="relative -mx-6 -mt-6 mb-5 overflow-hidden rounded-t-2xl bg-gradient-to-br from-accent-soft via-accent-soft/40 to-transparent px-6 pt-6">
           <Image
@@ -572,7 +632,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
           onDrop={(e) => {
             e.preventDefault();
             setDragOver(false);
-            start(Array.from(e.dataTransfer.files));
+            start(Array.from(e.dataTransfer.files), "drop");
           }}
           className={cn(
             "mt-6 rounded-2xl border-2 border-dashed px-6 py-10 transition-colors",
@@ -588,6 +648,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
           <div className="mt-5 flex flex-col items-stretch gap-2 sm:flex-row sm:justify-center">
             <button
               type="button"
+              {...ctaProps("onboarding_take_photo", "primary")}
               onClick={() => cameraInputRef.current?.click()}
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground hover:opacity-90 transition-opacity sm:hidden"
             >
@@ -596,6 +657,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
             </button>
             <button
               type="button"
+              {...ctaProps("onboarding_upload_material", "primary")}
               onClick={() => fileInputRef.current?.click()}
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-sm font-semibold hover:border-accent/40 transition-colors sm:border-0 sm:bg-accent sm:py-2.5 sm:text-accent-foreground sm:hover:opacity-90"
             >
@@ -603,25 +665,26 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
               Upload material
             </button>
           </div>
-          <input
+          <UploadFileInput
             ref={fileInputRef}
-            type="file"
+            uploadSource="first_session_onboarding"
             multiple
             accept={UPLOAD_ACCEPT}
             className="hidden"
             onChange={(e) => {
-              start(Array.from(e.target.files ?? []));
+              start(Array.from(e.target.files ?? []), "picker");
               e.target.value = "";
             }}
           />
-          <input
+          <UploadFileInput
             ref={cameraInputRef}
-            type="file"
+            uploadSource="first_session_onboarding"
+            uploadMethod="camera"
             accept="image/*"
             capture="environment"
             className="hidden"
             onChange={(e) => {
-              start(Array.from(e.target.files ?? []));
+              start(Array.from(e.target.files ?? []), "camera");
               e.target.value = "";
             }}
           />
@@ -639,6 +702,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
             <button
               key={p.board}
               type="button"
+              {...ctaProps("onboarding_pick_curriculum", "secondary")}
               onClick={() => setPreset(p)}
               className="rounded-full border border-border px-4 py-2 text-sm font-semibold hover:border-accent hover:bg-accent-soft/40 transition-colors"
             >
@@ -665,6 +729,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
             <div className="mt-2 flex items-center gap-3">
               <button
                 type="button"
+                {...ctaProps("onboarding_verified_email", "tertiary")}
                 onClick={() => refreshSession().catch(() => {})}
                 className="text-xs font-semibold text-accent hover:underline"
               >
@@ -673,6 +738,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
               <button
                 type="button"
                 disabled={resendState !== "idle"}
+                {...ctaProps("onboarding_resend_verification", "tertiary")}
                 onClick={() => {
                   setResendState("sending");
                   resendVerification()
@@ -696,6 +762,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
 
         <button
           type="button"
+          {...ctaProps("onboarding_skip", "tertiary")}
           onClick={onSkip}
           className="mt-6 text-xs font-medium text-faint hover:text-foreground"
         >
