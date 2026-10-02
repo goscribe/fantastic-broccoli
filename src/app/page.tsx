@@ -41,6 +41,7 @@ import { HeroScene, ConfettiDots, Sticker } from "@/components/graphics/floating
 import { Banner } from "@/components/ui/banner";
 import { HomeUploadRow } from "@/components/workspace/home-upload-row";
 import { ReviewReadyStrip } from "@/components/session/review-ready-strip";
+import { PlannedSessionStrip } from "@/components/calendar/planned-session-strip";
 import { TrackedButton } from "@/components/ui/tracked-button";
 import { ctaProps } from "@/lib/analytics";
 
@@ -242,6 +243,7 @@ export default function HomePage() {
       </Banner>
       <main className="w-full flex-1 space-y-6 px-4 py-5 sm:space-y-8 sm:px-8 sm:py-8">
         <ReviewReadyStrip dueReview={dueReview} />
+        <PlannedSessionStrip />
         {/* Greeting */}
         <header className="flex flex-wrap items-end justify-between gap-4 animate-fade-up">
           <div>
