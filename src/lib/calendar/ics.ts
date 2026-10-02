@@ -359,13 +359,21 @@ function expandRRule(start: WallTime, rule: RRule, windowEndMs: number, windowSt
 
 const DEADLINE_STRONG =
   /\b(due|deadline|submit|submission|hand[- ]?in|turn[- ]?in|entrega|abgabe|rendu)\b/i;
-const EXAM_WORDS =
-  /\b(exams?|examen(es)?|midterms?|mid-terms?|finals?|quiz(zes)?|tests?|assessments?|mocks?|orals?|paper\s*\d|prüfung|klausur|parcial|prova|controle)\b/i;
+// Sessions *about* an exam ("Paper 2 prep seminar", "Midterm review") aren't the exam.
+const PREP_WORDS =
+  /\b(prep|preparation|revision|review(\s+session)?|study\s+(group|hall|session)|tutoring|office\s+hours)\b/i;
+const EXAM_STRONG =
+  /\b(exams?|examen(es)?|midterms?|mid-terms?|finals?|quiz(zes)?|tests?|mocks?|orals?|prüfung|klausur|parcial|prova|controle)\b/i;
+// IB/A-level "Paper 1" or "assessment" alone is weak: also used for class names.
+const EXAM_WEAK = /\b(paper\s*\d|assessments?)\b/i;
 const DEADLINE_WORDS =
   /\b(assignments?|homework|hw\d*|problem\s*sets?|psets?|essays?|reports?|projects?|coursework|ia|ee|tok|portfolio|tarea|devoir)\b/i;
 const CLASS_WORDS =
   /\b(lectures?|class(es)?|seminars?|labs?|tutorials?|recitations?|lessons?|workshops?|discussion|section|period|module|clase|cours|vorlesung|lezione)\b/i;
 const COURSE_CODE = /\b[A-Z]{2,5}\s?-?\d{2,4}[A-Z]?\b/;
+// School timetables often name classes after the subject alone ("Chemistry HL").
+const SUBJECT_WORDS =
+  /\b(math(s|ematics)?|calculus|algebra|geometry|statistics|physics|chemistry|chem|biology|bio|science|history|geography|economics|econ|english|literature|spanish|french|german|chinese|mandarin|japanese|latin|art|music|drama|computer\s+science|psychology|philosophy|business|sociology|politics|religious\s+studies)\b|\b(HL|SL|AP|IB|GCSE|A-?level)\b/i;
 const NOT_FINAL = /\bfinal\s+(project|essay|report|paper\s+due)\b/i;
 
 export function inferEventKind(input: {
@@ -376,10 +384,13 @@ export function inferEventKind(input: {
 }): CalendarEventKind {
   const text = `${input.title} ${input.categories ?? ""}`;
   if (DEADLINE_STRONG.test(text)) return "deadline";
-  if (EXAM_WORDS.test(text) && !NOT_FINAL.test(text)) return "exam";
+  if (PREP_WORDS.test(text)) return "class";
+  if (EXAM_STRONG.test(text) && !NOT_FINAL.test(text)) return "exam";
+  if (EXAM_WEAK.test(text) && !input.recurring && !CLASS_WORDS.test(text)) return "exam";
   if (DEADLINE_WORDS.test(text)) return "deadline";
   if (CLASS_WORDS.test(text)) return "class";
-  if (input.recurring && COURSE_CODE.test(input.title)) return "class";
+  if (input.recurring && (COURSE_CODE.test(input.title) || SUBJECT_WORDS.test(input.title)))
+    return "class";
   // Fall back to the description only for the strongest signals.
   const desc = input.description ?? "";
   if (/\b(exam|midterm|final exam)\b/i.test(desc) && !input.recurring) return "exam";
@@ -389,7 +400,9 @@ export function inferEventKind(input: {
 const SUBJECT_NOISE = new RegExp(
   [
     DEADLINE_STRONG.source,
-    EXAM_WORDS.source,
+    PREP_WORDS.source,
+    EXAM_STRONG.source,
+    EXAM_WEAK.source,
     DEADLINE_WORDS.source,
     CLASS_WORDS.source,
     /\b(for|the|on|of|and|at|in|#?\d+|unit|chapter|week|online|in-class|take-home|reminder)\b/.source,
