@@ -57,7 +57,7 @@ export function HomeUploadRow() {
       <button
         type="button"
         disabled={busy}
-        {...ctaProps("home_upload_notes", "secondary")}
+        {...ctaProps("home_upload_notes", "secondary", t("misc.uploadNotes"))}
         onClick={() => inputRef.current?.click()}
         onDragOver={(e) => {
           e.preventDefault();

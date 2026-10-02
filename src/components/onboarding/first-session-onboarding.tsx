@@ -379,7 +379,10 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
           ? "units"
           : "subject"
         : "upload";
+  const trackedStep = useRef<string | null>(null);
   useEffect(() => {
+    if (trackedStep.current === step) return;
+    trackedStep.current = step;
     track("screen_viewed", {
       screen: "first_session_onboarding",
       step,

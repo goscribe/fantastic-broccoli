@@ -109,7 +109,9 @@ function DueReview() {
             {t("fc.backToFlashcards")}
           </Link>
           <h1 className="mt-3 text-2xl font-bold tracking-tight">
-            {reminderId ? t("retention.reviewReady") : t("fc.dailyReview")}
+            {reminderId && cards.length > 0
+              ? t("retention.reviewReady")
+              : t("fc.dailyReview")}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             {data
