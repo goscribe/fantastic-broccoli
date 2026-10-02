@@ -34,6 +34,7 @@ import { formatRelativeDate } from "@/lib/utils";
 import { useTheme } from "@/lib/theme";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
+import "@/lib/i18n/calendar";
 import {
   hasGuidedTourForPath,
   requestGuidedTour,
@@ -71,7 +72,9 @@ export function TopBar({
           ? t("misc.settings")
           : pathname === "/pricing"
             ? t("misc.pricing")
-            : t("misc.home");
+            : pathname === "/calendar"
+              ? t("nav.calendar")
+              : t("misc.home");
 
   const emailVerified = user?.emailVerified ?? true;
   const workspaceId = pathname.match(/^\/workspace\/([^/]+)/)?.[1] ?? null;
