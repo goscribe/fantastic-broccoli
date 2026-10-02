@@ -1,8 +1,14 @@
 "use client";
 
 import { MathText } from "@/components/ui/markdown-text";
-import { useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useAuthUser } from "@/lib/api/auth";
+import { track } from "@/lib/analytics";
+import { getImportedCalendar, markPlannedSessionOpened } from "@/lib/calendar/store";
+import { fill, formatShortDate } from "@/components/calendar/calendar-ui";
+import type { SessionConfig } from "@/components/session/session-create-wizard";
+import "@/lib/i18n/calendar";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
 import {
@@ -36,7 +42,7 @@ import { EmptyScene } from "@/components/graphics/floating-decor";
 export default function WorkspaceStudyPage() {
   const params = useParams();
   const router = useRouter();
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const searchParams = useSearchParams();
   const workspaceId = params.id as string;
   // ?create=1 opens the session wizard directly (e.g. from the chat sidebar).
@@ -44,6 +50,51 @@ export default function WorkspaceStudyPage() {
     searchParams.get("create") === "1",
   );
   const openUploadPicker = useRef<(() => void) | null>(null);
+
+  // ?planned=<id>: a study session planned from the imported calendar
+  // pre-fills the wizard (looked up locally, so titles stay out of URLs).
+  const plannedId = searchParams.get("planned");
+  const { user } = useAuthUser();
+  const planned = useMemo(
+    () =>
+      plannedId && user
+        ? getImportedCalendar(user.id)?.accepted.find((s) => s.id === plannedId)
+        : undefined,
+    [plannedId, user],
+  );
+  const plannedReady = !plannedId || !!user;
+  const plannedInitial = useMemo((): Partial<SessionConfig> | undefined => {
+    if (!planned) return undefined;
+    const focus = t(`cal.focus.${planned.focus}`);
+    return {
+      title: fill(t("cal.wizard.title"), { focus, target: planned.targetTitle }),
+      topics: fill(t("cal.wizard.topics"), {
+        target: planned.targetTitle,
+        kind: t(`cal.kind.${planned.targetKind}`).toLowerCase(),
+        date: formatShortDate(planned.targetStart, locale),
+        hint: t(`cal.focusHint.${planned.focus}`),
+      }),
+      durationMinutes: planned.minutes,
+      depth: planned.focus === "recap" ? "light" : "moderate",
+    };
+  }, [planned, t, locale]);
+  const plannedTracked = useRef(false);
+  useEffect(() => {
+    if (!plannedId || !user || plannedTracked.current) return;
+    plannedTracked.current = true;
+    const session = markPlannedSessionOpened(user.id, plannedId);
+    track("planned_session_opened", {
+      session_id: plannedId,
+      workspace_id: workspaceId,
+      src: searchParams.get("src") ?? undefined,
+      known_session: !!session,
+      target_kind: session?.targetKind,
+      focus: session?.focus,
+      minutes_late: session
+        ? Math.round((Date.now() - Date.parse(session.start)) / 60_000)
+        : undefined,
+    });
+  }, [plannedId, user, workspaceId, searchParams]);
 
   const { data: workspace, isLoading: workspaceLoading } = useQuery({
     queryKey: ["workspace", workspaceId],
@@ -344,11 +395,12 @@ export default function WorkspaceStudyPage() {
         )}
       </div>
 
-      {showCreateWizard && workspace && (
+      {showCreateWizard && workspace && plannedReady && (
         <SessionCreateWizard
           workspaceTitle={workspace.title}
           hasMaterials={(workspace.materials ?? []).some((m) => m.analyzed)}
           creating={createSession.isPending}
+          initial={plannedInitial}
           onClose={() => setShowCreateWizard(false)}
           onCreate={(config) =>
             createSession.mutate({

@@ -17,7 +17,7 @@ import {
   Loader2,
 } from "lucide-react";
 
-interface SessionConfig {
+export interface SessionConfig {
   title: string;
   description: string;
   depth: SessionDepth;
@@ -33,6 +33,8 @@ interface SessionCreateWizardProps {
   /** Whether the workspace has any analyzed materials to plan from. */
   hasMaterials?: boolean;
   creating?: boolean;
+  /** Pre-filled fields (e.g. a study session planned from the calendar). */
+  initial?: Partial<SessionConfig>;
   onClose: () => void;
   onCreate: (config: SessionConfig) => void;
 }
@@ -102,6 +104,7 @@ export function SessionCreateWizard({
   workspaceTitle,
   hasMaterials = true,
   creating = false,
+  initial,
   onClose,
   onCreate,
 }: SessionCreateWizardProps) {
@@ -116,6 +119,7 @@ export function SessionCreateWizard({
     syllabus: "",
     topics: "",
     subject: "",
+    ...initial,
   }));
 
   const steps = [
