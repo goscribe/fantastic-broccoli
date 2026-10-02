@@ -124,7 +124,7 @@ export function CalendarImport({
   }
 
   return (
-    <div {...screenProps("calendar_import")} className="grid gap-4 lg:grid-cols-[1fr_320px]">
+    <div {...screenProps("calendar_import")} className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
       <section className="rounded-2xl border border-border bg-card p-5 sm:p-6">
         <h2 className="text-base font-semibold">{t("cal.import.title")}</h2>
         <div className="mt-4">{dropZone}</div>
@@ -140,7 +140,7 @@ export function CalendarImport({
           <div className="flex items-center gap-2.5">
             <GoogleCalendarGlyph />
             <p className="text-sm font-semibold">{t("cal.google.title")}</p>
-            <span className="ml-auto rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
+            <span className="ml-auto shrink-0 whitespace-nowrap rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
               {t("cal.google.soon")}
             </span>
           </div>

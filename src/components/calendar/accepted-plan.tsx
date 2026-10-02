@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, CalendarPlus, Check, CheckCircle2, Download, Pencil } from "lucide-react";
 import { TrackedButton } from "@/components/ui/tracked-button";
@@ -14,6 +15,7 @@ export function AcceptedPlan({
   sessions,
   workspaces,
   now,
+  scrollIntoView = false,
   onEdit,
   onDownloadIcs,
   onGoogle,
@@ -22,12 +24,18 @@ export function AcceptedPlan({
   sessions: AcceptedSession[];
   workspaces: { id: string; title: string }[];
   now: Date;
+  /** Bring the confirmation into view (right after accepting). */
+  scrollIntoView?: boolean;
   onEdit: () => void;
   onDownloadIcs: () => void;
   onGoogle: (session: AcceptedSession) => void;
   onWorkspace: (session: AcceptedSession, workspaceId: string) => void;
 }) {
   const { t, locale } = useI18n();
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (scrollIntoView) ref.current?.scrollIntoView({ block: "start", behavior: "smooth" });
+  }, [scrollIntoView]);
   const nowMs = now.getTime();
   const upcoming = sessions
     .filter((s) => Date.parse(s.end) + 60 * 60_000 > nowMs)
@@ -42,7 +50,11 @@ export function AcceptedPlan({
   const wsTitle = (id?: string) => workspaces.find((w) => w.id === id)?.title;
 
   return (
-    <section {...screenProps("study_plan_accepted")} className="rounded-2xl border border-border bg-card">
+    <section
+      ref={ref}
+      {...screenProps("study_plan_accepted")}
+      className="scroll-mt-4 rounded-2xl border border-border bg-card"
+    >
       <div className="border-b border-border px-4 py-4 sm:px-5">
         <h2 className="flex items-center gap-1.5 text-sm font-semibold">
           <CheckCircle2 className="h-4 w-4 text-accent" />

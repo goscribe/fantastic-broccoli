@@ -120,6 +120,7 @@ const en = {
   "cal.focusHint.finish": "Finish up, check it against the requirements, and hand it in.",
   "cal.plan.accept": "Add {count} study sessions",
   "cal.plan.acceptOne": "Add 1 study session",
+  "cal.plan.update": "Save plan ({count} sessions)",
   "cal.plan.acceptHint": "You can change or remove them anytime.",
   "cal.plan.empty":
     "No exams or deadlines found in the next 8 weeks. If one is listed as “Class” or “Other”, change its type and Scribe will plan for it.",
@@ -264,6 +265,7 @@ registerTranslations(en, {
     "cal.focusHint.finish": "Termina, revisa los requisitos y entrégalo.",
     "cal.plan.accept": "Añadir {count} sesiones de estudio",
     "cal.plan.acceptOne": "Añadir 1 sesión de estudio",
+    "cal.plan.update": "Guardar plan ({count} sesiones)",
     "cal.plan.acceptHint": "Puedes cambiarlas o quitarlas cuando quieras.",
     "cal.plan.empty":
       "No hay exámenes ni entregas en las próximas 8 semanas. Si alguno aparece como “Clase” u “Otro”, cambia su tipo y Scribe lo planificará.",

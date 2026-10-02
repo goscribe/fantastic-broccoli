@@ -239,8 +239,9 @@ export function StudyPlanPanel({
     }
   }, [plan.sessions, prefs.window]);
 
-  const acceptLabel =
-    sessions.length === 1
+  const acceptLabel = editingAccepted
+    ? fill(t("cal.plan.update"), { count: sessions.length })
+    : sessions.length === 1
       ? t("cal.plan.acceptOne")
       : fill(t("cal.plan.accept"), { count: sessions.length });
 

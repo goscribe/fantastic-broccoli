@@ -89,6 +89,7 @@ export default function CalendarPage() {
   const [error, setError] = useState<string | null>(null);
   const [reimporting, setReimporting] = useState(false);
   const [editingAccepted, setEditingAccepted] = useState(false);
+  const [justAccepted, setJustAccepted] = useState(false);
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
     const tick = setInterval(() => setNow(new Date()), 60_000);
@@ -248,8 +249,9 @@ export default function CalendarPage() {
     update((c) => ({ ...c, kindOverrides: { ...c.kindOverrides, [event.seriesId]: kind } }));
   };
 
+  // Times are re-planned for the new preferences; removals still apply.
   const setPrefs = (prefs: PlanPrefs) =>
-    update((c) => ({ ...c, prefs, edits: { removed: [], starts: {} } }));
+    update((c) => ({ ...c, prefs, edits: { ...c.edits, starts: {} } }));
 
   const accept = () => {
     if (!calendar) return;
@@ -280,6 +282,7 @@ export default function CalendarPage() {
     });
     toast.success(fill(t("cal.toast.accepted"), { count: fresh.length }));
     setEditingAccepted(false);
+    setJustAccepted(true);
   };
 
   const exportText = (s: AcceptedSession) => ({
@@ -385,7 +388,7 @@ export default function CalendarPage() {
             />
           )}
 
-          <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
+          <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
             <CalendarTimeline
               events={calendar.events}
               kindOf={kindOf}
@@ -440,7 +443,11 @@ export default function CalendarPage() {
                 sessions={calendar.accepted}
                 workspaces={workspaces}
                 now={now}
-                onEdit={() => setEditingAccepted(true)}
+                scrollIntoView={justAccepted}
+                onEdit={() => {
+                  setJustAccepted(false);
+                  setEditingAccepted(true);
+                }}
                 onDownloadIcs={() => {
                   const upcoming = calendar.accepted.filter(
                     (s) => Date.parse(s.end) > now.getTime(),

@@ -177,10 +177,12 @@ export function CalendarTimeline({
                       </div>
                       <span className="inline-flex shrink-0 items-center gap-1 text-[11px] font-semibold text-accent">
                         <Sparkles className="h-3 w-3" />
-                        {item.entry.state === "planned"
-                          ? t("cal.session.planned")
-                          : t("cal.session.suggested")}
-                        {" · "}
+                        <span className="hidden sm:inline">
+                          {item.entry.state === "planned"
+                            ? t("cal.session.planned")
+                            : t("cal.session.suggested")}
+                          {" · "}
+                        </span>
                         {fill(t("cal.session.minutes"), { minutes: item.entry.session.minutes })}
                       </span>
                     </li>
