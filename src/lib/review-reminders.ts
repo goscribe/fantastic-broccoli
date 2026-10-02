@@ -242,7 +242,7 @@ function eventWindow(reminder: ReviewReminder): { start: Date; end: Date } {
   return { start, end };
 }
 
-const utcStamp = (d: Date) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+export const utcStamp = (d: Date) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
 
 function eventText(reminder: ReviewReminder, url: string) {
   const summary = `Scribe review: ${reminder.workspaceTitle}`;
@@ -267,7 +267,7 @@ export function googleCalendarUrl(reminder: ReviewReminder, origin: string): str
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
-const icsEscape = (s: string) =>
+export const icsEscape = (s: string) =>
   s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
 
 export function icsFile(reminder: ReviewReminder, origin: string): string {

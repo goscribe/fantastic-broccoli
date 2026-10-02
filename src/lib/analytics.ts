@@ -35,7 +35,16 @@ export type AnalyticsEventName =
   | "reminder_opt_in"
   | "next_session_scheduled"
   | "reminder_opened"
-  | "review_ready_shown";
+  | "review_ready_shown"
+  | "calendar_import_started"
+  | "calendar_import_completed"
+  | "calendar_import_failed"
+  | "calendar_events_parsed"
+  | "calendar_event_kind_changed"
+  | "study_plan_shown"
+  | "study_session_planned"
+  | "study_session_accepted"
+  | "planned_session_opened";
 
 export type AnalyticsValue = string | number | boolean | null | undefined;
 export type AnalyticsProps = Record<string, AnalyticsValue>;
