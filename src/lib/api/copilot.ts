@@ -299,3 +299,54 @@ export function repairContentBlock(input: {
     input,
   );
 }
+
+export type RenderIssueSurface =
+  | "copilot_visualization"
+  | "reading_figure"
+  | "worksheet_figure"
+  | "widget"
+  | "markdown"
+  | "flashcard"
+  | "other";
+export type RenderIssueKind =
+  | "unrendered_math"
+  | "bare_latex"
+  | "script_error"
+  | "latex"
+  | "mermaid"
+  | "markdown"
+  | "widget";
+
+export interface RenderIssueReport {
+  surface: RenderIssueSurface;
+  kind: RenderIssueKind;
+  detail: string;
+  snippet: string;
+  workspaceId?: string;
+  path?: string;
+}
+
+const reported = new Set<string>();
+
+/**
+ * Tells the server a generated block rendered broken on this screen (raw
+ * LaTeX left in a visualization, a widget script error, a block the
+ * renderer rejected). Fire-and-forget; deduplicated per page load.
+ */
+export function reportRenderIssue(input: RenderIssueReport): void {
+  const key = `${input.surface}|${input.kind}|${input.snippet.slice(0, 400)}`;
+  if (reported.has(key)) return;
+  reported.add(key);
+  const path =
+    input.path ??
+    (typeof window !== "undefined" ? window.location.pathname : undefined);
+  const workspaceId =
+    input.workspaceId ?? path?.match(/^\/workspace\/([^/?#]+)/)?.[1];
+  rpc<{ id: string; count: number }>("copilot.reportRenderIssue", "mutation", {
+    ...input,
+    detail: input.detail.slice(0, 600),
+    snippet: input.snippet.slice(0, 2000),
+    workspaceId,
+    path: path?.slice(0, 300),
+  }).catch(() => {});
+}

@@ -502,7 +502,12 @@ export function Copilot({
                   ) : part.embed === "widget" ? (
                     <InteractiveWidget key={part.id} id={part.widget} />
                   ) : part.embed === "html" ? (
-                    <HtmlWidget key={part.id} html={part.html} title={part.title} />
+                    <HtmlWidget
+                      key={part.id}
+                      html={part.html}
+                      title={part.title}
+                      surface="copilot_visualization"
+                    />
                   ) : (
                     <CitationEmbed key={part.id} data={part.citation} />
                   )
