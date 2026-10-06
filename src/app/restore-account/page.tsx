@@ -51,8 +51,8 @@ export default function RestoreAccountPage() {
           status === "success"
             ? "/illustrations/props/trophy.png"
             : status === "error"
-              ? "/illustrations/flag.png"
-              : "/illustrations/bot.png"
+              ? "/illustrations/blob/blob-flag.png"
+              : "/illustrations/blob/blob-think.png"
         }
       />
 

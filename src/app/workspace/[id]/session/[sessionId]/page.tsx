@@ -858,7 +858,7 @@ export default function SessionDetailPage() {
                   alt=""
                   width={96}
                   height={96}
-                  className="h-20 w-20 select-none object-contain drop-shadow-lg"
+                  className="h-20 w-20 select-none object-contain"
                 />
                 {cheerKey && (
                   <p className="text-sm font-bold text-accent">{t(cheerKey)}</p>

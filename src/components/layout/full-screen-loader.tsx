@@ -42,7 +42,7 @@ export function FullScreenLoader() {
 
       <div className="relative z-10 flex flex-col items-center">
         <Image
-          src="/illustrations/blobs-playing.png"
+          src="/illustrations/blob/blob-read.png"
           alt=""
           width={785}
           height={503}

@@ -126,7 +126,7 @@ export const homeScenes: FeatureScene[] = [
     ],
     mock: "copilot",
     url: "scribe.study/session",
-    art: "/illustrations/bot.png",
+    art: "/illustrations/blob/blob-think.png",
     artTint: "accent",
     artSide: "right",
   },

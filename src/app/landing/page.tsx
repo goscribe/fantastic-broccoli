@@ -87,7 +87,7 @@ export default function LandingPage() {
                 src="/illustrations/marketing/mkt-hero.png"
                 tint="accent"
                 side="right"
-                size="xl"
+                size="md"
                 className="p-5 sm:p-6"
               >
                 <HeroPreview />

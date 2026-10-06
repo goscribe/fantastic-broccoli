@@ -20,25 +20,25 @@ const TINTS: Record<ArtTint, string> = {
 };
 
 const ART_POS: Record<ArtSide, string> = {
-  right: "-bottom-10 -right-8 sm:-bottom-14 sm:-right-12",
-  left: "-bottom-10 -left-8 sm:-bottom-14 sm:-left-12",
-  bottom: "-bottom-14 left-1/2 -translate-x-1/2",
+  right: "-bottom-2 right-2 sm:-bottom-3 sm:right-4",
+  left: "-bottom-2 left-2 sm:-bottom-3 sm:left-4",
+  bottom: "-bottom-3 left-1/2 -translate-x-1/2",
 };
 
 const ART_SIZE = {
-  sm: "w-40 sm:w-52",
-  md: "w-56 sm:w-72",
-  lg: "w-72 sm:w-96",
-  xl: "w-80 sm:w-[28rem]",
+  sm: "w-28 sm:w-36",
+  md: "w-36 sm:w-48",
+  lg: "w-44 sm:w-60",
+  xl: "w-52 sm:w-72",
 };
 
 const CHILD_PAD: Record<ArtSide, string> = {
-  right: "pr-16 sm:pr-28 md:pr-36",
-  left: "pl-16 sm:pl-28 md:pl-36",
+  right: "pr-24 sm:pr-40 md:pr-52",
+  left: "pl-24 sm:pl-40 md:pl-52",
   bottom: "pb-20 sm:pb-28",
 };
 
-/** Tinted panel the 3D art bleeds off — same idea as the in-app empty states. */
+/** Tinted panel with a sprite anchored in a corner — same idea as the in-app empty states. */
 export function ArtStage({
   src,
   tint = "accent",
@@ -80,7 +80,7 @@ export function ArtStage({
           width={880}
           height={880}
           unoptimized
-          className="w-full select-none object-contain drop-shadow-[0_22px_40px_rgba(105,82,224,0.28)]"
+          className="w-full select-none object-contain"
         />
       </div>
     </div>

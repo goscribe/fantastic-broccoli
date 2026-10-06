@@ -379,7 +379,7 @@ export default function WorkspaceRecallPage() {
         </div>
 
         {episodes.length === 0 ? (
-          <EmptyScene image="/illustrations/icons/headphones.png">
+          <EmptyScene image="/illustrations/blob/blob-listen.png">
             <p className="text-base font-semibold">{t("ws.noEpisodes")}</p>
             <p className="mt-1.5 text-sm text-muted-foreground">
               {t("ws.noEpisodesHint")}

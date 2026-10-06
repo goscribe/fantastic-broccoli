@@ -77,7 +77,7 @@ export default function FlashcardsPage() {
             </p>
           </div>
           {(decks ?? []).length > 0 && (
-            <HeaderDecor image="/illustrations/cards.png" />
+            <HeaderDecor image="/illustrations/blob/blob-cards.png" />
           )}
         </div>
         {dueReview && dueReview.total > 0 && (
@@ -96,7 +96,7 @@ export default function FlashcardsPage() {
       {isLoading && <CardGridSkeleton count={6} />}
 
       {!isLoading && (decks ?? []).length === 0 && (
-        <EmptyScene image="/illustrations/cards.png">
+        <EmptyScene image="/illustrations/blob/blob-cards.png">
           <p className="text-base font-semibold">{t("fc.noDecksTitle")}</p>
           <p className="mt-1.5 text-sm text-muted-foreground">
             {t("fc.noDecksBody")}

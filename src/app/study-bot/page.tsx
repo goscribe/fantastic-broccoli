@@ -66,19 +66,19 @@ export default function StudyBotPage() {
   return (
     <main className="flex flex-1 flex-col items-center justify-center bg-card px-6 py-10">
       <div className="w-full max-w-xl animate-fade-up">
-        <div className="text-center">
+        <div>
           <Image
-            src="/illustrations/blob-hello-poster.png"
+            src="/illustrations/blob/blob-hello.png"
             alt=""
             width={200}
             height={200}
             priority
-            className="pointer-events-none mx-auto mb-5 h-28 w-28 select-none object-cover [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]"
+            className="pointer-events-none mb-5 h-28 w-28 select-none object-contain"
           />
           <h1 className="text-[26px] font-bold tracking-tight sm:text-3xl">
             {t("misc.studyBotTitle")}
           </h1>
-          <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
             {t("misc.studyBotSubtitle")}
           </p>
         </div>

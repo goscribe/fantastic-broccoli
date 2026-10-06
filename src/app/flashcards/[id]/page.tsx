@@ -126,7 +126,7 @@ function FlashcardDeck() {
     return (
       <div className="mx-auto w-full max-w-3xl rounded-2xl border border-border bg-card px-6 py-12 text-center">
         <Image
-          src="/illustrations/cards.png"
+          src="/illustrations/blob/blob-cards.png"
           alt=""
           width={200}
           height={168}

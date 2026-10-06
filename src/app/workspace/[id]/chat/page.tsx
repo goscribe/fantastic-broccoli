@@ -102,49 +102,17 @@ const ASSISTANT_BRIEF = `You are Scribe's workspace study assistant — the stud
 - When a diagram would genuinely help an explanation (processes, hierarchies, timelines, comparisons), draw it: attach an interactive widget or a custom visualization via attach_study_aids (never a code-fenced diagram).
 - Keep replies short (under 4 sentences unless explaining or quizzing).`;
 
-/**
- * Blob mascot: plays the hello video (alpha webm — transparent background,
- * so it sits cleanly on light and dark surfaces), falling back to the
- * transparent still poster when autoplay or the format is unsupported
- * (mobile low-power mode shows a play glyph over a paused video otherwise).
- */
+/** Blob mascot greeting the empty chat. */
 function BlobHello() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [usePoster, setUsePoster] = useState(false);
-  const blobClass =
-    "pointer-events-none mx-auto mb-4 h-32 w-32 select-none object-cover [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]";
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.play().catch(() => setUsePoster(true));
-  }, [usePoster]);
-
-  if (usePoster) {
-    return (
-      <Image
-        src="/illustrations/blob-hello-poster.png"
-        alt=""
-        width={200}
-        height={200}
-        priority
-        aria-hidden
-        className={blobClass}
-      />
-    );
-  }
   return (
-    <video
-      ref={videoRef}
-      src="/illustrations/blob-hello.webm"
-      autoPlay
-      loop
-      muted
-      playsInline
-      disablePictureInPicture
+    <Image
+      src="/illustrations/blob/blob-hello.png"
+      alt=""
+      width={200}
+      height={200}
+      priority
       aria-hidden
-      onError={() => setUsePoster(true)}
-      className={blobClass}
+      className="pointer-events-none mb-4 h-28 w-28 select-none object-contain"
     />
   );
 }
@@ -662,13 +630,13 @@ export default function WorkspaceChatPage() {
       <WorkspaceShell workspace={workspace} loading>
         <div className="flex h-full min-h-[60vh] w-full flex-col items-center justify-center gap-3">
           <Image
-            src="/illustrations/blob-hello-poster.png"
+            src="/illustrations/blob/blob-hello.png"
             alt=""
             width={112}
             height={112}
             priority
             aria-hidden
-            className="pointer-events-none h-20 w-20 select-none object-cover opacity-80 [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]"
+            className="pointer-events-none h-20 w-20 select-none object-contain opacity-80"
           />
           <Skeleton className="h-4 w-40 rounded-full" />
           <Skeleton className="h-3 w-56 rounded-full" />
@@ -790,7 +758,7 @@ export default function WorkspaceChatPage() {
           <div aria-hidden className="flex-1" />
 
           {messages.length === 0 && (
-            <div className="mb-2 text-center animate-fade-up">
+            <div className="mb-2 animate-fade-up">
               <BlobHello />
               <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
                 {workspace?.title}

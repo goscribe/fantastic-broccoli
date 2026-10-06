@@ -201,7 +201,7 @@ export function StudyNowCard({
             aria-hidden
           >
             <Image
-              src="/illustrations/flag.png"
+              src="/illustrations/blob/blob-flag.png"
               alt=""
               width={200}
               height={200}

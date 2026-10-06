@@ -38,7 +38,7 @@ export function ConfettiDots({ className }: { className?: string }) {
   );
 }
 
-/** Floating 3D prop sticker. */
+/** Floating flat prop sticker. */
 export function Sticker({
   src,
   className,
@@ -56,7 +56,7 @@ export function Sticker({
       height={160}
       unoptimized
       className={cn(
-        "pointer-events-none absolute select-none object-contain drop-shadow-md",
+        "pointer-events-none absolute select-none object-contain",
         className,
       )}
       style={delay ? { animationDelay: delay } : undefined}
@@ -64,7 +64,7 @@ export function Sticker({
   );
 }
 
-/** Flying 3D props scene for the dashboard hero. Parent must be `relative`. */
+/** Mascot scene for the dashboard hero. Parent must be `relative`. */
 export function HeroScene() {
   return (
     <div
@@ -72,13 +72,13 @@ export function HeroScene() {
       aria-hidden
     >
       <Image
-        src="/illustrations/hero-scene.png"
+        src="/illustrations/blob/blob-laptop.png"
         alt=""
-        width={720}
-        height={423}
+        width={512}
+        height={420}
         priority
         unoptimized
-        className="absolute -bottom-4 right-0 w-80 lg:w-96"
+        className="absolute -bottom-3 right-6 w-52 lg:w-60"
       />
       <Sticker
         src="/illustrations/props/star-gold.png"

@@ -45,8 +45,8 @@ export default function ForgotPasswordPage() {
       <AuthFigure
         src={
           sent
-            ? "/illustrations/welcome.png"
-            : "/illustrations/search.png"
+            ? "/illustrations/blob/blob-hello.png"
+            : "/illustrations/blob/blob-search.png"
         }
       />
 

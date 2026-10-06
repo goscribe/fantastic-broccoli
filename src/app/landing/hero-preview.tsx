@@ -148,7 +148,7 @@ export function StatsStrip() {
         {
           value: `${stats.countries}`,
           label: "countries studying with Scribe",
-          icon: "/illustrations/flag.png",
+          icon: "/illustrations/props/flag-mini.png",
         },
       ].map((stat) => (
         <div key={stat.label} className="flex flex-col items-center">

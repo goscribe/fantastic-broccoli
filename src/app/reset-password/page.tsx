@@ -61,7 +61,7 @@ export default function ResetPasswordPage() {
         src={
           done
             ? "/illustrations/props/trophy.png"
-            : "/illustrations/bot.png"
+            : "/illustrations/blob/blob-think.png"
         }
       />
 

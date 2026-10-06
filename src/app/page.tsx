@@ -262,7 +262,7 @@ export default function HomePage() {
           className="relative z-10 grid gap-4 animate-fade-up lg:grid-cols-[1fr_250px]"
         >
           <div className="relative rounded-2xl border border-border bg-card p-5 sm:p-7">
-            {/* Clip the 3D props, not the New-workspace menu. */}
+            {/* Clip the mascot art, not the New-workspace menu. */}
             <div
               className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
               aria-hidden
@@ -272,7 +272,7 @@ export default function HomePage() {
               ) : (
                 <>
                   <Image
-                    src="/illustrations/welcome.png"
+                    src="/illustrations/blob/blob-hello.png"
                     alt=""
                     width={280}
                     height={280}
@@ -349,12 +349,12 @@ export default function HomePage() {
               {t("misc.progress")}
             </p>
             <Image
-              src="/illustrations/journey.png"
+              src="/illustrations/blob/blob-climb.png"
               alt=""
               width={220}
               height={220}
               unoptimized
-              className="pointer-events-none absolute -bottom-4 -right-3 w-40 select-none"
+              className="pointer-events-none absolute -bottom-3 right-1 w-32 select-none"
             />
             <Image
               src="/illustrations/props/star-gold.png"
@@ -428,7 +428,7 @@ export default function HomePage() {
                   {
                     label: t("misc.activePlans"),
                     value: String(activeSessions.length),
-                    icon: "/illustrations/flag.png",
+                    icon: "/illustrations/props/flag-mini.png",
                     hideOnMobile: false,
                   },
                   {

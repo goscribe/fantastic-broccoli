@@ -547,7 +547,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
       <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
         <div className="relative -mx-6 -mt-6 mb-5 overflow-hidden rounded-t-2xl bg-gradient-to-br from-accent-soft via-accent-soft/40 to-transparent px-6 pt-6">
           <Image
-            src="/illustrations/welcome.png"
+            src="/illustrations/blob/blob-hello.png"
             alt=""
             width={340}
             height={255}

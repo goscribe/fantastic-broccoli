@@ -200,7 +200,7 @@ export default function WorkspaceStudyPage() {
               ))}
             </div>
           ) : workspace?.sharedBy && sessions.length === 0 ? (
-            <EmptyScene image="/illustrations/flag.png">
+            <EmptyScene image="/illustrations/blob/blob-flag.png">
               <p className="text-base font-semibold">
                 {t("ws.sessionsPrivate")}
               </p>

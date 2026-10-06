@@ -38,14 +38,14 @@ export default function SharedPage() {
           </p>
         </div>
         {shared.length > 0 && (
-          <HeaderDecor image="/illustrations/shared.png" />
+          <HeaderDecor image="/illustrations/blob/blob-friends.png" />
         )}
       </div>
 
       {loading && <CardGridSkeleton count={6} />}
 
       {!loading && shared.length === 0 && (
-        <EmptyScene image="/illustrations/shared.png">
+        <EmptyScene image="/illustrations/blob/blob-friends.png">
           <p className="text-base font-semibold">{t("fc.nothingShared")}</p>
           <p className="mt-1.5 text-sm text-muted-foreground">
             {t("fc.nothingSharedBody")}

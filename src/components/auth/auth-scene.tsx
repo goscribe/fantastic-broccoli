@@ -5,13 +5,13 @@ import { cn } from "@/lib/utils";
 const MASCOT = {
   study: "/illustrations/marketing/mkt-hero.png",
   celebrate: "/illustrations/marketing/mkt-celebrate.png",
-  mail: "/illustrations/welcome.png",
-  invite: "/illustrations/shared.png",
+  mail: "/illustrations/blob/blob-hello.png",
+  invite: "/illustrations/blob/blob-friends.png",
 } as const;
 
 export type AuthMood = keyof typeof MASCOT;
 
-/** Floating 3D figure used as a page hero on email-link screens. */
+/** Mascot sprite used as a page hero on email-link screens. */
 export function AuthFigure({
   src,
   className,
@@ -34,7 +34,7 @@ export function AuthFigure({
   );
 }
 
-/** Shared login/signup/email-link chrome: solid page, peeking 3D art. */
+/** Shared login/signup/email-link chrome: solid page, mascot sprite in the corner. */
 export function AuthScene({
   children,
   mood = "study",
@@ -87,7 +87,7 @@ export function AuthScene({
         width={420}
         height={420}
         unoptimized
-        className="pointer-events-none absolute -bottom-8 -right-8 w-36 select-none object-contain motion-reduce:animate-none sm:-bottom-16 sm:-right-10 sm:w-72 lg:w-96"
+        className="pointer-events-none absolute -bottom-3 right-2 w-28 select-none object-contain motion-reduce:animate-none sm:right-6 sm:w-48 lg:w-64"
       />
 
       <div className="relative z-10 w-full max-w-sm space-y-6 sm:space-y-8">
