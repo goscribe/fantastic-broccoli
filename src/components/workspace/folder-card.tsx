@@ -3,10 +3,10 @@
 import { Folder } from "@/types";
 import { countWorkspaces } from "@/lib/utils";
 import { accentNameForColor } from "@/lib/accent-palette";
-import Image from "next/image";
+import { IconTile } from "@/components/graphics/icon-tile";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Folder as FolderIcon } from "lucide-react";
 import {
   ResourceActionsMenu,
   type ResourceActions,
@@ -34,13 +34,7 @@ export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
       }}
       className="group relative flex cursor-pointer items-center gap-3 rounded-2xl border border-border bg-card px-4 py-4 text-left transition-all hover:-translate-y-0.5 hover:shadow-md"
     >
-      <Image
-        src={`/illustrations/icons/folder-${accent}.png`}
-        alt=""
-        width={88}
-        height={88}
-        className="pointer-events-none h-11 w-11 shrink-0 select-none object-contain"
-      />
+      <IconTile icon={FolderIcon} tone={accent} size="md" />
       <div className="relative min-w-0 flex-1">
         <p className="font-semibold text-sm truncate">{folder.name}</p>
         <p className="text-xs text-muted-foreground mt-0.5">

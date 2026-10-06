@@ -5,7 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 import { toastError } from "@/lib/toast";
 import { Sparkles, X, ArrowUp, Plus } from "lucide-react";
-import Image from "next/image";
+import { IconTile } from "@/components/graphics/icon-tile";
 import { EquationEmbed, GraphEmbed, CitationEmbed } from "@/components/ai/embeds";
 import {
   InteractiveWidget,
@@ -441,13 +441,7 @@ export function Copilot({
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
         {chatMessages.length === 0 && (
           <div className="pt-8 space-y-5">
-            <Image
-              src="/illustrations/blob/blob-think.png"
-              alt=""
-              width={160}
-              height={160}
-              className="pointer-events-none h-20 w-20 select-none object-contain"
-            />
+            <IconTile icon={Sparkles} tone="purple" size="md" />
             <div>
               <p className="text-sm font-semibold">
                 {t("misc.copilotEmptyTitle")}

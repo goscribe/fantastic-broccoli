@@ -1,10 +1,10 @@
 "use client";
 
 import "@/lib/i18n/flashcards";
-import Image from "next/image";
 import { MathText } from "@/components/ui/markdown-text";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { IconTile } from "@/components/graphics/icon-tile";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
@@ -124,14 +124,8 @@ function FlashcardDeck() {
 
   if (!item || !deck || deck.entries.length === 0) {
     return (
-      <div className="mx-auto w-full max-w-3xl rounded-2xl border border-border bg-card px-6 py-12 text-center">
-        <Image
-          src="/illustrations/blob/blob-cards.png"
-          alt=""
-          width={200}
-          height={168}
-          className="pointer-events-none mx-auto h-24 w-auto select-none"
-        />
+      <div className="mx-auto w-full max-w-3xl rounded-3xl border border-border bg-card px-6 py-10">
+        <IconTile icon={Layers} tone="pink" size="lg" />
         <p className="mt-3 text-sm font-medium">
           {t(item ? "fc.emptyDeck" : "fc.deckNotFound")}
         </p>

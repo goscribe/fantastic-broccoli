@@ -1,6 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
 import { ArrowRight, Check, FileText } from "lucide-react";
+import { IconTile, type Tone } from "@/components/graphics/icon-tile";
 import { Button } from "@/components/ui/button";
 import { ScribeMark } from "@/components/graphics/logo";
 import {
@@ -9,109 +10,56 @@ import {
   PdfArt,
   SlidesArt,
 } from "@/components/graphics/material-art";
-import type { ArtSide, ArtTint, FeatureScene, SceneMock } from "@/app/landing/data";
+import type { ArtTint, FeatureScene, SceneMock } from "@/app/landing/data";
 import { cn } from "@/lib/utils";
 
 const TINTS: Record<ArtTint, string> = {
   accent: "bg-accent-soft",
-  sky: "bg-sky/25",
-  rose: "bg-rose/20",
-  amber: "bg-amber/25",
+  sky: "bg-[#e3f3fc]",
+  rose: "bg-[#fde7f1]",
+  amber: "bg-[#fdf1dc]",
 };
 
-const ART_POS: Record<ArtSide, string> = {
-  right: "-bottom-2 right-2 sm:-bottom-3 sm:right-4",
-  left: "-bottom-2 left-2 sm:-bottom-3 sm:left-4",
-  bottom: "-bottom-3 left-1/2 -translate-x-1/2",
-};
-
-const ART_SIZE = {
-  sm: "w-28 sm:w-36",
-  md: "w-36 sm:w-48",
-  lg: "w-44 sm:w-60",
-  xl: "w-52 sm:w-72",
-};
-
-const CHILD_PAD: Record<ArtSide, string> = {
-  right: "pr-24 sm:pr-40 md:pr-52",
-  left: "pl-24 sm:pl-40 md:pl-52",
-  bottom: "pb-20 sm:pb-28",
-};
-
-/** Tinted panel with a sprite anchored in a corner — same idea as the in-app empty states. */
+/** Soft tinted panel that frames a product preview (no sprite, no outline). */
 export function ArtStage({
-  src,
   tint = "accent",
-  side = "right",
-  size = "md",
   children,
   className,
 }: {
-  src: string;
   tint?: ArtTint;
-  side?: ArtSide;
-  size?: keyof typeof ART_SIZE;
   children?: React.ReactNode;
   className?: string;
 }) {
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-[1.75rem]",
+        "relative overflow-hidden rounded-[1.75rem] p-5 sm:p-7",
         TINTS[tint],
         className,
       )}
     >
-      {children ? (
-        <div className={cn("relative z-10", CHILD_PAD[side])}>{children}</div>
-      ) : (
-        <div className="h-52 sm:h-56" />
-      )}
-      <div
-        className={cn(
-          "pointer-events-none absolute",
-          ART_POS[side],
-          ART_SIZE[size],
-        )}
-      >
-        <Image
-          src={src}
-          alt=""
-          width={880}
-          height={880}
-          unoptimized
-          className="w-full select-none object-contain"
-        />
-      </div>
+      {children}
     </div>
   );
 }
 
 export function FunFeatureCard({
   icon,
+  tone,
   title,
   description,
   heading: Heading = "h3",
 }: {
-  icon: string;
+  icon: LucideIcon;
+  tone: Tone;
   title: string;
   description: string;
-  tint?: ArtTint;
   heading?: "h2" | "h3";
 }) {
   return (
-    <li className="group relative overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm">
-      <span className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted/50">
-        <Image
-          src={icon}
-          alt=""
-          width={32}
-          height={32}
-          unoptimized
-          className="h-7 w-7 object-contain"
-        />
-      </span>
-      <Heading className="mt-3 text-sm font-semibold">{title}</Heading>
+    <li className="rounded-3xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)]">
+      <IconTile icon={icon} tone={tone} size="md" />
+      <Heading className="mt-4 text-[15px] font-semibold">{title}</Heading>
       <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
         {description}
       </p>
@@ -316,20 +264,12 @@ const MOCKS: Record<SceneMock, () => React.ReactNode> = {
 
 export function FeatureSplit({ scene }: { scene: FeatureScene }) {
   const mock = MOCKS[scene.mock]();
-  const visual = scene.art ? (
-    <ArtStage
-      src={scene.art}
-      tint={scene.artTint}
-      side={scene.artSide ?? (scene.reverse ? "left" : "right")}
-      size="lg"
-      className="p-5 sm:p-7"
-    >
-      <ProductCard eyebrow={scene.url} className="max-w-md shadow-md">
+  const visual = (
+    <ArtStage tint={scene.artTint ?? "accent"}>
+      <ProductCard eyebrow={scene.url} className="mx-auto max-w-md shadow-md">
         {mock}
       </ProductCard>
     </ArtStage>
-  ) : (
-    <ProductCard eyebrow={scene.url}>{mock}</ProductCard>
   );
   const copy = (
     <div>
@@ -371,10 +311,7 @@ export function CtaBand({
     <section className="border-t border-border py-10 md:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <ArtStage
-          src="/illustrations/marketing/mkt-celebrate.png"
           tint="accent"
-          side="right"
-          size="xl"
           className="px-8 py-12 sm:px-12 sm:py-16"
         >
           <div className="relative z-10 max-w-lg">

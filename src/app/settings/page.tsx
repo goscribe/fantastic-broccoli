@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Check, Camera, X } from "lucide-react";
-import Image from "next/image";
+import { Check, Camera, X, Zap } from "lucide-react";
+import { IconTile } from "@/components/graphics/icon-tile";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { HeaderDecor } from "@/components/graphics/floating-decor";
 import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import {
@@ -373,7 +372,6 @@ export default function SettingsPage() {
               {t("set.subtitle")}
             </p>
           </div>
-          <HeaderDecor image="/illustrations/icons/target.png" />
         </div>
 
         {/* Account */}
@@ -608,14 +606,7 @@ export default function SettingsPage() {
           </p>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <div className="flex items-start gap-3 rounded-2xl border border-border bg-card p-4">
-              <Image
-                src="/illustrations/icons/stat-bolt.png"
-                alt=""
-                width={64}
-                height={64}
-                unoptimized
-                className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
-              />
+              <IconTile icon={Zap} tone="purple" size="md" />
               <div className="min-w-0">
                 <p className="text-[12px] text-muted-foreground">
                   {t("set.balance")}

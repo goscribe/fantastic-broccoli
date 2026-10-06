@@ -9,9 +9,9 @@ import { Workspace } from "@/types";
 import { AvatarStack } from "@/components/ui/avatar-stack";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
+import { Users } from "lucide-react";
 import {
   EmptyScene,
-  HeaderDecor,
 } from "@/components/graphics/floating-decor";
 
 export default function SharedPage() {
@@ -37,15 +37,12 @@ export default function SharedPage() {
             {t("fc.sharedSubtitle")}
           </p>
         </div>
-        {shared.length > 0 && (
-          <HeaderDecor image="/illustrations/blob/blob-friends.png" />
-        )}
       </div>
 
       {loading && <CardGridSkeleton count={6} />}
 
       {!loading && shared.length === 0 && (
-        <EmptyScene image="/illustrations/blob/blob-friends.png">
+        <EmptyScene icon={Users} tone="sky">
           <p className="text-base font-semibold">{t("fc.nothingShared")}</p>
           <p className="mt-1.5 text-sm text-muted-foreground">
             {t("fc.nothingSharedBody")}

@@ -53,7 +53,7 @@ import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
 import { WarmupQuiz } from "@/components/onboarding/warmup-quiz";
-import Image from "next/image";
+import { ActivityIcon, IconTile } from "@/components/graphics/icon-tile";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { ACTIVITY_TYPE_LABELS } from "@/components/session/activity-item";
@@ -71,19 +71,8 @@ import {
   RefreshCw,
   Trash2,
   X,
+  Sparkles,
 } from "lucide-react";
-
-const ACTIVITY_ICON: Record<SessionActivity["type"], string> = {
-  reading: "/illustrations/icons/act-reading.png",
-  comprehension_check: "/illustrations/icons/act-comprehension.png",
-  mcq: "/illustrations/icons/act-mcq.png",
-  flashcard_review: "/illustrations/icons/act-flashcards.png",
-  worksheet: "/illustrations/icons/act-worksheet.png",
-  interactive: "/illustrations/icons/act-interactive.png",
-  vocab_recall: "/illustrations/icons/act-vocab.png",
-  cloze: "/illustrations/icons/act-cloze.png",
-  explain_aloud: "/illustrations/icons/act-explain.png",
-};
 
 const phaseOf = (t: SessionActivity["type"]) =>
   t === "reading" || t === "comprehension_check" || t === "interactive"
@@ -770,13 +759,7 @@ export default function SessionDetailPage() {
               <div className="space-y-5">
                 {cheerKey && (
                   <div className="flex items-center gap-2">
-                    <Image
-                      src="/illustrations/props/star-gold.png"
-                      alt=""
-                      width={40}
-                      height={40}
-                      className="pointer-events-none h-5 w-5 shrink-0 select-none object-contain"
-                    />
+                    <Sparkles className="h-4 w-4 shrink-0 text-amber" />
                     <p className="text-xs font-semibold text-accent">
                       {t(cheerKey)}
                     </p>
@@ -853,13 +836,7 @@ export default function SessionDetailPage() {
           {celebrating && (
             <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
               <div className="animate-celebrate-pop flex flex-col items-center gap-2">
-                <Image
-                  src="/illustrations/props/star-gold.png"
-                  alt=""
-                  width={96}
-                  height={96}
-                  className="h-20 w-20 select-none object-contain"
-                />
+                <IconTile icon={Sparkles} tone="amber" size="xl" />
                 {cheerKey && (
                   <p className="text-sm font-bold text-accent">{t(cheerKey)}</p>
                 )}
@@ -909,13 +886,7 @@ export default function SessionDetailPage() {
                               : "border-border opacity-70 group-hover:opacity-100",
                         )}
                       >
-                        <Image
-                          src={ACTIVITY_ICON[activity.type]}
-                          alt=""
-                          width={28}
-                          height={28}
-                          className="pointer-events-none h-6 w-6 select-none object-contain"
-                        />
+                        <ActivityIcon type={activity.type} size="xs" />
                       </span>
                       {done && (
                         <span className="absolute -right-1 -top-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-accent text-accent-foreground">
@@ -1108,12 +1079,10 @@ function FeedPeek({
         <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-foreground" />
       )}
       {activity ? (
-        <Image
-          src={ACTIVITY_ICON[activity.type]}
-          alt=""
-          width={28}
-          height={28}
-          className="pointer-events-none h-7 w-7 select-none object-contain opacity-60 transition-opacity group-hover:opacity-100"
+        <ActivityIcon
+          type={activity.type}
+          size="sm"
+          className="opacity-70 transition-opacity group-hover:opacity-100"
         />
       ) : (
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent/15">

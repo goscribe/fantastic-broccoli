@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Image from "next/image";
+import { IconTile } from "@/components/graphics/icon-tile";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -102,19 +102,8 @@ const ASSISTANT_BRIEF = `You are Scribe's workspace study assistant — the stud
 - When a diagram would genuinely help an explanation (processes, hierarchies, timelines, comparisons), draw it: attach an interactive widget or a custom visualization via attach_study_aids (never a code-fenced diagram).
 - Keep replies short (under 4 sentences unless explaining or quizzing).`;
 
-/** Blob mascot greeting the empty chat. */
 function BlobHello() {
-  return (
-    <Image
-      src="/illustrations/blob/blob-hello.png"
-      alt=""
-      width={200}
-      height={200}
-      priority
-      aria-hidden
-      className="pointer-events-none mb-4 h-28 w-28 select-none object-contain"
-    />
-  );
+  return <IconTile icon={Sparkles} tone="purple" size="lg" className="mb-4" />;
 }
 
 /** File chip shown on pending uploads and inside chat messages. */
@@ -629,15 +618,7 @@ export default function WorkspaceChatPage() {
     return (
       <WorkspaceShell workspace={workspace} loading>
         <div className="flex h-full min-h-[60vh] w-full flex-col items-center justify-center gap-3">
-          <Image
-            src="/illustrations/blob/blob-hello.png"
-            alt=""
-            width={112}
-            height={112}
-            priority
-            aria-hidden
-            className="pointer-events-none h-20 w-20 select-none object-contain opacity-80"
-          />
+          <Loader2 className="h-5 w-5 animate-spin text-accent" />
           <Skeleton className="h-4 w-40 rounded-full" />
           <Skeleton className="h-3 w-56 rounded-full" />
         </div>

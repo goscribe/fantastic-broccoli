@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/seo";
-import { ArtStage, CtaBand, FeatureSplit } from "@/components/graphics/marketing-art";
+import { CtaBand, FeatureSplit } from "@/components/graphics/marketing-art";
+import { IconTile, type Tone } from "@/components/graphics/icon-tile";
+import type { ArtTint } from "../data";
+
+const STEP_TONE: Record<ArtTint, Tone> = {
+  accent: "purple",
+  sky: "sky",
+  rose: "pink",
+  amber: "amber",
+};
 import { GlowField } from "@/components/graphics/landing-art";
 import { homeScenes, howItWorks } from "../data";
 
@@ -31,15 +40,16 @@ export default function HowItWorksPage() {
           <ol className="mt-12 grid gap-8 sm:grid-cols-3 sm:gap-6">
             {howItWorks.map((step) => (
               <li key={step.num}>
-                <ArtStage
-                  src={step.art}
-                  tint={step.tint}
-                  side={step.side}
-                  size="md"
-                />
-                <span className="mt-5 flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-sm font-bold text-accent">
-                  {step.num}
-                </span>
+                <div className="flex items-center gap-3">
+                  <IconTile
+                    icon={step.icon}
+                    tone={STEP_TONE[step.tint]}
+                    size="lg"
+                  />
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-muted text-sm font-bold text-muted-foreground">
+                    {step.num}
+                  </span>
+                </div>
                 <h2 className="mt-3 text-base font-semibold">{step.title}</h2>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                   {step.description}

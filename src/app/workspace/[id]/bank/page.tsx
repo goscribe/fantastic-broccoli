@@ -30,6 +30,7 @@ import {
   RefreshCw,
   Trash2,
   Users,
+  Target,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
@@ -364,10 +365,7 @@ export default function WorkspaceBankPage() {
         )}
 
         {groups.length === 0 ? (
-          <EmptyScene
-            image="/illustrations/icons/target.png"
-            className="animate-fade-up"
-          >
+          <EmptyScene icon={Target} tone="amber" className="animate-fade-up">
             <p className="text-base font-semibold">{t("ws.bankEmpty")}</p>
             <p className="text-sm text-muted-foreground mt-1.5">
               {t("ws.bankEmptyHint")}

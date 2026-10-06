@@ -4,8 +4,7 @@ import { MathText } from "@/components/ui/markdown-text";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
-import { ConfettiDots } from "@/components/graphics/floating-decor";
+import { IconTile } from "@/components/graphics/icon-tile";
 import {
   Sparkles,
   Loader2,
@@ -13,6 +12,7 @@ import {
   ArrowRight,
   FileText,
   CalendarClock,
+  Trophy,
 } from "lucide-react";
 import { awardSessionCredits } from "@/lib/credits";
 import { useQuery } from "@tanstack/react-query";
@@ -98,20 +98,8 @@ export function SessionDebrief({
   return (
     <div className="animate-fade-up pb-10">
       <div className="relative mb-6 overflow-hidden rounded-3xl border border-border bg-card px-6 py-6">
-        <div
-          className="pointer-events-none absolute inset-y-0 right-0 hidden w-48 select-none sm:block"
-          aria-hidden
-        >
-          <Image
-            src="/illustrations/props/trophy.png"
-            alt=""
-            width={160}
-            height={160}
-            className="absolute -bottom-3 right-6 w-24"
-          />
-          <ConfettiDots />
-        </div>
-        <div className="relative sm:max-w-[calc(100%-11rem)]">
+        <IconTile icon={Trophy} tone="amber" size="lg" className="mb-4" />
+        <div className="relative">
           <p className="flex items-center gap-1.5 text-[11px] font-medium text-accent-dim mb-2">
             <Sparkles className="h-3 w-3" />
             {t("session.debriefGenerated")}

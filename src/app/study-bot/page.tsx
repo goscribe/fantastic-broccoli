@@ -2,8 +2,8 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { ArrowUp, FileText, Loader2, Paperclip, X } from "lucide-react";
+import { IconTile } from "@/components/graphics/icon-tile";
+import { ArrowUp, FileText, Loader2, Paperclip, Sparkles, X } from "lucide-react";
 import { createWorkspace } from "@/lib/api/workspace";
 import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
 import { emitTreeChanged } from "@/lib/tree-events";
@@ -67,14 +67,7 @@ export default function StudyBotPage() {
     <main className="flex flex-1 flex-col items-center justify-center bg-card px-6 py-10">
       <div className="w-full max-w-xl animate-fade-up">
         <div>
-          <Image
-            src="/illustrations/blob/blob-hello.png"
-            alt=""
-            width={200}
-            height={200}
-            priority
-            className="pointer-events-none mb-5 h-28 w-28 select-none object-contain"
-          />
+          <IconTile icon={Sparkles} tone="purple" size="lg" className="mb-5" />
           <h1 className="text-[26px] font-bold tracking-tight sm:text-3xl">
             {t("misc.studyBotTitle")}
           </h1>

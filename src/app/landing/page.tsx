@@ -7,7 +7,7 @@ import {
   CtaBand,
   FunFeatureCard,
 } from "@/components/graphics/marketing-art";
-import { Sticker } from "@/components/graphics/floating-decor";
+import { IconTile } from "@/components/graphics/icon-tile";
 import { Button } from "@/components/ui/button";
 import { HeroPreview, StatsStrip } from "./hero-preview";
 import { features, subjects } from "./data";
@@ -74,22 +74,7 @@ export default function LandingPage() {
               </p>
             </div>
             <div className="relative animate-fade-up">
-              <Sticker
-                src="/illustrations/props/star-gold.png"
-                className="-top-6 right-8 z-20 hidden w-12 rotate-12 sm:block"
-              />
-              <Sticker
-                src="/illustrations/props/pencil.png"
-                className="-bottom-4 -left-6 z-20 hidden w-14 -rotate-12 lg:block"
-                delay="0.7s"
-              />
-              <ArtStage
-                src="/illustrations/marketing/mkt-hero.png"
-                tint="accent"
-                side="right"
-                size="md"
-                className="p-5 sm:p-6"
-              >
+              <ArtStage tint="accent" className="p-5 sm:p-6">
                 <HeroPreview />
               </ArtStage>
             </div>
@@ -107,14 +92,9 @@ export default function LandingPage() {
               {subjects.map((subject) => (
                 <li
                   key={subject.name}
-                  className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-bold ${subject.tint}`}
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-card py-1 pl-1 pr-3.5 text-sm font-semibold"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={subject.icon}
-                    alt=""
-                    className="h-6 w-6 object-contain"
-                  />
+                  <IconTile icon={subject.icon} tone={subject.tone} size="xs" />
                   {subject.name}
                 </li>
               ))}

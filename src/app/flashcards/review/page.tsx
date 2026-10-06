@@ -1,14 +1,14 @@
 "use client";
 
 import "@/lib/i18n/flashcards";
-import Image from "next/image";
+import { IconTile } from "@/components/graphics/icon-tile";
 import Link from "next/link";
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { DeckLearnView } from "@/components/flashcards/deck-learn-view";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Trophy } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
 /** Daily spaced review: every card past its SM-2 review date, across decks. */
@@ -69,14 +69,8 @@ export default function DueReviewPage() {
         {isLoading && <Skeleton className="h-[380px] w-full rounded-3xl" />}
 
         {data && data.cards.length === 0 && (
-          <div className="rounded-2xl border border-border bg-card px-6 py-12 text-center">
-            <Image
-              src="/illustrations/props/trophy.png"
-              alt=""
-              width={132}
-              height={160}
-              className="pointer-events-none mx-auto h-20 w-auto select-none"
-            />
+          <div className="rounded-3xl border border-border bg-card px-6 py-10">
+            <IconTile icon={Trophy} tone="amber" size="lg" />
             <p className="mt-3 text-sm font-medium">{t("fc.allCaughtUp")}</p>
             <p className="mt-1 text-sm text-muted-foreground">
               {t("fc.noCardsDue")}

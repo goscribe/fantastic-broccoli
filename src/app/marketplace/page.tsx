@@ -305,7 +305,7 @@ export default function MarketplacePage() {
         {isLoading ? (
           <CardGridSkeleton count={8} />
         ) : filtered.length === 0 ? (
-          <EmptyScene image="/illustrations/blob/blob-search.png">
+          <EmptyScene icon={Search} tone="neutral">
             <p className="text-base font-semibold">
               {t(aiResults !== null ? "fc.mkNoMatches" : "fc.mkNothingHere")}
             </p>

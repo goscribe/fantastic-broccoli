@@ -101,6 +101,7 @@ const english = {
   "misc.startFirstSession": "Start your first study session",
   "misc.planBlurb": "A plan generated around your syllabus and schedule.",
   "misc.firstWinTitle": "Let's make your first win happen.",
+  "misc.getStarted": "Get started",
   "misc.progress": "Progress",
   "misc.gettingReady": "Getting your study space ready…",
   "misc.quickReviewBlurb": "A quick review today keeps them in memory.",

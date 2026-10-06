@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import { Check } from "lucide-react";
+import { Check, Flag, Layers, Zap } from "lucide-react";
+import { ActivityIcon, IconTile } from "@/components/graphics/icon-tile";
 import { ProductCard } from "@/components/graphics/marketing-art";
 import {
   AudioArt,
@@ -89,14 +89,7 @@ export function HeroPreview() {
                     {done ? (
                       <Check className="h-4 w-4 text-accent" />
                     ) : (
-                      <Image
-                        src={item.art}
-                        alt=""
-                        width={28}
-                        height={28}
-                        unoptimized
-                        className="h-6 w-6 object-contain"
-                      />
+                      <ActivityIcon type={item.type} size="sm" />
                     )}
                   </span>
                   <span
@@ -138,29 +131,25 @@ export function StatsStrip() {
         {
           value: `${roundedDown(stats.artifacts, 100).toLocaleString()}+`,
           label: "practice artifacts generated",
-          icon: "/illustrations/icons/stat-bolt.png",
+          icon: Zap,
+          tone: "purple" as const,
         },
         {
           value: `${roundedDown(stats.activities, 10).toLocaleString()}+`,
           label: "study activities built",
-          icon: "/illustrations/icons/act-flashcards.png",
+          icon: Layers,
+          tone: "pink" as const,
         },
         {
           value: `${stats.countries}`,
           label: "countries studying with Scribe",
-          icon: "/illustrations/props/flag-mini.png",
+          icon: Flag,
+          tone: "amber" as const,
         },
       ].map((stat) => (
         <div key={stat.label} className="flex flex-col items-center">
           <dt className="sr-only">{stat.label}</dt>
-          <Image
-            src={stat.icon}
-            alt=""
-            width={80}
-            height={80}
-            unoptimized
-            className="mb-2 h-14 w-14 object-contain"
-          />
+          <IconTile icon={stat.icon} tone={stat.tone} size="md" className="mb-3" />
           <dd className="text-4xl font-extrabold tracking-tight tabular-nums">
             {stat.value}
           </dd>

@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import Image from "next/image";
 import { ScribeMark } from "@/components/graphics/logo";
-import { accentNameForColor, accentNameForId } from "@/lib/accent-palette";
+import { accentForColor, accentNameForId } from "@/lib/accent-palette";
+import { IconTile } from "@/components/graphics/icon-tile";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { onTreeChanged } from "@/lib/tree-events";
 import { signOut, useAuthUser } from "@/lib/api/auth";
@@ -23,6 +23,7 @@ import { useI18n } from "@/lib/i18n";
 import {
   Home,
   Layers,
+  Folder,
   Users,
   ChevronRight,
   FilePlus2,
@@ -33,28 +34,6 @@ import {
   Settings,
   LogOut,
 } from "lucide-react";
-
-function ClayIcon({
-  src,
-  className,
-}: {
-  src: string;
-  className?: string;
-}) {
-  return (
-    <Image
-      src={src}
-      alt=""
-      width={64}
-      height={64}
-      unoptimized
-      className={cn(
-        "pointer-events-none shrink-0 select-none object-contain",
-        className,
-      )}
-    />
-  );
-}
 
 function FolderNode({
   folder,
@@ -103,9 +82,11 @@ function FolderNode({
           onClick={() => router.push(`/folder/${folder.id}`)}
           className="flex min-w-0 flex-1 items-center gap-1.5 text-left"
         >
-          <ClayIcon
-            src={`/illustrations/icons/folder-${accentNameForColor(folder.color, folder.id)}.png`}
-            className="h-5 w-5"
+          <Folder
+            className="h-4 w-4 shrink-0"
+            style={{ color: accentForColor(folder.color, folder.id) }}
+            fill="currentColor"
+            fillOpacity={0.18}
           />
           <span className="truncate">{folder.name}</span>
         </button>
@@ -146,10 +127,7 @@ function FolderNode({
                 )}
                 style={{ paddingLeft: `${(depth + 1) * 14 + 24}px` }}
               >
-                <ClayIcon
-                  src={`/illustrations/icons/ws-${accentNameForId(ws.id)}.png`}
-                  className="h-5 w-5"
-                />
+                <IconTile icon={Layers} tone={accentNameForId(ws.id)} size="xs" />
                 <span className="truncate">{ws.title}</span>
               </button>
             );
@@ -359,10 +337,7 @@ export function Sidebar({
                         : "text-muted-foreground hover:bg-muted hover:text-foreground",
                     )}
                   >
-                    <ClayIcon
-                      src={`/illustrations/icons/ws-${accentNameForId(ws.id)}.png`}
-                      className="h-5 w-5"
-                    />
+                    <IconTile icon={Layers} tone={accentNameForId(ws.id)} size="xs" />
                     <span className="truncate">{ws.title}</span>
                   </Link>
                 );

@@ -1,90 +1,84 @@
-export const subjects = [
-  {
-    name: "Chemistry",
-    icon: "/illustrations/icons/ws-purple.png",
-    tint: "bg-accent-soft",
-  },
-  {
-    name: "Biology",
-    icon: "/illustrations/icons/ws-emerald.png",
-    tint: "bg-emerald-500/15",
-  },
-  {
-    name: "Physics",
-    icon: "/illustrations/icons/ws-sky.png",
-    tint: "bg-sky/20",
-  },
-  {
-    name: "Math",
-    icon: "/illustrations/icons/ws-amber.png",
-    tint: "bg-amber/20",
-  },
-  {
-    name: "English",
-    icon: "/illustrations/icons/ws-pink.png",
-    tint: "bg-rose/20",
-  },
-  {
-    name: "History",
-    icon: "/illustrations/props/book-blue.png",
-    tint: "bg-sky/15",
-  },
+import type { LucideIcon } from "lucide-react";
+import {
+  Atom,
+  BookOpen,
+  Calculator,
+  Dna,
+  FlaskConical,
+  Landmark,
+  Layers,
+  ListChecks,
+  MessageSquare,
+  PenLine,
+  Sparkles,
+  TextCursorInput,
+  Upload,
+} from "lucide-react";
+import type { Tone } from "@/components/graphics/icon-tile";
+import type { SessionActivity } from "@/types";
+
+export const subjects: { name: string; icon: LucideIcon; tone: Tone }[] = [
+  { name: "Chemistry", icon: FlaskConical, tone: "purple" },
+  { name: "Biology", icon: Dna, tone: "emerald" },
+  { name: "Physics", icon: Atom, tone: "sky" },
+  { name: "Math", icon: Calculator, tone: "amber" },
+  { name: "English", icon: BookOpen, tone: "pink" },
+  { name: "History", icon: Landmark, tone: "sky" },
 ];
 
 export type SceneMock =
   "session" | "quiz" | "copilot" | "upload" | "flashcards";
 export type ArtTint = "accent" | "sky" | "rose" | "amber";
-export type ArtSide = "right" | "left" | "bottom";
 
 export interface Feature {
-  icon: string;
+  icon: LucideIcon;
+  tone: Tone;
   title: string;
   description: string;
-  tint: ArtTint;
 }
 
 export const features: Feature[] = [
   {
-    icon: "/illustrations/icons/act-reading.png",
+    icon: BookOpen,
     title: "Readings with figures",
     description:
       "Focused readings generated from your materials, with the original figures and diagrams pulled straight from your PDFs.",
-    tint: "accent",
+    tone: "purple",
   },
   {
-    icon: "/illustrations/icons/act-worksheet.png",
+    icon: PenLine,
     title: "Worksheets with AI grading",
     description:
       "Exam-style questions marked against an AI markscheme — with per-part feedback, not just right or wrong.",
-    tint: "sky",
+    tone: "sky",
   },
   {
-    icon: "/illustrations/icons/act-flashcards.png",
+    icon: Layers,
     title: "Flashcards",
     description:
       "Auto-generated decks that target the definitions, formulas, and concepts you actually need to memorise.",
-    tint: "amber",
+    tone: "amber",
   },
   {
-    icon: "/illustrations/icons/act-cloze.png",
+    icon: TextCursorInput,
     title: "Cloze passages",
     description:
       "Fill-in-the-blank passages built from your notes that force real recall instead of passive recognition.",
-    tint: "rose",
+    tone: "pink",
   },
   {
-    icon: "/illustrations/icons/act-comprehension.png",
+    icon: ListChecks,
     title: "Comprehension checks",
     description:
       "Quick checkpoints after each reading to confirm you understood it — before you move on.",
-    tint: "sky",
+    tone: "sky",
   },
   {
-    icon: "/illustrations/icons/act-explain.png",
+    icon: MessageSquare,
     title: "AI copilot",
     description:
       "A study partner that knows your course. Ask questions, get explanations, and dig deeper without leaving your session.",
-    tint: "accent",
+    tone: "purple",
   },
 ];
 
@@ -95,9 +89,7 @@ export interface FeatureScene {
   mock: SceneMock;
   reverse?: boolean;
   url?: string;
-  art?: string;
   artTint?: ArtTint;
-  artSide?: ArtSide;
 }
 
 export const homeScenes: FeatureScene[] = [
@@ -112,9 +104,6 @@ export const homeScenes: FeatureScene[] = [
     mock: "quiz",
     reverse: true,
     url: "scribe.study/session",
-    art: "/illustrations/marketing/mkt-quiz.png",
-    artTint: "amber",
-    artSide: "left",
   },
   {
     title: "A copilot that already read the PDF",
@@ -126,9 +115,6 @@ export const homeScenes: FeatureScene[] = [
     ],
     mock: "copilot",
     url: "scribe.study/session",
-    art: "/illustrations/blob/blob-think.png",
-    artTint: "accent",
-    artSide: "right",
   },
 ];
 
@@ -138,27 +124,24 @@ export const howItWorks = [
     title: "Upload your materials",
     description:
       "Drop in PDFs, lecture slides, or audio. Scribe parses the text, figures, and diagrams — the stuff your exam will actually use.",
-    art: "/illustrations/marketing/mkt-upload.png",
+    icon: Upload,
     tint: "sky" as const,
-    side: "bottom" as const,
   },
   {
     num: "2",
     title: "Scribe builds the session",
     description:
       "Your materials become a path: readings, checks, worksheets, flashcards. One plan, not five tabs.",
-    art: "/illustrations/marketing/mkt-reading.png",
+    icon: Sparkles,
     tint: "accent" as const,
-    side: "right" as const,
   },
   {
     num: "3",
     title: "Study, then ask",
     description:
       "Work through the waypoints. When you get stuck, the copilot answers from your own pages and can add extra practice.",
-    art: "/illustrations/marketing/mkt-mcq.png",
+    icon: MessageSquare,
     tint: "rose" as const,
-    side: "left" as const,
   },
 ];
 
@@ -208,32 +191,32 @@ export const plans = [
 ];
 
 export const sessionPreview: {
-  art: string;
+  type: SessionActivity["type"];
   label: string;
   meta: string;
 }[] = [
   {
-    art: "/illustrations/icons/act-reading.png",
+    type: "reading",
     label: "Reading: Enzyme kinetics",
     meta: "12 min",
   },
   {
-    art: "/illustrations/icons/act-comprehension.png",
+    type: "comprehension_check",
     label: "Comprehension check",
     meta: "4 questions",
   },
   {
-    art: "/illustrations/icons/act-worksheet.png",
+    type: "worksheet",
     label: "Worksheet: Rate equations",
     meta: "6 parts",
   },
   {
-    art: "/illustrations/icons/act-flashcards.png",
+    type: "flashcard_review",
     label: "Flashcards: Key definitions",
     meta: "18 cards",
   },
   {
-    art: "/illustrations/icons/act-cloze.png",
+    type: "cloze",
     label: "Cloze: Michaelis–Menten",
     meta: "1 passage",
   },

@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/seo";
-import { ArtStage, CtaBand } from "@/components/graphics/marketing-art";
+import {
+  ArtStage,
+  CtaBand,
+  ProductCard,
+  SessionMock,
+} from "@/components/graphics/marketing-art";
 import { GlowField } from "@/components/graphics/landing-art";
 import { testimonials } from "../data";
 
@@ -39,12 +44,11 @@ export default function AboutPage() {
               one path you can finish.
             </p>
           </div>
-          <ArtStage
-            src="/illustrations/marketing/mkt-clip.png"
-            tint="rose"
-            side="bottom"
-            size="lg"
-          />
+          <ArtStage tint="rose">
+            <ProductCard eyebrow="scribe.study/session" className="mx-auto max-w-md shadow-md">
+              <SessionMock />
+            </ProductCard>
+          </ArtStage>
         </div>
       </section>
       <section className="border-y border-border bg-card/40 py-16">
@@ -78,13 +82,7 @@ export default function AboutPage() {
             What studying with Scribe feels like
           </h2>
           <div className="mt-10 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-            <ArtStage
-              src="/illustrations/marketing/mkt-worksheet.png"
-              tint="sky"
-              side="right"
-              size="md"
-              className="p-6 sm:p-8"
-            >
+            <ArtStage tint="sky" className="p-6 sm:p-8">
               <blockquote className="relative z-10 max-w-md">
                 <p className="text-base leading-relaxed text-pretty sm:text-lg">
                   “{featured.quote}”

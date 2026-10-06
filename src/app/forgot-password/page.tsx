@@ -42,13 +42,7 @@ export default function ForgotPasswordPage() {
         </Link>
       </div>
 
-      <AuthFigure
-        src={
-          sent
-            ? "/illustrations/blob/blob-hello.png"
-            : "/illustrations/blob/blob-search.png"
-        }
-      />
+      <AuthFigure state={sent ? "success" : "idle"} />
 
         <div className="text-center space-y-1.5">
           <h1 className="text-2xl font-bold tracking-tight">

@@ -58,3 +58,11 @@ export function accentNameForColor(
   });
   return best;
 }
+
+/** Hex for the nearest accent to a saved color (or the id's hashed accent). */
+export function accentForColor(
+  color: string | null | undefined,
+  fallbackId: string,
+): string {
+  return ACCENT_PALETTE[ACCENT_NAMES.indexOf(accentNameForColor(color, fallbackId))];
+}

@@ -29,7 +29,12 @@ import { toast, toastError } from "@/lib/toast";
 import { importYoutube } from "@/lib/api/materials";
 import { emitTreeChanged } from "@/lib/tree-events";
 import "@/lib/i18n/workspace";
-import { Plus, Sparkles, ArrowRight } from "lucide-react";
+import {
+  Plus,
+  Sparkles,
+  ArrowRight,
+  Flag,
+} from "lucide-react";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { EmptyScene } from "@/components/graphics/floating-decor";
 
@@ -200,7 +205,7 @@ export default function WorkspaceStudyPage() {
               ))}
             </div>
           ) : workspace?.sharedBy && sessions.length === 0 ? (
-            <EmptyScene image="/illustrations/blob/blob-flag.png">
+            <EmptyScene icon={Flag} tone="purple">
               <p className="text-base font-semibold">
                 {t("ws.sessionsPrivate")}
               </p>

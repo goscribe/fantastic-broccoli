@@ -32,13 +32,27 @@ import {
   markFirstSessionOnboardingSkipped,
 } from "@/components/onboarding/first-session-onboarding";
 import { onTreeChanged } from "@/lib/tree-events";
-import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDays,
+  Clock,
+  Flag,
+  Flame,
+  Plus,
+  RotateCcw,
+  Search,
+  Upload,
+  Zap,
+} from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
-import { HeroScene, ConfettiDots, Sticker } from "@/components/graphics/floating-decor";
+import { ActivityIcon, IconTile } from "@/components/graphics/icon-tile";
+import { ProgressRing } from "@/components/ui/progress-ring";
+import { ACTIVITY_TYPE_LABELS } from "@/components/session/activity-item";
+import "@/lib/i18n/workspace";
+import "@/lib/i18n/session";
 import { Banner } from "@/components/ui/banner";
 import { Button } from "@/components/ui/button";
 import { HomeUploadRow } from "@/components/workspace/home-upload-row";
@@ -261,40 +275,17 @@ export default function HomePage() {
           data-tour="home-banner"
           className="relative z-10 grid gap-4 animate-fade-up lg:grid-cols-[1fr_250px]"
         >
-          <div className="relative rounded-2xl border border-border bg-card p-5 sm:p-7">
-            {/* Clip the mascot art, not the New-workspace menu. */}
-            <div
-              className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
-              aria-hidden
-            >
-              {resumable ? (
-                <HeroScene />
-              ) : (
-                <>
-                  <Image
-                    src="/illustrations/blob/blob-hello.png"
-                    alt=""
-                    width={280}
-                    height={280}
-                    priority
-                    unoptimized
-                    className="absolute -bottom-6 right-2 hidden w-52 select-none md:block lg:right-6 lg:w-64"
-                  />
-                  <Sticker
-                    src="/illustrations/props/star-gold.png"
-                    className="right-36 top-4 hidden w-9 rotate-12 md:block"
-                  />
-                  <ConfettiDots className="hidden md:block" />
-                </>
-              )}
-            </div>
+          <div className="relative grid gap-6 rounded-3xl bg-accent-soft p-6 sm:p-8 md:grid-cols-[1fr_auto] md:items-center">
             <div className="relative z-10 max-w-lg">
-              <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight leading-snug">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-accent">
+                {resumable ? t("ws.studyNow.pickUp") : t("misc.getStarted")}
+              </p>
+              <h2 className="mt-2 text-2xl font-bold leading-tight sm:text-[1.75rem]">
                 {resumable
                   ? resumable.session.title
                   : t("misc.firstWinTitle")}
               </h2>
-              <p className="text-sm text-muted-foreground mt-1.5">
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 {resumable
                   ? `${resumable.workspace.title} · ${formatDuration(resumable.session.durationMinutes)} · ${resumable.session.activities.filter((a) => a.status === "completed").length} of ${resumable.session.activities.length} activities complete`
                   : t("misc.planBlurb")}
@@ -315,7 +306,7 @@ export default function HomePage() {
                   </Button>
                   <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
                     {(toggle) => (
-                      <Button type="button" variant="outline" onClick={toggle} className="gap-2">
+                      <Button type="button" variant="outline" onClick={toggle} className="gap-2 bg-transparent">
                         <Plus className="h-3.5 w-3.5" />
                         {t("nav.newWorkspace")}
                       </Button>
@@ -337,33 +328,61 @@ export default function HomePage() {
                 </NewWorkspaceMenu>
               )}
             </div>
+            {resumable ? (
+              <ul className="hidden w-64 space-y-1.5 md:block">
+                {resumable.session.activities
+                  .filter((a) => a.status !== "completed")
+                  .slice(0, 3)
+                  .map((a) => (
+                    <li
+                      key={a.id}
+                      className="flex items-center gap-3 rounded-2xl bg-card px-3 py-2.5 shadow-[var(--shadow-card)]"
+                    >
+                      <ActivityIcon type={a.type} size="sm" />
+                      <div className="min-w-0">
+                        <p className="truncate text-[13px] font-semibold">
+                          {a.title}
+                        </p>
+                        <p className="text-[11px] text-muted-foreground">
+                          {t(ACTIVITY_TYPE_LABELS[a.type] ?? "session.typeActivity")}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+              </ul>
+            ) : (
+              <ul className="hidden w-64 space-y-1.5 md:block">
+                {[
+                  { icon: Upload, tone: "purple" as const, label: t("ws.studyNow.uploadCta") },
+                  { icon: Zap, tone: "amber" as const, label: t("ws.studyNow.quick5") },
+                  { icon: RotateCcw, tone: "emerald" as const, label: t("home.reviewNow") },
+                ].map((step, i) => (
+                  <li
+                    key={step.label}
+                    className="flex items-center gap-3 rounded-2xl bg-card px-3 py-2.5 shadow-[var(--shadow-card)]"
+                  >
+                    <IconTile icon={step.icon} tone={step.tone} size="sm" />
+                    <p className="truncate text-[13px] font-semibold">
+                      <span className="mr-1.5 text-faint tabular-nums">{i + 1}.</span>
+                      {step.label}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
-          {/* Progress scene */}
-          <div className="relative hidden overflow-hidden rounded-2xl border border-border bg-card p-5 lg:block">
-            <ConfettiDots />
-            <p className="relative text-4xl font-extrabold tabular-nums">
-              {heroProgress}%
-            </p>
-            <p className="relative mt-0.5 text-[11px] font-bold text-muted-foreground">
-              {t("misc.progress")}
-            </p>
-            <Image
-              src="/illustrations/blob/blob-climb.png"
-              alt=""
-              width={220}
-              height={220}
-              unoptimized
-              className="pointer-events-none absolute -bottom-3 right-1 w-32 select-none"
-            />
-            <Image
-              src="/illustrations/props/star-gold.png"
-              alt=""
-              width={60}
-              height={60}
-              unoptimized
-              className="pointer-events-none absolute right-4 top-4 w-9 rotate-12 select-none"
-            />
+          {/* Progress ring */}
+          <div className="hidden items-center gap-5 rounded-3xl border border-border bg-card p-5 lg:flex">
+            <ProgressRing value={heroProgress} />
+            <div>
+              <p className="text-3xl font-bold tabular-nums leading-none">
+                {heroProgress}%
+              </p>
+              <p className="mt-1.5 text-xs font-medium text-muted-foreground">
+                {t("misc.progress")}
+              </p>
+            </div>
           </div>
         </section>
 
@@ -406,7 +425,8 @@ export default function HomePage() {
                   {
                     label: t("misc.dayStreak"),
                     value: String(streak),
-                    icon: "/illustrations/icons/stat-flame.png",
+                    icon: Flame,
+                    tone: "amber" as const,
                     hideOnMobile: true,
                   },
                   {
@@ -414,7 +434,8 @@ export default function HomePage() {
                     value: String(
                       dailyActivity.filter((d) => d.count > 0).length,
                     ),
-                    icon: "/illustrations/icons/stat-calendar.png",
+                    icon: CalendarDays,
+                    tone: "sky" as const,
                     hideOnMobile: false,
                   },
                   {
@@ -422,19 +443,22 @@ export default function HomePage() {
                     value: String(
                       dailyActivity.reduce((s, d) => s + d.count, 0),
                     ),
-                    icon: "/illustrations/icons/stat-bolt.png",
+                    icon: Zap,
+                    tone: "purple" as const,
                     hideOnMobile: false,
                   },
                   {
                     label: t("misc.activePlans"),
                     value: String(activeSessions.length),
-                    icon: "/illustrations/props/flag-mini.png",
+                    icon: Flag,
+                    tone: "pink" as const,
                     hideOnMobile: false,
                   },
                   {
                     label: t("misc.timePlanned"),
                     value: formatDuration(totalPlannedMinutes),
-                    icon: "/illustrations/icons/stat-clock.png",
+                    icon: Clock,
+                    tone: "emerald" as const,
                     hideOnMobile: false,
                   },
                 ].map((stat) => (
@@ -445,14 +469,7 @@ export default function HomePage() {
                     }`}
                     title={stat.label}
                   >
-                    <Image
-                      src={stat.icon}
-                      alt=""
-                      width={96}
-                      height={96}
-                      unoptimized
-                      className="pointer-events-none h-9 w-9 shrink-0 select-none object-contain sm:h-12 sm:w-12"
-                    />
+                    <IconTile icon={stat.icon} tone={stat.tone} size="md" />
                     <div className="min-w-0">
                       <p className="text-lg font-bold tabular-nums leading-none tracking-tight sm:text-xl">
                         {stat.value}

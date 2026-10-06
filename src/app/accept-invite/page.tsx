@@ -61,15 +61,7 @@ export default function AcceptInvitePage() {
         </Link>
       </div>
 
-      <AuthFigure
-        src={
-          status === "success"
-            ? "/illustrations/props/trophy.png"
-            : status === "error"
-              ? "/illustrations/blob/blob-flag.png"
-              : "/illustrations/blob/blob-think.png"
-        }
-      />
+      <AuthFigure state={status} />
 
       <div className="space-y-1.5 text-center">
         <h1 className="text-2xl font-bold tracking-tight">

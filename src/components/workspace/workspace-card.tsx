@@ -5,7 +5,7 @@ import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { formatRelativeDate, formatDuration } from "@/lib/utils";
 import { accentNameForId } from "@/lib/accent-palette";
-import Image from "next/image";
+import { IconTile } from "@/components/graphics/icon-tile";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import { Clock, ArrowRight, FileText, BookOpen, UserPlus } from "lucide-react";
@@ -62,13 +62,7 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
       )}
 
       <div className="flex items-start gap-3">
-        <Image
-          src={`/illustrations/icons/ws-${accent}.png`}
-          alt=""
-          width={80}
-          height={80}
-          className="pointer-events-none h-10 w-10 shrink-0 select-none object-contain"
-        />
+        <IconTile icon={BookOpen} tone={accent} size="md" />
         <div className="min-w-0 flex-1 pr-5">
           <div className="flex items-center gap-2">
             <h3 className="font-semibold text-sm leading-tight truncate">

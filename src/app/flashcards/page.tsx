@@ -9,13 +9,15 @@ import {
 } from "@/lib/flashcard-decks";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
 import { BankDocThumb } from "@/components/bank/bank-content";
-import { RotateCcw } from "lucide-react";
+import {
+  RotateCcw,
+  Layers,
+} from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { useI18n } from "@/lib/i18n";
 import {
   EmptyScene,
-  HeaderDecor,
 } from "@/components/graphics/floating-decor";
 
 function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
@@ -76,9 +78,6 @@ export default function FlashcardsPage() {
               {t("fc.subtitle")}
             </p>
           </div>
-          {(decks ?? []).length > 0 && (
-            <HeaderDecor image="/illustrations/blob/blob-cards.png" />
-          )}
         </div>
         {dueReview && dueReview.total > 0 && (
           <Link
@@ -96,7 +95,7 @@ export default function FlashcardsPage() {
       {isLoading && <CardGridSkeleton count={6} />}
 
       {!isLoading && (decks ?? []).length === 0 && (
-        <EmptyScene image="/illustrations/blob/blob-cards.png">
+        <EmptyScene icon={Layers} tone="pink">
           <p className="text-base font-semibold">{t("fc.noDecksTitle")}</p>
           <p className="mt-1.5 text-sm text-muted-foreground">
             {t("fc.noDecksBody")}

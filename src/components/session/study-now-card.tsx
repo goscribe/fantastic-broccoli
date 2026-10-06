@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import "@/lib/i18n/session";
 import { ACTIVITY_TYPE_LABELS } from "@/components/session/activity-item";
-import { ConfettiDots } from "@/components/graphics/floating-decor";
+import { ActivityIcon } from "@/components/graphics/icon-tile";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -195,23 +194,11 @@ export function StudyNowCard({
           "border-border bg-card hover:border-accent hover:shadow-md",
         )}
       >
-        {!compact && (
-          <div
-            className="pointer-events-none absolute inset-y-0 right-28 hidden w-40 select-none sm:block"
-            aria-hidden
-          >
-            <Image
-              src="/illustrations/blob/blob-flag.png"
-              alt=""
-              width={200}
-              height={200}
-              unoptimized
-              className="absolute -bottom-4 right-0 w-32"
-            />
-            <ConfettiDots />
-          </div>
-        )}
-        <div className="relative">
+        <div className="relative flex items-start gap-4">
+          {next && !compact && (
+            <ActivityIcon type={next.type} size="xl" className="mt-1 hidden sm:inline-flex" />
+          )}
+          <div className="min-w-0 flex-1">
           <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-accent">
             {session.quickStart ? (
               <>
@@ -269,6 +256,7 @@ export function StudyNowCard({
               className="mt-3.5 sm:max-w-md"
             />
           )}
+          </div>
         </div>
       </button>
     );

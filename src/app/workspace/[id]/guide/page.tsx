@@ -28,6 +28,7 @@ import {
   RefreshCw,
   Trash2,
   XCircle,
+  BookOpen,
 } from "lucide-react";
 
 interface EditorJsBlock {
@@ -461,7 +462,7 @@ export default function WorkspaceGuidePage() {
     <WorkspaceShell workspace={workspace}>
       <div className="animate-fade-up -mx-4 -my-6 min-h-full bg-paper px-4 py-6 sm:-mx-8 sm:-my-8 sm:px-8 sm:py-8">
         {error || !guides || guides.length === 0 ? (
-          <EmptyScene image="/illustrations/props/book-blue.png">
+          <EmptyScene icon={BookOpen} tone="sky">
             <p className="text-base font-semibold">No study guides yet</p>
             <p className="mt-1.5 text-sm text-muted-foreground">
               Upload materials in the Materials tab — Scribe builds study

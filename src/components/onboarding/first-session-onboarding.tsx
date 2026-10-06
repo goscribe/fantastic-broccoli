@@ -27,7 +27,7 @@ import {
   MailCheck,
   Zap,
 } from "lucide-react";
-import Image from "next/image";
+import { IconTile } from "@/components/graphics/icon-tile";
 import { cn } from "@/lib/utils";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import {
@@ -544,19 +544,10 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
-      <div className="w-full max-w-lg rounded-2xl border border-border bg-card p-6 text-center animate-fade-up">
-        <div className="relative -mx-6 -mt-6 mb-5 overflow-hidden rounded-t-2xl bg-gradient-to-br from-accent-soft via-accent-soft/40 to-transparent px-6 pt-6">
-          <Image
-            src="/illustrations/blob/blob-hello.png"
-            alt=""
-            width={340}
-            height={255}
-            priority
-            className="pointer-events-none mx-auto h-36 w-auto select-none"
-          />
-        </div>
-        <p className="text-xs font-semibold text-accent">Welcome to Scribe</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight">
+      <div className="w-full max-w-lg rounded-3xl bg-card p-6 text-left shadow-[var(--shadow-card)] animate-fade-up sm:p-8">
+        <IconTile icon={Upload} tone="purple" size="lg" />
+        <p className="mt-5 text-xs font-semibold text-accent">Welcome to Scribe</p>
+        <h1 className="mt-1.5 text-2xl font-bold sm:text-3xl">
           What are you studying?
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">

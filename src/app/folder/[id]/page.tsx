@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { IconTile } from "@/components/graphics/icon-tile";
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -19,7 +19,7 @@ import {
   type EditTarget,
 } from "@/components/workspace/resource-actions";
 import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
-import { ChevronRight, Plus } from "lucide-react";
+import { ChevronRight, Folder as FolderIcon, Plus } from "lucide-react";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
 
 function findFolderPath(folders: Folder[], id: string): Folder[] | null {
@@ -113,12 +113,10 @@ export default function FolderPage({
         </nav>
 
         <header className="flex items-center gap-3 animate-fade-up">
-          <Image
-            src={`/illustrations/icons/folder-${accentNameForColor(folder.color, folder.id)}.png`}
-            alt=""
-            width={96}
-            height={96}
-            className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
+          <IconTile
+            icon={FolderIcon}
+            tone={accentNameForColor(folder.color, folder.id)}
+            size="md"
           />
           <h1 className="text-2xl font-bold tracking-tight">{folder.name}</h1>
           <ResourceActionsMenu
@@ -225,12 +223,11 @@ export default function FolderPage({
             </div>
           ) : (
             <div className="rounded-xl border border-dashed border-border-strong px-4 py-8 text-center">
-              <Image
-                src={`/illustrations/icons/folder-${accentNameForColor(folder.color, folder.id)}.png`}
-                alt=""
-                width={128}
-                height={115}
-                className="pointer-events-none mx-auto mb-2 h-14 w-auto select-none"
+              <IconTile
+                icon={FolderIcon}
+                tone={accentNameForColor(folder.color, folder.id)}
+                size="lg"
+                className="mb-3"
               />
               <p className="text-sm text-muted-foreground">
                 No workspaces here yet.

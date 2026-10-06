@@ -57,13 +57,7 @@ export default function ResetPasswordPage() {
         </Link>
       </div>
 
-      <AuthFigure
-        src={
-          done
-            ? "/illustrations/props/trophy.png"
-            : "/illustrations/blob/blob-think.png"
-        }
-      />
+      <AuthFigure state={done ? "success" : "working"} />
 
       <div className="space-y-1.5 text-center">
         <h1 className="text-2xl font-bold tracking-tight">

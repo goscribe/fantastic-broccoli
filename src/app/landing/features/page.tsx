@@ -6,6 +6,7 @@ import {
   CtaBand,
   FunFeatureCard,
   ProductCard,
+  SessionMock,
 } from "@/components/graphics/marketing-art";
 import { DotGrid, GlowField } from "@/components/graphics/landing-art";
 import { ScribeMark } from "@/components/graphics/logo";
@@ -46,12 +47,11 @@ export default function FeaturesPage() {
                 from your own materials rather than generic question banks.
               </p>
             </div>
-            <ArtStage
-              src="/illustrations/marketing/mkt-reading.png"
-              tint="sky"
-              side="right"
-              size="lg"
-            />
+            <ArtStage tint="sky">
+              <ProductCard eyebrow="scribe.study/session" className="mx-auto max-w-md shadow-md">
+                <SessionMock />
+              </ProductCard>
+            </ArtStage>
           </div>
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature) => (
