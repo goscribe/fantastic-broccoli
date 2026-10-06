@@ -75,18 +75,26 @@ function lucideScript(): string {
 }
 
 // KaTeX for LaTeX inside visualizers. Elements with class "math" (inline)
-// or "math-display" (block) are rendered from their text content on load;
-// generated scripts can call window.renderMath() after dynamic updates.
+// or "math-display" (block) are rendered from their text content on load,
+// and re-rendered whenever a script overwrites that text (an element with no
+// .katex child is unrendered); a MutationObserver re-runs renderMath after
+// any DOM change so dynamic updates typeset even when the generated script
+// never calls window.renderMath().
 // renderMath also repairs common LLM output slips in plain text nodes:
 // literal "\n" escapes become <br>, $...$/$$...$$ delimited math is typeset,
 // and bare undelimited LaTeX fragments (e.g. C_{11}, \cdot, \frac{a}{b})
 // are typeset even without a .math class.
 function katexScript(): string {
   const repair = `
+var mathRendering=false;
 window.renderMath=function(){
-  if(!window.katex)return;
+  if(!window.katex||mathRendering)return;
+  mathRendering=true;
+  try{renderMathNow();}finally{mathRendering=false;}
+};
+function renderMathNow(){
   document.querySelectorAll(".math,.math-display").forEach(function(el){
-    if(el.dataset.mathRendered)return;el.dataset.mathRendered="1";
+    if(el.querySelector(".katex"))return;
     try{katex.render(el.textContent||"",el,{displayMode:el.classList.contains("math-display"),throwOnError:false});}catch(e){}
   });
   var texts=[],w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null),n;
@@ -175,7 +183,14 @@ window.renderMath=function(){
     }
   });
 };
-window.addEventListener("load",window.renderMath);`;
+window.addEventListener("load",function(){
+  window.renderMath();
+  var raf=0;
+  new MutationObserver(function(){
+    if(mathRendering||raf)return;
+    raf=requestAnimationFrame(function(){raf=0;window.renderMath();});
+  }).observe(document.body,{childList:true,characterData:true,subtree:true});
+});`;
   return (
     `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">` +
     `<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>` +
