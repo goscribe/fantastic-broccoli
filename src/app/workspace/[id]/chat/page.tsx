@@ -870,7 +870,12 @@ export default function WorkspaceChatPage() {
                           <InteractiveWidget key={id} id={id} />
                         ))}
                       {(m.visualizations ?? []).map((v, j) => (
-                        <HtmlWidget key={j} html={v.html} title={v.title} />
+                        <HtmlWidget
+                          key={j}
+                          html={v.html}
+                          title={v.title}
+                          surface="copilot_visualization"
+                        />
                       ))}
                     </div>
                   )}

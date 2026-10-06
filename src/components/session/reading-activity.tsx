@@ -221,7 +221,13 @@ export function FigureView({ figure }: { figure: ReadingFigure }) {
     );
   }
   if (figure.type === "html") {
-    return <HtmlWidget html={figure.html} title={figure.title} />;
+    return (
+      <HtmlWidget
+        html={figure.html}
+        title={figure.title}
+        surface="reading_figure"
+      />
+    );
   }
   return <ImageFigure figure={figure} />;
 }

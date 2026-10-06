@@ -454,6 +454,57 @@ export interface QualitySummary {
   flagCounts: Record<string, number>;
 }
 
+export interface RenderReport {
+  id: string;
+  surface: string;
+  kind: string;
+  detail: string;
+  snippet: string;
+  workspaceId: string | null;
+  userId: string | null;
+  path: string | null;
+  count: number;
+  resolved: boolean;
+  firstSeenAt: Date;
+  lastSeenAt: Date;
+}
+
+export interface RenderReportList {
+  reports: RenderReport[];
+  openByKind: Record<string, number>;
+}
+
+export interface ContentQaFinding {
+  severity: "high" | "medium" | "low";
+  kind: string;
+  detail: string;
+  workspaceId: string;
+  sessionId?: string;
+  itemId?: string;
+  itemType?: string;
+  source: "check" | "llm";
+}
+
+export interface ContentQaRun {
+  id: string;
+  windowStart: Date;
+  windowEnd: Date;
+  model: string;
+  sessionsChecked: number;
+  activitiesChecked: number;
+  artifactsChecked: number;
+  highCount: number;
+  mediumCount: number;
+  lowCount: number;
+  judgedItems: number;
+  judgeFlagged: number;
+  avgSense: number | null;
+  avgGrounded: number | null;
+  findings: ContentQaFinding[];
+  alerted: boolean;
+  createdAt: Date;
+}
+
 export interface FrustrationFlag {
   id: string;
   workspaceId: string;
@@ -634,4 +685,16 @@ export const adminApi = {
     rpc<FrustrationFlag>("admin.setFrustrationFlagResolved", "mutation", input),
 
   getRatingStats: () => rpc<RatingStats>("admin.getRatingStats", "query", undefined),
+
+  listRenderReports: (input: { resolved?: boolean; limit?: number }) =>
+    rpc<RenderReportList>("admin.listRenderReports", "query", input),
+
+  resolveRenderReport: (input: { id: string; resolved: boolean }) =>
+    rpc<{ id: string; resolved: boolean }>("admin.resolveRenderReport", "mutation", input),
+
+  listContentQaRuns: (input: { limit?: number }) =>
+    rpc<ContentQaRun[]>("admin.listContentQaRuns", "query", input),
+
+  runContentQa: (input: { windowHours?: number }) =>
+    rpc<ContentQaRun>("admin.runContentQa", "mutation", input),
 };

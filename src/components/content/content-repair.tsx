@@ -1,12 +1,19 @@
 "use client";
 
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { Loader2, Sparkles, TriangleAlert, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   repairContentBlock,
+  reportRenderIssue,
   type RepairBlockKind,
   type RepairTarget,
 } from "@/lib/api/copilot";
@@ -103,6 +110,18 @@ export function BrokenBlock({
   );
   const [open, setOpen] = useState(false);
   const [showSource, setShowSource] = useState(false);
+
+  // Widgets report their own script errors from the iframe harness.
+  useEffect(() => {
+    if (kind === "widget") return;
+    reportRenderIssue({
+      surface: "markdown",
+      kind,
+      detail: error ?? `${kind} block failed to render`,
+      snippet: source,
+      workspaceId: scope?.workspaceId,
+    });
+  }, [kind, source, error, scope?.workspaceId]);
 
   const fixed = repair?.of === source ? repair.fixed : null;
   if (fixed !== null && fixed !== source && renderFixed)

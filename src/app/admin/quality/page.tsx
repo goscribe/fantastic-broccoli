@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Loader2, Sparkles } from "lucide-react";
+import { Loader2, Play, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +14,12 @@ import {
   TableSkeletonRows,
   Td,
 } from "@/components/admin/admin-ui";
-import { adminApi, type QualityAssessment } from "@/lib/api/admin";
+import {
+  adminApi,
+  type ContentQaRun,
+  type QualityAssessment,
+  type RenderReport,
+} from "@/lib/api/admin";
 import { formatRelativeDate } from "@/lib/utils";
 import { toast, toastError } from "@/lib/toast";
 
@@ -152,6 +157,10 @@ export default function AdminQualityPage() {
         </div>
       )}
 
+      <RenderReportsSection />
+      <ContentQaSection />
+
+      <h2 className="mb-2 mt-8 text-sm font-semibold">Workspace assessments</h2>
       <Table
         headers={[
           "Workspace",
@@ -300,6 +309,318 @@ function AssessmentRow({
                       {flag.kind}
                     </Badge>
                     {flag.detail}
+                  </p>
+                ))}
+              </div>
+            )}
+          </td>
+        </tr>
+      )}
+    </>
+  );
+}
+
+/** Defects the frontend saw on learners' screens, deduplicated per artifact. */
+function RenderReportsSection() {
+  const queryClient = useQueryClient();
+  const [showResolved, setShowResolved] = useState(false);
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin", "quality", "render-reports", showResolved],
+    queryFn: () =>
+      adminApi.listRenderReports({
+        resolved: showResolved ? undefined : false,
+        limit: 100,
+      }),
+    placeholderData: keepPreviousData,
+  });
+  const resolve = useMutation({
+    mutationFn: (input: { id: string; resolved: boolean }) =>
+      adminApi.resolveRenderReport(input),
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ["admin", "quality", "render-reports"],
+      }),
+    onError: (err) => toastError(err, "Could not update report"),
+  });
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const byKind = Object.entries(data?.openByKind ?? {}).sort((a, b) => b[1] - a[1]);
+
+  return (
+    <section className="mb-8">
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h2 className="text-sm font-semibold">Seen broken on learners&apos; screens</h2>
+          <p className="text-xs text-muted-foreground">
+            Reported live by the app: raw LaTeX left in a visualization after an
+            interaction, widget script errors, blocks the renderer rejected.
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          {byKind.map(([kind, count]) => (
+            <Badge key={kind} variant="warning">
+              {kind} · {count}
+            </Badge>
+          ))}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowResolved((v) => !v)}
+          >
+            {showResolved ? "Hide resolved" : "Show resolved"}
+          </Button>
+        </div>
+      </div>
+      <Table headers={["Surface", "Kind", "Detail", "Seen", "Last", "Workspace", ""]}>
+        {isLoading ? (
+          <TableSkeletonRows cols={7} />
+        ) : !data || data.reports.length === 0 ? (
+          <EmptyRow colSpan={7}>Nothing reported — no learner has hit a rendering defect.</EmptyRow>
+        ) : (
+          data.reports.map((r: RenderReport) => (
+            <RenderReportRow
+              key={r.id}
+              report={r}
+              expanded={expanded === r.id}
+              onToggle={() => setExpanded(expanded === r.id ? null : r.id)}
+              onResolve={() => resolve.mutate({ id: r.id, resolved: !r.resolved })}
+              busy={resolve.isPending && resolve.variables?.id === r.id}
+            />
+          ))
+        )}
+      </Table>
+    </section>
+  );
+}
+
+function RenderReportRow({
+  report,
+  expanded,
+  onToggle,
+  onResolve,
+  busy,
+}: {
+  report: RenderReport;
+  expanded: boolean;
+  onToggle: () => void;
+  onResolve: () => void;
+  busy: boolean;
+}) {
+  return (
+    <>
+      <tr
+        className={`cursor-pointer transition-colors hover:bg-muted/40 ${report.resolved ? "opacity-60" : ""}`}
+        onClick={onToggle}
+      >
+        <Td className="text-xs">{report.surface}</Td>
+        <Td>
+          <Badge variant={report.resolved ? "muted" : "warning"}>{report.kind}</Badge>
+        </Td>
+        <Td className="max-w-[360px] truncate text-xs text-muted-foreground" title={report.detail}>
+          {report.detail}
+        </Td>
+        <Td className="tabular-nums text-xs">×{report.count}</Td>
+        <Td className="whitespace-nowrap text-xs text-muted-foreground">
+          {formatRelativeDate(report.lastSeenAt)}
+        </Td>
+        <Td className="text-xs">
+          {report.workspaceId ? (
+            <Link
+              href={`/admin/workspaces/${report.workspaceId}`}
+              className="hover:underline"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {report.workspaceId.slice(0, 10)}…
+            </Link>
+          ) : (
+            "—"
+          )}
+        </Td>
+        <Td>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={busy}
+            onClick={(e) => {
+              e.stopPropagation();
+              onResolve();
+            }}
+          >
+            {busy ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            ) : report.resolved ? (
+              "Reopen"
+            ) : (
+              "Resolve"
+            )}
+          </Button>
+        </Td>
+      </tr>
+      {expanded && (
+        <tr>
+          <td colSpan={7} className="bg-muted/30 px-4 py-3">
+            <p className="mb-1 text-xs text-muted-foreground">
+              {report.path ?? "—"} · first seen {formatRelativeDate(report.firstSeenAt)}
+            </p>
+            <pre className="max-h-64 overflow-auto rounded-md border border-border bg-card p-2 text-[11px] leading-snug">
+              {report.snippet}
+            </pre>
+          </td>
+        </tr>
+      )}
+    </>
+  );
+}
+
+/** Daily sweep over the previous day's generated content. */
+function ContentQaSection() {
+  const queryClient = useQueryClient();
+  const { data: runs, isLoading } = useQuery({
+    queryKey: ["admin", "quality", "qa-runs"],
+    queryFn: () => adminApi.listContentQaRuns({ limit: 14 }),
+  });
+  const runNow = useMutation({
+    mutationFn: () => adminApi.runContentQa({ windowHours: 24 }),
+    onSuccess: (run) => {
+      toast.success(
+        `Checked ${run.activitiesChecked + run.artifactsChecked} items: ${run.highCount} high, ${run.mediumCount} medium`,
+      );
+      queryClient.invalidateQueries({ queryKey: ["admin", "quality", "qa-runs"] });
+    },
+    onError: (err) => toastError(err, "QA sweep failed"),
+  });
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const latest = runs?.[0];
+  const rate = (run: ContentQaRun) => {
+    const n = run.activitiesChecked + run.artifactsChecked;
+    return n ? `${Math.round((run.highCount / n) * 100)}%` : "—";
+  };
+
+  return (
+    <section className="mb-8">
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h2 className="text-sm font-semibold">Daily content QA sweep</h2>
+          <p className="text-xs text-muted-foreground">
+            Every generated activity and bank item from the last 24h: deterministic
+            render/structure/visualization checks plus a cheap judge for sense,
+            grounding, wrong answers and recall-only questions. Admins are emailed
+            when the high-severity rate jumps.
+          </p>
+        </div>
+        <Button size="sm" onClick={() => runNow.mutate()} disabled={runNow.isPending}>
+          {runNow.isPending ? (
+            <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
+          ) : (
+            <Play className="mr-1.5 h-3.5 w-3.5" />
+          )}
+          Run now
+        </Button>
+      </div>
+      {latest && (
+        <div className="mb-3 grid grid-cols-2 gap-3 md:grid-cols-4">
+          <StatCard
+            label="Items checked (last run)"
+            value={latest.activitiesChecked + latest.artifactsChecked}
+          />
+          <StatCard label="High-severity rate" value={rate(latest)} />
+          <StatCard
+            label="Judge flagged"
+            value={`${latest.judgeFlagged}/${latest.judgedItems}`}
+          />
+          <StatCard
+            label="Avg sense / grounded"
+            value={
+              latest.avgSense != null
+                ? `${latest.avgSense} / ${latest.avgGrounded ?? "—"}`
+                : "—"
+            }
+          />
+        </div>
+      )}
+      <Table headers={["Run", "Window", "Sessions", "Items", "High", "Med", "Judge", "Alert"]}>
+        {isLoading ? (
+          <TableSkeletonRows cols={8} />
+        ) : !runs || runs.length === 0 ? (
+          <EmptyRow colSpan={8}>No sweeps yet — runs daily at 13:00 UTC, or press Run now.</EmptyRow>
+        ) : (
+          runs.map((run: ContentQaRun) => (
+            <QaRunRow
+              key={run.id}
+              run={run}
+              rate={rate(run)}
+              expanded={expanded === run.id}
+              onToggle={() => setExpanded(expanded === run.id ? null : run.id)}
+            />
+          ))
+        )}
+      </Table>
+    </section>
+  );
+}
+
+function QaRunRow({
+  run,
+  rate,
+  expanded,
+  onToggle,
+}: {
+  run: ContentQaRun;
+  rate: string;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <>
+      <tr className="cursor-pointer transition-colors hover:bg-muted/40" onClick={onToggle}>
+        <Td className="whitespace-nowrap text-xs">{formatRelativeDate(run.createdAt)}</Td>
+        <Td className="whitespace-nowrap text-xs text-muted-foreground">
+          {new Date(run.windowStart).toLocaleDateString()} →{" "}
+          {new Date(run.windowEnd).toLocaleDateString()}
+        </Td>
+        <Td className="tabular-nums text-xs">{run.sessionsChecked}</Td>
+        <Td className="tabular-nums text-xs">{run.activitiesChecked + run.artifactsChecked}</Td>
+        <Td>
+          <span className={`font-semibold tabular-nums ${run.highCount ? "text-red-600" : "text-emerald-600"}`}>
+            {run.highCount} ({rate})
+          </span>
+        </Td>
+        <Td className="tabular-nums text-xs">{run.mediumCount}</Td>
+        <Td className="tabular-nums text-xs">
+          {run.judgeFlagged}/{run.judgedItems}
+        </Td>
+        <Td>{run.alerted ? <Badge variant="warning">emailed</Badge> : <span className="text-xs text-muted-foreground">—</span>}</Td>
+      </tr>
+      {expanded && (
+        <tr>
+          <td colSpan={8} className="bg-muted/30 px-4 py-3">
+            {run.findings.length === 0 ? (
+              <p className="text-xs text-muted-foreground">No findings.</p>
+            ) : (
+              <div className="space-y-1">
+                {run.findings.map((f, i) => (
+                  <p key={i} className="text-xs text-muted-foreground">
+                    <Badge
+                      variant={f.severity === "high" ? "warning" : "muted"}
+                      className="mr-1.5"
+                    >
+                      {f.severity} · {f.kind}
+                    </Badge>
+                    {f.detail}
+                    {f.workspaceId && (
+                      <>
+                        {" "}
+                        <Link
+                          href={
+                            f.sessionId
+                              ? `/admin/workspaces/${f.workspaceId}?session=${f.sessionId}`
+                              : `/admin/workspaces/${f.workspaceId}`
+                          }
+                          className="hover:underline"
+                        >
+                          open
+                        </Link>
+                      </>
+                    )}
                   </p>
                 ))}
               </div>

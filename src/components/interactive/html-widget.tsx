@@ -1,6 +1,10 @@
 "use client";
 
 import { useEffect, useId, useMemo, useState } from "react";
+import {
+  reportRenderIssue,
+  type RenderIssueSurface,
+} from "@/lib/api/copilot";
 import { MathText } from "@/components/ui/markdown-text";
 import { BrokenBlock } from "@/components/content/content-repair";
 
@@ -84,7 +88,7 @@ function lucideScript(): string {
 // literal "\n" escapes become <br>, $...$/$$...$$ delimited math is typeset,
 // and bare undelimited LaTeX fragments (e.g. C_{11}, \cdot, \frac{a}{b})
 // are typeset even without a .math class.
-function katexScript(): string {
+function katexScript(id: string) {
   const repair = `
 var mathRendering=false;
 window.renderMath=function(){
@@ -183,13 +187,46 @@ function renderMathNow(){
     }
   });
 };
+var qualityTimer=0,qualitySent={};
+function qualityCheck(){
+  if(!window.katex)return;
+  var unrendered=[];
+  document.querySelectorAll(".math,.math-display").forEach(function(el){
+    var t=(el.textContent||"").trim();
+    if(t&&!el.querySelector(".katex"))unrendered.push(t);
+  });
+  var bare=[];
+  var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  var BARE=/\\\\[a-zA-Z]{2,}\\{|(?:^|[^\\\\$])\\$[^$\\n]{1,80}\\$/;
+  var n;
+  while((n=walker.nextNode())){
+    var p=n.parentElement;
+    if(!p||p.closest("script,style,textarea,.math,.math-display,.katex"))continue;
+    var v=n.nodeValue||"";
+    if(BARE.test(v))bare.push(v.trim());
+  }
+  function send(kind,list){
+    if(!list.length||qualitySent[kind])return;
+    qualitySent[kind]=true;
+    parent.postMessage({type:"scribe-widget-quality",id:${JSON.stringify(id)},kind:kind,count:list.length,sample:list.slice(0,3).join(" | ").slice(0,300)},"*");
+  }
+  send("unrendered_math",unrendered);
+  send("bare_latex",bare);
+}
+function scheduleQuality(){
+  clearTimeout(qualityTimer);
+  qualityTimer=setTimeout(qualityCheck,600);
+}
 window.addEventListener("load",function(){
   window.renderMath();
+  scheduleQuality();
   var raf=0;
   new MutationObserver(function(){
     if(mathRendering||raf)return;
-    raf=requestAnimationFrame(function(){raf=0;window.renderMath();});
+    raf=requestAnimationFrame(function(){raf=0;window.renderMath();scheduleQuality();});
   }).observe(document.body,{childList:true,characterData:true,subtree:true});
+  document.addEventListener("input",scheduleQuality,true);
+  document.addEventListener("click",scheduleQuality,true);
 });`;
   return (
     `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">` +
@@ -256,6 +293,8 @@ function resizeScript(id: string) {
 interface HtmlWidgetProps {
   html: string;
   title?: string;
+  /** Where this widget lives, for render-issue reports to the server. */
+  surface?: RenderIssueSurface;
 }
 
 /**
@@ -263,7 +302,11 @@ interface HtmlWidgetProps {
  * iframe (scripts allowed, no same-origin access — the document can't reach
  * cookies, storage, or the parent app). Height auto-fits via postMessage.
  */
-export function HtmlWidget({ html: htmlProp, title }: HtmlWidgetProps) {
+export function HtmlWidget({
+  html: htmlProp,
+  title,
+  surface = "widget",
+}: HtmlWidgetProps) {
   const frameId = useId();
   const [height, setHeight] = useState(320);
   // Agent-repaired markup replaces the original until the prop changes.
@@ -284,6 +327,9 @@ export function HtmlWidget({ html: htmlProp, title }: HtmlWidgetProps) {
         id?: string;
         height?: number;
         message?: string;
+        kind?: string;
+        count?: number;
+        sample?: string;
       } | null;
       if (!d || d.id !== frameId) return;
       if (
@@ -293,23 +339,39 @@ export function HtmlWidget({ html: htmlProp, title }: HtmlWidgetProps) {
       ) {
         setHeight(Math.min(Math.max(Math.ceil(d.height), MIN_HEIGHT), MAX_HEIGHT));
       } else if (d.type === "scribe-widget-error") {
+        const message =
+          typeof d.message === "string" ? d.message : "Script error";
         setScriptError((prev) =>
-          prev && prev.html === html
-            ? prev
-            : { html, message: typeof d.message === "string" ? d.message : "Script error" },
+          prev && prev.html === html ? prev : { html, message },
         );
+        reportRenderIssue({
+          surface,
+          kind: "script_error",
+          detail: message,
+          snippet: html,
+        });
+      } else if (
+        d.type === "scribe-widget-quality" &&
+        (d.kind === "unrendered_math" || d.kind === "bare_latex")
+      ) {
+        reportRenderIssue({
+          surface,
+          kind: d.kind,
+          detail: `${d.count ?? 1} element(s): ${typeof d.sample === "string" ? d.sample : ""}`,
+          snippet: html,
+        });
       }
     };
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
-  }, [frameId, html]);
+  }, [frameId, html, surface]);
 
   const srcDoc = useMemo(
     () =>
       errorScript(frameId) +
       tailwindScript() +
       lucideScript() +
-      katexScript() +
+      katexScript(frameId) +
       themeStyle() +
       html +
       resizeScript(frameId),
