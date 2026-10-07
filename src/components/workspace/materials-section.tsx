@@ -10,11 +10,14 @@ import {
   subscribeAnalysisProgress,
   uploadFiles,
   type AnalysisProgress,
+  type UploadMethod,
 } from "@/lib/api/materials";
 import { Material, MaterialType } from "@/types";
 import { notifyFirstFileUploaded } from "@/components/onboarding/guided-tour";
 import { Card, Surface } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { TrackedButton } from "@/components/ui/tracked-button";
+import { UploadFileInput } from "@/components/ui/upload-file-input";
 import { formatRelativeDate } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
@@ -475,13 +478,19 @@ export function MaterialsSection({
     [workspaceId, queryClient],
   );
 
-  const handleUpload = async (files: FileList | File[] | null) => {
+  const handleUpload = async (
+    files: FileList | File[] | null,
+    method: UploadMethod,
+  ) => {
     if (!files || files.length === 0) return;
     setUploadError(null);
     setUploading(true);
     try {
       const isFirstFile = materials.length === 0;
-      const fileIds = await uploadFiles(workspaceId, Array.from(files));
+      const fileIds = await uploadFiles(workspaceId, Array.from(files), {
+        source: "workspace_materials",
+        method,
+      });
       await analyzeFiles(workspaceId, fileIds);
       if (isFirstFile) notifyFirstFileUploaded();
       // Show a pending badge immediately; Pusher events take over from here.
@@ -544,7 +553,7 @@ export function MaterialsSection({
     const file = new File([blob], `Recording ${stamp} (${formatAudioDuration(seconds)}).${ext}`, {
       type: blob.type || "audio/webm",
     });
-    await handleUpload([file]);
+    await handleUpload([file], "record");
   };
 
   return (
@@ -571,7 +580,9 @@ export function MaterialsSection({
           className="flex flex-wrap gap-2"
           data-tour="upload-materials"
         >
-          <Button
+          <TrackedButton
+            ctaId="materials_record"
+            ctaPosition="secondary"
             size="sm"
             variant="outline"
             onClick={() => setRecording(true)}
@@ -579,8 +590,10 @@ export function MaterialsSection({
           >
             <Circle className="h-3 w-3 mr-1.5 fill-rose text-rose" />
             {t("ws.record")}
-          </Button>
-          <Button
+          </TrackedButton>
+          <TrackedButton
+            ctaId="materials_upload"
+            ctaPosition="primary"
             size="sm"
             variant="outline"
             onClick={() => fileInputRef.current?.click()}
@@ -592,8 +605,10 @@ export function MaterialsSection({
               <Upload className="h-3.5 w-3.5 mr-1.5" />
             )}
             {uploading ? t("ws.uploading") : t("ws.upload")}
-          </Button>
-          <Button
+          </TrackedButton>
+          <TrackedButton
+            ctaId="materials_scan"
+            ctaPosition="secondary"
             size="sm"
             variant="outline"
             className="sm:hidden"
@@ -602,26 +617,27 @@ export function MaterialsSection({
           >
             <Camera className="h-3.5 w-3.5 mr-1.5" />
             {t("ws.scan")}
-          </Button>
-          <input
+          </TrackedButton>
+          <UploadFileInput
             ref={fileInputRef}
-            type="file"
+            uploadSource="workspace_materials"
             multiple
             accept={UPLOAD_ACCEPT}
             className="hidden"
             onChange={(e) => {
-              void handleUpload(e.target.files);
+              void handleUpload(e.target.files, "picker");
               e.target.value = "";
             }}
           />
-          <input
+          <UploadFileInput
             ref={cameraInputRef}
-            type="file"
+            uploadSource="workspace_materials"
+            uploadMethod="camera"
             accept="image/*"
             capture="environment"
             className="hidden"
             onChange={(e) => {
-              void handleUpload(e.target.files);
+              void handleUpload(e.target.files, "camera");
               e.target.value = "";
             }}
           />
