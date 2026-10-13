@@ -13,6 +13,7 @@ import {
   Library,
   ScrollText,
   Sparkles,
+  MessageSquareText,
   Star,
   Users,
 } from "lucide-react";
@@ -28,6 +29,7 @@ const NAV = [
   { href: "/admin/quality", label: "Quality", icon: Sparkles },
   { href: "/admin/frustration", label: "Frustration", icon: Flame },
   { href: "/admin/ratings", label: "Ratings", icon: Star },
+  { href: "/admin/feedback", label: "Feedback", icon: MessageSquareText },
   { href: "/admin/logs", label: "Activity logs", icon: ScrollText },
   { href: "/admin/invoices", label: "Invoices", icon: FileText },
   { href: "/admin/plans", label: "Plans", icon: CreditCard },

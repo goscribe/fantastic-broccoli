@@ -565,6 +565,21 @@ export interface RatingStats {
   comments: RatingComment[];
 }
 
+export interface FeedbackResponse {
+  id: string;
+  kind: "GENERAL" | "CANCEL";
+  reason: string | null;
+  answers: Record<string, string>;
+  contactOk: boolean;
+  createdAt: string | Date;
+  user: { id: string; email: string | null; name: string | null };
+}
+
+export interface FeedbackList {
+  responses: FeedbackResponse[];
+  counts: { kind: string; reason: string | null; count: number }[];
+}
+
 export const adminApi = {
   getSystemStats: () => rpc<SystemStats>("admin.getSystemStats", "query", undefined),
 
@@ -685,6 +700,9 @@ export const adminApi = {
     rpc<FrustrationFlag>("admin.setFrustrationFlagResolved", "mutation", input),
 
   getRatingStats: () => rpc<RatingStats>("admin.getRatingStats", "query", undefined),
+
+  listFeedback: (input: { kind?: "GENERAL" | "CANCEL"; limit?: number }) =>
+    rpc<FeedbackList>("admin.listFeedback", "query", input),
 
   listRenderReports: (input: { resolved?: boolean; limit?: number }) =>
     rpc<RenderReportList>("admin.listRenderReports", "query", input),
