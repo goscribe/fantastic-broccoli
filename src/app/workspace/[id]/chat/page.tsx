@@ -32,6 +32,7 @@ import {
   importYoutube,
   uploadFiles,
 } from "@/lib/api/materials";
+import { UploadFileInput } from "@/components/ui/upload-file-input";
 import {
   askCopilotStream,
   createConversation,
@@ -403,7 +404,10 @@ export default function WorkspaceChatPage() {
       if (files.length > 0) {
         setUploading(true);
         try {
-          const fileIds = await uploadFiles(workspaceId, files);
+          const fileIds = await uploadFiles(workspaceId, files, {
+          source: "workspace_chat",
+          method: "picker",
+        });
           // Analysis runs in the background; the bot can keep chatting.
           analyzeFiles(workspaceId, fileIds).catch(() => {});
           queryClient.invalidateQueries({ queryKey: ["workspace", workspaceId] });
@@ -612,9 +616,9 @@ export default function WorkspaceChatPage() {
           className="block w-full resize-none bg-transparent px-2 py-1.5 text-sm placeholder:text-faint focus:outline-none"
         />
         <div className="flex items-center justify-between pt-1">
-          <input
+          <UploadFileInput
             ref={fileInputRef}
-            type="file"
+            uploadSource="workspace_chat"
             multiple
             accept="application/pdf,image/*,audio/*,video/*,.doc,.docx,.ppt,.pptx,.txt,.md"
             className="hidden"

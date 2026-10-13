@@ -31,6 +31,15 @@ function gtag(..._args: unknown[]) {
   window.dataLayer.push(arguments);
 }
 
+/** GA4 property for product events; unset = product events skip the Google tag. */
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "";
+
+/** Sends a product analytics event to the GA4 property (no-op without one). */
+export function sendGtagEvent(name: string, params: Record<string, unknown>) {
+  if (typeof window === "undefined" || !GA_MEASUREMENT_ID) return;
+  gtag("event", name, { ...params, send_to: GA_MEASUREMENT_ID });
+}
+
 function storageGet(key: string): string | null {
   try {
     return sessionStorage.getItem(key);

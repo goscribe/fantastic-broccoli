@@ -32,16 +32,17 @@ import {
   markFirstSessionOnboardingSkipped,
 } from "@/components/onboarding/first-session-onboarding";
 import { onTreeChanged } from "@/lib/tree-events";
-import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
-import Link from "next/link";
+import { Search, ArrowRight, Plus } from "lucide-react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { HeroScene, ConfettiDots, Sticker } from "@/components/graphics/floating-decor";
 import { Banner } from "@/components/ui/banner";
-import { Button } from "@/components/ui/button";
 import { HomeUploadRow } from "@/components/workspace/home-upload-row";
+import { ReviewReadyStrip } from "@/components/session/review-ready-strip";
+import { TrackedButton } from "@/components/ui/tracked-button";
+import { ctaProps } from "@/lib/analytics";
 
 function computeStreak(daily: DailyActivityPoint[]): number {
   const byDate = new Map(daily.map((d) => [d.date, d.count]));
@@ -240,6 +241,7 @@ export default function HomePage() {
         {t("misc.upgradeBanner")}
       </Banner>
       <main className="w-full flex-1 space-y-6 px-4 py-5 sm:space-y-8 sm:px-8 sm:py-8">
+        <ReviewReadyStrip dueReview={dueReview} />
         {/* Greeting */}
         <header className="flex flex-wrap items-end justify-between gap-4 animate-fade-up">
           <div>
@@ -301,7 +303,9 @@ export default function HomePage() {
               </p>
               {resumable ? (
                 <div className="mt-5 flex flex-wrap items-center gap-2.5">
-                  <Button
+                  <TrackedButton
+                    ctaId="home_resume_session"
+                    ctaPosition="primary"
                     type="button"
                     onClick={() =>
                       router.push(
@@ -312,27 +316,36 @@ export default function HomePage() {
                   >
                     {t("home.resumeSession")}
                     <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
+                  </TrackedButton>
                   <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
                     {(toggle) => (
-                      <Button type="button" variant="outline" onClick={toggle} className="gap-2">
+                      <TrackedButton
+                        ctaId="home_hero_new_workspace"
+                        ctaPosition="secondary"
+                        type="button"
+                        variant="outline"
+                        onClick={toggle}
+                        className="gap-2"
+                      >
                         <Plus className="h-3.5 w-3.5" />
                         {t("nav.newWorkspace")}
-                      </Button>
+                      </TrackedButton>
                     )}
                   </NewWorkspaceMenu>
                 </div>
               ) : (
                 <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
                   {(toggle) => (
-                    <Button
+                    <TrackedButton
+                      ctaId="home_hero_new_workspace"
+                      ctaPosition="primary"
                       type="button"
                       onClick={toggle}
                       className="mt-5 gap-2 w-full sm:w-auto"
                     >
                       <Plus className="h-4 w-4" />
                       {t("nav.newWorkspace")}
-                    </Button>
+                    </TrackedButton>
                   )}
                 </NewWorkspaceMenu>
               )}
@@ -366,33 +379,6 @@ export default function HomePage() {
             />
           </div>
         </section>
-
-        {dueReview && dueReview.total > 0 && (
-          <Link
-            href="/flashcards/review"
-            className="group flex flex-col items-start gap-3 rounded-2xl border border-border bg-card px-4 py-3.5 transition-colors animate-fade-up hover:border-accent/40 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-5 sm:py-4"
-          >
-            <div className="flex items-center gap-3.5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-accent">
-                <RotateCcw className="h-4 w-4" />
-              </span>
-              <div>
-                <p className="text-sm font-semibold">
-                  {t(
-                    dueReview.total === 1 ? "misc.cardDue" : "misc.cardsDue",
-                  ).replace("{count}", String(dueReview.total))}
-                </p>
-                <p className="text-[13px] text-muted-foreground">
-                  {t("misc.quickReviewBlurb")}
-                </p>
-              </div>
-            </div>
-            <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent">
-              {t("home.reviewNow")}
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </span>
-          </Link>
-        )}
 
         {/* Stats + upload. Week bars stay on tablet/desktop so they never
             overlay a figure; phones skip the extra chart. */}
@@ -574,6 +560,7 @@ export default function HomePage() {
               </h2>
               <button
                 type="button"
+                {...ctaProps("home_new_folder", "tertiary")}
                 onClick={() => setCreating("folder")}
                 className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-semibold hover:border-accent/40 hover:bg-muted"
               >
@@ -616,6 +603,7 @@ export default function HomePage() {
                     {(toggle) => (
                       <button
                         type="button"
+                        {...ctaProps("home_section_new_workspace", "tertiary")}
                         onClick={toggle}
                         className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-semibold hover:border-accent/40 hover:bg-muted"
                       >

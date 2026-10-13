@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   MutationCache,
   QueryClient,
@@ -12,6 +13,16 @@ import { I18nProvider } from "@/lib/i18n";
 import { toastError } from "@/lib/toast";
 import { captureAttribution } from "@/lib/attribution";
 import { reportSignupConversionFromUrl } from "@/lib/gtag";
+import { installAnalyticsListeners, trackPageView } from "@/lib/analytics";
+
+function AnalyticsListener() {
+  const pathname = usePathname();
+  useEffect(() => installAnalyticsListeners(), []);
+  useEffect(() => {
+    trackPageView(pathname);
+  }, [pathname]);
+  return null;
+}
 
 function ThemedToaster() {
   const { theme } = useTheme();
@@ -46,6 +57,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider>
       <I18nProvider>
         <QueryClientProvider client={queryClient}>
+          <AnalyticsListener />
           {children}
           <ThemedToaster />
         </QueryClientProvider>
