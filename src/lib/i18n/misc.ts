@@ -8,6 +8,11 @@ import { registerTranslations } from "@/lib/i18n";
 const english = {
   "nav.newSession": "New session",
   "misc.plan": "Plan",
+  "home.continue": "Continue where you left off",
+  "home.yourSubjects": "Your subjects",
+  "home.all": "All",
+  "home.openFolder": "Open folder",
+  "home.noSubjectsInFolder": "No workspaces in this folder yet.",
   "nav.recent": "Recent",
   "nav.workspaces": "Workspaces",
   "nav.generating": "Generating…",

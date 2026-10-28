@@ -49,7 +49,7 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
   return (
     <div
       onClick={() => onClick(workspace.id)}
-      className="group relative cursor-pointer rounded-xl border border-border bg-card p-4 transition-colors hover:border-border-strong hover:shadow-sm"
+      className="group relative cursor-pointer overflow-hidden rounded-xl border border-border bg-card p-4 pt-5 transition-shadow hover:shadow-md"
     >
       {actions ? (
         <ResourceActionsMenu
@@ -60,6 +60,11 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
         <ArrowRight className="absolute top-5 right-5 h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
       )}
 
+      <span
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-1.5"
+        style={{ background: accentHex }}
+      />
       <div className="flex items-start gap-3">
         <span
           aria-hidden
@@ -83,6 +88,15 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
           </p>
         </div>
       </div>
+
+      {activeSessions[0] && (
+        <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-muted">
+          <div
+            className="h-full rounded-full"
+            style={{ width: `${Math.max(3, activeSessions[0].progress)}%`, background: accentHex }}
+          />
+        </div>
+      )}
 
       {/* Stats row */}
       <div className="mt-4 flex items-center gap-3 text-[11px] text-muted-foreground">

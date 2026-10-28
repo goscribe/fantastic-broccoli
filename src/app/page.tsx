@@ -9,7 +9,6 @@ import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { formatDuration } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
-import { FolderCard } from "@/components/workspace/folder-card";
 import {
   CreateResourceDialog,
   NewWorkspaceMenu,
@@ -17,6 +16,7 @@ import {
 import {
   DeleteResourceDialog,
   EditResourceDialog,
+  ResourceActionsMenu,
   type DeleteTarget,
   type EditTarget,
 } from "@/components/workspace/resource-actions";
@@ -33,7 +33,18 @@ import {
   markFirstSessionOnboardingSkipped,
 } from "@/components/onboarding/first-session-onboarding";
 import { onTreeChanged } from "@/lib/tree-events";
-import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
+import {
+  Search,
+  ArrowRight,
+  Plus,
+  RotateCcw,
+  Flame,
+  BookOpen,
+  Clock,
+  Folder as FolderIcon,
+} from "lucide-react";
+import { accentForId } from "@/lib/accent-palette";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
@@ -67,6 +78,7 @@ export default function HomePage() {
     Map<string, StudySession[]>
   >(new Map());
   const [creating, setCreating] = useState<"folder" | "workspace" | null>(null);
+  const [selectedFolder, setSelectedFolder] = useState<Folder | null>(null);
 
   const { data: dueReview } = useQuery({
     queryKey: ["due-review-count"],
@@ -173,7 +185,6 @@ export default function HomePage() {
       .filter((s) => s.status === "active" && s.activities.length > 0)
       .map((s) => ({ session: s, workspace: w }));
   });
-  const resumable = activeSessions.find(({ session }) => session.progress > 0);
   const totalPlannedMinutes = activeSessions.reduce(
     (sum, { session }) => sum + session.durationMinutes,
     0,
@@ -181,7 +192,17 @@ export default function HomePage() {
 
   const streak = useMemo(() => computeStreak(dailyActivity), [dailyActivity]);
 
-  const heroProgress = resumable ? resumable.session.progress : 0;
+  const withSessions = (w: Workspace): Workspace => ({
+    ...w,
+    sessions: sessionsByWorkspace.get(w.id) ?? w.sessions,
+  });
+  const visibleWorkspaces = (
+    filtered
+      ? filtered
+      : selectedFolder
+        ? flattenWorkspaces(selectedFolder.folders ?? [], selectedFolder.workspaces)
+        : allWorkspaces
+  ).map(withSessions);
 
 
   const hour = new Date().getHours();
@@ -202,133 +223,250 @@ export default function HomePage() {
           }}
         />
       )}
-      <main className="w-full flex-1 px-4 py-5 sm:px-8 sm:py-6">
-        <header className="flex flex-wrap items-start justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/illustrations/bot.png"
-              alt=""
-              width={96}
-              height={96}
-              className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
-            />
-            <div>
-            <h1 className="text-xl font-bold tracking-tight">
-              {greeting}{user ? `, ${user.name}` : ""}
-            </h1>
-            <p className="mt-0.5 text-[12px] text-muted-foreground">
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-5 sm:px-8 sm:py-6">
+        <section
+          data-tour="home-banner"
+          className="relative overflow-hidden rounded-2xl border border-accent/15 bg-gradient-to-r from-accent-soft via-accent-soft/60 to-card px-5 py-5 sm:px-7 sm:py-6"
+        >
+          <div className="relative z-10 max-w-xl">
+            <p className="text-[12px] font-medium text-muted-foreground">
               {new Date().toLocaleDateString("en-GB", {
                 weekday: "long",
                 day: "numeric",
                 month: "long",
               })}
-              {streak > 0 && ` · ${streak} ${t("misc.dayStreak")}`}
-              {activeSessions.length > 0 &&
-                ` · ${activeSessions.length} ${t("misc.activePlans").toLowerCase()} · ${formatDuration(totalPlannedMinutes)} ${t("misc.timePlanned").toLowerCase()}`}
             </p>
+            <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-[28px]">
+              {greeting}{user ? `, ${user.name.split(" ")[0]}` : ""}
+            </h1>
+            <div className="mt-3 flex flex-wrap gap-2 text-[12px] font-semibold">
+              <span className="flex items-center gap-1.5 rounded-full border border-energy/25 bg-card px-2.5 py-1 text-energy">
+                <Flame className="h-3.5 w-3.5" fill="currentColor" />
+                {streak} {t("misc.dayStreak")}
+              </span>
+              <span className="flex items-center gap-1.5 rounded-full border border-accent/20 bg-card px-2.5 py-1 text-accent">
+                <BookOpen className="h-3.5 w-3.5" />
+                {activeSessions.length} {t("misc.activePlans").toLowerCase()}
+              </span>
+              <span className="flex items-center gap-1.5 rounded-full border border-border bg-card px-2.5 py-1 text-muted-foreground">
+                <Clock className="h-3.5 w-3.5" />
+                {formatDuration(totalPlannedMinutes)} {t("misc.timePlanned").toLowerCase()}
+              </span>
+              {dueReview && dueReview.total > 0 && (
+                <Link
+                  href="/flashcards/review"
+                  className="flex items-center gap-1.5 rounded-full border border-amber/30 bg-amber/10 px-2.5 py-1 text-amber hover:bg-amber/20"
+                >
+                  <RotateCcw className="h-3.5 w-3.5" />
+                  {t(dueReview.total === 1 ? "misc.cardDue" : "misc.cardsDue").replace(
+                    "{count}",
+                    String(dueReview.total),
+                  )}
+                </Link>
+              )}
+            </div>
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <Button onClick={() => router.push("/study-bot")}>
+                <Plus className="h-4 w-4" />
+                {t("nav.newSession")}
+              </Button>
+              <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
+                {(toggle) => (
+                  <Button variant="secondary" onClick={toggle}>
+                    {t("ws.newWorkspace")}
+                  </Button>
+                )}
+              </NewWorkspaceMenu>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setCreating("folder")}
-            >
+          <Image
+            src="/illustrations/bot.png"
+            alt=""
+            width={240}
+            height={240}
+            priority
+            className="pointer-events-none absolute -bottom-4 right-4 hidden h-36 w-36 select-none object-contain drop-shadow-xl sm:block md:right-10 md:h-44 md:w-44"
+          />
+        </section>
+
+        {(calendarLoading || treeLoading) && (
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <Skeleton className="h-28 rounded-xl" />
+            <Skeleton className="h-28 rounded-xl" />
+            <Skeleton className="hidden h-28 rounded-xl lg:block" />
+          </div>
+        )}
+
+        {!treeLoading && activeSessions.length > 0 && (
+          <section className="mt-6">
+            <h2 className="mb-2.5 text-[15px] font-bold tracking-tight">
+              {t("home.continue")}
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {[...activeSessions]
+                .sort((a, b) => b.session.updatedAt.localeCompare(a.session.updatedAt))
+                .slice(0, 3)
+                .map(({ session, workspace }) => {
+                  const hex = accentForId(workspace.id);
+                  const done = session.activities.filter(
+                    (a) => a.status === "completed",
+                  ).length;
+                  return (
+                    <button
+                      key={session.id}
+                      type="button"
+                      onClick={() =>
+                        router.push(`/workspace/${workspace.id}/session/${session.id}`)
+                      }
+                      className="group relative overflow-hidden rounded-xl border border-border bg-card p-4 pl-5 text-left transition-shadow hover:shadow-md"
+                      style={{ background: `${hex}12` }}
+                    >
+                      <span
+                        className="absolute inset-y-0 left-0 w-1.5"
+                        style={{ background: hex }}
+                      />
+                      <p className="truncate text-[12px] font-semibold" style={{ color: hex }}>
+                        {workspace.title}
+                      </p>
+                      <p className="mt-0.5 truncate text-[15px] font-semibold tracking-tight">
+                        {session.title}
+                      </p>
+                      <div className="mt-3 flex items-center gap-3 text-[12px] text-muted-foreground">
+                        <span className="h-2 flex-1 overflow-hidden rounded-full bg-black/5 dark:bg-white/10">
+                          <span
+                            className="block h-full rounded-full"
+                            style={{ width: `${Math.max(3, session.progress)}%`, background: hex }}
+                          />
+                        </span>
+                        <span className="tabular-nums">
+                          {done}/{session.activities.length} ·{" "}
+                          {formatDuration(session.durationMinutes)}
+                        </span>
+                        <ArrowRight className="h-4 w-4 text-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                      </div>
+                    </button>
+                  );
+                })}
+            </div>
+          </section>
+        )}
+
+        {!treeLoading && (
+          <section className="mt-6 overflow-hidden rounded-xl border border-dashed border-border-strong bg-card">
+            <HomeUploadRow />
+          </section>
+        )}
+
+        <section className="mt-8">
+          <div className="flex flex-wrap items-center gap-2">
+            <h2 className="mr-auto text-[15px] font-bold tracking-tight">
+              {t("home.yourSubjects")}
+            </h2>
+            <div className="relative">
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-faint" />
+              <input
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={t("misc.searchWorkspaces")}
+                className="h-9 w-56 rounded-full border border-transparent bg-muted pl-9 pr-3 text-[13px] outline-none placeholder:text-muted-foreground focus:border-ring focus:bg-card"
+              />
+            </div>
+            <Button variant="secondary" size="sm" onClick={() => setCreating("folder")}>
               <Plus className="h-3.5 w-3.5" />
               {t("misc.newFolder")}
             </Button>
-            <NewWorkspaceMenu align="right" onSelect={openWorkspaceCreate}>
-              {(toggle) => (
-                <Button size="sm" onClick={toggle}>
-                  <Plus className="h-3.5 w-3.5" />
-                  {t("ws.newWorkspace")}
-                </Button>
-              )}
-            </NewWorkspaceMenu>
           </div>
-        </header>
 
-        <section data-tour="home-banner" className="mt-5 space-y-2">
-          {calendarLoading || treeLoading ? (
-            <Skeleton className="h-20 w-full rounded-xl" />
-          ) : resumable ? (
-            <div className="flex flex-wrap items-center gap-4 rounded-xl border border-accent/15 border-l-4 border-l-accent bg-accent-soft/70 px-4 py-3">
-              <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-semibold uppercase tracking-wide text-accent">
-                  {t("home.resumeSession")}
-                </p>
-                <p className="mt-0.5 truncate text-[15px] font-semibold tracking-tight">
-                  {resumable.session.title}
-                </p>
-                <p className="mt-0.5 truncate text-[12px] text-muted-foreground">
-                  {resumable.workspace.title} ·{" "}
-                  {resumable.session.activities.filter((a) => a.status === "completed").length}
-                  /{resumable.session.activities.length} ·{" "}
-                  {formatDuration(resumable.session.durationMinutes)}
-                </p>
-                <div className="mt-2 h-1 w-full max-w-xs overflow-hidden rounded-full bg-muted">
-                  <div
-                    className="h-full rounded-full bg-accent"
-                    style={{ width: `${Math.max(2, heroProgress)}%` }}
-                  />
-                </div>
-              </div>
-              <Button
-                size="sm"
-                onClick={() =>
-                  router.push(
-                    `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
-                  )
-                }
-              >
-                {t("home.resumeSession")}
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Button>
-            </div>
-          ) : null}
-
-          {dueReview && dueReview.total > 0 && (
-            <Link
-              href="/flashcards/review"
-              className="flex items-center gap-3 rounded-xl border border-amber/20 border-l-4 border-l-amber bg-amber/10 px-4 py-2.5 text-[13px] hover:bg-amber/15"
-            >
-              <RotateCcw className="h-3.5 w-3.5 text-accent" />
-              <span className="font-medium">
-                {t(dueReview.total === 1 ? "misc.cardDue" : "misc.cardsDue").replace(
-                  "{count}",
-                  String(dueReview.total),
+          {!filtered && folders.length > 0 && (
+            <div className="mt-3 flex flex-wrap items-center gap-1.5">
+              <button
+                type="button"
+                onClick={() => setSelectedFolder(null)}
+                className={cn(
+                  "rounded-full px-3 py-1.5 text-[13px] font-semibold transition-colors",
+                  selectedFolder === null
+                    ? "bg-foreground text-background"
+                    : "bg-muted text-muted-foreground hover:text-foreground",
                 )}
-              </span>
-              <span className="text-muted-foreground">{t("misc.quickReviewBlurb")}</span>
-              <ArrowRight className="ml-auto h-3.5 w-3.5 text-faint" />
-            </Link>
+              >
+                {t("home.all")}
+              </button>
+              {folders.map((folder) => {
+                const hex = folder.color || accentForId(folder.id);
+                const active = selectedFolder?.id === folder.id;
+                return (
+                  <button
+                    key={folder.id}
+                    type="button"
+                    onClick={() => setSelectedFolder(folder)}
+                    className={cn(
+                      "flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] font-semibold transition-colors",
+                      active
+                        ? "bg-foreground text-background"
+                        : "bg-muted text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    <span
+                      className="h-2 w-2 rounded-full"
+                      style={{ background: active ? hex : hex }}
+                    />
+                    {folder.name}
+                  </button>
+                );
+              })}
+            </div>
           )}
 
-          <div className="overflow-hidden rounded-xl border border-dashed border-border-strong bg-card">
-            <HomeUploadRow />
-          </div>
-        </section>
+          {selectedFolder && !filtered && (
+            <div className="mt-3 flex items-center gap-2 text-[13px]">
+              <FolderIcon
+                className="h-4 w-4"
+                style={{ color: selectedFolder.color || accentForId(selectedFolder.id) }}
+              />
+              <span className="font-semibold">{selectedFolder.name}</span>
+              <Link
+                href={`/folder/${selectedFolder.id}`}
+                className="text-accent hover:underline"
+              >
+                {t("home.openFolder")}
+              </Link>
+              <ResourceActionsMenu
+                className="relative"
+                actions={{
+                  onRename: () =>
+                    setEditing({
+                      kind: "folder",
+                      id: selectedFolder.id,
+                      name: selectedFolder.name,
+                      color: selectedFolder.color,
+                    }),
+                  onDelete: () =>
+                    setDeleting({
+                      kind: "folder",
+                      id: selectedFolder.id,
+                      name: selectedFolder.name,
+                    }),
+                }}
+              />
+            </div>
+          )}
 
-        <div className="relative mt-6 max-w-md">
-          <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-faint" />
-          <input
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={t("misc.searchWorkspaces")}
-            className="h-9 w-full rounded-full border border-transparent bg-muted pl-9 pr-3 text-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:bg-card"
-          />
-        </div>
-
-        {filtered ? (
-          <section className="mt-4">
-            <p className="mb-3 text-xs text-muted-foreground">
+          {filtered && (
+            <p className="mt-3 text-xs text-muted-foreground">
               {t(filtered.length === 1 ? "misc.resultCount" : "misc.resultsCount").replace(
                 "{count}",
                 String(filtered.length),
               )}
             </p>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {filtered.map((ws) => (
+          )}
+
+          {treeLoading ? (
+            <div className="mt-4">
+              <CardGridSkeleton count={6} className="xl:grid-cols-4" />
+            </div>
+          ) : visibleWorkspaces.length > 0 ? (
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {visibleWorkspaces.map((ws) => (
                 <WorkspaceCard
                   key={ws.id}
                   workspace={ws}
@@ -349,89 +487,29 @@ export default function HomePage() {
                 />
               ))}
             </div>
-          </section>
-        ) : treeLoading ? (
-          <div className="mt-6">
-            <CardGridSkeleton count={6} className="xl:grid-cols-4" />
-          </div>
-        ) : (
-          <>
-            {folders.length > 0 && (
-              <section className="mt-6">
-                <h2 className="mb-2.5 text-sm font-semibold text-foreground">
-                  {t("misc.folders")}
-                </h2>
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {folders.map((folder) => (
-                    <FolderCard
-                      key={folder.id}
-                      folder={folder}
-                      onClick={(id) => router.push(`/folder/${id}`)}
-                      actions={{
-                        onRename: () =>
-                          setEditing({
-                            kind: "folder",
-                            id: folder.id,
-                            name: folder.name,
-                            color: folder.color,
-                          }),
-                        onDelete: () =>
-                          setDeleting({ kind: "folder", id: folder.id, name: folder.name }),
-                      }}
-                    />
-                  ))}
-                </div>
-              </section>
-            )}
-            {rootWorkspaces.length > 0 && (
-              <section className="mt-6">
-                <h2 className="mb-2.5 text-sm font-semibold text-foreground">
-                  {t("misc.workspaces")}
-                </h2>
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {rootWorkspaces.map((ws) => (
-                    <WorkspaceCard
-                      key={ws.id}
-                      workspace={ws}
-                      onClick={(id) => router.push(`/workspace/${id}`)}
-                      actions={{
-                        onRename: () =>
-                          setEditing({
-                            kind: "workspace",
-                            id: ws.id,
-                            name: ws.title,
-                            description: ws.description,
-                            icon: ws.icon,
-                          }),
-                        onMembers: () => setMembersFor(ws.id),
-                        onDelete: () =>
-                          setDeleting({ kind: "workspace", id: ws.id, name: ws.title }),
-                      }}
-                    />
-                  ))}
-                </div>
-              </section>
-            )}
-            {folders.length === 0 && rootWorkspaces.length === 0 && (
-              <section className="mt-6 rounded-xl border border-dashed border-border-strong px-4 py-6">
-                <p className="text-sm font-medium">{t("misc.firstWinTitle")}</p>
-                <p className="mt-1 max-w-md text-[13px] text-muted-foreground">
-                  {t("misc.planBlurb")}
-                </p>
-                <div className="mt-3 flex gap-2">
-                  <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
-                    {(toggle) => (
-                      <Button size="sm" onClick={toggle}>
-                        <Plus className="h-3.5 w-3.5" />
-                        {t("ws.newWorkspace")}
-                      </Button>
-                    )}
-                  </NewWorkspaceMenu>
-                </div>
-              </section>
-            )}
-          </>
-        )}
+          ) : allWorkspaces.length === 0 && folders.length === 0 ? (
+            <div className="mt-4 rounded-xl border border-dashed border-border-strong px-4 py-6">
+              <p className="text-sm font-medium">{t("misc.firstWinTitle")}</p>
+              <p className="mt-1 max-w-md text-[13px] text-muted-foreground">
+                {t("misc.planBlurb")}
+              </p>
+              <div className="mt-3 flex gap-2">
+                <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
+                  {(toggle) => (
+                    <Button size="sm" onClick={toggle}>
+                      <Plus className="h-3.5 w-3.5" />
+                      {t("ws.newWorkspace")}
+                    </Button>
+                  )}
+                </NewWorkspaceMenu>
+              </div>
+            </div>
+          ) : (
+            <p className="mt-4 text-[13px] text-muted-foreground">
+              {t("home.noSubjectsInFolder")}
+            </p>
+          )}
+        </section>
 
         {editing && (
           <EditResourceDialog
