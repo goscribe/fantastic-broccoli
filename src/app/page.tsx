@@ -34,12 +34,9 @@ import {
 import { onTreeChanged } from "@/lib/tree-events";
 import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
-import { HeroScene, ConfettiDots, Sticker } from "@/components/graphics/floating-decor";
-import { Banner } from "@/components/ui/banner";
 import { Button } from "@/components/ui/button";
 import { HomeUploadRow } from "@/components/workspace/home-upload-row";
 
@@ -197,21 +194,6 @@ export default function HomePage() {
 
   const heroProgress = resumable ? resumable.session.progress : 0;
 
-  const lastSevenDays = useMemo(() => {
-    const byDate = new Map(dailyActivity.map((d) => [d.date, d.count]));
-    return Array.from({ length: 7 }, (_, i) => {
-      const d = new Date();
-      d.setDate(d.getDate() - (6 - i));
-      const iso = d.toISOString().split("T")[0];
-      return {
-        label: d.toLocaleDateString("en-GB", { weekday: "narrow" }),
-        count: byDate.get(iso) ?? 0,
-        isToday: i === 6,
-      };
-    });
-  }, [dailyActivity]);
-
-  const maxWeekCount = Math.max(1, ...lastSevenDays.map((d) => d.count));
 
   const hour = new Date().getHours();
   const greeting =
@@ -231,310 +213,123 @@ export default function HomePage() {
           }}
         />
       )}
-      <Banner
-        variant="accent"
-        dismissKey="upgrade-promo"
-        action={{ label: t("misc.upgradeNow"), href: "/pricing" }}
-        className="rounded-none border-x-0 border-t-0 px-4 sm:px-8"
-      >
-        {t("misc.upgradeBanner")}
-      </Banner>
-      <main className="w-full flex-1 space-y-6 px-4 py-5 sm:space-y-8 sm:px-8 sm:py-8">
-        {/* Greeting */}
-        <header className="flex flex-wrap items-end justify-between gap-4 animate-fade-up">
+      <main className="w-full flex-1 px-4 py-5 sm:px-8 sm:py-6">
+        <header className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="text-[11px] font-semibold text-faint">
+            <h1 className="text-lg font-semibold tracking-tight">
+              {greeting}{user ? `, ${user.name}` : ""}
+            </h1>
+            <p className="mt-0.5 text-[12px] text-muted-foreground">
               {new Date().toLocaleDateString("en-GB", {
                 weekday: "long",
                 day: "numeric",
                 month: "long",
               })}
+              {streak > 0 && ` · ${streak} ${t("misc.dayStreak")}`}
+              {activeSessions.length > 0 &&
+                ` · ${activeSessions.length} ${t("misc.activePlans").toLowerCase()} · ${formatDuration(totalPlannedMinutes)} ${t("misc.timePlanned").toLowerCase()}`}
             </p>
-            <h1 className="mt-1 text-xl font-bold tracking-tight sm:text-2xl">
-              {greeting}{user ? `, ${user.name}` : ""}
-            </h1>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCreating("folder")}
+            >
+              <Plus className="h-3.5 w-3.5" />
+              {t("misc.newFolder")}
+            </Button>
+            <NewWorkspaceMenu align="right" onSelect={openWorkspaceCreate}>
+              {(toggle) => (
+                <Button size="sm" onClick={toggle}>
+                  <Plus className="h-3.5 w-3.5" />
+                  {t("ws.newWorkspace")}
+                </Button>
+              )}
+            </NewWorkspaceMenu>
           </div>
         </header>
 
-        {/* Hero */}
-        <section
-          data-tour="home-banner"
-          className="relative z-10 grid gap-4 animate-fade-up lg:grid-cols-[1fr_250px]"
-        >
-          <div className="relative rounded-2xl border border-border bg-card p-5 sm:p-7">
-            {/* Clip the 3D props, not the New-workspace menu. */}
-            <div
-              className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
-              aria-hidden
-            >
-              {resumable ? (
-                <HeroScene />
-              ) : (
-                <>
-                  <Image
-                    src="/illustrations/welcome.png"
-                    alt=""
-                    width={280}
-                    height={280}
-                    priority
-                    unoptimized
-                    className="absolute -bottom-6 right-2 hidden w-52 select-none md:block lg:right-6 lg:w-64"
-                  />
-                  <Sticker
-                    src="/illustrations/props/star-gold.png"
-                    className="right-36 top-4 hidden w-9 rotate-12 md:block"
-                  />
-                  <ConfettiDots className="hidden md:block" />
-                </>
-              )}
-            </div>
-            <div className="relative z-10 max-w-lg">
-              <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight leading-snug">
-                {resumable
-                  ? resumable.session.title
-                  : t("misc.firstWinTitle")}
-              </h2>
-              <p className="text-sm text-muted-foreground mt-1.5">
-                {resumable
-                  ? `${resumable.workspace.title} · ${formatDuration(resumable.session.durationMinutes)} · ${resumable.session.activities.filter((a) => a.status === "completed").length} of ${resumable.session.activities.length} activities complete`
-                  : t("misc.planBlurb")}
-              </p>
-              {resumable ? (
-                <div className="mt-5 flex flex-wrap items-center gap-2.5">
-                  <Button
-                    type="button"
-                    onClick={() =>
-                      router.push(
-                        `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
-                      )
-                    }
-                    className="gap-2"
-                  >
-                    {t("home.resumeSession")}
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
-                  <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
-                    {(toggle) => (
-                      <Button type="button" variant="outline" onClick={toggle} className="gap-2">
-                        <Plus className="h-3.5 w-3.5" />
-                        {t("nav.newWorkspace")}
-                      </Button>
-                    )}
-                  </NewWorkspaceMenu>
-                </div>
-              ) : (
-                <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
-                  {(toggle) => (
-                    <Button
-                      type="button"
-                      onClick={toggle}
-                      className="mt-5 gap-2 w-full sm:w-auto"
-                    >
-                      <Plus className="h-4 w-4" />
-                      {t("nav.newWorkspace")}
-                    </Button>
-                  )}
-                </NewWorkspaceMenu>
-              )}
-            </div>
-          </div>
-
-          {/* Progress scene */}
-          <div className="relative hidden overflow-hidden rounded-2xl border border-border bg-card p-5 lg:block">
-            <ConfettiDots />
-            <p className="relative text-4xl font-extrabold tabular-nums">
-              {heroProgress}%
-            </p>
-            <p className="relative mt-0.5 text-[11px] font-bold text-muted-foreground">
-              {t("misc.progress")}
-            </p>
-            <Image
-              src="/illustrations/journey.png"
-              alt=""
-              width={220}
-              height={220}
-              unoptimized
-              className="pointer-events-none absolute -bottom-4 -right-3 w-40 select-none"
-            />
-            <Image
-              src="/illustrations/props/star-gold.png"
-              alt=""
-              width={60}
-              height={60}
-              unoptimized
-              className="pointer-events-none absolute right-4 top-4 w-9 rotate-12 select-none"
-            />
-          </div>
-        </section>
-
-        {dueReview && dueReview.total > 0 && (
-          <Link
-            href="/flashcards/review"
-            className="group flex flex-col items-start gap-3 rounded-2xl border border-border bg-card px-4 py-3.5 transition-colors animate-fade-up hover:border-accent/40 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-5 sm:py-4"
-          >
-            <div className="flex items-center gap-3.5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-accent">
-                <RotateCcw className="h-4 w-4" />
-              </span>
-              <div>
-                <p className="text-sm font-semibold">
-                  {t(
-                    dueReview.total === 1 ? "misc.cardDue" : "misc.cardsDue",
-                  ).replace("{count}", String(dueReview.total))}
-                </p>
-                <p className="text-[13px] text-muted-foreground">
-                  {t("misc.quickReviewBlurb")}
-                </p>
-              </div>
-            </div>
-            <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent">
-              {t("home.reviewNow")}
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </span>
-          </Link>
-        )}
-
-        {/* Stats + upload. Week bars stay on tablet/desktop so they never
-            overlay a figure; phones skip the extra chart. */}
-        <section className="animate-fade-up">
+        <section data-tour="home-banner" className="mt-5 space-y-2">
           {calendarLoading || treeLoading ? (
-            <Skeleton className="h-24 w-full rounded-2xl" />
-          ) : (
-            <div className="overflow-hidden rounded-2xl border border-border bg-card">
-              <div className="grid grid-cols-2 gap-x-4 gap-y-4 px-4 py-4 sm:grid-cols-3 lg:grid-cols-5">
-                {[
-                  {
-                    label: t("misc.dayStreak"),
-                    value: String(streak),
-                    icon: "/illustrations/icons/stat-flame.png",
-                    hideOnMobile: true,
-                  },
-                  {
-                    label: t("misc.activeDays"),
-                    value: String(
-                      dailyActivity.filter((d) => d.count > 0).length,
-                    ),
-                    icon: "/illustrations/icons/stat-calendar.png",
-                    hideOnMobile: false,
-                  },
-                  {
-                    label: t("misc.sessionsLogged"),
-                    value: String(
-                      dailyActivity.reduce((s, d) => s + d.count, 0),
-                    ),
-                    icon: "/illustrations/icons/stat-bolt.png",
-                    hideOnMobile: false,
-                  },
-                  {
-                    label: t("misc.activePlans"),
-                    value: String(activeSessions.length),
-                    icon: "/illustrations/flag.png",
-                    hideOnMobile: false,
-                  },
-                  {
-                    label: t("misc.timePlanned"),
-                    value: formatDuration(totalPlannedMinutes),
-                    icon: "/illustrations/icons/stat-clock.png",
-                    hideOnMobile: false,
-                  },
-                ].map((stat) => (
-                  <div
-                    key={stat.label}
-                    className={`min-w-0 items-center gap-2.5 sm:gap-3 ${
-                      stat.hideOnMobile ? "hidden sm:flex" : "flex"
-                    }`}
-                    title={stat.label}
-                  >
-                    <Image
-                      src={stat.icon}
-                      alt=""
-                      width={96}
-                      height={96}
-                      unoptimized
-                      className="pointer-events-none h-9 w-9 shrink-0 select-none object-contain sm:h-12 sm:w-12"
-                    />
-                    <div className="min-w-0">
-                      <p className="text-lg font-bold tabular-nums leading-none tracking-tight sm:text-xl">
-                        {stat.value}
-                      </p>
-                      <p className="mt-1 truncate text-[11px] font-medium text-muted-foreground sm:text-xs">
-                        {stat.label}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <HomeUploadRow />
-              <div className="hidden border-t border-border px-4 py-3 sm:block">
-                <p className="text-[11px] font-semibold text-muted-foreground">
-                  {t("misc.thisWeek")}
+            <Skeleton className="h-20 w-full rounded-lg" />
+          ) : resumable ? (
+            <div className="flex flex-wrap items-center gap-4 rounded-lg border border-border bg-card px-4 py-3">
+              <div className="min-w-0 flex-1">
+                <p className="text-[11px] font-medium uppercase tracking-wide text-faint">
+                  {t("home.resumeSession")}
                 </p>
-                <div className="mt-2 flex min-h-14 items-end gap-2">
-                  {lastSevenDays.map(({ label, count, isToday }, i) => (
-                    <div
-                      key={i}
-                      className="flex h-14 flex-1 flex-col items-center justify-end gap-1"
-                      title={t(
-                        count === 1
-                          ? "misc.sessionTooltip"
-                          : "misc.sessionsTooltip",
-                      ).replace("{count}", String(count))}
-                    >
-                      <div
-                        className={`w-full max-w-9 rounded-t-md ${
-                          count > 0
-                            ? isToday
-                              ? "bg-accent"
-                              : "bg-accent/70"
-                            : "bg-muted"
-                        }`}
-                        style={{
-                          height:
-                            count > 0
-                              ? `${Math.max(12, (count / maxWeekCount) * 100)}%`
-                              : "4px",
-                        }}
-                      />
-                      <span
-                        className={`text-[10px] ${
-                          isToday
-                            ? "font-semibold text-foreground"
-                            : "text-faint"
-                        }`}
-                      >
-                        {label}
-                      </span>
-                    </div>
-                  ))}
+                <p className="mt-0.5 truncate text-[15px] font-semibold tracking-tight">
+                  {resumable.session.title}
+                </p>
+                <p className="mt-0.5 truncate text-[12px] text-muted-foreground">
+                  {resumable.workspace.title} ·{" "}
+                  {resumable.session.activities.filter((a) => a.status === "completed").length}
+                  /{resumable.session.activities.length} ·{" "}
+                  {formatDuration(resumable.session.durationMinutes)}
+                </p>
+                <div className="mt-2 h-1 w-full max-w-xs overflow-hidden rounded-full bg-muted">
+                  <div
+                    className="h-full rounded-full bg-accent"
+                    style={{ width: `${Math.max(2, heroProgress)}%` }}
+                  />
                 </div>
               </div>
+              <Button
+                size="sm"
+                onClick={() =>
+                  router.push(
+                    `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
+                  )
+                }
+              >
+                {t("home.resumeSession")}
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Button>
             </div>
+          ) : null}
+
+          {dueReview && dueReview.total > 0 && (
+            <Link
+              href="/flashcards/review"
+              className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-2.5 text-[13px] hover:border-border-strong"
+            >
+              <RotateCcw className="h-3.5 w-3.5 text-accent" />
+              <span className="font-medium">
+                {t(dueReview.total === 1 ? "misc.cardDue" : "misc.cardsDue").replace(
+                  "{count}",
+                  String(dueReview.total),
+                )}
+              </span>
+              <span className="text-muted-foreground">{t("misc.quickReviewBlurb")}</span>
+              <ArrowRight className="ml-auto h-3.5 w-3.5 text-faint" />
+            </Link>
           )}
+
+          <div className="overflow-hidden rounded-lg border border-border bg-card">
+            <HomeUploadRow />
+          </div>
         </section>
 
-        {/* Search */}
-        <div className="relative max-w-md animate-fade-up">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-faint" />
+        <div className="relative mt-6 max-w-md">
+          <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-faint" />
           <input
-            type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t("misc.searchWorkspaces")}
-            className="w-full h-10 pl-11 pr-4 rounded-xl border border-border bg-card text-sm focus:outline-none focus:border-accent/50 placeholder:text-faint"
+            className="h-8 w-full rounded-md border border-border bg-card pl-8 pr-3 text-[13px] outline-none placeholder:text-faint focus:border-ring"
           />
         </div>
 
-        {/* Workspaces */}
         {filtered ? (
-          <section>
-            <p className="text-xs text-muted-foreground mb-4">
-              {t(
-                filtered.length === 1
-                  ? "misc.resultCount"
-                  : "misc.resultsCount",
-              ).replace("{count}", String(filtered.length))}
+          <section className="mt-4">
+            <p className="mb-3 text-xs text-muted-foreground">
+              {t(filtered.length === 1 ? "misc.resultCount" : "misc.resultsCount").replace(
+                "{count}",
+                String(filtered.length),
+              )}
             </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {filtered.map((ws) => (
                 <WorkspaceCard
                   key={ws.id}
@@ -551,81 +346,51 @@ export default function HomePage() {
                       }),
                     onMembers: () => setMembersFor(ws.id),
                     onDelete: () =>
-                      setDeleting({
-                        kind: "workspace",
-                        id: ws.id,
-                        name: ws.title,
-                      }),
+                      setDeleting({ kind: "workspace", id: ws.id, name: ws.title }),
                   }}
                 />
               ))}
             </div>
           </section>
         ) : treeLoading ? (
-          <section className="animate-fade-up space-y-3">
-            <Skeleton className="h-4 w-16" />
+          <div className="mt-6">
             <CardGridSkeleton count={6} className="xl:grid-cols-4" />
-          </section>
+          </div>
         ) : (
-          <section className="animate-fade-up">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-semibold text-foreground">
-                {t("misc.folders")}
-              </h2>
-              <button
-                type="button"
-                onClick={() => setCreating("folder")}
-                className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-semibold hover:border-accent/40 hover:bg-muted"
-              >
-                <Plus className="h-3.5 w-3.5" />
-                {t("misc.newFolder")}
-              </button>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {folders.map((folder) => (
-                <FolderCard
-                  key={folder.id}
-                  folder={folder}
-                  onClick={(id) => router.push(`/folder/${id}`)}
-                  actions={{
-                    onRename: () =>
-                      setEditing({
-                        kind: "folder",
-                        id: folder.id,
-                        name: folder.name,
-                        color: folder.color,
-                      }),
-                    onDelete: () =>
-                      setDeleting({
-                        kind: "folder",
-                        id: folder.id,
-                        name: folder.name,
-                      }),
-                  }}
-                />
-              ))}
-            </div>
-            {/* Always offered: with only folders (or nothing) there was no
-                visible way to create a workspace outside the sidebar. */}
-            <div className="mt-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-sm font-semibold text-foreground">
-                    {t("misc.workspaces")}
-                  </h2>
-                  <NewWorkspaceMenu align="right" onSelect={openWorkspaceCreate}>
-                    {(toggle) => (
-                      <button
-                        type="button"
-                        onClick={toggle}
-                        className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-semibold hover:border-accent/40 hover:bg-muted"
-                      >
-                        <Plus className="h-3.5 w-3.5" />
-                        {t("nav.newWorkspace")}
-                      </button>
-                    )}
-                  </NewWorkspaceMenu>
+          <>
+            {folders.length > 0 && (
+              <section className="mt-6">
+                <h2 className="mb-2 text-[11px] font-medium uppercase tracking-wide text-faint">
+                  {t("misc.folders")}
+                </h2>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {folders.map((folder) => (
+                    <FolderCard
+                      key={folder.id}
+                      folder={folder}
+                      onClick={(id) => router.push(`/folder/${id}`)}
+                      actions={{
+                        onRename: () =>
+                          setEditing({
+                            kind: "folder",
+                            id: folder.id,
+                            name: folder.name,
+                            color: folder.color,
+                          }),
+                        onDelete: () =>
+                          setDeleting({ kind: "folder", id: folder.id, name: folder.name }),
+                      }}
+                    />
+                  ))}
                 </div>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              </section>
+            )}
+            {rootWorkspaces.length > 0 && (
+              <section className="mt-6">
+                <h2 className="mb-2 text-[11px] font-medium uppercase tracking-wide text-faint">
+                  {t("misc.workspaces")}
+                </h2>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {rootWorkspaces.map((ws) => (
                     <WorkspaceCard
                       key={ws.id}
@@ -638,20 +403,36 @@ export default function HomePage() {
                             id: ws.id,
                             name: ws.title,
                             description: ws.description,
+                            icon: ws.icon,
                           }),
                         onMembers: () => setMembersFor(ws.id),
                         onDelete: () =>
-                          setDeleting({
-                            kind: "workspace",
-                            id: ws.id,
-                            name: ws.title,
-                          }),
+                          setDeleting({ kind: "workspace", id: ws.id, name: ws.title }),
                       }}
                     />
                   ))}
                 </div>
-              </div>
-          </section>
+              </section>
+            )}
+            {folders.length === 0 && rootWorkspaces.length === 0 && (
+              <section className="mt-6 rounded-lg border border-dashed border-border px-4 py-6">
+                <p className="text-sm font-medium">{t("misc.firstWinTitle")}</p>
+                <p className="mt-1 max-w-md text-[13px] text-muted-foreground">
+                  {t("misc.planBlurb")}
+                </p>
+                <div className="mt-3 flex gap-2">
+                  <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
+                    {(toggle) => (
+                      <Button size="sm" onClick={toggle}>
+                        <Plus className="h-3.5 w-3.5" />
+                        {t("ws.newWorkspace")}
+                      </Button>
+                    )}
+                  </NewWorkspaceMenu>
+                </div>
+              </section>
+            )}
+          </>
         )}
 
         {editing && (
