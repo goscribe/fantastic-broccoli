@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { PartMarking, WorksheetContent, WorksheetPart } from "@/types";
 import { markWorksheetAnswer } from "@/lib/api/study";
+import { isPartCorrect } from "@/lib/worksheet-marking";
 import { toast } from "@/lib/toast";
 import { recordWorksheetQuestionProgress } from "@/lib/api/study-session";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
@@ -31,13 +32,6 @@ interface WorksheetDraft {
   markings: Record<string, PartMarking>;
   checkedSteps: Record<number, boolean>;
 }
-
-const isPartCorrect = (part: WorksheetPart, value: string) => {
-  if (!part.answer) return value.trim().length > 0;
-  if (part.type === "text")
-    return value.trim().toLowerCase().includes(part.answer.toLowerCase());
-  return value.trim().toLowerCase() === part.answer.toLowerCase();
-};
 
 /** Marking without an LLM markscheme — all-or-nothing on the expected answer. */
 const localMarking = (part: WorksheetPart, value: string): PartMarking => {
@@ -107,10 +101,12 @@ export function WorksheetActivity({
       step.parts.map(async (part, i) => {
         const value = answers[key(i)] ?? "";
         const drawing = drawings[key(i)] ?? undefined;
-        // Free-text parts with a markscheme (or a drawing attached) go
-        // through LLM marking; numeric / true-false parts are checked locally.
+        // Any part with a markscheme (or a drawing attached) goes through
+        // LLM marking — numeric parts included, since their expected answers
+        // are LaTeX with working and units. True/false and markscheme-less
+        // parts are checked locally.
         if (
-          part.type !== "text" ||
+          part.type === "true_false" ||
           (!part.markScheme?.points.length && !drawing)
         ) {
           return localMarking(part, value);
