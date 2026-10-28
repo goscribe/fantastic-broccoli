@@ -7,6 +7,7 @@ import { registerTranslations } from "@/lib/i18n";
 
 const english = {
   "nav.newSession": "New session",
+  "misc.plan": "Plan",
   "nav.recent": "Recent",
   "nav.workspaces": "Workspaces",
   "nav.generating": "Generating…",
