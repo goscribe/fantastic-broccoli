@@ -6,6 +6,13 @@
 import { registerTranslations } from "@/lib/i18n";
 
 const english = {
+  "nav.newSession": "New session",
+  "nav.recent": "Recent",
+  "nav.workspaces": "Workspaces",
+  "nav.generating": "Generating…",
+  "nav.done": "Done",
+  "nav.noRecent": "No sessions yet",
+  "nav.noWorkspaces": "No workspaces yet",
   "misc.acceptingInvite": "Accepting your invitation…",
   "misc.inviteAccepted": "Invitation accepted!",
   "misc.inviteAcceptFailed": "Could not accept the invitation",
