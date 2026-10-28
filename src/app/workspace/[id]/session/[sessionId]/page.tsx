@@ -71,18 +71,28 @@ import {
   RefreshCw,
   Trash2,
   X,
+  BookOpen,
+  ListChecks,
+  CircleHelp,
+  Layers,
+  PencilLine,
+  MousePointerClick,
+  SpellCheck,
+  TextCursorInput,
+  Mic,
+  type LucideIcon,
 } from "lucide-react";
 
-const ACTIVITY_ICON: Record<SessionActivity["type"], string> = {
-  reading: "/illustrations/icons/act-reading.png",
-  comprehension_check: "/illustrations/icons/act-comprehension.png",
-  mcq: "/illustrations/icons/act-mcq.png",
-  flashcard_review: "/illustrations/icons/act-flashcards.png",
-  worksheet: "/illustrations/icons/act-worksheet.png",
-  interactive: "/illustrations/icons/act-interactive.png",
-  vocab_recall: "/illustrations/icons/act-vocab.png",
-  cloze: "/illustrations/icons/act-cloze.png",
-  explain_aloud: "/illustrations/icons/act-explain.png",
+const ACTIVITY_ICON: Record<SessionActivity["type"], LucideIcon> = {
+  reading: BookOpen,
+  comprehension_check: ListChecks,
+  mcq: CircleHelp,
+  flashcard_review: Layers,
+  worksheet: PencilLine,
+  interactive: MousePointerClick,
+  vocab_recall: SpellCheck,
+  cloze: TextCursorInput,
+  explain_aloud: Mic,
 };
 
 const phaseOf = (t: SessionActivity["type"]) =>
@@ -1087,13 +1097,12 @@ function FeedPeek({
         <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-foreground" />
       )}
       {activity ? (
-        <Image
-          src={ACTIVITY_ICON[activity.type]}
-          alt=""
-          width={28}
-          height={28}
-          className="pointer-events-none h-7 w-7 select-none object-contain opacity-60 transition-opacity group-hover:opacity-100"
-        />
+        <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card text-muted-foreground transition-colors group-hover:text-foreground">
+          {(() => {
+            const Icon = ACTIVITY_ICON[activity.type];
+            return <Icon className="h-3.5 w-3.5" />;
+          })()}
+        </span>
       ) : (
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent/15">
           <Check className="h-4 w-4 text-accent" />
