@@ -59,6 +59,10 @@ export interface CopilotHistoryMessage {
   visualizations: CopilotVisualization[];
   highlights: CopilotHighlight[];
   toolCalls: CopilotToolCall[];
+  /** Artifact cards attached in that reply (persisted so they survive a reload). */
+  artifacts: CopilotAttachedArtifact[];
+  /** Sessions created or attached in that reply. */
+  sessionIds: string[];
 }
 
 export async function getConversationMessages(
@@ -76,6 +80,8 @@ export async function getConversationMessages(
       visualizations?: CopilotVisualization[];
       highlights?: CopilotHighlight[];
       toolCalls?: CopilotToolCall[];
+      artifacts?: CopilotAttachedArtifact[];
+      sessionIds?: string[];
     };
     return {
       id: m.id,
@@ -85,6 +91,8 @@ export async function getConversationMessages(
       visualizations: aids.visualizations ?? [],
       highlights: aids.highlights ?? [],
       toolCalls: aids.toolCalls ?? [],
+      artifacts: aids.artifacts ?? [],
+      sessionIds: aids.sessionIds ?? [],
     };
   });
 }

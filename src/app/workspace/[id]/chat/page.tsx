@@ -305,6 +305,8 @@ export default function WorkspaceChatPage() {
               widgets: m.widgets,
               visualizations: m.visualizations,
               toolCalls: m.toolCalls,
+              artifacts: m.artifacts,
+              sessionIds: m.sessionIds,
             })),
           );
         }
