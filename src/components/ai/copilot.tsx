@@ -5,7 +5,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 import { toastError } from "@/lib/toast";
 import { Sparkles, X, ArrowUp, Plus } from "lucide-react";
-import Image from "next/image";
 import { EquationEmbed, GraphEmbed, CitationEmbed } from "@/components/ai/embeds";
 import {
   InteractiveWidget,
@@ -120,6 +119,7 @@ interface ChatTab {
 
 export function Copilot({
   open,
+  plan,
   onClose,
   context,
   workspaceId,
@@ -128,6 +128,7 @@ export function Copilot({
   page,
 }: {
   open: boolean;
+  plan?: React.ReactNode;
   onClose: () => void;
   context?: string;
   workspaceId: string;
@@ -137,6 +138,7 @@ export function Copilot({
   /** Where the learner is in the app (page + position), for the model. */
   page?: string;
 }) {
+  const [pane, setPane] = useState<"chat" | "plan">("chat");
   const { t } = useI18n();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [chats, setChats] = useState<ChatTab[]>([]);
@@ -395,7 +397,27 @@ export function Copilot({
       />
       {/* Header */}
       <div className="flex items-center gap-2 px-3 h-12 border-b border-border shrink-0">
-        <p className="text-sm font-semibold shrink-0">{t("misc.copilot")}</p>
+        {plan ? (
+          <div className="flex shrink-0 items-center gap-0.5 rounded-full bg-muted p-1">
+            {(["chat", "plan"] as const).map((k) => (
+              <button
+                key={k}
+                type="button"
+                onClick={() => setPane(k)}
+                className={cn(
+                  "rounded-full px-3 py-1 text-[12px] font-semibold transition-colors",
+                  pane === k
+                    ? "bg-foreground text-background"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {k === "chat" ? t("misc.copilot") : t("misc.plan")}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm font-semibold shrink-0">{t("misc.copilot")}</p>
+        )}
         <div className="flex items-center gap-1 ml-1 flex-1 min-w-0 overflow-x-auto">
           {chatsLoading &&
             [0, 1].map((i) => (
@@ -437,34 +459,32 @@ export function Copilot({
         </button>
       </div>
 
+      {pane === "plan" && plan ? (
+        <div className="flex-1 overflow-y-auto">{plan}</div>
+      ) : (
+        <>
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
         {chatMessages.length === 0 && (
-          <div className="pt-8 text-center space-y-5">
-            <Image
-              src="/illustrations/bot.png"
-              alt=""
-              width={160}
-              height={160}
-              className="pointer-events-none mx-auto h-20 w-20 select-none object-contain"
-            />
+          <div className="pt-2 space-y-4">
             <div>
               <p className="text-sm font-semibold">
                 {t("misc.copilotEmptyTitle")}
               </p>
-              <p className="text-xs text-muted-foreground mt-1">
+              <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
                 {context ? `${context} — ` : ""}
                 {t("misc.copilotEmptyBlurb")}
               </p>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               {suggestions.map((s) => (
                 <button
                   key={s}
                   type="button"
                   onClick={() => send(s)}
-                  className="block w-full text-left text-xs px-3.5 py-2.5 rounded-xl border border-border bg-muted/40 text-muted-foreground hover:text-foreground hover:border-border-strong"
+                  className="flex w-full items-center gap-2 text-left text-xs px-3 py-2.5 rounded-xl border border-border bg-card text-foreground/80 hover:bg-accent-soft hover:border-accent/30 hover:text-accent"
                 >
+                  <Sparkles className="h-3 w-3 shrink-0 text-accent" />
                   {s}
                 </button>
               ))}
@@ -556,6 +576,8 @@ export function Copilot({
           </button>
         </form>
       </div>
+        </>
+      )}
     </div>
   );
 }

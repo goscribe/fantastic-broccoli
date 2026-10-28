@@ -4,8 +4,7 @@ import { Workspace } from "@/types";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { formatRelativeDate, formatDuration } from "@/lib/utils";
-import { accentNameForId } from "@/lib/accent-palette";
-import Image from "next/image";
+import { accentForId } from "@/lib/accent-palette";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import { Clock, ArrowRight, FileText, BookOpen, UserPlus } from "lucide-react";
@@ -45,12 +44,12 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
             : "ws.sessionsInProgress",
         ).replace("{n}", String(activeSessions.length))
       : t("ws.noActiveSessions");
-  const accent = accentNameForId(workspace.id);
+  const accentHex = accentForId(workspace.id);
 
   return (
     <div
       onClick={() => onClick(workspace.id)}
-      className="group relative cursor-pointer rounded-2xl border border-border bg-card p-5 transition-all duration-150 hover:border-border-strong hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0"
+      className="group relative cursor-pointer overflow-hidden rounded-xl border border-border bg-card p-4 transition-colors hover:border-border-strong hover:shadow-sm"
     >
       {actions ? (
         <ResourceActionsMenu
@@ -62,13 +61,13 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
       )}
 
       <div className="flex items-start gap-3">
-        <Image
-          src={`/illustrations/icons/ws-${accent}.png`}
-          alt=""
-          width={80}
-          height={80}
-          className="pointer-events-none h-10 w-10 shrink-0 select-none object-contain"
-        />
+        <span
+          aria-hidden
+          className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+          style={{ background: `${accentHex}1f`, color: accentHex }}
+        >
+          <BookOpen className="h-[18px] w-[18px]" />
+        </span>
         <div className="min-w-0 flex-1 pr-5">
           <div className="flex items-center gap-2">
             <h3 className="font-semibold text-sm leading-tight truncate">

@@ -3,13 +3,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
-import { useAuthUser } from "@/lib/api/auth";
 import type { Folder, StudySession, Workspace } from "@/types";
 import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { formatDuration } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
-import { FolderCard } from "@/components/workspace/folder-card";
 import {
   CreateResourceDialog,
   NewWorkspaceMenu,
@@ -25,6 +23,7 @@ import {
   fetchActivityCalendar,
   fetchStudySessions,
   type DailyActivityPoint,
+  computeStreak,
 } from "@/lib/api/study";
 import {
   FirstSessionOnboarding,
@@ -32,30 +31,27 @@ import {
   markFirstSessionOnboardingSkipped,
 } from "@/components/onboarding/first-session-onboarding";
 import { onTreeChanged } from "@/lib/tree-events";
-import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
-import Link from "next/link";
+import {
+  Search,
+  ChevronRight,
+  Plus,
+  RotateCcw,
+  Flame,
+  Zap,
+  Check,
+  Clock,
+} from "lucide-react";
+import { accentForId } from "@/lib/accent-palette";
+import { cn } from "@/lib/utils";
+import { FolderCard } from "@/components/workspace/folder-card";
+import { ProgressBar } from "@/components/ui/progress-bar";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
-import { HeroScene, ConfettiDots, Sticker } from "@/components/graphics/floating-decor";
-import { Banner } from "@/components/ui/banner";
 import { Button } from "@/components/ui/button";
 import { HomeUploadRow } from "@/components/workspace/home-upload-row";
 
-function computeStreak(daily: DailyActivityPoint[]): number {
-  const byDate = new Map(daily.map((d) => [d.date, d.count]));
-  let streak = 0;
-  const d = new Date();
-  for (;;) {
-    const iso = d.toISOString().split("T")[0];
-    const count = byDate.get(iso) ?? 0;
-    if (count > 0) streak += 1;
-    else if (streak > 0 || iso !== new Date().toISOString().split("T")[0]) break;
-    d.setDate(d.getDate() - 1);
-  }
-  return streak;
-}
 
 function flattenWorkspaces(folders: Folder[], root: Workspace[]): Workspace[] {
   const all: Workspace[] = [...root];
@@ -69,10 +65,11 @@ function flattenWorkspaces(folders: Folder[], root: Workspace[]): Workspace[] {
   return all;
 }
 
+const DAILY_GOAL = 3;
+
 export default function HomePage() {
   const router = useRouter();
   const { t } = useI18n();
-  const { user } = useAuthUser();
   const [searchQuery, setSearchQuery] = useState("");
   const [folders, setFolders] = useState<Folder[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
@@ -187,16 +184,22 @@ export default function HomePage() {
       .filter((s) => s.status === "active" && s.activities.length > 0)
       .map((s) => ({ session: s, workspace: w }));
   });
-  const resumable = activeSessions.find(({ session }) => session.progress > 0);
-  const totalPlannedMinutes = activeSessions.reduce(
-    (sum, { session }) => sum + session.durationMinutes,
-    0,
-  );
 
   const streak = useMemo(() => computeStreak(dailyActivity), [dailyActivity]);
 
-  const heroProgress = resumable ? resumable.session.progress : 0;
+  const withSessions = (w: Workspace): Workspace => ({
+    ...w,
+    sessions: sessionsByWorkspace.get(w.id) ?? w.sessions,
+  });
+  const visibleWorkspaces = (filtered ?? allWorkspaces).map(withSessions);
 
+  const sortedActive = [...activeSessions].sort((a, b) =>
+    b.session.updatedAt.localeCompare(a.session.updatedAt),
+  );
+  const primary = sortedActive[0];
+  const otherActive = sortedActive.slice(1, 4);
+
+  const todayIso = new Date().toISOString().split("T")[0];
   const lastSevenDays = useMemo(() => {
     const byDate = new Map(dailyActivity.map((d) => [d.date, d.count]));
     return Array.from({ length: 7 }, (_, i) => {
@@ -204,22 +207,21 @@ export default function HomePage() {
       d.setDate(d.getDate() - (6 - i));
       const iso = d.toISOString().split("T")[0];
       return {
-        label: d.toLocaleDateString("en-GB", { weekday: "narrow" }),
+        iso,
         count: byDate.get(iso) ?? 0,
-        isToday: i === 6,
+        label: d.toLocaleDateString(undefined, { weekday: "narrow" }),
       };
     });
   }, [dailyActivity]);
+  const todayCount = lastSevenDays[6]?.count ?? 0;
+  const dueCount = dueReview?.total ?? 0;
 
-  const maxWeekCount = Math.max(1, ...lastSevenDays.map((d) => d.count));
-
-  const hour = new Date().getHours();
-  const greeting =
-    hour < 12
-      ? t("misc.goodMorning")
-      : hour < 18
-        ? t("misc.goodAfternoon")
-        : t("misc.goodEvening");
+  const remainingMinutes = (session: StudySession) => {
+    const left = session.activities
+      .filter((a) => a.status !== "completed")
+      .reduce((sum, a) => sum + (a.estimatedMinutes || 0), 0);
+    return left || Math.round((session.durationMinutes * (100 - session.progress)) / 100);
+  };
 
   return (
     <div className="flex-1 flex flex-col">
@@ -231,402 +233,201 @@ export default function HomePage() {
           }}
         />
       )}
-      <Banner
-        variant="accent"
-        dismissKey="upgrade-promo"
-        action={{ label: t("misc.upgradeNow"), href: "/pricing" }}
-        className="rounded-none border-x-0 border-t-0 px-4 sm:px-8"
-      >
-        {t("misc.upgradeBanner")}
-      </Banner>
-      <main className="w-full flex-1 space-y-6 px-4 py-5 sm:space-y-8 sm:px-8 sm:py-8">
-        {/* Greeting */}
-        <header className="flex flex-wrap items-end justify-between gap-4 animate-fade-up">
-          <div>
-            <p className="text-[11px] font-semibold text-faint">
-              {new Date().toLocaleDateString("en-GB", {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-              })}
-            </p>
-            <h1 className="mt-1 text-xl font-bold tracking-tight sm:text-2xl">
-              {greeting}{user ? `, ${user.name}` : ""}
-            </h1>
-          </div>
-        </header>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-8 sm:py-8">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
+          <div className="min-w-0">
+            <section data-tour="home-banner">
+              <h1 className="text-xl font-semibold tracking-tight">
+                {t("home.continueLearning")}
+              </h1>
 
-        {/* Hero */}
-        <section
-          data-tour="home-banner"
-          className="relative z-10 grid gap-4 animate-fade-up lg:grid-cols-[1fr_250px]"
-        >
-          <div className="relative rounded-2xl border border-border bg-card p-5 sm:p-7">
-            {/* Clip the 3D props, not the New-workspace menu. */}
-            <div
-              className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
-              aria-hidden
-            >
-              {resumable ? (
-                <HeroScene />
+              {treeLoading ? (
+                <Skeleton className="mt-4 h-56 rounded-xl" />
+              ) : primary ? (
+                (() => {
+                  const { session, workspace } = primary;
+                  const hex = accentForId(workspace.id);
+                  const next =
+                    session.activities.find((a) => a.status !== "completed") ??
+                    session.activities[0];
+                  const href = `/workspace/${workspace.id}/session/${session.id}`;
+                  return (
+                    <div className="mt-4 rounded-xl border border-border bg-card p-5 shadow-xs">
+                      <div className="flex flex-col gap-5 sm:flex-row">
+                        <div
+                          className="flex h-36 w-full shrink-0 items-center justify-center rounded-lg sm:h-auto sm:w-52"
+                          style={{ background: `${hex}1a` }}
+                        >
+                          <Image
+                            src="/illustrations/bot.png"
+                            alt=""
+                            width={120}
+                            height={120}
+                            priority
+                            className="h-24 w-24 select-none object-contain"
+                          />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                            {workspace.title}
+                          </p>
+                          <h2 className="mt-1 text-lg font-semibold tracking-tight">
+                            {session.title}
+                          </h2>
+                          {next && (
+                            <p className="mt-1 text-sm text-muted-foreground">
+                              {t("home.nextUp")}: {next.title}
+                            </p>
+                          )}
+                          <div className="mt-4 flex items-center gap-3 text-[13px] text-muted-foreground">
+                            <ProgressBar value={session.progress} className="flex-1" size="sm" />
+                            <span className="tabular-nums">{Math.round(session.progress)}%</span>
+                            <span className="flex items-center gap-1 whitespace-nowrap">
+                              <Clock className="h-3.5 w-3.5" />
+                              {t("home.timeLeft").replace(
+                                "{time}",
+                                formatDuration(remainingMinutes(session)),
+                              )}
+                            </span>
+                          </div>
+                          <Button className="mt-4 w-full" onClick={() => router.push(href)}>
+                            {t("home.resumeSession")}
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()
               ) : (
-                <>
-                  <Image
-                    src="/illustrations/welcome.png"
-                    alt=""
-                    width={280}
-                    height={280}
-                    priority
-                    unoptimized
-                    className="absolute -bottom-6 right-2 hidden w-52 select-none md:block lg:right-6 lg:w-64"
-                  />
-                  <Sticker
-                    src="/illustrations/props/star-gold.png"
-                    className="right-36 top-4 hidden w-9 rotate-12 md:block"
-                  />
-                  <ConfettiDots className="hidden md:block" />
-                </>
-              )}
-            </div>
-            <div className="relative z-10 max-w-lg">
-              <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight leading-snug">
-                {resumable
-                  ? resumable.session.title
-                  : t("misc.firstWinTitle")}
-              </h2>
-              <p className="text-sm text-muted-foreground mt-1.5">
-                {resumable
-                  ? `${resumable.workspace.title} · ${formatDuration(resumable.session.durationMinutes)} · ${resumable.session.activities.filter((a) => a.status === "completed").length} of ${resumable.session.activities.length} activities complete`
-                  : t("misc.planBlurb")}
-              </p>
-              {resumable ? (
-                <div className="mt-5 flex flex-wrap items-center gap-2.5">
-                  <Button
-                    type="button"
-                    onClick={() =>
-                      router.push(
-                        `/workspace/${resumable.workspace.id}/session/${resumable.session.id}`,
-                      )
-                    }
-                    className="gap-2"
-                  >
-                    {t("home.resumeSession")}
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
-                  <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
-                    {(toggle) => (
-                      <Button type="button" variant="outline" onClick={toggle} className="gap-2">
-                        <Plus className="h-3.5 w-3.5" />
-                        {t("nav.newWorkspace")}
-                      </Button>
-                    )}
-                  </NewWorkspaceMenu>
+                <div className="mt-4 rounded-xl border border-border bg-card p-5">
+                  <p className="font-semibold">{t("home.noActive")}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{t("home.noActiveBlurb")}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Button onClick={() => router.push("/study-bot")}>
+                      <Plus className="h-4 w-4" />
+                      {t("nav.newSession")}
+                    </Button>
+                    <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
+                      {(toggle) => (
+                        <Button variant="secondary" onClick={toggle}>
+                          {t("ws.newWorkspace")}
+                        </Button>
+                      )}
+                    </NewWorkspaceMenu>
+                  </div>
                 </div>
-              ) : (
+              )}
+
+              {otherActive.length > 0 && (
+                <div className="mt-3 divide-y divide-border rounded-xl border border-border bg-card">
+                  {otherActive.map(({ session, workspace }) => {
+                    const done = session.activities.filter(
+                      (a) => a.status === "completed",
+                    ).length;
+                    return (
+                      <button
+                        key={session.id}
+                        type="button"
+                        onClick={() =>
+                          router.push(`/workspace/${workspace.id}/session/${session.id}`)
+                        }
+                        className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors first:rounded-t-xl last:rounded-b-xl hover:bg-muted/60"
+                      >
+                        <span
+                          className="h-2.5 w-2.5 shrink-0 rounded-full"
+                          style={{ background: accentForId(workspace.id) }}
+                        />
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-sm font-medium">
+                            {session.title}
+                          </span>
+                          <span className="block truncate text-xs text-muted-foreground">
+                            {workspace.title}
+                          </span>
+                        </span>
+                        <span className="text-xs tabular-nums text-muted-foreground">
+                          {done}/{session.activities.length}
+                        </span>
+                        <ChevronRight className="h-4 w-4 text-faint" />
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </section>
+
+            {!treeLoading && (
+              <section className="mt-6 overflow-hidden rounded-xl border border-border bg-card">
+                <HomeUploadRow />
+              </section>
+            )}
+
+            <section className="mt-10">
+              <div className="flex flex-wrap items-center gap-2">
+                <h2 className="mr-auto text-xl font-semibold tracking-tight">
+                  {t("misc.workspaces")}
+                </h2>
+                <div className="relative">
+                  <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-faint" />
+                  <input
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder={t("misc.searchWorkspaces")}
+                    className="h-9 w-44 rounded-lg border border-border bg-card pl-9 pr-3 text-[13px] outline-none placeholder:text-muted-foreground focus:border-ring"
+                  />
+                </div>
+                <Button variant="secondary" size="sm" onClick={() => setCreating("folder")}>
+                  {t("misc.newFolder")}
+                </Button>
                 <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
                   {(toggle) => (
-                    <Button
-                      type="button"
-                      onClick={toggle}
-                      className="mt-5 gap-2 w-full sm:w-auto"
-                    >
-                      <Plus className="h-4 w-4" />
-                      {t("nav.newWorkspace")}
+                    <Button size="sm" onClick={toggle}>
+                      <Plus className="h-3.5 w-3.5" />
+                      {t("ws.newWorkspace")}
                     </Button>
                   )}
                 </NewWorkspaceMenu>
+              </div>
+
+              {filtered && (
+                <p className="mt-3 text-xs text-muted-foreground">
+                  {t(filtered.length === 1 ? "misc.resultCount" : "misc.resultsCount").replace(
+                    "{count}",
+                    String(filtered.length),
+                  )}
+                </p>
               )}
-            </div>
-          </div>
 
-          {/* Progress scene */}
-          <div className="relative hidden overflow-hidden rounded-2xl border border-border bg-card p-5 lg:block">
-            <ConfettiDots />
-            <p className="relative text-4xl font-extrabold tabular-nums">
-              {heroProgress}%
-            </p>
-            <p className="relative mt-0.5 text-[11px] font-bold text-muted-foreground">
-              {t("misc.progress")}
-            </p>
-            <Image
-              src="/illustrations/journey.png"
-              alt=""
-              width={220}
-              height={220}
-              unoptimized
-              className="pointer-events-none absolute -bottom-4 -right-3 w-40 select-none"
-            />
-            <Image
-              src="/illustrations/props/star-gold.png"
-              alt=""
-              width={60}
-              height={60}
-              unoptimized
-              className="pointer-events-none absolute right-4 top-4 w-9 rotate-12 select-none"
-            />
-          </div>
-        </section>
-
-        {dueReview && dueReview.total > 0 && (
-          <Link
-            href="/flashcards/review"
-            className="group flex flex-col items-start gap-3 rounded-2xl border border-border bg-card px-4 py-3.5 transition-colors animate-fade-up hover:border-accent/40 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-5 sm:py-4"
-          >
-            <div className="flex items-center gap-3.5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft text-accent">
-                <RotateCcw className="h-4 w-4" />
-              </span>
-              <div>
-                <p className="text-sm font-semibold">
-                  {t(
-                    dueReview.total === 1 ? "misc.cardDue" : "misc.cardsDue",
-                  ).replace("{count}", String(dueReview.total))}
-                </p>
-                <p className="text-[13px] text-muted-foreground">
-                  {t("misc.quickReviewBlurb")}
-                </p>
-              </div>
-            </div>
-            <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-accent">
-              {t("home.reviewNow")}
-              <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </span>
-          </Link>
-        )}
-
-        {/* Stats + upload. Week bars stay on tablet/desktop so they never
-            overlay a figure; phones skip the extra chart. */}
-        <section className="animate-fade-up">
-          {calendarLoading || treeLoading ? (
-            <Skeleton className="h-24 w-full rounded-2xl" />
-          ) : (
-            <div className="overflow-hidden rounded-2xl border border-border bg-card">
-              <div className="grid grid-cols-2 gap-x-4 gap-y-4 px-4 py-4 sm:grid-cols-3 lg:grid-cols-5">
-                {[
-                  {
-                    label: t("misc.dayStreak"),
-                    value: String(streak),
-                    icon: "/illustrations/icons/stat-flame.png",
-                    hideOnMobile: true,
-                  },
-                  {
-                    label: t("misc.activeDays"),
-                    value: String(
-                      dailyActivity.filter((d) => d.count > 0).length,
-                    ),
-                    icon: "/illustrations/icons/stat-calendar.png",
-                    hideOnMobile: false,
-                  },
-                  {
-                    label: t("misc.sessionsLogged"),
-                    value: String(
-                      dailyActivity.reduce((s, d) => s + d.count, 0),
-                    ),
-                    icon: "/illustrations/icons/stat-bolt.png",
-                    hideOnMobile: false,
-                  },
-                  {
-                    label: t("misc.activePlans"),
-                    value: String(activeSessions.length),
-                    icon: "/illustrations/flag.png",
-                    hideOnMobile: false,
-                  },
-                  {
-                    label: t("misc.timePlanned"),
-                    value: formatDuration(totalPlannedMinutes),
-                    icon: "/illustrations/icons/stat-clock.png",
-                    hideOnMobile: false,
-                  },
-                ].map((stat) => (
-                  <div
-                    key={stat.label}
-                    className={`min-w-0 items-center gap-2.5 sm:gap-3 ${
-                      stat.hideOnMobile ? "hidden sm:flex" : "flex"
-                    }`}
-                    title={stat.label}
-                  >
-                    <Image
-                      src={stat.icon}
-                      alt=""
-                      width={96}
-                      height={96}
-                      unoptimized
-                      className="pointer-events-none h-9 w-9 shrink-0 select-none object-contain sm:h-12 sm:w-12"
+              {!filtered && folders.length > 0 && (
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {folders.map((folder) => (
+                    <FolderCard
+                      key={folder.id}
+                      folder={folder}
+                      onClick={(id) => router.push(`/folder/${id}`)}
+                      actions={{
+                        onRename: () =>
+                          setEditing({
+                            kind: "folder",
+                            id: folder.id,
+                            name: folder.name,
+                            color: folder.color,
+                          }),
+                        onDelete: () =>
+                          setDeleting({ kind: "folder", id: folder.id, name: folder.name }),
+                      }}
                     />
-                    <div className="min-w-0">
-                      <p className="text-lg font-bold tabular-nums leading-none tracking-tight sm:text-xl">
-                        {stat.value}
-                      </p>
-                      <p className="mt-1 truncate text-[11px] font-medium text-muted-foreground sm:text-xs">
-                        {stat.label}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <HomeUploadRow />
-              <div className="hidden border-t border-border px-4 py-3 sm:block">
-                <p className="text-[11px] font-semibold text-muted-foreground">
-                  {t("misc.thisWeek")}
-                </p>
-                <div className="mt-2 flex min-h-14 items-end gap-2">
-                  {lastSevenDays.map(({ label, count, isToday }, i) => (
-                    <div
-                      key={i}
-                      className="flex h-14 flex-1 flex-col items-center justify-end gap-1"
-                      title={t(
-                        count === 1
-                          ? "misc.sessionTooltip"
-                          : "misc.sessionsTooltip",
-                      ).replace("{count}", String(count))}
-                    >
-                      <div
-                        className={`w-full max-w-9 rounded-t-md ${
-                          count > 0
-                            ? isToday
-                              ? "bg-accent"
-                              : "bg-accent/70"
-                            : "bg-muted"
-                        }`}
-                        style={{
-                          height:
-                            count > 0
-                              ? `${Math.max(12, (count / maxWeekCount) * 100)}%`
-                              : "4px",
-                        }}
-                      />
-                      <span
-                        className={`text-[10px] ${
-                          isToday
-                            ? "font-semibold text-foreground"
-                            : "text-faint"
-                        }`}
-                      >
-                        {label}
-                      </span>
-                    </div>
                   ))}
                 </div>
-              </div>
-            </div>
-          )}
-        </section>
+              )}
 
-        {/* Search */}
-        <div className="relative max-w-md animate-fade-up">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-faint" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={t("misc.searchWorkspaces")}
-            className="w-full h-10 pl-11 pr-4 rounded-xl border border-border bg-card text-sm focus:outline-none focus:border-accent/50 placeholder:text-faint"
-          />
-        </div>
-
-        {/* Workspaces */}
-        {filtered ? (
-          <section>
-            <p className="text-xs text-muted-foreground mb-4">
-              {t(
-                filtered.length === 1
-                  ? "misc.resultCount"
-                  : "misc.resultsCount",
-              ).replace("{count}", String(filtered.length))}
-            </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filtered.map((ws) => (
-                <WorkspaceCard
-                  key={ws.id}
-                  workspace={ws}
-                  onClick={(id) => router.push(`/workspace/${id}`)}
-                  actions={{
-                    onRename: () =>
-                      setEditing({
-                        kind: "workspace",
-                        id: ws.id,
-                        name: ws.title,
-                        description: ws.description,
-                        icon: ws.icon,
-                      }),
-                    onMembers: () => setMembersFor(ws.id),
-                    onDelete: () =>
-                      setDeleting({
-                        kind: "workspace",
-                        id: ws.id,
-                        name: ws.title,
-                      }),
-                  }}
-                />
-              ))}
-            </div>
-          </section>
-        ) : treeLoading ? (
-          <section className="animate-fade-up space-y-3">
-            <Skeleton className="h-4 w-16" />
-            <CardGridSkeleton count={6} className="xl:grid-cols-4" />
-          </section>
-        ) : (
-          <section className="animate-fade-up">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-sm font-semibold text-foreground">
-                {t("misc.folders")}
-              </h2>
-              <button
-                type="button"
-                onClick={() => setCreating("folder")}
-                className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-semibold hover:border-accent/40 hover:bg-muted"
-              >
-                <Plus className="h-3.5 w-3.5" />
-                {t("misc.newFolder")}
-              </button>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {folders.map((folder) => (
-                <FolderCard
-                  key={folder.id}
-                  folder={folder}
-                  onClick={(id) => router.push(`/folder/${id}`)}
-                  actions={{
-                    onRename: () =>
-                      setEditing({
-                        kind: "folder",
-                        id: folder.id,
-                        name: folder.name,
-                        color: folder.color,
-                      }),
-                    onDelete: () =>
-                      setDeleting({
-                        kind: "folder",
-                        id: folder.id,
-                        name: folder.name,
-                      }),
-                  }}
-                />
-              ))}
-            </div>
-            {/* Always offered: with only folders (or nothing) there was no
-                visible way to create a workspace outside the sidebar. */}
-            <div className="mt-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-sm font-semibold text-foreground">
-                    {t("misc.workspaces")}
-                  </h2>
-                  <NewWorkspaceMenu align="right" onSelect={openWorkspaceCreate}>
-                    {(toggle) => (
-                      <button
-                        type="button"
-                        onClick={toggle}
-                        className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-semibold hover:border-accent/40 hover:bg-muted"
-                      >
-                        <Plus className="h-3.5 w-3.5" />
-                        {t("nav.newWorkspace")}
-                      </button>
-                    )}
-                  </NewWorkspaceMenu>
+              {treeLoading ? (
+                <div className="mt-4">
+                  <CardGridSkeleton count={4} className="sm:grid-cols-2 lg:grid-cols-2" />
                 </div>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {rootWorkspaces.map((ws) => (
+              ) : visibleWorkspaces.length > 0 ? (
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                  {visibleWorkspaces.map((ws) => (
                     <WorkspaceCard
                       key={ws.id}
                       workspace={ws}
@@ -638,21 +439,118 @@ export default function HomePage() {
                             id: ws.id,
                             name: ws.title,
                             description: ws.description,
+                            icon: ws.icon,
                           }),
                         onMembers: () => setMembersFor(ws.id),
                         onDelete: () =>
-                          setDeleting({
-                            kind: "workspace",
-                            id: ws.id,
-                            name: ws.title,
-                          }),
+                          setDeleting({ kind: "workspace", id: ws.id, name: ws.title }),
                       }}
                     />
                   ))}
                 </div>
+              ) : allWorkspaces.length === 0 && folders.length === 0 ? (
+                <div className="mt-4 rounded-xl border border-border bg-card p-5">
+                  <p className="font-semibold">{t("misc.firstWinTitle")}</p>
+                  <p className="mt-1 max-w-md text-sm text-muted-foreground">
+                    {t("misc.planBlurb")}
+                  </p>
+                  <div className="mt-4 flex gap-2">
+                    <NewWorkspaceMenu onSelect={openWorkspaceCreate}>
+                      {(toggle) => (
+                        <Button size="sm" onClick={toggle}>
+                          <Plus className="h-3.5 w-3.5" />
+                          {t("ws.newWorkspace")}
+                        </Button>
+                      )}
+                    </NewWorkspaceMenu>
+                  </div>
+                </div>
+              ) : null}
+            </section>
+          </div>
+
+          <aside className="space-y-4 lg:pt-11">
+            <div className="rounded-xl border border-border bg-card p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="font-semibold">
+                    {streak} {t("misc.dayStreak")}
+                  </p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">{t("home.lastSevenDays")}</p>
+                </div>
+                <Flame className="h-7 w-7 shrink-0 text-energy" fill="currentColor" />
               </div>
-          </section>
-        )}
+              {calendarLoading ? (
+                <Skeleton className="mt-4 h-12 rounded-lg" />
+              ) : (
+                <div className="mt-4 flex justify-between">
+                  {lastSevenDays.map((d) => (
+                    <div key={d.iso} className="flex flex-col items-center gap-1.5">
+                      <span
+                        className={cn(
+                          "flex h-7 w-7 items-center justify-center rounded-full",
+                          d.count > 0 ? "bg-energy text-white" : "bg-muted",
+                          d.iso === todayIso && "ring-2 ring-border-strong ring-offset-2 ring-offset-card",
+                        )}
+                      >
+                        {d.count > 0 && <Check className="h-3.5 w-3.5" strokeWidth={3} />}
+                      </span>
+                      <span className="text-[11px] text-muted-foreground">{d.label}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="rounded-xl border border-border bg-card p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="font-semibold">{t("home.dailyGoal")}</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">
+                    {t("home.dailyGoalBlurb").replace("{n}", String(DAILY_GOAL))}
+                  </p>
+                </div>
+                <Zap className="h-7 w-7 shrink-0 text-amber" fill="currentColor" />
+              </div>
+              <div className="mt-4 flex items-center gap-3">
+                <ProgressBar
+                  value={(todayCount / DAILY_GOAL) * 100}
+                  className="flex-1"
+                  barClassName="bg-amber"
+                />
+                <span className="text-xs tabular-nums text-muted-foreground">
+                  {Math.min(todayCount, DAILY_GOAL)} / {DAILY_GOAL}
+                </span>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-border bg-card p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="font-semibold">{t("home.flashcards")}</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">
+                    {dueCount > 0
+                      ? t(dueCount === 1 ? "misc.cardDue" : "misc.cardsDue").replace(
+                          "{count}",
+                          String(dueCount),
+                        )
+                      : t("home.nothingDue")}
+                  </p>
+                </div>
+                <RotateCcw className="h-6 w-6 shrink-0 text-violet" />
+              </div>
+              {dueCount > 0 && (
+                <Button
+                  variant="secondary"
+                  className="mt-4 w-full"
+                  onClick={() => router.push("/flashcards/review")}
+                >
+                  {t("home.reviewNow")}
+                </Button>
+              )}
+            </div>
+          </aside>
+        </div>
 
         {editing && (
           <EditResourceDialog
