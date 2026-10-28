@@ -13,6 +13,8 @@ import "@/lib/i18n/workspace";
 import "@/lib/i18n/misc";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { startWorkspaceFromUploads } from "@/lib/start-from-uploads";
+import { ctaProps } from "@/lib/analytics";
+import { UploadFileInput } from "@/components/ui/upload-file-input";
 import {
   ArrowLeft,
   Check,
@@ -75,7 +77,10 @@ export function NewWorkspaceMenu({
     if (files.length === 0 || uploading) return;
     setUploading(files);
     try {
-      const { workspaceId, session } = await startWorkspaceFromUploads(files);
+      const { workspaceId, session } = await startWorkspaceFromUploads(files, {
+        source: "new_workspace_menu",
+        method: "picker",
+      });
       if (session) {
         router.push(`/workspace/${workspaceId}/session/${session.id}`);
       } else {
@@ -105,9 +110,9 @@ export function NewWorkspaceMenu({
               align === "right" ? "right-0" : "left-0",
             )}
           >
-            <input
+            <UploadFileInput
               ref={fileRef}
-              type="file"
+              uploadSource="new_workspace_menu"
               multiple
               accept={UPLOAD_ACCEPT}
               className="hidden"
@@ -120,6 +125,7 @@ export function NewWorkspaceMenu({
             />
             <button
               type="button"
+              {...ctaProps("new_workspace_upload_notes", "primary", t("misc.uploadNotes"))}
               onClick={() => fileRef.current?.click()}
               className="flex w-full items-start gap-2.5 rounded-lg p-2.5 text-left hover:bg-muted"
             >
@@ -135,6 +141,7 @@ export function NewWorkspaceMenu({
             </button>
             <button
               type="button"
+              {...ctaProps("new_workspace_empty", "secondary", t("ws.createWorkspace"))}
               onClick={() => pick("workspace")}
               className="flex w-full items-start gap-2.5 rounded-lg p-2.5 text-left hover:bg-muted"
             >
@@ -150,6 +157,7 @@ export function NewWorkspaceMenu({
             </button>
             <button
               type="button"
+              {...ctaProps("new_workspace_study_bot", "secondary", t("ws.chatStudyBot"))}
               onClick={() => pick("bot")}
               className="flex w-full items-start gap-2.5 rounded-lg p-2.5 text-left hover:bg-muted"
             >

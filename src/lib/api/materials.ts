@@ -1,5 +1,6 @@
 import { api } from "./trpc-client";
 import { rpc } from "./study-session";
+import { errorMessage, track } from "@/lib/analytics";
 
 export interface FileImage {
   url: string;
@@ -55,9 +56,55 @@ interface SignedUpload {
 }
 
 export const MAX_UPLOAD_BYTES = 1024 * 1024 * 1024;
+
+export type UploadMethod = "picker" | "camera" | "drop" | "record";
+
+/** Where an upload came from, carried on upload_* analytics events. */
+export interface UploadContext {
+  source: string;
+  method: UploadMethod;
+}
+
+export function uploadEventProps(files: File[], context?: UploadContext) {
+  const types = [
+    ...new Set(
+      files.map((f) => f.name.split(".").pop()?.toLowerCase() || f.type || "unknown"),
+    ),
+  ];
+  return {
+    source: context?.source ?? "unknown",
+    method: context?.method ?? "picker",
+    file_count: files.length,
+    total_mb: Math.round(files.reduce((s, f) => s + f.size, 0) / 10_000) / 100,
+    file_types: types.slice(0, 5).join(","),
+  };
+}
+
 export async function uploadFiles(
   workspaceId: string,
   files: File[],
+  context?: UploadContext,
+): Promise<string[]> {
+  const props = uploadEventProps(files, context);
+  const startedAt = Date.now();
+  track("upload_started", props);
+  let stage = "validate";
+  try {
+    const fileIds = await uploadFilesUntracked(workspaceId, files, (s) => {
+      stage = s;
+    });
+    track("upload_completed", { ...props, duration_ms: Date.now() - startedAt });
+    return fileIds;
+  } catch (err) {
+    track("upload_failed", { ...props, stage, error: errorMessage(err) });
+    throw err;
+  }
+}
+
+async function uploadFilesUntracked(
+  workspaceId: string,
+  files: File[],
+  onStage: (stage: "sign" | "put") => void,
 ): Promise<string[]> {
   const oversized = files.find((f) => f.size > MAX_UPLOAD_BYTES);
   if (oversized) {
@@ -66,6 +113,7 @@ export async function uploadFiles(
     );
   }
 
+  onStage("sign");
   const result = (await api.workspace.uploadFiles.mutate({
     id: workspaceId,
     files: files.map((f) => ({
@@ -75,6 +123,7 @@ export async function uploadFiles(
     })),
   })) as unknown as SignedUpload[];
 
+  onStage("put");
   const outcomes = await Promise.allSettled(
     result.map((signed, i) =>
       fetch(signed.uploadUrl, {

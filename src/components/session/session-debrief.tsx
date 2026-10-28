@@ -2,7 +2,7 @@
 
 import { MathText } from "@/components/ui/markdown-text";
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { TrackedButton } from "@/components/ui/tracked-button";
 import Link from "next/link";
 import Image from "next/image";
 import { ConfettiDots } from "@/components/graphics/floating-decor";
@@ -12,12 +12,15 @@ import {
   Check,
   ArrowRight,
   FileText,
-  CalendarClock,
 } from "lucide-react";
 import { awardSessionCredits } from "@/lib/credits";
 import { useQuery } from "@tanstack/react-query";
 import { studySessionApi } from "@/lib/api/study-session";
+import { fetchStudySessions } from "@/lib/api/study";
 import { SESSION_COMPLETED_EVENT } from "@/lib/api/account";
+import { screenProps, track } from "@/lib/analytics";
+import { ScheduleNextReview } from "@/components/session/schedule-next-review";
+import type { SessionActivity } from "@/types";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 
@@ -31,10 +34,16 @@ const stages = [
 export function SessionDebrief({
   onBack,
   sessionId,
+  workspaceId,
+  workspaceTitle,
+  activities,
   quickStart = false,
 }: {
   onBack: () => void;
   sessionId: string;
+  workspaceId: string;
+  workspaceTitle: string;
+  activities: SessionActivity[];
   /** Quick 5 sessions promise "5 more tomorrow" instead of a recall session. */
   quickStart?: boolean;
 }) {
@@ -48,6 +57,11 @@ export function SessionDebrief({
     staleTime: Infinity,
     retry: 1,
   });
+  const { data: workspaceSessions } = useQuery({
+    queryKey: ["study-sessions", workspaceId],
+    queryFn: () => fetchStudySessions(workspaceId),
+  });
+  const isFirstSession = (workspaceSessions?.length ?? 1) <= 1;
 
   useEffect(() => {
     if (stage >= stages.length) return;
@@ -61,7 +75,15 @@ export function SessionDebrief({
     window.dispatchEvent(
       new CustomEvent(SESSION_COMPLETED_EVENT, { detail: { sessionId } }),
     );
-  }, [debriefShown, sessionId]);
+    track("screen_viewed", {
+      screen: "session_debrief",
+      session_id: sessionId,
+      workspace_id: workspaceId,
+      debrief_fallback: !debrief,
+    });
+    // Once per debrief reveal; `debrief` only decides the fallback flag.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debriefShown, sessionId, workspaceId]);
 
   if (!isError && (stage < stages.length || !debrief)) {
     return (
@@ -96,7 +118,7 @@ export function SessionDebrief({
   };
 
   return (
-    <div className="animate-fade-up pb-10">
+    <div {...screenProps("session_debrief")} className="animate-fade-up pb-10">
       <div className="relative mb-6 overflow-hidden rounded-3xl border border-border bg-card px-6 py-6">
         <div
           className="pointer-events-none absolute inset-y-0 right-0 hidden w-48 select-none sm:block"
@@ -165,34 +187,37 @@ export function SessionDebrief({
         ))}
       </div>
 
-      <div className="mt-8 rounded-xl border border-accent/25 bg-accent-soft p-4">
-        <p className="flex items-center gap-1.5 text-sm font-semibold">
-          <CalendarClock className="h-4 w-4 text-accent" />
-          {t(quickStart ? "session.quick5DoneTitle" : "session.nextStepTitle")}
-        </p>
-        <p className="mt-1 text-sm text-muted-foreground leading-6">
-          {t(quickStart ? "session.quick5DoneBody" : "session.nextStepBody")}
-        </p>
-        <div className="flex flex-wrap gap-2 mt-3">
-          {quickStart ? (
-            <Button size="sm" onClick={onBack}>
-              {t("session.backToWorkspace")}
+      <ScheduleNextReview
+        workspaceId={workspaceId}
+        workspaceTitle={workspaceTitle}
+        sessionId={sessionId}
+        activities={activities}
+        quickStart={quickStart}
+        isFirstSession={isFirstSession}
+      />
+      <div className="flex flex-wrap gap-2 mt-3">
+        {!quickStart && (
+          <Link href="/flashcards/review">
+            <TrackedButton
+              ctaId="debrief_review_due_cards"
+              ctaPosition="secondary"
+              size="sm"
+              variant="outline"
+            >
+              {t("session.reviewDueCards")}
               <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
-            </Button>
-          ) : (
-            <>
-              <Link href="/flashcards/review">
-                <Button size="sm">
-                  {t("session.reviewDueCards")}
-                  <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
-                </Button>
-              </Link>
-              <Button size="sm" variant="outline" onClick={onBack}>
-                {t("session.backToWorkspace")}
-              </Button>
-            </>
-          )}
-        </div>
+            </TrackedButton>
+          </Link>
+        )}
+        <TrackedButton
+          ctaId="debrief_back_to_workspace"
+          ctaPosition="secondary"
+          size="sm"
+          variant="ghost"
+          onClick={onBack}
+        >
+          {t("session.backToWorkspace")}
+        </TrackedButton>
       </div>
     </div>
   );

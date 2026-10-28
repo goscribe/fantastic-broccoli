@@ -1,5 +1,11 @@
 import { createWorkspace } from "@/lib/api/workspace";
-import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
+import {
+  analyzeFiles,
+  uploadEventProps,
+  uploadFiles,
+  type UploadContext,
+} from "@/lib/api/materials";
+import { errorMessage, track } from "@/lib/analytics";
 import { createStudySession } from "@/lib/api/study";
 import { emitTreeChanged } from "@/lib/tree-events";
 import type { StudySession } from "@/types";
@@ -19,10 +25,36 @@ export function workspaceTitleFromFiles(files: File[]): string {
 }
 
 /**
+ * Creates the workspace an upload goes into; a failure here is reported as
+ * `upload_failed` (stage `create_workspace`) since the learner already chose files.
+ */
+export async function createWorkspaceForUpload(
+  title: string,
+  files: File[],
+  context?: UploadContext,
+): Promise<string> {
+  try {
+    const workspaceId = await createWorkspace(title);
+    if (!workspaceId) throw new Error("Could not create a workspace");
+    return workspaceId;
+  } catch (err) {
+    track("upload_failed", {
+      ...uploadEventProps(files, context),
+      stage: "create_workspace",
+      error: errorMessage(err),
+    });
+    throw err;
+  }
+}
+
+/**
  * Create a workspace named after the files, upload + kick analysis, and
  * generate a first study session from those names.
  */
-export async function startWorkspaceFromUploads(files: File[]): Promise<{
+export async function startWorkspaceFromUploads(
+  files: File[],
+  context?: UploadContext,
+): Promise<{
   workspaceId: string;
   session?: StudySession;
 }> {
@@ -30,11 +62,10 @@ export async function startWorkspaceFromUploads(files: File[]): Promise<{
     throw new Error("Choose at least one file");
   }
   const title = workspaceTitleFromFiles(files);
-  const workspaceId = await createWorkspace(title);
-  if (!workspaceId) throw new Error("Could not create a workspace");
+  const workspaceId = await createWorkspaceForUpload(title, files, context);
   emitTreeChanged();
 
-  const fileIds = await uploadFiles(workspaceId, files);
+  const fileIds = await uploadFiles(workspaceId, files, context);
   analyzeFiles(workspaceId, fileIds).catch(() => {});
 
   const topics = files

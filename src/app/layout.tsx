@@ -18,6 +18,9 @@ import {
 } from "@/lib/seo";
 
 const GOOGLE_TAG_ID = "AW-18375140054";
+// Product analytics (see src/lib/analytics.ts). page_viewed is sent by the
+// app on client navigations, so GA4's automatic page_view is turned off.
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -99,7 +102,11 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${GOOGLE_TAG_ID}');
+            gtag('config', '${GOOGLE_TAG_ID}');${
+              GA_MEASUREMENT_ID
+                ? `\n            gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });`
+                : ""
+            }
           `}
         </Script>
         <Providers>
