@@ -83,6 +83,18 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+const ACTIVITY_TONE: Record<SessionActivity["type"], string> = {
+  reading: "bg-sky/15 text-sky",
+  comprehension_check: "bg-amber/15 text-amber",
+  mcq: "bg-violet/15 text-violet",
+  flashcard_review: "bg-rose/15 text-rose",
+  worksheet: "bg-amber/15 text-amber",
+  interactive: "bg-success/15 text-success",
+  vocab_recall: "bg-rose/15 text-rose",
+  cloze: "bg-sky/15 text-sky",
+  explain_aloud: "bg-violet/15 text-violet",
+};
+
 const ACTIVITY_ICON: Record<SessionActivity["type"], LucideIcon> = {
   reading: BookOpen,
   comprehension_check: ListChecks,
@@ -915,15 +927,19 @@ export default function SessionDetailPage() {
                   >
                     <span
                       className={cn(
-                        "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border text-[10px] font-medium tabular-nums",
-                        done
-                          ? "border-accent bg-accent text-accent-foreground"
-                          : isActive
-                            ? "border-accent text-accent"
-                            : "border-border-strong text-faint",
+                        "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md",
+                        done ? "bg-accent text-accent-foreground" : ACTIVITY_TONE[activity.type],
+                        isActive && !done && "ring-2 ring-accent/40",
                       )}
                     >
-                      {done ? <Check className="h-2.5 w-2.5" /> : i + 1}
+                      {done ? (
+                        <Check className="h-3 w-3" />
+                      ) : (
+                        (() => {
+                          const Icon = ACTIVITY_ICON[activity.type];
+                          return <Icon className="h-3 w-3" />;
+                        })()
+                      )}
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-[13px] font-medium">
@@ -1097,7 +1113,7 @@ function FeedPeek({
         <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-foreground" />
       )}
       {activity ? (
-        <span className="flex h-7 w-7 items-center justify-center rounded-md border border-border bg-card text-muted-foreground transition-colors group-hover:text-foreground">
+        <span className={cn("flex h-7 w-7 items-center justify-center rounded-md transition-opacity opacity-80 group-hover:opacity-100", ACTIVITY_TONE[activity.type])}>
           {(() => {
             const Icon = ACTIVITY_ICON[activity.type];
             return <Icon className="h-3.5 w-3.5" />;

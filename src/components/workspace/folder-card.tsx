@@ -35,9 +35,10 @@ export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
     >
       <span
         aria-hidden
-        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border bg-muted"
+        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md"
+        style={{ background: `${accentHex}1f`, color: accentHex }}
       >
-        <FolderIcon className="h-4 w-4" style={{ color: accentHex }} />
+        <FolderIcon className="h-4 w-4" />
       </span>
       <div className="relative min-w-0 flex-1">
         <p className="font-semibold text-sm truncate">{folder.name}</p>

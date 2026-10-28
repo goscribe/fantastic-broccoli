@@ -11,14 +11,14 @@
 
 
 :root {
-  --background: #fafafa;
-  --foreground: #161618;
+  --background: #f7f6fb;
+  --foreground: #19171f;
   --card: #ffffff;
-  --card-hover: #fbfbfc;
+  --card-hover: #fbfaff;
   --card-foreground: #161618;
-  --muted: #f2f2f4;
-  --muted-foreground: #66666f;
-  --faint: #9a9aa3;
+  --muted: #efedf6;
+  --muted-foreground: #65616f;
+  --faint: #9792a3;
   --ink: #161618;
   --accent: #6952e0;
   --accent-dim: #5a43d1;
@@ -31,8 +31,8 @@
   --sky: #38bdf8;
   --rose: #fb7185;
   --amber: #f59e0b;
-  --border: #e7e7ea;
-  --border-strong: #d3d3d9;
+  --border: #e6e3ef;
+  --border-strong: #cfcadd;
   --paper: #ffffff;
   --ring: #6952e0;
   --radius: 0.625rem;
@@ -43,13 +43,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 .dark {
-  --background: #111113;
-  --foreground: #ededf0;
-  --card: #18181b;
-  --card-hover: #1d1d21;
+  --background: #121117;
+  --foreground: #eeedf2;
+  --card: #19181f;
+  --card-hover: #1e1d25;
   --card-foreground: #ededf0;
-  --muted: #232327;
-  --muted-foreground: #a1a1ab;
+  --muted: #24222d;
+  --muted-foreground: #a4a0b0;
   --faint: #6e6e78;
   --ink: #0b0b0d;
   --accent: #8270db;
@@ -59,9 +59,9 @@
   --accent-foreground: #ffffff;
   --energy: #8270db;
   --energy-soft: #1f1c36;
-  --border: #27272c;
-  --border-strong: #3a3a42;
-  --paper: #1b1b1f;
+  --border: #29272f;
+  --border-strong: #3d3a47;
+  --paper: #1c1b22;
   --ring: #8270db;
 }
 

@@ -34,6 +34,7 @@ import {
 import { onTreeChanged } from "@/lib/tree-events";
 import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
@@ -215,7 +216,15 @@ export default function HomePage() {
       )}
       <main className="w-full flex-1 px-4 py-5 sm:px-8 sm:py-6">
         <header className="flex flex-wrap items-start justify-between gap-3">
-          <div>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/illustrations/bot.png"
+              alt=""
+              width={96}
+              height={96}
+              className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
+            />
+            <div>
             <h1 className="text-lg font-semibold tracking-tight">
               {greeting}{user ? `, ${user.name}` : ""}
             </h1>
@@ -229,6 +238,7 @@ export default function HomePage() {
               {activeSessions.length > 0 &&
                 ` · ${activeSessions.length} ${t("misc.activePlans").toLowerCase()} · ${formatDuration(totalPlannedMinutes)} ${t("misc.timePlanned").toLowerCase()}`}
             </p>
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <Button
@@ -254,9 +264,9 @@ export default function HomePage() {
           {calendarLoading || treeLoading ? (
             <Skeleton className="h-20 w-full rounded-lg" />
           ) : resumable ? (
-            <div className="flex flex-wrap items-center gap-4 rounded-lg border border-border bg-card px-4 py-3">
+            <div className="flex flex-wrap items-center gap-4 rounded-lg border border-accent/20 bg-gradient-to-r from-accent-soft via-card to-card px-4 py-3 dark:from-accent-soft/60">
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-medium uppercase tracking-wide text-faint">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-accent">
                   {t("home.resumeSession")}
                 </p>
                 <p className="mt-0.5 truncate text-[15px] font-semibold tracking-tight">

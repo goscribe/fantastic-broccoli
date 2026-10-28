@@ -101,7 +101,7 @@ function FolderNode({
         >
           <Folder
             className="h-3.5 w-3.5 shrink-0"
-            style={{ color: folder.color || accentForId(folder.id) }}
+            style={{ color: folder.color || accentForId(folder.id), fill: `${folder.color || accentForId(folder.id)}33` }}
           />
           <span className="truncate">{folder.name}</span>
         </button>
@@ -180,7 +180,10 @@ function RecentSessionRow({
         ) : done ? (
           <Check className="h-3 w-3 text-success" />
         ) : (
-          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+          <span
+            className="h-2 w-2 rounded-full"
+            style={{ background: accentForId(workspace.id) }}
+          />
         )}
       </span>
       <span className="min-w-0 flex-1">
@@ -331,7 +334,7 @@ export function Sidebar({
         <Link
           href="/study-bot"
           data-tour="new-workspace"
-          className="flex items-center gap-2 rounded-md border border-border bg-card px-2.5 py-1.5 text-[13px] font-medium text-foreground shadow-xs hover:border-border-strong"
+          className="flex items-center gap-2 rounded-md bg-accent-soft px-2.5 py-1.5 text-[13px] font-medium text-accent hover:bg-accent hover:text-accent-foreground"
         >
           <Plus className="h-3.5 w-3.5" />
           {t("nav.newSession")}

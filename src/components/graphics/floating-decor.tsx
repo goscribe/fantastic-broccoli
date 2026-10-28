@@ -105,12 +105,22 @@ export function EmptyScene({
   return (
     <div
       className={cn(
-        "rounded-lg border border-dashed border-border bg-card px-4 py-5 sm:px-5",
+        "rounded-lg border border-dashed border-accent/30 bg-accent-soft/40 px-4 py-5 sm:px-5 dark:bg-accent-soft/30",
         "[&_p:first-child]:text-sm [&_p:first-child]:font-semibold",
         className,
       )}
     >
-      <div className="max-w-md">{children}</div>
+      <div className="flex items-start gap-4">
+        <Image
+          src="/illustrations/bot.png"
+          alt=""
+          width={96}
+          height={96}
+          unoptimized
+          className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
+        />
+        <div className="max-w-md">{children}</div>
+      </div>
     </div>
   );
 }
