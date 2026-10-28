@@ -11,31 +11,31 @@
 
 
 :root {
-  --background: #faf9fc;
-  --foreground: #131118;
+  --background: #fafafa;
+  --foreground: #161618;
   --card: #ffffff;
-  --card-hover: #fcfcfe;
-  --card-foreground: #131118;
-  --muted: #f0eef6;
-  --muted-foreground: #605c6d;
-  --faint: #9a95a8;
-  --ink: #171320;
+  --card-hover: #fbfbfc;
+  --card-foreground: #161618;
+  --muted: #f2f2f4;
+  --muted-foreground: #66666f;
+  --faint: #9a9aa3;
+  --ink: #161618;
   --accent: #6952e0;
   --accent-dim: #5a43d1;
-  --accent-soft: #eeebfc;
+  --accent-soft: #efedfb;
   --accent-bright: #8270db;
   --accent-foreground: #ffffff;
   --energy: #6952e0;
-  --energy-soft: #eeebfc;
+  --energy-soft: #efedfb;
   --violet: #7c5cfc;
   --sky: #38bdf8;
   --rose: #fb7185;
   --amber: #f59e0b;
-  --border: #e8e5f0;
-  --border-strong: #d6d1e3;
+  --border: #e7e7ea;
+  --border-strong: #d3d3d9;
   --paper: #ffffff;
   --ring: #6952e0;
-  --radius: 1rem;
+  --radius: 0.625rem;
   --success: #22c55e;
   --warning: #f59e0b;
 }
@@ -43,25 +43,25 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 .dark {
-  --background: #101014;
-  --foreground: #f2f1f5;
-  --card: #18171e;
-  --card-hover: #1e1d26;
-  --card-foreground: #f2f1f5;
-  --muted: #232230;
-  --muted-foreground: #aaa6b8;
-  --faint: #716c80;
-  --ink: #0a090d;
+  --background: #111113;
+  --foreground: #ededf0;
+  --card: #18181b;
+  --card-hover: #1d1d21;
+  --card-foreground: #ededf0;
+  --muted: #232327;
+  --muted-foreground: #a1a1ab;
+  --faint: #6e6e78;
+  --ink: #0b0b0d;
   --accent: #8270db;
   --accent-dim: #7460d2;
-  --accent-soft: #221c40;
+  --accent-soft: #221f3b;
   --accent-bright: #a394ec;
   --accent-foreground: #ffffff;
   --energy: #8270db;
-  --energy-soft: #1f1a38;
-  --border: #2a2833;
-  --border-strong: #454153;
-  --paper: #1c1b23;
+  --energy-soft: #1f1c36;
+  --border: #27272c;
+  --border-strong: #3a3a42;
+  --paper: #1b1b1f;
   --ring: #8270db;
 }
 
@@ -92,9 +92,14 @@
   --color-ring: var(--ring);
   --color-success: var(--success);
   --color-warning: var(--warning);
-  --font-sans: var(--font-nunito);
+  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --radius: var(--radius);
+  /* Tighter corner scale: the reference uses 6–12px radii, not pills. */
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.625rem;
+  --radius-2xl: 0.75rem;
+  --radius-3xl: 1rem;
 }
 
 body {
@@ -102,6 +107,8 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
   -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  letter-spacing: -0.005em;
 }
 
 /* iOS zooms focused inputs below 16px; keep forms readable without zoom. */
