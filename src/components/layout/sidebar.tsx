@@ -36,9 +36,9 @@ import {
 type RecentSession = { session: StudySession; workspace: Workspace };
 
 const navRow =
-  "flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[13px] text-left transition-colors";
-const navIdle = "text-muted-foreground hover:bg-muted hover:text-foreground";
-const navActive = "bg-muted text-foreground font-medium";
+  "flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-sm text-left transition-colors";
+const navIdle = "text-foreground/80 hover:bg-muted hover:text-foreground";
+const navActive = "bg-accent-soft text-accent font-medium";
 
 function SectionLabel({
   children,
@@ -308,7 +308,7 @@ export function Sidebar({
     >
       <div className="flex h-12 items-center gap-2 px-3">
         <ScribeMark className="h-6 w-6" />
-        <span className="text-[13px] font-semibold tracking-tight">Scribe</span>
+        <span className="text-[15px] font-bold tracking-tight">Scribe</span>
         <button
           type="button"
           aria-label="Search"
@@ -334,7 +334,7 @@ export function Sidebar({
         <Link
           href="/study-bot"
           data-tour="new-workspace"
-          className="flex items-center gap-2 rounded-md bg-accent-soft px-2.5 py-1.5 text-[13px] font-medium text-accent hover:bg-accent hover:text-accent-foreground"
+          className="flex items-center gap-2 rounded-xl bg-accent px-3 py-2 text-sm font-medium text-accent-foreground shadow-xs hover:bg-accent-dim"
         >
           <Plus className="h-3.5 w-3.5" />
           {t("nav.newSession")}
@@ -458,7 +458,7 @@ export function Sidebar({
           {t("nav.settings")}
         </Link>
         <div className="mt-1 flex items-center gap-2 px-2 py-1">
-          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-soft text-[11px] font-semibold text-accent">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-accent-foreground">
             {(user?.name || user?.email || "?").slice(0, 1).toUpperCase()}
           </span>
           <span className="min-w-0 flex-1 truncate text-[12px] text-muted-foreground">

@@ -398,16 +398,16 @@ export function Copilot({
       {/* Header */}
       <div className="flex items-center gap-2 px-3 h-12 border-b border-border shrink-0">
         {plan ? (
-          <div className="flex shrink-0 items-center gap-0.5 rounded-md bg-muted p-0.5">
+          <div className="flex shrink-0 items-center gap-0.5 rounded-full bg-muted p-1">
             {(["chat", "plan"] as const).map((k) => (
               <button
                 key={k}
                 type="button"
                 onClick={() => setPane(k)}
                 className={cn(
-                  "rounded px-2 py-0.5 text-[12px] font-medium",
+                  "rounded-full px-3 py-1 text-[12px] font-semibold transition-colors",
                   pane === k
-                    ? "bg-card text-foreground shadow-xs"
+                    ? "bg-foreground text-background"
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
@@ -482,7 +482,7 @@ export function Copilot({
                   key={s}
                   type="button"
                   onClick={() => send(s)}
-                  className="flex w-full items-center gap-2 text-left text-xs px-3 py-2 rounded-md border border-border bg-card text-muted-foreground hover:text-foreground hover:border-border-strong"
+                  className="flex w-full items-center gap-2 text-left text-xs px-3 py-2.5 rounded-xl border border-border bg-card text-foreground/80 hover:bg-accent-soft hover:border-accent/30 hover:text-accent"
                 >
                   <Sparkles className="h-3 w-3 shrink-0 text-accent" />
                   {s}

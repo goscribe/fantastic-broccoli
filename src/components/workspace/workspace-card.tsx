@@ -49,7 +49,7 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
   return (
     <div
       onClick={() => onClick(workspace.id)}
-      className="group relative cursor-pointer rounded-lg border border-border bg-card p-4 transition-colors hover:border-border-strong hover:bg-card-hover"
+      className="group relative cursor-pointer rounded-xl border border-border bg-card p-4 transition-colors hover:border-border-strong hover:shadow-sm"
     >
       {actions ? (
         <ResourceActionsMenu
@@ -63,10 +63,10 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
       <div className="flex items-start gap-3">
         <span
           aria-hidden
-          className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md"
+          className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
           style={{ background: `${accentHex}1f`, color: accentHex }}
         >
-          <BookOpen className="h-4 w-4" />
+          <BookOpen className="h-[18px] w-[18px]" />
         </span>
         <div className="min-w-0 flex-1 pr-5">
           <div className="flex items-center gap-2">

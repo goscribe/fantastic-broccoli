@@ -11,31 +11,31 @@
 
 
 :root {
-  --background: #f7f6fb;
-  --foreground: #19171f;
+  --background: #ffffff;
+  --foreground: #111827;
   --card: #ffffff;
-  --card-hover: #fbfaff;
-  --card-foreground: #161618;
-  --muted: #efedf6;
-  --muted-foreground: #65616f;
-  --faint: #9792a3;
-  --ink: #161618;
-  --accent: #6952e0;
-  --accent-dim: #5a43d1;
-  --accent-soft: #efedfb;
-  --accent-bright: #8270db;
+  --card-hover: #f8fafc;
+  --card-foreground: #111827;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --faint: #94a3b8;
+  --ink: #111827;
+  --accent: #2b7fff;
+  --accent-dim: #1d6ae8;
+  --accent-soft: #e8f1ff;
+  --accent-bright: #5b9bff;
   --accent-foreground: #ffffff;
-  --energy: #6952e0;
-  --energy-soft: #efedfb;
+  --energy: #f97316;
+  --energy-soft: #fff1e6;
   --violet: #7c5cfc;
   --sky: #38bdf8;
   --rose: #fb7185;
   --amber: #f59e0b;
-  --border: #e6e3ef;
-  --border-strong: #cfcadd;
+  --border: #e5e7eb;
+  --border-strong: #cbd5e1;
   --paper: #ffffff;
-  --ring: #6952e0;
-  --radius: 0.625rem;
+  --ring: #2b7fff;
+  --radius: 0.75rem;
   --success: #22c55e;
   --warning: #f59e0b;
 }
@@ -43,26 +43,26 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 .dark {
-  --background: #121117;
-  --foreground: #eeedf2;
-  --card: #19181f;
-  --card-hover: #1e1d25;
-  --card-foreground: #ededf0;
-  --muted: #24222d;
-  --muted-foreground: #a4a0b0;
-  --faint: #6e6e78;
-  --ink: #0b0b0d;
-  --accent: #8270db;
-  --accent-dim: #7460d2;
-  --accent-soft: #221f3b;
-  --accent-bright: #a394ec;
+  --background: #0f1216;
+  --foreground: #e6e9ef;
+  --card: #161a20;
+  --card-hover: #1b2028;
+  --card-foreground: #e6e9ef;
+  --muted: #1f252e;
+  --muted-foreground: #9aa4b2;
+  --faint: #6b7584;
+  --ink: #0a0c10;
+  --accent: #4d8dff;
+  --accent-dim: #3b7ef0;
+  --accent-soft: #15243d;
+  --accent-bright: #7aaaff;
   --accent-foreground: #ffffff;
-  --energy: #8270db;
-  --energy-soft: #1f1c36;
-  --border: #29272f;
-  --border-strong: #3d3a47;
-  --paper: #1c1b22;
-  --ring: #8270db;
+  --energy: #fb923c;
+  --energy-soft: #2a1d12;
+  --border: #262c36;
+  --border-strong: #3a4250;
+  --paper: #181d24;
+  --ring: #4d8dff;
 }
 
 @theme inline {

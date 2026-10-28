@@ -637,7 +637,7 @@ export default function SessionDetailPage() {
                 <span>
                   {completedCount}/{activities.length} {t("session.doneCount")}
                 </span>
-                <span className="h-1 w-24 overflow-hidden rounded-full bg-muted">
+                <span className="h-2 w-32 overflow-hidden rounded-full bg-muted">
                   <span
                     className="block h-full rounded-full bg-accent transition-all duration-500"
                     style={{ width: `${session.progress}%` }}
@@ -921,7 +921,7 @@ export default function SessionDetailPage() {
                     onClick={() => goToIndex(i)}
                     aria-current={isActive ? "step" : undefined}
                     className={cn(
-                      "flex w-full items-start gap-2.5 rounded-md px-2 py-2 text-left hover:bg-muted",
+                      "flex w-full items-start gap-2.5 rounded-xl px-2.5 py-2 text-left hover:bg-muted",
                       isActive && "bg-muted",
                     )}
                   >

@@ -31,14 +31,14 @@ export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") onClick(folder.id);
       }}
-      className="group relative flex cursor-pointer items-center gap-3 rounded-lg border border-border bg-card px-3.5 py-3 text-left transition-colors hover:border-border-strong hover:bg-card-hover"
+      className="group relative flex cursor-pointer items-center gap-3 rounded-xl border border-border bg-card px-3.5 py-3 text-left transition-colors hover:border-border-strong hover:shadow-sm"
     >
       <span
         aria-hidden
-        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md"
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
         style={{ background: `${accentHex}1f`, color: accentHex }}
       >
-        <FolderIcon className="h-4 w-4" />
+        <FolderIcon className="h-[18px] w-[18px]" />
       </span>
       <div className="relative min-w-0 flex-1">
         <p className="font-semibold text-sm truncate">{folder.name}</p>

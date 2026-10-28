@@ -25,6 +25,7 @@ import {
   fetchActivityCalendar,
   fetchStudySessions,
   type DailyActivityPoint,
+  computeStreak,
 } from "@/lib/api/study";
 import {
   FirstSessionOnboarding,
@@ -41,19 +42,6 @@ import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { HomeUploadRow } from "@/components/workspace/home-upload-row";
 
-function computeStreak(daily: DailyActivityPoint[]): number {
-  const byDate = new Map(daily.map((d) => [d.date, d.count]));
-  let streak = 0;
-  const d = new Date();
-  for (;;) {
-    const iso = d.toISOString().split("T")[0];
-    const count = byDate.get(iso) ?? 0;
-    if (count > 0) streak += 1;
-    else if (streak > 0 || iso !== new Date().toISOString().split("T")[0]) break;
-    d.setDate(d.getDate() - 1);
-  }
-  return streak;
-}
 
 function flattenWorkspaces(folders: Folder[], root: Workspace[]): Workspace[] {
   const all: Workspace[] = [...root];
@@ -225,7 +213,7 @@ export default function HomePage() {
               className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
             />
             <div>
-            <h1 className="text-lg font-semibold tracking-tight">
+            <h1 className="text-xl font-bold tracking-tight">
               {greeting}{user ? `, ${user.name}` : ""}
             </h1>
             <p className="mt-0.5 text-[12px] text-muted-foreground">
@@ -262,9 +250,9 @@ export default function HomePage() {
 
         <section data-tour="home-banner" className="mt-5 space-y-2">
           {calendarLoading || treeLoading ? (
-            <Skeleton className="h-20 w-full rounded-lg" />
+            <Skeleton className="h-20 w-full rounded-xl" />
           ) : resumable ? (
-            <div className="flex flex-wrap items-center gap-4 rounded-lg border border-accent/20 bg-gradient-to-r from-accent-soft via-card to-card px-4 py-3 dark:from-accent-soft/60">
+            <div className="flex flex-wrap items-center gap-4 rounded-xl border border-accent/15 border-l-4 border-l-accent bg-accent-soft/70 px-4 py-3">
               <div className="min-w-0 flex-1">
                 <p className="text-[11px] font-semibold uppercase tracking-wide text-accent">
                   {t("home.resumeSession")}
@@ -302,7 +290,7 @@ export default function HomePage() {
           {dueReview && dueReview.total > 0 && (
             <Link
               href="/flashcards/review"
-              className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-2.5 text-[13px] hover:border-border-strong"
+              className="flex items-center gap-3 rounded-xl border border-amber/20 border-l-4 border-l-amber bg-amber/10 px-4 py-2.5 text-[13px] hover:bg-amber/15"
             >
               <RotateCcw className="h-3.5 w-3.5 text-accent" />
               <span className="font-medium">
@@ -316,7 +304,7 @@ export default function HomePage() {
             </Link>
           )}
 
-          <div className="overflow-hidden rounded-lg border border-border bg-card">
+          <div className="overflow-hidden rounded-xl border border-dashed border-border-strong bg-card">
             <HomeUploadRow />
           </div>
         </section>
@@ -327,7 +315,7 @@ export default function HomePage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t("misc.searchWorkspaces")}
-            className="h-8 w-full rounded-md border border-border bg-card pl-8 pr-3 text-[13px] outline-none placeholder:text-faint focus:border-ring"
+            className="h-9 w-full rounded-full border border-transparent bg-muted pl-9 pr-3 text-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:bg-card"
           />
         </div>
 
@@ -370,7 +358,7 @@ export default function HomePage() {
           <>
             {folders.length > 0 && (
               <section className="mt-6">
-                <h2 className="mb-2 text-[11px] font-medium uppercase tracking-wide text-faint">
+                <h2 className="mb-2.5 text-sm font-semibold text-foreground">
                   {t("misc.folders")}
                 </h2>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -397,7 +385,7 @@ export default function HomePage() {
             )}
             {rootWorkspaces.length > 0 && (
               <section className="mt-6">
-                <h2 className="mb-2 text-[11px] font-medium uppercase tracking-wide text-faint">
+                <h2 className="mb-2.5 text-sm font-semibold text-foreground">
                   {t("misc.workspaces")}
                 </h2>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -425,7 +413,7 @@ export default function HomePage() {
               </section>
             )}
             {folders.length === 0 && rootWorkspaces.length === 0 && (
-              <section className="mt-6 rounded-lg border border-dashed border-border px-4 py-6">
+              <section className="mt-6 rounded-xl border border-dashed border-border-strong px-4 py-6">
                 <p className="text-sm font-medium">{t("misc.firstWinTitle")}</p>
                 <p className="mt-1 max-w-md text-[13px] text-muted-foreground">
                   {t("misc.planBlurb")}
