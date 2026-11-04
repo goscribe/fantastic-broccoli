@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { PartMarking, WorksheetContent, WorksheetPart } from "@/types";
+import { PartMarking, WorksheetContent } from "@/types";
 import { markWorksheetAnswer } from "@/lib/api/study";
-import { isPartCorrect } from "@/lib/worksheet-marking";
+import {
+  resolvePartMarking,
+  serverCanMarkPart,
+} from "@/lib/worksheet-marking";
 import { toast } from "@/lib/toast";
 import { recordWorksheetQuestionProgress } from "@/lib/api/study-session";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
@@ -32,18 +35,6 @@ interface WorksheetDraft {
   markings: Record<string, PartMarking>;
   checkedSteps: Record<number, boolean>;
 }
-
-/** Marking without an LLM markscheme — all-or-nothing on the expected answer. */
-const localMarking = (part: WorksheetPart, value: string): PartMarking => {
-  const marks = part.marks ?? 1;
-  const correct = isPartCorrect(part, value);
-  return {
-    points: [],
-    achievedPoints: correct ? marks : 0,
-    totalPoints: marks,
-    correct,
-  };
-};
 
 export function WorksheetActivity({
   activityId,
@@ -101,35 +92,47 @@ export function WorksheetActivity({
       step.parts.map(async (part, i) => {
         const value = answers[key(i)] ?? "";
         const drawing = drawings[key(i)] ?? undefined;
-        // Any part with a markscheme (or a drawing attached) goes through
-        // LLM marking — numeric parts included, since their expected answers
-        // are LaTeX with working and units. True/false and markscheme-less
-        // parts are checked locally.
-        if (
-          part.type === "true_false" ||
-          (!part.markScheme?.points.length && !drawing)
-        ) {
-          return localMarking(part, value);
+        // Choice parts stay on the local check. Typed parts with a mark
+        // scheme (or a drawing) are decided by the server — a failed local
+        // comparison must not record them as wrong while that marker can run.
+        // When the server returns a result, it wins over the local check.
+        const serverCanDecide = serverCanMarkPart(part, drawing);
+        if (!serverCanDecide) {
+          return resolvePartMarking(part, value, { serverCanDecide: false });
         }
         try {
-          return await markWorksheetAnswer({
+          const serverMarking = await markWorksheetAnswer({
             activityId,
             stepIndex,
             partIndex: i,
             answer: value,
             answerImage: drawing,
           });
+          return resolvePartMarking(part, value, {
+            serverMarking,
+            serverCanDecide: true,
+          });
         } catch {
           toast.error(t("session.markingFallback"), {
             id: "marking-fallback",
           });
-          return localMarking(part, value);
+          return resolvePartMarking(part, value, { serverCanDecide: true });
         }
       }),
     );
+    const decided: PartMarking[] = [];
+    for (const result of results) {
+      if (!result) {
+        // Typed answer didn't match the key, and the AI marker didn't
+        // return a decision. Leave the step unmarked rather than wrong.
+        setMarkingInFlight(false);
+        return;
+      }
+      decided.push(result);
+    }
     setMarkings((m) => {
       const next = { ...m };
-      results.forEach((r, i) => (next[key(i)] = r));
+      decided.forEach((r, i) => (next[key(i)] = r));
       return next;
     });
     step.parts.forEach((part, i) => {

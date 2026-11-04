@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --experimental-strip-types --import ./test/register-ts.mjs --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/lib/worksheet-marking.test.ts"
   },
   "dependencies": {
     "@goscribe/server": "^1.8.0",

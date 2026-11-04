@@ -1,4 +1,4 @@
-import type { WorksheetPart } from "@/types";
+import type { PartMarking, WorksheetPart } from "@/types";
 
 /**
  * Local (no-LLM) worksheet answer check. Expected answers are authored as
@@ -104,9 +104,39 @@ function asBoolean(raw: string): boolean | null {
   return null;
 }
 
+function stripEdgePunctuation(s: string): string {
+  return s
+    .replace(/^[.,;:!?…'"“”‘’]+/, "")
+    .replace(/[.,;:!?…'"“”‘’]+$/, "")
+    .trim();
+}
+
+/**
+ * Canonical form of a typed answer for comparison with the key.
+ * Case, surrounding whitespace, trailing punctuation, and a missing space
+ * between a number and its unit ("5km" vs "5 km") do not change the value.
+ */
+export function normalizeAnswerKey(raw: string): string {
+  let s = stripEdgePunctuation(stripLatex(raw).toLowerCase());
+  const wrapped =
+    (s.startsWith("(") && s.endsWith(")") && s.length > 2) ||
+    (s.startsWith("[") && s.endsWith("]") && s.length > 2) ||
+    (s.startsWith("{") && s.endsWith("}") && s.length > 2);
+  if (wrapped) s = stripEdgePunctuation(s.slice(1, -1));
+  // "5km" and "5 km/h" — keep the unit, just split it from the number.
+  s = s.replace(/(\d)\s*([a-zµμ°%])/g, "$1 $2");
+  return s.replace(/\s+/g, " ").trim();
+}
+
+/** Typed answers match when they are the same key, not when one contains the other. */
+export function typedAnswersMatch(given: string, expected: string): boolean {
+  return normalizeAnswerKey(given) === normalizeAnswerKey(expected);
+}
+
 export function isPartCorrect(part: WorksheetPart, value: string): boolean {
   const given = value.trim();
   if (!part.answer) return given.length > 0;
+  // Choice parts: unchanged word match (True/False and the accepted synonyms).
   if (part.type === "true_false") {
     const want = asBoolean(part.answer);
     const got = asBoolean(given);
@@ -116,8 +146,53 @@ export function isPartCorrect(part: WorksheetPart, value: string): boolean {
     const want = parseNumericDetailed(part.answer);
     const got = parseNumericDetailed(given);
     if (want && got) return numbersMatch(want, got);
-    return stripLatex(given).toLowerCase() === stripLatex(part.answer).toLowerCase();
+    return typedAnswersMatch(given, part.answer);
   }
-  const expected = stripLatex(part.answer).toLowerCase();
-  return stripLatex(given).toLowerCase().includes(expected);
+  return typedAnswersMatch(given, part.answer);
+}
+
+/** All-or-nothing local mark. Choice parts and typed parts share this shape. */
+export function localPartMarking(part: WorksheetPart, value: string): PartMarking {
+  const marks = part.marks ?? 1;
+  const correct = isPartCorrect(part, value);
+  return {
+    points: [],
+    achievedPoints: correct ? marks : 0,
+    totalPoints: marks,
+    correct,
+  };
+}
+
+/**
+ * True when the server/AI marker is the authority for this part.
+ * True/false choices stay local even if a mark scheme is attached.
+ */
+export function serverCanMarkPart(
+  part: WorksheetPart,
+  drawing?: string | null,
+): boolean {
+  if (part.type === "true_false") return false;
+  return Boolean(part.markScheme?.points.length) || Boolean(drawing);
+}
+
+/**
+ * Pick the marking to record.
+ * A server result wins for typed answers. When the server can decide but
+ * did not return one, a failed local check is not stored as wrong (null) —
+ * the caller leaves the part unmarked so the AI marker can be retried.
+ * A positive local match is kept as the fallback. Choice parts ignore the server.
+ */
+export function resolvePartMarking(
+  part: WorksheetPart,
+  value: string,
+  options: {
+    serverMarking?: PartMarking | null;
+    serverCanDecide: boolean;
+  },
+): PartMarking | null {
+  const local = localPartMarking(part, value);
+  if (part.type === "true_false") return local;
+  if (options.serverMarking) return options.serverMarking;
+  if (options.serverCanDecide && !local.correct) return null;
+  return local;
 }
