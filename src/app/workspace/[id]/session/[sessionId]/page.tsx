@@ -71,18 +71,40 @@ import {
   RefreshCw,
   Trash2,
   X,
+  BookOpen,
+  ListChecks,
+  CircleHelp,
+  Layers,
+  PencilLine,
+  MousePointerClick,
+  SpellCheck,
+  TextCursorInput,
+  Mic,
+  type LucideIcon,
 } from "lucide-react";
 
-const ACTIVITY_ICON: Record<SessionActivity["type"], string> = {
-  reading: "/illustrations/icons/act-reading.png",
-  comprehension_check: "/illustrations/icons/act-comprehension.png",
-  mcq: "/illustrations/icons/act-mcq.png",
-  flashcard_review: "/illustrations/icons/act-flashcards.png",
-  worksheet: "/illustrations/icons/act-worksheet.png",
-  interactive: "/illustrations/icons/act-interactive.png",
-  vocab_recall: "/illustrations/icons/act-vocab.png",
-  cloze: "/illustrations/icons/act-cloze.png",
-  explain_aloud: "/illustrations/icons/act-explain.png",
+const ACTIVITY_TONE: Record<SessionActivity["type"], string> = {
+  reading: "bg-sky/15 text-sky",
+  comprehension_check: "bg-amber/15 text-amber",
+  mcq: "bg-violet/15 text-violet",
+  flashcard_review: "bg-rose/15 text-rose",
+  worksheet: "bg-amber/15 text-amber",
+  interactive: "bg-success/15 text-success",
+  vocab_recall: "bg-rose/15 text-rose",
+  cloze: "bg-sky/15 text-sky",
+  explain_aloud: "bg-violet/15 text-violet",
+};
+
+const ACTIVITY_ICON: Record<SessionActivity["type"], LucideIcon> = {
+  reading: BookOpen,
+  comprehension_check: ListChecks,
+  mcq: CircleHelp,
+  flashcard_review: Layers,
+  worksheet: PencilLine,
+  interactive: MousePointerClick,
+  vocab_recall: SpellCheck,
+  cloze: TextCursorInput,
+  explain_aloud: Mic,
 };
 
 const phaseOf = (t: SessionActivity["type"]) =>
@@ -611,6 +633,18 @@ export default function SessionDetailPage() {
           </h1>
           {planReady && (
             <div className="ml-auto flex items-center gap-2.5 sm:gap-4 shrink-0">
+              <span className="hidden sm:flex items-center gap-2 text-xs text-muted-foreground tabular-nums">
+                <span>
+                  {completedCount}/{activities.length} {t("session.doneCount")}
+                </span>
+                <span className="h-2 w-32 overflow-hidden rounded-full bg-muted">
+                  <span
+                    className="block h-full rounded-full bg-accent transition-all duration-500"
+                    style={{ width: `${session.progress}%` }}
+                  />
+                </span>
+                <span className="font-medium text-foreground">{session.progress}%</span>
+              </span>
               <span className="hidden md:flex items-center gap-1 text-xs text-muted-foreground">
                 <Clock className="h-3 w-3" />
                 {formatDuration(totalEstimated)}
@@ -869,91 +903,62 @@ export default function SessionDetailPage() {
         </main>
       </div>
 
-      {/* Journey waypoints pinned to the bottom */}
-      {planReady && (
-        <footer className="relative z-20 shrink-0 border-t border-border bg-card px-4 pb-3 pt-3 sm:px-22">
-          <div className="flex w-full items-center gap-4">
-            <span className="shrink-0 text-xs text-muted-foreground tabular-nums">
-              {completedCount}/{activities.length} {t("session.doneCount")}
-            </span>
-            <div className="relative flex-1">
-              <div className="absolute left-0 right-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-muted" />
-              <div
-                className="absolute left-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-accent transition-all duration-700 ease-out"
-                style={{ width: `${session.progress}%` }}
-              />
-              <div className="relative flex items-center justify-between">
-                {activities.map((activity, i) => {
-                  const done = activity.status === "completed";
-                  const isActive = activity.id === activeActivityId;
-                  const typeLabel = t(
-                    ACTIVITY_TYPE_LABELS[activity.type] ??
-                      "session.typeActivity",
-                  );
-                  return (
-                    <button
-                      key={activity.id}
-                      type="button"
-                      onClick={() => goToIndex(i)}
-                      className="group relative flex items-center justify-center"
-                      aria-current={isActive ? "step" : undefined}
-                      aria-label={`${typeLabel}: ${activity.title}`}
-                    >
-                      <span
-                        className={cn(
-                          "flex h-9 w-9 items-center justify-center rounded-xl border bg-card shadow-sm transition-all duration-200",
-                          isActive
-                            ? "scale-105 border-accent ring-2 ring-accent/25"
-                            : done
-                              ? "border-border"
-                              : "border-border opacity-70 group-hover:opacity-100",
-                        )}
-                      >
-                        <Image
-                          src={ACTIVITY_ICON[activity.type]}
-                          alt=""
-                          width={28}
-                          height={28}
-                          className="pointer-events-none h-6 w-6 select-none object-contain"
-                        />
-                      </span>
-                      {done && (
-                        <span className="absolute -right-1 -top-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                          <Check className="h-2.5 w-2.5" />
-                        </span>
-                      )}
-                      <div className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-2 hidden w-max max-w-56 -translate-x-1/2 rounded-xl border border-border bg-card px-3 py-2 text-left shadow-lg group-hover:block group-focus-visible:block">
-                        <p className="text-[11px] font-semibold text-accent">
-                          {typeLabel}
-                          <span className="font-medium text-muted-foreground">
-                            {" "}
-                            · {t(`session.phase${phaseOf(activity.type)}`)}
-                          </span>
-                        </p>
-                        <p className="mt-0.5 text-xs font-semibold">
-                          <MathText text={activity.title} />
-                        </p>
-                        <p className="mt-0.5 text-[11px] text-muted-foreground">
-                          {t("session.activityWord")} {i + 1} ·{" "}
-                          {formatDuration(activity.estimatedMinutes)}
-                        </p>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-            <span className="shrink-0 text-xs font-semibold tabular-nums">
-              {session.progress}%
-            </span>
-          </div>
-        </footer>
-      )}
       </div>
 
       {/* Copilot split pane */}
       <Copilot
         open={planReady && copilotOpen}
+        plan={
+          planReady ? (
+            <div className="px-2 py-2">
+              {activities.map((activity, i) => {
+                const done = activity.status === "completed";
+                const isActive = activity.id === activeActivityId;
+                return (
+                  <button
+                    key={activity.id}
+                    type="button"
+                    onClick={() => goToIndex(i)}
+                    aria-current={isActive ? "step" : undefined}
+                    className={cn(
+                      "flex w-full items-start gap-2.5 rounded-xl px-2.5 py-2 text-left hover:bg-muted",
+                      isActive && "bg-muted",
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md",
+                        done ? "bg-accent text-accent-foreground" : ACTIVITY_TONE[activity.type],
+                        isActive && !done && "ring-2 ring-accent/40",
+                      )}
+                    >
+                      {done ? (
+                        <Check className="h-3 w-3" />
+                      ) : (
+                        (() => {
+                          const Icon = ACTIVITY_ICON[activity.type];
+                          return <Icon className="h-3 w-3" />;
+                        })()
+                      )}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-[13px] font-medium">
+                        <MathText text={activity.title} />
+                      </span>
+                      <span className="block text-[11px] text-muted-foreground">
+                        {t(ACTIVITY_TYPE_LABELS[activity.type] ?? "session.typeActivity")}
+                        {" · "}
+                        {t(`session.phase${phaseOf(activity.type)}`)}
+                        {" · "}
+                        {formatDuration(activity.estimatedMinutes)}
+                      </span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          ) : undefined
+        }
         onClose={() => setCopilotOpen(false)}
         workspaceId={workspaceId}
         studySessionId={sessionId}
@@ -1108,13 +1113,12 @@ function FeedPeek({
         <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-foreground" />
       )}
       {activity ? (
-        <Image
-          src={ACTIVITY_ICON[activity.type]}
-          alt=""
-          width={28}
-          height={28}
-          className="pointer-events-none h-7 w-7 select-none object-contain opacity-60 transition-opacity group-hover:opacity-100"
-        />
+        <span className={cn("flex h-7 w-7 items-center justify-center rounded-md transition-opacity opacity-80 group-hover:opacity-100", ACTIVITY_TONE[activity.type])}>
+          {(() => {
+            const Icon = ACTIVITY_ICON[activity.type];
+            return <Icon className="h-3.5 w-3.5" />;
+          })()}
+        </span>
       ) : (
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent/15">
           <Check className="h-4 w-4 text-accent" />

@@ -2,11 +2,10 @@
 
 import { Folder } from "@/types";
 import { countWorkspaces } from "@/lib/utils";
-import { accentNameForColor } from "@/lib/accent-palette";
-import Image from "next/image";
+import { accentForId } from "@/lib/accent-palette";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Folder as FolderIcon } from "lucide-react";
 import {
   ResourceActionsMenu,
   type ResourceActions,
@@ -22,7 +21,7 @@ export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
   const { t } = useI18n();
   const wsCount = countWorkspaces(folder);
   const subCount = folder.folders?.length ?? 0;
-  const accent = accentNameForColor(folder.color, folder.id);
+  const accentHex = folder.color || accentForId(folder.id);
 
   return (
     <div
@@ -32,15 +31,15 @@ export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") onClick(folder.id);
       }}
-      className="group relative flex cursor-pointer items-center gap-3 rounded-2xl border border-border bg-card px-4 py-4 text-left transition-all hover:-translate-y-0.5 hover:shadow-md"
+      className="group relative flex cursor-pointer items-center gap-3 rounded-xl border border-border bg-card px-3.5 py-3 text-left transition-colors hover:border-border-strong hover:shadow-sm"
     >
-      <Image
-        src={`/illustrations/icons/folder-${accent}.png`}
-        alt=""
-        width={88}
-        height={88}
-        className="pointer-events-none h-11 w-11 shrink-0 select-none object-contain"
-      />
+      <span
+        aria-hidden
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+        style={{ background: `${accentHex}1f`, color: accentHex }}
+      >
+        <FolderIcon className="h-[18px] w-[18px]" />
+      </span>
       <div className="relative min-w-0 flex-1">
         <p className="font-semibold text-sm truncate">{folder.name}</p>
         <p className="text-xs text-muted-foreground mt-0.5">
