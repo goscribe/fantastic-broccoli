@@ -18,6 +18,7 @@ import {
 } from "@/lib/api/account";
 import { useAuthUser } from "@/lib/api/auth";
 import { toastError } from "@/lib/toast";
+import { BILLING_PAUSED } from "@/lib/billing-paused";
 
 function PlanCard({
   plan,
@@ -149,6 +150,13 @@ export default function PricingPage() {
   const trialEndsAt = caps?.trialEndsAt ? new Date(caps.trialEndsAt) : null;
 
   const handleSwitch = async (planId: string) => {
+    if (BILLING_PAUSED) {
+      toastError(
+        new Error("Billing is paused while our payment provider is down — everyone has Pro for free this month."),
+        "Checkout unavailable",
+      );
+      return;
+    }
     setSwitching(true);
     try {
       await switchPlan(planId);
@@ -173,7 +181,15 @@ export default function PricingPage() {
               ? `Paid plans start with a ${trialDays}-day free trial: add a card, pay $0 today, and billing begins after ${trialDays} days unless you cancel. Checkout is handled securely by Stripe.`
               : "Upgrade anytime — checkout is handled securely by Stripe."}
           </p>
-          {trialEndsAt && (
+          {BILLING_PAUSED && (
+            <p className="mt-3 max-w-2xl rounded-xl border border-accent/30 bg-accent-soft px-4 py-3 text-sm text-foreground">
+              <span className="font-semibold">Billing is paused.</span> Our payment
+              provider has suspended card payments while they review our account, so
+              checkout is unavailable and nobody is being charged. Every account has Pro
+              for free this month; we will email when billing is back.
+            </p>
+          )}
+          {trialEndsAt && !BILLING_PAUSED && (
             <p className="mt-2 inline-flex rounded-full bg-accent-soft px-3 py-1 text-[12px] font-medium text-accent">
               Free trial — your first charge is on{" "}
               {trialEndsAt.toLocaleDateString(undefined, {

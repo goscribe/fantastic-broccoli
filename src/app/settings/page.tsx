@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Camera, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { HeaderDecor } from "@/components/graphics/floating-decor";
@@ -640,7 +641,7 @@ export default function SettingsPage() {
                       .replace("{plan}", tokens.planName)}
                   </p>
                 )}
-                {tokens && tokens.planName === "Free" && (
+                {tokens && tokens.planName === "Free" && !BILLING_PAUSED && (
                   <p className="mt-2 rounded-lg bg-accent-soft/50 px-3 py-2 text-[12px] text-muted-foreground">
                     {t("set.upgradeNudge")}{" "}
                     <Link
