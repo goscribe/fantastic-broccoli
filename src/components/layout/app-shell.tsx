@@ -10,6 +10,7 @@ import { GuidedTour } from "@/components/onboarding/guided-tour";
 import { MonthlyRatingPrompt } from "@/components/rating/monthly-rating-prompt";
 import { SubscribeWall } from "@/components/billing/subscribe-wall";
 import { PlanLimitDialog } from "@/components/billing/plan-limit-dialog";
+import { BILLING_PAUSED } from "@/lib/billing-paused";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -30,7 +31,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="h-dvh flex flex-col overflow-hidden">
         <TopBar showLogo />
         {children}
-        <PlanLimitDialog />
+        {!BILLING_PAUSED && <PlanLimitDialog />}
       </div>
     );
   }
@@ -55,8 +56,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </div>
       <GuidedTour />
       <MonthlyRatingPrompt />
-      <PlanLimitDialog />
-      <SubscribeWall />
+      {!BILLING_PAUSED && <PlanLimitDialog />}
+      {!BILLING_PAUSED && <SubscribeWall />}
     </div>
   );
 }
