@@ -149,8 +149,8 @@ export default function LandingPreview() {
         <Headline sub="Hints when you ask, a worked example when you’re stuck, and “explain it differently” — all from the notes you uploaded.">a copilot that has actually read your notes.</Headline>
         <div className="design-root relative mx-auto flex w-full max-w-[460px] flex-col gap-3">
           <div className="self-end rounded-2xl rounded-br-md bg-accent px-4 py-3 text-[14px] font-medium text-white shadow-[0_10px_30px_-10px_rgba(124,58,237,.6)]">why did I lose M5?</div>
-          <div className="flex items-end gap-3"><Image src="/design/props/chat-cat.png" alt="" width={130} height={130} unoptimized className="-mb-3 size-[130px] shrink-0 object-contain" /><div className="rounded-2xl rounded-bl-md border border-border bg-white px-4 py-3 text-[14px] leading-relaxed shadow-[0_10px_30px_-10px_rgba(0,0,0,.12)]">You described the direction of water movement but not <b>the membrane</b>. Say it’s <b>partially permeable</b> — that’s the one-liner M5 wants. Want to try Q5 with that in mind?</div></div>
-          <div className="flex gap-2 self-start pl-[142px]">{["Try Q5", "Worked example", "Explain differently"].map((c) => <span key={c} className="rounded-full bg-accent-soft px-3 py-1.5 text-[12px] font-bold text-accent">{c}</span>)}</div>
+          <div className="flex items-end gap-3"><Image src="/design/cat2-think.png" alt="" width={64} height={64} unoptimized className="size-16 shrink-0 object-contain" /><div className="rounded-2xl rounded-bl-md border border-border bg-white px-4 py-3 text-[14px] leading-relaxed shadow-[0_10px_30px_-10px_rgba(0,0,0,.12)]">You described the direction of water movement but not <b>the membrane</b>. Say it’s <b>partially permeable</b> — that’s the one-liner M5 wants. Want to try Q5 with that in mind?</div></div>
+          <div className="flex gap-2 self-start pl-[76px]">{["Try Q5", "Worked example", "Explain differently"].map((c) => <span key={c} className="whitespace-nowrap rounded-full bg-accent-soft px-3 py-1.5 text-[12px] font-bold text-accent">{c}</span>)}</div>
         </div>
       </Band>
 
