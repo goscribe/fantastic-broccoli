@@ -25,6 +25,12 @@ const SESSIONS = [
   { kind: "pdf", title: "Cell structure recap", ws: "Bio notes · Topic 2", meta: "25 min · Moderate", done: 6, total: 6, next: "Debrief ready", when: "Mon", status: "done" },
 ] as const;
 
+function MatIcon({ kind, large = false }: { kind: "pdf" | "img" | "pp"; large?: boolean }) {
+  const map = { pdf: [FileText, large ? "bg-accent-soft text-accent" : "bg-accent text-white"], img: [Camera, large ? "bg-sky-100 text-sky-600" : "bg-sky-500 text-white"], pp: [BookOpen, large ? "bg-emerald-100 text-emerald-600" : "bg-emerald-500 text-white"] } as const;
+  const [Icon, cls] = map[kind];
+  return <span className={cn("grid shrink-0 place-items-center", large ? "size-9 rounded-[11px]" : "size-6 rounded-[7px] shadow-sm", cls)}><Icon className={large ? "size-4" : "size-3.5"} /></span>;
+}
+
 /** Preview of the material itself: first PDF page, the photo, the paper's cover. */
 function Thumb({ src, kind }: { src: string; kind: "pdf" | "img" | "pp" }) {
   return (
@@ -83,7 +89,7 @@ export default async function LearnPreview({ searchParams }: { searchParams: Pro
               const pct = s.done / s.total;
               return (
                 <div key={s.title} className="flex items-center gap-3.5 px-4 py-3">
-                  <MatIcon kind={s.kind} />
+                  <MatIcon kind={s.kind} large />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2"><span className="truncate text-[14px] font-semibold">{s.title}</span>{s.status === "done" && <span className="rounded-md bg-emerald-50 px-1.5 py-0.5 text-[11px] font-semibold text-emerald-700">Done</span>}{s.status === "new" && <span className="rounded-md bg-accent-soft px-1.5 py-0.5 text-[11px] font-semibold text-accent">New</span>}</div>
                     <div className="truncate text-[12px] text-faint">{s.ws} · {s.meta} · <span className="text-muted-foreground">Next: {s.next}</span></div>
