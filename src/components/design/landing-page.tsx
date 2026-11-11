@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Check, Play, Star } from "lucide-react";
 import { Ring, WeekBars } from "@/components/design/charts";
 import { T } from "@/components/design/tokens";
+import { StatsBand } from "@/components/design/stats-band";
 import { cn } from "@/lib/utils";
 
 
@@ -53,12 +54,6 @@ function Headline({ children, sub, dark = false }: { children: React.ReactNode; 
 const LAV = "#f5f3ff";
 const NAVY = "#1e1b4b";
 
-const STATS: [string, string][] = [
-  ["2,300+", "students revising with Scribe"],
-  ["86%", "average markscheme score after a week"],
-  ["23 min", "average study session"],
-  ["1.2M", "flashcards reviewed on time"],
-];
 
 const QUOTES: [string, string, string][] = [
   ["It marked my 6-marker exactly like my teacher did, then told me which point I’d skipped.", "Maya", "IB Bio HL · Year 13"],
@@ -99,16 +94,7 @@ export function LandingBody() {
       </section>
 
       {/* stats */}
-      <section className="w-full text-white" style={{ background: NAVY }}>
-        <div className="mx-auto grid w-full max-w-[1120px] gap-y-10 px-6 py-16 md:grid-cols-4">
-          {STATS.map(([n, l]) => (
-            <div key={l} className="text-center">
-              <div className="text-[56px] font-extrabold leading-none tracking-tight">{n}</div>
-              <div className="mx-auto mt-3 max-w-[180px] text-[14px] font-semibold leading-snug text-white/65">{l}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <StatsBand background={NAVY} />
 
       {/* 1 lavender: marked like the exam */}
       <Band bg={LAV}>
