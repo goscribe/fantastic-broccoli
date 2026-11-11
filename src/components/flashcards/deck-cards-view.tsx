@@ -96,7 +96,7 @@ export function DeckCardsView({
               transform: "rotateX(180deg)",
             }}
           >
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-accent-dim">
+            <span className="text-[12px] font-semibold text-accent-dim">
               {back}
             </span>
             <span className="text-xl md:text-2xl leading-relaxed text-center">
