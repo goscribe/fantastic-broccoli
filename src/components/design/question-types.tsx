@@ -6,9 +6,9 @@ import { T } from "./tokens";
 const field = "rounded-[14px] border bg-white text-[15px]";
 /** Hints stay folded until the student asks (or after a wrong try); `open` forces them for marked states. */
 export const SideHint = ({ title, children, open = false }: { title: string; children: React.ReactNode; open?: boolean }) => (
-  <details open={open} className="group rounded-2xl bg-muted/70 open:bg-muted">
-    <summary className="flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-[13px] font-semibold text-muted-foreground marker:hidden [&::-webkit-details-marker]:hidden"><Lightbulb className="size-4 text-amber-500" />Need a hint?<span className="ml-auto text-[11px] font-medium text-faint group-open:hidden">{title}</span><ChevronDown className="size-4 transition-transform group-open:rotate-180" /></summary>
-    <div className="px-4 pb-4 text-[13px] leading-relaxed text-muted-foreground"><div className="mb-1 text-[11px] font-semibold text-faint">{title}</div>{children}</div>
+  <details open={open} className="group">
+    <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-[13px] font-semibold text-accent hover:underline [&::-webkit-details-marker]:hidden"><Lightbulb className="size-4" />Need a hint?<ChevronDown className="size-3.5 transition-transform group-open:rotate-180" /></summary>
+    <div className="mt-2 max-w-[640px] text-[13px] leading-relaxed text-muted-foreground"><span className="text-[11px] font-semibold text-faint">{title}</span><div className="mt-0.5">{children}</div></div>
   </details>
 );
 const Row = ({ children }: { children: React.ReactNode }) => <div className="flex flex-col gap-4">{children}</div>;
