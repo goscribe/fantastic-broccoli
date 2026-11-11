@@ -1,6 +1,12 @@
 import Link from "next/link";
 
 const SCREENS: [string, string][] = [
+  ["Onboarding · goal", "/design/onboarding?step=1"],
+  ["Onboarding · subjects", "/design/onboarding?step=2"],
+  ["Onboarding · first material", "/design/onboarding?step=3"],
+  ["Onboarding · building", "/design/onboarding?step=4"],
+  ["Generating session (in app)", "/design/loading?step=1"],
+  ["Session ready", "/design/loading?step=4"],
   ["Learn (self-directed)", "/design/learn"],
   ["Question · multiple choice", "/design/question?type=mcq"],
   ["Question · multiple choice · hint open", "/design/question?type=mcq&hint=1"],
