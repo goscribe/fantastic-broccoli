@@ -32,7 +32,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
   const [folders, setFolders] = useState<Folder[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [paletteOpen, setPaletteOpen] = useState(false);
-  const [creating, setCreating] = useState(false);
+  const [creating, setCreating] = useState<"workspace" | "folder" | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [treeLoading, setTreeLoading] = useState(true);
 
@@ -116,11 +116,19 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           })}
           <button
             type="button"
-            onClick={() => setCreating(true)}
+            onClick={() => setCreating("workspace")}
             className="flex h-9 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium text-accent hover:bg-muted"
           >
             <Plus className="size-4" />
             New workspace
+          </button>
+          <button
+            type="button"
+            onClick={() => setCreating("folder")}
+            className="flex h-9 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium text-faint hover:bg-muted"
+          >
+            <FolderIcon className="size-4" />
+            New folder
           </button>
         </div>
         <div className="mt-auto flex flex-col gap-0.5 pt-3">
@@ -196,10 +204,10 @@ export function NewShell({ children }: { children: React.ReactNode }) {
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} folders={folders} rootWorkspaces={rootWorkspaces} />
       {creating && (
         <CreateResourceDialog
-          kind="workspace"
-          onClose={() => setCreating(false)}
+          kind={creating}
+          onClose={() => setCreating(null)}
           onCreated={(id) => {
-            setCreating(false);
+            setCreating(null);
             if (id) router.push(`/workspace/${id}`);
           }}
         />
