@@ -4,7 +4,8 @@ import { Workspace } from "@/types";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Badge } from "@/components/ui/badge";
 import { formatRelativeDate, formatDuration } from "@/lib/utils";
-import { accentNameForId } from "@/lib/accent-palette";
+import { accentForId, accentNameForId } from "@/lib/accent-palette";
+import { useNewUi } from "@/lib/new-ui";
 import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
@@ -46,6 +47,8 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
         ).replace("{n}", String(activeSessions.length))
       : t("ws.noActiveSessions");
   const accent = accentNameForId(workspace.id);
+  const newUi = useNewUi();
+  const hex = accentForId(workspace.id);
 
   return (
     <div
@@ -62,13 +65,19 @@ export function WorkspaceCard({ workspace, onClick, actions }: WorkspaceCardProp
       )}
 
       <div className="flex items-start gap-3">
-        <Image
-          src={`/illustrations/icons/ws-${accent}.png`}
-          alt=""
-          width={80}
-          height={80}
-          className="pointer-events-none h-10 w-10 shrink-0 select-none object-contain"
-        />
+        {newUi ? (
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl" style={{ background: `${hex}1f` }}>
+            <span className="block h-5 w-4 rounded-[3px] border-2 bg-white" style={{ borderColor: hex }} />
+          </span>
+        ) : (
+          <Image
+            src={`/illustrations/icons/ws-${accent}.png`}
+            alt=""
+            width={80}
+            height={80}
+            className="pointer-events-none h-10 w-10 shrink-0 select-none object-contain"
+          />
+        )}
         <div className="min-w-0 flex-1 pr-5">
           <div className="flex items-center gap-2">
             <h3 className="font-semibold text-sm leading-tight truncate">
