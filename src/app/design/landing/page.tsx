@@ -132,9 +132,9 @@ export default function LandingPreview() {
       {/* 2 white: flashcards */}
       <Band bg="#ffffff" className="lg:[&>*:first-child]:order-2">
         <Headline sub="Spaced repetition decides what comes back today. Get one wrong and it’s back tomorrow; get it right and it waits.">flashcards that come back right before you forget.</Headline>
-        <div className="relative mx-auto flex w-full max-w-[460px] items-center justify-center py-10">
-          {[["water potential", "-rotate-12 -translate-x-[150px] -translate-y-10"], ["partially permeable", "rotate-6 translate-x-[140px] -translate-y-16"], ["turgor", "rotate-[-4deg] translate-x-[150px] translate-y-20"]].map(([w, c]) => <span key={w} className={cn("design-root absolute rounded-2xl border-2 border-accent/30 bg-white px-5 py-6 text-[15px] font-bold shadow-[0_20px_40px_-20px_rgba(76,29,149,.35)]", c)}>{w}</span>)}
-          <Donut parts={[[14, T.violet], [2, T.red], [22, "#ede9fe"]]} size={260} stroke={34}><div className="text-center"><div className="text-[48px] font-extrabold leading-none">16</div><div className="text-[13px] font-semibold text-muted-foreground">due today</div></div></Donut>
+        <div className="relative mx-auto flex w-full max-w-[460px] items-center justify-center py-10 pr-24">
+          {[["water potential", "rotate-[-8deg] translate-x-[150px] -translate-y-[110px]"], ["partially permeable", "rotate-[5deg] translate-x-[190px] translate-y-0"], ["turgor", "rotate-[-5deg] translate-x-[140px] translate-y-[110px]"]].map(([w, c]) => <span key={w} className={cn("design-root absolute z-10 whitespace-nowrap rounded-2xl border-2 border-accent/30 bg-white px-5 py-5 text-[15px] font-bold shadow-[0_20px_40px_-20px_rgba(76,29,149,.35)]", c)}>{w}</span>)}
+          <Donut parts={[[14, T.violet], [2, T.red], [22, "#ede9fe"]]} size={240} stroke={30}><div className="text-center"><div className="text-[48px] font-extrabold leading-none">16</div><div className="text-[13px] font-semibold text-muted-foreground">due today</div></div></Donut>
           <Image src="/design/cat2-sleep.png" alt="" width={150} height={150} unoptimized className="cat-bob absolute -bottom-2 left-0 size-[140px] object-contain" />
         </div>
       </Band>
