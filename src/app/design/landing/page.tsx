@@ -55,8 +55,8 @@ export default function LandingPreview() {
     <div className="design-root min-h-dvh w-full bg-white text-foreground">
       <header className="mx-auto flex h-[72px] w-full max-w-[1120px] items-center justify-between px-6">
         <span className="text-[22px] font-extrabold tracking-tight text-accent">scribe</span>
-        <nav className="hidden gap-8 text-[14px] font-bold uppercase tracking-wide text-muted-foreground md:flex">{NAV.map((n) => <span key={n}>{n}</span>)}</nav>
-        <span className="inline-flex h-11 items-center rounded-xl bg-accent px-5 text-[13px] font-bold uppercase tracking-wide text-white shadow-[0_4px_0_0_rgba(0,0,0,.14)]">Get started</span>
+        <nav className="hidden gap-8 text-[14px] font-bold text-muted-foreground md:flex">{NAV.map((n) => <span key={n}>{n}</span>)}</nav>
+        <span className="inline-flex h-11 items-center rounded-xl bg-accent px-5 text-[13px] font-bold text-white shadow-[0_4px_0_0_rgba(0,0,0,.14)]">Get started</span>
       </header>
 
       {/* hero: headline on white, cat + props on a violet curve */}
@@ -66,10 +66,10 @@ export default function LandingPreview() {
           <p className="mt-5 max-w-[560px] text-[18px] text-muted-foreground">Drop in a PDF, slides or a photo of your notes. Scribe turns them into quizzes, worksheets and flashcards that know what you’re about to forget.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3"><Btn>Get started<ArrowRight className="size-5" /></Btn><span className="inline-flex h-14 items-center gap-2 rounded-2xl border-2 border-border px-6 text-[16px] font-bold text-accent"><Play className="size-4" />I already have an account</span></div>
         </div>
-        <div className="relative mt-10 h-[520px]">
-          <svg viewBox="0 0 1440 520" preserveAspectRatio="none" className="absolute inset-0 h-full w-full"><path d="M0 140 C 360 40, 1080 40, 1440 140 L1440 520 L0 520 Z" fill="#7c3aed" /></svg>
+        <div className="relative mt-10 h-[440px]">
+          <svg viewBox="0 0 1440 440" preserveAspectRatio="none" className="absolute inset-0 h-full w-full"><path d="M0 140 C 360 40, 1080 40, 1440 140 L1440 440 L0 440 Z" fill="#7c3aed" /></svg>
           <div className="relative mx-auto h-full w-full max-w-[1120px]">
-            <div className="absolute left-1/2 top-16 -translate-x-1/2"><HeroCard /></div>
+            <div className="absolute left-1/2 top-10 -translate-x-1/2"><HeroCard /></div>
             <Image src="/design/cat2-cheer.png" alt="" width={260} height={260} unoptimized className="design-pop absolute left-1/2 top-[-36px] z-10 size-[230px] -translate-x-[150%] object-contain" />
             <Image src="/design/cat2-book.png" alt="" width={200} height={200} unoptimized className="cat-bob absolute right-[14%] top-40 z-10 size-[180px] object-contain" />
             <Prop src="/illustrations/props/star-gold.png" className="left-[8%] top-6 size-16" />
@@ -77,14 +77,14 @@ export default function LandingPreview() {
             <Prop src="/illustrations/props/book-blue.png" className="right-[6%] top-10 size-20 rotate-12" delay="1.1s" />
             <Prop src="/illustrations/props/trophy.png" className="right-[26%] top-[-10px] size-20" delay="0.3s" />
             <Prop src="/illustrations/props/book-pink.png" className="left-[30%] top-[-8px] size-16 rotate-6" delay="1.6s" />
-            <Prop src="/illustrations/props/flag-mini.png" className="right-[22%] bottom-14 size-14" delay="0.9s" />
+            <Prop src="/illustrations/props/flag-mini.png" className="right-[30%] top-[300px] size-14" delay="0.9s" />
           </div>
         </div>
       </section>
 
       {/* subjects strip */}
       <section className="border-b border-border">
-        <div className="mx-auto flex w-full max-w-[1120px] flex-wrap items-center justify-center gap-x-8 gap-y-2 px-6 py-5 text-[13px] font-bold uppercase tracking-wide text-muted-foreground">{["IB", "A-level", "GCSE", "AP", "SAT", "University"].map((s) => <span key={s}>{s}</span>)}</div>
+        <div className="mx-auto flex w-full max-w-[1120px] flex-wrap items-center justify-center gap-x-8 gap-y-2 px-6 py-5 text-[13px] font-bold text-muted-foreground">{["IB", "A-level", "GCSE", "AP", "SAT", "University"].map((s) => <span key={s}>{s}</span>)}</div>
       </section>
 
       {/* 1 navy: marked like the exam */}
