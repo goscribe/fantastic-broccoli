@@ -49,7 +49,7 @@ function PlanChips({ plan, done, status }: { plan: readonly string[]; done: numb
     <div className="mt-1.5 flex flex-nowrap items-center gap-1 overflow-hidden">
       {items.map((a, i) => {
         const isDone = i < done || status === "done"; const cur = i === done && status !== "done"; const over = i === 3 && plan.length > 3;
-        return <span key={i} className={cn("inline-flex h-[20px] items-center gap-1 rounded-md px-1.5 text-[11px] font-semibold", over ? "text-faint" : isDone ? "bg-emerald-50 text-emerald-700" : cur ? "bg-accent text-white" : "bg-muted text-muted-foreground")}>{isDone && !over && <Check className="size-3" />}{a}</span>;
+        return <span key={i} className={cn("inline-flex h-[20px] shrink-0 items-center gap-1 whitespace-nowrap rounded-md px-1.5 text-[11px] font-semibold", over ? "text-faint" : isDone ? "bg-emerald-50 text-emerald-700" : cur ? "bg-accent text-white" : "bg-muted text-muted-foreground")}>{isDone && !over && <Check className="size-3" />}{a}</span>;
       })}
     </div>
   );
