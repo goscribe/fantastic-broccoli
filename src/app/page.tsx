@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { useAuthUser } from "@/lib/api/auth";
@@ -27,6 +27,7 @@ import {
   type DailyActivityPoint,
 } from "@/lib/api/study";
 import { LearnHome } from "@/components/learn/learn-home";
+import { useNewUi } from "@/lib/new-ui";
 import {
   FirstSessionOnboarding,
   hasSkippedFirstSessionOnboarding,
@@ -222,12 +223,7 @@ export default function HomePage() {
         ? t("misc.goodAfternoon")
         : t("misc.goodEvening");
 
-  // New Learn home (redesign) — NEXT_PUBLIC_NEW_UI=1, or ?ui=new to preview.
-  const newUi = useSyncExternalStore(
-    () => () => {},
-    () => process.env.NEXT_PUBLIC_NEW_UI === "1" || new URLSearchParams(window.location.search).get("ui") === "new",
-    () => process.env.NEXT_PUBLIC_NEW_UI === "1",
-  );
+  const newUi = useNewUi();
   if (newUi && showOnboarding === false) return <LearnHome />;
 
   return (
