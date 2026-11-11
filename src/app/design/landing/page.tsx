@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowRight, Check, Play, Star } from "lucide-react";
-import { Donut, Ring, WeekBars } from "@/components/design/charts";
+import { Ring, WeekBars } from "@/components/design/charts";
 import { T } from "@/components/design/tokens";
 import { cn } from "@/lib/utils";
 
@@ -132,10 +132,17 @@ export default function LandingPreview() {
       {/* 2 white: flashcards */}
       <Band bg="#ffffff" className="lg:[&>*:first-child]:order-2">
         <Headline sub="Spaced repetition decides what comes back today. Get one wrong and it’s back tomorrow; get it right and it waits.">flashcards that come back right before you forget.</Headline>
-        <div className="relative mx-auto flex w-full max-w-[460px] items-center justify-center py-10 pr-24">
-          {[["water potential", "rotate-[-8deg] translate-x-[150px] -translate-y-[110px]"], ["partially permeable", "rotate-[5deg] translate-x-[190px] translate-y-0"], ["turgor", "rotate-[-5deg] translate-x-[140px] translate-y-[110px]"]].map(([w, c]) => <span key={w} className={cn("design-root absolute z-10 whitespace-nowrap rounded-2xl border-2 border-accent/30 bg-white px-5 py-5 text-[15px] font-bold shadow-[0_20px_40px_-20px_rgba(76,29,149,.35)]", c)}>{w}</span>)}
-          <Donut parts={[[14, T.violet], [2, T.red], [22, "#ede9fe"]]} size={240} stroke={30}><div className="text-center"><div className="text-[48px] font-extrabold leading-none">16</div><div className="text-[13px] font-semibold text-muted-foreground">due today</div></div></Donut>
-          <Image src="/design/cat2-sleep.png" alt="" width={150} height={150} unoptimized className="cat-bob absolute -bottom-2 left-0 size-[140px] object-contain" />
+        <div className="relative mx-auto w-full max-w-[460px] py-8">
+          <div className="relative mx-auto h-[300px] w-[360px]">
+            <div className="design-root absolute inset-x-6 top-0 h-[250px] rotate-[4deg] rounded-[28px] border border-border bg-white shadow-[0_20px_40px_-28px_rgba(76,29,149,.3)]" />
+            <div className="design-root absolute inset-x-3 top-3 h-[250px] rotate-[-2deg] rounded-[28px] border border-border bg-white shadow-[0_20px_40px_-28px_rgba(76,29,149,.3)]" />
+            <div className="design-root absolute inset-x-0 top-7 flex h-[250px] flex-col justify-between rounded-[28px] border-2 border-accent/40 bg-white p-6 shadow-[0_30px_60px_-24px_rgba(76,29,149,.35)]">
+              <div className="flex items-center justify-between text-[12px] font-semibold"><span className="text-accent">Bio · Topic 3</span><span className="rounded-full bg-accent-soft px-2.5 py-1 text-accent">16 due today</span></div>
+              <div className="text-center"><div className="text-[13px] font-semibold text-faint">Define</div><div className="mt-1 text-[26px] font-extrabold leading-tight">water potential</div></div>
+              <div className="flex gap-2">{[["Again", "border-border text-muted-foreground"], ["Good", "border-accent bg-accent text-white"]].map(([b, c]) => <span key={b} className={cn("inline-flex h-10 flex-1 items-center justify-center rounded-xl border text-[14px] font-bold", c)}>{b}</span>)}</div>
+            </div>
+            <Image src="/design/cat2-sleep.png" alt="" width={150} height={150} unoptimized className="cat-bob absolute -bottom-2 -right-20 size-[140px] object-contain" />
+          </div>
         </div>
       </Band>
 
