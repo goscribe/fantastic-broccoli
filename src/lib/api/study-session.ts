@@ -333,6 +333,17 @@ export const studySessionApi = {
   listBank: (input: { workspaceId: string; kind?: ApiArtifactKind }) =>
     rpc<ApiArtifactBankItem[]>("studySession.listBank", "query", input),
 
+  /** Kick off a flashcard deck from a prompt; the workspace's primary set flips to generating. */
+  generateFlashcards: (input: { workspaceId: string; prompt: string; title?: string; numCards?: number }) =>
+    rpc<{ artifact: { id: string } }>("flashcards.generateFromPrompt", "mutation", input),
+
+  flashcardsGenerating: (workspaceId: string) =>
+    rpc<{ generating: boolean; metadata: { quantity?: number; difficulty?: string } | null }>(
+      "flashcards.isGenerating",
+      "query",
+      { workspaceId },
+    ),
+
   updateBankItem: (input: {
     workspaceId: string;
     id: string;

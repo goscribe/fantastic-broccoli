@@ -225,9 +225,10 @@ export async function reanalyzeFile(
 export async function fetchUploadPreviews(
   workspaceId: string,
 ): Promise<{ id: string; url: string | null }[]> {
-  return rpc<{ id: string; url: string | null }[]>(
+  const rows = await rpc<{ id: string; url: string | null }[] | null>(
     "workspace.getUploadPreviews",
     "query",
     { workspaceId },
   );
+  return Array.isArray(rows) ? rows.filter(Boolean) : [];
 }

@@ -20,7 +20,10 @@ const workspaces = [
     icon: "book",
     color: "green",
     updatedAt: new Date().toISOString(),
-    uploads: [],
+    uploads: [
+      { id: "up-1", name: "B4 Thermodynamics Guide.pdf", mimeType: "application/pdf", size: 1200000, createdAt: new Date(Date.now() - 86400000 * 3).toISOString(), updatedAt: new Date(Date.now() - 86400000 * 3).toISOString(), analysisStatus: "COMPLETED" },
+      { id: "up-2", name: "Energetics worked examples.pdf", mimeType: "application/pdf", size: 800000, createdAt: new Date(Date.now() - 86400000).toISOString(), updatedAt: new Date(Date.now() - 86400000).toISOString(), analysisStatus: "COMPLETED" },
+    ],
     owner: user,
     members: [],
   },
@@ -89,6 +92,8 @@ function handleProc(path, input) {
       // EMPTY=1 simulates a brand-new user (triggers first-session onboarding).
       if (process.env.EMPTY === "1") return { folders: [], workspaces: [] };
       return { folders, workspaces };
+    case "workspace.getUploadPreviews":
+      return [];
     case "workspace.getSharedWith":
       return { shared: [] };
     case "workspace.create": {
@@ -356,6 +361,10 @@ function handleProc(path, input) {
     case "planner.getPlan":
     case "planner.updatePlan":
       return { dailyGoalMin: 25, examTitle: "Bio Paper 1", examDate: new Date(Date.now() + 23 * 86400000), windowStart: "15:00", windowEnd: "19:00", weekdays: [1, 2, 3, 4, 5, 6, 0], timezone: "UTC" };
+    case "flashcards.generateFromPrompt":
+      return { artifact: { id: "bank-deck-1", title: input?.title ?? "Flashcards", generating: true } };
+    case "flashcards.isGenerating":
+      return { generating: false, metadata: null };
     case "planner.replan":
       return { ok: true, source: "ai" };
     case "planner.getWeek": {
