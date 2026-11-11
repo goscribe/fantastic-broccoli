@@ -18,7 +18,7 @@ export function FeedbackCard({ ok, title, message, secondary, primary, confetti 
   return (
     <div className="relative pb-6 pt-3">
       {ok && confetti && isClient && <><ConfettiBurst burst={1} /><ConfettiBurst burst={2} /></>}
-      {ok && <Image src="/design/cat-trophy.png" alt="" width={120} height={120} priority className="design-pop pointer-events-none absolute -top-[88px] left-1/2 h-[120px] w-auto -translate-x-1/2 drop-shadow-[0_10px_20px_rgba(22,163,74,.25)]" />}
+      {ok && <Image src="/design/cat-trophy.png" alt="" width={120} height={120} priority className="design-pop pointer-events-none absolute -top-[58px] right-[200px] h-[96px] w-auto drop-shadow-[0_10px_20px_rgba(22,163,74,.25)]" />}
       <div className={cn("flex items-center gap-4 rounded-2xl border px-5 py-4 shadow-[0_12px_40px_-12px_rgba(17,17,20,.18)]", ok ? "design-bounce border-emerald-300 bg-gradient-to-r from-emerald-50 to-lime-50" : "border-rose-200 bg-rose-50")}>
         <span className={cn("grid size-12 shrink-0 place-items-center rounded-full text-white", ok ? "design-pop bg-emerald-500 shadow-[0_0_0_6px_rgba(16,185,129,.2)]" : "bg-red-600")}>{ok ? <Check className="size-6" strokeWidth={3} /> : <X className="size-6" strokeWidth={2.5} />}</span>
         <div className="min-w-0 flex-1">
