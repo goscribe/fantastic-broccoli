@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const SCREENS: [string, string][] = [
+  ["Landing", "/design/landing"],
   ["Onboarding · goal", "/design/onboarding?step=1"],
   ["Onboarding · subjects", "/design/onboarding?step=2"],
   ["Onboarding · first material", "/design/onboarding?step=3"],
