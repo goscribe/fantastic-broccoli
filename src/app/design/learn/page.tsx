@@ -35,7 +35,7 @@ function MatIcon({ kind }: { kind: "pdf" | "img" | "pp" }) {
 function Thumb({ src, kind }: { src: string; kind: "pdf" | "img" | "pp" }) {
   return (
     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-border bg-muted">
-      <Image src={src} alt="" fill unoptimized className="object-cover object-top" />
+      <Image src={src} alt="" fill priority unoptimized className="object-cover object-top" />
       <span className="absolute bottom-2 left-2"><MatIcon kind={kind} /></span>
     </div>
   );
