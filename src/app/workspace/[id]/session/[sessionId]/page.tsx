@@ -1,5 +1,6 @@
 "use client";
 
+import { BuildBar } from "@/components/session/build-bar";
 import { useNewUi } from "@/lib/new-ui";
 import { useState, useMemo, useEffect, useRef } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
@@ -1233,6 +1234,7 @@ function GeneratingPlanCard({
   /** Last persisted progress, so a reload resumes instead of restarting at 0. */
   initial?: PlanGenerationSnapshot;
 }) {
+  const newUi = useNewUi();
   const { t } = useI18n();
   const [now, setNow] = useState(() => Date.now());
   const [hydrated] = useState(() => progressFromSnapshot(initial, Date.now()));
@@ -1289,6 +1291,24 @@ function GeneratingPlanCard({
         : `${t("session.progressWriting")} ${progress.completed} ${t("session.progressOf")} ${progress.total}${progress.label ? ` — ${progress.label}` : ""}`;
   } else if (currentStage === "verifying" && hasCount) {
     detail = `${t("session.progressRevising")} ${progress.completed} ${t("session.progressOf")} ${progress.total}${progress.label ? ` — ${progress.label}` : ""}`;
+  }
+
+  if (newUi) {
+    return (
+      <div className="mx-auto flex w-full max-w-[640px] flex-col items-center gap-5 px-4 pb-12 pt-6 animate-fade-up">
+        <BuildBar
+          title={title}
+          pct={percent / 100}
+          label={detail ?? t(GENERATION_STAGES[progress.stageIndex].label)}
+          steps={GENERATION_STAGES.length}
+          index={progress.stageIndex}
+        />
+        <WarmupQuiz workspaceId={workspaceId} hero />
+        <p className="text-[13px] text-faint">
+          {stalled ? t("session.takingLonger") : t("session.generatingHint")}
+        </p>
+      </div>
+    );
   }
 
   return (

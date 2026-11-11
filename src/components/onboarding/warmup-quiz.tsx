@@ -17,7 +17,9 @@ const SECTION = "mt-4 border-t border-border pt-3 text-left";
  * next one is fetched, so questions keep coming for as long as the wait
  * screen is mounted.
  */
-export function WarmupQuiz({ workspaceId }: { workspaceId: string }) {
+const HERO = "w-full rounded-3xl border border-border bg-card p-6";
+
+export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string; hero?: boolean }) {
   const [questions, setQuestions] = useState<ApiWarmupQuestion[]>([]);
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
@@ -79,7 +81,7 @@ export function WarmupQuiz({ workspaceId }: { workspaceId: string }) {
 
   if (questions.length === 0) {
     return (
-      <div className={SECTION}>
+      <div className={hero ? HERO : SECTION}>
         <p className="text-sm font-semibold">Warm-up quiz incoming…</p>
         <p className="mt-1 text-xs text-muted-foreground">
           Writing a few quick questions from your materials so you can practice
@@ -91,7 +93,7 @@ export function WarmupQuiz({ workspaceId }: { workspaceId: string }) {
 
   if (index >= questions.length) {
     return (
-      <div className={SECTION}>
+      <div className={hero ? HERO : SECTION}>
         <p className="text-sm font-semibold">
           {score}/{answered} correct so far
         </p>
@@ -104,19 +106,19 @@ export function WarmupQuiz({ workspaceId }: { workspaceId: string }) {
 
   const q = questions[index];
   return (
-    <div className={SECTION}>
+    <div className={hero ? HERO : SECTION}>
       <div className="flex items-center justify-between">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-accent">
+        <p className={cn("text-[11px] font-semibold text-accent", !hero && "uppercase tracking-wide")}>
           Warm-up while you wait
         </p>
         <p className="text-[11px] text-muted-foreground">
           {score}/{answered} correct
         </p>
       </div>
-      <div className="mt-1.5 text-sm font-medium">
+      <div className={hero ? "mt-3 text-[20px] font-bold leading-[1.35]" : "mt-1.5 text-sm font-medium"}>
         <MarkdownText text={q.question} />
       </div>
-      <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
+      <div className={hero ? "mt-4 grid gap-2.5" : "mt-2 grid gap-1.5 sm:grid-cols-2"}>
         {q.options.map((option, i) => {
           const hasPicked = picked !== null;
           const isCorrect = i === q.correctIndex;
@@ -132,13 +134,16 @@ export function WarmupQuiz({ workspaceId }: { workspaceId: string }) {
                 if (isCorrect) setScore((s) => s + 1);
               }}
               className={cn(
-                "flex w-full items-center gap-2 rounded-lg border px-2.5 py-1.5 text-left text-xs transition-colors",
+                hero ? "flex w-full items-center gap-3.5 rounded-[14px] border bg-card px-4 py-3 text-left text-[15px] font-medium transition-colors" : "flex w-full items-center gap-2 rounded-lg border px-2.5 py-1.5 text-left text-xs transition-colors",
                 !hasPicked && "border-border hover:border-accent hover:bg-accent-soft/40",
                 hasPicked && isCorrect && "border-accent bg-accent-soft/50",
                 hasPicked && isPicked && !isCorrect && "border-rose/50 bg-rose/10",
                 hasPicked && !isPicked && !isCorrect && "border-border/60 opacity-60",
               )}
             >
+              {hero && !hasPicked && (
+                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-muted text-[13px] font-semibold text-muted-foreground">{i + 1}</span>
+              )}
               {hasPicked && isCorrect && (
                 <Check className="h-3.5 w-3.5 shrink-0 text-accent" />
               )}
