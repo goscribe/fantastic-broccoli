@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import { LandingHeader, LandingFooter } from "./chrome";
+import "../design/design.css";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
   title: {
@@ -19,7 +23,7 @@ export default function LandingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+    <div className={`${inter.variable} design-root min-h-screen bg-white text-foreground`}>
       <LandingHeader />
       <main>{children}</main>
       <LandingFooter />
