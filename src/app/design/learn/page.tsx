@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUp, BookOpen, Camera, FileText, Layers, MessageCircle, Plus, Dumbbell, ClipboardList, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowUp, BookOpen, Camera, FileText, Layers, MessageCircle, Plus, Dumbbell, ClipboardList, ChevronDown, ChevronUp, MoreVertical, Check, ListChecks, Mic, Zap } from "lucide-react";
 import { AppFrame } from "@/components/design/shell";
 import { Donut, Ring, WeekBars } from "@/components/design/charts";
 import { T } from "@/components/design/tokens";
@@ -18,17 +18,61 @@ const MATERIALS = [
 ] as const;
 const ACTIONS = [["Quiz me", Dumbbell], ["Flashcards", Layers], ["Worksheet", ClipboardList], ["Explain", MessageCircle]] as const;
 const SESSIONS = [
-  { kind: "pdf", title: "Osmosis & water potential", ws: "Bio notes · Topic 3", meta: "30 min · Moderate", done: 3, total: 7, next: "Worksheet · Osmosis calculations", when: "Today 16:10", status: "active", q: "A red blood cell is placed in 0.9% NaCl. What happens to its volume?", kind2: "mcq" },
-  { kind: "img", title: "Potato lab write-up", ws: "Osmosis lab handout", meta: "20 min · Light", done: 1, total: 5, next: "Cloze · Method steps", when: "Today 08:45", status: "active", q: "Cut cylinders, ____ them dry, then record the initial ____ before placing in sucrose.", kind2: "cloze" },
-  { kind: "pp", title: "Paper 1 · May 2023 walkthrough", ws: "Past paper", meta: "60 min · Exam", done: 20, total: 40, next: "Quick 5 · Section B", when: "Yesterday", status: "active", q: "Which process moves glucose into the cell against its gradient?", kind2: "mcq" },
-  { kind: "img", title: "Active vs passive transport", ws: "Lecture slides 3.2", meta: "45 min · Deep", done: 0, total: 9, next: "Reading · Transport proteins", when: "Yesterday", status: "new", q: "Channel proteins form hydrophilic pores; carrier proteins change shape…", kind2: "read" },
-  { kind: "pdf", title: "Cell structure recap", ws: "Bio notes · Topic 2", meta: "25 min · Moderate", done: 6, total: 6, next: "Debrief ready", when: "Mon", status: "done", q: "86% · strongest on organelles, revisit membrane structure", kind2: "done" },
+  { kind: "pdf", title: "Osmosis & water potential", plan: ["Reading","Quick 5","Flashcards","Worksheet","Cloze","Quick 5","Explain aloud"], scores: [70, 80, 90], topic: "3.2", ws: "Bio notes · Topic 3", meta: "30 min · Moderate", done: 3, total: 7, next: "Worksheet · Osmosis calculations", when: "Today 16:10", status: "active", q: "A red blood cell is placed in 0.9% NaCl. What happens to its volume?", kind2: "mcq" },
+  { kind: "img", title: "Potato lab write-up", plan: ["Reading","Cloze","Worksheet","Quick 5","Comprehension"], scores: [60], topic: "3.2", ws: "Osmosis lab handout", meta: "20 min · Light", done: 1, total: 5, next: "Cloze · Method steps", when: "Today 08:45", status: "active", q: "Cut cylinders, ____ them dry, then record the initial ____ before placing in sucrose.", kind2: "cloze" },
+  { kind: "pp", title: "Paper 1 · May 2023 walkthrough", plan: Array.from({ length: 40 }, (_, i) => `Q${i + 1}`), scores: [55, 65, 60, 72, 78, 74, 82, 80], topic: "P1", ws: "Past paper", meta: "60 min · Exam", done: 20, total: 40, next: "Quick 5 · Section B", when: "Yesterday", status: "active", q: "Which process moves glucose into the cell against its gradient?", kind2: "mcq" },
+  { kind: "img", title: "Active vs passive transport", plan: ["Reading","Quick 5","Flashcards","Interactive","Worksheet","Cloze","Vocab recall","Quick 5","Explain aloud"], scores: [], topic: "3.3", ws: "Lecture slides 3.2", meta: "45 min · Deep", done: 0, total: 9, next: "Reading · Transport proteins", when: "Yesterday", status: "new", q: "Channel proteins form hydrophilic pores; carrier proteins change shape…", kind2: "read" },
+  { kind: "pdf", title: "Cell structure recap", plan: ["Reading","Quick 5","Flashcards","Cloze","Worksheet","Quick 5"], scores: [64, 70, 78, 82, 88, 86], topic: "2.1", ws: "Bio notes · Topic 2", meta: "25 min · Moderate", done: 6, total: 6, next: "Debrief ready", when: "Mon", status: "done", q: "86% · strongest on organelles, revisit membrane structure", kind2: "done" },
 ] as const;
 
 function MatIcon({ kind, large = false }: { kind: "pdf" | "img" | "pp"; large?: boolean }) {
   const map = { pdf: [FileText, large ? "bg-accent-soft text-accent" : "bg-accent text-white"], img: [Camera, large ? "bg-sky-100 text-sky-600" : "bg-sky-500 text-white"], pp: [BookOpen, large ? "bg-emerald-100 text-emerald-600" : "bg-emerald-500 text-white"] } as const;
   const [Icon, cls] = map[kind];
   return <span className={cn("grid shrink-0 place-items-center", large ? "size-9 rounded-[11px]" : "size-6 rounded-[7px] shadow-sm", cls)}><Icon className={large ? "size-4" : "size-3.5"} /></span>;
+}
+
+const ACT_ICON: Record<string, typeof Zap> = { Reading: BookOpen, "Quick 5": Zap, Flashcards: Layers, Worksheet: ClipboardList, Cloze: ListChecks, "Explain aloud": Mic, Comprehension: MessageCircle, Interactive: Dumbbell, "Vocab recall": Layers };
+
+function MiniRing({ pct, done, children }: { pct: number; done?: boolean; children?: React.ReactNode }) {
+  const r = 20, c = 2 * Math.PI * r;
+  return (
+    <span className="relative grid size-12 shrink-0 place-items-center">
+      <svg viewBox="0 0 48 48" className="absolute inset-0 -rotate-90"><circle cx="24" cy="24" r={r} fill="none" stroke="var(--color-muted)" strokeWidth="4" /><circle cx="24" cy="24" r={r} fill="none" stroke={done ? "#10b981" : "var(--color-accent)"} strokeWidth="4" strokeLinecap="round" strokeDasharray={`${pct * c} ${c}`} /></svg>
+      <span className="relative text-muted-foreground">{children}</span>
+    </span>
+  );
+}
+
+function PlanChips({ plan, done, status }: { plan: readonly string[]; done: number; status: string }) {
+  const items = plan.length > 6 ? [...plan.slice(0, 5), `+${plan.length - 5}`] : plan;
+  return (
+    <div className="mt-1.5 flex flex-wrap items-center gap-1">
+      {items.map((a, i) => {
+        const isDone = i < done || status === "done"; const cur = i === done && status !== "done"; const over = i === 5 && plan.length > 6;
+        return <span key={i} className={cn("inline-flex h-[20px] items-center gap-1 rounded-md px-1.5 text-[11px] font-semibold", over ? "text-faint" : isDone ? "bg-emerald-50 text-emerald-700" : cur ? "bg-accent text-white" : "bg-muted text-muted-foreground")}>{isDone && !over && <Check className="size-3" />}{a}</span>;
+      })}
+    </div>
+  );
+}
+
+function Spark({ v }: { v: readonly number[] }) {
+  if (v.length < 2) return <span className="grid h-10 w-[88px] shrink-0 place-items-center rounded-lg bg-muted text-[11px] font-semibold text-faint">Not started</span>;
+  const w = 88, h = 40, pts = v.map((y, i) => [4 + (i / (v.length - 1)) * (w - 8), h - 4 - ((y - 40) / 60) * (h - 8)] as const);
+  const d = pts.map((p, i) => `${i ? "L" : "M"}${p[0]},${p[1]}`).join(" ");
+  const last = pts[pts.length - 1];
+  return (
+    <svg width={w} height={h} className="shrink-0"><path d={`${d} L${last[0]},${h} L${pts[0][0]},${h} Z`} fill="var(--color-accent)" opacity=".12" /><path d={d} fill="none" stroke="var(--color-accent)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" /><circle cx={last[0]} cy={last[1]} r="3" fill="var(--color-accent)" /></svg>
+  );
+}
+
+function Stack({ kind }: { kind: "pdf" | "img" | "pp" }) {
+  const tint = { pdf: "bg-accent-soft", img: "bg-sky-50", pp: "bg-emerald-50" }[kind];
+  return (
+    <span className={cn("relative block h-14 w-14 shrink-0 rounded-lg", tint)}>
+      <span className="absolute left-4 top-1.5 h-10 w-8 rotate-[8deg] rounded-[3px] border border-border bg-white" />
+      <span className="absolute left-2.5 top-2 h-10 w-8 rotate-[-4deg] rounded-[3px] border border-border bg-white px-1 py-1.5"><span className="block h-[3px] w-5 rounded bg-neutral-300" /><span className="mt-1 block h-[2px] w-4 rounded bg-neutral-200" /><span className="mt-0.5 block h-[2px] w-5 rounded bg-neutral-200" /><span className="mt-1 block h-2.5 w-3 rounded-[2px] bg-neutral-200" /></span>
+    </span>
+  );
 }
 
 /** Tiny card showing the session's next question. */
@@ -56,8 +100,8 @@ function Thumb({ src, kind }: { src: string; kind: "pdf" | "img" | "pp" }) {
   );
 }
 
-export default async function LearnPreview({ searchParams }: { searchParams: Promise<{ all?: string }> }) {
-  const { all } = await searchParams;
+export default async function LearnPreview({ searchParams }: { searchParams: Promise<{ all?: string; rows?: string }> }) {
+  const { all, rows = "ring" } = await searchParams;
   const expanded = all === "1";
   const shown = expanded ? MATERIALS : MATERIALS.slice(0, 3);
   return (
@@ -104,14 +148,24 @@ export default async function LearnPreview({ searchParams }: { searchParams: Pro
               const pct = s.done / s.total;
               return (
                 <div key={s.title} className="flex items-center gap-3.5 px-4 py-3">
-                  <QPreview label={s.status === "done" ? "Debrief" : s.next} q={s.q} kind={s.kind2} />
+                  {rows === "ring" && <MiniRing pct={pct} done={s.status === "done"}>{(() => { const I = s.status === "done" ? Check : ACT_ICON[s.next.split(" · ")[0]] ?? Zap; return <I className={cn("size-4", s.status === "done" && "text-emerald-600")} />; })()}</MiniRing>}
+                  {rows === "trend" && <Spark v={s.scores} />}
+                  {rows === "tile" && <span className={cn("grid size-12 shrink-0 place-items-center rounded-xl text-[14px] font-bold", { pdf: "bg-accent-soft text-accent", img: "bg-sky-50 text-sky-600", pp: "bg-emerald-50 text-emerald-600" }[s.kind])}>{s.topic}</span>}
+                  {rows === "stack" && <Stack kind={s.kind} />}
+                  {rows === "preview" && <QPreview label={s.status === "done" ? "Debrief" : s.next} q={s.q} kind={s.kind2} />}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2"><span className="truncate text-[14px] font-semibold">{s.title}</span>{s.status === "done" && <span className="rounded-md bg-emerald-50 px-1.5 py-0.5 text-[11px] font-semibold text-emerald-700">Done</span>}{s.status === "new" && <span className="rounded-md bg-accent-soft px-1.5 py-0.5 text-[11px] font-semibold text-accent">New</span>}</div>
-                    <div className="truncate text-[12px] text-faint">{s.ws} · {s.meta}</div>
-                    <div className="mt-2 flex items-center gap-1">{Array.from({ length: Math.min(s.total, 10) }, (_, i) => { const d = Math.round((i / Math.min(s.total, 10)) * s.total); return <span key={i} className={cn("h-1.5 w-4 rounded-full", d < s.done ? (s.status === "done" ? "bg-emerald-500" : "bg-accent") : d === s.done && s.status !== "done" ? "bg-accent/40 ring-2 ring-accent/30" : "bg-muted")} />; })}<span className="ml-1.5 whitespace-nowrap text-[11.5px] font-semibold text-muted-foreground">{s.done}/{s.total} · {Math.round(pct * 100)}%</span></div>
+                    <div className="truncate text-[12px] text-faint">{s.ws} · {s.meta}{rows === "stack" && <> · {s.when}</>}</div>
+                    {(rows === "ring" || rows === "chips") && <PlanChips plan={s.plan} done={s.done} status={s.status} />}
+                    {rows === "trend" && <div className="mt-1.5 text-[12px] text-muted-foreground">{s.scores.length > 1 ? <>{s.scores[0]}% → <span className="font-semibold text-accent">{s.scores[s.scores.length - 1]}%</span> · {s.done}/{s.total} activities</> : <>{s.done}/{s.total} activities</>}</div>}
+                    {(rows === "tile" || rows === "preview") && <div className="mt-2 flex items-center gap-1">{Array.from({ length: Math.min(s.total, 10) }, (_, i) => { const d = Math.round((i / Math.min(s.total, 10)) * s.total); return <span key={i} className={cn("h-1.5 w-4 rounded-full", d < s.done ? (s.status === "done" ? "bg-emerald-500" : "bg-accent") : d === s.done && s.status !== "done" ? "bg-accent/40 ring-2 ring-accent/30" : "bg-muted")} />; })}<span className="ml-1.5 whitespace-nowrap text-[11.5px] font-semibold text-muted-foreground">{s.done}/{s.total} · {Math.round(pct * 100)}%</span></div>}
                   </div>
-                  <div className="w-20 shrink-0 text-right text-[12px] text-faint">{s.when}</div>
-                  <span className={cn("inline-flex h-8 w-[108px] shrink-0 items-center justify-center rounded-[9px] text-[12.5px] font-semibold", s.status === "active" ? "bg-accent text-white" : "border border-border")}>{s.status === "active" ? "Continue" : s.status === "new" ? "Start" : "View debrief"}</span>
+                  {rows === "stack" ? (
+                    <><span className="shrink-0 text-[13px] text-muted-foreground">{s.done}/{s.total} activities</span><span className="w-[88px] shrink-0 text-right text-[13px] font-semibold">{s.scores.length ? `Score ${s.scores[s.scores.length - 1]}%` : "—"}</span><MoreVertical className="size-4 shrink-0 text-faint" /></>
+                  ) : (
+                  <><div className="w-20 shrink-0 text-right text-[12px] text-faint">{s.when}</div>
+                  <span className={cn("inline-flex h-8 w-[108px] shrink-0 items-center justify-center rounded-[9px] text-[12.5px] font-semibold", s.status === "active" ? "bg-accent text-white" : "border border-border")}>{s.status === "active" ? "Continue" : s.status === "new" ? "Start" : "View debrief"}</span></>
+                  )}
                 </div>
               );
             })}
