@@ -1,0 +1,16 @@
+export const T = {
+  violet: "#7c3aed",
+  violetDark: "#5b21b6",
+  lavender: "#e1cdf7",
+  lavenderLight: "#ede9fe",
+  grey: "#f4f4f6",
+  border: "#e8e8ec",
+  text: "#111114",
+  text2: "#4b4b55",
+  text3: "#8a8a96",
+  red: "#dc2626",
+  green: "#16a34a",
+  orange: "#f0994c",
+  blue: "#3b82f6",
+  sky: "#0ea5e9",
+} as const;

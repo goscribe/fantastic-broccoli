@@ -1,0 +1,19 @@
+/* Scoped tokens for the redesign preview (RevisionDojo-like: white, violet, grey cards). */
+.design-root {
+  --background: #ffffff;
+  --card: #ffffff;
+  --muted: #f4f4f6;
+  --muted-foreground: #6b6b76;
+  --faint: #9a9aa6;
+  --accent: #7c3aed;
+  --accent-dim: #6d28d9;
+  --accent-soft: #ede9fe;
+  --border: #e8e8ec;
+  --border-strong: #d9d9df;
+  --ring: #7c3aed;
+  --lavender: #e1cdf7;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-sans);
+  letter-spacing: -0.005em;
+}
+.design-root h1, .design-root h2 { letter-spacing: -0.025em; }
