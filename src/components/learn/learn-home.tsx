@@ -24,6 +24,7 @@ import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { fetchStudySessions, fetchActivityCalendar } from "@/lib/api/study";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { startWorkspaceFromUploads } from "@/lib/start-from-uploads";
+import { fetchUploadPreviews } from "@/lib/api/materials";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { onTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
@@ -136,6 +137,7 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
   const [folders, setFolders] = useState<Folder[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [points, setPoints] = useState<DailyActivityPoint[]>([]);
+  const [previews, setPreviews] = useState<Record<string, string>>({});
   const [editing, setEditing] = useState<EditTarget | null>(null);
   const [deleting, setDeleting] = useState<DeleteTarget | null>(null);
   const [membersFor, setMembersFor] = useState<string | null>(null);
@@ -212,6 +214,25 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
     [workspaces],
   );
   const shown = expanded ? materials : materials.slice(0, 3);
+
+  useEffect(() => {
+    const wsIds = Array.from(new Set(shown.map(({ w }) => w.id))).filter((id) => !shown.some(({ m, w }) => w.id === id && m.id in previews));
+    if (wsIds.length === 0) return;
+    let cancelled = false;
+    Promise.all(wsIds.map((id) => fetchUploadPreviews(id).catch(() => [])))
+      .then((lists) => {
+        if (cancelled) return;
+        setPreviews((prev) => {
+          const next = { ...prev };
+          for (const { id, url } of lists.flat()) next[id] = url ?? "";
+          return next;
+        });
+      });
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shown.map(({ m }) => m.id).join(",")]);
   const recent = sessions.slice(0, 6);
   const suggested = sessions.find((s) => s.status === "active" && !s.generating);
   const todayIdx = (new Date().getDay() + 6) % 7;
@@ -318,7 +339,7 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
           {shown.map(({ m, w }) => (
             <div key={m.id} className="flex flex-col rounded-2xl border border-border bg-card p-3">
               <Link href={`/workspace/${w.id}/materials`}>
-                <MaterialThumb m={m} />
+                <MaterialThumb m={{ ...m, preview: m.preview ?? (previews[m.id] || undefined) }} />
               </Link>
               <div className="mt-3 truncate px-0.5 text-[14.5px] font-semibold">{m.title}</div>
               <div className="truncate px-0.5 text-[12px] text-faint">

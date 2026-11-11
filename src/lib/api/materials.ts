@@ -220,3 +220,14 @@ export async function reanalyzeFile(
 ): Promise<void> {
   await rpc("workspace.reanalyzeFile", "mutation", { workspaceId, fileId });
 }
+
+/** One preview image URL per upload in a workspace (signed, 24h); null when nothing has been extracted yet. */
+export async function fetchUploadPreviews(
+  workspaceId: string,
+): Promise<{ id: string; url: string | null }[]> {
+  return rpc<{ id: string; url: string | null }[]>(
+    "workspace.getUploadPreviews",
+    "query",
+    { workspaceId },
+  );
+}
