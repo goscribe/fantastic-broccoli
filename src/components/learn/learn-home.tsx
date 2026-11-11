@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -30,6 +30,19 @@ import { toastError } from "@/lib/toast";
 import { cn, formatRelativeDate } from "@/lib/utils";
 import { Donut, Ring, WeekBars } from "@/components/design/charts";
 import type { Folder, Material, StudySession, Workspace } from "@/types";
+import type { DailyActivityPoint } from "@/lib/api/study";
+import { FolderCard } from "@/components/workspace/folder-card";
+import { WorkspaceCard } from "@/components/workspace/workspace-card";
+import { StudyCalendar } from "@/components/workspace/study-calendar";
+import { CreateResourceDialog, NewWorkspaceMenu } from "@/components/workspace/create-dialog";
+import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
+import {
+  DeleteResourceDialog,
+  EditResourceDialog,
+  type DeleteTarget,
+  type EditTarget,
+} from "@/components/workspace/resource-actions";
+import { Skeleton } from "@/components/ui/skeleton";
 import "@/app/design/design.css";
 
 const ACTIVITY_LABEL: Record<string, string> = {
@@ -120,6 +133,13 @@ export function LearnHome() {
   const router = useRouter();
   const { user } = useAuthUser();
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
+  const [folders, setFolders] = useState<Folder[]>([]);
+  const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
+  const [points, setPoints] = useState<DailyActivityPoint[]>([]);
+  const [editing, setEditing] = useState<EditTarget | null>(null);
+  const [deleting, setDeleting] = useState<DeleteTarget | null>(null);
+  const [membersFor, setMembersFor] = useState<string | null>(null);
+  const [creating, setCreating] = useState<"workspace" | "folder" | null>(null);
   const [sessions, setSessions] = useState<StudySession[]>([]);
   const [due, setDue] = useState<number | null>(null);
   const [days, setDays] = useState<number[]>([]);
@@ -129,10 +149,12 @@ export function LearnHome() {
   const [uploading, setUploading] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    const load = () =>
+  const load = useCallback(
+    () =>
       fetchWorkspaceTree()
         .then(async (tree) => {
+          setFolders(tree.folders);
+          setRootWorkspaces(tree.rootWorkspaces);
           const ws = flatten(tree.folders, tree.rootWorkspaces);
           setWorkspaces(ws);
           const lists = await Promise.all(ws.map((w) => fetchStudySessions(w.id).catch(() => [] as StudySession[])));
@@ -143,12 +165,17 @@ export function LearnHome() {
           );
         })
         .catch(() => {})
-        .finally(() => setLoading(false));
-    load();
+        .finally(() => setLoading(false)),
+    [],
+  );
+
+  useEffect(() => {
+    void load();
     fetchDueReview().then((r) => setDue(r.total)).catch(() => setDue(0));
     fetchActivityCalendar()
-      .then((points) => {
-        const byDate = new Map(points.map((p) => [p.date.slice(0, 10), p.count]));
+      .then((pts) => {
+        setPoints(pts);
+        const byDate = new Map(pts.map((p) => [p.date.slice(0, 10), p.count]));
         const out: number[] = [];
         const d = new Date();
         d.setDate(d.getDate() - d.getDay() + (d.getDay() === 0 ? -6 : 1)); // Monday
@@ -159,8 +186,21 @@ export function LearnHome() {
         setDays(out);
       })
       .catch(() => setDays([]));
-    return onTreeChanged(load);
-  }, []);
+    return onTreeChanged(() => void load());
+  }, [load]);
+
+  const openWorkspaceCreate = (choice: "workspace" | "bot") => {
+    if (choice === "bot") {
+      router.push("/study-bot");
+      return;
+    }
+    setCreating("workspace");
+  };
+  const wsActions = (ws: Workspace) => ({
+    onRename: () => setEditing({ kind: "workspace", id: ws.id, name: ws.title, description: ws.description, icon: ws.icon }),
+    onMembers: () => setMembersFor(ws.id),
+    onDelete: () => setDeleting({ kind: "workspace", id: ws.id, name: ws.title }),
+  });
 
   const wsById = useMemo(() => new Map(workspaces.map((w) => [w.id, w])), [workspaces]);
   const materials = useMemo(
@@ -306,6 +346,18 @@ export function LearnHome() {
           <h2 className="text-[16px] font-semibold">Recent study sessions</h2>
         </div>
         <div className="divide-y divide-border rounded-2xl border border-border bg-card">
+          {loading &&
+            recent.length === 0 &&
+            [0, 1, 2].map((i) => (
+              <div key={i} className="flex items-center gap-3.5 px-4 py-3">
+                <Skeleton className="size-[60px] rounded-full" />
+                <div className="flex-1 space-y-2">
+                  <Skeleton className="h-4 w-1/2" />
+                  <Skeleton className="h-3 w-1/3" />
+                </div>
+                <Skeleton className="h-8 w-[108px] rounded-[9px]" />
+              </div>
+            ))}
           {!loading && recent.length === 0 && (
             <div className="flex items-center gap-4 px-5 py-6 text-[14px] text-muted-foreground">
               <Image src="/design/cat2-book.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
@@ -347,9 +399,57 @@ export function LearnHome() {
             );
           })}
         </div>
+
+        <div className="flex items-center justify-between">
+          <h2 className="text-[16px] font-semibold">
+            Workspaces <span className="font-medium text-faint">· {workspaces.length}</span>
+          </h2>
+          <div className="flex items-center gap-2">
+            <button type="button" onClick={() => setCreating("folder")} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-3 text-[12.5px] font-semibold hover:bg-accent-soft">
+              <Plus className="size-3.5" />
+              New folder
+            </button>
+            <NewWorkspaceMenu align="right" onSelect={openWorkspaceCreate}>
+              {(toggle) => (
+                <button type="button" onClick={toggle} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-accent px-3 text-[12.5px] font-semibold text-white hover:bg-accent-dim">
+                  <Plus className="size-3.5" />
+                  New workspace
+                </button>
+              )}
+            </NewWorkspaceMenu>
+          </div>
+        </div>
+        {loading && workspaces.length === 0 && (
+          <div className="grid gap-3.5 sm:grid-cols-2 md:grid-cols-3">
+            {[0, 1, 2].map((i) => <Skeleton key={i} className="h-[140px] rounded-2xl" />)}
+          </div>
+        )}
+        {folders.length > 0 && (
+          <div className="grid gap-3.5 sm:grid-cols-2 md:grid-cols-3">
+            {folders.map((f) => (
+              <FolderCard
+                key={f.id}
+                folder={f}
+                onClick={(id) => router.push(`/folder/${id}`)}
+                actions={{
+                  onRename: () => setEditing({ kind: "folder", id: f.id, name: f.name, color: f.color }),
+                  onDelete: () => setDeleting({ kind: "folder", id: f.id, name: f.name }),
+                }}
+              />
+            ))}
+          </div>
+        )}
+        {rootWorkspaces.length > 0 && (
+          <div className="grid gap-3.5 sm:grid-cols-2 md:grid-cols-3">
+            {rootWorkspaces.map((ws) => (
+              <WorkspaceCard key={ws.id} workspace={ws} onClick={(id) => router.push(`/workspace/${id}`)} actions={wsActions(ws)} />
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="flex w-full shrink-0 flex-col gap-3.5 lg:w-[300px]">
+        {loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
         {suggested && (() => {
           const { done, total, next } = sessionProgress(suggested);
           return (
@@ -401,7 +501,29 @@ export function LearnHome() {
             <WeekBars mins={days.length ? days : [0, 0, 0, 0, 0, 0, 0]} goal={3} today={todayIdx} accent="var(--accent)" />
           </div>
         </div>
+        <div className="rounded-2xl border border-border p-[18px]">
+          <div className="flex items-baseline justify-between">
+            <span className="text-[16px] font-semibold">Study calendar</span>
+            <span className="text-[12px] text-faint">{points.filter((p) => p.count > 0).length} active days</span>
+          </div>
+          <StudyCalendar dailyActivity={points} className="mt-3" />
+        </div>
       </div>
+
+      {editing && <EditResourceDialog target={editing} onClose={() => setEditing(null)} onSaved={() => void load()} />}
+      {deleting && <DeleteResourceDialog target={deleting} onClose={() => setDeleting(null)} onDeleted={() => void load()} />}
+      <WorkspaceMembersDialog workspaceId={membersFor} open={membersFor !== null} onClose={() => setMembersFor(null)} />
+      {creating && (
+        <CreateResourceDialog
+          kind={creating}
+          onClose={() => setCreating(null)}
+          onCreated={(workspaceId) => {
+            setCreating(null);
+            void load();
+            if (workspaceId) router.push(`/workspace/${workspaceId}`);
+          }}
+        />
+      )}
     </div>
   );
 }

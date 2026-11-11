@@ -1,5 +1,6 @@
 /* Scoped tokens for the redesign preview (RevisionDojo-like: white, violet, grey cards). */
-.design-root {
+.design-root,
+html.new-ui {
   --background: #ffffff;
   --card: #ffffff;
   --muted: #f4f4f6;
@@ -16,7 +17,7 @@
   font-family: var(--font-sans);
   letter-spacing: -0.005em;
 }
-.design-root h1, .design-root h2 { letter-spacing: -0.025em; }
+.design-root h1, .design-root h2, html.new-ui h1, html.new-ui h2 { letter-spacing: -0.025em; }
 
 @keyframes design-pop { 0% { transform: scale(.4) translateX(var(--tx, 0)); opacity: 0 } 60% { transform: scale(1.12) translateX(var(--tx, 0)); opacity: 1 } 100% { transform: scale(1) translateX(var(--tx, 0)) } }
 @keyframes design-bounce { 0% { transform: translateY(24px); opacity: 0 } 55% { transform: translateY(-6px); opacity: 1 } 100% { transform: translateY(0) } }
@@ -35,3 +36,5 @@
 .cat-float { animation: design-float 4s ease-in-out infinite; }
 .cat-peek { animation: design-peek .6s cubic-bezier(.22,1,.36,1) both; }
 .cat-cheer { animation: design-cheer .9s cubic-bezier(.34,1.56,.64,1) both; transform-origin: 50% 100%; }
+
+html.new-ui body { background: #ffffff; }

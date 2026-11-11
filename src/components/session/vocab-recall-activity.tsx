@@ -1,5 +1,6 @@
 "use client";
 
+import { useNewUi } from "@/lib/new-ui";
 import { useState } from "react";
 import { VocabRecallContent } from "@/types";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
@@ -44,6 +45,7 @@ export function VocabRecallActivity({
   onComplete,
 }: VocabRecallActivityProps) {
   const { t } = useI18n();
+  const newUi = useNewUi();
   const restored = restoredDraft(activityId, draft) as Partial<VocabDraft> | undefined;
   const allIndices = content.terms.map((_, i) => i);
   const [queue, setQueue] = useState<number[]>(
@@ -126,7 +128,7 @@ export function VocabRecallActivity({
     <div>
       <ConfettiBurst burst={burst} />
       <div className="flex items-center justify-between mb-5">
-        <p className="text-sm font-semibold">
+        <p className={newUi ? "text-[15px] font-semibold text-muted-foreground" : "text-sm font-semibold"}>
           {t("session.defineFromMemory")}
         </p>
         <div className="flex items-center gap-3">
@@ -142,7 +144,7 @@ export function VocabRecallActivity({
         </div>
       </div>
 
-      <p className="text-xl font-bold tracking-tight mb-4">
+      <p className={newUi ? "mb-5 text-[23px] font-bold leading-[1.3]" : "text-xl font-bold tracking-tight mb-4"}>
         <MathText text={term.term} />
       </p>
 
@@ -152,7 +154,7 @@ export function VocabRecallActivity({
         placeholder={t("session.definitionPlaceholder")}
         rows={3}
         disabled={revealed}
-        className="w-full rounded-xl border border-border bg-background p-3.5 text-sm text-foreground focus:outline-none focus:border-accent/50 placeholder:text-faint resize-none"
+        className={newUi ? "w-full rounded-2xl border border-border bg-card px-4 py-3.5 text-[15px] text-foreground focus:outline-none focus:border-accent" : "w-full rounded-xl border border-border bg-background p-3.5 text-sm text-foreground focus:outline-none focus:border-accent/50 placeholder:text-faint resize-none"}
       />
 
       {!revealed ? (
@@ -167,11 +169,11 @@ export function VocabRecallActivity({
         </div>
       ) : (
         <div className="mt-4 space-y-4">
-          <div className="rounded-xl bg-accent-soft border border-accent/20 p-4">
-            <p className="text-xs font-semibold text-accent mb-1.5">
+          <div className={newUi ? "rounded-2xl bg-accent-soft p-5" : "rounded-xl bg-accent-soft border border-accent/20 p-4"}>
+            <p className={newUi ? "mb-1.5 text-[12px] font-semibold text-accent-dim" : "text-xs font-semibold text-accent mb-1.5"}>
               {t("session.modelDefinition")}
             </p>
-            <p className="text-sm text-foreground">
+            <p className={newUi ? "text-[16px] leading-relaxed text-foreground" : "text-sm text-foreground"}>
               <MathText text={term.definition} />
             </p>
           </div>
@@ -184,7 +186,7 @@ export function VocabRecallActivity({
                 type="button"
                 onClick={() => mark(false)}
                 className={cn(
-                  "flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-xs font-semibold",
+                  newUi ? "flex h-10 items-center gap-1.5 rounded-xl border border-border px-4 text-[13.5px] font-semibold" : "flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-xs font-semibold",
                   "text-muted-foreground hover:border-rose hover:text-rose",
                 )}
               >
@@ -194,7 +196,7 @@ export function VocabRecallActivity({
               <button
                 type="button"
                 onClick={() => mark(true)}
-                className="flex items-center gap-1.5 rounded-full bg-accent px-3.5 py-1.5 text-xs font-semibold text-accent-foreground hover:bg-accent-dim"
+                className={newUi ? "flex h-10 items-center gap-1.5 rounded-xl bg-accent px-4 text-[13.5px] font-semibold text-white hover:bg-accent-dim" : "flex items-center gap-1.5 rounded-full bg-accent px-3.5 py-1.5 text-xs font-semibold text-accent-foreground hover:bg-accent-dim"}
               >
                 <Check className="h-3.5 w-3.5" />
                 {t("session.gotIt")}

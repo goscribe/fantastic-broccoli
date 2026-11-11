@@ -45,6 +45,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [creating, setCreating] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [treeLoading, setTreeLoading] = useState(true);
 
   useEffect(() => {
     const load = () =>
@@ -53,7 +54,8 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           setFolders(tree.folders);
           setRootWorkspaces(tree.rootWorkspaces);
         })
-        .catch(() => {});
+        .catch(() => {})
+        .finally(() => setTreeLoading(false));
     load();
     return onTreeChanged(load);
   }, []);
@@ -103,6 +105,9 @@ export function NewShell({ children }: { children: React.ReactNode }) {
         </nav>
         <div className="mt-6 px-3 text-[11px] font-semibold text-faint">My workspaces</div>
         <div className="mt-1.5 flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto">
+          {treeLoading &&
+            workspaces.length === 0 &&
+            [0, 1, 2, 3].map((i) => <span key={i} className="mx-3 my-2 block h-4 animate-pulse rounded bg-muted" style={{ width: `${70 - i * 10}%` }} />)}
           {workspaces.map((w) => {
             const on = pathname.startsWith(`/workspace/${w.id}`);
             return (

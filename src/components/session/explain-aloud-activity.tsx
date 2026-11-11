@@ -1,5 +1,6 @@
 "use client";
 
+import { useNewUi } from "@/lib/new-ui";
 import { useEffect, useRef, useState } from "react";
 import { ExplainAloudContent } from "@/types";
 import { MathText } from "@/components/ui/markdown-text";
@@ -24,6 +25,7 @@ export function ExplainAloudActivity({
   onComplete,
 }: ExplainAloudActivityProps) {
   const { t } = useI18n();
+  const newUi = useNewUi();
   const [phase, setPhase] = useState<"idle" | "recording" | "review">("idle");
   const [seconds, setSeconds] = useState(0);
   const [covered, setCovered] = useState<boolean[]>(
@@ -42,7 +44,7 @@ export function ExplainAloudActivity({
 
   return (
     <div>
-      <p className="text-sm font-semibold mb-1.5">
+      <p className={newUi ? "mb-1.5 text-[15px] font-semibold text-muted-foreground" : "text-sm font-semibold mb-1.5"}>
         {t("session.explainTitle")}
       </p>
       <p className="text-xs text-muted-foreground mb-5">
@@ -50,7 +52,7 @@ export function ExplainAloudActivity({
       </p>
 
       <Surface muted className="p-4 mb-5">
-        <p className="text-sm text-foreground font-medium">
+        <p className={newUi ? "text-[20px] font-bold leading-[1.35] text-foreground" : "text-sm text-foreground font-medium"}>
           <MathText text={content.prompt} />
         </p>
       </Surface>

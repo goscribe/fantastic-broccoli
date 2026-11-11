@@ -1,0 +1,2 @@
+/** Runs in <head> before paint: mirrors the new-UI flag onto <html class="new-ui"> so tokens/fonts don't flash. */
+export const newUiInitScript = `(function(){try{var q=new URLSearchParams(location.search).get("ui");if(q==="new")localStorage.setItem("scribe.newUi","1");if(q==="old")localStorage.removeItem("scribe.newUi");var on=${process.env.NEXT_PUBLIC_NEW_UI === "1" ? "true" : "false"}||localStorage.getItem("scribe.newUi")==="1";if(on)document.documentElement.classList.add("new-ui");}catch(e){}})();`;
