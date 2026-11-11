@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowRight, Camera, FileText, Link2, Upload } from "lucide-react";
-import { Generating } from "@/components/design/generating";
+import { BuildBar, WarmupCard } from "@/components/design/generating";
 import { cn } from "@/lib/utils";
 
 const STEPS = ["Goal", "Subjects", "First material", "Building"] as const;
@@ -55,10 +55,10 @@ export default async function OnboardingPreview({ searchParams }: { searchParams
             <p className="mt-4 text-center text-[13px] text-muted-foreground">No notes handy? <span className="font-semibold text-accent">Try our Biology sample</span> — it takes 2 minutes.</p>
           </>
         )}
-        {n === 4 && <Generating index={2} title="Bio notes · Topic 3" />}
+        {n === 4 && <><BuildBar index={2} title="Bio notes · Topic 3" /><div className="mt-4"><WarmupCard hero /></div></>}
       </div>
 
-      {n === 4 ? <button className="mt-4 text-[13px] font-semibold text-accent">Answer a warm-up question while you wait</button> : (
+      {n === 4 ? <p className="mt-4 text-[13px] text-faint">We’ll tell you the moment it’s ready.</p> : (
         <div className="mt-5 flex w-full max-w-[560px] items-center justify-between">
           <span className="text-[13px] font-semibold text-faint">{n > 1 ? "Back" : ""}</span>
           <span className="inline-flex h-11 items-center gap-2 rounded-xl bg-accent px-6 text-[14px] font-semibold text-white">{n === 3 ? "Build my first session" : "Continue"}<ArrowRight className="size-4" /></span>
