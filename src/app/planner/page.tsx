@@ -3,9 +3,10 @@
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { disconnectCalendar, fetchPlannerWeek, updateStudyPlan, type StudyPlan } from "@/lib/api/planner";
+import { disconnectCalendar, fetchPlannerWeek,
+  replanWeek, updateStudyPlan, type StudyPlan } from "@/lib/api/planner";
 import { apiUrl } from "@/lib/api/config";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -44,6 +45,7 @@ function Planner() {
   const qc = useQueryClient();
   const [weekStart, setWeekStart] = useState<string | undefined>();
   const [editing, setEditing] = useState(false);
+  const [replanning, setReplanning] = useState(false);
   const { data, isLoading } = useQuery({ queryKey: ["planner", weekStart], queryFn: () => fetchPlannerWeek(weekStart) });
   const params = useSearchParams();
   useEffect(() => {
@@ -75,10 +77,26 @@ function Planner() {
               {!data ? <Skeleton className="h-8 w-80" /> : data.plannedMinutes > 0 ? `${fmtMin(data.plannedMinutes)} planned this week` : "Nothing planned yet this week"}
             </h1>
           </div>
+          <div className="flex items-center gap-2">
+          <button
+            type="button"
+            disabled={replanning || !data}
+            onClick={() => {
+              setReplanning(true);
+              replanWeek(data?.weekStart)
+                .then(() => qc.invalidateQueries({ queryKey: ["planner"] }))
+                .catch((err) => toastError(err, "Couldn't replan"))
+                .finally(() => setReplanning(false));
+            }}
+            className="inline-flex h-10 items-center gap-1.5 rounded-xl bg-accent px-3.5 text-[13.5px] font-semibold text-white hover:brightness-95 disabled:opacity-60"
+          >
+            <Sparkles className={cn("size-4", replanning && "animate-pulse")} /> {replanning ? "Planning…" : "Replan"}
+          </button>
           <div className="flex items-center gap-1 rounded-xl border border-border p-1">
             <button type="button" aria-label="Previous week" onClick={() => setWeekStart(addDays(data?.weekStart ?? today, -7))} className="grid size-8 place-items-center rounded-lg hover:bg-muted"><ChevronLeft className="size-4" /></button>
             <button type="button" onClick={() => setWeekStart(undefined)} className="h-8 rounded-lg px-3 text-[13px] font-semibold hover:bg-muted">This week</button>
             <button type="button" aria-label="Next week" onClick={() => setWeekStart(addDays(data?.weekStart ?? today, 7))} className="grid size-8 place-items-center rounded-lg hover:bg-muted"><ChevronRight className="size-4" /></button>
+          </div>
           </div>
         </div>
 
@@ -117,11 +135,11 @@ function Planner() {
                     type="button"
                     onClick={() => router.push(s.kind === "review" ? "/flashcards/review" : `/workspace/${s.workspaceId}/session/${s.sessionId}`)}
                     className="absolute inset-x-1.5 overflow-hidden rounded-lg border-l-[3px] border-accent bg-accent-soft px-2 py-1 text-left text-[11.5px] font-semibold leading-tight text-accent-dim hover:brightness-95"
-                    style={{ top: y(s.start) + 1, height: Math.max(22, y(s.end) - y(s.start) - 2) }}
-                    title={s.title}
+                    style={{ top: y(s.start) + 1, height: Math.max(40, y(s.end) - y(s.start) - 2) }}
+                    title={s.why ? `${s.title} — ${s.why}` : s.title}
                   >
-                    {s.title}
-                    <span className="block font-medium opacity-70">{s.end - s.start} min</span>
+                    <span className="block truncate">{s.title}</span>
+                    <span className="block font-medium opacity-70">{hhmm(s.start)}–{hhmm(s.end)}{s.why ? ` · ${s.why}` : ""}</span>
                   </button>
                 ))}
               </div>
@@ -131,7 +149,7 @@ function Planner() {
         <div className="flex flex-wrap items-center gap-4 text-[12.5px] text-faint">
           <span className="inline-flex items-center gap-1.5"><span className="size-2.5 rounded-[3px] bg-accent" /> Scribe sessions</span>
           <span className="inline-flex items-center gap-1.5"><span className="size-2.5 rounded-[3px] bg-muted" /> Busy, from your calendar</span>
-          <span>Sessions re-flow as you study and when your plan changes.</span>
+          <span>{data?.summary || "Blocks are planned around your calendar, exam date and what's left in each session."}</span>
         </div>
       </div>
 
