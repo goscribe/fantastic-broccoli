@@ -1,5 +1,6 @@
 "use client";
 
+import { useNewUi } from "@/lib/new-ui";
 import { useState } from "react";
 import { ClozeContent } from "@/types";
 import { markClozeAnswers } from "@/lib/api/study";
@@ -35,6 +36,7 @@ export function ClozeActivity({
   onComplete,
 }: ClozeActivityProps) {
   const { t } = useI18n();
+  const newUi = useNewUi();
   const passage = content.passages[0];
   const parts = passage.textWithBlanks.split(/_{2,}|\{\{blank\}\}/g);
   const restored = restoredDraft(activityId, draft) as
@@ -102,11 +104,11 @@ export function ClozeActivity({
   return (
     <div>
       <ConfettiBurst burst={burst} />
-      <p className="text-sm font-semibold mb-4">
+      <p className={newUi ? "mb-5 text-[15px] font-semibold text-muted-foreground" : "text-sm font-semibold mb-4"}>
         {t("session.clozeInstruction")}
       </p>
 
-      <p className="text-[15px] leading-8 text-foreground">
+      <p className={newUi ? "text-[17px] leading-[2.3] text-foreground" : "text-[15px] leading-8 text-foreground"}>
         {parts.map((part, i) => (
           <span key={i}>
             <InlineMarkdown text={part} />
@@ -121,12 +123,14 @@ export function ClozeActivity({
                 }}
                 disabled={marking || (checked && isCorrect(i))}
                 className={cn(
-                  "mx-1 inline-block w-32 rounded-lg border px-2.5 py-1 text-sm text-center font-medium focus:outline-none",
+                  newUi ? "mx-1 inline-block w-36 rounded-xl border-2 px-3 py-1.5 text-[15px] text-center font-semibold focus:outline-none" : "mx-1 inline-block w-32 rounded-lg border px-2.5 py-1 text-sm text-center font-medium focus:outline-none",
                   checked
                     ? isCorrect(i)
                       ? "border-accent bg-accent-soft text-accent-dim"
                       : "border-rose bg-rose/5 text-rose"
-                    : "border-border-strong bg-background focus:border-accent/60",
+                    : newUi
+                      ? "border-dashed border-border bg-card focus:border-accent"
+                      : "border-border-strong bg-background focus:border-accent/60",
                 )}
               />
             )}
@@ -136,11 +140,11 @@ export function ClozeActivity({
 
       {checked && !allCorrect && (
         <div className="mt-4 space-y-1.5">
-          <p className="text-xs text-muted-foreground">
+          <p className={newUi ? "text-[13.5px] font-semibold text-muted-foreground" : "text-xs text-muted-foreground"}>
             {correctCount}/{passage.answers.length} {t("session.clozeFixHint")}
           </p>
           {feedbacks.map((r, i) => (
-            <p key={i} className="text-xs text-rose">
+            <p key={i} className={newUi ? "text-[13.5px] text-rose" : "text-xs text-rose"}>
               <MathText text={r.feedback} />
             </p>
           ))}

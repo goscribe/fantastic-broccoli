@@ -1,5 +1,6 @@
 "use client";
 
+import { useNewUi } from "@/lib/new-ui";
 import { useState } from "react";
 import { ComprehensionContent, ComprehensionEvaluation } from "@/types";
 import { submitComprehensionRewrite } from "@/lib/api/study";
@@ -27,6 +28,7 @@ export function ComprehensionActivity({
   onComplete,
 }: ComprehensionActivityProps) {
   const { t } = useI18n();
+  const newUi = useNewUi();
   const restored = restoredDraft(activityId, draft) as
     | Partial<{ userText: string; showOriginal: boolean }>
     | undefined;
@@ -116,7 +118,7 @@ export function ComprehensionActivity({
             value={userText}
             onChange={(e) => setUserText(e.target.value)}
             placeholder={t("session.compPlaceholder")}
-            className="w-full h-32 rounded-lg border border-border bg-card p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
+            className={newUi ? "w-full h-40 rounded-2xl border border-border bg-card px-4 py-3.5 text-[15px] resize-none focus:outline-none focus:border-accent" : "w-full h-32 rounded-lg border border-border bg-card p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"}
           />
 
           <div className="flex items-center justify-end gap-3">
@@ -180,7 +182,7 @@ export function ComprehensionActivity({
           </summary>
           <div className="mt-2 space-y-2">
             {userRewrites.map((rewrite, i) => (
-              <p key={i} className="p-2 rounded-lg border border-border bg-muted/50 italic">
+              <p key={i} className={newUi ? "rounded-xl bg-accent-soft/50 px-4 py-3 text-[13.5px] italic" : "p-2 rounded-lg border border-border bg-muted/50 italic"}>
                 &ldquo;{rewrite}&rdquo;
               </p>
             ))}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useNewUi } from "@/lib/new-ui";
 import { useState } from "react";
 import { FlashcardContent } from "@/types";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
@@ -29,6 +30,7 @@ export function FlashcardActivity({
   onComplete,
 }: FlashcardActivityProps) {
   const { t } = useI18n();
+  const newUi = useNewUi();
   const restored = restoredDraft(activityId, draft) as
     | Partial<{ currentIndex: number; results: (boolean | null)[] }>
     | undefined;
@@ -132,7 +134,7 @@ export function FlashcardActivity({
                 <p className="text-xs text-muted-foreground mb-2">
                   {t("session.answer")}
                 </p>
-                <p className="text-sm leading-relaxed">
+                <p className={newUi ? "text-[17px] leading-relaxed" : "text-sm leading-relaxed"}>
                   <MarkdownText text={card.back} />
                 </p>
               </>
