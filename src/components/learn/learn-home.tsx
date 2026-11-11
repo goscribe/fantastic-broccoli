@@ -21,13 +21,14 @@ import {
 } from "lucide-react";
 import { useAuthUser } from "@/lib/api/auth";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
-import { fetchStudySessions, fetchActivityCalendar } from "@/lib/api/study";
-import { fetchDueReview } from "@/lib/api/study-session";
-import { startWorkspaceFromUploads } from "@/lib/start-from-uploads";
-import { fetchUploadPreviews } from "@/lib/api/materials";
+import { fetchStudySessions, fetchActivityCalendar, createStudySession } from "@/lib/api/study";
+import { fetchDueReview, studySessionApi } from "@/lib/api/study-session";
+import { startWorkspaceFromUploads, workspaceTitleFromFiles, fileBasename } from "@/lib/start-from-uploads";
+import { fetchUploadPreviews, uploadFiles, analyzeFiles } from "@/lib/api/materials";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
-import { onTreeChanged } from "@/lib/tree-events";
+import { onTreeChanged, emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
+import { toast } from "sonner";
 import { cn, formatRelativeDate } from "@/lib/utils";
 import { Donut, Ring, WeekBars } from "@/components/design/charts";
 import type { Folder, Material, StudySession, Workspace } from "@/types";
@@ -51,10 +52,10 @@ const ACTIVITY_LABEL: Record<string, string> = {
 const activityLabel = (type: string) => ACTIVITY_LABEL[type.toLowerCase()] ?? type;
 
 const ONE_OFFS = [
-  ["Quiz me", Dumbbell, (t: string) => `Quiz me on ${t}`],
-  ["Flashcards", Layers, (t: string) => `Make flashcards from ${t}`],
-  ["Worksheet", ClipboardList, (t: string) => `Give me a worksheet on ${t}`],
-  ["Explain", MessageCircle, (t: string) => `Explain the key ideas in ${t}`],
+  ["Quiz me", Dumbbell],
+  ["Flashcards", Layers],
+  ["Worksheet", ClipboardList],
+  ["Explain", MessageCircle],
 ] as const;
 
 function flatten(folders: Folder[], root: Workspace[]): Workspace[] {
@@ -147,6 +148,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   const [expanded, setExpanded] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [busyOneOff, setBusyOneOff] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const load = useCallback(
@@ -210,7 +212,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         if (cancelled) return;
         setPreviews((prev) => {
           const next = { ...prev };
-          for (const { id, url } of lists.flat()) next[id] = url ?? "";
+          for (const row of lists.flat()) if (row) next[row.id] = row.url ?? "";
           return next;
         });
       });
@@ -237,15 +239,70 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     router.push(chatHref(defaultWorkspace.id, q.trim()));
   };
 
+  /** Uploads go into the workspace you're looking at (or your latest one); a brand-new learner gets a workspace made for them. */
   const onFiles = async (files: FileList | null) => {
     if (!files?.length) return;
+    const list = Array.from(files);
     setUploading(true);
     try {
-      const { workspaceId, session } = await startWorkspaceFromUploads(Array.from(files));
-      router.push(session ? `/workspace/${workspaceId}/session/${session.id}` : `/workspace/${workspaceId}`);
+      const target = workspaceId ?? defaultWorkspace?.id;
+      if (!target) {
+        const created = await startWorkspaceFromUploads(list);
+        router.push(created.session ? `/workspace/${created.workspaceId}/session/${created.session.id}` : `/workspace/${created.workspaceId}`);
+        return;
+      }
+      const fileIds = await uploadFiles(target, list);
+      analyzeFiles(target, fileIds).catch(() => {});
+      emitTreeChanged();
+      if (workspaceId) {
+        toast.success(`Added ${list.length} file${list.length === 1 ? "" : "s"} — analysing now`);
+        setUploading(false);
+        return;
+      }
+      const session = await createStudySession({
+        workspaceId: target,
+        title: workspaceTitleFromFiles(list),
+        depth: "moderate",
+        durationMinutes: 30,
+        topics: list.map((f) => fileBasename(f.name)).filter(Boolean).join(", ").slice(0, 2000) || undefined,
+      });
+      router.push(session ? `/workspace/${target}/session/${session.id}` : `/workspace/${target}`);
     } catch (e) {
       toastError(e, "Upload failed");
       setUploading(false);
+    }
+  };
+
+  /** One-offs do the thing: a quick quiz or worksheet session, a generated deck, or a Copilot explanation. */
+  const runOneOff = async (label: string, m: Material, w: Workspace) => {
+    if (label === "Explain") {
+      router.push(chatHref(w.id, `Explain the key ideas in ${m.title}`));
+      return;
+    }
+    setBusyOneOff(`${m.id}:${label}`);
+    try {
+      if (label === "Flashcards") {
+        const { artifact } = await studySessionApi.generateFlashcards({ workspaceId: w.id, prompt: `Flashcards from ${m.title}`, title: m.title, numCards: 12 });
+        router.push(`/flashcards/${artifact.id}?ws=${w.id}`);
+        return;
+      }
+      const session = await createStudySession(
+        label === "Quiz me"
+          ? { workspaceId: w.id, title: `Quiz: ${m.title}`, depth: "light", durationMinutes: 10, topics: m.title, quickStart: true }
+          : {
+              workspaceId: w.id,
+              title: `Worksheet: ${m.title}`,
+              depth: "light",
+              durationMinutes: 15,
+              topics: m.title,
+              description: `Worksheet practice on ${m.title}: written-answer questions with mark schemes.`,
+            },
+      );
+      if (!session) throw new Error("Could not start");
+      router.push(`/workspace/${w.id}/session/${session.id}`);
+    } catch (e) {
+      toastError(e, "Couldn't start that");
+      setBusyOneOff(null);
     }
   };
 
@@ -324,7 +381,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           {loading && materials.length === 0 && [0, 1, 2].map((i) => <div key={i} className="h-[232px] animate-pulse rounded-2xl bg-muted" />)}
           {shown.map(({ m, w }) => (
             <div key={m.id} className="flex flex-col rounded-2xl border border-border bg-card p-3">
-              <Link href={`/workspace/${w.id}/materials`}>
+              <Link href={`/workspace/${w.id}`}>
                 <MaterialThumb m={{ ...m, preview: m.preview ?? (previews[m.id] || undefined) }} />
               </Link>
               <div className="mt-3 truncate px-0.5 text-[14.5px] font-semibold">{m.title}</div>
@@ -332,12 +389,21 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                 {w.title} · {formatRelativeDate(m.updatedAt)}
               </div>
               <div className="mt-2.5 grid grid-cols-2 gap-1.5">
-                {ONE_OFFS.map(([label, Icon, q]) => (
-                  <Link key={label} href={chatHref(w.id, q(m.title))} className="inline-flex h-8 items-center justify-center gap-1.5 rounded-[9px] bg-muted px-2 text-[12px] font-semibold hover:bg-accent-soft hover:text-accent">
-                    <Icon className="size-3.5" />
-                    {label}
-                  </Link>
-                ))}
+                {ONE_OFFS.map(([label, Icon]) => {
+                  const busy = busyOneOff === `${m.id}:${label}`;
+                  return (
+                    <button
+                      key={label}
+                      type="button"
+                      disabled={!!busyOneOff}
+                      onClick={() => void runOneOff(label, m, w)}
+                      className="inline-flex h-8 items-center justify-center gap-1.5 rounded-[9px] bg-muted px-2 text-[12px] font-semibold hover:bg-accent-soft hover:text-accent disabled:opacity-60"
+                    >
+                      {busy ? <Loader2 className="size-3.5 animate-spin" /> : <Icon className="size-3.5" />}
+                      {label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           ))}

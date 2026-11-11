@@ -6,7 +6,7 @@ import { MathText } from "@/components/ui/markdown-text";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   fetchDeckProgress,
   startFlashcardTest,
@@ -113,11 +113,42 @@ function FlashcardDeck() {
     onError: (err) => toastError(err, t("fc.startSessionError")),
   });
 
+  const qc = useQueryClient();
+  const deckEmpty = !item || !deck || deck.entries.length === 0;
+  const { data: gen } = useQuery({
+    queryKey: ["fc-generating", workspaceId],
+    queryFn: () => studySessionApi.flashcardsGenerating(workspaceId),
+    enabled: !!workspaceId && deckEmpty,
+    refetchInterval: (q) => (q.state.data?.generating ? 2500 : false),
+  });
+  const wasGenerating = useRef(false);
+  useEffect(() => {
+    if (gen?.generating) wasGenerating.current = true;
+    else if (wasGenerating.current) {
+      wasGenerating.current = false;
+      void qc.invalidateQueries({ queryKey: ["bank", workspaceId] });
+    }
+  }, [gen?.generating, qc, workspaceId]);
+
   if (isLoading) {
     return (
       <div className="mx-auto w-full max-w-3xl space-y-4">
         <Skeleton className="h-8 w-40" />
         <Skeleton className="h-[380px] w-full rounded-3xl" />
+      </div>
+    );
+  }
+
+  if (deckEmpty && gen?.generating) {
+    return (
+      <div className="mx-auto w-full max-w-3xl">
+        <div className="rounded-3xl border border-border bg-card p-10 text-center">
+          <Image src="/design/cat2-book.png" alt="" width={120} height={110} unoptimized className="mx-auto h-[110px] w-auto animate-pulse" />
+          <div className="mt-4 text-[18px] font-bold">Building your deck…</div>
+          <p className="mt-1 text-[14px] text-muted-foreground">
+            {gen.metadata?.quantity ? `${gen.metadata.quantity} cards` : "A set of cards"} from your material — about a minute. This page updates by itself.
+          </p>
+        </div>
       </div>
     );
   }

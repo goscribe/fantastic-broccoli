@@ -216,6 +216,7 @@ export default function SettingsPage() {
   const [photoError, setPhotoError] = useState<string | null>(null);
   const [tokens, setTokens] = useState<TokenOverview | null>(null);
   const [ledger, setLedger] = useState<TokenLedgerEntry[] | null>(null);
+  const [tokensFailed, setTokensFailed] = useState(false);
   const [showAllLedger, setShowAllLedger] = useState(false);
   const [savingLanguage, setSavingLanguage] = useState(false);
   const [languageSaved, setLanguageSaved] = useState(false);
@@ -234,10 +235,10 @@ export default function SettingsPage() {
       .catch(() => {});
     fetchTokenOverview()
       .then(setTokens)
-      .catch(() => {});
+      .catch(() => setTokensFailed(true));
     fetchTokenHistory(100)
       .then(setLedger)
-      .catch(() => {});
+      .catch(() => setLedger([]));
   }, []);
 
   const handleSave = async () => {
@@ -629,7 +630,7 @@ export default function SettingsPage() {
                     </span>
                   </p>
                 ) : (
-                  <Skeleton className="mt-2 h-7 w-24" />
+                  tokensFailed ? <p className="mt-2 text-[14px] text-faint">Unavailable right now</p> : <Skeleton className="mt-2 h-7 w-24" />
                 )}
                 {tokens && (
                   <p className="mt-1 text-[12px] text-muted-foreground">
@@ -687,7 +688,7 @@ export default function SettingsPage() {
                   ))}
                 </ul>
               ) : (
-                <Skeleton className="mt-2 h-24 w-full" />
+                tokensFailed ? <p className="mt-2 text-[13px] text-faint">Unavailable right now</p> : <Skeleton className="mt-2 h-24 w-full" />
               )}
             </div>
           </div>
