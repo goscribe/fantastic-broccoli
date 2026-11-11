@@ -2,13 +2,13 @@
 
 import { useCallback, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowUp, ChevronLeft, ChevronRight, Link2, MessageCircle, Mic } from "lucide-react";
+import { ArrowUp, ChevronLeft, ChevronRight, MessageCircle, Mic } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type CopilotMsg = { who: "u" | "a"; text: React.ReactNode };
 
 /** Docked side panel: open by default, drag its left edge to resize, chevron collapses it to a slim tab. */
-export function CopilotPanel({ attached, messages = [], defaultWidth = 380, defaultOpen = true }: { attached: string; messages?: CopilotMsg[]; defaultWidth?: number; defaultOpen?: boolean }) {
+export function CopilotPanel({ messages = [], defaultWidth = 380, defaultOpen = true }: { messages?: CopilotMsg[]; defaultWidth?: number; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   const [width, setWidth] = useState(defaultWidth);
   const drag = useRef<{ x: number; w: number } | null>(null);
@@ -39,9 +39,8 @@ export function CopilotPanel({ attached, messages = [], defaultWidth = 380, defa
       <div onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} className="absolute inset-y-0 -left-[7px] flex w-[14px] cursor-col-resize items-center justify-center" aria-label="Resize Copilot"><span className="h-11 w-1 rounded-sm bg-border" /></div>
       <div className="flex items-center gap-2.5 border-b border-border py-3.5 pl-[22px] pr-[18px]">
         <span className="grid size-[30px] place-items-center rounded-[9px] bg-accent-soft text-accent"><MessageCircle className="size-4" /></span>
-        <div><div className="text-[14px] font-bold">Copilot</div><div className="text-[11.5px] text-faint">Sees this question + your notes</div></div>
-        <span className="ml-auto flex items-center gap-1.5 rounded-[7px] bg-accent-soft px-2 py-1 text-[11px] font-semibold text-accent-dim"><Link2 className="size-3" />{attached}</span>
-        <button onClick={() => setOpen(false)} className="ml-1.5 grid size-7 place-items-center rounded-lg border border-border text-muted-foreground hover:bg-muted" aria-label="Collapse Copilot"><ChevronRight className="size-3.5" /></button>
+        <div className="text-[14px] font-bold">Copilot</div>
+        <button onClick={() => setOpen(false)} className="ml-auto grid size-7 place-items-center rounded-lg border border-border text-muted-foreground hover:bg-muted" aria-label="Collapse Copilot"><ChevronRight className="size-3.5" /></button>
       </div>
       {messages.length ? (
         <div className="flex flex-1 flex-col gap-2.5 overflow-hidden py-4 pl-[22px] pr-[18px]">
@@ -55,7 +54,7 @@ export function CopilotPanel({ attached, messages = [], defaultWidth = 380, defa
         <div className="flex flex-1 flex-col items-center justify-center gap-2 px-[22px] text-center">
           <Image src="/design/cat-pencil.png" alt="" width={72} height={72} className="h-[72px] w-auto" />
           <div className="text-[14px] font-semibold">Stuck? Ask me anything.</div>
-          <p className="text-[12.5px] leading-relaxed text-faint">I can see this question, your notes and your past answers. I won&apos;t give the answer away before you try.</p>
+          <p className="text-[12.5px] leading-relaxed text-faint">I can see what you&apos;re working on and your notes. One chat for the whole session.</p>
         </div>
       )}
       <div className="flex gap-1.5 overflow-hidden pb-2 pl-[22px] pr-[18px]">

@@ -2,12 +2,13 @@ import Image from "next/image";
 import { Check, Eraser, Highlighter, Mic, PenLine, Redo2, Trash2, Undo2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CopilotPanel, type CopilotMsg } from "./copilot-panel";
+import { MarkTip } from "./feedback";
 import { FlameIcon, Ring } from "./charts";
 import { T } from "./tokens";
 
 export type QType = "mcq" | "text" | "sketch";
 
-export function QuestionFrame({ tag, attached, qi, qn, question, children, bottom, messages, panelOpen = true }: { tag: string; attached: string; qi: number; qn: number; question: string; children: React.ReactNode; bottom: React.ReactNode; messages?: CopilotMsg[]; panelOpen?: boolean }) {
+export function QuestionFrame({ tag, qi, qn, question, children, bottom, messages, panelOpen = true }: { tag: string; qi: number; qn: number; question: string; children: React.ReactNode; bottom: React.ReactNode; messages?: CopilotMsg[]; panelOpen?: boolean }) {
   return (
     <div className="flex h-dvh min-h-[800px] overflow-hidden">
       <div className="relative flex min-w-0 flex-1 flex-col px-10">
@@ -24,31 +25,15 @@ export function QuestionFrame({ tag, attached, qi, qn, question, children, botto
         </div>
         {bottom}
       </div>
-      <CopilotPanel attached={attached} messages={messages} defaultOpen={panelOpen} />
+      <CopilotPanel messages={messages} defaultOpen={panelOpen} />
     </div>
   );
 }
 
-const btn = "inline-flex h-11 items-center justify-center rounded-xl px-5 text-[15px] font-semibold whitespace-nowrap";
-export const btnPrimary = cn(btn, "bg-accent text-white hover:bg-accent-dim px-7");
-export const btnOutline = cn(btn, "border border-border bg-white hover:bg-muted");
+export { btnPrimary, btnOutline, FeedbackCard } from "./feedback";
 
 export function BottomBar({ left, right }: { left: React.ReactNode; right: React.ReactNode }) {
   return <div className="-mx-10 flex items-center justify-between border-t border-border bg-white px-10 pb-6 pt-[18px]">{left}{right}</div>;
-}
-
-export function FeedbackBar({ ok, title, message, secondary, primary }: { ok: boolean; title: string; message: string; secondary: string; primary: string }) {
-  return (
-    <div className={cn("-mx-10 border-t px-10 pb-6 pt-5", ok ? "border-emerald-200 bg-emerald-50" : "border-rose-200 bg-rose-50")}>
-      <div className="flex items-center justify-between gap-6">
-        <div className="flex min-w-0 items-center gap-3.5">
-          <span className={cn("grid size-11 shrink-0 place-items-center rounded-full text-white", ok ? "bg-emerald-600" : "bg-red-600")}>{ok ? <Check className="size-[22px]" /> : <X className="size-[22px]" />}</span>
-          <div className="min-w-0"><div className={cn("text-[17px] font-bold", ok ? "text-emerald-800" : "text-rose-800")}>{title}</div><div className="mt-0.5 text-[14px] text-muted-foreground">{message}</div></div>
-        </div>
-        <div className="flex shrink-0 gap-2.5"><button className={btnOutline}>{secondary}</button><button className={btnPrimary}>{primary}</button></div>
-      </div>
-    </div>
-  );
 }
 
 export function Option({ n, children, state }: { n: number; children: React.ReactNode; state?: "sel" | "ok" | "bad" }) {
@@ -70,20 +55,24 @@ export const MARKSCHEME = [
 ];
 export const ANSWER = "Water potential is the tendency of water to move from one place to another. Pure water has a water potential of 0 kPa and adding solute makes it more negative. Water moves from higher (less negative) to lower (more negative) water potential, so in the 0.3 M solution water moves out of the cell by osmosis and the cell shrinks.";
 
-function highlight(text: string, quotes: string[]): React.ReactNode[] {
+function highlight(text: string, marks: { id: string; text: string; quote: string }[], openFirst: boolean): React.ReactNode[] {
   let nodes: React.ReactNode[] = [text];
-  quotes.forEach((q, qi) => {
-    nodes = nodes.flatMap((n) => {
+  marks.forEach((m, qi) => {
+    nodes = nodes.flatMap((n): React.ReactNode[] => {
       if (typeof n !== "string") return [n];
-      const bits = n.split(q);
-      return bits.flatMap((s, i) => i < bits.length - 1 ? [s, <mark key={`${qi}-${i}`} className="rounded-[3px] bg-emerald-100 text-inherit">{q}</mark>] : [s]);
+      const bits = n.split(m.quote);
+      return bits.flatMap((s, i): React.ReactNode[] => i < bits.length - 1 ? [s, (
+        <MarkTip key={`${qi}-${i}`} label={m.id} detail={m.text} defaultOpen={openFirst && qi === 0}>
+          <mark className="cursor-help rounded-[3px] bg-emerald-100 text-inherit decoration-emerald-500 underline-offset-2 hover:underline">{m.quote}</mark>
+        </MarkTip>
+      )] : [s]);
     });
   });
   return nodes;
 }
 
-export function AnswerBox({ marked }: { marked: boolean }) {
-  const body = marked ? highlight(ANSWER, MARKSCHEME.flatMap((m) => (m.ok && m.quote ? [m.quote] : []))) : ANSWER;
+export function AnswerBox({ marked, showTip = false }: { marked: boolean; showTip?: boolean }) {
+  const body = marked ? highlight(ANSWER, MARKSCHEME.flatMap((m) => (m.ok && m.quote ? [{ id: m.id, text: m.text, quote: m.quote }] : [])), showTip) : ANSWER;
   return (
     <div>
       <div className={cn("min-h-[150px] rounded-[14px] border bg-white p-4 text-[14px] leading-[1.55]", marked ? "border-border" : "border-accent")}>{body}{!marked && <span className="ml-0.5 inline-block h-[18px] w-0.5 -translate-y-[3px] bg-accent align-middle" />}</div>

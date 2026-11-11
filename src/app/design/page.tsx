@@ -9,6 +9,17 @@ const SCREENS: [string, string][] = [
   ["Question · text · marked", "/design/question?type=text&state=fb"],
   ["Question · sketch", "/design/question?type=sketch"],
   ["Question · sketch · marked", "/design/question?type=sketch&state=fb"],
+  ["Question · text · marked, tooltip open", "/design/question?type=text&state=fb&tip=1"],
+  ["Question · numeric", "/design/question?type=numeric"],
+  ["Question · numeric · marked", "/design/question?type=numeric&state=fb"],
+  ["Question · true / false · marked", "/design/question?type=truefalse&state=fb"],
+  ["Question · matching", "/design/question?type=matching"],
+  ["Question · matching · marked", "/design/question?type=matching&state=fb"],
+  ["Cloze · fill in the blank", "/design/question?type=cloze"],
+  ["Cloze · marked", "/design/question?type=cloze&state=fb"],
+  ["Comprehension · summary · marked", "/design/question?type=summary&state=fb"],
+  ["Explain aloud · recording", "/design/question?type=explain"],
+  ["Explain aloud · marked", "/design/question?type=explain&state=fb"],
   ["Lesson step complete (mobile)", "/design/complete"],
 ];
 
