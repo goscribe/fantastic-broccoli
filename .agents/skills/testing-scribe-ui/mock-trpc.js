@@ -284,12 +284,14 @@ function handleProc(path, input) {
                       options: ["path function", "state function", "rate constant", "unit of heat"],
                       correctIndex: 1,
                       explanation: "Enthalpy depends only on the state, not the route.",
+                      sourceFlashcardId: "fc-1",
                     },
                     {
                       question: "Bond enthalpy values are…",
                       options: ["exact", "averages over many molecules"],
                       correctIndex: 1,
                       explanation: "Tabulated bond enthalpies are averages, so results are approximate.",
+                      sourceFlashcardId: "fc-2",
                     },
                   ],
                 } },
@@ -299,8 +301,8 @@ function handleProc(path, input) {
                 content: {
                   type: "vocab_recall",
                   terms: [
-                    { term: "Enthalpy", definition: "Heat content of a system at constant pressure.", result: null },
-                    { term: "State function", definition: "A property that depends only on the current state.", result: null },
+                    { term: "Enthalpy", definition: "Heat content of a system at constant pressure.", result: null, flashcardId: "fc-3" },
+                    { term: "State function", definition: "A property that depends only on the current state.", result: null, flashcardId: "fc-4" },
                   ],
                 } },
               { ...act(3, "Cloze: fill the blanks", ""),
@@ -351,8 +353,35 @@ function handleProc(path, input) {
         ];
       return [];
     }
-    case "flashcards.getDueReview":
-      return { total: 0, cards: [] };
+    case "flashcards.getDueReview": {
+      // DUE=1: three SRS cards due in ws-1 (home "Your review is ready" strip).
+      if (process.env.DUE !== "1") return { total: 0, cards: [] };
+      const due = [
+        ["Define enthalpy", "Heat content at constant pressure"],
+        ["Hess's law", "Total ΔH is path-independent"],
+        ["Bond enthalpy values are…", "Averages over many molecules"],
+      ].map(([front, back], i) => ({
+        flashcardId: `fc-${i + 1}`,
+        front,
+        back,
+        deckId: "deck-1",
+        deckTitle: "Energetics key terms",
+        workspaceId: "ws-1",
+        progress: { timesStudied: 1, masteryLevel: 1, nextReviewAt: null },
+      }));
+      return { total: due.length, cards: due };
+    }
+    case "studySession.getDebrief":
+      return {
+        headline: "Solid start on energetics",
+        summary: "You nailed Hess's law; bond enthalpy averages need another look.",
+        sections: [
+          {
+            heading: "What stuck",
+            bullets: [{ text: "Enthalpy is a state function", detail: "So reaction routes don't change ΔH." }],
+          },
+        ],
+      };
     case "podcast.listEpisodes":
       return [];
     case "podcast.getAvailableVoices":

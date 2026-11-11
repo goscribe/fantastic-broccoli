@@ -19,6 +19,8 @@ import {
 } from "@/lib/api/study";
 import { recordFlashcardAttempt } from "@/lib/api/study-session";
 import { reportStudySessionConversion } from "@/lib/gtag";
+import { SESSION_COMPLETED_EVENT } from "@/lib/api/account";
+import { ctaProps, track } from "@/lib/analytics";
 import {
   StudySession,
   SessionActivity,
@@ -49,6 +51,7 @@ import { SessionDebrief } from "@/components/session/session-debrief";
 import { MathText } from "@/components/ui/markdown-text";
 import { ContentRepairProvider } from "@/components/content/content-repair";
 import { Button } from "@/components/ui/button";
+import { TrackedButton } from "@/components/ui/tracked-button";
 import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
@@ -153,6 +156,36 @@ export default function SessionDetailPage() {
   // No study features until the plan actually exists.
   const planReady = !!session && !generating && !planFailed;
 
+  // Report plan ("pack") generation outcomes this page actually watched.
+  const generationWatchedSince = useRef<number | null>(null);
+  useEffect(() => {
+    if (!session) return;
+    if (generating && !planError) {
+      generationWatchedSince.current ??= Date.now();
+      return;
+    }
+    if (generationWatchedSince.current === null) return;
+    const props = {
+      session_id: sessionId,
+      workspace_id: workspaceId,
+      quick_start: session.quickStart ?? false,
+      watched_s: Math.round((Date.now() - generationWatchedSince.current) / 1000),
+    };
+    generationWatchedSince.current = null;
+    if (planFailed) {
+      track("pack_generation_failed", {
+        ...props,
+        stage: "plan",
+        error: planError ?? (session.status === "failed" ? "failed" : "empty_plan"),
+      });
+    } else {
+      track("pack_generation_completed", {
+        ...props,
+        activity_count: session.activities.length,
+      });
+    }
+  }, [session, generating, planFailed, planError, sessionId, workspaceId]);
+
   // Deep links (e.g. reminder emails) can point at a specific activity.
   const searchParams = useSearchParams();
   const linkedActivityId = searchParams.get("activity");
@@ -221,6 +254,66 @@ export default function SessionDetailPage() {
     [activities, activeActivityId],
   );
   const activeItemIndex = useCurrentItemIndex(activeActivity?.id);
+
+  // study_session_started once the plan is playable; study_session_ended when
+  // the debrief is shown (completed) or the learner leaves mid-plan (exited).
+  const sessionStats = useRef({ completed: 0, skipped: 0, total: 0 });
+  const sessionTracking = useRef<{ startedAt: number; ended: boolean } | null>(
+    null,
+  );
+  const pendingExit = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    sessionStats.current = {
+      completed: activities.filter((a) => a.status === "completed").length,
+      skipped: activities.filter((a) => a.status === "skipped").length,
+      total: activities.length,
+    };
+  }, [activities]);
+  useEffect(() => {
+    if (!planReady || sessionTracking.current) return;
+    sessionTracking.current = { startedAt: Date.now(), ended: false };
+    const { completed, total } = sessionStats.current;
+    track("study_session_started", {
+      session_id: sessionId,
+      workspace_id: workspaceId,
+      activity_count: total,
+      completed_count: completed,
+      is_resume: completed > 0,
+      quick_start: session?.quickStart ?? false,
+      src: new URLSearchParams(window.location.search).get("src") ?? undefined,
+    });
+  }, [planReady, sessionId, workspaceId, session?.quickStart]);
+  useEffect(() => {
+    if (pendingExit.current) clearTimeout(pendingExit.current);
+    const end = (outcome: "completed" | "exited") => {
+      const tracking = sessionTracking.current;
+      if (!tracking || tracking.ended) return;
+      tracking.ended = true;
+      const { completed, skipped, total } = sessionStats.current;
+      track("study_session_ended", {
+        session_id: sessionId,
+        workspace_id: workspaceId,
+        outcome,
+        duration_s: Math.round((Date.now() - tracking.startedAt) / 1000),
+        completed_count: completed,
+        skipped_count: skipped,
+        activity_count: total,
+      });
+    };
+    const onCompleted = (e: Event) => {
+      const detail = (e as CustomEvent<{ sessionId?: string }>).detail;
+      if (detail?.sessionId === sessionId) end("completed");
+    };
+    const onPageHide = () => end("exited");
+    window.addEventListener(SESSION_COMPLETED_EVENT, onCompleted);
+    window.addEventListener("pagehide", onPageHide);
+    return () => {
+      window.removeEventListener(SESSION_COMPLETED_EVENT, onCompleted);
+      window.removeEventListener("pagehide", onPageHide);
+      // Deferred so a Strict Mode remount (which clears it) isn't an exit.
+      pendingExit.current = setTimeout(() => end("exited"), 0);
+    };
+  }, [sessionId, workspaceId]);
 
   // Mirror the active activity into the URL so a refresh or shared link
   // reopens the same section. history.replaceState avoids a navigation.
@@ -597,6 +690,7 @@ export default function SessionDetailPage() {
         <div className="px-4 sm:px-6 h-12 flex items-center gap-2 sm:gap-3">
           <button
             type="button"
+            {...ctaProps("session_header_back", "tertiary", "Back to workspace")}
             onClick={() => router.push(`/workspace/${workspaceId}`)}
             className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground shrink-0"
           >
@@ -617,6 +711,7 @@ export default function SessionDetailPage() {
               </span>
               <button
                 type="button"
+                {...ctaProps("session_toggle_notes", "tertiary", "Session notes")}
                 onClick={() => setShowComments(!showComments)}
                 className="relative p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
               >
@@ -651,7 +746,9 @@ export default function SessionDetailPage() {
                       {planError ?? t("session.planFailedBody")}
                     </p>
                     <div className="mt-5 flex items-center gap-2">
-                      <Button
+                      <TrackedButton
+                        ctaId="session_retry_generation"
+                        ctaPosition="primary"
                         size="sm"
                         disabled={retryPlan.isPending || deleteSession.isPending}
                         onClick={() => retryPlan.mutate()}
@@ -660,8 +757,10 @@ export default function SessionDetailPage() {
                           className={`mr-1.5 h-3.5 w-3.5 ${retryPlan.isPending ? "animate-spin" : ""}`}
                         />
                         {t("session.retryGeneration")}
-                      </Button>
-                      <Button
+                      </TrackedButton>
+                      <TrackedButton
+                        ctaId="session_delete_failed"
+                        ctaPosition="secondary"
                         size="sm"
                         variant="outline"
                         disabled={retryPlan.isPending || deleteSession.isPending}
@@ -669,14 +768,16 @@ export default function SessionDetailPage() {
                       >
                         <Trash2 className="mr-1.5 h-3.5 w-3.5" />
                         {t("session.deleteSession")}
-                      </Button>
-                      <Button
+                      </TrackedButton>
+                      <TrackedButton
+                        ctaId="session_failed_back_to_workspace"
+                        ctaPosition="tertiary"
                         size="sm"
                         variant="ghost"
                         onClick={() => router.push(`/workspace/${workspaceId}`)}
                       >
                         {t("session.backToWorkspace")}
-                      </Button>
+                      </TrackedButton>
                     </div>
                   </div>
                 ) : (
@@ -745,7 +846,9 @@ export default function SessionDetailPage() {
                   </p>
                 </div>
                 <div className="flex gap-2 shrink-0">
-                  <Button
+                  <TrackedButton
+                    ctaId="session_continue_plan"
+                    ctaPosition="primary"
                     size="sm"
                     onClick={() => {
                       setExtended(true);
@@ -754,14 +857,16 @@ export default function SessionDetailPage() {
                     }}
                   >
                     {t("session.continuePlan")}
-                  </Button>
-                  <Button
+                  </TrackedButton>
+                  <TrackedButton
+                    ctaId="session_finish_as_planned"
+                    ctaPosition="secondary"
                     size="sm"
                     variant="ghost"
                     onClick={() => setExtendDismissed(true)}
                   >
                     {t("session.finishAsPlanned")}
-                  </Button>
+                  </TrackedButton>
                 </div>
               </div>
             )}
@@ -793,7 +898,9 @@ export default function SessionDetailPage() {
                       <MathText text={activeActivity.title} />
                     </h2>
                   </div>
-                  <Button
+                  <TrackedButton
+                    ctaId="session_skip_activity"
+                    ctaPosition="tertiary"
                     variant="ghost"
                     size="sm"
                     onClick={() => goToNext(true)}
@@ -801,7 +908,7 @@ export default function SessionDetailPage() {
                   >
                     <SkipForward className="h-3 w-3 mr-1" />
                     {t("session.skip")}
-                  </Button>
+                  </TrackedButton>
                 </div>
 
                 <ContentRepairProvider
@@ -820,6 +927,9 @@ export default function SessionDetailPage() {
             ) : (
               <SessionDebrief
                 sessionId={sessionId}
+                workspaceId={workspaceId}
+                workspaceTitle={workspace.title}
+                activities={activities}
                 quickStart={session.quickStart}
                 onBack={() => router.push(`/workspace/${workspaceId}`)}
               />

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { setAnalyticsUser } from "@/lib/analytics";
 import { Sidebar } from "@/components/layout/sidebar";
 import { TopBar } from "@/components/layout/top-bar";
 import { isPublicPath, useAuthUser } from "@/lib/api/auth";
@@ -14,9 +15,13 @@ import { BILLING_PAUSED } from "@/lib/billing-paused";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { loading } = useAuthUser();
+  const { user, loading } = useAuthUser();
   const isSession = /^\/workspace\/[^/]+\/session\//.test(pathname);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    setAnalyticsUser(user?.id);
+  }, [user?.id]);
 
   if (isPublicPath(pathname) || pathname.startsWith("/admin")) {
     return <>{children}</>;

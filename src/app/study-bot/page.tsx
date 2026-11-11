@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArrowUp, FileText, Loader2, Paperclip, X } from "lucide-react";
 import { createWorkspace } from "@/lib/api/workspace";
 import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
+import { UploadFileInput } from "@/components/ui/upload-file-input";
 import { emitTreeChanged } from "@/lib/tree-events";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
@@ -48,7 +49,10 @@ export default function StudyBotPage() {
       emitTreeChanged();
 
       if (files.length > 0) {
-        const fileIds = await uploadFiles(id, files);
+        const fileIds = await uploadFiles(id, files, {
+          source: "study_bot",
+          method: "picker",
+        });
         // Analysis runs in the background; the chat can start meanwhile.
         analyzeFiles(id, fileIds).catch(() => {});
       }
@@ -130,9 +134,9 @@ export default function StudyBotPage() {
                 className="block w-full resize-none bg-transparent px-2 py-1.5 text-sm placeholder:text-faint focus:outline-none"
               />
               <div className="flex items-center justify-between pt-1">
-                <input
+                <UploadFileInput
                   ref={fileInputRef}
-                  type="file"
+                  uploadSource="study_bot"
                   multiple
                   accept="application/pdf,image/*,audio/*,video/*,.doc,.docx,.ppt,.pptx,.txt,.md"
                   className="hidden"
