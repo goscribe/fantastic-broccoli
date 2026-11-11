@@ -32,8 +32,7 @@ import { toast } from "sonner";
 import { cn, formatRelativeDate } from "@/lib/utils";
 import { Donut, Ring, WeekBars } from "@/components/design/charts";
 import type { Folder, Material, StudySession, Workspace } from "@/types";
-import type { DailyActivityPoint } from "@/lib/api/study";
-import { StudyCalendar } from "@/components/workspace/study-calendar";
+import { fetchPlannerWeek, type PlannerSlot } from "@/lib/api/planner";
 import { Skeleton } from "@/components/ui/skeleton";
 import "@/app/design/design.css";
 import { inputBoxClass, bareInputClass } from "@/components/ui/input";
@@ -49,6 +48,8 @@ const ACTIVITY_LABEL: Record<string, string> = {
   cloze: "Cloze",
   explain_aloud: "Explain aloud",
 };
+const DAY = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const hhmm = (m: number) => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
 const activityLabel = (type: string) => ACTIVITY_LABEL[type.toLowerCase()] ?? type;
 
 const ONE_OFFS = [
@@ -138,7 +139,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   const { user } = useAuthUser();
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [scopeTitle, setScopeTitle] = useState<string | null>(null);
-  const [points, setPoints] = useState<DailyActivityPoint[]>([]);
+  const [upNext, setUpNext] = useState<(PlannerSlot & { date: string })[] | null>(null);
   const [previews, setPreviews] = useState<Record<string, string>>({});
   const [sessions, setSessions] = useState<StudySession[]>([]);
   const [due, setDue] = useState<number | null>(null);
@@ -175,9 +176,14 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   useEffect(() => {
     void load();
     fetchDueReview().then((r) => setDue(r.total)).catch(() => setDue(0));
+    fetchPlannerWeek()
+      .then((w) => {
+        const today = new Date().toISOString().slice(0, 10);
+        setUpNext(w.days.filter((d) => d.date >= today).flatMap((d) => d.slots.map((s) => ({ ...s, date: d.date }))).slice(0, 3));
+      })
+      .catch(() => setUpNext([]));
     fetchActivityCalendar()
       .then((pts) => {
-        setPoints(pts);
         const byDate = new Map(pts.map((p) => [p.date.slice(0, 10), p.count]));
         const out: number[] = [];
         const d = new Date();
@@ -550,10 +556,32 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         </div>
         <div className="rounded-2xl border border-border p-[18px]">
           <div className="flex items-baseline justify-between">
-            <span className="text-[16px] font-semibold">Study calendar</span>
-            <span className="text-[12px] text-faint">{points.filter((p) => p.count > 0).length} active days</span>
+            <span className="text-[16px] font-semibold">Up next</span>
+            <Link href="/planner" className="text-[12px] font-semibold text-accent hover:underline">Open planner</Link>
           </div>
-          <StudyCalendar dailyActivity={points} className="mt-3" />
+          {upNext === null ? (
+            <div className="mt-3 space-y-2">{[0, 1, 2].map((i) => <div key={i} className="h-10 animate-pulse rounded-xl bg-muted" />)}</div>
+          ) : upNext.length === 0 ? (
+            <p className="mt-3 text-[13px] text-faint">Nothing planned yet — set a goal and study window in the planner and your week fills itself in.</p>
+          ) : (
+            <ul className="mt-3 space-y-2">
+              {upNext.map((s) => {
+                const d = new Date(`${s.date}T00:00:00Z`);
+                const isToday = s.date === new Date().toISOString().slice(0, 10);
+                const label = isToday ? "Today" : DAY[(d.getUTCDay() + 6) % 7];
+                const href = s.kind === "review" ? "/flashcards/review" : s.workspaceId && s.sessionId ? `/workspace/${s.workspaceId}/session/${s.sessionId}` : "/planner";
+                return (
+                  <li key={`${s.date}-${s.id}`}>
+                    <Link href={href} className="flex items-center gap-3 rounded-xl border border-border px-3 py-2 hover:bg-muted">
+                      <span className="w-[72px] shrink-0 text-[12px] font-semibold text-faint">{label} · {hhmm(s.start)}</span>
+                      <span className="min-w-0 flex-1 truncate text-[13.5px] font-semibold">{s.title}</span>
+                      <span className="shrink-0 text-[12px] text-faint">{s.end - s.start} min</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
           </>
         )}
