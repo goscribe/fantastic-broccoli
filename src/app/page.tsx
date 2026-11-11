@@ -224,7 +224,7 @@ export default function HomePage() {
         : t("misc.goodEvening");
 
   const newUi = useNewUi();
-  if (newUi && showOnboarding === false) return <LearnHome />;
+  if (newUi && showOnboarding !== true) return <LearnHome />;
 
   return (
     <div className="flex-1 flex flex-col">

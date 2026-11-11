@@ -24,6 +24,7 @@ import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { fetchStudySessions, fetchActivityCalendar } from "@/lib/api/study";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { startWorkspaceFromUploads } from "@/lib/start-from-uploads";
+import { fetchUploadPreviews } from "@/lib/api/materials";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { onTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
@@ -136,12 +137,14 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
   const [folders, setFolders] = useState<Folder[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [points, setPoints] = useState<DailyActivityPoint[]>([]);
+  const [previews, setPreviews] = useState<Record<string, string>>({});
   const [editing, setEditing] = useState<EditTarget | null>(null);
   const [deleting, setDeleting] = useState<DeleteTarget | null>(null);
   const [membersFor, setMembersFor] = useState<string | null>(null);
   const [creating, setCreating] = useState<"workspace" | "folder" | null>(null);
   const [sessions, setSessions] = useState<StudySession[]>([]);
   const [due, setDue] = useState<number | null>(null);
+  const [actLoading, setActLoading] = useState(true);
   const [days, setDays] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
@@ -186,7 +189,8 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
         }
         setDays(out);
       })
-      .catch(() => setDays([]));
+      .catch(() => setDays([]))
+      .finally(() => setActLoading(false));
     return onTreeChanged(() => void load());
   }, [load]);
 
@@ -212,6 +216,25 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
     [workspaces],
   );
   const shown = expanded ? materials : materials.slice(0, 3);
+
+  useEffect(() => {
+    const wsIds = Array.from(new Set(shown.map(({ w }) => w.id))).filter((id) => !shown.some(({ m, w }) => w.id === id && m.id in previews));
+    if (wsIds.length === 0) return;
+    let cancelled = false;
+    Promise.all(wsIds.map((id) => fetchUploadPreviews(id).catch(() => [])))
+      .then((lists) => {
+        if (cancelled) return;
+        setPreviews((prev) => {
+          const next = { ...prev };
+          for (const { id, url } of lists.flat()) next[id] = url ?? "";
+          return next;
+        });
+      });
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shown.map(({ m }) => m.id).join(",")]);
   const recent = sessions.slice(0, 6);
   const suggested = sessions.find((s) => s.status === "active" && !s.generating);
   const todayIdx = (new Date().getDay() + 6) % 7;
@@ -318,7 +341,7 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
           {shown.map(({ m, w }) => (
             <div key={m.id} className="flex flex-col rounded-2xl border border-border bg-card p-3">
               <Link href={`/workspace/${w.id}/materials`}>
-                <MaterialThumb m={m} />
+                <MaterialThumb m={{ ...m, preview: m.preview ?? (previews[m.id] || undefined) }} />
               </Link>
               <div className="mt-3 truncate px-0.5 text-[14.5px] font-semibold">{m.title}</div>
               <div className="truncate px-0.5 text-[12px] text-faint">
@@ -485,6 +508,15 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
           <div className="flex items-baseline justify-between">
             <span className="text-[16px] font-semibold">Due for review</span>
           </div>
+          {due === null ? (
+            <div className="mt-3 flex items-center gap-4">
+              <Skeleton className="size-[72px] shrink-0 rounded-full" />
+              <div className="flex flex-1 flex-col gap-2">
+                <Skeleton className="h-3.5 w-full" />
+                <Skeleton className="h-3.5 w-2/3" />
+              </div>
+            </div>
+          ) : (
           <div className="mt-3 flex items-center gap-4">
             <Donut parts={due ? [[1, "var(--accent)"]] : [[1, "var(--border)"]]}>
               <span className="text-[20px] font-bold leading-none">{due ?? "–"}</span>
@@ -493,10 +525,18 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
             </Donut>
             <div className="text-[13px] text-muted-foreground">{due ? `${due} flashcards are due today. About ${Math.max(1, Math.round(due / 3))} min.` : "Nothing due right now — nice."}</div>
           </div>
+          )}
           <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-xl text-[14px] font-semibold", due ? "bg-accent text-white" : "bg-muted")}>
             {due ? "Review now" : "Browse flashcards"}
           </Link>
         </div>
+        {actLoading ? (
+          <>
+            <Skeleton className="h-[132px] rounded-2xl" />
+            <Skeleton className="h-[300px] rounded-2xl" />
+          </>
+        ) : (
+          <>
         <div className="rounded-2xl border border-border p-[18px]">
           <div className="flex items-baseline justify-between">
             <span className="text-[16px] font-semibold">This week</span>
@@ -515,6 +555,8 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
           </div>
           <StudyCalendar dailyActivity={points} className="mt-3" />
         </div>
+          </>
+        )}
       </div>
 
       {editing && <EditResourceDialog target={editing} onClose={() => setEditing(null)} onSaved={() => void load()} />}
