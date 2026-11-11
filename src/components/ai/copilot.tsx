@@ -163,6 +163,7 @@ export function Copilot({
   useEffect(() => {
     if (!activeChat || loadedChats.current.has(activeChat)) return;
     loadedChats.current.add(activeChat);
+    setHydrating(true);
     getConversationMessages(workspaceId, activeChat)
       .then((history) => {
         const hydrated: ChatMessage[] = history.map((m) => ({
@@ -186,8 +187,10 @@ export function Copilot({
       })
       .catch(() => {
         loadedChats.current.delete(activeChat);
-      });
+      })
+      .finally(() => setHydrating(false));
   }, [activeChat, workspaceId]);
+  const [hydrating, setHydrating] = useState(false);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [width, setWidth] = useState(0);
@@ -442,7 +445,14 @@ export function Copilot({
 
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
-        {chatMessages.length === 0 && (
+        {chatMessages.length === 0 && hydrating && (
+          <div className="flex flex-col gap-3 px-1 pt-2" aria-busy="true">
+            <div className="h-10 w-3/5 animate-pulse rounded-2xl bg-muted" />
+            <div className="ml-auto h-9 w-1/2 animate-pulse rounded-2xl bg-muted" />
+            <div className="h-14 w-4/5 animate-pulse rounded-2xl bg-muted" />
+          </div>
+        )}
+        {chatMessages.length === 0 && !hydrating && (
           <div className="pt-8 text-center space-y-5">
             <Image
               src={newUi ? "/design/cat2-pencil.png" : "/illustrations/bot.png"}

@@ -144,6 +144,7 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
   const [creating, setCreating] = useState<"workspace" | "folder" | null>(null);
   const [sessions, setSessions] = useState<StudySession[]>([]);
   const [due, setDue] = useState<number | null>(null);
+  const [actLoading, setActLoading] = useState(true);
   const [days, setDays] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
@@ -188,7 +189,8 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
         }
         setDays(out);
       })
-      .catch(() => setDays([]));
+      .catch(() => setDays([]))
+      .finally(() => setActLoading(false));
     return onTreeChanged(() => void load());
   }, [load]);
 
@@ -506,6 +508,15 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
           <div className="flex items-baseline justify-between">
             <span className="text-[16px] font-semibold">Due for review</span>
           </div>
+          {due === null ? (
+            <div className="mt-3 flex items-center gap-4">
+              <Skeleton className="size-[72px] shrink-0 rounded-full" />
+              <div className="flex flex-1 flex-col gap-2">
+                <Skeleton className="h-3.5 w-full" />
+                <Skeleton className="h-3.5 w-2/3" />
+              </div>
+            </div>
+          ) : (
           <div className="mt-3 flex items-center gap-4">
             <Donut parts={due ? [[1, "var(--accent)"]] : [[1, "var(--border)"]]}>
               <span className="text-[20px] font-bold leading-none">{due ?? "–"}</span>
@@ -514,10 +525,18 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
             </Donut>
             <div className="text-[13px] text-muted-foreground">{due ? `${due} flashcards are due today. About ${Math.max(1, Math.round(due / 3))} min.` : "Nothing due right now — nice."}</div>
           </div>
+          )}
           <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-xl text-[14px] font-semibold", due ? "bg-accent text-white" : "bg-muted")}>
             {due ? "Review now" : "Browse flashcards"}
           </Link>
         </div>
+        {actLoading ? (
+          <>
+            <Skeleton className="h-[132px] rounded-2xl" />
+            <Skeleton className="h-[300px] rounded-2xl" />
+          </>
+        ) : (
+          <>
         <div className="rounded-2xl border border-border p-[18px]">
           <div className="flex items-baseline justify-between">
             <span className="text-[16px] font-semibold">This week</span>
@@ -536,6 +555,8 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
           </div>
           <StudyCalendar dailyActivity={points} className="mt-3" />
         </div>
+          </>
+        )}
       </div>
 
       {editing && <EditResourceDialog target={editing} onClose={() => setEditing(null)} onSaved={() => void load()} />}
