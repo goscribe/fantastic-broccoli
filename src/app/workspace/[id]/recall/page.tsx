@@ -1,5 +1,8 @@
 "use client";
 
+import { useParams as useLegacyParams } from "next/navigation";
+import { LegacyPage } from "@/components/layout/legacy-redirect";
+
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -286,7 +289,7 @@ function EpisodeCard({
   );
 }
 
-export default function WorkspaceRecallPage() {
+function WorkspaceRecallPage() {
   const params = useParams();
   const { t } = useI18n();
   const workspaceId = params.id as string;
@@ -466,5 +469,14 @@ export default function WorkspaceRecallPage() {
         </div>
       )}
     </WorkspaceShell>
+  );
+}
+
+export default function WorkspaceRecallPageRoute() {
+  const { id } = useLegacyParams<{ id: string }>();
+  return (
+    <LegacyPage to={`/workspace/${id}`}>
+      <WorkspaceRecallPage />
+    </LegacyPage>
   );
 }

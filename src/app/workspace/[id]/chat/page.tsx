@@ -1,5 +1,9 @@
 "use client";
 
+import { LearnHome } from "@/components/learn/learn-home";
+import { Copilot } from "@/components/ai/copilot";
+import { useNewUi } from "@/lib/new-ui";
+
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -220,7 +224,7 @@ const SUGGESTION_KEYS = [
   "ws.chat.suggestExplain",
 ];
 
-export default function WorkspaceChatPage() {
+function WorkspaceChatPage() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -1026,4 +1030,36 @@ export default function WorkspaceChatPage() {
       </div>
     </WorkspaceShell>
   );
+}
+
+function NewUiChat() {
+  const { id } = useParams<{ id: string }>();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [open, setOpen] = useState(true);
+  const q = searchParams.get("q") ?? undefined;
+  useEffect(() => {
+    if (q) router.replace(`/workspace/${id}/chat`, { scroll: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const [prompt] = useState(q);
+  return (
+    <div className="flex min-h-0 flex-1">
+      <div className="min-w-0 flex-1 overflow-y-auto">
+        <LearnHome workspaceId={id} />
+      </div>
+      <Copilot
+        open={open}
+        onClose={() => setOpen(false)}
+        workspaceId={id}
+        initialPrompt={prompt}
+        page={`Workspace Copilot — /workspace/${id}/chat`}
+      />
+    </div>
+  );
+}
+
+export default function WorkspaceChatPageRoute() {
+  const newUi = useNewUi();
+  return newUi ? <NewUiChat /> : <WorkspaceChatPage />;
 }

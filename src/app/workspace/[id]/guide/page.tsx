@@ -1,5 +1,8 @@
 "use client";
 
+import { useParams as useLegacyParams } from "next/navigation";
+import { LegacyPage } from "@/components/layout/legacy-redirect";
+
 import { EmptyScene } from "@/components/graphics/floating-decor";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
@@ -373,7 +376,7 @@ function GuideDeck({
   );
 }
 
-export default function WorkspaceGuidePage() {
+function WorkspaceGuidePage() {
   const params = useParams();
   const workspaceId = params.id as string;
   const queryClient = useQueryClient();
@@ -479,5 +482,14 @@ export default function WorkspaceGuidePage() {
         )}
       </div>
     </WorkspaceShell>
+  );
+}
+
+export default function WorkspaceGuidePageRoute() {
+  const { id } = useLegacyParams<{ id: string }>();
+  return (
+    <LegacyPage to={`/workspace/${id}`}>
+      <WorkspaceGuidePage />
+    </LegacyPage>
   );
 }

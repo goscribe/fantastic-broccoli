@@ -1,5 +1,8 @@
 "use client";
 
+import { useParams as useLegacyParams } from "next/navigation";
+import { LegacyPage } from "@/components/layout/legacy-redirect";
+
 import { MathText } from "@/components/ui/markdown-text";
 import { useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
@@ -33,7 +36,7 @@ import { Plus, Sparkles, ArrowRight } from "lucide-react";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { EmptyScene } from "@/components/graphics/floating-decor";
 
-export default function WorkspaceStudyPage() {
+function WorkspaceStudyPage() {
   const params = useParams();
   const router = useRouter();
   const { t } = useI18n();
@@ -366,5 +369,14 @@ export default function WorkspaceStudyPage() {
         />
       )}
     </WorkspaceShell>
+  );
+}
+
+export default function WorkspaceStudyPageRoute() {
+  const { id } = useLegacyParams<{ id: string }>();
+  return (
+    <LegacyPage to={`/workspace/${id}`}>
+      <WorkspaceStudyPage />
+    </LegacyPage>
   );
 }

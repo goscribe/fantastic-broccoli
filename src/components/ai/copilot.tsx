@@ -128,8 +128,11 @@ export function Copilot({
   studySessionId,
   activity,
   page,
+  initialPrompt,
 }: {
   open: boolean;
+  /** Sent once as the first message when the panel is ready (Learn one-offs like "Quiz me on …"). */
+  initialPrompt?: string;
   onClose: () => void;
   context?: string;
   workspaceId: string;
@@ -360,6 +363,13 @@ export function Copilot({
       t,
     ],
   );
+
+  const autoSent = useRef(false);
+  useEffect(() => {
+    if (!initialPrompt || autoSent.current || chatsLoading || hydrating || busy) return;
+    autoSent.current = true;
+    void send(initialPrompt);
+  }, [initialPrompt, chatsLoading, hydrating, busy, send]);
 
   const chatMessages = messages.filter(
     (m) => (m.chatId ?? "pending") === (activeChat ?? "pending"),
