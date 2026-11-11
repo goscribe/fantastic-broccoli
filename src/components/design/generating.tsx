@@ -26,7 +26,7 @@ export function Generating({ index, title, compact = false }: { index: number; t
         <Ring pct={Math.max(pct, 0.04)} size={compact ? 96 : 128} stroke={compact ? 7 : 9}>
           <Image src={done ? "/design/cat2-cheer.png" : "/design/cat2-pencil.png"} alt="" width={84} height={84} unoptimized className={cn("object-contain", compact ? "size-[62px]" : "size-[84px]", !done && "design-float")} />
         </Ring>
-        <span className="absolute -right-1 -top-1 grid size-8 place-items-center rounded-full bg-white text-[12px] font-bold text-accent shadow-[0_1px_4px_rgba(17,17,20,.12)]">{Math.round(pct * 100)}%</span>
+        <span className="absolute -bottom-1 -right-2 grid h-7 min-w-7 place-items-center rounded-full border border-border bg-white px-1.5 text-[12px] font-bold text-accent shadow-[0_1px_4px_rgba(17,17,20,.08)]">{Math.round(pct * 100)}%</span>
       </div>
       <div>
         <h2 className={cn("font-bold", compact ? "text-[18px]" : "text-[22px]")}>{done ? "Your session is ready" : `Building “${title}”`}</h2>
