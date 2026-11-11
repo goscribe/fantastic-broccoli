@@ -160,5 +160,5 @@ export function Sketch({ overlay = false }: { overlay?: boolean }) {
 }
 
 export function Cat({ name, className }: { name: string; className?: string }) {
-  return <Image src={`/design/cat-${name}.png`} alt="" width={96} height={96} className={cn("h-24 w-auto", className)} />;
+  return <Image src={`/design/cat2-${name}.png`} alt="" width={96} height={96} className={cn("h-24 w-auto", className)} />;
 }

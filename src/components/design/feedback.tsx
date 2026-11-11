@@ -17,7 +17,7 @@ export function FeedbackCard({ ok, title, message, secondary, primary, confetti 
   const isClient = useSyncExternalStore(() => () => {}, () => true, () => false);
   return (
     <div className="relative pb-6 pt-3">
-      {ok && <Image src="/design/cat-cheer.png" alt="" width={110} height={110} priority className="cat-cheer pointer-events-none absolute -top-[62px] right-5 h-[92px] w-auto drop-shadow-[0_10px_18px_rgba(22,163,74,.22)]" />}
+      {ok && <Image src="/design/cat2-cheer.png" alt="" width={110} height={110} priority className="cat-cheer pointer-events-none absolute -top-[62px] right-5 h-[92px] w-auto drop-shadow-[0_10px_18px_rgba(22,163,74,.22)]" />}
       {ok && confetti && isClient && <><ConfettiBurst burst={1} /><ConfettiBurst burst={2} /></>}
       <div className={cn("flex items-center gap-4 rounded-2xl border px-5 py-4 shadow-[0_12px_40px_-12px_rgba(17,17,20,.18)]", ok ? "design-bounce border-emerald-300 bg-gradient-to-r from-emerald-50 to-lime-50" : "border-rose-200 bg-rose-50")}>
         <span className={cn("grid size-12 shrink-0 place-items-center rounded-full text-white", ok ? "design-pop bg-emerald-500 shadow-[0_0_0_6px_rgba(16,185,129,.2)]" : "bg-red-600")}>{ok ? <Check className="size-6" strokeWidth={3} /> : <X className="size-6" strokeWidth={2.5} />}</span>

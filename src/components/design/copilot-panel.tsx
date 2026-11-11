@@ -27,7 +27,7 @@ export function CopilotPanel({ messages = [], defaultWidth = 380, defaultOpen = 
     return (
       <aside className="flex w-14 shrink-0 flex-col items-center gap-3.5 border-l border-border pt-5">
         <button onClick={() => setOpen(true)} className="grid size-8 place-items-center rounded-lg border border-border text-muted-foreground hover:bg-muted" aria-label="Open Copilot"><ChevronLeft className="size-4" /></button>
-        <span className="grid size-9 place-items-center overflow-hidden rounded-full bg-accent-soft"><Image src="/design/cat-wave.png" alt="" width={28} height={28} className="cat-wiggle h-7 w-auto" /></span>
+        <span className="grid size-9 place-items-center overflow-hidden rounded-full bg-accent-soft"><Image src="/design/cat2-wave.png" alt="" width={28} height={28} className="cat-wiggle h-7 w-auto" /></span>
         <span className="text-[12px] font-semibold text-muted-foreground [writing-mode:vertical-rl]">Copilot</span>
         <span className="size-2 rounded-full bg-accent" />
       </aside>
@@ -46,12 +46,12 @@ export function CopilotPanel({ messages = [], defaultWidth = 380, defaultOpen = 
           {messages.map((m, i) => m.who === "u" ? (
             <div key={i} className="max-w-[88%] self-end rounded-[14px] rounded-br-[4px] bg-accent px-3.5 py-2.5 text-[13.5px] leading-relaxed text-white">{m.text}</div>
           ) : (
-            <div key={i} className="flex max-w-[94%] gap-2"><Image src="/design/cat-think.png" alt="" width={26} height={26} className="mt-0.5 h-[26px] w-auto shrink-0" /><div className="rounded-[14px] rounded-bl-[4px] bg-muted px-3.5 py-2.5 text-[13.5px] leading-relaxed">{m.text}</div></div>
+            <div key={i} className="flex max-w-[94%] gap-2"><Image src="/design/cat2-think.png" alt="" width={26} height={26} className="mt-0.5 h-[26px] w-auto shrink-0" /><div className="rounded-[14px] rounded-bl-[4px] bg-muted px-3.5 py-2.5 text-[13.5px] leading-relaxed">{m.text}</div></div>
           ))}
         </div>
       ) : (
         <div className="flex flex-1 flex-col items-center justify-center gap-2 px-[22px] text-center">
-          <Image src="/design/cat-pencil.png" alt="" width={84} height={84} className="cat-float h-[84px] w-auto" />
+          <Image src="/design/cat2-pencil.png" alt="" width={84} height={84} className="cat-float h-[84px] w-auto" />
           <div className="text-[14px] font-semibold">Stuck? Ask me anything.</div>
           <p className="text-[12.5px] leading-relaxed text-faint">I can see what you&apos;re working on and your notes. One chat for the whole session.</p>
         </div>
