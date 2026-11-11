@@ -45,7 +45,7 @@ export function Donut({ parts, size = 92, stroke = 14, children }: { parts: [num
   );
 }
 
-export function WeekBars({ mins, goal = 25, today = 4, height = 70 }: { mins: number[]; goal?: number; today?: number; height?: number }) {
+export function WeekBars({ mins, goal = 25, today = 4, height = 70, accent = T.orange }: { mins: number[]; goal?: number; today?: number; height?: number; accent?: string }) {
   const labels = ["M", "T", "W", "T", "F", "S", "S"];
   const max = Math.max(...mins, goal) * 1.15;
   const goalY = (height * goal) / max;
@@ -57,7 +57,7 @@ export function WeekBars({ mins, goal = 25, today = 4, height = 70 }: { mins: nu
         {mins.map((m, i) => (
           <div key={i} className="flex flex-1 flex-col items-center gap-1.5">
             <div className="flex w-full items-end" style={{ height }}>
-              <div className="w-full rounded-t-md rounded-b-[3px]" style={{ height: Math.max(4, (height * m) / max), background: m >= goal ? T.orange : i === today ? T.violet : T.border, opacity: i > today ? 0.35 : 1 }} />
+              <div className="w-full rounded-t-md rounded-b-[3px]" style={{ height: Math.max(4, (height * m) / max), background: m >= goal ? accent : i === today ? T.violet : T.border, opacity: i > today ? 0.35 : 1 }} />
             </div>
             <span className="text-[11px] font-semibold" style={{ color: i === today ? T.violet : T.text3 }}>{labels[i]}</span>
           </div>
