@@ -8,7 +8,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
-import {
+import { ArrowLeft,
   ArrowRight,
   ArrowUp,
   BookOpen,
@@ -1042,13 +1042,13 @@ function NewUiChat() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
-      <div className="mx-auto flex w-full max-w-3xl items-center gap-3 px-4 pt-4 text-[13px] text-muted-foreground">
-        <Link href={`/workspace/${id}`} className="hover:text-foreground">
-          ← {workspace?.title ?? "Workspace"}
+    <div className="flex min-h-0 flex-1 flex-col px-6">
+      <div className="mx-auto flex w-full max-w-3xl items-center gap-2 pt-6 text-[13px] text-muted-foreground">
+        <Link href={`/workspace/${id}`} className="flex items-center gap-1 hover:text-foreground">
+          <ArrowLeft className="size-3.5" /> {workspace?.title ?? "Workspace"}
         </Link>
         <span>·</span>
-        <span>Copilot</span>
+        <span className="font-semibold text-foreground">Copilot</span>
       </div>
       <Copilot
         open

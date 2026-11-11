@@ -419,7 +419,7 @@ export function Copilot({
         className={cn("absolute left-0 inset-y-0 w-1.5 -translate-x-1/2 cursor-col-resize z-10 hover:bg-accent/40 active:bg-accent/60 transition-colors max-sm:hidden", variant === "page" && "hidden")}
       />
       {/* Header */}
-      <div className="flex items-center gap-2 px-3 h-12 border-b border-border shrink-0">
+      <div className={cn("flex items-center gap-2 px-3 h-12 border-b border-border shrink-0", variant === "page" && "hidden")}>
         <p className="text-sm font-semibold shrink-0">{t("misc.copilot")}</p>
         <div className={cn("flex items-center gap-1 ml-1 flex-1 min-w-0 overflow-x-auto", newUi && "hidden")}>
           {chatsLoading &&
@@ -463,7 +463,7 @@ export function Copilot({
       </div>
 
       {/* Messages */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+      <div ref={scrollRef} className={cn("flex-1 overflow-y-auto px-4 py-4 space-y-4", variant === "page" && "px-0 py-6")}>
         {chatMessages.length === 0 && hydrating && (
           <div className="flex flex-col gap-3 px-1 pt-2" aria-busy="true">
             <div className="h-10 w-3/5 animate-pulse rounded-2xl bg-muted" />
@@ -563,7 +563,7 @@ export function Copilot({
       </div>
 
       {/* Input */}
-      <div className="p-3 border-t border-border">
+      <div className={cn("p-3 border-t border-border", variant === "page" && "border-t-0 px-0 pb-6 pt-2")}>
         <form
           onSubmit={(e) => {
             e.preventDefault();
