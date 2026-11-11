@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { useAuthUser } from "@/lib/api/auth";
@@ -26,6 +26,7 @@ import {
   fetchStudySessions,
   type DailyActivityPoint,
 } from "@/lib/api/study";
+import { LearnHome } from "@/components/learn/learn-home";
 import {
   FirstSessionOnboarding,
   hasSkippedFirstSessionOnboarding,
@@ -220,6 +221,14 @@ export default function HomePage() {
       : hour < 18
         ? t("misc.goodAfternoon")
         : t("misc.goodEvening");
+
+  // New Learn home (redesign) — NEXT_PUBLIC_NEW_UI=1, or ?ui=new to preview.
+  const newUi = useSyncExternalStore(
+    () => () => {},
+    () => process.env.NEXT_PUBLIC_NEW_UI === "1" || new URLSearchParams(window.location.search).get("ui") === "new",
+    () => process.env.NEXT_PUBLIC_NEW_UI === "1",
+  );
+  if (newUi && showOnboarding === false) return <LearnHome />;
 
   return (
     <div className="flex-1 flex flex-col">
