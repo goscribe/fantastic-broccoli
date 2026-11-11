@@ -17,6 +17,7 @@ export function FeedbackCard({ ok, title, message, secondary, primary, confetti 
   const isClient = useSyncExternalStore(() => () => {}, () => true, () => false);
   return (
     <div className="relative pb-6 pt-3">
+      {ok && <Image src="/design/cat-cheer.png" alt="" width={110} height={110} priority className="cat-cheer pointer-events-none absolute -top-[86px] right-6 h-[110px] w-auto drop-shadow-[0_10px_18px_rgba(22,163,74,.22)]" />}
       {ok && confetti && isClient && <><ConfettiBurst burst={1} /><ConfettiBurst burst={2} /></>}
       <div className={cn("flex items-center gap-4 rounded-2xl border px-5 py-4 shadow-[0_12px_40px_-12px_rgba(17,17,20,.18)]", ok ? "design-bounce border-emerald-300 bg-gradient-to-r from-emerald-50 to-lime-50" : "border-rose-200 bg-rose-50")}>
         <span className={cn("grid size-12 shrink-0 place-items-center rounded-full text-white", ok ? "design-pop bg-emerald-500 shadow-[0_0_0_6px_rgba(16,185,129,.2)]" : "bg-red-600")}>{ok ? <Check className="size-6" strokeWidth={3} /> : <X className="size-6" strokeWidth={2.5} />}</span>
@@ -24,7 +25,6 @@ export function FeedbackCard({ ok, title, message, secondary, primary, confetti 
           <div className="flex items-center gap-2.5"><span className={cn("text-[19px] font-extrabold", ok ? "text-emerald-800" : "text-rose-800")}>{title}</span>{ok && <span className="design-pop inline-flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-[12px] font-bold text-white [animation-delay:.15s]"><Sparkles className="size-3.5" fill="currentColor" />+{xp} XP</span>}</div>
           <div className="mt-0.5 text-[14px] text-muted-foreground">{message}</div>
         </div>
-        {ok && <Image src="/design/cat-trophy.png" alt="" width={72} height={72} priority className="design-pop h-[72px] w-auto shrink-0 -my-4 drop-shadow-[0_8px_16px_rgba(22,163,74,.25)]" />}
         <div className="flex shrink-0 gap-2.5"><button className={cn(btnOutline, "bg-white/80")}>{secondary}</button><button className={cn(btnPrimary, ok && "bg-emerald-600 hover:bg-emerald-700")}>{primary}</button></div>
       </div>
     </div>

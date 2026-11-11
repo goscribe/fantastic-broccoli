@@ -23,3 +23,15 @@
 .design-pop { animation: design-pop .55s cubic-bezier(.34,1.56,.64,1) both; }
 .design-pop.-translate-x-1\/2 { --tx: -50%; }
 .design-bounce { animation: design-bounce .5s cubic-bezier(.22,1,.36,1) both; }
+
+/* Mascot motion: one animation per pose. */
+@keyframes design-wiggle { 0%,100% { transform: rotate(-4deg) } 50% { transform: rotate(4deg) } }
+@keyframes design-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-4px) } }
+@keyframes design-float { 0%,100% { transform: translateY(0) rotate(-2deg) } 50% { transform: translateY(-6px) rotate(2deg) } }
+@keyframes design-peek { 0% { transform: translateY(18px) rotate(6deg); opacity: 0 } 100% { transform: translateY(0) rotate(0); opacity: 1 } }
+@keyframes design-cheer { 0% { transform: translateY(0) scale(.6); opacity: 0 } 50% { transform: translateY(-14px) scale(1.08); opacity: 1 } 70% { transform: translateY(0) scale(.98) } 85% { transform: translateY(-6px) scale(1.02) } 100% { transform: translateY(0) scale(1) } }
+.cat-wiggle { animation: design-wiggle 1.6s ease-in-out infinite; transform-origin: 50% 90%; }
+.cat-bob { animation: design-bob 3s ease-in-out infinite; }
+.cat-float { animation: design-float 4s ease-in-out infinite; }
+.cat-peek { animation: design-peek .6s cubic-bezier(.22,1,.36,1) both; }
+.cat-cheer { animation: design-cheer .9s cubic-bezier(.34,1.56,.64,1) both; transform-origin: 50% 100%; }

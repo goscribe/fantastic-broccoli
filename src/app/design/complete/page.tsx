@@ -7,7 +7,7 @@ export default function CompletePreview() {
   return (
     <div className="mx-auto flex h-dvh w-full max-w-[390px] flex-col bg-white px-5 pt-14">
       <div className="pt-1.5 text-center">
-        <Image src="/design/cat-trophy.png" alt="" width={96} height={96} className="mx-auto h-24 w-auto" />
+        <Image src="/design/cat-trophy.png" alt="" width={104} height={104} className="design-pop mx-auto h-[104px] w-auto" />
         <h1 className="mt-2 text-[24px] font-bold">Lesson step complete</h1>
         <p className="mt-1 text-[14px] text-muted-foreground">Worksheet · Osmosis calculations</p>
       </div>

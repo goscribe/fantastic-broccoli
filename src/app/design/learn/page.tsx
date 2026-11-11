@@ -30,7 +30,7 @@ export default function LearnPreview() {
           </div>
           <div className="rounded-[18px] border border-border p-3.5">
             <div className="flex items-center gap-3">
-              <Image src="/design/cat-pencil.png" alt="" width={40} height={40} className="h-10 w-auto" />
+              <Image src="/design/cat-wave.png" alt="" width={40} height={40} className="cat-wiggle h-10 w-auto" />
               <span className="flex-1 text-[15px] text-faint">What do you want to practise?</span>
               <span className="grid size-9 place-items-center rounded-[10px] bg-accent text-white"><ArrowUp className="size-4" /></span>
             </div>
@@ -45,7 +45,7 @@ export default function LearnPreview() {
               </div>
             ))}
             <div className="flex items-center gap-3.5 rounded-2xl border-2 border-dashed border-border p-4">
-              <Image src="/design/cat-cards.png" alt="" width={48} height={48} className="h-12 w-auto" />
+              <Image src="/design/cat-sleep.png" alt="" width={48} height={48} className="cat-bob h-12 w-auto" />
               <div><div className="text-[14.5px] font-semibold">Add material</div><div className="text-[12px] text-faint">Upload · Photos · Record · Paste a link</div></div>
               <Plus className="ml-auto size-4 text-faint" />
             </div>
@@ -54,7 +54,7 @@ export default function LearnPreview() {
         </div>
         <div className="flex w-[300px] shrink-0 flex-col gap-3.5">
           <div className="relative overflow-hidden rounded-2xl p-[18px]" style={{ background: T.lavender }}>
-            <Image src="/design/cat-book.png" alt="" width={64} height={64} className="absolute right-2.5 top-2.5 h-16 w-auto" />
+            <Image src="/design/cat-book.png" alt="" width={72} height={72} className="cat-peek absolute right-2.5 top-2 h-[72px] w-auto" />
             <div className="flex items-center gap-2"><Ring pct={0.6} size={28} stroke={12} /><span className="text-[11px] font-semibold text-accent-dim">Suggested next · 3 of 5 today</span></div>
             <div className="mt-2 pr-16 text-[16px] font-bold leading-tight">Worksheet · Osmosis calculations</div>
             <div className="mt-1 text-[12.5px] text-accent-dim">6 min · fits your 17:30 slot · from Bio notes pp. 13–16</div>
