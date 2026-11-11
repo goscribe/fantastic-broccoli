@@ -44,7 +44,7 @@ export default async function QuestionPreview({ searchParams }: { searchParams: 
         children: <MatchingBody marked={fb} /> });
     case "cloze":
       return frame({ tag: "Cloze · 3.2 Transport · Fill in the blank", qi: 2, qn: 6, question: "Complete the passage from your notes.",
-        bottom: fb ? <FeedbackCard ok title="5 of 6 blanks" message="\u201cpermeable\u201d was \u201cselectively permeable\u201d in your notes — the qualifier is the mark." secondary="Review blanks" primary="Continue" /> : actions("Check blanks"),
+        bottom: fb ? <FeedbackCard ok title="5 of 6 blanks" message="“permeable” was “selectively permeable” in your notes — the qualifier is the mark." secondary="Review blanks" primary="Continue" /> : actions("Check blanks"),
         children: <ClozeBody marked={fb} /> });
     case "summary":
       return frame({ tag: "Comprehension check · 3.2 Transport · Summary", qi: 7, qn: 9, question: "In 2–3 sentences, summarise how substances cross a membrane and what decides which route they take.",
