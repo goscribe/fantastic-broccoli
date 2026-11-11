@@ -367,6 +367,37 @@ export default function SessionDetailPage() {
   };
 
   if (!session || !workspace) {
+    if ((isLoading || workspaceLoading) && newUi) {
+      return (
+        <div className="flex h-dvh min-h-0 flex-1 overflow-hidden bg-background" aria-busy="true">
+          <div className="relative flex min-w-0 flex-1 flex-col">
+            <div className="flex items-center gap-5 px-10 pt-5">
+              <Skeleton className="size-9 rounded-xl" />
+              <Skeleton className="h-2.5 flex-1 rounded-full" />
+              <Skeleton className="h-4 w-28" />
+            </div>
+            <div className="mx-auto mt-12 flex w-full max-w-[760px] flex-col gap-5 px-10">
+              <Skeleton className="h-6 w-24 rounded-full" />
+              <Skeleton className="h-9 w-3/4" />
+              <Skeleton className="h-5 w-1/2" />
+              <div className="mt-6 flex flex-col gap-3">
+                {[0, 1, 2, 3].map((i) => (
+                  <Skeleton key={i} className="h-14 w-full rounded-2xl" />
+                ))}
+              </div>
+            </div>
+            <div className="mt-auto flex items-center justify-between border-t border-border px-10 py-4">
+              <Skeleton className="h-10 w-24 rounded-xl" />
+              <Skeleton className="h-10 w-28 rounded-xl" />
+            </div>
+          </div>
+          <div className="hidden w-[380px] shrink-0 border-l border-border p-5 lg:block">
+            <Skeleton className="h-5 w-20" />
+            <Skeleton className="mt-6 h-24 w-full rounded-2xl" />
+          </div>
+        </div>
+      );
+    }
     if (isLoading || workspaceLoading) {
       return (
         <div className="flex-1 flex flex-col">
