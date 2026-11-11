@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, Check, Play } from "lucide-react";
+import { ArrowRight, Check, Play, Star } from "lucide-react";
 import { Donut, Ring, WeekBars } from "@/components/design/charts";
 import { T } from "@/components/design/tokens";
 import { cn } from "@/lib/utils";
@@ -85,13 +85,14 @@ export default function LandingPreview() {
         <div className="relative mt-10 h-[460px]">
           <svg viewBox="0 0 1440 460" preserveAspectRatio="none" className="absolute inset-0 h-full w-full"><path d="M0 140 C 360 40, 1080 40, 1440 140 L1440 460 L0 460 Z" fill="#7c3aed" /></svg>
           <div className="relative mx-auto h-full w-full max-w-[1120px]">
-            <Image src="/design/props/hero.png" alt="" width={720} height={480} unoptimized className="design-pop absolute bottom-0 left-[2%] z-10 w-[520px] object-contain" />
-            <div className="absolute right-[6%] top-12"><HeroCard /></div>
+            <Image src="/design/cat2-cheer.png" alt="" width={300} height={300} unoptimized className="design-pop absolute bottom-6 left-[8%] z-10 size-[270px] object-contain" />
+            <div className="absolute left-1/2 top-14 -translate-x-1/2 -rotate-3"><HeroCard /></div>
+            <Image src="/design/cat2-book.png" alt="" width={220} height={220} unoptimized className="cat-bob absolute bottom-4 right-[8%] z-10 size-[200px] object-contain" />
             <Prop src="/design/props/star.png" className="left-[6%] top-6 size-14" />
-            <Prop src="/design/props/pencil.png" className="left-[44%] top-[70px] size-16 -rotate-12" delay="0.6s" />
-            <Prop src="/design/props/books.png" className="right-[2%] top-[330px] size-20" delay="1.1s" />
+            <Prop src="/design/props/pencil.png" className="left-[30%] top-[40px] size-16 -rotate-12" delay="0.6s" />
+            <Prop src="/design/props/books.png" className="right-[26%] top-[320px] size-20" delay="1.1s" />
             <Prop src="/design/props/trophy.png" className="right-[32%] top-[-6px] size-16" delay="0.3s" />
-            <Prop src="/design/props/cards.png" className="left-[36%] top-[300px] size-20 rotate-6" delay="1.6s" />
+            <Prop src="/design/props/cards.png" className="left-[27%] top-[330px] size-20 rotate-6" delay="1.6s" />
             <Prop src="/design/props/flag.png" className="right-[4%] top-6 size-12" delay="0.9s" />
           </div>
         </div>
@@ -103,12 +104,12 @@ export default function LandingPreview() {
       </section>
 
       {/* stats */}
-      <section className="mx-auto w-full max-w-[1120px] px-6 py-20">
-        <div className="grid gap-y-10 md:grid-cols-4 md:divide-x md:divide-border">
+      <section className="w-full text-white" style={{ background: NAVY }}>
+        <div className="mx-auto grid w-full max-w-[1120px] gap-y-10 px-6 py-16 md:grid-cols-4">
           {STATS.map(([n, l]) => (
-            <div key={l} className="px-6 text-center first:pl-0 last:pr-0">
-              <div className="text-[52px] font-extrabold leading-none tracking-tight text-accent">{n}</div>
-              <div className="mx-auto mt-3 max-w-[180px] text-[14px] font-semibold leading-snug text-muted-foreground">{l}</div>
+            <div key={l} className="text-center">
+              <div className="text-[56px] font-extrabold leading-none tracking-tight">{n}</div>
+              <div className="mx-auto mt-3 max-w-[180px] text-[14px] font-semibold leading-snug text-white/65">{l}</div>
             </div>
           ))}
         </div>
@@ -117,20 +118,24 @@ export default function LandingPreview() {
       {/* 1 lavender: marked like the exam */}
       <Band bg={LAV}>
         <Headline sub="Every answer is checked against a markscheme written from your material. Hover a highlight to see the exact point it earned.">marked like the exam. explained like a friend.</Headline>
-        <div className="design-root relative mx-auto w-full max-w-[460px] rounded-3xl bg-white p-6 text-foreground shadow-[0_30px_60px_-20px_rgba(76,29,149,.25)]">
+        <div className="relative mx-auto w-full max-w-[460px] pt-10">
+          <div className="absolute inset-x-6 top-0 h-24 rotate-[-3deg] rounded-3xl bg-white/70 px-5 py-4 text-[12px] font-semibold text-muted-foreground shadow-[0_20px_40px_-24px_rgba(76,29,149,.3)]">Q4 · Explain why the potato cylinder in 0.6 M sucrose lost mass. <span className="text-accent">[6]</span></div>
+          <div className="design-root relative w-full rounded-3xl bg-white p-6 text-foreground shadow-[0_30px_60px_-20px_rgba(76,29,149,.25)]">
           <div className="text-[11px] font-semibold text-accent">Worksheet · Osmosis · Q4 · 6 marks</div>
           <div className="mt-2 rounded-xl border border-border p-3 text-[14px] leading-relaxed">The solution has a <mark className="rounded bg-emerald-100 px-0.5">lower water potential than the cells</mark>, so water moves <mark className="rounded bg-emerald-100 px-0.5">out by osmosis</mark> and the cells become flaccid.</div>
           <div className="mt-3 flex items-center gap-3 rounded-xl bg-emerald-50 px-3.5 py-3"><Ring pct={4 / 6} size={40} stroke={5} color={T.green}><span className="text-[11px] font-bold">4/6</span></Ring><div className="text-[13px]"><b>Good causal chain.</b> Missing M5 (membrane) and M6 (turgor).</div></div>
           <Image src="/design/cat2-think.png" alt="" width={120} height={120} unoptimized className="cat-bob absolute -bottom-8 -right-10 size-[120px] object-contain" />
+          </div>
         </div>
       </Band>
 
       {/* 2 white: flashcards */}
       <Band bg="#ffffff" className="lg:[&>*:first-child]:order-2">
         <Headline sub="Spaced repetition decides what comes back today. Get one wrong and it’s back tomorrow; get it right and it waits.">flashcards that come back right before you forget.</Headline>
-        <div className="relative mx-auto flex w-full max-w-[460px] items-center justify-center py-6">
+        <div className="relative mx-auto flex w-full max-w-[460px] items-center justify-center py-10">
+          {[["water potential", "-rotate-12 -translate-x-[150px] -translate-y-10"], ["partially permeable", "rotate-6 translate-x-[140px] -translate-y-16"], ["turgor", "rotate-[-4deg] translate-x-[150px] translate-y-20"]].map(([w, c]) => <span key={w} className={cn("design-root absolute rounded-2xl border-2 border-accent/30 bg-white px-5 py-6 text-[15px] font-bold shadow-[0_20px_40px_-20px_rgba(76,29,149,.35)]", c)}>{w}</span>)}
           <Donut parts={[[14, T.violet], [2, T.red], [22, "#ede9fe"]]} size={260} stroke={34}><div className="text-center"><div className="text-[48px] font-extrabold leading-none">16</div><div className="text-[13px] font-semibold text-muted-foreground">due today</div></div></Donut>
-          <Image src="/design/props/cards-cat.png" alt="" width={220} height={220} unoptimized className="cat-bob absolute -bottom-4 -left-6 size-[200px] object-contain" />
+          <Image src="/design/cat2-sleep.png" alt="" width={150} height={150} unoptimized className="cat-bob absolute -bottom-2 left-0 size-[140px] object-contain" />
         </div>
       </Band>
 
@@ -171,25 +176,29 @@ export default function LandingPreview() {
       </section>
 
       {/* 6 white: quotes */}
-      <section className="mx-auto w-full max-w-[1120px] px-6 py-24">
+      <section className="relative w-full overflow-hidden bg-accent text-white">
+        <div className="mx-auto w-full max-w-[1120px] px-6 py-24">
         <h2 className="text-center text-[40px] font-extrabold tracking-tight">from the night before.</h2>
+        <div className="mt-3 flex justify-center gap-1 text-[#fbbf24]">{[0, 1, 2, 3, 4].map((i) => <Star key={i} className="size-5 fill-current" />)}</div>
+        <Image src="/design/cat2-wave.png" alt="" width={140} height={140} unoptimized className="cat-wiggle absolute -top-4 right-[6%] size-[130px] object-contain" />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {QUOTES.map(([q, name, who]) => (
-            <figure key={name} className="flex flex-col justify-between rounded-[28px] border border-border p-7">
+            <figure key={name} className="design-root flex flex-col justify-between rounded-[28px] bg-white p-7 text-foreground shadow-[0_24px_50px_-24px_rgba(0,0,0,.4)]">
               <blockquote className="text-[17px] font-semibold leading-snug">“{q}”</blockquote>
               <figcaption className="mt-6 flex items-center gap-3"><span className="grid size-10 place-items-center rounded-full bg-accent-soft text-[14px] font-extrabold text-accent">{name[0]}</span><div><div className="text-[14px] font-bold">{name}</div><div className="text-[12.5px] text-muted-foreground">{who}</div></div></figcaption>
             </figure>
           ))}
         </div>
+        </div>
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-accent">
-        <div className="mx-auto flex w-full max-w-[1120px] flex-col items-center px-6 pb-28 pt-24 text-center text-white">
+      <section className="relative overflow-hidden" style={{ background: LAV }}>
+        <div className="mx-auto flex w-full max-w-[1120px] flex-col items-center px-6 pb-28 pt-24 text-center">
           <Image src="/design/cat2-wave.png" alt="" width={200} height={200} unoptimized className="cat-wiggle size-[180px] object-contain" />
           <h2 className="mt-4 text-[44px] font-extrabold leading-[1.05] tracking-tight">tonight’s revision, sorted in five minutes.</h2>
-          <div className="mt-8 flex flex-wrap justify-center gap-3"><Btn tone="white">Get started</Btn><Btn tone="ghost">Try the sample</Btn></div>
-          <ul className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[14px] font-semibold text-white/85">{["Free to start", "No card", "First session in 5 minutes"].map((l) => <li key={l} className="flex items-center gap-1.5"><Check className="size-4" strokeWidth={3} />{l}</li>)}</ul>
+          <div className="mt-8 flex flex-wrap justify-center gap-3"><Btn>Get started</Btn><span className="inline-flex h-14 items-center rounded-2xl border-2 border-border bg-white px-6 text-[16px] font-bold text-accent">Try the sample</span></div>
+          <ul className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[14px] font-semibold text-muted-foreground">{["Free to start", "No card", "First session in 5 minutes"].map((l) => <li key={l} className="flex items-center gap-1.5"><Check className="size-4" strokeWidth={3} />{l}</li>)}</ul>
         </div>
       </section>
 
