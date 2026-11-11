@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUp, BookOpen, Camera, FileText, Layers, MessageCircle, Plus, Dumbbell, ClipboardList, ChevronDown, ChevronUp, Flame, Mic, Shuffle } from "lucide-react";
+import { ArrowUp, BookOpen, Camera, FileText, Layers, Plus, ClipboardList, ChevronDown, ChevronUp, Flame, Mic, Shuffle } from "lucide-react";
 import { AppFrame } from "@/components/design/shell";
 import { Donut, Ring, WeekBars } from "@/components/design/charts";
 import { T } from "@/components/design/tokens";
@@ -21,7 +21,6 @@ const RECENT = [
   { Icon: Shuffle, cls: "bg-emerald-100 text-emerald-600", title: "Quick 5 · Topic 3 mix", sub: "Osmosis & water potential · daily 5", result: "4/5", xp: "+25 XP", when: "Yesterday" },
   { Icon: Flame, cls: "bg-amber-100 text-amber-600", title: "Mock · Paper 1 section A", sub: "Paper 1 walkthrough · 20 Qs · 24 min", result: "15/20", xp: "+60 XP", when: "Mon" },
 ] as const;
-const ACTIONS = [["Quiz me", Dumbbell], ["Flashcards", Layers], ["Worksheet", ClipboardList], ["Explain", MessageCircle]] as const;
 
 function MatIcon({ kind }: { kind: "pdf" | "img" | "pp" }) {
   const map = { pdf: [FileText, "bg-accent text-white"], img: [Camera, "bg-sky-500 text-white"], pp: [BookOpen, "bg-emerald-500 text-white"] } as const;
