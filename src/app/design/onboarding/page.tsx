@@ -20,7 +20,7 @@ export default async function OnboardingPreview({ searchParams }: { searchParams
       </div>
       <ol className="mt-6 flex w-full max-w-[560px] items-center gap-2">{STEPS.map((s, i) => <li key={s} className="flex flex-1 flex-col gap-1.5"><span className={cn("h-1.5 rounded-full", i < n ? "bg-accent" : "bg-muted")} /><span className={cn("text-[11px] font-semibold", i < n ? "text-accent" : "text-faint")}>{s}</span></li>)}</ol>
 
-      <div className="mt-8 w-full max-w-[560px] rounded-3xl border border-border px-8 py-8">
+      <div className={cn("mt-8 w-full max-w-[560px]", n === 4 ? "max-w-[640px]" : "rounded-3xl border border-border px-8 py-8")}>
         {n === 1 && (
           <>
             <Image src="/design/cat2-wave.png" alt="" width={96} height={96} unoptimized className="design-wiggle mx-auto size-24 object-contain" />
