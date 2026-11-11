@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Folder as FolderIcon, House, Layers, LogOut, Plus, Search, Settings, Sparkles, Users } from "lucide-react";
+import { Calendar, Folder as FolderIcon, House, Layers, LogOut, Plus, Search, Settings, Sparkles, Users } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import { accentForId } from "@/lib/accent-palette";
@@ -19,6 +19,7 @@ import "@/app/design/design.css";
 const NAV = [
   { href: "/", label: "Learn", icon: House },
   { href: "/flashcards", label: "Flashcards", icon: Layers },
+  { href: "/planner", label: "Planner", icon: Calendar },
   { href: "/shared", label: "Shared", icon: Users },
 ];
 
