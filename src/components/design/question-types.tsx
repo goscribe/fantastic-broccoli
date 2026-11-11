@@ -1,4 +1,4 @@
-import { Check, ChevronDown, Keyboard, Lightbulb, Mic, Square, X } from "lucide-react";
+import { Check, ChevronDown, GripVertical, Keyboard, Lightbulb, Mic, Square, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Ring } from "./charts";
 import { T } from "./tokens";
@@ -64,17 +64,21 @@ export function MatchingBody({ marked, hint = false }: { marked: boolean; hint?:
   );
 }
 
-export function ClozeBody({ marked, hint = false }: { marked: boolean; hint?: boolean }) {
-  const blank = (v: string, ok = true, w = 110) => <span className={cn("mx-0.5 inline-flex h-8 items-center justify-center rounded-lg border px-2 align-middle text-[14px] font-semibold", marked ? (ok ? "border-emerald-400 bg-emerald-50 text-emerald-800" : "border-rose-400 bg-rose-50 text-rose-800 line-through") : "border-accent bg-accent-soft/60 text-accent-dim")} style={{ minWidth: w }}>{v}</span>;
+export function ClozeBody({ marked }: { marked: boolean; hint?: boolean }) {
+  const filled = (v: string, ok = true, w = 110) => <span className={cn("mx-0.5 inline-flex h-8 cursor-grab items-center justify-center rounded-lg border px-2.5 align-middle text-[14px] font-semibold", marked ? (ok ? "border-emerald-400 bg-emerald-50 text-emerald-800" : "border-rose-400 bg-rose-50 text-rose-800 line-through") : "border-accent bg-accent-soft/60 text-accent-dim")} style={{ minWidth: w }}>{v}</span>;
+  const slot = (w = 110) => <span className="mx-0.5 inline-flex h-8 items-center justify-center rounded-lg border-2 border-dashed border-border bg-white align-middle" style={{ minWidth: w }} />;
+  const used = ["permeable", "O₂", "simple diffusion", "channel", "ATP"];
+  const bank = ["ATP", "O₂", "against", "channel", "selectively permeable", "simple diffusion", "osmosis", "with"];
   return (
     <Row>
-      <div className="min-w-0 flex-1">
-        <div className={cn(field, "border-border p-5 text-[16px] leading-[2.2]")}>
-          The cell membrane is {blank(marked ? "permeable" : "permeable", false, 150)}{marked && <span className="ml-1 text-[13px] font-semibold text-emerald-700">selectively permeable</span>}, so small non-polar molecules such as {blank("O₂", true, 60)} cross by {blank("simple diffusion", true, 150)}. Ions and large polar molecules need {blank("channel", true, 100)} or carrier proteins. Moving a substance {blank("against", true, 90)} its gradient requires {blank("ATP", true, 70)}.
-        </div>
-        <div className="mt-2 text-[12px] text-faint">Type in each blank · Tab to move on</div>
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="mr-1 flex items-center gap-1.5 text-[12px] font-semibold text-faint"><GripVertical className="size-3.5" />Drag a word into a gap</span>
+        {bank.map((w) => <span key={w} className={cn("inline-flex h-8 cursor-grab items-center gap-1 rounded-lg border px-2.5 text-[13px] font-semibold shadow-sm active:cursor-grabbing", used.includes(w) ? "border-border bg-muted text-faint line-through shadow-none" : "border-border bg-white hover:border-accent hover:text-accent")}>{w}</span>)}
       </div>
-      <SideHint title="Word bank" open={hint}><div className="flex flex-wrap gap-1.5">{["ATP", "O₂", "against", "channel", "selectively permeable", "simple diffusion", "osmosis", "with"].map((w) => <span key={w} className="rounded-lg border border-border bg-white px-2 py-1 text-[12.5px] font-medium">{w}</span>)}</div></SideHint>
+      <div className={cn(field, "border-border p-5 text-[16px] leading-[2.3]")}>
+        The cell membrane is {filled("permeable", false, 150)}{marked && <span className="ml-1 text-[13px] font-semibold text-emerald-700">selectively permeable</span>}, so small non-polar molecules such as {filled("O₂", true, 60)} cross by {filled("simple diffusion", true, 150)}. Ions and large polar molecules need {filled("channel", true, 100)} or carrier proteins. Moving a substance {marked ? filled("against", true, 90) : slot(90)} its gradient requires {filled("ATP", true, 70)}.
+      </div>
+      <div className="text-[12px] text-faint">Drag or type · Tab moves to the next gap · drag a word back out to clear it</div>
     </Row>
   );
 }
