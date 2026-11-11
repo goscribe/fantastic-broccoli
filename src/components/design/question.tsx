@@ -18,7 +18,7 @@ export function QuestionFrame({ tag, qi, qn, question, children, bottom, message
           <span className="text-[14px] font-semibold text-muted-foreground">Q{qi} of {qn}</span>
           <span className="flex h-[34px] items-center gap-1.5 rounded-xl border border-border px-2.5 text-[14px] font-semibold"><FlameIcon size={20} />12</span>
         </div>
-        <div className="mt-7 min-h-0 flex-1">
+        <div className="mt-7 min-h-0 flex-1 overflow-y-auto pb-4">
           <span className="inline-flex items-center rounded-lg bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent-dim">{tag}</span>
           <h1 className="mb-[18px] mt-3 text-[23px] font-bold leading-[1.3]">{question}</h1>
           {children}
