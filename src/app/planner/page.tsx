@@ -29,7 +29,7 @@ const toMin = (s: string) => {
   const [h, m] = s.split(":").map(Number);
   return h * 60 + m;
 };
-const PX = 56;
+const PX = 76;
 
 /** Study planner: week grid with Scribe sessions slotted into the study window, plan settings, nudge. */
 export default function PlannerPage() {
@@ -138,8 +138,8 @@ function Planner() {
                     style={{ top: y(s.start) + 1, height: Math.max(40, y(s.end) - y(s.start) - 2) }}
                     title={s.why ? `${s.title} — ${s.why}` : s.title}
                   >
-                    <span className="block truncate">{s.title}</span>
-                    <span className="block font-medium opacity-70">{hhmm(s.start)}–{hhmm(s.end)}{s.why ? ` · ${s.why}` : ""}</span>
+                    <span className="line-clamp-2">{s.title}</span>
+                    <span className="block truncate font-medium opacity-70">{hhmm(s.start)}–{hhmm(s.end)}{s.why ? ` · ${s.why}` : ""}</span>
                   </button>
                 ))}
               </div>
