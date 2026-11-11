@@ -75,7 +75,7 @@ export default function LandingPreview() {
           <p className="mt-3 text-[12.5px] text-faint">Free to start · no card · first session in under 5 minutes</p>
         </div>
         <div className="relative">
-          <Image src="/design/cat2-cheer.png" alt="" width={120} height={120} unoptimized className="design-pop absolute -right-4 -top-12 z-10 size-[120px] object-contain" />
+          <Image src="/design/cat2-cheer.png" alt="" width={120} height={120} unoptimized className="design-pop absolute -left-8 -top-14 z-10 size-[112px] object-contain" />
           <HeroMock />
         </div>
       </section>
