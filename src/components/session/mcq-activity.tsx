@@ -139,9 +139,9 @@ export function McqActivity({
             onClick={() => !revealed && setSelected(i)}
             disabled={revealed}
             className={cn(
-              "w-full text-left p-3 rounded-lg border text-sm",
+              "w-full text-left p-3.5 rounded-xl border-2 text-sm font-medium transition-colors",
               !revealed && selected === i && "border-accent bg-accent/5",
-              !revealed && selected !== i && "border-border hover:border-accent/30 hover:bg-muted/30",
+              !revealed && selected !== i && "border-border hover:border-accent/40 hover:bg-accent-soft/50",
               revealed && i === question.correctIndex && "border-success bg-success/5",
               revealed && selected === i && i !== question.correctIndex && "border-red-500 bg-red-500/5",
               revealed && selected !== i && i !== question.correctIndex && "opacity-50",

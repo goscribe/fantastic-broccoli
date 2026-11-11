@@ -12,6 +12,7 @@ import {
   Moon,
   Settings,
   Sparkles,
+  Flame,
   Sun,
   UserPlus,
 } from "lucide-react";
@@ -20,6 +21,7 @@ import { ScribeLogo } from "@/components/graphics/logo";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
 import { fetchWorkspace } from "@/lib/api/workspace";
+import { computeStreak, fetchActivityCalendar } from "@/lib/api/study";
 import { useCredits } from "@/lib/credits";
 import { resendVerification, signOut, useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
@@ -51,6 +53,12 @@ export function TopBar({
   const { t } = useI18n();
   const { user } = useAuthUser();
   const credits = useCredits();
+  const { data: dailyActivity } = useQuery({
+    queryKey: ["activity-calendar", 30],
+    queryFn: () => fetchActivityCalendar(30),
+    staleTime: 5 * 60_000,
+  });
+  const streak = dailyActivity ? computeStreak(dailyActivity) : 0;
   const { theme, toggleTheme } = useTheme();
   const menuRef = useRef<HTMLDivElement>(null);
   const notifRef = useRef<HTMLDivElement>(null);
@@ -183,15 +191,24 @@ export function TopBar({
           </div>
 
           <div className="flex shrink-0 items-center gap-1 sm:gap-1.5">
-            <Link
-              href="/pricing"
-              title={t("misc.studyPointsTooltip")}
-              className="flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2 py-1 text-[12px] font-semibold tabular-nums text-accent hover:border-accent/50 sm:px-2.5"
-            >
-              <Sparkles className="h-3.5 w-3.5" />
-              {credits}
-              <span className="hidden sm:inline">{t("misc.pts")}</span>
-            </Link>
+            <div className="flex h-9 items-center divide-x divide-border rounded-xl border border-border bg-card text-[13px] font-semibold tabular-nums shadow-xs">
+              <span
+                title={`${streak} ${t("misc.dayStreak")}`}
+                className="flex items-center gap-1 px-2.5 text-energy sm:px-3"
+              >
+                <Flame className="h-4 w-4" fill="currentColor" />
+                {streak}
+              </span>
+              <Link
+                href="/pricing"
+                title={t("misc.studyPointsTooltip")}
+                className="flex items-center gap-1 px-2.5 text-violet hover:text-accent sm:px-3"
+              >
+                <Sparkles className="h-4 w-4" fill="currentColor" />
+                {credits}
+                <span className="hidden sm:inline">{t("misc.pts")}</span>
+              </Link>
+            </div>
             {hasGuidedTourForPath(pathname) && (
               <button
                 type="button"

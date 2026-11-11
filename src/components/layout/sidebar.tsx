@@ -1,58 +1,59 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import Image from "next/image";
 import { ScribeMark } from "@/components/graphics/logo";
-import { accentNameForColor, accentNameForId } from "@/lib/accent-palette";
+import { accentForId } from "@/lib/accent-palette";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
+import { fetchStudySessions } from "@/lib/api/study";
 import { onTreeChanged } from "@/lib/tree-events";
 import { signOut, useAuthUser } from "@/lib/api/auth";
-import {
-  fetchAccountSummary,
-  formatBytes,
-  type AccountSummary,
-} from "@/lib/api/account";
-import { Folder as FolderType, Workspace } from "@/types";
+import { fetchAccountSummary, type AccountSummary } from "@/lib/api/account";
+import { Folder as FolderType, StudySession, Workspace } from "@/types";
 import { CreateResourceDialog } from "@/components/workspace/create-dialog";
 import { CommandPalette } from "@/components/layout/command-palette";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/misc";
 import {
   Home,
   Layers,
   Users,
   ChevronRight,
-  FilePlus2,
   FolderPlus,
   Plus,
   Search,
   X,
   Settings,
   LogOut,
+  Folder,
+  Check,
+  Loader2,
 } from "lucide-react";
 
-function ClayIcon({
-  src,
-  className,
+type RecentSession = { session: StudySession; workspace: Workspace };
+
+const navRow =
+  "flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-sm text-left transition-colors";
+const navIdle = "text-foreground/80 hover:bg-muted hover:text-foreground";
+const navActive = "bg-accent-soft text-accent font-medium";
+
+function SectionLabel({
+  children,
+  action,
 }: {
-  src: string;
-  className?: string;
+  children: React.ReactNode;
+  action?: React.ReactNode;
 }) {
   return (
-    <Image
-      src={src}
-      alt=""
-      width={64}
-      height={64}
-      unoptimized
-      className={cn(
-        "pointer-events-none shrink-0 select-none object-contain",
-        className,
-      )}
-    />
+    <div className="mt-4 mb-1 flex items-center px-2">
+      <span className="text-[11px] font-medium uppercase tracking-wide text-faint">
+        {children}
+      </span>
+      <div className="ml-auto flex items-center gap-0.5">{action}</div>
+    </div>
   );
 }
 
@@ -77,19 +78,14 @@ function FolderNode({
   return (
     <div>
       <div
-        className={cn(
-          "group flex items-center gap-1 rounded-xl py-1 pr-2 text-[13px] font-medium",
-          active
-            ? "bg-accent-soft text-foreground"
-            : "text-muted-foreground hover:bg-muted hover:text-foreground",
-        )}
-        style={{ paddingLeft: `${depth * 14 + 6}px` }}
+        className={cn("group", navRow, "py-1 pr-1", active ? navActive : navIdle)}
+        style={{ paddingLeft: `${depth * 12 + 4}px` }}
       >
         <button
           type="button"
           aria-label={isOpen ? "Collapse folder" : "Expand folder"}
           onClick={() => toggle(folder.id)}
-          className="p-0.5 -m-0.5 rounded hover:bg-border"
+          className="-m-0.5 rounded p-0.5 hover:bg-border"
         >
           <ChevronRight
             className={cn(
@@ -101,11 +97,11 @@ function FolderNode({
         <button
           type="button"
           onClick={() => router.push(`/folder/${folder.id}`)}
-          className="flex min-w-0 flex-1 items-center gap-1.5 text-left"
+          className="flex min-w-0 flex-1 items-center gap-2 text-left"
         >
-          <ClayIcon
-            src={`/illustrations/icons/folder-${accentNameForColor(folder.color, folder.id)}.png`}
-            className="h-5 w-5"
+          <Folder
+            className="h-3.5 w-3.5 shrink-0"
+            style={{ color: folder.color || accentForId(folder.id), fill: `${folder.color || accentForId(folder.id)}33` }}
           />
           <span className="truncate">{folder.name}</span>
         </button>
@@ -113,7 +109,7 @@ function FolderNode({
           type="button"
           aria-label={`New workspace in ${folder.name}`}
           onClick={() => onNewInFolder(folder.id)}
-          className="ml-auto shrink-0 rounded p-0.5 -m-0.5 text-faint opacity-0 hover:bg-border group-hover:opacity-100"
+          className="ml-auto shrink-0 rounded p-0.5 text-faint opacity-0 hover:bg-border group-hover:opacity-100"
         >
           <Plus className="h-3.5 w-3.5" />
         </button>
@@ -131,33 +127,81 @@ function FolderNode({
               onNewInFolder={onNewInFolder}
             />
           ))}
-          {folder.workspaces.map((ws) => {
-            const active = pathname.startsWith(`/workspace/${ws.id}`);
-            return (
-              <button
-                key={ws.id}
-                type="button"
-                onClick={() => router.push(`/workspace/${ws.id}`)}
-                className={cn(
-                  "w-full flex items-center gap-2 rounded-xl py-1 pr-2 text-[13px] text-left",
-                  active
-                    ? "bg-accent-soft text-accent font-medium"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                )}
-                style={{ paddingLeft: `${(depth + 1) * 14 + 24}px` }}
-              >
-                <ClayIcon
-                  src={`/illustrations/icons/ws-${accentNameForId(ws.id)}.png`}
-                  className="h-5 w-5"
-                />
-                <span className="truncate">{ws.title}</span>
-              </button>
-            );
-          })}
+          {folder.workspaces.map((ws) => (
+            <WorkspaceRow key={ws.id} ws={ws} depth={depth + 1} />
+          ))}
         </div>
       )}
     </div>
   );
+}
+
+function WorkspaceRow({ ws, depth }: { ws: Workspace; depth: number }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const active = pathname.startsWith(`/workspace/${ws.id}`);
+  return (
+    <button
+      type="button"
+      onClick={() => router.push(`/workspace/${ws.id}`)}
+      className={cn(navRow, "py-1", active ? navActive : navIdle)}
+      style={{ paddingLeft: `${depth * 12 + 22}px` }}
+    >
+      <span
+        className="h-2 w-2 shrink-0 rounded-sm"
+        style={{ background: accentForId(ws.id) }}
+      />
+      <span className="truncate">{ws.title}</span>
+    </button>
+  );
+}
+
+function RecentSessionRow({
+  item,
+  statusLabel,
+}: {
+  item: RecentSession;
+  statusLabel: string;
+}) {
+  const pathname = usePathname();
+  const { session, workspace } = item;
+  const href = `/workspace/${workspace.id}/session/${session.id}`;
+  const active = pathname === href;
+  const done = session.status === "completed";
+  const generating = session.activities.length === 0 && session.status === "active";
+  return (
+    <Link
+      href={href}
+      className={cn(navRow, "items-start py-1.5", active ? navActive : navIdle)}
+    >
+      <span className="mt-[5px] flex h-3 w-3 shrink-0 items-center justify-center">
+        {generating ? (
+          <Loader2 className="h-3 w-3 animate-spin text-accent" />
+        ) : done ? (
+          <Check className="h-3 w-3 text-success" />
+        ) : (
+          <span
+            className="h-2 w-2 rounded-full"
+            style={{ background: accentForId(workspace.id) }}
+          />
+        )}
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block truncate text-foreground/90">{session.title}</span>
+        <span className="block truncate text-[11px] text-faint">{statusLabel}</span>
+      </span>
+    </Link>
+  );
+}
+
+function flattenWorkspaces(folders: FolderType[], root: Workspace[]): Workspace[] {
+  const out: Workspace[] = [...root];
+  const walk = (f: FolderType) => {
+    out.push(...f.workspaces);
+    f.folders?.forEach(walk);
+  };
+  folders.forEach(walk);
+  return out;
 }
 
 export function Sidebar({
@@ -173,6 +217,7 @@ export function Sidebar({
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [folders, setFolders] = useState<FolderType[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
+  const [recent, setRecent] = useState<RecentSession[] | null>(null);
   const [summary, setSummary] = useState<AccountSummary | null>(null);
   const [treeLoading, setTreeLoading] = useState(true);
   const [paletteOpen, setPaletteOpen] = useState(false);
@@ -186,11 +231,26 @@ export function Sidebar({
 
   const loadTree = () =>
     fetchWorkspaceTree()
-      .then((tree) => {
+      .then(async (tree) => {
         setFolders(tree.folders);
         setRootWorkspaces(tree.rootWorkspaces);
+        const all = flattenWorkspaces(tree.folders, tree.rootWorkspaces);
+        const lists = await Promise.all(
+          all.slice(0, 12).map((w) =>
+            fetchStudySessions(w.id)
+              .then((sessions) => sessions.map((session) => ({ session, workspace: w })))
+              .catch(() =>
+                w.sessions.map((session) => ({ session, workspace: w })),
+              ),
+          ),
+        );
+        const items = lists
+          .flat()
+          .sort((a, b) => b.session.updatedAt.localeCompare(a.session.updatedAt))
+          .slice(0, 8);
+        setRecent(items);
       })
-      .catch(() => {})
+      .catch(() => setRecent([]))
       .finally(() => setTreeLoading(false));
 
   useEffect(() => {
@@ -217,123 +277,138 @@ export function Sidebar({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
+  const statusFor = (item: RecentSession) => {
+    const { session, workspace } = item;
+    const total = session.activities.length;
+    if (total === 0 && session.status === "active") return t("nav.generating");
+    if (session.status === "completed") return `${t("nav.done")} · ${workspace.title}`;
+    const doneCount = session.activities.filter((a) => a.status === "completed").length;
+    return `${doneCount}/${total} · ${workspace.title}`;
+  };
+
+  const tokenPct = useMemo(() => {
+    if (!summary || !summary.monthlyTokens) return 0;
+    return Math.min(100, Math.round((summary.tokenBalance / summary.monthlyTokens) * 100));
+  }, [summary]);
+
+  const nav = [
+    { href: "/", label: t("nav.home"), icon: Home, exact: true },
+    { href: "/flashcards", label: t("nav.flashcards"), icon: Layers },
+    { href: "/shared", label: t("nav.shared"), icon: Users },
+  ];
+
   return (
     <aside
       className={cn(
-        "w-72 shrink-0 flex-col bg-white dark:bg-card border-r border-border",
+        "w-64 shrink-0 flex-col border-r border-border bg-background",
         "max-md:fixed max-md:inset-y-0 max-md:left-0 max-md:z-50 max-md:transition-transform",
         "pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]",
         mobileOpen ? "flex" : "max-md:-translate-x-full hidden md:flex",
       )}
     >
-      <div className="flex items-center gap-2 px-4 h-14">
-        <ScribeMark className="h-8 w-8" />
-        <span className="text-base font-bold tracking-tight">Scribe</span>
+      <div className="flex h-12 items-center gap-2 px-3">
+        <ScribeMark className="h-6 w-6" />
+        <span className="text-[15px] font-bold tracking-tight">Scribe</span>
+        <button
+          type="button"
+          aria-label="Search"
+          data-tour="sidebar-search"
+          onClick={() => setPaletteOpen(true)}
+          className="ml-auto rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
+        >
+          <Search className="h-4 w-4" />
+        </button>
         {onMobileClose && (
           <button
             type="button"
             aria-label="Close sidebar"
             onClick={onMobileClose}
-            className="ml-auto rounded-md p-2.5 text-muted-foreground hover:bg-muted md:hidden"
+            className="rounded-md p-1.5 text-muted-foreground hover:bg-muted md:hidden"
           >
             <X className="h-4 w-4" />
           </button>
         )}
       </div>
 
-      <div className="px-3">
-        <button
-          type="button"
-          data-tour="sidebar-search"
-          onClick={() => setPaletteOpen(true)}
-          className="w-full flex items-center gap-2 rounded-xl border border-border bg-muted/40 px-2.5 py-2 text-[13px] text-faint hover:border-border-strong"
+      <div className="px-2">
+        <Link
+          href="/study-bot"
+          data-tour="new-workspace"
+          className="flex items-center gap-2 rounded-xl bg-accent px-3 py-2 text-sm font-medium text-accent-foreground shadow-xs hover:bg-accent-dim"
         >
-          <Search className="h-3.5 w-3.5" />
-          Search…
-          <kbd className="ml-auto text-[10px] text-faint border border-border rounded px-1">
-            ⌘K
-          </kbd>
-        </button>
+          <Plus className="h-3.5 w-3.5" />
+          {t("nav.newSession")}
+        </Link>
       </div>
 
-      <nav
-        className="flex-1 overflow-y-auto px-3 py-3 space-y-4"
-        data-tour="workspace-tree"
-      >
-        <div className="space-y-px">
-          <Link
-            href="/"
-            className={cn(
-              "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-semibold",
-              pathname === "/"
-                ? "bg-accent-soft text-accent"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground",
-            )}
-          >
-            <Home className="h-4 w-4" />
-            {t("nav.home")}
-          </Link>
-          <Link
-            href="/flashcards"
-            className={cn(
-              "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-semibold",
-              pathname.startsWith("/flashcards")
-                ? "bg-accent-soft text-accent"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground",
-            )}
-          >
-            <Layers className="h-4 w-4" />
-            {t("nav.flashcards")}
-          </Link>
-          <Link
-            href="/shared"
-            className={cn(
-              "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-semibold",
-              pathname.startsWith("/shared")
-                ? "bg-accent-soft text-accent"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground",
-            )}
-          >
-            <Users className="h-4 w-4" />
-            {t("nav.shared")}
-          </Link>
-        </div>
+      <nav className="mt-2 flex flex-col gap-px px-2">
+        {nav.map(({ href, label, icon: Icon, exact }) => {
+          const active = exact ? pathname === href : pathname.startsWith(href);
+          return (
+            <Link key={href} href={href} className={cn(navRow, active ? navActive : navIdle)}>
+              <Icon className="h-4 w-4 shrink-0" />
+              <span className="truncate">{label}</span>
+            </Link>
+          );
+        })}
+      </nav>
 
-        <div>
-            <div className="flex items-center justify-between px-1.5 pb-1">
-              <span className="text-xs font-semibold text-faint">{t("nav.folders")}</span>
-              <div className="flex items-center gap-0.5" data-tour="new-workspace">
-                <button
-                  type="button"
-                  aria-label={t("nav.newWorkspace")}
-                  title={t("nav.newWorkspace")}
-                  onClick={() => setCreating({ kind: "workspace" })}
-                  className="p-0.5 rounded text-faint hover:text-foreground hover:bg-muted"
-                >
-                  <FilePlus2 className="h-3.5 w-3.5" />
-                </button>
-                <button
-                  type="button"
-                  aria-label={t("nav.newFolder")}
-                  title={t("nav.newFolder")}
-                  onClick={() => setCreating({ kind: "folder" })}
-                  className="p-0.5 rounded text-faint hover:text-foreground hover:bg-muted"
-                >
-                  <FolderPlus className="h-3.5 w-3.5" />
-                </button>
-              </div>
+      <div className="flex-1 overflow-y-auto px-2 pb-3">
+        <SectionLabel>{t("nav.recent")}</SectionLabel>
+        {recent === null ? (
+          <div className="space-y-2 px-2 py-1">
+            <Skeleton className="h-3.5 w-3/4" />
+            <Skeleton className="h-3.5 w-1/2" />
+            <Skeleton className="h-3.5 w-2/3" />
+          </div>
+        ) : recent.length === 0 ? (
+          <p className="px-2 py-1 text-[12px] text-faint">{t("nav.noRecent")}</p>
+        ) : (
+          <div className="flex flex-col gap-px">
+            {recent.map((item) => (
+              <RecentSessionRow
+                key={item.session.id}
+                item={item}
+                statusLabel={statusFor(item)}
+              />
+            ))}
+          </div>
+        )}
+
+        <SectionLabel
+          action={
+            <>
+              <button
+                type="button"
+                aria-label={t("nav.newFolder")}
+                title={t("nav.newFolder")}
+                onClick={() => setCreating({ kind: "folder" })}
+                className="rounded p-1 text-faint hover:bg-muted hover:text-foreground"
+              >
+                <FolderPlus className="h-3.5 w-3.5" />
+              </button>
+              <button
+                type="button"
+                aria-label={t("nav.newWorkspace")}
+                title={t("nav.newWorkspace")}
+                onClick={() => setCreating({ kind: "workspace" })}
+                className="rounded p-1 text-faint hover:bg-muted hover:text-foreground"
+              >
+                <Plus className="h-3.5 w-3.5" />
+              </button>
+            </>
+          }
+        >
+          {t("nav.workspaces")}
+        </SectionLabel>
+        <div data-tour="workspace-tree">
+          {treeLoading ? (
+            <div className="space-y-2 px-2 py-1">
+              <Skeleton className="h-3.5 w-2/3" />
+              <Skeleton className="h-3.5 w-1/2" />
             </div>
-            <div className="space-y-px">
-              {treeLoading &&
-                Array.from({ length: 5 }, (_, i) => (
-                  <div key={i} className="flex items-center gap-2 px-2 py-1">
-                    <Skeleton className="h-5 w-5 rounded shrink-0" />
-                    <Skeleton
-                      className="h-3.5 rounded"
-                      style={{ width: `${55 + ((i * 17) % 30)}%` }}
-                    />
-                  </div>
-                ))}
+          ) : (
+            <>
               {folders.map((folder) => (
                 <FolderNode
                   key={folder.id}
@@ -341,121 +416,63 @@ export function Sidebar({
                   depth={0}
                   expanded={expanded}
                   toggle={toggle}
-                  onNewInFolder={(folderId) =>
-                    setCreating({ kind: "workspace", parentId: folderId })
-                  }
+                  onNewInFolder={(parentId) => setCreating({ kind: "workspace", parentId })}
                 />
               ))}
-              {rootWorkspaces.map((ws) => {
-                const active = pathname.startsWith(`/workspace/${ws.id}`);
-                return (
-                  <Link
-                    key={ws.id}
-                    href={`/workspace/${ws.id}`}
-                    className={cn(
-                      "flex items-center gap-2 rounded-xl py-1 px-2 text-[13px]",
-                      active
-                        ? "bg-accent-soft text-accent font-medium"
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                    )}
-                  >
-                    <ClayIcon
-                      src={`/illustrations/icons/ws-${accentNameForId(ws.id)}.png`}
-                      className="h-5 w-5"
-                    />
-                    <span className="truncate">{ws.title}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-      </nav>
+              {rootWorkspaces.map((ws) => (
+                <WorkspaceRow key={ws.id} ws={ws} depth={0} />
+              ))}
+              {folders.length === 0 && rootWorkspaces.length === 0 && (
+                <p className="px-2 py-1 text-[12px] text-faint">{t("nav.noWorkspaces")}</p>
+              )}
+            </>
+          )}
+        </div>
+      </div>
 
-      <div
-        className="shrink-0 border-t border-border px-3 py-3 space-y-2"
-        data-tour="sidebar-footer"
-      >
+      <div className="border-t border-border px-2 py-2" data-tour="sidebar-footer">
         {summary && (
-          <div className="rounded-xl border border-border bg-muted/40 px-2.5 py-2.5">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className="font-semibold text-muted-foreground">
-                {summary.planName} plan
-              </span>
-              <span className="text-faint">
-                {summary.tokenBalance} / {summary.monthlyTokens} tokens
+          <Link
+            href="/settings/billing"
+            className="mb-1 block rounded-md px-2 py-1.5 hover:bg-muted"
+          >
+            <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+              <span className="font-medium text-foreground">{summary.planName}</span>
+              <span>
+                {summary.tokenBalance.toLocaleString()} {t("nav.tokens").toLowerCase()}
               </span>
             </div>
-            <div className="mt-1.5 h-1 rounded-full bg-border overflow-hidden">
+            <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-muted">
               <div
                 className="h-full rounded-full bg-accent"
-                style={{
-                  width: `${
-                    summary.monthlyTokens > 0
-                      ? Math.min(100, (summary.tokenBalance / summary.monthlyTokens) * 100)
-                      : 0
-                  }%`,
-                }}
+                style={{ width: `${tokenPct}%` }}
               />
             </div>
-            <div className="mt-2 flex items-center justify-between text-[11px]">
-              <span className="text-faint">{t("nav.storage")}</span>
-              <span className="text-faint">
-                {formatBytes(summary.storageUsedBytes)} /{" "}
-                {formatBytes(summary.storageLimitBytes)}
-              </span>
-            </div>
-            <div className="mt-1.5 h-1 rounded-full bg-border overflow-hidden">
-              <div
-                className="h-full rounded-full bg-accent"
-                style={{
-                  width: `${Math.min(100, (summary.storageUsedBytes / summary.storageLimitBytes) * 100)}%`,
-                }}
-              />
-            </div>
-          </div>
+          </Link>
         )}
         <Link
           href="/settings"
-          className={cn(
-            "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-semibold",
-            pathname.startsWith("/settings")
-              ? "bg-accent-soft text-accent"
-              : "text-muted-foreground hover:bg-muted hover:text-foreground",
-          )}
+          className={cn(navRow, pathname.startsWith("/settings") ? navActive : navIdle)}
         >
           <Settings className="h-4 w-4" />
           {t("nav.settings")}
         </Link>
-        {user && (
-          <div className="flex items-center gap-2 px-1.5 pt-1">
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-accent-soft text-[12px] font-semibold text-accent">
-              {user.profilePicture ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={user.profilePicture}
-                  alt="Profile"
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                user.name.charAt(0).toUpperCase()
-              )}
-            </span>
-            <div className="min-w-0 flex-1 leading-tight">
-              <p className="truncate text-[13px] font-medium">{user.name}</p>
-              <p className="truncate text-[11px] text-faint">
-                {user.email ?? "Personal workspace"}
-              </p>
-            </div>
-            <button
-              type="button"
-              aria-label={t("nav.signOut")}
-              onClick={() => signOut()}
-              className="p-1.5 rounded-md text-faint hover:text-foreground hover:bg-muted"
-            >
-              <LogOut className="h-4 w-4" />
-            </button>
-          </div>
-        )}
+        <div className="mt-1 flex items-center gap-2 px-2 py-1">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-accent-foreground">
+            {(user?.name || user?.email || "?").slice(0, 1).toUpperCase()}
+          </span>
+          <span className="min-w-0 flex-1 truncate text-[12px] text-muted-foreground">
+            {user?.name || user?.email}
+          </span>
+          <button
+            type="button"
+            aria-label={t("nav.signOut")}
+            onClick={() => signOut()}
+            className="rounded-md p-1 text-faint hover:bg-muted hover:text-foreground"
+          >
+            <LogOut className="h-3.5 w-3.5" />
+          </button>
+        </div>
       </div>
 
       <CommandPalette
@@ -464,7 +481,6 @@ export function Sidebar({
         folders={folders}
         rootWorkspaces={rootWorkspaces}
       />
-
       {creating && (
         <CreateResourceDialog
           kind={creating.kind}

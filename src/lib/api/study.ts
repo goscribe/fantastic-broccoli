@@ -288,6 +288,22 @@ export async function fetchActivityCalendar(
   return studySessionApi.activityCalendar(days);
 }
 
+/** Consecutive days (ending today or yesterday) with at least one completed activity. */
+export function computeStreak(daily: DailyActivityPoint[]): number {
+  const byDate = new Map(daily.map((d) => [d.date, d.count]));
+  const today = new Date().toISOString().split("T")[0];
+  let streak = 0;
+  const d = new Date();
+  for (;;) {
+    const iso = d.toISOString().split("T")[0];
+    const count = byDate.get(iso) ?? 0;
+    if (count > 0) streak += 1;
+    else if (streak > 0 || iso !== today) break;
+    d.setDate(d.getDate() - 1);
+  }
+  return streak;
+}
+
 const activityTypeFromKind: Record<ApiArtifactKind, ActivityType> = {
   WORKSHEET: "worksheet",
   MCQ_POOL: "mcq",

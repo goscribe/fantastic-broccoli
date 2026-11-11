@@ -108,46 +108,6 @@ const ASSISTANT_BRIEF = `You are Scribe's workspace study assistant — the stud
  * transparent still poster when autoplay or the format is unsupported
  * (mobile low-power mode shows a play glyph over a paused video otherwise).
  */
-function BlobHello() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [usePoster, setUsePoster] = useState(false);
-  const blobClass =
-    "pointer-events-none mx-auto mb-4 h-32 w-32 select-none object-cover [mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)] [-webkit-mask-image:radial-gradient(circle_closest-side,black_68%,transparent_100%)]";
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.play().catch(() => setUsePoster(true));
-  }, [usePoster]);
-
-  if (usePoster) {
-    return (
-      <Image
-        src="/illustrations/blob-hello-poster.png"
-        alt=""
-        width={200}
-        height={200}
-        priority
-        aria-hidden
-        className={blobClass}
-      />
-    );
-  }
-  return (
-    <video
-      ref={videoRef}
-      src="/illustrations/blob-hello.webm"
-      autoPlay
-      loop
-      muted
-      playsInline
-      disablePictureInPicture
-      aria-hidden
-      onError={() => setUsePoster(true)}
-      className={blobClass}
-    />
-  );
-}
 
 /** File chip shown on pending uploads and inside chat messages. */
 function FileChip({
@@ -792,9 +752,8 @@ export default function WorkspaceChatPage() {
           <div aria-hidden className="flex-1" />
 
           {messages.length === 0 && (
-            <div className="mb-2 text-center animate-fade-up">
-              <BlobHello />
-              <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
+            <div className="mb-2 animate-fade-up">
+              <h1 className="text-lg font-semibold tracking-tight">
                 {workspace?.title}
               </h1>
             </div>
