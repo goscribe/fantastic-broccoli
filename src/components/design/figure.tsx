@@ -9,7 +9,7 @@ export function Figure({ title, caption, legend, children, width = 320, height =
         <span className="flex gap-1.5 text-faint"><ZoomIn className="size-4" /><Ellipsis className="size-4" /></span>
       </div>
       <div className="flex justify-center bg-accent-soft/40 p-4">
-        <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>{children}</svg>
+        <svg width={width * (height / 170)} height={height} viewBox={`0 0 ${width} 170`}>{children}</svg>
       </div>
       <div className="flex items-center justify-between gap-3 px-4 py-2.5">
         <span className="text-[12px] text-faint">{caption}</span>
@@ -30,10 +30,10 @@ function Callout({ x, y, w, text, color, lx, ly }: { x: number; y: number; w: nu
 }
 
 /** Red blood cell in a hypertonic beaker: liquid, membrane line, arrowed water flow, pill callouts. */
-export function OsmosisFigure({ after = true, overlay = false }: { after?: boolean; overlay?: boolean }) {
+export function OsmosisFigure({ after = true, overlay = false, wide = false }: { after?: boolean; overlay?: boolean; wide?: boolean }) {
   const rx = after ? 40 : 50, ry = after ? 26 : 32;
   return (
-    <Figure title="Figure 3.4 · Red blood cell in 0.3 M NaCl" caption="Redrawn from your notes · p. 12" legend={[["Solution", T.violet], ["Cell", T.red], ["Water", T.blue]]}>
+    <Figure title="Figure 3.4 · Red blood cell in 0.3 M NaCl" caption="Redrawn from your notes · p. 12" legend={[["Solution", T.violet], ["Cell", T.red], ["Water", T.blue]]} height={wide ? 150 : 170}>
       <defs>
         <marker id="ah" markerWidth={7} markerHeight={7} refX={5.5} refY={3.5} orient="auto"><path d="M0 0L7 3.5 0 7z" fill={T.violet} /></marker>
         <linearGradient id="liq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#ede9fe" /><stop offset="1" stopColor="#ddd6fe" /></linearGradient>

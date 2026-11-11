@@ -1,13 +1,19 @@
-import { Check, Keyboard, Mic, Square, X } from "lucide-react";
+import { Check, ChevronDown, Keyboard, Lightbulb, Mic, Square, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Ring } from "./charts";
 import { T } from "./tokens";
 
 const field = "rounded-[14px] border bg-white text-[15px]";
-const SideHint = ({ title, children }: { title: string; children: React.ReactNode }) => <div className="w-[300px] shrink-0 rounded-2xl bg-muted p-4"><div className="text-[11px] font-semibold text-faint">{title}</div><div className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{children}</div></div>;
-const Row = ({ children }: { children: React.ReactNode }) => <div className="flex items-start gap-5">{children}</div>;
+/** Hints stay folded until the student asks (or after a wrong try); `open` forces them for marked states. */
+export const SideHint = ({ title, children, open = false }: { title: string; children: React.ReactNode; open?: boolean }) => (
+  <details open={open} className="group rounded-2xl bg-muted/70 open:bg-muted">
+    <summary className="flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-[13px] font-semibold text-muted-foreground marker:hidden [&::-webkit-details-marker]:hidden"><Lightbulb className="size-4 text-amber-500" />Need a hint?<span className="ml-auto text-[11px] font-medium text-faint group-open:hidden">{title}</span><ChevronDown className="size-4 transition-transform group-open:rotate-180" /></summary>
+    <div className="px-4 pb-4 text-[13px] leading-relaxed text-muted-foreground"><div className="mb-1 text-[11px] font-semibold text-faint">{title}</div>{children}</div>
+  </details>
+);
+const Row = ({ children }: { children: React.ReactNode }) => <div className="flex flex-col gap-4">{children}</div>;
 
-export function NumericBody({ marked }: { marked: boolean }) {
+export function NumericBody({ marked, hint = false }: { marked: boolean; hint?: boolean }) {
   return (
     <Row>
       <div className="min-w-0 flex-1">
@@ -18,12 +24,12 @@ export function NumericBody({ marked }: { marked: boolean }) {
         </div>
         <div className="mt-2 text-[12px] text-faint">Give your answer to 1 decimal place · units are filled in for you</div>
       </div>
-      <SideHint title="Markscheme · 2 marks"><div className="flex flex-col gap-1.5">{[["M1", "Change ÷ original mass × 100 (working)", marked], ["M2", "−11.3% (accept −11.2 to −11.4)", marked]].map(([m, t, ok]) => <div key={m as string} className="flex gap-2"><span className={cn("grid h-5 w-[30px] shrink-0 place-items-center rounded-md text-[11px] font-bold", ok ? "bg-emerald-600 text-white" : "bg-white text-muted-foreground")}>{m}</span>{t}</div>)}</div></SideHint>
+      <SideHint title="Markscheme · 2 marks" open={marked || hint}><div className="flex flex-col gap-1.5">{[["M1", "Change ÷ original mass × 100 (working)", marked], ["M2", "−11.3% (accept −11.2 to −11.4)", marked]].map(([m, t, ok]) => <div key={m as string} className="flex gap-2"><span className={cn("grid h-5 w-[30px] shrink-0 place-items-center rounded-md text-[11px] font-bold", ok ? "bg-emerald-600 text-white" : "bg-white text-muted-foreground")}>{m}</span>{t}</div>)}</div></SideHint>
     </Row>
   );
 }
 
-export function TrueFalseBody({ marked }: { marked: boolean }) {
+export function TrueFalseBody({ marked, hint = false }: { marked: boolean; hint?: boolean }) {
   const tile = (label: string, picked: boolean, right: boolean) => (
     <button className={cn("flex h-[88px] flex-1 flex-col items-center justify-center gap-1.5 rounded-2xl border text-[17px] font-semibold", !marked && picked && "border-accent bg-accent-soft", marked && right && "border-emerald-300 bg-emerald-50", marked && picked && !right && "border-rose-300 bg-rose-50", !picked && !right && "border-border bg-white")}>
       {label}
@@ -33,12 +39,12 @@ export function TrueFalseBody({ marked }: { marked: boolean }) {
   return (
     <Row>
       <div className="flex-1"><div className="flex gap-3">{tile("True", true, false)}{tile("False", false, true)}</div><div className="mt-2 text-[12px] text-faint">Press T or F · Enter to check</div></div>
-      <SideHint title="From your notes · p. 14">&ldquo;Facilitated diffusion: passive movement through channel or carrier proteins, down the concentration gradient, <b>no energy required</b>.&rdquo;</SideHint>
+      <SideHint title="From your notes · p. 14" open={hint}>&ldquo;Facilitated diffusion: passive movement through channel or carrier proteins, down the concentration gradient, <b>no energy required</b>.&rdquo;</SideHint>
     </Row>
   );
 }
 
-export function MatchingBody({ marked }: { marked: boolean }) {
+export function MatchingBody({ marked, hint = false }: { marked: boolean; hint?: boolean }) {
   const pairs: [string, string, boolean][] = [["Hypertonic", "Cell shrinks (crenates)", true], ["Hypotonic", "No net change", false], ["Isotonic", "Cell swells and bursts", false], ["Pure water", "Bursts fastest", true]];
   const colors = [T.violet, T.sky, T.orange, T.green];
   return (
@@ -53,12 +59,12 @@ export function MatchingBody({ marked }: { marked: boolean }) {
         ))}
         <div className="mt-1 text-[12px] text-faint">Drag a card on the right, or press 1–4 then A–D</div>
       </div>
-      <SideHint title="Tip">Think about where the <b>water</b> goes, not the solute — it always moves toward the side with more dissolved stuff.</SideHint>
+      <SideHint title="Tip" open={hint}>Think about where the <b>water</b> goes, not the solute — it always moves toward the side with more dissolved stuff.</SideHint>
     </Row>
   );
 }
 
-export function ClozeBody({ marked }: { marked: boolean }) {
+export function ClozeBody({ marked, hint = false }: { marked: boolean; hint?: boolean }) {
   const blank = (v: string, ok = true, w = 110) => <span className={cn("mx-0.5 inline-flex h-8 items-center justify-center rounded-lg border px-2 align-middle text-[14px] font-semibold", marked ? (ok ? "border-emerald-400 bg-emerald-50 text-emerald-800" : "border-rose-400 bg-rose-50 text-rose-800 line-through") : "border-accent bg-accent-soft/60 text-accent-dim")} style={{ minWidth: w }}>{v}</span>;
   return (
     <Row>
@@ -68,12 +74,12 @@ export function ClozeBody({ marked }: { marked: boolean }) {
         </div>
         <div className="mt-2 text-[12px] text-faint">Type in each blank · Tab to move on</div>
       </div>
-      <SideHint title="Word bank"><div className="flex flex-wrap gap-1.5">{["ATP", "O₂", "against", "channel", "selectively permeable", "simple diffusion", "osmosis", "with"].map((w) => <span key={w} className="rounded-lg border border-border bg-white px-2 py-1 text-[12.5px] font-medium">{w}</span>)}</div></SideHint>
+      <SideHint title="Word bank" open={hint}><div className="flex flex-wrap gap-1.5">{["ATP", "O₂", "against", "channel", "selectively permeable", "simple diffusion", "osmosis", "with"].map((w) => <span key={w} className="rounded-lg border border-border bg-white px-2 py-1 text-[12.5px] font-medium">{w}</span>)}</div></SideHint>
     </Row>
   );
 }
 
-export function SummaryBody({ marked }: { marked: boolean }) {
+export function SummaryBody({ marked, hint = false }: { marked: boolean; hint?: boolean }) {
   const ideas: [string, boolean][] = [["Names the routes (diffusion, facilitated, active, osmosis)", true], ["Size / polarity decides whether a protein is needed", true], ["Direction relative to the gradient", true], ["Energy: passive vs active (ATP)", false]];
   return (
     <Row>
@@ -81,15 +87,15 @@ export function SummaryBody({ marked }: { marked: boolean }) {
         <div className={cn(field, "min-h-[140px] p-4 text-[14px] leading-[1.6]", marked ? "border-border" : "border-accent")}>Small non-polar molecules slip straight through the bilayer, while ions and big polar molecules have to use channel or carrier proteins. Water moves by osmosis toward the side with more solute. Which route a substance takes depends on its size and whether it is charged.{!marked && <span className="ml-0.5 inline-block h-[18px] w-0.5 -translate-y-[3px] bg-accent align-middle" />}</div>
         <div className="mt-2 flex justify-between text-[12px] text-faint"><span>52 words · aim for 40–80</span><span>Reading: Transport across membranes · 3 min</span></div>
       </div>
-      <div className="w-[320px] shrink-0">
+      <div>
         {marked ? <div className="flex flex-col gap-3"><div className="flex items-center gap-4 rounded-2xl border border-border p-4"><Ring pct={0.75} size={64} stroke={10} color={T.green}><span className="text-[15px] font-bold">3/4</span></Ring><div><div className="text-[16px] font-bold">Nearly complete</div><div className="text-[13px] text-faint">One idea missing</div></div></div><div className="flex flex-col gap-2 rounded-2xl bg-muted p-4">{ideas.map(([t, ok]) => <div key={t} className={cn("flex items-start gap-2.5 text-[13px]", !ok && "text-muted-foreground")}><span className={cn("mt-px grid size-[18px] shrink-0 place-items-center rounded-full text-white", ok ? "bg-emerald-600" : "bg-red-600")}>{ok ? <Check className="size-[11px]" /> : <X className="size-[11px]" />}</span>{t}</div>)}</div></div>
-          : <SideHint title="Key ideas · 4">We check for the ideas, not the wording.<div className="mt-2 flex flex-wrap gap-1.5">{["Routes", "Size / polarity", "Direction", "Energy"].map((c) => <span key={c} className="rounded-[7px] border border-border bg-white px-2 py-1 text-[12px] font-semibold text-muted-foreground">{c}</span>)}</div></SideHint>}
+          : <SideHint title="Key ideas · 4" open={hint}>We check for the ideas, not the wording.<div className="mt-2 flex flex-wrap gap-1.5">{["Routes", "Size / polarity", "Direction", "Energy"].map((c) => <span key={c} className="rounded-[7px] border border-border bg-white px-2 py-1 text-[12px] font-semibold text-muted-foreground">{c}</span>)}</div></SideHint>}
       </div>
     </Row>
   );
 }
 
-export function ExplainBody({ marked, mode = "speak" }: { marked: boolean; mode?: "speak" | "type" }) {
+export function ExplainBody({ marked, mode = "speak", hint = false }: { marked: boolean; mode?: "speak" | "type"; hint?: boolean }) {
   const bars = Array.from({ length: 48 }, (_, i) => 8 + Math.abs(Math.sin(i * 0.9) * 26 + Math.cos(i * 0.37) * 10));
   const toggle = (
     <div className="mb-3 inline-flex rounded-xl bg-muted p-1 text-[13px] font-semibold">
@@ -103,7 +109,7 @@ export function ExplainBody({ marked, mode = "speak" }: { marked: boolean; mode?
           <div className={cn(field, "min-h-[150px] p-4 text-[14px] leading-[1.6]", marked ? "border-border" : "border-accent")}>Imagine the cell is a balloon full of salty water. Pure water outside has way more water molecules, so by osmosis they rush in and the balloon fills until it pops. Animal cells have no cell wall to hold them, so nothing stops the stretching.{!marked && <span className="ml-0.5 inline-block h-[18px] w-0.5 -translate-y-[3px] bg-accent align-middle" />}</div>
           <div className="mt-2 flex justify-between text-[12px] text-faint"><span>54 words · explain like you would out loud</span><span className="flex items-center gap-1"><Mic className="size-3.5" />Switch to speaking</span></div>
         </div>
-        <SideHint title="We look for">{["Uses the word osmosis", "Gives the direction of water movement", "Explains why the cell bursts (no cell wall)", "Pitched for a Year 9 — an analogy helps"].map((c, i) => <div key={c} className="flex gap-2"><span className="font-bold text-accent">{i + 1}</span>{c}</div>)}</SideHint>
+        <SideHint title="We look for" open={hint}>{["Uses the word osmosis", "Gives the direction of water movement", "Explains why the cell bursts (no cell wall)", "Pitched for a Year 9 — an analogy helps"].map((c, i) => <div key={c} className="flex gap-2"><span className="font-bold text-accent">{i + 1}</span>{c}</div>)}</SideHint>
       </Row>
     );
   }
@@ -118,7 +124,7 @@ export function ExplainBody({ marked, mode = "speak" }: { marked: boolean; mode?
         </div>
         {marked && <div className="mt-3 rounded-2xl border border-border p-4 text-[13.5px] leading-relaxed text-muted-foreground"><span className="text-[11px] font-semibold text-faint">Transcript</span><br />&ldquo;Imagine the cell is a balloon full of salty water. Pure water outside has way more water molecules, so by osmosis they rush in — the balloon fills until it pops. <mark className="rounded-[3px] bg-rose-100 text-rose-800">Water goes to where there is less water</mark>…&rdquo;</div>}
       </div>
-      <SideHint title="We listen for">{["Uses the word osmosis", "Gives the direction of water movement", "Explains why the cell bursts (no cell wall)", "Pitched for a Year 9 — an analogy helps"].map((c, i) => <div key={c} className="flex gap-2"><span className="font-bold text-accent">{i + 1}</span>{c}</div>)}</SideHint>
+      <SideHint title="We listen for" open={hint}>{["Uses the word osmosis", "Gives the direction of water movement", "Explains why the cell bursts (no cell wall)", "Pitched for a Year 9 — an analogy helps"].map((c, i) => <div key={c} className="flex gap-2"><span className="font-bold text-accent">{i + 1}</span>{c}</div>)}</SideHint>
     </Row>
   );
 }

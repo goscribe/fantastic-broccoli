@@ -3,6 +3,7 @@ import Link from "next/link";
 const SCREENS: [string, string][] = [
   ["Learn (self-directed)", "/design/learn"],
   ["Question · multiple choice", "/design/question?type=mcq"],
+  ["Question · multiple choice · hint open", "/design/question?type=mcq&hint=1"],
   ["Question · multiple choice · wrong, with chat", "/design/question?type=mcq&state=fb&chat=1"],
   ["Question · panel collapsed", "/design/question?type=mcq&panel=closed"],
   ["Question · text (6 marks)", "/design/question?type=text"],
