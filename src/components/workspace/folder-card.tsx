@@ -40,7 +40,7 @@ export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
     >
       {newUi ? (
         <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl" style={{ background: `${hex}1f` }}>
-          <FolderIcon className="h-5 w-5" style={{ color: hex }} fill="currentColor" fillOpacity={0.3} />
+          <FolderIcon className="h-5 w-5" style={{ color: hex }} fill="currentColor" strokeWidth={1.5} />
         </span>
       ) : (
         <Image

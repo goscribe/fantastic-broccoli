@@ -108,7 +108,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
                   on && "bg-accent-soft/70 text-accent-dim",
                 )}
               >
-                <FolderIcon className="size-4 shrink-0" style={{ color: accentForId(f.id) }} fill="currentColor" fillOpacity={0.25} />
+                <FolderIcon className="size-4 shrink-0" style={{ color: accentForId(f.id) }} fill="currentColor" strokeWidth={1.5} />
                 <span className="truncate">{f.name}</span>
                 <span className="ml-auto text-[11px] font-medium text-faint">{f.workspaces.length}</span>
               </Link>
