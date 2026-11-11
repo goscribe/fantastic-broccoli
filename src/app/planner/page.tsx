@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchPlannerWeek, updateStudyPlan, type StudyPlan } from "@/lib/api/planner";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -117,7 +116,7 @@ export default function PlannerPage() {
 
       <div className="flex w-full shrink-0 flex-col gap-3.5 lg:w-[300px]">
         <div className="flex items-center gap-3 rounded-2xl border border-border p-4">
-          <Image src="/design/props/calendar.png" alt="" width={36} height={36} unoptimized className="h-9 w-auto" />
+          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent"><Calendar className="size-[18px]" /></span>
           <div className="min-w-0 flex-1">
             <div className="text-[14px] font-semibold">Google Calendar</div>
             <div className="text-[12px] text-faint">{data?.calendar.connected ? "Connected" : "Not connected · coming soon"}</div>
