@@ -11,7 +11,9 @@ function readClient(): boolean {
   const q = new URLSearchParams(window.location.search).get("ui");
   if (q === "new") localStorage.setItem(KEY, "1");
   if (q === "old") localStorage.removeItem(KEY);
-  return localStorage.getItem(KEY) === "1";
+  const on = localStorage.getItem(KEY) === "1";
+  document.documentElement.classList.toggle("new-ui", on);
+  return on;
 }
 
 export function useNewUi(): boolean {

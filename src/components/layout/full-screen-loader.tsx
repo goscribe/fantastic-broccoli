@@ -1,72 +1,29 @@
 "use client";
 
 import Image from "next/image";
-import {
-  ConfettiDots,
-  Sticker,
-} from "@/components/graphics/floating-decor";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
 
 /**
- * Boot splash while auth resolves. Keep this light — it sits in front of
- * every signed-in page — and keep the first paint deterministic so it
- * does not trip a hydration mismatch.
+ * Boot splash while auth resolves. Deliberately plain (logo + bar) so it
+ * looks right under both the old and the new UI and never flashes
+ * old-theme artwork.
  */
 export function FullScreenLoader() {
   const { t } = useI18n();
-
   return (
     <div
       role="status"
       aria-live="polite"
       aria-busy="true"
-      className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-[#f3f1fe] px-6"
+      className="flex min-h-dvh flex-col items-center justify-center gap-5 bg-background px-6"
     >
-      <ConfettiDots className="opacity-60" />
-      <Sticker
-        src="/illustrations/props/star-gold.png"
-        className="right-[11%] top-[16%] hidden w-10 sm:block"
-        delay="-0.4s"
-      />
-      <Sticker
-        src="/illustrations/props/pencil.png"
-        className="bottom-[18%] left-[10%] hidden w-12 rotate-[-18deg] sm:block"
-        delay="-1.2s"
-      />
-      <Sticker
-        src="/illustrations/props/book-blue.png"
-        className="right-[14%] bottom-[20%] hidden w-11 sm:block"
-        delay="-0.8s"
-      />
-
-      <div className="relative z-10 flex flex-col items-center">
-        <Image
-          src="/illustrations/blobs-playing.png"
-          alt=""
-          width={785}
-          height={503}
-          priority
-          unoptimized
-          aria-hidden
-          className="h-40 w-auto select-none motion-reduce:animate-none sm:h-48"
-        />
-
-        <div className="mt-6 flex items-center gap-1.5" aria-hidden>
-          {[0, 1, 2].map((i) => (
-            <span
-              key={i}
-              className="h-2 w-2 rounded-full bg-accent motion-reduce:animate-none animate-loader-dot"
-              style={{ animationDelay: `${i * 0.16}s` }}
-            />
-          ))}
-        </div>
-
-        <p className="mt-3 text-center text-sm text-muted-foreground">
-          {t("misc.gettingReady")}
-        </p>
-        <span className="sr-only">{t("common.loading")}</span>
+      <Image src="/logo.png" alt="" width={48} height={48} priority className="size-12 animate-pulse" />
+      <div className="h-1.5 w-40 overflow-hidden rounded-full bg-muted">
+        <div className="h-full w-1/3 animate-[loader-slide_1.1s_ease-in-out_infinite] rounded-full bg-accent" />
       </div>
+      <span className="sr-only">{t("misc.loading")}</span>
+      <style>{`@keyframes loader-slide{0%{transform:translateX(-100%)}100%{transform:translateX(400%)}}`}</style>
     </div>
   );
 }

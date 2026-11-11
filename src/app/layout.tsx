@@ -5,6 +5,7 @@ import "./globals.css";
 import { AppShell } from "@/components/layout/app-shell";
 import { Providers } from "@/components/providers";
 import { themeInitScript } from "@/lib/theme";
+import { newUiInitScript } from "@/lib/new-ui-init";
 import {
   defaultDescription,
   defaultTitle,
@@ -87,6 +88,7 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: newUiInitScript }} />
         <script {...jsonLdScriptProps(organizationJsonLd)} />
         <script {...jsonLdScriptProps(webSiteJsonLd)} />
         <script {...jsonLdScriptProps(softwareApplicationJsonLd)} />
