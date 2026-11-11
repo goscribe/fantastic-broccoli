@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUp, BookOpen, Camera, FileText, Layers, MessageCircle, Plus, Dumbbell, ClipboardList, ChevronDown, ChevronUp, MoreVertical, Check, ListChecks, Mic, Zap } from "lucide-react";
+import { ArrowUp, BookOpen, Camera, FileText, Layers, MessageCircle, Plus, Dumbbell, ClipboardList, ChevronDown, ChevronUp, MoreVertical, Check } from "lucide-react";
 import { AppFrame } from "@/components/design/shell";
 import { Donut, Ring, WeekBars } from "@/components/design/charts";
 import { T } from "@/components/design/tokens";
@@ -31,14 +31,14 @@ function MatIcon({ kind, large = false }: { kind: "pdf" | "img" | "pp"; large?: 
   return <span className={cn("grid shrink-0 place-items-center", large ? "size-9 rounded-[11px]" : "size-6 rounded-[7px] shadow-sm", cls)}><Icon className={large ? "size-4" : "size-3.5"} /></span>;
 }
 
-const ACT_ICON: Record<string, typeof Zap> = { Reading: BookOpen, "Quick 5": Zap, Flashcards: Layers, Worksheet: ClipboardList, Cloze: ListChecks, "Explain aloud": Mic, Comprehension: MessageCircle, Interactive: Dumbbell, "Vocab recall": Layers };
+const CAT_FOR: Record<string, string> = { Reading: "/design/cat2-book.png", Worksheet: "/design/cat2-pencil.png", Cloze: "/design/cat2-pencil.png", "Quick 5": "/design/cat2-think.png", Flashcards: "/design/cat2-think.png", "Explain aloud": "/design/cat2-wave.png", Debrief: "/design/cat2-trophy.png" };
 
 function MiniRing({ pct, done, children }: { pct: number; done?: boolean; children?: React.ReactNode }) {
   const r = 20, c = 2 * Math.PI * r;
   return (
-    <span className="relative grid size-12 shrink-0 place-items-center">
-      <svg viewBox="0 0 48 48" className="absolute inset-0 -rotate-90"><circle cx="24" cy="24" r={r} fill="none" stroke="var(--color-muted)" strokeWidth="4" /><circle cx="24" cy="24" r={r} fill="none" stroke={done ? "#10b981" : "var(--color-accent)"} strokeWidth="4" strokeLinecap="round" strokeDasharray={`${pct * c} ${c}`} /></svg>
-      <span className="relative text-muted-foreground">{children}</span>
+    <span className="relative grid size-[52px] shrink-0 place-items-center">
+      <svg viewBox="0 0 48 48" className="absolute inset-0 -rotate-90"><circle cx="24" cy="24" r={r} fill="none" stroke="var(--color-muted)" strokeWidth="3.5" /><circle cx="24" cy="24" r={r} fill="none" stroke={done ? "#10b981" : "var(--color-accent)"} strokeWidth="3.5" strokeLinecap="round" strokeDasharray={`${pct * c} ${c}`} /></svg>
+      <span className="relative grid size-[42px] place-items-center overflow-hidden rounded-full bg-accent-soft/60">{children}</span>
     </span>
   );
 }
@@ -148,7 +148,7 @@ export default async function LearnPreview({ searchParams }: { searchParams: Pro
               const pct = s.done / s.total;
               return (
                 <div key={s.title} className="flex items-center gap-3.5 px-4 py-3">
-                  {rows === "ring" && <MiniRing pct={pct} done={s.status === "done"}>{(() => { const I = s.status === "done" ? Check : ACT_ICON[s.next.split(" · ")[0]] ?? Zap; return <I className={cn("size-4", s.status === "done" && "text-emerald-600")} />; })()}</MiniRing>}
+                  {rows === "ring" && <MiniRing pct={pct} done={s.status === "done"}><Image src={s.status === "done" ? "/design/cat2-trophy.png" : CAT_FOR[s.next.split(" · ")[0]] ?? "/design/cat2-think.png"} alt="" width={34} height={34} unoptimized className="size-[34px] object-contain" /></MiniRing>}
                   {rows === "trend" && <Spark v={s.scores} />}
                   {rows === "tile" && <span className={cn("grid size-12 shrink-0 place-items-center rounded-xl text-[14px] font-bold", { pdf: "bg-accent-soft text-accent", img: "bg-sky-50 text-sky-600", pp: "bg-emerald-50 text-emerald-600" }[s.kind])}>{s.topic}</span>}
                   {rows === "stack" && <Stack kind={s.kind} />}
