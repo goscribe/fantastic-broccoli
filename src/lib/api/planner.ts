@@ -38,7 +38,7 @@ export interface PlannerWeek {
   lessonsTotal: number;
   dueCards: number;
   nudge: { date: string; minutes: number } | null;
-  calendar: { connected: boolean };
+  calendar: { connected: false } | { connected: true; email: string | null; error: string | null };
 }
 
 export const fetchPlannerWeek = (weekStart?: string) =>
@@ -46,3 +46,5 @@ export const fetchPlannerWeek = (weekStart?: string) =>
 
 export const updateStudyPlan = (input: Partial<Omit<StudyPlan, "examDate">> & { examDate?: string | null }) =>
   rpc<StudyPlan>("planner.updatePlan", "mutation", input);
+
+export const disconnectCalendar = () => rpc<{ ok: boolean }>("planner.disconnectCalendar", "mutation", undefined);
