@@ -63,14 +63,15 @@ import { cn, formatDuration, formatRelativeDate } from "@/lib/utils";
 import { useCurrentItemIndex } from "@/lib/current-item";
 import {
   ArrowLeft,
+  ArrowRight,
   Check,
   ChevronLeft,
   ChevronRight,
   Clock,
   Loader2,
-  SkipForward,
   MessageSquare,
   RefreshCw,
+  SkipForward,
   Trash2,
   X,
 } from "lucide-react";
@@ -603,6 +604,286 @@ export default function SessionDetailPage() {
     }
   };
 
+  const copilotPane = (
+      <Copilot
+        open={planReady && copilotOpen}
+        onClose={() => setCopilotOpen(false)}
+        workspaceId={workspaceId}
+        studySessionId={sessionId}
+        activity={
+          activeActivity && !activeActivity.id.startsWith("bank-")
+            ? { activityId: activeActivity.id, itemIndex: activeItemIndex }
+            : undefined
+        }
+        page={`Study session player — "${session.title}"${
+          activeActivity
+            ? `, activity ${activities.findIndex((a) => a.id === activeActivity.id) + 1} of ${activities.length} "${activeActivity.title}" (${activeActivity.type})${
+                activeItemIndex !== undefined ? `, item ${activeItemIndex + 1}` : ""
+              }`
+            : ", plan overview"
+        } — /workspace/${workspaceId}/session/${sessionId}`}
+        context={`Session: ${session.title}${
+          activeActivity
+            ? `\nThe learner is currently on activity "${activeActivity.title}" (${activeActivity.type}).`
+            : ""
+        }`}
+      />
+  );
+  const commentsPanel = (
+    <>
+      {planReady && showComments && (
+        <div className="fixed inset-y-0 right-0 w-[26rem] max-w-full bg-card border-l border-border z-50 flex flex-col animate-fade-up">
+          <div className="flex items-center justify-between h-14 px-4 border-b border-border shrink-0">
+            <h3 className="text-sm font-semibold">{t("session.sessionNotes")}</h3>
+            <button
+              type="button"
+              onClick={() => setShowComments(false)}
+              className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+          <div className="flex-1 overflow-y-auto p-4 space-y-2">
+            {highlightEntries.length > 0 && (
+              <div className="space-y-2 pb-2">
+                <p className="text-xs font-semibold text-muted-foreground">
+                  {t("session.highlights")}
+                </p>
+                {highlightEntries.map((h) => (
+                  <Surface key={h.id} className="p-3 text-sm">
+                    <div className="flex items-start gap-2">
+                      <span
+                        className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${highlightDotClasses[h.color]}`}
+                      />
+                      <p className="italic">&ldquo;{h.text}&rdquo;</p>
+                    </div>
+                    {h.note && (
+                      <p className="mt-1.5 text-xs text-foreground/80 pl-4">
+                        {h.note}
+                      </p>
+                    )}
+                    <p className="mt-1.5 text-[11px] text-muted-foreground pl-4">
+                      {h.activityTitle}
+                    </p>
+                  </Surface>
+                ))}
+                <p className="text-xs font-semibold text-muted-foreground pt-2">
+                  {t("session.notes")}
+                </p>
+              </div>
+            )}
+            {notes.map((note) => (
+              <Surface key={note.id} muted className="group p-3 text-sm">
+                <p className="whitespace-pre-wrap">{note.content}</p>
+                <div className="mt-1.5 flex items-center justify-between">
+                  <span className="text-[11px] text-muted-foreground">
+                    {formatRelativeDate(note.createdAt)}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => deleteNote(note.id)}
+                    className="opacity-0 group-hover:opacity-100 p-1 rounded text-muted-foreground hover:text-rose transition-opacity"
+                    aria-label={t("session.deleteNote")}
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              </Surface>
+            ))}
+            {panelCount === 0 && (
+              <div className="text-center py-8">
+                <p className="text-sm font-medium">{t("session.noNotesYet")}</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {t("session.noNotesHint")}
+                </p>
+              </div>
+            )}
+          </div>
+          <div className="p-3 border-t border-border">
+            <div className="flex items-end gap-2">
+              <textarea
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    submitNote();
+                  }
+                }}
+                placeholder={t("session.addNotePlaceholder")}
+                rows={2}
+                className="flex-1 resize-none rounded-xl border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:border-accent/50 placeholder:text-faint"
+              />
+              <Button
+                size="sm"
+                disabled={!newComment.trim()}
+                onClick={submitNote}
+                className="h-9"
+              >
+                {t("session.add")}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+
+  if (newUi && !planFailed && !generating) {
+    const pct = (completedCount / Math.max(activities.length, 1)) * 100;
+    return (
+      <div className="flex h-dvh min-h-0 flex-1 overflow-hidden bg-background">
+        <div className="relative flex min-w-0 flex-1 flex-col">
+          <div className="flex items-center gap-4 px-5 pt-5 sm:gap-5 sm:px-10">
+            <button
+              type="button"
+              onClick={() => router.push(`/workspace/${workspaceId}`)}
+              aria-label={t("session.backToWorkspace")}
+              className="grid size-9 shrink-0 place-items-center rounded-xl text-faint hover:bg-muted hover:text-foreground"
+            >
+              <X className="size-[22px]" />
+            </button>
+            <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-muted">
+              <div className="h-full rounded-full bg-accent transition-[width] duration-500" style={{ width: `${pct}%` }} />
+            </div>
+            <span className="shrink-0 text-[14px] font-semibold text-muted-foreground tabular-nums">
+              {Math.min(activeIndex + 1, activities.length)} / {activities.length}
+            </span>
+            <span className="hidden shrink-0 items-center gap-1 text-[13px] text-muted-foreground md:flex">
+              <Clock className="size-3.5" />
+              {formatDuration(totalEstimated)}
+            </span>
+            <button
+              type="button"
+              onClick={() => setShowComments(!showComments)}
+              aria-label={t("session.sessionNotes")}
+              className="relative grid size-9 shrink-0 place-items-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
+            >
+              <MessageSquare className="size-4" />
+              {panelCount > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 grid size-3.5 place-items-center rounded-full bg-accent text-[9px] font-bold text-accent-foreground">
+                  {panelCount}
+                </span>
+              )}
+            </button>
+          </div>
+
+          <div
+            key={activeActivity?.id ?? "debrief"}
+            className={cn(
+              "min-h-0 flex-1 overflow-y-auto px-5 pb-28 pt-6 sm:px-10",
+              navDirection === "back" ? "animate-slide-in-left" : "animate-slide-in-right",
+            )}
+          >
+            <div className="mx-auto w-full max-w-3xl">
+              {showExtendPrompt && (
+                <div className="mb-5 flex flex-wrap items-center gap-3 rounded-2xl border border-accent/30 bg-accent-soft/60 px-5 py-4 animate-fade-up">
+                  <div className="min-w-56 flex-1">
+                    <p className="text-sm font-semibold">{t("session.extendTitle")}</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">
+                      {t("session.extendBefore")} {extensions.length} {t("session.extendAfter")} (+{extensionMinutes} {t("session.min")}).
+                    </p>
+                  </div>
+                  <div className="flex shrink-0 gap-2">
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        setExtended(true);
+                        extendPlan.mutate();
+                        if (!activeActivity) setActiveActivityId(extensions[0].id);
+                      }}
+                    >
+                      {t("session.continuePlan")}
+                    </Button>
+                    <Button size="sm" variant="ghost" onClick={() => setExtendDismissed(true)}>
+                      {t("session.finishAsPlanned")}
+                    </Button>
+                  </div>
+                </div>
+              )}
+              {activeActivity ? (
+                <>
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <span className="inline-flex items-center rounded-lg bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent-dim">
+                      {t(ACTIVITY_TYPE_LABELS[activeActivity.type] ?? "session.typeActivity")} · {t(`session.phase${phaseOf(activeActivity.type)}`)}
+                    </span>
+                    {cheerKey && (
+                      <span className="flex items-center gap-1.5 text-[12px] font-semibold text-accent">
+                        <Image src="/design/props/star.png" alt="" width={20} height={20} unoptimized className="size-5 object-contain" />
+                        {t(cheerKey)}
+                      </span>
+                    )}
+                  </div>
+                  <h1 className="mb-[18px] mt-3 text-[23px] font-bold leading-[1.3]">
+                    <MathText text={activeActivity.title} />
+                  </h1>
+                  <ContentRepairProvider
+                    scope={{
+                      workspaceId,
+                      target: { kind: "activity", id: activeActivity.id },
+                      onRepaired: () => queryClient.invalidateQueries({ queryKey: ["study-session", sessionId] }),
+                    }}
+                  >
+                    {renderActivity(activeActivity)}
+                  </ContentRepairProvider>
+                </>
+              ) : (
+                <SessionDebrief sessionId={sessionId} quickStart={session.quickStart} onBack={() => router.push(`/workspace/${workspaceId}`)} />
+              )}
+            </div>
+          </div>
+
+          {activeActivity && (
+            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 border-t border-border bg-card/95 px-5 py-3 backdrop-blur sm:px-10">
+              <button
+                type="button"
+                disabled={activeIndex === 0}
+                onClick={() => goToIndex(activeIndex - 1)}
+                className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-border px-4 text-[13.5px] font-semibold hover:bg-muted disabled:opacity-40"
+              >
+                <ArrowLeft className="size-4" />
+                {t("session.back")}
+              </button>
+              <span className="text-[12.5px] text-faint tabular-nums">
+                {completedCount}/{activities.length} {t("session.doneCount")}
+              </span>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => goToNext(true)}
+                  className="inline-flex h-10 items-center gap-1.5 rounded-xl px-4 text-[13.5px] font-semibold text-muted-foreground hover:bg-muted"
+                >
+                  <SkipForward className="size-4" />
+                  {t("session.skip")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => goToIndex(activeIndex + 1)}
+                  className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-border px-4 text-[13.5px] font-semibold hover:bg-muted"
+                >
+                  {t("session.next")}
+                  <ArrowRight className="size-4" />
+                </button>
+              </div>
+            </div>
+          )}
+
+          {celebrating && (
+            <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
+              <div className="animate-celebrate-pop flex flex-col items-center gap-2">
+                <Image src="/design/props/star.png" alt="" width={96} height={96} unoptimized className="h-20 w-20 select-none object-contain drop-shadow-lg" />
+                {cheerKey && <p className="text-sm font-bold text-accent">{t(cheerKey)}</p>}
+              </div>
+            </div>
+          )}
+        </div>
+        {copilotPane}
+        {commentsPanel}
+        {!copilotOpen && <CopilotTrigger onClick={() => setCopilotOpen(true)} />}
+      </div>
+    );
+  }
+
   return (
     <div className="flex-1 flex min-h-0">
       {/* Study column */}
@@ -966,127 +1247,8 @@ export default function SessionDetailPage() {
       )}
       </div>
 
-      {/* Copilot split pane */}
-      <Copilot
-        open={planReady && copilotOpen}
-        onClose={() => setCopilotOpen(false)}
-        workspaceId={workspaceId}
-        studySessionId={sessionId}
-        activity={
-          activeActivity && !activeActivity.id.startsWith("bank-")
-            ? { activityId: activeActivity.id, itemIndex: activeItemIndex }
-            : undefined
-        }
-        page={`Study session player — "${session.title}"${
-          activeActivity
-            ? `, activity ${activities.findIndex((a) => a.id === activeActivity.id) + 1} of ${activities.length} "${activeActivity.title}" (${activeActivity.type})${
-                activeItemIndex !== undefined ? `, item ${activeItemIndex + 1}` : ""
-              }`
-            : ", plan overview"
-        } — /workspace/${workspaceId}/session/${sessionId}`}
-        context={`Session: ${session.title}${
-          activeActivity
-            ? `\nThe learner is currently on activity "${activeActivity.title}" (${activeActivity.type}).`
-            : ""
-        }`}
-      />
-
-      {/* Comments panel */}
-      {planReady && showComments && (
-        <div className="fixed inset-y-0 right-0 w-[26rem] max-w-full bg-card border-l border-border z-50 flex flex-col animate-fade-up">
-          <div className="flex items-center justify-between h-14 px-4 border-b border-border shrink-0">
-            <h3 className="text-sm font-semibold">{t("session.sessionNotes")}</h3>
-            <button
-              type="button"
-              onClick={() => setShowComments(false)}
-              className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted"
-            >
-              <X className="h-4 w-4" />
-            </button>
-          </div>
-          <div className="flex-1 overflow-y-auto p-4 space-y-2">
-            {highlightEntries.length > 0 && (
-              <div className="space-y-2 pb-2">
-                <p className="text-xs font-semibold text-muted-foreground">
-                  {t("session.highlights")}
-                </p>
-                {highlightEntries.map((h) => (
-                  <Surface key={h.id} className="p-3 text-sm">
-                    <div className="flex items-start gap-2">
-                      <span
-                        className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${highlightDotClasses[h.color]}`}
-                      />
-                      <p className="italic">&ldquo;{h.text}&rdquo;</p>
-                    </div>
-                    {h.note && (
-                      <p className="mt-1.5 text-xs text-foreground/80 pl-4">
-                        {h.note}
-                      </p>
-                    )}
-                    <p className="mt-1.5 text-[11px] text-muted-foreground pl-4">
-                      {h.activityTitle}
-                    </p>
-                  </Surface>
-                ))}
-                <p className="text-xs font-semibold text-muted-foreground pt-2">
-                  {t("session.notes")}
-                </p>
-              </div>
-            )}
-            {notes.map((note) => (
-              <Surface key={note.id} muted className="group p-3 text-sm">
-                <p className="whitespace-pre-wrap">{note.content}</p>
-                <div className="mt-1.5 flex items-center justify-between">
-                  <span className="text-[11px] text-muted-foreground">
-                    {formatRelativeDate(note.createdAt)}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => deleteNote(note.id)}
-                    className="opacity-0 group-hover:opacity-100 p-1 rounded text-muted-foreground hover:text-rose transition-opacity"
-                    aria-label={t("session.deleteNote")}
-                  >
-                    <Trash2 className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-              </Surface>
-            ))}
-            {panelCount === 0 && (
-              <div className="text-center py-8">
-                <p className="text-sm font-medium">{t("session.noNotesYet")}</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {t("session.noNotesHint")}
-                </p>
-              </div>
-            )}
-          </div>
-          <div className="p-3 border-t border-border">
-            <div className="flex items-end gap-2">
-              <textarea
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                    submitNote();
-                  }
-                }}
-                placeholder={t("session.addNotePlaceholder")}
-                rows={2}
-                className="flex-1 resize-none rounded-xl border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:border-accent/50 placeholder:text-faint"
-              />
-              <Button
-                size="sm"
-                disabled={!newComment.trim()}
-                onClick={submitNote}
-                className="h-9"
-              >
-                {t("session.add")}
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
+      {copilotPane}
+      {commentsPanel}
 
       {planReady && !copilotOpen && (
         <CopilotTrigger onClick={() => setCopilotOpen(true)} />

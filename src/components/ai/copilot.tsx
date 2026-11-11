@@ -454,11 +454,12 @@ export function Copilot({
             />
             <div>
               <p className="text-sm font-semibold">
-                {t("misc.copilotEmptyTitle")}
+                {newUi ? "Stuck? Ask me anything." : t("misc.copilotEmptyTitle")}
               </p>
               <p className="text-xs text-muted-foreground mt-1">
-                {context ? `${context} — ` : ""}
-                {t("misc.copilotEmptyBlurb")}
+                {newUi
+                  ? "I can see what you’re working on and your notes. One chat for the whole session."
+                  : `${context ? `${context} — ` : ""}${t("misc.copilotEmptyBlurb")}`}
               </p>
             </div>
             <div className="space-y-2">

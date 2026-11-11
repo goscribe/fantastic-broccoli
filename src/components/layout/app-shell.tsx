@@ -11,10 +11,14 @@ import { MonthlyRatingPrompt } from "@/components/rating/monthly-rating-prompt";
 import { SubscribeWall } from "@/components/billing/subscribe-wall";
 import { PlanLimitDialog } from "@/components/billing/plan-limit-dialog";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
+import { NewShell } from "@/components/layout/new-shell";
+import { useNewUi } from "@/lib/new-ui";
+import "@/app/design/design.css";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { loading } = useAuthUser();
+  const newUi = useNewUi();
   const isSession = /^\/workspace\/[^/]+\/session\//.test(pathname);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -24,6 +28,26 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   if (loading) {
     return <FullScreenLoader />;
+  }
+
+  if (isSession && newUi) {
+    return (
+      <div className="design-root flex h-dvh flex-col overflow-hidden bg-white text-foreground">
+        {children}
+        {!BILLING_PAUSED && <PlanLimitDialog />}
+      </div>
+    );
+  }
+
+  if (newUi) {
+    return (
+      <>
+        <NewShell>{children}</NewShell>
+        <MonthlyRatingPrompt />
+        {!BILLING_PAUSED && <PlanLimitDialog />}
+        {!BILLING_PAUSED && <SubscribeWall />}
+      </>
+    );
   }
 
   if (isSession) {
