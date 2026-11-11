@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { House, Layers, LogOut, Plus, Search, Settings, Sparkles, Users } from "lucide-react";
+import { Folder as FolderIcon, House, Layers, LogOut, Plus, Search, Settings, Sparkles, Users } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import { accentForId } from "@/lib/accent-palette";
@@ -22,17 +22,6 @@ const NAV = [
   { href: "/shared", label: "Shared", icon: Users },
 ];
 
-function flatten(folders: Folder[], root: Workspace[]): Workspace[] {
-  const all = [...root];
-  const walk = (fs: Folder[]) => {
-    for (const f of fs) {
-      all.push(...f.workspaces);
-      if (f.folders) walk(f.folders);
-    }
-  };
-  walk(folders);
-  return all;
-}
 
 /** Redesign app frame: left rail with nav + workspaces, slim top bar, page content. */
 export function NewShell({ children }: { children: React.ReactNode }) {
@@ -71,7 +60,6 @@ export function NewShell({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  const workspaces = flatten(folders, rootWorkspaces);
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
   const initial = user?.name?.trim()?.[0]?.toUpperCase() ?? "";
 
@@ -103,25 +91,26 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             </Link>
           ))}
         </nav>
-        <div className="mt-6 px-3 text-[11px] font-semibold text-faint">My workspaces</div>
+        <div className="mt-6 px-3 text-[11px] font-semibold text-faint">Folders</div>
         <div className="mt-1.5 flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto">
           {treeLoading &&
-            workspaces.length === 0 &&
-            [0, 1, 2, 3].map((i) => <span key={i} className="mx-3 my-2 block h-4 animate-pulse rounded bg-muted" style={{ width: `${70 - i * 10}%` }} />)}
-          {workspaces.map((w) => {
-            const on = pathname.startsWith(`/workspace/${w.id}`);
+            folders.length === 0 &&
+            [0, 1, 2].map((i) => <span key={i} className="mx-3 my-2 block h-4 animate-pulse rounded bg-muted" style={{ width: `${70 - i * 12}%` }} />)}
+          {folders.map((f) => {
+            const on = pathname.startsWith(`/folder/${f.id}`);
             return (
               <Link
-                key={w.id}
-                href={`/workspace/${w.id}`}
+                key={f.id}
+                href={`/folder/${f.id}`}
                 onClick={() => setMobileOpen(false)}
                 className={cn(
                   "flex h-9 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium hover:bg-muted",
                   on && "bg-accent-soft/70 text-accent-dim",
                 )}
               >
-                <span className="size-2.5 shrink-0 rounded-full" style={{ background: accentForId(w.id) }} />
-                <span className="truncate">{w.title}</span>
+                <FolderIcon className="size-4 shrink-0" style={{ color: accentForId(f.id) }} fill="currentColor" fillOpacity={0.25} />
+                <span className="truncate">{f.name}</span>
+                <span className="ml-auto text-[11px] font-medium text-faint">{f.workspaces.length}</span>
               </Link>
             );
           })}

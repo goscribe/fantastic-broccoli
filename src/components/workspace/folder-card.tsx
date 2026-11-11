@@ -2,7 +2,9 @@
 
 import { Folder } from "@/types";
 import { countWorkspaces } from "@/lib/utils";
-import { accentNameForColor } from "@/lib/accent-palette";
+import { accentForId, accentNameForColor } from "@/lib/accent-palette";
+import { useNewUi } from "@/lib/new-ui";
+import { Folder as FolderIcon } from "lucide-react";
 import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
@@ -23,6 +25,8 @@ export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
   const wsCount = countWorkspaces(folder);
   const subCount = folder.folders?.length ?? 0;
   const accent = accentNameForColor(folder.color, folder.id);
+  const newUi = useNewUi();
+  const hex = /^#/.test(folder.color) ? folder.color : accentForId(folder.id);
 
   return (
     <div
@@ -34,13 +38,19 @@ export function FolderCard({ folder, onClick, actions }: FolderCardProps) {
       }}
       className="group relative flex cursor-pointer items-center gap-3 rounded-2xl border border-border bg-card px-4 py-4 text-left transition-all hover:-translate-y-0.5 hover:shadow-md"
     >
-      <Image
-        src={`/illustrations/icons/folder-${accent}.png`}
-        alt=""
-        width={88}
-        height={88}
-        className="pointer-events-none h-11 w-11 shrink-0 select-none object-contain"
-      />
+      {newUi ? (
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl" style={{ background: `${hex}1f` }}>
+          <FolderIcon className="h-5 w-5" style={{ color: hex }} fill="currentColor" fillOpacity={0.3} />
+        </span>
+      ) : (
+        <Image
+          src={`/illustrations/icons/folder-${accent}.png`}
+          alt=""
+          width={88}
+          height={88}
+          className="pointer-events-none h-11 w-11 shrink-0 select-none object-contain"
+        />
+      )}
       <div className="relative min-w-0 flex-1">
         <p className="font-semibold text-sm truncate">{folder.name}</p>
         <p className="text-xs text-muted-foreground mt-0.5">

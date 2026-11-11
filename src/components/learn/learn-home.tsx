@@ -129,7 +129,7 @@ function sessionProgress(s: StudySession) {
   return { total, done, next, pct: total ? done / total : s.progress / 100 };
 }
 
-export function LearnHome() {
+export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
   const router = useRouter();
   const { user } = useAuthUser();
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
@@ -153,9 +153,10 @@ export function LearnHome() {
     () =>
       fetchWorkspaceTree()
         .then(async (tree) => {
-          setFolders(tree.folders);
-          setRootWorkspaces(tree.rootWorkspaces);
-          const ws = flatten(tree.folders, tree.rootWorkspaces);
+          const all = flatten(tree.folders, tree.rootWorkspaces);
+          const ws = workspaceId ? all.filter((w) => w.id === workspaceId) : all;
+          setFolders(workspaceId ? [] : tree.folders);
+          setRootWorkspaces(workspaceId ? [] : tree.rootWorkspaces);
           setWorkspaces(ws);
           const lists = await Promise.all(ws.map((w) => fetchStudySessions(w.id).catch(() => [] as StudySession[])));
           setSessions(
@@ -166,7 +167,7 @@ export function LearnHome() {
         })
         .catch(() => {})
         .finally(() => setLoading(false)),
-    [],
+    [workspaceId],
   );
 
   useEffect(() => {
@@ -248,10 +249,12 @@ export function LearnHome() {
       <input ref={fileRef} type="file" multiple accept={UPLOAD_ACCEPT} className="hidden" onChange={(e) => void onFiles(e.target.files)} />
       <div className="flex min-w-0 flex-1 flex-col gap-[18px]">
         <div className="flex items-end justify-between">
-          <h1 className="text-[26px] font-bold">
-            {greeting()}
-            {firstName ? `, ${firstName}` : ""}
-          </h1>
+          <div>
+            {workspaceId && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Learn</Link>}
+            <h1 className="text-[26px] font-bold">
+              {workspaceId ? (workspaces[0]?.title ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
+            </h1>
+          </div>
           {sessions.length > 0 && <span className="text-[13px] text-faint">{sessions.length} study sessions</span>}
         </div>
 
@@ -400,6 +403,8 @@ export function LearnHome() {
           })}
         </div>
 
+        {!workspaceId && (
+          <>
         <div className="flex items-center justify-between">
           <h2 className="text-[16px] font-semibold">
             Workspaces <span className="font-medium text-faint">· {workspaces.length}</span>
@@ -445,6 +450,8 @@ export function LearnHome() {
               <WorkspaceCard key={ws.id} workspace={ws} onClick={(id) => router.push(`/workspace/${id}`)} actions={wsActions(ws)} />
             ))}
           </div>
+        )}
+          </>
         )}
       </div>
 
