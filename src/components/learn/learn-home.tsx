@@ -32,19 +32,10 @@ import { cn, formatRelativeDate } from "@/lib/utils";
 import { Donut, Ring, WeekBars } from "@/components/design/charts";
 import type { Folder, Material, StudySession, Workspace } from "@/types";
 import type { DailyActivityPoint } from "@/lib/api/study";
-import { FolderCard } from "@/components/workspace/folder-card";
-import { WorkspaceCard } from "@/components/workspace/workspace-card";
 import { StudyCalendar } from "@/components/workspace/study-calendar";
-import { CreateResourceDialog, NewWorkspaceMenu } from "@/components/workspace/create-dialog";
-import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
-import {
-  DeleteResourceDialog,
-  EditResourceDialog,
-  type DeleteTarget,
-  type EditTarget,
-} from "@/components/workspace/resource-actions";
 import { Skeleton } from "@/components/ui/skeleton";
 import "@/app/design/design.css";
+import { inputBoxClass, bareInputClass } from "@/components/ui/input";
 
 const ACTIVITY_LABEL: Record<string, string> = {
   mcq: "Quick 5",
@@ -130,18 +121,24 @@ function sessionProgress(s: StudySession) {
   return { total, done, next, pct: total ? done / total : s.progress / 100 };
 }
 
-export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
+/** Every workspace inside a folder, including nested folders. */
+function underFolder(folders: Folder[], folderId: string): { name: string; workspaces: Workspace[] } | null {
+  for (const f of folders) {
+    if (f.id === folderId) return { name: f.name, workspaces: flatten(f.folders ?? [], f.workspaces ?? []) };
+    const hit = underFolder(f.folders ?? [], folderId);
+    if (hit) return hit;
+  }
+  return null;
+}
+
+/** Learn home. `workspaceId` / `folderId` scope it to one workspace or folder; the sidebar handles navigation. */
+export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; folderId?: string } = {}) {
   const router = useRouter();
   const { user } = useAuthUser();
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
-  const [folders, setFolders] = useState<Folder[]>([]);
-  const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
+  const [scopeTitle, setScopeTitle] = useState<string | null>(null);
   const [points, setPoints] = useState<DailyActivityPoint[]>([]);
   const [previews, setPreviews] = useState<Record<string, string>>({});
-  const [editing, setEditing] = useState<EditTarget | null>(null);
-  const [deleting, setDeleting] = useState<DeleteTarget | null>(null);
-  const [membersFor, setMembersFor] = useState<string | null>(null);
-  const [creating, setCreating] = useState<"workspace" | "folder" | null>(null);
   const [sessions, setSessions] = useState<StudySession[]>([]);
   const [due, setDue] = useState<number | null>(null);
   const [actLoading, setActLoading] = useState(true);
@@ -157,9 +154,9 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
       fetchWorkspaceTree()
         .then(async (tree) => {
           const all = flatten(tree.folders, tree.rootWorkspaces);
-          const ws = workspaceId ? all.filter((w) => w.id === workspaceId) : all;
-          setFolders(workspaceId ? [] : tree.folders);
-          setRootWorkspaces(workspaceId ? [] : tree.rootWorkspaces);
+          const folder = folderId ? underFolder(tree.folders, folderId) : null;
+          const ws = workspaceId ? all.filter((w) => w.id === workspaceId) : folder ? folder.workspaces : all;
+          setScopeTitle(workspaceId ? (ws[0]?.title ?? null) : (folder?.name ?? null));
           setWorkspaces(ws);
           const lists = await Promise.all(ws.map((w) => fetchStudySessions(w.id).catch(() => [] as StudySession[])));
           setSessions(
@@ -170,7 +167,7 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
         })
         .catch(() => {})
         .finally(() => setLoading(false)),
-    [workspaceId],
+    [workspaceId, folderId],
   );
 
   useEffect(() => {
@@ -193,19 +190,6 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
       .finally(() => setActLoading(false));
     return onTreeChanged(() => void load());
   }, [load]);
-
-  const openWorkspaceCreate = (choice: "workspace" | "bot") => {
-    if (choice === "bot") {
-      router.push("/study-bot");
-      return;
-    }
-    setCreating("workspace");
-  };
-  const wsActions = (ws: Workspace) => ({
-    onRename: () => setEditing({ kind: "workspace", id: ws.id, name: ws.title, description: ws.description, icon: ws.icon }),
-    onMembers: () => setMembersFor(ws.id),
-    onDelete: () => setDeleting({ kind: "workspace", id: ws.id, name: ws.title }),
-  });
 
   const wsById = useMemo(() => new Map(workspaces.map((w) => [w.id, w])), [workspaces]);
   const materials = useMemo(
@@ -273,16 +257,16 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
       <div className="flex min-w-0 flex-1 flex-col gap-[18px]">
         <div className="flex items-end justify-between">
           <div>
-            {workspaceId && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Learn</Link>}
+            {(workspaceId || folderId) && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Learn</Link>}
             <h1 className="text-[26px] font-bold">
-              {workspaceId ? (workspaces[0]?.title ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
+              {workspaceId || folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
             </h1>
           </div>
           {sessions.length > 0 && <span className="text-[13px] text-faint">{sessions.length} study sessions</span>}
         </div>
 
         <form
-          className="rounded-[18px] border border-border p-3.5"
+          className={cn(inputBoxClass, "flex-col items-stretch gap-0 p-3.5")}
           onSubmit={(e) => {
             e.preventDefault();
             ask(prompt);
@@ -295,7 +279,7 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
               onChange={(e) => setPrompt(e.target.value)}
               placeholder={defaultWorkspace ? "What do you want to practise?" : "Add a material first, then ask for anything"}
               disabled={!defaultWorkspace}
-              className="flex-1 bg-transparent text-[15px] outline-none placeholder:text-faint"
+              className={cn(bareInputClass, "text-[15px]")}
             />
             <button type="submit" disabled={!defaultWorkspace || !prompt.trim()} className="grid size-9 place-items-center rounded-[10px] bg-accent text-white disabled:opacity-40">
               <ArrowUp className="size-4" />
@@ -426,56 +410,6 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
           })}
         </div>
 
-        {!workspaceId && (
-          <>
-        <div className="flex items-center justify-between">
-          <h2 className="text-[16px] font-semibold">
-            Workspaces <span className="font-medium text-faint">· {workspaces.length}</span>
-          </h2>
-          <div className="flex items-center gap-2">
-            <button type="button" onClick={() => setCreating("folder")} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-3 text-[12.5px] font-semibold hover:bg-accent-soft">
-              <Plus className="size-3.5" />
-              New folder
-            </button>
-            <NewWorkspaceMenu align="right" onSelect={openWorkspaceCreate}>
-              {(toggle) => (
-                <button type="button" onClick={toggle} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-accent px-3 text-[12.5px] font-semibold text-white hover:bg-accent-dim">
-                  <Plus className="size-3.5" />
-                  New workspace
-                </button>
-              )}
-            </NewWorkspaceMenu>
-          </div>
-        </div>
-        {loading && workspaces.length === 0 && (
-          <div className="grid gap-3.5 sm:grid-cols-2 md:grid-cols-3">
-            {[0, 1, 2].map((i) => <Skeleton key={i} className="h-[140px] rounded-2xl" />)}
-          </div>
-        )}
-        {folders.length > 0 && (
-          <div className="grid gap-3.5 sm:grid-cols-2 md:grid-cols-3">
-            {folders.map((f) => (
-              <FolderCard
-                key={f.id}
-                folder={f}
-                onClick={(id) => router.push(`/folder/${id}`)}
-                actions={{
-                  onRename: () => setEditing({ kind: "folder", id: f.id, name: f.name, color: f.color }),
-                  onDelete: () => setDeleting({ kind: "folder", id: f.id, name: f.name }),
-                }}
-              />
-            ))}
-          </div>
-        )}
-        {rootWorkspaces.length > 0 && (
-          <div className="grid gap-3.5 sm:grid-cols-2 md:grid-cols-3">
-            {rootWorkspaces.map((ws) => (
-              <WorkspaceCard key={ws.id} workspace={ws} onClick={(id) => router.push(`/workspace/${id}`)} actions={wsActions(ws)} />
-            ))}
-          </div>
-        )}
-          </>
-        )}
       </div>
 
       <div className="flex w-full shrink-0 flex-col gap-3.5 lg:w-[300px]">
@@ -559,20 +493,6 @@ export function LearnHome({ workspaceId }: { workspaceId?: string } = {}) {
         )}
       </div>
 
-      {editing && <EditResourceDialog target={editing} onClose={() => setEditing(null)} onSaved={() => void load()} />}
-      {deleting && <DeleteResourceDialog target={deleting} onClose={() => setDeleting(null)} onDeleted={() => void load()} />}
-      <WorkspaceMembersDialog workspaceId={membersFor} open={membersFor !== null} onClose={() => setMembersFor(null)} />
-      {creating && (
-        <CreateResourceDialog
-          kind={creating}
-          onClose={() => setCreating(null)}
-          onCreated={(workspaceId) => {
-            setCreating(null);
-            void load();
-            if (workspaceId) router.push(`/workspace/${workspaceId}`);
-          }}
-        />
-      )}
     </div>
   );
 }

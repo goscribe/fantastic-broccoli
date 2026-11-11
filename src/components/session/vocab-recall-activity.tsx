@@ -12,6 +12,7 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { Check, X, ArrowRight, RotateCcw } from "lucide-react";
+import { textareaClass } from "@/components/ui/input";
 
 interface VocabRecallActivityProps {
   activityId: string;
@@ -154,7 +155,7 @@ export function VocabRecallActivity({
         placeholder={t("session.definitionPlaceholder")}
         rows={3}
         disabled={revealed}
-        className={newUi ? "w-full rounded-2xl border border-border bg-card px-4 py-3.5 text-[15px] text-foreground focus:outline-none focus:border-accent" : "w-full rounded-xl border border-border bg-background p-3.5 text-sm text-foreground focus:outline-none focus:border-accent/50 placeholder:text-faint resize-none"}
+        className={newUi ? cn(textareaClass, "px-4 py-3 text-[15px]") : "w-full rounded-xl border border-border bg-background p-3.5 text-sm text-foreground focus:outline-none focus:border-accent/50 placeholder:text-faint resize-none"}
       />
 
       {!revealed ? (

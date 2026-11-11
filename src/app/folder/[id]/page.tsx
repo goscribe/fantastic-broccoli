@@ -21,6 +21,16 @@ import {
 import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
 import { ChevronRight, Plus } from "lucide-react";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
+import { LearnHome } from "@/components/learn/learn-home";
+import { useNewUi } from "@/lib/new-ui";
+
+/** New UI: the folder is a Learn page scoped to its workspaces. Old UI: the card grid below. */
+export default function FolderPage(props: { params: Promise<{ id: string }> }) {
+  const { id } = use(props.params);
+  const newUi = useNewUi();
+  if (newUi) return <LearnHome folderId={id} />;
+  return <LegacyFolderPage {...props} />;
+}
 
 function findFolderPath(folders: Folder[], id: string): Folder[] | null {
   for (const folder of folders) {
@@ -31,7 +41,7 @@ function findFolderPath(folders: Folder[], id: string): Folder[] | null {
   return null;
 }
 
-export default function FolderPage({
+function LegacyFolderPage({
   params,
 }: {
   params: Promise<{ id: string }>;

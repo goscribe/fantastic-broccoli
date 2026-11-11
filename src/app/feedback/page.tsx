@@ -2,10 +2,10 @@
 
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
+import { textareaClass } from "@/components/ui/input";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ScribeLogo } from "@/components/graphics/logo";
 import { useAuthUser } from "@/lib/api/auth";
 import {
   CANCEL_REASONS,
@@ -15,8 +15,7 @@ import {
 } from "@/lib/api/feedback";
 import { cn } from "@/lib/utils";
 
-const textareaClasses =
-  "w-full resize-none rounded-lg border border-border bg-card px-3.5 py-2.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 placeholder:text-faint";
+const textareaClasses = cn(textareaClass, "min-h-24");
 
 const QUESTIONS: Record<
   FeedbackKind,
@@ -223,12 +222,9 @@ function FeedbackForm() {
 
 export default function FeedbackPage() {
   return (
-    <main className="min-h-screen bg-background">
-      <div className="mx-auto w-full max-w-lg px-6 py-10 sm:py-16">
-        <Link href="/landing" aria-label="Scribe home" className="inline-block">
-          <ScribeLogo />
-        </Link>
-        <div className="mt-8">
+    <main className="bg-background">
+      <div className="mx-auto w-full max-w-lg px-6 py-10">
+        <div>
           <Suspense fallback={null}>
             <FeedbackForm />
           </Suspense>

@@ -81,7 +81,7 @@ export function DeckCardsView({
             className="flex min-h-[380px] w-full flex-col items-center justify-center gap-5 rounded-3xl border border-border bg-card p-10 shadow-sm hover:shadow-md transition-shadow"
             style={{ backfaceVisibility: "hidden" }}
           >
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-faint">
+            <span className="text-[12.5px] font-medium text-muted-foreground">
               {front}
             </span>
             <span className="text-2xl md:text-3xl font-semibold leading-snug text-center">
@@ -96,7 +96,7 @@ export function DeckCardsView({
               transform: "rotateX(180deg)",
             }}
           >
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-accent-dim">
+            <span className="text-[12px] font-semibold text-accent-dim">
               {back}
             </span>
             <span className="text-xl md:text-2xl leading-relaxed text-center">

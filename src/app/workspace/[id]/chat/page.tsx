@@ -1,11 +1,14 @@
 "use client";
 
+import { Copilot } from "@/components/ai/copilot";
+import { useNewUi } from "@/lib/new-ui";
+
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
-import {
+import { ArrowLeft,
   ArrowRight,
   ArrowUp,
   BookOpen,
@@ -220,7 +223,7 @@ const SUGGESTION_KEYS = [
   "ws.chat.suggestExplain",
 ];
 
-export default function WorkspaceChatPage() {
+function WorkspaceChatPage() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -1026,4 +1029,40 @@ export default function WorkspaceChatPage() {
       </div>
     </WorkspaceShell>
   );
+}
+
+function NewUiChat() {
+  const { id } = useParams<{ id: string }>();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { data: workspace } = useQuery({ queryKey: ["workspace", id], queryFn: () => fetchWorkspace(id) });
+  const [prompt] = useState(searchParams.get("q") ?? undefined);
+  useEffect(() => {
+    if (prompt) router.replace(`/workspace/${id}/chat`, { scroll: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return (
+    <div className="flex min-h-0 flex-1 flex-col px-6">
+      <div className="mx-auto flex w-full max-w-3xl items-center gap-2 pt-6 text-[13px] text-muted-foreground">
+        <Link href={`/workspace/${id}`} className="flex items-center gap-1 hover:text-foreground">
+          <ArrowLeft className="size-3.5" /> {workspace?.title ?? "Workspace"}
+        </Link>
+        <span>·</span>
+        <span className="font-semibold text-foreground">Copilot</span>
+      </div>
+      <Copilot
+        open
+        onClose={() => router.push(`/workspace/${id}`)}
+        workspaceId={id}
+        initialPrompt={prompt}
+        variant="page"
+        page={`Workspace Copilot — /workspace/${id}/chat`}
+      />
+    </div>
+  );
+}
+
+export default function WorkspaceChatPageRoute() {
+  const newUi = useNewUi();
+  return newUi ? <NewUiChat /> : <WorkspaceChatPage />;
 }

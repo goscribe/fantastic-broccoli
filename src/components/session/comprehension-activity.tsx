@@ -13,6 +13,7 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { Brain, Send, CheckCircle2, RotateCcw, Loader2 } from "lucide-react";
+import { textareaClass } from "@/components/ui/input";
 
 interface ComprehensionActivityProps {
   activityId: string;
@@ -118,7 +119,7 @@ export function ComprehensionActivity({
             value={userText}
             onChange={(e) => setUserText(e.target.value)}
             placeholder={t("session.compPlaceholder")}
-            className={newUi ? "w-full h-40 rounded-2xl border border-border bg-card px-4 py-3.5 text-[15px] resize-none focus:outline-none focus:border-accent" : "w-full h-32 rounded-lg border border-border bg-card p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"}
+            className={newUi ? cn(textareaClass, "h-40 px-4 py-3 text-[15px]") : "w-full h-32 rounded-lg border border-border bg-card p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"}
           />
 
           <div className="flex items-center justify-end gap-3">

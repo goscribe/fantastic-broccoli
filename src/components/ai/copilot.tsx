@@ -36,6 +36,7 @@ import type {
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
+import { inputBoxClass, bareInputClass } from "@/components/ui/input";
 
 let idCounter = 0;
 const nextId = () => `m-${++idCounter}-${Date.now()}`;
@@ -128,8 +129,14 @@ export function Copilot({
   studySessionId,
   activity,
   page,
+  initialPrompt,
+  variant = "panel",
 }: {
   open: boolean;
+  /** "page": full-width centred chat (workspace Copilot route) instead of the docked side panel. */
+  variant?: "panel" | "page";
+  /** Sent once as the first message when the panel is ready (Learn one-offs like "Quiz me on …"). */
+  initialPrompt?: string;
   onClose: () => void;
   context?: string;
   workspaceId: string;
@@ -361,6 +368,13 @@ export function Copilot({
     ],
   );
 
+  const autoSent = useRef(false);
+  useEffect(() => {
+    if (!initialPrompt || autoSent.current || chatsLoading || hydrating || busy) return;
+    autoSent.current = true;
+    void send(initialPrompt);
+  }, [initialPrompt, chatsLoading, hydrating, busy, send]);
+
   const chatMessages = messages.filter(
     (m) => (m.chatId ?? "pending") === (activeChat ?? "pending"),
   );
@@ -384,8 +398,13 @@ export function Copilot({
 
   return (
     <div
-      className="flex flex-col bg-card border-border min-h-0 max-sm:fixed max-sm:inset-0 max-sm:z-50 max-sm:w-full sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]"
-      style={{ "--copilot-width": width ? `${width}px` : newUi ? "380px" : "40vw" } as React.CSSProperties}
+      className={cn(
+        "flex flex-col bg-card border-border min-h-0",
+        variant === "page"
+          ? "relative mx-auto h-full w-full max-w-3xl flex-1"
+          : "max-sm:fixed max-sm:inset-0 max-sm:z-50 max-sm:w-full sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]",
+      )}
+      style={variant === "page" ? undefined : ({ "--copilot-width": width ? `${width}px` : newUi ? "380px" : "40vw" } as React.CSSProperties)}
     >
       {/* Resize handle */}
       <div
@@ -397,10 +416,10 @@ export function Copilot({
           document.body.style.cursor = "col-resize";
           document.body.style.userSelect = "none";
         }}
-        className="absolute left-0 inset-y-0 w-1.5 -translate-x-1/2 cursor-col-resize z-10 hover:bg-accent/40 active:bg-accent/60 transition-colors max-sm:hidden"
+        className={cn("absolute left-0 inset-y-0 w-1.5 -translate-x-1/2 cursor-col-resize z-10 hover:bg-accent/40 active:bg-accent/60 transition-colors max-sm:hidden", variant === "page" && "hidden")}
       />
       {/* Header */}
-      <div className="flex items-center gap-2 px-3 h-12 border-b border-border shrink-0">
+      <div className={cn("flex items-center gap-2 px-3 h-12 border-b border-border shrink-0", variant === "page" && "hidden")}>
         <p className="text-sm font-semibold shrink-0">{t("misc.copilot")}</p>
         <div className={cn("flex items-center gap-1 ml-1 flex-1 min-w-0 overflow-x-auto", newUi && "hidden")}>
           {chatsLoading &&
@@ -437,14 +456,14 @@ export function Copilot({
         <button
           type="button"
           onClick={onClose}
-          className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted shrink-0"
+          className={cn("p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted shrink-0", variant === "page" && "hidden")}
         >
           {newUi ? <PanelRightClose className="h-4 w-4" /> : <X className="h-4 w-4" />}
         </button>
       </div>
 
       {/* Messages */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+      <div ref={scrollRef} className={cn("flex-1 overflow-y-auto px-4 py-4 space-y-4", variant === "page" && "px-0 py-6")}>
         {chatMessages.length === 0 && hydrating && (
           <div className="flex flex-col gap-3 px-1 pt-2" aria-busy="true">
             <div className="h-10 w-3/5 animate-pulse rounded-2xl bg-muted" />
@@ -544,13 +563,13 @@ export function Copilot({
       </div>
 
       {/* Input */}
-      <div className="p-3 border-t border-border">
+      <div className={cn("p-3 border-t border-border", variant === "page" && "border-t-0 px-0 pb-6 pt-2")}>
         <form
           onSubmit={(e) => {
             e.preventDefault();
             send(input);
           }}
-          className="flex items-end gap-2 rounded-2xl border border-border-strong bg-muted/50 px-3 py-2 focus-within:border-accent/50"
+          className={cn(inputBoxClass, "items-end gap-2 py-2")}
         >
           <textarea
             value={input}
@@ -563,7 +582,7 @@ export function Copilot({
             }}
             rows={1}
             placeholder={t("misc.copilotPlaceholder")}
-            className="flex-1 resize-none bg-transparent text-sm focus:outline-none placeholder:text-faint py-1"
+            className={cn(bareInputClass, "resize-none py-1")}
           />
           <button
             type="submit"

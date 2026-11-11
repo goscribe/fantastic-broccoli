@@ -9,10 +9,7 @@ import { Workspace } from "@/types";
 import { AvatarStack } from "@/components/ui/avatar-stack";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
-import {
-  EmptyScene,
-  HeaderDecor,
-} from "@/components/graphics/floating-decor";
+import { EmptyScene } from "@/components/graphics/floating-decor";
 
 export default function SharedPage() {
   const { t } = useI18n();
@@ -27,7 +24,7 @@ export default function SharedPage() {
   }, []);
 
   return (
-    <main className="flex-1 px-6 py-6 md:px-10">
+    <main className="flex-1 px-6 py-6 md:px-10"><div className="mx-auto w-full max-w-4xl">
       <div className="mb-6 flex items-center gap-4">
         <div>
           <h1 className="text-xl font-bold tracking-tight">
@@ -37,9 +34,6 @@ export default function SharedPage() {
             {t("fc.sharedSubtitle")}
           </p>
         </div>
-        {shared.length > 0 && (
-          <HeaderDecor image="/illustrations/shared.png" />
-        )}
       </div>
 
       {loading && <CardGridSkeleton count={6} />}
@@ -53,36 +47,26 @@ export default function SharedPage() {
         </EmptyScene>
       )}
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col gap-2.5">
         {shared.map((ws) => (
           <Link
             key={ws.id}
-            href={`/workspace/${ws.id}/study`}
-            className="rounded-xl border border-border bg-card p-4 transition-colors hover:border-accent/40"
+            href={`/workspace/${ws.id}`}
+            className="flex items-center gap-4 rounded-2xl border border-border bg-card px-4 py-3.5 transition-colors hover:border-accent/40"
           >
-            <div className="flex items-center gap-3">
-              <WorkspaceIcon icon={ws.icon} className="h-9 w-9 shrink-0" />
-              <div className="min-w-0">
-                <p className="truncate text-sm font-semibold">{ws.title}</p>
-                {ws.course && (
-                  <p className="text-[12px] text-muted-foreground">{ws.course}</p>
-                )}
-              </div>
+            <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent-soft/60">
+              <WorkspaceIcon icon={ws.icon} className="h-7 w-7" />
             </div>
-            {ws.description && (
-              <p className="mt-3 line-clamp-2 text-[13px] text-muted-foreground">
-                {ws.description}
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-[15px] font-semibold leading-tight tracking-tight">{ws.title}</p>
+              <p className="mt-1 truncate text-[12.5px] text-muted-foreground">
+                {[ws.course, t("fc.sharedBy").replace("{name}", ws.sharedBy ?? "")].filter(Boolean).join(" · ")}
               </p>
-            )}
-            <div className="mt-3 flex items-center justify-between">
-              <p className="text-[12px] text-faint">
-                {t("fc.sharedBy").replace("{name}", ws.sharedBy ?? "")}
-              </p>
-              {ws.members && <AvatarStack members={ws.members} />}
             </div>
+            {ws.members && <AvatarStack members={ws.members} />}
           </Link>
         ))}
       </div>
-    </main>
+    </div></main>
   );
 }

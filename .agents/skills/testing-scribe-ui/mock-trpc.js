@@ -351,6 +351,22 @@ function handleProc(path, input) {
         ];
       return [];
     }
+    case "planner.disconnectCalendar":
+      return { ok: true };
+    case "planner.getPlan":
+    case "planner.updatePlan":
+      return { dailyGoalMin: 25, examTitle: "Bio Paper 1", examDate: new Date(Date.now() + 23 * 86400000), windowStart: "15:00", windowEnd: "19:00", weekdays: [1, 2, 3, 4, 5, 6, 0], timezone: "UTC" };
+    case "planner.getWeek": {
+      const monday = new Date(); monday.setUTCHours(0, 0, 0, 0); monday.setUTCDate(monday.getUTCDate() - ((monday.getUTCDay() + 6) % 7));
+      const ymd = (d) => d.toISOString().slice(0, 10);
+      const today = ymd(new Date());
+      const days = Array.from({ length: 7 }, (_, i) => { const d = new Date(monday); d.setUTCDate(monday.getUTCDate() + i); return ymd(d); })
+        .map((date, i) => ({ date, busy: i === 2 ? [{ title: "Busy", start: 900, end: 975 }] : i === 4 ? [{ title: "Busy", start: 1020, end: 1110 }] : [], slots: date < today || i === 5 ? [] : [
+          { id: `r-${date}`, kind: "review", title: "Review · 12 cards", start: 900, end: 910 },
+          { id: `s-${date}`, kind: "session", title: "Energetics recap · Reading: Bond enthalpies", start: 915, end: 940, sessionId: "ses-1", workspaceId: "ws-1" },
+        ] }));
+      return { plan: { dailyGoalMin: 25, examTitle: "Bio Paper 1", examDate: new Date(Date.now() + 23 * 86400000), windowStart: "15:00", windowEnd: "19:00", weekdays: [1, 2, 3, 4, 5, 6, 0], timezone: "UTC" }, weekStart: ymd(monday), days, plannedMinutes: days.reduce((n, d) => n + d.slots.reduce((m, s) => m + s.end - s.start, 0), 0), unscheduled: 3, lessonsLeft: 5, lessonsTotal: 14, dueCards: 12, nudge: { date: days[5].date, minutes: 10 }, calendar: { connected: true, email: "demo@scribe.study", error: null } };
+    }
     case "flashcards.getDueReview":
       return { total: 0, cards: [] };
     case "podcast.listEpisodes":

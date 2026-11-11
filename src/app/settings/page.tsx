@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 
 import { useEffect, useRef, useState } from "react";
 import { Check, Camera, X } from "lucide-react";
@@ -7,7 +8,6 @@ import Link from "next/link";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { HeaderDecor } from "@/components/graphics/floating-decor";
 import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import {
@@ -39,6 +39,7 @@ import {
   type TranslationKey,
 } from "@/lib/i18n";
 import "@/lib/i18n/settings";
+import { inputClass } from "@/components/ui/input";
 
 const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
 
@@ -374,7 +375,6 @@ export default function SettingsPage() {
               {t("set.subtitle")}
             </p>
           </div>
-          <HeaderDecor image="/illustrations/icons/target.png" />
         </div>
 
         {/* Account */}
@@ -441,7 +441,7 @@ export default function SettingsPage() {
                     type="text"
                     value={name}
                     onChange={(e) => setEditedName(e.target.value)}
-                    className="mt-1.5 h-10 w-full rounded-xl border border-border bg-background px-3.5 text-sm transition-colors focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15"
+                    className={cn(inputClass, "mt-1.5")}
                   />
                   <p className="mt-1.5 text-[12px] text-faint">
                     {t("set.displayNameHint")}
@@ -459,7 +459,7 @@ export default function SettingsPage() {
                     type="email"
                     value={user?.email ?? ""}
                     disabled
-                    className="mt-1.5 h-10 w-full rounded-xl border border-border bg-muted/60 px-3.5 text-sm text-muted-foreground"
+                    className={cn(inputClass, "mt-1.5 bg-muted/60 text-muted-foreground")}
                   />
                   <p className="mt-1.5 text-[12px] text-faint">
                     {t("set.emailHint")}
@@ -610,7 +610,7 @@ export default function SettingsPage() {
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <div className="flex items-start gap-3 rounded-2xl border border-border bg-card p-4">
               <Image
-                src="/illustrations/icons/stat-bolt.png"
+                src="/design/props/star.png"
                 alt=""
                 width={64}
                 height={64}

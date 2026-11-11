@@ -1,5 +1,8 @@
 "use client";
 
+import { useParams as useLegacyParams } from "next/navigation";
+import { LegacyPage } from "@/components/layout/legacy-redirect";
+
 import { MathText } from "@/components/ui/markdown-text";
 import { EmptyScene } from "@/components/graphics/floating-decor";
 import { useState } from "react";
@@ -185,7 +188,7 @@ function BankItemTile({
   );
 }
 
-export default function WorkspaceBankPage() {
+function WorkspaceBankPage() {
   const params = useParams();
   const { t } = useI18n();
   const workspaceId = params.id as string;
@@ -455,5 +458,14 @@ export default function WorkspaceBankPage() {
         )}
       </div>
     </WorkspaceShell>
+  );
+}
+
+export default function WorkspaceBankPageRoute() {
+  const { id } = useLegacyParams<{ id: string }>();
+  return (
+    <LegacyPage to={`/workspace/${id}`}>
+      <WorkspaceBankPage />
+    </LegacyPage>
   );
 }

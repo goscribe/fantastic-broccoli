@@ -29,6 +29,7 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { BookOpen, ArrowRight, Highlighter, Trash2 } from "lucide-react";
+import { textareaClass } from "@/components/ui/input";
 
 const WIDGET_TOKEN = /^\[\[widget:([a-z-]+)\]\]$/;
 const FIGURE_TOKEN = /^\[\[figure:([^\]]+)\]\]$/;
@@ -630,7 +631,7 @@ export function ReadingActivity({
               onChange={(e) => setNoteDraft(e.target.value)}
               placeholder={t("session.addNoteShort")}
               rows={2}
-              className="w-full resize-none rounded-lg border border-border bg-muted/40 px-2 py-1.5 text-xs outline-none focus:border-accent/50"
+              className={cn(textareaClass, "px-2.5 py-1.5 text-xs")}
             />
             <div className="flex items-center justify-between mt-1.5">
               <button
