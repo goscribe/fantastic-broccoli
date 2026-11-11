@@ -89,13 +89,24 @@ export function HeroScene() {
   );
 }
 
-/**
- * Composed empty-state scene: big art bleeding off the right edge, floating
- * props, confetti, and left-aligned content.
- */
+const CAT_FOR_SCENE: Record<string, string> = {
+  cards: "/design/cat2-book.png",
+  shared: "/design/cat2-wave.png",
+  guide: "/design/cat2-pencil.png",
+  recall: "/design/cat2-think.png",
+  study: "/design/cat2-pencil.png",
+  bank: "/design/cat2-book.png",
+  marketplace: "/design/cat2-wave.png",
+};
+
+function catFor(image: string): string {
+  const name = image.split("/").pop()?.replace(/\.png$/, "") ?? "";
+  return CAT_FOR_SCENE[name] ?? "/design/cat2-think.png";
+}
+
+/** Empty state on the design system: soft lavender card, one cat pose, left-aligned copy. */
 export function EmptyScene({
   image,
-  imageClassName,
   children,
   className,
 }: {
@@ -107,67 +118,25 @@ export function EmptyScene({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-3xl border border-border bg-card",
+        "flex flex-col-reverse items-start gap-4 rounded-2xl border border-border bg-accent-soft/40 px-6 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-8",
         className,
       )}
     >
-      <div
-        className="pointer-events-none absolute inset-y-0 right-0 hidden w-80 select-none sm:block"
-        aria-hidden
-      >
-        <Image
-          src={image}
-          alt=""
-          width={280}
-          height={240}
-          unoptimized
-          className={cn(
-            "absolute -bottom-6 right-4 w-56",
-            imageClassName,
-          )}
-        />
-      </div>
-      <ConfettiDots className="hidden sm:block" />
-      <div className="relative max-w-md px-6 py-10 sm:px-8 sm:py-12">
-        {children}
-      </div>
+      <div className="max-w-md">{children}</div>
       <Image
-        src={image}
+        src={catFor(image)}
         alt=""
-        width={200}
-        height={160}
+        width={120}
+        height={120}
         unoptimized
-        className="pointer-events-none mx-auto -mt-4 mb-6 h-28 w-auto select-none sm:hidden"
+        className="cat-bob pointer-events-none h-24 w-auto shrink-0 select-none sm:h-28"
       />
     </div>
   );
 }
 
-/** Compact decorated header art for list pages. */
-export function HeaderDecor({
-  image,
-  className,
-}: {
-  image: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn(
-        "pointer-events-none relative hidden h-24 w-44 select-none sm:block",
-        className,
-      )}
-      aria-hidden
-    >
-      <Image
-        src={image}
-        alt=""
-        width={160}
-        height={120}
-        unoptimized
-        className="absolute right-4 top-1/2 h-20 w-auto -translate-y-1/2"
-      />
-      <ConfettiDots />
-    </div>
-  );
+/** Retired: list-page header art is gone in the unified design. */
+export function HeaderDecor(props: { image: string; className?: string }) {
+  void props;
+  return null;
 }

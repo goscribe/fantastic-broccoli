@@ -323,7 +323,7 @@ export function DeckLearnView({
 
       <div className="rounded-3xl border border-border bg-card p-6 md:p-8 space-y-6">
         <div className="space-y-2">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-faint">
+          <p className="text-[12.5px] font-medium text-muted-foreground">
             {front}
           </p>
           <p className="text-lg md:text-xl font-medium leading-relaxed">
@@ -332,7 +332,7 @@ export function DeckLearnView({
         </div>
 
         <div className="space-y-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wider text-faint">
+          <p className="text-[12.5px] font-medium text-muted-foreground">
             {card.mode === "mcq"
               ? t("fc.chooseOne")
               : t("fc.typeThe").replace("{label}", back.toLowerCase())}

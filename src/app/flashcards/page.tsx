@@ -2,57 +2,54 @@
 
 import "@/lib/i18n/flashcards";
 import { MathText } from "@/components/ui/markdown-text";
+import Image from "next/image";
 import Link from "next/link";
 import {
   useFlashcardDecks,
   type DeckWithWorkspace,
 } from "@/lib/flashcard-decks";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
-import { BankDocThumb } from "@/components/bank/bank-content";
 import { RotateCcw } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { useI18n } from "@/lib/i18n";
-import {
-  EmptyScene,
-  HeaderDecor,
-} from "@/components/graphics/floating-decor";
+import { EmptyScene } from "@/components/graphics/floating-decor";
 
-function DeckCard({ deck }: { deck: DeckWithWorkspace }) {
+function DeckRow({ deck }: { deck: DeckWithWorkspace }) {
   const { t } = useI18n();
   const { item, workspace, cardCount } = deck;
   return (
     <Link
       href={`/flashcards/${item.id}?ws=${workspace.id}`}
-      className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-150 hover:border-border-strong hover:-translate-y-0.5 active:translate-y-0"
+      className="group flex items-center gap-4 rounded-2xl border border-border bg-card px-4 py-3.5 transition-colors hover:border-accent/40"
     >
-      <BankDocThumb
-        kind={item.kind}
-        content={item.content}
-        className="aspect-square w-full rounded-none border-0 border-b border-border"
-      />
-      <div className="p-4">
-        <h3 className="truncate text-sm font-semibold leading-tight tracking-tight group-hover:text-accent transition-colors">
+      <div className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-accent-soft/60">
+        <Image src="/design/props/cards.png" alt="" width={44} height={44} unoptimized className="h-10 w-auto" />
+      </div>
+      <div className="min-w-0 flex-1">
+        <h3 className="truncate text-[15px] font-semibold leading-tight tracking-tight">
           <MathText text={item.title} />
         </h3>
-        <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
+        <p className="mt-1 flex items-center gap-1.5 text-[12.5px] text-muted-foreground">
           <span className="shrink-0">
             {cardCount} {t(cardCount === 1 ? "fc.card" : "fc.cards")}
           </span>
           <span>·</span>
           <span className="truncate">{workspace.title}</span>
-        </p>
-        <div className="mt-2 flex flex-wrap items-center gap-1.5">
-          <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-medium text-accent-dim">
-            {t(item.kind === "VOCAB_DECK" ? "fc.kindVocab" : "fc.kindFlashcards")}
-          </span>
           {item.topic && (
-            <span className="max-w-[160px] truncate rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
-              {item.topic}
-            </span>
+            <>
+              <span>·</span>
+              <span className="truncate">{item.topic}</span>
+            </>
           )}
-        </div>
+        </p>
       </div>
+      <span className="hidden rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-medium text-accent-dim sm:inline">
+        {t(item.kind === "VOCAB_DECK" ? "fc.kindVocab" : "fc.kindFlashcards")}
+      </span>
+      <span className="h-8 shrink-0 rounded-lg border border-border px-3 text-[12.5px] font-semibold leading-8 text-foreground group-hover:border-accent group-hover:text-accent">
+        {t("fc.study")}
+      </span>
     </Link>
   );
 }
@@ -67,7 +64,7 @@ export default function FlashcardsPage() {
   });
 
   return (
-    <main className="flex-1 px-6 py-6 md:px-10">
+    <main className="flex-1 px-6 py-6 md:px-10"><div className="mx-auto w-full max-w-4xl">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div className="flex items-center gap-4">
           <div>
@@ -76,9 +73,6 @@ export default function FlashcardsPage() {
               {t("fc.subtitle")}
             </p>
           </div>
-          {(decks ?? []).length > 0 && (
-            <HeaderDecor image="/illustrations/cards.png" />
-          )}
         </div>
         {dueReview && dueReview.total > 0 && (
           <Link
@@ -104,11 +98,11 @@ export default function FlashcardsPage() {
         </EmptyScene>
       )}
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+      <div className="flex flex-col gap-2.5">
         {(decks ?? []).map((deck) => (
-          <DeckCard key={deck.item.id} deck={deck} />
+          <DeckRow key={deck.item.id} deck={deck} />
         ))}
       </div>
-    </main>
+    </div></main>
   );
 }

@@ -7,7 +7,6 @@ import Link from "next/link";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { HeaderDecor } from "@/components/graphics/floating-decor";
 import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import {
@@ -374,7 +373,6 @@ export default function SettingsPage() {
               {t("set.subtitle")}
             </p>
           </div>
-          <HeaderDecor image="/illustrations/icons/target.png" />
         </div>
 
         {/* Account */}
@@ -610,7 +608,7 @@ export default function SettingsPage() {
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <div className="flex items-start gap-3 rounded-2xl border border-border bg-card p-4">
               <Image
-                src="/illustrations/icons/stat-bolt.png"
+                src="/design/props/star.png"
                 alt=""
                 width={64}
                 height={64}

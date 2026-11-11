@@ -174,7 +174,7 @@ export function DeckTestView({
                 </span>
                 <div className="min-w-0 flex-1 space-y-3">
                   <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-faint">
+                    <p className="text-[12.5px] font-medium text-muted-foreground">
                       {front}
                     </p>
                     <p className="mt-1 text-base font-medium leading-relaxed">
