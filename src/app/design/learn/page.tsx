@@ -65,8 +65,8 @@ function Spark({ v }: { v: readonly number[] }) {
   );
 }
 
-function Stack({ kind }: { kind: "pdf" | "img" | "pp" }) {
-  const tint = { pdf: "bg-accent-soft", img: "bg-sky-50", pp: "bg-emerald-50" }[kind];
+function Stack({ kind, plain = false }: { kind: "pdf" | "img" | "pp"; plain?: boolean }) {
+  const tint = plain ? "" : { pdf: "bg-accent-soft", img: "bg-sky-50", pp: "bg-emerald-50" }[kind];
   return (
     <span className={cn("relative block h-14 w-14 shrink-0 rounded-lg", tint)}>
       <span className="absolute left-4 top-1.5 h-10 w-8 rotate-[8deg] rounded-[3px] border border-border bg-white" />
@@ -101,7 +101,7 @@ function Thumb({ src, kind }: { src: string; kind: "pdf" | "img" | "pp" }) {
 }
 
 export default async function LearnPreview({ searchParams }: { searchParams: Promise<{ all?: string; rows?: string }> }) {
-  const { all, rows = "ring" } = await searchParams;
+  const { all, rows = "papers" } = await searchParams;
   const expanded = all === "1";
   const shown = expanded ? MATERIALS : MATERIALS.slice(0, 3);
   return (
@@ -152,14 +152,16 @@ export default async function LearnPreview({ searchParams }: { searchParams: Pro
                   {rows === "trend" && <Spark v={s.scores} />}
                   {rows === "tile" && <span className={cn("grid size-12 shrink-0 place-items-center rounded-xl text-[14px] font-bold", { pdf: "bg-accent-soft text-accent", img: "bg-sky-50 text-sky-600", pp: "bg-emerald-50 text-emerald-600" }[s.kind])}>{s.topic}</span>}
                   {rows === "stack" && <Stack kind={s.kind} />}
+                  {rows === "papers" && <Stack kind={s.kind} plain />}
                   {rows === "preview" && <QPreview label={s.status === "done" ? "Debrief" : s.next} q={s.q} kind={s.kind2} />}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2"><span className="truncate text-[14px] font-semibold">{s.title}</span>{s.status === "done" && <span className="rounded-md bg-emerald-50 px-1.5 py-0.5 text-[11px] font-semibold text-emerald-700">Done</span>}{s.status === "new" && <span className="rounded-md bg-accent-soft px-1.5 py-0.5 text-[11px] font-semibold text-accent">New</span>}</div>
                     <div className="truncate text-[12px] text-faint">{s.ws} · {s.meta}{rows === "stack" && <> · {s.when}</>}</div>
-                    {(rows === "ring" || rows === "chips") && <PlanChips plan={s.plan} done={s.done} status={s.status} />}
+                    {(rows === "ring" || rows === "chips" || rows === "papers") && <PlanChips plan={s.plan} done={s.done} status={s.status} />}
                     {rows === "trend" && <div className="mt-1.5 text-[12px] text-muted-foreground">{s.scores.length > 1 ? <>{s.scores[0]}% → <span className="font-semibold text-accent">{s.scores[s.scores.length - 1]}%</span> · {s.done}/{s.total} activities</> : <>{s.done}/{s.total} activities</>}</div>}
                     {(rows === "tile" || rows === "preview") && <div className="mt-2 flex items-center gap-1">{Array.from({ length: Math.min(s.total, 10) }, (_, i) => { const d = Math.round((i / Math.min(s.total, 10)) * s.total); return <span key={i} className={cn("h-1.5 w-4 rounded-full", d < s.done ? (s.status === "done" ? "bg-emerald-500" : "bg-accent") : d === s.done && s.status !== "done" ? "bg-accent/40 ring-2 ring-accent/30" : "bg-muted")} />; })}<span className="ml-1.5 whitespace-nowrap text-[11.5px] font-semibold text-muted-foreground">{s.done}/{s.total} · {Math.round(pct * 100)}%</span></div>}
                   </div>
+                  {rows === "papers" && <span className="flex shrink-0 items-center gap-2"><span className="relative grid size-7 place-items-center"><svg viewBox="0 0 28 28" className="absolute inset-0 -rotate-90"><circle cx="14" cy="14" r="11" fill="none" stroke="var(--color-muted)" strokeWidth="3" /><circle cx="14" cy="14" r="11" fill="none" stroke={s.status === "done" ? "#10b981" : "var(--color-accent)"} strokeWidth="3" strokeLinecap="round" strokeDasharray={`${pct * 2 * Math.PI * 11} ${2 * Math.PI * 11}`} /></svg></span><span className="w-9 text-[12.5px] font-semibold text-muted-foreground">{s.done}/{s.total}</span></span>}
                   {rows === "stack" ? (
                     <><span className="shrink-0 text-[13px] text-muted-foreground">{s.done}/{s.total} activities</span><span className="w-[88px] shrink-0 text-right text-[13px] font-semibold">{s.scores.length ? `Score ${s.scores[s.scores.length - 1]}%` : "—"}</span><MoreVertical className="size-4 shrink-0 text-faint" /></>
                   ) : (
