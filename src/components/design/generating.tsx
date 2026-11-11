@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Check, Sparkles } from "lucide-react";
 import { Ring } from "@/components/design/charts";
 import { cn } from "@/lib/utils";
 
@@ -16,39 +15,26 @@ const TIPS = [
   "Flashcards you get wrong come back sooner; ones you know wait longer.",
 ];
 
-/** Generation progress: ring around the pencil cat, step list, one tip. */
+/** Generation progress: ring around the cat, one line, the current step. */
 export function Generating({ index, title, compact = false }: { index: number; title: string; compact?: boolean }) {
   const pct = Math.min(index, BUILD_STEPS.length) / BUILD_STEPS.length;
   const done = index >= BUILD_STEPS.length;
+  const step = BUILD_STEPS[Math.min(index, BUILD_STEPS.length - 1)];
   return (
-    <div className={cn("flex flex-col items-center text-center", compact ? "gap-3" : "gap-4")}>
-      <div className="relative">
-        <Ring pct={Math.max(pct, 0.04)} size={compact ? 96 : 128} stroke={compact ? 7 : 9}>
-          <Image src={done ? "/design/cat2-cheer.png" : "/design/cat2-pencil.png"} alt="" width={84} height={84} unoptimized className={cn("object-contain", compact ? "size-[62px]" : "size-[84px]", !done && "design-float")} />
-        </Ring>
-        <span className="absolute -bottom-1 -right-2 grid h-7 min-w-7 place-items-center rounded-full border border-border bg-white px-1.5 text-[12px] font-bold text-accent shadow-[0_1px_4px_rgba(17,17,20,.08)]">{Math.round(pct * 100)}%</span>
-      </div>
+    <div className={cn("flex flex-col items-center text-center", compact ? "gap-4" : "gap-6")}>
+      <Ring pct={Math.max(pct, 0.04)} size={compact ? 120 : 168} stroke={compact ? 8 : 11}>
+        <Image src={done ? "/design/cat2-cheer.png" : "/design/cat2-pencil.png"} alt="" width={120} height={120} unoptimized className={cn("object-contain", done ? "design-pop size-[108px]" : "design-float size-[104px]")} />
+      </Ring>
       <div>
-        <h2 className={cn("font-bold", compact ? "text-[18px]" : "text-[22px]")}>{done ? "Your session is ready" : `Building “${title}”`}</h2>
-        <p className="mt-1 text-[14px] text-muted-foreground">{done ? "Seven activities, about 30 minutes. Let’s go." : index >= 2 ? "Nearly there — a minute or so." : "Usually takes a couple of minutes. The hard part — showing up — is done."}</p>
+        <h2 className={cn("font-bold tracking-tight", compact ? "text-[20px]" : "text-[26px]")}>{done ? "Your session is ready" : `Building “${title}”`}</h2>
+        <p className="mt-2 text-[15px] text-muted-foreground">{done ? "Seven activities, about 30 minutes. Let’s go." : `${step[0]}…`}</p>
       </div>
-      <ol className="w-full max-w-[400px] text-left">
-        {BUILD_STEPS.map(([label, detail], i) => {
-          const state = i < index ? "done" : i === index ? "now" : "todo";
-          return (
-            <li key={label} className="flex items-start gap-3 py-2">
-              <span className={cn("mt-0.5 grid size-5 shrink-0 place-items-center rounded-full", state === "done" ? "bg-emerald-500 text-white" : state === "now" ? "border-2 border-accent border-t-transparent animate-spin" : "border-2 border-border")}>{state === "done" && <Check className="size-3" strokeWidth={3} />}</span>
-              <span className="min-w-0">
-                <span className={cn("block text-[14px] font-semibold", state === "todo" && "text-faint")}>{label}</span>
-                {state !== "todo" && <span className="block truncate text-[12px] text-muted-foreground">{state === "done" ? detail : "…"}</span>}
-              </span>
-            </li>
-          );
-        })}
-      </ol>
-      {!done && (
-        <p className="flex max-w-[400px] items-start gap-2 text-left text-[13px] text-muted-foreground"><Sparkles className="mt-0.5 size-4 shrink-0 text-accent" />{TIPS[index % TIPS.length]}</p>
-      )}
+      <div className="flex items-center gap-1.5">
+        {BUILD_STEPS.map(([label], i) => (
+          <span key={label} className={cn("h-1.5 rounded-full transition-all", i < index || done ? "w-6 bg-accent" : i === index ? "w-6 bg-accent/40" : "w-1.5 bg-muted")} />
+        ))}
+      </div>
+      {!done && <p className="text-[13px] text-faint">{TIPS[index % TIPS.length]}</p>}
     </div>
   );
 }

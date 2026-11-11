@@ -1,5 +1,5 @@
 import { AppFrame } from "@/components/design/shell";
-import { Generating, WarmupCard } from "@/components/design/generating";
+import { Generating } from "@/components/design/generating";
 
 /** In-app generation screen: /design/loading?step=0..4 */
 export default async function LoadingPreview({ searchParams }: { searchParams: Promise<{ step?: string }> }) {
@@ -12,7 +12,7 @@ export default async function LoadingPreview({ searchParams }: { searchParams: P
           <Generating index={index} title="Osmosis & water potential" />
           {index >= 4 && <div className="mt-5 flex justify-center gap-2.5"><span className="inline-flex h-11 items-center rounded-xl bg-accent px-6 text-[14px] font-semibold text-white">Start session</span><span className="inline-flex h-11 items-center rounded-xl border border-border px-5 text-[14px] font-semibold">See plan</span></div>}
         </div>
-        {index < 4 && <WarmupCard />}
+        {index < 4 && <button className="text-[13px] font-semibold text-accent">Answer a warm-up question while you wait</button>}
       </div>
     </AppFrame>
   );
