@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   ArrowUp,
-  Camera,
+  NotebookText,
   ChevronDown,
   ChevronUp,
   ClipboardList,
@@ -78,7 +78,7 @@ const chatHref = (workspaceId: string, q: string) =>
   `/workspace/${workspaceId}/chat?q=${encodeURIComponent(q)}`;
 
 function MaterialThumb({ m }: { m: Material }) {
-  const Icon = { pdf: FileText, note: Camera, slides: Presentation, audio: Headphones }[m.type] ?? FileText;
+  const Icon = { pdf: FileText, note: NotebookText, slides: Presentation, audio: Headphones }[m.type] ?? FileText;
   return (
     <span className="relative block aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
       {m.preview ? (
