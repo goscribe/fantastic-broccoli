@@ -1,6 +1,5 @@
 "use client";
 
-import { LearnHome } from "@/components/learn/learn-home";
 import { Copilot } from "@/components/ai/copilot";
 import { useNewUi } from "@/lib/new-ui";
 
@@ -1036,23 +1035,27 @@ function NewUiChat() {
   const { id } = useParams<{ id: string }>();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [open, setOpen] = useState(true);
-  const q = searchParams.get("q") ?? undefined;
+  const { data: workspace } = useQuery({ queryKey: ["workspace", id], queryFn: () => fetchWorkspace(id) });
+  const [prompt] = useState(searchParams.get("q") ?? undefined);
   useEffect(() => {
-    if (q) router.replace(`/workspace/${id}/chat`, { scroll: false });
+    if (prompt) router.replace(`/workspace/${id}/chat`, { scroll: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const [prompt] = useState(q);
   return (
-    <div className="flex min-h-0 flex-1">
-      <div className="min-w-0 flex-1 overflow-y-auto">
-        <LearnHome workspaceId={id} />
+    <div className="flex min-h-0 flex-1 flex-col">
+      <div className="mx-auto flex w-full max-w-3xl items-center gap-3 px-4 pt-4 text-[13px] text-muted-foreground">
+        <Link href={`/workspace/${id}`} className="hover:text-foreground">
+          ← {workspace?.title ?? "Workspace"}
+        </Link>
+        <span>·</span>
+        <span>Copilot</span>
       </div>
       <Copilot
-        open={open}
-        onClose={() => setOpen(false)}
+        open
+        onClose={() => router.push(`/workspace/${id}`)}
         workspaceId={id}
         initialPrompt={prompt}
+        variant="page"
         page={`Workspace Copilot — /workspace/${id}/chat`}
       />
     </div>

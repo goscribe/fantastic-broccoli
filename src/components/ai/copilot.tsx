@@ -129,8 +129,11 @@ export function Copilot({
   activity,
   page,
   initialPrompt,
+  variant = "panel",
 }: {
   open: boolean;
+  /** "page": full-width centred chat (workspace Copilot route) instead of the docked side panel. */
+  variant?: "panel" | "page";
   /** Sent once as the first message when the panel is ready (Learn one-offs like "Quiz me on …"). */
   initialPrompt?: string;
   onClose: () => void;
@@ -394,8 +397,13 @@ export function Copilot({
 
   return (
     <div
-      className="flex flex-col bg-card border-border min-h-0 max-sm:fixed max-sm:inset-0 max-sm:z-50 max-sm:w-full sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]"
-      style={{ "--copilot-width": width ? `${width}px` : newUi ? "380px" : "40vw" } as React.CSSProperties}
+      className={cn(
+        "flex flex-col bg-card border-border min-h-0",
+        variant === "page"
+          ? "relative mx-auto h-full w-full max-w-3xl flex-1"
+          : "max-sm:fixed max-sm:inset-0 max-sm:z-50 max-sm:w-full sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]",
+      )}
+      style={variant === "page" ? undefined : ({ "--copilot-width": width ? `${width}px` : newUi ? "380px" : "40vw" } as React.CSSProperties)}
     >
       {/* Resize handle */}
       <div
@@ -407,7 +415,7 @@ export function Copilot({
           document.body.style.cursor = "col-resize";
           document.body.style.userSelect = "none";
         }}
-        className="absolute left-0 inset-y-0 w-1.5 -translate-x-1/2 cursor-col-resize z-10 hover:bg-accent/40 active:bg-accent/60 transition-colors max-sm:hidden"
+        className={cn("absolute left-0 inset-y-0 w-1.5 -translate-x-1/2 cursor-col-resize z-10 hover:bg-accent/40 active:bg-accent/60 transition-colors max-sm:hidden", variant === "page" && "hidden")}
       />
       {/* Header */}
       <div className="flex items-center gap-2 px-3 h-12 border-b border-border shrink-0">
@@ -447,7 +455,7 @@ export function Copilot({
         <button
           type="button"
           onClick={onClose}
-          className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted shrink-0"
+          className={cn("p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted shrink-0", variant === "page" && "hidden")}
         >
           {newUi ? <PanelRightClose className="h-4 w-4" /> : <X className="h-4 w-4" />}
         </button>
