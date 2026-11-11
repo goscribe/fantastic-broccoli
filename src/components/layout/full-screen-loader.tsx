@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useI18n } from "@/lib/i18n";
-import "@/lib/i18n/misc";
 
 /**
  * Boot splash while auth resolves. Deliberately plain (logo + bar) so it
@@ -10,7 +8,6 @@ import "@/lib/i18n/misc";
  * old-theme artwork.
  */
 export function FullScreenLoader() {
-  const { t } = useI18n();
   return (
     <div
       role="status"
@@ -22,7 +19,7 @@ export function FullScreenLoader() {
       <div className="h-1.5 w-40 overflow-hidden rounded-full bg-muted">
         <div className="h-full w-1/3 animate-[loader-slide_1.1s_ease-in-out_infinite] rounded-full bg-accent" />
       </div>
-      <span className="sr-only">{t("misc.loading")}</span>
+      <span className="sr-only">Loading…</span>
       <style>{`@keyframes loader-slide{0%{transform:translateX(-100%)}100%{transform:translateX(400%)}}`}</style>
     </div>
   );

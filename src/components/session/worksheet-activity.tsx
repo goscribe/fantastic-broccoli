@@ -1,5 +1,6 @@
 "use client";
 
+import { useNewUi } from "@/lib/new-ui";
 import { useState } from "react";
 import { PartMarking, WorksheetContent } from "@/types";
 import { markWorksheetAnswer } from "@/lib/api/study";
@@ -43,6 +44,7 @@ export function WorksheetActivity({
   onComplete,
 }: WorksheetActivityProps) {
   const { t } = useI18n();
+  const newUi = useNewUi();
   const restored = restoredDraft(activityId, draft) as Partial<WorksheetDraft> | undefined;
   const [stepIndex, setStepIndex] = useState(restored?.stepIndex ?? 0);
   const [answers, setAnswers] = useState<Record<string, string>>(
@@ -214,12 +216,12 @@ export function WorksheetActivity({
               !!marking && !marking.correct && marking.achievedPoints > 0;
             return (
               <div key={part.label} className="flex gap-3">
-                <span className="mt-1.5 h-6 w-6 shrink-0 rounded-full bg-muted text-[11px] font-bold flex items-center justify-center">
+                <span className={cn("shrink-0 flex items-center justify-center font-bold", newUi ? "mt-1 h-7 w-7 rounded-lg bg-accent-soft text-[12px] text-accent-dim" : "mt-1.5 h-6 w-6 rounded-full bg-muted text-[11px]")}>
                   {part.label}
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline justify-between gap-3">
-                    <p className="text-sm leading-6">
+                    <p className={newUi ? "text-[15px] leading-7" : "text-sm leading-6"}>
                       <MarkdownText text={part.prompt} />
                     </p>
                     <span className="text-[11px] text-faint shrink-0 tabular-nums">
@@ -239,7 +241,7 @@ export function WorksheetActivity({
                             setAnswers((a) => ({ ...a, [key(i)]: opt }))
                           }
                           className={cn(
-                            "px-4 py-1.5 rounded-lg border text-sm font-medium",
+                            newUi ? "px-5 py-2 rounded-xl border text-[14px] font-semibold" : "px-4 py-1.5 rounded-lg border text-sm font-medium",
                             value === opt
                               ? checked
                                 ? correct
@@ -269,14 +271,16 @@ export function WorksheetActivity({
                           : t("session.textPlaceholder")
                       }
                       className={cn(
-                        "mt-2 w-full rounded-lg border px-3 py-2 text-sm resize-none focus:outline-none",
+                        newUi ? "mt-2.5 w-full rounded-2xl border px-4 py-3 text-[15px] resize-none focus:outline-none" : "mt-2 w-full rounded-lg border px-3 py-2 text-sm resize-none focus:outline-none",
                         checked
                           ? correct
                             ? "border-accent bg-accent-soft/50"
                             : partial
                               ? "border-amber bg-amber/5"
                               : "border-rose bg-rose/5"
-                          : "border-border-strong bg-background focus:border-accent/60",
+                          : newUi
+                            ? "border-border bg-card focus:border-accent"
+                            : "border-border-strong bg-background focus:border-accent/60",
                       )}
                     />
                   )}
@@ -305,14 +309,14 @@ export function WorksheetActivity({
 
                   {/* Markscheme breakdown (LLM-marked parts) */}
                   {checked && marking && marking.points.length > 0 && (
-                    <div className="mt-2 rounded-lg border border-border overflow-hidden">
-                      <div className="flex items-center justify-between bg-muted/60 px-3 py-1.5 border-b border-border">
-                        <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                    <div className={newUi ? "mt-3 rounded-2xl border border-border bg-card overflow-hidden shadow-[0_8px_24px_-16px_rgba(17,17,20,.2)]" : "mt-2 rounded-lg border border-border overflow-hidden"}>
+                      <div className={cn("flex items-center justify-between border-b border-border", newUi ? "px-4 py-2.5" : "bg-muted/60 px-3 py-1.5")}>
+                        <p className={newUi ? "text-[13px] font-semibold" : "text-[11px] font-semibold uppercase tracking-wide text-muted-foreground"}>
                           {t("session.markScheme")}
                         </p>
                         <span
                           className={cn(
-                            "text-[11px] font-bold tabular-nums rounded-full px-2 py-0.5",
+                            newUi ? "text-[12px] font-bold tabular-nums rounded-full px-2.5 py-1" : "text-[11px] font-bold tabular-nums rounded-full px-2 py-0.5",
                             correct
                               ? "bg-accent-soft text-accent-dim"
                               : partial
@@ -328,11 +332,11 @@ export function WorksheetActivity({
                         {marking.points.map((point, j) => {
                           const earned = point.achievedPoints >= point.point;
                           return (
-                            <div key={j} className="px-3 py-2">
+                            <div key={j} className={newUi ? "px-4 py-3" : "px-3 py-2"}>
                               <div className="flex items-start gap-2.5">
                                 <span
                                   className={cn(
-                                    "mt-0.5 shrink-0 h-4.5 rounded px-1.5 text-[10px] font-bold tabular-nums flex items-center",
+                                    newUi ? "mt-0.5 shrink-0 h-6 rounded-md px-2 text-[11px] font-bold tabular-nums flex items-center" : "mt-0.5 shrink-0 h-4.5 rounded px-1.5 text-[10px] font-bold tabular-nums flex items-center",
                                     earned
                                       ? "bg-accent-soft text-accent-dim"
                                       : "bg-rose/10 text-rose",
@@ -340,7 +344,7 @@ export function WorksheetActivity({
                                 >
                                   M{j + 1}
                                 </span>
-                                <p className="flex-1 min-w-0 text-xs leading-5">
+                                <p className={newUi ? "flex-1 min-w-0 text-[13.5px] leading-6" : "flex-1 min-w-0 text-xs leading-5"}>
                                   <MarkdownText text={point.requirements} />
                                 </p>
                                 <span className="shrink-0 flex items-center gap-1 text-[11px] font-semibold tabular-nums">
@@ -353,7 +357,7 @@ export function WorksheetActivity({
                                 </span>
                               </div>
                               {point.feedback && !earned && (
-                                <p className="mt-1 pl-8 text-[11px] leading-4 text-muted-foreground">
+                                <p className={newUi ? "mt-1.5 pl-10 text-[13px] leading-5 text-muted-foreground" : "mt-1 pl-8 text-[11px] leading-4 text-muted-foreground"}>
                                   <MarkdownText text={point.feedback} />
                                 </p>
                               )}
