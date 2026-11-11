@@ -1,4 +1,4 @@
-import { Check, Mic, Square, X } from "lucide-react";
+import { Check, Keyboard, Mic, Square, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Ring } from "./charts";
 import { T } from "./tokens";
@@ -89,11 +89,27 @@ export function SummaryBody({ marked }: { marked: boolean }) {
   );
 }
 
-export function ExplainBody({ marked }: { marked: boolean }) {
+export function ExplainBody({ marked, mode = "speak" }: { marked: boolean; mode?: "speak" | "type" }) {
   const bars = Array.from({ length: 48 }, (_, i) => 8 + Math.abs(Math.sin(i * 0.9) * 26 + Math.cos(i * 0.37) * 10));
+  const toggle = (
+    <div className="mb-3 inline-flex rounded-xl bg-muted p-1 text-[13px] font-semibold">
+      {([["speak", Mic, "Speak"], ["type", Keyboard, "Type"]] as const).map(([k, Icon, l]) => <span key={k} className={cn("inline-flex h-8 items-center gap-1.5 rounded-lg px-3", mode === k ? "bg-white shadow-sm" : "text-muted-foreground")}><Icon className="size-3.5" />{l}</span>)}
+    </div>
+  );
+  if (mode === "type") {
+    return (
+      <Row>
+        <div className="min-w-0 flex-1">{toggle}
+          <div className={cn(field, "min-h-[150px] p-4 text-[14px] leading-[1.6]", marked ? "border-border" : "border-accent")}>Imagine the cell is a balloon full of salty water. Pure water outside has way more water molecules, so by osmosis they rush in and the balloon fills until it pops. Animal cells have no cell wall to hold them, so nothing stops the stretching.{!marked && <span className="ml-0.5 inline-block h-[18px] w-0.5 -translate-y-[3px] bg-accent align-middle" />}</div>
+          <div className="mt-2 flex justify-between text-[12px] text-faint"><span>54 words · explain like you would out loud</span><span className="flex items-center gap-1"><Mic className="size-3.5" />Switch to speaking</span></div>
+        </div>
+        <SideHint title="We look for">{["Uses the word osmosis", "Gives the direction of water movement", "Explains why the cell bursts (no cell wall)", "Pitched for a Year 9 — an analogy helps"].map((c, i) => <div key={c} className="flex gap-2"><span className="font-bold text-accent">{i + 1}</span>{c}</div>)}</SideHint>
+      </Row>
+    );
+  }
   return (
     <Row>
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1">{toggle}
         <div className={cn(field, "flex flex-col items-center gap-4 border-border p-6")}>
           <div className="flex h-16 items-center gap-[3px]">{bars.map((h, i) => <span key={i} className="w-[5px] rounded-full" style={{ height: h, background: i < (marked ? 48 : 30) ? T.violet : T.border }} />)}</div>
           <div className="text-[28px] font-bold tabular-nums">{marked ? "0:47" : "0:29"}<span className="text-[14px] font-medium text-faint"> / 0:45</span></div>

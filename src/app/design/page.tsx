@@ -20,6 +20,7 @@ const SCREENS: [string, string][] = [
   ["Comprehension · summary · marked", "/design/question?type=summary&state=fb"],
   ["Explain aloud · recording", "/design/question?type=explain"],
   ["Explain aloud · marked", "/design/question?type=explain&state=fb"],
+  ["Explain · typed instead", "/design/question?type=explain&mode=type"],
   ["Lesson step complete (mobile)", "/design/complete"],
 ];
 

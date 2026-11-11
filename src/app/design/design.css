@@ -17,3 +17,9 @@
   letter-spacing: -0.005em;
 }
 .design-root h1, .design-root h2 { letter-spacing: -0.025em; }
+
+@keyframes design-pop { 0% { transform: scale(.4) translateX(var(--tx, 0)); opacity: 0 } 60% { transform: scale(1.12) translateX(var(--tx, 0)); opacity: 1 } 100% { transform: scale(1) translateX(var(--tx, 0)) } }
+@keyframes design-bounce { 0% { transform: translateY(24px); opacity: 0 } 55% { transform: translateY(-6px); opacity: 1 } 100% { transform: translateY(0) } }
+.design-pop { animation: design-pop .55s cubic-bezier(.34,1.56,.64,1) both; }
+.design-pop.-translate-x-1\/2 { --tx: -50%; }
+.design-bounce { animation: design-bounce .5s cubic-bezier(.22,1,.36,1) both; }

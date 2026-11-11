@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowUp, ChevronLeft, ChevronRight, MessageCircle, Mic } from "lucide-react";
+import { ArrowUp, ChevronLeft, ChevronRight, Mic } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export type CopilotMsg = { who: "u" | "a"; text: React.ReactNode };
@@ -38,7 +38,6 @@ export function CopilotPanel({ messages = [], defaultWidth = 380, defaultOpen = 
     <aside className="relative flex shrink-0 flex-col border-l border-border bg-white" style={{ width }}>
       <div onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} className="absolute inset-y-0 -left-[7px] flex w-[14px] cursor-col-resize items-center justify-center" aria-label="Resize Copilot"><span className="h-11 w-1 rounded-sm bg-border" /></div>
       <div className="flex items-center gap-2.5 border-b border-border py-3.5 pl-[22px] pr-[18px]">
-        <span className="grid size-[30px] place-items-center rounded-[9px] bg-accent-soft text-accent"><MessageCircle className="size-4" /></span>
         <div className="text-[14px] font-bold">Copilot</div>
         <button onClick={() => setOpen(false)} className="ml-auto grid size-7 place-items-center rounded-lg border border-border text-muted-foreground hover:bg-muted" aria-label="Collapse Copilot"><ChevronRight className="size-3.5" /></button>
       </div>

@@ -13,8 +13,8 @@ const MSGS: CopilotMsg[] = [
 const SIDE = "w-[320px] shrink-0";
 const Hint = ({ title, children }: { title: string; children: React.ReactNode }) => <div className="rounded-2xl bg-muted p-4"><div className="text-[11px] font-semibold text-faint">{title}</div><div className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{children}</div></div>;
 
-export default async function QuestionPreview({ searchParams }: { searchParams: Promise<{ type?: QType; state?: "q" | "fb"; chat?: string; panel?: string; tip?: string }> }) {
-  const { type = "mcq", state = "q", chat, panel, tip } = await searchParams;
+export default async function QuestionPreview({ searchParams }: { searchParams: Promise<{ type?: QType; state?: "q" | "fb"; chat?: string; panel?: string; tip?: string; mode?: "speak" | "type" }> }) {
+  const { type = "mcq", state = "q", chat, panel, tip, mode } = await searchParams;
   const fb = state === "fb";
   const panelOpen = panel !== "closed";
   const messages = chat ? MSGS : undefined;
@@ -53,7 +53,7 @@ export default async function QuestionPreview({ searchParams }: { searchParams: 
     case "explain":
       return frame({ tag: "Explain aloud · 3.2 Transport", qi: 8, qn: 9, question: "Explain to a Year 9 student why a red blood cell bursts in pure water. Speak for about 45 seconds.",
         bottom: fb ? <FeedbackCard ok title="Clear explanation" message="You used an analogy and the key term osmosis. One slip: you said water moves to the lower concentration of water — it's the higher." secondary="Hear it back" primary="Continue" /> : <BottomBar left={<button className={btnOutline}>Skip</button>} right={<button className={btnPrimary}>Stop &amp; check</button>} />,
-        children: <ExplainBody marked={fb} /> });
+        children: <ExplainBody marked={fb} mode={mode} /> });
     default: {
       const opts = ["Water moves out of the cell; it shrinks", "Water moves into the cell; it swells", "No net movement of water", "NaCl moves into the cell"];
       return frame({ tag: "Worksheet · Osmosis · Multiple choice", qi: 4, qn: 7, question: "A red blood cell (cytoplasm ≈ 0.15 M) is placed in a 0.3 M NaCl solution. What happens?",
