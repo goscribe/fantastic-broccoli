@@ -1,5 +1,7 @@
 "use client";
 
+import { useNewUi } from "@/lib/new-ui";
+import { BuildBar } from "@/components/session/build-bar";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createWorkspace, fetchWorkspace } from "@/lib/api/workspace";
@@ -175,6 +177,7 @@ function PlanUpsell() {
 }
 
 export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
+  const newUi = useNewUi();
   const router = useRouter();
   const { user } = useAuthUser();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -347,6 +350,27 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
     const buildPercent = Math.round(
       (Math.min(stepIndex, BUILD_STEPS.length) / BUILD_STEPS.length) * 100,
     );
+    if (newUi) {
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
+          <div className="flex max-h-full w-full max-w-[640px] flex-col items-center gap-5 overflow-y-auto animate-fade-up">
+            <BuildBar
+              title={title}
+              pct={buildPercent / 100}
+              label={BUILD_STEPS[Math.min(stepIndex, BUILD_STEPS.length - 1)]}
+              steps={BUILD_STEPS.length}
+              index={stepIndex}
+            />
+            {warmupWorkspaceId ? (
+              <WarmupQuiz workspaceId={warmupWorkspaceId} hero />
+            ) : (
+              <p className="text-[13px] text-faint">A warm-up question from your notes is on its way.</p>
+            )}
+            <div className="w-full rounded-3xl bg-card"><PlanUpsell /></div>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
         <div className="max-h-full w-full max-w-lg overflow-y-auto rounded-2xl border border-border bg-card p-5 animate-fade-up">

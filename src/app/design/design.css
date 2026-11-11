@@ -1,0 +1,37 @@
+/* Scoped tokens for the redesign preview (RevisionDojo-like: white, violet, grey cards). */
+.design-root {
+  --background: #ffffff;
+  --card: #ffffff;
+  --muted: #f4f4f6;
+  --muted-foreground: #6b6b76;
+  --faint: #9a9aa6;
+  --accent: #7c3aed;
+  --accent-dim: #6d28d9;
+  --accent-soft: #ede9fe;
+  --border: #e8e8ec;
+  --border-strong: #d9d9df;
+  --ring: #7c3aed;
+  --lavender: #e1cdf7;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-sans);
+  letter-spacing: -0.005em;
+}
+.design-root h1, .design-root h2 { letter-spacing: -0.025em; }
+
+@keyframes design-pop { 0% { transform: scale(.4) translateX(var(--tx, 0)); opacity: 0 } 60% { transform: scale(1.12) translateX(var(--tx, 0)); opacity: 1 } 100% { transform: scale(1) translateX(var(--tx, 0)) } }
+@keyframes design-bounce { 0% { transform: translateY(24px); opacity: 0 } 55% { transform: translateY(-6px); opacity: 1 } 100% { transform: translateY(0) } }
+.design-pop { animation: design-pop .55s cubic-bezier(.34,1.56,.64,1) both; }
+.design-pop.-translate-x-1\/2 { --tx: -50%; }
+.design-bounce { animation: design-bounce .5s cubic-bezier(.22,1,.36,1) both; }
+
+/* Mascot motion: one animation per pose. */
+@keyframes design-wiggle { 0%,100% { transform: rotate(-4deg) } 50% { transform: rotate(4deg) } }
+@keyframes design-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-4px) } }
+@keyframes design-float { 0%,100% { transform: translateY(0) rotate(-2deg) } 50% { transform: translateY(-6px) rotate(2deg) } }
+@keyframes design-peek { 0% { transform: translateY(18px) rotate(6deg); opacity: 0 } 100% { transform: translateY(0) rotate(0); opacity: 1 } }
+@keyframes design-cheer { 0% { transform: translateY(0) scale(.6); opacity: 0 } 50% { transform: translateY(-14px) scale(1.08); opacity: 1 } 70% { transform: translateY(0) scale(.98) } 85% { transform: translateY(-6px) scale(1.02) } 100% { transform: translateY(0) scale(1) } }
+.cat-wiggle { animation: design-wiggle 1.6s ease-in-out infinite; transform-origin: 50% 90%; }
+.cat-bob { animation: design-bob 3s ease-in-out infinite; }
+.cat-float { animation: design-float 4s ease-in-out infinite; }
+.cat-peek { animation: design-peek .6s cubic-bezier(.22,1,.36,1) both; }
+.cat-cheer { animation: design-cheer .9s cubic-bezier(.34,1.56,.64,1) both; transform-origin: 50% 100%; }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useNewUi } from "@/lib/new-ui";
 import { MathText } from "@/components/ui/markdown-text";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -39,6 +40,7 @@ export function SessionDebrief({
   quickStart?: boolean;
 }) {
   const { t } = useI18n();
+  const newUi = useNewUi();
   const [stage, setStage] = useState(0);
   const [creditsEarned] = useState(() => awardSessionCredits(sessionId));
 
@@ -103,7 +105,7 @@ export function SessionDebrief({
           aria-hidden
         >
           <Image
-            src="/illustrations/props/trophy.png"
+            src={newUi ? "/design/props/trophy.png" : "/illustrations/props/trophy.png"}
             alt=""
             width={160}
             height={160}

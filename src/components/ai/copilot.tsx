@@ -3,8 +3,10 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
+import { useNewUi } from "@/lib/new-ui";
+import "@/app/design/design.css";
 import { toastError } from "@/lib/toast";
-import { Sparkles, X, ArrowUp, Plus } from "lucide-react";
+import { ArrowUp, PanelRightClose, PanelRightOpen, Plus, Sparkles, X } from "lucide-react";
 import Image from "next/image";
 import { EquationEmbed, GraphEmbed, CitationEmbed } from "@/components/ai/embeds";
 import {
@@ -138,6 +140,7 @@ export function Copilot({
   page?: string;
 }) {
   const { t } = useI18n();
+  const newUi = useNewUi();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [chats, setChats] = useState<ChatTab[]>([]);
   const [activeChat, setActiveChat] = useState<string | null>(null);
@@ -396,7 +399,7 @@ export function Copilot({
       {/* Header */}
       <div className="flex items-center gap-2 px-3 h-12 border-b border-border shrink-0">
         <p className="text-sm font-semibold shrink-0">{t("misc.copilot")}</p>
-        <div className="flex items-center gap-1 ml-1 flex-1 min-w-0 overflow-x-auto">
+        <div className={cn("flex items-center gap-1 ml-1 flex-1 min-w-0 overflow-x-auto", newUi && "hidden")}>
           {chatsLoading &&
             [0, 1].map((i) => (
               <span
@@ -433,7 +436,7 @@ export function Copilot({
           onClick={onClose}
           className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted shrink-0"
         >
-          <X className="h-4 w-4" />
+          {newUi ? <PanelRightClose className="h-4 w-4" /> : <X className="h-4 w-4" />}
         </button>
       </div>
 
@@ -442,19 +445,21 @@ export function Copilot({
         {chatMessages.length === 0 && (
           <div className="pt-8 text-center space-y-5">
             <Image
-              src="/illustrations/bot.png"
+              src={newUi ? "/design/cat2-pencil.png" : "/illustrations/bot.png"}
               alt=""
               width={160}
               height={160}
-              className="pointer-events-none mx-auto h-20 w-20 select-none object-contain"
+              unoptimized={newUi}
+              className={cn("pointer-events-none mx-auto h-20 w-20 select-none object-contain", newUi && "cat-float h-24 w-24")}
             />
             <div>
               <p className="text-sm font-semibold">
-                {t("misc.copilotEmptyTitle")}
+                {newUi ? "Stuck? Ask me anything." : t("misc.copilotEmptyTitle")}
               </p>
               <p className="text-xs text-muted-foreground mt-1">
-                {context ? `${context} — ` : ""}
-                {t("misc.copilotEmptyBlurb")}
+                {newUi
+                  ? "I can see what you’re working on and your notes. One chat for the whole session."
+                  : `${context ? `${context} — ` : ""}${t("misc.copilotEmptyBlurb")}`}
               </p>
             </div>
             <div className="space-y-2">
@@ -480,7 +485,9 @@ export function Copilot({
               </div>
             </div>
           ) : (
-            <div key={msg.id} className="space-y-0.5">
+            <div key={msg.id} className={cn("space-y-0.5", newUi && "flex gap-2")}>
+              {newUi && <Image src="/design/cat2-think.png" alt="" width={26} height={26} unoptimized className="mt-1.5 h-[26px] w-auto shrink-0" />}
+              <div className="min-w-0 flex-1 space-y-0.5">
               {msg.parts.length === 0 && (
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground px-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse-dot" />
@@ -520,6 +527,7 @@ export function Copilot({
                   </div>
                 ),
               )}
+              </div>
             </div>
           ),
         )}
@@ -562,6 +570,20 @@ export function Copilot({
 
 export function CopilotTrigger({ onClick }: { onClick: () => void }) {
   const { t } = useI18n();
+  const newUi = useNewUi();
+  if (newUi) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        aria-label={t("misc.askScribe")}
+        className="fixed right-0 top-1/2 z-40 flex -translate-y-1/2 flex-col items-center gap-1.5 rounded-l-2xl border border-r-0 border-border bg-card px-2 py-3 shadow-md hover:bg-muted"
+      >
+        <Image src="/design/cat2-wave.png" alt="" width={36} height={36} unoptimized className="cat-wiggle h-9 w-auto" />
+        <PanelRightOpen className="h-4 w-4 text-muted-foreground" />
+      </button>
+    );
+  }
   return (
     <button
       type="button"

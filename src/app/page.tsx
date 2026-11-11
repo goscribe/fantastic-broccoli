@@ -26,6 +26,8 @@ import {
   fetchStudySessions,
   type DailyActivityPoint,
 } from "@/lib/api/study";
+import { LearnHome } from "@/components/learn/learn-home";
+import { useNewUi } from "@/lib/new-ui";
 import {
   FirstSessionOnboarding,
   hasSkippedFirstSessionOnboarding,
@@ -220,6 +222,9 @@ export default function HomePage() {
       : hour < 18
         ? t("misc.goodAfternoon")
         : t("misc.goodEvening");
+
+  const newUi = useNewUi();
+  if (newUi && showOnboarding === false) return <LearnHome />;
 
   return (
     <div className="flex-1 flex flex-col">

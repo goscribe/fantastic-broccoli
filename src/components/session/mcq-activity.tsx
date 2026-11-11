@@ -6,6 +6,8 @@ import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
 import { useReportCurrentItem } from "@/lib/current-item";
 import { Button } from "@/components/ui/button";
 import { ConfettiBurst } from "@/components/graphics/confetti-burst";
+import { FeedbackCard } from "@/components/session/feedback-card";
+import { useNewUi } from "@/lib/new-ui";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
@@ -28,6 +30,7 @@ export function McqActivity({
   onComplete,
 }: McqActivityProps) {
   const { t } = useI18n();
+  const newUi = useNewUi();
   const restored = restoredDraft(activityId, draft) as
     | Partial<{
         index: number;
@@ -127,7 +130,7 @@ export function McqActivity({
         </div>
       </div>
 
-      <p className="text-sm font-medium leading-relaxed">
+      <p className={newUi ? "text-[20px] font-bold leading-[1.35]" : "text-sm font-medium leading-relaxed"}>
         <MarkdownText text={question.question} />
       </p>
 
@@ -139,8 +142,8 @@ export function McqActivity({
             onClick={() => !revealed && setSelected(i)}
             disabled={revealed}
             className={cn(
-              "w-full text-left p-3 rounded-lg border text-sm",
-              !revealed && selected === i && "border-accent bg-accent/5",
+              newUi ? "w-full text-left rounded-[14px] border bg-card px-4 py-3 text-[15px] font-medium" : "w-full text-left p-3 rounded-lg border text-sm",
+              !revealed && selected === i && (newUi ? "border-accent bg-accent-soft" : "border-accent bg-accent/5"),
               !revealed && selected !== i && "border-border hover:border-accent/30 hover:bg-muted/30",
               revealed && i === question.correctIndex && "border-success bg-success/5",
               revealed && selected === i && i !== question.correctIndex && "border-red-500 bg-red-500/5",
@@ -150,14 +153,14 @@ export function McqActivity({
             <div className="flex items-center gap-3">
               <span
                 className={cn(
-                  "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium flex-shrink-0",
+                  newUi ? "flex h-7 w-7 items-center justify-center rounded-lg text-[13px] font-semibold flex-shrink-0" : "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium flex-shrink-0",
                   !revealed && selected === i && "bg-accent text-accent-foreground",
                   !revealed && selected !== i && "bg-muted text-muted-foreground",
                   revealed && i === question.correctIndex && "bg-success text-white",
                   revealed && selected === i && i !== question.correctIndex && "bg-red-500 text-white",
                 )}
               >
-                {String.fromCharCode(65 + i)}
+                {newUi ? i + 1 : String.fromCharCode(65 + i)}
               </span>
               <span className="flex-1 min-w-0">
                 <MarkdownText text={option} />
@@ -186,7 +189,16 @@ export function McqActivity({
         </div>
       )}
 
-      {revealed && (
+      {revealed && newUi && (
+        <FeedbackCard
+          ok={isCorrect}
+          title={isCorrect ? t("session.correct") : t("session.notQuite")}
+          message={<MarkdownText text={question.explanation} />}
+          primary={isLast ? t("session.finishQuiz") : t("session.nextQuestion")}
+          onPrimary={handleNext}
+        />
+      )}
+      {revealed && !newUi && (
         <div className="pt-3 border-t border-border">
           <p
             className={cn(

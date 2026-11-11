@@ -32,6 +32,7 @@ const PUBLIC_PATHS = [
   "/accept-invite",
   "/privacy",
   "/terms",
+  "/design",
 ];
 
 export function isPublicPath(path: string): boolean {
