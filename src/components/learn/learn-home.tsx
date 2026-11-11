@@ -35,6 +35,7 @@ import type { DailyActivityPoint } from "@/lib/api/study";
 import { StudyCalendar } from "@/components/workspace/study-calendar";
 import { Skeleton } from "@/components/ui/skeleton";
 import "@/app/design/design.css";
+import { inputBoxClass, bareInputClass } from "@/components/ui/input";
 
 const ACTIVITY_LABEL: Record<string, string> = {
   mcq: "Quick 5",
@@ -265,7 +266,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         </div>
 
         <form
-          className="rounded-[18px] border border-border p-3.5"
+          className={cn(inputBoxClass, "flex-col items-stretch gap-0 p-3.5")}
           onSubmit={(e) => {
             e.preventDefault();
             ask(prompt);
@@ -278,7 +279,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
               onChange={(e) => setPrompt(e.target.value)}
               placeholder={defaultWorkspace ? "What do you want to practise?" : "Add a material first, then ask for anything"}
               disabled={!defaultWorkspace}
-              className="flex-1 bg-transparent text-[15px] outline-none placeholder:text-faint"
+              className={cn(bareInputClass, "text-[15px]")}
             />
             <button type="submit" disabled={!defaultWorkspace || !prompt.trim()} className="grid size-9 place-items-center rounded-[10px] bg-accent text-white disabled:opacity-40">
               <ArrowUp className="size-4" />

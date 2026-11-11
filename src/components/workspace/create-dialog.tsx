@@ -33,6 +33,7 @@ import {
   WorkspaceIcon,
   WORKSPACE_ICONS,
 } from "@/components/graphics/workspace-icon";
+import { inputClass, textareaClass } from "@/components/ui/input";
 
 const folderColors = [
   "#6fd420",
@@ -515,7 +516,7 @@ export function CreateResourceDialog({
                 ? t("ws.folderNamePlaceholder")
                 : t("ws.workspaceNamePlaceholder")
             }
-            className="h-10 w-full rounded-lg border border-border bg-card px-3.5 text-sm placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15"
+            className={inputClass}
           />
           {kind === "workspace" && (
             <textarea
@@ -523,7 +524,7 @@ export function CreateResourceDialog({
               onChange={(e) => setDescription(e.target.value)}
               placeholder={t("ws.descriptionPlaceholder")}
               rows={2}
-              className="w-full rounded-lg border border-border bg-card px-3.5 py-2.5 text-sm placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15"
+              className={textareaClass}
             />
           )}
           {kind === "workspace" && (

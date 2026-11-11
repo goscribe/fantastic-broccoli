@@ -271,7 +271,7 @@ export function WorksheetActivity({
                           : t("session.textPlaceholder")
                       }
                       className={cn(
-                        newUi ? "mt-2.5 w-full rounded-2xl border px-4 py-3 text-[15px] resize-none focus:outline-none" : "mt-2 w-full rounded-lg border px-3 py-2 text-sm resize-none focus:outline-none",
+                        newUi ? "mt-2.5 w-full rounded-xl border px-4 py-3 text-[15px] leading-relaxed resize-none transition-colors placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-accent/15" : "mt-2 w-full rounded-lg border px-3 py-2 text-sm resize-none focus:outline-none",
                         checked
                           ? correct
                             ? "border-accent bg-accent-soft/50"

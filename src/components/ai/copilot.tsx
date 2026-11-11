@@ -36,6 +36,7 @@ import type {
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
+import { inputBoxClass, bareInputClass } from "@/components/ui/input";
 
 let idCounter = 0;
 const nextId = () => `m-${++idCounter}-${Date.now()}`;
@@ -568,7 +569,7 @@ export function Copilot({
             e.preventDefault();
             send(input);
           }}
-          className="flex items-end gap-2 rounded-2xl border border-border-strong bg-muted/50 px-3 py-2 focus-within:border-accent/50"
+          className={cn(inputBoxClass, "items-end gap-2 py-2")}
         >
           <textarea
             value={input}
@@ -581,7 +582,7 @@ export function Copilot({
             }}
             rows={1}
             placeholder={t("misc.copilotPlaceholder")}
-            className="flex-1 resize-none bg-transparent text-sm focus:outline-none placeholder:text-faint py-1"
+            className={cn(bareInputClass, "resize-none py-1")}
           />
           <button
             type="submit"

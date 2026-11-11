@@ -123,7 +123,7 @@ export function ClozeActivity({
                 }}
                 disabled={marking || (checked && isCorrect(i))}
                 className={cn(
-                  newUi ? "mx-1 inline-block w-36 rounded-xl border-2 px-3 py-1.5 text-[15px] text-center font-semibold focus:outline-none" : "mx-1 inline-block w-32 rounded-lg border px-2.5 py-1 text-sm text-center font-medium focus:outline-none",
+                  newUi ? "mx-1 inline-block w-36 rounded-xl border-2 px-3 py-1.5 text-[15px] text-center font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-accent/15" : "mx-1 inline-block w-32 rounded-lg border px-2.5 py-1 text-sm text-center font-medium focus:outline-none",
                   checked
                     ? isCorrect(i)
                       ? "border-accent bg-accent-soft text-accent-dim"

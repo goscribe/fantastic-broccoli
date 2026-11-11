@@ -16,6 +16,7 @@ import {
   ArrowLeft,
   Loader2,
 } from "lucide-react";
+import { inputClass, textareaClass } from "@/components/ui/input";
 
 interface SessionConfig {
   title: string;
@@ -137,7 +138,7 @@ export function SessionCreateWizard({
             value={config.title}
             onChange={(e) => setConfig({ ...config, title: e.target.value })}
             placeholder={t("session.wizardTitlePlaceholder")}
-            className="w-full h-10 rounded-lg border border-border bg-card px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
+            className={inputClass}
           />
         </div>
         <div>
@@ -150,7 +151,7 @@ export function SessionCreateWizard({
             value={config.subject}
             onChange={(e) => setConfig({ ...config, subject: e.target.value })}
             placeholder={t("session.wizardSubjectPlaceholder")}
-            className="w-full h-10 rounded-lg border border-border bg-card px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
+            className={inputClass}
           />
           <div className="flex flex-wrap gap-1.5 mt-2">
             {subjectSuggestions.map((subjectKey) => {
@@ -192,7 +193,7 @@ export function SessionCreateWizard({
             maxLength={TOPICS_MAX_LENGTH}
             onChange={(e) => setConfig({ ...config, topics: e.target.value })}
             placeholder={t("session.wizardTopicsPlaceholder")}
-            className="w-full h-20 rounded-lg border border-border bg-card p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
+            className={cn(textareaClass, "h-20")}
           />
           {config.topics.length > TOPICS_MAX_LENGTH - 200 && (
             <p className="mt-1 text-right text-[11px] text-muted-foreground">

@@ -13,6 +13,7 @@ import { toastError } from "@/lib/toast";
 import { CalendarSync } from "lucide-react";
 import { cn } from "@/lib/utils";
 import "@/app/design/design.css";
+import { inputClass } from "@/components/ui/input";
 
 const DAY = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const hhmm = (m: number) => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
@@ -216,7 +217,7 @@ function EditPlanDialog({ plan, onClose, onSaved }: { plan: StudyPlan; onClose: 
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
-  const field = "h-10 w-full rounded-xl border border-border bg-white px-3 text-[14px] outline-none focus:border-accent";
+  const field = inputClass;
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-black/30 p-4" onClick={onClose}>
       <form
