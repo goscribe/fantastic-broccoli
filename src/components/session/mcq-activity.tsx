@@ -130,7 +130,7 @@ export function McqActivity({
         </div>
       </div>
 
-      <p className="text-sm font-medium leading-relaxed">
+      <p className={newUi ? "text-[20px] font-bold leading-[1.35]" : "text-sm font-medium leading-relaxed"}>
         <MarkdownText text={question.question} />
       </p>
 

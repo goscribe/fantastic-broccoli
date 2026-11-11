@@ -1,5 +1,6 @@
 "use client";
 
+import { useNewUi } from "@/lib/new-ui";
 import { useState, useMemo, useEffect, useRef } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -85,6 +86,18 @@ const ACTIVITY_ICON: Record<SessionActivity["type"], string> = {
   explain_aloud: "/illustrations/icons/act-explain.png",
 };
 
+const NEW_ACTIVITY_ICON: Record<SessionActivity["type"], string> = {
+  reading: "/design/props/books.png",
+  comprehension_check: "/design/props/bulb.png",
+  mcq: "/design/props/notes.png",
+  flashcard_review: "/design/props/cards.png",
+  worksheet: "/design/props/pencil.png",
+  interactive: "/design/props/bulb.png",
+  vocab_recall: "/design/props/cards.png",
+  cloze: "/design/props/notes.png",
+  explain_aloud: "/design/props/flag.png",
+};
+
 const phaseOf = (t: SessionActivity["type"]) =>
   t === "reading" || t === "comprehension_check" || t === "interactive"
     ? "Learn"
@@ -94,6 +107,7 @@ const phaseOf = (t: SessionActivity["type"]) =>
 
 export default function SessionDetailPage() {
   const { t } = useI18n();
+  const newUi = useNewUi();
   const params = useParams();
   const router = useRouter();
   const workspaceId = params.id as string;
@@ -771,7 +785,7 @@ export default function SessionDetailPage() {
                 {cheerKey && (
                   <div className="flex items-center gap-2">
                     <Image
-                      src="/illustrations/props/star-gold.png"
+                      src={newUi ? "/design/props/star.png" : "/illustrations/props/star-gold.png"}
                       alt=""
                       width={40}
                       height={40}
@@ -854,7 +868,7 @@ export default function SessionDetailPage() {
             <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
               <div className="animate-celebrate-pop flex flex-col items-center gap-2">
                 <Image
-                  src="/illustrations/props/star-gold.png"
+                  src={newUi ? "/design/props/star.png" : "/illustrations/props/star-gold.png"}
                   alt=""
                   width={96}
                   height={96}
@@ -910,7 +924,7 @@ export default function SessionDetailPage() {
                         )}
                       >
                         <Image
-                          src={ACTIVITY_ICON[activity.type]}
+                          src={(newUi ? NEW_ACTIVITY_ICON : ACTIVITY_ICON)[activity.type]}
                           alt=""
                           width={28}
                           height={28}
@@ -1092,6 +1106,7 @@ function FeedPeek({
   onClick: () => void;
   typeLabel: string;
 }) {
+  const newUi = useNewUi();
   return (
     <button
       type="button"
@@ -1109,7 +1124,7 @@ function FeedPeek({
       )}
       {activity ? (
         <Image
-          src={ACTIVITY_ICON[activity.type]}
+          src={(newUi ? NEW_ACTIVITY_ICON : ACTIVITY_ICON)[activity.type]}
           alt=""
           width={28}
           height={28}

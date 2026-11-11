@@ -10,6 +10,7 @@ import { ConfettiDots } from "@/components/graphics/floating-decor";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useNewUi } from "@/lib/new-ui";
 import type { StudySession } from "@/types";
 import {
   ArrowRight,
@@ -141,6 +142,7 @@ export function StudyNowCard({
   className,
 }: StudyNowCardProps) {
   const { t } = useI18n();
+  const newUi = useNewUi();
   const session = pickStudyNowSession(sessions);
 
   const shell = cn(
@@ -201,7 +203,7 @@ export function StudyNowCard({
             aria-hidden
           >
             <Image
-              src="/illustrations/flag.png"
+              src={newUi ? "/design/props/flag.png" : "/illustrations/flag.png"}
               alt=""
               width={200}
               height={200}
