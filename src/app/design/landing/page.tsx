@@ -140,7 +140,7 @@ export default function LandingPreview() {
         <div className="design-root relative mx-auto w-full max-w-[460px] rounded-3xl bg-white p-6 shadow-[0_30px_60px_-20px_rgba(76,29,149,.25)]">
           <div className="flex items-baseline justify-between"><span className="text-[15px] font-bold">This week</span><span className="text-[13px] font-bold text-accent">4-day streak</span></div>
           <div className="mt-3"><WeekBars mins={[28, 32, 25, 30, 12, 0, 0]} height={120} accent={T.violet} /></div>
-          <Image src="/design/cat2-flame.png" alt="" width={150} height={150} unoptimized className="cat-wiggle absolute -right-12 -top-16 size-[140px] object-contain" />
+          <Image src="/design/cat2-flame.png" alt="" width={150} height={150} unoptimized className="cat-wiggle absolute -bottom-12 -right-14 size-[140px] object-contain" />
         </div>
       </Band>
 
@@ -149,8 +149,8 @@ export default function LandingPreview() {
         <Headline sub="Hints when you ask, a worked example when you’re stuck, and “explain it differently” — all from the notes you uploaded.">a copilot that has actually read your notes.</Headline>
         <div className="design-root relative mx-auto flex w-full max-w-[460px] flex-col gap-3">
           <div className="self-end rounded-2xl rounded-br-md bg-accent px-4 py-3 text-[14px] font-medium text-white shadow-[0_10px_30px_-10px_rgba(124,58,237,.6)]">why did I lose M5?</div>
-          <div className="flex items-end gap-3"><Image src="/design/props/chat-cat.png" alt="" width={72} height={72} unoptimized className="size-[72px] object-contain" /><div className="rounded-2xl rounded-bl-md border border-border bg-white px-4 py-3 text-[14px] leading-relaxed shadow-[0_10px_30px_-10px_rgba(0,0,0,.12)]">You described the direction of water movement but not <b>the membrane</b>. Say it’s <b>partially permeable</b> — that’s the one-liner M5 wants. Want to try Q5 with that in mind?</div></div>
-          <div className="flex gap-2 self-start pl-[84px]">{["Try Q5", "Worked example", "Explain differently"].map((c) => <span key={c} className="rounded-full bg-accent-soft px-3 py-1.5 text-[12px] font-bold text-accent">{c}</span>)}</div>
+          <div className="flex items-end gap-3"><Image src="/design/props/chat-cat.png" alt="" width={130} height={130} unoptimized className="-mb-3 size-[130px] shrink-0 object-contain" /><div className="rounded-2xl rounded-bl-md border border-border bg-white px-4 py-3 text-[14px] leading-relaxed shadow-[0_10px_30px_-10px_rgba(0,0,0,.12)]">You described the direction of water movement but not <b>the membrane</b>. Say it’s <b>partially permeable</b> — that’s the one-liner M5 wants. Want to try Q5 with that in mind?</div></div>
+          <div className="flex gap-2 self-start pl-[142px]">{["Try Q5", "Worked example", "Explain differently"].map((c) => <span key={c} className="rounded-full bg-accent-soft px-3 py-1.5 text-[12px] font-bold text-accent">{c}</span>)}</div>
         </div>
       </Band>
 
