@@ -405,6 +405,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         )}
       </div>
 
+      {workspaceId && (
       <CatNudge
         count={picked.length}
         empty={!loading && materials.length === 0}
@@ -413,6 +414,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         onFlashcards={() => void startFromSelection("flashcards")}
         onClear={() => setSelected(new Set())}
       />
+      )}
       <div className="flex w-full shrink-0 flex-col gap-3.5 lg:w-[300px]">
         {loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
         {suggested && (() => {
