@@ -14,11 +14,8 @@ import {
   AuthDivider,
 } from "@/components/auth/google-sign-in-button";
 import { AuthScene } from "@/components/auth/auth-scene";
+import { Input } from "@/components/ui/input";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
-
-const inputClasses =
-  "w-full h-10 rounded-lg border border-border bg-card px-3.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 placeholder:text-faint";
-
 export default function SignupPage() {
   const router = useRouter();
   const { t } = useI18n();
@@ -66,7 +63,7 @@ export default function SignupPage() {
             <label htmlFor="name" className="text-[13px] font-medium text-foreground">
               {t("misc.name")}
             </label>
-            <input
+            <Input
               id="name"
               type="text"
               value={name}
@@ -75,7 +72,6 @@ export default function SignupPage() {
               required
               autoComplete="name"
               autoFocus
-              className={inputClasses}
             />
           </div>
 
@@ -83,7 +79,7 @@ export default function SignupPage() {
             <label htmlFor="email" className="text-[13px] font-medium text-foreground">
               {t("misc.email")}
             </label>
-            <input
+            <Input
               id="email"
               type="email"
               value={email}
@@ -91,7 +87,6 @@ export default function SignupPage() {
               placeholder="name@school.edu"
               required
               autoComplete="email"
-              className={inputClasses}
             />
           </div>
 
@@ -103,7 +98,7 @@ export default function SignupPage() {
               {t("misc.password")}
             </label>
             <div className="relative">
-              <input
+              <Input
                 id="password"
                 type={showPassword ? "text" : "password"}
                 value={password}
@@ -112,7 +107,7 @@ export default function SignupPage() {
                 required
                 minLength={8}
                 autoComplete="new-password"
-                className={`${inputClasses} pr-10`}
+                className="pr-10"
               />
               <button
                 type="button"

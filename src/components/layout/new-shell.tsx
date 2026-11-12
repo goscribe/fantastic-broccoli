@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
+import { NotificationBell } from "@/components/layout/notification-bell";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Calendar, Folder as FolderIcon, House, Layers, LogOut, Plus, Search, Settings, Sparkles, Users } from "lucide-react";
@@ -34,6 +35,18 @@ export function NewShell({ children }: { children: React.ReactNode }) {
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [creating, setCreating] = useState<"workspace" | "folder" | null>(null);
+  /** Learners see one level: every workspace is a "folder" of materials. */
+  const allWorkspaces = useMemo(() => {
+    const out: Workspace[] = [...rootWorkspaces];
+    const walk = (fs: Folder[]) => {
+      for (const f of fs) {
+        out.push(...f.workspaces);
+        if (f.folders) walk(f.folders);
+      }
+    };
+    walk(folders);
+    return out;
+  }, [folders, rootWorkspaces]);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [treeLoading, setTreeLoading] = useState(true);
 
@@ -95,23 +108,22 @@ export function NewShell({ children }: { children: React.ReactNode }) {
         <div className="mt-6 px-3 text-[11px] font-semibold text-faint">Folders</div>
         <div className="mt-1.5 flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto">
           {treeLoading &&
-            folders.length === 0 &&
+            allWorkspaces.length === 0 &&
             [0, 1, 2].map((i) => <span key={i} className="mx-3 my-2 block h-4 animate-pulse rounded bg-muted" style={{ width: `${70 - i * 12}%` }} />)}
-          {folders.map((f) => {
-            const on = pathname.startsWith(`/folder/${f.id}`);
+          {allWorkspaces.map((w) => {
+            const on = pathname.startsWith(`/workspace/${w.id}`);
             return (
               <Link
-                key={f.id}
-                href={`/folder/${f.id}`}
+                key={w.id}
+                href={`/workspace/${w.id}`}
                 onClick={() => setMobileOpen(false)}
                 className={cn(
                   "flex h-9 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium hover:bg-muted",
                   on && "bg-accent-soft/70 text-accent-dim",
                 )}
               >
-                <FolderIcon className="size-4 shrink-0" style={{ color: accentForId(f.id) }} fill="currentColor" strokeWidth={1.5} />
-                <span className="truncate">{f.name}</span>
-                <span className="ml-auto text-[11px] font-medium text-faint">{f.workspaces.length}</span>
+                <FolderIcon className="size-4 shrink-0" style={{ color: accentForId(w.id) }} fill="currentColor" strokeWidth={1.5} />
+                <span className="truncate">{w.title}</span>
               </Link>
             );
           })}
@@ -121,14 +133,6 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             className="flex h-9 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium text-accent hover:bg-muted"
           >
             <Plus className="size-4" />
-            New workspace
-          </button>
-          <button
-            type="button"
-            onClick={() => setCreating("folder")}
-            className="flex h-9 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium text-faint hover:bg-muted"
-          >
-            <FolderIcon className="size-4" />
             New folder
           </button>
         </div>
@@ -184,6 +188,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             <kbd className="hidden rounded-md border border-border bg-white px-1.5 text-[11px] font-semibold text-faint sm:inline">⌘K</kbd>
           </button>
           <div className="ml-auto flex items-center gap-2.5">
+            <NotificationBell />
             <span className="flex h-10 items-center gap-1.5 rounded-xl border border-border bg-white px-3 text-[14px] font-semibold">
               <Sparkles className="size-[18px] text-accent" fill="currentColor" />
               {credits.toLocaleString()}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ScribeLogo } from "@/components/graphics/logo";
@@ -9,10 +10,6 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
 import { AuthFigure, AuthScene } from "@/components/auth/auth-scene";
 import { ArrowRight } from "lucide-react";
-
-const inputClasses =
-  "w-full h-10 rounded-lg border border-border bg-card px-3.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 placeholder:text-faint";
-
 export default function ForgotPasswordPage() {
   const { t } = useI18n();
   const [email, setEmail] = useState("");
@@ -74,7 +71,7 @@ export default function ForgotPasswordPage() {
               >
                 {t("misc.email")}
               </label>
-              <input
+              <Input
                 id="email"
                 type="email"
                 value={email}
@@ -83,7 +80,6 @@ export default function ForgotPasswordPage() {
                 required
                 autoComplete="email"
                 autoFocus
-                className={inputClasses}
               />
             </div>
 
