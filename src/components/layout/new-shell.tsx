@@ -5,7 +5,7 @@ import Image from "next/image";
 import { NotificationBell } from "@/components/layout/notification-bell";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Calendar, Folder as FolderIcon, House, Layers, LogOut, Plus, Search, Settings, Sparkles, Users } from "lucide-react";
+import { Calendar, Folder as FolderIcon, House, LogOut, Plus, Search, Settings, Sparkles } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import { accentForId } from "@/lib/accent-palette";
@@ -18,10 +18,8 @@ import type { Folder, Workspace } from "@/types";
 import "@/app/design/design.css";
 
 const NAV = [
-  { href: "/", label: "Learn", icon: House },
-  { href: "/flashcards", label: "Flashcards", icon: Layers },
+  { href: "/", label: "Home", icon: House },
   { href: "/planner", label: "Planner", icon: Calendar },
-  { href: "/shared", label: "Shared", icon: Users },
 ];
 
 
@@ -105,7 +103,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             </Link>
           ))}
         </nav>
-        <div className="mt-6 px-3 text-[11px] font-semibold text-faint">Folders</div>
+        <div className="mt-6 px-3 text-[11px] font-semibold text-faint">Subjects</div>
         <div className="mt-1.5 flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto">
           {treeLoading &&
             allWorkspaces.length === 0 &&
@@ -133,7 +131,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             className="flex h-9 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium text-accent hover:bg-muted"
           >
             <Plus className="size-4" />
-            New folder
+            New subject
           </button>
         </div>
         <div className="mt-auto flex flex-col gap-0.5 pt-3">
