@@ -152,7 +152,7 @@ export async function askCopilot(input: {
     workspaceId: input.workspaceId,
     artifactId: input.workspaceId,
     artifactType: "study-guide",
-    documentContent: input.documentContent ?? "",
+    documentContent: input.documentContent?.trim() ? input.documentContent : WORKSPACE_CHAT_CONTEXT,
     availableWidgets: input.availableWidgets,
     workspaceAgent: input.workspaceAgent,
     metadata: { ...input.activity, page: input.page },
@@ -195,6 +195,10 @@ type StreamEvent =
  * with the full structured payload. Falls back to the non-streaming
  * mutation if the endpoint is unavailable (e.g. older server deploys).
  */
+/** Sent when no activity is open: the server requires some document context, and this tells the model where the learner is. */
+const WORKSPACE_CHAT_CONTEXT =
+  "Workspace chat — the learner is not inside a study session. Use the workspace tools (search knowledge, create a study session, create flashcards) to act on requests about their material.";
+
 export async function askCopilotStream(
   input: Parameters<typeof askCopilot>[0],
   onDelta: (text: string) => void,
@@ -213,7 +217,7 @@ export async function askCopilotStream(
           workspaceId: input.workspaceId,
           artifactId: input.workspaceId,
           artifactType: "study-guide",
-          documentContent: input.documentContent ?? "",
+          documentContent: input.documentContent?.trim() ? input.documentContent : WORKSPACE_CHAT_CONTEXT,
           availableWidgets: input.availableWidgets,
           workspaceAgent: input.workspaceAgent,
           metadata: { ...input.activity, page: input.page },
