@@ -5,7 +5,7 @@ import { accentForId } from "@/lib/accent-palette";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowUp, Check, ChevronDown, ChevronUp, FileText, Headphones, Layers, Loader2, Lock, NotebookText, Play, Plus, Presentation } from "lucide-react";
+import { ArrowUp, Check, ChevronDown, ChevronUp, FileText, Headphones, Layers, Loader2, NotebookText, Play, Plus, Presentation } from "lucide-react";
 import { useAuthUser } from "@/lib/api/auth";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { fetchStudySessions, fetchActivityCalendar, createStudySession } from "@/lib/api/study";
@@ -395,11 +395,12 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         )}
 
         {workspaceId && (
-          <SubjectPath
-            sessions={[...sessions].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())}
+          <SessionList
+            sessions={[...sessions].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())}
             workspaceId={workspaceId}
             loading={loading}
-            adding={starting === "session" && picked.length === 0}
+            adding={starting === "session"}
+            pickedCount={picked.length}
             onAdd={() => void startFromSelection("session")}
           />
         )}
@@ -628,83 +629,93 @@ function SubjectsGrid({
   );
 }
 
-/** The subject's path: sessions in order, one current node, the rest locked until you get there. */
-function SubjectPath({
+/** The subject's study sessions, newest first, with one button to add the next one. */
+function SessionList({
   sessions,
   workspaceId,
   loading,
   adding,
+  pickedCount,
   onAdd,
 }: {
   sessions: StudySession[];
   workspaceId: string;
   loading: boolean;
   adding: boolean;
+  pickedCount: number;
   onAdd: () => void;
 }) {
-  const currentIdx = sessions.findIndex((s) => s.status !== "completed");
-  const offsets = [0, 56, 96, 56, 0, -56, -96, -56];
+  const doneCount = sessions.filter((s) => s.status === "completed").length;
   return (
     <div>
       <div className="flex items-center justify-between">
         <h2 className="text-[16px] font-semibold">
-          Your path <span className="font-medium text-faint">· {sessions.filter((s) => s.status === "completed").length}/{sessions.length} done</span>
+          Study sessions <span className="font-medium text-faint">· {doneCount}/{sessions.length} done</span>
         </h2>
+        <button
+          type="button"
+          disabled={adding}
+          onClick={onAdd}
+          className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-accent px-2.5 text-[12.5px] font-semibold text-white hover:bg-accent-dim disabled:opacity-60"
+        >
+          {adding ? <Loader2 className="size-3.5 animate-spin" /> : <Plus className="size-3.5" />}
+          {pickedCount > 0 ? `New session from ${pickedCount} file${pickedCount === 1 ? "" : "s"}` : "New session"}
+        </button>
       </div>
-      <div className="relative mt-3 flex flex-col items-center gap-5 rounded-2xl border border-border bg-card px-6 py-8">
-        {loading && sessions.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="size-[72px] rounded-full" />)}
-        {sessions.map((s, i) => {
-          const { total, done, next } = sessionProgress(s);
+      <div className="mt-3 divide-y divide-border rounded-2xl border border-border bg-card">
+        {loading &&
+          sessions.length === 0 &&
+          [0, 1, 2].map((i) => (
+            <div key={i} className="flex items-center gap-3.5 px-4 py-3">
+              <Skeleton className="size-[52px] rounded-full" />
+              <div className="flex-1 space-y-2">
+                <Skeleton className="h-4 w-1/2" />
+                <Skeleton className="h-3 w-1/3" />
+              </div>
+              <Skeleton className="h-8 w-[108px] rounded-[9px]" />
+            </div>
+          ))}
+        {!loading && sessions.length === 0 && (
+          <div className="flex items-center gap-4 px-5 py-6 text-[14px] text-muted-foreground">
+            <Image src="/design/cat2-book.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
+            No sessions yet — hit New session and I&apos;ll build one from your materials.
+          </div>
+        )}
+        {sessions.map((s) => {
+          const { total, done, next, pct } = sessionProgress(s);
           const finished = s.status === "completed";
-          const current = i === currentIdx;
-          const locked = currentIdx !== -1 && i > currentIdx;
-          const node = (
-            <span
-              className={cn(
-                "relative grid size-[72px] place-items-center rounded-full border-b-[6px] transition-transform",
-                finished && "border-emerald-700 bg-emerald-500 text-white",
-                current && "border-accent-dim bg-accent text-white shadow-[0_0_0_8px_var(--accent-soft)]",
-                locked && "border-border bg-muted text-faint",
-                !finished && !current && !locked && "border-border bg-muted text-foreground",
-                !locked && "hover:-translate-y-0.5",
-              )}
-            >
-              {finished ? <Check className="size-7" strokeWidth={3} /> : locked ? <Lock className="size-6" /> : s.generating ? <Loader2 className="size-7 animate-spin" /> : <Play className="size-7" fill="currentColor" />}
-              {current && !s.generating && (
-                <span className="absolute -top-9 whitespace-nowrap rounded-lg bg-white px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-accent shadow-sm ring-1 ring-border">
-                  {done > 0 ? "Continue" : "Start"}
-                </span>
-              )}
-            </span>
-          );
           return (
-            <div key={s.id} className="flex w-full max-w-[520px] items-center gap-4" style={{ transform: `translateX(${offsets[i % offsets.length]}px)` }}>
-              {locked ? <div className="cursor-not-allowed">{node}</div> : <Link href={`/workspace/${workspaceId}/session/${s.id}`}>{node}</Link>}
-              <div className="min-w-0">
-                <div className={cn("truncate text-[14.5px] font-semibold", locked && "text-faint")}>{s.title}</div>
+            <div key={s.id} className="flex items-center gap-3.5 px-4 py-3">
+              <span className="relative grid size-[52px] shrink-0 place-items-center">
+                <Ring pct={finished ? 1 : pct} size={52} stroke={8} color={finished ? "#10b981" : "var(--accent)"} />
+                <span className="absolute inset-0 grid place-items-center">
+                  {finished ? <Check className="size-5 text-emerald-600" strokeWidth={3} /> : s.generating ? <Loader2 className="size-5 animate-spin text-accent" /> : <Play className="size-4 text-accent" fill="currentColor" />}
+                </span>
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2">
+                  <span className="truncate text-[14px] font-semibold">{s.title}</span>
+                  {finished && <span className="rounded-md bg-emerald-50 px-1.5 py-0.5 text-[11px] font-semibold text-emerald-700">Done</span>}
+                  {s.generating && <span className="rounded-md bg-accent-soft px-1.5 py-0.5 text-[11px] font-semibold text-accent">Building…</span>}
+                </div>
                 <div className="truncate text-[12px] text-faint">
-                  {s.generating ? "Building…" : finished ? `Done · ${total} activities` : current && next ? `Next: ${activityLabel(next.type)} · ${next.estimatedMinutes} min` : `${s.durationMinutes} min · ${s.depth}`}
+                  {s.durationMinutes} min · {s.depth}
+                  {next && !finished ? ` · next: ${activityLabel(next.type)}` : total ? ` · ${done}/${total} activities` : ""}
                 </div>
               </div>
+              <div className="hidden w-20 shrink-0 text-right text-[12px] text-faint sm:block">{formatRelativeDate(s.updatedAt)}</div>
+              <Link
+                href={`/workspace/${workspaceId}/session/${s.id}`}
+                className={cn(
+                  "inline-flex h-8 w-[108px] shrink-0 items-center justify-center rounded-[9px] text-[12.5px] font-semibold",
+                  finished ? "bg-muted hover:bg-accent-soft" : "bg-accent text-white hover:bg-accent-dim",
+                )}
+              >
+                {finished ? "View debrief" : done > 0 ? "Continue" : "Start"}
+              </Link>
             </div>
           );
         })}
-        <div className="flex w-full max-w-[520px] items-center gap-4" style={{ transform: `translateX(${offsets[sessions.length % offsets.length]}px)` }}>
-          <button
-            type="button"
-            disabled={adding}
-            onClick={onAdd}
-            className="grid size-[72px] place-items-center rounded-full border-2 border-dashed border-border text-faint hover:border-accent hover:text-accent disabled:opacity-60"
-            aria-label="Add a session"
-          >
-            {adding ? <Loader2 className="size-6 animate-spin" /> : <Plus className="size-7" />}
-          </button>
-          <div className="text-[13px] text-muted-foreground">
-            <div className="font-semibold text-foreground">Add a session</div>
-            From everything in this subject — or tick materials above to pick.
-          </div>
-        </div>
-        <Image src="/design/cat2-cheer.png" alt="" width={72} height={72} unoptimized className="pointer-events-none absolute right-4 top-4 h-16 w-auto select-none" />
       </div>
     </div>
   );
