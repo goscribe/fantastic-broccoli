@@ -1,10 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { accentForId } from "@/lib/accent-palette";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowUp, Check, ChevronDown, ChevronUp, FileText, Headphones, Layers, Loader2, NotebookText, Play, Plus, Presentation } from "lucide-react";
+import { ArrowUp, Check, ChevronDown, ChevronUp, FileText, Headphones, Layers, Loader2, Lock, NotebookText, Play, Plus, Presentation } from "lucide-react";
 import { useAuthUser } from "@/lib/api/auth";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { fetchStudySessions, fetchActivityCalendar, createStudySession } from "@/lib/api/study";
@@ -82,19 +83,6 @@ function MaterialThumb({ m }: { m: Material }) {
   );
 }
 
-function PaperStack() {
-  return (
-    <span className="relative block h-14 w-14 shrink-0">
-      <span className="absolute left-4 top-1.5 h-10 w-8 rotate-[8deg] rounded-[3px] border border-border bg-white" />
-      <span className="absolute left-2.5 top-2 h-10 w-8 rotate-[-4deg] rounded-[3px] border border-border bg-white px-1 py-1.5">
-        <span className="block h-[3px] w-5 rounded bg-neutral-300" />
-        <span className="mt-1 block h-[2px] w-4 rounded bg-neutral-200" />
-        <span className="mt-0.5 block h-[2px] w-5 rounded bg-neutral-200" />
-        <span className="mt-1 block h-2.5 w-3 rounded-[2px] bg-neutral-200" />
-      </span>
-    </span>
-  );
-}
 
 function sessionProgress(s: StudySession) {
   const total = s.activities.length;
@@ -207,7 +195,6 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shown.map(({ m }) => m.id).join(",")]);
-  const recent = sessions.slice(0, 6);
   const suggested = sessions.find((s) => s.status === "active" && !s.generating);
   const todayIdx = (new Date().getDay() + 6) % 7;
   const streak = useMemo(() => {
@@ -301,7 +288,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
       <div className="flex min-w-0 flex-1 flex-col gap-[18px]">
         <div className="flex items-end justify-between">
           <div>
-            {(workspaceId || folderId) && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Learn</Link>}
+            {(workspaceId || folderId) && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>}
             <h1 className="text-[26px] font-bold">
               {workspaceId || folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
             </h1>
@@ -309,6 +296,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           {sessions.length > 0 && <span className="text-[13px] text-faint">{sessions.length} study session{sessions.length === 1 ? "" : "s"}</span>}
         </div>
 
+        {workspaceId && (
         <form
           className={cn(inputBoxClass, "flex-col items-stretch gap-0 p-3.5")}
           onSubmit={(e) => {
@@ -339,7 +327,10 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             </div>
           )}
         </form>
+        )}
 
+        {workspaceId ? (
+          <>
         <div className="flex items-center justify-between">
           <h2 className="text-[16px] font-semibold">
             Your materials <span className="font-medium text-faint">· {materials.length}</span>
@@ -398,66 +389,23 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           )}
         </div>
 
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-[16px] font-semibold">Recent study sessions</h2>
-        </div>
-        <div className="divide-y divide-border rounded-2xl border border-border bg-card">
-          {loading &&
-            recent.length === 0 &&
-            [0, 1, 2].map((i) => (
-              <div key={i} className="flex items-center gap-3.5 px-4 py-3">
-                <Skeleton className="size-[60px] rounded-full" />
-                <div className="flex-1 space-y-2">
-                  <Skeleton className="h-4 w-1/2" />
-                  <Skeleton className="h-3 w-1/3" />
-                </div>
-                <Skeleton className="h-8 w-[108px] rounded-[9px]" />
-              </div>
-            ))}
-          {!loading && recent.length === 0 && (
-            <div className="flex items-center gap-4 px-5 py-6 text-[14px] text-muted-foreground">
-              <Image src="/design/cat2-book.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
-              Your first session shows up here once you add a material.
-            </div>
-          )}
-          {recent.map((s) => {
-            const { total, done, next, pct } = sessionProgress(s);
-            const w = wsById.get(s.workspaceId);
-            const finished = s.status === "completed";
-            const r = 27;
-            return (
-              <div key={s.id} className="flex items-center gap-3.5 px-4 py-3">
-                <span className="relative grid size-[60px] shrink-0 place-items-center">
-                  <svg viewBox="0 0 60 60" className="absolute inset-0 -rotate-90">
-                    <circle cx="30" cy="30" r={r} fill="none" stroke="var(--color-muted)" strokeWidth="3.5" />
-                    <circle cx="30" cy="30" r={r} fill="none" stroke={finished ? "#10b981" : "var(--color-accent)"} strokeWidth="3.5" strokeLinecap="round" strokeDasharray={`${pct * 2 * Math.PI * r} ${2 * Math.PI * r}`} />
-                  </svg>
-                  <span className="scale-[.72]">
-                    <PaperStack />
-                  </span>
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="truncate text-[14px] font-semibold">{s.title}</span>
-                    {finished && <span className="rounded-md bg-emerald-50 px-1.5 py-0.5 text-[11px] font-semibold text-emerald-700">Done</span>}
-                    {s.generating && <span className="rounded-md bg-accent-soft px-1.5 py-0.5 text-[11px] font-semibold text-accent">Building…</span>}
-                  </div>
-                  <div className="truncate text-[12px] text-faint">
-                    {w?.title ?? "Workspace"} · {s.durationMinutes} min · {s.depth}
-                    {next && !finished ? ` · next: ${activityLabel(next.type)}` : total ? ` · ${done}/${total} activities` : ""}
-                  </div>
-                </div>
-                <div className="hidden w-20 shrink-0 text-right text-[12px] text-faint sm:block">{formatRelativeDate(s.updatedAt)}</div>
-                <Link href={`/workspace/${s.workspaceId}/session/${s.id}`} className={cn("inline-flex h-8 w-[108px] shrink-0 items-center justify-center rounded-[9px] text-[12.5px] font-semibold", s.status === "active" && done > 0 ? "bg-accent text-white" : "border border-border hover:bg-muted")}>
-                  {finished ? "View debrief" : done > 0 ? "Continue" : "Start"}
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+          </>
+        ) : (
+          <SubjectsGrid workspaces={workspaces} sessions={sessions} loading={loading} onNew={() => router.push("/new-subject")} />
+        )}
 
+        {workspaceId && (
+          <SubjectPath
+            sessions={[...sessions].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())}
+            workspaceId={workspaceId}
+            loading={loading}
+            adding={starting === "session" && picked.length === 0}
+            onAdd={() => void startFromSelection("session")}
+          />
+        )}
       </div>
 
+      {workspaceId && (
       <CatNudge
         count={picked.length}
         empty={!loading && materials.length === 0}
@@ -466,6 +414,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         onFlashcards={() => void startFromSelection("flashcards")}
         onClear={() => setSelected(new Set())}
       />
+      )}
       <div className="flex w-full shrink-0 flex-col gap-3.5 lg:w-[300px]">
         {loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
         {suggested && (() => {
@@ -617,6 +566,146 @@ function CatNudge({
         <span className="absolute -right-1.5 bottom-4 size-3 rotate-45 border-b border-r border-border bg-white" />
       </div>
       <Image src={count > 0 ? "/design/cat2-cheer.png" : "/design/cat2-wave.png"} alt="" width={96} height={96} unoptimized className="cat-wiggle h-[84px] w-auto select-none" />
+    </div>
+  );
+}
+
+
+/** Home: every subject as a card — progress ring over its sessions, materials count, and the next thing to do. */
+function SubjectsGrid({
+  workspaces,
+  sessions,
+  loading,
+  onNew,
+}: {
+  workspaces: Workspace[];
+  sessions: StudySession[];
+  loading: boolean;
+  onNew: () => void;
+}) {
+  return (
+    <div>
+      <div className="flex items-center justify-between">
+        <h2 className="text-[16px] font-semibold">
+          Your subjects <span className="font-medium text-faint">· {workspaces.length}</span>
+        </h2>
+        <button type="button" onClick={onNew} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-2.5 text-[12.5px] font-semibold hover:bg-accent-soft">
+          <Plus className="size-3.5" /> New subject
+        </button>
+      </div>
+      <div className="mt-3 grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-3">
+        {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[150px] rounded-2xl" />)}
+        {workspaces.map((w) => {
+          const own = sessions.filter((x) => x.workspaceId === w.id);
+          const done = own.filter((x) => x.status === "completed").length;
+          const current = own.find((x) => x.status !== "completed");
+          const pct = own.length ? done / own.length : 0;
+          return (
+            <Link key={w.id} href={`/workspace/${w.id}`} className="group flex flex-col rounded-2xl border border-border bg-card p-4 transition-colors hover:border-accent/50">
+              <div className="flex items-center gap-3">
+                <Ring pct={pct} size={44} stroke={10} color={accentForId(w.id)} />
+                <div className="min-w-0">
+                  <div className="truncate text-[15px] font-semibold">{w.title}</div>
+                  <div className="text-[12px] text-faint">
+                    {w.materials.length} material{w.materials.length === 1 ? "" : "s"} · {done}/{own.length} sessions
+                  </div>
+                </div>
+              </div>
+              <div className="mt-4 flex items-center justify-between text-[12.5px]">
+                <span className="truncate text-muted-foreground">{current ? (current.generating ? "Building the next session…" : `Next: ${current.title}`) : own.length ? "All caught up" : "No sessions yet"}</span>
+                <span className="ml-2 shrink-0 font-semibold text-accent group-hover:underline">{current ? "Continue" : "Open"}</span>
+              </div>
+            </Link>
+          );
+        })}
+        <button type="button" onClick={onNew} className="flex min-h-[150px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border text-center hover:border-accent/60 hover:bg-muted/40">
+          <Image src="/design/cat2-sleep.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
+          <div className="text-[14px] font-semibold">New subject</div>
+          <div className="text-[12px] text-faint">Drop notes, get a path</div>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/** The subject's path: sessions in order, one current node, the rest locked until you get there. */
+function SubjectPath({
+  sessions,
+  workspaceId,
+  loading,
+  adding,
+  onAdd,
+}: {
+  sessions: StudySession[];
+  workspaceId: string;
+  loading: boolean;
+  adding: boolean;
+  onAdd: () => void;
+}) {
+  const currentIdx = sessions.findIndex((s) => s.status !== "completed");
+  const offsets = [0, 56, 96, 56, 0, -56, -96, -56];
+  return (
+    <div>
+      <div className="flex items-center justify-between">
+        <h2 className="text-[16px] font-semibold">
+          Your path <span className="font-medium text-faint">· {sessions.filter((s) => s.status === "completed").length}/{sessions.length} done</span>
+        </h2>
+      </div>
+      <div className="relative mt-3 flex flex-col items-center gap-5 rounded-2xl border border-border bg-card px-6 py-8">
+        {loading && sessions.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="size-[72px] rounded-full" />)}
+        {sessions.map((s, i) => {
+          const { total, done, next } = sessionProgress(s);
+          const finished = s.status === "completed";
+          const current = i === currentIdx;
+          const locked = currentIdx !== -1 && i > currentIdx;
+          const node = (
+            <span
+              className={cn(
+                "relative grid size-[72px] place-items-center rounded-full border-b-[6px] transition-transform",
+                finished && "border-emerald-700 bg-emerald-500 text-white",
+                current && "border-accent-dim bg-accent text-white shadow-[0_0_0_8px_var(--accent-soft)]",
+                locked && "border-border bg-muted text-faint",
+                !finished && !current && !locked && "border-border bg-muted text-foreground",
+                !locked && "hover:-translate-y-0.5",
+              )}
+            >
+              {finished ? <Check className="size-7" strokeWidth={3} /> : locked ? <Lock className="size-6" /> : s.generating ? <Loader2 className="size-7 animate-spin" /> : <Play className="size-7" fill="currentColor" />}
+              {current && !s.generating && (
+                <span className="absolute -top-9 whitespace-nowrap rounded-lg bg-white px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-accent shadow-sm ring-1 ring-border">
+                  {done > 0 ? "Continue" : "Start"}
+                </span>
+              )}
+            </span>
+          );
+          return (
+            <div key={s.id} className="flex w-full max-w-[520px] items-center gap-4" style={{ transform: `translateX(${offsets[i % offsets.length]}px)` }}>
+              {locked ? <div className="cursor-not-allowed">{node}</div> : <Link href={`/workspace/${workspaceId}/session/${s.id}`}>{node}</Link>}
+              <div className="min-w-0">
+                <div className={cn("truncate text-[14.5px] font-semibold", locked && "text-faint")}>{s.title}</div>
+                <div className="truncate text-[12px] text-faint">
+                  {s.generating ? "Building…" : finished ? `Done · ${total} activities` : current && next ? `Next: ${activityLabel(next.type)} · ${next.estimatedMinutes} min` : `${s.durationMinutes} min · ${s.depth}`}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+        <div className="flex w-full max-w-[520px] items-center gap-4" style={{ transform: `translateX(${offsets[sessions.length % offsets.length]}px)` }}>
+          <button
+            type="button"
+            disabled={adding}
+            onClick={onAdd}
+            className="grid size-[72px] place-items-center rounded-full border-2 border-dashed border-border text-faint hover:border-accent hover:text-accent disabled:opacity-60"
+            aria-label="Add a session"
+          >
+            {adding ? <Loader2 className="size-6 animate-spin" /> : <Plus className="size-7" />}
+          </button>
+          <div className="text-[13px] text-muted-foreground">
+            <div className="font-semibold text-foreground">Add a session</div>
+            From everything in this subject — or tick materials above to pick.
+          </div>
+        </div>
+        <Image src="/design/cat2-cheer.png" alt="" width={72} height={72} unoptimized className="pointer-events-none absolute right-4 top-4 h-16 w-auto select-none" />
+      </div>
     </div>
   );
 }
