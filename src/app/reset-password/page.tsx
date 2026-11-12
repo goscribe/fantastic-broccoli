@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ScribeLogo } from "@/components/graphics/logo";
@@ -9,10 +10,6 @@ import { api } from "@/lib/api/trpc-client";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/misc";
 import { Eye, EyeOff } from "lucide-react";
-
-const inputClasses =
-  "w-full h-10 rounded-lg border border-border bg-card px-3.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 placeholder:text-faint";
-
 export default function ResetPasswordPage() {
   const { t } = useI18n();
   const [password, setPassword] = useState("");
@@ -81,14 +78,13 @@ export default function ResetPasswordPage() {
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
-            <input
+            <Input
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder={t("misc.newPassword")}
               required
               minLength={8}
-              className={inputClasses}
             />
             <button
               type="button"
@@ -105,14 +101,13 @@ export default function ResetPasswordPage() {
               )}
             </button>
           </div>
-          <input
+          <Input
             type={showPassword ? "text" : "password"}
             value={confirm}
             onChange={(e) => setConfirm(e.target.value)}
             placeholder={t("misc.confirmNewPassword")}
             required
             minLength={8}
-            className={inputClasses}
           />
           {error && (
             <p className="text-sm text-destructive">

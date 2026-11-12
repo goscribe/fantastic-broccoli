@@ -14,6 +14,7 @@ import {
   AuthDivider,
 } from "@/components/auth/google-sign-in-button";
 import { AuthScene } from "@/components/auth/auth-scene";
+import { Input } from "@/components/ui/input";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
 
 function safeRedirect(): string {
@@ -23,10 +24,6 @@ function safeRedirect(): string {
   }
   return "/";
 }
-
-const inputClasses =
-  "w-full h-10 rounded-lg border border-border bg-card px-3.5 text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 placeholder:text-faint";
-
 export default function LoginPage() {
   const router = useRouter();
   const { t } = useI18n();
@@ -84,7 +81,7 @@ export default function LoginPage() {
             >
               {t("misc.email")}
             </label>
-            <input
+            <Input
               id="email"
               type="email"
               value={email}
@@ -93,7 +90,6 @@ export default function LoginPage() {
               required
               autoComplete="email"
               autoFocus
-              className={inputClasses}
             />
           </div>
 
@@ -113,7 +109,7 @@ export default function LoginPage() {
               </Link>
             </div>
             <div className="relative">
-              <input
+              <Input
                 id="password"
                 type={showPassword ? "text" : "password"}
                 value={password}
@@ -121,7 +117,7 @@ export default function LoginPage() {
                 placeholder={t("misc.enterPassword")}
                 required
                 autoComplete="current-password"
-                className={`${inputClasses} pr-10`}
+                className="pr-10"
               />
               <button
                 type="button"

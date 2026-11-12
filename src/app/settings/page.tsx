@@ -8,7 +8,7 @@ import Link from "next/link";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PageHeader, pageShellClass } from "@/components/ui/page-header";
+import { PageHeader } from "@/components/ui/page-header";
 import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import {
@@ -196,6 +196,13 @@ function PlanCard({
   );
 }
 
+const SETTINGS_SECTIONS = [
+  ["account", "settings.account"],
+  ["language", "settings.language"],
+  ["plan", "settings.plan"],
+  ["tokens", "set.tokensTitle"],
+] as const;
+
 export default function SettingsPage() {
   const { user } = useAuthUser();
   const { t, locale } = useI18n();
@@ -366,16 +373,24 @@ export default function SettingsPage() {
   };
 
   return (
-    <main className={pageShellClass}>
-      <div className="mx-auto w-full max-w-3xl">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <PageHeader title={<>{t("settings.title")}</>} subtitle={<>{t("set.subtitle")}</>} className="mb-0" />
-          </div>
-        </div>
+    <main className="mx-auto w-full max-w-[1180px] px-6 pb-12 pt-6">
+      <PageHeader title={<>{t("settings.title")}</>} subtitle={<>{t("set.subtitle")}</>} />
+      <div className="flex flex-col gap-8 lg:flex-row">
+      <nav className="hidden w-[200px] shrink-0 lg:block">
+        <ul className="sticky top-6 space-y-1 text-[13.5px] font-semibold">
+          {SETTINGS_SECTIONS.map(([id, label]) => (
+            <li key={id}>
+              <a href={`#${id}`} className="block rounded-xl px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground">
+                {t(label)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div className="min-w-0 flex-1 max-w-[760px]">
 
         {/* Account */}
-        <section className="mt-8">
+        <section id="account">
           <h2 className="text-sm font-semibold">{t("settings.account")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("set.accountHint")}
@@ -487,39 +502,27 @@ export default function SettingsPage() {
         </section>
 
         {/* Language */}
-        <section className="mt-8">
+        <section id="language" className="mt-8">
           <h2 className="text-sm font-semibold">{t("settings.language")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("settings.languageHint")}
           </p>
           <div className="mt-3 rounded-2xl border border-border bg-card p-5">
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-              {(Object.keys(UI_LOCALES) as Locale[]).map((code) => {
-                const active = code === locale;
-                return (
-                  <button
-                    key={code}
-                    type="button"
-                    disabled={savingLanguage}
-                    onClick={() => handleLanguageChange(code)}
-                    aria-pressed={active}
-                    className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-left text-[13px] font-medium transition-colors ${
-                      active
-                        ? "border-accent bg-accent-soft text-accent"
-                        : "border-border text-muted-foreground hover:border-border-strong hover:text-foreground"
-                    }`}
-                  >
-                    <span className="text-base leading-none">
-                      {UI_LOCALE_FLAGS[code]}
-                    </span>
-                    <span className="truncate">{UI_LOCALES[code]}</span>
-                    {active && (
-                      <Check className="ml-auto h-3.5 w-3.5 shrink-0" />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+            <label className="block max-w-sm">
+              <span className="sr-only">{t("settings.language")}</span>
+              <select
+                value={locale}
+                disabled={savingLanguage}
+                onChange={(e) => handleLanguageChange(e.target.value as Locale)}
+                className="h-10 w-full rounded-xl border border-border bg-white px-3 text-[14px] font-medium outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
+              >
+                {(Object.keys(UI_LOCALES) as Locale[]).map((code) => (
+                  <option key={code} value={code}>
+                    {UI_LOCALE_FLAGS[code]} {UI_LOCALES[code]}
+                  </option>
+                ))}
+              </select>
+            </label>
             <p
               className={`mt-3 text-[12px] font-medium text-accent transition-opacity ${
                 languageSaved ? "opacity-100" : "opacity-0"
@@ -599,7 +602,7 @@ export default function SettingsPage() {
         )}
 
         {/* Tokens */}
-        <section className="mt-8">
+        <section id="tokens" className="mt-8">
           <h2 className="text-sm font-semibold">{t("set.tokensTitle")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("set.tokensHint")}
@@ -815,6 +818,7 @@ export default function SettingsPage() {
           </div>
         </div>
       )}
+      </div>
     </main>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { NotificationBell } from "@/components/layout/notification-bell";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Calendar, Folder as FolderIcon, House, Layers, LogOut, Plus, Search, Settings, Sparkles, Users } from "lucide-react";
@@ -184,6 +185,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             <kbd className="hidden rounded-md border border-border bg-white px-1.5 text-[11px] font-semibold text-faint sm:inline">⌘K</kbd>
           </button>
           <div className="ml-auto flex items-center gap-2.5">
+            <NotificationBell />
             <span className="flex h-10 items-center gap-1.5 rounded-xl border border-border bg-white px-3 text-[14px] font-semibold">
               <Sparkles className="size-[18px] text-accent" fill="currentColor" />
               {credits.toLocaleString()}
