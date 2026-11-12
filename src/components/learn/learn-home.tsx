@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { accentForId } from "@/lib/accent-palette";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
