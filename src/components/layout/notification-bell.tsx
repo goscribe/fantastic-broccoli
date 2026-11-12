@@ -59,7 +59,7 @@ export function NotificationBell() {
   };
 
   return (
-<div className="relative" ref={notifRef}>
+<div className="relative z-40" ref={notifRef}>
               <button
                 type="button"
                 onClick={openNotifications}
@@ -75,7 +75,7 @@ export function NotificationBell() {
               </button>
 
               {notifOpen && (
-                <div className="absolute right-0 top-full mt-2 w-80 max-w-[calc(100vw-1.5rem)] rounded-xl border border-border bg-card py-1.5 animate-fade-up">
+                <div className="absolute right-0 top-full z-50 mt-2 w-80 max-w-[calc(100vw-1.5rem)] rounded-xl border border-border bg-card py-1.5 shadow-[0_16px_40px_-20px_rgba(0,0,0,0.3)] animate-fade-up">
                   <div className="flex items-center justify-between border-b border-border px-3.5 py-2">
                     <p className="text-sm font-semibold">
                       {t("misc.notifications")}
