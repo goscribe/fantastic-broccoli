@@ -195,7 +195,9 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shown.map(({ m }) => m.id).join(",")]);
-  const suggested = sessions.find((s) => s.status === "active" && !s.generating);
+  // Oldest unfinished first: the learner continues where they left off, not the newest thing generated.
+  const byStart = useMemo(() => [...sessions].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()), [sessions]);
+  const suggested = byStart.find((s) => s.status === "active" && !s.generating);
   const todayIdx = (new Date().getDay() + 6) % 7;
   const streak = useMemo(() => {
     let n = 0;
@@ -597,7 +599,9 @@ function SubjectsGrid({
       <div className="mt-3 grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-3">
         {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[150px] rounded-2xl" />)}
         {workspaces.map((w) => {
-          const own = sessions.filter((x) => x.workspaceId === w.id);
+          const own = sessions
+            .filter((x) => x.workspaceId === w.id)
+            .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
           const done = own.filter((x) => x.status === "completed").length;
           const current = own.find((x) => x.status !== "completed");
           const pct = own.length ? done / own.length : 0;
