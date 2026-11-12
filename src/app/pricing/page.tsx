@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { PageHeader, pageShellClass } from "@/components/ui/page-header";
 import { useRouter } from "next/navigation";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -168,19 +168,13 @@ export default function PricingPage() {
   };
 
   return (
-    <main className="mx-auto w-full max-w-4xl px-6 py-8">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-medium text-accent">Plan</p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight">
-            Choose your plan
-          </h1>
-          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Your storage and monthly token allowance are shown below.{" "}
+    <main className={pageShellClass}>
+      <div>
+          <div>
+            <PageHeader back={{ href: "/settings", label: "Settings" }} title={<>Choose your plan</>} subtitle={<>Your storage and monthly token allowance are shown below.{" "}
             {trialDays > 0
               ? `Paid plans start with a ${trialDays}-day free trial: add a card, pay $0 today, and billing begins after ${trialDays} days unless you cancel. Checkout is handled securely by Stripe.`
-              : "Upgrade anytime — checkout is handled securely by Stripe."}
-          </p>
+              : "Upgrade anytime — checkout is handled securely by Stripe."}</>} className="mb-2" />
           {BILLING_PAUSED && (
             <p className="mt-3 max-w-2xl rounded-xl border border-accent/30 bg-accent-soft px-4 py-3 text-sm text-foreground">
               <span className="font-semibold">Billing is paused.</span> Our payment
@@ -200,12 +194,6 @@ export default function PricingPage() {
             </p>
           )}
         </div>
-        <Link
-          href="/settings"
-          className="rounded-full border border-border px-4 py-2 text-sm font-medium hover:bg-muted"
-        >
-          Settings
-        </Link>
       </div>
 
       <section className="mt-8 rounded-2xl border border-border bg-card p-5">

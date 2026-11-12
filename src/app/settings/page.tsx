@@ -8,6 +8,7 @@ import Link from "next/link";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PageHeader, pageShellClass } from "@/components/ui/page-header";
 import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import {
@@ -365,16 +366,11 @@ export default function SettingsPage() {
   };
 
   return (
-    <main className="flex-1 px-4 py-5 sm:px-8 sm:py-8 md:px-10">
+    <main className={pageShellClass}>
       <div className="mx-auto w-full max-w-3xl">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">
-              {t("settings.title")}
-            </h1>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {t("set.subtitle")}
-            </p>
+            <PageHeader title={<>{t("settings.title")}</>} subtitle={<>{t("set.subtitle")}</>} className="mb-0" />
           </div>
         </div>
 

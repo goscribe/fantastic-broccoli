@@ -325,7 +325,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
               {workspaceId || folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
             </h1>
           </div>
-          {sessions.length > 0 && <span className="text-[13px] text-faint">{sessions.length} study sessions</span>}
+          {sessions.length > 0 && <span className="text-[13px] text-faint">{sessions.length} study session{sessions.length === 1 ? "" : "s"}</span>}
         </div>
 
         <form

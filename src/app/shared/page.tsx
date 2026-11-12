@@ -3,13 +3,14 @@
 import "@/lib/i18n/flashcards";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { PageHeader, pageShellClass } from "@/components/ui/page-header";
+import { EmptyState } from "@/components/ui/empty-state";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { fetchSharedWorkspaces } from "@/lib/api/workspace";
 import { Workspace } from "@/types";
 import { AvatarStack } from "@/components/ui/avatar-stack";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
-import { EmptyScene } from "@/components/graphics/floating-decor";
 
 export default function SharedPage() {
   const { t } = useI18n();
@@ -24,27 +25,13 @@ export default function SharedPage() {
   }, []);
 
   return (
-    <main className="flex-1 px-6 py-6 md:px-10"><div className="mx-auto w-full max-w-4xl">
-      <div className="mb-6 flex items-center gap-4">
-        <div>
-          <h1 className="text-xl font-bold tracking-tight">
-            {t("fc.sharedTitle")}
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {t("fc.sharedSubtitle")}
-          </p>
-        </div>
-      </div>
+    <main className={pageShellClass}>
+      <PageHeader title={t("fc.sharedTitle")} subtitle={t("fc.sharedSubtitle")} />
 
       {loading && <CardGridSkeleton count={6} />}
 
       {!loading && shared.length === 0 && (
-        <EmptyScene image="/illustrations/shared.png">
-          <p className="text-base font-semibold">{t("fc.nothingShared")}</p>
-          <p className="mt-1.5 text-sm text-muted-foreground">
-            {t("fc.nothingSharedBody")}
-          </p>
-        </EmptyScene>
+        <EmptyState cat="wave" title={t("fc.nothingShared")} body={t("fc.nothingSharedBody")} />
       )}
 
       <div className="flex flex-col gap-2.5">
@@ -67,6 +54,6 @@ export default function SharedPage() {
           </Link>
         ))}
       </div>
-    </div></main>
+    </main>
   );
 }
