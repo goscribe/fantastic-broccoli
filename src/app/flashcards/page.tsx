@@ -4,6 +4,8 @@ import "@/lib/i18n/flashcards";
 import { MathText } from "@/components/ui/markdown-text";
 import Image from "next/image";
 import Link from "next/link";
+import { PageHeader, pageShellClass } from "@/components/ui/page-header";
+import { EmptyState } from "@/components/ui/empty-state";
 import {
   useFlashcardDecks,
   type DeckWithWorkspace,
@@ -13,7 +15,6 @@ import { RotateCcw } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { useI18n } from "@/lib/i18n";
-import { EmptyScene } from "@/components/graphics/floating-decor";
 
 function DeckRow({ deck }: { deck: DeckWithWorkspace }) {
   const { t } = useI18n();
@@ -64,17 +65,8 @@ export default function FlashcardsPage() {
   });
 
   return (
-    <main className="flex-1 px-6 py-6 md:px-10"><div className="mx-auto w-full max-w-4xl">
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div>
-            <h1 className="text-xl font-bold tracking-tight">{t("fc.title")}</h1>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {t("fc.subtitle")}
-            </p>
-          </div>
-        </div>
-        {dueReview && dueReview.total > 0 && (
+    <main className={pageShellClass}>
+      <PageHeader title={t("fc.title")} subtitle={t("fc.subtitle")} actions={dueReview && dueReview.total > 0 && (
           <Link
             href="/flashcards/review"
             className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-[13px] font-semibold text-white hover:bg-accent/90 transition-colors"
@@ -84,18 +76,12 @@ export default function FlashcardsPage() {
               dueReview.total === 1 ? "fc.reviewDueOne" : "fc.reviewDueMany",
             ).replace("{count}", String(dueReview.total))}
           </Link>
-        )}
-      </div>
+        )} />
 
       {isLoading && <CardGridSkeleton count={6} />}
 
       {!isLoading && (decks ?? []).length === 0 && (
-        <EmptyScene image="/illustrations/cards.png">
-          <p className="text-base font-semibold">{t("fc.noDecksTitle")}</p>
-          <p className="mt-1.5 text-sm text-muted-foreground">
-            {t("fc.noDecksBody")}
-          </p>
-        </EmptyScene>
+        <EmptyState cat="book" title={t("fc.noDecksTitle")} body={t("fc.noDecksBody")} />
       )}
 
       <div className="flex flex-col gap-2.5">
@@ -103,6 +89,6 @@ export default function FlashcardsPage() {
           <DeckRow key={deck.item.id} deck={deck} />
         ))}
       </div>
-    </div></main>
+    </main>
   );
 }

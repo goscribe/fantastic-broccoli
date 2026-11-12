@@ -20,6 +20,7 @@ import {
   EmbedPart,
   ToolCallPart,
   suggestions,
+  WORKSPACE_SUGGESTIONS,
 } from "@/components/ai/chat-types";
 import { ToolCallChip } from "@/components/ai/tool-call-chip";
 import {
@@ -492,7 +493,7 @@ export function Copilot({
               </p>
             </div>
             <div className="space-y-2">
-              {suggestions.map((s) => (
+              {(studySessionId ? suggestions : WORKSPACE_SUGGESTIONS).map((s) => (
                 <button
                   key={s}
                   type="button"

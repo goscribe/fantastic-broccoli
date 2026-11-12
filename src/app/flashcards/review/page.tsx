@@ -2,13 +2,12 @@
 
 import "@/lib/i18n/flashcards";
 import Image from "next/image";
-import Link from "next/link";
+import { PageHeader, pageShellClass } from "@/components/ui/page-header";
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { DeckLearnView } from "@/components/flashcards/deck-learn-view";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
 /** Daily spaced review: every card past its SM-2 review date, across decks. */
@@ -41,20 +40,13 @@ export default function DueReviewPage() {
   );
 
   return (
-    <main className="flex-1 px-6 py-6 md:px-10">
+    <main className={pageShellClass}>
       <div className="mx-auto w-full max-w-3xl space-y-6">
-        <div>
-          <Link
-            href="/flashcards"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" />
-            {t("fc.backToFlashcards")}
-          </Link>
-          <h1 className="mt-3 text-2xl font-bold tracking-tight">
-            {t("fc.dailyReview")}
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
+        <PageHeader
+          back={{ href: "/flashcards", label: t("fc.backToFlashcards") }}
+          title={t("fc.dailyReview")}
+          className="mb-0"
+          subtitle={<>
             {data
               ? data.total > 0
                 ? t(data.total === 1 ? "fc.dueOne" : "fc.dueMany").replace(
@@ -62,9 +54,8 @@ export default function DueReviewPage() {
                     String(data.total),
                   )
                 : t("fc.reviewComeBack")
-              : t("fc.reviewPastDue")}
-          </p>
-        </div>
+              : t("fc.reviewPastDue")}</>}
+        />
 
         {isLoading && <Skeleton className="h-[380px] w-full rounded-3xl" />}
 

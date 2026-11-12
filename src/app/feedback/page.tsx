@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
+import { PageHeader } from "@/components/ui/page-header";
 import { textareaClass } from "@/components/ui/input";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight } from "lucide-react";
@@ -129,13 +130,8 @@ function FeedbackForm() {
   if (done) {
     return (
       <div className="space-y-3">
-        <h1 className="text-2xl font-bold tracking-tight">
-          Thanks{firstName ? `, ${firstName}` : ""}.
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          Read by a human, not a dashboard. If you asked for a reply you&apos;ll
-          get one.
-        </p>
+        <PageHeader title={<>Thanks{firstName ? `, ${firstName}` : ""}.</>} subtitle={<>Read by a human, not a dashboard. If you asked for a reply you&apos;ll
+          get one.</>} />
         <Link href="/" className="inline-flex items-center gap-1 text-sm text-accent">
           Back to Scribe <ArrowRight className="h-3.5 w-3.5" />
         </Link>

@@ -70,10 +70,10 @@ function Planner() {
   return (
     <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-6 pb-12 pt-6 lg:flex-row">
       <div className="flex min-w-0 flex-1 flex-col gap-[18px]">
-        <div className="flex items-end justify-between gap-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <div className="text-[12px] font-semibold text-faint">Study planner</div>
-            <h1 className="text-[26px] font-bold leading-tight">
+            <h1 className="text-[22px] font-bold leading-tight sm:text-[26px]">
               {!data ? <Skeleton className="h-8 w-80" /> : data.plannedMinutes > 0 ? `${fmtMin(data.plannedMinutes)} planned this week` : "Nothing planned yet this week"}
             </h1>
           </div>

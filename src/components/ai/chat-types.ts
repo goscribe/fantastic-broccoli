@@ -56,3 +56,11 @@ export const suggestions = [
   "Show me an interactive simulation for this topic",
   "Where do my uploaded materials cover this?",
 ];
+
+/** Starters for the workspace Copilot page (no study session open). */
+export const WORKSPACE_SUGGESTIONS = [
+  "Quiz me on my weakest topic in this workspace",
+  "Make flashcards from my notes",
+  "What topics do my materials cover?",
+  "Plan a study session for this week",
+];
