@@ -4,21 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  ArrowUp,
-  NotebookText,
-  ChevronDown,
-  ChevronUp,
-  ClipboardList,
-  Dumbbell,
-  FileText,
-  Headphones,
-  Layers,
-  Loader2,
-  MessageCircle,
-  Plus,
-  Presentation,
-} from "lucide-react";
+import { ArrowUp, Check, ChevronDown, ChevronUp, FileText, Headphones, Layers, Loader2, NotebookText, Play, Plus, Presentation } from "lucide-react";
 import { useAuthUser } from "@/lib/api/auth";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { fetchStudySessions, fetchActivityCalendar, createStudySession } from "@/lib/api/study";
@@ -52,12 +38,6 @@ const DAY = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const hhmm = (m: number) => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
 const activityLabel = (type: string) => ACTIVITY_LABEL[type.toLowerCase()] ?? type;
 
-const ONE_OFFS = [
-  ["Quiz me", Dumbbell],
-  ["Flashcards", Layers],
-  ["Worksheet", ClipboardList],
-  ["Explain", MessageCircle],
-] as const;
 
 function flatten(folders: Folder[], root: Workspace[]): Workspace[] {
   const all = [...root];
@@ -149,7 +129,6 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   const [expanded, setExpanded] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [uploading, setUploading] = useState(false);
-  const [busyOneOff, setBusyOneOff] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const load = useCallback(
@@ -208,6 +187,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     [workspaces],
   );
   const shown = expanded ? materials : materials.slice(0, 3);
+  const shownAll = useMemo(() => workspaces.flatMap((w) => w.materials.map((m) => ({ m, w }))), [workspaces]);
 
   useEffect(() => {
     const wsIds = Array.from(new Set(shown.map(({ w }) => w.id))).filter((id) => !shown.some(({ m, w }) => w.id === id && m.id in previews));
@@ -279,36 +259,37 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     }
   };
 
-  /** One-offs do the thing: a quick quiz or worksheet session, a generated deck, or a Copilot explanation. */
-  const runOneOff = async (label: string, m: Material, w: Workspace) => {
-    if (label === "Explain") {
-      router.push(chatHref(w.id, `Explain the key ideas in ${m.title}`));
-      return;
-    }
-    setBusyOneOff(`${m.id}:${label}`);
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const toggleSelected = (id: string) =>
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  const picked = useMemo(() => shownAll.filter(({ m }) => selected.has(m.id)), [shownAll, selected]);
+  const [starting, setStarting] = useState<"session" | "flashcards" | null>(null);
+
+  /** Build a study session or a deck from the picked files (or everything in the first folder when nothing is picked). */
+  const startFromSelection = async (kind: "session" | "flashcards") => {
+    const list = picked.length ? picked : shownAll.slice(0, 1);
+    const w = list[0]?.w ?? defaultWorkspace;
+    if (!w) return;
+    const titles = list.map(({ m }) => m.title);
+    const title = titles.length <= 2 ? titles.join(" + ") : `${titles[0]} + ${titles.length - 1} more`;
+    setStarting(kind);
     try {
-      if (label === "Flashcards") {
-        const { artifact } = await studySessionApi.generateFlashcards({ workspaceId: w.id, prompt: `Flashcards from ${m.title}`, title: m.title, numCards: 12 });
+      if (kind === "flashcards") {
+        const { artifact } = await studySessionApi.generateFlashcards({ workspaceId: w.id, prompt: `Flashcards from ${titles.join(", ")}`, title, numCards: 20 });
         router.push(`/flashcards/${artifact.id}?ws=${w.id}`);
         return;
       }
-      const session = await createStudySession(
-        label === "Quiz me"
-          ? { workspaceId: w.id, title: `Quiz: ${m.title}`, depth: "light", durationMinutes: 10, topics: m.title, quickStart: true }
-          : {
-              workspaceId: w.id,
-              title: `Worksheet: ${m.title}`,
-              depth: "light",
-              durationMinutes: 15,
-              topics: m.title,
-              description: `Worksheet practice on ${m.title}: written-answer questions with mark schemes.`,
-            },
-      );
+      const session = await createStudySession({ workspaceId: w.id, title, depth: "moderate", durationMinutes: 25, topics: titles.join(", ") });
       if (!session) throw new Error("Could not start");
       router.push(`/workspace/${w.id}/session/${session.id}`);
     } catch (e) {
       toastError(e, "Couldn't start that");
-      setBusyOneOff(null);
+      setStarting(null);
     }
   };
 
@@ -350,7 +331,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           </div>
           {defaultWorkspace && (
             <div className="mt-3 flex gap-2 overflow-x-auto">
-              {[`Quiz me on ${defaultWorkspace.title}`, `Flashcards for ${defaultWorkspace.title}`, "Explain what I got wrong last time", "Mock paper, section A"].map((c) => (
+              {["Make a study session from everything here", "Flashcards from my latest upload", "Explain what I got wrong last time", "Mock paper, section A"].map((c) => (
                 <button key={c} type="button" onClick={() => ask(c)} className="whitespace-nowrap rounded-full border border-border px-3 py-1.5 text-[12.5px] font-semibold hover:bg-muted">
                   {c}
                 </button>
@@ -386,30 +367,23 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-3">
           {loading && materials.length === 0 && [0, 1, 2].map((i) => <div key={i} className="h-[232px] animate-pulse rounded-2xl bg-muted" />)}
           {shown.map(({ m, w }) => (
-            <div key={m.id} className="flex flex-col rounded-2xl border border-border bg-card p-3">
-              <Link href={`/workspace/${w.id}`}>
+            <div
+              key={m.id}
+              className={cn(
+                "relative flex flex-col rounded-2xl border bg-card p-3 transition-colors",
+                selected.has(m.id) ? "border-accent ring-2 ring-accent/20" : "border-border",
+              )}
+            >
+              <label className="absolute left-5 top-5 z-10 grid size-6 cursor-pointer place-items-center rounded-md border border-border bg-white shadow-sm has-[:checked]:border-accent has-[:checked]:bg-accent has-[:checked]:text-white">
+                <input type="checkbox" className="peer sr-only" checked={selected.has(m.id)} onChange={() => toggleSelected(m.id)} aria-label={`Select ${m.title}`} />
+                <Check className="size-3.5 opacity-0 peer-checked:opacity-100" />
+              </label>
+              <button type="button" onClick={() => toggleSelected(m.id)} className="block w-full text-left">
                 <MaterialThumb m={{ ...m, preview: m.preview ?? (previews[m.id] || undefined) }} />
-              </Link>
+              </button>
               <div className="mt-3 truncate px-0.5 text-[14.5px] font-semibold">{m.title}</div>
               <div className="truncate px-0.5 text-[12px] text-faint">
                 {w.title} · {formatRelativeDate(m.updatedAt)}
-              </div>
-              <div className="mt-2.5 grid grid-cols-2 gap-1.5">
-                {ONE_OFFS.map(([label, Icon]) => {
-                  const busy = busyOneOff === `${m.id}:${label}`;
-                  return (
-                    <button
-                      key={label}
-                      type="button"
-                      disabled={!!busyOneOff}
-                      onClick={() => void runOneOff(label, m, w)}
-                      className="inline-flex h-8 items-center justify-center gap-1.5 rounded-[9px] bg-muted px-2 text-[12px] font-semibold hover:bg-accent-soft hover:text-accent disabled:opacity-60"
-                    >
-                      {busy ? <Loader2 className="size-3.5 animate-spin" /> : <Icon className="size-3.5" />}
-                      {label}
-                    </button>
-                  );
-                })}
               </div>
             </div>
           ))}
@@ -484,6 +458,14 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
 
       </div>
 
+      <CatNudge
+        count={picked.length}
+        empty={!loading && materials.length === 0}
+        starting={starting}
+        onSession={() => void startFromSelection("session")}
+        onFlashcards={() => void startFromSelection("flashcards")}
+        onClear={() => setSelected(new Set())}
+      />
       <div className="flex w-full shrink-0 flex-col gap-3.5 lg:w-[300px]">
         {loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
         {suggested && (() => {
@@ -587,6 +569,54 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         )}
       </div>
 
+    </div>
+  );
+}
+
+
+/** The cat pops out with a speech bubble: encouragement, and the one action that fits the moment. */
+function CatNudge({
+  count,
+  empty,
+  starting,
+  onSession,
+  onFlashcards,
+  onClear,
+}: {
+  count: number;
+  empty: boolean;
+  starting: "session" | "flashcards" | null;
+  onSession: () => void;
+  onFlashcards: () => void;
+  onClear: () => void;
+}) {
+  const text = empty
+    ? "Drop a PDF, slides or a lecture link and I'll turn it into practice."
+    : count === 0
+      ? "Tick a few files and I'll build a study session from them."
+      : `${count} file${count === 1 ? "" : "s"} picked — ready when you are.`;
+  return (
+    <div className="pointer-events-none fixed bottom-5 right-5 z-30 flex items-end gap-2 animate-in fade-in slide-in-from-bottom-4 duration-300 sm:bottom-6 sm:right-6">
+      <div className="pointer-events-auto relative max-w-[260px] rounded-2xl border border-border bg-white px-4 py-3 text-[13.5px] leading-snug shadow-[0_12px_32px_-16px_rgba(0,0,0,0.25)]">
+        {text}
+        {count > 0 && (
+          <div className="mt-2.5 flex flex-wrap gap-1.5">
+            <button type="button" disabled={!!starting} onClick={onSession} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-accent px-3 text-[12.5px] font-semibold text-white hover:bg-accent-dim disabled:opacity-60">
+              {starting === "session" ? <Loader2 className="size-3.5 animate-spin" /> : <Play className="size-3.5" fill="currentColor" />}
+              Study session
+            </button>
+            <button type="button" disabled={!!starting} onClick={onFlashcards} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-3 text-[12.5px] font-semibold hover:bg-accent-soft disabled:opacity-60">
+              {starting === "flashcards" ? <Loader2 className="size-3.5 animate-spin" /> : <Layers className="size-3.5" />}
+              Flashcards
+            </button>
+            <button type="button" onClick={onClear} className="h-8 px-2 text-[12.5px] font-semibold text-faint hover:text-foreground">
+              Clear
+            </button>
+          </div>
+        )}
+        <span className="absolute -right-1.5 bottom-4 size-3 rotate-45 border-b border-r border-border bg-white" />
+      </div>
+      <Image src={count > 0 ? "/design/cat2-cheer.png" : "/design/cat2-wave.png"} alt="" width={96} height={96} unoptimized className="cat-wiggle h-[84px] w-auto select-none" />
     </div>
   );
 }
