@@ -14,11 +14,12 @@ import {
   removeBlock,
   type PlannerSlot,
 } from "@/lib/api/planner";
-import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
+import { analyzeFiles, detectSections, uploadFiles } from "@/lib/api/materials";
 import { createStudySession } from "@/lib/api/study";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { accentForId } from "@/lib/accent-palette";
+import { toast } from "sonner";
 import { toastError } from "@/lib/toast";
 
 const DAY = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -71,6 +72,23 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
       const fileIds = await uploadFiles(workspaceId, files);
       await analyzeFiles(workspaceId, fileIds).catch(() => {});
       const title = slot.title.replace(/ — .*$/, "");
+      const { sections } = await detectSections(workspaceId, fileIds).catch(() => ({ sections: [] }));
+      if (sections.length >= 2) {
+        for (const sec of sections) {
+          await createStudySession({
+            workspaceId,
+            title: sec.title,
+            depth: "moderate",
+            durationMinutes: Math.max(10, slot.end - slot.start),
+            topics: `${sec.title}${sec.excerpt ? `: ${sec.excerpt}` : ""}`.slice(0, 2000),
+          });
+        }
+        await overrideBlock({ weekStart: data.weekStart, id: slot.id, workspaceId });
+        await refresh();
+        toast.success(`Found ${sections.length} sections (${sections.map((s) => s.title).join(", ")}) — built a session for each.`);
+        router.push(`/workspace/${workspaceId}`);
+        return;
+      }
       const session = await createStudySession({
         workspaceId,
         title,
