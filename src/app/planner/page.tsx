@@ -12,7 +12,6 @@ import { apiUrl } from "@/lib/api/config";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toastError } from "@/lib/toast";
-import { CalendarSync } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PlannerChat } from "@/components/planner/planner-chat";
 import "@/app/design/design.css";
@@ -164,7 +163,7 @@ function Planner() {
 
       <div className="flex w-full shrink-0 flex-col gap-3.5 lg:w-[300px]">
         <div className="flex items-center gap-3 rounded-2xl border border-border p-4">
-          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent"><CalendarSync className="size-[18px]" /></span>
+          <Image src="/design/gcal.svg" alt="" width={36} height={36} className="size-9 shrink-0" />
           <div className="min-w-0 flex-1">
             <div className="text-[14px] font-semibold">Google Calendar</div>
             <div className="truncate text-[12px] text-faint">
