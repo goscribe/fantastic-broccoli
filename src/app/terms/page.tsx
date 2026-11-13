@@ -28,13 +28,13 @@ export default function TermsPage() {
           You retain ownership of the materials you upload. You grant Scribe a
           limited licence to process them — parsing, transcription, indexing,
           and AI generation — solely to provide the service to you and your
-          workspace members. Only upload materials you have the right to use.
+          the people you share a subject with. Only upload materials you have the right to use.
         </p>
       </LegalSection>
       <LegalSection heading="Content review and curation">
         <p>
           Scribe generates study content automatically, so we review it for
-          quality and safety. Authorised Scribe staff may access workspaces and
+          quality and safety. Authorised Scribe staff may access subjects and
           the content generated in them to investigate quality issues, debug
           failed generations, respond to your support requests, and enforce
           these terms. Reviewers may hide generated content that is inaccurate,
@@ -77,7 +77,7 @@ export default function TermsPage() {
         <p>
           You can delete your account at any time from settings. We may suspend
           or terminate accounts that breach these terms or create risk for
-          other users. On deletion, your workspaces and their generated content
+          other users. On deletion, your subjects and their generated content
           are removed as described in our privacy policy.
         </p>
       </LegalSection>

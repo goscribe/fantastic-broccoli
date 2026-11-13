@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/graphics/marketing-art";
 import { GlowField } from "@/components/graphics/landing-art";
 import { plans } from "../data";
+import { BILLING_PAUSED } from "@/lib/billing-paused";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -33,6 +34,14 @@ export default function LandingPricingPage() {
             worksheets, flashcards, and the copilot.
           </p>
 
+          {BILLING_PAUSED && (
+            <p className="mt-6 max-w-2xl rounded-xl border border-accent/30 bg-accent-soft px-4 py-3 text-sm text-foreground">
+              <span className="font-semibold">Billing is paused.</span> Card
+              payments are unavailable right now, so nobody is being charged
+              and every account has Pro for free. The prices below apply once
+              billing is back.
+            </p>
+          )}
           <div className="mx-auto mt-12 grid gap-5 sm:grid-cols-3">
             {plans.map((plan) => (
               <div

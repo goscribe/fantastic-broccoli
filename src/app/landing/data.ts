@@ -62,21 +62,21 @@ export const features: Feature[] = [
     icon: "/design/props/cards.png",
     title: "Flashcards",
     description:
-      "Auto-generated decks that target the definitions, formulas, and concepts you actually need to memorise.",
+      "Cards for the definitions, formulas and concepts you need to memorise, brought back by spaced repetition right before you forget them.",
     tint: "amber",
   },
   {
-    icon: "/design/props/notes.png",
-    title: "Cloze passages",
+    icon: "/design/props/bulb.png",
+    title: "Quick checks and cloze",
     description:
-      "Fill-in-the-blank passages built from your notes that force real recall instead of passive recognition.",
+      "A Quick 5 after each reading and fill-in-the-blank passages from your notes, so you recall it instead of recognising it.",
     tint: "rose",
   },
   {
-    icon: "/design/props/bulb.png",
-    title: "Comprehension checks",
+    icon: "/design/props/clock.png",
+    title: "Planner and streak",
     description:
-      "Quick checkpoints after each reading to confirm you understood it — before you move on.",
+      "Connect Google Calendar and Scribe slots study times around your week. Your streak counts on the days you hit your goal.",
     tint: "sky",
   },
   {
