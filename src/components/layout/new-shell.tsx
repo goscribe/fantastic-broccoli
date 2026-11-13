@@ -172,25 +172,26 @@ export function NewShell({ children }: { children: React.ReactNode }) {
       )}
 
       <div className="flex min-w-0 flex-1 flex-col overflow-y-auto">
-        <header className="flex h-[64px] shrink-0 items-center gap-3 px-5 sm:px-8">
+        <header className="flex h-[64px] shrink-0 items-center gap-2 px-4 sm:gap-3 sm:px-8">
           <button type="button" onClick={() => setMobileOpen(true)} className="grid size-10 place-items-center rounded-xl hover:bg-muted md:hidden" aria-label="Open sidebar">
             <Image src="/logo.png" alt="" width={24} height={24} />
           </button>
           <button
             type="button"
             onClick={() => setPaletteOpen(true)}
-            className="flex h-10 w-full max-w-[320px] items-center gap-2.5 rounded-xl bg-muted px-3.5 text-[13.5px] text-faint hover:bg-accent-soft/50"
+            aria-label="Search"
+            className="flex h-10 w-10 shrink-0 items-center justify-center gap-2.5 rounded-xl bg-muted text-[13.5px] text-faint hover:bg-accent-soft/50 sm:w-full sm:max-w-[320px] sm:justify-start sm:px-3.5"
           >
             <Search className="size-4" />
-            <span className="flex-1 text-left">Search notes, sessions, cards…</span>
+            <span className="hidden flex-1 truncate text-left sm:inline">Search notes, sessions, cards…</span>
             <kbd className="hidden rounded-md border border-border bg-white px-1.5 text-[11px] font-semibold text-faint sm:inline">⌘K</kbd>
           </button>
-          <div className="ml-auto flex items-center gap-2.5">
+          <div className="ml-auto flex items-center gap-1.5 sm:gap-2.5">
             <NotificationBell />
-            <span className="flex h-10 items-center gap-1.5 rounded-xl border border-border bg-white px-3 text-[14px] font-semibold">
+            <span className="flex h-10 items-center gap-1.5 rounded-xl border border-border bg-white px-2.5 text-[14px] font-semibold sm:px-3">
               <Sparkles className="size-[18px] text-accent" fill="currentColor" />
               {credits.toLocaleString()}
-              <span className="font-medium text-faint">pts</span>
+              <span className="hidden font-medium text-faint sm:inline">pts</span>
             </span>
             <Link href="/settings" aria-label="Settings" className="block">
               {user?.profilePicture ? (

@@ -77,7 +77,7 @@ export function PlannerChat({ weekStart, className }: { weekStart?: string; clas
             <div className="text-[11.5px] text-faint">Checks your calendar daily and leaves notes here</div>
           </div>
         </div>
-        <button type="button" onClick={() => void check()} disabled={checking} className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-muted px-2.5 text-[12px] font-semibold hover:bg-accent-soft hover:text-accent disabled:opacity-60">
+        <button type="button" onClick={() => void check()} disabled={checking} className="inline-flex h-8 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg bg-muted px-2.5 text-[12px] font-semibold hover:bg-accent-soft hover:text-accent disabled:opacity-60">
           {checking ? <Loader2 className="size-3.5 animate-spin" /> : <Sparkles className="size-3.5" />} Check now
         </button>
       </div>

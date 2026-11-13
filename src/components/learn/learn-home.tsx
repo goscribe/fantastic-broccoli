@@ -288,11 +288,11 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         <div className="flex items-end justify-between">
           <div>
             {(workspaceId || folderId) && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>}
-            <h1 className="text-[26px] font-bold">
+            <h1 className="text-[22px] font-bold leading-tight sm:text-[26px]">
               {workspaceId || folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
             </h1>
           </div>
-          {sessions.length > 0 && <span className="text-[13px] text-faint">{sessions.length} study session{sessions.length === 1 ? "" : "s"}</span>}
+          {sessions.length > 0 && <span className="hidden text-[13px] text-faint sm:inline">{sessions.length} study session{sessions.length === 1 ? "" : "s"}</span>}
         </div>
 
         {workspaceId && (
@@ -354,7 +354,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             )}
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 md:grid-cols-3">
           {loading && materials.length === 0 && [0, 1, 2].map((i) => <div key={i} className="h-[232px] animate-pulse rounded-2xl bg-muted" />)}
           {shown.map(({ m, w }) => (
             <div
@@ -378,7 +378,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             </div>
           ))}
           {(expanded || (!loading && materials.length < 3)) && (
-            <button type="button" onClick={() => fileRef.current?.click()} className="flex min-h-[200px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border p-4 text-center hover:border-accent/50 hover:bg-accent-soft/40">
+            <button type="button" onClick={() => fileRef.current?.click()} className="flex min-h-[140px] flex-col items-center justify-center gap-2 rounded-2xl border-2 sm:min-h-[200px] border-dashed border-border p-4 text-center hover:border-accent/50 hover:bg-accent-soft/40">
               <Image src="/design/cat2-sleep.png" alt="" width={64} height={64} unoptimized className="cat-bob h-16 w-auto" />
               <div>
                 <div className="text-[14.5px] font-semibold">Add material</div>
