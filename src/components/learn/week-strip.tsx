@@ -170,7 +170,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
                   return (
                     <div
                       key={s.id}
-                      style={{ position: "absolute", left: 6, right: 6, top: 26 + y(s.start), height: Math.max(26, y(s.end) - y(s.start)) }}
+                      style={{ position: "absolute", left: 6, right: 6, top: 26 + y(s.start), height: Math.max(30, y(s.end) - y(s.start)) }}
                       draggable
                       onDragStart={(e) => {
                         setDragId(s.id);
@@ -205,9 +205,8 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
                       )}
                       title={s.sessionId ? "Open session" : "Click or drop notes to build this session"}
                     >
-                      <div className="font-semibold">{hhmm(s.start)}–{hhmm(s.end)}</div>
-                      <div className="truncate">{s.title}</div>
-                      <div className="mt-0.5 flex items-center gap-1 text-[10.5px] opacity-70">
+                      <div className="truncate font-semibold">{hhmm(s.start)} <span className="font-medium opacity-80">{s.title}</span></div>
+                      <div className={cn("mt-0.5 flex items-center gap-1 text-[10.5px] opacity-70", y(s.end) - y(s.start) < 34 && "hidden")}>
                         {busy ? <Loader2 className="size-3 animate-spin" /> : s.sessionId ? null : <Upload className="size-3" />}
                         {busy ? "Building…" : subjectName(s.workspaceId) ?? (s.sessionId ? "" : "Drop notes here")}
                       </div>
