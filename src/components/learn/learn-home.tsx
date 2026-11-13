@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { cn, formatRelativeDate } from "@/lib/utils";
 import { Donut, Ring, WeekBars } from "@/components/design/charts";
 import type { Folder, Material, StudySession, Workspace } from "@/types";
+import { fetchStreak, type StreakSummary } from "@/lib/api/streak";
 import { fetchPlannerWeek, type PlannerSlot } from "@/lib/api/planner";
 import { Skeleton } from "@/components/ui/skeleton";
 import "@/app/design/design.css";
@@ -114,6 +115,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   const [due, setDue] = useState<number | null>(null);
   const [actLoading, setActLoading] = useState(true);
   const [days, setDays] = useState<number[]>([]);
+  const [streakInfo, setStreakInfo] = useState<StreakSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const [prompt, setPrompt] = useState("");
@@ -144,6 +146,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   useEffect(() => {
     void load();
     fetchDueReview().then((r) => setDue(r.total)).catch(() => setDue(0));
+    fetchStreak().then(setStreakInfo).catch(() => setStreakInfo(null));
     fetchPlannerWeek()
       .then((w) => {
         const today = new Date().toISOString().slice(0, 10);
@@ -200,14 +203,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   const byStart = useMemo(() => [...sessions].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()), [sessions]);
   const suggested = byStart.find((s) => s.status === "active" && !s.generating);
   const todayIdx = (new Date().getDay() + 6) % 7;
-  const streak = useMemo(() => {
-    let n = 0;
-    for (let i = todayIdx; i >= 0; i--) {
-      if ((days[i] ?? 0) > 0) n++;
-      else if (i !== todayIdx) break;
-    }
-    return n;
-  }, [days, todayIdx]);
+  const streak = streakInfo?.current ?? 0;
   const defaultWorkspace = suggested ? wsById.get(suggested.workspaceId) : workspaces[0];
 
   const ask = (q: string) => {
@@ -485,7 +481,8 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           <div className="flex items-baseline justify-between">
             <span className="text-[16px] font-semibold">This week</span>
             <span className="text-[12px] text-faint">
-              {days.reduce((a, b) => a + b, 0)} activities{streak > 1 ? <> · <b className="text-accent">{streak}-day streak</b></> : null}
+              {days.reduce((a, b) => a + b, 0)} activities{streak > 0 ? <> · <b className="text-accent">{streak}-day streak</b></> : null}
+              {streakInfo && !streakInfo.todayDone ? <> · {Math.max(0, streakInfo.goalMin - streakInfo.todayMinutes)} min to go today</> : null}
             </span>
           </div>
           <div className="mt-3.5">

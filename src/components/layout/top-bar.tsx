@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { ScribeLogo } from "@/components/graphics/logo";
+import { StreakFlame } from "@/components/graphics/streak-flame";
+import { fetchStreak } from "@/lib/api/streak";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
 import { fetchWorkspace } from "@/lib/api/workspace";
@@ -183,6 +185,7 @@ export function TopBar({
           </div>
 
           <div className="flex shrink-0 items-center gap-1 sm:gap-1.5">
+            <StreakChip />
             <Link
               href="/pricing"
               title={t("misc.studyPointsTooltip")}
@@ -407,5 +410,33 @@ export function TopBar({
         onClose={() => setMembersOpen(false)}
       />
     </>
+  );
+}
+
+const MILESTONES = [3, 7, 14, 30, 60, 100, 365];
+
+/** Flame + day count; lit once today's goal is met, grey while it's still pending. Celebrates milestones once. */
+function StreakChip() {
+  const { data } = useQuery({ queryKey: ["streak"], queryFn: fetchStreak, staleTime: 60_000 });
+  useEffect(() => {
+    if (!data || !data.todayDone || !MILESTONES.includes(data.current)) return;
+    const key = `streak-celebrated-${data.current}`;
+    if (typeof window === "undefined" || window.localStorage.getItem(key)) return;
+    window.localStorage.setItem(key, "1");
+    toast.success(`${data.current}-day streak! Keep it up.`);
+  }, [data]);
+  if (!data || data.current === 0) return null;
+  const left = Math.max(0, data.goalMin - data.todayMinutes);
+  return (
+    <Link
+      href="/"
+      title={data.todayDone ? `${data.current}-day streak — today's done` : `${data.current}-day streak — ${left} min to go today`}
+      className={`flex items-center gap-1 rounded-full border px-2 py-1 text-[12px] font-semibold tabular-nums ${
+        data.todayDone ? "border-[#ffb020]/40 bg-[#fff4e0] text-[#b4530a]" : "border-border bg-muted text-muted-foreground"
+      }`}
+    >
+      <StreakFlame className={`h-3.5 w-3.5 ${data.todayDone ? "" : "grayscale opacity-60"}`} />
+      {data.current}
+    </Link>
   );
 }
