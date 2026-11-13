@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { accentForId } from "@/lib/accent-palette";
 import { WeekStrip } from "@/components/learn/week-strip";
+import { SubjectCover } from "@/components/learn/subject-cover";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -58,9 +59,6 @@ const greeting = () => {
   const h = new Date().getHours();
   return h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
 };
-
-const chatHref = (workspaceId: string, q: string) =>
-  `/workspace/${workspaceId}/chat?q=${encodeURIComponent(q)}`;
 
 function MaterialThumb({ m }: { m: Material }) {
   const Icon = { pdf: FileText, note: NotebookText, slides: Presentation, audio: Headphones }[m.type] ?? FileText;
@@ -206,9 +204,31 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   const streak = streakInfo?.current ?? 0;
   const defaultWorkspace = suggested ? wsById.get(suggested.workspaceId) : workspaces[0];
 
-  const ask = (q: string) => {
-    if (!defaultWorkspace || !q.trim()) return;
-    router.push(chatHref(defaultWorkspace.id, q.trim()));
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  /** The prompt box builds the next study session in this subject around what you typed. */
+  const [asking, setAsking] = useState(false);
+  const ask = async (q: string) => {
+    const text = q.trim();
+    if (!defaultWorkspace || !text || asking) return;
+    setAsking(true);
+    try {
+      const picked = defaultWorkspace.materials.filter((m) => selected.has(m.id)).map((m) => m.title);
+      const session = await createStudySession({
+        workspaceId: defaultWorkspace.id,
+        title: text.length > 60 ? `${text.slice(0, 57).trimEnd()}…` : text,
+        description: text,
+        depth: "moderate",
+        durationMinutes: 25,
+        topics: [text, ...picked].join("\n").slice(0, 2000),
+      });
+      if (!session) throw new Error("Could not start a session");
+      setPrompt("");
+      router.push(`/workspace/${defaultWorkspace.id}/session/${session.id}`);
+    } catch (e) {
+      toastError(e, "Could not start a session");
+    } finally {
+      setAsking(false);
+    }
   };
 
   /** Uploads go into the workspace you're looking at (or your latest one); a brand-new learner gets a workspace made for them. */
@@ -245,7 +265,6 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     }
   };
 
-  const [selected, setSelected] = useState<Set<string>>(new Set());
   const toggleSelected = (id: string) =>
     setSelected((prev) => {
       const next = new Set(prev);
@@ -308,12 +327,12 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             <input
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              placeholder={defaultWorkspace ? "What do you want to practise?" : "Add a material first, then ask for anything"}
+              placeholder={defaultWorkspace ? "What should the next session cover?" : "Add a material first, then ask for anything"}
               disabled={!defaultWorkspace}
               className={cn(bareInputClass, "text-[15px]")}
             />
-            <button type="submit" disabled={!defaultWorkspace || !prompt.trim()} className="grid size-9 place-items-center rounded-[10px] bg-accent text-white disabled:opacity-40">
-              <ArrowUp className="size-4" />
+            <button type="submit" disabled={!defaultWorkspace || !prompt.trim() || asking} className="grid size-9 place-items-center rounded-[10px] bg-accent text-white disabled:opacity-40">
+              {asking ? <Loader2 className="size-4 animate-spin" /> : <ArrowUp className="size-4" />}
             </button>
           </div>
           {defaultWorkspace && (
@@ -598,7 +617,7 @@ function SubjectsGrid({
         </button>
       </div>
       <div className="mt-3 grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-3">
-        {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[150px] rounded-2xl" />)}
+        {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[172px] rounded-2xl" />)}
         {workspaces.map((w) => {
           const own = sessions
             .filter((x) => x.workspaceId === w.id)
@@ -607,24 +626,31 @@ function SubjectsGrid({
           const current = own.find((x) => x.status !== "completed");
           const pct = own.length ? done / own.length : 0;
           return (
-            <Link key={w.id} href={`/workspace/${w.id}`} className="group flex flex-col rounded-2xl border border-border bg-card p-4 transition-colors hover:border-accent/50">
-              <div className="flex items-center gap-3">
-                <Ring pct={pct} size={44} stroke={10} color={accentForId(w.id)} />
-                <div className="min-w-0">
-                  <div className="truncate text-[15px] font-semibold">{w.title}</div>
-                  <div className="text-[12px] text-faint">
-                    {w.materials.length} material{w.materials.length === 1 ? "" : "s"} · {done}/{own.length} sessions
+            <SubjectCover
+              key={w.id}
+              title={w.title}
+              coverUrl={w.coverUrl}
+              className="rounded-2xl border border-border transition-colors hover:border-accent/50"
+            >
+              <Link href={`/workspace/${w.id}`} className="group relative flex min-h-[172px] flex-col justify-between p-4">
+                <div className="flex items-center gap-3">
+                  <Ring pct={pct} size={44} stroke={10} color={accentForId(w.id)} />
+                  <div className="min-w-0 max-w-[62%]">
+                    <div className="line-clamp-2 text-[15px] font-semibold leading-tight text-foreground">{w.title}</div>
+                    <div className="text-[12px] text-muted-foreground">
+                      {w.materials.length} material{w.materials.length === 1 ? "" : "s"} · {done}/{own.length} sessions
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="mt-4 flex items-center justify-between text-[12.5px]">
-                <span className="truncate text-muted-foreground">{current ? (current.generating ? "Building the next session…" : `Next: ${current.title}`) : own.length ? "All caught up" : "No sessions yet"}</span>
-                <span className="ml-2 shrink-0 font-semibold text-accent group-hover:underline">{current ? "Continue" : "Open"}</span>
-              </div>
-            </Link>
+                <div className="mt-4 flex items-center justify-between text-[12.5px]">
+                  <span className="truncate text-muted-foreground">{current ? (current.generating ? "Building the next session…" : `Next: ${current.title}`) : own.length ? "All caught up" : "No sessions yet"}</span>
+                  <span className="ml-2 inline-flex h-7 shrink-0 items-center gap-1 rounded-full bg-muted px-3 font-semibold text-foreground group-hover:bg-accent/10 group-hover:text-accent">{current ? "Continue" : "Open"}</span>
+                </div>
+              </Link>
+            </SubjectCover>
           );
         })}
-        <button type="button" onClick={onNew} className="flex min-h-[150px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border text-center hover:border-accent/60 hover:bg-muted/40">
+        <button type="button" onClick={onNew} className="flex min-h-[172px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border text-center hover:border-accent/60 hover:bg-muted/40">
           <Image src="/design/cat2-sleep.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
           <div className="text-[14px] font-semibold">New subject</div>
           <div className="text-[12px] text-faint">Drop notes, get sessions</div>

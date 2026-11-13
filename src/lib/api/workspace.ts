@@ -22,6 +22,7 @@ interface TreeWorkspaceRow {
   folderId: string | null;
   icon: string | null;
   color: string | null;
+  coverUrl?: string | null;
   updatedAt: Date | string;
   uploads: UploadRow[];
   owner?: MemberUserRow | null;
@@ -100,6 +101,7 @@ function mapWorkspace(row: TreeWorkspaceRow): Workspace {
     title: row.title,
     icon: row.icon ?? "book",
     color: row.color ?? "green",
+    coverUrl: row.coverUrl ?? undefined,
     folderId: row.folderId ?? undefined,
     sessions: [],
     materials: (row.uploads ?? []).map((u) => mapUploadToMaterial(u, row.id)),
