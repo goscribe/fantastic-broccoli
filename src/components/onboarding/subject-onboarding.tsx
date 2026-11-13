@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Link2, Loader2, Upload } from "lucide-react";
@@ -9,23 +9,28 @@ import { createStudySession } from "@/lib/api/study";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { toastError } from "@/lib/toast";
+import { TourVideo, markAppTourSeen } from "@/components/onboarding/app-tour";
 
 const SUGGESTED = ["Biology HL", "Chemistry SL", "Maths AA", "Economics", "History", "Psychology", "Computer Science", "Physics"];
 const UPLOAD_ACCEPT = ".pdf,.pptx,.docx,.txt,.md,.png,.jpg,.jpeg,.mp3,.m4a,.wav";
 
-type Step = "subject" | "material" | "building";
+type Step = "intro" | "subject" | "material" | "building";
 
-/** First run: name a subject, drop your notes (or a YouTube link), the first session builds. The cat walks you through. */
-export function SubjectOnboarding({ onSkip, firstName }: { onSkip: () => void; firstName?: string }) {
+/** First run: (optional walkthrough video,) name a subject, drop your notes (or a YouTube link), the first session builds. The cat walks you through. */
+export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip: () => void; firstName?: string; intro?: boolean }) {
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
-  const [step, setStep] = useState<Step>("subject");
+  const [step, setStep] = useState<Step>(intro ? "intro" : "subject");
   const [subject, setSubject] = useState("");
   const [files, setFiles] = useState<File[]>([]);
   const [link, setLink] = useState("");
   const [dragging, setDragging] = useState(false);
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    if (intro) markAppTourSeen();
+  }, [intro]);
 
   const addFiles = (list: FileList | File[] | null) => {
     if (!list) return;
@@ -69,8 +74,25 @@ export function SubjectOnboarding({ onSkip, firstName }: { onSkip: () => void; f
 
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center bg-white px-5 py-10">
-      <div className="w-full max-w-[460px]">
-        <div className="mb-6 flex items-center justify-center gap-1.5">
+      <div className={cn("w-full", step === "intro" ? "max-w-[680px]" : "max-w-[460px]")}>
+        {step === "intro" && (
+          <section>
+            <h1 className="text-center text-[24px] font-bold tracking-tight">{firstName ? `Hi ${firstName} — here's how Scribe works` : "Here's how Scribe works"}</h1>
+            <p className="mt-1 text-center text-[14px] text-muted-foreground">50 seconds. Then we&apos;ll set up your first subject together.</p>
+            <TourVideo autoPlay className="mt-5" />
+            <button
+              type="button"
+              onClick={() => setStep("subject")}
+              className="mt-4 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent text-[15px] font-semibold text-white hover:bg-accent-dim"
+            >
+              Set up my first subject <ArrowRight className="size-4" />
+            </button>
+            <button type="button" onClick={onSkip} className="mt-4 block w-full text-center text-[13px] font-medium text-faint hover:text-foreground">
+              I&apos;ll look around first
+            </button>
+          </section>
+        )}
+        <div className={cn("mb-6 flex items-center justify-center gap-1.5", step === "intro" && "hidden")}>
           {(["subject", "material", "building"] as Step[]).map((s, i) => (
             <span
               key={s}

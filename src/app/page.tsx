@@ -33,6 +33,7 @@ import {
   markFirstSessionOnboardingSkipped,
 } from "@/components/onboarding/first-session-onboarding";
 import { SubjectOnboarding } from "@/components/onboarding/subject-onboarding";
+import { AppTourAuto } from "@/components/onboarding/app-tour";
 import { onTreeChanged } from "@/lib/tree-events";
 import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
 import Link from "next/link";
@@ -224,12 +225,19 @@ export default function HomePage() {
         : t("misc.goodEvening");
 
   const newUi = useNewUi();
-  if (newUi && showOnboarding !== true) return <LearnHome />;
+  if (newUi && showOnboarding !== true)
+    return (
+      <>
+        <LearnHome />
+        {showOnboarding === false && <AppTourAuto />}
+      </>
+    );
 
   return (
     <div className="flex-1 flex flex-col">
       {showOnboarding && (
         <SubjectOnboarding
+          intro
           onSkip={() => {
             markFirstSessionOnboardingSkipped();
             setShowOnboarding(false);
