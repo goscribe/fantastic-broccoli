@@ -72,3 +72,18 @@ export const addBlock = (input: { weekStart: string; date: string; start: number
   rpc<{ id: string }>("planner.addBlock", "mutation", input);
 export const removeBlock = (input: { weekStart: string; id: string }) =>
   rpc<{ ok: boolean }>("planner.removeBlock", "mutation", input);
+
+export interface PlannerMessage {
+  id: string;
+  role: "AGENT" | "USER" | "ASSISTANT";
+  content: string;
+  meta?: { name: string; label: string }[] | { added?: number } | null;
+  createdAt: string;
+}
+export const fetchPlannerMessages = () =>
+  rpc<{ unread: number; messages: PlannerMessage[] }>("planner.messages", "query", undefined);
+export const markPlannerRead = () => rpc<{ ok: boolean }>("planner.markRead", "mutation", undefined);
+export const runPlannerAgent = () =>
+  rpc<{ ran: boolean; added: number; note?: string }>("planner.runAgent", "mutation", undefined);
+export const plannerChat = (input: { message: string; weekStart?: string }) =>
+  rpc<{ id: string; reply: string; actions: { name: string; label: string }[] }>("planner.chat", "mutation", input);

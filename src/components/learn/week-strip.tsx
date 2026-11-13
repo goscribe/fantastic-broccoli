@@ -7,6 +7,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { CalendarDays, Loader2, Settings2, Upload, X } from "lucide-react";
 import { PlanSetupWizard } from "@/components/learn/plan-setup-wizard";
 import {
+  fetchPlannerMessages,
   fetchPlannerWeek,
   addBlock,
   overrideBlock,
@@ -31,6 +32,8 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
   const qc = useQueryClient();
   const router = useRouter();
   const { data, isLoading } = useQuery({ queryKey: ["planner", undefined], queryFn: () => fetchPlannerWeek() });
+  const { data: notes } = useQuery({ queryKey: ["planner-messages"], queryFn: fetchPlannerMessages, enabled: !!data?.calendar.connected });
+  const lastNote = [...(notes?.messages ?? [])].reverse().find((m) => m.role === "AGENT");
   const [dragId, setDragId] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const params = useSearchParams();
@@ -175,7 +178,15 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
       )}
 
       {data && (
-        <div className="mt-3 grid gap-1.5 rounded-2xl border border-border bg-card p-2" style={{ gridTemplateColumns: "40px repeat(7, 1fr)" }}>
+        <>
+        {lastNote && (notes?.unread ?? 0) > 0 && (
+          <Link href="/planner" className="mt-3 flex items-start gap-2.5 rounded-xl border border-[#f6d9a8] bg-[#fff8ec] px-3.5 py-2.5 text-[13px] text-[#5b3a12] hover:brightness-[0.98]">
+            <Image src="/design/cat2-think.png" alt="" width={28} height={28} className="size-7 shrink-0 object-contain" />
+            <span className="min-w-0"><b className="text-[#b4530a]">Note from your planner · </b>{lastNote.content}</span>
+          </Link>
+        )}
+        <div className="mt-3 overflow-x-auto rounded-2xl border border-border bg-card">
+        <div className="grid min-w-[640px] gap-1.5 p-2" style={{ gridTemplateColumns: "40px repeat(7, 1fr)" }}>
           <div className="relative" style={{ height: H + 26, marginTop: 0 }}>
             {hours.map((h) => (
               <span key={h} className="absolute right-1 -translate-y-1/2 text-[10px] text-faint" style={{ top: 26 + y(h) }}>{hhmm(h)}</span>
@@ -222,12 +233,15 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
                   <span key={k} title={b.title} className="pointer-events-none absolute inset-x-1.5 rounded-md bg-muted/80" style={{ top: 26 + y(Math.max(lo, b.start)), height: Math.max(4, y(Math.min(hi, b.end)) - y(Math.max(lo, b.start))) }} />
                 ))}
                 {d.slots.map((s) => {
+                  const overlapping = d.slots.filter((o) => o.start < s.end && o.end > s.start);
+                  const lane = Math.max(0, overlapping.findIndex((o) => o.id === s.id));
+                  const lanes = Math.max(1, overlapping.length);
                   const busy = busyId === s.id;
                   return (
                     <div
                       key={s.id}
                       data-block
-                      style={{ position: "absolute", left: 6, right: 6, top: 26 + y(s.start), height: Math.max(30, y(s.end) - y(s.start)) }}
+                      style={{ position: "absolute", left: `calc(6px + ${(lane / lanes) * 100}% - ${(lane / lanes) * 12}px)`, width: `calc(${100 / lanes}% - ${12 / lanes}px)`, top: 26 + y(s.start), height: Math.max(30, y(s.end) - y(s.start)) }}
                       draggable
                       onDragStart={(e) => {
                         setDragId(s.id);
@@ -275,6 +289,8 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
             );
           })}
         </div>
+        </div>
+        </>
       )}
 
       {data && data.days.every((d) => d.slots.length === 0) && (
