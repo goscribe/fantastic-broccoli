@@ -51,7 +51,11 @@ function Planner() {
   useEffect(() => {
     const r = params.get("calendar");
     if (!r) return;
-    if (r === "connected") toast.success("Google Calendar connected — busy times now shape your plan.");
+    if (r === "connected") {
+      toast.success("Google Calendar connected — let's set up your plan.");
+      router.replace("/?setup=1");
+      return;
+    }
     else if (r === "unconfigured") toast.error("Google Calendar isn't set up on the server yet.");
     else if (r !== "cancelled") toast.error("Couldn't connect Google Calendar. Try again.");
     router.replace("/planner");

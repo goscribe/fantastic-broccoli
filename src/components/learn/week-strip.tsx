@@ -2,19 +2,17 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { CalendarDays, Clock, Loader2, Upload } from "lucide-react";
+import { CalendarDays, Loader2, Settings2, Upload } from "lucide-react";
+import { PlanSetupWizard } from "@/components/learn/plan-setup-wizard";
 import {
   fetchPlannerWeek,
   overrideBlock,
-  setAvailability,
-  type AvailabilitySlot,
   type PlannerSlot,
 } from "@/lib/api/planner";
 import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
 import { createStudySession } from "@/lib/api/study";
-import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { toastError } from "@/lib/toast";
@@ -32,7 +30,8 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
   const { data, isLoading } = useQuery({ queryKey: ["planner", undefined], queryFn: () => fetchPlannerWeek() });
   const [dragId, setDragId] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
-  const [availOpen, setAvailOpen] = useState(false);
+  const params = useSearchParams();
+  const [setupOpen, setSetupOpen] = useState(params.get("setup") === "1");
   const fileRef = useRef<HTMLInputElement>(null);
   const pendingSlot = useRef<PlannerSlot | null>(null);
   const today = new Date().toISOString().slice(0, 10);
@@ -83,6 +82,15 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
 
   const subjectName = (id?: string) => subjects.find((s) => s.id === id)?.title;
 
+  const toMin = (t: string) => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
+  const all = (data?.days ?? []).flatMap((d) => d.slots.map((s) => [s.start, s.end])).flat();
+  const lo = Math.floor(Math.min(toMin(data?.plan.windowStart ?? "15:00"), ...(all.length ? [Math.min(...all)] : [])) / 60) * 60;
+  const hi = Math.ceil(Math.max(toMin(data?.plan.windowEnd ?? "19:00"), ...(all.length ? [Math.max(...all)] : [])) / 60) * 60;
+  const span = Math.max(60, hi - lo);
+  const H = 180;
+  const y = (m: number) => ((m - lo) / span) * H;
+  const hours = Array.from({ length: span / 60 + 1 }, (_, k) => lo + k * 60);
+
   return (
     <section>
       <input
@@ -103,8 +111,8 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
           {data && <span className="font-medium text-faint">· {data.plannedMinutes > 0 ? `${Math.round(data.plannedMinutes / 60 * 10) / 10} h planned` : "nothing planned"}</span>}
         </h2>
         <div className="flex items-center gap-2">
-          <button type="button" onClick={() => setAvailOpen(true)} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-2.5 text-[12.5px] font-semibold hover:bg-accent-soft">
-            <Clock className="size-3.5" /> When I&apos;m free
+          <button type="button" onClick={() => setSetupOpen(true)} aria-label="Plan settings" title="Plan settings" className="grid size-8 place-items-center rounded-[9px] bg-muted text-muted-foreground hover:bg-accent-soft hover:text-accent">
+            <Settings2 className="size-4" />
           </button>
           <Link href="/planner" className="text-[13px] font-semibold text-accent hover:underline">
             Open planner
@@ -128,7 +136,12 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
       )}
 
       {data && (
-        <div className="mt-3 grid grid-cols-7 gap-1.5 rounded-2xl border border-border bg-card p-2">
+        <div className="mt-3 grid gap-1.5 rounded-2xl border border-border bg-card p-2" style={{ gridTemplateColumns: "40px repeat(7, 1fr)" }}>
+          <div className="relative" style={{ height: H + 26, marginTop: 0 }}>
+            {hours.map((h) => (
+              <span key={h} className="absolute right-1 -translate-y-1/2 text-[10px] text-faint" style={{ top: 26 + y(h) }}>{hhmm(h)}</span>
+            ))}
+          </div>
           {data.days.map((d, i) => {
             const on = d.date === today;
             const past = d.date < today;
@@ -142,17 +155,22 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
                   e.preventDefault();
                   void moveTo(d.date);
                 }}
-                className={cn("flex min-h-[132px] flex-col rounded-xl p-1.5 transition-colors", dragId && "ring-1 ring-dashed ring-accent/40", on && "bg-accent-soft/40")}
+                className={cn("relative rounded-xl p-1.5 transition-colors", dragId && "ring-1 ring-dashed ring-accent/40", on && "bg-accent-soft/40")}
+                style={{ height: H + 26 }}
               >
-                <div className={cn("mb-1.5 px-1 text-[11px] font-semibold", on ? "text-accent" : past ? "text-faint/60" : "text-faint")}>
+                <div className={cn("px-1 text-[11px] font-semibold leading-[18px]", on ? "text-accent" : past ? "text-faint/60" : "text-faint")}>
                   {DAY[i]} <span className="font-medium">{Number(d.date.slice(8))}</span>
                 </div>
-                {d.slots.length === 0 && <div className="flex-1 rounded-lg border border-dashed border-border/70" />}
+                {hours.map((h) => <span key={h} className="pointer-events-none absolute inset-x-1 border-t border-dashed border-border/60" style={{ top: 26 + y(h) }} />)}
+                {d.busy.map((b, k) => (
+                  <span key={k} title={b.title} className="pointer-events-none absolute inset-x-1.5 rounded-md bg-muted/80" style={{ top: 26 + y(Math.max(lo, b.start)), height: Math.max(4, y(Math.min(hi, b.end)) - y(Math.max(lo, b.start))) }} />
+                ))}
                 {d.slots.map((s) => {
                   const busy = busyId === s.id;
                   return (
                     <div
                       key={s.id}
+                      style={{ position: "absolute", left: 6, right: 6, top: 26 + y(s.start), height: Math.max(26, y(s.end) - y(s.start)) }}
                       draggable
                       onDragStart={(e) => {
                         setDragId(s.id);
@@ -181,7 +199,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
                         }
                       }}
                       className={cn(
-                        "group mb-1 cursor-grab rounded-lg px-2 py-1.5 text-left text-[11.5px] leading-tight active:cursor-grabbing",
+                        "group cursor-grab overflow-hidden rounded-lg px-1.5 py-1 text-left text-[10.5px] leading-tight active:cursor-grabbing",
                         s.kind === "review" ? "bg-emerald-50 text-emerald-800" : "bg-accent-soft text-accent-dim",
                         dragId === s.id && "opacity-50",
                       )}
@@ -208,85 +226,20 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
         </p>
       )}
 
-      {availOpen && (
-        <AvailabilityDialog
-          initial={data?.plan.availability ?? null}
-          fallback={{ start: data?.plan.windowStart ?? "15:00", end: data?.plan.windowEnd ?? "19:00", weekdays: data?.plan.weekdays ?? [1, 2, 3, 4, 5, 6, 0] }}
-          onClose={() => setAvailOpen(false)}
+      {setupOpen && data && (
+        <PlanSetupWizard
+          plan={data.plan}
+          onClose={() => {
+            setSetupOpen(false);
+            if (params.get("setup")) router.replace("/");
+          }}
           onSaved={() => {
-            setAvailOpen(false);
+            setSetupOpen(false);
+            if (params.get("setup")) router.replace("/");
             void refresh();
           }}
         />
       )}
     </section>
-  );
-}
-
-/** One row per weekday: tick the days you can study and set the free window for each. */
-function AvailabilityDialog({
-  initial,
-  fallback,
-  onClose,
-  onSaved,
-}: {
-  initial: AvailabilitySlot[] | null;
-  fallback: { start: string; end: string; weekdays: number[] };
-  onClose: () => void;
-  onSaved: () => void;
-}) {
-  const weekdayOrder = [1, 2, 3, 4, 5, 6, 0];
-  const [rows, setRows] = useState<Record<number, { on: boolean; start: string; end: string }>>(() => {
-    const out: Record<number, { on: boolean; start: string; end: string }> = {};
-    for (const wd of weekdayOrder) {
-      const slot = initial?.find((s) => s.weekday === wd);
-      out[wd] = slot
-        ? { on: true, start: slot.start, end: slot.end }
-        : { on: initial ? false : fallback.weekdays.includes(wd), start: fallback.start, end: fallback.end };
-    }
-    return out;
-  });
-  const [saving, setSaving] = useState(false);
-  const save = async () => {
-    setSaving(true);
-    try {
-      await setAvailability(weekdayOrder.filter((wd) => rows[wd].on).map((wd) => ({ weekday: wd, start: rows[wd].start, end: rows[wd].end })));
-      onSaved();
-    } catch (e) {
-      toastError(e, "Couldn't save");
-      setSaving(false);
-    }
-  };
-  return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/30 p-4" onClick={onClose}>
-      <div className="w-full max-w-[420px] rounded-2xl border border-border bg-card p-5" onClick={(e) => e.stopPropagation()}>
-        <div className="text-[17px] font-bold">When are you free to study?</div>
-        <p className="mt-1 text-[13px] text-muted-foreground">Sessions only get planned inside these times.</p>
-        <div className="mt-4 space-y-2">
-          {weekdayOrder.map((wd, i) => {
-            const r = rows[wd];
-            return (
-              <div key={wd} className="flex items-center gap-3">
-                <label className="flex w-[72px] items-center gap-2 text-[13.5px] font-semibold">
-                  <input type="checkbox" checked={r.on} onChange={(e) => setRows({ ...rows, [wd]: { ...r, on: e.target.checked } })} className="size-4 accent-[var(--accent)]" />
-                  {DAY[i]}
-                </label>
-                <Input type="time" value={r.start} disabled={!r.on} onChange={(e) => setRows({ ...rows, [wd]: { ...r, start: e.target.value } })} className="h-9 flex-1" />
-                <span className="text-faint">–</span>
-                <Input type="time" value={r.end} disabled={!r.on} onChange={(e) => setRows({ ...rows, [wd]: { ...r, end: e.target.value } })} className="h-9 flex-1" />
-              </div>
-            );
-          })}
-        </div>
-        <div className="mt-5 flex justify-end gap-2">
-          <button type="button" onClick={onClose} className="h-9 rounded-xl px-3 text-[13px] font-semibold text-muted-foreground hover:bg-muted">
-            Cancel
-          </button>
-          <button type="button" disabled={saving} onClick={() => void save()} className="inline-flex h-9 items-center gap-1.5 rounded-xl bg-accent px-3.5 text-[13px] font-semibold text-white hover:bg-accent-dim disabled:opacity-60">
-            {saving && <Loader2 className="size-3.5 animate-spin" />} Save
-          </button>
-        </div>
-      </div>
-    </div>
   );
 }
