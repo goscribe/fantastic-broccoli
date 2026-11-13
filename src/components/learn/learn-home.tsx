@@ -4,6 +4,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { accentForId } from "@/lib/accent-palette";
 import { WeekStrip } from "@/components/learn/week-strip";
 import { SubjectCover } from "@/components/learn/subject-cover";
+import { NotesOutline } from "@/components/learn/notes-outline";
+import type { NotesTopic } from "@/lib/api/notes-outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -265,6 +267,29 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     }
   };
 
+  /** A topic from the organised outline becomes a session on just that topic, grounded in the files it came from. */
+  const [topicStarting, setTopicStarting] = useState<string | null>(null);
+  const studyTopic = async (t: NotesTopic) => {
+    if (!workspaceId || topicStarting) return;
+    setTopicStarting(t.title);
+    try {
+      const files = (wsById.get(workspaceId)?.materials ?? []).filter((m) => t.fileIds.includes(m.id)).map((m) => m.title);
+      const session = await createStudySession({
+        workspaceId,
+        title: t.title,
+        description: t.summary || undefined,
+        depth: "moderate",
+        durationMinutes: 25,
+        topics: [t.title, ...t.points, ...files].join("\n").slice(0, 2000),
+      });
+      if (!session) throw new Error("Could not start a session");
+      router.push(`/workspace/${workspaceId}/session/${session.id}`);
+    } catch (e) {
+      toastError(e, "Could not start a session");
+      setTopicStarting(null);
+    }
+  };
+
   const toggleSelected = (id: string) =>
     setSelected((prev) => {
       const next = new Set(prev);
@@ -407,6 +432,13 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           )}
         </div>
 
+        <NotesOutline
+          key={workspaceId}
+          workspaceId={workspaceId}
+          materials={wsById.get(workspaceId)?.materials ?? []}
+          starting={topicStarting}
+          onStudy={(t) => void studyTopic(t)}
+        />
           </>
         ) : (
           <>

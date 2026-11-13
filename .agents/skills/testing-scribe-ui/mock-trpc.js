@@ -70,6 +70,7 @@ const folders = [
 ];
 
 let wsCounter = 10;
+const notesOutlines = {};
 const createdSessions = {};
 
 function sessionEnvelope(session) {
@@ -93,6 +94,24 @@ function handleProc(path, input) {
       // EMPTY=1 simulates a brand-new user (triggers first-session onboarding).
       if (process.env.EMPTY === "1") return { folders: [], workspaces: [] };
       return { folders, workspaces };
+    case "workspace.getNotesOutline":
+      return notesOutlines[input && input.workspaceId] || null;
+    case "workspace.organizeNotes": {
+      const ws = workspaces.find((w) => w.id === (input && input.workspaceId));
+      const ids = ((ws && (ws.uploads || ws.files || ws.materials)) || []).map((f) => f.id);
+      const outline = {
+        generatedAt: new Date().toISOString(),
+        fileCount: ids.length || 1,
+        topics: [
+          { title: "First law and internal energy", summary: "How heat, work and internal energy are related for an ideal gas.", points: ["The first law is $Q = \\Delta U + W$.", "For a monatomic ideal gas, $\\Delta U = \\frac{3}{2} nR\\,\\Delta T$.", "Work done by the gas is the area under its $pV$ curve."], fileIds: ids.slice(0, 2) },
+          { title: "Gas processes", summary: "Isothermal, adiabatic, isobaric and isovolumetric changes.", points: ["In an adiabatic process $Q = 0$ and $pV^{\\gamma}$ is constant.", "In an isothermal process $\\Delta U = 0$, so $Q = W$.", "In an isovolumetric process $W = 0$."], fileIds: ids.slice(0, 1) },
+          { title: "Heat engines and efficiency", summary: "Engines turn part of the heat taken in into work; Carnot sets the limit.", points: ["Efficiency is $\\eta = W / Q_h$.", "The Carnot efficiency is $1 - T_c / T_h$.", "A clockwise cycle on a $pV$ diagram gives net work out."], fileIds: ids.slice(1, 3) },
+          { title: "Entropy and the second law", summary: "Entropy of an isolated system never decreases.", points: ["Entropy change is $\\Delta S = Q / T$.", "The entropy of an isolated system never decreases."], fileIds: ids.slice(0, 1) },
+        ],
+      };
+      notesOutlines[input.workspaceId] = outline;
+      return { outline, renamed: 1 };
+    }
     case "workspace.getUploadPreviews":
       return [];
     case "workspace.getSharedWith":
