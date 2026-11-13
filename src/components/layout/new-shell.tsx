@@ -5,13 +5,14 @@ import Image from "next/image";
 import { NotificationBell } from "@/components/layout/notification-bell";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Calendar, Folder as FolderIcon, House, LogOut, PanelLeft, PanelLeftClose, Plus, Search, Settings, Sparkles } from "lucide-react";
+import { Calendar, Folder as FolderIcon, House, LogOut, PanelLeft, PanelLeftClose, PlayCircle, Plus, Search, Settings, Sparkles } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import { accentForId } from "@/lib/accent-palette";
 import { useCredits } from "@/lib/credits";
 import { onTreeChanged } from "@/lib/tree-events";
 import { cn } from "@/lib/utils";
+import { AppTourHost, requestAppTour } from "@/components/onboarding/app-tour";
 import { CommandPalette } from "@/components/layout/command-palette";
 import { CreateResourceDialog } from "@/components/workspace/create-dialog";
 import type { Folder, Workspace } from "@/types";
@@ -201,6 +202,21 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           </Link>
         </div>
         <div className="mt-auto flex flex-col gap-1 border-t border-border pt-3">
+          <button
+            type="button"
+            onClick={() => {
+              setMobileOpen(false);
+              requestAppTour();
+            }}
+            title={rail ? "How Scribe works" : undefined}
+            className={cn(
+              "flex h-10 items-center gap-3 rounded-xl px-3 text-left text-[14px] font-medium text-foreground/80 hover:bg-muted",
+              rail && "md:justify-center md:px-0",
+            )}
+          >
+            <PlayCircle className="size-[18px] shrink-0" />
+            <span className={cn(rail && "md:hidden")}>How Scribe works</span>
+          </button>
           <Link
             href="/settings"
             onClick={() => setMobileOpen(false)}
@@ -272,6 +288,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           </div>
         </header>
         {children}
+        <AppTourHost />
       </div>
 
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} folders={folders} rootWorkspaces={rootWorkspaces} />
