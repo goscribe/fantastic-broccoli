@@ -16,6 +16,7 @@ const workspaces = [
   {
     id: "ws-1",
     title: "Chemistry HL",
+    coverUrl: "http://localhost:3000/design/covers/demo-chem.png",
     folderId: null,
     icon: "book",
     color: "green",

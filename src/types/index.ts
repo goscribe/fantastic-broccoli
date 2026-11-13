@@ -297,6 +297,8 @@ export interface Workspace {
   description?: string;
   icon: string;
   color: string;
+  /** Generated cover illustration (transparent landscape, object on the right). */
+  coverUrl?: string;
   course?: string;
   folderId?: string;
   sessions: StudySession[];

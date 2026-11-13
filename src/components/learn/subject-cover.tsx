@@ -6,14 +6,14 @@ import { cn } from "@/lib/utils";
 import { COVER_TINT, coverArtSrc, coverKeyForTitle } from "@/lib/subject-cover";
 
 /**
- * Cover band for a subject: soft two-tone tint with the family's flat
- * illustration sitting on the right. Falls back to the tint alone while the
- * art is missing or still loading.
+ * Cover band for a subject: soft two-tone tint (by subject family) with the
+ * generated illustration on the right; the tint alone until the cover exists.
  */
-export function SubjectCover({ title, className, children }: { title: string; className?: string; children?: React.ReactNode }) {
+export function SubjectCover({ title, coverUrl, className, children }: { title: string; coverUrl?: string; className?: string; children?: React.ReactNode }) {
   const key = coverKeyForTitle(title);
   const [from, to] = COVER_TINT[key];
   const [broken, setBroken] = useState(false);
+  const src = coverUrl ?? coverArtSrc(key);
   return (
     <div
       className={cn("relative overflow-hidden", className)}
@@ -21,13 +21,14 @@ export function SubjectCover({ title, className, children }: { title: string; cl
     >
       {!broken && (
         <Image
-          src={coverArtSrc(key)}
+          key={src}
+          src={src}
           alt=""
-          width={160}
-          height={160}
+          width={480}
+          height={320}
           unoptimized
           onError={() => setBroken(true)}
-          className="pointer-events-none absolute -bottom-3 -right-2 h-[118%] w-auto select-none opacity-95 drop-shadow-[0_6px_10px_rgba(80,50,160,0.18)]"
+          className="pointer-events-none absolute -right-2 bottom-0 h-[92%] w-auto select-none"
         />
       )}
       {children}
