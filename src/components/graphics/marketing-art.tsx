@@ -227,7 +227,7 @@ function CopilotMock() {
         <ScribeMark className="h-5 w-5" />
         <span className="text-[13px] font-semibold">Copilot</span>
         <span className="ml-auto text-[11px] text-muted-foreground">
-          Grounded in this workspace
+          Grounded in your subject
         </span>
       </div>
       <div className="mt-4 space-y-3">
@@ -371,7 +371,7 @@ export function CtaBand({
     <section className="border-t border-border py-10 md:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <ArtStage
-          src="/illustrations/marketing/mkt-celebrate.png"
+          src="/design/cat2-cheer.png"
           tint="accent"
           side="right"
           size="xl"

@@ -1,32 +1,32 @@
 export const subjects = [
   {
     name: "Chemistry",
-    icon: "/illustrations/icons/ws-purple.png",
+    icon: "/design/props/books.png",
     tint: "bg-accent-soft",
   },
   {
     name: "Biology",
-    icon: "/illustrations/icons/ws-emerald.png",
+    icon: "/design/props/notes.png",
     tint: "bg-emerald-500/15",
   },
   {
     name: "Physics",
-    icon: "/illustrations/icons/ws-sky.png",
+    icon: "/design/props/bulb.png",
     tint: "bg-sky/20",
   },
   {
     name: "Math",
-    icon: "/illustrations/icons/ws-amber.png",
+    icon: "/design/props/pencil.png",
     tint: "bg-amber/20",
   },
   {
     name: "English",
-    icon: "/illustrations/icons/ws-pink.png",
+    icon: "/design/props/cards.png",
     tint: "bg-rose/20",
   },
   {
     name: "History",
-    icon: "/illustrations/props/book-blue.png",
+    icon: "/design/props/flag.png",
     tint: "bg-sky/15",
   },
 ];
@@ -45,42 +45,42 @@ export interface Feature {
 
 export const features: Feature[] = [
   {
-    icon: "/illustrations/icons/act-reading.png",
+    icon: "/design/props/books.png",
     title: "Readings with figures",
     description:
       "Focused readings generated from your materials, with the original figures and diagrams pulled straight from your PDFs.",
     tint: "accent",
   },
   {
-    icon: "/illustrations/icons/act-worksheet.png",
+    icon: "/design/props/pencil.png",
     title: "Worksheets with AI grading",
     description:
       "Exam-style questions marked against an AI markscheme — with per-part feedback, not just right or wrong.",
     tint: "sky",
   },
   {
-    icon: "/illustrations/icons/act-flashcards.png",
+    icon: "/design/props/cards.png",
     title: "Flashcards",
     description:
       "Auto-generated decks that target the definitions, formulas, and concepts you actually need to memorise.",
     tint: "amber",
   },
   {
-    icon: "/illustrations/icons/act-cloze.png",
+    icon: "/design/props/notes.png",
     title: "Cloze passages",
     description:
       "Fill-in-the-blank passages built from your notes that force real recall instead of passive recognition.",
     tint: "rose",
   },
   {
-    icon: "/illustrations/icons/act-comprehension.png",
+    icon: "/design/props/bulb.png",
     title: "Comprehension checks",
     description:
       "Quick checkpoints after each reading to confirm you understood it — before you move on.",
     tint: "sky",
   },
   {
-    icon: "/illustrations/icons/act-explain.png",
+    icon: "/design/cat2-think.png",
     title: "AI copilot",
     description:
       "A study partner that knows your course. Ask questions, get explanations, and dig deeper without leaving your session.",
@@ -112,7 +112,7 @@ export const homeScenes: FeatureScene[] = [
     mock: "quiz",
     reverse: true,
     url: "scribe.study/session",
-    art: "/illustrations/marketing/mkt-quiz.png",
+    art: "/design/props/star.png",
     artTint: "amber",
     artSide: "left",
   },
@@ -120,13 +120,13 @@ export const homeScenes: FeatureScene[] = [
     title: "A copilot that already read the PDF",
     body: "Ask mid-session. Answers come from your materials with a citation back to the exact page — and it can extend the plan with extra practice when a topic feels shaky.",
     bullets: [
-      "Grounded in this workspace, not the open web",
+      "Grounded in that subject’s materials, not the open web",
       "Explains worksheet feedback step by step",
       "Sits beside the question when you open it",
     ],
     mock: "copilot",
     url: "scribe.study/session",
-    art: "/illustrations/bot.png",
+    art: "/design/cat2-book.png",
     artTint: "accent",
     artSide: "right",
   },
@@ -135,28 +135,28 @@ export const homeScenes: FeatureScene[] = [
 export const howItWorks = [
   {
     num: "1",
-    title: "Upload your materials",
+    title: "Make a subject, drop in your notes",
     description:
-      "Drop in PDFs, lecture slides, or audio. Scribe parses the text, figures, and diagrams — the stuff your exam will actually use.",
-    art: "/illustrations/marketing/mkt-upload.png",
+      "One subject per course — PDFs, slides, photos of notes, lecture audio. Scribe reads the text, figures and diagrams, so everything it builds comes from your own material.",
+    art: "/design/props/notes.png",
     tint: "sky" as const,
     side: "bottom" as const,
   },
   {
     num: "2",
-    title: "Scribe builds the session",
+    title: "Scribe builds the study session",
     description:
-      "Your materials become a path: readings, checks, worksheets, flashcards. One plan, not five tabs.",
-    art: "/illustrations/marketing/mkt-reading.png",
+      "Tell it what to cover (or just tick a few files) and it builds a 25-minute session: a reading, a check, a worksheet, flashcards. Sessions stack up inside the subject, in order.",
+    art: "/design/props/books.png",
     tint: "accent" as const,
     side: "right" as const,
   },
   {
     num: "3",
-    title: "Study, then ask",
+    title: "Study a bit every day",
     description:
-      "Work through the waypoints. When you get stuck, the copilot answers from your own pages and can add extra practice.",
-    art: "/illustrations/marketing/mkt-mcq.png",
+      "Connect your calendar and the planner slots study times around school and sport, with a streak that counts when you hit your daily goal. Stuck? The copilot answers from your own pages.",
+    art: "/design/props/bulb.png",
     tint: "rose" as const,
     side: "left" as const,
   },
@@ -167,9 +167,9 @@ export const plans = [
     name: "Free",
     price: "$0",
     description:
-      "A taste of Scribe: one workspace, one full session, and a free Quick 5 every day.",
+      "A taste of Scribe: one subject, one full session, and a free Quick 5 every day.",
     features: [
-      "1 workspace · 1 full study session · 1 test · a free Quick 5 every day",
+      "1 subject · 1 full study session · 1 test · a free Quick 5 every day",
       "Upload PDFs, slides, and lecture audio",
       "150 tokens per month",
       "2 GB storage",
@@ -182,7 +182,7 @@ export const plans = [
     price: "$9/mo",
     description: "Great for getting started with focused study sessions.",
     features: [
-      "Unlimited workspaces, study sessions and tests",
+      "Unlimited subjects, study sessions and tests",
       "5,000 tokens per month",
       "Smarter AI model routing — strongest model on every activity",
       "2 GB storage",
@@ -213,27 +213,27 @@ export const sessionPreview: {
   meta: string;
 }[] = [
   {
-    art: "/illustrations/icons/act-reading.png",
+    art: "/design/props/books.png",
     label: "Reading: Enzyme kinetics",
     meta: "12 min",
   },
   {
-    art: "/illustrations/icons/act-comprehension.png",
+    art: "/design/props/bulb.png",
     label: "Comprehension check",
     meta: "4 questions",
   },
   {
-    art: "/illustrations/icons/act-worksheet.png",
+    art: "/design/props/pencil.png",
     label: "Worksheet: Rate equations",
     meta: "6 parts",
   },
   {
-    art: "/illustrations/icons/act-flashcards.png",
+    art: "/design/props/cards.png",
     label: "Flashcards: Key definitions",
     meta: "18 cards",
   },
   {
-    art: "/illustrations/icons/act-cloze.png",
+    art: "/design/props/notes.png",
     label: "Cloze: Michaelis–Menten",
     meta: "1 passage",
   },

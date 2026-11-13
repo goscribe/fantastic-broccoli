@@ -13,14 +13,14 @@ export const faqs = [
   },
   {
     q: "Can I study with classmates?",
-    a: "Workspaces support members, so you can share materials, study sessions, and question banks with your class or study group.",
+    a: "Yes — share a subject with classmates and they get its materials, study sessions and flashcards too.",
   },
   {
     q: "Is my data private?",
-    a: "Your uploads stay in your workspaces and are only used to build your study materials. You can delete materials and generated content at any time.",
+    a: "Your uploads stay in your subjects and are only used to build your study materials. You can delete materials and generated content at any time.",
   },
   {
     q: "How much does it cost?",
-    a: "Scribe is free during early access — no credit card required. Paid plans will be available later with more storage and higher generation limits.",
+    a: "Free to start, no card needed: one subject, one full session and a free Quick 5 every day. Starter ($9/mo) and Pro ($19/mo) remove the limits — see Pricing.",
   },
 ];
