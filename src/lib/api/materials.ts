@@ -232,3 +232,12 @@ export async function fetchUploadPreviews(
   );
   return Array.isArray(rows) ? rows.filter(Boolean) : [];
 }
+
+export interface StudyGuideSection {
+  title: string;
+  excerpt: string;
+}
+
+/** Study-guide sections (Paper 1 / PP2 / Oral / Unit 3 …) found in analyzed files. */
+export const detectSections = (workspaceId: string, fileIds: string[]) =>
+  rpc<{ sections: StudyGuideSection[] }>("workspace.detectSections", "query", { workspaceId, fileIds });
