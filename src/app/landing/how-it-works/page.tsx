@@ -7,7 +7,7 @@ import { homeScenes, howItWorks } from "../data";
 export const metadata: Metadata = {
   title: "How it works",
   description:
-    "Upload your notes, let Scribe build a study session, then work through readings, worksheets, and flashcards — with a copilot that already read the PDF.",
+    "Make a subject, drop in your notes, and Scribe builds study sessions from them — readings, worksheets and flashcards — slotted into your week by the planner.",
   alternates: { canonical: "/landing/how-it-works" },
   openGraph: {
     url: absoluteUrl("/landing/how-it-works"),

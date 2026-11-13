@@ -47,10 +47,10 @@ export default function FeaturesPage() {
               </p>
             </div>
             <ArtStage
-              src="/illustrations/marketing/mkt-reading.png"
+              src="/design/props/books.png"
               tint="sky"
               side="right"
-              size="lg"
+              size="md"
             />
           </div>
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -96,7 +96,7 @@ export default function FeaturesPage() {
                   <ScribeMark className="h-5 w-5" />
                   <span className="text-[13px] font-semibold">Copilot</span>
                   <span className="ml-auto text-[11px] text-muted-foreground">
-                    Grounded in this workspace
+                    Grounded in your subject
                   </span>
                 </div>
                 <div className="mt-4 space-y-3">
@@ -133,7 +133,7 @@ export default function FeaturesPage() {
                 {[
                   "Lecture slides and textbook PDFs, figures included",
                   "Audio recordings of lectures, transcribed for you",
-                  "Notes and handouts, organised into workspaces",
+                  "Notes and handouts, organised into subjects",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2.5 text-sm">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />

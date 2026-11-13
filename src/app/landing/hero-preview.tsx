@@ -138,17 +138,17 @@ export function StatsStrip() {
         {
           value: `${roundedDown(stats.artifacts, 100).toLocaleString()}+`,
           label: "practice artifacts generated",
-          icon: "/illustrations/icons/stat-bolt.png",
+          icon: "/design/props/star.png",
         },
         {
           value: `${roundedDown(stats.activities, 10).toLocaleString()}+`,
           label: "study activities built",
-          icon: "/illustrations/icons/act-flashcards.png",
+          icon: "/design/props/cards.png",
         },
         {
           value: `${stats.countries}`,
           label: "countries studying with Scribe",
-          icon: "/illustrations/flag.png",
+          icon: "/design/props/flag.png",
         },
       ].map((stat) => (
         <div key={stat.label} className="flex flex-col items-center">

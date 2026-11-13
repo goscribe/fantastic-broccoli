@@ -36,14 +36,14 @@ export default function AboutPage() {
             <p className="mt-4 text-muted-foreground text-pretty">
               Not a generic chatbot. Not a question bank from someone else’s
               course. Your slides, your figures, your past papers — organised into
-              one path you can finish.
+              one study session you can finish.
             </p>
           </div>
           <ArtStage
-            src="/illustrations/marketing/mkt-clip.png"
+            src="/design/props/trophy.png"
             tint="rose"
-            side="bottom"
-            size="lg"
+            side="right"
+            size="md"
           />
         </div>
       </section>
@@ -60,7 +60,7 @@ export default function AboutPage() {
             },
             {
               title: "One sitting",
-              body: "A session is a path, not a dashboard of five products. Open it, work through the waypoints, done.",
+              body: "A session is one sitting, not a dashboard of five products. Open it, work through it, done.",
             },
           ].map((item) => (
             <div key={item.title}>
@@ -79,7 +79,7 @@ export default function AboutPage() {
           </h2>
           <div className="mt-10 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
             <ArtStage
-              src="/illustrations/marketing/mkt-worksheet.png"
+              src="/design/props/pencil.png"
               tint="sky"
               side="right"
               size="md"

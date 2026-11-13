@@ -371,7 +371,7 @@ export function CtaBand({
     <section className="border-t border-border py-10 md:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <ArtStage
-          src="/illustrations/marketing/mkt-celebrate.png"
+          src="/design/cat2-cheer.png"
           tint="accent"
           side="right"
           size="xl"

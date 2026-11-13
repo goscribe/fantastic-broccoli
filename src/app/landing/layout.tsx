@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s | Scribe",
   },
   description:
-    "Upload your notes, slides, or PDFs. Scribe turns them into flashcards, quizzes, worksheets, and readings — one complete study session built from your own course material. Free during early access.",
+    "Upload your notes, slides, or PDFs. Scribe turns them into flashcards, quizzes, worksheets, and readings — organised into study sessions inside each subject, built from your own course material, with a planner that fits them around your week.",
   openGraph: {
     title: "Scribe — AI Study Tool for Students",
   },
