@@ -626,7 +626,7 @@ function SubjectsGrid({
         <button type="button" onClick={onNew} className="flex min-h-[150px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border text-center hover:border-accent/60 hover:bg-muted/40">
           <Image src="/design/cat2-sleep.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
           <div className="text-[14px] font-semibold">New subject</div>
-          <div className="text-[12px] text-faint">Drop notes, get a path</div>
+          <div className="text-[12px] text-faint">Drop notes, get sessions</div>
         </button>
       </div>
     </div>
