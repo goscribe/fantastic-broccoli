@@ -23,7 +23,7 @@ const en = {
     "Scribe couldn't build a study plan for this session. Retry with the same settings, or delete it.",
   "session.retryGeneration": "Retry generation",
   "session.deleteSession": "Delete session",
-  "session.backToWorkspace": "Back to workspace",
+  "session.backToWorkspace": "Back to subject",
   "session.skip": "Skip",
   "session.cheerFirst": "Great start — one down already!",
   "session.cheerHalf": "Halfway there — keep the momentum!",

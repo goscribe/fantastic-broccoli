@@ -125,14 +125,14 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               </Link>
             );
           })}
-          <button
-            type="button"
-            onClick={() => setCreating("workspace")}
+          <Link
+            href="/new-subject"
+            onClick={() => setMobileOpen(false)}
             className="flex h-9 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium text-accent hover:bg-muted"
           >
             <Plus className="size-4" />
             New subject
-          </button>
+          </Link>
         </div>
         <div className="mt-auto flex flex-col gap-0.5 pt-3">
           <Link
