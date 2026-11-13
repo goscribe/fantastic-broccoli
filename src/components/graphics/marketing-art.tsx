@@ -227,7 +227,7 @@ function CopilotMock() {
         <ScribeMark className="h-5 w-5" />
         <span className="text-[13px] font-semibold">Copilot</span>
         <span className="ml-auto text-[11px] text-muted-foreground">
-          Grounded in this workspace
+          Grounded in your subject
         </span>
       </div>
       <div className="mt-4 space-y-3">
