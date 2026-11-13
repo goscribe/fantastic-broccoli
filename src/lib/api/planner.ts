@@ -67,3 +67,8 @@ export const setAvailability = (slots: AvailabilitySlot[]) =>
 /** Move a block (date/start/end) and/or assign it to a subject (workspaceId). */
 export const overrideBlock = (input: { weekStart: string; id: string; date?: string; start?: number; end?: number; workspaceId?: string }) =>
   rpc<{ ok: boolean }>("planner.overrideBlock", "mutation", input);
+/** Learner draws a block on the agenda. */
+export const addBlock = (input: { weekStart: string; date: string; start: number; end: number; workspaceId?: string; title?: string }) =>
+  rpc<{ id: string }>("planner.addBlock", "mutation", input);
+export const removeBlock = (input: { weekStart: string; id: string }) =>
+  rpc<{ ok: boolean }>("planner.removeBlock", "mutation", input);

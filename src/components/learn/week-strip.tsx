@@ -4,17 +4,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { CalendarDays, Loader2, Settings2, Upload } from "lucide-react";
+import { CalendarDays, Loader2, Settings2, Upload, X } from "lucide-react";
 import { PlanSetupWizard } from "@/components/learn/plan-setup-wizard";
 import {
   fetchPlannerWeek,
+  addBlock,
   overrideBlock,
+  removeBlock,
   type PlannerSlot,
 } from "@/lib/api/planner";
 import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
 import { createStudySession } from "@/lib/api/study";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { accentForId } from "@/lib/accent-palette";
 import { toastError } from "@/lib/toast";
 
 const DAY = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -31,6 +34,8 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
   const [dragId, setDragId] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const params = useSearchParams();
+  const [draw, setDraw] = useState<{ date: string; from: number; to: number } | null>(null);
+  const [pick, setPick] = useState<{ date: string; start: number; end: number } | null>(null);
   const [setupOpen, setSetupOpen] = useState(params.get("setup") === "1");
   const fileRef = useRef<HTMLInputElement>(null);
   const pendingSlot = useRef<PlannerSlot | null>(null);
@@ -81,6 +86,40 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
   };
 
   const subjectName = (id?: string) => subjects.find((s) => s.id === id)?.title;
+
+  const snap = (m: number) => Math.round(m / 15) * 15;
+  const minuteAt = (el: HTMLElement, clientY: number) => {
+    const rect = el.getBoundingClientRect();
+    const frac = (clientY - rect.top - 26) / H;
+    return Math.max(lo, Math.min(hi, snap(lo + frac * span)));
+  };
+  const commitDraw = () => {
+    if (!draw) return;
+    const start = Math.min(draw.from, draw.to);
+    const end = Math.max(draw.from, draw.to);
+    setDraw(null);
+    if (end - start >= 15) setPick({ date: draw.date, start, end });
+  };
+  const create = async (workspaceId?: string) => {
+    if (!data || !pick) return;
+    const p = pick;
+    setPick(null);
+    try {
+      await addBlock({ weekStart: data.weekStart, ...p, workspaceId });
+      await refresh();
+    } catch (e) {
+      toastError(e, "Couldn't add that block");
+    }
+  };
+  const remove = async (id: string) => {
+    if (!data) return;
+    try {
+      await removeBlock({ weekStart: data.weekStart, id });
+      await refresh();
+    } catch (e) {
+      toastError(e, "Couldn't remove that block");
+    }
+  };
 
   const toMin = (t: string) => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
   const all = (data?.days ?? []).flatMap((d) => d.slots.map((s) => [s.start, s.end])).flat();
@@ -155,9 +194,26 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
                   e.preventDefault();
                   void moveTo(d.date);
                 }}
-                className={cn("relative rounded-xl p-1.5 transition-colors", dragId && "ring-1 ring-dashed ring-accent/40", on && "bg-accent-soft/40")}
-                style={{ height: H + 26 }}
+                onPointerDown={(e) => {
+                  if (e.button !== 0 || (e.target as HTMLElement).closest("[data-block]")) return;
+                  const m = minuteAt(e.currentTarget, e.clientY);
+                  setDraw({ date: d.date, from: m, to: m });
+                  e.currentTarget.setPointerCapture(e.pointerId);
+                }}
+                onPointerMove={(e) => {
+                  if (draw && draw.date === d.date) setDraw({ ...draw, to: minuteAt(e.currentTarget, e.clientY) });
+                }}
+                onPointerUp={commitDraw}
+                onPointerCancel={() => setDraw(null)}
+                className={cn("relative select-none rounded-xl p-1.5 transition-colors", draw ? "cursor-row-resize" : "cursor-crosshair", dragId && "ring-1 ring-dashed ring-accent/40", on && "bg-accent-soft/40")}
+                style={{ height: H + 26, touchAction: "none" }}
+                title="Click and drag to add a study time"
               >
+                {draw && draw.date === d.date && (
+                  <span className="pointer-events-none absolute inset-x-1.5 rounded-lg border-2 border-dashed border-accent bg-accent-soft/70 px-1.5 py-1 text-[10.5px] font-semibold text-accent" style={{ top: 26 + y(Math.min(draw.from, draw.to)), height: Math.max(8, y(Math.max(draw.from, draw.to)) - y(Math.min(draw.from, draw.to))) }}>
+                    {hhmm(Math.min(draw.from, draw.to))}–{hhmm(Math.max(draw.from, draw.to))}
+                  </span>
+                )}
                 <div className={cn("px-1 text-[11px] font-semibold leading-[18px]", on ? "text-accent" : past ? "text-faint/60" : "text-faint")}>
                   {DAY[i]} <span className="font-medium">{Number(d.date.slice(8))}</span>
                 </div>
@@ -170,6 +226,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
                   return (
                     <div
                       key={s.id}
+                      data-block
                       style={{ position: "absolute", left: 6, right: 6, top: 26 + y(s.start), height: Math.max(30, y(s.end) - y(s.start)) }}
                       draggable
                       onDragStart={(e) => {
@@ -205,6 +262,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
                       )}
                       title={s.sessionId ? "Open session" : "Click or drop notes to build this session"}
                     >
+                      <button type="button" aria-label="Remove" onClick={(e) => { e.stopPropagation(); void remove(s.id); }} className="absolute right-1 top-1 hidden rounded p-0.5 hover:bg-white/60 group-hover:block"><X className="size-3" /></button>
                       <div className="truncate font-semibold">{hhmm(s.start)} <span className="font-medium opacity-80">{s.title}</span></div>
                       <div className={cn("mt-0.5 flex items-center gap-1 text-[10.5px] opacity-70", y(s.end) - y(s.start) < 34 && "hidden")}>
                         {busy ? <Loader2 className="size-3 animate-spin" /> : s.sessionId ? null : <Upload className="size-3" />}
@@ -225,6 +283,22 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
         </p>
       )}
 
+      {pick && (
+        <div className="fixed inset-0 z-50 grid place-items-center bg-black/30 p-4" onClick={() => setPick(null)}>
+          <div className="w-full max-w-[360px] rounded-2xl border border-border bg-card p-5" onClick={(e) => e.stopPropagation()}>
+            <div className="text-[16px] font-bold">Study {hhmm(pick.start)}–{hhmm(pick.end)}</div>
+            <p className="mt-0.5 text-[13px] text-muted-foreground">{new Date(pick.date + "T12:00:00").toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "short" })} · which subject?</p>
+            <div className="mt-3 grid gap-1.5">
+              {subjects.map((s) => (
+                <button key={s.id} type="button" onClick={() => void create(s.id)} className="flex h-10 items-center gap-2.5 rounded-xl border border-border px-3 text-left text-[13.5px] font-semibold hover:border-accent hover:bg-accent-soft">
+                  <span className="size-2.5 rounded-full" style={{ background: accentForId(s.id) }} /> {s.title}
+                </button>
+              ))}
+              <button type="button" onClick={() => void create()} className="h-10 rounded-xl px-3 text-[13px] font-semibold text-muted-foreground hover:bg-muted">Decide later</button>
+            </div>
+          </div>
+        </div>
+      )}
       {setupOpen && data && (
         <PlanSetupWizard
           plan={data.plan}
