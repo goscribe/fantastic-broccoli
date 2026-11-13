@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { accentForId } from "@/lib/accent-palette";
 import { WeekStrip } from "@/components/learn/week-strip";
+import { SubjectCover } from "@/components/learn/subject-cover";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -598,7 +599,7 @@ function SubjectsGrid({
         </button>
       </div>
       <div className="mt-3 grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-3">
-        {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[150px] rounded-2xl" />)}
+        {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[214px] rounded-2xl" />)}
         {workspaces.map((w) => {
           const own = sessions
             .filter((x) => x.workspaceId === w.id)
@@ -607,8 +608,9 @@ function SubjectsGrid({
           const current = own.find((x) => x.status !== "completed");
           const pct = own.length ? done / own.length : 0;
           return (
-            <Link key={w.id} href={`/workspace/${w.id}`} className="group flex flex-col rounded-2xl border border-border bg-card p-4 transition-colors hover:border-accent/50">
-              <div className="flex items-center gap-3">
+            <Link key={w.id} href={`/workspace/${w.id}`} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-colors hover:border-accent/50">
+              <SubjectCover title={w.title} className="h-[84px]" />
+              <div className="flex items-center gap-3 p-4 pb-0">
                 <Ring pct={pct} size={44} stroke={10} color={accentForId(w.id)} />
                 <div className="min-w-0">
                   <div className="truncate text-[15px] font-semibold">{w.title}</div>
@@ -617,14 +619,14 @@ function SubjectsGrid({
                   </div>
                 </div>
               </div>
-              <div className="mt-4 flex items-center justify-between text-[12.5px]">
+              <div className="mt-4 flex items-center justify-between p-4 pt-0 text-[12.5px]">
                 <span className="truncate text-muted-foreground">{current ? (current.generating ? "Building the next session…" : `Next: ${current.title}`) : own.length ? "All caught up" : "No sessions yet"}</span>
                 <span className="ml-2 shrink-0 font-semibold text-accent group-hover:underline">{current ? "Continue" : "Open"}</span>
               </div>
             </Link>
           );
         })}
-        <button type="button" onClick={onNew} className="flex min-h-[150px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border text-center hover:border-accent/60 hover:bg-muted/40">
+        <button type="button" onClick={onNew} className="flex min-h-[214px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border text-center hover:border-accent/60 hover:bg-muted/40">
           <Image src="/design/cat2-sleep.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
           <div className="text-[14px] font-semibold">New subject</div>
           <div className="text-[12px] text-faint">Drop notes, get sessions</div>
