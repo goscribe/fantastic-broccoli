@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 
 export const metadata: Metadata = {
   title: {
-    default: "Turn PDFs & Notes into Flashcards, Quizzes & Study Guides",
+    default: "Turn PDFs & Notes into Study Sessions, Flashcards & Quizzes",
     template: "%s | Scribe",
   },
   description:

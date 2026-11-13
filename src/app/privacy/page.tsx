@@ -16,7 +16,7 @@ export default function PrivacyPage() {
           with the copilot).
         </p>
         <p>
-          We also keep an audit log of account and workspace actions — what
+          We also keep an audit log of account and subject actions — what
           happened, when, the route involved, and the originating IP address —
           to secure accounts, debug failures, and investigate abuse.
         </p>
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
         <p>
           Your uploads are used solely to build your study materials: parsing
           documents, transcribing audio, and generating readings, worksheets,
-          flashcards, study guides, and podcast episodes for your workspaces.
+          flashcards, study guides, and podcast episodes for your subjects.
           Material content is sent to AI model providers to perform this
           generation. We do not sell your data or use your materials to train
           models.
@@ -34,7 +34,7 @@ export default function PrivacyPage() {
       <LegalSection heading="Quality review by our team">
         <p>
           Because study content is AI-generated, authorised Scribe staff can
-          access workspaces and the content generated in them through an
+          access subjects and the content generated in them through an
           internal admin console. We use this to check generation quality,
           debug failed or low-quality output, curate content that is inaccurate
           or unsafe, respond to support requests, and investigate abuse. Access
@@ -44,7 +44,7 @@ export default function PrivacyPage() {
       </LegalSection>
       <LegalSection heading="Sharing">
         <p>
-          Content in a workspace is visible to that workspace&apos;s members.
+          Content in a subject is visible to the people you share that subject with.
           You control who is invited. We share data with service providers only
           as needed to run Scribe (hosting, storage, AI generation, email, and
           payments), and with authorities where we are legally required to.
@@ -53,7 +53,7 @@ export default function PrivacyPage() {
       <LegalSection heading="Retention and deletion">
         <p>
           You can delete uploaded materials, generated study guides, and other
-          content from your workspaces at any time; deleted files are also
+          content from your subjects at any time; deleted files are also
           removed from storage. Deleting your account removes your personal
           data from our systems. Audit-log entries are kept for a limited
           retention window and then purged automatically; billing records are

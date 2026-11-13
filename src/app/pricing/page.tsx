@@ -75,7 +75,7 @@ function PlanCard({
         </li>
         {plan.priceDollars === 0 && (
           <li className="flex items-center gap-2">
-            <Check className="h-4 w-4 text-accent" />1 workspace · 1 full study
+            <Check className="h-4 w-4 text-accent" />1 subject · 1 full study
             session · 1 test · a free Quick 5 every day
           </li>
         )}
@@ -83,7 +83,7 @@ function PlanCard({
           <>
             <li className="flex items-center gap-2">
               <Check className="h-4 w-4 text-accent" />
-              Unlimited workspaces, study sessions and tests
+              Unlimited subjects, study sessions and tests
             </li>
             <li className="flex items-center gap-2">
               <Check className="h-4 w-4 text-accent" />

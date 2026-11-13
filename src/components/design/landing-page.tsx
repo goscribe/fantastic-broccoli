@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, Play, Star } from "lucide-react";
+import { ArrowRight, Check, Star } from "lucide-react";
 import { Ring, WeekBars } from "@/components/design/charts";
 import { T } from "@/components/design/tokens";
 import { StatsBand } from "@/components/design/stats-band";
@@ -69,8 +69,8 @@ export function LandingBody() {
       <section className="relative overflow-hidden">
         <div className="relative z-10 mx-auto flex w-full max-w-[1120px] flex-col items-center px-6 pt-12 text-center">
           <h1 className="text-[56px] font-extrabold leading-[1.02] tracking-[-0.02em] text-accent md:text-[68px]">study from your notes.<br />actually remember it.</h1>
-          <p className="mt-5 max-w-[560px] text-[18px] text-muted-foreground">Drop in a PDF, slides or a photo of your notes. Scribe turns them into quizzes, worksheets and flashcards that know what you’re about to forget.</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3"><Link href="/signup"><Btn>Get started<ArrowRight className="size-5" /></Btn></Link><Link href="/landing/how-it-works" className="inline-flex h-14 items-center gap-2 rounded-2xl border-2 border-border px-6 text-[16px] font-bold text-accent"><Play className="size-4" />I already have an account</Link></div>
+          <p className="mt-5 max-w-[560px] text-[18px] text-muted-foreground">Make a subject, drop in a PDF, slides or a photo of your notes. Scribe builds study sessions from them and fits them into your week.</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3"><Link href="/signup"><Btn>Get started<ArrowRight className="size-5" /></Btn></Link><Link href="/login" className="inline-flex h-14 items-center gap-2 rounded-2xl border-2 border-border px-6 text-[16px] font-bold text-accent">I already have an account</Link></div>
         </div>
         <div className="relative mt-10 h-[460px]">
           <svg viewBox="0 0 1440 460" preserveAspectRatio="none" className="absolute inset-0 h-full w-full"><path d="M0 140 C 360 40, 1080 40, 1440 140 L1440 460 L0 460 Z" fill="#7c3aed" /></svg>
@@ -129,7 +129,7 @@ export function LandingBody() {
 
       {/* 3 lavender: twenty minutes a day */}
       <Band bg={LAV}>
-        <Headline sub="A plan that fits around school, a streak that means something, and a reminder that doesn’t nag.">twenty minutes a day. that’s the whole trick.</Headline>
+        <Headline sub="Connect your calendar and the planner fits sessions around school. Your streak counts when you hit the daily goal, and one evening reminder is all you get.">twenty minutes a day. that’s the whole trick.</Headline>
         <div className="design-root relative mx-auto w-full max-w-[460px] rounded-3xl bg-white p-6 shadow-[0_30px_60px_-20px_rgba(76,29,149,.25)]">
           <div className="flex items-baseline justify-between"><span className="text-[15px] font-bold">This week</span><span className="text-[13px] font-bold text-accent">4-day streak</span></div>
           <div className="mt-3"><WeekBars mins={[28, 32, 25, 30, 12, 0, 0]} height={120} accent={T.violet} /></div>
@@ -152,7 +152,7 @@ export function LandingBody() {
         <div className="mx-auto w-full max-w-[1120px] px-6 py-24">
           <h2 className="text-center text-[40px] font-extrabold tracking-tight">three steps. you do one.</h2>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {[["/design/props/notes.png", "drop in what you have", "PDF, slides, a photo of your notes, a lecture link."], ["/design/props/bulb.png", "scribe writes the practice", "Readings, Quick 5s, cloze, worksheets with a markscheme."], ["/design/props/clock.png", "twenty minutes a day", "A plan, a streak, flashcards that come back on time."]].map(([img, t, d], i) => (
+            {[["/design/props/notes.png", "make a subject, drop in what you have", "One subject per course: PDFs, slides, a photo of your notes, a lecture link."], ["/design/props/bulb.png", "scribe builds the session", "A reading, a Quick 5, cloze and a marked worksheet, in one sitting."], ["/design/props/clock.png", "twenty minutes a day", "The planner picks the time, the streak keeps you honest, flashcards come back on time."]].map(([img, t, d], i) => (
               <div key={t} className="rounded-[28px] border border-border bg-white p-7">
                 <div className="flex items-center justify-between"><span className="grid size-10 place-items-center rounded-full bg-accent text-[15px] font-extrabold text-white">{i + 1}</span><Image src={img} alt="" width={120} height={120} unoptimized className="size-[96px] object-contain" /></div>
                 <h3 className="mt-5 text-[22px] font-extrabold leading-tight">{t}</h3>
@@ -185,7 +185,7 @@ export function LandingBody() {
         <div className="mx-auto flex w-full max-w-[1120px] flex-col items-center px-6 pb-28 pt-24 text-center">
           <Image src="/design/cat2-wave.png" alt="" width={200} height={200} unoptimized className="cat-wiggle size-[180px] object-contain" />
           <h2 className="mt-4 text-[44px] font-extrabold leading-[1.05] tracking-tight">tonight’s revision, sorted in five minutes.</h2>
-          <div className="mt-8 flex flex-wrap justify-center gap-3"><Link href="/signup"><Btn>Get started</Btn></Link><Link href="/signup?sample=1" className="inline-flex h-14 items-center rounded-2xl border-2 border-border bg-white px-6 text-[16px] font-bold text-accent">Try the sample</Link></div>
+          <div className="mt-8 flex flex-wrap justify-center gap-3"><Link href="/signup"><Btn>Get started</Btn></Link><Link href="/landing/how-it-works" className="inline-flex h-14 items-center rounded-2xl border-2 border-border bg-white px-6 text-[16px] font-bold text-accent">See how it works</Link></div>
           <ul className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[14px] font-semibold text-muted-foreground">{["Free to start", "No card", "First session in 5 minutes"].map((l) => <li key={l} className="flex items-center gap-1.5"><Check className="size-4" strokeWidth={3} />{l}</li>)}</ul>
         </div>
       </section>

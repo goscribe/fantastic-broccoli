@@ -4,10 +4,10 @@ export const siteUrl =
 export const siteName = "Scribe";
 
 export const defaultTitle =
-  "Scribe — Turn PDFs & Notes into Flashcards, Quizzes & Study Guides";
+  "Scribe — Turn PDFs & Notes into Study Sessions, Flashcards & Quizzes";
 
 export const defaultDescription =
-  "Upload your notes, slides, or PDFs and Scribe turns them into flashcards, quizzes, worksheets, and readings — one complete study session built from your own course material. Free during early access.";
+  "Make a subject, upload your notes, slides, or PDFs, and Scribe builds study sessions from them — readings, quizzes, worksheets, and flashcards — with a planner that fits them into your week. Free to start.";
 
 export const keywords = [
   "PDF to flashcards",
