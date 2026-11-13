@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { accentForId } from "@/lib/accent-palette";
+import { WeekStrip } from "@/components/learn/week-strip";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -393,7 +394,10 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
 
           </>
         ) : (
+          <>
+            <WeekStrip subjects={workspaces.map((w) => ({ id: w.id, title: w.title }))} />
           <SubjectsGrid workspaces={workspaces} sessions={sessions} loading={loading} onNew={() => router.push("/new-subject")} />
+          </>
         )}
 
         {workspaceId && (
