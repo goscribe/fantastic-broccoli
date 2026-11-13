@@ -3,21 +3,19 @@
 import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { COVER_TINT, coverArtSrc, coverKeyForTitle } from "@/lib/subject-cover";
+import { coverArtSrc, coverKeyForTitle } from "@/lib/subject-cover";
 
 /**
- * Cover band for a subject: soft two-tone tint (by subject family) with the
- * generated illustration on the right; the tint alone until the cover exists.
+ * Cover surface for a subject card: white card with the generated illustration
+ * on the right (family fallback art until the cover exists).
  */
 export function SubjectCover({ title, coverUrl, className, children }: { title: string; coverUrl?: string; className?: string; children?: React.ReactNode }) {
   const key = coverKeyForTitle(title);
-  const [from, to] = COVER_TINT[key];
   const [broken, setBroken] = useState(false);
   const src = coverUrl ?? coverArtSrc(key);
   return (
     <div
-      className={cn("relative overflow-hidden", className)}
-      style={{ background: `linear-gradient(135deg, ${from} 0%, ${to} 100%)` }}
+      className={cn("relative overflow-hidden bg-card", className)}
     >
       {!broken && (
         <Image

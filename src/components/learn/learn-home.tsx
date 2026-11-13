@@ -636,15 +636,15 @@ function SubjectsGrid({
                 <div className="flex items-center gap-3">
                   <Ring pct={pct} size={44} stroke={10} color={accentForId(w.id)} />
                   <div className="min-w-0 max-w-[62%]">
-                    <div className="line-clamp-2 text-[15px] font-semibold leading-tight text-[#1f1b2e]">{w.title}</div>
-                    <div className="text-[12px] text-[#1f1b2e]/60">
+                    <div className="line-clamp-2 text-[15px] font-semibold leading-tight text-foreground">{w.title}</div>
+                    <div className="text-[12px] text-muted-foreground">
                       {w.materials.length} material{w.materials.length === 1 ? "" : "s"} · {done}/{own.length} sessions
                     </div>
                   </div>
                 </div>
                 <div className="mt-4 flex items-center justify-between text-[12.5px]">
-                  <span className="truncate text-[#1f1b2e]/70">{current ? (current.generating ? "Building the next session…" : `Next: ${current.title}`) : own.length ? "All caught up" : "No sessions yet"}</span>
-                  <span className="ml-2 inline-flex h-7 shrink-0 items-center gap-1 rounded-full bg-white/90 px-3 font-semibold text-[#1f1b2e] shadow-sm group-hover:bg-white">{current ? "Continue" : "Open"}</span>
+                  <span className="truncate text-muted-foreground">{current ? (current.generating ? "Building the next session…" : `Next: ${current.title}`) : own.length ? "All caught up" : "No sessions yet"}</span>
+                  <span className="ml-2 inline-flex h-7 shrink-0 items-center gap-1 rounded-full bg-muted px-3 font-semibold text-foreground group-hover:bg-accent/10 group-hover:text-accent">{current ? "Continue" : "Open"}</span>
                 </div>
               </Link>
             </SubjectCover>
