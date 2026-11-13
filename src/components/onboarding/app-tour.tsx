@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { X } from "lucide-react";
+import { Volume2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const SEEN_KEY = "scribe.tour.v2";
 const VIDEO = "/onboarding/tour.mp4";
 const POSTER = "/onboarding/tour-poster.jpg";
+const BACKDROP = "/onboarding/backdrop.mp4";
+const BACKDROP_POSTER = "/onboarding/backdrop.jpg";
 
 /** Chapters of the walkthrough video; `at` is where each starts, in seconds. */
 const CHAPTERS = [
@@ -52,11 +54,23 @@ function closeAppTour() {
   notify();
 }
 
-/** The walkthrough video with its chapters: click one to jump there; the current one is described underneath. */
+/** The narrated walkthrough video with its chapters: click one to jump there; the current one is described underneath. */
 export function TourVideo({ autoPlay = false, className }: { autoPlay?: boolean; className?: string }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [time, setTime] = useState(0);
+  const [muted, setMuted] = useState(true);
   const active = CHAPTERS.reduce((cur, c, i) => (time >= c.at ? i : cur), 0);
+
+  // Browsers only start a video with sound after a click on the page; otherwise it starts muted with a "Turn sound on" button.
+  useEffect(() => {
+    const v = ref.current;
+    if (!v || !autoPlay) return;
+    v.muted = false;
+    v.play().catch(() => {
+      v.muted = true;
+      void v.play().catch(() => {});
+    });
+  }, [autoPlay]);
 
   const jump = (at: number) => {
     const v = ref.current;
@@ -66,23 +80,54 @@ export function TourVideo({ autoPlay = false, className }: { autoPlay?: boolean;
     void v.play().catch(() => {});
   };
 
+  const unmute = () => {
+    const v = ref.current;
+    if (!v) return;
+    v.muted = false;
+    void v.play().catch(() => {});
+  };
+
   return (
     <div className={className}>
-      <video
-        ref={ref}
-        src={VIDEO}
-        poster={POSTER}
-        width={1280}
-        height={800}
-        controls
-        muted
-        playsInline
-        autoPlay={autoPlay}
-        preload={autoPlay ? "auto" : "metadata"}
-        onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
-        aria-label="Walkthrough of Scribe: subjects, notes, study sessions and the planner"
-        className="aspect-[16/10] w-full rounded-xl border border-border bg-muted"
-      />
+      <div
+        className="relative overflow-hidden rounded-xl border border-border bg-muted bg-cover bg-center p-2 sm:p-4"
+        style={{ backgroundImage: `url(${BACKDROP_POSTER})` }}
+      >
+        <video
+          src={BACKDROP}
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden
+          tabIndex={-1}
+          className="pointer-events-none absolute inset-0 size-full object-cover motion-reduce:hidden"
+        />
+        <video
+          ref={ref}
+          src={VIDEO}
+          poster={POSTER}
+          width={1280}
+          height={800}
+          controls
+          muted
+          playsInline
+          preload={autoPlay ? "auto" : "metadata"}
+          onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
+          onVolumeChange={(e) => setMuted(e.currentTarget.muted)}
+          aria-label="Narrated walkthrough of Scribe: subjects, notes, study sessions and the planner"
+          className="relative aspect-[16/10] w-full rounded-lg border border-border bg-card"
+        />
+        {muted && (
+          <button
+            type="button"
+            onClick={unmute}
+            className="absolute right-3.5 top-3.5 inline-flex h-8 items-center gap-1.5 rounded-full border border-border bg-card px-3 text-[12px] font-semibold text-foreground hover:border-border-strong sm:right-6 sm:top-6 sm:h-9 sm:px-3.5 sm:text-[13px]"
+          >
+            <Volume2 className="size-4" /> Turn sound on
+          </button>
+        )}
+      </div>
       <ol className="mt-3 flex flex-wrap gap-1.5">
         {CHAPTERS.map((c, i) => (
           <li key={c.title}>
