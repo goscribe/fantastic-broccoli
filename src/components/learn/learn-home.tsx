@@ -336,7 +336,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             </button>
           </div>
           {defaultWorkspace && (
-            <div className="mt-3 flex gap-2 overflow-x-auto">
+            <div className="mt-3 flex gap-2 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {["Make a study session from everything here", "Flashcards from my latest upload", "Explain what I got wrong last time", "Mock paper, section A"].map((c) => (
                 <button key={c} type="button" onClick={() => ask(c)} className="whitespace-nowrap rounded-full border border-border px-3 py-1.5 text-[12.5px] font-semibold hover:bg-muted">
                   {c}
@@ -616,7 +616,7 @@ function SubjectsGrid({
           <Plus className="size-3.5" /> New subject
         </button>
       </div>
-      <div className="mt-3 grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-3">
+      <div className="mt-3 grid grid-cols-1 gap-3.5 sm:grid-cols-2 xl:grid-cols-3">
         {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[172px] rounded-2xl" />)}
         {workspaces.map((w) => {
           const own = sessions

@@ -229,7 +229,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
           </div>
         )}
         <div className="mt-3 overflow-x-auto rounded-2xl border border-border bg-card">
-        <div className={cn("grid gap-1.5 p-2", !mobile && "min-w-[640px]")} style={{ gridTemplateColumns: mobile ? "40px 1fr" : "40px repeat(7, 1fr)" }}>
+        <div className={cn("grid gap-1.5 p-2", !mobile && "min-w-[560px]")} style={{ gridTemplateColumns: mobile ? "40px 1fr" : "40px repeat(7, 1fr)" }}>
           <div className="relative" style={{ height: H + 26, marginTop: 0 }}>
             {hours.map((h) => (
               <span key={h} className="absolute right-1 -translate-y-1/2 text-[10px] text-faint" style={{ top: 26 + y(h) }}>{hhmm(h)}</span>

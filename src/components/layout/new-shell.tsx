@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { NotificationBell } from "@/components/layout/notification-bell";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Calendar, Folder as FolderIcon, House, LogOut, Plus, Search, Settings, Sparkles } from "lucide-react";
+import { Calendar, Folder as FolderIcon, House, LogOut, PanelLeft, PanelLeftClose, Plus, Search, Settings, Sparkles } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import { accentForId } from "@/lib/accent-palette";
@@ -22,6 +22,38 @@ const NAV = [
   { href: "/planner", label: "Planner", icon: Calendar },
 ];
 
+const RAIL_KEY = "scribe.sidebar.rail";
+const NARROW = "(max-width: 1179px)";
+const railListeners = new Set<() => void>();
+
+function setRailPref(rail: boolean) {
+  localStorage.setItem(RAIL_KEY, rail ? "1" : "0");
+  railListeners.forEach((l) => l());
+}
+
+/** Icon-only rail on desktop: the learner's choice if they made one, otherwise automatic on narrow windows. */
+function useRail(): boolean {
+  const pref = useSyncExternalStore(
+    (cb) => {
+      railListeners.add(cb);
+      return () => {
+        railListeners.delete(cb);
+      };
+    },
+    () => localStorage.getItem(RAIL_KEY),
+    () => null,
+  );
+  const narrow = useSyncExternalStore(
+    (cb) => {
+      const m = window.matchMedia(NARROW);
+      m.addEventListener("change", cb);
+      return () => m.removeEventListener("change", cb);
+    },
+    () => window.matchMedia(NARROW).matches,
+    () => false,
+  );
+  return pref === null ? narrow : pref === "1";
+}
 
 /** Redesign app frame: left rail with nav + workspaces, slim top bar, page content. */
 export function NewShell({ children }: { children: React.ReactNode }) {
@@ -46,6 +78,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
     return out;
   }, [folders, rootWorkspaces]);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const rail = useRail();
   const [treeLoading, setTreeLoading] = useState(true);
 
   useEffect(() => {
@@ -79,32 +112,47 @@ export function NewShell({ children }: { children: React.ReactNode }) {
     <div className="design-root flex h-dvh overflow-hidden bg-white text-foreground">
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[232px] shrink-0 flex-col border-r border-border bg-white px-3 py-5 transition-transform md:static md:translate-x-0",
+          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:translate-x-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
+          rail && "md:w-[68px] md:px-2.5",
         )}
       >
-        <Link href="/" className="mb-5 flex items-center gap-2.5 px-2" onClick={() => setMobileOpen(false)}>
-          <Image src="/logo.png" alt="Scribe" width={28} height={28} />
-          <span className="text-[17px] font-bold tracking-tight">Scribe</span>
-        </Link>
-        <nav className="flex flex-col gap-0.5">
+        <div className={cn("mb-6 flex items-center justify-between gap-2 pl-2", rail && "md:flex-col md:gap-3 md:pl-0")}>
+          <Link href="/" className="flex items-center gap-2.5" onClick={() => setMobileOpen(false)}>
+            <Image src="/logo.png" alt="Scribe" width={28} height={28} />
+            <span className={cn("text-[17px] font-bold tracking-tight", rail && "md:hidden")}>Scribe</span>
+          </Link>
+          <button
+            type="button"
+            onClick={() => setRailPref(!rail)}
+            aria-label={rail ? "Expand sidebar" : "Collapse sidebar"}
+            title={rail ? "Expand sidebar" : "Collapse sidebar"}
+            className="hidden size-8 place-items-center rounded-lg text-faint hover:bg-muted hover:text-foreground md:grid"
+          >
+            {rail ? <PanelLeft className="size-[18px]" /> : <PanelLeftClose className="size-[18px]" />}
+          </button>
+        </div>
+        <nav className="flex flex-col gap-1">
           {NAV.map(({ href, label, icon: Icon }) => (
             <Link
               key={href}
               href={href}
               onClick={() => setMobileOpen(false)}
+              title={rail ? label : undefined}
               className={cn(
                 "flex h-10 items-center gap-3 rounded-xl px-3 text-[14px] font-medium text-foreground/80 hover:bg-muted",
                 isActive(href) && "bg-muted font-semibold text-foreground",
+                rail && "md:justify-center md:px-0",
               )}
             >
-              <Icon className="size-[18px]" strokeWidth={isActive(href) ? 2.2 : 1.8} />
-              {label}
+              <Icon className="size-[18px] shrink-0" strokeWidth={isActive(href) ? 2.2 : 1.8} />
+              <span className={cn(rail && "md:hidden")}>{label}</span>
             </Link>
           ))}
         </nav>
-        <div className="mt-6 px-3 text-[11px] font-semibold text-faint">Subjects</div>
-        <div className="mt-1.5 flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto">
+        <div className={cn("mt-7 px-3 text-[11px] font-semibold text-faint", rail && "md:hidden")}>Subjects</div>
+        <div className={cn("mx-2 mt-4 hidden border-t border-border", rail && "md:block")} />
+        <div className={cn("mt-2 flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto [scrollbar-width:thin]", rail && "md:mt-3")}>
           {treeLoading &&
             allWorkspaces.length === 0 &&
             [0, 1, 2].map((i) => <span key={i} className="mx-3 my-2 block h-4 animate-pulse rounded bg-muted" style={{ width: `${70 - i * 12}%` }} />)}
@@ -115,45 +163,65 @@ export function NewShell({ children }: { children: React.ReactNode }) {
                 key={w.id}
                 href={`/workspace/${w.id}`}
                 onClick={() => setMobileOpen(false)}
+                title={w.title}
                 className={cn(
-                  "flex h-9 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium hover:bg-muted",
+                  "flex min-h-10 shrink-0 items-center gap-3 rounded-xl px-3 py-2 text-[13.5px] font-medium leading-snug hover:bg-muted",
                   on && "bg-accent-soft/70 text-accent-dim",
+                  rail && "md:justify-center md:px-0",
                 )}
               >
-                <FolderIcon className="size-4 shrink-0" style={{ color: accentForId(w.id) }} fill="currentColor" strokeWidth={1.5} />
-                <span className="truncate">{w.title}</span>
+                <FolderIcon
+                  className={cn("size-4 shrink-0", rail && "md:hidden")}
+                  style={{ color: accentForId(w.id) }}
+                  fill="currentColor"
+                  strokeWidth={1.5}
+                />
+                <span
+                  aria-hidden
+                  className={cn("hidden size-7 place-items-center rounded-lg text-[12px] font-bold text-white", rail && "md:grid")}
+                  style={{ backgroundColor: accentForId(w.id) }}
+                >
+                  {w.title.trim()[0]?.toUpperCase() ?? "?"}
+                </span>
+                <span className={cn("line-clamp-2 min-w-0 break-words", rail && "md:hidden")}>{w.title}</span>
               </Link>
             );
           })}
           <Link
             href="/new-subject"
             onClick={() => setMobileOpen(false)}
-            className="flex h-9 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium text-accent hover:bg-muted"
+            title={rail ? "New subject" : undefined}
+            className={cn(
+              "flex h-10 shrink-0 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium text-accent hover:bg-muted",
+              rail && "md:justify-center md:px-0",
+            )}
           >
-            <Plus className="size-4" />
-            New subject
+            <Plus className="size-4 shrink-0" />
+            <span className={cn(rail && "md:hidden")}>New subject</span>
           </Link>
         </div>
-        <div className="mt-auto flex flex-col gap-0.5 pt-3">
+        <div className="mt-auto flex flex-col gap-1 border-t border-border pt-3">
           <Link
             href="/settings"
             onClick={() => setMobileOpen(false)}
+            title={rail ? "Settings" : undefined}
             className={cn(
               "flex h-10 items-center gap-3 rounded-xl px-3 text-[14px] font-medium text-foreground/80 hover:bg-muted",
               isActive("/settings") && "bg-muted font-semibold text-foreground",
+              rail && "md:justify-center md:px-0",
             )}
           >
-            <Settings className="size-[18px]" />
-            Settings
+            <Settings className="size-[18px] shrink-0" />
+            <span className={cn(rail && "md:hidden")}>Settings</span>
           </Link>
-          <div className="flex items-center gap-2.5 px-3 pt-2">
+          <div className={cn("flex items-center gap-2.5 px-3 pt-2", rail && "md:flex-col md:gap-1 md:px-0")}>
             {user?.profilePicture ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={user.profilePicture} alt="" className="size-8 rounded-full object-cover" />
+              <img src={user.profilePicture} alt="" className="size-8 shrink-0 rounded-full object-cover" />
             ) : (
-              <span className="grid size-8 place-items-center rounded-full bg-accent-soft text-[13px] font-bold text-accent">{initial}</span>
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-accent-soft text-[13px] font-bold text-accent">{initial}</span>
             )}
-            <span className="min-w-0 flex-1 truncate text-[13px] font-semibold">{user?.name}</span>
+            <span className={cn("min-w-0 flex-1 truncate text-[13px] font-semibold", rail && "md:hidden")}>{user?.name}</span>
             <button
               type="button"
               aria-label="Sign out"
