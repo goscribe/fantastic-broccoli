@@ -120,7 +120,7 @@ export function MathSpan({ latex, display }: { latex: string; display: boolean }
             className={
               display
                 ? "block my-2 max-w-full overflow-x-auto"
-                : "inline-block max-w-full overflow-x-auto align-middle"
+                : "inline-block max-w-full overflow-x-auto overflow-y-hidden py-px align-middle [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             }
             dangerouslySetInnerHTML={{
               __html: katex.renderToString(latex, {
@@ -137,7 +137,7 @@ export function MathSpan({ latex, display }: { latex: string; display: boolean }
       className={
         display
           ? "block my-2 max-w-full overflow-x-auto"
-          : "inline-block max-w-full overflow-x-auto align-middle"
+          : "inline-block max-w-full overflow-x-auto overflow-y-hidden py-px align-middle [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       }
       dangerouslySetInnerHTML={{ __html: rendered.html }}
     />
