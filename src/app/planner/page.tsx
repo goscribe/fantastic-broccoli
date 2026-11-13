@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Suspense, useEffect, useState } from "react";
 import { useIsMobile } from "@/lib/use-mobile";
 import Link from "next/link";
