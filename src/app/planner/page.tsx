@@ -13,6 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toastError } from "@/lib/toast";
 import { CalendarSync } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PlannerChat } from "@/components/planner/planner-chat";
 import "@/app/design/design.css";
 import { inputClass } from "@/components/ui/input";
 
@@ -185,6 +186,8 @@ function Planner() {
             <a href={`${apiUrl}/calendar/google/connect`} className="h-8 shrink-0 rounded-lg bg-accent px-3 text-[12.5px] font-semibold leading-8 text-white">Connect</a>
           ))}
         </div>
+
+        <PlannerChat weekStart={data?.weekStart} />
 
         <div className="rounded-2xl border border-border p-[18px]">
           <div className="text-[16px] font-semibold">Plan</div>
