@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense, useEffect, useState } from "react";
+import { useIsMobile } from "@/lib/use-mobile";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
@@ -62,6 +63,8 @@ function Planner() {
     router.replace("/planner");
   }, [params, router]);
   const today = new Date().toISOString().slice(0, 10);
+  const mobile = useIsMobile();
+  const [mDay, setMDay] = useState<number | null>(null);
 
   const plan = data?.plan;
   const winStart = plan ? toMin(plan.windowStart) : 15 * 60;
@@ -71,6 +74,7 @@ function Planner() {
   const hours = Array.from({ length: (gridEnd - gridStart) / 60 }, (_, i) => gridStart + i * 60);
   const y = (m: number) => ((m - gridStart) / 60) * PX;
   const days = data?.days ?? Array.from({ length: 7 }, (_, i) => ({ date: addDays(today, i), slots: [], busy: [] }));
+  const shownIdx = mDay ?? Math.max(0, days.findIndex((d) => d.date === today));
 
   return (
     <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-6 pb-12 pt-6 lg:flex-row">
@@ -106,25 +110,25 @@ function Planner() {
         </div>
 
         <div className="overflow-hidden rounded-2xl border border-border">
-          <div className="grid border-b border-border" style={{ gridTemplateColumns: "56px repeat(7, 1fr)" }}>
+          <div className="grid border-b border-border" style={{ gridTemplateColumns: mobile ? "44px repeat(7, 1fr)" : "56px repeat(7, 1fr)" }}>
             <div />
             {days.map((d, i) => {
               const on = d.date === today;
               return (
-                <div key={d.date} className="flex flex-col items-center py-3">
+                <div key={d.date} role={mobile ? "button" : undefined} onClick={mobile ? () => setMDay(i) : undefined} className={cn("flex flex-col items-center py-3", mobile && i === shownIdx && "bg-accent-soft/60")}>
                   <span className={cn("text-[12px] font-semibold", on ? "text-accent" : "text-faint")}>{DAY[i]}</span>
                   <span className={cn("mt-0.5 grid size-7 place-items-center rounded-full text-[15px] font-bold", on && "bg-accent text-white")}>{Number(d.date.slice(8, 10))}</span>
                 </div>
               );
             })}
           </div>
-          <div className="relative grid" style={{ gridTemplateColumns: "56px repeat(7, 1fr)", height: hours.length * PX }}>
+          <div className="relative grid" style={{ gridTemplateColumns: mobile ? "44px 1fr" : "56px repeat(7, 1fr)", height: hours.length * PX }}>
             <div className="relative">
               {hours.map((h) => (
-                <span key={h} className="absolute -translate-y-1/2 pl-3 text-[11px] text-faint" style={{ top: y(h) }}>{hhmm(h)}</span>
+                <span key={h} className="absolute -translate-y-1/2 pl-2 text-[11px] text-faint sm:pl-3" style={{ top: y(h) }}>{hhmm(h)}</span>
               ))}
             </div>
-            {days.map((d, i) => (
+            {days.map((d, i) => (mobile && i !== shownIdx) ? null : (
               <div key={d.date} className="relative border-l border-border">
                 {hours.map((h) => (
                   <div key={h} className="absolute inset-x-0 border-t border-border/70" style={{ top: y(h) }} />

@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
+import { useIsMobile } from "@/lib/use-mobile";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -44,6 +45,10 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
   const fileRef = useRef<HTMLInputElement>(null);
   const pendingSlot = useRef<PlannerSlot | null>(null);
   const today = new Date().toISOString().slice(0, 10);
+  const mobile = useIsMobile();
+  const [mDay, setMDay] = useState<number | null>(null);
+  const todayIdx = Math.max(0, data?.days.findIndex((d) => d.date === today) ?? 0);
+  const shown = mDay ?? todayIdx;
 
   const refresh = () => qc.invalidateQueries({ queryKey: ["planner"] });
 
@@ -120,6 +125,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
     const end = Math.max(draw.from, draw.to);
     setDraw(null);
     if (end - start >= 15) setPick({ date: draw.date, start, end });
+    else if (mobile) setPick({ date: draw.date, start, end: start + 30 });
   };
   const create = async (workspaceId?: string) => {
     if (!data || !pick) return;
@@ -203,14 +209,34 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
             <span className="min-w-0"><b className="text-[#b4530a]">Note from your planner · </b>{lastNote.content}</span>
           </Link>
         )}
+        {mobile && (
+          <div className="mt-3 grid grid-cols-7 gap-1">
+            {data.days.map((d, i) => (
+              <button
+                key={d.date}
+                type="button"
+                onClick={() => setMDay(i)}
+                className={cn(
+                  "flex flex-col items-center rounded-xl py-1.5 text-[11px] font-semibold",
+                  i === shown ? "bg-accent text-white" : d.date === today ? "bg-accent-soft text-accent" : "bg-muted text-faint",
+                )}
+              >
+                {DAY[i]}
+                <span className="text-[14px] font-bold">{Number(d.date.slice(8))}</span>
+                <span className={cn("mt-0.5 size-1 rounded-full", d.slots.length ? (i === shown ? "bg-white" : "bg-accent") : "bg-transparent")} />
+              </button>
+            ))}
+          </div>
+        )}
         <div className="mt-3 overflow-x-auto rounded-2xl border border-border bg-card">
-        <div className="grid min-w-[640px] gap-1.5 p-2" style={{ gridTemplateColumns: "40px repeat(7, 1fr)" }}>
+        <div className={cn("grid gap-1.5 p-2", !mobile && "min-w-[640px]")} style={{ gridTemplateColumns: mobile ? "40px 1fr" : "40px repeat(7, 1fr)" }}>
           <div className="relative" style={{ height: H + 26, marginTop: 0 }}>
             {hours.map((h) => (
               <span key={h} className="absolute right-1 -translate-y-1/2 text-[10px] text-faint" style={{ top: 26 + y(h) }}>{hhmm(h)}</span>
             ))}
           </div>
           {data.days.map((d, i) => {
+            if (mobile && i !== shown) return null;
             const on = d.date === today;
             const past = d.date < today;
             return (
@@ -235,8 +261,8 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
                 onPointerUp={commitDraw}
                 onPointerCancel={() => setDraw(null)}
                 className={cn("relative select-none rounded-xl p-1.5 transition-colors", draw ? "cursor-row-resize" : "cursor-crosshair", dragId && "ring-1 ring-dashed ring-accent/40", on && "bg-accent-soft/40")}
-                style={{ height: H + 26, touchAction: "none" }}
-                title="Click and drag to add a study time"
+                style={{ height: H + 26, touchAction: mobile ? "pan-y" : "none" }}
+                title={mobile ? "Tap to add a study time" : "Click and drag to add a study time"}
               >
                 {draw && draw.date === d.date && (
                   <span className="pointer-events-none absolute inset-x-1.5 rounded-lg border-2 border-dashed border-accent bg-accent-soft/70 px-1.5 py-1 text-[10.5px] font-semibold text-accent" style={{ top: 26 + y(Math.min(draw.from, draw.to)), height: Math.max(8, y(Math.max(draw.from, draw.to)) - y(Math.min(draw.from, draw.to))) }}>
@@ -294,7 +320,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
                       )}
                       title={s.sessionId ? "Open session" : "Click or drop notes to build this session"}
                     >
-                      <button type="button" aria-label="Remove" onClick={(e) => { e.stopPropagation(); void remove(s.id); }} className="absolute right-1 top-1 hidden rounded p-0.5 hover:bg-white/60 group-hover:block"><X className="size-3" /></button>
+                      <button type="button" aria-label="Remove" onClick={(e) => { e.stopPropagation(); void remove(s.id); }} className="absolute right-1 top-1 rounded p-0.5 hover:bg-white/60 sm:hidden sm:group-hover:block"><X className="size-3" /></button>
                       <div className="truncate font-semibold">{hhmm(s.start)} <span className="font-medium opacity-80">{s.title}</span></div>
                       <div className={cn("mt-0.5 flex items-center gap-1 text-[10.5px] opacity-70", y(s.end) - y(s.start) < 34 && "hidden")}>
                         {busy ? <Loader2 className="size-3 animate-spin" /> : s.sessionId ? null : <Upload className="size-3" />}
