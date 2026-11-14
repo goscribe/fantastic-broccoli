@@ -184,6 +184,8 @@ export interface ApiSessionDebrief {
   summary: string;
   sections: {
     heading: string;
+    /** "good" = what went well, "improve" = what to work on. */
+    tone?: "good" | "improve";
     body?: string;
     bullets?: { text: string; detail?: string }[];
   }[];

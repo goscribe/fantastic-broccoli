@@ -126,8 +126,8 @@ export function ClozeActivity({
                   newUi ? "mx-1 inline-block w-36 rounded-xl border-2 px-3 py-1.5 text-[15px] text-center font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-accent/15" : "mx-1 inline-block w-32 rounded-lg border px-2.5 py-1 text-sm text-center font-medium focus:outline-none",
                   checked
                     ? isCorrect(i)
-                      ? "border-accent bg-accent-soft text-accent-dim"
-                      : "border-rose bg-rose/5 text-rose"
+                      ? "border-success bg-success/10 text-success"
+                      : "border-red-500 bg-red-500/5 text-red-500"
                     : newUi
                       ? "border-dashed border-border bg-card focus:border-accent"
                       : "border-border-strong bg-background focus:border-accent/60",
@@ -144,7 +144,7 @@ export function ClozeActivity({
             {correctCount}/{passage.answers.length} {t("session.clozeFixHint")}
           </p>
           {feedbacks.map((r, i) => (
-            <p key={i} className={newUi ? "text-[13.5px] text-rose" : "text-xs text-rose"}>
+            <p key={i} className={newUi ? "text-[13.5px] text-red-500" : "text-xs text-red-500"}>
               <MathText text={r.feedback} />
             </p>
           ))}

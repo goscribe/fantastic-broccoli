@@ -20,6 +20,7 @@ import { useQuery } from "@tanstack/react-query";
 import { studySessionApi } from "@/lib/api/study-session";
 import { SESSION_COMPLETED_EVENT } from "@/lib/api/account";
 import { useI18n } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
 import "@/lib/i18n/session";
 
 const stages = [
@@ -148,7 +149,16 @@ export function SessionDebrief({
               <ul className="space-y-2.5">
                 {section.bullets.map((b) => (
                   <li key={b.text} className="flex gap-2.5">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                    <span
+                      className={cn(
+                        "mt-2 h-1.5 w-1.5 rounded-full shrink-0",
+                        section.tone === "good"
+                          ? "bg-success"
+                          : section.tone === "improve"
+                            ? "bg-red-500"
+                            : "bg-accent",
+                      )}
+                    />
                     <div>
                       <p className="text-sm font-medium leading-6">
                         <MathText text={b.text} />
