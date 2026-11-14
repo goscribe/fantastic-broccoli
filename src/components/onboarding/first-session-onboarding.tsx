@@ -1,6 +1,7 @@
 "use client";
 
 import { useNewUi } from "@/lib/new-ui";
+import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { BuildBar } from "@/components/session/build-bar";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -136,7 +137,7 @@ function PlanUpsell() {
       .catch(() => {});
   }, []);
 
-  if (plans.length === 0) return null;
+  if (BILLING_PAUSED || plans.length === 0) return null;
 
   return (
     <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border pt-3 text-xs">

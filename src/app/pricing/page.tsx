@@ -18,7 +18,7 @@ import {
 } from "@/lib/api/account";
 import { useAuthUser } from "@/lib/api/auth";
 import { toastError } from "@/lib/toast";
-import { BILLING_PAUSED } from "@/lib/billing-paused";
+import { BILLING_PAUSED, BILLING_PAUSED_MESSAGE } from "@/lib/billing-paused";
 
 function PlanCard({
   plan,
@@ -152,7 +152,7 @@ export default function PricingPage() {
   const handleSwitch = async (planId: string) => {
     if (BILLING_PAUSED) {
       toastError(
-        new Error("Billing is paused while our payment provider is down — everyone has Pro for free this month."),
+        new Error(BILLING_PAUSED_MESSAGE),
         "Checkout unavailable",
       );
       return;
@@ -173,8 +173,8 @@ export default function PricingPage() {
           <div>
             <PageHeader back={{ href: "/settings", label: "Settings" }} title={<>Choose your plan</>} subtitle={<>Your storage and monthly token allowance are shown below.{" "}
             {trialDays > 0
-              ? `Paid plans start with a ${trialDays}-day free trial: add a card, pay $0 today, and billing begins after ${trialDays} days unless you cancel. Checkout is handled securely by Stripe.`
-              : "Upgrade anytime — checkout is handled securely by Stripe."}</>} className="mb-2" />
+              ? `Paid plans start with a ${trialDays}-day free trial: add a card, pay $0 today, and billing begins after ${trialDays} days unless you cancel. Checkout is handled by our payment provider; Scribe never sees your card.`
+              : "Upgrade anytime — checkout is handled by our payment provider; Scribe never sees your card."}</>} className="mb-2" />
           {BILLING_PAUSED && (
             <p className="mt-3 max-w-2xl rounded-xl border border-accent/30 bg-accent-soft px-4 py-3 text-sm text-foreground">
               <span className="font-semibold">Billing is paused.</span> Our payment
