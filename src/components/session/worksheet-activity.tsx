@@ -245,8 +245,8 @@ export function WorksheetActivity({
                             value === opt
                               ? checked
                                 ? correct
-                                  ? "border-accent bg-accent-soft text-accent-dim"
-                                  : "border-rose bg-rose/5 text-rose"
+                                  ? "border-success bg-success/10 text-green-700 dark:text-green-400"
+                                  : "border-red-500 bg-red-500/5 text-red-600 dark:text-red-400"
                                 : "border-foreground bg-foreground text-background"
                               : "border-border-strong bg-background hover:border-foreground/40",
                           )}
@@ -274,10 +274,10 @@ export function WorksheetActivity({
                         newUi ? "mt-2.5 w-full rounded-xl border px-4 py-3 text-[15px] leading-relaxed resize-none transition-colors placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-accent/15" : "mt-2 w-full rounded-lg border px-3 py-2 text-sm resize-none focus:outline-none",
                         checked
                           ? correct
-                            ? "border-accent bg-accent-soft/50"
+                            ? "border-success bg-success/5"
                             : partial
                               ? "border-amber bg-amber/5"
-                              : "border-rose bg-rose/5"
+                              : "border-red-500 bg-red-500/5"
                           : newUi
                             ? "border-border bg-card focus:border-accent"
                             : "border-border-strong bg-background focus:border-accent/60",
@@ -318,10 +318,10 @@ export function WorksheetActivity({
                           className={cn(
                             newUi ? "text-[12px] font-bold tabular-nums rounded-full px-2.5 py-1" : "text-[11px] font-bold tabular-nums rounded-full px-2 py-0.5",
                             correct
-                              ? "bg-accent-soft text-accent-dim"
+                              ? "bg-success/10 text-green-700 dark:text-green-400"
                               : partial
                                 ? "bg-amber/10 text-amber"
-                                : "bg-rose/10 text-rose",
+                                : "bg-red-500/10 text-red-600 dark:text-red-400",
                           )}
                         >
                           {marking.achievedPoints}/{marking.totalPoints}{" "}
@@ -338,8 +338,8 @@ export function WorksheetActivity({
                                   className={cn(
                                     newUi ? "mt-0.5 shrink-0 h-6 rounded-md px-2 text-[11px] font-bold tabular-nums flex items-center" : "mt-0.5 shrink-0 h-4.5 rounded px-1.5 text-[10px] font-bold tabular-nums flex items-center",
                                     earned
-                                      ? "bg-accent-soft text-accent-dim"
-                                      : "bg-rose/10 text-rose",
+                                      ? "bg-success/10 text-green-700 dark:text-green-400"
+                                      : "bg-red-500/10 text-red-600 dark:text-red-400",
                                   )}
                                 >
                                   M{j + 1}
@@ -349,9 +349,9 @@ export function WorksheetActivity({
                                 </p>
                                 <span className="shrink-0 flex items-center gap-1 text-[11px] font-semibold tabular-nums">
                                   {earned ? (
-                                    <Check className="h-3.5 w-3.5 text-accent" />
+                                    <Check className="h-3.5 w-3.5 text-green-700 dark:text-green-400" />
                                   ) : (
-                                    <X className="h-3.5 w-3.5 text-rose" />
+                                    <X className="h-3.5 w-3.5 text-red-600 dark:text-red-400" />
                                   )}
                                   {point.achievedPoints}/{point.point}
                                 </span>
@@ -373,7 +373,7 @@ export function WorksheetActivity({
                     marking.points.length === 0 &&
                     !correct &&
                     part.answer && (
-                      <p className="text-xs text-rose mt-1.5">
+                      <p className="text-xs text-red-600 dark:text-red-400 mt-1.5">
                         {t("session.expected")} {part.answer}
                       </p>
                     )}
