@@ -42,6 +42,11 @@ const english = {
   "set.trialCancelled": "Trial cancelled — no charge. Free plan starts {date}.",
   "set.planCancelled": "Plan cancelled — free plan starts {date}.",
   "set.planKept": "Your plan will continue.",
+  "set.manageSubscription": "Manage your subscription",
+  "set.inactiveSubscription": "Your paid access is inactive. You can still stop renewal for your {plan} subscription.",
+  "set.stopRenewal": "Stop renewal",
+  "set.stopRenewalBody": "Stop future renewals for {plan}? Any outstanding invoices remain payable.",
+  "set.renewalStopped": "Renewal stopped. Any outstanding invoices remain payable.",
   "set.usageHint": "What you've used on the {plan} plan this cycle.",
   "set.storage": "Storage",
   "set.tokensHint":

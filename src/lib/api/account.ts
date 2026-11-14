@@ -163,7 +163,7 @@ export async function switchPlan(planId: string): Promise<void> {
   if (session.url) window.location.href = session.url;
 }
 
-/** The learner's paid subscription; null on the free tier. */
+/** The learner's manageable subscription, including an overdue one without paid access. */
 export interface CurrentSubscription {
   id: string;
   planId: string;

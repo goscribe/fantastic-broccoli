@@ -86,6 +86,10 @@ function formatDate(value: Date | string, locale: string): string {
   });
 }
 
+function needsBillingManagement(subscription: CurrentSubscription | null) {
+  return Boolean(subscription && !["active", "trialing"].includes(subscription.status));
+}
+
 function PlanCard({
   plan,
   subscription,
@@ -187,7 +191,7 @@ function PlanCard({
           <Button
             size="sm"
             className="w-full"
-            disabled={switching}
+            disabled={switching || needsBillingManagement(subscription)}
             onClick={() => onSelect(plan.id)}
           >
             {t("set.switchTo").replace("{name}", plan.name)}
@@ -381,7 +385,11 @@ export default function SettingsPage() {
       setSubscription(sub);
       setConfirmingDowngrade(false);
       toast.success(
-        t(sub.isTrial ? "set.trialCancelled" : "set.planCancelled").replace(
+        t(
+          needsBillingManagement(sub)
+            ? "set.renewalStopped"
+            : sub.isTrial ? "set.trialCancelled" : "set.planCancelled",
+        ).replace(
           "{date}",
           formatDate(sub.cancelAt ?? sub.currentPeriodEnd, locale),
         ),
@@ -577,6 +585,21 @@ export default function SettingsPage() {
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("set.planHint")}
           </p>
+          {needsBillingManagement(subscription) && subscription && (
+            <div role="status" className="mt-3 space-y-3 rounded-2xl border border-border bg-card p-5">
+              <p className="text-sm font-semibold">{t("set.manageSubscription")}</p>
+              <p className="text-[13px] text-muted-foreground">
+                {t("set.inactiveSubscription").replace("{plan}", subscription.planName)}
+              </p>
+              {subscription.cancelAt ? (
+                <p className="text-[13px]">{t("set.renewalStopped")}</p>
+              ) : (
+                <Button variant="outline" size="sm" disabled={switching} onClick={openDowngrade}>
+                  {t("set.stopRenewal")}
+                </Button>
+              )}
+            </div>
+          )}
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             {plansLoading
               ? Array.from({ length: 3 }, (_, i) => (
@@ -815,15 +838,19 @@ export default function SettingsPage() {
               <X className="h-4 w-4" />
             </button>
             <h2 className="text-xl font-bold tracking-tight">
-              {subscription.isTrial
-                ? t("set.cancelTrialTitle")
-                : t("set.downgradeTitle")}
+              {needsBillingManagement(subscription)
+                ? t("set.stopRenewal")
+                : subscription.isTrial
+                  ? t("set.cancelTrialTitle")
+                  : t("set.downgradeTitle")}
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
               {t(
-                subscription.isTrial
-                  ? "set.cancelTrialBody"
-                  : "set.downgradeBody",
+                needsBillingManagement(subscription)
+                  ? "set.stopRenewalBody"
+                  : subscription.isTrial
+                    ? "set.cancelTrialBody"
+                    : "set.downgradeBody",
               )
                 .replace("{plan}", subscription.planName)
                 .replace(
@@ -840,9 +867,11 @@ export default function SettingsPage() {
               >
                 {switching
                   ? t("set.cancelling")
-                  : subscription.isTrial
-                    ? t("set.confirmCancelTrial")
-                    : t("set.confirmDowngrade")}
+                  : needsBillingManagement(subscription)
+                    ? t("set.stopRenewal")
+                    : subscription.isTrial
+                      ? t("set.confirmCancelTrial")
+                      : t("set.confirmDowngrade")}
               </Button>
               <button
                 type="button"
