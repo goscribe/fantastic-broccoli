@@ -207,8 +207,9 @@ const SETTINGS_SECTIONS = [
 
 /**
  * Back from the hosted checkout (`/settings?checkout=success|cancelled`): say what
- * happened without claiming a payment, then re-read the plan a few times. The plan
- * itself only changes when the server hears from the payment provider.
+ * happened without claiming a payment or the lack of one, then re-read the plan a
+ * few times for either return. The plan itself only changes when the server hears
+ * from the payment provider; checkout is never reopened from here.
  */
 function CheckoutReturnNotice({ onRefresh }: { onRefresh: () => Promise<void> }) {
   const params = useSearchParams();
@@ -225,7 +226,6 @@ function CheckoutReturnNotice({ onRefresh }: { onRefresh: () => Promise<void> })
     toast.message(outcome.message);
     // Dropping the query re-runs this effect with no outcome; the timers outlive that on purpose.
     router.replace("/settings");
-    if (!outcome.refresh) return;
     timers.current = CHECKOUT_REFRESH_DELAYS_MS.map((ms) =>
       setTimeout(() => void refreshRef.current().catch(() => {}), ms),
     );
