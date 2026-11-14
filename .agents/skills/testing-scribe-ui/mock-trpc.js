@@ -86,6 +86,9 @@ function sessionEnvelope(session) {
   return { __superjson: { json: session, meta: { values: meta } } };
 }
 
+const organizing = {};
+const ORGANIZE_MS = 6000;
+
 function handleProc(path, input) {
   switch (path) {
     case "auth.getSession":
@@ -94,8 +97,16 @@ function handleProc(path, input) {
       // EMPTY=1 simulates a brand-new user (triggers first-session onboarding).
       if (process.env.EMPTY === "1") return { folders: [], workspaces: [] };
       return { folders, workspaces };
-    case "workspace.getNotesOutline":
+    case "workspace.getNotesOutline": {
+      // While organizeNotes is "running" (it answers after ORGANIZE_MS), topics appear one at a time, as on the server.
+      const run = organizing[input && input.workspaceId];
+      if (run && Date.now() - run.start < ORGANIZE_MS) {
+        const n = Math.floor(((Date.now() - run.start) / ORGANIZE_MS) * (run.outline.topics.length + 1));
+        if (n > 0) return { ...run.outline, topics: run.outline.topics.slice(0, n), partial: true };
+        return run.previous;
+      }
       return notesOutlines[input && input.workspaceId] || null;
+    }
     case "workspace.organizeNotes": {
       const ws = workspaces.find((w) => w.id === (input && input.workspaceId));
       const ids = ((ws && (ws.uploads || ws.files || ws.materials)) || []).map((f) => f.id);
@@ -109,8 +120,9 @@ function handleProc(path, input) {
           { title: "Entropy and the second law", summary: "Entropy of an isolated system never decreases.", points: ["Entropy change is $\\Delta S = Q / T$.", "The entropy of an isolated system never decreases."], fileIds: ids.slice(0, 1) },
         ],
       };
+      organizing[input.workspaceId] = { start: Date.now(), outline, previous: notesOutlines[input.workspaceId] || null };
       notesOutlines[input.workspaceId] = outline;
-      return { outline, renamed: 1 };
+      return { __delayMs: ORGANIZE_MS, value: { outline, renamed: 1 } };
     }
     case "workspace.getUploadPreviews":
       return [];
@@ -516,14 +528,21 @@ const server = http.createServer((req, res) => {
     const isBatch = url.searchParams.get("batch") === "1";
 
     const respond = (inputs) => {
+      let delay = 0;
       const results = procs.map((p, i) => {
-        const data = handleProc(p, inputs[i]);
+        let data = handleProc(p, inputs[i]);
+        if (data && data.__delayMs) {
+          delay = Math.max(delay, data.__delayMs);
+          data = data.value;
+        }
         return {
           result: { data: data && data.__superjson ? data.__superjson : sj(data) },
         };
       });
-      res.writeHead(200, { "content-type": "application/json" });
-      res.end(JSON.stringify(isBatch ? results : results[0]));
+      setTimeout(() => {
+        res.writeHead(200, { "content-type": "application/json" });
+        res.end(JSON.stringify(isBatch ? results : results[0]));
+      }, delay);
     };
 
     if (req.method === "GET") {

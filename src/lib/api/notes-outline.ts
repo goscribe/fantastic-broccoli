@@ -11,6 +11,8 @@ export interface NotesOutline {
   topics: NotesTopic[];
   generatedAt: string;
   fileCount: number;
+  /** Set while the server is still writing the outline: `topics` holds the ones finished so far. */
+  partial?: boolean;
 }
 
 export const fetchNotesOutline = (workspaceId: string) =>

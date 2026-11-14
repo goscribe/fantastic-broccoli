@@ -45,10 +45,23 @@ export function NotesOutline({
 
   const run = async () => {
     setWorking(true);
+    // The server saves each topic as it finishes writing it, so show them as they arrive.
+    let done = false;
+    const poll = setInterval(() => {
+      fetchNotesOutline(workspaceId)
+        .then((o) => {
+          if (done || !o?.partial) return;
+          setOutline(o);
+          setOpen((cur) => cur ?? o.topics[0]?.title ?? null);
+        })
+        .catch(() => undefined);
+    }, 1200);
+    setOpen(null);
     try {
       const { outline: next, renamed } = await organizeNotes(workspaceId);
+      done = true;
       setOutline(next);
-      setOpen(next.topics[0]?.title ?? null);
+      setOpen((cur) => (cur && next.topics.some((t) => t.title === cur) ? cur : (next.topics[0]?.title ?? null)));
       if (renamed > 0) emitTreeChanged();
       toast.success(
         `Organised into ${next.topics.length} topic${next.topics.length === 1 ? "" : "s"}` +
@@ -56,7 +69,13 @@ export function NotesOutline({
       );
     } catch (e) {
       toastError(e, "Couldn't organise your notes");
+      // A failed run puts the previous outline back on the server.
+      fetchNotesOutline(workspaceId)
+        .then((o) => setOutline(o?.partial ? null : o))
+        .catch(() => undefined);
     } finally {
+      done = true;
+      clearInterval(poll);
       setWorking(false);
     }
   };
@@ -162,8 +181,8 @@ export function NotesOutline({
             })}
           </div>
           <p className="mt-2 text-[12px] text-faint">
-            Organised {formatRelativeDate(outline.generatedAt).toLowerCase()} from {outline.fileCount} file{outline.fileCount === 1 ? "" : "s"}
-            {stale ? " · you’ve added files since" : ""}
+            {working && outline.partial ? "Still reading your notes…" : <>Organised {formatRelativeDate(outline.generatedAt).toLowerCase()} from {outline.fileCount} file{outline.fileCount === 1 ? "" : "s"}
+            {stale ? " · you’ve added files since" : ""}</>}
           </p>
         </>
       )}
