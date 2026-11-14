@@ -18,7 +18,7 @@ import {
 } from "@/lib/api/account";
 import { useAuthUser } from "@/lib/api/auth";
 import { toastError } from "@/lib/toast";
-import { BILLING_PAUSED } from "@/lib/billing-paused";
+import { BILLING_PAUSED, BILLING_PAUSED_MESSAGE } from "@/lib/billing-paused";
 
 function PlanCard({
   plan,
@@ -152,7 +152,7 @@ export default function PricingPage() {
   const handleSwitch = async (planId: string) => {
     if (BILLING_PAUSED) {
       toastError(
-        new Error("Billing is paused while our payment provider is down — everyone has Pro for free this month."),
+        new Error(BILLING_PAUSED_MESSAGE),
         "Checkout unavailable",
       );
       return;
