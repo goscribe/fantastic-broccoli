@@ -13,6 +13,7 @@ import { apiUrl } from "@/lib/api/config";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toastError } from "@/lib/toast";
+import { calendarDisconnectNotice, calendarReturnNotice } from "@/lib/calendar-messages";
 import { cn } from "@/lib/utils";
 import { PlannerChat } from "@/components/planner/planner-chat";
 import "@/app/design/design.css";
@@ -53,14 +54,9 @@ function Planner() {
   useEffect(() => {
     const r = params.get("calendar");
     if (!r) return;
-    if (r === "connected") {
-      toast.success("Google Calendar connected — let's set up your plan.");
-      router.replace("/?setup=1");
-      return;
-    }
-    else if (r === "unconfigured") toast.error("Google Calendar isn't set up on the server yet.");
-    else if (r !== "cancelled") toast.error("Couldn't connect Google Calendar. Try again.");
-    router.replace("/planner");
+    const notice = calendarReturnNotice(r);
+    if (notice) toast[notice.tone === "success" ? "success" : "error"](notice.text);
+    router.replace(r === "connected" ? "/?setup=1" : "/planner");
   }, [params, router]);
   const today = new Date().toISOString().slice(0, 10);
   const mobile = useIsMobile();
@@ -176,7 +172,11 @@ function Planner() {
               type="button"
               onClick={async () => {
                 try {
-                  await disconnectCalendar();
+                  const notice = calendarDisconnectNotice(await disconnectCalendar());
+                  const url = notice.manualRevokeUrl;
+                  toast[notice.tone === "success" ? "success" : "message"](notice.text, url
+                    ? { duration: 20000, action: { label: "Open Google permissions", onClick: () => window.open(url, "_blank", "noopener,noreferrer") } }
+                    : undefined);
                   void qc.invalidateQueries({ queryKey: ["planner"] });
                 } catch (err) {
                   toastError(err, "Couldn't disconnect");
