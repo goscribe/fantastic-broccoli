@@ -77,7 +77,7 @@ const PAID_PERKS = [
  * Full-screen plan picker shown to every free-plan user on first load after
  * signup and again on each new login until they pick a paid plan, plus once
  * more right after their first completed study session. Nothing is charged
- * until the user picks a plan and completes Stripe checkout (7-day trial
+ * until the user picks a plan and completes hosted checkout (7-day trial
  * first when the account hasn't used one).
  */
 export function SubscribeWall() {
@@ -305,8 +305,8 @@ export function SubscribeWall() {
 
         <p className="mt-4 text-center text-xs text-faint">
           {trialDays > 0
-            ? `Card required · $0 today · billing starts after ${trialDays} days unless you cancel · secure checkout by Stripe`
-            : "Secure checkout by Stripe · cancel anytime"}
+            ? `Card required · $0 today · billing starts after ${trialDays} days unless you cancel · secure hosted checkout`
+            : "Secure hosted checkout · cancel anytime"}
         </p>
 
         <div className="mt-8 flex justify-center">
