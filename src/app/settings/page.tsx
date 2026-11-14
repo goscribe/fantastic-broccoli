@@ -1,11 +1,13 @@
 "use client";
 import { cn } from "@/lib/utils";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Check, Camera, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { BILLING_PAUSED } from "@/lib/billing-paused";
+import { useRouter, useSearchParams } from "next/navigation";
+import { BILLING_PAUSED, BILLING_PAUSED_MESSAGE } from "@/lib/billing-paused";
+import { CHECKOUT_REFRESH_DELAYS_MS, checkoutReturn } from "@/lib/checkout-return";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PageHeader } from "@/components/ui/page-header";
@@ -82,6 +84,10 @@ function formatDate(value: Date | string, locale: string): string {
     day: "numeric",
     year: "numeric",
   });
+}
+
+function needsBillingManagement(subscription: CurrentSubscription | null) {
+  return Boolean(subscription && !["active", "trialing"].includes(subscription.status));
 }
 
 function PlanCard({
@@ -185,7 +191,7 @@ function PlanCard({
           <Button
             size="sm"
             className="w-full"
-            disabled={switching}
+            disabled={switching || needsBillingManagement(subscription)}
             onClick={() => onSelect(plan.id)}
           >
             {t("set.switchTo").replace("{name}", plan.name)}
@@ -202,6 +208,35 @@ const SETTINGS_SECTIONS = [
   ["plan", "settings.plan"],
   ["tokens", "set.tokensTitle"],
 ] as const;
+
+/**
+ * Back from the hosted checkout (`/settings?checkout=success|cancelled`): say what
+ * happened without claiming a payment or the lack of one, then re-read the plan a
+ * few times for either return. The plan itself only changes when the server hears
+ * from the payment provider; checkout is never reopened from here.
+ */
+function CheckoutReturnNotice({ onRefresh }: { onRefresh: () => Promise<void> }) {
+  const params = useSearchParams();
+  const router = useRouter();
+  const param = params.get("checkout");
+  const refreshRef = useRef(onRefresh);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  useEffect(() => {
+    refreshRef.current = onRefresh;
+  }, [onRefresh]);
+  useEffect(() => {
+    const outcome = checkoutReturn(param);
+    if (!outcome) return;
+    toast.message(outcome.message);
+    // Dropping the query re-runs this effect with no outcome; the timers outlive that on purpose.
+    router.replace("/settings");
+    timers.current = CHECKOUT_REFRESH_DELAYS_MS.map((ms) =>
+      setTimeout(() => void refreshRef.current().catch(() => {}), ms),
+    );
+  }, [param, router]);
+  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  return null;
+}
 
 export default function SettingsPage() {
   const { user } = useAuthUser();
@@ -304,6 +339,10 @@ export default function SettingsPage() {
   };
 
   const handleSwitch = async (planId: string) => {
+    if (BILLING_PAUSED) {
+      toastError(new Error(BILLING_PAUSED_MESSAGE), "Checkout unavailable");
+      return;
+    }
     setSwitching(true);
     try {
       await switchPlan(planId);
@@ -346,7 +385,11 @@ export default function SettingsPage() {
       setSubscription(sub);
       setConfirmingDowngrade(false);
       toast.success(
-        t(sub.isTrial ? "set.trialCancelled" : "set.planCancelled").replace(
+        t(
+          needsBillingManagement(sub)
+            ? "set.renewalStopped"
+            : sub.isTrial ? "set.trialCancelled" : "set.planCancelled",
+        ).replace(
           "{date}",
           formatDate(sub.cancelAt ?? sub.currentPeriodEnd, locale),
         ),
@@ -374,6 +417,9 @@ export default function SettingsPage() {
 
   return (
     <main className="mx-auto w-full max-w-[1180px] px-6 pb-12 pt-6">
+      <Suspense fallback={null}>
+        <CheckoutReturnNotice onRefresh={refreshBilling} />
+      </Suspense>
       <PageHeader title={<>{t("settings.title")}</>} subtitle={<>{t("set.subtitle")}</>} />
       <div className="flex flex-col gap-8 lg:flex-row">
       <nav className="hidden w-[200px] shrink-0 lg:block">
@@ -539,6 +585,21 @@ export default function SettingsPage() {
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("set.planHint")}
           </p>
+          {needsBillingManagement(subscription) && subscription && (
+            <div role="status" className="mt-3 space-y-3 rounded-2xl border border-border bg-card p-5">
+              <p className="text-sm font-semibold">{t("set.manageSubscription")}</p>
+              <p className="text-[13px] text-muted-foreground">
+                {t("set.inactiveSubscription").replace("{plan}", subscription.planName)}
+              </p>
+              {subscription.cancelAt ? (
+                <p className="text-[13px]">{t("set.renewalStopped")}</p>
+              ) : (
+                <Button variant="outline" size="sm" disabled={switching} onClick={openDowngrade}>
+                  {t("set.stopRenewal")}
+                </Button>
+              )}
+            </div>
+          )}
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             {plansLoading
               ? Array.from({ length: 3 }, (_, i) => (
@@ -777,15 +838,19 @@ export default function SettingsPage() {
               <X className="h-4 w-4" />
             </button>
             <h2 className="text-xl font-bold tracking-tight">
-              {subscription.isTrial
-                ? t("set.cancelTrialTitle")
-                : t("set.downgradeTitle")}
+              {needsBillingManagement(subscription)
+                ? t("set.stopRenewal")
+                : subscription.isTrial
+                  ? t("set.cancelTrialTitle")
+                  : t("set.downgradeTitle")}
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
               {t(
-                subscription.isTrial
-                  ? "set.cancelTrialBody"
-                  : "set.downgradeBody",
+                needsBillingManagement(subscription)
+                  ? "set.stopRenewalBody"
+                  : subscription.isTrial
+                    ? "set.cancelTrialBody"
+                    : "set.downgradeBody",
               )
                 .replace("{plan}", subscription.planName)
                 .replace(
@@ -802,9 +867,11 @@ export default function SettingsPage() {
               >
                 {switching
                   ? t("set.cancelling")
-                  : subscription.isTrial
-                    ? t("set.confirmCancelTrial")
-                    : t("set.confirmDowngrade")}
+                  : needsBillingManagement(subscription)
+                    ? t("set.stopRenewal")
+                    : subscription.isTrial
+                      ? t("set.confirmCancelTrial")
+                      : t("set.confirmDowngrade")}
               </Button>
               <button
                 type="button"
