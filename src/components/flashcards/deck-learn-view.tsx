@@ -307,10 +307,10 @@ export function DeckLearnView({
             </button>
             {score.total > 0 && (
               <>
-                <span className="inline-flex items-center gap-1 font-medium text-success">
+                <span className="inline-flex items-center gap-1 font-medium text-green-700 dark:text-green-400">
                   <Check className="h-3 w-3" /> {score.correct}
                 </span>
-                <span className="inline-flex items-center gap-1 font-medium text-red-500">
+                <span className="inline-flex items-center gap-1 font-medium text-red-600 dark:text-red-400">
                   <X className="h-3 w-3" /> {score.total - score.correct}
                 </span>
               </>
@@ -371,9 +371,9 @@ export function DeckLearnView({
                       className={cn(
                         "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-xs font-semibold",
                         isCorrectOption
-                          ? "bg-success/15 text-success"
+                          ? "bg-success/15 text-green-700 dark:text-green-400"
                           : isWrongSelection
-                            ? "bg-red-500/15 text-red-500"
+                            ? "bg-red-500/15 text-red-600 dark:text-red-400"
                             : isSelected
                               ? "bg-accent/15 text-accent"
                               : "bg-muted text-muted-foreground",
@@ -385,10 +385,10 @@ export function DeckLearnView({
                       <MarkdownText text={option} />
                     </span>
                     {isCorrectOption && (
-                      <Check className="h-4 w-4 shrink-0 text-success" />
+                      <Check className="h-4 w-4 shrink-0 text-green-700 dark:text-green-400" />
                     )}
                     {isWrongSelection && (
-                      <X className="h-4 w-4 shrink-0 text-red-500" />
+                      <X className="h-4 w-4 shrink-0 text-red-600 dark:text-red-400" />
                     )}
                   </button>
                 );
@@ -420,7 +420,7 @@ export function DeckLearnView({
               />
               {showFeedback && !isCorrect && (
                 <div className="rounded-xl bg-success/10 px-4 py-3 text-sm">
-                  <span className="font-semibold text-success">
+                  <span className="font-semibold text-green-700 dark:text-green-400">
                     {t("fc.correctLabel").replace(
                       "{label}",
                       back.toLowerCase(),
@@ -437,7 +437,7 @@ export function DeckLearnView({
           <div
             className={cn(
               "rounded-xl px-4 py-3 text-center text-sm font-medium",
-              isCorrect ? "bg-success/10 text-success" : "bg-red-500/10 text-red-500",
+              isCorrect ? "bg-success/10 text-green-700 dark:text-green-400" : "bg-red-500/10 text-red-600 dark:text-red-400",
             )}
           >
             {t(isCorrect ? "fc.correctFeedback" : "fc.incorrectFeedback")}

@@ -245,8 +245,8 @@ export function WorksheetActivity({
                             value === opt
                               ? checked
                                 ? correct
-                                  ? "border-success bg-success/10 text-success"
-                                  : "border-red-500 bg-red-500/5 text-red-500"
+                                  ? "border-success bg-success/10 text-green-700 dark:text-green-400"
+                                  : "border-red-500 bg-red-500/5 text-red-600 dark:text-red-400"
                                 : "border-foreground bg-foreground text-background"
                               : "border-border-strong bg-background hover:border-foreground/40",
                           )}
@@ -318,10 +318,10 @@ export function WorksheetActivity({
                           className={cn(
                             newUi ? "text-[12px] font-bold tabular-nums rounded-full px-2.5 py-1" : "text-[11px] font-bold tabular-nums rounded-full px-2 py-0.5",
                             correct
-                              ? "bg-success/10 text-success"
+                              ? "bg-success/10 text-green-700 dark:text-green-400"
                               : partial
                                 ? "bg-amber/10 text-amber"
-                                : "bg-red-500/10 text-red-500",
+                                : "bg-red-500/10 text-red-600 dark:text-red-400",
                           )}
                         >
                           {marking.achievedPoints}/{marking.totalPoints}{" "}
@@ -338,8 +338,8 @@ export function WorksheetActivity({
                                   className={cn(
                                     newUi ? "mt-0.5 shrink-0 h-6 rounded-md px-2 text-[11px] font-bold tabular-nums flex items-center" : "mt-0.5 shrink-0 h-4.5 rounded px-1.5 text-[10px] font-bold tabular-nums flex items-center",
                                     earned
-                                      ? "bg-success/10 text-success"
-                                      : "bg-red-500/10 text-red-500",
+                                      ? "bg-success/10 text-green-700 dark:text-green-400"
+                                      : "bg-red-500/10 text-red-600 dark:text-red-400",
                                   )}
                                 >
                                   M{j + 1}
@@ -349,9 +349,9 @@ export function WorksheetActivity({
                                 </p>
                                 <span className="shrink-0 flex items-center gap-1 text-[11px] font-semibold tabular-nums">
                                   {earned ? (
-                                    <Check className="h-3.5 w-3.5 text-success" />
+                                    <Check className="h-3.5 w-3.5 text-green-700 dark:text-green-400" />
                                   ) : (
-                                    <X className="h-3.5 w-3.5 text-red-500" />
+                                    <X className="h-3.5 w-3.5 text-red-600 dark:text-red-400" />
                                   )}
                                   {point.achievedPoints}/{point.point}
                                 </span>
@@ -373,7 +373,7 @@ export function WorksheetActivity({
                     marking.points.length === 0 &&
                     !correct &&
                     part.answer && (
-                      <p className="text-xs text-red-500 mt-1.5">
+                      <p className="text-xs text-red-600 dark:text-red-400 mt-1.5">
                         {t("session.expected")} {part.answer}
                       </p>
                     )}
