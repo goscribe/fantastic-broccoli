@@ -39,6 +39,13 @@ export default function PrivacyPage() {
           cannot create, change, or delete anything in your calendar.
         </p>
         <p>
+          Scribe follows the <a href="https://developers.google.com/terms/api-services-user-data-policy" className="underline">Google API Services User Data Policy</a>,
+          including its Limited Use requirements, when using or transferring
+          information received from Google APIs. Calendar data and information
+          derived from it are used only for the Planner features described here,
+          not for advertising, sale, or training general-purpose AI models.
+        </p>
+        <p>
           <strong>What we read.</strong> Events on your primary calendar for
           the week shown in the Planner and for the next three weeks: each
           event&apos;s title, start and end time, status, and whether it is
@@ -86,6 +93,13 @@ export default function PrivacyPage() {
           as calendar-made, which we cannot tell apart from ones you made
           yourself. You can remove any block in the Planner, and deleting your
           account removes all of it.
+        </p>
+        <p>
+          <strong>Human access.</strong> Calendar data and information derived
+          from it are excluded from routine staff quality review. People may
+          read specific Calendar data only with your affirmative permission,
+          when necessary for security or investigating a bug or abuse, or to
+          comply with the law.
         </p>
       </LegalSection>
       <LegalSection heading="Quality review by our team">

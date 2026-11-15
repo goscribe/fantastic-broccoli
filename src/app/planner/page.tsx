@@ -191,6 +191,14 @@ function Planner() {
           ))}
         </div>
 
+        {data && !data.calendar.connected && (
+          <p className="px-1 text-[12px] leading-relaxed text-faint">
+            Connecting lets Scribe read titles and times from your primary calendar
+            and send them to its AI provider to plan your study sessions. You can
+            disconnect at any time. <Link href="/privacy" className="underline">Privacy policy</Link>
+          </p>
+        )}
+
         <PlannerChat weekStart={data?.weekStart} />
 
         <div className="rounded-2xl border border-border p-[18px]">
