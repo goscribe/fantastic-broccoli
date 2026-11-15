@@ -1,7 +1,10 @@
 /**
- * Stripe suspended the account (Oct 2026); every user has a complimentary Pro
- * month and checkout cannot succeed. While true, the paywall surfaces
- * (subscribe wall, plan-limit dialog, upgrade nudges) stay hidden and the
- * pricing page explains the pause. Flip to false when billing is back.
+ * Emergency switch for paid checkout and upgrade prompts. Airwallex has been
+ * configured and verified; existing complimentary subscriptions remain intact.
+ * Set true to pause checkout while a payment-provider issue is investigated.
  */
-export const BILLING_PAUSED = true;
+export const BILLING_PAUSED = false;
+
+/** Shown wherever a paid-plan button is pressed while billing is paused. */
+export const BILLING_PAUSED_MESSAGE =
+  "Billing is paused while our payment provider is down — everyone has Pro for free this month.";

@@ -1,5 +1,5 @@
 // Minimal mock goscribe/server for UI screenshots.
-const http = require("http");
+import http from "node:http";
 
 const sj = (json) => ({ json });
 

@@ -153,7 +153,10 @@ export function NewShell({ children }: { children: React.ReactNode }) {
         </nav>
         <div className={cn("mt-7 px-3 text-[11px] font-semibold text-faint", rail && "md:hidden")}>Subjects</div>
         <div className={cn("mx-2 mt-4 hidden border-t border-border", rail && "md:block")} />
-        <div className={cn("mt-2 flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto [scrollbar-width:thin]", rail && "md:mt-3")}>
+        <div className={cn(
+          "mt-2 flex min-h-0 flex-1 flex-col gap-1 overflow-x-hidden overflow-y-auto [scrollbar-width:thin]",
+          rail && "md:mt-3 md:[scrollbar-width:none] md:[&::-webkit-scrollbar]:hidden",
+        )}>
           {treeLoading &&
             allWorkspaces.length === 0 &&
             [0, 1, 2].map((i) => <span key={i} className="mx-3 my-2 block h-4 animate-pulse rounded bg-muted" style={{ width: `${70 - i * 12}%` }} />)}
