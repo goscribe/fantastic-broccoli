@@ -53,7 +53,9 @@ export const fetchPlannerWeek = (weekStart?: string) =>
 export const updateStudyPlan = (input: Partial<Omit<StudyPlan, "examDate">> & { examDate?: string | null }) =>
   rpc<StudyPlan>("planner.updatePlan", "mutation", input);
 
-export const disconnectCalendar = () => rpc<{ ok: boolean }>("planner.disconnectCalendar", "mutation", undefined);
+/** `revoked` is true only when Google confirmed the revoke; otherwise `manualRevokeUrl` points at Google's permissions page. */
+export const disconnectCalendar = () =>
+  rpc<{ ok: boolean; revoked?: boolean; manualRevokeUrl?: string | null }>("planner.disconnectCalendar", "mutation", undefined);
 export const replanWeek = (weekStart?: string) =>
   rpc<{ ok: boolean }>("planner.replan", "mutation", weekStart ? { weekStart } : undefined);
 
