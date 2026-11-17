@@ -613,6 +613,16 @@ export interface JourneyEvent {
   error: { action: string; code: string | null; message: string | null } | null;
 }
 
+/** A page (route pattern such as `/workspace/[id]/study`) with its views added up. */
+export interface JourneyPage {
+  path: string;
+  workspace: { id: string; title: string } | null;
+  views: number;
+  /** Time until the next page was opened; a visit's last page runs to its last request. */
+  seconds: number;
+  firstAt: Date;
+}
+
 export interface JourneyVisit {
   startedAt: Date;
   endedAt: Date;
@@ -623,6 +633,8 @@ export interface JourneyVisit {
   /** Happened with the user away from the site (a payment webhook…). */
   offline: boolean;
   events: JourneyEvent[];
+  /** Pages opened during the visit, in order of first view. Empty before page views were recorded. */
+  pages: JourneyPage[];
 }
 
 export interface UserTimeline {
@@ -665,11 +677,14 @@ export interface UserTimeline {
   window: { from: Date; to: Date; days: number; truncated: boolean };
   summary: {
     visits: number;
+    pageViews: number;
     activeDays: number;
     timeOnSiteSeconds: number;
     requests: number;
     errors: number;
   };
+  /** Pages opened in the window, most time first. */
+  pages: JourneyPage[];
   /** Oldest first. */
   visits: JourneyVisit[];
 }
@@ -699,6 +714,16 @@ export interface ProductAnalytics {
   from: Date;
   to: Date;
   days: number;
+  pages: {
+    totalViews: number;
+    top: Array<{
+      path: string;
+      views: number;
+      users: number;
+      /** Average time before the next page was opened; null when never followed by one. */
+      avgSeconds: number | null;
+    }>;
+  };
   activeUsers: {
     series: ActiveUsersPoint[];
     today: number;

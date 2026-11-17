@@ -18,7 +18,10 @@ export default function PrivacyPage() {
         <p>
           We also keep an audit log of account and subject actions — what
           happened, when, the route involved, and the originating IP address —
-          to secure accounts, debug failures, and investigate abuse.
+          to secure accounts, debug failures, and investigate abuse. While you
+          are signed in, that log also records which pages of the app you open
+          (the page address only, without search terms or anything you type),
+          which we use to understand how Scribe is used and improve it.
         </p>
       </LegalSection>
       <LegalSection heading="How we use your data">

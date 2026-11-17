@@ -12,7 +12,13 @@ import {
   TableSkeletonRows,
   Td,
 } from "@/components/admin/admin-ui";
-import { barHeights, biggestDropOff, formatMinutes } from "@/lib/admin-insights";
+import {
+  barHeights,
+  biggestDropOff,
+  formatDuration,
+  formatMinutes,
+  pageLabel,
+} from "@/lib/admin-insights";
 import { formatRelativeDate } from "@/lib/utils";
 
 const RANGES = [7, 30, 90] as const;
@@ -279,6 +285,39 @@ export function ProductAnalyticsSection() {
               </Table>
             </div>
           </div>
+
+          <h3 className="mb-1 mt-8 text-[15px] font-semibold">
+            Most-visited pages
+          </h3>
+          <p className="mb-3 text-[13px] text-muted-foreground">
+            {`${(data?.pages?.totalViews ?? 0).toLocaleString()} page views by signed-in users in this period. `}
+            Average time runs to the next page a person opened, so the last
+            page of a visit counts as a view but is not timed.
+          </p>
+          <Table headers={["Page", "Views", "Users", "Average time"]}>
+            {isLoading ? (
+              <TableSkeletonRows cols={4} rows={5} />
+            ) : !data?.pages?.top.length ? (
+              <EmptyRow colSpan={4}>
+                No page views recorded in this period. Recording starts when
+                this release goes live; earlier visits have none.
+              </EmptyRow>
+            ) : (
+              data.pages.top.map((p) => (
+                <tr key={p.path}>
+                  <Td>
+                    <p className="font-medium">{pageLabel(p.path)}</p>
+                    <p className="text-[12px] text-faint">{p.path}</p>
+                  </Td>
+                  <Td className="tabular-nums">{p.views.toLocaleString()}</Td>
+                  <Td className="tabular-nums">{p.users.toLocaleString()}</Td>
+                  <Td className="tabular-nums text-muted-foreground">
+                    {p.avgSeconds === null ? "—" : formatDuration(p.avgSeconds)}
+                  </Td>
+                </tr>
+              ))
+            )}
+          </Table>
 
           <h3 className="mb-1 mt-8 text-[15px] font-semibold">
             Recently active users

@@ -28,10 +28,11 @@ import {
   adminApi,
   type JourneyEvent,
   type JourneyKind,
+  type JourneyPage,
   type JourneyVisit,
   type UserTimeline,
 } from "@/lib/api/admin";
-import { formatDuration, humanizeTag } from "@/lib/admin-insights";
+import { formatDuration, humanizeTag, pageLabel } from "@/lib/admin-insights";
 import { cn, formatRelativeDate } from "@/lib/utils";
 
 const RANGES = [7, 30, 90] as const;
@@ -120,6 +121,72 @@ function EventRow({ event }: { event: JourneyEvent }) {
   );
 }
 
+function PageChips({ pages }: { pages: JourneyPage[] }) {
+  return (
+    <div className="flex flex-wrap items-center gap-1.5 border-b border-border px-4 py-2.5">
+      <span className="mr-1 text-[11px] font-semibold uppercase tracking-wide text-faint">
+        Pages
+      </span>
+      {pages.map((p) => (
+        <span
+          key={`${p.path}|${p.workspace?.id ?? ""}`}
+          title={p.path}
+          className="rounded-full border border-border bg-muted/50 px-2 py-0.5 text-[12px]"
+        >
+          {pageLabel(p.path)}
+          {p.workspace ? ` (${p.workspace.title})` : ""}
+          <span className="text-muted-foreground">
+            {p.seconds > 0 ? ` · ${formatDuration(p.seconds)}` : ""}
+            {p.views > 1 ? ` · ${p.views} views` : ""}
+          </span>
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function PagesCard({ pages, views }: { pages: JourneyPage[]; views: number }) {
+  return (
+    <div className="rounded-xl border border-border bg-card p-4">
+      <p className="text-[12px] font-medium uppercase tracking-wide text-faint">
+        Pages in this period
+      </p>
+      {pages.length === 0 ? (
+        <p className="mt-2 text-sm text-muted-foreground">
+          No page views recorded in this period.
+        </p>
+      ) : (
+        <>
+          <dl className="mt-2 space-y-1.5 text-sm">
+            {pages.map((p) => (
+              <div
+                key={`${p.path}|${p.workspace?.id ?? ""}`}
+                className="flex justify-between gap-3"
+              >
+                <dt className="min-w-0 truncate" title={p.path}>
+                  {pageLabel(p.path)}
+                  {p.workspace && (
+                    <span className="text-muted-foreground">
+                      {` (${p.workspace.title})`}
+                    </span>
+                  )}
+                </dt>
+                <dd className="shrink-0 text-right tabular-nums text-muted-foreground">
+                  {p.seconds > 0 ? formatDuration(p.seconds) : "—"}
+                  {` · ${p.views}`}
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-2 text-[12px] text-faint">
+            {`Time on page · views. ${views.toLocaleString()} page views in total.`}
+          </p>
+        </>
+      )}
+    </div>
+  );
+}
+
 function VisitCard({ visit }: { visit: JourneyVisit }) {
   return (
     <div className="rounded-xl border border-border bg-card">
@@ -139,10 +206,10 @@ function VisitCard({ visit }: { visit: JourneyVisit }) {
           </p>
         )}
       </div>
+      {visit.pages?.length > 0 && <PageChips pages={visit.pages} />}
       {visit.events.length === 0 ? (
         <p className="px-4 py-3 text-sm text-muted-foreground">
-          Browsed without doing anything we record as an action (
-          {visit.requests} background request{visit.requests === 1 ? "" : "s"}).
+          {`Browsed without doing anything we record as an action (${visit.requests} request${visit.requests === 1 ? "" : "s"}).`}
         </p>
       ) : (
         <ul className="divide-y divide-border">
@@ -407,17 +474,19 @@ export default function AdminUserActivityPage({
                 </>
               ) : (
                 <>
+                  <PagesCard
+                    pages={data.pages ?? []}
+                    views={data.summary.pageViews ?? 0}
+                  />
                   <Milestones milestones={data.milestones} />
                   <Totals totals={data.totals} />
                   <div className="rounded-xl border border-border bg-card p-4 text-[12px] leading-relaxed text-muted-foreground">
                     <p className="mb-1 font-medium uppercase tracking-wide text-faint">
                       What this can&rsquo;t show
                     </p>
-                    Page views, time on a page and sign-ins are not recorded.
-                    Visits are inferred from the requests the app makes, so
-                    time on site is a minimum. Planner use appears as counts
-                    and times only: calendar events, plan contents and planner
-                    chat are never shown here.
+                    {
+                      "Sign-ins are not recorded. Page views are recorded only from the release that added them, so older visits list no pages. Time on a page runs to the next page opened (for the last page of a visit, to the visit’s last request), and time on site from a visit’s first request to its last; neither knows whether the tab was in view. Planner use appears as counts and times only: calendar events, plan contents and planner chat are never shown here."
+                    }
                   </div>
                 </>
               )}

@@ -62,3 +62,34 @@ export function barHeights(values: number[]): number[] {
   const max = Math.max(0, ...values);
   return values.map((v) => (max === 0 ? 0 : Math.round((v / max) * 100)));
 }
+
+const PAGE_LABELS: Record<string, string> = {
+  "/": "Home",
+  "/new-subject": "New subject",
+  "/planner": "Study planner",
+  "/flashcards": "Flashcards",
+  "/flashcards/[id]": "Flashcard set",
+  "/flashcards/review": "Flashcard review",
+  "/folder/[id]": "Folder",
+  "/marketplace": "Marketplace",
+  "/pricing": "Pricing",
+  "/settings": "Settings",
+  "/shared": "Shared with me",
+  "/study-bot": "Study bot",
+  "/export": "Export",
+  "/feedback": "Feedback",
+  "/workspace/[id]": "Subject home",
+  "/workspace/[id]/study": "Subject: study",
+  "/workspace/[id]/materials": "Subject: materials",
+  "/workspace/[id]/guide": "Subject: study guide",
+  "/workspace/[id]/chat": "Subject: Copilot chat",
+  "/workspace/[id]/recall": "Subject: recall",
+  "/workspace/[id]/bank": "Subject: question bank",
+  "/workspace/[id]/bank/[itemId]": "Subject: question bank item",
+  "/workspace/[id]/session/[sessionId]": "Study session",
+};
+
+/** A readable name for a recorded route pattern; unknown routes show as the pattern itself. */
+export function pageLabel(path: string): string {
+  return PAGE_LABELS[path] ?? path;
+}

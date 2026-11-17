@@ -6,6 +6,7 @@ import {
   formatDuration,
   formatMinutes,
   humanizeTag,
+  pageLabel,
 } from "./admin-insights";
 
 test("visit lengths read as minutes and hours, never as false precision", () => {
@@ -71,4 +72,10 @@ test("bars scale to the tallest value and stay flat when there is no data", () =
 
 test("tags are shown without underscores", () => {
   assert.equal(humanizeTag("content_quality"), "content quality");
+});
+
+test("known routes get a readable name; unknown ones show their pattern", () => {
+  assert.equal(pageLabel("/workspace/[id]/study"), "Subject: study");
+  assert.equal(pageLabel("/planner"), "Study planner");
+  assert.equal(pageLabel("/some/new/[id]/route"), "/some/new/[id]/route");
 });
