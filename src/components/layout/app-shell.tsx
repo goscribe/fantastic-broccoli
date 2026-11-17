@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { usePageViewTracking } from "@/lib/use-page-view-tracking";
 import { Sidebar } from "@/components/layout/sidebar";
 import { TopBar } from "@/components/layout/top-bar";
 import { isPublicPath, useAuthUser } from "@/lib/api/auth";
@@ -17,7 +18,8 @@ import "@/app/design/design.css";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { loading } = useAuthUser();
+  const { user, loading } = useAuthUser();
+  usePageViewTracking(user !== null);
   const newUi = useNewUi();
   const isSession = /^\/workspace\/[^/]+\/session\//.test(pathname);
   const [sidebarOpen, setSidebarOpen] = useState(false);
