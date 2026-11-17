@@ -1,9 +1,12 @@
 /** Formatting and small derivations for the admin timeline and analytics views. */
 
-/** "under a minute", "12 min", "1 h 05 min". Visit lengths are lower bounds, so no seconds. */
+/**
+ * "under a minute", "12 min", "1 h 05 min". Visit lengths are shown as
+ * lower bounds ("at least …"), so partial minutes round down.
+ */
 export function formatDuration(seconds: number): string {
   if (seconds < 60) return "under a minute";
-  const minutes = Math.round(seconds / 60);
+  const minutes = Math.floor(seconds / 60);
   if (minutes < 60) return `${minutes} min`;
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;

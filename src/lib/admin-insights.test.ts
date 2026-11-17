@@ -12,6 +12,10 @@ test("visit lengths read as minutes and hours, never as false precision", () => 
   assert.equal(formatDuration(0), "under a minute");
   assert.equal(formatDuration(59), "under a minute");
   assert.equal(formatDuration(60), "1 min");
+  // Shown after "at least", so a partial minute must not round up.
+  assert.equal(formatDuration(90), "1 min");
+  assert.equal(formatDuration(119), "1 min");
+  assert.equal(formatDuration(3599), "59 min");
   assert.equal(formatDuration(50 * 60), "50 min");
   assert.equal(formatDuration(3600), "1 h");
   assert.equal(formatDuration(3600 + 5 * 60), "1 h 05 min");
