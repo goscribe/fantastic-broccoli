@@ -72,7 +72,7 @@ function EventRow({ event }: { event: JourneyEvent }) {
   );
   return (
     <li className="flex gap-3 px-4 py-2.5">
-      <span className="w-12 shrink-0 pt-0.5 text-[12px] tabular-nums text-faint">
+      <span className="w-16 shrink-0 whitespace-nowrap pt-0.5 text-[12px] tabular-nums text-faint">
         {time(event.at)}
       </span>
       <span
@@ -268,7 +268,7 @@ export default function AdminUserActivityPage({
 
       {error ? (
         <div className="rounded-xl border border-border bg-card p-4 text-sm text-muted-foreground">
-          This user&rsquo;s activity could not be loaded: {(error as Error).message}
+          {`This user’s activity could not be loaded: ${(error as Error).message}`}
         </div>
       ) : (
         <>

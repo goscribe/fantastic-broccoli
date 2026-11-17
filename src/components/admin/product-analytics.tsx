@@ -148,10 +148,9 @@ export function ProductAnalyticsSection() {
             Activation funnel
           </h3>
           <p className="mb-3 text-[13px] text-muted-foreground">
-            How far the {data?.funnel.signups ?? 0} people who signed up in this
-            period got. Each step counts anyone who did it at least once, in any
-            order. &ldquo;Stopped here&rdquo; is the furthest step a person
-            reached.
+            {`How far the ${data?.funnel.signups ?? 0} people who signed up in this period got. `}
+            Each step counts anyone who did it at least once, in any order.
+            {" “Stopped here” is the furthest step a person reached."}
           </p>
           <Table
             headers={[
