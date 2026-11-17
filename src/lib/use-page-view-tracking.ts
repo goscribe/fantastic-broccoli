@@ -26,7 +26,12 @@ export function usePageViewTracking(signedIn: boolean): void {
   const workspaceId = view?.workspaceId;
 
   useEffect(() => {
-    if (!key || !path || lastSent.current === key) return;
+    if (!key || !path) {
+      // On an unreported page (public, admin): coming back counts as a new view.
+      lastSent.current = null;
+      return;
+    }
+    if (lastSent.current === key) return;
     lastSent.current = key;
     rpc("activity.pageView", "mutation", { path, workspaceId }).catch(() => {});
   }, [key, path, workspaceId]);
