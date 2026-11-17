@@ -223,6 +223,8 @@ export interface AdminUser {
   utmContent: string | null;
   gclid: string | null;
   signupReferrer: string | null;
+  /** Last logged request; null if the user has none on record. */
+  lastActiveAt?: Date | null;
   role: { id: string; name: string } | null;
   subscriptions: Array<{
     id: string;
@@ -580,6 +582,164 @@ export interface FeedbackList {
   counts: { kind: string; reason: string | null; count: number }[];
 }
 
+// ── User timeline (admin.getUserTimeline) ──────────────────────────────
+
+export type JourneyKind =
+  | "account"
+  | "subject"
+  | "upload"
+  | "session"
+  | "practice"
+  | "flashcards"
+  | "copilot"
+  | "planner"
+  | "generate"
+  | "billing"
+  | "feedback"
+  | "frustration"
+  | "error";
+
+export interface JourneyEvent {
+  at: Date;
+  until: Date;
+  kind: JourneyKind;
+  text: string;
+  count: number;
+  /** Named things the line is about (file names, a session title…). */
+  items: string[];
+  milestone: boolean;
+  workspace: { id: string; title: string } | null;
+  sessionId: string | null;
+  error: { action: string; code: string | null; message: string | null } | null;
+}
+
+export interface JourneyVisit {
+  startedAt: Date;
+  endedAt: Date;
+  /** Last request minus first request: a floor on time spent, not a measurement. */
+  durationSeconds: number;
+  requests: number;
+  device: string | null;
+  /** Happened with the user away from the site (a payment webhook…). */
+  offline: boolean;
+  events: JourneyEvent[];
+}
+
+export interface UserTimeline {
+  user: {
+    id: string;
+    name: string | null;
+    email: string | null;
+    emailVerified: Date | null;
+    provider: string;
+    createdAt: Date;
+    deletedAt: Date | null;
+    isAdmin: boolean;
+    source: string | null;
+    campaign: string | null;
+    plan: {
+      name: string;
+      status: string;
+      cancelAt: Date | null;
+      currentPeriodEnd: Date;
+    } | null;
+    lastActiveAt: Date | null;
+  };
+  totals: {
+    subjects: number;
+    uploads: number;
+    sessionsStarted: number;
+    sessionsFinished: number;
+    activitiesCompleted: number;
+    flashcardReviews: number;
+    copilotMessages: number;
+    plannerMessages: number;
+    totalSpentCents: number;
+  };
+  milestones: Array<{
+    key: string;
+    label: string;
+    at: Date | null;
+    approximate?: boolean;
+  }>;
+  window: { from: Date; to: Date; days: number; truncated: boolean };
+  summary: {
+    visits: number;
+    activeDays: number;
+    timeOnSiteSeconds: number;
+    requests: number;
+    errors: number;
+  };
+  /** Oldest first. */
+  visits: JourneyVisit[];
+}
+
+// ── Product analytics (admin.getProductAnalytics) ──────────────────────
+
+export interface ActiveUsersPoint {
+  /** UTC day, `YYYY-MM-DD`. */
+  date: string;
+  dau: number;
+  wau: number;
+  mau: number;
+  signups: number;
+}
+
+export interface FunnelStep {
+  key: string;
+  label: string;
+  users: number;
+  pctOfSignups: number;
+  pctOfPrevious: number | null;
+  /** Users for whom this is the furthest step reached. */
+  stoppedHere: number;
+}
+
+export interface ProductAnalytics {
+  from: Date;
+  to: Date;
+  days: number;
+  activeUsers: {
+    series: ActiveUsersPoint[];
+    today: number;
+    last7Days: number;
+    last30Days: number;
+    inWindow: number;
+  };
+  funnel: {
+    signups: number;
+    steps: FunnelStep[];
+    verifiedEmail: { users: number; pct: number };
+    returnedLaterDay: { users: number; pct: number };
+    paid: { users: number; pct: number };
+    medianMinutesToFirstSession: number | null;
+  };
+  features: Array<{
+    key: string;
+    label: string;
+    unit: string;
+    users: number;
+    pctOfActive: number;
+    events: number;
+  }>;
+  failingActions: Array<{
+    path: string;
+    label: string;
+    calls: number;
+    failures: number;
+    failureRate: number;
+    users: number;
+  }>;
+  recentlyActive: Array<{
+    userId: string;
+    name: string | null;
+    email: string | null;
+    lastActiveAt: Date;
+    activeDays: number;
+    requests: number;
+  }>;
+}
+
 export const adminApi = {
   getSystemStats: () => rpc<SystemStats>("admin.getSystemStats", "query", undefined),
 
@@ -591,6 +751,12 @@ export const adminApi = {
 
   getClientStats: (since?: Date) =>
     rpc<ClientStats>("admin.getClientStats", "query", since ? { since } : undefined),
+
+  getProductAnalytics: (days: number) =>
+    rpc<ProductAnalytics>("admin.getProductAnalytics", "query", { days }),
+
+  getUserTimeline: (input: { userId: string; days: number; before?: Date }) =>
+    rpc<UserTimeline>("admin.getUserTimeline", "query", input),
 
   getCostAnalytics: (since?: Date) =>
     rpc<CostAnalytics>("admin.getCostAnalytics", "query", since ? { since } : undefined),

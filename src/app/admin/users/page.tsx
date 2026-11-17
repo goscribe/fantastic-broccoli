@@ -100,18 +100,23 @@ export default function AdminUsersPage() {
         </select>
       </div>
 
-      <Table headers={["User", "Verified", "Plan", "Source", "Joined", ""]}>
+      <Table headers={["User", "Verified", "Plan", "Source", "Joined", "Last active", ""]}>
         {isLoading ? (
-          <TableSkeletonRows cols={6} />
+          <TableSkeletonRows cols={7} />
         ) : !data?.users.length ? (
-          <EmptyRow colSpan={6}>No users match this search.</EmptyRow>
+          <EmptyRow colSpan={7}>No users match this search.</EmptyRow>
         ) : (
           data.users.map((user) => {
             const subscription = user.subscriptions?.[0];
             return (
               <tr key={user.id} className="hover:bg-muted/40">
                 <Td>
-                  <p className="font-medium">{user.name ?? "—"}</p>
+                  <Link
+                    href={`/admin/users/${user.id}`}
+                    className="font-medium hover:text-accent"
+                  >
+                    {user.name ?? "—"}
+                  </Link>
                   <p className="text-[12px] text-muted-foreground">
                     {user.email ?? "—"}
                   </p>
@@ -132,7 +137,18 @@ export default function AdminUsersPage() {
                 <Td className="text-muted-foreground">
                   {formatRelativeDate(user.createdAt)}
                 </Td>
-                <Td>
+                <Td className="text-muted-foreground">
+                  {user.lastActiveAt
+                    ? formatRelativeDate(user.lastActiveAt)
+                    : "—"}
+                </Td>
+                <Td className="whitespace-nowrap">
+                  <Link
+                    href={`/admin/users/${user.id}`}
+                    className="mr-3 text-[13px] text-accent hover:underline"
+                  >
+                    Activity
+                  </Link>
                   <Link
                     href={`/admin/workspaces?q=${encodeURIComponent(user.email ?? user.id)}`}
                     className="text-[13px] text-accent hover:underline"

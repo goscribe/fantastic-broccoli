@@ -11,6 +11,7 @@ import {
   TableSkeletonRows,
   Td,
 } from "@/components/admin/admin-ui";
+import { ProductAnalyticsSection } from "@/components/admin/product-analytics";
 import { formatRelativeDate } from "@/lib/utils";
 
 function retentionPct(part: number, whole: number): string {
@@ -104,7 +105,7 @@ export default function AdminOverviewPage() {
     <>
       <PageHeader
         title="System overview"
-        description="Platform health, recent workspaces, and revenue at a glance."
+        description="Platform health, product usage, recent workspaces, and revenue at a glance."
       />
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -132,6 +133,8 @@ export default function AdminOverviewPage() {
           loading={isLoading}
         />
       </div>
+
+      <ProductAnalyticsSection />
 
       <section className="mt-10">
         <h2 className="mb-3 text-lg font-semibold">Retention</h2>
