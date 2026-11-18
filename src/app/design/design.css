@@ -2,7 +2,9 @@
 .design-root,
 html.new-ui {
   --background: #ffffff;
+  --foreground: #111114;
   --card: #ffffff;
+  --card-foreground: #111114;
   --muted: #f4f4f6;
   --muted-foreground: #6b6b76;
   --faint: #9a9aa6;
