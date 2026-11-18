@@ -32,6 +32,7 @@ import {
   VocabRecallContent,
   ClozeContent,
   ExplainAloudContent,
+  InteractiveContent,
   WorksheetContent,
   PlanGenerationSnapshot,
 } from "@/types";
@@ -46,6 +47,7 @@ import { FlashcardActivity } from "@/components/session/flashcard-activity";
 import { VocabRecallActivity } from "@/components/session/vocab-recall-activity";
 import { ClozeActivity } from "@/components/session/cloze-activity";
 import { ExplainAloudActivity } from "@/components/session/explain-aloud-activity";
+import { InteractiveActivity } from "@/components/session/interactive-activity";
 import { WorksheetActivity } from "@/components/session/worksheet-activity";
 import { SessionDebrief } from "@/components/session/session-debrief";
 import { MathText } from "@/components/ui/markdown-text";
@@ -626,10 +628,19 @@ export default function SessionDetailPage() {
             onComplete={() => goToNext()}
           />
         );
+      case "interactive":
+        return (
+          <InteractiveActivity
+            key={activity.id}
+            content={activity.content as InteractiveContent}
+            onComplete={() => goToNext()}
+          />
+        );
       default:
         return (
           <Card className="text-center py-6 text-sm text-muted-foreground">
-            Activity type &ldquo;{activity.type}&rdquo; coming soon
+            <p className="mb-4">{t("session.activityUnavailable")}</p>
+            <Button onClick={() => goToNext()}>{t("session.continue")}</Button>
           </Card>
         );
     }
