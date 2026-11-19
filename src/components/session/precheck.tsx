@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { McqOptionBody, McqQuestionBody, optionsHaveFigures } from "@/components/session/mcq-rich";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   proficiencyApi,
@@ -18,7 +19,8 @@ import "@/app/design/design.css";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Check, X } from "lucide-react";
 
-const HERO = "w-full rounded-3xl border border-border bg-card p-5 sm:p-6 text-left";
+// Flat on the page like the session player; no card around it.
+const HERO = "w-full text-left";
 const SECTION = "mt-4 border-t border-border pt-3 text-left";
 
 /** Up to two questions per topic: start in the middle, then step up after a right answer or down after a wrong one. */
@@ -298,8 +300,8 @@ export function SessionPrecheck({
               <li
                 key={topic.topic}
                 className={cn(
-                  "animate-fade-up rounded-2xl border border-border bg-card",
-                  hero ? "p-3.5" : "px-3 py-2.5",
+                  "animate-fade-up border-b border-border last:border-0",
+                  hero ? "py-3.5" : "py-2.5",
                 )}
                 style={{ animationDelay: `${120 + i * 70}ms` }}
               >
@@ -336,25 +338,11 @@ export function SessionPrecheck({
   const total = topics.length;
   const isFirst = step.topicIndex === 0 && step.asked === 0;
   const finishing = result !== null && step.topicIndex === total - 1 && isLastForTopic(topic, step, result.correct);
-  const cat = result?.correct ? "cheer" : "think";
 
   return (
     <div className={wrap}>
       {/* Header: mascot, title, skip */}
       <div className="flex items-start gap-3">
-        {hero && (
-          <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-accent-soft">
-            <Image
-              key={cat}
-              src={`/design/cat2-${cat}.png`}
-              alt=""
-              width={40}
-              height={44}
-              unoptimized
-              className={cn("h-10 w-auto select-none object-contain", result?.correct ? "cat-cheer" : "cat-bob")}
-            />
-          </span>
-        )}
         <div className="min-w-0 flex-1">
           <p className={cn("font-semibold text-accent", hero ? "text-[13px] leading-snug" : "text-[11px] uppercase tracking-wide")}>
             {t("prof.checkTitle")}
@@ -421,9 +409,9 @@ export function SessionPrecheck({
       {/* Question + options, slide in on each new question */}
       <div key={`${step.topicIndex}-${step.asked}`} className="animate-slide-in-right">
         <div className={hero ? "mt-4 text-[19px] font-bold leading-[1.35] sm:text-[20px]" : "mt-2.5 text-sm font-medium"}>
-          <MarkdownText text={item.question} />
+          <McqQuestionBody text={item.question} figures={item.figures} options={item.options} />
         </div>
-        <div className={hero ? "mt-4 grid gap-2.5" : "mt-2 grid gap-1.5 sm:grid-cols-2"}>
+        <div className={cn(hero ? "mt-4 grid gap-2.5" : "mt-2 grid gap-1.5 sm:grid-cols-2", optionsHaveFigures(item.options) && "grid-cols-2")}>
           {item.options.map((option, i) => {
             const done = result !== null;
             const isCorrect = done && i === result.correctIndex;
@@ -464,8 +452,8 @@ export function SessionPrecheck({
                 )}
                 {!hero && isCorrect && <Check className="h-3.5 w-3.5 shrink-0 text-accent" />}
                 {!hero && wrong && <X className="h-3.5 w-3.5 shrink-0 text-rose" />}
-                <span className="min-w-0">
-                  <MarkdownText text={option} />
+                <span className="min-w-0 flex-1">
+                  <McqOptionBody text={option} figures={item.figures} />
                 </span>
               </button>
             );

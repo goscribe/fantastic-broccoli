@@ -8,7 +8,7 @@ import {
 import { MathText } from "@/components/ui/markdown-text";
 import { BrokenBlock } from "@/components/content/content-repair";
 
-const MIN_HEIGHT = 120;
+const MIN_HEIGHT = 60;
 const MAX_HEIGHT = 900;
 
 // Design tokens forwarded into the sandboxed iframe so LLM-authored
@@ -283,8 +283,11 @@ function errorScript(id: string) {
 
 function resizeScript(id: string) {
   return `<script>(function(){
-  function post(){parent.postMessage({type:"scribe-widget-height",id:${JSON.stringify(id)},height:document.documentElement.scrollHeight},"*");}
-  if(typeof ResizeObserver!=="undefined"){new ResizeObserver(post).observe(document.documentElement);}
+  // documentElement.scrollHeight never drops below the frame's own height,
+  // so a small figure stayed at the initial size; measure the content instead.
+  function contentHeight(){var b=document.body;if(!b)return document.documentElement.scrollHeight;var bottom=0;for(var i=0;i<b.children.length;i++){var el=b.children[i];if(el.tagName==="SCRIPT"||el.tagName==="STYLE")continue;var r=el.getBoundingClientRect();bottom=Math.max(bottom,r.bottom+window.scrollY);}var cs=getComputedStyle(b);return Math.ceil(bottom+(parseFloat(cs.marginBottom)||0)+(parseFloat(cs.paddingBottom)||0));}
+  function post(){parent.postMessage({type:"scribe-widget-height",id:${JSON.stringify(id)},height:contentHeight()},"*");}
+  if(typeof ResizeObserver!=="undefined"){var ro=new ResizeObserver(post);ro.observe(document.documentElement);if(document.body)ro.observe(document.body);}
   window.addEventListener("load",post);
   setTimeout(post,50);
 })();</script>`;
@@ -295,6 +298,8 @@ interface HtmlWidgetProps {
   title?: string;
   /** Where this widget lives, for render-issue reports to the server. */
   surface?: RenderIssueSurface;
+  /** No frame of its own (e.g. a picture inside a multiple-choice option). */
+  bare?: boolean;
 }
 
 /**
@@ -306,6 +311,7 @@ export function HtmlWidget({
   html: htmlProp,
   title,
   surface = "widget",
+  bare = false,
 }: HtmlWidgetProps) {
   const frameId = useId();
   const [height, setHeight] = useState(320);
@@ -380,7 +386,7 @@ export function HtmlWidget({
   const error = scriptError?.html === html ? scriptError.message : null;
 
   return (
-    <figure className="my-2 overflow-hidden rounded-xl border border-border bg-card animate-fade-up">
+    <figure className={bare ? "overflow-hidden" : "my-2 overflow-hidden rounded-xl border border-border bg-card animate-fade-up"}>
       <iframe
         title={title ?? "Interactive visualizer"}
         sandbox="allow-scripts"

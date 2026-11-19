@@ -2,7 +2,7 @@
 
 import { useNewUi } from "@/lib/new-ui";
 import { MathText } from "@/components/ui/markdown-text";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,42 +10,133 @@ import { ConfettiDots } from "@/components/graphics/floating-decor";
 import {
   Sparkles,
   Loader2,
-  Check,
+  Play,
+  Flame,
   ArrowRight,
-  FileText,
-  CalendarClock,
+  ChevronDown,
+  Target,
+  Clock,
+  CheckCircle2,
 } from "lucide-react";
-import { awardSessionCredits } from "@/lib/credits";
-import { useQuery } from "@tanstack/react-query";
+import { Mascot } from "@/components/rewards/mascot";
+import { useStreak } from "@/lib/rewards";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { studySessionApi } from "@/lib/api/study-session";
+import { createStudySession, fetchStudySessions } from "@/lib/api/study";
+import { pickStudyNowSession } from "@/components/session/study-now-card";
+import { remainingMinutes } from "@/components/session/session-progress";
+import { toastError } from "@/lib/toast";
+import type { StudySession } from "@/types";
 import { SESSION_COMPLETED_EVENT } from "@/lib/api/account";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/session";
+import "@/lib/i18n/rewards";
 
-const stages = [
-  "session.debriefReviewing",
-  "session.debriefComparing",
-  "session.debriefWriting",
-];
+/** Length of the full session a finished Quick 5 offers to start. */
+const FOLLOW_UP_MINUTES = 15;
 
+/** Today's full (non-Quick 5) session for the subject, if one is open. */
+function pickFullSession(
+  sessions: StudySession[],
+  excludeId: string,
+): StudySession | undefined {
+  return pickStudyNowSession(
+    sessions.filter(
+      (s) =>
+        !s.quickStart &&
+        s.id !== excludeId &&
+        (s.generating ||
+          s.activities.some(
+            (a) => a.status === "pending" || a.status === "in_progress",
+          )),
+    ),
+  );
+}
 
+/** Old cached debriefs were headed "Session debrief — <title>"; that's filler. */
+const usefulHeadline = (h: string | undefined) =>
+  h && !/^session debrief\b/i.test(h.trim()) ? h : undefined;
+
+function StatTile({ icon, label, value, tone }: { icon: ReactNode; label: string; value: ReactNode; tone: string }) {
+  return (
+    <div className="flex flex-col items-center gap-1 rounded-2xl border border-border bg-card px-2 py-3.5">
+      <span className={cn("flex items-center gap-1.5 text-[19px] font-bold tabular-nums leading-none", tone)}>
+        {icon}
+        {value}
+      </span>
+      <span className="text-[12px] font-medium text-muted-foreground">{label}</span>
+    </div>
+  );
+}
+
+/**
+ * End of session, in the shape learning apps converge on: one character,
+ * one title, a few hard numbers, one next step. The model-written report is
+ * a line under the title plus an optional "full report" below.
+ */
 export function SessionDebrief({
   onBack,
   sessionId,
+  workspaceId,
+  subjectTitle,
   quickStart = false,
+  sessionBonus = 0,
+  streakLitDays = null,
 }: {
   onBack: () => void;
   sessionId: string;
-  /** Quick 5 sessions promise "5 more tomorrow" instead of a recall session. */
+  /** Lets a finished Quick 5 hand off to today's full session. */
+  workspaceId?: string;
+  subjectTitle?: string;
   quickStart?: boolean;
+  /** Points for finishing the whole session (shown until the server's count arrives). */
+  sessionBonus?: number;
+  /** Streak length when a completion in this visit made today count; null otherwise. */
+  streakLitDays?: number | null;
 }) {
   const { t } = useI18n();
   const newUi = useNewUi();
-  const [stage, setStage] = useState(0);
-  const [creditsEarned] = useState(() => awardSessionCredits(sessionId));
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const [showReport, setShowReport] = useState(false);
+  const handOff = quickStart && !!workspaceId;
 
-  const { data: debrief, isError } = useQuery({
+  const { data: subjectSessions, isLoading: sessionsLoading } = useQuery({
+    queryKey: ["study-sessions", workspaceId],
+    queryFn: () => fetchStudySessions(workspaceId!),
+    enabled: handOff,
+  });
+  const fullSession = subjectSessions ? pickFullSession(subjectSessions, sessionId) : undefined;
+  const fullMinutes = fullSession
+    ? fullSession.generating
+      ? fullSession.durationMinutes
+      : remainingMinutes(fullSession.activities) || fullSession.durationMinutes
+    : FOLLOW_UP_MINUTES;
+  const openSession = (id: string) => router.push(`/workspace/${workspaceId}/session/${id}`);
+  const startFull = useMutation({
+    mutationFn: () =>
+      createStudySession({
+        workspaceId: workspaceId!,
+        title: subjectTitle || t("session.defaultTitle"),
+        depth: "moderate",
+        durationMinutes: FOLLOW_UP_MINUTES,
+      }),
+    onSuccess: (created) => {
+      queryClient.invalidateQueries({ queryKey: ["study-sessions", workspaceId] });
+      if (created) openSession(created.id);
+    },
+    onError: (error) => toastError(error, t("session.quick5StartFailed")),
+  });
+
+  const { data: streak } = useStreak();
+  const { data: stats } = useQuery({
+    queryKey: ["session-stats", sessionId],
+    queryFn: () => studySessionApi.getStats(sessionId),
+    retry: 1,
+  });
+  const { data: debrief, isLoading: debriefLoading } = useQuery({
     queryKey: ["session-debrief", sessionId],
     queryFn: () => studySessionApi.getDebrief(sessionId),
     staleTime: Infinity,
@@ -53,159 +144,172 @@ export function SessionDebrief({
   });
 
   useEffect(() => {
-    if (stage >= stages.length) return;
-    const timer = setTimeout(() => setStage((s) => s + 1), 1100);
-    return () => clearTimeout(timer);
-  }, [stage]);
+    window.dispatchEvent(new CustomEvent(SESSION_COMPLETED_EVENT, { detail: { sessionId } }));
+  }, [sessionId]);
 
-  const debriefShown = (isError || !!debrief) && stage >= stages.length;
-  useEffect(() => {
-    if (!debriefShown) return;
-    window.dispatchEvent(
-      new CustomEvent(SESSION_COMPLETED_EVENT, { detail: { sessionId } }),
-    );
-  }, [debriefShown, sessionId]);
+  const verdict = usefulHeadline(debrief?.headline) ?? debrief?.summary;
+  const hasReport = !!debrief && (debrief.sections.length > 0 || !!usefulHeadline(debrief.headline));
+  const streakDays = streakLitDays ?? (streak?.todayDone ? streak.current : null);
+  const points = Math.max(stats?.points ?? 0, sessionBonus);
 
-  if (!isError && (stage < stages.length || !debrief)) {
-    return (
-      <div className="py-14 text-center space-y-4 animate-fade-up">
-        <FileText className="h-7 w-7 text-accent mx-auto" />
-        <p className="text-sm font-semibold">{t("session.debriefPreparing")}</p>
-        <div className="inline-block text-left space-y-1.5">
-          {stages.slice(0, Math.min(stage, stages.length - 1) + 1).map((label, i) => (
-            <p
-              key={label}
-              className="flex items-center gap-2 text-xs font-medium animate-fade-up"
-            >
-              {i < stage && !(i === stages.length - 1 && !debrief) ? (
-                <Check className="h-3.5 w-3.5 text-accent" />
-              ) : (
-                <Loader2 className="h-3.5 w-3.5 animate-spin text-muted-foreground" />
-              )}
-              <span className={i >= stage || (i === stages.length - 1 && !debrief) ? "text-muted-foreground" : ""}>
-                {t(label)}
-              </span>
-            </p>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  const shown = debrief ?? {
-    headline: t("session.debriefFallbackHeadline"),
-    summary: t("session.debriefFallbackSummary"),
-    sections: [],
-  };
+  const primary = handOff ? (
+    <Button
+      size="lg"
+      className="w-full text-[15px]"
+      disabled={sessionsLoading || startFull.isPending}
+      onClick={() => (fullSession ? openSession(fullSession.id) : startFull.mutate())}
+    >
+      {startFull.isPending || sessionsLoading ? (
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+      ) : (
+        <Play className="mr-2 h-4 w-4 fill-current" />
+      )}
+      {t(fullSession ? "session.quick5FinishCta" : "session.quick5StartCta").replace("{n}", String(fullMinutes))}
+    </Button>
+  ) : quickStart ? (
+    <Button size="lg" className="w-full text-[15px]" onClick={onBack}>
+      {t("debrief.continue")}
+      <ArrowRight className="ml-1.5 h-4 w-4" />
+    </Button>
+  ) : (
+    <Link href="/flashcards/review" className="block w-full">
+      <Button size="lg" className="w-full text-[15px]">
+        {t("session.reviewDueCards")}
+        <ArrowRight className="ml-1.5 h-4 w-4" />
+      </Button>
+    </Link>
+  );
 
   return (
-    <div className="animate-fade-up pb-10">
-      <div className="relative mb-6 overflow-hidden rounded-3xl border border-border bg-card px-6 py-6">
-        <div
-          className="pointer-events-none absolute inset-y-0 right-0 hidden w-48 select-none sm:block"
-          aria-hidden
-        >
-          <Image
-            src={newUi ? "/design/props/trophy.png" : "/illustrations/props/trophy.png"}
-            alt=""
-            width={160}
-            height={160}
-            className="absolute -bottom-3 right-6 w-24"
-          />
-          <ConfettiDots />
-        </div>
-        <div className="relative sm:max-w-[calc(100%-11rem)]">
-          <p className="flex items-center gap-1.5 text-[11px] font-medium text-accent-dim mb-2">
-            <Sparkles className="h-3 w-3" />
-            {t("session.debriefGenerated")}
-          </p>
-          <h2 className="text-lg font-bold tracking-tight">
-            <MathText text={shown.headline} />
-          </h2>
-      {creditsEarned > 0 && (
-        <p className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent">
-          <Sparkles className="h-3.5 w-3.5" />+{creditsEarned}{" "}
-          {t("session.creditsEarned")}
+    <div className="mx-auto flex max-w-md flex-col items-center pb-10 pt-2 text-center animate-fade-up">
+      <div className="relative" aria-hidden>
+        {newUi ? (
+          <Mascot pose="trophy" className="h-[112px] sm:h-[128px]" />
+        ) : (
+          <Image src="/illustrations/props/trophy.png" alt="" width={160} height={160} className="w-24" />
+        )}
+        <ConfettiDots />
+      </div>
+
+      <h2 className="mt-4 text-2xl font-bold tracking-tight sm:text-[28px]">
+        {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
+      </h2>
+      <div className="mt-1.5 min-h-6 text-[15px] leading-6 text-muted-foreground">
+        {verdict ? (
+          <MathText text={verdict} />
+        ) : debriefLoading ? (
+          <span className="inline-block h-4 w-56 animate-pulse rounded-full bg-muted align-middle" />
+        ) : null}
+      </div>
+
+      <div className="mt-6 grid w-full grid-cols-3 gap-2.5" role="status">
+        {stats ? (
+          <>
+            <StatTile
+              tone="text-accent"
+              icon={<Sparkles className="size-4" fill="currentColor" />}
+              value={`+${points}`}
+              label={t("debrief.points")}
+            />
+            {stats.accuracy !== null ? (
+              <StatTile
+                tone="text-success"
+                icon={<Target className="size-4" />}
+                value={`${Math.round(stats.accuracy * 100)}%`}
+                label={t("debrief.accuracy")}
+              />
+            ) : (
+              <StatTile
+                tone="text-success"
+                icon={<CheckCircle2 className="size-4" />}
+                value={`${stats.activitiesDone}/${stats.activitiesTotal}`}
+                label={t("debrief.done")}
+              />
+            )}
+            <StatTile
+              tone="text-[#0369a1]"
+              icon={<Clock className="size-4" />}
+              value={t("debrief.minutes").replace("{n}", String(stats.minutes))}
+              label={t("debrief.time")}
+            />
+          </>
+        ) : (
+          [0, 1, 2].map((i) => <div key={i} className="h-[74px] animate-pulse rounded-2xl bg-muted" />)
+        )}
+      </div>
+
+      {streakDays !== null && streakDays > 0 && (
+        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#fff1e6] px-3.5 py-1.5 text-[13px] font-semibold text-[#9a3412]">
+          <Flame className={cn("size-4 text-[#f97316]", streakLitDays !== null && "animate-streak-pop")} fill="currentColor" strokeWidth={1.6} />
+          {t("rewards.streakDays").replace("{n}", String(streakDays))}
         </p>
       )}
-          <p className="text-sm text-muted-foreground leading-6 mt-1.5">
-            <MathText text={shown.summary} />
-          </p>
-        </div>
+
+      <div className="mt-7 w-full space-y-1">
+        {primary}
+        {(handOff || !quickStart) && (
+          <Button size="lg" variant="ghost" className="w-full text-muted-foreground" onClick={onBack}>
+            {t("session.backToWorkspace")}
+          </Button>
+        )}
       </div>
 
-      <div className="space-y-6">
-        {shown.sections.map((section) => (
-          <section key={section.heading}>
-            <h3 className="text-sm font-semibold mb-2 pb-1.5 border-b border-border">
-              {section.heading}
-            </h3>
-            {section.body && (
-              <p className="text-sm leading-6 text-foreground">
-                <MathText text={section.body} />
-              </p>
-            )}
-            {section.bullets && (
-              <ul className="space-y-2.5">
-                {section.bullets.map((b) => (
-                  <li key={b.text} className="flex gap-2.5">
-                    <span
-                      className={cn(
-                        "mt-2 h-1.5 w-1.5 rounded-full shrink-0",
-                        section.tone === "good"
-                          ? "bg-success"
-                          : section.tone === "improve"
-                            ? "bg-red-500"
-                            : "bg-accent",
-                      )}
-                    />
-                    <div>
-                      <p className="text-sm font-medium leading-6">
-                        <MathText text={b.text} />
-                      </p>
-                      {b.detail && (
-                        <p className="text-sm text-muted-foreground leading-6">
-                          <MathText text={b.detail} />
-                        </p>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </section>
-        ))}
-      </div>
-
-      <div className="mt-8 rounded-xl border border-accent/25 bg-accent-soft p-4">
-        <p className="flex items-center gap-1.5 text-sm font-semibold">
-          <CalendarClock className="h-4 w-4 text-accent" />
-          {t(quickStart ? "session.quick5DoneTitle" : "session.nextStepTitle")}
-        </p>
-        <p className="mt-1 text-sm text-muted-foreground leading-6">
-          {t(quickStart ? "session.quick5DoneBody" : "session.nextStepBody")}
-        </p>
-        <div className="flex flex-wrap gap-2 mt-3">
-          {quickStart ? (
-            <Button size="sm" onClick={onBack}>
-              {t("session.backToWorkspace")}
-              <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
-            </Button>
-          ) : (
-            <>
-              <Link href="/flashcards/review">
-                <Button size="sm">
-                  {t("session.reviewDueCards")}
-                  <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
-                </Button>
-              </Link>
-              <Button size="sm" variant="outline" onClick={onBack}>
-                {t("session.backToWorkspace")}
-              </Button>
-            </>
+      {hasReport && (
+        <div className="mt-4 w-full text-left">
+          <button
+            type="button"
+            onClick={() => setShowReport((v) => !v)}
+            aria-expanded={showReport}
+            className="mx-auto flex items-center gap-1 text-[13px] font-semibold text-accent-dim hover:underline"
+          >
+            {t(showReport ? "debrief.hideReport" : "debrief.seeReport")}
+            <ChevronDown className={cn("size-4 transition-transform", showReport && "rotate-180")} />
+          </button>
+          {showReport && debrief && (
+            <div className="mt-4 space-y-5 rounded-2xl border border-border p-5 animate-fade-up">
+              {usefulHeadline(debrief.headline) && debrief.summary && (
+                <p className="text-sm leading-6 text-foreground">
+                  <MathText text={debrief.summary} />
+                </p>
+              )}
+              {debrief.sections.map((section) => (
+                <section key={section.heading}>
+                  <h3 className="mb-1.5 text-sm font-semibold">{section.heading}</h3>
+                  {section.body && (
+                    <p className="text-sm leading-6 text-muted-foreground">
+                      <MathText text={section.body} />
+                    </p>
+                  )}
+                  {section.bullets && (
+                    <ul className="space-y-2">
+                      {section.bullets.map((b) => (
+                        <li key={b.text} className="flex gap-2.5">
+                          <span
+                            className={cn(
+                              "mt-2 h-1.5 w-1.5 shrink-0 rounded-full",
+                              section.tone === "good" ? "bg-success" : section.tone === "improve" ? "bg-red-500" : "bg-accent",
+                            )}
+                          />
+                          <div>
+                            <p className="text-sm font-medium leading-6">
+                              <MathText text={b.text} />
+                            </p>
+                            {b.detail && (
+                              <p className="text-sm leading-6 text-muted-foreground">
+                                <MathText text={b.detail} />
+                              </p>
+                            )}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              ))}
+            </div>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 }

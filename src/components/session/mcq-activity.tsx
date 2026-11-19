@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { McqOptionBody, McqQuestionBody, optionsHaveFigures } from "@/components/session/mcq-rich";
 import { McqContent } from "@/types";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
 import { useReportCurrentItem } from "@/lib/current-item";
@@ -131,10 +132,10 @@ export function McqActivity({
       </div>
 
       <p className={newUi ? "text-[20px] font-bold leading-[1.35]" : "text-sm font-medium leading-relaxed"}>
-        <MarkdownText text={question.question} />
+        <McqQuestionBody text={question.question} figures={question.figures} options={question.options} />
       </p>
 
-      <div className="space-y-2">
+      <div className={optionsHaveFigures(question.options) ? "grid grid-cols-2 gap-2" : "space-y-2"}>
         {question.options.map((option, i) => (
           <button
             key={i}
@@ -163,7 +164,7 @@ export function McqActivity({
                 {newUi ? i + 1 : String.fromCharCode(65 + i)}
               </span>
               <span className="flex-1 min-w-0">
-                <MarkdownText text={option} />
+                <McqOptionBody text={option} figures={question.figures} />
               </span>
               {revealed && i === question.correctIndex && (
                 <CheckCircle2 className="h-4 w-4 text-success flex-shrink-0" />

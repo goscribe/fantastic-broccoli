@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Mascot } from "@/components/rewards/mascot";
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -29,13 +29,9 @@ export function FeedbackCard({
   return (
     <div className="relative pb-2 pt-3">
       {ok && (
-        <Image
-          src="/design/cat2-cheer.png"
-          alt=""
-          width={110}
-          height={110}
-          unoptimized
-          className="cat-cheer pointer-events-none absolute -top-[58px] right-5 h-[88px] w-auto drop-shadow-[0_10px_18px_rgba(22,163,74,.22)]"
+        <Mascot
+          pose="cheer"
+          className="cat-cheer pointer-events-none absolute -top-[58px] right-5 h-[88px] drop-shadow-[0_10px_18px_rgba(22,163,74,.22)]"
         />
       )}
       <div

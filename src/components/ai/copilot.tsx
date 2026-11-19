@@ -1,5 +1,6 @@
 "use client";
 
+import { Mascot } from "@/components/rewards/mascot";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
@@ -52,6 +53,7 @@ function buildToolParts(toolCalls: CopilotToolCall[]): ToolCallPart[] {
     args: tc.detail,
     result: "",
     status: "done",
+    sources: tc.sources,
   }));
 }
 
@@ -474,14 +476,17 @@ export function Copilot({
         )}
         {chatMessages.length === 0 && !hydrating && (
           <div className="pt-8 text-center space-y-5">
-            <Image
-              src={newUi ? "/design/cat2-pencil.png" : "/illustrations/bot.png"}
-              alt=""
-              width={160}
-              height={160}
-              unoptimized={newUi}
-              className={cn("pointer-events-none mx-auto h-20 w-20 select-none object-contain", newUi && "cat-float h-24 w-24")}
-            />
+            {newUi ? (
+              <Mascot pose="pencil" className="cat-float pointer-events-none mx-auto block h-24" />
+            ) : (
+              <Image
+                src="/illustrations/bot.png"
+                alt=""
+                width={160}
+                height={160}
+                className="pointer-events-none mx-auto h-20 w-20 select-none object-contain"
+              />
+            )}
             <div>
               <p className="text-sm font-semibold">
                 {newUi ? "Stuck? Ask me anything." : t("misc.copilotEmptyTitle")}
@@ -516,7 +521,7 @@ export function Copilot({
             </div>
           ) : (
             <div key={msg.id} className={cn("space-y-0.5", newUi && "flex gap-2")}>
-              {newUi && <Image src="/design/cat2-think.png" alt="" width={26} height={26} unoptimized className="mt-1.5 h-[26px] w-auto shrink-0" />}
+              {newUi && <Mascot pose="think" className="mt-1.5 h-[26px]" />}
               <div className="min-w-0 flex-1 space-y-0.5">
               {msg.parts.length === 0 && (
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground px-1">
@@ -564,7 +569,7 @@ export function Copilot({
       </div>
 
       {/* Input */}
-      <div className={cn("p-3 border-t border-border", variant === "page" && "border-t-0 px-0 pb-6 pt-2")}>
+      <div className={cn("p-3", variant === "page" && "px-0 pb-6 pt-2")}>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -609,7 +614,7 @@ export function CopilotTrigger({ onClick }: { onClick: () => void }) {
         aria-label={t("misc.askScribe")}
         className="fixed right-0 top-1/2 z-40 flex -translate-y-1/2 flex-col items-center gap-1.5 rounded-l-2xl border border-r-0 border-border bg-card px-2 py-3 shadow-md hover:bg-muted"
       >
-        <Image src="/design/cat2-wave.png" alt="" width={36} height={36} unoptimized className="cat-wiggle h-9 w-auto" />
+        <Mascot pose="wave" className="cat-wiggle h-9" />
         <PanelRightOpen className="h-4 w-4 text-muted-foreground" />
       </button>
     );

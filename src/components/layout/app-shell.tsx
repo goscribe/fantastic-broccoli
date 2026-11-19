@@ -14,6 +14,7 @@ import { ConversionTracker } from "@/components/billing/conversion-tracker";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { NewShell } from "@/components/layout/new-shell";
 import { useNewUi } from "@/lib/new-ui";
+import { useAccentTheme } from "@/lib/rewards";
 import "@/app/design/design.css";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -21,10 +22,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuthUser();
   usePageViewTracking(user !== null);
   const newUi = useNewUi();
+  const isPublic = isPublicPath(pathname) || pathname.startsWith("/admin");
+  useAccentTheme(!isPublic && !loading && user !== null);
   const isSession = /^\/workspace\/[^/]+\/session\//.test(pathname);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  if (isPublicPath(pathname) || pathname.startsWith("/admin")) {
+  if (isPublic) {
     return <>{children}</>;
   }
 

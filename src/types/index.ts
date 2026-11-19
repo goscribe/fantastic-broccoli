@@ -103,6 +103,8 @@ export interface McqQuestion {
   options: string[];
   correctIndex: number;
   explanation: string;
+  /** Figures the question shows or options choose between ([[figure:ID]] tokens). */
+  figures?: ReadingFigure[];
   userAnswer?: number;
   /** `Flashcard` row this question tests; answers record SM-2 attempts on it. */
   sourceFlashcardId?: string;

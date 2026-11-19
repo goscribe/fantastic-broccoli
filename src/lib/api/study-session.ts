@@ -9,6 +9,7 @@ import type {
   SessionActivity,
   SessionDepth,
   StudySession,
+  ReadingFigure,
 } from "@/types";
 
 /**
@@ -191,6 +192,17 @@ export interface ApiSessionDebrief {
   }[];
 }
 
+export interface ApiSessionStats {
+  activitiesDone: number;
+  activitiesTotal: number;
+  answered: number;
+  correct: number;
+  /** 0-1, null when no questions were answered. */
+  accuracy: number | null;
+  minutes: number;
+  points: number;
+}
+
 export interface ApiWarmupQuestion {
   question: string;
   options: string[];
@@ -198,6 +210,7 @@ export interface ApiWarmupQuestion {
   explanation: string;
   topic: string | null;
   unseen: boolean;
+  figures?: ReadingFigure[];
 }
 
 // ---------- procedures ----------
@@ -211,6 +224,8 @@ export const studySessionApi = {
   create: (input: CreateStudySessionInput) =>
     rpc<ApiStudySession>("studySession.create", "mutation", input),
 
+  getStats: (id: string) =>
+    rpc<ApiSessionStats>("studySession.getStats", "query", { id }),
   getDebrief: (id: string) =>
     rpc<ApiSessionDebrief>("studySession.getDebrief", "query", { id }),
 

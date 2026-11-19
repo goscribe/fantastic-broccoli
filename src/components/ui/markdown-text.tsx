@@ -210,7 +210,13 @@ export function MathText({ text }: { text: string }) {
           <MathSpan key={i} latex={seg.latex} display={seg.display} />
         ) : (
           <React.Fragment key={i}>
-            {renderInlineCode(unescapeChars(seg.text))}
+            {/* Line breaks in generated questions separate the givens from the ask. */}
+            {seg.text.split("\n").map((line, j) => (
+              <React.Fragment key={j}>
+                {j > 0 && <br />}
+                {renderInlineCode(unescapeChars(line))}
+              </React.Fragment>
+            ))}
           </React.Fragment>
         ),
       )}
@@ -582,7 +588,8 @@ export function MarkdownText({ text, className }: MarkdownTextProps) {
   const flushParagraph = () => {
     if (!paragraph.length) return;
     blocks.push(
-      <span key={key++} className="block">
+      // pre-line keeps single line breaks (givens on their own lines in questions).
+      <span key={key++} className="block whitespace-pre-line">
         {renderInlineWithFigures(paragraph.join("\n"))}
       </span>,
     );

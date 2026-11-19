@@ -130,9 +130,6 @@ const english = {
   "misc.sharedWithMe": "Shared with me",
   "misc.pricing": "Pricing",
   "misc.openSidebar": "Open sidebar",
-  "misc.studyPointsTooltip":
-    "Study points — earn 25 for each completed study session",
-  "misc.pts": "pts",
   "misc.showMeAround": "Show me around",
   "misc.startGuidedTour": "Start guided tour",
   "misc.notifications": "Notifications",
@@ -301,9 +298,6 @@ registerTranslations(english, {
     "misc.sharedWithMe": "Compartido conmigo",
     "misc.pricing": "Precios",
     "misc.openSidebar": "Abrir barra lateral",
-    "misc.studyPointsTooltip":
-      "Puntos de estudio — gana 25 por cada sesión de estudio completada",
-    "misc.pts": "pts",
     "misc.showMeAround": "Muéstrame la app",
     "misc.startGuidedTour": "Iniciar tour guiado",
     "misc.notifications": "Notificaciones",
@@ -474,9 +468,6 @@ registerTranslations(english, {
     "misc.sharedWithMe": "Partagé avec moi",
     "misc.pricing": "Tarifs",
     "misc.openSidebar": "Ouvrir la barre latérale",
-    "misc.studyPointsTooltip":
-      "Points d'étude — gagnez 25 points par session d'étude terminée",
-    "misc.pts": "pts",
     "misc.showMeAround": "Faites-moi visiter",
     "misc.startGuidedTour": "Démarrer la visite guidée",
     "misc.notifications": "Notifications",
@@ -649,9 +640,6 @@ registerTranslations(english, {
     "misc.sharedWithMe": "Mit mir geteilt",
     "misc.pricing": "Preise",
     "misc.openSidebar": "Seitenleiste öffnen",
-    "misc.studyPointsTooltip":
-      "Lernpunkte — verdiene 25 für jede abgeschlossene Lernsitzung",
-    "misc.pts": "Pkt.",
     "misc.showMeAround": "Zeig mir die App",
     "misc.startGuidedTour": "Geführte Tour starten",
     "misc.notifications": "Benachrichtigungen",
@@ -812,8 +800,6 @@ registerTranslations(english, {
     "misc.sharedWithMe": "与我共享",
     "misc.pricing": "价格",
     "misc.openSidebar": "打开侧边栏",
-    "misc.studyPointsTooltip": "学习积分——每完成一次学习会话可获得 25 分",
-    "misc.pts": "分",
     "misc.showMeAround": "带我了解一下",
     "misc.startGuidedTour": "开始引导教程",
     "misc.notifications": "通知",
@@ -978,9 +964,6 @@ registerTranslations(english, {
     "misc.sharedWithMe": "मेरे साथ साझा",
     "misc.pricing": "मूल्य",
     "misc.openSidebar": "साइडबार खोलें",
-    "misc.studyPointsTooltip":
-      "स्टडी पॉइंट — हर पूरे स्टडी सेशन पर 25 कमाएँ",
-    "misc.pts": "अंक",
     "misc.showMeAround": "मुझे ऐप दिखाओ",
     "misc.startGuidedTour": "गाइडेड टूर शुरू करें",
     "misc.notifications": "सूचनाएँ",
@@ -1149,9 +1132,6 @@ registerTranslations(english, {
     "misc.sharedWithMe": "Ibinahagi sa akin",
     "misc.pricing": "Presyo",
     "misc.openSidebar": "Buksan ang sidebar",
-    "misc.studyPointsTooltip":
-      "Study points — kumita ng 25 sa bawat natapos na study session",
-    "misc.pts": "pts",
     "misc.showMeAround": "Ipakita sa akin ang app",
     "misc.startGuidedTour": "Simulan ang guided tour",
     "misc.notifications": "Mga Notification",

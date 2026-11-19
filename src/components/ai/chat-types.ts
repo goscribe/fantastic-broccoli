@@ -23,6 +23,8 @@ export interface ToolCallPart {
   args: string;
   result: string;
   status: "running" | "done";
+  /** Passages a materials search found (file name + snippet). */
+  sources?: Array<{ document: string; snippet: string }>;
 }
 
 export interface TextPart {

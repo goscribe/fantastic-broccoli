@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Mascot } from "@/components/rewards/mascot";
 import { Ring } from "@/components/design/charts";
 import { cn } from "@/lib/utils";
 import "@/app/design/design.css";
@@ -26,16 +26,9 @@ export function BuildBar({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex w-full items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3">
+    <div className="flex w-full items-center gap-3 border-b border-border pb-4">
       <Ring pct={Math.max(pct, 0.04)} size={44} stroke={4} color={done ? "#10b981" : "var(--accent)"}>
-        <Image
-          src={done ? "/design/cat2-cheer.png" : "/design/cat2-pencil.png"}
-          alt=""
-          width={30}
-          height={30}
-          unoptimized
-          className={cn("size-[30px] object-contain", !done && "cat-float")}
-        />
+        <Mascot pose={done ? "cheer" : "pencil"} className={cn("size-[30px]", !done && "cat-float")} />
       </Ring>
       <div className="min-w-0 flex-1">
         <div className="truncate text-[13.5px] font-semibold">{done ? (doneLabel ?? title) : `Building “${title}”`}</div>

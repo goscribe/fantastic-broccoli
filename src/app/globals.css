@@ -356,6 +356,56 @@ input[type="range"].param-slider:active::-moz-range-thumb {
   }
 }
 
+/* Session momentum: per-activity reward card. Disabled under reduced motion
+   (the card still appears, just without movement). */
+@keyframes reward-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-reward-in {
+  animation: reward-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes check-pop {
+  0% { transform: scale(0.3); opacity: 0; }
+  60% { transform: scale(1.18); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-check-pop {
+  animation: check-pop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s both;
+}
+@keyframes check-draw {
+  from { stroke-dashoffset: 24; }
+  to { stroke-dashoffset: 0; }
+}
+.animate-check-draw {
+  stroke-dasharray: 24;
+  animation: check-draw 0.3s ease-out 0.2s both;
+}
+@keyframes pts-rise {
+  0% { transform: translateY(6px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.animate-pts-rise {
+  animation: pts-rise 0.35s ease-out 0.25s both;
+}
+@keyframes reward-countdown {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+.animate-reward-countdown {
+  transform-origin: left;
+  animation: reward-countdown var(--reward-ms, 1400ms) linear both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-reward-in,
+  .animate-check-pop,
+  .animate-check-draw,
+  .animate-pts-rise,
+  .animate-reward-countdown {
+    animation: none !important;
+  }
+}
+
 @keyframes confetti-fall {
   0% {
     transform: translateY(-8vh) rotate(0deg);
@@ -420,5 +470,64 @@ input[type="range"].param-slider:active::-moz-range-thumb {
     letter-spacing: 0.1em;
     color: rgba(80, 80, 80, 0.08);
     white-space: nowrap;
+  }
+}
+
+/* Accent themes from the points shop: <html data-accent="…"> overrides the
+   brand accent tokens app-wide (legacy :root/.dark and the redesign's
+   .design-root / html.new-ui scopes). White text on --accent passes WCAG AA
+   (≥ 4.5:1) for every theme. No attribute = default violet. */
+:root[data-accent="ocean"],
+:root[data-accent="ocean"] .design-root {
+  --accent: #0369a1; --accent-dim: #075985; --accent-soft: #e0f2fe; --accent-bright: #0ea5e9;
+  --energy: #0369a1; --energy-soft: #e0f2fe; --ring: #0369a1;
+}
+:root[data-accent="forest"],
+:root[data-accent="forest"] .design-root {
+  --accent: #15803d; --accent-dim: #166534; --accent-soft: #dcfce7; --accent-bright: #22c55e;
+  --energy: #15803d; --energy-soft: #dcfce7; --ring: #15803d;
+}
+:root[data-accent="sunset"],
+:root[data-accent="sunset"] .design-root {
+  --accent: #c2410c; --accent-dim: #9a3412; --accent-soft: #ffedd5; --accent-bright: #f97316;
+  --energy: #c2410c; --energy-soft: #ffedd5; --ring: #c2410c;
+}
+:root[data-accent="rose"],
+:root[data-accent="rose"] .design-root {
+  --accent: #be123c; --accent-dim: #9f1239; --accent-soft: #ffe4e6; --accent-bright: #fb7185;
+  --energy: #be123c; --energy-soft: #ffe4e6; --ring: #be123c;
+}
+:root[data-accent="midnight"],
+:root[data-accent="midnight"] .design-root {
+  --accent: #312e81; --accent-dim: #1e1b4b; --accent-soft: #e0e7ff; --accent-bright: #6366f1;
+  --energy: #312e81; --energy-soft: #e0e7ff; --ring: #312e81;
+}
+/* Legacy dark mode: a touch brighter so accent text still reads on dark cards. */
+:root.dark[data-accent="ocean"] { --accent: #027abb; --accent-dim: #0369a1; --accent-soft: #0c2a3d; --accent-bright: #7dd3fc; --energy: #027abb; --energy-soft: #0c2a3d; --ring: #027abb; }
+:root.dark[data-accent="forest"] { --accent: #15803d; --accent-dim: #166534; --accent-soft: #0f2a1a; --accent-bright: #86efac; --energy: #15803d; --energy-soft: #0f2a1a; --ring: #15803d; }
+:root.dark[data-accent="sunset"] { --accent: #c2410c; --accent-dim: #9a3412; --accent-soft: #33190c; --accent-bright: #fdba74; --energy: #c2410c; --energy-soft: #33190c; --ring: #c2410c; }
+:root.dark[data-accent="rose"] { --accent: #e11d48; --accent-dim: #be123c; --accent-soft: #3a121c; --accent-bright: #fda4af; --energy: #e11d48; --energy-soft: #3a121c; --ring: #e11d48; }
+:root.dark[data-accent="midnight"] { --accent: #5b5bd6; --accent-dim: #4f46e5; --accent-soft: #1e1b4b; --accent-bright: #a5b4fc; --energy: #5b5bd6; --energy-soft: #1e1b4b; --ring: #5b5bd6; }
+
+/* Mascots, streak and shop moments hold still for reduced motion. */
+@keyframes streak-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-streak-pop {
+  animation: streak-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-streak-pop,
+  .animate-fade-up,
+  .cat-wiggle,
+  .cat-bob,
+  .cat-float,
+  .cat-peek,
+  .cat-cheer,
+  .design-pop,
+  .design-bounce {
+    animation: none !important;
   }
 }

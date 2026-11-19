@@ -6,6 +6,7 @@ import { AppShell } from "@/components/layout/app-shell";
 import { Providers } from "@/components/providers";
 import { themeInitScript } from "@/lib/theme";
 import { newUiInitScript } from "@/lib/new-ui-init";
+import { accentInitScript } from "@/lib/accent-theme";
 import {
   defaultDescription,
   defaultTitle,
@@ -89,6 +90,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: newUiInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: accentInitScript }} />
         <script {...jsonLdScriptProps(organizationJsonLd)} />
         <script {...jsonLdScriptProps(webSiteJsonLd)} />
         <script {...jsonLdScriptProps(softwareApplicationJsonLd)} />

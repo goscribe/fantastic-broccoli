@@ -170,7 +170,6 @@ const en = {
   "session.debriefGenerated": "Generated from this session's answers",
   "session.debriefFallbackHeadline": "Session debrief",
   "session.debriefFallbackSummary": "Nice work finishing this session. Come back tomorrow to review what you studied while it's fresh.",
-  "session.creditsEarned": "credits earned",
   "session.nextStepTitle": "Keep it going tomorrow",
   "session.nextStepBody":
     "Scribe will build a short recall session from what you missed today and email you when it's ready. The cards you studied come due tomorrow too.",
@@ -394,7 +393,6 @@ registerTranslations(en, {
     "session.nextStepTitle": "Sigue mañana",
     "session.nextStepBody": "Scribe creará una breve sesión de repaso con lo que fallaste hoy y te avisará por correo cuando esté lista. Las tarjetas que estudiaste también vencen mañana.",
     "session.reviewDueCards": "Repasar tarjetas pendientes",
-    "session.creditsEarned": "créditos ganados",
     "session.generationFailed": "Generación fallida",
     "session.cardFailedBody":
       "Scribe no pudo generar este plan de estudio. Puedes reintentar con los mismos ajustes o eliminar la sesión.",
@@ -608,7 +606,6 @@ registerTranslations(en, {
     "session.nextStepTitle": "Continuez demain",
     "session.nextStepBody": "Scribe créera une courte session de rappel à partir de vos erreurs d'aujourd'hui et vous enverra un e-mail quand elle sera prête. Les cartes étudiées seront aussi à revoir demain.",
     "session.reviewDueCards": "Réviser les cartes dues",
-    "session.creditsEarned": "crédits gagnés",
     "session.generationFailed": "Échec de la génération",
     "session.cardFailedBody":
       "Scribe n'a pas pu générer ce plan d'étude. Vous pouvez réessayer avec les mêmes réglages, ou supprimer la session.",
@@ -827,7 +824,6 @@ registerTranslations(en, {
     "session.nextStepTitle": "Morgen weitermachen",
     "session.nextStepBody": "Scribe erstellt aus deinen heutigen Fehlern eine kurze Wiederholungssitzung und benachrichtigt dich per E-Mail, sobald sie bereit ist. Deine gelernten Karten sind morgen ebenfalls fällig.",
     "session.reviewDueCards": "Fällige Karten wiederholen",
-    "session.creditsEarned": "Credits verdient",
     "session.generationFailed": "Generierung fehlgeschlagen",
     "session.cardFailedBody":
       "Scribe konnte diesen Lernplan nicht erstellen. Du kannst es mit denselben Einstellungen erneut versuchen oder die Sitzung löschen.",
@@ -1034,7 +1030,6 @@ registerTranslations(en, {
     "session.nextStepTitle": "明天继续",
     "session.nextStepBody": "Scribe 会根据你今天的错误生成一个简短的回顾学习，准备好后会发邮件通知你。你学过的卡片明天也将到期复习。",
     "session.reviewDueCards": "复习到期卡片",
-    "session.creditsEarned": "积分已获得",
     "session.generationFailed": "生成失败",
     "session.cardFailedBody":
       "Scribe 无法生成此学习计划。可用相同设置重试，或删除该会话。",
@@ -1244,7 +1239,6 @@ registerTranslations(en, {
     "session.nextStepTitle": "कल भी जारी रखें",
     "session.nextStepBody": "Scribe आज की गलतियों से एक छोटा रिकॉल सत्र बनाएगा और तैयार होने पर आपको ईमेल करेगा। आपके पढ़े हुए कार्ड भी कल रिव्यू के लिए ड्यू होंगे।",
     "session.reviewDueCards": "ड्यू कार्ड रिव्यू करें",
-    "session.creditsEarned": "क्रेडिट अर्जित",
     "session.generationFailed": "बनाना विफल रहा",
     "session.cardFailedBody":
       "Scribe यह अध्ययन योजना नहीं बना सका। समान सेटिंग्स के साथ पुनः प्रयास करें, या सत्र हटा दें।",
@@ -1461,7 +1455,6 @@ registerTranslations(en, {
     "session.nextStepTitle": "Ituloy bukas",
     "session.nextStepBody": "Gagawa ang Scribe ng maikling recall session mula sa mga pagkakamali mo ngayon at mag-eemail kapag handa na. Due na rin bukas ang mga card na inaral mo.",
     "session.reviewDueCards": "I-review ang mga due card",
-    "session.creditsEarned": "credits ang nakuha",
     "session.generationFailed": "Nabigo ang paggawa",
     "session.cardFailedBody":
       "Hindi nakagawa ang Scribe ng study plan na ito. Puwedeng subukan muli gamit ang parehong settings, o burahin ang session.",
@@ -1514,3 +1507,154 @@ registerTranslations(en, {
     "session.subjPsychology": "Sikolohiya",
   },
 });
+
+// Session momentum: progress header, per-activity reward and the Quick 5 →
+// full-session hand-off. `{n}`, `{total}` and `{subject}` are replaced by the
+// caller.
+registerTranslations(
+  {
+    "session.progressLabel": "Session progress",
+    "session.stepOf": "Step {n} of {total}",
+    "session.minLeft": "~{n} min left",
+    "session.approxMin": "~{n} min",
+    "session.rewardToGo": "Nice — {n} to go",
+    "session.rewardOneToGo": "Nice — just 1 to go",
+    "session.rewardAllDone": "Session complete!",
+    "session.nextUp": "Next:",
+    "session.seeResults": "See your results",
+    "session.quick5StreakTitle": "Keep the streak going",
+    "session.quick5FinishBody":
+      "Finish today's {subject} session while it's fresh — about {n} min.",
+    "session.quick5StartBody":
+      "Scribe builds today's full {subject} session from the same notes — about {n} min.",
+    "session.quick5FinishCta": "Finish today's session (~{n} min)",
+    "session.quick5StartCta": "Start today's session (~{n} min)",
+    "session.quick5StartFailed": "Couldn't start the session — try again.",
+    "session.quick5Tomorrow": "5 more from the same notes tomorrow.",
+  },
+  {
+    es: {
+      "session.progressLabel": "Progreso de la sesión",
+      "session.stepOf": "Paso {n} de {total}",
+      "session.minLeft": "~{n} min restantes",
+      "session.approxMin": "~{n} min",
+      "session.rewardToGo": "¡Bien! Quedan {n}",
+      "session.rewardOneToGo": "¡Bien! Solo queda 1",
+      "session.rewardAllDone": "¡Sesión completada!",
+      "session.nextUp": "Siguiente:",
+      "session.seeResults": "Ver tus resultados",
+      "session.quick5StreakTitle": "Mantén la racha",
+      "session.quick5FinishBody":
+        "Termina la sesión de hoy de {subject} mientras lo tienes fresco: unos {n} min.",
+      "session.quick5StartBody":
+        "Scribe prepara la sesión completa de hoy de {subject} con los mismos apuntes: unos {n} min.",
+      "session.quick5FinishCta": "Termina la sesión de hoy (~{n} min)",
+      "session.quick5StartCta": "Empieza la sesión de hoy (~{n} min)",
+      "session.quick5StartFailed":
+        "No se pudo iniciar la sesión. Inténtalo de nuevo.",
+      "session.quick5Tomorrow": "Mañana, 5 más de los mismos apuntes.",
+    },
+    fr: {
+      "session.progressLabel": "Progression de la session",
+      "session.stepOf": "Étape {n} sur {total}",
+      "session.minLeft": "~{n} min restantes",
+      "session.approxMin": "~{n} min",
+      "session.rewardToGo": "Bien joué — plus que {n}",
+      "session.rewardOneToGo": "Bien joué — plus qu'une",
+      "session.rewardAllDone": "Session terminée !",
+      "session.nextUp": "Suivant :",
+      "session.seeResults": "Voir tes résultats",
+      "session.quick5StreakTitle": "Garde ta série",
+      "session.quick5FinishBody":
+        "Termine la session du jour en {subject} tant que c'est frais — environ {n} min.",
+      "session.quick5StartBody":
+        "Scribe prépare la session complète du jour en {subject} à partir des mêmes notes — environ {n} min.",
+      "session.quick5FinishCta": "Termine la session du jour (~{n} min)",
+      "session.quick5StartCta": "Commence la session du jour (~{n} min)",
+      "session.quick5StartFailed": "Impossible de lancer la session — réessaie.",
+      "session.quick5Tomorrow": "5 de plus demain, tirées des mêmes notes.",
+    },
+    de: {
+      "session.progressLabel": "Sitzungsfortschritt",
+      "session.stepOf": "Schritt {n} von {total}",
+      "session.minLeft": "noch ~{n} Min.",
+      "session.approxMin": "~{n} Min.",
+      "session.rewardToGo": "Stark — noch {n}",
+      "session.rewardOneToGo": "Stark — nur noch 1",
+      "session.rewardAllDone": "Sitzung geschafft!",
+      "session.nextUp": "Weiter:",
+      "session.seeResults": "Ergebnisse ansehen",
+      "session.quick5StreakTitle": "Halte deine Serie",
+      "session.quick5FinishBody":
+        "Schließ die heutige {subject}-Sitzung ab, solange alles frisch ist — etwa {n} Min.",
+      "session.quick5StartBody":
+        "Scribe erstellt die heutige vollständige {subject}-Sitzung aus denselben Notizen — etwa {n} Min.",
+      "session.quick5FinishCta": "Heutige Sitzung abschließen (~{n} Min.)",
+      "session.quick5StartCta": "Heutige Sitzung starten (~{n} Min.)",
+      "session.quick5StartFailed":
+        "Sitzung konnte nicht gestartet werden — versuch es noch einmal.",
+      "session.quick5Tomorrow": "Morgen 5 weitere aus denselben Notizen.",
+    },
+    zh: {
+      "session.progressLabel": "学习进度",
+      "session.stepOf": "第 {n} 步，共 {total} 步",
+      "session.minLeft": "约剩 {n} 分钟",
+      "session.approxMin": "约 {n} 分钟",
+      "session.rewardToGo": "真棒——还剩 {n} 项",
+      "session.rewardOneToGo": "真棒——只剩最后 1 项",
+      "session.rewardAllDone": "本次学习完成！",
+      "session.nextUp": "下一项：",
+      "session.seeResults": "查看结果",
+      "session.quick5StreakTitle": "保持连续学习",
+      "session.quick5FinishBody":
+        "趁热打铁，完成今天的{subject}学习——大约 {n} 分钟。",
+      "session.quick5StartBody":
+        "Scribe 会用同样的笔记生成今天完整的{subject}学习——大约 {n} 分钟。",
+      "session.quick5FinishCta": "完成今天的学习（约 {n} 分钟）",
+      "session.quick5StartCta": "开始今天的学习（约 {n} 分钟）",
+      "session.quick5StartFailed": "无法开始学习，请重试。",
+      "session.quick5Tomorrow": "明天再从同样的笔记出 5 道题。",
+    },
+    hi: {
+      "session.progressLabel": "सत्र की प्रगति",
+      "session.stepOf": "चरण {n} / {total}",
+      "session.minLeft": "~{n} मिनट बाकी",
+      "session.approxMin": "~{n} मिनट",
+      "session.rewardToGo": "बढ़िया — {n} बाकी",
+      "session.rewardOneToGo": "बढ़िया — बस 1 बाकी",
+      "session.rewardAllDone": "सत्र पूरा!",
+      "session.nextUp": "अगला:",
+      "session.seeResults": "अपने नतीजे देखें",
+      "session.quick5StreakTitle": "अपनी स्ट्रीक बनाए रखें",
+      "session.quick5FinishBody":
+        "जब तक याद ताज़ा है, आज का {subject} सत्र पूरा करें — लगभग {n} मिनट।",
+      "session.quick5StartBody":
+        "Scribe इन्हीं नोट्स से आज का पूरा {subject} सत्र बनाएगा — लगभग {n} मिनट।",
+      "session.quick5FinishCta": "आज का सत्र पूरा करें (~{n} मिनट)",
+      "session.quick5StartCta": "आज का सत्र शुरू करें (~{n} मिनट)",
+      "session.quick5StartFailed": "सत्र शुरू नहीं हो सका — फिर से कोशिश करें।",
+      "session.quick5Tomorrow": "कल इन्हीं नोट्स से 5 और।",
+    },
+    tl: {
+      "session.progressLabel": "Progreso ng session",
+      "session.stepOf": "Hakbang {n} sa {total}",
+      "session.minLeft": "~{n} min na lang",
+      "session.approxMin": "~{n} min",
+      "session.rewardToGo": "Galing — {n} na lang",
+      "session.rewardOneToGo": "Galing — 1 na lang",
+      "session.rewardAllDone": "Tapos na ang session!",
+      "session.nextUp": "Susunod:",
+      "session.seeResults": "Tingnan ang resulta mo",
+      "session.quick5StreakTitle": "Ituloy ang streak",
+      "session.quick5FinishBody":
+        "Tapusin ang session mo ngayon sa {subject} habang sariwa pa — mga {n} min.",
+      "session.quick5StartBody":
+        "Gagawa ang Scribe ng buong session ngayon sa {subject} mula sa parehong notes — mga {n} min.",
+      "session.quick5FinishCta": "Tapusin ang session ngayon (~{n} min)",
+      "session.quick5StartCta": "Simulan ang session ngayon (~{n} min)",
+      "session.quick5StartFailed":
+        "Hindi masimulan ang session — subukan ulit.",
+      "session.quick5Tomorrow": "5 pa bukas mula sa parehong notes.",
+    },
+  },
+);

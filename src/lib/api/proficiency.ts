@@ -1,3 +1,4 @@
+import type { ReadingFigure } from "@/types";
 import { rpc } from "./study-session";
 
 export type ProficiencyLevel = "unknown" | "beginner" | "developing" | "secure";
@@ -17,6 +18,7 @@ export interface PrecheckItem {
   index: number;
   question: string;
   options: string[];
+  figures?: ReadingFigure[];
   difficulty: number;
 }
 
