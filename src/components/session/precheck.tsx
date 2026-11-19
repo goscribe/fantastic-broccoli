@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { McqOptionBody, McqQuestionBody, optionsHaveFigures } from "@/components/session/mcq-rich";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   proficiencyApi,
@@ -408,9 +409,9 @@ export function SessionPrecheck({
       {/* Question + options, slide in on each new question */}
       <div key={`${step.topicIndex}-${step.asked}`} className="animate-slide-in-right">
         <div className={hero ? "mt-4 text-[19px] font-bold leading-[1.35] sm:text-[20px]" : "mt-2.5 text-sm font-medium"}>
-          <MarkdownText text={item.question} />
+          <McqQuestionBody text={item.question} figures={item.figures} options={item.options} />
         </div>
-        <div className={hero ? "mt-4 grid gap-2.5" : "mt-2 grid gap-1.5 sm:grid-cols-2"}>
+        <div className={cn(hero ? "mt-4 grid gap-2.5" : "mt-2 grid gap-1.5 sm:grid-cols-2", optionsHaveFigures(item.options) && "grid-cols-2")}>
           {item.options.map((option, i) => {
             const done = result !== null;
             const isCorrect = done && i === result.correctIndex;
@@ -451,8 +452,8 @@ export function SessionPrecheck({
                 )}
                 {!hero && isCorrect && <Check className="h-3.5 w-3.5 shrink-0 text-accent" />}
                 {!hero && wrong && <X className="h-3.5 w-3.5 shrink-0 text-rose" />}
-                <span className="min-w-0">
-                  <MarkdownText text={option} />
+                <span className="min-w-0 flex-1">
+                  <McqOptionBody text={option} figures={item.figures} />
                 </span>
               </button>
             );

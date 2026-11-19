@@ -9,6 +9,7 @@ import type {
   SessionActivity,
   SessionDepth,
   StudySession,
+  ReadingFigure,
 } from "@/types";
 
 /**
@@ -209,6 +210,7 @@ export interface ApiWarmupQuestion {
   explanation: string;
   topic: string | null;
   unseen: boolean;
+  figures?: ReadingFigure[];
 }
 
 // ---------- procedures ----------

@@ -568,7 +568,7 @@ export function Copilot({
       </div>
 
       {/* Input */}
-      <div className={cn("p-3 border-t border-border", variant === "page" && "border-t-0 px-0 pb-6 pt-2")}>
+      <div className={cn("p-3", variant === "page" && "px-0 pb-6 pt-2")}>
         <form
           onSubmit={(e) => {
             e.preventDefault();

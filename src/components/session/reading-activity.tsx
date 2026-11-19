@@ -210,7 +210,7 @@ function ImageFigure({ figure }: { figure: ReadingImageFigure }) {
   );
 }
 
-export function FigureView({ figure }: { figure: ReadingFigure }) {
+export function FigureView({ figure, bare = false }: { figure: ReadingFigure; bare?: boolean }) {
   if (figure.type === "graph") {
     return (
       <ExpressionGraph
@@ -227,6 +227,7 @@ export function FigureView({ figure }: { figure: ReadingFigure }) {
         html={figure.html}
         title={figure.title}
         surface="reading_figure"
+        bare={bare}
       />
     );
   }

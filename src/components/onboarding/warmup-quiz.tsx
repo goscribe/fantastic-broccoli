@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { McqOptionBody, McqQuestionBody, optionsHaveFigures } from "@/components/session/mcq-rich";
 import { studySessionApi, type ApiWarmupQuestion } from "@/lib/api/study-session";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
@@ -116,9 +117,9 @@ export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string;
         </p>
       </div>
       <div className={hero ? "mt-3 text-[20px] font-bold leading-[1.35]" : "mt-1.5 text-sm font-medium"}>
-        <MarkdownText text={q.question} />
+        <McqQuestionBody text={q.question} figures={q.figures} options={q.options} />
       </div>
-      <div className={hero ? "mt-4 grid gap-2.5" : "mt-2 grid gap-1.5 sm:grid-cols-2"}>
+      <div className={cn(hero ? "mt-4 grid gap-2.5" : "mt-2 grid gap-1.5 sm:grid-cols-2", optionsHaveFigures(q.options) && "grid-cols-2")}>
         {q.options.map((option, i) => {
           const hasPicked = picked !== null;
           const isCorrect = i === q.correctIndex;
@@ -150,8 +151,8 @@ export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string;
               {hasPicked && isPicked && !isCorrect && (
                 <X className="h-3.5 w-3.5 shrink-0 text-rose" />
               )}
-              <span className="min-w-0">
-                <MarkdownText text={option} />
+              <span className="min-w-0 flex-1">
+                <McqOptionBody text={option} figures={q.figures} />
               </span>
             </button>
           );
