@@ -689,6 +689,41 @@ export interface UserTimeline {
   visits: JourneyVisit[];
 }
 
+// ── Trends (admin.getTrends) ───────────────────────────────────────────
+
+export const TREND_RANGES = ["3d", "1w", "1m", "3m", "6m", "1y"] as const;
+export type TrendRange = (typeof TREND_RANGES)[number];
+
+export interface TrendMetric {
+  key: string;
+  label: string;
+  description: string;
+  /** `money` values are in cents. */
+  unit: "count" | "percent" | "money";
+  /** Which direction is an improvement. */
+  better: "up" | "down";
+  current: number | null;
+  /** Null when the data does not reach back over the whole previous period. */
+  previous: number | null;
+  /** Percent change for counts and money; percentage points for percent metrics. */
+  change: { value: number; kind: "percent" | "points" } | null;
+  /** One value per bucket of the current period; null where there is no data. */
+  series: Array<number | null>;
+  previousSeries: Array<number | null> | null;
+}
+
+export interface Trends {
+  range: TrendRange;
+  days: number;
+  bucketHours: number;
+  previousFrom: Date;
+  from: Date;
+  to: Date;
+  /** Start of each bucket in the current period. */
+  bucketStarts: Date[];
+  metrics: TrendMetric[];
+}
+
 // ── Product analytics (admin.getProductAnalytics) ──────────────────────
 
 export interface ActiveUsersPoint {
@@ -776,6 +811,9 @@ export const adminApi = {
 
   getClientStats: (since?: Date) =>
     rpc<ClientStats>("admin.getClientStats", "query", since ? { since } : undefined),
+
+  getTrends: (range: TrendRange) =>
+    rpc<Trends>("admin.getTrends", "query", { range }),
 
   getProductAnalytics: (days: number) =>
     rpc<ProductAnalytics>("admin.getProductAnalytics", "query", { days }),
