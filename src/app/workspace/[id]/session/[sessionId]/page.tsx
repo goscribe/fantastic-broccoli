@@ -246,6 +246,20 @@ export default function SessionDetailPage() {
       window.history.replaceState(null, "", url);
   }, [planReady, activeActivityId]);
 
+  // When each activity was opened, so completion can report time spent.
+  const openedAt = useRef(new Map<string, number>());
+  useEffect(() => {
+    if (activeActivity && !openedAt.current.has(activeActivity.id)) {
+      openedAt.current.set(activeActivity.id, Date.now());
+    }
+  }, [activeActivity]);
+  const secondsOn = (activityId: string) => {
+    const start = openedAt.current.get(activityId);
+    if (!start) return undefined;
+    // Cap so a tab left open overnight doesn't skew the numbers.
+    return Math.min(2 * 60 * 60, Math.max(0, Math.round((Date.now() - start) / 1000)));
+  };
+
   // Persist which activity the learner is on so a refresh resumes there.
   const markedInProgress = useRef(new Set<string>());
   useEffect(() => {
@@ -264,6 +278,7 @@ export default function SessionDetailPage() {
         : setActivityStatus(
             input.activityId,
             input.skipped ? "skipped" : "completed",
+            secondsOn(input.activityId),
           ),
     onMutate: async (input) => {
       await queryClient.cancelQueries({
