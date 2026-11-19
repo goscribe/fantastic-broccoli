@@ -106,6 +106,8 @@ export interface McqQuestion {
   userAnswer?: number;
   /** `Flashcard` row this question tests; answers record SM-2 attempts on it. */
   sourceFlashcardId?: string;
+  /** Question-bank origin of a spaced-review question; answers are re-marked server-side. */
+  bankRef?: { artifactId: string; index: number };
 }
 
 export interface McqContent {

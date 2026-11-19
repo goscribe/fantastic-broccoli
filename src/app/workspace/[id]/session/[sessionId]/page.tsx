@@ -56,7 +56,8 @@ import { Button } from "@/components/ui/button";
 import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
-import { WarmupQuiz } from "@/components/onboarding/warmup-quiz";
+import { SessionPrecheck } from "@/components/session/precheck";
+import { proficiencyApi } from "@/lib/api/proficiency";
 import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
@@ -553,6 +554,13 @@ export default function SessionDetailPage() {
                   isCorrect: selectedIndex === question.correctIndex,
                   studySessionId: sessionId,
                 }).catch(() => {});
+              }
+              // Spaced-review questions from the bank are re-marked
+              // server-side, updating the topic level and their schedule.
+              if (question?.bankRef) {
+                proficiencyApi
+                  .answerBankQuestion({ workspaceId, ...question.bankRef, selectedIndex })
+                  .catch(() => {});
               }
             }}
             onComplete={() => goToNext()}
@@ -1507,7 +1515,7 @@ function GeneratingPlanCard({
           steps={GENERATION_STAGES.length}
           index={progress.stageIndex}
         />
-        <WarmupQuiz workspaceId={workspaceId} hero />
+        <SessionPrecheck workspaceId={workspaceId} focus={title} hero />
         <p className="text-[13px] text-faint">
           {stalled ? t("session.takingLonger") : t("session.generatingHint")}
         </p>
@@ -1600,7 +1608,7 @@ function GeneratingPlanCard({
               })}
             </ul>
           )}
-          <WarmupQuiz workspaceId={workspaceId} />
+          <SessionPrecheck workspaceId={workspaceId} focus={title} />
         </div>
       </div>
     </div>

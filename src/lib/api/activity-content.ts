@@ -51,7 +51,15 @@ function mcqQuestion(raw: Raw): McqQuestion {
       typeof raw.sourceFlashcardId === "string"
         ? raw.sourceFlashcardId
         : undefined,
+    bankRef: bankRef(raw.bankRef),
   };
+}
+
+function bankRef(v: unknown): McqQuestion["bankRef"] {
+  const r = obj(v);
+  return typeof r.artifactId === "string" && typeof r.index === "number"
+    ? { artifactId: r.artifactId, index: r.index }
+    : undefined;
 }
 
 function normalizeMcq(raw: Raw): McqContent {
