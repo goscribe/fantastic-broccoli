@@ -5,6 +5,7 @@ import { accentForId } from "@/lib/accent-palette";
 import { WeekStrip } from "@/components/learn/week-strip";
 import { SubjectCover } from "@/components/learn/subject-cover";
 import { NotesOutline } from "@/components/learn/notes-outline";
+import { SubjectProgress } from "@/components/learn/subject-progress";
 import type { NotesTopic } from "@/lib/api/notes-outline";
 import Image from "next/image";
 import Link from "next/link";
@@ -439,6 +440,8 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           starting={topicStarting}
           onStudy={(t) => void studyTopic(t)}
         />
+
+        <SubjectProgress key={`progress-${workspaceId}`} workspaceId={workspaceId} />
           </>
         ) : (
           <>
