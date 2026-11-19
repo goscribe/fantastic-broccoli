@@ -53,6 +53,7 @@ function buildToolParts(toolCalls: CopilotToolCall[]): ToolCallPart[] {
     args: tc.detail,
     result: "",
     status: "done",
+    sources: tc.sources,
   }));
 }
 

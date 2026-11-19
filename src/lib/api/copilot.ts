@@ -49,6 +49,8 @@ export interface CopilotToolCall {
   name: string;
   label: string;
   detail: string;
+  /** Where a materials search found its answer. */
+  sources?: Array<{ document: string; snippet: string }>;
 }
 
 export interface CopilotHistoryMessage {

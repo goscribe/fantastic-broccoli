@@ -4,9 +4,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   Search,
-  Check,
   Loader2,
-  ChevronDown,
   Paperclip,
   BookOpen,
   Layers,
@@ -16,80 +14,81 @@ import {
   Link2,
   Target,
   ListVideo,
-  Wrench,
+  FileText,
 } from "lucide-react";
-import { Surface } from "@/components/ui/card";
 import { ToolCallPart, ToolName } from "@/components/ai/chat-types";
 
-const toolMeta: Record<ToolName, { icon: React.ElementType; color: string }> = {
-  attach_study_aids: { icon: Paperclip, color: "text-accent" },
-  search_workspace_knowledge: { icon: Search, color: "text-sky" },
-  search_study_session: { icon: BookOpen, color: "text-sky" },
-  search_all_study_sessions: { icon: Layers, color: "text-sky" },
-  modify_study_session: { icon: Pencil, color: "text-violet" },
-  manage_workspace: { icon: FolderCog, color: "text-violet" },
-  create_study_session: { icon: Sparkles, color: "text-accent" },
-  attach_study_session: { icon: Link2, color: "text-accent" },
-  attach_artifact: { icon: Paperclip, color: "text-accent" },
-  record_mastery: { icon: Target, color: "text-amber" },
-  import_youtube_video: { icon: ListVideo, color: "text-rose" },
+/**
+ * One quiet line per thing Copilot did, in plain words — no boxes, no
+ * monospace queries. A notes search shows the passage it found and which
+ * file it came from.
+ */
+const toolMeta: Record<ToolName, { icon: React.ElementType; done: string; running: string; showDetail?: boolean }> = {
+  attach_study_aids: { icon: Paperclip, done: "Added study aids", running: "Adding study aids", showDetail: true },
+  search_workspace_knowledge: { icon: Search, done: "Looked through your notes", running: "Looking through your notes", showDetail: true },
+  search_study_session: { icon: BookOpen, done: "Checked this session", running: "Checking this session" },
+  search_all_study_sessions: { icon: Layers, done: "Checked your past sessions", running: "Checking your past sessions" },
+  modify_study_session: { icon: Pencil, done: "Updated your session", running: "Updating your session" },
+  manage_workspace: { icon: FolderCog, done: "Updated your subject", running: "Updating your subject" },
+  create_study_session: { icon: Sparkles, done: "Made a study session", running: "Making a study session", showDetail: true },
+  attach_study_session: { icon: Link2, done: "Linked a study session", running: "Linking a study session", showDetail: true },
+  attach_artifact: { icon: Paperclip, done: "Shared study material", running: "Sharing study material", showDetail: true },
+  record_mastery: { icon: Target, done: "Noted your progress", running: "Noting your progress" },
+  import_youtube_video: { icon: ListVideo, done: "Added a YouTube video", running: "Adding a YouTube video", showDetail: true },
 };
 
-const fallbackMeta = { icon: Wrench, color: "text-muted-foreground" };
+/** Searches send regex-ish patterns ("a|b|c"); only show plain-language details. */
+const readable = (s: string) => s && !/[|\\^$()[\]{}]/.test(s);
 
 export function ToolCallChip({ part }: { part: ToolCallPart }) {
-  const [expanded, setExpanded] = useState(false);
-  const meta = toolMeta[part.tool as ToolName] ?? fallbackMeta;
-  const Icon = meta.icon;
-  const expandable = part.status === "done" && part.result.length > 0;
+  const [showAll, setShowAll] = useState(false);
+  const meta = toolMeta[part.tool as ToolName];
+  const Icon = meta?.icon ?? Sparkles;
+  const running = part.status === "running";
+  const label = meta ? (running ? meta.running : meta.done) : part.label;
+  const detail = meta?.showDetail && readable(part.args) ? part.args : "";
+  const sources = part.sources ?? [];
+  const shown = showAll ? sources : sources.slice(0, 1);
 
   return (
-    <Surface muted className="my-1.5 overflow-hidden animate-fade-up">
-      <button
-        type="button"
-        onClick={() => expandable && setExpanded(!expanded)}
-        className="w-full flex items-center gap-2.5 px-3 py-2 text-left"
-      >
-        <span className={cn("flex items-center justify-center shrink-0", meta.color)}>
-          {part.status === "running" ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <Icon className="h-4 w-4" />
-          )}
-        </span>
-        <span className="flex-1 min-w-0">
-          <span className="block text-xs font-semibold">
-            {part.status === "running" ? (
-              <span className="animate-shimmer">{part.label}…</span>
-            ) : (
-              part.label
-            )}
-          </span>
-          {part.args ? (
-            <span className="block text-[11px] text-muted-foreground font-mono truncate">
-              {part.args}
-            </span>
-          ) : null}
-        </span>
-        {part.status === "done" && (
-          <>
-            <Check className="h-3.5 w-3.5 text-success shrink-0" />
-            {expandable && (
-              <ChevronDown
-                className={cn(
-                  "h-3.5 w-3.5 text-faint shrink-0 transition-transform",
-                  expanded && "rotate-180",
-                )}
-              />
-            )}
-          </>
+    <div className="my-1 animate-fade-up">
+      <p className="flex min-w-0 items-center gap-1.5 text-[13px] text-muted-foreground">
+        {running ? (
+          <Loader2 className="size-3.5 shrink-0 animate-spin" />
+        ) : (
+          <Icon className="size-3.5 shrink-0 text-faint" />
         )}
-      </button>
-      {expanded && expandable && (
-        <div className="px-3 pb-2.5 pt-0.5 text-xs text-muted-foreground border-t border-border/60 mt-0.5">
-          <p className="pt-2">{part.result}</p>
+        <span className={cn("truncate", running && "animate-shimmer")}>
+          {label}
+          {detail && <span className="text-faint"> for &ldquo;{detail}&rdquo;</span>}
+          {running && "…"}
+        </span>
+      </p>
+      {part.result && !running && (
+        <p className="ml-5 mt-0.5 text-[12px] text-faint">{part.result}</p>
+      )}
+      {shown.length > 0 && (
+        <div className="ml-5 mt-1.5 space-y-1.5">
+          {shown.map((s, i) => (
+            <figure key={i} className="border-l-2 border-accent/40 pl-3">
+              <blockquote className="text-[13px] leading-5 text-foreground/80">&ldquo;{s.snippet}&rdquo;</blockquote>
+              <figcaption className="mt-0.5 flex items-center gap-1 text-[11.5px] text-faint">
+                <FileText className="size-3 shrink-0" />
+                <span className="truncate">{s.document}</span>
+              </figcaption>
+            </figure>
+          ))}
+          {sources.length > 1 && (
+            <button
+              type="button"
+              onClick={() => setShowAll((v) => !v)}
+              className="text-[12px] font-medium text-accent-dim hover:underline"
+            >
+              {showAll ? "Show less" : `+${sources.length - 1} more from your notes`}
+            </button>
+          )}
         </div>
       )}
-    </Surface>
+    </div>
   );
 }
