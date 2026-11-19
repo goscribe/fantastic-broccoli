@@ -45,8 +45,9 @@ export function SessionProgressHeader({
   const total = activities.length;
   const minutes = remainingMinutes(activities);
   const onDebrief = activeIndex >= total;
+  // On the summary screen its own title says it's done; the full bar is enough here.
   const label = onDebrief
-    ? t("session.rewardAllDone")
+    ? "\u00a0"
     : t("session.stepOf")
         .replace("{n}", String(activeIndex + 1))
         .replace("{total}", String(total));
