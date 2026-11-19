@@ -10,7 +10,6 @@ import { FullScreenLoader } from "@/components/layout/full-screen-loader";
 import { GuidedTour } from "@/components/onboarding/guided-tour";
 import { MonthlyRatingPrompt } from "@/components/rating/monthly-rating-prompt";
 import { SubscribeWall } from "@/components/billing/subscribe-wall";
-import { PlanLimitDialog } from "@/components/billing/plan-limit-dialog";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { NewShell } from "@/components/layout/new-shell";
 import { useNewUi } from "@/lib/new-ui";
@@ -36,7 +35,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     return (
       <div className="design-root flex h-dvh flex-col overflow-hidden bg-white text-foreground">
         {children}
-        {!BILLING_PAUSED && <PlanLimitDialog />}
+        {!BILLING_PAUSED && <SubscribeWall />}
       </div>
     );
   }
@@ -46,7 +45,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <>
         <NewShell>{children}</NewShell>
         <MonthlyRatingPrompt />
-        {!BILLING_PAUSED && <PlanLimitDialog />}
         {!BILLING_PAUSED && <SubscribeWall />}
       </>
     );
@@ -57,7 +55,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="h-dvh flex flex-col overflow-hidden">
         <TopBar showLogo />
         {children}
-        {!BILLING_PAUSED && <PlanLimitDialog />}
       </div>
     );
   }
@@ -82,7 +79,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </div>
       <GuidedTour />
       <MonthlyRatingPrompt />
-      {!BILLING_PAUSED && <PlanLimitDialog />}
       {!BILLING_PAUSED && <SubscribeWall />}
     </div>
   );

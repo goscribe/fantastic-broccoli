@@ -75,8 +75,8 @@ function PlanCard({
         </li>
         {plan.priceDollars === 0 && (
           <li className="flex items-center gap-2">
-            <Check className="h-4 w-4 text-accent" />1 subject · 1 full study
-            session · 1 test · a free Quick 5 every day
+            <Check className="h-4 w-4 text-accent" />2 subjects · 3 full study
+            sessions · 2 tests · a free Quick 5 every day
           </li>
         )}
         {plan.priceDollars > 0 && (

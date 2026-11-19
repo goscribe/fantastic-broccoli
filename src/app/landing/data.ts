@@ -167,11 +167,11 @@ export const plans = [
     name: "Free",
     price: "$0",
     description:
-      "A taste of Scribe: one subject, one full session, and a free Quick 5 every day.",
+      "Try it properly: two subjects, three full sessions, and a free Quick 5 every day.",
     features: [
-      "1 subject · 1 full study session · 1 test · a free Quick 5 every day",
+      "2 subjects · 3 full study sessions · 2 tests · a free Quick 5 every day",
       "Upload PDFs, slides, and lecture audio",
-      "150 tokens per month",
+      "250 tokens per month",
       "2 GB storage",
     ],
     cta: "Start studying",
@@ -179,11 +179,11 @@ export const plans = [
   },
   {
     name: "Starter",
-    price: "$9/mo",
-    description: "Great for getting started with focused study sessions.",
+    price: "$5/mo",
+    description: "Student price: focused study sessions every week.",
     features: [
       "Unlimited subjects, study sessions and tests",
-      "5,000 tokens per month",
+      "600 tokens per month (about 15 full sessions)",
       "Smarter AI model routing — strongest model on every activity",
       "2 GB storage",
       "Study copilot grounded in your materials",
