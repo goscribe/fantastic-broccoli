@@ -32,7 +32,7 @@ export const faqs = [
   {
     q: "How much does it cost?",
     a: BILLING_PAUSED
-      ? "Right now every account has Pro for free: card payments are paused, so nobody is being charged. Normally Scribe is free to start (one subject, one full session and a free Quick 5 every day), with Starter at $9/mo and Pro at $19/mo."
-      : "Free to start, no card needed: one subject, one full session and a free Quick 5 every day. Starter ($9/mo) and Pro ($19/mo) remove the limits — see Pricing.",
+      ? "Right now every account has Pro for free: card payments are paused, so nobody is being charged. Normally Scribe is free to start (two subjects, three full sessions and a free Quick 5 every day), with Starter at $5/mo and Pro at $19/mo."
+      : "Free to start, no card needed: two subjects, three full sessions and a free Quick 5 every day. Starter ($5/mo) and Pro ($19/mo) remove the limits — see Pricing.",
   },
 ];

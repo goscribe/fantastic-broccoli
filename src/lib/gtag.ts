@@ -5,7 +5,6 @@ declare global {
   }
 }
 
-const STUDY_SESSION_CONVERSION = "AW-18375140054/rT6GCMGkl90cENbF-blE";
 const SIGNUP_CONVERSION = "AW-18375140054/9RI7CPXVxPccENbF-blE";
 
 /** Query flag appended to the OAuth landing URL for a newly created account. */
@@ -111,12 +110,55 @@ export function reportPendingOAuthSignupConversion() {
   reportSignupConversion();
 }
 
-/** Reports a Google Ads conversion when the user views a study session. */
-export function reportStudySessionConversion() {
+/** Google Ads: first completed study session (primary goal, value 1). */
+const ACTIVATION_CONVERSION = "AW-18375140054/wcCYCJS_sbsdENbF-blE";
+/** Google Ads: paid subscription or trial start (primary goal, value = plan price). */
+const PAID_CONVERSION = "AW-18375140054/4f7CCJG_sbsdENbF-blE";
+
+function localGet(key: string): string | null {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function localSet(key: string, value: string): void {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // storage unavailable — Google still dedupes on transaction_id
+  }
+}
+
+/**
+ * Reports activation (the user finished their first study session) once per
+ * user. `transaction_id` lets Google drop duplicates from other devices.
+ */
+export function reportActivationConversion(userId: string) {
   if (typeof window === "undefined") return;
+  const key = `scribe_activation_conversion_sent:${userId}`;
+  if (localGet(key)) return;
+  localSet(key, "1");
   gtag("event", "conversion", {
-    send_to: STUDY_SESSION_CONVERSION,
-    value: 1.0,
+    send_to: ACTIVATION_CONVERSION,
+    transaction_id: `activated-${userId}`,
+  });
+}
+
+/**
+ * Reports a paid subscription / trial start once per user and plan, only
+ * after the server confirms the plan (the checkout return URL proves nothing).
+ */
+export function reportPaidConversion(userId: string, planId: string, priceDollars: number) {
+  if (typeof window === "undefined") return;
+  const key = `scribe_paid_conversion_sent:${userId}:${planId}`;
+  if (localGet(key)) return;
+  localSet(key, "1");
+  gtag("event", "conversion", {
+    send_to: PAID_CONVERSION,
+    value: priceDollars,
     currency: "USD",
+    transaction_id: `paid-${userId}-${planId}`,
   });
 }

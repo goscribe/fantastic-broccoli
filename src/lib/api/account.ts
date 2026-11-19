@@ -58,7 +58,10 @@ export const PLAN_LIMIT_ERROR_PREFIX = "Free plan limit reached";
 
 export function isPlanLimitError(err: unknown): err is Error {
   return (
-    err instanceof Error && err.message.startsWith(PLAN_LIMIT_ERROR_PREFIX)
+    err instanceof Error &&
+    // Running out of monthly tokens is the same moment as hitting a cap.
+    (err.message.startsWith(PLAN_LIMIT_ERROR_PREFIX) ||
+      /^Not enough tokens\b/.test(err.message))
   );
 }
 
