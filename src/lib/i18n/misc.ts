@@ -168,6 +168,9 @@ const english = {
   "misc.copilotEmptyBlurb":
     "I can reshape your plan, dig through your materials, or quiz you.",
   "misc.copilotPlaceholder": "Ask, search, or change your plan…",
+  "misc.copilotStopped": "Stopped.",
+  "misc.copilotStop": "Stop",
+  "misc.copilotInterrupt": "Send now (interrupts the answer)",
   "misc.askScribe": "Ask Scribe",
   "misc.somethingWentWrong": "Something went wrong — try again.",
   "misc.couldntStartChat": "Couldn't start a new chat",
@@ -334,6 +337,9 @@ registerTranslations(english, {
     "misc.copilotEmptyBlurb":
       "Puedo reorganizar tu plan, buscar en tus materiales o hacerte preguntas.",
     "misc.copilotPlaceholder": "Pregunta, busca o cambia tu plan…",
+    "misc.copilotStopped": "Detenido.",
+    "misc.copilotStop": "Detener",
+    "misc.copilotInterrupt": "Enviar ahora (interrumpe la respuesta)",
     "misc.askScribe": "Pregunta a Scribe",
     "misc.somethingWentWrong": "Algo salió mal — inténtalo de nuevo.",
     "misc.couldntStartChat": "No se pudo iniciar un nuevo chat",
@@ -505,6 +511,9 @@ registerTranslations(english, {
     "misc.copilotEmptyBlurb":
       "Je peux remanier votre plan, fouiller vos supports ou vous interroger.",
     "misc.copilotPlaceholder": "Demandez, cherchez ou modifiez votre plan…",
+    "misc.copilotStopped": "Arrêté.",
+    "misc.copilotStop": "Arrêter",
+    "misc.copilotInterrupt": "Envoyer maintenant (interrompt la réponse)",
     "misc.askScribe": "Demander à Scribe",
     "misc.somethingWentWrong": "Une erreur s'est produite — réessayez.",
     "misc.couldntStartChat": "Impossible de démarrer une nouvelle discussion",
@@ -677,6 +686,9 @@ registerTranslations(english, {
     "misc.copilotEmptyBlurb":
       "Ich kann deinen Plan umbauen, deine Materialien durchsuchen oder dich abfragen.",
     "misc.copilotPlaceholder": "Frag, such oder ändere deinen Plan…",
+    "misc.copilotStopped": "Gestoppt.",
+    "misc.copilotStop": "Stoppen",
+    "misc.copilotInterrupt": "Jetzt senden (unterbricht die Antwort)",
     "misc.askScribe": "Scribe fragen",
     "misc.somethingWentWrong":
       "Etwas ist schiefgelaufen — versuch es erneut.",
@@ -833,6 +845,9 @@ registerTranslations(english, {
     "misc.copilotEmptyBlurb":
       "我可以调整你的计划、查找你的资料，或者考考你。",
     "misc.copilotPlaceholder": "提问、搜索或修改你的计划…",
+    "misc.copilotStopped": "已停止。",
+    "misc.copilotStop": "停止",
+    "misc.copilotInterrupt": "立即发送（打断回答）",
     "misc.askScribe": "问问 Scribe",
     "misc.somethingWentWrong": "出错了——请重试。",
     "misc.couldntStartChat": "无法开始新对话",
@@ -1001,6 +1016,9 @@ registerTranslations(english, {
     "misc.copilotEmptyBlurb":
       "मैं आपका प्लान बदल सकता हूँ, सामग्री खंगाल सकता हूँ, या क्विज़ ले सकता हूँ।",
     "misc.copilotPlaceholder": "पूछें, खोजें, या अपना प्लान बदलें…",
+    "misc.copilotStopped": "रोका गया।",
+    "misc.copilotStop": "रोकें",
+    "misc.copilotInterrupt": "अभी भेजें (जवाब रोक देगा)",
     "misc.askScribe": "Scribe से पूछें",
     "misc.somethingWentWrong": "कुछ गलत हुआ — फिर से कोशिश करें।",
     "misc.couldntStartChat": "नई चैट शुरू नहीं हो सकी",
@@ -1169,6 +1187,9 @@ registerTranslations(english, {
     "misc.copilotEmptyBlurb":
       "Kaya kong baguhin ang iyong plano, halungkatin ang iyong materials, o i-quiz ka.",
     "misc.copilotPlaceholder": "Magtanong, maghanap, o baguhin ang plano…",
+    "misc.copilotStopped": "Itinigil.",
+    "misc.copilotStop": "Itigil",
+    "misc.copilotInterrupt": "Ipadala ngayon (puputulin ang sagot)",
     "misc.askScribe": "Tanungin si Scribe",
     "misc.somethingWentWrong": "May nagkamali — subukan muli.",
     "misc.couldntStartChat": "Hindi makapagsimula ng bagong chat",
