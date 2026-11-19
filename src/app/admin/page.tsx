@@ -12,6 +12,7 @@ import {
   Td,
 } from "@/components/admin/admin-ui";
 import { ProductAnalyticsSection } from "@/components/admin/product-analytics";
+import { TrendsSection } from "@/components/admin/trends";
 import { formatRelativeDate } from "@/lib/utils";
 
 function retentionPct(part: number, whole: number): string {
@@ -133,6 +134,8 @@ export default function AdminOverviewPage() {
           loading={isLoading}
         />
       </div>
+
+      <TrendsSection />
 
       <ProductAnalyticsSection />
 

@@ -89,10 +89,70 @@ function sessionEnvelope(session) {
 const organizing = {};
 const ORGANIZE_MS = 6000;
 
+// Admin overview trend charts (admin.getTrends). Deterministic made-up numbers;
+// the 6m and 1y ranges have no previous period, like a young database.
+const TREND_SHAPES = { "3d": [3, 6], "1w": [7, 24], "1m": [28, 24], "3m": [91, 168], "6m": [182, 168], "1y": [364, 168] };
+function trendsFixture(range = "1m") {
+  const [days, bucketHours] = TREND_SHAPES[range] ?? TREND_SHAPES["1m"];
+  const n = (days * 24) / bucketHours;
+  const to = Date.now();
+  const from = to - days * 86400000;
+  const noHistory = days > 91;
+  const wave = (i, base, slope, seed) =>
+    Math.max(0, Math.round(base + slope * i + base * 0.35 * Math.sin(i * 1.7 + seed)));
+  const metric = (key, label, base, slope, extra = {}) => {
+    const scale = extra.unit === "percent" ? 1 : bucketHours / 24;
+    const all = Array.from({ length: 2 * n }, (_, i) => wave(i, base * scale, (slope * scale) / n, key.length));
+    const percent = extra.unit === "percent";
+    const total = (a) => (percent ? Math.round((a.reduce((x, y) => x + y, 0) / a.length) * 10) / 10 : a.reduce((x, y) => x + y, 0));
+    const current = total(all.slice(n));
+    const previous = noHistory ? null : total(all.slice(0, n));
+    const change =
+      previous === null || (!percent && previous === 0)
+        ? null
+        : percent
+          ? { value: Math.round((current - previous) * 10) / 10, kind: "points" }
+          : { value: Math.round(((current - previous) / previous) * 1000) / 10, kind: "percent" };
+    return {
+      key, label, description: `${label} (mock data).`, unit: "count", better: "up", ...extra,
+      current, previous, change,
+      series: all.slice(n).map((v, i) => (range === "1y" && i < 20 ? null : v)),
+      previousSeries: noHistory ? null : all.slice(0, n),
+    };
+  };
+  const json = {
+    range, days, bucketHours,
+    previousFrom: new Date(from - days * 86400000).toISOString(),
+    from: new Date(from).toISOString(),
+    to: new Date(to).toISOString(),
+    bucketStarts: Array.from({ length: n }, (_, i) => new Date(from + i * bucketHours * 3600000).toISOString()),
+    metrics: [
+      metric("activeUsers", "Active users", 40, 30),
+      metric("returningUsers", "Returning users", 9, -6),
+      metric("signups", "Signups", 30, 24),
+      metric("activation", "Activation", 27, 6, { unit: "percent" }),
+      metric("sessions", "Study sessions", 22, 10),
+      metric("activities", "Activities completed", 12, -8),
+      metric("uploads", "Uploads", 45, 20),
+      metric("flashcards", "Flashcards reviewed", 60, 0),
+      metric("copilot", "Copilot messages", 14, 5),
+      metric("revenue", "Revenue", 1900, 1500, { unit: "money" }),
+      metric("errorRate", "Error rate", 1.2, 1.5, { unit: "percent", better: "down" }),
+    ],
+  };
+  const values = { previousFrom: ["Date"], from: ["Date"], to: ["Date"] };
+  json.bucketStarts.forEach((_, i) => (values[`bucketStarts.${i}`] = ["Date"]));
+  return { __superjson: { json, meta: { values } } };
+}
+
 function handleProc(path, input) {
   switch (path) {
     case "auth.getSession":
+      // ADMIN=1 signs the demo user in as a System Admin so /admin renders.
+      if (process.env.ADMIN === "1") return { user: { ...user, role: { name: "System Admin" } } };
       return { user };
+    case "admin.getTrends":
+      return trendsFixture(input?.range);
     case "workspace.getTree":
       // EMPTY=1 simulates a brand-new user (triggers first-session onboarding).
       if (process.env.EMPTY === "1") return { folders: [], workspaces: [] };
