@@ -17,7 +17,9 @@ import {
   FileText,
   CalendarClock,
 } from "lucide-react";
-import { awardSessionCredits } from "@/lib/credits";
+import { Mascot } from "@/components/rewards/mascot";
+import { StreakWeek } from "@/components/rewards/streak-button";
+import { useStreak } from "@/lib/rewards";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { studySessionApi } from "@/lib/api/study-session";
@@ -30,6 +32,7 @@ import { SESSION_COMPLETED_EVENT } from "@/lib/api/account";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/session";
+import "@/lib/i18n/rewards";
 
 /** Length of the full session a finished Quick 5 offers to start. */
 const FOLLOW_UP_MINUTES = 15;
@@ -65,6 +68,8 @@ export function SessionDebrief({
   workspaceId,
   subjectTitle,
   quickStart = false,
+  sessionBonus = 0,
+  streakLitDays = null,
 }: {
   onBack: () => void;
   sessionId: string;
@@ -73,6 +78,10 @@ export function SessionDebrief({
   subjectTitle?: string;
   /** Quick 5 sessions promise "5 more tomorrow" instead of a recall session. */
   quickStart?: boolean;
+  /** Points the finished session earned (0 if it wasn't fully completed). */
+  sessionBonus?: number;
+  /** Streak length when a completion in this visit made today count; null otherwise. */
+  streakLitDays?: number | null;
 }) {
   const { t } = useI18n();
   const newUi = useNewUi();
@@ -112,7 +121,7 @@ export function SessionDebrief({
     onError: (error) => toastError(error, t("session.quick5StartFailed")),
   });
   const [stage, setStage] = useState(0);
-  const [creditsEarned] = useState(() => awardSessionCredits(sessionId));
+  const { data: streak } = useStreak();
 
   const { data: debrief, isError } = useQuery({
     queryKey: ["session-debrief", sessionId],
@@ -169,6 +178,30 @@ export function SessionDebrief({
 
   return (
     <div className="animate-fade-up pb-10">
+      {streakLitDays !== null && (
+        <div
+          role="status"
+          className="mb-6 overflow-hidden rounded-2xl border border-[#fdba74] bg-gradient-to-br from-[#fff7ed] to-[#ffedd5] p-4 sm:p-5"
+        >
+          <div className="flex items-center gap-4">
+            <Mascot pose="flame" className="cat-cheer h-[84px] sm:h-[96px]" />
+            <div className="min-w-0 flex-1">
+              <p className="animate-streak-pop flex items-center gap-1.5 text-[20px] font-bold leading-tight tracking-tight text-[#9a3412] sm:text-[22px]">
+                <Flame className="size-6 shrink-0 text-[#f97316]" fill="currentColor" strokeWidth={1.6} />
+                {streakLitDays === 1
+                  ? t("rewards.streakMomentOne")
+                  : t("rewards.streakMoment").replace("{n}", String(streakLitDays))}
+              </p>
+              <p className="mt-1 text-sm leading-6 text-[#7c2d12]">{t("rewards.streakMomentBody")}</p>
+            </div>
+          </div>
+          {streak && (
+            <div className="mt-4 rounded-xl bg-white/70 p-3">
+              <StreakWeek streak={streak} />
+            </div>
+          )}
+        </div>
+      )}
       {handOff && (
         <div className="mb-6 overflow-hidden rounded-2xl border border-accent/30 bg-accent-soft p-4 sm:p-5">
           <p className="flex items-center gap-1.5 text-[12px] font-semibold text-accent-dim">
@@ -224,13 +257,17 @@ export function SessionDebrief({
           className="pointer-events-none absolute inset-y-0 right-0 hidden w-48 select-none sm:block"
           aria-hidden
         >
-          <Image
-            src={newUi ? "/design/props/trophy.png" : "/illustrations/props/trophy.png"}
-            alt=""
-            width={160}
-            height={160}
-            className="absolute -bottom-3 right-6 w-24"
-          />
+          {newUi ? (
+            <Mascot pose="trophy" className="absolute -bottom-2 right-5 h-[118px]" />
+          ) : (
+            <Image
+              src="/illustrations/props/trophy.png"
+              alt=""
+              width={160}
+              height={160}
+              className="absolute -bottom-3 right-6 w-24"
+            />
+          )}
           <ConfettiDots />
         </div>
         <div className="relative sm:max-w-[calc(100%-11rem)]">
@@ -241,12 +278,12 @@ export function SessionDebrief({
           <h2 className="text-lg font-bold tracking-tight">
             <MathText text={shown.headline} />
           </h2>
-      {creditsEarned > 0 && (
-        <p className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent">
-          <Sparkles className="h-3.5 w-3.5" />+{creditsEarned}{" "}
-          {t("session.creditsEarned")}
-        </p>
-      )}
+          {sessionBonus > 0 && (
+            <p className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent-dim">
+              <Sparkles className="h-3.5 w-3.5" fill="currentColor" />
+              {t("rewards.sessionBonus").replace("{n}", String(sessionBonus))}
+            </p>
+          )}
           <p className="text-sm text-muted-foreground leading-6 mt-1.5">
             <MathText text={shown.summary} />
           </p>

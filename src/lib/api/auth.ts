@@ -7,6 +7,7 @@ import { apiUrl } from "./config";
 import { getSignupAttribution } from "@/lib/attribution";
 import { reportPendingOAuthSignupConversion } from "@/lib/gtag";
 import { syncUiLocale } from "@/lib/i18n";
+import { isPublicPath } from "@/lib/public-paths";
 
 export interface AuthUser {
   id: string;
@@ -21,23 +22,7 @@ export interface AuthUser {
 
 export const SYSTEM_ADMIN_ROLE = "System Admin";
 
-const PUBLIC_PATHS = [
-  "/landing",
-  "/login",
-  "/signup",
-  "/forgot-password",
-  "/reset-password",
-  "/verify-email",
-  "/restore-account",
-  "/accept-invite",
-  "/privacy",
-  "/terms",
-  "/design",
-];
-
-export function isPublicPath(path: string): boolean {
-  return PUBLIC_PATHS.some((p) => path === p || path.startsWith(`${p}/`));
-}
+export { isPublicPath };
 
 /** Returns true when a redirect was initiated. */
 function redirectUnauthenticated(): boolean {

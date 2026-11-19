@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { MathText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
+import "@/lib/i18n/rewards";
 import { cn } from "@/lib/utils";
 import type { SessionActivity } from "@/types";
 
@@ -117,6 +118,8 @@ export interface ActivityReward {
   next?: SessionActivity;
   /** Activities still not done after this one. */
   remaining: number;
+  /** Points this activity earned (server-derived; shown for momentum). */
+  pts: number;
   /** Session-completion points this finish earns / the next finish would. */
   bonusPts: number;
 }
@@ -136,18 +139,19 @@ export function ActivityRewardCard({
   className?: string;
 }) {
   const { t } = useI18n();
-  const { next, remaining, bonusPts } = reward;
+  const { next, remaining, pts, bonusPts } = reward;
   const allDone = remaining === 0;
   const message = allDone
     ? t("session.rewardAllDone")
     : remaining === 1
       ? t("session.rewardOneToGo")
       : t("session.rewardToGo").replace("{n}", String(remaining));
-  const pill =
+  const pill = pts > 0 ? t("rewards.plusPts").replace("{n}", String(pts)) : null;
+  const bonusLine =
     bonusPts > 0 && allDone
-      ? t("session.rewardPts").replace("{n}", String(bonusPts))
+      ? t("rewards.sessionBonus").replace("{n}", String(bonusPts))
       : bonusPts > 0 && remaining === 1
-        ? t("session.rewardFinishBonus").replace("{n}", String(bonusPts))
+        ? t("rewards.finishBonusHint").replace("{n}", String(bonusPts))
         : null;
 
   return (
@@ -171,9 +175,14 @@ export function ActivityRewardCard({
             />
           </svg>
         </span>
-        <p className="min-w-0 flex-1 text-[15px] font-bold leading-tight">
-          {message}
-        </p>
+        <div className="min-w-0 flex-1">
+          <p className="text-[15px] font-bold leading-tight">{message}</p>
+          {bonusLine && (
+            <p className="mt-0.5 text-[12px] font-medium leading-tight text-muted-foreground">
+              {bonusLine}
+            </p>
+          )}
+        </div>
         {pill && (
           <span className="animate-pts-rise inline-flex shrink-0 items-center gap-1 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent">
             <Sparkles className="size-3.5" fill="currentColor" />

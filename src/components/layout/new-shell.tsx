@@ -5,11 +5,13 @@ import Image from "next/image";
 import { NotificationBell } from "@/components/layout/notification-bell";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Calendar, Folder as FolderIcon, House, LogOut, PanelLeft, PanelLeftClose, PlayCircle, Plus, Search, Settings, Sparkles } from "lucide-react";
+import { Calendar, Folder as FolderIcon, House, LogOut, PanelLeft, PanelLeftClose, PlayCircle, Plus, Search, Settings, Store } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import { accentForId } from "@/lib/accent-palette";
-import { useCredits } from "@/lib/credits";
+import { StreakButton } from "@/components/rewards/streak-button";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/rewards";
 import { onTreeChanged } from "@/lib/tree-events";
 import { cn } from "@/lib/utils";
 import { AppTourHost, requestAppTour } from "@/components/onboarding/app-tour";
@@ -18,9 +20,10 @@ import { CreateResourceDialog } from "@/components/workspace/create-dialog";
 import type { Folder, Workspace } from "@/types";
 import "@/app/design/design.css";
 
-const NAV = [
+const NAV: { href: string; label: string; labelKey?: string; icon: typeof House }[] = [
   { href: "/", label: "Home", icon: House },
   { href: "/planner", label: "Planner", icon: Calendar },
+  { href: "/shop", label: "Shop", labelKey: "rewards.shop", icon: Store },
 ];
 
 const RAIL_KEY = "scribe.sidebar.rail";
@@ -61,7 +64,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const { user } = useAuthUser();
-  const credits = useCredits();
+  const { t } = useI18n();
   const [folders, setFolders] = useState<Folder[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [paletteOpen, setPaletteOpen] = useState(false);
@@ -134,7 +137,9 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           </button>
         </div>
         <nav className="flex flex-col gap-1">
-          {NAV.map(({ href, label, icon: Icon }) => (
+          {NAV.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
+            const label = labelKey ? t(labelKey) : fallbackLabel;
+            return (
             <Link
               key={href}
               href={href}
@@ -149,7 +154,8 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               <Icon className="size-[18px] shrink-0" strokeWidth={isActive(href) ? 2.2 : 1.8} />
               <span className={cn(rail && "md:hidden")}>{label}</span>
             </Link>
-          ))}
+            );
+          })}
         </nav>
         <div className={cn("mt-7 px-3 text-[11px] font-semibold text-faint", rail && "md:hidden")}>Subjects</div>
         <div className={cn("mx-2 mt-4 hidden border-t border-border", rail && "md:block")} />
@@ -275,11 +281,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           </button>
           <div className="ml-auto flex items-center gap-1.5 sm:gap-2.5">
             <NotificationBell />
-            <span className="flex h-10 items-center gap-1.5 rounded-xl border border-border bg-white px-2.5 text-[14px] font-semibold sm:px-3">
-              <Sparkles className="size-[18px] text-accent" fill="currentColor" />
-              {credits.toLocaleString()}
-              <span className="hidden font-medium text-faint sm:inline">pts</span>
-            </span>
+            <StreakButton />
             <Link href="/settings" aria-label="Settings" className="block">
               {user?.profilePicture ? (
                 // eslint-disable-next-line @next/next/no-img-element

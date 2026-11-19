@@ -56,7 +56,8 @@ import {
   remainingMinutes,
   type ActivityReward,
 } from "@/components/session/session-progress";
-import { pendingSessionCredits } from "@/lib/credits";
+import { POINTS_PER_ACTIVITY, POINTS_PER_SESSION } from "@/lib/api/rewards";
+import { refreshProgress, STREAK_KEY, useStreak, type StreakSummary } from "@/lib/rewards";
 import { MathText } from "@/components/ui/markdown-text";
 import { ContentRepairProvider } from "@/components/content/content-repair";
 import { Button } from "@/components/ui/button";
@@ -126,6 +127,10 @@ export default function SessionDetailPage() {
   const sessionId = params.sessionId as string;
 
   const queryClient = useQueryClient();
+  // Loaded up front so a completion can tell whether it just lit today's streak.
+  useStreak();
+  /** Set when a completion in this visit made today count toward the streak. */
+  const [streakLitDays, setStreakLitDays] = useState<number | null>(null);
   const { data: workspace, isLoading: workspaceLoading } = useQuery({
     queryKey: ["workspace", workspaceId],
     queryFn: () => fetchWorkspace(workspaceId),
@@ -326,6 +331,16 @@ export default function SessionDetailPage() {
           ["study-session", sessionId],
           context.previous,
         );
+      }
+    },
+    onSuccess: async (_data, input) => {
+      if (input.skipped) return;
+      const before = queryClient.getQueryData<StreakSummary>(STREAK_KEY);
+      // Points and streak are derived server-side from finished work.
+      await refreshProgress(queryClient);
+      const after = queryClient.getQueryData<StreakSummary>(STREAK_KEY);
+      if (before && !before.todayDone && after?.todayDone) {
+        setStreakLitDays(after.current);
       }
     },
     onSettled: () =>
@@ -531,7 +546,12 @@ export default function SessionDetailPage() {
       fromId,
       next,
       remaining,
-      bonusPts: remaining <= 1 ? pendingSessionCredits(sessionId) : 0,
+      pts: POINTS_PER_ACTIVITY,
+      // The session bonus needs every activity completed (skips don't count).
+      bonusPts:
+        remaining <= 1 && !activities.some((a) => a.status === "skipped")
+          ? POINTS_PER_SESSION
+          : 0,
     });
     rewardTimer.current = setTimeout(
       () => advanceFrom(fromId, nextId),
@@ -918,12 +938,6 @@ export default function SessionDetailPage() {
                     <span className="inline-flex items-center rounded-lg bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent-dim">
                       {[t(ACTIVITY_TYPE_LABELS[activeActivity.type] ?? "session.typeActivity"), t(`session.phase${phaseOf(activeActivity.type)}`)].filter((v, i, arr) => arr.indexOf(v) === i).join(" · ")}
                     </span>
-                    {cheerKey && (
-                      <span className="flex items-center gap-1.5 text-[12px] font-semibold text-accent">
-                        <Image src="/design/props/star.png" alt="" width={20} height={20} unoptimized className="size-5 object-contain" />
-                        {t(cheerKey)}
-                      </span>
-                    )}
                   </div>
                   <h1 className="mb-[18px] mt-3 text-[23px] font-bold leading-[1.3]">
                     <MathText text={activeActivity.title} />
@@ -939,7 +953,7 @@ export default function SessionDetailPage() {
                   </ContentRepairProvider>
                 </>
               ) : (
-                <SessionDebrief sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} onBack={() => router.push(`/workspace/${workspaceId}`)} />
+                <SessionDebrief sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onBack={() => router.push(`/workspace/${workspaceId}`)} />
               )}
             </div>
           </div>
@@ -955,9 +969,6 @@ export default function SessionDetailPage() {
                 <ArrowLeft className="size-4" />
                 {t("session.back")}
               </button>
-              <span className="text-[12.5px] text-faint tabular-nums">
-                {completedCount}/{activities.length} {t("session.doneCount")}
-              </span>
               <div className="flex gap-2">
                 <button
                   type="button"
@@ -1234,6 +1245,8 @@ export default function SessionDetailPage() {
                 workspaceId={workspaceId}
                 subjectTitle={workspace.title}
                 quickStart={session.quickStart}
+                sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0}
+                streakLitDays={streakLitDays}
                 onBack={() => router.push(`/workspace/${workspaceId}`)}
               />
             )}
