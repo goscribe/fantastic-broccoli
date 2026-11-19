@@ -26,7 +26,7 @@ export function BuildBar({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex w-full items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3">
+    <div className="flex w-full items-center gap-3 border-b border-border pb-4">
       <Ring pct={Math.max(pct, 0.04)} size={44} stroke={4} color={done ? "#10b981" : "var(--accent)"}>
         <Mascot pose={done ? "cheer" : "pencil"} className={cn("size-[30px]", !done && "cat-float")} />
       </Ring>

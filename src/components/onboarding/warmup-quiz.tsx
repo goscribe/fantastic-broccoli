@@ -17,7 +17,7 @@ const SECTION = "mt-4 border-t border-border pt-3 text-left";
  * next one is fetched, so questions keep coming for as long as the wait
  * screen is mounted.
  */
-const HERO = "w-full rounded-3xl border border-border bg-card p-6";
+const HERO = "w-full";
 
 export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string; hero?: boolean }) {
   const [questions, setQuestions] = useState<ApiWarmupQuestion[]>([]);
