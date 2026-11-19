@@ -28,7 +28,7 @@ export function BuildBar({
   return (
     <div className="flex w-full items-center gap-3 border-b border-border pb-4">
       <Ring pct={Math.max(pct, 0.04)} size={44} stroke={4} color={done ? "#10b981" : "var(--accent)"}>
-        <Mascot pose={done ? "cheer" : "pencil"} className={cn("size-[30px]", !done && "cat-float")} />
+        <Mascot pose={done ? "cheer" : "pencil"} className={cn("mt-1 size-[24px]", !done && "cat-float")} />
       </Ring>
       <div className="min-w-0 flex-1">
         <div className="truncate text-[13.5px] font-semibold">{done ? (doneLabel ?? title) : `Building “${title}”`}</div>

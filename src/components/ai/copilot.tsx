@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { useNewUi } from "@/lib/new-ui";
 import "@/app/design/design.css";
 import { toastError } from "@/lib/toast";
-import { ArrowUp, PanelRightClose, PanelRightOpen, Plus, Sparkles, X } from "lucide-react";
+import { ArrowUp, PanelRightClose, PanelRightOpen, Plus, Sparkles, Square, X } from "lucide-react";
 import Image from "next/image";
 import { EquationEmbed, GraphEmbed, CitationEmbed } from "@/components/ai/embeds";
 import {
@@ -203,6 +203,9 @@ export function Copilot({
   const [hydrating, setHydrating] = useState(false);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
+  // The answer being streamed; aborting it lets the learner interrupt.
+  const inFlight = useRef<AbortController | null>(null);
+  const stop = useCallback(() => inFlight.current?.abort(), []);
   const [width, setWidth] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const resizing = useRef(false);
@@ -233,7 +236,11 @@ export function Copilot({
 
   const send = useCallback(
     async (text: string) => {
-      if (!text.trim() || busy) return;
+      if (!text.trim()) return;
+      // Sending while an answer is still coming in interrupts it.
+      inFlight.current?.abort();
+      const controller = new AbortController();
+      inFlight.current = controller;
       setInput("");
       setBusy(true);
       const pendingChatId = activeChat ?? "pending";
@@ -244,6 +251,7 @@ export function Copilot({
         parts: [{ kind: "text", id: nextId(), text, done: true }],
       };
       const assistantId = nextId();
+      let streamedRef: () => string = () => "";
       setMessages((prev) => [
         ...prev,
         userMsg,
@@ -268,6 +276,7 @@ export function Copilot({
         }
         const streamPartId = nextId();
         let streamed = "";
+        streamedRef = () => streamed;
         let toolStatus = "";
         const paintStream = () => {
           const textSoFar =
@@ -309,6 +318,7 @@ export function Copilot({
             toolStatus = label;
             paintStream();
           },
+          controller.signal,
         );
         setMessages((prev) =>
           prev.map((m) =>
@@ -335,6 +345,32 @@ export function Copilot({
           });
         }
       } catch (err) {
+        if (controller.signal.aborted) {
+          // Keep what was said so far, marked as cut off.
+          const partial = streamedRef().trim();
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.id === assistantId
+                ? {
+                    ...m,
+                    parts: [
+                      {
+                        kind: "text",
+                        id: nextId(),
+                        text: partial ? `${partial} …` : `*${t("misc.copilotStopped")}*`,
+                        done: true,
+                      },
+                    ],
+                  }
+                : m,
+            ),
+          );
+          if (inFlight.current === controller) {
+            inFlight.current = null;
+            setBusy(false);
+          }
+          return;
+        }
         setMessages((prev) =>
           prev.map((m) =>
             m.id === assistantId
@@ -356,10 +392,12 @@ export function Copilot({
           ),
         );
       }
-      setBusy(false);
+      if (inFlight.current === controller) {
+        inFlight.current = null;
+        setBusy(false);
+      }
     },
     [
-      busy,
       activeChat,
       workspaceId,
       context,
@@ -590,13 +628,26 @@ export function Copilot({
             placeholder={t("misc.copilotPlaceholder")}
             className={cn(bareInputClass, "resize-none py-1")}
           />
-          <button
-            type="submit"
-            disabled={!input.trim() || busy}
-            className="flex h-7 w-7 items-center justify-center rounded-full bg-accent text-accent-foreground disabled:opacity-30 shrink-0"
-          >
-            <ArrowUp className="h-4 w-4" />
-          </button>
+          {busy && !input.trim() ? (
+            <button
+              type="button"
+              onClick={stop}
+              aria-label={t("misc.copilotStop")}
+              title={t("misc.copilotStop")}
+              className="flex h-7 w-7 items-center justify-center rounded-full bg-foreground text-background shrink-0"
+            >
+              <Square className="h-3 w-3" fill="currentColor" />
+            </button>
+          ) : (
+            <button
+              type="submit"
+              disabled={!input.trim()}
+              aria-label={busy ? t("misc.copilotInterrupt") : undefined}
+              className="flex h-7 w-7 items-center justify-center rounded-full bg-accent text-accent-foreground disabled:opacity-30 shrink-0"
+            >
+              <ArrowUp className="h-4 w-4" />
+            </button>
+          )}
         </form>
       </div>
     </div>
