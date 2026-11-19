@@ -10,18 +10,47 @@ import { ConfettiDots } from "@/components/graphics/floating-decor";
 import {
   Sparkles,
   Loader2,
+  Play,
+  Flame,
   Check,
   ArrowRight,
   FileText,
   CalendarClock,
 } from "lucide-react";
 import { awardSessionCredits } from "@/lib/credits";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { studySessionApi } from "@/lib/api/study-session";
+import { createStudySession, fetchStudySessions } from "@/lib/api/study";
+import { pickStudyNowSession } from "@/components/session/study-now-card";
+import { remainingMinutes } from "@/components/session/session-progress";
+import { toastError } from "@/lib/toast";
+import type { StudySession } from "@/types";
 import { SESSION_COMPLETED_EVENT } from "@/lib/api/account";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/session";
+
+/** Length of the full session a finished Quick 5 offers to start. */
+const FOLLOW_UP_MINUTES = 15;
+
+/** Today's full (non-Quick 5) session for the subject, if one is open. */
+function pickFullSession(
+  sessions: StudySession[],
+  excludeId: string,
+): StudySession | undefined {
+  return pickStudyNowSession(
+    sessions.filter(
+      (s) =>
+        !s.quickStart &&
+        s.id !== excludeId &&
+        (s.generating ||
+          s.activities.some(
+            (a) => a.status === "pending" || a.status === "in_progress",
+          )),
+    ),
+  );
+}
 
 const stages = [
   "session.debriefReviewing",
@@ -33,15 +62,55 @@ const stages = [
 export function SessionDebrief({
   onBack,
   sessionId,
+  workspaceId,
+  subjectTitle,
   quickStart = false,
 }: {
   onBack: () => void;
   sessionId: string;
+  /** Lets a finished Quick 5 hand off to today's full session. */
+  workspaceId?: string;
+  subjectTitle?: string;
   /** Quick 5 sessions promise "5 more tomorrow" instead of a recall session. */
   quickStart?: boolean;
 }) {
   const { t } = useI18n();
   const newUi = useNewUi();
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const handOff = quickStart && !!workspaceId;
+  // Same cache key as the subject's Study page, so this is usually warm.
+  const { data: subjectSessions, isLoading: sessionsLoading } = useQuery({
+    queryKey: ["study-sessions", workspaceId],
+    queryFn: () => fetchStudySessions(workspaceId!),
+    enabled: handOff,
+  });
+  const fullSession = subjectSessions
+    ? pickFullSession(subjectSessions, sessionId)
+    : undefined;
+  const fullMinutes = fullSession
+    ? fullSession.generating
+      ? fullSession.durationMinutes
+      : remainingMinutes(fullSession.activities) || fullSession.durationMinutes
+    : FOLLOW_UP_MINUTES;
+  const openSession = (id: string) =>
+    router.push(`/workspace/${workspaceId}/session/${id}`);
+  const startFull = useMutation({
+    mutationFn: () =>
+      createStudySession({
+        workspaceId: workspaceId!,
+        title: subjectTitle || t("session.defaultTitle"),
+        depth: "moderate",
+        durationMinutes: FOLLOW_UP_MINUTES,
+      }),
+    onSuccess: (created) => {
+      queryClient.invalidateQueries({
+        queryKey: ["study-sessions", workspaceId],
+      });
+      if (created) openSession(created.id);
+    },
+    onError: (error) => toastError(error, t("session.quick5StartFailed")),
+  });
   const [stage, setStage] = useState(0);
   const [creditsEarned] = useState(() => awardSessionCredits(sessionId));
 
@@ -100,6 +169,56 @@ export function SessionDebrief({
 
   return (
     <div className="animate-fade-up pb-10">
+      {handOff && (
+        <div className="mb-6 overflow-hidden rounded-2xl border border-accent/30 bg-accent-soft p-4 sm:p-5">
+          <p className="flex items-center gap-1.5 text-[12px] font-semibold text-accent-dim">
+            <Check className="h-3.5 w-3.5" />
+            {t("session.quick5DoneTitle")}
+          </p>
+          <h3 className="mt-1.5 flex items-center gap-1.5 text-base font-bold tracking-tight sm:text-lg">
+            <Flame className="h-5 w-5 shrink-0 text-accent" fill="currentColor" />
+            {t("session.quick5StreakTitle")}
+          </h3>
+          <p className="mt-1 text-sm leading-6 text-muted-foreground">
+            {t(fullSession ? "session.quick5FinishBody" : "session.quick5StartBody")
+              .replace("{subject}", subjectTitle || t("session.defaultTitle"))
+              .replace("{n}", String(fullMinutes))}
+          </p>
+          <div className="mt-3.5 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+            <Button
+              size="lg"
+              className="w-full px-6 text-[15px] sm:w-auto"
+              disabled={sessionsLoading || startFull.isPending}
+              onClick={() =>
+                fullSession ? openSession(fullSession.id) : startFull.mutate()
+              }
+            >
+              {startFull.isPending || sessionsLoading ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Play className="mr-2 h-4 w-4 fill-current" />
+              )}
+              {t(fullSession ? "session.quick5FinishCta" : "session.quick5StartCta").replace(
+                "{n}",
+                String(fullMinutes),
+              )}
+            </Button>
+            <Button
+              size="lg"
+              variant="ghost"
+              className="w-full sm:w-auto"
+              onClick={onBack}
+            >
+              {t("session.backToWorkspace")}
+            </Button>
+          </div>
+          <p className="mt-2.5 flex items-center gap-1.5 text-[12px] text-faint">
+            <CalendarClock className="h-3.5 w-3.5" />
+            {t("session.quick5Tomorrow")}
+          </p>
+        </div>
+      )}
+
       <div className="relative mb-6 overflow-hidden rounded-3xl border border-border bg-card px-6 py-6">
         <div
           className="pointer-events-none absolute inset-y-0 right-0 hidden w-48 select-none sm:block"
@@ -177,6 +296,7 @@ export function SessionDebrief({
         ))}
       </div>
 
+      {!handOff && (
       <div className="mt-8 rounded-xl border border-accent/25 bg-accent-soft p-4">
         <p className="flex items-center gap-1.5 text-sm font-semibold">
           <CalendarClock className="h-4 w-4 text-accent" />
@@ -206,6 +326,7 @@ export function SessionDebrief({
           )}
         </div>
       </div>
+      )}
     </div>
   );
 }

@@ -25,6 +25,21 @@ export function getCredits(): number {
   return read();
 }
 
+/** Credits finishing this session would still grant (0 once awarded), for
+ * previewing the reward before the debrief actually awards it. */
+export function pendingSessionCredits(sessionId: string): number {
+  if (typeof window === "undefined") return 0;
+  try {
+    const awardedRaw = window.localStorage.getItem(AWARDED_KEY);
+    const awarded: Record<string, number> = awardedRaw
+      ? JSON.parse(awardedRaw)
+      : {};
+    return awarded[sessionId] === undefined ? SESSION_COMPLETION_CREDITS : 0;
+  } catch {
+    return 0;
+  }
+}
+
 /** Awards credits once per session. Returns the amount granted; a session
  * awarded within the last few minutes still reports its amount so the
  * completion banner survives re-renders, while older awards return 0. */

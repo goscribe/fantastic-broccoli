@@ -49,6 +49,14 @@ import { ExplainAloudActivity } from "@/components/session/explain-aloud-activit
 import { InteractiveActivity } from "@/components/session/interactive-activity";
 import { WorksheetActivity } from "@/components/session/worksheet-activity";
 import { SessionDebrief } from "@/components/session/session-debrief";
+import {
+  ActivityRewardCard,
+  REWARD_MS,
+  SessionProgressHeader,
+  remainingMinutes,
+  type ActivityReward,
+} from "@/components/session/session-progress";
+import { pendingSessionCredits } from "@/lib/credits";
 import { MathText } from "@/components/ui/markdown-text";
 import { ContentRepairProvider } from "@/components/content/content-repair";
 import { Button } from "@/components/ui/button";
@@ -202,12 +210,20 @@ export default function SessionDetailPage() {
   const [extended, setExtended] = useState(false);
   const [extendDismissed, setExtendDismissed] = useState(false);
   // Horizontal feed navigation: which way the last slide change went, and a
-  // short-lived celebration overlay when an activity is completed.
+  // short-lived reward card ("Nice — 3 to go" + "Next: …") after an activity
+  // is completed. The card holds the finished activity on screen for
+  // REWARD_MS, then the next one opens by itself (or on one tap).
   const [navDirection, setNavDirection] = useState<"forward" | "back">(
     "forward",
   );
-  const [celebrating, setCelebrating] = useState(false);
-  const celebrateTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [reward, setReward] = useState<ActivityReward | null>(null);
+  const rewardTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(
+    () => () => {
+      if (rewardTimer.current) clearTimeout(rewardTimer.current);
+    },
+    [],
+  );
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   const { data: extensions = [] } = useQuery({
@@ -470,24 +486,65 @@ export default function SessionDetailPage() {
     (sum, a) => sum + a.estimatedMinutes,
     0,
   );
+  const minutesLeft = remainingMinutes(activities);
+
+  const clearReward = () => {
+    if (rewardTimer.current) clearTimeout(rewardTimer.current);
+    rewardTimer.current = null;
+    setReward(null);
+  };
+
+  /** Leave the reward card for the activity after it (if still on it). */
+  const advanceFrom = (fromId: string, nextId: string | null) => {
+    clearReward();
+    setNavDirection("forward");
+    setChosenActivityId((prev) => (prev === fromId ? nextId : prev));
+  };
 
   const goToNext = (skipped = false) => {
     if (!activeActivity) return;
-    completeActivity.mutate({ activityId: activeActivity.id, skipped });
-    const idx = activities.findIndex((a) => a.id === activeActivity.id);
+    const fromId = activeActivity.id;
+    const idx = activities.findIndex((a) => a.id === fromId);
     const next = activities[idx + 1];
-    setNavDirection("forward");
-    if (!skipped) {
-      setCelebrating(true);
-      if (celebrateTimer.current) clearTimeout(celebrateTimer.current);
-      celebrateTimer.current = setTimeout(() => setCelebrating(false), 1100);
+    const nextId = next?.id ?? null;
+    // A second "done" tap while the reward is up just skips the wait.
+    if (reward?.fromId === fromId) {
+      advanceFrom(fromId, nextId);
+      return;
     }
-    setActiveActivityId(next?.id ?? null);
+    completeActivity.mutate({ activityId: fromId, skipped });
+    setNavDirection("forward");
+    if (skipped) {
+      clearReward();
+      setActiveActivityId(nextId);
+      return;
+    }
+    const remaining = activities.filter(
+      (a) =>
+        a.id !== fromId && a.status !== "completed" && a.status !== "skipped",
+    ).length;
+    // Pin the finished activity explicitly: the default "first unfinished"
+    // pick would otherwise jump ahead as soon as the status flips.
+    setActiveActivityId(fromId);
+    if (rewardTimer.current) clearTimeout(rewardTimer.current);
+    setReward({
+      fromId,
+      next,
+      remaining,
+      bonusPts: remaining <= 1 ? pendingSessionCredits(sessionId) : 0,
+    });
+    rewardTimer.current = setTimeout(
+      () => advanceFrom(fromId, nextId),
+      REWARD_MS,
+    );
   };
+  const activeReward =
+    reward && activeActivity?.id === reward.fromId ? reward : null;
 
   // Navigate the feed without completing anything (swipe/arrow/peek click).
   const goToIndex = (i: number) => {
     if (i < 0 || i > activities.length || !planReady) return;
+    clearReward();
     const currentIdx = activeActivity
       ? activities.findIndex((a) => a.id === activeActivity.id)
       : activities.length;
@@ -790,7 +847,6 @@ export default function SessionDetailPage() {
   );
 
   if (newUi && !planFailed && !generating) {
-    const pct = (completedCount / Math.max(activities.length, 1)) * 100;
     return (
       <div className="flex h-dvh min-h-0 flex-1 overflow-hidden bg-background">
         <div className="relative flex min-w-0 flex-1 flex-col">
@@ -803,16 +859,11 @@ export default function SessionDetailPage() {
             >
               <X className="size-[22px]" />
             </button>
-            <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-muted">
-              <div className="h-full rounded-full bg-accent transition-[width] duration-500" style={{ width: `${pct}%` }} />
-            </div>
-            <span className="shrink-0 text-[14px] font-semibold text-muted-foreground tabular-nums">
-              {Math.min(activeIndex + 1, activities.length)} / {activities.length}
-            </span>
-            <span className="hidden shrink-0 items-center gap-1 text-[13px] text-muted-foreground md:flex">
-              <Clock className="size-3.5" />
-              {formatDuration(totalEstimated)}
-            </span>
+            <SessionProgressHeader
+              activities={activities}
+              activeIndex={activeIndex}
+              onSelect={goToIndex}
+            />
             <button
               type="button"
               onClick={() => setShowComments(!showComments)}
@@ -888,7 +939,7 @@ export default function SessionDetailPage() {
                   </ContentRepairProvider>
                 </>
               ) : (
-                <SessionDebrief sessionId={sessionId} quickStart={session.quickStart} onBack={() => router.push(`/workspace/${workspaceId}`)} />
+                <SessionDebrief sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} onBack={() => router.push(`/workspace/${workspaceId}`)} />
               )}
             </div>
           </div>
@@ -928,12 +979,14 @@ export default function SessionDetailPage() {
             </div>
           )}
 
-          {celebrating && (
-            <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
-              <div className="animate-celebrate-pop flex flex-col items-center gap-2">
-                <Image src="/design/props/star.png" alt="" width={96} height={96} unoptimized className="h-20 w-20 select-none object-contain drop-shadow-lg" />
-                {cheerKey && <p className="text-sm font-bold text-accent">{t(cheerKey)}</p>}
-              </div>
+          {activeReward && (
+            <div className="pointer-events-none absolute inset-x-0 bottom-[76px] z-30 flex justify-center px-4">
+              <ActivityRewardCard
+                reward={activeReward}
+                onNext={() =>
+                  advanceFrom(activeReward.fromId, activeReward.next?.id ?? null)
+                }
+              />
             </div>
           )}
         </div>
@@ -967,9 +1020,11 @@ export default function SessionDetailPage() {
           </h1>
           {planReady && (
             <div className="ml-auto flex items-center gap-2.5 sm:gap-4 shrink-0">
-              <span className="hidden md:flex items-center gap-1 text-xs text-muted-foreground">
+              <span className="hidden sm:flex items-center gap-1 text-xs text-muted-foreground tabular-nums">
                 <Clock className="h-3 w-3" />
-                {formatDuration(totalEstimated)}
+                {minutesLeft > 0
+                  ? t("session.minLeft").replace("{n}", String(minutesLeft))
+                  : formatDuration(totalEstimated)}
               </span>
               <button
                 type="button"
@@ -1176,6 +1231,8 @@ export default function SessionDetailPage() {
             ) : (
               <SessionDebrief
                 sessionId={sessionId}
+                workspaceId={workspaceId}
+                subjectTitle={workspace.title}
                 quickStart={session.quickStart}
                 onBack={() => router.push(`/workspace/${workspaceId}`)}
               />
@@ -1205,21 +1262,15 @@ export default function SessionDetailPage() {
             </div>
           )}
 
-          {/* Completion celebration overlay */}
-          {celebrating && (
-            <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
-              <div className="animate-celebrate-pop flex flex-col items-center gap-2">
-                <Image
-                  src={newUi ? "/design/props/star.png" : "/illustrations/props/star-gold.png"}
-                  alt=""
-                  width={96}
-                  height={96}
-                  className="h-20 w-20 select-none object-contain drop-shadow-lg"
-                />
-                {cheerKey && (
-                  <p className="text-sm font-bold text-accent">{t(cheerKey)}</p>
-                )}
-              </div>
+          {/* Completion reward: "Nice — 3 to go" + one-tap next */}
+          {activeReward && (
+            <div className="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex justify-center px-4">
+              <ActivityRewardCard
+                reward={activeReward}
+                onNext={() =>
+                  advanceFrom(activeReward.fromId, activeReward.next?.id ?? null)
+                }
+              />
             </div>
           )}
         </main>
