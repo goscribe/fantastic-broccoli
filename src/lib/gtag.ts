@@ -110,7 +110,11 @@ export function reportPendingOAuthSignupConversion() {
   reportSignupConversion();
 }
 
-/** Google Ads: first completed study session (primary goal, value 1). */
+/**
+ * Google Ads: first completed study session of any kind — Quick 5 or a full
+ * session (primary goal, value 1). Conversion action "Scribe activated (first
+ * Quick 5 / session completed)".
+ */
 const ACTIVATION_CONVERSION = "AW-18375140054/wcCYCJS_sbsdENbF-blE";
 /** Google Ads: paid subscription or trial start (primary goal, value = plan price). */
 const PAID_CONVERSION = "AW-18375140054/4f7CCJG_sbsdENbF-blE";
@@ -132,8 +136,8 @@ function localSet(key: string, value: string): void {
 }
 
 /**
- * Reports activation (the user finished their first study session) once per
- * user. `transaction_id` lets Google drop duplicates from other devices.
+ * Reports activation (the user finished their first study session, Quick 5
+ * included) once per user. `transaction_id` lets Google drop duplicates from other devices.
  */
 export function reportActivationConversion(userId: string) {
   if (typeof window === "undefined") return;

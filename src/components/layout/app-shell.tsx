@@ -61,6 +61,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="h-dvh flex flex-col overflow-hidden">
         <TopBar showLogo />
         {children}
+        <ConversionTracker />
       </div>
     );
   }
@@ -86,7 +87,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <GuidedTour />
       <MonthlyRatingPrompt />
       {!BILLING_PAUSED && <SubscribeWall />}
-        <ConversionTracker />
+      <ConversionTracker />
     </div>
   );
 }
