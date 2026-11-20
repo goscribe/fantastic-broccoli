@@ -207,6 +207,33 @@ export const plans = [
   },
 ];
 
+/**
+ * One-off exam passes, shown next to Starter: Starter's allowance until a
+ * fixed date, paid once, never renews. A parent can pay with a link.
+ */
+export const passes = [
+  {
+    name: "Until your 2027 exams",
+    price: "$29",
+    note: "once · about $3.60/month",
+    until: "Access through 15 July 2027",
+  },
+  {
+    name: "Until graduation 2028",
+    price: "$59",
+    note: "once · best value",
+    until: "Access through 15 July 2028",
+  },
+];
+
+export const passFeatures = [
+  "Everything in Starter: unlimited subjects, sessions and tests",
+  "600 tokens every month, refreshed monthly",
+  "Pay once — no subscription, nothing renews",
+  "Full refund within 14 days — one click",
+  "No card? Send a parent a secure pay link — they don't need an account",
+];
+
 export const sessionPreview: {
   art: string;
   label: string;

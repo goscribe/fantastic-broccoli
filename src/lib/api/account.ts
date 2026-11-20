@@ -50,6 +50,10 @@ export interface PlanCaps {
   /** When the current trial converts to a paid subscription, if trialing. */
   trialEndsAt: Date | string | null;
   completedSessions: number;
+  /** The plan the user pays for, with its price in dollars (the paid-conversion value). Newer servers only. */
+  paidPlan?: { id: string; price: number; kind: "pass" | "recurring" } | null;
+  /** Set while the user holds an exam pass: when it ends (it never renews). */
+  passEndsAt?: Date | string | null;
 }
 
 /** Fired on `window` when the learner finishes a study session (debrief shown). */
@@ -136,6 +140,9 @@ export interface PlanOption {
   storageLimitBytes: number;
   monthlyTokens: number;
   isActive: boolean;
+  /** `pass`: paid once, access until `accessUntil`, never renews. */
+  kind: "pass" | "recurring";
+  accessUntil: string | null;
 }
 
 export async function fetchPlanOptions(): Promise<PlanOption[]> {
@@ -150,7 +157,16 @@ export async function fetchPlanOptions(): Promise<PlanOption[]> {
     monthlyTokens:
       (plan as unknown as { monthlyTokens?: number }).monthlyTokens ?? 0,
     isActive: plan.isActive,
+    // `kind` / `accessUntil` are newer than the published @goscribe/server types.
+    ...passFields(plan as unknown as { kind?: string; accessUntil?: string | Date | null; interval?: string | null }),
   }));
+}
+
+function passFields(plan: { kind?: string; accessUntil?: string | Date | null; interval?: string | null }) {
+  const accessUntil = plan.accessUntil ? new Date(plan.accessUntil).toISOString() : null;
+  const kind: PlanOption["kind"] =
+    plan.kind === "pass" || (!plan.kind && accessUntil && !plan.interval) ? "pass" : "recurring";
+  return { kind, accessUntil };
 }
 
 /** Redirects to the hosted checkout (Stripe or Airwallex; the server picks) for the chosen paid plan. */
@@ -170,6 +186,8 @@ export interface CurrentSubscription {
   currentPeriodEnd: Date | string;
   /** Set when the subscription is scheduled to end at the period end. */
   cancelAt: Date | string | null;
+  /** A one-off exam pass: ends at `currentPeriodEnd`, nothing to cancel or resume. */
+  isPass?: boolean;
 }
 
 export function fetchCurrentSubscription(): Promise<CurrentSubscription | null> {

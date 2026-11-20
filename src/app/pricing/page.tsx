@@ -19,6 +19,11 @@ import {
 import { useAuthUser } from "@/lib/api/auth";
 import { toastError } from "@/lib/toast";
 import { BILLING_PAUSED, BILLING_PAUSED_MESSAGE } from "@/lib/billing-paused";
+import { AskParentBand, PassOptions } from "@/components/billing/pass-options";
+import { AskParentDialog } from "@/components/billing/ask-parent-dialog";
+import { useI18n } from "@/lib/i18n";
+import { fill, formatPassDate } from "@/lib/pass";
+import "@/lib/i18n/billing";
 
 function PlanCard({
   plan,
@@ -115,7 +120,7 @@ function PlanCard({
             {isCurrent
               ? "Your plan"
               : trial
-                ? `Start ${trialDays}-day free trial`
+                ? "Try for free"
                 : `Switch to ${plan.name}`}
           </Button>
         )}
@@ -125,7 +130,10 @@ function PlanCard({
 }
 
 export default function PricingPage() {
-  useAuthUser();
+  const { user } = useAuthUser();
+  const { t, locale } = useI18n();
+  const [asking, setAsking] = useState(false);
+  const [buying, setBuying] = useState<string | null>(null);
   const [summary, setSummary] = useState<AccountSummary | null>(null);
   const [plans, setPlans] = useState<PlanOption[]>([]);
   const [caps, setCaps] = useState<PlanCaps | null>(null);
@@ -148,6 +156,28 @@ export default function PricingPage() {
 
   const trialDays = caps?.trialDays ?? 0;
   const trialEndsAt = caps?.trialEndsAt ? new Date(caps.trialEndsAt) : null;
+  const passEndsAt = caps?.passEndsAt ? new Date(caps.passEndsAt) : null;
+  const monthlyPlans = plans.filter((p) => p.kind !== "pass");
+  // A pass that ends no later than the one held adds nothing.
+  const passes = plans.filter(
+    (p) => p.kind === "pass" && (!passEndsAt || (p.accessUntil !== null && new Date(p.accessUntil) > passEndsAt)),
+  );
+  const payable = plans.filter((p) => p.priceDollars > 0 && (p.kind === "pass" ? passes.includes(p) : !passEndsAt));
+
+  const handleBuyPass = async (planId: string) => {
+    if (BILLING_PAUSED) {
+      toastError(new Error(BILLING_PAUSED_MESSAGE), "Checkout unavailable");
+      return;
+    }
+    setBuying(planId);
+    try {
+      await switchPlan(planId);
+    } catch (err) {
+      toastError(err, "Couldn't open checkout");
+    } finally {
+      setBuying(null);
+    }
+  };
 
   const handleSwitch = async (planId: string) => {
     if (BILLING_PAUSED) {
@@ -181,6 +211,11 @@ export default function PricingPage() {
               provider has suspended card payments while they review our account, so
               checkout is unavailable and nobody is being charged. Every account has Pro
               for free this month; we will email when billing is back.
+            </p>
+          )}
+          {passEndsAt && (
+            <p className="mt-2 inline-flex rounded-full bg-accent-soft px-3 py-1 text-[12px] font-medium text-accent">
+              {fill(t("set.passUntil"), { date: formatPassDate(passEndsAt, locale) })}
             </p>
           )}
           {trialEndsAt && !BILLING_PAUSED && (
@@ -251,7 +286,7 @@ export default function PricingPage() {
                 <Skeleton className="h-28 w-full rounded-xl" />
               </div>
             ))
-          : plans.map((plan) => (
+          : monthlyPlans.map((plan) => (
               <PlanCard
                 key={plan.id}
                 plan={plan}
@@ -261,6 +296,21 @@ export default function PricingPage() {
               />
             ))}
       </section>
+
+      {!loading && (passes.length > 0 || payable.length > 0) && (
+        <div className="mx-auto mt-4 max-w-xl space-y-4">
+          <PassOptions passes={passes} busyId={buying} disabled={switching} onBuy={handleBuyPass} />
+          {payable.length > 0 && !BILLING_PAUSED && <AskParentBand onOpen={() => setAsking(true)} />}
+        </div>
+      )}
+      {asking && (
+        <AskParentDialog
+          plans={payable}
+          defaultPlanId={payable.find((p) => p.kind === "pass")?.id}
+          defaultFirstName={user?.name?.split(" ")[0] ?? ""}
+          onClose={() => setAsking(false)}
+        />
+      )}
     </main>
   );
 }
