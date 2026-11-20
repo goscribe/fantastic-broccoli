@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useAuthUser } from "@/lib/api/auth";
 import { trackNoteEvent } from "@/lib/api/public-notes";
 import { shouldPrompt, topicKey, topicScore, totalAnswered } from "@/lib/notes-public/progress";
+import { paywallHref } from "@/lib/notes-public/gate";
 import { cn } from "@/lib/utils";
 import { usePracticeProgress } from "./practice-store";
 
@@ -45,12 +46,15 @@ export function PracticeProvider({
   topicId,
   questionIds,
   signupHref,
+  trackView = true,
   children,
 }: {
   courseId: string;
   topicId: string;
   questionIds: string[];
   signupHref: string;
+  /** False for a provider nested in an outer one (the unlocked view of a locked topic), so the view is counted once. */
+  trackView?: boolean;
   children: ReactNode;
 }) {
   const { user } = useAuthUser();
@@ -59,8 +63,9 @@ export function PracticeProvider({
     [courseId, topicId, questionIds, signupHref, user],
   );
   useEffect(() => {
+    if (!trackView) return;
     trackNoteEvent("notes.viewed", courseId, topicId, { viewportWidth: window.innerWidth, fromSearch: searchReferrer() });
-  }, [courseId, topicId]);
+  }, [courseId, topicId, trackView]);
   return (
     <Ctx.Provider value={value}>
       {children}
@@ -352,8 +357,15 @@ export function StartQuick5({ courseId, topicId, level, placement, variant = "pr
       const { coursesApi } = await import("@/lib/api/courses");
       const { workspaceId, sessionId } = await coursesApi.startTopic({ courseId, topicId, ...(level ? { level } : {}), mode: "quick5" });
       window.location.href = `/workspace/${workspaceId}/session/${sessionId}`;
-    } catch {
+    } catch (err) {
       setBusy(false);
+      // A locked topic without a plan or pass (paid gate): straight to the paywall.
+      const { isPlanLimitError } = await import("@/lib/api/plan-limit");
+      if (isPlanLimitError(err)) {
+        trackNoteEvent("notes.unlock_clicked", courseId, topicId, { placement, signedIn: true });
+        window.location.href = paywallHref(courseId, topicId);
+        return;
+      }
       window.location.href = "/courses";
     }
   };

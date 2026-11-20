@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2, Lock } from "lucide-react";
+import { trackNoteEvent, type LockedSummary } from "@/lib/api/public-notes";
+import { isPlanLimitError } from "@/lib/api/plan-limit";
+import { isLocked, paywallHref } from "@/lib/notes-public/gate";
+import { InlineMarkdown } from "@/components/ui/markdown-text";
 import { notesApi, type LearnerNote } from "@/lib/api/notes";
 import type { Course, CatalogTopic, CourseLevel } from "@/lib/api/courses";
 import { loadCourse } from "@/components/courses/course-picker";
@@ -45,6 +49,13 @@ export function SignedInNoteReader({ courseId, topicId }: { courseId: string; to
 
   const unit = course?.units.find((u) => u.topics.some((x) => x.id === topicId));
   const topic = unit?.topics.find((x) => x.id === topicId);
+  // Paid gate: the server sent only the preview (first section, the other headings).
+  const locked = note && isLocked(note.access) ? note.access : null;
+  const shownNote = note && locked ? { ...note.content, sections: note.content.sections.slice(0, locked.shownSections) } : note?.content;
+  const hidden = note && locked ? note.content.sections.slice(locked.shownSections) : [];
+  useEffect(() => {
+    if (locked) trackNoteEvent("notes.locked_viewed", courseId, topicId, { lockedKind: locked.kind, signedIn: true });
+  }, [locked, courseId, topicId]);
 
   return (
     <div className="flex-1 bg-background">
@@ -81,16 +92,25 @@ export function SignedInNoteReader({ courseId, topicId }: { courseId: string; to
                     {t("notes.hlOnly")}
                   </span>
                 )}
+                {locked && (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-[12.5px] font-semibold text-muted-foreground">
+                    <Lock className="size-3" aria-hidden="true" />
+                    {t("notes.lockedBadge")}
+                  </span>
+                )}
               </div>
               {course && topic && <StartButtons course={course} topic={topic} className="mt-5" />}
             </header>
 
-            <div className="mt-6 lg:hidden">
-              <NoteToc note={note.content} variant="bar" />
-            </div>
+            {!locked && (
+              <div className="mt-6 lg:hidden">
+                <NoteToc note={note.content} variant="bar" />
+              </div>
+            )}
             <div className="mt-5 lg:mt-6">
-              <NoteBody note={note.content} />
+              <NoteBody note={shownNote!} />
             </div>
+            {locked && <ReaderUnlock courseId={courseId} topicId={topicId} summary={locked} headings={hidden.map((h) => h.heading)} />}
 
             {course && topic && (
               <div className="mt-12 rounded-2xl border border-border bg-card px-4 py-4 sm:px-5">
@@ -106,7 +126,7 @@ export function SignedInNoteReader({ courseId, topicId }: { courseId: string; to
           </>
         )}
       </article>
-      {state === "ready" && note && (
+      {state === "ready" && note && !locked && (
         <aside className="hidden pt-[150px] lg:block">
           <NoteToc note={note.content} variant="rail" />
         </aside>
@@ -116,9 +136,56 @@ export function SignedInNoteReader({ courseId, topicId }: { courseId: string; to
   );
 }
 
+/** The reader's unlock panel for a locked topic (translated; the public page has its own, English-only). */
+function ReaderUnlock({ courseId, topicId, summary, headings }: { courseId: string; topicId: string; summary: LockedSummary; headings: string[] }) {
+  const { t } = useI18n();
+  const lead = summary.kind === "HL" ? "notes.unlockLeadHL" : summary.kind === "A_LEVEL" ? "notes.unlockLeadALevel" : "notes.unlockLeadPlan";
+  return (
+    <section className="mt-9" aria-labelledby="h-reader-unlock">
+      {headings.length > 0 && (
+        <>
+          <p className="text-[13px] font-semibold text-muted-foreground">{t("notes.unlockStillToCome")}</p>
+          <ol className="mt-2 flex flex-col gap-2">
+            {headings.map((h, i) => (
+              <li key={i} className="flex items-start gap-2.5 rounded-xl border border-dashed border-border-strong px-4 py-3 text-[16px] font-semibold leading-snug text-muted-foreground">
+                <Lock className="mt-1 size-3.5 shrink-0 text-faint" aria-hidden="true" />
+                <span className="min-w-0">
+                  <InlineMarkdown text={h} />
+                </span>
+              </li>
+            ))}
+          </ol>
+        </>
+      )}
+      <div className="mt-5 rounded-2xl border border-border bg-card px-5 py-5 sm:px-6">
+        <h2 id="h-reader-unlock" className="text-[20px] font-bold leading-snug">
+          {t("notes.unlockTitle")}
+        </h2>
+        <p className="mt-1.5 text-[15px] leading-snug text-muted-foreground">{t(lead)}</p>
+        <p className="mt-2 text-[15px] leading-snug">{t("notes.unlockExtras")}</p>
+        <a
+          href={paywallHref(courseId, topicId)}
+          onClick={() => trackNoteEvent("notes.unlock_clicked", courseId, topicId, { placement: "unlock_panel", lockedKind: summary.kind, signedIn: true })}
+          className="mt-5 inline-flex h-11 items-center justify-center rounded-xl bg-accent px-6 text-[15px] font-semibold text-white transition-colors hover:bg-accent-dim"
+        >
+          {t("notes.tryFree")}
+        </a>
+        <p className="mt-3 text-[13px] leading-snug text-faint">{t("notes.trialHint")}</p>
+      </div>
+    </section>
+  );
+}
+
 function StartButtons({ course, topic, className }: { course: Course; topic: CatalogTopic; className?: string }) {
   const { t } = useI18n();
-  const { start, busyTopicId, busyMode } = useStartCourseTopic();
+  // A locked topic without a plan: the server refuses with a plan-limit error; send the learner to the paywall.
+  const { start, busyTopicId, busyMode } = useStartCourseTopic({
+    onError: (message) => {
+      if (!isPlanLimitError(new Error(message))) return;
+      trackNoteEvent("notes.unlock_clicked", course.id, topic.id, { placement: "header", signedIn: true });
+      window.location.href = paywallHref(course.id, topic.id);
+    },
+  });
   const level: CourseLevel | undefined = topic.hlOnly ? "HL" : undefined;
   const busy = !!busyTopicId;
   return (

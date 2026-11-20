@@ -6,6 +6,8 @@ import { BOARD_LABEL, BOARD_ORDER } from "@/lib/courses";
 import { getCourses } from "@/lib/notes-public/data";
 import { coursePath } from "@/lib/notes-public/slug";
 import { crumbsFor, INDEX_DESCRIPTION, INDEX_TITLE } from "@/lib/notes-public/seo";
+import { lockedCountLabel } from "@/lib/notes-public/gate";
+import { Lock } from "lucide-react";
 
 export const revalidate = 3600;
 
@@ -47,6 +49,12 @@ export default async function NotesIndexPage() {
                     {c.noteCount > 0 && ` · ${c.noteCount} notes`}
                     {c.questionCount > 0 && ` · ${c.questionCount} questions`}
                   </span>
+                  {!!c.lockedCount && (
+                    <span className="mt-1 inline-flex items-center gap-1 text-[12.5px] font-medium text-faint">
+                      <Lock className="size-3" aria-hidden="true" />
+                      {lockedCountLabel(c.lockedCount, c.lockedKind)}
+                    </span>
+                  )}
                 </Link>
               </li>
             ))}

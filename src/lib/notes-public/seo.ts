@@ -8,6 +8,11 @@
  *   LearningResource) whose `hasPart` Questions carry the visible question,
  *   the correct answer and its explanation — the Education Q&A markup Google
  *   documents for study / flashcard pages, on the most specific (leaf) page only.
+ * - Locked topics (paid gate): a `WebPage` with `isAccessibleForFree: false`
+ *   and a `hasPart` WebPageElement whose `cssSelector` is the unlock panel
+ *   (`.notes-locked`), per Google's subscription / paywalled content guidance.
+ *   The locked text is not in the page at all (the server strips it), and the
+ *   Quiz lists only the questions the page shows.
  * - Not used: Course / CourseInstance (Google dropped Course Info in 2025),
  *   practice-problem markup (dropped in early 2026), FAQPage (rich result
  *   retired) and QAPage (meant for user-submitted answers).
@@ -59,7 +64,13 @@ export function topicDescription(
   t: { code: string; name: string; objectives: string[] },
   hasNote: boolean,
   questionCount: number,
+  locked = false,
 ): string {
+  if (locked) {
+    const what = hasNote ? `${courseName(c)} notes on ${t.code} ${t.name}` : `${courseName(c)} ${t.code} ${t.name}`;
+    const obj = t.objectives[0] ? ` Covers: ${t.objectives.slice(0, 2).join("; ").replace(/\.$/, "")}.` : "";
+    return clip(`${what}: read the first section and try ${Math.min(2, questionCount)} practice questions free; the rest comes with a plan.${obj}`, 158);
+  }
   const lead = hasNote
     ? `Clear ${courseName(c)} notes on ${t.code} ${t.name}`
     : `${courseName(c)} ${t.code} ${t.name}`;
@@ -179,5 +190,25 @@ export function topicQuizJsonLd(opts: {
         text: `${plainText(q.options[q.correctIndex] ?? "").replace(/[.!?]+$/, "")}. ${plainText(q.explanation)}`,
       },
     })),
+  };
+}
+
+/** CSS class of the unlock panel on a locked topic page; the paywall markup points at it. */
+export const LOCKED_SELECTOR = ".notes-locked";
+
+/** Paywall structured data for a locked topic page (see the header comment). */
+export function lockedPageJsonLd(opts: { siteUrl: string; path: string; title: string; locale: "en-GB" | "en-US" }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: opts.title,
+    url: `${opts.siteUrl}${opts.path}`,
+    inLanguage: opts.locale,
+    isAccessibleForFree: false,
+    hasPart: {
+      "@type": "WebPageElement",
+      isAccessibleForFree: false,
+      cssSelector: LOCKED_SELECTOR,
+    },
   };
 }

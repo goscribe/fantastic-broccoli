@@ -7,6 +7,8 @@ import { unitTitle } from "@/lib/courses";
 import { getCourse, rowIndexable } from "@/lib/notes-public/data";
 import { coursePath, unitPath } from "@/lib/notes-public/slug";
 import { courseDescription, courseTitle, crumbsFor } from "@/lib/notes-public/seo";
+import { lockedCountLabel } from "@/lib/notes-public/gate";
+import { LockedCount } from "@/components/notes-public/locked-count";
 
 export const revalidate = 3600;
 
@@ -23,6 +25,8 @@ const counts = (c: NonNullable<Awaited<ReturnType<typeof getCourse>>>) => {
     notes: topics.filter((t) => t.note).length,
     questions: topics.reduce((a, t) => a + t.questionCount, 0),
     indexable: topics.some(rowIndexable),
+    locked: topics.filter((t) => t.locked).length,
+    lockedKind: c.board === "IB" ? ("HL" as const) : c.board === "A_LEVEL" ? ("A_LEVEL" as const) : ("PLAN" as const),
   };
 };
 
@@ -62,6 +66,7 @@ export default async function CourseNotesPage({ params }: Params) {
           {n.notes ? ` · ${n.notes} topic notes` : ""}
           {n.questions ? ` · ${n.questions} exam-style questions with worked answers` : ""}.
         </p>
+        {n.locked > 0 && <LockedCount label={lockedCountLabel(n.locked, n.lockedKind)} />}
       </header>
       <nav aria-label="Units" className="mt-5 flex flex-wrap gap-2">
         {course.units.map((u) => (

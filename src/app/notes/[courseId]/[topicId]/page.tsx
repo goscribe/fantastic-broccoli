@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Lock } from "lucide-react";
 import { notFound, permanentRedirect } from "next/navigation";
 import type { ReactNode } from "react";
 import { Breadcrumbs } from "@/components/notes-public/breadcrumbs";
@@ -13,7 +14,11 @@ import { unitTitle } from "@/lib/courses";
 import type { PublicCourse, PublicQuestion, PublicTopic, PublicUnit } from "@/lib/api/public-notes";
 import { getCourse, getTopic, indexDrafts, rowIndexable } from "@/lib/notes-public/data";
 import { coursePath, neighbours, resolveSegment, topicPath, unitPath } from "@/lib/notes-public/slug";
-import { crumbsFor, isTopicIndexable, topicDescription, topicQuizJsonLd, topicTitle, unitTitleSeo } from "@/lib/notes-public/seo";
+import { crumbsFor, isTopicIndexable, lockedPageJsonLd, topicDescription, topicQuizJsonLd, topicTitle, unitTitleSeo } from "@/lib/notes-public/seo";
+import { isLocked, lockedBadge, lockedCountLabel } from "@/lib/notes-public/gate";
+import { LockedCount } from "@/components/notes-public/locked-count";
+import { LockedTopicGate } from "@/components/notes-public/locked-topic";
+import { LockedQuestions, UnlockPanel } from "@/components/notes-public/unlock-panel";
 import { jsonLdScriptProps, siteUrl } from "@/lib/seo";
 import { splitInline } from "@/lib/notes-public/inline-split";
 
@@ -55,10 +60,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const data = await getTopic(course.id, match.topic.id);
   if (!data) notFound();
   const hasNote = !!data.note;
-  const title = topicTitle(course, data.topic, hasNote, data.questions.length);
-  const description = topicDescription(course, data.topic, hasNote, data.questions.length);
+  // A locked topic is described by what it has (the full set), not by its preview.
+  const locked = isLocked(data.access) ? data.access : null;
+  const questionCount = locked ? locked.questions : data.questions.length;
+  const title = topicTitle(course, data.topic, hasNote, questionCount);
+  const description = topicDescription(course, data.topic, hasNote, questionCount, !!locked);
   const path = topicPath(course.id, data.topic);
-  const indexable = isTopicIndexable({ note: data.note?.label ?? null, questionCount: data.questions.length, indexDrafts: indexDrafts() });
+  const indexable = isTopicIndexable({ note: data.note?.label ?? null, questionCount, indexDrafts: indexDrafts() });
   return {
     title,
     description,
@@ -98,6 +106,14 @@ function UnitView({ course, unit }: { course: PublicCourse; unit: PublicUnit }) 
         <p className="mt-2 text-[15.5px] text-muted-foreground">
           {unit.topics.length} topics · notes and exam-style practice questions with worked answers
         </p>
+        {unit.topics.some((t) => t.locked) && (
+          <LockedCount
+            label={lockedCountLabel(
+              unit.topics.filter((t) => t.locked).length,
+              course.board === "IB" ? "HL" : course.board === "A_LEVEL" ? "A_LEVEL" : "PLAN",
+            )}
+          />
+        )}
       </header>
       <TopicList courseId={course.id} topics={unit.topics} />
       <div className="mt-8 flex flex-wrap gap-3 text-[14.5px] font-semibold">
@@ -152,6 +168,43 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
     [...inline.entries()].map(([slot, q]) => [slot, <div key={q.id} className="mt-8">{questionCard(q, ids.indexOf(q.id) + 1, "inline")}</div>]),
   );
   const level = levelOf(topic);
+  const locked = isLocked(data.access) ? data.access : null;
+  const title = topicTitle(course, topic, !!note, locked ? locked.questions : questions.length);
+  const shown = note && locked ? note.content.sections.slice(0, locked.shownSections) : null;
+  const hidden = note && locked ? note.content.sections.slice(locked.shownSections) : [];
+
+  // Locked topic (paid gate): the server sent only the preview; this is all of it.
+  const lockedBody = locked && (
+    <>
+      {note && shown && (
+        <div className="mt-5 lg:mt-6">
+          <PublicNoteBody note={{ ...note.content, sections: shown }} />
+        </div>
+      )}
+      <UnlockPanel
+        courseId={course.id}
+        topicId={topic.id}
+        summary={locked}
+        headings={hidden.map((s) => (
+          <RichText key={s.id} text={s.heading} />
+        ))}
+        // "Ask a parent to pay" goes here once that feature (app PR #289) is on main.
+        parentSlot={null}
+      />
+      {questions.length > 0 && (
+        <section id="practice" className="mt-12 scroll-mt-4 border-t border-border pt-8" aria-labelledby="h-practice">
+          <h2 id="h-practice" className="text-[21px] font-bold leading-snug sm:text-[24px]">
+            Try {questions.length === 1 ? "a practice question" : `${questions.length} practice questions`}
+          </h2>
+          <p className="mt-1 text-[14.5px] text-muted-foreground">Tap an answer to see if you&apos;re right and the worked explanation.</p>
+          <div className="mt-4 flex flex-col gap-4">{questions.map((q, i) => questionCard(q, i + 1, "practice"))}</div>
+          <div className="mt-4">
+            <LockedQuestions courseId={course.id} topicId={topic.id} summary={locked} />
+          </div>
+        </section>
+      )}
+    </>
+  );
 
   return (
     <PracticeProvider courseId={course.id} topicId={topic.id} questionIds={ids} signupHref={signupHref}>
@@ -160,6 +213,7 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
           {...jsonLdScriptProps(topicQuizJsonLd({ siteUrl, path, course, topic, questions: order, locale }))}
         />
       )}
+      {locked && <script {...jsonLdScriptProps(lockedPageJsonLd({ siteUrl, path, title, locale }))} />}
       <div className="mx-auto w-full max-w-[720px] lg:grid lg:max-w-[1000px] lg:grid-cols-[minmax(0,720px)_220px] lg:gap-10">
         <article className="min-w-0 px-4 pb-8 pt-5 sm:px-6 sm:pt-8 lg:px-0">
           <Breadcrumbs crumbs={crumbsFor.topic(course, unit, topic)} />
@@ -172,7 +226,7 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
             </h1>
             <p className="mt-1 text-[15px] font-semibold text-muted-foreground">
               {note ? "Notes" : "Topic outline"}
-              {questions.length ? ` and ${questions.length} practice questions with answers` : ""}
+              {(locked ? locked.questions : questions.length) ? ` and ${locked ? locked.questions : questions.length} practice questions with answers` : ""}
             </p>
             <div className="mt-2.5 flex flex-wrap items-center gap-2">
               {note && (
@@ -180,13 +234,19 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
                   {note.label === "reviewed" ? "Scribe notes · reviewed" : "Scribe notes · draft"}
                 </span>
               )}
-              {topic.hlOnly && <span className="rounded-full bg-muted px-2.5 py-1 text-[12.5px] font-semibold text-muted-foreground">HL only</span>}
+              {locked ? (
+                <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-[12.5px] font-semibold text-muted-foreground">
+                  <Lock className="size-3" aria-hidden="true" /> {lockedBadge(locked.kind)}
+                </span>
+              ) : (
+                topic.hlOnly && <span className="rounded-full bg-muted px-2.5 py-1 text-[12.5px] font-semibold text-muted-foreground">HL only</span>
+              )}
               {topic.bcOnly && <span className="rounded-full bg-muted px-2.5 py-1 text-[12.5px] font-semibold text-muted-foreground">BC only</span>}
               {topic.higherTierOnly && <span className="rounded-full bg-muted px-2.5 py-1 text-[12.5px] font-semibold text-muted-foreground">Higher tier</span>}
             </div>
             <div className="mt-5 flex flex-col gap-2 sm:flex-row">
               <StartQuick5 courseId={course.id} topicId={topic.id} level={level} placement="header" />
-              {questions.length > 0 && (
+              {questions.length > 0 && !locked && (
                 <a href="#practice" className="inline-flex h-11 items-center justify-center rounded-xl border border-border-strong bg-card px-5 text-[15px] font-semibold hover:border-accent hover:text-accent">
                   Jump to {questions.length} practice questions
                 </a>
@@ -194,7 +254,11 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
             </div>
           </header>
 
-          {note ? (
+          {locked ? (
+            <LockedTopicGate courseId={course.id} topicId={topic.id} kind={locked.kind} signupHref={signupHref}>
+              {lockedBody}
+            </LockedTopicGate>
+          ) : note ? (
             <>
               <div className="mt-6 lg:hidden">
                 <NoteToc note={note.content} variant="bar" />
@@ -220,7 +284,7 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
             </>
           )}
 
-          {questions.length > 0 && (
+          {questions.length > 0 && !locked && (
             <section id="practice" className="mt-12 scroll-mt-4 border-t border-border pt-8" aria-labelledby="h-practice">
               <h2 id="h-practice" className="text-[21px] font-bold leading-snug sm:text-[24px]">
                 Practice this topic
@@ -295,7 +359,7 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
             <p>Topic codes follow the official numbering. Not endorsed by {course.boardName} or any exam board.</p>
           </footer>
         </article>
-        {note && (
+        {note && !locked && (
           <aside className="hidden pt-[150px] lg:block">
             <NoteToc note={note.content} variant="rail" />
           </aside>
