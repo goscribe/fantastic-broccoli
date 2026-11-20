@@ -30,9 +30,15 @@ export async function fetchAccountSummary(): Promise<AccountSummary> {
   };
 }
 
-/** Free-plan resource caps (see server FREE_TIER_CAPS); `caps` is null on a paid plan. */
+/** Free-plan resource caps (see server FREE_TIER_CAPS); `caps` is null on a paid or complimentary plan. */
 export interface PlanCaps {
+  /** The user pays (active or trialing provider subscription). False on a complimentary grant. */
   paid: boolean;
+  /**
+   * On a priced plan only through a complimentary grant (no payment). Has plan
+   * access, but is not a paid conversion. Absent from servers before it was added.
+   */
+  complimentary?: boolean;
   caps: {
     workspaces: number;
     studySessions: number;
