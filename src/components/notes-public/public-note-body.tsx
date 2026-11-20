@@ -132,6 +132,28 @@ function Block({ block, figure, number }: { block: NoteBlock; figure?: NoteFigur
       );
     case "table":
       return <NoteTable block={block} />;
+    case "deeper":
+      // Collapsed, but the text is in the HTML (and opens without JavaScript).
+      return (
+        <details className="group rounded-xl border border-border px-4 py-3 [&_summary::-webkit-details-marker]:hidden">
+          <summary className="flex min-h-8 cursor-pointer list-none items-center gap-2 font-semibold">
+            <span className="text-[12.5px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">Go deeper</span>
+            <span className="min-w-0 flex-1">
+              <RichText text={block.title} />
+            </span>
+            <svg viewBox="0 0 24 24" className="size-4 shrink-0 text-faint transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </summary>
+          <div className="mt-2 flex flex-col gap-3">
+            {block.paragraphs.map((p, i) => (
+              <p key={i}>
+                <RichText text={p} />
+              </p>
+            ))}
+          </div>
+        </details>
+      );
     case "figure":
       if (!figure) return null;
       return (
