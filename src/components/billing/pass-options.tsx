@@ -1,6 +1,7 @@
 "use client";
 
-import { Check, CalendarCheck, HeartHandshake } from "lucide-react";
+import { useId, useState } from "react";
+import { Check, CalendarCheck, ChevronDown, ChevronRight, HeartHandshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { PlanOption } from "@/lib/api/account";
 import { useI18n } from "@/lib/i18n";
@@ -27,12 +28,15 @@ export function PassOptions({
   disabled,
   onBuy,
   className,
+  bare = false,
 }: {
   passes: PlanOption[];
   busyId: string | null;
   disabled?: boolean;
   onBuy: (planId: string) => void;
   className?: string;
+  /** Just the pass cards, without the heading (inside `PassDisclosure`). */
+  bare?: boolean;
 }) {
   const { t, locale } = useI18n();
   const label = usePassLabel();
@@ -41,7 +45,11 @@ export function PassOptions({
   const best = [...passes].sort((a, b) => (b.accessUntil ?? "").localeCompare(a.accessUntil ?? ""))[0];
 
   return (
-    <section className={cn("rounded-3xl border border-border bg-card/80 p-5 sm:p-6", className)} aria-labelledby="pass-options-title">
+    <section
+      className={cn(!bare && "rounded-3xl border border-border bg-card/80 p-5 sm:p-6", className)}
+      aria-labelledby={bare ? undefined : "pass-options-title"}
+    >
+      {!bare && (
       <div className="flex items-start gap-3">
         <span className="grid size-9 shrink-0 place-items-center rounded-full bg-accent-soft text-accent">
           <CalendarCheck className="size-4.5" />
@@ -53,7 +61,8 @@ export function PassOptions({
           <p className="mt-0.5 text-[13px] text-muted-foreground">{t("bill.passNoRenew")}</p>
         </div>
       </div>
-      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+      )}
+      <ul className={cn("grid gap-3 sm:grid-cols-2", !bare && "mt-4")}>
         {passes.map((plan) => {
           const until = plan.accessUntil ? formatPassDate(plan.accessUntil, locale) : "";
           const monthly = plan.accessUntil ? perMonth(plan.priceDollars, plan.accessUntil) : null;
@@ -128,5 +137,76 @@ export function AskParentBand({ onOpen, className }: { onOpen: () => void; class
         {t("ask.title")}
       </Button>
     </div>
+  );
+}
+
+/**
+ * One compact "Pay once instead" row under the monthly plan that expands to
+ * the passes, so the monthly plan stays the first choice and the wall fits a
+ * phone's first screen.
+ */
+export function PassDisclosure({
+  passes,
+  busyId,
+  disabled,
+  onBuy,
+  className,
+}: {
+  passes: PlanOption[];
+  busyId: string | null;
+  disabled?: boolean;
+  onBuy: (planId: string) => void;
+  className?: string;
+}) {
+  const { t } = useI18n();
+  const [open, setOpen] = useState(false);
+  const panelId = useId();
+  if (passes.length === 0) return null;
+  const from = Math.min(...passes.map((p) => p.priceDollars));
+  return (
+    <div className={cn("rounded-2xl border border-border bg-card/80", className)}>
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left hover:bg-muted/40"
+      >
+        <span className="grid size-8 shrink-0 place-items-center rounded-full bg-accent-soft text-accent">
+          <CalendarCheck className="size-4" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-[14.5px] font-semibold">{t("bill.payOnceInstead")}</span>
+          <span className="block text-[12.5px] text-muted-foreground">
+            {fill(t("bill.payOnceInsteadSub"), { price: `$${from}` })}
+          </span>
+        </span>
+        <ChevronDown className={cn("size-4 shrink-0 text-muted-foreground transition-transform", open && "rotate-180")} />
+      </button>
+      {open && (
+        <div id={panelId} className="border-t border-border px-4 pb-4 pt-4">
+          <PassOptions bare passes={passes} busyId={busyId} disabled={disabled} onBuy={onBuy} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** A one-line "No card? Ask a parent to pay" link that opens the share step. */
+export function AskParentLink({ onOpen, className }: { onOpen: () => void; className?: string }) {
+  const { t } = useI18n();
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      className={cn(
+        "flex w-full items-center gap-3 rounded-2xl border border-dashed border-accent/40 bg-accent-soft/50 px-4 py-3 text-left hover:bg-accent-soft",
+        className,
+      )}
+    >
+      <HeartHandshake className="size-5 shrink-0 text-accent" />
+      <span className="min-w-0 flex-1 text-[14px] font-semibold text-accent-dim">{t("bill.noCard")}</span>
+      <ChevronRight className="size-4 shrink-0 text-accent" />
+    </button>
   );
 }

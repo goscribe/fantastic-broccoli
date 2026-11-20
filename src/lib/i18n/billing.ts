@@ -6,6 +6,8 @@ import { registerTranslations } from "@/lib/i18n";
 registerTranslations(
   {
     "bill.payOnce": "Pay once — until your exams",
+    "bill.payOnceInstead": "Pay once instead",
+    "bill.payOnceInsteadSub": "From {price} until your exams · no subscription",
     "bill.passExams": "Until your {year} exams",
     "bill.passGraduation": "Until graduation {year}",
     "bill.passPrice": "{price} once",
@@ -84,6 +86,8 @@ registerTranslations(
   },
   {
     es: {
+      "bill.payOnceInstead": "Paga una vez",
+      "bill.payOnceInsteadSub": "Desde {price} hasta tus exámenes · sin suscripción",
       "pay.secureBadge": "Seguro",
       "bill.payOnce": "Paga una vez — hasta tus exámenes",
       "bill.passExams": "Hasta tus exámenes de {year}",
@@ -162,6 +166,8 @@ registerTranslations(
       "set.once": "una vez",
     },
     fr: {
+      "bill.payOnceInstead": "Payer une fois à la place",
+      "bill.payOnceInsteadSub": "Dès {price} jusqu'à vos examens · sans abonnement",
       "pay.secureBadge": "Sécurisé",
       "bill.payOnce": "Payez une fois — jusqu'à vos examens",
       "bill.passExams": "Jusqu'à vos examens {year}",
@@ -240,6 +246,8 @@ registerTranslations(
       "set.once": "une fois",
     },
     de: {
+      "bill.payOnceInstead": "Stattdessen einmal zahlen",
+      "bill.payOnceInsteadSub": "Ab {price} bis zu deinen Prüfungen · kein Abo",
       "pay.secureBadge": "Sicher",
       "bill.payOnce": "Einmal zahlen — bis zu deinen Prüfungen",
       "bill.passExams": "Bis zu deinen Prüfungen {year}",
@@ -318,6 +326,8 @@ registerTranslations(
       "set.once": "einmalig",
     },
     zh: {
+      "bill.payOnceInstead": "改为一次付清",
+      "bill.payOnceInsteadSub": "{price} 起，用到考试结束 · 非订阅",
       "pay.secureBadge": "安全",
       "bill.payOnce": "一次付清 — 用到考试结束",
       "bill.passExams": "用到 {year} 年考试",
@@ -396,6 +406,8 @@ registerTranslations(
       "set.once": "一次",
     },
     hi: {
+      "bill.payOnceInstead": "इसके बजाय एक बार भुगतान करें",
+      "bill.payOnceInsteadSub": "{price} से, परीक्षा तक · कोई सब्सक्रिप्शन नहीं",
       "pay.secureBadge": "सुरक्षित",
       "bill.payOnce": "एक बार भुगतान करें — परीक्षा तक",
       "bill.passExams": "आपकी {year} की परीक्षाओं तक",
@@ -474,6 +486,8 @@ registerTranslations(
       "set.once": "एक बार",
     },
     tl: {
+      "bill.payOnceInstead": "Magbayad na lang nang isang beses",
+      "bill.payOnceInsteadSub": "Mula {price} hanggang exams mo · walang subscription",
       "pay.secureBadge": "Secure",
       "bill.payOnce": "Magbayad nang isang beses — hanggang sa exams mo",
       "bill.passExams": "Hanggang sa {year} exams mo",
