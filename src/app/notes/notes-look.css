@@ -2,10 +2,12 @@
 
 /*
  * The look of the public note pages (/notes): a study page, not a document.
- * Same language as the signed-in app (palette in design/tokens.css): a warm
- * off-white page, white cards with a hairline, ink text, and purple as the
- * accent only (primary button, links, the selected thing, progress). One warm
- * cream panel holds the page's main thing, with the cat. The details come
+ * Same language as the signed-in app (palette in design/tokens.css): a white
+ * page, white cards with a hairline, near-black text, and purple as the
+ * accent only (primary button, links, the selected thing, progress). Colour
+ * lives in the subject: a course is a tile in its family's hue, and a course
+ * or note opens with a header band in that hue with its illustration
+ * (.subject-band.nl-band). The reading body stays white. The details come
  * from studying: exam-style question numbers and [marks], lettered answers, a
  * highlighter on key phrases, a ruled line under the header. Green and rose
  * only after an answer.
@@ -34,8 +36,42 @@
     border-radius: var(--r-card);
     box-shadow: var(--card-shadow);
   }
-  /* The warm panel: the page header, and the practice header further down. */
+  /* A quiet neutral panel (the practice header, the end-of-note card). Page headers are subject bands, not this. */
   .nl-panel { background: var(--cream); border-radius: var(--r-panel); }
+
+  /* On a subject band: white type, a white primary button in the band's hue, a glassy second button. */
+  .nl-band .nl-meta { color: rgb(255 255 255 / 0.92); }
+  .nl-band .nl-meta > li:not(:last-child)::after { color: rgb(255 255 255 / 0.7); }
+  .nl-band .nl-btn { background: #fff; color: var(--tile-a); box-shadow: 0 4px 0 0 rgb(0 0 0 / 0.18); }
+  .nl-band .nl-btn:hover { background: #fff; }
+  .nl-band .nl-btn:active { box-shadow: 0 1px 0 0 rgb(0 0 0 / 0.18); }
+  .nl-band .nl-btn-ghost { background: rgb(255 255 255 / 0.16); color: #fff; border-color: rgb(255 255 255 / 0.45); box-shadow: none; }
+  .nl-band .nl-btn-ghost:hover { background: rgb(255 255 255 / 0.24); border-color: rgb(255 255 255 / 0.7); box-shadow: none; }
+  .nl-band .nl-meter, .subject-tile .nl-meter { height: 6px; background: rgb(255 255 255 / 0.3); }
+  .nl-band .nl-meter > span, .subject-tile .nl-meter > span { background: #fff; }
+  .nl-band a:focus-visible, .nl-band button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  /* Phones: the illustration sits in the top-right corner, where the title leaves it room. */
+  @media (max-width: 639px) {
+    .nl-band .subject-tile__art { top: 12px; bottom: auto; right: -8px; height: 104px; opacity: 1; }
+  }
+  @media (min-width: 640px) {
+    .nl-band .subject-tile__art { right: -1%; bottom: -12%; height: min(112%, 300px); }
+  }
+
+  /* The notes home header: the illustrated scene behind the headline (a strip on phones). */
+  .nl-hero { isolation: isolate; background: #fff; border: 1px solid var(--border); border-radius: var(--r-panel); }
+  .nl-hero__scene {
+    position: absolute; z-index: -2; inset: 0 0 auto 0; width: 100%; height: 150px;
+    object-fit: cover; object-position: 82% 46%; pointer-events: none; user-select: none;
+    -webkit-mask-image: linear-gradient(#000 62%, transparent); mask-image: linear-gradient(#000 62%, transparent);
+  }
+  @media (min-width: 640px) {
+    .nl-hero__scene { inset: 0; height: 100%; object-position: 100% 62%; -webkit-mask-image: none; mask-image: none; }
+    .nl-hero::before {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: linear-gradient(90deg, rgb(255 255 255 / 0.94) 0%, rgb(255 255 255 / 0.7) 40%, rgb(255 255 255 / 0) 68%);
+    }
+  }
   /* A quiet neutral box inside a card (model answers, a formula band). */
   .nl-well { background: var(--muted); border-radius: var(--r-control); }
 

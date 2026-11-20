@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/notes-public/breadcrumbs";
 import { NotesProgress } from "@/components/notes-public/notes-progress";
-import { SubjectTile } from "@/components/notes-public/subject-tile";
+import { SubjectArt } from "@/components/learn/subject-tile";
+import { familyFor, familyVars } from "@/lib/subject-family";
 import { BOARD_LABEL, BOARD_ORDER } from "@/lib/courses";
 import { getCourses } from "@/lib/notes-public/data";
 import { coursePath } from "@/lib/notes-public/slug";
@@ -28,9 +29,12 @@ export default async function NotesIndexPage() {
   return (
     <div className="mx-auto w-full max-w-[1120px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
       <Breadcrumbs crumbs={crumbsFor.index()} />
-      <header className="nl-panel relative mt-4 overflow-hidden px-5 pb-6 pt-6 sm:px-10 sm:py-11 lg:pr-[360px]">
-        <Image src="/design/cat2-book.png" alt="" width={240} height={260} priority unoptimized className="nl-cat-in absolute right-4 top-5 h-[84px] w-auto sm:right-8 sm:top-8 sm:h-[112px] lg:right-[76px] lg:top-1/2 lg:h-[200px] lg:-translate-y-1/2" />
-        <h1 className="nl-rise pr-[92px] text-[34px] font-black leading-[1.04] text-foreground sm:pr-[140px] sm:text-[52px] lg:pr-0" style={{ "--i": 1 } as React.CSSProperties}>
+      {/* The illustrated scene; the cat is its own image over it, so a new mascot swaps in without redrawing the scene. */}
+      <header className="nl-hero relative mt-4 overflow-hidden px-5 pb-6 pt-[148px] sm:px-10 sm:py-11 sm:pr-[300px] lg:pr-[400px]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/design/hero/scene.webp" alt="" width={1440} height={960} fetchPriority="high" decoding="async" className="nl-hero__scene" />
+        <Image src="/design/cat2-book.png" alt="" width={240} height={260} priority unoptimized className="nl-cat-in absolute right-[16%] top-[26px] h-[104px] w-auto sm:right-[8%] sm:top-auto sm:bottom-[12%] sm:h-[150px] lg:right-[11%] lg:h-[190px]" />
+        <h1 className="nl-rise text-[34px] font-black leading-[1.04] text-foreground sm:text-[48px]" style={{ "--i": 1 } as React.CSSProperties}>
           Free notes and practice questions
         </h1>
         <p className="nl-rise mt-3.5 max-w-[600px] text-[17px] font-semibold leading-snug text-foreground/75 sm:text-[19px]" style={{ "--i": 2 } as React.CSSProperties}>
@@ -62,27 +66,35 @@ export default async function NotesIndexPage() {
           <ul className="mt-4 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
             {g.courses.map((c) => (
               <li key={c.id}>
-                <Link href={coursePath(c.id)} data-nl-course={c.id} data-total={c.topicCount} className="nl-card nl-lift group flex h-full flex-col px-4 pb-4 pt-4">
-                  <span className="flex items-center gap-3">
-                    <SubjectTile title={`${c.subject} ${c.title}`} />
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-[18px] font-extrabold leading-tight text-foreground">{c.title}</span>
-                      <span className="mt-0.5 block text-[13.5px] font-semibold text-muted-foreground">
-                        {c.topicCount} topics
-                        {c.levels?.length ? ` · ${c.levels.join(" & ")}` : ""}
-                      </span>
+                {/* A course is a tile in its subject's colour with its illustration; progress and the action sit on it. */}
+                <Link
+                  href={coursePath(c.id)}
+                  data-nl-course={c.id}
+                  data-total={c.topicCount}
+                  className="subject-tile h-full min-h-[184px] p-[18px] sm:p-5"
+                  style={familyVars(familyFor(`${c.subject} ${c.title}`)) as React.CSSProperties}
+                >
+                  <SubjectArt family={familyFor(`${c.subject} ${c.title}`)} />
+                  <span className="subject-tile__text block">
+                    <span className="block text-[20px] font-extrabold leading-[1.15]">{c.title}</span>
+                    <span className="subject-tile__sub mt-1 block text-[13.5px] font-semibold leading-snug">
+                      {c.topicCount} topics
+                      {c.levels?.length ? ` · ${c.levels.join(" & ")}` : ""}
                     </span>
-                    <ArrowRight className="size-4.5 shrink-0 text-faint transition-colors group-hover:text-accent" strokeWidth={2.5} aria-hidden="true" />
+                    <span className="subject-tile__sub block text-[13.5px] font-semibold leading-snug">
+                      {[c.noteCount > 0 ? `${c.noteCount} notes` : null, c.questionCount > 0 ? `${c.questionCount} questions` : null].filter(Boolean).join(" · ") || "Topic outlines"}
+                    </span>
                   </span>
-                  <span className="mt-3 block pl-11 text-[13.5px] font-bold text-foreground">
-                    {[c.noteCount > 0 ? `${c.noteCount} notes` : null, c.questionCount > 0 ? `${c.questionCount} questions` : null].filter(Boolean).join(" · ") || "Topic outlines"}
-                  </span>
-                  <span className="mt-auto block pl-11 pt-3">
-                    <span className="nl-meter block" aria-hidden="true">
+                  <span className="mt-4 block">
+                    <span className="nl-meter block w-[52%]" aria-hidden="true">
                       <span />
                     </span>
-                    <span data-nl-count className="mt-1.5 block text-[12.5px] font-bold text-muted-foreground">
+                    <span data-nl-count className="subject-tile__sub mt-1.5 block max-w-[58%] text-[12.5px] font-bold">
                       Not started yet
+                    </span>
+                    <span className="subject-pill mt-3">
+                      Open
+                      <ChevronRight className="size-4" strokeWidth={2.6} aria-hidden="true" />
                     </span>
                   </span>
                 </Link>

@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import type { CSSProperties, ReactNode } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { SubjectArt } from "@/components/learn/subject-tile";
+import { familyFor, familyVars } from "@/lib/subject-family";
 import { Breadcrumbs } from "@/components/notes-public/breadcrumbs";
 import { PublicNoteBody } from "@/components/notes-public/public-note-body";
 import { RichText } from "@/components/notes-public/rich-text";
@@ -101,13 +103,16 @@ function UnitView({ course, unit }: { course: PublicCourse; unit: PublicUnit }) 
   return (
     <div className="mx-auto w-full max-w-[900px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
       <Breadcrumbs crumbs={crumbsFor.unit(course, unit)} />
-      <header className="nl-panel relative mt-4 overflow-hidden px-5 pb-6 pt-5 sm:px-9 sm:pb-8 sm:pt-8">
-        <Image src="/design/cat2-book.png" alt="" width={240} height={260} priority unoptimized className="nl-cat-in absolute right-4 top-4 h-[84px] w-auto sm:right-9 sm:top-8 sm:h-[128px]" />
-        <p className="nl-rise pr-[92px] text-[14px] font-extrabold text-foreground sm:pr-[150px]">{course.title}</p>
-        <h1 className="nl-rise mt-2 text-balance pr-[92px] text-[30px] font-black leading-[1.06] text-foreground sm:pr-[150px] sm:text-[42px]" style={stagger(1)}>
+      <header
+        className="subject-band nl-band mt-4 px-5 pb-6 pt-5 sm:px-9 sm:pb-8 sm:pt-8 sm:pr-[230px]"
+        style={familyVars(familyFor(`${course.subject} ${course.title}`)) as React.CSSProperties}
+      >
+        <SubjectArt family={familyFor(`${course.subject} ${course.title}`)} eager />
+        <p className="nl-rise pr-[92px] text-[14px] font-extrabold sm:pr-0">{course.title}</p>
+        <h1 className="nl-rise mt-2 text-balance pr-[92px] text-[30px] font-black leading-[1.06] sm:pr-0 sm:text-[42px]" style={stagger(1)}>
           {unitTitle(course, unit)}
         </h1>
-        <p className="nl-rise mt-3 text-[16.5px] font-semibold leading-snug text-foreground/75 sm:text-[18px]" style={stagger(2)}>
+        <p className="nl-rise mt-3 text-[16.5px] font-semibold leading-snug text-white/90 sm:text-[18px]" style={stagger(2)}>
           Notes and exam-style practice questions with worked answers
         </p>
         <ul className="nl-meta nl-rise mt-3" style={stagger(3)}>
@@ -200,26 +205,22 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
       {note && <ReadingTracker topicKey={key} sectionIds={note.content.sections.map((s) => s.id)} anchors={entries.map((e) => e.anchor)} />}
       <article className="mx-auto w-full max-w-[1120px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
         <Breadcrumbs crumbs={crumbsFor.topic(course, unit, topic)} />
-        <header className="nl-panel relative mt-4 overflow-hidden px-5 pb-6 pt-5 sm:px-10 sm:pb-9 sm:pt-8 lg:pr-[340px]">
-          <Image
-            src={note ? "/design/cat2-book.png" : "/design/cat2-pencil.png"}
-            alt=""
-            width={240}
-            height={260}
-            priority
-            unoptimized
-            className="nl-cat-in absolute right-4 top-4 h-[84px] w-auto sm:right-8 sm:top-8 sm:h-[112px] lg:right-[72px] lg:top-1/2 lg:h-[216px] lg:-translate-y-1/2"
-          />
+        {/* The note's header band: the subject's colour and illustration. The reading body under it stays white and calm. */}
+        <header
+          className="subject-band nl-band mt-4 px-5 pb-6 pt-5 sm:px-10 sm:pb-9 sm:pt-8 sm:pr-[220px] lg:pr-[340px]"
+          style={familyVars(familyFor(`${course.subject} ${course.title}`)) as React.CSSProperties}
+        >
+          <SubjectArt family={familyFor(`${course.subject} ${course.title}`)} eager />
           {/* Top line, like a paper's: the course and where this sits in it. */}
-          <p className="nl-rise flex min-h-[84px] items-center pr-[96px] text-[14px] font-bold leading-snug text-foreground/70 sm:min-h-0 sm:pr-[150px] lg:pr-0">
+          <p className="nl-rise flex min-h-[84px] items-center pr-[96px] text-[14px] font-bold leading-snug text-white/90 sm:min-h-0 sm:pr-0">
             <span>
-              <span className="font-extrabold text-foreground">{course.title}</span> · {unitTitle(course, unit)}
+              <span className="font-extrabold text-white">{course.title}</span> · {unitTitle(course, unit)}
             </span>
           </p>
-          <h1 className="nl-rise mt-2 text-[34px] font-black leading-[1.04] text-foreground sm:mt-3 sm:text-[50px] lg:text-[56px]" style={stagger(1)}>
-            <span className="text-foreground/45">{topic.code}</span> {topic.name}
+          <h1 className="nl-rise mt-2 text-[34px] font-black leading-[1.04] sm:mt-3 sm:text-[50px] lg:text-[56px]" style={stagger(1)}>
+            <span className="text-white/75">{topic.code}</span> {topic.name}
           </h1>
-          <p className="nl-rise mt-3 text-[17px] font-semibold leading-[1.4] text-foreground/80 sm:text-[20px]" style={stagger(2)}>
+          <p className="nl-rise mt-3 text-[17px] font-semibold leading-[1.4] text-white/95 sm:text-[20px]" style={stagger(2)}>
             {note ? <RichText text={note.content.objectiveLine} /> : "Scribe's note for this topic is on its way. Here is what it covers."}
           </p>
           <ul className="nl-meta nl-rise mt-3.5" style={stagger(3)}>
@@ -235,7 +236,7 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
           <div className="nl-rise mt-5 flex flex-col gap-1.5 sm:flex-row sm:gap-3" style={stagger(4)}>
             <StartQuick5 courseId={course.id} topicId={topic.id} level={level} placement="header" />
             {questions.length > 0 && (
-              <a href="#practice" className="nl-btn-ghost max-sm:!min-h-11 max-sm:!border-0 max-sm:!bg-transparent max-sm:!shadow-none max-sm:underline max-sm:decoration-[var(--cream-edge)] max-sm:decoration-2 max-sm:underline-offset-4">
+              <a href="#practice" className="nl-btn-ghost max-sm:!min-h-11 max-sm:!border-0 max-sm:!bg-transparent max-sm:!shadow-none max-sm:underline max-sm:decoration-white/50 max-sm:decoration-2 max-sm:underline-offset-4">
                 Jump to the {questions.length} questions
               </a>
             )}

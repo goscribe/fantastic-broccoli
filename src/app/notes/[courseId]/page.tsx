@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { SubjectArt } from "@/components/learn/subject-tile";
+import { familyFor, familyVars } from "@/lib/subject-family";
 import { Breadcrumbs } from "@/components/notes-public/breadcrumbs";
 import { NotesProgress } from "@/components/notes-public/notes-progress";
 import { TopicList } from "@/components/notes-public/topic-list";
@@ -55,27 +56,33 @@ export default async function CourseNotesPage({ params }: Params) {
   return (
     <div className="mx-auto w-full max-w-[900px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
       <Breadcrumbs crumbs={crumbsFor.course(course)} />
-      <header className="nl-panel relative mt-4 overflow-hidden px-5 pb-6 pt-5 sm:px-9 sm:pb-9 sm:pt-8" data-nl-course={course.id} data-total={topicCount}>
-        <Image src="/design/cat2-wave.png" alt="" width={240} height={255} priority unoptimized className="nl-cat-in absolute right-4 top-4 h-[84px] w-auto sm:right-9 sm:top-8 sm:h-[136px]" />
-        <p className="nl-rise flex min-h-[84px] items-center pr-[96px] text-[14px] font-bold leading-snug text-foreground/70 sm:min-h-0 sm:pr-[170px]">
+      {/* The header band is the course's subject colour with its illustration; everything under it stays white. */}
+      <header
+        className="subject-band nl-band mt-4 px-5 pb-6 pt-5 sm:px-9 sm:pb-9 sm:pt-8 sm:pr-[250px]"
+        style={familyVars(familyFor(`${course.subject} ${course.title}`)) as React.CSSProperties}
+        data-nl-course={course.id}
+        data-total={topicCount}
+      >
+        <SubjectArt family={familyFor(`${course.subject} ${course.title}`)} eager />
+        <p className="nl-rise flex min-h-[84px] items-center pr-[96px] text-[14px] font-bold leading-snug text-white/90 sm:min-h-0 sm:pr-0">
           <span>
-            <span className="font-extrabold text-foreground">{course.boardName}</span> · {course.qualification}
+            <span className="font-extrabold text-white">{course.boardName}</span> · {course.qualification}
             {course.levels?.length ? ` · ${course.levels.join(" and ")}` : ""}
           </span>
         </p>
-        <h1 className="nl-rise mt-2 text-[32px] font-black leading-[1.05] text-foreground sm:pr-[170px] sm:text-[46px]" style={{ "--i": 1 } as React.CSSProperties}>
+        <h1 className="nl-rise mt-2 text-[32px] font-black leading-[1.05] sm:text-[44px]" style={{ "--i": 1 } as React.CSSProperties}>
           {course.title} notes and practice questions
         </h1>
-        <p className="nl-rise mt-3 max-w-[560px] text-[16.5px] font-semibold leading-snug text-foreground/75 sm:text-[18px]" style={{ "--i": 2 } as React.CSSProperties}>
+        <p className="nl-rise mt-3 max-w-[560px] text-[16.5px] font-semibold leading-snug text-white/90 sm:text-[18px]" style={{ "--i": 2 } as React.CSSProperties}>
           {topicCount} topics in {course.units.length} units
           {n.notes ? ` · ${n.notes} topic notes` : ""}
           {n.questions ? ` · ${n.questions} exam-style questions with worked answers` : ""}.
         </p>
         <div className="nl-rise mt-5 max-w-[460px]" style={{ "--i": 3 } as React.CSSProperties}>
-          <div className="nl-meter !bg-[var(--cream-edge)]" aria-hidden="true">
+          <div className="nl-meter" aria-hidden="true">
             <span />
           </div>
-          <p data-nl-count className="mt-1.5 text-[13px] font-bold text-muted-foreground">
+          <p data-nl-count className="mt-1.5 text-[13px] font-bold text-white/90">
             Your progress shows up here as you read and practise
           </p>
         </div>
