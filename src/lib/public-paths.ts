@@ -16,6 +16,8 @@ export const PUBLIC_PATHS = [
   "/s",
   // "Ask a parent to pay" links (/pay/<token>): the payer has no account.
   "/pay",
+  // One-click "Refund my pass" / cancel-trial links (/refund/<signed token>).
+  "/refund",
 ];
 
 export function isPublicPath(path: string): boolean {

@@ -38,3 +38,9 @@ test("the paid conversion uses the plan the server reports (a pass is worth 29),
   assert.deepEqual(paidConversionPlan({ paidPlan: null }, plans), { id: "plan_starter", price: 5 });
   assert.deepEqual(paidConversionPlan({}, []), null);
 });
+
+test("refund links stay inside the app; amounts format from cents", async () => {
+  const { refundPath, formatAmount } = await import("./api/refund");
+  assert.equal(refundPath("https://scribe.study/refund/abc.def"), "/refund/abc.def");
+  assert.equal(formatAmount(2900), "$29.00");
+});

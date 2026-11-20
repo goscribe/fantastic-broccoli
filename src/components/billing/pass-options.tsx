@@ -106,7 +106,7 @@ export function PassOptions({
                 disabled={disabled || busyId !== null}
                 onClick={() => onBuy(plan.id)}
               >
-                {busyId === plan.id ? t("pay.opening") : fill(t("bill.passCta"), { price: `$${plan.priceDollars}` })}
+                {busyId === plan.id ? t("pay.opening") : t("bill.getStarted")}
               </Button>
             </li>
           );

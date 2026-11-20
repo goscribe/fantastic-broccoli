@@ -294,7 +294,7 @@ export function SubscribeWall() {
                   {switching === plan.id
                     ? "Opening checkout…"
                     : trialDays > 0
-                      ? `Start ${trialDays}-day free trial`
+                      ? "Try for free"
                       : `Get ${plan.name.charAt(0).toUpperCase()}${plan.name.slice(1)}`}
                 </Button>
               </div>

@@ -41,6 +41,6 @@ export const faqs = [
   },
   {
     q: "Does the exam pass renew?",
-    a: "No. A pass is one payment: you get Starter (600 tokens a month, refreshed monthly) until 15 July of your exam year, then you move back to the free plan and keep everything you made. We email you two weeks before it ends. Changed your mind? Full refund within 14 days — email support@scribe.study.",
+    a: "No. A pass is one payment: you get Starter (600 tokens a month, refreshed monthly) until 15 July of your exam year, then you move back to the free plan and keep everything you made. We email you two weeks before it ends. Changed your mind? Full refund within 14 days — one click, from your receipt email or Settings.",
   },
 ];

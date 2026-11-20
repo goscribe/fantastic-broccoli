@@ -44,6 +44,7 @@ import {
 import "@/lib/i18n/settings";
 import "@/lib/i18n/billing";
 import { formatPassDate } from "@/lib/pass";
+import { RefundLinkRow } from "@/components/billing/refund-link-row";
 import "@/lib/i18n/growth";
 import { InviteCard } from "@/components/growth/invite-card";
 import { ReminderSettings } from "@/components/reminders/reminder-settings";
@@ -642,6 +643,7 @@ export default function SettingsPage() {
                   />
                 ))}
           </div>
+          <RefundLinkRow className="mt-3" />
         </section>
 
         {/* Usage */}

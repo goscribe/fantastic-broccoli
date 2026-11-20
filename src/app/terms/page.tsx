@@ -67,8 +67,11 @@ export default function TermsPage() {
           are never charged again; the monthly token allowance refreshes each
           month while the pass is active. Someone else (for example a parent)
           may pay for a student through a payment link without an account.
-          If you change your mind, we refund a pass in full within 14 days of
-          purchase: email support@scribe.study.
+          If you change your mind, a pass is refunded in full within 14 days
+          of purchase with one click (&ldquo;Refund my pass&rdquo; in the
+          receipt email or Settings), once per account and once per payment
+          card; the refund goes to whoever paid and the pass ends at once. A
+          free trial can be cancelled the same way before it is charged.
         </p>
       </LegalSection>
       <LegalSection heading="Disclaimers">

@@ -230,6 +230,7 @@ export const passFeatures = [
   "Everything in Starter: unlimited subjects, sessions and tests",
   "600 tokens every month, refreshed monthly",
   "Pay once — no subscription, nothing renews",
+  "Full refund within 14 days — one click",
   "No card? Send a parent a secure pay link — they don't need an account",
 ];
 

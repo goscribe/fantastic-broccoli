@@ -120,7 +120,7 @@ function PlanCard({
             {isCurrent
               ? "Your plan"
               : trial
-                ? `Start ${trialDays}-day free trial`
+                ? "Try for free"
                 : `Switch to ${plan.name}`}
           </Button>
         )}
