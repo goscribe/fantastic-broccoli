@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { boldRanges, checksBySection, parseCallout, parseList, splitBold } from "./reading-format";
+import { boldRanges, calloutIsEmpty, checksBySection, parseCallout, parseList, splitBold } from "./reading-format";
 
 test("bold ranges index the text with the markers removed", () => {
   const raw = "A **balanced equation** gives the **mole ratio**.";
@@ -51,4 +51,10 @@ test("quick checks follow the section they belong to", () => {
   assert.deepEqual([...map.keys()], ["Concentration of solutions", "Titration calculations"]);
   assert.equal(map.get("Titration calculations")?.length, 1);
   assert.equal(checksBySection(undefined).size, 0);
+});
+
+test("a callout with a blank body is empty (never rendered as a bare label)", () => {
+  assert.equal(calloutIsEmpty(parseCallout("**In short:**")!), true);
+  assert.equal(calloutIsEmpty(parseCallout("**In short:**   ** **")!), true);
+  assert.equal(calloutIsEmpty(parseCallout("**In short:** Moles link mass and Mr.")!), false);
 });

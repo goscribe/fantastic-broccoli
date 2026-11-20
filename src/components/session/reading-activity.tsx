@@ -33,6 +33,7 @@ import {
   Callout,
   ReadingCheck,
   boldRanges,
+  calloutIsEmpty,
   checksBySection,
   parseCallout,
   parseList,
@@ -281,10 +282,12 @@ function ListView({ items, ordered }: { items: string[]; ordered?: boolean }) {
 
 /**
  * A labelled addition (In short, Note, Key term, Worked example): one flat
- * neutral card with a text label — no colour coding. "In short" folds on
- * phones.
+ * neutral card with a text label — no colour coding. "In short" is one
+ * sentence, so it is always shown (a folded card read as an empty box).
  */
 function CalloutView({ callout }: { callout: Callout }) {
+  // Never an empty card (a label with nothing under it).
+  if (calloutIsEmpty(callout)) return null;
   const label = (
     <span className="block text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
       {callout.label}
@@ -309,20 +312,6 @@ function CalloutView({ callout }: { callout: Callout }) {
       <p className="text-[15px] leading-[1.55] text-muted-foreground">
         <RichText text={callout.body} />
       </p>
-    );
-  }
-  if (callout.kind === "in_short") {
-    return (
-      <>
-        <details className="md:hidden rounded-xl border border-border bg-card px-4 py-3">
-          <summary className="cursor-pointer list-none min-h-[28px]">{label}</summary>
-          <div className="pt-1.5">{body}</div>
-        </details>
-        <div className="hidden md:block rounded-xl border border-border bg-card px-4 py-3 space-y-1.5">
-          {label}
-          {body}
-        </div>
-      </>
     );
   }
   return (

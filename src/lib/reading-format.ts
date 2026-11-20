@@ -95,6 +95,12 @@ export function parseCallout(raw: string): Callout | null {
   return { kind, label, body: m[2].trim(), scribe };
 }
 
+/** True when a callout has nothing to show under its label. */
+export function calloutIsEmpty(callout: Callout): boolean {
+  if (callout.lines?.length) return false;
+  return callout.body.replace(/\*\*|\$/g, "").trim().length === 0;
+}
+
 /** Items of a list paragraph ("- a" lines, or "1. a" lines), else null. */
 export function parseList(lines: string[]): { ordered: boolean; items: string[] } | null {
   if (lines.length === 0) return null;
