@@ -78,7 +78,7 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
     : null;
 
   const actions = (
-    <div className={cn("flex gap-2", variant === "compact" ? "mt-3" : "mt-4")}>
+    <div className="mt-4 flex gap-2">
       <button
         type="button"
         onClick={onShare}
@@ -101,28 +101,32 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
   );
 
   if (variant === "compact") {
+    // One quiet row, styled like the end-of-session "one more small step"
+    // items, so it never competes with the main button. The whole row shares
+    // (native share sheet, else the link is copied).
+    const sub = data && data.joined > 0 ? statusLine(data, t) : t("growth.inviteShort");
     return (
-      <section
-        aria-label={t("growth.inviteTitle")}
-        className={cn("w-full rounded-2xl border border-border bg-card p-4 text-left", className)}
-      >
-        <div className="flex items-start gap-3">
-          <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent">
-            <Gift className="size-5" />
-          </span>
-          <div className="min-w-0">
-            <p className="text-[14.5px] font-semibold leading-snug">{t("growth.inviteTitle")}</p>
-            <p className="mt-0.5 text-[12.5px] leading-snug text-muted-foreground">{t("growth.inviteShort")}</p>
-          </div>
-        </div>
-        {actions}
-        {data && data.joined > 0 && (
-          <p className="mt-2.5 flex items-start gap-1.5 text-[12px] font-medium text-muted-foreground">
-            <Users className="mt-px size-3.5 shrink-0" />
-            {statusLine(data, t)}
-          </p>
+      <button
+        type="button"
+        onClick={onShare}
+        disabled={!data}
+        className={cn(
+          "flex w-full items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 text-left transition-colors hover:bg-muted/60 focus-visible:bg-muted/60 focus-visible:outline-none disabled:cursor-default disabled:hover:bg-card",
+          className,
         )}
-      </section>
+      >
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-dim">
+          <Gift className="size-[18px]" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-[14.5px] font-semibold leading-5 text-foreground">{t("growth.inviteTitle")}</span>
+          <span className="block text-[12.5px] leading-5 text-muted-foreground">{sub}</span>
+        </span>
+        <span className="shrink-0 text-accent-dim" title={t("growth.share")}>
+          {copied ? <Check className="size-4 text-success" strokeWidth={3} /> : <Share2 className="size-4" />}
+          <span className="sr-only">{copied ? t("growth.copied") : t("growth.share")}</span>
+        </span>
+      </button>
     );
   }
 
