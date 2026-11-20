@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import "@/lib/i18n/misc";
+import "@/lib/i18n/courses";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { startWorkspaceFromUploads } from "@/lib/start-from-uploads";
 import {
@@ -131,6 +132,24 @@ export function NewWorkspaceMenu({
                 </span>
                 <span className="block text-xs text-muted-foreground">
                   {t("misc.uploadNotesHint")}
+                </span>
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                router.push("/courses");
+              }}
+              className="flex w-full items-start gap-2.5 rounded-lg p-2.5 text-left hover:bg-muted"
+            >
+              <GraduationCap className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+              <span className="min-w-0">
+                <span className="block text-[13px] font-semibold text-foreground">
+                  {t("course.menuPick")}
+                </span>
+                <span className="block text-xs text-muted-foreground">
+                  {t("course.menuPickHint")}
                 </span>
               </span>
             </button>
