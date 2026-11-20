@@ -20,6 +20,7 @@ import {
   type QualityAssessment,
   type RenderReport,
 } from "@/lib/api/admin";
+import { mediumIssueLabel, scoreChange, scoreText } from "@/lib/generation-eval";
 import { formatRelativeDate } from "@/lib/utils";
 import { toast, toastError } from "@/lib/toast";
 
@@ -157,6 +158,7 @@ export default function AdminQualityPage() {
         </div>
       )}
 
+      <GenerationAssessmentSection />
       <RenderReportsSection />
       <ContentQaSection />
 
@@ -468,6 +470,139 @@ function RenderReportRow({
         </tr>
       )}
     </>
+  );
+}
+
+/**
+ * Brief view of the generation assessment: sessions generated from a pool of
+ * openly licensed materials, judged for content and for whether they can be
+ * done on a laptop or phone. The full rows live in the GenerationEval table.
+ */
+function GenerationAssessmentSection() {
+  const queryClient = useQueryClient();
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin", "quality", "generation-eval"],
+    queryFn: () => adminApi.generationEvalSummary(),
+    // A run takes a while and reports row by row.
+    refetchInterval: (query) => (query.state.data?.running ? 30_000 : false),
+  });
+  const run = useMutation({
+    mutationFn: () => adminApi.runGenerationEval(),
+    onSuccess: ({ started }) => {
+      if (started) toast.success("Assessment started. Results appear here as each material finishes.");
+      else toast.info("An assessment is already running.");
+      queryClient.invalidateQueries({ queryKey: ["admin", "quality", "generation-eval"] });
+    },
+    onError: (err) => toastError(err, "Could not start the assessment"),
+  });
+  const latest = data?.latest;
+  const before = data?.previous?.averages;
+  const busy = run.isPending || !!data?.running;
+
+  return (
+    <section className="mb-8">
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h2 className="text-sm font-semibold">Generation assessment</h2>
+          <p className="text-xs text-muted-foreground">
+            A session is generated from each of {data?.poolSize ?? "the"} openly licensed
+            materials and judged for content and for whether a student can do it by
+            tapping and typing on a laptop or phone. Runs every Monday; every result
+            is a row in the GenerationEval table.
+          </p>
+        </div>
+        <Button size="sm" onClick={() => run.mutate()} disabled={busy}>
+          {busy ? (
+            <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
+          ) : (
+            <Play className="mr-1.5 h-3.5 w-3.5" />
+          )}
+          {data?.running ? "Running" : "Run now"}
+        </Button>
+      </div>
+      {isLoading ? (
+        <p className="text-xs text-muted-foreground">Loading…</p>
+      ) : !latest ? (
+        <p className="rounded-lg border border-border px-3 py-4 text-xs text-muted-foreground">
+          {data?.running
+            ? "The first run is in progress. Results appear as each material finishes."
+            : "No run yet. Press Run now, or wait for Monday."}
+        </p>
+      ) : (
+        <>
+          <p className="mb-2 text-xs text-muted-foreground">
+            Last run {formatRelativeDate(latest.finishedAt)}: {latest.assessed} of{" "}
+            {latest.materials} materials assessed
+            {latest.failed > 0 ? `, ${latest.failed} failed before a session could be judged` : ""}.
+          </p>
+          <div className="mb-3 grid grid-cols-2 gap-3 md:grid-cols-5">
+            <StatCard
+              label="Overall (out of 10)"
+              value={scoreText(latest.averages.overall)}
+              hint={scoreChange(latest.averages.overall, before?.overall) ?? undefined}
+            />
+            <StatCard
+              label="Fits the material"
+              value={scoreText(latest.averages.materialFit)}
+              hint={scoreChange(latest.averages.materialFit, before?.materialFit) ?? undefined}
+            />
+            <StatCard
+              label="Content quality"
+              value={scoreText(latest.averages.quality)}
+              hint={scoreChange(latest.averages.quality, before?.quality) ?? undefined}
+            />
+            <StatCard
+              label="Works on a laptop"
+              value={scoreText(latest.averages.laptopFit)}
+              hint={scoreChange(latest.averages.laptopFit, before?.laptopFit) ?? undefined}
+            />
+            <StatCard
+              label="Works on a phone"
+              value={scoreText(latest.averages.phoneFit)}
+              hint={scoreChange(latest.averages.phoneFit, before?.phoneFit) ?? undefined}
+            />
+          </div>
+          <div className="grid gap-3 md:grid-cols-2">
+            <div className="rounded-lg border border-border p-3">
+              <p className="mb-1.5 text-xs font-semibold">
+                {latest.mediumFlagged} of {latest.activities} activities ({latest.mediumFlaggedPct}%)
+                do not suit the device
+              </p>
+              {latest.mediumIssues.length === 0 ? (
+                <p className="text-xs text-muted-foreground">No device problems found.</p>
+              ) : (
+                <ul className="space-y-1 text-xs text-muted-foreground">
+                  {latest.mediumIssues.slice(0, 5).map((issue) => (
+                    <li key={issue.kind} className="flex justify-between gap-3">
+                      <span>{mediumIssueLabel(issue.kind)}</span>
+                      <span className="tabular-nums">{issue.activities}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div className="rounded-lg border border-border p-3">
+              <p className="mb-1.5 text-xs font-semibold">Weakest sessions</p>
+              {latest.weakest.length === 0 ? (
+                <p className="text-xs text-muted-foreground">Nothing was assessed.</p>
+              ) : (
+                <ul className="space-y-2 text-xs">
+                  {latest.weakest.map((item) => (
+                    <li key={item.materialKey}>
+                      <span className="font-medium">{item.title}</span>{" "}
+                      <span className="tabular-nums text-muted-foreground">
+                        {item.overallScore}/10
+                      </span>
+                      <p className="text-muted-foreground">{item.summary}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </>
+      )}
+    </section>
   );
 }
 

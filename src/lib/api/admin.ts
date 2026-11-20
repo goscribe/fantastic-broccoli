@@ -724,6 +724,42 @@ export interface Trends {
   metrics: TrendMetric[];
 }
 
+// ── Generation assessment (admin.generationEvalSummary) ────────────────
+
+export interface GenerationEvalRun {
+  runId: string;
+  startedAt: Date;
+  finishedAt: Date;
+  materials: number;
+  assessed: number;
+  failed: number;
+  averages: {
+    overall: number | null;
+    materialFit: number | null;
+    quality: number | null;
+    laptopFit: number | null;
+    phoneFit: number | null;
+  };
+  activities: number;
+  mediumFlagged: number;
+  mediumFlaggedPct: number;
+  mediumIssues: Array<{ kind: string; activities: number }>;
+  weakest: Array<{
+    materialKey: string;
+    title: string;
+    kind: string;
+    overallScore: number;
+    summary: string;
+  }>;
+}
+
+export interface GenerationEvalSummary {
+  running: boolean;
+  poolSize: number;
+  latest: GenerationEvalRun | null;
+  previous: GenerationEvalRun | null;
+}
+
 // ── Weekly cohorts (admin.getWeeklyCohorts) ────────────────────────────
 
 export interface CohortCell {
@@ -951,6 +987,12 @@ export const adminApi = {
 
   assessRecentWorkspaces: (input: { limit?: number; staleDays?: number }) =>
     rpc<BatchAssessResult>("admin.assessRecentWorkspaces", "mutation", input),
+
+  generationEvalSummary: () =>
+    rpc<GenerationEvalSummary>("admin.generationEvalSummary", "query", undefined),
+
+  runGenerationEval: () =>
+    rpc<{ started: boolean }>("admin.runGenerationEval", "mutation", undefined),
 
   qualitySummary: (sinceDays: number) =>
     rpc<QualitySummary>("admin.qualitySummary", "query", { sinceDays }),
