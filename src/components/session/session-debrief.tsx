@@ -33,6 +33,7 @@ import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/session";
 import "@/lib/i18n/rewards";
+import { InviteCard } from "@/components/growth/invite-card";
 
 /** Length of the full session a finished Quick 5 offers to start. */
 const FOLLOW_UP_MINUTES = 15;
@@ -253,6 +254,8 @@ export function SessionDebrief({
           </Button>
         )}
       </div>
+
+      <InviteCard variant="compact" className="mt-5" />
 
       {hasReport && (
         <div className="mt-4 w-full text-left">

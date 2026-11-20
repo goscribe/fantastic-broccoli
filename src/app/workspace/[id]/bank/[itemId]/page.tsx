@@ -1,5 +1,6 @@
 "use client";
 
+import { ShareItemButton } from "@/components/growth/share-item-button";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
@@ -194,6 +195,9 @@ export default function BankItemPage() {
             </p>
           </div>
           <div className="flex items-center gap-1.5 shrink-0">
+            {!editing && (
+              <ShareItemButton artifactId={item.id} kind={item.kind} title={item.title} />
+            )}
             {!editing && (
               <Button
                 size="sm"

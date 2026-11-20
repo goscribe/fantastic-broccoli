@@ -10,6 +10,7 @@ import { useBuyReward, useEquipReward, useRewards } from "@/lib/rewards";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/rewards";
+import { InviteCard } from "@/components/growth/invite-card";
 
 const btnBase =
   "inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-xl px-3 text-[13.5px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 disabled:cursor-not-allowed";
@@ -179,6 +180,9 @@ export function Shop() {
         </div>
         <Mascot pose="cheer" className="cat-bob absolute -bottom-3 right-3 h-[124px] sm:right-6 sm:h-[160px]" />
       </section>
+
+      {/* Invite a friend: a free Starter week each, plus points */}
+      <InviteCard className="mt-6" />
 
       {/* Streak freeze */}
       <section className="mt-8">
