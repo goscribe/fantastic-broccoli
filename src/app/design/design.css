@@ -63,35 +63,54 @@ html.new-ui body { background: #ffffff; }
 .app-brand h1, .app-brand h2 { letter-spacing: -0.015em; }
 
 /*
- * "Life" layer for the signed-in app: a softly tinted page, cards that sit on
- * it with a gentle shadow, chunky press-able buttons, fills that grow in, and
- * short sparkles. Everything that moves stops under prefers-reduced-motion.
+ * "Life" layer for the signed-in app: a student product, not a dashboard.
+ * A faintly purple-tinted page, soft white cards with big radii and a gentle
+ * shadow (no grey grids), one flat lavender panel per screen for the main
+ * thing, pill buttons with a lip that presses down, and motion that eases
+ * things in. One accent (purple) plus the mascot's orange for streak flames
+ * and ticks. Everything that moves stops under prefers-reduced-motion.
  */
 .app-brand {
-  --page: #f6f4fb;
-  --card-shadow: 0 1px 2px rgba(30, 20, 70, 0.04), 0 10px 28px -14px rgba(76, 52, 180, 0.18);
+  --page: #faf9fe;
+  --edge: #e6e3f1;
+  --card-shadow: 0 1px 2px rgba(36, 26, 92, 0.05), 0 16px 32px -20px rgba(72, 52, 170, 0.25);
+  --flame: #f0a645;
+  --flame-edge: #d98a25;
+  --flame-ink: #3a2420;
+  --accent-edge: #4f3bbd;
 }
+:root[data-accent] .app-brand { --accent-edge: var(--accent-dim); }
+.app-brand h1, .app-brand h2 { letter-spacing: -0.02em; }
 /* In the components layer so Tailwind utilities on the same element still win. */
 @layer components {
+/* A soft white card: big radius, hairline tint, gentle shadow. */
 .life-card {
   background: var(--card);
-  border: 1px solid rgba(105, 82, 224, 0.1);
-  border-radius: 20px;
+  border: 1px solid rgba(105, 82, 224, 0.09);
+  border-radius: 26px;
   box-shadow: var(--card-shadow);
 }
+/* The one flat lavender panel a screen may have: today's action, a result. */
+.life-panel {
+  background: var(--accent-soft);
+  border-radius: 32px;
+}
 .life-press {
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease, border-color 0.15s ease;
 }
 .life-press:active { transform: scale(0.98); }
 @media (hover: hover) {
   .life-press:hover { transform: translateY(-2px); }
 }
-/* Duolingo-style chunky button: a darker lip that presses down. */
+/* Things ease up into place, one after another (--i staggers them). */
+@keyframes life-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.life-rise { animation: life-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 70ms); }
+/* Chunky pill button: a darker lip that presses down. */
 .btn-chunky {
-  box-shadow: 0 4px 0 0 var(--accent-dim);
+  box-shadow: 0 4px 0 0 var(--accent-edge);
   transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
 }
-.btn-chunky:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 0 var(--accent-dim); }
+.btn-chunky:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 0 var(--accent-edge); }
 @keyframes life-grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .fill-grow { transform-origin: left center; animation: life-grow-x 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; }
 @keyframes life-ring { from { stroke-dasharray: 0 999; } }
@@ -105,10 +124,13 @@ html.new-ui body { background: #ffffff; }
 .life-pop { animation: life-pop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1); }
 @keyframes life-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 60% { transform: translateX(4px); } }
 .life-shake { animation: life-shake 0.35s ease-in-out; }
+/* Streak ticks land one after another. */
+@keyframes life-tick { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.12); opacity: 1; } 100% { transform: scale(1); } }
+.life-tick { animation: life-tick 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: calc(var(--i, 0) * 60ms + 150ms); }
 @keyframes life-shimmer { from { background-position: 150% 0; } to { background-position: -50% 0; } }
 @media (prefers-reduced-motion: reduce) {
   .life-press, .life-press:hover, .life-press:active, .btn-chunky:active:not(:disabled) { transform: none; transition: none; }
-  .fill-grow, .ring-draw circle:last-of-type, .life-pop, .life-shake { animation: none !important; }
+  .fill-grow, .ring-draw circle:last-of-type, .life-pop, .life-shake, .life-tick, .life-rise { animation: none !important; }
   .life-sparkle { display: none; }
 }
 }

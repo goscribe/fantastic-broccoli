@@ -3,7 +3,6 @@
 import { CourseShelf } from "@/components/courses/course-shelf";
 import { CourseTopics } from "@/components/courses/course-topics";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { accentForId } from "@/lib/accent-palette";
 import { WeekStrip } from "@/components/learn/week-strip";
 import { PlanTodayCard } from "@/components/planner/plan-today-card";
 import { SubjectCover } from "@/components/learn/subject-cover";
@@ -38,6 +37,7 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
 import "@/lib/i18n/today";
 import { TodayCard } from "@/components/learn/today-card";
+import { SubjectIcon } from "@/components/learn/subject-icon";
 import { StreakCard } from "@/components/learn/streak-card";
 import { useQuery } from "@tanstack/react-query";
 import { mistakesApi } from "@/lib/api/mistakes";
@@ -375,11 +375,11 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         <div className="flex items-end justify-between gap-3">
           <div>
             {(workspaceId || folderId) && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>}
-            <h1 className={cn("leading-tight", home ? "text-[26px] font-extrabold sm:text-[32px]" : "text-[22px] font-bold sm:text-[26px]")}>
+            <h1 className={cn("leading-tight", home ? "text-[30px] font-extrabold sm:text-[38px]" : "text-[22px] font-bold sm:text-[26px]")}>
               {workspaceId || folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
             </h1>
             {home && !loading && (
-              <p className="mt-1 text-[15px] font-semibold text-muted-foreground sm:text-[16px]">
+              <p className="mt-1.5 text-[16px] font-semibold text-muted-foreground sm:text-[17px]">
                 {t(`today.${GREET_KEY[mood]}`).replace("{n}", String(streakInfo?.current ?? 0))}
               </p>
             )}
@@ -532,7 +532,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                   type="button"
                   aria-expanded={weekOpen}
                   onClick={() => setWeekOpen((v) => !v)}
-                  className="flex min-h-11 w-full items-center justify-between rounded-2xl border border-border px-4 text-[15px] font-semibold lg:hidden"
+                  className="life-card flex min-h-[52px] w-full items-center justify-between rounded-[22px] px-4 text-[15px] font-bold lg:hidden"
                 >
                   <span className="flex items-center gap-2">
                     <CalendarDays className="size-4 text-accent" />
@@ -597,9 +597,9 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             </div>
           );
         })()}
-        <div className="rounded-2xl border border-border bg-card p-[18px] shadow-[var(--card-shadow)]">
+        <div className="life-card p-[18px]">
           <div className="flex items-baseline justify-between">
-            <span className="text-[16px] font-semibold">Due for review</span>
+            <span className="text-[16px] font-extrabold">Due for review</span>
           </div>
           {due === null ? (
             <div className="mt-3 flex items-center gap-4">
@@ -633,7 +633,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         {home ? (
           <StreakCard streak={streakInfo} />
         ) : (
-        <div className="rounded-2xl border border-border bg-card p-[18px] shadow-[var(--card-shadow)]">
+        <div className="life-card p-[18px]">
           <div className="flex items-baseline justify-between">
             <span className="text-[16px] font-semibold">This week</span>
             <span className="text-[12px] text-faint">
@@ -648,9 +648,9 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         )}
         <PlanTodayCard
           fallback={
-        <div className="rounded-2xl border border-border bg-card p-[18px] shadow-[var(--card-shadow)]">
+        <div className="life-card p-[18px]">
           <div className="flex items-baseline justify-between">
-            <span className="text-[16px] font-semibold">Up next</span>
+            <span className="text-[16px] font-extrabold">Up next</span>
             <Link href="/planner" className="text-[12px] font-semibold text-accent hover:underline">Open planner</Link>
           </div>
           {upNext === null ? (
@@ -752,19 +752,19 @@ function SubjectsGrid({
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h2 className="text-[18px] font-extrabold">
+        <h2 className="text-[20px] font-extrabold">
           Your subjects <span className="font-medium text-faint">· {workspaces.length}</span>
         </h2>
-        <button type="button" onClick={onNew} className="inline-flex h-11 items-center gap-1.5 rounded-xl bg-muted px-3 text-[13px] font-semibold hover:bg-accent-soft sm:h-9">
+        <button type="button" onClick={onNew} className="inline-flex h-11 items-center gap-1.5 rounded-full bg-accent-soft px-4 text-[13.5px] font-bold text-accent-dim hover:bg-accent/15 sm:h-10">
           <Plus className="size-3.5" /> New subject
         </button>
       </div>
       {/* Phones: one tidy list, a progress ring per subject, instead of tall cover cards. */}
-      <ul className="life-card mt-3 divide-y divide-border overflow-hidden sm:hidden">
+      <ul className="mt-3 flex flex-col gap-2.5 sm:hidden">
         {loading &&
           workspaces.length === 0 &&
           [0, 1].map((i) => (
-            <li key={i} className="flex items-center gap-3 px-4 py-3">
+            <li key={i} className="life-card flex items-center gap-3 rounded-[22px] px-4 py-3">
               <Skeleton className="size-9 rounded-full" />
               <div className="flex-1 space-y-1.5">
                 <Skeleton className="h-4 w-1/2" />
@@ -777,26 +777,19 @@ function SubjectsGrid({
           const done = own.filter((x) => x.status === "completed").length;
           return (
             <li key={w.id}>
-              <Link href={`/workspace/${w.id}`} className="flex min-h-[68px] items-center gap-3 px-4 py-3 transition-colors active:bg-muted/80 hover:bg-muted/50">
-                {/* A coloured tile per subject, like an app icon; the bar fills in as sessions are finished. */}
-                <span
-                  aria-hidden
-                  className="grid size-11 shrink-0 place-items-center rounded-[14px] text-[18px] font-extrabold text-white shadow-[inset_0_-3px_0_rgba(0,0,0,.12)]"
-                  style={{ background: `linear-gradient(160deg, ${accentForId(w.id)}cc, ${accentForId(w.id)})` }}
-                >
-                  {w.title.trim()[0]?.toUpperCase() ?? "?"}
-                </span>
+              <Link href={`/workspace/${w.id}`} className="life-card life-press flex min-h-[76px] items-center gap-3.5 rounded-[22px] px-4 py-3.5">
+                <SubjectIcon title={w.title} />
                 <span className="min-w-0 flex-1">
                   <span className="flex items-baseline justify-between gap-2">
-                    <span className="truncate text-[15.5px] font-extrabold">{w.title}</span>
+                    <span className="truncate text-[16.5px] font-extrabold">{w.title}</span>
                     <span className="shrink-0 text-[12px] font-bold tabular-nums text-muted-foreground">
                       {done}/{own.length}
                     </span>
                   </span>
                   <span className="mt-1.5 block h-2 overflow-hidden rounded-full bg-muted">
                     <span
-                      className="fill-grow block h-full rounded-full"
-                      style={{ width: `${own.length ? Math.max(6, (done / own.length) * 100) : 0}%`, background: accentForId(w.id) }}
+                      className="fill-grow block h-full rounded-full bg-accent"
+                      style={{ width: `${own.length ? Math.max(6, (done / own.length) * 100) : 0}%` }}
                     />
                   </span>
                   <span className="mt-1 block truncate text-[12px] text-muted-foreground">
@@ -823,21 +816,26 @@ function SubjectsGrid({
               key={w.id}
               title={w.title}
               coverUrl={w.coverUrl}
-              className="life-press rounded-2xl border border-border bg-card shadow-[var(--card-shadow)] transition-colors hover:border-accent/50"
+              className="life-card life-press"
             >
               <Link href={`/workspace/${w.id}`} className="group relative flex min-h-[128px] flex-col justify-between p-4 sm:min-h-[172px]">
                 <div className="flex items-center gap-3">
-                  <Ring pct={pct} size={44} stroke={10} color={accentForId(w.id)} />
+                  <SubjectIcon title={w.title} />
                   <div className="min-w-0 max-w-[62%]">
-                    <div className="line-clamp-2 text-[15px] font-semibold leading-tight text-foreground">{w.title}</div>
+                    <div className="line-clamp-2 text-[16px] font-extrabold leading-tight text-foreground">{w.title}</div>
                     <div className="text-[12px] text-muted-foreground">
                       {w.materials.length} material{w.materials.length === 1 ? "" : "s"} · {done}/{own.length} sessions
                     </div>
                   </div>
                 </div>
-                <div className="mt-3 flex items-center justify-between text-[12.5px] sm:mt-4">
-                  <span className="truncate text-muted-foreground">{current ? (current.generating ? "Building the next session…" : `Next: ${current.title}`) : own.length ? "All caught up" : "No sessions yet"}</span>
+                <div className="mt-3 sm:mt-4">
+                  <span className="block h-2 w-full overflow-hidden rounded-full bg-muted" aria-hidden>
+                    <span className="fill-grow block h-full rounded-full bg-accent" style={{ width: `${own.length ? Math.max(6, pct * 100) : 0}%` }} />
+                  </span>
+                <div className="mt-3 flex items-center justify-between text-[12.5px]">
+                  <span className="min-w-0 flex-1 truncate text-muted-foreground">{current ? (current.generating ? "Building the next session…" : `Next: ${current.title}`) : own.length ? "All caught up" : "No sessions yet"}</span>
                   <span className="ml-2 inline-flex h-7 shrink-0 items-center gap-1 rounded-full bg-muted px-3 font-semibold text-foreground group-hover:bg-accent/10 group-hover:text-accent">{current ? "Continue" : "Open"}</span>
+                </div>
                 </div>
               </Link>
             </SubjectCover>
@@ -965,7 +963,7 @@ function HomeShopCard() {
   return (
     <Link
       href="/shop"
-      className="group hidden items-center gap-3.5 life-press rounded-2xl border border-border bg-card p-3.5 shadow-[var(--card-shadow)] transition-colors hover:border-accent/40 hover:bg-accent-soft/40 lg:flex"
+      className="life-card life-press group hidden items-center gap-3.5 p-3.5 lg:flex"
     >
       <span className="grid size-[64px] shrink-0 place-items-end justify-center overflow-hidden rounded-xl bg-accent-soft">
         <Mascot pose="wave" className="cat-wiggle mb-0.5 h-[56px] w-[48px]" />

@@ -8,7 +8,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { Calendar, Folder as FolderIcon, House, LogOut, PanelLeft, PanelLeftClose, PlayCircle, Plus, RotateCcw, Search, Settings, Store } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
-import { accentForId } from "@/lib/accent-palette";
 import { StreakButton } from "@/components/rewards/streak-button";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
@@ -119,7 +118,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
     <div className="design-root app-brand flex h-dvh overflow-hidden bg-[var(--page)] text-foreground">
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:translate-x-0",
+          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:translate-x-0 md:border-r-0 md:bg-transparent",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
           rail && "md:w-[68px] md:px-2.5",
         )}
@@ -149,8 +148,8 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               onClick={() => setMobileOpen(false)}
               title={rail ? label : undefined}
               className={cn(
-                "flex h-10 items-center gap-3 rounded-xl px-3 text-[14px] font-medium text-foreground/80 hover:bg-muted",
-                isActive(href) && "bg-muted font-semibold text-foreground",
+                "flex h-11 items-center gap-3 rounded-full px-4 text-[14.5px] font-bold text-foreground/70 transition-colors hover:bg-accent-soft/60",
+                isActive(href) && "bg-accent-soft text-accent-dim",
                 rail && "md:justify-center md:px-0",
               )}
             >
@@ -184,15 +183,13 @@ export function NewShell({ children }: { children: React.ReactNode }) {
                 )}
               >
                 <FolderIcon
-                  className={cn("size-4 shrink-0", rail && "md:hidden")}
-                  style={{ color: accentForId(w.id) }}
+                  className={cn("size-4 shrink-0 text-accent", rail && "md:hidden")}
                   fill="currentColor"
                   strokeWidth={1.5}
                 />
                 <span
                   aria-hidden
-                  className={cn("hidden size-7 place-items-center rounded-lg text-[12px] font-bold text-white", rail && "md:grid")}
-                  style={{ backgroundColor: accentForId(w.id) }}
+                  className={cn("hidden size-7 place-items-center rounded-lg bg-accent-soft text-[12px] font-extrabold text-accent", rail && "md:grid")}
                 >
                   {w.title.trim()[0]?.toUpperCase() ?? "?"}
                 </span>
@@ -303,7 +300,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
       {/* Phones: the four places you go every day, one thumb away (the sidebar still holds subjects and settings). */}
       <nav
         aria-label="Main"
-        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-accent/10 bg-white/95 px-2 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_24px_-16px_rgba(76,52,180,.25)] backdrop-blur md:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-border bg-white/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
       >
         {NAV.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
           const label = labelKey ? t(labelKey) : fallbackLabel;

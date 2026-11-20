@@ -2,7 +2,8 @@
 
 import "@/app/design/design.css";
 
-const COLORS = ["#6952e0", "#f59e0b", "#10b981", "#ec4899", "#38bdf8"];
+/** Brand purple and the mascot's orange only. */
+const COLORS = ["#6952e0", "#f0a645", "#a79af0"];
 
 /**
  * A small, local burst of sparkles around its parent's centre (the parent

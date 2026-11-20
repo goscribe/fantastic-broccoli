@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, CalendarCheck, Clock, Flame, Loader2, PartyPopper, Play, RotateCcw, Upload, Zap } from "lucide-react";
+import { ArrowRight, CalendarCheck, Check, Flame, Loader2, Play, RotateCcw, Upload, Zap } from "lucide-react";
 import { Mascot, type MascotPose } from "@/components/rewards/mascot";
 import { mistakesApi } from "@/lib/api/mistakes";
 import { fetchPlanToday } from "@/lib/api/exam-planner";
@@ -25,16 +25,18 @@ import type { StudySession, Workspace } from "@/types";
 
 /** Big enough for a thumb on a phone (≥ 44px), full width so it is the obvious tap. */
 const primaryBtn =
-  "btn-chunky inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-2xl bg-accent px-5 text-[16px] font-extrabold text-white hover:bg-accent-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 disabled:opacity-70";
+  "btn-chunky inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-full bg-accent px-5 text-[16px] font-extrabold text-white hover:bg-accent-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 disabled:opacity-70";
 
-/** The card's tint and the cat's pose follow what today asks for. */
-const LOOK: Record<"mistakes" | "plan" | "quick5" | "done", { pose: MascotPose; bg: string }> = {
-  mistakes: { pose: "think", bg: "bg-[linear-gradient(140deg,#ece6ff_0%,#f6f2ff_48%,#ffffff_100%)]" },
-  plan: { pose: "pencil", bg: "bg-[linear-gradient(140deg,#e7f0ff_0%,#f3f0ff_48%,#ffffff_100%)]" },
-  quick5: { pose: "book", bg: "bg-[linear-gradient(140deg,#ece6ff_0%,#fbf3ff_48%,#ffffff_100%)]" },
-  done: { pose: "trophy", bg: "bg-[linear-gradient(140deg,#dcf7e8_0%,#f1fbf5_48%,#ffffff_100%)]" },
+/** The cat's pose follows what today asks for; the card itself stays white. */
+const POSE: Record<"mistakes" | "plan" | "quick5" | "done", MascotPose> = {
+  mistakes: "think",
+  plan: "pencil",
+  quick5: "book",
+  done: "trophy",
 };
-const shell = "relative overflow-hidden rounded-[24px] border border-accent/15 shadow-[var(--card-shadow)]";
+/** Home's one flat lavender panel; the cat stands on a white disc inside it. */
+const shell = "life-panel life-rise relative overflow-hidden";
+const disc = "pointer-events-none absolute rounded-full bg-white/70";
 
 /**
  * Home's one "Today" card: the smallest useful thing to do next (fix
@@ -79,7 +81,7 @@ export function TodayCard({
 
   if (action.kind === "loading") {
     return (
-      <div className={cn(shell, "bg-card p-5")} aria-busy="true">
+      <div className={cn(shell, "p-6")} aria-busy="true">
         <Skeleton className="h-3.5 w-16" />
         <Skeleton className="mt-3 h-6 w-3/4" />
         <Skeleton className="mt-2 h-4 w-1/2" />
@@ -90,14 +92,14 @@ export function TodayCard({
 
   if (action.kind === "upload") {
     return (
-      <section className={cn(shell, "bg-[linear-gradient(160deg,#ece6ff_0%,#f8f4ff_55%,#ffffff_100%)] px-5 pb-4 pt-6 sm:px-8 sm:pb-6 sm:pt-8")} aria-labelledby="today-title">
-        <span aria-hidden className="pointer-events-none absolute -right-16 -top-16 size-56 rounded-full bg-accent/10 blur-2xl" />
-        <Mascot pose="wave" className="cat-wiggle mx-auto block h-[104px] sm:absolute sm:right-10 sm:top-8 sm:h-[132px]" priority />
-        <div className="relative mt-3 text-center sm:mt-0 sm:max-w-[480px] sm:text-left">
-          <h2 id="today-title" className="text-[26px] font-extrabold leading-[1.15] sm:text-[30px]">
+      <section className={cn(shell, "px-6 pb-4 pt-8 sm:px-10 sm:pb-8 sm:pt-10")} aria-labelledby="today-title">
+        <span aria-hidden className={cn(disc, "left-1/2 top-6 size-[148px] -translate-x-1/2 sm:left-auto sm:right-10 sm:top-9 sm:size-[184px] sm:translate-x-0")} />
+        <Mascot pose="wave" className="cat-wiggle relative mx-auto block h-[136px] sm:absolute sm:right-[52px] sm:top-11 sm:h-[168px]" priority />
+        <div className="relative mt-5 text-center sm:mt-0 sm:max-w-[460px] sm:text-left">
+          <h2 id="today-title" className="text-balance text-[28px] font-extrabold leading-[1.12] sm:text-[34px]">
             {t("today.uploadTitle")}
           </h2>
-          <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t("today.uploadSub")}</p>
+          <p className="mt-2.5 text-[15.5px] leading-relaxed text-foreground/70">{t("today.uploadSub")}</p>
         </div>
         <button
           type="button"
@@ -106,14 +108,14 @@ export function TodayCard({
             tapped("upload");
             onUpload();
           }}
-          className={cn(primaryBtn, "relative mt-5 h-14 text-[17px] sm:max-w-[340px]")}
+          className={cn(primaryBtn, "relative mt-6 h-14 text-[17px] sm:max-w-[340px]")}
         >
           {uploading ? <Loader2 className="size-5 animate-spin" /> : <Upload className="size-5" strokeWidth={2.5} />}
           {uploading ? t("today.uploading") : t("today.uploadCta")}
         </button>
         <Link
           href="/new-subject"
-          className="relative mt-1 flex min-h-11 items-center justify-center text-[14px] font-bold text-accent-dim hover:underline sm:justify-start"
+          className="relative mt-2.5 flex min-h-11 items-center justify-center text-[14px] font-bold text-accent-dim hover:underline sm:justify-start"
         >
           {t("today.uploadAlt")}
         </Link>
@@ -155,7 +157,7 @@ export function TodayCard({
     };
   } else if (action.kind === "done") {
     const { workspaceId } = action;
-    Icon = PartyPopper;
+    Icon = Check;
     eyebrow = t("today.streakSafe");
     title = t("today.doneTitle");
     sub = t("today.doneSub");
@@ -200,45 +202,31 @@ export function TodayCard({
   const pending = busy || !!starter.startingId;
   const resume = pickResumable(sessions, resumeExclude);
 
-  const look = LOOK[action.kind];
-  const minutes = action.kind === "mistakes" ? action.minutes : action.kind === "plan" ? openTasks.find((x) => x.id === action.taskId)?.minutes ?? 0 : 2;
+  const pose = POSE[action.kind];
 
   return (
-    <section className={cn(shell, look.bg, "p-5 sm:p-7")} aria-labelledby="today-title">
-      <span aria-hidden className="pointer-events-none absolute -right-14 -top-20 size-56 rounded-full bg-accent/10 blur-2xl" />
-      <Mascot pose={look.pose} className="cat-peek pointer-events-none absolute right-3 top-4 h-[84px] sm:right-7 sm:top-6 sm:h-[112px]" priority />
+    <section className={cn(shell, "p-6 sm:p-9", resume && "pb-3 sm:pb-5")} aria-labelledby="today-title">
+      <span aria-hidden className={cn(disc, "-right-6 -top-8 size-[160px] sm:right-8 sm:top-8 sm:size-[200px]")} />
+      <Mascot pose={pose} className={cn("cat-peek pointer-events-none absolute top-4 h-[112px] sm:top-12 sm:h-[168px]", pose === "trophy" ? "right-2 sm:right-12" : "right-3 sm:right-[60px]")} priority />
       <div className="relative flex items-center gap-2">
-        <span className={cn("grid size-8 shrink-0 place-items-center rounded-xl text-white shadow-sm", action.kind === "done" ? "bg-emerald-500" : "bg-accent")}>
+        <span className="grid size-8 shrink-0 place-items-center rounded-full bg-accent text-white">
           <Icon className="size-4" strokeWidth={2.5} />
         </span>
-        <span className={cn("text-[13px] font-extrabold uppercase tracking-wide", action.kind === "done" ? "text-emerald-700" : "text-accent-dim")}>{eyebrow}</span>
+        <span className="text-[13px] font-extrabold uppercase tracking-wide text-accent-dim">{eyebrow}</span>
       </div>
-      <h2 id="today-title" className="relative mt-3 pr-[88px] text-[24px] font-extrabold leading-[1.15] sm:pr-36 sm:text-[28px]">
+      <h2 id="today-title" className="relative mt-4 pr-[104px] text-[28px] font-extrabold leading-[1.1] sm:max-w-[480px] sm:pr-0 sm:text-[36px]">
         {title}
       </h2>
-      <p className="relative mt-1.5 pr-14 text-[14.5px] leading-snug text-muted-foreground sm:pr-36">{sub}</p>
-      {action.kind !== "done" && (
-        <div className="relative mt-3 flex flex-wrap gap-1.5">
-          {minutes > 0 && (
-            <span className="inline-flex h-7 items-center gap-1 rounded-full bg-white/80 px-2.5 text-[12.5px] font-bold text-foreground/80 shadow-[0_1px_2px_rgba(0,0,0,.05)]">
-              <Clock className="size-3.5 text-accent" />
-              {t("today.approxMin").replace("{m}", String(minutes))}
-            </span>
-          )}
-          {!doneToday && (
-            <span className="inline-flex h-7 items-center gap-1 rounded-full bg-[#fff1e6] px-2.5 text-[12.5px] font-bold text-[#c2410c]">
-              <Flame className="size-3.5" fill="currentColor" strokeWidth={1.5} />
-              {t("today.countsForStreak")}
-            </span>
-          )}
+      <p className="relative mt-2 pr-[96px] text-[15.5px] leading-snug text-foreground/70 sm:max-w-[440px] sm:pr-0 sm:text-[16px]">{sub}</p>
+      {action.kind !== "done" && !doneToday && (
+        <div className="relative mt-3.5 flex">
+          <span className="inline-flex h-7 items-center gap-1 rounded-full bg-white/80 px-2.5 text-[12.5px] font-bold text-foreground/80">
+            <Flame className="size-3.5 text-[var(--flame)]" fill="currentColor" strokeWidth={1.5} />
+            {t("today.countsForStreak")}
+          </span>
         </div>
       )}
-      <button
-        type="button"
-        disabled={pending}
-        onClick={() => void onPrimary()}
-        className={cn(primaryBtn, "relative mt-4 sm:max-w-[340px]", action.kind === "done" && "bg-emerald-600 shadow-[0_4px_0_0_#047857] hover:bg-emerald-700")}
-      >
+      <button type="button" disabled={pending} onClick={() => void onPrimary()} className={cn(primaryBtn, "relative mt-5 h-14 text-[17px] sm:max-w-[340px]")}>
         {pending ? <Loader2 className="size-4 animate-spin" /> : <Play className="size-4" fill="currentColor" />}
         {cta}
       </button>
@@ -246,7 +234,7 @@ export function TodayCard({
         <Link
           href={`/workspace/${resume.workspaceId}/session/${resume.id}`}
           onClick={() => tapped("continue", resume.workspaceId)}
-          className="relative mt-1.5 flex min-h-11 items-center gap-1.5 text-[14px] font-bold text-accent-dim hover:underline"
+          className="relative mt-2.5 flex min-h-11 items-center justify-center gap-1.5 text-[14px] font-bold text-accent-dim hover:underline sm:justify-start"
         >
           <span className="min-w-0 truncate">{t("today.orContinue").replace("{title}", resume.title)}</span>
           <ArrowRight className="size-3.5 shrink-0" />

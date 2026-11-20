@@ -23,10 +23,10 @@ export function PageHeader({
   className?: string;
 }) {
   return (
-    <div className={cn("mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between", className)}>
+    <div className={cn("life-rise mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between", className)}>
       <div className="flex min-w-0 items-center gap-3.5">
         {mascot && (
-          <span aria-hidden className="grid size-16 shrink-0 place-items-end justify-center overflow-hidden rounded-[20px] bg-[linear-gradient(160deg,#ece6ff,#f8f5ff)] shadow-[var(--card-shadow)]">
+          <span aria-hidden className="grid size-16 shrink-0 place-items-end justify-center overflow-hidden rounded-[22px] bg-accent-soft">
             <Mascot pose={mascot} className="cat-peek -mb-1 h-[58px]" />
           </span>
         )}
@@ -38,7 +38,7 @@ export function PageHeader({
           </Link>
         )}
         {eyebrow && !back && <div className="text-[12px] font-semibold text-faint">{eyebrow}</div>}
-        <h1 className={cn("text-[26px] leading-tight tracking-tight", mascot ? "font-extrabold sm:text-[30px]" : "font-bold")}>{title}</h1>
+        <h1 className={cn("text-[26px] leading-tight tracking-tight", mascot ? "text-[30px] font-extrabold sm:text-[34px]" : "font-bold")}>{title}</h1>
         {subtitle && <p className="mt-1 text-[14px] text-muted-foreground">{subtitle}</p>}
         </div>
       </div>

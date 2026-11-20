@@ -44,10 +44,10 @@ export function StreakWeek({ streak }: { streak: StreakSummary }) {
             <span
               className={cn(
                 "grid size-8 place-items-center rounded-full",
-                state === "done" && "bg-gradient-to-b from-[#ffb020] to-[#f4602e] text-white",
-                state === "frozen" && "bg-sky-100 text-sky-600 ring-1 ring-sky-300",
+                state === "done" && "bg-[#f0a645] text-[#3a2420]",
+                state === "frozen" && "bg-muted text-muted-foreground ring-1 ring-border-strong",
                 state === "missed" && "bg-muted text-faint",
-                state === "today" && "border-2 border-dashed border-[#f59e0b] text-[#d97706]",
+                state === "today" && "border-2 border-dashed border-[#f0a645] text-[#b26a0c]",
               )}
             >
               {state === "done" ? (
@@ -149,12 +149,14 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
           "flex items-center gap-1 font-bold tabular-nums transition-colors",
           variant === "new" ? "h-10 rounded-xl border px-2.5 text-[14px] sm:px-3" : "rounded-full border px-2 py-1 text-[12px]",
           lit
-            ? "border-[#fdba74] bg-[#fff4e6] text-[#c2410c] hover:bg-[#ffedd5]"
+            ? variant === "new"
+              ? "border-border bg-white text-foreground hover:bg-muted"
+              : "border-[#fdba74] bg-[#fff4e6] text-[#c2410c] hover:bg-[#ffedd5]"
             : "border-border bg-white text-muted-foreground hover:bg-muted dark:bg-card",
         )}
       >
         <Flame
-          className={cn(variant === "new" ? "size-[18px]" : "size-3.5", lit ? "text-[#f97316]" : "text-faint")}
+          className={cn(variant === "new" ? "size-[18px]" : "size-3.5", lit ? (variant === "new" ? "text-[#f0a645]" : "text-[#f97316]") : "text-faint")}
           fill={lit ? "currentColor" : "none"}
           strokeWidth={lit ? 1.6 : 2}
         />

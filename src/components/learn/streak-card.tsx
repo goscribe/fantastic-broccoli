@@ -12,13 +12,12 @@ import { useCountUp } from "@/lib/use-count-up";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
-const FLAME = "#f97316";
-
 /**
- * Home: the streak as something to protect — the number, a Mon–Sun strip of
- * the last 7 days (ticked, frozen, or today still open) and a ring for
- * today's goal. `tiles` adds the cards-due and points tiles under it (phones;
- * desktop keeps those in the sidebar).
+ * Home: the streak as one simple row to protect — a flame and the number,
+ * today's goal ring, and a Mon–Sun strip of the last 7 days (ticked, frozen,
+ * or today still open). Orange is the mascot's, used for the flame and ticks
+ * only. `tiles` adds the cards-due and points tiles under it (phones; desktop
+ * keeps those in the sidebar).
  */
 export function StreakCard({
   streak,
@@ -46,57 +45,57 @@ export function StreakCard({
   const lastIdx = week.length - 1;
 
   return (
-    <div className={cn("flex flex-col gap-2.5", className)}>
-      <section data-look="streak" className="relative overflow-hidden rounded-[24px] border border-[#ffdcbf] bg-[linear-gradient(150deg,#fff1e2_0%,#fff8f1_55%,#ffffff_100%)] p-4 shadow-[var(--card-shadow)]">
-        <div className="flex items-center gap-3">
+    <div className={cn("life-rise flex flex-col gap-3", className)} style={{ ["--i" as string]: 1 }}>
+      <section data-look="streak" className="life-card px-5 pb-5 pt-4">
+        <div className="flex items-center gap-2.5">
           {streak?.todayDone ? (
-            <Mascot pose="flame" className="cat-bob -my-1 h-[60px]" />
+            <Mascot pose="flame" className="cat-bob -my-1 h-[52px]" />
           ) : (
-            <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-[linear-gradient(160deg,#fb923c,#f43f5e)] text-white shadow-[0_6px_14px_-6px_rgba(244,63,94,.6)]">
-              <Flame className="size-6" fill="currentColor" strokeWidth={1.5} />
-            </span>
+            <Flame className={cn("size-8 shrink-0", current > 0 ? "text-[var(--flame)]" : "text-border-strong")} fill="currentColor" strokeWidth={1.5} />
           )}
           <div className="min-w-0 flex-1">
-            <div className="text-[26px] font-extrabold leading-none tabular-nums" style={{ color: FLAME }}>
-              {shownStreak}
-            </div>
-            <div className="mt-1 truncate text-[13px] font-bold text-[#9a3412]">
-              {streak?.todayDone ? t("today.streakSafe") : t("today.statStreak")}
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-[26px] font-extrabold leading-none tabular-nums">{shownStreak}</span>
+              <span className="truncate text-[14px] font-bold text-muted-foreground">
+                {t("today.statStreak")}
+              </span>
             </div>
           </div>
-          <div className="flex shrink-0 flex-col items-center">
+          <div className="flex shrink-0 items-center gap-2">
+            <span className="text-right text-[12px] font-bold leading-tight text-muted-foreground">
+              {goalMet ? t("today.goalMet") : t("today.dailyGoal")}
+              {!goalMet && (
+                <span className="block text-[13px] font-extrabold tabular-nums text-foreground" aria-label={t("today.goalOf").replace("{a}", String(today)).replace("{b}", String(goal))}>
+                  {today}/{goal}
+                </span>
+              )}
+            </span>
             <span className="ring-draw">
-              <Ring pct={today / goal} size={56} stroke={11} color={goalMet ? "#10b981" : "var(--accent)"}>
-                {goalMet ? (
-                  <Check className="size-5 text-emerald-600" strokeWidth={3} />
-                ) : (
-                  <span className="text-[11px] font-extrabold tabular-nums" aria-label={t("today.goalOf").replace("{a}", String(today)).replace("{b}", String(goal))}>
-                    {today}/{goal}
-                  </span>
-                )}
+              <Ring pct={today / goal} size={40} stroke={14} color="var(--accent)">
+                {goalMet && <Check className="size-4 text-accent" strokeWidth={3.5} />}
               </Ring>
             </span>
-            <span className="mt-1 text-[11px] font-bold text-muted-foreground">{goalMet ? t("today.goalMet") : t("today.dailyGoal")}</span>
           </div>
         </div>
         {week.length > 0 && (
-          <ol className="mt-3 grid grid-cols-7 gap-1" aria-label={t("today.dayStreakLong").replace("{n}", String(current))}>
+          <ol className="mt-4 grid grid-cols-7 gap-1" aria-label={t("today.dayStreakLong").replace("{n}", String(current))}>
             {week.map((d, i) => {
               const dow = (new Date(`${d.date}T00:00:00Z`).getUTCDay() + 6) % 7;
               const isToday = i === lastIdx;
               return (
-                <li key={d.date} className="flex flex-col items-center gap-1">
-                  <span className={cn("text-[11px] font-bold", isToday ? "text-[#c2410c]" : "text-muted-foreground")}>{names[dow]}</span>
+                <li key={d.date} className="flex flex-col items-center gap-1.5">
+                  <span className={cn("text-[11.5px] font-bold", isToday ? "text-foreground" : "text-muted-foreground")}>{names[dow]}</span>
                   <span
+                    style={{ ["--i" as string]: i }}
                     className={cn(
-                      "grid size-8 place-items-center rounded-full",
+                      "grid size-9 place-items-center rounded-full lg:size-8",
                       d.done
-                        ? "bg-[linear-gradient(160deg,#fb923c,#f97316)] text-white shadow-[0_2px_0_#c2410c]"
+                        ? "life-tick bg-[var(--flame)] text-[var(--flame-ink)] shadow-[0_2px_0_var(--flame-edge)]"
                         : d.frozen
-                          ? "bg-sky-400 text-white"
+                          ? "bg-muted text-muted-foreground"
                           : isToday
-                            ? "border-2 border-dashed border-[#fb923c] bg-white"
-                            : "bg-[#f3ece4]",
+                            ? "border-2 border-dashed border-[var(--flame)] bg-white"
+                            : "bg-muted",
                     )}
                   >
                     {d.done ? <Check className="size-4" strokeWidth={3.5} /> : d.frozen ? <Snowflake className="size-4" /> : null}
@@ -116,20 +115,21 @@ function StatTiles({ due, points, canAfford }: { due: number; points: number; ca
   const { t } = useI18n();
   const shownDue = useCountUp(due);
   const shownPts = useCountUp(points);
-  const tile = "life-press relative flex min-h-[64px] items-center gap-3 rounded-[20px] border px-3.5 py-3 shadow-[var(--card-shadow)]";
+  const tile = "life-card life-press relative flex min-h-[72px] items-center gap-3 rounded-[22px] px-4 py-3";
+  const icon = "grid size-10 shrink-0 place-items-center rounded-full bg-accent-soft text-accent";
   return (
-    <div className="grid grid-cols-2 gap-2.5">
-      <Link href="/flashcards/review" className={cn(tile, "border-sky-100 bg-[linear-gradient(150deg,#e8f5ff,#ffffff)]")}>
-        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-sky-500 text-white">
-          <Layers className="size-5" />
+    <div className="grid grid-cols-2 gap-3">
+      <Link href="/flashcards/review" className={tile}>
+        <span className={icon}>
+          <Layers className="size-5" strokeWidth={2.25} />
         </span>
         <span className="min-w-0">
           <span className="block text-[20px] font-extrabold leading-none tabular-nums">{shownDue}</span>
           <span className="mt-1 block truncate text-[12.5px] font-bold text-muted-foreground">{t("today.statCards")}</span>
         </span>
       </Link>
-      <Link href="/shop" className={cn(tile, "border-accent/15 bg-[linear-gradient(150deg,#efeaff,#ffffff)]")}>
-        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent text-white">
+      <Link href="/shop" className={tile}>
+        <span className={icon}>
           <Sparkles className="size-5" fill="currentColor" />
         </span>
         <span className="min-w-0">
