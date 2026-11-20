@@ -148,16 +148,22 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
         className={cn(
           "flex items-center gap-1 font-bold tabular-nums transition-colors",
           variant === "new" ? "h-10 rounded-xl border px-2.5 text-[14px] sm:px-3" : "rounded-full border px-2 py-1 text-[12px]",
-          lit
-            ? variant === "new"
-              ? "border-border bg-white text-foreground hover:bg-muted"
-              : "border-[#fdba74] bg-[#fff4e6] text-[#c2410c] hover:bg-[#ffedd5]"
-            : "border-border bg-white text-muted-foreground hover:bg-muted dark:bg-card",
+          variant === "new"
+            ? "border-border bg-white text-foreground hover:bg-muted"
+            : lit
+              ? "border-[#fdba74] bg-[#fff4e6] text-[#c2410c] hover:bg-[#ffedd5]"
+              : "border-border bg-white text-muted-foreground hover:bg-muted dark:bg-card",
         )}
       >
+        {/* The flame is the lively bit: orange once there is a streak, brighter and filled when today counts. */}
         <Flame
-          className={cn(variant === "new" ? "size-[18px]" : "size-3.5", lit ? (variant === "new" ? "text-[#f0a645]" : "text-[#f97316]") : "text-faint")}
-          fill={lit ? "currentColor" : "none"}
+          className={cn(
+            variant === "new" ? "size-[19px]" : "size-3.5",
+            variant === "new" ? (lit || days > 0 ? "text-[var(--flame)]" : "text-faint") : lit ? "text-[#f97316]" : "text-faint",
+            variant === "new" && lit && "life-pop",
+          )}
+          fill={lit || (variant === "new" && days > 0) ? "currentColor" : "none"}
+          fillOpacity={variant === "new" && !lit ? 0.35 : 1}
           strokeWidth={lit ? 1.6 : 2}
         />
         {days}
@@ -221,5 +227,24 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
         </div>
       )}
     </div>
+  );
+}
+
+/** Header points: a sparkle and the balance, one tap to the shop. Hidden until rewards load. */
+export function PointsPill() {
+  const { t } = useI18n();
+  const { data: rewards } = useRewards();
+  if (!rewards) return null;
+  const label = t("rewards.ptsValue").replace("{n}", rewards.balance.toLocaleString());
+  return (
+    <Link
+      href="/shop"
+      aria-label={label}
+      title={label}
+      className="flex h-10 items-center gap-1 rounded-xl border border-border bg-white px-2.5 text-[14px] font-bold tabular-nums text-foreground transition-colors hover:bg-muted sm:px-3"
+    >
+      <Sparkles className="size-[18px] text-accent" fill="currentColor" strokeWidth={1.6} />
+      {rewards.balance.toLocaleString()}
+    </Link>
   );
 }

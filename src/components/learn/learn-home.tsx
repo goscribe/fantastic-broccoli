@@ -5,14 +5,14 @@ import { CourseTopics } from "@/components/courses/course-topics";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { WeekStrip } from "@/components/learn/week-strip";
 import { PlanTodayCard } from "@/components/planner/plan-today-card";
-import { SubjectCover } from "@/components/learn/subject-cover";
+import { SubjectTile } from "@/components/learn/subject-tile";
 import { NotesOutline } from "@/components/learn/notes-outline";
 import { SubjectProgress } from "@/components/learn/subject-progress";
 import type { NotesTopic } from "@/lib/api/notes-outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowUp, CalendarDays, Check, ChevronDown, ChevronRight, ChevronUp, FileText, Headphones, Layers, Loader2, NotebookText, Play, Plus, Presentation } from "lucide-react";
+import { ArrowUp, CalendarDays, Check, ChevronDown, ChevronUp, FileText, Headphones, Layers, Loader2, NotebookText, Play, Plus, Presentation } from "lucide-react";
 import { useAuthUser } from "@/lib/api/auth";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { fetchStudySessions, fetchActivityCalendar, createStudySession } from "@/lib/api/study";
@@ -37,7 +37,6 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
 import "@/lib/i18n/today";
 import { TodayCard } from "@/components/learn/today-card";
-import { SubjectIcon } from "@/components/learn/subject-icon";
 import { StreakCard } from "@/components/learn/streak-card";
 import { useQuery } from "@tanstack/react-query";
 import { mistakesApi } from "@/lib/api/mistakes";
@@ -372,6 +371,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-4 pb-12 pt-5 sm:px-6 sm:pt-6 lg:flex-row">
       <input ref={fileRef} type="file" multiple accept={UPLOAD_ACCEPT} className="hidden" onChange={(e) => void onFiles(e.target.files)} />
       <div className="flex min-w-0 flex-1 flex-col gap-4 sm:gap-5">
+        {(!home || (loadError && workspaces.length === 0)) && (
         <div className="flex items-end justify-between gap-3">
           <div>
             {(workspaceId || folderId) && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>}
@@ -386,6 +386,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           </div>
           {!home && sessions.length > 0 && <span className="hidden text-[13px] text-faint lg:inline">{sessions.length} study session{sessions.length === 1 ? "" : "s"}</span>}
         </div>
+        )}
 
         {workspaceId && (
         <form
@@ -515,6 +516,8 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                 uploading={uploading}
                 onUpload={() => fileRef.current?.click()}
                 doneToday={doneToday}
+                greeting={`${greeting()}${firstName ? `, ${firstName}` : ""}`}
+                greetingSub={loading ? undefined : t(`today.${GREET_KEY[mood]}`).replace("{n}", String(streakInfo?.current ?? 0))}
               />
             )}
             {home && !brandNew && (
@@ -755,89 +758,33 @@ function SubjectsGrid({
           <Plus className="size-3.5" /> New subject
         </button>
       </div>
-      {/* Phones: one tidy list, a progress ring per subject, instead of tall cover cards. */}
-      <ul className="mt-3 flex flex-col gap-2.5 sm:hidden">
-        {loading &&
-          workspaces.length === 0 &&
-          [0, 1].map((i) => (
-            <li key={i} className="life-card flex items-center gap-3 px-4 py-3">
-              <Skeleton className="size-9 rounded-full" />
-              <div className="flex-1 space-y-1.5">
-                <Skeleton className="h-4 w-1/2" />
-                <Skeleton className="h-3 w-1/3" />
-              </div>
-            </li>
-          ))}
-        {workspaces.map((w) => {
-          const own = sessions.filter((x) => x.workspaceId === w.id);
-          const done = own.filter((x) => x.status === "completed").length;
-          return (
-            <li key={w.id}>
-              <Link href={`/workspace/${w.id}`} className="life-card life-press flex min-h-[76px] items-center gap-3 px-4 py-3.5">
-                <SubjectIcon title={w.title} />
-                <span className="min-w-0 flex-1">
-                  <span className="flex items-baseline justify-between gap-2">
-                    <span className="truncate text-[16.5px] font-extrabold">{w.title}</span>
-                    <span className="shrink-0 text-[12px] font-bold tabular-nums text-muted-foreground">
-                      {done}/{own.length}
-                    </span>
-                  </span>
-                  <span className="mt-1.5 block h-2 overflow-hidden rounded-full bg-muted">
-                    <span
-                      className="fill-grow block h-full rounded-full bg-accent"
-                      style={{ width: `${own.length ? Math.max(6, (done / own.length) * 100) : 0}%` }}
-                    />
-                  </span>
-                  <span className="mt-1 block truncate text-[12px] text-muted-foreground">
-                    {w.materials.length} material{w.materials.length === 1 ? "" : "s"}
-                  </span>
-                </span>
-                <ChevronRight className="size-4 shrink-0 text-faint" />
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-      <div className="mt-3 hidden grid-cols-1 gap-3.5 sm:grid sm:grid-cols-2 xl:grid-cols-3">
-        {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[172px] rounded-2xl" />)}
+      {/* Each subject is a tile in its own colour with its illustration: the colour on this page lives here. */}
+      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3.5 xl:grid-cols-3">
+        {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[156px] rounded-[var(--r-card)] sm:h-[176px]" />)}
         {workspaces.map((w) => {
           const own = sessions
             .filter((x) => x.workspaceId === w.id)
             .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
           const done = own.filter((x) => x.status === "completed").length;
           const current = own.find((x) => x.status !== "completed");
-          const pct = own.length ? done / own.length : 0;
           return (
-            <SubjectCover
+            <SubjectTile
               key={w.id}
+              href={`/workspace/${w.id}`}
               title={w.title}
-              coverUrl={w.coverUrl}
-              className="life-card life-press"
-            >
-              <Link href={`/workspace/${w.id}`} className="group relative flex min-h-[128px] flex-col justify-between p-4 sm:min-h-[172px]">
-                <div className="flex items-center gap-3">
-                  <SubjectIcon title={w.title} />
-                  <div className="min-w-0 max-w-[62%]">
-                    <div className="line-clamp-2 text-[16px] font-extrabold leading-tight text-foreground">{w.title}</div>
-                    <div className="text-[12px] text-muted-foreground">
-                      {w.materials.length} material{w.materials.length === 1 ? "" : "s"} · {done}/{own.length} sessions
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-3 sm:mt-4">
-                  <span className="block h-2 w-full overflow-hidden rounded-full bg-muted" aria-hidden>
-                    <span className="fill-grow block h-full rounded-full bg-accent" style={{ width: `${own.length ? Math.max(6, pct * 100) : 0}%` }} />
-                  </span>
-                <div className="mt-3 flex items-center justify-between text-[12.5px]">
-                  <span className="min-w-0 flex-1 truncate text-muted-foreground">{current ? (current.generating ? "Building the next session…" : `Next: ${current.title}`) : own.length ? "All caught up" : "No sessions yet"}</span>
-                  <span className="ml-2 inline-flex h-7 shrink-0 items-center gap-1 rounded-full bg-muted px-3 font-semibold text-foreground group-hover:bg-accent/10 group-hover:text-accent">{current ? "Continue" : "Open"}</span>
-                </div>
-                </div>
-              </Link>
-            </SubjectCover>
+              sub={
+                current
+                  ? current.generating
+                    ? "Building the next session…"
+                    : `Next: ${current.title}`
+                  : `${w.materials.length} material${w.materials.length === 1 ? "" : "s"}${own.length ? ` · ${done}/${own.length} sessions` : ""}`
+              }
+              progress={own.length ? done / own.length : null}
+              action={current ? "Continue" : "Open"}
+            />
           );
         })}
-        <button type="button" onClick={onNew} className="hidden min-h-[172px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed sm:flex border-border text-center hover:border-accent/60 hover:bg-muted/40">
+        <button type="button" onClick={onNew} className="hidden min-h-[176px] flex-col items-center justify-center gap-2 rounded-[var(--r-card)] border-2 border-dashed border-border text-center hover:border-border-strong hover:bg-muted/40 sm:flex">
           <Image src="/design/cat2-sleep.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
           <div className="text-[14px] font-semibold">New subject</div>
           <div className="text-[12px] text-faint">Drop notes, get sessions</div>
@@ -961,7 +908,7 @@ function HomeShopCard() {
       href="/shop"
       className="life-card life-press group hidden items-center gap-3.5 p-3.5 lg:flex"
     >
-      <span className="grid size-[64px] shrink-0 place-items-end justify-center overflow-hidden rounded-xl bg-[var(--cream)]">
+      <span className="grid size-[64px] shrink-0 place-items-end justify-center overflow-hidden rounded-xl bg-muted">
         <Mascot pose="wave" className="cat-wiggle mb-0.5 h-[56px] w-[48px]" />
       </span>
       <span className="min-w-0 flex-1">

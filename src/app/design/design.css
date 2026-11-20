@@ -58,10 +58,10 @@ html.new-ui body { background: #ffffff; }
 
 /*
  * "Life" layer for the signed-in app: a student product, not a dashboard.
- * White cards with a hairline on a warm off-white page, one warm cream panel
- * per screen for the main thing (the cat lives there), a chunky button with a
- * lip that presses down, and motion that eases things in. Purple is the
- * accent only; the mascot's orange is for streak flames and ticks.
+ * White cards with a hairline on a white page; colour lives in the subject
+ * tiles and the illustrated hero (tokens.css), not in the chrome. A chunky
+ * button with a lip that presses down, and motion that eases things in.
+ * Purple is the accent only; orange is for streak flames and ticks.
  * Everything that moves stops under prefers-reduced-motion.
  */
 /* In the components layer so Tailwind utilities on the same element still win. */
@@ -73,7 +73,7 @@ html.new-ui body { background: #ffffff; }
   border-radius: var(--r-card);
   box-shadow: var(--card-shadow);
 }
-/* The one warm panel a screen may have: today's action. */
+/* A quiet neutral panel (v4's cream panel; home's hero no longer uses it). */
 .life-panel {
   background: var(--cream);
   border-radius: var(--r-panel);

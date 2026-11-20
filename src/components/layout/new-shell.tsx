@@ -8,7 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Calendar, Folder as FolderIcon, House, LogOut, PanelLeft, PanelLeftClose, PlayCircle, Plus, RotateCcw, Search, Settings, Store } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
-import { StreakButton } from "@/components/rewards/streak-button";
+import { PointsPill, StreakButton } from "@/components/rewards/streak-button";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
 import "@/lib/i18n/mistakes";
@@ -149,7 +149,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               title={rail ? label : undefined}
               className={cn(
                 "flex h-11 items-center gap-3 rounded-[var(--r-control)] px-4 text-[14.5px] font-bold text-foreground/70 transition-colors hover:bg-muted/70",
-                isActive(href) && "bg-muted text-accent-dim",
+                isActive(href) && "bg-[var(--accent-tint)] text-accent-dim hover:bg-[var(--accent-tint)]",
                 rail && "md:justify-center md:px-0",
               )}
             >
@@ -283,6 +283,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           <div className="ml-auto flex items-center gap-1.5 sm:gap-2.5">
             <NotificationBell />
             <StreakButton />
+            <PointsPill />
             <Link href="/settings" aria-label="Settings" className="block">
               {user?.profilePicture ? (
                 // eslint-disable-next-line @next/next/no-img-element

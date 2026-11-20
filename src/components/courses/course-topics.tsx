@@ -8,6 +8,7 @@ import { loadCourse, TopicRow } from "@/components/courses/course-picker";
 import { useStartCourseTopic } from "@/components/courses/use-start-topic";
 import { ProgressLine } from "@/components/courses/course-shelf";
 import { cn } from "@/lib/utils";
+import { SubjectBand } from "@/components/learn/subject-tile";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
 
@@ -54,7 +55,45 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
 
   const pct = masteryPercent(progress.mastery);
   return (
-    <section className="rounded-2xl border border-border bg-card p-4 sm:p-5">
+    <section className={cn(!showTitle && "rounded-2xl border border-border bg-card p-4 sm:p-5")}>
+      {showTitle ? (
+        // The course's own page: a header band in the subject's colour; the topic list under it stays white.
+        <SubjectBand match={course.subject || course.title} className="px-5 py-5 sm:px-7 sm:py-7">
+          <h1 className="max-w-[68%] text-[24px] font-extrabold leading-[1.12] sm:text-[30px]">
+            {course.title}
+            {level ? <span className="font-bold opacity-90"> · {level}</span> : null}
+          </h1>
+          <p className="subject-tile__sub mt-1.5 max-w-[68%] text-[13.5px] font-semibold">
+            {t("course.progressLine").replace("{done}", String(progress.topicsDone)).replace("{total}", String(progress.topicsTotal))}
+            {pct !== null ? ` · ${t("course.masteryLine").replace("{pct}", String(pct))}` : ""}
+          </p>
+          <div
+            className="subject-track mt-3 w-[52%]"
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={progress.topicsTotal}
+            aria-valuenow={progress.topicsDone}
+          >
+            <span className="fill-grow" style={{ width: `${progress.topicsTotal ? (progress.topicsDone / progress.topicsTotal) * 100 : 0}%` }} />
+          </div>
+          {next ? (
+            <button
+              type="button"
+              onClick={() => void start(course, next.topic, level)}
+              disabled={!!busyTopicId}
+              className="subject-pill mt-5 h-11 max-w-full pl-5 pr-4 text-[15px] disabled:opacity-70"
+            >
+              <span className="truncate">
+                {t("course.continue")}: {topicTitle(next.topic)}
+              </span>
+              {busyTopicId === next.topic.id ? <Loader2 className="size-4 shrink-0 animate-spin" /> : <ArrowRight className="size-4 shrink-0" strokeWidth={2.6} />}
+            </button>
+          ) : (
+            <p className="mt-4 text-[14px] font-bold">{t("course.allDone")}</p>
+          )}
+        </SubjectBand>
+      ) : (
+        <>
       <div className="flex flex-wrap items-end justify-between gap-2">
         <div className="min-w-0">
           {showTitle ? (
@@ -92,6 +131,8 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
         </button>
       ) : (
         <p className="mt-4 text-[13px] text-muted-foreground">{t("course.allDone")}</p>
+      )}
+        </>
       )}
 
       <div className="mt-4 flex flex-col gap-2">

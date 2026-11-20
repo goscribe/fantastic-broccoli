@@ -22,6 +22,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { Mascot } from "@/components/rewards/mascot";
+import { SubjectBand } from "@/components/learn/subject-tile";
 import { useStreak } from "@/lib/rewards";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -382,25 +383,25 @@ export function SessionDebrief({
   return (
     <div className={cn("mx-auto flex max-w-md flex-col items-center pb-10 pt-0 animate-fade-up sm:pt-2", !newUi && "text-center")}>
       {newUi ? (
-        // The cat holds the trophy beside the result, on the page's one warm panel.
-        <div className="life-panel relative flex w-full items-center gap-3 overflow-hidden py-4 pl-4 pr-5 text-left sm:gap-5 sm:py-6 sm:pl-6">
+        // The result, on a band in the subject's colour: its illustration on the right, the cat with the trophy on the left.
+        <SubjectBand match={subjectTitle} artClassName="!-right-[10%] !-bottom-[14%] !h-[86%] max-sm:!h-[70%]" className="flex w-full items-center gap-3 py-5 pl-4 pr-5 text-left sm:gap-5 sm:py-7 sm:pl-6">
           <div className="relative shrink-0" aria-hidden>
             <SparkleBurst burst={1} count={10} distance={46} />
-            <Mascot pose="trophy" className="cat-cheer relative h-[92px] sm:h-[120px]" />
+            <Mascot pose="trophy" className="cat-cheer relative h-[92px] drop-shadow-[0_6px_10px_rgba(0,0,0,0.18)] sm:h-[120px]" />
           </div>
-          <div className="min-w-0">
+          <div className="min-w-0 max-w-[58%] sm:max-w-[52%]">
             <h2 className="text-balance text-[26px] font-extrabold leading-[1.1] tracking-tight sm:text-[32px]">
               {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
             </h2>
-            <div className="mt-1.5 text-[14.5px] leading-snug text-foreground/75 line-clamp-2 sm:text-[15.5px]">
+            <div className="subject-tile__sub mt-1.5 text-[14.5px] font-semibold leading-snug line-clamp-2 sm:text-[15.5px]">
               {verdict ? (
                 <MathText text={verdict} />
               ) : debriefLoading ? (
-                <span className="inline-block h-4 w-40 rounded-full bg-[var(--cream-edge)] align-middle" />
+                <span className="inline-block h-4 w-40 rounded-full bg-white/30 align-middle" />
               ) : null}
             </div>
           </div>
-        </div>
+        </SubjectBand>
       ) : (
         <>
           <div className="relative" aria-hidden>
