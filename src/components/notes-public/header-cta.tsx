@@ -8,16 +8,16 @@ export function HeaderCta() {
   const { user, loading } = useAuthUser();
   if (!loading && user)
     return (
-      <Link href="/" className="inline-flex h-9 min-w-[132px] items-center justify-center rounded-full bg-accent px-4 text-[14px] font-bold text-white hover:bg-accent-dim">
+      <Link href="/" className="nl-btn nl-btn-sm min-w-[132px]">
         Open Scribe
       </Link>
     );
   return (
     <div className="flex items-center gap-1">
-      <Link href="/login" className="hidden h-9 items-center rounded-full px-3 text-[14px] font-semibold text-muted-foreground hover:text-foreground sm:inline-flex">
+      <Link href="/login" className="hidden h-10 items-center rounded-full px-3 text-[14px] font-extrabold text-muted-foreground hover:text-foreground sm:inline-flex">
         Sign in
       </Link>
-      <Link href="/signup?from=notes" className="inline-flex h-9 min-w-[132px] items-center justify-center rounded-full bg-accent px-4 text-[14px] font-bold text-white hover:bg-accent-dim">
+      <Link href="/signup?from=notes" className="nl-btn nl-btn-sm min-w-[132px]">
         Start free
       </Link>
     </div>

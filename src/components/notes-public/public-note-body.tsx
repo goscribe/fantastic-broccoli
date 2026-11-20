@@ -1,60 +1,63 @@
 import { Fragment, type ReactNode } from "react";
+import Image from "next/image";
+import { Check, ChevronDown, Sparkles, TriangleAlert } from "lucide-react";
 import type { NoteBlock, NoteFigure, TopicNoteContent } from "@/lib/api/notes";
-import { figureNumbers } from "@/lib/notes";
+import { figureNumbers, recallMarks } from "@/lib/notes";
 import { parseExpression } from "@/lib/latex-eval";
 import { RichText } from "./rich-text";
 import { PublicFigure } from "./public-figure";
+import { WorkedExample } from "./worked-example";
 
 /**
- * Server-rendered read view of a Scribe topic note for the public pages: the
- * same layout as the signed-in reader (components/notes/note-body.tsx), but
- * every word and formula is in the HTML with no client JavaScript except
- * live figures. "Check your recall" uses <details>, so its mark schemes open
- * without JavaScript too. `after` injects nodes after a section (by index),
- * used for the inline quick questions.
+ * Server-rendered read view of a Scribe topic note for the public pages.
+ * Every word and formula is in the HTML; the page reads in full with
+ * JavaScript off. On top of that: key terms are chips that swap a definition
+ * card (radio inputs, no script), worked examples reveal a step at a time,
+ * figures sit on a tinted stage, and each section ends in a marker that
+ * ticks when reached (see reading-progress.tsx). `after` injects nodes after
+ * a section (by index), used for the inline quick checks.
  */
 export function PublicNoteBody({ note, after }: { note: TopicNoteContent; after?: Map<number, ReactNode> }) {
   const figures = new Map(note.figures.map((f) => [f.id, f]));
   const numbers = figureNumbers(note);
+  const total = note.sections.length;
   return (
-    <div className="text-[16px] leading-[1.65] text-foreground sm:text-[17px]">
-      <div className="rounded-xl bg-muted/50 px-4 py-3">
-        <p className="text-[12.5px] font-semibold text-muted-foreground">In this note</p>
-        <p className="mt-0.5 text-[15px] leading-snug sm:text-[16px]">
-          <RichText text={note.objectiveLine} />
-        </p>
-      </div>
-
+    <div className="nl-prose">
       {note.sections.map((s, si) => {
         const terms = note.keyTerms.filter((k) => k.sectionId === s.id);
         return (
           <Fragment key={s.id}>
-            <section className="mt-9 scroll-mt-20 first-of-type:mt-7" aria-labelledby={`h-${s.id}`} id={`sec-${s.id}`}>
-              <h2 id={`h-${s.id}`} className="text-[19px] font-semibold leading-snug tracking-[-0.01em] sm:text-[21px]">
-                <RichText text={s.heading} />
-              </h2>
-              <div className="mt-3 flex flex-col gap-4">
+            <section className="mt-14 scroll-mt-20 first:mt-0 lg:scroll-mt-8" aria-labelledby={`h-${s.id}`} id={`sec-${s.id}`} data-nl-section={s.id}>
+              <header data-nl-reveal="">
+                <p className="flex items-center gap-2.5 text-[13.5px] font-extrabold text-accent">
+                  <span className="nl-secnum" aria-hidden="true">
+                    <span>{si + 1}</span>
+                    <Check strokeWidth={3.5} />
+                  </span>
+                  Part {si + 1} of {total}
+                </p>
+                <h2 id={`h-${s.id}`} className="mt-3 text-[26px] font-extrabold leading-[1.14] text-foreground sm:text-[32px]">
+                  <RichText text={s.heading} />
+                </h2>
+              </header>
+              <div className="mt-4 flex flex-col gap-5">
                 {s.blocks.map((b, bi) => (
-                  <Block key={bi} block={b} figure={b.type === "figure" ? figures.get(b.figureId) : undefined} number={b.type === "figure" ? numbers.get(b.figureId) : undefined} />
+                  <Block
+                    key={bi}
+                    block={b}
+                    lead={si === 0 && bi === 0}
+                    figure={b.type === "figure" ? figures.get(b.figureId) : undefined}
+                    number={b.type === "figure" ? numbers.get(b.figureId) : undefined}
+                  />
                 ))}
               </div>
-              {terms.length > 0 && (
-                <div className="-mx-4 mt-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0">
-                  {terms.map((k, ki) => (
-                    <div
-                      key={ki}
-                      className={`rounded-xl border border-border bg-card px-4 py-3 ${terms.length > 1 ? "w-[80%] shrink-0 snap-start sm:w-auto" : "w-full shrink-0 sm:w-auto"}`}
-                    >
-                      <p className="text-[15px] font-semibold leading-snug">
-                        <RichText text={k.term} />
-                      </p>
-                      <p className="mt-0.5 text-[14.5px] leading-snug text-muted-foreground">
-                        <RichText text={k.definition} />
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
+              {terms.length > 0 && <KeyTerms sectionId={s.id} terms={terms} />}
+              <p className="nl-secend" aria-hidden="true">
+                <i>
+                  <Check strokeWidth={3.5} />
+                </i>
+                <b>{si + 1 === total ? "Note read" : `Part ${si + 1} done`}</b>
+              </p>
             </section>
             {after?.get(si)}
           </Fragment>
@@ -66,25 +69,72 @@ export function PublicNoteBody({ note, after }: { note: TopicNoteContent; after?
   );
 }
 
+/**
+ * Key terms as tappable chips with one definition card (the tallest sets the
+ * height, so swapping never moves the page). Radio inputs and CSS only; every
+ * definition is in the HTML. One term is simply a card.
+ */
+function KeyTerms({ sectionId, terms }: { sectionId: string; terms: TopicNoteContent["keyTerms"] }) {
+  const card = (k: (typeof terms)[number], i: number) => (
+    <div key={i} data-i={i} className="nl-card !rounded-[22px] border-l-[5px] !border-l-accent px-4 py-3.5 sm:px-5">
+      <p className="text-[18px] font-extrabold leading-snug text-accent-dim">
+        <RichText text={k.term} />
+      </p>
+      <p className="mt-1 text-[16px] leading-[1.5] text-[#3b3650] sm:text-[16.5px]">
+        <RichText text={k.definition} />
+      </p>
+    </div>
+  );
+  const many = terms.length > 1 && terms.length <= 8;
+  return (
+    <div className="mt-6" data-nl-reveal="">
+      <p className="flex items-center gap-2 text-[13.5px] font-extrabold text-muted-foreground">
+        <Sparkles className="size-4 text-[var(--flame)]" strokeWidth={2.5} aria-hidden="true" />
+        {terms.length > 1 ? "Key terms" : "Key term"}
+        {many && <span className="font-bold text-faint">· tap one</span>}
+      </p>
+      {many ? (
+        <div className="nl-terms mt-2.5" role="radiogroup" aria-label="Key terms">
+          <div className="flex flex-wrap gap-2 pb-1">
+            {terms.map((k, i) => (
+              <Fragment key={i}>
+                <input type="radio" name={`kt-${sectionId}`} id={`kt-${sectionId}-${i}`} data-i={i} defaultChecked={i === 0} />
+                <label htmlFor={`kt-${sectionId}-${i}`}>
+                  <span>
+                    <RichText text={k.term} />
+                  </span>
+                </label>
+              </Fragment>
+            ))}
+          </div>
+          <div className="nl-defs mt-2.5">{terms.map(card)}</div>
+        </div>
+      ) : (
+        <div className="mt-2.5 flex flex-col gap-2">{terms.map(card)}</div>
+      )}
+    </div>
+  );
+}
+
 const staticGraphOk = (f: NoteFigure) =>
   !!f.graph && f.graph.expressions.length > 0 && f.graph.expressions.every((e) => parseExpression(e.latex) !== null);
 
-function Block({ block, figure, number }: { block: NoteBlock; figure?: NoteFigure; number?: number }) {
+function Block({ block, figure, number, lead }: { block: NoteBlock; figure?: NoteFigure; number?: number; lead?: boolean }) {
   switch (block.type) {
     case "paragraph":
       return (
-        <p>
+        <p className={lead ? "nl-lead" : undefined} data-nl-reveal="">
           <RichText text={block.text} />
         </p>
       );
     case "bullets":
       return (
-        <ul className="flex list-disc flex-col gap-1.5 pl-5 marker:text-faint">
+        <ul className="nl-bullets flex flex-col gap-2.5" data-nl-reveal="">
           {block.items.map((it, i) => (
             <li key={i}>
               <RichText text={it.text} />
               {it.sub.length > 0 && (
-                <ul className="mt-1.5 flex list-[circle] flex-col gap-1 pl-5 marker:text-faint">
+                <ul className="mt-2 flex flex-col gap-1.5 text-[0.96em]">
                   {it.sub.map((sub, j) => (
                     <li key={j}>
                       <RichText text={sub} />
@@ -97,55 +147,59 @@ function Block({ block, figure, number }: { block: NoteBlock; figure?: NoteFigur
         </ul>
       );
     case "callout":
-      return (
-        <aside className="rounded-xl bg-muted/60 px-4 py-3">
-          <p className="text-[12.5px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
-            {block.kind === "mistake" ? "Common mistake" : "Exam tip"}
-          </p>
-          <p className="mt-1 text-[15.5px] leading-snug sm:text-[16px]">
+      // Two different shapes on purpose: a warm warning card, and the cat's speech bubble.
+      return block.kind === "mistake" ? (
+        <aside className="relative rounded-[24px] rounded-tl-[8px] bg-[var(--flame-soft)] py-4 pl-[68px] pr-4 sm:pr-5" data-nl-reveal="">
+          <span className="absolute left-4 top-4 grid size-10 -rotate-6 place-items-center rounded-2xl bg-[var(--flame)] text-white shadow-[0_3px_0_0_var(--flame-edge)]" aria-hidden="true">
+            <TriangleAlert className="size-5" strokeWidth={2.75} />
+          </span>
+          <p className="text-[13.5px] font-extrabold text-[var(--flame-ink)]">Common mistake</p>
+          <p className="mt-0.5 text-[16.5px] font-semibold leading-[1.5] text-foreground sm:text-[17px]">
             <RichText text={block.text} />
           </p>
+        </aside>
+      ) : (
+        <aside className="flex items-end gap-2.5" data-nl-reveal="">
+          <Image src="/design/cat2-pencil.png" alt="" width={234} height={262} unoptimized loading="lazy" className="h-[68px] w-auto shrink-0 sm:h-[84px]" />
+          <div className="min-w-0 flex-1 rounded-[24px] rounded-bl-[8px] bg-accent-soft px-4 py-3.5 sm:px-5">
+            <p className="text-[13.5px] font-extrabold text-accent">Exam tip</p>
+            <p className="mt-0.5 text-[16.5px] font-semibold leading-[1.5] text-foreground sm:text-[17px]">
+              <RichText text={block.text} />
+            </p>
+          </div>
         </aside>
       );
     case "example":
       return (
-        <div className="rounded-xl border border-border px-4 py-4">
-          <p className="text-[12.5px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">Worked example</p>
-          <p className="mt-1 font-semibold leading-snug">
-            <RichText text={block.title} />
-          </p>
-          <p className="mt-2">
-            <RichText text={block.problem} />
-          </p>
-          <ol className="mt-3 flex list-decimal flex-col gap-1.5 pl-5 marker:font-semibold marker:text-faint">
-            {block.steps.map((st, i) => (
-              <li key={i}>
-                <RichText text={st} />
-              </li>
-            ))}
-          </ol>
-          <p className="mt-3 border-t border-border pt-3">
-            <span className="font-semibold">Answer: </span>
-            <RichText text={block.answer} />
-          </p>
-        </div>
+        <WorkedExample
+          title={<RichText text={block.title} />}
+          problem={<RichText text={block.problem} />}
+          steps={block.steps.map((st, i) => (
+            <RichText key={i} text={st} />
+          ))}
+          answer={<RichText text={block.answer} />}
+        />
       );
     case "table":
       return <NoteTable block={block} />;
     case "deeper":
       // Collapsed, but the text is in the HTML (and opens without JavaScript).
       return (
-        <details className="group rounded-xl border border-border px-4 py-3 [&_summary::-webkit-details-marker]:hidden">
-          <summary className="flex min-h-8 cursor-pointer list-none items-center gap-2 font-semibold">
-            <span className="text-[12.5px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">Go deeper</span>
-            <span className="min-w-0 flex-1">
-              <RichText text={block.title} />
+        <details className="nl-details group rounded-[24px] border-2 border-dashed border-[var(--edge)] bg-white/60 px-4 py-1 open:pb-4 sm:px-5" data-nl-reveal="">
+          <summary className="flex min-h-14 items-center gap-3">
+            <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent transition-transform group-open:rotate-45" aria-hidden="true">
+              <svg viewBox="0 0 24 24" className="size-4.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
             </span>
-            <svg viewBox="0 0 24 24" className="size-4 shrink-0 text-faint transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="m6 9 6 6 6-6" />
-            </svg>
+            <span className="min-w-0 flex-1">
+              <span className="block text-[13px] font-extrabold text-accent">Go deeper</span>
+              <span className="block text-[16.5px] font-extrabold leading-snug text-foreground">
+                <RichText text={block.title} />
+              </span>
+            </span>
           </summary>
-          <div className="mt-2 flex flex-col gap-3">
+          <div className="mt-1 flex flex-col gap-3 text-[16.5px] leading-[1.65]">
             {block.paragraphs.map((p, i) => (
               <p key={i}>
                 <RichText text={p} />
@@ -157,10 +211,19 @@ function Block({ block, figure, number }: { block: NoteBlock; figure?: NoteFigur
     case "figure":
       if (!figure) return null;
       return (
-        <figure className="flex flex-col gap-2">
-          <PublicFigure figure={figure} staticGraph={staticGraphOk(figure)} />
-          <figcaption className="text-[14px] leading-snug text-muted-foreground">
-            <span className="font-semibold text-foreground">Figure {number ?? 1}.</span> <RichText text={figure.caption} />
+        <figure className="nl-stage nl-panel -mx-2 flex flex-col gap-3 !rounded-[28px] p-2.5 pb-4 sm:mx-0 sm:p-4 sm:pb-5" data-nl-reveal="">
+          <div className="overflow-hidden rounded-[20px] bg-white [&>div]:!rounded-[20px] [&>div]:!border-0">
+            <PublicFigure figure={figure} staticGraph={staticGraphOk(figure)} />
+            {/* Figures are drawn by a script; without one, say what the figure shows. */}
+            <noscript>
+              <p className="px-4 py-4 text-[15.5px] font-semibold leading-snug text-[#3b3650]">{figure.alt}</p>
+            </noscript>
+          </div>
+          <figcaption className="flex items-start gap-2.5 px-2 text-[14.5px] font-semibold leading-snug text-[#3b3650]">
+            <span className="mt-px shrink-0 rounded-full bg-white px-2.5 py-0.5 text-[12.5px] font-extrabold text-accent">Figure {number ?? 1}</span>
+            <span className="min-w-0 flex-1">
+              <RichText text={figure.caption} />
+            </span>
           </figcaption>
         </figure>
       );
@@ -169,44 +232,46 @@ function Block({ block, figure, number }: { block: NoteBlock; figure?: NoteFigur
 
 function NoteTable({ block }: { block: Extract<NoteBlock, { type: "table" }> }) {
   return (
-    <div>
+    <div data-nl-reveal="">
       {block.caption && (
-        <p className="mb-2 text-[14px] font-semibold text-muted-foreground">
+        <p className="mb-2.5 text-[14.5px] font-extrabold text-muted-foreground">
           <RichText text={block.caption} />
         </p>
       )}
-      <table className="hidden w-full border-collapse text-[15.5px] leading-snug sm:table">
-        <thead>
-          <tr>
-            {block.headers.map((h, ci) => (
-              <th key={ci} className="border-b border-border-strong px-3 py-2 text-left font-semibold first:pl-0">
-                <RichText text={h} />
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {block.rows.map((r, ri) => (
-            <tr key={ri}>
-              {r.map((c, ci) => (
-                <td key={ci} className={`border-b border-border px-3 py-2 align-top first:pl-0 ${ci === 0 ? "font-semibold" : ""}`}>
-                  <RichText text={c} />
-                </td>
+      <div className="nl-card hidden overflow-hidden sm:block">
+        <table className="w-full border-collapse text-[16px] leading-snug">
+          <thead>
+            <tr className="bg-accent-soft">
+              {block.headers.map((h, ci) => (
+                <th key={ci} className="px-4 py-3 text-left text-[14px] font-extrabold text-accent-dim">
+                  <RichText text={h} />
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="flex flex-col gap-2 sm:hidden">
+          </thead>
+          <tbody>
+            {block.rows.map((r, ri) => (
+              <tr key={ri} className="border-t border-[var(--edge)]">
+                {r.map((c, ci) => (
+                  <td key={ci} className={`px-4 py-3 align-top ${ci === 0 ? "font-extrabold text-foreground" : ""}`}>
+                    <RichText text={c} />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="flex flex-col gap-2.5 sm:hidden">
         {block.rows.map((r, ri) => (
-          <dl key={ri} className="rounded-xl border border-border px-4 py-3 text-[15px] leading-snug">
+          <dl key={ri} className="nl-card !rounded-[22px] px-4 py-3.5 text-[16px] leading-snug">
             <dt className="sr-only">{block.headers[0]}</dt>
-            <dd className="font-semibold">
+            <dd className="text-[17px] font-extrabold text-foreground">
               <RichText text={r[0] ?? ""} />
             </dd>
             {r.slice(1).map((c, k) => (
               <Fragment key={k}>
-                <dt className="mt-2 text-[12.5px] font-semibold text-muted-foreground">
+                <dt className="mt-2.5 text-[12.5px] font-extrabold text-accent">
                   <RichText text={block.headers[k + 1] ?? ""} />
                 </dt>
                 <dd>
@@ -223,51 +288,56 @@ function NoteTable({ block }: { block: Extract<NoteBlock, { type: "table" }> }) 
 
 /** Written recall questions; the mark scheme opens with <details>, no JavaScript needed. */
 function Recall({ note }: { note: TopicNoteContent }) {
+  const marks = recallMarks(note);
   return (
-    <section className="mt-12 scroll-mt-20 border-t border-border pt-8" aria-labelledby="h-recall" id="sec-recall">
-      <h2 id="h-recall" className="text-[19px] font-semibold leading-snug sm:text-[21px]">
-        Check your recall
-      </h2>
-      <p className="mt-1 text-[14.5px] text-muted-foreground">
-        Written answers: answer each one in your head or on paper, then open the mark scheme.
-      </p>
-      <ol className="mt-5 flex flex-col gap-4">
+    <section className="mt-16 scroll-mt-20 lg:scroll-mt-8" aria-labelledby="h-recall" id="sec-recall">
+      <header data-nl-reveal="">
+        <p className="text-[13.5px] font-extrabold text-accent">
+          {note.recall.length} written questions · {marks} marks
+        </p>
+        <h2 id="h-recall" className="mt-1.5 text-[26px] font-extrabold leading-[1.14] text-foreground sm:text-[32px]">
+          Check your recall
+        </h2>
+        <p className="mt-2 text-[16px] leading-snug text-muted-foreground">Answer each one in your head or on paper, then open the mark scheme.</p>
+      </header>
+      <ol className="mt-5 flex flex-col gap-3.5">
         {note.recall.map((q, qi) => (
-          <li key={q.id} className="flex gap-3">
-            <span className="w-5 shrink-0 font-semibold tabular-nums text-faint">{qi + 1}.</span>
-            <div className="min-w-0 flex-1">
-              <p>
-                <RichText text={q.question} />{" "}
-                <span className="whitespace-nowrap font-semibold text-muted-foreground" aria-label={`${q.marks} marks`}>
-                  [{q.marks}]
-                </span>
-              </p>
-              <details className="group mt-1.5">
-                <summary className="inline-flex min-h-9 cursor-pointer list-none items-center gap-1 text-[14px] font-semibold text-accent hover:text-accent-dim [&::-webkit-details-marker]:hidden">
-                  <span className="group-open:hidden">Show mark scheme</span>
-                  <span className="hidden group-open:inline">Hide mark scheme</span>
-                  <svg viewBox="0 0 24 24" className="size-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="m6 9 6 6 6-6" />
-                  </svg>
-                </summary>
-                <div className="mt-2 rounded-xl bg-muted/50 px-4 py-3 text-[15px] leading-snug sm:text-[15.5px]">
-                  <p className="text-[12.5px] font-semibold text-muted-foreground">Model answer</p>
-                  <p className="mt-0.5">
-                    <RichText text={q.modelAnswer} />
-                  </p>
-                  <ul className="mt-2.5 flex flex-col gap-1">
-                    {q.markPoints.map((m, mi) => (
-                      <li key={mi} className="flex gap-2">
-                        <span className="mt-[9px] size-1.5 shrink-0 rounded-full bg-accent/60" />
-                        <span className="min-w-0 flex-1">
-                          1 mark for <RichText text={m} />
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </details>
+          <li key={q.id} className="nl-card px-4 py-4 sm:px-5" data-nl-reveal="">
+            <div className="flex items-center gap-2 text-[13px] font-extrabold text-muted-foreground">
+              <span className="grid size-7 place-items-center rounded-full bg-accent-soft text-accent tabular-nums">{qi + 1}</span>
+              <span>{q.commandTerm}</span>
+              <span className="ml-auto rounded-full bg-muted px-2.5 py-1 text-[12.5px] tabular-nums" aria-label={`${q.marks} marks`}>
+                {q.marks} {q.marks === 1 ? "mark" : "marks"}
+              </span>
             </div>
+            <p className="mt-2.5 text-[17px] font-bold leading-[1.45] text-foreground sm:text-[18px]">
+              <RichText text={q.question} />
+            </p>
+            <details className="nl-details group mt-3">
+              <summary className="nl-btn-ghost nl-btn-sm !inline-flex">
+                <span className="group-open:hidden">Show mark scheme</span>
+                <span className="hidden group-open:inline">Hide mark scheme</span>
+                <ChevronDown className="size-4 transition-transform group-open:rotate-180" aria-hidden="true" />
+              </summary>
+              <div className="mt-3.5 rounded-[20px] bg-accent-soft px-4 py-3.5 text-[16px] leading-[1.5]">
+                <p className="text-[13px] font-extrabold text-accent">Model answer</p>
+                <p className="mt-0.5 text-foreground">
+                  <RichText text={q.modelAnswer} />
+                </p>
+                <ul className="mt-3 flex flex-col gap-1.5">
+                  {q.markPoints.map((m, mi) => (
+                    <li key={mi} className="flex gap-2.5">
+                      <span className="mt-[3px] grid size-5 shrink-0 place-items-center rounded-full bg-accent text-white" aria-hidden="true">
+                        <Check className="size-3" strokeWidth={4} />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        1 mark for <RichText text={m} />
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </details>
           </li>
         ))}
       </ol>

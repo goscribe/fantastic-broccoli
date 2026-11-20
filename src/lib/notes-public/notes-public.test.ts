@@ -17,6 +17,7 @@ import { hasMath, tokenizeInline } from "./inline";
 import { notesRouteDecision } from "./route-decision";
 import { notesSitemapEntries } from "./sitemap";
 import { splitInline } from "./inline-split";
+import { emptyReading, markRead, parseReading, readingMinutes, topicState } from "./reading";
 
 const units = [
   {
@@ -231,5 +232,35 @@ describe("inline quick checks", () => {
     assert.equal(splitInline(2, qs(10)).inline.size, 0);
     assert.equal(splitInline(6, qs(7)).inline.size, 0);
     assert.equal(splitInline(3, qs(10)).inline.size, 1);
+  });
+});
+
+describe("reading time and reading progress", () => {
+  test("reading time comes from the note's own words, never under a minute", () => {
+    const para = (n: number) => ({ type: "paragraph" as const, text: Array.from({ length: n }, () => "word").join(" ") });
+    assert.equal(readingMinutes({ sections: [{ id: "s1", heading: "A", blocks: [para(10)] }], keyTerms: [] }), 1);
+    assert.equal(readingMinutes({ sections: [{ id: "s1", heading: "A", blocks: [para(570)] }], keyTerms: [] }), 3);
+    // A collapsed "Go deeper" block is optional reading and does not count.
+    assert.equal(
+      readingMinutes({ sections: [{ id: "s1", heading: "A", blocks: [para(189), { type: "deeper", title: "More", paragraphs: [para(900).text] }] }], keyTerms: [] }),
+      1,
+    );
+  });
+  test("marking sections read is idempotent and survives a round trip", () => {
+    let p = markRead(emptyReading(), "c/t", "s1", 3, 10);
+    const same = markRead(p, "c/t", "s1", 3, 20);
+    assert.equal(same, p);
+    p = markRead(p, "c/t", "s2", 3, 30);
+    assert.deepEqual(parseReading(JSON.stringify(p)).topics["c/t"], { read: ["s1", "s2"], total: 3, updatedAt: 30 });
+    assert.deepEqual(parseReading("{oops"), emptyReading());
+    assert.deepEqual(parseReading(JSON.stringify({ v: 2, topics: {} })), emptyReading());
+  });
+  test("a topic is started after one section or answer, done when read through or fully answered", () => {
+    assert.equal(topicState(undefined, 0, 10), "new");
+    assert.equal(topicState({ read: ["s1"], total: 3, updatedAt: 1 }, 0, 10), "started");
+    assert.equal(topicState(undefined, 2, 10), "started");
+    assert.equal(topicState({ read: ["s1", "s2", "s3"], total: 3, updatedAt: 1 }, 0, 10), "done");
+    assert.equal(topicState(undefined, 10, 10), "done");
+    assert.equal(topicState(undefined, 0, 0), "new");
   });
 });

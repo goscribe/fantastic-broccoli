@@ -46,7 +46,7 @@ export function RichText({ text }: { text: string }) {
             return (
               <span
                 key={i}
-                className={tok.display ? "my-2 block max-w-full overflow-x-auto" : undefined}
+                className={tok.display ? "nl-math-block my-2 block max-w-full overflow-x-auto" : undefined}
                 dangerouslySetInnerHTML={{ __html: html }}
               />
             );

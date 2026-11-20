@@ -1,34 +1,47 @@
 import Link from "next/link";
+import { Check, ChevronRight } from "lucide-react";
 import type { PublicTopicRow } from "@/lib/api/public-notes";
+import { topicKey } from "@/lib/notes-public/progress";
 import { topicPath } from "@/lib/notes-public/slug";
+import { cn } from "@/lib/utils";
 
-/** Topics of a unit as links, with what each has (note, number of questions). */
-export function TopicList({ courseId, topics, compact = false }: { courseId: string; topics: PublicTopicRow[]; compact?: boolean }) {
+/**
+ * Topics of a unit as a path: a node per topic on one line, with what each
+ * has (note, number of questions). Nodes fill in from the visitor's own
+ * progress (see notes-progress.tsx); `current` marks the page being read.
+ */
+export function TopicList({ courseId, topics, compact = false, current }: { courseId: string; topics: PublicTopicRow[]; compact?: boolean; current?: string }) {
   return (
-    <ul className={compact ? "flex flex-col gap-1.5" : "mt-3 flex flex-col divide-y divide-border rounded-2xl border border-border bg-card"}>
-      {topics.map((t) => (
-        <li key={t.id}>
-          <Link
-            href={topicPath(courseId, t)}
-            className={
-              compact
-                ? "flex items-baseline gap-2 rounded-lg py-1 text-[15px] hover:text-accent"
-                : "flex min-h-12 items-center gap-3 px-4 py-2.5 transition-colors hover:bg-accent-soft/40"
-            }
-          >
-            <span className="w-12 shrink-0 text-[13.5px] font-bold tabular-nums text-faint">{t.code}</span>
-            <span className="min-w-0 flex-1 font-semibold leading-snug">{t.name}</span>
-            {!compact && (
-              <span className="shrink-0 text-right text-[12.5px] font-semibold text-muted-foreground">
-                {[t.note ? "Notes" : null, t.questionCount ? `${t.questionCount} Qs` : null, t.hlOnly ? "HL" : null, t.bcOnly ? "BC" : null, t.higherTierOnly ? "Higher" : null]
-                  .filter(Boolean)
-                  .join(" · ") || "Coming soon"}
+    <ol className={cn("nl-path nl-card overflow-hidden", compact ? "!rounded-[22px]" : "mt-3")}>
+      {topics.map((t) => {
+        const has = [t.note ? "Notes" : null, t.questionCount ? `${t.questionCount} questions` : null].filter(Boolean).join(" · ");
+        const tier = t.hlOnly ? "HL" : t.bcOnly ? "BC" : t.higherTierOnly ? "Higher" : null;
+        const here = t.id === current;
+        return (
+          <li key={t.id}>
+            <Link
+              href={topicPath(courseId, t)}
+              data-nl-topic={topicKey(courseId, t.id)}
+              data-q={t.questionCount}
+              aria-current={here ? "page" : undefined}
+              className={cn("group flex items-center gap-3 px-4 transition-colors hover:bg-accent-soft/50", compact ? "min-h-[52px] py-2" : "min-h-[62px] py-2.5", here && "bg-accent-soft/70")}
+            >
+              <span className="nl-node" data-empty={!t.note && !t.questionCount ? "" : undefined}>
+                <Check strokeWidth={4} />
               </span>
-            )}
-            {compact && t.questionCount > 0 && <span className="shrink-0 text-[12.5px] text-muted-foreground">{t.questionCount} Qs</span>}
-          </Link>
-        </li>
-      ))}
-    </ul>
+              <span className="w-[46px] shrink-0 text-[13.5px] font-black tabular-nums text-accent">{t.code}</span>
+              <span className="min-w-0 flex-1">
+                <span className={cn("block font-extrabold leading-snug text-foreground", compact ? "text-[15px]" : "text-[16px]")}>{t.name}</span>
+                <span className="mt-0.5 flex flex-wrap items-center gap-x-1.5 text-[13px] font-semibold text-muted-foreground">
+                  {has || "Coming soon"}
+                  {tier && <span className="rounded-full bg-muted px-1.5 py-px text-[11.5px] font-extrabold">{tier}</span>}
+                </span>
+              </span>
+              <ChevronRight className="size-4.5 shrink-0 text-faint transition-transform group-hover:translate-x-0.5 group-hover:text-accent" aria-hidden="true" />
+            </Link>
+          </li>
+        );
+      })}
+    </ol>
   );
 }

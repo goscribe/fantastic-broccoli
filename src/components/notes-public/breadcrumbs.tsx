@@ -7,13 +7,17 @@ export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
   return (
     <>
       <script {...jsonLdScriptProps(breadcrumbJsonLd(siteUrl, crumbs))} />
-      <nav aria-label="Breadcrumb" className="text-[13px] font-semibold text-faint">
-        <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
+      <nav aria-label="Breadcrumb" className="-mx-4 overflow-x-auto px-4 text-[13.5px] font-bold text-muted-foreground [scrollbar-width:none] sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden">
+        <ol className="flex w-max items-center gap-x-1.5 whitespace-nowrap">
           {crumbs.map((c, i) => (
             <li key={c.path} className="flex items-center gap-1.5">
-              {i > 0 && <span aria-hidden="true">›</span>}
+              {i > 0 && (
+                <span aria-hidden="true" className="text-faint">
+                  ›
+                </span>
+              )}
               {i === crumbs.length - 1 ? (
-                <span aria-current="page" className="text-muted-foreground">
+                <span aria-current="page" className="text-foreground">
                   {c.name}
                 </span>
               ) : (

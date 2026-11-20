@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useAuthUser } from "@/lib/api/auth";
 import { trackNoteEvent } from "@/lib/api/public-notes";
 import { shouldPrompt, topicKey, topicScore, totalAnswered } from "@/lib/notes-public/progress";
+import { Check, Flame, RotateCcw, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usePracticeProgress } from "./practice-store";
 
@@ -13,7 +14,8 @@ import { usePracticeProgress } from "./practice-store";
  * The interactive layer of a public topic-note page. Everything a crawler
  * needs (stems, options, answers, explanations) is server-rendered and passed
  * in as nodes; this only adds tapping, feedback, the running score, progress
- * in localStorage, "next question", and the soft signup prompt.
+ * in localStorage, "next question", and the soft signup prompt (an inline
+ * card after the question just answered, so it never covers the page).
  */
 
 interface PracticeCtx {
@@ -64,13 +66,13 @@ export function PracticeProvider({
   return (
     <Ctx.Provider value={value}>
       {children}
-      <SignupPrompt />
     </Ctx.Provider>
   );
 }
 
 const LETTERS = ["A", "B", "C", "D", "E", "F"];
 const DIFFICULTY_LABEL = { easy: "Easy", medium: "Medium", hard: "Hard" } as const;
+const DIFFICULTY_LEVEL = { easy: 1, medium: 2, hard: 3 } as const;
 
 export interface CardProps {
   id: string;
@@ -93,14 +95,32 @@ function scrollToNext(ids: string[], from: string, answered: Record<string, numb
   if (next) (el?.querySelector("button[data-option]") as HTMLButtonElement | null)?.focus({ preventScroll: true });
 }
 
+/** A small burst of purple and orange sparkles for a right answer (decorative; off under reduced motion). */
+function Sparkles() {
+  return (
+    <span className="pointer-events-none absolute left-9 top-9" aria-hidden="true">
+      {[0, 45, 90, 135, 180, 225, 270, 315].map((a, i) => (
+        <span
+          key={a}
+          className="nl-sparkle size-2 rounded-full"
+          style={{ "--a": `${a}deg`, "--d": `${38 + (i % 3) * 10}px`, background: i % 2 ? "var(--flame)" : "var(--accent)", animationDelay: `${i * 18}ms` } as React.CSSProperties}
+        />
+      ))}
+    </span>
+  );
+}
+
 export function PracticeCard(p: CardProps) {
   const ctx = useCtx();
-  const { progress, answer } = usePracticeProgress();
+  const { progress, answer, lastAnswered } = usePracticeProgress();
   const answers = progress.topics[ctx.key]?.answers ?? {};
   const chosen = answers[p.id];
   const answered = chosen !== undefined;
   const right = answered && chosen === p.correctIndex;
   const detailsRef = useRef<HTMLDetailsElement>(null);
+  // Answered just now (as opposed to restored from an earlier visit): play the feedback motion.
+  const fresh = answered && lastAnswered === p.id;
+  const inline = p.placement === "inline";
 
   useEffect(() => {
     if (answered && detailsRef.current) detailsRef.current.open = true;
@@ -116,59 +136,68 @@ export function PracticeCard(p: CardProps) {
       answered: score.answered + 1,
       totalAnswered: totalAnswered(progress) + 1,
       difficulty: p.difficulty,
-      placement: p.placement === "inline" ? "inline" : undefined,
+      placement: inline ? "inline" : undefined,
     });
   };
+  const left = ctx.ids.some((id) => id !== p.id && !(id in answers));
 
   return (
-    <div
-      id={`pq-${p.id}`}
-      className={cn(
-        "scroll-mt-24 rounded-2xl border bg-card px-4 py-4 sm:px-5",
-        p.placement === "inline" ? "border-accent/30" : "border-border",
-      )}
-    >
-      <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px] font-semibold text-muted-foreground">
-        <span>{p.placement === "inline" ? "Quick check" : `Question ${p.number}`}</span>
-        <span aria-hidden="true">·</span>
-        <span>{DIFFICULTY_LABEL[p.difficulty]}</span>
-        {p.commandTerm && (
+    <div id={`pq-${p.id}`} className={cn("scroll-mt-24", inline ? "nl-panel !rounded-[28px] px-3.5 pb-4 pt-4 sm:px-5 sm:pb-5" : "nl-card px-3.5 pb-4 pt-4 sm:px-5 sm:pb-5")} data-nl-reveal="">
+      <div className="flex items-center gap-2.5 px-0.5">
+        {inline ? (
           <>
-            <span aria-hidden="true">·</span>
-            <span>{p.commandTerm}</span>
+            <Image src="/design/cat2-think.png" alt="" width={230} height={259} unoptimized loading="lazy" className="-my-2 h-[58px] w-auto shrink-0" />
+            <div className="min-w-0">
+              <p className="text-[17px] font-extrabold leading-tight text-foreground">Quick check</p>
+              <p className="text-[13px] font-bold text-accent">Did that land? One question.</p>
+            </div>
           </>
+        ) : (
+          <span className="grid size-9 shrink-0 place-items-center rounded-full bg-accent-soft text-[15px] font-black tabular-nums text-accent" aria-label={`Question ${p.number}`}>
+            {p.number}
+          </span>
         )}
-        <span className="ml-auto tabular-nums">[{p.marks}]</span>
-      </p>
-      <div className="mt-2 text-[16px] font-semibold leading-snug sm:text-[16.5px]">{p.stem}</div>
-      <ol className="mt-3 flex flex-col gap-2" aria-label="Options">
+        <p className={cn("flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-bold text-muted-foreground", inline ? "ml-auto justify-end" : "min-w-0 flex-1")}>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="inline-flex items-end gap-[3px]" aria-hidden="true">
+              {[1, 2, 3].map((n) => (
+                <span key={n} className={cn("w-[5px] rounded-full", n <= DIFFICULTY_LEVEL[p.difficulty] ? "bg-accent" : "bg-[var(--edge)]")} style={{ height: 5 + n * 3 }} />
+              ))}
+            </span>
+            {DIFFICULTY_LABEL[p.difficulty]}
+          </span>
+          {p.commandTerm && !inline && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span>{p.commandTerm}</span>
+            </>
+          )}
+          {!inline && (
+            <span className="ml-auto rounded-full bg-muted px-2.5 py-1 text-[12.5px] tabular-nums">
+              {p.marks} {p.marks === 1 ? "mark" : "marks"}
+            </span>
+          )}
+        </p>
+      </div>
+      <div className="mt-3 px-0.5 text-[18px] font-extrabold leading-[1.35] text-foreground sm:text-[19px]">{p.stem}</div>
+      <ol className="mt-3.5 flex flex-col gap-2.5" aria-label="Options">
         {p.options.map((o, i) => {
           const isKey = i === p.correctIndex;
           const isChosen = chosen === i;
+          const state = !answered ? "idle" : isKey ? "right" : isChosen ? "wrong" : "dim";
           return (
             <li key={i}>
               <button
                 type="button"
                 data-option
+                data-state={state}
                 onClick={() => pick(i)}
                 aria-disabled={answered}
                 aria-pressed={isChosen}
-                className={cn(
-                  "flex min-h-12 w-full items-start gap-3 rounded-xl border px-3 py-2.5 text-left text-[15.5px] leading-snug transition-colors",
-                  !answered && "border-border hover:border-accent hover:bg-accent-soft/40 active:bg-accent-soft",
-                  answered && isKey && "border-[#16a34a] bg-[#16a34a]/10",
-                  answered && isChosen && !isKey && "border-[#dc2626] bg-[#dc2626]/10",
-                  answered && !isKey && !isChosen && "border-border opacity-70",
-                )}
+                className={cn("nl-opt", fresh && isChosen && (isKey ? "nl-pop" : "nl-shake"))}
               >
-                <span
-                  className={cn(
-                    "mt-px flex size-6 shrink-0 items-center justify-center rounded-full border text-[12.5px] font-bold",
-                    answered && isKey ? "border-[#16a34a] bg-[#16a34a] text-white" : answered && isChosen ? "border-[#dc2626] bg-[#dc2626] text-white" : "border-border-strong text-muted-foreground",
-                  )}
-                  aria-hidden="true"
-                >
-                  {LETTERS[i]}
+                <span className="nl-letter" aria-hidden="true">
+                  {state === "right" ? <Check className="size-4" strokeWidth={3.5} /> : state === "wrong" ? <X className="size-4" strokeWidth={3.5} /> : LETTERS[i]}
                 </span>
                 <span className="min-w-0 flex-1">{o}</span>
                 {answered && isKey && <span className="sr-only"> (correct answer)</span>}
@@ -178,69 +207,87 @@ export function PracticeCard(p: CardProps) {
           );
         })}
       </ol>
-      <div aria-live="polite">
+      <div className={cn("relative", answered && "mt-4 rounded-[22px] px-4 pb-4 pt-3.5", answered && (right ? "bg-[var(--ok-soft)]" : "bg-[var(--no-soft)]"), fresh && "nl-up")}>
+        <div aria-live="polite">
+          {answered && (
+            <div className="flex items-center gap-3">
+              {fresh && right && <Sparkles />}
+              <Image src={right ? "/design/cat2-cheer.png" : "/design/cat2-think.png"} alt="" width={244} height={288} unoptimized className="h-[58px] w-auto shrink-0" />
+              <p className={cn("text-[19px] font-extrabold leading-tight", right ? "text-[var(--ok-ink)]" : "text-[var(--no-ink)]")}>
+                {right ? "Correct!" : `Not quite. The answer is ${LETTERS[p.correctIndex]}.`}
+              </p>
+            </div>
+          )}
+        </div>
+        {/* In the HTML for everyone (and readable without JavaScript); opens once answered. */}
+        <details ref={detailsRef} className={cn("group", answered ? "mt-2" : "mt-3")}>
+          <summary
+            className={cn(
+              "inline-flex min-h-10 cursor-pointer list-none items-center gap-1 px-0.5 text-[14.5px] font-extrabold text-accent hover:text-accent-dim [&::-webkit-details-marker]:hidden",
+              answered && "hidden",
+            )}
+          >
+            Show answer and explanation
+          </summary>
+          <div className={cn("text-[16px] leading-[1.55] text-foreground", !answered && "mt-1 rounded-[20px] bg-white/80 px-4 py-3")}>
+            <p className="text-[13px] font-extrabold text-muted-foreground">
+              Answer: {LETTERS[p.correctIndex]} · Worked explanation
+            </p>
+            <div className="mt-1">{p.explanation}</div>
+          </div>
+        </details>
         {answered && (
-          <p className={cn("mt-3 text-[15px] font-bold", right ? "text-[#15803d]" : "text-[#b91c1c]")}>
-            {right ? "Correct!" : `Not quite — the answer is ${LETTERS[p.correctIndex]}.`}
-          </p>
+          <button type="button" onClick={() => scrollToNext(ctx.ids, p.id, { ...answers, [p.id]: chosen })} className="nl-btn mt-4 w-full sm:w-auto">
+            {left ? "Next question" : "See your score"} <span aria-hidden="true">↓</span>
+          </button>
         )}
       </div>
-      {/* In the HTML for everyone (and readable without JavaScript); opens once answered. */}
-      <details ref={detailsRef} className="group mt-2">
-        <summary
-          className={cn(
-            "inline-flex min-h-9 cursor-pointer list-none items-center gap-1 text-[14px] font-semibold text-accent [&::-webkit-details-marker]:hidden",
-            answered && "hidden",
-          )}
-        >
-          Show answer and explanation
-        </summary>
-        <div className="mt-1 rounded-xl bg-muted/50 px-4 py-3 text-[15px] leading-snug">
-          <p className="text-[12.5px] font-semibold text-muted-foreground">
-            Answer: {LETTERS[p.correctIndex]} · Worked explanation
-          </p>
-          <div className="mt-1">{p.explanation}</div>
-        </div>
-      </details>
-      {answered && (
-        <button
-          type="button"
-          onClick={() => scrollToNext(ctx.ids, p.id, { ...answers, [p.id]: chosen })}
-          className="mt-3 inline-flex h-10 items-center gap-1.5 rounded-xl bg-accent px-4 text-[14.5px] font-semibold text-white hover:bg-accent-dim"
-        >
-          Next question <span aria-hidden="true">↓</span>
-        </button>
-      )}
+      {lastAnswered === p.id && <SignupNudge className="mt-4" />}
     </div>
   );
 }
 
-/** Running score: sticky at the top of the practice section. */
+/** Running score: sticky at the top of the practice section. One dot per question, and a run of right answers. */
 export function PracticeScore({ inlineCount }: { inlineCount: number }) {
   const ctx = useCtx();
-  const { progress, reset } = usePracticeProgress();
+  const { progress, reset, streak } = usePracticeProgress();
   const s = topicScore(progress, ctx.key, ctx.ids);
-  const pct = s.total ? Math.round((s.answered / s.total) * 100) : 0;
+  const t = progress.topics[ctx.key];
+  const firstOpen = ctx.ids.find((id) => !(t && id in t.answers));
   return (
-    <div className="sticky top-0 z-10 -mx-4 border-b border-border bg-background/95 px-4 py-2.5 backdrop-blur sm:top-2 sm:mx-0 sm:rounded-xl sm:border sm:px-4">
-      <div className="flex items-center gap-3 text-[14px] font-semibold">
-        <span className="tabular-nums">
-          Score {s.correct}/{s.answered}
-        </span>
-        <span className="text-muted-foreground tabular-nums">
-          · {s.answered} of {s.total} answered
-        </span>
+    <div className="nl-card sticky top-2 z-10 !rounded-[24px] px-4 py-3">
+      <div className="flex min-h-8 items-center gap-2.5">
+        <p className="text-[15px] font-extrabold tabular-nums">
+          <span className="text-[22px] font-black leading-none text-accent">{s.correct}</span>
+          <span className="text-muted-foreground"> right</span>
+          <span className="ml-2 font-bold text-muted-foreground">
+            {s.answered} of {s.total} answered
+          </span>
+        </p>
+        {streak >= 2 && (
+          <span key={streak} className="nl-pop inline-flex items-center gap-1 rounded-full bg-[var(--flame-soft)] px-2.5 py-1 text-[13px] font-extrabold text-[var(--flame-ink)]">
+            <Flame className="size-4 fill-[var(--flame)] text-[var(--flame)]" aria-hidden="true" />
+            {streak} in a row
+          </span>
+        )}
         {s.answered > 0 && (
-          <button type="button" onClick={() => reset(ctx.key)} className="ml-auto text-[13px] font-semibold text-accent hover:text-accent-dim">
-            Start again
+          <button type="button" onClick={() => reset(ctx.key)} className="ml-auto inline-flex min-h-8 items-center gap-1 text-[13px] font-extrabold text-accent hover:text-accent-dim" aria-label="Start again">
+            <RotateCcw className="size-3.5" /> <span className="hidden sm:inline">Start again</span>
           </button>
         )}
       </div>
-      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted" aria-hidden="true">
-        <div className="h-full rounded-full bg-accent transition-[width]" style={{ width: `${pct}%` }} />
-      </div>
+      <ol className="mt-2 flex flex-wrap gap-1.5" aria-hidden="true">
+        {ctx.ids.map((id) => {
+          const st = t && id in t.answers ? (t.correct[id] ? "right" : "wrong") : id === firstOpen ? "next" : "open";
+          return (
+            <li key={id} className="nl-dot" data-s={st}>
+              {st === "right" ? <Check strokeWidth={4} /> : st === "wrong" ? <X strokeWidth={4} /> : null}
+            </li>
+          );
+        })}
+      </ol>
       {inlineCount > 0 && s.answered === 0 && (
-        <p className="mt-1.5 text-[12.5px] text-muted-foreground">Includes the {inlineCount === 1 ? "quick check" : `${inlineCount} quick checks`} in the note above.</p>
+        <p className="mt-2 text-[13px] font-semibold text-muted-foreground">Includes the {inlineCount === 1 ? "quick check" : `${inlineCount} quick checks`} in the note above.</p>
       )}
     </div>
   );
@@ -249,24 +296,39 @@ export function PracticeScore({ inlineCount }: { inlineCount: number }) {
 /** Shown when every question is answered: the score and where to go next. */
 export function PracticeDone({ nextTopic, quick5 }: { nextTopic: ReactNode; quick5: ReactNode }) {
   const ctx = useCtx();
-  const { progress } = usePracticeProgress();
+  const { progress, lastAnswered } = usePracticeProgress();
   const s = topicScore(progress, ctx.key, ctx.ids);
+  const done = s.total > 0 && s.answered === s.total;
+  const ratio = s.total ? s.correct / s.total : 0;
   return (
     <div id="practice-score" className="scroll-mt-24">
-      {s.total > 0 && s.answered === s.total && (
-        <div className="rounded-2xl bg-accent-soft px-4 py-5 sm:px-6">
-          <div className="flex items-center gap-4">
-            <Image src={s.correct / s.total >= 0.7 ? "/design/cat2-trophy.png" : "/design/cat2-think.png"} alt="" width={72} height={80} unoptimized className="h-20 w-auto shrink-0" />
-            <div>
-              <p className="text-[20px] font-bold leading-tight">
-                You scored {s.correct}/{s.total}
-              </p>
-              <p className="mt-1 text-[14.5px] text-muted-foreground">
-                {s.correct === s.total ? "Full marks. On to the next topic." : s.correct / s.total >= 0.7 ? "Strong. Review the ones you missed, then move on." : "Reread the sections above, then try again."}
-              </p>
-            </div>
+      {/* After a reload there is no "question just answered" to sit under, so the prompt waits here. */}
+      {!lastAnswered && <SignupNudge className="mb-4" />}
+      {done && (
+        <div className="nl-panel nl-up px-5 pb-6 pt-7 text-center sm:px-8">
+          <div className="relative mx-auto grid size-[132px] place-items-center rounded-full bg-white">
+            {ratio >= 0.7 && (
+              <span className="absolute inset-0" aria-hidden="true">
+                {[0, 40, 80, 120, 160, 200, 240, 280, 320].map((a, i) => (
+                  <span
+                    key={a}
+                    className="nl-sparkle size-2.5 rounded-full"
+                    style={{ "--a": `${a}deg`, "--d": `${84 + (i % 3) * 14}px`, background: i % 2 ? "var(--flame)" : "var(--accent)", animationDelay: `${150 + i * 25}ms` } as React.CSSProperties}
+                  />
+                ))}
+              </span>
+            )}
+            <Image src={ratio >= 0.7 ? "/design/cat2-trophy.png" : "/design/cat2-think.png"} alt="" width={276} height={261} unoptimized className="nl-cat-in relative h-[112px] w-auto" />
           </div>
-          <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+          <p className="mt-4 text-[15px] font-extrabold text-accent">Practice complete</p>
+          <p className="mt-1 text-[44px] font-black leading-none tracking-[-0.03em] tabular-nums text-foreground">
+            {s.correct}
+            <span className="text-[26px] text-muted-foreground"> / {s.total}</span>
+          </p>
+          <p className="mx-auto mt-2.5 max-w-[420px] text-[16.5px] font-semibold leading-snug text-[#3b3650]">
+            {s.correct === s.total ? "Full marks. On to the next topic." : ratio >= 0.7 ? "Strong. Look over the ones you missed, then move on." : "Reread the parts above, then have another go."}
+          </p>
+          <div className="mx-auto mt-5 flex max-w-[460px] flex-col gap-3">
             {nextTopic}
             {quick5}
           </div>
@@ -276,8 +338,8 @@ export function PracticeDone({ nextTopic, quick5 }: { nextTopic: ReactNode; quic
   );
 }
 
-/** Soft, dismissible prompt after a few answers. Never blocks the page. */
-function SignupPrompt() {
+/** Soft, dismissible prompt after a few answers: a card in the flow of the page, never over it. */
+function SignupNudge({ className }: { className?: string }) {
   const ctx = useCtx();
   const { progress, dismissPrompt } = usePracticeProgress();
   const s = topicScore(progress, ctx.key, ctx.ids);
@@ -292,41 +354,32 @@ function SignupPrompt() {
   }, [show, ctx.courseId, ctx.topicId, s.answered]);
   if (!show) return null;
   return (
-    <div
-      role="dialog"
-      aria-modal="false"
-      aria-labelledby="signup-prompt-title"
-      className="fixed inset-x-3 bottom-3 z-30 rounded-2xl border border-border bg-card p-4 shadow-[0_8px_30px_rgba(20,10,60,0.18)] sm:inset-x-auto sm:right-5 sm:bottom-5 sm:w-[360px]"
-    >
-      <button type="button" onClick={dismissPrompt} aria-label="Dismiss" className="absolute right-2 top-2 flex size-9 items-center justify-center rounded-full text-muted-foreground hover:bg-muted">
-        <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-          <path d="M18 6 6 18M6 6l12 12" />
-        </svg>
+    <aside aria-labelledby="signup-prompt-title" className={cn("nl-up relative rounded-[24px] border-2 border-dashed border-accent/35 bg-white px-4 pb-4 pt-4", className)}>
+      <button type="button" onClick={dismissPrompt} aria-label="Dismiss" className="absolute right-1.5 top-1.5 flex size-10 items-center justify-center rounded-full text-muted-foreground hover:bg-muted">
+        <X className="size-4" />
       </button>
-      <div className="flex gap-3 pr-6">
-        <Image src="/design/cat2-cheer.png" alt="" width={56} height={66} unoptimized className="h-16 w-auto shrink-0" />
+      <div className="flex items-center gap-3 pr-8">
+        <Image src="/design/cat2-wave.png" alt="" width={240} height={255} unoptimized className="h-[60px] w-auto shrink-0" />
         <div>
-          <p id="signup-prompt-title" className="text-[16px] font-bold leading-snug">
+          <p id="signup-prompt-title" className="text-[17px] font-extrabold leading-snug">
             {s.correct * 2 >= s.answered ? `${s.correct}/${s.answered} so far. Keep your progress?` : `${s.answered} questions done. Keep your progress?`}
           </p>
-          <p className="mt-1 text-[14px] leading-snug text-muted-foreground">
-            Free account: save your scores, and get questions made from your own notes and slides.
-          </p>
+          <p className="mt-0.5 text-[14.5px] font-semibold leading-snug text-muted-foreground">Free account: save your scores, and get questions made from your own notes and slides.</p>
         </div>
       </div>
-      <div className="mt-3 flex gap-2">
+      <div className="mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-2">
         <Link
           href={ctx.signupHref}
           onClick={() => trackNoteEvent("notes.signup_clicked", ctx.courseId, ctx.topicId, { placement: "prompt", answered: s.answered })}
-          className="inline-flex h-10 flex-1 items-center justify-center rounded-xl bg-accent px-4 text-[14.5px] font-semibold text-white hover:bg-accent-dim"
+          className="nl-btn nl-btn-sm flex-1 sm:flex-none"
         >
           Create a free account
         </Link>
-        <button type="button" onClick={dismissPrompt} className="h-10 rounded-xl px-3 text-[14.5px] font-semibold text-muted-foreground hover:bg-muted">
+        <button type="button" onClick={dismissPrompt} className="min-h-10 px-1 text-[14.5px] font-extrabold text-muted-foreground hover:text-foreground">
           Not now
         </button>
       </div>
-    </div>
+    </aside>
   );
 }
 
@@ -334,14 +387,10 @@ function SignupPrompt() {
  * "Start a Quick 5 on this topic": signed-in learners start it in the app;
  * visitors go to sign up (a Quick 5 needs an account).
  */
-export function StartQuick5({ courseId, topicId, level, placement, variant = "primary" }: { courseId: string; topicId: string; level?: "SL" | "HL"; placement: "header" | "practice_end" | "note_cta"; variant?: "primary" | "secondary" }) {
+export function StartQuick5({ courseId, topicId, level, placement, variant = "primary", className }: { courseId: string; topicId: string; level?: "SL" | "HL"; placement: "header" | "practice_end" | "note_cta"; variant?: "primary" | "secondary"; className?: string }) {
   const ctx = useContext(Ctx);
   const { user } = useAuthUser();
   const [busy, setBusy] = useState(false);
-  const cls = cn(
-    "inline-flex h-11 items-center justify-center gap-2 rounded-xl px-5 text-[15px] font-semibold transition-colors disabled:opacity-60",
-    variant === "primary" ? "bg-accent text-white hover:bg-accent-dim" : "border border-border-strong bg-card hover:border-accent hover:text-accent",
-  );
   const onClick = async (e: React.MouseEvent) => {
     trackNoteEvent("notes.quick5_clicked", courseId, topicId, { placement });
     if (!user) return; // follow the link to sign up
@@ -358,7 +407,7 @@ export function StartQuick5({ courseId, topicId, level, placement, variant = "pr
     }
   };
   return (
-    <a href={ctx?.signupHref ?? "/signup?from=notes"} onClick={onClick} className={cls} aria-busy={busy}>
+    <a href={ctx?.signupHref ?? "/signup?from=notes"} onClick={onClick} className={cn(variant === "primary" ? "nl-btn" : "nl-btn-ghost", busy && "opacity-60", className)} aria-busy={busy}>
       {busy ? "Starting…" : "Start a Quick 5 on this topic"}
       {!busy && <span aria-hidden="true">→</span>}
     </a>

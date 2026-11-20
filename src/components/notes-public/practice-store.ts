@@ -18,6 +18,9 @@ import {
  */
 
 let state: PracticeProgress | null = null;
+// This visit only (not stored): the run of correct answers and the question answered last.
+let session: { streak: number; last: string | null } = { streak: 0, last: null };
+const SERVER_SESSION = session;
 const listeners = new Set<() => void>();
 const SERVER = emptyProgress();
 
@@ -45,9 +48,16 @@ function subscribe(l: () => void) {
 export function usePracticeProgress() {
   const progress = useSyncExternalStore(subscribe, load, () => SERVER);
   const answer = useCallback((key: string, questionId: string, choice: number, correct: boolean) => {
-    set(recordAnswer(load(), key, questionId, choice, correct, Date.now()));
+    const before = load();
+    const next = recordAnswer(before, key, questionId, choice, correct, Date.now());
+    if (next !== before) session = { streak: correct ? session.streak + 1 : 0, last: questionId };
+    set(next);
   }, []);
-  const reset = useCallback((key: string) => set(resetTopic(load(), key)), []);
+  const reset = useCallback((key: string) => {
+    session = { streak: 0, last: null };
+    set(resetTopic(load(), key));
+  }, []);
   const dismissPrompt = useCallback(() => set({ ...load(), promptDismissedAt: Date.now() }), []);
-  return { progress, answer, reset, dismissPrompt };
+  const run = useSyncExternalStore(subscribe, () => session, () => SERVER_SESSION);
+  return { progress, answer, reset, dismissPrompt, streak: run.streak, lastAnswered: run.last };
 }
