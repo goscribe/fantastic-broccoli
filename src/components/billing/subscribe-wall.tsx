@@ -18,6 +18,8 @@ import { hasPlanAccess } from "@/lib/plan-access";
 import { useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
+import { AskParentBand, PassOptions } from "./pass-options";
+import { AskParentDialog } from "./ask-parent-dialog";
 
 
 /** Routes where the wall must never render (billing surfaces, verification). */
@@ -74,6 +76,7 @@ export function SubscribeWall() {
   const [open, setOpen] = useState<WallVariant | null>(null);
   const [reason, setReason] = useState<string | null>(null);
   const [switching, setSwitching] = useState<string | null>(null);
+  const [asking, setAsking] = useState(false);
 
   const exempt = EXEMPT_PREFIXES.some((p) => pathname.startsWith(p));
 
@@ -155,8 +158,11 @@ export function SubscribeWall() {
     }
   };
 
+  // Monthly plans as cards; exam passes ("pay once") as their own block below.
+  const monthly = plans.filter((p) => p.kind !== "pass");
+  const passes = plans.filter((p) => p.kind === "pass");
   // Students are price-sensitive: lead with the cheapest paid plan.
-  const featured = [...plans].sort((a, b) => a.priceDollars - b.priceDollars)[0];
+  const featured = [...monthly].sort((a, b) => a.priceDollars - b.priceDollars)[0];
   const freeCaps = caps?.caps;
   const trialDays = caps?.trialDays ?? 0;
   const postSession = open === "post-session";
@@ -174,9 +180,9 @@ export function SubscribeWall() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="subscribe-wall-title"
-      className="fixed inset-0 z-[200] flex items-center justify-center overflow-y-auto bg-background/95 px-4 py-8 backdrop-blur-md"
+      className="fixed inset-0 z-[200] flex justify-center overflow-y-auto bg-background/95 px-4 py-8 backdrop-blur-md"
     >
-      <div className="w-full max-w-4xl">
+      <div className="my-auto w-full max-w-4xl">
         <div className="text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent">
             {postSession ? (
@@ -225,10 +231,10 @@ export function SubscribeWall() {
         <div
           className={cn(
             "mt-8 grid gap-4",
-            plans.length > 1 ? "sm:grid-cols-2" : "sm:max-w-md sm:mx-auto",
+            monthly.length > 1 ? "sm:grid-cols-2" : "sm:max-w-md sm:mx-auto",
           )}
         >
-          {plans.map((plan) => {
+          {monthly.map((plan) => {
             const isFeatured = plan.id === featured?.id;
             return (
               <div
@@ -292,6 +298,9 @@ export function SubscribeWall() {
           })}
         </div>
 
+        <PassOptions className="mt-4" passes={passes} busyId={switching} onBuy={choose} />
+        <AskParentBand className="mt-4" onOpen={() => setAsking(true)} />
+
         <p className="mt-4 text-center text-xs text-faint">
           {trialDays > 0
             ? `Card required · $0 today · billing starts after ${trialDays} days unless you cancel · secure hosted checkout`
@@ -308,6 +317,14 @@ export function SubscribeWall() {
           </button>
         </div>
       </div>
+      {asking && (
+        <AskParentDialog
+          plans={[...passes, ...monthly.filter((p) => p.id === featured?.id)]}
+          defaultPlanId={passes[0]?.id ?? featured?.id}
+          defaultFirstName={user.name.split(" ")[0] ?? ""}
+          onClose={() => setAsking(false)}
+        />
+      )}
     </div>
   );
 }

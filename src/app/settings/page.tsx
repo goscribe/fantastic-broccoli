@@ -42,6 +42,8 @@ import {
   type TranslationKey,
 } from "@/lib/i18n";
 import "@/lib/i18n/settings";
+import "@/lib/i18n/billing";
+import { formatPassDate } from "@/lib/pass";
 import "@/lib/i18n/growth";
 import { InviteCard } from "@/components/growth/invite-card";
 import { ReminderSettings } from "@/components/reminders/reminder-settings";
@@ -110,6 +112,7 @@ function PlanCard({
 }) {
   const { t, locale } = useI18n();
   const isFree = plan.priceDollars === 0;
+  const pass = plan.kind === "pass";
   const cancelAt = subscription?.cancelAt ?? null;
   const endsOn = cancelAt ? formatDate(cancelAt, locale) : null;
   return (
@@ -136,7 +139,7 @@ function PlanCard({
         {plan.priceDollars > 0 && (
           <span className="text-[12px] font-normal text-faint">
             {" "}
-            {t("set.perMonth")}
+            {pass ? t("set.once") : t("set.perMonth")}
           </span>
         )}
       </p>
@@ -157,7 +160,15 @@ function PlanCard({
         </li>
       </ul>
       <div className="mt-auto pt-4">
-        {plan.isActive && !isFree && endsOn ? (
+        {plan.isActive && pass ? (
+          // A pass just ends on its date: nothing to cancel or resume.
+          <p className="text-[12px] text-muted-foreground">
+            {t("set.passUntil").replace(
+              "{date}",
+              formatPassDate(subscription?.isPass ? subscription.currentPeriodEnd : (plan.accessUntil ?? ""), locale),
+            )}
+          </p>
+        ) : plan.isActive && !isFree && endsOn ? (
           <div className="space-y-2">
             <p className="text-[12px] text-muted-foreground">
               {t("set.endsOn").replace("{date}", endsOn)}

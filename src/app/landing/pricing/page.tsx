@@ -5,7 +5,7 @@ import { absoluteUrl } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/graphics/marketing-art";
 import { GlowField } from "@/components/graphics/landing-art";
-import { plans } from "../data";
+import { passFeatures, passes, plans } from "../data";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
 
 export const metadata: Metadata = {
@@ -80,6 +80,49 @@ export default function LandingPricingPage() {
                 </Link>
               </div>
             ))}
+          </div>
+          <div className="mt-8 rounded-2xl border border-border bg-card p-6">
+            <div className="flex flex-col gap-6 md:flex-row md:items-start">
+              <div className="md:w-1/3">
+                <p className="text-sm font-semibold text-accent">Pay once — until your exams</p>
+                <h2 className="mt-1 text-2xl font-bold tracking-tight">
+                  Exam passes
+                </h2>
+                <ul className="mt-4 space-y-2.5">
+                  {passFeatures.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-2.5 text-sm text-muted-foreground"
+                    >
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="grid flex-1 gap-4 sm:grid-cols-2">
+                {passes.map((pass) => (
+                  <div
+                    key={pass.name}
+                    className="flex flex-col rounded-2xl border border-border bg-background p-5"
+                  >
+                    <p className="text-sm font-semibold">{pass.name}</p>
+                    <p className="mt-3 text-3xl font-bold tracking-tight">
+                      {pass.price}
+                    </p>
+                    <p className="text-sm text-muted-foreground">{pass.note}</p>
+                    <p className="mt-3 flex-1 text-sm text-muted-foreground">
+                      {pass.until}
+                    </p>
+                    <Link href="/signup" className="mt-5">
+                      <Button className="w-full" variant="outline">
+                        Get the pass
+                      </Button>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
           <p className="mt-6 text-center text-xs text-faint">
             Manage or switch plans anytime from the{" "}

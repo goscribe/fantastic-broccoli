@@ -33,6 +33,14 @@ export const faqs = [
     q: "How much does it cost?",
     a: BILLING_PAUSED
       ? "Right now every account has Pro for free: card payments are paused, so nobody is being charged. Normally Scribe is free to start (two subjects, three full sessions and a free Quick 5 every day), with Starter at $5/mo and Pro at $19/mo."
-      : "Free to start, no card needed: two subjects, three full sessions and a free Quick 5 every day. Starter ($5/mo) and Pro ($19/mo) remove the limits — see Pricing.",
+      : "Free to start, no card needed: two subjects, three full sessions and a free Quick 5 every day. Starter ($5/mo) and Pro ($19/mo) remove the limits. Or pay once: $29 until your 2027 exams, or $59 until graduation in 2028 — no subscription. See Pricing.",
+  },
+  {
+    q: "I don't have a card. Can a parent pay?",
+    a: "Yes. Pick a plan and tap “Ask a parent to pay”: you get a secure link to send by WhatsApp, Messages or email. They see what it's for, pay on our payment provider's page without making an account, and your account upgrades straight away. Both of you get an email. The link works once and expires after 14 days.",
+  },
+  {
+    q: "Does the exam pass renew?",
+    a: "No. A pass is one payment: you get Starter (600 tokens a month, refreshed monthly) until 15 July of your exam year, then you move back to the free plan and keep everything you made. We email you two weeks before it ends. Changed your mind? Full refund within 14 days — email support@scribe.study.",
   },
 ];
