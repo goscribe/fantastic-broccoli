@@ -82,19 +82,21 @@ export function funnelPayload(
 
 export function track(event: FunnelEvent, props: FunnelProps = {}, workspaceId?: string): void {
   if (typeof window === "undefined" || !apiUrl) return;
-  const now = Date.now();
-  const body = funnelPayload(
-    event,
-    props,
-    {
-      now,
-      viewportWidth: window.innerWidth,
-      touch: typeof window.matchMedia === "function" ? window.matchMedia("(pointer: coarse)").matches : undefined,
-      sinceFirstScreen: msSinceFirstScreen(now),
-    },
-    workspaceId,
-  );
+  // Fire-and-forget, and nothing here may throw: callers track right before a
+  // navigation or upload, and a failed or rejected (400) event must never stop the tap.
   try {
+    const now = Date.now();
+    const body = funnelPayload(
+      event,
+      props,
+      {
+        now,
+        viewportWidth: window.innerWidth,
+        touch: typeof window.matchMedia === "function" ? window.matchMedia("(pointer: coarse)").matches : undefined,
+        sinceFirstScreen: msSinceFirstScreen(now),
+      },
+      workspaceId,
+    );
     void fetch(`${apiUrl}/trpc/activity.track`, {
       method: "POST",
       credentials: "include",

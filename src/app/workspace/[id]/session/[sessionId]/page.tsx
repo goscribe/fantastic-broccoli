@@ -992,7 +992,7 @@ export default function SessionDetailPage() {
               {activeActivity ? (
                 <>
                   <div className="flex flex-wrap items-center justify-between gap-3">
-                    <span className="inline-flex items-center rounded-lg bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent-dim">
+                    <span data-scroll-line className="inline-flex items-center rounded-lg bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent-dim">
                       {[t(ACTIVITY_TYPE_LABELS[activeActivity.type] ?? "session.typeActivity"), t(`session.phase${phaseOf(activeActivity.type)}`)].filter((v, i, arr) => arr.indexOf(v) === i).join(" · ")}
                     </span>
                   </div>

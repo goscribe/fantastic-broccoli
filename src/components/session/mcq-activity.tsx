@@ -118,11 +118,23 @@ export function McqActivity({
     setRevealed(past !== null);
   };
 
-  // Bring the result into view above the bottom bar on short phone screens.
+  // Bring the result into view above the bottom bar on short phone screens,
+  // without leaving a line (activity title, "Question 2 of 5", the question,
+  // an answer) cut in half at the top edge.
   useEffect(() => {
     if (!revealed || !newUi) return;
+    const panel = feedbackRef.current;
+    if (!panel) return;
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    feedbackRef.current?.scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" });
+    const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
+    let scroller = panel.parentElement;
+    while (scroller && !/(auto|scroll)/.test(getComputedStyle(scroller).overflowY)) scroller = scroller.parentElement;
+    if (!scroller) {
+      panel.scrollIntoView({ block: "nearest", behavior });
+      return;
+    }
+    const delta = scrollDeltaFor(scroller, panel);
+    if (delta > 0) scroller.scrollBy({ top: delta, behavior });
   }, [revealed, index, newUi]);
 
   const handleNext = () => {
@@ -150,7 +162,7 @@ export function McqActivity({
             {t("session.back")}
           </button>
         )}
-        <span className={cn("text-xs text-muted-foreground tabular-nums", newUi && "text-[13px] font-semibold")} aria-live="polite">
+        <span data-scroll-line className={cn("text-xs text-muted-foreground tabular-nums", newUi && "text-[13px] font-semibold")} aria-live="polite">
           {t("session.question")} {index + 1} {t("session.of")}{" "}
           {content.questions.length}
           {index > 0 && ` · ${correctCount} ${t("session.correctSoFar")}`}
@@ -173,7 +185,7 @@ export function McqActivity({
         </div>
       </div>
 
-      <p className={newUi ? "text-[18px] font-bold leading-[1.35] sm:text-[20px]" : "text-sm font-medium leading-relaxed"}>
+      <p data-scroll-line className={newUi ? "text-[18px] font-bold leading-[1.35] sm:text-[20px]" : "text-sm font-medium leading-relaxed"}>
         <McqQuestionBody text={question.question} figures={question.figures} options={question.options} />
       </p>
 
@@ -182,6 +194,7 @@ export function McqActivity({
           <button
             key={i}
             type="button"
+            data-scroll-line
             onClick={() => !revealed && setSelected(i)}
             disabled={revealed}
             className={cn(
@@ -236,7 +249,7 @@ export function McqActivity({
       )}
 
       {revealed && newUi && (
-        <div ref={feedbackRef} className="scroll-mb-28">
+        <div ref={feedbackRef} className="scroll-mt-3 scroll-mb-[calc(5.5rem+env(safe-area-inset-bottom))]">
         <FeedbackCard
           ok={isCorrect}
           title={isCorrect ? t("session.correct") : t("session.notQuite")}
@@ -270,4 +283,42 @@ export function McqActivity({
       )}
     </div>
   );
+}
+
+/**
+ * How far to scroll `scroller` so `panel` clears the bottom bar (its
+ * scroll-margin-bottom) — then a little further while that would leave a line
+ * above it (`h1`, `[data-scroll-line]`) half under the top edge, never so far
+ * that the panel's own top goes past its scroll-margin-top.
+ */
+function scrollDeltaFor(scroller: HTMLElement, panel: HTMLElement): number {
+  const box = scroller.getBoundingClientRect();
+  const p = panel.getBoundingClientRect();
+  const style = getComputedStyle(panel);
+  const marginBottom = parseFloat(style.scrollMarginBottom) || 0;
+  const marginTop = parseFloat(style.scrollMarginTop) || 0;
+  let delta = p.bottom + marginBottom - box.bottom;
+  if (delta <= 0) return 0;
+  const maxDelta = Math.max(0, p.top - box.top - marginTop);
+  const need = delta;
+  const cap = Math.max(maxDelta, need);
+  const lines = Array.from(scroller.querySelectorAll<HTMLElement>("h1, [data-scroll-line]"))
+    .map((el) => ({ r: el.getBoundingClientRect(), lh: parseFloat(getComputedStyle(el).lineHeight) || 0 }))
+    .filter(({ r }) => r.height > 0 && r.bottom <= p.top)
+    .sort((a, b) => a.r.top - b.r.top);
+  for (const { r, lh } of lines) {
+    if (r.top - delta >= box.top || r.bottom - delta <= box.top) continue;
+    // Cut by the top edge: scroll it fully out of view if the panel allows…
+    if (r.bottom - box.top <= cap) {
+      delta = r.bottom - box.top;
+      continue;
+    }
+    // …otherwise land on a line break of a multi-line block, never mid-line.
+    if (lh > 0) {
+      const into = box.top + delta - r.top;
+      const down = r.top - box.top + Math.ceil(into / lh) * lh;
+      delta = down <= cap ? down : r.top - box.top + Math.floor(into / lh) * lh;
+    }
+  }
+  return Math.min(Math.max(delta, 0), cap);
 }
