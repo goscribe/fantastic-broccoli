@@ -50,7 +50,7 @@ export function NoteGraph({ graph, title }: { graph: NonNullable<NoteFigure["gra
       <p className="px-1 text-[14px] font-semibold">
         <InlineMarkdown text={tidyMath(title)} />
       </p>
-      <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label={title} className="mt-1 block font-sans">
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label={title} className="mx-auto mt-1 block max-w-[560px] font-sans">
         <text x={M.l - 6} y={14} fontSize="13" fill="var(--muted-foreground, #605c6d)">{graph.yLabel}</text>
         {ticks(win.left, win.right, xs).map((v, i) => (
           <g key={`x${i}`}>

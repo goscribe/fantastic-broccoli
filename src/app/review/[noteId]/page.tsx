@@ -267,10 +267,18 @@ function ClaimCard({ c }: { c: CheckedClaim }) {
           <InlineMarkdown text={c.reason} />
         </span>
       )}
-      {c.fix && (
-        <span className="mt-1 block text-[12.5px] text-muted-foreground">
-          {c.applied ? "Changed" : "Suggested"}: <s>{c.fix.find}</s> → {c.fix.replace}
-        </span>
+      {c.applied && /^f\d/.test(c.where) ? (
+        <span className="mt-1 block text-[12.5px] text-muted-foreground">Figure regenerated to fix this: check it agrees with the text.</span>
+      ) : (
+        c.fix && (
+          <span className="mt-1 block text-[12.5px] text-muted-foreground">
+            {c.applied ? "Changed" : "Suggested"}:{" "}
+            <s>
+              <InlineMarkdown text={c.fix.find} />
+            </s>{" "}
+            → <InlineMarkdown text={c.fix.replace} />
+          </span>
+        )
       )}
     </button>
   );
