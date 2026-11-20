@@ -9,6 +9,7 @@ import { reportPendingOAuthSignupConversion } from "@/lib/gtag";
 import { syncUiLocale } from "@/lib/i18n";
 import { isPublicPath } from "@/lib/public-paths";
 import { syncTimezone } from "@/lib/timezone-sync";
+import { syncPushSubscription } from "@/lib/push-client";
 
 export interface AuthUser {
   id: string;
@@ -70,6 +71,8 @@ function toAuthUser(session: SessionResult): AuthUser | null {
   syncTimezone(u.id, u.timezone, (timezone) =>
     rpc("auth.setTimezone", "mutation", { timezone }),
   );
+  // Service worker for push + install; re-sends this browser's push subscription.
+  syncPushSubscription();
   return {
     id: u.id,
     name: u.name ?? u.email ?? "You",

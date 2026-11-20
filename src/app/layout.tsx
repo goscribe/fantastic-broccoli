@@ -43,6 +43,8 @@ export const metadata: Metadata = {
   description: defaultDescription,
   keywords,
   applicationName: siteName,
+  // Installable web app (manifest.ts); on iOS, web push needs the home-screen app.
+  appleWebApp: { capable: true, title: "Scribe", statusBarStyle: "default" },
   category: "education",
   openGraph: {
     type: "website",
@@ -74,6 +76,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({

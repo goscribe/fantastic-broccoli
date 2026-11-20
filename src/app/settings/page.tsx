@@ -44,6 +44,7 @@ import {
 import "@/lib/i18n/settings";
 import "@/lib/i18n/growth";
 import { InviteCard } from "@/components/growth/invite-card";
+import { ReminderSettings } from "@/components/reminders/reminder-settings";
 import { inputClass } from "@/components/ui/input";
 
 const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
@@ -580,6 +581,9 @@ export default function SettingsPage() {
             </p>
           </div>
         </section>
+
+        {/* Study reminders (time + push on this device) */}
+        <ReminderSettings />
 
         {/* Plan */}
         <section id="plan" className="mt-8">

@@ -38,6 +38,7 @@ import { cn } from "@/lib/utils";
 import "@/lib/i18n/session";
 import "@/lib/i18n/rewards";
 import { InviteCard } from "@/components/growth/invite-card";
+import { HabitPrompt } from "@/components/reminders/habit-prompt";
 import "@/lib/i18n/habits";
 
 /** Length of the full session a finished Quick 5 offers to start. */
@@ -357,6 +358,10 @@ export function SessionDebrief({
         </section>
       )}
       <InviteCard variant="compact" className="mt-4" />
+      {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
+      {quickStart && stats && (
+        <HabitPrompt accuracy={stats.accuracy} activitiesDone={stats.activitiesDone} subjectTitle={subjectTitle} />
+      )}
 
       {hasReport && (
         <div className="mt-4 w-full text-left">
