@@ -45,6 +45,9 @@ import "@/lib/i18n/mistakes";
 import { fixMinutes, masteryRow, practiceHref } from "@/lib/mistakes";
 import type { ApiSessionStats } from "@/lib/api/study-session";
 
+/** How long the mastery rows get on screen before the study-time sheet opens over them. */
+const MASTERY_READ_MS = 4000;
+
 /** Length of the full session a finished Quick 5 offers to start. */
 const FOLLOW_UP_MINUTES = 15;
 
@@ -303,7 +306,8 @@ export function SessionDebrief({
         ? { title: t("habit.askDeeperTitle"), sub: t("habit.askDeeperSub"), prompt: t("habit.askDeeperPrompt") }
         : { title: t("habit.askRecapTitle"), sub: t("habit.askRecapSub"), prompt: t("habit.askRecapPrompt") };
   const mistakes = stats?.mistakes ?? 0;
-  const mastery = stats?.mastery ?? [];
+  // A Quick 5 touches a topic or two; its debrief also asks for a study time, so keep it to two rows.
+  const mastery = (stats?.mastery ?? []).slice(0, quickStart ? 2 : 3);
   const weakest = !quickStart && workspaceId ? stats?.weakest : null;
   // Fixing mistakes is the practice returners did; it takes the Copilot row's place.
   const askRow = mistakes > 0 && ask && wrong > 0 ? null : ask;
@@ -468,7 +472,13 @@ export function SessionDebrief({
       <InviteCard variant="compact" className="mt-4" />
       {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
       {quickStart && stats && (
-        <HabitPrompt accuracy={stats.accuracy} activitiesDone={stats.activitiesDone} subjectTitle={subjectTitle} />
+        <HabitPrompt
+          accuracy={stats.accuracy}
+          activitiesDone={stats.activitiesDone}
+          subjectTitle={subjectTitle}
+          // Let the mastery gains fill and be read before the sheet slides over them.
+          showAfterMs={mastery.length > 0 ? MASTERY_READ_MS : undefined}
+        />
       )}
 
       {hasReport && (

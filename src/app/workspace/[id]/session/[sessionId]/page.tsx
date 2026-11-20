@@ -929,6 +929,10 @@ export default function SessionDetailPage() {
               activeIndex={activeIndex}
               onSelect={goToIndex}
             />
+            {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
+            {planReady && !copilotOpen && (
+              <CopilotTrigger compact onClick={() => setCopilotOpen(true)} />
+            )}
             <button
               type="button"
               onClick={() => setShowComments(!showComments)}
