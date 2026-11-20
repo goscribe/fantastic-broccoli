@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --experimental-strip-types --import ./test/register-ts.mjs --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/lib/worksheet-marking.test.ts src/lib/checkout-return.test.ts src/lib/calendar-messages.test.ts src/lib/admin-insights.test.ts src/lib/page-view.test.ts src/lib/admin-trends.test.ts src/lib/admin-cohorts.test.ts src/lib/plan-access.test.ts src/lib/api/refusals.test.ts src/lib/attribution.test.ts src/lib/timezone-sync.test.ts src/lib/first-run.test.ts src/lib/generation-eval.test.ts src/lib/exam-planner-view.test.ts src/lib/reminders.test.ts src/lib/figure-math.test.ts"
+    "test": "node --experimental-strip-types --import ./test/register-ts.mjs --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/lib/worksheet-marking.test.ts src/lib/checkout-return.test.ts src/lib/calendar-messages.test.ts src/lib/admin-insights.test.ts src/lib/page-view.test.ts src/lib/admin-trends.test.ts src/lib/admin-cohorts.test.ts src/lib/plan-access.test.ts src/lib/api/refusals.test.ts src/lib/attribution.test.ts src/lib/timezone-sync.test.ts src/lib/first-run.test.ts src/lib/generation-eval.test.ts src/lib/exam-planner-view.test.ts src/lib/reminders.test.ts src/lib/figure-math.test.ts src/lib/try.test.ts"
   },
   "dependencies": {
     "@goscribe/server": "^1.8.0",

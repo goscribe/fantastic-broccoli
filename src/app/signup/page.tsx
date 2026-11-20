@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,19 @@ import {
 import { AuthScene } from "@/components/auth/auth-scene";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
+import { safeRedirect } from "@/lib/try";
+import "@/lib/i18n/try";
+
+/** Where to go after signup (`?redirect=`), and whether they came to save an anonymous Quick 5. */
+function signupTarget(search: string): { redirect: string | null; fromTry: boolean } {
+  const params = new URLSearchParams(search);
+  const raw = params.get("redirect");
+  return { redirect: raw ? safeRedirect(raw) : null, fromTry: params.get("from") === "try" };
+}
+
+const noSubscribe = () => () => {};
+/** The query string, read after hydration (empty on the server) so the markup matches. */
+const useSearch = () => useSyncExternalStore(noSubscribe, () => window.location.search, () => "");
 export default function SignupPage() {
   const router = useRouter();
   const { t } = useI18n();
@@ -25,6 +38,8 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const search = useSearch();
+  const target = signupTarget(search);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +49,10 @@ export default function SignupPage() {
       await signUp(name, email, password);
       reportSignupConversion();
       await signIn(email, password);
-      router.push("/");
+      // A full load so the new session is read fresh (e.g. back on the
+      // anonymous Quick 5's results, which then claims it).
+      if (target.redirect) window.location.assign(target.redirect);
+      else router.push("/");
     } catch (err) {
       setError(err instanceof Error ? err.message : t("misc.signUpFailed"));
       setBusy(false);
@@ -57,6 +75,12 @@ export default function SignupPage() {
             {t("misc.signupSubtitle")}
           </p>
         </div>
+
+        {target.fromTry && (
+          <p className="rounded-xl bg-accent-soft px-3.5 py-2.5 text-center text-[13px] font-medium leading-snug text-accent-dim" role="note">
+            {t("try.signupBanner")}
+          </p>
+        )}
 
         <form onSubmit={submit} className="space-y-4">
           <div className="space-y-1.5">
@@ -152,7 +176,7 @@ export default function SignupPage() {
         <p className="text-center text-sm text-muted-foreground">
           {t("misc.alreadyHaveAccount")}{" "}
           <Link
-            href="/login"
+            href={`/login${search}`}
             className="font-medium text-foreground hover:underline"
           >
             {t("misc.signIn")}

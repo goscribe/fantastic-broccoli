@@ -48,7 +48,11 @@ export default function LoginPage() {
     setBusy(true);
     try {
       await signIn(email, password);
-      router.push(safeRedirect());
+      const to = safeRedirect();
+      // Back to an anonymous Quick 5: a full load so the page sees the new
+      // session and claims it.
+      if (to.startsWith("/try/")) window.location.assign(to);
+      else router.push(to);
     } catch (err) {
       setError(err instanceof Error ? err.message : t("misc.signInFailed"));
     } finally {
