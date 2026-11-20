@@ -13,8 +13,8 @@ const en = {
   "session.phaseRecall": "Recall",
   "session.extendTitle": "You're almost done — keep the momentum?",
   "session.extendBefore":
-    "Your quiz scores on periodic trends were shaky, so Scribe precomputed",
-  "session.extendAfter": "more activities from your worksheet bank",
+    "Want a bit more practice? Scribe has",
+  "session.extendAfter": "more activities ready from your notes",
   "session.min": "min",
   "session.continuePlan": "Continue plan",
   "session.finishAsPlanned": "Finish as planned",
@@ -241,8 +241,8 @@ registerTranslations(en, {
     "session.phaseRecall": "Recordar",
     "session.extendTitle": "Ya casi terminas — ¿mantenemos el ritmo?",
     "session.extendBefore":
-      "Tus resultados del cuestionario sobre tendencias periódicas fueron flojos, así que Scribe precalculó",
-    "session.extendAfter": "actividades más de tu banco de ejercicios",
+      "¿Quieres practicar un poco más? Scribe tiene",
+    "session.extendAfter": "actividades más listas a partir de tus apuntes",
     "session.min": "min",
     "session.continuePlan": "Continuar plan",
     "session.finishAsPlanned": "Terminar como estaba previsto",
@@ -454,8 +454,8 @@ registerTranslations(en, {
     "session.phaseRecall": "Restituer",
     "session.extendTitle": "Vous y êtes presque — on garde le rythme ?",
     "session.extendBefore":
-      "Vos scores au quiz sur les tendances périodiques étaient fragiles, alors Scribe a préparé",
-    "session.extendAfter": "activités de plus depuis votre banque d'exercices",
+      "Envie de vous entraîner un peu plus ? Scribe a préparé",
+    "session.extendAfter": "activités de plus à partir de vos notes",
     "session.min": "min",
     "session.continuePlan": "Continuer le plan",
     "session.finishAsPlanned": "Terminer comme prévu",
@@ -667,9 +667,9 @@ registerTranslations(en, {
     "session.phaseRecall": "Abrufen",
     "session.extendTitle": "Fast geschafft — Schwung mitnehmen?",
     "session.extendBefore":
-      "Deine Quiz-Ergebnisse zu periodischen Trends waren wackelig, daher hat Scribe",
+      "Noch etwas mehr üben? Scribe hat",
     "session.extendAfter":
-      "weitere Aktivitäten aus deiner Aufgabenbank vorbereitet",
+      "weitere Aktivitäten aus deinen Notizen vorbereitet",
     "session.min": "Min",
     "session.continuePlan": "Plan fortsetzen",
     "session.finishAsPlanned": "Wie geplant beenden",
@@ -885,7 +885,7 @@ registerTranslations(en, {
     "session.phaseRecall": "回忆",
     "session.extendTitle": "快完成了 — 要保持势头吗？",
     "session.extendBefore":
-      "你在周期性趋势测验中的成绩不太稳定，因此 Scribe 从你的练习题库中预先准备了",
+      "想再多练一会儿吗？Scribe 根据你的笔记准备了",
     "session.extendAfter": "个额外活动",
     "session.min": "分钟",
     "session.continuePlan": "继续计划",
@@ -1087,7 +1087,7 @@ registerTranslations(en, {
     "session.phaseRecall": "स्मरण",
     "session.extendTitle": "लगभग हो गया — गति बनाए रखें?",
     "session.extendBefore":
-      "आवर्त प्रवृत्तियों पर आपके क्विज़ स्कोर कमज़ोर थे, इसलिए Scribe ने आपके वर्कशीट बैंक से",
+      "थोड़ा और अभ्यास करना है? Scribe ने आपके नोट्स से",
     "session.extendAfter": "और गतिविधियाँ पहले से तैयार की हैं",
     "session.min": "मिनट",
     "session.continuePlan": "योजना जारी रखें",
@@ -1300,8 +1300,8 @@ registerTranslations(en, {
     "session.phaseRecall": "Alalahanin",
     "session.extendTitle": "Malapit ka nang matapos — ituloy ang momentum?",
     "session.extendBefore":
-      "Medyo mababa ang mga quiz score mo sa periodic trends, kaya naghanda ang Scribe ng",
-    "session.extendAfter": "pang aktibidad mula sa iyong worksheet bank",
+      "Gusto mo pa ng kaunting practice? Naghanda ang Scribe ng",
+    "session.extendAfter": "pang aktibidad mula sa iyong notes",
     "session.min": "min",
     "session.continuePlan": "Ituloy ang plano",
     "session.finishAsPlanned": "Tapusin ayon sa plano",
