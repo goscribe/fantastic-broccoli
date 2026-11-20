@@ -29,6 +29,10 @@ import { fetchPlannerWeek, type PlannerSlot } from "@/lib/api/planner";
 import { Skeleton } from "@/components/ui/skeleton";
 import "@/app/design/design.css";
 import { inputBoxClass, bareInputClass } from "@/components/ui/input";
+import { Mascot } from "@/components/rewards/mascot";
+import { useRewards } from "@/lib/rewards";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/rewards";
 
 const ACTIVITY_LABEL: Record<string, string> = {
   mcq: "Quick 5",
@@ -337,7 +341,8 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
               {workspaceId || folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
             </h1>
           </div>
-          {sessions.length > 0 && <span className="hidden text-[13px] text-faint sm:inline">{sessions.length} study session{sessions.length === 1 ? "" : "s"}</span>}
+          {sessions.length > 0 && <span className="hidden text-[13px] text-faint lg:inline">{sessions.length} study session{sessions.length === 1 ? "" : "s"}</span>}
+          {!workspaceId && !folderId && <HomeShopChip />}
         </div>
 
         {workspaceId && (
@@ -473,6 +478,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
       />
       )}
       <div className="flex w-full shrink-0 flex-col gap-3.5 lg:w-[300px]">
+        {!workspaceId && !folderId && <HomeShopCard />}
         {loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
         {suggested && (() => {
           const { done, total, next } = sessionProgress(suggested);
@@ -784,5 +790,70 @@ function SessionList({
         })}
       </div>
     </div>
+  );
+}
+
+
+function useShopSummary() {
+  const { data: rewards } = useRewards();
+  if (!rewards) return null;
+  const affordable = rewards.catalog.some(
+    (item) =>
+      item.cost <= rewards.balance &&
+      (item.slot === "freeze" ? rewards.freezes < rewards.maxFreezes : !rewards.owned.includes(item.id)),
+  );
+  return { balance: rewards.balance, affordable };
+}
+
+/** The shop from home: the cat in its outfit, the points balance, one tap to spend them. Desktop sidebar. */
+function HomeShopCard() {
+  const { t } = useI18n();
+  const shop = useShopSummary();
+  if (!shop) return null;
+  return (
+    <Link
+      href="/shop"
+      className="group hidden items-center gap-3.5 rounded-2xl border border-border bg-card p-3.5 transition-colors hover:border-accent/40 hover:bg-accent-soft/40 lg:flex"
+    >
+      <span className="grid size-[64px] shrink-0 place-items-end justify-center overflow-hidden rounded-xl bg-accent-soft">
+        <Mascot pose="wave" className="cat-wiggle mb-0.5 h-[56px] w-[48px]" />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="flex items-center justify-between gap-2">
+          <span className="text-[14px] font-bold">{t("rewards.homeTitle")}</span>
+          <span className="text-[12.5px] font-semibold tabular-nums text-accent">
+            {t("rewards.ptsValue").replace("{n}", String(shop.balance))}
+          </span>
+        </span>
+        <span className="mt-0.5 block text-[12px] leading-snug text-muted-foreground">
+          {shop.affordable ? (
+            <span className="font-semibold text-accent-dim">{t("rewards.homeAfford")} →</span>
+          ) : (
+            t("rewards.homeBody")
+          )}
+        </span>
+      </span>
+    </Link>
+  );
+}
+
+/** Phones/tablets: the sidebar sits far below the fold, so the cat and points ride next to the greeting. */
+function HomeShopChip() {
+  const { t } = useI18n();
+  const shop = useShopSummary();
+  if (!shop) return null;
+  const pts = t("rewards.ptsValue").replace("{n}", String(shop.balance));
+  return (
+    <Link
+      href="/shop"
+      aria-label={`${t("rewards.homeTitle")} · ${pts}${shop.affordable ? ` · ${t("rewards.homeAfford")}` : ""}`}
+      className="relative flex shrink-0 items-center gap-1.5 rounded-xl bg-accent-soft py-1 pl-1 pr-2.5 text-[13px] font-semibold tabular-nums text-accent transition-colors hover:bg-accent-soft/70 lg:hidden"
+    >
+      <span className="grid size-8 place-items-end justify-center overflow-hidden">
+        <Mascot pose="wave" className="h-[30px] w-[28px]" />
+      </span>
+      {pts}
+      {shop.affordable && <span aria-hidden className="absolute -right-0.5 -top-0.5 size-2.5 rounded-full border-2 border-background bg-accent" />}
+    </Link>
   );
 }
