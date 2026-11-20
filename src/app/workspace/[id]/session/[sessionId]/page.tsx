@@ -69,6 +69,8 @@ import { proficiencyApi } from "@/lib/api/proficiency";
 import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
+import "@/lib/i18n/first-run";
+import { track } from "@/lib/funnel";
 import { ACTIVITY_TYPE_LABELS } from "@/components/session/activity-item";
 import { cn, formatDuration, formatRelativeDate } from "@/lib/utils";
 import { useCurrentItemIndex } from "@/lib/current-item";
@@ -297,7 +299,8 @@ export default function SessionDetailPage() {
     if (markedInProgress.current.has(activeActivity.id)) return;
     markedInProgress.current.add(activeActivity.id);
     setActivityStatus(activeActivity.id, "in_progress").catch(() => {});
-  }, [activeActivity]);
+    if (session?.quickStart) track("quick5.started", {}, workspaceId);
+  }, [activeActivity, session?.quickStart, workspaceId]);
 
   const completeActivity = useMutation({
     // A dropped request here costs the learner their streak day; retry it.
@@ -344,6 +347,7 @@ export default function SessionDetailPage() {
     },
     onSuccess: async (_data, input) => {
       if (input.skipped) return;
+      if (session?.quickStart) track("quick5.finished", {}, workspaceId);
       const before = queryClient.getQueryData<StreakSummary>(STREAK_KEY);
       // Points and streak are derived server-side from finished work.
       await refreshProgress(queryClient);
@@ -1136,6 +1140,7 @@ export default function SessionDetailPage() {
                     workspaceId={workspaceId}
                     sessionId={sessionId}
                     initial={session.generationProgress}
+                    quickStart={session.quickStart}
                   />
                 )}
               </div>
@@ -1465,12 +1470,17 @@ const GENERATION_STAGES: {
   /** Cumulative share of the bar reached when this stage completes. */
   until: number;
 }[] = [
-  { label: "session.stageGathering", stage: "gathering", until: 0.1 },
-  { label: "session.stageOutlining", stage: "outlining", until: 0.2 },
+  // Reading the uploads is most of a first session's wait; it reports real
+  // "n of N files read" progress, so it gets a real share of the bar.
+  { label: "session.stageGathering", stage: "gathering", until: 0.3 },
+  { label: "session.stageOutlining", stage: "outlining", until: 0.35 },
   { label: "session.stageWriting", stage: "generating", until: 0.8 },
   { label: "session.stageVerifying", stage: "verifying", until: 0.92 },
   { label: "session.stageFinishing", stage: "finalizing", until: 1 },
 ];
+
+/** Sessions whose wait screen was already reported in this page load. */
+const waitTracked = new Set<string>();
 
 /** No progress event for this long is reported as "taking longer than usual". */
 const STALLED_AFTER_SECONDS = 45;
@@ -1543,12 +1553,14 @@ function GeneratingPlanCard({
   workspaceId,
   sessionId,
   initial,
+  quickStart = false,
 }: {
   title: string;
   workspaceId: string;
   sessionId: string;
   /** Last persisted progress, so a reload resumes instead of restarting at 0. */
   initial?: PlanGenerationSnapshot;
+  quickStart?: boolean;
 }) {
   const newUi = useNewUi();
   const { t } = useI18n();
@@ -1599,8 +1611,35 @@ function GeneratingPlanCard({
   const hasCount =
     progress.total !== undefined && progress.completed !== undefined;
 
+  // First-run funnel: the wait screen was seen, and whether the learner left
+  // it before the session was ready (tab hidden or closed mid-wait).
+  useEffect(() => {
+    if (!quickStart) return;
+    const shownAt = Date.now();
+    if (!waitTracked.has(sessionId)) {
+      waitTracked.add(sessionId);
+      track("first_run.wait_viewed", {}, workspaceId);
+    }
+    let reported = false;
+    const left = () => {
+      if (reported || document.visibilityState === "visible") return;
+      reported = true;
+      track("first_run.left_while_waiting", { durationMs: Date.now() - shownAt }, workspaceId);
+    };
+    document.addEventListener("visibilitychange", left);
+    window.addEventListener("pagehide", left);
+    return () => {
+      document.removeEventListener("visibilitychange", left);
+      window.removeEventListener("pagehide", left);
+    };
+  }, [quickStart, workspaceId, sessionId]);
+
   let detail: string | null = null;
-  if (currentStage === "generating" && hasCount) {
+  if (currentStage === "gathering" && hasCount && (progress.total ?? 0) > 0) {
+    detail = t("firstRun.readingFiles")
+      .replace("{done}", String(progress.completed))
+      .replace("{total}", String(progress.total));
+  } else if (currentStage === "generating" && hasCount) {
     detail =
       progress.completed === 0
         ? `${progress.total} ${t("session.progressPlanned")}`
@@ -1620,8 +1659,12 @@ function GeneratingPlanCard({
           index={progress.stageIndex}
         />
         <SessionPrecheck workspaceId={workspaceId} focus={title} hero />
-        <p className="text-[13px] text-faint">
-          {stalled ? t("session.takingLonger") : t("session.generatingHint")}
+        <p className="text-center text-[13px] text-faint">
+          {stalled
+            ? t("session.takingLonger")
+            : quickStart
+              ? t("firstRun.emailWhenReady")
+              : t("session.generatingHint")}
         </p>
       </div>
     );

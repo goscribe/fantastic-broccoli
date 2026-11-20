@@ -26,13 +26,13 @@ import {
   fetchStudySessions,
   type DailyActivityPoint,
 } from "@/lib/api/study";
-import { LearnHome } from "@/components/learn/learn-home";
+import dynamic from "next/dynamic";
 import { useNewUi } from "@/lib/new-ui";
 import {
   hasSkippedFirstSessionOnboarding,
   markFirstSessionOnboardingSkipped,
 } from "@/components/onboarding/first-session-onboarding";
-import { SubjectOnboarding } from "@/components/onboarding/subject-onboarding";
+import { FirstRun } from "@/components/onboarding/first-run";
 import { AppTourAuto } from "@/components/onboarding/app-tour";
 import { onTreeChanged } from "@/lib/tree-events";
 import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
@@ -45,6 +45,12 @@ import { HeroScene, ConfettiDots, Sticker } from "@/components/graphics/floating
 import { Banner } from "@/components/ui/banner";
 import { Button } from "@/components/ui/button";
 import { HomeUploadRow } from "@/components/workspace/home-upload-row";
+
+// The learn home is heavy (charts, covers, planner); a brand-new learner never
+// needs it on first paint, so it loads in its own chunk.
+const LearnHome = dynamic(() =>
+  import("@/components/learn/learn-home").then((m) => m.LearnHome),
+);
 
 function computeStreak(daily: DailyActivityPoint[]): number {
   const byDate = new Map(daily.map((d) => [d.date, d.count]));
@@ -126,15 +132,16 @@ export default function HomePage() {
     return onTreeChanged(loadTree);
   }, []);
 
-  // Upload-first onboarding: users with no study sessions anywhere land on
-  // the "drop your notes" screen instead of the dashboard.
+  // First run: anyone without a subject, and anyone whose subjects have no
+  // study session yet (unless they chose to look around), lands on "What are
+  // you studying?" instead of the dashboard.
   useEffect(() => {
     if (treeLoading || showOnboarding !== undefined) return;
     let cancelled = false;
     const decide = async (): Promise<boolean> => {
-      if (hasSkippedFirstSessionOnboarding()) return false;
       const workspaces = flattenWorkspaces(folders, rootWorkspaces);
       if (workspaces.length === 0) return true;
+      if (hasSkippedFirstSessionOnboarding()) return false;
       // Established users (many workspaces) are never onboarding candidates —
       // skip the per-workspace session queries entirely.
       if (workspaces.length > 5) return false;
@@ -225,7 +232,28 @@ export default function HomePage() {
         : t("misc.goodEvening");
 
   const newUi = useNewUi();
-  if (newUi && showOnboarding !== true)
+  const hasWorkspaces = allWorkspaces.length > 0;
+  if (showOnboarding === true) {
+    return (
+      <FirstRun
+        firstName={user?.name?.trim().split(/\s+/)[0] || undefined}
+        fallbackWorkspaceId={allWorkspaces[0]?.id}
+        onSkip={
+          hasWorkspaces
+            ? () => {
+                markFirstSessionOnboardingSkipped();
+                setShowOnboarding(false);
+              }
+            : undefined
+        }
+      />
+    );
+  }
+  // Still deciding: a new learner must not see the dashboard flash in first.
+  if (showOnboarding === undefined && (treeLoading || !hasWorkspaces)) {
+    return <div className="flex-1 bg-white" aria-busy="true" />;
+  }
+  if (newUi)
     return (
       <>
         <LearnHome />
@@ -235,15 +263,6 @@ export default function HomePage() {
 
   return (
     <div className="flex-1 flex flex-col">
-      {showOnboarding && (
-        <SubjectOnboarding
-          intro
-          onSkip={() => {
-            markFirstSessionOnboardingSkipped();
-            setShowOnboarding(false);
-          }}
-        />
-      )}
       <Banner
         variant="accent"
         dismissKey="upgrade-promo"
