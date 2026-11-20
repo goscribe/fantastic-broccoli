@@ -13,7 +13,7 @@ export function PageHeader({
   className,
   mascot,
 }: {
-  /** Optional cat in a tinted tile beside the title (the redesign's livelier pages). */
+  /** Optional cat standing beside the title (the redesign's livelier pages). */
   mascot?: MascotPose;
   title: React.ReactNode;
   subtitle?: React.ReactNode;
@@ -26,9 +26,7 @@ export function PageHeader({
     <div className={cn("life-rise mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between", className)}>
       <div className="flex min-w-0 items-center gap-3.5">
         {mascot && (
-          <span aria-hidden className="grid size-16 shrink-0 place-items-end justify-center overflow-hidden rounded-[22px] bg-accent-soft">
-            <Mascot pose={mascot} className="cat-peek -mb-1 h-[58px]" />
-          </span>
+          <Mascot pose={mascot} className="cat-peek h-[68px] shrink-0 self-end" />
         )}
         <div className="min-w-0">
         {back && (

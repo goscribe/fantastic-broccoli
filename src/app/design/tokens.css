@@ -1,0 +1,92 @@
+/*
+ * Scribe UI tokens (v4). One source for the signed-in app (.app-brand) and the
+ * public note pages (.notes-look); keep this file identical on every branch.
+ *
+ * The rules:
+ * - Surfaces are neutral: a warm off-white page, white cards, a warm-grey
+ *   ramp for borders and secondary text, ink (warm near-black) for text.
+ * - Purple is an accent, not a surface. It marks the primary button, links,
+ *   the selected thing and progress. --accent-soft is therefore a NEUTRAL
+ *   fill (icon tiles, quiet buttons, hover); --accent-tint is the one pale
+ *   purple and is only for a selected state.
+ * - Warmth comes from the cat: --cream for the one hero panel a screen may
+ *   have, --flame for streaks, --hl (highlighter) for key phrases.
+ * - Green and rose only after an answer.
+ * - Shape by size, not pills everywhere: controls 12, buttons 16, cards 20,
+ *   the hero panel 24. Depth is a hairline, plus a 1px shadow at most.
+ */
+:root .app-brand,
+:root .notes-look {
+  --page: #f8f6f2;
+  --background: #f8f6f2;
+  --card: #ffffff;
+  --paper: #ffffff;
+  --card-hover: #fcfbf9;
+  --foreground: #1d1a16;
+  --card-foreground: #1d1a16;
+  --ink: #1d1a16;
+  --muted: #f1eee8;
+  --muted-foreground: #5d574e;
+  --faint: #7c766b;
+  --border: #e7e3db;
+  --border-strong: #d4cfc5;
+  --edge: #e2ded5;
+
+  --accent-soft: #f1eee8;
+  --energy-soft: #f1eee8;
+  --accent-tint: #efecfc;
+
+  --cream: #fbf1dd;
+  --cream-edge: #f1e1c1;
+  --hl: #ffe08f;
+  --flame: #f0a645;
+  --flame-edge: #d98a25;
+  --flame-soft: #fdf3e1;
+  --flame-ink: #3a2420;
+
+  --r-control: 12px;
+  --r-button: 16px;
+  --r-card: 20px;
+  --r-panel: 24px;
+  --card-shadow: 0 1px 2px rgba(29, 26, 22, 0.05);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+/*
+ * Default brand accent. A points-shop theme (<html data-accent>) keeps its own
+ * accent and soft tint. `:root:root` is deliberate: it outranks any older
+ * `:root:not([data-accent]) .app-brand` rule whatever order the CSS loads in.
+ */
+:root:root:not([data-accent]) .app-brand,
+:root:root:not([data-accent]) .notes-look {
+  --accent-soft: #f1eee8;
+  --energy-soft: #f1eee8;
+  --accent: #6952e0;
+  --accent-dim: #5a43d1;
+  --accent-edge: #4f3bbd;
+  --ring: #6952e0;
+  --energy: #6952e0;
+}
+:root[data-accent] .app-brand,
+:root[data-accent] .notes-look {
+  --accent-edge: var(--accent-dim);
+  --accent-tint: var(--accent-soft);
+}
+
+@layer components {
+  /* Highlighter: the mark a student makes on the phrase that matters. */
+  .hl-mark {
+    background-image: linear-gradient(var(--hl), var(--hl));
+    background-repeat: no-repeat;
+    background-size: 100% 0.5em;
+    background-position: 0 88%;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    border-radius: 2px;
+  }
+  /* Exam-paper rule: a heavy ink line with a hairline under it. */
+  .paper-rule {
+    height: 5px;
+    border-top: 2px solid var(--foreground);
+    border-bottom: 1px solid var(--foreground);
+  }
+}

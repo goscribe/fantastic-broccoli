@@ -37,7 +37,7 @@ export function FeedbackCard({
       {/* Soft result panel: a pale green or rose surface says right/wrong, the cat reacts, and the one button stays purple. */}
       <div
         className={cn(
-          "relative overflow-hidden rounded-[28px] px-5 py-5 sm:px-6",
+          "relative overflow-hidden rounded-[var(--r-card)] px-5 py-5 sm:px-6",
           ok ? "design-bounce bg-emerald-50" : "life-rise bg-rose-50",
         )}
       >
@@ -58,9 +58,7 @@ export function FeedbackCard({
           <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-1">
             <span className={cn("text-[20px] font-extrabold", ok ? "text-emerald-800" : "text-rose-800")}>{title}</span>
             {ok && (
-              <span className="design-pop inline-flex items-center rounded-full bg-white px-2.5 py-0.5 text-[12px] font-extrabold tabular-nums text-emerald-800">
-                +{xpShown} XP
-              </span>
+              <span className="text-[13.5px] font-extrabold tabular-nums text-emerald-800/80">+{xpShown} XP</span>
             )}
           </div>
         </div>
@@ -68,7 +66,7 @@ export function FeedbackCard({
         {note && <p className="relative mt-2 text-[12.5px] font-bold text-rose-800">{note}</p>}
         <div className="relative mt-4 flex gap-2.5">
           {secondary && onSecondary && (
-            <Button variant="ghost" size="sm" onClick={onSecondary} className="h-12 flex-1 bg-white/70 sm:flex-none">
+            <Button variant="ghost" size="sm" onClick={onSecondary} className="h-12 flex-1 rounded-[var(--r-button)] bg-white/70 sm:flex-none">
               {secondary}
             </Button>
           )}
@@ -76,7 +74,7 @@ export function FeedbackCard({
             variant="primary"
             size="sm"
             onClick={onPrimary}
-            className="btn-chunky h-12 flex-1 rounded-full text-[16px] font-extrabold sm:min-w-[200px] sm:flex-none"
+            className="btn-chunky rounded-[var(--r-button)] h-12 flex-1 text-[16px] font-extrabold sm:min-w-[200px] sm:flex-none"
           >
             {primary}
           </Button>

@@ -11,15 +11,11 @@ import { SparkleBurst } from "@/components/graphics/sparkle-burst";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCountUp } from "@/lib/use-count-up";
 import {
-  Sparkles,
   Loader2,
   Play,
   Flame,
   ArrowRight,
   ChevronDown,
-  Target,
-  Clock,
-  CheckCircle2,
   ChevronRight,
   Layers,
   MessageCircle,
@@ -91,9 +87,7 @@ function NextStep({
 }) {
   const body = (
     <>
-      <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-dim">
-        {icon}
-      </span>
+      <span className="grid w-6 shrink-0 place-items-center text-foreground">{icon}</span>
       <span className="min-w-0 flex-1">
         <span className="block text-[14.5px] font-semibold leading-5 text-foreground">{title}</span>
         <span className="block text-[12.5px] leading-5 text-muted-foreground">{sub}</span>
@@ -117,18 +111,18 @@ function NextStep({
 const usefulHeadline = (h: string | undefined) =>
   h && !/^session debrief\b/i.test(h.trim()) ? h : undefined;
 
-/** One result tile (the pattern of Brilliant's "Lesson complete" tiles): big number, small label, on a white hard-edged card. */
-function StatTile({ icon, label, value }: { icon: ReactNode; label: string; value: ReactNode }) {
+/** One figure on the results slip: the label, then the number. No icon, no card of its own. */
+function StatTile({ label, value }: { label: string; value: ReactNode }) {
   return (
-    <div className="life-card flex flex-col items-center gap-1 rounded-[22px] px-2 py-3.5">
-      <span className="flex items-center gap-1 text-[22px] font-extrabold tabular-nums leading-none text-foreground">
-        {value}
-        <span className="text-accent">{icon}</span>
-      </span>
-      <span className="text-[13px] font-bold text-muted-foreground">{label}</span>
+    <div className="flex flex-col gap-1.5 px-4 py-3.5 text-left first:pl-5 last:pr-5">
+      <span className="text-[12.5px] font-bold leading-none text-muted-foreground">{label}</span>
+      <span className="text-[24px] font-extrabold tabular-nums leading-none text-foreground">{value}</span>
     </div>
   );
 }
+
+/** The three figures in one row, split by hairlines (one card, not three). */
+const slipRow = "grid grid-cols-3 divide-x divide-border";
 
 function CountUp({ value, prefix = "" }: { value: number; prefix?: string }) {
   const n = useCountUp(value);
@@ -146,9 +140,9 @@ type MasteryChange = NonNullable<ApiSessionStats["mastery"]>[number];
 function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: MasteryChange[] }) {
   const { t } = useI18n();
   return (
-    <div className="flex w-full flex-col gap-2.5" role="status">
-      <div className="grid grid-cols-3 gap-2">{tiles}</div>
-      <ul className="life-card space-y-3.5 rounded-[22px] px-5 py-4 text-left" aria-label={t("debrief.masteryTitle")}>
+    <div className="life-card w-full overflow-hidden" role="status">
+      <div className={slipRow}>{tiles}</div>
+      <ul className="space-y-3.5 border-t border-border px-5 py-4 text-left" aria-label={t("debrief.masteryTitle")}>
         {mastery.map((m, i) => {
           const { before, after, delta, base, gain } = masteryRow(m);
           return (
@@ -164,7 +158,7 @@ function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: Maste
                     .replace("{b}", String(after))}
                 >
                   {before === null ? (
-                    <span className="mr-1.5 rounded-full bg-muted px-1.5 py-px text-[11px] font-semibold">{t("debrief.masteryNew")}</span>
+                    <span className="mr-1.5 text-[12px] font-semibold">{t("debrief.masteryNew")} ·</span>
                   ) : (
                     <>{before}% → </>
                   )}
@@ -177,7 +171,7 @@ function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: Maste
                 </span>
               </div>
               <div className="mt-1.5 flex h-2 overflow-hidden rounded-full bg-muted" aria-hidden>
-                <span className="h-full bg-accent/35" style={{ width: `${base}%` }} />
+                <span className="h-full bg-border-strong" style={{ width: `${base}%` }} />
                 <span
                   className="fill-grow h-full rounded-r-full bg-accent"
                   style={{ width: `${gain}%` }}
@@ -327,7 +321,7 @@ export function SessionDebrief({
   const primary = handOff ? (
     <Button
       size="lg"
-      className="btn-chunky h-[52px] w-full rounded-full text-[16px] font-extrabold"
+      className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold"
       disabled={sessionsLoading || startFull.isPending}
       onClick={() => (fullSession ? openSession(fullSession.id) : startFull.mutate())}
     >
@@ -339,14 +333,14 @@ export function SessionDebrief({
       {t(fullSession ? "session.quick5FinishCta" : "session.quick5StartCta").replace("{n}", String(fullMinutes))}
     </Button>
   ) : quickStart ? (
-    <Button size="lg" className="btn-chunky h-[52px] w-full rounded-full text-[16px] font-extrabold" onClick={onBack}>
+    <Button size="lg" className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold" onClick={onBack}>
       {t("debrief.continue")}
       <ArrowRight className="ml-1.5 h-4 w-4" />
     </Button>
   ) : weakest ? (
     <Button
       size="lg"
-      className="btn-chunky h-[52px] w-full rounded-full text-[16px] font-extrabold"
+      className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold"
       disabled={startWeakest.isPending}
       onClick={() => startWeakest.mutate(weakest.label)}
     >
@@ -355,7 +349,7 @@ export function SessionDebrief({
     </Button>
   ) : (
     <Link href="/flashcards/review" className="block w-full">
-      <Button size="lg" className="btn-chunky h-[52px] w-full rounded-full text-[16px] font-extrabold">
+      <Button size="lg" className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold">
         {t("session.reviewDueCards")}
         <ArrowRight className="ml-1.5 h-4 w-4" />
       </Button>
@@ -365,70 +359,87 @@ export function SessionDebrief({
   const statTiles = (stats: ApiSessionStats) => (
     <>
       <StatTile
-        icon={<Sparkles className="size-4" fill="currentColor" />}
         value={<CountUp value={points} prefix="+" />}
         label={t("debrief.points")}
       />
       {stats.accuracy !== null ? (
         <StatTile
-          icon={<Target className="size-4" />}
           value={`${Math.round(stats.accuracy * 100)}%`}
           label={t("debrief.accuracy")}
         />
       ) : (
         <StatTile
-          icon={<CheckCircle2 className="size-4" />}
           value={`${stats.activitiesDone}/${stats.activitiesTotal}`}
           label={t("debrief.done")}
         />
       )}
       <StatTile
-        icon={<Clock className="size-4" />}
         value={t("debrief.minutes").replace("{n}", String(stats.minutes))}
         label={t("debrief.time")}
       />
     </>);
 
   return (
-    <div className="mx-auto flex max-w-md flex-col items-center pb-10 pt-0 text-center animate-fade-up sm:pt-2">
-      <div className="relative" aria-hidden>
-        {newUi && <span className="absolute left-1/2 top-1/2 size-[124px] -translate-x-1/2 -translate-y-[46%] rounded-full bg-accent-soft sm:size-[176px]" />}
-        {newUi && <SparkleBurst burst={1} count={14} distance={62} />}
-        {newUi ? (
-          <Mascot pose="trophy" className="cat-cheer relative h-[104px] sm:h-[140px]" />
-        ) : (
-          <Image src="/illustrations/props/trophy.png" alt="" width={160} height={160} className="w-24" />
-        )}
-        {!newUi && <ConfettiDots />}
-      </div>
-
-      <h2 className="mt-3 text-[30px] font-extrabold tracking-tight sm:mt-5 sm:text-[36px]">
-        {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
-      </h2>
-      <div className="mt-1 min-h-6 text-[14.5px] leading-6 text-muted-foreground line-clamp-2 sm:mt-1.5 sm:text-[15px]">
-        {verdict ? (
-          <MathText text={verdict} />
-        ) : debriefLoading ? (
-          <span className="inline-block h-4 w-56 animate-pulse rounded-full bg-muted align-middle" />
-        ) : null}
-      </div>
+    <div className={cn("mx-auto flex max-w-md flex-col items-center pb-10 pt-0 animate-fade-up sm:pt-2", !newUi && "text-center")}>
+      {newUi ? (
+        // The cat holds the trophy beside the result, on the page's one warm panel.
+        <div className="life-panel relative flex w-full items-center gap-3 overflow-hidden py-4 pl-4 pr-5 text-left sm:gap-5 sm:py-6 sm:pl-6">
+          <div className="relative shrink-0" aria-hidden>
+            <SparkleBurst burst={1} count={10} distance={46} />
+            <Mascot pose="trophy" className="cat-cheer relative h-[92px] sm:h-[120px]" />
+          </div>
+          <div className="min-w-0">
+            <h2 className="text-balance text-[26px] font-extrabold leading-[1.1] tracking-tight sm:text-[32px]">
+              {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
+            </h2>
+            <div className="mt-1.5 text-[14.5px] leading-snug text-foreground/75 line-clamp-2 sm:text-[15.5px]">
+              {verdict ? (
+                <MathText text={verdict} />
+              ) : debriefLoading ? (
+                <span className="inline-block h-4 w-40 rounded-full bg-[var(--cream-edge)] align-middle" />
+              ) : null}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="relative" aria-hidden>
+            <Image src="/illustrations/props/trophy.png" alt="" width={160} height={160} className="w-24" />
+            <ConfettiDots />
+          </div>
+          <h2 className="mt-3 text-[30px] font-extrabold tracking-tight sm:mt-5 sm:text-[36px]">
+            {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
+          </h2>
+          <div className="mt-1 min-h-6 text-[14.5px] leading-6 text-muted-foreground line-clamp-2 sm:mt-1.5 sm:text-[15px]">
+            {verdict ? (
+              <MathText text={verdict} />
+            ) : debriefLoading ? (
+              <span className="inline-block h-4 w-56 animate-pulse rounded-full bg-muted align-middle" />
+            ) : null}
+          </div>
+        </>
+      )}
 
       {stats && mastery.length > 0 ? (
         <div className="mt-4 w-full sm:mt-6">
           <StatsWithMastery tiles={statTiles(stats)} mastery={mastery} />
         </div>
       ) : statsError ? null : (
-      <div className="mt-4 grid w-full grid-cols-3 gap-2.5 sm:mt-6" role="status">
+      <div className={cn("life-card mt-4 w-full overflow-hidden sm:mt-6", slipRow)} role="status">
         {stats ? (
           statTiles(stats)
         ) : (
-          [0, 1, 2].map((i) => <Skeleton key={i} className="h-[86px] rounded-[20px]" />)
+          [0, 1, 2].map((i) => (
+            <div key={i} className="px-4 py-3.5">
+              <Skeleton className="h-[42px] w-full" />
+            </div>
+          ))
         )}
       </div>
       )}
 
       {streakDays !== null && streakDays > 0 && (
-        <p className="mt-2.5 inline-flex items-center gap-1.5 rounded-full bg-muted px-3 py-1 text-[13px] font-bold text-foreground sm:mt-3 sm:px-3.5 sm:py-1.5">
+        <p className="mt-3 flex w-full items-center gap-1.5 px-1 text-left text-[13.5px] font-bold text-foreground">
           <Flame className={cn("size-4 text-[var(--flame,#f0a645)]", streakLitDays !== null && "animate-streak-pop")} fill="currentColor" strokeWidth={1.6} />
           {t("rewards.streakDays").replace("{n}", String(streakDays))}
         </p>
@@ -438,7 +449,7 @@ export function SessionDebrief({
         {primary}
         {/* The second step sits right under the first, so both are visible without scrolling. */}
         {mistakes > 0 && (
-          <div className="life-card life-press overflow-hidden rounded-[22px] text-left">
+          <div className="life-card life-press overflow-hidden text-left">
             <NextStep
               icon={<RotateCcw className="size-[18px]" />}
               title={(mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes))}
@@ -499,7 +510,7 @@ export function SessionDebrief({
             type="button"
             onClick={() => setShowReport((v) => !v)}
             aria-expanded={showReport}
-            className="mx-auto flex items-center gap-1 text-[13px] font-semibold text-accent-dim hover:underline"
+            className="mx-auto flex min-h-11 items-center gap-1 text-[13px] font-semibold text-foreground underline decoration-border-strong underline-offset-4"
           >
             {t(showReport ? "debrief.hideReport" : "debrief.seeReport")}
             <ChevronDown className={cn("size-4 transition-transform", showReport && "rotate-180")} />

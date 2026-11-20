@@ -199,11 +199,11 @@ export function McqActivity({
             disabled={revealed}
             className={cn(
               newUi
-                ? // Chunky answer tiles: a thicker lower edge that presses flat; a spring when picked, a shake when wrong.
-                  "min-h-[60px] w-full touch-manipulation text-left rounded-[20px] border-2 border-b-4 bg-card text-foreground px-3.5 py-3 text-[15.5px] font-semibold leading-snug transition-[background-color,border-color,transform] duration-150 active:translate-y-[2px] active:border-b-2 disabled:active:translate-y-0 disabled:active:border-b-4 motion-reduce:transition-none motion-reduce:active:translate-y-0 sm:px-4"
+                ? // Chunky answer tiles, lettered like an exam paper: a thicker lower edge that presses flat; a pop when picked, a shake when wrong.
+                  "min-h-[60px] w-full touch-manipulation text-left rounded-[var(--r-button)] border-2 border-b-4 bg-card text-foreground px-3.5 py-3 text-[15.5px] font-semibold leading-snug transition-[background-color,border-color,transform] duration-150 active:translate-y-[2px] active:border-b-2 disabled:active:translate-y-0 disabled:active:border-b-4 motion-reduce:transition-none motion-reduce:active:translate-y-0 sm:px-4"
                 : "w-full text-left p-3 rounded-lg border text-sm",
-              !revealed && selected === i && (newUi ? "life-pop border-accent bg-accent-soft text-accent-dim" : "border-accent bg-accent/5"),
-              !revealed && selected !== i && (newUi ? "border-[var(--edge)] hover:border-accent/50" : "border-border hover:border-accent/30 hover:bg-muted/30"),
+              !revealed && selected === i && (newUi ? "life-pop border-accent bg-card text-foreground" : "border-accent bg-accent/5"),
+              !revealed && selected !== i && (newUi ? "border-[var(--edge)] hover:border-border-strong" : "border-border hover:border-accent/30 hover:bg-muted/30"),
               revealed && i === question.correctIndex && (newUi ? "border-emerald-300 bg-emerald-50 text-emerald-900" : "border-success bg-success/5"),
               revealed && selected === i && i !== question.correctIndex && (newUi ? "life-shake border-rose-300 bg-rose-50 text-rose-900" : "border-red-500 bg-red-500/5"),
               revealed && selected !== i && i !== question.correctIndex && (newUi ? "border-[var(--edge)] opacity-55" : "opacity-50"),
@@ -212,14 +212,14 @@ export function McqActivity({
             <div className="flex items-center gap-3">
               <span
                 className={cn(
-                  newUi ? "flex h-8 w-8 items-center justify-center rounded-full border-2 text-[13.5px] font-extrabold flex-shrink-0" : "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium flex-shrink-0",
+                  newUi ? "flex h-8 w-8 items-center justify-center rounded-[9px] border-2 text-[13.5px] font-extrabold flex-shrink-0" : "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium flex-shrink-0",
                   !revealed && selected === i && (newUi ? "border-accent bg-accent text-accent-foreground" : "bg-accent text-accent-foreground"),
-                  !revealed && selected !== i && (newUi ? "border-[var(--edge)] bg-white text-muted-foreground" : "bg-muted text-muted-foreground"),
+                  !revealed && selected !== i && (newUi ? "border-[var(--edge)] bg-card text-foreground" : "bg-muted text-muted-foreground"),
                   revealed && i === question.correctIndex && (newUi ? "border-emerald-600 bg-emerald-600 text-white" : "bg-success text-white"),
                   revealed && selected === i && i !== question.correctIndex && (newUi ? "border-rose-600 bg-rose-600 text-white" : "bg-red-500 text-white"),
                 )}
               >
-                {newUi ? i + 1 : String.fromCharCode(65 + i)}
+                {String.fromCharCode(65 + i)}
               </span>
               <span className="flex-1 min-w-0">
                 <McqOptionBody text={option} figures={question.figures} />
@@ -240,7 +240,7 @@ export function McqActivity({
           <Button
             variant="primary"
             size={newUi ? "lg" : "sm"}
-            className={newUi ? "btn-chunky h-[52px] w-full rounded-full text-[16px] font-extrabold disabled:shadow-none sm:w-auto sm:min-w-[200px]" : undefined}
+            className={newUi ? "btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold disabled:shadow-none sm:w-auto sm:min-w-[200px]" : undefined}
             onClick={handleSubmit}
             disabled={selected === null}
           >

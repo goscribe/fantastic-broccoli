@@ -148,8 +148,8 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               onClick={() => setMobileOpen(false)}
               title={rail ? label : undefined}
               className={cn(
-                "flex h-11 items-center gap-3 rounded-full px-4 text-[14.5px] font-bold text-foreground/70 transition-colors hover:bg-accent-soft/60",
-                isActive(href) && "bg-accent-soft text-accent-dim",
+                "flex h-11 items-center gap-3 rounded-[var(--r-control)] px-4 text-[14.5px] font-bold text-foreground/70 transition-colors hover:bg-muted/70",
+                isActive(href) && "bg-muted text-accent-dim",
                 rail && "md:justify-center md:px-0",
               )}
             >
@@ -178,18 +178,18 @@ export function NewShell({ children }: { children: React.ReactNode }) {
                 title={w.title}
                 className={cn(
                   "flex min-h-10 shrink-0 items-center gap-3 rounded-xl px-3 py-2 text-[13.5px] font-medium leading-snug hover:bg-muted",
-                  on && "bg-accent-soft/70 text-accent-dim",
+                  on && "bg-muted font-bold text-foreground",
                   rail && "md:justify-center md:px-0",
                 )}
               >
                 <FolderIcon
-                  className={cn("size-4 shrink-0 text-accent", rail && "md:hidden")}
+                  className={cn("size-4 shrink-0 text-border-strong", rail && "md:hidden")}
                   fill="currentColor"
                   strokeWidth={1.5}
                 />
                 <span
                   aria-hidden
-                  className={cn("hidden size-7 place-items-center rounded-lg bg-accent-soft text-[12px] font-extrabold text-accent", rail && "md:grid")}
+                  className={cn("hidden size-7 place-items-center rounded-lg bg-muted text-[12px] font-extrabold text-foreground", rail && "md:grid")}
                 >
                   {w.title.trim()[0]?.toUpperCase() ?? "?"}
                 </span>
@@ -202,7 +202,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             onClick={() => setMobileOpen(false)}
             title={rail ? "New subject" : undefined}
             className={cn(
-              "flex h-10 shrink-0 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium text-accent hover:bg-muted",
+              "flex h-10 shrink-0 items-center gap-3 rounded-xl px-3 text-[13.5px] font-semibold text-muted-foreground hover:bg-muted hover:text-foreground",
               rail && "md:justify-center md:px-0",
             )}
           >
@@ -244,7 +244,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               // eslint-disable-next-line @next/next/no-img-element
               <img src={user.profilePicture} alt="" className="size-8 shrink-0 rounded-full object-cover" />
             ) : (
-              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-accent-soft text-[13px] font-bold text-accent">{initial}</span>
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-muted text-[13px] font-bold text-foreground">{initial}</span>
             )}
             <span className={cn("min-w-0 flex-1 truncate text-[13px] font-semibold", rail && "md:hidden")}>{user?.name}</span>
             <button
@@ -274,7 +274,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             type="button"
             onClick={() => setPaletteOpen(true)}
             aria-label="Search"
-            className="flex h-10 w-10 shrink-0 items-center justify-center gap-2.5 rounded-xl bg-muted text-[13.5px] text-faint hover:bg-accent-soft/50 sm:w-full sm:max-w-[320px] sm:justify-start sm:px-3.5"
+            className="flex h-10 w-10 shrink-0 items-center justify-center gap-2.5 rounded-xl bg-muted text-[13.5px] text-faint hover:bg-border sm:w-full sm:max-w-[320px] sm:justify-start sm:px-3.5"
           >
             <Search className="size-4" />
             <span className="hidden flex-1 truncate text-left sm:inline">Search notes, sessions, cards…</span>
@@ -288,7 +288,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={user.profilePicture} alt="" className="size-10 rounded-full object-cover" />
               ) : (
-                <span className="grid size-10 place-items-center rounded-full bg-accent-soft text-[14px] font-bold text-accent">{initial}</span>
+                <span className="grid size-10 place-items-center rounded-full bg-muted text-[14px] font-bold text-foreground">{initial}</span>
               )}
             </Link>
           </div>
@@ -318,8 +318,8 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               {/* Active tab: a soft pill behind a filled icon. */}
               <span
                 className={cn(
-                  "grid h-8 w-14 place-items-center rounded-full transition-[background-color,transform] duration-200 group-active:scale-90 motion-reduce:transition-none",
-                  on ? "bg-accent-soft" : "group-hover:bg-muted",
+                  "grid h-8 w-14 place-items-center rounded-[10px] transition-[background-color,transform] duration-200 group-active:scale-90 motion-reduce:transition-none",
+                  on ? "bg-[var(--accent-tint)]" : "group-hover:bg-muted",
                 )}
               >
                 <Icon className="size-[22px]" strokeWidth={on ? 2.4 : 1.9} fill={on ? "currentColor" : "none"} fillOpacity={on ? 0.18 : 0} />

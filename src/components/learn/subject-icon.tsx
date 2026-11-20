@@ -21,12 +21,12 @@ const ICON: Record<CoverKey, LucideIcon> = {
   general: GraduationCap,
 };
 
-/** A subject's icon tile: one lavender tile, the icon picked from the subject's name (flask for Chemistry, …). */
+/** A subject's icon, picked from its name (flask for Chemistry, …): a plain line icon in ink, in a fixed-width column so titles line up. No tinted tile. */
 export function SubjectIcon({ title, className }: { title: string; className?: string }) {
   const Icon = ICON[coverKeyForTitle(title)];
   return (
-    <span aria-hidden className={cn("grid size-12 shrink-0 place-items-center rounded-2xl bg-accent-soft text-accent", className)}>
-      <Icon className="size-6" strokeWidth={2.25} />
+    <span aria-hidden className={cn("grid w-8 shrink-0 place-items-center text-foreground", className)}>
+      <Icon className="size-6" strokeWidth={2} />
     </span>
   );
 }

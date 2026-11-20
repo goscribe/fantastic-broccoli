@@ -3,7 +3,7 @@
 import "@/lib/i18n/today";
 import "@/app/design/design.css";
 import Link from "next/link";
-import { Check, Flame, Layers, Snowflake, Sparkles } from "lucide-react";
+import { Check, ChevronRight, Flame, Snowflake } from "lucide-react";
 import { Ring } from "@/components/design/charts";
 import { Mascot } from "@/components/rewards/mascot";
 import type { StreakSummary } from "@/lib/api/streak";
@@ -94,7 +94,7 @@ export function StreakCard({
                         : d.frozen
                           ? "bg-muted text-muted-foreground"
                           : isToday
-                            ? "border-2 border-dashed border-[var(--flame)] bg-white"
+                            ? "border-2 border-dashed border-[var(--flame)] bg-card"
                             : "bg-muted",
                     )}
                   >
@@ -115,28 +115,25 @@ function StatTiles({ due, points, canAfford }: { due: number; points: number; ca
   const { t } = useI18n();
   const shownDue = useCountUp(due);
   const shownPts = useCountUp(points);
-  const tile = "life-card life-press relative flex min-h-[72px] items-center gap-3 rounded-[22px] px-4 py-3";
-  const icon = "grid size-10 shrink-0 place-items-center rounded-full bg-accent-soft text-accent";
+  // One card, two figures split by a hairline: a number, its label, nothing else.
+  const cell = "life-press relative flex min-h-[72px] flex-col justify-center px-5 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent/50";
+  const label = "mt-1.5 flex items-center gap-1 truncate text-[13px] font-bold text-muted-foreground";
   return (
-    <div className="grid grid-cols-2 gap-3">
-      <Link href="/flashcards/review" className={tile}>
-        <span className={icon}>
-          <Layers className="size-5" strokeWidth={2.25} />
-        </span>
-        <span className="min-w-0">
-          <span className="block text-[20px] font-extrabold leading-none tabular-nums">{shownDue}</span>
-          <span className="mt-1 block truncate text-[12.5px] font-bold text-muted-foreground">{t("today.statCards")}</span>
+    <div className="life-card grid grid-cols-2 divide-x divide-border overflow-hidden">
+      <Link href="/flashcards/review" className={cell}>
+        <span className="block text-[22px] font-extrabold leading-none tabular-nums">{shownDue}</span>
+        <span className={label}>
+          {t("today.statCards")}
+          <ChevronRight className="size-3.5 shrink-0 text-faint" strokeWidth={2.5} />
         </span>
       </Link>
-      <Link href="/shop" className={tile}>
-        <span className={icon}>
-          <Sparkles className="size-5" fill="currentColor" />
+      <Link href="/shop" className={cell}>
+        <span className="block text-[22px] font-extrabold leading-none tabular-nums">{shownPts}</span>
+        <span className={label}>
+          {t("today.statPoints")}
+          <ChevronRight className="size-3.5 shrink-0 text-faint" strokeWidth={2.5} />
         </span>
-        <span className="min-w-0">
-          <span className="block text-[20px] font-extrabold leading-none tabular-nums">{shownPts}</span>
-          <span className="mt-1 block truncate text-[12.5px] font-bold text-muted-foreground">{t("today.statPoints")}</span>
-        </span>
-        {canAfford && <span aria-label={t("rewards.homeAfford")} className="absolute right-3 top-3 size-2.5 rounded-full bg-accent ring-2 ring-white" />}
+        {canAfford && <span aria-label={t("rewards.homeAfford")} className="absolute right-4 top-4 size-2 rounded-full bg-accent" />}
       </Link>
     </div>
   );

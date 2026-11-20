@@ -965,7 +965,7 @@ export default function SessionDetailPage() {
           >
             <div className="mx-auto w-full max-w-3xl">
               {showExtendPrompt && (
-                <div className="mb-5 flex flex-wrap items-center gap-3 rounded-2xl border border-accent/30 bg-accent-soft/60 px-5 py-4 animate-fade-up">
+                <div className="mb-5 flex flex-wrap items-center gap-3 rounded-2xl border border-border bg-muted/60 px-5 py-4 animate-fade-up">
                   <div className="min-w-56 flex-1">
                     <p className="text-sm font-semibold">{t("session.extendTitle")}</p>
                     <p className="mt-0.5 text-xs text-muted-foreground">
@@ -992,7 +992,7 @@ export default function SessionDetailPage() {
               {activeActivity ? (
                 <>
                   <div className="flex flex-wrap items-center justify-between gap-3">
-                    <span data-scroll-line className="inline-flex items-center rounded-lg bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent-dim">
+                    <span data-scroll-line className="inline-flex items-center text-[13px] font-bold text-muted-foreground">
                       {[t(ACTIVITY_TYPE_LABELS[activeActivity.type] ?? "session.typeActivity"), t(`session.phase${phaseOf(activeActivity.type)}`)].filter((v, i, arr) => arr.indexOf(v) === i).join(" · ")}
                     </span>
                   </div>

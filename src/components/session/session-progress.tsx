@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { MathText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
@@ -98,8 +98,8 @@ export function SessionProgressHeader({
                       : skipped
                         ? "bg-accent/30"
                         : current
-                          ? "bg-accent-soft"
-                          : "bg-muted group-hover:bg-border",
+                          ? "bg-card"
+                          : "bg-border group-hover:bg-border-strong",
                     current &&
                       "outline-2 outline-offset-1 outline-accent",
                   )}
@@ -159,7 +159,7 @@ export function ActivityRewardCard({
     <div
       role="status"
       className={cn(
-        "animate-reward-in pointer-events-auto relative w-full max-w-md overflow-hidden rounded-2xl border border-accent/25 bg-card p-3 shadow-[0_12px_40px_-12px_rgba(105,82,224,0.45)]",
+        "animate-reward-in pointer-events-auto relative w-full max-w-md overflow-hidden rounded-2xl border border-border bg-card p-3 shadow-[0_12px_32px_-16px_rgba(29,26,22,0.35)]",
         className,
       )}
     >
@@ -185,10 +185,7 @@ export function ActivityRewardCard({
           )}
         </div>
         {pill && (
-          <span className="animate-pts-rise inline-flex shrink-0 items-center gap-1 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent">
-            <Sparkles className="size-3.5" fill="currentColor" />
-            {pill}
-          </span>
+          <span className="animate-pts-rise shrink-0 text-[13px] font-extrabold tabular-nums text-foreground">{pill}</span>
         )}
       </div>
       <button

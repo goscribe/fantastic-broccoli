@@ -1,3 +1,5 @@
+@import "./tokens.css";
+
 /* Scoped tokens for the redesign preview (RevisionDojo-like: white, violet, grey cards). */
 .design-root,
 html.new-ui {
@@ -42,71 +44,53 @@ html.new-ui {
 html.new-ui body { background: #ffffff; }
 
 /*
- * The signed-in app (shell + session player) in Scribe's own brand: purple
- * #6952E0 and Nunito, on the redesign's white surfaces. Scoped to the app so
- * the marketing pages keep their tokens; a points-shop theme (<html
- * data-accent>) still wins.
+ * The signed-in app (shell + session player) in Scribe's own brand: Nunito,
+ * neutral paper surfaces and purple #6952E0 as the accent only. The palette
+ * lives in tokens.css (shared with the public note pages); a points-shop
+ * theme (<html data-accent>) still wins.
  */
-:root:not([data-accent]) .app-brand {
-  --accent: #6952e0;
-  --accent-dim: #5a43d1;
-  --accent-soft: #eeebfc;
-  --ring: #6952e0;
-  --energy: #6952e0;
-  --energy-soft: #eeebfc;
-}
 .app-brand {
   --font-sans: var(--font-nunito), system-ui, sans-serif;
   font-family: var(--font-sans);
   letter-spacing: 0;
 }
-.app-brand h1, .app-brand h2 { letter-spacing: -0.015em; }
+.app-brand h1, .app-brand h2 { letter-spacing: -0.02em; }
 
 /*
  * "Life" layer for the signed-in app: a student product, not a dashboard.
- * A faintly purple-tinted page, soft white cards with big radii and a gentle
- * shadow (no grey grids), one flat lavender panel per screen for the main
- * thing, pill buttons with a lip that presses down, and motion that eases
- * things in. One accent (purple) plus the mascot's orange for streak flames
- * and ticks. Everything that moves stops under prefers-reduced-motion.
+ * White cards with a hairline on a warm off-white page, one warm cream panel
+ * per screen for the main thing (the cat lives there), a chunky button with a
+ * lip that presses down, and motion that eases things in. Purple is the
+ * accent only; the mascot's orange is for streak flames and ticks.
+ * Everything that moves stops under prefers-reduced-motion.
  */
-.app-brand {
-  --page: #faf9fe;
-  --edge: #e6e3f1;
-  --card-shadow: 0 1px 2px rgba(36, 26, 92, 0.05), 0 16px 32px -20px rgba(72, 52, 170, 0.25);
-  --flame: #f0a645;
-  --flame-edge: #d98a25;
-  --flame-ink: #3a2420;
-  --accent-edge: #4f3bbd;
-}
-:root[data-accent] .app-brand { --accent-edge: var(--accent-dim); }
-.app-brand h1, .app-brand h2 { letter-spacing: -0.02em; }
 /* In the components layer so Tailwind utilities on the same element still win. */
 @layer components {
-/* A soft white card: big radius, hairline tint, gentle shadow. */
+/* A white card: a hairline and a 1px shadow, no glow. */
 .life-card {
   background: var(--card);
-  border: 1px solid rgba(105, 82, 224, 0.09);
-  border-radius: 26px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
   box-shadow: var(--card-shadow);
 }
-/* The one flat lavender panel a screen may have: today's action, a result. */
+/* The one warm panel a screen may have: today's action. */
 .life-panel {
-  background: var(--accent-soft);
-  border-radius: 32px;
+  background: var(--cream);
+  border-radius: var(--r-panel);
 }
 .life-press {
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease, border-color 0.15s ease;
+  transition: transform 0.18s var(--ease-out), border-color 0.15s ease;
 }
 .life-press:active { transform: scale(0.98); }
 @media (hover: hover) {
-  .life-press:hover { transform: translateY(-2px); }
+  .life-press:hover { border-color: var(--border-strong); }
 }
 /* Things ease up into place, one after another (--i staggers them). */
 @keyframes life-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .life-rise { animation: life-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 70ms); }
-/* Chunky pill button: a darker lip that presses down. */
+/* Chunky button: a darker lip that presses down. */
 .btn-chunky {
+  border-radius: var(--r-button);
   box-shadow: 0 4px 0 0 var(--accent-edge);
   transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
 }

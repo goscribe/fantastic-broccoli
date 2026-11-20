@@ -24,7 +24,7 @@ import { onTreeChanged, emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
 import { toast } from "sonner";
 import { cn, formatRelativeDate } from "@/lib/utils";
-import { Donut, Ring, WeekBars } from "@/components/design/charts";
+import { Ring, WeekBars } from "@/components/design/charts";
 import type { Folder, Material, StudySession, Workspace } from "@/types";
 import { fetchStreak, type StreakSummary } from "@/lib/api/streak";
 import { fetchPlannerWeek, type PlannerSlot } from "@/lib/api/planner";
@@ -532,10 +532,10 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                   type="button"
                   aria-expanded={weekOpen}
                   onClick={() => setWeekOpen((v) => !v)}
-                  className="life-card flex min-h-[52px] w-full items-center justify-between rounded-[22px] px-4 text-[15px] font-bold lg:hidden"
+                  className="life-card flex min-h-[52px] w-full items-center justify-between px-4 text-[15px] font-bold lg:hidden"
                 >
                   <span className="flex items-center gap-2">
-                    <CalendarDays className="size-4 text-accent" />
+                    <CalendarDays className="size-4 text-muted-foreground" />
                     {t("today.weekToggle")}
                   </span>
                   <ChevronDown className={cn("size-4 text-faint transition-transform", weekOpen && "rotate-180")} />
@@ -603,20 +603,16 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           </div>
           {due === null ? (
             <div className="mt-3 flex items-center gap-4">
-              <Skeleton className="size-[72px] shrink-0 rounded-full" />
+              <Skeleton className="h-10 w-12 shrink-0" />
               <div className="flex flex-1 flex-col gap-2">
                 <Skeleton className="h-3.5 w-full" />
                 <Skeleton className="h-3.5 w-2/3" />
               </div>
             </div>
           ) : (
-          <div className="mt-3 flex items-center gap-4">
-            <Donut parts={due ? [[1, "var(--accent)"]] : [[1, "var(--border)"]]}>
-              <span className="text-[20px] font-bold leading-none">{due ?? "–"}</span>
-              <br />
-              <span className="text-[11px] font-semibold text-faint">due</span>
-            </Donut>
-            <div className="text-[13px] text-muted-foreground">{due ? `${due} flashcards are due today. About ${Math.max(1, Math.round(due / 3))} min.` : "Nothing due right now — nice."}</div>
+          <div className="mt-2 flex items-baseline gap-3">
+            <span className="text-[40px] font-extrabold leading-none tabular-nums">{due}</span>
+            <div className="text-[13px] leading-snug text-muted-foreground">{due ? `flashcards due today, about ${Math.max(1, Math.round(due / 3))} min` : "Nothing due right now"}</div>
           </div>
           )}
           <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-xl text-[14px] font-semibold", due && !home ? "bg-accent text-white" : "bg-muted hover:bg-accent-soft")}>
@@ -755,7 +751,7 @@ function SubjectsGrid({
         <h2 className="text-[20px] font-extrabold">
           Your subjects <span className="font-medium text-faint">· {workspaces.length}</span>
         </h2>
-        <button type="button" onClick={onNew} className="inline-flex h-11 items-center gap-1.5 rounded-full bg-accent-soft px-4 text-[13.5px] font-bold text-accent-dim hover:bg-accent/15 sm:h-10">
+        <button type="button" onClick={onNew} className="inline-flex h-11 items-center gap-1.5 rounded-[var(--r-control)] border border-border bg-card px-4 text-[13.5px] font-bold text-foreground hover:border-border-strong sm:h-10">
           <Plus className="size-3.5" /> New subject
         </button>
       </div>
@@ -764,7 +760,7 @@ function SubjectsGrid({
         {loading &&
           workspaces.length === 0 &&
           [0, 1].map((i) => (
-            <li key={i} className="life-card flex items-center gap-3 rounded-[22px] px-4 py-3">
+            <li key={i} className="life-card flex items-center gap-3 px-4 py-3">
               <Skeleton className="size-9 rounded-full" />
               <div className="flex-1 space-y-1.5">
                 <Skeleton className="h-4 w-1/2" />
@@ -777,7 +773,7 @@ function SubjectsGrid({
           const done = own.filter((x) => x.status === "completed").length;
           return (
             <li key={w.id}>
-              <Link href={`/workspace/${w.id}`} className="life-card life-press flex min-h-[76px] items-center gap-3.5 rounded-[22px] px-4 py-3.5">
+              <Link href={`/workspace/${w.id}`} className="life-card life-press flex min-h-[76px] items-center gap-3 px-4 py-3.5">
                 <SubjectIcon title={w.title} />
                 <span className="min-w-0 flex-1">
                   <span className="flex items-baseline justify-between gap-2">
@@ -965,13 +961,13 @@ function HomeShopCard() {
       href="/shop"
       className="life-card life-press group hidden items-center gap-3.5 p-3.5 lg:flex"
     >
-      <span className="grid size-[64px] shrink-0 place-items-end justify-center overflow-hidden rounded-xl bg-accent-soft">
+      <span className="grid size-[64px] shrink-0 place-items-end justify-center overflow-hidden rounded-xl bg-[var(--cream)]">
         <Mascot pose="wave" className="cat-wiggle mb-0.5 h-[56px] w-[48px]" />
       </span>
       <span className="min-w-0 flex-1">
         <span className="flex items-center justify-between gap-2">
           <span className="text-[14px] font-bold">{t("rewards.homeTitle")}</span>
-          <span className="text-[12.5px] font-semibold tabular-nums text-accent">
+          <span className="text-[12.5px] font-bold tabular-nums text-foreground">
             {t("rewards.ptsValue").replace("{n}", String(shop.balance))}
           </span>
         </span>

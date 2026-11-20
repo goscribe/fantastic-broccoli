@@ -77,11 +77,9 @@ export function ExamPlanner() {
     <div className="mx-auto w-full max-w-[1080px] px-4 pb-16 pt-5 sm:px-6 sm:pt-6">
       <div className="mb-4 flex items-end justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3.5">
-          <span aria-hidden className="grid size-14 shrink-0 place-items-end justify-center overflow-hidden rounded-[18px] bg-accent-soft sm:size-16">
-            <Mascot pose="pencil" className="cat-peek -mb-1 h-[50px] sm:h-[58px]" />
-          </span>
+          <Mascot pose="pencil" className="cat-peek h-[60px] shrink-0 self-end sm:h-[68px]" />
           <div className="min-w-0">
-            <div className="text-[12px] font-bold uppercase tracking-wide text-accent-dim">{t("ep.title")}</div>
+            <div className="text-[13px] font-bold text-muted-foreground">{t("ep.title")}</div>
             <h1 className="truncate text-[24px] font-extrabold leading-tight tracking-tight sm:text-[30px]">{title}</h1>
           </div>
         </div>
@@ -89,7 +87,7 @@ export function ExamPlanner() {
           <button
             type="button"
             onClick={() => setSetup({ kind: "new" })}
-            className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl bg-accent-soft px-3 text-[13.5px] font-semibold text-accent-dim hover:brightness-95"
+            className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl border border-border bg-card px-3 text-[13.5px] font-semibold text-foreground hover:border-border-strong"
           >
             <Plus className="size-4" />
             <span className="hidden sm:inline">{t("ep.exams.add")}</span>

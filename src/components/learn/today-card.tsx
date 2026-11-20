@@ -25,7 +25,7 @@ import type { StudySession, Workspace } from "@/types";
 
 /** Big enough for a thumb on a phone (≥ 44px), full width so it is the obvious tap. */
 const primaryBtn =
-  "btn-chunky inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-full bg-accent px-5 text-[16px] font-extrabold text-white hover:bg-accent-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 disabled:opacity-70";
+  "btn-chunky rounded-[var(--r-button)] inline-flex h-[52px] w-full items-center justify-center gap-2 bg-accent px-5 text-[16px] font-extrabold text-white hover:bg-accent-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--cream)] disabled:opacity-70";
 
 /** The cat's pose follows what today asks for; the card itself stays white. */
 const POSE: Record<"mistakes" | "plan" | "quick5" | "done", MascotPose> = {
@@ -34,9 +34,8 @@ const POSE: Record<"mistakes" | "plan" | "quick5" | "done", MascotPose> = {
   quick5: "book",
   done: "trophy",
 };
-/** Home's one flat lavender panel; the cat stands on a white disc inside it. */
+/** Home's one warm panel (the cat's cream); everything else on the page is white or paper. */
 const shell = "life-panel life-rise relative overflow-hidden";
-const disc = "pointer-events-none absolute rounded-full bg-white/70";
 
 /**
  * Home's one "Today" card: the smallest useful thing to do next (fix
@@ -59,8 +58,9 @@ export function TodayCard({
   uploading: boolean;
   onUpload: () => void;
 }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
+  const dateLabel = new Intl.DateTimeFormat(locale, { weekday: "short", day: "numeric", month: "short" }).format(new Date());
   const starter = useStartTask();
   const [busy, setBusy] = useState(false);
   const mistakes = useQuery({ queryKey: ["mistakes-summary", null], queryFn: () => mistakesApi.summary(), retry: 1 });
@@ -93,13 +93,12 @@ export function TodayCard({
   if (action.kind === "upload") {
     return (
       <section className={cn(shell, "px-6 pb-4 pt-8 sm:px-10 sm:pb-8 sm:pt-10")} aria-labelledby="today-title">
-        <span aria-hidden className={cn(disc, "left-1/2 top-6 size-[148px] -translate-x-1/2 sm:left-auto sm:right-10 sm:top-9 sm:size-[184px] sm:translate-x-0")} />
-        <Mascot pose="wave" className="cat-wiggle relative mx-auto block h-[136px] sm:absolute sm:right-[52px] sm:top-11 sm:h-[168px]" priority />
-        <div className="relative mt-5 text-center sm:mt-0 sm:max-w-[460px] sm:text-left">
+        <Mascot pose="wave" className="cat-wiggle pointer-events-none absolute right-4 top-5 h-[104px] sm:right-[52px] sm:top-10 sm:h-[168px]" priority />
+        <div className="relative pr-[108px] sm:max-w-[460px] sm:pr-0">
           <h2 id="today-title" className="text-balance text-[28px] font-extrabold leading-[1.12] sm:text-[34px]">
             {t("today.uploadTitle")}
           </h2>
-          <p className="mt-2.5 text-[15.5px] leading-relaxed text-foreground/70">{t("today.uploadSub")}</p>
+          <p className="mt-2.5 text-[15.5px] leading-relaxed text-foreground/75">{t("today.uploadSub")}</p>
         </div>
         <button
           type="button"
@@ -115,7 +114,7 @@ export function TodayCard({
         </button>
         <Link
           href="/new-subject"
-          className="relative mt-2.5 flex min-h-11 items-center justify-center text-[14px] font-bold text-accent-dim hover:underline sm:justify-start"
+          className="relative mt-2.5 flex min-h-11 items-center justify-center text-[14px] font-bold text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground sm:justify-start"
         >
           {t("today.uploadAlt")}
         </Link>
@@ -206,27 +205,24 @@ export function TodayCard({
 
   return (
     <section className={cn(shell, "p-6 sm:p-9", resume && "pb-3 sm:pb-5")} aria-labelledby="today-title">
-      <span aria-hidden className={cn(disc, "-right-6 -top-8 size-[160px] sm:right-8 sm:top-8 sm:size-[200px]")} />
       <Mascot pose={pose} className={cn("cat-peek pointer-events-none absolute top-4 h-[112px] sm:top-12 sm:h-[168px]", pose === "trophy" ? "right-2 sm:right-12" : "right-3 sm:right-[60px]")} priority />
-      <div className="relative flex items-center gap-2">
-        <span className="grid size-8 shrink-0 place-items-center rounded-full bg-accent text-white">
-          <Icon className="size-4" strokeWidth={2.5} />
-        </span>
-        <span className="text-[13px] font-extrabold uppercase tracking-wide text-accent-dim">{eyebrow}</span>
-      </div>
-      <h2 id="today-title" className="relative mt-4 pr-[104px] text-[28px] font-extrabold leading-[1.1] sm:max-w-[480px] sm:pr-0 sm:text-[36px]">
+      {/* The label reads like the top line of a paper: what this is, and the date. */}
+      <p className="relative flex items-center gap-1.5 pr-[104px] text-[13.5px] font-extrabold text-foreground sm:pr-0">
+        <Icon className="size-4 shrink-0" strokeWidth={2.5} />
+        <span>{eyebrow}</span>
+        {action.kind !== "done" && <span className="whitespace-nowrap font-bold text-foreground/55">· {dateLabel}</span>}
+      </p>
+      <h2 id="today-title" className="relative mt-3 pr-[104px] text-[28px] font-extrabold leading-[1.1] sm:max-w-[480px] sm:pr-0 sm:text-[36px]">
         {title}
       </h2>
-      <p className="relative mt-2 pr-[96px] text-[15.5px] leading-snug text-foreground/70 sm:max-w-[440px] sm:pr-0 sm:text-[16px]">{sub}</p>
+      <p className="relative mt-2 pr-[96px] text-[15.5px] leading-snug text-foreground/75 sm:max-w-[440px] sm:pr-0 sm:text-[16px]">{sub}</p>
       {action.kind !== "done" && !doneToday && (
-        <div className="relative mt-3.5 flex">
-          <span className="inline-flex h-7 items-center gap-1 rounded-full bg-white/80 px-2.5 text-[12.5px] font-bold text-foreground/80">
-            <Flame className="size-3.5 text-[var(--flame)]" fill="currentColor" strokeWidth={1.5} />
-            {t("today.countsForStreak")}
-          </span>
-        </div>
+        <p className="relative mt-4 flex items-center gap-1.5 border-t border-[var(--cream-edge)] pt-3 text-[13px] font-bold text-foreground/75 sm:max-w-[440px]">
+          <Flame className="size-4 text-[var(--flame-edge)]" fill="currentColor" strokeWidth={1.5} />
+          {t("today.countsForStreak")}
+        </p>
       )}
-      <button type="button" disabled={pending} onClick={() => void onPrimary()} className={cn(primaryBtn, "relative mt-5 h-14 text-[17px] sm:max-w-[340px]")}>
+      <button type="button" disabled={pending} onClick={() => void onPrimary()} className={cn(primaryBtn, "relative mt-4 h-14 text-[17px] sm:max-w-[340px]")}>
         {pending ? <Loader2 className="size-4 animate-spin" /> : <Play className="size-4" fill="currentColor" />}
         {cta}
       </button>
@@ -234,7 +230,7 @@ export function TodayCard({
         <Link
           href={`/workspace/${resume.workspaceId}/session/${resume.id}`}
           onClick={() => tapped("continue", resume.workspaceId)}
-          className="relative mt-2.5 flex min-h-11 items-center justify-center gap-1.5 text-[14px] font-bold text-accent-dim hover:underline sm:justify-start"
+          className="relative mt-2.5 flex min-h-11 items-center justify-center gap-1.5 text-[14px] font-bold text-foreground hover:underline sm:justify-start"
         >
           <span className="min-w-0 truncate">{t("today.orContinue").replace("{title}", resume.title)}</span>
           <ArrowRight className="size-3.5 shrink-0" />
