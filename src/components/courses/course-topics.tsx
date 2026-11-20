@@ -6,6 +6,8 @@ import { coursesApi, type Course, type CourseLevel, type CourseProgress, type To
 import { masteryPercent, nextTopic, topicTitle, unitProgress, unitTitle, unitsForLevel } from "@/lib/courses";
 import { loadCourse, TopicRow } from "@/components/courses/course-picker";
 import { useStartCourseTopic } from "@/components/courses/use-start-topic";
+import { notesApi } from "@/lib/api/notes";
+import { noteHref } from "@/lib/notes";
 import { ProgressLine } from "@/components/courses/course-shelf";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
@@ -23,6 +25,7 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
   const [missing, setMissing] = useState(false);
   const [openUnit, setOpenUnit] = useState<string | null>(null);
   const [openTopic, setOpenTopic] = useState<string | null>(null);
+  const [withNotes, setWithNotes] = useState<Set<string>>(new Set());
   const { start, busyTopicId } = useStartCourseTopic();
 
   useEffect(() => {
@@ -34,6 +37,11 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
         if (cancelled) return;
         setProgress(p);
         setCourse(c);
+        // Scribe notes are optional: a failure just hides the links.
+        notesApi
+          .listForCourse(p.courseId)
+          .then((rows) => !cancelled && setWithNotes(new Set(rows.map((r) => r.topicId))))
+          .catch(() => {});
       })
       .catch(() => !cancelled && setMissing(true));
     return () => {
@@ -124,6 +132,7 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
                         onStart={() => void start(course, topic, level)}
                         busy={busyTopicId === topic.id}
                         disabled={!!busyTopicId}
+                        notesHref={withNotes.has(topic.id) ? noteHref(course.id, topic.id) : undefined}
                       />
                     </li>
                   ))}

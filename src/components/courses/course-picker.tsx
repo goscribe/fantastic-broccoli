@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, ChevronRight, Loader2 } from "lucide-react";
 import {
   coursesApi,
@@ -15,6 +16,7 @@ import { BOARD_LABEL, groupCourses, masteryPercent, unitTitle, unitsForLevel } f
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
+import "@/lib/i18n/notes";
 
 // One fetch per page load: the catalog is static between deploys.
 let listCache: Promise<CourseSummary[]> | null = null;
@@ -280,8 +282,11 @@ export function TopicRow({
   busy,
   disabled,
   progress,
+  notesHref,
 }: {
   topic: CatalogTopic;
+  /** Reader link when Scribe has notes for this topic. */
+  notesHref?: string;
   open: boolean;
   onToggle: () => void;
   onStart: () => void;
@@ -345,6 +350,14 @@ export function TopicRow({
               </>
             )}
           </button>
+          {notesHref && (
+            <Link
+              href={notesHref}
+              className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-xl border border-border-strong px-5 text-[14.5px] font-semibold transition-colors hover:border-accent hover:text-accent"
+            >
+              {t("notes.readNotes")}
+            </Link>
+          )}
         </div>
       )}
     </div>
