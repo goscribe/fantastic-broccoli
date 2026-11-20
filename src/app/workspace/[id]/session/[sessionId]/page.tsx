@@ -72,6 +72,7 @@ import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import "@/lib/i18n/first-run";
+import "@/lib/i18n/today";
 import { track } from "@/lib/funnel";
 import { ACTIVITY_TYPE_LABELS } from "@/components/session/activity-item";
 import { cn, formatDuration, formatRelativeDate } from "@/lib/utils";
@@ -139,7 +140,7 @@ export default function SessionDetailPage() {
     queryKey: ["workspace", workspaceId],
     queryFn: () => fetchWorkspace(workspaceId),
   });
-  const { data: session, isLoading } = useQuery({
+  const { data: session, isLoading, isError: sessionError, refetch: refetchSession } = useQuery({
     queryKey: ["study-session", sessionId],
     queryFn: () => fetchStudySession(sessionId),
     // "Practice my mistakes" is built server-side with English titles.
@@ -495,17 +496,23 @@ export default function SessionDetailPage() {
       );
     }
     return (
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex flex-1 items-center justify-center px-6">
         <div className="text-center">
-          <p className="text-muted-foreground">{t("session.notFound")}</p>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => router.push(`/workspace/${workspaceId}`)}
-            className="mt-2"
-          >
-            {t("session.goBack")}
-          </Button>
+          <p className="text-[15px] text-muted-foreground">{t(sessionError ? "today.sessionLoadError" : "session.notFound")}</p>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {sessionError && (
+              <Button size="lg" onClick={() => void refetchSession()}>
+                {t("today.retry")}
+              </Button>
+            )}
+            <Button
+              variant={sessionError ? "ghost" : "primary"}
+              size="lg"
+              onClick={() => router.push(`/workspace/${workspaceId}`)}
+            >
+              {t("session.goBack")}
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -915,12 +922,12 @@ export default function SessionDetailPage() {
     return (
       <div className="flex h-dvh min-h-0 flex-1 overflow-hidden bg-background">
         <div className="relative flex min-w-0 flex-1 flex-col">
-          <div className="flex items-center gap-4 px-5 pt-5 sm:gap-5 sm:px-10">
+          <div className="flex items-center gap-2 px-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:gap-5 sm:px-10 sm:pt-5">
             <button
               type="button"
               onClick={() => router.push(`/workspace/${workspaceId}`)}
               aria-label={t("session.backToWorkspace")}
-              className="grid size-9 shrink-0 place-items-center rounded-xl text-faint hover:bg-muted hover:text-foreground"
+              className="grid size-11 shrink-0 place-items-center rounded-xl text-faint hover:bg-muted hover:text-foreground"
             >
               <X className="size-[22px]" />
             </button>
@@ -937,11 +944,11 @@ export default function SessionDetailPage() {
               type="button"
               onClick={() => setShowComments(!showComments)}
               aria-label={t("session.sessionNotes")}
-              className="relative grid size-9 shrink-0 place-items-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
+              className="relative grid size-11 shrink-0 place-items-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
             >
               <MessageSquare className="size-4" />
               {panelCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 grid size-3.5 place-items-center rounded-full bg-accent text-[9px] font-bold text-accent-foreground">
+                <span className="absolute right-1 top-1 grid size-3.5 place-items-center rounded-full bg-accent text-[9px] font-bold text-accent-foreground">
                   {panelCount}
                 </span>
               )}
@@ -951,7 +958,8 @@ export default function SessionDetailPage() {
           <div
             key={activeActivity?.id ?? "debrief"}
             className={cn(
-              "min-h-0 flex-1 overflow-y-auto px-5 pb-28 pt-6 sm:px-10",
+              // Room for the bottom bar and the phone's home indicator, so the last answer is never under them.
+              "min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-4 sm:px-10 sm:pt-6",
               navDirection === "back" ? "animate-slide-in-left" : "animate-slide-in-right",
             )}
           >
@@ -988,7 +996,7 @@ export default function SessionDetailPage() {
                       {[t(ACTIVITY_TYPE_LABELS[activeActivity.type] ?? "session.typeActivity"), t(`session.phase${phaseOf(activeActivity.type)}`)].filter((v, i, arr) => arr.indexOf(v) === i).join(" · ")}
                     </span>
                   </div>
-                  <h1 className="mb-[18px] mt-3 text-[23px] font-bold leading-[1.3]">
+                  <h1 className="mb-4 mt-2.5 text-[20px] font-bold leading-[1.3] sm:mb-[18px] sm:mt-3 sm:text-[23px]">
                     <MathText text={activeActivity.title} />
                   </h1>
                   <ContentRepairProvider
@@ -1008,21 +1016,22 @@ export default function SessionDetailPage() {
           </div>
 
           {activeActivity && (
-            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 border-t border-border bg-card/95 px-5 py-3 backdrop-blur sm:px-10">
+            <div className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between gap-2 border-t border-border bg-card/95 px-4 pb-[max(0.625rem,env(safe-area-inset-bottom))] pt-2.5 backdrop-blur sm:gap-3 sm:px-10 sm:py-3">
               <button
                 type="button"
                 disabled={activeIndex === 0}
                 onClick={() => goToIndex(activeIndex - 1)}
-                className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-border px-4 text-[13.5px] font-semibold hover:bg-muted disabled:opacity-40"
+                aria-label={t("session.back")}
+                className="inline-flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-xl border border-border px-3 text-[14px] font-semibold hover:bg-muted disabled:opacity-40 sm:px-4"
               >
                 <ArrowLeft className="size-4" />
-                {t("session.back")}
+                <span className="max-[380px]:sr-only">{t("session.back")}</span>
               </button>
               <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={() => goToNext(true)}
-                  className="inline-flex h-10 items-center gap-1.5 rounded-xl px-4 text-[13.5px] font-semibold text-muted-foreground hover:bg-muted"
+                  className="inline-flex h-11 items-center gap-1.5 rounded-xl px-3 text-[14px] font-semibold text-muted-foreground hover:bg-muted sm:px-4"
                 >
                   <SkipForward className="size-4" />
                   {t("session.skip")}
@@ -1030,7 +1039,7 @@ export default function SessionDetailPage() {
                 <button
                   type="button"
                   onClick={() => goToIndex(activeIndex + 1)}
-                  className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-border px-4 text-[13.5px] font-semibold hover:bg-muted"
+                  className="inline-flex h-11 items-center gap-1.5 rounded-xl border border-border px-4 text-[14px] font-semibold hover:bg-muted"
                 >
                   {t("session.next")}
                   <ArrowRight className="size-4" />
@@ -1040,7 +1049,7 @@ export default function SessionDetailPage() {
           )}
 
           {activeReward && (
-            <div className="pointer-events-none absolute inset-x-0 bottom-[76px] z-30 flex justify-center px-4">
+            <div className="pointer-events-none absolute inset-x-0 bottom-[calc(76px+env(safe-area-inset-bottom))] z-30 flex justify-center px-4">
               <ActivityRewardCard
                 reward={activeReward}
                 onNext={() =>

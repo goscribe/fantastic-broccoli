@@ -37,7 +37,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   if (isSession && newUi) {
     return (
-      <div className="design-root flex h-dvh flex-col overflow-hidden bg-white text-foreground">
+      <div className="design-root app-brand flex h-dvh flex-col overflow-hidden bg-white text-foreground">
         {children}
         {!BILLING_PAUSED && <SubscribeWall />}
         <ConversionTracker />

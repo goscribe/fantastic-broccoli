@@ -13,7 +13,7 @@ import type { NotesTopic } from "@/lib/api/notes-outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowUp, Check, ChevronDown, ChevronUp, FileText, Headphones, Layers, Loader2, NotebookText, Play, Plus, Presentation } from "lucide-react";
+import { ArrowUp, CalendarDays, Check, ChevronDown, ChevronRight, ChevronUp, FileText, Flame, Headphones, Layers, Loader2, NotebookText, Play, Plus, Presentation, Sparkles } from "lucide-react";
 import { useAuthUser } from "@/lib/api/auth";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { fetchStudySessions, fetchActivityCalendar, createStudySession } from "@/lib/api/study";
@@ -36,6 +36,9 @@ import { Mascot } from "@/components/rewards/mascot";
 import { useRewards } from "@/lib/rewards";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
+import "@/lib/i18n/today";
+import { TodayCard } from "@/components/learn/today-card";
+import { isBrandNew } from "@/lib/home-today";
 
 const ACTIVITY_LABEL: Record<string, string> = {
   mcq: "Quick 5",
@@ -125,6 +128,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   const [days, setDays] = useState<number[]>([]);
   const [streakInfo, setStreakInfo] = useState<StreakSummary | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -134,6 +138,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     () =>
       fetchWorkspaceTree()
         .then(async (tree) => {
+          setLoadError(false);
           const all = flatten(tree.folders, tree.rootWorkspaces);
           const folder = folderId ? underFolder(tree.folders, folderId) : null;
           const ws = workspaceId ? all.filter((w) => w.id === workspaceId) : folder ? folder.workspaces : all;
@@ -146,7 +151,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
               .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()),
           );
         })
-        .catch(() => {})
+        .catch(() => setLoadError(true))
         .finally(() => setLoading(false)),
     [workspaceId, folderId],
   );
@@ -261,11 +266,13 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         setUploading(false);
         return;
       }
+      // From home the upload is the first win: 5 questions on it, not a half-hour plan.
       const session = await createStudySession({
         workspaceId: target,
         title: workspaceTitleFromFiles(list),
-        depth: "moderate",
-        durationMinutes: 30,
+        depth: "light",
+        durationMinutes: 5,
+        quickStart: true,
         topics: list.map((f) => fileBasename(f.name)).filter(Boolean).join(", ").slice(0, 2000) || undefined,
       });
       router.push(session ? `/workspace/${target}/session/${session.id}` : `/workspace/${target}`);
@@ -332,20 +339,28 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   };
 
   const firstName = user?.name?.split(" ")[0];
+  const home = !workspaceId && !folderId;
+  // Nothing uploaded and never studied: home is one upload action and nothing else.
+  const brandNew =
+    home &&
+    !loading &&
+    !loadError &&
+    isBrandNew({ workspaces: workspaces.map((w) => ({ id: w.id, materialCount: w.materials.length })), sessions });
+  const [weekOpen, setWeekOpen] = useState(false);
+  const { t } = useI18n();
 
   return (
-    <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-6 pb-12 pt-6 lg:flex-row">
+    <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-4 pb-12 pt-5 sm:px-6 sm:pt-6 lg:flex-row">
       <input ref={fileRef} type="file" multiple accept={UPLOAD_ACCEPT} className="hidden" onChange={(e) => void onFiles(e.target.files)} />
-      <div className="flex min-w-0 flex-1 flex-col gap-[18px]">
-        <div className="flex items-end justify-between">
+      <div className="flex min-w-0 flex-1 flex-col gap-4 sm:gap-5">
+        <div className="flex items-end justify-between gap-3">
           <div>
             {(workspaceId || folderId) && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>}
             <h1 className="text-[22px] font-bold leading-tight sm:text-[26px]">
               {workspaceId || folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
             </h1>
           </div>
-          {sessions.length > 0 && <span className="hidden text-[13px] text-faint lg:inline">{sessions.length} study session{sessions.length === 1 ? "" : "s"}</span>}
-          {!workspaceId && !folderId && <HomeShopChip />}
+          {!home && sessions.length > 0 && <span className="hidden text-[13px] text-faint lg:inline">{sessions.length} study session{sessions.length === 1 ? "" : "s"}</span>}
         </div>
 
         {workspaceId && (
@@ -452,11 +467,57 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         <CourseTopics key={`course-${workspaceId}`} workspaceId={workspaceId} />
         <SubjectProgress key={`progress-${workspaceId}`} workspaceId={workspaceId} />
           </>
+        ) : loadError && workspaces.length === 0 ? (
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border px-4 py-3" role="alert">
+            <span className="text-[14px] text-muted-foreground">{t("today.loadError")}</span>
+            <button
+              type="button"
+              onClick={() => {
+                setLoading(true);
+                void load();
+              }}
+              className="inline-flex h-11 items-center rounded-xl bg-accent px-4 text-[14px] font-semibold text-white hover:bg-accent-dim"
+            >
+              {t("today.retry")}
+            </button>
+          </div>
         ) : (
           <>
-            <WeekStrip subjects={workspaces.map((w) => ({ id: w.id, title: w.title }))} />
-          <SubjectsGrid workspaces={workspaces} sessions={sessions} loading={loading} onNew={() => router.push("/new-subject")} />
-          {!folderId && <CourseShelf />}
+            {home && (
+              <TodayCard
+                workspaces={workspaces}
+                sessions={sessions}
+                loading={loading}
+                uploading={uploading}
+                onUpload={() => fileRef.current?.click()}
+              />
+            )}
+            {home && !brandNew && <HomeStatRow due={due} streak={streakInfo} />}
+            {!brandNew && (
+              <SubjectsGrid workspaces={workspaces} sessions={sessions} loading={loading} onNew={() => router.push("/new-subject")} />
+            )}
+            {/* Courses from the course picker: a compact shelf (or one "pick a course" row) under the subjects. */}
+            {!brandNew && !folderId && <CourseShelf />}
+            {!brandNew && (
+              <div>
+                {/* Phones: the week planner is long; it opens on demand under the subjects. */}
+                <button
+                  type="button"
+                  aria-expanded={weekOpen}
+                  onClick={() => setWeekOpen((v) => !v)}
+                  className="flex min-h-11 w-full items-center justify-between rounded-2xl border border-border px-4 text-[15px] font-semibold lg:hidden"
+                >
+                  <span className="flex items-center gap-2">
+                    <CalendarDays className="size-4 text-accent" />
+                    {t("today.weekToggle")}
+                  </span>
+                  <ChevronDown className={cn("size-4 text-faint transition-transform", weekOpen && "rotate-180")} />
+                </button>
+                <div className={cn(!weekOpen && "max-lg:hidden", "max-lg:mt-3")}>
+                  <WeekStrip subjects={workspaces.map((w) => ({ id: w.id, title: w.title }))} />
+                </div>
+              </div>
+            )}
           </>
         )}
 
@@ -482,10 +543,10 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         onClear={() => setSelected(new Set())}
       />
       )}
-      <div className="flex w-full shrink-0 flex-col gap-3.5 lg:w-[300px]">
-        {!workspaceId && !folderId && <HomeShopCard />}
-        {loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
-        {suggested && (() => {
+      {!brandNew && (
+      <div className={cn("w-full shrink-0 flex-col gap-3.5 lg:w-[300px]", home ? "hidden lg:flex" : "flex")}>
+        {!home && loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
+        {!home && suggested && (() => {
           const { done, total, next } = sessionProgress(suggested);
           return (
             <div className="relative overflow-hidden rounded-2xl p-[18px]" style={{ background: "var(--accent-soft)" }}>
@@ -531,7 +592,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             <div className="text-[13px] text-muted-foreground">{due ? `${due} flashcards are due today. About ${Math.max(1, Math.round(due / 3))} min.` : "Nothing due right now — nice."}</div>
           </div>
           )}
-          <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-xl text-[14px] font-semibold", due ? "bg-accent text-white" : "bg-muted")}>
+          <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-xl text-[14px] font-semibold", due && !home ? "bg-accent text-white" : "bg-muted hover:bg-accent-soft")}>
             {due ? "Review now" : "Browse flashcards"}
           </Link>
         </div>
@@ -589,8 +650,49 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         />
           </>
         )}
+        {home && <HomeShopCard />}
       </div>
+      )}
 
+    </div>
+  );
+}
+
+/**
+ * Phones: a compact stat row under the Today card (streak · cards due ·
+ * points), each cell one tap to where it matters. Desktop keeps the sidebar;
+ * the planner is in the bottom nav.
+ */
+function HomeStatRow({ due, streak }: { due: number | null; streak: StreakSummary | null }) {
+  const { t } = useI18n();
+  const shop = useShopSummary();
+  const cell = "flex min-h-16 flex-col items-center justify-center gap-0.5 px-2 py-2.5 text-center";
+  const value = "flex items-center gap-1 text-[18px] font-extrabold leading-none tabular-nums";
+  const label = "text-[12px] font-semibold text-muted-foreground";
+  return (
+    <div className="grid grid-cols-3 divide-x divide-border overflow-hidden rounded-2xl border border-border bg-card lg:hidden">
+      <div className={cell}>
+        <span className={value}>
+          <Flame className="size-4 text-[#f97316]" fill="currentColor" strokeWidth={1.6} />
+          {streak?.current ?? 0}
+        </span>
+        <span className={label}>{t("today.statStreak")}</span>
+      </div>
+      <Link href="/flashcards/review" className={cn(cell, "hover:bg-muted")}>
+        <span className={value}>
+          <Layers className="size-4 text-accent" />
+          {due ?? 0}
+        </span>
+        <span className={label}>{t("today.statCards")}</span>
+      </Link>
+      <Link href="/shop" className={cn(cell, "relative hover:bg-muted")}>
+        <span className={value}>
+          <Sparkles className="size-4 text-accent" fill="currentColor" />
+          {shop?.balance ?? 0}
+        </span>
+        <span className={label}>{t("today.statPoints")}</span>
+        {shop?.affordable && <span aria-label={t("rewards.homeAfford")} className="absolute right-2 top-2 size-2 rounded-full bg-accent" />}
+      </Link>
     </div>
   );
 }
@@ -618,7 +720,7 @@ function CatNudge({
       ? "Tick a few files and I'll build a study session from them."
       : `${count} file${count === 1 ? "" : "s"} picked — ready when you are.`;
   return (
-    <div className="pointer-events-none fixed bottom-5 right-5 z-30 flex items-end gap-2 animate-in fade-in slide-in-from-bottom-4 duration-300 sm:bottom-6 sm:right-6">
+    <div className="pointer-events-none fixed bottom-5 right-5 z-30 flex items-end gap-2 max-md:bottom-[calc(4.75rem+env(safe-area-inset-bottom))] animate-in fade-in slide-in-from-bottom-4 duration-300 sm:bottom-6 sm:right-6">
       <div className="pointer-events-auto relative max-w-[260px] rounded-2xl border border-border bg-white px-4 py-3 text-[13.5px] leading-snug shadow-[0_12px_32px_-16px_rgba(0,0,0,0.25)]">
         {text}
         {count > 0 && (
@@ -662,11 +764,43 @@ function SubjectsGrid({
         <h2 className="text-[16px] font-semibold">
           Your subjects <span className="font-medium text-faint">· {workspaces.length}</span>
         </h2>
-        <button type="button" onClick={onNew} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-2.5 text-[12.5px] font-semibold hover:bg-accent-soft">
+        <button type="button" onClick={onNew} className="inline-flex h-11 items-center gap-1.5 rounded-xl bg-muted px-3 text-[13px] font-semibold hover:bg-accent-soft sm:h-9">
           <Plus className="size-3.5" /> New subject
         </button>
       </div>
-      <div className="mt-3 grid grid-cols-1 gap-3.5 sm:grid-cols-2 xl:grid-cols-3">
+      {/* Phones: one tidy list, a progress ring per subject, instead of tall cover cards. */}
+      <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card sm:hidden">
+        {loading &&
+          workspaces.length === 0 &&
+          [0, 1].map((i) => (
+            <li key={i} className="flex items-center gap-3 px-4 py-3">
+              <Skeleton className="size-9 rounded-full" />
+              <div className="flex-1 space-y-1.5">
+                <Skeleton className="h-4 w-1/2" />
+                <Skeleton className="h-3 w-1/3" />
+              </div>
+            </li>
+          ))}
+        {workspaces.map((w) => {
+          const own = sessions.filter((x) => x.workspaceId === w.id);
+          const done = own.filter((x) => x.status === "completed").length;
+          return (
+            <li key={w.id}>
+              <Link href={`/workspace/${w.id}`} className="flex min-h-16 items-center gap-3 px-4 py-3 hover:bg-muted/60">
+                <Ring pct={own.length ? done / own.length : 0} size={36} stroke={10} color={accentForId(w.id)} />
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-[15px] font-bold">{w.title}</span>
+                  <span className="block truncate text-[12.5px] text-muted-foreground">
+                    {w.materials.length} material{w.materials.length === 1 ? "" : "s"} · {done}/{own.length} sessions
+                  </span>
+                </span>
+                <ChevronRight className="size-4 shrink-0 text-faint" />
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+      <div className="mt-3 hidden grid-cols-1 gap-3.5 sm:grid sm:grid-cols-2 xl:grid-cols-3">
         {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[172px] rounded-2xl" />)}
         {workspaces.map((w) => {
           const own = sessions
@@ -682,7 +816,7 @@ function SubjectsGrid({
               coverUrl={w.coverUrl}
               className="rounded-2xl border border-border transition-colors hover:border-accent/50"
             >
-              <Link href={`/workspace/${w.id}`} className="group relative flex min-h-[172px] flex-col justify-between p-4">
+              <Link href={`/workspace/${w.id}`} className="group relative flex min-h-[128px] flex-col justify-between p-4 sm:min-h-[172px]">
                 <div className="flex items-center gap-3">
                   <Ring pct={pct} size={44} stroke={10} color={accentForId(w.id)} />
                   <div className="min-w-0 max-w-[62%]">
@@ -692,7 +826,7 @@ function SubjectsGrid({
                     </div>
                   </div>
                 </div>
-                <div className="mt-4 flex items-center justify-between text-[12.5px]">
+                <div className="mt-3 flex items-center justify-between text-[12.5px] sm:mt-4">
                   <span className="truncate text-muted-foreground">{current ? (current.generating ? "Building the next session…" : `Next: ${current.title}`) : own.length ? "All caught up" : "No sessions yet"}</span>
                   <span className="ml-2 inline-flex h-7 shrink-0 items-center gap-1 rounded-full bg-muted px-3 font-semibold text-foreground group-hover:bg-accent/10 group-hover:text-accent">{current ? "Continue" : "Open"}</span>
                 </div>
@@ -700,7 +834,7 @@ function SubjectsGrid({
             </SubjectCover>
           );
         })}
-        <button type="button" onClick={onNew} className="flex min-h-[172px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border text-center hover:border-accent/60 hover:bg-muted/40">
+        <button type="button" onClick={onNew} className="hidden min-h-[172px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed sm:flex border-border text-center hover:border-accent/60 hover:bg-muted/40">
           <Image src="/design/cat2-sleep.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
           <div className="text-[14px] font-semibold">New subject</div>
           <div className="text-[12px] text-faint">Drop notes, get sessions</div>
@@ -842,27 +976,6 @@ function HomeShopCard() {
           )}
         </span>
       </span>
-    </Link>
-  );
-}
-
-/** Phones/tablets: the sidebar sits far below the fold, so the cat and points ride next to the greeting. */
-function HomeShopChip() {
-  const { t } = useI18n();
-  const shop = useShopSummary();
-  if (!shop) return null;
-  const pts = t("rewards.ptsValue").replace("{n}", String(shop.balance));
-  return (
-    <Link
-      href="/shop"
-      aria-label={`${t("rewards.homeTitle")} · ${pts}${shop.affordable ? ` · ${t("rewards.homeAfford")}` : ""}`}
-      className="relative flex shrink-0 items-center gap-1.5 rounded-xl bg-accent-soft py-1 pl-1 pr-2.5 text-[13px] font-semibold tabular-nums text-accent transition-colors hover:bg-accent-soft/70 lg:hidden"
-    >
-      <span className="grid size-8 place-items-end justify-center overflow-hidden">
-        <Mascot pose="wave" className="h-[30px] w-[28px]" />
-      </span>
-      {pts}
-      {shop.affordable && <span aria-hidden className="absolute -right-0.5 -top-0.5 size-2.5 rounded-full border-2 border-background bg-accent" />}
     </Link>
   );
 }

@@ -13,6 +13,7 @@ import { StreakButton } from "@/components/rewards/streak-button";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
 import "@/lib/i18n/mistakes";
+import "@/lib/i18n/today";
 import { onTreeChanged } from "@/lib/tree-events";
 import { cn } from "@/lib/utils";
 import { AppTourHost, requestAppTour } from "@/components/onboarding/app-tour";
@@ -22,8 +23,8 @@ import type { Folder, Workspace } from "@/types";
 import "@/app/design/design.css";
 
 const NAV: { href: string; label: string; labelKey?: string; icon: typeof House }[] = [
-  { href: "/", label: "Home", icon: House },
-  { href: "/planner", label: "Planner", icon: Calendar },
+  { href: "/", label: "Home", labelKey: "nav.home", icon: House },
+  { href: "/planner", label: "Planner", labelKey: "today.planner", icon: Calendar },
   { href: "/shop", label: "Shop", labelKey: "rewards.shop", icon: Store },
   { href: "/mistakes", label: "Mistakes", labelKey: "mistakes.nav", icon: RotateCcw },
 ];
@@ -115,7 +116,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
   const initial = user?.name?.trim()?.[0]?.toUpperCase() ?? "";
 
   return (
-    <div className="design-root flex h-dvh overflow-hidden bg-white text-foreground">
+    <div className="design-root app-brand flex h-dvh overflow-hidden bg-white text-foreground">
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:translate-x-0",
@@ -266,7 +267,8 @@ export function NewShell({ children }: { children: React.ReactNode }) {
         <button type="button" aria-label="Close sidebar" onClick={() => setMobileOpen(false)} className="fixed inset-0 z-40 bg-foreground/20 md:hidden" />
       )}
 
-      <div className="flex min-w-0 flex-1 flex-col overflow-y-auto">
+      {/* Room for the phone bottom nav (and the home indicator) under the last row. */}
+      <div className="flex min-w-0 flex-1 flex-col overflow-y-auto max-md:pb-[calc(4rem+env(safe-area-inset-bottom))]">
         <header className="flex h-[64px] shrink-0 items-center gap-2 px-4 sm:gap-3 sm:px-8">
           <button type="button" onClick={() => setMobileOpen(true)} className="grid size-10 place-items-center rounded-xl hover:bg-muted md:hidden" aria-label="Open sidebar">
             <Image src="/logo.png" alt="" width={24} height={24} />
@@ -297,6 +299,31 @@ export function NewShell({ children }: { children: React.ReactNode }) {
         {children}
         <AppTourHost />
       </div>
+
+      {/* Phones: the four places you go every day, one thumb away (the sidebar still holds subjects and settings). */}
+      <nav
+        aria-label="Main"
+        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-border bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+      >
+        {NAV.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
+          const label = labelKey ? t(labelKey) : fallbackLabel;
+          const on = isActive(href);
+          return (
+            <Link
+              key={href}
+              href={href}
+              aria-current={on ? "page" : undefined}
+              className={cn(
+                "flex h-16 flex-col items-center justify-center gap-1 text-[11.5px] font-semibold",
+                on ? "text-accent" : "text-muted-foreground",
+              )}
+            >
+              <Icon className="size-[22px]" strokeWidth={on ? 2.3 : 1.8} />
+              {label}
+            </Link>
+          );
+        })}
+      </nav>
 
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} folders={folders} rootWorkspaces={rootWorkspaces} />
       {creating && (

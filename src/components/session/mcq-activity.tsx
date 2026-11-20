@@ -12,6 +12,7 @@ import { useNewUi } from "@/lib/new-ui";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
+import "@/lib/i18n/today";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, XCircle, ArrowRight, ArrowLeft } from "lucide-react";
 
@@ -63,6 +64,7 @@ export function McqActivity({
       : content.questions.map(() => null),
   );
   const [burst, setBurst] = useState(0);
+  const feedbackRef = useRef<HTMLDivElement>(null);
 
   useReportCurrentItem(activityId, index);
   useActivityDraft(activityId, {
@@ -89,9 +91,17 @@ export function McqActivity({
   const handleSubmit = () => {
     if (selected === null) return;
     onAnswer(index, selected);
-    if (selected === question.correctIndex) {
+    const right = selected === question.correctIndex;
+    if (right) {
       setCorrectCount((c) => c + 1);
-      setBurst((b) => b + 1);
+      // The redesign cheers in the feedback card itself; full-screen confetti covered the question for 2.6s.
+      if (!newUi) setBurst((b) => b + 1);
+    }
+    // A tiny tap on phones that support it: instant, and no motion.
+    try {
+      navigator.vibrate?.(right ? 12 : [24, 40, 24]);
+    } catch {
+      /* not supported */
     }
     setAnswersByQ((prev) => {
       const next = [...prev];
@@ -107,6 +117,13 @@ export function McqActivity({
     setSelected(past);
     setRevealed(past !== null);
   };
+
+  // Bring the result into view above the bottom bar on short phone screens.
+  useEffect(() => {
+    if (!revealed || !newUi) return;
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    feedbackRef.current?.scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" });
+  }, [revealed, index, newUi]);
 
   const handleNext = () => {
     if (isLast) {
@@ -124,35 +141,43 @@ export function McqActivity({
           <button
             type="button"
             onClick={() => goTo(index - 1)}
-            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+            className={cn(
+              "flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground",
+              newUi && "-my-3 -ml-2 min-h-11 px-2 text-[13px] font-semibold",
+            )}
           >
             <ArrowLeft className="h-3 w-3" />
             {t("session.back")}
           </button>
         )}
-        <span className="text-xs text-muted-foreground tabular-nums">
+        <span className={cn("text-xs text-muted-foreground tabular-nums", newUi && "text-[13px] font-semibold")} aria-live="polite">
           {t("session.question")} {index + 1} {t("session.of")}{" "}
           {content.questions.length}
           {index > 0 && ` · ${correctCount} ${t("session.correctSoFar")}`}
         </span>
-        <div className="flex gap-1 w-32">
+        <div className={cn("flex gap-1", newUi ? "w-24 shrink-0 sm:w-32" : "w-32")} aria-hidden>
           {content.questions.map((_, i) => (
             <div
               key={i}
               className={cn(
-                "h-1 flex-1 rounded-full",
-                i < index ? "bg-accent" : i === index ? "bg-accent/40" : "bg-muted",
+                newUi ? "h-1.5 flex-1 rounded-full transition-colors duration-300" : "h-1 flex-1 rounded-full",
+                // Answered questions fill in; the current one is half-tone.
+                (newUi ? answersByQ[i] !== null && i !== index : i < index)
+                  ? "bg-accent"
+                  : i === index
+                    ? revealed && newUi ? "bg-accent" : "bg-accent/40"
+                    : "bg-muted",
               )}
             />
           ))}
         </div>
       </div>
 
-      <p className={newUi ? "text-[20px] font-bold leading-[1.35]" : "text-sm font-medium leading-relaxed"}>
+      <p className={newUi ? "text-[18px] font-bold leading-[1.35] sm:text-[20px]" : "text-sm font-medium leading-relaxed"}>
         <McqQuestionBody text={question.question} figures={question.figures} options={question.options} />
       </p>
 
-      <div className={optionsHaveFigures(question.options) ? "grid grid-cols-2 gap-2" : "space-y-2"}>
+      <div className={optionsHaveFigures(question.options) ? "grid grid-cols-2 gap-2" : newUi ? "space-y-2.5" : "space-y-2"}>
         {question.options.map((option, i) => (
           <button
             key={i}
@@ -160,7 +185,9 @@ export function McqActivity({
             onClick={() => !revealed && setSelected(i)}
             disabled={revealed}
             className={cn(
-              newUi ? "w-full text-left rounded-[14px] border bg-card px-4 py-3 text-[15px] font-medium" : "w-full text-left p-3 rounded-lg border text-sm",
+              newUi
+                ? "min-h-[52px] w-full touch-manipulation text-left rounded-[14px] border bg-card px-3.5 py-3 text-[15px] font-medium leading-snug transition-colors duration-150 active:scale-[0.99] motion-reduce:active:scale-100 sm:px-4"
+                : "w-full text-left p-3 rounded-lg border text-sm",
               !revealed && selected === i && (newUi ? "border-accent bg-accent-soft" : "border-accent bg-accent/5"),
               !revealed && selected !== i && "border-border hover:border-accent/30 hover:bg-muted/30",
               revealed && i === question.correctIndex && "border-success bg-success/5",
@@ -198,7 +225,8 @@ export function McqActivity({
         <div className="flex justify-end">
           <Button
             variant="primary"
-            size="sm"
+            size={newUi ? "lg" : "sm"}
+            className={newUi ? "w-full rounded-xl sm:w-auto" : undefined}
             onClick={handleSubmit}
             disabled={selected === null}
           >
@@ -208,13 +236,16 @@ export function McqActivity({
       )}
 
       {revealed && newUi && (
+        <div ref={feedbackRef} className="scroll-mb-28">
         <FeedbackCard
           ok={isCorrect}
           title={isCorrect ? t("session.correct") : t("session.notQuite")}
           message={<MarkdownText text={question.explanation} />}
           primary={isLast ? t("session.finishQuiz") : t("session.nextQuestion")}
           onPrimary={handleNext}
+          note={isCorrect ? undefined : t("today.savedToMistakes")}
         />
+        </div>
       )}
       {revealed && !newUi && (
         <div className="pt-3 border-t border-border">

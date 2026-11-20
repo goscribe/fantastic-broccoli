@@ -18,12 +18,17 @@ export type FunnelEvent =
   | "first_run.wait_viewed"
   | "first_run.left_while_waiting"
   | "quick5.started"
-  | "quick5.finished";
+  | "quick5.finished"
+  /** Home's one "Today" button was tapped; `action` says which one it was. */
+  | "home.today_tapped";
+
+export type TodayActionKind = "mistakes" | "plan" | "quick5" | "upload" | "continue";
 
 export type FirstRunOption = "upload" | "camera" | "topic" | "paste" | "curriculum" | "skip";
 
 export interface FunnelProps {
   option?: FirstRunOption;
+  action?: TodayActionKind;
   durationMs?: number;
   fileCount?: number;
   sizeKb?: number;
