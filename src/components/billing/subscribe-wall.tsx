@@ -16,7 +16,7 @@ import {
 } from "@/lib/api/account";
 import { hasPlanAccess } from "@/lib/plan-access";
 import { useAuthUser } from "@/lib/api/auth";
-import { toastError } from "@/lib/toast";
+import { toast, toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 
 
@@ -82,15 +82,16 @@ export function SubscribeWall() {
     let cancelled = false;
     let timer: ReturnType<typeof setTimeout> | null = null;
 
-    const load = (variant: WallVariant, delayMs = 0) =>
+    /** Resolves true when the wall will show. */
+    const load = (variant: WallVariant, delayMs = 0): Promise<boolean> =>
       Promise.all([fetchPlanCaps(), fetchPlanOptions()])
         .then(([nextCaps, nextPlans]) => {
-          if (cancelled || hasPlanAccess(nextCaps)) return;
+          if (cancelled || hasPlanAccess(nextCaps)) return false;
           if (
             variant === "post-session" &&
             (nextCaps.completedSessions < 1 || postSessionShown(user.id))
           ) {
-            return;
+            return false;
           }
           setCaps(nextCaps);
           setPlans(nextPlans.filter((p) => p.priceDollars > 0));
@@ -101,14 +102,22 @@ export function SubscribeWall() {
           };
           if (delayMs > 0) timer = setTimeout(reveal, delayMs);
           else reveal();
+          return true;
         })
-        .catch(() => {});
+        .catch(() => false);
 
     const onCompleted = () => load("post-session", POST_SESSION_DELAY_MS);
     const onLimit = (event: Event) => {
       const detail = (event as CustomEvent<string>).detail;
-      setReason(typeof detail === "string" ? detail : null);
-      void load("limit");
+      const message = typeof detail === "string" ? detail : null;
+      // Claim it: we show the reason. If the wall can't open (paid user out
+      // of tokens, caps failed to load), fall back to the server's message
+      // so the refusal is never silent.
+      event.preventDefault();
+      setReason(message);
+      void load("limit").then((shown) => {
+        if (!shown && message && !cancelled) toast.error(message, { id: message });
+      });
     };
     window.addEventListener(SESSION_COMPLETED_EVENT, onCompleted);
     window.addEventListener(PLAN_LIMIT_EVENT, onLimit);

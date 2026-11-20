@@ -293,6 +293,8 @@ export default function SessionDetailPage() {
   }, [activeActivity]);
 
   const completeActivity = useMutation({
+    // A dropped request here costs the learner their streak day; retry it.
+    retry: 2,
     mutationFn: (input: { activityId: string; skipped?: boolean }) =>
       // Bank-pulled activities only exist client-side; no server row to update.
       input.activityId.startsWith("bank-")
@@ -527,7 +529,10 @@ export default function SessionDetailPage() {
       advanceFrom(fromId, nextId);
       return;
     }
-    completeActivity.mutate({ activityId: fromId, skipped });
+    // Already recorded (e.g. an MCQ finished on its last answer): don't send it twice.
+    if (skipped || activeActivity.status !== "completed") {
+      completeActivity.mutate({ activityId: fromId, skipped });
+    }
     setNavDirection("forward");
     if (skipped) {
       clearReward();
@@ -560,6 +565,20 @@ export default function SessionDetailPage() {
   };
   const activeReward =
     reward && activeActivity?.id === reward.fromId ? reward : null;
+
+  /**
+   * Record an activity as completed without moving on. MCQs call this when
+   * their last answer is in: learners often swipe or arrow to the debrief
+   * instead of tapping "Finish quiz", which used to leave the activity (and
+   * the Quick 5) IN_PROGRESS, with no streak day.
+   */
+  const markFinished = (activity: SessionActivity) => {
+    if (activity.status === "completed" || activity.status === "skipped") return;
+    // Stay on it (the learner is reading the last explanation): the default
+    // "first unfinished" pick would jump ahead as soon as the status flips.
+    setActiveActivityId((prev) => (prev === undefined ? activity.id : prev));
+    completeActivity.mutate({ activityId: activity.id });
+  };
 
   // Navigate the feed without completing anything (swipe/arrow/peek click).
   const goToIndex = (i: number) => {
@@ -651,6 +670,7 @@ export default function SessionDetailPage() {
               }
             }}
             onComplete={() => goToNext()}
+            onAllAnswered={() => markFinished(activity)}
           />
         );
       case "flashcard_review":

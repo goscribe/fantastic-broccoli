@@ -62,6 +62,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <TopBar showLogo />
         {children}
         <ConversionTracker />
+        {!BILLING_PAUSED && <SubscribeWall />}
       </div>
     );
   }

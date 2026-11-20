@@ -1,7 +1,25 @@
-import { createTRPCClient, httpBatchLink } from "@trpc/client";
+import { createTRPCClient, httpBatchLink, type TRPCLink } from "@trpc/client";
+import { observable } from "@trpc/server/observable";
 import type { AppRouter } from "@goscribe/server";
 import superjson from "superjson";
 import { apiUrl } from "./config";
+import { surfaceRefusal } from "./refusals";
+
+/** Surfaces plan-limit and other refusals of key mutations (see refusals.ts). */
+const refusalLink: TRPCLink<AppRouter> = () => ({ op, next }) =>
+  observable((observer) =>
+    next(op).subscribe({
+      next: (value) => observer.next(value),
+      error: (err) => {
+        if (op.type === "mutation") {
+          const code = (err as { data?: { code?: string } | null }).data?.code;
+          surfaceRefusal(op.path, err.message, code ?? undefined);
+        }
+        observer.error(err);
+      },
+      complete: () => observer.complete(),
+    }),
+  );
 
 /**
  * Typed tRPC client for the published goscribe/server router
@@ -12,6 +30,7 @@ import { apiUrl } from "./config";
  */
 export const api = createTRPCClient<AppRouter>({
   links: [
+    refusalLink,
     httpBatchLink({
       url: `${apiUrl}/trpc`,
       transformer: superjson,

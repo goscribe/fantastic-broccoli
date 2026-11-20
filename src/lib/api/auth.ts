@@ -14,6 +14,12 @@ export interface AuthUser {
   name: string;
   email?: string;
   emailVerified?: boolean;
+  /**
+   * Whether the server gates features on a verified email. False on current
+   * servers (verification is only a nudge); an older server that doesn't
+   * send it still gates, so a missing value means true.
+   */
+  emailVerificationRequired: boolean;
   profilePicture?: string | null;
   role?: string | null;
   isAdmin: boolean;
@@ -44,6 +50,7 @@ type SessionUser = {
   name?: string | null;
   email?: string | null;
   emailVerified?: boolean;
+  emailVerificationRequired?: boolean;
   profilePicture?: string | null;
   role?: { id: string; name: string } | null;
   preferredLanguage?: string;
@@ -61,6 +68,7 @@ function toAuthUser(session: SessionResult): AuthUser | null {
     name: u.name ?? u.email ?? "You",
     email: u.email ?? undefined,
     emailVerified: u.emailVerified,
+    emailVerificationRequired: u.emailVerificationRequired ?? true,
     role: u.role?.name ?? null,
     isAdmin: u.role?.name === SYSTEM_ADMIN_ROLE,
     preferredLanguage: u.preferredLanguage,
