@@ -116,7 +116,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
   const initial = user?.name?.trim()?.[0]?.toUpperCase() ?? "";
 
   return (
-    <div className="design-root app-brand flex h-dvh overflow-hidden bg-white text-foreground">
+    <div className="design-root app-brand flex h-dvh overflow-hidden bg-[var(--page)] text-foreground">
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:translate-x-0",
@@ -303,7 +303,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
       {/* Phones: the four places you go every day, one thumb away (the sidebar still holds subjects and settings). */}
       <nav
         aria-label="Main"
-        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-border bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-accent/10 bg-white/95 px-2 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_24px_-16px_rgba(76,52,180,.25)] backdrop-blur md:hidden"
       >
         {NAV.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
           const label = labelKey ? t(labelKey) : fallbackLabel;
@@ -314,11 +314,19 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               href={href}
               aria-current={on ? "page" : undefined}
               className={cn(
-                "flex h-16 flex-col items-center justify-center gap-1 text-[11.5px] font-semibold",
-                on ? "text-accent" : "text-muted-foreground",
+                "group flex h-16 flex-col items-center justify-center gap-0.5 text-[11.5px] font-bold",
+                on ? "text-accent-dim" : "text-muted-foreground",
               )}
             >
-              <Icon className="size-[22px]" strokeWidth={on ? 2.3 : 1.8} />
+              {/* Active tab: a soft pill behind a filled icon. */}
+              <span
+                className={cn(
+                  "grid h-8 w-14 place-items-center rounded-full transition-[background-color,transform] duration-200 group-active:scale-90 motion-reduce:transition-none",
+                  on ? "bg-accent-soft" : "group-hover:bg-muted",
+                )}
+              >
+                <Icon className="size-[22px]" strokeWidth={on ? 2.4 : 1.9} fill={on ? "currentColor" : "none"} fillOpacity={on ? 0.18 : 0} />
+              </span>
               {label}
             </Link>
           );

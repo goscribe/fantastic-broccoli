@@ -199,23 +199,24 @@ export function McqActivity({
             disabled={revealed}
             className={cn(
               newUi
-                ? "min-h-[52px] w-full touch-manipulation text-left rounded-[14px] border bg-card px-3.5 py-3 text-[15px] font-medium leading-snug transition-colors duration-150 active:scale-[0.99] motion-reduce:active:scale-100 sm:px-4"
+                ? // Chunky answer tiles: a thicker lower edge that presses flat; a spring when picked, a shake when wrong.
+                  "min-h-[56px] w-full touch-manipulation text-left rounded-2xl border-2 border-b-4 bg-card px-3.5 py-3 text-[15.5px] font-semibold leading-snug transition-[background-color,border-color,transform] duration-150 active:translate-y-[2px] active:border-b-2 disabled:active:translate-y-0 disabled:active:border-b-4 motion-reduce:transition-none motion-reduce:active:translate-y-0 sm:px-4"
                 : "w-full text-left p-3 rounded-lg border text-sm",
-              !revealed && selected === i && (newUi ? "border-accent bg-accent-soft" : "border-accent bg-accent/5"),
-              !revealed && selected !== i && "border-border hover:border-accent/30 hover:bg-muted/30",
-              revealed && i === question.correctIndex && "border-success bg-success/5",
-              revealed && selected === i && i !== question.correctIndex && "border-red-500 bg-red-500/5",
+              !revealed && selected === i && (newUi ? "life-pop border-accent bg-accent-soft text-accent-dim" : "border-accent bg-accent/5"),
+              !revealed && selected !== i && (newUi ? "border-border hover:border-accent/40 hover:bg-accent-soft/30" : "border-border hover:border-accent/30 hover:bg-muted/30"),
+              revealed && i === question.correctIndex && (newUi ? "border-emerald-400 bg-emerald-50 text-emerald-900" : "border-success bg-success/5"),
+              revealed && selected === i && i !== question.correctIndex && (newUi ? "life-shake border-rose-400 bg-rose-50 text-rose-900" : "border-red-500 bg-red-500/5"),
               revealed && selected !== i && i !== question.correctIndex && "opacity-50",
             )}
           >
             <div className="flex items-center gap-3">
               <span
                 className={cn(
-                  newUi ? "flex h-7 w-7 items-center justify-center rounded-lg text-[13px] font-semibold flex-shrink-0" : "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium flex-shrink-0",
-                  !revealed && selected === i && "bg-accent text-accent-foreground",
-                  !revealed && selected !== i && "bg-muted text-muted-foreground",
-                  revealed && i === question.correctIndex && "bg-success text-white",
-                  revealed && selected === i && i !== question.correctIndex && "bg-red-500 text-white",
+                  newUi ? "flex h-8 w-8 items-center justify-center rounded-[10px] border-2 text-[13.5px] font-extrabold flex-shrink-0" : "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium flex-shrink-0",
+                  !revealed && selected === i && (newUi ? "border-accent bg-accent text-accent-foreground" : "bg-accent text-accent-foreground"),
+                  !revealed && selected !== i && (newUi ? "border-border bg-white text-muted-foreground" : "bg-muted text-muted-foreground"),
+                  revealed && i === question.correctIndex && (newUi ? "border-emerald-500 bg-emerald-500 text-white" : "bg-success text-white"),
+                  revealed && selected === i && i !== question.correctIndex && (newUi ? "border-rose-500 bg-rose-500 text-white" : "bg-red-500 text-white"),
                 )}
               >
                 {newUi ? i + 1 : String.fromCharCode(65 + i)}
@@ -239,7 +240,7 @@ export function McqActivity({
           <Button
             variant="primary"
             size={newUi ? "lg" : "sm"}
-            className={newUi ? "w-full rounded-xl sm:w-auto" : undefined}
+            className={newUi ? "btn-chunky h-[52px] w-full rounded-2xl text-[16px] font-extrabold disabled:shadow-none sm:w-auto sm:min-w-[200px]" : undefined}
             onClick={handleSubmit}
             disabled={selected === null}
           >

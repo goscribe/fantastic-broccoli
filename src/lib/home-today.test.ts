@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { isBrandNew, pickResumable, pickTodayAction, type TodayInputs } from "./home-today";
+import { greetingMood, isBrandNew, pickResumable, pickTodayAction, type TodayInputs } from "./home-today";
 
 const s = (o: Partial<TodayInputs["sessions"][number]> = {}): TodayInputs["sessions"][number] => ({
   id: "s1",
@@ -41,6 +41,12 @@ test("priority: mistakes → plan task → Quick 5", () => {
   assert.deepEqual(pickTodayAction(base({ planTasks: [{ id: "t0", status: "done" }] })), { kind: "quick5", workspaceId: "w1", resumeSessionId: null });
 });
 
+test("goal met and nothing urgent: done for today (mistakes and plan tasks still come first)", () => {
+  assert.deepEqual(pickTodayAction(base({ doneToday: true })), { kind: "done", workspaceId: "w1" });
+  assert.equal(pickTodayAction(base({ doneToday: true, openMistakes: 2, practiceMinutes: 1 })).kind, "mistakes");
+  assert.equal(pickTodayAction(base({ doneToday: true, planTasks: [{ id: "t1", status: "planned" }] })).kind, "plan");
+});
+
 test("an unfinished Quick 5 is resumed rather than rebuilt", () => {
   const sessions = [s(), s({ id: "q1", workspaceId: "w2", quickStart: true, activities: [{ status: "in_progress" }] })];
   assert.deepEqual(pickTodayAction(base({ sessions })), { kind: "quick5", workspaceId: "w2", resumeSessionId: "q1" });
@@ -55,6 +61,15 @@ test("the 'or continue' line is a started, unfinished full session", () => {
   const quick = s({ id: "q", quickStart: true });
   assert.equal(pickResumable([fresh, quick, half])?.id, "half");
   assert.equal(pickResumable([half], "half"), undefined);
+});
+
+test("the greeting line follows the learner's day", () => {
+  const g = (o: Partial<Parameters<typeof greetingMood>[0]>) => greetingMood({ brandNew: false, doneToday: false, streak: 0, openMistakes: 0, ...o });
+  assert.equal(g({ brandNew: true, streak: 3 }), "new");
+  assert.equal(g({ doneToday: true, streak: 3 }), "done");
+  assert.equal(g({ streak: 3, openMistakes: 2 }), "streak");
+  assert.equal(g({ openMistakes: 2 }), "fix");
+  assert.equal(g({}), "start");
 });
 
 test("every Today string is translated in all 7 locales", () => {

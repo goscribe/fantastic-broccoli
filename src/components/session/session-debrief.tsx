@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { ConfettiDots } from "@/components/graphics/floating-decor";
+import { SparkleBurst } from "@/components/graphics/sparkle-burst";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useCountUp } from "@/lib/use-count-up";
 import {
   Sparkles,
   Loader2,
@@ -114,17 +117,27 @@ function NextStep({
 const usefulHeadline = (h: string | undefined) =>
   h && !/^session debrief\b/i.test(h.trim()) ? h : undefined;
 
-function StatTile({ icon, label, value, tone }: { icon: ReactNode; label: string; value: ReactNode; tone: string }) {
+const TILE_TONE = {
+  accent: { box: "border-accent/20 bg-[linear-gradient(160deg,#ece6ff,#faf8ff)]", icon: "bg-accent" },
+  green: { box: "border-emerald-200 bg-[linear-gradient(160deg,#dcf7e8,#f5fcf8)]", icon: "bg-emerald-500" },
+  amber: { box: "border-amber-200 bg-[linear-gradient(160deg,#fff0d6,#fffaf0)]", icon: "bg-amber-500" },
+} as const;
+
+/** One tinted result tile (Brilliant's "Lesson complete" tiles): icon chip, big number, small label. */
+function StatTile({ icon, label, value, tone }: { icon: ReactNode; label: string; value: ReactNode; tone: keyof typeof TILE_TONE }) {
+  const c = TILE_TONE[tone];
   return (
-    <div className="flex flex-col items-center gap-1 rounded-2xl border border-border bg-card px-2 py-3.5">
-      {/* Calm stat row: the number in ink, colour only on the small icon. */}
-      <span className="flex items-center gap-1.5 text-[19px] font-extrabold tabular-nums leading-none text-foreground">
-        <span className={tone}>{icon}</span>
-        {value}
-      </span>
-      <span className="text-[12px] font-medium text-muted-foreground">{label}</span>
+    <div className={cn("flex flex-col items-center gap-1.5 rounded-[20px] border px-2 py-3", c.box)}>
+      <span className={cn("grid size-7 place-items-center rounded-full text-white", c.icon)}>{icon}</span>
+      <span className="text-[21px] font-extrabold tabular-nums leading-none text-foreground">{value}</span>
+      <span className="text-[12px] font-bold text-muted-foreground">{label}</span>
     </div>
   );
+}
+
+function CountUp({ value, prefix = "" }: { value: number; prefix?: string }) {
+  const n = useCountUp(value);
+  return <>{`${prefix}${n}`}</>;
 }
 
 type MasteryChange = NonNullable<ApiSessionStats["mastery"]>[number];
@@ -138,9 +151,9 @@ type MasteryChange = NonNullable<ApiSessionStats["mastery"]>[number];
 function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: MasteryChange[] }) {
   const { t } = useI18n();
   return (
-    <div className="w-full overflow-hidden rounded-2xl border border-border bg-card" role="status">
-      <div className="grid grid-cols-3 divide-x divide-border [&>div]:rounded-none [&>div]:border-0">{tiles}</div>
-      <ul className="space-y-3 border-t border-border px-4 py-3.5 text-left" aria-label={t("debrief.masteryTitle")}>
+    <div className="flex w-full flex-col gap-2.5" role="status">
+      <div className="grid grid-cols-3 gap-2">{tiles}</div>
+      <ul className="life-card space-y-3 px-4 py-3.5 text-left" aria-label={t("debrief.masteryTitle")}>
         {mastery.map((m, i) => {
           const { before, after, delta, base, gain } = masteryRow(m);
           return (
@@ -171,7 +184,7 @@ function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: Maste
               <div className="mt-1.5 flex h-1.5 overflow-hidden rounded-full bg-muted" aria-hidden>
                 <span className="h-full bg-accent/35" style={{ width: `${base}%` }} />
                 <span
-                  className="h-full rounded-r-full bg-accent transition-[width] duration-700 ease-out"
+                  className="fill-grow h-full rounded-r-full bg-[linear-gradient(90deg,var(--accent),#9d8cf5)]"
                   style={{ width: `${gain}%` }}
                 />
               </div>
@@ -319,7 +332,7 @@ export function SessionDebrief({
   const primary = handOff ? (
     <Button
       size="lg"
-      className="w-full text-[15px]"
+      className="btn-chunky h-[52px] w-full rounded-2xl text-[16px] font-extrabold"
       disabled={sessionsLoading || startFull.isPending}
       onClick={() => (fullSession ? openSession(fullSession.id) : startFull.mutate())}
     >
@@ -331,14 +344,14 @@ export function SessionDebrief({
       {t(fullSession ? "session.quick5FinishCta" : "session.quick5StartCta").replace("{n}", String(fullMinutes))}
     </Button>
   ) : quickStart ? (
-    <Button size="lg" className="w-full text-[15px]" onClick={onBack}>
+    <Button size="lg" className="btn-chunky h-[52px] w-full rounded-2xl text-[16px] font-extrabold" onClick={onBack}>
       {t("debrief.continue")}
       <ArrowRight className="ml-1.5 h-4 w-4" />
     </Button>
   ) : weakest ? (
     <Button
       size="lg"
-      className="w-full text-[15px]"
+      className="btn-chunky h-[52px] w-full rounded-2xl text-[16px] font-extrabold"
       disabled={startWeakest.isPending}
       onClick={() => startWeakest.mutate(weakest.label)}
     >
@@ -347,7 +360,7 @@ export function SessionDebrief({
     </Button>
   ) : (
     <Link href="/flashcards/review" className="block w-full">
-      <Button size="lg" className="w-full text-[15px]">
+      <Button size="lg" className="btn-chunky h-[52px] w-full rounded-2xl text-[16px] font-extrabold">
         {t("session.reviewDueCards")}
         <ArrowRight className="ml-1.5 h-4 w-4" />
       </Button>
@@ -357,28 +370,28 @@ export function SessionDebrief({
   const statTiles = (stats: ApiSessionStats) => (
     <>
       <StatTile
-        tone="text-accent"
+        tone="accent"
         icon={<Sparkles className="size-4" fill="currentColor" />}
-        value={`+${points}`}
+        value={<CountUp value={points} prefix="+" />}
         label={t("debrief.points")}
       />
       {stats.accuracy !== null ? (
         <StatTile
-          tone="text-accent"
+          tone="green"
           icon={<Target className="size-4" />}
           value={`${Math.round(stats.accuracy * 100)}%`}
           label={t("debrief.accuracy")}
         />
       ) : (
         <StatTile
-          tone="text-accent"
+          tone="green"
           icon={<CheckCircle2 className="size-4" />}
           value={`${stats.activitiesDone}/${stats.activitiesTotal}`}
           label={t("debrief.done")}
         />
       )}
       <StatTile
-        tone="text-accent"
+        tone="amber"
         icon={<Clock className="size-4" />}
         value={t("debrief.minutes").replace("{n}", String(stats.minutes))}
         label={t("debrief.time")}
@@ -388,15 +401,17 @@ export function SessionDebrief({
   return (
     <div className="mx-auto flex max-w-md flex-col items-center pb-10 pt-0 text-center animate-fade-up sm:pt-2">
       <div className="relative" aria-hidden>
+        {newUi && <span className="absolute left-1/2 top-1/2 size-[140px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(250,204,21,.35),rgba(105,82,224,.12)_55%,transparent_70%)] sm:size-[190px]" />}
+        {newUi && <SparkleBurst burst={1} count={14} distance={62} />}
         {newUi ? (
-          <Mascot pose="trophy" className="h-[76px] sm:h-[128px]" />
+          <Mascot pose="trophy" className="cat-cheer relative h-[84px] sm:h-[128px]" />
         ) : (
           <Image src="/illustrations/props/trophy.png" alt="" width={160} height={160} className="w-24" />
         )}
         <ConfettiDots />
       </div>
 
-      <h2 className="mt-2 text-[22px] font-bold tracking-tight sm:mt-4 sm:text-[28px]">
+      <h2 className="mt-2 text-[26px] font-extrabold tracking-tight sm:mt-4 sm:text-[32px]">
         {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
       </h2>
       <div className="mt-1 min-h-6 text-[14.5px] leading-6 text-muted-foreground line-clamp-2 sm:mt-1.5 sm:text-[15px]">
@@ -416,7 +431,7 @@ export function SessionDebrief({
         {stats ? (
           statTiles(stats)
         ) : (
-          [0, 1, 2].map((i) => <div key={i} className="h-[74px] animate-pulse rounded-2xl bg-muted" />)
+          [0, 1, 2].map((i) => <Skeleton key={i} className="h-[86px] rounded-[20px]" />)
         )}
       </div>
       )}
@@ -432,7 +447,7 @@ export function SessionDebrief({
         {primary}
         {/* The second step sits right under the first, so both are visible without scrolling. */}
         {mistakes > 0 && (
-          <div className="overflow-hidden rounded-2xl border border-accent/30 bg-card text-left">
+          <div className="life-press overflow-hidden rounded-[20px] border-2 border-accent/25 bg-[linear-gradient(150deg,#f1edff,#ffffff)] text-left shadow-[var(--card-shadow)]">
             <NextStep
               icon={<RotateCcw className="size-[18px]" />}
               title={(mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes))}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Mascot } from "@/components/rewards/mascot";
 import { CalendarClock, ChevronLeft, ChevronRight, Clock, Pencil, Plus, Trash2 } from "lucide-react";
 import { accentForId } from "@/lib/accent-palette";
 import {
@@ -75,9 +76,14 @@ export function ExamPlanner() {
   return (
     <div className="mx-auto w-full max-w-[1080px] px-4 pb-16 pt-5 sm:px-6 sm:pt-6">
       <div className="mb-4 flex items-end justify-between gap-3">
-        <div className="min-w-0">
-          <div className="text-[12px] font-semibold text-faint">{t("ep.title")}</div>
-          <h1 className="truncate text-[22px] font-bold leading-tight tracking-tight sm:text-[26px]">{title}</h1>
+        <div className="flex min-w-0 items-center gap-3.5">
+          <span aria-hidden className="grid size-14 shrink-0 place-items-end justify-center overflow-hidden rounded-[18px] bg-[linear-gradient(160deg,#ece6ff,#f8f5ff)] shadow-[var(--card-shadow)] sm:size-16">
+            <Mascot pose="pencil" className="cat-peek -mb-1 h-[50px] sm:h-[58px]" />
+          </span>
+          <div className="min-w-0">
+            <div className="text-[12px] font-bold uppercase tracking-wide text-accent-dim">{t("ep.title")}</div>
+            <h1 className="truncate text-[24px] font-extrabold leading-tight tracking-tight sm:text-[30px]">{title}</h1>
+          </div>
         </div>
         {hasExams && tab !== "timetable" && (
           <button

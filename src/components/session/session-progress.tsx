@@ -92,9 +92,9 @@ export function SessionProgressHeader({
               >
                 <span
                   className={cn(
-                    "block h-2 w-full rounded-full transition-colors duration-500",
+                    "block h-2.5 w-full rounded-full transition-colors duration-500",
                     done
-                      ? "bg-accent"
+                      ? "bg-[linear-gradient(90deg,var(--accent),#9d8cf5)] shadow-[inset_0_-2px_0_rgba(0,0,0,.12)]"
                       : skipped
                         ? "bg-accent/30"
                         : current

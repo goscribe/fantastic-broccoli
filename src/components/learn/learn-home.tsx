@@ -13,7 +13,7 @@ import type { NotesTopic } from "@/lib/api/notes-outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowUp, CalendarDays, Check, ChevronDown, ChevronRight, ChevronUp, FileText, Flame, Headphones, Layers, Loader2, NotebookText, Play, Plus, Presentation, Sparkles } from "lucide-react";
+import { ArrowUp, CalendarDays, Check, ChevronDown, ChevronRight, ChevronUp, FileText, Headphones, Layers, Loader2, NotebookText, Play, Plus, Presentation } from "lucide-react";
 import { useAuthUser } from "@/lib/api/auth";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { fetchStudySessions, fetchActivityCalendar, createStudySession } from "@/lib/api/study";
@@ -38,7 +38,12 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
 import "@/lib/i18n/today";
 import { TodayCard } from "@/components/learn/today-card";
-import { isBrandNew } from "@/lib/home-today";
+import { StreakCard } from "@/components/learn/streak-card";
+import { useQuery } from "@tanstack/react-query";
+import { mistakesApi } from "@/lib/api/mistakes";
+import { greetingMood, isBrandNew, type GreetingMood } from "@/lib/home-today";
+
+const GREET_KEY: Record<GreetingMood, string> = { new: "greetNew", done: "greetDone", streak: "greetStreak", fix: "greetFix", start: "greetStart" };
 
 const ACTIVITY_LABEL: Record<string, string> = {
   mcq: "Quick 5",
@@ -348,6 +353,20 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     isBrandNew({ workspaces: workspaces.map((w) => ({ id: w.id, materialCount: w.materials.length })), sessions });
   const [weekOpen, setWeekOpen] = useState(false);
   const { t } = useI18n();
+  const shop = useShopSummary();
+  const { data: mistakeSummary } = useQuery({
+    queryKey: ["mistakes-summary", null],
+    queryFn: () => mistakesApi.summary(),
+    enabled: home,
+    retry: 1,
+  });
+  const doneToday = !!streakInfo?.todayGoalMet;
+  const mood = greetingMood({
+    brandNew: !!brandNew,
+    doneToday,
+    streak: streakInfo?.current ?? 0,
+    openMistakes: mistakeSummary?.open ?? 0,
+  });
 
   return (
     <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-4 pb-12 pt-5 sm:px-6 sm:pt-6 lg:flex-row">
@@ -356,9 +375,14 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         <div className="flex items-end justify-between gap-3">
           <div>
             {(workspaceId || folderId) && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>}
-            <h1 className="text-[22px] font-bold leading-tight sm:text-[26px]">
+            <h1 className={cn("leading-tight", home ? "text-[26px] font-extrabold sm:text-[32px]" : "text-[22px] font-bold sm:text-[26px]")}>
               {workspaceId || folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
             </h1>
+            {home && !loading && (
+              <p className="mt-1 text-[15px] font-semibold text-muted-foreground sm:text-[16px]">
+                {t(`today.${GREET_KEY[mood]}`).replace("{n}", String(streakInfo?.current ?? 0))}
+              </p>
+            )}
           </div>
           {!home && sessions.length > 0 && <span className="hidden text-[13px] text-faint lg:inline">{sessions.length} study session{sessions.length === 1 ? "" : "s"}</span>}
         </div>
@@ -490,9 +514,12 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                 loading={loading}
                 uploading={uploading}
                 onUpload={() => fileRef.current?.click()}
+                doneToday={doneToday}
               />
             )}
-            {home && !brandNew && <HomeStatRow due={due} streak={streakInfo} />}
+            {home && !brandNew && (
+              <StreakCard streak={streakInfo} due={due} points={shop?.balance ?? 0} canAfford={!!shop?.affordable} tiles className="lg:hidden" />
+            )}
             {!brandNew && (
               <SubjectsGrid workspaces={workspaces} sessions={sessions} loading={loading} onNew={() => router.push("/new-subject")} />
             )}
@@ -570,7 +597,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             </div>
           );
         })()}
-        <div className="rounded-2xl border border-border p-[18px]">
+        <div className="rounded-2xl border border-border bg-card p-[18px] shadow-[var(--card-shadow)]">
           <div className="flex items-baseline justify-between">
             <span className="text-[16px] font-semibold">Due for review</span>
           </div>
@@ -603,7 +630,10 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           </>
         ) : (
           <>
-        <div className="rounded-2xl border border-border p-[18px]">
+        {home ? (
+          <StreakCard streak={streakInfo} />
+        ) : (
+        <div className="rounded-2xl border border-border bg-card p-[18px] shadow-[var(--card-shadow)]">
           <div className="flex items-baseline justify-between">
             <span className="text-[16px] font-semibold">This week</span>
             <span className="text-[12px] text-faint">
@@ -615,9 +645,10 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             <WeekBars mins={days.length ? days : [0, 0, 0, 0, 0, 0, 0]} goal={3} today={todayIdx} accent="var(--accent)" />
           </div>
         </div>
+        )}
         <PlanTodayCard
           fallback={
-        <div className="rounded-2xl border border-border p-[18px]">
+        <div className="rounded-2xl border border-border bg-card p-[18px] shadow-[var(--card-shadow)]">
           <div className="flex items-baseline justify-between">
             <span className="text-[16px] font-semibold">Up next</span>
             <Link href="/planner" className="text-[12px] font-semibold text-accent hover:underline">Open planner</Link>
@@ -657,46 +688,6 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     </div>
   );
 }
-
-/**
- * Phones: a compact stat row under the Today card (streak · cards due ·
- * points), each cell one tap to where it matters. Desktop keeps the sidebar;
- * the planner is in the bottom nav.
- */
-function HomeStatRow({ due, streak }: { due: number | null; streak: StreakSummary | null }) {
-  const { t } = useI18n();
-  const shop = useShopSummary();
-  const cell = "flex min-h-16 flex-col items-center justify-center gap-0.5 px-2 py-2.5 text-center";
-  const value = "flex items-center gap-1 text-[18px] font-extrabold leading-none tabular-nums";
-  const label = "text-[12px] font-semibold text-muted-foreground";
-  return (
-    <div className="grid grid-cols-3 divide-x divide-border overflow-hidden rounded-2xl border border-border bg-card lg:hidden">
-      <div className={cell}>
-        <span className={value}>
-          <Flame className="size-4 text-[#f97316]" fill="currentColor" strokeWidth={1.6} />
-          {streak?.current ?? 0}
-        </span>
-        <span className={label}>{t("today.statStreak")}</span>
-      </div>
-      <Link href="/flashcards/review" className={cn(cell, "hover:bg-muted")}>
-        <span className={value}>
-          <Layers className="size-4 text-accent" />
-          {due ?? 0}
-        </span>
-        <span className={label}>{t("today.statCards")}</span>
-      </Link>
-      <Link href="/shop" className={cn(cell, "relative hover:bg-muted")}>
-        <span className={value}>
-          <Sparkles className="size-4 text-accent" fill="currentColor" />
-          {shop?.balance ?? 0}
-        </span>
-        <span className={label}>{t("today.statPoints")}</span>
-        {shop?.affordable && <span aria-label={t("rewards.homeAfford")} className="absolute right-2 top-2 size-2 rounded-full bg-accent" />}
-      </Link>
-    </div>
-  );
-}
-
 
 /** The cat pops out with a speech bubble: encouragement, and the one action that fits the moment. */
 function CatNudge({
@@ -761,7 +752,7 @@ function SubjectsGrid({
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h2 className="text-[16px] font-semibold">
+        <h2 className="text-[18px] font-extrabold">
           Your subjects <span className="font-medium text-faint">· {workspaces.length}</span>
         </h2>
         <button type="button" onClick={onNew} className="inline-flex h-11 items-center gap-1.5 rounded-xl bg-muted px-3 text-[13px] font-semibold hover:bg-accent-soft sm:h-9">
@@ -769,7 +760,7 @@ function SubjectsGrid({
         </button>
       </div>
       {/* Phones: one tidy list, a progress ring per subject, instead of tall cover cards. */}
-      <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card sm:hidden">
+      <ul className="life-card mt-3 divide-y divide-border overflow-hidden sm:hidden">
         {loading &&
           workspaces.length === 0 &&
           [0, 1].map((i) => (
@@ -786,12 +777,30 @@ function SubjectsGrid({
           const done = own.filter((x) => x.status === "completed").length;
           return (
             <li key={w.id}>
-              <Link href={`/workspace/${w.id}`} className="flex min-h-16 items-center gap-3 px-4 py-3 hover:bg-muted/60">
-                <Ring pct={own.length ? done / own.length : 0} size={36} stroke={10} color={accentForId(w.id)} />
+              <Link href={`/workspace/${w.id}`} className="flex min-h-[68px] items-center gap-3 px-4 py-3 transition-colors active:bg-muted/80 hover:bg-muted/50">
+                {/* A coloured tile per subject, like an app icon; the bar fills in as sessions are finished. */}
+                <span
+                  aria-hidden
+                  className="grid size-11 shrink-0 place-items-center rounded-[14px] text-[18px] font-extrabold text-white shadow-[inset_0_-3px_0_rgba(0,0,0,.12)]"
+                  style={{ background: `linear-gradient(160deg, ${accentForId(w.id)}cc, ${accentForId(w.id)})` }}
+                >
+                  {w.title.trim()[0]?.toUpperCase() ?? "?"}
+                </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[15px] font-bold">{w.title}</span>
-                  <span className="block truncate text-[12.5px] text-muted-foreground">
-                    {w.materials.length} material{w.materials.length === 1 ? "" : "s"} · {done}/{own.length} sessions
+                  <span className="flex items-baseline justify-between gap-2">
+                    <span className="truncate text-[15.5px] font-extrabold">{w.title}</span>
+                    <span className="shrink-0 text-[12px] font-bold tabular-nums text-muted-foreground">
+                      {done}/{own.length}
+                    </span>
+                  </span>
+                  <span className="mt-1.5 block h-2 overflow-hidden rounded-full bg-muted">
+                    <span
+                      className="fill-grow block h-full rounded-full"
+                      style={{ width: `${own.length ? Math.max(6, (done / own.length) * 100) : 0}%`, background: accentForId(w.id) }}
+                    />
+                  </span>
+                  <span className="mt-1 block truncate text-[12px] text-muted-foreground">
+                    {w.materials.length} material{w.materials.length === 1 ? "" : "s"}
                   </span>
                 </span>
                 <ChevronRight className="size-4 shrink-0 text-faint" />
@@ -814,7 +823,7 @@ function SubjectsGrid({
               key={w.id}
               title={w.title}
               coverUrl={w.coverUrl}
-              className="rounded-2xl border border-border transition-colors hover:border-accent/50"
+              className="life-press rounded-2xl border border-border bg-card shadow-[var(--card-shadow)] transition-colors hover:border-accent/50"
             >
               <Link href={`/workspace/${w.id}`} className="group relative flex min-h-[128px] flex-col justify-between p-4 sm:min-h-[172px]">
                 <div className="flex items-center gap-3">
@@ -956,7 +965,7 @@ function HomeShopCard() {
   return (
     <Link
       href="/shop"
-      className="group hidden items-center gap-3.5 rounded-2xl border border-border bg-card p-3.5 transition-colors hover:border-accent/40 hover:bg-accent-soft/40 lg:flex"
+      className="group hidden items-center gap-3.5 life-press rounded-2xl border border-border bg-card p-3.5 shadow-[var(--card-shadow)] transition-colors hover:border-accent/40 hover:bg-accent-soft/40 lg:flex"
     >
       <span className="grid size-[64px] shrink-0 place-items-end justify-center overflow-hidden rounded-xl bg-accent-soft">
         <Mascot pose="wave" className="cat-wiggle mb-0.5 h-[56px] w-[48px]" />
