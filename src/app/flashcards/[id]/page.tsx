@@ -1,6 +1,7 @@
 "use client";
 
 import "@/lib/i18n/flashcards";
+import { ShareItemButton } from "@/components/growth/share-item-button";
 import Image from "next/image";
 import { MathText } from "@/components/ui/markdown-text";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
@@ -218,7 +219,8 @@ function FlashcardDeck() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <ShareItemButton artifactId={item.id} kind={item.kind} title={item.title} />
             <div className="flex items-center gap-1 rounded-full border border-border bg-card p-1">
             {MODES.map(({ id, labelKey, icon: Icon }) => (
               <button

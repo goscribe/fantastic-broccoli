@@ -8,6 +8,12 @@
  */
 
 const STORAGE_KEY = "scribe_attribution_v1";
+/** Invite code from /i/<code> or `?ref=`; kept apart from campaign attribution. */
+const REF_KEY = "scribe_ref_v1";
+/** Random per-browser id, only used server-side to spot self-referrals. */
+const DEVICE_KEY = "scribe_did_v1";
+/** An invite is credited if the visitor signs up within this window. */
+const REF_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
 export interface Attribution {
   utmSource?: string;
@@ -84,6 +90,8 @@ function fromCurrentUrl(): Attribution | null {
  */
 export function captureAttribution(): void {
   if (typeof window === "undefined") return;
+  const ref = new URLSearchParams(window.location.search).get("ref");
+  if (ref) rememberReferral(ref);
   try {
     const current = fromCurrentUrl();
     if (!current) return;
@@ -109,6 +117,50 @@ export function getAttribution(): Attribution | null {
   }
 }
 
+const REF_RE = /^[a-z0-9]{6,16}$/;
+
+/**
+ * Records an invite code. The first invite wins (the friend who reached
+ * them first gets the credit) until it expires.
+ */
+export function rememberReferral(code: string): void {
+  const ref = code.trim().toLowerCase();
+  if (!REF_RE.test(ref) || typeof window === "undefined") return;
+  try {
+    if (getReferral()) return;
+    window.localStorage.setItem(REF_KEY, JSON.stringify({ ref, at: Date.now() }));
+  } catch {
+    // best-effort
+  }
+}
+
+export function getReferral(): string | undefined {
+  if (typeof window === "undefined") return undefined;
+  try {
+    const raw = window.localStorage.getItem(REF_KEY);
+    if (!raw) return undefined;
+    const { ref, at } = JSON.parse(raw) as { ref?: string; at?: number };
+    if (!ref || !REF_RE.test(ref) || !at || Date.now() - at > REF_TTL_MS) return undefined;
+    return ref;
+  } catch {
+    return undefined;
+  }
+}
+
+function deviceId(): string | undefined {
+  if (typeof window === "undefined") return undefined;
+  try {
+    let id = window.localStorage.getItem(DEVICE_KEY);
+    if (!id) {
+      id = crypto.randomUUID();
+      window.localStorage.setItem(DEVICE_KEY, id);
+    }
+    return id;
+  } catch {
+    return undefined;
+  }
+}
+
 /** Attribution payload for the signup mutation / Google OAuth handoff. */
 export function getSignupAttribution():
   | Pick<
@@ -124,10 +176,12 @@ export function getSignupAttribution():
       | "msclkid"
       | "referrer"
       | "landingPage"
-    >
+    > & { ref?: string; deviceId?: string }
   | undefined {
+  const ref = getReferral();
+  const did = deviceId();
   const stored = getAttribution();
-  if (!stored) return undefined;
+  if (!stored) return ref || did ? { ref, deviceId: did } : undefined;
   const {
     utmSource,
     utmMedium,
@@ -153,6 +207,8 @@ export function getSignupAttribution():
     msclkid,
     referrer,
     landingPage,
+    ref,
+    deviceId: did,
   };
   return Object.values(payload).some(Boolean) ? payload : undefined;
 }

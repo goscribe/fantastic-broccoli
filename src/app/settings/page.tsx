@@ -42,6 +42,8 @@ import {
   type TranslationKey,
 } from "@/lib/i18n";
 import "@/lib/i18n/settings";
+import "@/lib/i18n/growth";
+import { InviteCard } from "@/components/growth/invite-card";
 import { inputClass } from "@/components/ui/input";
 
 const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
@@ -661,6 +663,12 @@ export default function SettingsPage() {
             </div>
           </section>
         )}
+
+        {/* Invite friends */}
+        <section id="invite" className="mt-8">
+          <h2 className="mb-3 text-sm font-semibold">{t("growth.sectionTitle")}</h2>
+          <InviteCard />
+        </section>
 
         {/* Tokens */}
         <section id="tokens" className="mt-8">
