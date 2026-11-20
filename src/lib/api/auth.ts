@@ -8,6 +8,7 @@ import { getSignupAttribution } from "@/lib/attribution";
 import { reportPendingOAuthSignupConversion } from "@/lib/gtag";
 import { syncUiLocale } from "@/lib/i18n";
 import { isPublicPath } from "@/lib/public-paths";
+import { syncTimezone } from "@/lib/timezone-sync";
 
 export interface AuthUser {
   id: string;
@@ -54,6 +55,8 @@ type SessionUser = {
   profilePicture?: string | null;
   role?: { id: string; name: string } | null;
   preferredLanguage?: string;
+  /** Browser timezone the server has on file (null until the app reports one). */
+  timezone?: string | null;
 };
 
 // getSession returns the profile picture as a path relative to the API host
@@ -63,6 +66,10 @@ function toAuthUser(session: SessionResult): AuthUser | null {
   if (!u) return null;
   // Cross-device sync: adopt the server-side language preference for the UI.
   syncUiLocale(u.preferredLanguage);
+  // Local days (streak, next-day reminders) follow this browser's clock.
+  syncTimezone(u.id, u.timezone, (timezone) =>
+    rpc("auth.setTimezone", "mutation", { timezone }),
+  );
   return {
     id: u.id,
     name: u.name ?? u.email ?? "You",

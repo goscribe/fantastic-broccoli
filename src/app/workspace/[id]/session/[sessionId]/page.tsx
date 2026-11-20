@@ -2,7 +2,7 @@
 
 import { BuildBar } from "@/components/session/build-bar";
 import { useNewUi } from "@/lib/new-ui";
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
@@ -204,6 +204,13 @@ export default function SessionDetailPage() {
       typeof window === "undefined" ||
       window.matchMedia("(min-width: 640px)").matches,
   );
+  // One-tap prompts (end-of-session "Ask Copilot about what you got wrong")
+  // open the panel with the text already in the input.
+  const [copilotDraft, setCopilotDraft] = useState<{ text: string; id: number }>();
+  const askCopilot = useCallback((text: string) => {
+    setCopilotDraft({ text, id: Date.now() });
+    setCopilotOpen(true);
+  }, []);
   const [newComment, setNewComment] = useState("");
   const [localNotes, setLocalNotes] = useState<SessionNote[]>([]);
   const [removedNoteIds, setRemovedNoteIds] = useState<Set<string>>(
@@ -733,6 +740,7 @@ export default function SessionDetailPage() {
             activityId={activity.id}
             content={activity.content as WorksheetContent}
             draft={activity.draft}
+            estimatedMinutes={activity.estimatedMinutes}
             onComplete={() => goToNext()}
           />
         );
@@ -765,6 +773,7 @@ export default function SessionDetailPage() {
       <Copilot
         open={planReady && copilotOpen}
         onClose={() => setCopilotOpen(false)}
+        draft={copilotDraft}
         workspaceId={workspaceId}
         studySessionId={sessionId}
         activity={
@@ -973,7 +982,7 @@ export default function SessionDetailPage() {
                   </ContentRepairProvider>
                 </>
               ) : (
-                <SessionDebrief sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onBack={() => router.push(`/workspace/${workspaceId}`)} />
+                <SessionDebrief sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
               )}
             </div>
           </div>
@@ -1267,6 +1276,7 @@ export default function SessionDetailPage() {
                 quickStart={session.quickStart}
                 sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0}
                 streakLitDays={streakLitDays}
+                onAskCopilot={askCopilot}
                 onBack={() => router.push(`/workspace/${workspaceId}`)}
               />
             )}
