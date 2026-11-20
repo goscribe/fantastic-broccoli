@@ -7,6 +7,18 @@ import {
 } from "@/lib/api/copilot";
 import { MathText } from "@/components/ui/markdown-text";
 import { BrokenBlock } from "@/components/content/content-repair";
+import katex from "katex";
+import { prerenderFigureMath, type RenderTex } from "@/lib/figure-math";
+
+// Maths in the markup is typeset here, before the iframe exists, so it never
+// waits on (or depends on) the in-frame KaTeX script.
+const renderTex: RenderTex = (tex, display) => {
+  try {
+    return katex.renderToString(tex, { throwOnError: true, displayMode: display });
+  } catch {
+    return null;
+  }
+};
 
 const MIN_HEIGHT = 60;
 const MAX_HEIGHT = 900;
@@ -97,7 +109,7 @@ window.renderMath=function(){
   try{renderMathNow();}finally{mathRendering=false;}
 };
 function renderMathNow(){
-  document.querySelectorAll(".math,.math-display").forEach(function(el){
+  document.querySelectorAll(".math,.math-display,.math-inline,.latex,.tex").forEach(function(el){
     if(el.querySelector(".katex"))return;
     try{katex.render(el.textContent||"",el,{displayMode:el.classList.contains("math-display"),throwOnError:false});}catch(e){}
   });
@@ -129,18 +141,18 @@ function renderMathNow(){
     if(pd.closest(".math,.math-display,.katex"))continue;
     texts.push(n);
   }
-  var DOLLAR=/\\$\\$([\\s\\S]+?)\\$\\$|\\$([^$\\n]+?)\\$/g;
+  var DOLLAR=/\\$\\$([\\s\\S]+?)\\$\\$|\\\\\\[([\\s\\S]+?)\\\\\\]|\\\\\\(([\\s\\S]+?)\\\\\\)|\\$([^$\\n]+?)\\$/g;
   texts.forEach(function(node){
     var t=node.nodeValue||"";
-    if(t.indexOf("$")<0)return;
+    if(t.indexOf("$")<0&&t.indexOf("\\\\(")<0&&t.indexOf("\\\\[")<0)return;
     DOLLAR.lastIndex=0;
     var frag=document.createDocumentFragment(),last=0,m,any=false;
     while((m=DOLLAR.exec(t))){
       any=true;
       if(m.index>last)frag.appendChild(document.createTextNode(t.slice(last,m.index)));
       var s=document.createElement("span");
-      var latex=m[1]!=null?m[1]:m[2];
-      try{katex.render(latex,s,{displayMode:m[1]!=null,throwOnError:false});}catch(e){s.textContent=m[0];}
+      var latex=m[1]!=null?m[1]:m[2]!=null?m[2]:m[3]!=null?m[3]:m[4];
+      try{katex.render(latex,s,{displayMode:m[1]!=null||m[2]!=null,throwOnError:false});}catch(e){s.textContent=m[0];}
       frag.appendChild(s);
       last=m.index+m[0].length;
     }
@@ -191,7 +203,7 @@ var qualityTimer=0,qualitySent={};
 function qualityCheck(){
   if(!window.katex)return;
   var unrendered=[];
-  document.querySelectorAll(".math,.math-display").forEach(function(el){
+  document.querySelectorAll(".math,.math-display,.math-inline,.latex,.tex").forEach(function(el){
     var t=(el.textContent||"").trim();
     if(t&&!el.querySelector(".katex"))unrendered.push(t);
   });
@@ -229,8 +241,8 @@ window.addEventListener("load",function(){
   document.addEventListener("click",scheduleQuality,true);
 });`;
   return (
-    `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">` +
-    `<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>` +
+    `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css">` +
+    `<script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js"></script>` +
     `<script>${repair}</script>`
   );
 }
@@ -248,6 +260,8 @@ body{margin:0;padding:14px 16px;font-family:ui-sans-serif,system-ui,sans-serif;c
 span:has(>.katex):not(.math):not(.math-display){display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle;}
 .math,.math-display{display:inline-block;max-width:100%;overflow-x:auto;vertical-align:middle;}
 .math-display{display:block;}
+img,video,canvas{max-width:100%;height:auto;}
+svg[viewBox]:not(.lucide){max-width:100%;height:auto;}
 input[type=range]{accent-color:var(--accent);}
 button{font:inherit;border:1px solid var(--border);border-radius:8px;background:var(--muted);color:var(--foreground);padding:4px 10px;cursor:pointer;}
 button:hover{border-color:var(--border-strong);}
@@ -286,7 +300,12 @@ function resizeScript(id: string) {
   // documentElement.scrollHeight never drops below the frame's own height,
   // so a small figure stayed at the initial size; measure the content instead.
   function contentHeight(){var b=document.body;if(!b)return document.documentElement.scrollHeight;var bottom=0;for(var i=0;i<b.children.length;i++){var el=b.children[i];if(el.tagName==="SCRIPT"||el.tagName==="STYLE")continue;var r=el.getBoundingClientRect();bottom=Math.max(bottom,r.bottom+window.scrollY);}var cs=getComputedStyle(b);return Math.ceil(bottom+(parseFloat(cs.marginBottom)||0)+(parseFloat(cs.paddingBottom)||0));}
-  function post(){parent.postMessage({type:"scribe-widget-height",id:${JSON.stringify(id)},height:contentHeight()},"*");}
+  // A figure drawn for a laptop (fixed-width labels, wide tables) is scaled
+  // down to the frame instead of spilling past it on a phone.
+  var fitting=false;
+  // Percentage-positioned labels move with the layout width, so shrink in a few passes.
+  function fit(){var b=document.body,d=document.documentElement;if(!b||fitting)return;fitting=true;try{b.style.zoom="";var z=1;for(var i=0;i<8;i++){var over=d.scrollWidth,room=d.clientWidth;if(room<=0||over<=room+1||z<=0.5)break;z=Math.max(0.5,z*room/over);b.style.zoom=String(z);}}finally{fitting=false;}}
+  function post(){fit();parent.postMessage({type:"scribe-widget-height",id:${JSON.stringify(id)},height:contentHeight()},"*");}
   if(typeof ResizeObserver!=="undefined"){var ro=new ResizeObserver(post);ro.observe(document.documentElement);if(document.body)ro.observe(document.body);}
   window.addEventListener("load",post);
   setTimeout(post,50);
@@ -379,7 +398,7 @@ export function HtmlWidget({
       lucideScript() +
       katexScript(frameId) +
       themeStyle() +
-      html +
+      prerenderFigureMath(html, renderTex) +
       resizeScript(frameId),
     [html, frameId],
   );
