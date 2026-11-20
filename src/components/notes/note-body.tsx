@@ -181,6 +181,21 @@ function Block({
       );
     case "table":
       return <NoteTable block={block} field={field} />;
+    case "deeper":
+      return (
+        <details className="group rounded-xl border border-border px-4 py-3 [&_summary::-webkit-details-marker]:hidden">
+          <summary className="flex min-h-8 cursor-pointer list-none items-center gap-2 font-semibold">
+            <span className="text-[12.5px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">{t("notes.goDeeper")}</span>
+            <span className="min-w-0 flex-1">{field(block.title, (b, v) => (b.title = v))}</span>
+            <ChevronDown className="size-4 shrink-0 text-faint transition-transform group-open:rotate-180" />
+          </summary>
+          <div className="mt-2 flex flex-col gap-3">
+            {block.paragraphs.map((p, i) => (
+              <p key={i}>{field(p, (b, v) => ((b.paragraphs as string[])[i] = v))}</p>
+            ))}
+          </div>
+        </details>
+      );
     case "figure":
       if (!figure) return null;
       return (

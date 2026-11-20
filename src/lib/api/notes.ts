@@ -13,7 +13,9 @@ export type NoteBlock =
   | { type: "callout"; kind: "mistake" | "tip"; text: string }
   | { type: "example"; title: string; problem: string; steps: string[]; answer: string }
   | { type: "table"; caption: string; headers: string[]; rows: string[][] }
-  | { type: "figure"; figureId: string };
+  | { type: "figure"; figureId: string }
+  /** Extra depth, collapsed by default ("Go deeper"). */
+  | { type: "deeper"; title: string; paragraphs: string[] };
 
 export interface NoteSection {
   id: string;

@@ -10,6 +10,7 @@ const english = {
   "notes.labelReviewed": "Scribe notes · reviewed",
   "notes.labelDraft": "Scribe notes · draft",
   "notes.objective": "In this note",
+  "notes.goDeeper": "Go deeper",
   "notes.onThisPage": "On this page",
   "notes.startQuick5": "Start a Quick 5 on this topic",
   "notes.startSession": "Start a session",
@@ -39,6 +40,7 @@ const english = {
 
 registerTranslations(english, {
   es: {
+    "notes.goDeeper": "Profundiza",
     "notes.onThisPage": "En esta página",
     "notes.labelReviewed": "Apuntes de Scribe · revisados",
     "notes.labelDraft": "Apuntes de Scribe · borrador",
@@ -69,6 +71,7 @@ registerTranslations(english, {
     "notes.practiseHint": "Practica este tema cuando quieras. Tu sesión usa estos apuntes.",
   },
   fr: {
+    "notes.goDeeper": "Pour aller plus loin",
     "notes.onThisPage": "Sur cette page",
     "notes.labelReviewed": "Notes Scribe · relues",
     "notes.labelDraft": "Notes Scribe · brouillon",
@@ -99,6 +102,7 @@ registerTranslations(english, {
     "notes.practiseHint": "Entraîne-toi sur ce thème quand tu es prêt. Ta session utilise ces notes.",
   },
   de: {
+    "notes.goDeeper": "Vertiefung",
     "notes.onThisPage": "Auf dieser Seite",
     "notes.labelReviewed": "Scribe-Notizen · geprüft",
     "notes.labelDraft": "Scribe-Notizen · Entwurf",
@@ -129,6 +133,7 @@ registerTranslations(english, {
     "notes.practiseHint": "Übe dieses Thema, wenn du bereit bist. Deine Lerneinheit nutzt diese Notizen.",
   },
   zh: {
+    "notes.goDeeper": "深入了解",
     "notes.onThisPage": "本页内容",
     "notes.labelReviewed": "Scribe 笔记 · 已审核",
     "notes.labelDraft": "Scribe 笔记 · 草稿",
@@ -159,6 +164,7 @@ registerTranslations(english, {
     "notes.practiseHint": "准备好后就练习这个主题。你的学习会使用这些笔记。",
   },
   hi: {
+    "notes.goDeeper": "और गहराई से",
     "notes.onThisPage": "इस पेज पर",
     "notes.labelReviewed": "Scribe नोट्स · समीक्षित",
     "notes.labelDraft": "Scribe नोट्स · ड्राफ़्ट",
@@ -189,6 +195,7 @@ registerTranslations(english, {
     "notes.practiseHint": "तैयार होने पर इस विषय का अभ्यास करें। आपका सेशन इन नोट्स का उपयोग करता है।",
   },
   tl: {
+    "notes.goDeeper": "Mas malalim",
     "notes.onThisPage": "Sa pahinang ito",
     "notes.labelReviewed": "Scribe notes · nasuri na",
     "notes.labelDraft": "Scribe notes · draft",
