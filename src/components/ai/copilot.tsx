@@ -676,16 +676,35 @@ export function Copilot({
   );
 }
 
-export function CopilotTrigger({ onClick }: { onClick: () => void }) {
+/**
+ * Opens Copilot. New UI: an edge tab on tablets and up; on phones the tab
+ * would cover the right edge of the content, so it is hidden there and the
+ * player's top bar shows the `compact` button instead.
+ */
+export function CopilotTrigger({ onClick, compact = false }: { onClick: () => void; compact?: boolean }) {
   const { t } = useI18n();
   const newUi = useNewUi();
+  if (compact) {
+    if (!newUi) return null;
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        aria-label={t("misc.askScribe")}
+        title={t("misc.askScribe")}
+        className="grid size-9 shrink-0 place-items-center overflow-hidden rounded-xl bg-accent-soft hover:bg-muted sm:hidden"
+      >
+        <Mascot pose="wave" className="mt-1.5 h-8" />
+      </button>
+    );
+  }
   if (newUi) {
     return (
       <button
         type="button"
         onClick={onClick}
         aria-label={t("misc.askScribe")}
-        className="fixed right-0 top-1/2 z-40 flex -translate-y-1/2 flex-col items-center gap-1.5 rounded-l-2xl border border-r-0 border-border bg-card px-2 py-3 shadow-md hover:bg-muted"
+        className="fixed right-0 top-1/2 z-40 flex -translate-y-1/2 flex-col items-center gap-1.5 rounded-l-2xl border border-r-0 border-border bg-card px-2 py-3 shadow-md hover:bg-muted max-sm:hidden"
       >
         <Mascot pose="wave" className="cat-wiggle h-9" />
         <PanelRightOpen className="h-4 w-4 text-muted-foreground" />

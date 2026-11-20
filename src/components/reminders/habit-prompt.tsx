@@ -44,10 +44,13 @@ export function HabitPrompt({
   accuracy,
   activitiesDone,
   subjectTitle,
+  showAfterMs = SHOW_AFTER_MS,
 }: {
   accuracy: number | null | undefined;
   activitiesDone: number;
   subjectTitle?: string;
+  /** Wait longer when the debrief has more to read first (e.g. mastery gains). */
+  showAfterMs?: number;
 }) {
   const canInstall = useCanInstall();
   const { data: prefs } = useQuery({
@@ -73,9 +76,9 @@ export function HabitPrompt({
     });
     const planned = decided.current;
     if (planned.length === 0) return;
-    const timer = window.setTimeout(() => setSteps(planned), SHOW_AFTER_MS);
+    const timer = window.setTimeout(() => setSteps(planned), showAfterMs);
     return () => window.clearTimeout(timer);
-  }, [prefs, canInstall, accuracy, activitiesDone]);
+  }, [prefs, canInstall, accuracy, activitiesDone, showAfterMs]);
 
   if (!prefs || !steps || steps.length === 0) return null;
   return (

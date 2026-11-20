@@ -48,6 +48,8 @@ export interface StudySession {
   generationProgress?: PlanGenerationSnapshot;
   /** Quick 5: a single easy 5-question quiz (first session / daily "5 more"). */
   quickStart: boolean;
+  /** Built from the learner's mistakes ("Practice my mistakes"). */
+  mistakesPractice?: boolean;
   status: "active" | "paused" | "completed" | "failed";
   startDate: string;
   endDate?: string;

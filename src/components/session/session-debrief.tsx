@@ -20,6 +20,7 @@ import {
   ChevronRight,
   Layers,
   MessageCircle,
+  RotateCcw,
 } from "lucide-react";
 import { Mascot } from "@/components/rewards/mascot";
 import { useStreak } from "@/lib/rewards";
@@ -40,6 +41,12 @@ import "@/lib/i18n/rewards";
 import { InviteCard } from "@/components/growth/invite-card";
 import { HabitPrompt } from "@/components/reminders/habit-prompt";
 import "@/lib/i18n/habits";
+import "@/lib/i18n/mistakes";
+import { fixMinutes, masteryRow, practiceHref } from "@/lib/mistakes";
+import type { ApiSessionStats } from "@/lib/api/study-session";
+
+/** How long the mastery rows get on screen before the study-time sheet opens over them. */
+const MASTERY_READ_MS = 4000;
 
 /** Length of the full session a finished Quick 5 offers to start. */
 const FOLLOW_UP_MINUTES = 15;
@@ -119,6 +126,61 @@ function StatTile({ icon, label, value, tone }: { icon: ReactNode; label: string
   );
 }
 
+type MasteryChange = NonNullable<ApiSessionStats["mastery"]>[number];
+
+/**
+ * The stats tiles and this session's per-topic mastery change in one card
+ * ("Osmosis 48% → 61% +13%"), so the screen gains a few rows rather than
+ * another card. The bar shows where the topic was (muted) and what this
+ * session added (accent).
+ */
+function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: MasteryChange[] }) {
+  const { t } = useI18n();
+  return (
+    <div className="w-full overflow-hidden rounded-2xl border border-border bg-card" role="status">
+      <div className="grid grid-cols-3 divide-x divide-border [&>div]:rounded-none [&>div]:border-0">{tiles}</div>
+      <ul className="space-y-3 border-t border-border px-4 py-3.5 text-left" aria-label={t("debrief.masteryTitle")}>
+        {mastery.map((m) => {
+          const { before, after, delta, base, gain } = masteryRow(m);
+          return (
+            <li key={m.topic}>
+              <div className="flex items-baseline justify-between gap-3 text-[13.5px]">
+                <span className="min-w-0 truncate font-semibold">{m.label}</span>
+                <span
+                  className="shrink-0 tabular-nums text-muted-foreground"
+                  aria-label={(before === null ? t("debrief.masteryAriaNew") : t("debrief.masteryAria"))
+                    .replace("{topic}", m.label)
+                    .replace("{a}", String(before))
+                    .replace("{b}", String(after))}
+                >
+                  {before === null ? (
+                    <span className="mr-1.5 rounded-full bg-muted px-1.5 py-px text-[11px] font-semibold">{t("debrief.masteryNew")}</span>
+                  ) : (
+                    <>{before}% → </>
+                  )}
+                  <span className="font-semibold text-foreground">{after}%</span>
+                  {delta !== null && delta !== 0 && (
+                    <span className={cn("ml-1.5 font-semibold", delta > 0 ? "text-success" : "text-muted-foreground")}>
+                      {delta > 0 ? `+${delta}` : `−${-delta}`}%
+                    </span>
+                  )}
+                </span>
+              </div>
+              <div className="mt-1.5 flex h-1.5 overflow-hidden rounded-full bg-muted" aria-hidden>
+                <span className="h-full bg-accent/35" style={{ width: `${base}%` }} />
+                <span
+                  className="h-full rounded-r-full bg-accent transition-[width] duration-700 ease-out"
+                  style={{ width: `${gain}%` }}
+                />
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
 /**
  * End of session, in the shape learning apps converge on: one character,
  * one title, a few hard numbers, one next step. The model-written report is
@@ -181,6 +243,23 @@ export function SessionDebrief({
     onError: (error) => toastError(error, t("session.quick5StartFailed")),
   });
 
+  // "Next: <weakest topic>": a session on the subject's weakest topic.
+  const startWeakest = useMutation({
+    mutationFn: (topic: string) =>
+      createStudySession({
+        workspaceId: workspaceId!,
+        title: topic,
+        topics: topic,
+        depth: "moderate",
+        durationMinutes: FOLLOW_UP_MINUTES,
+      }),
+    onSuccess: (created) => {
+      queryClient.invalidateQueries({ queryKey: ["study-sessions", workspaceId] });
+      if (created) openSession(created.id);
+    },
+    onError: (error) => toastError(error, t("debrief.nextTopicFailed")),
+  });
+
   // After a Quick 5: flashcards from the same notes, one tap away.
   const { data: deck } = useQuery({
     queryKey: ["bank", workspaceId, "FLASHCARD_DECK"],
@@ -226,7 +305,13 @@ export function SessionDebrief({
       : stats.answered > 0
         ? { title: t("habit.askDeeperTitle"), sub: t("habit.askDeeperSub"), prompt: t("habit.askDeeperPrompt") }
         : { title: t("habit.askRecapTitle"), sub: t("habit.askRecapSub"), prompt: t("habit.askRecapPrompt") };
-  const showSteps = (!!deck && !!workspaceId) || (!!ask && !!onAskCopilot);
+  const mistakes = stats?.mistakes ?? 0;
+  // A Quick 5 touches a topic or two; its debrief also asks for a study time, so keep it to two rows.
+  const mastery = (stats?.mastery ?? []).slice(0, quickStart ? 2 : 3);
+  const weakest = !quickStart && workspaceId ? stats?.weakest : null;
+  // Fixing mistakes is the practice returners did; it takes the Copilot row's place.
+  const askRow = mistakes > 0 && ask && wrong > 0 ? null : ask;
+  const showSteps = (!!deck && !!workspaceId) || (!!askRow && !!onAskCopilot) || mistakes > 0;
 
   const primary = handOff ? (
     <Button
@@ -247,6 +332,16 @@ export function SessionDebrief({
       {t("debrief.continue")}
       <ArrowRight className="ml-1.5 h-4 w-4" />
     </Button>
+  ) : weakest ? (
+    <Button
+      size="lg"
+      className="w-full text-[15px]"
+      disabled={startWeakest.isPending}
+      onClick={() => startWeakest.mutate(weakest.label)}
+    >
+      {startWeakest.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Play className="mr-2 h-4 w-4 fill-current" />}
+      <span className="min-w-0 truncate">{t("debrief.nextTopic").replace("{topic}", weakest.label)}</span>
+    </Button>
   ) : (
     <Link href="/flashcards/review" className="block w-full">
       <Button size="lg" className="w-full text-[15px]">
@@ -255,6 +350,37 @@ export function SessionDebrief({
       </Button>
     </Link>
   );
+
+  const statTiles = (stats: ApiSessionStats) => (
+    <>
+      <StatTile
+        tone="text-accent"
+        icon={<Sparkles className="size-4" fill="currentColor" />}
+        value={`+${points}`}
+        label={t("debrief.points")}
+      />
+      {stats.accuracy !== null ? (
+        <StatTile
+          tone="text-success"
+          icon={<Target className="size-4" />}
+          value={`${Math.round(stats.accuracy * 100)}%`}
+          label={t("debrief.accuracy")}
+        />
+      ) : (
+        <StatTile
+          tone="text-success"
+          icon={<CheckCircle2 className="size-4" />}
+          value={`${stats.activitiesDone}/${stats.activitiesTotal}`}
+          label={t("debrief.done")}
+        />
+      )}
+      <StatTile
+        tone="text-[#0369a1]"
+        icon={<Clock className="size-4" />}
+        value={t("debrief.minutes").replace("{n}", String(stats.minutes))}
+        label={t("debrief.time")}
+      />
+    </>);
 
   return (
     <div className="mx-auto flex max-w-md flex-col items-center pb-10 pt-2 text-center animate-fade-up">
@@ -278,41 +404,19 @@ export function SessionDebrief({
         ) : null}
       </div>
 
+      {stats && mastery.length > 0 ? (
+        <div className="mt-6 w-full">
+          <StatsWithMastery tiles={statTiles(stats)} mastery={mastery} />
+        </div>
+      ) : (
       <div className="mt-6 grid w-full grid-cols-3 gap-2.5" role="status">
         {stats ? (
-          <>
-            <StatTile
-              tone="text-accent"
-              icon={<Sparkles className="size-4" fill="currentColor" />}
-              value={`+${points}`}
-              label={t("debrief.points")}
-            />
-            {stats.accuracy !== null ? (
-              <StatTile
-                tone="text-success"
-                icon={<Target className="size-4" />}
-                value={`${Math.round(stats.accuracy * 100)}%`}
-                label={t("debrief.accuracy")}
-              />
-            ) : (
-              <StatTile
-                tone="text-success"
-                icon={<CheckCircle2 className="size-4" />}
-                value={`${stats.activitiesDone}/${stats.activitiesTotal}`}
-                label={t("debrief.done")}
-              />
-            )}
-            <StatTile
-              tone="text-[#0369a1]"
-              icon={<Clock className="size-4" />}
-              value={t("debrief.minutes").replace("{n}", String(stats.minutes))}
-              label={t("debrief.time")}
-            />
-          </>
+          statTiles(stats)
         ) : (
           [0, 1, 2].map((i) => <div key={i} className="h-[74px] animate-pulse rounded-2xl bg-muted" />)
         )}
       </div>
+      )}
 
       {streakDays !== null && streakDays > 0 && (
         <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#fff1e6] px-3.5 py-1.5 text-[13px] font-semibold text-[#9a3412]">
@@ -336,6 +440,14 @@ export function SessionDebrief({
             {t("habit.nextSmallStep")}
           </h3>
           <div className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+            {mistakes > 0 && (
+              <NextStep
+                icon={<RotateCcw className="size-[18px]" />}
+                title={(mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes))}
+                sub={t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)))}
+                href={practiceHref({ sessionId })}
+              />
+            )}
             {deck && workspaceId && (
               <NextStep
                 icon={<Layers className="size-[18px]" />}
@@ -346,12 +458,12 @@ export function SessionDebrief({
                 href={`/flashcards/${deck.id}?ws=${workspaceId}&mode=learn`}
               />
             )}
-            {ask && onAskCopilot && (
+            {askRow && onAskCopilot && (
               <NextStep
                 icon={<MessageCircle className="size-[18px]" />}
-                title={ask.title}
-                sub={ask.sub}
-                onClick={() => onAskCopilot(ask.prompt)}
+                title={askRow.title}
+                sub={askRow.sub}
+                onClick={() => onAskCopilot(askRow.prompt)}
               />
             )}
           </div>
@@ -360,7 +472,13 @@ export function SessionDebrief({
       <InviteCard variant="compact" className="mt-4" />
       {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
       {quickStart && stats && (
-        <HabitPrompt accuracy={stats.accuracy} activitiesDone={stats.activitiesDone} subjectTitle={subjectTitle} />
+        <HabitPrompt
+          accuracy={stats.accuracy}
+          activitiesDone={stats.activitiesDone}
+          subjectTitle={subjectTitle}
+          // Let the mastery gains fill and be read before the sheet slides over them.
+          showAfterMs={mastery.length > 0 ? MASTERY_READ_MS : undefined}
+        />
       )}
 
       {hasReport && (

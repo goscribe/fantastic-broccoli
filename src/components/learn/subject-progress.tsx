@@ -7,7 +7,10 @@ import { LEVEL_FILL, LevelBadge } from "@/components/session/precheck";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/proficiency";
 import { cn } from "@/lib/utils";
-import { Check, Repeat } from "lucide-react";
+import { Check, ChevronRight, Repeat, RotateCcw } from "lucide-react";
+import Link from "next/link";
+import { mistakesApi, practiceHref, type MistakeSummary } from "@/lib/api/mistakes";
+import "@/lib/i18n/mistakes";
 
 /** Strongest first, so the summary reads "2 secure · 1 to practise · 1 to build". */
 const SUMMARY_ORDER: ProficiencyLevel[] = ["secure", "developing", "beginner", "unknown"];
@@ -28,6 +31,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
   const { t } = useI18n();
   const [levels, setLevels] = useState<TopicLevel[] | null>(null);
   const [pref, setPref] = useState<{ longTerm: boolean; dueItems: number } | null>(null);
+  const [mistakes, setMistakes] = useState<MistakeSummary | null>(null);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -35,10 +39,12 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
     void Promise.all([
       proficiencyApi.list(workspaceId).catch(() => []),
       proficiencyApi.reviewPreference(workspaceId).catch(() => null),
-    ]).then(([l, p]) => {
+      mistakesApi.summary(workspaceId).catch(() => null),
+    ]).then(([l, p, m]) => {
       if (cancelled) return;
       setLevels(l);
       setPref(p);
+      setMistakes(m);
     });
     return () => {
       cancelled = true;
@@ -154,6 +160,42 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
             })}
           </ul>
         </>
+      )}
+
+      {mistakes && mistakes.total > 0 && (
+        <div className="mt-5 flex items-center gap-3.5 rounded-2xl border border-border p-4">
+          <span
+            className={cn(
+              "hidden size-9 shrink-0 place-items-center rounded-xl sm:grid",
+              mistakes.open > 0 ? "bg-rose/12 text-[#be123c]" : "bg-accent-soft text-accent",
+            )}
+            aria-hidden
+          >
+            {mistakes.open > 0 ? <RotateCcw className="size-[18px]" /> : <Check className="size-[18px]" strokeWidth={3} />}
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="text-[14px] font-semibold">
+              {mistakes.open === 0
+                ? t("mistakes.cardRowNone")
+                : (mistakes.open === 1 ? t("mistakes.cardRowOne") : t("mistakes.cardRow")).replace("{n}", String(mistakes.open))}
+            </p>
+            <Link
+              href={`/mistakes?workspace=${encodeURIComponent(workspaceId)}`}
+              className="mt-0.5 inline-flex items-center gap-0.5 text-[12.5px] font-semibold text-accent-dim hover:underline"
+            >
+              {t("mistakes.cardSeeAll")}
+              <ChevronRight className="size-3.5" />
+            </Link>
+          </div>
+          {mistakes.open > 0 && (
+            <Link
+              href={practiceHref({ workspaceId })}
+              className="shrink-0 rounded-full bg-accent px-4 py-2 text-[13px] font-semibold text-accent-foreground transition-colors hover:bg-accent-dim"
+            >
+              {t("mistakes.practice")}
+            </Link>
+          )}
+        </div>
       )}
 
       {pref && (

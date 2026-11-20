@@ -106,6 +106,8 @@ export interface ApiStudySession {
   generating?: boolean;
   generationProgress?: PlanGenerationSnapshot | null;
   quickStart?: boolean;
+  /** Built from the learner's mistakes ("Practice my mistakes"). */
+  mistakesPractice?: boolean;
   examBoard: ExamBoard | null;
   syllabus: string | null;
   topics: string | null;
@@ -213,6 +215,12 @@ export interface ApiSessionStats {
   accuracy: number | null;
   minutes: number;
   points: number;
+  /** Up to 3 topics this session moved (mastery 0–1; before null = first practised here). */
+  mastery?: Array<{ topic: string; label: string; before: number | null; after: number; delta: number | null }>;
+  /** The subject's weakest not-yet-secure topic, for "Next: <topic>". */
+  weakest?: { topic: string; label: string; mastery: number } | null;
+  /** Mistakes from this session still to fix. */
+  mistakes?: number;
 }
 
 export interface ApiWarmupQuestion {
@@ -508,6 +516,10 @@ export const recordFlashcardAttempt = (input: {
   isCorrect: boolean;
   timeSpentMs?: number;
   studySessionId?: string;
+  /** What the learner typed (vocab recall), kept with the mistake. */
+  answer?: string;
+  /** An MCQ or cloze blank over this card: that activity logs its own mistake. */
+  fromQuiz?: boolean;
 }) => rpc<unknown>("flashcards.recordStudyAttempt", "mutation", input);
 
 export interface DeckCardProgress {
@@ -703,6 +715,7 @@ export function mapSession(s: ApiStudySession): StudySession {
     generating: s.generating ?? false,
     generationProgress: s.generationProgress ?? undefined,
     quickStart: s.quickStart ?? false,
+    mistakesPractice: s.mistakesPractice ?? false,
     status: s.status.toLowerCase() as StudySession["status"],
     startDate: s.startDate.toISOString(),
     endDate: s.endDate?.toISOString(),

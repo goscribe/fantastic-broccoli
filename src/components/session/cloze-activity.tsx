@@ -68,6 +68,7 @@ export function ClozeActivity({
         flashcardId,
         isCorrect: marked[i]?.correct ?? false,
         studySessionId: sessionId,
+        fromQuiz: true,
       }).catch(() => {});
     });
   };
