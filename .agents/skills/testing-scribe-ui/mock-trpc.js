@@ -145,6 +145,58 @@ function trendsFixture(range = "1m") {
   return { __superjson: { json, meta: { values } } };
 }
 
+// Weekly cohorts (admin.getWeeklyCohorts). Made-up numbers: the two newest weeks are
+// provisional, and only the newest has first-hour pages.
+function cohortsFixture(weeks = 8) {
+  const DAY = 86400000;
+  const now = Date.now();
+  const monday = (t) => { const d = new Date(t); const m = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()); return m - ((d.getUTCDay() + 6) % 7) * DAY; };
+  const first = monday(now);
+  const columns = [
+    ["verified", "Verified email", "first7Days", 0, 7, 48], ["createdSubject", "Made a subject", "first7Days", 0, 7, 36],
+    ["uploaded", "Uploaded", "first7Days", 0, 7, 31], ["startedSession", "Started a session", "first7Days", 0, 7, 27],
+    ["completedActivity", "Finished an activity", "first7Days", 0, 7, 17], ["finishedSession", "Finished a session", "first7Days", 0, 7, 16],
+    ["paid", "Paid (30 days)", "first7Days", 0, 30, 0.6], ["flashcards", "Flashcards", "used", 0, 7, 16],
+    ["copilot", "Copilot", "used", 0, 7, 9], ["planner", "Changed their plan", "used", 0, 7, 2],
+    ["week1", "Days 2–7", "cameBack", 1, 7, 4.5], ["week2", "Week 2", "cameBack", 7, 14, 1.8],
+    ["week3", "Week 3", "cameBack", 14, 21, 1.1], ["week4", "Week 4", "cameBack", 21, 28, 0.6],
+  ];
+  const values = { from: ["Date"], to: ["Date"], pageViewsFrom: ["Date"] };
+  const cohorts = Array.from({ length: weeks }, (_, i) => {
+    const start = first - i * 7 * DAY;
+    const end = start + 7 * DAY;
+    const signups = i === 0 ? 36 : i === 1 ? 22 : 600 + ((i * 37) % 90);
+    const lift = i <= 1 ? 1.35 : 1 + Math.sin(i) * 0.08;
+    const cells = {};
+    for (const [key, , , fromDay, toDay, base] of columns) {
+      if (start + fromDay * DAY >= now) { cells[key] = null; continue; }
+      const pct = Math.round(base * lift * 10) / 10;
+      cells[key] = { users: Math.round((pct / 100) * signups), pct, partial: end + toDay * DAY > now };
+    }
+    values[`cohorts.${i}.weekStart`] = ["Date"];
+    values[`cohorts.${i}.weekEnd`] = ["Date"];
+    return {
+      weekStart: new Date(start).toISOString(), weekEnd: new Date(end).toISOString(), inProgress: end > now, signups, cells,
+      sessionsPerUser: i <= 1 ? 0.7 : 0.5, activitiesPerUser: 0.2, medianMinutesToFirstSession: i === 1 ? null : 1.9 + (i % 3) * 0.4,
+      firstVisit: i === 0 ? {
+        partialTracking: true, trackedUsers: 18,
+        paths: [
+          { pages: ["/"], users: 5, pct: 27.8 },
+          { pages: ["/", "/workspace/[id]", "/workspace/[id]/session/[sessionId]"], users: 4, pct: 22.2 },
+          { pages: ["/", "/study-bot", "/workspace/[id]/chat"], users: 2, pct: 11.1 },
+        ],
+        lastPages: [{ page: "/", users: 6, pct: 33.3 }, { page: "/workspace/[id]", users: 4, pct: 22.2 }, { page: "/settings", users: 3, pct: 16.7 }],
+      } : null,
+    };
+  });
+  const json = {
+    weeks, from: new Date(first - (weeks - 1) * 7 * DAY).toISOString(), to: new Date(now).toISOString(),
+    pageViewsFrom: new Date(now - 3 * DAY).toISOString(),
+    columns: columns.map(([key, label, group]) => ({ key, label, group })), cohorts,
+  };
+  return { __superjson: { json, meta: { values } } };
+}
+
 function handleProc(path, input) {
   switch (path) {
     case "auth.getSession":
@@ -153,6 +205,8 @@ function handleProc(path, input) {
       return { user };
     case "admin.getTrends":
       return trendsFixture(input?.range);
+    case "admin.getWeeklyCohorts":
+      return cohortsFixture(input?.weeks);
     case "workspace.getTree":
       // EMPTY=1 simulates a brand-new user (triggers first-session onboarding).
       if (process.env.EMPTY === "1") return { folders: [], workspaces: [] };
