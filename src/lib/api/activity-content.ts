@@ -157,7 +157,28 @@ function normalizeReading(raw: Raw): ReadingContent {
       ? (raw.highlights as ReadingContent["highlights"])
       : undefined,
     completed: raw.completed === true,
+    ...readingSourceFields(raw),
   };
+}
+
+/** Source-first reading fields: mode, attribution, key points, typed blocks. */
+function readingSourceFields(raw: Raw): Partial<ReadingContent> {
+  const out: Partial<ReadingContent> = {};
+  if (raw.mode === "source" || raw.mode === "scribe" || raw.mode === "topic") out.mode = raw.mode;
+  const source = obj(raw.source);
+  if (source.kind === "notes") {
+    out.source = {
+      kind: "notes",
+      label: str(source.label) || undefined,
+      documents: arr(source.documents).map(str).filter(Boolean),
+      pages: arr(source.pages).filter((p): p is number => typeof p === "number"),
+    };
+  }
+  const keyPoints = arr(raw.keyPoints).map(str).filter(Boolean);
+  if (keyPoints.length > 0) out.keyPoints = keyPoints;
+  const blocks = arr(raw.blocks).filter((b) => obj(b).type);
+  if (blocks.length > 0) out.blocks = blocks as ReadingContent["blocks"];
+  return out;
 }
 
 function markScheme(raw: unknown): MarkScheme | undefined {
