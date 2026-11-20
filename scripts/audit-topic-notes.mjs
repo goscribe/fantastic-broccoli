@@ -78,6 +78,14 @@ for (const n of notes) {
       clone.querySelectorAll(".katex, textarea").forEach((e) => e.remove());
       return clone.innerText;
     });
+    // KaTeX with throwOnError:false draws unknown commands in red inside .katex, and parse
+    // errors as .katex-error: both mean the maths is broken even though no raw text shows.
+    const katexErrors = await page.evaluate(() =>
+      [...document.querySelectorAll("article .katex-error, article .katex [style*='color:#cc0000'], article .katex [style*='color: rgb(204, 0, 0)']")]
+        .map((e) => e.getAttribute("title") || e.textContent || "")
+        .slice(0, 3),
+    );
+    if (katexErrors.length) issues.push(`broken maths (KaTeX error): ${katexErrors.map((t) => JSON.stringify(t.slice(0, 60))).join(", ")}`);
     const m = RAW.exec(text);
     if (m) issues.push(`raw maths in page text: "${text.slice(Math.max(0, m.index - 30), m.index + 40).replace(/\s+/g, " ")}"`);
     for (const frame of page.frames().slice(1)) {
