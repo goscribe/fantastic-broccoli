@@ -145,6 +145,43 @@ function trendsFixture(range = "1m") {
   return { __superjson: { json, meta: { values } } };
 }
 
+// Generation assessment (admin.generationEvalSummary). Made-up scores for two runs.
+function generationEvalFixture() {
+  const DAY = 86400000;
+  const run = (id, daysAgo, averages, mediumFlagged) => ({
+    runId: id,
+    startedAt: new Date(Date.now() - daysAgo * DAY - 40 * 60000).toISOString(),
+    finishedAt: new Date(Date.now() - daysAgo * DAY).toISOString(),
+    materials: 13,
+    assessed: 12,
+    failed: 1,
+    averages,
+    activities: 96,
+    mediumFlagged,
+    mediumFlaggedPct: Math.round((mediumFlagged / 96) * 1000) / 10,
+    mediumIssues: [
+      { kind: "needs_drawing", activities: 6 },
+      { kind: "hard_to_type", activities: 4 },
+      { kind: "too_long_to_type", activities: 3 },
+      { kind: "missing_figure", activities: 1 },
+    ],
+    weakest: [
+      { materialKey: "wikipedia-supply-and-demand", title: "Supply and demand", kind: "graph-heavy", overallScore: 4, summary: "Good coverage of the model, but three worksheet parts ask the student to plot curves accurately, which the sketch pad cannot do." },
+      { materialKey: "wikibooks-matrices-problem-set", title: "High School Mathematics Extensions: Matrices problem set", kind: "problem-set", overallScore: 5, summary: "Answers are matrices typed as plain text, slow on a laptop and close to impossible on a phone." },
+      { materialKey: "wikipedia-hamlet", title: "Hamlet", kind: "literature", overallScore: 6, summary: "Sound questions; two comprehension checks expect essay-length answers." },
+    ],
+  });
+  const values = {};
+  for (const k of ["latest", "previous"]) for (const f of ["startedAt", "finishedAt"]) values[`${k}.${f}`] = ["Date"];
+  const json = {
+    running: false,
+    poolSize: 13,
+    latest: run("fixture-new", 2, { overall: 6.4, materialFit: 8.3, quality: 7.6, laptopFit: 7.9, phoneFit: 6.4 }, 14),
+    previous: run("fixture-old", 9, { overall: 5.8, materialFit: 8.3, quality: 7.4, laptopFit: 7.5, phoneFit: 5.8 }, 19),
+  };
+  return { __superjson: { json, meta: { values } } };
+}
+
 // Weekly cohorts (admin.getWeeklyCohorts). Made-up numbers: the two newest weeks are
 // provisional, and only the newest has first-hour pages.
 function cohortsFixture(weeks = 8) {
@@ -205,6 +242,10 @@ function handleProc(path, input) {
       return { user };
     case "admin.getTrends":
       return trendsFixture(input?.range);
+    case "admin.generationEvalSummary":
+      return generationEvalFixture();
+    case "admin.runGenerationEval":
+      return { started: true };
     case "admin.getWeeklyCohorts":
       return cohortsFixture(input?.weeks);
     case "workspace.getTree":
