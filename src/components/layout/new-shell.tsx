@@ -5,13 +5,14 @@ import Image from "next/image";
 import { NotificationBell } from "@/components/layout/notification-bell";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Calendar, Folder as FolderIcon, House, LogOut, PanelLeft, PanelLeftClose, PlayCircle, Plus, Search, Settings, Store } from "lucide-react";
+import { Calendar, Folder as FolderIcon, House, LogOut, PanelLeft, PanelLeftClose, PlayCircle, Plus, RotateCcw, Search, Settings, Store } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import { accentForId } from "@/lib/accent-palette";
 import { StreakButton } from "@/components/rewards/streak-button";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
+import "@/lib/i18n/mistakes";
 import { onTreeChanged } from "@/lib/tree-events";
 import { cn } from "@/lib/utils";
 import { AppTourHost, requestAppTour } from "@/components/onboarding/app-tour";
@@ -24,6 +25,7 @@ const NAV: { href: string; label: string; labelKey?: string; icon: typeof House 
   { href: "/", label: "Home", icon: House },
   { href: "/planner", label: "Planner", icon: Calendar },
   { href: "/shop", label: "Shop", labelKey: "rewards.shop", icon: Store },
+  { href: "/mistakes", label: "Mistakes", labelKey: "mistakes.nav", icon: RotateCcw },
 ];
 
 const RAIL_KEY = "scribe.sidebar.rail";

@@ -309,7 +309,14 @@ export function SessionPrecheck({
                   <span className={cn("min-w-0 font-semibold leading-snug", hero ? "text-[14px]" : "text-[13px]")}>
                     {topic.label}
                   </span>
-                  <LevelBadge level={level} />
+                  <span className="flex shrink-0 items-center gap-2">
+                    {levels[topic.topic] && (
+                      <span className="text-[11.5px] font-medium tabular-nums text-muted-foreground">
+                        {Math.round(mastery * 100)}%
+                      </span>
+                    )}
+                    <LevelBadge level={level} />
+                  </span>
                 </div>
                 <div
                   className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-muted"

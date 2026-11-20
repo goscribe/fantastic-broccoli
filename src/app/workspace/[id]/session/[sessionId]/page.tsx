@@ -49,6 +49,8 @@ import { ExplainAloudActivity } from "@/components/session/explain-aloud-activit
 import { InteractiveActivity } from "@/components/session/interactive-activity";
 import { WorksheetActivity } from "@/components/session/worksheet-activity";
 import { SessionDebrief } from "@/components/session/session-debrief";
+import { localizePracticeSession, mistakesApi } from "@/lib/api/mistakes";
+import "@/lib/i18n/mistakes";
 import {
   ActivityRewardCard,
   REWARD_MS,
@@ -140,6 +142,8 @@ export default function SessionDetailPage() {
   const { data: session, isLoading } = useQuery({
     queryKey: ["study-session", sessionId],
     queryFn: () => fetchStudySession(sessionId),
+    // "Practice my mistakes" is built server-side with English titles.
+    select: (s) => localizePracticeSession(s, t),
     // Plans are generated in the background — poll while generating as a
     // fallback for when Pusher isn't configured.
     refetchInterval: (query) =>
@@ -621,6 +625,7 @@ export default function SessionDetailPage() {
   const showExtendPrompt =
     planReady &&
     !session.quickStart &&
+    !session.mistakesPractice &&
     nearEnd &&
     !extended &&
     !extendDismissed &&
@@ -670,8 +675,14 @@ export default function SessionDetailPage() {
                   flashcardId: question.sourceFlashcardId,
                   isCorrect: selectedIndex === question.correctIndex,
                   studySessionId: sessionId,
+                  fromQuiz: true,
                 }).catch(() => {});
               }
+              // Marked server-side too, so a wrong answer lands in the
+              // mistakes log (bank questions are logged by answerBankQuestion).
+              mistakesApi
+                .answerMcq({ activityId: activity.id, questionIndex, selectedIndex })
+                .catch(() => {});
               // Spaced-review questions from the bank are re-marked
               // server-side, updating the topic level and their schedule.
               if (question?.bankRef) {
@@ -711,7 +722,7 @@ export default function SessionDetailPage() {
             activityId={activity.id}
             draft={activity.draft}
             content={activity.content as VocabRecallContent}
-            onTermResult={(index, correct) => {
+            onTermResult={(index, correct, answer) => {
               const term = (activity.content as VocabRecallContent).terms[
                 index
               ];
@@ -720,6 +731,7 @@ export default function SessionDetailPage() {
                   flashcardId: term.flashcardId,
                   isCorrect: correct,
                   studySessionId: sessionId,
+                  answer,
                 }).catch(() => {});
               }
             }}

@@ -18,7 +18,7 @@ interface VocabRecallActivityProps {
   activityId: string;
   content: VocabRecallContent;
   draft?: Record<string, unknown>;
-  onTermResult?: (index: number, correct: boolean) => void;
+  onTermResult?: (index: number, correct: boolean, answer?: string) => void;
   onComplete: () => void;
 }
 
@@ -81,7 +81,7 @@ export function VocabRecallActivity({
   const term = content.terms[termIndex];
 
   const mark = (correct: boolean) => {
-    onTermResult?.(termIndex, correct);
+    onTermResult?.(termIndex, correct, answer.trim() || undefined);
     setAttempts((n) => n + 1);
 
     const nextMissed = correct ? missed : [...missed, termIndex];
