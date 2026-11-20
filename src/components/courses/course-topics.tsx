@@ -133,7 +133,10 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
           );
         })}
       </div>
-      <p className="mt-4 text-[11.5px] leading-snug text-faint">{t("course.sourceNote")}</p>
+      <p className="mt-4 text-[11.5px] leading-snug text-faint">
+          {t("course.sourceNote")}
+          {course.numberingNote ? ` ${course.numberingNote}` : ""}
+        </p>
     </section>
   );
 }
