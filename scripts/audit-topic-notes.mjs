@@ -24,7 +24,7 @@ if (!dir) {
   console.error("usage: node scripts/audit-topic-notes.mjs <notes dir> [origin] [courses]");
   process.exit(2);
 }
-const courses = readdirSync(dir).filter((c) => !c.startsWith("_") && (!only || only.split(",").includes(c)));
+const courses = readdirSync(dir, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_") && (!only || only.split(",").includes(d.name))).map((d) => d.name);
 const notes = courses.flatMap((c) =>
   readdirSync(join(dir, c))
     .filter((f) => f.endsWith(".json"))
