@@ -30,6 +30,7 @@ export interface CatalogTopic {
   objectives: string[];
   hlOnly?: boolean;
   higherTierOnly?: boolean;
+  bcOnly?: boolean;
 }
 
 export interface CatalogUnit {
@@ -44,6 +45,8 @@ export interface Course extends Omit<CourseSummary, "unitCount" | "topicCount"> 
   unitLabel: string;
   version: number;
   sourceNote: string;
+  /** Where codes are partly Scribe's own or less certain (English, like course names). */
+  numberingNote?: string;
   units: CatalogUnit[];
 }
 

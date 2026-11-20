@@ -262,7 +262,10 @@ export function CoursePicker({
       )}
 
       {course && step !== "course" && (
-        <p className="mt-4 text-[11.5px] leading-snug text-faint">{t("course.sourceNote")}</p>
+        <p className="mt-4 text-[11.5px] leading-snug text-faint">
+          {t("course.sourceNote")}
+          {course.numberingNote ? ` ${course.numberingNote}` : ""}
+        </p>
       )}
     </div>
   );
@@ -299,9 +302,9 @@ export function TopicRow({
         <span className="w-[52px] shrink-0 text-[12.5px] font-semibold tabular-nums text-faint">{topic.code}</span>
         <span className="min-w-0 flex-1">
           <span className="block text-[14px] font-semibold leading-snug">{topic.name}</span>
-          {(topic.hlOnly || topic.higherTierOnly) && (
+          {(topic.hlOnly || topic.higherTierOnly || topic.bcOnly) && (
             <span className="text-[11.5px] font-medium text-faint">
-              {t(topic.hlOnly ? "course.hlOnly" : "course.higherTier")}
+              {t(topic.hlOnly ? "course.hlOnly" : topic.bcOnly ? "course.bcOnly" : "course.higherTier")}
             </span>
           )}
         </span>
