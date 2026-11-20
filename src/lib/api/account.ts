@@ -59,25 +59,12 @@ export function fetchPlanCaps(): Promise<PlanCaps> {
   return rpc<PlanCaps>("payment.getPlanCaps", "query", undefined);
 }
 
-/** Prefix the server puts on every free-plan cap error (see server PLAN_LIMIT_ERROR_PREFIX). */
-export const PLAN_LIMIT_ERROR_PREFIX = "Free plan limit reached";
-
-export function isPlanLimitError(err: unknown): err is Error {
-  return (
-    err instanceof Error &&
-    // Running out of monthly tokens is the same moment as hitting a cap.
-    (err.message.startsWith(PLAN_LIMIT_ERROR_PREFIX) ||
-      /^Not enough tokens\b/.test(err.message))
-  );
-}
-
-/** Fired on `window` when a request is refused by a free-plan cap; the upgrade dialog listens. */
-export const PLAN_LIMIT_EVENT = "scribe:plan-limit";
-
-export function announcePlanLimit(message: string): void {
-  if (typeof window === "undefined") return;
-  window.dispatchEvent(new CustomEvent(PLAN_LIMIT_EVENT, { detail: message }));
-}
+export {
+  PLAN_LIMIT_ERROR_PREFIX,
+  PLAN_LIMIT_EVENT,
+  announcePlanLimit,
+  isPlanLimitError,
+} from "./plan-limit";
 
 /** Server token cost table, keyed by operation (see server TOKEN_COSTS). */
 export interface TokenCosts {

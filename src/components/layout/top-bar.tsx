@@ -13,6 +13,7 @@ import {
   Settings,
   Sun,
   UserPlus,
+  X,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { ScribeLogo } from "@/components/graphics/logo";
@@ -37,6 +38,14 @@ import {
   hasGuidedTourForPath,
   requestGuidedTour,
 } from "@/components/onboarding/guided-tour";
+
+function storedFlag(key: string): boolean {
+  try {
+    return typeof window !== "undefined" && localStorage.getItem(key) === "1";
+  } catch {
+    return false;
+  }
+}
 
 export function TopBar({
   showLogo = false,
@@ -72,6 +81,23 @@ export function TopBar({
             : t("misc.home");
 
   const emailVerified = user?.emailVerified ?? true;
+  // Verification gates nothing unless the server says so: then it's only a
+  // gentle, dismissible reminder (remembered per user on this device).
+  const verificationRequired = user?.emailVerificationRequired ?? true;
+  const reminderKey = user ? `scribe-verify-reminder-dismissed:${user.id}` : null;
+  const [dismissedNow, setDismissedNow] = useState<string | null>(null);
+  // `user` only exists client-side (after the session loads), so reading
+  // storage here can't cause a hydration mismatch.
+  const reminderDismissed =
+    !!reminderKey && (dismissedNow === reminderKey || storedFlag(reminderKey));
+  const dismissReminder = () => {
+    setDismissedNow(reminderKey);
+    try {
+      if (reminderKey) localStorage.setItem(reminderKey, "1");
+    } catch {
+      // Storage unavailable: hidden until reload.
+    }
+  };
   const workspaceId = pathname.match(/^\/workspace\/([^/]+)/)?.[1] ?? null;
 
   const { data: workspace } = useQuery({
@@ -371,7 +397,37 @@ export function TopBar({
         </div>
       </div>
 
-      {!emailVerified && (
+      {!emailVerified && !verificationRequired && !reminderDismissed && (
+        <div className="border-b border-border bg-muted/40 px-3 py-1.5 text-[12px] text-muted-foreground sm:px-5">
+          <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
+            <span className="min-w-0 break-words">
+              {t("misc.verifyEmailReminder").replace(
+                "{email}",
+                user?.email ?? t("misc.email"),
+              )}
+            </span>
+            <div className="flex shrink-0 items-center gap-2">
+              <button
+                type="button"
+                onClick={onResendVerification}
+                className="font-semibold text-accent hover:underline"
+              >
+                {t("misc.resendVerification")}
+              </button>
+              <button
+                type="button"
+                onClick={dismissReminder}
+                aria-label={t("misc.dismiss")}
+                className="rounded-full p-1 hover:bg-muted hover:text-foreground"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {!emailVerified && verificationRequired && (
         <div className="border-b border-amber-500/20 bg-amber-500/10 px-3 py-2 text-[12px] text-amber-900 sm:px-5 dark:text-amber-100">
           <div className="mx-auto flex max-w-6xl flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
             <span className="min-w-0 font-medium break-words">

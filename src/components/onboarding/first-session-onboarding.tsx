@@ -438,10 +438,10 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
     );
   }
 
-  // Unverified users get their first study session for free (the server
-  // allows generation until they own one), so this screen only nudges them
-  // to verify instead of blocking the upload.
+  // Only a nudge: verification gates nothing unless the server requires it
+  // (then unverified users still get their first sessions free).
   const unverified = user?.emailVerified === false;
+  const verificationRequired = user?.emailVerificationRequired ?? true;
 
   if (preset) {
     const units = presetSubject ? unitsFor(preset.board, presetSubject) : [];
@@ -678,14 +678,16 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
           <div className="mt-4 rounded-xl border border-border bg-muted/40 px-4 py-3 text-left">
             <p className="flex items-center gap-2 text-xs font-semibold">
               <MailCheck className="h-3.5 w-3.5 text-accent" />
-              Your first session is free
+              {verificationRequired ? "Your first session is free" : "Confirm your email"}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
-              Verify{" "}
+              {verificationRequired ? "Verify" : "Confirm"}{" "}
               <span className="font-medium text-foreground">
                 {user?.email ?? "your email"}
               </span>{" "}
-              to keep generating after this one.
+              {verificationRequired
+                ? "to keep generating after this one."
+                : "whenever you like, so we can send tomorrow's 5 more questions. No need to wait: start now."}
             </p>
             <div className="mt-2 flex items-center gap-3">
               <button

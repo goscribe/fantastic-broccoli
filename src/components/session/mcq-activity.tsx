@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { McqOptionBody, McqQuestionBody, optionsHaveFigures } from "@/components/session/mcq-rich";
 import { McqContent } from "@/types";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
@@ -21,6 +21,13 @@ interface McqActivityProps {
   draft?: Record<string, unknown>;
   onAnswer: (questionIndex: number, selectedIndex: number) => void;
   onComplete: () => void;
+  /**
+   * Every question has an answer. Fired once, as soon as the last answer is
+   * revealed (or on mount when a restored draft is already complete), so
+   * the activity is recorded as finished even if the learner never taps
+   * "Finish quiz" (swipes or arrows on to the debrief, closes the tab…).
+   */
+  onAllAnswered?: () => void;
 }
 
 export function McqActivity({
@@ -29,6 +36,7 @@ export function McqActivity({
   draft,
   onAnswer,
   onComplete,
+  onAllAnswered,
 }: McqActivityProps) {
   const { t } = useI18n();
   const newUi = useNewUi();
@@ -64,6 +72,15 @@ export function McqActivity({
     revealed,
     answersByQ,
   });
+
+  const allAnswered =
+    answersByQ.length > 0 && answersByQ.every((a) => a !== null);
+  const reportedAllAnswered = useRef(false);
+  useEffect(() => {
+    if (!allAnswered || reportedAllAnswered.current) return;
+    reportedAllAnswered.current = true;
+    onAllAnswered?.();
+  }, [allAnswered, onAllAnswered]);
 
   const question = content.questions[index];
   const isLast = index === content.questions.length - 1;

@@ -14,6 +14,7 @@ export function toastError(err: unknown, fallback: string): string {
   }
   const message =
     err instanceof Error && err.message ? err.message : fallback;
-  toast.error(message);
+  // Keyed by message: the transport may already have shown this refusal.
+  toast.error(message, { id: message });
   return message;
 }

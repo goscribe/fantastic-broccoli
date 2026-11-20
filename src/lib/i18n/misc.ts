@@ -144,6 +144,9 @@ const english = {
   "misc.adminConsole": "Admin console",
   "misc.verifyEmailBanner":
     "Verify {email} to unlock study tools and billing actions.",
+  "misc.verifyEmailReminder":
+    "Confirm {email} so we can keep your account safe and send your study reminders.",
+  "misc.dismiss": "Dismiss",
   "misc.resendVerification": "Resend verification",
   "misc.verificationEmailSent": "Verification email sent.",
   "misc.verificationEmailFailed": "Could not resend the email.",
@@ -315,6 +318,9 @@ registerTranslations(english, {
     "misc.adminConsole": "Consola de administración",
     "misc.verifyEmailBanner":
       "Verifica {email} para desbloquear las herramientas de estudio y la facturación.",
+    "misc.verifyEmailReminder":
+      "Confirma {email} para proteger tu cuenta y enviarte tus recordatorios de estudio.",
+    "misc.dismiss": "Descartar",
     "misc.resendVerification": "Reenviar verificación",
     "misc.verificationEmailSent": "Correo de verificación enviado.",
     "misc.verificationEmailFailed": "No se pudo reenviar el correo.",
@@ -488,6 +494,9 @@ registerTranslations(english, {
     "misc.adminConsole": "Console d'administration",
     "misc.verifyEmailBanner":
       "Vérifiez {email} pour débloquer les outils d'étude et la facturation.",
+    "misc.verifyEmailReminder":
+      "Confirmez {email} pour sécuriser votre compte et recevoir vos rappels d'étude.",
+    "misc.dismiss": "Fermer",
     "misc.resendVerification": "Renvoyer la vérification",
     "misc.verificationEmailSent": "E-mail de vérification envoyé.",
     "misc.verificationEmailFailed": "Impossible de renvoyer l'e-mail.",
@@ -663,6 +672,9 @@ registerTranslations(english, {
     "misc.adminConsole": "Admin-Konsole",
     "misc.verifyEmailBanner":
       "Bestätige {email}, um Lernwerkzeuge und Abrechnungsaktionen freizuschalten.",
+    "misc.verifyEmailReminder":
+      "Bestätige {email}, damit dein Konto sicher bleibt und du deine Lern-Erinnerungen bekommst.",
+    "misc.dismiss": "Ausblenden",
     "misc.resendVerification": "Bestätigung erneut senden",
     "misc.verificationEmailSent": "Bestätigungs-E-Mail gesendet.",
     "misc.verificationEmailFailed": "Die E-Mail konnte nicht erneut gesendet werden.",
@@ -825,6 +837,9 @@ registerTranslations(english, {
     "misc.darkMode": "深色模式",
     "misc.adminConsole": "管理控制台",
     "misc.verifyEmailBanner": "验证 {email} 以解锁学习工具和账单操作。",
+    "misc.verifyEmailReminder":
+      "确认 {email}，以保护你的账户并接收学习提醒。",
+    "misc.dismiss": "关闭",
     "misc.resendVerification": "重新发送验证邮件",
     "misc.verificationEmailSent": "验证邮件已发送。",
     "misc.verificationEmailFailed": "无法重新发送验证邮件。",
@@ -993,6 +1008,9 @@ registerTranslations(english, {
     "misc.adminConsole": "एडमिन कंसोल",
     "misc.verifyEmailBanner":
       "स्टडी टूल और बिलिंग के लिए {email} सत्यापित करें।",
+    "misc.verifyEmailReminder":
+      "अपना खाता सुरक्षित रखने और पढ़ाई के रिमाइंडर पाने के लिए {email} की पुष्टि करें।",
+    "misc.dismiss": "हटाएँ",
     "misc.resendVerification": "सत्यापन फिर भेजें",
     "misc.verificationEmailSent": "सत्यापन ईमेल भेज दिया गया है।",
     "misc.verificationEmailFailed": "ईमेल फिर से नहीं भेजा जा सका।",
@@ -1164,6 +1182,9 @@ registerTranslations(english, {
     "misc.adminConsole": "Admin console",
     "misc.verifyEmailBanner":
       "I-verify ang {email} para ma-unlock ang study tools at billing.",
+    "misc.verifyEmailReminder":
+      "Kumpirmahin ang {email} para manatiling ligtas ang account mo at matanggap ang mga study reminder.",
+    "misc.dismiss": "Isara",
     "misc.resendVerification": "Ipadala muli ang verification",
     "misc.verificationEmailSent": "Naipadala na ang verification email.",
     "misc.verificationEmailFailed": "Hindi maipadala muli ang email.",

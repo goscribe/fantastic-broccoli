@@ -1,4 +1,5 @@
 import superjson from "superjson";
+import { surfaceRefusal } from "./refusals";
 import { apiUrl } from "./config";
 import { normalizeActivityContent } from "./activity-content";
 import type {
@@ -145,7 +146,11 @@ export interface AddActivityInput {
 interface TrpcEnvelope {
   result?: { data: { json: unknown; meta?: unknown } };
   // Error payload may be superjson-wrapped ({ json: { message } }) or plain.
-  error?: { message?: string; json?: { message?: string } };
+  error?: {
+    message?: string;
+    data?: { code?: string };
+    json?: { message?: string; data?: { code?: string } };
+  };
 }
 
 export async function rpc<T>(
@@ -169,11 +174,18 @@ export async function rpc<T>(
 
   const body = (await res.json()) as TrpcEnvelope;
   if (!res.ok || body.error || !body.result) {
-    throw new Error(
+    const message =
       body.error?.json?.message ??
-        body.error?.message ??
-        `${path} failed (${res.status})`,
-    );
+      body.error?.message ??
+      `${path} failed (${res.status})`;
+    if (kind === "mutation") {
+      surfaceRefusal(
+        path,
+        message,
+        body.error?.json?.data?.code ?? body.error?.data?.code,
+      );
+    }
+    throw new Error(message);
   }
   return superjson.deserialize(
     body.result.data as Parameters<typeof superjson.deserialize>[0],
