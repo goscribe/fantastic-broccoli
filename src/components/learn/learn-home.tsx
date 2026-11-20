@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { accentForId } from "@/lib/accent-palette";
 import { WeekStrip } from "@/components/learn/week-strip";
+import { PlanTodayCard } from "@/components/planner/plan-today-card";
 import { SubjectCover } from "@/components/learn/subject-cover";
 import { NotesOutline } from "@/components/learn/notes-outline";
 import { SubjectProgress } from "@/components/learn/subject-progress";
@@ -549,6 +550,8 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             <WeekBars mins={days.length ? days : [0, 0, 0, 0, 0, 0, 0]} goal={3} today={todayIdx} accent="var(--accent)" />
           </div>
         </div>
+        <PlanTodayCard
+          fallback={
         <div className="rounded-2xl border border-border p-[18px]">
           <div className="flex items-baseline justify-between">
             <span className="text-[16px] font-semibold">Up next</span>
@@ -578,6 +581,8 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             </ul>
           )}
         </div>
+          }
+        />
           </>
         )}
       </div>
