@@ -250,7 +250,9 @@ function NoteTable({
       <div className="flex flex-col gap-2 sm:hidden">
         {block.rows.map((r, ri) => (
           <dl key={ri} className="rounded-xl border border-border px-4 py-3 text-[15px] leading-snug">
-            <dt className="sr-only">{block.headers[0]}</dt>
+            <dt className="sr-only">
+              <InlineMarkdown text={tidyMath(block.headers[0])} />
+            </dt>
             <dd className="font-semibold">{cell(ri, 0)}</dd>
             {r.slice(1).map((_, k) => (
               <Fragment key={k}>

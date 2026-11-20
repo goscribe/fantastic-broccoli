@@ -69,7 +69,7 @@ for (const n of notes) {
   const issues = [];
   try {
     await page.goto(`${origin}/notes/${n.courseId}/${n.topicId}`, { waitUntil: "load", timeout: 120000 });
-    await page.waitForSelector("#sec-recall", { timeout: 60000 });
+    await page.waitForSelector("article h2", { timeout: 60000 });
     await page.waitForTimeout(1500);
     const text = await page.evaluate(() => {
       const art = document.querySelector("article");
