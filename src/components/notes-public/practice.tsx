@@ -95,7 +95,7 @@ function scrollToNext(ids: string[], from: string, answered: Record<string, numb
   if (next) (el?.querySelector("button[data-option]") as HTMLButtonElement | null)?.focus({ preventScroll: true });
 }
 
-/** A small burst of purple and orange sparkles for a right answer (decorative; off under reduced motion). */
+/** A small burst in the cat's orange and cream for a right answer (feedback; off under reduced motion). */
 function Sparkles() {
   return (
     <span className="pointer-events-none absolute left-9 top-9" aria-hidden="true">
@@ -103,7 +103,7 @@ function Sparkles() {
         <span
           key={a}
           className="nl-sparkle size-2 rounded-full"
-          style={{ "--a": `${a}deg`, "--d": `${38 + (i % 3) * 10}px`, background: i % 2 ? "var(--flame)" : "var(--accent)", animationDelay: `${i * 18}ms` } as React.CSSProperties}
+          style={{ "--a": `${a}deg`, "--d": `${38 + (i % 3) * 10}px`, background: i % 2 ? "var(--flame)" : "var(--hl)", animationDelay: `${i * 18}ms` } as React.CSSProperties}
         />
       ))}
     </span>
@@ -142,26 +142,26 @@ export function PracticeCard(p: CardProps) {
   const left = ctx.ids.some((id) => id !== p.id && !(id in answers));
 
   return (
-    <div id={`pq-${p.id}`} className={cn("scroll-mt-24", inline ? "nl-panel !rounded-[28px] px-3.5 pb-4 pt-4 sm:px-5 sm:pb-5" : "nl-card px-3.5 pb-4 pt-4 sm:px-5 sm:pb-5")} data-nl-reveal="">
+    <div id={`pq-${p.id}`} className={cn("scroll-mt-24", "nl-card px-3.5 pb-4 pt-4 sm:px-5 sm:pb-5")} data-nl-reveal="">
       <div className="flex items-center gap-2.5 px-0.5">
         {inline ? (
           <>
             <Image src="/design/cat2-think.png" alt="" width={230} height={259} unoptimized loading="lazy" className="-my-2 h-[58px] w-auto shrink-0" />
             <div className="min-w-0">
               <p className="text-[17px] font-extrabold leading-tight text-foreground">Quick check</p>
-              <p className="text-[13px] font-bold text-accent">Did that land? One question.</p>
+              <p className="text-[13px] font-bold text-muted-foreground">One question on the part you just read</p>
             </div>
           </>
         ) : (
-          <span className="grid size-9 shrink-0 place-items-center rounded-full bg-accent-soft text-[15px] font-black tabular-nums text-accent" aria-label={`Question ${p.number}`}>
-            {p.number}
+          <span className="shrink-0 text-[19px] font-black tabular-nums leading-none text-foreground" aria-label={`Question ${p.number}`}>
+            {p.number}.
           </span>
         )}
         <p className={cn("flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-bold text-muted-foreground", inline ? "ml-auto justify-end" : "min-w-0 flex-1")}>
           <span className="inline-flex items-center gap-1.5">
             <span className="inline-flex items-end gap-[3px]" aria-hidden="true">
               {[1, 2, 3].map((n) => (
-                <span key={n} className={cn("w-[5px] rounded-full", n <= DIFFICULTY_LEVEL[p.difficulty] ? "bg-accent" : "bg-[var(--edge)]")} style={{ height: 5 + n * 3 }} />
+                <span key={n} className={cn("w-[5px] rounded-full", n <= DIFFICULTY_LEVEL[p.difficulty] ? "bg-foreground" : "bg-[var(--border-strong)]")} style={{ height: 5 + n * 3 }} />
               ))}
             </span>
             {DIFFICULTY_LABEL[p.difficulty]}
@@ -173,8 +173,8 @@ export function PracticeCard(p: CardProps) {
             </>
           )}
           {!inline && (
-            <span className="ml-auto rounded-full bg-muted px-2.5 py-1 text-[12.5px] tabular-nums">
-              {p.marks} {p.marks === 1 ? "mark" : "marks"}
+            <span className="nl-marks">
+              [{p.marks} {p.marks === 1 ? "mark" : "marks"}]
             </span>
           )}
         </p>
@@ -207,7 +207,7 @@ export function PracticeCard(p: CardProps) {
           );
         })}
       </ol>
-      <div className={cn("relative", answered && "mt-4 rounded-[22px] px-4 pb-4 pt-3.5", answered && (right ? "bg-[var(--ok-soft)]" : "bg-[var(--no-soft)]"), fresh && "nl-up")}>
+      <div className={cn("relative", answered && "mt-4 rounded-[var(--r-button)] px-4 pb-4 pt-3.5", answered && (right ? "bg-[var(--ok-soft)]" : "bg-[var(--no-soft)]"), fresh && "nl-up")}>
         <div aria-live="polite">
           {answered && (
             <div className="flex items-center gap-3">
@@ -223,13 +223,13 @@ export function PracticeCard(p: CardProps) {
         <details ref={detailsRef} className={cn("group", answered ? "mt-2" : "mt-3")}>
           <summary
             className={cn(
-              "inline-flex min-h-10 cursor-pointer list-none items-center gap-1 px-0.5 text-[14.5px] font-extrabold text-accent hover:text-accent-dim [&::-webkit-details-marker]:hidden",
+              "inline-flex min-h-10 cursor-pointer list-none items-center gap-1 px-0.5 text-[14.5px] font-extrabold text-foreground underline decoration-border-strong underline-offset-4 [&::-webkit-details-marker]:hidden",
               answered && "hidden",
             )}
           >
             Show answer and explanation
           </summary>
-          <div className={cn("text-[16px] leading-[1.55] text-foreground", !answered && "mt-1 rounded-[20px] bg-white/80 px-4 py-3")}>
+          <div className={cn("text-[16px] leading-[1.55] text-foreground", !answered && "nl-well mt-1 px-4 py-3")}>
             <p className="text-[13px] font-extrabold text-muted-foreground">
               Answer: {LETTERS[p.correctIndex]} · Worked explanation
             </p>
@@ -255,23 +255,23 @@ export function PracticeScore({ inlineCount }: { inlineCount: number }) {
   const t = progress.topics[ctx.key];
   const firstOpen = ctx.ids.find((id) => !(t && id in t.answers));
   return (
-    <div className="nl-card sticky top-2 z-10 !rounded-[24px] px-4 py-3">
+    <div className="nl-card sticky top-2 z-10 px-4 py-3">
       <div className="flex min-h-8 items-center gap-2.5">
         <p className="text-[15px] font-extrabold tabular-nums">
-          <span className="text-[22px] font-black leading-none text-accent">{s.correct}</span>
+          <span className="text-[22px] font-black leading-none text-foreground">{s.correct}</span>
           <span className="text-muted-foreground"> right</span>
           <span className="ml-2 font-bold text-muted-foreground">
             {s.answered} of {s.total} answered
           </span>
         </p>
         {streak >= 2 && (
-          <span key={streak} className="nl-pop inline-flex items-center gap-1 rounded-full bg-[var(--flame-soft)] px-2.5 py-1 text-[13px] font-extrabold text-[var(--flame-ink)]">
+          <span key={streak} className="nl-pop inline-flex items-center gap-1 text-[13px] font-extrabold text-[var(--flame-ink)]">
             <Flame className="size-4 fill-[var(--flame)] text-[var(--flame)]" aria-hidden="true" />
             {streak} in a row
           </span>
         )}
         {s.answered > 0 && (
-          <button type="button" onClick={() => reset(ctx.key)} className="ml-auto inline-flex min-h-8 items-center gap-1 text-[13px] font-extrabold text-accent hover:text-accent-dim" aria-label="Start again">
+          <button type="button" onClick={() => reset(ctx.key)} className="ml-auto inline-flex min-h-8 items-center gap-1 text-[13px] font-extrabold text-muted-foreground hover:text-foreground" aria-label="Start again">
             <RotateCcw className="size-3.5" /> <span className="hidden sm:inline">Start again</span>
           </button>
         )}
@@ -306,26 +306,26 @@ export function PracticeDone({ nextTopic, quick5 }: { nextTopic: ReactNode; quic
       {!lastAnswered && <SignupNudge className="mb-4" />}
       {done && (
         <div className="nl-panel nl-up px-5 pb-6 pt-7 text-center sm:px-8">
-          <div className="relative mx-auto grid size-[132px] place-items-center rounded-full bg-white">
+          <div className="relative mx-auto grid size-[120px] place-items-center">
             {ratio >= 0.7 && (
               <span className="absolute inset-0" aria-hidden="true">
                 {[0, 40, 80, 120, 160, 200, 240, 280, 320].map((a, i) => (
                   <span
                     key={a}
                     className="nl-sparkle size-2.5 rounded-full"
-                    style={{ "--a": `${a}deg`, "--d": `${84 + (i % 3) * 14}px`, background: i % 2 ? "var(--flame)" : "var(--accent)", animationDelay: `${150 + i * 25}ms` } as React.CSSProperties}
+                    style={{ "--a": `${a}deg`, "--d": `${84 + (i % 3) * 14}px`, background: i % 2 ? "var(--flame)" : "var(--hl)", animationDelay: `${150 + i * 25}ms` } as React.CSSProperties}
                   />
                 ))}
               </span>
             )}
             <Image src={ratio >= 0.7 ? "/design/cat2-trophy.png" : "/design/cat2-think.png"} alt="" width={276} height={261} unoptimized className="nl-cat-in relative h-[112px] w-auto" />
           </div>
-          <p className="mt-4 text-[15px] font-extrabold text-accent">Practice complete</p>
+          <p className="mt-3 text-[15px] font-extrabold text-foreground/70">Practice complete</p>
           <p className="mt-1 text-[44px] font-black leading-none tracking-[-0.03em] tabular-nums text-foreground">
             {s.correct}
             <span className="text-[26px] text-muted-foreground"> / {s.total}</span>
           </p>
-          <p className="mx-auto mt-2.5 max-w-[420px] text-[16.5px] font-semibold leading-snug text-[#3b3650]">
+          <p className="mx-auto mt-2.5 max-w-[420px] text-[16.5px] font-semibold leading-snug text-foreground/80">
             {s.correct === s.total ? "Full marks. On to the next topic." : ratio >= 0.7 ? "Strong. Look over the ones you missed, then move on." : "Reread the parts above, then have another go."}
           </p>
           <div className="mx-auto mt-5 flex max-w-[460px] flex-col gap-3">
@@ -354,7 +354,7 @@ function SignupNudge({ className }: { className?: string }) {
   }, [show, ctx.courseId, ctx.topicId, s.answered]);
   if (!show) return null;
   return (
-    <aside aria-labelledby="signup-prompt-title" className={cn("nl-up relative rounded-[24px] border-2 border-dashed border-accent/35 bg-white px-4 pb-4 pt-4", className)}>
+    <aside aria-labelledby="signup-prompt-title" className={cn("nl-up relative rounded-[var(--r-card)] border border-dashed border-border-strong bg-card px-4 pb-4 pt-4", className)}>
       <button type="button" onClick={dismissPrompt} aria-label="Dismiss" className="absolute right-1.5 top-1.5 flex size-10 items-center justify-center rounded-full text-muted-foreground hover:bg-muted">
         <X className="size-4" />
       </button>

@@ -21,12 +21,12 @@ const ICON: Record<CoverKey, LucideIcon> = {
   general: GraduationCap,
 };
 
-/** A subject's icon tile, picked from the course title (flask for Chemistry, …). `solid` is the purple one. */
-export function SubjectTile({ title, solid = false, className, iconClassName }: { title: string; solid?: boolean; className?: string; iconClassName?: string }) {
+/** A subject's icon, picked from the course title (flask for Chemistry, …): a plain line icon in ink in a fixed-width column, no tinted tile. */
+export function SubjectTile({ title, className, iconClassName }: { title: string; className?: string; iconClassName?: string }) {
   const Icon = ICON[coverKeyForTitle(title)];
   return (
-    <span aria-hidden="true" className={cn("grid size-12 shrink-0 place-items-center rounded-2xl", solid ? "bg-accent text-white shadow-[0_3px_0_0_var(--accent-edge)]" : "bg-accent-soft text-accent", className)}>
-      <Icon className={cn("size-6", iconClassName)} strokeWidth={2.25} />
+    <span aria-hidden="true" className={cn("grid w-8 shrink-0 place-items-center text-foreground", className)}>
+      <Icon className={cn("size-6", iconClassName)} strokeWidth={2} />
     </span>
   );
 }

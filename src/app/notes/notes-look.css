@@ -1,55 +1,52 @@
+@import "../design/tokens.css";
+
 /*
  * The look of the public note pages (/notes): a study page, not a document.
- * Same language as the signed-in app's "life" layer: a faintly purple-tinted
- * page, soft white cards with big radii, one flat lavender panel for the main
- * thing, pill buttons with a lip that presses down, the cat with presence.
- * One accent (purple); the mascot's orange only for small highlights; green
- * and rose only after an answer.
+ * Same language as the signed-in app (palette in design/tokens.css): a warm
+ * off-white page, white cards with a hairline, ink text, and purple as the
+ * accent only (primary button, links, the selected thing, progress). One warm
+ * cream panel holds the page's main thing, with the cat. The details come
+ * from studying: exam-style question numbers and [marks], lettered answers, a
+ * highlighter on key phrases, a ruled line under the header. Green and rose
+ * only after an answer.
  *
  * Everything here is progressive: the page reads in full with JavaScript off,
  * nothing is hidden until a script has said so, and nothing that moves
  * changes layout. All motion stops under prefers-reduced-motion.
  */
 .notes-look {
-  --page: #faf9fe;
-  --edge: #e6e3f1;
-  --card-shadow: 0 1px 2px rgba(36, 26, 92, 0.05), 0 16px 32px -20px rgba(72, 52, 170, 0.25);
-  --accent-edge: #4f3bbd;
-  --flame: #f0a645;
-  --flame-edge: #d98a25;
-  --flame-soft: #fff5e6;
-  --flame-ink: #7a4a0c;
   --ok: #1f9d57;
   --ok-soft: #e7f7ed;
   --ok-ink: #15703d;
   --no: #d6455d;
   --no-soft: #fdecef;
   --no-ink: #a52a40;
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   background: var(--page);
 }
-:root[data-accent] .notes-look { --accent-edge: var(--accent-dim); }
 .notes-look h1, .notes-look h2 { letter-spacing: -0.022em; }
 
 @layer components {
   /* ---------- Surfaces ---------- */
   .nl-card {
     background: var(--card);
-    border: 1px solid rgba(105, 82, 224, 0.09);
-    border-radius: 26px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
     box-shadow: var(--card-shadow);
   }
-  .nl-panel { background: var(--accent-soft); border-radius: 32px; }
+  /* The warm panel: the page header, and the practice header further down. */
+  .nl-panel { background: var(--cream); border-radius: var(--r-panel); }
+  /* A quiet neutral box inside a card (model answers, a formula band). */
+  .nl-well { background: var(--muted); border-radius: var(--r-control); }
 
-  /* ---------- Buttons: a pill with a lip that presses down ---------- */
+  /* ---------- Buttons: chunky, with a lip that presses down ---------- */
   .nl-btn, .nl-btn-ghost {
     display: inline-flex;
     min-height: 48px;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    border-radius: 999px;
+    border-radius: var(--r-button);
     padding: 0 22px;
     font-size: 15.5px;
     font-weight: 800;
@@ -62,29 +59,21 @@
   .nl-btn:hover { background: var(--accent-dim); }
   .nl-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 0 var(--accent-edge); }
   .nl-btn-ghost { background: var(--card); color: var(--foreground); border: 1.5px solid var(--edge); box-shadow: 0 3px 0 0 var(--edge); }
-  .nl-btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .nl-btn-ghost:hover { border-color: var(--border-strong); box-shadow: 0 3px 0 0 var(--border-strong); }
   .nl-btn-ghost:active { transform: translateY(2px); box-shadow: 0 1px 0 0 var(--edge); }
-  .nl-btn-sm { min-height: 40px; padding: 0 16px; font-size: 14.5px; }
+  .nl-btn-sm { min-height: 40px; padding: 0 16px; font-size: 14.5px; border-radius: var(--r-control); }
 
-  .nl-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.75);
-    padding: 5px 11px;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--muted-foreground);
-    white-space: nowrap;
-  }
-  .nl-chip svg { width: 14px; height: 14px; color: var(--accent); }
+  /* Meta as one quiet line of text ("3 min read · 5 parts · 10 questions"), not a row of chips. */
+  .nl-meta { display: flex; flex-wrap: wrap; column-gap: 8px; row-gap: 2px; font-size: 14px; font-weight: 700; color: var(--muted-foreground); }
+  .nl-meta > li:not(:last-child)::after { content: "·"; margin-left: 8px; color: var(--faint); }
+  /* Exam-paper marks: "[2 marks]" at the end of the line. */
+  .nl-marks { margin-left: auto; white-space: nowrap; font-size: 13.5px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--foreground); }
 
   /* Cards and rows that lift a little under the pointer. */
-  .nl-lift { transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease, border-color 0.15s ease; }
+  .nl-lift { transition: transform 0.2s var(--ease-out), border-color 0.15s ease; }
   .nl-lift:active { transform: scale(0.985); }
   @media (hover: hover) {
-    .nl-lift:hover { transform: translateY(-3px); border-color: rgba(105, 82, 224, 0.35); }
+    .nl-lift:hover { border-color: var(--border-strong); }
   }
 
   /* ---------- Entrance: the header eases up on load (CSS only, opacity/transform only) ---------- */
@@ -141,21 +130,22 @@
     height: 34px;
     flex: none;
     place-items: center;
-    border-radius: 12px;
-    background: var(--accent-soft);
-    color: var(--accent);
-    font-size: 15px;
+    border-radius: 9px;
+    border: 2px solid var(--foreground);
+    color: var(--foreground);
+    font-size: 16px;
     font-weight: 900;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
+  .nl-secnum { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
   .nl-secnum svg { position: absolute; width: 18px; height: 18px; opacity: 0; transform: scale(0.4); transition: opacity 0.2s ease, transform 0.35s var(--ease-spring); }
-  [data-nl-read] > header .nl-secnum { background: var(--accent); color: #fff; }
+  [data-nl-read] > header .nl-secnum { background: var(--accent); border-color: var(--accent); color: #fff; }
   [data-nl-read] > header .nl-secnum > span { opacity: 0; }
   [data-nl-read] > header .nl-secnum svg { opacity: 1; transform: scale(1); }
 
   /* End of a section: a dot on a line that fills in with a tick when you get there. */
   .nl-secend { display: flex; align-items: center; gap: 10px; margin-top: 28px; color: var(--faint); font-size: 13px; font-weight: 800; }
-  .nl-secend::after { content: ""; height: 2px; flex: 1; border-radius: 2px; background: var(--edge); }
+  .nl-secend::after { content: ""; height: 1px; flex: 1; background: var(--border-strong); }
   .nl-secend i {
     display: grid;
     width: 26px;
@@ -169,27 +159,27 @@
   }
   .nl-secend i svg { width: 14px; height: 14px; color: #fff; opacity: 0; transform: scale(0.3); transition: opacity 0.2s ease, transform 0.4s var(--ease-spring); }
   .nl-secend b { max-width: 0; overflow: hidden; white-space: nowrap; font-weight: 800; opacity: 0; transition: opacity 0.3s ease 0.1s, max-width 0.4s var(--ease-out); }
-  [data-nl-read] > .nl-secend { color: var(--accent); }
-  [data-nl-read] > .nl-secend i { border-color: var(--accent); background: var(--accent); }
+  [data-nl-read] > .nl-secend { color: var(--muted-foreground); }
+  [data-nl-read] > .nl-secend i { border-color: var(--foreground); background: var(--foreground); }
   [data-nl-read] > .nl-secend i svg { opacity: 1; transform: scale(1); }
   [data-nl-read] > .nl-secend b { max-width: 12em; opacity: 1; }
 
   /* ---------- Prose ---------- */
-  .nl-prose { font-size: 17px; line-height: 1.7; color: #2a2636; }
+  .nl-prose { font-size: 17px; line-height: 1.7; color: #2b2722; }
   @media (min-width: 640px) { .nl-prose { font-size: 18px; } }
   /* Key phrases get a highlighter stroke instead of plain bold. */
   .nl-prose p strong, .nl-prose li strong {
     font-weight: 800;
     color: var(--foreground);
-    background-image: linear-gradient(rgba(105, 82, 224, 0.17), rgba(105, 82, 224, 0.17));
+    background-image: linear-gradient(var(--hl), var(--hl));
     background-repeat: no-repeat;
-    background-size: 100% 0.42em;
+    background-size: 100% 0.5em;
     background-position: 0 86%;
     border-radius: 2px;
   }
-  [data-nl-reveal="wait"] strong { background-size: 0% 0.42em; }
+  [data-nl-reveal="wait"] strong { background-size: 0% 0.5em; }
   [data-nl-reveal="in"] strong { animation: nl-mark 0.7s var(--ease-out) 0.25s both; }
-  @keyframes nl-mark { from { background-size: 0% 0.42em; } to { background-size: 100% 0.42em; } }
+  @keyframes nl-mark { from { background-size: 0% 0.5em; } to { background-size: 100% 0.5em; } }
   .nl-lead { font-size: 20px; line-height: 1.5; font-weight: 600; color: var(--foreground); }
   @media (min-width: 640px) { .nl-lead { font-size: 23px; line-height: 1.45; } }
   .nl-prose ul.nl-bullets > li { position: relative; padding-left: 26px; }
@@ -198,19 +188,19 @@
     position: absolute;
     left: 4px;
     top: 0.62em;
-    width: 9px;
-    height: 9px;
-    border-radius: 3px;
-    background: var(--accent);
-    transform: rotate(45deg);
+    top: 0.72em;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--foreground);
   }
   .nl-prose ul.nl-bullets ul > li { position: relative; padding-left: 20px; }
   .nl-prose ul.nl-bullets ul > li::before { content: ""; position: absolute; left: 4px; top: 0.68em; width: 6px; height: 6px; border-radius: 999px; background: var(--border-strong); }
   /* A formula on its own line sits on a soft band, so the maths has room. */
   .nl-prose p > .nl-math-block {
     margin: 12px 0 4px;
-    border-radius: 18px;
-    background: var(--accent-soft);
+    border-radius: var(--r-control);
+    background: var(--muted);
     padding: 14px 16px;
     text-align: center;
     font-size: 1.06em;
@@ -226,10 +216,10 @@
     display: inline-flex;
     min-height: 40px;
     align-items: center;
-    border-radius: 999px;
+    border-radius: var(--r-control);
     border: 1.5px solid var(--edge);
     background: var(--card);
-    padding: 0 15px;
+    padding: 0 14px;
     font-size: 15px;
     font-weight: 800;
     box-shadow: 0 3px 0 0 var(--edge);
@@ -238,7 +228,7 @@
     transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
   .nl-terms label:active { transform: translateY(2px); box-shadow: 0 1px 0 0 var(--edge); }
-  .nl-terms input:checked + label { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 3px 0 0 var(--accent-edge); }
+  .nl-terms input:checked + label { background: var(--foreground); border-color: var(--foreground); color: #fff; box-shadow: 0 3px 0 0 #000; }
   .nl-terms input:focus-visible + label { outline: 2px solid var(--ring); outline-offset: 2px; }
   .nl-defs { display: grid; }
   .nl-defs > * { grid-area: 1 / 1; visibility: hidden; opacity: 0; transform: translateY(6px) scale(0.985); transition: opacity 0.25s ease, transform 0.35s var(--ease-out), visibility 0s 0.25s; }
@@ -267,8 +257,8 @@
     flex: none;
     place-items: center;
     border-radius: 999px;
-    background: var(--accent-soft);
-    color: var(--accent);
+    background: var(--muted);
+    color: var(--foreground);
     font-size: 14px;
     font-weight: 900;
     transition: background-color 0.25s ease, color 0.25s ease;
@@ -276,7 +266,7 @@
   .nl-veil { transition: filter 0.4s var(--ease-out), opacity 0.4s ease; }
   [data-veiled="true"] > .nl-veil { filter: blur(7px); opacity: 0.45; user-select: none; pointer-events: none; }
   [data-veiled="true"] > .nl-stepnum { background: var(--muted); color: var(--faint); }
-  [data-veiled="false"] > .nl-stepnum { background: var(--accent); color: #fff; }
+  [data-veiled="false"] > .nl-stepnum { background: var(--foreground); color: #fff; }
 
   /* ---------- <details>: opens with an eased height where the browser can ---------- */
   .nl-details::details-content { block-size: 0; overflow: clip; opacity: 0; transition: block-size 0.35s var(--ease-out), opacity 0.3s ease, content-visibility 0.35s allow-discrete; }
@@ -292,7 +282,7 @@
     min-height: 56px;
     align-items: center;
     gap: 12px;
-    border-radius: 20px;
+    border-radius: var(--r-button);
     border: 1.5px solid var(--edge);
     background: var(--card);
     padding: 11px 14px;
@@ -306,7 +296,7 @@
   .nl-opt[data-state="idle"]:active { transform: translateY(2px); box-shadow: 0 1px 0 0 var(--edge); }
   @media (hover: hover) {
     .nl-opt[data-state="idle"]:hover { border-color: var(--accent); box-shadow: 0 3px 0 0 var(--accent); }
-    .nl-opt[data-state="idle"]:hover .nl-letter { background: var(--accent-soft); color: var(--accent); }
+    .nl-opt[data-state="idle"]:hover .nl-letter { border-color: var(--accent); color: var(--accent); }
   }
   .nl-letter {
     display: grid;
@@ -314,17 +304,18 @@
     height: 32px;
     flex: none;
     place-items: center;
-    border-radius: 999px;
-    background: var(--muted);
-    color: var(--muted-foreground);
+    border-radius: 9px;
+    border: 2px solid var(--edge);
+    background: var(--card);
+    color: var(--foreground);
     font-size: 14px;
     font-weight: 900;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
   .nl-opt[data-state="right"] { border-color: var(--ok); background: var(--ok-soft); box-shadow: 0 3px 0 0 var(--ok); }
-  .nl-opt[data-state="right"] .nl-letter { background: var(--ok); color: #fff; }
+  .nl-opt[data-state="right"] .nl-letter { background: var(--ok); border-color: var(--ok); color: #fff; }
   .nl-opt[data-state="wrong"] { border-color: var(--no); background: var(--no-soft); box-shadow: 0 3px 0 0 var(--no); }
-  .nl-opt[data-state="wrong"] .nl-letter { background: var(--no); color: #fff; }
+  .nl-opt[data-state="wrong"] .nl-letter { background: var(--no); border-color: var(--no); color: #fff; }
   .nl-opt[data-state="dim"] { opacity: 0.55; box-shadow: none; }
   @keyframes nl-pop { 0% { transform: scale(0.97); } 45% { transform: scale(1.025); } 100% { transform: scale(1); } }
   @keyframes nl-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 60% { transform: translateX(5px); } }
@@ -356,7 +347,7 @@
 
   /* ---------- Unit path on the course pages ---------- */
   .nl-path > li { position: relative; }
-  .nl-path > li::before { content: ""; position: absolute; left: 27px; top: 0; bottom: 0; width: 2px; background: rgba(105, 82, 224, 0.22); }
+  .nl-path > li::before { content: ""; position: absolute; left: 27px; top: 0; bottom: 0; width: 2px; background: var(--border-strong); }
   .nl-path > li:first-child::before { top: 50%; }
   .nl-path > li:last-child::before { bottom: 50%; }
   .nl-path > li:only-child::before { display: none; }
@@ -369,25 +360,25 @@
     flex: none;
     place-items: center;
     border-radius: 999px;
-    border: 2.5px solid var(--accent);
+    border: 2.5px solid var(--foreground);
     background: var(--card);
     color: #fff;
     transition: background-color 0.2s ease, transform 0.25s var(--ease-spring);
   }
   .nl-node svg { width: 13px; height: 13px; opacity: 0; }
   .nl-node[data-empty] { border-color: var(--border-strong); border-style: dashed; }
-  [data-nl-topic][data-state="started"] .nl-node { background: var(--accent-soft); }
+  [data-nl-topic][data-state="started"] .nl-node { border-color: var(--accent); }
   [data-nl-topic][data-state="started"] .nl-node::after { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--accent); }
-  [data-nl-topic][data-state="done"] .nl-node { background: var(--accent); }
+  [data-nl-topic][data-state="done"] .nl-node { border-color: var(--accent); background: var(--accent); }
   [data-nl-topic][data-state="done"] .nl-node svg { opacity: 1; }
   @media (hover: hover) { a:hover > .nl-node { transform: scale(1.15); } }
-  .nl-meter { height: 8px; overflow: hidden; border-radius: 999px; background: var(--accent-soft); }
+  .nl-meter { height: 8px; overflow: hidden; border-radius: 999px; background: var(--muted); }
   .nl-meter > span { display: block; height: 100%; width: 100%; border-radius: 999px; background: var(--accent); transform-origin: left center; transform: scaleX(var(--v, 0)); transition: transform 0.9s var(--ease-out) 0.1s; }
 
   @media (prefers-reduced-motion: reduce) {
     .nl-rise, .nl-cat-in, .nl-bob, .nl-pop, .nl-shake, .nl-up, .nl-dot, [data-nl-reveal="in"], [data-nl-reveal="in"] strong { animation: none !important; }
     [data-nl-reveal="wait"] { opacity: 1; transform: none; }
-    [data-nl-reveal="wait"] strong { background-size: 100% 0.42em; }
+    [data-nl-reveal="wait"] strong { background-size: 100% 0.5em; }
     .nl-sparkle { display: none; }
     .nl-btn, .nl-btn-ghost, .nl-opt, .nl-lift, .nl-terms label, .nl-defs > *, .nl-veil, .nl-secnum svg, .nl-secend i svg, .nl-secend b, .nl-node, .nl-meter > span, .nl-topbar > span, .nl-details::details-content {
       transition: none !important;

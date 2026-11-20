@@ -12,10 +12,10 @@ import { cn } from "@/lib/utils";
  */
 export function TopicList({ courseId, topics, compact = false, current }: { courseId: string; topics: PublicTopicRow[]; compact?: boolean; current?: string }) {
   return (
-    <ol className={cn("nl-path nl-card overflow-hidden", compact ? "!rounded-[22px]" : "mt-3")}>
+    <ol className={cn("nl-path nl-card overflow-hidden", compact ? "" : "mt-3")}>
       {topics.map((t) => {
         const has = [t.note ? "Notes" : null, t.questionCount ? `${t.questionCount} questions` : null].filter(Boolean).join(" · ");
-        const tier = t.hlOnly ? "HL" : t.bcOnly ? "BC" : t.higherTierOnly ? "Higher" : null;
+        const tier = t.hlOnly ? "HL only" : t.bcOnly ? "BC only" : t.higherTierOnly ? "Higher tier" : null;
         const here = t.id === current;
         return (
           <li key={t.id}>
@@ -24,17 +24,17 @@ export function TopicList({ courseId, topics, compact = false, current }: { cour
               data-nl-topic={topicKey(courseId, t.id)}
               data-q={t.questionCount}
               aria-current={here ? "page" : undefined}
-              className={cn("group flex items-center gap-3 px-4 transition-colors hover:bg-accent-soft/50", compact ? "min-h-[52px] py-2" : "min-h-[62px] py-2.5", here && "bg-accent-soft/70")}
+              className={cn("group flex items-center gap-3 px-4 transition-colors hover:bg-muted/60", compact ? "min-h-[52px] py-2" : "min-h-[62px] py-2.5", here && "bg-muted")}
             >
               <span className="nl-node" data-empty={!t.note && !t.questionCount ? "" : undefined}>
                 <Check strokeWidth={4} />
               </span>
-              <span className="w-[46px] shrink-0 text-[13.5px] font-black tabular-nums text-accent">{t.code}</span>
+              <span className="w-[46px] shrink-0 text-[13.5px] font-black tabular-nums text-muted-foreground">{t.code}</span>
               <span className="min-w-0 flex-1">
                 <span className={cn("block font-extrabold leading-snug text-foreground", compact ? "text-[15px]" : "text-[16px]")}>{t.name}</span>
                 <span className="mt-0.5 flex flex-wrap items-center gap-x-1.5 text-[13px] font-semibold text-muted-foreground">
                   {has || "Coming soon"}
-                  {tier && <span className="rounded-full bg-muted px-1.5 py-px text-[11.5px] font-extrabold">{tier}</span>}
+                  {tier && <span className="font-extrabold text-foreground">· {tier}</span>}
                 </span>
               </span>
               <ChevronRight className="size-4.5 shrink-0 text-faint transition-transform group-hover:translate-x-0.5 group-hover:text-accent" aria-hidden="true" />

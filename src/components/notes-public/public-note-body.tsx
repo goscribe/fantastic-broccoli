@@ -1,6 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 import Image from "next/image";
-import { Check, ChevronDown, Sparkles, TriangleAlert } from "lucide-react";
+import { Check, ChevronDown, TriangleAlert } from "lucide-react";
 import type { NoteBlock, NoteFigure, TopicNoteContent } from "@/lib/api/notes";
 import { figureNumbers, recallMarks } from "@/lib/notes";
 import { parseExpression } from "@/lib/latex-eval";
@@ -29,16 +29,19 @@ export function PublicNoteBody({ note, after }: { note: TopicNoteContent; after?
           <Fragment key={s.id}>
             <section className="mt-14 scroll-mt-20 first:mt-0 lg:scroll-mt-8" aria-labelledby={`h-${s.id}`} id={`sec-${s.id}`} data-nl-section={s.id}>
               <header data-nl-reveal="">
-                <p className="flex items-center gap-2.5 text-[13.5px] font-extrabold text-accent">
-                  <span className="nl-secnum" aria-hidden="true">
+                {/* Numbered like a question on a paper; the box ticks once the part is read. */}
+                <div className="flex items-start gap-3">
+                  <span className="nl-secnum mt-[1px] sm:mt-1" aria-hidden="true">
                     <span>{si + 1}</span>
                     <Check strokeWidth={3.5} />
                   </span>
-                  Part {si + 1} of {total}
-                </p>
-                <h2 id={`h-${s.id}`} className="mt-3 text-[26px] font-extrabold leading-[1.14] text-foreground sm:text-[32px]">
-                  <RichText text={s.heading} />
-                </h2>
+                  <h2 id={`h-${s.id}`} className="min-w-0 flex-1 text-[26px] font-extrabold leading-[1.14] text-foreground sm:text-[32px]">
+                    <span className="sr-only">
+                      Part {si + 1} of {total}:{" "}
+                    </span>
+                    <RichText text={s.heading} />
+                  </h2>
+                </div>
               </header>
               <div className="mt-4 flex flex-col gap-5">
                 {s.blocks.map((b, bi) => (
@@ -76,11 +79,13 @@ export function PublicNoteBody({ note, after }: { note: TopicNoteContent; after?
  */
 function KeyTerms({ sectionId, terms }: { sectionId: string; terms: TopicNoteContent["keyTerms"] }) {
   const card = (k: (typeof terms)[number], i: number) => (
-    <div key={i} data-i={i} className="nl-card !rounded-[22px] border-l-[5px] !border-l-accent px-4 py-3.5 sm:px-5">
-      <p className="text-[18px] font-extrabold leading-snug text-accent-dim">
-        <RichText text={k.term} />
+    <div key={i} data-i={i} className="nl-card px-4 py-3.5 sm:px-5">
+      <p className="text-[18px] font-extrabold leading-snug text-foreground">
+        <span className="hl-mark">
+          <RichText text={k.term} />
+        </span>
       </p>
-      <p className="mt-1 text-[16px] leading-[1.5] text-[#3b3650] sm:text-[16.5px]">
+      <p className="mt-1.5 text-[16px] leading-[1.5] text-foreground/80 sm:text-[16.5px]">
         <RichText text={k.definition} />
       </p>
     </div>
@@ -88,10 +93,9 @@ function KeyTerms({ sectionId, terms }: { sectionId: string; terms: TopicNoteCon
   const many = terms.length > 1 && terms.length <= 8;
   return (
     <div className="mt-6" data-nl-reveal="">
-      <p className="flex items-center gap-2 text-[13.5px] font-extrabold text-muted-foreground">
-        <Sparkles className="size-4 text-[var(--flame)]" strokeWidth={2.5} aria-hidden="true" />
+      <p className="text-[14px] font-extrabold text-foreground">
         {terms.length > 1 ? "Key terms" : "Key term"}
-        {many && <span className="font-bold text-faint">· tap one</span>}
+        {many && <span className="font-bold text-muted-foreground"> · tap one for its definition</span>}
       </p>
       {many ? (
         <div className="nl-terms mt-2.5" role="radiogroup" aria-label="Key terms">
@@ -147,22 +151,22 @@ function Block({ block, figure, number, lead }: { block: NoteBlock; figure?: Not
         </ul>
       );
     case "callout":
-      // Two different shapes on purpose: a warm warning card, and the cat's speech bubble.
+      // Two different shapes on purpose: a warm examiner's warning, and the cat's speech bubble.
       return block.kind === "mistake" ? (
-        <aside className="relative rounded-[24px] rounded-tl-[8px] bg-[var(--flame-soft)] py-4 pl-[68px] pr-4 sm:pr-5" data-nl-reveal="">
-          <span className="absolute left-4 top-4 grid size-10 -rotate-6 place-items-center rounded-2xl bg-[var(--flame)] text-white shadow-[0_3px_0_0_var(--flame-edge)]" aria-hidden="true">
-            <TriangleAlert className="size-5" strokeWidth={2.75} />
-          </span>
-          <p className="text-[13.5px] font-extrabold text-[var(--flame-ink)]">Common mistake</p>
-          <p className="mt-0.5 text-[16.5px] font-semibold leading-[1.5] text-foreground sm:text-[17px]">
+        <aside className="rounded-[var(--r-button)] bg-[var(--flame-soft)] px-4 py-3.5 sm:px-5" data-nl-reveal="">
+          <p className="flex items-center gap-1.5 text-[14px] font-extrabold text-[var(--flame-ink)]">
+            <TriangleAlert className="size-4 text-[var(--flame-edge)]" strokeWidth={2.75} aria-hidden="true" />
+            Common mistake
+          </p>
+          <p className="mt-1 text-[16.5px] font-semibold leading-[1.5] text-foreground sm:text-[17px]">
             <RichText text={block.text} />
           </p>
         </aside>
       ) : (
         <aside className="flex items-end gap-2.5" data-nl-reveal="">
           <Image src="/design/cat2-pencil.png" alt="" width={234} height={262} unoptimized loading="lazy" className="h-[68px] w-auto shrink-0 sm:h-[84px]" />
-          <div className="min-w-0 flex-1 rounded-[24px] rounded-bl-[8px] bg-accent-soft px-4 py-3.5 sm:px-5">
-            <p className="text-[13.5px] font-extrabold text-accent">Exam tip</p>
+          <div className="min-w-0 flex-1 rounded-[var(--r-card)] rounded-bl-[6px] border border-border bg-card px-4 py-3.5 sm:px-5">
+            <p className="text-[14px] font-extrabold text-foreground">Exam tip</p>
             <p className="mt-0.5 text-[16.5px] font-semibold leading-[1.5] text-foreground sm:text-[17px]">
               <RichText text={block.text} />
             </p>
@@ -185,15 +189,15 @@ function Block({ block, figure, number, lead }: { block: NoteBlock; figure?: Not
     case "deeper":
       // Collapsed, but the text is in the HTML (and opens without JavaScript).
       return (
-        <details className="nl-details group rounded-[24px] border-2 border-dashed border-[var(--edge)] bg-white/60 px-4 py-1 open:pb-4 sm:px-5" data-nl-reveal="">
+        <details className="nl-details group rounded-[var(--r-button)] border border-dashed border-border-strong px-4 py-1 open:pb-4 sm:px-5" data-nl-reveal="">
           <summary className="flex min-h-14 items-center gap-3">
-            <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent transition-transform group-open:rotate-45" aria-hidden="true">
+            <span className="grid w-6 shrink-0 place-items-center text-foreground transition-transform group-open:rotate-45" aria-hidden="true">
               <svg viewBox="0 0 24 24" className="size-4.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
                 <path d="M12 5v14M5 12h14" />
               </svg>
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block text-[13px] font-extrabold text-accent">Go deeper</span>
+              <span className="block text-[13px] font-extrabold text-muted-foreground">Go deeper</span>
               <span className="block text-[16.5px] font-extrabold leading-snug text-foreground">
                 <RichText text={block.title} />
               </span>
@@ -211,19 +215,16 @@ function Block({ block, figure, number, lead }: { block: NoteBlock; figure?: Not
     case "figure":
       if (!figure) return null;
       return (
-        <figure className="nl-stage nl-panel -mx-2 flex flex-col gap-3 !rounded-[28px] p-2.5 pb-4 sm:mx-0 sm:p-4 sm:pb-5" data-nl-reveal="">
-          <div className="overflow-hidden rounded-[20px] bg-white [&>div]:!rounded-[20px] [&>div]:!border-0">
+        <figure className="nl-stage flex flex-col gap-2.5" data-nl-reveal="">
+          <div className="nl-card -mx-2 overflow-hidden sm:mx-0 [&>div]:!rounded-none [&>div]:!border-0">
             <PublicFigure figure={figure} staticGraph={staticGraphOk(figure)} />
             {/* Figures are drawn by a script; without one, say what the figure shows. */}
             <noscript>
-              <p className="px-4 py-4 text-[15.5px] font-semibold leading-snug text-[#3b3650]">{figure.alt}</p>
+              <p className="px-4 py-4 text-[15.5px] font-semibold leading-snug text-foreground/80">{figure.alt}</p>
             </noscript>
           </div>
-          <figcaption className="flex items-start gap-2.5 px-2 text-[14.5px] font-semibold leading-snug text-[#3b3650]">
-            <span className="mt-px shrink-0 rounded-full bg-white px-2.5 py-0.5 text-[12.5px] font-extrabold text-accent">Figure {number ?? 1}</span>
-            <span className="min-w-0 flex-1">
-              <RichText text={figure.caption} />
-            </span>
+          <figcaption className="px-1 text-[14.5px] leading-snug text-muted-foreground">
+            <b className="font-extrabold text-foreground">Figure {number ?? 1}.</b> <RichText text={figure.caption} />
           </figcaption>
         </figure>
       );
@@ -241,9 +242,9 @@ function NoteTable({ block }: { block: Extract<NoteBlock, { type: "table" }> }) 
       <div className="nl-card hidden overflow-hidden sm:block">
         <table className="w-full border-collapse text-[16px] leading-snug">
           <thead>
-            <tr className="bg-accent-soft">
+            <tr className="bg-muted">
               {block.headers.map((h, ci) => (
-                <th key={ci} className="px-4 py-3 text-left text-[14px] font-extrabold text-accent-dim">
+                <th key={ci} className="px-4 py-3 text-left text-[14px] font-extrabold text-foreground">
                   <RichText text={h} />
                 </th>
               ))}
@@ -264,14 +265,14 @@ function NoteTable({ block }: { block: Extract<NoteBlock, { type: "table" }> }) 
       </div>
       <div className="flex flex-col gap-2.5 sm:hidden">
         {block.rows.map((r, ri) => (
-          <dl key={ri} className="nl-card !rounded-[22px] px-4 py-3.5 text-[16px] leading-snug">
+          <dl key={ri} className="nl-card px-4 py-3.5 text-[16px] leading-snug">
             <dt className="sr-only">{block.headers[0]}</dt>
             <dd className="text-[17px] font-extrabold text-foreground">
               <RichText text={r[0] ?? ""} />
             </dd>
             {r.slice(1).map((c, k) => (
               <Fragment key={k}>
-                <dt className="mt-2.5 text-[12.5px] font-extrabold text-accent">
+                <dt className="mt-2.5 text-[12.5px] font-extrabold text-muted-foreground">
                   <RichText text={block.headers[k + 1] ?? ""} />
                 </dt>
                 <dd>
@@ -292,22 +293,23 @@ function Recall({ note }: { note: TopicNoteContent }) {
   return (
     <section className="mt-16 scroll-mt-20 lg:scroll-mt-8" aria-labelledby="h-recall" id="sec-recall">
       <header data-nl-reveal="">
-        <p className="text-[13.5px] font-extrabold text-accent">
-          {note.recall.length} written questions · {marks} marks
-        </p>
-        <h2 id="h-recall" className="mt-1.5 text-[26px] font-extrabold leading-[1.14] text-foreground sm:text-[32px]">
+        <div className="paper-rule mb-5" aria-hidden="true" />
+        <h2 id="h-recall" className="flex flex-wrap items-baseline gap-x-3 text-[26px] font-extrabold leading-[1.14] text-foreground sm:text-[32px]">
           Check your recall
+          <span className="nl-marks !text-[15px]">[{marks} marks]</span>
         </h2>
-        <p className="mt-2 text-[16px] leading-snug text-muted-foreground">Answer each one in your head or on paper, then open the mark scheme.</p>
+        <p className="mt-2 text-[16px] leading-snug text-muted-foreground">
+          {note.recall.length} written questions. Answer each one in your head or on paper, then open the mark scheme.
+        </p>
       </header>
       <ol className="mt-5 flex flex-col gap-3.5">
         {note.recall.map((q, qi) => (
           <li key={q.id} className="nl-card px-4 py-4 sm:px-5" data-nl-reveal="">
-            <div className="flex items-center gap-2 text-[13px] font-extrabold text-muted-foreground">
-              <span className="grid size-7 place-items-center rounded-full bg-accent-soft text-accent tabular-nums">{qi + 1}</span>
+            <div className="flex items-baseline gap-2 text-[13.5px] font-extrabold text-muted-foreground">
+              <span className="text-[17px] tabular-nums text-foreground">{qi + 1}.</span>
               <span>{q.commandTerm}</span>
-              <span className="ml-auto rounded-full bg-muted px-2.5 py-1 text-[12.5px] tabular-nums" aria-label={`${q.marks} marks`}>
-                {q.marks} {q.marks === 1 ? "mark" : "marks"}
+              <span className="nl-marks" aria-label={`${q.marks} marks`}>
+                [{q.marks} {q.marks === 1 ? "mark" : "marks"}]
               </span>
             </div>
             <p className="mt-2.5 text-[17px] font-bold leading-[1.45] text-foreground sm:text-[18px]">
@@ -319,17 +321,15 @@ function Recall({ note }: { note: TopicNoteContent }) {
                 <span className="hidden group-open:inline">Hide mark scheme</span>
                 <ChevronDown className="size-4 transition-transform group-open:rotate-180" aria-hidden="true" />
               </summary>
-              <div className="mt-3.5 rounded-[20px] bg-accent-soft px-4 py-3.5 text-[16px] leading-[1.5]">
-                <p className="text-[13px] font-extrabold text-accent">Model answer</p>
+              <div className="nl-well mt-3.5 px-4 py-3.5 text-[16px] leading-[1.5]">
+                <p className="text-[13px] font-extrabold text-foreground">Model answer</p>
                 <p className="mt-0.5 text-foreground">
                   <RichText text={q.modelAnswer} />
                 </p>
                 <ul className="mt-3 flex flex-col gap-1.5">
                   {q.markPoints.map((m, mi) => (
                     <li key={mi} className="flex gap-2.5">
-                      <span className="mt-[3px] grid size-5 shrink-0 place-items-center rounded-full bg-accent text-white" aria-hidden="true">
-                        <Check className="size-3" strokeWidth={4} />
-                      </span>
+                      <Check className="mt-[5px] size-4 shrink-0 text-foreground" strokeWidth={3.5} aria-hidden="true" />
                       <span className="min-w-0 flex-1">
                         1 mark for <RichText text={m} />
                       </span>

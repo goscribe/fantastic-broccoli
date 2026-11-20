@@ -21,15 +21,15 @@ export function WorkedExample({ title, problem, steps, answer }: { title: ReactN
   return (
     <div className="nl-card overflow-hidden" data-nl-reveal="">
       <div className="flex items-center gap-3 px-4 pt-4 sm:px-6 sm:pt-5">
-        <span className="grid size-10 shrink-0 place-items-center rounded-2xl bg-accent text-white shadow-[0_3px_0_0_var(--accent-edge)]" aria-hidden="true">
-          <PencilLine className="size-5" strokeWidth={2.5} />
-        </span>
         <div className="min-w-0">
-          <p className="text-[13px] font-extrabold text-accent">Worked example</p>
+          <p className="flex items-center gap-1.5 text-[13.5px] font-extrabold text-muted-foreground">
+            <PencilLine className="size-4" strokeWidth={2.5} aria-hidden="true" />
+            Worked example
+          </p>
           <p className="text-[18px] font-extrabold leading-snug text-foreground sm:text-[19px]">{title}</p>
         </div>
       </div>
-      <div className="mx-4 mt-3 rounded-[20px] bg-accent-soft px-4 py-3 text-[16.5px] font-semibold leading-snug text-foreground sm:mx-6 sm:text-[17px]">{problem}</div>
+      <div className="nl-well mx-4 mt-3 px-4 py-3 text-[16.5px] font-semibold leading-snug text-foreground sm:mx-6 sm:text-[17px]">{problem}</div>
       <ol className="nl-steps mt-4 px-4 text-[16.5px] leading-[1.55] sm:px-6 sm:text-[17px]">
         {steps.map((st, i) => (
           <li key={i} data-veiled={hydrated ? String(i >= visible) : undefined}>
@@ -40,8 +40,8 @@ export function WorkedExample({ title, problem, steps, answer }: { title: ReactN
           </li>
         ))}
       </ol>
-      <div className="mx-4 flex gap-3 rounded-[20px] bg-accent-soft px-4 py-3 sm:mx-6" data-veiled={hydrated ? String(!done) : undefined}>
-        <span className="nl-stepnum !bg-accent !text-white" aria-hidden="true">
+      <div className="mx-4 flex gap-3 rounded-[var(--r-control)] bg-[var(--flame-soft)] px-4 py-3 sm:mx-6" data-veiled={hydrated ? String(!done) : undefined}>
+        <span className="nl-stepnum !bg-foreground !text-white" aria-hidden="true">
           <Check className="size-4" strokeWidth={3.5} />
         </span>
         <p className="nl-veil min-w-0 flex-1 pt-0.5 text-[16.5px] leading-[1.5] text-foreground sm:text-[17px]">
@@ -60,7 +60,7 @@ export function WorkedExample({ title, problem, steps, answer }: { title: ReactN
               <button type="button" onClick={() => setShown((s) => s + 1)} className="nl-btn nl-btn-sm">
                 {visible >= steps.length ? "Show the answer" : `Show step ${visible + 1}`}
               </button>
-              <button type="button" onClick={() => setShown(all)} className="inline-flex min-h-10 items-center gap-1.5 text-[14.5px] font-extrabold text-accent hover:text-accent-dim">
+              <button type="button" onClick={() => setShown(all)} className="inline-flex min-h-10 items-center gap-1.5 text-[14.5px] font-extrabold text-foreground underline decoration-border-strong underline-offset-4">
                 <Eye className="size-4" /> Show all
               </button>
               <span className="ml-auto text-[13px] font-bold tabular-nums text-faint">

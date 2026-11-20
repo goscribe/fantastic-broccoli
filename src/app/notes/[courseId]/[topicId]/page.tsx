@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import type { CSSProperties, ReactNode } from "react";
-import { ArrowLeft, ArrowRight, BadgeCheck, Clock, Layers, PencilLine } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/notes-public/breadcrumbs";
 import { PublicNoteBody } from "@/components/notes-public/public-note-body";
 import { RichText } from "@/components/notes-public/rich-text";
@@ -12,7 +12,6 @@ import { PracticeCard, PracticeDone, PracticeProvider, PracticeScore, StartQuick
 import { SignedInNoteFallback } from "@/components/notes-public/signed-in-fallback";
 import { NotesProgress } from "@/components/notes-public/notes-progress";
 import { ReadingPill, ReadingRail, ReadingTracker, type RailEntry } from "@/components/notes-public/reading-progress";
-import { SubjectTile } from "@/components/notes-public/subject-tile";
 import { unitTitle } from "@/lib/courses";
 import type { PublicCourse, PublicQuestion, PublicTopic, PublicUnit } from "@/lib/api/public-notes";
 import { getCourse, getTopic, indexDrafts, rowIndexable } from "@/lib/notes-public/data";
@@ -103,30 +102,17 @@ function UnitView({ course, unit }: { course: PublicCourse; unit: PublicUnit }) 
     <div className="mx-auto w-full max-w-[900px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
       <Breadcrumbs crumbs={crumbsFor.unit(course, unit)} />
       <header className="nl-panel relative mt-4 overflow-hidden px-5 pb-6 pt-5 sm:px-9 sm:pb-8 sm:pt-8">
-        <div className="absolute right-4 top-4 grid size-[84px] place-items-center rounded-full bg-white sm:right-8 sm:top-8 sm:size-[132px]">
-          <Image src="/design/cat2-book.png" alt="" width={240} height={260} priority unoptimized className="nl-cat-in h-[72px] w-auto sm:h-[112px]" />
-        </div>
-        <div className="nl-rise flex min-h-[84px] items-center gap-3 pr-[92px] sm:min-h-0 sm:pr-[150px]">
-          <SubjectTile title={`${course.subject} ${course.title}`} solid />
-          <p className="text-[13.5px] font-extrabold text-accent">{course.title}</p>
-        </div>
-        <h1 className="nl-rise mt-4 text-[30px] font-black leading-[1.06] text-foreground sm:pr-[150px] sm:text-[42px]" style={stagger(1)}>
+        <Image src="/design/cat2-book.png" alt="" width={240} height={260} priority unoptimized className="nl-cat-in absolute right-4 top-4 h-[84px] w-auto sm:right-9 sm:top-8 sm:h-[128px]" />
+        <p className="nl-rise pr-[92px] text-[14px] font-extrabold text-foreground sm:pr-[150px]">{course.title}</p>
+        <h1 className="nl-rise mt-2 text-balance pr-[92px] text-[30px] font-black leading-[1.06] text-foreground sm:pr-[150px] sm:text-[42px]" style={stagger(1)}>
           {unitTitle(course, unit)}
         </h1>
-        <p className="nl-rise mt-3 text-[16.5px] font-semibold leading-snug text-[#3b3650] sm:text-[18px]" style={stagger(2)}>
-          {unit.topics.length} topics · notes and exam-style practice questions with worked answers
+        <p className="nl-rise mt-3 text-[16.5px] font-semibold leading-snug text-foreground/75 sm:text-[18px]" style={stagger(2)}>
+          Notes and exam-style practice questions with worked answers
         </p>
-        <ul className="nl-rise mt-4 flex flex-wrap gap-2" style={stagger(3)}>
-          <li className="nl-chip">
-            <Layers aria-hidden="true" />
-            {unit.topics.length} topics
-          </li>
-          {notes > 0 && (
-            <li className="nl-chip">
-              <BadgeCheck aria-hidden="true" />
-              {notes} notes
-            </li>
-          )}
+        <ul className="nl-meta nl-rise mt-3" style={stagger(3)}>
+          <li>{unit.topics.length} topics</li>
+          {notes > 0 && <li>{notes} notes</li>}
         </ul>
         {first && (
           <Link href={topicPath(course.id, first)} className="nl-btn nl-rise mt-5 w-full sm:w-auto" style={stagger(4)}>
@@ -214,64 +200,43 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
       {note && <ReadingTracker topicKey={key} sectionIds={note.content.sections.map((s) => s.id)} anchors={entries.map((e) => e.anchor)} />}
       <article className="mx-auto w-full max-w-[1120px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
         <Breadcrumbs crumbs={crumbsFor.topic(course, unit, topic)} />
-        <header className="nl-panel relative mt-4 overflow-hidden px-5 pb-6 pt-5 sm:px-10 sm:pb-10 sm:pt-9 lg:pr-[380px]">
-          <div className="absolute right-4 top-4 grid size-[88px] place-items-center rounded-full bg-white sm:right-8 sm:top-8 sm:size-[130px] lg:right-[70px] lg:top-1/2 lg:size-[250px] lg:-translate-y-1/2">
-            <Image src={note ? "/design/cat2-book.png" : "/design/cat2-pencil.png"} alt="" width={240} height={260} priority unoptimized className="nl-cat-in h-[76px] w-auto sm:h-[112px] lg:h-[212px]" />
-            <SubjectTile title={`${course.subject} ${course.title}`} solid className="absolute -bottom-1 -left-2 hidden -rotate-6 lg:grid lg:size-16 lg:rounded-[22px]" iconClassName="lg:size-8" />
-          </div>
-          <div className="nl-rise flex min-h-[88px] items-center gap-3 pr-[100px] sm:min-h-[130px] sm:pr-[150px] lg:min-h-0 lg:pr-0">
-            <SubjectTile title={`${course.subject} ${course.title}`} solid className="lg:hidden" />
-            <p className="text-[13.5px] font-extrabold leading-snug text-accent">
-              {course.title}
-              <span className="font-bold text-[#5d5878]"> · {unitTitle(course, unit)}</span>
-            </p>
-          </div>
-          <h1 className="nl-rise mt-3 text-[36px] font-black leading-[1.02] text-foreground sm:text-[52px] lg:mt-4 lg:text-[58px]" style={stagger(1)}>
-            <span className="text-accent">{topic.code}</span> {topic.name}
+        <header className="nl-panel relative mt-4 overflow-hidden px-5 pb-6 pt-5 sm:px-10 sm:pb-9 sm:pt-8 lg:pr-[340px]">
+          <Image
+            src={note ? "/design/cat2-book.png" : "/design/cat2-pencil.png"}
+            alt=""
+            width={240}
+            height={260}
+            priority
+            unoptimized
+            className="nl-cat-in absolute right-4 top-4 h-[84px] w-auto sm:right-8 sm:top-8 sm:h-[112px] lg:right-[72px] lg:top-1/2 lg:h-[216px] lg:-translate-y-1/2"
+          />
+          {/* Top line, like a paper's: the course and where this sits in it. */}
+          <p className="nl-rise flex min-h-[84px] items-center pr-[96px] text-[14px] font-bold leading-snug text-foreground/70 sm:min-h-0 sm:pr-[150px] lg:pr-0">
+            <span>
+              <span className="font-extrabold text-foreground">{course.title}</span> · {unitTitle(course, unit)}
+            </span>
+          </p>
+          <h1 className="nl-rise mt-2 text-[34px] font-black leading-[1.04] text-foreground sm:mt-3 sm:text-[50px] lg:text-[56px]" style={stagger(1)}>
+            <span className="text-foreground/45">{topic.code}</span> {topic.name}
           </h1>
-          <p className="nl-rise mt-3 text-[17px] font-semibold leading-[1.4] text-[#3b3650] sm:text-[21px]" style={stagger(2)}>
+          <p className="nl-rise mt-3 text-[17px] font-semibold leading-[1.4] text-foreground/80 sm:text-[20px]" style={stagger(2)}>
             {note ? <RichText text={note.content.objectiveLine} /> : "Scribe's note for this topic is on its way. Here is what it covers."}
           </p>
-          <ul className="nl-rise mt-4 flex flex-wrap gap-2" style={stagger(3)}>
-            {note && (
-              <li className="nl-chip">
-                <Clock aria-hidden="true" />
-                {minutes} min read
-              </li>
-            )}
-            {note && (
-              <li className="nl-chip">
-                <Layers aria-hidden="true" />
-                {note.content.sections.length} parts
-              </li>
-            )}
-            {questions.length > 0 && (
-              <li className="nl-chip">
-                <PencilLine aria-hidden="true" />
-                {questions.length} questions
-              </li>
-            )}
-            {note && (
-              <li className="nl-chip">
-                <BadgeCheck aria-hidden="true" />
-                {note.label === "reviewed" ? "Scribe notes · reviewed" : "Scribe notes · draft"}
-              </li>
-            )}
-            {topic.hlOnly && <li className="nl-chip">HL only</li>}
-            {topic.bcOnly && <li className="nl-chip">BC only</li>}
-            {topic.higherTierOnly && <li className="nl-chip">Higher tier</li>}
+          <ul className="nl-meta nl-rise mt-3.5" style={stagger(3)}>
+            {note && <li>{minutes} min read</li>}
+            {note && <li>{note.content.sections.length} parts</li>}
+            {questions.length > 0 && <li>{questions.length} questions</li>}
+            {!note && questions.length === 0 && <li>Topic outline</li>}
+            {note && <li>{note.label === "reviewed" ? "Reviewed" : "Draft"}</li>}
+            {topic.hlOnly && <li>HL only</li>}
+            {topic.bcOnly && <li>BC only</li>}
+            {topic.higherTierOnly && <li>Higher tier</li>}
           </ul>
-          {(questions.length > 0 || !note) && (
-            <p className="nl-rise mt-3 text-[13.5px] font-bold text-[#5d5878]" style={stagger(3)}>
-              {note ? "Notes" : "Topic outline"}
-              {questions.length ? ` and ${questions.length} practice questions with answers` : ""}
-            </p>
-          )}
-          <div className="nl-rise mt-4 flex flex-col gap-1.5 sm:mt-5 sm:flex-row sm:gap-3" style={stagger(4)}>
+          <div className="nl-rise mt-5 flex flex-col gap-1.5 sm:flex-row sm:gap-3" style={stagger(4)}>
             <StartQuick5 courseId={course.id} topicId={topic.id} level={level} placement="header" />
             {questions.length > 0 && (
-              <a href="#practice" className="nl-btn-ghost max-sm:!min-h-11 max-sm:!border-0 max-sm:!bg-transparent max-sm:!text-accent max-sm:!shadow-none">
-                Jump to {questions.length} practice questions
+              <a href="#practice" className="nl-btn-ghost max-sm:!min-h-11 max-sm:!border-0 max-sm:!bg-transparent max-sm:!shadow-none max-sm:underline max-sm:decoration-[var(--cream-edge)] max-sm:decoration-2 max-sm:underline-offset-4">
+                Jump to the {questions.length} questions
               </a>
             )}
           </div>
@@ -310,11 +275,10 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
               <section id="practice" className="mt-16 scroll-mt-4" aria-labelledby="h-practice">
                 <div className="nl-panel relative overflow-hidden px-5 pb-6 pt-6 sm:px-8 sm:pb-8 sm:pt-8" data-nl-reveal="">
                   <Image src="/design/cat2-pencil.png" alt="" width={234} height={262} unoptimized loading="lazy" className="absolute -bottom-2 right-3 h-[92px] w-auto sm:right-7 sm:h-[132px]" />
-                  <p className="text-[13.5px] font-extrabold text-accent">Now make it stick</p>
-                  <h2 id="h-practice" className="mt-1 text-[30px] font-black leading-[1.05] text-foreground sm:text-[38px]">
+                  <h2 id="h-practice" className="text-[30px] font-black leading-[1.05] text-foreground sm:text-[38px]">
                     Practice this topic
                   </h2>
-                  <p className="mt-2.5 max-w-[440px] pr-[84px] text-[16px] font-semibold leading-snug text-[#3b3650] sm:pr-[120px] sm:text-[17px]">
+                  <p className="mt-2.5 max-w-[440px] pr-[84px] text-[16px] font-semibold leading-snug text-foreground/75 sm:pr-[120px] sm:text-[17px]">
                     {`${questions.length} quick-fire multiple-choice questions, easy to hard. `}Tap an answer to see if you&apos;re right and the worked explanation.
                     {note?.content.recall.length ? " (The written questions with mark schemes are under “Check your recall” above.)" : ""}
                   </p>
@@ -332,11 +296,10 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
             {note && questions.length === 0 && (
               <section className="nl-panel relative mt-16 overflow-hidden px-5 pb-6 pt-6 sm:px-8 sm:pb-8 sm:pt-8" aria-labelledby="h-finish" data-nl-reveal="">
                 <Image src="/design/cat2-cheer.png" alt="" width={244} height={288} unoptimized loading="lazy" className="absolute right-3 top-4 h-[88px] w-auto sm:right-7 sm:h-[128px]" />
-                <p className="text-[13.5px] font-extrabold text-accent">End of the note</p>
-                <h2 id="h-finish" className="mt-1 pr-[80px] text-[28px] font-black leading-[1.06] text-foreground sm:text-[36px]">
+                <h2 id="h-finish" className="pr-[80px] text-[28px] font-black leading-[1.06] text-foreground sm:text-[36px]">
                   Now make it stick
                 </h2>
-                <p className="mt-2.5 max-w-[440px] pr-[80px] text-[16px] font-semibold leading-snug text-[#3b3650] sm:pr-[120px] sm:text-[17px]">
+                <p className="mt-2.5 max-w-[440px] pr-[80px] text-[16px] font-semibold leading-snug text-foreground/75 sm:pr-[120px] sm:text-[17px]">
                   Five quick questions on {topic.name} while it is fresh, or keep going with the next topic.
                 </p>
                 <div className="mt-5 flex flex-col gap-3">
@@ -356,21 +319,17 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
                 {next && (
                   <Link href={topicPath(course.id, next)} className="nl-card nl-lift group flex items-center gap-3 px-4 py-4 sm:order-2">
                     <span className="min-w-0 flex-1">
-                      <span className="block text-[13px] font-extrabold text-accent">Next topic</span>
+                      <span className="block text-[13px] font-extrabold text-muted-foreground">Next topic</span>
                       <span className="mt-0.5 block text-[17px] font-extrabold leading-snug text-foreground">
                         {next.code} {next.name}
                       </span>
                     </span>
-                    <span className="grid size-10 shrink-0 place-items-center rounded-full bg-accent text-white shadow-[0_3px_0_0_var(--accent-edge)]" aria-hidden="true">
-                      <ArrowRight className="size-5" strokeWidth={2.75} />
-                    </span>
+                    <ArrowRight className="size-5 shrink-0 text-accent" strokeWidth={2.75} aria-hidden="true" />
                   </Link>
                 )}
                 {prev && (
                   <Link href={topicPath(course.id, prev)} className="nl-card nl-lift group flex items-center gap-3 px-4 py-4 sm:order-1">
-                    <span className="grid size-10 shrink-0 place-items-center rounded-full bg-accent-soft text-accent" aria-hidden="true">
-                      <ArrowLeft className="size-5" strokeWidth={2.75} />
-                    </span>
+                    <ArrowLeft className="size-5 shrink-0 text-muted-foreground" strokeWidth={2.75} aria-hidden="true" />
                     <span className="min-w-0 flex-1">
                       <span className="block text-[13px] font-extrabold text-muted-foreground">Previous topic</span>
                       <span className="mt-0.5 block text-[17px] font-extrabold leading-snug text-foreground">

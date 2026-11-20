@@ -131,8 +131,8 @@ function Marker({ entry, n, read, active }: { entry: RailEntry; n: number; read:
   return (
     <span
       className={cn(
-        "grid size-6 shrink-0 place-items-center rounded-full text-[12px] font-black transition-colors",
-        read ? "bg-accent text-white" : active ? "bg-white text-accent" : "bg-accent-soft text-accent",
+        "grid size-6 shrink-0 place-items-center rounded-[7px] border-[1.5px] text-[12px] font-black transition-colors",
+        read ? "border-accent bg-accent text-white" : active ? "border-foreground bg-card text-foreground" : "border-border-strong bg-card text-muted-foreground",
       )}
       aria-hidden="true"
     >
@@ -152,7 +152,7 @@ export function ReadingRail({ topicKey, entries, footer }: { topicKey: string; e
           {readCount}/{sections.length} read
         </p>
       </div>
-      <div className="nl-railbar mx-2 mt-2.5 h-2 overflow-hidden rounded-full bg-accent-soft" aria-hidden="true">
+      <div className="nl-railbar mx-2 mt-2.5 h-2 overflow-hidden rounded-full bg-muted" aria-hidden="true">
         <span />
       </div>
       <ol className="mt-3 flex flex-col gap-0.5">
@@ -164,8 +164,8 @@ export function ReadingRail({ topicKey, entries, footer }: { topicKey: string; e
                 href={`#${e.anchor}`}
                 aria-current={active ? "location" : undefined}
                 className={cn(
-                  "flex items-start gap-2.5 rounded-2xl px-2 py-2 text-[14px] leading-snug transition-colors",
-                  active ? "bg-accent-soft font-extrabold text-foreground" : "font-semibold text-muted-foreground hover:bg-muted/60 hover:text-foreground",
+                  "flex items-start gap-2.5 rounded-[var(--r-control)] px-2 py-2 text-[14px] leading-snug transition-colors",
+                  active ? "bg-muted font-extrabold text-foreground" : "font-semibold text-muted-foreground hover:bg-muted/60 hover:text-foreground",
                 )}
               >
                 <Marker entry={e} n={i + 1} read={!!e.sectionId && read.has(e.sectionId)} active={active} />
@@ -187,12 +187,12 @@ export function ReadingPill({ topicKey, entries }: { topicKey: string; entries: 
   const at = cur ? entries.indexOf(cur) : 0;
   return (
     <details ref={ref} className="group sticky top-2.5 z-20 lg:hidden">
-      <summary className="nl-card flex h-[52px] cursor-pointer list-none items-center gap-2.5 !rounded-full pl-2.5 pr-4 [&::-webkit-details-marker]:hidden">
+      <summary className="nl-card flex h-[52px] cursor-pointer list-none items-center gap-2.5 !rounded-[var(--r-button)] pl-2.5 pr-4 !shadow-[0_6px_16px_-10px_rgba(29,26,22,0.35)] [&::-webkit-details-marker]:hidden">
         <svg viewBox="0 0 36 36" className="nl-ring size-8 shrink-0 -rotate-90" aria-hidden="true">
-          <circle cx="18" cy="18" r="15.9155" fill="none" stroke="var(--accent-soft)" strokeWidth="4.2" />
+          <circle cx="18" cy="18" r="15.9155" fill="none" stroke="var(--muted)" strokeWidth="4.2" />
           <circle cx="18" cy="18" r="15.9155" fill="none" stroke="var(--accent)" strokeWidth="4.2" strokeLinecap="round" pathLength={100} />
         </svg>
-        <span className="shrink-0 text-[12.5px] font-extrabold tabular-nums text-accent">
+        <span className="shrink-0 text-[12.5px] font-extrabold tabular-nums text-muted-foreground">
           {cur?.kind === "section" ? `${at + 1}/${sections.length}` : "On this page"}
         </span>
         <span className="min-w-0 flex-1 truncate text-[14.5px] font-bold">{cur?.label}</span>
@@ -208,7 +208,7 @@ export function ReadingPill({ topicKey, entries }: { topicKey: string; entries: 
                 onClick={() => {
                   if (ref.current) ref.current.open = false;
                 }}
-                className={cn("flex min-h-11 items-center gap-2.5 rounded-2xl px-2.5 py-2 text-[15px] leading-snug", active ? "bg-accent-soft font-extrabold" : "font-semibold")}
+                className={cn("flex min-h-11 items-center gap-2.5 rounded-[var(--r-control)] px-2.5 py-2 text-[15px] leading-snug", active ? "bg-muted font-extrabold" : "font-semibold")}
               >
                 <Marker entry={e} n={i + 1} read={!!e.sectionId && read.has(e.sectionId)} active={active} />
                 <span className="min-w-0 flex-1">{e.label}</span>
