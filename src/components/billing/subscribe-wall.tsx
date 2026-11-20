@@ -14,6 +14,7 @@ import {
   type PlanCaps,
   type PlanOption,
 } from "@/lib/api/account";
+import { hasPlanAccess } from "@/lib/plan-access";
 import { useAuthUser } from "@/lib/api/auth";
 import { toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
@@ -84,7 +85,7 @@ export function SubscribeWall() {
     const load = (variant: WallVariant, delayMs = 0) =>
       Promise.all([fetchPlanCaps(), fetchPlanOptions()])
         .then(([nextCaps, nextPlans]) => {
-          if (cancelled || nextCaps.paid) return;
+          if (cancelled || hasPlanAccess(nextCaps)) return;
           if (
             variant === "post-session" &&
             (nextCaps.completedSessions < 1 || postSessionShown(user.id))

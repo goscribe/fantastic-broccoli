@@ -9,6 +9,7 @@ import {
 import { useAuthUser } from "@/lib/api/auth";
 import { CHECKOUT_REFRESH_DELAYS_MS } from "@/lib/checkout-return";
 import { reportActivationConversion, reportPaidConversion } from "@/lib/gtag";
+import { isPaidConversion } from "@/lib/plan-access";
 
 /**
  * After the debrief announces a finished session, re-check a few times: the
@@ -44,7 +45,8 @@ export function ConversionTracker() {
           activated = true;
           reportActivationConversion(user.id);
         }
-        if (caps.paid) {
+        // A complimentary grant is not a purchase: never reported as one.
+        if (isPaidConversion(caps)) {
           const plans = await fetchPlanOptions();
           const active = plans.find((p) => p.isActive && p.priceDollars > 0);
           if (active && !cancelled) reportPaidConversion(user.id, active.id, active.priceDollars);
