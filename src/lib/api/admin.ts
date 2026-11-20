@@ -724,6 +724,45 @@ export interface Trends {
   metrics: TrendMetric[];
 }
 
+// ── Weekly cohorts (admin.getWeeklyCohorts) ────────────────────────────
+
+export interface CohortCell {
+  users: number;
+  /** Percent of the week's signups. */
+  pct: number;
+  /** Some of the cohort has not yet had the whole period, so the figure can still rise. */
+  partial: boolean;
+}
+
+export interface WeeklyCohort {
+  /** Monday 00:00 UTC. */
+  weekStart: Date;
+  weekEnd: Date;
+  inProgress: boolean;
+  signups: number;
+  /** By column key; null when nobody in the cohort has reached that period yet. */
+  cells: Record<string, CohortCell | null>;
+  sessionsPerUser: number;
+  activitiesPerUser: number;
+  medianMinutesToFirstSession: number | null;
+  /** Pages opened in the first hour after signing up; null before page tracking existed. */
+  firstVisit: {
+    partialTracking: boolean;
+    trackedUsers: number;
+    paths: Array<{ pages: string[]; users: number; pct: number }>;
+    lastPages: Array<{ page: string; users: number; pct: number }>;
+  } | null;
+}
+
+export interface WeeklyCohorts {
+  weeks: number;
+  from: Date;
+  to: Date;
+  pageViewsFrom: Date | null;
+  columns: Array<{ key: string; label: string; group: "first7Days" | "used" | "cameBack" }>;
+  cohorts: WeeklyCohort[];
+}
+
 // ── Product analytics (admin.getProductAnalytics) ──────────────────────
 
 export interface ActiveUsersPoint {
@@ -814,6 +853,9 @@ export const adminApi = {
 
   getTrends: (range: TrendRange) =>
     rpc<Trends>("admin.getTrends", "query", { range }),
+
+  getWeeklyCohorts: (weeks: number) =>
+    rpc<WeeklyCohorts>("admin.getWeeklyCohorts", "query", { weeks }),
 
   getProductAnalytics: (days: number) =>
     rpc<ProductAnalytics>("admin.getProductAnalytics", "query", { days }),
