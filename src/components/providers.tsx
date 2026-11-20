@@ -12,6 +12,7 @@ import { I18nProvider } from "@/lib/i18n";
 import { toastError } from "@/lib/toast";
 import { captureAttribution } from "@/lib/attribution";
 import { reportSignupConversionFromUrl } from "@/lib/gtag";
+import { captureInstallPrompt } from "@/lib/push-client";
 
 function ThemedToaster() {
   const { theme } = useTheme();
@@ -24,6 +25,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     captureAttribution();
     reportSignupConversionFromUrl();
+    // Chrome's install prompt fires once, early; held until after a Quick 5.
+    captureInstallPrompt();
   }, []);
 
   const [queryClient] = useState(
