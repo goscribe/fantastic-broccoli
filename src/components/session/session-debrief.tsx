@@ -17,6 +17,9 @@ import {
   Target,
   Clock,
   CheckCircle2,
+  ChevronRight,
+  Layers,
+  MessageCircle,
 } from "lucide-react";
 import { Mascot } from "@/components/rewards/mascot";
 import { useStreak } from "@/lib/rewards";
@@ -25,6 +28,7 @@ import { useRouter } from "next/navigation";
 import { studySessionApi } from "@/lib/api/study-session";
 import { createStudySession, fetchStudySessions } from "@/lib/api/study";
 import { pickStudyNowSession } from "@/components/session/study-now-card";
+import { deckEntries } from "@/components/bank/bank-content";
 import { remainingMinutes } from "@/components/session/session-progress";
 import { toastError } from "@/lib/toast";
 import type { StudySession } from "@/types";
@@ -34,6 +38,7 @@ import { cn } from "@/lib/utils";
 import "@/lib/i18n/session";
 import "@/lib/i18n/rewards";
 import { InviteCard } from "@/components/growth/invite-card";
+import "@/lib/i18n/habits";
 
 /** Length of the full session a finished Quick 5 offers to start. */
 const FOLLOW_UP_MINUTES = 15;
@@ -53,6 +58,47 @@ function pickFullSession(
             (a) => a.status === "pending" || a.status === "in_progress",
           )),
     ),
+  );
+}
+
+/**
+ * One row in the "one more small step" list: what returners did on day 0
+ * (flashcards from the same notes, a question to Copilot), one tap each.
+ */
+function NextStep({
+  icon,
+  title,
+  sub,
+  href,
+  onClick,
+}: {
+  icon: ReactNode;
+  title: string;
+  sub: string;
+  href?: string;
+  onClick?: () => void;
+}) {
+  const body = (
+    <>
+      <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-dim">
+        {icon}
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-[14.5px] font-semibold leading-5 text-foreground">{title}</span>
+        <span className="block text-[12.5px] leading-5 text-muted-foreground">{sub}</span>
+      </span>
+      <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
+    </>
+  );
+  const cls = "flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/60 focus-visible:bg-muted/60 focus-visible:outline-none";
+  return href ? (
+    <Link href={href} className={cls}>
+      {body}
+    </Link>
+  ) : (
+    <button type="button" onClick={onClick} className={cls}>
+      {body}
+    </button>
   );
 }
 
@@ -85,8 +131,11 @@ export function SessionDebrief({
   quickStart = false,
   sessionBonus = 0,
   streakLitDays = null,
+  onAskCopilot,
 }: {
   onBack: () => void;
+  /** Opens Copilot with this text in the input (the learner sends it). */
+  onAskCopilot?: (prompt: string) => void;
   sessionId: string;
   /** Lets a finished Quick 5 hand off to today's full session. */
   workspaceId?: string;
@@ -131,6 +180,18 @@ export function SessionDebrief({
     onError: (error) => toastError(error, t("session.quick5StartFailed")),
   });
 
+  // After a Quick 5: flashcards from the same notes, one tap away.
+  const { data: deck } = useQuery({
+    queryKey: ["bank", workspaceId, "FLASHCARD_DECK"],
+    queryFn: () => studySessionApi.listBank({ workspaceId: workspaceId!, kind: "FLASHCARD_DECK" }),
+    enabled: quickStart && !!workspaceId,
+    select: (items) =>
+      items
+        .map((item) => ({ id: item.id, cards: deckEntries(item)?.entries.length ?? 0 }))
+        .sort((a, b) => b.cards - a.cards)
+        .find((d) => d.cards > 0),
+  });
+
   const { data: streak } = useStreak();
   const { data: stats } = useQuery({
     queryKey: ["session-stats", sessionId],
@@ -152,6 +213,19 @@ export function SessionDebrief({
   const hasReport = !!debrief && (debrief.sections.length > 0 || !!usefulHeadline(debrief.headline));
   const streakDays = streakLitDays ?? (streak?.todayDone ? streak.current : null);
   const points = Math.max(stats?.points ?? 0, sessionBonus);
+  const wrong = stats ? Math.max(0, stats.answered - stats.correct) : 0;
+  const ask = !stats
+    ? null
+    : wrong > 0
+      ? {
+          title: t("habit.askWrongTitle"),
+          sub: (wrong === 1 ? t("habit.askWrongSubOne") : t("habit.askWrongSub")).replace("{n}", String(wrong)),
+          prompt: t("habit.askWrongPrompt"),
+        }
+      : stats.answered > 0
+        ? { title: t("habit.askDeeperTitle"), sub: t("habit.askDeeperSub"), prompt: t("habit.askDeeperPrompt") }
+        : { title: t("habit.askRecapTitle"), sub: t("habit.askRecapSub"), prompt: t("habit.askRecapPrompt") };
+  const showSteps = (!!deck && !!workspaceId) || (!!ask && !!onAskCopilot);
 
   const primary = handOff ? (
     <Button
@@ -255,7 +329,34 @@ export function SessionDebrief({
         )}
       </div>
 
-      <InviteCard variant="compact" className="mt-5" />
+      {showSteps && (
+        <section className="mt-6 w-full text-left animate-fade-up" aria-labelledby="debrief-next-steps">
+          <h3 id="debrief-next-steps" className="mb-2 px-1 text-[12.5px] font-semibold text-muted-foreground">
+            {t("habit.nextSmallStep")}
+          </h3>
+          <div className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+            {deck && workspaceId && (
+              <NextStep
+                icon={<Layers className="size-[18px]" />}
+                title={t("habit.flashcardsTitle")}
+                sub={t("habit.flashcardsSub")
+                  .replace("{n}", String(deck.cards))
+                  .replace("{m}", String(Math.max(1, Math.min(10, Math.ceil(deck.cards / 6)))))}
+                href={`/flashcards/${deck.id}?ws=${workspaceId}&mode=learn`}
+              />
+            )}
+            {ask && onAskCopilot && (
+              <NextStep
+                icon={<MessageCircle className="size-[18px]" />}
+                title={ask.title}
+                sub={ask.sub}
+                onClick={() => onAskCopilot(ask.prompt)}
+              />
+            )}
+          </div>
+        </section>
+      )}
+      <InviteCard variant="compact" className="mt-4" />
 
       {hasReport && (
         <div className="mt-4 w-full text-left">

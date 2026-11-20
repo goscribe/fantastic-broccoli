@@ -133,6 +133,7 @@ export function Copilot({
   activity,
   page,
   initialPrompt,
+  draft,
   variant = "panel",
 }: {
   open: boolean;
@@ -140,6 +141,11 @@ export function Copilot({
   variant?: "panel" | "page";
   /** Sent once as the first message when the panel is ready (Learn one-offs like "Quiz me on …"). */
   initialPrompt?: string;
+  /**
+   * Text put in the input (not sent) when `id` changes, e.g. a one-tap
+   * "Ask Copilot about what you got wrong" on the end-of-session screen.
+   */
+  draft?: { text: string; id: number };
   onClose: () => void;
   context?: string;
   workspaceId: string;
@@ -202,6 +208,20 @@ export function Copilot({
   }, [activeChat, workspaceId]);
   const [hydrating, setHydrating] = useState(false);
   const [input, setInput] = useState("");
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const draftId = useRef<number | null>(null);
+  useEffect(() => {
+    if (!draft || !open || draftId.current === draft.id) return;
+    draftId.current = draft.id;
+    setInput(draft.text);
+    // After the panel has rendered open; caret at the end so Enter sends.
+    requestAnimationFrame(() => {
+      const el = inputRef.current;
+      if (!el) return;
+      el.focus();
+      el.setSelectionRange(el.value.length, el.value.length);
+    });
+  }, [draft, open]);
   const [busy, setBusy] = useState(false);
   // The answer being streamed; aborting it lets the learner interrupt.
   const inFlight = useRef<AbortController | null>(null);
@@ -616,6 +636,7 @@ export function Copilot({
           className={cn(inputBoxClass, "items-end gap-2 py-2")}
         >
           <textarea
+            ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
@@ -624,7 +645,8 @@ export function Copilot({
                 send(input);
               }
             }}
-            rows={1}
+            // Grows a little for a pre-filled prompt so it can be read before sending.
+            rows={Math.min(4, Math.max(1, Math.ceil(input.length / 52)))}
             placeholder={t("misc.copilotPlaceholder")}
             className={cn(bareInputClass, "resize-none py-1")}
           />
