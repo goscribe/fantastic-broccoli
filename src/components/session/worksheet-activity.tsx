@@ -1,7 +1,7 @@
 "use client";
 
 import { useNewUi } from "@/lib/new-ui";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PartMarking, WorksheetContent } from "@/types";
 import { markWorksheetAnswer } from "@/lib/api/study";
 import {
@@ -19,14 +19,32 @@ import { DrawingCanvas } from "@/components/ui/drawing-canvas";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
+import "@/lib/i18n/habits";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, ArrowRight, Check, Loader2, PenLine, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Loader2, PenLine, SkipForward, Undo2, X } from "lucide-react";
 
 interface WorksheetActivityProps {
   activityId: string;
   content: WorksheetContent;
   draft?: Record<string, unknown>;
+  /** The plan's estimate; shown as "3 questions · ~6 min". */
+  estimatedMinutes?: number;
   onComplete: () => void;
+}
+
+/** Intros longer than this start collapsed, so the first question is on screen. */
+const LONG_INTRO_CHARS = 320;
+
+/** "3 questions · ~6 min": every part counts as a question (the composer caps them at 3). */
+export function worksheetSummary(content: WorksheetContent, estimatedMinutes?: number) {
+  const questions = content.steps.reduce((n, st) => n + st.parts.length, 0);
+  const minutes = estimatedMinutes && estimatedMinutes > 0 ? estimatedMinutes : Math.max(2, questions * 2);
+  return { questions, minutes };
+}
+
+/** Marking for a part the learner chose to skip: no marks, no server call. */
+function skippedMarking(marks: number): PartMarking {
+  return { points: [], achievedPoints: 0, totalPoints: marks, correct: false };
 }
 
 interface WorksheetDraft {
@@ -35,12 +53,14 @@ interface WorksheetDraft {
   drawings: Record<string, string | null>;
   markings: Record<string, PartMarking>;
   checkedSteps: Record<number, boolean>;
+  skipped: Record<string, boolean>;
 }
 
 export function WorksheetActivity({
   activityId,
   content,
   draft,
+  estimatedMinutes,
   onComplete,
 }: WorksheetActivityProps) {
   const { t } = useI18n();
@@ -60,7 +80,12 @@ export function WorksheetActivity({
   const [checkedSteps, setCheckedSteps] = useState<Record<number, boolean>>(
     restored?.checkedSteps ?? {},
   );
+  const [skipped, setSkipped] = useState<Record<string, boolean>>(
+    restored?.skipped ?? {},
+  );
+  const [introOpen, setIntroOpen] = useState<Record<number, boolean>>({});
   const [markingInFlight, setMarkingInFlight] = useState(false);
+  const firstInput = useRef<HTMLTextAreaElement>(null);
 
   useReportCurrentItem(activityId, stepIndex);
   useActivityDraft(activityId, {
@@ -69,6 +94,7 @@ export function WorksheetActivity({
     drawings,
     markings,
     checkedSteps,
+    skipped,
   });
 
   const step = content.steps[stepIndex];
@@ -84,9 +110,22 @@ export function WorksheetActivity({
     (s, _, i) => s + (markings[key(i)]?.achievedPoints ?? 0),
     0,
   );
-  const allAnswered = step.parts.every(
-    (_, i) => (answers[key(i)] ?? "").trim() || drawings[key(i)],
-  );
+  const answered = (i: number) => !!((answers[key(i)] ?? "").trim() || drawings[key(i)]);
+  // Every part either answered or skipped; skipping all of them skips the question.
+  const allAnswered = step.parts.every((_, i) => answered(i) || skipped[key(i)]);
+  const allSkipped = step.parts.every((_, i) => skipped[key(i)] && !answered(i));
+  const summary = worksheetSummary(content, estimatedMinutes);
+  const introLong = (step.intro?.length ?? 0) > LONG_INTRO_CHARS;
+
+  // The first question is answerable straight away: focus its box on a
+  // desktop (not on touch, where the keyboard would cover the question).
+  useEffect(() => {
+    if (checkedSteps[stepIndex]) return;
+    if (typeof window === "undefined" || !window.matchMedia("(pointer: fine)").matches) return;
+    firstInput.current?.focus({ preventScroll: true });
+    // Only when the question changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stepIndex]);
 
   const checkStep = async () => {
     setMarkingInFlight(true);
@@ -94,6 +133,7 @@ export function WorksheetActivity({
       step.parts.map(async (part, i) => {
         const value = answers[key(i)] ?? "";
         const drawing = drawings[key(i)] ?? undefined;
+        if (skipped[key(i)] && !value.trim() && !drawing) return skippedMarking(part.marks ?? 1);
         // Choice parts stay on the local check. Typed parts with a mark
         // scheme (or a drawing) are decided by the server — a failed local
         // comparison must not record them as wrong while that marker can run.
@@ -139,6 +179,7 @@ export function WorksheetActivity({
     });
     step.parts.forEach((part, i) => {
       if (!part.worksheetQuestionId) return;
+      if (skipped[key(i)] && !answered(i)) return; // not attempted
       recordWorksheetQuestionProgress({
         problemId: part.worksheetQuestionId,
         completed: true,
@@ -154,6 +195,11 @@ export function WorksheetActivity({
     <div>
       {/* Step header */}
       <div className="pb-4 border-b border-border">
+        <p className="mb-1.5 text-xs font-medium text-muted-foreground tabular-nums">
+          {(summary.questions === 1 ? t("habit.wsSummaryOne") : t("habit.wsSummary"))
+            .replace("{n}", String(summary.questions))
+            .replace("{m}", String(summary.minutes))}
+        </p>
         <div className="flex items-center justify-between gap-4">
           <p className="text-sm font-semibold">
             {t("session.question")} {stepIndex + 1} —{" "}
@@ -196,9 +242,25 @@ export function WorksheetActivity({
 
       <div className="py-5 space-y-5">
         {step.intro && (
-          <p className="text-sm leading-6 text-foreground">
-            <MarkdownText text={step.intro} />
-          </p>
+          <div>
+            <div
+              className={cn(
+                "text-sm leading-6 text-foreground",
+                introLong && !introOpen[stepIndex] && "line-clamp-3",
+              )}
+            >
+              <MarkdownText text={step.intro} />
+            </div>
+            {introLong && (
+              <button
+                type="button"
+                onClick={() => setIntroOpen((o) => ({ ...o, [stepIndex]: !o[stepIndex] }))}
+                className="mt-1 text-xs font-semibold text-accent-dim hover:underline"
+              >
+                {t(introOpen[stepIndex] ? "habit.wsShowLess" : "habit.wsShowMore")}
+              </button>
+            )}
+          </div>
         )}
 
         {step.figure && <WorksheetFigureCard data={step.figure} />}
@@ -214,6 +276,7 @@ export function WorksheetActivity({
             const correct = marking?.correct ?? false;
             const partial =
               !!marking && !marking.correct && marking.achievedPoints > 0;
+            const isSkipped = !!skipped[key(i)] && !value.trim() && !drawings[key(i)];
             return (
               <div key={part.label} className="flex gap-3">
                 <span className={cn("shrink-0 flex items-center justify-center font-bold", newUi ? "mt-1 h-7 w-7 rounded-lg bg-accent-soft text-[12px] text-accent-dim" : "mt-1.5 h-6 w-6 rounded-full bg-muted text-[11px]")}>
@@ -259,21 +322,29 @@ export function WorksheetActivity({
                     </div>
                   ) : (
                     <textarea
+                      ref={i === 0 ? firstInput : undefined}
                       value={value}
                       rows={part.type === "numeric" ? 1 : 2}
                       disabled={(checked && correct) || markingInFlight}
-                      onChange={(e) =>
-                        setAnswers((a) => ({ ...a, [key(i)]: e.target.value }))
-                      }
+                      onChange={(e) => {
+                        const v = e.target.value;
+                        setAnswers((a) => ({ ...a, [key(i)]: v }));
+                        // Typing un-skips the part.
+                        if (v.trim()) setSkipped((sk) => (sk[key(i)] ? { ...sk, [key(i)]: false } : sk));
+                      }}
                       placeholder={
-                        part.type === "numeric"
-                          ? t("session.numericPlaceholder")
-                          : t("session.textPlaceholder")
+                        isSkipped && !checked
+                          ? t("habit.wsSkippedPlaceholder")
+                          : part.type === "numeric"
+                            ? t("session.numericPlaceholder")
+                            : t("session.textPlaceholder")
                       }
                       className={cn(
                         newUi ? "mt-2.5 w-full rounded-xl border px-4 py-3 text-[15px] leading-relaxed resize-none transition-colors placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-accent/15" : "mt-2 w-full rounded-lg border px-3 py-2 text-sm resize-none focus:outline-none",
                         checked
-                          ? correct
+                          ? isSkipped
+                            ? "border-border bg-muted/40"
+                            : correct
                             ? "border-success bg-success/5"
                             : partial
                               ? "border-amber bg-amber/5"
@@ -281,21 +352,52 @@ export function WorksheetActivity({
                           : newUi
                             ? "border-border bg-card focus:border-accent"
                             : "border-border-strong bg-background focus:border-accent/60",
+                        isSkipped && !checked && "border-dashed bg-muted/30",
                       )}
                     />
                   )}
 
-                  {part.type === "text" && !drawingOpen[key(i)] && !checked && (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setDrawingOpen((d) => ({ ...d, [key(i)]: true }))
-                      }
-                      className="mt-1.5 flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
-                    >
-                      <PenLine className="h-3 w-3" />
-                      {t("session.addDrawing")}
-                    </button>
+                  {!checked && (
+                    <div className="mt-1.5 flex items-center gap-4">
+                      {part.type === "text" && !drawingOpen[key(i)] && (
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setDrawingOpen((d) => ({ ...d, [key(i)]: true }))
+                          }
+                          className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+                        >
+                          <PenLine className="h-3 w-3" />
+                          {t("session.addDrawing")}
+                        </button>
+                      )}
+                      {!answered(i) && (
+                        <button
+                          type="button"
+                          disabled={markingInFlight}
+                          aria-pressed={isSkipped}
+                          onClick={() =>
+                            setSkipped((sk) => ({ ...sk, [key(i)]: !sk[key(i)] }))
+                          }
+                          className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+                        >
+                          {isSkipped ? (
+                            <>
+                              <Undo2 className="h-3 w-3" />
+                              {t("habit.wsUndoSkip")}
+                            </>
+                          ) : (
+                            <>
+                              <SkipForward className="h-3 w-3" />
+                              {t("habit.wsSkipPart")}
+                            </>
+                          )}
+                        </button>
+                      )}
+                    </div>
+                  )}
+                  {checked && isSkipped && (
+                    <p className="mt-1.5 text-xs text-muted-foreground">{t("habit.wsSkipped")}</p>
                   )}
                   {part.type === "text" && drawingOpen[key(i)] && (
                     <DrawingCanvas
@@ -373,7 +475,7 @@ export function WorksheetActivity({
                     marking.points.length === 0 &&
                     !correct &&
                     part.answer && (
-                      <p className="text-xs text-red-600 dark:text-red-400 mt-1.5">
+                      <p className={cn("text-xs mt-1.5", isSkipped ? "text-muted-foreground" : "text-red-600 dark:text-red-400")}>
                         {t("session.expected")} {part.answer}
                       </p>
                     )}
@@ -425,6 +527,8 @@ export function WorksheetActivity({
                   <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
                   {t("session.marking")}
                 </>
+              ) : allSkipped ? (
+                t("habit.wsSkipQuestion")
               ) : (
                 t("session.checkAnswers")
               )}

@@ -1,0 +1,104 @@
+/**
+ * First-run funnel events (server: `activity.track`). Answers "what happens in
+ * the first 9 seconds": first screen viewed, way in chosen, upload
+ * started/finished, Quick 5 started/finished — with viewport width and touch
+ * so phone and desktop can be told apart. Fire-and-forget: a failed or slow
+ * request never affects the page, and `keepalive` lets an event sent while
+ * the tab closes still arrive.
+ */
+import { apiUrl } from "./api/config";
+
+export type FunnelEvent =
+  | "first_run.viewed"
+  | "first_run.option_chosen"
+  | "first_run.upload_started"
+  | "first_run.upload_finished"
+  | "first_run.upload_failed"
+  | "first_run.session_requested"
+  | "first_run.wait_viewed"
+  | "first_run.left_while_waiting"
+  | "quick5.started"
+  | "quick5.finished";
+
+export type FirstRunOption = "upload" | "camera" | "topic" | "paste" | "curriculum" | "skip";
+
+export interface FunnelProps {
+  option?: FirstRunOption;
+  durationMs?: number;
+  fileCount?: number;
+  sizeKb?: number;
+  correct?: number;
+  total?: number;
+}
+
+const FIRST_SCREEN_KEY = "scribe.firstRun.shownAt";
+
+/** Remembers when this tab first showed the first-run screen (kept across navigations). */
+export function markFirstScreenShown(now = Date.now()): void {
+  try {
+    if (!sessionStorage.getItem(FIRST_SCREEN_KEY)) sessionStorage.setItem(FIRST_SCREEN_KEY, String(now));
+  } catch {
+    /* storage blocked */
+  }
+}
+
+function msSinceFirstScreen(now: number): number | undefined {
+  try {
+    const raw = sessionStorage.getItem(FIRST_SCREEN_KEY);
+    const at = raw ? Number(raw) : NaN;
+    return Number.isFinite(at) ? clampMs(now - at) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+/** Whole, non-negative ms capped at a day (the server's bound). */
+export function clampMs(ms: number): number {
+  return Math.min(86_400_000, Math.max(0, Math.round(ms)));
+}
+
+/** The request body for one event (exported for tests). */
+export function funnelPayload(
+  event: FunnelEvent,
+  props: FunnelProps,
+  env: { now: number; viewportWidth?: number; touch?: boolean; sinceFirstScreen?: number },
+  workspaceId?: string,
+) {
+  const clean: Record<string, number | string | boolean> = {};
+  for (const [key, value] of Object.entries(props)) {
+    if (value === undefined) continue;
+    clean[key] = typeof value === "number" ? (key === "durationMs" ? clampMs(value) : Math.max(0, Math.round(value))) : value;
+  }
+  if (env.sinceFirstScreen !== undefined) clean.msSinceFirstScreen = clampMs(env.sinceFirstScreen);
+  if (env.viewportWidth !== undefined) clean.viewportWidth = Math.min(10_000, Math.max(0, Math.round(env.viewportWidth)));
+  if (env.touch !== undefined) clean.touch = env.touch;
+  return { event, ...(workspaceId ? { workspaceId } : {}), props: clean };
+}
+
+export function track(event: FunnelEvent, props: FunnelProps = {}, workspaceId?: string): void {
+  if (typeof window === "undefined" || !apiUrl) return;
+  const now = Date.now();
+  const body = funnelPayload(
+    event,
+    props,
+    {
+      now,
+      viewportWidth: window.innerWidth,
+      touch: typeof window.matchMedia === "function" ? window.matchMedia("(pointer: coarse)").matches : undefined,
+      sinceFirstScreen: msSinceFirstScreen(now),
+    },
+    workspaceId,
+  );
+  try {
+    void fetch(`${apiUrl}/trpc/activity.track`, {
+      method: "POST",
+      credentials: "include",
+      keepalive: true,
+      headers: { "content-type": "application/json" },
+      // superjson envelope for plain JSON input.
+      body: JSON.stringify({ json: body }),
+    }).catch(() => {});
+  } catch {
+    /* never let analytics break the page */
+  }
+}

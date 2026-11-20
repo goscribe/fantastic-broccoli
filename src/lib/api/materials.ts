@@ -241,3 +241,15 @@ export interface StudyGuideSection {
 /** Study-guide sections (Paper 1 / PP2 / Oral / Unit 3 …) found in analyzed files. */
 export const detectSections = (workspaceId: string, fileIds: string[]) =>
   rpc<{ sections: StudyGuideSection[] }>("workspace.detectSections", "query", { workspaceId, fileIds });
+
+/**
+ * Pasted notes become an analysed material at once (no upload, no analysis
+ * wait), so a Quick 5 can be planned from them straight away.
+ */
+export async function addPastedText(
+  workspaceId: string,
+  text: string,
+  title?: string,
+): Promise<{ fileId: string; name: string; chars: number }> {
+  return rpc("workspace.addPastedText", "mutation", { workspaceId, text, title });
+}
