@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Camera, ClipboardPaste, Loader2, PenLine, Upload } from "lucide-react";
+import { ArrowRight, Camera, ClipboardPaste, GraduationCap, Loader2, PenLine, Upload } from "lucide-react";
 import { createWorkspace } from "@/lib/api/workspace";
 import { addPastedText, analyzeFiles, uploadFiles } from "@/lib/api/materials";
 import { createStudySession } from "@/lib/api/study";
@@ -13,6 +13,9 @@ import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/first-run";
+import "@/lib/i18n/courses";
+import { CoursePicker } from "@/components/courses/course-picker";
+import { coursesApi, type CatalogTopic, type Course, type CourseLevel } from "@/lib/api/courses";
 import { markFirstScreenShown, track, type FirstRunOption } from "@/lib/funnel";
 import {
   PASTE_MAX_CHARS,
@@ -23,7 +26,7 @@ import {
 } from "@/lib/first-run";
 import type { ExamBoard } from "@/types";
 
-type Mode = "upload" | "topic" | "paste";
+type Mode = "upload" | "topic" | "paste" | "course";
 type Busy = "uploading" | "saving" | "building" | null;
 
 /** One "viewed" per page load, however often the screen remounts. */
@@ -33,9 +36,10 @@ const EXAMPLE_KEYS = ["firstRun.example1", "firstRun.example2", "firstRun.exampl
 
 /**
  * First screen after signup, and home for anyone without a subject: "What are
- * you studying?" with three equal ways in — upload (one-tap camera on phones),
- * type a topic, or paste text. Every path goes straight to a Quick 5: no
- * intro video, no naming step, no plan picker.
+ * you studying?" with four equal ways in — upload (one-tap camera on phones),
+ * type a topic, paste text, or pick a course from Scribe's outlines (course →
+ * unit → topic, for the many who have no notes to hand). Every path goes
+ * straight to a Quick 5: no intro video, no naming step, no plan picker.
  */
 export function FirstRun({
   firstName,
@@ -200,10 +204,30 @@ export function FirstRun({
     );
   };
 
+  /** Course → unit → topic: the server reuses/creates the course's subject and starts a topic-mode Quick 5. */
+  const startCourse = (course: Course, topic: CatalogTopic, level?: CourseLevel) => {
+    void run(
+      "curriculum",
+      async () => {
+        setBusy("building");
+        const { workspaceId, sessionId } = await coursesApi.startTopic({
+          courseId: course.id,
+          topicId: topic.id,
+          ...(level ? { level } : {}),
+        });
+        emitTreeChanged();
+        track("first_run.session_requested", { option: "curriculum" }, workspaceId);
+        router.push(`/workspace/${workspaceId}/session/${sessionId}`);
+      },
+      t("course.errorStart"),
+    );
+  };
+
   const options: { id: Mode; label: string; hint: string; icon: typeof Upload }[] = [
     { id: "upload", label: t("firstRun.optUpload"), hint: t("firstRun.optUploadHint"), icon: Upload },
     { id: "topic", label: t("firstRun.optTopic"), hint: t("firstRun.optTopicHint"), icon: PenLine },
     { id: "paste", label: t("firstRun.optPaste"), hint: t("firstRun.optPasteHint"), icon: ClipboardPaste },
+    { id: "course", label: t("course.optPick"), hint: t("course.optPickHint"), icon: GraduationCap },
   ];
 
   const primaryButton =
@@ -242,7 +266,7 @@ export function FirstRun({
           </div>
         ) : (
           <>
-            <div role="tablist" aria-label={t("firstRun.optionsLabel")} className="mt-7 grid grid-cols-3 gap-2">
+            <div role="tablist" aria-label={t("firstRun.optionsLabel")} className="mt-7 grid grid-cols-2 gap-2 sm:grid-cols-4">
               {options.map(({ id, label, hint, icon: Icon }) => (
                 <button
                   key={id}
@@ -382,6 +406,8 @@ export function FirstRun({
                   </button>
                 </form>
               )}
+
+              {mode === "course" && <CoursePicker onStart={startCourse} />}
 
               {mode === "paste" && (
                 <form

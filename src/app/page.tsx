@@ -45,6 +45,7 @@ import { HeroScene, ConfettiDots, Sticker } from "@/components/graphics/floating
 import { Banner } from "@/components/ui/banner";
 import { Button } from "@/components/ui/button";
 import { HomeUploadRow } from "@/components/workspace/home-upload-row";
+import { CourseShelf } from "@/components/courses/course-shelf";
 
 // The learn home is heavy (charts, covers, planner); a brand-new learner never
 // needs it on first paint, so it loads in its own chunk.
@@ -543,6 +544,11 @@ export default function HomePage() {
             </div>
           )}
         </section>
+
+        {/* Courses: progress per course, or a way into the course picker */}
+        <div className="animate-fade-up">
+          <CourseShelf />
+        </div>
 
         {/* Search */}
         <div className="relative max-w-md animate-fade-up">

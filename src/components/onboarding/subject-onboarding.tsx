@@ -2,7 +2,10 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Link2, Loader2, Upload } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, GraduationCap, Link2, Loader2, Upload } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/courses";
 import { createWorkspace } from "@/lib/api/workspace";
 import { analyzeFiles, importYoutube, uploadFiles } from "@/lib/api/materials";
 import { createStudySession } from "@/lib/api/study";
@@ -18,6 +21,7 @@ type Step = "intro" | "subject" | "material" | "building";
 
 /** First run: (optional walkthrough video,) name a subject, drop your notes (or a YouTube link), the first session builds. The cat walks you through. */
 export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip: () => void; firstName?: string; intro?: boolean }) {
+  const { t } = useI18n();
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
   const [step, setStep] = useState<Step>(intro ? "intro" : "subject");
@@ -87,6 +91,13 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
             >
               Set up my first subject <ArrowRight className="size-4" />
             </button>
+            <Link
+              href="/courses"
+              className="mt-4 flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl border border-border text-[13.5px] font-semibold text-foreground hover:border-border-strong"
+            >
+              <GraduationCap className="size-4 text-accent" />
+              {t("course.orPick")}
+            </Link>
             <button type="button" onClick={onSkip} className="mt-4 block w-full text-center text-[13px] font-medium text-faint hover:text-foreground">
               I&apos;ll look around first
             </button>

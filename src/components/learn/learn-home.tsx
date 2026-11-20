@@ -1,5 +1,7 @@
 "use client";
 
+import { CourseShelf } from "@/components/courses/course-shelf";
+import { CourseTopics } from "@/components/courses/course-topics";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { accentForId } from "@/lib/accent-palette";
 import { WeekStrip } from "@/components/learn/week-strip";
@@ -447,12 +449,14 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           onStudy={(t) => void studyTopic(t)}
         />
 
+        <CourseTopics key={`course-${workspaceId}`} workspaceId={workspaceId} />
         <SubjectProgress key={`progress-${workspaceId}`} workspaceId={workspaceId} />
           </>
         ) : (
           <>
             <WeekStrip subjects={workspaces.map((w) => ({ id: w.id, title: w.title }))} />
           <SubjectsGrid workspaces={workspaces} sessions={sessions} loading={loading} onNew={() => router.push("/new-subject")} />
+          {!folderId && <CourseShelf />}
           </>
         )}
 
