@@ -692,7 +692,7 @@ export function CopilotTrigger({ onClick, compact = false }: { onClick: () => vo
         onClick={onClick}
         aria-label={t("misc.askScribe")}
         title={t("misc.askScribe")}
-        className="grid size-9 shrink-0 place-items-center overflow-hidden rounded-xl bg-accent-soft hover:bg-muted sm:hidden"
+        className="grid size-11 shrink-0 place-items-center overflow-hidden rounded-xl bg-accent-soft hover:bg-muted sm:hidden"
       >
         <Mascot pose="wave" className="mt-1.5 h-8" />
       </button>

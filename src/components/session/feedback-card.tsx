@@ -16,6 +16,7 @@ export function FeedbackCard({
   secondary,
   onSecondary,
   xp = 10,
+  note,
 }: {
   ok: boolean;
   title: string;
@@ -25,49 +26,62 @@ export function FeedbackCard({
   secondary?: string;
   onSecondary?: () => void;
   xp?: number;
+  /** One quiet line under the explanation (e.g. "Saved to Mistakes"). */
+  note?: React.ReactNode;
 }) {
   return (
     <div className="relative pb-2 pt-3">
       {ok && (
         <Mascot
           pose="cheer"
-          className="cat-cheer pointer-events-none absolute -top-[58px] right-5 h-[88px] drop-shadow-[0_10px_18px_rgba(22,163,74,.22)]"
+          className="cat-cheer pointer-events-none absolute -top-[58px] right-5 h-[88px] max-sm:hidden drop-shadow-[0_10px_18px_rgba(22,163,74,.22)]"
         />
       )}
+      {/* Calm result panel: a coloured edge and icon say right/wrong; the explanation reads like notes; one accent button. */}
       <div
         className={cn(
-          "flex flex-wrap items-center gap-4 rounded-2xl border px-5 py-4 shadow-[0_12px_40px_-12px_rgba(17,17,20,.18)]",
-          ok
-            ? "design-bounce border-emerald-300 bg-gradient-to-r from-emerald-50 to-lime-50"
-            : "border-rose-200 bg-rose-50",
+          "rounded-2xl border bg-card px-4 py-3.5 shadow-[0_8px_28px_-14px_rgba(17,17,20,.16)] sm:px-5 sm:py-4",
+          ok ? "design-bounce border-emerald-300" : "border-rose-300",
         )}
       >
-        <span
-          className={cn(
-            "grid size-11 shrink-0 place-items-center rounded-full text-white",
-            ok ? "design-pop bg-emerald-500 shadow-[0_0_0_6px_rgba(16,185,129,.2)]" : "bg-rose-500",
-          )}
-        >
-          {ok ? <Check className="size-6" strokeWidth={3} /> : <X className="size-6" strokeWidth={3} />}
-        </span>
-        <div className="min-w-0 flex-1 basis-[200px]">
-          <div className="flex items-center gap-2.5">
-            <span className={cn("text-[18px] font-extrabold", ok ? "text-emerald-800" : "text-rose-800")}>{title}</span>
+        <div className="flex flex-wrap items-center gap-3 sm:flex-nowrap sm:gap-4">
+          <span
+            className={cn(
+              "grid size-9 shrink-0 place-items-center rounded-full text-white",
+              ok ? "design-pop bg-emerald-500" : "bg-rose-500",
+            )}
+          >
+            {ok ? <Check className="size-5" strokeWidth={3} /> : <X className="size-5" strokeWidth={3} />}
+          </span>
+          <div className="flex min-w-0 flex-1 items-center gap-2">
+            <span className={cn("text-[17px] font-extrabold", ok ? "text-emerald-700" : "text-rose-700")}>{title}</span>
             {ok && (
-              <span className="design-pop inline-flex items-center rounded-full bg-emerald-600 px-2 py-0.5 text-[11px] font-bold text-white">
+              <span className="design-pop inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-[11.5px] font-bold text-emerald-700">
                 +{xp} XP
               </span>
             )}
           </div>
-          {message && <div className="mt-0.5 text-[13.5px] leading-5 text-muted-foreground">{message}</div>}
+          <div className="hidden shrink-0 gap-2.5 sm:flex">
+            {secondary && onSecondary && (
+              <Button variant="ghost" size="sm" onClick={onSecondary}>
+                {secondary}
+              </Button>
+            )}
+            <Button variant="primary" size="sm" onClick={onPrimary}>
+              {primary}
+            </Button>
+          </div>
         </div>
-        <div className="flex shrink-0 gap-2.5">
+        {message && <div className="mt-2.5 border-t border-border pt-2.5 text-[14px] leading-6 text-muted-foreground">{message}</div>}
+        {note && <p className="mt-2 text-[12.5px] font-semibold text-muted-foreground">{note}</p>}
+        {/* Phones: one full-width, thumb-sized button under the explanation. */}
+        <div className="mt-3 flex gap-2.5 sm:hidden">
           {secondary && onSecondary && (
-            <Button variant="ghost" size="sm" onClick={onSecondary} className="bg-white/80">
+            <Button variant="ghost" size="sm" onClick={onSecondary} className="h-11 flex-1">
               {secondary}
             </Button>
           )}
-          <Button variant="primary" size="sm" onClick={onPrimary} className={cn(ok && "bg-emerald-600 hover:bg-emerald-700")}>
+          <Button variant="primary" size="sm" onClick={onPrimary} className="h-11 flex-1 rounded-xl text-[15px]">
             {primary}
           </Button>
         </div>

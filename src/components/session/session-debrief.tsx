@@ -98,7 +98,7 @@ function NextStep({
       <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
     </>
   );
-  const cls = "flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/60 focus-visible:bg-muted/60 focus-visible:outline-none";
+  const cls = "flex min-h-14 w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/60 focus-visible:bg-muted/60 focus-visible:outline-none";
   return href ? (
     <Link href={href} className={cls}>
       {body}
@@ -117,8 +117,9 @@ const usefulHeadline = (h: string | undefined) =>
 function StatTile({ icon, label, value, tone }: { icon: ReactNode; label: string; value: ReactNode; tone: string }) {
   return (
     <div className="flex flex-col items-center gap-1 rounded-2xl border border-border bg-card px-2 py-3.5">
-      <span className={cn("flex items-center gap-1.5 text-[19px] font-bold tabular-nums leading-none", tone)}>
-        {icon}
+      {/* Calm stat row: the number in ink, colour only on the small icon. */}
+      <span className="flex items-center gap-1.5 text-[19px] font-extrabold tabular-nums leading-none text-foreground">
+        <span className={tone}>{icon}</span>
         {value}
       </span>
       <span className="text-[12px] font-medium text-muted-foreground">{label}</span>
@@ -140,10 +141,11 @@ function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: Maste
     <div className="w-full overflow-hidden rounded-2xl border border-border bg-card" role="status">
       <div className="grid grid-cols-3 divide-x divide-border [&>div]:rounded-none [&>div]:border-0">{tiles}</div>
       <ul className="space-y-3 border-t border-border px-4 py-3.5 text-left" aria-label={t("debrief.masteryTitle")}>
-        {mastery.map((m) => {
+        {mastery.map((m, i) => {
           const { before, after, delta, base, gain } = masteryRow(m);
           return (
-            <li key={m.topic}>
+            // Phones: two rows keep the next step above the fold.
+            <li key={m.topic} className={cn(i >= 2 && "max-sm:hidden")}>
               <div className="flex items-baseline justify-between gap-3 text-[13.5px]">
                 <span className="min-w-0 truncate font-semibold">{m.label}</span>
                 <span
@@ -273,7 +275,7 @@ export function SessionDebrief({
   });
 
   const { data: streak } = useStreak();
-  const { data: stats } = useQuery({
+  const { data: stats, isError: statsError } = useQuery({
     queryKey: ["session-stats", sessionId],
     queryFn: () => studySessionApi.getStats(sessionId),
     retry: 1,
@@ -311,7 +313,8 @@ export function SessionDebrief({
   const weakest = !quickStart && workspaceId ? stats?.weakest : null;
   // Fixing mistakes is the practice returners did; it takes the Copilot row's place.
   const askRow = mistakes > 0 && ask && wrong > 0 ? null : ask;
-  const showSteps = (!!deck && !!workspaceId) || (!!askRow && !!onAskCopilot) || mistakes > 0;
+  // "Fix N mistakes" sits right under the main button; the rest are optional extras further down.
+  const showSteps = (!!deck && !!workspaceId) || (!!askRow && !!onAskCopilot);
 
   const primary = handOff ? (
     <Button
@@ -361,21 +364,21 @@ export function SessionDebrief({
       />
       {stats.accuracy !== null ? (
         <StatTile
-          tone="text-success"
+          tone="text-accent"
           icon={<Target className="size-4" />}
           value={`${Math.round(stats.accuracy * 100)}%`}
           label={t("debrief.accuracy")}
         />
       ) : (
         <StatTile
-          tone="text-success"
+          tone="text-accent"
           icon={<CheckCircle2 className="size-4" />}
           value={`${stats.activitiesDone}/${stats.activitiesTotal}`}
           label={t("debrief.done")}
         />
       )}
       <StatTile
-        tone="text-[#0369a1]"
+        tone="text-accent"
         icon={<Clock className="size-4" />}
         value={t("debrief.minutes").replace("{n}", String(stats.minutes))}
         label={t("debrief.time")}
@@ -383,20 +386,20 @@ export function SessionDebrief({
     </>);
 
   return (
-    <div className="mx-auto flex max-w-md flex-col items-center pb-10 pt-2 text-center animate-fade-up">
+    <div className="mx-auto flex max-w-md flex-col items-center pb-10 pt-0 text-center animate-fade-up sm:pt-2">
       <div className="relative" aria-hidden>
         {newUi ? (
-          <Mascot pose="trophy" className="h-[112px] sm:h-[128px]" />
+          <Mascot pose="trophy" className="h-[76px] sm:h-[128px]" />
         ) : (
           <Image src="/illustrations/props/trophy.png" alt="" width={160} height={160} className="w-24" />
         )}
         <ConfettiDots />
       </div>
 
-      <h2 className="mt-4 text-2xl font-bold tracking-tight sm:text-[28px]">
+      <h2 className="mt-2 text-[22px] font-bold tracking-tight sm:mt-4 sm:text-[28px]">
         {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
       </h2>
-      <div className="mt-1.5 min-h-6 text-[15px] leading-6 text-muted-foreground">
+      <div className="mt-1 min-h-6 text-[14.5px] leading-6 text-muted-foreground line-clamp-2 sm:mt-1.5 sm:text-[15px]">
         {verdict ? (
           <MathText text={verdict} />
         ) : debriefLoading ? (
@@ -405,11 +408,11 @@ export function SessionDebrief({
       </div>
 
       {stats && mastery.length > 0 ? (
-        <div className="mt-6 w-full">
+        <div className="mt-4 w-full sm:mt-6">
           <StatsWithMastery tiles={statTiles(stats)} mastery={mastery} />
         </div>
-      ) : (
-      <div className="mt-6 grid w-full grid-cols-3 gap-2.5" role="status">
+      ) : statsError ? null : (
+      <div className="mt-4 grid w-full grid-cols-3 gap-2.5 sm:mt-6" role="status">
         {stats ? (
           statTiles(stats)
         ) : (
@@ -419,16 +422,27 @@ export function SessionDebrief({
       )}
 
       {streakDays !== null && streakDays > 0 && (
-        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#fff1e6] px-3.5 py-1.5 text-[13px] font-semibold text-[#9a3412]">
+        <p className="mt-2.5 inline-flex items-center gap-1.5 rounded-full bg-[#fff1e6] px-3 py-1 text-[13px] sm:mt-3 sm:px-3.5 sm:py-1.5 font-semibold text-[#9a3412]">
           <Flame className={cn("size-4 text-[#f97316]", streakLitDays !== null && "animate-streak-pop")} fill="currentColor" strokeWidth={1.6} />
           {t("rewards.streakDays").replace("{n}", String(streakDays))}
         </p>
       )}
 
-      <div className="mt-7 w-full space-y-1">
+      <div className="mt-4 w-full space-y-2 sm:mt-7">
         {primary}
+        {/* The second step sits right under the first, so both are visible without scrolling. */}
+        {mistakes > 0 && (
+          <div className="overflow-hidden rounded-2xl border border-accent/30 bg-card text-left">
+            <NextStep
+              icon={<RotateCcw className="size-[18px]" />}
+              title={(mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes))}
+              sub={t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)))}
+              href={practiceHref({ sessionId })}
+            />
+          </div>
+        )}
         {(handOff || !quickStart) && (
-          <Button size="lg" variant="ghost" className="w-full text-muted-foreground" onClick={onBack}>
+          <Button size="md" variant="ghost" className="h-11 w-full text-muted-foreground" onClick={onBack}>
             {t("session.backToWorkspace")}
           </Button>
         )}
@@ -440,14 +454,6 @@ export function SessionDebrief({
             {t("habit.nextSmallStep")}
           </h3>
           <div className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
-            {mistakes > 0 && (
-              <NextStep
-                icon={<RotateCcw className="size-[18px]" />}
-                title={(mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes))}
-                sub={t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)))}
-                href={practiceHref({ sessionId })}
-              />
-            )}
             {deck && workspaceId && (
               <NextStep
                 icon={<Layers className="size-[18px]" />}

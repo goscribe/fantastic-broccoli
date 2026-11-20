@@ -40,3 +40,24 @@ html.new-ui {
 .cat-cheer { animation: design-cheer .9s cubic-bezier(.34,1.56,.64,1) both; transform-origin: 50% 100%; }
 
 html.new-ui body { background: #ffffff; }
+
+/*
+ * The signed-in app (shell + session player) in Scribe's own brand: purple
+ * #6952E0 and Nunito, on the redesign's white surfaces. Scoped to the app so
+ * the marketing pages keep their tokens; a points-shop theme (<html
+ * data-accent>) still wins.
+ */
+:root:not([data-accent]) .app-brand {
+  --accent: #6952e0;
+  --accent-dim: #5a43d1;
+  --accent-soft: #eeebfc;
+  --ring: #6952e0;
+  --energy: #6952e0;
+  --energy-soft: #eeebfc;
+}
+.app-brand {
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+}
+.app-brand h1, .app-brand h2 { letter-spacing: -0.015em; }

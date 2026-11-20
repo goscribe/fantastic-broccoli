@@ -351,7 +351,8 @@ input[type="range"].param-slider:active::-moz-range-thumb {
 @media (prefers-reduced-motion: reduce) {
   .animate-answer-pop,
   .animate-answer-shake,
-  .animate-slide-in-right {
+  .animate-slide-in-right,
+  .animate-slide-in-left {
     animation: none !important;
   }
 }
@@ -421,6 +422,13 @@ input[type="range"].param-slider:active::-moz-range-thumb {
 }
 .animate-confetti-fall {
   animation: confetti-fall var(--confetti-duration, 1.6s) ease-in both;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Falling confetti is pure motion: hide it rather than freeze it over the content. */
+  .animate-confetti-fall {
+    animation: none !important;
+    display: none;
+  }
 }
 
 /* Printable artifact sheets: only the .print-sheet subtree is printed, with
