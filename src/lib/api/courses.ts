@@ -31,6 +31,10 @@ export interface CatalogTopic {
   hlOnly?: boolean;
   higherTierOnly?: boolean;
   bcOnly?: boolean;
+  /** IB HL-only or second-year A-level content. */
+  advanced?: boolean;
+  /** Notes and Quick 5 need a plan or exam pass (only while the server's NOTES_PAID_GATE is on). */
+  locked?: boolean;
 }
 
 export interface CatalogUnit {
@@ -89,6 +93,6 @@ export const coursesApi = {
   progress: (workspaceId: string) => rpc<CourseProgress>("course.progress", "query", { workspaceId }),
   enroll: (courseId: string, level?: CourseLevel) =>
     rpc<{ workspaceId: string }>("course.enroll", "mutation", { courseId, ...(level ? { level } : {}) }),
-  startTopic: (input: { courseId: string; topicId: string; level?: CourseLevel }) =>
+  startTopic: (input: { courseId: string; topicId: string; level?: CourseLevel; mode?: "quick5" | "session" }) =>
     rpc<{ workspaceId: string; sessionId: string }>("course.startTopic", "mutation", input),
 };

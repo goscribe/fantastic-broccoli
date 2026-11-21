@@ -1,0 +1,441 @@
+@import "../design/tokens.css";
+
+/*
+ * The look of the public note pages (/notes): a study page, not a document.
+ * Same language as the signed-in app (palette in design/tokens.css): a white
+ * page, white cards with a hairline, near-black text, and purple as the
+ * accent only (primary button, links, the selected thing, progress). Colour
+ * lives in the subject: a course is a tile in its family's hue, and a course
+ * or note opens with a header band in that hue with its illustration
+ * (.subject-band.nl-band). The reading body stays white. The details come
+ * from studying: exam-style question numbers and [marks], lettered answers, a
+ * highlighter on key phrases, a ruled line under the header. Green and rose
+ * only after an answer.
+ *
+ * Everything here is progressive: the page reads in full with JavaScript off,
+ * nothing is hidden until a script has said so, and nothing that moves
+ * changes layout. All motion stops under prefers-reduced-motion.
+ */
+.notes-look {
+  --ok: #1f9d57;
+  --ok-soft: #e7f7ed;
+  --ok-ink: #15703d;
+  --no: #d6455d;
+  --no-soft: #fdecef;
+  --no-ink: #a52a40;
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: var(--page);
+}
+.notes-look h1, .notes-look h2 { letter-spacing: -0.022em; }
+
+@layer components {
+  /* ---------- Surfaces ---------- */
+  .nl-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
+    box-shadow: var(--card-shadow);
+  }
+  /* A question in a list: it sits on the page, split from the next by a hairline, with no box around it. */
+  .nl-q { padding: 22px 0; }
+  .nl-q + .nl-q { border-top: 1px solid var(--border); }
+  .nl-q:first-child { padding-top: 18px; }
+  /* A quiet neutral panel (the practice header, the end-of-note card). Page headers are subject bands, not this. */
+  .nl-panel { background: var(--cream); border-radius: var(--r-panel); }
+
+  /* On a subject band: white type, a white primary button in the band's hue, a glassy second button. */
+  .nl-band .nl-meta { color: rgb(255 255 255 / 0.92); }
+  .nl-band .nl-meta > li:not(:last-child)::after { color: rgb(255 255 255 / 0.7); }
+  .nl-band .nl-btn { background: #fff; color: var(--tile-a); box-shadow: 0 4px 0 0 rgb(0 0 0 / 0.18); }
+  .nl-band .nl-btn:hover { background: #fff; }
+  .nl-band .nl-btn:active { box-shadow: 0 1px 0 0 rgb(0 0 0 / 0.18); }
+  .nl-band .nl-btn-ghost { background: rgb(255 255 255 / 0.16); color: #fff; border-color: rgb(255 255 255 / 0.45); box-shadow: none; }
+  .nl-band .nl-btn-ghost:hover { background: rgb(255 255 255 / 0.24); border-color: rgb(255 255 255 / 0.7); box-shadow: none; }
+  .nl-band .nl-meter, .subject-tile .nl-meter { height: 6px; background: rgb(255 255 255 / 0.3); }
+  .nl-band .nl-meter > span, .subject-tile .nl-meter > span { background: #fff; }
+  .nl-band a:focus-visible, .nl-band button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  /* Phones: the illustration sits in the top-right corner, where the title leaves it room. */
+  @media (max-width: 639px) {
+    .nl-band .subject-tile__art { top: 12px; bottom: auto; right: -8px; height: 104px; opacity: 1; }
+  }
+  @media (min-width: 640px) {
+    .nl-band .subject-tile__art { right: -1%; bottom: -12%; height: min(112%, 300px); }
+  }
+
+  /* The notes home header: the shared time-of-day landscape (.hero-card / .hero-field in tokens.css) behind the headline; a band on phones. */
+  .nl-hero { isolation: isolate; border: 1px solid var(--border); border-radius: var(--r-panel); }
+  /* Its buttons keep their own white fill after dark, so their label stays dark. */
+  .nl-hero .nl-btn-ghost { background: #fff; color: #16161a; }
+  .nl-hero .nl-btn-ghost:hover { background: #f4f4f6; }
+  .nl-hero__field { position: absolute; z-index: -1; inset: 0 0 auto 0; height: 150px; overflow: hidden; pointer-events: none; user-select: none; }
+  @media (min-width: 640px) {
+    .nl-hero__field { inset: 0; height: auto; }
+  }
+  /* A quiet neutral box inside a card (model answers, a formula band). */
+  .nl-well { background: var(--muted); border-radius: var(--r-control); }
+
+  /* ---------- Buttons: chunky, with a lip that presses down ---------- */
+  .nl-btn, .nl-btn-ghost {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: var(--r-button);
+    padding: 0 22px;
+    font-size: 15.5px;
+    font-weight: 800;
+    line-height: 1.15;
+    text-align: center;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease, border-color 0.15s ease;
+    cursor: pointer;
+  }
+  .nl-btn { background: var(--accent); color: #fff; box-shadow: 0 4px 0 0 var(--accent-edge); }
+  .nl-btn:hover { background: var(--accent-dim); }
+  .nl-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 0 var(--accent-edge); }
+  /* The quiet button: a tinted pill, no outline and no lip. */
+  .nl-btn-ghost { background: var(--muted); color: var(--foreground); border: 1.5px solid transparent; border-radius: 999px; }
+  .nl-btn-ghost:hover { background: var(--edge); }
+  .nl-btn-ghost:active { transform: scale(0.98); }
+  .nl-btn-sm { min-height: 40px; padding: 0 16px; font-size: 14.5px; }
+  .nl-btn.nl-btn-sm { border-radius: var(--r-control); }
+
+  /* Meta as one quiet line of text ("3 min read · 5 parts · 10 questions"), not a row of chips. */
+  .nl-meta { display: flex; flex-wrap: wrap; column-gap: 8px; row-gap: 2px; font-size: 14px; font-weight: 700; color: var(--muted-foreground); }
+  .nl-meta > li:not(:last-child)::after { content: "·"; margin-left: 8px; color: var(--faint); }
+  /* Exam-paper marks: "[2 marks]" at the end of the line. */
+  .nl-marks { margin-left: auto; white-space: nowrap; font-size: 13.5px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--foreground); }
+
+  /* Cards and rows that lift a little under the pointer. */
+  .nl-lift { transition: transform 0.2s var(--ease-out), border-color 0.15s ease; }
+  .nl-lift:active { transform: scale(0.985); }
+  @media (hover: hover) {
+    .nl-lift:hover { border-color: var(--border-strong); }
+  }
+
+  /* ---------- Entrance: the header eases up on load (CSS only, opacity/transform only) ---------- */
+  @keyframes nl-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .nl-rise { animation: nl-rise 0.5s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms); }
+  @keyframes nl-cat-in { 0% { opacity: 0; transform: translateY(18px) rotate(6deg) scale(0.9); } 100% { opacity: 1; transform: none; } }
+  .nl-cat-in { animation: nl-cat-in 0.7s var(--ease-spring) 0.12s both; transform-origin: 50% 100%; }
+  @keyframes nl-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+  .nl-bob { animation: nl-bob 3.4s ease-in-out infinite; }
+
+  /* ---------- Reveal on scroll: only elements a script has marked as waiting are hidden ---------- */
+  [data-nl-reveal="wait"] { opacity: 0; transform: translateY(16px); }
+  [data-nl-reveal="in"] { animation: nl-rise 0.55s var(--ease-out) both; }
+  .nl-stage[data-nl-reveal="wait"] { transform: translateY(16px) scale(0.97); }
+
+  /* ---------- Reading progress ---------- */
+  .nl-topbar {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 40;
+    height: 4px;
+    background: transparent;
+    pointer-events: none;
+  }
+  .nl-topbar > span {
+    display: block;
+    height: 100%;
+    border-radius: 0 4px 4px 0;
+    background: var(--accent);
+    transform-origin: left center;
+    transform: scaleX(var(--nl-read, 0));
+    transition: transform 0.15s linear;
+  }
+  .nl-ring circle:last-of-type {
+    stroke-dasharray: 100;
+    stroke-dashoffset: calc(100 - var(--nl-read, 0) * 100);
+    transition: stroke-dashoffset 0.2s linear;
+  }
+  .nl-railbar > span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: var(--accent);
+    transform-origin: left center;
+    transform: scaleX(var(--nl-read, 0));
+    transition: transform 0.2s linear;
+  }
+
+  /* Section number that turns into a tick once the section has been read. */
+  .nl-secnum {
+    position: relative;
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: none;
+    place-items: center;
+    border-radius: 9px;
+    border: 2px solid var(--foreground);
+    color: var(--foreground);
+    font-size: 16px;
+    font-weight: 900;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .nl-secnum { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+  .nl-secnum svg { position: absolute; width: 18px; height: 18px; opacity: 0; transform: scale(0.4); transition: opacity 0.2s ease, transform 0.35s var(--ease-spring); }
+  [data-nl-read] > header .nl-secnum { background: var(--accent); border-color: var(--accent); color: #fff; }
+  [data-nl-read] > header .nl-secnum > span { opacity: 0; }
+  [data-nl-read] > header .nl-secnum svg { opacity: 1; transform: scale(1); }
+
+  /* End of a section: a dot on a line that fills in with a tick when you get there. */
+  .nl-secend { display: flex; align-items: center; gap: 10px; margin-top: 28px; color: var(--faint); font-size: 13px; font-weight: 800; }
+  .nl-secend::after { content: ""; height: 1px; flex: 1; background: var(--border-strong); }
+  .nl-secend i {
+    display: grid;
+    width: 26px;
+    height: 26px;
+    flex: none;
+    place-items: center;
+    border-radius: 999px;
+    border: 2px solid var(--edge);
+    background: var(--card);
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+  }
+  .nl-secend i svg { width: 14px; height: 14px; color: #fff; opacity: 0; transform: scale(0.3); transition: opacity 0.2s ease, transform 0.4s var(--ease-spring); }
+  .nl-secend b { max-width: 0; overflow: hidden; white-space: nowrap; font-weight: 800; opacity: 0; transition: opacity 0.3s ease 0.1s, max-width 0.4s var(--ease-out); }
+  [data-nl-read] > .nl-secend { color: var(--muted-foreground); }
+  [data-nl-read] > .nl-secend i { border-color: var(--foreground); background: var(--foreground); }
+  [data-nl-read] > .nl-secend i svg { opacity: 1; transform: scale(1); }
+  [data-nl-read] > .nl-secend b { max-width: 12em; opacity: 1; }
+
+  /* ---------- Prose ---------- */
+  .nl-prose { font-size: 17px; line-height: 1.7; color: #2b2722; }
+  @media (min-width: 640px) { .nl-prose { font-size: 18px; } }
+  /* Key phrases get a highlighter stroke instead of plain bold. */
+  .nl-prose p strong, .nl-prose li strong {
+    font-weight: 800;
+    color: var(--foreground);
+    background-image: linear-gradient(var(--hl), var(--hl));
+    background-repeat: no-repeat;
+    background-size: 100% 0.5em;
+    background-position: 0 86%;
+    border-radius: 2px;
+  }
+  [data-nl-reveal="wait"] strong { background-size: 0% 0.5em; }
+  [data-nl-reveal="in"] strong { animation: nl-mark 0.7s var(--ease-out) 0.25s both; }
+  @keyframes nl-mark { from { background-size: 0% 0.5em; } to { background-size: 100% 0.5em; } }
+  .nl-lead { font-size: 20px; line-height: 1.5; font-weight: 600; color: var(--foreground); }
+  @media (min-width: 640px) { .nl-lead { font-size: 23px; line-height: 1.45; } }
+  .nl-prose ul.nl-bullets > li { position: relative; padding-left: 26px; }
+  .nl-prose ul.nl-bullets > li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0.62em;
+    top: 0.72em;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--foreground);
+  }
+  .nl-prose ul.nl-bullets ul > li { position: relative; padding-left: 20px; }
+  .nl-prose ul.nl-bullets ul > li::before { content: ""; position: absolute; left: 4px; top: 0.68em; width: 6px; height: 6px; border-radius: 999px; background: var(--border-strong); }
+  /* A formula on its own line sits on a soft band, so the maths has room. */
+  .nl-prose p > .nl-math-block {
+    margin: 12px 0 4px;
+    border-radius: var(--r-control);
+    background: var(--muted);
+    padding: 14px 16px;
+    text-align: center;
+    font-size: 1.06em;
+  }
+  .notes-look .katex { font-size: 1.08em; }
+
+  /* A live figure keeps its reserved height (no shift while it loads); centre it in that space. */
+  .nl-stage [style*="min-height"] { display: flex; flex-direction: column; justify-content: center; }
+
+  /* ---------- Key terms: chips that swap one definition card (radios; no script) ---------- */
+  .nl-terms input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+  .nl-terms label {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    border-radius: var(--r-control);
+    border: 1.5px solid var(--edge);
+    background: var(--card);
+    padding: 0 14px;
+    font-size: 15px;
+    font-weight: 800;
+    box-shadow: 0 3px 0 0 var(--edge);
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .nl-terms label:active { transform: translateY(2px); box-shadow: 0 1px 0 0 var(--edge); }
+  .nl-terms input:checked + label { background: var(--foreground); border-color: var(--foreground); color: #fff; box-shadow: 0 3px 0 0 #000; }
+  .nl-terms input:focus-visible + label { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .nl-defs { display: grid; }
+  .nl-defs > * { grid-area: 1 / 1; visibility: hidden; opacity: 0; transform: translateY(6px) scale(0.985); transition: opacity 0.25s ease, transform 0.35s var(--ease-out), visibility 0s 0.25s; }
+  .nl-terms:has(input[data-i="0"]:checked) .nl-defs > [data-i="0"],
+  .nl-terms:has(input[data-i="1"]:checked) .nl-defs > [data-i="1"],
+  .nl-terms:has(input[data-i="2"]:checked) .nl-defs > [data-i="2"],
+  .nl-terms:has(input[data-i="3"]:checked) .nl-defs > [data-i="3"],
+  .nl-terms:has(input[data-i="4"]:checked) .nl-defs > [data-i="4"],
+  .nl-terms:has(input[data-i="5"]:checked) .nl-defs > [data-i="5"],
+  .nl-terms:has(input[data-i="6"]:checked) .nl-defs > [data-i="6"],
+  .nl-terms:has(input[data-i="7"]:checked) .nl-defs > [data-i="7"] { visibility: visible; opacity: 1; transform: none; transition-delay: 0s; }
+  /* Browsers without :has() simply show every definition, stacked. */
+  @supports not selector(:has(*)) {
+    .nl-defs { display: flex; flex-direction: column; gap: 8px; }
+    .nl-defs > * { visibility: visible; opacity: 1; transform: none; }
+  }
+
+  /* ---------- Worked example: steps on a line, revealed one at a time ---------- */
+  .nl-steps > li { position: relative; display: flex; gap: 12px; padding-bottom: 14px; }
+  .nl-steps > li::before { content: ""; position: absolute; left: 14px; top: 30px; bottom: 0; width: 2px; border-radius: 2px; background: var(--edge); }
+  .nl-steps > li:last-child::before { display: none; }
+  .nl-stepnum {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    flex: none;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--muted);
+    color: var(--foreground);
+    font-size: 14px;
+    font-weight: 900;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  .nl-veil { transition: filter 0.4s var(--ease-out), opacity 0.4s ease; }
+  [data-veiled="true"] > .nl-veil { filter: blur(7px); opacity: 0.45; user-select: none; pointer-events: none; }
+  [data-veiled="true"] > .nl-stepnum { background: var(--muted); color: var(--faint); }
+  [data-veiled="false"] > .nl-stepnum { background: var(--foreground); color: #fff; }
+
+  /* ---------- <details>: opens with an eased height where the browser can ---------- */
+  .nl-details::details-content { block-size: 0; overflow: clip; opacity: 0; transition: block-size 0.35s var(--ease-out), opacity 0.3s ease, content-visibility 0.35s allow-discrete; }
+  .nl-details[open]::details-content { block-size: auto; opacity: 1; }
+  @supports (interpolate-size: allow-keywords) { .nl-details { interpolate-size: allow-keywords; } }
+  .nl-details > summary { list-style: none; cursor: pointer; }
+  .nl-details > summary::-webkit-details-marker { display: none; }
+
+  /* ---------- Practice ---------- */
+  /* Answer options: soft pills on a tint, no outline; a ring and a colour once marked. */
+  .nl-opt {
+    display: flex;
+    width: 100%;
+    min-height: 56px;
+    align-items: center;
+    gap: 12px;
+    border-radius: 28px;
+    background: var(--muted);
+    padding: 11px 14px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.35;
+    transition: transform 0.1s ease, box-shadow 0.15s ease, background-color 0.15s ease, opacity 0.2s ease;
+  }
+  .nl-opt[data-state="idle"] { cursor: pointer; }
+  .nl-opt[data-state="idle"]:active { transform: scale(0.99); }
+  @media (hover: hover) {
+    .nl-opt[data-state="idle"]:hover { background: var(--edge); }
+  }
+  .nl-letter {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    flex: none;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--foreground);
+    font-size: 14px;
+    font-weight: 900;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .nl-opt[data-state="right"] { background: var(--ok-soft); box-shadow: inset 0 0 0 2px var(--ok); }
+  .nl-opt[data-state="right"] .nl-letter { background: var(--ok); color: #fff; }
+  .nl-opt[data-state="wrong"] { background: var(--no-soft); box-shadow: inset 0 0 0 2px var(--no); }
+  .nl-opt[data-state="wrong"] .nl-letter { background: var(--no); color: #fff; }
+  .nl-opt[data-state="dim"] { opacity: 0.55; }
+  @keyframes nl-pop { 0% { transform: scale(0.97); } 45% { transform: scale(1.025); } 100% { transform: scale(1); } }
+  @keyframes nl-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 60% { transform: translateX(5px); } }
+  .nl-pop { animation: nl-pop 0.34s var(--ease-spring); }
+  .nl-shake { animation: nl-shake 0.36s ease-in-out; }
+  @keyframes nl-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .nl-up { animation: nl-up 0.4s var(--ease-out) both; }
+  @keyframes nl-sparkle {
+    0% { transform: translate(-50%, -50%) rotate(var(--a)) translateY(0) scale(0.4); opacity: 1; }
+    100% { transform: translate(-50%, -50%) rotate(var(--a)) translateY(calc(var(--d) * -1)) scale(1); opacity: 0; }
+  }
+  .nl-sparkle { position: absolute; left: 50%; top: 50%; pointer-events: none; animation: nl-sparkle 0.75s var(--ease-out) both; }
+  /* The end of practice: confetti thrown from the cat on a strong score, the score landing with a small overshoot, answer dots popping in one by one. */
+  @keyframes nl-confetti {
+    0% { transform: translate(-50%, -50%) scale(0.3) rotate(0deg); opacity: 0; }
+    12% { opacity: 1; }
+    55% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1) rotate(var(--r)); opacity: 1; }
+    100% { transform: translate(calc(-50% + var(--x) * 1.18), calc(-50% + var(--y) + 56px)) scale(0.9) rotate(calc(var(--r) * 1.8)); opacity: 0; }
+  }
+  .nl-confetti { position: absolute; left: 50%; top: 46%; pointer-events: none; }
+  .nl-confetti > span { position: absolute; left: 0; top: 0; opacity: 0; animation: nl-confetti 1.25s cubic-bezier(0.2, 0.7, 0.3, 1) both; animation-delay: calc(var(--i, 0) * 9ms + 180ms); }
+  @keyframes nl-score { 0% { transform: scale(0.7); opacity: 0; } 60% { transform: scale(1.06); opacity: 1; } 100% { transform: scale(1); } }
+  .nl-score { transform-origin: left bottom; animation: nl-score 0.6s var(--ease-spring) 0.15s both; }
+  .nl-findot { animation: nl-tick 0.34s var(--ease-spring) both; animation-delay: calc(var(--i, 0) * 34ms + 520ms); }
+  .nl-stagger { animation: nl-up 0.45s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms); }
+  @keyframes nl-tick { 0% { transform: scale(0.4); opacity: 0; } 60% { transform: scale(1.18); opacity: 1; } 100% { transform: scale(1); } }
+  .nl-dot {
+    display: grid;
+    width: 22px;
+    height: 22px;
+    flex: none;
+    place-items: center;
+    border-radius: 999px;
+    border: 2px solid var(--edge);
+    background: var(--card);
+    color: #fff;
+  }
+  .nl-dot svg { width: 12px; height: 12px; }
+  .nl-dot[data-s="right"] { border-color: var(--ok); background: var(--ok); animation: nl-tick 0.4s var(--ease-spring) both; }
+  .nl-dot[data-s="wrong"] { border-color: var(--no); background: var(--no); animation: nl-tick 0.4s var(--ease-spring) both; }
+  .nl-dot[data-s="next"] { border-color: var(--accent); }
+
+  /* ---------- Unit path on the course pages ---------- */
+  .nl-path > li { position: relative; }
+  .nl-path > li::before { content: ""; position: absolute; left: 27px; top: 0; bottom: 0; width: 2px; background: var(--border-strong); }
+  .nl-path > li:first-child::before { top: 50%; }
+  .nl-path > li:last-child::before { bottom: 50%; }
+  .nl-path > li:only-child::before { display: none; }
+  .nl-node {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 24px;
+    height: 24px;
+    flex: none;
+    place-items: center;
+    border-radius: 999px;
+    border: 2.5px solid var(--foreground);
+    background: var(--card);
+    color: #fff;
+    transition: background-color 0.2s ease, transform 0.25s var(--ease-spring);
+  }
+  .nl-node svg { width: 13px; height: 13px; opacity: 0; }
+  .nl-node[data-empty] { border-color: var(--border-strong); border-style: dashed; }
+  [data-nl-topic][data-state="started"] .nl-node { border-color: var(--accent); }
+  [data-nl-topic][data-state="started"] .nl-node::after { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--accent); }
+  [data-nl-topic][data-state="done"] .nl-node { border-color: var(--accent); background: var(--accent); }
+  [data-nl-topic][data-state="done"] .nl-node svg { opacity: 1; }
+  @media (hover: hover) { a:hover > .nl-node { transform: scale(1.15); } }
+  .nl-meter { height: 8px; overflow: hidden; border-radius: 999px; background: var(--muted); }
+  .nl-meter > span { display: block; height: 100%; width: 100%; border-radius: 999px; background: var(--accent); transform-origin: left center; transform: scaleX(var(--v, 0)); transition: transform 0.9s var(--ease-out) 0.1s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nl-rise, .nl-cat-in, .nl-bob, .nl-pop, .nl-shake, .nl-up, .nl-dot, [data-nl-reveal="in"], [data-nl-reveal="in"] strong { animation: none !important; }
+    [data-nl-reveal="wait"] { opacity: 1; transform: none; }
+    [data-nl-reveal="wait"] strong { background-size: 100% 0.5em; }
+    .nl-sparkle, .nl-confetti { display: none; }
+    .nl-score, .nl-findot, .nl-stagger { animation: none !important; }
+    .nl-btn, .nl-btn-ghost, .nl-opt, .nl-lift, .nl-terms label, .nl-defs > *, .nl-veil, .nl-secnum svg, .nl-secend i svg, .nl-secend b, .nl-node, .nl-meter > span, .nl-topbar > span, .nl-details::details-content {
+      transition: none !important;
+    }
+    .nl-btn:active, .nl-btn-ghost:active, .nl-opt:active, .nl-lift:hover, .nl-lift:active, .nl-terms label:active { transform: none; }
+  }
+}
+
+/* In-page links glide (not under reduced motion). */
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.notes-look) { scroll-behavior: smooth; }
+}
