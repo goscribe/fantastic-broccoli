@@ -112,7 +112,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
     <div className="design-root app-brand flex h-dvh overflow-hidden bg-[var(--page)] text-foreground">
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:translate-x-0 md:border-r-0 md:bg-transparent",
+          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:translate-x-0 md:bg-white",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
           rail && "md:w-[68px] md:px-2.5",
         )}
