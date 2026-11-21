@@ -1,4 +1,5 @@
 import { toast } from "sonner";
+import { limitSentence } from "../wall";
 
 /** Prefix the server puts on every free-plan cap error (see server PLAN_LIMIT_ERROR_PREFIX). */
 export const PLAN_LIMIT_ERROR_PREFIX = "Free plan limit reached";
@@ -31,7 +32,7 @@ let lastAnnounced: { message: string; at: number } | null = null;
 /**
  * Tells the learner a plan limit was hit. The subscribe wall claims the
  * event when it can show; otherwise (wall not mounted, billing paused,
- * exempt route, signed-out shell…) the server's reason is shown as a toast,
+ * exempt route, signed-out shell…) the reason is shown as a toast in plain words,
  * so a refusal is never silent. Repeats within a moment (the same error
  * surfaced by the transport and by the call site) are ignored.
  */
@@ -45,5 +46,6 @@ export function announcePlanLimit(message: string): void {
     cancelable: true,
   });
   const unclaimed = window.dispatchEvent(event);
-  if (unclaimed) refusalToast.show(message);
+  // In plain words: never "tokens" or "workspaces" (see wall.ts limitSentence).
+  if (unclaimed) refusalToast.show(limitSentence(message) ?? message);
 }

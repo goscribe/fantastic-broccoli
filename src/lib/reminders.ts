@@ -156,3 +156,28 @@ export function urlBase64ToUint8Array(base64String: string): Uint8Array<ArrayBuf
   for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
   return out;
 }
+
+/** The week planner's untouched server default window (StudyPlan windowStart/windowEnd). */
+export const PLANNER_DEFAULT_WINDOW = { windowStart: "15:00", windowEnd: "19:00" } as const;
+
+/** How long the planner window is when it comes from the study-time answer. */
+export const PLANNER_WINDOW_FROM_STUDY_TIME_MIN = 120;
+
+/**
+ * The planner study window implied by the habit prompt's "When do you usually
+ * study?" answer, or null when the student already chose their own window or
+ * free times (never overwritten). The window starts at that time and runs two
+ * hours, ending by 23:59.
+ */
+export function plannerWindowFromStudyTime(
+  plan: { windowStart: string; windowEnd: string; availability?: unknown[] | null },
+  minute: number,
+): { windowStart: string; windowEnd: string } | null {
+  if (Array.isArray(plan.availability) && plan.availability.length > 0) return null;
+  if (plan.windowStart !== PLANNER_DEFAULT_WINDOW.windowStart || plan.windowEnd !== PLANNER_DEFAULT_WINDOW.windowEnd) return null;
+  if (!Number.isFinite(minute) || minute < 0 || minute >= 24 * 60) return null;
+  const start = Math.floor(minute);
+  const end = Math.min(start + PLANNER_WINDOW_FROM_STUDY_TIME_MIN, 23 * 60 + 59);
+  if (end <= start) return null;
+  return { windowStart: minuteToTimeInput(start), windowEnd: minuteToTimeInput(end) };
+}

@@ -1,6 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import {
+  plannerWindowFromStudyTime,
   STUDY_TIME_PRESETS,
   canAskPush,
   formatStudyTime,
@@ -110,4 +111,12 @@ describe("study time helpers", () => {
   it("decodes the VAPID key", () => {
     assert.deepEqual(Array.from(urlBase64ToUint8Array("AQID_w")), [1, 2, 3, 255]);
   });
+});
+
+it("the habit prompt's study time places the planner window, but never over the student's own", () => {
+  const fresh = { windowStart: "15:00", windowEnd: "19:00", availability: null };
+  assert.deepEqual(plannerWindowFromStudyTime(fresh, 17 * 60), { windowStart: "17:00", windowEnd: "19:00" });
+  assert.deepEqual(plannerWindowFromStudyTime(fresh, 22 * 60 + 30), { windowStart: "22:30", windowEnd: "23:59" });
+  assert.equal(plannerWindowFromStudyTime({ ...fresh, windowStart: "16:00" }, 17 * 60), null, "own window kept");
+  assert.equal(plannerWindowFromStudyTime({ ...fresh, availability: [{ weekday: 1, start: "16:00", end: "18:00" }] }, 17 * 60), null, "own free times kept");
 });
