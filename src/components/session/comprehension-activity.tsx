@@ -1,5 +1,6 @@
 "use client";
 
+import { MarkBadge, PlayActions, PlayDone, PlayPrimary, playField, playLink } from "@/components/session/play-ui";
 import { useNewUi } from "@/lib/new-ui";
 import { useState } from "react";
 import { ComprehensionContent, ComprehensionEvaluation } from "@/types";
@@ -69,6 +70,87 @@ export function ComprehensionActivity({
       setEvaluating(false);
     }
   };
+
+  if (newUi) {
+    const last = evaluations[evaluations.length - 1];
+    if (hasPassed) {
+      return (
+        <PlayDone
+          title={t("session.compConfirmed")}
+          sub={`${t("session.compUnderstoodIn")} ${evaluations.length} ${evaluations.length === 1 ? t("session.attemptNoun") : t("session.attemptsNoun")}`}
+          action={t("session.continueNext")}
+          onAction={onComplete}
+        >
+          {last?.feedback && (
+            <p className="text-[15px] leading-6 text-foreground/80">
+              <MarkdownText text={last.feedback} />
+            </p>
+          )}
+        </PlayDone>
+      );
+    }
+    return (
+      <div className="space-y-4">
+        {showOriginal ? (
+          <>
+            <p data-scroll-line className="text-[13px] font-semibold text-muted-foreground">{t("session.compReadInstruction")}</p>
+            {/* The passage is the page: reading-size text with nothing around it. */}
+            <div className="life-rise whitespace-pre-wrap text-[18px] leading-[1.7] text-foreground sm:text-[19px]">
+              <MarkdownText text={content.originalText} />
+            </div>
+            <PlayActions className="pt-1">
+              <PlayPrimary onClick={() => setShowOriginal(false)}>{t("session.compReadDone")}</PlayPrimary>
+            </PlayActions>
+          </>
+        ) : (
+          <>
+            <p data-scroll-line className="text-[13px] font-semibold text-muted-foreground">
+              {t("session.attempt")} {attemptNumber}: {t("session.compWriteBack")}
+            </p>
+            {last && !last.passed && (
+              <div className="life-rise flex items-start gap-3" role="status">
+                <MarkBadge ok={false} className="mt-0.5 !size-8 [&>svg]:!size-5" />
+                <div className="min-w-0 text-[15px] leading-6 text-foreground/80">
+                  <MarkdownText text={last.feedback} />
+                </div>
+              </div>
+            )}
+            <textarea
+              value={userText}
+              onChange={(e) => setUserText(e.target.value)}
+              placeholder={t("session.compPlaceholder")}
+              aria-label={t("session.compPlaceholder")}
+              className={cn(playField, "h-44")}
+            />
+            {error && <p className="text-[13.5px] font-bold text-rose-700" role="alert">{error}</p>}
+            <PlayActions>
+              <button type="button" onClick={() => setShowOriginal(true)} className={cn(playLink, "justify-center sm:mr-3")}>
+                {t("session.reReadOriginal")}
+              </button>
+              <PlayPrimary onClick={handleSubmit} disabled={userText.trim().length < 20 || evaluating}>
+                {evaluating && <Loader2 className="mr-2 size-4 animate-spin" />}
+                {evaluating ? t("session.evaluating") : t("session.submit")}
+              </PlayPrimary>
+            </PlayActions>
+            {userRewrites.length > 0 && (
+              <details className="text-[13.5px] text-muted-foreground">
+                <summary className="flex min-h-11 cursor-pointer items-center font-bold hover:text-foreground">
+                  {userRewrites.length === 1 ? t("session.yourPreviousAttempt") : t("session.yourPreviousAttempts")}
+                </summary>
+                <div className="space-y-3 pb-2">
+                  {userRewrites.map((rewrite, i) => (
+                    <p key={i} className="border-l-[3px] border-[var(--edge)] pl-4 italic leading-6">
+                      &ldquo;{rewrite}&rdquo;
+                    </p>
+                  ))}
+                </div>
+              </details>
+            )}
+          </>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">

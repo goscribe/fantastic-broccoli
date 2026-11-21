@@ -925,7 +925,7 @@ export default function SessionDetailPage() {
         <div className="relative flex min-w-0 flex-1 flex-col">
           {/* The top bar sits in the same column as the content under it (same gutters, same max width), so the step bar and the question share their edges. */}
           <div className="px-4 pt-[max(0.5rem,env(safe-area-inset-top))] sm:px-10 sm:pt-4">
-            <div className={cn("mx-auto w-full", activeActivity ? "max-w-3xl" : "max-w-md")}>
+            <div className={cn("mx-auto w-full", activeActivity ? "max-w-3xl" : "max-w-2xl")}>
               <div className="flex items-center gap-1.5">
                 <button
                   type="button"
@@ -966,7 +966,7 @@ export default function SessionDetailPage() {
               navDirection === "back" ? "animate-slide-in-left" : "animate-slide-in-right",
             )}
           >
-            <div className="mx-auto w-full max-w-3xl">
+            <div className={cn("mx-auto w-full", activeActivity ? "max-w-3xl" : "max-w-2xl")}>
               {showExtendPrompt && (
                 <div className="mb-5 flex flex-wrap items-center gap-3 rounded-[22px] bg-muted px-5 py-4 animate-fade-up">
                   <div className="min-w-56 flex-1">
@@ -1013,7 +1013,7 @@ export default function SessionDetailPage() {
                   </ContentRepairProvider>
                 </>
               ) : (
-                <SessionDebrief sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
+                <SessionDebrief activities={activities} sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
               )}
             </div>
           </div>

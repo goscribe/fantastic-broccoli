@@ -580,7 +580,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
       />
       )}
       {!brandNew && (
-      <div className={cn("w-full shrink-0 flex-col lg:w-[300px]", home ? "rail-flat hidden lg:flex" : "flex gap-3.5")}>
+      <div className={cn("w-full shrink-0 flex-col lg:w-[300px]", home ? "rail-flat hidden lg:flex" : "rail-flat flex")}>
         {!home && loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
         {!home && suggested && (() => {
           const { done, total, next } = sessionProgress(suggested);

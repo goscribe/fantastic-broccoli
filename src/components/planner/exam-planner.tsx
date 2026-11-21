@@ -147,7 +147,7 @@ export function ExamPlanner() {
 function EmptyPlan({ onAdd }: { onAdd: () => void }) {
   const { t } = useI18n();
   return (
-    <div className="flex flex-col items-center rounded-3xl border border-border px-6 py-10 text-center sm:py-14">
+    <div className="flex flex-col items-center px-6 py-10 text-center sm:py-14">
       <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob h-28 w-auto" />
       <h2 className="mt-4 text-[20px] font-bold tracking-tight">{t("ep.empty.title")}</h2>
       <p className="mt-2 max-w-[460px] text-[14px] leading-relaxed text-muted-foreground">{t("ep.empty.body")}</p>
@@ -243,7 +243,7 @@ function CoverageBar({ exam }: { exam: ExamSummary }) {
 function CountdownRow({ exam }: { exam: ExamSummary }) {
   const { t, locale } = useI18n();
   return (
-    <div className="flex items-center gap-3.5 rounded-2xl border border-border p-3.5">
+    <div className="flex items-center gap-3.5 py-2.5">
       <Countdown days={exam.daysLeft} />
       <div className="min-w-0 flex-1">
         <div className="truncate text-[14px] font-semibold">{exam.title}</div>

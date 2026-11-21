@@ -1,5 +1,6 @@
 "use client";
 
+import { ItemDots, RunBadge, runOfRight } from "@/components/session/play-ui";
 import { useEffect, useRef, useState } from "react";
 import { McqOptionBody, McqQuestionBody, optionsHaveFigures } from "@/components/session/mcq-rich";
 import { McqContent } from "@/types";
@@ -145,6 +146,9 @@ export function McqActivity({
     goTo(index + 1);
   };
 
+  /** Each question's mark so far: true right, false wrong, null not answered. */
+  const marks = answersByQ.map((a, i) => (a === null ? null : a === content.questions[i].correctIndex));
+
   return (
     <div className="space-y-4">
       <ConfettiBurst burst={burst} />
@@ -167,7 +171,11 @@ export function McqActivity({
           {content.questions.length}
           {index > 0 && ` · ${correctCount} ${t("session.correctSoFar")}`}
         </span>
-        <div className={cn("flex gap-1", newUi ? "w-24 shrink-0 sm:w-32" : "w-32")} aria-hidden>
+        {newUi && <RunBadge className="mr-auto" run={runOfRight(marks, revealed ? index + 1 : index)} />}
+        {newUi ? (
+          <ItemDots current={index} states={marks.map((m, i) => (m === null || (i === index && !revealed) ? "todo" : m ? "right" : "wrong"))} />
+        ) : (
+        <div className="flex gap-1 w-32" aria-hidden>
           {content.questions.map((_, i) => (
             <div
               key={i}
@@ -183,6 +191,7 @@ export function McqActivity({
             />
           ))}
         </div>
+        )}
       </div>
 
       <p key={`q-${index}`} data-scroll-line className={newUi ? "life-rise text-[20px] font-extrabold leading-[1.3] sm:text-[22px]" : "text-sm font-medium leading-relaxed"}>

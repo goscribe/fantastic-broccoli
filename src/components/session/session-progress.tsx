@@ -6,6 +6,7 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import "@/lib/i18n/rewards";
 import { cn } from "@/lib/utils";
+import "@/app/design/design.css";
 import type { SessionActivity } from "@/types";
 
 /** How long the reward card stays before the next activity opens on its own. */
@@ -104,18 +105,16 @@ export function SessionStepBar({
               title={activity.title}
               className="group flex w-full min-w-0 py-1.5 disabled:cursor-default"
             >
-              <span
-                className={cn(
-                  "block h-2.5 w-full rounded-full transition-colors duration-500",
-                  done
-                    ? "bg-accent"
-                    : skipped
-                      ? "bg-accent/30"
-                      : current
-                        ? "bg-accent/35"
-                        : "bg-border group-hover:bg-border-strong",
-                )}
-              />
+              {/* The track; a finished step fills in from the left, the step you are on carries a slow sheen. */}
+              <span className={cn("relative block h-2.5 w-full overflow-hidden rounded-full bg-border", !done && !current && !skipped && "group-hover:bg-border-strong")}>
+                {done ? (
+                  <span key="done" className="play-fill absolute inset-0 rounded-full bg-accent" />
+                ) : skipped ? (
+                  <span className="absolute inset-0 bg-accent/30" />
+                ) : current ? (
+                  <span className="play-sheen absolute inset-0 bg-accent/35" />
+                ) : null}
+              </span>
             </button>
           </li>
         );

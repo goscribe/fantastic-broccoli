@@ -1,9 +1,8 @@
 "use client";
 
 import { Mascot } from "@/components/rewards/mascot";
-import { SparkleBurst } from "@/components/graphics/sparkle-burst";
 import { useCountUp } from "@/lib/use-count-up";
-import { Check, X } from "lucide-react";
+import { MarkBadge } from "@/components/session/play-ui";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import "@/app/design/design.css";
@@ -41,15 +40,7 @@ export function FeedbackCard({
           className={cn("pointer-events-none absolute right-0 top-0 h-[58px] sm:h-[76px]", ok && "cat-cheer")}
         />
         <div className="relative flex items-center gap-3 pr-16 sm:pr-20">
-          <span
-            className={cn(
-              "relative grid size-10 shrink-0 place-items-center rounded-full text-white",
-              ok ? "design-pop bg-emerald-600" : "bg-rose-600",
-            )}
-          >
-            {ok && <SparkleBurst burst={1} />}
-            {ok ? <Check className="size-6" strokeWidth={3.5} /> : <X className="size-6" strokeWidth={3.5} />}
-          </span>
+          <MarkBadge ok={ok} />
           <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-1">
             <span className={cn("text-[20px] font-extrabold", ok ? "text-emerald-800" : "text-rose-800")}>{title}</span>
             {ok && (

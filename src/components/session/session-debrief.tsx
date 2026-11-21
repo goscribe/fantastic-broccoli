@@ -17,8 +17,13 @@ import {
   ChevronDown,
   ChevronRight,
 } from "lucide-react";
-import { Mascot } from "@/components/rewards/mascot";
-import { SubjectBand } from "@/components/learn/subject-tile";
+import { Flame } from "lucide-react";
+import { Mascot, type MascotPose } from "@/components/rewards/mascot";
+import { restoredDraft } from "@/lib/use-activity-draft";
+import { bandCelebrates, questionTrail, resultBand, resultDots, type ResultBand } from "@/lib/session-result";
+import type { SessionActivity } from "@/types";
+import "@/lib/i18n/finish";
+import "@/app/design/design.css";
 import { useStreak } from "@/lib/rewards";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -39,7 +44,7 @@ import { HabitPrompt } from "@/components/reminders/habit-prompt";
 import "@/lib/i18n/habits";
 import "@/lib/i18n/mistakes";
 import { fixMinutes, masteryRow, practiceHref } from "@/lib/mistakes";
-import type { ApiSessionStats } from "@/lib/api/study-session";
+import type { ApiSessionDebrief, ApiSessionStats } from "@/lib/api/study-session";
 
 /** How long the mastery rows get on screen before the study-time sheet opens over them. */
 const MASTERY_READ_MS = 4000;
@@ -131,17 +136,15 @@ type MasteryChange = NonNullable<ApiSessionStats["mastery"]>[number];
  * another card. The bar shows where the topic was (muted) and what this
  * session added (accent).
  */
-function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: MasteryChange[] }) {
+function MasteryRows({ mastery, className, phoneMax = 2 }: { mastery: MasteryChange[]; className?: string; phoneMax?: number }) {
   const { t } = useI18n();
   return (
-    <div className="w-full" role="status">
-      <div className={slipRow}>{tiles}</div>
-      <ul className="mt-1 space-y-3.5 border-t border-border px-1 pb-1 pt-4 text-left" aria-label={t("debrief.masteryTitle")}>
+      <ul className={className} aria-label={t("debrief.masteryTitle")}>
         {mastery.map((m, i) => {
           const { before, after, delta, base, gain } = masteryRow(m);
           return (
             // Phones: two rows keep the next step above the fold.
-            <li key={m.topic} className={cn(i >= 2 && "max-sm:hidden")}>
+            <li key={m.topic} className={cn(i >= phoneMax && "max-sm:hidden")}>
               <div className="flex items-baseline justify-between gap-3 text-[13.5px]">
                 <span className="min-w-0 truncate font-semibold">{m.label}</span>
                 <span
@@ -175,7 +178,113 @@ function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: Maste
           );
         })}
       </ul>
+  );
+}
+
+function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: MasteryChange[] }) {
+  return (
+    <div className="w-full" role="status">
+      <div className={slipRow}>{tiles}</div>
+      <MasteryRows mastery={mastery} className="mt-1 space-y-3.5 border-t border-border px-1 pb-1 pt-4 text-left" />
     </div>
+  );
+}
+
+/** The cat's reaction to the result: proud when it went well, at work when it was fine, thoughtful (never sad) when it was hard. */
+const BAND_POSE: Record<ResultBand, MascotPose> = { perfect: "trophy", strong: "cheer", okay: "pencil", rough: "think", done: "book" };
+
+/** Confetti in the tile colours and the cat's orange; no purple. */
+const CONFETTI_COLORS = ["#f6a53b", "#ffd166", "#34b27b", "#4f8df7", "#ef5d7a", "#ffffff"];
+
+/** Thrown from the cat, once, on a strong result. Positions are fixed, so server and client agree. */
+function FinishConfetti({ count = 38 }: { count?: number }) {
+  return (
+    <span aria-hidden className="finish-confetti">
+      {Array.from({ length: count }, (_, i) => {
+        // A fan over the top half, biased up and to the left where the words are; lengths vary so it reads as thrown.
+        const angle = (-200 + (220 * i) / (count - 1) + ((i * 37) % 17) - 8) * (Math.PI / 180);
+        const reach = 110 + ((i * 53) % 150);
+        const long = i % 3 !== 0;
+        return (
+          <span
+            key={i}
+            style={{
+              width: long ? 6 : 8,
+              height: long ? 12 : 8,
+              borderRadius: long ? 2 : 999,
+              background: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+              ["--x" as string]: `${Math.round(Math.cos(angle) * reach)}px`,
+              ["--y" as string]: `${Math.round(Math.sin(angle) * reach)}px`,
+              ["--r" as string]: `${((i * 71) % 300) - 150}deg`,
+              ["--i" as string]: i,
+            }}
+          />
+        );
+      })}
+    </span>
+  );
+}
+
+/** One dot per answer: a filled green dot for a right one, an open ring for one to fix (shape as well as colour). */
+function AnswerDots({ dots, correct, wrong }: { dots: boolean[]; correct: number; wrong: number }) {
+  const { t } = useI18n();
+  return (
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+      <ol
+        className="flex flex-wrap items-center gap-[7px]"
+        aria-label={t("finish.answersAria").replace("{c}", String(correct)).replace("{n}", String(wrong))}
+      >
+        {dots.map((ok, i) => (
+          <li
+            key={i}
+            aria-hidden
+            style={{ ["--i" as string]: i }}
+            className={cn("finish-dot size-3.5 rounded-full", ok ? "bg-emerald-500" : "border-[2.5px] border-rose-400")}
+          />
+        ))}
+      </ol>
+      {wrong > 0 && (
+        <span className="text-[13.5px] font-bold text-muted-foreground">{t("finish.toFix").replace("{n}", String(wrong))}</span>
+      )}
+    </div>
+  );
+}
+
+/** A secondary action at the end of a session: words on the page, underlined, with a quiet note after them. */
+function TextAction({
+  title,
+  sub,
+  href,
+  onClick,
+  disabled,
+  i,
+}: {
+  title: ReactNode;
+  sub?: ReactNode;
+  href?: string;
+  onClick?: () => void;
+  disabled?: boolean;
+  i: number;
+}) {
+  const body = (
+    <>
+      <span className="font-bold text-foreground underline decoration-border-strong underline-offset-4 group-hover:decoration-foreground">{title}</span>
+      {sub && <span className="text-[13px] text-muted-foreground">{sub}</span>}
+    </>
+  );
+  const cls = "group flex min-h-11 w-full flex-wrap items-center gap-x-2.5 gap-y-0 py-1.5 text-left text-[14.5px] leading-5 focus-visible:outline-none focus-visible:[&>span:first-child]:decoration-foreground disabled:opacity-60";
+  return (
+    <li className="life-rise" style={{ ["--i" as string]: i }}>
+      {href ? (
+        <Link href={href} className={cls}>
+          {body}
+        </Link>
+      ) : (
+        <button type="button" onClick={onClick} disabled={disabled} className={cls}>
+          {body}
+        </button>
+      )}
+    </li>
   );
 }
 
@@ -193,7 +302,10 @@ export function SessionDebrief({
   sessionBonus = 0,
   streakLitDays = null,
   onAskCopilot,
+  activities,
 }: {
+  /** The session's activities: their saved answers draw the row of answer dots. */
+  activities?: SessionActivity[];
   onBack: () => void;
   /** Opens Copilot with this text in the input (the learner sends it). */
   onAskCopilot?: (prompt: string) => void;
@@ -373,46 +485,215 @@ export function SessionDebrief({
       />
     </>);
 
-  return (
-    <div className={cn("mx-auto flex max-w-md flex-col items-center pb-10 pt-0 animate-fade-up sm:pt-2", !newUi && "text-center")}>
-      {newUi ? (
-        // The result, on a band in the subject's colour: its illustration on the right, the cat with the trophy on the left.
-        <SubjectBand match={subjectTitle} artClassName="!-right-[10%] !-bottom-[14%] !h-[86%] max-sm:!h-[70%]" className="flex w-full items-center gap-3 py-5 pl-4 pr-5 text-left sm:gap-5 sm:py-7 sm:pl-6">
-          <div className="relative shrink-0" aria-hidden>
-            <SparkleBurst burst={1} count={10} distance={46} />
-            <Mascot pose="trophy" className="cat-cheer relative h-[92px] drop-shadow-[0_6px_10px_rgba(0,0,0,0.18)] sm:h-[120px]" />
-          </div>
-          <div className="min-w-0 max-w-[58%] sm:max-w-[52%]">
-            <h2 className="text-balance text-[26px] font-extrabold leading-[1.1] tracking-tight sm:text-[32px]">
-              {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
-            </h2>
-            <div className="subject-tile__sub mt-1.5 text-[14.5px] font-semibold leading-snug line-clamp-2 sm:text-[15.5px]">
-              {verdict ? (
-                <MathText text={verdict} />
-              ) : debriefLoading ? (
-                <span className="inline-block h-4 w-40 rounded-full bg-white/30 align-middle" />
-              ) : null}
+  if (newUi) {
+    const band = resultBand(stats?.accuracy);
+    const celebrate = !!stats && bandCelebrates(band);
+    // Today's streak day beats the pencil: the flame is the reward the student just earned.
+    const pose: MascotPose = band === "okay" && streakLitDays ? "flame" : BAND_POSE[band];
+    const pct = stats && stats.accuracy !== null ? Math.round(stats.accuracy * 100) : null;
+    const dots = stats ? resultDots(stats.answered, stats.correct, activities ? questionTrail(activities, restoredDraft) : []) : null;
+    // Mistakes to fix come first; a Quick 5 keeps its hand-off to the full session as the main step.
+    const fixFirst = mistakes > 0 && !handOff;
+    const fixTitle = (mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes));
+    const fixSub = t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)));
+    const mainButton = "btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold sm:w-auto sm:min-w-[300px]";
+    // What the main button would have been, as a text link under "Fix N mistakes".
+    const demoted = !fixFirst ? null : quickStart ? (
+      <TextAction i={8} title={t("debrief.continue")} onClick={onBack} />
+    ) : weakest ? (
+      <TextAction
+        i={0}
+        title={t("debrief.nextTopic").replace("{topic}", weakest.label)}
+        onClick={() => startWeakest.mutate(weakest.label)}
+        disabled={startWeakest.isPending}
+      />
+    ) : (
+      <TextAction i={8} title={t("session.reviewDueCards")} href="/flashcards/review" />
+    );
+    return (
+      <div className="mx-auto flex w-full max-w-2xl flex-col pb-10 text-left" data-debrief data-band={stats ? band : undefined}>
+        {/* One moment, in the home banner's own language: the scene for the student's time of day, the cat reacting to the result, the score. */}
+        <section
+          className="hero-card life-rise relative isolate w-full overflow-hidden rounded-[var(--r-panel)] border border-border px-5 pb-5 pt-[176px] sm:min-h-[292px] sm:px-9 sm:pb-8 sm:pt-8"
+          aria-labelledby="finish-title"
+        >
+          <div aria-hidden className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[160px] sm:inset-0 sm:h-auto">
+            <div className="absolute bottom-[20px] left-1/2 h-[118px] -translate-x-1/2 sm:bottom-[7%] sm:left-auto sm:right-[9%] sm:h-[196px] sm:translate-x-0">
+              <span className="hero-field__ground" />
+              {celebrate && <FinishConfetti />}
+              {stats && band === "okay" && <SparkleBurst burst={1} count={10} distance={64} />}
+              <Mascot pose={stats ? pose : "book"} key={stats ? pose : "wait"} className={cn("relative h-full", celebrate ? "cat-cheer" : "cat-peek")} priority />
             </div>
           </div>
-        </SubjectBand>
-      ) : (
-        <>
-          <div className="relative" aria-hidden>
-            <Image src="/illustrations/props/trophy.png" alt="" width={160} height={160} className="w-24" />
-            <ConfettiDots />
-          </div>
-          <h2 className="mt-3 text-[30px] font-extrabold tracking-tight sm:mt-5 sm:text-[36px]">
-            {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
+          <p className="hero-eyebrow relative text-[13.5px] font-extrabold">
+            {[subjectTitle, t(quickStart ? "debrief.quick5Complete" : "debrief.complete")].filter(Boolean).join(" · ")}
+          </p>
+          <h2 id="finish-title" className="relative mt-1.5 text-balance text-[30px] font-extrabold leading-[1.08] tracking-tight sm:max-w-[58%] sm:text-[38px]">
+            {stats ? t(band === "done" ? (quickStart ? "debrief.quick5Complete" : "debrief.complete") : `finish.${band}`) : statsError ? t(quickStart ? "debrief.quick5Complete" : "debrief.complete") : <span className="skeleton inline-block h-9 w-52 rounded-full align-middle" />}
           </h2>
-          <div className="mt-1 min-h-6 text-[14.5px] leading-6 text-muted-foreground line-clamp-2 sm:mt-1.5 sm:text-[15px]">
+          <div className="relative mt-1.5 min-h-[22px] text-[15.5px] font-semibold leading-snug text-foreground/75 line-clamp-2 sm:max-w-[52%]">
             {verdict ? (
               <MathText text={verdict} />
             ) : debriefLoading ? (
-              <span className="inline-block h-4 w-56 animate-pulse rounded-full bg-muted align-middle" />
+              <span className="skeleton inline-block h-4 w-44 rounded-full align-middle" />
+            ) : stats ? (
+              t(`finish.${band}Sub`)
             ) : null}
           </div>
-        </>
-      )}
+          {stats ? (
+            <p className="relative mt-4 flex items-baseline gap-3 sm:mt-6" role="status">
+              <span className="finish-score text-[60px] font-extrabold leading-[0.9] tracking-tight tabular-nums sm:text-[76px]">
+                {pct !== null ? (
+                  <>
+                    <CountUp value={pct} />
+                    <span className="text-[0.55em]">%</span>
+                  </>
+                ) : (
+                  `${stats.activitiesDone}/${stats.activitiesTotal}`
+                )}
+              </span>
+              <span className="text-[15px] font-bold leading-tight text-foreground/75">
+                {pct !== null
+                  ? t("finish.rightOf").replace("{c}", String(stats.correct)).replace("{n}", String(stats.answered))
+                  : t("debrief.done")}
+              </span>
+            </p>
+          ) : statsError ? null : (
+            <div className="relative mt-4 sm:mt-6" role="status">
+              <span className="skeleton block h-[60px] w-40 rounded-2xl sm:h-[72px]" />
+            </div>
+          )}
+        </section>
+
+        {/* What was earned: numbers on the page, ticking up; no tiles. */}
+        {stats && (
+          <ul className="mt-5 flex flex-wrap items-baseline gap-x-7 gap-y-2 px-1 sm:mt-6" aria-label={t("debrief.points")}>
+            <li className="life-rise flex items-baseline gap-1.5" style={{ ["--i" as string]: 2 }}>
+              <span className="text-[24px] font-extrabold leading-none tabular-nums"><CountUp value={points} prefix="+" /></span>
+              <span className="text-[13.5px] font-bold text-muted-foreground">{t("debrief.points").toLowerCase()}</span>
+            </li>
+            {streakDays !== null && streakDays > 0 && (
+              <li className="life-rise flex items-baseline gap-1.5" style={{ ["--i" as string]: 3 }}>
+                <Flame aria-hidden className={cn("size-[22px] shrink-0 self-center text-[var(--flame)]", streakLitDays !== null && "finish-flame")} fill="currentColor" strokeWidth={1.5} />
+                <span className="text-[13.5px] font-bold text-foreground">
+                  {streakLitDays !== null ? (
+                    <span className="finish-bump" style={{ animationDelay: "0.85s" }}>{t("rewards.streakDays").replace("{n}", String(streakDays))}</span>
+                  ) : (
+                    t("rewards.streakDays").replace("{n}", String(streakDays))
+                  )}
+                </span>
+              </li>
+            )}
+            <li className="life-rise flex items-baseline gap-1.5" style={{ ["--i" as string]: 11 }}>
+              <span className="text-[24px] font-extrabold leading-none tabular-nums">{stats.minutes}</span>
+              <span className="text-[13.5px] font-bold text-muted-foreground">{t("debrief.minutes").replace("{n}", "").trim()}</span>
+            </li>
+            {pct !== null && <li className="sr-only">{`${t("debrief.accuracy")} ${pct}%`}</li>}
+          </ul>
+        )}
+
+        {dots && stats && (
+          <div className="life-rise mt-4 px-1" style={{ ["--i" as string]: 12 }}>
+            <AnswerDots dots={dots.dots} correct={stats.correct} wrong={wrong} />
+          </div>
+        )}
+
+        {stats && mastery.length > 0 && (
+          <div className="life-rise mt-6 w-full px-1" style={{ ["--i" as string]: 6 }}>
+            <h3 className="mb-3 text-[12.5px] font-bold text-muted-foreground">{t("debrief.masteryTitle")}</h3>
+            <MasteryRows mastery={mastery} className="space-y-3.5" />
+          </div>
+        )}
+
+        {/* One next step, then everything else as plain links. */}
+        <div className="life-rise mt-7 w-full px-1" style={{ ["--i" as string]: 7 }}>
+          {fixFirst ? (
+            <>
+              <Link href={practiceHref({ sessionId })} className="block w-full sm:w-fit">
+                <Button size="lg" className={mainButton}>
+                  <Play className="mr-2 h-4 w-4 fill-current" />
+                  {fixTitle}
+                </Button>
+              </Link>
+              <p className="mt-2.5 text-[13px] text-muted-foreground">{fixSub}</p>
+            </>
+          ) : (
+            <div className="[&_button]:sm:w-auto [&_button]:sm:min-w-[300px] [&>a]:sm:w-fit">{primary}</div>
+          )}
+        </div>
+        <ul className="mt-3 w-full px-1">
+          {demoted}
+          {mistakes > 0 && !fixFirst && (
+            <TextAction i={8} title={fixTitle} sub={fixSub} href={practiceHref({ sessionId })} />
+          )}
+          {deck && workspaceId && (
+            <TextAction
+              i={1}
+              title={t("habit.flashcardsTitle")}
+              sub={t("habit.flashcardsSub")
+                .replace("{n}", String(deck.cards))
+                .replace("{m}", String(Math.max(1, Math.min(10, Math.ceil(deck.cards / 6)))))}
+              href={`/flashcards/${deck.id}?ws=${workspaceId}&mode=learn`}
+            />
+          )}
+          {askRow && onAskCopilot && (
+            <TextAction i={10} title={askRow.title} sub={askRow.sub} onClick={() => onAskCopilot(askRow.prompt)} />
+          )}
+          <InviteCard variant="link" className="life-rise" />
+          {hasReport && (
+            <li className="life-rise" style={{ ["--i" as string]: 11 }}>
+              <button
+                type="button"
+                onClick={() => setShowReport((v) => !v)}
+                aria-expanded={showReport}
+                className="group flex min-h-11 items-center gap-1 py-1.5 text-[14.5px] font-bold text-foreground"
+              >
+                <span className="underline decoration-border-strong underline-offset-4 group-hover:decoration-foreground">{t(showReport ? "debrief.hideReport" : "debrief.seeReport")}</span>
+                <ChevronDown className={cn("size-4 transition-transform", showReport && "rotate-180")} />
+              </button>
+            </li>
+          )}
+          {(handOff || !quickStart) && (
+            <li className="life-rise" style={{ ["--i" as string]: 12 }}>
+              <button type="button" onClick={onBack} className="flex min-h-11 items-center py-1.5 text-[14.5px] font-bold text-muted-foreground hover:text-foreground">
+                {t("session.backToWorkspace")}
+              </button>
+            </li>
+          )}
+        </ul>
+        {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
+        {quickStart && stats && (
+          <HabitPrompt
+            accuracy={stats.accuracy}
+            activitiesDone={stats.activitiesDone}
+            subjectTitle={subjectTitle}
+            // Let the mastery gains fill and be read before the sheet slides over them.
+            showAfterMs={mastery.length > 0 ? MASTERY_READ_MS : undefined}
+          />
+        )}
+        {showReport && debrief && <DebriefReport debrief={debrief} />}
+      </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto flex max-w-md flex-col items-center pb-10 pt-0 text-center animate-fade-up sm:pt-2">
+      <>
+        <div className="relative" aria-hidden>
+          <Image src="/illustrations/props/trophy.png" alt="" width={160} height={160} className="w-24" />
+          <ConfettiDots />
+        </div>
+        <h2 className="mt-3 text-[30px] font-extrabold tracking-tight sm:mt-5 sm:text-[36px]">
+          {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
+        </h2>
+        <div className="mt-1 min-h-6 text-[14.5px] leading-6 text-muted-foreground line-clamp-2 sm:mt-1.5 sm:text-[15px]">
+          {verdict ? (
+            <MathText text={verdict} />
+          ) : debriefLoading ? (
+            <span className="inline-block h-4 w-56 animate-pulse rounded-full bg-muted align-middle" />
+          ) : null}
+        </div>
+      </>
 
       {stats && mastery.length > 0 ? (
         <div className="mt-4 w-full sm:mt-6">
@@ -505,7 +786,16 @@ export function SessionDebrief({
             {t(showReport ? "debrief.hideReport" : "debrief.seeReport")}
             <ChevronDown className={cn("size-4 transition-transform", showReport && "rotate-180")} />
           </button>
-          {showReport && debrief && (
+          {showReport && debrief && <DebriefReport debrief={debrief} />}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** The model-written report, opened from "See your full report". */
+function DebriefReport({ debrief }: { debrief: ApiSessionDebrief }) {
+  return (
             <div className="mt-2 space-y-5 border-t border-border px-1 pt-5 animate-fade-up">
               {usefulHeadline(debrief.headline) && debrief.summary && (
                 <p className="text-sm leading-6 text-foreground">
@@ -547,9 +837,5 @@ export function SessionDebrief({
                 </section>
               ))}
             </div>
-          )}
-        </div>
-      )}
-    </div>
   );
 }

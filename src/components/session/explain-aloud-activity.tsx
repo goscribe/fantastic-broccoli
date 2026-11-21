@@ -1,5 +1,6 @@
 "use client";
 
+import { PlayActions, PlayPrimary, playLink } from "@/components/session/play-ui";
 import { useNewUi } from "@/lib/new-ui";
 import { useEffect, useRef, useState } from "react";
 import { ExplainAloudContent } from "@/types";
@@ -41,6 +42,102 @@ export function ExplainAloudActivity({
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [phase]);
+
+  if (newUi) {
+    const got = covered.filter(Boolean).length;
+    return (
+      <div className="space-y-5">
+        <p data-scroll-line className="text-[13px] font-semibold text-muted-foreground">{t("session.explainTitle")}</p>
+        {/* The prompt is the headline of the page, not a box on it. */}
+        <p className="life-rise text-[24px] font-extrabold leading-[1.25] tracking-tight text-foreground sm:text-[28px]">
+          <MathText text={content.prompt} />
+        </p>
+
+        {phase === "idle" && (
+          <>
+            <p className="text-[14.5px] leading-6 text-muted-foreground">{t("session.explainHint")}</p>
+            <PlayActions className="sm:justify-start">
+              <PlayPrimary onClick={() => setPhase("recording")}>{t("session.startExplaining")}</PlayPrimary>
+            </PlayActions>
+          </>
+        )}
+
+        {phase === "recording" && (
+          <div className="life-rise space-y-4">
+            <div className="flex items-end gap-[3px] h-12" aria-hidden>
+              {Array.from({ length: 40 }).map((_, i) => (
+                <span
+                  key={i}
+                  className="w-1.5 flex-1 rounded-full bg-accent/60 animate-wave motion-reduce:animate-none"
+                  style={{ height: `${30 + ((i * 41) % 70)}%`, animationDelay: `${(i % 8) * 0.12}s` }}
+                />
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <p className="flex items-center gap-2.5 text-[15.5px] font-extrabold" role="timer">
+                <span className="size-2.5 rounded-full bg-rose-500 animate-pulse-dot motion-reduce:animate-none" aria-hidden />
+                {t("session.listening")}
+                <span className="font-semibold tabular-nums text-muted-foreground">{formatTime(seconds)}</span>
+              </p>
+              <PlayPrimary onClick={() => setPhase("review")}>{t("session.done")}</PlayPrimary>
+            </div>
+          </div>
+        )}
+
+        {phase === "review" && (
+          <div className="life-rise space-y-4">
+            <p className="text-[15.5px] font-extrabold">
+              {t("session.keyPointsQuestion")}
+              <span className="ml-2 font-semibold tabular-nums text-muted-foreground">
+                {got}/{content.keyPoints.length}
+              </span>
+            </p>
+            <div className="space-y-2.5">
+              {content.keyPoints.map((point, i) => (
+                <button
+                  key={point}
+                  type="button"
+                  aria-pressed={covered[i]}
+                  onClick={() => {
+                    const next = [...covered];
+                    next[i] = !next[i];
+                    setCovered(next);
+                  }}
+                  className={cn(
+                    "flex min-h-[56px] w-full touch-manipulation items-center gap-3 rounded-[28px] px-3.5 py-3 text-left text-[15.5px] font-semibold leading-snug ring-inset transition-[background-color,box-shadow,transform] duration-150 active:scale-[0.99] motion-reduce:transition-none motion-reduce:active:scale-100",
+                    covered[i] ? "life-pop bg-emerald-50 text-emerald-900 ring-2 ring-emerald-500" : "bg-muted text-foreground hover:bg-[var(--edge)]",
+                  )}
+                >
+                  <span className={cn("grid size-8 shrink-0 place-items-center rounded-full", covered[i] ? "bg-emerald-600 text-white" : "bg-card text-transparent")}>
+                    <Check className="size-4" strokeWidth={3.5} />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <MathText text={point} />
+                  </span>
+                </button>
+              ))}
+            </div>
+            <PlayActions>
+              <button
+                type="button"
+                onClick={() => {
+                  setPhase("recording");
+                  setSeconds(0);
+                }}
+                className={cn(playLink, "justify-center sm:mr-3")}
+              >
+                {t("session.explainAgain")}
+              </button>
+              <PlayPrimary onClick={onComplete}>
+                {t("session.continue")}
+                <ArrowRight className="ml-1.5 size-4" />
+              </PlayPrimary>
+            </PlayActions>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div>

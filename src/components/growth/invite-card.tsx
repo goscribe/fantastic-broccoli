@@ -33,7 +33,7 @@ function statusLine(s: ReferralSummary, t: (k: string) => string): string {
  * `compact` sits under the end-of-session actions; `full` is the shop /
  * settings card with the link visible and the monthly cap explained.
  */
-export function InviteCard({ variant = "full", className }: { variant?: "compact" | "full"; className?: string }) {
+export function InviteCard({ variant = "full", className }: { variant?: "compact" | "full" | "link"; className?: string }) {
   const { t, locale } = useI18n();
   const [copied, setCopied] = useState(false);
   const { data, isError } = useQuery({
@@ -44,7 +44,7 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
   });
 
   // The invite is a nice-to-have: never show an error box at the end of a session.
-  if (isError && variant === "compact") return null;
+  if (isError && variant !== "full") return null;
 
   const url = data ? inviteUrl(data.code) : "";
   const flashCopied = () => {
@@ -99,6 +99,24 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
       </button>
     </div>
   );
+
+  if (variant === "link") {
+    // The end of a session (redesign): one line of text among the other "what next" links. Tapping it shares.
+    const sub = data && data.joined > 0 ? statusLine(data, t) : t("growth.inviteShort");
+    return (
+      <li className={className} style={{ ["--i" as string]: 10 }}>
+        <button
+          type="button"
+          onClick={onShare}
+          disabled={!data}
+          className="group flex min-h-11 w-full flex-wrap items-center gap-x-2.5 py-1.5 text-left text-[14.5px] leading-5 focus-visible:outline-none disabled:cursor-default"
+        >
+          <span className="font-bold text-foreground underline decoration-border-strong underline-offset-4 group-hover:decoration-foreground">{t("growth.inviteTitle")}</span>
+          <span className="text-[13px] text-muted-foreground">{copied ? t("growth.copied") : sub}</span>
+        </button>
+      </li>
+    );
+  }
 
   if (variant === "compact") {
     // One quiet row, styled like the end-of-session "one more small step"
