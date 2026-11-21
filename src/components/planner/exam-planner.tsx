@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Mascot } from "@/components/rewards/mascot";
 import { CalendarClock, ChevronLeft, ChevronRight, Clock, Pencil, Plus, Trash2 } from "lucide-react";
 import { accentForId } from "@/lib/accent-palette";
 import {
@@ -75,15 +76,18 @@ export function ExamPlanner() {
   return (
     <div className="mx-auto w-full max-w-[1080px] px-4 pb-16 pt-5 sm:px-6 sm:pt-6">
       <div className="mb-4 flex items-end justify-between gap-3">
-        <div className="min-w-0">
-          <div className="text-[12px] font-semibold text-faint">{t("ep.title")}</div>
-          <h1 className="truncate text-[22px] font-bold leading-tight tracking-tight sm:text-[26px]">{title}</h1>
+        <div className="flex min-w-0 items-center gap-3.5">
+          <Mascot pose="pencil" className="cat-peek h-[60px] shrink-0 self-end sm:h-[68px]" />
+          <div className="min-w-0">
+            <div className="text-[13px] font-bold text-muted-foreground">{t("ep.title")}</div>
+            <h1 className="truncate text-[24px] font-extrabold leading-tight tracking-tight sm:text-[30px]">{title}</h1>
+          </div>
         </div>
         {hasExams && tab !== "timetable" && (
           <button
             type="button"
             onClick={() => setSetup({ kind: "new" })}
-            className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl bg-accent-soft px-3 text-[13.5px] font-semibold text-accent-dim hover:brightness-95"
+            className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl border border-border bg-card px-3 text-[13.5px] font-semibold text-foreground hover:border-border-strong"
           >
             <Plus className="size-4" />
             <span className="hidden sm:inline">{t("ep.exams.add")}</span>
@@ -143,8 +147,8 @@ export function ExamPlanner() {
 function EmptyPlan({ onAdd }: { onAdd: () => void }) {
   const { t } = useI18n();
   return (
-    <div className="flex flex-col items-center rounded-3xl border border-border px-6 py-10 text-center sm:py-14">
-      <Image src="/design/cat2-book.png" alt="" width={120} height={120} unoptimized className="cat-bob h-28 w-auto" />
+    <div className="flex flex-col items-center px-6 py-10 text-center sm:py-14">
+      <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob h-28 w-auto" />
       <h2 className="mt-4 text-[20px] font-bold tracking-tight">{t("ep.empty.title")}</h2>
       <p className="mt-2 max-w-[460px] text-[14px] leading-relaxed text-muted-foreground">{t("ep.empty.body")}</p>
       <button type="button" onClick={onAdd} className="mt-6 inline-flex h-11 items-center gap-2 rounded-xl bg-accent px-5 text-[14.5px] font-semibold text-white hover:bg-accent-dim">
@@ -170,13 +174,13 @@ function TodayView({ data, starter, onOpenExams }: { data: PlanToday; starter: R
     : allDone
       ? t("ep.today.allDone")
       : t("ep.today.cat");
-  const cat = rest ? "cat2-sleep" : allDone ? "cat2-cheer" : "cat2-book";
+  const cat = rest ? "cat3-sleep" : allDone ? "cat3-cheer" : "cat3-book";
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
       <div className="flex min-w-0 flex-col gap-3">
         <div className="flex items-end gap-3">
-          <Image src={`/design/${cat}.png`} alt="" width={72} height={72} unoptimized className={cn("h-16 w-auto shrink-0", allDone ? "cat-cheer" : "cat-bob")} />
+          <Image src={`/design/${cat}.webp`} alt="" width={72} height={72} unoptimized className={cn("h-16 w-auto shrink-0", allDone ? "cat-cheer" : "cat-bob")} />
           <div className="relative mb-2 min-w-0 flex-1 rounded-2xl rounded-bl-md bg-accent-soft/70 px-4 py-3">
             {!rest && (
               <div className="text-[12px] font-semibold text-accent-dim">
@@ -239,7 +243,7 @@ function CoverageBar({ exam }: { exam: ExamSummary }) {
 function CountdownRow({ exam }: { exam: ExamSummary }) {
   const { t, locale } = useI18n();
   return (
-    <div className="flex items-center gap-3.5 rounded-2xl border border-border p-3.5">
+    <div className="life-card flex items-center gap-3.5 p-3.5">
       <Countdown days={exam.daysLeft} />
       <div className="min-w-0 flex-1">
         <div className="truncate text-[14px] font-semibold">{exam.title}</div>

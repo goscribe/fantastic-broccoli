@@ -8,8 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Calendar, Folder as FolderIcon, House, LogOut, PanelLeft, PanelLeftClose, PlayCircle, Plus, RotateCcw, Search, Settings, Store } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
-import { accentForId } from "@/lib/accent-palette";
-import { StreakButton } from "@/components/rewards/streak-button";
+import { PointsPill, StreakButton } from "@/components/rewards/streak-button";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
 import "@/lib/i18n/mistakes";
@@ -116,10 +115,10 @@ export function NewShell({ children }: { children: React.ReactNode }) {
   const initial = user?.name?.trim()?.[0]?.toUpperCase() ?? "";
 
   return (
-    <div className="design-root app-brand flex h-dvh overflow-hidden bg-white text-foreground">
+    <div className="design-root app-brand flex h-dvh overflow-hidden bg-[var(--page)] text-foreground">
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:translate-x-0",
+          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:translate-x-0 md:border-r-0 md:bg-transparent",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
           rail && "md:w-[68px] md:px-2.5",
         )}
@@ -149,8 +148,8 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               onClick={() => setMobileOpen(false)}
               title={rail ? label : undefined}
               className={cn(
-                "flex h-10 items-center gap-3 rounded-xl px-3 text-[14px] font-medium text-foreground/80 hover:bg-muted",
-                isActive(href) && "bg-muted font-semibold text-foreground",
+                "flex h-11 items-center gap-3 rounded-[var(--r-control)] px-4 text-[14.5px] font-bold text-foreground/70 transition-colors hover:bg-muted/70",
+                isActive(href) && "bg-[var(--accent-tint)] text-accent-dim hover:bg-[var(--accent-tint)]",
                 rail && "md:justify-center md:px-0",
               )}
             >
@@ -179,20 +178,18 @@ export function NewShell({ children }: { children: React.ReactNode }) {
                 title={w.title}
                 className={cn(
                   "flex min-h-10 shrink-0 items-center gap-3 rounded-xl px-3 py-2 text-[13.5px] font-medium leading-snug hover:bg-muted",
-                  on && "bg-accent-soft/70 text-accent-dim",
+                  on && "bg-muted font-bold text-foreground",
                   rail && "md:justify-center md:px-0",
                 )}
               >
                 <FolderIcon
-                  className={cn("size-4 shrink-0", rail && "md:hidden")}
-                  style={{ color: accentForId(w.id) }}
+                  className={cn("size-4 shrink-0 text-border-strong", rail && "md:hidden")}
                   fill="currentColor"
                   strokeWidth={1.5}
                 />
                 <span
                   aria-hidden
-                  className={cn("hidden size-7 place-items-center rounded-lg text-[12px] font-bold text-white", rail && "md:grid")}
-                  style={{ backgroundColor: accentForId(w.id) }}
+                  className={cn("hidden size-7 place-items-center rounded-lg bg-muted text-[12px] font-extrabold text-foreground", rail && "md:grid")}
                 >
                   {w.title.trim()[0]?.toUpperCase() ?? "?"}
                 </span>
@@ -205,7 +202,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             onClick={() => setMobileOpen(false)}
             title={rail ? "New subject" : undefined}
             className={cn(
-              "flex h-10 shrink-0 items-center gap-3 rounded-xl px-3 text-[13.5px] font-medium text-accent hover:bg-muted",
+              "flex h-10 shrink-0 items-center gap-3 rounded-xl px-3 text-[13.5px] font-semibold text-muted-foreground hover:bg-muted hover:text-foreground",
               rail && "md:justify-center md:px-0",
             )}
           >
@@ -247,7 +244,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               // eslint-disable-next-line @next/next/no-img-element
               <img src={user.profilePicture} alt="" className="size-8 shrink-0 rounded-full object-cover" />
             ) : (
-              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-accent-soft text-[13px] font-bold text-accent">{initial}</span>
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-muted text-[13px] font-bold text-foreground">{initial}</span>
             )}
             <span className={cn("min-w-0 flex-1 truncate text-[13px] font-semibold", rail && "md:hidden")}>{user?.name}</span>
             <button
@@ -277,7 +274,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             type="button"
             onClick={() => setPaletteOpen(true)}
             aria-label="Search"
-            className="flex h-10 w-10 shrink-0 items-center justify-center gap-2.5 rounded-xl bg-muted text-[13.5px] text-faint hover:bg-accent-soft/50 sm:w-full sm:max-w-[320px] sm:justify-start sm:px-3.5"
+            className="flex h-10 w-10 shrink-0 items-center justify-center gap-2.5 rounded-xl bg-muted text-[13.5px] text-faint hover:bg-border sm:w-full sm:max-w-[320px] sm:justify-start sm:px-3.5"
           >
             <Search className="size-4" />
             <span className="hidden flex-1 truncate text-left sm:inline">Search notes, sessions, cards…</span>
@@ -286,12 +283,13 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           <div className="ml-auto flex items-center gap-1.5 sm:gap-2.5">
             <NotificationBell />
             <StreakButton />
+            <PointsPill />
             <Link href="/settings" aria-label="Settings" className="block">
               {user?.profilePicture ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={user.profilePicture} alt="" className="size-10 rounded-full object-cover" />
               ) : (
-                <span className="grid size-10 place-items-center rounded-full bg-accent-soft text-[14px] font-bold text-accent">{initial}</span>
+                <span className="grid size-10 place-items-center rounded-full bg-muted text-[14px] font-bold text-foreground">{initial}</span>
               )}
             </Link>
           </div>
@@ -303,7 +301,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
       {/* Phones: the four places you go every day, one thumb away (the sidebar still holds subjects and settings). */}
       <nav
         aria-label="Main"
-        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-border bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-border bg-white/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
       >
         {NAV.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
           const label = labelKey ? t(labelKey) : fallbackLabel;
@@ -314,11 +312,19 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               href={href}
               aria-current={on ? "page" : undefined}
               className={cn(
-                "flex h-16 flex-col items-center justify-center gap-1 text-[11.5px] font-semibold",
-                on ? "text-accent" : "text-muted-foreground",
+                "group flex h-16 flex-col items-center justify-center gap-0.5 text-[11.5px] font-bold",
+                on ? "text-accent-dim" : "text-muted-foreground",
               )}
             >
-              <Icon className="size-[22px]" strokeWidth={on ? 2.3 : 1.8} />
+              {/* Active tab: a soft pill behind a filled icon. */}
+              <span
+                className={cn(
+                  "grid h-8 w-14 place-items-center rounded-[10px] transition-[background-color,transform] duration-200 group-active:scale-90 motion-reduce:transition-none",
+                  on ? "bg-[var(--accent-tint)]" : "group-hover:bg-muted",
+                )}
+              >
+                <Icon className="size-[22px]" strokeWidth={on ? 2.4 : 1.9} fill={on ? "currentColor" : "none"} fillOpacity={on ? 0.18 : 0} />
+              </span>
               {label}
             </Link>
           );

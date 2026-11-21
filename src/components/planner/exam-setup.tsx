@@ -275,7 +275,7 @@ export function ExamSetup({
                 <>
                   {all.length === 0 ? (
                     <div className="flex items-start gap-3 rounded-xl bg-muted/60 p-3 text-[13px] text-muted-foreground">
-                      <Image src="/design/cat2-think.png" alt="" width={40} height={40} unoptimized className="h-10 w-auto shrink-0" />
+                      <Image src="/design/cat3-think.webp" alt="" width={383} height={400} unoptimized className="h-10 w-auto shrink-0" />
                       {t("ep.setup.noTopics")}
                     </div>
                   ) : (
@@ -381,7 +381,7 @@ export function ExamSetup({
 
           {step === "review" && (
             <div className="mt-4 flex flex-col items-center text-center">
-              <Image src="/design/cat2-cheer.png" alt="" width={110} height={110} unoptimized className="cat-cheer h-24 w-auto" />
+              <Image src="/design/cat3-cheer.webp" alt="" width={363} height={400} unoptimized className="cat-cheer h-24 w-auto" />
               <p className="mt-4 max-w-[400px] text-[16px] font-semibold leading-snug">
                 {fill(t(chosen.length ? "ep.setup.reviewBody" : "ep.setup.reviewWhole"), {
                   days: daysLeft,

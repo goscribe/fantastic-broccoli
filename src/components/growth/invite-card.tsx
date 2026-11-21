@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Check, Copy, Gift, Share2, Users } from "lucide-react";
+import { Check, Copy, Share2, Users } from "lucide-react";
 import {
   copyText,
   fetchReferralSummary,
@@ -33,7 +33,7 @@ function statusLine(s: ReferralSummary, t: (k: string) => string): string {
  * `compact` sits under the end-of-session actions; `full` is the shop /
  * settings card with the link visible and the monthly cap explained.
  */
-export function InviteCard({ variant = "full", className }: { variant?: "compact" | "full"; className?: string }) {
+export function InviteCard({ variant = "full", className }: { variant?: "compact" | "full" | "link"; className?: string }) {
   const { t, locale } = useI18n();
   const [copied, setCopied] = useState(false);
   const { data, isError } = useQuery({
@@ -44,7 +44,7 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
   });
 
   // The invite is a nice-to-have: never show an error box at the end of a session.
-  if (isError && variant === "compact") return null;
+  if (isError && variant !== "full") return null;
 
   const url = data ? inviteUrl(data.code) : "";
   const flashCopied = () => {
@@ -100,6 +100,24 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
     </div>
   );
 
+  if (variant === "link") {
+    // The end of a session (redesign): one line of text among the other "what next" links. Tapping it shares.
+    const sub = data && data.joined > 0 ? statusLine(data, t) : t("growth.inviteShort");
+    return (
+      <li className={className} style={{ ["--i" as string]: 10 }}>
+        <button
+          type="button"
+          onClick={onShare}
+          disabled={!data}
+          className="group flex min-h-11 w-full flex-wrap items-center gap-x-2.5 py-1.5 text-left text-[14.5px] leading-5 focus-visible:outline-none disabled:cursor-default"
+        >
+          <span className="font-bold text-foreground underline decoration-border-strong underline-offset-4 group-hover:decoration-foreground">{t("growth.inviteTitle")}</span>
+          <span className="text-[13px] text-muted-foreground">{copied ? t("growth.copied") : sub}</span>
+        </button>
+      </li>
+    );
+  }
+
   if (variant === "compact") {
     // One quiet row, styled like the end-of-session "one more small step"
     // items, so it never competes with the main button. The whole row shares
@@ -111,13 +129,10 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
         onClick={onShare}
         disabled={!data}
         className={cn(
-          "flex w-full items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 text-left transition-colors hover:bg-muted/60 focus-visible:bg-muted/60 focus-visible:outline-none disabled:cursor-default disabled:hover:bg-card",
+          "flex w-full items-center gap-3 rounded-[22px] bg-muted px-4 py-3 text-left transition-colors hover:bg-[var(--edge)] focus-visible:bg-[var(--edge)] focus-visible:outline-none disabled:cursor-default disabled:hover:bg-muted",
           className,
         )}
       >
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-dim">
-          <Gift className="size-[18px]" />
-        </span>
         <span className="min-w-0 flex-1">
           <span className="block text-[14.5px] font-semibold leading-5 text-foreground">{t("growth.inviteTitle")}</span>
           <span className="block text-[12.5px] leading-5 text-muted-foreground">{sub}</span>
@@ -136,9 +151,6 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
       className={cn("rounded-2xl border border-border bg-card p-4 sm:p-5", className)}
     >
       <div className="flex items-start gap-3.5">
-        <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-accent-soft text-accent">
-          <Gift className="size-6" />
-        </span>
         <div className="min-w-0">
           <h2 className="text-[16px] font-bold leading-snug tracking-tight">{t("growth.inviteTitle")}</h2>
           <p className="mt-1 text-[13px] leading-snug text-muted-foreground">{body}</p>

@@ -1,0 +1,214 @@
+/*
+ * Scribe UI tokens (v5). One source for the signed-in app (.app-brand) and the
+ * public note pages (.notes-look); keep this file identical on every branch.
+ *
+ * The rules:
+ * - Chrome is quiet: a white page, white cards, a cool-grey ramp for borders
+ *   and secondary text, near-black text. No tinted page, no tinted panels.
+ * - Colour lives in content objects, not chrome: a subject or course is a
+ *   full-bleed tile in its family's hue with its illustration (.subject-tile,
+ *   .subject-band; hues and art in src/lib/subject-family.ts). Many hues on
+ *   one screen read as one set because structure, saturation, radius and
+ *   illustration style are shared.
+ * - Purple is the brand accent: the primary button, links, the selected nav
+ *   item (--accent-tint pill), progress. --accent-soft stays a NEUTRAL fill.
+ * - --flame for streaks, --hl (highlighter) for key phrases. Green and rose
+ *   only after an answer.
+ * - Shape by size: controls 12, buttons 16, cards 20, the hero 24. Depth is a
+ *   hairline, plus a 1px shadow at most.
+ */
+:root .app-brand,
+:root .notes-look {
+  --page: #ffffff;
+  --background: #ffffff;
+  --card: #ffffff;
+  --paper: #ffffff;
+  --card-hover: #fafafb;
+  --foreground: #16161a;
+  --card-foreground: #16161a;
+  --ink: #16161a;
+  --muted: #f4f4f6;
+  --muted-foreground: #5c5c68;
+  --faint: #767683;
+  --border: #e8e8ec;
+  --border-strong: #d5d5dc;
+  --edge: #e2e2e8;
+
+  --accent-soft: #f4f4f6;
+  --energy-soft: #f4f4f6;
+  --accent-tint: #efecfc;
+
+  /* v4's cream panel is gone; the names stay as neutral fills for anything that still reads them. */
+  --cream: #f4f4f6;
+  --cream-edge: #e8e8ec;
+  --hl: #ffe08f;
+  --flame: #ff9a1f;
+  --flame-edge: #e67700;
+  --flame-soft: #fff4e2;
+  --flame-ink: #3a2420;
+
+  --r-control: 12px;
+  --r-button: 16px;
+  --r-card: 20px;
+  --r-panel: 24px;
+  --card-shadow: 0 1px 2px rgba(22, 22, 26, 0.05);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+/*
+ * Default brand accent. A points-shop theme (<html data-accent>) keeps its own
+ * accent and soft tint. `:root:root` is deliberate: it outranks any older
+ * `:root:not([data-accent]) .app-brand` rule whatever order the CSS loads in.
+ */
+:root:root:not([data-accent]) .app-brand,
+:root:root:not([data-accent]) .notes-look {
+  --accent-soft: #f4f4f6;
+  --energy-soft: #f4f4f6;
+  --accent: #6952e0;
+  --accent-dim: #5a43d1;
+  --accent-edge: #4f3bbd;
+  --ring: #6952e0;
+  --energy: #6952e0;
+}
+:root[data-accent] .app-brand,
+:root[data-accent] .notes-look {
+  --accent-edge: var(--accent-dim);
+  --accent-tint: var(--accent-soft);
+}
+
+@layer components {
+  /* Highlighter: the mark a student makes on the phrase that matters. */
+  .hl-mark {
+    background-image: linear-gradient(var(--hl), var(--hl));
+    background-repeat: no-repeat;
+    background-size: 100% 0.5em;
+    background-position: 0 88%;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    border-radius: 2px;
+  }
+  /* Exam-paper rule: a heavy ink line with a hairline under it. */
+  .paper-rule {
+    height: 5px;
+    border-top: 2px solid var(--foreground);
+    border-bottom: 1px solid var(--foreground);
+  }
+
+  /*
+   * Subject tile: a full-bleed card in its family's hue (--tile-a deep,
+   * --tile-b bright, set inline from subject-family.ts). White text sits on
+   * the left over --tile-a (≥ 4.5:1 for every family); the bright end only
+   * glows behind the illustration, which bleeds off the right edge.
+   */
+  .subject-tile,
+  .subject-band {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: #fff;
+    background: radial-gradient(85% 135% at 100% 30%, var(--tile-b) 0%, var(--tile-a) 62%);
+  }
+  .subject-tile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: var(--r-card);
+    text-decoration: none;
+    transition: transform 0.2s var(--ease-out), box-shadow 0.2s ease;
+  }
+  .subject-tile:focus-visible { outline: 3px solid var(--tile-a); outline-offset: 3px; }
+  .subject-tile__art {
+    position: absolute;
+    z-index: -1;
+    right: -9%;
+    bottom: -15%;
+    height: 90%;
+    width: auto;
+    max-width: none;
+    pointer-events: none;
+    user-select: none;
+    transform: rotate(6deg);
+    transform-origin: 60% 60%;
+    transition: transform 0.35s var(--ease-out);
+  }
+  /* Short rows (phone lists, the picker): the art is cropped harder so the title keeps its room. */
+  .subject-tile--row .subject-tile__art { right: -4%; bottom: -34%; height: 150%; }
+  .subject-tile__text { max-width: 58%; }
+  .subject-tile__sub { color: rgb(255 255 255 / 0.92); }
+  .subject-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 36px;
+    padding: 0 10px 0 16px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--tile-a);
+    font-size: 14.5px;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: 0 2px 0 rgb(0 0 0 / 0.14);
+  }
+  .subject-track { height: 6px; border-radius: 999px; background: rgb(255 255 255 / 0.3); overflow: hidden; }
+  .subject-track > span { display: block; height: 100%; border-radius: inherit; background: #fff; }
+  @media (hover: hover) {
+    .subject-tile:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -12px var(--tile-a); }
+    .subject-tile:hover .subject-tile__art { transform: rotate(2deg) scale(1.05); }
+  }
+  .subject-tile:active { transform: scale(0.985); }
+  /* A header band in the subject's colour (note pages, a course's page, the result screen). */
+  .subject-band { border-radius: var(--r-panel); }
+  .subject-band .subject-tile__art { right: -2%; bottom: -22%; height: 128%; }
+  @media (max-width: 639px) {
+    .subject-band .subject-tile__art { right: -12%; bottom: -8%; height: 78%; opacity: 0.95; }
+  }
+  /*
+   * The hero (home, the notes index): an illustrated landscape that follows the
+   * visitor's own time of day. <html data-daypart> is written by a head script
+   * before first paint (src/lib/daypart.ts); with no attribute it is afternoon.
+   * Only the one matching file is fetched: 800px on phones, 1600px from sm up.
+   * .hero-card is the card; .hero-field the scene inside it; --hero-sky is the
+   * scene's sky colour, shown until the image arrives; --hero-wash is the card
+   * colour, washed over the scene's left where the words sit.
+   */
+  .hero-card { --hero-wash: #ffffff; --hero-sky: #a8dafb; background-color: var(--hero-wash); }
+  .hero-field {
+    background-color: var(--hero-sky);
+    background-image: url("/design/hero/afternoon-800.webp");
+    background-position: right 60%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  /* The cat's contact shadow on the grass; goes inside the box that holds the cat. */
+  .hero-field__ground { position: absolute; left: 52%; bottom: -3%; width: 74%; height: 9%; transform: translateX(-50%); border-radius: 50%; background: rgb(20 40 30 / 0.2); pointer-events: none; }
+  html[data-daypart="morning"] .hero-card { --hero-wash: #fffdf8; --hero-sky: #e6e9f6; }
+  html[data-daypart="evening"] .hero-card { --hero-wash: #fff4ea; --hero-sky: #d9719a; }
+  /* After dark the card goes dark with the sky, and its words turn light. */
+  html[data-daypart="night"] .hero-card,
+  html[data-daypart="late"] .hero-card {
+    --hero-wash: #0b1351; --hero-sky: #0b1351;
+    --foreground: #ffffff; --muted-foreground: #c5c9ec; --border-strong: rgb(255 255 255 / 0.45); --hero-eyebrow: #cdc5ff;
+    color: #ffffff; border-color: #0b1351;
+  }
+  html[data-daypart="late"] .hero-card { --hero-wash: #0d013c; --hero-sky: #0d013c; border-color: #0d013c; }
+  .hero-eyebrow { color: var(--hero-eyebrow, var(--accent-dim)); }
+  html[data-daypart="morning"] .hero-field { background-image: url("/design/hero/morning-800.webp"); }
+  html[data-daypart="evening"] .hero-field { background-image: url("/design/hero/evening-800.webp"); }
+  html[data-daypart="night"] .hero-field { background-image: url("/design/hero/night-800.webp"); }
+  html[data-daypart="late"] .hero-field { background-image: url("/design/hero/late-800.webp"); }
+  @media (min-width: 640px) {
+    .hero-field {
+      --wash: linear-gradient(90deg, var(--hero-wash) 0%, color-mix(in srgb, var(--hero-wash) 94%, transparent) 38%, color-mix(in srgb, var(--hero-wash) 62%, transparent) 56%, transparent 76%);
+      background-image: var(--wash), url("/design/hero/afternoon-1600.webp");
+    }
+    html[data-daypart="morning"] .hero-field { background-image: var(--wash), url("/design/hero/morning-1600.webp"); }
+    html[data-daypart="evening"] .hero-field { background-image: var(--wash), url("/design/hero/evening-1600.webp"); }
+    html[data-daypart="night"] .hero-field { background-image: var(--wash), url("/design/hero/night-1600.webp"); }
+    html[data-daypart="late"] .hero-field { background-image: var(--wash), url("/design/hero/late-1600.webp"); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .subject-tile, .subject-tile__art { transition: none; }
+    .subject-tile:hover, .subject-tile:active, .subject-tile:hover .subject-tile__art { transform: none; }
+    .subject-tile:hover .subject-tile__art { transform: rotate(6deg); }
+  }
+}

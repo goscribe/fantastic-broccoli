@@ -7,7 +7,7 @@ import { LEVEL_FILL, LevelBadge } from "@/components/session/precheck";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/proficiency";
 import { cn } from "@/lib/utils";
-import { Check, ChevronRight, Repeat, RotateCcw } from "lucide-react";
+import { Check, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { mistakesApi, practiceHref, type MistakeSummary } from "@/lib/api/mistakes";
 import "@/lib/i18n/mistakes";
@@ -73,9 +73,9 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
   const labelId = `review-${workspaceId}`;
 
   return (
-    <section className="rounded-3xl border border-border bg-card p-5 sm:p-6">
+    <section>
       <div className="flex items-baseline justify-between gap-3">
-        <h2 className="text-[17px] font-bold tracking-tight">{t("prof.progressTitle")}</h2>
+        <h2 className="text-[16px] font-semibold">{t("prof.progressTitle")}</h2>
         {levels.length > 0 && (
           <span className="shrink-0 text-[12.5px] tabular-nums text-muted-foreground">
             {t("prof.topicCount").replace("{count}", String(levels.length))}
@@ -84,12 +84,12 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
       </div>
 
       {shown.length === 0 ? (
-        <div className="mt-4 flex items-center gap-4 rounded-2xl border border-dashed border-border-strong/80 bg-muted/40 px-4 py-4">
+        <div className="mt-3 flex items-center gap-4">
           <Image
-            src="/design/cat2-book.png"
+            src="/design/cat3-book.webp"
             alt=""
-            width={60}
-            height={66}
+            width={363}
+            height={400}
             unoptimized
             className="cat-bob h-[60px] w-auto shrink-0 select-none object-contain"
           />
@@ -163,16 +163,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
       )}
 
       {mistakes && mistakes.total > 0 && (
-        <div className="mt-5 flex items-center gap-3.5 rounded-2xl border border-border p-4">
-          <span
-            className={cn(
-              "hidden size-9 shrink-0 place-items-center rounded-xl sm:grid",
-              mistakes.open > 0 ? "bg-rose/12 text-[#be123c]" : "bg-accent-soft text-accent",
-            )}
-            aria-hidden
-          >
-            {mistakes.open > 0 ? <RotateCcw className="size-[18px]" /> : <Check className="size-[18px]" strokeWidth={3} />}
-          </span>
+        <div className="mt-5 flex items-center gap-3.5 border-t border-border pt-4">
           <div className="min-w-0 flex-1">
             <p className="text-[14px] font-semibold">
               {mistakes.open === 0
@@ -199,21 +190,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
       )}
 
       {pref && (
-        <div
-          className={cn(
-            "mt-5 flex items-start gap-3.5 rounded-2xl border p-4 transition-colors",
-            pref.longTerm ? "border-accent/25 bg-accent-soft/50" : "border-border bg-muted/40",
-          )}
-        >
-          <span
-            className={cn(
-              "hidden size-9 shrink-0 place-items-center rounded-xl transition-colors sm:grid",
-              pref.longTerm ? "bg-accent text-white" : "bg-card text-muted-foreground",
-            )}
-            aria-hidden
-          >
-            <Repeat className="size-[18px]" />
-          </span>
+        <div className="mt-4 flex items-start gap-3.5 border-t border-border pt-4">
           <div className="min-w-0 flex-1">
             <p id={labelId} className="text-[14px] font-semibold">
               {t("prof.reviewTitle")}
@@ -225,7 +202,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
               <p
                 className={cn(
                   "mt-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-semibold",
-                  pref.dueItems > 0 ? "bg-accent text-white" : "bg-card text-accent",
+                  pref.dueItems > 0 ? "bg-accent text-white" : "bg-muted text-accent",
                 )}
               >
                 {pref.dueItems > 0 ? (

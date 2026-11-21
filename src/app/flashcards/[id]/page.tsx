@@ -144,7 +144,7 @@ function FlashcardDeck() {
     return (
       <div className="mx-auto w-full max-w-3xl">
         <div className="rounded-3xl border border-border bg-card p-10 text-center">
-          <Image src="/design/cat2-book.png" alt="" width={120} height={110} unoptimized className="mx-auto h-[110px] w-auto animate-pulse" />
+          <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="mx-auto h-[110px] w-auto animate-pulse" />
           <div className="mt-4 text-[18px] font-bold">Building your deck…</div>
           <p className="mt-1 text-[14px] text-muted-foreground">
             {gen.metadata?.quantity ? `${gen.metadata.quantity} cards` : "A set of cards"} from your material — about a minute. This page updates by itself.

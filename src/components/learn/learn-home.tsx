@@ -3,17 +3,16 @@
 import { CourseShelf } from "@/components/courses/course-shelf";
 import { CourseTopics } from "@/components/courses/course-topics";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { accentForId } from "@/lib/accent-palette";
 import { WeekStrip } from "@/components/learn/week-strip";
 import { PlanTodayCard } from "@/components/planner/plan-today-card";
-import { SubjectCover } from "@/components/learn/subject-cover";
+import { SubjectBand, SubjectTile } from "@/components/learn/subject-tile";
 import { NotesOutline } from "@/components/learn/notes-outline";
 import { SubjectProgress } from "@/components/learn/subject-progress";
 import type { NotesTopic } from "@/lib/api/notes-outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowUp, CalendarDays, Check, ChevronDown, ChevronRight, ChevronUp, FileText, Flame, Headphones, Layers, Loader2, NotebookText, Play, Plus, Presentation, Sparkles } from "lucide-react";
+import { ArrowUp, Check, ChevronDown, ChevronRight, ChevronUp, FileText, Headphones, Loader2, NotebookText, Play, Presentation } from "lucide-react";
 import { useAuthUser } from "@/lib/api/auth";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { fetchStudySessions, fetchActivityCalendar, createStudySession } from "@/lib/api/study";
@@ -25,7 +24,7 @@ import { onTreeChanged, emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
 import { toast } from "sonner";
 import { cn, formatRelativeDate } from "@/lib/utils";
-import { Donut, Ring, WeekBars } from "@/components/design/charts";
+import { Ring, WeekBars } from "@/components/design/charts";
 import type { Folder, Material, StudySession, Workspace } from "@/types";
 import { fetchStreak, type StreakSummary } from "@/lib/api/streak";
 import { fetchPlannerWeek, type PlannerSlot } from "@/lib/api/planner";
@@ -38,7 +37,14 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
 import "@/lib/i18n/today";
 import { TodayCard } from "@/components/learn/today-card";
-import { isBrandNew } from "@/lib/home-today";
+import { StreakCard } from "@/components/learn/streak-card";
+import { useQuery } from "@tanstack/react-query";
+import { mistakesApi } from "@/lib/api/mistakes";
+import type { Daypart } from "@/lib/daypart";
+import { useDaypart } from "@/lib/use-daypart";
+import { greetingMood, isBrandNew, type GreetingMood } from "@/lib/home-today";
+
+const GREET_KEY: Record<GreetingMood, string> = { new: "greetNew", done: "greetDone", streak: "greetStreak", fix: "greetFix", start: "greetStart" };
 
 const ACTIVITY_LABEL: Record<string, string> = {
   mcq: "Quick 5",
@@ -68,9 +74,13 @@ function flatten(folders: Folder[], root: Workspace[]): Workspace[] {
   return all;
 }
 
-const greeting = () => {
-  const h = new Date().getHours();
-  return h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
+/** The same buckets as the hero's sky (src/lib/daypart.ts), so the words and the scene agree. */
+const GREETING: Record<Daypart, string> = {
+  morning: "Good morning",
+  afternoon: "Good afternoon",
+  evening: "Good evening",
+  night: "Good evening",
+  late: "Up late",
 };
 
 function MaterialThumb({ m }: { m: Material }) {
@@ -215,8 +225,8 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   // Oldest unfinished first: the learner continues where they left off, not the newest thing generated.
   const byStart = useMemo(() => [...sessions].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()), [sessions]);
   const suggested = byStart.find((s) => s.status === "active" && !s.generating);
+  const sessionsDone = sessions.filter((s) => s.status === "completed").length;
   const todayIdx = (new Date().getDay() + 6) % 7;
-  const streak = streakInfo?.current ?? 0;
   const defaultWorkspace = suggested ? wsById.get(suggested.workspaceId) : workspaces[0];
 
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -348,31 +358,83 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     isBrandNew({ workspaces: workspaces.map((w) => ({ id: w.id, materialCount: w.materials.length })), sessions });
   const [weekOpen, setWeekOpen] = useState(false);
   const { t } = useI18n();
+  const shop = useShopSummary();
+  const { data: mistakeSummary } = useQuery({
+    queryKey: ["mistakes-summary", null],
+    queryFn: () => mistakesApi.summary(),
+    enabled: home,
+    retry: 1,
+  });
+  const doneToday = !!streakInfo?.todayGoalMet;
+  // The student's own clock; unknown on the server, where a plain "Hello" stands in (home renders client-side after sign-in).
+  const daypart = useDaypart();
+  const greeting = () => (daypart ? GREETING[daypart] : "Hello");
+  const mood = greetingMood({
+    brandNew: !!brandNew,
+    doneToday,
+    streak: streakInfo?.current ?? 0,
+    openMistakes: mistakeSummary?.open ?? 0,
+  });
 
   return (
-    <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-4 pb-12 pt-5 sm:px-6 sm:pt-6 lg:flex-row">
+    <div className={cn("mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-4 pb-12 pt-5 sm:px-6 sm:pt-6 lg:flex-row", workspaceId && "gap-8 lg:gap-10")}>
       <input ref={fileRef} type="file" multiple accept={UPLOAD_ACCEPT} className="hidden" onChange={(e) => void onFiles(e.target.files)} />
-      <div className="flex min-w-0 flex-1 flex-col gap-4 sm:gap-5">
+      <div className={cn("flex min-w-0 flex-1 flex-col", workspaceId ? "gap-8" : "gap-4 sm:gap-5")}>
+        {workspaceId ? (
+        <div>
+          <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>
+          {scopeTitle ? (
+            // The tile the student tapped on home, opened out: the subject's colour and art, where it stands, the one thing to do next.
+            <SubjectBand match={scopeTitle} className="mt-2 !rounded-[var(--r-card)] px-[18px] py-4 sm:px-6 sm:py-5">
+              <h1 className="max-w-[66%] text-[22px] font-extrabold leading-[1.15] sm:text-[26px]">{scopeTitle}</h1>
+              <p className="subject-tile__sub mt-1 max-w-[66%] text-[13px] font-semibold leading-snug">
+                {materials.length} material{materials.length === 1 ? "" : "s"}
+                {sessions.length > 0 ? ` · ${sessionsDone} of ${sessions.length} sessions done` : ""}
+              </p>
+              {sessions.length > 0 && (
+                <div className="subject-track mt-3 w-[52%] max-w-[300px]" role="progressbar" aria-valuemin={0} aria-valuemax={sessions.length} aria-valuenow={sessionsDone}>
+                  <span className="fill-grow" style={{ width: `${Math.max(sessionsDone > 0 ? 6 : 0, (sessionsDone / sessions.length) * 100)}%` }} />
+                </div>
+              )}
+              {suggested && (
+                <Link href={`/workspace/${suggested.workspaceId}/session/${suggested.id}`} className="subject-pill mt-4 h-10 max-w-full">
+                  <span className="truncate">
+                    {sessionProgress(suggested).done > 0 ? "Continue" : "Start"}: {suggested.title}
+                  </span>
+                  <ChevronRight className="size-4 shrink-0" strokeWidth={2.6} />
+                </Link>
+              )}
+            </SubjectBand>
+          ) : (
+            <Skeleton className="mt-2 h-[120px] rounded-[var(--r-card)]" />
+          )}
+        </div>
+        ) : (!home || (loadError && workspaces.length === 0)) && (
         <div className="flex items-end justify-between gap-3">
           <div>
-            {(workspaceId || folderId) && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>}
-            <h1 className="text-[22px] font-bold leading-tight sm:text-[26px]">
-              {workspaceId || folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
+            {folderId && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>}
+            <h1 className={cn("leading-tight", home ? "text-[30px] font-extrabold sm:text-[38px]" : "text-[22px] font-bold sm:text-[26px]")}>
+              {folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
             </h1>
+            {home && !loading && (
+              <p className="mt-1.5 text-[16px] font-semibold text-muted-foreground sm:text-[17px]">
+                {t(`today.${GREET_KEY[mood]}`).replace("{n}", String(streakInfo?.current ?? 0))}
+              </p>
+            )}
           </div>
-          {!home && sessions.length > 0 && <span className="hidden text-[13px] text-faint lg:inline">{sessions.length} study session{sessions.length === 1 ? "" : "s"}</span>}
         </div>
+        )}
 
         {workspaceId && (
         <form
-          className={cn(inputBoxClass, "flex-col items-stretch gap-0 p-3.5")}
+          className={cn(inputBoxClass, "-mt-4 flex-col items-stretch gap-0 p-4")}
           onSubmit={(e) => {
             e.preventDefault();
             ask(prompt);
           }}
         >
           <div className="flex items-center gap-3">
-            <Image src="/design/cat2-wave.png" alt="" width={40} height={40} unoptimized className="cat-wiggle h-10 w-auto" />
+            <Image src="/design/cat3-wave.webp" alt="" width={352} height={400} unoptimized className="cat-wiggle hidden h-10 w-auto sm:block" />
             <input
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
@@ -385,9 +447,9 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             </button>
           </div>
           {defaultWorkspace && (
-            <div className="mt-3 flex gap-2 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {["Make a study session from everything here", "Flashcards from my latest upload", "Explain what I got wrong last time", "Mock paper, section A"].map((c) => (
-                <button key={c} type="button" onClick={() => ask(c)} className="whitespace-nowrap rounded-full border border-border px-3 py-1.5 text-[12.5px] font-semibold hover:bg-muted">
+            <div className="mt-4 flex flex-wrap gap-2">
+              {["Make a study session from everything here", "Flashcards from my latest upload", "Explain what I got wrong last time"].map((c) => (
+                <button key={c} type="button" onClick={() => ask(c)} className="max-w-full rounded-full border border-border px-3 py-1.5 text-left text-[12.5px] font-semibold hover:bg-muted">
                   {c}
                 </button>
               ))}
@@ -398,15 +460,19 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
 
         {workspaceId ? (
           <>
-        <div className="flex items-center justify-between">
+        <div>
+        <div className="flex items-center justify-between gap-3">
           <h2 className="text-[16px] font-semibold">
             Your materials <span className="font-medium text-faint">· {materials.length}</span>
           </h2>
           <div className="flex items-center gap-3">
+            {/* With one or two files the dashed tile in the grid is the way to add; from three up, this button is. */}
+            {(loading || materials.length >= 3) && (
             <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-3 text-[12.5px] font-semibold hover:bg-accent-soft">
-              {uploading ? <Loader2 className="size-3.5 animate-spin" /> : <Plus className="size-3.5" />}
+              {uploading && <Loader2 className="size-3.5 animate-spin" />}
               Add material
             </button>
+            )}
             {materials.length > 3 && (
               <button type="button" onClick={() => setExpanded((v) => !v)} className="inline-flex items-center gap-1 text-[13px] font-semibold text-accent hover:underline">
                 {expanded ? (
@@ -422,38 +488,39 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             )}
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 md:grid-cols-3">
-          {loading && materials.length === 0 && [0, 1, 2].map((i) => <div key={i} className="h-[232px] animate-pulse rounded-2xl bg-muted" />)}
+        <div className="mt-3 grid grid-cols-2 gap-3 sm:gap-3.5 md:grid-cols-3">
+          {loading && materials.length === 0 && [0, 1, 2].map((i) => <div key={i} className="h-[200px] animate-pulse rounded-[var(--r-card)] bg-muted" />)}
           {shown.map(({ m, w }) => (
             <div
               key={m.id}
-              className={cn(
-                "relative flex flex-col rounded-2xl border bg-card p-3 transition-colors",
-                selected.has(m.id) ? "border-accent ring-2 ring-accent/20" : "border-border",
-              )}
+              className={cn("life-card relative flex min-w-0 flex-col p-2.5 transition-colors sm:p-3", selected.has(m.id) && "border-accent ring-2 ring-accent/20")}
             >
-              <label className="absolute left-5 top-5 z-10 grid size-6 cursor-pointer place-items-center rounded-md border border-border bg-white shadow-sm has-[:checked]:border-accent has-[:checked]:bg-accent has-[:checked]:text-white">
+              <label className="absolute left-[18px] top-[18px] z-10 grid size-6 cursor-pointer place-items-center rounded-md border border-border bg-white shadow-sm has-[:checked]:border-accent has-[:checked]:bg-accent has-[:checked]:text-white">
                 <input type="checkbox" className="peer sr-only" checked={selected.has(m.id)} onChange={() => toggleSelected(m.id)} aria-label={`Select ${m.title}`} />
                 <Check className="size-3.5 opacity-0 peer-checked:opacity-100" />
               </label>
-              <button type="button" onClick={() => toggleSelected(m.id)} className="block w-full text-left">
+              <button type="button" onClick={() => toggleSelected(m.id)} className="block w-full rounded-xl text-left">
                 <MaterialThumb m={{ ...m, preview: m.preview ?? (previews[m.id] || undefined) }} />
               </button>
-              <div className="mt-3 truncate px-0.5 text-[14.5px] font-semibold">{m.title}</div>
-              <div className="truncate px-0.5 text-[12px] text-faint">
+              <div className="mt-2.5 truncate px-1 text-[14.5px] font-semibold">{m.title}</div>
+              <div className="truncate px-1 pb-1 text-[12px] text-faint">
                 {w.title} · {formatRelativeDate(m.updatedAt)}
               </div>
             </div>
           ))}
-          {(expanded || (!loading && materials.length < 3)) && (
-            <button type="button" onClick={() => fileRef.current?.click()} className="flex min-h-[140px] flex-col items-center justify-center gap-2 rounded-2xl border-2 sm:min-h-[200px] border-dashed border-border p-4 text-center hover:border-accent/50 hover:bg-accent-soft/40">
-              <Image src="/design/cat2-sleep.png" alt="" width={64} height={64} unoptimized className="cat-bob h-16 w-auto" />
+          {!loading && materials.length < 3 && (
+            <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} className={cn("flex min-h-[160px] flex-col items-center justify-center gap-2 rounded-[var(--r-card)] border-2 border-dashed border-border p-4 text-center hover:border-border-strong hover:bg-muted/40", materials.length === 0 && "col-span-full")}>
+              <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-16 w-auto" />
               <div>
-                <div className="text-[14.5px] font-semibold">Add material</div>
+                <div className="inline-flex items-center gap-1.5 text-[14.5px] font-semibold">
+                  {uploading && <Loader2 className="size-3.5 animate-spin" />}
+                  Add material
+                </div>
                 <div className="mt-0.5 text-[12px] text-faint">PDF · slides · photos of notes</div>
               </div>
             </button>
           )}
+        </div>
         </div>
 
         <NotesOutline
@@ -490,9 +557,14 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                 loading={loading}
                 uploading={uploading}
                 onUpload={() => fileRef.current?.click()}
+                doneToday={doneToday}
+                greeting={`${greeting()}${firstName ? `, ${firstName}` : ""}`}
+                greetingSub={loading ? undefined : t(`today.${GREET_KEY[mood]}`).replace("{n}", String(streakInfo?.current ?? 0))}
               />
             )}
-            {home && !brandNew && <HomeStatRow due={due} streak={streakInfo} />}
+            {home && !brandNew && (
+              <StreakCard streak={streakInfo} due={due} points={shop?.balance ?? 0} canAfford={!!shop?.affordable} tiles className="lg:hidden" />
+            )}
             {!brandNew && (
               <SubjectsGrid workspaces={workspaces} sessions={sessions} loading={loading} onNew={() => router.push("/new-subject")} />
             )}
@@ -505,12 +577,9 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                   type="button"
                   aria-expanded={weekOpen}
                   onClick={() => setWeekOpen((v) => !v)}
-                  className="flex min-h-11 w-full items-center justify-between rounded-2xl border border-border px-4 text-[15px] font-semibold lg:hidden"
+                  className="life-card flex min-h-[52px] w-full items-center justify-between px-4 text-[15px] font-bold lg:hidden"
                 >
-                  <span className="flex items-center gap-2">
-                    <CalendarDays className="size-4 text-accent" />
-                    {t("today.weekToggle")}
-                  </span>
+                  <span>{t("today.weekToggle")}</span>
                   <ChevronDown className={cn("size-4 text-faint transition-transform", weekOpen && "rotate-180")} />
                 </button>
                 <div className={cn(!weekOpen && "max-lg:hidden", "max-lg:mt-3")}>
@@ -533,7 +602,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         )}
       </div>
 
-      {workspaceId && (
+      {workspaceId && picked.length > 0 && (
       <CatNudge
         count={picked.length}
         empty={!loading && materials.length === 0}
@@ -544,55 +613,44 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
       />
       )}
       {!brandNew && (
-      <div className={cn("w-full shrink-0 flex-col gap-3.5 lg:w-[300px]", home ? "hidden lg:flex" : "flex")}>
-        {!home && loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
-        {!home && suggested && (() => {
+      <div className={cn("w-full shrink-0 flex-col lg:w-[300px]", home ? "rail-flat hidden lg:flex" : workspaceId ? "rail-cards flex gap-3.5 lg:mt-[30px]" : "rail-flat rail-flush flex")}>
+        {!home && !workspaceId && loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
+        {!home && !workspaceId && suggested && (() => {
           const { done, total, next } = sessionProgress(suggested);
           return (
-            <div className="relative overflow-hidden rounded-2xl p-[18px]" style={{ background: "var(--accent-soft)" }}>
-              <Image src="/design/cat2-book.png" alt="" width={72} height={72} unoptimized className="cat-peek absolute right-2.5 top-2 h-[72px] w-auto" />
-              <div className="flex items-center gap-2">
-                <Ring pct={total ? done / total : 0} size={28} stroke={12} color="var(--accent)" />
-                <span className="text-[11px] font-semibold text-accent">
-                  Suggested next · {done} of {total} done
-                </span>
-              </div>
-              <div className="mt-2 pr-16 text-[16px] font-bold leading-tight">{next ? `${activityLabel(next.type)} · ${next.title}` : suggested.title}</div>
-              <div className="mt-1 text-[12.5px] text-muted-foreground">
+            <div>
+              <div className="text-[12px] font-bold text-accent-dim">Suggested next</div>
+              <div className="mt-1 text-[16px] font-extrabold leading-tight">{next ? `${activityLabel(next.type)} · ${next.title}` : suggested.title}</div>
+              <div className="mt-1 text-[13px] text-muted-foreground">
                 {next ? `${next.estimatedMinutes} min · ` : ""}
-                {wsById.get(suggested.workspaceId)?.title}
+                {done} of {total} done
+                {!workspaceId && wsById.get(suggested.workspaceId) ? ` · ${wsById.get(suggested.workspaceId)?.title}` : ""}
               </div>
-              <div className="mt-3.5 flex gap-2">
-                <Link href={`/workspace/${suggested.workspaceId}/session/${suggested.id}`} className="inline-flex h-9 items-center rounded-xl bg-accent px-4 text-[13.5px] font-semibold text-white">
-                  {done > 0 ? "Continue" : "Start"}
-                </Link>
-              </div>
+              <Link href={`/workspace/${suggested.workspaceId}/session/${suggested.id}`} className="mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full bg-accent text-[14px] font-semibold text-white hover:bg-accent-dim">
+                {done > 0 ? "Continue" : "Start"}
+              </Link>
             </div>
           );
         })()}
-        <div className="rounded-2xl border border-border p-[18px]">
+        <div className="life-card p-[18px]">
           <div className="flex items-baseline justify-between">
-            <span className="text-[16px] font-semibold">Due for review</span>
+            <span className="text-[16px] font-extrabold">Due for review</span>
           </div>
           {due === null ? (
             <div className="mt-3 flex items-center gap-4">
-              <Skeleton className="size-[72px] shrink-0 rounded-full" />
+              <Skeleton className="h-10 w-12 shrink-0" />
               <div className="flex flex-1 flex-col gap-2">
                 <Skeleton className="h-3.5 w-full" />
                 <Skeleton className="h-3.5 w-2/3" />
               </div>
             </div>
           ) : (
-          <div className="mt-3 flex items-center gap-4">
-            <Donut parts={due ? [[1, "var(--accent)"]] : [[1, "var(--border)"]]}>
-              <span className="text-[20px] font-bold leading-none">{due ?? "–"}</span>
-              <br />
-              <span className="text-[11px] font-semibold text-faint">due</span>
-            </Donut>
-            <div className="text-[13px] text-muted-foreground">{due ? `${due} flashcards are due today. About ${Math.max(1, Math.round(due / 3))} min.` : "Nothing due right now — nice."}</div>
+          <div className="mt-2 flex items-baseline gap-3">
+            <span className="text-[40px] font-extrabold leading-none tabular-nums">{due}</span>
+            <div className="text-[13px] leading-snug text-muted-foreground">{due ? `flashcards due today, about ${Math.max(1, Math.round(due / 3))} min` : "Nothing due right now"}</div>
           </div>
           )}
-          <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-xl text-[14px] font-semibold", due && !home ? "bg-accent text-white" : "bg-muted hover:bg-accent-soft")}>
+          <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full text-[14px] font-semibold", due && !home && !suggested ? "bg-accent text-white hover:bg-accent-dim" : "bg-muted hover:bg-accent-soft")}>
             {due ? "Review now" : "Browse flashcards"}
           </Link>
         </div>
@@ -603,23 +661,25 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           </>
         ) : (
           <>
-        <div className="rounded-2xl border border-border p-[18px]">
-          <div className="flex items-baseline justify-between">
-            <span className="text-[16px] font-semibold">This week</span>
-            <span className="text-[12px] text-faint">
-              {days.reduce((a, b) => a + b, 0)} activities{streak > 0 ? <> · <b className="text-accent">{streak}-day streak</b></> : null}
-              {streakInfo && !streakInfo.todayDone ? <> · {Math.max(0, streakInfo.goalMin - streakInfo.todayMinutes)} min to go today</> : null}
-            </span>
+        {home ? (
+          <StreakCard streak={streakInfo} />
+        ) : (
+        <div className="life-card p-[18px]">
+          <div className="text-[16px] font-extrabold">This week</div>
+          <div className="mt-0.5 text-[12.5px] text-faint">
+            {days.reduce((a, b) => a + b, 0)} activities
+            {streakInfo && !streakInfo.todayDone ? <> · {Math.max(0, streakInfo.goalMin - streakInfo.todayMinutes)} min to go today</> : null}
           </div>
-          <div className="mt-3.5">
+          <div className="mt-4">
             <WeekBars mins={days.length ? days : [0, 0, 0, 0, 0, 0, 0]} goal={3} today={todayIdx} accent="var(--accent)" />
           </div>
         </div>
+        )}
         <PlanTodayCard
           fallback={
-        <div className="rounded-2xl border border-border p-[18px]">
+        <div className="life-card p-[18px]">
           <div className="flex items-baseline justify-between">
-            <span className="text-[16px] font-semibold">Up next</span>
+            <span className="text-[16px] font-extrabold">Up next</span>
             <Link href="/planner" className="text-[12px] font-semibold text-accent hover:underline">Open planner</Link>
           </div>
           {upNext === null ? (
@@ -635,7 +695,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                 const href = s.kind === "review" ? "/flashcards/review" : s.workspaceId && s.sessionId ? `/workspace/${s.workspaceId}/session/${s.sessionId}` : "/planner";
                 return (
                   <li key={`${s.date}-${s.id}`}>
-                    <Link href={href} className="flex items-center gap-3 rounded-xl border border-border px-3 py-2 hover:bg-muted">
+                    <Link href={href} className="-mx-2 flex items-center gap-3 rounded-2xl px-2 py-2 hover:bg-muted">
                       <span className="w-[72px] shrink-0 text-[12px] font-semibold text-faint">{label} · {hhmm(s.start)}</span>
                       <span className="min-w-0 flex-1 truncate text-[13.5px] font-semibold">{s.title}</span>
                       <span className="shrink-0 text-[12px] text-faint">{s.end - s.start} min</span>
@@ -657,46 +717,6 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     </div>
   );
 }
-
-/**
- * Phones: a compact stat row under the Today card (streak · cards due ·
- * points), each cell one tap to where it matters. Desktop keeps the sidebar;
- * the planner is in the bottom nav.
- */
-function HomeStatRow({ due, streak }: { due: number | null; streak: StreakSummary | null }) {
-  const { t } = useI18n();
-  const shop = useShopSummary();
-  const cell = "flex min-h-16 flex-col items-center justify-center gap-0.5 px-2 py-2.5 text-center";
-  const value = "flex items-center gap-1 text-[18px] font-extrabold leading-none tabular-nums";
-  const label = "text-[12px] font-semibold text-muted-foreground";
-  return (
-    <div className="grid grid-cols-3 divide-x divide-border overflow-hidden rounded-2xl border border-border bg-card lg:hidden">
-      <div className={cell}>
-        <span className={value}>
-          <Flame className="size-4 text-[#f97316]" fill="currentColor" strokeWidth={1.6} />
-          {streak?.current ?? 0}
-        </span>
-        <span className={label}>{t("today.statStreak")}</span>
-      </div>
-      <Link href="/flashcards/review" className={cn(cell, "hover:bg-muted")}>
-        <span className={value}>
-          <Layers className="size-4 text-accent" />
-          {due ?? 0}
-        </span>
-        <span className={label}>{t("today.statCards")}</span>
-      </Link>
-      <Link href="/shop" className={cn(cell, "relative hover:bg-muted")}>
-        <span className={value}>
-          <Sparkles className="size-4 text-accent" fill="currentColor" />
-          {shop?.balance ?? 0}
-        </span>
-        <span className={label}>{t("today.statPoints")}</span>
-        {shop?.affordable && <span aria-label={t("rewards.homeAfford")} className="absolute right-2 top-2 size-2 rounded-full bg-accent" />}
-      </Link>
-    </div>
-  );
-}
-
 
 /** The cat pops out with a speech bubble: encouragement, and the one action that fits the moment. */
 function CatNudge({
@@ -730,7 +750,7 @@ function CatNudge({
               Study session
             </button>
             <button type="button" disabled={!!starting} onClick={onFlashcards} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-3 text-[12.5px] font-semibold hover:bg-accent-soft disabled:opacity-60">
-              {starting === "flashcards" ? <Loader2 className="size-3.5 animate-spin" /> : <Layers className="size-3.5" />}
+              {starting === "flashcards" && <Loader2 className="size-3.5 animate-spin" />}
               Flashcards
             </button>
             <button type="button" onClick={onClear} className="h-8 px-2 text-[12.5px] font-semibold text-faint hover:text-foreground">
@@ -740,7 +760,7 @@ function CatNudge({
         )}
         <span className="absolute -right-1.5 bottom-4 size-3 rotate-45 border-b border-r border-border bg-white" />
       </div>
-      <Image src={count > 0 ? "/design/cat2-cheer.png" : "/design/cat2-wave.png"} alt="" width={96} height={96} unoptimized className="cat-wiggle h-[84px] w-auto select-none" />
+      <Image src={count > 0 ? "/design/cat3-cheer.webp" : "/design/cat3-wave.webp"} alt="" width={96} height={96} unoptimized className="cat-wiggle h-[84px] w-auto select-none" />
     </div>
   );
 }
@@ -761,81 +781,41 @@ function SubjectsGrid({
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h2 className="text-[16px] font-semibold">
+        <h2 className="text-[20px] font-extrabold">
           Your subjects <span className="font-medium text-faint">· {workspaces.length}</span>
         </h2>
-        <button type="button" onClick={onNew} className="inline-flex h-11 items-center gap-1.5 rounded-xl bg-muted px-3 text-[13px] font-semibold hover:bg-accent-soft sm:h-9">
-          <Plus className="size-3.5" /> New subject
+        <button type="button" onClick={onNew} className="inline-flex h-11 items-center gap-1.5 rounded-[var(--r-control)] border border-border bg-card px-4 text-[13.5px] font-bold text-foreground hover:border-border-strong sm:h-10">
+          New subject
         </button>
       </div>
-      {/* Phones: one tidy list, a progress ring per subject, instead of tall cover cards. */}
-      <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card sm:hidden">
-        {loading &&
-          workspaces.length === 0 &&
-          [0, 1].map((i) => (
-            <li key={i} className="flex items-center gap-3 px-4 py-3">
-              <Skeleton className="size-9 rounded-full" />
-              <div className="flex-1 space-y-1.5">
-                <Skeleton className="h-4 w-1/2" />
-                <Skeleton className="h-3 w-1/3" />
-              </div>
-            </li>
-          ))}
-        {workspaces.map((w) => {
-          const own = sessions.filter((x) => x.workspaceId === w.id);
-          const done = own.filter((x) => x.status === "completed").length;
-          return (
-            <li key={w.id}>
-              <Link href={`/workspace/${w.id}`} className="flex min-h-16 items-center gap-3 px-4 py-3 hover:bg-muted/60">
-                <Ring pct={own.length ? done / own.length : 0} size={36} stroke={10} color={accentForId(w.id)} />
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[15px] font-bold">{w.title}</span>
-                  <span className="block truncate text-[12.5px] text-muted-foreground">
-                    {w.materials.length} material{w.materials.length === 1 ? "" : "s"} · {done}/{own.length} sessions
-                  </span>
-                </span>
-                <ChevronRight className="size-4 shrink-0 text-faint" />
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-      <div className="mt-3 hidden grid-cols-1 gap-3.5 sm:grid sm:grid-cols-2 xl:grid-cols-3">
-        {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[172px] rounded-2xl" />)}
+      {/* Each subject is a tile in its own colour with its illustration: the colour on this page lives here. */}
+      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3.5 xl:grid-cols-3">
+        {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[156px] rounded-[var(--r-card)] sm:h-[176px]" />)}
         {workspaces.map((w) => {
           const own = sessions
             .filter((x) => x.workspaceId === w.id)
             .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
           const done = own.filter((x) => x.status === "completed").length;
           const current = own.find((x) => x.status !== "completed");
-          const pct = own.length ? done / own.length : 0;
           return (
-            <SubjectCover
+            <SubjectTile
               key={w.id}
+              href={`/workspace/${w.id}`}
               title={w.title}
-              coverUrl={w.coverUrl}
-              className="rounded-2xl border border-border transition-colors hover:border-accent/50"
-            >
-              <Link href={`/workspace/${w.id}`} className="group relative flex min-h-[128px] flex-col justify-between p-4 sm:min-h-[172px]">
-                <div className="flex items-center gap-3">
-                  <Ring pct={pct} size={44} stroke={10} color={accentForId(w.id)} />
-                  <div className="min-w-0 max-w-[62%]">
-                    <div className="line-clamp-2 text-[15px] font-semibold leading-tight text-foreground">{w.title}</div>
-                    <div className="text-[12px] text-muted-foreground">
-                      {w.materials.length} material{w.materials.length === 1 ? "" : "s"} · {done}/{own.length} sessions
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-3 flex items-center justify-between text-[12.5px] sm:mt-4">
-                  <span className="truncate text-muted-foreground">{current ? (current.generating ? "Building the next session…" : `Next: ${current.title}`) : own.length ? "All caught up" : "No sessions yet"}</span>
-                  <span className="ml-2 inline-flex h-7 shrink-0 items-center gap-1 rounded-full bg-muted px-3 font-semibold text-foreground group-hover:bg-accent/10 group-hover:text-accent">{current ? "Continue" : "Open"}</span>
-                </div>
-              </Link>
-            </SubjectCover>
+              sub={
+                current
+                  ? current.generating
+                    ? "Building the next session…"
+                    : `Next: ${current.title}`
+                  : `${w.materials.length} material${w.materials.length === 1 ? "" : "s"}${own.length ? ` · ${done}/${own.length} sessions` : ""}`
+              }
+              progress={own.length ? done / own.length : null}
+              action={current ? "Continue" : "Open"}
+            />
           );
         })}
-        <button type="button" onClick={onNew} className="hidden min-h-[172px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed sm:flex border-border text-center hover:border-accent/60 hover:bg-muted/40">
-          <Image src="/design/cat2-sleep.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
+        <button type="button" onClick={onNew} className="hidden min-h-[176px] flex-col items-center justify-center gap-2 rounded-[var(--r-card)] border-2 border-dashed border-border text-center hover:border-border-strong hover:bg-muted/40 sm:flex">
+          <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-14 w-auto" />
           <div className="text-[14px] font-semibold">New subject</div>
           <div className="text-[12px] text-faint">Drop notes, get sessions</div>
         </button>
@@ -873,15 +853,15 @@ function SessionList({
           onClick={onAdd}
           className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-accent px-2.5 text-[12.5px] font-semibold text-white hover:bg-accent-dim disabled:opacity-60"
         >
-          {adding ? <Loader2 className="size-3.5 animate-spin" /> : <Plus className="size-3.5" />}
+          {adding && <Loader2 className="size-3.5 animate-spin" />}
           {pickedCount > 0 ? `New session from ${pickedCount} file${pickedCount === 1 ? "" : "s"}` : "New session"}
         </button>
       </div>
-      <div className="mt-3 divide-y divide-border rounded-2xl border border-border bg-card">
+      <div className="mt-3 flex flex-col gap-2.5">
         {loading &&
           sessions.length === 0 &&
           [0, 1, 2].map((i) => (
-            <div key={i} className="flex items-center gap-3.5 px-4 py-3">
+            <div key={i} className="life-card flex items-center gap-3.5 px-4 py-3">
               <Skeleton className="size-[52px] rounded-full" />
               <div className="flex-1 space-y-2">
                 <Skeleton className="h-4 w-1/2" />
@@ -891,8 +871,8 @@ function SessionList({
             </div>
           ))}
         {!loading && sessions.length === 0 && (
-          <div className="flex items-center gap-4 px-5 py-6 text-[14px] text-muted-foreground">
-            <Image src="/design/cat2-book.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
+          <div className="flex items-center gap-4 py-3 text-[14px] text-muted-foreground">
+            <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob h-14 w-auto" />
             No sessions yet — hit New session and I&apos;ll build one from your materials.
           </div>
         )}
@@ -900,7 +880,7 @@ function SessionList({
           const { total, done, next, pct } = sessionProgress(s);
           const finished = s.status === "completed";
           return (
-            <div key={s.id} className="flex items-center gap-3.5 px-4 py-3">
+            <div key={s.id} className="life-card flex items-center gap-3.5 px-3.5 py-3 sm:px-4">
               <span className="relative grid size-[52px] shrink-0 place-items-center">
                 <Ring pct={finished ? 1 : pct} size={52} stroke={8} color={finished ? "#10b981" : "var(--accent)"} />
                 <span className="absolute inset-0 grid place-items-center">
@@ -956,15 +936,15 @@ function HomeShopCard() {
   return (
     <Link
       href="/shop"
-      className="group hidden items-center gap-3.5 rounded-2xl border border-border bg-card p-3.5 transition-colors hover:border-accent/40 hover:bg-accent-soft/40 lg:flex"
+      className="life-card life-press group hidden items-center gap-3.5 p-3.5 lg:flex"
     >
-      <span className="grid size-[64px] shrink-0 place-items-end justify-center overflow-hidden rounded-xl bg-accent-soft">
+      <span className="grid size-[64px] shrink-0 place-items-end justify-center overflow-hidden rounded-full bg-muted">
         <Mascot pose="wave" className="cat-wiggle mb-0.5 h-[56px] w-[48px]" />
       </span>
       <span className="min-w-0 flex-1">
         <span className="flex items-center justify-between gap-2">
           <span className="text-[14px] font-bold">{t("rewards.homeTitle")}</span>
-          <span className="text-[12.5px] font-semibold tabular-nums text-accent">
+          <span className="text-[12.5px] font-bold tabular-nums text-foreground">
             {t("rewards.ptsValue").replace("{n}", String(shop.balance))}
           </span>
         </span>
