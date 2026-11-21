@@ -1,3 +1,5 @@
+/* Layer order first (see tokens.css): this file can load before globals.css. */
+@layer properties, theme, base, components, utilities;
 @import "./tokens.css";
 
 /* Scoped tokens for the redesign preview (RevisionDojo-like: white, violet, grey cards). */

@@ -1,11 +1,11 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
-import { FAMILY_ART_SIZE, familyArtSrc, familyFor, familyVars, type SubjectFamily } from "@/lib/subject-family";
+import { FAMILY_ART_SIZE, familyArtSrc, familyFor, familyVars, hueFamilyFor, type SubjectFamily } from "@/lib/subject-family";
 import { cn } from "@/lib/utils";
 
 /** The family illustration, positioned by the tile/band it sits in. Decorative. */
-export function SubjectArt({ family, eager = false, className }: { family: SubjectFamily; eager?: boolean; className?: string }) {
+export function SubjectArt({ family, eager = false, neutral = false, className }: { family: SubjectFamily; eager?: boolean; /** The art sits on a hue that is not its own: drawn white-grey. */ neutral?: boolean; className?: string }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
@@ -16,7 +16,7 @@ export function SubjectArt({ family, eager = false, className }: { family: Subje
       loading={eager ? "eager" : "lazy"}
       decoding="async"
       draggable={false}
-      className={cn("subject-tile__art", className)}
+      className={cn("subject-tile__art", neutral && "subject-tile__art--neutral", className)}
     />
   );
 }
@@ -27,6 +27,8 @@ export interface SubjectTileProps {
   /** Text to pick the family from when the title is not a plain subject name. */
   match?: string;
   family?: SubjectFamily;
+  /** A stable key (the workspace id) that gives a subject matching no family its own hue. */
+  seed?: string;
   sub?: ReactNode;
   /** Label for the white pill ("Continue", "Open"). */
   action?: ReactNode;
@@ -49,35 +51,46 @@ export interface SubjectTileProps {
  * A subject or course as a full-bleed tile in its family's colour with its
  * illustration bleeding off the right edge: the app's colour carrier. White
  * title, white pill action, progress on the card when there is some.
+ *
+ * Titles are whatever the student (or an upload's file name) made them, so
+ * the tile's height is fixed and never follows the text: the title clamps to
+ * two lines, the line under it to one, and the art is sized from the tile.
  */
-export function SubjectTile({ title, match, family, sub, action, progress, row, trailing, href, onClick, disabled, eager, className, style }: SubjectTileProps) {
-  const fam = family ?? familyFor(match ?? (typeof title === "string" ? title : ""));
+export function SubjectTile({ title, match, family, seed, sub, action, progress, row, trailing, href, onClick, disabled, eager, className, style }: SubjectTileProps) {
+  const text = typeof title === "string" ? title.trim() : null;
+  const fam = family ?? familyFor(match ?? text ?? "");
+  const neutral = hueFamilyFor(fam, seed) !== fam;
+  // An empty name still gets a tile you can read and tap.
+  const shownTitle = text === "" ? "Untitled" : title;
+  // A long name steps down a size before it clamps, so more of it is read.
+  const long = (text ?? match ?? "").length > 22;
   const body = (
     <>
-      <SubjectArt family={fam} eager={eager} />
+      <SubjectArt family={fam} eager={eager} neutral={neutral} />
       {row ? (
         <span className="flex w-full items-center gap-3">
           <span className="subject-tile__text min-w-0 flex-1">
-            <span className="block text-[16px] font-extrabold leading-snug">{title}</span>
-            {sub && <span className="subject-tile__sub mt-0.5 block text-[12.5px] font-semibold leading-snug">{sub}</span>}
+            <span className="subject-tile__title text-[16px] font-extrabold leading-snug text-white">{shownTitle}</span>
+            {sub && <span className="subject-tile__sub subject-tile__sub--line mt-0.5 block text-[12.5px] font-semibold leading-snug">{sub}</span>}
           </span>
         </span>
       ) : (
         <>
           <span className="subject-tile__text block">
-            <span className="line-clamp-3 block text-[19px] font-extrabold leading-[1.18] sm:text-[20px]">{title}</span>
-            {sub && <span className="subject-tile__sub mt-1 line-clamp-2 block text-[13px] font-semibold leading-snug">{sub}</span>}
+            {/* No display utility here: `block` would undo the clamp (it is what let real titles run to five lines). */}
+            <span className={cn("subject-tile__title font-extrabold text-white", long ? "text-[16px] leading-[1.22] sm:text-[16.5px]" : "text-[19px] leading-[1.18] sm:text-[20px]")}>{shownTitle}</span>
+            {sub && <span className="subject-tile__sub subject-tile__sub--line mt-1 block text-[13px] font-semibold leading-snug">{sub}</span>}
           </span>
-          <span className="mt-4 block">
+          <span className="block shrink-0">
             {progress != null && (
-              <span className="subject-track mb-3 block w-[52%]" aria-hidden>
+              <span className="subject-track mb-2.5 block w-[52%]" aria-hidden>
                 <span className="fill-grow" style={{ width: `${Math.min(100, Math.max(progress > 0 ? 6 : 0, progress * 100))}%` }} />
               </span>
             )}
             {action && (
               <span className="subject-pill">
-                {action}
-                <ChevronRight className="size-4" strokeWidth={2.6} />
+                <span className="truncate">{action}</span>
+                <ChevronRight className="size-4 shrink-0" strokeWidth={2.6} />
               </span>
             )}
           </span>
@@ -88,14 +101,14 @@ export function SubjectTile({ title, match, family, sub, action, progress, row, 
   );
   const cls = cn(
     "subject-tile text-left",
-    row ? "subject-tile--row min-h-[76px] w-full justify-center px-4 py-3" : "min-h-[156px] p-[18px] sm:min-h-[176px] sm:p-5",
+    row ? "subject-tile--row min-h-[76px] w-full justify-center px-4 py-3" : "h-[156px] p-[18px] sm:h-[176px] sm:p-5",
     disabled && "opacity-70",
     className,
   );
-  const vars = { ...familyVars(fam), ...style } as CSSProperties;
+  const vars = { ...familyVars(fam, seed), ...style } as CSSProperties;
   if (href) {
     return (
-      <Link href={href} className={cls} style={vars} onClick={onClick}>
+      <Link href={href} className={cls} style={vars} onClick={onClick} title={text && text.length > 22 ? text : undefined}>
         {body}
       </Link>
     );
@@ -112,11 +125,11 @@ export function SubjectTile({ title, match, family, sub, action, progress, row, 
  * page, the picker once a course is chosen, the result screen). The body
  * under it stays white.
  */
-export function SubjectBand({ match, family, children, className, artClassName, eager = true }: { match?: string; family?: SubjectFamily; children: ReactNode; className?: string; artClassName?: string; eager?: boolean }) {
+export function SubjectBand({ match, family, seed, children, className, artClassName, eager = true }: { match?: string; family?: SubjectFamily; /** As on SubjectTile: keeps an unmatched subject the colour its tile had. */ seed?: string; children: ReactNode; className?: string; artClassName?: string; eager?: boolean }) {
   const fam = family ?? familyFor(match);
   return (
-    <div className={cn("subject-band", className)} style={familyVars(fam) as CSSProperties}>
-      <SubjectArt family={fam} eager={eager} className={artClassName} />
+    <div className={cn("subject-band", className)} style={familyVars(fam, seed) as CSSProperties}>
+      <SubjectArt family={fam} eager={eager} neutral={hueFamilyFor(fam, seed) !== fam} className={artClassName} />
       {children}
     </div>
   );

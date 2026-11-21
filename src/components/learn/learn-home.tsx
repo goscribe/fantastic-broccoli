@@ -22,6 +22,7 @@ import { fetchUploadPreviews, uploadFiles, analyzeFiles } from "@/lib/api/materi
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { onTreeChanged, emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
+import { HOME_TILES_ALL_UP_TO, HOME_TILES_SHOWN, byRecentActivity, repeatsTitle } from "@/lib/subject-tiles";
 import { toast } from "sonner";
 import { cn, formatRelativeDate } from "@/lib/utils";
 import { Ring, WeekBars } from "@/components/design/charts";
@@ -385,8 +386,8 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>
           {scopeTitle ? (
             // The tile the student tapped on home, opened out: the subject's colour and art, where it stands, the one thing to do next.
-            <SubjectBand match={scopeTitle} className="mt-2 !rounded-[var(--r-card)] px-[18px] py-4 sm:px-6 sm:py-5">
-              <h1 className="max-w-[66%] text-[22px] font-extrabold leading-[1.15] sm:text-[26px]">{scopeTitle}</h1>
+            <SubjectBand match={scopeTitle} seed={workspaceId} className="mt-2 !rounded-[var(--r-card)] px-[18px] py-4 sm:px-6 sm:py-5">
+              <h1 title={scopeTitle} className={cn("subject-band__title max-w-[66%] font-extrabold text-white", scopeTitle.length > 40 ? "text-[18px] sm:text-[20px]" : "text-[22px] sm:text-[26px]", "leading-[1.15]")}>{scopeTitle}</h1>
               <p className="subject-tile__sub mt-1 max-w-[66%] text-[13px] font-semibold leading-snug">
                 {materials.length} material{materials.length === 1 ? "" : "s"}
                 {sessions.length > 0 ? ` · ${sessionsDone} of ${sessions.length} sessions done` : ""}
@@ -778,48 +779,78 @@ function SubjectsGrid({
   loading: boolean;
   onNew: () => void;
 }) {
+  const [showAll, setShowAll] = useState(false);
+  // Most recently active first. A real account can hold dozens of subjects: past a couple of rows, home shows the recent ones and folds the rest away.
+  const ordered = useMemo(() => byRecentActivity(workspaces, sessions), [workspaces, sessions]);
+  const many = ordered.length > HOME_TILES_ALL_UP_TO;
+  const tiles = many ? ordered.slice(0, HOME_TILES_SHOWN) : ordered;
+  const rest = many ? ordered.slice(HOME_TILES_SHOWN) : [];
+  const summary = (w: Workspace) => {
+    const own = sessions
+      .filter((x) => x.workspaceId === w.id)
+      .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    const done = own.filter((x) => x.status === "completed").length;
+    const current = own.find((x) => x.status !== "completed");
+    const counts = `${w.materials.length} material${w.materials.length === 1 ? "" : "s"}${own.length ? ` · ${done}/${own.length} sessions` : ""}`;
+    // "Next: <the subject's own name again>" says nothing: show where the subject stands instead.
+    const sub = !current ? counts : current.generating ? "Building the next session…" : repeatsTitle(w.title, current.title) ? counts : `Next: ${current.title}`;
+    return { sub, progress: own.length ? done / own.length : null, action: current ? "Continue" : "Open" };
+  };
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <h2 className="text-[20px] font-extrabold">
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="min-w-0 text-[20px] font-extrabold">
           Your subjects <span className="font-medium text-faint">· {workspaces.length}</span>
         </h2>
-        <button type="button" onClick={onNew} className="inline-flex h-11 items-center gap-1.5 rounded-[var(--r-control)] border border-border bg-card px-4 text-[13.5px] font-bold text-foreground hover:border-border-strong sm:h-10">
+        <button type="button" onClick={onNew} className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-[var(--r-control)] border border-border bg-card px-4 text-[13.5px] font-bold text-foreground hover:border-border-strong sm:h-10">
           New subject
         </button>
       </div>
       {/* Each subject is a tile in its own colour with its illustration: the colour on this page lives here. */}
       <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3.5 xl:grid-cols-3">
         {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[156px] rounded-[var(--r-card)] sm:h-[176px]" />)}
-        {workspaces.map((w) => {
-          const own = sessions
-            .filter((x) => x.workspaceId === w.id)
-            .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-          const done = own.filter((x) => x.status === "completed").length;
-          const current = own.find((x) => x.status !== "completed");
-          return (
-            <SubjectTile
-              key={w.id}
-              href={`/workspace/${w.id}`}
-              title={w.title}
-              sub={
-                current
-                  ? current.generating
-                    ? "Building the next session…"
-                    : `Next: ${current.title}`
-                  : `${w.materials.length} material${w.materials.length === 1 ? "" : "s"}${own.length ? ` · ${done}/${own.length} sessions` : ""}`
-              }
-              progress={own.length ? done / own.length : null}
-              action={current ? "Continue" : "Open"}
-            />
-          );
-        })}
-        <button type="button" onClick={onNew} className="hidden min-h-[176px] flex-col items-center justify-center gap-2 rounded-[var(--r-card)] border-2 border-dashed border-border text-center hover:border-border-strong hover:bg-muted/40 sm:flex">
-          <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-14 w-auto" />
-          <div className="text-[14px] font-semibold">New subject</div>
-          <div className="text-[12px] text-faint">Drop notes, get sessions</div>
-        </button>
+        {tiles.map((w) => (
+          <SubjectTile key={w.id} href={`/workspace/${w.id}`} title={w.title} seed={w.id} {...summary(w)} />
+        ))}
+        {!many && (
+          <button type="button" onClick={onNew} className="hidden h-[176px] flex-col items-center justify-center gap-2 rounded-[var(--r-card)] border-2 border-dashed border-border text-center hover:border-border-strong hover:bg-muted/40 sm:flex">
+            <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-14 w-auto" />
+            <div className="text-[14px] font-semibold">New subject</div>
+            <div className="text-[12px] text-faint">Drop notes, get sessions</div>
+          </button>
+        )}
       </div>
+      {rest.length > 0 && (
+        <>
+          {/* The rest as short rows in the same colours: thirty subjects stay a list you can scan, not a wall of cards. */}
+          {showAll && (
+            <div id="all-subjects" className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3 xl:grid-cols-3">
+              {rest.map((w) => (
+                <SubjectTile key={w.id} row href={`/workspace/${w.id}`} title={w.title} seed={w.id} sub={summary(w).sub} className="h-[76px]" />
+              ))}
+            </div>
+          )}
+          <div className="mt-3 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setShowAll((v) => !v)}
+              aria-expanded={showAll}
+              aria-controls="all-subjects"
+              className="inline-flex h-11 items-center gap-1.5 rounded-[var(--r-control)] border border-border bg-card px-4 text-[13.5px] font-bold text-foreground hover:border-border-strong sm:h-10"
+            >
+              {showAll ? (
+                <>
+                  Show fewer <ChevronUp className="size-4" />
+                </>
+              ) : (
+                <>
+                  Show all {ordered.length} <ChevronDown className="size-4" />
+                </>
+              )}
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

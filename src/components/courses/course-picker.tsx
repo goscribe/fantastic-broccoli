@@ -196,7 +196,7 @@ export function CoursePicker({
 
       {course && step !== "course" && (
         <SubjectBand match={course.subject || course.title} className="mt-3 flex min-h-[92px] flex-col justify-center !rounded-[var(--r-card)] px-5 py-4">
-          <p className="max-w-[68%] text-[19px] font-extrabold leading-tight">{course.title}</p>
+          <p className="subject-band__title max-w-[68%] text-[19px] font-extrabold leading-tight text-white">{course.title}</p>
           <p className="subject-tile__sub mt-0.5 max-w-[68%] text-[13px] font-semibold">
             {course.boardName}
             {level && course.levels?.length ? ` · ${level}` : ""}
