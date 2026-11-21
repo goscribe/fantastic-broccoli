@@ -7,6 +7,7 @@
  * the tab closes still arrive.
  */
 import { apiUrl } from "./api/config";
+import type { WallReason, WallVariant } from "./wall";
 
 export type FunnelEvent =
   | "first_run.viewed"
@@ -38,7 +39,11 @@ export type FunnelEvent =
   | "tour.shown"
   | "tour.closed"
   /** A search ran; `hasLocalResults` says whether the free local index found anything. */
-  | "search.query";
+  | "search.query"
+  /** Subscribe wall: shown (`reason`, `variant`), dismissed, or checkout opened from it (a trial, or the pass when `variant` is "exam_pass"). */
+  | "wall.shown"
+  | "wall.dismissed"
+  | "wall.trial_started";
 
 /** What the end screen's next step offered (the server's DEBRIEF_NEXT_KINDS). */
 export type DebriefNextKind = "session" | "quick5" | "mistakes" | "topic" | "review" | "plan" | "home" | "other";
@@ -68,6 +73,10 @@ export interface FunnelProps {
   seconds?: number;
   /** search.query: the free local index returned at least one row. */
   hasLocalResults?: boolean;
+  /** wall.*: why the wall opened (server WALL_REASONS). */
+  reason?: WallReason;
+  /** wall.*: which wall layout (server WALL_VARIANTS). */
+  variant?: WallVariant;
 }
 
 const FIRST_SCREEN_KEY = "scribe.firstRun.shownAt";

@@ -50,6 +50,9 @@ export interface PlannerWeek {
 export const fetchPlannerWeek = (weekStart?: string) =>
   rpc<PlannerWeek>("planner.getWeek", "query", weekStart ? { weekStart } : undefined);
 
+/** The learner's week-plan settings (created with the server defaults on first read). */
+export const fetchStudyPlan = () => rpc<StudyPlan>("planner.getPlan", "query", undefined);
+
 export const updateStudyPlan = (input: Partial<Omit<StudyPlan, "examDate">> & { examDate?: string | null }) =>
   rpc<StudyPlan>("planner.updatePlan", "mutation", input);
 

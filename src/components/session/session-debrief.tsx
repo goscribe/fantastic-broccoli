@@ -34,7 +34,7 @@ import { deckEntries } from "@/components/bank/bank-content";
 import { remainingMinutes } from "@/components/session/session-progress";
 import { toastError } from "@/lib/toast";
 import type { StudySession } from "@/types";
-import { SESSION_COMPLETED_EVENT } from "@/lib/api/account";
+import { SESSION_COMPLETED_EVENT, type SessionCompletedDetail } from "@/lib/api/account";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/session";
@@ -430,8 +430,10 @@ export function SessionDebrief({
   });
 
   useEffect(() => {
-    window.dispatchEvent(new CustomEvent(SESSION_COMPLETED_EVENT, { detail: { sessionId } }));
-  }, [sessionId]);
+    // `quickStart` lets the subscribe wall stay off a Quick 5's end screen (its one ask is the habit prompt).
+    const detail: SessionCompletedDetail = { sessionId, quickStart };
+    window.dispatchEvent(new CustomEvent(SESSION_COMPLETED_EVENT, { detail }));
+  }, [sessionId, quickStart]);
 
   // Mastery rows link to their topic: the catalog course (if the subject has one) and which topics have a note.
   const { data: topicLinks } = useQuery({
@@ -748,6 +750,7 @@ export function SessionDebrief({
         {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
         {quickStart && stats && (
           <HabitPrompt
+            sessionId={sessionId}
             accuracy={stats.accuracy}
             activitiesDone={stats.activitiesDone}
             subjectTitle={subjectTitle}
@@ -851,6 +854,7 @@ export function SessionDebrief({
       {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
       {quickStart && stats && (
         <HabitPrompt
+          sessionId={sessionId}
           accuracy={stats.accuracy}
           activitiesDone={stats.activitiesDone}
           subjectTitle={subjectTitle}

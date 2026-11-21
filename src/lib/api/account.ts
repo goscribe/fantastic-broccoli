@@ -55,6 +55,12 @@ export interface PlanCaps {
 /** Fired on `window` when the learner finishes a study session (debrief shown). */
 export const SESSION_COMPLETED_EVENT = "scribe:session-completed";
 
+/** `detail` of SESSION_COMPLETED_EVENT: which end screen is showing (the wall never opens on a Quick 5's). */
+export interface SessionCompletedDetail {
+  sessionId: string;
+  quickStart?: boolean;
+}
+
 export function fetchPlanCaps(): Promise<PlanCaps> {
   return rpc<PlanCaps>("payment.getPlanCaps", "query", undefined);
 }

@@ -32,15 +32,16 @@ test("a plan-limit refusal the subscribe wall claims opens the wall, without a t
   assert.deepEqual(shown, []);
 });
 
-test("a plan-limit refusal nobody claims (no wall mounted) still shows the server's message", () => {
+test("a plan-limit refusal nobody claims (no wall mounted) still shows the reason, in plain words", () => {
   surfaceRefusal("studySession.create", capMessage(3), "FORBIDDEN");
-  assert.deepEqual(shown, [capMessage(3)]);
+  assert.deepEqual(shown, ["The free plan includes 3 subjects. Your subjects stay free to use; a plan lets you add more."]);
 });
 
 test("running out of tokens counts as a plan limit on any path", () => {
   const msg = "Not enough tokens for flashcards (needs 10, you have 4). Upgrade your plan.";
   surfaceRefusal("flashcards.generateFromPrompt", msg, "FORBIDDEN");
-  assert.deepEqual(shown, [msg]);
+  // The student never reads "tokens": the plan limit, in plain words.
+  assert.deepEqual(shown, ["You've used this month's study allowance on your plan. It refills next month."]);
 });
 
 test("the same refusal surfaced twice in a row (transport + call site) is shown once", () => {

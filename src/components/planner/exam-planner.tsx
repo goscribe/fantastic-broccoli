@@ -49,7 +49,8 @@ export function ExamPlanner() {
   const router = useRouter();
   const params = useSearchParams();
   const [tab, setTab] = useState<Tab>(() => {
-    if (params.get("calendar")) return "timetable";
+    // Back from Google (?calendar=…) or "Connect Google Calendar" on home (?connect=1): the timetable, where connecting lives.
+    if (params.get("calendar") || params.get("connect")) return "timetable";
     const p = params.get("tab") as Tab | null;
     return p && TABS.includes(p) ? p : "today";
   });
