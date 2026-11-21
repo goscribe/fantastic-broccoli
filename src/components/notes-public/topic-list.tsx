@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Check, ChevronRight } from "lucide-react";
+import { Check, ChevronRight, Lock } from "lucide-react";
 import type { PublicTopicRow } from "@/lib/api/public-notes";
 import { topicKey } from "@/lib/notes-public/progress";
 import { topicPath } from "@/lib/notes-public/slug";
@@ -37,6 +37,12 @@ export function TopicList({ courseId, topics, compact = false, current }: { cour
                   {tier && <span className="font-extrabold text-foreground">· {tier}</span>}
                 </span>
               </span>
+              {t.locked && (
+                <span className="shrink-0 text-faint" title="Included with a plan or exam pass">
+                  <Lock className="size-4" strokeWidth={2.5} aria-hidden="true" />
+                  <span className="sr-only">Included with a plan or exam pass</span>
+                </span>
+              )}
               <ChevronRight className="size-4.5 shrink-0 text-faint transition-transform group-hover:translate-x-0.5 group-hover:text-accent" aria-hidden="true" />
             </Link>
           </li>

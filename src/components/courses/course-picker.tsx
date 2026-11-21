@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, ChevronRight, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, ChevronRight, Loader2, Lock } from "lucide-react";
 import {
   coursesApi,
   type CatalogTopic,
@@ -313,6 +313,12 @@ export function TopicRow({
             </span>
           )}
         </span>
+        {topic.locked && (
+          <span className="shrink-0 text-faint" title={t("course.lockedTopic")}>
+            <Lock className="size-3.5" aria-hidden="true" />
+            <span className="sr-only">{t("course.lockedTopic")}</span>
+          </span>
+        )}
         {pct !== null && <span className="shrink-0 text-[12.5px] font-semibold tabular-nums text-muted-foreground">{pct}%</span>}
         {progress?.done && (
           <span className="grid size-6 shrink-0 place-items-center rounded-full bg-accent text-white" aria-label={t("course.done")}>

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import type { CSSProperties, ReactNode } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Lock } from "lucide-react";
 import { SubjectArt } from "@/components/learn/subject-tile";
 import { familyFor, familyVars } from "@/lib/subject-family";
 import { Breadcrumbs } from "@/components/notes-public/breadcrumbs";
@@ -18,7 +18,11 @@ import { unitTitle } from "@/lib/courses";
 import type { PublicCourse, PublicQuestion, PublicTopic, PublicUnit } from "@/lib/api/public-notes";
 import { getCourse, getTopic, indexDrafts, rowIndexable } from "@/lib/notes-public/data";
 import { coursePath, neighbours, resolveSegment, topicPath, unitPath } from "@/lib/notes-public/slug";
-import { crumbsFor, isTopicIndexable, topicDescription, topicQuizJsonLd, topicTitle, unitTitleSeo } from "@/lib/notes-public/seo";
+import { crumbsFor, isTopicIndexable, lockedPageJsonLd, topicDescription, topicQuizJsonLd, topicTitle, unitTitleSeo } from "@/lib/notes-public/seo";
+import { isLocked, lockedBadge, lockedCountLabel } from "@/lib/notes-public/gate";
+import { LockedCount } from "@/components/notes-public/locked-count";
+import { LockedTopicGate } from "@/components/notes-public/locked-topic";
+import { LockedQuestions, UnlockPanel } from "@/components/notes-public/unlock-panel";
 import { jsonLdScriptProps, siteUrl } from "@/lib/seo";
 import { splitInline } from "@/lib/notes-public/inline-split";
 import { topicKey } from "@/lib/notes-public/progress";
@@ -62,10 +66,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const data = await getTopic(course.id, match.topic.id);
   if (!data) notFound();
   const hasNote = !!data.note;
-  const title = topicTitle(course, data.topic, hasNote, data.questions.length);
-  const description = topicDescription(course, data.topic, hasNote, data.questions.length);
+  // A locked topic is described by what it has (the full set), not by its preview.
+  const locked = isLocked(data.access) ? data.access : null;
+  const questionCount = locked ? locked.questions : data.questions.length;
+  const title = topicTitle(course, data.topic, hasNote, questionCount);
+  const description = topicDescription(course, data.topic, hasNote, questionCount, !!locked);
   const path = topicPath(course.id, data.topic);
-  const indexable = isTopicIndexable({ note: data.note?.label ?? null, questionCount: data.questions.length, indexDrafts: indexDrafts() });
+  const indexable = isTopicIndexable({ note: data.note?.label ?? null, questionCount, indexDrafts: indexDrafts() });
   return {
     title,
     description,
@@ -119,6 +126,16 @@ function UnitView({ course, unit }: { course: PublicCourse; unit: PublicUnit }) 
           <li>{unit.topics.length} topics</li>
           {notes > 0 && <li>{notes} notes</li>}
         </ul>
+        {unit.topics.some((t) => t.locked) && (
+          <div>
+            <LockedCount
+              label={lockedCountLabel(
+                unit.topics.filter((t) => t.locked).length,
+                course.board === "IB" ? "HL" : course.board === "A_LEVEL" ? "A_LEVEL" : "PLAN",
+              )}
+            />
+          </div>
+        )}
         {first && (
           <Link href={topicPath(course.id, first)} className="nl-btn nl-rise mt-5 w-full sm:w-auto" style={stagger(4)}>
             Start with {first.code} {first.name} <span aria-hidden="true">→</span>
@@ -182,7 +199,12 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
   const level = levelOf(topic);
   const key = topicKey(course.id, topic.id);
   const minutes = note ? readingMinutes(note.content) : 0;
-  const entries: RailEntry[] = note
+  const locked = isLocked(data.access) ? data.access : null;
+  const questionCount = locked ? locked.questions : questions.length;
+  const title = topicTitle(course, topic, !!note, questionCount);
+  const shown = note && locked ? note.content.sections.slice(0, locked.shownSections) : null;
+  const hidden = note && locked ? note.content.sections.slice(locked.shownSections) : [];
+  const entries: RailEntry[] = note && !locked
     ? [
         ...note.content.sections.map((s) => ({ anchor: `sec-${s.id}`, sectionId: s.id, kind: "section" as const, label: <RichText text={s.heading} /> })),
         ...(note.content.recall.length ? [{ anchor: "sec-recall", kind: "recall" as const, label: "Check your recall" }] : []),
@@ -195,6 +217,44 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
     </Link>
   ) : null;
 
+  // Locked topic (paid gate): the server sent only the preview; this is all of it.
+  const lockedBody = locked && (
+    <>
+      {note && shown && (
+        <div className="mt-8 lg:mt-0">
+          <PublicNoteBody note={{ ...note.content, sections: shown }} />
+        </div>
+      )}
+      <UnlockPanel
+        courseId={course.id}
+        topicId={topic.id}
+        summary={locked}
+        headings={hidden.map((s) => (
+          <RichText key={s.id} text={s.heading} />
+        ))}
+        // "Ask a parent to pay" goes here once that feature (app PR #289) is on main.
+        parentSlot={null}
+      />
+      {questions.length > 0 && (
+        <section id="practice" className="mt-16 scroll-mt-4" aria-labelledby="h-practice">
+          <div className="nl-panel relative overflow-hidden px-5 pb-6 pt-6 sm:px-8 sm:pb-8 sm:pt-8" data-nl-reveal="">
+            <Image src="/design/cat3-pencil.webp" alt="" width={360} height={400} unoptimized loading="lazy" className="absolute -bottom-2 right-3 h-[92px] w-auto sm:right-7 sm:h-[132px]" />
+            <h2 id="h-practice" className="pr-[84px] text-[30px] font-black leading-[1.05] text-foreground sm:pr-[120px] sm:text-[38px]">
+              Try {questions.length === 1 ? "a practice question" : `${questions.length} practice questions`}
+            </h2>
+            <p className="mt-2.5 max-w-[440px] pr-[84px] text-[16px] font-semibold leading-snug text-foreground/75 sm:pr-[120px] sm:text-[17px]">
+              Tap an answer to see if you&apos;re right and the worked explanation.
+            </p>
+          </div>
+          <div className="mt-4 flex flex-col">{questions.map((q, i) => questionCard(q, i + 1, "practice"))}</div>
+          <div className="mt-4">
+            <LockedQuestions courseId={course.id} topicId={topic.id} summary={locked} />
+          </div>
+        </section>
+      )}
+    </>
+  );
+
   return (
     <PracticeProvider courseId={course.id} topicId={topic.id} questionIds={ids} signupHref={signupHref}>
       {questions.length > 0 && (
@@ -202,7 +262,8 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
           {...jsonLdScriptProps(topicQuizJsonLd({ siteUrl, path, course, topic, questions: order, locale }))}
         />
       )}
-      {note && <ReadingTracker topicKey={key} sectionIds={note.content.sections.map((s) => s.id)} anchors={entries.map((e) => e.anchor)} />}
+      {locked && <script {...jsonLdScriptProps(lockedPageJsonLd({ siteUrl, path, title, locale }))} />}
+      {note && !locked && <ReadingTracker topicKey={key} sectionIds={note.content.sections.map((s) => s.id)} anchors={entries.map((e) => e.anchor)} />}
       <article className="mx-auto w-full max-w-[1120px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
         <Breadcrumbs crumbs={crumbsFor.topic(course, unit, topic)} />
         {/* The note's header band: the subject's colour and illustration. The reading body under it stays white and calm. */}
@@ -224,18 +285,26 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
             {note ? <RichText text={note.content.objectiveLine} /> : "Scribe's note for this topic is on its way. Here is what it covers."}
           </p>
           <ul className="nl-meta nl-rise mt-3.5" style={stagger(3)}>
-            {note && <li>{minutes} min read</li>}
-            {note && <li>{note.content.sections.length} parts</li>}
-            {questions.length > 0 && <li>{questions.length} questions</li>}
-            {!note && questions.length === 0 && <li>Topic outline</li>}
+            {note && !locked && <li>{minutes} min read</li>}
+            {note && <li>{locked ? locked.sections : note.content.sections.length} parts</li>}
+            {questionCount > 0 && <li>{questionCount} questions</li>}
+            {!note && questionCount === 0 && <li>Topic outline</li>}
             {note && <li>{note.label === "reviewed" ? "Reviewed" : "Draft"}</li>}
-            {topic.hlOnly && <li>HL only</li>}
+            {locked ? (
+              <li>
+                <span className="inline-flex items-center gap-1">
+                  <Lock className="size-3.5" strokeWidth={2.75} aria-hidden="true" /> {lockedBadge(locked.kind)}
+                </span>
+              </li>
+            ) : (
+              topic.hlOnly && <li>HL only</li>
+            )}
             {topic.bcOnly && <li>BC only</li>}
             {topic.higherTierOnly && <li>Higher tier</li>}
           </ul>
           <div className="nl-rise mt-5 flex flex-col gap-1.5 sm:flex-row sm:gap-3" style={stagger(4)}>
             <StartQuick5 courseId={course.id} topicId={topic.id} level={level} placement="header" />
-            {questions.length > 0 && (
+            {questions.length > 0 && !locked && (
               <a href="#practice" className="nl-btn-ghost max-sm:!min-h-11 max-sm:!border-0 max-sm:!bg-transparent max-sm:!shadow-none max-sm:underline max-sm:decoration-white/50 max-sm:decoration-2 max-sm:underline-offset-4">
                 Jump to the {questions.length} questions
               </a>
@@ -245,7 +314,11 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
 
         <div className="mt-6 lg:mt-12 lg:grid lg:grid-cols-[minmax(0,700px)_300px] lg:justify-between lg:gap-12">
           <div id="nl-article" className="min-w-0">
-            {note ? (
+            {locked ? (
+              <LockedTopicGate courseId={course.id} topicId={topic.id} kind={locked.kind} signupHref={signupHref}>
+                {lockedBody}
+              </LockedTopicGate>
+            ) : note ? (
               // The pill is sticky only while the note itself is on screen (the practice section has its own score bar).
               <div>
                 <ReadingPill topicKey={key} entries={entries} />
@@ -272,7 +345,7 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
               </>
             )}
 
-            {questions.length > 0 && (
+            {questions.length > 0 && !locked && (
               <section id="practice" className="mt-16 scroll-mt-4" aria-labelledby="h-practice">
                 <div className="nl-panel relative overflow-hidden px-5 pb-6 pt-6 sm:px-8 sm:pb-8 sm:pt-8" data-nl-reveal="">
                   <Image src="/design/cat3-pencil.webp" alt="" width={360} height={400} unoptimized loading="lazy" className="absolute -bottom-2 right-3 h-[92px] w-auto sm:right-7 sm:h-[132px]" />
@@ -294,7 +367,7 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
               </section>
             )}
 
-            {note && questions.length === 0 && (
+            {note && questions.length === 0 && !locked && (
               <section className="nl-panel relative mt-16 overflow-hidden px-5 pb-6 pt-6 sm:px-8 sm:pb-8 sm:pt-8" aria-labelledby="h-finish" data-nl-reveal="">
                 <Image src="/design/cat3-cheer.webp" alt="" width={363} height={400} unoptimized loading="lazy" className="absolute right-3 top-4 h-[88px] w-auto sm:right-7 sm:h-[128px]" />
                 <h2 id="h-finish" className="pr-[80px] text-[28px] font-black leading-[1.06] text-foreground sm:text-[36px]">
@@ -372,7 +445,7 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
               <p>Topic codes follow the official numbering. Not endorsed by {course.boardName} or any exam board.</p>
             </footer>
           </div>
-          {note && (
+          {note && !locked && (
             <aside className="hidden lg:block">
               <ReadingRail topicKey={key} entries={entries} />
             </aside>

@@ -10,6 +10,8 @@ import { BOARD_LABEL, BOARD_ORDER } from "@/lib/courses";
 import { getCourses } from "@/lib/notes-public/data";
 import { coursePath } from "@/lib/notes-public/slug";
 import { crumbsFor, INDEX_DESCRIPTION, INDEX_TITLE } from "@/lib/notes-public/seo";
+import { lockedCountLabel } from "@/lib/notes-public/gate";
+import { Lock } from "lucide-react";
 
 export const revalidate = 3600;
 
@@ -87,6 +89,12 @@ export default async function NotesIndexPage() {
                     <span className="subject-tile__sub block text-[13.5px] font-semibold leading-snug">
                       {[c.noteCount > 0 ? `${c.noteCount} notes` : null, c.questionCount > 0 ? `${c.questionCount} questions` : null].filter(Boolean).join(" · ") || "Topic outlines"}
                     </span>
+                    {!!c.lockedCount && (
+                      <span className="subject-tile__sub mt-0.5 flex items-center gap-1 text-[13px] font-semibold leading-snug">
+                        <Lock className="size-3 shrink-0" strokeWidth={2.5} aria-hidden="true" />
+                        {lockedCountLabel(c.lockedCount, c.lockedKind)}
+                      </span>
+                    )}
                   </span>
                   <span className="mt-4 block">
                     <span className="nl-meter block w-[52%]" aria-hidden="true">

@@ -22,7 +22,29 @@ export interface PublicCourseSummary {
   topicCount: number;
   noteCount: number;
   questionCount: number;
+  /** Topics behind the paid gate (0 while it is off) and how they are described. */
+  lockedCount?: number;
+  lockedKind?: LockedKind;
 }
+
+/** How a locked topic is gated: IB HL-only, second-year A-level, or the whole course. */
+export type LockedKind = "HL" | "A_LEVEL" | "PLAN";
+
+/** What a locked page leaves out (server src/lib/notes/gate.ts LockedSummary). */
+export interface LockedSummary {
+  locked: true;
+  kind: LockedKind;
+  sections: number;
+  shownSections: number;
+  questions: number;
+  shownQuestions: number;
+  workedExamples: number;
+  keyTerms: number;
+  figures: number;
+  recall: number;
+}
+
+export type NoteAccess = { locked: false } | LockedSummary;
 
 export interface PublicTopicRow {
   id: string;
@@ -31,6 +53,8 @@ export interface PublicTopicRow {
   hlOnly?: boolean;
   higherTierOnly?: boolean;
   bcOnly?: boolean;
+  /** Needs a plan or exam pass (only while the server's NOTES_PAID_GATE is on). */
+  locked?: boolean;
   note: NoteLabel | null;
   questionCount: number;
 }
@@ -73,6 +97,12 @@ export interface PublicTopic {
   note: { label: NoteLabel; version: number; updatedAt: string; content: TopicNoteContent } | null;
   questions: PublicQuestion[];
   updatedAt: string | null;
+  /**
+   * `locked: false`, or what the preview leaves out: then `note` holds only the
+   * first section (the rest are headings with no blocks) and `questions` the
+   * preview questions. Older servers omit it (treated as unlocked).
+   */
+  access?: NoteAccess;
 }
 
 export interface SitemapRow {
@@ -120,14 +150,18 @@ export type PublicNoteEvent =
   | "notes.practice_answered"
   | "notes.signup_prompt_shown"
   | "notes.signup_clicked"
-  | "notes.quick5_clicked";
+  | "notes.quick5_clicked"
+  | "notes.locked_viewed"
+  | "notes.unlock_clicked";
 
 export interface PublicEventProps {
   correct?: boolean;
   answered?: number;
   totalAnswered?: number;
   difficulty?: "easy" | "medium" | "hard";
-  placement?: "prompt" | "header" | "practice_end" | "note_cta" | "inline";
+  placement?: "prompt" | "header" | "practice_end" | "note_cta" | "inline" | "unlock_panel" | "locked_questions";
+  lockedKind?: LockedKind;
+  signedIn?: boolean;
   viewportWidth?: number;
   fromSearch?: boolean;
 }

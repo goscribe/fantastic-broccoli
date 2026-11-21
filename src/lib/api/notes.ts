@@ -1,4 +1,5 @@
 import { rpc } from "./study-session";
+import type { NoteAccess, PublicTopic } from "./public-notes";
 
 /**
  * Client for the server's `topicNote` router (goscribe/server): Scribe's own
@@ -76,7 +77,10 @@ export interface LearnerNote {
   version: number;
   label: NoteLabel;
   updatedAt: string;
+  /** The whole note, or only its preview when `access.locked` (paid gate). */
   content: TopicNoteContent;
+  /** Older servers omit it (treated as unlocked). */
+  access?: NoteAccess;
 }
 
 export interface CheckedClaim {
@@ -186,6 +190,8 @@ export interface PayoutRow {
 export const notesApi = {
   get: (courseId: string, topicId: string) =>
     rpc<LearnerNote | null>("topicNote.get", "query", { courseId, topicId }),
+  /** The public page's data for the signed-in user; whole when they may read a locked topic. */
+  page: (courseId: string, topicId: string) => rpc<PublicTopic | null>("topicNote.page", "query", { courseId, topicId }),
   listForCourse: (courseId: string) =>
     rpc<{ topicId: string; label: NoteLabel }[]>("topicNote.listForCourse", "query", { courseId }),
 };
