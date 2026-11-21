@@ -7,7 +7,10 @@ import { LEVEL_FILL, LevelBadge } from "@/components/session/precheck";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/proficiency";
 import { cn } from "@/lib/utils";
-import { Check, Repeat } from "lucide-react";
+import { Check, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { mistakesApi, practiceHref, type MistakeSummary } from "@/lib/api/mistakes";
+import "@/lib/i18n/mistakes";
 
 /** Strongest first, so the summary reads "2 secure · 1 to practise · 1 to build". */
 const SUMMARY_ORDER: ProficiencyLevel[] = ["secure", "developing", "beginner", "unknown"];
@@ -28,6 +31,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
   const { t } = useI18n();
   const [levels, setLevels] = useState<TopicLevel[] | null>(null);
   const [pref, setPref] = useState<{ longTerm: boolean; dueItems: number } | null>(null);
+  const [mistakes, setMistakes] = useState<MistakeSummary | null>(null);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -35,10 +39,12 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
     void Promise.all([
       proficiencyApi.list(workspaceId).catch(() => []),
       proficiencyApi.reviewPreference(workspaceId).catch(() => null),
-    ]).then(([l, p]) => {
+      mistakesApi.summary(workspaceId).catch(() => null),
+    ]).then(([l, p, m]) => {
       if (cancelled) return;
       setLevels(l);
       setPref(p);
+      setMistakes(m);
     });
     return () => {
       cancelled = true;
@@ -67,9 +73,9 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
   const labelId = `review-${workspaceId}`;
 
   return (
-    <section className="rounded-3xl border border-border bg-card p-5 sm:p-6">
+    <section>
       <div className="flex items-baseline justify-between gap-3">
-        <h2 className="text-[17px] font-bold tracking-tight">{t("prof.progressTitle")}</h2>
+        <h2 className="text-[16px] font-semibold">{t("prof.progressTitle")}</h2>
         {levels.length > 0 && (
           <span className="shrink-0 text-[12.5px] tabular-nums text-muted-foreground">
             {t("prof.topicCount").replace("{count}", String(levels.length))}
@@ -78,12 +84,12 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
       </div>
 
       {shown.length === 0 ? (
-        <div className="mt-4 flex items-center gap-4 rounded-2xl border border-dashed border-border-strong/80 bg-muted/40 px-4 py-4">
+        <div className="mt-3 flex items-center gap-4">
           <Image
-            src="/design/cat2-book.png"
+            src="/design/cat3-book.webp"
             alt=""
-            width={60}
-            height={66}
+            width={363}
+            height={400}
             unoptimized
             className="cat-bob h-[60px] w-auto shrink-0 select-none object-contain"
           />
@@ -156,22 +162,35 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
         </>
       )}
 
-      {pref && (
-        <div
-          className={cn(
-            "mt-5 flex items-start gap-3.5 rounded-2xl border p-4 transition-colors",
-            pref.longTerm ? "border-accent/25 bg-accent-soft/50" : "border-border bg-muted/40",
+      {mistakes && mistakes.total > 0 && (
+        <div className="mt-5 flex items-center gap-3.5 border-t border-border pt-4">
+          <div className="min-w-0 flex-1">
+            <p className="text-[14px] font-semibold">
+              {mistakes.open === 0
+                ? t("mistakes.cardRowNone")
+                : (mistakes.open === 1 ? t("mistakes.cardRowOne") : t("mistakes.cardRow")).replace("{n}", String(mistakes.open))}
+            </p>
+            <Link
+              href={`/mistakes?workspace=${encodeURIComponent(workspaceId)}`}
+              className="mt-0.5 inline-flex items-center gap-0.5 text-[12.5px] font-semibold text-accent-dim hover:underline"
+            >
+              {t("mistakes.cardSeeAll")}
+              <ChevronRight className="size-3.5" />
+            </Link>
+          </div>
+          {mistakes.open > 0 && (
+            <Link
+              href={practiceHref({ workspaceId })}
+              className="shrink-0 rounded-full bg-accent px-4 py-2 text-[13px] font-semibold text-accent-foreground transition-colors hover:bg-accent-dim"
+            >
+              {t("mistakes.practice")}
+            </Link>
           )}
-        >
-          <span
-            className={cn(
-              "hidden size-9 shrink-0 place-items-center rounded-xl transition-colors sm:grid",
-              pref.longTerm ? "bg-accent text-white" : "bg-card text-muted-foreground",
-            )}
-            aria-hidden
-          >
-            <Repeat className="size-[18px]" />
-          </span>
+        </div>
+      )}
+
+      {pref && (
+        <div className="mt-4 flex items-start gap-3.5 border-t border-border pt-4">
           <div className="min-w-0 flex-1">
             <p id={labelId} className="text-[14px] font-semibold">
               {t("prof.reviewTitle")}
@@ -183,7 +202,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
               <p
                 className={cn(
                   "mt-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-semibold",
-                  pref.dueItems > 0 ? "bg-accent text-white" : "bg-card text-accent",
+                  pref.dueItems > 0 ? "bg-accent text-white" : "bg-muted text-accent",
                 )}
               >
                 {pref.dueItems > 0 ? (

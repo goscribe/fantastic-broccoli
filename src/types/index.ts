@@ -48,6 +48,8 @@ export interface StudySession {
   generationProgress?: PlanGenerationSnapshot;
   /** Quick 5: a single easy 5-question quiz (first session / daily "5 more"). */
   quickStart: boolean;
+  /** Built from the learner's mistakes ("Practice my mistakes"). */
+  mistakesPractice?: boolean;
   status: "active" | "paused" | "completed" | "failed";
   startDate: string;
   endDate?: string;
@@ -177,12 +179,28 @@ export type ReadingFigure =
   | ReadingImageFigure
   | ReadingHtmlFigure;
 
+/** Where a source-first reading's text comes from (the student's own notes). */
+export interface ReadingSource {
+  kind: "notes";
+  documents?: string[];
+  pages?: number[];
+  /** Ready-made badge, e.g. "From your notes: physics.pdf, p. 3". */
+  label?: string;
+}
+
 export interface ReadingContent {
   type: "reading";
   text: string;
   figures?: ReadingFigure[];
   highlights?: { start: number; end: number; note: string }[];
   completed: boolean;
+  /** "source": the student's notes verbatim; "scribe"/"topic": written by Scribe. */
+  mode?: "source" | "scribe" | "topic";
+  source?: ReadingSource;
+  /** Teach-back checklist (used by the server). */
+  keyPoints?: string[];
+  /** Typed blocks (origin "source" | "scribe"); inline quick checks live here. */
+  blocks?: { type: string; origin?: "source" | "scribe"; text?: string; [key: string]: unknown }[];
 }
 
 export interface WorksheetFigure {

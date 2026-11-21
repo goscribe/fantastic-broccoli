@@ -42,8 +42,8 @@ export default function ForgotPasswordPage() {
       <AuthFigure
         src={
           sent
-            ? "/design/cat2-wave.png"
-            : "/design/cat2-think.png"
+            ? "/design/cat3-wave.webp"
+            : "/design/cat3-think.webp"
         }
       />
 

@@ -132,6 +132,10 @@ const en = {
   "session.remove": "Remove",
   "session.save": "Save",
   "session.doneReading": "Done reading",
+  "session.sectionOf": "Section {n} of {m}",
+  "session.quickCheck": "Quick check",
+  "session.tryAgain": "Try again",
+  "session.fromYourNotes": "From your notes",
   // Vocab recall
   "session.allPrefix": "All",
   "session.termsRecalled": "terms recalled",

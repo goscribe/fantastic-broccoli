@@ -49,10 +49,13 @@ import { ExplainAloudActivity } from "@/components/session/explain-aloud-activit
 import { InteractiveActivity } from "@/components/session/interactive-activity";
 import { WorksheetActivity } from "@/components/session/worksheet-activity";
 import { SessionDebrief } from "@/components/session/session-debrief";
+import { localizePracticeSession, mistakesApi } from "@/lib/api/mistakes";
+import "@/lib/i18n/mistakes";
 import {
   ActivityRewardCard,
   REWARD_MS,
-  SessionProgressHeader,
+  SessionStepBar,
+  SessionStepLabel,
   remainingMinutes,
   type ActivityReward,
 } from "@/components/session/session-progress";
@@ -70,6 +73,7 @@ import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import "@/lib/i18n/first-run";
+import "@/lib/i18n/today";
 import { track } from "@/lib/funnel";
 import { ACTIVITY_TYPE_LABELS } from "@/components/session/activity-item";
 import { cn, formatDuration, formatRelativeDate } from "@/lib/utils";
@@ -137,9 +141,11 @@ export default function SessionDetailPage() {
     queryKey: ["workspace", workspaceId],
     queryFn: () => fetchWorkspace(workspaceId),
   });
-  const { data: session, isLoading } = useQuery({
+  const { data: session, isLoading, isError: sessionError, refetch: refetchSession } = useQuery({
     queryKey: ["study-session", sessionId],
     queryFn: () => fetchStudySession(sessionId),
+    // "Practice my mistakes" is built server-side with English titles.
+    select: (s) => localizePracticeSession(s, t),
     // Plans are generated in the background — poll while generating as a
     // fallback for when Pusher isn't configured.
     refetchInterval: (query) =>
@@ -491,17 +497,23 @@ export default function SessionDetailPage() {
       );
     }
     return (
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex flex-1 items-center justify-center px-6">
         <div className="text-center">
-          <p className="text-muted-foreground">{t("session.notFound")}</p>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => router.push(`/workspace/${workspaceId}`)}
-            className="mt-2"
-          >
-            {t("session.goBack")}
-          </Button>
+          <p className="text-[15px] text-muted-foreground">{t(sessionError ? "today.sessionLoadError" : "session.notFound")}</p>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {sessionError && (
+              <Button size="lg" onClick={() => void refetchSession()}>
+                {t("today.retry")}
+              </Button>
+            )}
+            <Button
+              variant={sessionError ? "ghost" : "primary"}
+              size="lg"
+              onClick={() => router.push(`/workspace/${workspaceId}`)}
+            >
+              {t("session.goBack")}
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -621,6 +633,7 @@ export default function SessionDetailPage() {
   const showExtendPrompt =
     planReady &&
     !session.quickStart &&
+    !session.mistakesPractice &&
     nearEnd &&
     !extended &&
     !extendDismissed &&
@@ -670,8 +683,14 @@ export default function SessionDetailPage() {
                   flashcardId: question.sourceFlashcardId,
                   isCorrect: selectedIndex === question.correctIndex,
                   studySessionId: sessionId,
+                  fromQuiz: true,
                 }).catch(() => {});
               }
+              // Marked server-side too, so a wrong answer lands in the
+              // mistakes log (bank questions are logged by answerBankQuestion).
+              mistakesApi
+                .answerMcq({ activityId: activity.id, questionIndex, selectedIndex })
+                .catch(() => {});
               // Spaced-review questions from the bank are re-marked
               // server-side, updating the topic level and their schedule.
               if (question?.bankRef) {
@@ -711,7 +730,7 @@ export default function SessionDetailPage() {
             activityId={activity.id}
             draft={activity.draft}
             content={activity.content as VocabRecallContent}
-            onTermResult={(index, correct) => {
+            onTermResult={(index, correct, answer) => {
               const term = (activity.content as VocabRecallContent).terms[
                 index
               ];
@@ -720,6 +739,7 @@ export default function SessionDetailPage() {
                   flashcardId: term.flashcardId,
                   isCorrect: correct,
                   studySessionId: sessionId,
+                  answer,
                 }).catch(() => {});
               }
             }}
@@ -903,45 +923,52 @@ export default function SessionDetailPage() {
     return (
       <div className="flex h-dvh min-h-0 flex-1 overflow-hidden bg-background">
         <div className="relative flex min-w-0 flex-1 flex-col">
-          <div className="flex items-center gap-4 px-5 pt-5 sm:gap-5 sm:px-10">
-            <button
-              type="button"
-              onClick={() => router.push(`/workspace/${workspaceId}`)}
-              aria-label={t("session.backToWorkspace")}
-              className="grid size-9 shrink-0 place-items-center rounded-xl text-faint hover:bg-muted hover:text-foreground"
-            >
-              <X className="size-[22px]" />
-            </button>
-            <SessionProgressHeader
-              activities={activities}
-              activeIndex={activeIndex}
-              onSelect={goToIndex}
-            />
-            <button
-              type="button"
-              onClick={() => setShowComments(!showComments)}
-              aria-label={t("session.sessionNotes")}
-              className="relative grid size-9 shrink-0 place-items-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
-            >
-              <MessageSquare className="size-4" />
-              {panelCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 grid size-3.5 place-items-center rounded-full bg-accent text-[9px] font-bold text-accent-foreground">
-                  {panelCount}
-                </span>
-              )}
-            </button>
+          {/* The top bar sits in the same column as the content under it (same gutters, same max width), so the step bar and the question share their edges. */}
+          <div className="px-4 pt-[max(0.5rem,env(safe-area-inset-top))] sm:px-10 sm:pt-4">
+            <div className={cn("mx-auto w-full", activeActivity ? "max-w-3xl" : "max-w-2xl")}>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => router.push(`/workspace/${workspaceId}`)}
+                  aria-label={t("session.backToWorkspace")}
+                  className="-ml-3 grid size-11 shrink-0 place-items-center rounded-full text-faint hover:bg-muted hover:text-foreground"
+                >
+                  <X className="size-[22px]" />
+                </button>
+                <SessionStepLabel activities={activities} activeIndex={activeIndex} className="flex-1" />
+                {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
+                {planReady && !copilotOpen && (
+                  <CopilotTrigger compact onClick={() => setCopilotOpen(true)} />
+                )}
+                <button
+                  type="button"
+                  onClick={() => setShowComments(!showComments)}
+                  aria-label={t("session.sessionNotes")}
+                  className="relative -mr-3 grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
+                >
+                  <MessageSquare className="size-4" />
+                  {panelCount > 0 && (
+                    <span className="absolute right-1 top-1 grid size-3.5 place-items-center rounded-full bg-accent text-[9px] font-bold text-accent-foreground">
+                      {panelCount}
+                    </span>
+                  )}
+                </button>
+              </div>
+              <SessionStepBar activities={activities} activeIndex={activeIndex} onSelect={goToIndex} />
+            </div>
           </div>
 
           <div
             key={activeActivity?.id ?? "debrief"}
             className={cn(
-              "min-h-0 flex-1 overflow-y-auto px-5 pb-28 pt-6 sm:px-10",
+              // Room for the bottom bar and the phone's home indicator, so the last answer is never under them.
+              "min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-4 sm:px-10 sm:pt-6",
               navDirection === "back" ? "animate-slide-in-left" : "animate-slide-in-right",
             )}
           >
-            <div className="mx-auto w-full max-w-3xl">
+            <div className={cn("mx-auto w-full", activeActivity ? "max-w-3xl" : "max-w-2xl")}>
               {showExtendPrompt && (
-                <div className="mb-5 flex flex-wrap items-center gap-3 rounded-2xl border border-accent/30 bg-accent-soft/60 px-5 py-4 animate-fade-up">
+                <div className="mb-5 flex flex-wrap items-center gap-3 rounded-[22px] bg-muted px-5 py-4 animate-fade-up">
                   <div className="min-w-56 flex-1">
                     <p className="text-sm font-semibold">{t("session.extendTitle")}</p>
                     <p className="mt-0.5 text-xs text-muted-foreground">
@@ -968,11 +995,11 @@ export default function SessionDetailPage() {
               {activeActivity ? (
                 <>
                   <div className="flex flex-wrap items-center justify-between gap-3">
-                    <span className="inline-flex items-center rounded-lg bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent-dim">
+                    <span data-scroll-line className="inline-flex items-center text-[13px] font-bold text-muted-foreground">
                       {[t(ACTIVITY_TYPE_LABELS[activeActivity.type] ?? "session.typeActivity"), t(`session.phase${phaseOf(activeActivity.type)}`)].filter((v, i, arr) => arr.indexOf(v) === i).join(" · ")}
                     </span>
                   </div>
-                  <h1 className="mb-[18px] mt-3 text-[23px] font-bold leading-[1.3]">
+                  <h1 className="mb-4 mt-2.5 text-[20px] font-bold leading-[1.3] sm:mb-[18px] sm:mt-3 sm:text-[23px]">
                     <MathText text={activeActivity.title} />
                   </h1>
                   <ContentRepairProvider
@@ -986,27 +1013,30 @@ export default function SessionDetailPage() {
                   </ContentRepairProvider>
                 </>
               ) : (
-                <SessionDebrief sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
+                <SessionDebrief activities={activities} sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
               )}
             </div>
           </div>
 
           {activeActivity && (
-            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 border-t border-border bg-card/95 px-5 py-3 backdrop-blur sm:px-10">
+            <div className="absolute inset-x-0 bottom-0 z-20 border-t border-border bg-card/95 px-4 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur sm:px-10 sm:py-2.5">
+            {/* Quiet text buttons, in the content's own column so Back and Next line up with it. */}
+            <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-2 sm:gap-3">
               <button
                 type="button"
                 disabled={activeIndex === 0}
                 onClick={() => goToIndex(activeIndex - 1)}
-                className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-border px-4 text-[13.5px] font-semibold hover:bg-muted disabled:opacity-40"
+                aria-label={t("session.back")}
+                className="-ml-3 inline-flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-[14px] font-bold hover:bg-muted disabled:opacity-40 sm:-ml-4 sm:px-4"
               >
                 <ArrowLeft className="size-4" />
-                {t("session.back")}
+                <span className="max-[380px]:sr-only">{t("session.back")}</span>
               </button>
               <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={() => goToNext(true)}
-                  className="inline-flex h-10 items-center gap-1.5 rounded-xl px-4 text-[13.5px] font-semibold text-muted-foreground hover:bg-muted"
+                  className="inline-flex h-11 items-center gap-1.5 rounded-full px-3 text-[14px] font-bold text-muted-foreground hover:bg-muted sm:px-4"
                 >
                   <SkipForward className="size-4" />
                   {t("session.skip")}
@@ -1014,17 +1044,18 @@ export default function SessionDetailPage() {
                 <button
                   type="button"
                   onClick={() => goToIndex(activeIndex + 1)}
-                  className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-border px-4 text-[13.5px] font-semibold hover:bg-muted"
+                  className="-mr-4 inline-flex h-11 items-center gap-1.5 rounded-full px-4 text-[14px] font-bold hover:bg-muted"
                 >
                   {t("session.next")}
                   <ArrowRight className="size-4" />
                 </button>
               </div>
             </div>
+            </div>
           )}
 
           {activeReward && (
-            <div className="pointer-events-none absolute inset-x-0 bottom-[76px] z-30 flex justify-center px-4">
+            <div className="pointer-events-none absolute inset-x-0 bottom-[calc(76px+env(safe-area-inset-bottom))] z-30 flex justify-center px-4">
               <ActivityRewardCard
                 reward={activeReward}
                 onNext={() =>

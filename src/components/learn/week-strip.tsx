@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { CalendarDays, Loader2, Settings2, Upload, X } from "lucide-react";
+import { Loader2, Settings2, Upload, X } from "lucide-react";
 import { PlanSetupWizard } from "@/components/learn/plan-setup-wizard";
 import {
   fetchPlannerMessages,
@@ -205,7 +205,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
         <>
         {lastNote && (notes?.unread ?? 0) > 0 && (
           <Link href="/planner" className="mt-3 flex items-start gap-2.5 rounded-xl border border-[#f6d9a8] bg-[#fff8ec] px-3.5 py-2.5 text-[13px] text-[#5b3a12] hover:brightness-[0.98]">
-            <Image src="/design/cat2-think.png" alt="" width={28} height={28} className="size-7 shrink-0 object-contain" />
+            <Image src="/design/cat3-think.webp" alt="" width={383} height={400} className="size-7 shrink-0 object-contain" />
             <span className="min-w-0"><b className="text-[#b4530a]">Note from your planner · </b>{lastNote.content}</span>
           </Link>
         )}
@@ -339,7 +339,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
 
       {data && data.days.every((d) => d.slots.length === 0) && (
         <p className="mt-2 flex items-center gap-1.5 text-[12.5px] text-faint">
-          <CalendarDays className="size-3.5" /> Tell me when you&apos;re free and add a subject — the week fills itself in.
+          Tell me when you&apos;re free and add a subject — the week fills itself in.
         </p>
       )}
 

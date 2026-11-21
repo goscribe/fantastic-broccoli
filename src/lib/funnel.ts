@@ -18,12 +18,17 @@ export type FunnelEvent =
   | "first_run.wait_viewed"
   | "first_run.left_while_waiting"
   | "quick5.started"
-  | "quick5.finished";
+  | "quick5.finished"
+  /** Home's one "Today" button was tapped; `action` says which one it was. */
+  | "home.today_tapped";
+
+export type TodayActionKind = "mistakes" | "plan" | "quick5" | "upload" | "continue";
 
 export type FirstRunOption = "upload" | "camera" | "topic" | "paste" | "curriculum" | "skip";
 
 export interface FunnelProps {
   option?: FirstRunOption;
+  action?: TodayActionKind;
   durationMs?: number;
   fileCount?: number;
   sizeKb?: number;
@@ -77,19 +82,21 @@ export function funnelPayload(
 
 export function track(event: FunnelEvent, props: FunnelProps = {}, workspaceId?: string): void {
   if (typeof window === "undefined" || !apiUrl) return;
-  const now = Date.now();
-  const body = funnelPayload(
-    event,
-    props,
-    {
-      now,
-      viewportWidth: window.innerWidth,
-      touch: typeof window.matchMedia === "function" ? window.matchMedia("(pointer: coarse)").matches : undefined,
-      sinceFirstScreen: msSinceFirstScreen(now),
-    },
-    workspaceId,
-  );
+  // Fire-and-forget, and nothing here may throw: callers track right before a
+  // navigation or upload, and a failed or rejected (400) event must never stop the tap.
   try {
+    const now = Date.now();
+    const body = funnelPayload(
+      event,
+      props,
+      {
+        now,
+        viewportWidth: window.innerWidth,
+        touch: typeof window.matchMedia === "function" ? window.matchMedia("(pointer: coarse)").matches : undefined,
+        sinceFirstScreen: msSinceFirstScreen(now),
+      },
+      workspaceId,
+    );
     void fetch(`${apiUrl}/trpc/activity.track`, {
       method: "POST",
       credentials: "include",

@@ -2,7 +2,10 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Link2, Loader2, Upload } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, GraduationCap, Link2, Loader2, Upload } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/courses";
 import { createWorkspace } from "@/lib/api/workspace";
 import { analyzeFiles, importYoutube, uploadFiles } from "@/lib/api/materials";
 import { createStudySession } from "@/lib/api/study";
@@ -18,6 +21,7 @@ type Step = "intro" | "subject" | "material" | "building";
 
 /** First run: (optional walkthrough video,) name a subject, drop your notes (or a YouTube link), the first session builds. The cat walks you through. */
 export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip: () => void; firstName?: string; intro?: boolean }) {
+  const { t } = useI18n();
   const router = useRouter();
   const fileRef = useRef<HTMLInputElement>(null);
   const [step, setStep] = useState<Step>(intro ? "intro" : "subject");
@@ -87,6 +91,13 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
             >
               Set up my first subject <ArrowRight className="size-4" />
             </button>
+            <Link
+              href="/courses"
+              className="mt-4 flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl border border-border text-[13.5px] font-semibold text-foreground hover:border-border-strong"
+            >
+              <GraduationCap className="size-4 text-accent" />
+              {t("course.orPick")}
+            </Link>
             <button type="button" onClick={onSkip} className="mt-4 block w-full text-center text-[13px] font-medium text-faint hover:text-foreground">
               I&apos;ll look around first
             </button>
@@ -106,7 +117,7 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
 
         {step === "subject" && (
           <section>
-            <Image src="/design/cat2-wave.png" alt="" width={96} height={96} unoptimized className="cat-wiggle mx-auto h-24 w-auto" />
+            <Image src="/design/cat3-wave.webp" alt="" width={352} height={400} unoptimized className="cat-wiggle mx-auto h-24 w-auto" />
             <h1 className="mt-3 text-center text-[24px] font-bold tracking-tight">
               {firstName ? `Hi ${firstName} — what are you studying?` : "What are you studying?"}
             </h1>
@@ -150,7 +161,7 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
 
         {step === "material" && (
           <section>
-            <Image src="/design/cat2-book.png" alt="" width={96} height={96} unoptimized className="cat-bob mx-auto h-24 w-auto" />
+            <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob mx-auto h-24 w-auto" />
             <h1 className="mt-3 text-center text-[24px] font-bold tracking-tight">Drop your {subject.trim()} notes</h1>
             <p className="mt-1 text-center text-[14px] text-muted-foreground">Slides, PDFs, photos of notes or a lecture recording — I&apos;ll turn them into your first session.</p>
             <input ref={fileRef} type="file" multiple accept={UPLOAD_ACCEPT} className="hidden" onChange={(e) => addFiles(e.target.files)} />
@@ -196,7 +207,7 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
 
         {step === "building" && (
           <section className="text-center">
-            <Image src="/design/cat2-think.png" alt="" width={96} height={96} unoptimized className="cat-bob mx-auto h-24 w-auto" />
+            <Image src="/design/cat3-think.webp" alt="" width={383} height={400} unoptimized className="cat-bob mx-auto h-24 w-auto" />
             <h1 className="mt-3 text-[24px] font-bold tracking-tight">Setting up {subject.trim()}</h1>
             <p className="mt-2 inline-flex items-center gap-2 text-[14px] text-muted-foreground">
               <Loader2 className="size-4 animate-spin text-accent" /> {status}

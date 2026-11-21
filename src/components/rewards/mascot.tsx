@@ -8,12 +8,12 @@ import { useEquippedOutfit, type OutfitId } from "@/lib/rewards";
 /**
  * The cat mascot with an optional shop outfit drawn over it.
  *
- * Each pose is a flat PNG; the outfits are hand-drawn SVG accessories placed
- * from per-pose landmarks measured in the PNG's own pixels (ear tips, eye
- * centres). The overlay uses the PNG's size as its viewBox, so it scales with
- * the image at any size. Headphone bands sit in a layer *behind* the image —
- * the PNG is transparent around the cat, so the band shows above the head
- * and disappears behind the ears.
+ * Each pose is a WebP with alpha, 400px tall (2x the largest size it is shown
+ * at); the outfits are hand-drawn SVG accessories placed from per-pose
+ * landmarks (ear tips, eye centres) in half-pixel units of that image. The
+ * overlay uses that size as its viewBox, so it scales with the image.
+ * Headphone bands sit in a layer *behind* the image: it is transparent around
+ * the cat, so the band shows above the head and disappears behind the ears.
  */
 
 export type MascotPose =
@@ -39,18 +39,21 @@ interface PoseInfo {
 }
 
 const POSES: Record<MascotPose, PoseInfo> = {
-  wave: { w: 240, h: 255, earL: [96, 0], earR: [173, 1], eyeL: [108.5, 57.5], eyeR: [163.5, 58] },
-  flame: { w: 235, h: 260, earL: [105, 0], earR: [183, 0], eyeL: [118.5, 59], eyeR: [171.5, 59.5] },
-  pencil: { w: 234, h: 262, earL: [102, 1], earR: [182, 0], eyeL: [118.5, 58.5], eyeR: [168.5, 60] },
-  book: { w: 240, h: 260, earL: [101, 0], earR: [179, 0], eyeL: [113.5, 59.5], eyeR: [167.5, 59.5] },
-  think: { w: 230, h: 259, earL: [98, 0], earR: [179, 0], eyeL: [116, 55.5], eyeR: [165.5, 57] },
-  trophy: { w: 276, h: 261, earL: [119, 0], earR: [197, 1], eyeL: [132.5, 59.5], eyeR: [186, 59.5] },
-  sleep: { w: 264, h: 255, earL: [97, 0], earR: [176, 0], eyeL: [110.5, 57.5], eyeR: [165.5, 57.5] },
-  // Head tilted ~14° and turned: hats follow the ears; glasses follow the eyes.
-  cheer: { w: 244, h: 288, earL: [93, 2], earR: [172, 22], eyeL: [95.5, 53], eyeR: [136, 66] },
+  wave: { w: 176, h: 200, earL: [39.5, 0], earR: [147.5, 0], eyeL: [69, 62.2], eyeR: [122.5, 61.2] },
+  book: { w: 181.5, h: 200, earL: [46, 0], earR: [162, 0], eyeL: [79.8, 62.8], eyeR: [135.2, 62.5] },
+  // Jumping: the sparks sit above the ears, so the head starts lower.
+  cheer: { w: 181.5, h: 200, earL: [40, 9.5], earR: [144, 10], eyeL: [68.5, 66.5], eyeR: [118.5, 67] },
+  flame: { w: 172, h: 200, earL: [46, 0], earR: [151, 0.5], eyeL: [74, 61.5], eyeR: [126.8, 61.5] },
+  pencil: { w: 180, h: 200, earL: [46, 0], earR: [160, 0], eyeL: [78.2, 63.8], eyeR: [133, 63.8] },
+  think: { w: 191.5, h: 200, earL: [42, 0], earR: [147, 0], eyeL: [70, 62.2], eyeR: [122, 62] },
+  trophy: { w: 206.5, h: 200, earL: [41.5, 0], earR: [144, 0], eyeL: [70.2, 59.8], eyeR: [120.8, 59.8] },
+  sleep: { w: 200.5, h: 200, earL: [40, 0.5], earR: [145, 0], eyeL: [70.2, 67.2], eyeR: [120.2, 67.5] },
 };
 
-const INK = "#3a2420";
+/** The cat's own outline colour, so the accessories look drawn with it. */
+const INK = "#43231a";
+/** Ear tips are this far apart in the hat drawings' own units (the head is about 132 wide there). */
+const EAR_SPAN = 102;
 
 /** Transform into a frame centred between two points, x-axis along them, scaled to `unit` px apart. */
 function frame(a: Pt, b: Pt, unit: number): string {
@@ -61,8 +64,8 @@ function frame(a: Pt, b: Pt, unit: number): string {
   return `translate(${(a[0] + b[0]) / 2} ${(a[1] + b[1]) / 2}) rotate(${angle.toFixed(2)}) scale(${scale.toFixed(3)})`;
 }
 
-// --- Accessories. Hat coordinates: ear tips at (±39, 0), head top dip ≈ y 24,
-// head ≈ ±63 wide at y 40 and ±71 at y 60. Glasses: eyes at (±27.5, 0).
+// --- Accessories. Hat coordinates: ear tips at (±51, 0), head top dip ≈ y 21,
+// head ≈ ±60 wide at y 40 and ±66 at y 60. Glasses: eyes at (±27.5, 0).
 
 function Beanie() {
   return (
@@ -135,7 +138,7 @@ function Glasses() {
 }
 
 function OutfitLayer({ pose, outfit, layer }: { pose: PoseInfo; outfit: OutfitId; layer: "back" | "front" }) {
-  const head = frame(pose.earL, pose.earR, 78);
+  const head = frame(pose.earL, pose.earR, EAR_SPAN);
   if (layer === "back") {
     return outfit === "outfit_headphones" ? <g transform={head}><HeadphoneBand /></g> : null;
   }
@@ -187,10 +190,10 @@ export function Mascot({
         </svg>
       )}
       <Image
-        src={`/design/cat2-${pose}.png`}
+        src={`/design/cat3-${pose}.webp`}
         alt=""
-        width={info.w}
-        height={info.h}
+        width={Math.round(info.w * 2)}
+        height={info.h * 2}
         unoptimized
         priority={priority}
         draggable={false}

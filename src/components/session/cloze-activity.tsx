@@ -14,6 +14,8 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Loader2 } from "lucide-react";
+import { FeedbackCard } from "@/components/session/feedback-card";
+import { PlayActions, PlayPrimary } from "@/components/session/play-ui";
 
 interface ClozeActivityProps {
   activityId: string;
@@ -68,6 +70,7 @@ export function ClozeActivity({
         flashcardId,
         isCorrect: marked[i]?.correct ?? false,
         studySessionId: sessionId,
+        fromQuiz: true,
       }).catch(() => {});
     });
   };
@@ -100,6 +103,83 @@ export function ClozeActivity({
   const allCorrect = checked && passage.answers.every((_, i) => isCorrect(i));
   const correctCount = passage.answers.filter((_, i) => isCorrect(i)).length;
   const feedbacks = (results ?? []).filter((r) => !r.correct && r.feedback);
+
+  if (newUi) {
+    return (
+      <div>
+        <p data-scroll-line className="mb-4 text-[13px] font-semibold text-muted-foreground">
+          {t("session.clozeInstruction")}
+        </p>
+
+        {/* The sentence sits on the page; each gap is a soft pill to type in, green once right, rose while it still needs fixing. */}
+        <p className="text-[19px] font-semibold leading-[2.7] text-foreground sm:text-[20px]">
+          {parts.map((part, i) => (
+            <span key={i}>
+              <InlineMarkdown text={part} />
+              {i < passage.answers.length && (
+                <input
+                  type="text"
+                  value={answers[i]}
+                  onChange={(e) => {
+                    const next = [...answers];
+                    next[i] = e.target.value;
+                    setAnswers(next);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !marking && answers.every((a) => a.trim())) void checkAnswers();
+                  }}
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  spellCheck={false}
+                  aria-label={`${t("session.clozeInstruction")} ${i + 1}`}
+                  readOnly={marking || (checked && isCorrect(i))}
+                  style={{ width: `${Math.max(8, Math.min(18, Math.max(answers[i].length, passage.answers[i].length) + 4))}ch` }}
+                  className={cn(
+                    "mx-1.5 inline-block h-11 max-w-full rounded-full px-4 text-center align-middle text-[17px] font-extrabold ring-inset transition-[background-color,box-shadow] duration-150 focus:outline-none motion-reduce:transition-none",
+                    checked
+                      ? isCorrect(i)
+                        ? "life-pop bg-emerald-50 text-emerald-900 ring-2 ring-emerald-500"
+                        : "life-shake bg-rose-50 text-rose-900 ring-2 ring-rose-400 focus:ring-rose-500"
+                      : "bg-muted text-foreground focus:bg-card focus:ring-2 focus:ring-accent",
+                  )}
+                />
+              )}
+            </span>
+          ))}
+        </p>
+
+        {checked && allCorrect ? (
+          <FeedbackCard
+            ok
+            title={t("session.correct")}
+            primary={t("session.continue")}
+            onPrimary={onComplete}
+          />
+        ) : (
+          <>
+            {checked && (
+              <div className="life-rise mt-4 space-y-1.5" role="status">
+                <p className="text-[14.5px] font-bold text-foreground">
+                  {correctCount}/{passage.answers.length} {t("session.clozeFixHint")}
+                </p>
+                {feedbacks.map((r, i) => (
+                  <p key={i} className="text-[14.5px] leading-6 text-foreground/80">
+                    <MathText text={r.feedback} />
+                  </p>
+                ))}
+              </div>
+            )}
+            <PlayActions className="mt-5">
+              <PlayPrimary onClick={checkAnswers} disabled={marking || answers.some((a) => !a.trim())}>
+                {marking && <Loader2 className="mr-2 size-4 animate-spin" />}
+                {marking ? t("session.marking") : t("session.checkAnswers")}
+              </PlayPrimary>
+            </PlayActions>
+          </>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div>

@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { ArrowRight } from "lucide-react";
+import { PlayActions, PlayPrimary } from "@/components/session/play-ui";
 
 interface InteractiveActivityProps {
   content: InteractiveContent;
@@ -59,6 +60,27 @@ export function InteractiveActivity({ content, onComplete }: InteractiveActivity
           <ArrowRight className="ml-1.5 h-4 w-4" />
         </Button>
       </Card>
+    );
+  }
+
+  if (newUi) {
+    return (
+      <div className="space-y-5">
+        <div>
+          <p data-scroll-line className="text-[13px] font-semibold text-muted-foreground">{title ?? t("session.interactiveTitle")}</p>
+          <p className="life-rise mt-2 text-[20px] font-extrabold leading-[1.3] text-foreground sm:text-[22px]">
+            {prompt ? <MathText text={prompt} /> : t("session.interactiveHint")}
+          </p>
+        </div>
+        {/* The widget brings its own surface; nothing is wrapped around it. */}
+        <div className="play-widget">{body}</div>
+        <PlayActions>
+          <PlayPrimary onClick={onComplete}>
+            {t("session.continue")}
+            <ArrowRight className="ml-1.5 size-4" />
+          </PlayPrimary>
+        </PlayActions>
+      </div>
     );
   }
 

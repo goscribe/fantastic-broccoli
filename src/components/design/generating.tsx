@@ -23,7 +23,7 @@ export function Generating({ index, title, compact = false }: { index: number; t
   return (
     <div className={cn("flex flex-col items-center text-center", compact ? "gap-4" : "gap-6")}>
       <Ring pct={Math.max(pct, 0.04)} size={compact ? 120 : 168} stroke={compact ? 8 : 11}>
-        <Image src={done ? "/design/cat2-cheer.png" : "/design/cat2-pencil.png"} alt="" width={120} height={120} unoptimized className={cn("object-contain", done ? "design-pop size-[108px]" : "design-float size-[104px]")} />
+        <Image src={done ? "/design/cat3-cheer.webp" : "/design/cat3-pencil.webp"} alt="" width={363} height={400} unoptimized className={cn("object-contain", done ? "design-pop size-[108px]" : "design-float size-[104px]")} />
       </Ring>
       <div>
         <h2 className={cn("font-bold tracking-tight", compact ? "text-[20px]" : "text-[26px]")}>{done ? "Your session is ready" : `Building “${title}”`}</h2>
@@ -48,7 +48,7 @@ export function BuildBar({ index, title }: { index: number; title: string }) {
   return (
     <div className="flex w-full items-center gap-3 rounded-2xl border border-border bg-white px-4 py-3">
       <Ring pct={Math.max(pct, 0.04)} size={44} stroke={4} color={done ? "#10b981" : undefined}>
-        <Image src={done ? "/design/cat2-cheer.png" : "/design/cat2-pencil.png"} alt="" width={30} height={30} unoptimized className="size-[30px] object-contain" />
+        <Image src={done ? "/design/cat3-cheer.webp" : "/design/cat3-pencil.webp"} alt="" width={363} height={400} unoptimized className="size-[30px] object-contain" />
       </Ring>
       <div className="min-w-0 flex-1">
         <div className="truncate text-[13.5px] font-semibold">{done ? "Your session is ready" : `Building “${title}”`}</div>

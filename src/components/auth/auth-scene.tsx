@@ -27,13 +27,7 @@ export function AuthFigure({
   );
 }
 
-const PROPS = [
-  ["star", "size-12"],
-  ["pencil", "size-14 -rotate-12"],
-  ["trophy", "size-12"],
-] as const;
-
-/** Shared login/signup/email-link chrome: the landing's violet scene on the left, the form on the right. */
+/** Shared login/signup/email-link chrome: the home banner's landscape on the left, the form on the right. */
 export function AuthScene({
   children,
 }: {
@@ -42,48 +36,23 @@ export function AuthScene({
 }) {
   return (
     <div className="min-h-dvh bg-white lg:grid lg:grid-cols-2">
-      <aside className="hidden overflow-hidden lg:m-4 lg:flex lg:flex-col lg:rounded-[28px] lg:bg-[#7c3aed] lg:p-10 lg:pb-6 lg:text-white">
-        <div className="text-[13px] font-bold text-white/80">Scribe</div>
-        <h2 className="mt-8 max-w-[440px] text-[32px] font-extrabold xl:text-[40px] leading-[1.04] tracking-[-0.02em]">
-          study from your notes.
+      {/* The same scene as the home banner, lit for the visitor's time of day: words on the card colour at the top, the cat on the hill below. */}
+      <aside className="auth-scene hero-card relative isolate hidden overflow-hidden border border-border lg:m-4 lg:flex lg:flex-col lg:rounded-[28px] lg:p-10">
+        <div aria-hidden className="hero-field pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute bottom-[7%] right-[14%] h-[clamp(150px,27vh,230px)]">
+            <span className="hero-field__ground" />
+            <Image src="/design/cat3-wave.webp" alt="" width={352} height={400} unoptimized priority className="cat-peek h-full w-auto select-none object-contain" />
+          </div>
+        </div>
+        <div className="hero-eyebrow text-[13.5px] font-extrabold">Scribe</div>
+        <h2 className="mt-6 max-w-[440px] text-[32px] font-extrabold leading-[1.06] tracking-[-0.02em] xl:text-[40px]">
+          Study from your notes.
           <br />
-          actually remember it.
+          Actually remember it.
         </h2>
-        <p className="mt-4 max-w-[400px] text-[16px] text-white/80">
+        <p className="mt-4 max-w-[400px] text-[16px] leading-relaxed text-foreground/75">
           Make a subject, drop in a PDF, slides or a photo of your notes. Scribe builds study sessions from them and fits them into your week.
         </p>
-        <div className="mt-auto flex items-center justify-around px-8 pt-8">
-          {PROPS.map(([name, size], i) => (
-            <Image
-              key={name}
-              src={`/design/props/${name}.png`}
-              alt=""
-              width={96}
-              height={96}
-              unoptimized
-              className={cn("cat-float select-none object-contain drop-shadow-[0_10px_18px_rgba(0,0,0,.18)]", size)}
-              style={{ animationDelay: `${i * 0.5}s` }}
-            />
-          ))}
-        </div>
-        <div className="mt-2 flex items-end justify-between">
-          <Image
-            src="/design/cat2-cheer.png"
-            alt=""
-            width={244}
-            height={288}
-            unoptimized
-            className="h-[clamp(150px,30vh,250px)] w-auto select-none object-contain"
-          />
-          <Image
-            src="/design/cat2-book.png"
-            alt=""
-            width={240}
-            height={260}
-            unoptimized
-            className="cat-bob h-[clamp(120px,23vh,190px)] w-auto select-none object-contain"
-          />
-        </div>
       </aside>
       <div className="flex min-h-dvh flex-col items-center justify-center px-5 py-10 pt-[max(2.5rem,env(safe-area-inset-top))] pb-[max(2.5rem,env(safe-area-inset-bottom))] lg:min-h-0">
         <div className="w-full max-w-[380px] space-y-6">{children}</div>

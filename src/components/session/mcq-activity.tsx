@@ -1,5 +1,6 @@
 "use client";
 
+import { ItemDots, RunBadge, runOfRight } from "@/components/session/play-ui";
 import { useEffect, useRef, useState } from "react";
 import { McqOptionBody, McqQuestionBody, optionsHaveFigures } from "@/components/session/mcq-rich";
 import { McqContent } from "@/types";
@@ -12,6 +13,7 @@ import { useNewUi } from "@/lib/new-ui";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
+import "@/lib/i18n/today";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, XCircle, ArrowRight, ArrowLeft } from "lucide-react";
 
@@ -63,6 +65,7 @@ export function McqActivity({
       : content.questions.map(() => null),
   );
   const [burst, setBurst] = useState(0);
+  const feedbackRef = useRef<HTMLDivElement>(null);
 
   useReportCurrentItem(activityId, index);
   useActivityDraft(activityId, {
@@ -89,9 +92,17 @@ export function McqActivity({
   const handleSubmit = () => {
     if (selected === null) return;
     onAnswer(index, selected);
-    if (selected === question.correctIndex) {
+    const right = selected === question.correctIndex;
+    if (right) {
       setCorrectCount((c) => c + 1);
-      setBurst((b) => b + 1);
+      // The redesign cheers in the feedback card itself; full-screen confetti covered the question for 2.6s.
+      if (!newUi) setBurst((b) => b + 1);
+    }
+    // A tiny tap on phones that support it: instant, and no motion.
+    try {
+      navigator.vibrate?.(right ? 12 : [24, 40, 24]);
+    } catch {
+      /* not supported */
     }
     setAnswersByQ((prev) => {
       const next = [...prev];
@@ -108,6 +119,25 @@ export function McqActivity({
     setRevealed(past !== null);
   };
 
+  // Bring the result into view above the bottom bar on short phone screens,
+  // without leaving a line (activity title, "Question 2 of 5", the question,
+  // an answer) cut in half at the top edge.
+  useEffect(() => {
+    if (!revealed || !newUi) return;
+    const panel = feedbackRef.current;
+    if (!panel) return;
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
+    let scroller = panel.parentElement;
+    while (scroller && !/(auto|scroll)/.test(getComputedStyle(scroller).overflowY)) scroller = scroller.parentElement;
+    if (!scroller) {
+      panel.scrollIntoView({ block: "nearest", behavior });
+      return;
+    }
+    const delta = scrollDeltaFor(scroller, panel);
+    if (delta > 0) scroller.scrollBy({ top: delta, behavior });
+  }, [revealed, index, newUi]);
+
   const handleNext = () => {
     if (isLast) {
       onComplete();
@@ -115,6 +145,9 @@ export function McqActivity({
     }
     goTo(index + 1);
   };
+
+  /** Each question's mark so far: true right, false wrong, null not answered. */
+  const marks = answersByQ.map((a, i) => (a === null ? null : a === content.questions[i].correctIndex));
 
   return (
     <div className="space-y-4">
@@ -124,70 +157,88 @@ export function McqActivity({
           <button
             type="button"
             onClick={() => goTo(index - 1)}
-            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+            className={cn(
+              "flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground",
+              newUi && "-my-3 -ml-2 min-h-11 px-2 text-[13px] font-semibold",
+            )}
           >
             <ArrowLeft className="h-3 w-3" />
             {t("session.back")}
           </button>
         )}
-        <span className="text-xs text-muted-foreground tabular-nums">
+        <span data-scroll-line className={cn("text-xs text-muted-foreground tabular-nums", newUi && "text-[13px] font-semibold")} aria-live="polite">
           {t("session.question")} {index + 1} {t("session.of")}{" "}
           {content.questions.length}
           {index > 0 && ` · ${correctCount} ${t("session.correctSoFar")}`}
         </span>
-        <div className="flex gap-1 w-32">
+        {newUi && <RunBadge className="mr-auto" run={runOfRight(marks, revealed ? index + 1 : index)} />}
+        {newUi ? (
+          <ItemDots current={index} states={marks.map((m, i) => (m === null || (i === index && !revealed) ? "todo" : m ? "right" : "wrong"))} />
+        ) : (
+        <div className="flex gap-1 w-32" aria-hidden>
           {content.questions.map((_, i) => (
             <div
               key={i}
               className={cn(
-                "h-1 flex-1 rounded-full",
-                i < index ? "bg-accent" : i === index ? "bg-accent/40" : "bg-muted",
+                newUi ? "h-1.5 flex-1 rounded-full transition-colors duration-300" : "h-1 flex-1 rounded-full",
+                // Answered questions fill in; the current one is half-tone.
+                (newUi ? answersByQ[i] !== null && i !== index : i < index)
+                  ? "bg-accent"
+                  : i === index
+                    ? revealed && newUi ? "bg-accent" : "bg-accent/40"
+                    : "bg-muted",
               )}
             />
           ))}
         </div>
+        )}
       </div>
 
-      <p className={newUi ? "text-[20px] font-bold leading-[1.35]" : "text-sm font-medium leading-relaxed"}>
+      <p key={`q-${index}`} data-scroll-line className={newUi ? "life-rise text-[20px] font-extrabold leading-[1.3] sm:text-[22px]" : "text-sm font-medium leading-relaxed"}>
         <McqQuestionBody text={question.question} figures={question.figures} options={question.options} />
       </p>
 
-      <div className={optionsHaveFigures(question.options) ? "grid grid-cols-2 gap-2" : "space-y-2"}>
+      <div key={`o-${index}`} style={{ ["--i" as string]: 1 }} className={cn(newUi && "life-rise", optionsHaveFigures(question.options) ? "grid grid-cols-2 gap-2" : newUi ? "space-y-3" : "space-y-2")}>
         {question.options.map((option, i) => (
           <button
             key={i}
             type="button"
+            data-scroll-line
             onClick={() => !revealed && setSelected(i)}
             disabled={revealed}
             className={cn(
-              newUi ? "w-full text-left rounded-[14px] border bg-card px-4 py-3 text-[15px] font-medium" : "w-full text-left p-3 rounded-lg border text-sm",
-              !revealed && selected === i && (newUi ? "border-accent bg-accent-soft" : "border-accent bg-accent/5"),
-              !revealed && selected !== i && "border-border hover:border-accent/30 hover:bg-muted/30",
-              revealed && i === question.correctIndex && "border-success bg-success/5",
-              revealed && selected === i && i !== question.correctIndex && "border-red-500 bg-red-500/5",
-              revealed && selected !== i && i !== question.correctIndex && "opacity-50",
+              newUi
+                ? // Soft answer pills, lettered like an exam paper: a tinted fill instead of an outline, a ring once picked, green or rose once marked; a pop when picked, a shake when wrong.
+                  "min-h-[60px] w-full touch-manipulation text-left rounded-[30px] px-3.5 py-3 text-[15.5px] font-semibold leading-snug text-foreground ring-inset transition-[background-color,box-shadow,transform] duration-150 active:scale-[0.99] disabled:active:scale-100 motion-reduce:transition-none motion-reduce:active:scale-100 sm:px-4"
+                : "w-full text-left p-3 rounded-lg border text-sm",
+              !revealed && selected === i && (newUi ? "life-pop bg-[color-mix(in_srgb,var(--accent)_10%,#fff)] ring-2 ring-accent" : "border-accent bg-accent/5"),
+              !revealed && selected !== i && (newUi ? "bg-muted hover:bg-[var(--edge)]" : "border-border hover:border-accent/30 hover:bg-muted/30"),
+              revealed && i === question.correctIndex && (newUi ? "bg-emerald-50 text-emerald-900 ring-2 ring-emerald-500" : "border-success bg-success/5"),
+              revealed && selected === i && i !== question.correctIndex && (newUi ? "life-shake bg-rose-50 text-rose-900 ring-2 ring-rose-400" : "border-red-500 bg-red-500/5"),
+              revealed && selected !== i && i !== question.correctIndex && (newUi ? "bg-muted opacity-55" : "opacity-50"),
             )}
           >
             <div className="flex items-center gap-3">
               <span
                 className={cn(
-                  newUi ? "flex h-7 w-7 items-center justify-center rounded-lg text-[13px] font-semibold flex-shrink-0" : "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium flex-shrink-0",
-                  !revealed && selected === i && "bg-accent text-accent-foreground",
-                  !revealed && selected !== i && "bg-muted text-muted-foreground",
-                  revealed && i === question.correctIndex && "bg-success text-white",
-                  revealed && selected === i && i !== question.correctIndex && "bg-red-500 text-white",
+                  newUi ? "flex h-8 w-8 items-center justify-center rounded-full text-[13.5px] font-extrabold flex-shrink-0" : "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium flex-shrink-0",
+                  !revealed && selected === i && (newUi ? "bg-accent text-accent-foreground" : "bg-accent text-accent-foreground"),
+                  !revealed && selected !== i && (newUi ? "bg-card text-foreground" : "bg-muted text-muted-foreground"),
+                  revealed && i === question.correctIndex && (newUi ? "bg-emerald-600 text-white" : "bg-success text-white"),
+                  revealed && selected === i && i !== question.correctIndex && (newUi ? "bg-rose-600 text-white" : "bg-red-500 text-white"),
+                  revealed && selected !== i && i !== question.correctIndex && newUi && "bg-card text-foreground",
                 )}
               >
-                {newUi ? i + 1 : String.fromCharCode(65 + i)}
+                {String.fromCharCode(65 + i)}
               </span>
               <span className="flex-1 min-w-0">
                 <McqOptionBody text={option} figures={question.figures} />
               </span>
               {revealed && i === question.correctIndex && (
-                <CheckCircle2 className="h-4 w-4 text-success flex-shrink-0" />
+                <CheckCircle2 className={cn("flex-shrink-0", newUi ? "h-5 w-5 text-emerald-600" : "h-4 w-4 text-success")} />
               )}
               {revealed && selected === i && i !== question.correctIndex && (
-                <XCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
+                <XCircle className={cn("flex-shrink-0", newUi ? "h-5 w-5 text-rose-600" : "h-4 w-4 text-red-500")} />
               )}
             </div>
           </button>
@@ -198,7 +249,8 @@ export function McqActivity({
         <div className="flex justify-end">
           <Button
             variant="primary"
-            size="sm"
+            size={newUi ? "lg" : "sm"}
+            className={newUi ? "btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold disabled:shadow-none sm:w-auto sm:min-w-[200px]" : undefined}
             onClick={handleSubmit}
             disabled={selected === null}
           >
@@ -208,13 +260,16 @@ export function McqActivity({
       )}
 
       {revealed && newUi && (
+        <div ref={feedbackRef} className="scroll-mt-3 scroll-mb-[calc(5.5rem+env(safe-area-inset-bottom))]">
         <FeedbackCard
           ok={isCorrect}
           title={isCorrect ? t("session.correct") : t("session.notQuite")}
           message={<MarkdownText text={question.explanation} />}
           primary={isLast ? t("session.finishQuiz") : t("session.nextQuestion")}
           onPrimary={handleNext}
+          note={isCorrect ? undefined : t("today.savedToMistakes")}
         />
+        </div>
       )}
       {revealed && !newUi && (
         <div className="pt-3 border-t border-border">
@@ -239,4 +294,42 @@ export function McqActivity({
       )}
     </div>
   );
+}
+
+/**
+ * How far to scroll `scroller` so `panel` clears the bottom bar (its
+ * scroll-margin-bottom) — then a little further while that would leave a line
+ * above it (`h1`, `[data-scroll-line]`) half under the top edge, never so far
+ * that the panel's own top goes past its scroll-margin-top.
+ */
+function scrollDeltaFor(scroller: HTMLElement, panel: HTMLElement): number {
+  const box = scroller.getBoundingClientRect();
+  const p = panel.getBoundingClientRect();
+  const style = getComputedStyle(panel);
+  const marginBottom = parseFloat(style.scrollMarginBottom) || 0;
+  const marginTop = parseFloat(style.scrollMarginTop) || 0;
+  let delta = p.bottom + marginBottom - box.bottom;
+  if (delta <= 0) return 0;
+  const maxDelta = Math.max(0, p.top - box.top - marginTop);
+  const need = delta;
+  const cap = Math.max(maxDelta, need);
+  const lines = Array.from(scroller.querySelectorAll<HTMLElement>("h1, [data-scroll-line]"))
+    .map((el) => ({ r: el.getBoundingClientRect(), lh: parseFloat(getComputedStyle(el).lineHeight) || 0 }))
+    .filter(({ r }) => r.height > 0 && r.bottom <= p.top)
+    .sort((a, b) => a.r.top - b.r.top);
+  for (const { r, lh } of lines) {
+    if (r.top - delta >= box.top || r.bottom - delta <= box.top) continue;
+    // Cut by the top edge: scroll it fully out of view if the panel allows…
+    if (r.bottom - box.top <= cap) {
+      delta = r.bottom - box.top;
+      continue;
+    }
+    // …otherwise land on a line break of a multi-line block, never mid-line.
+    if (lh > 0) {
+      const into = box.top + delta - r.top;
+      const down = r.top - box.top + Math.ceil(into / lh) * lh;
+      delta = down <= cap ? down : r.top - box.top + Math.floor(into / lh) * lh;
+    }
+  }
+  return Math.min(Math.max(delta, 0), cap);
 }

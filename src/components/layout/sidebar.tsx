@@ -20,9 +20,11 @@ import { CommandPalette } from "@/components/layout/command-palette";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/mistakes";
 import {
   Home,
   Layers,
+  RotateCcw,
   Users,
   ChevronRight,
   FilePlus2,
@@ -284,6 +286,18 @@ export function Sidebar({
           >
             <Layers className="h-4 w-4" />
             {t("nav.flashcards")}
+          </Link>
+          <Link
+            href="/mistakes"
+            className={cn(
+              "flex items-center gap-2.5 rounded-xl px-2 py-2 text-[13px] font-semibold",
+              pathname.startsWith("/mistakes")
+                ? "bg-accent-soft text-accent"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground",
+            )}
+          >
+            <RotateCcw className="h-4 w-4" />
+            {t("mistakes.nav")}
           </Link>
           <Link
             href="/shared"

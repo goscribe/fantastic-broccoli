@@ -1,7 +1,8 @@
 "use client";
 
 import { Mascot } from "@/components/rewards/mascot";
-import { Check, X } from "lucide-react";
+import { useCountUp } from "@/lib/use-count-up";
+import { MarkBadge } from "@/components/session/play-ui";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import "@/app/design/design.css";
@@ -16,6 +17,7 @@ export function FeedbackCard({
   secondary,
   onSecondary,
   xp = 10,
+  note,
 }: {
   ok: boolean;
   title: string;
@@ -25,49 +27,41 @@ export function FeedbackCard({
   secondary?: string;
   onSecondary?: () => void;
   xp?: number;
+  /** One quiet line under the explanation (e.g. "Saved to Mistakes"). */
+  note?: React.ReactNode;
 }) {
+  const xpShown = useCountUp(ok ? xp : 0, 600);
   return (
     <div className="relative pb-2 pt-3">
-      {ok && (
+      {/* No panel: the result sits on the page under the answers. The badge and title say right/wrong, the cat reacts, and the one button stays purple. */}
+      <div className={cn("relative pt-1", ok ? "design-bounce" : "life-rise")}>
         <Mascot
-          pose="cheer"
-          className="cat-cheer pointer-events-none absolute -top-[58px] right-5 h-[88px] drop-shadow-[0_10px_18px_rgba(22,163,74,.22)]"
+          pose={ok ? "cheer" : "think"}
+          className={cn("pointer-events-none absolute right-0 top-0 h-[58px] sm:h-[76px]", ok && "cat-cheer")}
         />
-      )}
-      <div
-        className={cn(
-          "flex flex-wrap items-center gap-4 rounded-2xl border px-5 py-4 shadow-[0_12px_40px_-12px_rgba(17,17,20,.18)]",
-          ok
-            ? "design-bounce border-emerald-300 bg-gradient-to-r from-emerald-50 to-lime-50"
-            : "border-rose-200 bg-rose-50",
-        )}
-      >
-        <span
-          className={cn(
-            "grid size-11 shrink-0 place-items-center rounded-full text-white",
-            ok ? "design-pop bg-emerald-500 shadow-[0_0_0_6px_rgba(16,185,129,.2)]" : "bg-rose-500",
-          )}
-        >
-          {ok ? <Check className="size-6" strokeWidth={3} /> : <X className="size-6" strokeWidth={3} />}
-        </span>
-        <div className="min-w-0 flex-1 basis-[200px]">
-          <div className="flex items-center gap-2.5">
-            <span className={cn("text-[18px] font-extrabold", ok ? "text-emerald-800" : "text-rose-800")}>{title}</span>
+        <div className="relative flex items-center gap-3 pr-16 sm:pr-20">
+          <MarkBadge ok={ok} />
+          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-1">
+            <span className={cn("text-[20px] font-extrabold", ok ? "text-emerald-800" : "text-rose-800")}>{title}</span>
             {ok && (
-              <span className="design-pop inline-flex items-center rounded-full bg-emerald-600 px-2 py-0.5 text-[11px] font-bold text-white">
-                +{xp} XP
-              </span>
+              <span className="text-[13.5px] font-extrabold tabular-nums text-emerald-800/80">+{xpShown} XP</span>
             )}
           </div>
-          {message && <div className="mt-0.5 text-[13.5px] leading-5 text-muted-foreground">{message}</div>}
         </div>
-        <div className="flex shrink-0 gap-2.5">
+        {message && <div className="relative mt-3.5 text-[15px] leading-6 text-foreground/80 sm:pr-24">{message}</div>}
+        {note && <p className="relative mt-2 text-[12.5px] font-bold text-rose-800">{note}</p>}
+        <div className="relative mt-4 flex gap-2.5">
           {secondary && onSecondary && (
-            <Button variant="ghost" size="sm" onClick={onSecondary} className="bg-white/80">
+            <Button variant="ghost" size="sm" onClick={onSecondary} className="h-12 flex-1 rounded-[var(--r-button)] bg-muted sm:flex-none">
               {secondary}
             </Button>
           )}
-          <Button variant="primary" size="sm" onClick={onPrimary} className={cn(ok && "bg-emerald-600 hover:bg-emerald-700")}>
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={onPrimary}
+            className="btn-chunky rounded-[var(--r-button)] h-12 flex-1 text-[16px] font-extrabold sm:min-w-[200px] sm:flex-none"
+          >
             {primary}
           </Button>
         </div>

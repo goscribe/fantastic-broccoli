@@ -7,6 +7,7 @@ import { Providers } from "@/components/providers";
 import { themeInitScript } from "@/lib/theme";
 import { newUiInitScript } from "@/lib/new-ui-init";
 import { accentInitScript } from "@/lib/accent-theme";
+import { daypartInitScript } from "@/lib/daypart";
 import {
   defaultDescription,
   defaultTitle,
@@ -94,6 +95,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: newUiInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: accentInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: daypartInitScript }} />
         <script {...jsonLdScriptProps(organizationJsonLd)} />
         <script {...jsonLdScriptProps(webSiteJsonLd)} />
         <script {...jsonLdScriptProps(softwareApplicationJsonLd)} />
