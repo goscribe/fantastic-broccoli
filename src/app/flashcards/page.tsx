@@ -1,10 +1,11 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import "@/lib/i18n/flashcards";
 import { MathText } from "@/components/ui/markdown-text";
 import Image from "next/image";
 import Link from "next/link";
-import { PageHeader, pageShellClass } from "@/components/ui/page-header";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { EmptyState } from "@/components/ui/empty-state";
 import {
   useFlashcardDecks,
@@ -65,11 +66,11 @@ export default function FlashcardsPage() {
   });
 
   return (
-    <main className={pageShellClass}>
+    <PageShell>
       <PageHeader title={t("fc.title")} subtitle={t("fc.subtitle")} actions={dueReview && dueReview.total > 0 && (
           <Link
             href="/flashcards/review"
-            className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-[13px] font-semibold text-white hover:bg-accent/90 transition-colors"
+            className={buttonClass({ className: "gap-2" })}
           >
             <RotateCcw className="h-3.5 w-3.5" />
             {t(
@@ -89,6 +90,6 @@ export default function FlashcardsPage() {
           <DeckRow key={deck.item.id} deck={deck} />
         ))}
       </div>
-    </main>
+    </PageShell>
   );
 }

@@ -3,7 +3,7 @@
 import "@/lib/i18n/flashcards";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { PageHeader, pageShellClass } from "@/components/ui/page-header";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { EmptyState } from "@/components/ui/empty-state";
 import { WorkspaceIcon } from "@/components/graphics/workspace-icon";
 import { fetchSharedWorkspaces } from "@/lib/api/workspace";
@@ -25,7 +25,7 @@ export default function SharedPage() {
   }, []);
 
   return (
-    <main className={pageShellClass}>
+    <PageShell>
       <PageHeader title={t("fc.sharedTitle")} subtitle={t("fc.sharedSubtitle")} />
 
       {loading && <CardGridSkeleton count={6} />}
@@ -54,6 +54,6 @@ export default function SharedPage() {
           </Link>
         ))}
       </div>
-    </main>
+    </PageShell>
   );
 }

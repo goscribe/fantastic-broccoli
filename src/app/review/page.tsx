@@ -1,5 +1,7 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
+import { PageShell } from "@/components/ui/page-header";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -191,10 +193,9 @@ function ReviewQueue() {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex-1 bg-background">
-      <div className="mx-auto w-full max-w-[1000px] px-4 pb-16 pt-6 sm:px-6">
+    <PageShell max="max-w-[1000px]">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="text-[22px] font-bold">Note review</h1>
+          <h1 className="page-h1">Note review</h1>
           <a href="https://github.com/goscribe/server/blob/main/docs/topic-notes-reviewer-guide.md" target="_blank" rel="noreferrer" className="text-[13px] font-semibold text-accent">
             Reviewer guide
           </a>
@@ -203,8 +204,7 @@ function Shell({ children }: { children: React.ReactNode }) {
           Notes with the most fact-check flags come first. Check every flag, fix what is wrong, then approve or request changes.
         </p>
         {children}
-      </div>
-    </div>
+    </PageShell>
   );
 }
 
@@ -278,7 +278,7 @@ function AdminPanel({ courses }: { courses: ReviewCourse[] }) {
           );
         })}
       </div>
-      <button type="button" onClick={() => void invite()} disabled={sending || !form.email || !form.courseIds.length} className="mt-3 inline-flex h-10 items-center gap-2 rounded-xl bg-accent px-4 text-[14px] font-semibold text-white disabled:opacity-50">
+      <button type="button" onClick={() => void invite()} disabled={sending || !form.email || !form.courseIds.length} className={buttonClass({ className: "mt-3 gap-2" })}>
         {sending && <Loader2 className="size-4 animate-spin" />} Invite reviewer
       </button>
 

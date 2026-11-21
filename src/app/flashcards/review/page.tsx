@@ -2,7 +2,7 @@
 
 import "@/lib/i18n/flashcards";
 import Image from "next/image";
-import { PageHeader, pageShellClass } from "@/components/ui/page-header";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
@@ -27,8 +27,7 @@ export default function DueReviewPage() {
   );
 
   return (
-    <main className={pageShellClass}>
-      <div className="mx-auto w-full max-w-3xl space-y-6">
+    <PageShell max="max-w-3xl" className="space-y-6">
         <PageHeader
           back={{ href: "/flashcards", label: t("fc.backToFlashcards") }}
           title={t("fc.dailyReview")}
@@ -63,7 +62,6 @@ export default function DueReviewPage() {
         )}
 
         {data && data.cards.length > 0 && <DueReviewRound cards={cards} />}
-      </div>
-    </main>
+    </PageShell>
   );
 }

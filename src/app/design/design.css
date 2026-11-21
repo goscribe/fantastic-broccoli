@@ -63,6 +63,20 @@ html.new-ui body { background: #ffffff; }
   letter-spacing: 0;
 }
 .app-brand h1, .app-brand h2 { letter-spacing: -0.02em; }
+/*
+ * Heading scale. A page has one title (.page-h1, through PageHeader) and
+ * section titles (.page-h2, through SectionTitle). Home's hero greeting, a
+ * subject's colour band and the session player set their own type: they are
+ * content objects, not page chrome.
+ */
+.app-brand {
+  --h1: 26px;
+  --h2: 18px;
+  --h-weight: 800;
+}
+@media (min-width: 640px) {
+  .app-brand { --h1: 30px; --h2: 20px; }
+}
 /* A preview scope nested in the app (the old landing) keeps its own headings. */
 .design-root:not(.app-brand) h1, .design-root:not(.app-brand) h2 { letter-spacing: -0.025em; }
 
@@ -76,6 +90,8 @@ html.new-ui body { background: #ffffff; }
  */
 /* In the components layer so Tailwind utilities on the same element still win. */
 @layer components {
+.page-h1 { font-size: var(--h1, 26px); font-weight: var(--h-weight, 800); line-height: 1.15; }
+.page-h2 { font-size: var(--h2, 18px); font-weight: var(--h-weight, 800); line-height: 1.25; }
 /* A white card: a hairline and a 1px shadow, no glow. */
 .life-card {
   background: var(--card);

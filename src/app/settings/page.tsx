@@ -11,7 +11,7 @@ import { CHECKOUT_REFRESH_DELAYS_MS, checkoutReturn } from "@/lib/checkout-retur
 import { planBilling, planCta, planDescription, planDisplayName, planPriceLabel, planTermsLine } from "@/lib/plan-display";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PageHeader } from "@/components/ui/page-header";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import {
@@ -421,7 +421,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <main className="mx-auto w-full max-w-[1180px] px-6 pb-12 pt-6">
+    <PageShell max="max-w-none">
       <Suspense fallback={null}>
         <CheckoutReturnNotice onRefresh={refreshBilling} />
       </Suspense>
@@ -902,6 +902,6 @@ export default function SettingsPage() {
         </div>
       )}
       </div>
-    </main>
+    </PageShell>
   );
 }

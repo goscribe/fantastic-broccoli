@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PageHeader, pageShellClass } from "@/components/ui/page-header";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { useRouter } from "next/navigation";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -126,7 +126,7 @@ export default function PricingPage() {
   };
 
   return (
-    <main className={pageShellClass}>
+    <PageShell>
       <PageHeader
         back={{ href: "/settings", label: "Settings" }}
         title="Choose your plan"
@@ -192,6 +192,6 @@ export default function PricingPage() {
             ))
           : plans.map((plan) => <PlanCard key={plan.id} plan={plan} onSelect={handleSwitch} switching={switching} trialDays={trialDays} />)}
       </section>
-    </main>
+    </PageShell>
   );
 }

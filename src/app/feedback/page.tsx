@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
-import { PageHeader } from "@/components/ui/page-header";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { textareaClass } from "@/components/ui/input";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight } from "lucide-react";
@@ -218,14 +218,12 @@ function FeedbackForm() {
 
 export default function FeedbackPage() {
   return (
-    <main className="bg-background">
-      <div className="mx-auto w-full max-w-lg px-6 py-10">
+    <PageShell max="max-w-lg">
         <div>
           <Suspense fallback={null}>
             <FeedbackForm />
           </Suspense>
         </div>
-      </div>
-    </main>
+    </PageShell>
   );
 }

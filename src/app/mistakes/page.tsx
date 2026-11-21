@@ -3,7 +3,7 @@
 import { Suspense } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { PageHeader, pageShellClass } from "@/components/ui/page-header";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { MistakesView } from "@/components/mistakes/mistakes-view";
 import { mistakesApi } from "@/lib/api/mistakes";
 import { useI18n } from "@/lib/i18n";
@@ -20,8 +20,7 @@ function MistakesPageInner() {
   const subject = overall?.subjects.find((s) => s.workspaceId === workspaceId);
 
   return (
-    <main className={pageShellClass}>
-      <div className="mx-auto w-full max-w-3xl">
+    <PageShell max="max-w-3xl">
         <PageHeader
           back={workspaceId ? { href: `/workspace/${workspaceId}`, label: subject?.title ?? t("mistakes.allSubjects") } : undefined}
           title={t("mistakes.title")}
@@ -32,8 +31,7 @@ function MistakesPageInner() {
           workspaceId={workspaceId}
           onWorkspaceChange={(id) => router.replace(id ? `${pathname}?workspace=${encodeURIComponent(id)}` : pathname)}
         />
-      </div>
-    </main>
+    </PageShell>
   );
 }
 
