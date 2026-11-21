@@ -64,6 +64,12 @@ html.new-ui body { background: #ffffff; }
 }
 .app-brand h1, .app-brand h2 { letter-spacing: -0.02em; }
 /*
+ * What every approved screen was actually drawn with: this selector outranks
+ * the one above (and the note pages' own), and always has. Kept exactly, so
+ * moving the palette off html.new-ui does not re-space a single heading.
+ */
+html.new-ui h1, html.new-ui h2 { letter-spacing: -0.025em; }
+/*
  * Heading scale. A page has one title (.page-h1, through PageHeader) and
  * section titles (.page-h2, through SectionTitle). Home's hero greeting, a
  * subject's colour band and the session player set their own type: they are
@@ -77,8 +83,6 @@ html.new-ui body { background: #ffffff; }
 @media (min-width: 640px) {
   .app-brand { --h1: 30px; --h2: 20px; }
 }
-/* A preview scope nested in the app (the old landing) keeps its own headings. */
-.design-root:not(.app-brand) h1, .design-root:not(.app-brand) h2 { letter-spacing: -0.025em; }
 
 /*
  * "Life" layer for the signed-in app: a student product, not a dashboard.
@@ -267,3 +271,17 @@ html.new-ui .skeleton {
 [data-sonner-toaster] .scribe-toast[data-type="error"] [data-icon] { color: #e11d48; }
 [data-sonner-toaster] .scribe-toast[data-type="success"] [data-icon] { color: #059669; }
 [data-sonner-toaster] .scribe-toast [data-close-button] { background: var(--card, #fff); border-color: var(--border, #e8e8ec); color: var(--muted-foreground, #5c5c68); }
+
+/*
+ * The old landing (/landing, until its redesign in #300 replaces it) is a
+ * preview scope without .app-brand: it keeps the flat pill buttons it was
+ * designed with. Scoped by the Button primitive's marker classes; remove this
+ * block when the landing moves to the product look.
+ */
+.design-root:not(.app-brand) .ui-btn { border-radius: 9999px; box-shadow: none; font-weight: 500; transform: none; }
+.design-root:not(.app-brand) .ui-btn--primary { font-weight: 600; color: var(--accent-foreground, #fff); }
+.design-root:not(.app-brand) .ui-btn--sm { height: 2rem; padding-inline: 0.75rem; font-size: 0.875rem; line-height: 1.25rem; }
+.design-root:not(.app-brand) .ui-btn--md { height: 2.5rem; padding-inline: 1.25rem; font-size: 0.875rem; line-height: 1.25rem; }
+.design-root:not(.app-brand) .ui-btn--lg { height: 3rem; padding-inline: 1.75rem; font-size: 1rem; line-height: 1.5rem; }
+.design-root:not(.app-brand) .ui-btn--secondary { background: var(--muted); border-color: var(--border-strong); font-weight: 500; }
+.design-root:not(.app-brand) .ui-btn--outline { background: var(--card); border-color: var(--border-strong); font-weight: 500; }

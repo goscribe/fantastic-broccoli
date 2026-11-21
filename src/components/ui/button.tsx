@@ -51,6 +51,8 @@ export function buttonClass({
   className,
 }: { variant?: ButtonVariant; size?: ButtonSize; className?: string } = {}): string {
   return cn(
+    // Marker classes (no styles of their own): design.css uses them to keep the old landing's buttons as they were.
+    `ui-btn ui-btn--${variant} ui-btn--${size}`,
     "inline-flex select-none items-center justify-center transition-[background-color,border-color,color,transform,box-shadow] duration-150",
     "disabled:pointer-events-none disabled:opacity-45 aria-disabled:pointer-events-none aria-disabled:opacity-45",
     variantClasses[variant],
