@@ -7,6 +7,9 @@ import { WeekStrip } from "@/components/learn/week-strip";
 import { PlanTodayCard } from "@/components/planner/plan-today-card";
 import { SubjectBand, SubjectTile } from "@/components/learn/subject-tile";
 import { NotesOutline } from "@/components/learn/notes-outline";
+import { AddMaterialMenu, NoteMaterialCard, useAttachedNotes } from "@/components/notes-app/subject-notes";
+import { AttachNotesDialog } from "@/components/notes-app/attach-notes-dialog";
+import { track as trackFunnel } from "@/lib/funnel";
 import { SubjectProgress } from "@/components/learn/subject-progress";
 import type { NotesTopic } from "@/lib/api/notes-outline";
 import Image from "next/image";
@@ -144,6 +147,9 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   const [prompt, setPrompt] = useState("");
   const [uploading, setUploading] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  // Scribe notes attached to this subject as material (subject page only).
+  const attached = useAttachedNotes(workspaceId);
+  const [attachOpen, setAttachOpen] = useState(false);
 
   const load = useCallback(
     () =>
@@ -342,6 +348,8 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
       }
       const session = await createStudySession({ workspaceId: w.id, title, depth: "moderate", durationMinutes: 25, topics: titles.join(", ") });
       if (!session) throw new Error("Could not start");
+      const fromNotes = list.filter(({ m }) => attached.notes.has(m.id)).length;
+      if (fromNotes > 0) trackFunnel("notes.attached_session_started", { from: "subject", noteCount: fromNotes }, w.id);
       router.push(`/workspace/${w.id}/session/${session.id}`);
     } catch (e) {
       toastError(e, "Couldn't start that");
@@ -468,12 +476,15 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           </h2>
           <div className="flex items-center gap-3">
             {/* With one or two files the dashed tile in the grid is the way to add; from three up, this button is. */}
-            {(loading || materials.length >= 3) && (
+            {(loading || materials.length >= 3) &&
+              (attached.available ? (
+                <AddMaterialMenu uploading={uploading} onUpload={() => fileRef.current?.click()} onNotes={() => setAttachOpen(true)} />
+              ) : (
             <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-3 text-[12.5px] font-semibold hover:bg-accent-soft">
               {uploading && <Loader2 className="size-3.5 animate-spin" />}
               Add material
             </button>
-            )}
+              ))}
             {materials.length > 3 && (
               <button type="button" onClick={() => setExpanded((v) => !v)} className="inline-flex items-center gap-1 text-[13px] font-semibold text-accent hover:underline">
                 {expanded ? (
@@ -491,7 +502,10 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         </div>
         <div className="mt-3 grid grid-cols-2 gap-3 sm:gap-3.5 md:grid-cols-3">
           {loading && materials.length === 0 && [0, 1, 2].map((i) => <div key={i} className="h-[200px] animate-pulse rounded-[var(--r-card)] bg-muted" />)}
-          {shown.map(({ m, w }) => (
+          {shown.map(({ m, w }) =>
+            attached.notes.has(m.id) ? (
+              <NoteMaterialCard key={m.id} note={attached.notes.get(m.id)!} workspaceId={w.id} selected={selected.has(m.id)} onToggle={() => toggleSelected(m.id)} />
+            ) : (
             <div
               key={m.id}
               className={cn("life-card relative flex min-w-0 flex-col p-2.5 transition-colors sm:p-3", selected.has(m.id) && "border-accent ring-2 ring-accent/20")}
@@ -508,7 +522,8 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                 {w.title} · {formatRelativeDate(m.updatedAt)}
               </div>
             </div>
-          ))}
+            ),
+          )}
           {!loading && materials.length < 3 && (
             <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} className={cn("flex min-h-[160px] flex-col items-center justify-center gap-2 rounded-[var(--r-card)] border-2 border-dashed border-border p-4 text-center hover:border-border-strong hover:bg-muted/40", materials.length === 0 && "col-span-full")}>
               <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-16 w-auto" />
@@ -522,6 +537,14 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             </button>
           )}
         </div>
+        {attached.available && !loading && materials.length < 3 && (
+          <button type="button" onClick={() => setAttachOpen(true)} className="mx-auto mt-3 flex min-h-10 items-center text-[13.5px] font-semibold text-accent hover:underline">
+            Or add Scribe&apos;s notes for your course
+          </button>
+        )}
+        {attachOpen && (
+          <AttachNotesDialog workspaceId={workspaceId} workspaceTitle={scopeTitle ?? "this subject"} onClose={() => setAttachOpen(false)} onAttached={() => attached.reload()} />
+        )}
         </div>
 
         <NotesOutline

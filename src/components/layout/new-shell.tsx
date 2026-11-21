@@ -5,7 +5,7 @@ import Image from "next/image";
 import { NotificationBell } from "@/components/layout/notification-bell";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Calendar, Folder as FolderIcon, House, LogOut, PanelLeft, PanelLeftClose, PlayCircle, Plus, RotateCcw, Search, Settings, Store } from "lucide-react";
+import { Calendar, Folder as FolderIcon, House, LogOut, NotebookText, PanelLeft, PanelLeftClose, PlayCircle, Plus, RotateCcw, Search, Settings, Store } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import { PointsPill, StreakButton } from "@/components/rewards/streak-button";
@@ -23,6 +23,8 @@ import "@/app/design/design.css";
 
 const NAV: { href: string; label: string; labelKey?: string; icon: typeof House }[] = [
   { href: "/", label: "Home", labelKey: "nav.home", icon: House },
+  // Scribe's own notes, inside the app (the public pages are /notes).
+  { href: "/library", label: "Notes", icon: NotebookText },
   { href: "/planner", label: "Planner", labelKey: "today.planner", icon: Calendar },
   { href: "/shop", label: "Shop", labelKey: "rewards.shop", icon: Store },
   { href: "/mistakes", label: "Mistakes", labelKey: "mistakes.nav", icon: RotateCcw },
@@ -298,10 +300,10 @@ export function NewShell({ children }: { children: React.ReactNode }) {
         <AppTourHost />
       </div>
 
-      {/* Phones: the four places you go every day, one thumb away (the sidebar still holds subjects and settings). */}
+      {/* Phones: the five places you go every day, one thumb away (the sidebar still holds subjects and settings). */}
       <nav
         aria-label="Main"
-        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-border bg-white/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-border bg-white/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
       >
         {NAV.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
           const label = labelKey ? t(labelKey) : fallbackLabel;
@@ -319,7 +321,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               {/* Active tab: a soft pill behind a filled icon. */}
               <span
                 className={cn(
-                  "grid h-8 w-14 place-items-center rounded-[10px] transition-[background-color,transform] duration-200 group-active:scale-90 motion-reduce:transition-none",
+                  "grid h-8 w-[52px] place-items-center rounded-[10px] transition-[background-color,transform] duration-200 group-active:scale-90 motion-reduce:transition-none",
                   on ? "bg-[var(--accent-tint)]" : "group-hover:bg-muted",
                 )}
               >

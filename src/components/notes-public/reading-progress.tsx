@@ -100,11 +100,12 @@ export function ReadingTracker({ topicKey, sectionIds, anchors }: { topicKey: st
       if (!frame) frame = requestAnimationFrame(update);
     };
     update();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    // Capture: inside the app shell the page scrolls in its own container, whose scroll events do not bubble to the window.
+    window.addEventListener("scroll", onScroll, { passive: true, capture: true });
     window.addEventListener("resize", onScroll);
     return () => {
       observers.forEach((o) => o.disconnect());
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", onScroll, { capture: true });
       window.removeEventListener("resize", onScroll);
       if (frame) cancelAnimationFrame(frame);
       root.style.removeProperty("--nl-read");
@@ -181,12 +182,12 @@ export function ReadingRail({ topicKey, entries, footer }: { topicKey: string; e
 }
 
 /** Phones: a floating pill naming the current section; opens the full list. */
-export function ReadingPill({ topicKey, entries }: { topicKey: string; entries: RailEntry[] }) {
+export function ReadingPill({ topicKey, entries, hideClass = "lg:hidden" }: { topicKey: string; entries: RailEntry[]; /** From which width the rail replaces the pill. */ hideClass?: string }) {
   const { read, cur, current, sections } = useEntries(topicKey, entries);
   const ref = useRef<HTMLDetailsElement>(null);
   const at = cur ? entries.indexOf(cur) : 0;
   return (
-    <details ref={ref} className="group sticky top-2.5 z-20 lg:hidden">
+    <details ref={ref} className={cn("group sticky top-2.5 z-20", hideClass)}>
       <summary className="nl-card flex h-[52px] cursor-pointer list-none items-center gap-2.5 !rounded-[var(--r-button)] pl-2.5 pr-4 !shadow-[0_6px_16px_-10px_rgba(29,26,22,0.35)] [&::-webkit-details-marker]:hidden">
         <svg viewBox="0 0 36 36" className="nl-ring size-8 shrink-0 -rotate-90" aria-hidden="true">
           <circle cx="18" cy="18" r="15.9155" fill="none" stroke="var(--muted)" strokeWidth="4.2" />

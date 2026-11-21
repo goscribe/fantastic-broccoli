@@ -28,6 +28,8 @@ interface PracticeCtx {
   ids: string[];
   signupHref: string;
   signedIn: boolean;
+  /** Told about each answer (the in-app reader sends it to the server for the Mistakes list). */
+  onAnswer?: (questionId: string, choice: number, correct: boolean) => void;
 }
 
 const Ctx = createContext<PracticeCtx | null>(null);
@@ -51,6 +53,7 @@ export function PracticeProvider({
   questionIds,
   signupHref,
   trackView = true,
+  onAnswer,
   children,
 }: {
   courseId: string;
@@ -59,12 +62,13 @@ export function PracticeProvider({
   signupHref: string;
   /** False for a provider nested in an outer one (the unlocked view of a locked topic), so the view is counted once. */
   trackView?: boolean;
+  onAnswer?: (questionId: string, choice: number, correct: boolean) => void;
   children: ReactNode;
 }) {
   const { user } = useAuthUser();
   const value = useMemo(
-    () => ({ courseId, topicId, key: topicKey(courseId, topicId), ids: questionIds, signupHref, signedIn: !!user }),
-    [courseId, topicId, questionIds, signupHref, user],
+    () => ({ courseId, topicId, key: topicKey(courseId, topicId), ids: questionIds, signupHref, signedIn: !!user, onAnswer }),
+    [courseId, topicId, questionIds, signupHref, user, onAnswer],
   );
   useEffect(() => {
     if (!trackView) return;
@@ -137,6 +141,7 @@ export function PracticeCard(p: CardProps) {
     if (answered) return;
     const correct = i === p.correctIndex;
     answer(ctx.key, p.id, i, correct);
+    ctx.onAnswer?.(p.id, i, correct);
     const score = topicScore(progress, ctx.key, ctx.ids);
     trackNoteEvent("notes.practice_answered", ctx.courseId, ctx.topicId, {
       correct,
@@ -475,7 +480,7 @@ function SignupNudge({ className }: { className?: string }) {
  * "Start a Quick 5 on this topic": signed-in learners start it in the app;
  * visitors go to sign up (a Quick 5 needs an account).
  */
-export function StartQuick5({ courseId, topicId, level, placement, variant = "primary", className }: { courseId: string; topicId: string; level?: "SL" | "HL"; placement: "header" | "practice_end" | "note_cta"; variant?: "primary" | "secondary"; className?: string }) {
+export function StartQuick5({ courseId, topicId, level, placement, variant = "primary", mode = "quick5", onStarted, className }: { courseId: string; topicId: string; level?: "SL" | "HL"; placement: "header" | "practice_end" | "note_cta"; variant?: "primary" | "secondary"; /** "session": a full study session on the topic instead of five questions (the in-app reader). */ mode?: "quick5" | "session"; /** Called with the subject once the session exists, before the page changes. */ onStarted?: (workspaceId: string) => void; className?: string }) {
   const ctx = useContext(Ctx);
   const { user } = useAuthUser();
   const [busy, setBusy] = useState(false);
@@ -487,7 +492,8 @@ export function StartQuick5({ courseId, topicId, level, placement, variant = "pr
     setBusy(true);
     try {
       const { coursesApi } = await import("@/lib/api/courses");
-      const { workspaceId, sessionId } = await coursesApi.startTopic({ courseId, topicId, ...(level ? { level } : {}), mode: "quick5" });
+      const { workspaceId, sessionId } = await coursesApi.startTopic({ courseId, topicId, ...(level ? { level } : {}), mode });
+      onStarted?.(workspaceId);
       window.location.href = `/workspace/${workspaceId}/session/${sessionId}`;
     } catch (err) {
       setBusy(false);
@@ -503,7 +509,7 @@ export function StartQuick5({ courseId, topicId, level, placement, variant = "pr
   };
   return (
     <a href={ctx?.signupHref ?? "/signup?from=notes"} onClick={onClick} className={cn(variant === "primary" ? "nl-btn" : "nl-btn-ghost", busy && "opacity-60", className)} aria-busy={busy}>
-      {busy ? "Starting…" : "Start a Quick 5 on this topic"}
+      {busy ? "Starting…" : mode === "session" ? "Start a session on this topic" : "Start a Quick 5 on this topic"}
       {!busy && <span aria-hidden="true">→</span>}
     </a>
   );

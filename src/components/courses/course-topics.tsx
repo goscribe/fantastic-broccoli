@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, ChevronDown, Loader2 } from "lucide-react";
 import { coursesApi, type Course, type CourseLevel, type CourseProgress, type TopicProgress } from "@/lib/api/courses";
@@ -7,7 +8,7 @@ import { masteryPercent, nextTopic, topicTitle, unitProgress, unitTitle, unitsFo
 import { loadCourse, TopicRow } from "@/components/courses/course-picker";
 import { useStartCourseTopic } from "@/components/courses/use-start-topic";
 import { notesApi } from "@/lib/api/notes";
-import { noteHref } from "@/lib/notes";
+import { libraryCourseHref, noteHref } from "@/lib/notes";
 import { ProgressLine } from "@/components/courses/course-shelf";
 import { cn } from "@/lib/utils";
 import { SubjectBand } from "@/components/learn/subject-tile";
@@ -141,6 +142,13 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
         <p className="mt-4 text-[13px] text-muted-foreground">{t("course.allDone")}</p>
       )}
         </>
+      )}
+
+      {withNotes.size > 0 && (
+        <Link href={libraryCourseHref(course.id)} className="mt-4 flex min-h-11 items-center justify-between gap-3 rounded-xl bg-muted px-4 py-2.5 text-[14px] font-semibold hover:bg-accent-soft">
+          <span className="min-w-0">{`Scribe has notes for ${withNotes.size} of this course's topics`}</span>
+          <span className="shrink-0 font-bold text-accent">Read the notes</span>
+        </Link>
       )}
 
       <div className="mt-4 flex flex-col gap-2">

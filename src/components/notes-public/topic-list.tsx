@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
  * has (note, number of questions). Nodes fill in from the visitor's own
  * progress (see notes-progress.tsx); `current` marks the page being read.
  */
-export function TopicList({ courseId, topics, compact = false, current }: { courseId: string; topics: PublicTopicRow[]; compact?: boolean; current?: string }) {
+export function TopicList({ courseId, topics, compact = false, current, hrefFor }: { courseId: string; topics: PublicTopicRow[]; compact?: boolean; current?: string; /** Where a topic leads; the public page by default (the in-app library passes its own). */ hrefFor?: (topic: PublicTopicRow) => string }) {
   return (
     <ol className={cn("nl-path nl-card overflow-hidden", compact ? "" : "mt-3")}>
       {topics.map((t) => {
@@ -20,7 +20,7 @@ export function TopicList({ courseId, topics, compact = false, current }: { cour
         return (
           <li key={t.id}>
             <Link
-              href={topicPath(courseId, t)}
+              href={hrefFor ? hrefFor(t) : topicPath(courseId, t)}
               data-nl-topic={topicKey(courseId, t.id)}
               data-q={t.questionCount}
               aria-current={here ? "page" : undefined}

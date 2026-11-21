@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Camera, ClipboardPaste, GraduationCap, Loader2, PenLine, Upload } from "lucide-react";
@@ -17,6 +17,10 @@ import "@/lib/i18n/courses";
 import { CoursePicker } from "@/components/courses/course-picker";
 import { coursesApi, type CatalogTopic, type Course, type CourseLevel } from "@/lib/api/courses";
 import { markFirstScreenShown, track, type FirstRunOption } from "@/lib/funnel";
+import { NotesOffer, type NotesOfferSelection } from "@/components/onboarding/notes-offer";
+import { markFirstSessionOnboardingSkipped } from "@/components/onboarding/first-session-onboarding";
+import { attachedNotesApi } from "@/lib/api/notes";
+import { noteHref } from "@/lib/notes";
 import {
   PASTE_MAX_CHARS,
   PASTE_MIN_CHARS,
@@ -204,8 +208,51 @@ export function FirstRun({
     );
   };
 
+  /** The course whose notes were offered on this screen, so picking a topic by hand instead counts as passing the offer over. */
+  const offered = useRef<{ courseId: string; noteCount: number } | null>(null);
+  const onNotesOffered = useCallback((courseId: string, noteCount: number) => {
+    offered.current = { courseId, noteCount };
+    track("first_run.notes_offered", { courseId, noteCount });
+  }, []);
+
+  /**
+   * "Start with Scribe's notes": the course's subject is made with the first
+   * unit's notes in it as material, then a Quick 5 starts on the first topic
+   * (or the first note opens). No upload. If the notes cannot be attached
+   * (an older server), the Quick 5 still starts as it always did.
+   */
+  const startWithNotes = (course: Course, level: CourseLevel | undefined, selection: NotesOfferSelection, then: "quick5" | "read") => {
+    void run(
+      "curriculum",
+      async () => {
+        setBusy("building");
+        const first = selection.topics[0];
+        const { workspaceId } = await coursesApi.enroll(course.id, level);
+        emitTreeChanged();
+        const attached = await attachedNotesApi
+          .attach(workspaceId, course.id, selection.topics.map((x) => x.id))
+          .then((out) => out.attached.length)
+          .catch(() => 0);
+        track("first_run.notes_accepted", { courseId: course.id, noteCount: attached }, workspaceId);
+        if (attached > 0) track("notes.attached", { from: "first_run", courseId: course.id, noteCount: attached }, workspaceId);
+        if (then === "read") {
+          // They chose to read first: home is their subject and its notes from now on, not this screen again.
+          markFirstSessionOnboardingSkipped();
+          router.push(`${noteHref(course.id, first.id)}?ws=${encodeURIComponent(workspaceId)}`);
+          return;
+        }
+        const { sessionId } = await coursesApi.startTopic({ courseId: course.id, topicId: first.id, ...(level ? { level } : {}) });
+        track("first_run.session_requested", { option: "curriculum" }, workspaceId);
+        if (attached > 0) track("notes.attached_session_started", { from: "first_run", courseId: course.id, noteCount: attached }, workspaceId);
+        router.push(`/workspace/${workspaceId}/session/${sessionId}`);
+      },
+      t("course.errorStart"),
+    );
+  };
+
   /** Course → unit → topic: the server reuses/creates the course's subject and starts a topic-mode Quick 5. */
   const startCourse = (course: Course, topic: CatalogTopic, level?: CourseLevel) => {
+    if (offered.current?.courseId === course.id) track("first_run.notes_skipped", { courseId: course.id, noteCount: offered.current.noteCount });
     void run(
       "curriculum",
       async () => {
@@ -407,7 +454,20 @@ export function FirstRun({
                 </form>
               )}
 
-              {mode === "course" && <CoursePicker onStart={startCourse} />}
+              {mode === "course" && (
+                <CoursePicker
+                  onStart={startCourse}
+                  unitTop={(course, level) => (
+                    <NotesOffer
+                      key={`${course.id}-${level ?? ""}`}
+                      course={course}
+                      level={level}
+                      onOffered={(n) => onNotesOffered(course.id, n)}
+                      onAccept={(selection, then) => startWithNotes(course, level, selection, then)}
+                    />
+                  )}
+                />
+              )}
 
               {mode === "paste" && (
                 <form

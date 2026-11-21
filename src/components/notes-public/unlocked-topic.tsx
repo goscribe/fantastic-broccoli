@@ -2,7 +2,7 @@
 
 import { Unlock } from "lucide-react";
 import type { PublicTopic } from "@/lib/api/public-notes";
-import { NoteBody } from "@/components/notes/note-body";
+import { PublicNoteBody } from "./public-note-body";
 import { InlineMarkdown } from "@/components/ui/markdown-text";
 import { PracticeCard, PracticeProvider, PracticeScore } from "./practice";
 
@@ -21,7 +21,7 @@ export function UnlockedTopic({ data, signupHref }: { data: PublicTopic; signupH
       </p>
       {note && (
         <div className="mt-5">
-          <NoteBody note={note.content} />
+          <PublicNoteBody note={note.content} />
         </div>
       )}
       {questions.length > 0 && (

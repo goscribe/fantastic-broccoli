@@ -56,8 +56,11 @@ export function CoursePicker({
   onStart,
   busyTopicId,
   enrolledCourseIds,
+  unitTop,
 }: {
   onStart: (course: Course, topic: CatalogTopic, level?: CourseLevel) => void;
+  /** Shown above the unit list once a course (and level) is chosen: first run offers Scribe's notes there. */
+  unitTop?: (course: Course, level?: CourseLevel) => React.ReactNode;
   /** Topic whose session is being started (shows a spinner, blocks others). */
   busyTopicId?: string | null;
   enrolledCourseIds?: string[];
@@ -228,6 +231,8 @@ export function CoursePicker({
           ))}
         </div>
       )}
+
+      {step === "unit" && course && unitTop?.(course, level)}
 
       {step === "unit" && course && (
         <ul className="mt-3 flex flex-col gap-1.5">

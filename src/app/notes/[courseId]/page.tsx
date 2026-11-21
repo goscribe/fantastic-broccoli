@@ -5,10 +5,9 @@ import { SubjectArt } from "@/components/learn/subject-tile";
 import { familyFor, familyVars } from "@/lib/subject-family";
 import { Breadcrumbs } from "@/components/notes-public/breadcrumbs";
 import { NotesProgress } from "@/components/notes-public/notes-progress";
-import { TopicList } from "@/components/notes-public/topic-list";
-import { unitTitle } from "@/lib/courses";
+import { CourseUnits } from "@/components/notes-public/course-units";
 import { getCourse, rowIndexable } from "@/lib/notes-public/data";
-import { coursePath, topicPath, unitPath } from "@/lib/notes-public/slug";
+import { coursePath, topicPath } from "@/lib/notes-public/slug";
 import { courseDescription, courseTitle, crumbsFor } from "@/lib/notes-public/seo";
 import { lockedCountLabel } from "@/lib/notes-public/gate";
 import { LockedCount } from "@/components/notes-public/locked-count";
@@ -106,34 +105,7 @@ export default async function CourseNotesPage({ params }: Params) {
           </Link>
         )}
       </header>
-      <nav aria-label="Units" className="-mx-4 mt-6 flex gap-2 overflow-x-auto px-4 pb-1.5 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0 [&::-webkit-scrollbar]:hidden">
-        {course.units.map((u) => (
-          <a key={u.id} href={`#u-${u.id}`} className="nl-btn-ghost nl-btn-sm shrink-0">
-            {u.code}
-          </a>
-        ))}
-      </nav>
-      {course.units.map((u, ui) => (
-        <section key={u.id} id={`u-${u.id}`} className="mt-10 scroll-mt-6" aria-labelledby={`uh-${u.id}`}>
-          <div className="flex items-start gap-3">
-            <span className="nl-secnum mt-0.5 !w-auto min-w-[34px] px-1.5" aria-hidden="true">
-              <span>{u.code.length <= 4 ? u.code : ui + 1}</span>
-            </span>
-            <div className="min-w-0">
-              <h2 id={`uh-${u.id}`} className="text-[21px] font-black leading-[1.15] sm:text-[25px]">
-                <Link href={unitPath(course.id, u)} className="hover:underline">
-                  {unitTitle(course, u)}
-                </Link>
-              </h2>
-              <p className="mt-0.5 text-[13.5px] font-bold text-muted-foreground">
-                {u.topics.length} topics
-                {u.topics.some((t) => t.note) ? ` · ${u.topics.filter((t) => t.note).length} notes` : ""}
-              </p>
-            </div>
-          </div>
-          <TopicList courseId={course.id} topics={u.topics} />
-        </section>
-      ))}
+      <CourseUnits course={course} />
       <p className="mt-10 text-[12.5px] leading-snug text-faint">{course.sourceNote}</p>
       <NotesProgress />
     </div>
