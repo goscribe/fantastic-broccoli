@@ -115,7 +115,7 @@ function StatTile({ label, value }: { label: string; value: ReactNode }) {
   );
 }
 
-/** The three figures in one row, split by hairlines (one card, not three). */
+/** The three figures in one row, split by hairlines; they sit on the page, with no box around them. */
 const slipRow = "grid grid-cols-3 divide-x divide-border";
 
 function CountUp({ value, prefix = "" }: { value: number; prefix?: string }) {
@@ -134,9 +134,9 @@ type MasteryChange = NonNullable<ApiSessionStats["mastery"]>[number];
 function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: MasteryChange[] }) {
   const { t } = useI18n();
   return (
-    <div className="life-card w-full overflow-hidden" role="status">
+    <div className="w-full" role="status">
       <div className={slipRow}>{tiles}</div>
-      <ul className="space-y-3.5 border-t border-border px-5 py-4 text-left" aria-label={t("debrief.masteryTitle")}>
+      <ul className="mt-1 space-y-3.5 border-t border-border px-1 pb-1 pt-4 text-left" aria-label={t("debrief.masteryTitle")}>
         {mastery.map((m, i) => {
           const { before, after, delta, base, gain } = masteryRow(m);
           return (
@@ -419,7 +419,7 @@ export function SessionDebrief({
           <StatsWithMastery tiles={statTiles(stats)} mastery={mastery} />
         </div>
       ) : statsError ? null : (
-      <div className={cn("life-card mt-4 w-full overflow-hidden sm:mt-6", slipRow)} role="status">
+      <div className={cn("mt-4 w-full sm:mt-6", slipRow)} role="status">
         {stats ? (
           statTiles(stats)
         ) : (
@@ -442,7 +442,7 @@ export function SessionDebrief({
         {primary}
         {/* The second step sits right under the first, so both are visible without scrolling. */}
         {mistakes > 0 && (
-          <div className="life-card life-press overflow-hidden text-left">
+          <div className="life-press overflow-hidden rounded-[22px] bg-muted text-left">
             <NextStep
               title={(mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes))}
               sub={t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)))}
@@ -462,7 +462,7 @@ export function SessionDebrief({
           <h3 id="debrief-next-steps" className="mb-2 px-1 text-[12.5px] font-semibold text-muted-foreground">
             {t("habit.nextSmallStep")}
           </h3>
-          <div className="life-card divide-y divide-border overflow-hidden">
+          <div className="divide-y divide-border border-y border-border">
             {deck && workspaceId && (
               <NextStep
                 title={t("habit.flashcardsTitle")}
@@ -506,7 +506,7 @@ export function SessionDebrief({
             <ChevronDown className={cn("size-4 transition-transform", showReport && "rotate-180")} />
           </button>
           {showReport && debrief && (
-            <div className="mt-4 space-y-5 rounded-2xl border border-border p-5 animate-fade-up">
+            <div className="mt-2 space-y-5 border-t border-border px-1 pt-5 animate-fade-up">
               {usefulHeadline(debrief.headline) && debrief.summary && (
                 <p className="text-sm leading-6 text-foreground">
                   <MathText text={debrief.summary} />

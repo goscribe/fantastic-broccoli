@@ -20,6 +20,7 @@ import { track, type TodayActionKind } from "@/lib/funnel";
 import { toastError } from "@/lib/toast";
 import { useI18n } from "@/lib/i18n";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useDaypart } from "@/lib/use-daypart";
 import { cn } from "@/lib/utils";
 import type { StudySession, Workspace } from "@/types";
 
@@ -34,28 +35,39 @@ const POSE: Record<"mistakes" | "plan" | "quick5" | "done", MascotPose> = {
   quick5: "book",
   done: "trophy",
 };
-/** The hero's card: white, hairline, a calm colour field with the cat inside it. */
-const shell = "life-rise relative isolate overflow-hidden rounded-[var(--r-panel)] border border-border bg-white";
+/** The hero's card: the colour of its scene's light (white by day, dark after dark), a hairline, the scene inside it. */
+const shell = "hero-card life-rise relative isolate overflow-hidden rounded-[var(--r-panel)] border border-border";
 
 /**
- * The hero's backdrop: one soft lilac field and two large flat shapes, no
- * scenery. The disc and the ground are sized and placed from the cat's own
- * box, so they sit behind it at every width. Phones: a strip across the top
- * that fades into the white card, text below. From sm up: full-bleed, white
- * on the left where the text sits.
+ * The hero's backdrop: an illustrated landscape lit for the student's own time
+ * of day (tokens.css picks the file from <html data-daypart>), with the cat
+ * standing on the knoll at its right, wearing whatever outfit is equipped.
+ * Phones: a strip across the top of the card, text below. From sm up:
+ * full-bleed, washed out on the left where the text sits. The pill beside the
+ * cat opens the shop's outfits, where the cat is dressed.
  */
 function HeroScene({ pose, motion }: { pose: MascotPose; motion: string }) {
+  const { t } = useI18n();
   return (
-    <div
-      aria-hidden
-      className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[168px] overflow-hidden sm:inset-0 sm:h-auto"
-    >
-      <div className="absolute bottom-[26px] right-[13%] h-[112px] sm:bottom-[15%] sm:right-[9%] sm:h-[184px] lg:right-[11%]">
-        <span className="hero-field__disc" />
-        <span className="hero-field__ground" />
-        <Mascot pose={pose} className={cn(motion, "h-full")} priority />
+    <>
+      <div
+        aria-hidden
+        className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[168px] overflow-hidden sm:inset-0 sm:h-auto"
+      >
+        <div className="absolute bottom-[26px] right-[13%] h-[112px] sm:bottom-[15%] sm:right-[9%] sm:h-[184px] lg:right-[11%]">
+          <span className="hero-field__ground" />
+          <Mascot pose={pose} className={cn(motion, "h-full")} priority />
+        </div>
       </div>
-    </div>
+      <Link
+        href="/shop#outfits"
+        className="absolute left-1.5 top-1.5 z-10 flex min-h-11 items-center px-1.5 focus-visible:outline-none sm:bottom-1.5 sm:left-auto sm:right-2.5 sm:top-auto [&:focus-visible>span]:ring-2 [&:focus-visible>span]:ring-accent/50"
+      >
+        <span className="rounded-full bg-white/90 px-3 py-1.5 text-[12.5px] font-extrabold leading-none text-[#16161a] shadow-[0_1px_0_rgb(0_0_0/0.08)] transition-colors hover:bg-white">
+          {t("today.dressUp")}
+        </span>
+      </Link>
+    </>
   );
 }
 
@@ -98,6 +110,7 @@ export function TodayCard({
 }) {
   const { t, locale } = useI18n();
   const router = useRouter();
+  const daypart = useDaypart();
   const dateLabel = new Intl.DateTimeFormat(locale, { weekday: "short", day: "numeric", month: "short" }).format(new Date());
   const starter = useStartTask();
   const [busy, setBusy] = useState(false);
@@ -238,14 +251,15 @@ export function TodayCard({
   const pending = busy || !!starter.startingId;
   const resume = pickResumable(sessions, resumeExclude);
 
-  const pose = POSE[action.kind];
+  // In the small hours the cat is asleep on its feet, unless today is already done.
+  const pose = daypart === "late" && action.kind !== "done" ? "sleep" : POSE[action.kind];
 
   return (
     <section className={cn(shell, "px-5 pb-6 pt-[188px] sm:p-9", resume && "pb-3 sm:pb-5")} aria-labelledby="today-title">
       <HeroScene pose={pose} motion="cat-peek" />
       <Greeting greeting={greeting} sub={greetingSub} />
       {/* One thing to do today: what it is, how long, one button. */}
-      <p className={cn("relative text-[13.5px] font-extrabold text-accent-dim", greeting && "mt-5 sm:mt-8")}>
+      <p className={cn("hero-eyebrow relative text-[13.5px] font-extrabold", greeting && "mt-5 sm:mt-8")}>
         {eyebrow}
         {action.kind !== "done" && <span className="whitespace-nowrap font-bold text-foreground/60"> · {dateLabel}</span>}
       </p>

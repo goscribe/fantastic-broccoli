@@ -264,8 +264,8 @@ export function Shop() {
         </ul>
       </section>
 
-      {/* Outfits */}
-      <section className="mt-8">
+      {/* Outfits: home's "Dress up" pill lands here. */}
+      <section id="outfits" className="mt-8 scroll-mt-20">
         <SectionTitle>{t("rewards.sectionOutfits")}</SectionTitle>
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {OUTFIT_ITEMS.map((item) => (

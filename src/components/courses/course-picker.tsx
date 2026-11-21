@@ -301,7 +301,7 @@ export function TopicRow({
   const { t } = useI18n();
   const pct = masteryPercent(progress?.mastery);
   return (
-    <div className={cn("rounded-xl border bg-card transition-colors", open ? "border-accent" : "border-border")}>
+    <div className={cn("rounded-[22px] transition-colors", open ? "bg-muted" : "hover:bg-muted/60")}>
       <button
         type="button"
         onClick={onToggle}
@@ -326,7 +326,7 @@ export function TopicRow({
         <ChevronRight className={cn("size-4 shrink-0 text-faint transition-transform", open && "rotate-90")} />
       </button>
       {open && (
-        <div className="border-t border-border px-3.5 pb-3.5 pt-3">
+        <div className="px-3.5 pb-3.5 pt-1">
           <p className="text-[12px] font-semibold text-faint">{t("course.youllPractise")}</p>
           <ul className="mt-1.5 flex flex-col gap-1">
             {topic.objectives.map((o) => (

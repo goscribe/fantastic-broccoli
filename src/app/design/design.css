@@ -128,3 +128,19 @@ html.new-ui .skeleton {
 @media (prefers-reduced-motion: reduce) {
   html.new-ui .skeleton { animation: none !important; }
 }
+
+/*
+ * Home's right rail: its sections sit on the page, split by hairlines, not a
+ * stack of outlined boxes. Unlayered on purpose, so it beats the cards' own
+ * padding utilities.
+ */
+.rail-flat .life-card,
+.rail-flat .rail-box { background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+.rail-flat > * > .life-card { padding: 0; }
+.rail-flat > *,
+.rail-flat > .life-card,
+.rail-flat > .rail-box { padding: 20px 2px; }
+.rail-flat > :first-child { padding-top: 6px; }
+.rail-flat > * + *,
+.rail-flat > * + .life-card,
+.rail-flat > * + .rail-box { border-top: 1px solid var(--border); }

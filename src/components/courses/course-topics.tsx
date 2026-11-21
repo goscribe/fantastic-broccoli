@@ -154,7 +154,7 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
                 <ChevronDown className={cn("size-4 shrink-0 text-faint transition-transform", open && "rotate-180")} />
               </button>
               {open && (
-                <ul className="mt-1 flex flex-col gap-1.5">
+                <ul className="mt-1 flex flex-col gap-0.5">
                   {u.topics.map((topic) => (
                     <li key={topic.id}>
                       <TopicRow

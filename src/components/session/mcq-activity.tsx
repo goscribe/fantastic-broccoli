@@ -199,24 +199,25 @@ export function McqActivity({
             disabled={revealed}
             className={cn(
               newUi
-                ? // Chunky answer tiles, lettered like an exam paper: a thicker lower edge that presses flat; a pop when picked, a shake when wrong.
-                  "min-h-[60px] w-full touch-manipulation text-left rounded-[var(--r-button)] border-2 border-b-4 bg-card text-foreground px-3.5 py-3 text-[15.5px] font-semibold leading-snug transition-[background-color,border-color,transform] duration-150 active:translate-y-[2px] active:border-b-2 disabled:active:translate-y-0 disabled:active:border-b-4 motion-reduce:transition-none motion-reduce:active:translate-y-0 sm:px-4"
+                ? // Soft answer pills, lettered like an exam paper: a tinted fill instead of an outline, a ring once picked, green or rose once marked; a pop when picked, a shake when wrong.
+                  "min-h-[60px] w-full touch-manipulation text-left rounded-[30px] px-3.5 py-3 text-[15.5px] font-semibold leading-snug text-foreground ring-inset transition-[background-color,box-shadow,transform] duration-150 active:scale-[0.99] disabled:active:scale-100 motion-reduce:transition-none motion-reduce:active:scale-100 sm:px-4"
                 : "w-full text-left p-3 rounded-lg border text-sm",
-              !revealed && selected === i && (newUi ? "life-pop border-accent bg-card text-foreground" : "border-accent bg-accent/5"),
-              !revealed && selected !== i && (newUi ? "border-[var(--edge)] hover:border-border-strong" : "border-border hover:border-accent/30 hover:bg-muted/30"),
-              revealed && i === question.correctIndex && (newUi ? "border-emerald-300 bg-emerald-50 text-emerald-900" : "border-success bg-success/5"),
-              revealed && selected === i && i !== question.correctIndex && (newUi ? "life-shake border-rose-300 bg-rose-50 text-rose-900" : "border-red-500 bg-red-500/5"),
-              revealed && selected !== i && i !== question.correctIndex && (newUi ? "border-[var(--edge)] opacity-55" : "opacity-50"),
+              !revealed && selected === i && (newUi ? "life-pop bg-[color-mix(in_srgb,var(--accent)_10%,#fff)] ring-2 ring-accent" : "border-accent bg-accent/5"),
+              !revealed && selected !== i && (newUi ? "bg-muted hover:bg-[var(--edge)]" : "border-border hover:border-accent/30 hover:bg-muted/30"),
+              revealed && i === question.correctIndex && (newUi ? "bg-emerald-50 text-emerald-900 ring-2 ring-emerald-500" : "border-success bg-success/5"),
+              revealed && selected === i && i !== question.correctIndex && (newUi ? "life-shake bg-rose-50 text-rose-900 ring-2 ring-rose-400" : "border-red-500 bg-red-500/5"),
+              revealed && selected !== i && i !== question.correctIndex && (newUi ? "bg-muted opacity-55" : "opacity-50"),
             )}
           >
             <div className="flex items-center gap-3">
               <span
                 className={cn(
-                  newUi ? "flex h-8 w-8 items-center justify-center rounded-[9px] border-2 text-[13.5px] font-extrabold flex-shrink-0" : "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium flex-shrink-0",
-                  !revealed && selected === i && (newUi ? "border-accent bg-accent text-accent-foreground" : "bg-accent text-accent-foreground"),
-                  !revealed && selected !== i && (newUi ? "border-[var(--edge)] bg-card text-foreground" : "bg-muted text-muted-foreground"),
-                  revealed && i === question.correctIndex && (newUi ? "border-emerald-600 bg-emerald-600 text-white" : "bg-success text-white"),
-                  revealed && selected === i && i !== question.correctIndex && (newUi ? "border-rose-600 bg-rose-600 text-white" : "bg-red-500 text-white"),
+                  newUi ? "flex h-8 w-8 items-center justify-center rounded-full text-[13.5px] font-extrabold flex-shrink-0" : "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium flex-shrink-0",
+                  !revealed && selected === i && (newUi ? "bg-accent text-accent-foreground" : "bg-accent text-accent-foreground"),
+                  !revealed && selected !== i && (newUi ? "bg-card text-foreground" : "bg-muted text-muted-foreground"),
+                  revealed && i === question.correctIndex && (newUi ? "bg-emerald-600 text-white" : "bg-success text-white"),
+                  revealed && selected === i && i !== question.correctIndex && (newUi ? "bg-rose-600 text-white" : "bg-red-500 text-white"),
+                  revealed && selected !== i && i !== question.correctIndex && newUi && "bg-card text-foreground",
                 )}
               >
                 {String.fromCharCode(65 + i)}

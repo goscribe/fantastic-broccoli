@@ -40,6 +40,8 @@ import { TodayCard } from "@/components/learn/today-card";
 import { StreakCard } from "@/components/learn/streak-card";
 import { useQuery } from "@tanstack/react-query";
 import { mistakesApi } from "@/lib/api/mistakes";
+import type { Daypart } from "@/lib/daypart";
+import { useDaypart } from "@/lib/use-daypart";
 import { greetingMood, isBrandNew, type GreetingMood } from "@/lib/home-today";
 
 const GREET_KEY: Record<GreetingMood, string> = { new: "greetNew", done: "greetDone", streak: "greetStreak", fix: "greetFix", start: "greetStart" };
@@ -72,9 +74,13 @@ function flatten(folders: Folder[], root: Workspace[]): Workspace[] {
   return all;
 }
 
-const greeting = () => {
-  const h = new Date().getHours();
-  return h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
+/** The same buckets as the hero's sky (src/lib/daypart.ts), so the words and the scene agree. */
+const GREETING: Record<Daypart, string> = {
+  morning: "Good morning",
+  afternoon: "Good afternoon",
+  evening: "Good evening",
+  night: "Good evening",
+  late: "Up late",
 };
 
 function MaterialThumb({ m }: { m: Material }) {
@@ -360,6 +366,9 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     retry: 1,
   });
   const doneToday = !!streakInfo?.todayGoalMet;
+  // The student's own clock; unknown on the server, where a plain "Hello" stands in (home renders client-side after sign-in).
+  const daypart = useDaypart();
+  const greeting = () => (daypart ? GREETING[daypart] : "Hello");
   const mood = greetingMood({
     brandNew: !!brandNew,
     doneToday,
@@ -571,7 +580,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
       />
       )}
       {!brandNew && (
-      <div className={cn("w-full shrink-0 flex-col gap-3.5 lg:w-[300px]", home ? "hidden lg:flex" : "flex")}>
+      <div className={cn("w-full shrink-0 flex-col lg:w-[300px]", home ? "rail-flat hidden lg:flex" : "flex gap-3.5")}>
         {!home && loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
         {!home && suggested && (() => {
           const { done, total, next } = sessionProgress(suggested);
@@ -615,7 +624,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             <div className="text-[13px] leading-snug text-muted-foreground">{due ? `flashcards due today, about ${Math.max(1, Math.round(due / 3))} min` : "Nothing due right now"}</div>
           </div>
           )}
-          <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-xl text-[14px] font-semibold", due && !home ? "bg-accent text-white" : "bg-muted hover:bg-accent-soft")}>
+          <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full text-[14px] font-semibold", due && !home ? "bg-accent text-white" : "bg-muted hover:bg-accent-soft")}>
             {due ? "Review now" : "Browse flashcards"}
           </Link>
         </div>
@@ -662,7 +671,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                 const href = s.kind === "review" ? "/flashcards/review" : s.workspaceId && s.sessionId ? `/workspace/${s.workspaceId}/session/${s.sessionId}` : "/planner";
                 return (
                   <li key={`${s.date}-${s.id}`}>
-                    <Link href={href} className="flex items-center gap-3 rounded-xl border border-border px-3 py-2 hover:bg-muted">
+                    <Link href={href} className="-mx-2 flex items-center gap-3 rounded-2xl px-2 py-2 hover:bg-muted">
                       <span className="w-[72px] shrink-0 text-[12px] font-semibold text-faint">{label} · {hhmm(s.start)}</span>
                       <span className="min-w-0 flex-1 truncate text-[13.5px] font-semibold">{s.title}</span>
                       <span className="shrink-0 text-[12px] text-faint">{s.end - s.start} min</span>
@@ -905,7 +914,7 @@ function HomeShopCard() {
       href="/shop"
       className="life-card life-press group hidden items-center gap-3.5 p-3.5 lg:flex"
     >
-      <span className="grid size-[64px] shrink-0 place-items-end justify-center overflow-hidden rounded-xl bg-muted">
+      <span className="grid size-[64px] shrink-0 place-items-end justify-center overflow-hidden rounded-full bg-muted">
         <Mascot pose="wave" className="cat-wiggle mb-0.5 h-[56px] w-[48px]" />
       </span>
       <span className="min-w-0 flex-1">

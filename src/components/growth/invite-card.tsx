@@ -111,7 +111,7 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
         onClick={onShare}
         disabled={!data}
         className={cn(
-          "flex w-full items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 text-left transition-colors hover:bg-muted/60 focus-visible:bg-muted/60 focus-visible:outline-none disabled:cursor-default disabled:hover:bg-card",
+          "flex w-full items-center gap-3 rounded-[22px] bg-muted px-4 py-3 text-left transition-colors hover:bg-[var(--edge)] focus-visible:bg-[var(--edge)] focus-visible:outline-none disabled:cursor-default disabled:hover:bg-muted",
           className,
         )}
       >

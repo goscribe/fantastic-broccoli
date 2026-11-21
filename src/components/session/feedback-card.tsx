@@ -34,16 +34,11 @@ export function FeedbackCard({
   const xpShown = useCountUp(ok ? xp : 0, 600);
   return (
     <div className="relative pb-2 pt-3">
-      {/* Soft result panel: a pale green or rose surface says right/wrong, the cat reacts, and the one button stays purple. */}
-      <div
-        className={cn(
-          "relative overflow-hidden rounded-[var(--r-card)] px-5 py-5 sm:px-6",
-          ok ? "design-bounce bg-emerald-50" : "life-rise bg-rose-50",
-        )}
-      >
+      {/* No panel: the result sits on the page under the answers. The badge and title say right/wrong, the cat reacts, and the one button stays purple. */}
+      <div className={cn("relative pt-1", ok ? "design-bounce" : "life-rise")}>
         <Mascot
           pose={ok ? "cheer" : "think"}
-          className={cn("pointer-events-none absolute right-3 top-2.5 h-[68px] sm:right-5 sm:h-[76px]", ok && "cat-cheer")}
+          className={cn("pointer-events-none absolute right-0 top-0 h-[58px] sm:h-[76px]", ok && "cat-cheer")}
         />
         <div className="relative flex items-center gap-3 pr-16 sm:pr-20">
           <span
@@ -66,7 +61,7 @@ export function FeedbackCard({
         {note && <p className="relative mt-2 text-[12.5px] font-bold text-rose-800">{note}</p>}
         <div className="relative mt-4 flex gap-2.5">
           {secondary && onSecondary && (
-            <Button variant="ghost" size="sm" onClick={onSecondary} className="h-12 flex-1 rounded-[var(--r-button)] bg-white/70 sm:flex-none">
+            <Button variant="ghost" size="sm" onClick={onSecondary} className="h-12 flex-1 rounded-[var(--r-button)] bg-muted sm:flex-none">
               {secondary}
             </Button>
           )}
