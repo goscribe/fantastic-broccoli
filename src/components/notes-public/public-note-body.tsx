@@ -1,6 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 import Image from "next/image";
-import { Check, ChevronDown, TriangleAlert } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import type { NoteBlock, NoteFigure, TopicNoteContent } from "@/lib/api/notes";
 import { figureNumbers, recallMarks } from "@/lib/notes";
 import { parseExpression } from "@/lib/latex-eval";
@@ -154,17 +154,14 @@ function Block({ block, figure, number, lead }: { block: NoteBlock; figure?: Not
       // Two different shapes on purpose: a warm examiner's warning, and the cat's speech bubble.
       return block.kind === "mistake" ? (
         <aside className="rounded-[var(--r-button)] bg-[var(--flame-soft)] px-4 py-3.5 sm:px-5" data-nl-reveal="">
-          <p className="flex items-center gap-1.5 text-[14px] font-extrabold text-[var(--flame-ink)]">
-            <TriangleAlert className="size-4 text-[var(--flame-edge)]" strokeWidth={2.75} aria-hidden="true" />
-            Common mistake
-          </p>
+          <p className="text-[14px] font-extrabold text-[var(--flame-ink)]">Common mistake</p>
           <p className="mt-1 text-[16.5px] font-semibold leading-[1.5] text-foreground sm:text-[17px]">
             <RichText text={block.text} />
           </p>
         </aside>
       ) : (
         <aside className="flex items-end gap-2.5" data-nl-reveal="">
-          <Image src="/design/cat2-pencil.png" alt="" width={234} height={262} unoptimized loading="lazy" className="h-[68px] w-auto shrink-0 sm:h-[84px]" />
+          <Image src="/design/cat3-pencil.webp" alt="" width={360} height={400} unoptimized loading="lazy" className="h-[68px] w-auto shrink-0 sm:h-[84px]" />
           <div className="min-w-0 flex-1 rounded-[var(--r-card)] rounded-bl-[6px] border border-border bg-card px-4 py-3.5 sm:px-5">
             <p className="text-[14px] font-extrabold text-foreground">Exam tip</p>
             <p className="mt-0.5 text-[16.5px] font-semibold leading-[1.5] text-foreground sm:text-[17px]">

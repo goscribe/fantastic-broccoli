@@ -275,7 +275,7 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
             {questions.length > 0 && (
               <section id="practice" className="mt-16 scroll-mt-4" aria-labelledby="h-practice">
                 <div className="nl-panel relative overflow-hidden px-5 pb-6 pt-6 sm:px-8 sm:pb-8 sm:pt-8" data-nl-reveal="">
-                  <Image src="/design/cat2-pencil.png" alt="" width={234} height={262} unoptimized loading="lazy" className="absolute -bottom-2 right-3 h-[92px] w-auto sm:right-7 sm:h-[132px]" />
+                  <Image src="/design/cat3-pencil.webp" alt="" width={360} height={400} unoptimized loading="lazy" className="absolute -bottom-2 right-3 h-[92px] w-auto sm:right-7 sm:h-[132px]" />
                   <h2 id="h-practice" className="text-[30px] font-black leading-[1.05] text-foreground sm:text-[38px]">
                     Practice this topic
                   </h2>
@@ -296,7 +296,7 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
 
             {note && questions.length === 0 && (
               <section className="nl-panel relative mt-16 overflow-hidden px-5 pb-6 pt-6 sm:px-8 sm:pb-8 sm:pt-8" aria-labelledby="h-finish" data-nl-reveal="">
-                <Image src="/design/cat2-cheer.png" alt="" width={244} height={288} unoptimized loading="lazy" className="absolute right-3 top-4 h-[88px] w-auto sm:right-7 sm:h-[128px]" />
+                <Image src="/design/cat3-cheer.webp" alt="" width={363} height={400} unoptimized loading="lazy" className="absolute right-3 top-4 h-[88px] w-auto sm:right-7 sm:h-[128px]" />
                 <h2 id="h-finish" className="pr-[80px] text-[28px] font-black leading-[1.06] text-foreground sm:text-[36px]">
                   Now make it stick
                 </h2>

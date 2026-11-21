@@ -248,7 +248,7 @@ export function MistakesView({
   if (summary && summary.total === 0) {
     return (
       <div className="rounded-3xl border border-border bg-card px-6 py-12 text-center">
-        <Image src="/design/cat2-book.png" alt="" width={120} height={132} unoptimized className="cat-bob mx-auto h-24 w-auto select-none" />
+        <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob mx-auto h-24 w-auto select-none" />
         <p className="mt-3 text-[15px] font-semibold">{t("mistakes.emptyTitle")}</p>
         <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">{t("mistakes.empty")}</p>
       </div>

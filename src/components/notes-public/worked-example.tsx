@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { Check, Eye, PencilLine, RotateCcw } from "lucide-react";
+import { Check } from "lucide-react";
 import { useHydrated } from "./reading-store";
 
 /**
@@ -22,10 +22,7 @@ export function WorkedExample({ title, problem, steps, answer }: { title: ReactN
     <div className="nl-card overflow-hidden" data-nl-reveal="">
       <div className="flex items-center gap-3 px-4 pt-4 sm:px-6 sm:pt-5">
         <div className="min-w-0">
-          <p className="flex items-center gap-1.5 text-[13.5px] font-extrabold text-muted-foreground">
-            <PencilLine className="size-4" strokeWidth={2.5} aria-hidden="true" />
-            Worked example
-          </p>
+          <p className="text-[13.5px] font-extrabold text-muted-foreground">Worked example</p>
           <p className="text-[18px] font-extrabold leading-snug text-foreground sm:text-[19px]">{title}</p>
         </div>
       </div>
@@ -53,7 +50,7 @@ export function WorkedExample({ title, problem, steps, answer }: { title: ReactN
         {hydrated &&
           (done ? (
             <button type="button" onClick={() => setShown(1)} className="nl-btn-ghost nl-btn-sm">
-              <RotateCcw className="size-4" /> Hide the steps and try it yourself
+              Hide the steps and try it yourself
             </button>
           ) : (
             <>
@@ -61,7 +58,7 @@ export function WorkedExample({ title, problem, steps, answer }: { title: ReactN
                 {visible >= steps.length ? "Show the answer" : `Show step ${visible + 1}`}
               </button>
               <button type="button" onClick={() => setShown(all)} className="inline-flex min-h-10 items-center gap-1.5 text-[14.5px] font-extrabold text-foreground underline decoration-border-strong underline-offset-4">
-                <Eye className="size-4" /> Show all
+                Show all
               </button>
               <span className="ml-auto text-[13px] font-bold tabular-nums text-faint">
                 {Math.min(visible, steps.length)}/{steps.length}

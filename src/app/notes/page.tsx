@@ -29,11 +29,15 @@ export default async function NotesIndexPage() {
   return (
     <div className="mx-auto w-full max-w-[1120px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
       <Breadcrumbs crumbs={crumbsFor.index()} />
-      {/* The illustrated scene; the cat is its own image over it, so a new mascot swaps in without redrawing the scene. */}
-      <header className="nl-hero relative mt-4 overflow-hidden px-5 pb-6 pt-[148px] sm:px-10 sm:py-11 sm:pr-[300px] lg:pr-[400px]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/design/hero/scene.svg" alt="" width={1440} height={960} fetchPriority="high" decoding="async" className="nl-hero__scene" />
-        <Image src="/design/cat2-book.png" alt="" width={240} height={260} priority unoptimized className="nl-cat-in absolute right-[16%] top-[26px] h-[104px] w-auto sm:right-[8%] sm:top-auto sm:bottom-[12%] sm:h-[150px] lg:right-[11%] lg:h-[190px]" />
+      {/* A calm colour field behind the headline; the disc and the ground follow the cat's own box. */}
+      <header className="nl-hero relative mt-4 overflow-hidden px-5 pb-6 pt-[170px] sm:px-10 sm:py-11 sm:pr-[300px] lg:pr-[400px]">
+        <div aria-hidden="true" className="hero-field nl-hero__field">
+          <div className="absolute bottom-[22px] right-[13%] h-[104px] sm:bottom-[15%] sm:right-[7%] sm:h-[150px] lg:right-[9%] lg:h-[190px]">
+            <span className="hero-field__disc" />
+            <span className="hero-field__ground" />
+            <Image src="/design/cat3-book.webp" alt="" width={363} height={400} priority unoptimized className="nl-cat-in relative h-full w-auto" />
+          </div>
+        </div>
         <h1 className="nl-rise text-[34px] font-black leading-[1.04] text-foreground sm:text-[48px]" style={{ "--i": 1 } as React.CSSProperties}>
           Free notes and practice questions
         </h1>

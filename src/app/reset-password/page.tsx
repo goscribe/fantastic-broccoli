@@ -57,8 +57,8 @@ export default function ResetPasswordPage() {
       <AuthFigure
         src={
           done
-            ? "/design/cat2-trophy.png"
-            : "/design/cat2-think.png"
+            ? "/design/cat3-trophy.webp"
+            : "/design/cat3-think.webp"
         }
       />
 

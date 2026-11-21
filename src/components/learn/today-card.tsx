@@ -78,7 +78,7 @@ export function TodayCard({
   if (action.kind === "upload") {
     return (
       <section className="relative overflow-hidden rounded-2xl border border-border bg-card px-5 pb-4 pt-6 sm:px-8 sm:pb-6 sm:pt-8" aria-labelledby="today-title">
-        <Image src="/design/cat2-book.png" alt="" width={96} height={96} unoptimized className="cat-peek mx-auto h-[88px] w-auto sm:absolute sm:right-8 sm:top-6 sm:h-[112px]" />
+        <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-peek mx-auto h-[88px] w-auto sm:absolute sm:right-8 sm:top-6 sm:h-[112px]" />
         <div className="mt-3 text-center sm:mt-0 sm:max-w-[460px] sm:text-left">
           <h2 id="today-title" className="text-[22px] font-bold leading-tight sm:text-[26px]">
             {t("today.uploadTitle")}
@@ -178,7 +178,7 @@ export function TodayCard({
 
   return (
     <section className="relative overflow-hidden rounded-2xl border border-border bg-card p-4 sm:p-6" aria-labelledby="today-title">
-      <Image src="/design/cat2-book.png" alt="" width={72} height={72} unoptimized className="cat-peek pointer-events-none absolute right-3 top-3 h-14 w-auto sm:right-5 sm:top-5 sm:h-[72px]" />
+      <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-peek pointer-events-none absolute right-3 top-3 h-14 w-auto sm:right-5 sm:top-5 sm:h-[72px]" />
       <div className="flex items-center gap-2.5">
         <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent">
           <Icon className="size-[18px]" />

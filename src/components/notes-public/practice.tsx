@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useAuthUser } from "@/lib/api/auth";
 import { trackNoteEvent } from "@/lib/api/public-notes";
 import { shouldPrompt, topicKey, topicScore, totalAnswered } from "@/lib/notes-public/progress";
-import { Check, Flame, RotateCcw, X } from "lucide-react";
+import { Check, RotateCcw, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usePracticeProgress } from "./practice-store";
 
@@ -146,7 +146,7 @@ export function PracticeCard(p: CardProps) {
       <div className="flex items-center gap-2.5 px-0.5">
         {inline ? (
           <>
-            <Image src="/design/cat2-think.png" alt="" width={230} height={259} unoptimized loading="lazy" className="-my-2 h-[58px] w-auto shrink-0" />
+            <Image src="/design/cat3-think.webp" alt="" width={383} height={400} unoptimized loading="lazy" className="-my-2 h-[58px] w-auto shrink-0" />
             <div className="min-w-0">
               <p className="text-[17px] font-extrabold leading-tight text-foreground">Quick check</p>
               <p className="text-[13px] font-bold text-muted-foreground">One question on the part you just read</p>
@@ -212,7 +212,7 @@ export function PracticeCard(p: CardProps) {
           {answered && (
             <div className="flex items-center gap-3">
               {fresh && right && <Sparkles />}
-              <Image src={right ? "/design/cat2-cheer.png" : "/design/cat2-think.png"} alt="" width={244} height={288} unoptimized className="h-[58px] w-auto shrink-0" />
+              <Image src={right ? "/design/cat3-cheer.webp" : "/design/cat3-think.webp"} alt="" width={363} height={400} unoptimized className="h-[58px] w-auto shrink-0" />
               <p className={cn("text-[19px] font-extrabold leading-tight", right ? "text-[var(--ok-ink)]" : "text-[var(--no-ink)]")}>
                 {right ? "Correct!" : `Not quite. The answer is ${LETTERS[p.correctIndex]}.`}
               </p>
@@ -265,8 +265,7 @@ export function PracticeScore({ inlineCount }: { inlineCount: number }) {
           </span>
         </p>
         {streak >= 2 && (
-          <span key={streak} className="nl-pop inline-flex items-center gap-1 text-[13px] font-extrabold text-[var(--flame-ink)]">
-            <Flame className="size-4 fill-[var(--flame)] text-[var(--flame)]" aria-hidden="true" />
+          <span key={streak} className="nl-pop inline-flex items-center text-[13px] font-extrabold text-[var(--flame-ink)]">
             {streak} in a row
           </span>
         )}
@@ -318,7 +317,7 @@ export function PracticeDone({ nextTopic, quick5 }: { nextTopic: ReactNode; quic
                 ))}
               </span>
             )}
-            <Image src={ratio >= 0.7 ? "/design/cat2-trophy.png" : "/design/cat2-think.png"} alt="" width={276} height={261} unoptimized className="nl-cat-in relative h-[112px] w-auto" />
+            <Image src={ratio >= 0.7 ? "/design/cat3-trophy.webp" : "/design/cat3-think.webp"} alt="" width={276} height={261} unoptimized className="nl-cat-in relative h-[112px] w-auto" />
           </div>
           <p className="mt-3 text-[15px] font-extrabold text-foreground/70">Practice complete</p>
           <p className="mt-1 text-[44px] font-black leading-none tracking-[-0.03em] tabular-nums text-foreground">
@@ -359,7 +358,7 @@ function SignupNudge({ className }: { className?: string }) {
         <X className="size-4" />
       </button>
       <div className="flex items-center gap-3 pr-8">
-        <Image src="/design/cat2-wave.png" alt="" width={240} height={255} unoptimized className="h-[60px] w-auto shrink-0" />
+        <Image src="/design/cat3-wave.webp" alt="" width={352} height={400} unoptimized className="h-[60px] w-auto shrink-0" />
         <div>
           <p id="signup-prompt-title" className="text-[17px] font-extrabold leading-snug">
             {s.correct * 2 >= s.answered ? `${s.correct}/${s.answered} so far. Keep your progress?` : `${s.answered} questions done. Keep your progress?`}

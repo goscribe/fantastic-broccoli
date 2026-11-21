@@ -86,10 +86,10 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
       {shown.length === 0 ? (
         <div className="mt-4 flex items-center gap-4 rounded-2xl border border-dashed border-border-strong/80 bg-muted/40 px-4 py-4">
           <Image
-            src="/design/cat2-book.png"
+            src="/design/cat3-book.webp"
             alt=""
-            width={60}
-            height={66}
+            width={363}
+            height={400}
             unoptimized
             className="cat-bob h-[60px] w-auto shrink-0 select-none object-contain"
           />
