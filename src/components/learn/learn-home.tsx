@@ -1,11 +1,12 @@
 "use client";
 
-import { CourseShelf } from "@/components/courses/course-shelf";
 import { CourseTopics } from "@/components/courses/course-topics";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { WeekStrip } from "@/components/learn/week-strip";
 import { PlanTodayCard } from "@/components/planner/plan-today-card";
-import { SubjectBand, SubjectTile } from "@/components/learn/subject-tile";
+import { SubjectBand } from "@/components/learn/subject-tile";
+import { SubjectsGrid } from "@/components/learn/subjects-grid";
+import { homeSubjects, toSessionInput } from "@/lib/home-action";
 import { NotesOutline } from "@/components/learn/notes-outline";
 import { AddMaterialMenu, NoteMaterialCard, useAttachedNotes } from "@/components/notes-app/subject-notes";
 import { AttachNotesDialog } from "@/components/notes-app/attach-notes-dialog";
@@ -16,41 +17,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowUp, Check, ChevronDown, ChevronRight, ChevronUp, FileText, Headphones, Loader2, NotebookText, Play, Presentation } from "lucide-react";
-import { useAuthUser } from "@/lib/api/auth";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
-import { fetchStudySessions, fetchActivityCalendar, createStudySession } from "@/lib/api/study";
+import { fetchStudySessions, createStudySession } from "@/lib/api/study";
 import { fetchDueReview, studySessionApi } from "@/lib/api/study-session";
 import { startWorkspaceFromUploads, workspaceTitleFromFiles, fileBasename } from "@/lib/start-from-uploads";
 import { fetchUploadPreviews, uploadFiles, analyzeFiles } from "@/lib/api/materials";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { onTreeChanged, emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
-import { HOME_TILES_ALL_UP_TO, HOME_TILES_SHOWN, byRecentActivity, repeatsTitle, titleHints } from "@/lib/subject-tiles";
 import { toast } from "sonner";
 import { cn, formatRelativeDate } from "@/lib/utils";
-import { Ring, WeekBars } from "@/components/design/charts";
+import { Ring } from "@/components/design/charts";
 import type { Folder, Material, StudySession, Workspace } from "@/types";
-import { fetchStreak, type StreakSummary } from "@/lib/api/streak";
 import { fetchPlannerWeek, type PlannerSlot } from "@/lib/api/planner";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LoadError } from "@/components/ui/load-error";
 import { buttonClass } from "@/components/ui/button";
 import "@/app/design/design.css";
 import { inputBoxClass, bareInputClass } from "@/components/ui/input";
-import { Mascot } from "@/components/rewards/mascot";
-import { useRewards } from "@/lib/rewards";
 import { useI18n } from "@/lib/i18n";
-import "@/lib/i18n/rewards";
 import "@/lib/i18n/today";
-import { TodayCard } from "@/components/learn/today-card";
-import { StreakCard } from "@/components/learn/streak-card";
-import { useQuery } from "@tanstack/react-query";
-import { mistakesApi } from "@/lib/api/mistakes";
-import type { Daypart } from "@/lib/daypart";
-import { useDaypart } from "@/lib/use-daypart";
-import { greetingMood, isBrandNew, type GreetingMood } from "@/lib/home-today";
-
-const GREET_KEY: Record<GreetingMood, string> = { new: "greetNew", done: "greetDone", streak: "greetStreak", fix: "greetFix", start: "greetStart" };
 
 const ACTIVITY_LABEL: Record<string, string> = {
   mcq: "Quick 5",
@@ -79,15 +65,6 @@ function flatten(folders: Folder[], root: Workspace[]): Workspace[] {
   walk(folders);
   return all;
 }
-
-/** The same buckets as the hero's sky (src/lib/daypart.ts), so the words and the scene agree. */
-const GREETING: Record<Daypart, string> = {
-  morning: "Good morning",
-  afternoon: "Good afternoon",
-  evening: "Good evening",
-  night: "Good evening",
-  late: "Up late",
-};
 
 function MaterialThumb({ m }: { m: Material }) {
   const Icon = { pdf: FileText, note: NotebookText, slides: Presentation, audio: Headphones }[m.type] ?? FileText;
@@ -133,16 +110,12 @@ function underFolder(folders: Folder[], folderId: string): { name: string; works
 /** Learn home. `workspaceId` / `folderId` scope it to one workspace or folder; the sidebar handles navigation. */
 export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; folderId?: string } = {}) {
   const router = useRouter();
-  const { user } = useAuthUser();
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [scopeTitle, setScopeTitle] = useState<string | null>(null);
   const [upNext, setUpNext] = useState<(PlannerSlot & { date: string })[] | null>(null);
   const [previews, setPreviews] = useState<Record<string, string>>({});
   const [sessions, setSessions] = useState<StudySession[]>([]);
   const [due, setDue] = useState<number | null>(null);
-  const [actLoading, setActLoading] = useState(true);
-  const [days, setDays] = useState<number[]>([]);
-  const [streakInfo, setStreakInfo] = useState<StreakSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -178,27 +151,12 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   useEffect(() => {
     void load();
     fetchDueReview().then((r) => setDue(r.total)).catch(() => setDue(0));
-    fetchStreak().then(setStreakInfo).catch(() => setStreakInfo(null));
     fetchPlannerWeek()
       .then((w) => {
         const today = new Date().toISOString().slice(0, 10);
         setUpNext(w.days.filter((d) => d.date >= today).flatMap((d) => d.slots.map((s) => ({ ...s, date: d.date }))).slice(0, 3));
       })
       .catch(() => setUpNext([]));
-    fetchActivityCalendar()
-      .then((pts) => {
-        const byDate = new Map(pts.map((p) => [p.date.slice(0, 10), p.count]));
-        const out: number[] = [];
-        const d = new Date();
-        d.setDate(d.getDate() - d.getDay() + (d.getDay() === 0 ? -6 : 1)); // Monday
-        for (let i = 0; i < 7; i++) {
-          out.push(byDate.get(d.toISOString().slice(0, 10)) ?? 0);
-          d.setDate(d.getDate() + 1);
-        }
-        setDays(out);
-      })
-      .catch(() => setDays([]))
-      .finally(() => setActLoading(false));
     return onTreeChanged(() => void load());
   }, [load]);
 
@@ -235,7 +193,6 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   const byStart = useMemo(() => [...sessions].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()), [sessions]);
   const suggested = byStart.find((s) => s.status === "active" && !s.generating);
   const sessionsDone = sessions.filter((s) => s.status === "completed").length;
-  const todayIdx = (new Date().getDay() + 6) % 7;
   const defaultWorkspace = suggested ? wsById.get(suggested.workspaceId) : workspaces[0];
 
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -359,33 +316,25 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     }
   };
 
-  const firstName = user?.name?.split(" ")[0];
-  const home = !workspaceId && !folderId;
-  // Nothing uploaded and never studied: home is one upload action and nothing else.
-  const brandNew =
-    home &&
-    !loading &&
-    !loadError &&
-    isBrandNew({ workspaces: workspaces.map((w) => ({ id: w.id, materialCount: w.materials.length })), sessions });
-  const [weekOpen, setWeekOpen] = useState(false);
   const { t } = useI18n();
-  const shop = useShopSummary();
-  const { data: mistakeSummary } = useQuery({
-    queryKey: ["mistakes-summary", null],
-    queryFn: () => mistakesApi.summary(),
-    enabled: home,
-    retry: 1,
-  });
-  const doneToday = !!streakInfo?.todayGoalMet;
-  // The student's own clock; unknown on the server, where a plain "Hello" stands in (home renders client-side after sign-in).
-  const daypart = useDaypart();
-  const greeting = () => (daypart ? GREETING[daypart] : "Hello");
-  const mood = greetingMood({
-    brandNew: !!brandNew,
-    doneToday,
-    streak: streakInfo?.current ?? 0,
-    openMistakes: mistakeSummary?.open ?? 0,
-  });
+  const [weekOpen, setWeekOpen] = useState(false);
+  // A folder's subjects as home's tiles show them.
+  const folderSubjects = useMemo(
+    () =>
+      homeSubjects({
+        workspaces: workspaces.map((w) => ({
+          id: w.id,
+          title: w.title,
+          folderId: w.folderId ?? null,
+          subjectFamily: w.subjectFamily ?? null,
+          createdAt: new Date(w.createdAt),
+          updatedAt: new Date(w.createdAt),
+          materialCount: w.materials.length,
+        })),
+        sessions: sessions.map(toSessionInput),
+      }),
+    [workspaces, sessions],
+  );
 
   // A subject or folder that failed to load: one error with Retry, not "0 materials / No sessions yet" under a skeleton.
   if ((workspaceId || folderId) && loadError && workspaces.length === 0) {
@@ -437,18 +386,13 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             <Skeleton className="mt-2 h-[120px] rounded-[var(--r-card)]" />
           )}
         </div>
-        ) : (!home || (loadError && workspaces.length === 0)) && (
+        ) : (
         <div className="flex items-end justify-between gap-3">
           <div>
-            {folderId && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>}
-            <h1 className={cn("leading-tight", home ? "text-[30px] font-extrabold sm:text-[38px]" : "text-[22px] font-bold sm:text-[26px]")}>
-              {folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
+            <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>
+            <h1 className="text-[22px] font-bold leading-tight sm:text-[26px]">
+              {scopeTitle ?? <Skeleton className="h-7 w-48" />}
             </h1>
-            {home && !loading && (
-              <p className="mt-1.5 text-[16px] font-semibold text-muted-foreground sm:text-[17px]">
-                {t(`today.${GREET_KEY[mood]}`).replace("{n}", String(streakInfo?.current ?? 0))}
-              </p>
-            )}
           </div>
         </div>
         )}
@@ -593,43 +537,22 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           </div>
         ) : (
           <>
-            {home && (
-              <TodayCard
-                workspaces={workspaces}
-                sessions={sessions}
-                loading={loading}
-                uploading={uploading}
-                onUpload={() => fileRef.current?.click()}
-                doneToday={doneToday}
-                greeting={`${greeting()}${firstName ? `, ${firstName}` : ""}`}
-                greetingSub={loading ? undefined : t(`today.${GREET_KEY[mood]}`).replace("{n}", String(streakInfo?.current ?? 0))}
-              />
-            )}
-            {home && !brandNew && (
-              <StreakCard streak={streakInfo} due={due} points={shop?.balance ?? 0} canAfford={!!shop?.affordable} tiles className="lg:hidden" />
-            )}
-            {!brandNew && (
-              <SubjectsGrid workspaces={workspaces} sessions={sessions} loading={loading} onNew={() => router.push("/new-subject")} />
-            )}
-            {/* Courses from the course picker: a compact shelf (or one "pick a course" row) under the subjects. */}
-            {!brandNew && !folderId && <CourseShelf />}
-            {!brandNew && (
-              <div>
-                {/* Phones: the week planner is long; it opens on demand under the subjects. */}
-                <button
-                  type="button"
-                  aria-expanded={weekOpen}
-                  onClick={() => setWeekOpen((v) => !v)}
-                  className="life-card flex min-h-[52px] w-full items-center justify-between px-4 text-[15px] font-bold lg:hidden"
-                >
-                  <span>{t("today.weekToggle")}</span>
-                  <ChevronDown className={cn("size-4 text-faint transition-transform", weekOpen && "rotate-180")} />
-                </button>
-                <div className={cn(!weekOpen && "max-lg:hidden", "max-lg:mt-3")}>
-                  <WeekStrip subjects={workspaces.map((w) => ({ id: w.id, title: w.title }))} />
-                </div>
+            <SubjectsGrid subjects={folderSubjects} loading={loading} onNew={() => router.push("/new-subject")} />
+            <div>
+              {/* Phones: the week planner is long; it opens on demand under the subjects. */}
+              <button
+                type="button"
+                aria-expanded={weekOpen}
+                onClick={() => setWeekOpen((v) => !v)}
+                className="life-card flex min-h-[52px] w-full items-center justify-between px-4 text-[15px] font-bold lg:hidden"
+              >
+                <span>{t("today.weekToggle")}</span>
+                <ChevronDown className={cn("size-4 text-faint transition-transform", weekOpen && "rotate-180")} />
+              </button>
+              <div className={cn(!weekOpen && "max-lg:hidden", "max-lg:mt-3")}>
+                <WeekStrip subjects={workspaces.map((w) => ({ id: w.id, title: w.title }))} />
               </div>
-            )}
+            </div>
           </>
         )}
 
@@ -655,10 +578,9 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         onClear={() => setSelected(new Set())}
       />
       )}
-      {!brandNew && (
-      <div className={cn("w-full shrink-0 flex-col lg:w-[300px]", home ? "rail-flat hidden lg:flex" : workspaceId ? "rail-cards flex gap-3.5 lg:mt-[30px]" : "rail-flat rail-flush flex")}>
-        {!home && !workspaceId && loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
-        {!home && !workspaceId && suggested && (() => {
+      <div className={cn("w-full shrink-0 flex-col lg:w-[300px]", workspaceId ? "rail-cards flex gap-3.5 lg:mt-[30px]" : "rail-flat rail-flush flex")}>
+        {!workspaceId && loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
+        {!workspaceId && suggested && (() => {
           const { done, total, next } = sessionProgress(suggested);
           return (
             <div>
@@ -690,34 +612,13 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           ) : (
           <div className="mt-2 flex items-baseline gap-3">
             <span className="text-[40px] font-extrabold leading-none tabular-nums">{due}</span>
-            <div className="text-[13px] leading-snug text-muted-foreground">{due ? `flashcards due today${home ? "" : " across all your subjects"}, about ${Math.max(1, Math.round(due / 3))} min` : "Nothing due right now"}</div>
+            <div className="text-[13px] leading-snug text-muted-foreground">{due ? `flashcards due today across all your subjects, about ${Math.max(1, Math.round(due / 3))} min` : "Nothing due right now"}</div>
           </div>
           )}
-          <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full text-[14px] font-semibold", due && !home && !suggested ? "bg-accent text-white hover:bg-accent-dim" : "bg-muted hover:bg-accent-soft")}>
+          <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full text-[14px] font-semibold", due && !suggested ? "bg-accent text-white hover:bg-accent-dim" : "bg-muted hover:bg-accent-soft")}>
             {due ? "Review now" : "Browse flashcards"}
           </Link>
         </div>
-        {actLoading ? (
-          <>
-            <Skeleton className="h-[132px] rounded-2xl" />
-            <Skeleton className="h-[300px] rounded-2xl" />
-          </>
-        ) : (
-          <>
-        {home ? (
-          <StreakCard streak={streakInfo} />
-        ) : (
-        <div className="life-card p-[18px]">
-          <div className="text-[16px] font-extrabold">This week</div>
-          <div className="mt-0.5 text-[12.5px] text-faint">
-            {days.reduce((a, b) => a + b, 0)} activities
-            {streakInfo && !streakInfo.todayDone ? <> · {Math.max(0, streakInfo.goalMin - streakInfo.todayMinutes)} min to go today</> : null}
-          </div>
-          <div className="mt-4">
-            <WeekBars mins={days.length ? days : [0, 0, 0, 0, 0, 0, 0]} goal={3} today={todayIdx} accent="var(--accent)" />
-          </div>
-        </div>
-        )}
         <PlanTodayCard
           fallback={
         <div className="life-card p-[18px]">
@@ -751,11 +652,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         </div>
           }
         />
-          </>
-        )}
-        {home && <HomeShopCard />}
       </div>
-      )}
 
     </div>
   );
@@ -808,97 +705,6 @@ function CatNudge({
   );
 }
 
-
-/** Home: every subject as a card — progress ring over its sessions, materials count, and the next thing to do. */
-function SubjectsGrid({
-  workspaces,
-  sessions,
-  loading,
-  onNew,
-}: {
-  workspaces: Workspace[];
-  sessions: StudySession[];
-  loading: boolean;
-  onNew: () => void;
-}) {
-  const [showAll, setShowAll] = useState(false);
-  // Most recently active first. A real account can hold dozens of subjects: past a couple of rows, home shows the recent ones and folds the rest away.
-  const ordered = useMemo(() => byRecentActivity(workspaces, sessions), [workspaces, sessions]);
-  const hints = useMemo(() => titleHints(ordered), [ordered]);
-  const many = ordered.length > HOME_TILES_ALL_UP_TO;
-  const tiles = many ? ordered.slice(0, HOME_TILES_SHOWN) : ordered;
-  const rest = many ? ordered.slice(HOME_TILES_SHOWN) : [];
-  const summary = (w: Workspace) => {
-    const own = sessions
-      .filter((x) => x.workspaceId === w.id)
-      .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-    const done = own.filter((x) => x.status === "completed").length;
-    const current = own.find((x) => x.status !== "completed");
-    const counts = `${w.materials.length} material${w.materials.length === 1 ? "" : "s"}${own.length ? ` · ${done}/${own.length} sessions` : ""}`;
-    // "Next: <the subject's own name again>" says nothing: show where the subject stands instead.
-    // Two subjects whose titles the tile cuts to the same text ("B4 Thermodynami…"): the second line says which is which.
-    const hint = hints.get(w.id);
-    const sub = hint ?? (!current ? counts : current.generating ? "Building the next session…" : repeatsTitle(w.title, current.title) ? counts : `Next: ${current.title}`);
-    return { sub, progress: own.length ? done / own.length : null, action: current ? "Continue" : "Open" };
-  };
-  return (
-    <div>
-      <div className="flex items-center justify-between gap-3">
-        <h2 className="min-w-0 text-[20px] font-extrabold">
-          Your subjects <span className="font-medium text-faint">· {workspaces.length}</span>
-        </h2>
-        <button type="button" onClick={onNew} className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-[var(--r-control)] border border-border bg-card px-4 text-[13.5px] font-bold text-foreground hover:border-border-strong sm:h-10">
-          New subject
-        </button>
-      </div>
-      {/* Each subject is a tile in its own colour with its illustration: the colour on this page lives here. */}
-      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3.5 xl:grid-cols-3">
-        {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[156px] rounded-[var(--r-card)] sm:h-[176px]" />)}
-        {tiles.map((w) => (
-          <SubjectTile key={w.id} href={`/workspace/${w.id}`} title={w.title} stored={w.subjectFamily} seed={w.id} {...summary(w)} />
-        ))}
-        {!many && (
-          <button type="button" onClick={onNew} className="hidden h-[176px] flex-col items-center justify-center gap-2 rounded-[var(--r-card)] border-2 border-dashed border-border text-center hover:border-border-strong hover:bg-muted/40 sm:flex">
-            <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-14 w-auto" />
-            <div className="text-[14px] font-semibold">New subject</div>
-            <div className="text-[12px] text-faint">Drop notes, get sessions</div>
-          </button>
-        )}
-      </div>
-      {rest.length > 0 && (
-        <>
-          {/* The rest as short rows in the same colours: thirty subjects stay a list you can scan, not a wall of cards. */}
-          {showAll && (
-            <div id="all-subjects" className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3 xl:grid-cols-3">
-              {rest.map((w) => (
-                <SubjectTile key={w.id} row href={`/workspace/${w.id}`} title={w.title} stored={w.subjectFamily} seed={w.id} sub={summary(w).sub} className="h-[76px]" />
-              ))}
-            </div>
-          )}
-          <div className="mt-3 flex justify-center">
-            <button
-              type="button"
-              onClick={() => setShowAll((v) => !v)}
-              aria-expanded={showAll}
-              aria-controls="all-subjects"
-              className="inline-flex h-11 items-center gap-1.5 rounded-[var(--r-control)] border border-border bg-card px-4 text-[13.5px] font-bold text-foreground hover:border-border-strong sm:h-10"
-            >
-              {showAll ? (
-                <>
-                  Show fewer <ChevronUp className="size-4" />
-                </>
-              ) : (
-                <>
-                  Show all {ordered.length} <ChevronDown className="size-4" />
-                </>
-              )}
-            </button>
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
 
 /** The subject's study sessions, newest first, with one button to add the next one. */
 function SessionList({
@@ -990,49 +796,5 @@ function SessionList({
         })}
       </div>
     </div>
-  );
-}
-
-
-function useShopSummary() {
-  const { data: rewards } = useRewards();
-  if (!rewards) return null;
-  const affordable = rewards.catalog.some(
-    (item) =>
-      item.cost <= rewards.balance &&
-      (item.slot === "freeze" ? rewards.freezes < rewards.maxFreezes : !rewards.owned.includes(item.id)),
-  );
-  return { balance: rewards.balance, affordable };
-}
-
-/** The shop from home: the cat in its outfit, the points balance, one tap to spend them. Desktop sidebar. */
-function HomeShopCard() {
-  const { t } = useI18n();
-  const shop = useShopSummary();
-  if (!shop) return null;
-  return (
-    <Link
-      href="/shop"
-      className="life-card life-press group hidden items-center gap-3.5 p-3.5 lg:flex"
-    >
-      <span className="grid size-[64px] shrink-0 place-items-end justify-center overflow-hidden rounded-full bg-muted">
-        <Mascot pose="wave" className="cat-wiggle mb-0.5 h-[56px] w-[48px]" />
-      </span>
-      <span className="min-w-0 flex-1">
-        <span className="flex items-center justify-between gap-2">
-          <span className="text-[14px] font-bold">{t("rewards.homeTitle")}</span>
-          <span className="text-[12.5px] font-bold tabular-nums text-foreground">
-            {t("rewards.ptsValue").replace("{n}", String(shop.balance))}
-          </span>
-        </span>
-        <span className="mt-0.5 block text-[12px] leading-snug text-muted-foreground">
-          {shop.affordable ? (
-            <span className="font-semibold text-accent-dim">{t("rewards.homeAfford")} →</span>
-          ) : (
-            t("rewards.homeBody")
-          )}
-        </span>
-      </span>
-    </Link>
   );
 }

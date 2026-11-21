@@ -80,7 +80,7 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
           <>
             <Image src="/design/cat3-flame.webp" alt="" width={344} height={400} unoptimized className="cat-bob mx-auto h-16 w-auto" />
             <h2 className="mt-2 text-center text-[20px] font-bold">How much per day?</h2>
-            <p className="mt-1 text-center text-[13px] text-muted-foreground">A realistic daily goal keeps the streak alive.</p>
+            <p className="mt-1 text-center text-[13px] text-muted-foreground">A realistic amount to plan for each day. (A streak day is one finished activity.)</p>
             <div className="mt-5 grid grid-cols-4 gap-2">
               {[15, 25, 45, 60].map((m) => (
                 <button key={m} type="button" onClick={() => setGoal(m)} className={cn("rounded-xl border py-3 text-[15px] font-bold", goal === m ? "border-accent bg-accent-soft text-accent" : "border-border hover:border-border-strong")}>
