@@ -42,7 +42,7 @@ const shell = "life-rise relative isolate overflow-hidden rounded-[var(--r-panel
  * <Mascot> placed over it (see HeroScene), so a redesigned mascot swaps in
  * without touching the background.
  */
-const HERO_SCENE = { src: "/design/hero/scene.webp", width: 1440, height: 960 };
+const HERO_SCENE = { src: "/design/hero/scene.svg", width: 1440, height: 960 };
 
 /**
  * Scene + mascot. Phones: a strip across the top that fades into the white
