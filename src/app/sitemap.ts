@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/seo";
 import { blogApi } from "@/lib/api/blog";
+import { TRY_TOOLS } from "@/lib/try";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
@@ -32,6 +33,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 1,
     },
+    // Ad / SEO landing pages with the anonymous Quick 5.
+    ...TRY_TOOLS.map((tool) => ({
+      url: `${siteUrl}/landing/${tool}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    })),
     {
       url: `${siteUrl}/landing/features`,
       lastModified,

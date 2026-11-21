@@ -14,6 +14,8 @@ export const PUBLIC_PATHS = [
   // Invite landing (/i/<code>) and shared quizzes/decks (/s/<token>).
   "/i",
   "/s",
+  // Anonymous Quick 5 ("try before signing up") and its results.
+  "/try",
 ];
 
 export function isPublicPath(path: string): boolean {

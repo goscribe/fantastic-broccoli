@@ -11,6 +11,7 @@ import { GuidedTour } from "@/components/onboarding/guided-tour";
 import { MonthlyRatingPrompt } from "@/components/rating/monthly-rating-prompt";
 import { SubscribeWall } from "@/components/billing/subscribe-wall";
 import { ConversionTracker } from "@/components/billing/conversion-tracker";
+import { PendingTryClaim } from "@/components/try/pending-try-claim";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { NewShell } from "@/components/layout/new-shell";
 import { useNewUi } from "@/lib/new-ui";
@@ -41,6 +42,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {children}
         {!BILLING_PAUSED && <SubscribeWall />}
         <ConversionTracker />
+        {user && <PendingTryClaim />}
       </div>
     );
   }
@@ -52,6 +54,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <MonthlyRatingPrompt />
         {!BILLING_PAUSED && <SubscribeWall />}
         <ConversionTracker />
+        {user && <PendingTryClaim />}
       </>
     );
   }
@@ -62,6 +65,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <TopBar showLogo />
         {children}
         <ConversionTracker />
+        {user && <PendingTryClaim />}
         {!BILLING_PAUSED && <SubscribeWall />}
       </div>
     );
@@ -89,6 +93,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <MonthlyRatingPrompt />
       {!BILLING_PAUSED && <SubscribeWall />}
       <ConversionTracker />
+        {user && <PendingTryClaim />}
     </div>
   );
 }

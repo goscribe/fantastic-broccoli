@@ -5,6 +5,7 @@ import { Ring, WeekBars } from "@/components/design/charts";
 import { T } from "@/components/design/tokens";
 import { StatsBand } from "@/components/design/stats-band";
 import { cn } from "@/lib/utils";
+import { TryHeroLink, TrySection } from "@/components/try/try-landing";
 
 
 function Btn({ children, tone = "violet", className }: { children: React.ReactNode; tone?: "violet" | "white" | "ghost" | "navy"; className?: string }) {
@@ -70,7 +71,7 @@ export function LandingBody() {
         <div className="relative z-10 mx-auto flex w-full max-w-[1120px] flex-col items-center px-6 pt-12 text-center">
           <h1 className="text-[56px] font-extrabold leading-[1.02] tracking-[-0.02em] text-accent md:text-[68px]">study from your notes.<br />actually remember it.</h1>
           <p className="mt-5 max-w-[560px] text-[18px] text-muted-foreground">Make a subject, drop in a PDF, slides or a photo of your notes. Scribe builds study sessions from them and fits them into your week.</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3"><Link href="/signup"><Btn>Get started<ArrowRight className="size-5" /></Btn></Link><Link href="/login" className="inline-flex h-14 items-center gap-2 rounded-2xl border-2 border-border px-6 text-[16px] font-bold text-accent">I already have an account</Link></div>
+          <div className="relative mt-8 flex flex-wrap justify-center gap-3"><Link href="/signup"><Btn>Get started<ArrowRight className="size-5" /></Btn></Link><Link href="/login" className="inline-flex h-14 items-center gap-2 rounded-2xl border-2 border-border px-6 text-[16px] font-bold text-accent">I already have an account</Link><TryHeroLink /></div>
         </div>
         <div className="relative mt-10 h-[460px]">
           <svg viewBox="0 0 1440 460" preserveAspectRatio="none" className="absolute inset-0 h-full w-full"><path d="M0 140 C 360 40, 1080 40, 1440 140 L1440 460 L0 460 Z" fill="#7c3aed" /></svg>
@@ -87,6 +88,9 @@ export function LandingBody() {
           </div>
         </div>
       </section>
+
+      {/* try before signing up: a real Quick 5 with no account */}
+      <TrySection />
 
       {/* subjects strip */}
       <section className="border-b border-border">
