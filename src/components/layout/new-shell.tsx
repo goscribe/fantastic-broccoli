@@ -112,7 +112,9 @@ export function NewShell({ children }: { children: React.ReactNode }) {
     <div className="design-root app-brand flex h-dvh overflow-hidden bg-[var(--page)] text-foreground">
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:translate-x-0 md:border-r-0 md:bg-transparent",
+          // Desktop: the sidebar is its own soft surface, an inset panel on a light
+          // neutral tint with a hairline, a small gap from the window edges.
+          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:my-2 md:ml-2 md:translate-x-0 md:rounded-[var(--r-card)] md:border md:bg-[var(--card-hover)]",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
           rail && "md:w-[68px] md:px-2.5",
         )}
