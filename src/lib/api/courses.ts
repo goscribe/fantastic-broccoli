@@ -72,6 +72,8 @@ export interface ProgressSummary {
 export interface CourseProgress extends ProgressSummary {
   courseId: string;
   level: string | null;
+  /** The subject's stored cover family; not sent by an older server. */
+  subjectFamily?: string | null;
   topics: TopicProgress[];
 }
 
@@ -81,6 +83,8 @@ export interface CourseSubject {
   courseId: string;
   courseTitle: string;
   level: string | null;
+  /** The subject's stored cover family; not sent by an older server. */
+  subjectFamily?: string | null;
   progress: ProgressSummary;
 }
 

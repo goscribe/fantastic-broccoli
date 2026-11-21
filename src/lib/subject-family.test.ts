@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { FAMILY, GENERAL_HUES, familyFor, familyVars, hueFamilyFor, type SubjectFamily } from "./subject-family";
+import { FAMILY, GENERAL_HUES, SUBJECT_FAMILIES, familyFor, familyVars, hueFamilyFor, isSubjectFamily, resolveSubjectFamily, type SubjectFamily } from "./subject-family";
 
 /** Every course in the catalog (CATALOG_VERSION 3, 37 courses): title → family. */
 const CATALOG: [string, SubjectFamily][] = [
@@ -120,4 +120,53 @@ test("white text passes AA (4.5:1) on every family's base colour", () => {
     const ratio = 1.05 / (lum(a) + 0.05);
     assert.ok(ratio >= 4.5, `${name} ${a}: ${ratio.toFixed(2)}`);
   }
+});
+
+/* ----- stored family (picked once on the server) ----- */
+
+test("the family list is the server's list, in the server's order", () => {
+  // Copied from goscribe/server src/lib/subject-family.ts (SUBJECT_FAMILIES),
+  // which has the same test against this list. Change both repos together.
+  assert.deepEqual(
+    [...SUBJECT_FAMILIES],
+    ["maths", "physics", "chemistry", "biology", "science", "earth", "computing", "economics", "business", "history", "society", "psychology", "english", "languages", "general"],
+  );
+  // Every key has a look, and nothing has a look without a key.
+  assert.deepEqual(Object.keys(FAMILY).sort(), [...SUBJECT_FAMILIES].sort());
+});
+
+test("a stored family wins over the name rules", () => {
+  // The rules miss this name (general) or would pick another family; the stored one is used.
+  assert.equal(familyFor("Chem IA"), "chemistry");
+  assert.equal(resolveSubjectFamily("business", "Chem IA"), "business");
+  assert.equal(familyFor("IA draft v3 final FINAL"), "general");
+  assert.equal(resolveSubjectFamily("history", "IA draft v3 final FINAL"), "history");
+  assert.equal(resolveSubjectFamily("general", "IB Biology"), "general");
+});
+
+test("no stored family (an older server, or not decided yet): exactly today's rules", () => {
+  const names = ["B4 Thermodynamics Guide +3", "Cl1 AAHL T3 C1 Differentiation Tangents and normals", "A 2.1.2 Modern Digital Infrastructures (2)", "IB English Paper 2: Gatsby & Oryx and Crake comparative", "Week 7 lecture slides", "IB Biology", "", "Untitled"];
+  for (const name of names) {
+    for (const missing of [undefined, null, ""]) assert.equal(resolveSubjectFamily(missing, name), familyFor(name), name);
+  }
+  assert.equal(resolveSubjectFamily(undefined, undefined), "general");
+});
+
+test("a stored key this build does not know falls back to the rules", () => {
+  for (const bad of ["art", "Maths", " maths", 3, {}, []]) assert.equal(resolveSubjectFamily(bad, "IB Physics"), "physics");
+  assert.equal(isSubjectFamily("maths"), true);
+  assert.equal(isSubjectFamily("art"), false);
+});
+
+test("a stored family looks exactly like the same family picked by the rules", () => {
+  // Same colours, same art, for every family and with a seed: the tile cannot tell where its family came from.
+  for (const family of SUBJECT_FAMILIES) {
+    const stored = resolveSubjectFamily(family, "anything at all");
+    assert.equal(stored, family);
+    assert.deepEqual(familyVars(stored, "w42"), familyVars(family, "w42"));
+    assert.equal(hueFamilyFor(stored, "w42"), hueFamilyFor(family, "w42"));
+  }
+  // A real family never borrows a hue; only 'general' varies by seed, stored or not.
+  assert.equal(hueFamilyFor(resolveSubjectFamily("physics", "Week 7"), "w42"), "physics");
+  assert.equal(hueFamilyFor(resolveSubjectFamily("general", "IB Physics"), "w42"), hueFamilyFor(familyFor("Week 7 lecture slides"), "w42"));
 });
