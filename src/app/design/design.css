@@ -198,6 +198,12 @@ html.new-ui .skeleton {
  * drops the 2px inset so both share one left edge.
  */
 .rail-flat.rail-flush > * { padding-left: 0; padding-right: 0; }
+/*
+ * A subject's rail: separate widgets, so each is its own card (home's approved
+ * rail stays hairline-split above). The plan widget brings its own outline;
+ * this gives it the same surface as the .life-card ones beside it.
+ */
+.rail-cards > .rail-box { background: var(--card); border-radius: var(--r-card); box-shadow: var(--card-shadow); }
 
 /*
  * Sign-in and sign-up: the home banner's landscape in a tall panel. The card

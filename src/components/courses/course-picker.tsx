@@ -301,7 +301,7 @@ export function TopicRow({
   const { t } = useI18n();
   const pct = masteryPercent(progress?.mastery);
   return (
-    <div className={cn("rounded-[22px] transition-colors", open ? "bg-muted" : "hover:bg-muted/60")}>
+    <div className={cn("rounded-2xl border bg-card transition-colors", open ? "border-border-strong" : "border-border hover:border-border-strong")}>
       <button
         type="button"
         onClick={onToggle}

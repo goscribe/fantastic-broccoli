@@ -5,14 +5,14 @@ import { CourseTopics } from "@/components/courses/course-topics";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { WeekStrip } from "@/components/learn/week-strip";
 import { PlanTodayCard } from "@/components/planner/plan-today-card";
-import { SubjectTile } from "@/components/learn/subject-tile";
+import { SubjectBand, SubjectTile } from "@/components/learn/subject-tile";
 import { NotesOutline } from "@/components/learn/notes-outline";
 import { SubjectProgress } from "@/components/learn/subject-progress";
 import type { NotesTopic } from "@/lib/api/notes-outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowUp, Check, ChevronDown, ChevronUp, FileText, Headphones, Loader2, NotebookText, Play, Presentation } from "lucide-react";
+import { ArrowUp, Check, ChevronDown, ChevronRight, ChevronUp, FileText, Headphones, Loader2, NotebookText, Play, Presentation } from "lucide-react";
 import { useAuthUser } from "@/lib/api/auth";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { fetchStudySessions, fetchActivityCalendar, createStudySession } from "@/lib/api/study";
@@ -225,6 +225,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   // Oldest unfinished first: the learner continues where they left off, not the newest thing generated.
   const byStart = useMemo(() => [...sessions].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()), [sessions]);
   const suggested = byStart.find((s) => s.status === "active" && !s.generating);
+  const sessionsDone = sessions.filter((s) => s.status === "completed").length;
   const todayIdx = (new Date().getDay() + 6) % 7;
   const defaultWorkspace = suggested ? wsById.get(suggested.workspaceId) : workspaces[0];
 
@@ -379,12 +380,41 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     <div className={cn("mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-4 pb-12 pt-5 sm:px-6 sm:pt-6 lg:flex-row", workspaceId && "gap-8 lg:gap-10")}>
       <input ref={fileRef} type="file" multiple accept={UPLOAD_ACCEPT} className="hidden" onChange={(e) => void onFiles(e.target.files)} />
       <div className={cn("flex min-w-0 flex-1 flex-col", workspaceId ? "gap-8" : "gap-4 sm:gap-5")}>
-        {(!home || (loadError && workspaces.length === 0)) && (
+        {workspaceId ? (
+        <div>
+          <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>
+          {scopeTitle ? (
+            // The tile the student tapped on home, opened out: the subject's colour and art, where it stands, the one thing to do next.
+            <SubjectBand match={scopeTitle} className="mt-2 !rounded-[var(--r-card)] px-[18px] py-4 sm:px-6 sm:py-5">
+              <h1 className="max-w-[66%] text-[22px] font-extrabold leading-[1.15] sm:text-[26px]">{scopeTitle}</h1>
+              <p className="subject-tile__sub mt-1 max-w-[66%] text-[13px] font-semibold leading-snug">
+                {materials.length} material{materials.length === 1 ? "" : "s"}
+                {sessions.length > 0 ? ` · ${sessionsDone} of ${sessions.length} sessions done` : ""}
+              </p>
+              {sessions.length > 0 && (
+                <div className="subject-track mt-3 w-[52%] max-w-[300px]" role="progressbar" aria-valuemin={0} aria-valuemax={sessions.length} aria-valuenow={sessionsDone}>
+                  <span className="fill-grow" style={{ width: `${Math.max(sessionsDone > 0 ? 6 : 0, (sessionsDone / sessions.length) * 100)}%` }} />
+                </div>
+              )}
+              {suggested && (
+                <Link href={`/workspace/${suggested.workspaceId}/session/${suggested.id}`} className="subject-pill mt-4 h-10 max-w-full">
+                  <span className="truncate">
+                    {sessionProgress(suggested).done > 0 ? "Continue" : "Start"}: {suggested.title}
+                  </span>
+                  <ChevronRight className="size-4 shrink-0" strokeWidth={2.6} />
+                </Link>
+              )}
+            </SubjectBand>
+          ) : (
+            <Skeleton className="mt-2 h-[120px] rounded-[var(--r-card)]" />
+          )}
+        </div>
+        ) : (!home || (loadError && workspaces.length === 0)) && (
         <div className="flex items-end justify-between gap-3">
           <div>
-            {(workspaceId || folderId) && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>}
+            {folderId && <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>}
             <h1 className={cn("leading-tight", home ? "text-[30px] font-extrabold sm:text-[38px]" : "text-[22px] font-bold sm:text-[26px]")}>
-              {workspaceId || folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
+              {folderId ? (scopeTitle ?? <Skeleton className="h-7 w-48" />) : `${greeting()}${firstName ? `, ${firstName}` : ""}`}
             </h1>
             {home && !loading && (
               <p className="mt-1.5 text-[16px] font-semibold text-muted-foreground sm:text-[17px]">
@@ -436,10 +466,13 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             Your materials <span className="font-medium text-faint">· {materials.length}</span>
           </h2>
           <div className="flex items-center gap-3">
+            {/* With one or two files the dashed tile in the grid is the way to add; from three up, this button is. */}
+            {(loading || materials.length >= 3) && (
             <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-3 text-[12.5px] font-semibold hover:bg-accent-soft">
               {uploading && <Loader2 className="size-3.5 animate-spin" />}
               Add material
             </button>
+            )}
             {materials.length > 3 && (
               <button type="button" onClick={() => setExpanded((v) => !v)} className="inline-flex items-center gap-1 text-[13px] font-semibold text-accent hover:underline">
                 {expanded ? (
@@ -455,31 +488,34 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             )}
           </div>
         </div>
-        <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-5 md:grid-cols-3">
-          {loading && materials.length === 0 && [0, 1, 2].map((i) => <div key={i} className="aspect-[4/3] animate-pulse rounded-xl bg-muted" />)}
+        <div className="mt-3 grid grid-cols-2 gap-3 sm:gap-3.5 md:grid-cols-3">
+          {loading && materials.length === 0 && [0, 1, 2].map((i) => <div key={i} className="h-[200px] animate-pulse rounded-[var(--r-card)] bg-muted" />)}
           {shown.map(({ m, w }) => (
             <div
               key={m.id}
-              className="relative flex min-w-0 flex-col"
+              className={cn("life-card relative flex min-w-0 flex-col p-2.5 transition-colors sm:p-3", selected.has(m.id) && "border-accent ring-2 ring-accent/20")}
             >
-              <label className="absolute left-2.5 top-2.5 z-10 grid size-6 cursor-pointer place-items-center rounded-md border border-border bg-white shadow-sm has-[:checked]:border-accent has-[:checked]:bg-accent has-[:checked]:text-white">
+              <label className="absolute left-[18px] top-[18px] z-10 grid size-6 cursor-pointer place-items-center rounded-md border border-border bg-white shadow-sm has-[:checked]:border-accent has-[:checked]:bg-accent has-[:checked]:text-white">
                 <input type="checkbox" className="peer sr-only" checked={selected.has(m.id)} onChange={() => toggleSelected(m.id)} aria-label={`Select ${m.title}`} />
                 <Check className="size-3.5 opacity-0 peer-checked:opacity-100" />
               </label>
-              <button type="button" onClick={() => toggleSelected(m.id)} className={cn("block w-full rounded-xl text-left transition-shadow", selected.has(m.id) && "ring-2 ring-accent ring-offset-2 ring-offset-background")}>
+              <button type="button" onClick={() => toggleSelected(m.id)} className="block w-full rounded-xl text-left">
                 <MaterialThumb m={{ ...m, preview: m.preview ?? (previews[m.id] || undefined) }} />
               </button>
-              <div className="mt-3 truncate text-[14.5px] font-semibold">{m.title}</div>
-              <div className="truncate text-[12px] text-faint">
+              <div className="mt-2.5 truncate px-1 text-[14.5px] font-semibold">{m.title}</div>
+              <div className="truncate px-1 pb-1 text-[12px] text-faint">
                 {w.title} · {formatRelativeDate(m.updatedAt)}
               </div>
             </div>
           ))}
-          {!loading && materials.length === 0 && (
-            <button type="button" onClick={() => fileRef.current?.click()} className="col-span-full flex min-h-[160px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border p-4 text-center hover:border-accent/50 hover:bg-accent-soft/40">
+          {!loading && materials.length < 3 && (
+            <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} className={cn("flex min-h-[160px] flex-col items-center justify-center gap-2 rounded-[var(--r-card)] border-2 border-dashed border-border p-4 text-center hover:border-border-strong hover:bg-muted/40", materials.length === 0 && "col-span-full")}>
               <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-16 w-auto" />
               <div>
-                <div className="text-[14.5px] font-semibold">Add material</div>
+                <div className="inline-flex items-center gap-1.5 text-[14.5px] font-semibold">
+                  {uploading && <Loader2 className="size-3.5 animate-spin" />}
+                  Add material
+                </div>
                 <div className="mt-0.5 text-[12px] text-faint">PDF · slides · photos of notes</div>
               </div>
             </button>
@@ -577,9 +613,9 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
       />
       )}
       {!brandNew && (
-      <div className={cn("w-full shrink-0 flex-col lg:w-[300px]", home ? "rail-flat hidden lg:flex" : "rail-flat rail-flush flex")}>
-        {!home && loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
-        {!home && suggested && (() => {
+      <div className={cn("w-full shrink-0 flex-col lg:w-[300px]", home ? "rail-flat hidden lg:flex" : workspaceId ? "rail-cards flex gap-3.5 lg:mt-[30px]" : "rail-flat rail-flush flex")}>
+        {!home && !workspaceId && loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
+        {!home && !workspaceId && suggested && (() => {
           const { done, total, next } = sessionProgress(suggested);
           return (
             <div>
@@ -821,11 +857,11 @@ function SessionList({
           {pickedCount > 0 ? `New session from ${pickedCount} file${pickedCount === 1 ? "" : "s"}` : "New session"}
         </button>
       </div>
-      <div className="mt-3 divide-y divide-border border-y border-border">
+      <div className="mt-3 flex flex-col gap-2.5">
         {loading &&
           sessions.length === 0 &&
           [0, 1, 2].map((i) => (
-            <div key={i} className="flex items-center gap-3.5 py-3.5">
+            <div key={i} className="life-card flex items-center gap-3.5 px-4 py-3">
               <Skeleton className="size-[52px] rounded-full" />
               <div className="flex-1 space-y-2">
                 <Skeleton className="h-4 w-1/2" />
@@ -835,7 +871,7 @@ function SessionList({
             </div>
           ))}
         {!loading && sessions.length === 0 && (
-          <div className="flex items-center gap-4 py-6 text-[14px] text-muted-foreground">
+          <div className="flex items-center gap-4 py-3 text-[14px] text-muted-foreground">
             <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob h-14 w-auto" />
             No sessions yet — hit New session and I&apos;ll build one from your materials.
           </div>
@@ -844,7 +880,7 @@ function SessionList({
           const { total, done, next, pct } = sessionProgress(s);
           const finished = s.status === "completed";
           return (
-            <div key={s.id} className="flex items-center gap-3.5 py-3.5">
+            <div key={s.id} className="life-card flex items-center gap-3.5 px-3.5 py-3 sm:px-4">
               <span className="relative grid size-[52px] shrink-0 place-items-center">
                 <Ring pct={finished ? 1 : pct} size={52} stroke={8} color={finished ? "#10b981" : "var(--accent)"} />
                 <span className="absolute inset-0 grid place-items-center">

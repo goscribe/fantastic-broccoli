@@ -125,16 +125,16 @@ export function NotesOutline({
         </div>
       ) : (
         <>
-          <div className="mt-3 divide-y divide-border border-y border-border">
+          <div className="mt-3 flex flex-col gap-2.5">
             {outline.topics.map((t, i) => {
               const expanded = open === t.title;
               return (
-                <div key={t.title}>
+                <div key={t.title} className="life-card">
                   <button
                     type="button"
                     onClick={() => setOpen(expanded ? null : t.title)}
                     aria-expanded={expanded}
-                    className="flex w-full items-center gap-3 py-3.5 text-left"
+                    className="flex w-full items-center gap-3 px-4 py-3.5 text-left"
                   >
                     <span className="w-5 shrink-0 text-[13px] font-bold tabular-nums text-faint">{i + 1}</span>
                     <span className="min-w-0 flex-1">
@@ -144,7 +144,7 @@ export function NotesOutline({
                     <ChevronDown className={cn("size-4 shrink-0 text-faint transition-transform", expanded && "rotate-180")} />
                   </button>
                   {expanded && (
-                    <div className="pb-4 pl-8">
+                    <div className="px-4 pb-4 pl-12">
                       <ul className="list-disc space-y-1.5 pl-4 text-[13.5px] leading-relaxed marker:text-faint">
                         {t.points.map((p, j) => (
                           <li key={j}>

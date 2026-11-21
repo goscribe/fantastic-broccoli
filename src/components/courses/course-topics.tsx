@@ -117,7 +117,7 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
           type="button"
           onClick={() => void start(course, next.topic, level)}
           disabled={!!busyTopicId}
-          className="mt-4 flex w-full items-center gap-3 rounded-xl bg-accent-soft/60 px-3.5 py-3 text-left transition-colors hover:bg-accent-soft disabled:opacity-60"
+          className="life-card life-press mt-4 flex w-full items-center gap-3 px-4 py-3.5 text-left disabled:opacity-60"
         >
           <span className="min-w-0 flex-1">
             <span className="block text-[12px] font-semibold text-accent">{t("course.continue")}</span>
@@ -154,7 +154,7 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
                 <ChevronDown className={cn("size-4 shrink-0 text-faint transition-transform", open && "rotate-180")} />
               </button>
               {open && (
-                <ul className="mt-1 flex flex-col gap-0.5">
+                <ul className="mb-2 mt-1 flex flex-col gap-2">
                   {u.topics.map((topic) => (
                     <li key={topic.id}>
                       <TopicRow

@@ -243,7 +243,7 @@ function CoverageBar({ exam }: { exam: ExamSummary }) {
 function CountdownRow({ exam }: { exam: ExamSummary }) {
   const { t, locale } = useI18n();
   return (
-    <div className="flex items-center gap-3.5 py-2.5">
+    <div className="life-card flex items-center gap-3.5 p-3.5">
       <Countdown days={exam.daysLeft} />
       <div className="min-w-0 flex-1">
         <div className="truncate text-[14px] font-semibold">{exam.title}</div>

@@ -103,7 +103,7 @@ function MistakeCard({ m, showSubject }: { m: Mistake; showSubject: boolean }) {
     m.yourAnswer === "(drawing)" ? t("mistakes.drawing") : m.yourAnswer?.trim() ? m.yourAnswer : null;
   const dateFmt = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short" });
   return (
-    <li className="py-5 first:pt-1">
+    <li className="life-card p-4 sm:p-5">
       <div className="flex items-center justify-between gap-3">
         <p className="min-w-0 truncate text-[12.5px] font-medium text-muted-foreground">
           {t(KIND_KEY[m.kind] ?? "mistakes.kindMcq")} · {m.label}
@@ -343,7 +343,7 @@ export function MistakesView({
           {filter === "open" ? t("mistakes.allFixed") : t("mistakes.noneCorrected")}
         </p>
       ) : (
-        <ul className="divide-y divide-border">
+        <ul className="space-y-3">
           {items.map((m) => (
             <MistakeCard key={m.id} m={m} showSubject={!workspaceId} />
           ))}
