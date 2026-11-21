@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Check, Loader2, Plus, Search } from "lucide-react";
 import { attachedNotesApi, type AttachSkipReason, type NoteSubjects } from "@/lib/api/notes";
 import { coursesApi } from "@/lib/api/courses";
@@ -10,7 +11,6 @@ import { paywallHref } from "@/lib/notes-public/gate";
 import { track } from "@/lib/funnel";
 import { emitTreeChanged } from "@/lib/tree-events";
 import { toast, toastError } from "@/lib/toast";
-import { cn } from "@/lib/utils";
 import type { Folder, Workspace } from "@/types";
 import { Sheet } from "./sheet";
 
@@ -61,6 +61,7 @@ export function AddToSubjectDialog({
   const [failed, setFailed] = useState(false);
   const [busy, setBusy] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     let cancelled = false;
@@ -134,16 +135,10 @@ export function AddToSubjectDialog({
   const blocked = where && !where.attachable ? where.reason : null;
   return (
     <Sheet
-      title="Add to a subject"
-      sub={
-        <>
-          <span className="font-semibold text-foreground">{topicLabel}</span> becomes material in the subject: sessions, flashcards and the copilot can use it.
-        </>
-      }
+      title={`Add ${topicLabel} to a subject`}
       onClose={onClose}
       footer={
-        <div className="flex items-center justify-between gap-3">
-          <p className="text-[12.5px] leading-snug text-faint">Scribe&apos;s notes don&apos;t use your upload space.</p>
+        <div className="flex justify-end">
           <button type="button" onClick={onClose} className="h-10 shrink-0 rounded-xl bg-muted px-5 text-[14.5px] font-bold hover:bg-border">
             Done
           </button>
@@ -204,10 +199,10 @@ export function AddToSubjectDialog({
                 <li key={w.id}>
                   <button
                     type="button"
-                    onClick={() => void add(w.id, w.title)}
-                    disabled={added || !!busy}
-                    aria-pressed={added}
-                    className={cn("life-card flex min-h-[60px] w-full items-center gap-3 px-3.5 py-2.5 text-left transition-colors", added ? "cursor-default" : "hover:border-border-strong disabled:opacity-60")}
+                    // A subject that already holds the note: the row goes to it.
+                    onClick={() => (added ? router.push(`/workspace/${w.id}`) : void add(w.id, w.title))}
+                    disabled={!!busy}
+                    className="life-card flex min-h-[60px] w-full items-center gap-3 px-3.5 py-2.5 text-left transition-colors hover:border-border-strong disabled:opacity-60"
                   >
                     <span className="min-w-0 flex-1">
                       <span className="line-clamp-2 break-words text-[15px] font-bold leading-snug">{w.title}</span>
@@ -220,7 +215,7 @@ export function AddToSubjectDialog({
                       <Loader2 className="size-4 shrink-0 animate-spin text-accent" />
                     ) : added ? (
                       <span className="inline-flex shrink-0 items-center gap-1 text-[13px] font-bold text-muted-foreground">
-                        <Check className="size-4" strokeWidth={3} /> Added
+                        <Check className="size-4" strokeWidth={3} /> Open
                       </span>
                     ) : (
                       <span className="shrink-0 rounded-full bg-accent px-3.5 py-1.5 text-[13px] font-bold text-white">Add</span>

@@ -65,13 +65,11 @@ export function NotesLibrary() {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="min-w-0">
             <h1 className="text-[30px] font-extrabold leading-tight sm:text-[38px]">Notes</h1>
-            <p className="mt-1.5 max-w-[620px] text-[16px] font-semibold leading-snug text-muted-foreground sm:text-[17px]">
-              {courses.state !== "ready"
-                ? "Scribe's notes and practice questions, course by course."
-                : empty
-                  ? "Scribe's notes are being added course by course. For now, each course shows what its topics cover."
-                  : `Scribe's own notes for ${all.filter((c) => c.noteCount > 0).length} courses, with practice questions. Read one, or add it to a subject as material.`}
-            </p>
+            {empty && (
+              <p className="mt-1.5 max-w-[620px] text-[16px] font-semibold leading-snug text-muted-foreground sm:text-[17px]">
+                Scribe&apos;s notes are being added course by course. For now, each course shows what its topics cover.
+              </p>
+            )}
           </div>
           <label className="flex h-11 w-full shrink-0 items-center gap-2.5 rounded-xl bg-muted px-3.5 text-[14.5px] sm:w-[280px]">
             <Search className="size-4 shrink-0 text-faint" aria-hidden="true" />
@@ -123,15 +121,6 @@ export function NotesLibrary() {
                 <h2 id="lib-all" className="text-[20px] font-extrabold">
                   {own.length > 0 && !q ? "All courses" : q ? "Courses" : "Pick a course"}
                 </h2>
-                {!q && groups.length > 1 && (
-                  <nav aria-label="Exam boards" className="flex flex-wrap gap-2">
-                    {groups.map((g) => (
-                      <a key={g.board} href={`#lib-${g.board}`} className="rounded-full border border-border px-3 py-1.5 text-[13px] font-bold text-foreground hover:bg-muted">
-                        {BOARD_LABEL[g.board]}
-                      </a>
-                    ))}
-                  </nav>
-                )}
               </div>
               {groups.map((g) => (
                 <div key={g.board} id={`lib-${g.board}`} className="mt-5 scroll-mt-4">

@@ -18,9 +18,7 @@ import { CoursePicker } from "@/components/courses/course-picker";
 import { coursesApi, type CatalogTopic, type Course, type CourseLevel } from "@/lib/api/courses";
 import { markFirstScreenShown, track, type FirstRunOption } from "@/lib/funnel";
 import { NotesOffer, type NotesOfferSelection } from "@/components/onboarding/notes-offer";
-import { markFirstSessionOnboardingSkipped } from "@/components/onboarding/first-session-onboarding";
 import { attachedNotesApi } from "@/lib/api/notes";
-import { noteHref } from "@/lib/notes";
 import {
   PASTE_MAX_CHARS,
   PASTE_MIN_CHARS,
@@ -217,11 +215,11 @@ export function FirstRun({
 
   /**
    * "Start with Scribe's notes": the course's subject is made with the first
-   * unit's notes in it as material, then a Quick 5 starts on the first topic
-   * (or the first note opens). No upload. If the notes cannot be attached
+   * unit's notes in it as material, then a Quick 5 starts on the first topic.
+   * No upload, nothing to choose. If the notes cannot be attached
    * (an older server), the Quick 5 still starts as it always did.
    */
-  const startWithNotes = (course: Course, level: CourseLevel | undefined, selection: NotesOfferSelection, then: "quick5" | "read") => {
+  const startWithNotes = (course: Course, level: CourseLevel | undefined, selection: NotesOfferSelection) => {
     void run(
       "curriculum",
       async () => {
@@ -235,12 +233,6 @@ export function FirstRun({
           .catch(() => 0);
         track("first_run.notes_accepted", { courseId: course.id, noteCount: attached }, workspaceId);
         if (attached > 0) track("notes.attached", { from: "first_run", courseId: course.id, noteCount: attached }, workspaceId);
-        if (then === "read") {
-          // They chose to read first: home is their subject and its notes from now on, not this screen again.
-          markFirstSessionOnboardingSkipped();
-          router.push(`${noteHref(course.id, first.id)}?ws=${encodeURIComponent(workspaceId)}`);
-          return;
-        }
         const { sessionId } = await coursesApi.startTopic({ courseId: course.id, topicId: first.id, ...(level ? { level } : {}) });
         track("first_run.session_requested", { option: "curriculum" }, workspaceId);
         if (attached > 0) track("notes.attached_session_started", { from: "first_run", courseId: course.id, noteCount: attached }, workspaceId);
@@ -463,7 +455,7 @@ export function FirstRun({
                       course={course}
                       level={level}
                       onOffered={(n) => onNotesOffered(course.id, n)}
-                      onAccept={(selection, then) => startWithNotes(course, level, selection, then)}
+                      onAccept={(selection) => startWithNotes(course, level, selection)}
                     />
                   )}
                 />

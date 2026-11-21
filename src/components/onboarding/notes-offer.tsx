@@ -18,10 +18,11 @@ export interface NotesOfferSelection {
 
 /**
  * First run, after a course is picked: Scribe's notes for it, offered as
- * ready-made material. One primary action ("Start with Scribe's notes":
- * the subject is made with the first unit's notes in it and a Quick 5 starts
- * on the first topic) and one quiet alternative (read the first note). Renders
- * nothing when the course has no notes yet or they cannot be loaded.
+ * ready-made material, with one action: "Start with Scribe's notes" makes the
+ * subject with the first unit's notes in it and starts a Quick 5 on the first
+ * topic. Onboarding ends in practice, not in reading: the note is one tap
+ * away from the session and the subject afterwards. Renders nothing when the
+ * course has no notes yet or they cannot be loaded.
  */
 export function NotesOffer({
   course,
@@ -35,7 +36,7 @@ export function NotesOffer({
   disabled?: boolean;
   /** Called once per course when the offer is actually shown. */
   onOffered: (noteCount: number) => void;
-  onAccept: (selection: NotesOfferSelection, then: "quick5" | "read") => void;
+  onAccept: (selection: NotesOfferSelection) => void;
 }) {
   const { t } = useI18n();
   const outline = useLoaded(`course:${course.id}`, () => loadNoteCourse(course.id));
@@ -48,7 +49,6 @@ export function NotesOffer({
   }, [selection, course.id, onOffered]);
 
   if (!selection) return null;
-  const first = selection.topics[0];
   const count = selection.topics.length;
   return (
     <>
@@ -68,20 +68,12 @@ export function NotesOffer({
         </div>
         <button
           type="button"
-          onClick={() => onAccept(selection, "quick5")}
+          onClick={() => onAccept(selection)}
           disabled={disabled}
           className="mt-3.5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 text-[15px] font-semibold text-white transition-colors hover:bg-accent-dim disabled:opacity-50"
         >
           {t("firstRun.notesStart")}
           <ArrowRight className="size-4" />
-        </button>
-        <button
-          type="button"
-          onClick={() => onAccept(selection, "read")}
-          disabled={disabled}
-          className="mx-auto mt-1 flex min-h-11 items-center px-3 text-center text-[13.5px] font-semibold text-accent hover:underline disabled:opacity-50"
-        >
-          {t("firstRun.notesRead").replace("{topic}", `${first.code} ${first.name}`)}
         </button>
       </section>
       <p className="mt-5 text-[13px] font-semibold text-muted-foreground">{t("firstRun.notesOr")}</p>

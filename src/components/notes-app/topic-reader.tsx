@@ -13,6 +13,8 @@ import { isLocked } from "@/lib/notes-public/gate";
 import { resolveSegment, topicSlug } from "@/lib/notes-public/slug";
 import { LIBRARY_PATH, libraryCourseHref, noteHref } from "@/lib/notes";
 import { track } from "@/lib/funnel";
+import { emitTreeChanged } from "@/lib/tree-events";
+import { toast } from "@/lib/toast";
 import { AddToSubjectDialog } from "./add-to-subject";
 import { loadNoteCourse, useLoaded } from "./data";
 import "@/app/notes/notes-look.css";
@@ -88,6 +90,9 @@ function Reader({ data }: { data: PublicTopic }) {
   /** Subjects that hold this note; null until known (or when this server has no attached notes). */
   const [inSubjects, setInSubjects] = useState<string[] | null>(null);
   const [canAttach, setCanAttach] = useState(false);
+  /** The student's subject for this course: the default place for the note, one tap, no dialog. */
+  const [courseSubject, setCourseSubject] = useState<string | null>(null);
+  const [addingNow, setAddingNow] = useState(false);
   const [missed, setMissed] = useState<{ logged: number; unlogged: number }>({ logged: 0, unlogged: 0 });
   const level = topic.hlOnly ? ("HL" as const) : undefined;
 
@@ -103,6 +108,7 @@ function Reader({ data }: { data: PublicTopic }) {
         if (cancelled) return;
         setInSubjects(w.attachedWorkspaceIds);
         setCanAttach(w.attachable);
+        setCourseSubject(w.courseWorkspaceId);
       })
       // An older server: no "Add to a subject".
       .catch(() => undefined);
@@ -132,6 +138,25 @@ function Reader({ data }: { data: PublicTopic }) {
     if (note) track("notes.attached_session_started", { from: "note", courseId: course.id }, workspaceId);
   };
   const added = (inSubjects?.length ?? 0) > 0;
+  const addToSubject = async () => {
+    // Not in any subject yet and they have one for this course: put it there. Anything else is a choice, so ask.
+    if (added || !courseSubject) return setAdding(true);
+    if (addingNow) return;
+    setAddingNow(true);
+    try {
+      const out = await attachedNotesApi.attach(courseSubject, course.id, [topic.id]);
+      setInSubjects([courseSubject]);
+      if (out.attached.length) {
+        track("notes.attached", { from: "note", noteCount: 1, courseId: course.id }, courseSubject);
+        emitTreeChanged();
+        toast.success(`Added to your ${course.title} subject`);
+      }
+    } catch {
+      setAdding(true);
+    } finally {
+      setAddingNow(false);
+    }
+  };
 
   return (
     <>
@@ -157,7 +182,7 @@ function Reader({ data }: { data: PublicTopic }) {
             <>
               <StartQuick5 courseId={course.id} topicId={topic.id} level={level} placement="header" mode="session" onStarted={onStarted} />
               {note && !locked && inSubjects !== null && canAttach && (
-                <button type="button" onClick={() => setAdding(true)} className="nl-btn-ghost">
+                <button type="button" onClick={() => void addToSubject()} className="nl-btn-ghost" aria-busy={addingNow}>
                   {added && <Check className="size-4" strokeWidth={3} aria-hidden="true" />}
                   {added ? (inSubjects!.length === 1 ? "In a subject" : `In ${inSubjects!.length} subjects`) : "Add to a subject"}
                 </button>
@@ -165,21 +190,12 @@ function Reader({ data }: { data: PublicTopic }) {
             </>
           ),
           emptyNote: (
-            <section className="mt-6 flex flex-col items-center rounded-[var(--r-card)] border-2 border-dashed border-border px-5 py-8 text-center" aria-labelledby="h-no-note">
-              <Image src="/design/cat3-pencil.webp" alt="" width={360} height={400} unoptimized className="h-[76px] w-auto" />
-              <h2 id="h-no-note" className="mt-3 text-[19px] font-extrabold leading-tight">
-                No Scribe note for this topic yet
-              </h2>
-              <p className="mt-1.5 max-w-[420px] text-[14.5px] leading-snug text-muted-foreground">
-                You can still study it: a session on {topic.name} is built from what the topic covers. Have your own notes? Add them to a subject and Scribe works from those.
-              </p>
-              <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
-                <StartQuick5 courseId={course.id} topicId={topic.id} level={level} placement="note_cta" mode="session" />
-                <Link href="/new-subject" className="text-[14.5px] font-bold text-accent hover:underline">
-                  Add your own notes
-                </Link>
-              </div>
-            </section>
+            <div className="mt-5 flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
+              <StartQuick5 courseId={course.id} topicId={topic.id} level={level} placement="note_cta" mode="session" />
+              <Link href="/new-subject" className="text-[14.5px] font-bold text-accent hover:underline">
+                Or add your own notes
+              </Link>
+            </div>
           ),
           finish:
             missed.logged + missed.unlogged > 0 ? (
@@ -195,7 +211,7 @@ function Reader({ data }: { data: PublicTopic }) {
                 ) : canAttach ? (
                   <>
                     Want the questions you miss kept in Mistakes?{" "}
-                    <button type="button" onClick={() => setAdding(true)} className="font-extrabold text-accent hover:underline">
+                    <button type="button" onClick={() => void addToSubject()} className="font-extrabold text-accent hover:underline">
                       Add this note to a subject
                     </button>
                     .

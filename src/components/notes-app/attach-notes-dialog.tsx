@@ -169,13 +169,12 @@ export function AttachNotesDialog({
           "Add Scribe notes"
         )
       }
-      sub={courseId && course ? `Pick the topics to add to ${workspaceTitle.length > 40 ? "this subject" : workspaceTitle}.` : "Scribe's own notes for your course, added to this subject as material."}
       onClose={onClose}
       footer={
         courseId && options ? (
           <div className="flex items-center justify-between gap-3">
             <p className="min-w-0 text-[12.5px] leading-snug text-faint">
-              {room === 0 ? `This subject holds ${options.max} Scribe notes, the most it can.` : picked.size > 0 ? `${picked.size} selected` : "They don't use your upload space."}
+              {room === 0 ? `This subject holds ${options.max} Scribe notes, the most it can.` : picked.size > 0 ? `${picked.size} selected` : ""}
             </p>
             <button
               type="button"
