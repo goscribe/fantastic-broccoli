@@ -5,9 +5,9 @@ import "@/lib/i18n/exam-planner";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { CalendarDays, Loader2, Play, Settings2 } from "lucide-react";
+import { CalendarDays, Check, Loader2, Play, Settings2 } from "lucide-react";
 import { Mascot, type MascotPose } from "@/components/rewards/mascot";
 import { createStudySession } from "@/lib/api/study";
 import { fetchPlannerWeek } from "@/lib/api/planner";
@@ -15,8 +15,10 @@ import { fetchPlanToday } from "@/lib/api/exam-planner";
 import { mistakesApi } from "@/lib/api/mistakes";
 import { PLAN_KEY, useStartTask } from "@/components/planner/plan-task";
 import { PlanSetupWizard } from "@/components/learn/plan-setup-wizard";
-import { actionCopy, funnelKind, type HomeAction, type HomeSummary } from "@/lib/home-action";
-import { isEmptyWeek, localYmd, plannedLabel, weekCells, type WeekCell } from "@/lib/home-week";
+import { actionCopy, funnelKind, type HomeAction, type HomeSubject, type HomeSummary } from "@/lib/home-action";
+import { dayState, isEmptyWeek, localYmd, plannedLabel, streakDoneDates, weekCells, type DayState, type WeekCell, type WeekItem } from "@/lib/home-week";
+import { FAMILY, hueFamilyFor, resolveSubjectFamily } from "@/lib/subject-family";
+import { useStreak } from "@/lib/rewards";
 import { mixedRoundSubjects } from "@/lib/mistakes";
 import { weekdayNames } from "@/lib/exam-planner-view";
 import { track } from "@/lib/funnel";
@@ -50,20 +52,25 @@ const shell = "hero-card life-rise @container relative isolate overflow-hidden r
  * The banner's backdrop: the illustrated landscape lit for the student's own
  * time of day (tokens.css picks the file from <html data-daypart>), with the
  * cat on the knoll at the right in whatever outfit is equipped and the
- * "Dress up" pill (the shop's outfits) at its feet. Narrow: a band behind
- * the greeting. Wide: behind the whole banner, washed out on the left.
+ * "Dress up" pill (the shop's outfits) at its feet. `clear` (the week
+ * banner): the scene fills the whole banner, unwashed, and the words sit on
+ * solid cards over it. Otherwise (first upload, load error, whose words sit
+ * on the scene itself): a band behind the greeting when narrow, the whole
+ * banner washed out on the left when wide.
  */
-function HeroScene({ pose, motion }: { pose: MascotPose; motion: string }) {
+function HeroScene({ pose, motion, clear = false }: { pose: MascotPose; motion: string; clear?: boolean }) {
   const { t } = useI18n();
   return (
     <>
-      <div aria-hidden className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[112px] overflow-hidden @2xl:inset-0 @2xl:h-auto" />
+      <div aria-hidden className={cn("hero-field pointer-events-none absolute -z-10 overflow-hidden", clear ? "inset-0" : "inset-x-0 top-0 h-[112px] @2xl:inset-0 @2xl:h-auto")} />
       {/* Phones: the scene's own wash starts at sm, so the greeting on the band gets one here. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[112px] sm:hidden"
-        style={{ background: "linear-gradient(90deg, var(--hero-wash) 0%, color-mix(in srgb, var(--hero-wash) 85%, transparent) 40%, transparent 68%)" }}
-      />
+      {!clear && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[112px] sm:hidden"
+          style={{ background: "linear-gradient(90deg, var(--hero-wash) 0%, color-mix(in srgb, var(--hero-wash) 85%, transparent) 40%, transparent 68%)" }}
+        />
+      )}
       <div className="pointer-events-none absolute right-[5%] top-[18px] -z-10 h-[86px] @2xl:right-[4%] @2xl:top-[12px] @2xl:h-[108px]">
         <span className="hero-field__ground" />
         <Mascot pose={pose} className={cn(motion, "h-full")} priority />
@@ -174,10 +181,10 @@ export function HomeBanner({
   // In the small hours the cat is asleep on its feet.
   const pose = daypart === "late" ? "sleep" : POSE[action.kind];
   return (
-    <section className={shell} aria-labelledby="today-title">
-      <HeroScene pose={pose} motion="cat-peek" />
+    <section className={cn(shell, "home-hero")} aria-labelledby="today-title">
+      <HeroScene pose={pose} motion="cat-peek" clear />
       <Greeting greeting={greeting} />
-      <WeekPlan action={action} />
+      <WeekPlan action={action} subjects={summary.subjects} />
     </section>
   );
 }
@@ -226,14 +233,14 @@ function TodayAction({ action }: { action: Exclude<HomeAction, { kind: "upload" 
 
   return (
     <div className="flex min-w-0 flex-col">
-      <p className="hero-eyebrow text-[12.5px] font-extrabold">
+      <p className="text-[12.5px] font-extrabold">
         {t("today.eyebrow")}
         <span className="font-bold text-foreground/60"> · {dateLabel}</span>
       </p>
       <h2
         id="today-title"
         title={copy.title}
-        className="mt-1 text-balance text-[19px] font-extrabold leading-[1.2] @2xl:line-clamp-3 @2xl:text-[17px]"
+        className="mt-1 text-balance text-[19px] font-extrabold leading-[1.2] @2xl:line-clamp-3 @2xl:text-[18px]"
       >
         {copy.title}
       </h2>
@@ -247,7 +254,7 @@ function TodayAction({ action }: { action: Exclude<HomeAction, { kind: "upload" 
           type="button"
           disabled={pending}
           onClick={() => void go()}
-          className={cn(primaryBtn, "mt-3 h-[52px] text-[16px] @2xl:mt-0 @2xl:h-10 @2xl:w-auto @2xl:px-4 @2xl:text-[14.5px]")}
+          className={cn(primaryBtn, "mt-3 h-[52px] text-[16px] @2xl:mt-0 @2xl:h-11 @2xl:w-auto @2xl:px-5 @2xl:text-[15px]")}
         >
           {pending ? <Loader2 className="size-4 animate-spin" /> : <Play className="size-4" fill="currentColor" />}
           {copy.cta}
@@ -257,25 +264,40 @@ function TodayAction({ action }: { action: Exclude<HomeAction, { kind: "upload" 
   );
 }
 
+/** A subject's deep colour (the family's `a`, as on its tile), by workspace id. */
+function useSubjectColours(subjects: HomeSubject[]): Map<string, string> {
+  return useMemo(
+    () => new Map(subjects.map((s) => [s.id, FAMILY[hueFamilyFor(resolveSubjectFamily(s.subjectFamily, s.title), s.id)].a])),
+    [subjects],
+  );
+}
+
 /**
- * The week's study plan inside the banner: a line saying how much is planned
- * (and the next exam), then seven days. Wide: seven cells in a row, today's
- * the widest with the action on it, each other day listing its study times
- * (tap one to open it). Narrow: seven day pills, today's action under them,
- * and the day you tap listed below. No plan yet: one calm line to set the
- * week up instead of an empty grid.
+ * The week's study plan inside the banner: a solid chip saying how much is
+ * planned (and the next exam), then seven days as solid cards on the scene.
+ * Every study time is a chip in its subject's colour. Wide: seven cards in a
+ * row, today's the widest, white and lifted, with the action on it; a day the
+ * streak counted gets the streak's tick, a day that passed with its plan
+ * undone goes grey and dashed, a free day shows the cat asleep. Narrow: seven
+ * day pills (a dot per subject, the tick, today dark), today's action under
+ * them, and the day you tap listed below. No plan yet: one calm card to set
+ * the week up instead of an empty grid.
  */
-function WeekPlan({ action }: { action: Exclude<HomeAction, { kind: "upload" }> }) {
+function WeekPlan({ action, subjects }: { action: Exclude<HomeAction, { kind: "upload" }>; subjects: HomeSubject[] }) {
   const { t, locale } = useI18n();
   const qc = useQueryClient();
   const router = useRouter();
   const week = useQuery({ queryKey: ["planner", undefined], queryFn: () => fetchPlannerWeek(), retry: 1 });
   const plan = useQuery({ queryKey: [...PLAN_KEY, "today"], queryFn: fetchPlanToday, retry: 1 });
+  // The rail's own streak request (same key): which days counted. The strip never waits for it.
+  const { data: streak } = useStreak();
+  const colours = useSubjectColours(subjects);
   // `?setup=1` (back from connecting Google Calendar) opens the week's setup, as the timetable on home always did.
   const [setupOpen, setSetupOpen] = useState(() => typeof window !== "undefined" && new URLSearchParams(window.location.search).get("setup") === "1");
   const [picked, setPicked] = useState<string | null>(null);
   const today = localYmd(new Date());
   const cells = weekCells(today, week.data?.days);
+  const done = streakDoneDates(streak?.week);
   const empty = isEmptyWeek(week.data?.days);
   const names = weekdayNames(locale, "short");
   const narrow = weekdayNames(locale, "narrow");
@@ -295,14 +317,14 @@ function WeekPlan({ action }: { action: Exclude<HomeAction, { kind: "upload" }> 
   const summaryLine = [t("week.title"), summaryRest].filter(Boolean).join(" · ");
 
   const controls = (
-    <div className="flex shrink-0 items-center gap-1">
+    <div className="flex shrink-0 items-center">
       {/* The calendar's own icon; an empty week offers it in words in its card instead. */}
       {week.data && !week.data.calendar.connected && !empty && (
         <Link
           href="/planner?connect=1"
           title={t("week.connect")}
           aria-label={t("week.connect")}
-          className="grid size-9 place-items-center rounded-[9px] hover:bg-foreground/5"
+          className="grid size-9 place-items-center rounded-full hover:bg-foreground/5"
         >
           <Image src="/design/gcal.svg" alt="" width={18} height={18} className="size-[18px]" />
         </Link>
@@ -313,12 +335,12 @@ function WeekPlan({ action }: { action: Exclude<HomeAction, { kind: "upload" }> 
           onClick={() => setSetupOpen(true)}
           aria-label={t("week.settings")}
           title={t("week.settings")}
-          className="grid size-9 place-items-center rounded-[9px] text-foreground/70 hover:bg-foreground/5 hover:text-foreground"
+          className="grid size-9 place-items-center rounded-full text-foreground/70 hover:bg-foreground/5 hover:text-foreground"
         >
           <Settings2 className="size-4" />
         </button>
       )}
-      <Link href="/planner" className="flex h-9 items-center px-1.5 text-[12.5px] font-bold text-accent hover:underline">
+      <Link href="/planner" className="flex h-9 items-center rounded-full px-2.5 text-[12.5px] font-extrabold text-foreground underline decoration-foreground/25 underline-offset-[3px] hover:bg-foreground/5 hover:decoration-foreground">
         {t("week.open")}
       </Link>
     </div>
@@ -327,11 +349,12 @@ function WeekPlan({ action }: { action: Exclude<HomeAction, { kind: "upload" }> 
   const pickedCell = picked ? cells.find((c) => c.date === picked && !c.isToday) : undefined;
 
   return (
-    <div className="px-4 pb-4 @2xl:px-6 @2xl:pb-5">
-      <div className="flex items-center justify-between gap-2 @2xl:mt-0.5 @2xl:max-w-[calc(96%-200px)] @2xl:justify-start @2xl:gap-3">
-        <p className="min-w-0 truncate text-[13.5px] font-bold text-foreground/70 @2xl:text-[14.5px]">
+    <div className="px-4 pb-4 @2xl:px-6 @2xl:pb-6">
+      {/* The week line sits on its own solid chip, never on the bare scene. */}
+      <div className="hero-chip flex items-center justify-between gap-2 rounded-[14px] py-0.5 pl-3 pr-0.5 @2xl:mt-1 @2xl:w-fit @2xl:max-w-[calc(96%-200px)] @2xl:justify-start @2xl:gap-2 @2xl:rounded-full @2xl:pl-4">
+        <p className="min-w-0 truncate text-[13px] font-bold text-foreground/75 @2xl:text-[13.5px]">
           {/* Narrow: the strip right under it says "this week" already. */}
-          <span className={cn(summaryRest && "hidden @2xl:inline")}>{t("week.title")}{summaryRest ? " · " : ""}</span>
+          <span className={cn("text-foreground", summaryRest && "hidden @2xl:inline")}>{t("week.title")}{summaryRest ? " · " : ""}</span>
           {summaryRest}
         </p>
         {controls}
@@ -345,12 +368,12 @@ function WeekPlan({ action }: { action: Exclude<HomeAction, { kind: "upload" }> 
           </div>
           {empty && (
             <div className="hero-cell flex flex-1 items-center gap-3 rounded-[var(--r-card)] px-4 py-3.5">
-              <CalendarDays className="size-6 shrink-0 text-accent" />
+              <CalendarDays className="size-6 shrink-0 text-foreground/70" />
               <div className="min-w-0 flex-1">
                 <div className="text-[14.5px] font-extrabold">{t("week.emptyTitle")}</div>
                 <p className="mt-0.5 text-[12.5px] leading-snug text-foreground/70">{t("week.emptyBody")}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
-                  <button type="button" onClick={() => setSetupOpen(true)} className="min-h-8 text-[13px] font-extrabold text-accent hover:underline">
+                  <button type="button" onClick={() => setSetupOpen(true)} className="min-h-8 text-[13px] font-extrabold text-foreground underline decoration-foreground/30 underline-offset-[3px] hover:decoration-foreground">
                     {t("week.setup")} →
                   </button>
                   {week.data && !week.data.calendar.connected && (
@@ -367,13 +390,15 @@ function WeekPlan({ action }: { action: Exclude<HomeAction, { kind: "upload" }> 
       ) : (
         <ol
           className="mt-3 grid grid-cols-7 gap-1 @2xl:mt-4 @2xl:gap-1.5 @2xl:[grid-template-columns:var(--cols)]"
-          style={{ ["--cols" as string]: cells.map((c) => (c.isToday ? "minmax(0,3.4fr)" : "minmax(0,1fr)")).join(" ") }}
+          style={{ ["--cols" as string]: cells.map((c) => (c.isToday ? "minmax(0,3.1fr)" : "minmax(0,1fr)")).join(" ") }}
           aria-label={summaryLine}
         >
           {cells.map((c) => (
             <DayCell
               key={c.date}
               cell={c}
+              state={dayState(c, done)}
+              colours={colours}
               name={names[c.dow]}
               letter={narrow[c.dow]}
               loading={!week.data}
@@ -384,7 +409,7 @@ function WeekPlan({ action }: { action: Exclude<HomeAction, { kind: "upload" }> 
           ))}
           {pickedCell && (
             <li className="col-span-full mt-1 @2xl:hidden">
-              <DayItems cell={pickedCell} heading={`${names[pickedCell.dow]} ${pickedCell.day}`} />
+              <PickedDay cell={pickedCell} state={dayState(pickedCell, done)} colours={colours} heading={`${names[pickedCell.dow]} ${pickedCell.day}`} />
             </li>
           )}
         </ol>
@@ -404,70 +429,126 @@ function WeekPlan({ action }: { action: Exclude<HomeAction, { kind: "upload" }> 
   );
 }
 
-/** One day's study times as links (a session opens it, review opens the flashcards, the rest the planner). */
-function DayItems({ cell, heading, max = 6, stacked = false }: { cell: WeekCell; heading?: string; max?: number; stacked?: boolean }) {
-  const { t } = useI18n();
-  const shown = cell.items.slice(0, max);
+/**
+ * One study time as a chip in its subject's colour (a session opens itself,
+ * review the flashcards, the rest the planner). Review blocks and times with
+ * no subject are neutral; on a missed day every chip is. `inline`: the time
+ * and title on one line (today's other times, a picked day on phones).
+ *
+ * In a day card the chip is narrow, so a word is never split: the title
+ * wraps only between words, a word too wide for the chip ends in an
+ * ellipsis instead of breaking, and the title stops at two lines. A review block says "Cards" there. The full title is in the
+ * tooltip and the accessible name.
+ */
+function ItemChip({ item, colour, muted = false, inline = false }: { item: WeekItem; colour?: string; muted?: boolean; inline?: boolean }) {
+  const { t, locale } = useI18n();
+  const plain = muted || !colour;
+  const label = !inline && item.kind === "review" ? t("week.cardsShort") : item.title;
+  const full = `${item.time} ${item.title}`;
   return (
-    <div className={cn(heading && "hero-cell rounded-[var(--r-card)] px-3.5 py-2.5")}>
-      {heading && (
-        <div className="flex items-baseline justify-between text-[13px] font-extrabold">
-          {heading}
-          {cell.minutes > 0 && <span className="text-[12px] font-bold text-foreground/60">{plannedLabel(cell.minutes)}</span>}
-        </div>
-      )}
-      {cell.items.length === 0 ? (
-        <p className="mt-0.5 text-[12px] font-semibold text-foreground/50">{t("week.free")}</p>
+    <Link
+      href={item.href}
+      title={full}
+      aria-label={full}
+      className={cn("week-chip min-w-0 text-left", plain && "week-chip--plain", inline ? "inline-flex max-w-full items-baseline gap-1 px-2 py-1" : "block px-1.5 py-1.5", muted && "text-foreground/70")}
+      style={plain ? undefined : ({ ["--chip" as string]: colour } as React.CSSProperties)}
+    >
+      <span className={cn("shrink-0 font-bold tabular-nums", inline ? "text-[11px]" : "block text-[10px] leading-tight")}>{item.time}</span>
+      {inline ? (
+        <span className="truncate text-[11.5px] font-extrabold">{label}</span>
       ) : (
-        <ul className="mt-0.5 flex flex-col">
-          {shown.map((s) => (
-            <li key={s.id}>
-              <Link href={s.href} title={`${s.time} ${s.title}`} className="-mx-1 block rounded-md px-1 py-0.5 text-[12px] leading-snug hover:bg-foreground/5">
-                <span className={cn("font-bold tabular-nums text-foreground/60", stacked && "block text-[11px] leading-tight")}>{s.time}</span>
-                {stacked ? null : " "}
-                <span className={cn("font-semibold", stacked && "line-clamp-2", s.kind === "review" ? "hero-review" : "text-foreground")}>{s.title}</span>
-              </Link>
+        <span lang={locale} className="week-chip__title line-clamp-2 text-[11px] font-extrabold leading-[1.2]">
+          {label.split(/\s+/).filter(Boolean).map((w, i) => (
+            <span key={i}>
+              {i > 0 && " "}
+              <span className="week-chip__word">{w}</span>
+            </span>
+          ))}
+        </span>
+      )}
+    </Link>
+  );
+}
+
+const colourOf = (item: WeekItem, colours: Map<string, string>) => (item.kind === "review" || !item.workspaceId ? undefined : colours.get(item.workspaceId));
+
+/** The streak's tick on a day that counted. */
+function DoneTick({ className }: { className?: string }) {
+  const { t } = useI18n();
+  return (
+    <span role="img" aria-label={t("week.dayDone")} className={cn("week-tick grid shrink-0 place-items-center rounded-full", className)}>
+      <Check className="size-[65%]" strokeWidth={3.5} />
+    </span>
+  );
+}
+
+/** A free day: the word, and on a free day still to come the cat asleep (one nap, not a row of them on a past week). */
+function FreeDay({ nap, className }: { nap: boolean; className?: string }) {
+  const { t } = useI18n();
+  return (
+    <div className={cn("flex flex-col items-center", className)}>
+      <span className="self-start pl-1 text-[12px] font-bold text-foreground/65">{t("week.free")}</span>
+      {nap && <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="mt-auto h-10 w-auto pt-1" />}
+    </div>
+  );
+}
+
+/** Phones: the day you tapped, its times as chips. */
+function PickedDay({ cell, state, colours, heading }: { cell: WeekCell; state: DayState; colours: Map<string, string>; heading: string }) {
+  const { t } = useI18n();
+  return (
+    <div className={cn("hero-cell rounded-[var(--r-card)] px-3.5 py-2.5", state === "missed" && "hero-cell--missed")}>
+      <div className="flex items-center justify-between gap-2 text-[13px] font-extrabold">
+        <span className="flex items-center gap-1.5">
+          {heading}
+          {state === "done" && <DoneTick className="size-4" />}
+          {state === "missed" && <span className="text-[12px] font-bold text-foreground/65">· {t("week.dayMissed")}</span>}
+        </span>
+        {cell.minutes > 0 && <span className="text-[12px] font-bold text-foreground/65">{plannedLabel(cell.minutes)}</span>}
+      </div>
+      {cell.items.length === 0 ? (
+        <p className="mt-0.5 text-[12px] font-bold text-foreground/65">{t("week.free")}</p>
+      ) : (
+        <ul className="mt-2 flex flex-wrap gap-1.5">
+          {cell.items.map((s) => (
+            <li key={s.id} className="min-w-0 max-w-full">
+              <ItemChip item={s} colour={colourOf(s, colours)} muted={state === "missed"} inline />
             </li>
           ))}
-          {cell.items.length > shown.length && (
-            <li>
-              <Link href="/planner" className="-mx-1 block rounded-md px-1 py-0.5 text-[12px] font-bold text-accent hover:underline">
-                {t("week.more").replace("{n}", String(cell.items.length - shown.length))}
-              </Link>
-            </li>
-          )}
         </ul>
       )}
     </div>
   );
 }
 
-/** Today's other study times, one quiet line under the action ("Also today: 17:00 Cell transport · 18:00 Flashcards"). */
-function AlsoToday({ cell }: { cell: WeekCell }) {
+/** Today's other study times under the action, as chips ("Also today: 17:00 Cell transport, 18:00 Flashcards"). */
+function AlsoToday({ cell, colours }: { cell: WeekCell; colours: Map<string, string> }) {
   const { t } = useI18n();
   if (cell.items.length === 0) return null;
   return (
-    <p className="mt-2 truncate px-1 text-[12px] font-semibold text-foreground/70 @2xl:mt-2.5 @2xl:border-t @2xl:border-foreground/10 @2xl:px-0 @2xl:pt-2">
-      {t("week.alsoToday")}{" "}
-      {cell.items.map((s, i) => (
-        <span key={s.id}>
-          {i > 0 && " · "}
-          <Link href={s.href} className="hover:underline">
-            <span className="tabular-nums text-foreground/55">{s.time}</span> {s.title}
-          </Link>
-        </span>
-      ))}
-    </p>
+    <div className="mt-3 flex flex-wrap items-center gap-1.5 border-t border-foreground/10 pt-2.5">
+      <p className="mr-0.5 text-[12px] font-bold text-foreground/65">{t("week.alsoToday")}</p>
+      <ul className="contents">
+        {cell.items.map((s) => (
+          <li key={s.id} className="min-w-0 max-w-full">
+            <ItemChip item={s} colour={colourOf(s, colours)} inline />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
 /**
- * A day of the strip. Narrow: a pill (letter, date, a dot when something is
- * planned) that shows the day's times below the strip; today's action sits
- * under the pills. Wide: a cell with the day's times, today's holding the action.
+ * A day of the strip. Narrow: a pill (letter, date, a dot per subject, the
+ * streak's tick on a day that counted) that shows the day's times below the
+ * strip; today's pill is the dark one and its action sits under the pills.
+ * Wide: a solid card with the day's times as chips, today's holding the action.
  */
 function DayCell({
   cell,
+  state,
+  colours,
   name,
   letter,
   loading,
@@ -476,6 +557,8 @@ function DayCell({
   action,
 }: {
   cell: WeekCell;
+  state: DayState;
+  colours: Map<string, string>;
   name: string;
   letter: string;
   loading: boolean;
@@ -483,15 +566,18 @@ function DayCell({
   onPick: () => void;
   action: React.ReactNode;
 }) {
+  const { t } = useI18n();
+  const missed = state === "missed";
+  // One dot per subject that day (review blocks share one neutral dot), at most three.
+  const dots = [...new Set(cell.items.map((s) => (missed ? "" : colourOf(s, colours) ?? "")))].slice(0, 3);
+  const shown = cell.items.slice(0, 2);
   return (
     <li
       className={cn(
         // Narrow: the li dissolves so today's action can span the row under the pills.
-        "contents @2xl:flex @2xl:min-w-0 @2xl:flex-col @2xl:rounded-[var(--r-card)] @2xl:p-2.5",
-        // display: contents draws no box, so the cell surface shows only when wide.
-        "hero-cell",
-        cell.isToday && "hero-cell--today @2xl:p-3",
-        cell.past && "@2xl:opacity-60",
+        "hero-day contents @2xl:relative @2xl:flex @2xl:min-w-0 @2xl:flex-col @2xl:rounded-[var(--r-card)] @2xl:p-1.5 @2xl:pt-2",
+        missed && "hero-day--missed",
+        cell.isToday && "hero-day--today @2xl:z-10 @2xl:-my-1.5 @2xl:p-3.5",
       )}
     >
       {/* Narrow pill. */}
@@ -499,34 +585,70 @@ function DayCell({
         type="button"
         onClick={onPick}
         aria-pressed={cell.isToday ? undefined : picked}
-        aria-label={`${name} ${cell.day}${cell.minutes ? ` · ${plannedLabel(cell.minutes)}` : ""}`}
+        aria-label={`${name} ${cell.day}${cell.minutes ? ` · ${plannedLabel(cell.minutes)}` : ""}${state === "done" ? ` · ${t("week.dayDone")}` : missed ? ` · ${t("week.dayMissed")}` : ""}`}
         className={cn(
-          "hero-cell flex h-[58px] flex-col items-center justify-center rounded-xl text-[11px] font-bold @2xl:hidden",
-          cell.isToday && "hero-cell--today",
-          picked && "!border-foreground/50",
-          cell.past && "opacity-60",
+          "week-pill relative flex h-[58px] flex-col items-center justify-center rounded-xl text-[11px] font-bold @2xl:hidden",
+          cell.isToday ? "hero-pill--today -my-[3px] h-[64px] rounded-[14px]" : "hero-cell",
+          missed && "hero-cell--missed",
+          picked && "outline outline-2 outline-offset-1 outline-foreground",
         )}
       >
-        <span className={cn(cell.isToday ? "text-accent" : "text-foreground/60")}>{letter}</span>
-        <span className="text-[15px] font-extrabold leading-tight">{cell.day}</span>
-        <span className={cn("mt-0.5 size-1.5 rounded-full", cell.items.length ? "bg-accent" : "bg-transparent")} />
-      </button>
-      {/* Wide cell header (today's is the action's own "Today · date" line). */}
-      {!cell.isToday && (
-      <div className="hidden items-baseline justify-between gap-1 @2xl:flex">
-        <span className="truncate text-[12.5px] font-extrabold">
-          {name} {cell.day}
+        <span className={cn(!cell.isToday && "text-foreground/75")}>{letter}</span>
+        <span className={cn("text-[15px] font-extrabold leading-tight", missed && "text-foreground/65")}>{cell.day}</span>
+        <span className="mt-1 flex h-1.5 items-center gap-[3px]">
+          {dots.map((c) => (
+            <span
+              key={c || "plain"}
+              className={cn("size-1.5 rounded-full", !c && "bg-current opacity-45", cell.isToday && c && "ring-[1.5px] ring-current")}
+              style={c ? { background: c } : undefined}
+            />
+          ))}
         </span>
-      </div>
+        {state === "done" && <DoneTick className="absolute -right-1 -top-1 size-[17px]" />}
+      </button>
+      {/* Wide card header (today's is the action's own "Today · date" line). */}
+      {!cell.isToday && (
+        <div className="hidden pl-1 @2xl:block">
+          <span className={cn("block truncate text-[12.5px] font-extrabold", missed && "text-foreground/65")}>
+            {name} {cell.day}
+          </span>
+          {/* A sticker on the card's corner, so the day's name keeps its room. */}
+          {state === "done" && <DoneTick className="absolute -right-1.5 -top-1.5 size-5" />}
+        </div>
       )}
       {cell.isToday ? (
-        <div className="col-span-full row-start-2 mt-2 @2xl:mt-1">
-          <div className="hero-cell hero-cell--today rounded-[var(--r-card)] p-3.5 @2xl:contents">{action}</div>
-          <AlsoToday cell={cell} />
+        <div className="col-span-full row-start-2 mt-2 @2xl:mt-0">
+          <div className="hero-cell hero-cell--today rounded-[var(--r-card)] p-3.5 @2xl:contents">
+            {action}
+            <AlsoToday cell={cell} colours={colours} />
+          </div>
         </div>
       ) : (
-        <div className="hidden min-w-0 @2xl:mt-1 @2xl:block">
-          {loading ? <span className="mt-1.5 block h-3 w-4/5 animate-pulse rounded bg-foreground/10" /> : <DayItems cell={cell} max={2} stacked />}
+        <div className="hidden min-w-0 flex-1 flex-col @2xl:mt-1.5 @2xl:flex">
+          {loading ? (
+            <>
+              <span className="block h-9 rounded-[10px] bg-foreground/10" />
+              <span className="mt-1.5 block h-9 w-4/5 rounded-[10px] bg-foreground/[0.06]" />
+            </>
+          ) : cell.items.length === 0 ? (
+            <FreeDay nap={!cell.past} className="flex-1" />
+          ) : (
+            <>
+              {missed && <span className="-mt-1 mb-1 pl-1 text-[11px] font-bold text-foreground/65">{t("week.dayMissed")}</span>}
+              <ul className="flex flex-col gap-1.5">
+                {shown.map((s) => (
+                  <li key={s.id}>
+                    <ItemChip item={s} colour={colourOf(s, colours)} muted={missed} />
+                  </li>
+                ))}
+              </ul>
+              {cell.items.length > shown.length && (
+                <Link href="/planner" className="mt-1 block rounded-md px-0.5 text-[11.5px] font-extrabold text-foreground/70 hover:text-foreground hover:underline">
+                  {t("week.more").replace("{n}", String(cell.items.length - shown.length))}
+                </Link>
+              )}
+            </>
+          )}
         </div>
       )}
     </li>

@@ -30,6 +30,8 @@ export interface WeekItem {
   time: string;
   minutes: number;
   kind: "session" | "review";
+  /** The subject it belongs to (its colour on the strip); none for review blocks. */
+  workspaceId?: string;
   /** A session opens itself, a review block opens the flashcard review, anything else the planner. */
   href: string;
 }
@@ -97,10 +99,31 @@ export function weekCells(today: string, days?: WeekDayInput[] | null): WeekCell
         time: hhmm(s.start),
         minutes: Math.max(0, s.end - s.start),
         kind: s.kind,
+        workspaceId: s.workspaceId,
         href: slotHref(s),
       })),
     };
   });
+}
+
+/**
+ * How a day reads on the strip. `done`: the streak counted it (any finished
+ * activity, or a freeze); `missed`: it is over, something was planned and
+ * nothing counted; `free`: nothing planned (and not done); `planned`: today
+ * or later with study times still ahead. `doneDates` are the streak's days
+ * that counted (`streak.get` → week[].done or .frozen).
+ */
+export type DayState = "done" | "missed" | "free" | "planned";
+
+export function dayState(cell: Pick<WeekCell, "date" | "past" | "items">, doneDates: ReadonlySet<string>): DayState {
+  if (doneDates.has(cell.date)) return "done";
+  if (cell.items.length === 0) return "free";
+  return cell.past ? "missed" : "planned";
+}
+
+/** The streak's days that counted, as a set of YYYY-MM-DD. */
+export function streakDoneDates(week: { date: string; done: boolean; frozen?: boolean }[] | null | undefined): Set<string> {
+  return new Set((week ?? []).filter((d) => d.done || d.frozen).map((d) => d.date));
 }
 
 /** Nothing planned anywhere this week: the banner asks the student to set the week up instead of drawing an empty grid. */

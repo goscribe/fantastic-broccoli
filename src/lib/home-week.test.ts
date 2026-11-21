@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { isEmptyWeek, localYmd, plannedLabel, slotHref, weekCells, weekDates, weekdayOf } from "./home-week";
+import { dayState, isEmptyWeek, streakDoneDates, localYmd, plannedLabel, slotHref, weekCells, weekDates, weekdayOf } from "./home-week";
 
 test("weekDates: Monday to Sunday around today", () => {
   assert.deepEqual(weekDates("2026-11-21"), ["2026-11-16", "2026-11-17", "2026-11-18", "2026-11-19", "2026-11-20", "2026-11-21", "2026-11-22"]);
@@ -50,4 +50,23 @@ test("plannedLabel and slotHref", () => {
   assert.equal(plannedLabel(150), "2.5 h");
   assert.equal(slotHref({ kind: "session" }), "/planner");
   assert.equal(localYmd(new Date(2026, 0, 5, 23, 30)), "2026-01-05");
+});
+
+test("dayState: done from the streak, missed only when something was planned and the day is over", () => {
+  const done = streakDoneDates([
+    { date: "2026-11-17", done: true },
+    { date: "2026-11-18", done: false, frozen: true },
+    { date: "2026-11-16", done: false },
+  ]);
+  const item = { id: "a", title: "Osmosis", time: "17:00", minutes: 20, kind: "session" as const, href: "/planner" };
+  assert.equal(dayState({ date: "2026-11-16", past: true, items: [item] }, done), "missed");
+  assert.equal(dayState({ date: "2026-11-16", past: true, items: [] }, done), "free");
+  assert.equal(dayState({ date: "2026-11-17", past: true, items: [item] }, done), "done");
+  // A freeze keeps the day: it reads as done, not missed.
+  assert.equal(dayState({ date: "2026-11-18", past: true, items: [item] }, done), "done");
+  // Studied on a free day still counts.
+  assert.equal(dayState({ date: "2026-11-17", past: true, items: [] }, done), "done");
+  assert.equal(dayState({ date: "2026-11-21", past: false, items: [item] }, done), "planned");
+  assert.equal(dayState({ date: "2026-11-22", past: false, items: [] }, done), "free");
+  assert.equal(streakDoneDates(null).size, 0);
 });
