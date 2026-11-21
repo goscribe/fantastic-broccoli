@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { ChevronRight } from "lucide-react";
-import { FAMILY_ART_SIZE, familyArtSrc, familyFor, familyVars, hueFamilyFor, type SubjectFamily } from "@/lib/subject-family";
+import { FAMILY_ART_SIZE, familyArtSrc, familyVars, hueFamilyFor, resolveSubjectFamily, type SubjectFamily } from "@/lib/subject-family";
 import { cn } from "@/lib/utils";
 
 /** The family illustration, positioned by the tile/band it sits in. Decorative. */
@@ -22,11 +22,13 @@ export function SubjectArt({ family, eager = false, neutral = false, className }
 }
 
 export interface SubjectTileProps {
-  /** Shown as the title; also picks the family unless `family` or `match` is given. */
+  /** Shown as the title; also picks the family unless `family`, `stored` or `match` is given. */
   title: ReactNode;
   /** Text to pick the family from when the title is not a plain subject name. */
   match?: string;
   family?: SubjectFamily;
+  /** The family the server stored for this subject (`Workspace.subjectFamily`); wins over the name rules. */
+  stored?: string | null;
   /** A stable key (the workspace id) that gives a subject matching no family its own hue. */
   seed?: string;
   sub?: ReactNode;
@@ -56,9 +58,9 @@ export interface SubjectTileProps {
  * the tile's height is fixed and never follows the text: the title clamps to
  * two lines, the line under it to one, and the art is sized from the tile.
  */
-export function SubjectTile({ title, match, family, seed, sub, action, progress, row, trailing, href, onClick, disabled, eager, className, style }: SubjectTileProps) {
+export function SubjectTile({ title, match, family, stored, seed, sub, action, progress, row, trailing, href, onClick, disabled, eager, className, style }: SubjectTileProps) {
   const text = typeof title === "string" ? title.trim() : null;
-  const fam = family ?? familyFor(match ?? text ?? "");
+  const fam = family ?? resolveSubjectFamily(stored, match ?? text ?? "");
   const neutral = hueFamilyFor(fam, seed) !== fam;
   // An empty name still gets a tile you can read and tap.
   const shownTitle = text === "" ? "Untitled" : title;
@@ -125,8 +127,8 @@ export function SubjectTile({ title, match, family, seed, sub, action, progress,
  * page, the picker once a course is chosen, the result screen). The body
  * under it stays white.
  */
-export function SubjectBand({ match, family, seed, children, className, artClassName, eager = true }: { match?: string; family?: SubjectFamily; /** As on SubjectTile: keeps an unmatched subject the colour its tile had. */ seed?: string; children: ReactNode; className?: string; artClassName?: string; eager?: boolean }) {
-  const fam = family ?? familyFor(match);
+export function SubjectBand({ match, family, stored, seed, children, className, artClassName, eager = true }: { match?: string; family?: SubjectFamily; /** As on SubjectTile: the family the server stored for the subject. */ stored?: string | null; /** As on SubjectTile: keeps an unmatched subject the colour its tile had. */ seed?: string; children: ReactNode; className?: string; artClassName?: string; eager?: boolean }) {
+  const fam = family ?? resolveSubjectFamily(stored, match);
   return (
     <div className={cn("subject-band", className)} style={familyVars(fam, seed) as CSSProperties}>
       <SubjectArt family={fam} eager={eager} neutral={hueFamilyFor(fam, seed) !== fam} className={artClassName} />

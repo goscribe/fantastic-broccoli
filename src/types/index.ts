@@ -1,3 +1,5 @@
+import type { SubjectFamily } from "@/lib/subject-family";
+
 export type ActivityType =
   | "mcq"
   | "comprehension_check"
@@ -321,6 +323,11 @@ export interface Workspace {
   color: string;
   /** Generated cover illustration (transparent landscape, object on the right). */
   coverUrl?: string;
+  /**
+   * Which cover family the server stored for the subject (picked once by a
+   * model, the course or the learner). Absent: the app's own name rules.
+   */
+  subjectFamily?: SubjectFamily;
   course?: string;
   folderId?: string;
   sessions: StudySession[];

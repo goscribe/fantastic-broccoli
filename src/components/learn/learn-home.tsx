@@ -386,7 +386,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>
           {scopeTitle ? (
             // The tile the student tapped on home, opened out: the subject's colour and art, where it stands, the one thing to do next.
-            <SubjectBand match={scopeTitle} seed={workspaceId} className="mt-2 !rounded-[var(--r-card)] px-[18px] py-4 sm:px-6 sm:py-5">
+            <SubjectBand match={scopeTitle} stored={wsById.get(workspaceId)?.subjectFamily} seed={workspaceId} className="mt-2 !rounded-[var(--r-card)] px-[18px] py-4 sm:px-6 sm:py-5">
               <h1 title={scopeTitle} className={cn("subject-band__title max-w-[66%] font-extrabold text-white", scopeTitle.length > 40 ? "text-[18px] sm:text-[20px]" : "text-[22px] sm:text-[26px]", "leading-[1.15]")}>{scopeTitle}</h1>
               <p className="subject-tile__sub mt-1 max-w-[66%] text-[13px] font-semibold leading-snug">
                 {materials.length} material{materials.length === 1 ? "" : "s"}
@@ -810,7 +810,7 @@ function SubjectsGrid({
       <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3.5 xl:grid-cols-3">
         {loading && workspaces.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[156px] rounded-[var(--r-card)] sm:h-[176px]" />)}
         {tiles.map((w) => (
-          <SubjectTile key={w.id} href={`/workspace/${w.id}`} title={w.title} seed={w.id} {...summary(w)} />
+          <SubjectTile key={w.id} href={`/workspace/${w.id}`} title={w.title} stored={w.subjectFamily} seed={w.id} {...summary(w)} />
         ))}
         {!many && (
           <button type="button" onClick={onNew} className="hidden h-[176px] flex-col items-center justify-center gap-2 rounded-[var(--r-card)] border-2 border-dashed border-border text-center hover:border-border-strong hover:bg-muted/40 sm:flex">
@@ -826,7 +826,7 @@ function SubjectsGrid({
           {showAll && (
             <div id="all-subjects" className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3 xl:grid-cols-3">
               {rest.map((w) => (
-                <SubjectTile key={w.id} row href={`/workspace/${w.id}`} title={w.title} seed={w.id} sub={summary(w).sub} className="h-[76px]" />
+                <SubjectTile key={w.id} row href={`/workspace/${w.id}`} title={w.title} stored={w.subjectFamily} seed={w.id} sub={summary(w).sub} className="h-[76px]" />
               ))}
             </div>
           )}

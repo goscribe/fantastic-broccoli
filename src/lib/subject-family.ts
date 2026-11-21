@@ -6,11 +6,23 @@
  * `a` is the deep end of the hue (white text sits on it, ≥ 4.5:1); `b` is the
  * bright end, used only behind the illustration. Keep this file and
  * public/design/subjects/ identical on every branch (app + public note pages).
+ *
+ * The server stores which family a subject wears (`Workspace.subjectFamily`,
+ * picked once by a model or by the learner) and validates against the same
+ * 15 keys: goscribe/server `src/lib/subject-family.ts` (`SUBJECT_FAMILIES`).
+ * Both repos carry a unit test pinning the list; change them together.
  */
-export type SubjectFamily =
-  | "maths" | "physics" | "chemistry" | "biology" | "science" | "earth"
-  | "computing" | "economics" | "business" | "history" | "society"
-  | "psychology" | "english" | "languages" | "general";
+export const SUBJECT_FAMILIES = [
+  "maths", "physics", "chemistry", "biology", "science", "earth",
+  "computing", "economics", "business", "history", "society",
+  "psychology", "english", "languages", "general",
+] as const;
+
+export type SubjectFamily = (typeof SUBJECT_FAMILIES)[number];
+
+export function isSubjectFamily(value: unknown): value is SubjectFamily {
+  return typeof value === "string" && (SUBJECT_FAMILIES as readonly string[]).includes(value);
+}
 
 export interface FamilyLook {
   /** Deep end: the tile's base colour, and the pill button's text colour. */
@@ -85,6 +97,17 @@ export function familyFor(name: string | null | undefined): SubjectFamily {
   for (const [key, re] of RULES) if (re.test(t)) return key;
   for (const [key, re] of TOPIC_RULES) if (re.test(t)) return key;
   return "general";
+}
+
+/**
+ * The family a subject wears: the one the server stored for it when there is
+ * one (so it never changes on its own), else today's rules on its name.
+ * Every tile, band and row goes through this, so a subject looks the same
+ * everywhere. A server that does not return the field yet (or returns a key
+ * this build does not know) simply gets the rules.
+ */
+export function resolveSubjectFamily(stored: unknown, name?: string | null): SubjectFamily {
+  return isSubjectFamily(stored) ? stored : familyFor(name);
 }
 
 /** Flat vector art on a 360×360 viewBox, transparent, drawn in tints of the family's own hue. */
