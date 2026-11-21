@@ -57,6 +57,8 @@ export default async function CourseNotesPage({ params }: Params) {
   const n = counts(course);
   const topicCount = course.units.reduce((a, u) => a + u.topics.length, 0);
   const first = course.units.flatMap((u) => u.topics).find((t) => t.note) ?? course.units[0]?.topics[0];
+  // Nothing published for this course yet: the page is its outline and says so (no promise of notes, no progress meter).
+  const empty = n.notes === 0 && n.questions === 0;
   return (
     <div className="mx-auto w-full max-w-[900px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
       <Breadcrumbs crumbs={crumbsFor.course(course)} />
@@ -75,29 +77,32 @@ export default async function CourseNotesPage({ params }: Params) {
           </span>
         </p>
         <h1 className="nl-rise mt-2 text-[32px] font-black leading-[1.05] sm:text-[44px]" style={{ "--i": 1 } as React.CSSProperties}>
-          {course.title} notes and practice questions
+          {empty ? `${course.title} topics` : `${course.title} notes and practice questions`}
         </h1>
         <p className="nl-rise mt-3 max-w-[560px] text-[16.5px] font-semibold leading-snug text-white/90 sm:text-[18px]" style={{ "--i": 2 } as React.CSSProperties}>
           {topicCount} topics in {course.units.length} units
-          {n.notes ? ` · ${n.notes} topic notes` : ""}
-          {n.questions ? ` · ${n.questions} exam-style questions with worked answers` : ""}.
+          {n.notes ? ` · ${n.notes.toLocaleString("en-GB")} topic notes` : ""}
+          {n.questions ? ` · ${n.questions.toLocaleString("en-GB")} exam-style questions with worked answers` : ""}.
+          {empty ? " Scribe's notes and practice questions for this course are on their way. For now, see what each topic covers." : ""}
         </p>
         {n.locked > 0 && (
           <div>
             <LockedCount label={lockedCountLabel(n.locked, n.lockedKind)} />
           </div>
         )}
-        <div className="nl-rise mt-5 max-w-[460px]" style={{ "--i": 3 } as React.CSSProperties}>
-          <div className="nl-meter" aria-hidden="true">
-            <span />
+        {!empty && (
+          <div className="nl-rise mt-5 max-w-[460px]" style={{ "--i": 3 } as React.CSSProperties}>
+            <div className="nl-meter" aria-hidden="true">
+              <span />
+            </div>
+            <p data-nl-count className="mt-1.5 text-[13px] font-bold text-white/90">
+              Your progress shows up here as you read and practise
+            </p>
           </div>
-          <p data-nl-count className="mt-1.5 text-[13px] font-bold text-white/90">
-            Your progress shows up here as you read and practise
-          </p>
-        </div>
+        )}
         {first && (
           <Link href={topicPath(course.id, first)} className="nl-btn nl-rise mt-5 w-full sm:w-auto" style={{ "--i": 4 } as React.CSSProperties}>
-            Start with {first.code} {first.name} <span aria-hidden="true">→</span>
+            {empty ? "See" : "Start with"} {first.code} {first.name} <span aria-hidden="true">→</span>
           </Link>
         )}
       </header>

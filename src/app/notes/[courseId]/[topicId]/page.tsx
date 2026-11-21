@@ -107,6 +107,8 @@ function UnitView({ course, unit }: { course: PublicCourse; unit: PublicUnit }) 
   const next = course.units[i + 1];
   const notes = unit.topics.filter((t) => t.note).length;
   const first = unit.topics.find((t) => t.note) ?? unit.topics[0];
+  // Nothing published for this unit yet: say so instead of promising notes.
+  const empty = notes === 0 && unit.topics.every((t) => !t.questionCount);
   return (
     <div className="mx-auto w-full max-w-[900px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
       <Breadcrumbs crumbs={crumbsFor.unit(course, unit)} />
@@ -120,7 +122,7 @@ function UnitView({ course, unit }: { course: PublicCourse; unit: PublicUnit }) 
           {unitTitle(course, unit)}
         </h1>
         <p className="nl-rise mt-3 text-[16.5px] font-semibold leading-snug text-white/90 sm:text-[18px]" style={stagger(2)}>
-          Notes and exam-style practice questions with worked answers
+          {empty ? "Scribe's notes and practice questions for this unit are on their way. For now, see what each topic covers." : "Notes and exam-style practice questions with worked answers"}
         </p>
         <ul className="nl-meta nl-rise mt-3" style={stagger(3)}>
           <li>{unit.topics.length} topics</li>
@@ -138,7 +140,7 @@ function UnitView({ course, unit }: { course: PublicCourse; unit: PublicUnit }) 
         )}
         {first && (
           <Link href={topicPath(course.id, first)} className="nl-btn nl-rise mt-5 w-full sm:w-auto" style={stagger(4)}>
-            Start with {first.code} {first.name} <span aria-hidden="true">→</span>
+            {empty ? "See" : "Start with"} {first.code} {first.name} <span aria-hidden="true">→</span>
           </Link>
         )}
       </header>

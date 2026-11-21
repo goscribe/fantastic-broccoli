@@ -29,7 +29,7 @@ export function TopicList({ courseId, topics, compact = false, current }: { cour
               <span className="nl-node" data-empty={!t.note && !t.questionCount ? "" : undefined}>
                 <Check strokeWidth={4} />
               </span>
-              <span className="w-[46px] shrink-0 text-[13.5px] font-black tabular-nums text-muted-foreground">{t.code}</span>
+              <span className="min-w-[46px] shrink-0 whitespace-nowrap text-[13.5px] font-black tabular-nums text-muted-foreground">{t.code}</span>
               <span className="min-w-0 flex-1">
                 <span className={cn("block font-extrabold leading-snug text-foreground", compact ? "text-[15px]" : "text-[16px]")}>{t.name}</span>
                 <span className="mt-0.5 flex flex-wrap items-center gap-x-1.5 text-[13px] font-semibold text-muted-foreground">

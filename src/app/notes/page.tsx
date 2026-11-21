@@ -28,6 +28,8 @@ export default async function NotesIndexPage() {
   const groups = BOARD_ORDER.map((board) => ({ board, courses: courses.filter((c) => c.board === board) })).filter((g) => g.courses.length);
   const notes = courses.reduce((a, c) => a + c.noteCount, 0);
   const questions = courses.reduce((a, c) => a + c.questionCount, 0);
+  // Nothing published yet (a fresh deploy before the notes are imported): the page says so instead of promising notes.
+  const empty = notes === 0 && questions === 0;
   return (
     <div className="mx-auto w-full max-w-[1120px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
       <Breadcrumbs crumbs={crumbsFor.index()} />
@@ -43,11 +45,13 @@ export default async function NotesIndexPage() {
           Free notes and practice questions
         </h1>
         <p className="nl-rise mt-3.5 max-w-[600px] text-[17px] font-semibold leading-snug text-foreground/75 sm:text-[19px]" style={{ "--i": 2 } as React.CSSProperties}>
-          Pick your course, read Scribe&apos;s note for a topic, then answer exam-style questions with worked explanations. No sign-up needed.
+          {empty
+            ? "Pick your course to see what each topic covers. Scribe's notes and exam-style practice questions are being added course by course."
+            : "Pick your course, read Scribe's note for a topic, then answer exam-style questions with worked explanations. No sign-up needed."}
         </p>
         <ul className="nl-meta nl-rise mt-4" style={{ "--i": 3 } as React.CSSProperties}>
           <li>{courses.length} courses</li>
-          {notes > 0 && <li>{notes} topic notes</li>}
+          {notes > 0 && <li>{notes.toLocaleString("en-GB")} topic notes</li>}
           {questions > 0 && <li>{questions.toLocaleString("en-GB")} questions</li>}
         </ul>
         {groups.length > 1 && (
@@ -87,7 +91,7 @@ export default async function NotesIndexPage() {
                       {c.levels?.length ? ` · ${c.levels.join(" & ")}` : ""}
                     </span>
                     <span className="subject-tile__sub block text-[13.5px] font-semibold leading-snug">
-                      {[c.noteCount > 0 ? `${c.noteCount} notes` : null, c.questionCount > 0 ? `${c.questionCount} questions` : null].filter(Boolean).join(" · ") || "Topic outlines"}
+                      {[c.noteCount > 0 ? `${c.noteCount} notes` : null, c.questionCount > 0 ? `${c.questionCount.toLocaleString("en-GB")} questions` : null].filter(Boolean).join(" · ") || "Topic outlines"}
                     </span>
                     {!!c.lockedCount && (
                       <span className="subject-tile__sub mt-0.5 flex items-center gap-1 text-[13px] font-semibold leading-snug">
@@ -97,11 +101,12 @@ export default async function NotesIndexPage() {
                     )}
                   </span>
                   <span className="mt-4 block">
-                    <span className="nl-meter block w-[52%]" aria-hidden="true">
+                    {/* A course with nothing to read or answer yet has no progress to show: the meter keeps its space so the tiles in a row still line up. */}
+                    <span className={c.noteCount + c.questionCount > 0 ? "nl-meter block w-[52%]" : "nl-meter invisible block w-[52%]"} aria-hidden="true">
                       <span />
                     </span>
-                    <span data-nl-count className="subject-tile__sub mt-1.5 block max-w-[58%] text-[12.5px] font-bold">
-                      Not started yet
+                    <span data-nl-count={c.noteCount + c.questionCount > 0 ? "" : undefined} className="subject-tile__sub mt-1.5 block max-w-[58%] text-[12.5px] font-bold">
+                      {c.noteCount + c.questionCount > 0 ? "Not started yet" : "Notes coming soon"}
                     </span>
                     <span className="subject-pill mt-3">
                       Open

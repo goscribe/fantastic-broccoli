@@ -166,8 +166,9 @@ function ReviewQueue() {
             {rows.map((r) => (
               <li key={r.id}>
                 <Link href={`/review/${r.id}`} className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 py-3 hover:bg-muted/40">
-                  <span className="w-14 shrink-0 text-[13px] font-semibold tabular-nums text-faint">{r.topicCode}</span>
-                  <span className="min-w-0 flex-1 text-[14px] font-semibold">{r.topicName}</span>
+                  <span className="min-w-14 shrink-0 whitespace-nowrap text-[13px] font-semibold tabular-nums text-faint">{r.topicCode}</span>
+                  {/* The name keeps a readable width: on a phone the badges drop to their own line instead of squeezing it to a word per line. */}
+                  <span className="min-w-[9rem] flex-1 text-[14px] font-semibold">{r.topicName}</span>
                   <span className="flex flex-wrap items-center gap-2 text-[12.5px] text-muted-foreground">
                     {r.stats.flagged > 0 && <span className="rounded-full bg-amber/15 px-2 py-0.5 font-semibold text-[#92400e]">{r.stats.flagged} to check</span>}
                     {r.stats.autoFixed > 0 && <span className="rounded-full bg-sky/15 px-2 py-0.5 font-semibold text-[#075985]">{r.stats.autoFixed} auto-fixed</span>}
