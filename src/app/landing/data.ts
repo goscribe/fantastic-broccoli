@@ -139,30 +139,3 @@ export const plans = [
     highlighted: false,
   },
 ];
-
-export const testimonials = [
-  {
-    quote:
-      "I used to highlight everything and still not know what mattered. I dumped in the lecture slides and it pulled the exact concepts I needed to review.",
-    name: "Maya",
-    role: "First-year biochem",
-  },
-  {
-    quote:
-      "The worksheet feedback named the causal step I skipped — not just “wrong.” That’s the bit my professor actually marks.",
-    name: "Jonah",
-    role: "A-level chemistry",
-  },
-  {
-    quote:
-      "Flashcards that used my notes, including the diagrams from the slides. Finally didn’t feel like a generic quizlet deck.",
-    name: "Priya",
-    role: "Pre-med",
-  },
-  {
-    quote:
-      "Sixty-page reading used to freeze me. The session chopped it into a guide plus a check, and I actually finished it.",
-    name: "Leo",
-    role: "Undergrad history",
-  },
-];

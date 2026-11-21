@@ -34,12 +34,6 @@ const STEPS: ["pencil" | "think" | "flame", string, string][] = [
   ["flame", "Twenty minutes a day", "The planner picks the time, the streak keeps you honest, flashcards come back on time."],
 ];
 
-const QUOTES: [string, string, string][] = [
-  ["It marked my 6-marker exactly like my teacher did, then told me which point I’d skipped.", "Maya", "IB Bio HL · Year 13"],
-  ["I just photograph the board after class. By the evening there’s a worksheet waiting.", "Tom", "A-level Chemistry"],
-  ["The flashcards come back the day before I’d have forgotten them. It’s a bit creepy.", "Priya", "GCSE · Year 11"],
-];
-
 export function LandingBody() {
   return (
     <>
@@ -139,22 +133,6 @@ export function LandingBody() {
             </li>
           ))}
         </ol>
-      </section>
-
-      {/* What students said. */}
-      <section className={cn(landingWrap, "py-12 sm:py-16")}>
-        <h2 className="text-balance text-[30px] font-extrabold leading-[1.1] sm:text-center sm:text-[38px]">From the night before.</h2>
-        <div className="mt-8 grid gap-3 sm:mt-10 md:grid-cols-3 md:gap-4">
-          {QUOTES.map(([quote, name, who]) => (
-            <figure key={name} className="life-card m-0 flex flex-col justify-between p-6 md:p-7">
-              <blockquote className="m-0 text-[17px] font-semibold leading-snug">“{quote}”</blockquote>
-              <figcaption className="mt-6">
-                <div className="text-[14.5px] font-extrabold">{name}</div>
-                <div className="text-[13.5px] text-muted-foreground">{who}</div>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
       </section>
 
       <LandingCta

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { absoluteUrl, landingOgImages } from "@/lib/seo";
 import { CtaBand, PageHero, PageSection } from "@/components/graphics/marketing-art";
-import { testimonials } from "../data";
 
 export const metadata: Metadata = {
   title: "About",
@@ -49,20 +48,6 @@ export default function AboutPage() {
             <p className="mt-2 text-[15.5px] leading-relaxed text-muted-foreground">{item.body}</p>
           </div>
         ))}
-      </PageSection>
-      <PageSection rule>
-        <h2 className="text-balance text-[26px] font-extrabold leading-[1.12] sm:text-[32px]">What studying with Scribe feels like</h2>
-        <ul className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4">
-          {testimonials.map((t) => (
-            <li key={t.name} className="life-card flex flex-col justify-between p-6">
-              <p className="text-[16px] leading-relaxed text-pretty">“{t.quote}”</p>
-              <div className="mt-5">
-                <p className="text-[14.5px] font-extrabold">{t.name}</p>
-                <p className="text-[13.5px] text-muted-foreground">{t.role}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
       </PageSection>
       <CtaBand />
     </>
