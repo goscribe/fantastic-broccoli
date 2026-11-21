@@ -134,6 +134,8 @@ export function Copilot({
   page,
   initialPrompt,
   draft,
+  ask,
+  sheet = false,
   variant = "panel",
 }: {
   open: boolean;
@@ -146,6 +148,14 @@ export function Copilot({
    * "Ask Copilot about what you got wrong" on the end-of-session screen.
    */
   draft?: { text: string; id: number };
+  /**
+   * A Hint / Why? tap on the question card: sent once per `id`, as `intent`
+   * with no typed text; `label` is what the chat shows for it, `pinned` the
+   * question it is about (shown at the top of the panel).
+   */
+  ask?: { intent: "hint" | "why"; id: number; label: string; pinned?: string; prepare?: () => Promise<void> };
+  /** Phones: a half-sheet over the bottom of the screen, so the question stays in view. */
+  sheet?: boolean;
   onClose: () => void;
   context?: string;
   workspaceId: string;
@@ -255,7 +265,7 @@ export function Copilot({
   }, [messages]);
 
   const send = useCallback(
-    async (text: string) => {
+    async (text: string, intent?: "hint" | "why") => {
       if (!text.trim()) return;
       // Sending while an answer is still coming in interrupts it.
       inFlight.current?.abort();
@@ -323,7 +333,9 @@ export function Copilot({
           {
             workspaceId,
             conversationId,
-            message: text,
+            // A Hint / Why? tap sends its intent; the server words the question.
+            message: intent ? undefined : text,
+            intent,
             documentContent: context,
             availableWidgets,
             activity,
@@ -436,6 +448,15 @@ export function Copilot({
     void send(initialPrompt);
   }, [initialPrompt, chatsLoading, hydrating, busy, send]);
 
+  // A Hint / Why? tap: once per id, after any history has loaded.
+  const askedId = useRef<number | null>(null);
+  useEffect(() => {
+    if (!ask || !open || askedId.current === ask.id || chatsLoading || hydrating) return;
+    askedId.current = ask.id;
+    const prepared = ask.prepare ? ask.prepare().catch(() => {}) : Promise.resolve();
+    void prepared.then(() => send(ask.label, ask.intent));
+  }, [ask, open, chatsLoading, hydrating, send]);
+
   const chatMessages = messages.filter(
     (m) => (m.chatId ?? "pending") === (activeChat ?? "pending"),
   );
@@ -463,8 +484,12 @@ export function Copilot({
         "flex flex-col bg-card border-border min-h-0",
         variant === "page"
           ? "relative mx-auto h-full w-full max-w-3xl flex-1"
-          : "max-sm:fixed max-sm:inset-0 max-sm:z-50 max-sm:w-full sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]",
+          : sheet
+            ? // Phones: the bottom half only, so the question above stays readable.
+              "max-sm:fixed max-sm:inset-x-0 max-sm:bottom-0 max-sm:z-50 max-sm:h-[52dvh] max-sm:w-full max-sm:rounded-t-[22px] max-sm:border-t max-sm:shadow-[0_-18px_40px_-20px_rgba(0,0,0,0.35)] sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]"
+            : "max-sm:fixed max-sm:inset-0 max-sm:z-50 max-sm:w-full sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]",
       )}
+      data-copilot={sheet ? "sheet" : "panel"}
       style={variant === "page" ? undefined : ({ "--copilot-width": width ? `${width}px` : newUi ? "380px" : "40vw" } as React.CSSProperties)}
     >
       {/* Resize handle */}
@@ -522,6 +547,12 @@ export function Copilot({
           {newUi ? <PanelRightClose className="h-4 w-4" /> : <X className="h-4 w-4" />}
         </button>
       </div>
+
+      {ask?.pinned && (
+        <p className="shrink-0 border-b border-border px-4 py-2 text-[12.5px] leading-snug text-muted-foreground line-clamp-2" data-pinned>
+          {ask.pinned}
+        </p>
+      )}
 
       {/* Messages */}
       <div ref={scrollRef} className={cn("flex-1 overflow-y-auto px-4 py-4 space-y-4", variant === "page" && "px-0 py-6")}>

@@ -71,7 +71,8 @@ export interface ExamTopic {
 export interface ExamInput {
   id?: string;
   workspaceId: string;
-  title: string;
+  /** Optional: the server defaults it to the course name ("IB Biology HL"), else the subject's title. */
+  title?: string;
   date: string;
   kind: "exam" | "test" | "coursework";
   topics: string[];
@@ -90,6 +91,28 @@ const tz = () => {
 export const fetchPlanToday = () => rpc<PlanToday>("planner.today", "query", { timezone: tz() });
 export const fetchPlanRange = (from: string | undefined, days: number) =>
   rpc<PlanRange>("planner.examPlan", "query", { from, days, timezone: tz() });
+/** The next sitting of a board's exam window: first and last day of its months (picker bounds, never a paper date). */
+export interface UpcomingExamWindow {
+  season: "may" | "may_june" | "november";
+  startMonth: number;
+  endMonth: number;
+  label: string;
+  optional?: boolean;
+  year: number;
+  from: string;
+  to: string;
+}
+
+export interface ExamDefaults {
+  /** "IB Biology HL" for a course subject, else the subject's title. */
+  title: string;
+  courseId: string | null;
+  level: string | null;
+  windows: Omit<UpcomingExamWindow, "year" | "from" | "to">[];
+  next: UpcomingExamWindow | null;
+}
+
+export const fetchExamDefaults = (workspaceId: string) => rpc<ExamDefaults>("planner.examDefaults", "query", { workspaceId, timezone: tz() });
 export const fetchExamTopics = (workspaceId: string) => rpc<ExamTopic[]>("planner.examTopics", "query", { workspaceId });
 export const fetchExamSuggestions = () =>
   rpc<{ connected: boolean; suggestions: { title: string; date: string }[] }>("planner.examSuggestions", "query", { timezone: tz() });

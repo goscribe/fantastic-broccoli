@@ -35,6 +35,7 @@ import "@/lib/i18n/settings";
 import "@/lib/i18n/reminders";
 import { ReminderSettings } from "@/components/reminders/reminder-settings";
 import { inputClass } from "@/components/ui/input";
+import { DeleteAccountSection } from "@/components/settings/delete-account-section";
 
 const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
 
@@ -482,6 +483,9 @@ export default function SettingsPage() {
             {t("nav.signOut")}
           </Button>
         </section>
+
+        {/* Delete account: last on the page, its own section. */}
+        <DeleteAccountSection email={user?.email} />
       </div>
 
       {confirmingDowngrade && subscription && (

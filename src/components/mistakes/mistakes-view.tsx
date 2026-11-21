@@ -1,11 +1,11 @@
 "use client";
 
-import { noteHref } from "@/lib/notes";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { Check, ChevronDown, Play, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+import { Check, ChevronDown, Loader2, Play, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { InlineMarkdown, MathText } from "@/components/ui/markdown-text";
@@ -17,7 +17,11 @@ import {
   type MistakeFilter,
   type MistakeState,
 } from "@/lib/api/mistakes";
-import { fixMinutes } from "@/lib/mistakes";
+import { fixMinutes, mistakeSessionHref, mistakeTopicHref, mixedRoundSubjects } from "@/lib/mistakes";
+import { coursesApi } from "@/lib/api/courses";
+import { createStudySession } from "@/lib/api/study";
+import { toastError } from "@/lib/toast";
+import "@/lib/i18n/purpose";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/mistakes";
 import { cn } from "@/lib/utils";
@@ -96,22 +100,53 @@ function AnswerRow({ ok, label, children }: { ok: boolean; label: string; childr
   );
 }
 
-function MistakeCard({ m, showSubject }: { m: Mistake; showSubject: boolean }) {
+/** "Practise this topic": a Quick 5 on the mistake's catalog topic, or on its label in its subject. */
+function PractiseTopic({ m }: { m: Mistake }) {
+  const { t } = useI18n();
+  const router = useRouter();
+  const start = useMutation({
+    mutationFn: async () => {
+      if (m.courseTopic) {
+        const r = await coursesApi.startTopic({ courseId: m.courseTopic.courseId, topicId: m.courseTopic.topicId });
+        return `/workspace/${r.workspaceId}/session/${r.sessionId}`;
+      }
+      const s = await createStudySession({ workspaceId: m.workspaceId, title: m.label, topics: m.label, depth: "light", durationMinutes: 5, quickStart: true });
+      return s ? `/workspace/${m.workspaceId}/session/${s.id}` : `/workspace/${m.workspaceId}`;
+    },
+    onSuccess: (href) => router.push(href),
+    onError: (e) => toastError(e, t("debrief.nextTopicFailed")),
+  });
+  return (
+    <button
+      type="button"
+      onClick={() => start.mutate()}
+      disabled={start.isPending || start.isSuccess}
+      className="-my-2 inline-flex min-h-10 items-center gap-1.5 text-[13.5px] font-bold text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground disabled:opacity-60"
+    >
+      {start.isPending && <Loader2 className="size-3.5 animate-spin" />}
+      {t("purpose.practiseTopic")}
+    </button>
+  );
+}
+
+function MistakeCard({ m, showSubject, highlight = false }: { m: Mistake; showSubject: boolean; highlight?: boolean }) {
   const { t, locale } = useI18n();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(highlight);
+  const topicHref = mistakeTopicHref(m);
+  const sessionHref = mistakeSessionHref(m);
   const explanation = m.explanation?.trim();
   const yours =
     m.yourAnswer === "(drawing)" ? t("mistakes.drawing") : m.yourAnswer?.trim() ? m.yourAnswer : null;
   const dateFmt = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short" });
   return (
-    <li className="life-card p-4 sm:p-5">
+    <li id={`mistake-${m.id}`} className={cn("life-card scroll-mt-24 p-4 sm:p-5", highlight && "ring-2 ring-accent/40")} data-highlight={highlight || undefined}>
       <div className="flex items-center justify-between gap-3">
         <p className="min-w-0 truncate text-[12.5px] font-medium text-muted-foreground">
           {t(KIND_KEY[m.kind] ?? "mistakes.kindMcq")} ·{" "}
-          {m.detail.note ? (
-            // From a note's practice questions: straight back to the part that was missed.
-            <Link href={noteHref(m.detail.note.courseId, m.detail.note.topicId)} className="font-semibold text-foreground underline decoration-border-strong underline-offset-2 hover:text-accent">
-              {m.label}
+          {topicHref ? (
+            // Its topic: Scribe's note when there is one, else the topic in its subject.
+            <Link href={topicHref} className="font-semibold text-foreground underline decoration-border-strong underline-offset-2 hover:decoration-foreground">
+              {m.courseTopic ? m.courseTopic.title : m.label}
             </Link>
           ) : (
             m.label
@@ -170,6 +205,17 @@ function MistakeCard({ m, showSubject }: { m: Mistake; showSubject: boolean }) {
         </div>
       )}
 
+      <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1">
+        {sessionHref && m.session && (
+          <Link href={sessionHref} className="inline-flex min-h-10 min-w-0 items-center text-[13px] text-muted-foreground hover:text-foreground">
+            <span className="truncate underline decoration-border-strong underline-offset-4">
+              {fill(t("purpose.fromSession"), { session: m.session.title, date: dateFmt.format(new Date(m.session.date)) })}
+            </span>
+          </Link>
+        )}
+        {m.state !== "CORRECTED" && <PractiseTopic m={m} />}
+      </div>
+
       {(m.wrongCount > 1 || m.correctedAt) && (
         <p className="mt-3 text-[12px] text-faint">
           {m.wrongCount > 1 && fill(t("mistakes.wrongTimes"), { n: m.wrongCount })}
@@ -217,12 +263,21 @@ export function MistakeSummaryBar({ counts }: { counts: Record<MistakeState, num
 export function MistakesView({
   workspaceId,
   onWorkspaceChange,
+  focusMistakeId,
+  sessionId,
+  onClearSession,
 }: {
   workspaceId?: string;
   onWorkspaceChange?: (id: string | undefined) => void;
+  /** `?mistake=<id>` (search, links): open the list on it, scrolled to and highlighted. */
+  focusMistakeId?: string;
+  /** `?session=<id>` (an end screen's "N to fix"): only that session's mistakes. */
+  sessionId?: string;
+  onClearSession?: () => void;
 }) {
   const { t } = useI18n();
-  const [filter, setFilter] = useState<MistakeFilter>("open");
+  // A linked mistake may already be corrected: look in all of them.
+  const [filter, setFilter] = useState<MistakeFilter>(focusMistakeId ? "all" : "open");
   // Subject chips always come from the overall summary.
   const { data: overall } = useQuery({ queryKey: ["mistakes-summary", null], queryFn: () => mistakesApi.summary() });
   const { data: scoped } = useQuery({
@@ -233,15 +288,24 @@ export function MistakesView({
   const summary = workspaceId ? scoped : overall;
   const list = useInfiniteQuery({
     queryKey: ["mistakes", workspaceId ?? null, filter],
-    queryFn: ({ pageParam }) => mistakesApi.list({ workspaceId, filter, cursor: pageParam, limit: 20 }),
+    queryFn: ({ pageParam }) => mistakesApi.list({ workspaceId, filter, cursor: pageParam, limit: focusMistakeId || sessionId ? 50 : 20 }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (last) => last.nextCursor ?? undefined,
   });
-  const items = useMemo(() => list.data?.pages.flatMap((p) => p.items) ?? [], [list.data]);
+  const all = useMemo(() => list.data?.pages.flatMap((p) => p.items) ?? [], [list.data]);
+  const items = useMemo(() => (sessionId ? all.filter((m) => (m.session?.id ?? m.sessionId) === sessionId) : all), [all, sessionId]);
+  const fromSession = sessionId ? all.find((m) => (m.session?.id ?? m.sessionId) === sessionId)?.session : undefined;
   const subjects = overall?.subjects ?? [];
-  // Practice runs on one subject: this one, or overall the one with most to fix.
-  const practiceSubject = workspaceId ? undefined : subjects.find((s) => s.open > 0);
-  const practiceCount = workspaceId ? (summary?.open ?? 0) : (practiceSubject?.open ?? 0);
+  // Practice runs on this subject, or overall on every subject with something to fix (one mixed round).
+  const mixed = workspaceId ? "" : mixedRoundSubjects(subjects);
+  const practiceCount = summary?.open ?? 0;
+
+  // Scroll a linked mistake into view once it is on the page.
+  const focused = !!focusMistakeId && items.some((m) => m.id === focusMistakeId);
+  useEffect(() => {
+    if (!focused) return;
+    document.getElementById(`mistake-${focusMistakeId}`)?.scrollIntoView({ block: "center" });
+  }, [focused, focusMistakeId]);
 
   const filters: Array<{ id: MistakeFilter; label: string; count?: number }> = [
     { id: "open", label: t("mistakes.filterOpen"), count: summary?.open },
@@ -272,14 +336,14 @@ export function MistakesView({
             <MistakeSummaryBar counts={summary.counts} />
             {summary.open > 0 ? (
               <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
-                <Link href={practiceHref({ workspaceId: workspaceId ?? practiceSubject?.workspaceId })} className="w-full sm:w-auto">
+                <Link href={practiceHref({ workspaceId })} className="w-full sm:w-auto">
                   <Button size="lg" className="btn-chunky h-[52px] w-full rounded-[var(--r-button)] px-7 text-[16px] font-extrabold sm:w-auto">
                     <Play className="mr-2 size-4 fill-current" />
                     {t("mistakes.practice")}
                   </Button>
                 </Link>
                 <span className="w-full text-center text-[13px] text-muted-foreground sm:w-auto sm:text-left">
-                  {practiceSubject && !workspaceId && subjects.length > 1 ? `${practiceSubject.title} · ` : ""}
+                  {mixed ? `${mixed} · ` : ""}
                   {fill(t(practiceCount === 1 ? "mistakes.practiceSubOne" : "mistakes.practiceSub"), {
                     n: practiceCount,
                     m: fixMinutes(practiceCount),
@@ -341,6 +405,17 @@ export function MistakesView({
         ))}
       </div>
 
+      {sessionId && (
+        <p className="flex flex-wrap items-center gap-x-3 text-[14px]">
+          <span className="font-semibold">{fill(t("purpose.onlySession"), { session: fromSession?.title ?? "…" })}</span>
+          {onClearSession && (
+            <button type="button" onClick={onClearSession} className="inline-flex min-h-10 items-center font-bold text-muted-foreground underline decoration-border-strong underline-offset-4 hover:text-foreground">
+              {t("purpose.showAll")}
+            </button>
+          )}
+        </p>
+      )}
+
       {list.isLoading ? (
         <div className="space-y-3">
           {[0, 1, 2].map((i) => (
@@ -355,7 +430,7 @@ export function MistakesView({
       ) : (
         <ul className="space-y-3">
           {items.map((m) => (
-            <MistakeCard key={m.id} m={m} showSubject={!workspaceId} />
+            <MistakeCard key={m.id} m={m} showSubject={!workspaceId} highlight={m.id === focusMistakeId} />
           ))}
         </ul>
       )}

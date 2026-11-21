@@ -6,6 +6,12 @@ const nextConfig: NextConfig = {
   // list, plus Googlebot (the public /notes pages depend on canonical + noindex).
   htmlLimitedBots:
     /Googlebot|[\w-]+-Google|Google-[\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight/i,
+  async redirects() {
+    return [
+      // A course is a subject: its own page duplicated the subject page's topic list.
+      { source: "/courses/:workspaceId", destination: "/workspace/:workspaceId", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

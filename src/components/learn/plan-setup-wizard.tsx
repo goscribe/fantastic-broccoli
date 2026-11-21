@@ -1,6 +1,7 @@
 "use client";
 import { buttonClass } from "@/components/ui/button";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { setAvailability, type AvailabilitySlot, type StudyPlan } from "@/lib/api/planner";
@@ -15,7 +16,7 @@ const ORDER = [1, 2, 3, 4, 5, 6, 0];
 const STEPS = ["free", "done"] as const;
 type Step = (typeof STEPS)[number];
 
-/** Runs right after the calendar connects (Planner › Timetable): when you are free, then a summary; saved at the end. */
+/** The week setup: when you are free, then a summary; saved at the end. Opens in Planner › Timetable after the calendar connects (and with ?setup=1), and from home's week banner (/?setup=1). */
 export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { plan: StudyPlan; start?: Step; onClose: () => void; onSaved: () => void }) {
   const [step, setStep] = useState<Step>(start);
   const initial = (plan.availability ?? null) as AvailabilitySlot[] | null;
@@ -41,8 +42,12 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-50 grid grid-cols-[minmax(0,440px)] place-content-center bg-black/30 p-4" onClick={onClose}>
+  // Portalled: home opens this from inside its banner, whose stacking context would let later cards paint over it.
+  // Only ever opened on the client (a tap or a query param read in the browser).
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[100] grid grid-cols-[minmax(0,440px)] place-content-center bg-black/30 p-4" onClick={onClose}>
       <div className="w-full min-w-0 rounded-2xl border border-border bg-card p-5 sm:p-6" onClick={(e) => e.stopPropagation()}>
         <div className="mb-4 flex items-center justify-center gap-1.5">
           {STEPS.map((s, i) => (
@@ -100,6 +105,7 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
