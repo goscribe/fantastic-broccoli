@@ -71,7 +71,7 @@ export function LandingBody() {
       <section className={cn(landingWrap, "pt-12 sm:pt-16")}>
         <h2 className="text-balance text-[30px] font-extrabold leading-[1.1] sm:text-[38px]">Every subject, one home.</h2>
         <p className="mt-3 max-w-[560px] text-[17px] leading-relaxed text-muted-foreground">Your subjects, today’s flashcards and your streak are the first thing you see.</p>
-        <div className="mt-7 rounded-[28px] border border-border p-4 sm:p-7">
+        <div className="mt-6 sm:mt-7 sm:rounded-[28px] sm:border sm:border-border sm:p-7">
           <HomeMock />
         </div>
       </section>

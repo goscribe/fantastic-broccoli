@@ -42,7 +42,7 @@ export default function LandingLayout({
         first layer (properties).
       */}
       <noscript>
-        <style>{`@layer properties{#S\\:0{display:block!important}}body>main{display:none!important}`}</style>
+        <style>{`@layer properties,theme,base,components,utilities;@layer properties{#S\\:0{display:block!important}}body>main{display:none!important}`}</style>
       </noscript>
       <LandingHeader />
       <main>{children}</main>

@@ -33,7 +33,7 @@ export function MockScreen({ children, className }: { children: ReactNode; class
 const CAT = { wave: 352, cheer: 363, flame: 344, pencil: 360, book: 363, think: 383, trophy: 413, sleep: 401 } as const;
 export type CatPose = keyof typeof CAT;
 
-/** The mascot. Decorative; lazy unless it is the page's first image. */
+/** The mascot. Decorative; lazy unless it is in the first screen (never preloaded: it is small and not what the first paint waits for). */
 export function Cat({ pose, className, eager = false }: { pose: CatPose; className?: string; eager?: boolean }) {
   return (
     <Image
@@ -43,7 +43,6 @@ export function Cat({ pose, className, eager = false }: { pose: CatPose; classNa
       height={400}
       unoptimized
       loading={eager ? "eager" : "lazy"}
-      fetchPriority={eager ? "high" : undefined}
       draggable={false}
       className={cn("w-auto select-none object-contain", className)}
     />
