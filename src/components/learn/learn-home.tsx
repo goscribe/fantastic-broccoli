@@ -22,7 +22,7 @@ import { fetchUploadPreviews, uploadFiles, analyzeFiles } from "@/lib/api/materi
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { onTreeChanged, emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
-import { HOME_TILES_ALL_UP_TO, HOME_TILES_SHOWN, byRecentActivity, repeatsTitle } from "@/lib/subject-tiles";
+import { HOME_TILES_ALL_UP_TO, HOME_TILES_SHOWN, byRecentActivity, repeatsTitle, titleHints } from "@/lib/subject-tiles";
 import { toast } from "sonner";
 import { cn, formatRelativeDate } from "@/lib/utils";
 import { Ring, WeekBars } from "@/components/design/charts";
@@ -801,6 +801,7 @@ function SubjectsGrid({
   const [showAll, setShowAll] = useState(false);
   // Most recently active first. A real account can hold dozens of subjects: past a couple of rows, home shows the recent ones and folds the rest away.
   const ordered = useMemo(() => byRecentActivity(workspaces, sessions), [workspaces, sessions]);
+  const hints = useMemo(() => titleHints(ordered), [ordered]);
   const many = ordered.length > HOME_TILES_ALL_UP_TO;
   const tiles = many ? ordered.slice(0, HOME_TILES_SHOWN) : ordered;
   const rest = many ? ordered.slice(HOME_TILES_SHOWN) : [];
@@ -812,7 +813,9 @@ function SubjectsGrid({
     const current = own.find((x) => x.status !== "completed");
     const counts = `${w.materials.length} material${w.materials.length === 1 ? "" : "s"}${own.length ? ` · ${done}/${own.length} sessions` : ""}`;
     // "Next: <the subject's own name again>" says nothing: show where the subject stands instead.
-    const sub = !current ? counts : current.generating ? "Building the next session…" : repeatsTitle(w.title, current.title) ? counts : `Next: ${current.title}`;
+    // Two subjects whose titles the tile cuts to the same text ("B4 Thermodynami…"): the second line says which is which.
+    const hint = hints.get(w.id);
+    const sub = hint ?? (!current ? counts : current.generating ? "Building the next session…" : repeatsTitle(w.title, current.title) ? counts : `Next: ${current.title}`);
     return { sub, progress: own.length ? done / own.length : null, action: current ? "Continue" : "Open" };
   };
   return (

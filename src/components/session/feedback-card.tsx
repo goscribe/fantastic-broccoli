@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import "@/app/design/design.css";
 
-/** Floating result card shown under an answered question (redesign): cheering cat + XP on a correct answer. */
+/** Floating result card shown under an answered question (redesign): cheering cat + points on a correct answer. */
 export function FeedbackCard({
   ok,
   title,
@@ -44,7 +44,7 @@ export function FeedbackCard({
           <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-1">
             <span className={cn("text-[20px] font-extrabold", ok ? "text-emerald-800" : "text-rose-800")}>{title}</span>
             {ok && (
-              <span className="text-[13.5px] font-extrabold tabular-nums text-emerald-800/80">+{xpShown} XP</span>
+              <span className="text-[13.5px] font-extrabold tabular-nums text-emerald-800/80">+{xpShown} pts</span>
             )}
           </div>
         </div>
