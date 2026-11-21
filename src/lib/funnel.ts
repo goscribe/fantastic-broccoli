@@ -29,7 +29,19 @@ export type FunnelEvent =
   /** First run: Scribe's notes for the picked course offered, taken, or passed over. */
   | "first_run.notes_offered"
   | "first_run.notes_accepted"
-  | "first_run.notes_skipped";
+  | "first_run.notes_skipped"
+  /** End screen: the one next step was tapped; `kind` says which. */
+  | "debrief.next_tapped"
+  /** The player's bottom-bar Next (against the card's own "Next question"). */
+  | "session.footer_next"
+  /** "How Scribe works" opened by hand, then closed after `seconds`. */
+  | "tour.shown"
+  | "tour.closed"
+  /** A search ran; `hasLocalResults` says whether the free local index found anything. */
+  | "search.query";
+
+/** What the end screen's next step offered (the server's DEBRIEF_NEXT_KINDS). */
+export type DebriefNextKind = "session" | "quick5" | "mistakes" | "topic" | "review" | "plan" | "home" | "other";
 
 /** Where a notes event happened. */
 export type NoteEventSource = "library" | "course" | "subject" | "note" | "public" | "first_run";
@@ -50,6 +62,12 @@ export interface FunnelProps {
   noteCount?: number;
   /** A catalog course id (the server accepts only known ids). */
   courseId?: string;
+  /** debrief.next_tapped: what the next step offered. */
+  kind?: DebriefNextKind;
+  /** tour.closed: seconds the tour was open. */
+  seconds?: number;
+  /** search.query: the free local index returned at least one row. */
+  hasLocalResults?: boolean;
 }
 
 const FIRST_SCREEN_KEY = "scribe.firstRun.shownAt";

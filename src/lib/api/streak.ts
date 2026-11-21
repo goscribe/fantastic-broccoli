@@ -23,7 +23,16 @@ export interface StreakSummary {
   freezes: number;
   /** Last 7 local days, oldest first, ending today. */
   week: StreakDay[];
+  /**
+   * The latest freeze Scribe applied by itself in the last week ("A streak
+   * freeze saved your 5-day streak"); `bought` freezes were paid for with
+   * points. Show once per `at`.
+   */
+  freezeSave?: FreezeSave | null;
 }
+
+import type { FreezeSave } from "@/lib/streak-freeze";
+export { freezeSaveLine, type FreezeSave } from "@/lib/streak-freeze";
 
 function localTimezone(): string | undefined {
   try {

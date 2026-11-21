@@ -10,6 +10,8 @@ import { toast } from "@/lib/toast";
 import { useI18n, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/rewards";
+import "@/lib/i18n/purpose";
+import { freezeSaveLine } from "@/lib/api/streak";
 
 const MILESTONES = [3, 7, 14, 30, 60, 100, 365];
 
@@ -112,6 +114,21 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
     }
     toast.success(`${t("rewards.streakDays").replace("{n}", String(streak.current))}!`);
   }, [streak, t]);
+
+  // A freeze Scribe applied by itself: one calm line, once per save, on the next visit.
+  useEffect(() => {
+    const save = streak?.freezeSave;
+    const line = freezeSaveLine(save, t);
+    if (!save || !line) return;
+    const key = `scribe.freezeSave.${save.at}`;
+    try {
+      if (window.localStorage.getItem(key)) return;
+      window.localStorage.setItem(key, "1");
+    } catch {
+      return;
+    }
+    toast(line, { duration: 8000 });
+  }, [streak?.freezeSave, t]);
 
   useEffect(() => {
     if (!open) return;

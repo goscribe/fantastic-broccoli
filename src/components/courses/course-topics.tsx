@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, ChevronDown, Loader2 } from "lucide-react";
 import { coursesApi, type Course, type CourseLevel, type CourseProgress, type TopicProgress } from "@/lib/api/courses";
 import { masteryPercent, nextTopic, topicTitle, unitProgress, unitTitle, unitsForLevel } from "@/lib/courses";
@@ -11,6 +11,7 @@ import { notesApi } from "@/lib/api/notes";
 import { libraryCourseHref, noteHref } from "@/lib/notes";
 import { ProgressLine } from "@/components/courses/course-shelf";
 import { cn } from "@/lib/utils";
+import { dataSelector, linkTarget, revealTarget } from "@/lib/link-target";
 import { SubjectBand } from "@/components/learn/subject-tile";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
@@ -26,7 +27,7 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
   const [course, setCourse] = useState<Course | null>(null);
   const [missing, setMissing] = useState(false);
   const [openUnit, setOpenUnit] = useState<string | null>(null);
-  const [openTopic, setOpenTopic] = useState<string | null>(null);
+  const [openTopic, setOpenTopic] = useState<string | null>(() => linkTarget("topic"));
   const [withNotes, setWithNotes] = useState<Set<string>>(new Set());
   const { start, busyTopicId } = useStartCourseTopic();
 
@@ -56,8 +57,18 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
   const next = useMemo(() => nextTopic(units, byTopic), [units, byTopic]);
   const level = (progress?.level ?? undefined) as CourseLevel | undefined;
 
+  // `?topic=<id>` (search, mistakes, end screen): open that topic, scrolled to and outlined.
+  const [topicTarget] = useState(() => linkTarget("topic"));
+  const linkedUnit = useMemo(() => (topicTarget ? units.find((u) => u.topics.some((tp) => tp.id === topicTarget)) : undefined), [units, topicTarget]);
+  const revealed = useRef(false);
+  useEffect(() => {
+    if (!topicTarget || !linkedUnit || revealed.current) return;
+    revealed.current = true;
+    requestAnimationFrame(() => requestAnimationFrame(() => revealTarget(dataSelector("topic-id", topicTarget))));
+  }, [topicTarget, linkedUnit]);
+
   // Until the learner opens one, show the unit holding the next topic.
-  const shownUnit = openUnit ?? next?.unit.id ?? null;
+  const shownUnit = openUnit ?? linkedUnit?.id ?? next?.unit.id ?? null;
 
   if (missing) return null;
   if (!progress || !course) return <div className="h-[140px] animate-pulse rounded-2xl bg-muted" aria-busy="true" />;
@@ -172,7 +183,7 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
               {open && (
                 <ul className="mb-2 mt-1 flex flex-col gap-2">
                   {u.topics.map((topic) => (
-                    <li key={topic.id}>
+                    <li key={topic.id} data-topic-id={topic.id} className="rounded-[var(--r-card)]">
                       <TopicRow
                         topic={topic}
                         progress={byTopic.get(topic.id)}

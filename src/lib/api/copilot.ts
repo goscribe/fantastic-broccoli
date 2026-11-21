@@ -138,7 +138,10 @@ export interface CopilotAnswer {
 export async function askCopilot(input: {
   workspaceId: string;
   conversationId?: string;
-  message: string;
+  /** Optional with `intent` (the question card's Hint / Why?). */
+  message?: string;
+  /** "hint": a nudge for the question on screen (never its answer); "why": why the answer is what it is. */
+  intent?: "hint" | "why";
   documentContent?: string;
   availableWidgets?: { id: string; description: string }[];
   /** Enables workspace-assistant tools (rename, proficiency, create session). */
@@ -159,11 +162,13 @@ export async function askCopilot(input: {
     workspaceAgent: input.workspaceAgent,
     metadata: { ...input.activity, page: input.page },
   } as AskInput["context"];
+  // `intent` (and a missing message with it) is newer than the published @goscribe/server types.
   const result = await api.copilot.ask.mutate({
     context,
     message: input.message,
     conversationId: input.conversationId,
-  });
+    ...(input.intent ? { intent: input.intent } : {}),
+  } as Parameters<typeof api.copilot.ask.mutate>[0]);
   return {
     answer: result.answer,
     widgets: (result as { widgets?: string[] }).widgets ?? [],
@@ -226,6 +231,7 @@ export async function askCopilotStream(
         },
         message: input.message,
         conversationId: input.conversationId,
+        ...(input.intent ? { intent: input.intent } : {}),
       }),
     });
   } catch (err) {
