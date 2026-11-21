@@ -116,7 +116,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           // Desktop: a shelf out from the left wall. Flush with the window's left
           // edge, inset 8px top and bottom, rounded and hairlined only on the sides
           // you can see, on the light neutral tint, with a soft shadow to the right.
-          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:my-2 md:translate-x-0 md:rounded-r-[var(--r-card)] md:border md:border-l-0 md:bg-[var(--card-hover)] md:shadow-[4px_0_16px_-12px_rgba(22,22,26,0.18)]",
+          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:my-2 md:translate-x-0 md:rounded-r-[var(--r-card)] md:border md:border-l-0 md:bg-white md:shadow-[4px_0_16px_-12px_rgba(22,22,26,0.18)]",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
           rail && "md:w-[68px] md:px-2.5",
         )}
@@ -227,7 +227,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
         <div className="sticky top-0 z-30 shrink-0 bg-[linear-gradient(to_bottom,var(--page)_8px,transparent_8px)] px-2 pt-2">
         <header
           className={cn(
-            "flex h-14 items-center gap-2 rounded-[var(--r-card)] border border-border bg-[var(--card-hover)] px-2 transition-shadow sm:gap-3 sm:px-6",
+            "flex h-14 items-center gap-2 rounded-[var(--r-card)] border border-border bg-white px-2 transition-shadow sm:gap-3 sm:px-6",
             scrolled && "shadow-[0_10px_24px_-14px_rgba(22,22,26,0.3)]",
           )}
         >
