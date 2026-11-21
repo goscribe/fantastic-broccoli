@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Check, ChevronRight, Loader2, Lock, Search } from "lucide-react";
@@ -180,7 +181,7 @@ export function AttachNotesDialog({
               type="button"
               onClick={() => void save()}
               disabled={picked.size === 0 || saving}
-              className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-accent px-5 text-[15px] font-bold text-white transition-colors hover:bg-accent-dim disabled:opacity-40"
+              className={buttonClass({ className: "shrink-0 gap-2" })}
             >
               {saving && <Loader2 className="size-4 animate-spin" />}
               {picked.size > 1 ? `Add ${picked.size} notes` : "Add note"}

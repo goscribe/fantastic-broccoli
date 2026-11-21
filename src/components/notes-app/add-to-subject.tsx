@@ -218,7 +218,8 @@ export function AddToSubjectDialog({
                         <Check className="size-4" strokeWidth={3} /> Open
                       </span>
                     ) : (
-                      <span className="shrink-0 rounded-full bg-accent px-3.5 py-1.5 text-[13px] font-bold text-white">Add</span>
+                      // One row per subject: each "Add" is the secondary shape, so a list of them is not a column of primaries.
+                      <span className="shrink-0 rounded-[12px] border border-border bg-white px-3.5 py-1.5 text-[13px] font-bold text-accent-dim">Add</span>
                     )}
                   </button>
                 </li>
