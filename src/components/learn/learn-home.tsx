@@ -669,7 +669,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                 {done} of {total} done
                 {!workspaceId && wsById.get(suggested.workspaceId) ? ` · ${wsById.get(suggested.workspaceId)?.title}` : ""}
               </div>
-              <Link href={`/workspace/${suggested.workspaceId}/session/${suggested.id}`} className="mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full bg-accent text-[14px] font-semibold text-white hover:bg-accent-dim">
+              <Link href={`/workspace/${suggested.workspaceId}/session/${suggested.id}`} className={buttonClass({ className: "mt-3.5 w-full" })}>
                 {done > 0 ? "Continue" : "Start"}
               </Link>
             </div>

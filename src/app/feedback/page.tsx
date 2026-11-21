@@ -142,7 +142,7 @@ function FeedbackForm() {
   return (
     <form onSubmit={submit} className="space-y-5">
       <div className="space-y-1.5">
-        <h1 className="text-2xl font-bold tracking-tight">
+        <h1 className="page-h1">
           {kind === "CANCEL"
             ? "What should we have done better?"
             : "What can we do better?"}

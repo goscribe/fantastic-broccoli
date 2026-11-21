@@ -441,7 +441,7 @@ export default function SettingsPage() {
 
         {/* Account */}
         <section id="account">
-          <h2 className="text-sm font-semibold">{t("settings.account")}</h2>
+          <h2 className="page-h2">{t("settings.account")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("set.accountHint")}
           </p>
@@ -553,7 +553,7 @@ export default function SettingsPage() {
 
         {/* Language */}
         <section id="language" className="mt-8">
-          <h2 className="text-sm font-semibold">{t("settings.language")}</h2>
+          <h2 className="page-h2">{t("settings.language")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("settings.languageHint")}
           </p>
@@ -589,7 +589,7 @@ export default function SettingsPage() {
 
         {/* Plan */}
         <section id="plan" className="mt-8">
-          <h2 className="text-sm font-semibold">{t("settings.plan")}</h2>
+          <h2 className="page-h2">{t("settings.plan")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("set.planHint")}
           </p>
@@ -639,7 +639,7 @@ export default function SettingsPage() {
         {/* Usage */}
         {summaryLoading && (
           <section className="mt-8">
-            <h2 className="text-sm font-semibold">{t("settings.usage")}</h2>
+            <h2 className="page-h2">{t("settings.usage")}</h2>
             <div className="mt-3 rounded-2xl border border-border bg-card px-5 py-2 divide-y divide-border">
               {Array.from({ length: 3 }, (_, i) => (
                 <div key={i} className="py-3 space-y-2">
@@ -655,7 +655,7 @@ export default function SettingsPage() {
         )}
         {!summaryLoading && summary && (
           <section className="mt-8">
-            <h2 className="text-sm font-semibold">{t("settings.usage")}</h2>
+            <h2 className="page-h2">{t("settings.usage")}</h2>
             <p className="mt-0.5 text-[13px] text-muted-foreground">
               {t("set.usageHint").replace("{plan}", summary.planName)}
             </p>
@@ -674,13 +674,13 @@ export default function SettingsPage() {
 
         {/* Invite friends */}
         <section id="invite" className="mt-8">
-          <h2 className="mb-3 text-sm font-semibold">{t("growth.sectionTitle")}</h2>
+          {/* The card carries its own title; a section title above it said the same thing twice. */}
           <InviteCard />
         </section>
 
         {/* Tokens */}
         <section id="tokens" className="mt-8">
-          <h2 className="text-sm font-semibold">{t("set.tokensTitle")}</h2>
+          <h2 className="page-h2">{t("set.tokensTitle")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("set.tokensHint")}
           </p>
