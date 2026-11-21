@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, Check, ChevronRight, Loader2 } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, ArrowRight, Check, ChevronRight, Loader2, Lock } from "lucide-react";
 import {
   coursesApi,
   type CatalogTopic,
@@ -16,6 +17,7 @@ import { cn } from "@/lib/utils";
 import { SubjectBand, SubjectTile } from "@/components/learn/subject-tile";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
+import "@/lib/i18n/notes";
 
 // One fetch per page load: the catalog is static between deploys.
 let listCache: Promise<CourseSummary[]> | null = null;
@@ -289,8 +291,11 @@ export function TopicRow({
   busy,
   disabled,
   progress,
+  notesHref,
 }: {
   topic: CatalogTopic;
+  /** Reader link when Scribe has notes for this topic. */
+  notesHref?: string;
   open: boolean;
   onToggle: () => void;
   onStart: () => void;
@@ -317,6 +322,12 @@ export function TopicRow({
             </span>
           )}
         </span>
+        {topic.locked && (
+          <span className="shrink-0 text-faint" title={t("course.lockedTopic")}>
+            <Lock className="size-3.5" aria-hidden="true" />
+            <span className="sr-only">{t("course.lockedTopic")}</span>
+          </span>
+        )}
         {pct !== null && <span className="shrink-0 text-[12.5px] font-semibold tabular-nums text-muted-foreground">{pct}%</span>}
         {progress?.done && (
           <span className="grid size-6 shrink-0 place-items-center rounded-full bg-accent text-white" aria-label={t("course.done")}>
@@ -354,6 +365,14 @@ export function TopicRow({
               </>
             )}
           </button>
+          {notesHref && (
+            <Link
+              href={notesHref}
+              className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-xl border border-border-strong px-5 text-[14.5px] font-semibold transition-colors hover:border-accent hover:text-accent"
+            >
+              {t("notes.readNotes")}
+            </Link>
+          )}
         </div>
       )}
     </div>
