@@ -53,13 +53,13 @@ export const metadata: Metadata = {
     url: siteUrl,
     title: defaultTitle,
     description: defaultDescription,
-    images: [{ url: "/logo.png", alt: "Scribe logo" }],
+    images: [{ url: "/brand/og-default.png", width: 1200, height: 630, alt: "Scribe: study from your notes" }],
   },
   twitter: {
     card: "summary_large_image",
     title: defaultTitle,
     description: defaultDescription,
-    images: ["/logo.png"],
+    images: ["/brand/og-default.png"],
   },
   robots: {
     index: true,

@@ -339,7 +339,7 @@ function PushStep({
       {/* What it will look like: one calm notification, not a feed. */}
       <div className="mt-5 rounded-2xl bg-muted/70 p-3" aria-hidden>
         <div className="flex items-start gap-3 rounded-xl bg-card p-3 shadow-sm">
-          <Image src="/icons/icon-192.png" alt="" width={36} height={36} className="size-9 shrink-0 rounded-[10px] border border-border" />
+          <Image src="/icons/cat-maskable-192.png" alt="" width={36} height={36} className="size-9 shrink-0 rounded-[10px] border border-border" />
           <div className="min-w-0 flex-1">
             <div className="flex items-center justify-between gap-2 text-[11.5px] text-muted-foreground">
               <span className="font-semibold uppercase tracking-wide">Scribe</span>
@@ -396,7 +396,7 @@ function IosInstallStep({ onDone }: { onDone: () => void }) {
   const steps: Array<{ key: string; icon: ReactNode }> = [
     { key: "remind.iosStep1", icon: <Share className="size-[18px] text-[#007aff]" /> },
     { key: "remind.iosStep2", icon: <SquarePlus className="size-[18px]" /> },
-    { key: "remind.iosStep3", icon: <Image src="/icons/icon-192.png" alt="" width={22} height={22} className="rounded-[6px]" /> },
+    { key: "remind.iosStep3", icon: <Image src="/icons/cat-maskable-192.png" alt="" width={22} height={22} className="rounded-[6px]" /> },
   ];
   return (
     <>
@@ -429,7 +429,7 @@ function AndroidInstallStep({ onSkip, onInstall }: { onSkip: () => void; onInsta
     <>
       <StepHeader pose="cheer" title={t("remind.installTitle")} sub={t("remind.installSub")} />
       <div className="mt-5 flex justify-center" aria-hidden>
-        <Image src="/icons/icon-192.png" alt="" width={72} height={72} className="size-[72px] rounded-[20px] border border-border shadow-sm" />
+        <Image src="/icons/cat-maskable-192.png" alt="" width={72} height={72} className="size-[72px] rounded-[20px] border border-border shadow-sm" />
       </div>
       <div className="mt-5 space-y-1">
         <Button size="lg" className="w-full text-[15px]" onClick={() => void onInstall()}>
