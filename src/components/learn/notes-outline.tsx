@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { ChevronDown, FileText, Loader2, Play, RefreshCw, Sparkles } from "lucide-react";
 import { toast } from "sonner";
@@ -117,9 +118,9 @@ export function NotesOutline({
             type="button"
             onClick={() => void run()}
             disabled={working}
-            className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-[10px] bg-accent px-3.5 text-[13px] font-semibold text-white hover:bg-accent-dim disabled:opacity-60"
+            className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-[12px] border border-border bg-white px-3.5 text-[13.5px] font-bold text-foreground hover:border-border-strong hover:bg-muted disabled:opacity-60"
           >
-            {working ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
+            {working ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4 text-accent" />}
             {working ? "Reading your notes…" : "Organise my notes"}
           </button>
         </div>
@@ -157,7 +158,7 @@ export function NotesOutline({
                           type="button"
                           onClick={() => onStudy(t)}
                           disabled={starting !== null}
-                          className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-accent px-3 text-[12.5px] font-semibold text-white hover:bg-accent-dim disabled:opacity-60"
+                          className={buttonClass({ variant: "secondary", size: "sm", className: "gap-1.5" })}
                         >
                           {starting === t.title ? <Loader2 className="size-3.5 animate-spin" /> : <Play className="size-3.5" fill="currentColor" />}
                           Study this topic

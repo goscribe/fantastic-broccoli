@@ -9,6 +9,7 @@ import "@/lib/i18n/proficiency";
 import { cn } from "@/lib/utils";
 import { Check, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { buttonClass } from "@/components/ui/button";
 import { mistakesApi, practiceHref, type MistakeSummary } from "@/lib/api/mistakes";
 import "@/lib/i18n/mistakes";
 
@@ -181,7 +182,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
           {mistakes.open > 0 && (
             <Link
               href={practiceHref({ workspaceId })}
-              className="shrink-0 rounded-full bg-accent px-4 py-2 text-[13px] font-semibold text-accent-foreground transition-colors hover:bg-accent-dim"
+              className={buttonClass({ variant: "secondary", size: "sm" })}
             >
               {t("mistakes.practice")}
             </Link>
@@ -199,20 +200,17 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
               {pref.longTerm ? t("prof.reviewOnHint") : t("prof.reviewOffHint")}
             </p>
             {pref.longTerm && (
-              <p
-                className={cn(
-                  "mt-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-semibold",
-                  pref.dueItems > 0 ? "bg-accent text-white" : "bg-muted text-accent",
-                )}
-              >
+              // Plain text, and it says WHAT is due: this subject's questions and cards in long-term review.
+              // (The rail's "Due for review" counts flashcards due today across every subject; the two numbers differ by design.)
+              <p className="mt-2 inline-flex items-center gap-1.5 text-[13px] font-bold text-foreground">
                 {pref.dueItems > 0 ? (
                   <>
-                    <span className="size-1.5 rounded-full bg-white animate-pulse-dot" aria-hidden />
+                    <span className="size-1.5 rounded-full bg-accent" aria-hidden />
                     {t("prof.dueItems").replace("{count}", String(pref.dueItems))}
                   </>
                 ) : (
                   <>
-                    <Check className="size-3.5" strokeWidth={3} aria-hidden />
+                    <Check className="size-3.5 text-accent" strokeWidth={3} aria-hidden />
                     {t("prof.dueNone")}
                   </>
                 )}

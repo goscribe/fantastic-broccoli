@@ -1,4 +1,5 @@
 "use client";
+import { buttonClass } from "@/components/ui/button";
 import { useRef, useState } from "react";
 import { useIsMobile } from "@/lib/use-mobile";
 import Link from "next/link";
@@ -195,7 +196,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
             <div className="text-[14px] font-semibold">Connect Google Calendar</div>
             <div className="text-[12.5px] text-muted-foreground">Study times get planned around your lessons, sport and everything else on your calendar.</div>
           </div>
-          <Link href="/planner?connect=1" className="inline-flex h-9 shrink-0 items-center rounded-xl bg-accent px-3.5 text-[13px] font-semibold text-white hover:bg-accent-dim">
+          <Link href="/planner?connect=1" className={buttonClass({ variant: "secondary", size: "sm", className: "shrink-0" })}>
             Connect
           </Link>
         </div>

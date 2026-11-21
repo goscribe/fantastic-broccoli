@@ -31,6 +31,7 @@ import { fetchStreak, type StreakSummary } from "@/lib/api/streak";
 import { fetchPlannerWeek, type PlannerSlot } from "@/lib/api/planner";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LoadError } from "@/components/ui/load-error";
+import { buttonClass } from "@/components/ui/button";
 import "@/app/design/design.css";
 import { inputBoxClass, bareInputClass } from "@/components/ui/input";
 import { Mascot } from "@/components/rewards/mascot";
@@ -562,7 +563,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                 setLoading(true);
                 void load();
               }}
-              className="inline-flex h-11 items-center rounded-xl bg-accent px-4 text-[14px] font-semibold text-white hover:bg-accent-dim"
+              className={buttonClass()}
             >
               {t("today.retry")}
             </button>
@@ -666,7 +667,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           ) : (
           <div className="mt-2 flex items-baseline gap-3">
             <span className="text-[40px] font-extrabold leading-none tabular-nums">{due}</span>
-            <div className="text-[13px] leading-snug text-muted-foreground">{due ? `flashcards due today, about ${Math.max(1, Math.round(due / 3))} min` : "Nothing due right now"}</div>
+            <div className="text-[13px] leading-snug text-muted-foreground">{due ? `flashcards due today${home ? "" : " across all your subjects"}, about ${Math.max(1, Math.round(due / 3))} min` : "Nothing due right now"}</div>
           </div>
           )}
           <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full text-[14px] font-semibold", due && !home && !suggested ? "bg-accent text-white hover:bg-accent-dim" : "bg-muted hover:bg-accent-soft")}>
@@ -764,7 +765,7 @@ function CatNudge({
         {text}
         {count > 0 && (
           <div className="mt-2.5 flex flex-wrap gap-1.5">
-            <button type="button" disabled={!!starting} onClick={onSession} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-accent px-3 text-[12.5px] font-semibold text-white hover:bg-accent-dim disabled:opacity-60">
+            <button type="button" disabled={!!starting} onClick={onSession} className={buttonClass({ size: "sm", className: "gap-1.5" })}>
               {starting === "session" ? <Loader2 className="size-3.5 animate-spin" /> : <Play className="size-3.5" fill="currentColor" />}
               Study session
             </button>
@@ -900,7 +901,7 @@ function SessionList({
           type="button"
           disabled={adding}
           onClick={onAdd}
-          className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-accent px-2.5 text-[12.5px] font-semibold text-white hover:bg-accent-dim disabled:opacity-60"
+          className="inline-flex h-9 items-center gap-1.5 rounded-[12px] border border-border bg-white px-3.5 text-[13.5px] font-bold text-foreground hover:border-border-strong hover:bg-muted disabled:opacity-60"
         >
           {adding && <Loader2 className="size-3.5 animate-spin" />}
           {pickedCount > 0 ? `New session from ${pickedCount} file${pickedCount === 1 ? "" : "s"}` : "New session"}
@@ -916,7 +917,7 @@ function SessionList({
                 <Skeleton className="h-4 w-1/2" />
                 <Skeleton className="h-3 w-1/3" />
               </div>
-              <Skeleton className="h-8 w-[108px] rounded-[9px]" />
+              <Skeleton className="h-9 w-[108px] rounded-[12px]" />
             </div>
           ))}
         {!loading && sessions.length === 0 && (
@@ -951,8 +952,9 @@ function SessionList({
               <Link
                 href={`/workspace/${workspaceId}/session/${s.id}`}
                 className={cn(
-                  "inline-flex h-8 w-[108px] shrink-0 items-center justify-center rounded-[9px] text-[12.5px] font-semibold",
-                  finished ? "bg-muted hover:bg-accent-soft" : "bg-accent text-white hover:bg-accent-dim",
+                  // Secondary: the subject's one primary is the band's Continue / Start pill at the top.
+                  "inline-flex h-9 w-[108px] shrink-0 items-center justify-center rounded-[12px] text-[13.5px] font-bold",
+                  finished ? "bg-muted hover:bg-border" : "border border-border bg-white hover:border-border-strong hover:bg-muted",
                 )}
               >
                 {finished ? "View debrief" : done > 0 ? "Continue" : "Start"}

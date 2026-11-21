@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useIsMobile } from "@/lib/use-mobile";
@@ -84,7 +85,7 @@ export function WeekTimetable() {
                 .catch((err) => toastError(err, "Couldn't replan"))
                 .finally(() => setReplanning(false));
             }}
-            className="inline-flex h-10 items-center gap-1.5 rounded-xl bg-accent px-3.5 text-[13.5px] font-semibold text-white hover:brightness-95 disabled:opacity-60"
+            className={buttonClass({ size: "sm", className: "gap-1.5" })}
           >
             <Sparkles className={cn("size-4", replanning && "animate-pulse")} /> {replanning ? "Planning…" : "Replan"}
           </button>
@@ -178,7 +179,7 @@ export function WeekTimetable() {
               Disconnect
             </button>
           ) : (
-            <a href={`${apiUrl}/calendar/google/connect`} className="h-8 shrink-0 rounded-lg bg-accent px-3 text-[12.5px] font-semibold leading-8 text-white">Connect</a>
+            <a href={`${apiUrl}/calendar/google/connect`} className={buttonClass({ variant: "secondary", size: "sm", className: "shrink-0" })}>Connect</a>
           ))}
         </div>
 
@@ -214,7 +215,7 @@ export function WeekTimetable() {
             <div className="mt-1 text-[13px]" style={{ color: "#8a4a12" }}>
               {data.dueCards > 0 ? `A ${data.nudge.minutes}-min review keeps your streak.` : `Nothing fits your ${plan?.windowStart}–${plan?.windowEnd} window that day — widen it or make it a rest day.`}
             </div>
-            <button type="button" onClick={() => (data.dueCards > 0 ? router.push("/flashcards/review") : setEditing(true))} className="mt-3 h-10 w-full rounded-xl bg-accent text-[14px] font-semibold text-white">
+            <button type="button" onClick={() => (data.dueCards > 0 ? router.push("/flashcards/review") : setEditing(true))} className={buttonClass({ className: "mt-3 w-full" })}>
               {data.dueCards > 0 ? "Review now" : "Edit plan"}
             </button>
           </div>
@@ -306,7 +307,7 @@ function EditPlanDialog({ plan, onClose, onSaved }: { plan: StudyPlan; onClose: 
         </div>
         <div className="mt-6 flex justify-end gap-2">
           <button type="button" onClick={onClose} className="h-10 rounded-xl px-4 text-[14px] font-semibold hover:bg-muted">Cancel</button>
-          <button type="submit" disabled={saving} className="h-10 rounded-xl bg-accent px-5 text-[14px] font-semibold text-white disabled:opacity-60">{saving ? "Saving…" : "Save plan"}</button>
+          <button type="submit" disabled={saving} className={buttonClass()}>{saving ? "Saving…" : "Save plan"}</button>
         </div>
       </form>
     </div>

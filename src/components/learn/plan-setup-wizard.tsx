@@ -1,4 +1,5 @@
 "use client";
+import { buttonClass } from "@/components/ui/button";
 import { useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
@@ -119,11 +120,11 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
             <ArrowLeft className="size-4" /> {idx === 0 ? "Later" : "Back"}
           </button>
           {step === "done" ? (
-            <button type="button" disabled={saving} onClick={() => void save()} className="inline-flex h-9 items-center gap-1.5 rounded-xl bg-accent px-4 text-[13px] font-semibold text-white hover:bg-accent-dim disabled:opacity-60">
+            <button type="button" disabled={saving} onClick={() => void save()} className={buttonClass({ size: "sm", className: "gap-1.5" })}>
               {saving && <Loader2 className="size-3.5 animate-spin" />} Save plan
             </button>
           ) : (
-            <button type="button" onClick={() => setStep(STEPS[idx + 1])} className="inline-flex h-9 items-center gap-1.5 rounded-xl bg-accent px-4 text-[13px] font-semibold text-white hover:bg-accent-dim">
+            <button type="button" onClick={() => setStep(STEPS[idx + 1])} className={buttonClass({ size: "sm", className: "gap-1.5" })}>
               Next <ArrowRight className="size-4" />
             </button>
           )}

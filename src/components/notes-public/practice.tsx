@@ -247,11 +247,21 @@ export function PracticeCard(p: CardProps) {
             <div className="mt-1">{p.explanation}</div>
           </div>
         </details>
-        {answered && (
-          <button type="button" onClick={() => scrollToNext(ctx.ids, p.id, { ...answers, [p.id]: chosen })} className="nl-btn mt-4 w-full sm:w-auto">
-            {left ? "Next question" : "See your score"} <span aria-hidden="true">↓</span>
-          </button>
-        )}
+        {/* One main button on the page: the question just answered carries it; earlier ones keep a quiet link. */}
+        {answered &&
+          (lastAnswered === p.id ? (
+            <button type="button" onClick={() => scrollToNext(ctx.ids, p.id, { ...answers, [p.id]: chosen })} className="nl-btn mt-4 w-full sm:w-auto">
+              {left ? "Next question" : "See your score"} <span aria-hidden="true">↓</span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => scrollToNext(ctx.ids, p.id, { ...answers, [p.id]: chosen })}
+              className="mt-3 inline-flex min-h-11 items-center gap-1 text-[14.5px] font-bold text-foreground underline decoration-[var(--border-strong)] underline-offset-4 hover:decoration-current"
+            >
+              {left ? "Next question" : "See your score"} <span aria-hidden="true">↓</span>
+            </button>
+          ))}
       </div>
       {lastAnswered === p.id && <SignupNudge className="mt-4" />}
     </div>
