@@ -525,7 +525,7 @@ export function SessionDebrief({
               <Mascot pose={stats ? pose : "book"} key={stats ? pose : "wait"} className={cn("relative h-full", celebrate ? "cat-cheer" : "cat-peek")} priority />
             </div>
           </div>
-          <p className="hero-eyebrow relative text-[13.5px] font-extrabold">
+          <p className="hero-eyebrow relative line-clamp-2 break-words text-[13.5px] font-extrabold sm:max-w-[58%]">
             {[subjectTitle, t(quickStart ? "debrief.quick5Complete" : "debrief.complete")].filter(Boolean).join(" · ")}
           </p>
           <h2 id="finish-title" className="relative mt-1.5 text-balance text-[30px] font-extrabold leading-[1.08] tracking-tight sm:max-w-[58%] sm:text-[38px]">
