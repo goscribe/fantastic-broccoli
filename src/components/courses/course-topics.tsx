@@ -55,7 +55,7 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
 
   const pct = masteryPercent(progress.mastery);
   return (
-    <section className={cn(!showTitle && "rounded-2xl border border-border bg-card p-4 sm:p-5")}>
+    <section>
       {showTitle ? (
         // The course's own page: a header band in the subject's colour; the topic list under it stays white.
         <SubjectBand match={course.subject || course.title} className="px-5 py-5 sm:px-7 sm:py-7">

@@ -226,7 +226,6 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   const byStart = useMemo(() => [...sessions].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()), [sessions]);
   const suggested = byStart.find((s) => s.status === "active" && !s.generating);
   const todayIdx = (new Date().getDay() + 6) % 7;
-  const streak = streakInfo?.current ?? 0;
   const defaultWorkspace = suggested ? wsById.get(suggested.workspaceId) : workspaces[0];
 
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -377,9 +376,9 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
   });
 
   return (
-    <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-4 pb-12 pt-5 sm:px-6 sm:pt-6 lg:flex-row">
+    <div className={cn("mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-4 pb-12 pt-5 sm:px-6 sm:pt-6 lg:flex-row", workspaceId && "gap-8 lg:gap-10")}>
       <input ref={fileRef} type="file" multiple accept={UPLOAD_ACCEPT} className="hidden" onChange={(e) => void onFiles(e.target.files)} />
-      <div className="flex min-w-0 flex-1 flex-col gap-4 sm:gap-5">
+      <div className={cn("flex min-w-0 flex-1 flex-col", workspaceId ? "gap-8" : "gap-4 sm:gap-5")}>
         {(!home || (loadError && workspaces.length === 0)) && (
         <div className="flex items-end justify-between gap-3">
           <div>
@@ -393,20 +392,19 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
               </p>
             )}
           </div>
-          {!home && sessions.length > 0 && <span className="hidden text-[13px] text-faint lg:inline">{sessions.length} study session{sessions.length === 1 ? "" : "s"}</span>}
         </div>
         )}
 
         {workspaceId && (
         <form
-          className={cn(inputBoxClass, "flex-col items-stretch gap-0 p-3.5")}
+          className={cn(inputBoxClass, "-mt-4 flex-col items-stretch gap-0 p-4")}
           onSubmit={(e) => {
             e.preventDefault();
             ask(prompt);
           }}
         >
           <div className="flex items-center gap-3">
-            <Image src="/design/cat3-wave.webp" alt="" width={352} height={400} unoptimized className="cat-wiggle h-10 w-auto" />
+            <Image src="/design/cat3-wave.webp" alt="" width={352} height={400} unoptimized className="cat-wiggle hidden h-10 w-auto sm:block" />
             <input
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
@@ -419,9 +417,9 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             </button>
           </div>
           {defaultWorkspace && (
-            <div className="mt-3 flex gap-2 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {["Make a study session from everything here", "Flashcards from my latest upload", "Explain what I got wrong last time", "Mock paper, section A"].map((c) => (
-                <button key={c} type="button" onClick={() => ask(c)} className="whitespace-nowrap rounded-full border border-border px-3 py-1.5 text-[12.5px] font-semibold hover:bg-muted">
+            <div className="mt-4 flex flex-wrap gap-2">
+              {["Make a study session from everything here", "Flashcards from my latest upload", "Explain what I got wrong last time"].map((c) => (
+                <button key={c} type="button" onClick={() => ask(c)} className="max-w-full rounded-full border border-border px-3 py-1.5 text-left text-[12.5px] font-semibold hover:bg-muted">
                   {c}
                 </button>
               ))}
@@ -432,7 +430,8 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
 
         {workspaceId ? (
           <>
-        <div className="flex items-center justify-between">
+        <div>
+        <div className="flex items-center justify-between gap-3">
           <h2 className="text-[16px] font-semibold">
             Your materials <span className="font-medium text-faint">· {materials.length}</span>
           </h2>
@@ -456,31 +455,28 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             )}
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 md:grid-cols-3">
-          {loading && materials.length === 0 && [0, 1, 2].map((i) => <div key={i} className="h-[232px] animate-pulse rounded-2xl bg-muted" />)}
+        <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-5 md:grid-cols-3">
+          {loading && materials.length === 0 && [0, 1, 2].map((i) => <div key={i} className="aspect-[4/3] animate-pulse rounded-xl bg-muted" />)}
           {shown.map(({ m, w }) => (
             <div
               key={m.id}
-              className={cn(
-                "relative flex flex-col rounded-2xl border bg-card p-3 transition-colors",
-                selected.has(m.id) ? "border-accent ring-2 ring-accent/20" : "border-border",
-              )}
+              className="relative flex min-w-0 flex-col"
             >
-              <label className="absolute left-5 top-5 z-10 grid size-6 cursor-pointer place-items-center rounded-md border border-border bg-white shadow-sm has-[:checked]:border-accent has-[:checked]:bg-accent has-[:checked]:text-white">
+              <label className="absolute left-2.5 top-2.5 z-10 grid size-6 cursor-pointer place-items-center rounded-md border border-border bg-white shadow-sm has-[:checked]:border-accent has-[:checked]:bg-accent has-[:checked]:text-white">
                 <input type="checkbox" className="peer sr-only" checked={selected.has(m.id)} onChange={() => toggleSelected(m.id)} aria-label={`Select ${m.title}`} />
                 <Check className="size-3.5 opacity-0 peer-checked:opacity-100" />
               </label>
-              <button type="button" onClick={() => toggleSelected(m.id)} className="block w-full text-left">
+              <button type="button" onClick={() => toggleSelected(m.id)} className={cn("block w-full rounded-xl text-left transition-shadow", selected.has(m.id) && "ring-2 ring-accent ring-offset-2 ring-offset-background")}>
                 <MaterialThumb m={{ ...m, preview: m.preview ?? (previews[m.id] || undefined) }} />
               </button>
-              <div className="mt-3 truncate px-0.5 text-[14.5px] font-semibold">{m.title}</div>
-              <div className="truncate px-0.5 text-[12px] text-faint">
+              <div className="mt-3 truncate text-[14.5px] font-semibold">{m.title}</div>
+              <div className="truncate text-[12px] text-faint">
                 {w.title} · {formatRelativeDate(m.updatedAt)}
               </div>
             </div>
           ))}
-          {(expanded || (!loading && materials.length < 3)) && (
-            <button type="button" onClick={() => fileRef.current?.click()} className="flex min-h-[140px] flex-col items-center justify-center gap-2 rounded-2xl border-2 sm:min-h-[200px] border-dashed border-border p-4 text-center hover:border-accent/50 hover:bg-accent-soft/40">
+          {!loading && materials.length === 0 && (
+            <button type="button" onClick={() => fileRef.current?.click()} className="col-span-full flex min-h-[160px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border p-4 text-center hover:border-accent/50 hover:bg-accent-soft/40">
               <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-16 w-auto" />
               <div>
                 <div className="text-[14.5px] font-semibold">Add material</div>
@@ -488,6 +484,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
               </div>
             </button>
           )}
+        </div>
         </div>
 
         <NotesOutline
@@ -569,7 +566,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
         )}
       </div>
 
-      {workspaceId && (
+      {workspaceId && picked.length > 0 && (
       <CatNudge
         count={picked.length}
         empty={!loading && materials.length === 0}
@@ -580,29 +577,22 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
       />
       )}
       {!brandNew && (
-      <div className={cn("w-full shrink-0 flex-col lg:w-[300px]", home ? "rail-flat hidden lg:flex" : "rail-flat flex")}>
+      <div className={cn("w-full shrink-0 flex-col lg:w-[300px]", home ? "rail-flat hidden lg:flex" : "rail-flat rail-flush flex")}>
         {!home && loading && !suggested && <Skeleton className="h-[150px] rounded-2xl" />}
         {!home && suggested && (() => {
           const { done, total, next } = sessionProgress(suggested);
           return (
-            <div className="relative overflow-hidden rounded-2xl p-[18px]" style={{ background: "var(--accent-soft)" }}>
-              <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-peek absolute right-2.5 top-2 h-[72px] w-auto" />
-              <div className="flex items-center gap-2">
-                <Ring pct={total ? done / total : 0} size={28} stroke={12} color="var(--accent)" />
-                <span className="text-[11px] font-semibold text-accent">
-                  Suggested next · {done} of {total} done
-                </span>
-              </div>
-              <div className="mt-2 pr-16 text-[16px] font-bold leading-tight">{next ? `${activityLabel(next.type)} · ${next.title}` : suggested.title}</div>
-              <div className="mt-1 text-[12.5px] text-muted-foreground">
+            <div>
+              <div className="text-[12px] font-bold text-accent-dim">Suggested next</div>
+              <div className="mt-1 text-[16px] font-extrabold leading-tight">{next ? `${activityLabel(next.type)} · ${next.title}` : suggested.title}</div>
+              <div className="mt-1 text-[13px] text-muted-foreground">
                 {next ? `${next.estimatedMinutes} min · ` : ""}
-                {wsById.get(suggested.workspaceId)?.title}
+                {done} of {total} done
+                {!workspaceId && wsById.get(suggested.workspaceId) ? ` · ${wsById.get(suggested.workspaceId)?.title}` : ""}
               </div>
-              <div className="mt-3.5 flex gap-2">
-                <Link href={`/workspace/${suggested.workspaceId}/session/${suggested.id}`} className="inline-flex h-9 items-center rounded-xl bg-accent px-4 text-[13.5px] font-semibold text-white">
-                  {done > 0 ? "Continue" : "Start"}
-                </Link>
-              </div>
+              <Link href={`/workspace/${suggested.workspaceId}/session/${suggested.id}`} className="mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full bg-accent text-[14px] font-semibold text-white hover:bg-accent-dim">
+                {done > 0 ? "Continue" : "Start"}
+              </Link>
             </div>
           );
         })()}
@@ -624,7 +614,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
             <div className="text-[13px] leading-snug text-muted-foreground">{due ? `flashcards due today, about ${Math.max(1, Math.round(due / 3))} min` : "Nothing due right now"}</div>
           </div>
           )}
-          <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full text-[14px] font-semibold", due && !home ? "bg-accent text-white" : "bg-muted hover:bg-accent-soft")}>
+          <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full text-[14px] font-semibold", due && !home && !suggested ? "bg-accent text-white hover:bg-accent-dim" : "bg-muted hover:bg-accent-soft")}>
             {due ? "Review now" : "Browse flashcards"}
           </Link>
         </div>
@@ -639,14 +629,12 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           <StreakCard streak={streakInfo} />
         ) : (
         <div className="life-card p-[18px]">
-          <div className="flex items-baseline justify-between">
-            <span className="text-[16px] font-semibold">This week</span>
-            <span className="text-[12px] text-faint">
-              {days.reduce((a, b) => a + b, 0)} activities{streak > 0 ? <> · <b className="text-accent">{streak}-day streak</b></> : null}
-              {streakInfo && !streakInfo.todayDone ? <> · {Math.max(0, streakInfo.goalMin - streakInfo.todayMinutes)} min to go today</> : null}
-            </span>
+          <div className="text-[16px] font-extrabold">This week</div>
+          <div className="mt-0.5 text-[12.5px] text-faint">
+            {days.reduce((a, b) => a + b, 0)} activities
+            {streakInfo && !streakInfo.todayDone ? <> · {Math.max(0, streakInfo.goalMin - streakInfo.todayMinutes)} min to go today</> : null}
           </div>
-          <div className="mt-3.5">
+          <div className="mt-4">
             <WeekBars mins={days.length ? days : [0, 0, 0, 0, 0, 0, 0]} goal={3} today={todayIdx} accent="var(--accent)" />
           </div>
         </div>
@@ -833,11 +821,11 @@ function SessionList({
           {pickedCount > 0 ? `New session from ${pickedCount} file${pickedCount === 1 ? "" : "s"}` : "New session"}
         </button>
       </div>
-      <div className="mt-3 divide-y divide-border rounded-2xl border border-border bg-card">
+      <div className="mt-3 divide-y divide-border border-y border-border">
         {loading &&
           sessions.length === 0 &&
           [0, 1, 2].map((i) => (
-            <div key={i} className="flex items-center gap-3.5 px-4 py-3">
+            <div key={i} className="flex items-center gap-3.5 py-3.5">
               <Skeleton className="size-[52px] rounded-full" />
               <div className="flex-1 space-y-2">
                 <Skeleton className="h-4 w-1/2" />
@@ -847,7 +835,7 @@ function SessionList({
             </div>
           ))}
         {!loading && sessions.length === 0 && (
-          <div className="flex items-center gap-4 px-5 py-6 text-[14px] text-muted-foreground">
+          <div className="flex items-center gap-4 py-6 text-[14px] text-muted-foreground">
             <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob h-14 w-auto" />
             No sessions yet — hit New session and I&apos;ll build one from your materials.
           </div>
@@ -856,7 +844,7 @@ function SessionList({
           const { total, done, next, pct } = sessionProgress(s);
           const finished = s.status === "completed";
           return (
-            <div key={s.id} className="flex items-center gap-3.5 px-4 py-3">
+            <div key={s.id} className="flex items-center gap-3.5 py-3.5">
               <span className="relative grid size-[52px] shrink-0 place-items-center">
                 <Ring pct={finished ? 1 : pct} size={52} stroke={8} color={finished ? "#10b981" : "var(--accent)"} />
                 <span className="absolute inset-0 grid place-items-center">

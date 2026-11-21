@@ -191,6 +191,13 @@ html.new-ui .skeleton {
 .rail-flat > * + *,
 .rail-flat > * + .life-card,
 .rail-flat > * + .rail-box { border-top: 1px solid var(--border); }
+/*
+ * These rules own every rail section's padding, so a section must not bring a
+ * surface of its own: a tinted block here would have its text 2px from its edge.
+ * A subject's rail stacks under the main column on small screens; .rail-flush
+ * drops the 2px inset so both share one left edge.
+ */
+.rail-flat.rail-flush > * { padding-left: 0; padding-right: 0; }
 
 /*
  * Sign-in and sign-up: the home banner's landscape in a tall panel. The card
