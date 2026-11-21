@@ -33,6 +33,8 @@ import {
   markFirstSessionOnboardingSkipped,
 } from "@/components/onboarding/first-session-onboarding";
 import { FirstRun } from "@/components/onboarding/first-run";
+import { FIRST_RUN_MAX_SUBJECTS, shouldShowFirstRun } from "@/lib/first-run";
+import { LoadError } from "@/components/ui/load-error";
 import { AppTourAuto } from "@/components/onboarding/app-tour";
 import { onTreeChanged } from "@/lib/tree-events";
 import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
@@ -115,13 +117,17 @@ export default function HomePage() {
     undefined,
   );
 
+  // A failed load is its own state: it must never look like "no subjects yet".
+  const [treeError, setTreeError] = useState(false);
+
   const loadTree = () =>
     fetchWorkspaceTree()
       .then((tree) => {
+        setTreeError(false);
         setFolders(tree.folders);
         setRootWorkspaces(tree.rootWorkspaces);
       })
-      .catch(() => {})
+      .catch(() => setTreeError(true))
       .finally(() => setTreeLoading(false));
 
   useEffect(() => {
@@ -137,19 +143,27 @@ export default function HomePage() {
   // study session yet (unless they chose to look around), lands on "What are
   // you studying?" instead of the dashboard.
   useEffect(() => {
-    if (treeLoading || showOnboarding !== undefined) return;
+    // Nothing is decided from a failed load (shouldShowFirstRun would say no,
+    // and a retry that succeeds must still be able to decide).
+    if (treeLoading || treeError || showOnboarding !== undefined) return;
     let cancelled = false;
     const decide = async (): Promise<boolean> => {
       const workspaces = flattenWorkspaces(folders, rootWorkspaces);
-      if (workspaces.length === 0) return true;
-      if (hasSkippedFirstSessionOnboarding()) return false;
+      const skipped = hasSkippedFirstSessionOnboarding();
       // Established users (many workspaces) are never onboarding candidates —
       // skip the per-workspace session queries entirely.
-      if (workspaces.length > 5) return false;
-      const lists = await Promise.all(
-        workspaces.map((w) => fetchStudySessions(w.id).catch(() => [])),
-      );
-      return lists.every((l) => l.length === 0);
+      const needSessions = workspaces.length > 0 && !skipped && workspaces.length <= FIRST_RUN_MAX_SUBJECTS;
+      const sessionCounts = needSessions
+        ? await Promise.all(
+            workspaces.map((w) =>
+              fetchStudySessions(w.id).then(
+                (l) => l.length,
+                () => null,
+              ),
+            ),
+          )
+        : [];
+      return shouldShowFirstRun({ treeFailed: false, workspaceCount: workspaces.length, skipped, sessionCounts });
     };
     decide().then((show) => {
       if (!cancelled) setShowOnboarding(show);
@@ -157,7 +171,7 @@ export default function HomePage() {
     return () => {
       cancelled = true;
     };
-  }, [treeLoading, folders, rootWorkspaces, showOnboarding]);
+  }, [treeLoading, treeError, folders, rootWorkspaces, showOnboarding]);
 
   const allWorkspaces = useMemo(
     () => flattenWorkspaces(folders, rootWorkspaces),
@@ -248,6 +262,21 @@ export default function HomePage() {
             : undefined
         }
       />
+    );
+  }
+  // The load failed and there is nothing to show: say so, with a way to retry.
+  // Never the first-run screen, never an empty dashboard.
+  if (treeError && !hasWorkspaces) {
+    return (
+      <div className="flex flex-1 items-center justify-center bg-white px-4 py-16">
+        <LoadError
+          onRetry={() => {
+            setTreeError(false);
+            setTreeLoading(true);
+            void loadTree();
+          }}
+        />
+      </div>
     );
   }
   // Still deciding: a new learner must not see the dashboard flash in first.

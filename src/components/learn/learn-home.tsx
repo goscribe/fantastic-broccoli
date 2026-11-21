@@ -30,6 +30,7 @@ import type { Folder, Material, StudySession, Workspace } from "@/types";
 import { fetchStreak, type StreakSummary } from "@/lib/api/streak";
 import { fetchPlannerWeek, type PlannerSlot } from "@/lib/api/planner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { LoadError } from "@/components/ui/load-error";
 import "@/app/design/design.css";
 import { inputBoxClass, bareInputClass } from "@/components/ui/input";
 import { Mascot } from "@/components/rewards/mascot";
@@ -376,6 +377,23 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     streak: streakInfo?.current ?? 0,
     openMistakes: mistakeSummary?.open ?? 0,
   });
+
+  // A subject or folder that failed to load: one error with Retry, not "0 materials / No sessions yet" under a skeleton.
+  if ((workspaceId || folderId) && loadError && workspaces.length === 0) {
+    return (
+      <div className="mx-auto w-full max-w-[1180px] px-4 pb-12 pt-5 sm:px-6 sm:pt-6">
+        <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>
+        <LoadError
+          className="mt-10"
+          onRetry={() => {
+            setLoading(true);
+            void load();
+          }}
+          retrying={loading}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={cn("mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-4 pb-12 pt-5 sm:px-6 sm:pt-6 lg:flex-row", workspaceId && "gap-8 lg:gap-10")}>

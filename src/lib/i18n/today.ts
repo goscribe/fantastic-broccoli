@@ -46,6 +46,8 @@ const english = {
   "today.weekToggle": "This week's plan",
   "today.loadError": "We couldn't load your subjects.",
   "today.retry": "Try again",
+  "today.loadErrorTitle": "That didn't load",
+  "today.loadErrorBody": "Your subjects and progress are safe. Check your connection and try again.",
   "today.startFailed": "Couldn't start that. Try again.",
   "today.sessionLoadError": "We couldn't open this session.",
 };
