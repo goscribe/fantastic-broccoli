@@ -12,7 +12,7 @@ export default function CourseSubjectPage() {
   const { workspaceId } = useParams<{ workspaceId: string }>();
   return (
     <div className="flex-1 bg-white">
-      <div className="mx-auto w-full max-w-[640px] px-4 pb-12 pt-6 sm:px-6">
+      <div className="mx-auto w-full max-w-[760px] px-4 pb-12 pt-6 sm:px-6">
         <Link href="/courses" className="text-[12px] font-semibold text-faint hover:text-accent">
           ← {t("course.backCourses")}
         </Link>

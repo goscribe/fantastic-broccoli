@@ -54,7 +54,8 @@ import "@/lib/i18n/mistakes";
 import {
   ActivityRewardCard,
   REWARD_MS,
-  SessionProgressHeader,
+  SessionStepBar,
+  SessionStepLabel,
   remainingMinutes,
   type ActivityReward,
 } from "@/components/session/session-progress";
@@ -922,37 +923,39 @@ export default function SessionDetailPage() {
     return (
       <div className="flex h-dvh min-h-0 flex-1 overflow-hidden bg-background">
         <div className="relative flex min-w-0 flex-1 flex-col">
-          <div className="flex items-center gap-2 px-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:gap-5 sm:px-10 sm:pt-5">
-            <button
-              type="button"
-              onClick={() => router.push(`/workspace/${workspaceId}`)}
-              aria-label={t("session.backToWorkspace")}
-              className="grid size-11 shrink-0 place-items-center rounded-xl text-faint hover:bg-muted hover:text-foreground"
-            >
-              <X className="size-[22px]" />
-            </button>
-            <SessionProgressHeader
-              activities={activities}
-              activeIndex={activeIndex}
-              onSelect={goToIndex}
-            />
-            {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
-            {planReady && !copilotOpen && (
-              <CopilotTrigger compact onClick={() => setCopilotOpen(true)} />
-            )}
-            <button
-              type="button"
-              onClick={() => setShowComments(!showComments)}
-              aria-label={t("session.sessionNotes")}
-              className="relative grid size-11 shrink-0 place-items-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
-            >
-              <MessageSquare className="size-4" />
-              {panelCount > 0 && (
-                <span className="absolute right-1 top-1 grid size-3.5 place-items-center rounded-full bg-accent text-[9px] font-bold text-accent-foreground">
-                  {panelCount}
-                </span>
-              )}
-            </button>
+          {/* The top bar sits in the same column as the content under it (same gutters, same max width), so the step bar and the question share their edges. */}
+          <div className="px-4 pt-[max(0.5rem,env(safe-area-inset-top))] sm:px-10 sm:pt-4">
+            <div className={cn("mx-auto w-full", activeActivity ? "max-w-3xl" : "max-w-2xl")}>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => router.push(`/workspace/${workspaceId}`)}
+                  aria-label={t("session.backToWorkspace")}
+                  className="-ml-3 grid size-11 shrink-0 place-items-center rounded-full text-faint hover:bg-muted hover:text-foreground"
+                >
+                  <X className="size-[22px]" />
+                </button>
+                <SessionStepLabel activities={activities} activeIndex={activeIndex} className="flex-1" />
+                {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
+                {planReady && !copilotOpen && (
+                  <CopilotTrigger compact onClick={() => setCopilotOpen(true)} />
+                )}
+                <button
+                  type="button"
+                  onClick={() => setShowComments(!showComments)}
+                  aria-label={t("session.sessionNotes")}
+                  className="relative -mr-3 grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
+                >
+                  <MessageSquare className="size-4" />
+                  {panelCount > 0 && (
+                    <span className="absolute right-1 top-1 grid size-3.5 place-items-center rounded-full bg-accent text-[9px] font-bold text-accent-foreground">
+                      {panelCount}
+                    </span>
+                  )}
+                </button>
+              </div>
+              <SessionStepBar activities={activities} activeIndex={activeIndex} onSelect={goToIndex} />
+            </div>
           </div>
 
           <div
@@ -963,9 +966,9 @@ export default function SessionDetailPage() {
               navDirection === "back" ? "animate-slide-in-left" : "animate-slide-in-right",
             )}
           >
-            <div className="mx-auto w-full max-w-3xl">
+            <div className={cn("mx-auto w-full", activeActivity ? "max-w-3xl" : "max-w-2xl")}>
               {showExtendPrompt && (
-                <div className="mb-5 flex flex-wrap items-center gap-3 rounded-2xl border border-accent/30 bg-accent-soft/60 px-5 py-4 animate-fade-up">
+                <div className="mb-5 flex flex-wrap items-center gap-3 rounded-[22px] bg-muted px-5 py-4 animate-fade-up">
                   <div className="min-w-56 flex-1">
                     <p className="text-sm font-semibold">{t("session.extendTitle")}</p>
                     <p className="mt-0.5 text-xs text-muted-foreground">
@@ -992,7 +995,7 @@ export default function SessionDetailPage() {
               {activeActivity ? (
                 <>
                   <div className="flex flex-wrap items-center justify-between gap-3">
-                    <span data-scroll-line className="inline-flex items-center rounded-lg bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent-dim">
+                    <span data-scroll-line className="inline-flex items-center text-[13px] font-bold text-muted-foreground">
                       {[t(ACTIVITY_TYPE_LABELS[activeActivity.type] ?? "session.typeActivity"), t(`session.phase${phaseOf(activeActivity.type)}`)].filter((v, i, arr) => arr.indexOf(v) === i).join(" · ")}
                     </span>
                   </div>
@@ -1010,19 +1013,21 @@ export default function SessionDetailPage() {
                   </ContentRepairProvider>
                 </>
               ) : (
-                <SessionDebrief sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
+                <SessionDebrief activities={activities} sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
               )}
             </div>
           </div>
 
           {activeActivity && (
-            <div className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between gap-2 border-t border-border bg-card/95 px-4 pb-[max(0.625rem,env(safe-area-inset-bottom))] pt-2.5 backdrop-blur sm:gap-3 sm:px-10 sm:py-3">
+            <div className="absolute inset-x-0 bottom-0 z-20 border-t border-border bg-card/95 px-4 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur sm:px-10 sm:py-2.5">
+            {/* Quiet text buttons, in the content's own column so Back and Next line up with it. */}
+            <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-2 sm:gap-3">
               <button
                 type="button"
                 disabled={activeIndex === 0}
                 onClick={() => goToIndex(activeIndex - 1)}
                 aria-label={t("session.back")}
-                className="inline-flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-xl border border-border px-3 text-[14px] font-semibold hover:bg-muted disabled:opacity-40 sm:px-4"
+                className="-ml-3 inline-flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-[14px] font-bold hover:bg-muted disabled:opacity-40 sm:-ml-4 sm:px-4"
               >
                 <ArrowLeft className="size-4" />
                 <span className="max-[380px]:sr-only">{t("session.back")}</span>
@@ -1031,7 +1036,7 @@ export default function SessionDetailPage() {
                 <button
                   type="button"
                   onClick={() => goToNext(true)}
-                  className="inline-flex h-11 items-center gap-1.5 rounded-xl px-3 text-[14px] font-semibold text-muted-foreground hover:bg-muted sm:px-4"
+                  className="inline-flex h-11 items-center gap-1.5 rounded-full px-3 text-[14px] font-bold text-muted-foreground hover:bg-muted sm:px-4"
                 >
                   <SkipForward className="size-4" />
                   {t("session.skip")}
@@ -1039,12 +1044,13 @@ export default function SessionDetailPage() {
                 <button
                   type="button"
                   onClick={() => goToIndex(activeIndex + 1)}
-                  className="inline-flex h-11 items-center gap-1.5 rounded-xl border border-border px-4 text-[14px] font-semibold hover:bg-muted"
+                  className="-mr-4 inline-flex h-11 items-center gap-1.5 rounded-full px-4 text-[14px] font-bold hover:bg-muted"
                 >
                   {t("session.next")}
                   <ArrowRight className="size-4" />
                 </button>
               </div>
+            </div>
             </div>
           )}
 

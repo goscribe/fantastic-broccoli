@@ -25,6 +25,7 @@ function MistakesPageInner() {
         <PageHeader
           back={workspaceId ? { href: `/workspace/${workspaceId}`, label: subject?.title ?? t("mistakes.allSubjects") } : undefined}
           title={t("mistakes.title")}
+          mascot="think"
           subtitle={subject ? t("mistakes.subjectSubtitle").replace("{subject}", subject.title) : t("mistakes.subtitle")}
         />
         <MistakesView

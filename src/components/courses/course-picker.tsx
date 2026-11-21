@@ -14,6 +14,7 @@ import {
 } from "@/lib/api/courses";
 import { BOARD_LABEL, groupCourses, masteryPercent, unitTitle, unitsForLevel } from "@/lib/courses";
 import { cn } from "@/lib/utils";
+import { SubjectBand, SubjectTile } from "@/components/learn/subject-tile";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
 import "@/lib/i18n/notes";
@@ -128,7 +129,7 @@ export function CoursePicker({
           </button>
         )}
         <div className="min-w-0">
-          <h2 className="text-[15px] font-semibold leading-tight">{heading}</h2>
+          <h2 className="text-[18px] font-extrabold leading-tight">{heading}</h2>
           {step !== "course" && crumbs.length > 0 && (
             <p className="truncate text-[12.5px] text-faint">
               {crumbs.join(" › ")}
@@ -148,7 +149,7 @@ export function CoursePicker({
       )}
 
       {step === "course" && (
-        <div className="mt-3 flex flex-col gap-4">
+        <div className="mt-3 flex flex-col gap-6">
           {!courses && !failed && (
             <div className="flex flex-col gap-2" aria-busy="true">
               {[0, 1, 2, 3].map((i) => (
@@ -159,42 +160,50 @@ export function CoursePicker({
           {courses &&
             groupCourses(courses).map((group) => (
               <section key={group.board}>
-                <h3 className="mb-1.5 text-[12px] font-semibold uppercase tracking-wide text-faint">
+                <h3 className="mb-2 text-[14px] font-extrabold text-foreground">
                   {BOARD_LABEL[group.board]}
                 </h3>
-                <ul className="flex flex-col gap-1.5">
+                {/* Each course is a tile in its subject's colour, so the catalog reads at a glance. */}
+                <ul className="grid gap-2.5 sm:grid-cols-2">
                   {group.courses.map((c) => (
                     <li key={c.id}>
-                      <button
-                        type="button"
+                      <SubjectTile
+                        row
+                        match={c.subject || c.title}
+                        title={c.title}
+                        sub={
+                          <>
+                            {t("course.topicCount").replace("{count}", String(c.topicCount))}
+                            {enrolledCourseIds?.includes(c.id) ? ` · ${t("course.inYourCourses")}` : ""}
+                          </>
+                        }
                         onClick={() => chooseCourse(c.id)}
                         disabled={!!loadingCourse}
-                        className={row}
-                      >
-                        <span className="min-w-0 flex-1">
-                          <span className="block text-[14.5px] font-semibold leading-snug">{c.title}</span>
-                          <span className="block text-[12.5px] text-faint">
-                            {c.boardName.includes(c.qualification) ? c.boardName : `${c.boardName} · ${c.qualification}`} ·{" "}
-                            {t("course.topicCount").replace("{count}", String(c.topicCount))}
-                          </span>
-                        </span>
-                        {enrolledCourseIds?.includes(c.id) && (
-                          <span className="hidden shrink-0 rounded-full bg-accent-soft px-2 py-0.5 text-[11.5px] font-semibold text-accent sm:inline">
-                            {t("course.inYourCourses")}
-                          </span>
-                        )}
-                        {loadingCourse === c.id ? (
-                          <Loader2 className="size-4 shrink-0 animate-spin text-accent" />
-                        ) : (
-                          <ChevronRight className="size-4 shrink-0 text-faint" />
-                        )}
-                      </button>
+                        className={cn("h-full", loadingCourse && loadingCourse !== c.id && "opacity-60")}
+                        trailing={
+                          loadingCourse === c.id ? (
+                            <span className="absolute right-3 top-3 grid size-7 place-items-center rounded-full bg-white">
+                              <Loader2 className="size-4 animate-spin text-[var(--tile-a)]" />
+                            </span>
+                          ) : undefined
+                        }
+                      />
                     </li>
                   ))}
                 </ul>
               </section>
             ))}
         </div>
+      )}
+
+      {course && step !== "course" && (
+        <SubjectBand match={course.subject || course.title} className="mt-3 flex min-h-[92px] flex-col justify-center !rounded-[var(--r-card)] px-5 py-4">
+          <p className="max-w-[68%] text-[19px] font-extrabold leading-tight">{course.title}</p>
+          <p className="subject-tile__sub mt-0.5 max-w-[68%] text-[13px] font-semibold">
+            {course.boardName}
+            {level && course.levels?.length ? ` · ${level}` : ""}
+          </p>
+        </SubjectBand>
       )}
 
       {step === "level" && course && (
@@ -297,7 +306,7 @@ export function TopicRow({
   const { t } = useI18n();
   const pct = masteryPercent(progress?.mastery);
   return (
-    <div className={cn("rounded-xl border bg-card transition-colors", open ? "border-accent" : "border-border")}>
+    <div className={cn("rounded-2xl border bg-card transition-colors", open ? "border-border-strong" : "border-border hover:border-border-strong")}>
       <button
         type="button"
         onClick={onToggle}
@@ -328,7 +337,7 @@ export function TopicRow({
         <ChevronRight className={cn("size-4 shrink-0 text-faint transition-transform", open && "rotate-90")} />
       </button>
       {open && (
-        <div className="border-t border-border px-3.5 pb-3.5 pt-3">
+        <div className="px-3.5 pb-3.5 pt-1">
           <p className="text-[12px] font-semibold text-faint">{t("course.youllPractise")}</p>
           <ul className="mt-1.5 flex flex-col gap-1">
             {topic.objectives.map((o) => (

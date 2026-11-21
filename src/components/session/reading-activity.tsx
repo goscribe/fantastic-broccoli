@@ -1,5 +1,7 @@
 "use client";
 
+import { useNewUi } from "@/lib/new-ui";
+import { PlayActions, PlayPrimary } from "@/components/session/play-ui";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ReadingContent,
@@ -286,10 +288,11 @@ function ListView({ items, ordered }: { items: string[]; ordered?: boolean }) {
  * sentence, so it is always shown (a folded card read as an empty box).
  */
 function CalloutView({ callout }: { callout: Callout }) {
+  const newUi = useNewUi();
   // Never an empty card (a label with nothing under it).
   if (calloutIsEmpty(callout)) return null;
   const label = (
-    <span className="block text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+    <span className={newUi ? "block text-[12.5px] font-extrabold text-muted-foreground" : "block text-[11px] font-semibold uppercase tracking-wide text-muted-foreground"}>
       {callout.label}
     </span>
   );
@@ -315,7 +318,8 @@ function CalloutView({ callout }: { callout: Callout }) {
     );
   }
   return (
-    <div className="rounded-xl border border-border bg-card px-4 py-3 space-y-1.5">
+    // Redesign: an aside marked by a bar down its left, on the page; not a box inside the reading.
+    <div className={newUi ? "space-y-1 border-l-[3px] border-[var(--edge)] py-0.5 pl-4" : "rounded-xl border border-border bg-card px-4 py-3 space-y-1.5"}>
       {label}
       {body}
     </div>
@@ -326,13 +330,14 @@ function CalloutView({ callout }: { callout: Callout }) {
 function QuickCheck({ check }: { check: ReadingCheck }) {
   const { t } = useI18n();
   const [picked, setPicked] = useState<number | null>(null);
+  const newUi = useNewUi();
   const correct = picked === check.correctIndex;
   return (
-    <div className="rounded-xl border border-border bg-card px-4 py-3 space-y-2.5">
-      <span className="block text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+    <div className={newUi ? "space-y-3 py-1" : "rounded-xl border border-border bg-card px-4 py-3 space-y-2.5"}>
+      <span className={newUi ? "block text-[12.5px] font-extrabold text-muted-foreground" : "block text-[11px] font-semibold uppercase tracking-wide text-muted-foreground"}>
         {t("session.quickCheck")}
       </span>
-      <p className={cn(BODY_TEXT, "font-medium")}>
+      <p className={cn(BODY_TEXT, newUi ? "font-extrabold" : "font-medium")}>
         <RichText text={check.question} />
       </p>
       <div className="grid gap-2">
@@ -342,21 +347,32 @@ function QuickCheck({ check }: { check: ReadingCheck }) {
             type="button"
             disabled={correct}
             onClick={() => setPicked(i)}
-            className={cn(
-              "min-h-[44px] w-full rounded-lg border px-3 py-2 text-left text-[15px] transition-colors",
-              picked === i
-                ? i === check.correctIndex
-                  ? "border-energy bg-energy/10"
-                  : "border-rose bg-rose/10"
-                : "border-border hover:bg-muted/50",
-            )}
+            className={
+              newUi
+                ? cn(
+                    "min-h-[52px] w-full touch-manipulation rounded-[26px] px-5 py-2.5 text-left text-[15.5px] font-semibold ring-inset transition-[background-color,box-shadow,transform] duration-150 active:scale-[0.99] disabled:active:scale-100 motion-reduce:transition-none",
+                    picked === i
+                      ? i === check.correctIndex
+                        ? "life-pop bg-emerald-50 text-emerald-900 ring-2 ring-emerald-500"
+                        : "life-shake bg-rose-50 text-rose-900 ring-2 ring-rose-400"
+                      : "bg-muted hover:bg-[var(--edge)]",
+                  )
+                : cn(
+                    "min-h-[44px] w-full rounded-lg border px-3 py-2 text-left text-[15px] transition-colors",
+                    picked === i
+                      ? i === check.correctIndex
+                        ? "border-energy bg-energy/10"
+                        : "border-rose bg-rose/10"
+                      : "border-border hover:bg-muted/50",
+                  )
+            }
           >
             <RichText text={option} />
           </button>
         ))}
       </div>
       {picked !== null && (
-        <p className="text-[14px] leading-[1.55]" role="status">
+        <p className={newUi ? cn("life-rise text-[15px] font-semibold leading-[1.55]", correct ? "text-emerald-800" : "text-foreground/80") : "text-[14px] leading-[1.55]"} role="status">
           <RichText text={correct ? check.feedbackCorrect : check.feedbackWrong} />
         </p>
       )}
@@ -443,6 +459,7 @@ function SectionHeading({
 }) {
   const section = info.headingIdx.indexOf(index);
   const top = block.level <= 2;
+  const newUi = useNewUi();
   return (
     <>
       {top &&
@@ -454,8 +471,8 @@ function SectionHeading({
       )}
       <h3
         className={cn(
-          "font-semibold tracking-tight",
-          top ? "text-lg pt-2" : "text-base pt-3",
+          newUi ? "font-extrabold tracking-tight" : "font-semibold tracking-tight",
+          top ? (newUi ? "pt-2 text-[21px]" : "text-lg pt-2") : newUi ? "pt-3 text-[17.5px]" : "text-base pt-3",
         )}
       >
         <MathText text={block.text} />
@@ -651,6 +668,7 @@ export function ReadingActivity({
   onHighlightsChange,
 }: ReadingActivityProps) {
   const { t } = useI18n();
+  const newUi = useNewUi();
   const containerRef = useRef<HTMLDivElement>(null);
   const [highlights, setHighlights] = useState<Highlight[]>(() =>
     (initialHighlights ?? []).map(fromPersisted),
@@ -768,6 +786,10 @@ export function ReadingActivity({
 
   return (
     <div className="space-y-4">
+      {newUi ? (
+        // One quiet line, like the other activities' "Question 1 of 5"; no icons.
+        <p data-scroll-line className="text-[13px] font-semibold text-muted-foreground max-sm:hidden">{t("session.selectToHighlight")}</p>
+      ) : (
       <div className="flex items-center justify-between text-muted-foreground">
         <div className="flex items-center gap-2">
           <BookOpen className="h-4 w-4" />
@@ -780,11 +802,12 @@ export function ReadingActivity({
           {t("session.selectToHighlight")}
         </span>
       </div>
+      )}
 
       <div
         ref={containerRef}
         onMouseUp={handleMouseUp}
-        className="relative mx-auto max-w-[75ch] space-y-5 select-text"
+        className={cn("relative space-y-5 select-text", newUi ? "max-w-[70ch]" : "mx-auto max-w-[75ch]")}
       >
         <SourceBadge content={content} />
         {parsedBlocks.map((block, i) => {
@@ -899,11 +922,19 @@ export function ReadingActivity({
         )}
       </div>
 
+      {newUi ? (
+        <PlayActions className="pt-2">
+          <PlayPrimary onClick={onComplete}>
+            {t("session.doneReading")} <ArrowRight className="ml-1.5 size-4" />
+          </PlayPrimary>
+        </PlayActions>
+      ) : (
       <div className="flex justify-end pt-2">
         <Button variant="primary" size="sm" onClick={onComplete}>
           {t("session.doneReading")} <ArrowRight className="h-3 w-3 ml-1" />
         </Button>
       </div>
+      )}
     </div>
   );
 }

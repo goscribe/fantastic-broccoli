@@ -29,14 +29,14 @@ export const STATE_KEY: Record<MistakeState, string> = {
   STILL_INCORRECT: "mistakes.stateStill",
 };
 const STATE_FILL: Record<MistakeState, string> = {
-  STILL_INCORRECT: "bg-rose",
-  NEVER_CORRECTED: "bg-amber",
-  CORRECTED: "bg-accent",
+  STILL_INCORRECT: "bg-rose-500",
+  NEVER_CORRECTED: "bg-border-strong",
+  CORRECTED: "bg-emerald-500",
 };
 const STATE_BADGE: Record<MistakeState, string> = {
-  STILL_INCORRECT: "bg-rose/12 text-[#be123c]",
-  NEVER_CORRECTED: "bg-amber/15 text-[#a16207]",
-  CORRECTED: "bg-accent-soft text-accent-dim",
+  STILL_INCORRECT: "text-rose-700",
+  NEVER_CORRECTED: "text-muted-foreground",
+  CORRECTED: "text-emerald-700",
 };
 const KIND_KEY: Record<string, string> = {
   mcq: "mistakes.kindMcq",
@@ -81,7 +81,7 @@ function AnswerRow({ ok, label, children }: { ok: boolean; label: string; childr
       <span
         className={cn(
           "mt-0.5 grid size-5 shrink-0 place-items-center rounded-full",
-          ok ? "bg-success/15 text-success" : "bg-rose/15 text-[#be123c]",
+          ok ? "bg-emerald-600 text-white" : "bg-rose-500 text-white",
         )}
         aria-hidden
       >
@@ -103,18 +103,18 @@ function MistakeCard({ m, showSubject }: { m: Mistake; showSubject: boolean }) {
     m.yourAnswer === "(drawing)" ? t("mistakes.drawing") : m.yourAnswer?.trim() ? m.yourAnswer : null;
   const dateFmt = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short" });
   return (
-    <li className="rounded-2xl border border-border bg-card p-4 sm:p-5">
+    <li className="life-card p-4 sm:p-5">
       <div className="flex items-center justify-between gap-3">
         <p className="min-w-0 truncate text-[12.5px] font-medium text-muted-foreground">
           {t(KIND_KEY[m.kind] ?? "mistakes.kindMcq")} · {m.label}
           {showSubject && m.workspaceTitle !== m.label ? ` · ${m.workspaceTitle}` : ""}
         </p>
-        <span className={cn("shrink-0 rounded-full px-2.5 py-0.5 text-[11.5px] font-semibold", STATE_BADGE[m.state])}>
+        <span className={cn("shrink-0 text-[12.5px] font-bold", STATE_BADGE[m.state])}>
           {t(STATE_KEY[m.state])}
         </span>
       </div>
 
-      <div className="mt-2.5 text-[15px] font-semibold leading-6">
+      <div className="mt-2 text-[16.5px] font-extrabold leading-snug">
         {m.kind === "cloze" ? (
           <ClozePassage m={m} />
         ) : m.kind === "mcq" && m.detail.figures?.length ? (
@@ -148,13 +148,13 @@ function MistakeCard({ m, showSubject }: { m: Mistake; showSubject: boolean }) {
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
-            className="inline-flex items-center gap-1 text-[12.5px] font-semibold text-accent-dim hover:underline"
+            className="-my-2 inline-flex min-h-10 items-center gap-1 text-[13.5px] font-bold text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground"
           >
             {t("mistakes.why")}
             <ChevronDown className={cn("size-3.5 transition-transform", open && "rotate-180")} />
           </button>
           {open && (
-            <div className="mt-1.5 rounded-xl bg-muted/60 px-3.5 py-2.5 text-[13.5px] leading-6 text-muted-foreground">
+            <div className="life-rise mt-2 border-l-[3px] border-[var(--edge)] pl-4 text-[14.5px] leading-6 text-foreground/80">
               <MathText text={explanation} />
             </div>
           )}
@@ -242,12 +242,12 @@ export function MistakesView({
   const chip = (active: boolean) =>
     cn(
       "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-[13px] font-semibold transition-colors",
-      active ? "border-accent bg-accent-soft text-accent-dim" : "border-border bg-card text-muted-foreground hover:bg-muted",
+      active ? "border-foreground bg-foreground text-background" : "border-transparent bg-muted text-foreground hover:bg-[var(--edge)]",
     );
 
   if (summary && summary.total === 0) {
     return (
-      <div className="rounded-3xl border border-border bg-card px-6 py-12 text-center">
+      <div className="px-6 py-10 text-center">
         <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob mx-auto h-24 w-auto select-none" />
         <p className="mt-3 text-[15px] font-semibold">{t("mistakes.emptyTitle")}</p>
         <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">{t("mistakes.empty")}</p>
@@ -257,14 +257,14 @@ export function MistakesView({
 
   return (
     <div className="space-y-5">
-      <section className="rounded-3xl border border-border bg-card p-5 sm:p-6">
+      <section>
         {summary ? (
           <>
             <MistakeSummaryBar counts={summary.counts} />
             {summary.open > 0 ? (
               <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
                 <Link href={practiceHref({ workspaceId: workspaceId ?? practiceSubject?.workspaceId })} className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full text-[15px] sm:w-auto">
+                  <Button size="lg" className="btn-chunky h-[52px] w-full rounded-[var(--r-button)] px-7 text-[16px] font-extrabold sm:w-auto">
                     <Play className="mr-2 size-4 fill-current" />
                     {t("mistakes.practice")}
                   </Button>
@@ -278,8 +278,8 @@ export function MistakesView({
                 </span>
               </div>
             ) : (
-              <div className="mt-4 flex items-center gap-3 rounded-2xl bg-accent-soft/60 px-4 py-3">
-                <Check className="size-5 shrink-0 text-accent" strokeWidth={3} />
+              <div className="mt-4 flex items-center gap-3">
+                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-emerald-600 text-white"><Check className="size-4" strokeWidth={3.5} /></span>
                 <div>
                   <p className="text-[14px] font-semibold">{t("mistakes.allFixedTitle")}</p>
                   <p className="text-[12.5px] text-muted-foreground">{t("mistakes.allFixed")}</p>
@@ -339,7 +339,7 @@ export function MistakesView({
           ))}
         </div>
       ) : items.length === 0 ? (
-        <p className="rounded-2xl border border-dashed border-border px-4 py-8 text-center text-sm text-muted-foreground">
+        <p className="py-8 text-[15px] font-semibold text-muted-foreground">
           {filter === "open" ? t("mistakes.allFixed") : t("mistakes.noneCorrected")}
         </p>
       ) : (

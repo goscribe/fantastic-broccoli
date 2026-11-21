@@ -104,7 +104,7 @@ function catFor(image: string): string {
   return CAT_FOR_SCENE[name] ?? "/design/cat3-think.webp";
 }
 
-/** Empty state on the design system: soft lavender card, one cat pose, left-aligned copy. */
+/** Empty state: one cat pose and left-aligned copy, on the page (no card around it). */
 export function EmptyScene({
   image,
   children,
@@ -118,7 +118,7 @@ export function EmptyScene({
   return (
     <div
       className={cn(
-        "flex flex-col-reverse items-start gap-4 rounded-2xl border border-border bg-accent-soft/40 px-6 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-8",
+        "flex flex-col-reverse items-start gap-4 py-6 sm:flex-row sm:items-center sm:justify-between",
         className,
       )}
     >

@@ -24,17 +24,17 @@ export default function CoursesPage() {
 
   return (
     <div className="flex-1 bg-white">
-      <div className="mx-auto w-full max-w-[640px] px-4 pb-12 pt-6 sm:px-6">
+      <div className="mx-auto w-full max-w-[760px] px-4 pb-12 pt-6 sm:px-6">
         <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">
           ← {t("course.backHome")}
         </Link>
-        <h1 className="mt-1 text-[24px] font-bold leading-tight tracking-tight">{t("course.pageTitle")}</h1>
+        <h1 className="mt-1 text-[28px] font-extrabold leading-tight">{t("course.pageTitle")}</h1>
         <p className="mt-1 text-[14px] text-muted-foreground">{t("course.pageSubtitle")}</p>
 
         {mine && mine.length > 0 && (
           <section className="mt-6">
-            <h2 className="mb-2 text-[15px] font-semibold">{t("course.yourCourses")}</h2>
-            <div className="flex flex-col gap-2">
+            <h2 className="mb-3 text-[18px] font-extrabold">{t("course.yourCourses")}</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
               {mine.map((c) => (
                 <CourseProgressRow key={c.workspaceId} c={c} />
               ))}

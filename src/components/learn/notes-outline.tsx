@@ -104,18 +104,15 @@ export function NotesOutline({
       </div>
 
       {loading ? (
-        <div className="mt-3 space-y-2 rounded-2xl border border-border bg-card p-4">
+        <div className="mt-3 space-y-2">
           <Skeleton className="h-4 w-1/3" />
           <Skeleton className="h-3 w-2/3" />
         </div>
       ) : !outline ? (
-        <div className="mt-3 flex flex-col items-start gap-3 rounded-2xl border border-border bg-card px-5 py-4 sm:flex-row sm:items-center">
-          <div className="min-w-0 flex-1">
-            <div className="text-[14px] font-semibold">Notes all over the place?</div>
-            <p className="mt-0.5 text-[13px] text-muted-foreground">
-              Scribe reads every file in this subject and regroups it by topic, with the key points of each. Your files stay as they are.
-            </p>
-          </div>
+        <div className="mt-1.5 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-6">
+          <p className="min-w-0 flex-1 text-[13.5px] leading-relaxed text-muted-foreground">
+            Scribe reads every file in this subject and regroups it by topic, with the key points of each. Your files stay as they are.
+          </p>
           <button
             type="button"
             onClick={() => void run()}
@@ -128,18 +125,18 @@ export function NotesOutline({
         </div>
       ) : (
         <>
-          <div className="mt-3 divide-y divide-border rounded-2xl border border-border bg-card">
+          <div className="mt-3 flex flex-col gap-2.5">
             {outline.topics.map((t, i) => {
               const expanded = open === t.title;
               return (
-                <div key={t.title}>
+                <div key={t.title} className="life-card">
                   <button
                     type="button"
                     onClick={() => setOpen(expanded ? null : t.title)}
                     aria-expanded={expanded}
-                    className="flex w-full items-center gap-3 px-4 py-3 text-left"
+                    className="flex w-full items-center gap-3 px-4 py-3.5 text-left"
                   >
-                    <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-accent-soft text-[12px] font-bold text-accent">{i + 1}</span>
+                    <span className="w-5 shrink-0 text-[13px] font-bold tabular-nums text-faint">{i + 1}</span>
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-[14px] font-semibold">{t.title}</span>
                       {t.summary && <span className={cn("block text-[12.5px] text-muted-foreground", !expanded && "truncate")}>{t.summary}</span>}
@@ -147,7 +144,7 @@ export function NotesOutline({
                     <ChevronDown className={cn("size-4 shrink-0 text-faint transition-transform", expanded && "rotate-180")} />
                   </button>
                   {expanded && (
-                    <div className="px-4 pb-4 pl-[56px]">
+                    <div className="px-4 pb-4 pl-12">
                       <ul className="list-disc space-y-1.5 pl-4 text-[13.5px] leading-relaxed marker:text-faint">
                         {t.points.map((p, j) => (
                           <li key={j}>

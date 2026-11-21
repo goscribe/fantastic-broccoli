@@ -561,7 +561,7 @@ export function Copilot({
                   key={s}
                   type="button"
                   onClick={() => send(s)}
-                  className="block w-full text-left text-xs px-3.5 py-2.5 rounded-xl border border-border bg-muted/40 text-muted-foreground hover:text-foreground hover:border-border-strong"
+                  className="block w-full text-left text-xs px-4 py-2.5 rounded-full bg-muted text-muted-foreground hover:text-foreground hover:bg-border"
                 >
                   {s}
                 </button>
@@ -692,7 +692,7 @@ export function CopilotTrigger({ onClick, compact = false }: { onClick: () => vo
         onClick={onClick}
         aria-label={t("misc.askScribe")}
         title={t("misc.askScribe")}
-        className="grid size-11 shrink-0 place-items-center overflow-hidden rounded-xl bg-accent-soft hover:bg-muted sm:hidden"
+        className="grid size-11 shrink-0 place-items-center overflow-hidden rounded-full bg-accent-soft hover:bg-muted sm:hidden"
       >
         <Mascot pose="wave" className="mt-1.5 h-8" />
       </button>

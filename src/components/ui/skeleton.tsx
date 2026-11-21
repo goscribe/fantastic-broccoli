@@ -12,7 +12,7 @@ export function Skeleton({
     <div
       aria-hidden
       style={style}
-      className={cn("animate-pulse rounded-lg bg-muted", className)}
+      className={cn("skeleton animate-pulse rounded-lg bg-muted", className)}
     />
   );
 }

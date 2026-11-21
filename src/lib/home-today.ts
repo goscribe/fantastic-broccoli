@@ -14,6 +14,8 @@ export interface TodayInputs {
   openMistakes: number;
   /** Minutes one practice round takes (server value). */
   practiceMinutes: number;
+  /** Today already counts for the streak (the daily goal is met). */
+  doneToday?: boolean;
   /** Today's planner tasks still to do, in plan order. */
   planTasks: { id: string; status: string }[];
   workspaces: { id: string; materialCount: number }[];
@@ -33,7 +35,9 @@ export type TodayAction =
   | { kind: "upload" }
   | { kind: "mistakes"; count: number; minutes: number }
   | { kind: "plan"; taskId: string }
-  | { kind: "quick5"; workspaceId: string; resumeSessionId: string | null };
+  | { kind: "quick5"; workspaceId: string; resumeSessionId: string | null }
+  /** Goal met and nothing urgent: celebrate, and offer a bonus Quick 5. */
+  | { kind: "done"; workspaceId: string };
 
 const openActivity = (status: string) => status !== "completed" && status !== "skipped";
 
@@ -50,15 +54,17 @@ export function pickTodayAction(input: TodayInputs): TodayAction {
   }
   const task = input.planTasks.find((t) => t.status === "planned");
   if (task) return { kind: "plan", taskId: task.id };
+  const latestWs = () =>
+    [...input.sessions].sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0]?.workspaceId ??
+    input.workspaces.find((w) => w.materialCount > 0)?.id ??
+    input.workspaces[0].id;
+  if (input.doneToday) return { kind: "done", workspaceId: latestWs() };
   // An unfinished Quick 5 is the quickest win there is; otherwise build one in the subject with notes.
   const quick = input.sessions.find(
     (s) => s.quickStart && !s.generating && s.status !== "completed" && s.activities.some((a) => openActivity(a.status)),
   );
   if (quick) return { kind: "quick5", workspaceId: quick.workspaceId, resumeSessionId: quick.id };
-  const latest = [...input.sessions].sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0];
-  const withNotes = input.workspaces.find((w) => w.materialCount > 0);
-  const workspaceId = latest?.workspaceId ?? withNotes?.id ?? input.workspaces[0].id;
-  return { kind: "quick5", workspaceId, resumeSessionId: null };
+  return { kind: "quick5", workspaceId: latestWs(), resumeSessionId: null };
 }
 
 /**
@@ -77,4 +83,15 @@ export function pickResumable<S extends TodayInputs["sessions"][number]>(session
         s.activities.some((a) => !openActivity(a.status)) &&
         s.activities.some((a) => openActivity(a.status)),
     );
+}
+
+/** The line under the greeting, by state: what today looks like in one sentence. */
+export type GreetingMood = "new" | "done" | "streak" | "fix" | "start";
+
+export function greetingMood(input: { brandNew: boolean; doneToday: boolean; streak: number; openMistakes: number }): GreetingMood {
+  if (input.brandNew) return "new";
+  if (input.doneToday) return "done";
+  if (input.streak > 0) return "streak";
+  if (input.openMistakes > 0) return "fix";
+  return "start";
 }

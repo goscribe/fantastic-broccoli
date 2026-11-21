@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { CalendarDays, Loader2, Settings2, Upload, X } from "lucide-react";
+import { Loader2, Settings2, Upload, X } from "lucide-react";
 import { PlanSetupWizard } from "@/components/learn/plan-setup-wizard";
 import {
   fetchPlannerMessages,
@@ -339,7 +339,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
 
       {data && data.days.every((d) => d.slots.length === 0) && (
         <p className="mt-2 flex items-center gap-1.5 text-[12.5px] text-faint">
-          <CalendarDays className="size-3.5" /> Tell me when you&apos;re free and add a subject — the week fills itself in.
+          Tell me when you&apos;re free and add a subject — the week fills itself in.
         </p>
       )}
 
