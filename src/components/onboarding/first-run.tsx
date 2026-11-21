@@ -237,10 +237,10 @@ export function FirstRun({
     <div className="flex min-h-full w-full flex-col items-center bg-white px-4 pb-10 pt-8 sm:justify-center sm:px-6 sm:py-12">
       <div className="w-full max-w-[520px] animate-fade-up">
         <Image
-          src="/design/cat2-wave.png"
+          src="/design/cat3-wave.webp"
           alt=""
-          width={80}
-          height={85}
+          width={352}
+          height={400}
           priority
           className="cat-wiggle mx-auto h-[72px] w-auto sm:h-20"
         />

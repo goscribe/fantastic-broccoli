@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, CalendarCheck, Check, Flame, Loader2, Play, RotateCcw, Upload, Zap } from "lucide-react";
+import { ArrowRight, Loader2, Play } from "lucide-react";
 import { Mascot, type MascotPose } from "@/components/rewards/mascot";
 import { mistakesApi } from "@/lib/api/mistakes";
 import { fetchPlanToday } from "@/lib/api/exam-planner";
@@ -34,41 +34,27 @@ const POSE: Record<"mistakes" | "plan" | "quick5" | "done", MascotPose> = {
   quick5: "book",
   done: "trophy",
 };
-/** The hero's card: white, hairline, the illustrated scene inside it. */
+/** The hero's card: white, hairline, a calm colour field with the cat inside it. */
 const shell = "life-rise relative isolate overflow-hidden rounded-[var(--r-panel)] border border-border bg-white";
 
 /**
- * The hero's illustrated scene. The cat is NOT part of this image: it is the
- * <Mascot> placed over it (see HeroScene), so a redesigned mascot swaps in
- * without touching the background.
- */
-const HERO_SCENE = { src: "/design/hero/scene.svg", width: 1440, height: 960 };
-
-/**
- * Scene + mascot. Phones: a strip across the top that fades into the white
- * card, text below. From sm up: full-bleed behind the text, which sits on the
- * scene's pale left half (a white wash keeps it readable).
+ * The hero's backdrop: one soft lilac field and two large flat shapes, no
+ * scenery. The disc and the ground are sized and placed from the cat's own
+ * box, so they sit behind it at every width. Phones: a strip across the top
+ * that fades into the white card, text below. From sm up: full-bleed, white
+ * on the left where the text sits.
  */
 function HeroScene({ pose, motion }: { pose: MascotPose; motion: string }) {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[168px] sm:inset-0 sm:h-auto">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={HERO_SCENE.src}
-        alt=""
-        width={HERO_SCENE.width}
-        height={HERO_SCENE.height}
-        fetchPriority="high"
-        decoding="async"
-        className="size-full select-none object-cover object-[82%_46%] sm:object-[100%_62%]"
-      />
-      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent sm:hidden" />
-      <div className="absolute inset-0 hidden bg-[linear-gradient(90deg,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.6)_38%,rgba(255,255,255,0)_66%)] sm:block" />
-      <Mascot
-        pose={pose}
-        className={cn(motion, "absolute bottom-[14px] right-[17%] h-[104px] sm:bottom-[12%] sm:right-[11%] sm:h-[176px] lg:right-[13%]")}
-        priority
-      />
+    <div
+      aria-hidden
+      className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[168px] overflow-hidden sm:inset-0 sm:h-auto"
+    >
+      <div className="absolute bottom-[26px] right-[13%] h-[112px] sm:bottom-[15%] sm:right-[9%] sm:h-[184px] lg:right-[11%]">
+        <span className="hero-field__disc" />
+        <span className="hero-field__ground" />
+        <Mascot pose={pose} className={cn(motion, "h-full")} priority />
+      </div>
     </div>
   );
 }
@@ -133,7 +119,7 @@ export function TodayCard({
 
   if (action.kind === "loading") {
     return (
-      <div className={cn(shell, "px-5 pb-6 pt-[176px] sm:p-9")} aria-busy="true">
+      <div className={cn(shell, "px-5 pb-6 pt-[188px] sm:p-9")} aria-busy="true">
         <HeroScene pose="wave" motion="cat-bob" />
         <Greeting greeting={greeting} sub={greetingSub} />
         <Skeleton className="mt-6 h-3.5 w-16" />
@@ -146,7 +132,7 @@ export function TodayCard({
 
   if (action.kind === "upload") {
     return (
-      <section className={cn(shell, "px-5 pb-4 pt-[176px] sm:px-9 sm:pb-8 sm:pt-9")} aria-labelledby="today-title">
+      <section className={cn(shell, "px-5 pb-4 pt-[188px] sm:px-9 sm:pb-8 sm:pt-9")} aria-labelledby="today-title">
         <HeroScene pose="wave" motion="cat-wiggle" />
         <Greeting greeting={greeting} sub={greetingSub} />
         <div className={cn("relative sm:max-w-[460px]", greeting && "mt-5 sm:mt-7")}>
@@ -164,7 +150,7 @@ export function TodayCard({
           }}
           className={cn(primaryBtn, "relative mt-6 h-14 text-[17px] sm:max-w-[340px]")}
         >
-          {uploading ? <Loader2 className="size-5 animate-spin" /> : <Upload className="size-5" strokeWidth={2.5} />}
+          {uploading && <Loader2 className="size-5 animate-spin" />}
           {uploading ? t("today.uploading") : t("today.uploadCta")}
         </button>
         <Link
@@ -179,7 +165,6 @@ export function TodayCard({
 
   const wsTitle = (id: string) => workspaces.find((w) => w.id === id)?.title ?? "";
   let eyebrow: string;
-  let Icon = Zap;
   let title: string;
   let sub: string;
   let cta: string;
@@ -187,7 +172,6 @@ export function TodayCard({
   let resumeExclude: string | null = null;
 
   if (action.kind === "mistakes") {
-    Icon = RotateCcw;
     eyebrow = t("today.eyebrow");
     title = (action.count === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(action.count));
     sub = t("today.fixSub").replace("{m}", String(action.minutes));
@@ -199,7 +183,6 @@ export function TodayCard({
     };
   } else if (action.kind === "plan") {
     const task = openTasks.find((x) => x.id === action.taskId)!;
-    Icon = CalendarCheck;
     eyebrow = t("today.planEyebrow");
     title = taskTitle(task, t);
     sub = fill(t("today.planSub"), { subject: task.subject, m: fmtDuration(task.minutes, t) });
@@ -211,7 +194,6 @@ export function TodayCard({
     };
   } else if (action.kind === "done") {
     const { workspaceId } = action;
-    Icon = Check;
     eyebrow = t("today.streakSafe");
     title = t("today.doneTitle");
     sub = t("today.doneSub");
@@ -259,14 +241,13 @@ export function TodayCard({
   const pose = POSE[action.kind];
 
   return (
-    <section className={cn(shell, "px-5 pb-6 pt-[176px] sm:p-9", resume && "pb-3 sm:pb-5")} aria-labelledby="today-title">
+    <section className={cn(shell, "px-5 pb-6 pt-[188px] sm:p-9", resume && "pb-3 sm:pb-5")} aria-labelledby="today-title">
       <HeroScene pose={pose} motion="cat-peek" />
       <Greeting greeting={greeting} sub={greetingSub} />
       {/* One thing to do today: what it is, how long, one button. */}
-      <p className={cn("relative flex items-center gap-1.5 text-[13.5px] font-extrabold text-foreground", greeting && "mt-5 sm:mt-8")}>
-        <Icon className="size-4 shrink-0 text-accent" strokeWidth={2.5} />
-        <span>{eyebrow}</span>
-        {action.kind !== "done" && <span className="whitespace-nowrap font-bold text-foreground/60">· {dateLabel}</span>}
+      <p className={cn("relative text-[13.5px] font-extrabold text-accent-dim", greeting && "mt-5 sm:mt-8")}>
+        {eyebrow}
+        {action.kind !== "done" && <span className="whitespace-nowrap font-bold text-foreground/60"> · {dateLabel}</span>}
       </p>
       <h2 id="today-title" className="relative mt-1.5 text-[24px] font-extrabold leading-[1.15] sm:max-w-[440px] sm:text-[28px]">
         {title}
@@ -274,10 +255,7 @@ export function TodayCard({
       <p className="relative mt-1 text-[15.5px] leading-snug text-foreground/75 sm:max-w-[420px]">
         {sub}
         {action.kind !== "done" && !doneToday && (
-          <span className="ml-2 inline-flex items-center gap-1 whitespace-nowrap text-[13.5px] font-bold text-foreground/80">
-            <Flame className="size-4 text-[var(--flame)]" fill="currentColor" strokeWidth={1.5} />
-            {t("today.countsForStreak")}
-          </span>
+          <span className="whitespace-nowrap"> · {t("today.countsForStreak")}</span>
         )}
       </p>
       <button type="button" disabled={pending} onClick={() => void onPrimary()} className={cn(primaryBtn, "relative mt-4 h-14 text-[17px] sm:max-w-[340px]")}>

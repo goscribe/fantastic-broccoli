@@ -3,7 +3,7 @@
 import Image from "next/image";
 import "@/app/design/design.css";
 
-const FRAMES = ["/design/cat2-cheer.png", "/design/cat2-wave.png", "/design/cat2-flame.png", "/design/cat2-wave.png"];
+const FRAMES = ["/design/cat3-cheer.webp", "/design/cat3-wave.webp", "/design/cat3-flame.webp", "/design/cat3-wave.webp"];
 
 /** Boot splash while auth resolves: the cat dances (pose frames swap on the beat while it hops and sways) over a progress bar. */
 export function FullScreenLoader() {

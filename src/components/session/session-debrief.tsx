@@ -13,13 +13,9 @@ import { useCountUp } from "@/lib/use-count-up";
 import {
   Loader2,
   Play,
-  Flame,
   ArrowRight,
   ChevronDown,
   ChevronRight,
-  Layers,
-  MessageCircle,
-  RotateCcw,
 } from "lucide-react";
 import { Mascot } from "@/components/rewards/mascot";
 import { SubjectBand } from "@/components/learn/subject-tile";
@@ -74,13 +70,11 @@ function pickFullSession(
  * (flashcards from the same notes, a question to Copilot), one tap each.
  */
 function NextStep({
-  icon,
   title,
   sub,
   href,
   onClick,
 }: {
-  icon: ReactNode;
   title: string;
   sub: string;
   href?: string;
@@ -88,7 +82,6 @@ function NextStep({
 }) {
   const body = (
     <>
-      <span className="grid w-6 shrink-0 place-items-center text-foreground">{icon}</span>
       <span className="min-w-0 flex-1">
         <span className="block text-[14.5px] font-semibold leading-5 text-foreground">{title}</span>
         <span className="block text-[12.5px] leading-5 text-muted-foreground">{sub}</span>
@@ -440,8 +433,7 @@ export function SessionDebrief({
       )}
 
       {streakDays !== null && streakDays > 0 && (
-        <p className="mt-3 flex w-full items-center gap-1.5 px-1 text-left text-[13.5px] font-bold text-foreground">
-          <Flame className={cn("size-4 text-[var(--flame,#f0a645)]", streakLitDays !== null && "animate-streak-pop")} fill="currentColor" strokeWidth={1.6} />
+        <p className="mt-3 w-full px-1 text-left text-[13.5px] font-bold text-foreground">
           {t("rewards.streakDays").replace("{n}", String(streakDays))}
         </p>
       )}
@@ -452,7 +444,6 @@ export function SessionDebrief({
         {mistakes > 0 && (
           <div className="life-card life-press overflow-hidden text-left">
             <NextStep
-              icon={<RotateCcw className="size-[18px]" />}
               title={(mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes))}
               sub={t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)))}
               href={practiceHref({ sessionId })}
@@ -474,7 +465,6 @@ export function SessionDebrief({
           <div className="life-card divide-y divide-border overflow-hidden">
             {deck && workspaceId && (
               <NextStep
-                icon={<Layers className="size-[18px]" />}
                 title={t("habit.flashcardsTitle")}
                 sub={t("habit.flashcardsSub")
                   .replace("{n}", String(deck.cards))
@@ -484,7 +474,6 @@ export function SessionDebrief({
             )}
             {askRow && onAskCopilot && (
               <NextStep
-                icon={<MessageCircle className="size-[18px]" />}
                 title={askRow.title}
                 sub={askRow.sub}
                 onClick={() => onAskCopilot(askRow.prompt)}

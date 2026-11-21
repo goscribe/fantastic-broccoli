@@ -148,7 +148,7 @@ function EmptyPlan({ onAdd }: { onAdd: () => void }) {
   const { t } = useI18n();
   return (
     <div className="flex flex-col items-center rounded-3xl border border-border px-6 py-10 text-center sm:py-14">
-      <Image src="/design/cat2-book.png" alt="" width={120} height={120} unoptimized className="cat-bob h-28 w-auto" />
+      <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob h-28 w-auto" />
       <h2 className="mt-4 text-[20px] font-bold tracking-tight">{t("ep.empty.title")}</h2>
       <p className="mt-2 max-w-[460px] text-[14px] leading-relaxed text-muted-foreground">{t("ep.empty.body")}</p>
       <button type="button" onClick={onAdd} className="mt-6 inline-flex h-11 items-center gap-2 rounded-xl bg-accent px-5 text-[14.5px] font-semibold text-white hover:bg-accent-dim">
@@ -174,13 +174,13 @@ function TodayView({ data, starter, onOpenExams }: { data: PlanToday; starter: R
     : allDone
       ? t("ep.today.allDone")
       : t("ep.today.cat");
-  const cat = rest ? "cat2-sleep" : allDone ? "cat2-cheer" : "cat2-book";
+  const cat = rest ? "cat3-sleep" : allDone ? "cat3-cheer" : "cat3-book";
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
       <div className="flex min-w-0 flex-col gap-3">
         <div className="flex items-end gap-3">
-          <Image src={`/design/${cat}.png`} alt="" width={72} height={72} unoptimized className={cn("h-16 w-auto shrink-0", allDone ? "cat-cheer" : "cat-bob")} />
+          <Image src={`/design/${cat}.webp`} alt="" width={72} height={72} unoptimized className={cn("h-16 w-auto shrink-0", allDone ? "cat-cheer" : "cat-bob")} />
           <div className="relative mb-2 min-w-0 flex-1 rounded-2xl rounded-bl-md bg-accent-soft/70 px-4 py-3">
             {!rest && (
               <div className="text-[12px] font-semibold text-accent-dim">

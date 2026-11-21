@@ -62,10 +62,10 @@ export default function DueReviewPage() {
         {data && data.cards.length === 0 && (
           <div className="rounded-2xl border border-border bg-card px-6 py-12 text-center">
             <Image
-              src="/design/cat2-trophy.png"
+              src="/design/cat3-trophy.webp"
               alt=""
-              width={132}
-              height={160}
+              width={413}
+              height={400}
               className="cat-bob pointer-events-none mx-auto h-24 w-auto select-none"
             />
             <p className="mt-3 text-sm font-medium">{t("fc.allCaughtUp")}</p>

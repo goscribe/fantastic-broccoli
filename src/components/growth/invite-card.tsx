@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Check, Copy, Gift, Share2, Users } from "lucide-react";
+import { Check, Copy, Share2, Users } from "lucide-react";
 import {
   copyText,
   fetchReferralSummary,
@@ -115,9 +115,6 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
           className,
         )}
       >
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-dim">
-          <Gift className="size-[18px]" />
-        </span>
         <span className="min-w-0 flex-1">
           <span className="block text-[14.5px] font-semibold leading-5 text-foreground">{t("growth.inviteTitle")}</span>
           <span className="block text-[12.5px] leading-5 text-muted-foreground">{sub}</span>
@@ -136,9 +133,6 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
       className={cn("rounded-2xl border border-border bg-card p-4 sm:p-5", className)}
     >
       <div className="flex items-start gap-3.5">
-        <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-accent-soft text-accent">
-          <Gift className="size-6" />
-        </span>
         <div className="min-w-0">
           <h2 className="text-[16px] font-bold leading-snug tracking-tight">{t("growth.inviteTitle")}</h2>
           <p className="mt-1 text-[13px] leading-snug text-muted-foreground">{body}</p>

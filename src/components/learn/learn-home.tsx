@@ -12,7 +12,7 @@ import type { NotesTopic } from "@/lib/api/notes-outline";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowUp, CalendarDays, Check, ChevronDown, ChevronUp, FileText, Headphones, Layers, Loader2, NotebookText, Play, Plus, Presentation } from "lucide-react";
+import { ArrowUp, Check, ChevronDown, ChevronUp, FileText, Headphones, Loader2, NotebookText, Play, Presentation } from "lucide-react";
 import { useAuthUser } from "@/lib/api/auth";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { fetchStudySessions, fetchActivityCalendar, createStudySession } from "@/lib/api/study";
@@ -397,7 +397,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           }}
         >
           <div className="flex items-center gap-3">
-            <Image src="/design/cat2-wave.png" alt="" width={40} height={40} unoptimized className="cat-wiggle h-10 w-auto" />
+            <Image src="/design/cat3-wave.webp" alt="" width={352} height={400} unoptimized className="cat-wiggle h-10 w-auto" />
             <input
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
@@ -429,7 +429,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           </h2>
           <div className="flex items-center gap-3">
             <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-3 text-[12.5px] font-semibold hover:bg-accent-soft">
-              {uploading ? <Loader2 className="size-3.5 animate-spin" /> : <Plus className="size-3.5" />}
+              {uploading && <Loader2 className="size-3.5 animate-spin" />}
               Add material
             </button>
             {materials.length > 3 && (
@@ -472,7 +472,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           ))}
           {(expanded || (!loading && materials.length < 3)) && (
             <button type="button" onClick={() => fileRef.current?.click()} className="flex min-h-[140px] flex-col items-center justify-center gap-2 rounded-2xl border-2 sm:min-h-[200px] border-dashed border-border p-4 text-center hover:border-accent/50 hover:bg-accent-soft/40">
-              <Image src="/design/cat2-sleep.png" alt="" width={64} height={64} unoptimized className="cat-bob h-16 w-auto" />
+              <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-16 w-auto" />
               <div>
                 <div className="text-[14.5px] font-semibold">Add material</div>
                 <div className="mt-0.5 text-[12px] text-faint">PDF · slides · photos of notes</div>
@@ -537,10 +537,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                   onClick={() => setWeekOpen((v) => !v)}
                   className="life-card flex min-h-[52px] w-full items-center justify-between px-4 text-[15px] font-bold lg:hidden"
                 >
-                  <span className="flex items-center gap-2">
-                    <CalendarDays className="size-4 text-muted-foreground" />
-                    {t("today.weekToggle")}
-                  </span>
+                  <span>{t("today.weekToggle")}</span>
                   <ChevronDown className={cn("size-4 text-faint transition-transform", weekOpen && "rotate-180")} />
                 </button>
                 <div className={cn(!weekOpen && "max-lg:hidden", "max-lg:mt-3")}>
@@ -580,7 +577,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           const { done, total, next } = sessionProgress(suggested);
           return (
             <div className="relative overflow-hidden rounded-2xl p-[18px]" style={{ background: "var(--accent-soft)" }}>
-              <Image src="/design/cat2-book.png" alt="" width={72} height={72} unoptimized className="cat-peek absolute right-2.5 top-2 h-[72px] w-auto" />
+              <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-peek absolute right-2.5 top-2 h-[72px] w-auto" />
               <div className="flex items-center gap-2">
                 <Ring pct={total ? done / total : 0} size={28} stroke={12} color="var(--accent)" />
                 <span className="text-[11px] font-semibold text-accent">
@@ -720,7 +717,7 @@ function CatNudge({
               Study session
             </button>
             <button type="button" disabled={!!starting} onClick={onFlashcards} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-3 text-[12.5px] font-semibold hover:bg-accent-soft disabled:opacity-60">
-              {starting === "flashcards" ? <Loader2 className="size-3.5 animate-spin" /> : <Layers className="size-3.5" />}
+              {starting === "flashcards" && <Loader2 className="size-3.5 animate-spin" />}
               Flashcards
             </button>
             <button type="button" onClick={onClear} className="h-8 px-2 text-[12.5px] font-semibold text-faint hover:text-foreground">
@@ -730,7 +727,7 @@ function CatNudge({
         )}
         <span className="absolute -right-1.5 bottom-4 size-3 rotate-45 border-b border-r border-border bg-white" />
       </div>
-      <Image src={count > 0 ? "/design/cat2-cheer.png" : "/design/cat2-wave.png"} alt="" width={96} height={96} unoptimized className="cat-wiggle h-[84px] w-auto select-none" />
+      <Image src={count > 0 ? "/design/cat3-cheer.webp" : "/design/cat3-wave.webp"} alt="" width={96} height={96} unoptimized className="cat-wiggle h-[84px] w-auto select-none" />
     </div>
   );
 }
@@ -755,7 +752,7 @@ function SubjectsGrid({
           Your subjects <span className="font-medium text-faint">· {workspaces.length}</span>
         </h2>
         <button type="button" onClick={onNew} className="inline-flex h-11 items-center gap-1.5 rounded-[var(--r-control)] border border-border bg-card px-4 text-[13.5px] font-bold text-foreground hover:border-border-strong sm:h-10">
-          <Plus className="size-3.5" /> New subject
+          New subject
         </button>
       </div>
       {/* Each subject is a tile in its own colour with its illustration: the colour on this page lives here. */}
@@ -785,7 +782,7 @@ function SubjectsGrid({
           );
         })}
         <button type="button" onClick={onNew} className="hidden min-h-[176px] flex-col items-center justify-center gap-2 rounded-[var(--r-card)] border-2 border-dashed border-border text-center hover:border-border-strong hover:bg-muted/40 sm:flex">
-          <Image src="/design/cat2-sleep.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
+          <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-14 w-auto" />
           <div className="text-[14px] font-semibold">New subject</div>
           <div className="text-[12px] text-faint">Drop notes, get sessions</div>
         </button>
@@ -823,7 +820,7 @@ function SessionList({
           onClick={onAdd}
           className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-accent px-2.5 text-[12.5px] font-semibold text-white hover:bg-accent-dim disabled:opacity-60"
         >
-          {adding ? <Loader2 className="size-3.5 animate-spin" /> : <Plus className="size-3.5" />}
+          {adding && <Loader2 className="size-3.5 animate-spin" />}
           {pickedCount > 0 ? `New session from ${pickedCount} file${pickedCount === 1 ? "" : "s"}` : "New session"}
         </button>
       </div>
@@ -842,7 +839,7 @@ function SessionList({
           ))}
         {!loading && sessions.length === 0 && (
           <div className="flex items-center gap-4 px-5 py-6 text-[14px] text-muted-foreground">
-            <Image src="/design/cat2-book.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
+            <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob h-14 w-auto" />
             No sessions yet — hit New session and I&apos;ll build one from your materials.
           </div>
         )}

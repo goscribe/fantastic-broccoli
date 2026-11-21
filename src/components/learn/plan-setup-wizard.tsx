@@ -53,7 +53,7 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
 
         {step === "free" && (
           <>
-            <Image src="/design/cat2-think.png" alt="" width={72} height={72} unoptimized className="cat-bob mx-auto h-16 w-auto" />
+            <Image src="/design/cat3-think.webp" alt="" width={383} height={400} unoptimized className="cat-bob mx-auto h-16 w-auto" />
             <h2 className="mt-2 text-center text-[20px] font-bold">When are you free to study?</h2>
             <p className="mt-1 text-center text-[13px] text-muted-foreground">Sessions only land inside these times, around what&apos;s on your calendar.</p>
             <div className="mt-4 space-y-2">
@@ -77,7 +77,7 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
 
         {step === "goal" && (
           <>
-            <Image src="/design/cat2-flame.png" alt="" width={72} height={72} unoptimized className="cat-bob mx-auto h-16 w-auto" />
+            <Image src="/design/cat3-flame.webp" alt="" width={344} height={400} unoptimized className="cat-bob mx-auto h-16 w-auto" />
             <h2 className="mt-2 text-center text-[20px] font-bold">How much per day?</h2>
             <p className="mt-1 text-center text-[13px] text-muted-foreground">A realistic daily goal keeps the streak alive.</p>
             <div className="mt-5 grid grid-cols-4 gap-2">
@@ -92,7 +92,7 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
 
         {step === "exam" && (
           <>
-            <Image src="/design/cat2-trophy.png" alt="" width={72} height={72} unoptimized className="cat-bob mx-auto h-16 w-auto" />
+            <Image src="/design/cat3-trophy.webp" alt="" width={413} height={400} unoptimized className="cat-bob mx-auto h-16 w-auto" />
             <h2 className="mt-2 text-center text-[20px] font-bold">Working towards an exam?</h2>
             <p className="mt-1 text-center text-[13px] text-muted-foreground">The plan ramps up as the date gets closer. Skip if not.</p>
             <div className="mt-5 space-y-2">
@@ -104,7 +104,7 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
 
         {step === "done" && (
           <>
-            <Image src="/design/cat2-cheer.png" alt="" width={72} height={72} unoptimized className="cat-wiggle mx-auto h-16 w-auto" />
+            <Image src="/design/cat3-cheer.webp" alt="" width={363} height={400} unoptimized className="cat-wiggle mx-auto h-16 w-auto" />
             <h2 className="mt-2 text-center text-[20px] font-bold">Here&apos;s your plan</h2>
             <ul className="mt-4 space-y-2 text-[13.5px]">
               <li className="flex justify-between rounded-xl bg-muted px-3 py-2"><span className="text-muted-foreground">Free</span><button type="button" onClick={() => setStep("free")} className="font-semibold text-accent">{ORDER.filter((wd) => rows[wd].on).length} days · {rows[ORDER.find((wd) => rows[wd].on) ?? 1].start}–{rows[ORDER.find((wd) => rows[wd].on) ?? 1].end}</button></li>

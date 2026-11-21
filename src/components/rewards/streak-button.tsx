@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
-import { Check, Flame, Snowflake, Sparkles, Store } from "lucide-react";
+import { Flame, Snowflake, Sparkles } from "lucide-react";
 import { Mascot } from "@/components/rewards/mascot";
 import { useRewards, useStreak, type StreakSummary } from "@/lib/rewards";
 import { toast } from "@/lib/toast";
@@ -183,7 +183,6 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
                 {t("rewards.streakDays").replace("{n}", String(days))}
               </p>
               <p className={cn("mt-1 text-[13px] font-medium leading-snug", lit ? "text-muted-foreground" : "text-[#c2410c]")}>
-                {lit && <Check className="mr-1 inline size-3.5 align-[-2px] text-success" strokeWidth={3} />}
                 {status}
               </p>
               {streak.longest > days && (
@@ -221,7 +220,6 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
             onClick={() => setOpen(false)}
             className="mt-3 flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-accent text-[14px] font-semibold text-accent-foreground hover:bg-accent-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2"
           >
-            <Store className="size-4" />
             {t("rewards.openShop")}
           </Link>
         </div>

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { GraduationCap, Plus } from "lucide-react";
 import { SubjectTile } from "@/components/learn/subject-tile";
 import { coursesApi, type CourseSubject } from "@/lib/api/courses";
 import { masteryPercent } from "@/lib/courses";
@@ -80,7 +79,6 @@ export function CourseShelf() {
         href="/courses"
         className="flex min-h-[56px] items-center gap-3 rounded-2xl border border-dashed border-border px-4 py-3 text-left transition-colors hover:border-border-strong"
       >
-        <GraduationCap className="size-5 shrink-0 text-accent" />
         <span className="min-w-0 flex-1 text-[13.5px] text-muted-foreground">{t("course.homeEmpty")}</span>
         <span className="shrink-0 text-[13px] font-semibold text-accent">{t("course.browse")}</span>
       </Link>
@@ -91,7 +89,6 @@ export function CourseShelf() {
       <div className="mb-3 flex items-center justify-between">
         <h2 className="text-[20px] font-extrabold">{t("course.yourCourses")}</h2>
         <Link href="/courses" className="inline-flex items-center gap-1 text-[13px] font-semibold text-accent hover:underline">
-          <Plus className="size-3.5" />
           {t("course.addCourse")}
         </Link>
       </div>

@@ -44,10 +44,10 @@ function PracticeInner() {
   return (
     <main className="mx-auto flex min-h-[70vh] w-full max-w-md flex-col items-center justify-center px-6 text-center">
       <Image
-        src={state.kind === "empty" ? "/design/cat2-trophy.png" : "/design/cat2-book.png"}
+        src={state.kind === "empty" ? "/design/cat3-trophy.webp" : "/design/cat3-book.webp"}
         alt=""
-        width={132}
-        height={150}
+        width={413}
+        height={400}
         unoptimized
         className="cat-bob h-28 w-auto select-none"
       />
