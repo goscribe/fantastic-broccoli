@@ -29,7 +29,7 @@ export function PageHero({ title, lede, pose, children, narrow = false }: { titl
     <div className={cn(pose && "grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12")}>
       <div className={cn(narrow && "max-w-3xl")}>
         <h1 className="text-balance text-[34px] font-extrabold leading-[1.08] sm:text-[44px] lg:text-[50px]">{title}</h1>
-        <div className="mt-4 max-w-xl text-[17px] leading-relaxed text-muted-foreground sm:text-[18px]">{lede}</div>
+        <div className="mt-4 max-w-xl text-read text-muted-foreground">{lede}</div>
         {children}
       </div>
       {pose && <Scene pose={pose} className="hidden lg:block" />}
@@ -58,7 +58,7 @@ export function FunFeatureCard({
   return (
     <li className="life-card p-5 sm:p-6">
       <Heading className="text-[17px] font-extrabold leading-snug">{title}</Heading>
-      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{description}</p>
+      <p className="mt-2 text-ui text-muted-foreground">{description}</p>
     </li>
   );
 }
@@ -66,7 +66,7 @@ export function FunFeatureCard({
 /** A plain list: the points themselves, no icon in front of each. */
 export function Points({ items, className }: { items: string[]; className?: string }) {
   return (
-    <ul className={cn("list-disc space-y-2 pl-5 text-[15.5px] leading-relaxed text-muted-foreground marker:text-border-strong", className)}>
+    <ul className={cn("list-disc space-y-2 pl-5 text-ui text-muted-foreground marker:text-border-strong", className)}>
       {items.map((item) => (
         <li key={item}>{item}</li>
       ))}
@@ -87,7 +87,7 @@ export function FeatureSplit({ scene }: { scene: FeatureScene }) {
     <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
       <div className={scene.reverse ? "lg:order-2" : undefined}>
         <h2 className="text-balance text-[26px] font-extrabold leading-[1.12] sm:text-[32px]">{scene.title}</h2>
-        <p className="mt-3 max-w-lg text-[17px] leading-relaxed text-muted-foreground text-pretty">{scene.body}</p>
+        <p className="mt-3 max-w-lg text-read text-muted-foreground text-pretty">{scene.body}</p>
         <Points items={scene.bullets} className="mt-5" />
       </div>
       <div className={cn("mx-auto w-full max-w-[480px]", scene.reverse && "lg:order-1")}>{MOCKS[scene.mock]()}</div>

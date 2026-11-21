@@ -42,7 +42,7 @@ export default function LandingFaqPage() {
                   </span>
                 </span>
               </summary>
-              <p className="max-w-[640px] pb-5 text-[15.5px] leading-relaxed text-muted-foreground">{faq.a}</p>
+              <p className="max-w-[640px] pb-5 text-read text-muted-foreground">{faq.a}</p>
             </details>
           ))}
         </div>

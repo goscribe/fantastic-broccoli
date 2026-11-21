@@ -21,7 +21,7 @@ function Band({ title, sub, children, flip = false }: { title: ReactNode; sub: s
     <section className={cn(landingWrap, "grid items-center gap-7 py-10 sm:py-12 lg:grid-cols-2 lg:gap-16 lg:py-14")}>
       <div className={cn(flip && "lg:order-2")}>
         <h2 className="text-balance text-[30px] font-extrabold leading-[1.1] sm:text-[38px]">{title}</h2>
-        <p className="mt-4 max-w-[460px] text-[17px] leading-relaxed text-muted-foreground">{sub}</p>
+        <p className="mt-4 max-w-[460px] text-read text-muted-foreground">{sub}</p>
       </div>
       <div className={cn("mx-auto w-full max-w-[480px]", flip && "lg:order-1")}>{children}</div>
     </section>
@@ -51,7 +51,7 @@ export function LandingBody() {
             <br />
             Actually remember it.
           </h1>
-          <p className="relative mt-4 text-[16.5px] leading-relaxed text-foreground/75 sm:max-w-[50%] sm:text-[18px] lg:max-w-[46%]">
+          <p className="relative mt-4 text-read text-foreground/75 sm:max-w-[50%] lg:max-w-[46%]">
             Pick your course, or drop in a PDF, slides or a photo of your notes. Scribe builds study sessions from them and fits them into your week.
           </p>
           <div className="relative mt-6 flex flex-col gap-x-6 gap-y-1.5 sm:mt-8 sm:flex-row sm:items-center">
@@ -64,7 +64,7 @@ export function LandingBody() {
       {/* The app's home, as it looks once you are in. */}
       <section className={cn(landingWrap, "pt-12 sm:pt-16")}>
         <h2 className="text-balance text-[30px] font-extrabold leading-[1.1] sm:text-[38px]">Every subject, one home.</h2>
-        <p className="mt-3 max-w-[560px] text-[17px] leading-relaxed text-muted-foreground">Your subjects, today’s flashcards and your streak are the first thing you see.</p>
+        <p className="mt-3 max-w-[560px] text-read text-muted-foreground">Your subjects, today’s flashcards and your streak are the first thing you see.</p>
         <div className="mt-6 sm:mt-7 sm:rounded-[28px] sm:border sm:border-border sm:p-7">
           <HomeMock />
         </div>
@@ -73,7 +73,7 @@ export function LandingBody() {
       {/* Coverage: the course catalog, in the subjects' own colours. */}
       <section className={cn(landingWrap, "pt-14 sm:pt-20")} aria-labelledby="courses-title">
         <h2 id="courses-title" className="text-balance text-[30px] font-extrabold leading-[1.1] sm:text-[38px]">Your course, topic by topic.</h2>
-        <p className="mt-3 max-w-[600px] text-[17px] leading-relaxed text-muted-foreground">
+        <p className="mt-3 max-w-[600px] text-read text-muted-foreground">
           {LANDING_COURSE_COUNT} courses across IB, AP, A-level and GCSE, each one split into its topics. Studying something else? Upload your notes and Scribe works from those.
         </p>
         {LANDING_BOARDS.map(({ board, courses }) => (
@@ -126,9 +126,9 @@ export function LandingBody() {
             <li key={title} className="life-card flex gap-4 p-5 md:block md:p-7">
               <Cat pose={pose} className="h-[72px] shrink-0 md:h-[96px]" />
               <div className="min-w-0 md:mt-5">
-                <div className="text-[13.5px] font-extrabold text-muted-foreground">Step {i + 1}</div>
+                <div className="text-small font-extrabold text-muted-foreground">Step {i + 1}</div>
                 <h3 className="mt-1 text-[20px] font-extrabold leading-tight md:text-[22px]">{title}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{body}</p>
+                <p className="mt-2 text-ui text-muted-foreground">{body}</p>
               </div>
             </li>
           ))}
@@ -173,12 +173,12 @@ export function LandingCta({
           </div>
         </div>
         <Heading className="relative text-balance text-[28px] font-extrabold leading-[1.1] sm:max-w-[56%] sm:text-[38px]">{title}</Heading>
-        {sub && <p className="relative mt-3 text-[16.5px] leading-relaxed text-foreground/75 sm:max-w-[48%]">{sub}</p>}
+        {sub && <p className="relative mt-3 text-read text-foreground/75 sm:max-w-[48%]">{sub}</p>}
         <div className="relative mt-6 flex flex-col gap-x-6 gap-y-1.5 sm:flex-row sm:items-center">
           <Link href="/signup" className={landingPrimary}>{cta}</Link>
           {secondary && <Link href={secondary.href} className={cn(landingTextLink, "justify-center sm:justify-start")}>{secondary.label}</Link>}
         </div>
-        {note && <p className="relative mt-4 text-center text-[14px] font-bold text-foreground/80 sm:max-w-[56%] sm:text-left">{note}</p>}
+        {note && <p className="relative mt-4 text-center text-ui font-bold text-foreground/80 sm:max-w-[56%] sm:text-left">{note}</p>}
       </div>
     </section>
   );

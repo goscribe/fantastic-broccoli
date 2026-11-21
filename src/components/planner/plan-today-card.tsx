@@ -25,18 +25,18 @@ export function PlanTodayCard({ fallback }: { fallback: ReactNode }) {
     <div className="rail-box rounded-2xl border border-border p-[18px]">
       <div className="flex items-baseline justify-between gap-2">
         <span className="text-[16px] font-semibold">{t("ep.home.title")}</span>
-        <Link href="/planner" className="shrink-0 text-[12px] font-semibold text-accent hover:underline">{t("ep.home.open")}</Link>
+        <Link href="/planner" className="shrink-0 text-caption font-semibold text-accent hover:underline">{t("ep.home.open")}</Link>
       </div>
       {next && (
-        <div className="mt-0.5 truncate text-[12.5px] text-faint">
+        <div className="mt-0.5 truncate text-caption text-faint">
           {next.daysLeft === 1 ? fill(t("ep.home.countdownTomorrow"), { exam: next.title }) : fill(t("ep.home.countdown"), { exam: next.title, n: next.daysLeft })}
         </div>
       )}
       <div className="mt-2 flex flex-col gap-0.5">
         {data.tasks.length === 0 ? (
-          <p className="text-[13px] text-faint">{t("ep.today.rest")}</p>
+          <p className="text-small text-faint">{t("ep.today.rest")}</p>
         ) : open.length === 0 ? (
-          <p className="text-[13px] text-faint">{t("ep.today.allDone")}</p>
+          <p className="text-small text-faint">{t("ep.today.allDone")}</p>
         ) : (
           open.map((task, i) => (
             <button
@@ -48,8 +48,8 @@ export function PlanTodayCard({ fallback }: { fallback: ReactNode }) {
             >
               <span className="size-2.5 shrink-0 rounded-full" style={{ background: accentForId(task.workspaceId) }} />
               <span className="min-w-0 flex-1">
-                <span className="block truncate text-[13.5px] font-semibold">{taskTitle(task, t)}</span>
-                <span className="block truncate text-[12px] text-faint">
+                <span className="block truncate text-small font-semibold">{taskTitle(task, t)}</span>
+                <span className="block truncate text-caption text-faint">
                   {t(`ep.kind.${task.kind}`)} · {fmtDuration(task.minutes, t)}
                 </span>
               </span>

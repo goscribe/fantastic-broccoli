@@ -66,7 +66,7 @@ export function NotesLibrary() {
           <div className="min-w-0">
             <h1 className="page-h1">Notes</h1>
             {empty && (
-              <p className="mt-1.5 max-w-[620px] text-[16px] font-semibold leading-snug text-muted-foreground sm:text-[17px]">
+              <p className="mt-1.5 max-w-[620px] text-read font-semibold text-muted-foreground">
                 Scribe&apos;s notes are being added course by course. For now, each course shows what its topics cover.
               </p>
             )}
@@ -92,7 +92,7 @@ export function NotesLibrary() {
         )}
         {courses.state === "error" && (
           <div className="mt-8 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border px-4 py-3" role="alert">
-            <span className="text-[14.5px] text-muted-foreground">We couldn&apos;t load the notes just now.</span>
+            <span className="text-ui text-muted-foreground">We couldn&apos;t load the notes just now.</span>
             <button type="button" onClick={courses.retry} className="text-[14px] font-bold text-accent hover:underline">
               Try again
             </button>
@@ -126,7 +126,7 @@ export function NotesLibrary() {
                 <div key={g.board} id={`lib-${g.board}`} className="mt-5 scroll-mt-4">
                   <h3 className="flex items-baseline gap-2 text-[15px] font-extrabold text-foreground">
                     {BOARD_LABEL[g.board]}
-                    <span className="text-[13px] font-semibold text-faint">
+                    <span className="text-small font-semibold text-faint">
                       {g.courses.length} {g.courses.length === 1 ? "course" : "courses"}
                     </span>
                   </h3>
@@ -143,7 +143,7 @@ export function NotesLibrary() {
                 <div className="mt-6 flex flex-col items-center rounded-[var(--r-card)] border-2 border-dashed border-border px-5 py-9 text-center">
                   <Image src="/design/cat3-think.webp" alt="" width={383} height={400} unoptimized className="h-[72px] w-auto" />
                   <p className="mt-3 text-[16px] font-extrabold">No course matches “{query.trim()}”</p>
-                  <p className="mt-1 max-w-[380px] text-[14px] text-muted-foreground">
+                  <p className="mt-1 max-w-[380px] text-ui text-muted-foreground">
                     Scribe has outlines for IB, AP, GCSE and A-level courses. Studying something else?{" "}
                     <Link href="/new-subject" className="font-bold text-accent hover:underline">
                       Make a subject from your own notes

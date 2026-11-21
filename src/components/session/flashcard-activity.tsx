@@ -79,7 +79,7 @@ export function FlashcardActivity({
         <p className="text-lg font-semibold mb-1">
           {t("session.flashcardsComplete")}
         </p>
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="text-ui text-muted-foreground mb-4">
           {correct}/{content.cards.length} {t("session.cardsKnown")}
         </p>
         <ProgressBar
@@ -139,7 +139,7 @@ export function FlashcardActivity({
               {t("session.back")}
             </button>
           )}
-          <span className="text-xs text-muted-foreground">
+          <span className="text-caption text-muted-foreground">
             {t("session.card")} {currentIndex + 1} {t("session.of")}{" "}
             {content.cards.length}
           </span>
@@ -160,19 +160,19 @@ export function FlashcardActivity({
           <div className="text-center px-4">
             {!flipped ? (
               <>
-                <p className="text-base font-medium">
+                <p className="text-read font-medium">
                   <MarkdownText text={card.front} />
                 </p>
-                <p className="text-xs text-muted-foreground mt-3">
+                <p className="text-caption text-muted-foreground mt-3">
                   {t("session.tapToReveal")}
                 </p>
               </>
             ) : (
               <>
-                <p className="text-xs text-muted-foreground mb-2">
+                <p className="text-caption text-muted-foreground mb-2">
                   {t("session.answer")}
                 </p>
-                <p className={newUi ? "text-[17px] leading-relaxed" : "text-sm leading-relaxed"}>
+                <p className={newUi ? "text-read" : "text-ui"}>
                   <MarkdownText text={card.back} />
                 </p>
               </>
@@ -254,7 +254,7 @@ export function FlashcardRound({
               {t("session.back")}
             </button>
           )}
-          <span data-scroll-line className="text-[13px] font-semibold tabular-nums text-muted-foreground" aria-live="polite">
+          <span data-scroll-line className="text-small font-semibold tabular-nums text-muted-foreground" aria-live="polite">
             {t("session.card")} {index + 1} {t("session.of")} {cards.length}
           </span>
           <RunBadge run={runOfRight(results, index)} />
@@ -273,7 +273,7 @@ export function FlashcardRound({
           !flipped && "hover:bg-muted",
         )}
       >
-        <span className="mb-3 text-[12.5px] font-extrabold text-muted-foreground">{flipped ? t("session.answer") : t("session.tapToReveal")}</span>
+        <span className="mb-3 text-caption font-extrabold text-muted-foreground">{flipped ? t("session.answer") : t("session.tapToReveal")}</span>
         <span className={cn("block max-w-[34rem] text-foreground [overflow-wrap:anywhere]", flipped ? "text-[18px] font-semibold leading-relaxed sm:text-[19px]" : "text-[21px] font-extrabold leading-snug sm:text-[24px]")}>
           <MarkdownText text={flipped ? card.back : card.front} />
         </span>

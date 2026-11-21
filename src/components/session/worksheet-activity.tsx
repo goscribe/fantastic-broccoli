@@ -205,7 +205,7 @@ export function WorksheetActivity({
       {newUi ? (
         <div>
           <div className="flex min-h-6 items-center justify-between gap-4">
-            <p data-scroll-line className="text-[13px] font-semibold tabular-nums text-muted-foreground" aria-live="polite">
+            <p data-scroll-line className="text-small font-semibold tabular-nums text-muted-foreground" aria-live="polite">
               {t("session.question")} {stepIndex + 1} {t("session.of")} {content.steps.length} · {totalMarks} {t("session.marks")}
               {content.steps.length === 1 && ` · ~${summary.minutes} ${t("session.min")}`}
             </p>
@@ -217,19 +217,19 @@ export function WorksheetActivity({
         </div>
       ) : (
       <div className="pb-4 border-b border-border">
-        <p className="mb-1.5 text-xs font-medium text-muted-foreground tabular-nums">
+        <p className="mb-1.5 text-caption font-medium text-muted-foreground tabular-nums">
           {(summary.questions === 1 ? t("habit.wsSummaryOne") : t("habit.wsSummary"))
             .replace("{n}", String(summary.questions))
             .replace("{m}", String(summary.minutes))}
         </p>
         <div className="flex items-center justify-between gap-4">
-          <p className="text-sm font-semibold">
+          <p className="text-ui font-semibold">
             {t("session.question")} {stepIndex + 1} —{" "}
             <MathText
               text={step.title.replace(/^question\s*\d+\s*[—–:.-]?\s*/i, "")}
             />
           </p>
-          <span className="text-xs text-muted-foreground shrink-0 tabular-nums">
+          <span className="text-caption text-muted-foreground shrink-0 tabular-nums">
             {stepIndex + 1} {t("session.of")} {content.steps.length} ·{" "}
             {totalMarks} {t("session.marks")}
           </span>
@@ -268,7 +268,7 @@ export function WorksheetActivity({
           <div>
             <div
               className={cn(
-                newUi ? "text-[16.5px] leading-7 text-foreground" : "text-sm leading-6 text-foreground",
+                newUi ? "text-read text-foreground" : "text-ui text-foreground",
                 introLong && !introOpen[stepIndex] && "line-clamp-3",
               )}
             >
@@ -307,10 +307,10 @@ export function WorksheetActivity({
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline justify-between gap-3">
-                    <p className={newUi ? "pt-0.5 text-[16.5px] font-semibold leading-7" : "text-sm leading-6"}>
+                    <p className={newUi ? "pt-0.5 text-read font-semibold" : "text-ui"}>
                       <MarkdownText text={part.prompt} />
                     </p>
-                    <span className={newUi ? "shrink-0 text-[13px] font-bold tabular-nums text-muted-foreground" : "text-[11px] text-faint shrink-0 tabular-nums"}>
+                    <span className={newUi ? "shrink-0 text-small font-bold tabular-nums text-muted-foreground" : "text-caption text-faint shrink-0 tabular-nums"}>
                       {checked && marking
                         ? `${marking.achievedPoints}/${marking.totalPoints}`
                         : `[${part.marks ?? 1}]`}
@@ -444,7 +444,7 @@ export function WorksheetActivity({
                     </div>
                   )}
                   {checked && isSkipped && (
-                    <p className={newUi ? "mt-2 text-[13.5px] font-semibold text-muted-foreground" : "mt-1.5 text-xs text-muted-foreground"}>{t("habit.wsSkipped")}</p>
+                    <p className={newUi ? "mt-2 text-small font-semibold text-muted-foreground" : "mt-1.5 text-caption text-muted-foreground"}>{t("habit.wsSkipped")}</p>
                   )}
                   {part.type === "text" && drawingOpen[key(i)] && (
                     <DrawingCanvas
@@ -459,7 +459,7 @@ export function WorksheetActivity({
                   {/* Mark scheme (redesign): lines on the page under the answer, a tick or a cross per mark; no table. */}
                   {newUi && checked && marking && marking.points.length > 0 && (
                     <div className="life-rise mt-4" role="status">
-                      <p className="text-[13px] font-extrabold text-foreground">
+                      <p className="text-small font-extrabold text-foreground">
                         {t("session.markScheme")}
                         <span className="ml-2 font-bold tabular-nums text-muted-foreground">
                           {marking.achievedPoints}/{marking.totalPoints} {t("session.marks")}
@@ -474,10 +474,10 @@ export function WorksheetActivity({
                                 {earned ? <Check className="size-3.5" strokeWidth={3.5} /> : <X className="size-3.5" strokeWidth={3.5} />}
                                 <span className="sr-only">{point.achievedPoints}/{point.point}</span>
                               </span>
-                              <div className="min-w-0 flex-1 text-[15px] leading-6">
+                              <div className="min-w-0 flex-1 text-ui">
                                 <MarkdownText text={point.requirements} />
                                 {point.feedback && !earned && (
-                                  <p className="mt-0.5 text-[14px] leading-6 text-muted-foreground">
+                                  <p className="mt-0.5 text-ui text-muted-foreground">
                                     <MarkdownText text={point.feedback} />
                                   </p>
                                 )}
@@ -492,12 +492,12 @@ export function WorksheetActivity({
                   {!newUi && checked && marking && marking.points.length > 0 && (
                     <div className={newUi ? "mt-3 rounded-2xl border border-border bg-card overflow-hidden shadow-[0_8px_24px_-16px_rgba(17,17,20,.2)]" : "mt-2 rounded-lg border border-border overflow-hidden"}>
                       <div className={cn("flex items-center justify-between border-b border-border", newUi ? "px-4 py-2.5" : "bg-muted/60 px-3 py-1.5")}>
-                        <p className={newUi ? "text-[13px] font-semibold" : "text-[11px] font-semibold uppercase tracking-wide text-muted-foreground"}>
+                        <p className={newUi ? "text-small font-semibold" : "text-caption font-semibold uppercase tracking-wide text-muted-foreground"}>
                           {t("session.markScheme")}
                         </p>
                         <span
                           className={cn(
-                            newUi ? "text-[12px] font-bold tabular-nums rounded-full px-2.5 py-1" : "text-[11px] font-bold tabular-nums rounded-full px-2 py-0.5",
+                            newUi ? "text-caption font-bold tabular-nums rounded-full px-2.5 py-1" : "text-caption font-bold tabular-nums rounded-full px-2 py-0.5",
                             correct
                               ? "bg-success/10 text-green-700 dark:text-green-400"
                               : partial
@@ -525,10 +525,10 @@ export function WorksheetActivity({
                                 >
                                   M{j + 1}
                                 </span>
-                                <p className={newUi ? "flex-1 min-w-0 text-[13.5px] leading-6" : "flex-1 min-w-0 text-xs leading-5"}>
+                                <p className={newUi ? "flex-1 min-w-0 text-small" : "flex-1 min-w-0 text-caption leading-5"}>
                                   <MarkdownText text={point.requirements} />
                                 </p>
-                                <span className="shrink-0 flex items-center gap-1 text-[11px] font-semibold tabular-nums">
+                                <span className="shrink-0 flex items-center gap-1 text-caption font-semibold tabular-nums">
                                   {earned ? (
                                     <Check className="h-3.5 w-3.5 text-green-700 dark:text-green-400" />
                                   ) : (
@@ -538,7 +538,7 @@ export function WorksheetActivity({
                                 </span>
                               </div>
                               {point.feedback && !earned && (
-                                <p className={newUi ? "mt-1.5 pl-10 text-[13px] leading-5 text-muted-foreground" : "mt-1 pl-8 text-[11px] leading-4 text-muted-foreground"}>
+                                <p className={newUi ? "mt-1.5 pl-10 text-small leading-5 text-muted-foreground" : "mt-1 pl-8 text-caption leading-4 text-muted-foreground"}>
                                   <MarkdownText text={point.feedback} />
                                 </p>
                               )}
@@ -554,7 +554,7 @@ export function WorksheetActivity({
                     marking.points.length === 0 &&
                     !correct &&
                     part.answer && (
-                      <p className={cn(newUi ? "mt-2 text-[14.5px] font-bold" : "text-xs mt-1.5", isSkipped ? "text-muted-foreground" : newUi ? "text-rose-800" : "text-red-600 dark:text-red-400")}>
+                      <p className={cn(newUi ? "mt-2 text-ui font-bold" : "text-caption mt-1.5", isSkipped ? "text-muted-foreground" : newUi ? "text-rose-800" : "text-red-600 dark:text-red-400")}>
                         {t("session.expected")} {part.answer}
                       </p>
                     )}
@@ -573,7 +573,7 @@ export function WorksheetActivity({
                 </button>
               )}
               {checked && (
-                <p className="text-[14.5px] font-extrabold tabular-nums text-foreground" role="status">
+                <p className="text-ui font-extrabold tabular-nums text-foreground" role="status">
                   {earnedMarks}/{totalMarks} <span className="font-semibold text-muted-foreground">{t("session.marksOnQuestion")}</span>
                 </p>
               )}
@@ -613,7 +613,7 @@ export function WorksheetActivity({
               </Button>
             )}
             {checked && (
-              <p className="text-xs text-muted-foreground tabular-nums">
+              <p className="text-caption text-muted-foreground tabular-nums">
                 {earnedMarks}/{totalMarks} {t("session.marksOnQuestion")}
               </p>
             )}

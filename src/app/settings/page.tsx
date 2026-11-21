@@ -89,7 +89,7 @@ function PlanRow({
         ) : (
           <p className="text-[16px] font-extrabold">{name}</p>
         )}
-        {!loading && status && <p className="mt-0.5 text-[13px] text-muted-foreground">{status}</p>}
+        {!loading && status && <p className="mt-0.5 text-small text-muted-foreground">{status}</p>}
       </div>
       <div className="flex flex-wrap items-center gap-2">
         {manageable && subscription?.cancelAt ? (
@@ -299,7 +299,7 @@ export default function SettingsPage() {
       <PageHeader title={<>{t("settings.title")}</>} subtitle={<>{t("set.subtitle")}</>} />
       <div className="flex flex-col gap-8 lg:flex-row">
       <nav className="hidden w-[200px] shrink-0 lg:block">
-        <ul className="sticky top-[calc(var(--app-top,0px)+1.5rem)] space-y-1 text-[13.5px] font-semibold">
+        <ul className="sticky top-[calc(var(--app-top,0px)+1.5rem)] space-y-1 text-small font-semibold">
           {SETTINGS_SECTIONS.map(([id, label]) => (
             <li key={id}>
               <a href={`#${id}`} className="block rounded-xl px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground">
@@ -354,7 +354,7 @@ export default function SettingsPage() {
                   {uploadingPhoto ? t("set.uploading") : t("set.change")}
                 </button>
                 {photoError && (
-                  <p className="mt-1 w-14 text-[11px] text-red-500">
+                  <p className="mt-1 w-14 text-caption text-red-500">
                     {photoError}
                   </p>
                 )}
@@ -363,7 +363,7 @@ export default function SettingsPage() {
                 <div>
                   <label
                     htmlFor="settings-name"
-                    className="block text-[13px] font-medium"
+                    className="block text-small font-medium"
                   >
                     {t("set.displayName")}
                   </label>
@@ -378,7 +378,7 @@ export default function SettingsPage() {
                 <div>
                   <label
                     htmlFor="settings-email"
-                    className="block text-[13px] font-medium"
+                    className="block text-small font-medium"
                   >
                     {t("set.email")}
                   </label>
@@ -389,7 +389,7 @@ export default function SettingsPage() {
                     disabled
                     className={cn(inputClass, "mt-1.5 bg-muted/60 text-muted-foreground")}
                   />
-                  <p className="mt-1.5 text-[12px] text-faint">
+                  <p className="mt-1.5 text-caption text-faint">
                     {t("set.emailHint")}
                   </p>
                 </div>
@@ -398,7 +398,7 @@ export default function SettingsPage() {
             <div className="mt-4 flex flex-wrap items-center justify-end gap-3 border-t border-border pt-4">
               <div className="flex items-center gap-2">
                 {saved && (
-                  <span className="text-[12px] text-accent font-medium">
+                  <span className="text-caption text-accent font-medium">
                     {t("set.saved")}
                   </span>
                 )}
@@ -417,7 +417,7 @@ export default function SettingsPage() {
         {/* Language */}
         <section id="language" className="mt-8">
           <h2 className="page-h2">{t("settings.language")}</h2>
-          <p className="mt-0.5 text-[13px] text-muted-foreground">
+          <p className="mt-0.5 text-small text-muted-foreground">
             {t("settings.languageHint")}
           </p>
           {/* One select: it sits on the page, no card around it. */}
@@ -438,9 +438,9 @@ export default function SettingsPage() {
               </select>
             </label>
             <p
-              className={`mt-3 text-[12px] font-medium text-accent transition-opacity ${
-                languageSaved ? "opacity-100" : "opacity-0"
-              }`}
+              className={`mt-3 text-caption font-medium text-accent transition-opacity ${
+ languageSaved ?"opacity-100":"opacity-0"
+ }`}
             >
               {t("settings.languageSaved")}
             </p>
@@ -455,12 +455,12 @@ export default function SettingsPage() {
           <h2 className="page-h2">{t("settings.plan")}</h2>
           {needsBillingManagement(subscription) && subscription && (
             <div role="status" className="mt-3 space-y-3 rounded-2xl border border-border bg-card p-5">
-              <p className="text-sm font-semibold">{t("set.manageSubscription")}</p>
-              <p className="text-[13px] text-muted-foreground">
+              <p className="text-ui font-semibold">{t("set.manageSubscription")}</p>
+              <p className="text-small text-muted-foreground">
                 {t("set.inactiveSubscription").replace("{plan}", subscription.planName)}
               </p>
               {subscription.cancelAt ? (
-                <p className="text-[13px]">{t("set.renewalStopped")}</p>
+                <p className="text-small">{t("set.renewalStopped")}</p>
               ) : (
                 <Button variant="outline" size="sm" disabled={switching} onClick={openDowngrade}>
                   {t("set.stopRenewal")}
@@ -515,7 +515,7 @@ export default function SettingsPage() {
                   ? t("set.cancelTrialTitle")
                   : t("set.downgradeTitle")}
             </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-2 text-ui text-muted-foreground">
               {t(
                 needsBillingManagement(subscription)
                   ? "set.stopRenewalBody"

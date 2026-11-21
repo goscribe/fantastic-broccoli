@@ -95,6 +95,15 @@
   --font-sans: var(--font-nunito);
   --font-mono: var(--font-geist-mono);
   --radius: var(--radius);
+  /* Body type scale (values and rules in design/tokens.css). */
+  --text-read: var(--fs-read, 17px);
+  --text-read--line-height: var(--lh-read, 1.6);
+  --text-ui: var(--fs-ui, 15px);
+  --text-ui--line-height: var(--lh-ui, 1.5);
+  --text-small: var(--fs-small, 13px);
+  --text-small--line-height: var(--lh-small, 1.45);
+  --text-caption: var(--fs-caption, 12px);
+  --text-caption--line-height: var(--lh-caption, 1.35);
 }
 
 body {

@@ -217,7 +217,7 @@ function ImageFigure({ figure }: { figure: ReadingImageFigure }) {
         className="w-full max-h-96 object-contain bg-muted/40"
       />
       {figure.caption && (
-        <figcaption className="px-3.5 py-2 text-[11px] text-muted-foreground border-t border-border">
+        <figcaption className="px-3.5 py-2 text-caption text-muted-foreground border-t border-border">
           <MathText text={figure.caption} />
         </figcaption>
       )}
@@ -292,7 +292,7 @@ function CalloutView({ callout }: { callout: Callout }) {
   // Never an empty card (a label with nothing under it).
   if (calloutIsEmpty(callout)) return null;
   const label = (
-    <span className={newUi ? "block text-[12.5px] font-extrabold text-muted-foreground" : "block text-[11px] font-semibold uppercase tracking-wide text-muted-foreground"}>
+    <span className={newUi ? "block text-caption font-extrabold text-muted-foreground" : "block text-caption font-semibold uppercase tracking-wide text-muted-foreground"}>
       {callout.label}
     </span>
   );
@@ -312,7 +312,7 @@ function CalloutView({ callout }: { callout: Callout }) {
     );
   if (callout.kind === "objective") {
     return (
-      <p className="text-[15px] leading-[1.55] text-muted-foreground">
+      <p className="text-ui text-muted-foreground">
         <RichText text={callout.body} />
       </p>
     );
@@ -334,7 +334,7 @@ function QuickCheck({ check }: { check: ReadingCheck }) {
   const correct = picked === check.correctIndex;
   return (
     <div className={newUi ? "space-y-3 py-1" : "rounded-xl border border-border bg-card px-4 py-3 space-y-2.5"}>
-      <span className={newUi ? "block text-[12.5px] font-extrabold text-muted-foreground" : "block text-[11px] font-semibold uppercase tracking-wide text-muted-foreground"}>
+      <span className={newUi ? "block text-caption font-extrabold text-muted-foreground" : "block text-caption font-semibold uppercase tracking-wide text-muted-foreground"}>
         {t("session.quickCheck")}
       </span>
       <p className={cn(BODY_TEXT, newUi ? "font-extrabold" : "font-medium")}>
@@ -372,7 +372,7 @@ function QuickCheck({ check }: { check: ReadingCheck }) {
         ))}
       </div>
       {picked !== null && (
-        <p className={newUi ? cn("life-rise text-[15px] font-semibold leading-[1.55]", correct ? "text-emerald-800" : "text-foreground/80") : "text-[14px] leading-[1.55]"} role="status">
+        <p className={newUi ? cn("life-rise text-ui font-semibold", correct ? "text-emerald-800" : "text-foreground/80") : "text-ui"} role="status">
           <RichText text={correct ? check.feedbackCorrect : check.feedbackWrong} />
         </p>
       )}
@@ -386,7 +386,7 @@ function SourceBadge({ content }: { content: ReadingContent }) {
   if (content.mode !== "source" && !content.source) return null;
   const label = content.source?.label || t("session.fromYourNotes");
   return (
-    <p className="flex items-center gap-1.5 text-[12px] text-muted-foreground">
+    <p className="flex items-center gap-1.5 text-caption text-muted-foreground">
       <FileText className="h-3.5 w-3.5 shrink-0" />
       <span className="truncate">{label}</span>
     </p>
@@ -405,7 +405,7 @@ function SectionMarker({ n, m }: { n: number; m: number }) {
   const { t } = useI18n();
   return (
     <div className="space-y-1.5 pt-2">
-      <span className="text-[11px] text-muted-foreground">
+      <span className="text-caption text-muted-foreground">
         {t("session.sectionOf").replace("{n}", String(n)).replace("{m}", String(m))}
       </span>
       <div className="h-0.5 w-full rounded-full bg-muted">
@@ -788,16 +788,16 @@ export function ReadingActivity({
     <div className="space-y-4">
       {newUi ? (
         // One quiet line, like the other activities' "Question 1 of 5"; no icons.
-        <p data-scroll-line className="text-[13px] font-semibold text-muted-foreground max-sm:hidden">{t("session.selectToHighlight")}</p>
+        <p data-scroll-line className="text-small font-semibold text-muted-foreground max-sm:hidden">{t("session.selectToHighlight")}</p>
       ) : (
       <div className="flex items-center justify-between text-muted-foreground">
         <div className="flex items-center gap-2">
           <BookOpen className="h-4 w-4" />
-          <span className="text-xs font-medium">
+          <span className="text-caption font-medium">
             {t("session.readingMaterial")}
           </span>
         </div>
-        <span className="flex items-center gap-1.5 text-[11px]">
+        <span className="flex items-center gap-1.5 text-caption">
           <Highlighter className="h-3.5 w-3.5" />
           {t("session.selectToHighlight")}
         </span>

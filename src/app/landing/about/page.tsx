@@ -23,7 +23,7 @@ export default function AboutPage() {
           title="The pre-scribed learning tool"
           lede="Scribe exists because re-reading is a trap. Highlighting a PDF feels like work and doesn’t stick. We built a session that takes the materials you already have and turns them into the activities that actually move memory: recall, explanation, and marked practice."
         >
-          <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-muted-foreground text-pretty">
+          <p className="mt-4 max-w-xl text-read text-muted-foreground text-pretty">
             Not a generic chatbot. Not a question bank from someone else’s course. Your slides, your figures, your past papers — organised into one study session you can finish.
           </p>
         </PageHero>
@@ -45,7 +45,7 @@ export default function AboutPage() {
         ].map((item) => (
           <div key={item.title}>
             <h2 className="text-[19px] font-extrabold">{item.title}</h2>
-            <p className="mt-2 text-[15.5px] leading-relaxed text-muted-foreground">{item.body}</p>
+            <p className="mt-2 text-ui text-muted-foreground">{item.body}</p>
           </div>
         ))}
       </PageSection>

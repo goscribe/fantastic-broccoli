@@ -22,12 +22,12 @@ export function UpNextCard() {
     <div className="life-card p-[18px]">
       <div className="flex items-baseline justify-between">
         <span className="text-[16px] font-extrabold">Up next</span>
-        <Link href="/planner" className="text-[12px] font-semibold text-accent hover:underline">Open planner</Link>
+        <Link href="/planner" className="text-caption font-semibold text-accent hover:underline">Open planner</Link>
       </div>
       {upNext === null ? (
         <div className="mt-3 space-y-2">{[0, 1, 2].map((i) => <div key={i} className="h-10 animate-pulse rounded-xl bg-muted" />)}</div>
       ) : upNext.length === 0 ? (
-        <p className="mt-3 text-[13px] text-faint">Nothing planned yet — set a goal and study window in the planner and your week fills itself in.</p>
+        <p className="mt-3 text-small text-faint">Nothing planned yet — set a goal and study window in the planner and your week fills itself in.</p>
       ) : (
         <ul className="mt-3 space-y-2">
           {upNext.map((s) => {
@@ -38,9 +38,9 @@ export function UpNextCard() {
             return (
               <li key={`${s.date}-${s.id}`}>
                 <Link href={href} className="-mx-2 flex items-center gap-3 rounded-2xl px-2 py-2 hover:bg-muted">
-                  <span className="w-[72px] shrink-0 text-[12px] font-semibold text-faint">{label} · {hhmm(s.start)}</span>
-                  <span className="min-w-0 flex-1 truncate text-[13.5px] font-semibold">{s.title}</span>
-                  <span className="shrink-0 text-[12px] text-faint">{s.end - s.start} min</span>
+                  <span className="w-[72px] shrink-0 text-caption font-semibold text-faint">{label} · {hhmm(s.start)}</span>
+                  <span className="min-w-0 flex-1 truncate text-small font-semibold">{s.title}</span>
+                  <span className="shrink-0 text-caption text-faint">{s.end - s.start} min</span>
                 </Link>
               </li>
             );

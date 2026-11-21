@@ -44,8 +44,8 @@ export function SubjectsGrid({ subjects, loading = false, onNew }: { subjects: H
         {!many && !loading && (
           <button type="button" onClick={onNew} className="hidden h-[176px] flex-col items-center justify-center gap-2 rounded-[var(--r-card)] border-2 border-dashed border-border text-center hover:border-border-strong hover:bg-muted/40 sm:flex">
             <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-14 w-auto" />
-            <div className="text-[14px] font-semibold">New subject</div>
-            <div className="text-[12px] text-faint">Drop notes, get sessions</div>
+            <div className="text-ui font-semibold">New subject</div>
+            <div className="text-caption text-faint">Drop notes, get sessions</div>
           </button>
         )}
       </div>

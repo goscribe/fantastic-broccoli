@@ -229,7 +229,7 @@ export function SubjectTopics({
           <h2 className="text-[16px] font-semibold">Topics</h2>
           {reorganiseLink}
         </div>
-        <p className="mt-0.5 text-[13px] text-muted-foreground">
+        <p className="mt-0.5 text-small text-muted-foreground">
           {t("course.progressLine").replace("{done}", String(progress.topicsDone)).replace("{total}", String(progress.topicsTotal))}
           {pct !== null ? ` · ${t("course.masteryLine").replace("{pct}", String(pct))}` : ""}
           {ready.withNotes.size > 0 && (
@@ -253,8 +253,8 @@ export function SubjectTopics({
                   aria-expanded={open}
                   className="flex min-h-11 w-full items-center gap-3 rounded-lg px-1 text-left hover:bg-muted/60"
                 >
-                  <span className="min-w-0 flex-1 truncate text-[13.5px] font-semibold">{unitTitle(c, u)}</span>
-                  <span className="shrink-0 text-[12.5px] tabular-nums text-faint">
+                  <span className="min-w-0 flex-1 truncate text-small font-semibold">{unitTitle(c, u)}</span>
+                  <span className="shrink-0 text-caption tabular-nums text-faint">
                     {up.done}/{up.total}
                   </span>
                   <ChevronDown className={cn("size-4 shrink-0 text-faint transition-transform", open && "rotate-180")} />
@@ -286,7 +286,7 @@ export function SubjectTopics({
             {outlineRows(matched.unmatched)}
           </div>
         )}
-        <p className="mt-4 text-[11.5px] leading-snug text-faint">
+        <p className="mt-4 text-caption leading-snug text-faint">
           {t("course.sourceNote")}
           {c.numberingNote ? ` ${c.numberingNote}` : ""}
         </p>
@@ -303,13 +303,13 @@ export function SubjectTopics({
         {reorganiseLink}
       </div>
       {!outline ? (
-        <p className="mt-1.5 text-[13.5px] leading-relaxed text-muted-foreground">
+        <p className="mt-1.5 text-small text-muted-foreground">
           {working ? "Reading your notes…" : "Scribe sorts your files into topics by itself once it has read them."}
         </p>
       ) : (
         <>
           <div className="mt-3">{outlineRows(outline.topics)}</div>
-          <p className="mt-2 text-[12px] text-faint">
+          <p className="mt-2 text-caption text-faint">
             {working && outline.partial ? (
               "Still reading your notes…"
             ) : (
@@ -333,9 +333,9 @@ function OutlineRow({ topic, files, busy, disabled, onStart }: { topic: NotesTop
       <div className="flex items-stretch">
         <button type="button" onClick={onStart} disabled={disabled} aria-label={`Start: ${topic.title}`} className="flex min-h-[52px] min-w-0 flex-1 items-center gap-3 rounded-2xl px-3.5 py-2.5 text-left disabled:opacity-70">
           <span className="min-w-0 flex-1">
-            <span className="block text-[14px] font-semibold leading-snug">{topic.title}</span>
-            {topic.summary && <span className="block truncate text-[12px] text-faint">{topic.summary}</span>}
-            {files.length > 0 && <span className="block truncate text-[12px] text-muted-foreground">Your files: {files.join(", ")}</span>}
+            <span className="block text-ui font-semibold">{topic.title}</span>
+            {topic.summary && <span className="block truncate text-caption text-faint">{topic.summary}</span>}
+            {files.length > 0 && <span className="block truncate text-caption text-muted-foreground">Your files: {files.join(", ")}</span>}
           </span>
           <span className="inline-flex h-8 shrink-0 items-center rounded-[10px] border border-border px-3 text-[13px] font-bold text-foreground">
             {busy ? <Loader2 className="size-4 animate-spin" /> : "Start"}
@@ -354,7 +354,7 @@ function OutlineRow({ topic, files, busy, disabled, onStart }: { topic: NotesTop
         )}
       </div>
       {open && (
-        <ul className="list-disc space-y-1.5 px-4 pb-4 pl-8 text-[13.5px] leading-relaxed marker:text-faint">
+        <ul className="list-disc space-y-1.5 px-4 pb-4 pl-8 text-small marker:text-faint">
           {topic.points.map((p, j) => (
             <li key={j}>
               <MarkdownText text={p} />

@@ -34,9 +34,9 @@ export default function FeaturesPage() {
 
       <PageSection rule className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
         <div>
-          <p className="text-[14px] font-extrabold text-accent-dim">AI copilot</p>
+          <p className="text-small font-extrabold text-accent-dim">AI copilot</p>
           <h2 className="mt-1.5 text-balance text-[26px] font-extrabold leading-[1.12] sm:text-[32px]">Stuck? Ask mid-session.</h2>
-          <p className="mt-3 max-w-lg text-[17px] leading-relaxed text-muted-foreground">
+          <p className="mt-3 max-w-lg text-read text-muted-foreground">
             The copilot answers from your own materials — with citations back to the exact page — and can extend your plan with extra practice when you need it.
           </p>
           <Points
@@ -52,7 +52,7 @@ export default function FeaturesPage() {
       <PageSection rule className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
         <div>
           <h2 className="text-balance text-[26px] font-extrabold leading-[1.12] sm:text-[32px]">Bring your whole course</h2>
-          <p className="mt-3 max-w-lg text-[17px] leading-relaxed text-muted-foreground">
+          <p className="mt-3 max-w-lg text-read text-muted-foreground">
             Scribe handles the formats your course actually comes in — and keeps the figures, diagrams, and structure intact.
           </p>
           <Points

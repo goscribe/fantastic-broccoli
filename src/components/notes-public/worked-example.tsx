@@ -22,12 +22,12 @@ export function WorkedExample({ title, problem, steps, answer }: { title: ReactN
     <div className="nl-card overflow-hidden" data-nl-reveal="">
       <div className="flex items-center gap-3 px-4 pt-4 sm:px-6 sm:pt-5">
         <div className="min-w-0">
-          <p className="text-[13.5px] font-extrabold text-muted-foreground">Worked example</p>
-          <p className="text-[18px] font-extrabold leading-snug text-foreground sm:text-[19px]">{title}</p>
+          <p className="text-small font-extrabold text-muted-foreground">Worked example</p>
+          <p className="text-read font-extrabold text-foreground">{title}</p>
         </div>
       </div>
-      <div className="nl-well mx-4 mt-3 px-4 py-3 text-[16.5px] font-semibold leading-snug text-foreground sm:mx-6 sm:text-[17px]">{problem}</div>
-      <ol className="nl-steps mt-4 px-4 text-[16.5px] leading-[1.55] sm:px-6 sm:text-[17px]">
+      <div className="nl-well mx-4 mt-3 px-4 py-3 text-read font-semibold text-foreground sm:mx-6">{problem}</div>
+      <ol className="nl-steps mt-4 px-4 text-read sm:px-6">
         {steps.map((st, i) => (
           <li key={i} data-veiled={hydrated ? String(i >= visible) : undefined}>
             <span className="nl-stepnum" aria-hidden="true">
@@ -41,7 +41,7 @@ export function WorkedExample({ title, problem, steps, answer }: { title: ReactN
         <span className="nl-stepnum !bg-foreground !text-white" aria-hidden="true">
           <Check className="size-4" strokeWidth={3.5} />
         </span>
-        <p className="nl-veil min-w-0 flex-1 pt-0.5 text-[16.5px] leading-[1.5] text-foreground sm:text-[17px]">
+        <p className="nl-veil min-w-0 flex-1 pt-0.5 text-read text-foreground">
           <span className="font-extrabold">Answer: </span>
           {answer}
         </p>
@@ -60,7 +60,7 @@ export function WorkedExample({ title, problem, steps, answer }: { title: ReactN
               <button type="button" onClick={() => setShown(all)} className="inline-flex min-h-10 items-center gap-1.5 text-[14.5px] font-extrabold text-foreground underline decoration-border-strong underline-offset-4">
                 Show all
               </button>
-              <span className="ml-auto text-[13px] font-bold tabular-nums text-faint">
+              <span className="ml-auto text-small font-bold tabular-nums text-faint">
                 {Math.min(visible, steps.length)}/{steps.length}
               </span>
             </>

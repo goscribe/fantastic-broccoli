@@ -51,7 +51,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
       <div className="flex items-baseline justify-between gap-3">
         <h2 className="text-[16px] font-semibold">{t("prof.progressTitle")}</h2>
         {levels.length > 0 && (
-          <span className="shrink-0 text-[12.5px] tabular-nums text-muted-foreground">
+          <span className="shrink-0 text-caption tabular-nums text-muted-foreground">
             {t("prof.topicCount").replace("{count}", String(levels.length))}
           </span>
         )}
@@ -68,8 +68,8 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
             className="cat-bob h-[60px] w-auto shrink-0 select-none object-contain"
           />
           <div className="min-w-0">
-            <p className="text-[14px] font-semibold">{t("prof.progressEmptyTitle")}</p>
-            <p className="mt-0.5 text-[13px] leading-snug text-muted-foreground">{t("prof.progressEmpty")}</p>
+            <p className="text-ui font-semibold">{t("prof.progressEmptyTitle")}</p>
+            <p className="mt-0.5 text-small text-muted-foreground">{t("prof.progressEmpty")}</p>
           </div>
         </div>
       ) : (
@@ -84,7 +84,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
               />
             ))}
           </div>
-          <p className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-muted-foreground">
+          <p className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-caption text-muted-foreground">
             {counts.map((c) => (
               <span key={c.level} className="inline-flex items-center gap-1.5">
                 <span className={cn("size-2 rounded-full", LEVEL_FILL[c.level])} aria-hidden />
@@ -108,7 +108,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
               return (
                 <li key={l.topic} className="-mx-2 min-w-0 rounded-xl px-2 py-2 transition-colors hover:bg-muted/50">
                   <div className="flex items-center justify-between gap-3">
-                    <span className="min-w-0 truncate text-[14px] font-semibold">{l.label}</span>
+                    <span className="min-w-0 truncate text-ui font-semibold">{l.label}</span>
                     <LevelBadge level={l.level} />
                   </div>
                   <div className="mt-2 flex items-center gap-2.5">
@@ -125,7 +125,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
                         style={{ width: `${Math.max(4, pct)}%` }}
                       />
                     </div>
-                    <span className="w-9 shrink-0 text-right text-[11.5px] font-medium tabular-nums text-muted-foreground">
+                    <span className="w-9 shrink-0 text-right text-caption font-medium tabular-nums text-muted-foreground">
                       {pct}%
                     </span>
                   </div>

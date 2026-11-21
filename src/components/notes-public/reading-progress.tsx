@@ -132,7 +132,7 @@ function Marker({ entry, n, read, active }: { entry: RailEntry; n: number; read:
   return (
     <span
       className={cn(
-        "grid size-6 shrink-0 place-items-center rounded-[7px] border-[1.5px] text-[12px] font-black transition-colors",
+        "grid size-6 shrink-0 place-items-center rounded-[7px] border-[1.5px] text-caption font-black transition-colors",
         read ? "border-accent bg-accent text-white" : active ? "border-foreground bg-card text-foreground" : "border-border-strong bg-card text-muted-foreground",
       )}
       aria-hidden="true"
@@ -148,8 +148,8 @@ export function ReadingRail({ topicKey, entries, footer }: { topicKey: string; e
   return (
     <nav aria-label="On this page" className="sticky top-6 px-1 pb-4 pt-1">
       <div className="flex items-baseline justify-between px-2">
-        <p className="text-[15px] font-extrabold">On this page</p>
-        <p className="text-[12.5px] font-bold tabular-nums text-muted-foreground">
+        <p className="text-ui font-extrabold">On this page</p>
+        <p className="text-small font-bold tabular-nums text-muted-foreground">
           {readCount}/{sections.length} read
         </p>
       </div>
@@ -165,7 +165,7 @@ export function ReadingRail({ topicKey, entries, footer }: { topicKey: string; e
                 href={`#${e.anchor}`}
                 aria-current={active ? "location" : undefined}
                 className={cn(
-                  "flex items-start gap-2.5 rounded-[var(--r-control)] px-2 py-2 text-[14px] leading-snug transition-colors",
+                  "flex items-start gap-2.5 rounded-[var(--r-control)] px-2 py-2 text-ui transition-colors",
                   active ? "bg-muted font-extrabold text-foreground" : "font-semibold text-muted-foreground hover:bg-muted/60 hover:text-foreground",
                 )}
               >
@@ -193,10 +193,10 @@ export function ReadingPill({ topicKey, entries, hideClass = "lg:hidden" }: { to
           <circle cx="18" cy="18" r="15.9155" fill="none" stroke="var(--muted)" strokeWidth="4.2" />
           <circle cx="18" cy="18" r="15.9155" fill="none" stroke="var(--accent)" strokeWidth="4.2" strokeLinecap="round" pathLength={100} />
         </svg>
-        <span className="shrink-0 text-[12.5px] font-extrabold tabular-nums text-muted-foreground">
+        <span className="shrink-0 text-small font-extrabold tabular-nums text-muted-foreground">
           {cur?.kind === "section" ? `${at + 1}/${sections.length}` : "On this page"}
         </span>
-        <span className="min-w-0 flex-1 truncate text-[14.5px] font-bold">{cur?.label}</span>
+        <span className="min-w-0 flex-1 truncate text-ui font-bold">{cur?.label}</span>
         <ChevronDown className="size-4 shrink-0 text-faint transition-transform group-open:rotate-180" />
       </summary>
       <ol className="nl-card nl-up absolute inset-x-0 top-full mt-2 flex max-h-[62vh] flex-col gap-0.5 overflow-y-auto p-2">
@@ -209,7 +209,7 @@ export function ReadingPill({ topicKey, entries, hideClass = "lg:hidden" }: { to
                 onClick={() => {
                   if (ref.current) ref.current.open = false;
                 }}
-                className={cn("flex min-h-11 items-center gap-2.5 rounded-[var(--r-control)] px-2.5 py-2 text-[15px] leading-snug", active ? "bg-muted font-extrabold" : "font-semibold")}
+                className={cn("flex min-h-11 items-center gap-2.5 rounded-[var(--r-control)] px-2.5 py-2 text-ui", active ? "bg-muted font-extrabold" : "font-semibold")}
               >
                 <Marker entry={e} n={i + 1} read={!!e.sectionId && read.has(e.sectionId)} active={active} />
                 <span className="min-w-0 flex-1">{e.label}</span>

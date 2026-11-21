@@ -55,10 +55,10 @@ export function StreakCard({
           )}
           <div className="flex min-w-0 shrink-0 items-baseline gap-1.5">
             <span className="text-[26px] font-extrabold leading-none tabular-nums">{shownStreak}</span>
-            <span className="truncate text-[14px] font-bold text-muted-foreground">{t("today.statStreak")}</span>
+            <span className="truncate text-ui font-bold text-muted-foreground">{t("today.statStreak")}</span>
           </div>
           {streak && (
-            <span className="ml-auto min-w-0 text-right text-[12px] font-bold leading-tight text-muted-foreground">
+            <span className="ml-auto min-w-0 text-right text-caption font-bold leading-tight text-muted-foreground">
               {done ? (
                 <span className="inline-flex items-center gap-1 text-foreground">
                   <Check className="size-3.5 text-[var(--flame-edge)]" strokeWidth={3.5} />
@@ -78,7 +78,7 @@ export function StreakCard({
               const isToday = i === lastIdx;
               return (
                 <li key={d.date} className="flex flex-col items-center gap-1.5">
-                  <span className={cn("text-[11.5px] font-bold", isToday ? "text-foreground" : "text-muted-foreground")}>{names[dow]}</span>
+                  <span className={cn("text-caption font-bold", isToday ? "text-foreground" : "text-muted-foreground")}>{names[dow]}</span>
                   <span
                     style={{ ["--i" as string]: i }}
                     className={cn(

@@ -62,13 +62,13 @@ export function TopicReader({ courseId, segment }: { courseId: string; segment: 
         <div className="mx-auto w-full max-w-[640px] px-4 pt-10 sm:px-6">
           <div className="flex flex-col items-center rounded-[var(--r-card)] border-2 border-dashed border-border px-5 py-10 text-center">
             <Image src="/design/cat3-think.webp" alt="" width={383} height={400} unoptimized className="h-[72px] w-auto" />
-            <p className="mt-3 text-[17px] font-extrabold">{failed ? "We couldn't load this note" : "We couldn't find that topic"}</p>
+            <p className="mt-3 text-read font-extrabold">{failed ? "We couldn't load this note" : "We couldn't find that topic"}</p>
             {failed ? (
               <button type="button" onClick={() => (course.state === "error" ? course.retry() : page.retry())} className="mt-2 text-[14.5px] font-bold text-accent hover:underline">
                 Try again
               </button>
             ) : (
-              <Link href={course.state === "ready" && course.data ? libraryCourseHref(courseId) : LIBRARY_PATH} className="mt-2 text-[14.5px] font-bold text-accent hover:underline">
+              <Link href={course.state === "ready" && course.data ? libraryCourseHref(courseId) : LIBRARY_PATH} className="mt-2 text-ui font-bold text-accent hover:underline">
                 {course.state === "ready" && course.data ? `See every ${course.data.title} topic` : "See every course"}
               </Link>
             )}
@@ -168,7 +168,7 @@ function Reader({ data }: { data: PublicTopic }) {
           paths: APP_PATHS,
           onAnswer,
           top: (
-            <nav aria-label="Where you are" className="flex flex-wrap items-center gap-x-1.5 text-[12.5px] font-semibold text-faint">
+            <nav aria-label="Where you are" className="flex flex-wrap items-center gap-x-1.5 text-caption font-semibold text-faint">
               <Link href={LIBRARY_PATH} className="hover:text-accent">
                 Notes
               </Link>
@@ -197,7 +197,7 @@ function Reader({ data }: { data: PublicTopic }) {
           ),
           finish:
             missed.logged + missed.unlogged > 0 ? (
-              <p className="mt-6 rounded-2xl bg-muted px-4 py-3.5 text-[14.5px] font-semibold leading-snug text-foreground" role="status">
+              <p className="mt-6 rounded-2xl bg-muted px-4 py-3.5 text-ui font-semibold text-foreground" role="status">
                 {missed.logged > 0 ? (
                   <>
                     {missed.logged === 1 ? "The question you missed is" : `The ${missed.logged} questions you missed are`} in your{" "}

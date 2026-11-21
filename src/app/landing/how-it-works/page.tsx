@@ -26,9 +26,9 @@ export default function HowItWorksPage() {
             <li key={step.num} className="life-card flex gap-4 p-5 md:block md:p-7">
               <Cat pose={step.pose} className="h-[72px] shrink-0 md:h-[96px]" />
               <div className="min-w-0 md:mt-5">
-                <div className="text-[13.5px] font-extrabold text-muted-foreground">Step {step.num}</div>
+                <div className="text-small font-extrabold text-muted-foreground">Step {step.num}</div>
                 <h2 className="mt-1 text-[19px] font-extrabold leading-tight">{step.title}</h2>
-                <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{step.description}</p>
+                <p className="mt-2 text-ui text-muted-foreground">{step.description}</p>
               </div>
             </li>
           ))}
