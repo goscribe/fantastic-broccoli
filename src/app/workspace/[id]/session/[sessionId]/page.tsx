@@ -3,6 +3,14 @@
 import { BuildBar } from "@/components/session/build-bar";
 import { useNewUi } from "@/lib/new-ui";
 import { initialCopilotOpen, rememberCopilotOpen } from "@/lib/copilot-pref";
+import {
+  BUBBLE_AFTER_WRONG_MS,
+  BUBBLE_IDLE_MS,
+  BUBBLE_VISIBLE_MS,
+  bubbleAllowed,
+  countCopilotOpen,
+  dismissBubble,
+} from "@/lib/copilot-bubble";
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -129,6 +137,17 @@ const phaseOf = (t: SessionActivity["type"]) =>
     : t === "mcq" || t === "worksheet" || t === "cloze"
       ? "Practice"
       : "Recall";
+
+/** Activities where a student answers something: where "Stuck?" makes sense. */
+const QUESTION_TYPES = new Set(["mcq", "vocab_recall", "cloze", "comprehension_check"]);
+
+function safeLocalStorage(): Storage | null {
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
 
 export default function SessionDetailPage() {
   const { t } = useI18n();
@@ -312,6 +331,40 @@ export default function SessionDetailPage() {
       openedAt.current.set(activeActivity.id, Date.now());
     }
   }, [activeActivity]);
+  // "Stuck? Tap me" on the collapsed Copilot tab: once per visit, on a question,
+  // after a quiet spell or right after a wrong answer. See copilot-bubble.ts.
+  const [bubble, setBubble] = useState<"idle" | "showing" | "done">("idle");
+  const bubbleTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const onQuestion = !!activeActivity && QUESTION_TYPES.has(activeActivity.type);
+  const bubbleCanWait = newUi && planReady && onQuestion && !copilotOpen && !showComments;
+  const offerBubble = useCallback((delay: number) => {
+    clearTimeout(bubbleTimer.current);
+    bubbleTimer.current = setTimeout(() => {
+      setBubble((b) => (b === "idle" && bubbleAllowed(safeLocalStorage()) ? "showing" : b));
+    }, delay);
+  }, []);
+  useEffect(() => {
+    if (bubble !== "idle" || !bubbleCanWait) return;
+    offerBubble(BUBBLE_IDLE_MS);
+    return () => clearTimeout(bubbleTimer.current);
+  }, [bubble, bubbleCanWait, activeActivity?.id, offerBubble]);
+  const bubbleOnWrong = () => {
+    if (bubble === "idle" && bubbleCanWait) offerBubble(BUBBLE_AFTER_WRONG_MS);
+  };
+  // It has had its one showing: leaving the question or opening Copilot or the notes ends it (and so does time, below).
+  if (bubble === "showing" && !bubbleCanWait) setBubble("done");
+  useEffect(() => {
+    if (bubble !== "showing") return;
+    const id = setTimeout(() => setBubble("done"), BUBBLE_VISIBLE_MS);
+    return () => clearTimeout(id);
+  }, [bubble]);
+  /** The student's own tap on the tab, the top-bar button or the bubble. */
+  const openCopilotByTap = () => {
+    countCopilotOpen(safeLocalStorage());
+    setBubble("done");
+    setCopilotOpen(true);
+  };
+  const contentColumn = useRef<HTMLDivElement>(null);
   const secondsOn = (activityId: string) => {
     const start = openedAt.current.get(activityId);
     if (!start) return undefined;
@@ -738,6 +791,7 @@ export default function SessionDetailPage() {
               const question = (activity.content as McqContent).questions[
                 questionIndex
               ];
+              if (question && selectedIndex !== question.correctIndex) bubbleOnWrong();
               if (question?.sourceFlashcardId) {
                 recordFlashcardAttempt({
                   flashcardId: question.sourceFlashcardId,
@@ -794,6 +848,7 @@ export default function SessionDetailPage() {
             draft={activity.draft}
             content={activity.content as VocabRecallContent}
             onTermResult={(index, correct, answer) => {
+              if (!correct) bubbleOnWrong();
               const term = (activity.content as VocabRecallContent).terms[
                 index
               ];
@@ -1012,7 +1067,7 @@ export default function SessionDetailPage() {
                 )}
                 {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
                 {planReady && !copilotOpen && (
-                  <CopilotTrigger compact onClick={() => setCopilotOpen(true)} />
+                  <CopilotTrigger compact onClick={openCopilotByTap} />
                 )}
                 <button
                   type="button"
@@ -1045,7 +1100,7 @@ export default function SessionDetailPage() {
               navDirection === "back" ? "animate-slide-in-left" : "animate-slide-in-right",
             )}
           >
-            <div className={cn("mx-auto w-full", activeActivity ? "max-w-3xl" : "max-w-2xl")}>
+            <div ref={contentColumn} className={cn("mx-auto w-full", activeActivity ? "max-w-3xl" : "max-w-2xl")}>
               {showExtendPrompt && (
                 <div className="mb-5 flex flex-wrap items-center gap-3 rounded-[22px] bg-muted px-5 py-4 animate-fade-up">
                   <div className="min-w-56 flex-1">
@@ -1192,7 +1247,22 @@ export default function SessionDetailPage() {
         </div>
         {copilotPane}
         {commentsPanel}
-        {planReady && !copilotOpen && <CopilotTrigger onClick={() => setCopilotOpen(true)} />}
+        {planReady && !copilotOpen && (
+          <CopilotTrigger
+            onClick={openCopilotByTap}
+            bubble={
+              bubble === "showing"
+                ? {
+                    avoid: contentColumn,
+                    onDismiss: () => {
+                      dismissBubble(safeLocalStorage());
+                      setBubble("done");
+                    },
+                  }
+                : undefined
+            }
+          />
+        )}
       </div>
     );
   }

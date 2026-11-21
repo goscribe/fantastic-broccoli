@@ -183,6 +183,22 @@ input[type="range"].param-slider:active::-moz-range-thumb {
   animation: fade-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* The Copilot tab's speech bubble: a small step in from the cat. */
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateX(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-bubble-in {
+  animation: bubble-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: right center;
+}
+
 @keyframes float-y {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
@@ -529,6 +545,7 @@ input[type="range"].param-slider:active::-moz-range-thumb {
 @media (prefers-reduced-motion: reduce) {
   .animate-streak-pop,
   .animate-fade-up,
+  .animate-bubble-in,
   .cat-wiggle,
   .cat-bob,
   .cat-float,
