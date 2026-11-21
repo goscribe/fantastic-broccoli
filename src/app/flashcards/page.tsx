@@ -3,7 +3,6 @@
 import { buttonClass } from "@/components/ui/button";
 import "@/lib/i18n/flashcards";
 import { MathText } from "@/components/ui/markdown-text";
-import Image from "next/image";
 import Link from "next/link";
 import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -25,9 +24,6 @@ function DeckRow({ deck }: { deck: DeckWithWorkspace }) {
       href={`/flashcards/${item.id}?ws=${workspace.id}`}
       className="group flex items-center gap-4 rounded-2xl border border-border bg-card px-4 py-3.5 transition-colors hover:border-accent/40"
     >
-      <div className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-accent-soft/60">
-        <Image src="/design/props/cards.png" alt="" width={44} height={44} unoptimized className="h-10 w-auto" />
-      </div>
       <div className="min-w-0 flex-1">
         <h3 className="truncate text-[15px] font-semibold leading-tight tracking-tight">
           <MathText text={item.title} />

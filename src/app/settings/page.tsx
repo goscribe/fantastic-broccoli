@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 
 import { Suspense, useEffect, useRef, useState } from "react";
 import { Check, Camera, X } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BILLING_PAUSED, BILLING_PAUSED_MESSAGE } from "@/lib/billing-paused";
@@ -686,14 +685,6 @@ export default function SettingsPage() {
           </p>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <div className="flex items-start gap-3 rounded-2xl border border-border bg-card p-4">
-              <Image
-                src="/design/props/star.png"
-                alt=""
-                width={64}
-                height={64}
-                unoptimized
-                className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
-              />
               <div className="min-w-0">
                 <p className="text-[12px] text-muted-foreground">
                   {t("set.balance")}
