@@ -37,7 +37,7 @@ export function PageHeader({
         )}
         {eyebrow && !back && <div className="text-[12px] font-semibold text-faint">{eyebrow}</div>}
         <h1 className="page-h1 [overflow-wrap:anywhere]">{title}</h1>
-        {subtitle && <p className="mt-1 text-[14px] text-muted-foreground">{subtitle}</p>}
+        {subtitle && <p className="mt-1 text-ui text-muted-foreground">{subtitle}</p>}
         </div>
       </div>
       {actions && <div className="flex shrink-0 flex-wrap items-center gap-2">{actions}</div>}

@@ -46,7 +46,7 @@ export function ActivityItem({
     >
       <span
         className={cn(
-          "flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold tabular-nums",
+          "flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-caption font-bold tabular-nums",
           completed
             ? "bg-accent text-accent-foreground"
             : isActive
@@ -60,13 +60,13 @@ export function ActivityItem({
       <span className="flex-1 min-w-0">
         <span
           className={cn(
-            "block text-[13px] font-medium truncate",
+            "block text-small font-medium truncate",
             completed ? "text-faint line-through" : "text-foreground",
           )}
         >
           <MathText text={activity.title} />
         </span>
-        <span className="block text-[11px] text-muted-foreground">
+        <span className="block text-caption text-muted-foreground">
           {t(ACTIVITY_TYPE_LABELS[activity.type] ?? "session.typeActivity")} ·{" "}
           {formatDuration(activity.estimatedMinutes)}
         </span>

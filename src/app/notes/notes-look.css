@@ -104,10 +104,10 @@
   .nl-btn.nl-btn-sm { border-radius: var(--r-control); }
 
   /* Meta as one quiet line of text ("3 min read · 5 parts · 10 questions"), not a row of chips. */
-  .nl-meta { display: flex; flex-wrap: wrap; column-gap: 8px; row-gap: 2px; font-size: 14px; font-weight: 700; color: var(--muted-foreground); }
+  .nl-meta { display: flex; flex-wrap: wrap; column-gap: 8px; row-gap: 2px; font-size: var(--fs-small); font-weight: 700; color: var(--muted-foreground); }
   .nl-meta > li:not(:last-child)::after { content: "·"; margin-left: 8px; color: var(--faint); }
   /* Exam-paper marks: "[2 marks]" at the end of the line. */
-  .nl-marks { margin-left: auto; white-space: nowrap; font-size: 13.5px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--foreground); }
+  .nl-marks { margin-left: auto; white-space: nowrap; font-size: var(--fs-small); font-weight: 800; font-variant-numeric: tabular-nums; color: var(--foreground); }
 
   /* Cards and rows that lift a little under the pointer. */
   .nl-lift { transition: transform 0.2s var(--ease-out), border-color 0.15s ease; }
@@ -184,7 +184,7 @@
   [data-nl-read] > header .nl-secnum svg { opacity: 1; transform: scale(1); }
 
   /* End of a section: a dot on a line that fills in with a tick when you get there. */
-  .nl-secend { display: flex; align-items: center; gap: 10px; margin-top: 28px; color: var(--faint); font-size: 13px; font-weight: 800; }
+  .nl-secend { display: flex; align-items: center; gap: 10px; margin-top: 28px; color: var(--faint); font-size: var(--fs-small); font-weight: 800; }
   .nl-secend::after { content: ""; height: 1px; flex: 1; background: var(--border-strong); }
   .nl-secend i {
     display: grid;
@@ -205,8 +205,8 @@
   [data-nl-read] > .nl-secend b { max-width: 12em; opacity: 1; }
 
   /* ---------- Prose ---------- */
-  .nl-prose { font-size: 17px; line-height: 1.7; color: #2b2722; }
-  @media (min-width: 640px) { .nl-prose { font-size: 18px; } }
+  /* One reading size for the whole note (tokens.css): body, lists, callouts, examples, questions. Same ink as the lead. */
+  .nl-prose { font-size: var(--fs-read); line-height: var(--lh-read); color: var(--foreground); }
   /* Key phrases get a highlighter stroke instead of plain bold. */
   .nl-prose p strong, .nl-prose li strong {
     font-weight: 800;
@@ -220,8 +220,8 @@
   [data-nl-reveal="wait"] strong { background-size: 0% 0.5em; }
   [data-nl-reveal="in"] strong { animation: nl-mark 0.7s var(--ease-out) 0.25s both; }
   @keyframes nl-mark { from { background-size: 0% 0.5em; } to { background-size: 100% 0.5em; } }
-  .nl-lead { font-size: 20px; line-height: 1.5; font-weight: 600; color: var(--foreground); }
-  @media (min-width: 640px) { .nl-lead { font-size: 23px; line-height: 1.45; } }
+  /* The opening paragraph stands out by weight only: same size, line-height and colour as the rest. */
+  .nl-lead { font-weight: 600; }
   .nl-prose ul.nl-bullets > li { position: relative; padding-left: 26px; }
   .nl-prose ul.nl-bullets > li::before {
     content: "";
@@ -327,8 +327,8 @@
     background: var(--muted);
     padding: 11px 14px;
     text-align: left;
-    font-size: 16px;
-    line-height: 1.35;
+    font-size: var(--fs-read);
+    line-height: 1.4;
     transition: transform 0.1s ease, box-shadow 0.15s ease, background-color 0.15s ease, opacity 0.2s ease;
   }
   .nl-opt[data-state="idle"] { cursor: pointer; }

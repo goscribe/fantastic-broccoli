@@ -61,7 +61,7 @@ function ClozePassage({ m }: { m: Mistake }) {
   const yours = m.detail.yours ?? [];
   const wrong = new Set(m.detail.wrong ?? []);
   return (
-    <p className="text-[15px] leading-8">
+    <p className="text-ui leading-8">
       {parts.map((part, i) => (
         <span key={i}>
           <InlineMarkdown text={part} />
@@ -92,8 +92,8 @@ function AnswerRow({ ok, label, children }: { ok: boolean; label: string; childr
       >
         {ok ? <Check className="size-3" strokeWidth={3} /> : <X className="size-3" strokeWidth={3} />}
       </span>
-      <div className="min-w-0 text-[14px] leading-6">
-        <span className="mr-1.5 text-[12.5px] font-semibold text-muted-foreground">{label}</span>
+      <div className="min-w-0 text-ui">
+        <span className="mr-1.5 text-caption font-semibold text-muted-foreground">{label}</span>
         {children}
       </div>
     </div>
@@ -141,7 +141,7 @@ function MistakeCard({ m, showSubject, highlight = false }: { m: Mistake; showSu
   return (
     <li id={`mistake-${m.id}`} className={cn("life-card scroll-mt-24 p-4 sm:p-5", highlight && "ring-2 ring-accent/40")} data-highlight={highlight || undefined}>
       <div className="flex items-center justify-between gap-3">
-        <p className="min-w-0 truncate text-[12.5px] font-medium text-muted-foreground">
+        <p className="min-w-0 truncate text-caption font-medium text-muted-foreground">
           {t(KIND_KEY[m.kind] ?? "mistakes.kindMcq")} ·{" "}
           {topicHref ? (
             // Its topic: Scribe's note when there is one, else the topic in its subject.
@@ -153,12 +153,12 @@ function MistakeCard({ m, showSubject, highlight = false }: { m: Mistake; showSu
           )}
           {showSubject && m.workspaceTitle !== m.label ? ` · ${m.workspaceTitle}` : ""}
         </p>
-        <span className={cn("shrink-0 text-[12.5px] font-bold", STATE_BADGE[m.state])}>
+        <span className={cn("shrink-0 text-caption font-bold", STATE_BADGE[m.state])}>
           {t(STATE_KEY[m.state])}
         </span>
       </div>
 
-      <div className="mt-2 text-[16.5px] font-extrabold leading-snug [overflow-wrap:anywhere]">
+      <div className="mt-2 text-ui font-extrabold [overflow-wrap:anywhere]">
         {m.kind === "cloze" ? (
           <ClozePassage m={m} />
         ) : m.kind === "mcq" && m.detail.figures?.length ? (
@@ -198,7 +198,7 @@ function MistakeCard({ m, showSubject, highlight = false }: { m: Mistake; showSu
             <ChevronDown className={cn("size-3.5 transition-transform", open && "rotate-180")} />
           </button>
           {open && (
-            <div className="life-rise mt-2 border-l-[3px] border-[var(--edge)] pl-4 text-[14.5px] leading-6 text-foreground/80">
+            <div className="life-rise mt-2 border-l-[3px] border-[var(--edge)] pl-4 text-ui text-foreground/80">
               <MathText text={explanation} />
             </div>
           )}
@@ -207,7 +207,7 @@ function MistakeCard({ m, showSubject, highlight = false }: { m: Mistake; showSu
 
       <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1">
         {sessionHref && m.session && (
-          <Link href={sessionHref} className="inline-flex min-h-10 min-w-0 items-center text-[13px] text-muted-foreground hover:text-foreground">
+          <Link href={sessionHref} className="inline-flex min-h-10 min-w-0 items-center text-small text-muted-foreground hover:text-foreground">
             <span className="truncate underline decoration-border-strong underline-offset-4">
               {fill(t("purpose.fromSession"), { session: m.session.title, date: dateFmt.format(new Date(m.session.date)) })}
             </span>
@@ -217,7 +217,7 @@ function MistakeCard({ m, showSubject, highlight = false }: { m: Mistake; showSu
       </div>
 
       {(m.wrongCount > 1 || m.correctedAt) && (
-        <p className="mt-3 text-[12px] text-faint">
+        <p className="mt-3 text-caption text-faint">
           {m.wrongCount > 1 && fill(t("mistakes.wrongTimes"), { n: m.wrongCount })}
           {m.wrongCount > 1 && m.correctedAt && m.state === "CORRECTED" && " · "}
           {m.correctedAt && m.state === "CORRECTED" && fill(t("mistakes.correctedOn"), { date: dateFmt.format(new Date(m.correctedAt)) })}
@@ -242,7 +242,7 @@ export function MistakeSummaryBar({ counts }: { counts: Record<MistakeState, num
           />
         ))}
       </div>
-      <p className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12.5px] text-muted-foreground">
+      <p className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-caption text-muted-foreground">
         {STATE_ORDER.map((s) => (
           <span key={s} className="inline-flex items-center gap-1.5">
             <span className={cn("size-2 rounded-full", STATE_FILL[s])} aria-hidden />
@@ -322,8 +322,8 @@ export function MistakesView({
     return (
       <div className="px-6 py-10 text-center">
         <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob mx-auto h-24 w-auto select-none" />
-        <p className="mt-3 text-[15px] font-semibold">{t("mistakes.emptyTitle")}</p>
-        <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">{t("mistakes.empty")}</p>
+        <p className="mt-3 text-ui font-semibold">{t("mistakes.emptyTitle")}</p>
+        <p className="mx-auto mt-1 max-w-sm text-ui text-muted-foreground">{t("mistakes.empty")}</p>
       </div>
     );
   }
@@ -342,7 +342,7 @@ export function MistakesView({
                     {t("mistakes.practice")}
                   </Button>
                 </Link>
-                <span className="w-full text-center text-[13px] text-muted-foreground sm:w-auto sm:text-left">
+                <span className="w-full text-center text-small text-muted-foreground sm:w-auto sm:text-left">
                   {mixed ? `${mixed} · ` : ""}
                   {fill(t(practiceCount === 1 ? "mistakes.practiceSubOne" : "mistakes.practiceSub"), {
                     n: practiceCount,
@@ -354,8 +354,8 @@ export function MistakesView({
               <div className="mt-4 flex items-center gap-3">
                 <span className="grid size-8 shrink-0 place-items-center rounded-full bg-emerald-600 text-white"><Check className="size-4" strokeWidth={3.5} /></span>
                 <div>
-                  <p className="text-[14px] font-semibold">{t("mistakes.allFixedTitle")}</p>
-                  <p className="text-[12.5px] text-muted-foreground">{t("mistakes.allFixed")}</p>
+                  <p className="text-ui font-semibold">{t("mistakes.allFixedTitle")}</p>
+                  <p className="text-caption text-muted-foreground">{t("mistakes.allFixed")}</p>
                 </div>
               </div>
             )}
@@ -406,7 +406,7 @@ export function MistakesView({
       </div>
 
       {sessionId && (
-        <p className="flex flex-wrap items-center gap-x-3 text-[14px]">
+        <p className="flex flex-wrap items-center gap-x-3 text-ui">
           <span className="font-semibold">{fill(t("purpose.onlySession"), { session: fromSession?.title ?? "…" })}</span>
           {onClearSession && (
             <button type="button" onClick={onClearSession} className="inline-flex min-h-10 items-center font-bold text-muted-foreground underline decoration-border-strong underline-offset-4 hover:text-foreground">
@@ -425,7 +425,7 @@ export function MistakesView({
       ) : items.length === 0 ? (
         // Nothing left to fix is already said once, in the summary above; only the other tabs need their own line.
         filter === "open" ? null : (
-          <p className="py-8 text-[15px] font-semibold text-muted-foreground">{t("mistakes.noneCorrected")}</p>
+          <p className="py-8 text-ui font-semibold text-muted-foreground">{t("mistakes.noneCorrected")}</p>
         )
       ) : (
         <ul className="space-y-3">

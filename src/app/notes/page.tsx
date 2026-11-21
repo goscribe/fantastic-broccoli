@@ -63,7 +63,7 @@ export default async function NotesIndexPage() {
         <section key={g.board} className="mt-11 scroll-mt-6" aria-labelledby={`b-${g.board}`}>
           <h2 id={`b-${g.board}`} className="flex items-baseline gap-2.5 text-[24px] font-black sm:text-[28px]">
             {BOARD_LABEL[g.board]}
-            <span className="text-[14px] font-bold tracking-normal text-muted-foreground">
+            <span className="text-ui font-bold tracking-normal text-muted-foreground">
               {g.courses.length} {g.courses.length === 1 ? "course" : "courses"}
             </span>
           </h2>

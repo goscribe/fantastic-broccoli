@@ -47,7 +47,7 @@ export function ExplainAloudActivity({
     const got = covered.filter(Boolean).length;
     return (
       <div className="space-y-5">
-        <p data-scroll-line className="text-[13px] font-semibold text-muted-foreground">{t("session.explainTitle")}</p>
+        <p data-scroll-line className="text-small font-semibold text-muted-foreground">{t("session.explainTitle")}</p>
         {/* The prompt is the headline of the page, not a box on it. */}
         <p className="life-rise text-[24px] font-extrabold leading-[1.25] tracking-tight text-foreground sm:text-[28px]">
           <MathText text={content.prompt} />
@@ -55,7 +55,7 @@ export function ExplainAloudActivity({
 
         {phase === "idle" && (
           <>
-            <p className="text-[14.5px] leading-6 text-muted-foreground">{t("session.explainHint")}</p>
+            <p className="text-ui text-muted-foreground">{t("session.explainHint")}</p>
             <PlayActions>
               <PlayPrimary onClick={() => setPhase("recording")}>{t("session.startExplaining")}</PlayPrimary>
             </PlayActions>
@@ -74,7 +74,7 @@ export function ExplainAloudActivity({
               ))}
             </div>
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <p className="flex items-center gap-2.5 text-[15.5px] font-extrabold" role="timer">
+              <p className="flex items-center gap-2.5 text-ui font-extrabold" role="timer">
                 <span className="size-2.5 rounded-full bg-rose-500 animate-pulse-dot motion-reduce:animate-none" aria-hidden />
                 {t("session.listening")}
                 <span className="font-semibold tabular-nums text-muted-foreground">{formatTime(seconds)}</span>
@@ -86,7 +86,7 @@ export function ExplainAloudActivity({
 
         {phase === "review" && (
           <div className="life-rise space-y-4">
-            <p className="text-[15.5px] font-extrabold">
+            <p className="text-ui font-extrabold">
               {t("session.keyPointsQuestion")}
               <span className="ml-2 font-semibold tabular-nums text-muted-foreground">
                 {got}/{content.keyPoints.length}
@@ -141,15 +141,15 @@ export function ExplainAloudActivity({
 
   return (
     <div>
-      <p className={newUi ? "mb-1.5 text-[15px] font-semibold text-muted-foreground" : "text-sm font-semibold mb-1.5"}>
+      <p className={newUi ? "mb-1.5 text-ui font-semibold text-muted-foreground" : "text-ui font-semibold mb-1.5"}>
         {t("session.explainTitle")}
       </p>
-      <p className="text-xs text-muted-foreground mb-5">
+      <p className="text-caption text-muted-foreground mb-5">
         {t("session.explainHint")}
       </p>
 
       <Surface muted className="p-4 mb-5">
-        <p className={newUi ? "text-[20px] font-bold leading-[1.35] text-foreground" : "text-sm text-foreground font-medium"}>
+        <p className={newUi ? "text-[20px] font-bold leading-[1.35] text-foreground" : "text-ui text-foreground font-medium"}>
           <MathText text={content.prompt} />
         </p>
       </Surface>
@@ -166,8 +166,8 @@ export function ExplainAloudActivity({
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2.5">
               <span className="h-2.5 w-2.5 rounded-full bg-rose animate-pulse-dot" />
-              <span className="text-sm font-semibold">{t("session.listening")}</span>
-              <span className="text-sm text-muted-foreground tabular-nums">
+              <span className="text-ui font-semibold">{t("session.listening")}</span>
+              <span className="text-ui text-muted-foreground tabular-nums">
                 {formatTime(seconds)}
               </span>
             </div>
@@ -193,7 +193,7 @@ export function ExplainAloudActivity({
 
       {phase === "review" && (
         <div>
-          <p className="text-sm font-semibold mb-3">
+          <p className="text-ui font-semibold mb-3">
             {t("session.keyPointsQuestion")}
           </p>
           <div className="space-y-2 mb-5">

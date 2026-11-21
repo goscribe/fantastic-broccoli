@@ -106,11 +106,11 @@ function UnitView({ course, unit }: { course: PublicCourse; unit: PublicUnit }) 
         style={familyVars(familyFor(`${course.subject} ${course.title}`)) as React.CSSProperties}
       >
         <SubjectArt family={familyFor(`${course.subject} ${course.title}`)} eager />
-        <p className="nl-rise pr-[92px] text-[14px] font-extrabold sm:pr-0">{course.title}</p>
+        <p className="nl-rise pr-[92px] text-ui font-extrabold sm:pr-0">{course.title}</p>
         <h1 className="nl-rise mt-2 text-balance pr-[92px] text-[30px] font-black leading-[1.06] sm:pr-0 sm:text-[42px]" style={stagger(1)}>
           {unitTitle(course, unit)}
         </h1>
-        <p className="nl-rise mt-3 text-[16.5px] font-semibold leading-snug text-white/90 sm:text-[18px]" style={stagger(2)}>
+        <p className="nl-rise mt-3 text-read font-semibold text-white/90" style={stagger(2)}>
           {empty ? "Scribe's notes and practice questions for this unit are on their way. For now, see what each topic covers." : "Notes and exam-style practice questions with worked answers"}
         </p>
         <ul className="nl-meta nl-rise mt-3" style={stagger(3)}>

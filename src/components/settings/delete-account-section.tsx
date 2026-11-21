@@ -45,7 +45,7 @@ export function DeleteAccountSection({ email }: { email?: string | null }) {
       <h2 id="delete-account-title" className="page-h2">
         {t("del.title")}
       </h2>
-      <p className="mt-0.5 max-w-xl text-[13px] text-muted-foreground">
+      <p className="mt-0.5 max-w-xl text-small text-muted-foreground">
         {t("del.hint").replace("{days}", days)}
       </p>
       <Button
@@ -170,14 +170,14 @@ function DeleteAccountDialog({
         <h2 id={titleId} className="text-xl font-bold tracking-tight">
           {t("del.dialogTitle")}
         </h2>
-        <ul id={descId} className="mt-3 list-disc space-y-2 pl-5 text-[14px] leading-relaxed text-foreground">
+        <ul id={descId} className="mt-3 list-disc space-y-2 pl-5 text-ui text-foreground">
           <li>{t("del.signedOut")}</li>
           <li>{t("del.permanent").replace("{date}", date).replace("{days}", days)}</li>
           <li>{t("del.restore").replace("{date}", date)}</li>
           <li>{t("del.billing")}</li>
         </ul>
         <form onSubmit={submit} className="mt-5">
-          <label htmlFor={inputId} className="block text-[13px] font-semibold">
+          <label htmlFor={inputId} className="block text-small font-semibold">
             {t("del.typeLabel").replace("{word}", DELETE_CONFIRM_WORD)}
           </label>
           <input
@@ -194,7 +194,7 @@ function DeleteAccountDialog({
             className={cn(inputClass, "mt-1.5 h-11")}
           />
           {error && (
-            <p id={errorId} role="alert" className="mt-3 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-[13px] text-rose-700">
+            <p id={errorId} role="alert" className="mt-3 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-small text-rose-700">
               {error}
             </p>
           )}
@@ -225,10 +225,10 @@ function DeletionScheduled({ date, email, locale }: { date: Date; email?: string
         <h1 ref={headingRef} tabIndex={-1} className="text-2xl font-bold tracking-tight outline-none">
           {t("del.doneTitle")}
         </h1>
-        <p className="mt-3 text-[15px] leading-relaxed text-foreground">
+        <p className="mt-3 text-ui text-foreground">
           {t("del.doneBody").replace("{date}", longDate(date, locale))}
         </p>
-        <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-ui text-muted-foreground">
           {email ? t("del.doneEmail").replace("{email}", email) : t("del.doneEmailNoAddress")}
         </p>
         {/* A full navigation: the cached session in memory is no longer valid. */}

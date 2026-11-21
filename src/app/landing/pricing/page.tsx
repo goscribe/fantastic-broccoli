@@ -27,7 +27,7 @@ export default function LandingPricingPage() {
         />
 
         {BILLING_PAUSED && (
-          <p className="mt-6 max-w-2xl rounded-[var(--r-control)] border border-border-strong bg-muted px-4 py-3 text-[14.5px] text-foreground">
+          <p className="mt-6 max-w-2xl rounded-[var(--r-control)] border border-border-strong bg-muted px-4 py-3 text-ui text-foreground">
             <span className="font-extrabold">Billing is paused.</span> Card payments are unavailable right now, so nobody is being charged and every account has Pro for free. The prices below apply once billing is back.
           </p>
         )}
@@ -36,8 +36,8 @@ export default function LandingPricingPage() {
             <div key={plan.name} className={`life-card flex flex-col p-6 ${plan.highlighted ? "border-2 border-accent" : ""}`}>
               <h2 className="text-[16px] font-extrabold">{plan.name}</h2>
               <p className="mt-3 text-[34px] font-extrabold leading-none tracking-tight">{plan.price}</p>
-              <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{plan.description}</p>
-              <ul className="mt-5 flex-1 list-disc space-y-2 pl-5 text-[14.5px] leading-relaxed text-muted-foreground marker:text-border-strong">
+              <p className="mt-3 text-ui text-muted-foreground">{plan.description}</p>
+              <ul className="mt-5 flex-1 list-disc space-y-2 pl-5 text-ui text-muted-foreground marker:text-border-strong">
                 {plan.features.map((feature) => (
                   <li key={feature}>{feature}</li>
                 ))}
@@ -55,7 +55,7 @@ export default function LandingPricingPage() {
             </div>
           ))}
         </div>
-        <p className="mt-6 text-center text-[13.5px] text-muted-foreground">
+        <p className="mt-6 text-center text-small text-muted-foreground">
           Manage or switch plans anytime from the{" "}
           <Link href="/pricing" className="underline hover:text-foreground">
             pricing page

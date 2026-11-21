@@ -130,7 +130,7 @@ export function LearnHome({ folderId }: { folderId: string }) {
   if (loadError && workspaces.length === 0) {
     return (
       <div className="mx-auto w-full max-w-[1180px] px-4 pb-12 pt-5 sm:px-6 sm:pt-6">
-        <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>
+        <Link href="/" className="text-caption font-semibold text-faint hover:text-accent">← Home</Link>
         <LoadError
           className="mt-10"
           onRetry={() => {
@@ -148,7 +148,7 @@ export function LearnHome({ folderId }: { folderId: string }) {
       <div className="flex min-w-0 flex-1 flex-col gap-4 sm:gap-5">
         <div className="flex items-end justify-between gap-3">
           <div>
-            <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>
+            <Link href="/" className="text-caption font-semibold text-faint hover:text-accent">← Home</Link>
             <h1 className="text-[22px] font-bold leading-tight sm:text-[26px]">{scopeTitle ?? <Skeleton className="h-7 w-48" />}</h1>
           </div>
         </div>
@@ -177,9 +177,9 @@ export function LearnHome({ folderId }: { folderId: string }) {
             const { done, total, next } = sessionProgress(suggested);
             return (
               <div>
-                <div className="text-[12px] font-bold text-accent-dim">Suggested next</div>
+                <div className="text-caption font-bold text-accent-dim">Suggested next</div>
                 <div className="mt-1 text-[16px] font-extrabold leading-tight">{next ? `${activityLabel(next.type)} · ${next.title}` : suggested.title}</div>
-                <div className="mt-1 text-[13px] text-muted-foreground">
+                <div className="mt-1 text-small text-muted-foreground">
                   {next ? `${next.estimatedMinutes} min · ` : ""}
                   {done} of {total} done
                   {wsById.get(suggested.workspaceId) ? ` · ${wsById.get(suggested.workspaceId)?.title}` : ""}
@@ -205,7 +205,7 @@ export function LearnHome({ folderId }: { folderId: string }) {
           ) : (
             <div className="mt-2 flex items-baseline gap-3">
               <span className="text-[40px] font-extrabold leading-none tabular-nums">{due}</span>
-              <div className="text-[13px] leading-snug text-muted-foreground">{due ? `flashcards due today across all your subjects, about ${Math.max(1, Math.round(due / 3))} min` : "Nothing due right now"}</div>
+              <div className="text-small text-muted-foreground">{due ? `flashcards due today across all your subjects, about ${Math.max(1, Math.round(due / 3))} min` : "Nothing due right now"}</div>
             </div>
           )}
           <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full text-[14px] font-semibold", due && !suggested ? "bg-accent text-white hover:bg-accent-dim" : "bg-muted hover:bg-accent-soft")}>

@@ -44,7 +44,7 @@ export function CourseView({ courseId }: { courseId: string }) {
   return (
     <div className="notes-look flex-1">
       <PageShell as="div" max="max-w-[900px]">
-        <Link href={LIBRARY_PATH} className="text-[12px] font-semibold text-faint hover:text-accent">
+        <Link href={LIBRARY_PATH} className="text-caption font-semibold text-faint hover:text-accent">
           ← Notes
         </Link>
         {loaded.state === "loading" && <div className="mt-2 h-[220px] animate-pulse rounded-[var(--r-panel)] bg-muted" aria-busy="true" />}
@@ -57,7 +57,7 @@ export function CourseView({ courseId }: { courseId: string }) {
                 Try again
               </button>
             ) : (
-              <Link href={LIBRARY_PATH} className="mt-2 text-[14.5px] font-bold text-accent hover:underline">
+              <Link href={LIBRARY_PATH} className="mt-2 text-ui font-bold text-accent hover:underline">
                 See every course
               </Link>
             )}
@@ -83,20 +83,20 @@ function Outline({ course, subject }: { course: PublicCourse; subject: CourseSub
     <>
       <header className="subject-band nl-band mt-2 px-5 pb-6 pt-5 sm:px-9 sm:pb-8 sm:pt-7 sm:pr-[250px]" style={familyVars(family) as React.CSSProperties} data-nl-course={course.id} data-total={topics.length}>
         <SubjectArt family={family} eager />
-        <p className="flex min-h-[84px] items-center pr-[96px] text-[14px] font-bold leading-snug text-white/90 sm:min-h-0 sm:pr-0">
+        <p className="flex min-h-[84px] items-center pr-[96px] text-ui font-bold text-white/90 sm:min-h-0 sm:pr-0">
           <span>
             <span className="font-extrabold text-white">{course.boardName}</span> · {course.qualification}
             {subject?.level ? ` · ${subject.level}` : course.levels?.length ? ` · ${course.levels.join(" and ")}` : ""}
           </span>
         </p>
         <h1 className="mt-2 text-[30px] font-black leading-[1.05] sm:text-[40px]">{course.title}</h1>
-        <p className="mt-2.5 max-w-[560px] text-[16px] font-semibold leading-snug text-white/90 sm:text-[17.5px]">
+        <p className="mt-2.5 max-w-[560px] text-read font-semibold text-white/90">
           {empty
             ? `${topics.length} topics in ${course.units.length} units. Scribe's notes for this course are on their way; for now, see what each topic covers.`
             : [`${topics.length} topics`, notes ? `${notes.toLocaleString("en-GB")} notes` : null, questions ? `${questions.toLocaleString("en-GB")} practice questions` : null].filter(Boolean).join(" · ")}
         </p>
         {locked > 0 && (
-          <p className="mt-2 inline-flex items-center gap-1.5 text-[13.5px] font-bold text-white/90">
+          <p className="mt-2 inline-flex items-center gap-1.5 text-small font-bold text-white/90">
             <Lock className="size-3.5" strokeWidth={2.75} aria-hidden="true" />
             {lockedCountLabel(locked, course.board === "IB" ? "HL" : course.board === "A_LEVEL" ? "A_LEVEL" : "PLAN")}
           </p>
@@ -106,7 +106,7 @@ function Outline({ course, subject }: { course: PublicCourse; subject: CourseSub
             <div className="nl-meter" aria-hidden="true">
               <span />
             </div>
-            <p data-nl-count className="mt-1.5 text-[13px] font-bold text-white/90">
+            <p data-nl-count className="mt-1.5 text-small font-bold text-white/90">
               Not started yet
             </p>
           </div>
@@ -128,7 +128,7 @@ function Outline({ course, subject }: { course: PublicCourse; subject: CourseSub
         </div>
       </header>
       <CourseUnits course={course} topicHref={(t) => appTopicHref(course.id, t)} unitHref={null} />
-      <p className="mt-10 text-[12.5px] leading-snug text-faint">{course.sourceNote}</p>
+      <p className="mt-10 text-caption leading-snug text-faint">{course.sourceNote}</p>
       <NotesProgress key={course.id} />
     </>
   );

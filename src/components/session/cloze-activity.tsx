@@ -107,7 +107,7 @@ export function ClozeActivity({
   if (newUi) {
     return (
       <div>
-        <p data-scroll-line className="mb-4 text-[13px] font-semibold text-muted-foreground">
+        <p data-scroll-line className="mb-4 text-small font-semibold text-muted-foreground">
           {t("session.clozeInstruction")}
         </p>
 
@@ -159,11 +159,11 @@ export function ClozeActivity({
           <>
             {checked && (
               <div className="life-rise mt-4 space-y-1.5" role="status">
-                <p className="text-[14.5px] font-bold text-foreground">
+                <p className="text-ui font-bold text-foreground">
                   {correctCount}/{passage.answers.length} {t("session.clozeFixHint")}
                 </p>
                 {feedbacks.map((r, i) => (
-                  <p key={i} className="text-[14.5px] leading-6 text-foreground/80">
+                  <p key={i} className="text-ui text-foreground/80">
                     <MathText text={r.feedback} />
                   </p>
                 ))}
@@ -184,11 +184,11 @@ export function ClozeActivity({
   return (
     <div>
       <ConfettiBurst burst={burst} />
-      <p className={newUi ? "mb-5 text-[15px] font-semibold text-muted-foreground" : "text-sm font-semibold mb-4"}>
+      <p className={newUi ? "mb-5 text-ui font-semibold text-muted-foreground" : "text-ui font-semibold mb-4"}>
         {t("session.clozeInstruction")}
       </p>
 
-      <p className={newUi ? "text-[17px] leading-[2.3] text-foreground" : "text-[15px] leading-8 text-foreground"}>
+      <p className={newUi ? "text-read leading-[2.3] text-foreground" : "text-ui leading-8 text-foreground"}>
         {parts.map((part, i) => (
           <span key={i}>
             <InlineMarkdown text={part} />
@@ -220,11 +220,11 @@ export function ClozeActivity({
 
       {checked && !allCorrect && (
         <div className="mt-4 space-y-1.5">
-          <p className={newUi ? "text-[13.5px] font-semibold text-muted-foreground" : "text-xs text-muted-foreground"}>
+          <p className={newUi ? "text-small font-semibold text-muted-foreground" : "text-caption text-muted-foreground"}>
             {correctCount}/{passage.answers.length} {t("session.clozeFixHint")}
           </p>
           {feedbacks.map((r, i) => (
-            <p key={i} className={newUi ? "text-[13.5px] text-red-600 dark:text-red-400" : "text-xs text-red-600 dark:text-red-400"}>
+            <p key={i} className={newUi ? "text-small text-red-600 dark:text-red-400" : "text-caption text-red-600 dark:text-red-400"}>
               <MathText text={r.feedback} />
             </p>
           ))}

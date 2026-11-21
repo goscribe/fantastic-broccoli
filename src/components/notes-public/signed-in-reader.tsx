@@ -61,17 +61,17 @@ export function SignedInNoteReader({ courseId, topicId }: { courseId: string; to
     <div className="flex-1 bg-background">
       <div className="mx-auto w-full max-w-[720px] lg:grid lg:max-w-[1000px] lg:grid-cols-[minmax(0,720px)_220px] lg:gap-10">
       <article className="min-w-0 px-4 pb-16 pt-5 sm:px-6 sm:pt-8 lg:px-0">
-        <Link href="/courses" className="text-[13px] font-semibold text-faint hover:text-accent">
+        <Link href="/courses" className="text-small font-semibold text-faint hover:text-accent">
           ← {t("notes.back")}
         </Link>
         {state === "loading" && <div className="mt-6 h-[420px] animate-pulse rounded-2xl bg-muted" aria-busy="true" />}
         {(state === "missing" || state === "error") && (
-          <p className="mt-8 text-[15px] text-muted-foreground">{t(state === "missing" ? "notes.notFound" : "notes.loadError")}</p>
+          <p className="mt-8 text-ui text-muted-foreground">{t(state === "missing" ? "notes.notFound" : "notes.loadError")}</p>
         )}
         {state === "ready" && note && (
           <>
             <header className="mt-4">
-              <p className="text-[13px] font-medium text-muted-foreground">
+              <p className="text-small font-medium text-muted-foreground">
                 {course ? course.title : note.content.courseId}
                 {course && unit ? ` · ${unitTitle(course, unit)}` : ` · ${note.content.unitCode} ${note.content.unitName}`}
               </p>
@@ -81,7 +81,7 @@ export function SignedInNoteReader({ courseId, topicId }: { courseId: string; to
               <div className="mt-2.5 flex flex-wrap items-center gap-2">
                 <span
                   className={cn(
-                    "rounded-full px-2.5 py-1 text-[12.5px] font-semibold",
+                    "rounded-full px-2.5 py-1 text-caption font-semibold",
                     note.label === "reviewed" ? "bg-accent-soft text-accent-dim" : "bg-muted text-muted-foreground",
                   )}
                 >
@@ -114,12 +114,12 @@ export function SignedInNoteReader({ courseId, topicId }: { courseId: string; to
 
             {course && topic && (
               <div className="mt-12 rounded-2xl border border-border bg-card px-4 py-4 sm:px-5">
-                <p className="text-[15px] leading-snug text-muted-foreground">{t("notes.practiseHint")}</p>
+                <p className="text-ui text-muted-foreground">{t("notes.practiseHint")}</p>
                 <StartButtons course={course} topic={topic} className="mt-3" />
               </div>
             )}
 
-            <footer className="mt-8 flex flex-col gap-1 text-[12.5px] leading-snug text-faint">
+            <footer className="mt-8 flex flex-col gap-1 text-small text-faint">
               <p>{t(note.label === "reviewed" ? "notes.reviewedFoot" : "notes.draftFoot")}</p>
               <p>{t("notes.sourceFoot")}</p>
             </footer>
@@ -144,10 +144,10 @@ function ReaderUnlock({ courseId, topicId, summary, headings }: { courseId: stri
     <section className="mt-9" aria-labelledby="h-reader-unlock">
       {headings.length > 0 && (
         <>
-          <p className="text-[13px] font-semibold text-muted-foreground">{t("notes.unlockStillToCome")}</p>
+          <p className="text-small font-semibold text-muted-foreground">{t("notes.unlockStillToCome")}</p>
           <ol className="mt-2 flex flex-col gap-2">
             {headings.map((h, i) => (
-              <li key={i} className="flex items-start gap-2.5 rounded-xl border border-dashed border-border-strong px-4 py-3 text-[16px] font-semibold leading-snug text-muted-foreground">
+              <li key={i} className="flex items-start gap-2.5 rounded-xl border border-dashed border-border-strong px-4 py-3 text-read font-semibold text-muted-foreground">
                 <Lock className="mt-1 size-3.5 shrink-0 text-faint" aria-hidden="true" />
                 <span className="min-w-0">
                   <InlineMarkdown text={h} />
@@ -161,8 +161,8 @@ function ReaderUnlock({ courseId, topicId, summary, headings }: { courseId: stri
         <h2 id="h-reader-unlock" className="text-[20px] font-bold leading-snug">
           {t("notes.unlockTitle")}
         </h2>
-        <p className="mt-1.5 text-[15px] leading-snug text-muted-foreground">{t(lead)}</p>
-        <p className="mt-2 text-[15px] leading-snug">{t("notes.unlockExtras")}</p>
+        <p className="mt-1.5 text-ui text-muted-foreground">{t(lead)}</p>
+        <p className="mt-2 text-ui">{t("notes.unlockExtras")}</p>
         <a
           href={paywallHref(courseId, topicId)}
           onClick={() => trackNoteEvent("notes.unlock_clicked", courseId, topicId, { placement: "unlock_panel", lockedKind: summary.kind, signedIn: true })}
@@ -170,7 +170,7 @@ function ReaderUnlock({ courseId, topicId, summary, headings }: { courseId: stri
         >
           {t("notes.tryFree")}
         </a>
-        <p className="mt-3 text-[13px] leading-snug text-faint">{t("notes.trialHint")}</p>
+        <p className="mt-3 text-small text-faint">{t("notes.trialHint")}</p>
       </div>
     </section>
   );

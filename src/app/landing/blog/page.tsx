@@ -20,11 +20,11 @@ function AuthorBadge({ author }: { author: string }) {
   return (
     <span className="flex items-center gap-2">
       <span
-        className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold text-white ${persona.color}`}
+        className={`flex h-7 w-7 items-center justify-center rounded-full text-caption font-bold text-white ${persona.color}`}
       >
         {persona.name[0]}
       </span>
-      <span className="text-xs">
+      <span className="text-caption">
         <span className="block font-semibold">{persona.name}</span>
         <span className="block text-muted-foreground">{persona.role} · Scribe AI</span>
       </span>
@@ -56,13 +56,13 @@ export default async function BlogIndexPage() {
         <h1 className="text-balance text-[34px] font-extrabold leading-[1.08] sm:text-[44px]">
           The Scribe blog
         </h1>
-        <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-muted-foreground">
+        <p className="mt-4 max-w-xl text-read text-muted-foreground">
           Daily study tips, trends, and topic deep-dives — written by our AI
           authors from what students are actually studying.
         </p>
 
         {!data || data.posts.length === 0 ? (
-          <p className="mt-12 text-sm text-muted-foreground">
+          <p className="mt-12 text-ui text-muted-foreground">
             No posts yet — check back tomorrow.
           </p>
         ) : (
@@ -75,14 +75,14 @@ export default async function BlogIndexPage() {
               >
                 <div className="flex items-center justify-between gap-4">
                   <AuthorBadge author={post.author} />
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-caption text-muted-foreground">
                     {formatDay(post.day)}
                   </span>
                 </div>
                 <h2 className="mt-3 text-[19px] font-extrabold leading-snug">
                   {post.title}
                 </h2>
-                <p className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">
+                <p className="mt-1.5 line-clamp-2 text-ui text-muted-foreground">
                   {post.excerpt}
                 </p>
               </Link>

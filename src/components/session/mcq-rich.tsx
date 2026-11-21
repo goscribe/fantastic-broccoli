@@ -41,7 +41,7 @@ export function McqQuestionBody({
     if (fig) {
       placed.add(fig.id);
       parts.push(
-        <div key={key++} className="my-3 text-base font-normal">
+        <div key={key++} className="my-3 text-read font-normal">
           <FigureView figure={fig} />
         </div>,
       );
@@ -55,7 +55,7 @@ export function McqQuestionBody({
     <>
       {parts}
       {loose.map((f) => (
-        <div key={f.id} className="mt-3 text-base font-normal">
+        <div key={f.id} className="mt-3 text-read font-normal">
           <FigureView figure={f} />
         </div>
       ))}
@@ -73,7 +73,7 @@ export function McqOptionBody({ text, figures }: { text: string; figures?: Readi
       {ids.map((id) => {
         const fig = byId.get(id);
         return fig ? (
-          <span key={id} className="pointer-events-none block w-full max-w-[340px] overflow-hidden rounded-lg text-sm font-normal">
+          <span key={id} className="pointer-events-none block w-full max-w-[340px] overflow-hidden rounded-lg text-ui font-normal">
             <FigureView figure={fig} bare />
           </span>
         ) : null;

@@ -63,8 +63,8 @@ export function CourseShelf() {
         href="/courses"
         className="flex min-h-[56px] items-center gap-3 rounded-2xl border border-dashed border-border px-4 py-3 text-left transition-colors hover:border-border-strong"
       >
-        <span className="min-w-0 flex-1 text-[13.5px] text-muted-foreground">{t("course.homeEmpty")}</span>
-        <span className="shrink-0 text-[13px] font-semibold text-accent">{t("course.browse")}</span>
+        <span className="min-w-0 flex-1 text-small text-muted-foreground">{t("course.homeEmpty")}</span>
+        <span className="shrink-0 text-small font-semibold text-accent">{t("course.browse")}</span>
       </Link>
     );
   }
@@ -72,7 +72,7 @@ export function CourseShelf() {
     <section>
       <div className="mb-3 flex items-center justify-between">
         <h2 className="text-[20px] font-extrabold">{t("course.yourCourses")}</h2>
-        <Link href="/courses" className="inline-flex items-center gap-1 text-[13px] font-semibold text-accent hover:underline">
+        <Link href="/courses" className="inline-flex items-center gap-1 text-small font-semibold text-accent hover:underline">
           {t("course.addCourse")}
         </Link>
       </div>

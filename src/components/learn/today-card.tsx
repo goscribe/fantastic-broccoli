@@ -107,7 +107,7 @@ export function HomeBannerError({ greeting, onRetry, retrying }: { greeting: str
         <h2 id="today-title" className="text-[21px] font-extrabold leading-[1.2] @2xl:max-w-[440px] @2xl:text-[24px]">
           {t("today.loadError")}
         </h2>
-        <p className="mt-1.5 text-[15px] leading-snug text-foreground/75 @2xl:max-w-[420px]">{t("today.loadErrorBody")}</p>
+        <p className="mt-1.5 text-ui text-foreground/75 @2xl:max-w-[420px]">{t("today.loadErrorBody")}</p>
         <button type="button" disabled={retrying} onClick={onRetry} className={cn(primaryBtn, "mt-4 h-[52px] text-[16px] @2xl:w-auto @2xl:min-w-[220px]")}>
           {retrying && <Loader2 className="size-5 animate-spin" />}
           {t("today.retry")}
@@ -151,7 +151,7 @@ export function HomeBanner({
             <h2 id="today-title" className="text-balance text-[22px] font-extrabold leading-[1.15] @2xl:text-[26px]">
               {t("today.uploadTitle")}
             </h2>
-            <p className="mt-2 text-[15px] leading-relaxed text-foreground/75">{t("today.uploadSub")}</p>
+            <p className="mt-2 text-ui text-foreground/75">{t("today.uploadSub")}</p>
           </div>
           <div className="mt-4 flex flex-col gap-1 @2xl:flex-row @2xl:items-center @2xl:gap-4">
             <button
@@ -168,7 +168,7 @@ export function HomeBanner({
             </button>
             <Link
               href="/new-subject"
-              className="flex min-h-11 items-center justify-center text-[14px] font-bold text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground"
+              className="flex min-h-11 items-center justify-center text-ui font-bold text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground"
             >
               {t("today.uploadAlt")}
             </Link>
@@ -233,7 +233,7 @@ function TodayAction({ action }: { action: Exclude<HomeAction, { kind: "upload" 
 
   return (
     <div className="flex min-w-0 flex-col">
-      <p className="text-[12.5px] font-extrabold">
+      <p className="text-caption font-extrabold">
         {t("today.eyebrow")}
         <span className="font-bold text-foreground/60"> · {dateLabel}</span>
       </p>
@@ -246,7 +246,7 @@ function TodayAction({ action }: { action: Exclude<HomeAction, { kind: "upload" 
       </h2>
       {/* Narrow: how long, then a full-width button. Wide: both on one line, so today's cell stays short. */}
       <div className="flex flex-col @2xl:mt-2 @2xl:flex-row @2xl:flex-wrap @2xl:items-center @2xl:justify-between @2xl:gap-x-3 @2xl:gap-y-1.5">
-        <p className="mt-0.5 min-w-0 text-[13.5px] font-semibold text-foreground/65 @2xl:mt-0">
+        <p className="mt-0.5 min-w-0 text-small font-semibold text-foreground/65 @2xl:mt-0">
           {names ? `${t("home.mixedIn").replace("{list}", names)} · ` : ""}
           {copy.meta}
         </p>
@@ -352,7 +352,7 @@ function WeekPlan({ action, subjects }: { action: Exclude<HomeAction, { kind: "u
     <div className="px-4 pb-4 @2xl:px-6 @2xl:pb-6">
       {/* The week line sits on its own solid chip, never on the bare scene. */}
       <div className="hero-chip flex items-center justify-between gap-2 rounded-[14px] py-0.5 pl-3 pr-0.5 @2xl:mt-1 @2xl:w-fit @2xl:max-w-[calc(96%-200px)] @2xl:justify-start @2xl:gap-2 @2xl:rounded-full @2xl:pl-4">
-        <p className="min-w-0 truncate text-[13px] font-bold text-foreground/75 @2xl:text-[13.5px]">
+        <p className="min-w-0 truncate text-small font-bold text-foreground/75">
           {/* Narrow: the strip right under it says "this week" already. */}
           <span className={cn("text-foreground", summaryRest && "hidden @2xl:inline")}>{t("week.title")}{summaryRest ? " · " : ""}</span>
           {summaryRest}
@@ -370,14 +370,14 @@ function WeekPlan({ action, subjects }: { action: Exclude<HomeAction, { kind: "u
             <div className="hero-cell flex flex-1 items-center gap-3 rounded-[var(--r-card)] px-4 py-3.5">
               <CalendarDays className="size-6 shrink-0 text-foreground/70" />
               <div className="min-w-0 flex-1">
-                <div className="text-[14.5px] font-extrabold">{t("week.emptyTitle")}</div>
-                <p className="mt-0.5 text-[12.5px] leading-snug text-foreground/70">{t("week.emptyBody")}</p>
+                <div className="text-ui font-extrabold">{t("week.emptyTitle")}</div>
+                <p className="mt-0.5 text-caption leading-snug text-foreground/70">{t("week.emptyBody")}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
                   <button type="button" onClick={() => setSetupOpen(true)} className="min-h-8 text-[13px] font-extrabold text-foreground underline decoration-foreground/30 underline-offset-[3px] hover:decoration-foreground">
                     {t("week.setup")} →
                   </button>
                   {week.data && !week.data.calendar.connected && (
-                    <Link href="/planner?connect=1" className="inline-flex min-h-8 items-center gap-1.5 text-[13px] font-bold text-foreground/80 hover:underline">
+                    <Link href="/planner?connect=1" className="inline-flex min-h-8 items-center gap-1.5 text-small font-bold text-foreground/80 hover:underline">
                       <Image src="/design/gcal.svg" alt="" width={16} height={16} className="size-4" />
                       {t("week.connect")}
                     </Link>
@@ -453,11 +453,11 @@ function ItemChip({ item, colour, muted = false, inline = false }: { item: WeekI
       className={cn("week-chip min-w-0 text-left", plain && "week-chip--plain", inline ? "inline-flex max-w-full items-baseline gap-1 px-2 py-1" : "block px-1.5 py-1.5", muted && "text-foreground/70")}
       style={plain ? undefined : ({ ["--chip" as string]: colour } as React.CSSProperties)}
     >
-      <span className={cn("shrink-0 font-bold tabular-nums", inline ? "text-[11px]" : "block text-[10px] leading-tight")}>{item.time}</span>
+      <span className={cn("shrink-0 font-bold tabular-nums", inline ? "text-caption" : "block text-[10px] leading-tight")}>{item.time}</span>
       {inline ? (
-        <span className="truncate text-[11.5px] font-extrabold">{label}</span>
+        <span className="truncate text-caption font-extrabold">{label}</span>
       ) : (
-        <span lang={locale} className="week-chip__title line-clamp-2 text-[11px] font-extrabold leading-[1.2]">
+        <span lang={locale} className="week-chip__title line-clamp-2 text-caption font-extrabold leading-[1.2]">
           {label.split(/\s+/).filter(Boolean).map((w, i) => (
             <span key={i}>
               {i > 0 && " "}
@@ -487,7 +487,7 @@ function FreeDay({ nap, className }: { nap: boolean; className?: string }) {
   const { t } = useI18n();
   return (
     <div className={cn("flex flex-col items-center", className)}>
-      <span className="self-start pl-1 text-[12px] font-bold text-foreground/65">{t("week.free")}</span>
+      <span className="self-start pl-1 text-caption font-bold text-foreground/65">{t("week.free")}</span>
       {nap && <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="mt-auto h-10 w-auto pt-1" />}
     </div>
   );
@@ -498,16 +498,16 @@ function PickedDay({ cell, state, colours, heading }: { cell: WeekCell; state: D
   const { t } = useI18n();
   return (
     <div className={cn("hero-cell rounded-[var(--r-card)] px-3.5 py-2.5", state === "missed" && "hero-cell--missed")}>
-      <div className="flex items-center justify-between gap-2 text-[13px] font-extrabold">
+      <div className="flex items-center justify-between gap-2 text-small font-extrabold">
         <span className="flex items-center gap-1.5">
           {heading}
           {state === "done" && <DoneTick className="size-4" />}
-          {state === "missed" && <span className="text-[12px] font-bold text-foreground/65">· {t("week.dayMissed")}</span>}
+          {state === "missed" && <span className="text-caption font-bold text-foreground/65">· {t("week.dayMissed")}</span>}
         </span>
-        {cell.minutes > 0 && <span className="text-[12px] font-bold text-foreground/65">{plannedLabel(cell.minutes)}</span>}
+        {cell.minutes > 0 && <span className="text-caption font-bold text-foreground/65">{plannedLabel(cell.minutes)}</span>}
       </div>
       {cell.items.length === 0 ? (
-        <p className="mt-0.5 text-[12px] font-bold text-foreground/65">{t("week.free")}</p>
+        <p className="mt-0.5 text-caption font-bold text-foreground/65">{t("week.free")}</p>
       ) : (
         <ul className="mt-2 flex flex-wrap gap-1.5">
           {cell.items.map((s) => (
@@ -527,7 +527,7 @@ function AlsoToday({ cell, colours }: { cell: WeekCell; colours: Map<string, str
   if (cell.items.length === 0) return null;
   return (
     <div className="mt-3 flex flex-wrap items-center gap-1.5 border-t border-foreground/10 pt-2.5">
-      <p className="mr-0.5 text-[12px] font-bold text-foreground/65">{t("week.alsoToday")}</p>
+      <p className="mr-0.5 text-caption font-bold text-foreground/65">{t("week.alsoToday")}</p>
       <ul className="contents">
         {cell.items.map((s) => (
           <li key={s.id} className="min-w-0 max-w-full">
@@ -594,7 +594,7 @@ function DayCell({
         )}
       >
         <span className={cn(!cell.isToday && "text-foreground/75")}>{letter}</span>
-        <span className={cn("text-[15px] font-extrabold leading-tight", missed && "text-foreground/65")}>{cell.day}</span>
+        <span className={cn("text-ui font-extrabold leading-tight", missed && "text-foreground/65")}>{cell.day}</span>
         <span className="mt-1 flex h-1.5 items-center gap-[3px]">
           {dots.map((c) => (
             <span
@@ -609,7 +609,7 @@ function DayCell({
       {/* Wide card header (today's is the action's own "Today · date" line). */}
       {!cell.isToday && (
         <div className="hidden pl-1 @2xl:block">
-          <span className={cn("block truncate text-[12.5px] font-extrabold", missed && "text-foreground/65")}>
+          <span className={cn("block truncate text-caption font-extrabold", missed && "text-foreground/65")}>
             {name} {cell.day}
           </span>
           {/* A sticker on the card's corner, so the day's name keeps its room. */}
@@ -634,7 +634,7 @@ function DayCell({
             <FreeDay nap={!cell.past} className="flex-1" />
           ) : (
             <>
-              {missed && <span className="-mt-1 mb-1 pl-1 text-[11px] font-bold text-foreground/65">{t("week.dayMissed")}</span>}
+              {missed && <span className="-mt-1 mb-1 pl-1 text-caption font-bold text-foreground/65">{t("week.dayMissed")}</span>}
               <ul className="flex flex-col gap-1.5">
                 {shown.map((s) => (
                   <li key={s.id}>
@@ -643,7 +643,7 @@ function DayCell({
                 ))}
               </ul>
               {cell.items.length > shown.length && (
-                <Link href="/planner" className="mt-1 block rounded-md px-0.5 text-[11.5px] font-extrabold text-foreground/70 hover:text-foreground hover:underline">
+                <Link href="/planner" className="mt-1 block rounded-md px-0.5 text-caption font-extrabold text-foreground/70 hover:text-foreground hover:underline">
                   {t("week.more").replace("{n}", String(cell.items.length - shown.length))}
                 </Link>
               )}

@@ -409,9 +409,9 @@ export function TopicRow({
         aria-label={`${t("course.start")}: ${topic.code} ${topic.name}`}
         className="flex min-h-[52px] min-w-0 flex-1 items-center gap-3 rounded-2xl px-3.5 py-2.5 text-left disabled:opacity-70"
       >
-        <span className="w-[52px] shrink-0 text-[12.5px] font-semibold tabular-nums text-faint">{topic.code}</span>
+        <span className="w-[52px] shrink-0 text-caption font-semibold tabular-nums text-faint">{topic.code}</span>
         <span className="min-w-0 flex-1">
-          <span className="block text-[14px] font-semibold leading-snug">{topic.name}</span>
+          <span className="block text-ui font-semibold">{topic.name}</span>
           {sub && <span className="block truncate text-[12px] text-faint">{sub}</span>}
           {files && files.length > 0 && (
             <span className="block truncate text-[12px] text-muted-foreground">{t("course.files").replace("{names}", files.join(", "))}</span>
