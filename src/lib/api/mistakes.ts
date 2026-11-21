@@ -48,12 +48,22 @@ export interface Mistake {
   correctedAt: Date | null;
   workspaceId: string;
   workspaceTitle: string;
+  /** Session of the latest wrong answer, when it was given in one (and still exists). */
+  sessionId?: string | null;
+  session?: { id: string; title: string; date: Date | string } | null;
+  /** The catalog topic it was tested under, when Scribe can tell. */
+  courseTopic?: { courseId: string; topicId: string; code: string; title: string } | null;
+  /** Scribe's note for that topic, when one is served to learners. */
+  note?: { courseId: string; topicId: string } | null;
+  hasNote?: boolean;
 }
 
 export interface StartPracticeResult {
   sessionId: string | null;
   workspaceId: string | null;
   count: number;
+  /** Subjects in the round, most items first (a mixed round spans several). */
+  workspaceIds?: string[];
 }
 
 export const OPEN_STATES: MistakeState[] = ["NEVER_CORRECTED", "STILL_INCORRECT"];

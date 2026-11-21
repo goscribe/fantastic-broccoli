@@ -15,6 +15,7 @@ import { filesForCourseTopics } from "@/lib/subject-page";
 import { emitTreeChanged, onTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
 import { cn, formatRelativeDate } from "@/lib/utils";
+import { dataSelector, linkTarget, revealTarget } from "@/lib/link-target";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { Skeleton } from "@/components/ui/skeleton";
 import { loadCourse, TopicRow } from "@/components/courses/course-picker";
@@ -147,9 +148,18 @@ export function SubjectTopics({
   const titleOf = useMemo(() => new Map(materials.map((m) => [m.id, m.title])), [materials]);
 
   const ready = course.state === "ready" ? course : null;
+  // `?topic=<id>` (search, mistakes, end screen): open that topic's unit, scrolled to and outlined.
+  const [topicTarget] = useState(() => linkTarget("topic"));
   const byTopic = useMemo(() => new Map<string, TopicProgress>((ready?.progress.topics ?? []).map((p) => [p.topicId, p])), [ready]);
   const units = useMemo(() => (ready ? unitsForLevel(ready.course, ready.level) : []), [ready]);
   const next = useMemo(() => nextTopic(units, byTopic), [units, byTopic]);
+  const linkedUnit = useMemo(() => (topicTarget ? units.find((u) => u.topics.some((tp) => tp.id === topicTarget)) : undefined), [units, topicTarget]);
+  const revealed = useRef(false);
+  useEffect(() => {
+    if (!topicTarget || !linkedUnit || revealed.current) return;
+    revealed.current = true;
+    requestAnimationFrame(() => requestAnimationFrame(() => revealTarget(dataSelector("topic-id", topicTarget))));
+  }, [topicTarget, linkedUnit]);
   const matched = useMemo(
     () =>
       filesForCourseTopics(
@@ -212,7 +222,7 @@ export function SubjectTopics({
   if (ready) {
     const { course: c, progress } = ready;
     const pct = masteryPercent(progress.mastery);
-    const shownUnit = openUnit ?? next?.unit.id ?? null;
+    const shownUnit = openUnit ?? linkedUnit?.id ?? next?.unit.id ?? null;
     return (
       <section>
         <div className="flex items-baseline justify-between gap-3">
@@ -252,7 +262,7 @@ export function SubjectTopics({
                 {open && (
                   <ul className="mb-2 mt-1 flex flex-col gap-1.5">
                     {u.topics.map((topic) => (
-                      <li key={topic.id}>
+                      <li key={topic.id} data-topic-id={topic.id} className="rounded-2xl">
                         <TopicRow
                           topic={topic}
                           progress={byTopic.get(topic.id)}

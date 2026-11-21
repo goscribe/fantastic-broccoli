@@ -16,6 +16,8 @@ function MistakesPageInner() {
   const pathname = usePathname();
   const params = useSearchParams();
   const workspaceId = params.get("workspace") ?? undefined;
+  const focusMistakeId = params.get("mistake") ?? undefined;
+  const sessionId = params.get("session") ?? undefined;
   const { data: overall } = useQuery({ queryKey: ["mistakes-summary", null], queryFn: () => mistakesApi.summary() });
   const subject = overall?.subjects.find((s) => s.workspaceId === workspaceId);
 
@@ -30,6 +32,9 @@ function MistakesPageInner() {
         <MistakesView
           workspaceId={workspaceId}
           onWorkspaceChange={(id) => router.replace(id ? `${pathname}?workspace=${encodeURIComponent(id)}` : pathname)}
+          focusMistakeId={focusMistakeId}
+          sessionId={sessionId}
+          onClearSession={() => router.replace(workspaceId ? `${pathname}?workspace=${encodeURIComponent(workspaceId)}` : pathname)}
         />
     </PageShell>
   );

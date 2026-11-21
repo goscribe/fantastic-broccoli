@@ -35,6 +35,7 @@ import { onTreeChanged, emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
 import { track as trackFunnel } from "@/lib/funnel";
 import { cn, formatRelativeDate } from "@/lib/utils";
+import { dataSelector, linkTarget, revealTarget } from "@/lib/link-target";
 import type { Folder, Material, StudySession, Workspace } from "@/types";
 import "@/app/design/design.css";
 
@@ -141,7 +142,16 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
     () => [...(workspace?.materials ?? [])].sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()),
     [workspace],
   );
-  const shown = expanded ? materials : materials.slice(0, 3);
+  // `?file=<id>` (search): show that material, scrolled to and outlined.
+  const [fileTarget] = useState(() => linkTarget("file"));
+  const fileIndex = fileTarget ? materials.findIndex((m) => m.id === fileTarget) : -1;
+  const shown = expanded || fileIndex >= 3 ? materials : materials.slice(0, 3);
+  const fileShown = useRef(false);
+  useEffect(() => {
+    if (!fileTarget || fileIndex < 0 || fileShown.current) return;
+    fileShown.current = true;
+    requestAnimationFrame(() => requestAnimationFrame(() => revealTarget(dataSelector("file-id", fileTarget))));
+  }, [fileTarget, fileIndex]);
   const sessionsDone = sessions.filter((s) => s.status === "completed").length;
 
   useEffect(() => {
@@ -471,7 +481,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
               attached.notes.has(m.id) ? (
                 <NoteMaterialCard key={m.id} note={attached.notes.get(m.id)!} workspaceId={workspaceId} selected={selected.has(m.id)} onToggle={() => toggleSelected(m.id)} />
               ) : (
-                <div key={m.id} className={cn("life-card relative flex min-w-0 flex-col p-2.5 transition-colors sm:p-3", selected.has(m.id) && "border-accent ring-2 ring-accent/20")}>
+                <div key={m.id} data-file-id={m.id} className={cn("life-card relative flex min-w-0 flex-col p-2.5 transition-colors sm:p-3", selected.has(m.id) && "border-accent ring-2 ring-accent/20")}>
                   <label className="absolute left-[18px] top-[18px] z-10 grid size-6 cursor-pointer place-items-center rounded-md border border-border bg-white shadow-sm has-[:checked]:border-accent has-[:checked]:bg-accent has-[:checked]:text-white">
                     <input type="checkbox" className="peer sr-only" checked={selected.has(m.id)} onChange={() => toggleSelected(m.id)} aria-label={`Select ${m.title}`} />
                     <Check className="size-3.5 opacity-0 peer-checked:opacity-100" />
