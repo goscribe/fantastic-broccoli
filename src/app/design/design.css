@@ -2,9 +2,15 @@
 @layer properties, theme, base, components, utilities;
 @import "./tokens.css";
 
-/* Scoped tokens for the redesign preview (RevisionDojo-like: white, violet, grey cards). */
-.design-root,
-html.new-ui {
+/*
+ * Scoped tokens for the redesign PREVIEWS only (/design, and the old landing):
+ * white, violet #7c3aed, Inter. The product itself reads tokens.css through
+ * `.app-brand`, which the root layout puts on <body>, so every screen (auth,
+ * invite, shared quiz, paywall, loader, toasts and anything portalled to
+ * <body>) gets Scribe's own palette and Nunito. This block must not name
+ * `html.new-ui`: that made the preview palette the default outside the shell.
+ */
+.design-root {
   --background: #ffffff;
   --foreground: #111114;
   --card: #ffffff;
@@ -23,7 +29,7 @@ html.new-ui {
   font-family: var(--font-sans);
   letter-spacing: -0.005em;
 }
-.design-root h1, .design-root h2, html.new-ui h1, html.new-ui h2 { letter-spacing: -0.025em; }
+.design-root h1, .design-root h2 { letter-spacing: -0.025em; }
 
 @keyframes design-pop { 0% { transform: scale(.4) translateX(var(--tx, 0)); opacity: 0 } 60% { transform: scale(1.12) translateX(var(--tx, 0)); opacity: 1 } 100% { transform: scale(1) translateX(var(--tx, 0)) } }
 @keyframes design-bounce { 0% { transform: translateY(24px); opacity: 0 } 55% { transform: translateY(-6px); opacity: 1 } 100% { transform: translateY(0) } }
@@ -57,6 +63,8 @@ html.new-ui body { background: #ffffff; }
   letter-spacing: 0;
 }
 .app-brand h1, .app-brand h2 { letter-spacing: -0.02em; }
+/* A preview scope nested in the app (the old landing) keeps its own headings. */
+.design-root:not(.app-brand) h1, .design-root:not(.app-brand) h2 { letter-spacing: -0.025em; }
 
 /*
  * "Life" layer for the signed-in app: a student product, not a dashboard.
