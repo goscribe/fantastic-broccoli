@@ -1,4 +1,5 @@
 "use client";
+import { buttonClass } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -81,13 +82,13 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
       <div className={cn("w-full", step === "intro" ? "max-w-[680px]" : "max-w-[460px]")}>
         {step === "intro" && (
           <section>
-            <h1 className="text-center text-[24px] font-bold tracking-tight">{firstName ? `Hi ${firstName} — here's how Scribe works` : "Here's how Scribe works"}</h1>
+            <h1 className="text-center page-h1">{firstName ? `Hi ${firstName} — here's how Scribe works` : "Here's how Scribe works"}</h1>
             <p className="mt-1 text-center text-[14px] text-muted-foreground">50 seconds. Then we&apos;ll set up your first subject together.</p>
             <TourVideo autoPlay className="mt-5" />
             <button
               type="button"
               onClick={() => setStep("subject")}
-              className="mt-4 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent text-[15px] font-semibold text-white hover:bg-accent-dim"
+              className={buttonClass({ size: "lg", className: "mt-4 w-full gap-2" })}
             >
               Set up my first subject <ArrowRight className="size-4" />
             </button>
@@ -118,7 +119,7 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
         {step === "subject" && (
           <section>
             <Image src="/design/cat3-wave.webp" alt="" width={352} height={400} unoptimized className="cat-wiggle mx-auto h-24 w-auto" />
-            <h1 className="mt-3 text-center text-[24px] font-bold tracking-tight">
+            <h1 className="mt-3 text-center page-h1">
               {firstName ? `Hi ${firstName} — what are you studying?` : "What are you studying?"}
             </h1>
             <p className="mt-1 text-center text-[14px] text-muted-foreground">One subject to start. You can add more later.</p>
@@ -148,7 +149,7 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
               <button
                 type="submit"
                 disabled={!subject.trim()}
-                className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent text-[15px] font-semibold text-white hover:bg-accent-dim disabled:opacity-50"
+                className={buttonClass({ size: "lg", className: "mt-6 w-full gap-2" })}
               >
                 Next <ArrowRight className="size-4" />
               </button>
@@ -162,7 +163,7 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
         {step === "material" && (
           <section>
             <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob mx-auto h-24 w-auto" />
-            <h1 className="mt-3 text-center text-[24px] font-bold tracking-tight">Drop your {subject.trim()} notes</h1>
+            <h1 className="mt-3 text-center page-h1">Drop your {subject.trim()} notes</h1>
             <p className="mt-1 text-center text-[14px] text-muted-foreground">Slides, PDFs, photos of notes or a lecture recording — I&apos;ll turn them into your first session.</p>
             <input ref={fileRef} type="file" multiple accept={UPLOAD_ACCEPT} className="hidden" onChange={(e) => addFiles(e.target.files)} />
             <button
@@ -195,7 +196,7 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
               type="button"
               disabled={busy || (files.length === 0 && !link.trim())}
               onClick={() => void build()}
-              className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent text-[15px] font-semibold text-white hover:bg-accent-dim disabled:opacity-50"
+              className={buttonClass({ size: "lg", className: "mt-6 w-full gap-2" })}
             >
               Build my first session <ArrowRight className="size-4" />
             </button>
@@ -208,7 +209,7 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
         {step === "building" && (
           <section className="text-center">
             <Image src="/design/cat3-think.webp" alt="" width={383} height={400} unoptimized className="cat-bob mx-auto h-24 w-auto" />
-            <h1 className="mt-3 text-[24px] font-bold tracking-tight">Setting up {subject.trim()}</h1>
+            <h1 className="mt-3 page-h1">Setting up {subject.trim()}</h1>
             <p className="mt-2 inline-flex items-center gap-2 text-[14px] text-muted-foreground">
               <Loader2 className="size-4 animate-spin text-accent" /> {status}
             </p>

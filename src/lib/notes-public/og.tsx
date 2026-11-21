@@ -7,7 +7,7 @@ export const OG_SIZE = { width: 1200, height: 630 };
 
 let cat: Promise<string> | null = null;
 const catDataUrl = () =>
-  (cat ??= readFile(join(process.cwd(), "public/design/cat2-book.png"))
+  (cat ??= readFile(join(process.cwd(), "public/design/cat3-book.png"))
     .then((b) => `data:image/png;base64,${b.toString("base64")}`)
     .catch(() => ""));
 
@@ -25,7 +25,7 @@ export async function notesOgImage(opts: { eyebrow: string; title: string; subti
           <div style={{ display: "flex", fontSize: 30, fontWeight: 800 }}>scribe.study</div>
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse renders plain <img>, not next/image */}
-        {src ? <img src={src} width={300} height={325} alt="" style={{ alignSelf: "flex-end" }} /> : null}
+        {src ? <img src={src} width={300} height={331} alt="" style={{ alignSelf: "flex-end" }} /> : null}
       </div>
     ),
     OG_SIZE,

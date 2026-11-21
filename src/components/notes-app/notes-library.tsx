@@ -64,7 +64,7 @@ export function NotesLibrary() {
       <div className="mx-auto w-full max-w-[1180px] px-4 pb-12 pt-5 sm:px-6 sm:pt-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="min-w-0">
-            <h1 className="text-[30px] font-extrabold leading-tight sm:text-[38px]">Notes</h1>
+            <h1 className="page-h1">Notes</h1>
             {empty && (
               <p className="mt-1.5 max-w-[620px] text-[16px] font-semibold leading-snug text-muted-foreground sm:text-[17px]">
                 Scribe&apos;s notes are being added course by course. For now, each course shows what its topics cover.
@@ -103,7 +103,7 @@ export function NotesLibrary() {
           <>
             {own.length > 0 && !q && (
               <section className="mt-8" aria-labelledby="lib-yours">
-                <h2 id="lib-yours" className="text-[20px] font-extrabold">
+                <h2 id="lib-yours" className="page-h2">
                   Your courses
                 </h2>
                 <ul className="mt-3 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
@@ -118,7 +118,7 @@ export function NotesLibrary() {
 
             <section className="mt-9" aria-labelledby="lib-all">
               <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-                <h2 id="lib-all" className="text-[20px] font-extrabold">
+                <h2 id="lib-all" className="page-h2">
                   {own.length > 0 && !q ? "All courses" : q ? "Courses" : "Pick a course"}
                 </h2>
               </div>

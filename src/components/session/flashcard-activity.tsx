@@ -106,63 +106,19 @@ export function FlashcardActivity({
   };
 
   if (newUi) {
-    const goTo = (i: number) => {
-      setFlipped(false);
-      setCurrentIndex(i);
-    };
     return (
-      <div className="space-y-4">
-        <div className="flex min-h-6 items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            {currentIndex > 0 && (
-              <button type="button" onClick={() => goTo(currentIndex - 1)} className="-my-3 -ml-2 flex min-h-11 items-center gap-1 px-2 text-[13px] font-semibold text-muted-foreground hover:text-foreground">
-                <ArrowLeft className="h-3 w-3" />
-                {t("session.back")}
-              </button>
-            )}
-            <span data-scroll-line className="text-[13px] font-semibold tabular-nums text-muted-foreground" aria-live="polite">
-              {t("session.card")} {currentIndex + 1} {t("session.of")} {content.cards.length}
-            </span>
-            <RunBadge run={runOfRight(results, currentIndex)} />
-          </div>
-          <ItemDots current={currentIndex} states={results.map((r) => (r === true ? "right" : r === false ? "wrong" : "todo"))} />
-        </div>
-
-        {/* The card is the one surface on the page: a soft tile that turns over when tapped. */}
-        <button
-          type="button"
-          key={`${currentIndex}-${flipped ? "b" : "f"}`}
-          onClick={() => setFlipped(!flipped)}
-          aria-label={flipped ? undefined : t("session.tapToReveal")}
-          className={cn(
-            "play-flip flex min-h-[220px] w-full touch-manipulation flex-col items-center justify-center rounded-[28px] px-6 py-8 text-center transition-colors sm:min-h-[260px] sm:px-12",
-            flipped ? "bg-card ring-2 ring-inset ring-[var(--edge)]" : "bg-muted hover:bg-[var(--edge)]",
-          )}
-        >
-          <span className="mb-3 text-[12.5px] font-extrabold text-muted-foreground">{flipped ? t("session.answer") : t("session.tapToReveal")}</span>
-          <span className={cn("block max-w-[34rem] text-foreground", flipped ? "text-[18px] font-semibold leading-relaxed sm:text-[19px]" : "text-[21px] font-extrabold leading-snug sm:text-[24px]")}>
-            <MarkdownText text={flipped ? card.back : card.front} />
-          </span>
-        </button>
-
-        {flipped ? (
-          <PlayActions>
-            <button type="button" onClick={() => handleResult(false)} className={playQuiet}>
-              {t("session.didntKnow")}
-            </button>
-            <PlayPrimary onClick={() => handleResult(true)}>{t("session.knewIt")}</PlayPrimary>
-          </PlayActions>
-        ) : (
-          <PlayActions>
-            {currentIndex < content.cards.length - 1 && (
-              <button type="button" onClick={() => goTo(currentIndex + 1)} className={cn(playLink, "justify-center sm:mr-3")}>
-                {t("session.nextCard")}
-              </button>
-            )}
-            <PlayPrimary onClick={() => setFlipped(true)}>{t("finish.showAnswer")}</PlayPrimary>
-          </PlayActions>
-        )}
-      </div>
+      <FlashcardRound
+        cards={content.cards}
+        index={currentIndex}
+        flipped={flipped}
+        results={results}
+        onFlip={() => setFlipped(!flipped)}
+        onGoTo={(i) => {
+          setFlipped(false);
+          setCurrentIndex(i);
+        }}
+        onResult={handleResult}
+      />
     );
   }
 
@@ -258,6 +214,87 @@ export function FlashcardActivity({
             {t("session.nextCard")} <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
           </Button>
         </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * One flashcard on screen (the session player's card): tap to turn it over,
+ * then "Didn't know" / "Knew it". Presentational, so the daily review
+ * (/flashcards/review) plays exactly the same card as a study session.
+ */
+export function FlashcardRound({
+  cards,
+  index,
+  flipped,
+  results,
+  onFlip,
+  onGoTo,
+  onResult,
+}: {
+  cards: { front: string; back: string }[];
+  index: number;
+  flipped: boolean;
+  results: (boolean | null)[];
+  onFlip: () => void;
+  onGoTo: (index: number) => void;
+  onResult: (known: boolean) => void;
+}) {
+  const { t } = useI18n();
+  const card = cards[index];
+  if (!card) return null;
+  return (
+    <div className="space-y-4">
+      <div className="flex min-h-6 items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          {index > 0 && (
+            <button type="button" onClick={() => onGoTo(index - 1)} className="-my-3 -ml-2 flex min-h-11 items-center gap-1 px-2 text-[13px] font-semibold text-muted-foreground hover:text-foreground">
+              <ArrowLeft className="h-3 w-3" />
+              {t("session.back")}
+            </button>
+          )}
+          <span data-scroll-line className="text-[13px] font-semibold tabular-nums text-muted-foreground" aria-live="polite">
+            {t("session.card")} {index + 1} {t("session.of")} {cards.length}
+          </span>
+          <RunBadge run={runOfRight(results, index)} />
+        </div>
+        <ItemDots current={index} states={results.map((r) => (r === true ? "right" : r === false ? "wrong" : "todo"))} />
+      </div>
+
+      {/* The card is the one surface on the page; both faces are the same outlined card, and it turns over when tapped. */}
+      <button
+        type="button"
+        key={`${index}-${flipped ? "b" : "f"}`}
+        onClick={onFlip}
+        aria-label={flipped ? undefined : t("session.tapToReveal")}
+        className={cn(
+          "play-flip flex min-h-[220px] w-full touch-manipulation flex-col items-center justify-center rounded-[28px] bg-card px-6 py-8 text-center ring-2 ring-inset ring-[var(--edge)] transition-colors sm:min-h-[260px] sm:px-12",
+          !flipped && "hover:bg-muted",
+        )}
+      >
+        <span className="mb-3 text-[12.5px] font-extrabold text-muted-foreground">{flipped ? t("session.answer") : t("session.tapToReveal")}</span>
+        <span className={cn("block max-w-[34rem] text-foreground [overflow-wrap:anywhere]", flipped ? "text-[18px] font-semibold leading-relaxed sm:text-[19px]" : "text-[21px] font-extrabold leading-snug sm:text-[24px]")}>
+          <MarkdownText text={flipped ? card.back : card.front} />
+        </span>
+      </button>
+
+      {flipped ? (
+        <PlayActions>
+          <button type="button" onClick={() => onResult(false)} className={playQuiet}>
+            {t("session.didntKnow")}
+          </button>
+          <PlayPrimary onClick={() => onResult(true)}>{t("session.knewIt")}</PlayPrimary>
+        </PlayActions>
+      ) : (
+        <PlayActions>
+          {index < cards.length - 1 && (
+            <button type="button" onClick={() => onGoTo(index + 1)} className={cn(playLink, "justify-center sm:mr-3")}>
+              {t("session.nextCard")}
+            </button>
+          )}
+          <PlayPrimary onClick={onFlip}>{t("finish.showAnswer")}</PlayPrimary>
+        </PlayActions>
       )}
     </div>
   );

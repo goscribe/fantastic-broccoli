@@ -76,7 +76,7 @@ export default function RestoreAccountPage() {
       {status === "error" && (
         <div className="flex flex-col items-center gap-4">
           <Link href="/login">
-            <Button variant="outline" size="sm">
+            <Button>
               {t("misc.signIn")}
             </Button>
           </Link>

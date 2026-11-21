@@ -25,7 +25,7 @@ import { fetchUploadPreviews, uploadFiles, analyzeFiles } from "@/lib/api/materi
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { onTreeChanged, emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
-import { HOME_TILES_ALL_UP_TO, HOME_TILES_SHOWN, byRecentActivity, repeatsTitle } from "@/lib/subject-tiles";
+import { HOME_TILES_ALL_UP_TO, HOME_TILES_SHOWN, byRecentActivity, repeatsTitle, titleHints } from "@/lib/subject-tiles";
 import { toast } from "sonner";
 import { cn, formatRelativeDate } from "@/lib/utils";
 import { Ring, WeekBars } from "@/components/design/charts";
@@ -33,6 +33,8 @@ import type { Folder, Material, StudySession, Workspace } from "@/types";
 import { fetchStreak, type StreakSummary } from "@/lib/api/streak";
 import { fetchPlannerWeek, type PlannerSlot } from "@/lib/api/planner";
 import { Skeleton } from "@/components/ui/skeleton";
+import { LoadError } from "@/components/ui/load-error";
+import { buttonClass } from "@/components/ui/button";
 import "@/app/design/design.css";
 import { inputBoxClass, bareInputClass } from "@/components/ui/input";
 import { Mascot } from "@/components/rewards/mascot";
@@ -385,6 +387,23 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
     openMistakes: mistakeSummary?.open ?? 0,
   });
 
+  // A subject or folder that failed to load: one error with Retry, not "0 materials / No sessions yet" under a skeleton.
+  if ((workspaceId || folderId) && loadError && workspaces.length === 0) {
+    return (
+      <div className="mx-auto w-full max-w-[1180px] px-4 pb-12 pt-5 sm:px-6 sm:pt-6">
+        <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>
+        <LoadError
+          className="mt-10"
+          onRetry={() => {
+            setLoading(true);
+            void load();
+          }}
+          retrying={loading}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={cn("mx-auto flex w-full max-w-[1180px] flex-col gap-6 px-4 pb-12 pt-5 sm:px-6 sm:pt-6 lg:flex-row", workspaceId && "gap-8 lg:gap-10")}>
       <input ref={fileRef} type="file" multiple accept={UPLOAD_ACCEPT} className="hidden" onChange={(e) => void onFiles(e.target.files)} />
@@ -567,7 +586,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                 setLoading(true);
                 void load();
               }}
-              className="inline-flex h-11 items-center rounded-xl bg-accent px-4 text-[14px] font-semibold text-white hover:bg-accent-dim"
+              className={buttonClass()}
             >
               {t("today.retry")}
             </button>
@@ -650,7 +669,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
                 {done} of {total} done
                 {!workspaceId && wsById.get(suggested.workspaceId) ? ` · ${wsById.get(suggested.workspaceId)?.title}` : ""}
               </div>
-              <Link href={`/workspace/${suggested.workspaceId}/session/${suggested.id}`} className="mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full bg-accent text-[14px] font-semibold text-white hover:bg-accent-dim">
+              <Link href={`/workspace/${suggested.workspaceId}/session/${suggested.id}`} className={buttonClass({ className: "mt-3.5 w-full" })}>
                 {done > 0 ? "Continue" : "Start"}
               </Link>
             </div>
@@ -671,7 +690,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           ) : (
           <div className="mt-2 flex items-baseline gap-3">
             <span className="text-[40px] font-extrabold leading-none tabular-nums">{due}</span>
-            <div className="text-[13px] leading-snug text-muted-foreground">{due ? `flashcards due today, about ${Math.max(1, Math.round(due / 3))} min` : "Nothing due right now"}</div>
+            <div className="text-[13px] leading-snug text-muted-foreground">{due ? `flashcards due today${home ? "" : " across all your subjects"}, about ${Math.max(1, Math.round(due / 3))} min` : "Nothing due right now"}</div>
           </div>
           )}
           <Link href="/flashcards/review" className={cn("mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full text-[14px] font-semibold", due && !home && !suggested ? "bg-accent text-white hover:bg-accent-dim" : "bg-muted hover:bg-accent-soft")}>
@@ -769,7 +788,7 @@ function CatNudge({
         {text}
         {count > 0 && (
           <div className="mt-2.5 flex flex-wrap gap-1.5">
-            <button type="button" disabled={!!starting} onClick={onSession} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-accent px-3 text-[12.5px] font-semibold text-white hover:bg-accent-dim disabled:opacity-60">
+            <button type="button" disabled={!!starting} onClick={onSession} className={buttonClass({ size: "sm", className: "gap-1.5" })}>
               {starting === "session" ? <Loader2 className="size-3.5 animate-spin" /> : <Play className="size-3.5" fill="currentColor" />}
               Study session
             </button>
@@ -805,6 +824,7 @@ function SubjectsGrid({
   const [showAll, setShowAll] = useState(false);
   // Most recently active first. A real account can hold dozens of subjects: past a couple of rows, home shows the recent ones and folds the rest away.
   const ordered = useMemo(() => byRecentActivity(workspaces, sessions), [workspaces, sessions]);
+  const hints = useMemo(() => titleHints(ordered), [ordered]);
   const many = ordered.length > HOME_TILES_ALL_UP_TO;
   const tiles = many ? ordered.slice(0, HOME_TILES_SHOWN) : ordered;
   const rest = many ? ordered.slice(HOME_TILES_SHOWN) : [];
@@ -816,7 +836,9 @@ function SubjectsGrid({
     const current = own.find((x) => x.status !== "completed");
     const counts = `${w.materials.length} material${w.materials.length === 1 ? "" : "s"}${own.length ? ` · ${done}/${own.length} sessions` : ""}`;
     // "Next: <the subject's own name again>" says nothing: show where the subject stands instead.
-    const sub = !current ? counts : current.generating ? "Building the next session…" : repeatsTitle(w.title, current.title) ? counts : `Next: ${current.title}`;
+    // Two subjects whose titles the tile cuts to the same text ("B4 Thermodynami…"): the second line says which is which.
+    const hint = hints.get(w.id);
+    const sub = hint ?? (!current ? counts : current.generating ? "Building the next session…" : repeatsTitle(w.title, current.title) ? counts : `Next: ${current.title}`);
     return { sub, progress: own.length ? done / own.length : null, action: current ? "Continue" : "Open" };
   };
   return (
@@ -905,7 +927,7 @@ function SessionList({
           type="button"
           disabled={adding}
           onClick={onAdd}
-          className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-accent px-2.5 text-[12.5px] font-semibold text-white hover:bg-accent-dim disabled:opacity-60"
+          className="inline-flex h-9 items-center gap-1.5 rounded-[12px] border border-border bg-white px-3.5 text-[13.5px] font-bold text-foreground hover:border-border-strong hover:bg-muted disabled:opacity-60"
         >
           {adding && <Loader2 className="size-3.5 animate-spin" />}
           {pickedCount > 0 ? `New session from ${pickedCount} file${pickedCount === 1 ? "" : "s"}` : "New session"}
@@ -921,7 +943,7 @@ function SessionList({
                 <Skeleton className="h-4 w-1/2" />
                 <Skeleton className="h-3 w-1/3" />
               </div>
-              <Skeleton className="h-8 w-[108px] rounded-[9px]" />
+              <Skeleton className="h-9 w-[108px] rounded-[12px]" />
             </div>
           ))}
         {!loading && sessions.length === 0 && (
@@ -956,8 +978,9 @@ function SessionList({
               <Link
                 href={`/workspace/${workspaceId}/session/${s.id}`}
                 className={cn(
-                  "inline-flex h-8 w-[108px] shrink-0 items-center justify-center rounded-[9px] text-[12.5px] font-semibold",
-                  finished ? "bg-muted hover:bg-accent-soft" : "bg-accent text-white hover:bg-accent-dim",
+                  // Secondary: the subject's one primary is the band's Continue / Start pill at the top.
+                  "inline-flex h-9 w-[108px] shrink-0 items-center justify-center rounded-[12px] text-[13.5px] font-bold",
+                  finished ? "bg-muted hover:bg-border" : "border border-border bg-white hover:border-border-strong hover:bg-muted",
                 )}
               >
                 {finished ? "View debrief" : done > 0 ? "Continue" : "Start"}

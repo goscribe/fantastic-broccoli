@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Check, Copy, Share2, Users } from "lucide-react";
+import { Check, Share2 } from "lucide-react";
 import {
   copyText,
   fetchReferralSummary,
@@ -13,6 +13,7 @@ import {
 import { toast } from "@/lib/toast";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { buttonClass } from "@/components/ui/button";
 import "@/lib/i18n/growth";
 
 export const REFERRALS_KEY = ["referrals"] as const;
@@ -83,18 +84,17 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
         type="button"
         onClick={onShare}
         disabled={!data}
-        className="inline-flex h-10 flex-1 items-center justify-center gap-1.5 rounded-full bg-accent px-4 text-[13.5px] font-semibold text-accent-foreground transition-colors hover:bg-accent-dim disabled:opacity-60"
+        className={buttonClass({ variant: "secondary", size: "sm", className: "h-10 flex-1" })}
       >
-        <Share2 className="size-4" />
         {t("growth.share")}
       </button>
       <button
         type="button"
         onClick={onCopy}
         disabled={!data}
-        className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full border border-border-strong bg-card px-4 text-[13.5px] font-semibold text-foreground transition-colors hover:border-accent/50 disabled:opacity-60"
+        className={buttonClass({ variant: "secondary", size: "sm", className: "h-10 gap-1.5" })}
       >
-        {copied ? <Check className="size-4 text-success" strokeWidth={3} /> : <Copy className="size-4" />}
+        {copied && <Check className="size-4 text-success" strokeWidth={3} />}
         {t("growth.copy")}
       </button>
     </div>
@@ -148,11 +148,11 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
   return (
     <section
       aria-label={t("growth.inviteTitle")}
-      className={cn("rounded-2xl border border-border bg-card p-4 sm:p-5", className)}
+      className={cn("life-card p-4 sm:p-5", className)}
     >
       <div className="flex items-start gap-3.5">
         <div className="min-w-0">
-          <h2 className="text-[16px] font-bold leading-snug tracking-tight">{t("growth.inviteTitle")}</h2>
+          <h2 className="page-h2">{t("growth.inviteTitle")}</h2>
           <p className="mt-1 text-[13px] leading-snug text-muted-foreground">{body}</p>
         </div>
       </div>
@@ -171,8 +171,7 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
       {actions}
 
       <div className="mt-4 flex flex-col gap-1 border-t border-border pt-3 text-[12.5px] text-muted-foreground">
-        <p className="flex items-start gap-1.5 font-medium text-foreground">
-          <Users className="mt-px size-4 shrink-0 text-accent" />
+        <p className="font-semibold text-foreground">
           {data ? statusLine(data, t) : <span className="inline-block h-3.5 w-40 animate-pulse rounded-full bg-muted" />}
         </p>
         {until && <p className="font-semibold text-accent-dim">{until}</p>}

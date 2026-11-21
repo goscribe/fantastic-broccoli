@@ -11,14 +11,18 @@ import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/rewards";
 import { InviteCard } from "@/components/growth/invite-card";
+import { PageShell } from "@/components/ui/page-header";
 
+/** Every action in the shop is a secondary button (white, hairline): a catalogue has no single primary. */
 const btnBase =
-  "inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-xl px-3 text-[13.5px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 disabled:cursor-not-allowed";
+  "inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-[12px] px-3 text-[13.5px] font-bold transition-colors disabled:cursor-not-allowed";
+/** Something you can afford: the price in the accent colour on the secondary shape. */
+const btnBuy = "border border-border bg-white text-accent-dim hover:border-border-strong hover:bg-muted disabled:opacity-60";
 
 function SectionTitle({ children, aside }: { children: React.ReactNode; aside?: React.ReactNode }) {
   return (
     <div className="mb-3 flex items-baseline justify-between gap-3">
-      <h2 className="text-[16px] font-bold tracking-tight">{children}</h2>
+      <h2 className="page-h2">{children}</h2>
       {aside}
     </div>
   );
@@ -57,16 +61,14 @@ function ItemAction({
             btnBase,
             short > 0
               ? "border border-border bg-muted text-faint"
-              : "bg-accent text-accent-foreground hover:bg-accent-dim disabled:opacity-60",
+              : btnBuy,
           )}
         >
           {pending ? (
             <Loader2 className="size-4 animate-spin" />
           ) : short > 0 ? (
             <Lock className="size-3.5" />
-          ) : (
-            <Sparkles className="size-3.5" fill="currentColor" />
-          )}
+          ) : null}
           {t("rewards.ptsValue").replace("{n}", cost.toLocaleString())}
         </button>
         {short > 0 && (
@@ -79,7 +81,7 @@ function ItemAction({
   }
   if (inUse && (slot === "theme" || itemId === null)) {
     return (
-      <span className={cn(btnBase, "border border-accent/30 bg-accent-soft text-accent-dim")}>
+      <span className={cn(btnBase, "bg-muted text-foreground")}>
         <Check className="size-4" strokeWidth={3} />
         {t("rewards.inUse")}
       </span>
@@ -91,7 +93,7 @@ function ItemAction({
         type="button"
         disabled={pending}
         onClick={() => onEquip(slot, null)}
-        className={cn(btnBase, "border border-border bg-white text-foreground hover:bg-muted dark:bg-card")}
+        className={cn(btnBase, "border border-border bg-white text-foreground hover:border-border-strong hover:bg-muted")}
       >
         {t("rewards.takeOff")}
       </button>
@@ -102,7 +104,7 @@ function ItemAction({
       type="button"
       disabled={pending}
       onClick={() => onEquip(slot, itemId)}
-      className={cn(btnBase, "border border-accent/40 bg-white text-accent-dim hover:bg-accent-soft dark:bg-card")}
+      className={cn(btnBase, "border border-border bg-white text-foreground hover:border-border-strong hover:bg-muted")}
     >
       {t("rewards.use")}
     </button>
@@ -138,24 +140,24 @@ export function Shop() {
 
   if (isError && !rewards) {
     return (
-      <div className="mx-auto w-full max-w-3xl px-4 py-16 text-center sm:px-8">
+      <PageShell as="div" max="max-w-3xl" className="py-10 text-center">
         <p className="text-sm text-muted-foreground">{t("rewards.loadFailed")}</p>
         <button type="button" onClick={() => refetch()} className="mt-3 rounded-xl border border-border px-4 py-2 text-sm font-semibold hover:bg-muted">
           {t("rewards.retry")}
         </button>
-      </div>
+      </PageShell>
     );
   }
 
   if (!rewards) {
     return (
-      <div className="mx-auto w-full max-w-3xl space-y-6 px-4 pb-12 pt-4 sm:px-8">
+      <PageShell as="div" max="max-w-3xl" className="space-y-6">
         <Skeleton className="h-32 rounded-2xl" />
         <Skeleton className="h-24 rounded-2xl" />
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {[0, 1, 2, 3, 4, 5].map((i) => <Skeleton key={i} className="h-40 rounded-2xl" />)}
         </div>
-      </div>
+      </PageShell>
     );
   }
 
@@ -165,20 +167,21 @@ export function Shop() {
   const buyingFreeze = buy.isPending && buy.variables === FREEZE_ID;
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-4 pb-16 pt-2 sm:px-8 sm:pt-4">
+    <PageShell as="div" max="max-w-3xl">
       {/* Balance */}
-      <section className="relative overflow-hidden rounded-3xl border border-accent/20 bg-accent-soft px-5 py-5 sm:px-7 sm:py-6">
+      {/* The page's own header: on the page, no tinted panel. */}
+      <section className="relative overflow-hidden border-b border-border pb-5 pt-1 sm:pb-6">
         <div className="relative z-10 max-w-[calc(100%-96px)] sm:max-w-[calc(100%-140px)]">
-          <h1 className="text-[24px] font-bold leading-tight tracking-tight sm:text-[28px]">{t("rewards.shop")}</h1>
+          <h1 className="page-h1">{t("rewards.shop")}</h1>
           <p className="mt-1 text-[13.5px] leading-snug text-muted-foreground">{t("rewards.shopSubtitle")}</p>
-          <p className="mt-4 text-[12px] font-semibold text-accent-dim">{t("rewards.balance")}</p>
+          <p className="mt-4 text-[13px] font-bold text-muted-foreground">{t("rewards.balance")}</p>
           <p className="flex items-center gap-1.5 text-[30px] font-bold leading-none tabular-nums">
             <Sparkles className="size-6 text-accent" fill="currentColor" />
             {rewards.balance.toLocaleString()}
           </p>
           <p className="mt-2.5 text-[12px] font-medium text-muted-foreground">{t("rewards.howToEarn")}</p>
         </div>
-        <Mascot pose="cheer" className="cat-bob absolute -bottom-3 right-3 h-[124px] sm:right-6 sm:h-[160px]" />
+        <Mascot pose="cheer" className="cat-bob absolute bottom-0 right-1 h-[112px] sm:right-4 sm:h-[140px]" />
       </section>
 
       {/* Invite a friend: a free Starter week each, plus points */}
@@ -189,15 +192,15 @@ export function Shop() {
         <SectionTitle>{t("rewards.sectionFreeze")}</SectionTitle>
         <div className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-4 sm:flex-row sm:items-center">
           <div className="flex min-w-0 flex-1 items-center gap-3.5">
-            <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-sky-100 text-sky-600 ring-1 ring-sky-200">
+            <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-muted text-foreground">
               <Snowflake className="size-6" strokeWidth={2.2} />
             </span>
             <div className="min-w-0">
               <p className="text-[15px] font-semibold">{t("rewards.freezeName")}</p>
               <p className="text-[12.5px] leading-snug text-muted-foreground">{t("rewards.freezeDesc")}</p>
-              <p className="mt-1.5 flex items-center gap-1.5 text-[12px] font-semibold text-sky-700">
+              <p className="mt-1.5 flex items-center gap-1.5 text-[12.5px] font-semibold text-muted-foreground">
                 {Array.from({ length: rewards.maxFreezes }, (_, i) => (
-                  <Snowflake key={i} className={cn("size-3.5", i < rewards.freezes ? "text-sky-600" : "text-border-strong")} strokeWidth={2.4} />
+                  <Snowflake key={i} className={cn("size-3.5", i < rewards.freezes ? "text-foreground" : "text-border-strong")} strokeWidth={2.4} />
                 ))}
                 {t("rewards.held").replace("{n}", String(rewards.freezes)).replace("{max}", String(rewards.maxFreezes))}
               </p>
@@ -212,7 +215,7 @@ export function Shop() {
                 btnBase,
                 freezesFull || freezeShort > 0
                   ? "border border-border bg-muted text-faint"
-                  : "bg-accent text-accent-foreground hover:bg-accent-dim disabled:opacity-60",
+                  : btnBuy,
               )}
             >
               {buyingFreeze ? (
@@ -221,9 +224,7 @@ export function Shop() {
                 <Check className="size-4" strokeWidth={3} />
               ) : freezeShort > 0 ? (
                 <Lock className="size-3.5" />
-              ) : (
-                <Sparkles className="size-3.5" fill="currentColor" />
-              )}
+              ) : null}
               {freezesFull ? t("rewards.maxHeld") : t("rewards.ptsValue").replace("{n}", freezeCost.toLocaleString())}
             </button>
             {!freezesFull && freezeShort > 0 && (
@@ -276,7 +277,7 @@ export function Shop() {
                 rewards.outfit === item.id ? "border-accent/50 ring-1 ring-accent/30" : "border-border",
               )}
             >
-              <div className="grid h-[128px] place-items-center rounded-xl bg-[#fdf6ec] pt-3">
+              <div className="grid h-[128px] place-items-center rounded-xl bg-muted pt-3">
                 <Mascot pose="wave" outfit={item.id} className="h-[96px]" />
               </div>
               <p className="text-[14px] font-semibold">{t(item.nameKey)}</p>
@@ -287,6 +288,6 @@ export function Shop() {
           ))}
         </ul>
       </section>
-    </div>
+    </PageShell>
   );
 }

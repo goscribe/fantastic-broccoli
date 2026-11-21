@@ -1,4 +1,5 @@
 "use client";
+import { buttonClass } from "@/components/ui/button";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Volume2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -185,7 +186,7 @@ export function AppTourHost() {
         </div>
         <TourVideo autoPlay />
         <div className="mt-4 flex justify-end">
-          <button type="button" onClick={closeAppTour} className="inline-flex h-10 items-center rounded-xl bg-accent px-5 text-[14px] font-semibold text-white hover:bg-accent-dim">
+          <button type="button" onClick={closeAppTour} className={buttonClass()}>
             Got it
           </button>
         </div>

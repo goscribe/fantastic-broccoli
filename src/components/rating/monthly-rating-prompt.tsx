@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Star, X } from "lucide-react";
 import { ratingApi } from "@/lib/api/rating";
@@ -136,7 +137,7 @@ export function MonthlyRatingPrompt() {
               <button
                 type="button"
                 onClick={() => void finish()}
-                className="w-full rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground hover:bg-accent/90"
+                className={buttonClass({ size: "sm", className: "w-full" })}
               >
                 {t("rating.send")}
               </button>

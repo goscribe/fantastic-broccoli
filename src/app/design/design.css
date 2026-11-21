@@ -2,9 +2,15 @@
 @layer properties, theme, base, components, utilities;
 @import "./tokens.css";
 
-/* Scoped tokens for the redesign preview (RevisionDojo-like: white, violet, grey cards). */
-.design-root,
-html.new-ui {
+/*
+ * Scoped tokens for the redesign PREVIEWS only (/design, and the old landing):
+ * white, violet #7c3aed, Inter. The product itself reads tokens.css through
+ * `.app-brand`, which the root layout puts on <body>, so every screen (auth,
+ * invite, shared quiz, paywall, loader, toasts and anything portalled to
+ * <body>) gets Scribe's own palette and Nunito. This block must not name
+ * `html.new-ui`: that made the preview palette the default outside the shell.
+ */
+.design-root {
   --background: #ffffff;
   --foreground: #111114;
   --card: #ffffff;
@@ -23,7 +29,7 @@ html.new-ui {
   font-family: var(--font-sans);
   letter-spacing: -0.005em;
 }
-.design-root h1, .design-root h2, html.new-ui h1, html.new-ui h2 { letter-spacing: -0.025em; }
+.design-root h1, .design-root h2 { letter-spacing: -0.025em; }
 
 @keyframes design-pop { 0% { transform: scale(.4) translateX(var(--tx, 0)); opacity: 0 } 60% { transform: scale(1.12) translateX(var(--tx, 0)); opacity: 1 } 100% { transform: scale(1) translateX(var(--tx, 0)) } }
 @keyframes design-bounce { 0% { transform: translateY(24px); opacity: 0 } 55% { transform: translateY(-6px); opacity: 1 } 100% { transform: translateY(0) } }
@@ -57,6 +63,26 @@ html.new-ui body { background: #ffffff; }
   letter-spacing: 0;
 }
 .app-brand h1, .app-brand h2 { letter-spacing: -0.02em; }
+/*
+ * What every approved screen was actually drawn with: this selector outranks
+ * the one above (and the note pages' own), and always has. Kept exactly, so
+ * moving the palette off html.new-ui does not re-space a single heading.
+ */
+html.new-ui h1, html.new-ui h2 { letter-spacing: -0.025em; }
+/*
+ * Heading scale. A page has one title (.page-h1, through PageHeader) and
+ * section titles (.page-h2, through SectionTitle). Home's hero greeting, a
+ * subject's colour band and the session player set their own type: they are
+ * content objects, not page chrome.
+ */
+.app-brand {
+  --h1: 26px;
+  --h2: 18px;
+  --h-weight: 800;
+}
+@media (min-width: 640px) {
+  .app-brand { --h1: 30px; --h2: 20px; }
+}
 
 /*
  * "Life" layer for the signed-in app: a student product, not a dashboard.
@@ -68,6 +94,8 @@ html.new-ui body { background: #ffffff; }
  */
 /* In the components layer so Tailwind utilities on the same element still win. */
 @layer components {
+.page-h1 { font-size: var(--h1, 26px); font-weight: var(--h-weight, 800); line-height: 1.15; }
+.page-h2 { font-size: var(--h2, 18px); font-weight: var(--h-weight, 800); line-height: 1.25; }
 /* A white card: a hairline and a 1px shadow, no glow. */
 .life-card {
   background: var(--card);
@@ -136,6 +164,9 @@ html.new-ui body { background: #ffffff; }
 }
 .finish-confetti { position: absolute; left: 50%; top: 46%; pointer-events: none; }
 .finish-confetti > span { position: absolute; left: 0; top: 0; opacity: 0; animation: finish-confetti 1.25s cubic-bezier(0.2, 0.7, 0.3, 1) both; animation-delay: calc(var(--i, 0) * 9ms + 180ms); }
+/* The result hero draws its own side wash (container-driven), so the viewport-driven one in tokens.css is switched off. */
+.finish-hero .hero-field { --wash: none; }
+.finish-hero__wash { background: linear-gradient(90deg, var(--hero-wash) 0%, color-mix(in srgb, var(--hero-wash) 94%, transparent) 38%, color-mix(in srgb, var(--hero-wash) 62%, transparent) 56%, transparent 76%); }
 /* The big score lands with a small overshoot. */
 @keyframes finish-score { 0% { transform: scale(0.7); opacity: 0; } 60% { transform: scale(1.06); opacity: 1; } 100% { transform: scale(1); } }
 .finish-score { transform-origin: left bottom; animation: finish-score 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both; }
@@ -216,3 +247,41 @@ html.new-ui .skeleton {
   --wash: linear-gradient(180deg, var(--hero-wash) 0%, var(--hero-wash) 30%, color-mix(in srgb, var(--hero-wash) 70%, transparent) 44%, transparent 62%);
   background-position: 72% 100%;
 }
+
+/*
+ * Toasts (sonner): a white card with a hairline in the app's tokens, whatever
+ * the message type. Unlayered and doubled up so they beat sonner's own
+ * injected styles, which load later.
+ */
+[data-sonner-toaster][data-sonner-theme] .scribe-toast {
+  --normal-bg: var(--card, #fff);
+  --normal-border: var(--border, #e8e8ec);
+  --normal-text: var(--foreground, #16161a);
+  background: var(--card, #fff);
+  color: var(--foreground, #16161a);
+  border: 1px solid var(--border, #e8e8ec);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px -12px rgb(22 22 26 / 0.25);
+  font-family: var(--font-sans, inherit);
+  font-size: 14px;
+  padding: 14px 16px;
+}
+[data-sonner-toaster] .scribe-toast .scribe-toast__title { font-weight: 700; line-height: 1.35; }
+[data-sonner-toaster] .scribe-toast .scribe-toast__description { color: var(--muted-foreground, #5c5c68); }
+[data-sonner-toaster] .scribe-toast[data-type="error"] [data-icon] { color: #e11d48; }
+[data-sonner-toaster] .scribe-toast[data-type="success"] [data-icon] { color: #059669; }
+[data-sonner-toaster] .scribe-toast [data-close-button] { background: var(--card, #fff); border-color: var(--border, #e8e8ec); color: var(--muted-foreground, #5c5c68); }
+
+/*
+ * The old landing (/landing, until its redesign in #300 replaces it) is a
+ * preview scope without .app-brand: it keeps the flat pill buttons it was
+ * designed with. Scoped by the Button primitive's marker classes; remove this
+ * block when the landing moves to the product look.
+ */
+.design-root:not(.app-brand) .ui-btn { border-radius: 9999px; box-shadow: none; font-weight: 500; transform: none; }
+.design-root:not(.app-brand) .ui-btn--primary { font-weight: 600; color: var(--accent-foreground, #fff); }
+.design-root:not(.app-brand) .ui-btn--sm { height: 2rem; padding-inline: 0.75rem; font-size: 0.875rem; line-height: 1.25rem; }
+.design-root:not(.app-brand) .ui-btn--md { height: 2.5rem; padding-inline: 1.25rem; font-size: 0.875rem; line-height: 1.25rem; }
+.design-root:not(.app-brand) .ui-btn--lg { height: 3rem; padding-inline: 1.75rem; font-size: 1rem; line-height: 1.5rem; }
+.design-root:not(.app-brand) .ui-btn--secondary { background: var(--muted); border-color: var(--border-strong); font-weight: 500; }
+.design-root:not(.app-brand) .ui-btn--outline { background: var(--card); border-color: var(--border-strong); font-weight: 500; }

@@ -97,8 +97,8 @@ export function PlannerChat({ weekStart, className }: { weekStart?: string; clas
         ) : (
           messages.map((m) => (
             <div key={m.id} className={cn("flex flex-col gap-1", m.role === "USER" ? "items-end" : "items-start")}>
-              <div className={cn("max-w-[92%] whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-[13.5px] leading-snug", m.role === "USER" ? "rounded-br-md bg-accent text-white" : m.role === "AGENT" ? "rounded-bl-md border border-[#f6d9a8] bg-[#fff8ec] text-[#5b3a12]" : "rounded-bl-md bg-muted")}>
-                {m.role === "AGENT" && <div className="mb-0.5 text-[11px] font-semibold text-[#b4530a]">Note from your planner</div>}
+              <div className={cn("max-w-[92%] whitespace-pre-wrap rounded-2xl px-3.5 py-2 text-[13.5px] leading-snug", m.role === "USER" ? "rounded-br-md bg-accent text-white" : m.role === "AGENT" ? "rounded-bl-md border border-border bg-white text-foreground" : "rounded-bl-md bg-muted")}>
+                {m.role === "AGENT" && <div className="mb-0.5 text-[12px] font-bold text-muted-foreground">Note from your planner</div>}
                 {m.content}
               </div>
               {Array.isArray(m.meta) && m.meta.length > 0 && (

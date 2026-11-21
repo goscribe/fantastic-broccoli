@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { Flame, Snowflake, Sparkles } from "lucide-react";
@@ -218,7 +219,7 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
           <Link
             href="/shop"
             onClick={() => setOpen(false)}
-            className="mt-3 flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-accent text-[14px] font-semibold text-accent-foreground hover:bg-accent-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2"
+            className={buttonClass({ className: "mt-3 w-full gap-2" })}
           >
             {t("rewards.openShop")}
           </Link>

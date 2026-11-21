@@ -1,5 +1,7 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
+import { PageShell } from "@/components/ui/page-header";
 import "@/lib/i18n/exam-planner";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -74,13 +76,13 @@ export function ExamPlanner() {
     tab === "today" && data ? dayLabel(data.today, locale, { weekday: "long", day: "numeric", month: "long" }) : t(`ep.tab.${tab}`);
 
   return (
-    <div className="mx-auto w-full max-w-[1080px] px-4 pb-16 pt-5 sm:px-6 sm:pt-6">
+    <PageShell as="div" max="max-w-[1080px]">
       <div className="mb-4 flex items-end justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3.5">
           <Mascot pose="pencil" className="cat-peek h-[60px] shrink-0 self-end sm:h-[68px]" />
           <div className="min-w-0">
             <div className="text-[13px] font-bold text-muted-foreground">{t("ep.title")}</div>
-            <h1 className="truncate text-[24px] font-extrabold leading-tight tracking-tight sm:text-[30px]">{title}</h1>
+            <h1 className="page-h1 text-balance [overflow-wrap:anywhere]">{title}</h1>
           </div>
         </div>
         {hasExams && tab !== "timetable" && (
@@ -140,7 +142,7 @@ export function ExamPlanner() {
           onClose={() => setSetup(null)}
         />
       )}
-    </div>
+    </PageShell>
   );
 }
 
@@ -151,7 +153,7 @@ function EmptyPlan({ onAdd }: { onAdd: () => void }) {
       <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob h-28 w-auto" />
       <h2 className="mt-4 text-[20px] font-bold tracking-tight">{t("ep.empty.title")}</h2>
       <p className="mt-2 max-w-[460px] text-[14px] leading-relaxed text-muted-foreground">{t("ep.empty.body")}</p>
-      <button type="button" onClick={onAdd} className="mt-6 inline-flex h-11 items-center gap-2 rounded-xl bg-accent px-5 text-[14.5px] font-semibold text-white hover:bg-accent-dim">
+      <button type="button" onClick={onAdd} className={buttonClass({ className: "mt-6 gap-2" })}>
         <Plus className="size-4" />
         {t("ep.empty.cta")}
       </button>
@@ -459,7 +461,7 @@ function ExamsView({ data, onEdit, onTime }: { data: PlanToday; onEdit: (e: Exam
                 </div>
               </div>
               {e.unplanned > 0 && (
-                <div className="mt-3 flex flex-col gap-2 rounded-xl bg-[#fff8ec] px-3 py-2.5 text-[12.5px] text-[#8a4a12] sm:flex-row sm:items-center sm:justify-between">
+                <div className="mt-3 flex flex-col gap-2 rounded-xl bg-muted px-3 py-2.5 text-[13px] text-foreground sm:flex-row sm:items-center sm:justify-between">
                   <span>{fill(t("ep.exams.unplanned"), { n: e.unplanned })}</span>
                   <button type="button" onClick={onTime} className="shrink-0 self-start font-semibold underline sm:self-auto">{t("ep.exams.changeTime")}</button>
                 </div>

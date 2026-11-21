@@ -1,5 +1,6 @@
 "use client";
 
+import { LegacyPage } from "@/components/layout/legacy-redirect";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -24,7 +25,16 @@ const SUGGESTION_KEYS = [
   "misc.suggestionSpanish",
 ];
 
-export default function StudyBotPage() {
+/** Nothing in the redesigned app links here; under the new UI it goes home (the legacy `?ui=old` screens keep it). */
+export default function StudyBotRoute() {
+  return (
+    <LegacyPage to="/">
+      <StudyBotPage />
+    </LegacyPage>
+  );
+}
+
+function StudyBotPage() {
   const router = useRouter();
   const { t } = useI18n();
   const [input, setInput] = useState("");

@@ -136,21 +136,34 @@ export interface PlanOption {
   storageLimitBytes: number;
   monthlyTokens: number;
   isActive: boolean;
+  /** Billing interval ("month", "year"); null for a pay-once plan. Undefined when the server does not send it. Labels only (plan-display.ts). */
+  interval?: string | null;
+  /** "pass" for a pay-once pass, when the server sends it. Labels only. */
+  kind?: string | null;
+  /** When a pass's access ends, when the server sends it. Labels only. */
+  accessUntil?: string | Date | null;
 }
 
 export async function fetchPlanOptions(): Promise<PlanOption[]> {
   const plans = await api.payment.getPlans.query();
-  return plans.map((plan) => ({
-    id: plan.id,
-    name: plan.name,
-    priceDollars: plan.price,
-    description: plan.description ?? "",
-    storageLimitBytes: Number(plan.limit?.maxStorageBytes ?? 0),
-    // `monthlyTokens` is newer than the published @goscribe/server types.
-    monthlyTokens:
-      (plan as unknown as { monthlyTokens?: number }).monthlyTokens ?? 0,
-    isActive: plan.isActive,
-  }));
+  return plans.map((plan) => {
+    // Display-only fields; `kind` / `accessUntil` are newer than the published @goscribe/server types.
+    const extra = plan as unknown as { interval?: string | null; kind?: string | null; accessUntil?: string | Date | null };
+    return {
+      id: plan.id,
+      name: plan.name,
+      priceDollars: plan.price,
+      description: plan.description ?? "",
+      storageLimitBytes: Number(plan.limit?.maxStorageBytes ?? 0),
+      // `monthlyTokens` is newer than the published @goscribe/server types.
+      monthlyTokens:
+        (plan as unknown as { monthlyTokens?: number }).monthlyTokens ?? 0,
+      isActive: plan.isActive,
+      interval: extra.interval,
+      kind: extra.kind,
+      accessUntil: extra.accessUntil,
+    };
+  });
 }
 
 /** Redirects to the hosted checkout (Stripe or Airwallex; the server picks) for the chosen paid plan. */

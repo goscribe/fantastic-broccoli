@@ -123,7 +123,7 @@ function MistakeCard({ m, showSubject }: { m: Mistake; showSubject: boolean }) {
         </span>
       </div>
 
-      <div className="mt-2 text-[16.5px] font-extrabold leading-snug">
+      <div className="mt-2 text-[16.5px] font-extrabold leading-snug [overflow-wrap:anywhere]">
         {m.kind === "cloze" ? (
           <ClozePassage m={m} />
         ) : m.kind === "mcq" && m.detail.figures?.length ? (
@@ -250,7 +250,7 @@ export function MistakesView({
   ];
   const chip = (active: boolean) =>
     cn(
-      "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-[13px] font-semibold transition-colors",
+      "inline-flex max-w-[240px] shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-[13px] font-semibold transition-colors",
       active ? "border-foreground bg-foreground text-background" : "border-transparent bg-muted text-foreground hover:bg-[var(--edge)]",
     );
 
@@ -315,8 +315,8 @@ export function MistakesView({
               className={chip(workspaceId === s.workspaceId)}
               onClick={() => onWorkspaceChange(s.workspaceId)}
             >
-              {s.title}
-              {s.open > 0 && <span className="tabular-nums opacity-70">{s.open}</span>}
+              <span className="min-w-0 truncate" title={s.title}>{s.title}</span>
+              {s.open > 0 && <span className="shrink-0 tabular-nums opacity-70">{s.open}</span>}
             </button>
           ))}
         </div>
@@ -348,9 +348,10 @@ export function MistakesView({
           ))}
         </div>
       ) : items.length === 0 ? (
-        <p className="py-8 text-[15px] font-semibold text-muted-foreground">
-          {filter === "open" ? t("mistakes.allFixed") : t("mistakes.noneCorrected")}
-        </p>
+        // Nothing left to fix is already said once, in the summary above; only the other tabs need their own line.
+        filter === "open" ? null : (
+          <p className="py-8 text-[15px] font-semibold text-muted-foreground">{t("mistakes.noneCorrected")}</p>
+        )
       ) : (
         <ul className="space-y-3">
           {items.map((m) => (

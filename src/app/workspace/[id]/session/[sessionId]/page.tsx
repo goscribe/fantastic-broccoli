@@ -2,6 +2,7 @@
 
 import { BuildBar } from "@/components/session/build-bar";
 import { useNewUi } from "@/lib/new-ui";
+import { initialCopilotOpen, rememberCopilotOpen } from "@/lib/copilot-pref";
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -64,6 +65,7 @@ import { refreshProgress, STREAK_KEY, useStreak, type StreakSummary } from "@/li
 import { MathText } from "@/components/ui/markdown-text";
 import { ContentRepairProvider } from "@/components/content/content-repair";
 import { Button } from "@/components/ui/button";
+import { Mascot } from "@/components/rewards/mascot";
 import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
@@ -206,18 +208,25 @@ export default function SessionDetailPage() {
   const setActiveActivityId = setChosenActivityId;
 
   const [showComments, setShowComments] = useState(false);
-  // Copilot defaults open on desktop; on mobile it covers the screen, so start closed.
-  const [copilotOpen, setCopilotOpen] = useState(
+  // Copilot starts closed (the question keeps the full column); a student who
+  // docks it open keeps it open next time. See copilot-pref.ts.
+  const [copilotOpen, setCopilotOpenState] = useState(
     () =>
-      typeof window === "undefined" ||
-      window.matchMedia("(min-width: 640px)").matches,
+      typeof window !== "undefined" &&
+      initialCopilotOpen(window.localStorage, window.matchMedia("(min-width: 640px)").matches),
   );
+  /** The student's own open/close: remembered. */
+  const setCopilotOpen = useCallback((open: boolean) => {
+    setCopilotOpenState(open);
+    rememberCopilotOpen(window.localStorage, open);
+  }, []);
   // One-tap prompts (end-of-session "Ask Copilot about what you got wrong")
   // open the panel with the text already in the input.
   const [copilotDraft, setCopilotDraft] = useState<{ text: string; id: number }>();
   const askCopilot = useCallback((text: string) => {
     setCopilotDraft({ text, id: Date.now() });
-    setCopilotOpen(true);
+    // A one-off prompt opens the panel without changing the remembered choice.
+    setCopilotOpenState(true);
   }, []);
   const [newComment, setNewComment] = useState("");
   const [localNotes, setLocalNotes] = useState<SessionNote[]>([]);
@@ -919,7 +928,9 @@ export default function SessionDetailPage() {
     </>
   );
 
-  if (newUi && !planFailed && !generating) {
+  // The new player shell also carries the two states before there is a plan
+  // (still building, or the build failed): same X, same column, no legacy chrome.
+  if (newUi) {
     return (
       <div className="flex h-dvh min-h-0 flex-1 overflow-hidden bg-background">
         <div className="relative flex min-w-0 flex-1 flex-col">
@@ -935,7 +946,11 @@ export default function SessionDetailPage() {
                 >
                   <X className="size-[22px]" />
                 </button>
-                <SessionStepLabel activities={activities} activeIndex={activeIndex} className="flex-1" />
+                {planReady ? (
+                  <SessionStepLabel activities={activities} activeIndex={activeIndex} className="flex-1" />
+                ) : (
+                  <span className="flex-1" />
+                )}
                 {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
                 {planReady && !copilotOpen && (
                   <CopilotTrigger compact onClick={() => setCopilotOpen(true)} />
@@ -954,12 +969,15 @@ export default function SessionDetailPage() {
                   )}
                 </button>
               </div>
-              <SessionStepBar activities={activities} activeIndex={activeIndex} onSelect={goToIndex} />
+              {/* One activity (a Quick 5) has its own question bar; a one-segment step bar above it said the same thing twice. */}
+              {planReady && activities.length > 1 && (
+                <SessionStepBar activities={activities} activeIndex={activeIndex} onSelect={goToIndex} />
+              )}
             </div>
           </div>
 
           <div
-            key={activeActivity?.id ?? "debrief"}
+            key={!planReady ? "building" : (activeActivity?.id ?? "debrief")}
             className={cn(
               // Room for the bottom bar and the phone's home indicator, so the last answer is never under them.
               "min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-4 sm:px-10 sm:pt-6",
@@ -992,7 +1010,32 @@ export default function SessionDetailPage() {
                   </div>
                 </div>
               )}
-              {activeActivity ? (
+              {planFailed ? (
+                <div className="mx-auto flex max-w-md flex-col items-center pb-10 pt-6 text-center animate-fade-up sm:pt-12" role="alert">
+                  <Mascot pose="think" className="h-[112px]" />
+                  <h1 className="mt-5 text-[24px] font-extrabold leading-tight">{t("session.planFailedTitle")}</h1>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{planError ?? t("session.planFailedBody")}</p>
+                  <div className="mt-6 flex w-full flex-col gap-2.5 sm:w-auto sm:flex-row">
+                    <Button size="lg" disabled={retryPlan.isPending || deleteSession.isPending} onClick={() => retryPlan.mutate()}>
+                      {t("session.retryGeneration")}
+                    </Button>
+                    <Button size="lg" variant="secondary" disabled={retryPlan.isPending || deleteSession.isPending} onClick={() => deleteSession.mutate()}>
+                      {t("session.deleteSession")}
+                    </Button>
+                  </div>
+                  <button type="button" onClick={() => router.push(`/workspace/${workspaceId}`)} className="mt-4 text-[14px] font-bold text-muted-foreground hover:text-foreground">
+                    {t("session.backToWorkspace")}
+                  </button>
+                </div>
+              ) : generating ? (
+                <GeneratingPlanCard
+                  title={session.title}
+                  workspaceId={workspaceId}
+                  sessionId={sessionId}
+                  initial={session.generationProgress}
+                  quickStart={session.quickStart}
+                />
+              ) : activeActivity ? (
                 <>
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <span data-scroll-line className="inline-flex items-center text-[13px] font-bold text-muted-foreground">
@@ -1067,7 +1110,7 @@ export default function SessionDetailPage() {
         </div>
         {copilotPane}
         {commentsPanel}
-        {!copilotOpen && <CopilotTrigger onClick={() => setCopilotOpen(true)} />}
+        {planReady && !copilotOpen && <CopilotTrigger onClick={() => setCopilotOpen(true)} />}
       </div>
     );
   }
@@ -1681,7 +1724,7 @@ function GeneratingPlanCard({
 
   if (newUi) {
     return (
-      <div className="mx-auto flex w-full max-w-[640px] flex-col items-center gap-5 px-4 pb-12 pt-6 animate-fade-up">
+      <div className="mx-auto flex w-full max-w-[640px] flex-col items-center gap-5 pb-12 pt-2 animate-fade-up">
         <BuildBar
           title={title}
           pct={percent / 100}
@@ -1694,7 +1737,8 @@ function GeneratingPlanCard({
           {stalled
             ? t("session.takingLonger")
             : quickStart
-              ? t("firstRun.emailWhenReady")
+              ? // A Quick 5 is ready in about a minute: it opens here by itself, there is nothing to email.
+                t("firstRun.busyHint")
               : t("session.generatingHint")}
         </p>
       </div>

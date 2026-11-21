@@ -1,5 +1,6 @@
 "use client";
 
+import { PageShell } from "@/components/ui/page-header";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -42,7 +43,7 @@ export function CourseView({ courseId }: { courseId: string }) {
 
   return (
     <div className="notes-look flex-1">
-      <div className="mx-auto w-full max-w-[900px] px-4 pb-12 pt-5 sm:px-6 sm:pt-6">
+      <PageShell as="div" max="max-w-[900px]">
         <Link href={LIBRARY_PATH} className="text-[12px] font-semibold text-faint hover:text-accent">
           ← Notes
         </Link>
@@ -63,7 +64,7 @@ export function CourseView({ courseId }: { courseId: string }) {
           </div>
         )}
         {loaded.state === "ready" && loaded.data && <Outline course={openFor(loaded.data, entitled)} subject={subject} />}
-      </div>
+      </PageShell>
     </div>
   );
 }

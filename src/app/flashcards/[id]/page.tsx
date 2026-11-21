@@ -156,14 +156,8 @@ function FlashcardDeck() {
 
   if (!item || !deck || deck.entries.length === 0) {
     return (
-      <div className="mx-auto w-full max-w-3xl rounded-2xl border border-border bg-card px-6 py-12 text-center">
-        <Image
-          src="/design/props/cards.png"
-          alt=""
-          width={200}
-          height={168}
-          className="pointer-events-none mx-auto h-24 w-auto select-none"
-        />
+      <div className="mx-auto w-full max-w-3xl px-6 py-12 text-center">
+        <Image src="/design/cat3-think.webp" alt="" width={383} height={400} unoptimized className="pointer-events-none mx-auto h-24 w-auto select-none" />
         <p className="mt-3 text-sm font-medium">
           {t(item ? "fc.emptyDeck" : "fc.deckNotFound")}
         </p>

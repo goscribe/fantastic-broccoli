@@ -3,14 +3,14 @@ import { cn } from "@/lib/utils";
 
 import { Suspense, useEffect, useRef, useState } from "react";
 import { Check, Camera, X } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BILLING_PAUSED, BILLING_PAUSED_MESSAGE } from "@/lib/billing-paused";
 import { CHECKOUT_REFRESH_DELAYS_MS, checkoutReturn } from "@/lib/checkout-return";
+import { planBilling, planCta, planDescription, planDisplayName, planPriceLabel, planTermsLine } from "@/lib/plan-display";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PageHeader } from "@/components/ui/page-header";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import {
@@ -18,6 +18,7 @@ import {
   describeLedgerEntry,
   fetchAccountSummary,
   fetchCurrentSubscription,
+  fetchPlanCaps,
   fetchPlanOptions,
   resumeSubscription,
   fetchTokenHistory,
@@ -100,6 +101,7 @@ function PlanCard({
   onDowngrade,
   onResume,
   switching,
+  trialDays,
 }: {
   plan: PlanOption;
   subscription: CurrentSubscription | null;
@@ -107,49 +109,43 @@ function PlanCard({
   onDowngrade: () => void;
   onResume: () => void;
   switching: boolean;
+  /** Free-trial days the account can still use (subscriptions only); 0 when none. */
+  trialDays: number;
 }) {
   const { t, locale } = useI18n();
   const isFree = plan.priceDollars === 0;
   const cancelAt = subscription?.cancelAt ?? null;
   const endsOn = cancelAt ? formatDate(cancelAt, locale) : null;
+  const billing = planBilling(plan);
+  const price = planPriceLabel(plan);
+  const description = planDescription(plan);
+  const terms = plan.isActive ? null : planTermsLine(plan, trialDays);
   return (
-    <div
-      className={`flex flex-col rounded-2xl border p-5 ${
-        plan.isActive
-          ? "border-accent bg-accent-soft/40"
-          : "border-border bg-card"
-      }`}
-    >
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold">{plan.name}</p>
-        {plan.isActive && (
-          <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold text-white">
-            {t("set.current")}
-          </span>
-        )}
+    <div className={cn("life-card flex flex-col p-5", plan.isActive && "border-border-strong")}>
+      <div className="flex items-baseline justify-between gap-2">
+        <p className="text-[16px] font-extrabold">{planDisplayName(plan.name)}</p>
+        {plan.isActive && <span className="shrink-0 text-[12.5px] font-bold text-accent">{t("set.current")}</span>}
       </div>
-      <p className="mt-1 text-[12px] text-muted-foreground">
-        {plan.description}
-      </p>
-      <p className="mt-3 text-lg font-bold tabular-nums">
-        {plan.priceDollars === 0 ? t("set.free") : `$${plan.priceDollars}`}
-        {plan.priceDollars > 0 && (
-          <span className="text-[12px] font-normal text-faint">
-            {" "}
-            {t("set.perMonth")}
+      {description && <p className="mt-1 text-[13px] text-muted-foreground">{description}</p>}
+      <p className="mt-3 text-[22px] font-extrabold leading-none tabular-nums">
+        {billing === "free" ? t("set.free") : price.amount}
+        {billing !== "free" && (
+          <span className="text-[13px] font-semibold text-muted-foreground">
+            {billing === "month" ? ` ${t("set.perMonth")}` : price.suffix}
           </span>
         )}
       </p>
-      <ul className="mt-3 space-y-1.5 text-[12px] text-muted-foreground">
+      {terms && <p className="mt-2 text-[12.5px] leading-snug text-muted-foreground">{terms}</p>}
+      <ul className="mt-3 space-y-1.5 text-[13px] text-muted-foreground">
         <li className="flex items-center gap-1.5">
-          <Check className="h-3 w-3 text-accent" />
+          <Check className="size-3.5 text-accent" strokeWidth={2.6} />
           {t("set.storageAmount").replace(
             "{amount}",
             formatBytes(plan.storageLimitBytes),
           )}
         </li>
         <li className="flex items-center gap-1.5">
-          <Check className="h-3 w-3 text-accent" />
+          <Check className="size-3.5 text-accent" strokeWidth={2.6} />
           {t("set.tokensPerMonth").replace(
             "{count}",
             String(plan.monthlyTokens),
@@ -197,7 +193,7 @@ function PlanCard({
             disabled={switching || needsBillingManagement(subscription)}
             onClick={() => onSelect(plan.id)}
           >
-            {t("set.switchTo").replace("{name}", plan.name)}
+            {planCta(plan, trialDays)}
           </Button>
         )}
       </div>
@@ -246,6 +242,8 @@ export default function SettingsPage() {
   const { t, locale } = useI18n();
   const [summary, setSummary] = useState<AccountSummary | null>(null);
   const [plans, setPlans] = useState<PlanOption[]>([]);
+  // Only for the plan cards' wording ("Try for free" needs a trial to be on offer).
+  const [trialDays, setTrialDays] = useState(0);
   const [editedName, setEditedName] = useState<string | null>(null);
   const name = editedName ?? user?.name ?? "";
   const [saving, setSaving] = useState(false);
@@ -278,6 +276,9 @@ export default function SettingsPage() {
       .finally(() => setPlansLoading(false));
     fetchCurrentSubscription()
       .then(setSubscription)
+      .catch(() => {});
+    fetchPlanCaps()
+      .then((caps) => setTrialDays(caps.trialDays ?? 0))
       .catch(() => {});
     fetchTokenOverview()
       .then(setTokens)
@@ -419,7 +420,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <main className="mx-auto w-full max-w-[1180px] px-6 pb-12 pt-6">
+    <PageShell max="max-w-none">
       <Suspense fallback={null}>
         <CheckoutReturnNotice onRefresh={refreshBilling} />
       </Suspense>
@@ -440,7 +441,7 @@ export default function SettingsPage() {
 
         {/* Account */}
         <section id="account">
-          <h2 className="text-sm font-semibold">{t("settings.account")}</h2>
+          <h2 className="page-h2">{t("settings.account")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("set.accountHint")}
           </p>
@@ -552,11 +553,12 @@ export default function SettingsPage() {
 
         {/* Language */}
         <section id="language" className="mt-8">
-          <h2 className="text-sm font-semibold">{t("settings.language")}</h2>
+          <h2 className="page-h2">{t("settings.language")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("settings.languageHint")}
           </p>
-          <div className="mt-3 rounded-2xl border border-border bg-card p-5">
+          {/* One select: it sits on the page, no card around it. */}
+          <div className="mt-3">
             <label className="block max-w-sm">
               <span className="sr-only">{t("settings.language")}</span>
               <select
@@ -587,7 +589,7 @@ export default function SettingsPage() {
 
         {/* Plan */}
         <section id="plan" className="mt-8">
-          <h2 className="text-sm font-semibold">{t("settings.plan")}</h2>
+          <h2 className="page-h2">{t("settings.plan")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("set.planHint")}
           </p>
@@ -628,6 +630,7 @@ export default function SettingsPage() {
                     onDowngrade={openDowngrade}
                     onResume={handleResume}
                     switching={switching}
+                    trialDays={trialDays}
                   />
                 ))}
           </div>
@@ -636,7 +639,7 @@ export default function SettingsPage() {
         {/* Usage */}
         {summaryLoading && (
           <section className="mt-8">
-            <h2 className="text-sm font-semibold">{t("settings.usage")}</h2>
+            <h2 className="page-h2">{t("settings.usage")}</h2>
             <div className="mt-3 rounded-2xl border border-border bg-card px-5 py-2 divide-y divide-border">
               {Array.from({ length: 3 }, (_, i) => (
                 <div key={i} className="py-3 space-y-2">
@@ -652,11 +655,12 @@ export default function SettingsPage() {
         )}
         {!summaryLoading && summary && (
           <section className="mt-8">
-            <h2 className="text-sm font-semibold">{t("settings.usage")}</h2>
+            <h2 className="page-h2">{t("settings.usage")}</h2>
             <p className="mt-0.5 text-[13px] text-muted-foreground">
               {t("set.usageHint").replace("{plan}", summary.planName)}
             </p>
-            <div className="mt-3 rounded-2xl border border-border bg-card px-5 py-2 divide-y divide-border">
+            {/* One bar: it sits on the page, no card around a single row. */}
+            <div className="mt-1">
               <UsageBar
                 label={t("set.storage")}
                 used={summary.storageUsedBytes}
@@ -670,26 +674,18 @@ export default function SettingsPage() {
 
         {/* Invite friends */}
         <section id="invite" className="mt-8">
-          <h2 className="mb-3 text-sm font-semibold">{t("growth.sectionTitle")}</h2>
+          {/* The card carries its own title; a section title above it said the same thing twice. */}
           <InviteCard />
         </section>
 
         {/* Tokens */}
         <section id="tokens" className="mt-8">
-          <h2 className="text-sm font-semibold">{t("set.tokensTitle")}</h2>
+          <h2 className="page-h2">{t("set.tokensTitle")}</h2>
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("set.tokensHint")}
           </p>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <div className="flex items-start gap-3 rounded-2xl border border-border bg-card p-4">
-              <Image
-                src="/design/props/star.png"
-                alt=""
-                width={64}
-                height={64}
-                unoptimized
-                className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
-              />
               <div className="min-w-0">
                 <p className="text-[12px] text-muted-foreground">
                   {t("set.balance")}
@@ -898,6 +894,6 @@ export default function SettingsPage() {
         </div>
       )}
       </div>
-    </main>
+    </PageShell>
   );
 }

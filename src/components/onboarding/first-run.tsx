@@ -270,11 +270,14 @@ export function FirstRun({
   ];
 
   const primaryButton =
-    "inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 text-[15px] font-semibold text-white transition-colors hover:bg-accent-dim disabled:opacity-50";
+    "btn-chunky inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-[16px] bg-accent px-5 text-[16px] font-extrabold text-white hover:bg-accent-dim disabled:opacity-50";
 
   return (
-    <div className="flex min-h-full w-full flex-col items-center bg-white px-4 pb-10 pt-8 sm:justify-center sm:px-6 sm:py-12">
-      <div className="w-full max-w-[520px] animate-fade-up">
+    // Centred with auto margins, not justify-center: when the column is taller
+    // than the screen (the course list) centring pushed the greeting and H1
+    // above the top edge, where scrolling cannot reach.
+    <div className="flex min-h-full w-full shrink-0 flex-col items-center bg-white px-4 pb-10 pt-8 sm:px-6 sm:py-12">
+      <div className="w-full max-w-[520px] animate-fade-up sm:my-auto">
         <Image
           src="/design/cat3-wave.webp"
           alt=""

@@ -47,3 +47,37 @@ export function repeatsTitle(subjectTitle: string, sessionTitle: string | null |
   if (!a) return false;
   return a === b || b.startsWith(a) || (b.length >= 8 && a.startsWith(b));
 }
+
+/** About how much of a long title a tile shows before it is cut ("B4 Thermodynami…"). */
+export const TILE_TITLE_VISIBLE_CHARS = 16;
+
+/**
+ * Subjects whose titles look the same once a tile cuts them ("B4
+ * Thermodynamics Guide +3" and "B4 Thermodynamics Short Answer Questions"
+ * both read "B4 Thermodynami…"). For each of those, the part that tells it
+ * apart ("Guide +3", "Short Answer Questions"), to show on the tile's second
+ * line. Titles that are short, or unique in what the tile shows, get nothing.
+ */
+export function titleHints(subjects: { id: string; title: string }[], visibleChars = TILE_TITLE_VISIBLE_CHARS): Map<string, string> {
+  const hints = new Map<string, string>();
+  const groups = new Map<string, { id: string; words: string[] }[]>();
+  for (const s of subjects) {
+    const title = s.title.trim().replace(/\s+/g, " ");
+    if (title.length <= visibleChars) continue;
+    const key = title.slice(0, visibleChars).toLowerCase();
+    const group = groups.get(key) ?? [];
+    group.push({ id: s.id, words: title.split(" ") });
+    groups.set(key, group);
+  }
+  for (const group of groups.values()) {
+    if (group.length < 2) continue;
+    // The words every title in the group starts with.
+    let shared = 0;
+    while (group.every((g) => g.words.length > shared && g.words[shared].toLowerCase() === group[0].words[shared].toLowerCase())) shared++;
+    for (const g of group) {
+      const rest = g.words.slice(shared).join(" ");
+      if (rest) hints.set(g.id, rest);
+    }
+  }
+  return hints;
+}

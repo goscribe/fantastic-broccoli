@@ -24,7 +24,7 @@ export function Sheet({ title, sub, onClose, footer, children, labelId = "notes-
       >
         <div className="flex items-start justify-between gap-3 px-5 pb-3 pt-5 sm:px-6">
           <div className="min-w-0">
-            <h2 id={labelId} className="text-[20px] font-extrabold leading-tight">
+            <h2 id={labelId} className="page-h2">
               {title}
             </h2>
             {sub && <p className="mt-1 text-[14px] leading-snug text-muted-foreground">{sub}</p>}

@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import "@/lib/i18n/exam-planner";
 import Image from "next/image";
 import Link from "next/link";
@@ -408,7 +409,7 @@ export function ExamSetup({
             type="button"
             disabled={!canNext || saving}
             onClick={() => (last ? void save() : setStep(steps[idx + 1]))}
-            className="inline-flex h-11 min-w-[120px] items-center justify-center gap-2 rounded-xl bg-accent px-5 text-[14.5px] font-semibold text-white hover:bg-accent-dim disabled:opacity-50"
+            className={buttonClass({ className: "min-w-[120px] gap-2" })}
           >
             {saving && <Loader2 className="size-4 animate-spin" />}
             {saving ? t("ep.setup.saving") : !last ? t("ep.setup.next") : mode.kind === "new" ? t("ep.setup.create") : t("ep.setup.save")}
