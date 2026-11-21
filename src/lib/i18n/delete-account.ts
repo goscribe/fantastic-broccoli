@@ -3,9 +3,12 @@
 // {date} is the permanent-deletion date, {days} the grace period, {email}
 // the account email, {word} the confirm word (DELETE, never translated).
 //
-// Facts from goscribe/server: the account is soft-deleted at once and the
-// session cookie cleared; it is hard-deleted 30 days later; the email has a
-// restore link valid for those 30 days; billing is NOT cancelled.
+// Facts from goscribe/server: the account is soft-deleted at once and every
+// session (all devices) stops working; it is hard-deleted 30 days later; the
+// email has a restore link valid for those 30 days. Billing: at the request a
+// subscription is set to cancel at the end of the current period (no further
+// charge); restoring before then resumes it; at the hard delete anything still
+// running is cancelled immediately with no refund. One-time passes never renew.
 
 import { registerTranslations } from "@/lib/i18n";
 
@@ -21,7 +24,7 @@ const english = {
     "On {date} ({days} days from now) your account and everything in it — subjects, uploads, study sessions and notes — are permanently deleted. After that it can't be undone.",
   "del.restore": "We email you a link to restore your account. It works until {date}.",
   "del.billing":
-    "Deleting your account does not cancel a paid plan. If you have a subscription, cancel it first under Plan in Settings (Downgrade to free, or Cancel trial), or it can keep renewing. A one-time pass isn't charged again.",
+    "Your subscription stops renewing now, so you won't be charged again. If you restore your account before your current billing period ends, it carries on as normal; after that, you'd need to subscribe again. Anything still active is cancelled, with no refund, when the account is deleted. A one-time pass isn't charged again.",
   "del.typeLabel": "Type {word} or your email to confirm",
   "del.confirm": "Delete my account",
   "del.deleting": "Deleting…",
@@ -49,7 +52,7 @@ registerTranslations(english, {
       "El {date} (dentro de {days} días) tu cuenta y todo su contenido — asignaturas, archivos, sesiones de estudio y apuntes — se eliminan para siempre. Después no se puede deshacer.",
     "del.restore": "Te enviamos por correo un enlace para restaurar tu cuenta. Funciona hasta el {date}.",
     "del.billing":
-      "Eliminar tu cuenta no cancela un plan de pago. Si tienes una suscripción, cancélala antes en Plan, en Ajustes (Bajar al plan gratis o Cancelar prueba), o puede seguir renovándose. Un pase de pago único no se vuelve a cobrar.",
+      "Tu suscripción deja de renovarse ahora, así que no se te volverá a cobrar. Si restauras tu cuenta antes de que termine tu periodo de facturación actual, sigue como siempre; después, tendrías que volver a suscribirte. Lo que siga activo se cancela, sin reembolso, cuando se elimina la cuenta. Un pase de pago único no se vuelve a cobrar.",
     "del.typeLabel": "Escribe {word} o tu correo para confirmar",
     "del.confirm": "Eliminar mi cuenta",
     "del.deleting": "Eliminando…",
@@ -75,7 +78,7 @@ registerTranslations(english, {
       "Le {date} (dans {days} jours), votre compte et tout son contenu — matières, fichiers, sessions d'étude et notes — sont supprimés définitivement. Ensuite, c'est irréversible.",
     "del.restore": "Nous vous envoyons par e-mail un lien pour restaurer votre compte. Il fonctionne jusqu'au {date}.",
     "del.billing":
-      "Supprimer votre compte n'annule pas un forfait payant. Si vous avez un abonnement, annulez-le d'abord dans Forfait, dans les Paramètres (Passer au forfait gratuit ou Annuler l'essai), sinon il peut continuer à se renouveler. Un pass payé une seule fois n'est plus facturé.",
+      "Votre abonnement cesse de se renouveler dès maintenant : vous ne serez plus facturé. Si vous restaurez votre compte avant la fin de votre période de facturation en cours, il continue normalement ; après, il faudra vous réabonner. Ce qui est encore actif est annulé, sans remboursement, lorsque le compte est supprimé. Un pass payé une seule fois n'est plus facturé.",
     "del.typeLabel": "Tapez {word} ou votre e-mail pour confirmer",
     "del.confirm": "Supprimer mon compte",
     "del.deleting": "Suppression…",
@@ -101,7 +104,7 @@ registerTranslations(english, {
       "Am {date} (in {days} Tagen) werden dein Konto und alles darin — Fächer, Uploads, Lerneinheiten und Notizen — endgültig gelöscht. Danach lässt sich das nicht rückgängig machen.",
     "del.restore": "Wir schicken dir per E-Mail einen Link, um dein Konto wiederherzustellen. Er gilt bis zum {date}.",
     "del.billing":
-      "Das Löschen deines Kontos kündigt keinen bezahlten Tarif. Wenn du ein Abo hast, kündige es zuerst unter Tarif in den Einstellungen (Zum Gratis-Tarif wechseln oder Testphase beenden), sonst kann es sich weiter verlängern. Ein einmal bezahlter Pass wird nicht erneut berechnet.",
+      "Dein Abo verlängert sich ab sofort nicht mehr, dir wird also nichts mehr berechnet. Wenn du dein Konto vor dem Ende deines aktuellen Abrechnungszeitraums wiederherstellst, läuft es normal weiter; danach müsstest du es neu abschließen. Was dann noch aktiv ist, wird beim Löschen des Kontos ohne Erstattung gekündigt. Ein einmal bezahlter Pass wird nicht erneut berechnet.",
     "del.typeLabel": "Gib {word} oder deine E-Mail ein, um zu bestätigen",
     "del.confirm": "Mein Konto löschen",
     "del.deleting": "Wird gelöscht…",
@@ -125,7 +128,7 @@ registerTranslations(english, {
       "{date}（{days} 天后），你的账户及其中所有内容——科目、上传的文件、学习环节和笔记——将被永久删除。之后无法撤销。",
     "del.restore": "我们会通过邮件发送恢复账户的链接，在 {date} 之前有效。",
     "del.billing":
-      "删除账户不会取消付费套餐。如果你有订阅，请先在设置的“套餐”中取消（降级或取消试用），否则它可能继续续费。一次性通行证不会再次扣费。",
+      "你的订阅从现在起停止续费，不会再扣费。如果你在当前计费周期结束前恢复账户，订阅会照常继续；之后则需要重新订阅。账户被删除时，仍在生效的订阅会被取消，且不退款。一次性通行证不会再次扣费。",
     "del.typeLabel": "输入 {word} 或你的邮箱以确认",
     "del.confirm": "删除我的账户",
     "del.deleting": "正在删除…",
@@ -149,7 +152,7 @@ registerTranslations(english, {
       "{date} को ({days} दिन बाद) आपका खाता और उसमें मौजूद सब कुछ — विषय, अपलोड, स्टडी सेशन और नोट्स — हमेशा के लिए हटा दिए जाएँगे। उसके बाद इसे वापस नहीं किया जा सकता।",
     "del.restore": "हम आपको खाता बहाल करने का लिंक ईमेल करते हैं। यह {date} तक काम करता है।",
     "del.billing":
-      "खाता हटाने से पेड प्लान रद्द नहीं होता। अगर आपकी सदस्यता है, तो पहले सेटिंग्स में प्लान के तहत उसे रद्द करें (डाउनग्रेड या ट्रायल रद्द करें), वरना वह रिन्यू होती रह सकती है। एक बार खरीदे गए पास पर दोबारा शुल्क नहीं लगता।",
+      "आपकी सदस्यता अब से रिन्यू नहीं होगी, इसलिए आपसे दोबारा शुल्क नहीं लिया जाएगा। अगर आप मौजूदा बिलिंग अवधि खत्म होने से पहले अपना खाता बहाल करते हैं, तो यह पहले की तरह चलती रहेगी; उसके बाद आपको फिर से सदस्यता लेनी होगी। खाता हटाए जाने पर जो कुछ भी अब भी सक्रिय है, वह बिना रिफ़ंड के रद्द कर दिया जाता है। एक बार खरीदे गए पास पर दोबारा शुल्क नहीं लगता।",
     "del.typeLabel": "पुष्टि के लिए {word} या अपना ईमेल लिखें",
     "del.confirm": "मेरा खाता हटाएँ",
     "del.deleting": "हटाया जा रहा है…",
@@ -175,7 +178,7 @@ registerTranslations(english, {
       "Sa {date} ({days} araw mula ngayon), permanenteng buburahin ang account mo at lahat ng laman nito — mga subject, upload, study session at notes. Pagkatapos noon, hindi na ito maibabalik.",
     "del.restore": "Mag-e-email kami ng link para maibalik ang account mo. Gumagana ito hanggang {date}.",
     "del.billing":
-      "Hindi kinakansela ng pagbura ng account ang bayad na plan. Kung may subscription ka, kanselahin muna ito sa Plan sa Settings (Mag-downgrade o kanselahin ang trial), kung hindi ay maaari itong patuloy na mag-renew. Hindi na sisingilin muli ang isang beses na pass.",
+      "Hihinto na ngayon ang pag-renew ng subscription mo, kaya hindi ka na sisingilin ulit. Kung ibabalik mo ang account bago matapos ang kasalukuyang billing period mo, tuloy ito gaya ng dati; pagkatapos noon, kailangan mong mag-subscribe ulit. Kakanselahin, nang walang refund, ang anumang aktibo pa kapag binura na ang account. Hindi na sisingilin muli ang isang beses na pass.",
     "del.typeLabel": "I-type ang {word} o ang email mo para kumpirmahin",
     "del.confirm": "Burahin ang account ko",
     "del.deleting": "Binubura…",
