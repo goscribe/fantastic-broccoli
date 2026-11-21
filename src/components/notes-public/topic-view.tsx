@@ -193,7 +193,8 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
               <span className="font-extrabold text-white">{course.title}</span> · {unitTitle(course, unit)}
             </span>
           </p>
-          <h1 className="nl-rise mt-2 text-[34px] font-black leading-[1.04] sm:mt-3 sm:text-[50px] lg:text-[56px]" style={stagger(1)}>
+          {/* A topic without a note yet balances its title, so a short last word ("Period 1") is not left alone; titles with a note keep the approved breaks. */}
+          <h1 className={cn("nl-rise mt-2 text-[34px] font-black leading-[1.04] sm:mt-3 sm:text-[50px] lg:text-[56px]", !note && "text-balance")} style={stagger(1)}>
             <span className="text-white/75">{topic.code}</span> {topic.name}
           </h1>
           <p className="nl-rise mt-3 text-[17px] font-semibold leading-[1.4] text-white/95 sm:text-[20px]" style={stagger(2)}>
@@ -248,7 +249,8 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
               </div>
             ) : (
               <>
-                <section className="nl-card mt-2 px-5 py-5 sm:px-7 sm:py-6" aria-labelledby="h-objectives">
+                {/* The page's one piece of content: no card around it. */}
+                <section className="mt-2" aria-labelledby="h-objectives">
                   <h2 id="h-objectives" className="text-[24px] font-extrabold leading-tight sm:text-[28px]">
                     What this topic covers
                   </h2>
