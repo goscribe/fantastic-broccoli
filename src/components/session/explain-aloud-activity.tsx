@@ -56,7 +56,7 @@ export function ExplainAloudActivity({
         {phase === "idle" && (
           <>
             <p className="text-[14.5px] leading-6 text-muted-foreground">{t("session.explainHint")}</p>
-            <PlayActions className="sm:justify-start">
+            <PlayActions>
               <PlayPrimary onClick={() => setPhase("recording")}>{t("session.startExplaining")}</PlayPrimary>
             </PlayActions>
           </>

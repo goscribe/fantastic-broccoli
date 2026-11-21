@@ -16,7 +16,7 @@ export const ACCENT_THEMES = {
 export type AccentThemeId = keyof typeof ACCENT_THEMES;
 
 /** The look with nothing equipped, shown in the shop so students can switch back. */
-export const DEFAULT_ACCENT_SWATCH = { swatch: "#7c3aed", soft: "#ede9fe" };
+export const DEFAULT_ACCENT_SWATCH = { swatch: "#6952e0", soft: "#efecfc" };
 
 export const ACCENT_STORAGE_KEY = "scribe.accent";
 

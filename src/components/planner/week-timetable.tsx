@@ -210,9 +210,9 @@ export function WeekTimetable() {
         </div>
 
         {data?.nudge && (
-          <div className="rounded-2xl border p-[18px]" style={{ borderColor: "#f6d9a8", background: "#fff8ec" }}>
-            <div className="text-[15px] font-bold" style={{ color: "#b4530a" }}>{DAY[(new Date(data.nudge.date + "T00:00:00Z").getUTCDay() + 6) % 7]} has no slot</div>
-            <div className="mt-1 text-[13px]" style={{ color: "#8a4a12" }}>
+          <div className="life-card p-[18px]">
+            <div className="text-[15px] font-bold">{DAY[(new Date(data.nudge.date + "T00:00:00Z").getUTCDay() + 6) % 7]} has no slot</div>
+            <div className="mt-1 text-[13px] text-muted-foreground">
               {data.dueCards > 0 ? `A ${data.nudge.minutes}-min review keeps your streak.` : `Nothing fits your ${plan?.windowStart}–${plan?.windowEnd} window that day — widen it or make it a rest day.`}
             </div>
             <button type="button" onClick={() => (data.dueCards > 0 ? router.push("/flashcards/review") : setEditing(true))} className={buttonClass({ className: "mt-3 w-full" })}>

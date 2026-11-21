@@ -3,7 +3,7 @@
 import { use, useEffect } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, Check, Gift } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { AuthScene } from "@/components/auth/auth-scene";
 import { ScribeLogo } from "@/components/graphics/logo";
 import { Mascot } from "@/components/rewards/mascot";
@@ -57,14 +57,11 @@ export default function InvitePage({ params }: { params: Promise<{ code: string 
       </div>
 
       {!isLoading && !valid ? (
-        <p className="rounded-2xl border border-border bg-muted/40 px-4 py-3 text-center text-[13px] text-muted-foreground">
+        <p className="border-y border-border py-3 text-center text-[14px] text-muted-foreground">
           {t("growth.landingInvalid")}
         </p>
       ) : (
-        <div className="flex items-start gap-3 rounded-2xl border border-accent/20 bg-accent-soft px-4 py-3.5">
-          <Gift className="mt-0.5 size-5 shrink-0 text-accent" />
-          <p className="text-[13.5px] font-medium leading-snug text-foreground">{t("growth.landingReward")}</p>
-        </div>
+        <p className="border-y border-border py-3.5 text-[14.5px] font-bold leading-snug text-foreground">{t("growth.landingReward")}</p>
       )}
 
       <ul className="space-y-2.5">

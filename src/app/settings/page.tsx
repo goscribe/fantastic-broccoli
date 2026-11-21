@@ -557,7 +557,8 @@ export default function SettingsPage() {
           <p className="mt-0.5 text-[13px] text-muted-foreground">
             {t("settings.languageHint")}
           </p>
-          <div className="mt-3 rounded-2xl border border-border bg-card p-5">
+          {/* One select: it sits on the page, no card around it. */}
+          <div className="mt-3">
             <label className="block max-w-sm">
               <span className="sr-only">{t("settings.language")}</span>
               <select

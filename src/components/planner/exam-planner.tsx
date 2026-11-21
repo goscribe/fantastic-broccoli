@@ -461,7 +461,7 @@ function ExamsView({ data, onEdit, onTime }: { data: PlanToday; onEdit: (e: Exam
                 </div>
               </div>
               {e.unplanned > 0 && (
-                <div className="mt-3 flex flex-col gap-2 rounded-xl bg-[#fff8ec] px-3 py-2.5 text-[12.5px] text-[#8a4a12] sm:flex-row sm:items-center sm:justify-between">
+                <div className="mt-3 flex flex-col gap-2 rounded-xl bg-muted px-3 py-2.5 text-[13px] text-foreground sm:flex-row sm:items-center sm:justify-between">
                   <span>{fill(t("ep.exams.unplanned"), { n: e.unplanned })}</span>
                   <button type="button" onClick={onTime} className="shrink-0 self-start font-semibold underline sm:self-auto">{t("ep.exams.changeTime")}</button>
                 </div>
