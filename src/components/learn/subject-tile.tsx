@@ -32,6 +32,8 @@ export interface SubjectTileProps {
   /** A stable key (the workspace id) that gives a subject matching no family its own hue. */
   seed?: string;
   sub?: ReactNode;
+  /** A small badge before the second line: the course a subject follows ("IB Biology · HL"). */
+  badge?: string;
   /** Label for the white pill ("Continue", "Open"). */
   action?: ReactNode;
   /** 0–1: draws a white track above the pill. */
@@ -58,7 +60,7 @@ export interface SubjectTileProps {
  * the tile's height is fixed and never follows the text: the title clamps to
  * two lines, the line under it to one, and the art is sized from the tile.
  */
-export function SubjectTile({ title, match, family, stored, seed, sub, action, progress, row, trailing, href, onClick, disabled, eager, className, style }: SubjectTileProps) {
+export function SubjectTile({ title, match, family, stored, seed, sub, badge, action, progress, row, trailing, href, onClick, disabled, eager, className, style }: SubjectTileProps) {
   const text = typeof title === "string" ? title.trim() : null;
   const fam = family ?? resolveSubjectFamily(stored, match ?? text ?? "");
   const neutral = hueFamilyFor(fam, seed) !== fam;
@@ -66,6 +68,13 @@ export function SubjectTile({ title, match, family, stored, seed, sub, action, p
   const shownTitle = text === "" ? "Untitled" : title;
   // A long name steps down a size before it clamps, so more of it is read.
   const long = (text ?? match ?? "").length > 22;
+  const subLine =
+    badge || sub ? (
+      <>
+        {badge && <span className="mr-1.5 inline-block rounded-full bg-white/25 px-2 py-px align-[1px] text-[11px] font-extrabold leading-[16px] text-white">{badge}</span>}
+        {sub}
+      </>
+    ) : null;
   const body = (
     <>
       <SubjectArt family={fam} eager={eager} neutral={neutral} />
@@ -73,7 +82,7 @@ export function SubjectTile({ title, match, family, stored, seed, sub, action, p
         <span className="flex w-full items-center gap-3">
           <span className="subject-tile__text min-w-0 flex-1">
             <span className="subject-tile__title text-[16px] font-extrabold leading-snug text-white">{shownTitle}</span>
-            {sub && <span className="subject-tile__sub subject-tile__sub--line mt-0.5 block text-[12.5px] font-semibold leading-snug">{sub}</span>}
+            {subLine && <span className="subject-tile__sub subject-tile__sub--line mt-0.5 block text-[12.5px] font-semibold leading-snug">{subLine}</span>}
           </span>
         </span>
       ) : (
@@ -81,7 +90,7 @@ export function SubjectTile({ title, match, family, stored, seed, sub, action, p
           <span className="subject-tile__text block">
             {/* No display utility here: `block` would undo the clamp (it is what let real titles run to five lines). */}
             <span className={cn("subject-tile__title font-extrabold text-white", long ? "text-[16px] leading-[1.22] sm:text-[16.5px]" : "text-[19px] leading-[1.18] sm:text-[20px]")}>{shownTitle}</span>
-            {sub && <span className="subject-tile__sub subject-tile__sub--line mt-1 block text-[13px] font-semibold leading-snug">{sub}</span>}
+            {subLine && <span className="subject-tile__sub subject-tile__sub--line mt-1 block text-[13px] font-semibold leading-snug">{subLine}</span>}
           </span>
           <span className="block shrink-0">
             {progress != null && (
