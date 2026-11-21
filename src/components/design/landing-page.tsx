@@ -1,59 +1,38 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, Star } from "lucide-react";
-import { Ring, WeekBars } from "@/components/design/charts";
-import { T } from "@/components/design/tokens";
+import type { ReactNode } from "react";
 import { StatsBand } from "@/components/design/stats-band";
+import { Cat, CopilotMock, FinishMock, FlashcardMock, HomeMock, QuestionMock, StreakMock, WorksheetMock } from "@/components/design/landing-mocks";
+import { SubjectTile } from "@/components/learn/subject-tile";
+import { LANDING_BOARDS, LANDING_COURSE_COUNT } from "@/app/landing/courses";
 import { cn } from "@/lib/utils";
 
+/** The one purple thing on a screen: the app's chunky primary button, as a link. */
+export const landingPrimary =
+  "btn-chunky inline-flex h-14 items-center justify-center bg-accent px-8 text-[17px] font-extrabold text-white hover:bg-accent-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2";
+/** A quiet second action: underlined text, no box. */
+export const landingTextLink =
+  "inline-flex min-h-11 items-center text-[15.5px] font-bold text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground";
 
-function Btn({ children, tone = "violet", className }: { children: React.ReactNode; tone?: "violet" | "white" | "ghost" | "navy"; className?: string }) {
+export const landingWrap = "mx-auto w-full max-w-[1160px] px-4 sm:px-6";
+
+/** A feature: words on one side, the app itself on the other. No card around either. */
+function Band({ title, sub, children, flip = false }: { title: ReactNode; sub: string; children: ReactNode; flip?: boolean }) {
   return (
-    <span className={cn("inline-flex h-14 items-center gap-2 rounded-2xl px-7 text-[16px] font-bold shadow-[0_4px_0_0_rgba(0,0,0,.14)]", tone === "violet" && "bg-accent text-white", tone === "white" && "bg-white text-accent", tone === "navy" && "bg-[#1e1b4b] text-white", tone === "ghost" && "border-2 border-white/60 text-white shadow-none", className)}>{children}</span>
-  );
-}
-
-/** Floating study props around the hero cat. */
-function Prop({ src, className, delay = "0s" }: { src: string; className: string; delay?: string }) {
-  return <Image src={src} alt="" width={96} height={96} unoptimized className={cn("cat-float absolute object-contain drop-shadow-[0_10px_18px_rgba(0,0,0,.18)]", className)} style={{ animationDelay: delay }} />;
-}
-
-/** A session card as a "phone" at the centre of the hero. */
-function HeroCard() {
-  return (
-    <div className="design-root relative w-[300px] rounded-[28px] border-[6px] border-[#5b21b6] bg-white p-4 shadow-[0_30px_60px_-20px_rgba(0,0,0,.45)]">
-      <div className="text-[11px] font-semibold text-faint">IB Bio HL · Topic 3</div>
-      <div className="mt-0.5 text-[16px] font-bold">Osmosis & water potential</div>
-      <div className="mt-3 flex items-center gap-3">
-        <Ring pct={3 / 7} size={48} stroke={6}><span className="text-[11px] font-bold">3/7</span></Ring>
-        <div className="text-[12px] text-muted-foreground"><b className="text-foreground">Next:</b> Worksheet · 6 marks<br />about 12 min left</div>
+    <section className={cn(landingWrap, "grid items-center gap-7 py-10 sm:py-12 lg:grid-cols-2 lg:gap-16 lg:py-14")}>
+      <div className={cn(flip && "lg:order-2")}>
+        <h2 className="text-balance text-[30px] font-extrabold leading-[1.1] sm:text-[38px]">{title}</h2>
+        <p className="mt-4 max-w-[460px] text-[17px] leading-relaxed text-muted-foreground">{sub}</p>
       </div>
-      <div className="mt-3 rounded-xl bg-accent-soft p-3 text-[12.5px] font-semibold">Explain why the potato cylinder in 0.6 M sucrose lost mass.</div>
-      <div className="mt-3 flex gap-1.5">{["Reading", "Quick 5", "Cloze", "Worksheet"].map((s, i) => <span key={s} className={cn("h-1.5 flex-1 rounded-full", i < 3 ? "bg-accent" : "bg-muted")} />)}</div>
-    </div>
-  );
-}
-
-function Band({ bg, dark = false, children, className }: { bg: string; dark?: boolean; children: React.ReactNode; className?: string }) {
-  return (
-    <section className={cn("w-full", dark && "text-white")} style={{ background: bg }}>
-      <div className={cn("mx-auto grid w-full max-w-[1120px] items-center gap-12 px-6 py-24 lg:grid-cols-2", className)}>{children}</div>
+      <div className={cn("mx-auto w-full max-w-[480px]", flip && "lg:order-1")}>{children}</div>
     </section>
   );
 }
 
-function Headline({ children, sub, dark = false }: { children: React.ReactNode; sub: string; dark?: boolean }) {
-  return (
-    <div>
-      <h2 className="text-[40px] font-extrabold leading-[1.05] tracking-tight">{children}</h2>
-      <p className={cn("mt-4 max-w-[440px] text-[17px] leading-relaxed", dark ? "text-white/75" : "text-muted-foreground")}>{sub}</p>
-    </div>
-  );
-}
-
-const LAV = "#f5f3ff";
-const NAVY = "#1e1b4b";
-
+const STEPS: ["pencil" | "think" | "flame", string, string][] = [
+  ["pencil", "Make a subject, drop in what you have", "One subject per course: PDFs, slides, a photo of your notes, a lecture link."],
+  ["think", "Scribe builds the session", "A reading, a Quick 5, cloze and a marked worksheet, in one sitting."],
+  ["flame", "Twenty minutes a day", "The planner picks the time, the streak keeps you honest, flashcards come back on time."],
+];
 
 const QUOTES: [string, string, string][] = [
   ["It marked my 6-marker exactly like my teacher did, then told me which point I’d skipped.", "Maya", "IB Bio HL · Year 13"],
@@ -64,132 +43,165 @@ const QUOTES: [string, string, string][] = [
 export function LandingBody() {
   return (
     <>
-
-      {/* hero: headline on white, desk scene + session card on a violet curve */}
-      <section className="relative overflow-hidden">
-        <div className="relative z-10 mx-auto flex w-full max-w-[1120px] flex-col items-center px-6 pt-12 text-center">
-          <h1 className="text-[56px] font-extrabold leading-[1.02] tracking-[-0.02em] text-accent md:text-[68px]">study from your notes.<br />actually remember it.</h1>
-          <p className="mt-5 max-w-[560px] text-[18px] text-muted-foreground">Make a subject, drop in a PDF, slides or a photo of your notes. Scribe builds study sessions from them and fits them into your week.</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3"><Link href="/signup"><Btn>Get started<ArrowRight className="size-5" /></Btn></Link><Link href="/login" className="inline-flex h-14 items-center gap-2 rounded-2xl border-2 border-border px-6 text-[16px] font-bold text-accent">I already have an account</Link></div>
-        </div>
-        <div className="relative mt-10 h-[460px]">
-          <svg viewBox="0 0 1440 460" preserveAspectRatio="none" className="absolute inset-0 h-full w-full"><path d="M0 140 C 360 40, 1080 40, 1440 140 L1440 460 L0 460 Z" fill="#7c3aed" /></svg>
-          <div className="relative mx-auto h-full w-full max-w-[1120px]">
-            <Image src="/design/cat2-cheer.png" alt="" width={300} height={300} unoptimized className="design-pop absolute bottom-6 left-[8%] z-10 size-[270px] object-contain" />
-            <div className="absolute left-1/2 top-14 -translate-x-1/2 -rotate-3"><HeroCard /></div>
-            <Image src="/design/cat2-book.png" alt="" width={220} height={220} unoptimized className="cat-bob absolute bottom-4 right-[8%] z-10 size-[200px] object-contain" />
-            <Prop src="/design/props/star.png" className="left-[6%] top-6 size-14" />
-            <Prop src="/design/props/pencil.png" className="left-[30%] top-[40px] size-16 -rotate-12" delay="0.6s" />
-            <Prop src="/design/props/books.png" className="right-[26%] top-[320px] size-20" delay="1.1s" />
-            <Prop src="/design/props/trophy.png" className="right-[32%] top-[-6px] size-16" delay="0.3s" />
-            <Prop src="/design/props/cards.png" className="left-[27%] top-[330px] size-20 rotate-6" delay="1.6s" />
-            <Prop src="/design/props/flag.png" className="right-[4%] top-6 size-12" delay="0.9s" />
-          </div>
-        </div>
-      </section>
-
-      {/* subjects strip */}
-      <section className="border-b border-border">
-        <div className="mx-auto flex w-full max-w-[1120px] flex-wrap items-center justify-center gap-x-8 gap-y-2 px-6 py-5 text-[13px] font-bold text-muted-foreground">{["IB", "A-level", "GCSE", "AP", "SAT", "University"].map((s) => <span key={s}>{s}</span>)}</div>
-      </section>
-
-      {/* stats */}
-      <StatsBand background={NAVY} />
-
-      {/* 1 lavender: marked like the exam */}
-      <Band bg={LAV}>
-        <Headline sub="Every answer is checked against a markscheme written from your material. Hover a highlight to see the exact point it earned.">marked like the exam. explained like a friend.</Headline>
-        <div className="relative mx-auto w-full max-w-[460px] pt-10">
-          <div className="absolute inset-x-6 top-0 h-24 rotate-[-3deg] rounded-3xl bg-white/70 px-5 py-4 text-[12px] font-semibold text-muted-foreground shadow-[0_20px_40px_-24px_rgba(76,29,149,.3)]">Q4 · Explain why the potato cylinder in 0.6 M sucrose lost mass. <span className="text-accent">[6]</span></div>
-          <div className="design-root relative w-full rounded-3xl bg-white p-6 text-foreground shadow-[0_30px_60px_-20px_rgba(76,29,149,.25)]">
-          <div className="text-[11px] font-semibold text-accent">Worksheet · Osmosis · Q4 · 6 marks</div>
-          <div className="mt-2 rounded-xl border border-border p-3 text-[14px] leading-relaxed">The solution has a <mark className="rounded bg-emerald-100 px-0.5">lower water potential than the cells</mark>, so water moves <mark className="rounded bg-emerald-100 px-0.5">out by osmosis</mark> and the cells become flaccid.</div>
-          <div className="mt-3 flex items-center gap-3 rounded-xl bg-emerald-50 px-3.5 py-3"><Ring pct={4 / 6} size={40} stroke={5} color={T.green}><span className="text-[11px] font-bold">4/6</span></Ring><div className="text-[13px]"><b>Good causal chain.</b> Missing M5 (membrane) and M6 (turgor).</div></div>
-          <Image src="/design/cat2-think.png" alt="" width={120} height={120} unoptimized className="cat-bob absolute -bottom-8 -right-10 size-[120px] object-contain" />
-          </div>
-        </div>
-      </Band>
-
-      {/* 2 white: flashcards */}
-      <Band bg="#ffffff" className="lg:[&>*:first-child]:order-2">
-        <Headline sub="Spaced repetition decides what comes back today. Get one wrong and it’s back tomorrow; get it right and it waits.">flashcards that come back right before you forget.</Headline>
-        <div className="relative mx-auto w-full max-w-[460px] py-8">
-          <div className="relative mx-auto h-[300px] w-[360px]">
-            <div className="design-root absolute inset-x-6 top-0 h-[250px] rotate-[4deg] rounded-[28px] border border-border bg-white shadow-[0_20px_40px_-28px_rgba(76,29,149,.3)]" />
-            <div className="design-root absolute inset-x-3 top-3 h-[250px] rotate-[-2deg] rounded-[28px] border border-border bg-white shadow-[0_20px_40px_-28px_rgba(76,29,149,.3)]" />
-            <div className="design-root absolute inset-x-0 top-7 flex h-[250px] flex-col justify-between rounded-[28px] border-2 border-accent/40 bg-white p-6 shadow-[0_30px_60px_-24px_rgba(76,29,149,.35)]">
-              <div className="flex items-center justify-between text-[12px] font-semibold"><span className="text-accent">Bio · Topic 3</span><span className="rounded-full bg-accent-soft px-2.5 py-1 text-accent">16 due today</span></div>
-              <div className="text-center"><div className="text-[13px] font-semibold text-faint">Define</div><div className="mt-1 text-[26px] font-extrabold leading-tight">water potential</div></div>
-              <div className="flex gap-2">{[["Again", "border-border text-muted-foreground"], ["Good", "border-accent bg-accent text-white"]].map(([b, c]) => <span key={b} className={cn("inline-flex h-10 flex-1 items-center justify-center rounded-xl border text-[14px] font-bold", c)}>{b}</span>)}</div>
+      {/* Hero: the app's own banner. A landscape lit for the visitor's time of day, the cat on the hill, one purple button. */}
+      <section className={cn(landingWrap, "pt-3 sm:pt-5")}>
+        <div className="landing-hero landing-banner hero-card relative isolate overflow-hidden rounded-[var(--r-panel)] border border-border px-5 pb-7 pt-[188px] sm:px-10 sm:py-14 lg:px-14 lg:py-[76px]">
+          <div aria-hidden className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[168px] overflow-hidden sm:inset-0 sm:h-auto">
+            <div className="absolute bottom-[24px] right-[13%] h-[118px] sm:bottom-[14%] sm:right-[4%] sm:h-[160px] md:right-[7%] md:h-[200px] lg:right-[10%] lg:h-[260px]">
+              <span className="hero-field__ground" />
+              <Cat pose="wave" eager className="cat-wiggle relative h-full" />
             </div>
-            <Image src="/design/cat2-sleep.png" alt="" width={150} height={150} unoptimized className="cat-bob absolute -bottom-2 -right-20 size-[140px] object-contain" />
           </div>
-        </div>
-      </Band>
-
-      {/* 3 lavender: twenty minutes a day */}
-      <Band bg={LAV}>
-        <Headline sub="Connect your calendar and the planner fits sessions around school. Your streak counts when you hit the daily goal, and one evening reminder is all you get.">twenty minutes a day. that’s the whole trick.</Headline>
-        <div className="design-root relative mx-auto w-full max-w-[460px] rounded-3xl bg-white p-6 shadow-[0_30px_60px_-20px_rgba(76,29,149,.25)]">
-          <div className="flex items-baseline justify-between"><span className="text-[15px] font-bold">This week</span><span className="text-[13px] font-bold text-accent">4-day streak</span></div>
-          <div className="mt-3"><WeekBars mins={[28, 32, 25, 30, 12, 0, 0]} height={120} accent={T.violet} /></div>
-          <Image src="/design/cat2-flame.png" alt="" width={150} height={150} unoptimized className="cat-wiggle absolute -bottom-12 -right-14 size-[140px] object-contain" />
-        </div>
-      </Band>
-
-      {/* 4 white: copilot */}
-      <Band bg="#ffffff" className="lg:[&>*:first-child]:order-2">
-        <Headline sub="Hints when you ask, a worked example when you’re stuck, and “explain it differently” — all from the notes you uploaded.">a copilot that has actually read your notes.</Headline>
-        <div className="design-root relative mx-auto flex w-full max-w-[460px] flex-col gap-3">
-          <div className="self-end rounded-2xl rounded-br-md bg-accent px-4 py-3 text-[14px] font-medium text-white shadow-[0_10px_30px_-10px_rgba(124,58,237,.6)]">why did I lose M5?</div>
-          <div className="flex items-end gap-3"><Image src="/design/cat2-think.png" alt="" width={64} height={64} unoptimized className="size-16 shrink-0 object-contain" /><div className="rounded-2xl rounded-bl-md border border-border bg-white px-4 py-3 text-[14px] leading-relaxed shadow-[0_10px_30px_-10px_rgba(0,0,0,.12)]">You described the direction of water movement but not <b>the membrane</b>. Say it’s <b>partially permeable</b> — that’s the one-liner M5 wants. Want to try Q5 with that in mind?</div></div>
-          <div className="flex gap-2 self-start pl-[76px]">{["Try Q5", "Worked example", "Explain differently"].map((c) => <span key={c} className="whitespace-nowrap rounded-full bg-accent-soft px-3 py-1.5 text-[12px] font-bold text-accent">{c}</span>)}</div>
-        </div>
-      </Band>
-
-      {/* 5 lavender: how it works */}
-      <section className="w-full" style={{ background: LAV }}>
-        <div className="mx-auto w-full max-w-[1120px] px-6 py-24">
-          <h2 className="text-center text-[40px] font-extrabold tracking-tight">three steps. you do one.</h2>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {[["/design/props/notes.png", "make a subject, drop in what you have", "One subject per course: PDFs, slides, a photo of your notes, a lecture link."], ["/design/props/bulb.png", "scribe builds the session", "A reading, a Quick 5, cloze and a marked worksheet, in one sitting."], ["/design/props/clock.png", "twenty minutes a day", "The planner picks the time, the streak keeps you honest, flashcards come back on time."]].map(([img, t, d], i) => (
-              <div key={t} className="rounded-[28px] border border-border bg-white p-7">
-                <div className="flex items-center justify-between"><span className="grid size-10 place-items-center rounded-full bg-accent text-[15px] font-extrabold text-white">{i + 1}</span><Image src={img} alt="" width={120} height={120} unoptimized className="size-[96px] object-contain" /></div>
-                <h3 className="mt-5 text-[22px] font-extrabold leading-tight">{t}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{d}</p>
-              </div>
-            ))}
+          <h1 className="relative text-balance text-[clamp(24px,7.2vw,34px)] font-extrabold leading-[1.06] sm:max-w-[66%] sm:text-[34px] md:text-[38px] lg:text-[46px] xl:text-[58px]">
+            Study from your notes.
+            <br />
+            Actually remember it.
+          </h1>
+          <p className="relative mt-4 text-[16.5px] leading-relaxed text-foreground/75 sm:max-w-[50%] sm:text-[18px] lg:max-w-[46%]">
+            Pick your course, or drop in a PDF, slides or a photo of your notes. Scribe builds study sessions from them and fits them into your week.
+          </p>
+          <div className="relative mt-6 flex flex-col gap-x-6 gap-y-1.5 sm:mt-8 sm:flex-row sm:items-center">
+            <Link href="/signup" className={landingPrimary}>Get started</Link>
+            <Link href="/login" className={cn(landingTextLink, "justify-center sm:justify-start")}>I already have an account</Link>
           </div>
         </div>
       </section>
 
-      {/* 6 white: quotes */}
-      <section className="relative w-full overflow-hidden bg-accent text-white">
-        <div className="mx-auto w-full max-w-[1120px] px-6 py-24">
-        <h2 className="text-center text-[40px] font-extrabold tracking-tight">from the night before.</h2>
-        <div className="mt-3 flex justify-center gap-1 text-[#fbbf24]">{[0, 1, 2, 3, 4].map((i) => <Star key={i} className="size-5 fill-current" />)}</div>
-        <Image src="/design/cat2-wave.png" alt="" width={140} height={140} unoptimized className="cat-wiggle absolute -top-4 right-[6%] size-[130px] object-contain" />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {QUOTES.map(([q, name, who]) => (
-            <figure key={name} className="design-root flex flex-col justify-between rounded-[28px] bg-white p-7 text-foreground shadow-[0_24px_50px_-24px_rgba(0,0,0,.4)]">
-              <blockquote className="text-[17px] font-semibold leading-snug">“{q}”</blockquote>
-              <figcaption className="mt-6 flex items-center gap-3"><span className="grid size-10 place-items-center rounded-full bg-accent-soft text-[14px] font-extrabold text-accent">{name[0]}</span><div><div className="text-[14px] font-bold">{name}</div><div className="text-[12.5px] text-muted-foreground">{who}</div></div></figcaption>
+      {/* The app's home, as it looks once you are in. */}
+      <section className={cn(landingWrap, "pt-12 sm:pt-16")}>
+        <h2 className="text-balance text-[30px] font-extrabold leading-[1.1] sm:text-[38px]">Every subject, one home.</h2>
+        <p className="mt-3 max-w-[560px] text-[17px] leading-relaxed text-muted-foreground">Your subjects, today’s flashcards and your streak are the first thing you see.</p>
+        <div className="mt-7 rounded-[28px] border border-border p-4 sm:p-7">
+          <HomeMock />
+        </div>
+      </section>
+
+      {/* Coverage: the course catalog, in the subjects' own colours. */}
+      <section className={cn(landingWrap, "pt-14 sm:pt-20")} aria-labelledby="courses-title">
+        <h2 id="courses-title" className="text-balance text-[30px] font-extrabold leading-[1.1] sm:text-[38px]">Your course, topic by topic.</h2>
+        <p className="mt-3 max-w-[600px] text-[17px] leading-relaxed text-muted-foreground">
+          {LANDING_COURSE_COUNT} courses across IB, AP, A-level and GCSE, each one split into its topics. Studying something else? Upload your notes and Scribe works from those.
+        </p>
+        {LANDING_BOARDS.map(({ board, courses }) => (
+          <div key={board} className="mt-7">
+            <h3 className="text-[17px] font-extrabold">
+              {board} <span className="font-bold text-muted-foreground">· {courses.length}</span>
+            </h3>
+            <ul className="landing-strip -mx-4 mt-3 flex snap-x gap-2.5 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-3 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 xl:grid-cols-4">
+              {courses.map((course) => (
+                <li key={course} className="flex w-[264px] shrink-0 snap-start sm:w-auto">
+                  <SubjectTile row title={course} href="/signup" className="landing-course" />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      <StatsBand />
+
+      <Band title="Marked like the exam. Explained like a friend." sub="Every answer is checked against a mark scheme written from your material, point by point, so you see which marks you earned and what the missing one needed.">
+        <WorksheetMock />
+      </Band>
+
+      <Band flip title="Practice that tells you why." sub="Short questions on each topic. Get one wrong and you see the reason straight away, and it goes on your mistakes list to fix later.">
+        <QuestionMock />
+      </Band>
+
+      <Band title="Flashcards that come back right before you forget." sub="Spaced repetition decides what comes back today. Get one wrong and it’s back tomorrow; get it right and it waits.">
+        <FlashcardMock />
+      </Band>
+
+      <Band flip title="Finish a session. See what stuck." sub="Your score, your streak and how far each topic moved, the moment you answer the last question.">
+        <FinishMock />
+      </Band>
+
+      <Band title="Twenty minutes a day. That’s the whole trick." sub="Connect your calendar and the planner fits sessions around school. Your streak counts when you hit the daily goal, and one evening reminder is all you get.">
+        <StreakMock />
+      </Band>
+
+      <Band flip title="A copilot that has actually read your notes." sub="Hints when you ask, a worked example when you’re stuck, and “explain it differently” — all from the notes you uploaded.">
+        <CopilotMock />
+      </Band>
+
+      {/* How it works: three separate things, so three cards. */}
+      <section className={cn(landingWrap, "py-12 sm:py-16")}>
+        <h2 className="text-balance text-[30px] font-extrabold leading-[1.1] sm:text-center sm:text-[38px]">Three steps. You do one.</h2>
+        <ol className="mt-8 grid gap-3 sm:mt-10 md:grid-cols-3 md:gap-4">
+          {STEPS.map(([pose, title, body], i) => (
+            <li key={title} className="life-card flex gap-4 p-5 md:block md:p-7">
+              <Cat pose={pose} className="h-[72px] shrink-0 md:h-[96px]" />
+              <div className="min-w-0 md:mt-5">
+                <div className="text-[13.5px] font-extrabold text-muted-foreground">Step {i + 1}</div>
+                <h3 className="mt-1 text-[20px] font-extrabold leading-tight md:text-[22px]">{title}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* What students said. */}
+      <section className={cn(landingWrap, "py-12 sm:py-16")}>
+        <h2 className="text-balance text-[30px] font-extrabold leading-[1.1] sm:text-center sm:text-[38px]">From the night before.</h2>
+        <div className="mt-8 grid gap-3 sm:mt-10 md:grid-cols-3 md:gap-4">
+          {QUOTES.map(([quote, name, who]) => (
+            <figure key={name} className="life-card m-0 flex flex-col justify-between p-6 md:p-7">
+              <blockquote className="m-0 text-[17px] font-semibold leading-snug">“{quote}”</blockquote>
+              <figcaption className="mt-6">
+                <div className="text-[14.5px] font-extrabold">{name}</div>
+                <div className="text-[13.5px] text-muted-foreground">{who}</div>
+              </figcaption>
             </figure>
           ))}
         </div>
-        </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative overflow-hidden" style={{ background: LAV }}>
-        <div className="mx-auto flex w-full max-w-[1120px] flex-col items-center px-6 pb-28 pt-24 text-center">
-          <Image src="/design/cat2-wave.png" alt="" width={200} height={200} unoptimized className="cat-wiggle size-[180px] object-contain" />
-          <h2 className="mt-4 text-[44px] font-extrabold leading-[1.05] tracking-tight">tonight’s revision, sorted in five minutes.</h2>
-          <div className="mt-8 flex flex-wrap justify-center gap-3"><Link href="/signup"><Btn>Get started</Btn></Link><Link href="/landing/how-it-works" className="inline-flex h-14 items-center rounded-2xl border-2 border-border bg-white px-6 text-[16px] font-bold text-accent">See how it works</Link></div>
-          <ul className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[14px] font-semibold text-muted-foreground">{["Free to start", "No card", "First session in 5 minutes"].map((l) => <li key={l} className="flex items-center gap-1.5"><Check className="size-4" strokeWidth={3} />{l}</li>)}</ul>
-        </div>
-      </section>
-
+      <LandingCta
+        pose="cheer"
+        title="Tonight’s revision, sorted in five minutes."
+        note="Free to start · No card · First session in 5 minutes"
+        secondary={{ href: "/landing/how-it-works", label: "See how it works" }}
+      />
     </>
+  );
+}
+
+/** The closing banner: the hero's scene again, the cat celebrating, the same one button. */
+export function LandingCta({
+  title,
+  sub,
+  note,
+  cta = "Get started",
+  pose = "cheer",
+  secondary,
+  heading: Heading = "h2",
+}: {
+  title: string;
+  sub?: string;
+  note?: string;
+  cta?: string;
+  pose?: "cheer" | "wave" | "trophy" | "book";
+  secondary?: { href: string; label: string };
+  heading?: "h2" | "h3";
+}) {
+  return (
+    <section className={cn(landingWrap, "pb-14 pt-6 sm:pb-20 sm:pt-10")}>
+      <div className="landing-banner hero-card relative isolate overflow-hidden rounded-[var(--r-panel)] border border-border px-5 pb-7 pt-[172px] sm:px-10 sm:py-12 lg:px-14 lg:py-16">
+        <div aria-hidden className="landing-cta-field hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[152px] overflow-hidden sm:inset-0 sm:h-auto">
+          <div className="absolute bottom-[20px] right-[13%] h-[110px] sm:bottom-[13%] sm:right-[7%] sm:h-[180px] lg:right-[10%] lg:h-[220px]">
+            <span className="hero-field__ground" />
+            <Cat pose={pose} className="cat-bob relative h-full" />
+          </div>
+        </div>
+        <Heading className="relative text-balance text-[28px] font-extrabold leading-[1.1] sm:max-w-[56%] sm:text-[38px]">{title}</Heading>
+        {sub && <p className="relative mt-3 text-[16.5px] leading-relaxed text-foreground/75 sm:max-w-[48%]">{sub}</p>}
+        <div className="relative mt-6 flex flex-col gap-x-6 gap-y-1.5 sm:flex-row sm:items-center">
+          <Link href="/signup" className={landingPrimary}>{cta}</Link>
+          {secondary && <Link href={secondary.href} className={cn(landingTextLink, "justify-center sm:justify-start")}>{secondary.label}</Link>}
+        </div>
+        {note && <p className="relative mt-4 text-center text-[14px] font-bold text-foreground/80 sm:max-w-[56%] sm:text-left">{note}</p>}
+      </div>
+    </section>
   );
 }

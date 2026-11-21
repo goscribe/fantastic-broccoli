@@ -1,361 +1,96 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, Check, FileText } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ScribeMark } from "@/components/graphics/logo";
-import {
-  AudioArt,
-  NoteArt,
-  PdfArt,
-  SlidesArt,
-} from "@/components/graphics/material-art";
-import type { ArtSide, ArtTint, FeatureScene, SceneMock } from "@/app/landing/data";
+import type { ReactNode } from "react";
+import { LandingCta, landingWrap } from "@/components/design/landing-page";
+import { Cat, CopilotMock, FlashcardMock, QuestionMock, UploadMock, WorksheetMock, type CatPose } from "@/components/design/landing-mocks";
+import type { FeatureScene, SceneMock } from "@/app/landing/data";
 import { cn } from "@/lib/utils";
 
-const TINTS: Record<ArtTint, string> = {
-  accent: "bg-accent-soft",
-  sky: "bg-sky/25",
-  rose: "bg-rose/20",
-  amber: "bg-amber/25",
-};
+/**
+ * Shared pieces for the /landing sub-pages, in the signed-in app's look:
+ * white page, grey text ramp, the time-of-day scene and the cat for colour.
+ */
 
-const ART_POS: Record<ArtSide, string> = {
-  right: "-bottom-10 -right-8 sm:-bottom-14 sm:-right-12",
-  left: "-bottom-10 -left-8 sm:-bottom-14 sm:-left-12",
-  bottom: "-bottom-14 left-1/2 -translate-x-1/2",
-};
-
-const ART_SIZE = {
-  sm: "w-40 sm:w-52",
-  md: "w-56 sm:w-72",
-  lg: "w-72 sm:w-96",
-  xl: "w-80 sm:w-[28rem]",
-};
-
-const CHILD_PAD: Record<ArtSide, string> = {
-  right: "pr-16 sm:pr-28 md:pr-36",
-  left: "pl-16 sm:pl-28 md:pl-36",
-  bottom: "pb-20 sm:pb-28",
-};
-
-/** Tinted panel the 3D art bleeds off — same idea as the in-app empty states. */
-export function ArtStage({
-  src,
-  tint = "accent",
-  side = "right",
-  size = "md",
-  children,
-  className,
-}: {
-  src: string;
-  tint?: ArtTint;
-  side?: ArtSide;
-  size?: keyof typeof ART_SIZE;
-  children?: React.ReactNode;
-  className?: string;
-}) {
+/** A small window onto the hero's landscape with the cat standing in it. Decorative. */
+export function Scene({ pose = "wave", className }: { pose?: CatPose; className?: string }) {
   return (
-    <div
-      className={cn(
-        "relative overflow-hidden rounded-[1.75rem]",
-        TINTS[tint],
-        className,
-      )}
-    >
-      {children ? (
-        <div className={cn("relative z-10", CHILD_PAD[side])}>{children}</div>
-      ) : (
-        <div className="h-52 sm:h-56" />
-      )}
-      <div
-        className={cn(
-          "pointer-events-none absolute",
-          ART_POS[side],
-          ART_SIZE[size],
-        )}
-      >
-        <Image
-          src={src}
-          alt=""
-          width={880}
-          height={880}
-          unoptimized
-          className="w-full select-none object-contain drop-shadow-[0_22px_40px_rgba(105,82,224,0.28)]"
-        />
+    <div aria-hidden className={cn("landing-scene hero-card relative isolate h-52 overflow-hidden rounded-[var(--r-panel)] border border-border sm:h-60", className)}>
+      <div className="hero-field absolute inset-0 -z-10">
+        <div className="absolute bottom-[12%] left-1/2 h-[62%] -translate-x-1/2">
+          <span className="hero-field__ground" />
+          <Cat pose={pose} className="cat-bob relative h-full" />
+        </div>
       </div>
     </div>
+  );
+}
+
+/** A sub-page's opening: the h1 and its lede on the page, the scene beside them from lg up. */
+export function PageHero({ title, lede, pose, children, narrow = false }: { title: string; lede: ReactNode; pose?: CatPose; children?: ReactNode; narrow?: boolean }) {
+  return (
+    <div className={cn(pose && "grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12")}>
+      <div className={cn(narrow && "max-w-3xl")}>
+        <h1 className="text-balance text-[34px] font-extrabold leading-[1.08] sm:text-[44px] lg:text-[50px]">{title}</h1>
+        <div className="mt-4 max-w-xl text-[17px] leading-relaxed text-muted-foreground sm:text-[18px]">{lede}</div>
+        {children}
+      </div>
+      {pose && <Scene pose={pose} className="hidden lg:block" />}
+    </div>
+  );
+}
+
+/** Section wrapper for the sub-pages: one width, one rhythm. */
+export function PageSection({ children, className, rule = false }: { children: ReactNode; className?: string; rule?: boolean }) {
+  return (
+    <section className={cn(rule && "border-t border-border")}>
+      <div className={cn(landingWrap, "py-12 sm:py-16", className)}>{children}</div>
+    </section>
   );
 }
 
 export function FunFeatureCard({
-  icon,
   title,
   description,
   heading: Heading = "h3",
 }: {
-  icon: string;
   title: string;
   description: string;
-  tint?: ArtTint;
   heading?: "h2" | "h3";
 }) {
   return (
-    <li className="group relative overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-sm">
-      <span className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-muted/50">
-        <Image
-          src={icon}
-          alt=""
-          width={32}
-          height={32}
-          unoptimized
-          className="h-7 w-7 object-contain"
-        />
-      </span>
-      <Heading className="mt-3 text-sm font-semibold">{title}</Heading>
-      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-        {description}
-      </p>
+    <li className="life-card p-5 sm:p-6">
+      <Heading className="text-[17px] font-extrabold leading-snug">{title}</Heading>
+      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{description}</p>
     </li>
   );
 }
 
-export function ProductCard({
-  children,
-  className,
-  eyebrow,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  eyebrow?: string;
-}) {
+/** A plain list: the points themselves, no icon in front of each. */
+export function Points({ items, className }: { items: string[]; className?: string }) {
   return (
-    <div
-      className={cn(
-        "overflow-hidden rounded-2xl border border-border bg-card shadow-sm",
-        className,
-      )}
-    >
-      {eyebrow ? (
-        <div className="border-b border-border px-4 py-2.5">
-          <p className="truncate text-[11px] font-medium text-muted-foreground">
-            {eyebrow}
-          </p>
-        </div>
-      ) : null}
-      {children}
-    </div>
+    <ul className={cn("list-disc space-y-2 pl-5 text-[15.5px] leading-relaxed text-muted-foreground marker:text-border-strong", className)}>
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
   );
 }
 
-export function SessionMock({ className }: { className?: string }) {
-  return (
-    <div className={cn("bg-background", className)}>
-      <div className="px-5 pb-4 pt-5">
-        <p className="text-[11px] font-semibold text-accent">Activity 3 of 6</p>
-        <p className="mt-2 text-[15px] font-semibold leading-snug">
-          What does K<sub>m</sub> represent in Michaelis–Menten kinetics?
-        </p>
-        <ul className="mt-4 space-y-2">
-          {[
-            { label: "Maximum reaction velocity", ok: false },
-            { label: "Substrate concentration at half-Vmax", ok: true },
-            { label: "The enzyme’s molecular weight", ok: false },
-            { label: "A unitless equilibrium constant", ok: false },
-          ].map((opt) => (
-            <li
-              key={opt.label}
-              className={`flex items-center gap-2.5 rounded-xl border px-3 py-2.5 text-[13px] ${
-                opt.ok
-                  ? "border-accent/50 bg-accent-soft font-medium text-accent"
-                  : "border-border bg-card text-muted-foreground"
-              }`}
-            >
-              {opt.ok ? (
-                <Check className="h-3.5 w-3.5 shrink-0" />
-              ) : (
-                <span className="size-3.5 shrink-0 rounded-full border border-border-strong" />
-              )}
-              {opt.label}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="flex items-center gap-3 border-t border-border bg-card px-4 py-3">
-        <span className="text-[10px] tabular-nums text-muted-foreground">
-          3/6
-        </span>
-        <div className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
-          <div className="absolute inset-y-0 left-0 w-[48%] rounded-full bg-accent" />
-        </div>
-        <span className="text-[10px] font-semibold tabular-nums">48%</span>
-      </div>
-    </div>
-  );
-}
-
-function QuizMock() {
-  return (
-    <div className="space-y-3 bg-background p-5">
-      <p className="text-[11px] font-semibold text-muted-foreground">
-        Worksheet · part (b)
-      </p>
-      <p className="text-sm font-semibold">
-        Explain why doubling [E] doubles the observed rate.
-      </p>
-      <div className="rounded-xl border border-border bg-card px-3.5 py-3 text-[13px] text-muted-foreground">
-        Rate doubles because there are twice as many active sites…
-      </div>
-      <div className="rounded-xl border border-accent/30 bg-accent-soft px-3.5 py-3 text-[13px]">
-        <p className="font-semibold text-accent">+1 of 2 marks</p>
-        <p className="mt-1 text-muted-foreground">
-          Link it to enzyme concentration — the markscheme wants the causal
-          step, not just “it doubles.”
-        </p>
-        <p className="mt-2 flex items-center gap-1.5 text-[11px] font-medium text-accent">
-          <FileText className="h-3 w-3" />
-          lecture-04.pdf · p.12
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function CopilotMock() {
-  return (
-    <div className="bg-background p-5">
-      <div className="flex items-center gap-2 border-b border-border pb-3">
-        <ScribeMark className="h-5 w-5" />
-        <span className="text-[13px] font-semibold">Copilot</span>
-        <span className="ml-auto text-[11px] text-muted-foreground">
-          Grounded in your subject
-        </span>
-      </div>
-      <div className="mt-4 space-y-3">
-        <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-md bg-accent px-3.5 py-2.5 text-[13px] font-medium text-accent-foreground">
-          Why did I lose a mark on part (b)?
-        </div>
-        <div className="max-w-[90%] rounded-2xl rounded-bl-md border border-border bg-card px-3.5 py-2.5 text-[13px] text-muted-foreground">
-          You stated the rate doubles but didn’t link it to enzyme
-          concentration. The scheme wants the causal step.
-          <span className="mt-2 flex items-center gap-1.5 text-[11px] font-medium text-accent">
-            <FileText className="h-3 w-3" />
-            lecture-04.pdf · p.12
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function UploadMock() {
-  return (
-    <div className="bg-background p-5">
-      <div className="grid grid-cols-2 gap-2.5">
-        {[
-          { art: PdfArt, label: "Textbook PDFs" },
-          { art: SlidesArt, label: "Lecture slides" },
-          { art: AudioArt, label: "Lecture audio" },
-          { art: NoteArt, label: "Notes & handouts" },
-        ].map((item) => (
-          <div
-            key={item.label}
-            className="flex items-center gap-2.5 rounded-xl border border-border bg-card px-3 py-3"
-          >
-            <item.art className="h-9 w-9 shrink-0" />
-            <span className="text-[12px] font-medium leading-tight">
-              {item.label}
-            </span>
-          </div>
-        ))}
-      </div>
-      <ul className="mt-3 space-y-2">
-        {[
-          { name: "lecture-04.pdf", state: "Parsed · 18 figures" },
-          { name: "Week 4 slides.pptx", state: "Parsed · 42 slides" },
-          { name: "seminar-audio.m4a", state: "Transcribed" },
-        ].map((f) => (
-          <li
-            key={f.name}
-            className="flex items-center justify-between rounded-xl border border-border bg-card px-3 py-2 text-[12px]"
-          >
-            <span className="font-medium">{f.name}</span>
-            <span className="text-accent">{f.state}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function FlashcardMock() {
-  return (
-    <div className="flex flex-col items-center bg-background px-5 py-7">
-      <p className="text-[11px] font-semibold text-muted-foreground">
-        Card 7 of 18
-      </p>
-      <div className="relative mt-4 w-full max-w-xs">
-        <div className="absolute inset-x-3 top-2 h-full rounded-2xl border border-border bg-muted" />
-        <div className="relative rounded-2xl border border-border bg-card px-5 py-8 text-center shadow-sm">
-          <p className="text-base font-semibold">What does Kₘ represent?</p>
-          <p className="mt-3 text-[12px] text-muted-foreground">
-            Tap to reveal answer
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-const MOCKS: Record<SceneMock, () => React.ReactNode> = {
-  session: () => <SessionMock />,
-  quiz: () => <QuizMock />,
+const MOCKS: Record<SceneMock, () => ReactNode> = {
+  session: () => <QuestionMock />,
+  quiz: () => <WorksheetMock />,
   copilot: () => <CopilotMock />,
   upload: () => <UploadMock />,
   flashcards: () => <FlashcardMock />,
 };
 
 export function FeatureSplit({ scene }: { scene: FeatureScene }) {
-  const mock = MOCKS[scene.mock]();
-  const visual = scene.art ? (
-    <ArtStage
-      src={scene.art}
-      tint={scene.artTint}
-      side={scene.artSide ?? (scene.reverse ? "left" : "right")}
-      size="lg"
-      className="p-5 sm:p-7"
-    >
-      <ProductCard eyebrow={scene.url} className="max-w-md shadow-md">
-        {mock}
-      </ProductCard>
-    </ArtStage>
-  ) : (
-    <ProductCard eyebrow={scene.url}>{mock}</ProductCard>
-  );
-  const copy = (
-    <div>
-      <h2 className="text-2xl font-bold tracking-tight text-balance sm:text-3xl">
-        {scene.title}
-      </h2>
-      <p className="mt-3 max-w-lg text-muted-foreground text-pretty">
-        {scene.body}
-      </p>
-      <ul className="mt-6 space-y-3">
-        {scene.bullets.map((item) => (
-          <li key={item} className="flex items-start gap-2.5 text-sm">
-            <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-accent-soft">
-              <Check className="h-3 w-3 text-accent" />
-            </span>
-            <span className="text-muted-foreground">{item}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-
   return (
-    <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-      <div className={scene.reverse ? "lg:order-2" : undefined}>{copy}</div>
-      <div className={scene.reverse ? "lg:order-1" : undefined}>{visual}</div>
+    <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
+      <div className={scene.reverse ? "lg:order-2" : undefined}>
+        <h2 className="text-balance text-[26px] font-extrabold leading-[1.12] sm:text-[32px]">{scene.title}</h2>
+        <p className="mt-3 max-w-lg text-[17px] leading-relaxed text-muted-foreground text-pretty">{scene.body}</p>
+        <Points items={scene.bullets} className="mt-5" />
+      </div>
+      <div className={cn("mx-auto w-full max-w-[480px]", scene.reverse && "lg:order-1")}>{MOCKS[scene.mock]()}</div>
     </div>
   );
 }
@@ -367,33 +102,5 @@ export function CtaBand({
   title?: string;
   subtitle?: string;
 }) {
-  return (
-    <section className="border-t border-border py-10 md:py-16">
-      <div className="mx-auto max-w-6xl px-6">
-        <ArtStage
-          src="/design/cat2-cheer.png"
-          tint="accent"
-          side="right"
-          size="xl"
-          className="px-8 py-12 sm:px-12 sm:py-16"
-        >
-          <div className="relative z-10 max-w-lg">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
-              {title}
-            </h2>
-            <p className="mt-3 max-w-md text-muted-foreground">{subtitle}</p>
-            <Link href="/signup" className="mt-8 inline-block">
-              <Button size="lg" className="gap-2">
-                Start studying
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
-            <p className="mt-3 text-xs text-faint">
-              Free to start · No credit card required
-            </p>
-          </div>
-        </ArtStage>
-      </div>
-    </section>
-  );
+  return <LandingCta title={title} sub={subtitle} cta="Start studying" note="Free to start · No credit card required" />;
 }

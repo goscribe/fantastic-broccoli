@@ -87,9 +87,9 @@ export default async function BlogPostPage({
             <div className="text-sm">
               <p className="font-semibold">
                 {persona.name}{" "}
-                <span className="font-normal text-faint">· Scribe AI</span>
+                <span className="font-normal text-muted-foreground">· Scribe AI</span>
               </p>
-              <p className="text-xs text-faint">
+              <p className="text-xs text-muted-foreground">
                 {persona.role} · {formatDay(post.day)}
               </p>
             </div>

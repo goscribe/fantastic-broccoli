@@ -82,3 +82,8 @@ export function jsonLdScriptProps(data: object) {
     },
   } as const;
 }
+
+/** Link-preview image for the public marketing pages (1200×630: the hero scene, the cat, the headline). */
+export const landingOgImages = [
+  { url: "/og-landing.jpg", width: 1200, height: 630, alt: "Scribe: study from your notes, actually remember it" },
+];
