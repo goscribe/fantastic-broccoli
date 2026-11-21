@@ -77,7 +77,7 @@ export default function SignupPage() {
         </div>
 
         {target.fromTry && (
-          <p className="rounded-xl bg-accent-soft px-3.5 py-2.5 text-center text-[13px] font-medium leading-snug text-accent-dim" role="note">
+          <p className="rounded-[12px] bg-muted px-3.5 py-2.5 text-center text-[13.5px] font-semibold leading-snug text-foreground" role="note">
             {t("try.signupBanner")}
           </p>
         )}

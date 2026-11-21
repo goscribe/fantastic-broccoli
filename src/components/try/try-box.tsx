@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import { ArrowRight, ClipboardPaste, FileText, Loader2, PenLine, Upload } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/try";
 import { cn } from "@/lib/utils";
@@ -139,26 +138,31 @@ export function TryBox({
   };
 
   const pastedLength = pasted.trim().length;
+  // The one purple thing in the box: the same chunky button as the session player's.
   const primary =
-    "inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 text-[15px] font-semibold text-white transition-colors hover:bg-accent-dim disabled:opacity-50";
+    "btn-chunky inline-flex h-[52px] w-full touch-manipulation items-center justify-center rounded-[var(--r-button)] bg-accent px-6 text-[16px] font-extrabold text-white transition-colors hover:bg-accent-dim disabled:opacity-40 disabled:shadow-none";
+  const quietLink =
+    "inline-flex min-h-11 items-center text-[14px] font-bold text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground";
+  // A place to type: a soft fill, a ring once focused (as in the session player).
+  const field =
+    "w-full rounded-[20px] bg-muted px-4 text-[16px] text-foreground ring-inset transition-[background-color,box-shadow] duration-150 placeholder:text-faint focus:bg-card focus:outline-none focus:ring-2 focus:ring-accent motion-reduce:transition-none";
 
-  const options: { id: TrySource; label: string; icon: typeof Upload; desktopOnly?: boolean }[] = [
-    { id: "topic", label: t("try.optTopic"), icon: PenLine },
-    { id: "paste", label: t("try.optPaste"), icon: ClipboardPaste },
-    { id: "pdf", label: t("try.optPdf"), icon: FileText, desktopOnly: true },
+  const options: { id: TrySource; label: string; desktopOnly?: boolean }[] = [
+    { id: "topic", label: t("try.optTopic") },
+    { id: "paste", label: t("try.optPaste") },
+    { id: "pdf", label: t("try.optPdf"), desktopOnly: true },
   ];
 
   if (blocked && blocked !== "captcha") {
     return (
-      <div className={cn("w-full rounded-[22px] border border-border bg-white p-5 text-center shadow-[0_20px_50px_-30px_rgba(76,29,149,.35)] sm:p-6", className)} role="status">
-        <Image src="/design/cat2-sleep.png" alt="" width={88} height={88} unoptimized className="mx-auto h-[76px] w-auto" />
-        <h2 className="mt-2 text-[18px] font-bold tracking-tight">{t(blocked === "limit" ? "try.limitTitle" : "try.busyTitle")}</h2>
-        <p className="mx-auto mt-1 max-w-sm text-[14px] leading-snug text-muted-foreground">{t(blocked === "limit" ? "try.limitBody" : "try.busyBody")}</p>
-        <Link href="/signup" className={cn(primary, "mt-4")}>
+      // The section's own cat sits right above the box, so the message needs no second one.
+      <div className={cn("app-brand w-full border-t border-border pt-6 text-center text-foreground", className)} role="status">
+        <h2 className="text-[22px] font-extrabold leading-tight tracking-tight">{t(blocked === "limit" ? "try.limitTitle" : "try.busyTitle")}</h2>
+        <p className="mx-auto mt-1.5 max-w-sm text-[15px] font-semibold leading-snug text-muted-foreground">{t(blocked === "limit" ? "try.limitBody" : "try.busyBody")}</p>
+        <Link href="/signup" className={cn(primary, "mt-5")}>
           {t("try.createAccount")}
-          <ArrowRight className="size-4" />
         </Link>
-        <Link href="/login" className="mt-2 inline-flex min-h-10 items-center text-[13px] font-semibold text-accent-dim hover:underline">
+        <Link href="/login" className={cn(quietLink, "mt-2")}>
           {t("try.haveAccount")}
         </Link>
       </div>
@@ -166,20 +170,19 @@ export function TryBox({
   }
 
   return (
-    <div className={cn("w-full rounded-[22px] border border-border bg-white p-4 text-left text-foreground shadow-[0_20px_50px_-30px_rgba(76,29,149,.35)] sm:p-5", className)}>
+    <div className={cn("app-brand w-full text-left text-foreground", className)}>
       {busy ? (
-        <div className="flex min-h-[208px] flex-col items-center justify-center text-center" role="status" aria-live="polite">
-          <Image src="/design/cat2-pencil.png" alt="" width={88} height={88} unoptimized className="cat-bob h-[76px] w-auto" />
-          <p className="mt-3 flex items-center gap-2 text-[15px] font-semibold">
-            <Loader2 className="size-4 animate-spin text-accent" />
+        <div className="flex min-h-[176px] flex-col items-center justify-center text-center" role="status" aria-live="polite">
+          <p className="flex items-center gap-2 text-[17px] font-extrabold">
+            <Loader2 aria-hidden className="size-4 animate-spin text-muted-foreground" />
             {t("try.building")}
           </p>
-          <p className="mt-1 text-[13px] text-muted-foreground">{t("try.buildingHint")}</p>
+          <p className="mt-1 text-[14px] font-semibold text-muted-foreground">{t("try.buildingHint")}</p>
         </div>
       ) : blocked === "captcha" ? (
         <div className="flex min-h-[208px] flex-col items-center justify-center text-center">
-          <h2 className="text-[17px] font-bold">{t("try.captchaTitle")}</h2>
-          <p className="mt-1 text-[13.5px] text-muted-foreground">{t("try.captchaBody")}</p>
+          <h2 className="text-[20px] font-extrabold tracking-tight">{t("try.captchaTitle")}</h2>
+          <p className="mt-1 text-[14.5px] font-semibold text-muted-foreground">{t("try.captchaBody")}</p>
           <div className="mt-3">
             <Turnstile
               onToken={(captchaToken) => {
@@ -192,8 +195,8 @@ export function TryBox({
         </div>
       ) : (
         <>
-          <div role="tablist" aria-label={t("try.optionsLabel")} className="grid grid-cols-2 gap-1 rounded-xl bg-muted/60 p-1 sm:grid-cols-3">
-            {options.map(({ id, label, icon: Icon, desktopOnly }) => (
+          <div role="tablist" aria-label={t("try.optionsLabel")} className="grid grid-cols-2 gap-1 rounded-[var(--r-button)] bg-muted p-1 sm:grid-cols-3">
+            {options.map(({ id, label, desktopOnly }) => (
               <button
                 key={id}
                 type="button"
@@ -201,12 +204,11 @@ export function TryBox({
                 aria-selected={mode === id}
                 onClick={() => pickMode(id)}
                 className={cn(
-                  "min-h-10 items-center justify-center gap-1.5 rounded-lg px-2 text-[13.5px] font-semibold transition-colors",
+                  "min-h-11 touch-manipulation items-center justify-center rounded-[var(--r-control)] px-2 text-[14px] font-bold transition-colors",
                   desktopOnly ? "hidden sm:inline-flex" : "inline-flex",
-                  mode === id ? "bg-white text-accent shadow-sm" : "text-muted-foreground hover:text-foreground",
+                  mode === id ? "bg-card text-foreground shadow-[var(--card-shadow)]" : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                <Icon className="size-4" />
                 {label}
               </button>
             ))}
@@ -233,10 +235,10 @@ export function TryBox({
                   autoComplete="off"
                   enterKeyHint="go"
                   placeholder={t("try.topicPlaceholder")}
-                  className="h-12 w-full rounded-xl border border-border bg-card px-3.5 text-[16px] text-foreground placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15"
+                  className={cn(field, "h-[52px]")}
                 />
-                <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                  <span className="text-[12.5px] text-faint">{t("try.examplesLabel")}</span>
+                <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
+                  <span className="text-[13px] font-semibold text-muted-foreground">{t("try.examplesLabel")}</span>
                   {EXAMPLES.map((key) => (
                     <button
                       key={key}
@@ -245,15 +247,14 @@ export function TryBox({
                         setTopic(t(key));
                         topicRef.current?.focus();
                       }}
-                      className="inline-flex min-h-8 items-center rounded-full border border-border px-2.5 text-[12.5px] font-semibold text-muted-foreground hover:border-border-strong hover:text-foreground"
+                      className="inline-flex min-h-9 touch-manipulation items-center rounded-full bg-muted px-3 text-[13px] font-bold text-foreground transition-colors hover:bg-[var(--edge)]"
                     >
                       {t(key)}
                     </button>
                   ))}
                 </div>
-                <button type="submit" disabled={!topicReady(topic)} className={cn(primary, "mt-3")}>
+                <button type="submit" disabled={!topicReady(topic)} className={cn(primary, "mt-4")}>
                   {t("try.start")}
-                  <ArrowRight className="size-4" />
                 </button>
               </form>
             )}
@@ -276,18 +277,17 @@ export function TryBox({
                   onChange={(e) => setPasted(e.target.value)}
                   rows={4}
                   placeholder={t("try.pastePlaceholder")}
-                  className="max-h-[40dvh] min-h-[104px] w-full resize-y rounded-xl border border-border bg-card px-3.5 py-3 text-[16px] leading-relaxed text-foreground placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15"
+                  className={cn(field, "max-h-[40dvh] min-h-[112px] resize-y py-3.5 leading-relaxed")}
                 />
-                <p className="min-h-[18px] text-[12.5px] text-faint" aria-live="polite">
+                <p className="min-h-[20px] px-1 text-[13px] font-semibold text-muted-foreground" aria-live="polite">
                   {pastedLength > TRY_PASTE_MAX
                     ? t("try.pasteTooLong")
                     : pastedLength > 0 && pastedLength < TRY_PASTE_MIN
                       ? t("try.pasteMore").replace("{count}", String(TRY_PASTE_MIN - pastedLength))
                       : ""}
                 </p>
-                <button type="submit" disabled={!pasteReady(pasted)} className={cn(primary, "mt-1")}>
+                <button type="submit" disabled={!pasteReady(pasted)} className={cn(primary, "mt-2")}>
                   {t("try.start")}
-                  <ArrowRight className="size-4" />
                 </button>
               </form>
             )}
@@ -305,16 +305,15 @@ export function TryBox({
                   void startPdf(e.dataTransfer.files[0]);
                 }}
                 className={cn(
-                  "flex min-h-[168px] flex-col items-center justify-center gap-2.5 rounded-xl border-2 border-dashed px-6 py-6 text-center transition-colors",
-                  dragging ? "border-accent bg-accent-soft/50" : "border-border",
+                  "flex min-h-[176px] flex-col items-center justify-center gap-3 rounded-[20px] px-6 py-6 text-center ring-inset transition-[background-color,box-shadow]",
+                  dragging ? "bg-card ring-2 ring-accent" : "bg-muted",
                 )}
               >
-                <p className="text-[15px] font-semibold">{t("try.pdfDrop")}</p>
-                <button type="button" onClick={() => fileRef.current?.click()} className={cn(primary, "h-11 w-auto")}>
-                  <Upload className="size-4" />
+                <p className="text-[16px] font-extrabold">{t("try.pdfDrop")}</p>
+                <button type="button" onClick={() => fileRef.current?.click()} className={cn(primary, "w-auto")}>
                   {t("try.pdfChoose")}
                 </button>
-                <p className="text-[12.5px] text-faint">{t("try.pdfHint")}</p>
+                <p className="text-[13px] font-semibold text-muted-foreground">{t("try.pdfHint")}</p>
                 <input
                   ref={fileRef}
                   type="file"
@@ -330,11 +329,11 @@ export function TryBox({
           </div>
 
           {error && (
-            <p role="alert" className="mt-2 text-center text-[13px] text-rose">
+            <p role="alert" className="mt-3 text-center text-[13.5px] font-bold text-rose-800">
               {error}
             </p>
           )}
-          <p className="mt-3 text-center text-[12.5px] text-faint">{t("try.footnote")}</p>
+          <p className="mt-3 text-center text-[13px] font-semibold text-muted-foreground">{t("try.footnote")}</p>
         </>
       )}
     </div>
