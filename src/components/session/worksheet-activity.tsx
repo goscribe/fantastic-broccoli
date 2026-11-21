@@ -11,7 +11,7 @@ import {
 import { toast } from "@/lib/toast";
 import { recordWorksheetQuestionProgress } from "@/lib/api/study-session";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
-import { useReportCurrentItem } from "@/lib/current-item";
+import { useItemNav, useReportCurrentItem } from "@/lib/current-item";
 import { WorksheetFigureCard } from "@/components/graphics/worksheet-figures";
 import { FigureView } from "@/components/session/reading-activity";
 import { MarkdownText, MathText } from "@/components/ui/markdown-text";
@@ -89,6 +89,13 @@ export function WorksheetActivity({
   const firstInput = useRef<HTMLTextAreaElement>(null);
 
   useReportCurrentItem(activityId, stepIndex);
+  // The player's bottom bar moves between questions here first.
+  useItemNav(activityId, {
+    canNext: () => stepIndex < content.steps.length - 1,
+    canBack: () => stepIndex > 0,
+    next: () => setStepIndex((i) => Math.min(i + 1, content.steps.length - 1)),
+    back: () => setStepIndex((i) => Math.max(i - 1, 0)),
+  });
   useActivityDraft(activityId, {
     stepIndex,
     answers,

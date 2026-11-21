@@ -5,7 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { McqOptionBody, McqQuestionBody, optionsHaveFigures } from "@/components/session/mcq-rich";
 import { McqContent } from "@/types";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
-import { useReportCurrentItem } from "@/lib/current-item";
+import { useItemNav, useReportCurrentItem } from "@/lib/current-item";
+import { nextUnanswered } from "@/lib/session-footer";
+import "@/lib/i18n/purpose";
 import { Button } from "@/components/ui/button";
 import { ConfettiBurst } from "@/components/graphics/confetti-burst";
 import { FeedbackCard } from "@/components/session/feedback-card";
@@ -30,6 +32,12 @@ interface McqActivityProps {
    * "Finish quiz" (swipes or arrows on to the debrief, closes the tab…).
    */
   onAllAnswered?: () => void;
+  /** "Hint" on an unanswered question: opens Copilot for this question (it won't give the answer away). */
+  onHint?: (questionIndex: number) => void;
+  /** "Why?" under the result: opens Copilot on this question. */
+  onWhy?: (questionIndex: number) => void;
+  /** The player's bottom bar already has Back (question by question): no second one on the card. */
+  hideBack?: boolean;
 }
 
 export function McqActivity({
@@ -39,6 +47,9 @@ export function McqActivity({
   onAnswer,
   onComplete,
   onAllAnswered,
+  onHint,
+  onWhy,
+  hideBack = false,
 }: McqActivityProps) {
   const { t } = useI18n();
   const newUi = useNewUi();
@@ -138,13 +149,30 @@ export function McqActivity({
     if (delta > 0) scroller.scrollBy({ top: delta, behavior });
   }, [revealed, index, newUi]);
 
+  // The bar under the player moves between questions here; past the last one it moves to the next activity.
+  useItemNav(activityId, {
+    canNext: () => index < content.questions.length - 1,
+    canBack: () => index > 0,
+    next: () => goTo(index + 1),
+    back: () => goTo(index - 1),
+  });
+
+  // A quiz finishes only when every question has an answer: questions passed over come back first.
+  const pending = nextUnanswered(answersByQ, index);
   const handleNext = () => {
     if (isLast) {
-      onComplete();
+      if (pending !== null) goTo(pending);
+      else onComplete();
       return;
     }
     goTo(index + 1);
   };
+  const nextLabel =
+    isLast && pending !== null
+      ? t("purpose.goToQuestion").replace("{n}", String(pending + 1))
+      : isLast
+        ? t("session.finishQuiz")
+        : t("session.nextQuestion");
 
   /** Each question's mark so far: true right, false wrong, null not answered. */
   const marks = answersByQ.map((a, i) => (a === null ? null : a === content.questions[i].correctIndex));
@@ -153,7 +181,7 @@ export function McqActivity({
     <div className="space-y-4">
       <ConfettiBurst burst={burst} />
       <div className="flex items-center justify-between gap-4">
-        {index > 0 && (
+        {index > 0 && !(newUi && hideBack) && (
           <button
             type="button"
             onClick={() => goTo(index - 1)}
@@ -246,7 +274,16 @@ export function McqActivity({
       </div>
 
       {!revealed && (
-        <div className="flex justify-end">
+        <div className={cn("flex justify-end", newUi && onHint && "flex-col-reverse items-stretch gap-2 sm:flex-row sm:items-center sm:justify-between")}>
+          {newUi && onHint && (
+            <button
+              type="button"
+              onClick={() => onHint(index)}
+              className="-my-1 inline-flex min-h-11 items-center justify-center self-center px-2 text-[14px] font-bold text-muted-foreground underline decoration-border-strong underline-offset-4 hover:text-foreground hover:decoration-foreground sm:self-auto"
+            >
+              {t("purpose.hint")}
+            </button>
+          )}
           <Button
             variant="primary"
             size={newUi ? "lg" : "sm"}
@@ -265,9 +302,10 @@ export function McqActivity({
           ok={isCorrect}
           title={isCorrect ? t("session.correct") : t("session.notQuite")}
           message={<MarkdownText text={question.explanation} />}
-          primary={isLast ? t("session.finishQuiz") : t("session.nextQuestion")}
+          primary={nextLabel}
           onPrimary={handleNext}
           note={isCorrect ? undefined : t("today.savedToMistakes")}
+          aside={onWhy ? { label: t("purpose.why"), onClick: () => onWhy(index) } : undefined}
         />
         </div>
       )}
@@ -286,7 +324,7 @@ export function McqActivity({
           </p>
           <div className="flex justify-end mt-3">
             <Button variant="ghost" size="sm" onClick={handleNext}>
-              {isLast ? t("session.finishQuiz") : t("session.nextQuestion")}
+              {nextLabel}
               <ArrowRight className="h-3 w-3 ml-1" />
             </Button>
           </div>
