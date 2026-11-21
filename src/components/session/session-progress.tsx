@@ -41,9 +41,13 @@ export function SessionStepLabel({
   const minutes = remainingMinutes(activities);
   const onDebrief = activeIndex >= total;
   // On the summary screen its own title says it's done; the full bar is enough here.
+  // A one-activity session (a Quick 5) has no steps to count: just the time left.
+  const single = total <= 1;
   const label = onDebrief
     ? "\u00a0"
-    : t("session.stepOf")
+    : single
+      ? ""
+      : t("session.stepOf")
         .replace("{n}", String(activeIndex + 1))
         .replace("{total}", String(total));
   return (
@@ -51,12 +55,14 @@ export function SessionStepLabel({
       className={cn("flex min-w-0 items-baseline gap-1.5 text-[13px] font-semibold leading-none tabular-nums", className)}
       aria-live="polite"
     >
-      <span className="shrink-0 text-foreground">{label}</span>
+      {label && <span className="shrink-0 text-foreground">{label}</span>}
       {!onDebrief && minutes > 0 && (
         <>
-          <span className="text-faint" aria-hidden>
-            ·
-          </span>
+          {label && (
+            <span className="text-faint" aria-hidden>
+              ·
+            </span>
+          )}
           <span className="truncate text-muted-foreground">
             {t("session.minLeft").replace("{n}", String(minutes))}
           </span>
