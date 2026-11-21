@@ -128,7 +128,6 @@
     user-select: none;
     transform: rotate(6deg);
     transform-origin: 60% 60%;
-    filter: drop-shadow(0 10px 12px rgb(0 0 0 / 0.2));
     transition: transform 0.35s var(--ease-out);
   }
   /* Short rows (phone lists, the picker): the art is cropped harder so the title keeps its room. */

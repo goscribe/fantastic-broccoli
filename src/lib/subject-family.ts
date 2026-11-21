@@ -65,8 +65,8 @@ export function familyFor(name: string | null | undefined): SubjectFamily {
   return "general";
 }
 
-/** 360×360 WebP with alpha: 2x for a card-height illustration. */
-export const familyArtSrc = (family: SubjectFamily) => `/design/subjects/${family}.webp`;
+/** Flat vector art on a 360×360 viewBox, transparent, drawn in tints of the family's own hue. */
+export const familyArtSrc = (family: SubjectFamily) => `/design/subjects/${family}.svg`;
 export const FAMILY_ART_SIZE = 360;
 
 /** Inline custom properties for a `.subject-tile` / `.subject-band` element. */
