@@ -31,6 +31,10 @@ export interface CatalogTopic {
   hlOnly?: boolean;
   higherTierOnly?: boolean;
   bcOnly?: boolean;
+  /** IB HL-only or second-year A-level content. */
+  advanced?: boolean;
+  /** Notes and Quick 5 need a plan or exam pass (only while the server's NOTES_PAID_GATE is on). */
+  locked?: boolean;
 }
 
 export interface CatalogUnit {

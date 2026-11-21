@@ -11,6 +11,8 @@ export const PUBLIC_PATHS = [
   "/privacy",
   "/terms",
   "/design",
+  // Public topic notes + practice questions (server-rendered, indexable).
+  "/notes",
   // Invite landing (/i/<code>) and shared quizzes/decks (/s/<token>).
   "/i",
   "/s",

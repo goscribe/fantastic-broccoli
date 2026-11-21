@@ -90,18 +90,18 @@ export function HeroScene() {
 }
 
 const CAT_FOR_SCENE: Record<string, string> = {
-  cards: "/design/cat2-book.png",
-  shared: "/design/cat2-wave.png",
-  guide: "/design/cat2-pencil.png",
-  recall: "/design/cat2-think.png",
-  study: "/design/cat2-pencil.png",
-  bank: "/design/cat2-book.png",
-  marketplace: "/design/cat2-wave.png",
+  cards: "/design/cat3-book.webp",
+  shared: "/design/cat3-wave.webp",
+  guide: "/design/cat3-pencil.webp",
+  recall: "/design/cat3-think.webp",
+  study: "/design/cat3-pencil.webp",
+  bank: "/design/cat3-book.webp",
+  marketplace: "/design/cat3-wave.webp",
 };
 
 function catFor(image: string): string {
   const name = image.split("/").pop()?.replace(/\.png$/, "") ?? "";
-  return CAT_FOR_SCENE[name] ?? "/design/cat2-think.png";
+  return CAT_FOR_SCENE[name] ?? "/design/cat3-think.webp";
 }
 
 /** Empty state on the design system: soft lavender card, one cat pose, left-aligned copy. */

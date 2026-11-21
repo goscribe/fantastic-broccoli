@@ -205,7 +205,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
         <>
         {lastNote && (notes?.unread ?? 0) > 0 && (
           <Link href="/planner" className="mt-3 flex items-start gap-2.5 rounded-xl border border-[#f6d9a8] bg-[#fff8ec] px-3.5 py-2.5 text-[13px] text-[#5b3a12] hover:brightness-[0.98]">
-            <Image src="/design/cat2-think.png" alt="" width={28} height={28} className="size-7 shrink-0 object-contain" />
+            <Image src="/design/cat3-think.webp" alt="" width={383} height={400} className="size-7 shrink-0 object-contain" />
             <span className="min-w-0"><b className="text-[#b4530a]">Note from your planner · </b>{lastNote.content}</span>
           </Link>
         )}

@@ -71,7 +71,7 @@ export function PlannerChat({ weekStart, className }: { weekStart?: string; clas
     <div className={cn("flex min-h-0 flex-col rounded-2xl border border-border", className)}>
       <div className="flex items-center justify-between gap-2 border-b border-border px-4 py-3">
         <div className="flex items-center gap-2.5">
-          <Image src="/design/cat2-think.png" alt="" width={32} height={32} className="size-8 object-contain" />
+          <Image src="/design/cat3-think.webp" alt="" width={383} height={400} className="size-8 object-contain" />
           <div>
             <div className="text-[14px] font-semibold leading-tight">Your planner</div>
             <div className="text-[11.5px] text-faint">Checks your calendar daily and leaves notes here</div>

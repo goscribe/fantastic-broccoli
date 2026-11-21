@@ -272,7 +272,7 @@ export function SessionPrecheck({
         <ConfettiBurst burst={burst} />
         <div className="flex items-center gap-3.5">
           <Image
-            src="/design/cat2-cheer.png"
+            src="/design/cat3-cheer.webp"
             alt=""
             width={hero ? 64 : 40}
             height={hero ? 76 : 48}

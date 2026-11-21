@@ -372,7 +372,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           }}
         >
           <div className="flex items-center gap-3">
-            <Image src="/design/cat2-wave.png" alt="" width={40} height={40} unoptimized className="cat-wiggle h-10 w-auto" />
+            <Image src="/design/cat3-wave.webp" alt="" width={352} height={400} unoptimized className="cat-wiggle h-10 w-auto" />
             <input
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
@@ -447,7 +447,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           ))}
           {(expanded || (!loading && materials.length < 3)) && (
             <button type="button" onClick={() => fileRef.current?.click()} className="flex min-h-[140px] flex-col items-center justify-center gap-2 rounded-2xl border-2 sm:min-h-[200px] border-dashed border-border p-4 text-center hover:border-accent/50 hover:bg-accent-soft/40">
-              <Image src="/design/cat2-sleep.png" alt="" width={64} height={64} unoptimized className="cat-bob h-16 w-auto" />
+              <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-16 w-auto" />
               <div>
                 <div className="text-[14.5px] font-semibold">Add material</div>
                 <div className="mt-0.5 text-[12px] text-faint">PDF · slides · photos of notes</div>
@@ -550,7 +550,7 @@ export function LearnHome({ workspaceId, folderId }: { workspaceId?: string; fol
           const { done, total, next } = sessionProgress(suggested);
           return (
             <div className="relative overflow-hidden rounded-2xl p-[18px]" style={{ background: "var(--accent-soft)" }}>
-              <Image src="/design/cat2-book.png" alt="" width={72} height={72} unoptimized className="cat-peek absolute right-2.5 top-2 h-[72px] w-auto" />
+              <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-peek absolute right-2.5 top-2 h-[72px] w-auto" />
               <div className="flex items-center gap-2">
                 <Ring pct={total ? done / total : 0} size={28} stroke={12} color="var(--accent)" />
                 <span className="text-[11px] font-semibold text-accent">
@@ -740,7 +740,7 @@ function CatNudge({
         )}
         <span className="absolute -right-1.5 bottom-4 size-3 rotate-45 border-b border-r border-border bg-white" />
       </div>
-      <Image src={count > 0 ? "/design/cat2-cheer.png" : "/design/cat2-wave.png"} alt="" width={96} height={96} unoptimized className="cat-wiggle h-[84px] w-auto select-none" />
+      <Image src={count > 0 ? "/design/cat3-cheer.webp" : "/design/cat3-wave.webp"} alt="" width={96} height={96} unoptimized className="cat-wiggle h-[84px] w-auto select-none" />
     </div>
   );
 }
@@ -835,7 +835,7 @@ function SubjectsGrid({
           );
         })}
         <button type="button" onClick={onNew} className="hidden min-h-[172px] flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed sm:flex border-border text-center hover:border-accent/60 hover:bg-muted/40">
-          <Image src="/design/cat2-sleep.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
+          <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-14 w-auto" />
           <div className="text-[14px] font-semibold">New subject</div>
           <div className="text-[12px] text-faint">Drop notes, get sessions</div>
         </button>
@@ -892,7 +892,7 @@ function SessionList({
           ))}
         {!loading && sessions.length === 0 && (
           <div className="flex items-center gap-4 px-5 py-6 text-[14px] text-muted-foreground">
-            <Image src="/design/cat2-book.png" alt="" width={56} height={56} unoptimized className="cat-bob h-14 w-auto" />
+            <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob h-14 w-auto" />
             No sessions yet — hit New session and I&apos;ll build one from your materials.
           </div>
         )}

@@ -68,18 +68,18 @@ export function AuthScene({
         </div>
         <div className="mt-2 flex items-end justify-between">
           <Image
-            src="/design/cat2-cheer.png"
+            src="/design/cat3-cheer.webp"
             alt=""
-            width={244}
-            height={288}
+            width={363}
+            height={400}
             unoptimized
             className="h-[clamp(150px,30vh,250px)] w-auto select-none object-contain"
           />
           <Image
-            src="/design/cat2-book.png"
+            src="/design/cat3-book.webp"
             alt=""
-            width={240}
-            height={260}
+            width={363}
+            height={400}
             unoptimized
             className="cat-bob h-[clamp(120px,23vh,190px)] w-auto select-none object-contain"
           />
