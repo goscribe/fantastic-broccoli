@@ -71,7 +71,8 @@ export function NewShell({ children }: { children: React.ReactNode }) {
   const [folders, setFolders] = useState<Folder[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [paletteOpen, setPaletteOpen] = useState(false);
-    const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const rail = useRail();
   const { data: streak } = useStreak();
   const started = !!streak && (streak.longest > 0 || streak.current > 0 || streak.todayDone);
@@ -112,7 +113,10 @@ export function NewShell({ children }: { children: React.ReactNode }) {
     <div className="design-root app-brand flex h-dvh overflow-hidden bg-[var(--page)] text-foreground">
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:translate-x-0 md:border-r-0 md:bg-transparent",
+          // Desktop: a shelf out from the left wall. Flush with the window's left
+          // edge, inset 8px top and bottom, rounded and hairlined only on the sides
+          // you can see, on the light neutral tint, with a soft shadow to the right.
+          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:my-2 md:translate-x-0 md:rounded-r-[var(--r-card)] md:border md:border-l-0 md:bg-white md:shadow-[4px_0_16px_-12px_rgba(22,22,26,0.18)]",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
           rail && "md:w-[68px] md:px-2.5",
         )}
@@ -208,8 +212,25 @@ export function NewShell({ children }: { children: React.ReactNode }) {
       )}
 
       {/* Room for the phone bottom nav (and the home indicator) under the last row. */}
-      <div className="flex min-w-0 flex-1 flex-col overflow-y-auto max-md:pb-[calc(4rem+env(safe-area-inset-bottom))]">
-        <header className="flex h-[64px] shrink-0 items-center gap-2 px-4 sm:gap-3 sm:px-8">
+      {/* --app-top: where the floating top bar ends, for sticky bars inside pages. */}
+      <div
+        onScroll={(e) => {
+          const s = e.currentTarget.scrollTop > 4;
+          if (s !== scrolled) setScrolled(s);
+        }}
+        className="flex min-w-0 flex-1 flex-col overflow-y-auto [--app-top:64px] max-md:pb-[calc(4rem+env(safe-area-inset-bottom))]"
+      >
+        {/* The top bar floats: the same tint and hairline as the shelf, its top edge
+            level with the shelf's, 8px in from the shelf and the window. It stays put
+            while the page scrolls under it; a soft shadow appears once scrolled. Only
+            the 8px strip above it is page-coloured, so content never shows over its top. */}
+        <div className="sticky top-0 z-30 shrink-0 bg-[linear-gradient(to_bottom,var(--page)_8px,transparent_8px)] px-2 pt-2">
+        <header
+          className={cn(
+            "flex h-14 items-center gap-2 rounded-[var(--r-card)] border border-border bg-white px-2 transition-shadow sm:gap-3 sm:px-6",
+            scrolled && "shadow-[0_10px_24px_-14px_rgba(22,22,26,0.3)]",
+          )}
+        >
           <button type="button" onClick={() => setMobileOpen(true)} className="grid size-10 place-items-center rounded-xl hover:bg-muted md:hidden" aria-label="Open sidebar">
             <Image src="/logo.png" alt="" width={24} height={24} />
           </button>
@@ -243,6 +264,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
         </header>
+        </div>
         {children}
         <AppTourHost />
       </div>
