@@ -299,9 +299,9 @@ function Recall({ note }: { note: TopicNoteContent }) {
           {note.recall.length} written questions. Answer each one in your head or on paper, then open the mark scheme.
         </p>
       </header>
-      <ol className="mt-5 flex flex-col gap-3.5">
+      <ol className="mt-5 flex flex-col">
         {note.recall.map((q, qi) => (
-          <li key={q.id} className="nl-card px-4 py-4 sm:px-5" data-nl-reveal="">
+          <li key={q.id} className="nl-q" data-nl-reveal="">
             <div className="flex items-baseline gap-2 text-[13.5px] font-extrabold text-muted-foreground">
               <span className="text-[17px] tabular-nums text-foreground">{qi + 1}.</span>
               <span>{q.commandTerm}</span>

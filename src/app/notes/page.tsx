@@ -29,11 +29,10 @@ export default async function NotesIndexPage() {
   return (
     <div className="mx-auto w-full max-w-[1120px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
       <Breadcrumbs crumbs={crumbsFor.index()} />
-      {/* A calm colour field behind the headline; the disc and the ground follow the cat's own box. */}
-      <header className="nl-hero relative mt-4 overflow-hidden px-5 pb-6 pt-[170px] sm:px-10 sm:py-11 sm:pr-[300px] lg:pr-[400px]">
+      {/* The landscape behind the headline is lit for the visitor's own time of day (tokens.css reads <html data-daypart>, set by a head script; the markup is the same for everyone, so the page stays static). */}
+      <header className="nl-hero hero-card relative mt-4 overflow-hidden px-5 pb-6 pt-[170px] sm:px-10 sm:py-11 sm:pr-[300px] lg:pr-[400px]">
         <div aria-hidden="true" className="hero-field nl-hero__field">
           <div className="absolute bottom-[22px] right-[13%] h-[104px] sm:bottom-[15%] sm:right-[7%] sm:h-[150px] lg:right-[9%] lg:h-[190px]">
-            <span className="hero-field__disc" />
             <span className="hero-field__ground" />
             <Image src="/design/cat3-book.webp" alt="" width={363} height={400} priority unoptimized className="nl-cat-in relative h-full w-auto" />
           </div>

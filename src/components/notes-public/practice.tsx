@@ -142,7 +142,7 @@ export function PracticeCard(p: CardProps) {
   const left = ctx.ids.some((id) => id !== p.id && !(id in answers));
 
   return (
-    <div id={`pq-${p.id}`} className={cn("scroll-mt-24", "nl-card px-3.5 pb-4 pt-4 sm:px-5 sm:pb-5")} data-nl-reveal="">
+    <div id={`pq-${p.id}`} className={cn("scroll-mt-24", inline ? "nl-well !rounded-[var(--r-card)] px-3.5 pb-4 pt-4 sm:px-5 sm:pb-5" : "nl-q")} data-nl-reveal="">
       <div className="flex items-center gap-2.5 px-0.5">
         {inline ? (
           <>

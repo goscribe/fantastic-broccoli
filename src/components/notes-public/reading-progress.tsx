@@ -145,7 +145,7 @@ function Marker({ entry, n, read, active }: { entry: RailEntry; n: number; read:
 export function ReadingRail({ topicKey, entries, footer }: { topicKey: string; entries: RailEntry[]; footer?: ReactNode }) {
   const { read, current, sections, readCount } = useEntries(topicKey, entries);
   return (
-    <nav aria-label="On this page" className="nl-card sticky top-6 px-4 pb-4 pt-5">
+    <nav aria-label="On this page" className="sticky top-6 px-1 pb-4 pt-1">
       <div className="flex items-baseline justify-between px-2">
         <p className="text-[15px] font-extrabold">On this page</p>
         <p className="text-[12.5px] font-bold tabular-nums text-muted-foreground">

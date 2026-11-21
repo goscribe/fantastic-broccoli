@@ -36,6 +36,10 @@
     border-radius: var(--r-card);
     box-shadow: var(--card-shadow);
   }
+  /* A question in a list: it sits on the page, split from the next by a hairline, with no box around it. */
+  .nl-q { padding: 22px 0; }
+  .nl-q + .nl-q { border-top: 1px solid var(--border); }
+  .nl-q:first-child { padding-top: 18px; }
   /* A quiet neutral panel (the practice header, the end-of-note card). Page headers are subject bands, not this. */
   .nl-panel { background: var(--cream); border-radius: var(--r-panel); }
 
@@ -58,8 +62,11 @@
     .nl-band .subject-tile__art { right: -1%; bottom: -12%; height: min(112%, 300px); }
   }
 
-  /* The notes home header: the shared colour field (.hero-field in tokens.css) behind the headline; a band on phones. */
-  .nl-hero { isolation: isolate; background: #fff; border: 1px solid var(--border); border-radius: var(--r-panel); }
+  /* The notes home header: the shared time-of-day landscape (.hero-card / .hero-field in tokens.css) behind the headline; a band on phones. */
+  .nl-hero { isolation: isolate; border: 1px solid var(--border); border-radius: var(--r-panel); }
+  /* Its buttons keep their own white fill after dark, so their label stays dark. */
+  .nl-hero .nl-btn-ghost { background: #fff; color: #16161a; }
+  .nl-hero .nl-btn-ghost:hover { background: #f4f4f6; }
   .nl-hero__field { position: absolute; z-index: -1; inset: 0 0 auto 0; height: 150px; overflow: hidden; pointer-events: none; user-select: none; }
   @media (min-width: 640px) {
     .nl-hero__field { inset: 0; height: auto; }
@@ -86,10 +93,12 @@
   .nl-btn { background: var(--accent); color: #fff; box-shadow: 0 4px 0 0 var(--accent-edge); }
   .nl-btn:hover { background: var(--accent-dim); }
   .nl-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 0 var(--accent-edge); }
-  .nl-btn-ghost { background: var(--card); color: var(--foreground); border: 1.5px solid var(--edge); box-shadow: 0 3px 0 0 var(--edge); }
-  .nl-btn-ghost:hover { border-color: var(--border-strong); box-shadow: 0 3px 0 0 var(--border-strong); }
-  .nl-btn-ghost:active { transform: translateY(2px); box-shadow: 0 1px 0 0 var(--edge); }
-  .nl-btn-sm { min-height: 40px; padding: 0 16px; font-size: 14.5px; border-radius: var(--r-control); }
+  /* The quiet button: a tinted pill, no outline and no lip. */
+  .nl-btn-ghost { background: var(--muted); color: var(--foreground); border: 1.5px solid transparent; border-radius: 999px; }
+  .nl-btn-ghost:hover { background: var(--edge); }
+  .nl-btn-ghost:active { transform: scale(0.98); }
+  .nl-btn-sm { min-height: 40px; padding: 0 16px; font-size: 14.5px; }
+  .nl-btn.nl-btn-sm { border-radius: var(--r-control); }
 
   /* Meta as one quiet line of text ("3 min read · 5 parts · 10 questions"), not a row of chips. */
   .nl-meta { display: flex; flex-wrap: wrap; column-gap: 8px; row-gap: 2px; font-size: 14px; font-weight: 700; color: var(--muted-foreground); }
@@ -304,27 +313,25 @@
   .nl-details > summary::-webkit-details-marker { display: none; }
 
   /* ---------- Practice ---------- */
+  /* Answer options: soft pills on a tint, no outline; a ring and a colour once marked. */
   .nl-opt {
     display: flex;
     width: 100%;
     min-height: 56px;
     align-items: center;
     gap: 12px;
-    border-radius: var(--r-button);
-    border: 1.5px solid var(--edge);
-    background: var(--card);
+    border-radius: 28px;
+    background: var(--muted);
     padding: 11px 14px;
     text-align: left;
     font-size: 16px;
     line-height: 1.35;
-    box-shadow: 0 3px 0 0 var(--edge);
-    transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.15s ease, background-color 0.15s ease, opacity 0.2s ease;
+    transition: transform 0.1s ease, box-shadow 0.15s ease, background-color 0.15s ease, opacity 0.2s ease;
   }
   .nl-opt[data-state="idle"] { cursor: pointer; }
-  .nl-opt[data-state="idle"]:active { transform: translateY(2px); box-shadow: 0 1px 0 0 var(--edge); }
+  .nl-opt[data-state="idle"]:active { transform: scale(0.99); }
   @media (hover: hover) {
-    .nl-opt[data-state="idle"]:hover { border-color: var(--accent); box-shadow: 0 3px 0 0 var(--accent); }
-    .nl-opt[data-state="idle"]:hover .nl-letter { border-color: var(--accent); color: var(--accent); }
+    .nl-opt[data-state="idle"]:hover { background: var(--edge); }
   }
   .nl-letter {
     display: grid;
@@ -332,19 +339,18 @@
     height: 32px;
     flex: none;
     place-items: center;
-    border-radius: 9px;
-    border: 2px solid var(--edge);
+    border-radius: 999px;
     background: var(--card);
     color: var(--foreground);
     font-size: 14px;
     font-weight: 900;
-    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    transition: background-color 0.15s ease, color 0.15s ease;
   }
-  .nl-opt[data-state="right"] { border-color: var(--ok); background: var(--ok-soft); box-shadow: 0 3px 0 0 var(--ok); }
-  .nl-opt[data-state="right"] .nl-letter { background: var(--ok); border-color: var(--ok); color: #fff; }
-  .nl-opt[data-state="wrong"] { border-color: var(--no); background: var(--no-soft); box-shadow: 0 3px 0 0 var(--no); }
-  .nl-opt[data-state="wrong"] .nl-letter { background: var(--no); border-color: var(--no); color: #fff; }
-  .nl-opt[data-state="dim"] { opacity: 0.55; box-shadow: none; }
+  .nl-opt[data-state="right"] { background: var(--ok-soft); box-shadow: inset 0 0 0 2px var(--ok); }
+  .nl-opt[data-state="right"] .nl-letter { background: var(--ok); color: #fff; }
+  .nl-opt[data-state="wrong"] { background: var(--no-soft); box-shadow: inset 0 0 0 2px var(--no); }
+  .nl-opt[data-state="wrong"] .nl-letter { background: var(--no); color: #fff; }
+  .nl-opt[data-state="dim"] { opacity: 0.55; }
   @keyframes nl-pop { 0% { transform: scale(0.97); } 45% { transform: scale(1.025); } 100% { transform: scale(1); } }
   @keyframes nl-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 60% { transform: translateX(5px); } }
   .nl-pop { animation: nl-pop 0.34s var(--ease-spring); }

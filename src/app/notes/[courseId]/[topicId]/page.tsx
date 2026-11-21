@@ -287,7 +287,7 @@ function TopicView({ course, unit, data }: { course: PublicCourse; unit: PublicU
                 <div className="mt-4">
                   <PracticeScore inlineCount={inline.size} />
                 </div>
-                <div className="mt-4 flex flex-col gap-4">{rest.map((q) => questionCard(q, ids.indexOf(q.id) + 1, "practice"))}</div>
+                <div className="mt-4 flex flex-col">{rest.map((q) => questionCard(q, ids.indexOf(q.id) + 1, "practice"))}</div>
                 <div className="mt-6">
                   <PracticeDone nextTopic={nextLink} quick5={<StartQuick5 courseId={course.id} topicId={topic.id} level={level} placement="practice_end" variant="secondary" />} />
                 </div>
