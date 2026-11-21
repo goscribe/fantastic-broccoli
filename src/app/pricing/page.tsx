@@ -51,7 +51,7 @@ function PlanCard({
       </div>
       {description && <p className="mt-1 text-[14px] text-muted-foreground">{description}</p>}
       <p className="mt-4 text-[30px] font-extrabold leading-none tracking-tight tabular-nums">
-        {price.amount}
+        {paid ? price.amount : "$0"}
         {price.suffix && <span className="text-[14px] font-semibold tracking-normal text-muted-foreground">{price.suffix}</span>}
       </p>
       <p className="mt-2 min-h-[2.6em] text-[13px] leading-snug text-muted-foreground">{terms}</p>
