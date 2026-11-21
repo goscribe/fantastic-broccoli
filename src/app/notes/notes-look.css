@@ -1,3 +1,5 @@
+/* Layer order first (see design/tokens.css): this file can load before globals.css. */
+@layer properties, theme, base, components, utilities;
 @import "../design/tokens.css";
 
 /*
@@ -82,7 +84,8 @@
     justify-content: center;
     gap: 8px;
     border-radius: var(--r-button);
-    padding: 0 22px;
+    /* Vertical padding only shows when a long label (a topic name) wraps; one line still sits at min-height. */
+    padding: 7px 22px;
     font-size: 15.5px;
     font-weight: 800;
     line-height: 1.15;
