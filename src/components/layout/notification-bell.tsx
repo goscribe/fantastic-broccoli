@@ -130,7 +130,7 @@ export function NotificationBell() {
                             <span className="block truncate text-[13px] font-medium">
                               {n.title}
                             </span>
-                            <span className="block line-clamp-2 text-xs text-muted-foreground">
+                            <span className="line-clamp-2 text-xs text-muted-foreground">
                               {n.body}
                             </span>
                             <span className="mt-0.5 block text-[10px] text-faint">

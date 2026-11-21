@@ -58,10 +58,32 @@ const RULES: [SubjectFamily, RegExp][] = [
   ["languages", /\b(spanish|french|german|italian|chinese|mandarin|japanese|korean|latin|arabic|languages?|ab initio|español|français)\b/i],
 ];
 
+/**
+ * Topic words and course codes, for subjects named after a file or a unit
+ * rather than a course ("B4 Thermodynamics Guide +3", "Cl1 AAHL T3 C1
+ * Differentiation"). Tried only after RULES finds no subject name, so
+ * "Biology: cell differentiation" stays biology. Keep to words that mean one
+ * subject at school; a wrong colour is worse than the neutral one.
+ */
+const TOPIC_RULES: [SubjectFamily, RegExp][] = [
+  ["computing", /\b(data transmission|digital infrastructures?|networks?|networking|algorithms?|databases?|cyber\w*|python|javascript|html|sql|binary|boolean|operating systems?)\b/i],
+  ["maths", /\b(aa ?[hs]l|ai ?[hs]l|calc|pre-?calc\w*|(anti[ -]?)?differentiation|antiderivatives?|derivatives?|integrals?|trig\w*|vectors?|matri(x|ces)|logarithms?|quadratics?|polynomials?|probability|sequences and series|complex numbers)\b/i],
+  ["physics", /\b(thermodynamics?|kinematics|electric(al)? (fields?|circuits?)|magneti\w+|electricity|circuits?|optics|momentum|relativity|nuclear|radioactiv\w+|waves)\b/i],
+  ["chemistry", /\b(organic|stoichiometry|kinetics|equilibri(um|a)|titrations?|redox|periodic(ity| table)|acids? and bases?|bonding|moles?)\b/i],
+  ["biology", /\b(photosynthesis|respiration|osmosis|enzymes?|dna|mitosis|meiosis|cells?|evolution|ecosystems?|homeostasis)\b/i],
+  ["economics", /\b(macro|micro|fiscal|monetary|inflation|elasticity|gdp|market (structures?|failure)|supply and demand)\b/i],
+  ["history", /\b(cold war|world war|ww ?(1|2|i|ii)|revolutions?|empires?|weimar|tudors?)\b/i],
+  ["earth", /\b(glaciation|glaciers?|tectonics?|rivers|coasts|urbani[sz]ation|ecosystems and biomes|hazards)\b/i],
+  ["psychology", /\b(cognitive|behaviou?ris\w+|sociocultural approach|abnormal)\b/i],
+  ["english", /\b(gatsby|shakespeare|macbeth|hamlet|othello|orwell|novels?|poems?|essays?|paper 2 comparative)\b/i],
+];
+
 /** The family for a subject title, a catalog course title or a catalog `subject`. */
 export function familyFor(name: string | null | undefined): SubjectFamily {
   const t = (name ?? "").trim();
-  if (t) for (const [key, re] of RULES) if (re.test(t)) return key;
+  if (!t) return "general";
+  for (const [key, re] of RULES) if (re.test(t)) return key;
+  for (const [key, re] of TOPIC_RULES) if (re.test(t)) return key;
   return "general";
 }
 
@@ -69,8 +91,38 @@ export function familyFor(name: string | null | undefined): SubjectFamily {
 export const familyArtSrc = (family: SubjectFamily) => `/design/subjects/${family}.svg`;
 export const FAMILY_ART_SIZE = 360;
 
-/** Inline custom properties for a `.subject-tile` / `.subject-band` element. */
-export function familyVars(family: SubjectFamily): Record<string, string> {
-  const { a, b } = FAMILY[family];
+/**
+ * Hues for subjects that match no family ("Week 7 lecture slides"): a real
+ * account can have dozens, and one purple for all of them is a wall. Each
+ * borrows a family's colour pair (so white text is already AA on it) and
+ * keeps the neutral books-and-cap art.
+ */
+export const GENERAL_HUES: SubjectFamily[] = ["general", "maths", "chemistry", "economics", "psychology", "science", "earth", "physics", "business", "languages"];
+
+/** FNV-1a: small, stable across sessions and browsers. */
+function hash(s: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return h >>> 0;
+}
+
+/**
+ * The family whose colours a tile wears. A matched family wears its own; an
+ * unmatched one ("general") picks one from GENERAL_HUES by `seed` (the
+ * workspace's id, else its name), so it is the same every time and the same
+ * on the subject's own page. No seed: the default purple.
+ */
+export function hueFamilyFor(family: SubjectFamily, seed?: string | null): SubjectFamily {
+  const key = (seed ?? "").trim();
+  if (family !== "general" || !key) return family;
+  return GENERAL_HUES[hash(key) % GENERAL_HUES.length];
+}
+
+/** Inline custom properties for a `.subject-tile` / `.subject-band` element. `seed` varies the hue of an unmatched subject. */
+export function familyVars(family: SubjectFamily, seed?: string | null): Record<string, string> {
+  const { a, b } = FAMILY[hueFamilyFor(family, seed)];
   return { "--tile-a": a, "--tile-b": b };
 }

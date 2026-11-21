@@ -1,4 +1,14 @@
 /*
+ * Cascade-layer order, stated first in every stylesheet that uses a layer.
+ * Layers rank by where they are FIRST named. This file (via design.css) can
+ * be loaded before globals.css: the production build (Turbopack) links its
+ * chunk first. Without this line `components` was then the lowest layer, so
+ * Tailwind's preflight in `base` beat every rule below: `a { color: inherit }`
+ * turned subject-tile titles ink, `* { padding: 0 }` stripped the pill.
+ */
+@layer properties, theme, base, components, utilities;
+
+/*
  * Scribe UI tokens (v5). One source for the signed-in app (.app-brand) and the
  * public note pages (.notes-look); keep this file identical on every branch.
  *
@@ -94,6 +104,19 @@
   }
 
   /*
+   * Keyboard focus: one soft accent ring for links and buttons, instead of the
+   * browser's own heavy two-tone box (which also appears on a clicked link as
+   * soon as any key is pressed). :where() keeps it at the weight of a single
+   * class, so a component's own focus style still wins.
+   */
+  .app-brand :where(a, button, summary, [role="button"], [role="tab"]):focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    outline-offset: 2px;
+  }
+  /* Sidebar rows sit edge to edge in a scroller that clips: the ring goes inside. */
+  .app-brand aside :where(a, button):focus-visible { outline-offset: -2px; }
+
+  /*
    * Subject tile: a full-bleed card in its family's hue (--tile-a deep,
    * --tile-b bright, set inline from subject-family.ts). White text sits on
    * the left over --tile-a (≥ 4.5:1 for every family); the bright end only
@@ -107,7 +130,14 @@
     color: #fff;
     background: radial-gradient(85% 135% at 100% 30%, var(--tile-b) 0%, var(--tile-a) 62%);
   }
+  /*
+   * The tile is a size container, so the art and the text column follow the
+   * tile's own width (150–400px), not the viewport's. Its height is fixed by
+   * the component: a long title is clamped, it never grows the tile, and the
+   * art (a share of the height) stays the size it was drawn for.
+   */
   .subject-tile {
+    container-type: inline-size;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -130,15 +160,32 @@
     transform-origin: 60% 60%;
     transition: transform 0.35s var(--ease-out);
   }
+  /* An unmatched subject in a borrowed hue: the neutral art goes white-grey so it sits on any colour. */
+  .subject-tile__art--neutral { filter: saturate(0) brightness(1.12); opacity: 0.9; }
   /* Short rows (phone lists, the picker): the art is cropped harder so the title keeps its room. */
   .subject-tile--row .subject-tile__art { right: -4%; bottom: -34%; height: 150%; }
-  .subject-tile__text { max-width: 58%; }
+  .subject-tile--row .subject-tile__text { max-width: 60%; }
+  /* The words keep the left; the art keeps the right. */
+  .subject-tile__text { max-width: 62%; min-width: 0; }
+  .subject-tile__title,
+  .subject-band__title {
+    color: #fff;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+  }
+  .subject-band__title { -webkit-line-clamp: 3; line-clamp: 3; }
   .subject-tile__sub { color: rgb(255 255 255 / 0.92); }
+  .subject-tile__sub--line { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .subject-pill {
     display: inline-flex;
     align-items: center;
     gap: 4px;
     height: 36px;
+    max-width: 100%;
     padding: 0 10px 0 16px;
     border-radius: 999px;
     background: #fff;
@@ -151,6 +198,23 @@
   }
   .subject-track { height: 6px; border-radius: 999px; background: rgb(255 255 255 / 0.3); overflow: hidden; }
   .subject-track > span { display: block; height: 100%; border-radius: inherit; background: #fff; }
+  /*
+   * Narrow tiles (the queries measure the tile inside its padding): the art
+   * steps back so it never runs under the words or the pill…
+   */
+  @container (max-width: 195px) {
+    .subject-tile:not(.subject-tile--row) > .subject-tile__art { height: 62%; right: -12%; bottom: -10%; }
+    .subject-tile:not(.subject-tile--row) .subject-tile__text { max-width: 68%; }
+  }
+  /* …and under ~170px of tile there is no room for both: the words take it. */
+  @container (max-width: 132px) {
+    .subject-tile:not(.subject-tile--row) > .subject-tile__art { display: none; }
+    .subject-tile:not(.subject-tile--row) .subject-tile__text { max-width: none; }
+  }
+  @container (max-width: 180px) {
+    .subject-tile--row > .subject-tile__art { display: none; }
+    .subject-tile--row .subject-tile__text { max-width: none; }
+  }
   @media (hover: hover) {
     .subject-tile:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -12px var(--tile-a); }
     .subject-tile:hover .subject-tile__art { transform: rotate(2deg) scale(1.05); }
@@ -158,7 +222,7 @@
   .subject-tile:active { transform: scale(0.985); }
   /* A header band in the subject's colour (note pages, a course's page, the result screen). */
   .subject-band { border-radius: var(--r-panel); }
-  .subject-band .subject-tile__art { right: -2%; bottom: -22%; height: 128%; }
+  .subject-band .subject-tile__art { right: -2%; bottom: -22%; height: 128%; max-height: 230px; }
   @media (max-width: 639px) {
     .subject-band .subject-tile__art { right: -12%; bottom: -8%; height: 78%; opacity: 0.95; }
   }

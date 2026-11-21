@@ -59,7 +59,7 @@ export function CourseTopics({ workspaceId, showTitle = false }: { workspaceId: 
       {showTitle ? (
         // The course's own page: a header band in the subject's colour; the topic list under it stays white.
         <SubjectBand match={course.subject || course.title} className="px-5 py-5 sm:px-7 sm:py-7">
-          <h1 className="max-w-[68%] text-[24px] font-extrabold leading-[1.12] sm:text-[30px]">
+          <h1 className="subject-band__title max-w-[68%] text-[24px] font-extrabold leading-[1.12] text-white sm:text-[30px]">
             {course.title}
             {level ? <span className="font-bold opacity-90"> · {level}</span> : null}
           </h1>
