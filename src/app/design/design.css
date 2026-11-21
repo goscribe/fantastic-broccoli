@@ -287,21 +287,88 @@ html.new-ui .skeleton {
 .design-root:not(.app-brand) .ui-btn--outline { background: var(--card); border-color: var(--border-strong); font-weight: 500; }
 
 /*
- * Home banner's week strip: the days sit on the landscape as frosted cells in
- * the banner's own colour (white by day, the night sky after dark), so the
- * words keep the banner's contrast whatever the time of day.
+ * Home banner's week: the landscape runs edge to edge with no wash, and every
+ * word sits on a solid card over it (the scene's own light: white by day,
+ * the night sky after dark), so the contrast never depends on the picture.
+ * Today's card is always white and lifts above the row.
  */
+.home-hero { --hero-surface: #ffffff; }
+.home-hero .hero-field { --wash: none; }
+/* After dark the cards are the night sky lifted a step, so they read as cards against it. */
+html[data-daypart="night"] .home-hero,
+html[data-daypart="late"] .home-hero { --hero-surface: color-mix(in srgb, var(--hero-wash) 86%, #ffffff); }
 .hero-cell {
-  background: color-mix(in srgb, var(--hero-wash, #fff) 88%, transparent);
-  border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  background: var(--hero-surface, #fff);
+  border: 1px solid color-mix(in srgb, var(--foreground) 9%, transparent);
+  box-shadow: 0 1px 0 rgb(22 22 26 / 0.05), 0 8px 18px -10px rgb(22 22 26 / 0.35);
 }
+.hero-cell--missed { border: 1.5px dashed color-mix(in srgb, var(--foreground) 28%, transparent); }
 .hero-cell--today {
-  background: color-mix(in srgb, var(--hero-wash, #fff) 96%, transparent);
-  border: 2px solid var(--accent);
+  --foreground: #16161a;
+  --muted-foreground: #5c5c68;
+  --hero-surface: #ffffff;
+  color: var(--foreground);
+  background: #ffffff;
+  border: 0;
+  box-shadow: 0 2px 0 rgb(22 22 26 / 0.06), 0 18px 34px -14px rgb(22 22 26 / 0.5);
 }
-/* A review block in the week strip: green by day, a lighter green on the night sky. */
-.hero-review { color: #047857; }
-html[data-daypart="night"] .hero-card .hero-review,
-html[data-daypart="late"] .hero-card .hero-review { color: #6ee7b7; }
+/* Today's pill on phones: the one dark (by night, light) pill in the row. */
+.hero-pill--today {
+  background: var(--foreground);
+  color: var(--hero-surface, #fff);
+  border-color: transparent;
+}
+/* The week line and its controls: a small solid chip on the scene. */
+.hero-chip {
+  background: var(--hero-surface, #fff);
+  box-shadow: 0 1px 0 rgb(22 22 26 / 0.05), 0 6px 14px -8px rgb(22 22 26 / 0.3);
+}
+/*
+ * A planned study time: a chip in its subject's deep colour (the family's
+ * `a`, white text at AA) with a flat darker lip, like the chunky buttons.
+ * Review blocks and times with no subject are neutral; a missed day's go grey.
+ */
+.week-chip {
+  --chip-lip: color-mix(in srgb, var(--chip, #16161a) 70%, #000);
+  border-radius: 10px;
+  background: var(--chip);
+  color: #ffffff;
+  box-shadow: 0 2px 0 0 var(--chip-lip);
+  transition: transform 0.15s var(--ease-out), box-shadow 0.15s var(--ease-out);
+}
+.week-chip--plain {
+  --chip-lip: color-mix(in srgb, var(--foreground) 16%, transparent);
+  background: color-mix(in srgb, var(--foreground) 7%, var(--hero-surface, #fff));
+  color: var(--foreground);
+}
+@media (hover: hover) {
+  .week-chip:hover { transform: translateY(-1px); box-shadow: 0 3px 0 0 var(--chip-lip); }
+}
+.week-chip:active { transform: translateY(2px); box-shadow: 0 0 0 0 var(--chip-lip); }
+.week-chip:focus-visible { outline: 2px solid var(--foreground); outline-offset: 2px; }
+/* The streak's tick on a day that counted. */
+.week-tick { background: var(--flame); color: var(--flame-ink); box-shadow: 0 1.5px 0 0 var(--flame-edge); }
+@media (prefers-reduced-motion: reduce) {
+  .week-chip, .week-chip:hover, .week-chip:active { transition: none; transform: none; }
+}
+/* Wide (the banner's container ≥ 42rem): each day is a card; on phones the li dissolves and the pill carries the look. */
+@container (min-width: 42rem) {
+  .hero-day {
+    background: var(--hero-surface, #fff);
+    border: 1px solid color-mix(in srgb, var(--foreground) 9%, transparent);
+    box-shadow: 0 1px 0 rgb(22 22 26 / 0.05), 0 8px 18px -10px rgb(22 22 26 / 0.35);
+  }
+  .hero-day--missed { border: 1.5px dashed color-mix(in srgb, var(--foreground) 28%, transparent); }
+  .hero-day--today {
+    --foreground: #16161a;
+    --muted-foreground: #5c5c68;
+    --hero-surface: #ffffff;
+    color: var(--foreground);
+    background: #ffffff;
+    border: 0;
+    box-shadow: 0 2px 0 rgb(22 22 26 / 0.06), 0 18px 34px -14px rgb(22 22 26 / 0.5);
+  }
+}
+.week-pill { transition: transform 0.15s var(--ease-out); }
+.week-pill:active { transform: scale(0.95); }
+@media (prefers-reduced-motion: reduce) { .week-pill, .week-pill:active { transition: none; transform: none; } }
