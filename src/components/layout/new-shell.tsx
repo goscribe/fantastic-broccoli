@@ -220,14 +220,14 @@ export function NewShell({ children }: { children: React.ReactNode }) {
         }}
         className="flex min-w-0 flex-1 flex-col overflow-y-auto [--app-top:64px] max-md:pb-[calc(4rem+env(safe-area-inset-bottom))]"
       >
-        {/* The top bar floats: the same tint and hairline as the shelf, its top edge
+        {/* The top bar: plain white, no border or island, its top edge
             level with the shelf's, 8px in from the shelf and the window. It stays put
             while the page scrolls under it; a soft shadow appears once scrolled. Only
             the 8px strip above it is page-coloured, so content never shows over its top. */}
         <div className="sticky top-0 z-30 shrink-0 bg-[linear-gradient(to_bottom,var(--page)_8px,transparent_8px)] px-2 pt-2">
         <header
           className={cn(
-            "flex h-14 items-center gap-2 rounded-[var(--r-card)] border border-border bg-white px-2 transition-shadow sm:gap-3 sm:px-6",
+            "flex h-14 items-center gap-2 bg-white px-2 transition-shadow sm:gap-3 sm:px-6",
             scrolled && "shadow-[0_10px_24px_-14px_rgba(22,22,26,0.3)]",
           )}
         >
