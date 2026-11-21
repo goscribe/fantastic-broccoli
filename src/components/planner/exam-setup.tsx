@@ -10,6 +10,7 @@ import { ArrowLeft, CalendarPlus, Check, Loader2, Plus, X } from "lucide-react";
 import { accentForId } from "@/lib/accent-palette";
 import {
   dayDiff,
+  fetchExamDefaults,
   fetchExamSuggestions,
   fetchExamTopics,
   saveExam,
@@ -66,11 +67,14 @@ export function ExamSetup({
   const editing = mode.kind === "edit" ? mode.exam : null;
 
   const [pickedWs, setPickedWs] = useState(editing?.workspaceId ?? "");
-  const [title, setTitle] = useState(editing?.title ?? "");
-  const [date, setDate] = useState(editing?.date ?? "");
+  // null until the student types: the name and date shown come from the subject's course and board.
+  const [titleTyped, setTitle] = useState<string | null>(editing?.title ?? null);
+  const [dateTyped, setDate] = useState<string | null>(editing?.date ?? null);
   const [kind, setKind] = useState<Kind>(editing?.kind ?? "exam");
   const [selected, setSelected] = useState<Set<string> | null>(null);
   const [confidence, setConfidence] = useState<Record<string, number>>(editing?.confidence ?? {});
+  // Self-rating is optional: the pre-lesson check measures each topic. Open only when asked (or already used).
+  const [rating, setRating] = useState(Object.keys(editing?.confidence ?? {}).length > 0);
   const [custom, setCustom] = useState<ExamTopic[]>([]);
   const [draft, setDraft] = useState("");
   // Snap to the chips (the plan's default daily goal is 25 min).
@@ -84,6 +88,11 @@ export function ExamSetup({
 
   // With one subject there's nothing to pick.
   const workspaceId = pickedWs || (subjects.data?.length === 1 ? subjects.data[0].id : "");
+  const defaultsQ = useQuery({ queryKey: [...PLAN_KEY, "exam-defaults", workspaceId], queryFn: () => fetchExamDefaults(workspaceId), enabled: !!workspaceId && !editing, retry: false });
+  const examWindow = defaultsQ.data?.next ?? null;
+  const title = titleTyped ?? defaultsQ.data?.title ?? "";
+  // The start of the board's exam season, when it is still ahead: a bound the student moves to their first paper.
+  const date = dateTyped ?? (examWindow && examWindow.from > today ? examWindow.from : "");
   const topicsQ = useQuery({ queryKey: [...PLAN_KEY, "topics", workspaceId], queryFn: () => fetchExamTopics(workspaceId), enabled: !!workspaceId });
 
   // Topics on the exam: an edited exam's list, else everything Scribe knows.
@@ -110,7 +119,7 @@ export function ExamSetup({
   const names = weekdayNames(locale);
 
   const canNext =
-    step === "exam" ? !!workspaceId && title.trim().length > 0 && !!date && daysLeft > 0 : step === "time" ? minutes.some((m) => m > 0) : true;
+    step === "exam" ? !!workspaceId && !!date && daysLeft > 0 : step === "time" ? minutes.some((m) => m > 0) : true;
 
   const toggle = (key: string) => {
     const next = new Set(sel);
@@ -135,7 +144,8 @@ export function ExamSetup({
         await saveExam({
           id: editing?.id,
           workspaceId,
-          title: title.trim(),
+          // Blank: the server names it after the course ("IB Biology HL"), else the subject.
+          title: title.trim() || undefined,
           date,
           kind,
           topics: wholeSubject ? [] : chosen.map((x) => x.label),
@@ -231,6 +241,10 @@ export function ExamSetup({
                           setPickedWs(w.id);
                           setSelected(null);
                           setCustom([]);
+                          if (!editing) {
+                            setTitle(null);
+                            setDate(null);
+                          }
                         }}
                         className={cn("flex h-12 items-center gap-2.5 rounded-xl border px-3 text-left text-[14px] font-semibold", workspaceId === w.id ? "border-accent bg-accent-soft/60" : "border-border hover:bg-muted")}
                       >
@@ -252,6 +266,11 @@ export function ExamSetup({
                   <input type="date" value={date} min={today} onChange={(e) => setDate(e.target.value)} className="h-11 w-full rounded-xl border border-border bg-card px-3 text-[14.5px] outline-none focus:border-accent" />
                 </label>
               </div>
+              {examWindow && dateTyped === null && date === examWindow.from && (
+                <p className="-mt-2 text-[12.5px] leading-snug text-muted-foreground">
+                  {fill(t("ep.setup.windowHint"), { exam: title || defaultsQ.data?.title || "", season: `${examWindow.label} ${examWindow.year}` })}
+                </p>
+              )}
               <div className="flex gap-1 rounded-xl bg-muted p-1">
                 {(["exam", "test", "coursework"] as const).map((k) => (
                   <button key={k} type="button" aria-pressed={kind === k} onClick={() => setKind(k)} className={cn("h-9 flex-1 rounded-lg text-[13px] font-semibold", kind === k ? "bg-card shadow-[0_1px_2px_rgba(0,0,0,0.06)]" : "text-muted-foreground")}>
@@ -269,7 +288,7 @@ export function ExamSetup({
 
           {step === "topics" && (
             <div className="mt-1.5 flex flex-col gap-3">
-              <p className="text-[13.5px] text-muted-foreground">{t("ep.setup.topicsSub")}</p>
+              <p className="text-[13.5px] text-muted-foreground">{t(rating ? "ep.setup.topicsSub" : "ep.setup.topicsSubAuto")}</p>
               {topicsQ.isLoading ? (
                 <div className="flex flex-col gap-2">{[0, 1, 2, 3].map((i) => <div key={i} className="h-14 animate-pulse rounded-xl bg-muted" />)}</div>
               ) : (
@@ -305,7 +324,7 @@ export function ExamSetup({
                               <span className="ml-7 self-start rounded-full bg-accent-soft px-2.5 py-1 text-[11.5px] font-semibold text-accent-dim sm:ml-0 sm:self-auto">
                                 {fill(t("ep.setup.measured"), { level: t(`ep.level.${x.level}`) })}
                               </span>
-                            ) : (
+                            ) : !rating ? null : (
                               <div className="flex gap-1 pl-7 sm:pl-0">
                                 {[0, 1, 2].map((c) => (
                                   <button
@@ -324,6 +343,11 @@ export function ExamSetup({
                       );
                     })}
                   </ul>
+                  {!rating && all.some((x) => x.mastery === null) && (
+                    <button type="button" onClick={() => setRating(true)} className="self-start text-[13px] font-semibold text-accent hover:underline">
+                      {t("ep.setup.rateToggle")}
+                    </button>
+                  )}
                   <form
                     className="flex gap-2"
                     onSubmit={(e) => {

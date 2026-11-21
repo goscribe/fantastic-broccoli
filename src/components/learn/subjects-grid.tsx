@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { HOME_TILES_ALL_UP_TO, HOME_TILES_SHOWN, repeatsTitle, titleHints } from "@/lib/subject-tiles";
 import { isSubjectFamily } from "@/lib/subject-family";
 import { tileSummary, type HomeSubject } from "@/lib/home-action";
+import { useCourseBadges } from "@/components/courses/use-course-badges";
 
 /**
  * Every subject as a tile in its own colour: progress over its sessions and
@@ -17,6 +18,7 @@ import { tileSummary, type HomeSubject } from "@/lib/home-action";
  */
 export function SubjectsGrid({ subjects, loading = false, onNew }: { subjects: HomeSubject[]; loading?: boolean; onNew: () => void }) {
   const [showAll, setShowAll] = useState(false);
+  const badges = useCourseBadges();
   const hints = useMemo(() => titleHints(subjects), [subjects]);
   const many = subjects.length > HOME_TILES_ALL_UP_TO;
   const tiles = many ? subjects.slice(0, HOME_TILES_SHOWN) : subjects;
@@ -37,7 +39,7 @@ export function SubjectsGrid({ subjects, loading = false, onNew }: { subjects: H
       <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3.5 xl:grid-cols-3">
         {loading && subjects.length === 0 && [0, 1, 2].map((i) => <Skeleton key={i} className="h-[156px] rounded-[var(--r-card)] sm:h-[176px]" />)}
         {tiles.map((s) => (
-          <SubjectTile key={s.id} href={`/workspace/${s.id}`} title={s.title} stored={stored(s)} seed={s.id} {...summary(s)} />
+          <SubjectTile key={s.id} href={`/workspace/${s.id}`} title={s.title} stored={stored(s)} seed={s.id} badge={badges.get(s.id)} {...summary(s)} />
         ))}
         {!many && !loading && (
           <button type="button" onClick={onNew} className="hidden h-[176px] flex-col items-center justify-center gap-2 rounded-[var(--r-card)] border-2 border-dashed border-border text-center hover:border-border-strong hover:bg-muted/40 sm:flex">
@@ -53,7 +55,7 @@ export function SubjectsGrid({ subjects, loading = false, onNew }: { subjects: H
           {showAll && (
             <div id="all-subjects" className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3 xl:grid-cols-3">
               {rest.map((s) => (
-                <SubjectTile key={s.id} row href={`/workspace/${s.id}`} title={s.title} stored={stored(s)} seed={s.id} sub={summary(s).sub} className="h-[76px]" />
+                <SubjectTile key={s.id} row href={`/workspace/${s.id}`} title={s.title} stored={stored(s)} seed={s.id} badge={badges.get(s.id)} sub={summary(s).sub} className="h-[76px]" />
               ))}
             </div>
           )}

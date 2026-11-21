@@ -21,6 +21,18 @@ export interface CourseSummary {
   levels?: string[];
   unitCount: number;
   topicCount: number;
+  /** When the board sits this course's exams (season only); not sent by an older server. */
+  examWindows?: ExamWindow[];
+}
+
+/** A board's exam season, months only (goscribe/server lib/courses/types.ts). */
+export interface ExamWindow {
+  season: "may" | "may_june" | "november";
+  startMonth: number;
+  endMonth: number;
+  label: string;
+  /** Only some schools sit this session (IB November). */
+  optional?: boolean;
 }
 
 export interface CatalogTopic {
