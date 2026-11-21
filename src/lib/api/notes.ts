@@ -196,6 +196,77 @@ export const notesApi = {
     rpc<{ topicId: string; label: NoteLabel }[]>("topicNote.listForCourse", "query", { courseId }),
 };
 
+/* ---- Notes attached to a subject as material (server: AttachedNotesService) ---- */
+
+/** `current`: in step with the note. `locked`: needs a plan the learner no longer has (not used as material). `withdrawn`: the note is being revised or was removed; the subject keeps its last text. */
+export type AttachedNoteState = "current" | "locked" | "withdrawn";
+
+export interface AttachedNote {
+  /** The material (file) id in the subject. */
+  fileId: string;
+  name: string;
+  courseId: string;
+  courseTitle: string;
+  topicId: string;
+  topicCode: string;
+  topicName: string;
+  version: number;
+  label: NoteLabel;
+  state: AttachedNoteState;
+  addedAt: string;
+}
+
+export type AttachSkipReason = "unknown_topic" | "no_note" | "locked" | "already_attached" | "limit";
+
+export interface AttachResult {
+  attached: { fileId: string; topicId: string; name: string }[];
+  skipped: { topicId: string; reason: AttachSkipReason }[];
+  count: number;
+  max: number;
+}
+
+export interface AttachOptionTopic {
+  id: string;
+  code: string;
+  name: string;
+  hlOnly?: boolean;
+  higherTierOnly?: boolean;
+  bcOnly?: boolean;
+  note: NoteLabel | null;
+  locked: boolean;
+  attached: boolean;
+}
+
+export interface AttachOptions {
+  course: { id: string; title: string; board: string; boardName: string; subject: string; unitLabel: string };
+  count: number;
+  max: number;
+  units: { id: string; code: string; name: string; topics: AttachOptionTopic[] }[];
+}
+
+export interface NoteSubjects {
+  attachable: boolean;
+  reason: "no_note" | "locked" | null;
+  attachedWorkspaceIds: string[];
+  courseWorkspaceId: string | null;
+}
+
+/**
+ * Newer than some deployed servers: every caller treats a failure as "this
+ * server has no attached notes" and hides the feature rather than erroring.
+ */
+export const attachedNotesApi = {
+  list: (workspaceId: string) => rpc<AttachedNote[]>("topicNote.attached", "query", { workspaceId }),
+  options: (workspaceId: string, courseId: string) => rpc<AttachOptions>("topicNote.attachOptions", "query", { workspaceId, courseId }),
+  attach: (workspaceId: string, courseId: string, topicIds: string[]) =>
+    rpc<AttachResult>("topicNote.attach", "mutation", { workspaceId, courseId, topicIds }),
+  detach: (workspaceId: string, fileIds: string[]) => rpc<{ removed: number }>("topicNote.detach", "mutation", { workspaceId, fileIds }),
+  subjectsFor: (courseId: string, topicId: string) => rpc<NoteSubjects>("topicNote.subjectsFor", "query", { courseId, topicId }),
+  /** A signed-in practice answer: the server marks it and feeds the Mistakes list. */
+  practiceAnswer: (input: { courseId: string; topicId: string; questionId: string; choice: number }) =>
+    rpc<{ correct: boolean; logged: boolean; workspaceId: string | null }>("topicNote.practiceAnswer", "mutation", input),
+};
+
 export const reviewApi = {
   me: () => rpc<{ admin: boolean; courseIds: string[] | null } | null>("topicNote.review.me", "query", undefined),
   courses: () => rpc<ReviewCourse[]>("topicNote.review.courses", "query", undefined),

@@ -23,6 +23,8 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
         "/restore-account",
         "/accept-invite",
         "/review",
+        // The signed-in notes library; the public note pages are /notes.
+        "/library",
       ],
     },
     sitemap: [`${siteUrl}/sitemap.xml`, ...notes.map((s) => `${siteUrl}/notes/sitemap/${s.id}.xml`)],

@@ -11,7 +11,7 @@ import { notesApi, type LearnerNote } from "@/lib/api/notes";
 import type { Course, CatalogTopic, CourseLevel } from "@/lib/api/courses";
 import { loadCourse } from "@/components/courses/course-picker";
 import { useStartCourseTopic } from "@/components/courses/use-start-topic";
-import { NoteBody } from "@/components/notes/note-body";
+import { PublicNoteBody } from "./public-note-body";
 import { NoteToc } from "@/components/notes/note-toc";
 import { noteLabelKey } from "@/lib/notes";
 import { unitTitle } from "@/lib/courses";
@@ -108,7 +108,7 @@ export function SignedInNoteReader({ courseId, topicId }: { courseId: string; to
               </div>
             )}
             <div className="mt-5 lg:mt-6">
-              <NoteBody note={shownNote!} />
+              <PublicNoteBody note={shownNote!} />
             </div>
             {locked && <ReaderUnlock courseId={courseId} topicId={topicId} summary={locked} headings={hidden.map((h) => h.heading)} />}
 

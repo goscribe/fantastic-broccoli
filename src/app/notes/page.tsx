@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/notes-public/breadcrumbs";
 import { NotesProgress } from "@/components/notes-public/notes-progress";
-import { SubjectArt } from "@/components/learn/subject-tile";
-import { familyFor, familyVars } from "@/lib/subject-family";
+import { CourseTile } from "@/components/notes-public/course-tile";
 import { BOARD_LABEL, BOARD_ORDER } from "@/lib/courses";
 import { getCourses } from "@/lib/notes-public/data";
 import { coursePath } from "@/lib/notes-public/slug";
 import { crumbsFor, INDEX_DESCRIPTION, INDEX_TITLE } from "@/lib/notes-public/seo";
-import { lockedCountLabel } from "@/lib/notes-public/gate";
-import { Lock } from "lucide-react";
 
 export const revalidate = 3600;
 
@@ -75,45 +70,7 @@ export default async function NotesIndexPage() {
           <ul className="mt-4 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
             {g.courses.map((c) => (
               <li key={c.id}>
-                {/* A course is a tile in its subject's colour with its illustration; progress and the action sit on it. */}
-                <Link
-                  href={coursePath(c.id)}
-                  data-nl-course={c.id}
-                  data-total={c.topicCount}
-                  className="subject-tile h-full min-h-[184px] p-[18px] sm:p-5"
-                  style={familyVars(familyFor(`${c.subject} ${c.title}`)) as React.CSSProperties}
-                >
-                  <SubjectArt family={familyFor(`${c.subject} ${c.title}`)} />
-                  <span className="subject-tile__text block">
-                    <span className="block text-[20px] font-extrabold leading-[1.15]">{c.title}</span>
-                    <span className="subject-tile__sub mt-1 block text-[13.5px] font-semibold leading-snug">
-                      {c.topicCount} topics
-                      {c.levels?.length ? ` · ${c.levels.join(" & ")}` : ""}
-                    </span>
-                    <span className="subject-tile__sub block text-[13.5px] font-semibold leading-snug">
-                      {[c.noteCount > 0 ? `${c.noteCount} notes` : null, c.questionCount > 0 ? `${c.questionCount.toLocaleString("en-GB")} questions` : null].filter(Boolean).join(" · ") || "Topic outlines"}
-                    </span>
-                    {!!c.lockedCount && (
-                      <span className="subject-tile__sub mt-0.5 flex items-center gap-1 text-[13px] font-semibold leading-snug">
-                        <Lock className="size-3 shrink-0" strokeWidth={2.5} aria-hidden="true" />
-                        {lockedCountLabel(c.lockedCount, c.lockedKind)}
-                      </span>
-                    )}
-                  </span>
-                  <span className="mt-4 block">
-                    {/* A course with nothing to read or answer yet has no progress to show: the meter keeps its space so the tiles in a row still line up. */}
-                    <span className={c.noteCount + c.questionCount > 0 ? "nl-meter block w-[52%]" : "nl-meter invisible block w-[52%]"} aria-hidden="true">
-                      <span />
-                    </span>
-                    <span data-nl-count={c.noteCount + c.questionCount > 0 ? "" : undefined} className="subject-tile__sub mt-1.5 block max-w-[58%] text-[12.5px] font-bold">
-                      {c.noteCount + c.questionCount > 0 ? "Not started yet" : "Notes coming soon"}
-                    </span>
-                    <span className="subject-pill mt-3">
-                      Open
-                      <ChevronRight className="size-4" strokeWidth={2.6} aria-hidden="true" />
-                    </span>
-                  </span>
-                </Link>
+                <CourseTile course={c} href={coursePath(c.id)} />
               </li>
             ))}
           </ul>
