@@ -6,7 +6,7 @@ import { PageHeader, pageShellClass } from "@/components/ui/page-header";
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
-import { DeckLearnView } from "@/components/flashcards/deck-learn-view";
+import { DueReviewRound } from "@/components/flashcards/due-review-round";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
 
@@ -21,21 +21,8 @@ export default function DueReviewPage() {
     staleTime: Infinity,
   });
 
-  const entries = useMemo(
-    () =>
-      (data?.cards ?? []).map((c) => ({
-        front: c.front,
-        back: c.back,
-        flashcardId: c.flashcardId,
-      })),
-    [data],
-  );
-  const progress = useMemo(
-    () =>
-      (data?.cards ?? []).map((c) => ({
-        flashcardId: c.flashcardId,
-        progress: c.progress,
-      })),
+  const cards = useMemo(
+    () => (data?.cards ?? []).map((c) => ({ front: c.front, back: c.back, flashcardId: c.flashcardId })),
     [data],
   );
 
@@ -57,7 +44,7 @@ export default function DueReviewPage() {
               : t("fc.reviewPastDue")}</>}
         />
 
-        {isLoading && <Skeleton className="h-[380px] w-full rounded-3xl" />}
+        {isLoading && <Skeleton className="h-[260px] w-full rounded-[28px]" />}
 
         {data && data.cards.length === 0 && (
           <div className="px-6 py-10 text-center">
@@ -75,14 +62,7 @@ export default function DueReviewPage() {
           </div>
         )}
 
-        {data && data.cards.length > 0 && (
-          <DeckLearnView
-            entries={entries}
-            frontLabel="Front"
-            backLabel="Back"
-            progress={progress}
-          />
-        )}
+        {data && data.cards.length > 0 && <DueReviewRound cards={cards} />}
       </div>
     </main>
   );
