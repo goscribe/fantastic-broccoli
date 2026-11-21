@@ -20,7 +20,19 @@ export type FunnelEvent =
   | "quick5.started"
   | "quick5.finished"
   /** Home's one "Today" button was tapped; `action` says which one it was. */
-  | "home.today_tapped";
+  | "home.today_tapped"
+  /** A note opened in the in-app reader; notes attached to / removed from a subject; a session started from an attached note. */
+  | "notes.opened_in_app"
+  | "notes.attached"
+  | "notes.detached"
+  | "notes.attached_session_started"
+  /** First run: Scribe's notes for the picked course offered, taken, or passed over. */
+  | "first_run.notes_offered"
+  | "first_run.notes_accepted"
+  | "first_run.notes_skipped";
+
+/** Where a notes event happened. */
+export type NoteEventSource = "library" | "course" | "subject" | "note" | "public" | "first_run";
 
 export type TodayActionKind = "mistakes" | "plan" | "quick5" | "upload" | "continue";
 
@@ -34,6 +46,10 @@ export interface FunnelProps {
   sizeKb?: number;
   correct?: number;
   total?: number;
+  from?: NoteEventSource;
+  noteCount?: number;
+  /** A catalog course id (the server accepts only known ids). */
+  courseId?: string;
 }
 
 const FIRST_SCREEN_KEY = "scribe.firstRun.shownAt";

@@ -3,9 +3,22 @@ import type { CheckedClaim, LintIssue, NoteLabel, TopicNoteContent } from "@/lib
 /** Learner-facing label key: only reviewed/published notes say "reviewed". */
 export const noteLabelKey = (label: NoteLabel) => (label === "reviewed" ? "notes.labelReviewed" : "notes.labelDraft");
 
-/** Reader URL for a topic note. */
-export const noteHref = (courseId: string, topicId: string) =>
-  `/notes/${encodeURIComponent(courseId)}/${encodeURIComponent(topicId)}`;
+/** The in-app notes library (inside the app shell). The public, indexable pages stay at /notes. */
+export const LIBRARY_PATH = "/library";
+export const libraryCourseHref = (courseId: string) => `${LIBRARY_PATH}/${encodeURIComponent(courseId)}`;
+
+/** Reader URL for a topic note: the reader inside the app (a topic id or its public slug both resolve). */
+export const noteHref = (courseId: string, topicId: string) => `${libraryCourseHref(courseId)}/${encodeURIComponent(topicId)}`;
+
+/**
+ * The in-app page for a public notes URL (/notes, /notes/<course>,
+ * /notes/<course>/<topic-or-unit>), or null for anything else (sitemaps, images).
+ */
+export function libraryPathFor(pathname: string): string | null {
+  const m = /^\/notes(?:\/([^/.]+)(?:\/([^/.]+))?)?\/?$/.exec(pathname);
+  if (!m) return null;
+  return [LIBRARY_PATH, m[1], m[2]].filter(Boolean).join("/");
+}
 
 /**
  * Block-level key for a location label from the fact-check or lint

@@ -33,6 +33,8 @@ export interface Mistake {
   rightAnswer: string | null;
   explanation: string | null;
   detail: {
+    /** Made on a Scribe practice question: the topic's note. */
+    note?: { courseId: string; topicId: string };
     figures?: ReadingFigure[];
     textWithBlanks?: string;
     answers?: string[];

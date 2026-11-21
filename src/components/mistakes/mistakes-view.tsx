@@ -1,5 +1,6 @@
 "use client";
 
+import { noteHref } from "@/lib/notes";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -106,7 +107,15 @@ function MistakeCard({ m, showSubject }: { m: Mistake; showSubject: boolean }) {
     <li className="life-card p-4 sm:p-5">
       <div className="flex items-center justify-between gap-3">
         <p className="min-w-0 truncate text-[12.5px] font-medium text-muted-foreground">
-          {t(KIND_KEY[m.kind] ?? "mistakes.kindMcq")} · {m.label}
+          {t(KIND_KEY[m.kind] ?? "mistakes.kindMcq")} ·{" "}
+          {m.detail.note ? (
+            // From a note's practice questions: straight back to the part that was missed.
+            <Link href={noteHref(m.detail.note.courseId, m.detail.note.topicId)} className="font-semibold text-foreground underline decoration-border-strong underline-offset-2 hover:text-accent">
+              {m.label}
+            </Link>
+          ) : (
+            m.label
+          )}
           {showSubject && m.workspaceTitle !== m.label ? ` · ${m.workspaceTitle}` : ""}
         </p>
         <span className={cn("shrink-0 text-[12.5px] font-bold", STATE_BADGE[m.state])}>
