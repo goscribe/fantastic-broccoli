@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Check, Lock, Trophy, Zap } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   fetchPlanCaps,
@@ -15,6 +15,7 @@ import {
   type PlanOption,
 } from "@/lib/api/account";
 import { hasPlanAccess } from "@/lib/plan-access";
+import { planBilling, planCta, planDescription, planDisplayName, planPriceLabel, planTermsLine, planTrialDays } from "@/lib/plan-display";
 import { useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
@@ -160,6 +161,8 @@ export function SubscribeWall() {
   const freeCaps = caps?.caps;
   const trialDays = caps?.trialDays ?? 0;
   const postSession = open === "post-session";
+  const hasTrialPlan = plans.some((p) => planTrialDays(p, trialDays) > 0);
+  const hasOneOffPlan = plans.some((p) => planBilling(p) === "once");
   const rawDetail = reason?.startsWith(PLAN_LIMIT_ERROR_PREFIX)
     ? reason.slice(PLAN_LIMIT_ERROR_PREFIX.length).replace(/^[:\s]+/, "")
     : reason;
@@ -174,32 +177,22 @@ export function SubscribeWall() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="subscribe-wall-title"
-      className="fixed inset-0 z-[200] flex items-center justify-center overflow-y-auto bg-background/95 px-4 py-8 backdrop-blur-md"
+      className="fixed inset-0 z-[200] flex overflow-y-auto bg-background/95 px-4 py-8 backdrop-blur-md"
     >
-      <div className="w-full max-w-4xl">
+      <div className="m-auto w-full max-w-4xl">
         <div className="text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent">
-            {postSession ? (
-              <>
-                <Trophy className="h-3.5 w-3.5" />
-                First session done, {user.name.split(" ")[0] || "nice"}
-              </>
-            ) : (
-              <>
-                <Lock className="h-3.5 w-3.5" />
-                You&apos;ve used up the free plan
-              </>
-            )}
-          </span>
+          <p className="text-[14px] font-extrabold text-accent">
+            {postSession ? <>First session done, {user.name.split(" ")[0] || "nice"}</> : <>You&apos;ve used up the free plan</>}
+          </p>
           <h1
             id="subscribe-wall-title"
-            className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
+            className="mt-2 text-[28px] font-extrabold leading-tight tracking-tight sm:text-[36px]"
           >
             {postSession
               ? "Nice work. Want to keep this pace every day?"
               : "Keep going — from $5 a month"}
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
+          <p className="mx-auto mt-3 max-w-xl text-[15px] text-muted-foreground sm:text-[16px]">
             {postSession ? (
               <>
                 The free plan is{" "}
@@ -216,7 +209,7 @@ export function SubscribeWall() {
               <>
                 {limitDetail ?? "That's as far as the free plan goes."}{" "}
                 Pick a plan to keep studying right now
-                {trialDays > 0 ? ` — the first ${trialDays} days are free.` : "."}
+                {!hasTrialPlan ? "." : hasOneOffPlan ? `. Subscriptions start with ${trialDays} days free.` : ` — the first ${trialDays} days are free.`}
               </>
             )}
           </p>
@@ -230,79 +223,66 @@ export function SubscribeWall() {
         >
           {plans.map((plan) => {
             const isFeatured = plan.id === featured?.id;
+            // Only a subscription has a trial; the pay-once pass is charged today and never renews.
+            const planTrial = planTrialDays(plan, trialDays);
+            const price = planPriceLabel(plan);
+            const description = planDescription(plan);
             return (
               <div
                 key={plan.id}
-                className={cn(
-                  "relative flex flex-col rounded-3xl border p-6",
-                  isFeatured
-                    ? "border-accent bg-card shadow-xl shadow-accent/20 ring-2 ring-accent"
-                    : "border-border bg-card/80",
-                )}
+                className={cn("life-card relative flex flex-col p-6", isFeatured && "border-accent ring-1 ring-accent")}
               >
-                {isFeatured && (
-                  <span className="absolute -top-3 left-6 inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-accent-foreground">
-                    <Zap className="h-3 w-3" />
-                    Student price
-                  </span>
-                )}
-                <p className="text-lg font-semibold capitalize">{plan.name}</p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {plan.description}
+                <div className="flex items-baseline justify-between gap-3">
+                  <p className="text-[18px] font-extrabold">{planDisplayName(plan.name)}</p>
+                  {isFeatured && <span className="shrink-0 text-[13px] font-extrabold text-accent">Student price</span>}
+                </div>
+                {description && <p className="mt-1 text-[14px] text-muted-foreground">{description}</p>}
+                <p className="mt-4 text-[36px] font-extrabold leading-none tracking-tight tabular-nums">
+                  {planTrial > 0 ? "$0" : price.amount}
+                  <span className="text-[14px] font-semibold tracking-normal text-muted-foreground">{planTrial > 0 ? " today" : price.suffix}</span>
                 </p>
-                <p className="mt-4 text-4xl font-bold tracking-tight">
-                  {trialDays > 0 ? "$0" : `$${plan.priceDollars}`}
-                  <span className="text-sm font-normal text-faint">
-                    {trialDays > 0 ? " today" : " / month"}
-                  </span>
-                </p>
-                {trialDays > 0 && (
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    then ${plan.priceDollars}/month after {trialDays} days —
-                    cancel anytime before, pay nothing
-                  </p>
-                )}
-                <ul className="mt-5 space-y-2.5 text-sm">
+                <p className="mt-2 min-h-[2.6em] text-[13px] leading-snug text-muted-foreground">{planTermsLine(plan, trialDays, { afterZeroToday: true })}</p>
+                <ul className="mt-4 space-y-2.5 text-[14px]">
                   <li className="flex items-start gap-2">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" strokeWidth={2.6} />
                     {plan.monthlyTokens.toLocaleString()} tokens every month
                   </li>
                   {PAID_PERKS.map((perk) => (
                     <li key={perk} className="flex items-start gap-2">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" strokeWidth={2.6} />
                       {perk}
                     </li>
                   ))}
                 </ul>
                 <Button
                   size="lg"
-                  variant={isFeatured ? "primary" : "outline"}
+                  variant={isFeatured ? "primary" : "secondary"}
                   className="mt-6 w-full"
                   disabled={switching !== null}
                   onClick={() => choose(plan.id)}
                 >
-                  {switching === plan.id
-                    ? "Opening checkout…"
-                    : trialDays > 0
-                      ? `Start ${trialDays}-day free trial`
-                      : `Get ${plan.name.charAt(0).toUpperCase()}${plan.name.slice(1)}`}
+                  {switching === plan.id ? "Opening checkout…" : planCta(plan, trialDays)}
                 </Button>
               </div>
             );
           })}
         </div>
 
-        <p className="mt-4 text-center text-xs text-faint">
-          {trialDays > 0
-            ? `Card required · $0 today · billing starts after ${trialDays} days unless you cancel · secure hosted checkout`
-            : "Secure hosted checkout · cancel anytime"}
+        <p className="mt-4 text-center text-[13px] text-muted-foreground">
+          {[
+            hasTrialPlan ? `Free trial: card required, $0 today, billing starts after ${trialDays} days unless you cancel` : null,
+            hasOneOffPlan ? "A pass is one payment today, with no renewal" : null,
+            hasTrialPlan ? "Secure hosted checkout" : "Secure hosted checkout, cancel anytime",
+          ]
+            .filter(Boolean)
+            .join(" · ")}
         </p>
 
-        <div className="mt-8 flex justify-center">
+        <div className="mt-4 flex justify-center">
           <button
             type="button"
             onClick={dismiss}
-            className="text-xs text-faint underline-offset-2 hover:text-muted-foreground hover:underline"
+            className="min-h-11 px-3 text-[14px] font-bold text-muted-foreground hover:text-foreground"
           >
             {postSession ? "Not now, keep studying free" : "Not now"}
           </button>

@@ -19,6 +19,8 @@ import {
 import { useAuthUser } from "@/lib/api/auth";
 import { toastError } from "@/lib/toast";
 import { BILLING_PAUSED, BILLING_PAUSED_MESSAGE } from "@/lib/billing-paused";
+import { planCta, planDescription, planDisplayName, planPriceLabel, planTermsLine } from "@/lib/plan-display";
+import { cn } from "@/lib/utils";
 
 function PlanCard({
   plan,
@@ -29,94 +31,50 @@ function PlanCard({
   plan: PlanOption;
   onSelect: (id: string) => void;
   switching: boolean;
-  /** Free-trial length offered on this paid plan; 0 when unavailable. */
+  /** Free-trial length the account can still use; 0 when unavailable. Only subscriptions have a trial. */
   trialDays: number;
 }) {
   const router = useRouter();
   const isCurrent = plan.isActive;
-  const trial = !isCurrent && plan.priceDollars > 0 && trialDays > 0;
+  const paid = plan.priceDollars > 0;
+  const price = planPriceLabel(plan);
+  const description = planDescription(plan);
+  const terms = isCurrent ? null : planTermsLine(plan, trialDays);
+  const perks = paid
+    ? ["Unlimited subjects, study sessions and tests", "Our strongest AI model on every activity", `${plan.monthlyTokens.toLocaleString()} tokens a month, enough for daily study sessions`, `${formatBytes(plan.storageLimitBytes)} storage`]
+    : ["2 subjects, 3 full study sessions and 2 tests", "A free Quick 5 every day", `${plan.monthlyTokens.toLocaleString()} tokens a month`, `${formatBytes(plan.storageLimitBytes)} storage`];
   return (
-    <div
-      className={`flex flex-col rounded-2xl border p-5 ${
-        isCurrent ? "border-accent bg-accent-soft/40" : "border-border bg-card"
-      }`}
-    >
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold">{plan.name}</p>
-        {isCurrent && (
-          <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold text-white">
-            Current
-          </span>
-        )}
+    <div className={cn("life-card flex flex-col p-5 sm:p-6", isCurrent && "border-border-strong")}>
+      <div className="flex items-baseline justify-between gap-3">
+        <h2 className="text-[18px] font-extrabold leading-tight">{planDisplayName(plan.name)}</h2>
+        {isCurrent && <span className="shrink-0 text-[13px] font-bold text-accent">Current plan</span>}
       </div>
-      <p className="mt-1 text-[13px] text-muted-foreground">
-        {plan.description}
+      {description && <p className="mt-1 text-[14px] text-muted-foreground">{description}</p>}
+      <p className="mt-4 text-[30px] font-extrabold leading-none tracking-tight tabular-nums">
+        {price.amount}
+        {price.suffix && <span className="text-[14px] font-semibold tracking-normal text-muted-foreground">{price.suffix}</span>}
       </p>
-      <p className="mt-4 text-2xl font-bold tracking-tight">
-        {plan.priceDollars === 0 ? "Free" : `$${plan.priceDollars}`}
-        {plan.priceDollars > 0 && (
-          <span className="text-sm font-normal text-faint"> / month</span>
-        )}
-      </p>
-      {trial && (
-        <p className="mt-1 text-[12px] text-muted-foreground">
-          {trialDays}-day free trial · $0 today · card required · billed $
-          {plan.priceDollars}/month after {trialDays} days unless you cancel
-        </p>
-      )}
-      <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-        <li className="flex items-center gap-2">
-          <Check className="h-4 w-4 text-accent" />
-          {formatBytes(plan.storageLimitBytes)} storage
-        </li>
-        <li className="flex items-center gap-2">
-          <Check className="h-4 w-4 text-accent" />
-          {plan.monthlyTokens} tokens / month
-        </li>
-        {plan.priceDollars === 0 && (
-          <li className="flex items-center gap-2">
-            <Check className="h-4 w-4 text-accent" />2 subjects · 3 full study
-            sessions · 2 tests · a free Quick 5 every day
+      <p className="mt-2 min-h-[2.6em] text-[13px] leading-snug text-muted-foreground">{terms}</p>
+      <ul className="mt-3 space-y-2 text-[14px]">
+        {perks.map((perk) => (
+          <li key={perk} className="flex items-start gap-2">
+            <Check className="mt-0.5 size-4 shrink-0 text-accent" strokeWidth={2.6} />
+            {perk}
           </li>
-        )}
-        {plan.priceDollars > 0 && (
-          <>
-            <li className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-accent" />
-              Unlimited subjects, study sessions and tests
-            </li>
-            <li className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-accent" />
-              Smarter AI model routing — strongest model on every activity
-            </li>
-            <li className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-accent" />
-              Enough tokens for daily study sessions
-            </li>
-          </>
-        )}
+        ))}
       </ul>
-      <div className="mt-5">
-        {!isCurrent && plan.priceDollars === 0 ? (
-          <Button
-            className="w-full"
-            variant="outline"
-            onClick={() => router.push("/settings#plan")}
-          >
+      <div className="mt-auto pt-5">
+        {isCurrent ? (
+          <Button className="w-full" variant="secondary" disabled>
+            Your plan
+          </Button>
+        ) : !paid ? (
+          <Button className="w-full" variant="secondary" onClick={() => router.push("/settings#plan")}>
             Downgrade to Free
           </Button>
         ) : (
-          <Button
-            className="w-full"
-            variant={isCurrent ? "outline" : "primary"}
-            disabled={isCurrent || switching}
-            onClick={() => onSelect(plan.id)}
-          >
-            {isCurrent
-              ? "Your plan"
-              : trial
-                ? `Start ${trialDays}-day free trial`
-                : `Switch to ${plan.name}`}
+          <Button className="w-full" disabled={switching} onClick={() => onSelect(plan.id)}>
+            {planCta(plan, trialDays)}
           </Button>
         )}
       </div>
@@ -169,97 +127,70 @@ export default function PricingPage() {
 
   return (
     <main className={pageShellClass}>
-      <div>
-          <div>
-            <PageHeader back={{ href: "/settings", label: "Settings" }} title={<>Choose your plan</>} subtitle={<>Your storage and monthly token allowance are shown below.{" "}
-            {trialDays > 0
-              ? `Paid plans start with a ${trialDays}-day free trial: add a card, pay $0 today, and billing begins after ${trialDays} days unless you cancel. Checkout is handled by our payment provider; Scribe never sees your card.`
-              : "Upgrade anytime — checkout is handled by our payment provider; Scribe never sees your card."}</>} className="mb-2" />
-          {BILLING_PAUSED && (
-            <p className="mt-3 max-w-2xl rounded-xl border border-accent/30 bg-accent-soft px-4 py-3 text-sm text-foreground">
-              <span className="font-semibold">Billing is paused.</span> Our payment
-              provider has suspended card payments while they review our account, so
-              checkout is unavailable and nobody is being charged. Every account has Pro
-              for free this month; we will email when billing is back.
-            </p>
-          )}
-          {trialEndsAt && !BILLING_PAUSED && (
-            <p className="mt-2 inline-flex rounded-full bg-accent-soft px-3 py-1 text-[12px] font-medium text-accent">
-              Free trial — your first charge is on{" "}
-              {trialEndsAt.toLocaleDateString(undefined, {
-                month: "short",
-                day: "numeric",
-              })}
-              . Cancel before then in Settings to pay nothing.
-            </p>
-          )}
-        </div>
-      </div>
+      <PageHeader
+        back={{ href: "/settings", label: "Settings" }}
+        title="Choose your plan"
+        subtitle={
+          trialDays > 0
+            ? `Subscriptions start with a ${trialDays}-day free trial: add a card, pay $0 today, and billing begins after ${trialDays} days unless you cancel. Checkout is handled by our payment provider; Scribe never sees your card.`
+            : "Upgrade anytime. Checkout is handled by our payment provider; Scribe never sees your card."
+        }
+        className="mb-2"
+      />
+      {BILLING_PAUSED && (
+        <p className="mt-3 max-w-2xl rounded-[var(--r-control)] border border-border px-4 py-3 text-[14px] text-foreground" role="status">
+          <span className="font-bold">Billing is paused.</span> Our payment provider has suspended card payments while they review our account, so
+          checkout is unavailable and nobody is being charged. Every account has Pro for free this month; we will email when billing is back.
+        </p>
+      )}
+      {trialEndsAt && !BILLING_PAUSED && (
+        <p className="mt-2 text-[14px] font-semibold text-foreground" role="status">
+          Free trial: your first charge is on {trialEndsAt.toLocaleDateString(undefined, { month: "short", day: "numeric" })}. Cancel before then in
+          Settings to pay nothing.
+        </p>
+      )}
 
-      <section className="mt-8 rounded-2xl border border-border bg-card p-5">
-        <p className="text-sm font-semibold">Current usage</p>
+      {/* What you have used: one flat row, no boxes inside a box. */}
+      <section className="mt-6 border-y border-border py-4" aria-label="Current usage">
         {loading ? (
-          <div className="mt-4 space-y-3">
-            <Skeleton className="h-4 w-48" />
-            <Skeleton className="h-1.5 w-full rounded-full" />
-            <Skeleton className="h-4 w-40" />
+          <div className="flex gap-10">
+            <Skeleton className="h-10 w-40" />
+            <Skeleton className="h-10 w-40" />
           </div>
         ) : summary ? (
-          <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border border-border bg-background p-4">
-              <p className="text-[12px] text-faint">Storage</p>
-              <p className="mt-1 text-lg font-semibold">
-                {formatBytes(summary.storageUsedBytes)}
-              </p>
-              <p className="text-[12px] text-muted-foreground">
-                of {formatBytes(summary.storageLimitBytes)}
-              </p>
+          <dl className="flex flex-wrap gap-x-12 gap-y-3">
+            <div>
+              <dt className="text-[13px] font-semibold text-muted-foreground">Storage used</dt>
+              <dd className="mt-0.5 text-[16px] font-extrabold tabular-nums">
+                {formatBytes(summary.storageUsedBytes)} <span className="text-[13px] font-semibold text-muted-foreground">of {formatBytes(summary.storageLimitBytes)}</span>
+              </dd>
             </div>
-            <div className="rounded-xl border border-border bg-background p-4">
-              <p className="text-[12px] text-faint">Tokens</p>
-              <p className="mt-1 text-lg font-semibold">
-                {summary.tokenBalance}
-              </p>
-              <p className="text-[12px] text-muted-foreground">
-                of {summary.monthlyTokens} / month
-              </p>
+            <div>
+              <dt className="text-[13px] font-semibold text-muted-foreground">Tokens left</dt>
+              <dd className="mt-0.5 text-[16px] font-extrabold tabular-nums">
+                {summary.tokenBalance.toLocaleString()} <span className="text-[13px] font-semibold text-muted-foreground">of {summary.monthlyTokens.toLocaleString()} this month</span>
+              </dd>
             </div>
-          </div>
+          </dl>
         ) : null}
-        {!loading &&
-          summary &&
-          summary.monthlyTokens > 0 &&
-          summary.tokenBalance <= summary.monthlyTokens * 0.3 && (
-            <p className="mt-4 rounded-xl bg-accent-soft/50 px-4 py-3 text-[13px] text-muted-foreground">
-              You&apos;re running low on tokens. Paid plans come with a much
-              bigger monthly allowance and smarter AI model routing — every
-              session is generated with our strongest model.
-            </p>
-          )}
+        {!loading && summary && summary.monthlyTokens > 0 && summary.tokenBalance <= summary.monthlyTokens * 0.3 && (
+          <p className="mt-3 text-[13.5px] text-muted-foreground">
+            You&apos;re running low on tokens. Paid plans come with a much bigger monthly allowance, and every session is generated with our
+            strongest model.
+          </p>
+        )}
       </section>
 
-      <section className="mx-auto mt-8 grid max-w-xl gap-4 sm:grid-cols-1">
+      <section className={cn("mt-6 grid gap-4", plans.length >= 3 ? "md:grid-cols-3" : plans.length === 2 ? "sm:grid-cols-2" : "max-w-md")}>
         {loading
-          ? Array.from({ length: 1 }, (_, i) => (
-              <div
-                key={i}
-                className="rounded-2xl border border-border bg-card p-5 space-y-3"
-              >
-                <Skeleton className="h-4 w-20" />
-                <Skeleton className="h-4 w-full" />
+          ? Array.from({ length: 2 }, (_, i) => (
+              <div key={i} className="life-card space-y-3 p-5">
+                <Skeleton className="h-5 w-24" />
                 <Skeleton className="h-8 w-28" />
                 <Skeleton className="h-28 w-full rounded-xl" />
               </div>
             ))
-          : plans.map((plan) => (
-              <PlanCard
-                key={plan.id}
-                plan={plan}
-                onSelect={handleSwitch}
-                switching={switching}
-                trialDays={trialDays}
-              />
-            ))}
+          : plans.map((plan) => <PlanCard key={plan.id} plan={plan} onSelect={handleSwitch} switching={switching} trialDays={trialDays} />)}
       </section>
     </main>
   );
