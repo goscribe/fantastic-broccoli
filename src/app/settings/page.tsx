@@ -299,7 +299,7 @@ export default function SettingsPage() {
       <PageHeader title={<>{t("settings.title")}</>} subtitle={<>{t("set.subtitle")}</>} />
       <div className="flex flex-col gap-8 lg:flex-row">
       <nav className="hidden w-[200px] shrink-0 lg:block">
-        <ul className="sticky top-6 space-y-1 text-[13.5px] font-semibold">
+        <ul className="sticky top-[calc(var(--app-top,0px)+1.5rem)] space-y-1 text-[13.5px] font-semibold">
           {SETTINGS_SECTIONS.map(([id, label]) => (
             <li key={id}>
               <a href={`#${id}`} className="block rounded-xl px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground">

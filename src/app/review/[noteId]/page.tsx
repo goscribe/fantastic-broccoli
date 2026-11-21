@@ -77,7 +77,7 @@ export default function ReviewNotePage() {
         <span className="text-faint">{note.content.topicCode}</span> {note.content.topicName}
       </h1>
 
-      <div className="sticky top-0 z-20 -mx-4 mt-3 flex flex-wrap items-center gap-2 border-b border-border bg-background/95 px-4 py-2 backdrop-blur">
+      <div className="sticky top-[var(--app-top,0px)] z-20 -mx-4 mt-3 flex flex-wrap items-center gap-2 border-b border-border bg-background/95 px-4 py-2 backdrop-blur">
         {!note.assignedToMe ? (
           <Btn onClick={() => act("claim", () => reviewApi.claim(note.id))} busy={busy === "claim"}>
             {note.assigned ? "Take over" : "Claim for review"}
@@ -157,7 +157,7 @@ export default function ReviewNotePage() {
           />
         </div>
 
-        <aside className="lg:sticky lg:top-16 lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto">
+        <aside className="lg:sticky lg:top-[calc(var(--app-top,0px)+4rem)] lg:max-h-[calc(100vh-5rem-var(--app-top,0px))] lg:overflow-y-auto">
           <div className="flex gap-1 rounded-xl bg-muted p-1 text-[13px] font-semibold">
             {(["checks", "claims", "history"] as Tab[]).map((k) => (
               <button
