@@ -243,3 +243,27 @@ html.new-ui .skeleton {
   --wash: linear-gradient(180deg, var(--hero-wash) 0%, var(--hero-wash) 30%, color-mix(in srgb, var(--hero-wash) 70%, transparent) 44%, transparent 62%);
   background-position: 72% 100%;
 }
+
+/*
+ * Toasts (sonner): a white card with a hairline in the app's tokens, whatever
+ * the message type. Unlayered and doubled up so they beat sonner's own
+ * injected styles, which load later.
+ */
+[data-sonner-toaster][data-sonner-theme] .scribe-toast {
+  --normal-bg: var(--card, #fff);
+  --normal-border: var(--border, #e8e8ec);
+  --normal-text: var(--foreground, #16161a);
+  background: var(--card, #fff);
+  color: var(--foreground, #16161a);
+  border: 1px solid var(--border, #e8e8ec);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px -12px rgb(22 22 26 / 0.25);
+  font-family: var(--font-sans, inherit);
+  font-size: 14px;
+  padding: 14px 16px;
+}
+[data-sonner-toaster] .scribe-toast .scribe-toast__title { font-weight: 700; line-height: 1.35; }
+[data-sonner-toaster] .scribe-toast .scribe-toast__description { color: var(--muted-foreground, #5c5c68); }
+[data-sonner-toaster] .scribe-toast[data-type="error"] [data-icon] { color: #e11d48; }
+[data-sonner-toaster] .scribe-toast[data-type="success"] [data-icon] { color: #059669; }
+[data-sonner-toaster] .scribe-toast [data-close-button] { background: var(--card, #fff); border-color: var(--border, #e8e8ec); color: var(--muted-foreground, #5c5c68); }
