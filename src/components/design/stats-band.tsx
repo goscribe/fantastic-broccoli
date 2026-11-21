@@ -14,7 +14,8 @@ const FALLBACK: PublicStats = { artifacts: 1717, activities: 796, countries: 27 
 
 const roundedDown = (n: number, step: number) => Math.floor(n / step) * step;
 
-export function StatsBand({ background }: { background: string }) {
+/** Live counts from the server, as plain numbers on the page: no band, no tiles. */
+export function StatsBand() {
   const [stats, setStats] = useState<PublicStats>(FALLBACK);
 
   useEffect(() => {
@@ -26,22 +27,22 @@ export function StatsBand({ background }: { background: string }) {
   }, []);
 
   const items: [string, string][] = [
-    [`${roundedDown(stats.artifacts, 100).toLocaleString()}+`, "quizzes, worksheets and decks built from students’ notes"],
-    [`${roundedDown(stats.activities, 10).toLocaleString()}+`, "study activities completed"],
+    [`${roundedDown(stats.artifacts, 100).toLocaleString("en-US")}+`, "quizzes, worksheets and decks built from students’ notes"],
+    [`${roundedDown(stats.activities, 10).toLocaleString("en-US")}+`, "study activities completed"],
     [`${stats.countries}`, "countries studying with Scribe"],
     ["5 min", "from upload to your first question"],
   ];
 
   return (
-    <section className="w-full text-white" style={{ background }}>
-      <div className="mx-auto grid w-full max-w-[1120px] gap-y-10 px-6 py-16 md:grid-cols-4">
+    <section className="mx-auto mt-14 w-full max-w-[1160px] px-4 sm:mt-20 sm:px-6">
+      <dl className="grid grid-cols-2 gap-x-4 gap-y-8 border-y border-border py-9 sm:py-11 md:grid-cols-4">
         {items.map(([n, l]) => (
-          <div key={l} className="text-center">
-            <div className="text-[56px] font-extrabold leading-none tracking-tight">{n}</div>
-            <div className="mx-auto mt-3 max-w-[200px] text-[14px] font-semibold leading-snug text-white/65">{l}</div>
+          <div key={l} className="flex flex-col-reverse justify-end sm:text-center">
+            <dt className="mt-2 max-w-[210px] text-[14px] font-semibold leading-snug text-muted-foreground sm:mx-auto">{l}</dt>
+            <dd className="m-0 text-[38px] font-extrabold leading-none tracking-tight tabular-nums sm:text-[48px]">{n}</dd>
           </div>
         ))}
-      </div>
+      </dl>
     </section>
   );
 }
