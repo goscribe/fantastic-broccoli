@@ -12,7 +12,7 @@ import type { PublicCourse } from "@/lib/api/public-notes";
 import { LIBRARY_PATH, noteHref } from "@/lib/notes";
 import { lockedCountLabel } from "@/lib/notes-public/gate";
 import { topicSlug } from "@/lib/notes-public/slug";
-import { familyFor, familyVars } from "@/lib/subject-family";
+import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
 import { loadNoteCourse, openFor, useLoaded, useNotesEntitled } from "./data";
 import "@/app/notes/notes-look.css";
 
@@ -76,7 +76,8 @@ function Outline({ course, subject }: { course: PublicCourse; subject: CourseSub
   const first = topics.find((t) => t.note && !t.locked) ?? topics.find((t) => t.note) ?? topics[0];
   // Nothing published for this course yet: the page is its outline and says so (no counts of nothing, no meter).
   const empty = notes === 0 && questions === 0;
-  const family = familyFor(`${course.subject} ${course.title}`);
+  // The student's own subject for this course keeps the cover it has everywhere else.
+  const family = resolveSubjectFamily(subject?.subjectFamily, `${course.subject} ${course.title}`);
   return (
     <>
       <header className="subject-band nl-band mt-2 px-5 pb-6 pt-5 sm:px-9 sm:pb-8 sm:pt-7 sm:pr-[250px]" style={familyVars(family) as React.CSSProperties} data-nl-course={course.id} data-total={topics.length}>

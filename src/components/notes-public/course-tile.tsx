@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChevronRight, Lock } from "lucide-react";
 import { SubjectArt } from "@/components/learn/subject-tile";
-import { familyFor, familyVars } from "@/lib/subject-family";
+import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
 import type { PublicCourseSummary } from "@/lib/api/public-notes";
 import { lockedCountLabel } from "@/lib/notes-public/gate";
 
@@ -10,16 +10,17 @@ import { lockedCountLabel } from "@/lib/notes-public/gate";
  * has, the reader's progress (filled in by NotesProgress) and the action sit
  * on it. Used by the public notes index and the in-app notes library.
  */
-export function CourseTile({ course: c, href, sub }: { course: PublicCourseSummary; href: string; /** Replaces the "N topics" line (e.g. the student's level). */ sub?: string }) {
+export function CourseTile({ course: c, href, sub, stored }: { course: PublicCourseSummary; href: string; /** Replaces the "N topics" line (e.g. the student's level). */ sub?: string; /** The family stored for the student's subject for this course, so the tile matches their subject's. */ stored?: string | null }) {
+  const family = resolveSubjectFamily(stored, `${c.subject} ${c.title}`);
   return (
     <Link
       href={href}
       data-nl-course={c.id}
       data-total={c.topicCount}
       className="subject-tile h-full min-h-[184px] p-[18px] sm:p-5"
-      style={familyVars(familyFor(`${c.subject} ${c.title}`)) as React.CSSProperties}
+      style={familyVars(family) as React.CSSProperties}
     >
-      <SubjectArt family={familyFor(`${c.subject} ${c.title}`)} />
+      <SubjectArt family={family} />
       <span className="subject-tile__text block">
         <span className="block text-[20px] font-extrabold leading-[1.15]">{c.title}</span>
         <span className="subject-tile__sub mt-1 block text-[13.5px] font-semibold leading-snug">

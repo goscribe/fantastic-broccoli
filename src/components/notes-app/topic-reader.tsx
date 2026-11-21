@@ -190,12 +190,10 @@ function Reader({ data }: { data: PublicTopic }) {
             </>
           ),
           emptyNote: (
-            <div className="mt-5 flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
-              <StartQuick5 courseId={course.id} topicId={topic.id} level={level} placement="note_cta" mode="session" />
-              <Link href="/new-subject" className="text-[14.5px] font-bold text-accent hover:underline">
-                Or add your own notes
-              </Link>
-            </div>
+            // The band already offers the session; the one thing left to say is the other way to get material.
+            <Link href="/new-subject" className="mt-4 inline-flex min-h-10 items-center text-[14.5px] font-bold text-accent hover:underline">
+              Have your own notes? Add them to a subject
+            </Link>
           ),
           finish:
             missed.logged + missed.unlogged > 0 ? (

@@ -50,7 +50,7 @@ export function NotesLibrary() {
       const c = byId.get(m.courseId);
       if (!c || seen.has(c.id)) return [];
       seen.add(c.id);
-      return [{ course: c, level: m.level }];
+      return [{ course: c, level: m.level, stored: m.subjectFamily }];
     });
   }, [mine, byId]);
   const groups = BOARD_ORDER.map((board) => ({ board, courses: all.filter((c) => c.board === board && match(c)) })).filter((g) => g.courses.length);
@@ -107,9 +107,9 @@ export function NotesLibrary() {
                   Your courses
                 </h2>
                 <ul className="mt-3 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
-                  {own.map(({ course, level }) => (
+                  {own.map(({ course, level, stored }) => (
                     <li key={course.id}>
-                      <CourseTile course={course} href={libraryCourseHref(course.id)} sub={level ? `${course.topicCount} topics · ${level}` : undefined} />
+                      <CourseTile course={course} href={libraryCourseHref(course.id)} sub={level ? `${course.topicCount} topics · ${level}` : undefined} stored={stored} />
                     </li>
                   ))}
                 </ul>
