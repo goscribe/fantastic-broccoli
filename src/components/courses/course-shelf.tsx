@@ -35,6 +35,7 @@ export function CourseProgressRow({ c }: { c: CourseSubject }) {
     <SubjectTile
       href={`/courses/${c.workspaceId}`}
       match={c.courseTitle}
+      stored={c.subjectFamily}
       title={
         <>
           {c.courseTitle}
