@@ -9,6 +9,8 @@ import { shouldPrompt, topicKey, topicScore, totalAnswered } from "@/lib/notes-p
 import { Check, RotateCcw, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usePracticeProgress } from "./practice-store";
+import { bandCelebrates, resultBand, type ResultBand } from "@/lib/session-result";
+import { useCountUp } from "@/lib/use-count-up";
 
 /**
  * The interactive layer of a public topic-note page. Everything a crawler
@@ -98,7 +100,7 @@ function scrollToNext(ids: string[], from: string, answered: Record<string, numb
 /** A small burst in the cat's orange and cream for a right answer (feedback; off under reduced motion). */
 function Sparkles() {
   return (
-    <span className="pointer-events-none absolute left-9 top-9" aria-hidden="true">
+    <span className="pointer-events-none absolute left-5 top-5" aria-hidden="true">
       {[0, 45, 90, 135, 180, 225, 270, 315].map((a, i) => (
         <span
           key={a}
@@ -207,15 +209,19 @@ export function PracticeCard(p: CardProps) {
           );
         })}
       </ol>
-      <div className={cn("relative", answered && "mt-4 rounded-[var(--r-button)] px-4 pb-4 pt-3.5", answered && (right ? "bg-[var(--ok-soft)]" : "bg-[var(--no-soft)]"), fresh && "nl-up")}>
+      {/* The result sits on the page under the options: a badge, the cat reacting, the explanation, the way on. No tinted panel. */}
+      <div className={cn("relative", answered && "mt-5 px-0.5", fresh && "nl-up")}>
         <div aria-live="polite">
           {answered && (
-            <div className="flex items-center gap-3">
+            <div className="relative flex items-center gap-3">
               {fresh && right && <Sparkles />}
-              <Image src={right ? "/design/cat3-cheer.webp" : "/design/cat3-think.webp"} alt="" width={363} height={400} unoptimized className="h-[58px] w-auto shrink-0" />
-              <p className={cn("text-[19px] font-extrabold leading-tight", right ? "text-[var(--ok-ink)]" : "text-[var(--no-ink)]")}>
+              <span className={cn("grid size-10 shrink-0 place-items-center rounded-full text-white", right ? "bg-[var(--ok)]" : "bg-[var(--no)]", fresh && right && "nl-pop")} aria-hidden="true">
+                {right ? <Check className="size-6" strokeWidth={3.5} /> : <X className="size-6" strokeWidth={3.5} />}
+              </span>
+              <p className={cn("min-w-0 flex-1 text-[20px] font-extrabold leading-tight", right ? "text-[var(--ok-ink)]" : "text-[var(--no-ink)]")}>
                 {right ? "Correct!" : `Not quite. The answer is ${LETTERS[p.correctIndex]}.`}
               </p>
+              <Image src={right ? "/design/cat3-cheer.webp" : "/design/cat3-think.webp"} alt="" width={363} height={400} unoptimized className={cn("-my-2 h-[64px] w-auto shrink-0 sm:h-[76px]", fresh && "nl-cat-in")} />
             </div>
           )}
         </div>
@@ -255,7 +261,7 @@ export function PracticeScore({ inlineCount }: { inlineCount: number }) {
   const t = progress.topics[ctx.key];
   const firstOpen = ctx.ids.find((id) => !(t && id in t.answers));
   return (
-    <div className="nl-card sticky top-2 z-10 px-4 py-3">
+    <div className="sticky top-0 z-10 -mx-1 border-b border-border bg-[color-mix(in_srgb,var(--page,#fff)_94%,transparent)] px-1 py-3 backdrop-blur">
       <div className="flex min-h-8 items-center gap-2.5">
         <p className="text-[15px] font-extrabold tabular-nums">
           <span className="text-[22px] font-black leading-none text-foreground">{s.correct}</span>
@@ -292,45 +298,123 @@ export function PracticeScore({ inlineCount }: { inlineCount: number }) {
   );
 }
 
-/** Shown when every question is answered: the score and where to go next. */
+const BAND_CAT: Record<ResultBand, [src: string, w: number, h: number]> = {
+  perfect: ["/design/cat3-trophy.webp", 413, 400],
+  strong: ["/design/cat3-cheer.webp", 363, 400],
+  okay: ["/design/cat3-pencil.webp", 360, 400],
+  rough: ["/design/cat3-think.webp", 383, 400],
+  done: ["/design/cat3-book.webp", 363, 400],
+};
+const BAND_LINE: Record<ResultBand, [title: string, sub: string]> = {
+  perfect: ["Flawless!", "Full marks. On to the next topic."],
+  strong: ["Nailed it!", "Strong. Look over the ones you missed, then move on."],
+  okay: ["Nice work!", "Most of it stuck. Look over the ones you missed while it's fresh."],
+  rough: ["Good effort", "That was a tough one. Reread the parts above, then have another go."],
+  done: ["Practice complete", ""],
+};
+/** Confetti in the tile colours and the cat's orange; no purple. */
+const CONFETTI_COLORS = ["#f6a53b", "#ffd166", "#34b27b", "#4f8df7", "#ef5d7a", "#ffffff"];
+
+/** Thrown from the cat, once, on a strong score. Positions are fixed, so server and client agree. */
+function Confetti({ count = 38 }: { count?: number }) {
+  return (
+    <span aria-hidden="true" className="nl-confetti">
+      {Array.from({ length: count }, (_, i) => {
+        const angle = (-200 + (220 * i) / (count - 1) + ((i * 37) % 17) - 8) * (Math.PI / 180);
+        const reach = 110 + ((i * 53) % 150);
+        const long = i % 3 !== 0;
+        return (
+          <span
+            key={i}
+            style={{
+              width: long ? 6 : 8,
+              height: long ? 12 : 8,
+              borderRadius: long ? 2 : 999,
+              background: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+              "--x": `${Math.round(Math.cos(angle) * reach)}px`,
+              "--y": `${Math.round(Math.sin(angle) * reach)}px`,
+              "--r": `${((i * 71) % 300) - 150}deg`,
+              "--i": i,
+            } as React.CSSProperties}
+          />
+        );
+      })}
+    </span>
+  );
+}
+
+function CountUp({ value }: { value: number }) {
+  return <>{useCountUp(value, 900)}</>;
+}
+
+/**
+ * Shown when every question is answered. One moment in the notes index's own
+ * language: the landscape for the reader's time of day, the cat reacting to
+ * the score, the score counting up; then each answer as a dot and where to go
+ * next. Encouraging at every score.
+ */
 export function PracticeDone({ nextTopic, quick5 }: { nextTopic: ReactNode; quick5: ReactNode }) {
   const ctx = useCtx();
-  const { progress, lastAnswered } = usePracticeProgress();
+  const { progress, lastAnswered, reset } = usePracticeProgress();
   const s = topicScore(progress, ctx.key, ctx.ids);
   const done = s.total > 0 && s.answered === s.total;
-  const ratio = s.total ? s.correct / s.total : 0;
+  const band = resultBand(s.total ? s.correct / s.total : null);
+  const [cat, catW, catH] = BAND_CAT[band];
+  const [title, sub] = BAND_LINE[band];
+  const t = progress.topics[ctx.key];
+  const missed = s.total - s.correct;
   return (
     <div id="practice-score" className="scroll-mt-24">
       {/* After a reload there is no "question just answered" to sit under, so the prompt waits here. */}
       {!lastAnswered && <SignupNudge className="mb-4" />}
       {done && (
-        <div className="nl-panel nl-up px-5 pb-6 pt-7 text-center sm:px-8">
-          <div className="relative mx-auto grid size-[120px] place-items-center">
-            {ratio >= 0.7 && (
-              <span className="absolute inset-0" aria-hidden="true">
-                {[0, 40, 80, 120, 160, 200, 240, 280, 320].map((a, i) => (
-                  <span
-                    key={a}
-                    className="nl-sparkle size-2.5 rounded-full"
-                    style={{ "--a": `${a}deg`, "--d": `${84 + (i % 3) * 14}px`, background: i % 2 ? "var(--flame)" : "var(--hl)", animationDelay: `${150 + i * 25}ms` } as React.CSSProperties}
-                  />
-                ))}
+        <div data-practice-done data-band={band}>
+          <section className="hero-card nl-up relative isolate overflow-hidden rounded-[var(--r-panel)] border border-border px-5 pb-5 pt-[176px] sm:min-h-[280px] sm:px-9 sm:pb-8 sm:pt-8" aria-labelledby="practice-done-title">
+            <div aria-hidden="true" className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[160px] sm:inset-0 sm:h-auto">
+              <div className="absolute bottom-[20px] left-1/2 h-[118px] -translate-x-1/2 sm:bottom-[7%] sm:left-auto sm:right-[9%] sm:h-[190px] sm:translate-x-0">
+                <span className="hero-field__ground" />
+                {bandCelebrates(band) && <Confetti />}
+                <Image src={cat} alt="" width={catW} height={catH} unoptimized className="nl-cat-in relative h-full w-auto" />
+              </div>
+            </div>
+            <p className="hero-eyebrow relative text-[13.5px] font-extrabold">Practice complete</p>
+            <h3 id="practice-done-title" className="relative mt-1.5 text-[30px] font-black leading-[1.08] tracking-[-0.02em] sm:max-w-[58%] sm:text-[38px]">
+              {title}
+            </h3>
+            <p className="relative mt-1.5 text-[15.5px] font-semibold leading-snug text-foreground/75 sm:max-w-[52%]">{sub}</p>
+            <p className="relative mt-4 flex items-baseline gap-3 sm:mt-6" role="status">
+              <span className="nl-score text-[60px] font-black leading-[0.9] tracking-[-0.03em] tabular-nums sm:text-[76px]">
+                <CountUp value={s.correct} />
+                <span className="text-[0.5em] text-muted-foreground"> / {s.total}</span>
               </span>
-            )}
-            <Image src={ratio >= 0.7 ? "/design/cat3-trophy.webp" : "/design/cat3-think.webp"} alt="" width={276} height={261} unoptimized className="nl-cat-in relative h-[112px] w-auto" />
+              <span className="text-[15px] font-bold leading-tight text-foreground/75">right</span>
+            </p>
+          </section>
+
+          <div className="nl-stagger mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 px-1" style={{ "--i": 2 } as React.CSSProperties}>
+            <ol className="flex flex-wrap items-center gap-[7px]" aria-label={`${s.correct} right, ${missed} to look over`}>
+              {ctx.ids.map((id, i) => (
+                <li key={id} aria-hidden="true" style={{ "--i": i } as React.CSSProperties} className={cn("nl-findot size-3.5 rounded-full", t?.correct[id] ? "bg-[var(--ok)]" : "border-[2.5px] border-[var(--no)]")} />
+              ))}
+            </ol>
+            {missed > 0 && <span className="text-[13.5px] font-bold text-muted-foreground">{missed} to look over</span>}
           </div>
-          <p className="mt-3 text-[15px] font-extrabold text-foreground/70">Practice complete</p>
-          <p className="mt-1 text-[44px] font-black leading-none tracking-[-0.03em] tabular-nums text-foreground">
-            {s.correct}
-            <span className="text-[26px] text-muted-foreground"> / {s.total}</span>
-          </p>
-          <p className="mx-auto mt-2.5 max-w-[420px] text-[16.5px] font-semibold leading-snug text-foreground/80">
-            {s.correct === s.total ? "Full marks. On to the next topic." : ratio >= 0.7 ? "Strong. Look over the ones you missed, then move on." : "Reread the parts above, then have another go."}
-          </p>
-          <div className="mx-auto mt-5 flex max-w-[460px] flex-col gap-3">
+
+          <div className="nl-stagger mt-6 flex flex-col items-stretch gap-3 px-1 sm:flex-row sm:flex-wrap sm:items-center" style={{ "--i": 4 } as React.CSSProperties}>
             {nextTopic}
             {quick5}
           </div>
+          <button
+            type="button"
+            onClick={() => {
+              reset(ctx.key);
+              document.getElementById("practice")?.scrollIntoView({ block: "start" });
+            }}
+            className="nl-stagger mt-2 inline-flex min-h-11 items-center gap-1.5 px-1 text-[14.5px] font-extrabold text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground"
+            style={{ "--i": 5 } as React.CSSProperties}
+          >
+            Try these questions again
+          </button>
         </div>
       )}
     </div>
@@ -353,7 +437,7 @@ function SignupNudge({ className }: { className?: string }) {
   }, [show, ctx.courseId, ctx.topicId, s.answered]);
   if (!show) return null;
   return (
-    <aside aria-labelledby="signup-prompt-title" className={cn("nl-up relative rounded-[var(--r-card)] border border-dashed border-border-strong bg-card px-4 pb-4 pt-4", className)}>
+    <aside aria-labelledby="signup-prompt-title" className={cn("nl-up relative rounded-[var(--r-card)] bg-muted px-4 pb-4 pt-4", className)}>
       <button type="button" onClick={dismissPrompt} aria-label="Dismiss" className="absolute right-1.5 top-1.5 flex size-10 items-center justify-center rounded-full text-muted-foreground hover:bg-muted">
         <X className="size-4" />
       </button>

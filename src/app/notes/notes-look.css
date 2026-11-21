@@ -362,6 +362,19 @@
     100% { transform: translate(-50%, -50%) rotate(var(--a)) translateY(calc(var(--d) * -1)) scale(1); opacity: 0; }
   }
   .nl-sparkle { position: absolute; left: 50%; top: 50%; pointer-events: none; animation: nl-sparkle 0.75s var(--ease-out) both; }
+  /* The end of practice: confetti thrown from the cat on a strong score, the score landing with a small overshoot, answer dots popping in one by one. */
+  @keyframes nl-confetti {
+    0% { transform: translate(-50%, -50%) scale(0.3) rotate(0deg); opacity: 0; }
+    12% { opacity: 1; }
+    55% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1) rotate(var(--r)); opacity: 1; }
+    100% { transform: translate(calc(-50% + var(--x) * 1.18), calc(-50% + var(--y) + 56px)) scale(0.9) rotate(calc(var(--r) * 1.8)); opacity: 0; }
+  }
+  .nl-confetti { position: absolute; left: 50%; top: 46%; pointer-events: none; }
+  .nl-confetti > span { position: absolute; left: 0; top: 0; opacity: 0; animation: nl-confetti 1.25s cubic-bezier(0.2, 0.7, 0.3, 1) both; animation-delay: calc(var(--i, 0) * 9ms + 180ms); }
+  @keyframes nl-score { 0% { transform: scale(0.7); opacity: 0; } 60% { transform: scale(1.06); opacity: 1; } 100% { transform: scale(1); } }
+  .nl-score { transform-origin: left bottom; animation: nl-score 0.6s var(--ease-spring) 0.15s both; }
+  .nl-findot { animation: nl-tick 0.34s var(--ease-spring) both; animation-delay: calc(var(--i, 0) * 34ms + 520ms); }
+  .nl-stagger { animation: nl-up 0.45s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms); }
   @keyframes nl-tick { 0% { transform: scale(0.4); opacity: 0; } 60% { transform: scale(1.18); opacity: 1; } 100% { transform: scale(1); } }
   .nl-dot {
     display: grid;
@@ -413,7 +426,8 @@
     .nl-rise, .nl-cat-in, .nl-bob, .nl-pop, .nl-shake, .nl-up, .nl-dot, [data-nl-reveal="in"], [data-nl-reveal="in"] strong { animation: none !important; }
     [data-nl-reveal="wait"] { opacity: 1; transform: none; }
     [data-nl-reveal="wait"] strong { background-size: 100% 0.5em; }
-    .nl-sparkle { display: none; }
+    .nl-sparkle, .nl-confetti { display: none; }
+    .nl-score, .nl-findot, .nl-stagger { animation: none !important; }
     .nl-btn, .nl-btn-ghost, .nl-opt, .nl-lift, .nl-terms label, .nl-defs > *, .nl-veil, .nl-secnum svg, .nl-secend i svg, .nl-secend b, .nl-node, .nl-meter > span, .nl-topbar > span, .nl-details::details-content {
       transition: none !important;
     }
