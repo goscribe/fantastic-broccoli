@@ -285,3 +285,23 @@ html.new-ui .skeleton {
 .design-root:not(.app-brand) .ui-btn--lg { height: 3rem; padding-inline: 1.75rem; font-size: 1rem; line-height: 1.5rem; }
 .design-root:not(.app-brand) .ui-btn--secondary { background: var(--muted); border-color: var(--border-strong); font-weight: 500; }
 .design-root:not(.app-brand) .ui-btn--outline { background: var(--card); border-color: var(--border-strong); font-weight: 500; }
+
+/*
+ * Home banner's week strip: the days sit on the landscape as frosted cells in
+ * the banner's own colour (white by day, the night sky after dark), so the
+ * words keep the banner's contrast whatever the time of day.
+ */
+.hero-cell {
+  background: color-mix(in srgb, var(--hero-wash, #fff) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.hero-cell--today {
+  background: color-mix(in srgb, var(--hero-wash, #fff) 96%, transparent);
+  border: 2px solid var(--accent);
+}
+/* A review block in the week strip: green by day, a lighter green on the night sky. */
+.hero-review { color: #047857; }
+html[data-daypart="night"] .hero-card .hero-review,
+html[data-daypart="late"] .hero-card .hero-review { color: #6ee7b7; }
