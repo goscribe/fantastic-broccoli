@@ -434,18 +434,38 @@ function WeekPlan({ action, subjects }: { action: Exclude<HomeAction, { kind: "u
  * review the flashcards, the rest the planner). Review blocks and times with
  * no subject are neutral; on a missed day every chip is. `inline`: the time
  * and title on one line (today's other times, a picked day on phones).
+ *
+ * In a day card the chip is narrow, so a word is never split: the title
+ * wraps only between words, a word too wide for the chip ends in an
+ * ellipsis instead of breaking, and the title stops at two lines. A review block says "Cards" there. The full title is in the
+ * tooltip and the accessible name.
  */
 function ItemChip({ item, colour, muted = false, inline = false }: { item: WeekItem; colour?: string; muted?: boolean; inline?: boolean }) {
+  const { t, locale } = useI18n();
   const plain = muted || !colour;
+  const label = !inline && item.kind === "review" ? t("week.cardsShort") : item.title;
+  const full = `${item.time} ${item.title}`;
   return (
     <Link
       href={item.href}
-      title={`${item.time} ${item.title}`}
+      title={full}
+      aria-label={full}
       className={cn("week-chip min-w-0 text-left", plain && "week-chip--plain", inline ? "inline-flex max-w-full items-baseline gap-1 px-2 py-1" : "block px-1.5 py-1.5", muted && "text-foreground/70")}
       style={plain ? undefined : ({ ["--chip" as string]: colour } as React.CSSProperties)}
     >
       <span className={cn("shrink-0 font-bold tabular-nums", inline ? "text-[11px]" : "block text-[10px] leading-tight")}>{item.time}</span>
-      <span className={cn("font-extrabold", inline ? "truncate text-[11.5px]" : "line-clamp-3 hyphens-auto break-words text-[11px] leading-[1.2]")}>{item.title}</span>
+      {inline ? (
+        <span className="truncate text-[11.5px] font-extrabold">{label}</span>
+      ) : (
+        <span lang={locale} className="week-chip__title line-clamp-2 text-[11px] font-extrabold leading-[1.2]">
+          {label.split(/\s+/).filter(Boolean).map((w, i) => (
+            <span key={i}>
+              {i > 0 && " "}
+              <span className="week-chip__word">{w}</span>
+            </span>
+          ))}
+        </span>
+      )}
     </Link>
   );
 }

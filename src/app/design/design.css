@@ -341,6 +341,14 @@ html[data-daypart="late"] .home-hero { --hero-surface: color-mix(in srgb, var(--
   background: color-mix(in srgb, var(--foreground) 7%, var(--hero-surface, #fff));
   color: var(--foreground);
 }
+/*
+ * A day card's chip title: lines break only between words, never inside one
+ * (each word is an unbreakable box; one too wide for the chip ends in an
+ * ellipsis). hyphens/overflow-wrap/word-break are set so nothing above can
+ * re-enable a mid-word break.
+ */
+.week-chip__title { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: normal; word-break: normal; }
+.week-chip__word { display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top; }
 @media (hover: hover) {
   .week-chip:hover { transform: translateY(-1px); box-shadow: 0 3px 0 0 var(--chip-lip); }
 }
