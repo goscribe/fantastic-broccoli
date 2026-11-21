@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Check, Lock, Trophy, Zap } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   fetchPlanCaps,
@@ -10,23 +11,41 @@ import {
   switchPlan,
   SESSION_COMPLETED_EVENT,
   PLAN_LIMIT_EVENT,
-  PLAN_LIMIT_ERROR_PREFIX,
   type PlanCaps,
   type PlanOption,
+  type SessionCompletedDetail,
 } from "@/lib/api/account";
+import { fetchPlanToday } from "@/lib/api/exam-planner";
+import { api } from "@/lib/api/trpc-client";
+import { fetchStudySessions } from "@/lib/api/study";
 import { hasPlanAccess } from "@/lib/plan-access";
+import { planBilling, planCta, planDescription, planDisplayName, planPriceLabel, planTermsLine, planTrialDays } from "@/lib/plan-display";
+import {
+  claimEndScreenAsk,
+  countCompletedFullSessions,
+  examPassPitch,
+  freePlanSummary,
+  limitSentence,
+  paidPerks,
+  plural,
+  postSessionWallDue,
+  wallReason,
+  type ExamPitch,
+  type WallReason,
+  type WallVariant,
+} from "@/lib/wall";
+import { track } from "@/lib/funnel";
 import { useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 
-
 /** Routes where the wall must never render (billing surfaces, verification). */
 const EXEMPT_PREFIXES = ["/pricing", "/settings", "/verify-email"];
 
-/** Delay before the post-session wall covers the debrief the learner just earned. */
+/** Delay before the post-session wall opens over a full session's end screen, so its result is read first. */
 const POST_SESSION_DELAY_MS = 4000;
 
-/** The "you finished your first session" wall shows once per user per device. */
+/** The post-session wall shows once per user per device. */
 const postSessionKey = (userId: string) =>
   `scribe-subscribe-wall-post-session:${userId}`;
 
@@ -46,34 +65,64 @@ function markPostSessionShown(userId: string) {
   }
 }
 
-type WallVariant = "limit" | "post-session";
+type WallKind = "limit" | "post-session";
 
-const PAID_PERKS = [
-  "Unlimited workspaces, study sessions and tests",
-  "Strongest AI model on every activity",
-  "Spaced review that brings back what you'd forget",
-  "Daily recall sessions built from what you missed",
-];
+interface OpenWall {
+  kind: WallKind;
+  reason: WallReason;
+  variant: WallVariant;
+  message: string | null;
+}
+
+/** Completed full sessions across the student's subjects (null when they can't be counted). */
+async function completedFullSessions(current: { id: string; quickStart: boolean }): Promise<number | null> {
+  try {
+    // Every subject the student owns, folders included (the tree's flat list).
+    const { workspaces } = await api.workspace.getTree.query();
+    const ids = (workspaces as { id: string }[]).map((w) => w.id);
+    const lists = await Promise.all(ids.map((id) => fetchStudySessions(id)));
+    return countCompletedFullSessions(lists.flat(), current);
+  } catch {
+    return null;
+  }
+}
+
+/** The pitch for the pass against the student's exam date, when there is one. */
+async function loadExamPitch(plans: PlanOption[]): Promise<ExamPitch | null> {
+  const pass = plans.find((p) => planBilling(p) === "once");
+  if (!pass) return null;
+  try {
+    const today = await fetchPlanToday();
+    const locale = typeof navigator !== "undefined" ? navigator.language : "en-GB";
+    return examPassPitch(today.exams, pass, today.today, locale);
+  } catch {
+    return null;
+  }
+}
 
 /**
- * Full-screen plan picker. Never shown on signup or login (that sent most
- * new users away before they tried anything). It opens:
- * - "limit": blocking, whenever a request is refused by a free-plan cap or
- *   runs out of tokens (see `toastError` → `announcePlanLimit`), with the
- *   server's reason and one-tap plans;
- * - "post-session": once per device, a soft nudge after the first completed
- *   study session.
- * Nothing is charged until the user picks a plan and completes hosted
- * checkout (7-day trial first when the account hasn't used one).
+ * Full-screen plan picker. Never shown on signup or login. It opens:
+ * - "limit": blocking, whenever a request is refused by a free-plan cap,
+ *   the monthly allowance or a locked topic (see `announcePlanLimit`), with
+ *   the reason in plain words and one-tap plans;
+ * - "post-session": once per device, a soft nudge on the end screen of the
+ *   student's SECOND completed full session or later (`postSessionWallDue`).
+ *   Never on the first win, never on a Quick 5 (its end screen asks for a
+ *   study time instead), and never while another ask holds the end screen.
+ * Every wall reports `wall.shown {reason, variant}`, then `wall.dismissed`
+ * or `wall.trial_started`. Nothing is charged until the user picks a plan
+ * and completes hosted checkout (7-day trial first on a subscription when
+ * the account hasn't used one).
  */
 export function SubscribeWall() {
   const pathname = usePathname();
   const { user } = useAuthUser();
   const [caps, setCaps] = useState<PlanCaps | null>(null);
   const [plans, setPlans] = useState<PlanOption[]>([]);
-  const [open, setOpen] = useState<WallVariant | null>(null);
-  const [reason, setReason] = useState<string | null>(null);
+  const [pitch, setPitch] = useState<ExamPitch | null>(null);
+  const [open, setOpen] = useState<OpenWall | null>(null);
   const [switching, setSwitching] = useState<string | null>(null);
+  const openRef = useRef<OpenWall | null>(null);
 
   const exempt = EXEMPT_PREFIXES.some((p) => pathname.startsWith(p));
 
@@ -83,40 +132,80 @@ export function SubscribeWall() {
     let timer: ReturnType<typeof setTimeout> | null = null;
 
     /** Resolves true when the wall will show. */
-    const load = (variant: WallVariant, delayMs = 0): Promise<boolean> =>
-      Promise.all([fetchPlanCaps(), fetchPlanOptions()])
-        .then(([nextCaps, nextPlans]) => {
-          if (cancelled || hasPlanAccess(nextCaps)) return false;
-          if (
-            variant === "post-session" &&
-            (nextCaps.completedSessions < 1 || postSessionShown(user.id))
-          ) {
-            return false;
+    const load = async (
+      kind: WallKind,
+      opts: { message?: string | null; delayMs?: number; session?: { id: string; quickStart: boolean } } = {},
+    ): Promise<boolean> => {
+      try {
+        // A Quick 5's end screen gets the habit prompt, not the wall: decide before fetching anything.
+        if (kind === "post-session" && (!opts.session || opts.session.quickStart || postSessionShown(user.id))) return false;
+        const [nextCaps, nextPlans] = await Promise.all([fetchPlanCaps(), fetchPlanOptions()]);
+        if (cancelled || hasPlanAccess(nextCaps)) return false;
+        if (kind === "post-session") {
+          // Cheap first check (Quick 5s included), then the real count of full sessions.
+          const full = nextCaps.completedSessions >= 2 ? await completedFullSessions(opts.session!) : 0;
+          const due = postSessionWallDue({
+            quickStart: opts.session!.quickStart,
+            completedFullSessions: full,
+            alreadyShown: postSessionShown(user.id),
+            hasAccess: hasPlanAccess(nextCaps),
+          });
+          if (!due || cancelled) return false;
+        }
+        const paidPlans = nextPlans.filter((p) => p.priceDollars > 0);
+        const nextPitch = await loadExamPitch(paidPlans);
+        if (cancelled) return false;
+        const reason: WallReason = kind === "post-session" ? "post_session" : wallReason(opts.message);
+        const variant: WallVariant = nextPitch
+          ? "exam_pass"
+          : kind === "post-session"
+            ? "post_session"
+            : reason === "locked_topic"
+              ? "locked"
+              : "limit";
+        setCaps(nextCaps);
+        setPlans(paidPlans);
+        setPitch(nextPitch);
+        const reveal = () => {
+          if (cancelled) return;
+          if (kind === "post-session") {
+            // One ask per end screen: the habit prompt keeps it if it got there first.
+            if (!claimEndScreenAsk(opts.session!.id, "wall")) return;
+            markPostSessionShown(user.id);
           }
-          setCaps(nextCaps);
-          setPlans(nextPlans.filter((p) => p.priceDollars > 0));
-          const reveal = () => {
-            if (cancelled) return;
-            if (variant === "post-session") markPostSessionShown(user.id);
-            setOpen(variant);
-          };
-          if (delayMs > 0) timer = setTimeout(reveal, delayMs);
-          else reveal();
-          return true;
-        })
-        .catch(() => false);
+          const next = { kind, reason, variant, message: opts.message ?? null };
+          openRef.current = next;
+          setOpen(next);
+          track("wall.shown", { reason, variant });
+        };
+        if (opts.delayMs && opts.delayMs > 0) timer = setTimeout(reveal, opts.delayMs);
+        else reveal();
+        return true;
+      } catch {
+        return false;
+      }
+    };
 
-    const onCompleted = () => load("post-session", POST_SESSION_DELAY_MS);
+    const onCompleted = (event: Event) => {
+      const detail = (event as CustomEvent<SessionCompletedDetail | undefined>).detail;
+      if (!detail?.sessionId) return;
+      void load("post-session", {
+        delayMs: POST_SESSION_DELAY_MS,
+        session: { id: detail.sessionId, quickStart: detail.quickStart === true },
+      });
+    };
     const onLimit = (event: Event) => {
       const detail = (event as CustomEvent<string>).detail;
       const message = typeof detail === "string" ? detail : null;
       // Claim it: we show the reason. If the wall can't open (paid user out
-      // of tokens, caps failed to load), fall back to the server's message
-      // so the refusal is never silent.
+      // of this month's allowance, caps failed to load), fall back to a toast
+      // in plain words so the refusal is never silent.
       event.preventDefault();
-      setReason(message);
-      void load("limit").then((shown) => {
-        if (!shown && message && !cancelled) toast.error(message, { id: message });
+      void load("limit", { message }).then((shown) => {
+        if (!shown && message && !cancelled) {
+          const text = limitSentence(message) ?? message;
+          toast.error(text, { id: text });
+        }
       });
     };
     window.addEventListener(SESSION_COMPLETED_EVENT, onCompleted);
@@ -140,14 +229,17 @@ export function SubscribeWall() {
   if (!open || !user || exempt) return null;
 
   const dismiss = () => {
+    track("wall.dismissed", { reason: open.reason, variant: open.variant });
+    openRef.current = null;
     setOpen(null);
-    setReason(null);
   };
 
-  const choose = async (planId: string) => {
-    setSwitching(planId);
+  const choose = async (plan: PlanOption) => {
+    // A pass is not a trial: its tap is told apart by the variant.
+    track("wall.trial_started", { reason: open.reason, variant: planBilling(plan) === "once" ? "exam_pass" : open.variant });
+    setSwitching(plan.id);
     try {
-      await switchPlan(planId);
+      await switchPlan(plan.id);
     } catch (err) {
       toastError(err, "Could not start checkout. Please try again.");
     } finally {
@@ -155,68 +247,70 @@ export function SubscribeWall() {
     }
   };
 
-  // Students are price-sensitive: lead with the cheapest paid plan.
-  const featured = [...plans].sort((a, b) => a.priceDollars - b.priceDollars)[0];
-  const freeCaps = caps?.caps;
+  const byPrice = [...plans].sort((a, b) => a.priceDollars - b.priceDollars);
+  const subscriptions = byPrice.filter((p) => planBilling(p) !== "once");
+  const pass = byPrice.find((p) => planBilling(p) === "once");
+  // With an exam date: the trial and the pass side by side, nothing else.
+  const shown = pitch && pass ? [...subscriptions.slice(0, 1), pass] : byPrice;
+  // Students are price-sensitive: lead with the cheapest subscription (the trial).
+  const featured = subscriptions[0] ?? byPrice[0];
+  const freeCaps = caps?.caps ?? null;
+  const used = caps?.used;
   const trialDays = caps?.trialDays ?? 0;
-  const postSession = open === "post-session";
-  const rawDetail = reason?.startsWith(PLAN_LIMIT_ERROR_PREFIX)
-    ? reason.slice(PLAN_LIMIT_ERROR_PREFIX.length).replace(/^[:\s]+/, "")
-    : reason;
-  // Keep the server's first sentence (what ran out); the upsell is on this screen already.
-  const firstSentence = rawDetail?.split(/(?<=\.)\s/)[0];
-  const limitDetail = firstSentence
-    ? firstSentence.charAt(0).toUpperCase() + firstSentence.slice(1)
-    : null;
+  const postSession = open.kind === "post-session";
+  const hasTrialPlan = shown.some((p) => planTrialDays(p, trialDays) > 0);
+  const hasOneOffPlan = shown.some((p) => planBilling(p) === "once");
+  const limitDetail = limitSentence(open.message, { caps: freeCaps });
+  const fromPrice = subscriptions[0] && planBilling(subscriptions[0]) === "month" ? `$${subscriptions[0].priceDollars} a month` : null;
+  const eyebrow = postSession
+    ? `Nice work, ${user.name.split(" ")[0] || "you"}`
+    : open.reason === "locked_topic"
+      ? "Included with a plan"
+      : open.reason === "plan_limit_workspaces" && freeCaps
+        ? `Free plan: ${plural(freeCaps.workspaces, "subject", "subjects")}`
+        : "That's the free plan's limit";
 
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-labelledby="subscribe-wall-title"
-      className="fixed inset-0 z-[200] flex items-center justify-center overflow-y-auto bg-background/95 px-4 py-8 backdrop-blur-md"
+      className="fixed inset-0 z-[200] flex overflow-y-auto bg-background/95 px-4 py-8 backdrop-blur-md"
     >
-      <div className="w-full max-w-4xl">
+      <div className="m-auto w-full max-w-4xl">
         <div className="text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent">
-            {postSession ? (
-              <>
-                <Trophy className="h-3.5 w-3.5" />
-                First session done, {user.name.split(" ")[0] || "nice"}
-              </>
-            ) : (
-              <>
-                <Lock className="h-3.5 w-3.5" />
-                You&apos;ve used up the free plan
-              </>
-            )}
-          </span>
+          <p className="text-[14px] font-extrabold text-muted-foreground">{eyebrow}</p>
           <h1
             id="subscribe-wall-title"
-            className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
+            className="mt-2 text-[28px] font-extrabold leading-tight tracking-tight sm:text-[36px]"
           >
             {postSession
-              ? "Nice work. Want to keep this pace every day?"
-              : "Keep going — from $5 a month"}
+              ? "Want to keep this pace every day?"
+              : pitch
+                ? `Keep going until your exam on ${pitch.dateLabel}`
+                : fromPrice
+                  ? `Keep going from ${fromPrice}`
+                  : "Keep going"}
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
+          <p className="mx-auto mt-3 max-w-xl text-[15px] text-muted-foreground sm:text-[16px]">
             {postSession ? (
               <>
-                The free plan is{" "}
-                <strong className="text-foreground">
-                  one Quick 5 a day, {freeCaps?.studySessions ?? 1} full study
-                  session, {freeCaps?.workspaces ?? 1} workspace and{" "}
-                  {freeCaps?.flashcardTests ?? 1} test
-                </strong>
-                . Unlimited sessions right now and the strongest AI are one tap
-                away
+                {freeCaps ? (
+                  <>
+                    The free plan is <strong className="text-foreground">{freePlanSummary(freeCaps)}</strong>.
+                    {used && ` You've started ${used.studySessions} of ${freeCaps.studySessions} full sessions.`}
+                  </>
+                ) : (
+                  "The free plan is one Quick 5 a day and a few full study sessions."
+                )}{" "}
+                More sessions and our strongest AI are one tap away
                 {trialDays > 0 ? ` — free for ${trialDays} days.` : "."}
               </>
             ) : (
               <>
                 {limitDetail ?? "That's as far as the free plan goes."}{" "}
                 Pick a plan to keep studying right now
-                {trialDays > 0 ? ` — the first ${trialDays} days are free.` : "."}
+                {!hasTrialPlan ? "." : hasOneOffPlan ? `. Subscriptions start with ${trialDays} days free.` : ` — the first ${trialDays} days are free.`}
               </>
             )}
           </p>
@@ -225,84 +319,78 @@ export function SubscribeWall() {
         <div
           className={cn(
             "mt-8 grid gap-4",
-            plans.length > 1 ? "sm:grid-cols-2" : "sm:max-w-md sm:mx-auto",
+            shown.length > 1 ? "sm:grid-cols-2" : "sm:max-w-md sm:mx-auto",
+            shown.length > 2 && "lg:grid-cols-3",
           )}
         >
-          {plans.map((plan) => {
+          {shown.map((plan) => {
             const isFeatured = plan.id === featured?.id;
+            const isPass = planBilling(plan) === "once";
+            const pitched = isPass && pitch;
+            // Only a subscription has a trial; the pay-once pass is charged today and never renews.
+            const planTrial = planTrialDays(plan, trialDays);
+            const price = planPriceLabel(plan);
+            const description = pitched ? pitch.headline : planDescription(plan);
             return (
               <div
                 key={plan.id}
-                className={cn(
-                  "relative flex flex-col rounded-3xl border p-6",
-                  isFeatured
-                    ? "border-accent bg-card shadow-xl shadow-accent/20 ring-2 ring-accent"
-                    : "border-border bg-card/80",
-                )}
+                className={cn("life-card relative flex flex-col p-6", (isFeatured || pitched) && "border-border-strong")}
               >
-                {isFeatured && (
-                  <span className="absolute -top-3 left-6 inline-flex items-center gap-1 rounded-full bg-accent px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-accent-foreground">
-                    <Zap className="h-3 w-3" />
-                    Student price
-                  </span>
-                )}
-                <p className="text-lg font-semibold capitalize">{plan.name}</p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {plan.description}
+                <div className="flex items-baseline justify-between gap-3">
+                  <p className="text-[18px] font-extrabold">{planDisplayName(plan.name)}</p>
+                  {isFeatured && <span className="shrink-0 text-[13px] font-bold text-muted-foreground">Student price</span>}
+                  {pitched && <span className="shrink-0 text-[13px] font-bold text-muted-foreground">For your exam</span>}
+                </div>
+                {description && <p className="mt-1 text-[14px] text-muted-foreground">{description}</p>}
+                <p className="mt-4 text-[36px] font-extrabold leading-none tracking-tight tabular-nums">
+                  {planTrial > 0 ? "$0" : price.amount}
+                  <span className="text-[14px] font-semibold tracking-normal text-muted-foreground">{planTrial > 0 ? " today" : price.suffix}</span>
                 </p>
-                <p className="mt-4 text-4xl font-bold tracking-tight">
-                  {trialDays > 0 ? "$0" : `$${plan.priceDollars}`}
-                  <span className="text-sm font-normal text-faint">
-                    {trialDays > 0 ? " today" : " / month"}
-                  </span>
-                </p>
-                {trialDays > 0 && (
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    then ${plan.priceDollars}/month after {trialDays} days —
-                    cancel anytime before, pay nothing
-                  </p>
-                )}
-                <ul className="mt-5 space-y-2.5 text-sm">
-                  <li className="flex items-start gap-2">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                    {plan.monthlyTokens.toLocaleString()} tokens every month
-                  </li>
-                  {PAID_PERKS.map((perk) => (
+                <p className="mt-2 min-h-[2.6em] text-[13px] leading-snug text-muted-foreground">{planTermsLine(plan, trialDays, { afterZeroToday: true })}</p>
+                <ul className="mt-4 space-y-2.5 text-[14px]">
+                  {paidPerks(plan, { examLine: pitched ? pitch.line : null }).map((perk) => (
                     <li key={perk} className="flex items-start gap-2">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={2.6} />
                       {perk}
                     </li>
                   ))}
                 </ul>
                 <Button
                   size="lg"
-                  variant={isFeatured ? "primary" : "outline"}
+                  variant={isFeatured ? "primary" : "secondary"}
                   className="mt-6 w-full"
                   disabled={switching !== null}
-                  onClick={() => choose(plan.id)}
+                  onClick={() => choose(plan)}
                 >
-                  {switching === plan.id
-                    ? "Opening checkout…"
-                    : trialDays > 0
-                      ? `Start ${trialDays}-day free trial`
-                      : `Get ${plan.name.charAt(0).toUpperCase()}${plan.name.slice(1)}`}
+                  {switching === plan.id ? "Opening checkout…" : planCta(plan, trialDays)}
                 </Button>
               </div>
             );
           })}
         </div>
 
-        <p className="mt-4 text-center text-xs text-faint">
-          {trialDays > 0
-            ? `Card required · $0 today · billing starts after ${trialDays} days unless you cancel · secure hosted checkout`
-            : "Secure hosted checkout · cancel anytime"}
+        <p className="mt-4 text-center text-[13px] text-muted-foreground">
+          {[
+            hasTrialPlan ? `Free trial: card required, $0 today, billing starts after ${trialDays} days unless you cancel` : null,
+            hasOneOffPlan ? "A pass is one payment today, with no renewal" : null,
+            hasTrialPlan ? "Secure hosted checkout" : "Secure hosted checkout, cancel anytime",
+          ]
+            .filter(Boolean)
+            .join(" · ")}
         </p>
+        {shown.length < plans.length && (
+          <p className="mt-2 text-center text-[13px]">
+            <Link href="/pricing" onClick={dismiss} className="font-semibold text-muted-foreground underline underline-offset-4 hover:text-foreground">
+              See all plans
+            </Link>
+          </p>
+        )}
 
-        <div className="mt-8 flex justify-center">
+        <div className="mt-4 flex justify-center">
           <button
             type="button"
             onClick={dismiss}
-            className="text-xs text-faint underline-offset-2 hover:text-muted-foreground hover:underline"
+            className="min-h-11 px-3 text-[14px] font-bold text-muted-foreground hover:text-foreground"
           >
             {postSession ? "Not now, keep studying free" : "Not now"}
           </button>

@@ -1,7 +1,12 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/seo";
+import { generateSitemaps as notesSitemaps } from "./notes/sitemap";
 
-export default function robots(): MetadataRoute.Robots {
+export const revalidate = 3600;
+
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  // Public note pages (/notes) are crawlable and have their own sitemap files.
+  const notes = await notesSitemaps();
   return {
     rules: {
       userAgent: "*",
@@ -17,8 +22,11 @@ export default function robots(): MetadataRoute.Robots {
         "/reset-password",
         "/restore-account",
         "/accept-invite",
+        "/review",
+        // The signed-in notes library; the public note pages are /notes.
+        "/library",
       ],
     },
-    sitemap: `${siteUrl}/sitemap.xml`,
+    sitemap: [`${siteUrl}/sitemap.xml`, ...notes.map((s) => `${siteUrl}/notes/sitemap/${s.id}.xml`)],
   };
 }

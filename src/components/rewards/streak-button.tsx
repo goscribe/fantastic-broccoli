@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { Flame, Snowflake, Sparkles } from "lucide-react";
@@ -9,6 +10,8 @@ import { toast } from "@/lib/toast";
 import { useI18n, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/rewards";
+import "@/lib/i18n/purpose";
+import { freezeSaveLine } from "@/lib/api/streak";
 
 const MILESTONES = [3, 7, 14, 30, 60, 100, 365];
 
@@ -111,6 +114,21 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
     }
     toast.success(`${t("rewards.streakDays").replace("{n}", String(streak.current))}!`);
   }, [streak, t]);
+
+  // A freeze Scribe applied by itself: one calm line, once per save, on the next visit.
+  useEffect(() => {
+    const save = streak?.freezeSave;
+    const line = freezeSaveLine(save, t);
+    if (!save || !line) return;
+    const key = `scribe.freezeSave.${save.at}`;
+    try {
+      if (window.localStorage.getItem(key)) return;
+      window.localStorage.setItem(key, "1");
+    } catch {
+      return;
+    }
+    toast(line, { duration: 8000 });
+  }, [streak?.freezeSave, t]);
 
   useEffect(() => {
     if (!open) return;
@@ -218,7 +236,7 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
           <Link
             href="/shop"
             onClick={() => setOpen(false)}
-            className="mt-3 flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-accent text-[14px] font-semibold text-accent-foreground hover:bg-accent-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2"
+            className={buttonClass({ className: "mt-3 w-full gap-2" })}
           >
             {t("rewards.openShop")}
           </Link>

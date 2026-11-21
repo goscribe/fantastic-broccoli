@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import "@/app/design/design.css";
 
-/** Floating result card shown under an answered question (redesign): cheering cat + XP on a correct answer. */
+/** Floating result card shown under an answered question (redesign): cheering cat + points on a correct answer. */
 export function FeedbackCard({
   ok,
   title,
@@ -18,6 +18,7 @@ export function FeedbackCard({
   onSecondary,
   xp = 10,
   note,
+  aside,
 }: {
   ok: boolean;
   title: string;
@@ -29,6 +30,8 @@ export function FeedbackCard({
   xp?: number;
   /** One quiet line under the explanation (e.g. "Saved to Mistakes"). */
   note?: React.ReactNode;
+  /** A quiet text action beside the button (e.g. "Why?"), not a second button. */
+  aside?: { label: string; onClick: () => void };
 }) {
   const xpShown = useCountUp(ok ? xp : 0, 600);
   return (
@@ -44,13 +47,13 @@ export function FeedbackCard({
           <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-1">
             <span className={cn("text-[20px] font-extrabold", ok ? "text-emerald-800" : "text-rose-800")}>{title}</span>
             {ok && (
-              <span className="text-[13.5px] font-extrabold tabular-nums text-emerald-800/80">+{xpShown} XP</span>
+              <span className="text-[13.5px] font-extrabold tabular-nums text-emerald-800/80">+{xpShown} pts</span>
             )}
           </div>
         </div>
         {message && <div className="relative mt-3.5 text-[15px] leading-6 text-foreground/80 sm:pr-24">{message}</div>}
         {note && <p className="relative mt-2 text-[12.5px] font-bold text-rose-800">{note}</p>}
-        <div className="relative mt-4 flex gap-2.5">
+        <div className="relative mt-4 flex items-center gap-2.5">
           {secondary && onSecondary && (
             <Button variant="ghost" size="sm" onClick={onSecondary} className="h-12 flex-1 rounded-[var(--r-button)] bg-muted sm:flex-none">
               {secondary}
@@ -64,6 +67,15 @@ export function FeedbackCard({
           >
             {primary}
           </Button>
+          {aside && (
+            <button
+              type="button"
+              onClick={aside.onClick}
+              className="inline-flex min-h-11 shrink-0 items-center px-2 text-[14px] font-bold text-muted-foreground underline decoration-border-strong underline-offset-4 hover:text-foreground hover:decoration-foreground"
+            >
+              {aside.label}
+            </button>
+          )}
         </div>
       </div>
     </div>

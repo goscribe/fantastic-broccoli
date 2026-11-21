@@ -6,25 +6,8 @@ import { SubjectTile } from "@/components/learn/subject-tile";
 import { coursesApi, type CourseSubject } from "@/lib/api/courses";
 import { masteryPercent } from "@/lib/courses";
 import { onTreeChanged } from "@/lib/tree-events";
-import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
-
-/** Thin topics-done bar. */
-export function ProgressLine({ done, total, className }: { done: number; total: number; className?: string }) {
-  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
-  return (
-    <div
-      className={cn("h-1.5 w-full overflow-hidden rounded-full bg-muted", className)}
-      role="progressbar"
-      aria-valuemin={0}
-      aria-valuemax={total}
-      aria-valuenow={done}
-    >
-      <div className="h-full rounded-full bg-accent transition-[width]" style={{ width: `${pct}%` }} />
-    </div>
-  );
-}
 
 /** A course the learner is on, as a tile in its subject's colour: topics done on the card, one tap to carry on. */
 export function CourseProgressRow({ c }: { c: CourseSubject }) {
@@ -33,8 +16,9 @@ export function CourseProgressRow({ c }: { c: CourseSubject }) {
   const started = c.progress.topicsDone > 0 || c.progress.topicsPractised > 0;
   return (
     <SubjectTile
-      href={`/courses/${c.workspaceId}`}
+      href={`/workspace/${c.workspaceId}`}
       match={c.courseTitle}
+      stored={c.subjectFamily}
       title={
         <>
           {c.courseTitle}

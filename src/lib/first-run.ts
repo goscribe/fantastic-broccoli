@@ -62,3 +62,29 @@ export function uploadSubjectTitle(names: string[], fallback: string): string {
   const first = useful[0].slice(0, 60);
   return base.length > 1 ? `${first.slice(0, 50)} +${base.length - 1}` : first;
 }
+
+/**
+ * Whether home shows the first-run screen ("What are you studying?") instead
+ * of the dashboard. A failed request is never read as "nothing there": only a
+ * successful, empty answer makes someone a first-run candidate.
+ *
+ * `sessionCounts` has one entry per subject: its number of study sessions, or
+ * null when that request failed.
+ */
+export function shouldShowFirstRun(input: {
+  treeFailed: boolean;
+  workspaceCount: number;
+  skipped: boolean;
+  sessionCounts: (number | null)[];
+}): boolean {
+  if (input.treeFailed) return false;
+  if (input.workspaceCount === 0) return true;
+  if (input.skipped) return false;
+  // Established students (many subjects) are never first-run candidates.
+  if (input.workspaceCount > FIRST_RUN_MAX_SUBJECTS) return false;
+  if (input.sessionCounts.some((c) => c === null)) return false;
+  return input.sessionCounts.every((c) => c === 0);
+}
+
+/** Above this many subjects the per-subject session check is skipped entirely. */
+export const FIRST_RUN_MAX_SUBJECTS = 5;

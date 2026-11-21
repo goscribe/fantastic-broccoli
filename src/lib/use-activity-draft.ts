@@ -74,3 +74,19 @@ export function useActivityDraft(
     };
   }, [activityId]);
 }
+
+/**
+ * Saves an activity's latest in-progress state now (not after the debounce),
+ * so the server sees an answer the learner has just given — the copilot's
+ * "Why?" checks that the question was answered before explaining it.
+ * Resolves after `timeoutMs` at the latest.
+ */
+export function flushActivityDraft(activityId: string, timeoutMs = 2500): Promise<void> {
+  const draft = memoryDrafts.get(activityId);
+  if (!draft || !isDraftable(activityId)) return Promise.resolve();
+  const save = saveActivityDraft(activityId, draft).then(
+    () => undefined,
+    () => undefined,
+  );
+  return Promise.race([save, new Promise<void>((r) => setTimeout(r, timeoutMs))]);
+}

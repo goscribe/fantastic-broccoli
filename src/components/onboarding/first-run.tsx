@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Camera, ClipboardPaste, GraduationCap, Loader2, PenLine, Upload } from "lucide-react";
+import { ArrowRight, Camera, ClipboardPaste, GraduationCap, Loader2, Upload } from "lucide-react";
 import { createWorkspace } from "@/lib/api/workspace";
 import { addPastedText, analyzeFiles, uploadFiles } from "@/lib/api/materials";
 import { createStudySession } from "@/lib/api/study";
@@ -16,7 +16,9 @@ import "@/lib/i18n/first-run";
 import "@/lib/i18n/courses";
 import { CoursePicker } from "@/components/courses/course-picker";
 import { coursesApi, type CatalogTopic, type Course, type CourseLevel } from "@/lib/api/courses";
-import { markFirstScreenShown, track, type FirstRunOption } from "@/lib/funnel";
+import { markFirstScreenShown, track as trackFunnel, type FirstRunOption } from "@/lib/funnel";
+import { NotesOffer, type NotesOfferSelection } from "@/components/onboarding/notes-offer";
+import { attachedNotesApi } from "@/lib/api/notes";
 import {
   PASTE_MAX_CHARS,
   PASTE_MIN_CHARS,
@@ -26,52 +28,60 @@ import {
 } from "@/lib/first-run";
 import type { ExamBoard } from "@/types";
 
-type Mode = "upload" | "topic" | "paste" | "course";
+type Mode = "course" | "upload" | "paste";
 type Busy = "uploading" | "saving" | "building" | null;
 
 /** One "viewed" per page load, however often the screen remounts. */
 let viewedTracked = false;
 
-const EXAMPLE_KEYS = ["firstRun.example1", "firstRun.example2", "firstRun.example3"] as const;
-
 /**
- * First screen after signup, and home for anyone without a subject: "What are
- * you studying?" with four equal ways in — upload (one-tap camera on phones),
- * type a topic, paste text, or pick a course from Scribe's outlines (course →
- * unit → topic, for the many who have no notes to hand). Every path goes
- * straight to a Quick 5: no intro video, no naming step, no plan picker.
+ * First screen after signup, home for anyone without a subject, and "New
+ * subject" later: "What are you studying?" Pick your course comes first (one
+ * search over courses and topics; anything else typed starts on exactly that
+ * topic), then upload (one-tap camera on phones) or paste text. Every path
+ * goes straight to a Quick 5: no intro video, no naming step, no plan picker.
  */
 export function FirstRun({
   firstName,
   onSkip,
   fallbackWorkspaceId,
+  context = "first_run",
 }: {
   firstName?: string;
   /** Offered only to learners who already have a subject to look around in. */
   onSkip?: () => void;
   /** An existing empty subject to use if a new one can't be created (e.g. the unverified one-subject limit). */
   fallbackWorkspaceId?: string;
+  /** "new_subject": the same screen for adding a subject later; the first-run funnel events are not sent. */
+  context?: "first_run" | "new_subject";
 }) {
   const { t } = useI18n();
   const router = useRouter();
-  const [mode, setMode] = useState<Mode>("upload");
+  const firstRun = context === "first_run";
+  /** First-run funnel events only from the first run itself, so adding a subject later doesn't skew them. */
+  const track = useCallback<typeof trackFunnel>(
+    (event, props, workspaceId) => {
+      if (firstRun || !event.startsWith("first_run.")) trackFunnel(event, props, workspaceId);
+    },
+    [firstRun],
+  );
+  const [mode, setMode] = useState<Mode>("course");
   const [busy, setBusy] = useState<Busy>(null);
   const [error, setError] = useState<string | null>(null);
-  const [topic, setTopic] = useState("");
   const [pasted, setPasted] = useState("");
   const [dragging, setDragging] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const cameraRef = useRef<HTMLInputElement>(null);
-  const topicRef = useRef<HTMLInputElement>(null);
   const pasteRef = useRef<HTMLTextAreaElement>(null);
   const started = useRef(false);
 
   useEffect(() => {
+    if (!firstRun) return;
     markFirstScreenShown();
     if (viewedTracked) return;
     viewedTracked = true;
-    track("first_run.viewed");
-  }, []);
+    trackFunnel("first_run.viewed");
+  }, [firstRun]);
 
   // Focus the field when switching to a typed option (not on first paint:
   // on a phone that would open the keyboard over the three options).
@@ -79,7 +89,6 @@ export function FirstRun({
     setMode(next);
     setError(null);
     requestAnimationFrame(() => {
-      if (next === "topic") topicRef.current?.focus();
       if (next === "paste") pasteRef.current?.focus();
     });
   };
@@ -164,12 +173,10 @@ export function FirstRun({
     );
   };
 
-  const startTopic = () => {
-    const start = topicStart(topic);
-    if (!start) {
-      topicRef.current?.focus();
-      return;
-    }
+  /** Typed text that matches no course or topic: a subject and 5 questions on exactly that. */
+  const startTopic = (text: string) => {
+    const start = topicStart(text);
+    if (!start) return;
     void run(
       "topic",
       async () => {
@@ -204,8 +211,45 @@ export function FirstRun({
     );
   };
 
+  /** The course whose notes were offered on this screen, so picking a topic by hand instead counts as passing the offer over. */
+  const offered = useRef<{ courseId: string; noteCount: number } | null>(null);
+  const onNotesOffered = useCallback((courseId: string, noteCount: number) => {
+    offered.current = { courseId, noteCount };
+    track("first_run.notes_offered", { courseId, noteCount });
+  }, [track]);
+
+  /**
+   * "Start with Scribe's notes": the course's subject is made with the first
+   * unit's notes in it as material, then a Quick 5 starts on the first topic.
+   * No upload, nothing to choose. If the notes cannot be attached
+   * (an older server), the Quick 5 still starts as it always did.
+   */
+  const startWithNotes = (course: Course, level: CourseLevel | undefined, selection: NotesOfferSelection) => {
+    void run(
+      "curriculum",
+      async () => {
+        setBusy("building");
+        const first = selection.topics[0];
+        const { workspaceId } = await coursesApi.enroll(course.id, level);
+        emitTreeChanged();
+        const attached = await attachedNotesApi
+          .attach(workspaceId, course.id, selection.topics.map((x) => x.id))
+          .then((out) => out.attached.length)
+          .catch(() => 0);
+        track("first_run.notes_accepted", { courseId: course.id, noteCount: attached }, workspaceId);
+        if (attached > 0) track("notes.attached", { from: "first_run", courseId: course.id, noteCount: attached }, workspaceId);
+        const { sessionId } = await coursesApi.startTopic({ courseId: course.id, topicId: first.id, ...(level ? { level } : {}) });
+        track("first_run.session_requested", { option: "curriculum" }, workspaceId);
+        if (attached > 0) track("notes.attached_session_started", { from: "first_run", courseId: course.id, noteCount: attached }, workspaceId);
+        router.push(`/workspace/${workspaceId}/session/${sessionId}`);
+      },
+      t("course.errorStart"),
+    );
+  };
+
   /** Course → unit → topic: the server reuses/creates the course's subject and starts a topic-mode Quick 5. */
   const startCourse = (course: Course, topic: CatalogTopic, level?: CourseLevel) => {
+    if (offered.current?.courseId === course.id) track("first_run.notes_skipped", { courseId: course.id, noteCount: offered.current.noteCount });
     void run(
       "curriculum",
       async () => {
@@ -223,19 +267,22 @@ export function FirstRun({
     );
   };
 
+  // Your course first: it is the way in that needs nothing to hand, and typing a topic lives in its search.
   const options: { id: Mode; label: string; hint: string; icon: typeof Upload }[] = [
-    { id: "upload", label: t("firstRun.optUpload"), hint: t("firstRun.optUploadHint"), icon: Upload },
-    { id: "topic", label: t("firstRun.optTopic"), hint: t("firstRun.optTopicHint"), icon: PenLine },
-    { id: "paste", label: t("firstRun.optPaste"), hint: t("firstRun.optPasteHint"), icon: ClipboardPaste },
     { id: "course", label: t("course.optPick"), hint: t("course.optPickHint"), icon: GraduationCap },
+    { id: "upload", label: t("firstRun.optUpload"), hint: t("firstRun.optUploadHint"), icon: Upload },
+    { id: "paste", label: t("firstRun.optPaste"), hint: t("firstRun.optPasteHint"), icon: ClipboardPaste },
   ];
 
   const primaryButton =
-    "inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 text-[15px] font-semibold text-white transition-colors hover:bg-accent-dim disabled:opacity-50";
+    "btn-chunky inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-[16px] bg-accent px-5 text-[16px] font-extrabold text-white hover:bg-accent-dim disabled:opacity-50";
 
   return (
-    <div className="flex min-h-full w-full flex-col items-center bg-white px-4 pb-10 pt-8 sm:justify-center sm:px-6 sm:py-12">
-      <div className="w-full max-w-[520px] animate-fade-up">
+    // Centred with auto margins, not justify-center: when the column is taller
+    // than the screen (the course list) centring pushed the greeting and H1
+    // above the top edge, where scrolling cannot reach.
+    <div className="flex min-h-full w-full shrink-0 flex-col items-center bg-white px-4 pb-10 pt-8 sm:px-6 sm:py-12">
+      <div className="w-full max-w-[520px] animate-fade-up sm:my-auto">
         <Image
           src="/design/cat3-wave.webp"
           alt=""
@@ -250,10 +297,10 @@ export function FirstRun({
           </p>
         )}
         <h1 className={cn("text-center text-[26px] font-bold leading-tight tracking-tight sm:text-[28px]", firstName ? "mt-1" : "mt-3")}>
-          {t("firstRun.title")}
+          {firstRun ? t("firstRun.title") : t("firstRun.newTitle")}
         </h1>
         <p className="mx-auto mt-2 max-w-[440px] text-balance text-center text-[14.5px] leading-snug text-muted-foreground">
-          {t("firstRun.subtitle")}
+          {firstRun ? t("firstRun.subtitle") : t("firstRun.newSubtitle")}
         </p>
 
         {busy ? (
@@ -266,7 +313,7 @@ export function FirstRun({
           </div>
         ) : (
           <>
-            <div role="tablist" aria-label={t("firstRun.optionsLabel")} className="mt-7 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <div role="tablist" aria-label={t("firstRun.optionsLabel")} className="mt-7 grid grid-cols-3 gap-2">
               {options.map(({ id, label, hint, icon: Icon }) => (
                 <button
                   key={id}
@@ -362,52 +409,22 @@ export function FirstRun({
                 </>
               )}
 
-              {mode === "topic" && (
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    startTopic();
-                  }}
-                >
-                  <label htmlFor="first-run-topic" className="text-[13px] font-semibold">
-                    {t("firstRun.topicLabel")}
-                  </label>
-                  <input
-                    ref={topicRef}
-                    id="first-run-topic"
-                    value={topic}
-                    onChange={(e) => setTopic(e.target.value)}
-                    onFocus={keepVisible}
-                    maxLength={100}
-                    autoComplete="off"
-                    enterKeyHint="go"
-                    placeholder={t("firstRun.topicPlaceholder")}
-                    className="mt-1.5 h-12 w-full rounded-xl border border-border bg-card px-3.5 text-[16px] text-foreground placeholder:text-faint focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/15"
-                  />
-                  <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
-                    <span className="text-[12.5px] text-faint">{t("firstRun.examplesLabel")}</span>
-                    {EXAMPLE_KEYS.map((key) => (
-                      <button
-                        key={key}
-                        type="button"
-                        onClick={() => {
-                          setTopic(t(key));
-                          topicRef.current?.focus();
-                        }}
-                        className="inline-flex min-h-9 items-center rounded-full border border-border px-3 text-[12.5px] font-semibold text-muted-foreground hover:border-border-strong hover:text-foreground"
-                      >
-                        {t(key)}
-                      </button>
-                    ))}
-                  </div>
-                  <button type="submit" disabled={!topicStart(topic)} className={cn(primaryButton, "mt-4")}>
-                    {t("firstRun.start")}
-                    <ArrowRight className="size-4" />
-                  </button>
-                </form>
-              )}
 
-              {mode === "course" && <CoursePicker onStart={startCourse} />}
+              {mode === "course" && (
+                <CoursePicker
+                  onStart={startCourse}
+                  onFreeTopic={startTopic}
+                  unitTop={(course, level) => (
+                    <NotesOffer
+                      key={`${course.id}-${level ?? ""}`}
+                      course={course}
+                      level={level}
+                      onOffered={(n) => onNotesOffered(course.id, n)}
+                      onAccept={(selection) => startWithNotes(course, level, selection)}
+                    />
+                  )}
+                />
+              )}
 
               {mode === "paste" && (
                 <form
@@ -460,7 +477,7 @@ export function FirstRun({
                 }}
                 className="mx-auto mt-2 flex min-h-11 items-center px-3 text-[13px] font-medium text-faint hover:text-foreground"
               >
-                {t("firstRun.skip")}
+                {firstRun ? t("firstRun.skip") : t("firstRun.backHome")}
               </button>
             )}
           </>

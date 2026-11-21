@@ -4,7 +4,6 @@ import "@/lib/i18n/today";
 import "@/app/design/design.css";
 import Link from "next/link";
 import { Check, ChevronRight, Flame, Snowflake } from "lucide-react";
-import { Ring } from "@/components/design/charts";
 import { Mascot } from "@/components/rewards/mascot";
 import type { StreakSummary } from "@/lib/api/streak";
 import { weekdayNames } from "@/lib/exam-planner-view";
@@ -14,10 +13,12 @@ import { cn } from "@/lib/utils";
 
 /**
  * Home: the streak as one simple row to protect — a flame and the number,
- * today's goal ring, and a Mon–Sun strip of the last 7 days (ticked, frozen,
- * or today still open). Orange is the mascot's, used for the flame and ticks
- * only. `tiles` adds the cards-due and points tiles under it (phones; desktop
- * keeps those in the sidebar).
+ * whether today counts yet, and a Mon–Sun strip of the last 7 days (ticked,
+ * frozen, or today still open). A streak day is one finished activity, so
+ * that is what the card asks for; minutes studied today are shown only as
+ * information (there is no minutes goal to meet). Orange is the mascot's,
+ * used for the flame and ticks only. `tiles` adds the cards-due and points
+ * tiles under it (phones; desktop keeps those in the rail).
  */
 export function StreakCard({
   streak,
@@ -27,7 +28,7 @@ export function StreakCard({
   tiles = false,
   className,
 }: {
-  streak: StreakSummary | null;
+  streak: StreakSummary | null | undefined;
   due?: number | null;
   points?: number | null;
   canAfford?: boolean;
@@ -38,9 +39,8 @@ export function StreakCard({
   const names = weekdayNames(locale, "narrow");
   const current = streak?.current ?? 0;
   const shownStreak = useCountUp(current);
-  const goal = Math.max(1, streak?.goalMin ?? 20);
-  const today = Math.min(goal, streak?.todayMinutes ?? 0);
-  const goalMet = !!streak?.todayGoalMet || today >= goal;
+  const done = !!streak?.todayDone;
+  const minutes = Math.max(0, Math.round(streak?.todayMinutes ?? 0));
   const week = streak?.week ?? [];
   const lastIdx = week.length - 1;
 
@@ -48,34 +48,28 @@ export function StreakCard({
     <div className={cn("life-rise flex flex-col gap-3", className)} style={{ ["--i" as string]: 1 }}>
       <section data-look="streak" className="life-card px-5 pb-5 pt-4">
         <div className="flex items-center gap-2.5">
-          {streak?.todayDone ? (
+          {done ? (
             <Mascot pose="flame" className="cat-bob -my-1 h-[52px]" />
           ) : (
             <Flame className={cn("size-8 shrink-0", current > 0 ? "text-[var(--flame)]" : "text-border-strong")} fill="currentColor" strokeWidth={1.5} />
           )}
-          <div className="min-w-0 flex-1">
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-[26px] font-extrabold leading-none tabular-nums">{shownStreak}</span>
-              <span className="truncate text-[14px] font-bold text-muted-foreground">
-                {t("today.statStreak")}
-              </span>
-            </div>
+          <div className="flex min-w-0 shrink-0 items-baseline gap-1.5">
+            <span className="text-[26px] font-extrabold leading-none tabular-nums">{shownStreak}</span>
+            <span className="truncate text-[14px] font-bold text-muted-foreground">{t("today.statStreak")}</span>
           </div>
-          <div className="flex shrink-0 items-center gap-2">
-            <span className="text-right text-[12px] font-bold leading-tight text-muted-foreground">
-              {goalMet ? t("today.goalMet") : t("today.dailyGoal")}
-              {!goalMet && (
-                <span className="block text-[13px] font-extrabold tabular-nums text-foreground" aria-label={t("today.goalOf").replace("{a}", String(today)).replace("{b}", String(goal))}>
-                  {today}/{goal}
+          {streak && (
+            <span className="ml-auto min-w-0 text-right text-[12px] font-bold leading-tight text-muted-foreground">
+              {done ? (
+                <span className="inline-flex items-center gap-1 text-foreground">
+                  <Check className="size-3.5 text-[var(--flame-edge)]" strokeWidth={3.5} />
+                  {t("streak.doneToday")}
                 </span>
+              ) : (
+                <span className="block text-foreground">{t("streak.keepIt")}</span>
               )}
+              {minutes > 0 && <span className="mt-0.5 block font-semibold">{t("streak.minutesToday").replace("{m}", String(minutes))}</span>}
             </span>
-            <span className="ring-draw">
-              <Ring pct={today / goal} size={40} stroke={14} color="var(--accent)">
-                {goalMet && <Check className="size-4 text-accent" strokeWidth={3.5} />}
-              </Ring>
-            </span>
-          </div>
+          )}
         </div>
         {week.length > 0 && (
           <ol className="mt-4 grid grid-cols-7 gap-1" aria-label={t("today.dayStreakLong").replace("{n}", String(current))}>

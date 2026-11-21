@@ -19,10 +19,10 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#6952e0",
     categories: ["education", "productivity"],
     icons: [
-      { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
-      { src: "/icons/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
-      { src: "/icons/maskable-192.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
-      { src: "/icons/maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+      { src: "/icons/cat-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: "/icons/cat-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: "/icons/cat-maskable-192.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
+      { src: "/icons/cat-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
   };
 }

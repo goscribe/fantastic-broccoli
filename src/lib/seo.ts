@@ -48,7 +48,7 @@ export const organizationJsonLd = {
   "@type": "Organization",
   name: siteName,
   url: siteUrl,
-  logo: absoluteUrl("/logo.png"),
+  logo: absoluteUrl("/brand/scribe-cat-512.png"),
   sameAs: ["https://www.producthunt.com/products/scribe-19"],
 };
 

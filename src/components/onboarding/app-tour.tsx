@@ -1,7 +1,9 @@
 "use client";
+import { buttonClass } from "@/components/ui/button";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Volume2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { track } from "@/lib/funnel";
 
 const SEEN_KEY = "scribe.tour.v2";
 const VIDEO = "/onboarding/tour.mp4";
@@ -34,23 +36,23 @@ export function markAppTourSeen() {
   } catch {}
 }
 
-function hasSeenAppTour(): boolean {
-  try {
-    return localStorage.getItem(SEEN_KEY) === "seen";
-  } catch {
-    return true;
-  }
-}
+/** When the open tour was opened, for `tour.closed {seconds}`. */
+let openedAt = 0;
 
-/** Opens the walkthrough from anywhere (the sidebar's "How Scribe works"). */
+/** Opens the walkthrough from anywhere (the sidebar's "How Scribe works"). It never opens by itself. */
 export function requestAppTour() {
+  if (open) return;
   open = true;
+  openedAt = Date.now();
+  track("tour.shown");
   notify();
 }
 
 function closeAppTour() {
+  if (!open) return;
   open = false;
   markAppTourSeen();
+  track("tour.closed", { seconds: Math.round((Date.now() - openedAt) / 1000) });
   notify();
 }
 
@@ -151,7 +153,7 @@ export function TourVideo({ autoPlay = false, className }: { autoPlay?: boolean;
   );
 }
 
-/** Mounted once in the shell: the walkthrough dialog, opened by `requestAppTour()` or `<AppTourAuto />`. */
+/** Mounted once in the shell: the walkthrough dialog, opened by `requestAppTour()`. */
 export function AppTourHost() {
   const isOpen = useSyncExternalStore(subscribe, () => open, () => false);
 
@@ -185,19 +187,11 @@ export function AppTourHost() {
         </div>
         <TourVideo autoPlay />
         <div className="mt-4 flex justify-end">
-          <button type="button" onClick={closeAppTour} className="inline-flex h-10 items-center rounded-xl bg-accent px-5 text-[14px] font-semibold text-white hover:bg-accent-dim">
+          <button type="button" onClick={closeAppTour} className={buttonClass()}>
             Got it
           </button>
         </div>
       </div>
     </div>
   );
-}
-
-/** Shows the walkthrough once to someone who has not seen it (rendered on Home for people past first-run). */
-export function AppTourAuto() {
-  useEffect(() => {
-    if (!hasSeenAppTour()) requestAppTour();
-  }, []);
-  return null;
 }

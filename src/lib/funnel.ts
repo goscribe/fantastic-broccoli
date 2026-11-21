@@ -7,6 +7,7 @@
  * the tab closes still arrive.
  */
 import { apiUrl } from "./api/config";
+import type { WallReason, WallVariant } from "./wall";
 
 export type FunnelEvent =
   | "first_run.viewed"
@@ -20,7 +21,35 @@ export type FunnelEvent =
   | "quick5.started"
   | "quick5.finished"
   /** Home's one "Today" button was tapped; `action` says which one it was. */
-  | "home.today_tapped";
+  | "home.today_tapped"
+  /** A note opened in the in-app reader; notes attached to / removed from a subject; a session started from an attached note. */
+  | "notes.opened_in_app"
+  | "notes.attached"
+  | "notes.detached"
+  | "notes.attached_session_started"
+  /** First run: Scribe's notes for the picked course offered, taken, or passed over. */
+  | "first_run.notes_offered"
+  | "first_run.notes_accepted"
+  | "first_run.notes_skipped"
+  /** End screen: the one next step was tapped; `kind` says which. */
+  | "debrief.next_tapped"
+  /** The player's bottom-bar Next (against the card's own "Next question"). */
+  | "session.footer_next"
+  /** "How Scribe works" opened by hand, then closed after `seconds`. */
+  | "tour.shown"
+  | "tour.closed"
+  /** A search ran; `hasLocalResults` says whether the free local index found anything. */
+  | "search.query"
+  /** Subscribe wall: shown (`reason`, `variant`), dismissed, or checkout opened from it (a trial, or the pass when `variant` is "exam_pass"). */
+  | "wall.shown"
+  | "wall.dismissed"
+  | "wall.trial_started";
+
+/** What the end screen's next step offered (the server's DEBRIEF_NEXT_KINDS). */
+export type DebriefNextKind = "session" | "quick5" | "mistakes" | "topic" | "review" | "plan" | "home" | "other";
+
+/** Where a notes event happened. */
+export type NoteEventSource = "library" | "course" | "subject" | "note" | "public" | "first_run";
 
 export type TodayActionKind = "mistakes" | "plan" | "quick5" | "upload" | "continue";
 
@@ -34,6 +63,20 @@ export interface FunnelProps {
   sizeKb?: number;
   correct?: number;
   total?: number;
+  from?: NoteEventSource;
+  noteCount?: number;
+  /** A catalog course id (the server accepts only known ids). */
+  courseId?: string;
+  /** debrief.next_tapped: what the next step offered. */
+  kind?: DebriefNextKind;
+  /** tour.closed: seconds the tour was open. */
+  seconds?: number;
+  /** search.query: the free local index returned at least one row. */
+  hasLocalResults?: boolean;
+  /** wall.*: why the wall opened (server WALL_REASONS). */
+  reason?: WallReason;
+  /** wall.*: which wall layout (server WALL_VARIANTS). */
+  variant?: WallVariant;
 }
 
 const FIRST_SCREEN_KEY = "scribe.firstRun.shownAt";

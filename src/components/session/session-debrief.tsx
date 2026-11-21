@@ -34,7 +34,7 @@ import { deckEntries } from "@/components/bank/bank-content";
 import { remainingMinutes } from "@/components/session/session-progress";
 import { toastError } from "@/lib/toast";
 import type { StudySession } from "@/types";
-import { SESSION_COMPLETED_EVENT } from "@/lib/api/account";
+import { SESSION_COMPLETED_EVENT, type SessionCompletedDetail } from "@/lib/api/account";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/session";
@@ -43,7 +43,14 @@ import { InviteCard } from "@/components/growth/invite-card";
 import { HabitPrompt } from "@/components/reminders/habit-prompt";
 import "@/lib/i18n/habits";
 import "@/lib/i18n/mistakes";
-import { fixMinutes, masteryRow, practiceHref } from "@/lib/mistakes";
+import { catalogTopicForLabel, fixMinutes, masteryRow, practiceHref, sessionMistakesHref } from "@/lib/mistakes";
+import { unfinishedSummary } from "@/lib/session-footer";
+import { coursesApi } from "@/lib/api/courses";
+import { loadCourse } from "@/components/courses/course-picker";
+import { notesApi } from "@/lib/api/notes";
+import { noteHref } from "@/lib/notes";
+import { track, type DebriefNextKind } from "@/lib/funnel";
+import "@/lib/i18n/purpose";
 import type { ApiSessionDebrief, ApiSessionStats } from "@/lib/api/study-session";
 
 /** How long the mastery rows get on screen before the study-time sheet opens over them. */
@@ -136,17 +143,30 @@ type MasteryChange = NonNullable<ApiSessionStats["mastery"]>[number];
  * another card. The bar shows where the topic was (muted) and what this
  * session added (accent).
  */
-function MasteryRows({ mastery, className, phoneMax = 2 }: { mastery: MasteryChange[]; className?: string; phoneMax?: number }) {
+function MasteryRows({
+  mastery,
+  className,
+  phoneMax = 2,
+  hrefFor,
+}: {
+  mastery: MasteryChange[];
+  className?: string;
+  phoneMax?: number;
+  /** Where each topic row leads (its note, or the topic in its subject). */
+  hrefFor?: (m: MasteryChange) => string | null;
+}) {
   const { t } = useI18n();
   return (
       <ul className={className} aria-label={t("debrief.masteryTitle")}>
         {mastery.map((m, i) => {
           const { before, after, delta, base, gain } = masteryRow(m);
+          const href = hrefFor?.(m) ?? null;
           return (
             // Phones: two rows keep the next step above the fold.
             <li key={m.topic} className={cn(i >= phoneMax && "max-sm:hidden")}>
+              <MaybeLink href={href} className={cn("group block", href && "-mx-1 rounded-lg px-1 py-0.5 hover:bg-muted/60 focus-visible:bg-muted/60")}>
               <div className="flex items-baseline justify-between gap-3 text-[13.5px]">
-                <span className="min-w-0 truncate font-semibold">{m.label}</span>
+                <span className={cn("min-w-0 truncate font-semibold", href && "underline decoration-border-strong underline-offset-4 group-hover:decoration-foreground")}>{m.label}</span>
                 <span
                   className="shrink-0 tabular-nums text-muted-foreground"
                   aria-label={(before === null ? t("debrief.masteryAriaNew") : t("debrief.masteryAria"))
@@ -174,6 +194,7 @@ function MasteryRows({ mastery, className, phoneMax = 2 }: { mastery: MasteryCha
                   style={{ width: `${gain}%` }}
                 />
               </div>
+              </MaybeLink>
             </li>
           );
         })}
@@ -225,11 +246,22 @@ function FinishConfetti({ count = 38 }: { count?: number }) {
   );
 }
 
+/** A link when there is somewhere to go, else a plain block with the same layout. */
+function MaybeLink({ href, className, children }: { href?: string | null; className?: string; children: ReactNode }) {
+  return href ? (
+    <Link href={href} className={className}>
+      {children}
+    </Link>
+  ) : (
+    <div className={className}>{children}</div>
+  );
+}
+
 /** One dot per answer: a filled green dot for a right one, an open ring for one to fix (shape as well as colour). */
-function AnswerDots({ dots, correct, wrong }: { dots: boolean[]; correct: number; wrong: number }) {
+function AnswerDots({ dots, correct, wrong, href }: { dots: boolean[]; correct: number; wrong: number; href?: string }) {
   const { t } = useI18n();
   return (
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+    <MaybeLink href={wrong > 0 ? href : undefined} className={cn("flex flex-wrap items-center gap-x-4 gap-y-2", href && wrong > 0 && "group -mx-1 w-fit rounded-lg px-1 py-1 hover:bg-muted/60")}>
       <ol
         className="flex flex-wrap items-center gap-[7px]"
         aria-label={t("finish.answersAria").replace("{c}", String(correct)).replace("{n}", String(wrong))}
@@ -244,9 +276,11 @@ function AnswerDots({ dots, correct, wrong }: { dots: boolean[]; correct: number
         ))}
       </ol>
       {wrong > 0 && (
-        <span className="text-[13.5px] font-bold text-muted-foreground">{t("finish.toFix").replace("{n}", String(wrong))}</span>
+        <span className={cn("text-[13.5px] font-bold text-muted-foreground", href && "underline decoration-border-strong underline-offset-4 group-hover:text-foreground group-hover:decoration-foreground")}>
+          {t("finish.toFix").replace("{n}", String(wrong))}
+        </span>
       )}
-    </div>
+    </MaybeLink>
   );
 }
 
@@ -396,8 +430,40 @@ export function SessionDebrief({
   });
 
   useEffect(() => {
-    window.dispatchEvent(new CustomEvent(SESSION_COMPLETED_EVENT, { detail: { sessionId } }));
-  }, [sessionId]);
+    // `quickStart` lets the subscribe wall stay off a Quick 5's end screen (its one ask is the habit prompt).
+    const detail: SessionCompletedDetail = { sessionId, quickStart };
+    window.dispatchEvent(new CustomEvent(SESSION_COMPLETED_EVENT, { detail }));
+  }, [sessionId, quickStart]);
+
+  // Mastery rows link to their topic: the catalog course (if the subject has one) and which topics have a note.
+  const { data: topicLinks } = useQuery({
+    queryKey: ["debrief-topic-links", workspaceId],
+    enabled: !!workspaceId && (stats?.mastery?.length ?? 0) > 0,
+    staleTime: 5 * 60_000,
+    retry: false,
+    queryFn: async () => {
+      const progress = await coursesApi.progress(workspaceId!).catch(() => null);
+      if (!progress) return null;
+      const [course, notes] = await Promise.all([
+        loadCourse(progress.courseId).catch(() => null),
+        notesApi.listForCourse(progress.courseId).catch(() => []),
+      ]);
+      return course ? { course, withNotes: new Set(notes.map((n) => n.topicId)) } : null;
+    },
+  });
+  const topicHref = (m: MasteryChange): string | null => {
+    if (!workspaceId) return null;
+    const topic = topicLinks ? catalogTopicForLabel(topicLinks.course.units, m.label) : null;
+    if (topic && topicLinks) {
+      return topicLinks.withNotes.has(topic.id)
+        ? noteHref(topicLinks.course.id, topic.id)
+        : `/workspace/${encodeURIComponent(workspaceId)}?topic=${encodeURIComponent(topic.id)}`;
+    }
+    // Not a catalog topic: the subject, where its topics are listed.
+    return `/workspace/${encodeURIComponent(workspaceId)}`;
+  };
+  /** The one next step was tapped (funnel: which kind gets taken). */
+  const nextTapped = (kind: DebriefNextKind) => track("debrief.next_tapped", { kind }, workspaceId);
 
   const verdict = usefulHeadline(debrief?.headline) ?? debrief?.summary;
   const hasReport = !!debrief && (debrief.sections.length > 0 || !!usefulHeadline(debrief.headline));
@@ -429,7 +495,11 @@ export function SessionDebrief({
       size="lg"
       className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold"
       disabled={sessionsLoading || startFull.isPending}
-      onClick={() => (fullSession ? openSession(fullSession.id) : startFull.mutate())}
+      onClick={() => {
+        nextTapped("session");
+        if (fullSession) openSession(fullSession.id);
+        else startFull.mutate();
+      }}
     >
       {startFull.isPending || sessionsLoading ? (
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -439,7 +509,14 @@ export function SessionDebrief({
       {t(fullSession ? "session.quick5FinishCta" : "session.quick5StartCta").replace("{n}", String(fullMinutes))}
     </Button>
   ) : quickStart ? (
-    <Button size="lg" className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold" onClick={onBack}>
+    <Button
+      size="lg"
+      className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold"
+      onClick={() => {
+        nextTapped("home");
+        onBack();
+      }}
+    >
       {t("debrief.continue")}
       <ArrowRight className="ml-1.5 h-4 w-4" />
     </Button>
@@ -448,13 +525,16 @@ export function SessionDebrief({
       size="lg"
       className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold"
       disabled={startWeakest.isPending}
-      onClick={() => startWeakest.mutate(weakest.label)}
+      onClick={() => {
+        nextTapped("topic");
+        startWeakest.mutate(weakest.label);
+      }}
     >
       {startWeakest.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Play className="mr-2 h-4 w-4 fill-current" />}
       <span className="min-w-0 truncate">{t("debrief.nextTopic").replace("{topic}", weakest.label)}</span>
     </Button>
   ) : (
-    <Link href="/flashcards/review" className="block w-full">
+    <Link href="/flashcards/review" className="block w-full" onClick={() => nextTapped("review")}>
       <Button size="lg" className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold">
         {t("session.reviewDueCards")}
         <ArrowRight className="ml-1.5 h-4 w-4" />
@@ -511,27 +591,33 @@ export function SessionDebrief({
       <TextAction i={8} title={t("session.reviewDueCards")} href="/flashcards/review" />
     );
     return (
-      <div className="mx-auto flex w-full max-w-2xl flex-col pb-10 text-left" data-debrief data-band={stats ? band : undefined}>
-        {/* One moment, in the home banner's own language: the scene for the student's time of day, the cat reacting to the result, the score. */}
+      <div className="@container mx-auto flex w-full max-w-2xl flex-col pb-10 text-left" data-debrief data-band={stats ? band : undefined}>
+        {/*
+          One moment, in the home banner's own language: the scene for the student's time of day, the cat reacting to the result, the score.
+          The hero lays itself out from ITS OWN width (@container above), not the viewport's: with Copilot docked beside it the column can be
+          ~330px on a 768px screen, where the side-by-side layout put the cat over the score.
+        */}
         <section
-          className="hero-card life-rise relative isolate w-full overflow-hidden rounded-[var(--r-panel)] border border-border px-5 pb-5 pt-[176px] sm:min-h-[292px] sm:px-9 sm:pb-8 sm:pt-8"
+          className="hero-card finish-hero life-rise relative isolate w-full overflow-hidden rounded-[var(--r-panel)] border border-border px-5 pb-5 pt-[176px] @[520px]:min-h-[292px] @[520px]:px-9 @[520px]:pb-8 @[520px]:pt-8"
           aria-labelledby="finish-title"
         >
-          <div aria-hidden className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[160px] sm:inset-0 sm:h-auto">
-            <div className="absolute bottom-[20px] left-1/2 h-[118px] -translate-x-1/2 sm:bottom-[7%] sm:left-auto sm:right-[9%] sm:h-[196px] sm:translate-x-0">
+          <div aria-hidden className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[160px] @[520px]:inset-0 @[520px]:h-auto">
+            {/* The side wash the words sit on, only in the side-by-side layout (tokens.css ties its own wash to the viewport). */}
+            <span className="finish-hero__wash absolute inset-0 hidden @[520px]:block" />
+            <div className="absolute bottom-[20px] left-1/2 h-[118px] -translate-x-1/2 @[520px]:bottom-[7%] @[520px]:left-auto @[520px]:right-[9%] @[520px]:h-[196px] @[520px]:translate-x-0">
               <span className="hero-field__ground" />
               {celebrate && <FinishConfetti />}
               {stats && band === "okay" && <SparkleBurst burst={1} count={10} distance={64} />}
               <Mascot pose={stats ? pose : "book"} key={stats ? pose : "wait"} className={cn("relative h-full", celebrate ? "cat-cheer" : "cat-peek")} priority />
             </div>
           </div>
-          <p className="hero-eyebrow relative line-clamp-2 break-words text-[13.5px] font-extrabold sm:max-w-[58%]">
+          <p className="hero-eyebrow relative line-clamp-2 break-words text-[13.5px] font-extrabold @[520px]:max-w-[58%]">
             {[subjectTitle, t(quickStart ? "debrief.quick5Complete" : "debrief.complete")].filter(Boolean).join(" · ")}
           </p>
-          <h2 id="finish-title" className="relative mt-1.5 text-balance text-[30px] font-extrabold leading-[1.08] tracking-tight sm:max-w-[58%] sm:text-[38px]">
+          <h2 id="finish-title" className="relative mt-1.5 text-balance text-[30px] font-extrabold leading-[1.08] tracking-tight @[520px]:max-w-[58%] @[520px]:text-[38px]">
             {stats ? t(band === "done" ? (quickStart ? "debrief.quick5Complete" : "debrief.complete") : `finish.${band}`) : statsError ? t(quickStart ? "debrief.quick5Complete" : "debrief.complete") : <span className="skeleton inline-block h-9 w-52 rounded-full align-middle" />}
           </h2>
-          <div className="relative mt-1.5 min-h-[22px] text-[15.5px] font-semibold leading-snug text-foreground/75 line-clamp-2 sm:max-w-[52%]">
+          <div className="relative mt-1.5 min-h-[22px] text-[15.5px] font-semibold leading-snug text-foreground/75 line-clamp-2 @[520px]:max-w-[52%]">
             {verdict ? (
               <MathText text={verdict} />
             ) : debriefLoading ? (
@@ -541,8 +627,8 @@ export function SessionDebrief({
             ) : null}
           </div>
           {stats ? (
-            <p className="relative mt-4 flex items-baseline gap-3 sm:mt-6" role="status">
-              <span className="finish-score text-[60px] font-extrabold leading-[0.9] tracking-tight tabular-nums sm:text-[76px]">
+            <p className="relative mt-4 flex items-baseline gap-3 @[520px]:mt-6" role="status">
+              <span className="finish-score text-[60px] font-extrabold leading-[0.9] tracking-tight tabular-nums @[520px]:text-[76px]">
                 {pct !== null ? (
                   <>
                     <CountUp value={pct} />
@@ -559,8 +645,8 @@ export function SessionDebrief({
               </span>
             </p>
           ) : statsError ? null : (
-            <div className="relative mt-4 sm:mt-6" role="status">
-              <span className="skeleton block h-[60px] w-40 rounded-2xl sm:h-[72px]" />
+            <div className="relative mt-4 @[520px]:mt-6" role="status">
+              <span className="skeleton block h-[60px] w-40 rounded-2xl @[520px]:h-[72px]" />
             </div>
           )}
         </section>
@@ -594,14 +680,14 @@ export function SessionDebrief({
 
         {dots && stats && (
           <div className="life-rise mt-4 px-1" style={{ ["--i" as string]: 12 }}>
-            <AnswerDots dots={dots.dots} correct={stats.correct} wrong={wrong} />
+            <AnswerDots dots={dots.dots} correct={stats.correct} wrong={wrong} href={sessionMistakesHref(workspaceId, sessionId)} />
           </div>
         )}
 
         {stats && mastery.length > 0 && (
           <div className="life-rise mt-6 w-full px-1" style={{ ["--i" as string]: 6 }}>
             <h3 className="mb-3 text-[12.5px] font-bold text-muted-foreground">{t("debrief.masteryTitle")}</h3>
-            <MasteryRows mastery={mastery} className="space-y-3.5" />
+            <MasteryRows mastery={mastery} className="space-y-3" hrefFor={topicHref} />
           </div>
         )}
 
@@ -609,7 +695,7 @@ export function SessionDebrief({
         <div className="life-rise mt-7 w-full px-1" style={{ ["--i" as string]: 7 }}>
           {fixFirst ? (
             <>
-              <Link href={practiceHref({ sessionId })} className="block w-full sm:w-fit">
+              <Link href={practiceHref({ sessionId })} className="block w-full sm:w-fit" onClick={() => nextTapped("mistakes")}>
                 <Button size="lg" className={mainButton}>
                   <Play className="mr-2 h-4 w-4 fill-current" />
                   {fixTitle}
@@ -664,6 +750,7 @@ export function SessionDebrief({
         {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
         {quickStart && stats && (
           <HabitPrompt
+            sessionId={sessionId}
             accuracy={stats.accuracy}
             activitiesDone={stats.activitiesDone}
             subjectTitle={subjectTitle}
@@ -767,6 +854,7 @@ export function SessionDebrief({
       {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
       {quickStart && stats && (
         <HabitPrompt
+          sessionId={sessionId}
           accuracy={stats.accuracy}
           activitiesDone={stats.activitiesDone}
           subjectTitle={subjectTitle}
@@ -837,5 +925,39 @@ function DebriefReport({ debrief }: { debrief: ApiSessionDebrief }) {
                 </section>
               ))}
             </div>
+  );
+}
+
+/**
+ * The summary for a session left before the end (purpose audit, finding 3):
+ * no cheer, no points, no streak day — what is left and one way back in.
+ */
+export function SessionUnfinished({
+  activities,
+  onResume,
+  onLeave,
+}: {
+  activities: SessionActivity[];
+  onResume: (activityId: string) => void;
+  onLeave: () => void;
+}) {
+  const { t } = useI18n();
+  const { left, minutes, resumeId } = unfinishedSummary(activities);
+  return (
+    <div className="mx-auto flex w-full max-w-md flex-col items-center pb-10 pt-6 text-center sm:pt-12" data-debrief="unfinished">
+      <Mascot pose="book" className="h-[104px]" />
+      <h2 className="mt-5 text-[26px] font-extrabold leading-tight tracking-tight">{t("purpose.unfinishedTitle")}</h2>
+      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+        {(left === 1 ? t("purpose.unfinishedSubOne") : t("purpose.unfinishedSub")).replace("{n}", String(left)).replace("{m}", String(minutes))}
+      </p>
+      {resumeId && (
+        <Button size="lg" className="mt-6 w-full sm:w-auto sm:min-w-[260px]" onClick={() => onResume(resumeId)}>
+          {t("purpose.keepGoing")}
+        </Button>
+      )}
+      <button type="button" onClick={onLeave} className="mt-3 flex min-h-11 items-center text-[14.5px] font-bold text-muted-foreground hover:text-foreground">
+        {t("purpose.leaveForNow")}
+      </button>
+    </div>
   );
 }

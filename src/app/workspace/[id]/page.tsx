@@ -2,11 +2,11 @@
 
 import { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { LearnHome } from "@/components/learn/learn-home";
+import { SubjectPage } from "@/components/learn/subject-page";
 import { FullScreenLoader } from "@/components/layout/full-screen-loader";
 import { useNewUi } from "@/lib/new-ui";
 
-/** New UI: the workspace is a Learn page scoped to it. Old UI: straight to the chat tab as before. */
+/** New UI: the subject page. Old UI: straight to the chat tab as before. */
 export default function WorkspacePage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
@@ -17,5 +17,5 @@ export default function WorkspacePage() {
   }, [newUi, id, router]);
 
   if (!newUi) return <FullScreenLoader />;
-  return <LearnHome workspaceId={id} />;
+  return <SubjectPage workspaceId={id} />;
 }

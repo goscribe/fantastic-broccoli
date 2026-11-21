@@ -16,17 +16,20 @@ export function useStartCourseTopic(opts: { onStarted?: (workspaceId: string) =>
   const { t } = useI18n();
   const router = useRouter();
   const [busyTopicId, setBusyTopicId] = useState<string | null>(null);
+  const [busyMode, setBusyMode] = useState<"quick5" | "session" | null>(null);
   const started = useRef(false);
 
-  const start = async (course: Course, topic: CatalogTopic, level?: CourseLevel) => {
+  const start = async (course: Course, topic: CatalogTopic, level?: CourseLevel, mode?: "quick5" | "session") => {
     if (started.current) return;
     started.current = true;
     setBusyTopicId(topic.id);
+    setBusyMode(mode ?? "quick5");
     try {
       const { workspaceId, sessionId } = await coursesApi.startTopic({
         courseId: course.id,
         topicId: topic.id,
         ...(level ? { level } : {}),
+        ...(mode ? { mode } : {}),
       });
       emitTreeChanged();
       opts.onStarted?.(workspaceId);
@@ -34,10 +37,11 @@ export function useStartCourseTopic(opts: { onStarted?: (workspaceId: string) =>
     } catch (err) {
       started.current = false;
       setBusyTopicId(null);
+      setBusyMode(null);
       const message = toastError(err, t("course.errorStart"));
       opts.onError?.(message);
     }
   };
 
-  return { start, busyTopicId };
+  return { start, busyTopicId, busyMode };
 }

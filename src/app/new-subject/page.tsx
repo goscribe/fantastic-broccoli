@@ -1,9 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { SubjectOnboarding } from "@/components/onboarding/subject-onboarding";
+import { FirstRun } from "@/components/onboarding/first-run";
 
-/** Same three steps as first run, for adding another subject later. */
+/** Another subject later: the first-run screen itself (your course, upload or paste; no notes required). */
 export default function NewSubjectPage() {
   const router = useRouter();
-  return <SubjectOnboarding onSkip={() => router.push("/")} />;
+  return <FirstRun context="new_subject" onSkip={() => router.push("/")} />;
 }

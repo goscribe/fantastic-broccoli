@@ -1,9 +1,15 @@
 import Image from 'next/image';
 
+/**
+ * The Scribe mark: the mascot cat's head (cat3). A vector traced from the
+ * generated art with a slightly heavier outline so it holds up at 20–32 px.
+ * Favicons and app icons have their own small-size drawings (src/app/icon*,
+ * favicon.ico, public/icons/cat-*).
+ */
 export function ScribeMark({ className }: { className?: string }) {
   return (
     <Image
-      src="/logo.png"
+      src="/brand/scribe-mark.svg"
       width={64}
       height={64}
       alt="Scribe logo"

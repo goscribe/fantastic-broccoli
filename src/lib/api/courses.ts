@@ -21,6 +21,18 @@ export interface CourseSummary {
   levels?: string[];
   unitCount: number;
   topicCount: number;
+  /** When the board sits this course's exams (season only); not sent by an older server. */
+  examWindows?: ExamWindow[];
+}
+
+/** A board's exam season, months only (goscribe/server lib/courses/types.ts). */
+export interface ExamWindow {
+  season: "may" | "may_june" | "november";
+  startMonth: number;
+  endMonth: number;
+  label: string;
+  /** Only some schools sit this session (IB November). */
+  optional?: boolean;
 }
 
 export interface CatalogTopic {
@@ -31,6 +43,10 @@ export interface CatalogTopic {
   hlOnly?: boolean;
   higherTierOnly?: boolean;
   bcOnly?: boolean;
+  /** IB HL-only or second-year A-level content. */
+  advanced?: boolean;
+  /** Notes and Quick 5 need a plan or exam pass (only while the server's NOTES_PAID_GATE is on). */
+  locked?: boolean;
 }
 
 export interface CatalogUnit {
@@ -68,6 +84,8 @@ export interface ProgressSummary {
 export interface CourseProgress extends ProgressSummary {
   courseId: string;
   level: string | null;
+  /** The subject's stored cover family; not sent by an older server. */
+  subjectFamily?: string | null;
   topics: TopicProgress[];
 }
 
@@ -77,6 +95,8 @@ export interface CourseSubject {
   courseId: string;
   courseTitle: string;
   level: string | null;
+  /** The subject's stored cover family; not sent by an older server. */
+  subjectFamily?: string | null;
   progress: ProgressSummary;
 }
 
@@ -89,6 +109,6 @@ export const coursesApi = {
   progress: (workspaceId: string) => rpc<CourseProgress>("course.progress", "query", { workspaceId }),
   enroll: (courseId: string, level?: CourseLevel) =>
     rpc<{ workspaceId: string }>("course.enroll", "mutation", { courseId, ...(level ? { level } : {}) }),
-  startTopic: (input: { courseId: string; topicId: string; level?: CourseLevel }) =>
+  startTopic: (input: { courseId: string; topicId: string; level?: CourseLevel; mode?: "quick5" | "session" }) =>
     rpc<{ workspaceId: string; sessionId: string }>("course.startTopic", "mutation", input),
 };
