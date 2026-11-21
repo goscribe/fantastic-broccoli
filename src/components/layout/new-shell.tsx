@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useState, useMemo, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { NotificationBell } from "@/components/layout/notification-bell";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Calendar, Folder as FolderIcon, House, LogOut, NotebookText, PanelLeft, PanelLeftClose, PlayCircle, Plus, RotateCcw, Search, Settings, Store } from "lucide-react";
+import { Calendar, House, LogOut, NotebookText, PanelLeft, PanelLeftClose, PlayCircle, RotateCcw, Search, Settings } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import { PointsPill, StreakButton } from "@/components/rewards/streak-button";
+import { useStreak } from "@/lib/rewards";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
 import "@/lib/i18n/mistakes";
@@ -17,7 +18,6 @@ import { onTreeChanged } from "@/lib/tree-events";
 import { cn } from "@/lib/utils";
 import { AppTourHost, requestAppTour } from "@/components/onboarding/app-tour";
 import { CommandPalette } from "@/components/layout/command-palette";
-import { CreateResourceDialog } from "@/components/workspace/create-dialog";
 import type { Folder, Workspace } from "@/types";
 import "@/app/design/design.css";
 
@@ -26,7 +26,6 @@ const NAV: { href: string; label: string; labelKey?: string; icon: typeof House 
   // Scribe's own notes, inside the app (the public pages are /notes).
   { href: "/library", label: "Notes", icon: NotebookText },
   { href: "/planner", label: "Planner", labelKey: "today.planner", icon: Calendar },
-  { href: "/shop", label: "Shop", labelKey: "rewards.shop", icon: Store },
   { href: "/mistakes", label: "Mistakes", labelKey: "mistakes.nav", icon: RotateCcw },
 ];
 
@@ -63,7 +62,7 @@ function useRail(): boolean {
   return pref === null ? narrow : pref === "1";
 }
 
-/** Redesign app frame: left rail with nav + workspaces, slim top bar, page content. */
+/** Redesign app frame: left rail with nav (subjects live on home), slim top bar, page content. */
 export function NewShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -72,35 +71,28 @@ export function NewShell({ children }: { children: React.ReactNode }) {
   const [folders, setFolders] = useState<Folder[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [paletteOpen, setPaletteOpen] = useState(false);
-  const [creating, setCreating] = useState<"workspace" | "folder" | null>(null);
-  /** Learners see one level: every workspace is a "folder" of materials. */
-  const allWorkspaces = useMemo(() => {
-    const out: Workspace[] = [...rootWorkspaces];
-    const walk = (fs: Folder[]) => {
-      for (const f of fs) {
-        out.push(...f.workspaces);
-        if (f.folders) walk(f.folders);
-      }
-    };
-    walk(folders);
-    return out;
-  }, [folders, rootWorkspaces]);
-  const [mobileOpen, setMobileOpen] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
   const rail = useRail();
-  const [treeLoading, setTreeLoading] = useState(true);
-
+  const { data: streak } = useStreak();
+  const started = !!streak && (streak.longest > 0 || streak.current > 0 || streak.todayDone);
+  // Subjects live on home's tiles, not in the sidebar. The tree is only for
+  // search, so it loads the first time search opens (not on every page load).
+  const treeLoaded = useRef(false);
+  const treeUnsub = useRef<(() => void) | null>(null);
   useEffect(() => {
+    if (!paletteOpen || treeLoaded.current) return;
+    treeLoaded.current = true;
     const load = () =>
       fetchWorkspaceTree()
         .then((tree) => {
           setFolders(tree.folders);
           setRootWorkspaces(tree.rootWorkspaces);
         })
-        .catch(() => {})
-        .finally(() => setTreeLoading(false));
-    load();
-    return onTreeChanged(load);
-  }, []);
+        .catch(() => {});
+    void load();
+    treeUnsub.current = onTreeChanged(load);
+  }, [paletteOpen]);
+  useEffect(() => () => treeUnsub.current?.(), []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -161,57 +153,6 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             );
           })}
         </nav>
-        <div className={cn("mt-7 px-3 text-[11px] font-semibold text-faint", rail && "md:hidden")}>Subjects</div>
-        <div className={cn("mx-2 mt-4 hidden border-t border-border", rail && "md:block")} />
-        <div className={cn(
-          "mt-2 flex min-h-0 flex-1 flex-col gap-1 overflow-x-hidden overflow-y-auto [scrollbar-width:thin]",
-          rail && "md:mt-3 md:[scrollbar-width:none] md:[&::-webkit-scrollbar]:hidden",
-        )}>
-          {treeLoading &&
-            allWorkspaces.length === 0 &&
-            [0, 1, 2].map((i) => <span key={i} className="mx-3 my-2 block h-4 animate-pulse rounded bg-muted" style={{ width: `${70 - i * 12}%` }} />)}
-          {allWorkspaces.map((w) => {
-            const on = pathname.startsWith(`/workspace/${w.id}`);
-            return (
-              <Link
-                key={w.id}
-                href={`/workspace/${w.id}`}
-                onClick={() => setMobileOpen(false)}
-                title={w.title}
-                className={cn(
-                  "flex min-h-10 shrink-0 items-center gap-3 rounded-xl px-3 py-2 text-[13.5px] font-medium leading-snug hover:bg-muted",
-                  on && "bg-muted font-bold text-foreground",
-                  rail && "md:justify-center md:px-0",
-                )}
-              >
-                <FolderIcon
-                  className={cn("size-4 shrink-0 text-border-strong", rail && "md:hidden")}
-                  fill="currentColor"
-                  strokeWidth={1.5}
-                />
-                <span
-                  aria-hidden
-                  className={cn("hidden size-7 place-items-center rounded-lg bg-muted text-[12px] font-extrabold text-foreground", rail && "md:grid")}
-                >
-                  {w.title.trim()[0]?.toUpperCase() ?? "?"}
-                </span>
-                <span className={cn("line-clamp-2 min-w-0 break-words", rail && "md:hidden")}>{w.title}</span>
-              </Link>
-            );
-          })}
-          <Link
-            href="/new-subject"
-            onClick={() => setMobileOpen(false)}
-            title={rail ? "New subject" : undefined}
-            className={cn(
-              "flex h-10 shrink-0 items-center gap-3 rounded-xl px-3 text-[13.5px] font-semibold text-muted-foreground hover:bg-muted hover:text-foreground",
-              rail && "md:justify-center md:px-0",
-            )}
-          >
-            <Plus className="size-4 shrink-0" />
-            <span className={cn(rail && "md:hidden")}>New subject</span>
-          </Link>
-        </div>
         <div className="mt-auto flex flex-col gap-1 border-t border-border pt-3">
           <button
             type="button"
@@ -283,9 +224,15 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             <kbd className="hidden rounded-md border border-border bg-white px-1.5 text-[11px] font-semibold text-faint sm:inline">⌘K</kbd>
           </button>
           <div className="ml-auto flex items-center gap-1.5 sm:gap-2.5">
-            <NotificationBell />
-            <StreakButton />
-            <PointsPill />
+            {/* First run (nothing finished yet): no streak, points or bell to explain. They appear with the first finished activity. */}
+            {started && (
+              <>
+                <NotificationBell />
+                <StreakButton />
+                {/* The points pill is the way into the shop. */}
+                <PointsPill />
+              </>
+            )}
             <Link href="/settings" aria-label="Settings" className="block">
               {user?.profilePicture ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -300,10 +247,10 @@ export function NewShell({ children }: { children: React.ReactNode }) {
         <AppTourHost />
       </div>
 
-      {/* Phones: the five places you go every day, one thumb away (the sidebar still holds subjects and settings). */}
+      {/* Phones: the four places you go every day, one thumb away (the drawer holds settings; subjects are on home). */}
       <nav
         aria-label="Main"
-        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-border bg-white/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-border bg-white/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
       >
         {NAV.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
           const label = labelKey ? t(labelKey) : fallbackLabel;
@@ -334,16 +281,6 @@ export function NewShell({ children }: { children: React.ReactNode }) {
       </nav>
 
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} folders={folders} rootWorkspaces={rootWorkspaces} />
-      {creating && (
-        <CreateResourceDialog
-          kind={creating}
-          onClose={() => setCreating(null)}
-          onCreated={(id) => {
-            setCreating(null);
-            if (id) router.push(`/workspace/${id}`);
-          }}
-        />
-      )}
     </div>
   );
 }
