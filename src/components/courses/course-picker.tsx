@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check, ChevronRight, Loader2, Lock } from "lucide-react";
@@ -351,7 +352,7 @@ export function TopicRow({
             type="button"
             onClick={onStart}
             disabled={disabled}
-            className="mt-3.5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 text-[14.5px] font-semibold text-white transition-colors hover:bg-accent-dim disabled:opacity-50"
+            className={buttonClass({ className: "mt-3.5 w-full gap-2" })}
           >
             {busy ? (
               <>

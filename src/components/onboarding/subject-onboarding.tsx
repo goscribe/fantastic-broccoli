@@ -1,4 +1,5 @@
 "use client";
+import { buttonClass } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -87,7 +88,7 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
             <button
               type="button"
               onClick={() => setStep("subject")}
-              className="mt-4 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent text-[15px] font-semibold text-white hover:bg-accent-dim"
+              className={buttonClass({ size: "lg", className: "mt-4 w-full gap-2" })}
             >
               Set up my first subject <ArrowRight className="size-4" />
             </button>
@@ -148,7 +149,7 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
               <button
                 type="submit"
                 disabled={!subject.trim()}
-                className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent text-[15px] font-semibold text-white hover:bg-accent-dim disabled:opacity-50"
+                className={buttonClass({ size: "lg", className: "mt-6 w-full gap-2" })}
               >
                 Next <ArrowRight className="size-4" />
               </button>
@@ -195,7 +196,7 @@ export function SubjectOnboarding({ onSkip, firstName, intro = false }: { onSkip
               type="button"
               disabled={busy || (files.length === 0 && !link.trim())}
               onClick={() => void build()}
-              className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent text-[15px] font-semibold text-white hover:bg-accent-dim disabled:opacity-50"
+              className={buttonClass({ size: "lg", className: "mt-6 w-full gap-2" })}
             >
               Build my first session <ArrowRight className="size-4" />
             </button>

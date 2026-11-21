@@ -231,7 +231,7 @@ export function FirstRun({
   ];
 
   const primaryButton =
-    "inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 text-[15px] font-semibold text-white transition-colors hover:bg-accent-dim disabled:opacity-50";
+    "btn-chunky inline-flex h-[52px] w-full items-center justify-center gap-2 rounded-[16px] bg-accent px-5 text-[16px] font-extrabold text-white hover:bg-accent-dim disabled:opacity-50";
 
   return (
     // Centred with auto margins, not justify-center: when the column is taller
