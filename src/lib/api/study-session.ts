@@ -119,6 +119,19 @@ export interface ApiStudySession {
   comments: ApiSessionComment[];
 }
 
+export interface ApiPaperSize {
+  minutes: number;
+  marks: number;
+  questions: number;
+}
+
+export interface ApiPaperOptions {
+  board: string | null;
+  detectedBoard: string | null;
+  family: string;
+  papers: Array<{ id: string; name: string; blurb: string; calculator: boolean | null; full: ApiPaperSize; short: ApiPaperSize }>;
+}
+
 export interface CreateStudySessionInput {
   workspaceId: string;
   title: string;
@@ -246,6 +259,14 @@ export const studySessionApi = {
 
   getStats: (id: string) =>
     rpc<ApiSessionStats>("studySession.getStats", "query", { id }),
+
+  /** Practice papers this subject can take, in its board's format. */
+  paperOptions: (input: { workspaceId: string; board?: string }) =>
+    rpc<ApiPaperOptions>("studySession.paperOptions", "query", input),
+
+  /** Starts a practice paper (a session generated as one paper). */
+  createPaper: (input: { workspaceId: string; paperId: string; length: "full" | "short"; topics?: string }) =>
+    rpc<ApiStudySession>("studySession.createPaper", "mutation", input),
   getDebrief: (id: string) =>
     rpc<ApiSessionDebrief>("studySession.getDebrief", "query", { id }),
 

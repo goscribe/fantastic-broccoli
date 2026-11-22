@@ -217,9 +217,19 @@ export interface MarkSchemePoint {
   requirements: string;
 }
 
+/** One level of a level-marked essay (practice papers). */
+export interface MarkBand {
+  level: number;
+  minMarks: number;
+  maxMarks: number;
+  descriptor: string;
+}
+
 export interface MarkScheme {
   points: MarkSchemePoint[];
   totalPoints: number;
+  /** Level-marked essays: marked by best-fit level. */
+  bands?: MarkBand[];
 }
 
 export interface MarkedPoint extends MarkSchemePoint {
@@ -237,7 +247,12 @@ export interface PartMarking {
 export interface WorksheetPart {
   label: string;
   prompt: string;
-  type: "text" | "numeric" | "true_false";
+  /** mcq and essay come from practice papers. */
+  type: "text" | "numeric" | "true_false" | "mcq" | "essay";
+  /** mcq: the four options (the answer is the letter A-D). */
+  options?: string[];
+  /** The command term the part opens with (practice papers). */
+  commandTerm?: string;
   answer?: string;
   userAnswer?: string;
   marks?: number;
@@ -252,12 +267,36 @@ export interface WorksheetStep {
   figure?: WorksheetFigure;
   /** LLM-generated static figures (graph / image / static html diagram). */
   figures?: ReadingFigure[];
+  /** Practice papers: the section this question is in ("Section A"). */
+  section?: string;
+  /** Practice papers: sources or documents the question is on. */
+  sources?: WorksheetSource[];
   parts: WorksheetPart[];
+}
+
+export interface WorksheetSource {
+  label: string;
+  attribution?: string;
+  text: string;
+}
+
+/** A practice paper's cover: written in a board's exam format, never a real past paper. */
+export interface PaperInfo {
+  id?: string;
+  board?: string;
+  name: string;
+  minutes?: number;
+  calculator?: boolean | null;
+  instructions?: string[];
+  sections?: { name: string; instructions?: string }[];
+  totalMarks?: number;
 }
 
 export interface WorksheetContent {
   type: "worksheet";
   source?: { file: string; generatedByAi?: boolean };
+  /** Set when this worksheet is a whole practice paper. */
+  paper?: PaperInfo;
   steps: WorksheetStep[];
 }
 
