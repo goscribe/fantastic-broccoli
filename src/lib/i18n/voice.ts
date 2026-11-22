@@ -23,6 +23,8 @@ const english = {
   "voice.how3": "Tap ■ when you're done and it goes into the answer box.",
   "voice.howUndo": "Said something wrong? Say “scratch that”.",
   "voice.answering": "You're answering",
+  "voice.peek": "See the whole question and its figures",
+  "voice.peekBack": "Back",
   "voice.parts": "Parts",
   "voice.howToSwitch": "Say “part {part}” or “next part” to switch, or tap a letter.",
   "voice.switched": "Now on part {part}",
