@@ -100,6 +100,22 @@ export interface DeviceSeen {
   androidInstall: boolean;
 }
 
+/** What localStorage keeps: the markers plus the user agent they were set under. */
+export interface StoredDeviceSeen extends Partial<DeviceSeen> {
+  ua?: string;
+}
+
+/**
+ * The markers that still count for this browser. A different user agent (a
+ * browser or OS update, "Request desktop site", a new phone restored from a
+ * backup) clears them, so the install hint can come back; markers saved
+ * before the user agent was recorded count as changed too.
+ */
+export function deviceSeenFor(stored: StoredDeviceSeen | null | undefined, userAgent: string): DeviceSeen {
+  if (!stored || stored.ua !== userAgent) return { iosInstallHint: false, androidInstall: false };
+  return { iosInstallHint: !!stored.iosInstallHint, androidInstall: !!stored.androidInstall };
+}
+
 export type HabitStep = "study_time" | "push" | "ios_install" | "android_install";
 
 /** Whether this browser can ask for push permission right now. */

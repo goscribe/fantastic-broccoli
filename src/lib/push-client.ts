@@ -7,7 +7,7 @@
  */
 import { useSyncExternalStore } from "react";
 import { remindersApi } from "@/lib/api/reminders";
-import { urlBase64ToUint8Array } from "@/lib/reminders";
+import { deviceSeenFor, urlBase64ToUint8Array, type DeviceSeen, type StoredDeviceSeen } from "@/lib/reminders";
 
 const SW_URL = "/sw.js";
 
@@ -138,18 +138,21 @@ export async function promptInstall(): Promise<"accepted" | "dismissed" | "unava
 // ── Per-device "shown once" markers ─────────────────────────────────────────
 
 const SEEN_KEY = "scribe.habit-seen";
-export function readDeviceSeen(): { iosInstallHint: boolean; androidInstall: boolean } {
+const currentUserAgent = () => (typeof navigator === "undefined" ? "" : navigator.userAgent || "");
+
+/** This device's markers; cleared when the user agent changed since they were set. */
+export function readDeviceSeen(): DeviceSeen {
   try {
-    const raw = JSON.parse(window.localStorage.getItem(SEEN_KEY) ?? "{}") as Record<string, boolean>;
-    return { iosInstallHint: !!raw.iosInstallHint, androidInstall: !!raw.androidInstall };
+    const raw = JSON.parse(window.localStorage.getItem(SEEN_KEY) ?? "{}") as StoredDeviceSeen;
+    return deviceSeenFor(raw, currentUserAgent());
   } catch {
     return { iosInstallHint: false, androidInstall: false };
   }
 }
-export function markDeviceSeen(key: "iosInstallHint" | "androidInstall"): void {
+export function markDeviceSeen(key: keyof DeviceSeen): void {
   try {
-    const cur = readDeviceSeen();
-    window.localStorage.setItem(SEEN_KEY, JSON.stringify({ ...cur, [key]: true }));
+    const next: StoredDeviceSeen = { ...readDeviceSeen(), [key]: true, ua: currentUserAgent() };
+    window.localStorage.setItem(SEEN_KEY, JSON.stringify(next));
   } catch {
     // Storage blocked: may show again, which is harmless.
   }
