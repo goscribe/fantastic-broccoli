@@ -27,6 +27,7 @@ import {
   uploadSubjectTitle,
 } from "@/lib/first-run";
 import type { ExamBoard } from "@/types";
+import { chooseStudyLength } from "@/lib/study-length-client";
 
 type Mode = "course" | "upload" | "paste";
 type Busy = "uploading" | "saving" | "building" | null;
@@ -39,7 +40,9 @@ let viewedTracked = false;
  * subject" later: "What are you studying?" Pick your course comes first (one
  * search over courses and topics; anything else typed starts on exactly that
  * topic), then upload (one-tap camera on phones) or paste text. Every path
- * goes straight to a Quick 5: no intro video, no naming step, no plan picker.
+ * goes straight to the first session: no intro video, no naming step. The one
+ * question is "How long do you want to study?" (a Quick 5 when short, a full
+ * plan of that length when longer; see chooseStudyLength).
  */
 export function FirstRun({
   firstName,
@@ -119,15 +122,17 @@ export function FirstRun({
     option: FirstRunOption,
     extra: { topics?: string; examBoard?: ExamBoard } = {},
   ) => {
-    setBusy("building");
-    const session = await createStudySession({
+    // First session: ask how long first (a long answer makes it a full plan).
+    const input = await chooseStudyLength({
       workspaceId,
       title,
-      depth: "light",
+      depth: "light" as const,
       durationMinutes: 15,
       quickStart: true,
       ...extra,
     });
+    setBusy("building");
+    const session = await createStudySession(input);
     track("first_run.session_requested", { option }, workspaceId);
     router.push(session ? `/workspace/${workspaceId}/session/${session.id}` : `/workspace/${workspaceId}`);
   };

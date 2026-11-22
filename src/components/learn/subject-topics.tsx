@@ -23,6 +23,7 @@ import { useStartCourseTopic } from "@/components/courses/use-start-topic";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
 import type { Material } from "@/types";
+import { chooseStudyLength } from "@/lib/study-length-client";
 
 export type SubjectCourse =
   | { state: "loading" }
@@ -177,15 +178,17 @@ export function SubjectTopics({
     setStarting(topic.title);
     try {
       const files = topic.fileIds.map((id) => titleOf.get(id)).filter(Boolean);
-      const session = await createStudySession({
-        workspaceId,
-        title: topic.title,
-        description: topic.summary || undefined,
-        depth: "light",
-        durationMinutes: 5,
-        quickStart: true,
-        topics: [topic.title, ...topic.points, ...files].join("\n").slice(0, 2000),
-      });
+      const session = await createStudySession(
+        await chooseStudyLength({
+          workspaceId,
+          title: topic.title,
+          description: topic.summary || undefined,
+          depth: "light" as const,
+          durationMinutes: 5,
+          quickStart: true,
+          topics: [topic.title, ...topic.points, ...files].join("\n").slice(0, 2000),
+        }),
+      );
       if (!session) throw new Error("Could not start a session");
       router.push(`/workspace/${workspaceId}/session/${session.id}`);
     } catch (e) {

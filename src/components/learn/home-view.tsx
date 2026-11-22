@@ -23,6 +23,7 @@ import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/rewards";
 import "@/app/design/design.css";
+import { chooseStudyLength } from "@/lib/study-length-client";
 
 /** The same buckets as the banner's sky (src/lib/daypart.ts), so the words and the scene agree. */
 const GREETING: Record<Daypart, string> = {
@@ -76,14 +77,16 @@ export function HomeView({ summary }: { summary: HomeSummary }) {
       const fileIds = await uploadFiles(target, list);
       analyzeFiles(target, fileIds).catch(() => {});
       emitTreeChanged();
-      const session = await createStudySession({
-        workspaceId: target,
-        title: workspaceTitleFromFiles(list),
-        depth: "light",
-        durationMinutes: 5,
-        quickStart: true,
-        topics: list.map((f) => fileBasename(f.name)).filter(Boolean).join(", ").slice(0, 2000) || undefined,
-      });
+      const session = await createStudySession(
+        await chooseStudyLength({
+          workspaceId: target,
+          title: workspaceTitleFromFiles(list),
+          depth: "light" as const,
+          durationMinutes: 5,
+          quickStart: true,
+          topics: list.map((f) => fileBasename(f.name)).filter(Boolean).join(", ").slice(0, 2000) || undefined,
+        }),
+      );
       router.push(session ? `/workspace/${target}/session/${session.id}` : `/workspace/${target}`);
     } catch (e) {
       toastError(e, "Upload failed");

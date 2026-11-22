@@ -30,6 +30,7 @@ import {
   Layers,
   Sparkles,
 } from "lucide-react";
+import { chooseStudyLength } from "@/lib/study-length-client";
 
 type DeckMode = "cards" | "learn" | "test";
 
@@ -98,14 +99,16 @@ function FlashcardDeck() {
   }, [requestedMode, item?.id]);
 
   const startSession = useMutation({
-    mutationFn: () =>
-      createStudySession({
-        workspaceId,
-        title: item!.title,
-        depth: "moderate",
-        durationMinutes: 30,
-        topics: item!.topic ?? item!.title,
-      }),
+    mutationFn: async () =>
+      createStudySession(
+        await chooseStudyLength({
+          workspaceId,
+          title: item!.title,
+          depth: "moderate" as const,
+          durationMinutes: 30,
+          topics: item!.topic ?? item!.title,
+        }),
+      ),
     onSuccess: (session) => {
       if (session) {
         router.push(`/workspace/${workspaceId}/session/${session.id}`);
