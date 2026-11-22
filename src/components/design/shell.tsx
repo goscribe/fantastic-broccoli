@@ -21,7 +21,7 @@ export function Sidebar({ active = "Learn" }: { active?: string }) {
   return (
     <aside className="flex h-full w-[232px] shrink-0 flex-col border-r border-border bg-white px-3 py-5">
       <Link href="/design" className="mb-5 flex items-center gap-2.5 px-2">
-        <Image src="/brand/scribe-mark.svg" alt="Scribe" width={28} height={28} />
+        <Image src="/brand/scribe-hp-head.svg" alt="Scribe" width={28} height={28} />
         <span className="text-[17px] font-bold tracking-tight">Scribe</span>
       </Link>
       <nav className="flex flex-col gap-0.5">

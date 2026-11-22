@@ -48,7 +48,7 @@ export const organizationJsonLd = {
   "@type": "Organization",
   name: siteName,
   url: siteUrl,
-  logo: absoluteUrl("/brand/scribe-cat-512.png"),
+  logo: absoluteUrl("/brand/scribe-hp-logo-512.png"),
   sameAs: ["https://www.producthunt.com/products/scribe-19"],
 };
 
@@ -85,5 +85,5 @@ export function jsonLdScriptProps(data: object) {
 
 /** Link-preview image for the public marketing pages (1200×630: the hero scene, the cat, the headline). */
 export const landingOgImages = [
-  { url: "/og-landing.jpg", width: 1200, height: 630, alt: "Scribe: study from your notes, actually remember it" },
+  { url: "/og-landing-hp.jpg", width: 1200, height: 630, alt: "Scribe: study from your notes, actually remember it" },
 ];
