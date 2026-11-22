@@ -380,3 +380,13 @@ html[data-daypart="late"] .home-hero { --hero-surface: color-mix(in srgb, var(--
 .week-pill { transition: transform 0.15s var(--ease-out); }
 .week-pill:active { transform: scale(0.95); }
 @media (prefers-reduced-motion: reduce) { .week-pill, .week-pill:active { transition: none; transform: none; } }
+
+/* Session build progress: a light sheen travels along the filled part. */
+.build-stage__fill {
+  background-image: linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 0.35) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: life-shimmer 1.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .build-stage__fill { animation: none; }
+}
