@@ -14,6 +14,7 @@ import { captureAttribution } from "@/lib/attribution";
 import { reportSignupConversionFromUrl } from "@/lib/gtag";
 import { captureInstallPrompt } from "@/lib/push-client";
 import { useNewUi } from "@/lib/new-ui";
+import { StudyLengthHost } from "@/components/session/study-length-host";
 import "@/app/design/design.css";
 
 /**
@@ -78,6 +79,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         <QueryClientProvider client={queryClient}>
           {children}
           <ThemedToaster />
+          <StudyLengthHost />
         </QueryClientProvider>
       </I18nProvider>
     </ThemeProvider>

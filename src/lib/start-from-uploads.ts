@@ -3,6 +3,7 @@ import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
 import { createStudySession } from "@/lib/api/study";
 import { emitTreeChanged } from "@/lib/tree-events";
 import type { StudySession } from "@/types";
+import { chooseStudyLength } from "@/lib/study-length-client";
 
 export function fileBasename(name: string): string {
   return name.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ").trim();
@@ -45,13 +46,15 @@ export async function startWorkspaceFromUploads(files: File[]): Promise<{
 
   let session: StudySession | undefined;
   try {
-    session = await createStudySession({
-      workspaceId,
-      title,
-      depth: "moderate",
-      durationMinutes: 30,
-      topics: topics || undefined,
-    });
+    session = await createStudySession(
+      await chooseStudyLength({
+        workspaceId,
+        title,
+        depth: "moderate" as const,
+        durationMinutes: 30,
+        topics: topics || undefined,
+      }),
+    );
   } catch {
     // Workspace + files still exist; the study tab can pick up from here.
     session = undefined;

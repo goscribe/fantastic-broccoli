@@ -35,6 +35,7 @@ import {
   WORKSPACE_ICONS,
 } from "@/components/graphics/workspace-icon";
 import { inputClass, textareaClass } from "@/components/ui/input";
+import { chooseStudyLength } from "@/lib/study-length-client";
 
 const folderColors = [
   "#6fd420",
@@ -270,18 +271,20 @@ export function CreateResourceDialog({
       const workspaceId = await createWorkspace(title, parentId);
       if (!workspaceId) throw new Error("Could not create a workspace");
       emitTreeChanged();
-      const session = await createStudySession({
-        workspaceId,
-        title:
-          chosenUnits.length > 0
-            ? `${title}: ${chosenUnits.slice(0, 2).join(", ")}${chosenUnits.length > 2 ? "…" : ""}`
-            : title,
-        depth: "moderate",
-        durationMinutes: 30,
-        subject: chosenSubject,
-        topics: chosenUnits.join(", ").slice(0, 2000) || undefined,
-        examBoard: chosen.board,
-      });
+      const session = await createStudySession(
+        await chooseStudyLength({
+          workspaceId,
+          title:
+            chosenUnits.length > 0
+              ? `${title}: ${chosenUnits.slice(0, 2).join(", ")}${chosenUnits.length > 2 ? "…" : ""}`
+              : title,
+          depth: "moderate" as const,
+          durationMinutes: 30,
+          subject: chosenSubject,
+          topics: chosenUnits.join(", ").slice(0, 2000) || undefined,
+          examBoard: chosen.board,
+        }),
+      );
       toast.success(t("ws.workspaceCreated"));
       onClose();
       if (session) {

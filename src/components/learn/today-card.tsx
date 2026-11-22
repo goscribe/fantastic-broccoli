@@ -26,6 +26,7 @@ import { toastError } from "@/lib/toast";
 import { useI18n } from "@/lib/i18n";
 import { useDaypart } from "@/lib/use-daypart";
 import { cn } from "@/lib/utils";
+import { chooseStudyLength } from "@/lib/study-length-client";
 
 /** Big enough for a thumb on a phone (≥ 44px); the page's one purple button. */
 const primaryBtn =
@@ -214,15 +215,17 @@ function TodayAction({ action }: { action: Exclude<HomeAction, { kind: "upload" 
     setBusy(true);
     if (action.kind !== "quick5") return router.push(action.href);
     try {
-      const created = await createStudySession({
-        workspaceId: action.workspaceId,
-        title: action.subject || t("today.quick5Cta"),
-        depth: "light",
-        durationMinutes: 5,
-        quickStart: true,
-        // No notes yet (a topic-only subject): the subject name is the topic.
-        topics: action.topics ?? undefined,
-      });
+      const created = await createStudySession(
+        await chooseStudyLength({
+          workspaceId: action.workspaceId,
+          title: action.subject || t("today.quick5Cta"),
+          depth: "light" as const,
+          durationMinutes: 5,
+          quickStart: true,
+          // No notes yet (a topic-only subject): the subject name is the topic.
+          topics: action.topics ?? undefined,
+        }),
+      );
       router.push(created ? `/workspace/${action.workspaceId}/session/${created.id}` : `/workspace/${action.workspaceId}`);
     } catch (e) {
       toastError(e, t("today.startFailed"));
