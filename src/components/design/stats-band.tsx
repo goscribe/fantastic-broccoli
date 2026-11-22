@@ -34,12 +34,12 @@ export function StatsBand() {
   ];
 
   return (
-    <section className="mx-auto mt-14 w-full max-w-[1160px] px-4 sm:mt-20 sm:px-6">
+    <section className="mx-auto mt-16 w-full max-w-[1160px] px-4 sm:mt-24 sm:px-6">
       <dl className="grid grid-cols-2 gap-x-4 gap-y-8 border-y border-border py-9 sm:py-11 md:grid-cols-4">
         {items.map(([n, l]) => (
           <div key={l} className="flex flex-col-reverse justify-end sm:text-center">
             <dt className="mt-2 max-w-[210px] text-ui font-semibold text-muted-foreground sm:mx-auto">{l}</dt>
-            <dd className="m-0 text-[38px] font-extrabold leading-none tracking-tight tabular-nums sm:text-[48px]">{n}</dd>
+            <dd className="m-0 text-[42px] font-extrabold leading-none tracking-[-0.03em] tabular-nums sm:text-[60px]">{n}</dd>
           </div>
         ))}
       </dl>

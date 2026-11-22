@@ -30,7 +30,8 @@ export function MockScreen({ children, className }: { children: ReactNode; class
   );
 }
 
-const CAT = { wave: 352, cheer: 363, flame: 344, pencil: 360, book: 363, think: 383, trophy: 413, sleep: 401 } as const;
+/** Each pose's width at 400px tall. leap, peek, read and stack are the landing's own (drawn for the home page). */
+const CAT = { wave: 352, cheer: 363, flame: 344, pencil: 360, book: 363, think: 383, trophy: 413, sleep: 401, leap: 412, peek: 389, read: 608, stack: 216 } as const;
 export type CatPose = keyof typeof CAT;
 
 /** The mascot. Decorative; lazy unless it is in the first screen (never preloaded: it is small and not what the first paint waits for). */
@@ -194,13 +195,14 @@ export function StreakRow({ className }: { className?: string }) {
   );
 }
 
-export function StreakMock() {
+/** `quiet`: without the small cat (the home page keeps the mascot for its big moments). */
+export function StreakMock({ quiet = false }: { quiet?: boolean }) {
   return (
     <Mock label="The streak in Scribe: a five-day streak, today’s goal of 20 minutes partly done, and a tick for each day studied this week.">
       <MockScreen>
         <StreakRow />
         <div className="mt-5 flex items-center gap-3 border-t border-border pt-4">
-          <Cat pose="flame" className="h-[54px]" />
+          {!quiet && <Cat pose="flame" className="h-[54px]" />}
           <div className="min-w-0">
             <div className="text-[15px] font-extrabold">8 minutes to go today</div>
             <div className="text-[13.5px] text-muted-foreground">Osmosis · Biology · counts for your streak</div>
@@ -332,7 +334,7 @@ const FILES: [string, string][] = [
 ];
 
 /** A subject's materials after upload. */
-export function UploadMock() {
+export function UploadMock({ quiet = false }: { quiet?: boolean }) {
   return (
     <Mock label="A subject in Scribe with three uploaded materials, each read and ready: a PDF of notes, a slide deck and a photo of a whiteboard.">
       <MockScreen>
@@ -349,7 +351,7 @@ export function UploadMock() {
           ))}
         </ul>
         <div className="mt-2 flex items-center gap-3 rounded-[var(--r-card)] border-2 border-dashed border-border-strong px-4 py-3.5">
-          <Cat pose="sleep" className="h-10" />
+          {!quiet && <Cat pose="sleep" className="h-10" />}
           <div>
             <div className="text-[14.5px] font-extrabold">Add material</div>
             <div className="text-[13px] text-muted-foreground">PDF · slides · photos of notes</div>
