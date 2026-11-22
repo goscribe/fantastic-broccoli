@@ -39,6 +39,9 @@ import { dataSelector, linkTarget, revealTarget } from "@/lib/link-target";
 import type { Folder, Material, StudySession, Workspace } from "@/types";
 import "@/app/design/design.css";
 import { chooseStudyLength } from "@/lib/study-length-client";
+import { PaperPicker } from "@/components/session/paper-picker";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/practice-paper";
 
 const ACTIVITY_LABEL: Record<string, string> = {
   mcq: "Quick 5",
@@ -109,6 +112,8 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
   const [prompt, setPrompt] = useState("");
   const [uploading, setUploading] = useState(false);
   const [busy, setBusy] = useState<string | null>(null);
+  const [paperOpen, setPaperOpen] = useState(false);
+  const { t } = useI18n();
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [attachOpen, setAttachOpen] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -433,8 +438,11 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
               {busy === "ask" ? <Loader2 className="size-4 animate-spin" /> : <ArrowUp className="size-4" />}
             </button>
           </div>
-          {chips.length > 0 && (
+          {(
             <div className="mt-4 flex flex-wrap gap-2">
+              <button type="button" disabled={!!busy} onClick={() => setPaperOpen(true)} className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-left text-[12.5px] font-semibold hover:bg-muted disabled:opacity-60">
+                {t("paper.cta")}
+              </button>
               {chips.map((c) => (
                 <button key={c.id} type="button" disabled={!!busy} onClick={() => onChip(c.id)} className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-left text-[12.5px] font-semibold hover:bg-muted disabled:opacity-60">
                   {busy === "chip" && c.id === "flashcards" && <Loader2 className="size-3.5 animate-spin" />}
@@ -536,6 +544,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
         />
       </div>
 
+      {paperOpen && <PaperPicker workspaceId={workspaceId} onClose={() => setPaperOpen(false)} />}
       {picked.length > 0 && (
         <CatNudge count={picked.length} starting={busy === "session" ? "session" : busy === "deck" ? "flashcards" : null} onSession={() => void newSession()} onFlashcards={() => void makeDeck(picked, "deck")} onClear={() => setSelected(new Set())} />
       )}

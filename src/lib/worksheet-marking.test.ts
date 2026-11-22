@@ -150,3 +150,13 @@ describe("resolvePartMarking", () => {
     );
   });
 });
+
+it("practice-paper multiple choice is marked locally by letter or option text", () => {
+  const part = { label: "1", prompt: "Which?", type: "mcq" as const, options: ["Ribosome", "Mitochondrion", "Nucleus", "Golgi"], answer: "B", marks: 1 };
+  assert.equal(isPartCorrect(part, "B"), true);
+  assert.equal(isPartCorrect(part, "(b)"), true);
+  assert.equal(isPartCorrect(part, "mitochondrion"), true);
+  assert.equal(isPartCorrect(part, "A"), false);
+  assert.equal(serverCanMarkPart({ ...part, markScheme: { points: [{ point: 1, requirements: "B" }], totalPoints: 1 } }), false);
+  assert.equal(serverCanMarkPart({ label: "a", prompt: "Discuss", type: "essay", markScheme: { points: [{ point: 15, requirements: "x" }], totalPoints: 15 } }), true);
+});
