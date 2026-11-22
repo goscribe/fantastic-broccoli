@@ -1,6 +1,6 @@
 "use client";
 
-import { BuildBar } from "@/components/session/build-bar";
+import { BuildStage } from "@/components/session/build-stage";
 import { useNewUi } from "@/lib/new-ui";
 import { initialCopilotOpen, rememberCopilotOpen } from "@/lib/copilot-pref";
 import {
@@ -1888,22 +1888,28 @@ function GeneratingPlanCard({
   if (newUi) {
     return (
       <div className="mx-auto flex w-full max-w-[640px] flex-col items-center gap-5 pb-12 pt-2 animate-fade-up">
-        <BuildBar
+        <BuildStage
           title={title}
           pct={percent / 100}
           label={detail ?? t(GENERATION_STAGES[progress.stageIndex].label)}
-          steps={GENERATION_STAGES.length}
-          index={progress.stageIndex}
+          stageIndex={progress.stageIndex}
+          stageCount={GENERATION_STAGES.length}
+          planned={progress.planned}
+          finished={progress.finished}
+          writing={progress.stageIndex >= 2}
+          hint={
+            stalled
+              ? t("session.takingLonger")
+              : quickStart
+                ? // A Quick 5 is ready in about a minute: it opens here by itself, there is nothing to email.
+                  t("firstRun.busyHint")
+                : t("session.generatingHint")
+          }
         />
-        <SessionPrecheck workspaceId={workspaceId} focus={title} hero />
-        <p className="text-center text-[13px] text-faint">
-          {stalled
-            ? t("session.takingLonger")
-            : quickStart
-              ? // A Quick 5 is ready in about a minute: it opens here by itself, there is nothing to email.
-                t("firstRun.busyHint")
-              : t("session.generatingHint")}
-        </p>
+        {/* The quick check / warm-up on a card that matches the build panel; hidden while it has nothing to show. */}
+        <div className="w-full rounded-[var(--r-panel,24px)] border border-border bg-card p-5 empty:hidden sm:p-7">
+          <SessionPrecheck workspaceId={workspaceId} focus={title} hero />
+        </div>
       </div>
     );
   }

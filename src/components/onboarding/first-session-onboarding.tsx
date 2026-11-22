@@ -2,7 +2,7 @@
 
 import { useNewUi } from "@/lib/new-ui";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
-import { BuildBar } from "@/components/session/build-bar";
+import { BuildStage } from "@/components/session/build-stage";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createWorkspace, fetchWorkspace } from "@/lib/api/workspace";
@@ -355,18 +355,21 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
       return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
           <div className="flex max-h-full w-full max-w-[640px] flex-col items-center gap-5 overflow-y-auto animate-fade-up">
-            <BuildBar
+            <BuildStage
               title={title}
               pct={buildPercent / 100}
               label={BUILD_STEPS[Math.min(stepIndex, BUILD_STEPS.length - 1)]}
-              steps={BUILD_STEPS.length}
-              index={stepIndex}
+              stageIndex={Math.min(stepIndex, BUILD_STEPS.length - 1)}
+              stageCount={BUILD_STEPS.length}
+              hint="This can take a couple of minutes for large files. Your session opens by itself."
             />
-            {warmupWorkspaceId ? (
-              <WarmupQuiz workspaceId={warmupWorkspaceId} hero />
-            ) : (
-              <p className="text-[13px] text-faint">A warm-up question from your notes is on its way.</p>
-            )}
+            <div className="w-full rounded-[var(--r-panel,24px)] border border-border bg-card p-5 sm:p-7">
+              {warmupWorkspaceId ? (
+                <WarmupQuiz workspaceId={warmupWorkspaceId} hero />
+              ) : (
+                <p className="text-[13px] text-muted-foreground">A warm-up question from your notes is on its way.</p>
+              )}
+            </div>
             <div className="w-full rounded-3xl bg-card"><PlanUpsell /></div>
           </div>
         </div>
