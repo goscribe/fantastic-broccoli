@@ -202,6 +202,12 @@
   /* Short rows (phone lists, the picker): the art is cropped harder so the title keeps its room. */
   .subject-tile--row .subject-tile__art { right: -4%; bottom: -34%; height: 150%; }
   .subject-tile--row .subject-tile__text { max-width: 60%; }
+  /*
+   * Course tiles grow with their text (a long name, a wrapped stats line), so
+   * their art is capped by the tile's width too: a taller tile no longer means
+   * bigger art running under the words, the status line and the pill.
+   */
+  .course-tile:not(.subject-tile--row) > .subject-tile__art { height: min(90%, 72cqw); bottom: -8%; }
   /* The words keep the left; the art keeps the right. */
   .subject-tile__text { max-width: 62%; min-width: 0; }
   .subject-tile__title,
@@ -215,6 +221,7 @@
     overflow: hidden;
   }
   .subject-band__title { -webkit-line-clamp: 3; line-clamp: 3; }
+  .course-tile__title { -webkit-line-clamp: 3; line-clamp: 3; }
   .subject-tile__sub { color: rgb(255 255 255 / 0.92); }
   .subject-tile__sub--line { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .subject-pill {
