@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useImperativeHandle, useRef, useState, useSyncExternalStore, type RefObject } from "react";
-import { Check, Loader2, Mic, Square, X } from "lucide-react";
+import { ArrowUp, Check, Eye, Loader2, Mic, Square, X } from "lucide-react";
 import { Mascot } from "@/components/rewards/mascot";
 import { interpretSpeech } from "@/lib/api/voice-scribe";
 import {
@@ -216,6 +216,8 @@ export function VoiceScribe({
   const [open, setOpenState] = useState(false);
   const [steps, setSteps] = useState<Step[]>([]);
   const [listening, setListening] = useState(false);
+  /** The overlay is lowered so the page (its tables, graphs and figures) can be read; listening carries on. */
+  const [peek, setPeek] = useState(false);
   const [parts, setParts] = useState<AnswerPart[]>([]);
   const [current, setCurrentState] = useState("");
 
@@ -230,6 +232,8 @@ export function VoiceScribe({
 
   const setOpen = (next: boolean) => {
     setOpenState(next);
+    // Each opening starts on the overlay, not lowered.
+    setPeek(false);
     onOpenChange(next);
   };
   const setCurrent = (label: string) => {
@@ -441,6 +445,50 @@ export function VoiceScribe({
   // A question without marked parts: its own words, from the page.
   const prompt = part?.prompt || questionContext(part?.field ?? null, scope.current).split("\n").find((l) => l.trim().length > 12) || "";
 
+  /** Lower the overlay and bring the question's figure (or the question) into view. */
+  const lookAtQuestion = () => {
+    setPeek(true);
+    const holder = (part?.field?.closest("[data-dictation-context]") as HTMLElement | null) ?? scope.current;
+    const visual = holder?.querySelector<HTMLElement>("figure, table, img, svg, iframe, canvas, [data-figure]");
+    (visual ?? holder)?.scrollIntoView({ block: "center", behavior: "smooth" });
+  };
+
+  if (peek) {
+    // The page stays readable and scrollable; a small bar keeps the session in reach.
+    return (
+      <div
+        role="dialog"
+        aria-label={t("voice.title")}
+        data-voice-ignore
+        className="life-rise fixed inset-x-0 bottom-0 z-50 flex justify-center px-4 pb-[max(1rem,env(safe-area-inset-bottom))]"
+      >
+        <div className="flex items-center gap-2 rounded-full bg-card py-2 pl-4 pr-2 shadow-[0_10px_30px_-12px_rgba(17,17,20,.45)] ring-1 ring-border">
+          <span className={cn("size-2.5 shrink-0 rounded-full", listening ? "bg-rose-500 animate-pulse-dot motion-reduce:animate-none" : "bg-faint")} aria-hidden />
+          <span className="text-ui font-extrabold" role="status">
+            {t(writing ? "voice.writing" : hearing ? "voice.hearing" : listening ? "voice.listening" : "voice.paused")}
+          </span>
+          <button type="button" onClick={() => setPeek(false)} className="ml-1 flex h-10 items-center gap-1.5 rounded-full bg-muted px-3.5 text-[13.5px] font-bold hover:bg-[var(--edge)]">
+            <ArrowUp className="size-4" aria-hidden />
+            {t("voice.peekBack")}
+          </button>
+          {listening && (
+            <button
+              type="button"
+              onClick={() => {
+                setPeek(false);
+                void stopAndWrite();
+              }}
+              aria-label={t("voice.stopAndWrite")}
+              className="grid size-10 place-items-center rounded-full bg-rose-500 text-white"
+            >
+              <Square className="size-3.5 fill-current" />
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       role="dialog"
@@ -479,6 +527,10 @@ export function VoiceScribe({
               <MathText text={prompt} />
             </span>
           </p>
+          <button type="button" onClick={lookAtQuestion} className={cn(playLink, "mt-2 inline-flex min-h-9 items-center gap-1.5 text-[13.5px] no-underline")}>
+            <Eye className="size-4" aria-hidden />
+            {t("voice.peek")}
+          </button>
           {several && (
             <p className="mt-2 text-small text-muted-foreground">
               {t("voice.howToSwitch").replace("{part}", parts.find((p) => p.label !== current)?.label ?? "")}

@@ -19,6 +19,15 @@ const CONTENT: WorksheetContent = {
     {
       title: "Counting fruit",
       intro: "Sam has 2 oranges and 2 bananas. He buys 3 more apples.",
+      // A question that needs its figure: "See the whole question" lowers the overlay to read it.
+      figures: [
+        {
+          id: "fruit",
+          type: "html",
+          title: "Sam's fruit",
+          html: '<table style="border-collapse:collapse;font:15px system-ui;margin:auto"><tr><th style="padding:6px 14px;border-bottom:1px solid #ccc">Fruit</th><th style="padding:6px 14px;border-bottom:1px solid #ccc">Count</th></tr><tr><td style="padding:6px 14px">Oranges</td><td style="padding:6px 14px">2</td></tr><tr><td style="padding:6px 14px">Bananas</td><td style="padding:6px 14px">2</td></tr><tr><td style="padding:6px 14px">Apples</td><td style="padding:6px 14px">3</td></tr></table>',
+        },
+      ],
       parts: [
         { label: "a", prompt: "How many oranges and bananas does Sam have?", type: "numeric", marks: 1 },
         { label: "b", prompt: "How many pieces of fruit does he have in total? Show your working.", type: "text", marks: 2 },
