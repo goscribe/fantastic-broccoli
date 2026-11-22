@@ -22,6 +22,7 @@ const CONTENT: WorksheetContent = {
       parts: [
         { label: "a", prompt: "How many oranges and bananas does Sam have?", type: "numeric", marks: 1 },
         { label: "b", prompt: "How many pieces of fruit does he have in total? Show your working.", type: "text", marks: 2 },
+        { label: "c", prompt: "What fraction of his fruit are apples?", type: "text", marks: 1 },
       ],
     },
   ],

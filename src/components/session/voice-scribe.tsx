@@ -410,7 +410,9 @@ export function VoiceScribe({
                 s.wrote && <span className="text-small font-bold text-accent">{s.wrote}</span>
               ) : (
                 <span className="flex flex-wrap items-baseline gap-x-2">
-                  <span className={cn("font-mono text-[16px] font-bold leading-snug text-foreground", s.state === "undone" && "line-through")}>{s.wrote}</span>
+                  <span className={cn("text-[17px] font-semibold leading-snug text-foreground", s.state === "undone" && "line-through")}>
+                    <MathText text={s.wrote} />
+                  </span>
                   {several && <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-extrabold text-accent">→ {s.part}</span>}
                 </span>
               )}

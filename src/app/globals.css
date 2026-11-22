@@ -622,7 +622,8 @@ input[type="range"].param-slider:active::-moz-range-thumb {
 }
 
 /* Voice scribe: an answer box just written into. */
-[data-voice-flash] {
+[data-voice-flash],
+[data-voice-flash] + [data-rich-rendered] {
   animation: voice-flash 0.9s ease;
 }
 @keyframes voice-flash {

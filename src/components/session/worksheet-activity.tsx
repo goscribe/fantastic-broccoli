@@ -16,6 +16,7 @@ import { WorksheetFigureCard } from "@/components/graphics/worksheet-figures";
 import { FigureView } from "@/components/session/reading-activity";
 import { MarkdownText, MathText } from "@/components/ui/markdown-text";
 import { DrawingCanvas } from "@/components/ui/drawing-canvas";
+import { RichAnswerField } from "@/components/ui/rich-answer-field";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
@@ -354,13 +355,12 @@ export function WorksheetActivity({
                       ))}
                     </div>
                   ) : (
-                    <textarea
-                      ref={i === 0 ? firstInput : undefined}
+                    <RichAnswerField
+                      textareaRef={i === 0 ? firstInput : undefined}
                       value={value}
                       rows={part.type === "numeric" ? 1 : 2}
                       disabled={(checked && correct) || markingInFlight}
-                      onChange={(e) => {
-                        const v = e.target.value;
+                      onChange={(v) => {
                         setAnswers((a) => ({ ...a, [key(i)]: v }));
                         // Typing un-skips the part.
                         if (v.trim()) setSkipped((sk) => (sk[key(i)] ? { ...sk, [key(i)]: false } : sk));
