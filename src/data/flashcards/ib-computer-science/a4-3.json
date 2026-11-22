@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a4-3",
+  "topicCode": "A4.3",
+  "topicName": "Machine learning approaches",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:05.915Z",
+  "cards": [
+    {
+      "id": "0wdaexw",
+      "kind": "concept",
+      "front": "What is the key difference between supervised, unsupervised and reinforcement learning?",
+      "back": "The **feedback** each receives. Supervised learning uses labelled correct answers, unsupervised learning uses no labels so it finds structure itself, and reinforcement learning learns from rewards.",
+      "hint": "Think about what the model is told after each example or action.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rbt8pl",
+      "kind": "concept",
+      "front": "How do classification and regression differ?",
+      "back": "Classification predicts a **category** from a fixed set, such as spam or not spam. Regression predicts a **numerical value**, such as a house price.",
+      "hint": "Ask whether the output is a named group or an amount.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0634i01",
+      "kind": "concept",
+      "front": "How should you choose between supervised, unsupervised and reinforcement learning for a problem?",
+      "back": "Match the approach to your data and goal. Labelled data with a clear target suggests **supervised** learning, raw unlabelled data suggests **unsupervised** learning, and a sequence of decisions that earns rewards suggests **reinforcement** learning.",
+      "hint": "Start by asking whether you have labels and whether there is a target.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "06sulk7",
+      "kind": "process",
+      "front": "How does supervised learning train a model?",
+      "back": "The model sees many **labelled examples**, adjusts until its predictions match the labels, then makes predictions for new cases.",
+      "hint": "There are three steps, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1q9wfve",
+      "kind": "term",
+      "front": "What is clustering?",
+      "back": "Clustering is an **unsupervised** task that groups similar items together without predefined categories.",
+      "hint": "It is a task for data with no labels.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0832z52",
+      "kind": "term",
+      "front": "What is an agent in reinforcement learning?",
+      "back": "The **learner**, which chooses actions in a setting and receives rewards from that setting.",
+      "hint": "Think of the pet learning tricks in the note.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0snu3bt",
+      "kind": "mistake",
+      "front": "A model predicts a digit from 0 to 9. Is this a regression task because the output is a number?",
+      "back": "No. The digit names a **class** from a fixed set, so it is **classification**, even though the label is numeric.",
+      "hint": "Ask whether the values are categories or amounts on a scale.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p5cr0k",
+      "kind": "example",
+      "front": "A company wants to predict how much a customer will spend next month. Is this classification or regression?",
+      "back": "**Regression**, because the output is a number, the amount spent, rather than a category.",
+      "hint": "Is the answer a named group or a quantity?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tsuv4i",
+      "kind": "example",
+      "front": "A shop groups customers by buying habits with no predefined groups. Which approach and task is this?",
+      "back": "**Unsupervised** learning, using **clustering**. The groups are not named in advance, so a person must decide what each group means.",
+      "hint": "There are no labels in the data.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mignkc",
+      "kind": "mistake",
+      "front": "When comparing the three learning approaches, is it enough to say that supervised learning uses examples?",
+      "back": "No. Name the **type of feedback** for each approach, since examples alone do not show how the approaches differ.",
+      "hint": "Focus on what the model receives to learn from.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1mejbww",
+      "kind": "concept",
+      "front": "What is a risk of a badly designed reward in reinforcement learning?",
+      "back": "It can encourage **behaviour the designer did not intend**, because the agent works to maximise the reward it is given.",
+      "hint": "Think about what the agent actually optimises.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sdmm5a",
+      "kind": "concept",
+      "front": "Why are results from unsupervised learning harder to check?",
+      "back": "There is **no known right answer** to compare them against, unlike supervised learning, which can be checked against labels.",
+      "hint": "Compare with what supervised learning uses to measure accuracy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dnh7wq",
+      "kind": "process",
+      "front": "What steps does a reinforcement learning agent go through?",
+      "back": "It takes an **action** in a setting, receives a **reward** (positive or negative), and repeats over many trials until it learns the strategy with the highest total reward.",
+      "hint": "The cycle repeats many times.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lukq2n",
+      "kind": "concept",
+      "front": "How is a supervised learning model judged?",
+      "back": "On **cases it did not see during training**, by comparing its predictions against the known answers.",
+      "hint": "Think about what new data the model is tested on.",
+      "sectionId": "s2"
+    }
+  ]
+}

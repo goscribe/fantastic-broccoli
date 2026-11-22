@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-4-1-3",
+  "topicCode": "3.4.1.3",
+  "topicName": "Motion in a straight line",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:15.949Z",
+  "cards": [
+    {
+      "id": "1co0ai6",
+      "kind": "formula",
+      "front": "What does the equation $a=\\frac{v-u}{t}$ calculate, and what unit does it give?",
+      "back": "**Acceleration**, the rate of change of velocity. $u$ is initial velocity, $v$ is final velocity and $t$ is time taken. The unit is $\\mathrm{m\\,s^{-2}}$.",
+      "hint": "Compare the change in velocity with the time it takes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09k1kbr",
+      "kind": "concept",
+      "front": "What does the area between a velocity–time graph and the time axis tell you?",
+      "back": "The **displacement**. Split the area into triangles and rectangles, add them, and count area below the axis as negative.",
+      "hint": "Multiply the two axis quantities together. What do you get?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jj8e8x",
+      "kind": "concept",
+      "front": "How do you choose which equation of motion to use for a constant-acceleration problem?",
+      "back": "**List $s$, $u$, $v$, $a$ and $t$**, mark the three you know and the one you want, then pick the equation that leaves out the fifth.",
+      "hint": "Start by listing what the question gives you.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19ec36h",
+      "kind": "concept",
+      "front": "Why does a runner who completes one 400 m lap have a zero average velocity?",
+      "back": "She finishes where she started, so her **displacement** is zero. Average velocity is displacement divided by time, so it is zero even though her average speed is $8.0\\,\\mathrm{m\\,s^{-1}}$.",
+      "hint": "Compare where she ends with where she began.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03vz26j",
+      "kind": "term",
+      "front": "What is the instantaneous velocity of an object?",
+      "back": "The **velocity at a single instant**. It equals the gradient of the tangent drawn to the displacement–time graph at that point.",
+      "hint": "Think about how the slope of a curve changes from point to point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a7h31q",
+      "kind": "concept",
+      "front": "What does the gradient of a velocity–time graph give, and what does a horizontal line mean?",
+      "back": "The gradient gives the **acceleration**. A horizontal line means constant velocity and zero acceleration.",
+      "hint": "Think about what changes on the vertical axis over time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m88jr2",
+      "kind": "mistake",
+      "front": "A student says negative acceleration always means slowing down. What is wrong with this?",
+      "back": "**Direction** matters. Negative acceleration only means it acts in the negative direction. An object speeding up in the negative direction also has negative acceleration.",
+      "hint": "Think about the sign of velocity as well as the sign of acceleration.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wmjkd1",
+      "kind": "example",
+      "front": "A car speeds up from $12\\,\\mathrm{m\\,s^{-1}}$ to $30\\,\\mathrm{m\\,s^{-1}}$ in 6.0 s. What is its acceleration?",
+      "back": "**$3.0\\,\\mathrm{m\\,s^{-2}}$** in the direction of motion, from $a=\\frac{30-12}{6.0}$.",
+      "hint": "Start with the formula that links acceleration, change in velocity and time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0o8lk4n",
+      "kind": "example",
+      "front": "A vehicle speeds up from rest to $6.0\\,\\mathrm{m\\,s^{-1}}$ in 3.0 s, cruises for 4.0 s, then stops in 3.0 s. What is its total displacement?",
+      "back": "**$42\\,\\mathrm{m}$**: two triangles of $9.0\\,\\mathrm{m}$ each plus a rectangle of $24\\,\\mathrm{m}$ under the velocity–time graph.",
+      "hint": "Split the velocity–time graph into simple shapes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z1mhht",
+      "kind": "example",
+      "front": "A car at $20\\,\\mathrm{m\\,s^{-1}}$ brakes at $4.0\\,\\mathrm{m\\,s^{-2}}$ until it stops. How far does it travel?",
+      "back": "**$50\\,\\mathrm{m}$**, using $v^2=u^2+2as$ with $a=-4.0\\,\\mathrm{m\\,s^{-2}}$. It takes $5.0\\,\\mathrm{s}$ to stop.",
+      "hint": "Which equation has no time in it?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zy986r",
+      "kind": "term",
+      "front": "What is free fall?",
+      "back": "**Motion with gravity as the only force acting**, so air drag is ignored. The acceleration is $g=9.81\\,\\mathrm{m\\,s^{-2}}$ downwards.",
+      "hint": "Think about which forces are being left out.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0idl1oi",
+      "kind": "mistake",
+      "front": "Why does a ball thrown upwards still have acceleration at its highest point, even though its velocity is zero there?",
+      "back": "**Gravity still acts** on it, so the acceleration stays $9.81\\,\\mathrm{m\\,s^{-2}}$ downwards. Its velocity is zero only for an instant as it changes direction.",
+      "hint": "Think about which force is acting on the ball at the top.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1okspn6",
+      "kind": "example",
+      "front": "A stone is dropped from rest and falls for 3.0 s. How far does it fall?",
+      "back": "**$44\\,\\mathrm{m}$**, from $s=ut+\\frac{1}{2}at^2=\\frac{1}{2}\\times9.81\\times3.0^2$ with downwards positive. Its speed then is $29\\,\\mathrm{m\\,s^{-1}}$.",
+      "hint": "With $u=0$, which equation uses time but not final velocity?",
+      "sectionId": "s6"
+    }
+  ]
+}

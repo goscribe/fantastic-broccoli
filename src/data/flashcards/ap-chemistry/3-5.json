@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "3-5",
+  "topicCode": "3.5",
+  "topicName": "Kinetic molecular theory",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:22.729Z",
+  "cards": [
+    {
+      "id": "1d3vjor",
+      "kind": "concept",
+      "front": "What are the core assumptions of kinetic molecular theory for an ideal gas?",
+      "back": "Particles move constantly, randomly, and in straight lines between collisions. Their own volume is **negligible** compared with the container, and they exert no forces on each other between collisions. Collisions are elastic.",
+      "hint": "Think about motion, volume, and forces.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nfjlh1",
+      "kind": "concept",
+      "front": "What does the temperature of an ideal gas control about its particles?",
+      "back": "The **average kinetic energy** of the particles. It depends only on absolute temperature and is proportional to Kelvin temperature. Individual particles still have a range of speeds.",
+      "hint": "Which temperature scale must you use?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1f4ibhu",
+      "kind": "concept",
+      "front": "Why does a gas push on the walls of its container?",
+      "back": "Particles strike the walls and transfer momentum. Many impacts exert a force per unit area, which is the **gas pressure**. Random motion means the gas pushes on all sides.",
+      "hint": "Think about impacts, not repulsion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1utgj85",
+      "kind": "term",
+      "front": "What is an elastic collision in kinetic molecular theory?",
+      "back": "A collision in which **total kinetic energy is conserved**. The colliding particles may still exchange energy with each other.",
+      "hint": "What is conserved in each collision?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gipaf7",
+      "kind": "example",
+      "front": "A gas warms from 300 K to 450 K. What is the ratio of its final to initial average kinetic energy?",
+      "back": "**1.5**, with no units. Average kinetic energy is proportional to Kelvin temperature, so $\\frac{450}{300}=1.5$.",
+      "hint": "Use the Kelvin temperatures in a ratio.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hre24z",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that gas pressure needs particles to repel each other?",
+      "back": "Ideal gas particles exert **no repulsive forces** between collisions. Pressure comes from particles colliding with the container walls.",
+      "hint": "Where do the impacts happen?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1936muz",
+      "kind": "concept",
+      "front": "At fixed volume and particle number, why does heating a gas raise its pressure?",
+      "back": "Faster particles strike the walls **more often** and transfer more momentum per impact, so pressure rises.",
+      "hint": "Consider impact frequency and momentum per impact.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kkiwrc",
+      "kind": "concept",
+      "front": "At fixed temperature and particle number, what happens to pressure when the container volume is reduced?",
+      "back": "Pressure **rises**. Particles travel shorter distances between wall collisions, so impacts become more frequent.",
+      "hint": "Think about the distance between walls.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vjt7pa",
+      "kind": "term",
+      "front": "What determines the volume of a gas?",
+      "back": "The **container volume**. A gas has no fixed volume of its own; its particles spread through all the space available.",
+      "hint": "Where do the particles spread?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00u8z13",
+      "kind": "concept",
+      "front": "Why does heating a gas in a rigid container raise its pressure rather than its volume?",
+      "back": "The **volume is fixed** by the container, so the extra energy shows up as stronger and more frequent wall impacts, which raise the pressure.",
+      "hint": "What stays fixed in a rigid container?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1u3ayh9",
+      "kind": "process",
+      "front": "What happens step by step when a gas is heated beneath a movable piston at constant outside pressure?",
+      "back": "1) Wall impacts become stronger and more frequent. 2) The piston moves outward. 3) The larger volume reduces how often particles hit the walls. 4) Expansion stops when gas pressure balances the outside pressure.",
+      "hint": "Follow what happens to the wall impacts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04lejo9",
+      "kind": "term",
+      "front": "What is Kelvin temperature?",
+      "back": "**Absolute temperature**, the scale used when relating gas temperature to average kinetic energy. Convert Celsius to kelvins before comparing.",
+      "hint": "Which scale must you convert to first?",
+      "sectionId": "s2"
+    }
+  ]
+}

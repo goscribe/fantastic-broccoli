@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "5-6",
+  "topicCode": "5.6",
+  "topicName": "Concavity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:20.256Z",
+  "cards": [
+    {
+      "id": "14ur7t4",
+      "kind": "concept",
+      "front": "What does it mean for a curve to be concave up?",
+      "back": "A curve is **concave up** where its tangent slopes increase as $x$ increases. It can still be decreasing while concave up.",
+      "hint": "Think about whether the slopes are getting bigger as you move right.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dwfuuf",
+      "kind": "formula",
+      "front": "What do the signs of the second derivative $f''(x)$ tell you about the concavity of $f$?",
+      "back": "Where $f''(x)>0$, $f$ is **concave up**. Where $f''(x)<0$, $f$ is **concave down**. These rules apply on whole intervals, not just single points.",
+      "hint": "Positive second derivative means slopes are increasing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ms18mh",
+      "kind": "term",
+      "front": "What is a point of inflection?",
+      "back": "A **point of inflection** is a point on the graph of $f$ where the concavity changes, either from up to down or from down to up. The point must lie on the graph.",
+      "hint": "Concavity has to switch at this point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "062m4a0",
+      "kind": "mistake",
+      "front": "If $f''(c)=0$, is there automatically an inflection point at $x=c$?",
+      "back": "**No.** $f''(c)=0$ only gives a candidate. You must check that the sign of $f''$ changes on either side of $c$ and that $f$ is defined there.",
+      "hint": "What has to happen to the sign around $c$?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v3nw2l",
+      "kind": "process",
+      "front": "What are the steps to find the concavity intervals and inflection points of $f$ using $f''$?",
+      "back": "1) Find $f''(x)$. 2) Find where $f''(x)=0$ or is undefined. 3) Split the domain at those values. 4) Test the sign of $f''$ on each interval. 5) Substitute confirmed $x$-values into $f$ for full coordinates.",
+      "hint": "Start by differentiating twice.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0533m10",
+      "kind": "example",
+      "front": "For $f(x)=x^3-3x$, find the concavity intervals and the inflection point.",
+      "back": "$f''(x)=6x$. $f$ is **concave down** on $(-\\infty,0)$ and **concave up** on $(0,\\infty)$. The inflection point is $(0,0)$.",
+      "hint": "The only candidate is where $6x=0$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d0r9cu",
+      "kind": "concept",
+      "front": "What is a candidate for inflection, and where does it occur?",
+      "back": "A **candidate for inflection** is an $x$-value where $f''(x)=0$ or where $f''$ is undefined. These values divide the domain into intervals to test.",
+      "hint": "Look for zeros and breaks in $f''$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ntx2ij",
+      "kind": "term",
+      "front": "What does the second derivative $f''$ measure?",
+      "back": "The **second derivative** $f''$ is the derivative of $f'$. It gives the rate at which the tangent slopes of $f$ change with respect to $x$.",
+      "hint": "It is a derivative of a derivative.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jk03ia",
+      "kind": "process",
+      "front": "How can you identify an inflection point from the graph of $f$ itself?",
+      "back": "Track how tangent slopes change as you move right. Find a point where slopes switch from increasing to decreasing, or from decreasing to increasing. The tangent there need not be horizontal.",
+      "hint": "Watch the direction the slopes are changing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01su0u8",
+      "kind": "concept",
+      "front": "On a graph of $f''$, how do you spot a possible inflection point?",
+      "back": "Look for a **sign change** where the graph crosses the horizontal axis. Merely touching the axis may not be enough. Also check that the point exists on the graph of $f$.",
+      "hint": "Crossing is different from touching.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p8pe5m",
+      "kind": "mistake",
+      "front": "Does a decreasing function have to be concave down?",
+      "back": "**No.** A function can decrease while remaining concave up. Concavity describes how the slopes change, not whether the function rises or falls.",
+      "hint": "Separate the slope values from how the slopes change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gme5rv",
+      "kind": "example",
+      "front": "If $f''$ is negative left of $x=2$ and positive right of $x=2$, what happens to $f$ at $x=2$?",
+      "back": "$f$ is **concave down** left of 2 and **concave up** right of 2. If $f$ is defined and continuous at 2, it has an inflection point at $(2,f(2))$.",
+      "hint": "Which sign means concave up?",
+      "sectionId": "s4"
+    }
+  ]
+}

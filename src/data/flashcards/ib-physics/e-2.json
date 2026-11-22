@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "e-2",
+  "topicCode": "E.2",
+  "topicName": "Quantum physics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:24:10.539Z",
+  "cards": [
+    {
+      "id": "1shw5rk",
+      "kind": "concept",
+      "front": "Why can increasing light intensity fail to release electrons below the threshold frequency?",
+      "back": "Each **photon** has too little energy to release an electron, and one electron absorbs energy from one photon. Higher intensity supplies more photons, not more energy per photon.",
+      "hint": "Think about what a single photon can do to a single electron.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1aqqfu4",
+      "kind": "formula",
+      "front": "Which equation links maximum photoelectron kinetic energy to photon frequency and work function?",
+      "back": "$K_{\\max}=hf-\\phi$, where $h$ is Planck's constant ($\\mathrm{J\\,s}$), $f$ is frequency ($\\mathrm{Hz}$) and $\\phi$ is the **work function** ($\\mathrm{J}$). It follows from energy conservation.",
+      "hint": "Think about where the photon's energy goes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s5093d",
+      "kind": "formula",
+      "front": "What is the de Broglie wavelength of a particle with momentum $p$?",
+      "back": "$\\lambda=\\frac{h}{p}$, where $h$ is Planck's constant. For a slow particle, $p=mv$, so $\\lambda=\\frac{h}{mv}$. Greater momentum gives a **shorter wavelength**.",
+      "hint": "Compare how a heavy, fast particle and a light, slow particle would behave.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1at5qfd",
+      "kind": "term",
+      "front": "What is the threshold frequency of a surface?",
+      "back": "The **lowest light frequency** that can release electrons from that surface. Below it, no electrons escape, however intense the light is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gcmfjj",
+      "kind": "term",
+      "front": "What is the work function of a surface?",
+      "back": "The **minimum energy** needed to release an electron from the surface. At threshold, $\\phi=hf_0$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07rpryx",
+      "kind": "example",
+      "front": "What is $K_{\\max}$ for light of $8.00\\times10^{14}\\,\\mathrm{Hz}$ on a surface with threshold $5.00\\times10^{14}\\,\\mathrm{Hz}$?",
+      "back": "$K_{\\max}=1.99\\times10^{-19}\\,\\mathrm{J}$, from $h(f-f_0)=(6.63\\times10^{-34})(3.00\\times10^{14})$ using $h=6.63\\times10^{-34}\\,\\mathrm{J\\,s}$.",
+      "hint": "Find the frequency difference before multiplying by $h$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hp7g5m",
+      "kind": "example",
+      "front": "What is the de Broglie wavelength of an electron moving at $2.00\\times10^6\\,\\mathrm{m\\,s^{-1}}$?",
+      "back": "$\\lambda=3.64\\times10^{-10}\\,\\mathrm{m}$. First find $p=mv=1.82\\times10^{-24}\\,\\mathrm{kg\\,m\\,s^{-1}}$, then divide $h$ by it.",
+      "hint": "Work out the momentum first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lvs8z9",
+      "kind": "mistake",
+      "front": "Why is it wrong to picture a particle's de Broglie wavelength as a permanently wavy path it follows?",
+      "back": "The wavelength describes **wave behaviour**, such as electron diffraction. It does not mean the particle travels along a wavy path.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "024p50u",
+      "kind": "concept",
+      "front": "What happens to a photon in Compton scattering?",
+      "back": "The photon scatters in a new direction with **less energy and a longer wavelength**, while an electron recoils. Momentum and energy are conserved, so the photon must carry momentum.",
+      "hint": "Think of the interaction as a collision between two bodies.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04745a9",
+      "kind": "formula",
+      "front": "What expression gives the wavelength change in Compton scattering for an electron initially at rest?",
+      "back": "$\\Delta\\lambda=\\frac{h}{m_ec}(1-\\cos\\theta)$, where $\\theta$ is the angle between the incoming and scattered photon directions. A **larger angle** gives a larger increase.",
+      "hint": "Consider a photon that is not deflected at all.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16b7bkt",
+      "kind": "term",
+      "front": "What is the momentum of a photon in terms of its wavelength?",
+      "back": "$p=\\frac{h}{\\lambda}=\\frac{E}{c}$. This is **photon momentum**, which exists even though a photon has no rest mass.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mdye8u",
+      "kind": "concept",
+      "front": "Why do emitted photoelectrons have a range of kinetic energies rather than one value?",
+      "back": "Only electrons escaping without losing energy inside the material have the **maximum** kinetic energy. Others lose energy on the way out and leave with less.",
+      "hint": "Consider what can happen to an electron after it absorbs a photon.",
+      "sectionId": "s2"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-11",
+  "topicCode": "7.11",
+  "topicName": "Negative and positive feedback",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:57.683Z",
+  "cards": [
+    {
+      "id": "1l0c7el",
+      "kind": "concept",
+      "front": "How does negative feedback respond when a controlled factor has moved away from its normal value?",
+      "back": "It produces a response that **reverses** the original change, moving the factor back towards its normal value. Most homeostatic control uses this type of feedback.",
+      "hint": "Think about what the response does to the change that triggered it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02lkd71",
+      "kind": "process",
+      "front": "What are the four steps of a negative feedback loop, in order?",
+      "back": "1) A sensory receptor detects a change. 2) A coordination centre, such as the brain, processes the information. 3) An effector, a muscle or gland, carries out a response. 4) The response reverses the change.",
+      "hint": "Start with the part that notices the change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01fqiey",
+      "kind": "concept",
+      "front": "Why does positive feedback push a value further from where it started?",
+      "back": "The response **amplifies** the change that caused it, so each cycle makes the factor move further away from its starting value.",
+      "hint": "Compare the direction of the response with the original change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1au9k0z",
+      "kind": "term",
+      "front": "What is homeostasis?",
+      "back": "The **maintenance** of internal conditions within ranges suitable for cell function.",
+      "hint": "Think about why cells need a steady temperature and glucose level.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xermc9",
+      "kind": "term",
+      "front": "What is a set point?",
+      "back": "The **target value** of a controlled factor, around which negative feedback holds it.",
+      "hint": "Think about what the control loop is aiming for.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0w9rqhw",
+      "kind": "concept",
+      "front": "Why does a controlled factor never stay perfectly fixed under negative feedback?",
+      "back": "The response takes time, so the value **swings** slightly above and below the set point. The control system keeps these swings small.",
+      "hint": "Consider the delay between detecting a change and responding to it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0u2ujjt",
+      "kind": "example",
+      "front": "Which way does negative feedback push blood glucose when it has risen after a meal?",
+      "back": "Downwards: a response **lowers** it. Between meals, when it falls, a response raises it instead.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dnzhh2",
+      "kind": "mistake",
+      "front": "Why is 'negative' feedback not harmful?",
+      "back": "**Negative** describes the response working against the change, not a bad outcome. Negative feedback is the normal stabilising control.",
+      "hint": "Think about what the word describes: the direction of the response.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19w1u8x",
+      "kind": "term",
+      "front": "What is an effector?",
+      "back": "A **muscle or gland** that carries out a response to a signal from a coordination centre.",
+      "hint": "Think about which part of the loop physically does the work.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vvotkn",
+      "kind": "term",
+      "front": "What is oxytocin, and where is it released from?",
+      "back": "A chemical messenger released into the blood from the **pituitary gland**, which stimulates contraction of the uterus.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sujpei",
+      "kind": "example",
+      "front": "What happens to labour contractions as the loop of positive feedback continues?",
+      "back": "Each contraction pushes the baby harder, stretching the cervix further, so contractions **strengthen** until the baby is born.",
+      "hint": "Trace what each contraction does to the cervix.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1714z6i",
+      "kind": "concept",
+      "front": "How does blood clotting show positive feedback?",
+      "back": "Activated platelets release chemicals that attract and **activate more platelets**, so the clot grows until the wound is sealed.",
+      "hint": "Think about what the first platelets do to other platelets.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07873fz",
+      "kind": "concept",
+      "front": "Why can positive feedback not keep body conditions stable?",
+      "back": "It makes the change larger, so the factor moves further from its normal value. It needs an **end point**, because it cannot run for ever.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0opygrj",
+      "kind": "concept",
+      "front": "Which feedback type suits a process that must finish quickly and only once?",
+      "back": "**Positive** feedback, whereas negative feedback keeps conditions stable around a set point. Positive feedback needs an end point to stop the loop.",
+      "hint": "Think about the examples given for each type.",
+      "sectionId": "s5"
+    }
+  ]
+}

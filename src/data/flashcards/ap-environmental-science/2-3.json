@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "2-3",
+  "topicCode": "2.3",
+  "topicName": "Island biogeography",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:21.159Z",
+  "cards": [
+    {
+      "id": "0cgthp4",
+      "kind": "term",
+      "front": "What does the theory of island biogeography say sets how many species an island holds?",
+      "back": "The number of species depends on the **balance between immigration and extinction**, shaped by island size and distance from the mainland.",
+      "hint": "Think about two opposing processes that add species to an island and remove them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10xjong",
+      "kind": "concept",
+      "front": "What is the equilibrium number of species on an island?",
+      "back": "It is the number where the **immigration rate equals the extinction rate**, so the species count stays roughly steady.",
+      "hint": "Think about what happens to each rate as the island fills up with species.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0548wqq",
+      "kind": "concept",
+      "front": "Why does a large island usually hold more species than a small one?",
+      "back": "A large island has more habitats and resources, so **populations are bigger**. Bigger populations are less likely to die out, so extinction is lower.",
+      "hint": "Think about what a storm or disease does to a very small population.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pt4c34",
+      "kind": "mistake",
+      "front": "Why is it wrong to think that equilibrium means no species change on an island?",
+      "back": "**Species keep arriving and disappearing.** The total number stays about the same, but the list of species can change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w69xg8",
+      "kind": "concept",
+      "front": "Why is immigration lower for an island far from the mainland?",
+      "back": "Species must cross **open water** to reach a distant island, so fewer species make the trip and fewer new arrivals settle.",
+      "hint": "Compare how far a species must travel to reach each island.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "113n1tf",
+      "kind": "mistake",
+      "front": "Why is it wrong to say distance from the mainland mainly sets the extinction rate?",
+      "back": "Distance mainly changes **immigration**. Extinction depends mainly on island size.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kx7ct1",
+      "kind": "example",
+      "front": "Which type of island has the lowest expected species number in the table?",
+      "back": "A **small, far** island. Its immigration rate is low and its extinction rate is high, so it has the lowest expected species number.",
+      "hint": "Check which combination gives low arrivals and high losses.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nhctwu",
+      "kind": "process",
+      "front": "What steps should you follow to predict how a change to an island alters its species number?",
+      "back": "First find **which rate the change affects**, then decide whether the equilibrium number of species rises or falls.",
+      "hint": "Think about whether the change affects arrivals or losses first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17kws0m",
+      "kind": "example",
+      "front": "If people clear half of an island's forest, what happens to its equilibrium number of species?",
+      "back": "It **falls**. Less habitat means smaller populations, which raises extinction, so the balance point moves to a lower number.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0asndfk",
+      "kind": "term",
+      "front": "What is habitat fragmentation?",
+      "back": "The division of a large habitat into **smaller, isolated patches**, usually by human land use such as roads, farms, or cities.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "02m3tun",
+      "kind": "concept",
+      "front": "Why do small, isolated habitat fragments hold fewer species?",
+      "back": "Each patch acts like an island. Smaller size raises extinction, and isolation lowers immigration, so **both changes reduce** the species number.",
+      "hint": "Compare each habitat patch with an island surrounded by water.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1oy0d9i",
+      "kind": "term",
+      "front": "What is a habitat corridor?",
+      "back": "A **strip of habitat** that links patches, helping animals and plants move between them.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1q36jwh",
+      "kind": "term",
+      "front": "What is species diversity?",
+      "back": "The **variety of species** in a community, along with their relative abundances.",
+      "hint": "Think about both how many kinds of species there are and how common each one is.",
+      "sectionId": "s3"
+    }
+  ]
+}

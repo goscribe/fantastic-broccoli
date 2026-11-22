@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "1-4",
+  "topicCode": "1.4",
+  "topicName": "Financial applications",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:12.742Z",
+  "cards": [
+    {
+      "id": "1czk6v4",
+      "kind": "concept",
+      "front": "Why does compound interest give a bigger balance than simple interest after more than one year?",
+      "back": "With **compound interest**, interest is added to the balance, so later interest is earned on earlier interest too. Simple interest is always worked out on the principal alone.",
+      "hint": "Ask what each year's interest is calculated on.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11xs9zp",
+      "kind": "formula",
+      "front": "What formula gives the future value of a compound interest investment, and what does each symbol mean?",
+      "back": "$FV=PV\\left(1+\\frac{r}{100k}\\right)^{kn}$, where $PV$ is the principal, $r$ the annual rate in %, $k$ the compoundings per year and $n$ the years. $FV$ is the **future value** in dollars.",
+      "hint": "k is 12 for monthly, 4 for quarterly, 1 for yearly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1f1euqf",
+      "kind": "concept",
+      "front": "How do straight-line and reducing balance depreciation differ?",
+      "back": "**Straight-line** depreciation takes off the same fixed amount each year. **Reducing balance** takes off a fixed percentage of the current value, so the yearly loss gets smaller.",
+      "hint": "Ask whether the yearly loss stays the same.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "043y4y4",
+      "kind": "term",
+      "front": "What is the principal in a savings or loan calculation?",
+      "back": "The **principal** is the original amount deposited or borrowed, also called the present value $PV$.",
+      "hint": "It is the starting amount, before any interest.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ej408o",
+      "kind": "formula",
+      "front": "What is the formula for simple interest, and what does each symbol stand for?",
+      "back": "$I=\\frac{PV\\times r\\times n}{100}$, where $PV$ is the principal, $r$ the annual rate in %, and $n$ the number of years. $I$ is the **interest** in dollars.",
+      "hint": "A rate of 4% means r = 4.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mrqggf",
+      "kind": "formula",
+      "front": "How is percentage change calculated, and what does a negative answer mean?",
+      "back": "**Percentage change** is $\\frac{\\mathrm{final}-\\mathrm{original}}{\\mathrm{original}}\\times100$. A positive answer is an increase; a negative answer is a decrease.",
+      "hint": "Always subtract the original value from the final value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ueig83",
+      "kind": "process",
+      "front": "What steps should you follow before choosing a formula in a financial question?",
+      "back": "First identify the type: simple interest, compound interest or depreciation. Then list $PV$, $r$, $n$ and $k$ with units, check that $k$ matches how often interest is added, and round only at the end.",
+      "hint": "Four steps, starting with the type of problem.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mrcvbu",
+      "kind": "mistake",
+      "front": "Why does a 20% rise followed by a 20% fall not return the value to its start?",
+      "back": "The **fall** is taken from the larger value after the rise, so the final value ends below the start. Each percentage applies to the value at that moment.",
+      "hint": "Which value is the second 20% taken from?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1o7c3u4",
+      "kind": "example",
+      "front": "Find the future value of 5000 dollars at 6% per year, compounded quarterly, for 4 years.",
+      "back": "About **6344.93 dollars**. Quarterly means $k=4$, so there are 16 periods at 1.5% each: $5000\\times1.015^{16}$.",
+      "hint": "Work out kn first, then the rate per period.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "110snja",
+      "kind": "example",
+      "front": "A car costing 18 000 dollars depreciates by 12% a year by reducing balance. What is its value after 5 years?",
+      "back": "About **9499.17 dollars**, from $18\\,000\\times0.88^{5}$, because each year the value is multiplied by 0.88.",
+      "hint": "Multiply by 1 minus the yearly percentage loss, five times.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ngnccj",
+      "kind": "example",
+      "front": "Calculate the simple interest on 2500 dollars at 4% per year for 3 years, and the total amount.",
+      "back": "Interest is **300 dollars** and the total is 2800 dollars, since $I=\\frac{2500\\times4\\times3}{100}=300$ and $2500+300=2800$.",
+      "hint": "Use the simple interest formula, then add the principal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11wwj5h",
+      "kind": "example",
+      "front": "An investment of 4000 dollars grows to 4494.40 dollars in 2 years with yearly compounding. What is the annual rate?",
+      "back": "The **annual rate** is 6%. Solve $4000\\left(1+\\frac{r}{100}\\right)^{2}=4494.40$, giving $\\left(1+\\frac{r}{100}\\right)^{2}=1.1236$, so $1+\\frac{r}{100}=1.06$.",
+      "hint": "Divide by 4000, then take the square root.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0l4rgqy",
+      "kind": "mistake",
+      "front": "What goes wrong if you round money in the middle of a financial calculation?",
+      "back": "**Rounding early** can change the final answer. Keep full accuracy during the working and round money to 2 decimal places only at the end.",
+      "hint": "Think about which step comes last.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ej1zlz",
+      "kind": "term",
+      "front": "What is depreciation?",
+      "back": "**Depreciation** is the decrease in the value of an asset over time, such as a car or machine losing value as it ages.",
+      "hint": "It is the opposite of an amount growing with interest.",
+      "sectionId": "s3"
+    }
+  ]
+}

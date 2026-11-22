@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "7-2",
+  "topicCode": "7.2",
+  "topicName": "Photochemical smog",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:40.175Z",
+  "cards": [
+    {
+      "id": "0cujjve",
+      "kind": "term",
+      "front": "What is photochemical smog?",
+      "back": "**Photochemical smog** is a brownish haze of secondary pollutants, mainly ground-level ozone, that forms when sunlight drives reactions among pollutants in the air.",
+      "hint": "Think about where the haze comes from, not what emits it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ayg5md",
+      "kind": "process",
+      "front": "What steps turn nitrogen dioxide and volatile organic compounds into ground-level ozone?",
+      "back": "1) Ultraviolet light splits $\\text{NO}_2$ into nitric oxide and a single oxygen atom. 2) The oxygen atom joins an $\\text{O}_2$ molecule to form **ozone**. 3) Volatile organic compounds convert nitric oxide back to $\\text{NO}_2$, so ozone builds up and the cycle repeats.",
+      "hint": "Start with what sunlight does to the first gas in the chain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1w5tdo7",
+      "kind": "concept",
+      "front": "What health effects does photochemical smog have on people?",
+      "back": "Smog causes coughing, chest pain, eye irritation and **reduced lung function**, and can trigger asthma attacks, especially in children and older adults.",
+      "hint": "Think about which body part takes in the air first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1v9v0im",
+      "kind": "term",
+      "front": "What are nitrogen oxides?",
+      "back": "**Nitrogen oxides** are gases of nitrogen and oxygen, such as nitrogen dioxide, formed when fuel burns at high temperature. Vehicle engines and power plants are major sources.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1miuhwp",
+      "kind": "term",
+      "front": "What is a volatile organic compound?",
+      "back": "A **volatile organic compound** is a carbon-containing chemical that evaporates easily into the air. Fuel vapors, paints and solvents release them, and some plants do too.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d9nnom",
+      "kind": "term",
+      "front": "What is a secondary pollutant?",
+      "back": "A **secondary pollutant** is one that forms in the air through reactions among other pollutants or substances, rather than being emitted directly.",
+      "hint": "Compare with smoke that goes straight out of a chimney.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rg2k0n",
+      "kind": "mistake",
+      "front": "Why is high-altitude ozone not the same as the ozone in smog?",
+      "back": "High ozone shields Earth from ultraviolet light and is helpful. **Ground-level ozone** is the harmful smog form, and no engine emits it directly.",
+      "hint": "Think about where each type of ozone sits relative to people.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "015med6",
+      "kind": "concept",
+      "front": "Why does ozone usually peak in the afternoon rather than at dawn?",
+      "back": "Morning emissions have time to react, and strong sunlight and warmth drive the reactions, so ozone builds up to a **peak in the afternoon**.",
+      "hint": "Think about how long emissions have been reacting by midday.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jwdmkz",
+      "kind": "example",
+      "front": "Predict the effect on afternoon ozone of halving both nitrogen oxide and volatile organic compound emissions.",
+      "back": "Ozone would **decrease**, because fewer ingredients are available to react in sunlight.",
+      "hint": "Count how much of each raw material is left for sunlight to act on.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p4i9om",
+      "kind": "mistake",
+      "front": "What is a common omission when listing what photochemical smog needs?",
+      "back": "Leaving out **sunlight**. Smog needs nitrogen oxides, volatile organic compounds and sunlight, and the reactions do not run without light.",
+      "hint": "Count how many separate things the answer needs, not just the substances.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "092qg0s",
+      "kind": "concept",
+      "front": "How does ground-level ozone damage plants and materials?",
+      "back": "Ozone damages leaf tissue, which lowers crop yields and weakens trees. It also cracks rubber and speeds the wearing of some materials.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1rwr2af",
+      "kind": "concept",
+      "front": "How does cutting emissions reduce photochemical smog?",
+      "back": "Cutting **nitrogen oxides** and volatile organic compounds removes the ingredients, so less ozone forms. Cleaner vehicles and public transit both help.",
+      "hint": "Think about what the reactions run out of when ingredients are removed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0varnyh",
+      "kind": "concept",
+      "front": "Which conditions make photochemical smog more severe on a given day?",
+      "back": "Strong sunlight, warm temperatures, heavy traffic and still air all make smog worse. Sunlight splits nitrogen dioxide, warmth speeds reactions, traffic adds ingredients, and still air stops spreading.",
+      "hint": "Consider what the sun, the weather and the roads each contribute.",
+      "sectionId": "s4"
+    }
+  ]
+}

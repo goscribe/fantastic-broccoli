@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-2-2",
+  "topicCode": "4.2.2",
+  "topicName": "Animal tissues, organs and organ systems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:15.937Z",
+  "cards": [
+    {
+      "id": "0uekxu0",
+      "kind": "concept",
+      "front": "Why must large food molecules be broken down by digestive enzymes before the body can use them?",
+      "back": "Large, insoluble molecules cannot be absorbed. **Digestive enzymes** break them into small, soluble products that the small intestine can absorb into the blood.",
+      "hint": "Think about the size and solubility the products need to be.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uksbgg",
+      "kind": "concept",
+      "front": "How do the four heart chambers keep blood moving through two linked circuits?",
+      "back": "The right side pumps **deoxygenated** blood to the lungs, and the left side pumps **oxygenated** blood to the rest of the body.",
+      "hint": "Compare what each side of the heart is responsible for.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0olt3im",
+      "kind": "concept",
+      "front": "How does the wall structure of arteries, veins and capillaries match their roles?",
+      "back": "**Arteries** have thick, elastic walls to handle high pressure. **Veins** have thinner walls, wider spaces and valves. **Capillaries** have walls one cell thick, allowing exchange with tissues.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01usyw9",
+      "kind": "term",
+      "front": "What is the role of the large intestine?",
+      "back": "The **large intestine** absorbs water from the material left after digestion.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11yz079",
+      "kind": "term",
+      "front": "What does the enzyme amylase act on?",
+      "back": "**Amylase** breaks starch down into sugars.",
+      "hint": "Consider which food group the enzyme acts on.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pyaq1m",
+      "kind": "mistake",
+      "front": "Why is bile not the substance that chemically digests fat?",
+      "back": "**Bile** is not an enzyme. It breaks large fat droplets into smaller ones, increasing surface area, while **lipase** chemically breaks down the fat molecules.",
+      "hint": "Compare what bile does physically with what the enzyme does chemically.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05qknca",
+      "kind": "process",
+      "front": "What is the route food takes from the mouth to the rectum?",
+      "back": "Mouth (teeth break food), oesophagus, stomach (churns, begins protein digestion), small intestine (completes digestion, absorbs), large intestine (absorbs water), then rectum and anus.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ljn1xr",
+      "kind": "mistake",
+      "front": "Why is the pulmonary artery an exception to the rule about arteries?",
+      "back": "Arteries do not always carry oxygenated blood. The **pulmonary artery** carries **deoxygenated** blood from the heart to the lungs.",
+      "hint": "Think about which side of the heart it leaves from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11xjvsu",
+      "kind": "concept",
+      "front": "How does the shape of red blood cells help them carry oxygen?",
+      "back": "Their **biconcave** shape gives a large surface area for oxygen exchange. Having no nucleus leaves more room for haemoglobin.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1oh27fp",
+      "kind": "term",
+      "front": "What is the role of platelets in blood?",
+      "back": "**Platelets** are cell fragments without a nucleus that help blood clot, limiting blood loss and helping stop pathogens entering a wound.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "046d5n4",
+      "kind": "concept",
+      "front": "How do white blood cells defend the body against pathogens?",
+      "back": "Some **engulf** pathogens, while others produce **antibodies**. Unlike red blood cells, they have a nucleus.",
+      "hint": "Consider the two defence methods described in the note.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ldlh2d",
+      "kind": "process",
+      "front": "What is the order of blood flow from the body, through the heart and lungs, and back to the body?",
+      "back": "Vena cava, right atrium, right ventricle, pulmonary artery, lungs, pulmonary vein, left atrium, left ventricle, aorta, body.",
+      "hint": "Start at the vein that returns blood from the body.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rbpllt",
+      "kind": "term",
+      "front": "What is the difference between an atrium and a ventricle?",
+      "back": "An **atrium** receives blood returning to the heart. A **ventricle** pumps blood out of the heart. The left ventricle has a thicker wall because it pumps blood around the body.",
+      "hint": "Think about which chamber receives blood and which sends it out.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ez487l",
+      "kind": "term",
+      "front": "Which organ produces bile, and where is it stored?",
+      "back": "The **liver** produces bile, which is stored in the gall bladder before entering the small intestine.",
+      "sectionId": "s1"
+    }
+  ]
+}

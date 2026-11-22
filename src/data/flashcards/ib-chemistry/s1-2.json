@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "s1-2",
+  "topicCode": "S1.2",
+  "topicName": "The nuclear atom",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:19.367Z",
+  "cards": [
+    {
+      "id": "02ep3tc",
+      "kind": "concept",
+      "front": "Why does nearly all of an atom's mass sit in its nucleus?",
+      "back": "Protons and neutrons are in the **nucleus**, and each has a relative mass close to 1. An electron has much less mass, so the tiny nucleus holds nearly all the atomic mass.",
+      "hint": "Compare the masses of the particles, not their charges.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04znpn0",
+      "kind": "term",
+      "front": "What is the atomic number, $Z$, of an atom?",
+      "back": "The **atomic number** is the number of protons in an atom's nucleus. Every atom of one element has the same value, which is what identifies the element.",
+      "hint": "Think about what makes carbon different from oxygen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07sxnep",
+      "kind": "formula",
+      "front": "How do you find the number of neutrons from the mass number and atomic number?",
+      "back": "Neutrons $= A-Z$, where $A$ is the **mass number** (protons plus neutrons) and $Z$ is the atomic number (protons). Both are whole-number counts for one atom.",
+      "hint": "Mass number counts protons and neutrons together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rvl2zk",
+      "kind": "term",
+      "front": "What are isotopes?",
+      "back": "**Isotopes** are atoms of the same element with the same proton number but different neutron numbers, so they have different mass numbers.",
+      "hint": "Same element, different number of neutrons.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ule4j9",
+      "kind": "concept",
+      "front": "What do the upper and lower numbers in an isotope symbol ${}^{A}_{Z}\\text{X}$ show?",
+      "back": "The upper number is the **mass number** $A$, and the lower number is the **atomic number** $Z$, which gives the proton count.",
+      "hint": "Upper is for protons plus neutrons.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f50e9u",
+      "kind": "mistake",
+      "front": "Does changing the number of neutrons in an atom change which element it is?",
+      "back": "No. Only changing the **proton** number changes the element. Changing the neutron number gives an isotope of the same element.",
+      "hint": "Which particle defines the element?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wo3hqw",
+      "kind": "example",
+      "front": "How many protons, neutrons and electrons are in a neutral ${}^{23}_{11}\\text{Na}$ atom?",
+      "back": "11 protons, 12 neutrons and 11 electrons. Neutrons are $23-11=12$, and a neutral atom has as many electrons as protons.",
+      "hint": "Start with the lower number.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "055wkd2",
+      "kind": "example",
+      "front": "Sodium-23 is an isotope name. Which part of it gives the number of protons, and which gives the number of protons plus neutrons?",
+      "back": "The **mass number** 23 gives protons plus neutrons. The element name sodium fixes the proton number, which is 11.",
+      "hint": "Split the name: one part is the element, one is a count.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1oxqyrf",
+      "kind": "process",
+      "front": "What are the steps to find the particles in a neutral atom from its isotope symbol?",
+      "back": "1) Read $Z$ from the lower-left number; this gives the protons. 2) Find neutrons with $A-Z$. 3) For a neutral atom, electrons equal protons.",
+      "hint": "Three steps, each using one number.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ft72r6",
+      "kind": "concept",
+      "front": "Why do carbon-12 and carbon-14 have very similar chemical behaviour?",
+      "back": "Neutral atoms of the same element have the same number of electrons, which controls chemical behaviour. Their different neutron numbers change the mass but not the electron count.",
+      "hint": "Chemistry depends mainly on electrons.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lmj6z9",
+      "kind": "mistake",
+      "front": "Is the mass number of an element the same as its average atomic mass?",
+      "back": "No. The **mass number** is a whole-number count for one atom. Average atomic mass is a different value that describes the element's atoms as a whole.",
+      "hint": "One atom versus a whole element.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hdvt1h",
+      "kind": "term",
+      "front": "What is the mass number, $A$?",
+      "back": "The **mass number** is the total number of protons and neutrons in one atom's nucleus.",
+      "hint": "Count the particles in the nucleus.",
+      "sectionId": "s2"
+    }
+  ]
+}

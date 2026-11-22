@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "8-6",
+  "topicCode": "8.6",
+  "topicName": "Area between curves with several intersections",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:37.572Z",
+  "cards": [
+    {
+      "id": "0906d4o",
+      "kind": "process",
+      "front": "What are the main steps for finding the area between two curves that cross several times?",
+      "back": "Find every **intersection** by setting the functions equal, test each interval to find the top curve, write a separate top-minus-bottom integral for each section, then evaluate and add the areas.",
+      "hint": "Four steps, in order."
+    },
+    {
+      "id": "0553ifg",
+      "kind": "concept",
+      "front": "Why do you write a separate integral for each section between intersections?",
+      "back": "Because the **top curve** can switch on different intervals, so each section needs its own top-minus-bottom expression to keep the integrand nonnegative.",
+      "hint": "Look at what happens at x=0 for y=x^3 and y=x.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1foae7n",
+      "kind": "concept",
+      "front": "Why can one integral of the difference over the whole region give the wrong area?",
+      "back": "It gives **signed** accumulation: parts where the top curve is below cancel positive parts. Area needs the nonnegative section areas added together.",
+      "hint": "Think about the sign of x-x^3 on (-1,0) and (0,1).",
+      "sectionId": "s4"
+    },
+    {
+      "id": "093w8b8",
+      "kind": "term",
+      "front": "What is an intersection point?",
+      "back": "A **point** where two curves have the same coordinates, found by setting their expressions equal and solving.",
+      "hint": "Set the two y-values equal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "140v10x",
+      "kind": "term",
+      "front": "What are split points?",
+      "back": "The **intersection** x-values used as the limits of each area integral.",
+      "hint": "They mark where the sections begin and end.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0y4xrj3",
+      "kind": "formula",
+      "front": "Write the area formula for one section from a to b where f(x) is the top curve and g(x) is the bottom curve.",
+      "back": "$A=\\int_{a}^{b}(f(x)-g(x))\\,dx$, where **$f(x)$** is the top function. Area is in square units when the axes use length units.",
+      "hint": "Top minus bottom.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06o152o",
+      "kind": "example",
+      "front": "For y=x and y=x^3 on the interval from -1 to 0, which curve is on top at x=-1/2?",
+      "back": "**$y=x^3$** is on top, since $-\\frac18>-\\frac12$. The test value settles the order on that interval.",
+      "hint": "Substitute x=-1/2 into both functions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e2rfhj",
+      "kind": "mistake",
+      "front": "A student finds only the outer intersections of two curves and sets up one integral. What is wrong?",
+      "back": "Inner **intersections** can change which curve is on top. Find all intersections first, then split the area at each one.",
+      "hint": "Check for crossings between the outer points.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uyfd00",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume two curves alternate which one is on top?",
+      "back": "Order is not guaranteed to alternate. You must **test** a value on each interval to establish which curve is higher.",
+      "hint": "Do not guess from the pattern.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yz6uub",
+      "kind": "example",
+      "front": "Find the area enclosed by y=x and y=x^3 when both axes measure centimeters.",
+      "back": "$\\frac12\\,\\mathrm{cm}^2$. The left section gives $\\frac14$ and the **right** section gives $\\frac14$, which add together.",
+      "hint": "Split at x=-1, 0, 1.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ukqoa8",
+      "kind": "term",
+      "front": "What is the total area between curves?",
+      "back": "The **sum** of the nonnegative areas of all sections between the curves.",
+      "hint": "Add, do not cancel.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vgd99c",
+      "kind": "concept",
+      "front": "What does a sketch do, and what does it not do, when checking which curve is on top?",
+      "back": "A sketch helps you **see** the order, but test values are what actually establish it.",
+      "hint": "Sketches can mislead if they are rough.",
+      "sectionId": "s2"
+    }
+  ]
+}

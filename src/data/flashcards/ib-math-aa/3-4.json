@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-4",
+  "topicCode": "3.4",
+  "topicName": "Radians, arcs and sectors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:23.499Z",
+  "cards": [
+    {
+      "id": "02fan9r",
+      "kind": "term",
+      "front": "What is one radian?",
+      "back": "One **radian** is the angle at the centre of a circle that cuts off an arc equal in length to the radius.",
+      "hint": "Compare the arc length with the radius.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wpxqtt",
+      "kind": "formula",
+      "front": "What is the arc length formula for a sector, and what does each symbol mean?",
+      "back": "$l=r\\theta$, where $l$ is the **arc length**, $r$ is the radius and $\\theta$ is the centre angle in radians.",
+      "hint": "It comes from the fraction $\\frac{\\theta}{2\\pi}$ of the circumference.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16tmoow",
+      "kind": "formula",
+      "front": "What is the area of a sector with radius $r$ and centre angle $\\theta$ in radians?",
+      "back": "$A=\\frac12r^2\\theta$. It is the fraction $\\frac{\\theta}{2\\pi}$ of the circle's area $\\pi r^2$.",
+      "hint": "It uses the same fraction as the arc length.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07jkydf",
+      "kind": "process",
+      "front": "How do you convert an angle from degrees to radians?",
+      "back": "**Multiply** the angle in degrees by $\\frac{\\pi}{180}$. To go the other way, multiply the radians by $\\frac{180}{\\pi}$.",
+      "hint": "Half a turn is $180^{\\circ}$ and also $\\pi$ radians.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09dx8gb",
+      "kind": "concept",
+      "front": "Why does a full turn contain $2\\pi$ radians?",
+      "back": "The circumference is $2\\pi r$, and one radian is an arc of length $r$, so the whole circumference holds $2\\pi$ radians.",
+      "hint": "Divide the circumference by the radius.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "014vuac",
+      "kind": "mistake",
+      "front": "A student uses $l=r\\theta$ with $\\theta=60^{\\circ}$. What goes wrong?",
+      "back": "**Degrees** break the formula, which works only in radians. Convert $60^{\\circ}$ to $\\frac{\\pi}{3}$ first, or use $l=\\frac{\\theta}{360}\\times2\\pi r$.",
+      "hint": "Check the units of the angle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10b6k71",
+      "kind": "example",
+      "front": "A sector has radius 6 cm and centre angle 0.8 radians. Find the arc length.",
+      "back": "$l=6\\times0.8=4.8\\,\\mathrm{cm}$.",
+      "hint": "Substitute into $l=r\\theta$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sxz550",
+      "kind": "example",
+      "front": "A sector has radius 10 cm and centre angle $\\frac{\\pi}{3}$. Find its area.",
+      "back": "$A=\\frac{50\\pi}{3}\\approx52.4\\,\\mathrm{cm^2}$.",
+      "hint": "Use $A=\\frac12r^2\\theta$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sb4yvu",
+      "kind": "mistake",
+      "front": "A student says the perimeter of a sector is just its arc length. Why is that wrong?",
+      "back": "The boundary also includes **two radii**. The perimeter is $2r+r\\theta$.",
+      "hint": "Picture a slice of pie.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18yxk3y",
+      "kind": "process",
+      "front": "A sector has arc length 12 cm and centre angle 1.5 radians. How do you find its radius and area?",
+      "back": "Rearrange $l=r\\theta$ to get $r=\\frac{l}{\\theta}=8$ cm. Then use $A=\\frac12r^2\\theta$ to get $48\\,\\mathrm{cm^2}$, and check with $A=\\frac12rl$.",
+      "hint": "Find the unknown radius first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bda23q",
+      "kind": "term",
+      "front": "What is a segment of a circle?",
+      "back": "A **segment** is the region between a chord and the arc it cuts off. Its area is $\\frac12r^2(\\theta-\\sin\\theta)$, with $\\theta$ in radians.",
+      "hint": "Think of the sector minus a triangle.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "11febj4",
+      "kind": "example",
+      "front": "A sector has radius 8 cm and centre angle 1.2 radians. Find the area of the segment cut off by its chord.",
+      "back": "About $8.57\\,\\mathrm{cm^2}$: the sector area $38.4$ minus the triangle area $29.83$.",
+      "hint": "Subtract the triangle formed by the two radii and the chord.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1u907cv",
+      "kind": "mistake",
+      "front": "Why must the calculator be in the correct mode before a trigonometric calculation?",
+      "back": "A value found in the **wrong mode** is wrong by a large factor. Check for degree or radian mode before every calculation.",
+      "hint": "Radians and degrees give very different values for the same number.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m4c0k0",
+      "kind": "concept",
+      "front": "Why do advanced courses use radians rather than degrees?",
+      "back": "Radians keep **calculus** simple: the derivative of $\\sin x$ is $\\cos x$ only in radians. Degrees add an extra factor of $\\frac{\\pi}{180}$ each time.",
+      "hint": "Think about the derivative of sine.",
+      "sectionId": "s2"
+    }
+  ]
+}

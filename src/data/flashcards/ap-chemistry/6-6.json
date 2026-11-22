@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "6-6",
+  "topicCode": "6.6",
+  "topicName": "Introduction to enthalpy of reaction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:51.479Z",
+  "cards": [
+    {
+      "id": "1o5gjla",
+      "kind": "concept",
+      "front": "What does the reaction enthalpy change, $\\Delta H$, compare, and what does it equal at constant pressure?",
+      "back": "$\\Delta H$ is the **products'** enthalpy minus the **reactants'** enthalpy for the reaction as written. At constant pressure it equals the heat transferred between the system and its surroundings.",
+      "hint": "Think about which side is subtracted from which.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rrni93",
+      "kind": "concept",
+      "front": "How does the sign of $\\Delta H$ show whether a reaction releases or absorbs heat?",
+      "back": "A **negative** $\\Delta H$ means an exothermic reaction: heat leaves the system and products have lower enthalpy. A **positive** $\\Delta H$ means an endothermic reaction: heat is taken in from the surroundings.",
+      "hint": "Heat leaving the system is the key idea.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1z0a51m",
+      "kind": "concept",
+      "front": "Why must an enthalpy value be tied to the exact equation it was written for?",
+      "back": "The value applies to the reaction **as written**, including its coefficients and physical states. Changing the coefficients or a state symbol can change $\\Delta H$.",
+      "hint": "Look at what the equation specifies.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0smap17",
+      "kind": "term",
+      "front": "What is enthalpy?",
+      "back": "**Enthalpy** is a property of a system equal to its internal energy plus its pressure multiplied by its volume.",
+      "hint": "It has two parts added together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0w3vqaw",
+      "kind": "term",
+      "front": "What is an exothermic reaction?",
+      "back": "An **exothermic reaction** transfers heat from the reacting system to its surroundings, so its $\\Delta H$ is negative.",
+      "hint": "Which direction does the heat flow?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kdu2v4",
+      "kind": "term",
+      "front": "What is an endothermic reaction?",
+      "back": "An **endothermic reaction** takes in heat from the surroundings, so its $\\Delta H$ is positive.",
+      "hint": "Compare it with exothermic.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "122f1pe",
+      "kind": "term",
+      "front": "What is a thermochemical equation?",
+      "back": "A **thermochemical equation** pairs a balanced chemical equation, including physical states, with the enthalpy change for the reaction as written.",
+      "hint": "It combines two things into one statement.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gfnl2z",
+      "kind": "process",
+      "front": "How do you find $\\Delta H$ when you change the coefficients of an equation by a common factor?",
+      "back": "Multiply or divide **every coefficient and $\\Delta H$** by the same number. Enthalpy scales with the amounts in the equation.",
+      "hint": "Apply the same factor to both the equation and the value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ejxrkg",
+      "kind": "concept",
+      "front": "What happens to $\\Delta H$ when a reaction is reversed?",
+      "back": "It keeps the same magnitude but changes to the **opposite sign**, because reactants and products are exchanged.",
+      "hint": "Reversing swaps products and reactants.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ka5fm2",
+      "kind": "mistake",
+      "front": "Why is it wrong to judge the sign of $\\Delta H$ from the surroundings' point of view?",
+      "back": "The sign describes the **reacting system**. Heat leaving the system gives a negative $\\Delta H$, so a positive value does not mean the reaction produces heat.",
+      "hint": "Whose heat flow does the sign describe?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gk37i5",
+      "kind": "mistake",
+      "front": "For $\\mathrm{2H_2(g)+O_2(g)\\rightarrow 2H_2O(l)}$, $\\Delta H=-572$ kJ, is 572 kJ released per mole of water?",
+      "back": "No. The **whole reaction as written** releases 572 kJ, which forms two moles of water. Per mole of water, the value is half that, but that is a separate calculation.",
+      "hint": "Count how many moles of water the equation forms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0x8hh82",
+      "kind": "example",
+      "front": "For $\\mathrm{2H_2(g)+O_2(g)\\rightarrow 2H_2O(l)}$ with $\\Delta H=-572$ kJ, what is $\\Delta H$ for $\\mathrm{H_2(g)+\\tfrac{1}{2}O_2(g)\\rightarrow H_2O(l)}$?",
+      "back": "**$-286$ kJ**. The coefficients are halved, so $\\Delta H$ is halved: $-572 \\div 2 = -286$ kJ.",
+      "hint": "Compare the coefficients of the two equations.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ruk0hw",
+      "kind": "example",
+      "front": "Using $\\mathrm{2H_2(g)+O_2(g)\\rightarrow 2H_2O(l)}$, $\\Delta H=-572$ kJ, what is $\\Delta H$ for $\\mathrm{2H_2O(l)\\rightarrow 2H_2(g)+O_2(g)}$?",
+      "back": "**$+572$ kJ**. The equation is reversed, so the sign of $\\Delta H$ changes while the magnitude stays the same.",
+      "hint": "Which direction is the given equation written in?",
+      "sectionId": "s4"
+    }
+  ]
+}

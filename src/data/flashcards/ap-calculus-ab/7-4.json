@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "7-4",
+  "topicCode": "7.4",
+  "topicName": "Reasoning with slope fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:28.108Z",
+  "cards": [
+    {
+      "id": "0edy4pb",
+      "kind": "concept",
+      "front": "What does one segment in a slope field tell you about a solution curve?",
+      "back": "It gives the **slope** of a solution curve passing through that point, so the curve is tangent to the segment there. It does not show how far the solution travels.",
+      "hint": "Think about what dy/dx means at a single point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z933q5",
+      "kind": "concept",
+      "front": "How do you trace a solution curve through a slope field from a given starting point?",
+      "back": "Draw a **smooth** path from the point, staying tangent to nearby segments as you move right or left. Follow how the direction changes across the field.",
+      "hint": "Segments give direction, not destinations.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ce8bu7",
+      "kind": "concept",
+      "front": "Why does changing the initial value change the solution path but not the slope field?",
+      "back": "The **differential equation** has not changed, so every segment keeps its slope. A new starting point selects a different solution path through the same field.",
+      "hint": "Which part of the setup actually changed?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18bp5hq",
+      "kind": "term",
+      "front": "What is a slope field?",
+      "back": "A display of short **line segments** at points in the plane, each showing the slope that a differential equation assigns at that point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nq6kxa",
+      "kind": "term",
+      "front": "What is a nullcline of a differential equation?",
+      "back": "A set of points where the equation assigns **zero slope**, so the segments there are horizontal.",
+      "hint": "Look for horizontal segments.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wsecj3",
+      "kind": "formula",
+      "front": "For $\\frac{dy}{dx}=f(x,y)$, what slope does the segment at the point $(a,b)$ have?",
+      "back": "Slope $f(a,b)$. You find it by **substituting** the point into the right-hand side of the equation.",
+      "hint": "Plug the coordinates into f.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rb2vc6",
+      "kind": "formula",
+      "front": "For $\\frac{dy}{dx}=x-y$, where are the horizontal segments, and where are slopes positive?",
+      "back": "Horizontal segments lie on the **line** $y=x$. Slopes are positive below that line and negative above it.",
+      "hint": "Set the slope equal to zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0m5sqf1",
+      "kind": "process",
+      "front": "What steps do you follow to match a slope field to a differential equation?",
+      "back": "1) Find the **nullcline** using the horizontal segments. 2) Check where slopes are positive and negative. 3) Compare steepness at selected points. 4) Confirm the equation fits the whole visible region.",
+      "hint": "Start with the zero-slope locations.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ipc1xh",
+      "kind": "mistake",
+      "front": "A student says that a new initial value changes the segment slopes. What is wrong with this?",
+      "back": "Changing the initial value does not change **slopes**. It only changes which path you trace through the same segments.",
+      "hint": "What does the equation still assign at each point?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0g8zo8f",
+      "kind": "mistake",
+      "front": "Why is joining segment ends together like dots a mistake when sketching a solution?",
+      "back": "A segment gives **direction** at its location, not the curve's next destination. The sketch should be a smooth curve tangent to nearby segments.",
+      "hint": "Think about what a segment actually means.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14ma8p9",
+      "kind": "example",
+      "front": "For $\\frac{dy}{dx}=x-y$ with $y(0)=1$, estimate $y(0.25)$ using one step of width $0.25$.",
+      "back": "The starting slope is $0-1=-1$, so the change is $0.25(-1)=-0.25$. Therefore $y(0.25)\\approx 0.75$.",
+      "hint": "Find the slope at the point (0, 1) first."
+    },
+    {
+      "id": "0ytisn3",
+      "kind": "mistake",
+      "front": "Can two different solution curves for $\\frac{dy}{dx}=x-y$ cross at one point? Why or why not?",
+      "back": "No. A crossing would give two solutions through the same **initial point**. This uniqueness rule may fail for other equations.",
+      "hint": "Think about what a crossing would imply.",
+      "sectionId": "s4"
+    }
+  ]
+}

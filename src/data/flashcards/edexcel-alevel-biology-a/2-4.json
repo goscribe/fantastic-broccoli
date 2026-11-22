@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-4",
+  "topicCode": "2.4",
+  "topicName": "Passive and active transport",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:14.968Z",
+  "cards": [
+    {
+      "id": "0wbog3m",
+      "kind": "concept",
+      "front": "How does active transport move substances against their concentration gradient?",
+      "back": "**Active transport** uses energy from **ATP**, which cells make by respiration, and membrane carrier proteins to move substances against their gradient.",
+      "hint": "Compare the direction it moves substances with the direction diffusion takes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "051253n",
+      "kind": "term",
+      "front": "What is diffusion?",
+      "back": "**Diffusion** is the net movement of particles from a region of higher concentration to a region of lower concentration, down a concentration gradient, with no energy from the cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09ksg7k",
+      "kind": "concept",
+      "front": "Why do ions and polar molecules need membrane proteins to cross a membrane?",
+      "back": "The fatty acid tails in the centre of the bilayer repel charged particles, so they need **facilitated diffusion** through proteins to cross.",
+      "hint": "Think about what the centre of the phospholipid bilayer is made of.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cds656",
+      "kind": "concept",
+      "front": "Which molecules pass straight through the phospholipid bilayer by simple diffusion?",
+      "back": "Small, non-polar molecules without charge, such as **oxygen** and carbon dioxide, dissolve in the bilayer and pass through.",
+      "hint": "Think about charge and size.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01ipi9o",
+      "kind": "concept",
+      "front": "Which three factors increase the rate of simple diffusion?",
+      "back": "A steeper **concentration gradient**, a larger membrane surface area, and a thinner membrane, which gives a shorter distance.",
+      "hint": "Consider what makes particles cross faster.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rxukty",
+      "kind": "concept",
+      "front": "How does a carrier protein differ from a channel protein?",
+      "back": "A **channel protein** has a water-filled pore for specific ions or small molecules. A **carrier protein** binds one specific molecule, changes shape and releases it on the other side.",
+      "hint": "Think about a pore versus a binding site.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kxh1ah",
+      "kind": "concept",
+      "front": "Why does facilitated diffusion have a maximum rate, but simple diffusion does not?",
+      "back": "The membrane has a limited number of proteins. Once all are busy, a steeper gradient makes no difference. Simple diffusion has no such limit.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17xz6ow",
+      "kind": "term",
+      "front": "What does ATP release when its terminal phosphate group is removed?",
+      "back": "**Energy** for cell processes, released by **hydrolysis**.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nhkysa",
+      "kind": "mistake",
+      "front": "Why is using a membrane protein not enough to make transport active?",
+      "back": "Facilitated diffusion also uses proteins but needs no ATP. Active transport is defined by moving substances against their gradient using energy from ATP.",
+      "hint": "Think about what facilitated diffusion does not need.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18qr2ha",
+      "kind": "process",
+      "front": "What are the four steps of one cycle of active transport by a carrier protein?",
+      "back": "1. A molecule or ion binds to the carrier on the lower-concentration side. 2. ATP is hydrolysed and the phosphate attaches to the carrier. 3. The carrier changes shape and releases the substance on the higher-concentration side. 4. The phosphate leaves and the carrier returns to its original shape.",
+      "hint": "Start where the substance first meets the carrier.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10dhlda",
+      "kind": "mistake",
+      "front": "Why do particles keep moving when the concentrations on both sides of a membrane become equal?",
+      "back": "Particles still cross in both directions. Equal concentrations mean there is no net movement, not that movement has stopped.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1u8rydz",
+      "kind": "concept",
+      "front": "How does a respiratory inhibitor show whether transport is active?",
+      "back": "It stops ATP production. If transport stops after it is added, the process is active. If transport carries on, it is passive.",
+      "hint": "Think about what the inhibitor blocks.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1sqc0xy",
+      "kind": "example",
+      "front": "How many times greater is an ion's concentration inside a cell ($1.8\\,\\mathrm{mmol\\,dm^{-3}}$) than outside ($0.3\\,\\mathrm{mmol\\,dm^{-3}}$)?",
+      "back": "$\\frac{1.8}{0.3}=6$, so the concentration inside is **6 times** greater.",
+      "hint": "Divide the larger concentration by the smaller one."
+    }
+  ]
+}

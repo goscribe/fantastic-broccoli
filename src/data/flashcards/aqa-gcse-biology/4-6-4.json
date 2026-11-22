@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-6-4",
+  "topicCode": "4.6.4",
+  "topicName": "Classification of living organisms",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:48.048Z",
+  "cards": [
+    {
+      "id": "1j0dkao",
+      "kind": "concept",
+      "front": "Why does classification place organisms into a series of ranks, from domain down to species?",
+      "back": "Classification groups organisms by **shared characteristics**. Broad ranks contain many kinds of organism, and each smaller rank contains organisms with more characteristics in common.",
+      "hint": "Compare how many kinds of organism a domain holds with how many a species holds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rvsbk9",
+      "kind": "term",
+      "front": "What is a species?",
+      "back": "A **species** is a group of organisms that can breed together to produce fertile offspring.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0stf7bs",
+      "kind": "concept",
+      "front": "How does the three-domain system differ from the five-kingdom system?",
+      "back": "The **three-domain system** places every organism in Bacteria, Archaea or Eukaryota, a broader rank than kingdom. It separates the prokaryotes into two domains, Bacteria and Archaea.",
+      "hint": "Think about which of the two systems uses the broader top-level rank.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jwuwal",
+      "kind": "term",
+      "front": "What is the binomial system?",
+      "back": "The **binomial system** gives each species a two-part scientific name: the genus first, then a second part that identifies the species within that genus.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ir1wah",
+      "kind": "example",
+      "front": "In the scientific name Homo sapiens, which part is the genus and how should each part be written?",
+      "back": "**Homo** is the genus and starts with a capital letter. The second part, sapiens, starts with a lower-case letter. Both are in italics, or underlined when handwritten.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04ksbw0",
+      "kind": "mistake",
+      "front": "Why is a genus name alone not enough to identify a species?",
+      "back": "A **genus** can contain several closely related species, so a genus name may refer to more than one species. Give both parts of the scientific name.",
+      "hint": "Think about how many species one genus can hold.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iwyrns",
+      "kind": "process",
+      "front": "What is the order of the eight main classification ranks, from broadest to narrowest?",
+      "back": "Domain, kingdom, phylum, class, order, family, genus, species.",
+      "hint": "Start from the rank that holds the most kinds of organism.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hqlqj9",
+      "kind": "concept",
+      "front": "Why can the breeding test not be used to group organisms that reproduce asexually?",
+      "back": "Asexual organisms do not breed to produce fertile offspring, so scientists use other evidence such as cell structures and genetic similarities.",
+      "hint": "Think about what the breeding test depends on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0avynyc",
+      "kind": "term",
+      "front": "What is genetic evidence?",
+      "back": "**Genetic evidence** uses similarities and differences in DNA to investigate relationships between organisms. Greater genetic similarity can indicate a closer evolutionary relationship.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k7hvke",
+      "kind": "mistake",
+      "front": "Why is it misleading to place bacteria and archaea in one group simply because neither has a nucleus?",
+      "back": "Both lack a nucleus, but their cells differ in important ways. The three-domain system therefore separates them into **Bacteria** and **Archaea**.",
+      "hint": "Consider what the three-domain system does with prokaryotes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00w9j14",
+      "kind": "mistake",
+      "front": "What is wrong with thinking an organism's classification changes because the organism itself changes species?",
+      "back": "Classification does not change because an individual organism changes. It changes when **new evidence** improves our understanding of relationships between organisms.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cyundw",
+      "kind": "concept",
+      "front": "Why do scientists revise classification systems?",
+      "back": "New evidence, such as DNA comparisons and cell features, can show that organisms have different relationships than previously thought, so scientists revise groups to reflect those relationships.",
+      "hint": "Think about what kinds of evidence scientists now compare.",
+      "sectionId": "s4"
+    }
+  ]
+}

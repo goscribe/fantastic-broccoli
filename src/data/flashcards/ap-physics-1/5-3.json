@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "5-3",
+  "topicCode": "5.3",
+  "topicName": "Torque",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:41.566Z",
+  "cards": [
+    {
+      "id": "1brlbny",
+      "kind": "term",
+      "front": "What is torque?",
+      "back": "**Torque** is the turning effect of a force about an axis of rotation. Its size depends on the force, the distance from the axis, and the angle at which the force acts.",
+      "hint": "Think about how a door swings when you push it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1a83zqe",
+      "kind": "formula",
+      "front": "What is the formula for the magnitude of torque, and what do its symbols mean?",
+      "back": "$\\tau = rF\\sin\\theta$. Here $r$ is the distance from the axis to where the force acts, $F$ is the force, and $\\theta$ is the angle between $\\vec{r}$ and $\\vec{F}$. The **unit** is $\\mathrm{N\\,m}$.",
+      "hint": "The angle is between the rod and the force, not the vertical.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mxbpk5",
+      "kind": "concept",
+      "front": "Why does a force pushed straight along a rod toward the hinge produce no torque?",
+      "back": "Only the **perpendicular** component of a force twists an object. A force along the line from the axis has $\\sin\\theta = 0$, so the torque is zero.",
+      "hint": "Compare the angle between r and F with the sine values.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oga2xt",
+      "kind": "term",
+      "front": "What is the lever arm?",
+      "back": "The **lever arm** is the perpendicular distance from the axis to the line along which the force acts. It equals $r\\sin\\theta$.",
+      "hint": "It is measured at a right angle to the force's line.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q9wfcf",
+      "kind": "formula",
+      "front": "How can torque be written using the lever arm?",
+      "back": "$\\tau = r_{\\perp}F$, where $r_{\\perp}$ is the **lever arm** and $F$ is the force. This is the same as $rF\\sin\\theta$.",
+      "hint": "Substitute $r_{\\perp} = r\\sin\\theta$ into the main formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cqzb2x",
+      "kind": "mistake",
+      "front": "A student measures the angle between the force and the vertical and puts it into $\\tau = rF\\sin\\theta$. What is wrong?",
+      "back": "The angle must be between $\\vec{r}$ and $\\vec{F}$, not the vertical. Check which angle the problem gives and sketch it before substituting.",
+      "hint": "Which two vectors does the formula compare?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mkg840",
+      "kind": "process",
+      "front": "What are the steps for calculating the torque from a wrench pull?",
+      "back": "First name the axis. Then find $r$, $F$ and $\\theta$, sketching if needed. Substitute into $\\tau = rF\\sin\\theta$, set the calculator to degrees, and evaluate.",
+      "hint": "Start with the axis, not the numbers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "051x76s",
+      "kind": "example",
+      "front": "A 40 N force acts 0.25 m from a bolt, at 60° to the wrench. What is the torque?",
+      "back": "About $8.7\\ \\mathrm{N\\,m}$. Using $\\tau = (0.25)(40)\\sin 60^\\circ = 10 \\times 0.866$. A perpendicular pull would give the maximum, $10\\ \\mathrm{N\\,m}$.",
+      "hint": "Evaluate $\\sin 60^\\circ$ on a calculator in degree mode.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "142gzuh",
+      "kind": "concept",
+      "front": "How do you decide whether a torque is clockwise or counterclockwise?",
+      "back": "Imagine the force pushing at its point of application. A **clockwise** torque turns the object like a clock's hands. Physics usually treats counterclockwise as positive and clockwise as negative.",
+      "hint": "Picture the turn like the hands of a clock.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nv2pgh",
+      "kind": "term",
+      "front": "What is net torque?",
+      "back": "The **net torque** is the signed sum of all torques about one axis. Clockwise and counterclockwise torques have opposite signs.",
+      "hint": "Add signed values, all about the same axis.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0wchjfa",
+      "kind": "example",
+      "front": "A 5.0 N downward force acts 0.40 m right of a pivot, and a 3.0 N downward force acts 0.20 m left. What is the net torque?",
+      "back": "$1.4\\ \\mathrm{N\\,m}$ clockwise. The right force gives $-2.0$ and the left force gives $+0.60$, so the sum is $-1.4\\ \\mathrm{N\\,m}$.",
+      "hint": "Assign a sign to each torque before adding.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jzq7pz",
+      "kind": "mistake",
+      "front": "Why must you name the axis before calculating torque?",
+      "back": "Torque is always measured about a chosen **axis of rotation**, so changing the axis changes the torque. Naming the axis first keeps every torque in the same reference frame.",
+      "hint": "Does the turning effect depend on where you pivot?",
+      "sectionId": "s1"
+    }
+  ]
+}

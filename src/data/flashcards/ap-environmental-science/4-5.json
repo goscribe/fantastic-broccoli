@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "4-5",
+  "topicCode": "4.5",
+  "topicName": "Global wind patterns",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:49.339Z",
+  "cards": [
+    {
+      "id": "042pht2",
+      "kind": "concept",
+      "front": "What sets Earth's air in motion?",
+      "back": "**Uneven heating**: sunlight is concentrated near the equator and spread out near the poles, so energy flows from the warm tropics toward the cool poles and moves air.",
+      "hint": "Compare sunlight at the equator with sunlight at the poles.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v757y3",
+      "kind": "concept",
+      "front": "What makes wind blow?",
+      "back": "A **pressure difference**: wind moves air from higher to lower pressure, and a bigger difference gives a stronger wind.",
+      "hint": "Think about what rising and sinking air does at the surface.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "020e7ga",
+      "kind": "concept",
+      "front": "How does Earth's rotation change the path of moving air?",
+      "back": "The **Coriolis effect** makes moving air appear to curve, so winds bend rather than blowing straight from high to low pressure.",
+      "hint": "Imagine what winds would do if Earth did not spin.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qt33h5",
+      "kind": "term",
+      "front": "What is heat, in physics terms?",
+      "back": "**Heat** is energy transferred between a system and its surroundings because of a temperature difference.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01obksh",
+      "kind": "term",
+      "front": "How does convection move energy through air?",
+      "back": "**Convection** is energy transfer by bulk fluid movement: warm, less dense fluid rises while cooler, denser fluid sinks.",
+      "hint": "Think about the heater example in the opening.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i1rb4e",
+      "kind": "term",
+      "front": "What is the Hadley cell?",
+      "back": "The **Hadley cell** is a closed loop between the equator and about 30° latitude, with air rising at the equator and sinking near 30°.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bqh573",
+      "kind": "process",
+      "front": "What is the path of air in the Hadley cell, in order?",
+      "back": "Air rises at the equator, spreads toward the poles at high altitude, cools and sinks near 30°, then flows back toward the equator at the surface.",
+      "hint": "Start where the warm air is.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s0tdyb",
+      "kind": "concept",
+      "front": "Why are many large deserts found near 30° latitude?",
+      "back": "Air sinks near 30° in the Hadley cell, and sinking air is dry, so these areas get little rain.",
+      "hint": "Think about what happens to air as it descends.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1915v7u",
+      "kind": "term",
+      "front": "What is a prevailing wind?",
+      "back": "A **prevailing wind** is a wind that blows most often from one direction in a particular region.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mqiaoq",
+      "kind": "concept",
+      "front": "Where do the wind belts have low pressure and common rain?",
+      "back": "Air rises near the equator and near 60°, where pressure is low and rain is common; air sinks near 30° and the poles, where it is dry.",
+      "hint": "Recall where the three cells meet in each hemisphere.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13sc3xq",
+      "kind": "mistake",
+      "front": "A student says the Coriolis effect is what makes wind blow. What is wrong with this?",
+      "back": "The Coriolis effect does not cause wind. **Pressure differences** cause wind, and the Coriolis effect only bends its path.",
+      "hint": "Think about what the note says drives wind.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1d7h1cc",
+      "kind": "concept",
+      "front": "Which way is moving air deflected in the Southern Hemisphere?",
+      "back": "To the **left** of its path. In the Northern Hemisphere it is deflected to the right, and the effect is zero at the equator.",
+      "hint": "Compare with the Northern Hemisphere.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bzjwjp",
+      "kind": "mistake",
+      "front": "A student says a westerly wind blows toward the west. What is wrong with this?",
+      "back": "Wind is named for where it comes from. A **westerly** blows from the west toward the east.",
+      "hint": "Think about how the note names winds.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dl0g8l",
+      "kind": "example",
+      "front": "Which way do Northern Hemisphere trade winds blow from, and why?",
+      "back": "They blow from the **northeast**: surface Hadley air moves toward the equator and is deflected right, which bends it toward the west.",
+      "hint": "Trace the surface air from the 30° cell toward the equator.",
+      "sectionId": "s5"
+    }
+  ]
+}

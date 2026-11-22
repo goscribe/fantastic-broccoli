@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "1-10",
+  "topicCode": "1.10",
+  "topicName": "Types of discontinuities",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:51.838Z",
+  "cards": [
+    {
+      "id": "0sccr1u",
+      "kind": "concept",
+      "front": "How do you tell which type of discontinuity a point is?",
+      "back": "Compare the **one-sided limits** from the left and right, and check whether the function has a value at that point. The value alone cannot tell you the type.",
+      "hint": "Think about both sides of the point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09tjcky",
+      "kind": "term",
+      "front": "What is a removable discontinuity?",
+      "back": "A **removable** discontinuity is where both sides approach the same finite value, but the function does not equal that value or is undefined there. It often looks like a hole on a graph.",
+      "hint": "Do the two sides agree on a height?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tsvf9d",
+      "kind": "term",
+      "front": "What is a jump discontinuity?",
+      "back": "A **jump** discontinuity is where the one-sided limits are both finite but unequal, so the graph approaches different heights from the left and right.",
+      "hint": "Picture a graph that steps up or down.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bykojk",
+      "kind": "example",
+      "front": "For $f(x)=\\frac{x^2-1}{x-1}$ with $f(1)$ undefined, what is the limit as $x\\to1$, and what type of discontinuity is at $x=1$?",
+      "back": "The limit is $2$, so it is a **removable** discontinuity. For $x\\ne1$, $f(x)=x+1$, so both sides approach $2$.",
+      "hint": "Simplify the fraction for $x\\ne1$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0el4gbd",
+      "kind": "example",
+      "front": "For $g(x)=1$ when $x<0$ and $g(x)=3$ when $x\\ge0$, what type of discontinuity is at $x=0$?",
+      "back": "A **jump** discontinuity. The left limit is $1$ and the right limit is $3$. These finite values differ.",
+      "hint": "Compare the two one-sided limits.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hpic43",
+      "kind": "term",
+      "front": "What is an infinite discontinuity?",
+      "back": "An **infinite** discontinuity is where function values become unbounded from at least one side near a point. The graph is steep beside a vertical asymptote.",
+      "hint": "Think about what the values do, not just how steep the graph is.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q0gw1s",
+      "kind": "example",
+      "front": "What type of discontinuity does $h(x)=\\frac{1}{x}$ have at $x=0$, and why?",
+      "back": "An **infinite** discontinuity. Values decrease without bound from the left and increase without bound from the right, so $x=0$ is a vertical asymptote.",
+      "hint": "Check both sides of $x=0$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1s2pqzn",
+      "kind": "mistake",
+      "front": "A student says a vertical asymptote needs both sides to rise to infinity. Is that right?",
+      "back": "No. One side may rise while the other falls. The requirement is only that the values become unbounded near the point.",
+      "hint": "Think about $h(x)=\\frac{1}{x}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13b65ov",
+      "kind": "mistake",
+      "front": "A student sees an open circle and says that is all they need to classify the point. What is wrong?",
+      "back": "A single open circle does not show the whole behavior. You must check **both sides** before naming the discontinuity.",
+      "hint": "What else must you compare?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gg0xwf",
+      "kind": "concept",
+      "front": "Why can't assigning one function value fix a jump discontinuity?",
+      "back": "The finite one-sided limits are **unequal**, so the overall limit does not exist. One function value cannot make two different approaches agree.",
+      "hint": "Think about the two one-sided limits.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0phhgp3",
+      "kind": "process",
+      "front": "What are the steps to classify a discontinuity at $x=c$?",
+      "back": "1) Find the left limit as $x\\to c^-$. 2) Find the right limit as $x\\to c^+$. 3) Check whether $f(c)$ exists. Equal finite limits with a missing or different value mean removable; unequal finite limits mean jump; unbounded behavior means infinite.",
+      "hint": "Start with the one-sided limits.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v4zjbb",
+      "kind": "concept",
+      "front": "What does filling a removable discontinuity do to the function?",
+      "back": "Defining the function value to equal the common one-sided limit makes the function **continuous** at that point. For $f(x)=\\frac{x^2-1}{x-1}$, setting $f(1)=2$ does this.",
+      "hint": "Use the height that both sides approach.",
+      "sectionId": "s2"
+    }
+  ]
+}

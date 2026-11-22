@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-10",
+  "topicCode": "3.3.10",
+  "topicName": "Aromatic chemistry",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:08.345Z",
+  "cards": [
+    {
+      "id": "12tickj",
+      "kind": "concept",
+      "front": "What bonding feature makes all six carbon–carbon bonds in benzene equal in length?",
+      "back": "**Delocalisation**: the sideways overlap of six p orbitals forms a ring of six delocalised electrons, so every C–C bond lies between single and double bond length.",
+      "hint": "Think about what the fourth outer electron on each carbon atom does.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o5kqj8",
+      "kind": "concept",
+      "front": "Why does benzene release less energy on hydrogenation than three separate double bonds would?",
+      "back": "**Delocalisation** gives benzene extra stability, so it starts at a lower energy and releases less energy when hydrogenated.",
+      "hint": "Compare benzene's starting energy with three isolated double bonds.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nmk569",
+      "kind": "concept",
+      "front": "Why does benzene not decolourise bromine water, unlike alkenes?",
+      "back": "Its electron density is **spread over six carbons**, so it is lower between any two atoms and does not attract bromine. Addition would also destroy the delocalised ring.",
+      "hint": "Compare where the electron density sits in a C=C bond with where it sits in the ring.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wtfjwt",
+      "kind": "mistake",
+      "front": "Why is it wrong to draw benzene with alternating double and single bonds?",
+      "back": "**All six C–C bonds are identical**, with electrons shared evenly round the ring. The bonds do not switch between double and single.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zvvlkg",
+      "kind": "example",
+      "front": "Using hydrogenation values of $-208$ and $-120\\,\\mathrm{kJ\\,mol^{-1}}$, how much more stable is benzene than the Kekulé structure predicts?",
+      "back": "**$152\\,\\mathrm{kJ\\,mol^{-1}}$**. Predicted value is $3\\times(-120)=-360$, then $-208-(-360)=+152\\,\\mathrm{kJ\\,mol^{-1}}$.",
+      "hint": "Start by multiplying cyclohexene's value by three.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a2n75x",
+      "kind": "term",
+      "front": "What is an electrophile?",
+      "back": "A species that **accepts a pair of electrons** to form a covalent bond, often a positive ion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kr7wsm",
+      "kind": "term",
+      "front": "What is electrophilic substitution?",
+      "back": "A reaction in which an **electrophile replaces an atom**, usually hydrogen, on a ring, so the delocalised ring is kept in the product.",
+      "hint": "Contrast it with the addition reactions of alkenes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1no4esh",
+      "kind": "term",
+      "front": "What is the nitronium ion and what is its formula?",
+      "back": "The **cation $\\mathrm{NO_2^+}$**, the electrophile that attacks benzene in nitration. Sulfuric acid protonates nitric acid, then water is lost to form it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1f5h77n",
+      "kind": "process",
+      "front": "What are the steps of the nitration mechanism once the nitronium ion has formed?",
+      "back": "1) The ring donates a pair of electrons to $\\mathrm{NO_2^+}$, forming a C–N bond and a positive intermediate. 2) The C–H bond breaks and **H+ leaves**. 3) H+ combines with $\\mathrm{HSO_4^-}$ to re-form $\\mathrm{H_2SO_4}$.",
+      "hint": "Start with what the benzene ring does to the electrophile.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lj60t8",
+      "kind": "mistake",
+      "front": "Why must nitration be kept at no more than $50\\,^{\\circ}\\mathrm{C}$?",
+      "back": "Hotter mixtures give products with **more than one nitro group**, so the reaction must stay controlled to make nitrobenzene.",
+      "hint": "Consider what further nitration does to the product.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kne6i6",
+      "kind": "term",
+      "front": "What is the acylium ion and what is its formula?",
+      "back": "The cation **$\\mathrm{RCO^+}$**, formed when aluminium chloride removes chloride from an acyl chloride. It is the electrophile in acylation.",
+      "hint": "Think about what $\\mathrm{AlCl_3}$ does to the acyl chloride.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ak8zyw",
+      "kind": "mistake",
+      "front": "Why is aluminium chloride described as a catalyst in Friedel–Crafts acylation?",
+      "back": "It is **regenerated** at the end of the mechanism, so it is not used up and does not appear in the overall equation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08u6e7h",
+      "kind": "example",
+      "front": "What is the organic product when benzene is acylated with ethanoyl chloride?",
+      "back": "**Phenylethanone**, $\\mathrm{C_6H_5COCH_3}$, a ketone: its carbonyl carbon is bonded to two carbon groups.",
+      "hint": "Think about which functional group the new acyl group creates on the ring.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tiifww",
+      "kind": "term",
+      "front": "What is an arene?",
+      "back": "A **hydrocarbon** whose molecules contain one or more benzene rings.",
+      "sectionId": "s1"
+    }
+  ]
+}

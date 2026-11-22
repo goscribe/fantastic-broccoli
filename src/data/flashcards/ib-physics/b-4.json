@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "b-4",
+  "topicCode": "B.4",
+  "topicName": "Thermodynamics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:33.642Z",
+  "cards": [
+    {
+      "id": "0o5qbsb",
+      "kind": "concept",
+      "front": "What does the first law of thermodynamics say about a system's internal energy?",
+      "back": "**Energy is conserved**: the change in internal energy equals heat in minus work done by the system, $\\Delta U=Q-W$. Heat entering raises internal energy; work done by the system leaves it.",
+      "hint": "Think about what enters and what leaves the system's boundary.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0clt18g",
+      "kind": "concept",
+      "front": "How does the area under a pressure–volume path relate to work?",
+      "back": "The **area** between the path and the volume axis gives the magnitude of the work done. The path, not just the start and end states, decides the work.",
+      "hint": "Two different paths between the same two states can enclose different areas.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xxsyt4",
+      "kind": "concept",
+      "front": "Why do natural processes have a direction, such as heat flowing from hot to cold?",
+      "back": "The **second law**: the total entropy of an isolated system cannot decrease. Irreversible natural processes increase entropy, so heat flows spontaneously from hotter to colder bodies.",
+      "hint": "Think about how energy spreads out among microscopic arrangements.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0c667k2",
+      "kind": "term",
+      "front": "What is heat in thermodynamics?",
+      "back": "**Energy transferred** between a system and its surroundings because of a temperature difference. It passes spontaneously from hotter to colder bodies.",
+      "hint": "It describes a transfer across a boundary, not stored energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0odpevj",
+      "kind": "term",
+      "front": "What is work in thermodynamics?",
+      "back": "**Energy transferred** when a force acts through a distance. For a gas, expansion that pushes a piston does work on the surroundings.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j8pu93",
+      "kind": "term",
+      "front": "What is the internal energy of a system?",
+      "back": "The **total microscopic kinetic and potential energy** of the particles in the system. It can change when energy crosses the boundary as heat or work.",
+      "hint": "Think about the particles, not the whole object's motion.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03p2h6f",
+      "kind": "mistake",
+      "front": "A student says a gas contains a quantity of heat. Why is this wrong?",
+      "back": "**Heat is a transfer**, not something stored. The gas has internal energy; heat names energy crossing its boundary because of a temperature difference.",
+      "hint": "Is heat a store of energy or a transfer of energy?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07zyp63",
+      "kind": "mistake",
+      "front": "An insulated gas is compressed, so no heat is transferred. Does its internal energy stay the same?",
+      "back": "**No**. Q is zero, but work is still done on the gas, so its internal energy can increase. Both heat and work contribute to the change.",
+      "hint": "Look at both terms in the first law.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xf8hf3",
+      "kind": "formula",
+      "front": "What is the work done by a gas in an isobaric expansion, and what are the units?",
+      "back": "$W=p(V_2-V_1)$, where $p$ is the **constant pressure** in pascals and volume in cubic metres, giving work in joules.",
+      "hint": "Check the units before substituting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jzo542",
+      "kind": "formula",
+      "front": "What expression gives the work for an isothermal expansion of a fixed amount of ideal gas?",
+      "back": "$W=nRT\\ln(V_2/V_1)$, which equals $p_1V_1\\ln(V_2/V_1)$ because $pV$ is constant. It is positive for expansion and negative for compression.",
+      "hint": "The volume ratio has no units; use the natural logarithm.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lkfays",
+      "kind": "example",
+      "front": "A gas expands from 0.002 m³ to 0.004 m³ at a constant 100 kPa. Find the work done by the gas.",
+      "back": "**200 J**. Convert to $100\\,000\\,\\mathrm{Pa}$, then $W=(100\\,000)(0.004-0.002)=200\\,\\mathrm{J}$.",
+      "hint": "Convert kPa to Pa first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16n5hha",
+      "kind": "example",
+      "front": "The same gas, starting at 100 kPa and 0.002 m³, now doubles its volume isothermally. Find the work done.",
+      "back": "About **139 J**. First $p_1V_1=200\\,\\mathrm{J}$, so $W=200\\ln 2\\approx139\\,\\mathrm{J}$.",
+      "hint": "Find the value of p1V1 first.",
+      "sectionId": "s4"
+    }
+  ]
+}

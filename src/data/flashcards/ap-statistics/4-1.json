@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "4-1",
+  "topicCode": "4.1",
+  "topicName": "Sample means",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:24.653Z",
+  "cards": [
+    {
+      "id": "0ppta8i",
+      "kind": "concept",
+      "front": "Where is the center of the sampling distribution of the sample mean, and does a bigger sample move it?",
+      "back": "The **center** is the population mean, $\\mu_{\\bar{x}}=\\mu$. Sample means are not biased high or low, and a bigger sample does not move this center.",
+      "hint": "Think about whether sample means lean high or low.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z7tio0",
+      "kind": "formula",
+      "front": "What is the standard deviation of the sample mean, and what does each symbol mean?",
+      "back": "$\\sigma_{\\bar{x}}=\\frac{\\sigma}{\\sqrt{n}}$, where $\\sigma$ is the **population** standard deviation and $n$ is the sample size. It is in the units of the data and assumes independent observations.",
+      "hint": "Notice the square root in the denominator.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04bxhdq",
+      "kind": "concept",
+      "front": "What does the central limit theorem say about the shape of the sampling distribution of x-bar?",
+      "back": "For large $n$, the distribution of $\\bar{x}$ is approximately **Normal**, whatever the population shape. A common guideline is $n\\ge30$.",
+      "hint": "Does the result depend on the population shape?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ev2qhq",
+      "kind": "concept",
+      "front": "Why do sample means vary less than single observations?",
+      "back": "**Averaging** cancels extreme values, since a high score in a sample is usually balanced by a low one. So sample means cluster more tightly than individual values.",
+      "hint": "What happens to extreme values when you average them?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dngncz",
+      "kind": "mistake",
+      "front": "A student writes the spread of x-bar as sigma divided by n. What is wrong?",
+      "back": "Use $\\sigma/\\sqrt{n}$, not $\\sigma/n$. Dividing by $n$ is a **slip** that makes the spread far too small.",
+      "hint": "Compare how fast the spread should shrink as n grows.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19mteqp",
+      "kind": "concept",
+      "front": "What happens to the spread of x-bar if the sample size is quadrupled?",
+      "back": "The spread is **cut in half**, since $\\sqrt{4n}=2\\sqrt{n}$. Each extra observation helps a little less than the one before.",
+      "hint": "Work out the square root of 4n.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gjuont",
+      "kind": "term",
+      "front": "What is the sampling distribution of the sample mean?",
+      "back": "The **distribution** of $\\bar{x}$ values across all possible random samples of one fixed size $n$, showing how often each value occurs.",
+      "hint": "Think of repeating the sampling many times.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09yz48o",
+      "kind": "term",
+      "front": "What is the 10% condition, and what does it protect?",
+      "back": "When sampling without replacement, the **sample size** must be at most 10% of the population: $n\\le0.10N$. It protects independence.",
+      "hint": "Compare n with the population size N.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fgbx2u",
+      "kind": "term",
+      "front": "What is the Normal condition for using a Normal model for x-bar?",
+      "back": "The population is **Normal**, or $n\\ge30$, or the sample data show no strong skew or outliers.",
+      "hint": "There are three ways to satisfy it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zqj4hz",
+      "kind": "process",
+      "front": "What are the steps to find P(x-bar > a) using a Normal model?",
+      "back": "1) Write $\\mu_{\\bar{x}}$ and $\\sigma_{\\bar{x}}$. 2) Check the conditions. 3) Standardize with $z=\\frac{\\bar{x}-\\mu_{\\bar{x}}}{\\sigma_{\\bar{x}}}$. 4) Use a **Normal** table or technology, sketching the curve first.",
+      "hint": "Start with the center and spread.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1tdmoj8",
+      "kind": "formula",
+      "front": "What is the z-score for a sample mean, and what do its parts mean?",
+      "back": "$z=\\frac{\\bar{x}-\\mu_{\\bar{x}}}{\\sigma_{\\bar{x}}}$ is the distance of $\\bar{x}$ from its center, measured in standard deviations of the sample mean.",
+      "hint": "The denominator is the spread of x-bar, not of single values.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1y4i6xw",
+      "kind": "example",
+      "front": "A population has mu=72 and sigma=12. For n=36, what is P(x-bar > 75)?",
+      "back": "$\\sigma_{\\bar{x}}=2$ and $z=1.5$, so $P\\approx0.067$. Conditions hold: the sample is random, 36 is under 10% of a very large population, and $n\\ge30$.",
+      "hint": "Find the spread of x-bar before standardizing.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09vku8l",
+      "kind": "mistake",
+      "front": "A student says a large sample makes the population Normal. What is wrong?",
+      "back": "The central limit theorem is about the distribution of $\\bar{x}$, not the population. A large sample does not change the population shape, and the sample data keep its shape.",
+      "hint": "Which distribution does the theorem describe?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vfi3al",
+      "kind": "example",
+      "front": "Is a Normal model appropriate for x-bar when n=12 and a dotplot is strongly skewed with an outlier?",
+      "back": "No. The **Normal condition** fails: $n$ is below 30, and the sample shows strong skew and an outlier.",
+      "hint": "Check each part of the Normal condition.",
+      "sectionId": "s4"
+    }
+  ]
+}

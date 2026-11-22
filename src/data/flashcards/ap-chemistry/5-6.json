@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "5-6",
+  "topicCode": "5.6",
+  "topicName": "Reaction energy profile",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:47.650Z",
+  "cards": [
+    {
+      "id": "1xsxc9a",
+      "kind": "concept",
+      "front": "How does a reaction's energy change tell you whether it releases or absorbs heat?",
+      "back": "Products below reactants means an **exothermic** reaction, with negative ΔH, releasing heat to the surroundings. Products above reactants means an **endothermic** reaction, with positive ΔH, absorbing heat.",
+      "hint": "Compare the product level with the reactant level.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ntqf3x",
+      "kind": "term",
+      "front": "What is the activation energy on a reaction energy profile?",
+      "back": "The **energy barrier** a reaction must overcome: the vertical energy difference from the reactants' level up to the peak (transition state).",
+      "hint": "Measure it from the starting level, not from the products.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01xjhiu",
+      "kind": "formula",
+      "front": "How do you calculate the enthalpy change, ΔH, from an energy profile?",
+      "back": "$\\Delta H=H_{\\mathrm{products}}-H_{\\mathrm{reactants}}$, the **product level minus the reactant level**. A negative value means exothermic.",
+      "hint": "Subtract the starting level from the ending level.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b85x2q",
+      "kind": "concept",
+      "front": "What does the horizontal axis of a reaction energy profile show?",
+      "back": "The **reaction coordinate**, which is progress from reactants to products. It does not measure time or distance.",
+      "hint": "Think about what changes along the curve, not how long it takes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "102vsi9",
+      "kind": "term",
+      "front": "What is the transition state on a single-peaked energy profile?",
+      "back": "A **fleeting, high-energy** arrangement of atoms at the top of the energy barrier. Bonds may be partly broken or formed there, and it cannot be collected as a substance.",
+      "hint": "Where is the highest point on the curve?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08do9cx",
+      "kind": "formula",
+      "front": "Which formula gives the forward activation energy from an energy profile?",
+      "back": "$E_a=E_{\\mathrm{peak}}-E_{\\mathrm{reactants}}$, the **peak minus the starting level**. Use the same energy units throughout.",
+      "hint": "The peak is the top of the barrier.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1u623lu",
+      "kind": "process",
+      "front": "What steps should you follow to read energy differences from a reaction energy profile?",
+      "back": "1. Find the **reactant level**, **product level**, and **highest point**. 2. Subtract the starting level from the peak for Ea. 3. Subtract reactants from products for ΔH.",
+      "hint": "Start by reading three heights from the scale.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dl1r66",
+      "kind": "example",
+      "front": "Reactants are at 40 kJ mol⁻¹, the peak is at 115 kJ mol⁻¹, and products are at 10 kJ mol⁻¹. What is the forward activation energy?",
+      "back": "**75 kJ mol⁻¹**, from $115-40=75\\ \\mathrm{kJ\\,mol^{-1}}$. It is measured from the reactant level up to the peak.",
+      "hint": "Use peak minus reactants.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18sgchw",
+      "kind": "example",
+      "front": "Using the same profile (reactants 40, peak 115, products 10, all in kJ mol⁻¹), what is ΔH?",
+      "back": "**−30 kJ mol⁻¹**, from $10-40=-30\\ \\mathrm{kJ\\,mol^{-1}}$. The negative sign means the reaction is exothermic.",
+      "hint": "Products minus reactants.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "083a8jg",
+      "kind": "mistake",
+      "front": "A student measures ΔH from the top of the curve down to the reactants. What is wrong?",
+      "back": "**Wrong reference points.** ΔH is measured between the product and reactant levels. The peak gives activation energy, not ΔH.",
+      "hint": "Which two levels define ΔH?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xs4uwr",
+      "kind": "mistake",
+      "front": "A student says a wider curve on a profile means a slower reaction. Why is this wrong?",
+      "back": "The **reaction coordinate** is not a time axis, so horizontal width does not show rate. Only the heights of barriers matter.",
+      "hint": "What does the horizontal axis measure?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1e54rp7",
+      "kind": "mistake",
+      "front": "True or false: an exothermic reaction cannot have an activation energy.",
+      "back": "**False.** Products can sit below reactants while the pathway still rises to a transition state, so there is still an activation energy.",
+      "hint": "Separate the sign of ΔH from the height of the barrier.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xqs9gu",
+      "kind": "concept",
+      "front": "How do the forward and reverse activation energies compare on the same profile?",
+      "back": "They can **differ**. The reverse activation energy is measured from the product level up to the same peak, so it is larger when products are lower than reactants.",
+      "hint": "Which starting level is used for the reverse reaction?",
+      "sectionId": "s4"
+    }
+  ]
+}

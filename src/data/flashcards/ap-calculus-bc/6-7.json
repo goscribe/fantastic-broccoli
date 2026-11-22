@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-7",
+  "topicCode": "6.7",
+  "topicName": "FTC and definite integrals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:33.899Z",
+  "cards": [
+    {
+      "id": "16u2q7s",
+      "kind": "concept",
+      "front": "How does the Fundamental Theorem of Calculus let you evaluate a definite integral without estimating area?",
+      "back": "Find any **antiderivative** $F$ of $f$, then compute $F(b)-F(a)$. For continuous $f$ on $[a,b]$, this endpoint subtraction equals the integral.",
+      "hint": "Think about what you do with the two bounds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xt3onz",
+      "kind": "concept",
+      "front": "Why does a region below the horizontal axis reduce the value of a definite integral?",
+      "back": "Its contribution is **negative** signed area. The integral counts regions above the axis as positive and regions below as negative, so the total is the net area.",
+      "hint": "Think about the sign of the region.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0whd5a9",
+      "kind": "concept",
+      "front": "If $v(t)$ is velocity, what does $\\int_a^b v(t)\\,dt$ measure, and why is it not always total distance?",
+      "back": "It measures **displacement**, the net change in position. Motion in the negative direction reduces it, so it can be smaller than the distance traveled.",
+      "hint": "What happens when the object moves backward?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tkp4s3",
+      "kind": "formula",
+      "front": "Which formula evaluates $\\int_a^b f(x)\\,dx$ using an antiderivative?",
+      "back": "$\\int_a^b f(x)\\,dx=F(b)-F(a)$, where $F'(x)=f(x)$ and $f$ is continuous on $[a,b]$. $F$ is an **antiderivative** of $f$.",
+      "hint": "The result is the change in F over the interval.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k3zyk9",
+      "kind": "term",
+      "front": "What is an antiderivative of $f$?",
+      "back": "A function $F$ whose **derivative** equals $f$, so $F'(x)=f(x)$.",
+      "hint": "It is the reverse of differentiation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01beidk",
+      "kind": "process",
+      "front": "What are the steps for evaluating a definite integral with the Fundamental Theorem?",
+      "back": "1) Find any antiderivative $F$. 2) Evaluate $F(b)$ and $F(a)$. 3) Subtract to get $F(b)-F(a)$. The **constant** $C$ cancels.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vq8i1g",
+      "kind": "concept",
+      "front": "Why can you ignore the constant $C$ when evaluating a definite integral?",
+      "back": "Because $[F(b)+C]-[F(a)+C]=F(b)-F(a)$. The **constant cancels** in the subtraction.",
+      "hint": "Write out both endpoint values.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00ahyer",
+      "kind": "mistake",
+      "front": "A student says a region below the axis adds positive area to the integral. What is wrong?",
+      "back": "Regions **below** the axis subtract from signed area. For total geometric area, use absolute values, $\\int_a^b |f(x)|\\,dx$.",
+      "hint": "Check the sign of the region.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ewbswx",
+      "kind": "example",
+      "front": "A particle has velocity $v(t)=2t-4$ meters per second. What is its displacement from $t=0$ to $t=5$?",
+      "back": "**5 meters** in the positive direction. An antiderivative is $F(t)=t^2-4t$, so $F(5)-F(0)=5-0=5$.",
+      "hint": "Find an antiderivative of $2t-4$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1k8ae2y",
+      "kind": "mistake",
+      "front": "With $v(t)=2t-4$ on $[0,5]$, why is 5 meters not the total distance traveled?",
+      "back": "The velocity changes sign at $t=2$, so the particle moves backward for part of the trip. Total distance is $4+9=13$ meters.",
+      "hint": "Does the particle ever turn around?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0drnj7o",
+      "kind": "formula",
+      "front": "Which integral gives total distance traveled from $t=a$ to $t=b$, given velocity $v(t)$?",
+      "back": "$\\int_a^b |v(t)|\\,dt$. The **absolute value** makes every piece of travel count as positive distance.",
+      "hint": "Which operation removes negative signs?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vgo060",
+      "kind": "example",
+      "front": "Evaluate $\\int_1^3 2x\\,dx$ using an antiderivative.",
+      "back": "**8**. An antiderivative is $F(x)=x^2$, so $F(3)-F(1)=9-1=8$.",
+      "hint": "What function has derivative $2x$?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fojzrd",
+      "kind": "process",
+      "front": "How can you check that the sign of a displacement answer is reasonable?",
+      "back": "Compare the sizes of the regions above and below the axis. If the **positive region** is larger, the displacement should be positive.",
+      "hint": "Compare areas, not just the graph's shape.",
+      "sectionId": "s4"
+    }
+  ]
+}

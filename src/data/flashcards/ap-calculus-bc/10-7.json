@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "10-7",
+  "topicCode": "10.7",
+  "topicName": "Alternating series test",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:12.869Z",
+  "cards": [
+    {
+      "id": "1gmdo16",
+      "kind": "process",
+      "front": "What three conditions must $\\sum(-1)^nb_n$ meet for the alternating series test to show it converges?",
+      "back": "The terms **alternate** in sign with $b_n>0$, the sizes decrease so $b_{n+1}\\le b_n$ for large $n$, and $\\lim_{n\\to\\infty}b_n=0$. Check them in that order.",
+      "hint": "Think about sign, then size, then the size limit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vkvjb7",
+      "kind": "term",
+      "front": "What is an alternating series?",
+      "back": "A series whose consecutive terms have **opposite signs**, written $\\sum(-1)^nb_n$ or $\\sum(-1)^{n+1}b_n$ with $b_n>0$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vxms8l",
+      "kind": "concept",
+      "front": "Why do shrinking steps make an alternating series settle toward one value?",
+      "back": "Each **shrinking** step makes the partial sums overshoot and swing back. The swings get smaller and squeeze toward a single value, alternately above and below it.",
+      "hint": "Picture a walk with steps that get shorter each time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hljxo8",
+      "kind": "mistake",
+      "front": "A student says a series fails the decreasing condition, so it must diverge. Is this correct?",
+      "back": "**No.** Failing the decreasing condition means the test gives no conclusion. Another method is needed to decide convergence.",
+      "hint": "What does the test say when a condition fails?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05xmb4i",
+      "kind": "concept",
+      "front": "If $\\lim_{n\\to\\infty}b_n$ is not 0, what happens to the series $\\sum(-1)^nb_n$?",
+      "back": "It **diverges**. Its terms do not approach zero, and a series whose terms stay away from zero cannot converge.",
+      "hint": "Check the limit condition first; it is the quickest.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wv38zt",
+      "kind": "process",
+      "front": "How can you show that $b_n$ is decreasing?",
+      "back": "Compare $b_{n+1}$ with $b_n$, or let $f(x)=b_n$ and show $f'(x)<0$. Write each condition on its own line.",
+      "hint": "Two methods: compare neighbours, or use a derivative.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00tv19b",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}(-1)^n\\frac{n}{n^2+1}$ converge?",
+      "back": "Yes. $b_n=\\frac{n}{n^2+1}$ is positive, decreasing for $n\\ge 1$, and $\\lim b_n=0$, so all three conditions hold.",
+      "hint": "Let $f(x)=\\frac{x}{x^2+1}$ and find $f'(x)$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15qxfmb",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}(-1)^n\\frac{n}{n+1}$ converge? Find $\\lim b_n$ first.",
+      "back": "No, it **diverges**. The limit of $\\frac{n}{n+1}$ is 1, not 0, so the terms do not approach zero.",
+      "hint": "Divide top and bottom by $n$ to find the limit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "155nt3u",
+      "kind": "formula",
+      "front": "Which expression flips sign in the same way as $(-1)^n$, and why does it matter?",
+      "back": "$\\cos(n\\pi)$, because $\\cos(n\\pi)=(-1)^n$. So $\\sum\\frac{\\cos(n\\pi)}{n}$ is an alternating series.",
+      "hint": "Write out the first few values of $\\cos(n\\pi)$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09y229a",
+      "kind": "mistake",
+      "front": "Is $\\sum\\frac{\\sin n}{n}$ an alternating series?",
+      "back": "**No.** The signs of $\\sin n$ do not alternate in a regular order, so the sign pattern is not alternating.",
+      "hint": "Write out terms 1 to 4 and look at the signs.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fii33m",
+      "kind": "concept",
+      "front": "What does the alternating series test tell you about the value of a convergent alternating series?",
+      "back": "It shows the sum **exists**, meaning the series converges. It does not tell you the value of the sum.",
+      "hint": "The test answers 'does it converge?', not 'what is it equal to?'",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0o2sfyz",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}\\frac{(-1)^{n+1}}{n^2}$ converge?",
+      "back": "Yes. $b_n=\\frac{1}{n^2}$ is positive, decreasing, and $\\lim\\frac{1}{n^2}=0$, so all three conditions hold.",
+      "hint": "Identify $b_n$ first, then check the three conditions.",
+      "sectionId": "s2"
+    }
+  ]
+}

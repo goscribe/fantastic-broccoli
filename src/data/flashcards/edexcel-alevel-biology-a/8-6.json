@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-6",
+  "topicCode": "8.6",
+  "topicName": "Plant responses to light",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:12.418Z",
+  "cards": [
+    {
+      "id": "03qpeo9",
+      "kind": "concept",
+      "front": "Where does auxin collect when light falls on one side of a shoot tip?",
+      "back": "On the **shaded side**. Phototropins in the tip absorb blue light, so IAA moves sideways away from the light. More auxin on the shaded side makes those cells elongate more, so the shoot bends towards the light.",
+      "hint": "Think about which side of the tip the light is hitting and what the auxin is doing there.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rtnb29",
+      "kind": "concept",
+      "front": "Why do plants need photoreceptor pigments to respond to light?",
+      "back": "They are **pigment proteins** that absorb particular wavelengths of light and change shape, which starts a response. A plant cannot move away from poor conditions, so it must detect light and grow differently.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "029fpet",
+      "kind": "process",
+      "front": "What happens inside a shaded-side cell once auxin arrives?",
+      "back": "Auxin binds to receptors on the cell surface membrane and activates proton pumps. These move $\\text{H}^{+}$ into the cell wall, making it acidic. The acid loosens cellulose links, water enters by osmosis, and the cell stretches.",
+      "hint": "Follow the steps in order, starting from the receptor.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ugool4",
+      "kind": "term",
+      "front": "What is phototropism?",
+      "back": "**Phototropism** is directional growth in response to light. Shoots show positive phototropism, so they grow towards the light source.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0y7132l",
+      "kind": "term",
+      "front": "What is a phototropin?",
+      "back": "A **phototropin** is a plant photoreceptor that absorbs blue light and controls growth towards light, which is phototropism.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00xqs17",
+      "kind": "term",
+      "front": "What is a phytochrome?",
+      "back": "A **phytochrome** is a plant photoreceptor that absorbs red and far-red light. It helps control seed germination, flowering and growth in shade.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tljr9l",
+      "kind": "term",
+      "front": "What is auxin?",
+      "back": "**Auxin** is a plant growth substance, such as indole-3-acetic acid (IAA). It is made in the shoot tip, moves down the shoot, and stimulates cell elongation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mmini4",
+      "kind": "term",
+      "front": "What is cell elongation?",
+      "back": "**Cell elongation** is the irreversible increase in cell length caused by water entering a cell whose wall has been loosened.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0egsndw",
+      "kind": "concept",
+      "front": "Which part of a shoot detects the direction of light?",
+      "back": "The **tip**. Covered tips and removed tips do not bend, but an exposed tip with a covered rest still bends. So the bending happens in the zone below the tip.",
+      "hint": "Compare which parts were covered or removed in the experiments.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k5ej11",
+      "kind": "mistake",
+      "front": "Why is it wrong to say auxin makes shaded-side cells divide?",
+      "back": "Auxin does not cause division. It makes **existing cells longer** by elongation, which is why the shaded side grows faster.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nt9prp",
+      "kind": "mistake",
+      "front": "Why is saying more auxin on one side not enough in an answer about phototropism?",
+      "back": "You must state where the IAA is: **more IAA on the shaded side** and less on the lit side. Without the location, the mark is not earned.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0anzcob",
+      "kind": "example",
+      "front": "How could a student show that the shoot tip detects the direction of light?",
+      "back": "Cover the tips of some seedlings with foil and leave others uncovered. Shine light from one side on both groups for the same time, then measure the bending angle. Covered tips should bend much less.",
+      "hint": "Use a control group and change only one variable.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0j58jpv",
+      "kind": "concept",
+      "front": "Why does a shoot growing towards light increase its rate of photosynthesis?",
+      "back": "Growing towards light puts the **leaves** in a better position to absorb more light, so photosynthesis happens faster.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1onhgb7",
+      "kind": "concept",
+      "front": "Which variables must be kept the same in a fair phototropism investigation?",
+      "back": "Use seedlings of the **same species and age**, and keep light intensity and temperature the same. Then change only one variable, such as covering the tip.",
+      "sectionId": "s5"
+    }
+  ]
+}

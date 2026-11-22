@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "2-8",
+  "topicCode": "2.8",
+  "topicName": "Product rule",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:51.834Z",
+  "cards": [
+    {
+      "id": "0jijzqm",
+      "kind": "formula",
+      "front": "What is the product rule for $y=u(x)v(x)$?",
+      "back": "$y'=u'(x)v(x)+u(x)v'(x)$. **Differentiate** each factor once, keep the other factor unchanged, then add the two terms.",
+      "hint": "Two terms, added together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18rfw8r",
+      "kind": "mistake",
+      "front": "Is the derivative of a product just the product of the derivatives?",
+      "back": "**No**. For $y=x^2x^3=x^5$, $y'=5x^4$, not $6x^3$, because a change in either factor changes the product.",
+      "hint": "Try $x^2$ times $x^3$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14y2v1v",
+      "kind": "process",
+      "front": "What steps do you follow to differentiate a product of two functions?",
+      "back": "1) Name $u$ and $v$. 2) Find $u'$ and $v'$. 3) Write $u'v+uv'$ before simplifying. 4) Combine **like terms**.",
+      "hint": "Name the factors before differentiating.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0o12nai",
+      "kind": "term",
+      "front": "What is a variable factor?",
+      "back": "A **variable factor** is one part of a product whose value depends on $x$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l3t5yn",
+      "kind": "concept",
+      "front": "Does a constant times a function need the product rule?",
+      "back": "**No**. A constant times a function does not need the product rule, and neither does a single power such as $x^5$.",
+      "hint": "Only two $x$-dependent factors multiplied.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0i79vwu",
+      "kind": "concept",
+      "front": "Why does the product rule add two terms instead of one?",
+      "back": "Because both factors can change at once, so **both** effects on the product must be counted.",
+      "hint": "Think about what changes the product.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1of8nmj",
+      "kind": "example",
+      "front": "Differentiate $y=(x^2+1)(3x-2)$ and simplify.",
+      "back": "$y'=9x^2-4x+3$. From $2x(3x-2)+3(x^2+1)$, then combining **like terms**.",
+      "hint": "Let $u=x^2+1$ and $v=3x-2$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16a566z",
+      "kind": "mistake",
+      "front": "Why should you keep both $u'v$ and $uv'$ in the answer?",
+      "back": "Dropping one term **loses part of the derivative**. Writing both terms helps prevent a missing term.",
+      "hint": "Count the terms before simplifying.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16mgrv3",
+      "kind": "term",
+      "front": "What is a factor derivative?",
+      "back": "A **factor derivative** is the derivative of one function in a product, such as $u'$ or $v'$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xlai5c",
+      "kind": "example",
+      "front": "Differentiate $y=x^2(x+1)$ and simplify.",
+      "back": "$y'=3x^2+2x$. Using $2x(x+1)+x^2$, which matches the derivative of the expanded form $x^3+x^2$.",
+      "hint": "Check by expanding first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dc5lt0",
+      "kind": "concept",
+      "front": "Why is expanding a polynomial product first useful?",
+      "back": "It gives a polynomial you can differentiate directly, so it **checks** a product-rule result. It is a check, not a required step.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13igc42",
+      "kind": "term",
+      "front": "What is factored form?",
+      "back": "**Factored form** writes an expression as a product rather than a sum of expanded terms, making shared factors easy to see.",
+      "sectionId": "s4"
+    }
+  ]
+}

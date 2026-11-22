@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-14",
+  "topicCode": "1.14",
+  "topicName": "Triglycerides and fatty acids",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:58.720Z",
+  "cards": [
+    {
+      "id": "0q93r6k",
+      "kind": "concept",
+      "front": "What is a triglyceride made of?",
+      "back": "One **glycerol** molecule joined to **three fatty acids**, each attached by an ester bond.",
+      "hint": "Count the building blocks first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "021v28q",
+      "kind": "concept",
+      "front": "Why do triglycerides release more energy per gram than most carbohydrates?",
+      "back": "Their hydrocarbon chains contain many **carbon–hydrogen bonds**, which release a lot of energy when broken down.",
+      "hint": "Compare the proportion of oxygen in lipids with that in carbohydrates.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0oop8xy",
+      "kind": "concept",
+      "front": "Why are fats rich in unsaturated fatty acids usually liquid at room temperature?",
+      "back": "Each **C=C double bond** bends the chain, so the chains cannot pack tightly together.",
+      "hint": "Compare the shape of these chains with saturated ones.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yquj7r",
+      "kind": "term",
+      "front": "What is a lipid?",
+      "back": "A **lipid** is a member of a varied group of molecules that are largely insoluble in water, such as fats and oils.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0f2wdxa",
+      "kind": "term",
+      "front": "What are the two parts of a fatty acid?",
+      "back": "A **carboxyl group** ($-\\mathrm{COOH}$) at one end and a **hydrocarbon chain** of carbon and hydrogen atoms.",
+      "hint": "Think about the acidic end and the long tail.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hk4slf",
+      "kind": "term",
+      "front": "What is condensation?",
+      "back": "A reaction that **joins two molecules** and releases a **water molecule**.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08c7czd",
+      "kind": "term",
+      "front": "What kind of bond links glycerol to a fatty acid?",
+      "back": "An **ester bond**, formed between a hydroxyl group and a carboxyl group in a condensation reaction.",
+      "hint": "Think about which groups react during condensation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ym7mlo",
+      "kind": "process",
+      "front": "How are three fatty acids joined to glycerol to make a triglyceride?",
+      "back": "Each $-\\mathrm{OH}$ on glycerol reacts with a fatty acid's **carboxyl group** by condensation, releasing **water** each time, three times in total.",
+      "hint": "Start with the reactive groups on glycerol.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0o5tidv",
+      "kind": "process",
+      "front": "What happens during hydrolysis of a triglyceride?",
+      "back": "**Three water molecules** break the three ester bonds, releasing one **glycerol** and three **fatty acids**.",
+      "hint": "It is the reverse of forming a triglyceride.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t1aeyo",
+      "kind": "mistake",
+      "front": "Why is a triglyceride not a polymer?",
+      "back": "A polymer is a long chain of many repeating units, but a triglyceride has just **one glycerol** and **three fatty acids**.",
+      "hint": "Count the units in a triglyceride.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16jq3sv",
+      "kind": "term",
+      "front": "What is a saturated fatty acid?",
+      "back": "A fatty acid whose hydrocarbon chain has **no carbon–carbon double bonds**, only single bonds, so the chain is straight.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tu7t0w",
+      "kind": "term",
+      "front": "What is an unsaturated fatty acid?",
+      "back": "A fatty acid whose hydrocarbon chain has **one or more carbon–carbon double bonds** (C=C).",
+      "hint": "Contrast it with the saturated type.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11vg189",
+      "kind": "concept",
+      "front": "Why does storing a large amount of triglyceride have little effect on the water balance of cells?",
+      "back": "Triglycerides are **insoluble**, so a large store does not greatly change the water balance of cells.",
+      "hint": "Recall how lipids behave in water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lg8y06",
+      "kind": "concept",
+      "front": "Apart from energy storage, what protective roles do triglycerides play?",
+      "back": "They **insulate** the body against heat loss and **cushion** delicate organs.",
+      "sectionId": "s5"
+    }
+  ]
+}

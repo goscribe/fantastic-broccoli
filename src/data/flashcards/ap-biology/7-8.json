@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "7-8",
+  "topicCode": "7.8",
+  "topicName": "Continuing evolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:53.322Z",
+  "cards": [
+    {
+      "id": "069twdc",
+      "kind": "term",
+      "front": "What is evolution in a population?",
+      "back": "**Evolution** is a change in inherited traits within a population across generations. It has not stopped in living species, and individuals do not evolve during their own lifetimes.",
+      "hint": "Think about populations, not single organisms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lz7lwy",
+      "kind": "concept",
+      "front": "What is a selection pressure, and what does it act on?",
+      "back": "A **selection pressure** is an environmental factor that affects survival or reproduction differently among inherited variants. Variants that do better leave more descendants, so their traits become more common.",
+      "hint": "Ask which variants leave more offspring.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bg37nt",
+      "kind": "concept",
+      "front": "How does antibiotic use make resistance more common in bacteria?",
+      "back": "Resistant bacteria are more likely to survive and reproduce, so **resistance** becomes more common across generations. The antibiotic kills or stops susceptible bacteria; it does not create the resistance.",
+      "hint": "Focus on who survives, not who adapts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1o6ljhk",
+      "kind": "mistake",
+      "front": "Why is it wrong to say antibiotics make individual bacteria adapt because they need to survive?",
+      "back": "Individual bacteria do not adapt to meet the need. Resistance rises because resistant bacteria leave more descendants, which changes the population over generations.",
+      "hint": "Who changes: the bacterium or the population?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wwlupw",
+      "kind": "process",
+      "front": "What are the steps by which pesticide use can make resistance more common in insects?",
+      "back": "1) Some insects inherit **pesticide resistance**. 2) Pesticide is applied and susceptible insects are less likely to survive. 3) Resistant survivors reproduce and pass on the trait. 4) Resistance becomes more common across generations.",
+      "hint": "Work through what happens in each generation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0f4976n",
+      "kind": "mistake",
+      "front": "If one insect survives a pesticide, has that insect evolved?",
+      "back": "No. Evolution is a change in the population, not in an individual insect. It shows up when surviving individuals pass on the trait and its frequency changes across generations.",
+      "hint": "Evolution is measured across generations.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02j0dl6",
+      "kind": "concept",
+      "front": "What is a fitness cost, and why does it matter after pesticide use stops?",
+      "back": "A **fitness cost** is a reduction in survival or reproduction linked to a trait under particular conditions. Without pesticide, resistant insects may not keep increasing, because their frequency depends on how they survive and reproduce in the new conditions.",
+      "hint": "Compare the trait's effects with and without pesticide.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b0ay1b",
+      "kind": "concept",
+      "front": "How can a changing environment cause a trait to change in a population?",
+      "back": "A changing environment creates new **selection pressures**. Individuals with traits suited to the new conditions may leave more offspring, so those traits change in frequency across generations.",
+      "hint": "Link the environment change to unequal reproduction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16ee650",
+      "kind": "example",
+      "front": "A long drought leaves mostly hard seeds for a bird population. What change in beak traits is likely?",
+      "back": "Birds better able to eat the hard seeds may leave more offspring, so those beak traits become more common across generations.",
+      "hint": "Which birds can eat the food that is left?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ho644f",
+      "kind": "concept",
+      "front": "Why can't a changing environment guarantee that a helpful trait will evolve?",
+      "back": "Useful **heritable variation** must already be present or arise, and individuals carrying it must reproduce successfully. Populations may also not change quickly enough to persist.",
+      "hint": "Think about what must be present before selection can act.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10ta4iz",
+      "kind": "term",
+      "front": "What is heritable variation?",
+      "back": "**Heritable variation** consists of differences in traits that can be passed from parents to offspring. It gives a population different traits that may matter when conditions change.",
+      "hint": "Ask what can be inherited.",
+      "sectionId": "s1"
+    }
+  ]
+}

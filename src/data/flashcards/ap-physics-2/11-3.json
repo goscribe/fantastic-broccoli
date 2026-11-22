@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "11-3",
+  "topicCode": "11.3",
+  "topicName": "Resistance, resistivity and Ohm's law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:25.655Z",
+  "cards": [
+    {
+      "id": "07ip6xd",
+      "kind": "term",
+      "front": "What is the resistance of a conductor, and how is it calculated?",
+      "back": "**Resistance** is the ratio of potential difference to current: $R=\\frac{\\Delta V}{I}$. Its unit is the **ohm**, $\\Omega$, where $1\\,\\Omega=1\\,\\mathrm{V/A}$.",
+      "hint": "Think about how much current a given voltage drives through the object.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0j818dd",
+      "kind": "formula",
+      "front": "Which equation links potential difference, current and resistance for an ohmic conductor?",
+      "back": "**Ohm's law**: $\\Delta V=IR$. At constant temperature the resistance stays the same, so current is proportional to potential difference.",
+      "hint": "Rearrange the resistance definition.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xgvr3z",
+      "kind": "formula",
+      "front": "How does the resistance of a uniform wire depend on its resistivity, length and cross-sectional area?",
+      "back": "$R=\\frac{\\rho\\ell}{A}$, where $\\rho$ is resistivity in $\\Omega\\,\\mathrm{m}$, $\\ell$ is length in $\\mathrm{m}$, and $A$ is cross-sectional area in $\\mathrm{m^2}$. Resistance rises with length and falls with area.",
+      "hint": "Resistivity belongs to the material, not the shape.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bsioxw",
+      "kind": "concept",
+      "front": "Does resistance belong to the object itself or to the circuit it sits in?",
+      "back": "**The object itself.** Resistance is a property of the conductor, so it stays the same whatever circuit it is placed in.",
+      "hint": "Ask what would change if you moved the same object into a different circuit.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jkwo0d",
+      "kind": "example",
+      "front": "A resistor on a 9.0 V battery carries 0.30 A. What is its resistance, and what current flows at 12 V?",
+      "back": "**30 Ω**, then **0.40 A**. $R=\\frac{9.0}{0.30}=30\\,\\Omega$. The resistor is ohmic, so $R$ stays 30 Ω and $I=\\frac{12}{30}=0.40\\,\\mathrm{A}$.",
+      "hint": "Find the resistance first, then use it at the new voltage.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11d2hmp",
+      "kind": "mistake",
+      "front": "A student says a higher voltage across a resistor makes its resistance higher. What is wrong with this?",
+      "back": "**Voltage does not set resistance.** For an ohmic conductor, changing $\\Delta V$ changes only the current. Resistance depends on material, length, area and temperature.",
+      "hint": "Ask what the note says actually sets resistance.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a1a9fl",
+      "kind": "concept",
+      "front": "What does resistivity describe?",
+      "back": "**Resistivity** $\\rho$ is how strongly a material resists current, independent of the object's shape. It is measured in $\\Omega\\,\\mathrm{m}$.",
+      "hint": "Compare two wires of the same shape but different metals.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15ammc8",
+      "kind": "process",
+      "front": "What are the steps to find a wire's resistance from its resistivity, length and area?",
+      "back": "1) Write $R=\\frac{\\rho\\ell}{A}$. 2) Substitute each value with its unit. 3) Evaluate to get the resistance in ohms.",
+      "hint": "Keep units beside each value so they never get mixed up.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xp9tal",
+      "kind": "example",
+      "front": "A wire has $\\rho=4.0\\times10^{-7}\\,\\Omega\\,\\mathrm{m}$, length 1.5 m and area $2.0\\times10^{-7}\\,\\mathrm{m^2}$. What is its resistance?",
+      "back": "**3.0 Ω**. $R=\\frac{(4.0\\times10^{-7})(1.5)}{2.0\\times10^{-7}}=3.0\\,\\Omega$.",
+      "hint": "Multiply resistivity by length, then divide by area.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09i3dt3",
+      "kind": "concept",
+      "front": "How does doubling the radius of a wire change its resistance, if length and material stay the same?",
+      "back": "**It falls to one quarter.** Doubling the radius makes the cross-sectional area four times larger, and resistance is inversely proportional to area.",
+      "hint": "Think about how the area changes when the radius doubles.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mb1a6m",
+      "kind": "mistake",
+      "front": "A student says doubling a wire's length halves its resistance. Is this right?",
+      "back": "**No, it doubles.** Resistance is proportional to length, so longer wires resist more. Halving comes from doubling the area, not the length.",
+      "hint": "Check which direction length pushes resistance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xhlg47",
+      "kind": "term",
+      "front": "What makes a conductor non-ohmic?",
+      "back": "**Non-ohmic** means its resistance changes as the potential difference across it changes, so its $\\Delta V$ against $I$ graph is not a straight line. A lamp filament is an example.",
+      "hint": "Think about what happens to resistance as the device heats up.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09ae4om",
+      "kind": "concept",
+      "front": "Why does the graph of potential difference against current for a lamp filament curve upward?",
+      "back": "As current rises, the filament heats up. Higher temperature raises its resistivity and resistance, so each extra ampere needs a bigger rise in potential difference.",
+      "hint": "Connect current, heating and resistance in order.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11za0lk",
+      "kind": "process",
+      "front": "How can you test whether a device is ohmic using measurements?",
+      "back": "**Check that $\\frac{\\Delta V}{I}$ stays the same** at several different currents. If the ratio changes, the device is non-ohmic.",
+      "hint": "Calculate the ratio at two or three different currents.",
+      "sectionId": "s5"
+    }
+  ]
+}

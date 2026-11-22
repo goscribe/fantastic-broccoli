@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-3-1",
+  "topicCode": "4.3.1",
+  "topicName": "Communicable diseases",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:37.644Z",
+  "cards": [
+    {
+      "id": "0a6gawh",
+      "kind": "term",
+      "front": "What is a pathogen?",
+      "back": "A **pathogen** is a microorganism that causes infectious disease. Bacteria, viruses, fungi and protists can all be pathogens.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0li9l2v",
+      "kind": "concept",
+      "front": "How do white blood cells protect the body against pathogens that get inside it?",
+      "back": "They **engulf and digest** pathogens (phagocytosis), and they make **antibodies** that bind to specific substances on a pathogen to help destroy it.",
+      "hint": "Think about two different ways a white blood cell can deal with an invader.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03bhh9c",
+      "kind": "concept",
+      "front": "Why does vaccination protect you against a pathogen you have not yet met?",
+      "back": "A vaccine exposes the immune system to harmless pathogen material, so white blood cells make specific antibodies and **memory cells**. Later, memory cells make antibodies faster, often before serious illness develops.",
+      "hint": "Consider what the body keeps after its first response to an invader.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0z8nrg3",
+      "kind": "term",
+      "front": "What are toxins?",
+      "back": "**Toxins** are harmful substances released by some bacteria that damage the body's tissues.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "094874f",
+      "kind": "mistake",
+      "front": "Why is it wrong to call a virus a living cell like a bacterium?",
+      "back": "Viruses are **particles smaller than cells**, not cells. They can only reproduce inside living host cells.",
+      "hint": "Compare the size and structure of a virus with a bacterium.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gy4lce",
+      "kind": "term",
+      "front": "What does it mean for a disease to be communicable?",
+      "back": "The pathogen can **pass between organisms**, so the disease can spread from one host to another.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04vkpxi",
+      "kind": "term",
+      "front": "What is a vector?",
+      "back": "A **vector** is an organism that carries a pathogen from one host to another, for example an insect transferring a pathogen when it feeds on a host.",
+      "hint": "Consider how a pathogen can move between hosts without direct contact.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jed12h",
+      "kind": "concept",
+      "front": "Why is there no single measure that stops every pathogen from spreading?",
+      "back": "Each measure **interrupts a different route** of transmission, so the most useful one depends on how that pathogen spreads.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0eni9cl",
+      "kind": "concept",
+      "front": "How do mucus and cilia work together to protect the airways?",
+      "back": "**Mucus** traps pathogens in the nose and airways, and **cilia** move the mucus towards the throat, where it is swallowed.",
+      "hint": "Think about two structures that work in sequence.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18b3bfi",
+      "kind": "process",
+      "front": "What happens to inhaled or swallowed pathogens in the airways and stomach, in order?",
+      "back": "Mucus traps them, cilia move the mucus to the throat, it is swallowed, and then **stomach acid** kills many of the pathogens.",
+      "hint": "Follow the path from the nose down to the stomach.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pyl8mx",
+      "kind": "mistake",
+      "front": "How specific are the skin, mucus and stomach acid defences?",
+      "back": "They are **non-specific**: they do not recognise a particular pathogen, and a pathogen can still enter through a wound or the airways.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12paqgn",
+      "kind": "mistake",
+      "front": "Why might an antibody fail to stop a different pathogen?",
+      "back": "Antibodies bind only to **specific substances** on one pathogen, so an antibody made against one pathogen may not bind to another.",
+      "hint": "Think about how precisely an antibody matches its target.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0yi1o89",
+      "kind": "concept",
+      "front": "How can vaccinating many people protect those who cannot be vaccinated?",
+      "back": "When many people are vaccinated, a pathogen has **fewer opportunities to spread**, which also protects people who cannot be vaccinated.",
+      "hint": "Consider what happens to a pathogen when fewer people can catch it.",
+      "sectionId": "s5"
+    }
+  ]
+}

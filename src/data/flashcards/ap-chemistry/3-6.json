@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "3-6",
+  "topicCode": "3.6",
+  "topicName": "Deviation from ideal gas law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:27.813Z",
+  "cards": [
+    {
+      "id": "0my7gzi",
+      "kind": "concept",
+      "front": "Why do real gases deviate from ideal gas law predictions?",
+      "back": "**Real gas** particles have volume and attract one another, but the ideal gas law assumes neither. These differences matter most when particles are close together or moving slowly.",
+      "hint": "Compare the ideal gas assumptions with real particles.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08yyi3d",
+      "kind": "concept",
+      "front": "Which conditions produce the greatest deviation from ideal behavior?",
+      "back": "**High pressure** and **low temperature**. High pressure packs particles together, and low temperature slows them so attractions have a bigger effect on their motion.",
+      "hint": "Think about how close and how fast the particles are.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06ijq32",
+      "kind": "concept",
+      "front": "What two effects push measured gas pressure in opposite directions?",
+      "back": "**Intermolecular attractions** can lower measured pressure, while **particle volume** can raise it. The overall direction depends on which effect dominates under the conditions.",
+      "hint": "One effect lowers pressure and the other raises it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0aqdgva",
+      "kind": "term",
+      "front": "What are intermolecular attractions?",
+      "back": "**Intermolecular attractions** are forces that pull neighboring particles toward one another. They can make a gas's measured pressure lower than the ideal prediction.",
+      "hint": "Think about forces between neighboring particles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gu956l",
+      "kind": "process",
+      "front": "Walk through how attractions can lower a gas's measured pressure.",
+      "back": "1) A particle approaches the container wall. 2) Nearby particles pull it inward. 3) It hits the wall with less momentum. 4) Measured pressure ends up below the ideal prediction.",
+      "hint": "Follow one particle from approach to collision.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tqc50e",
+      "kind": "term",
+      "front": "What is particle volume?",
+      "back": "**Particle volume** is the space gas particles occupy, so less space is left for their movement than the container volume suggests.",
+      "hint": "The ideal gas law treats particles as points.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ilxcgx",
+      "kind": "concept",
+      "front": "How can particle volume raise a gas's measured pressure?",
+      "back": "When particles are crowded, their volume takes up a larger share of the container, leaving less room for movement. This can push measured pressure above the ideal prediction.",
+      "hint": "Consider what happens at high pressure.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "100wije",
+      "kind": "mistake",
+      "front": "Why is it wrong to say attractions always explain the whole deviation from ideal behavior?",
+      "back": "Attractions do not always explain the entire deviation. **Particle volume** can also be important and can push pressure above the ideal prediction.",
+      "hint": "Consider the opposite effect from attractions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fufbbf",
+      "kind": "mistake",
+      "front": "Do the trends predict the exact direction of a deviation?",
+      "back": "No. The trends predict when deviations matter most, but not always their overall direction. Attractions and particle volume can pull in opposite directions.",
+      "hint": "Separate how large a deviation is from which way it goes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1txe2ux",
+      "kind": "concept",
+      "front": "Why does low temperature increase deviation from ideal behavior?",
+      "back": "Particles move more slowly at low temperature, so attractions affect their motion more strongly. Sufficiently cool, crowded gases may approach condensation.",
+      "hint": "Link slower motion to the strength of attractions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fmh1mu",
+      "kind": "concept",
+      "front": "Under what conditions do gases behave approximately ideally?",
+      "back": "At **low pressure** and **high temperature**. Particles are far apart and attractions have less effect, so the ideal gas law works well.",
+      "hint": "Think about how far apart the particles are and how fast they move.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wmzuil",
+      "kind": "term",
+      "front": "What is a deviation from ideal behavior?",
+      "back": "A **deviation from ideal behavior** occurs when measured pressure, volume, or temperature does not fit the ideal gas law exactly.",
+      "hint": "Think about measured values versus predicted values.",
+      "sectionId": "s1"
+    }
+  ]
+}

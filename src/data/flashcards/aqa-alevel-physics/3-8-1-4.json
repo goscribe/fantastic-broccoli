@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-8-1-4",
+  "topicCode": "3.8.1.4",
+  "topicName": "Nuclear instability",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:02.833Z",
+  "cards": [
+    {
+      "id": "0za5153",
+      "kind": "concept",
+      "front": "Why does a nucleus containing several protons stay together when protons repel each other?",
+      "back": "The **strong nuclear force** attracts nucleons and overcomes the electrostatic repulsion between protons. It acts only over very short distances, between close neighbours.",
+      "hint": "Think about how far each of the two forces reaches across a nucleus.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tyklkn",
+      "kind": "concept",
+      "front": "Why do heavier stable nuclei contain more neutrons than protons?",
+      "back": "Extra **neutrons** add strong-force attraction without adding electrostatic repulsion, and they keep protons further apart. The neutron-to-proton ratio rises from about 1 for light nuclei to about 1.5 for the heaviest stable ones.",
+      "hint": "Consider what a particle with no charge does to the forces inside the nucleus.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1v9uks3",
+      "kind": "concept",
+      "front": "How does a nucleus with too many neutrons move back towards the stable band?",
+      "back": "It undergoes **beta-minus** decay. A neutron becomes a proton, emitting an electron and an electron antineutrino, so the proton number rises by 1.",
+      "hint": "Ask which type of nucleon is in excess and what it needs to change into.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n06ynz",
+      "kind": "term",
+      "front": "What is a nucleon?",
+      "back": "A **nucleon** is a proton or a neutron, the particles packed into a nucleus.",
+      "hint": "Think about what makes up the nucleus itself.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "098yfs0",
+      "kind": "term",
+      "front": "What is the difference between the proton number Z and the nucleon number A?",
+      "back": "**Proton number** $Z$ counts protons only. **Nucleon number** $A$ counts protons plus neutrons, so the neutron number is $N=A-Z$.",
+      "hint": "Try writing the neutron count using the other two numbers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nyc6rr",
+      "kind": "process",
+      "front": "What steps should you follow to write a decay equation?",
+      "back": "1) Write the parent nucleus. 2) Use the decay type to find the new nucleon and proton numbers. 3) Add the emitted particles. 4) Check that the top and bottom numbers balance on both sides.",
+      "hint": "Start from the parent nucleus and the change the decay makes to it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e2pasd",
+      "kind": "example",
+      "front": "Cobalt-60, $^{60}_{27}\\mathrm{Co}$, decays by beta-minus emission. What is the daughter nucleus?",
+      "back": "Nickel-60, $^{60}_{28}\\mathrm{Ni}$, plus $^{0}_{-1}\\beta$ and $\\bar{\\nu}_e$. The nucleon number stays at 60 while the proton number rises from 27 to 28.",
+      "hint": "Work out how the proton number changes in beta-minus decay.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wcge92",
+      "kind": "example",
+      "front": "A nucleus of $^{226}_{88}\\mathrm{Ra}$ emits an alpha particle. What are the nucleon and proton numbers of the new nucleus?",
+      "back": "$A=222$ and $Z=86$. Alpha decay lowers $A$ by 4 and $Z$ by 2.",
+      "hint": "Recall how alpha decay changes both the top and bottom numbers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yb1dox",
+      "kind": "mistake",
+      "front": "A student says alpha decay removes four protons from the nucleus. Why is this wrong?",
+      "back": "Alpha decay removes **2 protons and 2 neutrons**, so $A$ falls by 4 and $Z$ falls by 2. Removing four protons would lower $Z$ by 4.",
+      "hint": "Think about the charge and mass of the alpha particle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "122sqli",
+      "kind": "mistake",
+      "front": "Why can gravity not explain why a nucleus stays bound together?",
+      "back": "Gravitational attraction between nucleons is far too weak to overcome proton repulsion. The strong nuclear force is what holds the nucleus together.",
+      "hint": "Compare how strong gravity is with electrostatic repulsion between protons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0g457nb",
+      "kind": "concept",
+      "front": "What happens to an excited nucleus left over after an alpha or beta decay?",
+      "back": "It returns to its lowest energy by emitting a **gamma** photon. Gamma emission changes neither $A$ nor $Z$, so the element stays the same.",
+      "hint": "Think about what the nucleus loses, and whether its identity changes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qtz9qe",
+      "kind": "concept",
+      "front": "Why is technetium-99m used to image organs inside the body?",
+      "back": "It is a **metastable** excited state with a half-life of about 6 hours. It emits gamma radiation that leaves the body, and detectors outside record it to form an image.",
+      "hint": "Think about which type of radiation can escape the body and be detected outside.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vk684k",
+      "kind": "concept",
+      "front": "What does beta-plus decay do to a nucleus with too many protons?",
+      "back": "A **proton** becomes a neutron, emitting a positron and an electron neutrino. The proton number falls by 1 and the nucleon number is unchanged.",
+      "hint": "Consider which nucleon is in excess and what it must become.",
+      "sectionId": "s3"
+    }
+  ]
+}

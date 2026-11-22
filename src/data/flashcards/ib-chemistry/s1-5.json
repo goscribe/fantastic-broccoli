@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "s1-5",
+  "topicCode": "S1.5",
+  "topicName": "Ideal gases",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:10.979Z",
+  "cards": [
+    {
+      "id": "1ouv295",
+      "kind": "concept",
+      "front": "What are the key assumptions of the ideal gas model about particle volume and forces?",
+      "back": "Particles have **negligible volume** compared with the container and experience **no intermolecular forces** except during collisions. Collisions are perfectly elastic, so kinetic energy is conserved.",
+      "hint": "Think about what the particles are like when they are not colliding.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pdskg2",
+      "kind": "formula",
+      "front": "What does the ideal gas equation pV = nRT state, and what does each symbol stand for?",
+      "back": "$pV=nRT$ links **pressure** p (Pa), **volume** V (m³), **amount** n (mol), and **absolute temperature** T (K). $R$ is the **gas constant**, $8.31\\,\\mathrm{J\\,K^{-1}\\,mol^{-1}}$ when p is in Pa and V in m³.",
+      "hint": "Check which units go with R before substituting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1j6cv4v",
+      "kind": "concept",
+      "front": "Why do real gases approach ideal behaviour at low pressure and high temperature?",
+      "back": "At **low pressure**, particles are far apart, so their own volume matters less. At **high temperature**, intermolecular attractions have less effect on their motion.",
+      "hint": "Consider how far apart the particles are in each case.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qbog2c",
+      "kind": "process",
+      "front": "What are the steps to calculate an unknown quantity using the ideal gas equation?",
+      "back": "1) **Rearrange** the equation for the unknown. 2) **Convert units** (kPa to Pa, L to m³, °C to K). 3) **Substitute** all known values. 4) **Calculate**, keeping extra digits and rounding only the final answer.",
+      "hint": "Which step comes before substituting numbers?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m12znc",
+      "kind": "mistake",
+      "front": "A student uses 25 °C directly as T in pV = nRT. What is wrong and what is right?",
+      "back": "Temperature must be **absolute**, in kelvin. Convert using $T(\\mathrm{K})=t(°\\mathrm{C})+273.15$, so 25 °C becomes 298.15 K.",
+      "hint": "Which scale does the gas law need?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1g9jnhf",
+      "kind": "mistake",
+      "front": "Is it true that ideal gas particles are motionless between collisions?",
+      "back": "No. Particles move **constantly and randomly**, travelling freely until another collision changes their motion.",
+      "hint": "Think about what happens between collisions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v0cf50",
+      "kind": "term",
+      "front": "What is the pascal, and how does it relate to kilopascals?",
+      "back": "The **pascal** (Pa) is the SI unit of pressure. To convert kilopascals to pascals, multiply by **1000**.",
+      "hint": "Think about the prefix kilo.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10hkwks",
+      "kind": "term",
+      "front": "What is the kelvin used for in gas calculations?",
+      "back": "The **kelvin** (K) is the unit of **absolute temperature** used in the ideal gas equation. It starts from absolute zero.",
+      "hint": "Why does the gas equation need a different scale from Celsius?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1p1apib",
+      "kind": "formula",
+      "front": "How do you rearrange pV = nRT to find the amount of gas n?",
+      "back": "$n=\\frac{pV}{RT}$. Use consistent units, such as kPa, L and K with $R=8.31\\,\\mathrm{kPa\\,L\\,mol^{-1}\\,K^{-1}}$.",
+      "hint": "Divide both sides by RT.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ml817x",
+      "kind": "example",
+      "front": "A gas occupies 2.00 L at 100 kPa and 27.0 °C. What is its amount in moles, using R = 8.31 kPa L mol⁻¹ K⁻¹?",
+      "back": "**0.0802 mol**. Convert T to 300.15 K, then $n=\\frac{(100)(2.00)}{(8.31)(300.15)}\\approx0.0802\\,\\mathrm{mol}$.",
+      "hint": "Convert the temperature to kelvin first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mm7jn9",
+      "kind": "example",
+      "front": "What is the molar volume of an ideal gas at STP, using T = 273 K and p = 100 kPa?",
+      "back": "**22.7 dm³ mol⁻¹**. Using $V=\\frac{nRT}{p}$ with $n=1$ mol gives about 0.0227 m³, which equals 22.7 dm³.",
+      "hint": "Use V = nRT/p with n = 1 mol and SI units.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uxxsit",
+      "kind": "example",
+      "front": "Calculate the pressure of 0.500 mol of ideal gas in 0.0100 m³ at 300 K, using R = 8.31 J K⁻¹ mol⁻¹.",
+      "back": "**About 125 kPa** (124 650 Pa). Using $p=\\frac{nRT}{V}=\\frac{(0.500)(8.31)(300)}{0.0100}$.",
+      "hint": "Check that your volume is in m³ and pressure comes out in Pa.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15u0xqo",
+      "kind": "concept",
+      "front": "Why must pressure and volume units match the value of R you choose?",
+      "back": "Each **value of R** depends on its units. Using kPa and L gives $8.31\\,\\mathrm{kPa\\,L\\,mol^{-1}\\,K^{-1}}$, because one kPa·L equals one joule.",
+      "hint": "Think about what the numerical value of R depends on.",
+      "sectionId": "s3"
+    }
+  ]
+}

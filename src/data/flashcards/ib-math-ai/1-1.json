@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "1-1",
+  "topicCode": "1.1",
+  "topicName": "Scientific notation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:07.777Z",
+  "cards": [
+    {
+      "id": "1ptbsay",
+      "kind": "concept",
+      "front": "What must be true of the coefficient and exponent in scientific notation $a\\times10^{k}$?",
+      "back": "The **coefficient** $a$ must satisfy $1\\le a<10$, and the **exponent** $k$ must be a whole number, which may be negative. The exponent shows how far the decimal point has moved.",
+      "hint": "Think about the size of $a$ and what kind of number $k$ is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15vu52t",
+      "kind": "process",
+      "front": "What are the steps to convert a number such as 52 000 000 into scientific notation?",
+      "back": "**Move the decimal point** until one non-zero digit sits before it, then count the places moved. Use a positive exponent for numbers of 10 or more and a negative exponent for numbers below 1.",
+      "hint": "Count the places the point moves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0eh3axp",
+      "kind": "concept",
+      "front": "How do you multiply and divide numbers written in scientific notation?",
+      "back": "**Multiply** the coefficients and **add** the exponents. **Divide** the coefficients and **subtract** the exponents. Then adjust the coefficient so it lies between 1 and 10.",
+      "hint": "Use the laws of exponents on the powers of ten.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kij98s",
+      "kind": "term",
+      "front": "What is a significant figure?",
+      "back": "A **significant figure** is a digit that carries information about precision: any non-zero digit, a zero between non-zero digits, or a zero at the end of a decimal.",
+      "hint": "Leading zeros do not count.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04a4msc",
+      "kind": "mistake",
+      "front": "Why is $25\\times10^{3}$ not in scientific notation, and what is the correct form?",
+      "back": "**Because 25 is not below 10**, so the coefficient is too large. Write it as $2.5\\times10^{4}$.",
+      "hint": "Check the size of the coefficient.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d1u5wo",
+      "kind": "example",
+      "front": "Write 0.00037 in scientific notation.",
+      "back": "$3.7\\times10^{-4}$. The decimal point moves 4 places to the right, so the exponent is negative.",
+      "hint": "Count the places carefully.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00qi613",
+      "kind": "example",
+      "front": "Calculate $(3.0\\times10^{5})(4.0\\times10^{-2})$ and give the answer in scientific notation.",
+      "back": "$1.2\\times10^{4}$. The coefficients give $3.0\\times4.0=12$ and the powers give $10^{3}$, so $12\\times10^{3}=1.2\\times10^{4}$.",
+      "hint": "Check whether the coefficient is between 1 and 10.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0a0wzep",
+      "kind": "mistake",
+      "front": "What should you check after every multiplication or division in scientific notation?",
+      "back": "**The coefficient.** If it lies outside 1 to 10, as 12 or 0.4 would, adjust it and change the exponent to match.",
+      "hint": "Compare the coefficient with the range 1 to 10.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1su2xcd",
+      "kind": "concept",
+      "front": "Why should a final answer not have more significant figures than the data used?",
+      "back": "The answer **cannot be more precise than the least precise value** used. Extra digits would suggest accuracy that the measurements never had.",
+      "hint": "Think about the weakest measurement in the calculation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12mgyji",
+      "kind": "process",
+      "front": "How many significant figures should a final answer be given to?",
+      "back": "The **same number as the least precise value used**. If the question states no accuracy, give three significant figures. Keep extra digits in your working and round only at the end.",
+      "hint": "Round only at the end.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13vp330",
+      "kind": "example",
+      "front": "How many significant figures does 0.003070 have?",
+      "back": "**4**. The digits 3, 0, 7 and 0 count, because the leading zeros do not count but the trailing zero after the decimal point does.",
+      "hint": "Leading zeros do not count.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gonjul",
+      "kind": "example",
+      "front": "Estimate $\\frac{(4.87\\times10^{6})(2.1\\times10^{-3})}{9.6\\times10^{2}}$ by rounding each value to 1 significant figure.",
+      "back": "**10**. Rounding gives $\\frac{(5\\times10^{6})(2\\times10^{-3})}{1\\times10^{3}}=10$. The full calculation gives 11 to 2 significant figures.",
+      "hint": "Round each value to 1 significant figure first.",
+      "sectionId": "s5"
+    }
+  ]
+}

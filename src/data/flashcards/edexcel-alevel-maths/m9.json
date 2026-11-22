@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "m9",
+  "topicCode": "M9",
+  "topicName": "Moments",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:56.218Z",
+  "cards": [
+    {
+      "id": "0xvdnsj",
+      "kind": "formula",
+      "front": "What is the moment of a force about a point, and what is its unit?",
+      "back": "The moment is $M=Fd$, the force times its **perpendicular distance** from the point. Its unit is $\\mathrm{N\\,m}$.",
+      "hint": "Think about why a door is easier to push near its handle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d657cu",
+      "kind": "concept",
+      "front": "What must be true about the moments on a body in equilibrium?",
+      "back": "The **principle of moments**: the total clockwise moment about any point equals the total anticlockwise moment about that same point, because the resultant moment is zero.",
+      "hint": "Remember that a balanced seesaw neither turns nor accelerates.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k28ihz",
+      "kind": "process",
+      "front": "What steps should you follow to find unknown reactions on a beam?",
+      "back": "Draw all forces, with the weight at the centre of mass. Take moments about a point where an unknown force acts. Equate clockwise and anticlockwise moments, then resolve vertically.",
+      "hint": "Start by choosing the point that removes one unknown.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18zmgg3",
+      "kind": "term",
+      "front": "What is a pivot?",
+      "back": "A **pivot** is a fixed point about which an object can turn.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wuxjid",
+      "kind": "example",
+      "front": "What is the moment about the nut of a 40 N force acting at right angles to a spanner, 0.25 m from the nut?",
+      "back": "$10\\,\\mathrm{N\\,m}$, from $M=Fd=40\\times0.25$.",
+      "hint": "Is the force already at right angles, so the distance can be used directly?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dsd9d6",
+      "kind": "concept",
+      "front": "Why does a force at an angle to a rod have a smaller turning effect than one at right angles?",
+      "back": "Only the component $F\\sin\\theta$ at right angles to the rod turns it, so the effective force is reduced.",
+      "hint": "Split the force into a part along the rod and a part across it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09cpl3s",
+      "kind": "mistake",
+      "front": "What is wrong with taking the distance along the rod when a force is not at right angles to it?",
+      "back": "It gives the wrong moment. Use the **perpendicular distance** from the pivot to the force, or resolve the force first.",
+      "hint": "Which distance does the moment formula actually need?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1snjyku",
+      "kind": "example",
+      "front": "What is the moment about the pivot of a 50 N force at $30^{\\circ}$ to a rod, acting 0.80 m from the pivot along the rod?",
+      "back": "$20\\,\\mathrm{N\\,m}$, since the perpendicular component is $50\\sin30^{\\circ}=25\\,\\mathrm{N}$ and $25\\times0.80=20$.",
+      "hint": "Find the part of the force that is at right angles to the rod first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hbij1d",
+      "kind": "term",
+      "front": "What is the resultant moment about a point?",
+      "back": "The **resultant moment** is the sum of the signed moments of all the forces about that point, with one direction taken as positive.",
+      "hint": "Consider what happens when some forces turn one way and some the other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cz9lg4",
+      "kind": "mistake",
+      "front": "Why must every moment in one calculation be taken about the same point?",
+      "back": "Different points give different totals, so adding moments about different points gives a meaningless answer.",
+      "hint": "Compare how the distances change when the pivot moves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wbnaz4",
+      "kind": "example",
+      "front": "Taking anticlockwise as positive, what is the resultant moment about O of these forces: 12 N up 0.5 m right, 8 N down 1.5 m right, 5 N down 0.4 m left?",
+      "back": "$4.0\\,\\mathrm{N\\,m}$ clockwise, since $6.0-12+2.0=-4.0$.",
+      "hint": "Give each force a sign according to which way it turns the rod.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "049e6ox",
+      "kind": "term",
+      "front": "What is the centre of mass of a body?",
+      "back": "The **centre of mass** is the point through which the whole weight of a body may be taken to act.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gn4fh4",
+      "kind": "concept",
+      "front": "What reaction does a support have when it is about to lose contact with the beam?",
+      "back": "Zero. This condition gives the limit before the beam tilts.",
+      "hint": "Think about what the support is physically doing as contact is lost.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0g7cuty",
+      "kind": "example",
+      "front": "A uniform beam AB of length 6.00 m and weight 196 N rests on supports at A and C, with AC = 4.00 m. What is the reaction at C?",
+      "back": "$R_\\mathrm{C}=147\\,\\mathrm{N}$, from moments about A: $R_\\mathrm{C}\\times4.00=196\\times3.00$. Then $R_\\mathrm{A}=49.0\\,\\mathrm{N}$.",
+      "hint": "Take moments about A, where the reaction there has no moment.",
+      "sectionId": "s5"
+    }
+  ]
+}

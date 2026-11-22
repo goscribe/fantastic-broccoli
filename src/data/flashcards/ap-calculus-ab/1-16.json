@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-16",
+  "topicCode": "1.16",
+  "topicName": "Intermediate value theorem",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:53.358Z",
+  "cards": [
+    {
+      "id": "0yp6fmd",
+      "kind": "term",
+      "front": "What does the intermediate value theorem say about a function that is continuous on $[a,b]$?",
+      "back": "A continuous function **reaches every value** between $f(a)$ and $f(b)$ at some point $c$ in $[a,b]$. The theorem guarantees the value is reached but does not say where.",
+      "hint": "Think about tracing a continuous graph from one endpoint to the other.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1x0iqg5",
+      "kind": "process",
+      "front": "What steps do you follow to prove that $f(x)=N$ has a solution on an interval?",
+      "back": "Name the interval, show $f$ is **continuous** on it, calculate both endpoint values, check that $N$ lies between them, then state the value reached.",
+      "hint": "The tip in section 2 lists these steps in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e22v43",
+      "kind": "mistake",
+      "front": "Why is it not enough that a function has opposite signs at the two endpoints?",
+      "back": "Opposite endpoint signs alone do not guarantee a root. You must check **continuity** across the whole closed interval, because a jump can skip zero.",
+      "hint": "Consider a graph that jumps from negative to positive.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qy15he",
+      "kind": "concept",
+      "front": "How can the intermediate value theorem be used to prove that a root exists on $[a,b]$?",
+      "back": "Take the target $N=0$ and check that $f(a)$ and $f(b)$ have **opposite signs**. Then zero lies between them, so some $c$ in $(a,b)$ has $f(c)=0$.",
+      "hint": "Ask which target value the endpoint values must bracket.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sfiugg",
+      "kind": "example",
+      "front": "Does $f(x)=x^2-2$ have a root between 1 and 2? Justify with the theorem.",
+      "back": "Yes. $f$ is a polynomial, so continuous on $[1,2]$. Since $f(1)=-1$ and $f(2)=2$, zero lies between them, so some $c$ in $(1,2)$ has $f(c)=0$.",
+      "hint": "Check continuity first, then compare the endpoint values with zero.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16kix9v",
+      "kind": "example",
+      "front": "For $g(x)=-1$ when $x<0$ and $g(x)=1$ when $x\\geq 0$, why does $g(x)$ never equal zero on $[-1,1]$?",
+      "back": "**Discontinuity**: $g$ jumps from $-1$ to $1$ at $x=0$, so it skips zero. The theorem does not apply because $g$ is not continuous on $[-1,1]$.",
+      "hint": "Look at what happens at $x=0$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xv4est",
+      "kind": "term",
+      "front": "What is a closed interval $[a,b]$?",
+      "back": "An interval that **includes both endpoints** $a$ and $b$. The intermediate value theorem requires continuity on this kind of interval.",
+      "hint": "Square brackets mean the endpoints are included.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0e02rzr",
+      "kind": "term",
+      "front": "What is a root of a function $f$?",
+      "back": "A **root** is an input $c$ for which $f(c)=0$.",
+      "hint": "It is a solution of $f(x)=0$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1o9a4bw",
+      "kind": "concept",
+      "front": "What does the intermediate value theorem guarantee, and what does it leave out?",
+      "back": "It guarantees an **existence** claim: at least one input gives the target value. It does not identify where that input is or count all solutions.",
+      "hint": "Think about the difference between existence and location.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z3xj0p",
+      "kind": "mistake",
+      "front": "Why do the endpoint values of $h(x)=x^2-1$ on $[-2,2]$ fail to establish a root?",
+      "back": "Both endpoint values equal $3$, so zero is **not between** them and the theorem gives no conclusion. Choose endpoints that bracket zero instead.",
+      "hint": "For the theorem to apply, zero must sit between the two endpoint values.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ejg6cp",
+      "kind": "example",
+      "front": "Using $h(x)=x^2-1$ on $[0,2]$, what does the intermediate value theorem guarantee?",
+      "back": "Since $h(0)=-1$ and $h(2)=3$, there is some $c$ in $(0,2)$ with $h(c)=0$. This works even when solving exactly would be hard.",
+      "hint": "Compare each endpoint value with zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19nbl1p",
+      "kind": "concept",
+      "front": "What does it mean for a function to be continuous on an interval?",
+      "back": "It has **no breaks** there, with one-sided continuity at any included endpoints. Continuity is what lets the graph reach every value in between.",
+      "hint": "Think of drawing the graph without lifting your pencil.",
+      "sectionId": "s2"
+    }
+  ]
+}

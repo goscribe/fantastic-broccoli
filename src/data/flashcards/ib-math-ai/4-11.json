@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-11",
+  "topicCode": "4.11",
+  "topicName": "Chi-squared and t-tests",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:59.309Z",
+  "cards": [
+    {
+      "id": "0s0a1b9",
+      "kind": "concept",
+      "front": "When do we reject the null hypothesis, and what does the p-value measure?",
+      "back": "Reject $H_0$ when the **p-value** is less than the significance level, usually 5%. Otherwise do not reject $H_0$. The p-value measures how surprising the data would be if $H_0$ were true.",
+      "hint": "Compare two numbers.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "043ga9j",
+      "kind": "concept",
+      "front": "What does a chi-squared test check, and what kind of data does it use?",
+      "back": "It checks whether two **categorical** variables are associated, using observed and expected counts in a contingency table. Its null hypothesis is that the variables are independent.",
+      "hint": "Think about counts in categories.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0li6l6i",
+      "kind": "concept",
+      "front": "What does a t-test compare?",
+      "back": "A **t-test** compares the means of two groups of numerical data. It assumes both groups are independent and roughly normal, with similar spread.",
+      "hint": "Measurements, not counts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09rxksn",
+      "kind": "term",
+      "front": "What is the null hypothesis $H_0$?",
+      "back": "The **null hypothesis** states there is no difference or no association. The alternative $H_1$ states there is one. A test looks for evidence against $H_0$.",
+      "hint": "It is the default statement.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "183ilfi",
+      "kind": "term",
+      "front": "What is a contingency table?",
+      "back": "A **contingency table** shows observed counts for two categorical variables, with a row or column for each category.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mf6ku5",
+      "kind": "formula",
+      "front": "What is the chi-squared test statistic, and what do $O$ and $E$ mean?",
+      "back": "$\\chi^2=\\sum\\frac{(O-E)^2}{E}$, where $O$ is an **observed** count and $E$ is an **expected** count. Each cell contributes one term to the sum.",
+      "hint": "Sum over every cell.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0uvbvvg",
+      "kind": "formula",
+      "front": "How is an expected frequency found in a contingency table?",
+      "back": "$E=\\frac{\\text{row total}\\times\\text{column total}}{\\text{grand total}}$. It is the count a cell would have if the variables were **independent**.",
+      "hint": "Use the totals.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1itykr3",
+      "kind": "formula",
+      "front": "How are the degrees of freedom for a chi-squared test found?",
+      "back": "$(r-1)(c-1)$ for a table with $r$ rows and $c$ columns. Technology uses this number to find the **p-value**.",
+      "hint": "Count rows and columns.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1b73f69",
+      "kind": "process",
+      "front": "What are the steps to run a chi-squared test with technology?",
+      "back": "1) State $H_0$ (independent) and $H_1$ (associated). 2) Enter the observed counts as a matrix. 3) Check every **expected** count is at least 5. 4) Compare the p-value with the significance level and conclude in context.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11f25ku",
+      "kind": "example",
+      "front": "Bus and car counts for Year 12 and Year 13 (100 students in total) are tested at 5%. What is the p-value and conclusion?",
+      "back": "$\\chi^2=4$ with 1 degree of freedom, $p\\approx 0.0455$. Since $0.0455<0.05$, **reject** $H_0$. There is evidence of an association between year group and transport choice.",
+      "hint": "Each expected count is 25.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05wntyl",
+      "kind": "process",
+      "front": "What are the steps to run a two-sample t-test with technology?",
+      "back": "State $H_0$: the two population means are equal. Enter each data set, choose the two-sample test with pooled variance, then read off $t$, the degrees of freedom and the p-value. Write the sample means before concluding.",
+      "hint": "Start with the hypotheses.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tzfj4q",
+      "kind": "example",
+      "front": "Fertiliser X gives heights 14, 16, 15, 18, 17 cm and Y gives 19, 21, 18, 20, 22 cm. At 5%, what do you conclude?",
+      "back": "Sample means are 16 cm (X) and 20 cm (Y). $t=4.00$ with 8 degrees of freedom, $p\\approx 0.0039<0.05$. **Reject** $H_0$: the mean height is greater with fertiliser Y.",
+      "hint": "Find the sample means first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fse4ms",
+      "kind": "mistake",
+      "front": "Why must we not write that we accept the null hypothesis?",
+      "back": "A large p-value only shows the evidence is not strong enough to **reject** $H_0$. It does not prove $H_0$ true, so write 'do not reject $H_0$'.",
+      "hint": "Missing evidence is not proof.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0deqde3",
+      "kind": "mistake",
+      "front": "Is the p-value the probability that $H_0$ is true?",
+      "back": "No. The **p-value** is the probability of results at least as extreme as ours if $H_0$ is true. The condition runs one way only.",
+      "hint": "Read which way the condition goes.",
+      "sectionId": "s5"
+    }
+  ]
+}

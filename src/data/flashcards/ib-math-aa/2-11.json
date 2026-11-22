@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-11",
+  "topicCode": "2.11",
+  "topicName": "Transformations of graphs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:10.854Z",
+  "cards": [
+    {
+      "id": "1cpsskt",
+      "kind": "concept",
+      "front": "Where does the graph of $y=f(x-a)$ move compared with $y=f(x)$, and why does it feel backwards?",
+      "back": "It moves **right** by $a$ units. The output $f(0)$ now appears where $x-a=0$, so each point is $a$ units further right. For $y=f(x+a)$ it moves left.",
+      "hint": "Test where f(0) appears.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "193wzn1",
+      "kind": "formula",
+      "front": "What transformation does $y=f(x-a)+b$ represent, and how is it written?",
+      "back": "A **translation** by the vector $\\binom{a}{b}$: $a$ units in the $x$ direction and $b$ units in the $y$ direction.",
+      "hint": "Give both components.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yuxyrz",
+      "kind": "formula",
+      "front": "What does $y=pf(x)$ do to the graph of $y=f(x)$?",
+      "back": "A **vertical stretch** with scale factor $p$, parallel to the $y$-axis. Every $y$-coordinate is multiplied by $p$, and points on the $x$-axis stay fixed.",
+      "hint": "Which coordinate is multiplied?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ux9ani",
+      "kind": "concept",
+      "front": "What does $y=f(x)+b$ do to the graph of $y=f(x)$?",
+      "back": "A **translation** of $b$ units in the $y$ direction: up if $b>0$, down if $b<0$. The shape does not change.",
+      "hint": "Only the outputs change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0x61vcs",
+      "kind": "mistake",
+      "front": "A student says $y=f(x+3)$ moves the graph 3 units right. Is this correct?",
+      "back": "**No**. It moves the graph 3 units left. The sign inside the bracket works against the direction of movement.",
+      "hint": "Check with a point such as f(0).",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1q1ra80",
+      "kind": "concept",
+      "front": "Which axis does $y=-f(x)$ reflect the graph in, and where does the point $(a,b)$ go?",
+      "back": "The **x-axis**. The point $(a,b)$ maps to $(a,-b)$, because every output changes sign.",
+      "hint": "Which variable changes sign?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pdarli",
+      "kind": "mistake",
+      "front": "Does the graph of $y=-f(x)$ flip from left to right?",
+      "back": "**No**. It flips over the $x$-axis. A left-right flip in the $y$-axis comes from $y=f(-x)$.",
+      "hint": "Which variable changes sign?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jndtct",
+      "kind": "term",
+      "front": "What is an invariant point under a reflection?",
+      "back": "An **invariant point** is a point that does not move under the transformation. For a reflection, these are the points lying on the mirror line.",
+      "hint": "Think about points on the axis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rm0tus",
+      "kind": "formula",
+      "front": "What does $y=f(qx)$ do to the graph of $y=f(x)$, and which points stay fixed?",
+      "back": "A **horizontal stretch** with scale factor $\\frac{1}{q}$, parallel to the $x$-axis. Every $x$-coordinate is divided by $q$, and points on the $y$-axis stay fixed.",
+      "hint": "Which coordinate is divided?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hm4zcm",
+      "kind": "example",
+      "front": "The point $(4,6)$ lies on $y=f(x)$. What is its image on $y=f(2x)$?",
+      "back": "$(2,6)$. The $x$-coordinate is divided by 2 ($4\\div2=2$), and the $y$-coordinate stays 6.",
+      "hint": "Only one coordinate changes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qmorf1",
+      "kind": "process",
+      "front": "In what order do you apply the transformations for $y=pf(x-a)+b$ to a point?",
+      "back": "1. **Shift** horizontally by $a$. 2. **Stretch** vertically by $p$. 3. **Shift** vertically by $b$. This follows the order you would use to calculate the output.",
+      "hint": "Think about how you would calculate the output.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uich8e",
+      "kind": "example",
+      "front": "The point $(2,3)$ lies on $y=f(x)$. Find its image on $y=2f(x-1)+4$.",
+      "back": "$(3,10)$. The shift right gives $x=3$, the vertical stretch gives $y=2\\times3=6$, and the shift up gives $y=10$.",
+      "hint": "Apply the steps in order.",
+      "sectionId": "s5"
+    }
+  ]
+}

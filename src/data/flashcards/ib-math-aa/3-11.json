@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-11",
+  "topicCode": "3.11",
+  "topicName": "Symmetry of trig graphs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:31.404Z",
+  "cards": [
+    {
+      "id": "0ik6nvp",
+      "kind": "formula",
+      "front": "What are $\\sin(\\pi-x)$ and $\\cos(\\pi-x)$ in terms of $\\sin x$ and $\\cos x$?",
+      "back": "$\\sin(\\pi-x)=\\sin x$ and $\\cos(\\pi-x)=-\\cos x$. The angles $x$ and $\\pi-x$ are **mirror images** across the vertical axis, so they share a sine.",
+      "hint": "Think of reflecting the angle across the vertical axis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0a39856",
+      "kind": "process",
+      "front": "How do you find every solution of $\\sin x=k$ in a given range?",
+      "back": "Use the calculator to get the first angle $x$, then find the second as $\\pi-x$. Add or subtract whole **periods** ($2\\pi$) until every angle in the range is listed.",
+      "hint": "Start with the calculator value.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xyk7hp",
+      "kind": "term",
+      "front": "What is an even function?",
+      "back": "An **even function** satisfies $f(-x)=f(x)$ for every $x$, so its graph is a mirror image across the y-axis.",
+      "hint": "Compare the values at $x$ and $-x$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eqylva",
+      "kind": "term",
+      "front": "What is the period of a function?",
+      "back": "The **period** is the smallest positive $p$ with $f(x+p)=f(x)$ for all $x$. Sine and cosine have period $2\\pi$; tangent has period $\\pi$.",
+      "hint": "It is the length of one full cycle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06sm1g9",
+      "kind": "formula",
+      "front": "Which of sine, cosine and tangent are odd, and which is even?",
+      "back": "**Cosine** is even: $\\cos(-x)=\\cos x$. Sine and tangent are odd: $\\sin(-x)=-\\sin x$ and $\\tan(-x)=-\\tan x$.",
+      "hint": "Check each rule with $-x$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tglxh7",
+      "kind": "formula",
+      "front": "What are $\\sin(\\pi+x)$, $\\cos(\\pi+x)$ and $\\tan(\\pi+x)$ in terms of $x$?",
+      "back": "$\\sin(\\pi+x)=-\\sin x$, $\\cos(\\pi+x)=-\\cos x$ and $\\tan(\\pi+x)=\\tan x$.",
+      "hint": "Add $\\pi$ to the angle and compare signs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sx2cpv",
+      "kind": "mistake",
+      "front": "Is $\\sin x+\\cos x$ an odd function, an even function, or neither?",
+      "back": "**Neither.** Sine is odd and cosine is even, but their sum has no such symmetry. Most functions are neither even nor odd.",
+      "hint": "Test $f(-x)$ against $f(x)$ and $-f(x)$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qagmxg",
+      "kind": "example",
+      "front": "Given $\\sin20^{\\circ}=0.342$, what is $\\sin160^{\\circ}$?",
+      "back": "$0.342$. Since $160^{\\circ}=180^{\\circ}-20^{\\circ}$, we have $\\sin160^{\\circ}=\\sin20^{\\circ}$.",
+      "hint": "Write 160° as 180° minus a smaller angle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01hbthr",
+      "kind": "example",
+      "front": "Given $\\sin20^{\\circ}=0.342$, what is $\\sin(-20^{\\circ})$?",
+      "back": "$-0.342$. Sine is odd, so $\\sin(-20^{\\circ})=-\\sin20^{\\circ}$.",
+      "hint": "Which symmetry rule applies to sine?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qx1gki",
+      "kind": "example",
+      "front": "Solve $\\cos x=-0.3$ for $0\\le x\\le2\\pi$, giving answers to 3 significant figures in radians.",
+      "back": "$x\\approx1.88$ and $x\\approx4.41$. The first is $\\cos^{-1}(-0.3)=1.8755\\ldots$ and the second is $2\\pi-1.8755\\ldots=4.4077\\ldots$.",
+      "hint": "Use radian mode and keep extra digits until the end.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bm4t7y",
+      "kind": "mistake",
+      "front": "For $\\tan x=k$, which expression gives the second solution in range: $\\pi-x$ or $x+\\pi$?",
+      "back": "**$x+\\pi$.** The rule $\\pi-x$ belongs to sine, while tangent solutions are spaced exactly $\\pi$ apart because its period is $\\pi$.",
+      "hint": "Recall the period of tangent.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09h17jz",
+      "kind": "concept",
+      "front": "Where is sine positive and where is it negative between $0$ and $2\\pi$?",
+      "back": "Sine is **positive** for angles between $0$ and $\\pi$, and negative between $\\pi$ and $2\\pi$. Symmetry predicts the sign of a value.",
+      "hint": "Picture the sine graph above and below the x-axis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10v6qdd",
+      "kind": "concept",
+      "front": "Why can you use the period to reduce a large angle before using symmetry?",
+      "back": "Adding or subtracting a whole **period** never changes the value, so you can bring the angle into $0\\le x<2\\pi$ first.",
+      "hint": "What does one full cycle do to the value?",
+      "sectionId": "s1"
+    }
+  ]
+}

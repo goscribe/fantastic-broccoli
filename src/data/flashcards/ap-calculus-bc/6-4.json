@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-4",
+  "topicCode": "6.4",
+  "topicName": "FTC and accumulation functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:40.174Z",
+  "cards": [
+    {
+      "id": "1soyi6f",
+      "kind": "concept",
+      "front": "If $A(x)=\\int_a^x f(t)\\,dt$ and $f$ is continuous, what is $A'(x)$?",
+      "back": "**$A'(x)=f(x)$**: the rate at which the accumulated total grows equals the integrand evaluated at the moving upper limit. This is the Fundamental Theorem of Calculus.",
+      "hint": "Think about adding a tiny slice of area at the endpoint.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xx8j14",
+      "kind": "concept",
+      "front": "When $f$ is a rate, what does $\\int_a^x f(t)\\,dt$ measure?",
+      "back": "The **net change** from $a$ to $x$, found as signed area. Area above the axis adds to the total, and area below the axis subtracts from it.",
+      "hint": "Area below the horizontal axis counts as negative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0edhyth",
+      "kind": "concept",
+      "front": "How can the theorem evaluate $\\int_a^b f(x)\\,dx$ without finding each region's area separately?",
+      "back": "Find an antiderivative $F$ with $F'=f$, then compute **$F(b)-F(a)$**. Any added constant cancels in this difference.",
+      "hint": "Consider what the antiderivative gives you at each limit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ckrss2",
+      "kind": "term",
+      "front": "What is an accumulation function?",
+      "back": "A function $A(x)=\\int_a^x f(t)\\,dt$ with a **fixed** lower limit $a$ and a moving upper limit $x$. It gives the signed area from $a$ to $x$.",
+      "hint": "Which limit stays put, and which one moves?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cbnvhq",
+      "kind": "formula",
+      "front": "In $A'(x)=f(x)$ for $A(x)=\\int_a^x f(t)\\,dt$, what do $A$, $f$, and $x$ stand for?",
+      "back": "$A$ is the accumulated total, $f$ is the rate being accumulated, and $x$ is the moving upper limit where the rate is read.",
+      "hint": "Ask which symbol is the total and which is the rate.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ovhvbq",
+      "kind": "mistake",
+      "front": "Why is it wrong to say $A'(x)=A(x)$ for $A(x)=\\int_a^x f(t)\\,dt$?",
+      "back": "The **derivative** of accumulation equals the integrand at the upper limit, $f(x)$. The total $A(x)$ and the rate $f(x)$ answer different questions.",
+      "hint": "Check what the integrand is at the upper limit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d91csj",
+      "kind": "formula",
+      "front": "What is the derivative of $B(x)=\\int_a^{g(x)} f(t)\\,dt$?",
+      "back": "$B'(x)=f(g(x))\\,g'(x)$. Evaluate the integrand at $g(x)$, then multiply by the **chain rule** factor $g'(x)$.",
+      "hint": "Two steps: substitute the upper limit, then multiply by its derivative.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09gmqzo",
+      "kind": "example",
+      "front": "Find the derivative of $B(x)=\\int_1^{x^2}(t^3+1)\\,dt$.",
+      "back": "$B'(x)=(x^6+1)(2x)$. Substitute $x^2$ into $t^3+1$ to get $(x^2)^3+1$, then multiply by $2x$.",
+      "hint": "The upper limit is $x^2$, not $x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oig9y9",
+      "kind": "process",
+      "front": "When both limits of an integral depend on $x$, how do you differentiate it?",
+      "back": "Treat each limit's contribution separately, then **subtract** the lower-limit contribution from the upper-limit one. A fixed lower limit contributes nothing.",
+      "hint": "A constant lower limit gives zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03n5jhx",
+      "kind": "process",
+      "front": "What steps evaluate $\\int_1^3(2t+1)\\,dt$ using an antiderivative?",
+      "back": "1) Find $F$ with $F'=f$, such as $F(t)=t^2+t$. 2) Compute $F(3)-F(1)$. 3) Simplify: $12-2=10$.",
+      "hint": "Find the antiderivative before you substitute any limits.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1d3vy6a",
+      "kind": "example",
+      "front": "For $A(x)=\\int_1^x(2t+1)\\,dt$, what are $A(3)$ and $A'(3)$?",
+      "back": "$A(3)=10$ is the accumulated total, and $A'(3)=7$ is its rate, since $A'(3)=f(3)=2(3)+1=7$.",
+      "hint": "The total and the rate answer different questions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tg7w5l",
+      "kind": "concept",
+      "front": "Can $A'(x)$ be negative while $A(x)$ is still positive?",
+      "back": "**Yes.** Since $A'(x)=f(x)$, the derivative is negative wherever $f(x)<0$. The total can stay positive while it is decreasing.",
+      "hint": "Think of a rate that turns negative.",
+      "sectionId": "s2"
+    }
+  ]
+}

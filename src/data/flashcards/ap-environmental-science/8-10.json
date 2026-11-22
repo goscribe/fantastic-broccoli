@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-10",
+  "topicCode": "8.10",
+  "topicName": "Waste reduction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:20.936Z",
+  "cards": [
+    {
+      "id": "1orqds1",
+      "kind": "concept",
+      "front": "Why should waste reduction and reuse rank above recycling in a waste strategy?",
+      "back": "**Source reduction** and reuse stop waste being created, so nothing needs collecting or processing. Recycling still uses energy for collection and processing.",
+      "hint": "Think about which waste is cheapest to manage.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tg4qne",
+      "kind": "concept",
+      "front": "What does recycling save compared with making products from raw materials?",
+      "back": "It generally uses **less energy**, reduces mining and logging, and keeps material out of landfills, saving landfill space.",
+      "hint": "Compare recycled metal, paper, or glass with raw materials.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p5xz4r",
+      "kind": "concept",
+      "front": "How does composting benefit both soil and landfills?",
+      "back": "Compost adds **nutrients** and organic matter that improve soil structure and water holding. It also keeps organic waste out of landfills, where buried waste releases more methane.",
+      "hint": "Think about what compost gives the soil and what happens to food scraps in a landfill.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1x402po",
+      "kind": "term",
+      "front": "What is source reduction?",
+      "back": "Any change in product design, manufacturing, or purchasing that reduces the amount or **toxicity** of waste produced.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o5e38f",
+      "kind": "term",
+      "front": "What is composting?",
+      "back": "The **decomposition** of organic waste by microorganisms in the presence of oxygen, producing a nutrient-rich soil amendment called compost.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wv4bds",
+      "kind": "term",
+      "front": "What is the diversion rate?",
+      "back": "The **percentage** of total waste kept out of landfills and incinerators by reuse, recycling, and composting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0eeplfl",
+      "kind": "formula",
+      "front": "Which equation gives the daily mass of waste sent to disposal from total waste and the diversion rate?",
+      "back": "$\\text{Disposal} = \\text{Total waste} \\times (1 - d)$, where $d$ is the diversion rate as a decimal, in $\\text{kg per day}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a8jkvo",
+      "kind": "example",
+      "front": "A town of 20,000 people makes 2.0 kg per person per day and has a 30 percent diversion rate. How much waste goes to disposal each day?",
+      "back": "**$28{,}000\\,\\text{kg}$ per day**. Total waste is $40{,}000\\,\\text{kg}$ per day, and 70 percent of it goes to disposal.",
+      "hint": "Find the total waste first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p9caok",
+      "kind": "mistake",
+      "front": "Why should recycling not be the first choice for managing waste?",
+      "back": "Recycling still **uses energy** for collection and processing, so reducing and reusing come first.",
+      "hint": "Think about the order of options in a waste strategy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wm0dxv",
+      "kind": "mistake",
+      "front": "Which meaning of 'consumer' applies to waste reduction?",
+      "back": "A **buyer** of goods. The ecology meaning, an organism that eats other organisms, does not apply in this topic.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vy2niw",
+      "kind": "concept",
+      "front": "Why do everyday purchases influence how much waste is produced?",
+      "back": "Buyers shape waste through what they buy, how long they use it, and how they discard it. When many shift demand, producers often change packaging and design.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vbl2tk",
+      "kind": "concept",
+      "front": "How does pay-as-you-throw pricing reduce household waste?",
+      "back": "It charges households by the amount of trash they set out, giving them a clear **reason to change habits** and produce less.",
+      "hint": "Think about what the household pays for.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1s3syzq",
+      "kind": "concept",
+      "front": "What are two limits on waste reduction policies?",
+      "back": "Recycling markets can weaken when demand falls, and contaminated loads may be rejected. Convenience also matters, since people recycle more when collection is easy.",
+      "hint": "Think about what happens to materials after collection.",
+      "sectionId": "s6"
+    }
+  ]
+}

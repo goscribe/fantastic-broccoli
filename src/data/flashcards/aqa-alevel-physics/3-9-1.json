@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-9-1",
+  "topicCode": "3.9.1",
+  "topicName": "Telescopes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:13.047Z",
+  "cards": [
+    {
+      "id": "1e15and",
+      "kind": "concept",
+      "front": "How does a refracting telescope make a very distant star appear larger?",
+      "back": "The **objective lens**, with a long focal length, forms a real image of the star at its focal point. The **eyepiece lens**, with a short focal length, then acts as a magnifying glass on that image.",
+      "hint": "Think about where parallel light from a distant star comes to a focus.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jhaetp",
+      "kind": "formula",
+      "front": "What is the angular magnification of a telescope in normal adjustment, and what does each symbol mean?",
+      "back": "$M=\\frac{f_o}{f_e}$, where $f_o$ is the objective focal length and $f_e$ the eyepiece focal length, both in the same unit. $M$ has no unit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cflfly",
+      "kind": "concept",
+      "front": "What limits the angular resolution of any telescope, however well it is made?",
+      "back": "**Diffraction** of light through the circular objective spreads each point source into a bright disc, so two sources blur together below $\\theta\\approx\\frac{\\lambda}{D}$, with $\\theta$ in radians.",
+      "hint": "Think about what happens to light passing through a circular opening.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08gqwyh",
+      "kind": "term",
+      "front": "What is the Rayleigh criterion?",
+      "back": "Two point sources are just **resolved** when the central maximum of one diffraction pattern lies on the first minimum of the other.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1f8pbdx",
+      "kind": "concept",
+      "front": "Why do most large telescopes use a mirror rather than a lens as the objective?",
+      "back": "A large lens is heavy, and glass sags when held only at its edge. A **mirror** can be supported across its whole back, so it can be made much larger.",
+      "hint": "Consider how each objective is held and how heavy it is.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gez50b",
+      "kind": "term",
+      "front": "What is chromatic aberration?",
+      "back": "**Chromatic aberration** is coloured blurring of an image because a lens bends each colour by a different amount. A mirror reflects all colours equally, so it has none.",
+      "hint": "Think about what a lens does to white light.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d0ruij",
+      "kind": "term",
+      "front": "What is a Cassegrain arrangement?",
+      "back": "A reflecting design in which a convex **secondary mirror** reflects light back through a hole in the concave primary mirror, where the eyepiece sits.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nhzcts",
+      "kind": "concept",
+      "front": "How does the collecting power of a telescope depend on the diameter $D$ of its objective?",
+      "back": "It is proportional to $D^2$, because it depends on the **area** of the objective. Doubling $D$ gives four times the collecting power.",
+      "hint": "Think about the shape of the objective opening.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rbaaxx",
+      "kind": "example",
+      "front": "An objective of focal length $1.50\\,\\mathrm{m}$ and an eyepiece of focal length $3.0\\,\\mathrm{cm}$: what is the lens separation in normal adjustment?",
+      "back": "$f_o+f_e=1.50\\,\\mathrm{m}+0.030\\,\\mathrm{m}=1.53\\,\\mathrm{m}$. In normal adjustment the separation is the sum of the two focal lengths.",
+      "hint": "Convert the eyepiece focal length to metres first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11f9fog",
+      "kind": "example",
+      "front": "Calculate the angular resolution of an optical telescope with a $2.4\\,\\mathrm{m}$ diameter objective, for light of wavelength $550\\,\\mathrm{nm}$.",
+      "back": "$\\theta\\approx\\frac{5.50\\times10^{-7}\\,\\mathrm{m}}{2.4\\,\\mathrm{m}}=2.3\\times10^{-7}\\,\\mathrm{rad}$",
+      "hint": "Convert the wavelength from nanometres to metres first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ey9h93",
+      "kind": "mistake",
+      "front": "Common mistake: 'More magnification always gives better resolution.' Why is this wrong?",
+      "back": "Once **diffraction** blurs two sources together, a stronger eyepiece only enlarges the blur. Magnification does not change the angular resolution set by $D$ and $\\lambda$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bl46xd",
+      "kind": "concept",
+      "front": "Why must a radio telescope dish be so much larger than an optical telescope to achieve the same angular resolution?",
+      "back": "Radio waves have much longer wavelengths. Since $\\theta\\approx\\frac{\\lambda}{D}$, a larger $\\lambda$ needs a larger $D$ to give the same small $\\theta$.",
+      "hint": "Look at the formula linking angle, wavelength and diameter.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0rd0dtx",
+      "kind": "term",
+      "front": "What form does the output of a radio telescope take?",
+      "back": "A **map** of radio intensity across the sky, produced after the receiver signal is amplified and processed by a computer. It is not a picture seen by eye.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0wysgzy",
+      "kind": "concept",
+      "front": "Why are telescopes for infrared, ultraviolet and X-ray radiation carried on satellites?",
+      "back": "The atmosphere **absorbs** most of these radiations. A satellite above the air also avoids blurring from moving air, so it can reach its full resolution.",
+      "hint": "Think about what the air does to these radiations.",
+      "sectionId": "s6"
+    }
+  ]
+}

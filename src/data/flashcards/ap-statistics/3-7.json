@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-7",
+  "topicCode": "3.7",
+  "topicName": "Carrying out a test for a proportion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:21.586Z",
+  "cards": [
+    {
+      "id": "06ulruh",
+      "kind": "process",
+      "front": "What are the four steps of a test for a proportion, in order?",
+      "back": "**State** the hypotheses with p defined in context, **check** the conditions for a normal model, **calculate** the test statistic and p-value, then **compare** the p-value with α and conclude in context.",
+      "hint": "Think about the order a careful test runs in.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c5h8qz",
+      "kind": "concept",
+      "front": "When do you reject the null hypothesis?",
+      "back": "When the **p-value** is at or below α. The data then give convincing evidence for the alternative. If the p-value is above α, you fail to reject H0.",
+      "hint": "Compare two numbers.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "048ez8x",
+      "kind": "formula",
+      "front": "What is the z statistic for a test of a proportion, and what does each symbol mean?",
+      "back": "$z=\\frac{\\hat{p}-p_0}{\\sqrt{\\frac{p_0(1-p_0)}{n}}}$, where $\\hat{p}$ is the sample proportion, $p_0$ the null value, and $n$ the sample size. z counts **standard deviations** from the null value.",
+      "hint": "The numerator is the gap; the denominator is the typical spread.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03xo75z",
+      "kind": "concept",
+      "front": "Why does the denominator of the z statistic use p0 instead of the sample proportion?",
+      "back": "Because the test **assumes the null hypothesis is true**, so the sampling variation is calculated using the claimed value $p_0$.",
+      "hint": "What does the test assume?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "016s721",
+      "kind": "term",
+      "front": "What is a test statistic?",
+      "back": "A **test statistic** is a value computed from sample data that measures how far the result lies from the null hypothesis value. For a proportion it is a z-score.",
+      "hint": "Think of it as one number summarizing the sample.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0y06pb6",
+      "kind": "example",
+      "front": "A company claims 30% of its 5,000 customers renew. In a random sample of 200, 48 renewed. For Ha: p < 0.30, what are z and the p-value?",
+      "back": "$z \\approx -1.85$ and the **p-value** is about 0.032, the area below z in the lower tail.",
+      "hint": "Find the sample proportion first, then the standard deviation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kuq410",
+      "kind": "process",
+      "front": "What three parts should a complete conclusion in context contain?",
+      "back": "**Compare** the p-value with α, **decide** whether to reject H0, and **conclude** about the population proportion named in the claim.",
+      "hint": "Think about what one full sentence must link together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a1uvlv",
+      "kind": "mistake",
+      "front": "A student with a large p-value writes: We accept the null hypothesis. What is wrong?",
+      "back": "Never say **accept** H0. A large p-value means the data fail to reject the null, not that it is true. The data are only consistent with it.",
+      "hint": "Has the null been proven?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0r5wbmo",
+      "kind": "mistake",
+      "front": "A student writes that the sample proportion of renewals was 0.24, which is less than 0.30. Why does this earn no credit as a conclusion?",
+      "back": "It describes the **sample**, not the population. A conclusion must name the population and link the p-value, α, and the decision to the claim.",
+      "hint": "Who is the claim about?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qhwzua",
+      "kind": "mistake",
+      "front": "A test of Ha: p ≠ 0.50 gives a p-value of 0.20. A student says the proportion equals 0.50. What is wrong?",
+      "back": "Failing to reject does not **prove** p = 0.50. The correct statement is that there is not convincing evidence the proportion differs from 0.50.",
+      "hint": "Failing to reject is not proof.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0yk1uqr",
+      "kind": "example",
+      "front": "A random sample of 150 (fewer than 10% of the population) has 57 who prefer a new product. Find z for H0: p = 0.40.",
+      "back": "$z = -0.5$, since $\\hat{p}=0.38$ and the **standard deviation** is 0.04, found using $p_0 = 0.40$.",
+      "hint": "Compute the sample proportion, then the standard deviation using p0.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jmc0t2",
+      "kind": "concept",
+      "front": "What does rejecting H0 tell you, and what does it not tell you?",
+      "back": "It means the data are **unlikely** under the null, giving convincing evidence for Ha. It does not prove Ha, and a small chance remains that random sampling misled you.",
+      "hint": "Think about what evidence does and does not prove.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1rbd1t2",
+      "kind": "concept",
+      "front": "How is the p-value found for a two-sided alternative such as Ha: p ≠ p0?",
+      "back": "Find the one-tail area beyond z, then **double** it. A one-sided alternative uses only the tail in the direction of Ha.",
+      "hint": "Which tails count?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vitexk",
+      "kind": "term",
+      "front": "What does it mean to fail to reject the null hypothesis?",
+      "back": "The p-value is **above** α, so the data do not give convincing evidence against H0. It does not mean H0 is true.",
+      "hint": "Compare the p-value with α.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-6",
+  "topicCode": "5.6",
+  "topicName": "Differentiation rules",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:56.825Z",
+  "cards": [
+    {
+      "id": "0r71jj3",
+      "kind": "formula",
+      "front": "What is the product rule for $y=uv$, where $u$ and $v$ are functions of $x$?",
+      "back": "$\\frac{dy}{dx}=u\\frac{dv}{dx}+v\\frac{du}{dx}$. Each term is **a function times the derivative of the other**, and the two terms are added.",
+      "hint": "The two terms are added, not multiplied.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jt3exy",
+      "kind": "formula",
+      "front": "What is the quotient rule for $y=\\frac{u}{v}$?",
+      "back": "$\\frac{dy}{dx}=\\frac{v\\frac{du}{dx}-u\\frac{dv}{dx}}{v^2}$. The **numerator is a subtraction**, so the order of its two terms matters.",
+      "hint": "Which term comes first in the subtraction, and what sits on the bottom?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1g363gt",
+      "kind": "formula",
+      "front": "What does the chain rule say for $y=f(u)$ with $u=g(x)$?",
+      "back": "$\\frac{dy}{dx}=\\frac{dy}{du}\\times\\frac{du}{dx}$. You **multiply** the derivative of the outer function by the derivative of the inner function.",
+      "hint": "Two derivatives are linked by a single operation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qvr2vz",
+      "kind": "concept",
+      "front": "Why does differentiating $(3x^2+1)^4$ need the chain rule rather than a simple power rule?",
+      "back": "Because it is a **composite function**, with one function fed into another. Differentiate the outer power, leave the inner expression unchanged, then multiply by the inner derivative.",
+      "hint": "Count how many layers the function has.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jahh6c",
+      "kind": "term",
+      "front": "What is a quotient?",
+      "back": "An expression formed by **dividing one function by another**, defined only where the divisor is not zero.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10dcdjc",
+      "kind": "term",
+      "front": "What is a composite function?",
+      "back": "A function where the **output of one function is used as the input of another**, such as $(3x^2+1)^4$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vw24xr",
+      "kind": "mistake",
+      "front": "Why is the derivative of $x\\times x$ not found by multiplying $1\\times1$?",
+      "back": "The derivative of a product is **not** the product of the derivatives. Since $x\\times x=x^2$, the correct derivative is $2x$.",
+      "hint": "Compare $x\\times x$ with $x^2$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1a9iisv",
+      "kind": "example",
+      "front": "Differentiate $y=x^2\\sin x$ using the product rule.",
+      "back": "$\\frac{dy}{dx}=x^2\\cos x+2x\\sin x$. Let $u=x^2$ and $v=\\sin x$, then substitute into the product rule.",
+      "hint": "Identify u and v first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sxn7el",
+      "kind": "mistake",
+      "front": "A student writes the quotient rule numerator as $u\\frac{dv}{dx}-v\\frac{du}{dx}$. What is wrong?",
+      "back": "The order is reversed. The numerator should be $v\\frac{du}{dx}-u\\frac{dv}{dx}$, because the **order of the subtraction matters**.",
+      "hint": "Check which term starts the subtraction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07sfp4p",
+      "kind": "example",
+      "front": "Differentiate $y=(3x^2+1)^4$ using the chain rule.",
+      "back": "$\\frac{dy}{dx}=24x(3x^2+1)^3$. This comes from $4(3x^2+1)^3\\times6x$.",
+      "hint": "Outer power first, then multiply by the derivative of the inside.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h0sxjw",
+      "kind": "process",
+      "front": "What is the method for differentiating $y=x(2x+1)^3$, which mixes two rules?",
+      "back": "First identify the **outermost operation**, here a product, and use that rule. Then find inner derivatives separately, such as the chain rule for $(2x+1)^3$, and factorise at the end.",
+      "hint": "Decide the plan before expanding anything.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04uofxc",
+      "kind": "mistake",
+      "front": "When finding a gradient, why is substituting $x$ into the original function wrong?",
+      "back": "The original function gives a **height**, not a gradient. Substitute $x$ into the derivative to get the gradient.",
+      "hint": "What does y tell you on a graph?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "04rti10",
+      "kind": "example",
+      "front": "Find the gradient of $y=\\frac{x^2}{x+1}$ at $x=1$, given $\\frac{dy}{dx}=\\frac{x^2+2x}{(x+1)^2}$.",
+      "back": "$\\frac{3}{4}=0.75$. Substitute $x=1$ into the **derivative**: $\\frac{1+2}{4}$.",
+      "hint": "Substitute into the derivative only.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1mdnfl9",
+      "kind": "concept",
+      "front": "What does a positive gradient at a point tell you about the graph?",
+      "back": "The graph **rises** as $x$ increases at that point.",
+      "sectionId": "s5"
+    }
+  ]
+}

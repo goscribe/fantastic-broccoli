@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-15",
+  "topicCode": "2.15",
+  "topicName": "Genetic screening",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:16.084Z",
+  "cards": [
+    {
+      "id": "03ih5yf",
+      "kind": "term",
+      "front": "What is genetic screening?",
+      "back": "**Genetic screening** is the testing of people, fetuses or embryos for alleles that cause, or raise the risk of, a genetic disorder.",
+      "hint": "Think about what is being tested for, and who can be tested at different stages of life.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07wvxf6",
+      "kind": "term",
+      "front": "What is a carrier of a genetic disorder?",
+      "back": "A **carrier** has one copy of a recessive disease-causing allele and usually shows no symptoms. Carrier status shows the allele is present, not that the disorder will develop.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hcneop",
+      "kind": "concept",
+      "front": "How does the band pattern on a gel show whether a person is a carrier or affected?",
+      "back": "A carrier has one band for each allele, normal and faulty. An affected person has only the band for the faulty allele.",
+      "hint": "Think about how many copies of each allele a carrier has compared with an affected person.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ebacgv",
+      "kind": "concept",
+      "front": "Why do amniocentesis and chorionic villus sampling carry a risk?",
+      "back": "Both are **invasive** methods, so each carries a small risk of miscarriage. Parents must weigh this risk against the value of the result.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1q20zlq",
+      "kind": "term",
+      "front": "What is pre-implantation genetic diagnosis?",
+      "back": "**Pre-implantation genetic diagnosis** tests one or two cells from embryos made by IVF. Only an embryo without the disorder is placed in the womb.",
+      "hint": "Think about when in the process the testing happens, relative to IVF.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jrawth",
+      "kind": "concept",
+      "front": "Why does a positive result from fetal DNA in a mother's blood usually need confirming?",
+      "back": "The blood test works as a **screening test**, not a final diagnosis, so a positive result is confirmed by amniocentesis or chorionic villus sampling.",
+      "hint": "Compare what a screening test does with what a diagnostic test does.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d0rplo",
+      "kind": "process",
+      "front": "How does the polymerase chain reaction make many copies of a chosen DNA region?",
+      "back": "The sample is repeatedly heated and cooled, using **DNA polymerase** to copy the chosen region each cycle, so enough DNA is available to test.",
+      "hint": "Think about why a sample often holds very little DNA.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zexs8r",
+      "kind": "process",
+      "front": "How does gel electrophoresis separate DNA fragments by size?",
+      "back": "DNA is negatively charged, so fragments move through the gel towards the positive electrode. Shorter fragments travel further, so the fragments separate into bands by size.",
+      "hint": "Think about the charge on DNA and which electrode it is attracted to.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bpv78u",
+      "kind": "term",
+      "front": "What is a DNA probe?",
+      "back": "A **DNA probe** is a short, labelled, single-stranded DNA sequence that binds to a complementary sequence in a sample, so the allele can be detected by its label.",
+      "hint": "Think about how the probe finds its match in the sample.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rxe44j",
+      "kind": "mistake",
+      "front": "A student says a DNA probe cuts out the faulty allele. What is wrong with this?",
+      "back": "A probe does not cut or change DNA. It only binds to a matching sequence by base pairing, so the allele can be detected.",
+      "hint": "Think about what a probe does compared with an enzyme that cuts DNA.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1w6br2d",
+      "kind": "example",
+      "front": "Two carrier parents have a child. What is the probability the child has the recessive disorder?",
+      "back": "$\\frac{1}{4}$, or 25%. Each parent passes on the faulty allele with probability $\\frac{1}{2}$, so $\\frac{1}{2}\\times\\frac{1}{2}=\\frac{1}{4}$.",
+      "hint": "Think about the chance each parent passes on the faulty allele.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0svqlrm",
+      "kind": "concept",
+      "front": "Why can a false positive or a false negative cause harm?",
+      "back": "A **false positive** reports a faulty allele that is not there, causing needless worry. A **false negative** misses a faulty allele that is present, giving false reassurance.",
+      "hint": "Think about what a wrong yes or a wrong no would lead a person to do.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1w028fn",
+      "kind": "concept",
+      "front": "Why might a negative screening result not rule out a genetic disorder?",
+      "back": "A test looks only for the alleles it was designed to find. Other faulty alleles that cause the same disorder may be missed.",
+      "hint": "Think about what the test was built to look for.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ezb32u",
+      "kind": "term",
+      "front": "What is genetic counselling?",
+      "back": "**Genetic counselling** is advice from a trained adviser who explains test results, inheritance risks and options, without directing the person's decision.",
+      "hint": "Think about the adviser's role: helping people decide, or deciding for them?",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "5-5",
+  "topicCode": "5.5",
+  "topicName": "Candidates test",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:19.567Z",
+  "cards": [
+    {
+      "id": "1bn12j1",
+      "kind": "concept",
+      "front": "Where can an absolute extreme of a continuous function on a closed interval occur?",
+      "back": "Only at **candidates**: both endpoints and every interior critical point, where $f'(x)=0$ or $f'(x)$ is undefined. Candidates are possible locations, not guaranteed extrema.",
+      "hint": "Think about which inputs you must always list.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14xxgaz",
+      "kind": "mistake",
+      "front": "Why is checking only the points where $f'(x)=0$ not enough?",
+      "back": "An absolute extreme can occur at an **endpoint** or at an interior point where the derivative is undefined. Those inputs must be checked too.",
+      "hint": "Which inputs does the derivative-zero check skip?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07fzb3k",
+      "kind": "process",
+      "front": "What are the steps of the candidates test?",
+      "back": "First find the endpoints. Then solve $f'(x)=0$ inside the interval and add interior inputs where $f'$ is undefined but $f$ is defined. Evaluate the original $f$ at every candidate, then compare outputs.",
+      "hint": "Start with the interval, then the derivative, then the function."
+    },
+    {
+      "id": "12u3u04",
+      "kind": "term",
+      "front": "What is a closed interval?",
+      "back": "A **closed interval** $[a,b]$ includes both endpoints $a$ and $b$. This is why a continuous function on it always has an absolute maximum and minimum.",
+      "hint": "Check whether the boundary values are included.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0egyf2i",
+      "kind": "term",
+      "front": "What are the endpoints of an interval?",
+      "back": "The **endpoints** are the two boundary inputs included in a closed interval. They are always candidates, even when the graph seems to rise or fall across the whole interval.",
+      "hint": "They sit at the two edges of $[a,b]$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18ohb6w",
+      "kind": "term",
+      "front": "When is a derivative undefined at an interior input?",
+      "back": "A derivative is **undefined** at an input where the function has no derivative, such as a sharp corner. For $f(x)=|x|$, this happens at $x=0$.",
+      "hint": "Think of a corner on the graph.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lj74a5",
+      "kind": "example",
+      "front": "Find the absolute extrema of $f(x)=x^2-2x$ on $[-1,4]$, with their locations.",
+      "back": "The candidates are $-1$, $1$, and $4$, with $f(-1)=3$, $f(1)=-1$, and $f(4)=8$. The **absolute minimum** is $-1$ at $x=1$, and the **absolute maximum** is $8$ at $x=4$.",
+      "hint": "Solve $f'(x)=2x-2=0$ for the interior candidate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uorr4o",
+      "kind": "example",
+      "front": "Find the absolute extrema of $f(x)=|x|$ on $[-2,1]$, with their locations.",
+      "back": "The candidates are $-2$, $0$, and $1$, with outputs $2$, $0$, and $1$. The **absolute maximum** is $2$ at $x=-2$, and the **absolute minimum** is $0$ at $x=0$.",
+      "hint": "Include the corner point where the derivative is undefined.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01prhi6",
+      "kind": "mistake",
+      "front": "Why must you substitute into the original function, not its derivative?",
+      "back": "The **derivative** only helps locate candidates. Its values do not decide the absolute extrema, so compare the outputs of the original $f$ at each candidate.",
+      "hint": "Which function gives the output being maximized?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0v4pzvh",
+      "kind": "term",
+      "front": "What is the absolute maximum value?",
+      "back": "The **absolute maximum value** is the greatest function output anywhere on the stated interval. Report every input where it occurs, since candidates can tie.",
+      "hint": "Compare the outputs of all candidates.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ojsbxb",
+      "kind": "term",
+      "front": "What is the absolute minimum value?",
+      "back": "The **absolute minimum value** is the least function output anywhere on the stated interval. Report every input where it occurs, since candidates can tie.",
+      "hint": "Look for the smallest output among the candidates.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1w5imca",
+      "kind": "example",
+      "front": "Find the absolute maximum and minimum of $f(x)=x^2$ on $[-1,1]$, with their locations.",
+      "back": "The **absolute maximum** is $1$, occurring at both $x=-1$ and $x=1$. The **absolute minimum** is $0$ at $x=0$.",
+      "hint": "Two different candidates can share the maximum value.",
+      "sectionId": "s4"
+    }
+  ]
+}

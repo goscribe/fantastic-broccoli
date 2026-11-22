@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "s5",
+  "topicCode": "S5",
+  "topicName": "Hypothesis testing",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:51.839Z",
+  "cards": [
+    {
+      "id": "1jfdv3j",
+      "kind": "process",
+      "front": "How do you decide whether to reject $H_0$ in a binomial test?",
+      "back": "Assume $H_0$ is true and find the probability of a result at least as extreme as the one observed. If this **probability is no more than the significance level**, reject $H_0$; otherwise do not reject $H_0$.",
+      "hint": "Start by deciding what you assume to be true before you calculate anything.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18aidun",
+      "kind": "concept",
+      "front": "What decides whether the alternative hypothesis $H_1$ is one-tailed or two-tailed?",
+      "back": "The **wording of the problem**, not the sample result. 'Fewer' or 'decreased' gives $p<p_0$, 'more' or 'increased' gives $p>p_0$, and 'different', 'biased' or 'changed' gives $p\\ne p_0$.",
+      "hint": "Think about what the situation says you are looking for, before you see any data.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m2e5fc",
+      "kind": "term",
+      "front": "What is the significance level of a test?",
+      "back": "The **significance level** is a probability, often 5%, chosen before the data are seen. A smaller significance level needs stronger evidence before $H_0$ is rejected.",
+      "hint": "Think about how unlikely a result must be before you act on it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09rxksn",
+      "kind": "term",
+      "front": "What is the null hypothesis $H_0$?",
+      "back": "The **null hypothesis** $H_0$ is the claim that a parameter takes one exact value, written with an equals sign, such as $H_0:p=p_0$. It is assumed true when probabilities are calculated.",
+      "hint": "Think about the default claim that the test is checking.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gat0o4",
+      "kind": "term",
+      "front": "What is the test statistic in a binomial hypothesis test?",
+      "back": "The **test statistic** is the number of successes $X$ in the sample. Under $H_0$ it follows $B(n,p_0)$.",
+      "hint": "Think about what you count from the sample.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16rpz2u",
+      "kind": "example",
+      "front": "A shop claims $p=0.3$ and the owner thinks $p<0.3$. In a sample of 20 visitors, 2 buy. At the 5% level, what is the decision?",
+      "back": "$P(X\\le2)=0.0355<0.05$, so **reject** $H_0$. There is sufficient evidence at the 5% level that the proportion of visitors who buy is less than 0.3.",
+      "hint": "Under $H_0$, what is the distribution of $X$?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15a1d4s",
+      "kind": "mistake",
+      "front": "A coin is described as 'biased', with no direction given. Why is a one-tailed test the wrong choice?",
+      "back": "The word 'biased' gives no direction, so use a **two-tailed** test with $H_1:p\\ne p_0$. A one-tailed test is only correct when the problem says which way the bias goes.",
+      "hint": "Compare this wording with words like 'fewer' or 'more'.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tab7dc",
+      "kind": "term",
+      "front": "What is the critical region of a test?",
+      "back": "The **critical region** is the set of values of the test statistic for which the null hypothesis is rejected. It depends only on $n$, $p_0$, the tail and the significance level.",
+      "hint": "Think about listing every outcome that would lead you to reject $H_0$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0l5cg4d",
+      "kind": "term",
+      "front": "What is a critical value in a hypothesis test?",
+      "back": "The **critical value** is the boundary value of the test statistic at the edge of the critical region. It lies inside the critical region.",
+      "hint": "Think about where the critical region ends.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w0owzw",
+      "kind": "example",
+      "front": "For a lower-tail test with $X\\sim B(10,0.5)$ and critical region $X\\le1$, what is the actual significance level?",
+      "back": "**$0.0107$**, or 1.07%, not 5%. It is $P(X\\le1)$ when $H_0$ is true.",
+      "hint": "Work out the probability of landing in the critical region when $H_0$ is true.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1erq4iz",
+      "kind": "process",
+      "front": "What are the four steps of a complete hypothesis test?",
+      "back": "Write $H_0$ and $H_1$ in terms of $p$; state the distribution of $X$ under $H_0$; compare the probability with the significance level; then write a conclusion in the context of the problem.",
+      "hint": "Start with what you write before any probabilities.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0q1gwag",
+      "kind": "example",
+      "front": "A coin is spun 10 times and lands heads 9 times. In a two-tailed test at 5%, what value should $P(X\\ge9)=0.0107$ be compared with, and what is the decision?",
+      "back": "Compare with **0.025**, since each tail gets 2.5%. Because $0.0107<0.025$, reject $H_0$: sufficient evidence at the 5% level that the coin is biased.",
+      "hint": "Think about how the 5% is shared between the two tails.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vh2h9j",
+      "kind": "mistake",
+      "front": "Why is it wrong to write that $H_0$ is proved true when the test does not reject it?",
+      "back": "A test gives evidence, not proof. Not rejecting $H_0$ only shows the sample gives insufficient evidence against it, and the true value of $p$ may still differ from the claim.",
+      "sectionId": "s5"
+    }
+  ]
+}

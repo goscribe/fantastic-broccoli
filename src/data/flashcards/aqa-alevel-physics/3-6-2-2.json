@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-6-2-2",
+  "topicCode": "3.6.2.2",
+  "topicName": "Ideal gases",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:42.710Z",
+  "cards": [
+    {
+      "id": "186jjd5",
+      "kind": "term",
+      "front": "What is an ideal gas?",
+      "back": "An **ideal gas** is a model gas whose particles have negligible volume, exert no forces on each other except during collisions, and undergo only elastic collisions.",
+      "hint": "Think about which real-gas complications the model removes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cdk1a5",
+      "kind": "formula",
+      "front": "Which equation links the pressure, volume, amount and temperature of an ideal gas?",
+      "back": "$pV=nRT$, where $p$ is in $\\mathrm{Pa}$, $V$ is in $\\mathrm{m^3}$, $n$ is in $\\mathrm{mol}$, $T$ is in $\\mathrm{K}$ and $R=8.31\\,\\mathrm{J\\,K^{-1}\\,mol^{-1}}$.",
+      "hint": "Combine the pressure, volume and temperature laws with the amount of gas.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12xkdcd",
+      "kind": "mistake",
+      "front": "Why doesn't heating a gas from $20\\,^{\\circ}\\mathrm{C}$ to $40\\,^{\\circ}\\mathrm{C}$ double its pressure?",
+      "back": "Pressure is proportional to the **kelvin** temperature, not the Celsius value. Only doubling the temperature in kelvin doubles the pressure.",
+      "hint": "Which temperature scale does the pressure law use?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0be5det",
+      "kind": "formula",
+      "front": "What equation links the kelvin and Celsius temperature scales?",
+      "back": "$T=\\theta+273$, where $T$ is in $\\mathrm{K}$ and $\\theta$ is in $^{\\circ}\\mathrm{C}$. A change of $1\\,\\mathrm{K}$ equals a change of $1\\,^{\\circ}\\mathrm{C}$.",
+      "hint": "Kelvin and Celsius start counting from different zero points.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0absfs7",
+      "kind": "concept",
+      "front": "Why does the pressure of a gas in a sealed rigid container rise when it is heated?",
+      "back": "Heating makes the particles move faster. They hit the walls harder and more often, so the pressure rises.",
+      "hint": "Think about what temperature tells you about particle motion.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ap02o9",
+      "kind": "term",
+      "front": "What is absolute zero?",
+      "back": "**Absolute zero** is the lowest possible temperature, $0\\,\\mathrm{K}$, or about $-273\\,^{\\circ}\\mathrm{C}$. Particles cannot have less energy than this minimum.",
+      "hint": "Consider why temperature cannot fall without limit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pbc17b",
+      "kind": "concept",
+      "front": "What does Boyle's law say about pressure and volume for a fixed amount of gas at constant temperature?",
+      "back": "Pressure is **inversely proportional** to volume, so $p_1V_1=p_2V_2$. Doubling the volume halves the pressure.",
+      "hint": "Think about what happens when you push the handle of a bicycle pump.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15x0lib",
+      "kind": "process",
+      "front": "What steps should you take before substituting values into $pV=nRT$?",
+      "back": "1) Convert the temperature to kelvin. 2) Convert the volume to $\\mathrm{m^3}$ from $\\mathrm{cm^3}$ or $\\mathrm{dm^3}$. 3) Convert the pressure to pascals from kPa. Then substitute.",
+      "hint": "Check each quantity against the units the equation needs.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1kgplbh",
+      "kind": "example",
+      "front": "A sealed container holds $0.40\\,\\mathrm{mol}$ of an ideal gas at $27\\,^{\\circ}\\mathrm{C}$ and $2.0\\times10^{5}\\,\\mathrm{Pa}$. What is its volume?",
+      "back": "$V=\\frac{nRT}{p}=\\frac{0.40\\times8.31\\times300}{2.0\\times10^{5}}\\approx5.0\\times10^{-3}\\,\\mathrm{m^3}$, after converting $27\\,^{\\circ}\\mathrm{C}$ to $300\\,\\mathrm{K}$.",
+      "hint": "Rearrange the ideal gas equation to make volume the subject.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1ch9p0h",
+      "kind": "formula",
+      "front": "Which form of the ideal gas equation uses the number of molecules $N$ instead of the number of moles?",
+      "back": "$pV=NkT$, where $k=1.38\\times10^{-23}\\,\\mathrm{J\\,K^{-1}}$ is the **Boltzmann constant**.",
+      "hint": "Think about how moles relate to molecules through the Avogadro constant.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1g1ucbi",
+      "kind": "term",
+      "front": "What is a mole?",
+      "back": "A **mole** is the amount of substance that contains $6.02\\times10^{23}$ particles, the Avogadro constant $N_\\mathrm{A}$.",
+      "hint": "Think about counting particles in a very large batch.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0p9386l",
+      "kind": "concept",
+      "front": "Why might a real gas compressed to very high pressure not obey the ideal gas equation?",
+      "back": "At high pressure the particles are much closer together, so their volume is no longer negligible compared with the container. Forces between particles also become significant.",
+      "hint": "Compare this with the assumptions of the model.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cnwtk2",
+      "kind": "example",
+      "front": "What pressure does $0.30\\,\\mathrm{mol}$ of an ideal gas exert at $350\\,\\mathrm{K}$ in a volume of $4.0\\times10^{-3}\\,\\mathrm{m^3}$?",
+      "back": "$p=\\frac{nRT}{V}=\\frac{0.30\\times8.31\\times350}{4.0\\times10^{-3}}\\approx2.2\\times10^{5}\\,\\mathrm{Pa}$.",
+      "hint": "Rearrange $pV=nRT$ to make pressure the subject.",
+      "sectionId": "s5"
+    }
+  ]
+}

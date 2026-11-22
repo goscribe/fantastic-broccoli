@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-9",
+  "topicCode": "7.9",
+  "topicName": "Cardiac output and ventilation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:58.143Z",
+  "cards": [
+    {
+      "id": "19qcm0v",
+      "kind": "concept",
+      "front": "How is cardiac output related to heart rate and stroke volume?",
+      "back": "**Cardiac output** is the volume of blood one ventricle pumps each minute. It equals heart rate multiplied by stroke volume, $CO=HR\\times SV$, so both the beat count and the blood moved per beat matter.",
+      "hint": "Think about what one beat moves and how many beats happen in a minute.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1up86bw",
+      "kind": "concept",
+      "front": "Why does cardiac output rise so much during exercise?",
+      "back": "Both **heart rate** and **stroke volume** increase. Because the two changes multiply, cardiac output can rise several times above its resting value.",
+      "hint": "Think about what muscles need delivered and removed faster.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pyskdk",
+      "kind": "process",
+      "front": "What is the pathway that makes breathing speed up when blood carbon dioxide rises?",
+      "back": "**Chemoreceptors** in the carotid arteries and aorta detect the change and send impulses to the ventilation centre in the medulla. It sends impulses to the diaphragm and intercostal muscles, which contract more often and more strongly.",
+      "hint": "Start with what detects the change and end with the muscles that respond.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0657e5d",
+      "kind": "formula",
+      "front": "Which unit is used for cardiac output when heart rate is in beats per minute and stroke volume is in cm³?",
+      "back": "$\\mathrm{cm^3\\,min^{-1}}$. Beats per minute multiplied by cm³ per beat leaves cm³ per minute.",
+      "hint": "Multiply the units in the same way you multiply the numbers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vjhc30",
+      "kind": "example",
+      "front": "A person at rest has a heart rate of $60\\,\\mathrm{beats\\,min^{-1}}$ and a stroke volume of $80\\,\\mathrm{cm^3}$. What is their cardiac output?",
+      "back": "$4.8\\times10^{3}\\,\\mathrm{cm^3\\,min^{-1}}$, from $60\\times80=4800$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c9rpm8",
+      "kind": "example",
+      "front": "During exercise, $HR=150\\,\\mathrm{beats\\,min^{-1}}$ and $SV=100\\,\\mathrm{cm^3}$. About how many times the resting output is this?",
+      "back": "About 3.1 times. Cardiac output is $1.5\\times10^{4}\\,\\mathrm{cm^3\\,min^{-1}}$, and $15\\,000\\div4800\\approx3.1$.",
+      "hint": "Compare with the resting value of $4.8\\times10^{3}\\,\\mathrm{cm^3\\,min^{-1}}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k6d2s1",
+      "kind": "mistake",
+      "front": "Why is a cardiac output answer given as just 4800 usually marked down?",
+      "back": "It has no unit. Give $\\mathrm{cm^3\\,min^{-1}}$ and show the substitution, because a missing unit usually costs a mark.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0br5ufq",
+      "kind": "term",
+      "front": "What is tidal volume?",
+      "back": "The **tidal volume** is the volume of air moved into or out of the lungs in one breath. It is about $500\\,\\mathrm{cm^3}$ at rest in a healthy adult.",
+      "hint": "Compare it with ventilation rate, which counts breaths rather than measuring them.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mmoixn",
+      "kind": "formula",
+      "front": "How is minute ventilation calculated from ventilation rate and tidal volume?",
+      "back": "**Minute ventilation** equals ventilation rate multiplied by tidal volume: $\\mathrm{minute\\ ventilation}=\\mathrm{ventilation\\ rate}\\times\\mathrm{tidal\\ volume}$, giving $\\mathrm{cm^3\\,min^{-1}}$.",
+      "hint": "It follows the same pattern as the cardiac output calculation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wrs8gp",
+      "kind": "mistake",
+      "front": "Why is multiplying ventilation rate by lung volume the wrong calculation for minute ventilation?",
+      "back": "Lung volume is the total capacity, not the air moved in one breath. Use the tidal volume, the volume of a single breath.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pbkv0z",
+      "kind": "example",
+      "front": "A resting person takes 12 breaths in one minute with a tidal volume of $500\\,\\mathrm{cm^3}$. What is their minute ventilation?",
+      "back": "$6.0\\times10^{3}\\,\\mathrm{cm^3\\,min^{-1}}$, from $12\\times500=6000$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1czuddp",
+      "kind": "concept",
+      "front": "Why must ventilation rise along with cardiac output during exercise?",
+      "back": "More oxygen must enter the blood and carbon dioxide must be removed faster. Without this, carbon dioxide would build up and **blood pH** would fall.",
+      "hint": "Think about what happens to carbon dioxide if breathing does not change.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sx4v70",
+      "kind": "concept",
+      "front": "What happens to breathing once blood carbon dioxide returns towards its normal level?",
+      "back": "The impulses from the chemoreceptors decrease, so breathing slows. The control is a feedback loop that keeps ventilation matched to demand.",
+      "sectionId": "s6"
+    }
+  ]
+}

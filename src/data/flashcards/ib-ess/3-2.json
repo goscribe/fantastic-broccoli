@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "3-2",
+  "topicCode": "3.2",
+  "topicName": "Human impact on biodiversity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:32.568Z",
+  "cards": [
+    {
+      "id": "1k5wbwx",
+      "kind": "term",
+      "front": "What is habitat loss, and why is it a leading way that people reduce biodiversity?",
+      "back": "**Habitat loss** is the removal or alteration of habitat so native species can no longer live there. Populations shrink, and some disappear from the area altogether.",
+      "hint": "Think about where species live.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nueali",
+      "kind": "concept",
+      "front": "Why do several small habitat patches usually support less biodiversity than one large patch of the same total area?",
+      "back": "They have more **edge** and more isolated populations. Small isolated groups are easier to lose, cannot cross gaps to find mates, and lose genetic diversity.",
+      "hint": "Consider boundaries and isolation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ui03ia",
+      "kind": "process",
+      "front": "Describe the sequence of steps in eutrophication of a lake.",
+      "back": "Nutrients make **algae** grow rapidly at the surface. The algae block light, so plants below die. Decomposers feed on dead matter and use up oxygen, and fish and other animals die from lack of oxygen.",
+      "hint": "Start with what the nutrients do first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11n4pwa",
+      "kind": "term",
+      "front": "What is overexploitation?",
+      "back": "**Overexploitation** is harvesting a species at a rate faster than its population can replace itself. Overfishing and hunting for trade are common examples.",
+      "hint": "Compare the harvest rate with the recovery rate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hp1vp5",
+      "kind": "term",
+      "front": "What is the edge effect?",
+      "back": "The **edge effect** is the change in physical conditions and species interactions near the boundary of a habitat patch, such as light, wind, temperature and predators.",
+      "hint": "Compare the boundary with the interior.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03mfd8q",
+      "kind": "term",
+      "front": "What is an invasive species?",
+      "back": "An **invasive species** is an introduced organism that spreads and damages native species or ecosystems. Being introduced alone does not make a species invasive.",
+      "hint": "It must both spread and cause harm.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s78st3",
+      "kind": "example",
+      "front": "Cane toads were released in Australia for pest control. What harm did they cause?",
+      "back": "They **poison native predators** that eat them, which reduces the numbers of those predators.",
+      "hint": "Think about what happens when a predator eats a cane toad.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0un1k8g",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume every introduced species is invasive?",
+      "back": "Many introduced species **stay where they are put** and cause little harm. A species is only invasive if it spreads and damages native species or ecosystems.",
+      "hint": "Look back at the definition of invasive.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "084abv4",
+      "kind": "mistake",
+      "front": "A student says eutrophication kills fish by blocking their light. What is wrong with this?",
+      "back": "Light is blocked for the plants, which die. Fish die because **decomposers use up oxygen** while breaking down dead matter.",
+      "hint": "Who is losing light, and who is losing oxygen?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "178g2c1",
+      "kind": "term",
+      "front": "What is pollution, as defined in this topic?",
+      "back": "**Pollution** is the introduction of harmful substances or energy into an environment. It can poison organisms directly or lower habitat quality.",
+      "hint": "Substances and energy both count.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dw77yq",
+      "kind": "concept",
+      "front": "Why do pollutants often reduce biodiversity unevenly?",
+      "back": "**Sensitive species** disappear first while tolerant species may dominate, so overall diversity falls. The effect depends on the pollutant's type, amount, persistence and each species' sensitivity.",
+      "hint": "Think about which species can cope.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sa2b2j",
+      "kind": "concept",
+      "front": "Why do top consumers often suffer most from persistent pollutants such as DDT?",
+      "back": "**Biomagnification** means persistent pollutants are not easily broken down or excreted, so their concentration rises at each higher trophic level. Top consumers receive the highest doses.",
+      "hint": "Follow the concentration up the food chain.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1h12nkz",
+      "kind": "example",
+      "front": "DDT built up in birds of prey through their food. What effect did this have on them?",
+      "back": "It reached high concentrations in the birds, and their **eggshells became thin and cracked**.",
+      "hint": "Think about what happens to the eggs.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-1-3",
+  "topicCode": "6.1.3",
+  "topicName": "Energy resources",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:12.247Z",
+  "cards": [
+    {
+      "id": "1w9mw7y",
+      "kind": "term",
+      "front": "What is a renewable resource?",
+      "back": "A **renewable resource** is replaced naturally as it is used, such as wind, sunlight, tides or geothermal energy.",
+      "hint": "Think about whether the supply can run out.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yr13p0",
+      "kind": "concept",
+      "front": "Why does the UK rely on an energy mix rather than a single resource for electricity?",
+      "back": "Resources differ in strengths: nuclear gives **steady output** for regular use, while cost, local conditions, environmental effects and supply security also shape the choice.",
+      "hint": "Think about reliability and cost together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i678s4",
+      "kind": "concept",
+      "front": "Why do fossil-fuel power stations cause environmental harm despite their reliable output?",
+      "back": "Burning **fossil fuels** releases $\\text{CO}_2$, which contributes to climate change, and pollutants that harm health or cause acid rain.",
+      "hint": "Consider what is produced when a fuel is burned.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sg1h8w",
+      "kind": "mistake",
+      "front": "A student says nuclear power stations burn nuclear fuel to make electricity. What is wrong with this?",
+      "back": "Nuclear fuel is non-renewable, but its energy comes from **nuclear reactions**, not burning, so stations do not burn it.",
+      "hint": "Think about where the energy is released.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lbq4zl",
+      "kind": "concept",
+      "front": "What makes biofuel a renewable resource?",
+      "back": "Biofuel comes from recently living material, so it is **renewable** only when that material is replaced, such as by growing new crops or trees.",
+      "hint": "Think about where the material comes from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14lespr",
+      "kind": "concept",
+      "front": "Why can wind and solar not always meet electricity demand?",
+      "back": "Their output depends on the **weather** and daylight, so it cannot be controlled to match demand.",
+      "hint": "Consider what the output depends on.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hj5gna",
+      "kind": "concept",
+      "front": "Why can nuclear power struggle to respond to changes in demand?",
+      "back": "Nuclear stations provide **steady output** but take longer to adjust their output than gas or hydroelectric stations.",
+      "hint": "Compare with gas and hydroelectric stations.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11gbpjj",
+      "kind": "concept",
+      "front": "How can hydroelectric power respond quickly to a sudden rise in demand?",
+      "back": "Its output can change **quickly**, and reservoirs can store water until electricity is needed.",
+      "hint": "Think about what a dam allows you to hold back.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0svn3og",
+      "kind": "term",
+      "front": "What is habitat disruption?",
+      "back": "A **habitat disruption** is a change to a natural environment that can affect the organisms living there, such as a dam flooding land.",
+      "hint": "Think about what happens to plants and animals when their home changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lq0ng9",
+      "kind": "mistake",
+      "front": "A student says wind turbines have no environmental impact. What is missing from this?",
+      "back": "Turbines produce no air pollution during **operation**, but making and installing them uses materials and energy, and wind farms can affect landscapes and wildlife.",
+      "hint": "Consider the stages before a turbine starts generating.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1g63t4d",
+      "kind": "concept",
+      "front": "Why does radioactive waste from nuclear power need special handling?",
+      "back": "It must be **stored securely for a long time** to limit exposure to radiation.",
+      "hint": "Think about how long the material stays radioactive.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "120kr8n",
+      "kind": "concept",
+      "front": "Why are petrol and diesel useful transport fuels?",
+      "back": "They store a **large amount of energy** in a small volume, so vehicles can carry them easily.",
+      "hint": "Think about what a vehicle must carry with it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "013b9g1",
+      "kind": "example",
+      "front": "Why can a gas power station respond to a sudden rise in demand better than wind turbines?",
+      "back": "Gas stations can increase output to meet a sudden rise, but wind output depends on wind conditions and cannot always be increased. Burning gas releases $\\text{CO}_2$.",
+      "hint": "Think about what controls how much energy a wind turbine captures.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19y4ml8",
+      "kind": "concept",
+      "front": "What causes electricity demand to rise in the evening?",
+      "back": "People return home and switch on **appliances**, so electricity use often rises.",
+      "hint": "Think about daily routines.",
+      "sectionId": "s4"
+    }
+  ]
+}

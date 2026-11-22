@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-5-1-6",
+  "topicCode": "3.5.1.6",
+  "topicName": "EMF and internal resistance",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:02.419Z",
+  "cards": [
+    {
+      "id": "16zs9ec",
+      "kind": "term",
+      "front": "What is the electromotive force (EMF) of a source?",
+      "back": "The **energy** supplied by the source to each coulomb of charge, $\\varepsilon=\\frac{E}{Q}$, measured in $\\text{V}$. One volt is one joule per coulomb.",
+      "hint": "Think about what happens to each coulomb of charge passing through a cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dxr34f",
+      "kind": "concept",
+      "front": "Why is the terminal p.d. of a cell lower than its EMF when it supplies a current?",
+      "back": "Energy is used up inside the cell as charge passes through its **internal resistance**. The p.d. across this resistance is the lost volts $Ir$, so less energy per coulomb reaches the external circuit.",
+      "hint": "Consider where the missing energy per coulomb goes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "098a45q",
+      "kind": "formula",
+      "front": "Which equation links EMF, terminal p.d. and the lost volts?",
+      "back": "$\\varepsilon=V+Ir$, where $\\varepsilon$ and $V$ are in $\\text{V}$, $I$ in $\\text{A}$ and $r$ in $\\Omega$. The term $Ir$ is the **lost volts**.",
+      "hint": "Apply energy conservation around the whole circuit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02q8a2d",
+      "kind": "concept",
+      "front": "Why is a graph of terminal p.d. against current a straight line?",
+      "back": "The lost volts $Ir$ rise in step with $I$, so $V=-rI+\\varepsilon$ has the form $y=mx+c$. The **intercept** is $\\varepsilon$ and the **gradient** is $-r$.",
+      "hint": "Rearrange $\\varepsilon=V+Ir$ into the form $y=mx+c$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lolo3j",
+      "kind": "mistake",
+      "front": "Why is it wrong to say the EMF drops as the current grows?",
+      "back": "It is the **terminal p.d.** that drops. The EMF stays fixed, while the lost volts $Ir$ grow as the current rises.",
+      "hint": "Which of the two voltages changes as the current rises?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1twx95c",
+      "kind": "example",
+      "front": "What is the terminal p.d. when a cell of EMF $1.50\\,\\text{V}$ and internal resistance $0.50\\,\\Omega$ feeds a $2.5\\,\\Omega$ resistor?",
+      "back": "$1.25\\,\\text{V}$. The current is $I=\\frac{1.50}{2.5+0.50}=0.50\\,\\text{A}$, so the lost volts are $0.25\\,\\text{V}$ and $V=1.50-0.25=1.25\\,\\text{V}$.",
+      "hint": "Find the current first using $\\varepsilon=I(R+r)$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0usgk73",
+      "kind": "concept",
+      "front": "What is the largest current a source can supply, and when is it reached?",
+      "back": "$I=\\frac{\\varepsilon}{r}$. It is reached when the **external resistance** is zero, which makes the terminal p.d. zero.",
+      "hint": "Consider how the external resistor limits the current in $\\varepsilon=I(R+r)$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1yroli6",
+      "kind": "process",
+      "front": "What are the steps, in order, to measure the EMF and internal resistance of a cell?",
+      "back": "Connect the cell in series with an ammeter, switch and variable resistor, with a voltmeter across the terminals. Set the largest resistance, close the switch, record $I$ and $V$, reduce the resistance and repeat for six or more readings. Plot $V$ against $I$, then read $\\varepsilon$ from the intercept and $r$ from the negative gradient.",
+      "hint": "Start from the circuit layout, then the readings, then the graph.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qz4w45",
+      "kind": "mistake",
+      "front": "Why should the switch be opened between readings when measuring a cell?",
+      "back": "A continuous current **warms the cell**, which can change its internal resistance and spoil the results.",
+      "hint": "Think about what heating does to the cell over time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r8fdeo",
+      "kind": "formula",
+      "front": "Which equation gives the power wasted inside a source of internal resistance $r$?",
+      "back": "$P=I^2r$, where $P$ is in $\\text{W}$, $I$ in $\\text{A}$ and $r$ in $\\Omega$. This energy is lost as heat inside the source.",
+      "hint": "Compare with the power formula that uses current and resistance.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qe5ynn",
+      "kind": "concept",
+      "front": "Why does a car battery need a very small internal resistance?",
+      "back": "The starter motor needs a very **large current**. A small $r$ gives small lost volts, so the terminal p.d. stays close to the EMF.",
+      "hint": "Consider what a large current does to the lost volts $Ir$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1x4xigd",
+      "kind": "concept",
+      "front": "Why does a voltmeter of very high resistance across a cell read almost the EMF?",
+      "back": "It draws almost no current, so the lost volts $Ir$ are almost zero and the terminal p.d. is almost equal to $\\varepsilon$.",
+      "hint": "How much current does the voltmeter let through the cell?",
+      "sectionId": "s5"
+    }
+  ]
+}

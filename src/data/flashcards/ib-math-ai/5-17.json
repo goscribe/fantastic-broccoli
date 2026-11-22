@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-17",
+  "topicCode": "5.17",
+  "topicName": "Phase portraits",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:32.871Z",
+  "cards": [
+    {
+      "id": "1ju0h2i",
+      "kind": "concept",
+      "front": "Which feature of a linear system's coefficients decides the pattern of trajectories near an equilibrium point?",
+      "back": "The **eigenvalues**. Their signs, and whether they are real or complex, decide the pattern, such as node, saddle, spiral or centre.",
+      "hint": "Look at the numbers multiplying x and y in the system.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09bixyz",
+      "kind": "formula",
+      "front": "What equation do the eigenvalues $\\lambda$ of the linear system $\\frac{dx}{dt}=ax+by$, $\\frac{dy}{dt}=cx+dy$ satisfy?",
+      "back": "$\\lambda^2-(a+d)\\lambda+(ad-bc)=0$. Its two roots are the **eigenvalues**, built from the constants $a$, $b$, $c$ and $d$.",
+      "hint": "The constants come straight from the system.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r7q6xw",
+      "kind": "process",
+      "front": "What are the steps to classify an equilibrium point of a linear system?",
+      "back": "1) Set both rates to zero to find the point. 2) Read off $a$, $b$, $c$ and $d$. 3) Solve $\\lambda^2-(a+d)\\lambda+(ad-bc)=0$. 4) Match the eigenvalues to the pattern table.",
+      "hint": "Four steps, in this order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0o7t13k",
+      "kind": "term",
+      "front": "What is the phase plane?",
+      "back": "The **phase plane** is the plane with $x$ and $y$ on its two axes. Time $t$ is hidden and is not shown on the axes.",
+      "hint": "Two axes, one for each quantity.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01u0j65",
+      "kind": "term",
+      "front": "What is a trajectory in the phase plane?",
+      "back": "A **trajectory** is the curve traced by the point $(x,y)$ as $t$ increases. Arrows on the curve show the direction of travel.",
+      "hint": "Think about the path the point takes over time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ce8kpf",
+      "kind": "term",
+      "front": "What is an equilibrium point?",
+      "back": "An **equilibrium point** is where $\\frac{dx}{dt}=0$ and $\\frac{dy}{dt}=0$ at the same time. A system that starts there stays there.",
+      "hint": "Neither quantity is changing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06kaddk",
+      "kind": "mistake",
+      "front": "A student sets only $\\frac{dx}{dt}=0$ and calls the solution an equilibrium point. What is wrong?",
+      "back": "**Both** rates must be zero at the same point. Setting only one gives a whole curve of points, not a single equilibrium point.",
+      "hint": "Count how many equations must hold together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hz5jpx",
+      "kind": "example",
+      "front": "Find the equilibrium point of $\\frac{dx}{dt}=8-2x$ and $\\frac{dy}{dt}=x-4y$.",
+      "back": "$(4,1)$. From $8-2x=0$ we get $x=4$, and then $4-4y=0$ gives $y=1$.",
+      "hint": "Solve the first equation, then substitute.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0etrp3k",
+      "kind": "term",
+      "front": "What is an eigenvalue of a linear system?",
+      "back": "An **eigenvalue** is a root $\\lambda$ of $\\lambda^2-(a+d)\\lambda+(ad-bc)=0$, where the constants come from the coefficients of the system.",
+      "hint": "Recall which equation the constants a, b, c and d feed into.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j9xz9l",
+      "kind": "term",
+      "front": "When is an equilibrium point called stable?",
+      "back": "An equilibrium point is **stable** when every trajectory starting close enough to it approaches it as $t$ increases without limit.",
+      "hint": "Think about trajectories that start nearby.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hnyj29",
+      "kind": "concept",
+      "front": "What do the real and imaginary parts of the eigenvalues control?",
+      "back": "The **real part** controls growth or decay. The **imaginary part** controls rotation, so complex eigenvalues produce spirals or centres.",
+      "hint": "Growth, decay or turning?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1k9xd9e",
+      "kind": "example",
+      "front": "Classify the equilibrium point $(4,1)$ of $\\frac{dx}{dt}=8-2x$ and $\\frac{dy}{dt}=x-4y$.",
+      "back": "A **stable node**. Here $a=-2$, $b=0$, $c=1$, $d=-4$, so $\\lambda^2+6\\lambda+8=0$, giving $\\lambda=-2$ or $\\lambda=-4$. Both are real and negative.",
+      "hint": "Factorise the quadratic first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qiuzjb",
+      "kind": "mistake",
+      "front": "Why is a saddle unstable even though some trajectories approach it?",
+      "back": "Only trajectories along one special direction approach it. Most trajectories **leave** the equilibrium point, so it is unstable.",
+      "hint": "Ask what most trajectories do.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sveg67",
+      "kind": "concept",
+      "front": "How do trajectories behave near a centre?",
+      "back": "They form **closed loops** around the equilibrium point, so both quantities repeat the same cycle for ever. A centre has purely imaginary eigenvalues.",
+      "hint": "Think about the real part of the eigenvalues.",
+      "sectionId": "s5"
+    }
+  ]
+}

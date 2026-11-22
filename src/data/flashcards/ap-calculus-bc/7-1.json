@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "7-1",
+  "topicCode": "7.1",
+  "topicName": "Modelling with differential equations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:38.194Z",
+  "cards": [
+    {
+      "id": "0ghoer9",
+      "kind": "concept",
+      "front": "How do you write the rate of change of a tank's volume when water flows in and out?",
+      "back": "The **net rate** equals inflow minus outflow, so $\\frac{dV}{dt}=$ inflow $-$ outflow. Water coming in adds to the volume, and water going out takes away from it.",
+      "hint": "Think about which flows add water and which remove it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kwaabj",
+      "kind": "concept",
+      "front": "Why must you keep a quantity and its rate of change distinct?",
+      "back": "A statement about how much is present describes $V$, while a statement about how fast it changes describes $\\frac{dV}{dt}$. Units help keep those two statements separate.",
+      "hint": "Compare liters with liters per minute.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kxa0qj",
+      "kind": "formula",
+      "front": "In $\\frac{dV}{dt}=8-0.1V$, what do the terms $8$ and $0.1V$ represent, and what are their units?",
+      "back": "8 is the constant inflow, in liters per minute. $0.1V$ is the outflow, in liters per minute, which is proportional to the current volume $V$.",
+      "hint": "Check that each term has units of liters per minute.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qj72gi",
+      "kind": "term",
+      "front": "What is a state variable?",
+      "back": "A **state variable** measures a quantity that changes in the situation being modeled, such as the water volume $V(t)$ in a tank.",
+      "hint": "It is the thing that changes over time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lgbg6o",
+      "kind": "term",
+      "front": "What is a differential equation?",
+      "back": "A **differential equation** relates a changing quantity to its rate of change, describing how the quantity changes without giving its value at every time.",
+      "hint": "It involves a function and at least one of its derivatives.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ec4naa",
+      "kind": "mistake",
+      "front": "A tank's rate is 3 liters per minute. Is the tank holding 3 liters?",
+      "back": "No. A rate of 3 liters per minute is not a volume of 3 liters. The volume is a quantity in liters, and the rate describes how fast it changes.",
+      "hint": "Look at the units of each number.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nt46r4",
+      "kind": "example",
+      "front": "For $\\frac{dV}{dt}=8-0.1V$, find the rate when the tank holds 50 liters and interpret the sign.",
+      "back": "$8-0.1(50)=8-5=3$ liters per minute. The volume is increasing at 3 liters per minute at that instant.",
+      "hint": "Substitute $V=50$ first, then subtract the outflow from the inflow.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "128zdwp",
+      "kind": "term",
+      "front": "What is an instantaneous rate?",
+      "back": "An **instantaneous rate** is the rate of change at a particular value of the independent variable, such as the net rate at one specific volume.",
+      "hint": "Think of a single moment, not an average over time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lxuuno",
+      "kind": "formula",
+      "front": "In $\\frac{dM}{dt}=4-kM$, what do the symbols $M$, $t$, and $k$ mean, and what are the units of $k$?",
+      "back": "$M$ is the medicine amount in milligrams, $t$ is time in hours, and $k$ is a positive constant with units of inverse hours.",
+      "hint": "Look at the units of $kM$ to find $k$'s units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i1qvon",
+      "kind": "concept",
+      "front": "How does a constant rate differ from a rate proportional to a quantity?",
+      "back": "A **constant rate** stays the same regardless of the current quantity. A rate proportional to the quantity changes as that quantity changes.",
+      "hint": "Ask whether the rate depends on how much is present.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lcvuqn",
+      "kind": "term",
+      "front": "What does it mean for a rate to be proportional to a quantity?",
+      "back": "A rate is **proportional to** a quantity when it equals a constant multiplied by that quantity, so more of the quantity gives a faster rate.",
+      "hint": "Think of the outflow from a tank with more water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vubb9i",
+      "kind": "process",
+      "front": "What are the steps for writing a differential equation model?",
+      "back": "1. Define the variable and time unit. 2. Identify what increases and decreases the quantity. 3. Write the net rate as the sum of those effects. 4. Check each term's sign and units against the situation.",
+      "hint": "Start by naming the variable and its time unit.",
+      "sectionId": "s4"
+    }
+  ]
+}

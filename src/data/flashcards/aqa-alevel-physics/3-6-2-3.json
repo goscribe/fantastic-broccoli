@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-6-2-3",
+  "topicCode": "3.6.2.3",
+  "topicName": "Kinetic theory model",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:09.186Z",
+  "cards": [
+    {
+      "id": "0vwzmp0",
+      "kind": "concept",
+      "front": "How does a gas produce a pressure on the walls of its container?",
+      "back": "Particles **rebound** elastically, so their momentum changes. The wall's force on them equals the rate of change of momentum. Countless collisions give a steady force per unit area, which is the pressure.",
+      "hint": "Think about one particle bouncing off a wall and Newton's laws of motion.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e1kg20",
+      "kind": "concept",
+      "front": "What does the temperature of an ideal gas tell you about its particles?",
+      "back": "Temperature in kelvin is proportional to the **mean kinetic energy** of the particles, from $\\frac{1}{2}m\\overline{c^2}=\\frac{3}{2}kT$. Doubling $T$ doubles this mean energy.",
+      "hint": "Think about what changes inside a sealed container when you heat the gas.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18t2xn3",
+      "kind": "formula",
+      "front": "What do the symbols in $pV=\\frac{1}{3}Nm\\overline{c^2}$ represent?",
+      "back": "$p$ is the **pressure** in $\\text{Pa}$, $V$ the volume in $\\text{m}^3$, $N$ the number of particles, $m$ the mass of one particle in $\\text{kg}$, and $\\overline{c^2}$ the mean square speed in $\\text{m}^2\\,\\text{s}^{-2}$.",
+      "hint": "Check the units of each term so that the two sides match.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vhby66",
+      "kind": "term",
+      "front": "What is an ideal gas in the kinetic theory model?",
+      "back": "A gas whose **particles** have negligible volume and exert no forces on each other except during elastic collisions, which last a negligible time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1sikpza",
+      "kind": "formula",
+      "front": "Which expression gives the root mean square speed $c_\\mathrm{rms}$ of gas particles in terms of $T$ and $m$?",
+      "back": "$c_\\mathrm{rms}=\\sqrt{\\frac{3kT}{m}}$, where $k$ is the **Boltzmann constant** in $\\text{J K}^{-1}$, $T$ is the kelvin temperature and $m$ is the particle mass in $\\text{kg}$.",
+      "hint": "Start from the link between mean kinetic energy and temperature.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wl3ier",
+      "kind": "term",
+      "front": "What is the Boltzmann constant $k$?",
+      "back": "The **Boltzmann constant** is the molar gas constant divided by the Avogadro constant, with value $1.38\\times10^{-23}\\,\\text{J K}^{-1}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04b68b1",
+      "kind": "mistake",
+      "front": "Why is it wrong to say every particle in a gas moves at the same speed?",
+      "back": "Particles move randomly with a **range** of speeds, so some are faster and some slower. The model uses an average, because individual speeds vary.",
+      "hint": "Think about what random motion implies for the spread of speeds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1roffc6",
+      "kind": "mistake",
+      "front": "Why does a gas moving at several hundred metres per second not drift across the room?",
+      "back": "Particles collide so often that they change direction constantly, so the **average velocity** of all the particles is close to zero. The speed is random motion, not drift.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09zrwho",
+      "kind": "example",
+      "front": "Calculate $c_\\mathrm{rms}$ for a nitrogen molecule of mass $4.7\\times10^{-26}\\,\\text{kg}$ at $300\\,\\text{K}$ (take $k=1.38\\times10^{-23}\\,\\text{J K}^{-1}$).",
+      "back": "$c_\\mathrm{rms}\\approx5.1\\times10^{2}\\,\\text{m s}^{-1}$, from $\\sqrt{\\frac{3kT}{m}}$, with the fraction evaluated as $2.64\\times10^{5}\\,\\text{m}^2\\,\\text{s}^{-2}$ before the square root.",
+      "hint": "Start from the expression for c_rms and substitute each value with its unit.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0waucxi",
+      "kind": "example",
+      "front": "A gas has density $1.2\\,\\text{kg m}^{-3}$ and $c_\\mathrm{rms}=5.0\\times10^{2}\\,\\text{m s}^{-1}$. What is its pressure?",
+      "back": "$p=1.0\\times10^{5}\\,\\text{Pa}$, from $p=\\frac{1}{3}\\rho\\overline{c^2}$ with $\\overline{c^2}=2.5\\times10^{5}\\,\\text{m}^2\\,\\text{s}^{-2}$.",
+      "hint": "Which form of the kinetic theory equation uses density rather than particle number?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "05kfvlo",
+      "kind": "mistake",
+      "front": "What common error occurs when using $p=\\frac{1}{3}\\rho\\overline{c^2}$ with a given $c_\\mathrm{rms}$?",
+      "back": "Forgetting to **square** $c_\\mathrm{rms}$. Since $\\overline{c^2}=c_\\mathrm{rms}^2$, you must square the speed before substituting it into the formula.",
+      "hint": "Check the units of the term that goes into the formula.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0g78zos",
+      "kind": "concept",
+      "front": "Why does heating a gas in a rigid container increase its pressure?",
+      "back": "Heating raises the **root mean square speed**, so particles hit the walls harder and more often. This matches $p$ being proportional to $T$ at constant volume.",
+      "hint": "Think about what the temperature change does to particle speeds.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0g2wpvk",
+      "kind": "term",
+      "front": "What does the mean square speed $\\overline{c^2}$ measure?",
+      "back": "The **mean** of the squares of all particle speeds. Squaring gives faster particles more weight, so it is not the same as the simple average speed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s25zk9",
+      "kind": "concept",
+      "front": "Why does the kinetic theory equation contain a factor of $\\frac{1}{3}$?",
+      "back": "The motion is shared equally between **three** directions, so only a third of the particles' motion acts on a given wall.",
+      "hint": "Think about how many perpendicular directions a particle can move in.",
+      "sectionId": "s3"
+    }
+  ]
+}

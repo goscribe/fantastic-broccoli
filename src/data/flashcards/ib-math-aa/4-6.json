@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-6",
+  "topicCode": "4.6",
+  "topicName": "Combined events and diagrams",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:50.930Z",
+  "cards": [
+    {
+      "id": "0cv7lhd",
+      "kind": "formula",
+      "front": "What is the addition rule for $P(A\\cup B)$, and what does each part mean?",
+      "back": "$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$. The **union** $A\\cup B$ means $A$ or $B$ or both. The overlap $P(A\\cap B)$ is subtracted because it was counted twice.",
+      "hint": "Which part was counted twice?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fu0m0g",
+      "kind": "formula",
+      "front": "How do you test whether two events $A$ and $B$ are independent?",
+      "back": "Check whether $P(A\\cap B)=P(A)\\times P(B)$. If it holds, the events are **independent**. If not, they are dependent.",
+      "hint": "Compare the intersection with the product.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19ptmvf",
+      "kind": "term",
+      "front": "What is the **intersection** $A\\cap B$ on a Venn diagram?",
+      "back": "The **intersection** is the overlap of the two circles, the event that both $A$ and $B$ occur. It means ‘$A$ and $B$’.",
+      "hint": "Look at where the circles meet.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05gc112",
+      "kind": "term",
+      "front": "What does it mean for two events to be mutually exclusive?",
+      "back": "**Mutually exclusive** events cannot happen together, so $P(A\\cap B)=0$. Their circles on a Venn diagram do not overlap.",
+      "hint": "Can both events happen at once?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f0icli",
+      "kind": "example",
+      "front": "In a Venn diagram, $P(A)=\\frac{18}{40}$, $P(B)=\\frac{15}{40}$ and $P(A\\cap B)=\\frac{6}{40}$. Find $P(A\\cup B)$.",
+      "back": "$\\frac{27}{40}$, because $\\frac{18+15-6}{40}=\\frac{27}{40}$. This matches the 27 students inside the circles.",
+      "hint": "Use the addition rule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0u0kade",
+      "kind": "mistake",
+      "front": "Can mutually exclusive events with non-zero probabilities be independent?",
+      "back": "**No.** Mutually exclusive events have $P(A\\cap B)=0$, but $P(A)\\times P(B)>0$, so the product test fails and they are dependent.",
+      "hint": "Test the product rule with numbers.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tvicsa",
+      "kind": "concept",
+      "front": "How does a two-way table help you find probabilities?",
+      "back": "Each count divided by the **overall total** gives a probability. Row and column totals also give unions and complements, such as the probability of not walking.",
+      "hint": "What is the grand total?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17m7197",
+      "kind": "example",
+      "front": "A table of 50 students shows 12 boys walk, 18 girls walk, 15 boys take the bus and 5 girls take the bus. Find $P(\\text{walk or boy})$.",
+      "back": "$\\frac{45}{50}$, because the walkers are 30 and the boys are 27, so $30+27-12=45$ and $\\frac{45}{50}$.",
+      "hint": "Subtract the walking boys once.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dbei92",
+      "kind": "process",
+      "front": "What are the steps for finding a probability using a tree diagram?",
+      "back": "1) Label each branch with its probability. 2) **Multiply** along each path. 3) **Add** the paths that fit the event. Branch probabilities from each point add to 1.",
+      "hint": "What does each complete path represent?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1r1qnd9",
+      "kind": "concept",
+      "front": "How does drawing without replacement change a tree diagram?",
+      "back": "The second-stage probabilities change because one item has already been removed, so the totals shrink. With replacement, the probabilities stay the same at each stage.",
+      "hint": "What happens to the total in the second draw?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pe05qv",
+      "kind": "example",
+      "front": "A bag has 5 red and 3 blue counters. Two are drawn without replacement. Find $P(\\text{two red})$.",
+      "back": "$\\frac{5}{14}$, from $\\frac{5}{8}\\times\\frac{4}{7}=\\frac{20}{56}=\\frac{5}{14}$.",
+      "hint": "After one red is drawn, how many reds are left?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0565ufs",
+      "kind": "formula",
+      "front": "What does the addition rule become for mutually exclusive events $A$ and $B$?",
+      "back": "$P(A\\cup B)=P(A)+P(B)$, because $P(A\\cap B)=0$, so there is no overlap to subtract.",
+      "hint": "What is the probability of both events happening together?",
+      "sectionId": "s2"
+    }
+  ]
+}

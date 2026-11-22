@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "2-1-1",
+  "topicCode": "2.1.1",
+  "topicName": "Cell structure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:55.821Z",
+  "cards": [
+    {
+      "id": "0xbl0ki",
+      "kind": "concept",
+      "front": "What is the key structural difference between a eukaryotic cell and a prokaryotic cell?",
+      "back": "A eukaryotic cell has a **nucleus** and other membrane-bound organelles, whereas a prokaryotic cell has neither, and its DNA lies free in the cytoplasm.",
+      "hint": "Think about where the DNA is kept in each cell type."
+    },
+    {
+      "id": "19ij5du",
+      "kind": "process",
+      "front": "What is the route of a protein for export, from its synthesis to its release outside the cell?",
+      "back": "**Ribosomes** on the rough ER make the protein; a vesicle carries it to the Golgi apparatus, which modifies and packages it; a vesicle then fuses with the cell-surface membrane and releases it.",
+      "hint": "Start at the organelle that is covered in ribosomes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1g052yb",
+      "kind": "formula",
+      "front": "Which equation links magnification, image size and actual size, and what does each symbol mean?",
+      "back": "$M=\\frac{I}{A}$, where $M$ is the **magnification**, $I$ is the image size and $A$ is the actual size; both sizes must be in the same unit.",
+      "hint": "Rearrange it to find the actual size of a cell.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1tnqw1j",
+      "kind": "term",
+      "front": "What is the job of the mitochondrion?",
+      "back": "It is the **site of aerobic respiration**, which makes ATP; its inner membrane is folded into cristae.",
+      "hint": "Think about the energy currency of the cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ancusm",
+      "kind": "concept",
+      "front": "How does the cell wall help a plant cell when it takes in water?",
+      "back": "Its rigid cellulose layer **supports the cell and stops it bursting**.",
+      "hint": "Compare with what could happen to a cell with only a membrane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kqledm",
+      "kind": "mistake",
+      "front": "Why is it wrong to call the cell wall the cell-surface membrane?",
+      "back": "The **cell wall** is a rigid, freely permeable layer outside the membrane; the cell-surface membrane is the layer that controls what enters and leaves.",
+      "hint": "Think about which layer does the controlling.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h935jh",
+      "kind": "term",
+      "front": "What is the role of a chloroplast in a plant cell?",
+      "back": "It is the **site of photosynthesis**, a double-membraned organelle with stacks of flattened sacs holding chlorophyll.",
+      "hint": "Think about the green pigment inside it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0irv2tt",
+      "kind": "term",
+      "front": "What is a plasmid?",
+      "back": "A **small, circular loop of DNA**, separate from the main DNA, found in many prokaryotic cells.",
+      "hint": "Compare it with the circular DNA in the nucleoid.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fodfri",
+      "kind": "concept",
+      "front": "Why is a stain used when viewing cells with a light microscope?",
+      "back": "Living cells are mostly transparent, so a **stain** binds to particular structures and increases their contrast.",
+      "hint": "Think about how a living cell looks before any treatment.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qp51vz",
+      "kind": "mistake",
+      "front": "Why does enlarging an image not always reveal more detail?",
+      "back": "**Resolution** limits the detail that can be seen, so if resolution is poor, extra magnification shows no more detail.",
+      "hint": "Magnification only makes things bigger, so ask what limits what you can separate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1up5u9y",
+      "kind": "concept",
+      "front": "Which microscope can show ribosomes, and why can it do so?",
+      "back": "An **electron microscope**, because electrons have a much shorter wavelength than visible light, giving far higher resolution.",
+      "hint": "Compare the wavelength of the light or beam used by each microscope.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rrizs0",
+      "kind": "example",
+      "front": "A cell nucleus measures 24 mm in a photograph taken at ×1200. What is its actual diameter?",
+      "back": "$20\\,\\mu\\mathrm{m}$, from $A=\\frac{24\\,\\mathrm{mm}}{1200}=0.020\\,\\mathrm{mm}$, then multiplied by 1000 to convert to micrometres.",
+      "hint": "Convert both sizes to the same unit before dividing.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1qrqk4c",
+      "kind": "example",
+      "front": "A cell with an actual diameter of 40 µm is viewed at ×500. What is its image diameter in mm?",
+      "back": "$20\\,\\mathrm{mm}$, since $40\\,\\mu\\mathrm{m}\\times500=20\\,000\\,\\mu\\mathrm{m}$, which is divided by 1000 to give millimetres.",
+      "hint": "Rearrange the magnification formula to find image size.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0axu82a",
+      "kind": "process",
+      "front": "How is an eyepiece graticule used to measure the size of a real specimen?",
+      "back": "First **calibrate** it against a stage micrometer, a slide with a ruler of known length; then count the graticule divisions across the cell.",
+      "hint": "Think about what reference you need before you can measure anything.",
+      "sectionId": "s6"
+    }
+  ]
+}

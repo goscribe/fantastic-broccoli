@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-1",
+  "topicCode": "5.1",
+  "topicName": "Limits and the derivative",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:52.462Z",
+  "cards": [
+    {
+      "id": "0hxwmbh",
+      "kind": "concept",
+      "front": "Why does the gradient of a chord settle to one value as the step h gets smaller?",
+      "back": "As h shrinks, the second point slides along the curve towards the first, so the chord turns. Its gradient approaches the **gradient of the touching line** at that point.",
+      "hint": "Picture the chord turning as the second point moves closer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vbfje6",
+      "kind": "formula",
+      "front": "What is the limit definition of the derivative $f'(x)$, and what does it mean?",
+      "back": "$f'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}$. The **limit** is the value the chord gradient approaches as the step $h$ shrinks to zero.",
+      "hint": "Read it as a chord gradient, then shrink h.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17ca4xk",
+      "kind": "concept",
+      "front": "What does $f'(a)$ tell you, both as a gradient and as a rate?",
+      "back": "It is the **gradient** of the curve at $x=a$: positive means rising, negative means falling. As a rate, it is the **instantaneous rate of change** of $f$ at $x=a$.",
+      "hint": "One number, two readings.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08ceqb2",
+      "kind": "term",
+      "front": "What is a chord of a curve?",
+      "back": "A **chord** is a straight line segment joining two points on a curve. Its gradient is $\\frac{f(x+h)-f(x)}{h}$.",
+      "hint": "Think of a straight line cutting across the curve.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qxnpa6",
+      "kind": "term",
+      "front": "What is a limit?",
+      "back": "A **limit** is the value a function approaches as its input approaches a specified value.",
+      "hint": "Approaching a value is not the same as reaching it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hui3ay",
+      "kind": "process",
+      "front": "What are the steps to differentiate from first principles?",
+      "back": "1) Write $\\frac{f(x+h)-f(x)}{h}$. 2) Expand and simplify the numerator. 3) Cancel $h$ (allowed because $h\\neq0$). 4) Let $h\\to0$.",
+      "hint": "Simplify before letting h approach zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1c9cu4o",
+      "kind": "mistake",
+      "front": "Why can you not just substitute $h=0$ straight into the chord gradient?",
+      "back": "It gives $\\frac{0}{0}$, which has no meaning. You must **simplify and cancel $h$ first**, then let $h$ approach zero.",
+      "hint": "What happens to the denominator when h is 0?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cl4vxs",
+      "kind": "example",
+      "front": "Differentiate $f(x)=x^2$ from first principles, then find the gradient at $x=3$.",
+      "back": "$f'(x)=2x$, since $\\frac{(x+h)^2-x^2}{h}=2x+h$ tends to $2x$. So $f'(3)=6$.",
+      "hint": "Expand $(x+h)^2$ in the numerator.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rjm5gs",
+      "kind": "mistake",
+      "front": "Is a derivative the same as an average rate of change?",
+      "back": "No. A **derivative** describes one instant, while a chord gradient describes a whole interval.",
+      "hint": "Ask whether the measurement covers a point or an interval.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jnzxaj",
+      "kind": "example",
+      "front": "If $s$ is distance in metres and $t$ is time in seconds, what is the unit of $\\frac{ds}{dt}$?",
+      "back": "$\\mathrm{m\\,s^{-1}}$, the unit of $s$ divided by the unit of $t$.",
+      "hint": "Divide the units, not the numbers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e388ev",
+      "kind": "process",
+      "front": "How do you estimate $f'(a)$ from a table of values?",
+      "back": "Use a **symmetric chord**: $f'(a)\\approx\\frac{f(a+h)-f(a-h)}{2h}$. Values on both sides of $a$ usually give a better estimate than a one-sided chord.",
+      "hint": "Use points either side of a.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0p9mp91",
+      "kind": "example",
+      "front": "A trolley is at 5.832 m at t=1.8 s and 10.648 m at t=2.2 s. Estimate its speed at t=2.0 s.",
+      "back": "About $12.0\\,\\mathrm{m\\,s^{-1}}$, since $\\frac{10.648-5.832}{2.2-1.8}=\\frac{4.816}{0.4}=12.04$.",
+      "hint": "Use the chord between the two times either side of 2.0.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1dzjxvd",
+      "kind": "mistake",
+      "front": "How should you present an estimate of a derivative from a graph or table?",
+      "back": "State clearly that it is an **estimate**, and give the unit of the derivative.",
+      "hint": "Think about what the answer's accuracy and units tell the reader.",
+      "sectionId": "s5"
+    }
+  ]
+}

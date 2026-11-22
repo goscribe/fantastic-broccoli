@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-3-1-2",
+  "topicCode": "3.3.1.2",
+  "topicName": "Longitudinal and transverse waves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:10.405Z",
+  "cards": [
+    {
+      "id": "0dbobt1",
+      "kind": "concept",
+      "front": "What single feature separates a transverse wave from a longitudinal wave?",
+      "back": "The direction of the **oscillations** relative to the direction of energy transfer. They are perpendicular to travel in a transverse wave and parallel to travel in a longitudinal wave.",
+      "hint": "Compare which way the particles move with which way the energy travels.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02k479l",
+      "kind": "process",
+      "front": "What steps show that light is a transverse wave using polarising filters?",
+      "back": "1) Pass light through one **polarising filter**. 2) Place a second filter beyond it. 3) Rotate the second filter; the transmitted light fades and nearly vanishes at $90^{\\circ}$.",
+      "hint": "Think about what the second filter lets through as it turns.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hcvqeq",
+      "kind": "concept",
+      "front": "How do air particles move when a sound wave passes through air?",
+      "back": "They **oscillate** back and forth about fixed positions, parallel to the direction the sound travels. Energy passes along, but the particles do not travel with the wave.",
+      "hint": "Think about what a loudspeaker cone does to the air in front of it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19n0vau",
+      "kind": "term",
+      "front": "What is a compression in a longitudinal wave?",
+      "back": "A region where the particles are **closer together** than usual.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gn5da8",
+      "kind": "term",
+      "front": "What is a rarefaction in a longitudinal wave?",
+      "back": "A region where the particles are **further apart** than usual.",
+      "hint": "Think of the opposite of a compression.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18a28ux",
+      "kind": "term",
+      "front": "What is a polarising filter?",
+      "back": "A material that **transmits** only the oscillations of a transverse wave that lie in one direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11wjedq",
+      "kind": "term",
+      "front": "What is a plane-polarised wave?",
+      "back": "A transverse wave whose **oscillations** all lie in a single plane.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07vlk7v",
+      "kind": "mistake",
+      "front": "Why don't the coils of a spring travel along the spring with the pulse?",
+      "back": "Each coil only **oscillates** about its own rest position. It is the energy that moves along the spring, not the coils themselves.",
+      "hint": "Think about what is actually transferred along the spring.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gr5ael",
+      "kind": "mistake",
+      "front": "Why does a polarising filter reduce light intensity instead of turning all oscillations into one direction?",
+      "back": "It **blocks** the oscillations that do not lie in its direction, so the intensity falls. It does not rotate them into one direction.",
+      "hint": "Think about what happens to the oscillations the filter does not transmit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jteuy2",
+      "kind": "concept",
+      "front": "Why do polarising sunglasses reduce glare?",
+      "back": "Light reflected from water or roads is partly **polarised**, and the filters in the sunglasses block much of this reflected light.",
+      "hint": "Consider what kind of light reflections from flat surfaces carry.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09laxgb",
+      "kind": "concept",
+      "front": "Why does a rod aerial respond best to a plane-polarised radio wave when it is aligned in one way?",
+      "back": "It responds most when it lies along the **oscillations** of the wave. Rotating it away from that direction gives a weaker signal.",
+      "hint": "Compare the aerial's orientation with the direction the wave oscillates.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h2c294",
+      "kind": "concept",
+      "front": "How are the oscillating fields in electromagnetic waves oriented relative to the direction of travel?",
+      "back": "The electric and magnetic fields oscillate **perpendicular** to the direction of travel, which makes all electromagnetic waves transverse.",
+      "hint": "Think about which waves the note lists as electromagnetic.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13ksbbe",
+      "kind": "concept",
+      "front": "Which longitudinal waves are mentioned besides sound?",
+      "back": "**Ultrasound** and the primary waves produced by earthquakes.",
+      "hint": "Think about medical scans and seismology.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fhv8es",
+      "kind": "concept",
+      "front": "How is the wavelength of a transverse wave measured?",
+      "back": "As the distance from one **peak** to the next peak.",
+      "hint": "Measure between matching points on neighbouring parts of the wave.",
+      "sectionId": "s2"
+    }
+  ]
+}

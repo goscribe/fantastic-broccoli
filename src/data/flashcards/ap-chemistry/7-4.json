@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "7-4",
+  "topicCode": "7.4",
+  "topicName": "Calculating the equilibrium constant",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:53.481Z",
+  "cards": [
+    {
+      "id": "1bl9ajk",
+      "kind": "concept",
+      "front": "Why do equilibrium constant expressions use equilibrium values rather than starting values?",
+      "back": "Because K describes the **equilibrium** mixture. Brackets or partial pressures must be the values measured once the reaction has reached equilibrium, not the starting amounts.",
+      "hint": "Think about what the brackets stand for.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xf15nu",
+      "kind": "formula",
+      "front": "For aA(g) + bB(g) ⇌ cC(g) + dD(g), what is Kc in terms of concentrations?",
+      "back": "$K_c=\\frac{[\\mathrm{C}]^c[\\mathrm{D}]^d}{[\\mathrm{A}]^a[\\mathrm{B}]^b}$, where the brackets are **equilibrium concentrations** in mol L⁻¹ and the exponents are the balanced coefficients. Products go on top, reactants on the bottom.",
+      "hint": "Coefficients become exponents.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12zodw3",
+      "kind": "concept",
+      "front": "Which substances are left out of an equilibrium constant expression?",
+      "back": "**Pure solids** and **pure liquids** are left out, because their activities stay constant while the phase is present. Aqueous substances are included in Kc, even if they came from a solid.",
+      "hint": "Think about phase, not origin.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1f9hkfl",
+      "kind": "example",
+      "front": "For H2(g) + I2(g) ⇌ 2HI(g), equilibrium concentrations are [H2] = 0.20, [I2] = 0.20 and [HI] = 1.20 mol L⁻¹. What is Kc?",
+      "back": "$K_c=36$ (dimensionless). Substitute into $\\frac{[\\mathrm{HI}]^2}{[\\mathrm{H_2}][\\mathrm{I_2}]}=\\frac{(1.20)^2}{(0.20)(0.20)}$.",
+      "hint": "Write the expression first, then substitute.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pknc4z",
+      "kind": "mistake",
+      "front": "A student omits a dissolved ion from Kc because it was made from a solid. Is this correct?",
+      "back": "No. Only **pure solids** and **pure liquids** are omitted. Dissolved species can change concentration, so they must be included in $K_c$.",
+      "hint": "Check the phase of each species.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11ecnbu",
+      "kind": "mistake",
+      "front": "Can you calculate Kc from starting concentrations alone?",
+      "back": "No. Starting concentrations alone cannot give K. You need the **equilibrium concentrations** from the same equilibrium mixture.",
+      "hint": "Which values are measured at equilibrium?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1e1xr42",
+      "kind": "formula",
+      "front": "For aA(g) + bB(g) ⇌ cC(g) + dD(g), what is Kp in terms of partial pressures?",
+      "back": "$K_p=\\frac{(P_{\\mathrm{C}})^c(P_{\\mathrm{D}})^d}{(P_{\\mathrm{A}})^a(P_{\\mathrm{B}})^b}$, using each gas's **equilibrium partial pressure** in atm. The exponents come from the balanced equation.",
+      "hint": "Same pattern as Kc, but with pressures.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00bsq73",
+      "kind": "mistake",
+      "front": "For N2(g) + 3H2(g) ⇌ 2NH3(g), a student uses the total pressure in place of P(H2) in Kp. What is wrong?",
+      "back": "Each gas must use its own **partial pressure**, not the total pressure. The correct form is $K_p=\\frac{(P_{\\mathrm{NH_3}})^2}{P_{\\mathrm{N_2}}(P_{\\mathrm{H_2}})^3}$, with the hydrogen pressure raised to the third power.",
+      "hint": "Look at the coefficient of H2.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0se1uhr",
+      "kind": "example",
+      "front": "For N2O4(g) ⇌ 2NO2(g), equilibrium partial pressures are P(N2O4) = 0.50 atm and P(NO2) = 0.20 atm. What is Kp?",
+      "back": "$K_p=0.080$ (dimensionless). Substitute into $\\frac{(P_{\\mathrm{NO_2}})^2}{P_{\\mathrm{N_2O_4}}}=\\frac{(0.20)^2}{0.50}$.",
+      "hint": "Square the NO2 pressure.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0h8uciw",
+      "kind": "process",
+      "front": "What steps should you follow to calculate K from equilibrium data?",
+      "back": "First balance the equation. Then write the expression, with coefficients as exponents and solids or pure liquids left out. Substitute equilibrium values, calculate, and give K as dimensionless.",
+      "hint": "Start with the balanced equation."
+    },
+    {
+      "id": "1qyydjx",
+      "kind": "example",
+      "front": "For A(aq) ⇌ 2B(aq), equilibrium concentrations are [A] = 0.50 and [B] = 0.40 mol L⁻¹. What is Kc?",
+      "back": "$K_c=0.32$ (dimensionless). Use $\\frac{[\\mathrm{B}]^2}{[\\mathrm{A}]}=\\frac{(0.40)^2}{0.50}$.",
+      "hint": "B has an exponent of 2.",
+      "sectionId": "s3"
+    }
+  ]
+}

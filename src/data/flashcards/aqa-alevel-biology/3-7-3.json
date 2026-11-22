@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-7-3",
+  "topicCode": "3.7.3",
+  "topicName": "Evolution and speciation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:57.195Z",
+  "cards": [
+    {
+      "id": "10sm6yl",
+      "kind": "concept",
+      "front": "How does natural selection lead to evolution in a population?",
+      "back": "Individuals with **advantageous inherited traits** survive and reproduce more, passing their alleles to more offspring, so the allele frequency rises across generations.",
+      "hint": "Start with the differences between individuals in a population.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05y8sb7",
+      "kind": "concept",
+      "front": "What key outcome must occur before two populations count as separate species?",
+      "back": "**Reproductive isolation**: members can no longer exchange alleles through successful breeding, even if they once could.",
+      "hint": "Ask whether the two groups can still breed successfully together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0291h0d",
+      "kind": "concept",
+      "front": "Which process creates genuinely new alleles?",
+      "back": "**Mutation**, a change in DNA. Meiosis and random fertilisation only rearrange alleles that are already present.",
+      "hint": "Compare a change to the DNA itself with a change in how existing DNA is combined.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0u7sh24",
+      "kind": "term",
+      "front": "What is a selection pressure?",
+      "back": "A **selection pressure** is an environmental factor, such as predators, disease or limited food, that affects individuals' chances of surviving and reproducing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "154sln0",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a useful trait appears because the organism needs it?",
+      "back": "**Mutation** occurs first and regardless of need; selection may then favour carriers of the trait if it is useful.",
+      "hint": "Think about which comes first: the variation or the advantage.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0v98zqn",
+      "kind": "mistake",
+      "front": "Why does a change in allele frequency alone not prove natural selection?",
+      "back": "**Chance events** can also change allele frequencies, so the change must be linked to an inherited trait that improves survival and reproduction.",
+      "hint": "Consider what else, besides usefulness, could shift allele frequencies.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bhqbyt",
+      "kind": "process",
+      "front": "What are the steps in allopatric speciation?",
+      "back": "1 A **geographical barrier** separates populations and stops gene flow. 2 Different mutations, selection pressures and chance changes alter each group's allele frequencies. 3 Reproductive isolation may remain even after the barrier disappears.",
+      "hint": "Start with what physically happens to the population first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lbm81s",
+      "kind": "concept",
+      "front": "How does sympatric speciation differ from allopatric speciation?",
+      "back": "Populations diverge **without a geographical barrier**; for example, a chromosome-number change in a plant can stop it breeding with the original population.",
+      "hint": "Think about whether anything physically separates the groups.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bm7hro",
+      "kind": "mistake",
+      "front": "Why does living apart not by itself make two groups separate species?",
+      "back": "Separation in space is not enough; the **key outcome is reproductive isolation**, meaning the groups can no longer breed successfully.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bsji0w",
+      "kind": "formula",
+      "front": "How is the percentage of resistant bacteria calculated?",
+      "back": "$\\frac{\\text{resistant bacteria}}{\\text{total bacteria}}\\times100$ gives a **percentage** of the sample that carries resistance.",
+      "hint": "Think about dividing a part by the whole, then scaling.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qu1m6j",
+      "kind": "example",
+      "front": "Resistant bacteria rise from 15% to 65% of a population. What is the change in percentage points?",
+      "back": "$65\\%-15\\%=50$ percentage points, so the **resistant proportion** increased by 50 percentage points.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w3zwb7",
+      "kind": "concept",
+      "front": "Why does antibiotic treatment increase the proportion of resistant bacteria?",
+      "back": "**Resistant bacteria** survive treatment that kills susceptible ones, then reproduce, so the proportion carrying resistance rises.",
+      "hint": "Think about which bacteria are killed and which remain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15xckp1",
+      "kind": "term",
+      "front": "What is a resistance allele?",
+      "back": "A **resistance allele** is a gene variant that helps its carrier survive exposure to an antibiotic.",
+      "sectionId": "s4"
+    }
+  ]
+}

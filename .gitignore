@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# flashcard generator run reports (scripts/generate-flashcards.mjs)
+/src/data/flashcards/_runs/

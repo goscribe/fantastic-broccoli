@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "4-5",
+  "topicCode": "4.5",
+  "topicName": "Cell cycle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:34.239Z",
+  "cards": [
+    {
+      "id": "13xgv0n",
+      "kind": "concept",
+      "front": "What are the three main parts of the cell cycle, in order?",
+      "back": "**Interphase**, then mitosis, then cytokinesis. Interphase takes up most of the cycle, while mitosis and cytokinesis complete cell division.",
+      "hint": "Think about where the cell grows and copies its DNA.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "174azrk",
+      "kind": "concept",
+      "front": "Why must DNA be copied before mitosis begins?",
+      "back": "In **S phase**, each chromosome is copied into two sister chromatids. Mitosis then separates them, so each new nucleus gets a full set of chromosomes.",
+      "hint": "Consider what the copies are needed for.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zkf78v",
+      "kind": "concept",
+      "front": "What does mitosis do to the copied chromosomes?",
+      "back": "It **separates sister chromatids** into two nuclei. Each new nucleus has the same chromosome number as the original nucleus.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lxgm5l",
+      "kind": "term",
+      "front": "What is cytokinesis?",
+      "back": "**Cytokinesis** is the division of the cytoplasm, which forms two daughter cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14lxt7n",
+      "kind": "concept",
+      "front": "What happens during G1 phase?",
+      "back": "The cell **grows**, makes proteins, and carries out its usual work after the previous division.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m7kcf4",
+      "kind": "concept",
+      "front": "What happens during G2 phase?",
+      "back": "The cell grows further and makes materials needed for division. The copied DNA stays in the nucleus.",
+      "hint": "G2 comes after DNA replication.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lxqmii",
+      "kind": "process",
+      "front": "What are the stages of mitosis, in order?",
+      "back": "**Prophase**, metaphase, anaphase, then telophase. Chromosomes condense, line up at the middle, sister chromatids separate to opposite ends, and new nuclei form.",
+      "hint": "Remember the order: condense, line up, separate, re-form.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "144x9zu",
+      "kind": "term",
+      "front": "What is the spindle?",
+      "back": "The **spindle** is a structure of microtubules that moves chromosomes during cell division.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l0wsot",
+      "kind": "concept",
+      "front": "What is G0?",
+      "back": "G0 is a **nondividing state** that some cells enter after leaving the cell cycle. They are not moving through the usual sequence toward division.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1swhtwe",
+      "kind": "mistake",
+      "front": "Is interphase a resting stage of the cell cycle?",
+      "back": "No. Interphase is **not** a resting stage. The cell grows and carries out active processes throughout it.",
+      "hint": "Think about what the cell is doing during interphase.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s4o86r",
+      "kind": "mistake",
+      "front": "Is DNA replicated during mitosis?",
+      "back": "No. DNA is replicated in **S phase**, before mitosis. Mitosis separates the copies that already exist.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j9kmlj",
+      "kind": "term",
+      "front": "What is asexual reproduction?",
+      "back": "**Asexual reproduction** produces offspring from one parent without combining genetic material from two parents.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0boucko",
+      "kind": "concept",
+      "front": "How does mitosis support growth and replacement of cells?",
+      "back": "Mitosis increases the number of cells in a multicellular organism and replaces damaged or worn-out cells. The daughter cells keep the same chromosome number.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "164rmgk",
+      "kind": "mistake",
+      "front": "Does mitosis reduce the chromosome number of the daughter cells?",
+      "back": "No. Mitosis **maintains** chromosome number. The daughter cells generally have the same chromosome number and genetic information as the original cell.",
+      "sectionId": "s4"
+    }
+  ]
+}

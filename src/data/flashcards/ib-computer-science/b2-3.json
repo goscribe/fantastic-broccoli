@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "b2-3",
+  "topicCode": "B2.3",
+  "topicName": "Programming constructs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:06.852Z",
+  "cards": [
+    {
+      "id": "0e3lftf",
+      "kind": "concept",
+      "front": "What are the three constructs that every program is built from?",
+      "back": "**Sequence**, **selection** and **iteration**. Sequence runs statements in order, selection chooses a path using a condition, and iteration repeats statements until a stopping point is reached.",
+      "hint": "Think of a recipe: it has steps, choices and repeats.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00wjbii",
+      "kind": "concept",
+      "front": "How does an if-else statement decide what runs?",
+      "back": "It tests a **condition** that is true or false. The true block runs when the condition holds, otherwise the else block runs, so exactly one path is taken.",
+      "hint": "Look at what the condition evaluates to.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06s3h9e",
+      "kind": "concept",
+      "front": "What is nesting, and how many times does an inner loop body run in total?",
+      "back": "**Nesting** means placing one construct inside another. The inner loop runs in full on every outer pass, so the total is the outer count multiplied by the inner count.",
+      "hint": "Think of how a clock's minutes sit inside each hour.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0njqmuh",
+      "kind": "term",
+      "front": "What is a count-controlled loop?",
+      "back": "A **count-controlled loop** repeats its body a fixed, known number of times, such as loop i from 1 to 4 running four times.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0c53w43",
+      "kind": "term",
+      "front": "What is a condition-controlled loop, and why might it run zero times?",
+      "back": "A **condition-controlled loop** repeats while a condition stays true. The number of repeats is not known in advance, and it may be zero if the condition is false at the start.",
+      "hint": "Think of while n > 0.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14yyaxy",
+      "kind": "example",
+      "front": "What does this print: total = 0; loop i from 1 to 4; total = total + i; end loop; output total",
+      "back": "**10**. Total goes 1, 3, 6, 10 as i takes the values 1 to 4.",
+      "hint": "Track total after each pass.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l50mm1",
+      "kind": "example",
+      "front": "An outer loop runs 3 times and its inner loop runs 4 times on each pass. How many times does the inner body run?",
+      "back": "**12** times, because $3\\times4=12$.",
+      "hint": "Multiply the outer count by the inner count.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vni5qg",
+      "kind": "mistake",
+      "front": "Why is writing if mark = 50 wrong when you want to compare values?",
+      "back": "In these notes **=** assigns a value, so it does not compare. Use **==** to compare two values.",
+      "hint": "Which symbol assigns and which compares?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gl6d8l",
+      "kind": "mistake",
+      "front": "What must happen inside a while loop, and what goes wrong if it does not?",
+      "back": "Something inside the loop must change the **condition**. Otherwise the condition stays true and the loop never ends.",
+      "hint": "Think about what the test is checking.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "146wfux",
+      "kind": "process",
+      "front": "How should you trace nested code reliably?",
+      "back": "Use a **trace table** that records each variable after every line. Finish all inner passes before the outer loop moves on, and check each condition against current values.",
+      "hint": "Work one pass at a time.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1q7fncs",
+      "kind": "term",
+      "front": "What is a trace table?",
+      "back": "A **trace table** is a table that records the value of each variable after every line of a program is executed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zlonbf",
+      "kind": "example",
+      "front": "Program: count = 0; loop i from 1 to 6; if i mod 2 == 0 then count = count + i; end if; end loop; output count. What is the output?",
+      "back": "**12**. Only the even values 2, 4 and 6 are added, so count goes 2, 6, 12.",
+      "hint": "Check the if test with each value of i.",
+      "sectionId": "s5"
+    }
+  ]
+}

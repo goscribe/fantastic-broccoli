@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-2",
+  "topicCode": "3.2",
+  "topicName": "Trigonometry in triangles",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:35.106Z",
+  "cards": [
+    {
+      "id": "0j6rxjp",
+      "kind": "formula",
+      "front": "What is the sine rule, and when should you use it?",
+      "back": "The **sine rule** says $\\frac{a}{\\sin A}=\\frac{b}{\\sin B}=\\frac{c}{\\sin C}$. Use it when you know a side and its opposite angle, plus one more angle or side.",
+      "hint": "Each side sits over the sine of its opposite angle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14g0ila",
+      "kind": "formula",
+      "front": "What is the cosine rule for side $c$, and when is it needed?",
+      "back": "The **cosine rule** is $c^2=a^2+b^2-2ab\\cos C$, where $C$ is the included angle. Use it for two sides with the included angle, or for three sides. It works for any triangle.",
+      "hint": "Think of the angle between the two known sides.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hrsqd5",
+      "kind": "concept",
+      "front": "Given two angles and a side, or two sides and a non-included angle, which rule applies?",
+      "back": "The **sine rule**. Two sides and the included angle, or three sides, need the cosine rule instead.",
+      "hint": "Sketch the triangle and mark what you know.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0u8opq4",
+      "kind": "concept",
+      "front": "What do SOH CAH TOA stand for in a right-angled triangle?",
+      "back": "**SOH**: $\\sin\\theta=\\frac{\\mathrm{opposite}}{\\mathrm{hypotenuse}}$. **CAH**: $\\cos\\theta=\\frac{\\mathrm{adjacent}}{\\mathrm{hypotenuse}}$. **TOA**: $\\tan\\theta=\\frac{\\mathrm{opposite}}{\\mathrm{adjacent}}$.",
+      "hint": "Three ratios, three letter groups.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xh8rs1",
+      "kind": "example",
+      "front": "A ramp is 5.00 m long and rises 1.20 m. What angle does it make with the ground?",
+      "back": "**13.9°**. Use $\\sin\\theta=\\frac{1.20}{5.00}=0.240$, then $\\theta=\\sin^{-1}(0.240)$.",
+      "hint": "The rise is opposite the angle and the ramp is the hypotenuse.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yuoggc",
+      "kind": "example",
+      "front": "In triangle $ABC$, $A=40^{\\circ}$, $B=65^{\\circ}$ and $a=8.00$ cm. Find $b$.",
+      "back": "$b\\approx11.3$ cm. Use $b=\\frac{a\\sin B}{\\sin A}=\\frac{8.00\\sin65^{\\circ}}{\\sin40^{\\circ}}$.",
+      "hint": "Put the unknown side on top.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1aiyk8y",
+      "kind": "example",
+      "front": "A triangle has sides 5.00 cm, 6.00 cm and 7.00 cm. Find the angle opposite the 7.00 cm side.",
+      "back": "**78.5°**. Rearrange to $\\cos C=\\frac{5.00^2+6.00^2-7.00^2}{2\\times5.00\\times6.00}=0.200$, then take the inverse cosine.",
+      "hint": "Rearrange the cosine rule to make $\\cos C$ the subject.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09pxig7",
+      "kind": "mistake",
+      "front": "A student finds an angle from its sine and stops. What might they have missed?",
+      "back": "A calculator's inverse sine gives only the **acute** angle. The obtuse angle $180^{\\circ}$ minus it has the same sine, so check whether it also fits the triangle.",
+      "hint": "Sine of an angle equals sine of its supplement.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j1l1bj",
+      "kind": "term",
+      "front": "What is the ambiguous case?",
+      "back": "The **ambiguous case** is when two sides and a non-included angle fit two different triangles, because the sine rule gives both an acute and an obtuse angle.",
+      "hint": "Two triangles can fit the same data.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wtotp5",
+      "kind": "formula",
+      "front": "What is the area of a triangle with sides $a$ and $b$ and included angle $C$?",
+      "back": "**Area** $=\\frac{1}{2}ab\\sin C$, where $C$ is the angle between sides $a$ and $b$. The missing height is hidden inside as $b\\sin C$.",
+      "hint": "No height is needed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0m8abbl",
+      "kind": "example",
+      "front": "A triangular garden has sides 12.0 m and 15.0 m with an included angle of $70^{\\circ}$. What is its area?",
+      "back": "**84.6 m²**. Substitute: $\\frac{1}{2}\\times12.0\\times15.0\\times\\sin70^{\\circ}=90.0\\times0.9397\\approx84.6$.",
+      "hint": "Show the substitution before the answer.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0saitjb",
+      "kind": "mistake",
+      "front": "Why is using the wrong angle in the area formula a mistake?",
+      "back": "The angle must sit **between** the two sides you use. An angle outside those sides gives the wrong area, so check the included angle first.",
+      "hint": "Picture the angle sitting between the two sides.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0uzyz9z",
+      "kind": "process",
+      "front": "How do you find the area of a shape that is not a single triangle?",
+      "back": "**Split** it into triangles, usually with one diagonal. Find each triangle's area with $\\frac{1}{2}ab\\sin C$, then add them.",
+      "hint": "Think of a plot of land.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xahcla",
+      "kind": "concept",
+      "front": "How does equal areas explain the sine rule?",
+      "back": "Writing the area with two different pairs of sides gives $\\frac{1}{2}bc\\sin A=\\frac{1}{2}ac\\sin B$. Cancelling and dividing gives $\\frac{a}{\\sin A}=\\frac{b}{\\sin B}$.",
+      "hint": "Write the area two ways.",
+      "sectionId": "s5"
+    }
+  ]
+}

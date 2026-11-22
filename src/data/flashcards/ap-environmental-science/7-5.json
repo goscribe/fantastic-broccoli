@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "7-5",
+  "topicCode": "7.5",
+  "topicName": "Indoor air pollutants",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:37.017Z",
+  "cards": [
+    {
+      "id": "1iko77y",
+      "kind": "concept",
+      "front": "Why can indoor air hold higher pollutant levels than outdoor air?",
+      "back": "Pollutants released indoors stay in a small, enclosed space, so concentrations can be higher. Wind and weather that dilute **outdoor** pollution do not reach inside sealed buildings.",
+      "hint": "Think about where the pollutant goes after it is released.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17i9he4",
+      "kind": "term",
+      "front": "What is source control?",
+      "back": "**Source control** removes or reduces a pollutant at its origin, so it never builds up. Examples include banning indoor smoking and choosing low-VOC paint.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nr6rtr",
+      "kind": "concept",
+      "front": "How does carbon monoxide harm the human body?",
+      "back": "Carbon monoxide binds to **hemoglobin** in the blood, which lowers the oxygen delivered around the body. This causes headaches and dizziness, and death at high levels.",
+      "hint": "Think about what hemoglobin normally carries.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0djez2u",
+      "kind": "term",
+      "front": "What is radon, and where does it come from?",
+      "back": "**Radon** is a colorless, odorless, radioactive gas made by the natural decay of uranium in soil and rock. It seeps up through foundation cracks and builds up in basements.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jh6isk",
+      "kind": "term",
+      "front": "What is a volatile organic compound (VOC)?",
+      "back": "A **volatile organic compound** is a carbon-containing chemical that evaporates easily at room temperature. Paints, cleaners, and new furniture emit VOC vapors.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1otegqb",
+      "kind": "term",
+      "front": "What is asbestos, and what health problem does it cause?",
+      "back": "**Asbestos** is a group of heat-resistant mineral fibers once used in insulation and tiles. When inhaled, it causes lung scarring and cancer.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03f5mfp",
+      "kind": "term",
+      "front": "What is ventilation, and how does it reduce indoor pollution?",
+      "back": "**Ventilation** is the exchange of indoor air with outdoor air. It dilutes and removes pollutants, and it helps most when sources cannot be removed.",
+      "hint": "Think about what happens to the air when windows or exhaust fans are used.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18rp1j6",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume a gas with no smell is harmless?",
+      "back": "Odorless does **not** mean harmless. Radon and carbon monoxide have no smell, so people need tests and detectors to find them.",
+      "hint": "Think about which of your senses would warn you.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xktvwv",
+      "kind": "process",
+      "front": "What steps can a homeowner take to reduce radon exposure?",
+      "back": "First, **test** the home for radon. Then seal cracks in the foundation and increase ventilation in the basement to dilute the gas.",
+      "hint": "Start with finding out whether the problem exists.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1khrwez",
+      "kind": "concept",
+      "front": "Why are some people more at risk from indoor pollutants than others?",
+      "back": "Health harm depends on **dose** and length of exposure. Children, older adults, and people with lung or heart disease are the most vulnerable.",
+      "hint": "Think about both how much and how long someone is exposed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tui3ru",
+      "kind": "concept",
+      "front": "What causes serious respiratory illness in many poorer regions?",
+      "back": "Families cook over wood or other fuels in **poorly ventilated** homes. The smoke stays indoors and causes serious breathing illness.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1x871iq",
+      "kind": "concept",
+      "front": "Who mainly controls indoor air pollution, compared with outdoor air pollution?",
+      "back": "Indoor air is mostly controlled by **residents and owners**. Outdoor air is mostly controlled by laws and public agencies that monitor and regulate sources.",
+      "hint": "Think about who can change the sources inside a home.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xqjzih",
+      "kind": "concept",
+      "front": "Which living-thing sources grow in damp materials and bedding and trigger asthma attacks?",
+      "back": "**Mold and dust mites** grow in damp materials and bedding. They cause allergies and asthma attacks when people breathe them in.",
+      "hint": "Think about the conditions these living things need to thrive.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "7-3",
+  "topicCode": "7.3",
+  "topicName": "Solid waste",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:43.530Z",
+  "cards": [
+    {
+      "id": "0r2i576",
+      "kind": "concept",
+      "front": "Which strategy ranks highest in the waste hierarchy, and where does disposal sit?",
+      "back": "**Reduce** ranks highest, because it stops waste being made in the first place. Reuse and recycling come next, and disposal is the last resort.",
+      "hint": "Think about what avoids making waste at all.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00r591o",
+      "kind": "concept",
+      "front": "Why does no method of disposing of solid waste come without a cost?",
+      "back": "**Every method solves one problem and creates another.** Landfill releases leachate and methane, incineration releases air pollutants and ash, and composting needs separated waste.",
+      "hint": "Compare the costs column in the disposal table.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1c7jhr1",
+      "kind": "formula",
+      "front": "How is the recycling rate calculated, and what does it give?",
+      "back": "$\\frac{\\text{mass recycled}}{\\text{total mass}}\\times100$, giving a **percentage** by mass. The units cancel, leaving a percentage.",
+      "hint": "Divide the recycled part by the whole, then convert to percent.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1q2rznd",
+      "kind": "term",
+      "front": "What is solid waste?",
+      "back": "**Unwanted solid material** discarded by households, businesses, farms and industry.",
+      "hint": "Think about what gets thrown away across all sectors of society.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wu4snk",
+      "kind": "term",
+      "front": "What makes waste hazardous?",
+      "back": "Waste that can harm people or the environment because it is **toxic, flammable, corrosive or reactive**. Used batteries and paint are examples.",
+      "hint": "Four properties make it dangerous.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0w90lfn",
+      "kind": "term",
+      "front": "What is a landfill?",
+      "back": "A site where waste is **buried** in a lined pit to hold back liquids, then covered with soil.",
+      "hint": "Consider what the lining is for.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rdj9c2",
+      "kind": "concept",
+      "front": "What does incineration achieve, and what problem remains?",
+      "back": "It **greatly reduces waste volume**, and the heat can generate electricity. The **ash** left behind still needs disposal.",
+      "hint": "Think about what is left after burning.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n9vaey",
+      "kind": "process",
+      "front": "Describe how composting turns food and garden waste into compost.",
+      "back": "Decomposers break down the waste in a heap with **plenty of air**, producing compost that improves soil.",
+      "hint": "Note the role of decomposers and oxygen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kz7b0x",
+      "kind": "term",
+      "front": "What is leachate?",
+      "back": "**Liquid that drains through waste** and carries pollutants, which can contaminate groundwater and rivers if a landfill lining fails.",
+      "hint": "It is a liquid that flows out of buried waste.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tw8vfh",
+      "kind": "concept",
+      "front": "Why does buried waste produce methane, while a compost heap releases far less?",
+      "back": "Buried waste gets **little oxygen**, so it decomposes without air and produces methane, a greenhouse gas. Compost heaps have air.",
+      "hint": "Focus on what the decomposition needs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gchr9o",
+      "kind": "mistake",
+      "front": "Does burning waste make it disappear?",
+      "back": "No. **Incineration** produces ash, gases and heat, and all of these must be managed.",
+      "hint": "Consider what the burning actually produces.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bot06r",
+      "kind": "mistake",
+      "front": "Is recycling always the best way to manage waste?",
+      "back": "No. **Reducing and reusing** rank higher, because they avoid reprocessing, which needs collection, sorting and energy.",
+      "hint": "Compare the order in the waste hierarchy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uw7so9",
+      "kind": "example",
+      "front": "A town produces 800 tonnes of household waste in a month and recycles 240 tonnes. What is its recycling rate?",
+      "back": "**30%**, from $\\frac{240}{800}\\times100=30$.",
+      "hint": "Divide the recycled mass by the total mass, then multiply by 100.",
+      "sectionId": "s5"
+    }
+  ]
+}

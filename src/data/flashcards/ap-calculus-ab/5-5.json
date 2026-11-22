@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "5-5",
+  "topicCode": "5.5",
+  "topicName": "Candidates test",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:15.424Z",
+  "cards": [
+    {
+      "id": "1bn12j1",
+      "kind": "concept",
+      "front": "Where can an absolute extreme of a continuous function on a closed interval occur?",
+      "back": "Only at **candidates**: both endpoints and interior points where $f'(x)=0$ or $f'$ is undefined. These are the only places to check.",
+      "hint": "Think about which inputs you must test, not just where the slope is flat.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07fzb3k",
+      "kind": "process",
+      "front": "What are the steps of the candidates test?",
+      "back": "1) List all **candidates**: endpoints plus interior points where $f'(x)=0$ or $f'$ is undefined. 2) Evaluate the original $f$ at each candidate. 3) Compare the outputs to find the largest and smallest.",
+      "hint": "Three steps, in this order."
+    },
+    {
+      "id": "0sokrin",
+      "kind": "mistake",
+      "front": "Why is checking only where $f'(x)=0$ not enough?",
+      "back": "An absolute extreme can occur at an **endpoint** or at an interior point where the derivative is undefined, so those inputs must be checked too.",
+      "hint": "Consider $f(x)=|x|$ on $[-2,1]$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10y5t8k",
+      "kind": "term",
+      "front": "What is a candidate in the candidates test?",
+      "back": "A **candidate** is an endpoint or interior critical point where an absolute extreme might occur. It is a possible location, not a guaranteed extreme.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12u3u04",
+      "kind": "term",
+      "front": "What is a closed interval?",
+      "back": "A **closed interval** $[a,b]$ includes both endpoints $a$ and $b$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0q9href",
+      "kind": "process",
+      "front": "Which interior inputs do you add when building the candidate list?",
+      "back": "Solve $f'(x)=0$ and include interior inputs where $f'$ is **undefined** but $f$ is defined. Discard inputs outside the interval and list each input once.",
+      "hint": "Only inputs strictly inside the interval count here.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s59cm8",
+      "kind": "concept",
+      "front": "Why do you evaluate the original function rather than its derivative at candidates?",
+      "back": "Absolute extrema are **function outputs**, so substitute each candidate into $f(x)$. The derivative only helps locate candidates; its values do not decide the extrema.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qv4bvy",
+      "kind": "example",
+      "front": "Find the absolute maximum and minimum of $f(x)=x^2-2x$ on $[-1,4]$.",
+      "back": "Absolute minimum $-1$ at $x=1$; absolute maximum $8$ at $x=4$. Candidates $-1$, $1$, $4$ give outputs $3$, $-1$, $8$.",
+      "hint": "Start with $f'(x)=2x-2$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hgpvjs",
+      "kind": "example",
+      "front": "Find the absolute extrema of $f(x)=x^2-4x$ on $[0,5]$, with locations.",
+      "back": "Absolute minimum $-4$ at $x=2$; absolute maximum $5$ at $x=5$. Outputs are $f(0)=0$, $f(2)=-4$, $f(5)=5$.",
+      "hint": "The interior candidate comes from $f'(x)=2x-4=0$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15vvt0q",
+      "kind": "mistake",
+      "front": "Why must you state both the extreme value and its location?",
+      "back": "The **value** is the output and the **location** is the input. Different candidates can share one extreme value, so report every matching location.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jlvouo",
+      "kind": "example",
+      "front": "Where does $f(x)=x^2$ reach its absolute maximum on $[-1,1]$?",
+      "back": "The absolute maximum value $1$ occurs at both $x=-1$ and $x=1$. The absolute minimum value $0$ occurs at $x=0$.",
+      "hint": "Think about which input gives the parabola its largest height.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18w07q4",
+      "kind": "term",
+      "front": "What is the absolute maximum value of a function on an interval?",
+      "back": "The **greatest** function output anywhere on the stated interval. It is the largest of the candidate outputs."
+    },
+    {
+      "id": "0giziz0",
+      "kind": "term",
+      "front": "What does it mean that a derivative is undefined at an input?",
+      "back": "The function has **no derivative** at that input, such as the corner of $f(x)=|x|$ at $x=0$. That input is still a candidate if $f$ is defined there.",
+      "sectionId": "s2"
+    }
+  ]
+}

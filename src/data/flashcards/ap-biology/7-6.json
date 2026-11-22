@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "7-6",
+  "topicCode": "7.6",
+  "topicName": "Evidence of evolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:50.104Z",
+  "cards": [
+    {
+      "id": "1kwom5i",
+      "kind": "concept",
+      "front": "Why is evidence for evolution gathered from several independent sources rather than just one?",
+      "back": "Several **independent sources** together support change over time and shared ancestry. No single source records every event, so the sources combine to build the conclusion.",
+      "hint": "Think about what fossils, anatomy, and molecules each can and cannot record.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "006bdaq",
+      "kind": "concept",
+      "front": "How do homologous structures differ from analogous structures as evidence of common ancestry?",
+      "back": "**Homologous** structures share an inherited anatomical pattern from a common ancestor, even when their functions differ. **Analogous** structures do similar jobs but did not inherit those functions from the same ancestral structure.",
+      "hint": "Focus on inheritance versus function.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ex2194",
+      "kind": "concept",
+      "front": "Why do similar DNA and protein sequences suggest that two species share a common ancestor?",
+      "back": "Descendants **inherit DNA** from their ancestors, and changes build up in inherited sequences over generations. Species with more similar sequences usually share a more recent common ancestor.",
+      "hint": "Think about how inheritance and accumulated change work together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kzwqm8",
+      "kind": "term",
+      "front": "What is the fossil record?",
+      "back": "The **collection of discovered fossils** and their positions in geological layers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tjbgwi",
+      "kind": "term",
+      "front": "What are homologous structures?",
+      "back": "Structures that share an **inherited anatomical pattern** from a common ancestor, even though their functions may differ.",
+      "hint": "Vertebrate forelimbs are one example.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1a2o194",
+      "kind": "term",
+      "front": "What is a vestigial structure?",
+      "back": "An **inherited feature** whose function is reduced or changed compared with ancestral forms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1iz4yho",
+      "kind": "process",
+      "front": "How can fossils in rock layers show a relative sequence of change over time?",
+      "back": "In an **undisturbed sequence**, deeper layers are generally older than layers above them. Fossils in successive layers can then show how traits changed over time.",
+      "hint": "Think about how rock layers are laid down.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1iyg8h2",
+      "kind": "process",
+      "front": "What steps do researchers take when comparing protein sequences across species?",
+      "back": "They **compare corresponding genes or proteins** across species, look for matching positions, and examine the patterns of differences between them.",
+      "hint": "Start with what is being matched.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e5gdii",
+      "kind": "mistake",
+      "front": "A fossil shows traits of two groups. Is it the direct ancestor of a living species?",
+      "back": "**Not necessarily.** It may represent a related lineage. It still documents change between ancestral and later forms.",
+      "hint": "Consider what transitional forms show.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q9h906",
+      "kind": "mistake",
+      "front": "Does a gap in the fossil record mean that evolution stopped or that no intermediate forms existed?",
+      "back": "**No.** Fossil preservation needs particular conditions, so many organisms left no fossils. A gap does not prove evolution stopped.",
+      "hint": "Think about why organisms become fossils.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fjhfao",
+      "kind": "mistake",
+      "front": "If two proteins have identical amino acid sequences, must their DNA sequences also be identical?",
+      "back": "**No.** Different DNA sequences can encode the same amino acid sequence, so similar proteins do not always have identical DNA.",
+      "hint": "Consider how the genetic code works.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qfjzcy",
+      "kind": "mistake",
+      "front": "Is one broad resemblance between two structures enough to prove common ancestry?",
+      "back": "**No.** Anatomy is stronger evidence when several detailed features agree, rather than relying on one broad resemblance.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1matobg",
+      "kind": "concept",
+      "front": "Can sequence similarity alone tell you exactly when two species shared an ancestor?",
+      "back": "**No.** Similarity gives no exact date, because some sequences change faster than others and natural selection can preserve important sequences for long periods.",
+      "hint": "Think about differing rates of change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1i0xyic",
+      "kind": "term",
+      "front": "What are molecular data in evidence for evolution?",
+      "back": "**DNA sequences** and the amino acid sequences of proteins, which can be compared across species.",
+      "sectionId": "s1"
+    }
+  ]
+}

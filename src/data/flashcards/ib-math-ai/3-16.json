@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-16",
+  "topicCode": "3.16",
+  "topicName": "Tree and cycle algorithms",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:45.973Z",
+  "cards": [
+    {
+      "id": "0lc3zo2",
+      "kind": "concept",
+      "front": "What does a minimum spanning tree connect, and what must it avoid?",
+      "back": "It connects **every vertex** at the least total weight, with no cycle. It is the cheapest way to connect all vertices, not the shortest route between two of them.",
+      "hint": "Think about connecting everything cheaply, not travelling.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bjadvr",
+      "kind": "process",
+      "front": "What are the four steps of Kruskal's algorithm?",
+      "back": "Sort the edges from smallest to largest. Take the smallest edge not yet considered. Add it unless it completes a **cycle**. Stop when the tree has n minus 1 edges.",
+      "hint": "The first step is sorting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "091cz89",
+      "kind": "concept",
+      "front": "Which algorithm should you choose for linking towns with cable, and why?",
+      "back": "**Kruskal's or Prim's** algorithm, because the task must cover every vertex with no cycles. Each route need not return to the start, and the weights are the cable costs.",
+      "hint": "Ask what the route must cover.",
+      "sectionId": "s7"
+    },
+    {
+      "id": "1uj70r1",
+      "kind": "term",
+      "front": "What is a spanning tree?",
+      "back": "A **spanning tree** is a connected subgraph that reaches every vertex and has no cycle. With n vertices it always has exactly n minus 1 edges.",
+      "hint": "Connected, every vertex, no cycle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02cm1p0",
+      "kind": "concept",
+      "front": "Why does rejecting an edge in Kruskal's algorithm not mean a mistake?",
+      "back": "Rejecting an edge means its two vertices are **already connected**, so adding it would create a cycle. This is an expected part of the method.",
+      "hint": "What does a cycle mean for the tree?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wmc38a",
+      "kind": "process",
+      "front": "What are the steps of Prim's algorithm?",
+      "back": "Choose a starting vertex. Find the cheapest edge joining the tree to a vertex outside it. Add that edge and its new vertex. Repeat until every vertex is in the **single tree**.",
+      "hint": "One tree grows from a start vertex.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sszl02",
+      "kind": "mistake",
+      "front": "A student says the nearest neighbour cycle must be the shortest cycle. What is wrong?",
+      "back": "It is only an **upper bound**. It is one valid cycle, and a shorter valid cycle may exist. The true shortest cycle may be shorter.",
+      "hint": "How many cycles might there be?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cpryfv",
+      "kind": "term",
+      "front": "What is the degree of a vertex?",
+      "back": "The **number of edges** that meet at that vertex. If every degree is even, an Eulerian circuit exists.",
+      "hint": "Count the edges touching the vertex.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w9nz3g",
+      "kind": "process",
+      "front": "What are the steps for the Chinese postman problem when some vertices have odd degree?",
+      "back": "Identify the odd vertices. List every way of pairing them. Find the shortest path for each pair. Choose the pairing with the smallest total and add it to the **total weight** of all edges.",
+      "hint": "Odd vertices come first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dkft4x",
+      "kind": "example",
+      "front": "Roads AB 3 km, BC 4 km, CD 5 km, DA 6 km and AC 8 km. What is the shortest route using every road and returning to its start?",
+      "back": "**33 km**. The total of all roads is 26 km. Odd vertices A and C are joined by the path A to B to C, which is 7 km, giving 26 plus 7.",
+      "hint": "Find the degrees first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qct1w6",
+      "kind": "term",
+      "front": "What is the travelling salesman problem?",
+      "back": "Finding the **minimum-weight cycle** that visits every vertex exactly once and returns to the start.",
+      "hint": "Every vertex once, not every edge.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vk000n",
+      "kind": "example",
+      "front": "Towns AB 5, AC 8, AD 6, BC 4, BD 7 and CD 9 km. What bounds the shortest cycle?",
+      "back": "Between **22 km and 24 km**. The nearest neighbour cycle ABCDA gives 24 km as the upper bound. Deleting A gives 11 plus 11, so 22 km is the lower bound.",
+      "hint": "Nearest neighbour from A gives the upper bound.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0efbc6h",
+      "kind": "concept",
+      "front": "Why does deleting a vertex give a lower bound for the shortest cycle?",
+      "back": "Every cycle uses **two edges** at the deleted vertex, so add the two smallest edges there. The other edges connect the remaining vertices, so they weigh at least as much as their minimum spanning tree.",
+      "hint": "Count the edges at the deleted vertex.",
+      "sectionId": "s6"
+    }
+  ]
+}

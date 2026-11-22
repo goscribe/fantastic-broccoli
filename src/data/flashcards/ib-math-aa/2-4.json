@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-4",
+  "topicCode": "2.4",
+  "topicName": "Key features of graphs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:07.157Z",
+  "cards": [
+    {
+      "id": "138o8qk",
+      "kind": "concept",
+      "front": "How can you tell from a graph whether a function is increasing or decreasing?",
+      "back": "Read the graph from **left to right**. It is increasing where the outputs get larger as $x$ increases, and decreasing where they get smaller. State the intervals using $x$-values.",
+      "hint": "Imagine walking along the curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03830e6",
+      "kind": "term",
+      "front": "What is a turning point?",
+      "back": "A **turning point** is where a graph switches from increasing to decreasing, or from decreasing to increasing. A maximum point rises then falls; a minimum point falls then rises.",
+      "hint": "Where does the graph change direction?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ossdvb",
+      "kind": "concept",
+      "front": "How can the zeros of a U-shaped graph help you find its turning point?",
+      "back": "The **line of symmetry** lies midway between the two zeros, and the turning point lies on it. Average the zeros to get the $x$-coordinate, then substitute to find the height.",
+      "hint": "Average the two zeros.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1iu28lr",
+      "kind": "term",
+      "front": "What is a zero of a function?",
+      "back": "A **zero** is a value of $x$ for which $f(x)=0$. It is only an $x$-value, whereas an $x$-intercept is a point with two coordinates.",
+      "hint": "Set the output to zero.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0klvith",
+      "kind": "process",
+      "front": "How do you find the y-intercept and the zeros of a function from its equation?",
+      "back": "For the **y-intercept**, substitute $x=0$. For the **zeros**, set $f(x)=0$ and solve. Write intercepts as coordinates when a question asks for points.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vgm4n8",
+      "kind": "example",
+      "front": "Find the intercepts of $f(x)=(x-2)(x+5)$.",
+      "back": "Zeros: $x=2$ and $x=-5$, so $(2,0)$ and $(-5,0)$. At $x=0$, $f(0)=(-2)(5)=-10$, so the $y$-intercept is $(0,-10)$.",
+      "hint": "Set each bracket to zero, then substitute $x=0$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09mxprz",
+      "kind": "mistake",
+      "front": "A student solves $(x-1)(x+3)=0$ and writes $x=-1$ or $x=3$. What is the error?",
+      "back": "**Sign error**. $x-1=0$ gives $x=1$, and $x+3=0$ gives $x=-3$. Move the constant to the other side with the opposite sign.",
+      "hint": "Check each bracket separately.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0e4qxsm",
+      "kind": "term",
+      "front": "What is a line of symmetry?",
+      "back": "A **line of symmetry** is a line that divides a graph into two mirror-image halves. The graph of $y=x^2$ is symmetric about the $y$-axis, which is $x=0$.",
+      "hint": "Imagine folding the graph along the line.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0l96ajv",
+      "kind": "example",
+      "front": "For $f(x)=(x-2)^2$, state where $f$ is increasing and where it is decreasing.",
+      "back": "Decreasing for $x<2$ and increasing for $x>2$. The outputs fall from $4$ to $0$ as $x$ goes from $0$ to $2$, then rise again.",
+      "hint": "Compare values either side of $x=2$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bveyj2",
+      "kind": "concept",
+      "front": "What does point symmetry about a point mean?",
+      "back": "A **half-turn** of $180^{\\circ}$ about the point maps the graph onto itself. For example, $y=x^3$ has point symmetry about the origin.",
+      "hint": "Rotate the picture.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mjwea5",
+      "kind": "mistake",
+      "front": "Is a maximum point always the greatest value of a function?",
+      "back": "No. A **maximum point** is only higher than nearby points. The graph may rise to a larger value elsewhere, so it can be a local peak rather than the overall greatest value.",
+      "hint": "Think about points far away.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ptlv9o",
+      "kind": "example",
+      "front": "Give the minimum point and line of symmetry of $f(x)=(x-1)(x+3)$.",
+      "back": "Minimum point $(-1,-4)$ and line of symmetry $x=-1$. The zeros are $1$ and $-3$, with midpoint $x=-1$, and $f(-1)=(-2)(2)=-4$.",
+      "hint": "Average the zeros first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zw7u6r",
+      "kind": "process",
+      "front": "In what order should you describe the key features of a graph?",
+      "back": "Give the **intercepts** first, then the turning points (maximum or minimum), then the intervals of increase and decrease, and finally any symmetry.",
+      "hint": "Four features, always in the same order.",
+      "sectionId": "s5"
+    }
+  ]
+}

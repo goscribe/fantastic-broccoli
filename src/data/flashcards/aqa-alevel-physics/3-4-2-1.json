@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-4-2-1",
+  "topicCode": "3.4.2.1",
+  "topicName": "Bulk properties of solids",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:47.012Z",
+  "cards": [
+    {
+      "id": "1lco436",
+      "kind": "formula",
+      "front": "Which equation links force and extension for a spring within its limit of proportionality?",
+      "back": "**Hooke's law**: $F=k\\Delta L$, with $F$ in $\\mathrm{N}$, $k$ in $\\mathrm{N\\,m^{-1}}$ and $\\Delta L$ in $\\mathrm{m}$. It holds only up to the limit of proportionality.",
+      "hint": "Think about what the gradient of a straight force–extension line tells you.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "030uk5z",
+      "kind": "concept",
+      "front": "Why does a wire stretched past its elastic limit stay longer when the force is removed?",
+      "back": "It has undergone **plastic deformation**, a permanent change in shape. Within the elastic limit the material is elastic and fully recovers its original length.",
+      "hint": "Compare with a rubber band after a gentle pull.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00jpmsg",
+      "kind": "concept",
+      "front": "How does a brittle material fail differently from a ductile material when stretched until it breaks?",
+      "back": "A **brittle** material fractures suddenly with little or no plastic deformation, so there is almost no warning. A **ductile** material extends plastically by a large amount first, giving clear warning.",
+      "hint": "Compare glass with copper wire.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19d7uuy",
+      "kind": "term",
+      "front": "How is density defined as a property of a material?",
+      "back": "**Density** is mass per unit volume, $\\rho=\\frac{m}{V}$, measured in $\\mathrm{kg\\,m^{-3}}$. It belongs to the material, not to the size of the object.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qq54dn",
+      "kind": "term",
+      "front": "How is the spring constant $k$ defined for a spring?",
+      "back": "The **spring constant** $k$ is the force per unit extension, $k=\\frac{F}{\\Delta L}$, measured in $\\mathrm{N\\,m^{-1}}$. A stiff spring has a large value of $k$.",
+      "hint": "Think about how steep the straight part of a force–extension graph is.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06h6lij",
+      "kind": "term",
+      "front": "What is the limit of proportionality on a force–extension graph?",
+      "back": "The **limit of proportionality** is the point beyond which force is no longer directly proportional to extension, so the graph stops being a straight line.",
+      "hint": "Consider when Hooke's law stops being obeyed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1p41enq",
+      "kind": "term",
+      "front": "What is the elastic limit of a material?",
+      "back": "The **elastic limit** is the greatest force or extension from which the material still fully recovers its original length when unloaded.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1azngun",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume the elastic limit and the limit of proportionality are always the same point?",
+      "back": "They can differ. A material can stay **elastic** after it stops obeying Hooke's law, so it still returns to its original length once unloaded.",
+      "hint": "Compare what each limit describes on the graph.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04jqciz",
+      "kind": "mistake",
+      "front": "What goes wrong if you divide a mass in grams by a volume in cm³ without converting first?",
+      "back": "The answer is not in $\\mathrm{kg\\,m^{-3}}$, so it is wrong. Convert first using $1\\,\\mathrm{g}=10^{-3}\\,\\mathrm{kg}$ and $1\\,\\mathrm{cm^{3}}=1\\times10^{-6}\\,\\mathrm{m^{3}}$.",
+      "hint": "Check the units your answer must have.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k4gtfs",
+      "kind": "process",
+      "front": "How can the unloading line of a force–extension graph show that plastic deformation occurred?",
+      "back": "Within the elastic limit the unloading line retraces the loading line. After plastic deformation it returns along a parallel line and ends at a non-zero extension.",
+      "hint": "Compare the unloading path with the loading path.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0e93mtm",
+      "kind": "formula",
+      "front": "What equation gives the elastic strain energy stored in a stretched material within its elastic limit?",
+      "back": "$E_\\mathrm{e}=\\frac{1}{2}F\\Delta L$, with $E_\\mathrm{e}$ in $\\mathrm{J}$, $F$ in $\\mathrm{N}$ and $\\Delta L$ in $\\mathrm{m}$. It equals the **area under** the force–extension graph.",
+      "hint": "Think about the area of a triangle under a straight line through the origin.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1p8tt2c",
+      "kind": "example",
+      "front": "A spring extends by 40 mm under a 6.0 N force and obeys Hooke's law. What is its spring constant?",
+      "back": "$k=1.5\\times10^{2}\\,\\mathrm{N\\,m^{-1}}$. Convert $40\\,\\mathrm{mm}$ to $0.040\\,\\mathrm{m}$ first, then $k=\\frac{6.0\\,\\mathrm{N}}{0.040\\,\\mathrm{m}}$.",
+      "hint": "Check the extension is in metres before dividing.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fyziwl",
+      "kind": "term",
+      "front": "What is the tensile strength of a material?",
+      "back": "The **tensile strength** is the maximum tensile force per unit cross-sectional area a material can bear before it breaks, measured in $\\mathrm{Pa}$, where $1\\,\\mathrm{Pa}=1\\,\\mathrm{N\\,m^{-2}}$.",
+      "sectionId": "s4"
+    }
+  ]
+}

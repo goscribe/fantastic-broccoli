@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "d1-1",
+  "topicCode": "D1.1",
+  "topicName": "DNA replication",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:01.029Z",
+  "cards": [
+    {
+      "id": "0zxocba",
+      "kind": "concept",
+      "front": "How does semi-conservative replication work?",
+      "back": "Each original strand separates and acts as a **template**. Free nucleotides pair with its exposed bases, so each new DNA molecule contains one original strand and one newly made strand.",
+      "hint": "Think about what each new molecule keeps from the original.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1psvuwl",
+      "kind": "concept",
+      "front": "Why can the base sequence of one DNA strand be used to make a new strand?",
+      "back": "Because of **complementary base pairing**: adenine pairs with thymine and guanine with cytosine. Each template base determines which free nucleotide joins it.",
+      "hint": "Which base pairs with which?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cy27b4",
+      "kind": "concept",
+      "front": "Why can DNA polymerase only add nucleotides in one direction?",
+      "back": "It adds nucleotides only to the **3′ end** of a growing strand, so new DNA is always made 5′ to 3′. It also needs a primer as a starting point.",
+      "hint": "Consider which end of the growing strand is free.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "014haoa",
+      "kind": "term",
+      "front": "What does helicase do at the replication fork?",
+      "back": "**Helicase** unwinds the double helix and separates the two strands by breaking hydrogen bonds between paired bases.",
+      "hint": "Think about what breaks and what it separates.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ll4pgo",
+      "kind": "term",
+      "front": "What is the role of primase, and why is it needed?",
+      "back": "**Primase** makes short RNA primers, which give DNA polymerase a starting point for synthesis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rkxqwv",
+      "kind": "process",
+      "front": "Outline the order in which the enzymes act when DNA is copied.",
+      "back": "Helicase separates the strands; primase lays RNA primers; DNA polymerase extends them with DNA; the primers are replaced with DNA; **DNA ligase** seals the breaks.",
+      "hint": "Work from unwinding to sealing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tobjd9",
+      "kind": "term",
+      "front": "How does the leading strand grow?",
+      "back": "**Continuously** towards the moving replication fork, as DNA polymerase extends it when more template becomes exposed.",
+      "hint": "Compare this with the lagging strand.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qajmbl",
+      "kind": "term",
+      "front": "What is an Okazaki fragment?",
+      "back": "A short piece of newly synthesised DNA on the **lagging strand**, made by extending a primer. DNA ligase later joins the fragments together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g9px53",
+      "kind": "mistake",
+      "front": "A student says semi-conservative replication leaves one DNA molecule completely unchanged. What is wrong?",
+      "back": "That is incorrect. **Semi-conservative** means each resulting molecule contains one original strand and one newly made strand.",
+      "hint": "Count the strands in each new molecule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jbuuv6",
+      "kind": "mistake",
+      "front": "A student says the lagging strand grows 3′ to 5′ because it runs away from the fork. What is wrong?",
+      "back": "Growth direction is not the same as fork direction. Both new strands grow **5′ to 3′**; the lagging strand differs because it is made discontinuously in short pieces.",
+      "hint": "Check what the note says about direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09rroru",
+      "kind": "concept",
+      "front": "Why are RNA primers needed during DNA replication?",
+      "back": "DNA polymerase cannot start a new strand without a starting point. An **RNA primer** provides an end that DNA polymerase can extend.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0m3copr",
+      "kind": "mistake",
+      "front": "A student says DNA ligase copies the template strand. What is wrong?",
+      "back": "Ligase does not copy DNA. It **seals breaks** between adjacent DNA pieces by joining their sugar–phosphate backbones. DNA polymerase adds the nucleotides.",
+      "hint": "Which enzyme adds nucleotides?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09nglx3",
+      "kind": "concept",
+      "front": "Why can the two DNA strands separate without their backbones breaking?",
+      "back": "The **hydrogen bonds** between paired bases break, while the sugar–phosphate backbones stay intact, so the strands can separate.",
+      "hint": "What holds the bases together?",
+      "sectionId": "s1"
+    }
+  ]
+}

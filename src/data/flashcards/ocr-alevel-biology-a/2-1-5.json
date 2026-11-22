@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "2-1-5",
+  "topicCode": "2.1.5",
+  "topicName": "Biological membranes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:11.521Z",
+  "cards": [
+    {
+      "id": "17rqkok",
+      "kind": "concept",
+      "front": "What arrangement of phospholipids and proteins makes up the plasma membrane?",
+      "back": "A **fluid mosaic**: a phospholipid bilayer with proteins scattered through it, and both can drift sideways. Cholesterol between the phospholipids makes it more stable.",
+      "hint": "Think about which way the water-attracting heads and water-repelling tails face.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mlbbfm",
+      "kind": "concept",
+      "front": "Why can oxygen diffuse straight through the membrane while ions cannot?",
+      "back": "Oxygen is small and uncharged, so it dissolves in the lipid tails. Ions cannot pass the **lipid tails** and must cross through channel or carrier proteins.",
+      "hint": "Compare the size and charge of each particle with the inside of the bilayer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06u9uth",
+      "kind": "process",
+      "front": "Which way does water move during osmosis?",
+      "back": "From a region of **higher water potential** to a region of lower water potential, across a partially permeable membrane.",
+      "hint": "Compare a dilute solution with a concentrated one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "051253n",
+      "kind": "term",
+      "front": "What is diffusion?",
+      "back": "The **net movement** of particles from a higher concentration to a lower concentration, down a concentration gradient.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xs362l",
+      "kind": "mistake",
+      "front": "A student says particles only move down a concentration gradient during diffusion. What is wrong with this?",
+      "back": "Particles move in **both directions**. Diffusion is a net movement because more particles move down the gradient than up it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12vi7pg",
+      "kind": "term",
+      "front": "What does water potential, $\\psi$, measure?",
+      "back": "The tendency of water to move out of a system, measured in **kilopascals** ($\\mathrm{kPa}$). Pure water is zero and dissolved substances make it negative.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15xpbsr",
+      "kind": "concept",
+      "front": "What happens to an animal cell placed in a solution with a higher water potential than its contents?",
+      "back": "Water enters by osmosis, so the cell swells and may burst. This bursting is called **lysis**, because the animal cell has no cell wall.",
+      "hint": "Think about which way water moves and what supports the cell.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pcaqhw",
+      "kind": "term",
+      "front": "What does a turgid plant cell look like inside?",
+      "back": "It is fully swollen with water, with its contents pressing firmly against the **cell wall**. The wall stops the cell bursting and helps support the plant.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lzc8lf",
+      "kind": "formula",
+      "front": "What is the symbol equation for percentage change in mass?",
+      "back": "$\\text{change}=\\frac{m_\\mathrm{final}-m_\\mathrm{initial}}{m_\\mathrm{initial}}\\times100$, where each mass is in $\\mathrm{g}$. The answer is a **percentage**, so keep its sign.",
+      "hint": "Start from the change in mass, then divide by the starting mass.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vyknoe",
+      "kind": "example",
+      "front": "A potato cylinder falls from 2.40 g to 2.10 g in a salt solution. What is its percentage change in mass?",
+      "back": "$-12.5\\%$, from $\\frac{-0.30\\,\\mathrm{g}}{2.40\\,\\mathrm{g}}\\times100$. The cylinder lost water by **osmosis**, so the solution had a lower water potential than the cells.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sx57m7",
+      "kind": "process",
+      "front": "How does a carrier protein move a substance against its concentration gradient?",
+      "back": "ATP supplies the **energy**. The carrier binds the substance, changes shape and releases it on the other side of the membrane.",
+      "hint": "List the steps in the order they happen.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0w8xijl",
+      "kind": "concept",
+      "front": "How does active transport differ from facilitated diffusion?",
+      "back": "Active transport moves substances **against** the gradient using ATP and always needs a carrier. Facilitated diffusion moves them down the gradient with no energy from the cell.",
+      "hint": "Compare the direction of movement and where the energy comes from.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qrw4zt",
+      "kind": "concept",
+      "front": "How does a receptor protein allow a cell to respond to a hormone?",
+      "back": "Its **binding site** fits one specific signalling molecule. Binding changes the receptor and starts a response inside the cell, without the hormone needing to enter.",
+      "hint": "Think about how exact the shape match must be.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "050148e",
+      "kind": "term",
+      "front": "What are glycoproteins?",
+      "back": "Proteins with **carbohydrate chains** attached, found on the outer surface of the plasma membrane. They can act as receptors or as recognition markers.",
+      "sectionId": "s6"
+    }
+  ]
+}

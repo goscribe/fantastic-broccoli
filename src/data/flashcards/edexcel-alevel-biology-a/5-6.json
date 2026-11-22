@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-6",
+  "topicCode": "5.6",
+  "topicName": "ATP and phosphorylation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:03.312Z",
+  "cards": [
+    {
+      "id": "0hbyoih",
+      "kind": "concept",
+      "front": "How does hydrolysis of ATP supply energy to a cell process?",
+      "back": "**Water** breaks the bond between the second and third phosphates, forming ADP and Pi. The small amount of energy released drives a process such as active transport.",
+      "hint": "Consider what the molecule turns into after one phosphate is lost.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pot1r1",
+      "kind": "concept",
+      "front": "Why can a single ATP molecule be used many times in a cell?",
+      "back": "ADP and Pi are rejoined by **phosphorylation**, regenerating ATP, so the molecule is recycled rapidly.",
+      "hint": "Think about what ATP becomes after it has released its energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p29ldy",
+      "kind": "concept",
+      "front": "Why do cells use ATP rather than glucose as an immediate energy source?",
+      "back": "Hydrolysing ATP is a **single step** that releases energy quickly, in small amounts that match demand. Releasing energy from glucose takes many slow reactions.",
+      "hint": "Compare how many reactions each molecule needs to release its energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z0q2eu",
+      "kind": "concept",
+      "front": "What are the three parts of an ATP molecule?",
+      "back": "**Adenine** (a nitrogen-containing base), **ribose** (a five-carbon sugar) and a chain of three **phosphate groups** attached to the ribose.",
+      "hint": "Think of adenosine plus what is attached to the ribose.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "033ogud",
+      "kind": "concept",
+      "front": "Why is the end phosphate of ATP easy to remove?",
+      "back": "All three phosphates carry **negative charge**, so they repel one another, which weakens the bond holding the end phosphate.",
+      "hint": "Think about what happens when several like charges sit close together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10gicl7",
+      "kind": "term",
+      "front": "What is phosphorylation?",
+      "back": "The addition of a **phosphate group** to a molecule. In cells, adding Pi to ADP forms ATP.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ye7j96",
+      "kind": "formula",
+      "front": "Which equation shows ADP being converted into ATP by phosphorylation?",
+      "back": "$\\mathrm{ADP}+\\mathrm{P_i}\\rightarrow\\mathrm{ATP}+\\mathrm{H_2O}$. This is a **condensation** reaction, so water is released.",
+      "hint": "Compare the direction of this equation with the hydrolysis equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y9afcf",
+      "kind": "process",
+      "front": "How does a proton gradient drive ATP production in chloroplasts and mitochondria?",
+      "back": "**Protons** flow down their gradient through **ATP synthase**. This flow supplies the energy needed to join ADP and Pi.",
+      "hint": "Think about where the energy comes from to push ADP and Pi together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00onmgf",
+      "kind": "concept",
+      "front": "Where does photophosphorylation take place, and what supplies its energy?",
+      "back": "In the **thylakoid membranes** of chloroplasts. Its energy comes from light absorbed by chlorophyll.",
+      "hint": "Think about the membranes inside chloroplasts where light is captured.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1yyzsf2",
+      "kind": "concept",
+      "front": "Where does oxidative phosphorylation occur in the cell?",
+      "back": "The **inner mitochondrial membrane**. Its energy comes from electrons passing along carriers.",
+      "hint": "Think about the membrane folded inside mitochondria.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0p08rw7",
+      "kind": "term",
+      "front": "What is substrate-level phosphorylation?",
+      "back": "The production of ATP by **direct transfer** of a phosphate group from another molecule to ADP. It occurs in the cytoplasm and mitochondrial matrix.",
+      "hint": "Compare how the phosphate reaches ADP with the proton-flow method.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "014geb6",
+      "kind": "concept",
+      "front": "Why does ATP move easily around the cell?",
+      "back": "ATP is **soluble**, so it can travel quickly through the cytoplasm to the places where energy is needed.",
+      "hint": "Think about what property lets a molecule dissolve in the watery cytoplasm.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ihr0ju",
+      "kind": "mistake",
+      "front": "Why is ATP not a good long-term energy store?",
+      "back": "Cells hold only a **small amount** of ATP at any time and keep remaking it from ADP and Pi. It is not stored for later use.",
+      "hint": "Think about how much ATP is present in the cell at any one moment.",
+      "sectionId": "s3"
+    }
+  ]
+}

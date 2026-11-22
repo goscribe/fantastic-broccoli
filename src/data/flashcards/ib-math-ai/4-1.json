@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-1",
+  "topicCode": "4.1",
+  "topicName": "Sampling concepts",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:44.630Z",
+  "cards": [
+    {
+      "id": "08pysc9",
+      "kind": "concept",
+      "front": "Why study a sample instead of the whole population, and what must the sample be like?",
+      "back": "We study a **sample** because testing everyone is often slow, costly or impossible. It should be a **representative sample**, with features that match the population.",
+      "hint": "Think of tasting one spoonful of soup.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02j4st7",
+      "kind": "concept",
+      "front": "Why can a sample mislead even when the data are analysed carefully?",
+      "back": "If the method favours some members over others, the results lean one way. This is **sampling bias**, and careful analysis cannot fix a biased sample.",
+      "hint": "The problem starts before any data are collected.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "191jmjw",
+      "kind": "term",
+      "front": "What is a simple random sample?",
+      "back": "A **simple random sample** is one where every member of the population has the same chance of selection. Members are numbered and a random number generator picks them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1x9q7qq",
+      "kind": "formula",
+      "front": "In a systematic sample, how is the sampling interval k found?",
+      "back": "$k=\\frac{N}{n}$, where $N$ is the population size and $n$ is the sample size. Choose a random start from the first $k$, then take every $k$th member.",
+      "hint": "N is the population, n is the sample.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ezmgi5",
+      "kind": "mistake",
+      "front": "Why might a systematic sample be biased?",
+      "back": "If the ordered list has a **repeating pattern** that matches the interval, some members are favoured. Check the list for patterns before sampling.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l4j0s0",
+      "kind": "example",
+      "front": "A list has 600 students. A systematic sample of 40 starts at student 7. Which student is the 40th chosen?",
+      "back": "Student **592**. The interval is $k=15$, so the 40th student is $7+39\\times15=592$.",
+      "hint": "Find k first, then add k each time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0grhvua",
+      "kind": "formula",
+      "front": "How many members should a stratified sample take from one stratum?",
+      "back": "$n_s=\\frac{N_s}{N}\\times n$, where $N_s$ is the stratum size, $N$ the population size and $n$ the sample size.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0uth4z8",
+      "kind": "example",
+      "front": "A school has 800 students, with 320 in Year 10. In a stratified sample of 40, how many come from Year 10?",
+      "back": "**16** students, since $\\frac{320}{800}\\times40=16$.",
+      "hint": "Use the proportion of the population in Year 10.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04uzami",
+      "kind": "concept",
+      "front": "How does quota sampling differ from stratified sampling?",
+      "back": "Both match the group proportions, but in **quota sampling** the interviewer chooses who fills each quota, so selection is not random. Stratified sampling is random within each group.",
+      "hint": "Focus on who makes the choice.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jmfsjh",
+      "kind": "mistake",
+      "front": "Is a sample of the first 30 people outside a shop a good sample?",
+      "back": "Usually not. It is a **convenience sample**, which is quick and cheap, but those people may not resemble the whole population.",
+      "hint": "Ask who is easiest to reach.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tpazu3",
+      "kind": "term",
+      "front": "What is a sampling frame?",
+      "back": "The **sampling frame** is the complete list of population members from which the sample is drawn. Anyone missing from the list can never be selected.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ujqr3j",
+      "kind": "term",
+      "front": "What is non-response, and why does it bias results?",
+      "back": "**Non-response** is when selected members do not provide data. It biases results when non-responders differ from responders, for example when volunteers hold strong opinions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1n3uerb",
+      "kind": "mistake",
+      "front": "Does taking a larger sample remove sampling bias?",
+      "back": "No. A **larger sample** only repeats the same bias with more data. The sampling method itself must be fixed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qs4fie",
+      "kind": "process",
+      "front": "How should you choose a sampling method?",
+      "back": "Choose by **purpose**. Use random or stratified methods when accuracy matters and a list exists. Use quota or convenience methods when no list exists or time is short.",
+      "sectionId": "s4"
+    }
+  ]
+}

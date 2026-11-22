@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-17",
+  "topicCode": "4.17",
+  "topicName": "Poisson distribution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:04.078Z",
+  "cards": [
+    {
+      "id": "1jhujvf",
+      "kind": "concept",
+      "front": "When is a Poisson model suitable for counting events?",
+      "back": "When events occur randomly, one at a time, **independently** of each other, at a **constant average rate**, and are counted over a fixed period or region.",
+      "hint": "Think of calls arriving through a morning at a steady average.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tyzfu9",
+      "kind": "formula",
+      "front": "For $X\\sim\\mathrm{Po}(m)$, what are $\\mathrm{E}(X)$ and $\\mathrm{Var}(X)$?",
+      "back": "**Both equal $m$**: $\\mathrm{E}(X)=m$ and $\\mathrm{Var}(X)=m$, so the standard deviation is $\\sqrt{m}$.",
+      "hint": "The mean and variance are linked in this model.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ibsi09",
+      "kind": "formula",
+      "front": "What is the formula for $P(X=x)$ when $X\\sim\\mathrm{Po}(m)$, and what is $x!$?",
+      "back": "$P(X=x)=\\frac{e^{-m}m^{x}}{x!}$ for $x=0,1,2,\\dots$. The **factorial** $x!$ multiplies the whole numbers from $x$ down to 1.",
+      "hint": "A calculator can also give this probability directly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "016m43a",
+      "kind": "term",
+      "front": "What is a Poisson distribution?",
+      "back": "The **Poisson distribution** $\\mathrm{Po}(m)$ is the discrete distribution for the number of random, independent events in a fixed period, where $m$ is the mean number of events in that period.",
+      "hint": "Write $X\\sim\\mathrm{Po}(m)$ and say what $m$ refers to.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wf1u4l",
+      "kind": "term",
+      "front": "What does 'constant average rate' mean in a Poisson model?",
+      "back": "The **mean number of events** per unit of time or space does not change, so the same $m$ applies across the whole period.",
+      "hint": "Consider how rush hour affects traffic at a junction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w1p0nv",
+      "kind": "mistake",
+      "front": "A fixed number of trials, each a success or failure. Is a Poisson model right?",
+      "back": "No. A **binomial** model fits a fixed number of trials with two outcomes. Poisson counts events over a period at a steady rate.",
+      "hint": "Ask whether the number of trials is fixed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yn4yj3",
+      "kind": "mistake",
+      "front": "Weekly counts have sample mean 4.1 and sample variance 9.8. Does a Poisson model fit?",
+      "back": "Doubtful. A Poisson model needs the **variance to equal the mean**. Here the variance is far larger, so events may not be independent or the rate may change.",
+      "hint": "Compare the mean with the variance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iklgub",
+      "kind": "example",
+      "front": "For $X\\sim\\mathrm{Po}(6)$, find $P(X=4)$.",
+      "back": "About **0.134**. Use $\\frac{e^{-6}6^{4}}{4!}=54e^{-6}$.",
+      "hint": "Substitute $x=4$ and $m=6$ into the formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10qwebi",
+      "kind": "example",
+      "front": "For $X\\sim\\mathrm{Po}(6)$, find $P(X\\ge2)$.",
+      "back": "About **0.983**. Use the complement: $1-P(X\\le1)=1-7e^{-6}$.",
+      "hint": "Use $P(X\\ge x)=1-P(X\\le x-1)$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h61uv4",
+      "kind": "mistake",
+      "front": "Is 'fewer than 3' the same as $X\\le3$?",
+      "back": "No. **'Fewer than 3'** means $X\\le2$. 'At most 3' means $X\\le3$, and 'more than 3' means $X\\ge4$.",
+      "hint": "Read the inequality wording carefully.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09jx4h7",
+      "kind": "process",
+      "front": "How do you find the mean for a different period?",
+      "back": "Multiply $m$ by the ratio of the new period to the old. For 0.8 faults per 10 m, 25 m gives $m=0.8\\times\\frac{25}{10}=2.0$.",
+      "hint": "Scale by the ratio of lengths or times.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10ttm6m",
+      "kind": "example",
+      "front": "Calls average 6 per hour. If $P(X\\ge10)\\approx0.0839$, what does this mean in context?",
+      "back": "About **8 hours in every 100** bring 10 or more calls. Answer in the words of the question, naming the event and period.",
+      "hint": "Turn the probability into a number of hours in 100.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0n7b0ge",
+      "kind": "concept",
+      "front": "If independent $X\\sim\\mathrm{Po}(m_1)$ and $Y\\sim\\mathrm{Po}(m_2)$, what is the distribution of $X+Y$?",
+      "back": "$X+Y\\sim\\mathrm{Po}(m_1+m_2)$. The **means add** when independent Poisson counts are combined.",
+      "hint": "Think of counts over two separate hours.",
+      "sectionId": "s4"
+    }
+  ]
+}

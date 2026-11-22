@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "8-10",
+  "topicCode": "8.10",
+  "topicName": "Buffer capacity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:19.833Z",
+  "cards": [
+    {
+      "id": "1519zpg",
+      "kind": "term",
+      "front": "What is buffer capacity?",
+      "back": "**Buffer capacity** is how much strong acid or base a buffer can absorb before its pH changes substantially. It depends on the component amounts and the pH change allowed.",
+      "hint": "Think about resistance to pH change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1f7hdly",
+      "kind": "concept",
+      "front": "Which buffer component consumes added strong acid, and which consumes added strong base?",
+      "back": "The **conjugate base** consumes added strong acid. The **weak acid** consumes added strong base.",
+      "hint": "Each component reacts with the opposite addition.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pg18k6",
+      "kind": "concept",
+      "front": "When does a buffer stop resisting pH change?",
+      "back": "It fails as the component that reacts with the addition runs out, leaving **excess strong acid or base**. A substantial pH change can occur before full depletion.",
+      "hint": "Track the component that reacts with the addition.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12i7gxp",
+      "kind": "term",
+      "front": "What does buffer concentration describe?",
+      "back": "The **amounts of buffer components per unit volume**. Doubling both concentrations in the same volume doubles the moles of each, so more can be absorbed.",
+      "hint": "Think moles per litre.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kaf0o7",
+      "kind": "mistake",
+      "front": "Does a high buffer concentration mean a buffer can resist unlimited acid or base?",
+      "back": "No. A large enough addition can use up either component, so the **buffer** stops working. High concentration raises the amount it can absorb but does not remove the limit.",
+      "hint": "Think about what can run out.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1e4jyyn",
+      "kind": "concept",
+      "front": "For a fixed total amount of buffer components, where is buffer capacity greatest?",
+      "back": "Near **equal amounts** of conjugate base and weak acid. An unequal ratio favors one direction but leaves less of the other reacting component.",
+      "hint": "Think about balance between the two components.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iidvdq",
+      "kind": "term",
+      "front": "What is total buffer amount?",
+      "back": "The **combined moles** of weak acid and conjugate base in a sample. Two buffers with equal concentrations can differ in total amount if their volumes differ.",
+      "hint": "Moles, not concentration.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "067wlgd",
+      "kind": "term",
+      "front": "What is excess strong acid?",
+      "back": "**Added strong acid** left over after the available conjugate base has reacted. Excess strong base is the same idea for the weak acid.",
+      "hint": "Think about what remains after the reaction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mdf3ag",
+      "kind": "process",
+      "front": "How do you predict the direction in which a buffer will fail?",
+      "back": "1) Identify the component that reacts with the addition. 2) Compare its initial moles with the moles added. 3) If the addition is larger, that component runs out first.",
+      "hint": "Name the reacting component first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b018o8",
+      "kind": "example",
+      "front": "A buffer has 0.100 mol weak acid and 0.100 mol conjugate base. How much conjugate base is left after adding 0.080 mol strong acid?",
+      "back": "$0.020\\ \\mathrm{mol}$ conjugate base. The acid reacts 1:1, so $0.100-0.080=0.020\\ \\mathrm{mol}$ remain, and the weak acid rises to $0.180\\ \\mathrm{mol}$.",
+      "hint": "Acid consumes conjugate base in a 1:1 ratio.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ad15cf",
+      "kind": "example",
+      "front": "A buffer contains 0.090 mol conjugate base. How much remains after adding 0.060 mol strong acid?",
+      "back": "$0.030\\ \\mathrm{mol}$, since $0.090-0.060=0.030\\ \\mathrm{mol}$ of conjugate base remains.",
+      "hint": "Subtract the moles of acid added.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tei7wo",
+      "kind": "mistake",
+      "front": "Why does an unequal component ratio not give equal resistance to added acid and base?",
+      "back": "Extra conjugate base favors added acid, but it leaves less weak acid to consume added base. The buffer then resists acid better than base.",
+      "hint": "Compare which component is scarcer.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q5709l",
+      "kind": "concept",
+      "front": "Can a buffer's capacity for added acid differ from its capacity for added base?",
+      "back": "Yes. Each capacity depends on the **available component** that reacts with that particular addition, so the two can differ.",
+      "hint": "Which component reacts with each addition?",
+      "sectionId": "s1"
+    }
+  ]
+}

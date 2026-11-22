@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "6-5",
+  "topicCode": "6.5",
+  "topicName": "Regulation of gene expression",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:43.926Z",
+  "cards": [
+    {
+      "id": "0p60gdj",
+      "kind": "concept",
+      "front": "What does gene regulation control in a cell?",
+      "back": "**Gene regulation** controls whether a gene makes a functional product and how much it makes. Cells adjust this as conditions change.",
+      "hint": "Think about on, off, and how much.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ec1qb1",
+      "kind": "term",
+      "front": "What are regulatory proteins, and what do they do?",
+      "back": "**Regulatory proteins** bind specific DNA sequences or other molecules to increase or decrease gene expression. A signal can change their activity, so one DNA can be used differently.",
+      "hint": "What do they bind to?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12b9b2g",
+      "kind": "concept",
+      "front": "How are prokaryotic genes in one operon regulated?",
+      "back": "They share one **promoter** and are transcribed together, so one operator can control all of them at once.",
+      "hint": "Count the promoters.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lkaqs6",
+      "kind": "process",
+      "front": "How does the lac operon respond to lactose?",
+      "back": "1. Without lactose, a **repressor** binds the operator and limits transcription. 2. With lactose, a lactose-derived molecule binds the repressor. 3. The repressor releases the operator, so transcription can proceed.",
+      "hint": "Follow the repressor step by step.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oglumv",
+      "kind": "concept",
+      "front": "What does low glucose add to lac operon control?",
+      "back": "Low glucose increases activation through a **separate regulatory protein**. This is additional to the release of the repressor by lactose.",
+      "hint": "It is not the repressor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kfzdjd",
+      "kind": "term",
+      "front": "What is an operator?",
+      "back": "An **operator** is a DNA site near the promoter where a repressor can bind to block transcription of the operon.",
+      "hint": "Where is it located?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n2wehv",
+      "kind": "term",
+      "front": "What is chromatin, and how does its packing affect transcription?",
+      "back": "**Chromatin** is eukaryotic DNA packaged with proteins. Tightly packed chromatin generally makes transcription less likely.",
+      "hint": "Think about access to the gene.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1omd75d",
+      "kind": "term",
+      "front": "What is an enhancer?",
+      "back": "An **enhancer** is a regulatory DNA sequence that binds regulatory proteins to increase transcription of a target gene. It may be far from that gene.",
+      "hint": "Does it have to be next to the gene?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15vz0ly",
+      "kind": "mistake",
+      "front": "A student says an enhancer must sit right beside the gene it controls. What is wrong?",
+      "back": "An enhancer does not have to be immediately next to its gene. **DNA looping** can bring distant enhancer-bound proteins close to the promoter.",
+      "hint": "Think about how DNA can fold.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dewlwk",
+      "kind": "mistake",
+      "front": "A student says turning off a gene deletes it from the DNA. What is wrong?",
+      "back": "The gene usually **stays in the DNA**. It is still present but makes little or no product.",
+      "hint": "Is the gene still there?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1au231e",
+      "kind": "concept",
+      "front": "Why might a eukaryotic gene respond to several signals at once?",
+      "back": "Several transcription factors can act together, so the gene responds to a **combination** of signals.",
+      "hint": "Think about more than one factor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gj4anv",
+      "kind": "term",
+      "front": "What is an inducible operon?",
+      "back": "An **inducible operon**, such as the lac operon, increases expression when a particular molecule is available. This is a direct response to an environmental resource.",
+      "hint": "What triggers it to switch on?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0la0uui",
+      "kind": "concept",
+      "front": "How do prokaryotes and eukaryotes differ in how related genes are transcribed?",
+      "back": "Prokaryotic related genes are often grouped in **operons**, while eukaryotic genes are usually transcribed separately. Eukaryotes also use chromatin and distant enhancers.",
+      "hint": "Compare operons with separate transcription.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vtsii8",
+      "kind": "concept",
+      "front": "Besides transcription, what else can a cell regulate?",
+      "back": "A cell can change **RNA stability** after transcription and control how long a protein lasts.",
+      "hint": "Think about steps after the RNA is made.",
+      "sectionId": "s1"
+    }
+  ]
+}

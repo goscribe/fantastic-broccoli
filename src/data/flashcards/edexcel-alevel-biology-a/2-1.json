@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-1",
+  "topicCode": "2.1",
+  "topicName": "Gas exchange surfaces and Fick's law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:58.136Z",
+  "cards": [
+    {
+      "id": "13amtfy",
+      "kind": "concept",
+      "front": "What four features make a gas exchange surface efficient?",
+      "back": "A **large surface area**, a **thin barrier** giving a short diffusion distance, a **steep concentration gradient**, and a **good blood supply**. Each one speeds up diffusion.",
+      "hint": "Think about which parts of Fick's law each feature improves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tjko2d",
+      "kind": "formula",
+      "front": "Write Fick's law as a proportion, using surface area, concentration difference and thickness of the exchange surface.",
+      "back": "rate of diffusion $\\propto \\frac{\\text{surface area} \\times \\text{concentration difference}}{\\text{thickness of exchange surface}}$. The rate rises with area and gradient, and falls as the barrier gets thicker.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0o3bdqd",
+      "kind": "concept",
+      "front": "Why does ventilation help to keep diffusion going at a gas exchange surface?",
+      "back": "It replaces gas that has already crossed, so the concentration on that side stays high and the **concentration gradient** stays steep.",
+      "hint": "Think about what happens to the air or water once gas has crossed the surface.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "051253n",
+      "kind": "term",
+      "front": "What is diffusion?",
+      "back": "The **net movement** of particles from a region of higher concentration to a region of lower concentration. It needs no energy from the cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1m4lepy",
+      "kind": "term",
+      "front": "What is gas exchange?",
+      "back": "The **uptake of oxygen** and **removal of carbon dioxide** by an organism.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "126nxxw",
+      "kind": "concept",
+      "front": "Why can a large animal not rely on its body surface for gas exchange?",
+      "back": "Its surface area is too small compared with its volume, so it needs **specialised surfaces** such as lungs or gills.",
+      "hint": "Compare how surface area and volume change as an animal gets bigger.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cy7aqe",
+      "kind": "term",
+      "front": "What is a concentration gradient?",
+      "back": "The **difference in concentration** of a substance between two regions, which drives its diffusion.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15rqnaz",
+      "kind": "example",
+      "front": "A disease halves surface area and doubles thickness, with concentration difference unchanged. What is the new rate as a fraction of the original?",
+      "back": "$\\frac{1}{4}$ of the original rate, which is 25%. Area factor $\\frac{1}{2}$, thickness factor 2 (a divisor), so $\\frac{\\frac{1}{2}\\times1}{2}=\\frac{1}{4}$.",
+      "hint": "Write each change as a factor, then multiply them together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0u5zbq1",
+      "kind": "example",
+      "front": "Surface area triples, thickness is unchanged, and concentration difference halves. What is the new rate as a multiple of the original?",
+      "back": "**1.5** times the original rate, because $\\frac{3\\times\\frac{1}{2}}{1}=1.5$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hs8ici",
+      "kind": "mistake",
+      "front": "Why is it wrong to say gases diffuse across a surface because the body needs them?",
+      "back": "Diffusion is **passive**. Only the concentration difference drives net movement, not the cell's need for the gas.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ombtlp",
+      "kind": "mistake",
+      "front": "A student says doubling the thickness of an exchange surface doubles the rate of diffusion. What is wrong?",
+      "back": "Rate is **inversely** proportional to thickness, so doubling thickness **halves** the rate, because particles travel further.",
+      "hint": "Check which side of the fraction thickness sits on in Fick's law.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "160patf",
+      "kind": "process",
+      "front": "What steps should you follow to predict the combined effect of several changes on the rate of diffusion?",
+      "back": "1) Start from Fick's law. 2) Write each change as a multiplying factor, treating thickness as a divisor. 3) Multiply the factors together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1smiyp0",
+      "kind": "concept",
+      "front": "Why does the oxygen concentration difference rise during exercise?",
+      "back": "Muscle cells use oxygen faster, so the oxygen concentration in the blood falls, making the difference larger. Active animals also need larger or thinner surfaces.",
+      "hint": "Consider what muscle cells do with the oxygen in the blood.",
+      "sectionId": "s4"
+    }
+  ]
+}

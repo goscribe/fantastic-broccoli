@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "b-3",
+  "topicCode": "B.3",
+  "topicName": "Gas laws",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:34.413Z",
+  "cards": [
+    {
+      "id": "19c2utp",
+      "kind": "formula",
+      "front": "What equation links the absolute pressure, volume, amount and temperature of an ideal gas?",
+      "back": "$pV = nRT$, where $p$ is **absolute pressure** in pascals, $V$ is volume in cubic metres, $n$ is amount in moles and $T$ is temperature in kelvin. $R = 8.31\\,\\mathrm{J\\,mol^{-1}\\,K^{-1}}$.",
+      "hint": "Think about which quantities must be in SI units.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vob1s8",
+      "kind": "formula",
+      "front": "What is the combined gas law for a fixed amount of gas, and which temperature unit must you use?",
+      "back": "$\\frac{p_1V_1}{T_1}=\\frac{p_2V_2}{T_2}$. Temperatures must be in **kelvin**, and the amount of gas must stay unchanged between the two states.",
+      "hint": "Two states of the same gas.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gwqj1b",
+      "kind": "concept",
+      "front": "What are the main assumptions of the ideal gas model?",
+      "back": "Particles have **negligible volume**, exert no forces on each other except during collisions, and undergo **elastic collisions**, so kinetic energy is conserved.",
+      "hint": "Think about volume, forces and collisions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nkp2h4",
+      "kind": "concept",
+      "front": "Why does an ideal gas exert pressure on the walls of its container?",
+      "back": "Moving particles hit the walls and change their momentum. These **collisions** exert a force on the walls, and this force per unit area is the pressure.",
+      "hint": "Link momentum change to force.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lhogqp",
+      "kind": "term",
+      "front": "What is absolute temperature?",
+      "back": "**Absolute temperature** is measured from absolute zero in kelvin and is proportional to the average translational kinetic energy of the gas particles.",
+      "hint": "Measured from absolute zero.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0csmnp4",
+      "kind": "concept",
+      "front": "At constant temperature, how does the pressure of a fixed amount of gas change when its volume doubles?",
+      "back": "Pressure **halves**, because pressure is inversely proportional to volume when temperature and amount are constant, so $pV$ stays constant.",
+      "hint": "Inverse proportion.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09qlgih",
+      "kind": "process",
+      "front": "What steps should you follow before using pV = nRT to solve a gas problem?",
+      "back": "Convert every quantity to compatible SI units, such as kPa to Pa, dm³ to m³ and °C to K. Use absolute pressure, rearrange for the unknown, substitute, and round only the final answer.",
+      "hint": "Units come first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wfyzmr",
+      "kind": "mistake",
+      "front": "A student substitutes 27 °C directly into a gas law. What is wrong and what should they do?",
+      "back": "Gas laws need **kelvin**, not Celsius. Convert using $T/\\mathrm{K} = \\theta/^\\circ\\mathrm{C} + 273.15$, so 27 °C becomes 300 K before substituting.",
+      "hint": "Check the temperature scale used in gas laws.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1t9vjeu",
+      "kind": "mistake",
+      "front": "A student uses pressure measured relative to the surrounding air in pV = nRT. Why is this wrong?",
+      "back": "The ideal gas law needs **absolute pressure**, measured from zero pressure. Gauge pressure measured against air gives incorrect results.",
+      "hint": "Compare with zero pressure.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lvjxif",
+      "kind": "example",
+      "front": "A fixed amount of gas at 100 kPa and 300 K is heated at constant volume to 360 K. What is the new pressure?",
+      "back": "**120 kPa**. From $\\frac{p_1}{T_1}=\\frac{p_2}{T_2}$, $p_2 = \\frac{(100)(360)}{300} = 120\\,\\mathrm{kPa}$.",
+      "hint": "At constant volume, p/T is constant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0surahl",
+      "kind": "example",
+      "front": "How many moles of gas occupy 0.020 m³ at 100 kPa and 300 K?",
+      "back": "About **0.80 mol**. Convert 100 kPa to $1.00\\times10^5\\,\\mathrm{Pa}$, then use $n = \\frac{pV}{RT} = 0.802\\,\\mathrm{mol}$.",
+      "hint": "Convert kPa to Pa first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1364sf1",
+      "kind": "term",
+      "front": "What is an elastic collision in the ideal gas model?",
+      "back": "An **elastic collision** is one in which the total kinetic energy of the colliding particles is conserved.",
+      "hint": "Think about what stays the same.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qd7rbo",
+      "kind": "concept",
+      "front": "Why does $pV = nRT$ reduce to the combined gas law for a fixed amount of gas?",
+      "back": "For a fixed amount, $nR$ is **constant**, so $\\frac{pV}{T}$ is constant. This gives the combined gas law for two states.",
+      "hint": "Which quantities stay fixed?",
+      "sectionId": "s3"
+    }
+  ]
+}

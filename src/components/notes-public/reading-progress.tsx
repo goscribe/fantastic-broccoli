@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
-import { Check, ChevronDown, PencilLine } from "lucide-react";
+import { Check, ChevronDown, Layers, PencilLine } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getReading, recordSectionRead, setCurrentSection, useCurrentSection, useReading } from "./reading-store";
 
@@ -21,9 +21,9 @@ import { getReading, recordSectionRead, setCurrentSection, useCurrentSection, us
 export interface RailEntry {
   /** Element id to jump to. */
   anchor: string;
-  /** Section id for the read tick; none for the recall and practice entries. */
+  /** Section id for the read tick; none for the recall, flashcards and practice entries. */
   sectionId?: string;
-  kind: "section" | "recall" | "practice";
+  kind: "section" | "recall" | "flashcards" | "practice";
   label: ReactNode;
 }
 
@@ -137,7 +137,7 @@ function Marker({ entry, n, read, active }: { entry: RailEntry; n: number; read:
       )}
       aria-hidden="true"
     >
-      {read ? <Check className="size-3.5" strokeWidth={3.5} /> : entry.kind === "section" ? n : <PencilLine className="size-3" strokeWidth={2.75} />}
+      {read ? <Check className="size-3.5" strokeWidth={3.5} /> : entry.kind === "section" ? n : entry.kind === "flashcards" ? <Layers className="size-3" strokeWidth={2.75} /> : <PencilLine className="size-3" strokeWidth={2.75} />}
     </span>
   );
 }

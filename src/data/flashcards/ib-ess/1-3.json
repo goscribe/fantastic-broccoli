@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "1-3",
+  "topicCode": "1.3",
+  "topicName": "Sustainability",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:22.301Z",
+  "cards": [
+    {
+      "id": "1r4s9di",
+      "kind": "term",
+      "front": "What does sustainability mean for the way we use a resource?",
+      "back": "**Sustainability** means using resources at rates that let them be replaced naturally, and letting affected ecosystems recover, so resources stay available over time.",
+      "hint": "Think about the fishing community example.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1d97big",
+      "kind": "concept",
+      "front": "How do natural capital and natural income relate, and why does harvesting only the income matter?",
+      "back": "**Natural capital** is the stock (trees, soil, wildlife) and **natural income** is its yearly yield. Harvesting only the income leaves the stock intact so the same yield can continue; harvesting more eats into the capital.",
+      "hint": "Stock versus yearly yield.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t7fmrf",
+      "kind": "concept",
+      "front": "When is resource use not sustainable, judged by an ecological footprint?",
+      "back": "When the **ecological footprint** is larger than the **biocapacity** of the region. Demand then exceeds what the area can produce and absorb.",
+      "hint": "Compare demand with supply of area.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0498bgz",
+      "kind": "formula",
+      "front": "What equation gives the yearly change in natural capital, and what do its terms mean?",
+      "back": "Change in natural capital = **natural income minus harvest**, in units per year (for example fish per year). A negative answer means the stock is shrinking.",
+      "hint": "Both terms are yearly amounts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gm7ir0",
+      "kind": "example",
+      "front": "A fishery gains 300 fish a year and fishers remove 350 fish a year. What is the yearly change in natural capital?",
+      "back": "**Minus 50 fish per year**: $300-350=-50$. The harvest is unsustainable because it exceeds the natural income.",
+      "hint": "Subtract the harvest from the income.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rae6xp",
+      "kind": "mistake",
+      "front": "Is natural income the same as the whole stock of natural capital?",
+      "back": "No. **Natural income** is only the yearly yield that can be taken without reducing the stock. The whole stock is the natural capital.",
+      "hint": "Income is a flow, capital is a stock.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1padmrf",
+      "kind": "term",
+      "front": "What does an ecological footprint measure?",
+      "back": "The **area** of productive land and water needed to supply a population's food, energy, housing and goods, and to absorb its wastes.",
+      "hint": "It is expressed as an area.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0thygfo",
+      "kind": "term",
+      "front": "What is biocapacity?",
+      "back": "The **capacity** of an area's ecosystems to regenerate resources and absorb wastes, usually expressed as an area.",
+      "hint": "Compare with the footprint.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "087vb2g",
+      "kind": "concept",
+      "front": "Why is an ecological footprint useful but incomplete as a measure of sustainability?",
+      "back": "It gives **one figure that is easy to compare** and raises awareness of consumption. However, averages hide differences between people, it relies on assumptions and incomplete data, and it does not directly show impacts such as loss of species.",
+      "hint": "Give strengths, then limitations, then a judgement.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vontbt",
+      "kind": "term",
+      "front": "What is the aim of sustainable development?",
+      "back": "To **raise living standards** while keeping resources available for later generations, treating economic growth, social fairness and environmental protection as linked goals.",
+      "hint": "Three linked goals.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1p53jhy",
+      "kind": "mistake",
+      "front": "Does sustainable development mean stopping all development?",
+      "back": "No. It means **growing in ways that keep resources available** for future generations, not halting growth altogether.",
+      "hint": "Think about how, not whether, societies grow.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19013d6",
+      "kind": "process",
+      "front": "Name actions that help societies achieve sustainable development.",
+      "back": "Use resources at or below their natural income; reduce waste through reuse and recycling; switch to **renewable** energy; protect and restore ecosystems; use laws, taxes and incentives; educate people and share benefits fairly.",
+      "hint": "Six actions in the note.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09l5iwz",
+      "kind": "example",
+      "front": "A woodland grows 120 m³ of new timber a year and foresters cut 150 m³ a year. What is the yearly change in natural capital?",
+      "back": "**Minus 30 m³ per year**: $120-150=-30$. The harvest is unsustainable because it exceeds the natural income.",
+      "hint": "Subtract the harvest from the yearly growth.",
+      "sectionId": "s2"
+    }
+  ]
+}

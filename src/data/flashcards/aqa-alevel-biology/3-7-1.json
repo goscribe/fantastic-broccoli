@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-7-1",
+  "topicCode": "3.7.1",
+  "topicName": "Inheritance",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:09.000Z",
+  "cards": [
+    {
+      "id": "1nglich",
+      "kind": "concept",
+      "front": "How does each offspring end up with one allele of a gene from each parent?",
+      "back": "Meiosis separates each parent's **allele** pair so each gamete gets one allele. Fertilisation joins two gametes and restores the pair.",
+      "hint": "Think about what happens to the allele pair when gametes form.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17haciw",
+      "kind": "concept",
+      "front": "Why does a heterozygote with one dominant allele show the dominant phenotype?",
+      "back": "A **dominant allele** affects the phenotype when just one copy is present. A **recessive allele** only shows when no dominant allele is present.",
+      "hint": "Compare how many copies each type of allele needs to have an effect.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f05b3p",
+      "kind": "example",
+      "front": "What genotype and phenotype ratios come from an $Aa$ by $Aa$ cross with complete dominance?",
+      "back": "Genotype ratio $1:2:1$ ($AA$:$Aa$:$aa$). Phenotype ratio **$3:1$** dominant to recessive.",
+      "hint": "Work out the four possible gamete combinations first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0con42k",
+      "kind": "process",
+      "front": "What are the steps for predicting offspring from a genetic cross?",
+      "back": "1) Write the parents' genotypes. 2) List the possible gametes from each parent. 3) Combine gametes to find offspring genotypes. 4) Use the allele relationship to predict phenotypes.",
+      "hint": "Start with what the question gives you about the parents.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1berk2w",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a dominant allele is the common allele in a population?",
+      "back": "**Dominant** describes an allele's effect in a heterozygote, not how common it is in a population.",
+      "hint": "Think about what dominance is describing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15klt2n",
+      "kind": "concept",
+      "front": "Why do both $I^A$ and $I^B$ alleles show in an $I^AI^B$ blood group AB individual?",
+      "back": "They are **codominant**: both alleles affect the heterozygote's phenotype, so neither masks the other, giving blood group AB.",
+      "hint": "Compare this with a dominant and recessive pair.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iqi41q",
+      "kind": "example",
+      "front": "In an $AaBb$ by $AaBb$ cross, how many of 160 offspring show both recessive phenotypes?",
+      "back": "**10** offspring, since $P(aabb)=\\frac{1}{4}\\times\\frac{1}{4}=\\frac{1}{16}$ and $160\\times\\frac{1}{16}=10$.",
+      "hint": "Find the probability for each gene separately first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1s284oe",
+      "kind": "concept",
+      "front": "Why do genes on the same autosome not give the 9:3:3:1 ratio?",
+      "back": "They are **autosomally linked**, so they tend to be inherited together, mainly giving $AB$ and $ab$ gametes. Crossing over gives $Ab$ and $aB$ at a frequency depending on gene distance.",
+      "hint": "Think about which gametes an $AB/ab$ parent makes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "133q1rk",
+      "kind": "concept",
+      "front": "Which offspring of an $X^AX^a$ by $X^AY$ cross are expected to show the X-linked recessive characteristic, and why?",
+      "back": "Half the **sons**, with genotype $X^aY$. The daughters are unaffected because each has a dominant $X^A$ allele.",
+      "hint": "Check which X chromosome each offspring receives from each parent.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13119ac",
+      "kind": "concept",
+      "front": "What do two unaffected parents with an affected child suggest about inheritance of a single gene?",
+      "back": "**Autosomal recessive** inheritance. Both parents are carriers with one recessive allele each, and the affected child has two recessive alleles.",
+      "hint": "Think about the genotypes that unaffected carriers can have.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0x130au",
+      "kind": "mistake",
+      "front": "Why can a father not pass an X-linked allele to his son?",
+      "back": "Sons inherit the father's **Y chromosome**, not his X chromosome. So the father's X-linked allele goes only to his daughters.",
+      "hint": "Consider which sex chromosome a son gets from his father.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "150xtnv",
+      "kind": "term",
+      "front": "What is epistasis?",
+      "back": "**Epistasis** occurs when an allele at one gene masks or alters the phenotypic effect of another gene. For example, $aa$ masking gene $B$ gives a $9:3:4$ ratio.",
+      "hint": "Compare this with the two-gene ratio when genes act independently.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0se3i8j",
+      "kind": "example",
+      "front": "What chi-squared value do observed counts of 88, 32 and 40 give against a predicted 9:3:4 ratio of 160 offspring?",
+      "back": "About **0.18**. This is below the critical value 5.99 for 2 degrees of freedom, so the difference is not statistically significant at 5%.",
+      "hint": "Work out the expected counts from the ratio first.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "18g6ufv",
+      "kind": "mistake",
+      "front": "Why does a non-significant chi-squared result not prove a predicted ratio is correct?",
+      "back": "It only shows the observed difference is not strong evidence against the ratio. It does not **prove** the ratio.",
+      "sectionId": "s6"
+    }
+  ]
+}

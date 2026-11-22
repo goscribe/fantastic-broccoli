@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "15-4",
+  "topicCode": "15.4",
+  "topicName": "Blackbody radiation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:50.001Z",
+  "cards": [
+    {
+      "id": "00118m2",
+      "kind": "term",
+      "front": "What is a blackbody?",
+      "back": "An ideal object that **absorbs** all radiation striking it. The spectrum it emits depends only on its temperature, not on its material.",
+      "hint": "What does it do with light that hits it, and what sets its glow?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1d6n5ts",
+      "kind": "concept",
+      "front": "Why does a blackbody's intensity fall at short wavelengths?",
+      "back": "Energy is **quantized** into packets of size $hf$. Short wavelengths have high frequency, so packets are large, and limited thermal energy excites few oscillators.",
+      "hint": "Link packet size, thermal energy, and oscillators.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0seuefy",
+      "kind": "concept",
+      "front": "What happens to a blackbody's peak wavelength as its temperature rises?",
+      "back": "The peak shifts to **shorter** wavelengths, and the object emits more intensity at every wavelength.",
+      "hint": "Think of a stove burner going from red to white.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "109izdq",
+      "kind": "concept",
+      "front": "What is thermal radiation?",
+      "back": "Electromagnetic radiation emitted by matter because its charged particles are in constant **thermal motion**.",
+      "hint": "Why does a warm object glow at all?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1oppz2h",
+      "kind": "term",
+      "front": "What is a blackbody spectrum?",
+      "back": "A graph of emitted **intensity** against wavelength for a blackbody at one temperature. It is smooth, with a single peak.",
+      "hint": "Smooth curve, not separate lines.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lzbzae",
+      "kind": "formula",
+      "front": "State the relation between peak wavelength and temperature for a blackbody, with units.",
+      "back": "$\\lambda_\\mathrm{peak}T=2.90\\times10^{-3}\\,\\mathrm{m\\,K}$, where $T$ is in **kelvin**. Doubling $T$ halves the peak wavelength.",
+      "hint": "The product is a constant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "196of0v",
+      "kind": "example",
+      "front": "A surface is at about 5800 K. Estimate its peak wavelength.",
+      "back": "About $5.0\\times10^{-7}\\,\\mathrm{m}$, or **500 nm**, which lies in the visible range.",
+      "hint": "Divide 2.90 times 10 to the minus 3 by T.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12q3b9i",
+      "kind": "term",
+      "front": "What is the ultraviolet catastrophe?",
+      "back": "The **failure** of classical theory, which predicted blackbody intensity rising without limit at short wavelengths.",
+      "hint": "Classical prediction versus measurement.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13b6wxv",
+      "kind": "concept",
+      "front": "Why did classical physics fail to describe a blackbody?",
+      "back": "It predicted intensity rising **without limit** toward short wavelengths. Measured intensity falls toward zero instead.",
+      "hint": "Compare prediction with measured data.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yg00y3",
+      "kind": "formula",
+      "front": "What are the allowed energies of an oscillator of frequency $f$ in Planck's model?",
+      "back": "$E=nhf$, with $n=0,1,2,\\dots$ a whole number, and $h=6.63\\times10^{-34}\\,\\mathrm{J\\,s}$ Planck's constant.",
+      "hint": "Energy comes in whole-number multiples.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03r9439",
+      "kind": "example",
+      "front": "By what factor does a blackbody's total radiated power change if its temperature in kelvin doubles?",
+      "back": "It increases by **16**, because total power is proportional to $T^4$ and $2^4=16$.",
+      "hint": "Power scales with the fourth power of T.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mnkx6f",
+      "kind": "mistake",
+      "front": "Does a hotter object stop emitting the wavelengths it used to emit?",
+      "back": "No. It emits **more** intensity at every wavelength and adds more light at shorter wavelengths.",
+      "hint": "Hotter means more, not replaced.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h0lo55",
+      "kind": "mistake",
+      "front": "Must a blackbody look black?",
+      "back": "No. A **very hot** blackbody glows brilliantly. The name refers to absorbing all incident radiation.",
+      "hint": "Think about the stove burner.",
+      "sectionId": "s1"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-12",
+  "topicCode": "1.12",
+  "topicName": "Complex numbers",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:48.849Z",
+  "cards": [
+    {
+      "id": "0gi8udk",
+      "kind": "concept",
+      "front": "Why do we need the imaginary unit $i$?",
+      "back": "No real number squares to $-1$, so we define $i$ by $i^2=-1$. This lets negative numbers have square roots, and it lets quadratics with no real roots be solved.",
+      "hint": "Think about squaring a real number.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07jiog0",
+      "kind": "formula",
+      "front": "What is the modulus of $z=a+bi$, and what does it measure?",
+      "back": "$|z|=\\sqrt{a^2+b^2}$. It is the **distance** from the origin to the point representing $z$ on an Argand diagram.",
+      "hint": "Pythagoras on the point $(a,b)$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09v50kv",
+      "kind": "process",
+      "front": "How do you find the argument of $z=a+bi$ when $a<0$?",
+      "back": "Find the reference angle with $\\tan^{-1}\\frac{|b|}{|a|}$, sketch the point, then use the quadrant to set $\\theta$ in $-\\pi<\\theta\\le\\pi$. For $a<0$, $b>0$, $\\theta=\\pi-$ reference angle.",
+      "hint": "A calculator alone can give the wrong quadrant.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08v1txk",
+      "kind": "term",
+      "front": "What is the complex conjugate of $z=a+bi$?",
+      "back": "$z^*=a-bi$, found by changing the **sign** of the imaginary part. Multiplying $z$ by $z^*$ gives the real number $a^2+b^2$.",
+      "hint": "Only the sign of the imaginary part changes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "140n1i6",
+      "kind": "process",
+      "front": "How do you write $\\frac{3+2i}{1-i}$ in the form $a+bi$?",
+      "back": "Multiply top and bottom by the conjugate $1+i$. The numerator becomes $1+5i$ and the denominator becomes $2$, so the answer is $\\frac{1}{2}+\\frac{5}{2}i$.",
+      "hint": "Make the denominator real first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03waafx",
+      "kind": "concept",
+      "front": "How does an Argand diagram show a complex number?",
+      "back": "The number $a+bi$ is plotted as the point $(a,b)$. The **horizontal** axis is the real part and the **vertical** axis is the imaginary part.",
+      "hint": "Compare with plotting coordinates.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lyb20z",
+      "kind": "example",
+      "front": "Solve $x^2-4x+13=0$.",
+      "back": "Discriminant $=16-52=-36$, so $x=\\frac{4\\pm6i}{2}$. Answer: $x=2+3i$ or $x=2-3i$.",
+      "hint": "Find the discriminant first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xx7evd",
+      "kind": "concept",
+      "front": "Why are the complex roots of a real quadratic conjugates?",
+      "back": "The real part $-\\frac{b}{2a}$ is the same for both roots. The imaginary parts differ only in **sign**, which makes them conjugates.",
+      "hint": "Look at the formula with a negative discriminant.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17vxb9a",
+      "kind": "mistake",
+      "front": "What is wrong with saying $\\mathrm{Im}(3-5i)=-5i$?",
+      "back": "The imaginary part is the real number $b$, not $bi$. So $\\mathrm{Im}(3-5i)=-5$.",
+      "hint": "Is the answer a real number?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qey5e4",
+      "kind": "mistake",
+      "front": "Why is leaving $i^2$ in a final answer a mistake?",
+      "back": "The answer must be in the form $a+bi$. Replace $i^2$ by $-1$ as soon as it appears, or marks are lost.",
+      "hint": "What should $i^2$ become?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l33jsh",
+      "kind": "mistake",
+      "front": "Why can a calculator's $\\tan^{-1}\\frac{b}{a}$ give the wrong argument?",
+      "back": "It returns values between $-\\frac{\\pi}{2}$ and $\\frac{\\pi}{2}$. When $a<0$, you must add or subtract $\\pi$ to reach the correct quadrant.",
+      "hint": "Check the sign of $a$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18nm38e",
+      "kind": "example",
+      "front": "Find $|z|$ and $\\arg z$ for $z=-1+\\sqrt{3}\\,i$.",
+      "back": "$|z|=2$ and $\\arg z=\\frac{2\\pi}{3}$. The reference angle is $\\frac{\\pi}{3}$ and the point is in the second quadrant.",
+      "hint": "Use the reference angle and the quadrant.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0luiez5",
+      "kind": "term",
+      "front": "What is the discriminant of $ax^2+bx+c$, and what does a negative value mean?",
+      "back": "The discriminant is $b^2-4ac$. If it is **negative**, the quadratic has no real roots, and the roots are complex.",
+      "hint": "It sits under the square root in the formula.",
+      "sectionId": "s5"
+    }
+  ]
+}

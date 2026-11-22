@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-18",
+  "topicCode": "5.18",
+  "topicName": "How the scientific community validates evidence",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:16.039Z",
+  "cards": [
+    {
+      "id": "04ih3xp",
+      "kind": "term",
+      "front": "What is reproducibility in science?",
+      "back": "**Reproducibility** is how consistently independent scientists get the same results when they repeat an investigation using the same method.",
+      "hint": "Compare a result from one lab alone with one seen across several labs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19uyir9",
+      "kind": "term",
+      "front": "What is a scientific theory?",
+      "back": "A **scientific theory** is a widely tested explanation supported by evidence from many independent sources. It explains many observations and makes testable predictions.",
+      "hint": "Think about how many separate sources must back an explanation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pi08bj",
+      "kind": "concept",
+      "front": "What is the main job of peer review before a journal publishes a report?",
+      "back": "**Peer review** has independent experts check the method, data and conclusion, which filters out poor work and improves what gets published.",
+      "hint": "Consider who does the checking and whether they are part of the research team.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "041hgmh",
+      "kind": "term",
+      "front": "What is a hypothesis?",
+      "back": "A **hypothesis** is a testable proposed explanation for an observation or phenomenon.",
+      "hint": "It is proposed before the data are collected.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1r4np06",
+      "kind": "process",
+      "front": "What steps take a finding from experiment to shared evidence?",
+      "back": "Experiments or observations produce data, the data count as evidence once others can examine them, and the results are then published in a journal with the method, data and conclusion.",
+      "hint": "Start with what the scientist does in the lab.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04ou2lh",
+      "kind": "term",
+      "front": "What is a scientific journal?",
+      "back": "A **scientific journal** is a regular publication that prints research reports, usually after experts have checked them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1aaa9ms",
+      "kind": "mistake",
+      "front": "Why is it wrong to think peer review proves a result is correct?",
+      "back": "Peer review only reduces errors; it does not prove a result. Other scientists must still repeat the work before the result can be trusted.",
+      "hint": "Compare what reviewers actually do with what other labs do.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qi433f",
+      "kind": "term",
+      "front": "What is bias in research?",
+      "back": "**Bias** is a systematic influence, such as a personal or financial interest, that pushes results or conclusions in one direction.",
+      "hint": "Think about what could tilt a study one way.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rup3xv",
+      "kind": "mistake",
+      "front": "Why do repeats by the original team count for less than independent repeats?",
+      "back": "Repeats by the same team can share the same hidden mistakes, so only independent scientists using their own equipment and samples give a fair check.",
+      "hint": "Think about what the original team already did.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b37y32",
+      "kind": "concept",
+      "front": "What does a prediction do for a hypothesis?",
+      "back": "A **prediction** states what should be observed if the hypothesis is correct. Matching results add support, while mismatched results mean the hypothesis must be changed or rejected.",
+      "hint": "Think about what happens when the new results do not match.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0udt15v",
+      "kind": "concept",
+      "front": "Why are scientific theories never treated as final?",
+      "back": "New evidence that conflicts with a theory leads scientists to modify or replace it. This willingness to revise is a strength of science.",
+      "hint": "Consider what should happen when new data disagree with an explanation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ebn856",
+      "kind": "term",
+      "front": "What is a conflict of interest?",
+      "back": "A **conflict of interest** is a situation in which a personal or financial interest could influence how research is done or reported.",
+      "hint": "Think about who might gain from a particular result.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0giti7e",
+      "kind": "process",
+      "front": "What happens when a published paper is found to contain errors or misconduct?",
+      "back": "The journal may issue a **retraction**, formally withdrawing the paper so that other scientists should no longer rely on it.",
+      "hint": "Consider what a journal can do after a paper is already in print.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ixa5os",
+      "kind": "concept",
+      "front": "Which checks should a reader make before trusting a news story's scientific claim?",
+      "back": "Check whether the work appeared in a journal, whether other scientists have repeated it, who paid for it, and whether the authors have a conflict of interest.",
+      "sectionId": "s5"
+    }
+  ]
+}

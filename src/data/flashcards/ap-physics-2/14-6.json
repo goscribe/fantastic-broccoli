@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "14-6",
+  "topicCode": "14.6",
+  "topicName": "Interference and standing waves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:39.929Z",
+  "cards": [
+    {
+      "id": "1utka8g",
+      "kind": "term",
+      "front": "What is the principle of superposition?",
+      "back": "**Superposition** means that where waves overlap, the net displacement at each point equals the sum of the displacements each wave would cause alone. Afterward, each wave carries on unchanged.",
+      "hint": "Think about two ripples crossing on a pond.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "173l7bl",
+      "kind": "concept",
+      "front": "How do in-phase and out-of-phase waves combine when they overlap?",
+      "back": "In phase (crest on crest) gives **constructive interference**, where amplitudes add to a larger amplitude. Out of phase (crest on trough) gives **destructive interference**, where displacements cancel to a smaller amplitude.",
+      "hint": "Compare the signs of the two displacements.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "001v8y9",
+      "kind": "formula",
+      "front": "What are the allowed frequencies of a string of length L fixed at both ends?",
+      "back": "$f_n=\\frac{nv}{2L}$, where $n=1,2,3,\\dots$ is the harmonic number, $v$ is the wave speed in m/s, $L$ is the length in m, and $f_n$ is in Hz.",
+      "hint": "Only whole-number values of n are allowed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nayv8w",
+      "kind": "term",
+      "front": "What is a node in a standing wave?",
+      "back": "A **node** is a point that never moves, because the waves always cancel there. A fixed end of a string is always a node.",
+      "hint": "Think of the points that stay still.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19xa2jy",
+      "kind": "term",
+      "front": "What is an antinode in a standing wave?",
+      "back": "An **antinode** is a point midway between nodes where the string oscillates with maximum amplitude. Nodes and antinodes alternate along the string.",
+      "hint": "It is the opposite of a node.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04hx7b0",
+      "kind": "formula",
+      "front": "What path differences give constructive or destructive interference for in-phase sources?",
+      "back": "Constructive when the path difference is $m\\lambda$ with $m=0,1,2,\\dots$. Destructive when it is $\\left(m+\\frac{1}{2}\\right)\\lambda$. Both use the wavelength $\\lambda$ in meters.",
+      "hint": "Whole wavelengths add; half wavelengths cancel.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bayfje",
+      "kind": "example",
+      "front": "Two in-phase speakers emit sound of wavelength 0.50 m. A listener is 4.00 m from one and 5.25 m from the other. Constructive or destructive?",
+      "back": "**Destructive**. The path difference is 1.25 m, which is 2.5 wavelengths. A half-integer number of wavelengths gives a quiet spot.",
+      "hint": "Divide the path difference by the wavelength.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n5qgho",
+      "kind": "example",
+      "front": "A string 0.50 m long is fixed at both ends, and waves travel on it at 200 m/s. What is the third harmonic?",
+      "back": "**600 Hz**. The fundamental is $f_1=\\frac{v}{2L}=200$ Hz, so the third harmonic is $f_3=3f_1=600$ Hz.",
+      "hint": "Find the fundamental first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01iinec",
+      "kind": "mistake",
+      "front": "A student says overlapping waves always give a bigger amplitude. What is wrong?",
+      "back": "Amplitudes add only when the waves are in phase. Out of phase they subtract, so the resultant ranges from the difference to the sum of the two amplitudes.",
+      "hint": "Consider the out-of-phase case.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sopkj1",
+      "kind": "mistake",
+      "front": "Do waves destroy each other where they cancel?",
+      "back": "No. Waves do not destroy each other where they cancel. They pass through and continue unchanged, and the cancellation is only the net displacement at that moment.",
+      "hint": "Think about what happens after the ripples cross.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wsdw7j",
+      "kind": "process",
+      "front": "Outline how a standing wave forms on a string fixed at both ends.",
+      "back": "1) A wave travels along the string. 2) It reflects at the fixed end. 3) The reflected wave overlaps waves moving the other way. 4) At certain frequencies the overlap forms a stationary pattern of nodes and antinodes.",
+      "hint": "Start with a single wave travelling outward.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01corv4",
+      "kind": "formula",
+      "front": "Which harmonics does a pipe closed at one end support?",
+      "back": "Wavelengths $\\lambda_n=\\frac{4L}{n}$ with $n=1,3,5,\\dots$ only. A closed end is a node and an open end is an antinode, so only odd harmonics fit.",
+      "hint": "Count how many quarter wavelengths fit.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0a036r4",
+      "kind": "term",
+      "front": "What is the fundamental frequency?",
+      "back": "The **fundamental frequency** is the lowest frequency, $f_1$, at which a system supports a standing wave. It is measured in hertz, and each higher allowed frequency is a harmonic.",
+      "hint": "It corresponds to n = 1.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a3-4",
+  "topicCode": "A3.4",
+  "topicName": "Alternative databases and warehouses",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:04.678Z",
+  "cards": [
+    {
+      "id": "10d7jd9",
+      "kind": "term",
+      "front": "What is a NoSQL database?",
+      "back": "A **NoSQL database** stores data in a model other than related tables, often with a flexible schema and a design that spreads data across many servers.",
+      "hint": "Think about what it does instead of linked tables.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0v2v03d",
+      "kind": "concept",
+      "front": "Why would a bank's account records suit a relational database better than a NoSQL database?",
+      "back": "Relational databases give **strong consistency** through transactions, so every transfer stays accurate. NoSQL may relax consistency, which is risky when mistakes are costly.",
+      "hint": "Link the feature to the need for accuracy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17erqf4",
+      "kind": "concept",
+      "front": "What is a data warehouse and what is it used for?",
+      "back": "A **data warehouse** is a large central store of historical data from many sources. It is built for analysis and reporting, not for daily transactions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wge3xl",
+      "kind": "concept",
+      "front": "Name the four common NoSQL database types and what each one stores.",
+      "back": "**Document** stores self-contained documents. **Key-value** pairs a unique key with a value. **Graph** stores nodes joined by links. **Wide-column** stores rows whose columns can vary.",
+      "hint": "Each type has a typical use, such as social networks for graph.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zixm6e",
+      "kind": "concept",
+      "front": "How does a flexible schema differ from the schema of a relational database?",
+      "back": "A relational **schema** is fixed, with tables and data types defined before data is stored. A flexible schema lets records in the same collection hold different fields.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hbhrs7",
+      "kind": "term",
+      "front": "What is horizontal scaling?",
+      "back": "**Horizontal scaling** means increasing capacity by adding more servers to share the load, rather than upgrading a single server.",
+      "hint": "Compare with upgrading one machine.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mf56j6",
+      "kind": "mistake",
+      "front": "A student says NoSQL data has no structure at all. Why is this wrong?",
+      "back": "NoSQL does not mean **no structure**. The structure is simply less rigid than in a relational database.",
+      "hint": "Think about how rigid the schema is, not whether one exists.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0g7u5h2",
+      "kind": "term",
+      "front": "What is an operational database?",
+      "back": "An **operational database** supports an organisation's day-to-day transactions, such as taking orders or updating stock.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f3y53h",
+      "kind": "process",
+      "front": "What are the three stages of ETL, in order, when loading a data warehouse?",
+      "back": "**Extract** copies data from each source system. **Transform** cleans it and converts it to one consistent format. **Load** stores the result in the warehouse.",
+      "hint": "Consider what the data must go through before it is stored.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16x3upu",
+      "kind": "term",
+      "front": "What is data mining?",
+      "back": "**Data mining** is the analysis of large datasets to discover patterns, trends and relationships that are not obvious.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wv2t9c",
+      "kind": "concept",
+      "front": "Why is analysis run on the data warehouse rather than the operational systems?",
+      "back": "It keeps the **operational systems fast**, so staff and customers are not slowed down by heavy analysis.",
+      "hint": "Consider who uses the operational systems.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0u2tqlt",
+      "kind": "mistake",
+      "front": "A manager thinks a data warehouse guarantees good decisions. What is the mistake?",
+      "back": "A warehouse is only a **tool**. Poor quality data loaded into it leads to poor decisions.",
+      "hint": "Think about what goes in, not just where it is stored.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0l955x7",
+      "kind": "concept",
+      "front": "Name two disadvantages of data warehouses.",
+      "back": "They are **costly** to build and maintain. ETL is complex and can introduce errors, and data may be out of date between loads.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0akwd8a",
+      "kind": "concept",
+      "front": "What is eventual consistency and what does it favour?",
+      "back": "Copies of data may briefly differ across servers. It favours **speed and availability** over instant agreement between copies.",
+      "hint": "Think about trade-offs in distributed systems.",
+      "sectionId": "s3"
+    }
+  ]
+}

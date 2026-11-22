@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "1-4",
+  "topicCode": "1.4",
+  "topicName": "Reference frames and relative motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:24.613Z",
+  "cards": [
+    {
+      "id": "1f0iswf",
+      "kind": "term",
+      "front": "What is a reference frame?",
+      "back": "A **reference frame** is the viewpoint, with a chosen origin and axes, from which positions and velocities are measured.",
+      "hint": "Think about where the observer stands and which way the axes point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09fflaj",
+      "kind": "concept",
+      "front": "Why can two observers measure different velocities for the same passenger on a moving train?",
+      "back": "Velocity depends on the **reference frame** used to measure it, so both answers can be correct. The events themselves do not change.",
+      "hint": "Compare a passenger seen from inside the train with one seen from the platform.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jpxlmx",
+      "kind": "formula",
+      "front": "What is the rule for adding relative velocities along a line, and what does the subscript notation mean?",
+      "back": "$v_{A/C}=v_{A/B}+v_{B/C}$, where $v_{A/B}$ is the **relative velocity** of A with respect to B. Choose a positive direction and give each velocity its sign before adding.",
+      "hint": "Look for the matching middle subscripts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02iookq",
+      "kind": "mistake",
+      "front": "Why is saying a car moves at 20 m/s on its own an incomplete description?",
+      "back": "A velocity means nothing without a named **frame**. When no frame is stated, the ground is assumed.",
+      "hint": "What is assumed when no frame is named?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yaosc5",
+      "kind": "process",
+      "front": "What are the steps to find a passenger's velocity relative to the ground?",
+      "back": "1. Choose a positive direction. 2. Give each velocity its sign. 3. Add the passenger's velocity relative to the train to the train's velocity relative to the ground.",
+      "hint": "Sign first, then add.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vzhjuc",
+      "kind": "example",
+      "front": "A train moves 20 m/s east relative to the ground. A passenger walks 1.5 m/s west relative to the train. What is the passenger's velocity relative to the ground?",
+      "back": "**18.5 m/s east**, since $-1.5+20=+18.5$ m/s with east taken as positive.",
+      "hint": "Walking west gives a negative sign.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q5swlp",
+      "kind": "term",
+      "front": "What is the ground frame?",
+      "back": "The **ground frame** is a reference frame fixed to the Earth's surface, and it is assumed by default when no frame is named.",
+      "hint": "Which frame do we use when nobody says otherwise?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ugyyyk",
+      "kind": "formula",
+      "front": "Write the rule for the velocity of car A as seen by car B, with both velocities measured from the ground.",
+      "back": "$v_{A/B}=v_A-v_B$, where $v_A$ and $v_B$ are measured in the ground frame. The result is the velocity of A as the observer in B sees it.",
+      "hint": "Subtract the observer's velocity.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rog1h8",
+      "kind": "example",
+      "front": "Car A moves at 25 m/s east and car B at 15 m/s west, both relative to the ground. What is A's velocity relative to B?",
+      "back": "**40 m/s east**, since $25-(-15)=+40$ m/s. Cars moving in opposite directions give a large relative speed.",
+      "hint": "Remember that subtracting a negative adds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1axbpu5",
+      "kind": "concept",
+      "front": "Why does a river current change a boat's speed over the ground?",
+      "back": "The boat's speed is quoted relative to the **water**, and the water moves relative to the bank. Adding the two velocities gives the motion relative to the bank.",
+      "hint": "Which two velocities need to be combined?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11hns48",
+      "kind": "term",
+      "front": "What is a river's current?",
+      "back": "The **current** is the motion of the water itself, measured relative to the bank.",
+      "hint": "Think of what moves the boat along with the water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "04inzcg",
+      "kind": "example",
+      "front": "A boat moves at 4.0 m/s relative to the water in a 1.0 m/s current. How long does it take to travel 60 m downstream?",
+      "back": "**12 s**. The speed over the bank is $4.0+1.0=5.0$ m/s, so $t=\\frac{60}{5.0}=12$ s.",
+      "hint": "Downstream, the current adds to the boat's speed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1486qg3",
+      "kind": "mistake",
+      "front": "Does a river current cancel out over a round trip?",
+      "back": "**No**. The current helps for a shorter time than it hurts, so the round trip is slower than in still water. For example, 12 s downstream plus 20 s upstream.",
+      "hint": "Compare the time spent with and against the current.",
+      "sectionId": "s5"
+    }
+  ]
+}

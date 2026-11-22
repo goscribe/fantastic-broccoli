@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-17",
+  "topicCode": "8.17",
+  "topicName": "Drugs from genetically modified organisms",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:19.166Z",
+  "cards": [
+    {
+      "id": "0cictaa",
+      "kind": "concept",
+      "front": "Why can a bacterium make a human protein such as insulin from a human gene?",
+      "back": "The **genetic code** is almost universal, so the same base sequence codes for the same amino acids in almost all organisms.",
+      "hint": "Consider whether a bacterium reads a human gene in the same way a human cell does.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1eu8h41",
+      "kind": "process",
+      "front": "What are the steps for joining a human gene into a plasmid?",
+      "back": "1) The same **restriction enzyme** cuts the human DNA and the plasmid, leaving matching single-stranded ends. 2) The ends pair by complementary base pairing. 3) **DNA ligase** joins the sugar–phosphate backbones.",
+      "hint": "Think about what happens to both DNA samples before anything is joined.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19qf0e0",
+      "kind": "concept",
+      "front": "Why is a marker gene included on the plasmid?",
+      "back": "It lets scientists find the **few cells that took up the plasmid**. For example, an antibiotic resistance gene means only those cells survive on agar containing the antibiotic.",
+      "hint": "Most treated cells stay unchanged, so how could the rest be picked out?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1e77eei",
+      "kind": "mistake",
+      "front": "A student says restriction enzymes join the human gene into the plasmid. What is wrong?",
+      "back": "**Restriction enzymes** only cut DNA at a specific base sequence. Joining the fragments is the job of **DNA ligase**.",
+      "hint": "Check what each enzyme in the process actually does.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0irv2tt",
+      "kind": "term",
+      "front": "What is a plasmid?",
+      "back": "A small **circular loop of DNA** in bacteria, separate from the main chromosome, that can be passed to new cells.",
+      "hint": "Compare where it sits with the main chromosome.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mits4p",
+      "kind": "term",
+      "front": "What is recombinant DNA?",
+      "back": "DNA formed by **joining DNA from two different sources**.",
+      "hint": "Think about where the human gene and the plasmid each come from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bqpv1f",
+      "kind": "process",
+      "front": "Which conditions does a fermenter keep at their best values?",
+      "back": "**Temperature, pH, oxygen and nutrient supply**. Stirring spreads nutrients and oxygen to every cell.",
+      "hint": "Think about what a growing culture needs in order to thrive.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rtk6zv",
+      "kind": "concept",
+      "front": "Why must other microorganisms be kept out of a fermenter?",
+      "back": "They would **compete for nutrients** and could spoil the product.",
+      "hint": "Think about what happens when two organisms share the same food supply.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j15yj0",
+      "kind": "process",
+      "front": "What happens to the protein after the bacteria have made it?",
+      "back": "It is **separated from the culture and purified**. Purity matters because many such drugs are injected into patients.",
+      "hint": "Think about what must happen before a drug reaches a patient.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jtt4y3",
+      "kind": "concept",
+      "front": "Why are some human proteins made in cultured mammalian cells instead of bacteria?",
+      "back": "Some proteins need **sugar groups added** after they are made, and bacteria cannot do this.",
+      "hint": "Consider what changes some proteins undergo after they are assembled.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qmm75m",
+      "kind": "term",
+      "front": "What is pharming?",
+      "back": "The use of **genetically modified animals or plants** to make pharmaceutical products.",
+      "hint": "Think of the goats and the leaves mentioned in the note.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01gs8eb",
+      "kind": "example",
+      "front": "Which host is used to make Factor VIII?",
+      "back": "**Cultured mammalian cells**. Factor VIII helps blood to clot in haemophilia.",
+      "hint": "Look at the table of drugs and the hosts that make them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0daa29e",
+      "kind": "example",
+      "front": "Which drug is secreted in the milk of GM goats?",
+      "back": "**Antithrombin**, which reduces clots in people who lack it.",
+      "hint": "Think about which host in the table produces a drug in its milk.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03lkli7",
+      "kind": "concept",
+      "front": "Why is a DNA copy of mRNA used for some human genes instead of the gene itself?",
+      "back": "Human genes contain **introns**, which bacteria cannot remove, so the protein would be wrong. A DNA copy made by **reverse transcriptase** has no introns.",
+      "hint": "Think about the non-coding sections found inside human genes.",
+      "sectionId": "s5"
+    }
+  ]
+}

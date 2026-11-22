@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "11-6",
+  "topicCode": "11.6",
+  "topicName": "Kirchhoff's loop rule",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:17.177Z",
+  "cards": [
+    {
+      "id": "01cw89v",
+      "kind": "concept",
+      "front": "What does Kirchhoff's loop rule say about potential differences around a closed loop?",
+      "back": "The **sum** of the potential differences around any closed loop is zero, $\\sum \\Delta V=0$. It reflects conservation of energy: energy gained in batteries is lost in resistors.",
+      "hint": "Think of a hiking trail that returns to its start.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ffsbhc",
+      "kind": "formula",
+      "front": "What term does a resistor add to a loop equation when you travel in the same direction as the current?",
+      "back": "$-IR$. The potential drops along the current, so the term is **negative**. Traveling against the current flips it to $+IR$.",
+      "hint": "Does the potential rise or fall along the current?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ukx5u8",
+      "kind": "example",
+      "front": "A 12 V and a 6.0 V battery oppose each other in one loop with resistors of 3.0 Ω and 1.0 Ω. What current flows, and which way?",
+      "back": "**1.5 A**, clockwise. The loop equation $6.0\\,\\mathrm{V}-I(4.0\\,\\Omega)=0$ gives $I=1.5\\,\\mathrm{A}$, and the larger battery sets the direction.",
+      "hint": "Travel clockwise and combine the two resistances.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xw69dk",
+      "kind": "process",
+      "front": "What are the steps for writing and solving loop equations in a circuit?",
+      "back": "Label each unknown current and assume its direction. Choose a loop and a direction of travel. Write each term with its sign. Repeat for other independent loops, then solve the equations together.",
+      "hint": "Start with the currents, then the loops.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05s8wjd",
+      "kind": "term",
+      "front": "What is a closed loop?",
+      "back": "A **closed loop** is any path through a circuit that returns to its starting point without crossing any element twice.",
+      "hint": "Where does the path end?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v2ut4f",
+      "kind": "term",
+      "front": "What makes a loop an independent loop?",
+      "back": "An **independent loop** includes at least one element not already included in the loops chosen. Each independent loop adds a new equation.",
+      "hint": "Compare it with the loops you have already used.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14v69wn",
+      "kind": "mistake",
+      "front": "While traveling a loop, a student crosses a battery from its + terminal to its − terminal and writes +ΔV. What is wrong?",
+      "back": "The sign is wrong. Crossing from **+ to −** gives $-\\Delta V_\\mathrm{battery}$. Crossing from − to + gives $+\\Delta V_\\mathrm{battery}$.",
+      "hint": "Battery signs follow the direction of travel.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0py278a",
+      "kind": "mistake",
+      "front": "After solving, a current comes out negative. Does that mean the calculation is wrong?",
+      "back": "No. The current flows **opposite** to the direction you assumed. Its size is still correct.",
+      "hint": "Recall the direction you chose at the start.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a7u353",
+      "kind": "concept",
+      "front": "Why must two resistors joined across the same two points have equal potential differences?",
+      "back": "A loop going down one resistor and up the other gives $-I_2R_2+I_3R_3=0$, so $I_2R_2=I_3R_3$. The loop rule forces the **potential differences** to match, even with no battery in the loop.",
+      "hint": "Use a loop that contains no battery.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t9jdtw",
+      "kind": "concept",
+      "front": "When should you use Kirchhoff's loop rule instead of series and parallel reduction?",
+      "back": "Use it when the circuit **cannot be reduced**, such as when batteries sit in different branches or when you need an unknown potential difference inside a loop.",
+      "hint": "Think about circuits that do not simplify neatly.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0o3hjfo",
+      "kind": "example",
+      "front": "A 9.0 V battery sits in one loop with a 2.0 Ω resistor and a 4.0 Ω resistor. What is the current?",
+      "back": "**1.5 A**. The loop equation $+9.0\\,\\mathrm{V}-I(6.0\\,\\Omega)=0$ gives $I=\\frac{9.0\\,\\mathrm{V}}{6.0\\,\\Omega}=1.5\\,\\mathrm{A}$.",
+      "hint": "Add the resistances around the loop."
+    },
+    {
+      "id": "0804by8",
+      "kind": "concept",
+      "front": "How can you check a loop solution against the batteries?",
+      "back": "The resistor potential drops should add up to the **net** battery voltage. In the 12 V and 6.0 V example, the drops are 4.5 V and 1.5 V, which total 6.0 V.",
+      "hint": "Add the drop across each resistor.",
+      "sectionId": "s3"
+    }
+  ]
+}

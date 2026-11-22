@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-5-2",
+  "topicCode": "3.5.2",
+  "topicName": "Respiration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:52.005Z",
+  "cards": [
+    {
+      "id": "0yqcgru",
+      "kind": "concept",
+      "front": "How does the inner mitochondrial membrane make most of the ATP in aerobic respiration?",
+      "back": "Electron transport pumps protons into the intermembrane space, creating an **electrochemical gradient**. Protons flow back into the matrix through **ATP synthase**, which makes ATP from ADP and inorganic phosphate.",
+      "hint": "Think about what the electron transport chain does with the energy from electrons.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vpv0ns",
+      "kind": "term",
+      "front": "What is **glycolysis**?",
+      "back": "The cytoplasmic pathway that splits one glucose into two pyruvate molecules, giving a net gain of two ATP. It does not need oxygen.",
+      "hint": "Think about where the first stage of respiration takes place.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wz9t9c",
+      "kind": "term",
+      "front": "What is **anaerobic respiration**?",
+      "back": "Respiration without oxygen. It regenerates **NAD** from reduced NAD so glycolysis keeps running, giving only the net two ATP per glucose.",
+      "hint": "Consider what glycolysis needs in order to keep running.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rdapaj",
+      "kind": "mistake",
+      "front": "A student says converting pyruvate to lactate makes extra ATP. What is wrong with this?",
+      "back": "It is wrong. The conversion makes no ATP. It only regenerates NAD so glycolysis can continue, so the total stays at the net two ATP.",
+      "hint": "Which step in this process actually makes ATP?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03eyiz7",
+      "kind": "process",
+      "front": "Where in the mitochondrion does the Krebs cycle take place?",
+      "back": "In the **mitochondrial matrix**. Acetyl coenzyme A joins a four-carbon compound, carbon dioxide is released, and NAD and FAD are reduced.",
+      "hint": "Compare this location with the inner membrane where the electron transport chain sits.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1f60saa",
+      "kind": "term",
+      "front": "What is the **link reaction**?",
+      "back": "Pyruvate is converted into acetyl coenzyme A in the mitochondrion. Carbon dioxide is released and NAD is reduced.",
+      "hint": "Think about where pyruvate goes when oxygen is available.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1da9ns5",
+      "kind": "concept",
+      "front": "What is the role of oxygen at the end of the electron transport chain?",
+      "back": "Oxygen accepts electrons and protons, forming **water**. Without it, electron transport stops and reduced carriers cannot be recycled efficiently.",
+      "hint": "Think about what happens to the electrons at the end of the chain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mqaweq",
+      "kind": "term",
+      "front": "What is **oxidative phosphorylation**?",
+      "back": "ATP production driven by the proton gradient that electron transfer creates, with ATP synthase making the ATP.",
+      "hint": "Compare this with the ATP made directly in glycolysis or the Krebs cycle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tvx3eu",
+      "kind": "mistake",
+      "front": "A student says oxygen directly powers ATP synthase. What is the correct role of oxygen?",
+      "back": "This is wrong. Oxygen does not power ATP synthase. It only accepts electrons at the end of the transport chain, forming water.",
+      "hint": "Where does oxygen sit in the sequence of electron carriers?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vku8uo",
+      "kind": "example",
+      "front": "What is the oxygen uptake rate per gram for $2\\,\\text{g}$ of tissue that takes up $0.60\\,\\text{cm}^3$ in $5\\,\\text{minutes}$?",
+      "back": "$0.060\\,\\text{cm}^3$ per minute per gram. Divide $0.60\\div5=0.12$ to get $\\text{cm}^3$ per minute, then divide by $2\\,\\text{g}$.",
+      "hint": "Work out the rate for the whole sample first, then adjust for its mass.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bwjyp3",
+      "kind": "term",
+      "front": "What is a **respiration rate**?",
+      "back": "The amount of a measurable respiration-related change, such as oxygen uptake, that occurs per unit time.",
+      "hint": "Think about how you would compare two groups fairly.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0euxrfc",
+      "kind": "formula",
+      "front": "How is a respiration rate calculated from a measured change?",
+      "back": "Rate $=\\frac{\\text{change in measurement}}{\\text{elapsed time}}$. Always state the units, for example $\\text{cm}^3$ per minute.",
+      "hint": "Consider what a rate tells you per unit of something.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1dklhdr",
+      "kind": "concept",
+      "front": "Why does oxygen uptake fall at a high temperature, after rising at lower temperatures?",
+      "back": "Excessive heat denatures the **enzymes** involved in respiration, so aerobic respiration slows down.",
+      "hint": "Think about how enzyme activity changes as the temperature keeps rising.",
+      "sectionId": "s5"
+    }
+  ]
+}

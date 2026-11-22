@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "15-2",
+  "topicCode": "15.2",
+  "topicName": "The Bohr model",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:45.368Z",
+  "cards": [
+    {
+      "id": "1d5i23p",
+      "kind": "concept",
+      "front": "What rule did Bohr add to explain why atoms stay stable and do not collapse?",
+      "back": "Electrons can occupy only certain **allowed orbits**, each with one fixed energy. An electron in an allowed orbit does not radiate energy, so the atom stays stable.",
+      "hint": "Think about which orbits are allowed, not just any orbit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tbq8rn",
+      "kind": "formula",
+      "front": "What is the energy of hydrogen's level $n$, and what do the symbols mean?",
+      "back": "$E_n=-\\frac{13.6\\,\\mathrm{eV}}{n^2}$, where $n$ is the level number (1, 2, 3...) and energies are in **electron volts**. The negative sign shows the electron is bound to the nucleus.",
+      "hint": "Higher levels have larger n. What happens to $n^2$?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02zaqv5",
+      "kind": "concept",
+      "front": "When an electron jumps between two levels, what sets the energy of the photon it emits or absorbs?",
+      "back": "The photon's energy equals the **size of the energy gap** between the two levels, $E_\\mathrm{photon}=|E_f-E_i|$. It must match the gap exactly.",
+      "hint": "Think about the difference between the start and end levels.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rm5uhn",
+      "kind": "concept",
+      "front": "Why did classical physics fail to explain the atom?",
+      "back": "It predicts an accelerating electron radiates energy and spirals into the nucleus. Real atoms are stable, and hot hydrogen emits light only at certain colors.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nurl7y",
+      "kind": "term",
+      "front": "What is the ground state of an atom?",
+      "back": "The **lowest** energy level of an atom, $n=1$ in hydrogen. An electron there cannot drop any lower.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jbdi0x",
+      "kind": "process",
+      "front": "What steps find the wavelength of a photon released when an electron drops between two hydrogen levels?",
+      "back": "Find $E_i$ and $E_f$ from the level formula. Subtract to get the gap, then use $\\lambda=\\frac{hc}{E}$ with $hc\\approx1240\\,\\mathrm{eV\\,nm}$.",
+      "hint": "Three steps, then one division.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "015rsga",
+      "kind": "example",
+      "front": "A hydrogen electron drops from $n=3$ to $n=2$. What are the photon's energy and wavelength?",
+      "back": "About $1.89\\,\\mathrm{eV}$ and $656\\,\\mathrm{nm}$. The levels are $-1.51\\,\\mathrm{eV}$ and $-3.40\\,\\mathrm{eV}$, and $\\lambda=\\frac{1240}{1.89}$.",
+      "hint": "Find both level energies first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ffkayx",
+      "kind": "mistake",
+      "front": "Can an atom absorb only part of a photon's energy and keep the rest?",
+      "back": "No. For a jump between two levels the photon energy must **equal the gap** exactly. Partial absorption is not allowed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jo9o51",
+      "kind": "example",
+      "front": "Can a hydrogen atom in the ground state absorb a photon of energy $2.00\\,\\mathrm{eV}$? Justify.",
+      "back": "No. The smallest gap from the ground state is $10.2\\,\\mathrm{eV}$, and $2.00\\,\\mathrm{eV}$ does not match any gap, so the photon cannot be absorbed.",
+      "hint": "Compare the photon energy with the gap from n=1.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1y7mx94",
+      "kind": "mistake",
+      "front": "Is it right to say $-13.6\\,\\mathrm{eV}$ is higher than $-3.40\\,\\mathrm{eV}$ because 13.6 is the bigger number?",
+      "back": "No. Keep the negative sign: $-3.40\\,\\mathrm{eV}$ is higher. Levels lie closer to zero as $n$ grows.",
+      "hint": "Which level is closer to zero?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qalghe",
+      "kind": "concept",
+      "front": "Why does hot hydrogen gas give a line spectrum rather than a continuous band of color?",
+      "back": "Electrons can jump only between existing **energy levels**, so only certain photon energies and wavelengths are released as separate bright lines.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ln3wic",
+      "kind": "term",
+      "front": "What is a line spectrum?",
+      "back": "A set of separate bright lines at specific wavelengths, emitted by the atoms of an element. Each element's lines act as a fingerprint.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fth3ak",
+      "kind": "example",
+      "front": "A hydrogen electron jumps from $n=4$ to $n=2$. What photon energy and wavelength are released?",
+      "back": "About $2.55\\,\\mathrm{eV}$ and $486\\,\\mathrm{nm}$. Use the level formula for both levels, then $\\lambda=\\frac{1240}{2.55}$.",
+      "hint": "Work out $E_4$ and $E_2$ first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1h5sej3",
+      "kind": "concept",
+      "front": "Which atoms can the Bohr model explain well, and which can it not?",
+      "back": "It works well for hydrogen and other **one-electron atoms**. It cannot explain spectra of atoms with several electrons, which needs later quantum theory.",
+      "sectionId": "s5"
+    }
+  ]
+}

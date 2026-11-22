@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-13",
+  "topicCode": "1.13",
+  "topicName": "Polar and Euler form",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:01.488Z",
+  "cards": [
+    {
+      "id": "0wota0q",
+      "kind": "formula",
+      "front": "What happens to the modulus and argument when you multiply two complex numbers in polar form?",
+      "back": "The **moduli multiply** and the **arguments add**: $z_1z_2=r_1r_2\\,\\mathrm{cis}(\\theta_1+\\theta_2)$. Multiplying also rotates the number anticlockwise.",
+      "hint": "Think about what a product does to distance and direction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wibc9r",
+      "kind": "term",
+      "front": "What are the modulus and argument of a complex number $z=a+bi$?",
+      "back": "The **modulus** is the distance from the origin, $|z|=\\sqrt{a^2+b^2}$. The **argument** is the anticlockwise angle from the positive real axis to $z$, $\\theta=\\arg z$.",
+      "hint": "Sketch z on an Argand diagram.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i8wclo",
+      "kind": "process",
+      "front": "How do you convert $a+bi$ into polar form $r(\\cos\\theta+i\\sin\\theta)$?",
+      "back": "1) Find $r=\\sqrt{a^2+b^2}$. 2) Sketch to find the quadrant. 3) Find the reference angle $\\tan^{-1}\\left|\\frac{b}{a}\\right|$ and adjust it for the quadrant. 4) Write the polar form in radians.",
+      "hint": "Sketch first to pick the quadrant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10mmpus",
+      "kind": "concept",
+      "front": "Why is $\\tan^{-1}\\frac{b}{a}$ alone not reliable for finding an argument?",
+      "back": "When $a<0$ it gives an angle in the **wrong quadrant**, so you must sketch $z$ first to check where it lies.",
+      "hint": "Check the signs of a and b.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c204rm",
+      "kind": "formula",
+      "front": "What is the quotient rule for complex numbers in polar form?",
+      "back": "$\\frac{z_1}{z_2}=\\frac{r_1}{r_2}\\,\\mathrm{cis}(\\theta_1-\\theta_2)$: the **moduli divide** and the **arguments subtract**.",
+      "hint": "Division reverses multiplication.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0t3vboy",
+      "kind": "example",
+      "front": "Let $z_1=3\\,\\mathrm{cis}\\frac{\\pi}{4}$ and $z_2=2\\,\\mathrm{cis}\\frac{\\pi}{3}$. Find $z_1z_2$.",
+      "back": "$6\\,\\mathrm{cis}\\frac{7\\pi}{12}$, since $3\\times2=6$ and $\\frac{\\pi}{4}+\\frac{\\pi}{3}=\\frac{7\\pi}{12}$.",
+      "hint": "Multiply the moduli and add the arguments.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13khj9g",
+      "kind": "mistake",
+      "front": "Your product argument comes out as $\\frac{3\\pi}{2}$. Is this acceptable as the principal argument?",
+      "back": "No. The principal argument lies in $-\\pi<\\theta\\le\\pi$, so subtract $2\\pi$ to get $-\\frac{\\pi}{2}$.",
+      "hint": "Check the range of the principal argument.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1w5exih",
+      "kind": "term",
+      "front": "What is Euler's formula?",
+      "back": "**Euler's formula** states $e^{i\\theta}=\\cos\\theta+i\\sin\\theta$, with $\\theta$ in radians. It gives the Euler form $z=re^{i\\theta}$.",
+      "hint": "Replace the bracket in polar form.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qqu393",
+      "kind": "concept",
+      "front": "Why does the polar multiplication rule resemble the laws of indices?",
+      "back": "Moduli multiply and arguments add, just as indices add when multiplying powers of one base. Euler form $re^{i\\theta}$ makes this link exact.",
+      "hint": "Compare with $e^a\\times e^b$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14xz2s4",
+      "kind": "example",
+      "front": "Write $4e^{-i\\pi/6}$ in the form $a+bi$.",
+      "back": "$2\\sqrt{3}-2i$, using $a=4\\cos\\left(-\\frac{\\pi}{6}\\right)$ and $b=4\\sin\\left(-\\frac{\\pi}{6}\\right)$.",
+      "hint": "Use $a=r\\cos\\theta$ and $b=r\\sin\\theta$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0chdjlb",
+      "kind": "concept",
+      "front": "Which form is quickest for adding complex numbers, and which for multiplying them?",
+      "back": "**Cartesian form** $a+bi$ is quickest for adding and subtracting. **Euler form** $re^{i\\theta}$ or polar form is quickest for multiplying and dividing.",
+      "hint": "Look at the table of three forms.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "068sddw",
+      "kind": "example",
+      "front": "What is the value of $e^{i\\pi}+1$?",
+      "back": "**0**, because $e^{i\\pi}=\\cos\\pi+i\\sin\\pi=-1$.",
+      "hint": "Use Euler's formula with $\\theta=\\pi$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1c652cc",
+      "kind": "concept",
+      "front": "What does multiplying $z$ by $3\\,\\mathrm{cis}\\frac{\\pi}{2}$ do geometrically?",
+      "back": "It **enlarges** the distance of $z$ from the origin by a factor of 3, and **rotates** it anticlockwise by $\\frac{\\pi}{2}$ about the origin.",
+      "hint": "The modulus gives scaling; the argument gives rotation.",
+      "sectionId": "s3"
+    }
+  ]
+}

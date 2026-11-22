@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "s2",
+  "topicCode": "S2",
+  "topicName": "Data presentation and interpretation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:56.308Z",
+  "cards": [
+    {
+      "id": "1ebebcy",
+      "kind": "concept",
+      "front": "Why does a histogram use frequency density on its vertical axis rather than frequency?",
+      "back": "The **area** of each bar is proportional to frequency, so classes of different widths can be compared fairly. Frequency density is $\\frac{\\text{frequency}}{\\text{class width}}$.",
+      "hint": "Think about what happens to bar height when class widths differ.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1b33x98",
+      "kind": "term",
+      "front": "What test marks a value as an outlier using the interquartile range?",
+      "back": "A value is an **outlier** if it is more than $1.5\\times\\text{IQR}$ above $Q_3$ or below $Q_1$, so it lies far outside the middle of the data.",
+      "hint": "Start by finding the interquartile range.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p0eqfc",
+      "kind": "concept",
+      "front": "Which pair of summaries is better for comparing two data sets that contain outliers?",
+      "back": "The **median** with the **IQR**, since they are less affected by extreme values than the mean and standard deviation. Then write the comparison in context.",
+      "hint": "Think about which measures ignore extreme values.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0e9ei9o",
+      "kind": "formula",
+      "front": "Which formula gives the variance $\\sigma^2$ of a data set?",
+      "back": "$\\sigma^2=\\frac{\\sum x^2}{n}-\\bar{x}^2$, where $n$ is the number of values. Take the square root last to get $\\sigma$, which has the same units as the data.",
+      "hint": "Compare the mean of the squares with the square of the mean.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ndbiyo",
+      "kind": "example",
+      "front": "A histogram has the class 20–40 with frequency 36. What is its frequency density?",
+      "back": "$1.8$, since $\\frac{36}{20}=1.8$. The class width is 20, not 10.",
+      "hint": "Divide by the class width first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "093u70g",
+      "kind": "process",
+      "front": "What are the steps to estimate the median from a cumulative frequency graph?",
+      "back": "Find $\\frac{n}{2}$ on the cumulative frequency axis, read across to the curve, then read down to the horizontal axis.",
+      "hint": "Where does the median sit in the ordered data?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05dxqwa",
+      "kind": "example",
+      "front": "For 80 values with cumulative frequency 30 at boundary 20 and 62 at boundary 30, what is the estimated median?",
+      "back": "About $23.1$, from $20+\\frac{40-30}{62-30}\\times10$, since the median is the 40th value and lies in the class 20–30.",
+      "hint": "Find the position of the median first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15fpxyv",
+      "kind": "term",
+      "front": "How is the interquartile range calculated?",
+      "back": "**$Q_3-Q_1$**, the spread of the middle half of the ordered data.",
+      "hint": "Quartiles mark the quarter points of ordered data.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lzdhhd",
+      "kind": "example",
+      "front": "For the data 2, 4, 4, 5, 9, what are the mean and standard deviation?",
+      "back": "Mean $4.8$ and $\\sigma\\approx2.32$, since $\\sum x^2=142$ and the variance is $5.36$.",
+      "hint": "Find $\\sum x$ and $\\sum x^2$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09c6kvz",
+      "kind": "term",
+      "front": "What does a box plot show?",
+      "back": "A box from $Q_1$ to $Q_3$ with a line at the median, whiskers to the most extreme non-outlier values, and outliers marked separately with crosses.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1stsvy2",
+      "kind": "mistake",
+      "front": "Why should you not remove an outlier straight away?",
+      "back": "An outlier is not automatically an error. Check whether it is a recording mistake before removing it from the data.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xjohc5",
+      "kind": "example",
+      "front": "With $Q_1=12$ and $Q_3=20$, which of the values 28 and 35 is an outlier?",
+      "back": "35 is an outlier. The IQR is 8, so $1.5\\times\\text{IQR}=12$, the upper limit is 32, and 28 lies below it.",
+      "hint": "Work out the upper limit before testing each value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16pvyud",
+      "kind": "concept",
+      "front": "How can the quartiles show whether a data set has positive skew?",
+      "back": "Positive skew means $Q_3-Q_2>Q_2-Q_1$, so the longer tail is on the right and the mean lies above the median.",
+      "hint": "Compare the two gaps either side of the median.",
+      "sectionId": "s5"
+    }
+  ]
+}

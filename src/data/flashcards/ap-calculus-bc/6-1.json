@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-1",
+  "topicCode": "6.1",
+  "topicName": "Accumulation of change",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:29.897Z",
+  "cards": [
+    {
+      "id": "0yot8o1",
+      "kind": "term",
+      "front": "What is the difference between a rate of change and accumulated change?",
+      "back": "A **rate of change** tells how fast a quantity changes at an instant. **Accumulated change** is the total change over an interval, found by combining the rate across that interval.",
+      "hint": "A rate is about a moment; accumulated change is about a span of time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xqdnxt",
+      "kind": "concept",
+      "front": "What does the area under a rate-versus-time graph represent?",
+      "back": "The **accumulated change** of the quantity over that interval. Each thin strip has area about rate times time, and adding the strips gives the definite integral.",
+      "hint": "Think about what you get when you multiply the rate by the time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09ex1dh",
+      "kind": "concept",
+      "front": "How does area below the time axis affect the net change?",
+      "back": "It counts as **negative** accumulated change, so it reduces the net change. Net change keeps the signs of the positive and negative areas and adds them.",
+      "hint": "Think about a tank that is losing water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tcby3v",
+      "kind": "formula",
+      "front": "Which formula gives the final amount of a quantity, using its value at time $a$ and its rate $r(t)$?",
+      "back": "$V(b)=V(a)+\\int_a^b r(t)\\,dt$. The **initial value** plus the net change from the integral gives the final amount.",
+      "hint": "The integral gives a change, so what must you add to it?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10238ph",
+      "kind": "example",
+      "front": "A tank gains water at $r(t)=2t$ liters per minute from $t=0$ to $t=4$ minutes. How much water is added?",
+      "back": "**16 liters**. The region under the graph is a triangle with base 4 and height 8, so its area is $\\frac{1}{2}(4)(8)=16$.",
+      "hint": "Sketch the graph first. What shape is the region below it?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ekn6gc",
+      "kind": "mistake",
+      "front": "A tank gains 10 liters, then loses 4 liters. A student says the net change is 14 liters. What is wrong?",
+      "back": "The **net change** is $10-4=6$ liters, because the loss is negative. The 14 liters is the total change in magnitude, not the net change.",
+      "hint": "Are the gain and the loss given signs?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0el7csq",
+      "kind": "mistake",
+      "front": "Should area below the time axis be counted as a gain in the quantity?",
+      "back": "No. Area below the axis is **negative** accumulated change, so it must be subtracted from the total, not added as a gain.",
+      "hint": "What sign does the rate have below the axis?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00aiwr3",
+      "kind": "term",
+      "front": "What is total change in magnitude?",
+      "back": "The **sum of the sizes** of all changes with no cancellation. Gains and losses both add in, so a gain of 10 and a loss of 4 give 14 liters.",
+      "hint": "Ignore the signs of the changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00a4xu3",
+      "kind": "process",
+      "front": "What steps should you follow to interpret an integral of a rate in context?",
+      "back": "1) Identify the quantity, its rate, and the interval. 2) Evaluate the integral, keeping its signs. 3) Interpret the result with the quantity's units, stating whether it is a change or a final value.",
+      "hint": "Start by naming what each variable stands for.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05nd2rd",
+      "kind": "term",
+      "front": "What is displacement?",
+      "back": "**Displacement** is the net change in position, with direction given by its sign. Integrating velocity over time gives displacement.",
+      "hint": "Compare it with the total distance traveled.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pfm0wa",
+      "kind": "concept",
+      "front": "Why does negative velocity give negative displacement even though the object still travels?",
+      "back": "Displacement is a net change in position, and its sign shows direction. Negative velocity contributes **negative displacement**, while the object still moves.",
+      "hint": "Think about direction, not speed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m0iwbz",
+      "kind": "example",
+      "front": "A tank holds 30 liters initially, and its net change is $-6$ liters. How much water does it hold now?",
+      "back": "**24 liters**, since $30+(-6)=24$. Adding a negative net change lowers the final amount.",
+      "hint": "Add the net change to the starting amount.",
+      "sectionId": "s4"
+    }
+  ]
+}

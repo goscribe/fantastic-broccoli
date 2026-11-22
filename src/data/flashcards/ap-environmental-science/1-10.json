@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "1-10",
+  "topicCode": "1.10",
+  "topicName": "Energy flow and the 10% rule",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:24.362Z",
+  "cards": [
+    {
+      "id": "1aweriq",
+      "kind": "concept",
+      "front": "How does energy enter an ecosystem, and where does it end up?",
+      "back": "Producers capture **sunlight** and pass it up the trophic levels. It finally leaves the ecosystem as heat and is not recycled.",
+      "hint": "Think about where the energy goes after each organism uses it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xgi620",
+      "kind": "term",
+      "front": "What does the 10% rule say about energy moving from one trophic level to the next?",
+      "back": "About **10%** of the energy at one trophic level reaches the next. The other 90% is mostly lost as heat. It is an approximation, not an exact law.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cx6rc5",
+      "kind": "concept",
+      "front": "Why do most food chains have only four or five trophic levels?",
+      "back": "Because about **90%** of energy is lost at each transfer, too little energy remains after a few steps to support more levels.",
+      "hint": "Follow how much energy is left after each transfer.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1dqdnce",
+      "kind": "term",
+      "front": "What is photosynthesis in the context of energy flow?",
+      "back": "The process by which producers use **light energy** to build sugars from carbon dioxide and water.",
+      "hint": "Think about where energy first enters the food chain.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ktqqlo",
+      "kind": "term",
+      "front": "What is a trophic level?",
+      "back": "An organism's **feeding position** within a pathway of energy transfer.",
+      "hint": "Picture a food chain as a series of steps, with producers at the start.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1oq7mr2",
+      "kind": "example",
+      "front": "Producers in a lake capture 500,000 kcal. How much energy reaches tertiary consumers using the 10% rule?",
+      "back": "About **500 kcal**. There are three transfers, so $500{,}000\\,\\mathrm{kcal}\\times0.10^3=500\\,\\mathrm{kcal}$.",
+      "hint": "Count transfers from producers to tertiary consumers, not the levels themselves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h71w2c",
+      "kind": "mistake",
+      "front": "Why is it a mistake to treat the 10% rule as an exact law?",
+      "back": "Actual transfer varies between ecosystems, so 10% is only a useful **approximation** for estimating energy at each level.",
+      "hint": "Think about whether every ecosystem behaves the same way.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ca9m5j",
+      "kind": "concept",
+      "front": "What are the three possible fates of the energy a rabbit takes in from grass?",
+      "back": "It is released as **heat** in respiration, lost in waste or undigested food, or stored in new body tissue. Only the stored part passes on.",
+      "hint": "Follow the energy from the moment the rabbit eats the grass.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0plv320",
+      "kind": "process",
+      "front": "What is cellular respiration?",
+      "back": "The process by which cells **release usable energy** from sugars and other organic molecules, with some of it lost as heat.",
+      "hint": "It is what the rabbit's cells do to power movement and growth.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y8e2xt",
+      "kind": "formula",
+      "front": "What equation gives the energy at the next trophic level?",
+      "back": "$E_{\\mathrm{next}}=E_{\\mathrm{current}}\\times0.10$, with energy in $\\mathrm{kcal}$. Each transfer multiplies the energy by 0.10.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jbkhke",
+      "kind": "concept",
+      "front": "Why is an energy pyramid never inverted?",
+      "back": "Energy cannot increase from one level to the next, so each higher bar must be **smaller** than the one below it.",
+      "hint": "Think about what the 10% rule says about a higher level compared with the level below.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1809a2z",
+      "kind": "example",
+      "front": "A tertiary consumer level holds 500 kcal. Using the pyramid, estimate the energy at the level directly below.",
+      "back": "About **5,000 kcal**. Divide by 0.10: $500\\,\\mathrm{kcal}\\div0.10=5{,}000\\,\\mathrm{kcal}$.",
+      "hint": "Work backward from the top bar toward the base.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09xjf6b",
+      "kind": "concept",
+      "front": "Why does feeding grain to livestock support fewer people than eating the grain directly?",
+      "back": "Feeding livestock adds an extra **trophic level**, so less of the grain's energy reaches people.",
+      "hint": "Count how many transfers the grain's energy passes through in each case.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0072gdr",
+      "kind": "concept",
+      "front": "Why are energy transfers never complete?",
+      "back": "Each energy conversion turns some energy into **heat** that spreads into the surroundings. This follows the second law of thermodynamics, so usable energy decreases.",
+      "hint": "Consider what happens to usable energy at every conversion.",
+      "sectionId": "s5"
+    }
+  ]
+}

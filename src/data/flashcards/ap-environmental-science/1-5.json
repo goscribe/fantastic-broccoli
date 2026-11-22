@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "1-5",
+  "topicCode": "1.5",
+  "topicName": "The nitrogen cycle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:03.589Z",
+  "cards": [
+    {
+      "id": "16q8n2n",
+      "kind": "term",
+      "front": "What is the nitrogen cycle?",
+      "back": "The **nitrogen cycle** is the continuous movement of nitrogen among the air, soil, water, and organisms through a series of chemical changes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bfwlvv",
+      "kind": "concept",
+      "front": "Why do living things need nitrogen?",
+      "back": "Nitrogen is part of **amino acids**, which join to form proteins such as enzymes. It is also part of DNA and RNA, which carry genetic information.",
+      "hint": "Think about what builds enzymes and genetic material.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ggljk8",
+      "kind": "term",
+      "front": "What is nitrogen fixation?",
+      "back": "**Nitrogen fixation** is the conversion of nitrogen gas into ammonia, a form organisms can use. Most of it is done by nitrogen-fixing bacteria, which break the very strong bond in the gas.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sqltei",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that plants fix nitrogen gas by themselves?",
+      "back": "Plants cannot fix nitrogen themselves. **Bacteria** in the root nodules of legumes do the fixing for them.",
+      "hint": "Think about where the nodules are found.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0y191gs",
+      "kind": "process",
+      "front": "Which two conversions make up nitrification?",
+      "back": "First, one group of bacteria converts **ammonium** to nitrite. Then a second group converts nitrite to **nitrate**. Both groups need oxygen.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0q7r2ih",
+      "kind": "term",
+      "front": "What is assimilation?",
+      "back": "**Assimilation** is the uptake of nitrogen compounds, such as nitrate or ammonium, and their use to build amino acids and other molecules in an organism.",
+      "hint": "Think about what plants do with the nitrate they take up.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qx3ab6",
+      "kind": "concept",
+      "front": "Why can heavy rain reduce the amount of nitrate in soil?",
+      "back": "**Nitrate** dissolves easily in water, so heavy rain can wash it out of the soil.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u4k47s",
+      "kind": "term",
+      "front": "What is ammonification?",
+      "back": "**Ammonification** is the breakdown of nitrogen compounds in dead organisms and animal waste into ammonia or ammonium, carried out by decomposers such as bacteria and fungi.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04ostkp",
+      "kind": "concept",
+      "front": "Which soil conditions make denitrification most likely?",
+      "back": "Denitrification happens in **waterlogged**, oxygen-poor soil. Denitrifying bacteria then convert nitrate into nitrogen gas, which escapes to the air.",
+      "hint": "Compare with the oxygen needs of nitrifying bacteria.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03lllpk",
+      "kind": "process",
+      "front": "Which two steps connect the air and the soil in the nitrogen cycle?",
+      "back": "**Nitrogen fixation** moves nitrogen from the air into the soil as ammonia. **Denitrification** returns it from the soil to the air as nitrogen gas.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1944usm",
+      "kind": "term",
+      "front": "What is eutrophication?",
+      "back": "**Eutrophication** is nutrient enrichment of a water body that drives excess algal growth, often followed by oxygen loss when the algae decompose.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0tvliqa",
+      "kind": "concept",
+      "front": "Why do fish sometimes suffocate after fertilizer runoff reaches a lake?",
+      "back": "Extra nitrogen feeds algae. When the algae die, decomposers use up the **dissolved oxygen** as they break them down, so the fish run out of oxygen.",
+      "hint": "Trace what happens to the algae after they die.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "17onbmc",
+      "kind": "process",
+      "front": "Which three farming practices reduce nitrogen runoff from fields?",
+      "back": "Farmers can apply **less fertilizer**, time applications to avoid heavy rain, and keep plants growing on bare soil to reduce runoff into streams and lakes.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "143k08m",
+      "kind": "concept",
+      "front": "Why is nitrous oxide from denitrification a concern?",
+      "back": "Nitrous oxide is a **greenhouse gas** released by some denitrifying bacteria. Wet, heavily fertilized soils can release more of it, so managing fertilizer helps the atmosphere too.",
+      "sectionId": "s6"
+    }
+  ]
+}

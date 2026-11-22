@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-7",
+  "topicCode": "1.7",
+  "topicName": "Laws of exponents and logarithms",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:53.310Z",
+  "cards": [
+    {
+      "id": "0osct5m",
+      "kind": "concept",
+      "front": "When you multiply two powers with the same base, what happens to the exponents?",
+      "back": "**Add** the exponents: $a^m\\times a^n=a^{m+n}$. Writing the factors out in full, such as $2^3\\times2^2=2^5$, shows why.",
+      "hint": "Count the factors of the base in the product.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15hmfyq",
+      "kind": "formula",
+      "front": "Write the product law of logarithms and say what each symbol means.",
+      "back": "$\\log_a(xy)=\\log_a x+\\log_a y$, for $x>0$ and $y>0$. The base $a$ must be the same in every term. Logarithms are exponents, so a product becomes a sum.",
+      "hint": "Think of the exponent form $a^p\\times a^q=a^{p+q}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kxu9dt",
+      "kind": "process",
+      "front": "What are the steps for solving a logarithmic equation?",
+      "back": "1. **Combine** the logarithms into one using the laws. 2. Convert to exponential form. 3. Solve the resulting equation. 4. Check every answer in the original equation and reject any that give the logarithm of a negative number.",
+      "hint": "Finish by checking the answers in the original equation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09ikqoe",
+      "kind": "formula",
+      "front": "Write the quotient law of logarithms and say what each symbol means.",
+      "back": "$\\log_a\\frac{x}{y}=\\log_a x-\\log_a y$, for $x>0$ and $y>0$, with the same base $a$. Dividing inside the logarithm becomes subtracting logarithms.",
+      "hint": "It mirrors the exponent law $\\frac{a^m}{a^n}=a^{m-n}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0adtssg",
+      "kind": "formula",
+      "front": "Write the power law of logarithms and explain what it lets you do.",
+      "back": "$\\log_a x^m=m\\log_a x$. The **power** in the argument moves to the front as a multiplying coefficient.",
+      "hint": "It mirrors $(a^m)^n=a^{mn}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vdfoge",
+      "kind": "mistake",
+      "front": "Is $\\log_a(x+y)$ equal to $\\log_a x+\\log_a y$?",
+      "back": "**No**. The product law only applies when there is a product inside the logarithm, not a sum. Testing $x=y=1$ with base 2 gives $1$ on the left and $0$ on the right.",
+      "hint": "Try $x=y=1$ and base 2 to test it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ynqd46",
+      "kind": "mistake",
+      "front": "Can $2^3\\times3^2$ be combined into a single power using the first law of exponents?",
+      "back": "**No**. The first two laws need the same base. Bases 2 and 3 cannot be merged into one power.",
+      "hint": "Check whether the bases match before you apply a law.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bn8cug",
+      "kind": "example",
+      "front": "Simplify $\\frac{(2x^3)^2\\times x^{-1}}{4x^2}$.",
+      "back": "$x^3$. Expanding the bracket gives $4x^6$, multiplying by $x^{-1}$ gives $4x^5$, and dividing by $4x^2$ gives $x^{5-2}=x^3$.",
+      "hint": "Expand brackets first, then combine like bases.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sp2418",
+      "kind": "example",
+      "front": "Write $2\\log_3 6-\\log_3 4$ as a single logarithm and evaluate it.",
+      "back": "$\\log_3 9=2$. The power law gives $\\log_3 36$, then the quotient law gives $\\log_3\\frac{36}{4}=\\log_3 9$, and since $3^2=9$, the value is 2.",
+      "hint": "Apply the power law before the quotient law.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16ryzlg",
+      "kind": "process",
+      "front": "How do you split $\\log_2(x^3y)$ into simpler logarithms?",
+      "back": "Write $3\\log_2 x+\\log_2 y$. Use the product law to separate the factors, then the power law on $x^3$, so each factor has its own logarithm.",
+      "hint": "Split the product first, then deal with the power.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "007c8av",
+      "kind": "term",
+      "front": "What is the change of base formula?",
+      "back": "**Change of base** is $\\log_a x=\\frac{\\log_b x}{\\log_b a}$. It rewrites a logarithm using any new base $b$, such as 10 or $e$, which calculators can handle.",
+      "hint": "Any new base $b$ will do.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16bxtis",
+      "kind": "example",
+      "front": "Calculate $\\log_5 40$, giving your answer to 3 significant figures.",
+      "back": "$\\approx2.29$. Using change of base, $\\log_5 40=\\frac{\\ln 40}{\\ln 5}\\approx2.29$.",
+      "hint": "Use natural logarithms on the calculator.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1d2xgsm",
+      "kind": "example",
+      "front": "Solve $5^{2x-1}=7$, giving your answer to 2 decimal places.",
+      "back": "$x=\\frac{1+\\log_5 7}{2}\\approx1.10$. Write $2x-1=\\log_5 7$, because the bases cannot be matched, then rearrange.",
+      "hint": "Take the logarithm base 5 of both sides.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1q6epvo",
+      "kind": "concept",
+      "front": "When solving an exponential equation, what should you try first, and why?",
+      "back": "**Match the bases** if you can. It is quicker and gives exact answers. Use logarithms only when the bases cannot be matched.",
+      "hint": "Ask whether both sides can be written with the same base.",
+      "sectionId": "s5"
+    }
+  ]
+}

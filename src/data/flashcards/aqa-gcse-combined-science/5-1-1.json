@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-1-1",
+  "topicCode": "5.1.1",
+  "topicName": "Atoms, elements and compounds",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:41.900Z",
+  "cards": [
+    {
+      "id": "01r9yow",
+      "kind": "concept",
+      "front": "What is the difference between an element and a compound?",
+      "back": "An **element** contains only one type of atom. A **compound** contains atoms of two or more different elements that are chemically bonded together.",
+      "hint": "Count how many types of atom are in each substance."
+    },
+    {
+      "id": "1nr3p7b",
+      "kind": "concept",
+      "front": "Why does an atom have no overall charge?",
+      "back": "It has equal numbers of **protons** (positive) and **electrons** (negative), so their charges cancel out.",
+      "hint": "Compare the charges of the particles in the nucleus with those in the shells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10bppz4",
+      "kind": "term",
+      "front": "What makes two atoms belong to the same element?",
+      "back": "They have the same number of **protons**. An element contains only atoms with the same number of protons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1f1ad25",
+      "kind": "term",
+      "front": "What is the nucleus of an atom?",
+      "back": "The small central region containing **protons** and **neutrons**. Almost all of the atom's mass is in the nucleus.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r4y3l6",
+      "kind": "mistake",
+      "front": "Why is it wrong to draw electrons mixed in with the protons and neutrons in an atom?",
+      "back": "Electrons occupy **shells** outside the nucleus, so they should be drawn outside it, not with the protons and neutrons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fe5gys",
+      "kind": "term",
+      "front": "How should a chemical symbol be written?",
+      "back": "It starts with a **capital letter**. Any second letter is lower case, so helium is $\\text{He}$, not $\\text{HE}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ce85jx",
+      "kind": "mistake",
+      "front": "Why does $\\text{O}_2$ not count as a compound even though its two atoms are bonded?",
+      "back": "Both atoms are **oxygen**, so it contains only one element. A compound needs two or more different elements.",
+      "hint": "Look at how many types of atom it contains.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1io909w",
+      "kind": "formula",
+      "front": "What do the numbers in the formula $\\text{H}_2\\text{O}$ tell you?",
+      "back": "The number after each symbol gives how many atoms of that element are in each group. So each water molecule has **two** hydrogen atoms and **one** oxygen atom.",
+      "hint": "Read the small number written after each element symbol.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ia4zd5",
+      "kind": "concept",
+      "front": "How can you tell from a formula whether a substance is an element or a compound?",
+      "back": "One element symbol, even with a small number, means an **element**. More than one symbol means a **compound**. So $\\text{Fe}$ is an element and $\\text{FeS}$ is a compound.",
+      "hint": "Count the element symbols, not the numbers.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t38yj0",
+      "kind": "concept",
+      "front": "Why can't filtering separate the atoms in a compound?",
+      "back": "The atoms are **chemically bonded**, and physical methods such as filtering cannot break those bonds.",
+      "hint": "Think about what holds the atoms together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n7tv04",
+      "kind": "term",
+      "front": "What does a particle diagram show?",
+      "back": "Atoms drawn as **circles**. Touching circles in a group show bonded atoms, and separate groups show separate particles.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gzq3wk",
+      "kind": "process",
+      "front": "How do you draw a particle diagram of pure water?",
+      "back": "1. Draw one **oxygen** circle touching two hydrogen circles to form a group. 2. Repeat the same separate group to show a sample of pure water.",
+      "hint": "Start with the smallest bonded unit in water.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01uc1ac",
+      "kind": "concept",
+      "front": "What does a particle diagram show when different particles appear without all being bonded into the same groups?",
+      "back": "It shows a **mixture**, not a compound.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "070akzc",
+      "kind": "mistake",
+      "front": "Why can't you assume two neighbouring atoms in a particle diagram are bonded?",
+      "back": "Atoms near each other are not necessarily bonded. Show a **bond** by joining or touching their circles.",
+      "sectionId": "s4"
+    }
+  ]
+}

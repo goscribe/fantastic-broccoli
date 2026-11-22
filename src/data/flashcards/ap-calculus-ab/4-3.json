@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "4-3",
+  "topicCode": "4.3",
+  "topicName": "Rates of change in applied contexts",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:01.545Z",
+  "cards": [
+    {
+      "id": "11xwnpq",
+      "kind": "formula",
+      "front": "What is the average rate of change of Q(t) from t=a to t=b, and what do its symbols mean?",
+      "back": "$\\frac{Q(b)-Q(a)}{b-a}$: the **change in output** divided by the **change in input** across the interval, in output units per input unit.",
+      "hint": "Change in output divided by change in input.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ljrv4x",
+      "kind": "concept",
+      "front": "What does the derivative Q'(t) tell you about a quantity?",
+      "back": "The **instantaneous rate of change** at input t: how fast Q is changing at that moment. It is the limit of average rates over intervals that shrink toward t.",
+      "hint": "Think of a rate at one input, not over an interval.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xfza01",
+      "kind": "mistake",
+      "front": "Does a derivative value tell you how much of the quantity is present?",
+      "back": "No. A **derivative** tells how quickly the amount changes, not the amount itself. For a tank, V'(4)=4 means volume is rising at 4 liters per minute, not that it holds 4 liters.",
+      "hint": "A rate is not an amount.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sqtvt7",
+      "kind": "example",
+      "front": "A tank has V(t)=100+12t-t^2 liters, with t in minutes. What is the average rate of change from 0 to 4 minutes?",
+      "back": "**8 liters per minute**. V(0)=100 and V(4)=132, so (132-100)/(4-0)=8.",
+      "hint": "Find V at both endpoints first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gmrdkq",
+      "kind": "example",
+      "front": "For V(t)=100+12t-t^2 liters (t in minutes), what is the instantaneous rate at t=4?",
+      "back": "**4 liters per minute**. Differentiate to get V'(t)=12-2t, then V'(4)=12-8=4.",
+      "hint": "Differentiate before you evaluate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03jhphk",
+      "kind": "process",
+      "front": "What are the steps for solving a rate-of-change problem in an applied context?",
+      "back": "1) Identify the changing quantity and its input. 2) Write a **quantity model** with units and a valid domain. 3) Choose an average rate or differentiate. 4) Evaluate only after choosing the rate.",
+      "hint": "Start with the quantity, not the numbers.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1il233t",
+      "kind": "mistake",
+      "front": "Does an average rate of change mean the quantity changed steadily over the whole interval?",
+      "back": "No. An **average rate** describes the whole interval. The output need not rise steadily, so the average may not match any single moment.",
+      "hint": "Average describes the whole interval.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pk57t5",
+      "kind": "concept",
+      "front": "What do the signs of a derivative tell you about a quantity near an input?",
+      "back": "A **positive** derivative means the quantity is increasing locally, a **negative** one means decreasing locally, and zero means a horizontal tangent where change may still occur nearby.",
+      "hint": "Think about whether the graph rises or falls.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ph9t5k",
+      "kind": "example",
+      "front": "If C(q) is cost in dollars and q counts items, what does C'(50)=-3 mean?",
+      "back": "At 50 items, cost is **decreasing** at an instantaneous rate of 3 dollars per additional item.",
+      "hint": "Read the sign first, then the units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0641b0v",
+      "kind": "formula",
+      "front": "In the tank model V(t) in liters with t in minutes, what are the units of V'(t)?",
+      "back": "**Liters per minute**: the output unit divided by the input unit.",
+      "hint": "Output units over input units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xctf07",
+      "kind": "term",
+      "front": "What is a quantity model?",
+      "back": "A **function** that represents a measured or counted quantity in terms of an input, written with units and a valid domain.",
+      "hint": "It turns a real context into a function.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ly93in",
+      "kind": "term",
+      "front": "What is the geometric meaning of an average rate of change on a graph?",
+      "back": "The **secant slope**: the slope of the line through the two points at the interval's endpoints.",
+      "hint": "Think of a line cutting the curve at two points.",
+      "sectionId": "s1"
+    }
+  ]
+}

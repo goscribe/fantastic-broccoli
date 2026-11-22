@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-8",
+  "topicCode": "3.8",
+  "topicName": "Gene loci and linkage",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:25.537Z",
+  "cards": [
+    {
+      "id": "02u9jy9",
+      "kind": "concept",
+      "front": "What is linkage, and why are two genes on the same chromosome usually inherited together?",
+      "back": "**Linkage** is the tendency of genes on the same chromosome to be inherited together. Whole chromosomes are sorted into gametes during meiosis, so the linked alleles travel as a unit.",
+      "hint": "Think about what meiosis moves into each gamete.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xhx9wy",
+      "kind": "concept",
+      "front": "How can crossing over stop linked alleles always travelling together?",
+      "back": "Non-sister chromatids of homologous chromosomes break and rejoin at matching positions, exchanging sections. A crossover between two loci makes **recombinant** chromatids carrying new allele combinations.",
+      "hint": "Which chromatids take part in the exchange?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07otv9x",
+      "kind": "example",
+      "front": "A test cross gives 800 offspring, and 120 of them are recombinant. What is the recombinant percentage?",
+      "back": "**15%**, because $\\frac{120}{800}\\times100=15\\%$.",
+      "hint": "Divide recombinant offspring by the total number of offspring.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1elem4e",
+      "kind": "term",
+      "front": "What is a gene locus?",
+      "back": "A **gene locus** is the fixed position of a gene on a chromosome. Homologous chromosomes carry the same gene at the same locus.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wxm9th",
+      "kind": "term",
+      "front": "What are homologous chromosomes?",
+      "back": "A pair of chromosomes, one from each parent, that carry the same genes at the same loci. Every gene is therefore present twice.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hx62hm",
+      "kind": "term",
+      "front": "What is an allele?",
+      "back": "An **allele** is a version of a gene. One chromosome of a pair may carry allele A while its partner carries allele a.",
+      "hint": "Think about the two copies of a gene in a homologous pair.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0n03ef5",
+      "kind": "concept",
+      "front": "Why do genes on different chromosomes give a 9:3:3:1 ratio in a cross?",
+      "back": "Homologous pairs align and separate **independently** in meiosis I, so alleles combine freely. Unlinked genes therefore make four gamete types in equal numbers.",
+      "hint": "Compare where the two genes sit with the case of genes on one chromosome.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qdzkme",
+      "kind": "process",
+      "front": "What offspring ratio does a test cross of AaBb with aabb give for linked genes with no crossing over?",
+      "back": "**1:1**, with only the two parental phenotypes. The AaBb parent makes only AB and ab gametes, and the partner contributes only ab.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ddqt1b",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume linked alleles are always inherited together?",
+      "back": "Linkage is not complete, because crossing over can separate linked alleles. This is why a few recombinant offspring usually appear.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1i7vuv6",
+      "kind": "concept",
+      "front": "Why does a smaller recombinant percentage mean two loci lie closer together?",
+      "back": "Crossovers fall at random along the chromosome, so one is less likely to fall between loci that are close together. Fewer gametes are recombinant as the loci get closer.",
+      "hint": "Think about where a crossover can land between two nearby loci.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07gf6px",
+      "kind": "concept",
+      "front": "Why do very distant loci on one chromosome behave as if they were unlinked?",
+      "back": "Crossing over happens between them in most meioses, so recombinants approach 50%. This matches the pattern of independent assortment.",
+      "hint": "Consider how often a crossover falls between two far-apart loci.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0keij0r",
+      "kind": "process",
+      "front": "How do you identify the parental classes in a test cross result?",
+      "back": "The two largest classes are parental. They show which alleles shared a chromosome in the parent, and every other class is recombinant.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0res15e",
+      "kind": "term",
+      "front": "What is a chromatid?",
+      "back": "One of two identical copies of a replicated chromosome. The two chromatids are held together at the **centromere**.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08hoffd",
+      "kind": "term",
+      "front": "What does meiosis do to chromosome number?",
+      "back": "**Meiosis** halves the chromosome number and normally produces four genetically different cells. These cells form gametes.",
+      "sectionId": "s2"
+    }
+  ]
+}

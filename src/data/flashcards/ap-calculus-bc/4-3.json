@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "4-3",
+  "topicCode": "4.3",
+  "topicName": "Rates of change in applied contexts",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:13.100Z",
+  "cards": [
+    {
+      "id": "1o1okaq",
+      "kind": "formula",
+      "front": "What is the formula for the average rate of change of $Q(t)$ from $t=a$ to $t=b$, and what does it describe?",
+      "back": "$\\frac{Q(b)-Q(a)}{b-a}$ is the **average rate of change**. It describes the whole interval, not necessarily any single moment.",
+      "hint": "Think output change divided by input change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pazncg",
+      "kind": "concept",
+      "front": "How is an instantaneous rate of change at one input found, and what does it look like on a graph?",
+      "back": "It is the **derivative** $Q'(t)$, the limit of average rates over shrinking intervals. On a graph, it is the **slope of the tangent line**.",
+      "hint": "Think of intervals shrinking toward one input.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o5rqnx",
+      "kind": "process",
+      "front": "What steps should you follow to turn a context into an average or instantaneous rate?",
+      "back": "1) Identify the changing quantity and its input. 2) Write a **quantity model** with units and a valid domain. 3) Choose endpoints for an average rate, or differentiate for a rate at one input. 4) Evaluate last.",
+      "hint": "Four steps, and evaluation comes last.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1p1f3f4",
+      "kind": "term",
+      "front": "What is a secant slope?",
+      "back": "The **slope of the line** through two points on a graph, usually the endpoints of an interval. It gives the same value as an average rate.",
+      "hint": "Two points on the curve.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i2fdkd",
+      "kind": "mistake",
+      "front": "A student says that $V'(4)=4$ means the tank holds 4 liters. What is wrong with this?",
+      "back": "A derivative is a **rate, not an amount**. $V'(4)=4$ liters per minute means volume is increasing at 4 minutes, not that the tank contains 4 liters.",
+      "hint": "Check the units of the answer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rp93t4",
+      "kind": "example",
+      "front": "For $V(t)=100+12t-t^2$ liters (t in minutes), what is the average rate of change from 0 to 4 minutes?",
+      "back": "**8 liters per minute**. $V(0)=100$ and $V(4)=132$, so $\\frac{132-100}{4-0}=8$.",
+      "hint": "Find the two endpoint values first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sidjm0",
+      "kind": "example",
+      "front": "For the same tank, what is the instantaneous rate of change at 4 minutes?",
+      "back": "**4 liters per minute**. $V'(t)=12-2t$, so $V'(4)=12-8=4$, meaning the volume is increasing at that moment.",
+      "hint": "Differentiate first, then substitute t=4.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0246yiq",
+      "kind": "concept",
+      "front": "What do positive and negative rates tell you about a quantity?",
+      "back": "A **positive rate** means the quantity increases as the input increases. A **negative rate** means it decreases as the input increases.",
+      "hint": "Think about the direction of change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sv96td",
+      "kind": "example",
+      "front": "If $C(q)$ is cost in dollars and $q$ is the number of items, what does $C'(50)=-3$ mean?",
+      "back": "At 50 items, cost is **decreasing** at an instantaneous rate of 3 dollars per additional item.",
+      "hint": "Check the sign and the units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xctf07",
+      "kind": "term",
+      "front": "What is a quantity model?",
+      "back": "A **function** that represents a measured or counted quantity in terms of an input, written with units and a valid domain.",
+      "hint": "It describes a real measured quantity.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ttyd8f",
+      "kind": "mistake",
+      "front": "Why is a rate without its units or interval an incomplete answer?",
+      "back": "The interpretation becomes **incomplete or wrong**. Always name the quantity, its direction, units per input unit, and the interval or input value.",
+      "hint": "Units are part of the answer.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z935df",
+      "kind": "concept",
+      "front": "What does a zero derivative tell you, and what does it not tell you?",
+      "back": "It means the graph has a **horizontal tangent** at that input. It does not mean the quantity stays constant, since it may still change nearby.",
+      "hint": "A flat tangent is only a local fact.",
+      "sectionId": "s2"
+    }
+  ]
+}

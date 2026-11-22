@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-4",
+  "topicCode": "5.4",
+  "topicName": "Tangents and normals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:50.192Z",
+  "cards": [
+    {
+      "id": "0f7r77u",
+      "kind": "concept",
+      "front": "What gradient does the tangent line to a curve at a point have?",
+      "back": "It has the **slope** of the curve at that point, found as $\\frac{dy}{dx}$ evaluated at the given $x$-value. A positive slope means the line rises and a negative slope means it falls.",
+      "hint": "Think about what the derivative measures.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0slpvpc",
+      "kind": "process",
+      "front": "What are the four steps to find the equation of a tangent line?",
+      "back": "1) Find the $y$-coordinate if it is not given. 2) Differentiate to get $\\frac{dy}{dx}$. 3) Substitute the $x$-coordinate to find the gradient $m$. 4) Write $y-y_1=m(x-x_1)$ and simplify.",
+      "hint": "The point and the gradient are both needed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0n4fw0g",
+      "kind": "formula",
+      "front": "If the tangent line has gradient $m$, what is the gradient of the normal at the same point?",
+      "back": "The normal gradient is $-\\frac{1}{m}$, the **negative reciprocal**. Perpendicular lines have gradients whose product is $-1$.",
+      "hint": "Perpendicular lines multiply to give what?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fucnj3",
+      "kind": "term",
+      "front": "What is a normal to a curve at a point?",
+      "back": "The **normal** is the line through the point at right angles to the tangent line. Its gradient is $-\\frac{1}{m}$ when $m\\neq0$.",
+      "hint": "Compare it with the tangent line at the same point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t5a0hs",
+      "kind": "example",
+      "front": "Find the tangent line to $y=x^2-3x+2$ at $x=4$.",
+      "back": "$y=5x-14$. The point is $(4,6)$, $\\frac{dy}{dx}=2x-3$ gives $m=5$, so $y-6=5(x-4)$.",
+      "hint": "Find $y$ first, then the gradient.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xrynhg",
+      "kind": "concept",
+      "front": "How can you check that a tangent line equation is correct?",
+      "back": "Substitute the $x$-value of the point into the line. It must return the curve's $y$-value, so $y=5x-14$ at $x=4$ gives $y=6$. The gradient sign should also match the curve's direction.",
+      "hint": "Substitute the point back in.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "104cgfm",
+      "kind": "example",
+      "front": "Find the normal to $y=x^2-3x+2$ at $(4,6)$.",
+      "back": "$x+5y=34$. The tangent gradient is $5$, so the normal gradient is $-\\frac{1}{5}$, giving $y-6=-\\frac{1}{5}(x-4)$.",
+      "hint": "Start from the tangent gradient at $x=4$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jywax4",
+      "kind": "mistake",
+      "front": "What is wrong with finding the normal gradient by only flipping the fraction or changing its sign?",
+      "back": "Both give the wrong gradient. You must take the **negative reciprocal**, so the sign changes and the fraction flips together.",
+      "hint": "Do both changes at once.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1aa8kha",
+      "kind": "process",
+      "front": "How do you find points on a curve where the tangent has a given gradient?",
+      "back": "Set $\\frac{dy}{dx}$ equal to the required gradient and solve for $x$. Then substitute each solution into the curve to find the matching $y$-values.",
+      "hint": "Start by differentiating the curve.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10whwh2",
+      "kind": "example",
+      "front": "Find the points on $y=x^3$ where the tangent is parallel to $y=12x+1$.",
+      "back": "$(2,8)$ and $(-2,-8)$. Differentiating gives $3x^2=12$, so $x=\\pm2$, then $y=x^3$.",
+      "hint": "Parallel lines share a gradient.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19or7dx",
+      "kind": "mistake",
+      "front": "Why is giving only one point often wrong when solving $x^2=k$?",
+      "back": "Solving $x^2=k$ gives two roots, $x=\\sqrt{k}$ and $x=-\\sqrt{k}$. **Both** must be checked, and two points are usually expected.",
+      "hint": "A square root has two values.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cjxnac",
+      "kind": "example",
+      "front": "Find the point on $y=x^2-4x+7$ where the tangent line is horizontal.",
+      "back": "$(2,3)$. Solving $\\frac{dy}{dx}=2x-4=0$ gives $x=2$, then $y=4-8+7=3$.",
+      "hint": "A horizontal tangent has gradient zero.",
+      "sectionId": "s5"
+    }
+  ]
+}

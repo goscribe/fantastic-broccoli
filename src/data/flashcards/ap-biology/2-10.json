@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "2-10",
+  "topicCode": "2.10",
+  "topicName": "Origins of cell compartmentalization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:35.327Z",
+  "cards": [
+    {
+      "id": "1yqk4av",
+      "kind": "term",
+      "front": "What does the endosymbiotic theory explain?",
+      "back": "It explains mitochondria and chloroplasts as **descendants of bacteria** kept inside ancestral host cells instead of being digested.",
+      "hint": "Think about where the bacteria ended up and what happened to them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sm8fzc",
+      "kind": "concept",
+      "front": "How did chloroplasts arise in plants and many algae?",
+      "back": "A eukaryotic cell took in a photosynthetic **cyanobacterium** and kept it. Its descendants became chloroplasts. This happened after mitochondria had already originated.",
+      "hint": "Compare this event with the origin of mitochondria.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17ax7cs",
+      "kind": "concept",
+      "front": "Which features of mitochondria and chloroplasts support an endosymbiotic origin?",
+      "back": "They have **circular DNA**, bacterial-like ribosomes, double membranes, and divide like bacteria. Gene comparisons link mitochondrial genes to bacteria and chloroplast genes to cyanobacteria.",
+      "hint": "Think about DNA, ribosomes, membranes, division and genes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09vaqyj",
+      "kind": "concept",
+      "front": "Why did both the host and the bacterium benefit from the relationship?",
+      "back": "The **bacterium** gained a protected environment and access to resources. The **host** gained an effective way to make ATP.",
+      "hint": "Consider what each partner gave and received.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hc9zb6",
+      "kind": "process",
+      "front": "What are the main steps in the endosymbiotic origin of mitochondria?",
+      "back": "1) A host cell took in an oxygen-using bacterium. 2) The host kept it instead of digesting it. 3) The relationship became permanent over evolutionary time. 4) Many bacterial genes were lost or moved to the host nucleus, producing mitochondria.",
+      "hint": "Start with the host cell and end with the organelle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sd0ldi",
+      "kind": "mistake",
+      "front": "Why is it wrong to explain mitochondria and chloroplasts as simple inward folds of the plasma membrane?",
+      "back": "Their **bacterial features** point to a different origin: they descended from cells taken in by another cell. Membrane folding may explain the nuclear envelope and parts of the endomembrane system, not these organelles.",
+      "hint": "Look at what the organelles contain and how they divide.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cb8nfr",
+      "kind": "concept",
+      "front": "What might folds of the plasma membrane have done in an early cell?",
+      "back": "They could surround genetic material and create **separate spaces** inside the cell. This may help explain the origin of the nuclear envelope and parts of the endomembrane system.",
+      "hint": "Think about what the folds would enclose.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01n6b6f",
+      "kind": "term",
+      "front": "What is the endomembrane system?",
+      "back": "A group of **connected or interacting membranes** within a eukaryotic cell.",
+      "hint": "Think about which organelles the nuclear envelope belongs to alongside.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zb9d2f",
+      "kind": "term",
+      "front": "What is a cyanobacterium in the story of chloroplasts?",
+      "back": "A **photosynthetic bacterium** from the group ancestral to chloroplasts.",
+      "hint": "Think about the ancestor of the organelle that does photosynthesis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fco0ql",
+      "kind": "concept",
+      "front": "Why is the chloroplast event considered later than the mitochondria event?",
+      "back": "It occurred **after** the origin of mitochondria in eukaryotic ancestry, so the host cell already had mitochondria.",
+      "hint": "Consider what the host lineage had already acquired.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xk6od6",
+      "kind": "concept",
+      "front": "Why can mitochondria and chloroplasts not generally live as independent cells today?",
+      "back": "Many of their genes were lost or transferred to the host's **nucleus**, and they depend on the rest of the cell for many proteins.",
+      "hint": "Think about where their genes and proteins now come from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y4wjl5",
+      "kind": "term",
+      "front": "What are double membranes?",
+      "back": "**Two distinct membrane layers** surrounding an organelle. In mitochondria and chloroplasts, this is consistent with a cell being taken inside another cell.",
+      "hint": "Count the layers around the organelle.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "d3-3",
+  "topicCode": "D3.3",
+  "topicName": "Homeostasis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:03.442Z",
+  "cards": [
+    {
+      "id": "1au9k0z",
+      "kind": "term",
+      "front": "What is homeostasis?",
+      "back": "**Homeostasis** is the maintenance of internal conditions within ranges that support normal cell function. It does not keep every condition at one fixed value.",
+      "hint": "Think about ranges, not single numbers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09m6r8h",
+      "kind": "concept",
+      "front": "How does negative feedback respond when a regulated condition rises above its target?",
+      "back": "A receptor detects the rise, a coordinating centre activates an **effector**, and the response lowers the condition back towards its target. The response opposes the change rather than amplifying it.",
+      "hint": "Name the change, the response, and how the response opposes the change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1czjdvy",
+      "kind": "concept",
+      "front": "How do insulin and glucagon work together to control blood glucose concentration?",
+      "back": "**Insulin** lowers blood glucose by promoting glucose uptake and glycogen storage. **Glucagon** raises it by stimulating the liver to release glucose. Their opposing effects keep glucose available to cells.",
+      "hint": "Consider what happens after a meal and when glucose falls.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13sg2o1",
+      "kind": "process",
+      "front": "What are the steps of a negative feedback loop, in order?",
+      "back": "1) A **receptor** detects a change in a condition. 2) A coordinating centre processes the information. 3) An **effector** (muscle or gland) produces a response. 4) The response changes the condition back towards the set point.",
+      "hint": "Start with the detection and end with the condition changing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xermc9",
+      "kind": "term",
+      "front": "What is a set point?",
+      "back": "A **set point** is the target value around which a regulated condition can vary. Monitoring is done against it.",
+      "hint": "It is a target, not a fixed reading.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xo357c",
+      "kind": "term",
+      "front": "What is negative feedback?",
+      "back": "**Negative feedback** is a control process in which a response opposes the change that triggered it.",
+      "hint": "Opposes is the key word.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wvaknr",
+      "kind": "process",
+      "front": "What happens to blood glucose after a meal, step by step?",
+      "back": "Blood glucose rises. Cells in the pancreas detect this and release **insulin**. Insulin increases glucose uptake by muscle and fat cells and promotes conversion of glucose to glycogen in the liver and muscles, lowering blood glucose.",
+      "hint": "Follow the change from detection to the result.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0trrca2",
+      "kind": "process",
+      "front": "What responses does the body make when it becomes too warm?",
+      "back": "The **hypothalamus** stimulates sweating, and sweat glands release sweat that evaporates to remove heat. It also causes **vasodilation** in skin arterioles, so more blood flows near the skin surface and heat is lost.",
+      "hint": "Two responses, both increase heat loss.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bys5se",
+      "kind": "term",
+      "front": "What is glucagon?",
+      "back": "**Glucagon** is a pancreatic hormone released when blood glucose falls. It stimulates the liver to break down glycogen and release glucose into the blood, raising blood glucose concentration.",
+      "hint": "It acts when glucose is low.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zni40y",
+      "kind": "mistake",
+      "front": "A student says homeostasis means conditions never change. Why is this wrong?",
+      "back": "Homeostasis does not mean conditions never change. Blood glucose, body temperature and water content all vary. The correct idea is that changes trigger responses that keep conditions within suitable limits.",
+      "hint": "Think about what the ranges allow.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00vabwy",
+      "kind": "mistake",
+      "front": "Does vasodilation directly cool the blood?",
+      "back": "No. **Vasodilation** widens blood vessels and increases blood flow near the skin surface, which increases heat loss. It does not directly cool the blood by producing cold.",
+      "hint": "Focus on what blood flow does to heat loss.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09nyscy",
+      "kind": "concept",
+      "front": "How do hormones and nerve-controlled responses both help maintain homeostasis?",
+      "back": "**Hormones** are chemical messengers carried in the blood to target cells with suitable receptors, as with insulin and glucagon. Nerve-controlled responses, such as sweating and shivering, are rapid and also support homeostasis.",
+      "hint": "Compare how the message travels.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19w1u8x",
+      "kind": "term",
+      "front": "What is an effector?",
+      "back": "An **effector** is a muscle or gland that carries out a response to a detected change, such as sweat glands releasing sweat when body temperature rises.",
+      "hint": "Muscles and glands are the examples.",
+      "sectionId": "s2"
+    }
+  ]
+}

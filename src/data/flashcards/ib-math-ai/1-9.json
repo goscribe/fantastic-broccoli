@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "1-9",
+  "topicCode": "1.9",
+  "topicName": "Laws of logarithms",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:12.760Z",
+  "cards": [
+    {
+      "id": "0v0ouj6",
+      "kind": "term",
+      "front": "What does $\\log_a x=y$ mean?",
+      "back": "It means $a^y=x$. The **logarithm** is the power that takes the base $a$ to give $x$. The base must be positive and not 1, and $x$ must be positive.",
+      "hint": "Start with $10^3=1000$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r1v7tb",
+      "kind": "formula",
+      "front": "What does the product law of logarithms state?",
+      "back": "$\\log_a(xy)=\\log_a x+\\log_a y$. A **product** inside the logarithm becomes a sum outside it, mirroring $a^m\\times a^n=a^{m+n}$.",
+      "hint": "Think of multiplying powers of the same base.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f2m3q1",
+      "kind": "formula",
+      "front": "What does the power law of logarithms state?",
+      "back": "$\\log_a(x^k)=k\\log_a x$. The **exponent** $k$ comes down as a multiplier, and it works for any real number $k$.",
+      "hint": "Think of $x^3=x\\times x\\times x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vdfoge",
+      "kind": "mistake",
+      "front": "Is $\\log_a(x+y)$ equal to $\\log_a x+\\log_a y$?",
+      "back": "No. The **product law** only applies to a product inside the logarithm, not to a sum. $\\log_a(x+y)$ cannot be split this way.",
+      "hint": "Check which operation sits inside the bracket.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vtsoaj",
+      "kind": "formula",
+      "front": "What does the quotient law of logarithms state?",
+      "back": "$\\log_a\\left(\\frac{x}{y}\\right)=\\log_a x-\\log_a y$. A **quotient** inside the logarithm becomes a subtraction outside it, mirroring $\\frac{a^m}{a^n}=a^{m-n}$.",
+      "hint": "It is the subtraction version of the product law.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "111hz6z",
+      "kind": "term",
+      "front": "What is the natural logarithm $\\ln x$?",
+      "back": "$\\ln x$ is the **natural logarithm**: the logarithm of $x$ to base $e$, where $e\\approx2.718$.",
+      "hint": "The base is the constant $e$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0n2n0wk",
+      "kind": "process",
+      "front": "What are the steps to condense logarithms into a single logarithm?",
+      "back": "First, move each **coefficient** inside as a power (power law). Second, replace each addition with a product. Third, replace each subtraction with a quotient.",
+      "hint": "Start with the power law.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jyu2od",
+      "kind": "example",
+      "front": "Write $2\\log 3+\\log 5-\\log 15$ as a single logarithm and evaluate it.",
+      "back": "$\\log\\left(\\frac{9\\times5}{15}\\right)=\\log 3\\approx0.477$. Apply the power law, then the product law, then the quotient law.",
+      "hint": "Turn $2\\log 3$ into $\\log 9$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03yeilv",
+      "kind": "formula",
+      "front": "What is the change of base formula, and why is it useful?",
+      "back": "$\\log_a x=\\frac{\\log_b x}{\\log_b a}$. It lets you **evaluate** any logarithm using base 10 or base $e$ on a calculator.",
+      "hint": "Calculators usually only have $\\log$ and $\\ln$ keys.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fbuiid",
+      "kind": "example",
+      "front": "Solve $3^x=20$, giving your answer to 3 significant figures.",
+      "back": "$x=\\log_3 20=\\frac{\\ln 20}{\\ln 3}\\approx2.73$. Change the base to $e$, then divide.",
+      "hint": "Rewrite the equation in logarithm form first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1l9qyl9",
+      "kind": "process",
+      "front": "What is the four-step routine for solving logarithm equations?",
+      "back": "Combine the logarithms into one, rewrite in exponent form, solve the resulting equation, then **check** each answer in the original equation.",
+      "hint": "The last step guards against invalid answers.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0lzl1d1",
+      "kind": "example",
+      "front": "Solve $\\log_2 x+\\log_2(x-2)=3$.",
+      "back": "$x=4$. Combining gives $\\log_2(x(x-2))=3$, so $x^2-2x-8=0$ and $x=4$ or $x=-2$. Reject $x=-2$ as it gives a logarithm of a negative number.",
+      "hint": "Use the product law, then rewrite as $x(x-2)=2^3$.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1kd6czk",
+      "kind": "mistake",
+      "front": "Why must some answers to logarithm equations be rejected?",
+      "back": "Because the **input** of a logarithm must be positive. Any value making the input zero or negative is not a valid solution, so check every answer in the original equation.",
+      "hint": "Substitute back into the original equation.",
+      "sectionId": "s6"
+    }
+  ]
+}

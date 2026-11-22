@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "b2-3",
+  "topicCode": "B2.3",
+  "topicName": "Cell specialization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:51.266Z",
+  "cards": [
+    {
+      "id": "1jfeykc",
+      "kind": "concept",
+      "front": "Why can specialised cells in one organism be so different when they contain the same genome?",
+      "back": "**Selective gene expression**: cells use different genes at different times, so they make different proteins. Their genomes are mainly the same; the difference lies in which genes are active.",
+      "hint": "Think about which genes are switched on, not which genes are present.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01dr9b7",
+      "kind": "term",
+      "front": "What is cell differentiation?",
+      "back": "**Cell differentiation** is the process by which a cell develops features suited to a particular function.",
+      "hint": "It is about developing features for a job.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03y2mpi",
+      "kind": "concept",
+      "front": "What links a specialised cell's shape and contents to its job?",
+      "back": "Each **adaptation** (such as shape or protein content) supports the cell's particular function. For example, neurons have proteins for electrical signalling.",
+      "hint": "Name the feature, then explain how it helps the job.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oj0ax6",
+      "kind": "term",
+      "front": "What is a stem cell?",
+      "back": "A **stem cell** can divide and produce cells that differentiate along one or more developmental paths.",
+      "hint": "Think about what it can divide into.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ugml70",
+      "kind": "process",
+      "front": "How does differentiation usually happen in a developing cell?",
+      "back": "It occurs in **several stages** rather than all at once. A cell's surroundings, including signals from nearby cells, can influence which path it takes.",
+      "hint": "Stages, then influences from surroundings.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0924mz2",
+      "kind": "concept",
+      "front": "How do daughter cells keep the specialised features of their parent cell?",
+      "back": "**Patterns of gene expression are maintained** as cells divide, so daughter cells retain the same specialised features.",
+      "hint": "Consider what is passed on when a cell divides.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12to9sl",
+      "kind": "mistake",
+      "front": "A student says specialised cells have completely different genomes. What is wrong with this?",
+      "back": "**Not usually true**: specialised cells mainly differ in which genes they express. Their genomes are usually the same.",
+      "hint": "Compare which genes are used with which genes exist.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qu5cni",
+      "kind": "term",
+      "front": "What is a neuron?",
+      "back": "A **neuron** is a specialised animal cell that carries electrical signals. Its long projection carries signals over a distance, and its branched ends connect with other cells.",
+      "hint": "Think about the cell's shape and its job.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "175tgf2",
+      "kind": "concept",
+      "front": "Why does a mature mammalian red blood cell have no nucleus?",
+      "back": "It leaves **more space for haemoglobin**, which binds oxygen. Its biconcave shape also gives a large surface area relative to its volume.",
+      "hint": "Think about what fills the space inside the cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ak2adb",
+      "kind": "term",
+      "front": "What is a root hair cell?",
+      "back": "A **root hair cell** is a specialised plant cell that absorbs water and mineral ions from soil. Its long extension increases surface area for absorption.",
+      "hint": "Think about where it sits and what it takes in.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0u0ebna",
+      "kind": "concept",
+      "front": "Why is a mature xylem vessel element described as dead, and how does it suit its job?",
+      "back": "It has **lost its internal contents**, leaving a hollow tube so water can pass through. Lignin in its walls helps stop the tube collapsing.",
+      "hint": "Consider what must be empty for water to flow.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f570ky",
+      "kind": "mistake",
+      "front": "A student says root hair cells must be dead because xylem vessel elements are dead. Why is this wrong?",
+      "back": "**Root hair cells stay living** because absorption needs ongoing cellular activity. Only mature xylem vessel elements are dead.",
+      "hint": "Each cell type has a different mature structure for its job.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ivh71s",
+      "kind": "term",
+      "front": "What is the role of lignin in a xylem vessel element?",
+      "back": "**Lignin** strengthens the walls of the xylem vessel, which helps stop the tube collapsing.",
+      "hint": "Think about what the vessel's walls need in order to stay open.",
+      "sectionId": "s4"
+    }
+  ]
+}

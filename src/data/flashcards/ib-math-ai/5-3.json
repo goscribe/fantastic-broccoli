@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-3",
+  "topicCode": "5.3",
+  "topicName": "Derivatives of polynomials",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:05.959Z",
+  "cards": [
+    {
+      "id": "0e9yjv4",
+      "kind": "formula",
+      "front": "What is the power rule for differentiating $x^n$?",
+      "back": "$\\frac{d}{dx}(x^n)=nx^{n-1}$: **multiply** by the power, then reduce the power by 1. It works for any integer $n$, including negative ones.",
+      "hint": "Multiply first, then subtract 1 from the power.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ux01du",
+      "kind": "process",
+      "front": "How do you differentiate a whole polynomial such as $2x^4-5x^3+3x^2-7x+9$?",
+      "back": "Differentiate **each term separately**, then write the results as one expression. Constant terms become 0, and a constant multiplier stays in place.",
+      "hint": "Work term by term, then combine.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wxdk0a",
+      "kind": "concept",
+      "front": "What does the derivative of a model tell you in a real situation?",
+      "back": "It gives the **rate of change** at one instant, not an average over a period. Its unit is the output unit divided by the input unit, such as $\\mathrm{dm^3\\,min^{-1}}$.",
+      "hint": "Think about what the unit is made of.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nw3qml",
+      "kind": "term",
+      "front": "What is a polynomial?",
+      "back": "A **polynomial** is a sum of terms, each a constant multiple of a non-negative whole-number power of $x$, such as $4x^3-2x^2+7x-5$.",
+      "hint": "Only whole-number powers of $x$ that are zero or positive.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jpryzf",
+      "kind": "term",
+      "front": "In $4x^3-2x^2+7x-5$, what is a coefficient?",
+      "back": "A **coefficient** is the number multiplying a power of $x$. Here the coefficients are 4, $-2$ and 7. The constant term $-5$ has no $x$.",
+      "hint": "Look at the number in front of each power of $x$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1brb54m",
+      "kind": "example",
+      "front": "Differentiate $f(x)=2x^4-5x^3+3x^2-7x+9$.",
+      "back": "$f'(x)=8x^3-15x^2+6x-7$. The constant 9 gives 0, and $-7x$ gives $-7$.",
+      "hint": "Do each term separately, then combine.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lojskj",
+      "kind": "mistake",
+      "front": "Why is the derivative of the constant 9 not 9?",
+      "back": "The derivative of a **constant** is 0, because a horizontal line has zero gradient. Constant terms disappear when you differentiate.",
+      "hint": "What is the gradient of a horizontal line?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "168ucj2",
+      "kind": "mistake",
+      "front": "Is the derivative of $-7x$ equal to $-7x$?",
+      "back": "No, it is $-7$. The power 1 is multiplied in and then reduced to 0, so the $x$ disappears.",
+      "hint": "Apply the power rule to $x^1$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1we1jxn",
+      "kind": "example",
+      "front": "A tank holds $V(t)=t^3-6t^2+50$ dm$^3$, with $t$ in minutes. Find the rate of change of volume at $t=5$.",
+      "back": "$V'(t)=3t^2-12t$, so $V'(5)=75-60=15$. The volume is increasing at $15\\,\\mathrm{dm^3\\,min^{-1}}$.",
+      "hint": "Differentiate first, then substitute $t=5$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r5me8v",
+      "kind": "process",
+      "front": "What are the steps to find the rate of change of a model at a given time?",
+      "back": "1) **Differentiate** the model. 2) **Substitute** the time into the derivative. 3) Calculate, give the units, and say what the sign means.",
+      "hint": "Three steps, in this order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k21k50",
+      "kind": "concept",
+      "front": "What does it mean that the derivative is itself a function?",
+      "back": "It gives a **gradient** for every value of $x$. Where $f'$ is positive, $f$ rises; where $f'$ is negative, $f$ falls; where $f'$ meets the $x$-axis, $f$ is level for an instant.",
+      "hint": "Compare the sign of $f'$ with the shape of $f$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1rhpmiy",
+      "kind": "example",
+      "front": "What is the derivative of $x^{-2}$?",
+      "back": "$-2x^{-3}$. The power rule also holds for negative integer powers: multiply by $-2$, then reduce the power by 1.",
+      "hint": "Apply the power rule with $n=-2$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1je07fs",
+      "kind": "example",
+      "front": "For $f(x)=x^3-3x$, find the gradient of the curve at $x=2$.",
+      "back": "$f'(x)=3x^2-3$, so the gradient is $3(4)-3=9$.",
+      "hint": "Find $f'(x)$ first, then substitute $x=2$.",
+      "sectionId": "s5"
+    }
+  ]
+}

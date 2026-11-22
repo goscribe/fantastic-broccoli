@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "9-8",
+  "topicCode": "9.8",
+  "topicName": "Galvanic and electrolytic cells",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:22.692Z",
+  "cards": [
+    {
+      "id": "0qz5zw5",
+      "kind": "concept",
+      "front": "How do you identify the anode in any electrochemical cell?",
+      "back": "The **anode** is the electrode where oxidation occurs, in either cell type. Find the oxidation first, then name that electrode. The sign alone does not decide it.",
+      "hint": "Start with the reaction, not the charge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03pjyvd",
+      "kind": "concept",
+      "front": "What does a galvanic cell do with a spontaneous redox reaction?",
+      "back": "It converts the reaction's energy into **electrical energy**. Electrons leave the oxidation electrode and flow through an external wire to the reduction electrode.",
+      "hint": "Think about what the cell produces.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13u2g6g",
+      "kind": "concept",
+      "front": "How do electrons and ions travel differently through a cell?",
+      "back": "Electrons move through the external wire or power supply. Ions carry charge through the **electrolyte** and salt bridge. Free electrons do not cross the electrolyte.",
+      "hint": "Name both paths.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dbm6wg",
+      "kind": "term",
+      "front": "What is a salt bridge?",
+      "back": "A **salt bridge** connects the solutions of a galvanic cell while limiting their mixing. It lets ions move between half-cells so charge does not build up and stop the reaction.",
+      "hint": "Think about what keeps the circuit going.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ohv2qg",
+      "kind": "term",
+      "front": "What is an electrolytic cell?",
+      "back": "An **electrolytic cell** uses an external power supply to drive a nonspontaneous redox reaction. Its electrolyte may be a solution or a molten substance.",
+      "hint": "Compare the energy source with a galvanic cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0goaq2p",
+      "kind": "term",
+      "front": "What is an electrolyte?",
+      "back": "An **electrolyte** is a solution or molten substance containing mobile ions that carry charge through the cell.",
+      "hint": "Focus on what carries the charge.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1oxtexb",
+      "kind": "term",
+      "front": "What are half-cells?",
+      "back": "**Half-cells** are the separate electrode and electrolyte regions where oxidation and reduction occur. A galvanic cell has two of them.",
+      "hint": "Each one holds one electrode.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zj107k",
+      "kind": "process",
+      "front": "Trace the electron path through a galvanic cell, step by step.",
+      "back": "1. Oxidation at the anode releases electrons. 2. Electrons flow through the external wire. 3. Reduction at the cathode uses them. Ions then move through the salt bridge to balance charge.",
+      "hint": "Start at the anode.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pjkyzw",
+      "kind": "concept",
+      "front": "What does the power supply do in an electrolytic cell?",
+      "back": "It removes electrons from the anode and delivers electrons to the cathode. Oxidation still occurs at the anode and reduction at the cathode.",
+      "hint": "Think about where the electrons are pulled from and pushed to.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1288wcr",
+      "kind": "concept",
+      "front": "What are the electrode signs in galvanic and electrolytic cells?",
+      "back": "A galvanic anode is **negative** and its cathode is positive. In an electrolytic cell, the power supply makes the anode positive and the cathode negative.",
+      "hint": "Galvanic cells supply electrons to the circuit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ktfga4",
+      "kind": "concept",
+      "front": "Which way do ions move in an electrolytic cell?",
+      "back": "**Cations** move toward the cathode and **anions** move toward the anode. They may react at the electrodes, depending on the substances present.",
+      "hint": "Opposite charges attract.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k3md57",
+      "kind": "concept",
+      "front": "Which way do ions move through the salt bridge of a galvanic cell?",
+      "back": "**Anions** migrate toward the anode half-cell and **cations** migrate toward the cathode half-cell. This keeps charge balanced.",
+      "hint": "Remember where oxidation produces positive ions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y64au9",
+      "kind": "mistake",
+      "front": "Why is it wrong to name an anode by its sign alone?",
+      "back": "The sign can change between cell types, so it is unreliable. The **anode** is always the electrode where oxidation occurs, so identify oxidation first.",
+      "hint": "Does the electrolytic anode have the same sign as the galvanic anode?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05zig2o",
+      "kind": "mistake",
+      "front": "Do free electrons travel across the electrolyte in a cell?",
+      "back": "No. Electrons move only through external connections. Ions carry the charge through the electrolyte, which completes the circuit.",
+      "hint": "Which path do electrons take?",
+      "sectionId": "s3"
+    }
+  ]
+}

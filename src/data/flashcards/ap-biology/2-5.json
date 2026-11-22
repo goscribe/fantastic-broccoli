@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "2-5",
+  "topicCode": "2.5",
+  "topicName": "Membrane transport",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:20.934Z",
+  "cards": [
+    {
+      "id": "0tzlgm4",
+      "kind": "concept",
+      "front": "What is the key difference between passive and active transport?",
+      "back": "**Passive** transport moves a substance down its gradient without cellular energy. **Active** transport uses cellular energy to move a substance against its gradient.",
+      "hint": "Ask which way the substance moves and whether the cell pays energy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ixfs9c",
+      "kind": "concept",
+      "front": "Why can't ions simply diffuse through the lipid part of the membrane?",
+      "back": "Their **electrical charge** makes the membrane's hydrophobic interior a barrier, so ions need transport proteins to cross.",
+      "hint": "Think about what the membrane interior is made of.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0olk62r",
+      "kind": "mistake",
+      "front": "A student says passive transport stops once particles reach equilibrium. What is wrong?",
+      "back": "Particles keep moving at equilibrium. There is **no net movement**, but movement in both directions continues.",
+      "hint": "Separate movement of single particles from net movement.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cy7aqe",
+      "kind": "term",
+      "front": "What is a concentration gradient?",
+      "back": "A **difference** in a substance's concentration between two areas.",
+      "hint": "Think about two regions that do not have the same amount of a substance.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dktbq7",
+      "kind": "term",
+      "front": "What is osmosis?",
+      "back": "The **net diffusion of water** across a selectively permeable membrane.",
+      "hint": "It is a special case of passive movement, involving water only.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mc6q0j",
+      "kind": "concept",
+      "front": "Which substances can cross the lipid portion of a membrane by simple diffusion?",
+      "back": "**Small nonpolar molecules**, such as oxygen and carbon dioxide, move directly down their concentration gradients.",
+      "hint": "Think about size and charge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e1tuxn",
+      "kind": "concept",
+      "front": "How do a channel and a carrier differ in facilitated diffusion?",
+      "back": "A **channel** provides a passage through the membrane. A **carrier** binds the substance and changes shape to move it across.",
+      "hint": "One is an open route, the other binds and changes shape.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bfq28l",
+      "kind": "term",
+      "front": "What is an electrochemical gradient?",
+      "back": "A combination of a **concentration difference** and an **electrical difference** across a membrane, which sets the net direction of an ion's passive movement.",
+      "hint": "It has both a chemical part and a charge part.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08avo1f",
+      "kind": "process",
+      "front": "Describe how secondary active transport moves a substance against its gradient.",
+      "back": "One substance moves **down** an established gradient, and its movement supplies energy to move another substance against its gradient. Energy earlier established the driving gradient.",
+      "hint": "Start with the substance moving downhill.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gynpb2",
+      "kind": "term",
+      "front": "What is a pump in membrane transport?",
+      "back": "A membrane protein that uses **energy** to move substances against their electrochemical gradients.",
+      "hint": "Compare it with facilitated diffusion, which needs no energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mmd0lb",
+      "kind": "concept",
+      "front": "What does the sodium-potassium pump move, and in which directions?",
+      "back": "It uses **ATP** to move sodium out of the cell and potassium into the cell, maintaining ion gradients.",
+      "hint": "Think about which ion is pumped out and which is pumped in.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19h42l5",
+      "kind": "mistake",
+      "front": "A student says diffusion uses ATP because molecules are always moving. What is wrong?",
+      "back": "Diffusion requires **no ATP**. Particle motion supplies the movement, and the gradient determines its net direction.",
+      "hint": "Separate what causes movement from what provides energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1avhoyx",
+      "kind": "mistake",
+      "front": "Is facilitated diffusion active because it uses a membrane protein?",
+      "back": "No, it is **passive**. The protein only provides a route down the gradient, so no cellular energy is used.",
+      "hint": "Ask whether the substance moves against its gradient.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vt409u",
+      "kind": "concept",
+      "front": "How do endocytosis and exocytosis differ, and what do they need?",
+      "back": "**Endocytosis** brings material into a cell in vesicles. **Exocytosis** releases material from a cell using vesicles. Both require cellular energy.",
+      "hint": "Think about which direction the material moves across the membrane.",
+      "sectionId": "s4"
+    }
+  ]
+}

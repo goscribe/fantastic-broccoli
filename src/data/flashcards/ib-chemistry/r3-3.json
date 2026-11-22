@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "r3-3",
+  "topicCode": "R3.3",
+  "topicName": "Electron sharing reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:27.739Z",
+  "cards": [
+    {
+      "id": "1p5pfzf",
+      "kind": "concept",
+      "front": "Why does UV light start radical substitution of an alkane with chlorine?",
+      "back": "UV light supplies energy to break the Cl–Cl bond **homolytically**, giving two chlorine radicals. These radicals can then attack alkane molecules.",
+      "hint": "Ask what splits first, before any alkane reacts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ce4b6z",
+      "kind": "process",
+      "front": "What are the three stages of radical substitution, in order?",
+      "back": "**Initiation** splits Cl2 into radicals using UV light. **Propagation** steps use radicals and make a new radical each time. **Termination** combines two radicals, so no radical is made.",
+      "hint": "Think about start, repeat, and stop.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oepc09",
+      "kind": "term",
+      "front": "What is a radical?",
+      "back": "A **radical** is a species with an unpaired electron. It is shown with a dot on the atom that has that electron.",
+      "hint": "Look for the dot in the formula.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wqejk1",
+      "kind": "term",
+      "front": "What is homolytic fission?",
+      "back": "**Homolytic fission** breaks a covalent bond so that each bonded atom takes one of the bonding electrons, forming two radicals.",
+      "hint": "Each atom gets one electron, not both.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "178bqnt",
+      "kind": "formula",
+      "front": "Write the initiation step for chlorination of methane, and say what the label above the arrow means.",
+      "back": "$\\mathrm{Cl_2 \\xrightarrow{UV} 2Cl\\cdot}$. The **UV** above the arrow is the energy source, not a reactant.",
+      "hint": "Cl2 is the only molecule that splits here.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04hc8cr",
+      "kind": "process",
+      "front": "What two propagation steps regenerate a chlorine radical in methane chlorination?",
+      "back": "First $\\mathrm{Cl\\cdot + CH_4 \\rightarrow HCl + CH_3\\cdot}$, then $\\mathrm{CH_3\\cdot + Cl_2 \\rightarrow CH_3Cl + Cl\\cdot}$. The second step gives back a chlorine radical.",
+      "hint": "Track which radical is used up and which is made.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13m4cki",
+      "kind": "mistake",
+      "front": "Why is it wrong to say UV light splits methane to start this reaction?",
+      "back": "UV light splits **chlorine** molecules first, not methane. The chlorine radicals then remove hydrogen from methane.",
+      "hint": "Which molecule absorbs the UV energy?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lyq6cf",
+      "kind": "term",
+      "front": "What happens in a termination step?",
+      "back": "Two radicals combine to form a **covalent bond**, and no new radical is produced. For example, Cl· + Cl· gives Cl2.",
+      "hint": "Count the radicals before and after.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yako3a",
+      "kind": "mistake",
+      "front": "Can methane chlorination be assumed to give only chloromethane?",
+      "back": "No. Further substitution of chloromethane can occur, so the product can be a **mixture**. Two methyl radicals can also combine to form ethane.",
+      "hint": "Think about what the product can react with next.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cu9gg2",
+      "kind": "term",
+      "front": "What is a fish-hook arrow?",
+      "back": "A **fish-hook** arrow is a single-headed curved arrow that shows the movement of one electron.",
+      "hint": "Count the heads on the arrow.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nd1nhz",
+      "kind": "mistake",
+      "front": "How does a fish-hook arrow differ from a full-headed curly arrow?",
+      "back": "A **fish-hook** arrow is single-headed and shows one electron. A full-headed arrow shows a movement of an electron pair.",
+      "hint": "Radical mechanisms track single electrons.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0c8qga8",
+      "kind": "example",
+      "front": "How many fish-hook arrows show homolytic fission of Cl2, and where do they point?",
+      "back": "**Two** arrows start from the Cl–Cl bond, one pointing to each chlorine atom. Each atom receives one electron, giving 2Cl·.",
+      "hint": "Each arrow represents one electron.",
+      "sectionId": "s4"
+    }
+  ]
+}

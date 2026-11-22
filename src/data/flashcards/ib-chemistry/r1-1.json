@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "r1-1",
+  "topicCode": "R1.1",
+  "topicName": "Measuring enthalpy changes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:18.886Z",
+  "cards": [
+    {
+      "id": "1sq69wm",
+      "kind": "concept",
+      "front": "Why does an exothermic reaction have a negative enthalpy change?",
+      "back": "Its **products** have lower enthalpy than its reactants, so the reaction transfers heat to its surroundings. An endothermic reaction is the opposite, with a positive enthalpy change.",
+      "hint": "Compare the enthalpy of the products with that of the reactants.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xyih77",
+      "kind": "concept",
+      "front": "How does calorimetry estimate the enthalpy change of a reaction in solution?",
+      "back": "It measures the **temperature change** of the surroundings. The heat the solution gains gives the heat of the reaction, which has the opposite sign.",
+      "hint": "Think about where the measured heat goes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ii92yf",
+      "kind": "formula",
+      "front": "What does $q=mc\\Delta T$ calculate, and what are its units?",
+      "back": "The **heat** gained by the solution, in J. $m$ is solution mass in g, $c$ is specific heat capacity in J g⁻¹ K⁻¹, and $\\Delta T$ is the temperature change in K.",
+      "hint": "Check the units of each symbol.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wv66ah",
+      "kind": "term",
+      "front": "What is the enthalpy change of a reaction?",
+      "back": "The **heat** transferred by a reaction at constant pressure. It equals the enthalpy of the products minus the enthalpy of the reactants.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kdu2v4",
+      "kind": "term",
+      "front": "What is an endothermic reaction?",
+      "back": "A reaction that **takes in heat** from its surroundings. Its enthalpy change is positive.",
+      "hint": "Think about the direction of heat flow.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fktlyc",
+      "kind": "term",
+      "front": "What is a calorimeter?",
+      "back": "An **apparatus** used to estimate the heat transferred in a reaction from a measured temperature change. An insulated cup is a simple example.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0im5wca",
+      "kind": "term",
+      "front": "What is specific heat capacity?",
+      "back": "The **energy** needed to raise the temperature of one gram of a substance by one kelvin.",
+      "hint": "Units are J g⁻¹ K⁻¹.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "033v0x1",
+      "kind": "process",
+      "front": "What are the steps for measuring a temperature change when mixing two aqueous reactants?",
+      "back": "Measure the reactants and record their **initial temperatures**. Mix them in an insulated, lidded cup and stir gently. Record the highest or lowest temperature reached and subtract the starting temperature.",
+      "hint": "Start with the measurements before mixing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kb3atp",
+      "kind": "process",
+      "front": "What are the steps for calculating a reaction enthalpy change from temperature data?",
+      "back": "Find $q=mc\\Delta T$ for the solution using its mass. Take the **reaction heat** as $-q$ and divide by the amount reacting in the balanced equation. Convert J to kJ, then report in kJ mol⁻¹.",
+      "hint": "Watch the sign change and the unit conversion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ak862m",
+      "kind": "example",
+      "front": "Mix 50.0 cm³ of 1.00 mol dm⁻³ acid with 50.0 cm³ of 1.00 mol dm⁻³ alkali (1:1 ratio). The temperature rises by 6.8 °C. What is the enthalpy change?",
+      "back": "About **−57 kJ mol⁻¹**. The solution mass is 100.0 g, so $q=2.8424$ kJ. Moles reacting are 0.0500, giving $\\Delta H=-56.848$ kJ mol⁻¹.",
+      "hint": "Use density 1.00 g cm⁻³ and $c=4.18$ J g⁻¹ K⁻¹.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cfb1zp",
+      "kind": "mistake",
+      "front": "A student says a rising solution temperature means the reaction enthalpy change is positive. Why is this wrong?",
+      "back": "The solution **gains** heat, so the reaction released heat. A rising temperature means an exothermic reaction, which has a negative enthalpy change.",
+      "hint": "Which way does heat flow for the reaction?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gxzif8",
+      "kind": "mistake",
+      "front": "An insulated cup is used for an exothermic reaction. Why does heat loss make the calculated enthalpy change less negative?",
+      "back": "Some released heat escapes to the **room** instead of warming the solution. The measured temperature rise is smaller, so the calculated enthalpy change is less negative than the true value.",
+      "hint": "Link the cause to the temperature rise, then to ΔH.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0uwyecr",
+      "kind": "concept",
+      "front": "Why does ignoring the heat capacity of the cup and thermometer affect the result?",
+      "back": "They **absorb heat** too, so less heat warms the solution. The measured temperature change is then too small, which also makes the enthalpy change less accurate.",
+      "hint": "Think about where the heat goes.",
+      "sectionId": "s4"
+    }
+  ]
+}

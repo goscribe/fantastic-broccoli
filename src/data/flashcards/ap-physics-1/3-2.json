@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "3-2",
+  "topicCode": "3.2",
+  "topicName": "Work",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:38.991Z",
+  "cards": [
+    {
+      "id": "02dk5od",
+      "kind": "concept",
+      "front": "What does work mean in physics?",
+      "back": "**Work** is the energy a force transfers to or from an object as the object moves. A push that makes a stalled car speed up does work on the car.",
+      "hint": "Think about a push that makes a stalled car speed up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jt9ak1",
+      "kind": "formula",
+      "front": "How do you calculate the work done by a constant force that is at an angle to the motion?",
+      "back": "$W=Fd\\cos\\theta$, where $F$ and $d$ are the magnitudes of the force and displacement and $\\theta$ is the angle between them. Only the part of the force along the motion does work. Work is measured in **joules** (J).",
+      "hint": "Only the part of the force along the motion counts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0i060cb",
+      "kind": "concept",
+      "front": "What does the sign of work tell you?",
+      "back": "The **sign** shows the direction of energy transfer. Positive work adds energy to the object (angle below $90^\\circ$), and negative work removes energy (angle above $90^\\circ$).",
+      "hint": "Look at the angle between force and displacement.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kqk5io",
+      "kind": "term",
+      "front": "What is a joule?",
+      "back": "The **joule** (J) is the SI unit of work and energy, where $1\\,\\mathrm{J}=1\\,\\mathrm{N\\,m}$. It is the work done by a 1 N force moving 1 m along its direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nduulx",
+      "kind": "concept",
+      "front": "Why does a person pushing on a solid wall do no work on the wall?",
+      "back": "The wall does not move, so there is no **displacement** and no energy is transferred to it. Work needs both a force and a displacement.",
+      "hint": "Work needs both a force and a displacement.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lnhbd8",
+      "kind": "mistake",
+      "front": "A student says the lifting force does work on a bag carried at constant velocity along a level floor. Why is this wrong?",
+      "back": "The lifting force points up, perpendicular to the horizontal displacement, so $\\theta=90^\\circ$ and the work is **zero**. No energy is transferred to the bag by that force.",
+      "hint": "Check the angle between the force and the displacement.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tl376b",
+      "kind": "example",
+      "front": "A person pulls a sled with a constant 40 N force 30° above the horizontal. The sled moves 5.0 m along level ground. How much work does the person do?",
+      "back": "About $1.7\\times10^{2}\\,\\mathrm{J}$ (173 J), since $W=(40\\,\\mathrm{N})(5.0\\,\\mathrm{m})\\cos30^\\circ$.",
+      "hint": "Use the angle between the pull and the motion.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bh4i2e",
+      "kind": "term",
+      "front": "What is negative work?",
+      "back": "Work done by a force with a component opposite the displacement, so the object **loses** energy. It occurs when $90^\\circ<\\theta\\le180^\\circ$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nvuvjb",
+      "kind": "concept",
+      "front": "What is the work done by the normal force on a crate sliding across a floor?",
+      "back": "**Zero**, because the normal force is at $90^\\circ$ to the displacement, so $\\cos90^\\circ=0$.",
+      "hint": "The normal force is perpendicular to the surface.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f5v625",
+      "kind": "example",
+      "front": "A constant 12 N friction force acts on a crate that slides 3.0 m. What work does friction do?",
+      "back": "$-36\\,\\mathrm{J}$. Friction acts at $180^\\circ$, so $W=(12)(3.0)\\cos180^\\circ=-36\\,\\mathrm{J}$, meaning the crate loses 36 J.",
+      "hint": "Friction opposes the motion.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t6sfk4",
+      "kind": "process",
+      "front": "What are the steps to calculate the work done by a constant force?",
+      "back": "1) Identify the force, the displacement and the angle between them. 2) Substitute into $W=Fd\\cos\\theta$. 3) Calculate the value, and check the sign matches the angle.",
+      "hint": "Start by naming the force.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l5r3zy",
+      "kind": "mistake",
+      "front": "True or false: gravity and friction act on the same object, so they must do work with the same sign.",
+      "back": "**False**. They can do work with opposite signs, since the angle decides the sign for each force. Always name the force when you state a value of work.",
+      "hint": "The angle decides the sign for each force separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q460i8",
+      "kind": "example",
+      "front": "Calculate the work done by gravity on a 2.0 kg ball that falls 5.0 m. Use $g=9.8\\,\\mathrm{m/s^2}$.",
+      "back": "98 J. Gravity acts along the motion, so $W=mgd=(2.0)(9.8)(5.0)=98\\,\\mathrm{J}$.",
+      "hint": "Gravity acts along the direction of motion."
+    }
+  ]
+}

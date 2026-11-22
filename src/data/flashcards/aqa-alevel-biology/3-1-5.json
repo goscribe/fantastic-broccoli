@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-1-5",
+  "topicCode": "3.1.5",
+  "topicName": "Nucleic acids and DNA replication",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:09.758Z",
+  "cards": [
+    {
+      "id": "1irloci",
+      "kind": "term",
+      "front": "What three components make up a nucleotide?",
+      "back": "A **nucleotide** contains a phosphate group, a pentose sugar and a nitrogen-containing base.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vbqcpv",
+      "kind": "concept",
+      "front": "Why does the base sequence on one DNA strand determine the sequence on the other strand?",
+      "back": "Each base can only pair with one partner: adenine with thymine and cytosine with guanine (**complementary base pairing**), so one strand fixes the other.",
+      "hint": "Consider which base each one can bond to.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wawzwq",
+      "kind": "term",
+      "front": "What does semi-conservative mean for DNA replication?",
+      "back": "Each new DNA molecule contains **one original strand and one newly made strand**.",
+      "hint": "Think about how many old strands each daughter molecule keeps.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0swrb1y",
+      "kind": "term",
+      "front": "Which pentose sugar do DNA nucleotides contain?",
+      "back": "**Deoxyribose**, which has one fewer oxygen atom than the ribose found in RNA nucleotides.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ppoxzj",
+      "kind": "term",
+      "front": "Which base do RNA nucleotides use in place of thymine?",
+      "back": "**Uracil**. RNA nucleotides contain ribose and uracil, while DNA nucleotides use thymine.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qwy22o",
+      "kind": "example",
+      "front": "What is the base sequence of the new strand made from the template strand TAGC?",
+      "back": "**ATCG**. Each template base pairs with its partner: T with A, A with T, G with C and C with G.",
+      "hint": "Pair each template base with its complementary base.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03q8qcw",
+      "kind": "concept",
+      "front": "How many hydrogen bonds hold an adenine–thymine pair together?",
+      "back": "**Two**. Cytosine–guanine pairs form three. Each bond is weak, but many together stabilise the molecule.",
+      "hint": "Compare the two base pairs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "143t250",
+      "kind": "concept",
+      "front": "What does it mean that the two DNA strands are antiparallel?",
+      "back": "The **antiparallel** strands run in opposite directions, with each sugar–phosphate backbone on the outside and the bases facing inwards.",
+      "hint": "Think about the direction each strand runs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ivnppq",
+      "kind": "process",
+      "front": "What are the main steps of DNA replication, in order?",
+      "back": "1 Hydrogen bonds between bases break and the strands separate. 2 Each original strand acts as a template. 3 Free nucleotides pair with exposed bases. 4 New nucleotides are joined into strands, giving two DNA molecules with the original sequence.",
+      "hint": "Start with what must happen before any copying can begin.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00c7y1k",
+      "kind": "mistake",
+      "front": "Why is it wrong to say semi-conservative means one DNA molecule is entirely old and the other entirely new?",
+      "back": "Each daughter molecule contains both an old strand and a new strand. Neither molecule is wholly old or wholly new.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0firwi8",
+      "kind": "term",
+      "front": "What does DNA helicase do during replication?",
+      "back": "It **separates** the two strands by breaking hydrogen bonds between complementary bases, exposing bases on both template strands.",
+      "hint": "Consider the first step of replication.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1y8s5iq",
+      "kind": "concept",
+      "front": "Where can DNA polymerase add nucleotides to a growing strand?",
+      "back": "Only to the **growing end** of a strand, so new DNA is always made in one direction.",
+      "hint": "Think about where new nucleotides can attach.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gf7a5i",
+      "kind": "mistake",
+      "front": "Why is it wrong to say DNA polymerase breaks hydrogen bonds between bases?",
+      "back": "Helicase breaks hydrogen bonds between bases. Polymerase forms bonds in the new sugar–phosphate backbone, joining nucleotides together.",
+      "hint": "Compare the job of each enzyme.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03l5x6b",
+      "kind": "concept",
+      "front": "How does the antiparallel arrangement affect the making of the two new strands?",
+      "back": "One new strand grows continuously towards the opening point. The other is made in short sections, which **DNA ligase** joins together.",
+      "sectionId": "s4"
+    }
+  ]
+}

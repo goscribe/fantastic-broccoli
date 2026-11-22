@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "9-10",
+  "topicCode": "9.10",
+  "topicName": "Human impacts on biodiversity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:11.128Z",
+  "cards": [
+    {
+      "id": "1v8cgp3",
+      "kind": "term",
+      "front": "What is biodiversity?",
+      "back": "**Biodiversity** is the variety of life at three levels: genes within species, the species themselves, and the ecosystems they form.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gdkl7r",
+      "kind": "concept",
+      "front": "How is species diversity determined within a community?",
+      "back": "**Species diversity** depends on how many species live in a community and on how evenly individuals are spread among them. A field dominated by one species is less diverse than one with many species in similar numbers.",
+      "hint": "Compare a field with ten species to one where a single species dominates.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06r0jyc",
+      "kind": "concept",
+      "front": "How does habitat loss lower the number of species an area can support?",
+      "back": "Clearing or converting land reduces the **area** available, so fewer individuals live there and fewer species can survive.",
+      "hint": "Link the area lost to the number of individuals.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0asndfk",
+      "kind": "term",
+      "front": "What is habitat fragmentation?",
+      "back": "**Habitat fragmentation** is the division of a continuous habitat into smaller, isolated patches, often caused by roads, farms, or buildings.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0r9pwcn",
+      "kind": "concept",
+      "front": "Why can fragmentation reduce genetic diversity within a species?",
+      "back": "Isolated groups cannot mix easily, and animals with large ranges may lack enough space, so the flow of genes between groups falls.",
+      "hint": "Think about whether separated groups can breed with each other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0626z0r",
+      "kind": "process",
+      "front": "What happens in order when excess fertilizer runs into a lake?",
+      "back": "Extra nutrients make algae multiply. The algae die, and decomposers use up dissolved oxygen as they break them down. Sensitive fish and other species then die, a process called **eutrophication**.",
+      "hint": "Start with what the extra nutrients trigger.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0veneei",
+      "kind": "concept",
+      "front": "Why does pollution usually lower species diversity?",
+      "back": "Sensitive species die while a few **tolerant species** survive, so there are fewer species and the remaining ones are unevenly abundant.",
+      "hint": "Consider which species the pollution harms most.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02g6386",
+      "kind": "term",
+      "front": "What is pollution in ecological terms?",
+      "back": "**Pollution** is the introduction of harmful substances or excess materials into the environment.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00upt38",
+      "kind": "concept",
+      "front": "Why can a polluted and invaded forest fragment lose species faster than one pressure alone would cause?",
+      "back": "Pressures often act together. Pollution and invaders stack on top of habitat loss, so each stress weakens species further and they decline faster.",
+      "hint": "Think about what happens when several stresses hit one place at once.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03mfd8q",
+      "kind": "term",
+      "front": "What is an invasive species?",
+      "back": "An **invasive species** spreads outside its native range and causes ecological harm.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zf3xcg",
+      "kind": "concept",
+      "front": "Why can climate change reduce biodiversity?",
+      "back": "Climate change shifts temperature and rainfall. Species that cannot move to suitable habitat may decline.",
+      "hint": "Consider whether species can keep up with shifting conditions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qwsqz3",
+      "kind": "term",
+      "front": "What is habitat restoration?",
+      "back": "**Habitat restoration** is the repair of a damaged ecosystem so that native species can return.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0neobsh",
+      "kind": "concept",
+      "front": "What are two ways people can reduce pollution's harm to biodiversity?",
+      "back": "People can use less fertilizer and pesticide, and treat wastewater before it reaches waterways.",
+      "hint": "Think about what goes into the water and soil.",
+      "sectionId": "s5"
+    }
+  ]
+}

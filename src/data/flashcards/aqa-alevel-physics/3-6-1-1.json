@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-6-1-1",
+  "topicCode": "3.6.1.1",
+  "topicName": "Circular motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:38.610Z",
+  "cards": [
+    {
+      "id": "0bkzcbg",
+      "kind": "concept",
+      "front": "Why is an object moving in a circle at constant speed still accelerating?",
+      "back": "Its **velocity** changes because its direction keeps changing, and a change in velocity is an **acceleration**.",
+      "hint": "Think about what else is recorded besides how fast it moves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06e25ln",
+      "kind": "concept",
+      "front": "What is centripetal force in terms of the real forces acting on an object?",
+      "back": "It is the **resultant** force directed towards the centre of the circle, supplied by real forces such as tension, friction or gravity, not an extra force.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1jg11ul",
+      "kind": "formula",
+      "front": "What is the size of the centripetal acceleration of an object moving at speed $v$ in a circle of radius $r$?",
+      "back": "$a=\\frac{v^2}{r}$, which equals $\\omega^2 r$. It always points towards the **centre** of the circle.",
+      "hint": "Start from the change in velocity, which points inwards.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "181wj0o",
+      "kind": "term",
+      "front": "What is a radian?",
+      "back": "One **radian** is the angle at the centre of a circle when the arc length equals the radius; a full turn is $2\\pi$ radians.",
+      "hint": "Relate the angle to an arc and a radius.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "069kwtl",
+      "kind": "term",
+      "front": "What is angular speed, $\\omega$, and what is its unit?",
+      "back": "The **angular speed** is the angle turned per second, $\\omega=\\frac{\\Delta\\theta}{\\Delta t}$, measured in $\\mathrm{rad\\,s^{-1}}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vhs81m",
+      "kind": "formula",
+      "front": "Which equation links linear speed $v$ to angular speed $\\omega$ and radius $r$?",
+      "back": "$v=\\omega r$, where $v$ is in $\\mathrm{m\\,s^{-1}}$, $\\omega$ in $\\mathrm{rad\\,s^{-1}}$ and $r$ in $\\mathrm{m}$. Points further out move faster.",
+      "hint": "Think about the distance a point travels along the arc in one second.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o91w1n",
+      "kind": "formula",
+      "front": "Which equation links angular speed $\\omega$ to the period $T$?",
+      "back": "$\\omega=\\frac{2\\pi}{T}$, which also equals $2\\pi f$, since $f=\\frac{1}{T}$.",
+      "hint": "How far does an object travel in one full revolution?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1udbh2p",
+      "kind": "term",
+      "front": "What is the period of an object moving in a circle?",
+      "back": "The **period**, $T$, is the time taken for one complete revolution.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12hy6gh",
+      "kind": "example",
+      "front": "A fan blade tip 0.15 m from the axis makes 8.0 revolutions each second. What is the speed of the tip?",
+      "back": "About $7.5\\,\\mathrm{m\\,s^{-1}}$. First $\\omega=2\\pi\\times8.0=50\\,\\mathrm{rad\\,s^{-1}}$, then $v=\\omega r=50\\times0.15$.",
+      "hint": "Find the angular speed first, then use the radius.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10tg12d",
+      "kind": "example",
+      "front": "What centripetal force does a 1200 kg car need on a level bend of radius 50 m travelling at $15\\,\\mathrm{m\\,s^{-1}}$?",
+      "back": "$F=\\frac{mv^2}{r}=5.4\\times10^{3}\\,\\mathrm{N}$, provided by **friction** between the tyres and the road.",
+      "hint": "Use $F=\\frac{mv^2}{r}$ with each value in SI units.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18zx10v",
+      "kind": "mistake",
+      "front": "Why is there no outward 'centrifugal' force acting on an object moving in a circle?",
+      "back": "It is **not** a real force. The only force is the inward resultant; if it vanishes, the object moves off along the tangent.",
+      "hint": "Think about what happens when a string breaks.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0a7efbn",
+      "kind": "mistake",
+      "front": "Why must revolutions per minute be divided by 60 before using $\\omega=2\\pi f$?",
+      "back": "Because $f$ must be in **revolutions per second**, $\\mathrm{s^{-1}}$, so the units match the radian-based angular speed.",
+      "hint": "Check the units of frequency in the formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02onp91",
+      "kind": "concept",
+      "front": "What happens to centripetal acceleration if speed doubles on the same circle?",
+      "back": "It **quadruples**, because $a=\\frac{v^2}{r}$ depends on speed squared.",
+      "hint": "Look at how $v$ appears in the equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nyceyu",
+      "kind": "concept",
+      "front": "Why does the centripetal force not change the speed of an object moving in a circle?",
+      "back": "The force acts at right angles to the velocity, so it does no **work**; it changes direction but not speed.",
+      "hint": "Recall how work done depends on the direction of the force.",
+      "sectionId": "s4"
+    }
+  ]
+}

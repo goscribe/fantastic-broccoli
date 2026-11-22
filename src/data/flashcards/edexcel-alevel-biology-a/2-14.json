@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-14",
+  "topicCode": "2.14",
+  "topicName": "Cystic fibrosis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:12.943Z",
+  "cards": [
+    {
+      "id": "0tt82xr",
+      "kind": "concept",
+      "front": "What genetic change causes cystic fibrosis?",
+      "back": "A mutation in the gene for the **CFTR protein**, most commonly a deletion of three bases that removes one amino acid, so the protein cannot work properly.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t55hv9",
+      "kind": "concept",
+      "front": "Why does faulty CFTR make mucus thick and sticky?",
+      "back": "**Chloride ions** stay inside the cell, so the water potential outside is not lowered and little water leaves by osmosis. The mucus stays dry and thick.",
+      "hint": "Follow where chloride ions go in a healthy cell first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0g7nbag",
+      "kind": "concept",
+      "front": "Why does a carrier of cystic fibrosis usually show no symptoms?",
+      "back": "A carrier has one working allele that makes enough functional CFTR protein. Cystic fibrosis needs two faulty alleles, and carriers can still pass the faulty allele on.",
+      "hint": "Compare how much working protein a carrier makes with a person who has the condition.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ml050h",
+      "kind": "concept",
+      "front": "What does the CFTR protein do in epithelial cell membranes?",
+      "back": "It is a **channel protein** that lets chloride ions move out of the cell, because charged ions cannot pass freely through the lipid part of the membrane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0obb5uw",
+      "kind": "term",
+      "front": "What are epithelial cells?",
+      "back": "**Epithelial cells** form sheets that line surfaces and cavities of the body, such as the airways, the gut and gland ducts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lzz7vp",
+      "kind": "term",
+      "front": "Define osmosis.",
+      "back": "**Osmosis** is the net movement of water through a partially permeable membrane from higher to lower water potential.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e92w9m",
+      "kind": "example",
+      "front": "Two carriers ($Aa \\times Aa$) have a child. What is the probability the child has cystic fibrosis?",
+      "back": "$\\frac{1}{4}$. Each parent passes on the faulty allele with probability $\\frac{1}{2}$, so both gametes carry it: $\\frac{1}{2}\\times\\frac{1}{2}=\\frac{1}{4}$.",
+      "hint": "Work out the chance each parent passes on the faulty allele.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o8rb63",
+      "kind": "example",
+      "front": "Two carriers ($Aa \\times Aa$) have a child. What is the probability the child is a carrier?",
+      "back": "$\\frac{1}{2}$. The child is a carrier if the gametes are A and a in either order: $\\frac{1}{4}+\\frac{1}{4}=\\frac{1}{2}$.",
+      "hint": "Count both orders in which one gamete is working and one is faulty.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wwam1v",
+      "kind": "mistake",
+      "front": "Why can two healthy parents have a child with cystic fibrosis?",
+      "back": "Both parents may be **carriers**, each with one faulty recessive allele and one working allele. Carriers look healthy, but their child can inherit two faulty alleles.",
+      "hint": "Think about what a parent with one faulty allele looks like.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03esgtx",
+      "kind": "process",
+      "front": "What happens in the lungs when mucus is thick in cystic fibrosis?",
+      "back": "Mucus builds up and blocks the airways, trapping bacteria. This makes infections frequent and makes gas exchange harder.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ogttk1",
+      "kind": "process",
+      "front": "How does thick mucus affect digestion in cystic fibrosis?",
+      "back": "Pancreatic ducts block, so digestive enzymes cannot reach the small intestine. Food is poorly digested, nutrients are absorbed badly and growth can slow.",
+      "hint": "Follow the route digestive enzymes take from the pancreas.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wefqh7",
+      "kind": "concept",
+      "front": "Why is sweat saltier than normal in cystic fibrosis?",
+      "back": "The faulty CFTR channel affects the movement of **chloride ions**, so less of them leave the cells that produce sweat.",
+      "hint": "Think about what the CFTR channel normally transports.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09ic83w",
+      "kind": "concept",
+      "front": "Which treatment loosens the thick mucus in cystic fibrosis?",
+      "back": "**Physiotherapy** loosens mucus. Antibiotics treat infections and enzyme supplements help digestion, but these manage symptoms rather than cure the condition.",
+      "sectionId": "s5"
+    }
+  ]
+}

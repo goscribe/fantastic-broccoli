@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-1",
+  "topicCode": "8.1",
+  "topicName": "Sensory, relay and motor neurones",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:55.686Z",
+  "cards": [
+    {
+      "id": "03zru8f",
+      "kind": "concept",
+      "front": "Why does your hand move away from a hot pan before you feel pain?",
+      "back": "A **reflex arc** runs through the spinal cord, so the response is automatic and the brain does not decide it. Pain is passed to the brain afterwards.",
+      "hint": "Think about where the response is controlled.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1je7ojk",
+      "kind": "concept",
+      "front": "Why is a reflex arc so quick?",
+      "back": "It uses few **neurones** and few **synapses**. Each synapse adds a small delay, and the pathway skips the brain's decision-making.",
+      "hint": "Count the junctions an impulse must cross.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "12r42tj",
+      "kind": "concept",
+      "front": "What is the job of a sensory neurone?",
+      "back": "A **sensory neurone** carries impulses from a sensory receptor into the **central nervous system**, so the body can start a response.",
+      "hint": "Think about where the stimulus is first detected.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0eqmnrh",
+      "kind": "term",
+      "front": "What is a neurone?",
+      "back": "A **neurone** is a specialised animal cell that carries electrical signals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v83lb8",
+      "kind": "concept",
+      "front": "Which way do dendrites carry impulses, compared with the axon?",
+      "back": "**Dendrites** carry impulses towards the cell body, while a long **axon** carries them away from it.",
+      "hint": "Treat the cell body as a central point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04b4gm4",
+      "kind": "concept",
+      "front": "What does myelin do, and why does it matter?",
+      "back": "**Myelin** is a fatty insulating sheath around some axons. It increases the speed at which impulses travel.",
+      "hint": "Think about what insulation does to a signal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r5bn6e",
+      "kind": "term",
+      "front": "What is a synapse?",
+      "back": "A **synapse** is the tiny junction between two neurones, where they communicate. Neurones do not actually touch.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "035bqky",
+      "kind": "concept",
+      "front": "Why does a relay neurone have many short dendrites?",
+      "back": "It can connect with several neurones, so one sensory neurone can influence several pathways at once.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xk9dyx",
+      "kind": "term",
+      "front": "What is a reflex?",
+      "back": "A **reflex** is a rapid, automatic response to a stimulus.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14wksa7",
+      "kind": "process",
+      "front": "What is the order of a reflex arc, from stimulus to response?",
+      "back": "A **receptor** detects the stimulus. A sensory neurone carries impulses to the spinal cord. A relay neurone passes them across a synapse to a motor neurone, which carries them to a muscle effector that contracts.",
+      "hint": "Start where the stimulus is first detected.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1mj8pl3",
+      "kind": "mistake",
+      "front": "What mistake do students make about where a reflex response is decided?",
+      "back": "They think the brain decides it. In a **reflex**, the response is controlled through the spinal cord, and the brain only receives information afterwards.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bwbzax",
+      "kind": "concept",
+      "front": "Where is the cell body of a motor neurone found?",
+      "back": "Inside the spinal cord, with many short dendrites. A long, myelinated axon leaves the cord and ends at the effector.",
+      "hint": "Compare this with the sensory neurone's position.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p2rtit",
+      "kind": "concept",
+      "front": "Where is the cell body of a sensory neurone found?",
+      "back": "To one side of the main fibre, in a swelling just outside the spinal cord, outside the CNS.",
+      "hint": "Compare this with the motor neurone's position.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19w1u8x",
+      "kind": "term",
+      "front": "What is an effector?",
+      "back": "An **effector** is a muscle that contracts or a gland that secretes, producing the response to an impulse.",
+      "sectionId": "s4"
+    }
+  ]
+}

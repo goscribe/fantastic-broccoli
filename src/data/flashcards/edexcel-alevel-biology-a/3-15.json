@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-15",
+  "topicCode": "3.15",
+  "topicName": "Polygenic and multiple allele traits",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:38.042Z",
+  "cards": [
+    {
+      "id": "0ea7u4y",
+      "kind": "term",
+      "front": "What is polygenic inheritance?",
+      "back": "The control of one characteristic by **many genes**, each adding a small effect. Height is a common example.",
+      "hint": "Compare how many genes are involved in height with blood group.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ouwa5j",
+      "kind": "concept",
+      "front": "How can a population have three ABO alleles when each person carries only two?",
+      "back": "This is **multiple alleles**: the gene has three versions, $I^A$, $I^B$ and $I^O$, across the population, but each individual carries just two of them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rxhpqa",
+      "kind": "term",
+      "front": "What is a normal distribution?",
+      "back": "A **normal distribution** is a symmetrical, bell-shaped pattern in which most values lie near the mean and few lie at the extremes.",
+      "hint": "Think about how a histogram of a polygenic trait such as height would look.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1flfvte",
+      "kind": "term",
+      "front": "What is continuous variation?",
+      "back": "Variation in which a characteristic takes any value within a **smooth range**, rather than falling into distinct categories.",
+      "hint": "Contrast it with the separate groups produced by a single gene.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xfseuk",
+      "kind": "term",
+      "front": "What is discontinuous variation?",
+      "back": "Variation in which individuals fall into **distinct categories** with no intermediate values. A bar chart suits this kind of data.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k9wnzv",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a polygenic trait is one gene with a blended effect?",
+      "back": "Several **separate genes** contribute, and each is inherited in the usual way. The blended look comes from many genes adding together, not from one gene blending.",
+      "hint": "Count how many genes are involved.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0owxyxu",
+      "kind": "term",
+      "front": "What is a genotype?",
+      "back": "The **alleles** an individual has for a particular gene, such as $I^A I^O$ for the ABO gene.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ns0njc",
+      "kind": "term",
+      "front": "What does it mean for two alleles to be codominant?",
+      "back": "**Codominant** alleles both contribute to the phenotype when an individual carries one copy of each, as $I^A$ and $I^B$ do in group AB.",
+      "hint": "Think about what a person with one copy of each allele shows.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m5udj2",
+      "kind": "mistake",
+      "front": "Why must each person's ABO genotype be shown as only two alleles?",
+      "back": "An individual has only **two alleles** of a gene, so no one carries all three ABO alleles. Show each person's two alleles separately in genetic diagrams.",
+      "hint": "How many copies of a gene does each person have?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1orukgy",
+      "kind": "example",
+      "front": "A parent with group A ($I^A I^O$) has a child with a group B parent ($I^B I^O$). What is the probability the child has group O?",
+      "back": "$\\frac{1}{4}$ or 0.25. Each parent gives $I^O$ with probability $\\frac{1}{2}$, so $I^O I^O$ has probability $\\frac{1}{2}\\times\\frac{1}{2}=\\frac{1}{4}$.",
+      "hint": "Start by listing the gametes each parent can make.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1a2md4f",
+      "kind": "process",
+      "front": "What are the steps for predicting the probability of each blood group in children?",
+      "back": "1) List the gametes each parent makes, with probabilities. 2) Combine them into all possible child genotypes. 3) Match each genotype to its blood group and add up the probabilities.",
+      "hint": "The first step is about what each parent can pass on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j77ui6",
+      "kind": "mistake",
+      "front": "Why can two group A parents have a group O child?",
+      "back": "Both may carry $I^O$, so each can pass it on to make $I^O I^O$, which gives group O. The chance is one in four.",
+      "hint": "Think about the genotypes a group A person can have.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kyzqqr",
+      "kind": "concept",
+      "front": "Why can data alone not separate the effect of genes from the effect of the environment?",
+      "back": "The environment adds to the spread, so people with similar alleles can still differ. Measurements alone cannot tell the two effects apart.",
+      "hint": "Think about what else, besides genes, can change someone's height.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hav7ms",
+      "kind": "concept",
+      "front": "Why do many genes with small effects produce a bell-shaped curve?",
+      "back": "Only people with every adding allele reach the highest values, and only those with none reach the lowest. Many combinations give middle values, so extremes are rare.",
+      "hint": "Think about how often every gene adds its effect, or none does.",
+      "sectionId": "s5"
+    }
+  ]
+}

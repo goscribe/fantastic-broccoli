@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "6-14",
+  "topicCode": "6.14",
+  "topicName": "Choosing an antidifferentiation technique",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:35.634Z",
+  "cards": [
+    {
+      "id": "1gky26o",
+      "kind": "concept",
+      "front": "When should you choose substitution for an integral?",
+      "back": "Use **substitution** when an inner expression's derivative also appears as a factor, so you can replace it with $u$. Parentheses alone are not enough.",
+      "hint": "Look for an inner function and check whether its derivative is present.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bwu9nx",
+      "kind": "process",
+      "front": "What is the simplest first move when choosing an antidifferentiation technique?",
+      "back": "**Check for a familiar derivative first.** Split sums, carry constant multiples outside, and match standard forms before changing the integrand.",
+      "hint": "Ask whether the integrand already matches a known antiderivative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ey8t3i",
+      "kind": "concept",
+      "front": "Two methods both look like they might work. How do you choose between them?",
+      "back": "Pick the method that gives a **familiar form** in the fewest steps. For example, dividing by $x$ can beat substitution for $\\int\\frac{x^2+1}{x}\\,dx$.",
+      "hint": "Compare the form each method produces, not just whether it works.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1feieqt",
+      "kind": "term",
+      "front": "What is a standard antiderivative?",
+      "back": "A **standard antiderivative** is one that follows directly from a familiar derivative rule, such as powers, exponentials, basic trig functions, and $1/x$.",
+      "hint": "Think of antiderivatives you can recall straight away.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07qltnz",
+      "kind": "mistake",
+      "front": "Is the power rule valid for $\\int\\frac{1}{x}\\,dx$?",
+      "back": "**No.** Do not apply the power rule to $1/x$. Its antiderivative is $\\ln|x|+C$.",
+      "hint": "Think about which standard antiderivative $1/x$ belongs to.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "116i8o6",
+      "kind": "concept",
+      "front": "Which rule justifies integrating $2x\\cos(x^2)$ by recognizing a derivative of a composite function?",
+      "back": "The **reverse chain rule**: the integrand is a composite function times its inner derivative. Differentiating $\\sin(x^2)$ gives $2x\\cos(x^2)$, so the antiderivative is $\\sin(x^2)+C$.",
+      "hint": "Compare the integrand with the derivative of a composite function.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ovvg55",
+      "kind": "mistake",
+      "front": "Can substitution with $u=x^2$ solve $\\int\\cos(x^2)\\,dx$?",
+      "back": "**No.** Substitution needs a $2x$ factor for $du$, and it is absent here. This integrand has no elementary antiderivative.",
+      "hint": "Check whether $du$ appears in the integrand.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dppagv",
+      "kind": "term",
+      "front": "What is polynomial division in this topic?",
+      "back": "**Polynomial division** rewrites an improper rational expression as a polynomial plus a proper rational expression.",
+      "hint": "Think about what happens when the numerator's degree is large.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0o0z3n8",
+      "kind": "process",
+      "front": "When should you use polynomial division on a rational integrand?",
+      "back": "Use it **first** when the numerator's degree is at least as large as the denominator's, then integrate the resulting pieces.",
+      "hint": "Compare the degrees of the numerator and denominator.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mz1y8w",
+      "kind": "formula",
+      "front": "Complete the square for $x^2+4x+5$. What does the result suggest?",
+      "back": "$(x+2)^2+1$. This form suggests an **arctangent** antiderivative for $\\int\\frac{1}{x^2+4x+5}\\,dx$.",
+      "hint": "Write $x^2+4x$ as a square plus a constant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cu4jma",
+      "kind": "example",
+      "front": "Find $\\int\\frac{2x}{x^2+1}\\,dx$ and justify your method.",
+      "back": "$\\ln(x^2+1)+C$. Let $u=x^2+1$, so $du=2x\\,dx$, giving $\\int\\frac{1}{u}\\,du=\\ln|u|+C$. Since $x^2+1>0$, the absolute value can be dropped.",
+      "hint": "Choose $u$ as the denominator and check the numerator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10xt3o7",
+      "kind": "example",
+      "front": "Find $\\int\\frac{x^2+1}{x}\\,dx$ using the shortest method.",
+      "back": "$\\frac{x^2}{2}+\\ln|x|+C$. Divide each term by $x$ to get $x+1/x$, then integrate each term directly.",
+      "hint": "Try splitting the fraction before any substitution.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m7njv5",
+      "kind": "example",
+      "front": "Integrate $\\int(3x^2+2\\cos x)\\,dx$ and check your answer.",
+      "back": "$x^3+2\\sin x+C$. Differentiating this result gives back the original integrand $3x^2+2\\cos x$.",
+      "hint": "Integrate each term separately, then differentiate to verify.",
+      "sectionId": "s1"
+    }
+  ]
+}

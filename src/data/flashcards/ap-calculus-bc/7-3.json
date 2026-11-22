@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "7-3",
+  "topicCode": "7.3",
+  "topicName": "Sketching slope fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:40.530Z",
+  "cards": [
+    {
+      "id": "18bp5hq",
+      "kind": "term",
+      "front": "What is a slope field?",
+      "back": "A **slope field** is a grid of short line segments, each showing the slope a solution curve would have at that point.",
+      "hint": "Think about what each small segment shows.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bbh8kb",
+      "kind": "process",
+      "front": "What are the steps for sketching a slope field?",
+      "back": "**Substitute** each marked point's coordinates into the differential equation to get its slope, then draw a short segment at that point with that tilt.",
+      "hint": "Work point by point, using both coordinates when needed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1twwh5v",
+      "kind": "concept",
+      "front": "What does the tilt of one segment tell you?",
+      "back": "The **local slope** at its own point: the direction a solution curve would take there. It does not give the value of $y$.",
+      "hint": "Focus on the direction, not the height.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0j483o6",
+      "kind": "formula",
+      "front": "In $\\frac{dy}{dx}=f(x,y)$, what slope belongs to a segment at $(x,y)$?",
+      "back": "The slope is $f(x,y)$, found by substituting $x$ and $y$ into the right side. The slope has no units here.",
+      "hint": "Replace x and y in the right side.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gkwlo6",
+      "kind": "example",
+      "front": "For $\\frac{dy}{dx}=x+y$, what is the slope at $(1,0)$?",
+      "back": "The slope is $1+0=1$, so that segment rises with slope $1$.",
+      "hint": "Add the two coordinates.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06p9uc0",
+      "kind": "formula",
+      "front": "What does a slope of $2$ look like as rise over run?",
+      "back": "A slope of $2$ means the segment rises $2$ units for every $1$ unit it runs to the right.",
+      "hint": "Write the slope as rise over run.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14sw5gq",
+      "kind": "term",
+      "front": "What is rise over run?",
+      "back": "**Rise over run** is the vertical change divided by the horizontal change along a nonvertical segment.",
+      "hint": "Compare vertical change with horizontal change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0m5n51s",
+      "kind": "mistake",
+      "front": "Can you draw a vertical segment to show a large slope?",
+      "back": "**No**. A vertical segment has zero horizontal change, so it cannot show a finite $\\frac{dy}{dx}$. Draw a steep segment instead.",
+      "hint": "What is the run of a vertical line?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19c4wiu",
+      "kind": "mistake",
+      "front": "A segment has slope $-3$. Which way should it run from left to right?",
+      "back": "It **falls**. Negative slopes always fall; a larger absolute value makes the fall steeper.",
+      "hint": "Check the sign of the slope first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cvz21n",
+      "kind": "mistake",
+      "front": "Should you join neighboring segments into one smooth curve?",
+      "back": "**No**. Each segment shows only the local direction at its own point, so joining them misrepresents the field.",
+      "hint": "Each segment belongs to one point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sd582y",
+      "kind": "concept",
+      "front": "For $\\frac{dy}{dx}=x$, what do segments in one vertical column share?",
+      "back": "They share the same **tilt**, because every point in a column has the same $x$-coordinate, so the slope is the same.",
+      "hint": "Which coordinate stays fixed in a column?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1saj5ep",
+      "kind": "concept",
+      "front": "For $\\frac{dy}{dx}=x+y$, where are the segments horizontal?",
+      "back": "Along the line $y=-x$, where $x+y=0$. These points form a **zero-slope set**.",
+      "hint": "Set the right side equal to zero.",
+      "sectionId": "s4"
+    }
+  ]
+}

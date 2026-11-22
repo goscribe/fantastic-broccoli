@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "2-12",
+  "topicCode": "2.12",
+  "topicName": "Sampling distributions and the central limit theorem",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:12.580Z",
+  "cards": [
+    {
+      "id": "15js4bp",
+      "kind": "concept",
+      "front": "What does the sampling distribution of a sample mean show?",
+      "back": "It shows every value $\\bar{x}$ can take over all random samples of the same size, including its **center**, **spread** and **shape**.",
+      "hint": "Imagine repeating the survey thousands of times and plotting each sample mean.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "046p7ry",
+      "kind": "concept",
+      "front": "What does the Central Limit Theorem say about the sampling distribution of $\\bar{x}$?",
+      "back": "For large random samples, it is approximately **normal** whatever the population shape, with mean $\\mu$ and standard deviation $\\frac{\\sigma}{\\sqrt{n}}$.",
+      "hint": "Think about what happens to skewed populations when you average many values.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b6y2mi",
+      "kind": "formula",
+      "front": "What is the standard deviation of the sampling distribution of $\\bar{x}$, and what does each symbol mean?",
+      "back": "$\\sigma_{\\bar{x}}=\\frac{\\sigma}{\\sqrt{n}}$, where $\\sigma$ is the **population** standard deviation and $n$ is the sample size. It needs $n$ to be at most 10% of the population.",
+      "hint": "Check which symbol belongs to the population and which to the sample.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ishriq",
+      "kind": "term",
+      "front": "What is the difference between a parameter and a statistic?",
+      "back": "A **parameter** describes a whole population, such as $\\mu$. A **statistic** is calculated from a sample, such as $\\bar{x}$.",
+      "hint": "Ask whether the number comes from everyone or from a sample.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nmdi8h",
+      "kind": "term",
+      "front": "Why do two random samples of the same size usually give different sample means?",
+      "back": "This is **sampling variability**: each random sample has different individuals, so the statistic changes. It is natural, not a researcher error.",
+      "hint": "Think about what changes between the two samples.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ad16ry",
+      "kind": "formula",
+      "front": "What is the mean of the sampling distribution of $\\bar{x}$, and what does it tell you?",
+      "back": "$\\mu_{\\bar{x}}=\\mu$, the **population mean**. Sample means centre on the parameter.",
+      "hint": "Compare it with the population mean.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1x8kqhk",
+      "kind": "concept",
+      "front": "How does increasing the sample size affect the spread of sample means?",
+      "back": "Larger $n$ shrinks $\\sigma_{\\bar{x}}$ because $n$ sits under a square root, so means cluster more tightly. Quadrupling $n$ halves the spread.",
+      "hint": "Look at where n sits in the formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qxqcct",
+      "kind": "mistake",
+      "front": "A student says a larger sample makes the population standard deviation $\\sigma$ smaller. What is wrong?",
+      "back": "**Wrong**: $\\sigma$ describes the population and stays the same. Only the spread of $\\bar{x}$, $\\frac{\\sigma}{\\sqrt{n}}$, shrinks as $n$ grows.",
+      "hint": "Which quantity is the sample size changing?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ixmafp",
+      "kind": "example",
+      "front": "Scores have mean 68 and standard deviation 12. What is the standard deviation of $\\bar{x}$ for random samples of size 36?",
+      "back": "$\\sigma_{\\bar{x}}=\\frac{12}{\\sqrt{36}}=2$. The mean of the sampling distribution is still 68.",
+      "hint": "Take the square root of n first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n3hixz",
+      "kind": "process",
+      "front": "What steps should you take before using a normal model for the sampling distribution of $\\bar{x}$?",
+      "back": "1) Check the **population shape**: if normal, any $n$ works. 2) If skewed or unknown, check $n\\ge 30$. 3) Confirm the sample is random and at most 10% of the population.",
+      "hint": "There are three checks, and the first decides whether the others matter.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bi4abk",
+      "kind": "example",
+      "front": "Delivery times are right skewed with mean 20 and standard deviation 8 minutes. For random samples of 64, what is $P(\\bar{x}>22)$?",
+      "back": "About **0.023**: $\\sigma_{\\bar{x}}=1$, $z=2.00$, so $P(Z>2.00)=0.0228$. The model is approximately normal because $n=64\\ge 30$.",
+      "hint": "Find the standard deviation of $\\bar{x}$ before the z-score.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0luatl1",
+      "kind": "mistake",
+      "front": "Why is a normal model risky for a small sample from a skewed population?",
+      "back": "A small sample keeps some of the population's **skew**, and the CLT does not guarantee normality. Plot the data and look for strong skew or outliers.",
+      "hint": "Think about what the CLT needs before it applies.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1n6i4nl",
+      "kind": "concept",
+      "front": "Why do averages of large samples look bell-shaped even when single values are skewed?",
+      "back": "Extreme values in opposite directions **offset** each other in an average, and one outlier carries less weight as $n$ grows, so the distribution smooths into a symmetric bell.",
+      "hint": "Think about what happens when you average a few extreme values with many ordinary ones.",
+      "sectionId": "s5"
+    }
+  ]
+}

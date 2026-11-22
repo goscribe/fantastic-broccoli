@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "6-5",
+  "topicCode": "6.5",
+  "topicName": "Behaviour of accumulation functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:19.302Z",
+  "cards": [
+    {
+      "id": "0ssfufv",
+      "kind": "concept",
+      "front": "What does the accumulation function $A(x)=\\int_a^x r(t)\\,dt$ actually measure as the upper limit $x$ moves?",
+      "back": "The **total signed change** from the fixed start $a$ up to $x$. Area above the axis adds to $A$ and area below subtracts, so $A$ is not just the latest rate.",
+      "hint": "Think about what the integral adds up as x moves right.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1skp4s7",
+      "kind": "formula",
+      "front": "How is the rate function $r$ related to the derivative of the accumulation function $A$?",
+      "back": "$A'(x)=r(x)$. The **rate** is the slope of $A$: a larger positive rate gives a steeper upward slope, and a more negative rate gives a steeper downward slope.",
+      "hint": "Compare the rate graph with the slopes of the accumulation graph.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cbkcn4",
+      "kind": "concept",
+      "front": "How does the sign of the rate $r(x)$ tell you what the accumulation function $A$ is doing?",
+      "back": "$A$ is **increasing** where $r(x)>0$ and **decreasing** where $r(x)<0$. It is constant only over intervals where the rate is zero throughout.",
+      "hint": "Match the sign of the rate with the direction of change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ckrss2",
+      "kind": "term",
+      "front": "What is an accumulation function?",
+      "back": "A function that gives the **integral** of a rate from a fixed starting point to a variable endpoint. It is written $A(x)=\\int_a^x r(t)\\,dt$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07gsarz",
+      "kind": "formula",
+      "front": "What is the value of $A(a)$ for $A(x)=\\int_a^x r(t)\\,dt$, and why?",
+      "back": "$A(a)=0$. **No change** has accumulated yet, because the upper limit equals the fixed starting value.",
+      "hint": "What is the integral from a to a?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ffv798",
+      "kind": "term",
+      "front": "What is a stationary point of an accumulation function?",
+      "back": "A **stationary point** is a point where $A'(x)=0$, provided the derivative exists. At such a point the graph of $A$ has zero slope.",
+      "hint": "Where is the rate zero?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uticcj",
+      "kind": "concept",
+      "front": "How does the rate's sign change at a stationary point tell you if $A$ has a max or min?",
+      "back": "A rate going from **positive to negative** gives a local maximum. A rate going from negative to positive gives a local minimum.",
+      "hint": "Look at the sign of r just before and after the point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07qdzvn",
+      "kind": "mistake",
+      "front": "If the rate is negative, does that mean the accumulated value $A(x)$ is negative?",
+      "back": "No. A **negative rate** means $A$ is decreasing. The value of $A(x)$ can still be positive.",
+      "hint": "Separate the value of A from the direction it is moving.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t119ch",
+      "kind": "mistake",
+      "front": "If the rate touches zero but does not change sign, does $A$ get a turning point?",
+      "back": "No. The graph has a **stationary point** there, but $A$ keeps moving in the same direction on both sides.",
+      "hint": "Check whether the sign of r changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1acq2lg",
+      "kind": "concept",
+      "front": "What does a rate that is increasing tell you about the shape of the accumulation graph?",
+      "back": "$A$ is **concave up**, because its slopes increase. When the rate is decreasing, $A$ bends downward (concave down).",
+      "hint": "Think about how the slopes of A behave.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dtwe7r",
+      "kind": "formula",
+      "front": "Which formula links the concavity of $A$ to the rate $r$?",
+      "back": "$A''(x)=r'(x)$. The **derivative of the rate** sets the bending: positive gives upward bending and negative gives downward bending.",
+      "hint": "Differentiate A twice.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qh4xd8",
+      "kind": "process",
+      "front": "What are the steps to sketch an accumulation graph from a rate graph?",
+      "back": "1) Start at **$A(a)=0$**. 2) Use signed areas to find other values of $A$. 3) Use the rate's signs and sizes to shape the curve between those values.",
+      "hint": "Do not copy the rate graph.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ekyblr",
+      "kind": "example",
+      "front": "For $A(x)=\\int_0^x(2-t)\\,dt$, what is $A(3)$?",
+      "back": "$A(3)=\\frac{3}{2}$ units of accumulated change, from $\\left[2t-\\frac{t^2}{2}\\right]_0^3=6-\\frac{9}{2}$.",
+      "hint": "Integrate $2-t$ and substitute the limits.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02rlqcl",
+      "kind": "example",
+      "front": "For $r(x)=2-x$ on $0\\leq x\\leq4$ with $A(x)=\\int_0^x r(t)\\,dt$, where does $A$ increase and decrease, and where is its maximum?",
+      "back": "$A$ **increases** up to $x=2$, then decreases. The rate changes from positive to negative at $x=2$, giving a maximum there. $A$ bends downward throughout.",
+      "hint": "Find where the rate changes sign.",
+      "sectionId": "s4"
+    }
+  ]
+}

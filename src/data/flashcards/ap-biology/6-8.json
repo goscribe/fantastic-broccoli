@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "6-8",
+  "topicCode": "6.8",
+  "topicName": "Biotechnology",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:48.354Z",
+  "cards": [
+    {
+      "id": "0busyak",
+      "kind": "term",
+      "front": "What does PCR do, and what three stages repeat in each cycle?",
+      "back": "**PCR** copies a chosen DNA region outside a cell. Each cycle heats to separate the strands, cools so primers bind, then a heat-stable polymerase extends the primers.",
+      "hint": "Think heat, cool, then build.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0134u6o",
+      "kind": "process",
+      "front": "How is a recombinant plasmid made?",
+      "back": "A **restriction enzyme** cuts the plasmid and the gene so their ends are compatible. Then **DNA ligase** joins the sugar-phosphate backbones, producing recombinant DNA.",
+      "hint": "Two steps: cut, then join.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09gbatr",
+      "kind": "concept",
+      "front": "Why do smaller DNA fragments travel farther in gel electrophoresis?",
+      "back": "DNA is **negatively charged**, so it moves toward the positive electrode. The gel slows larger fragments more, so smaller fragments usually travel farther from the wells.",
+      "hint": "Think about charge and the gel's resistance.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1x6qmru",
+      "kind": "term",
+      "front": "What is a DNA ladder used for?",
+      "back": "A **DNA ladder** is a mixture of fragments of known sizes. Comparing sample bands with it helps estimate the sizes of the sample fragments.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ntd57h",
+      "kind": "term",
+      "front": "What job do primers do in PCR?",
+      "back": "**Primers** are short DNA strands that bind beside the target region. They define which region is copied and give the polymerase a starting point.",
+      "hint": "Where does the polymerase start?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rqu1j4",
+      "kind": "term",
+      "front": "What is a plasmid, and why is it useful in recombinant DNA work?",
+      "back": "A **plasmid** is a small, usually circular DNA molecule. It can carry inserted DNA into a cell, such as a bacterium.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ldh4ci",
+      "kind": "example",
+      "front": "Give a medical application of recombinant DNA in bacteria.",
+      "back": "Making a **human protein**, such as insulin. The human gene is inserted into a plasmid, and with suitable control sequences the bacteria make the protein for medical use.",
+      "hint": "Think of a medicine people need.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1x2ii2i",
+      "kind": "mistake",
+      "front": "A student says PCR makes an organism express the copied gene. What is wrong?",
+      "back": "**PCR** only copies DNA. It does not make an organism express the copied gene.",
+      "hint": "What does PCR actually produce?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1thsrmq",
+      "kind": "mistake",
+      "front": "A PCR test shows no band. Does that prove the sequence was absent?",
+      "back": "**No.** Poor sample quality or a failed reaction can also prevent amplification, so a negative result does not always prove the sequence was absent.",
+      "hint": "Consider what else could go wrong.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09ykqkk",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume a successfully inserted gene will always make its protein?",
+      "back": "**Insertion** alone does not guarantee expression. Making the protein also requires suitable expression controls.",
+      "hint": "Copying a gene is different from producing its protein.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rxevo2",
+      "kind": "term",
+      "front": "What is genetic engineering?",
+      "back": "**Genetic engineering** is the deliberate modification of an organism's DNA. Its benefits include medicines and useful crop traits, but it can also carry risks.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y1y0dw",
+      "kind": "concept",
+      "front": "Why is germline editing an ethical concern?",
+      "back": "**Germline** changes can be passed to future generations. Those individuals cannot consent to changes inherited from earlier editing.",
+      "hint": "Think about who receives the change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wg4dtd",
+      "kind": "concept",
+      "front": "What should an ethical evaluation of genetic engineering weigh?",
+      "back": "It weighs **likely benefits against risks**, considering who receives the benefits, who bears the risks, and how use is controlled. Fair access also matters.",
+      "hint": "Four questions to ask.",
+      "sectionId": "s4"
+    }
+  ]
+}

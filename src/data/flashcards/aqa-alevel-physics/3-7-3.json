@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-7-3",
+  "topicCode": "3.7.3",
+  "topicName": "Electric fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:44.799Z",
+  "cards": [
+    {
+      "id": "0q0obvo",
+      "kind": "term",
+      "front": "What is an electric field?",
+      "back": "An **electric field** is a region where an electric charge experiences an electric force, even without touching the charge that creates it.",
+      "hint": "Think about the balloon that sticks to a wall.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1m1wy6y",
+      "kind": "formula",
+      "front": "Write Coulomb's law as a formula and say what each symbol means, with units.",
+      "back": "$F=\\frac{Q_1Q_2}{4\\pi\\varepsilon_0r^2}$: $F$ is force in $\\mathrm{N}$, $Q_1$ and $Q_2$ are charges in $\\mathrm{C}$, $r$ is separation in $\\mathrm{m}$, and $\\varepsilon_0$ is the **permittivity of free space**, $8.85\\times10^{-12}\\,\\mathrm{F\\,m^{-1}}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1seiwhb",
+      "kind": "formula",
+      "front": "What is the equation for electric field strength, and what is its unit?",
+      "back": "$E=\\frac{F}{Q}$, where $F$ is the electric force in $\\mathrm{N}$ and $Q$ is the test charge in $\\mathrm{C}$. The unit is $\\mathrm{N\\,C^{-1}}$.",
+      "hint": "Compare with how gravitational field strength is defined.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bjjmh9",
+      "kind": "mistake",
+      "front": "Which way is a negative charge pushed when placed in an electric field?",
+      "back": "It is pushed **opposite** to the field direction. Field arrows show the force on a positive charge, so a negative charge feels the reverse.",
+      "hint": "Which type of charge does the field arrow describe?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a48luk",
+      "kind": "example",
+      "front": "What is the force between a +2.0 nC charge and a -3.0 nC charge 4.0 cm apart?",
+      "back": "About $3.4\\times10^{-5}\\,\\mathrm{N}$, attractive. Convert to coulombs and metres, then use $F=\\frac{Q_1Q_2}{4\\pi\\varepsilon_0r^2}$. The charges are unlike, so the force is attractive.",
+      "hint": "Convert nanocoulombs and centimetres before substituting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c6ge2r",
+      "kind": "concept",
+      "front": "What happens to the electric force between two point charges if their separation doubles?",
+      "back": "The force falls to **one quarter** of its original value. It is inversely proportional to the square of the separation, as with gravity.",
+      "hint": "Look at the $r^2$ term in Coulomb's law.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yu9zg7",
+      "kind": "concept",
+      "front": "What do the spacing of field lines tell you about a field?",
+      "back": "Field lines are **closer together** where the field is stronger. They show direction and strength together, and they never cross.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vwv9m0",
+      "kind": "concept",
+      "front": "What pattern of field lines appears between oppositely charged parallel plates?",
+      "back": "The lines are straight, parallel and evenly spaced, giving a **uniform electric field**. Its strength is the same at every point between the plates, away from the edges.",
+      "hint": "Compare with the lines spreading out from a single point charge.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04yphd4",
+      "kind": "formula",
+      "front": "What equation gives the field strength between two parallel plates, and what does each symbol mean?",
+      "back": "$E=\\frac{V}{d}$, where $V$ is the potential difference in $\\mathrm{V}$ between the plates and $d$ is their separation in $\\mathrm{m}$. The unit $\\mathrm{V\\,m^{-1}}$ equals $\\mathrm{N\\,C^{-1}}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qky53j",
+      "kind": "example",
+      "front": "What force acts on an electron between plates 5.0 cm apart with a potential difference of 400 V?",
+      "back": "About $1.3\\times10^{-15}\\,\\mathrm{N}$. First find $E=\\frac{400}{0.050}=8.0\\times10^{3}\\,\\mathrm{V\\,m^{-1}}$, then use $F=EQ$ with $Q=1.60\\times10^{-19}\\,\\mathrm{C}$.",
+      "hint": "Find the field strength first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02nyz9v",
+      "kind": "term",
+      "front": "What is electric potential at a point?",
+      "back": "The **electric potential** is the work done per unit positive charge in bringing a test charge from infinity to that point. For a point charge, $V=\\frac{Q}{4\\pi\\varepsilon_0r}$, in $\\mathrm{J\\,C^{-1}}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1od5nr8",
+      "kind": "mistake",
+      "front": "Why can electric potential be negative, unlike what you might expect from gravity?",
+      "back": "Electric potential is **negative near a negative charge** and positive near a positive charge. Gravitational potential is always negative because gravity only attracts.",
+      "hint": "Compare the sign of the source with the sign of the potential.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05h1rcp",
+      "kind": "concept",
+      "front": "Why do field lines always meet equipotential surfaces at right angles?",
+      "back": "No work is done moving a charge along an equipotential, so the field has no component along it. The field must therefore be perpendicular to the surface.",
+      "hint": "Use the idea that work done is $Q\\Delta V$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "083juqk",
+      "kind": "concept",
+      "front": "What is the source of a gravitational field compared with an electric field?",
+      "back": "A gravitational field comes from **mass** and acts on mass. An electric field comes from **charge** and acts on charge.",
+      "sectionId": "s6"
+    }
+  ]
+}

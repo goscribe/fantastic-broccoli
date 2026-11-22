@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-16",
+  "topicCode": "1.16",
+  "topicName": "Using science to reduce health risks",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:59.157Z",
+  "cards": [
+    {
+      "id": "0gjs6o3",
+      "kind": "term",
+      "front": "What is a correlation?",
+      "back": "A **correlation** is when one factor changes and an outcome tends to change with it. It shows a link but does not yet explain it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mjcyge",
+      "kind": "concept",
+      "front": "How do researchers move from a correlation towards a cause?",
+      "back": "They look for several kinds of evidence that agree, such as a control group, a plausible **mechanism** and repeated results.",
+      "hint": "Think about what makes a link more convincing than a pattern alone.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "116d820",
+      "kind": "concept",
+      "front": "How do expert groups turn many studies into health advice?",
+      "back": "They review many studies, judge sample size, controls and agreement, then write a **guideline** from the overall weight of evidence.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wikzsf",
+      "kind": "term",
+      "front": "What is a confounding variable?",
+      "back": "A **confounding variable** is another factor, besides the one studied, that affects the outcome and can distort the result.",
+      "hint": "Consider the coffee and smoking example.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10j19ss",
+      "kind": "term",
+      "front": "What is a causal relationship?",
+      "back": "A **causal relationship** exists when a change in one factor directly produces a change in another.",
+      "hint": "Compare with a correlation, where two factors merely change together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1r6bjdx",
+      "kind": "term",
+      "front": "What is a control group?",
+      "back": "A **control group** is treated in the same way as the test group except for the factor being tested. Comparing the two shows that factor's effect.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13k39d7",
+      "kind": "concept",
+      "front": "Why does a larger sample size give more reliable evidence?",
+      "back": "A large sample reduces the chance that a few unusual individuals distort the result.",
+      "hint": "Think about what one unusual person does to the average of a small group.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gca14y",
+      "kind": "formula",
+      "front": "How is the percentage of a group affected calculated?",
+      "back": "Percentage = $\\frac{\\mathrm{number\\ affected}}{\\mathrm{group\\ size}}\\times100$. Using percentages allows fair comparison of groups of different sizes.",
+      "hint": "Think about comparing a part with the whole.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15pgxg7",
+      "kind": "example",
+      "front": "In a study, 18 of 300 people on a diet developed a disease. What percentage were affected?",
+      "back": "$\\frac{18}{300}\\times100=6.0\\%$, so **6.0%** of the group were affected.",
+      "hint": "Put the number affected on top and the group size underneath.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tqvvh6",
+      "kind": "term",
+      "front": "What is peer review?",
+      "back": "Peer review is the evaluation of a scientific report by **independent experts** in the same field before it is published.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0p07172",
+      "kind": "process",
+      "front": "What are the steps of peer review, in order?",
+      "back": "Researchers submit a report to a journal. Independent experts judge the methods, data and conclusions. They accept, ask for changes or reject it. Accepted work is published.",
+      "hint": "Start with who sends the report and where.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12bfdlk",
+      "kind": "term",
+      "front": "What is replication?",
+      "back": "**Replication** is repeating an investigation, usually by other scientists, to see whether the same results are obtained. Replicated results are more trustworthy.",
+      "hint": "Think about who repeats the work and why.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jp3u2m",
+      "kind": "mistake",
+      "front": "Why should you be cautious about a health claim reported in the news?",
+      "back": "News may exaggerate a finding or describe work nobody independent has checked. Check whether it was peer reviewed, how large the sample was and whether it had a control group.",
+      "hint": "Compare with what peer review has already checked.",
+      "sectionId": "s6"
+    }
+  ]
+}

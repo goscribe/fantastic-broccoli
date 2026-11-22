@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-6",
+  "topicCode": "3.6",
+  "topicName": "Trigonometric identities",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:24.785Z",
+  "cards": [
+    {
+      "id": "0xrzncc",
+      "kind": "formula",
+      "front": "What is the Pythagorean identity, and why does it hold for every angle?",
+      "back": "$\\sin^2\\theta+\\cos^2\\theta=1$. The point at angle $\\theta$ is $(\\cos\\theta,\\sin\\theta)$, which lies on the **unit circle**, so $x^2+y^2=1$ holds for every angle.",
+      "hint": "Think about the coordinates of a point on the unit circle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gdqdsg",
+      "kind": "formula",
+      "front": "What is the quotient identity for tangent, and for which angles is it valid?",
+      "back": "$\\tan\\theta=\\frac{\\sin\\theta}{\\cos\\theta}$, valid for every angle with $\\cos\\theta\\ne0$. It does not apply at $90^{\\circ}$, where the right side would divide by zero.",
+      "hint": "What happens to the denominator at 90 degrees?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0moeefv",
+      "kind": "concept",
+      "front": "What makes an identity different from an equation such as $\\sin\\theta=\\frac{1}{2}$?",
+      "back": "An **identity** holds for every allowed value of its variable. An equation like $\\sin\\theta=\\frac{1}{2}$ is true only for certain angles, which you solve to find.",
+      "hint": "Ask whether the statement works for all allowed values or only some.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gacy10",
+      "kind": "formula",
+      "front": "How can you rearrange the Pythagorean identity to get $\\cos^2\\theta$ in terms of $\\sin^2\\theta$?",
+      "back": "$\\cos^2\\theta=1-\\sin^2\\theta$. Subtract $\\sin^2\\theta$ from both sides of $\\sin^2\\theta+\\cos^2\\theta=1$.",
+      "hint": "Move one squared term to the other side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e24xik",
+      "kind": "example",
+      "front": "Given $\\sin\\theta=\\frac{5}{13}$ with $\\theta$ obtuse, find $\\cos\\theta$.",
+      "back": "$\\cos\\theta=-\\frac{12}{13}$. Since $\\cos^2\\theta=1-\\frac{25}{169}=\\frac{144}{169}$, and an obtuse angle has negative cosine, the answer is negative.",
+      "hint": "Find the square first, then choose the sign from the quadrant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oxulfq",
+      "kind": "mistake",
+      "front": "A student takes $\\cos^2\\theta=\\frac{144}{169}$ with an obtuse angle and writes $\\cos\\theta=\\frac{12}{13}$. What is wrong?",
+      "back": "The **sign** is lost. A square root gives both $\\pm$, and the quadrant decides which applies. An obtuse angle has negative cosine, so $\\cos\\theta=-\\frac{12}{13}$.",
+      "hint": "Which quadrant is an obtuse angle in, and what sign does cosine have there?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tnc7uv",
+      "kind": "concept",
+      "front": "What does $\\sin^2\\theta$ mean, and what does it not mean?",
+      "back": "$\\sin^2\\theta$ means $(\\sin\\theta)^2$. It does not mean $\\sin(\\theta^2)$.",
+      "hint": "The square applies to which part of the expression?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03v4zvv",
+      "kind": "process",
+      "front": "What are the steps for simplifying a trigonometric expression?",
+      "back": "Rewrite every tangent as sine over cosine. Replace $1-\\cos^2\\theta$ with $\\sin^2\\theta$ or $1-\\sin^2\\theta$ with $\\cos^2\\theta$. Factorise and cancel common factors. Stop when no further simplification is possible.",
+      "hint": "Start by removing tangents.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e4509p",
+      "kind": "mistake",
+      "front": "Can you cancel the sines in $\\frac{1+\\sin\\theta}{\\sin\\theta}$?",
+      "back": "**No**. You can cancel factors, never terms. Here $\\sin\\theta$ is added to 1 in the numerator, so it is not a common factor.",
+      "hint": "Is $\\sin\\theta$ a factor of the whole numerator?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p85xk4",
+      "kind": "example",
+      "front": "Simplify $\\frac{1-\\cos^2\\theta}{\\sin\\theta\\cos\\theta}$.",
+      "back": "$\\tan\\theta$. Replace $1-\\cos^2\\theta$ with $\\sin^2\\theta$, cancel one $\\sin\\theta$ to get $\\frac{\\sin\\theta}{\\cos\\theta}$, then use the quotient identity.",
+      "hint": "Which identity replaces the numerator?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13lflas",
+      "kind": "process",
+      "front": "How should you begin a proof of a trigonometric identity?",
+      "back": "Start with the more complicated side and apply identities step by step until it matches the other side. Do not move terms across the equals sign, because that assumes the result you are proving.",
+      "hint": "Which side should you work on?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bdjzyx",
+      "kind": "example",
+      "front": "Prove that $\\tan\\theta+\\frac{1}{\\tan\\theta}=\\frac{1}{\\sin\\theta\\cos\\theta}$. What is the key steps?",
+      "back": "Rewrite $\\tan\\theta$ as $\\frac{\\sin\\theta}{\\cos\\theta}$ to get $\\frac{\\sin\\theta}{\\cos\\theta}+\\frac{\\cos\\theta}{\\sin\\theta}$. Combine over a common denominator to get $\\frac{\\sin^2\\theta+\\cos^2\\theta}{\\sin\\theta\\cos\\theta}$, then apply the Pythagorean identity.",
+      "hint": "Write everything in sine and cosine first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "016l5v8",
+      "kind": "formula",
+      "front": "Dividing the Pythagorean identity by $\\cos^2\\theta$ gives which other form?",
+      "back": "$\\tan^2\\theta+1=\\frac{1}{\\cos^2\\theta}$. It is valid wherever the denominators are non-zero.",
+      "hint": "Divide every term by $\\cos^2\\theta$.",
+      "sectionId": "s5"
+    }
+  ]
+}

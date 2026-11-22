@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "9-7",
+  "topicCode": "9.7",
+  "topicName": "Polar coordinates and polar derivatives",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:06.847Z",
+  "cards": [
+    {
+      "id": "1eyq06f",
+      "kind": "formula",
+      "front": "What formula gives the slope dy/dx of a polar curve r = f(θ)?",
+      "back": "$\\frac{dy}{dx}=\\frac{dy/d\\theta}{dx/d\\theta}$, valid when $\\frac{dx}{d\\theta}\\neq0$. Treat **θ** as a parameter, because both x and y depend on it.",
+      "hint": "Think of θ as a parameter.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16dtgz2",
+      "kind": "formula",
+      "front": "Which equations turn a polar point (r, θ) into Cartesian coordinates (x, y)?",
+      "back": "$x=r\\cos\\theta$ and $y=r\\sin\\theta$. They hold for every point, including negative r and angles past a quarter turn.",
+      "hint": "Draw the right triangle with hypotenuse r.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "155r25b",
+      "kind": "concept",
+      "front": "How do you tell whether a polar curve has a horizontal or vertical tangent?",
+      "back": "A **horizontal** tangent occurs where $\\frac{dy}{d\\theta}=0$ with $\\frac{dx}{d\\theta}\\neq0$. A **vertical** tangent occurs where $\\frac{dx}{d\\theta}=0$ with $\\frac{dy}{d\\theta}\\neq0$.",
+      "hint": "Check which derivative is zero.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0bnw7dt",
+      "kind": "formula",
+      "front": "What are dy/dθ and dx/dθ when x = r cos θ and y = r sin θ?",
+      "back": "$\\frac{dy}{d\\theta}=\\frac{dr}{d\\theta}\\sin\\theta+r\\cos\\theta$ and $\\frac{dx}{d\\theta}=\\frac{dr}{d\\theta}\\cos\\theta-r\\sin\\theta$. The product rule gives both.",
+      "hint": "Rebuild them from x and y rather than memorizing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17l7uey",
+      "kind": "process",
+      "front": "What are the steps to find the slope of a polar curve at a given θ?",
+      "back": "1) Find $\\frac{dr}{d\\theta}$. 2) Substitute into $\\frac{dx}{d\\theta}$ and $\\frac{dy}{d\\theta}$. 3) Evaluate both at the given θ. 4) Divide to get $\\frac{dy}{dx}$.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uzaioi",
+      "kind": "process",
+      "front": "How do you convert a Cartesian point (x, y) to polar coordinates?",
+      "back": "Find $r=\\sqrt{x^2+y^2}$ and $\\tan\\theta=\\frac{y}{x}$. Then use the quadrant of (x, y) to choose θ, since a calculator only returns values between $-\\frac{\\pi}{2}$ and $\\frac{\\pi}{2}$.",
+      "hint": "The calculator angle alone can be wrong.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ucivzs",
+      "kind": "mistake",
+      "front": "A student converts (-1, 1) and takes θ = -π/4 from the calculator. What is wrong?",
+      "back": "The point is in quadrant II, so θ should be $\\frac{3\\pi}{4}$. Opposite quadrants share a tangent, so the calculator angle must be shifted by **π**.",
+      "hint": "Find the quadrant first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jbi1dt",
+      "kind": "mistake",
+      "front": "Do the polar points $\\left(2,\\frac{\\pi}{6}\\right)$ and $\\left(-2,\\frac{\\pi}{6}\\right)$ name the same point?",
+      "back": "No. A **negative** r places the point |r| units from the pole in the opposite direction, so the second point lies on the other side of the pole.",
+      "hint": "Think about the direction that r points.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mep1j3",
+      "kind": "example",
+      "front": "Convert the polar point $\\left(4,\\frac{\\pi}{3}\\right)$ to Cartesian coordinates.",
+      "back": "$\\left(2,2\\sqrt3\\right)$. Here $x=4\\cos\\frac{\\pi}{3}=2$ and $y=4\\sin\\frac{\\pi}{3}=2\\sqrt3$.",
+      "hint": "Use x = r cos θ and y = r sin θ.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1imjosz",
+      "kind": "example",
+      "front": "Find the slope of the tangent to $r=2\\cos\\theta$ at $\\theta=\\frac{\\pi}{6}$.",
+      "back": "$-\\frac{\\sqrt3}{3}\\approx-0.577$. At that angle $\\frac{dy}{d\\theta}=1$ and $\\frac{dx}{d\\theta}=-\\sqrt3$.",
+      "hint": "Find dr/dθ first, then both derivatives.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1etle0s",
+      "kind": "concept",
+      "front": "What does the sign of dr/dθ tell you about a polar curve?",
+      "back": "A **positive** dr/dθ means the distance from the pole grows as θ increases, so the curve moves away from the pole. A negative value means it moves toward the pole.",
+      "hint": "Think about distance from the pole.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0bmgehp",
+      "kind": "mistake",
+      "front": "Is dr/dθ the same as the slope of the tangent line?",
+      "back": "No. dr/dθ measures how the distance from the pole changes with θ. The tangent slope is $\\frac{dy}{dx}$, so the two are different quantities.",
+      "hint": "Which one measures distance from the pole?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0g8ww5e",
+      "kind": "term",
+      "front": "What is a parameter in the context of a polar curve?",
+      "back": "A **parameter** is a third variable that both x and y depend on. For a polar curve, the parameter is the angle θ.",
+      "hint": "Which variable do both x and y depend on?",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-17",
+  "topicCode": "5.17",
+  "topicName": "Sustainable forestry",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:10.214Z",
+  "cards": [
+    {
+      "id": "1gcor1y",
+      "kind": "term",
+      "front": "What is the sustainable yield of a forest?",
+      "back": "The **sustainable yield** is the amount of timber that can be harvested over time without reducing the forest's ability to regrow.",
+      "hint": "Think about the limit that keeps timber supplies from running out.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19xis4e",
+      "kind": "concept",
+      "front": "Why does selective cutting protect soil better than removing every tree from an area?",
+      "back": "The remaining trees keep their **roots** in the ground, so the roots keep holding the soil and erosion stays low.",
+      "hint": "Think about what happens to bare ground when roots have nothing holding it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cucn4g",
+      "kind": "mistake",
+      "front": "Why is it wrong to think sustainable forestry means no trees are ever cut?",
+      "back": "Sustainable forestry does cut trees. It means **cutting** in ways the forest can recover from, staying within what the forest regrows.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wn6pbr",
+      "kind": "concept",
+      "front": "What happens to the forest floor when selective cutting opens small gaps in the canopy?",
+      "back": "More **sunlight** reaches the forest floor through the canopy gaps, so young trees grow faster.",
+      "hint": "Think about what the upper layer of tall trees blocks.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0he9xrt",
+      "kind": "term",
+      "front": "What is sustainable forestry?",
+      "back": "**Sustainable forestry** is managing forests so that timber harvest does not exceed regrowth and the forest's ecosystem functions are kept going.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0825fap",
+      "kind": "term",
+      "front": "What is replanting in forestry?",
+      "back": "**Replanting** is planting seedlings or seeds in harvested or disturbed ground to re-establish a forest.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qbuiex",
+      "kind": "concept",
+      "front": "Why should replanting happen soon after logging ends?",
+      "back": "Young trees quickly **protect the soil**, restore shade, and start storing carbon again.",
+      "hint": "Think about what bare, unshaded ground loses over time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v062tt",
+      "kind": "term",
+      "front": "What is a monoculture in forest planting?",
+      "back": "A **monoculture** is a stand made up of a single species, often planted in uniform rows.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0150n38",
+      "kind": "mistake",
+      "front": "Why does a replanted stand not instantly match the old forest?",
+      "back": "Young trees lack the **habitat structure** and carbon storage of mature trees, so replanting does not restore them straight away.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02pq4vd",
+      "kind": "concept",
+      "front": "Why is planting a mix of native species better than a monoculture?",
+      "back": "It supports more wildlife and gives a sturdier forest, because one **pest or disease** cannot spread easily through a mix of different trees.",
+      "hint": "Think about what happens when every tree in a stand is identical.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iqqqez",
+      "kind": "term",
+      "front": "What is a buffer strip?",
+      "back": "A **buffer strip** is a band of uncut vegetation beside a stream or lake that shades the water and filters runoff.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vya168",
+      "kind": "term",
+      "front": "What is a rotation in forest management?",
+      "back": "A **rotation** is the planned number of years between harvests of the same area, giving trees time to mature and habitat time to rebuild.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xnpgml",
+      "kind": "term",
+      "front": "What is forest certification?",
+      "back": "**Forest certification** is an independent review confirming that timber comes from forests managed to meet set sustainability standards.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1eya1by",
+      "kind": "concept",
+      "front": "Why might a manager accept the higher time cost of selective cutting?",
+      "back": "It protects habitat and soil, which keeps the forest **productive** for later harvests.",
+      "hint": "Think about what happens to future timber income if the forest is damaged now.",
+      "sectionId": "s5"
+    }
+  ]
+}

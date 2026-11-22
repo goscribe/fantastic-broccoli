@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "14-7",
+  "topicCode": "14.7",
+  "topicName": "Diffraction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:38.431Z",
+  "cards": [
+    {
+      "id": "0lxmyw5",
+      "kind": "concept",
+      "front": "What two lengths decide how strongly a wave diffracts through an opening?",
+      "back": "The **wavelength** $\\lambda$ compared with the aperture width $a$. The ratio $\\frac{\\lambda}{a}$ sets the spreading: a larger ratio means more spreading.",
+      "hint": "Think about what gets compared, not one length alone.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zli9d1",
+      "kind": "term",
+      "front": "What is diffraction?",
+      "back": "**Diffraction** is the spreading of a wave as it passes through an opening or around the edge of an obstacle, so it bends into the region behind.",
+      "hint": "Think of sound reaching you around a corner.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ogq4oi",
+      "kind": "concept",
+      "front": "Why does sound bend through a doorway while light mostly travels straight?",
+      "back": "Sound's wavelength of about 1 m is comparable to a doorway's width, so it spreads strongly. Light's wavelength is far smaller than the doorway, so it barely spreads.",
+      "hint": "Compare each wavelength with the width of the door.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0t9c6zv",
+      "kind": "term",
+      "front": "What is an aperture in diffraction?",
+      "back": "An **aperture** is the opening a wave passes through, such as a slit or gap. Its width $a$ is measured in meters.",
+      "hint": "It is the gap, not the wave itself.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0z6iax7",
+      "kind": "concept",
+      "front": "How does the spreading change when $a$ is much larger than $\\lambda$, comparable to $\\lambda$, or smaller than $\\lambda$?",
+      "back": "Much larger $a$ gives very little spreading. Comparable $a$ gives strong spreading. Smaller $a$ gives almost even spreading in all forward directions.",
+      "hint": "Go through the three cases in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c8oz0v",
+      "kind": "example",
+      "front": "A 340 Hz sound travels at 340 m/s through a 0.90 m doorway. What is $\\frac{\\lambda}{a}$ for the sound?",
+      "back": "$\\lambda=1.0\\,\\mathrm{m}$, so $\\frac{\\lambda}{a}\\approx1.1$. The ratio is close to 1, so the sound spreads strongly through the doorway.",
+      "hint": "Find the wavelength with $v=f\\lambda$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yqz0yp",
+      "kind": "mistake",
+      "front": "A student says a narrow slit alone explains the spreading. What is missing?",
+      "back": "The **wavelength** must be compared with the opening width. Spreading depends on $\\frac{\\lambda}{a}$, not on the slit being narrow by itself.",
+      "hint": "Which other length matters here?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04pdiwx",
+      "kind": "term",
+      "front": "What is the central maximum in a single-slit pattern?",
+      "back": "The **central maximum** is the wide, bright band centered straight ahead of the slit. Dark minima lie on each side because waves from different parts of the slit cancel.",
+      "hint": "Where is the brightest region on the screen?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0s9zrn7",
+      "kind": "formula",
+      "front": "What does the single-slit condition $a\\sin\\theta=\\lambda$ tell you about the first dark minimum?",
+      "back": "It gives the angle $\\theta$ from the center line where the first minimum lies. A smaller $a$ gives a larger $\\sin\\theta$, so the central maximum becomes wider.",
+      "hint": "Which symbol changes when the slit is narrowed?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l739pg",
+      "kind": "mistake",
+      "front": "Is diffraction only important for very narrow slits?",
+      "back": "No. Large openings diffract too, but the effect is too small to see. Diffraction is clear when the opening is comparable to or smaller than the wavelength.",
+      "hint": "Think about how big the effect is, not whether it exists.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1abpj8t",
+      "kind": "process",
+      "front": "How can you check whether a wave will spread strongly through an opening?",
+      "back": "Find the wavelength $\\lambda$, measure the opening width $a$, then form $\\frac{\\lambda}{a}$. A ratio near 1 or larger means strong spreading; a tiny ratio means little spreading.",
+      "hint": "Start with the two lengths, then compare them as a ratio.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0brwtp6",
+      "kind": "example",
+      "front": "Why do radio signals keep working when buildings block the direct path?",
+      "back": "Radio waves have long wavelengths, so they bend around buildings through diffraction and keep reception going.",
+      "hint": "Connect the long wavelength to the size of buildings.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1jzg4t9",
+      "kind": "example",
+      "front": "Why do the edges of a large object's shadow in sunlight look fairly sharp?",
+      "back": "Light's wavelength is far smaller than the object, so $\\frac{\\lambda}{a}$ is tiny and diffraction at the edges is very small.",
+      "hint": "Compare light's wavelength with the size of the object.",
+      "sectionId": "s3"
+    }
+  ]
+}

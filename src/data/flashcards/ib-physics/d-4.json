@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "d-4",
+  "topicCode": "D.4",
+  "topicName": "Induction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:57.008Z",
+  "cards": [
+    {
+      "id": "0ygflbj",
+      "kind": "formula",
+      "front": "What equation gives the induced emf for N identical turns, and what does its minus sign show?",
+      "back": "$\\varepsilon=-N\\frac{d\\Phi}{dt}$: the **induced emf** (V) equals minus N times the rate of change of flux. The minus sign gives the direction, as in Lenz's law.",
+      "hint": "Think about the rate of change of flux, not the flux itself.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0conkex",
+      "kind": "concept",
+      "front": "What does Lenz's law tell you about an induced current?",
+      "back": "An induced current flows in the **direction that opposes** the change in flux producing it. It opposes the change, not necessarily the existing field.",
+      "hint": "Ask whether the flux through the coil is increasing or decreasing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03art75",
+      "kind": "concept",
+      "front": "Why does a coil rotating at constant speed in a magnetic field produce an alternating emf?",
+      "back": "Rotation changes the flux linkage, so an **emf** is induced. The rate of change of flux reverses sign each half-turn, so the emf reverses polarity.",
+      "hint": "Consider how the flux through the coil changes as it turns.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uo5xlr",
+      "kind": "term",
+      "front": "What is magnetic flux through a flat surface in a uniform field?",
+      "back": "**Magnetic flux** is $\\Phi=BA\\cos\\theta$, where $B$ is flux density, $A$ is area and $\\theta$ is measured from the surface normal. Its unit is the weber (Wb).",
+      "hint": "How much field passes through the enclosed area?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bmwsxo",
+      "kind": "term",
+      "front": "What is flux linkage, and how is it calculated for N identical turns?",
+      "back": "**Flux linkage** is the total flux through all the turns of a coil: $N\\Phi=NBA\\cos\\theta$, measured in Wb.",
+      "hint": "Multiply the flux per turn by the number of turns.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zomnei",
+      "kind": "mistake",
+      "front": "A student measures the angle θ from the plane of the coil. Why is this wrong?",
+      "back": "θ must be measured from the **surface normal**, the line perpendicular to the coil. Flux is greatest when the field follows the normal and zero when it lies within the coil.",
+      "hint": "Which line is perpendicular to the coil?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k382ra",
+      "kind": "concept",
+      "front": "When is there no induced emf, even though a magnetic field is present?",
+      "back": "When the flux is **steady**. Faraday's law needs a change in flux. Flux can change through field strength, enclosed area or orientation.",
+      "hint": "Induction depends on a change, not on a value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0g8sva6",
+      "kind": "example",
+      "front": "A 200-turn coil of area 0.015 m² has a perpendicular field rising from 0.10 T to 0.30 T in 0.50 s. What is the magnitude of the average emf?",
+      "back": "**1.2 V**. $\\Delta\\Phi=0.015\\times0.20=0.0030$ Wb per turn, so $N\\Delta\\Phi=0.60$ Wb, and $0.60/0.50=1.2$ V.",
+      "hint": "Find the change in flux linkage first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cbbdm8",
+      "kind": "process",
+      "front": "What steps find the direction of an induced current in a closed coil?",
+      "back": "1) Decide whether the flux through the coil increases or decreases. 2) Choose the **induced field** that opposes that change. 3) Use the right-hand grip rule: thumb along the induced field, curled fingers show conventional current.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mgw7pk",
+      "kind": "mistake",
+      "front": "A student says the induced field always points opposite to the external field. What is wrong?",
+      "back": "The induced field opposes the **change** in flux, not the existing field. If the external field decreases, the induced field points the same way as the external field.",
+      "hint": "Focus on what is changing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "145j2ia",
+      "kind": "example",
+      "front": "A 50-turn coil encloses 0.020 m² per turn in a 0.40 T field perpendicular to its surface. What is its flux linkage?",
+      "back": "**0.40 Wb**. The flux per turn is $0.40\\times0.020=0.0080$ Wb, and $50\\times0.0080=0.40$ Wb.",
+      "hint": "Find the flux per turn first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cfbg3t",
+      "kind": "formula",
+      "front": "What is the peak emf of a coil rotating at constant angular speed, and what does each symbol mean?",
+      "back": "$\\varepsilon_0=NBA\\omega$: the **peak emf** (V) equals N turns times B flux density (T) times A area (m²) times ω angular speed (rad s⁻¹).",
+      "hint": "Which value in the sine term reaches its largest possible size?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xzckfe",
+      "kind": "concept",
+      "front": "At what coil positions is the induced emf zero, and where is it largest?",
+      "back": "Zero when flux is at its greatest or least, because flux is momentarily not changing. Largest in magnitude when flux crosses zero, where it changes fastest.",
+      "hint": "Think about the rate of change of flux.",
+      "sectionId": "s4"
+    }
+  ]
+}

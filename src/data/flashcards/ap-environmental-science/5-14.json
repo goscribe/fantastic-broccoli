@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-14",
+  "topicCode": "5.14",
+  "topicName": "Integrated pest management",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:17.489Z",
+  "cards": [
+    {
+      "id": "1r0qkgr",
+      "kind": "term",
+      "front": "What is integrated pest management (IPM)?",
+      "back": "**IPM** is a strategy that combines monitoring, prevention and several control methods to keep pests below damaging levels, with minimal harm to people and the environment.",
+      "hint": "Compare it with spraying the whole field as soon as pests appear.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t8lf4f",
+      "kind": "process",
+      "front": "What are the main steps of IPM, in order?",
+      "back": "**Identify** the pest, **monitor** its numbers, **compare** the count with the action threshold, **prevent** problems with the least harmful methods, use **targeted chemicals** only if other methods fail, then **evaluate** and adjust the plan.",
+      "hint": "Start with what the farmer needs to know before choosing any control.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17c00pj",
+      "kind": "term",
+      "front": "What is the action threshold in IPM?",
+      "back": "The **action threshold** is the pest level at which control begins, because the expected damage would cost more than the control.",
+      "hint": "Think about what a few pests on a crop actually cost the farmer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "179qm2j",
+      "kind": "term",
+      "front": "What is a pest, in the context of IPM?",
+      "back": "A **pest** is an organism, such as an insect, weed or pathogen, that damages crops, livestock or other human interests.",
+      "hint": "Think about what threatens farm output or people's plans.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1srkaq0",
+      "kind": "term",
+      "front": "What is biological control?",
+      "back": "**Biological control** uses a pest's natural enemies, such as predators, parasites or disease-causing organisms, to reduce its population.",
+      "hint": "Think about what in nature keeps a pest population in check.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tnlu83",
+      "kind": "example",
+      "front": "Give one example of biological control on a farm.",
+      "back": "**Releasing ladybugs**, which eat aphids. Parasitic wasps that lay eggs in caterpillars are another example.",
+      "hint": "Think of a predator insect that eats a common crop pest.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tnjwh1",
+      "kind": "concept",
+      "front": "How does cultural control reduce pest damage?",
+      "back": "It changes how the crop is grown, such as **crop rotation**, adjusted planting dates or removing crop residue, which interrupts the pest's life cycle.",
+      "hint": "Think about changing farm practice rather than killing pests directly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0u43b41",
+      "kind": "term",
+      "front": "What is physical control, and what is one example?",
+      "back": "**Physical control** blocks or removes pests directly, for example with netting or hand picking.",
+      "hint": "Compare it with cultural control, which changes how the crop is grown.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19l23mm",
+      "kind": "mistake",
+      "front": "Why can a broad-spectrum pesticide backfire on a farm?",
+      "back": "It kills many kinds of organisms, including **natural enemies**, so the pest can rebound faster than before.",
+      "hint": "Think about which organisms the spray hits besides the pest.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1aljl86",
+      "kind": "concept",
+      "front": "How does repeated spraying lead to pesticide resistance?",
+      "back": "Pests that survive a chemical pass their **resistant traits** to their offspring, so over generations more of the population resists it.",
+      "hint": "Think about what happens to the survivors and their offspring.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ef7r32",
+      "kind": "concept",
+      "front": "Why might a farmer not spray when pest counts are below the action threshold?",
+      "back": "At that level the crop damage costs less than the control, and not spraying protects natural enemies and slows resistance. The farmer keeps monitoring.",
+      "hint": "Compare the cost of the damage with the cost of the control.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l2qotp",
+      "kind": "mistake",
+      "front": "Why is it wrong to think IPM aims to remove every pest?",
+      "back": "IPM aims to keep pests **below damaging levels**. It does not ban pesticides or remove every pest, and chemicals are used only when needed.",
+      "hint": "Think about what the word management suggests compared with elimination.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1w4he2t",
+      "kind": "concept",
+      "front": "Name two benefits IPM gives to wildlife or human health.",
+      "back": "IPM lets **natural enemies and pollinators** survive, and it reduces **toxic runoff** and worker exposure to chemicals.",
+      "hint": "Think about who lives in and around the field.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "040f72p",
+      "kind": "concept",
+      "front": "What is one limit of IPM compared with a single spray?",
+      "back": "It needs **knowledge and regular scouting**, and its results can be slower than a single spray.",
+      "hint": "Think about the effort needed before the farmer can act.",
+      "sectionId": "s5"
+    }
+  ]
+}

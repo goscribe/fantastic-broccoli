@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-12",
+  "topicCode": "5.12",
+  "topicName": "Areas and volumes of revolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:28.640Z",
+  "cards": [
+    {
+      "id": "1gbvvjc",
+      "kind": "formula",
+      "front": "Which integral gives the area between an upper curve $y=f(x)$ and a lower curve $y=g(x)$ from $x=a$ to $x=b$?",
+      "back": "$A=\\int_a^b\\big(f(x)-g(x)\\big)\\,dx$: take the **upper** curve minus the **lower** curve. This needs $f(x)\\ge g(x)$ throughout the interval.",
+      "hint": "Think of each strip as height equal to top minus bottom.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rn01m6",
+      "kind": "concept",
+      "front": "Why can a definite integral give zero even when the region clearly has area?",
+      "back": "Parts **below** the x-axis give negative values, so they cancel parts above it. Split the integral at each axis crossing, take each part's positive value, then add them.",
+      "hint": "Where does the curve cross the x-axis?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oal1l6",
+      "kind": "formula",
+      "front": "What volume integral applies when a region under $y=f(x)$ is rotated through $360^{\\circ}$ about the x-axis?",
+      "back": "$V=\\pi\\int_a^b y^2\\,dx$. Each thin strip becomes a **disc** of radius $y$ and thickness $dx$, with volume $\\pi y^2\\,dx$.",
+      "hint": "Picture each thin strip spinning into a flat circular slice.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1j7ztp1",
+      "kind": "term",
+      "front": "What is a volume of revolution?",
+      "back": "The **volume of revolution** is the solid formed when a plane region is rotated through $360^{\\circ}$ about an axis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1905i6s",
+      "kind": "process",
+      "front": "What are the steps to find the area between two curves?",
+      "back": "1) Solve $f(x)=g(x)$ for the limits. 2) Test one $x$ between them to see which curve is higher. 3) Write $\\int(\\text{upper}-\\text{lower})\\,dx$. 4) Integrate and evaluate.",
+      "hint": "Start with the intersection points.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w0m47r",
+      "kind": "example",
+      "front": "Find the area between $y=x+2$ and $y=x^2$. Give the answer in square units.",
+      "back": "$A=\\frac{9}{2}=4.5$ square units. The limits are $x=-1$ and $x=2$, and the line is the upper curve.",
+      "hint": "Solve $x^2=x+2$ first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "107znva",
+      "kind": "mistake",
+      "front": "A student gets a negative value for the area between two curves. What is the likely error?",
+      "back": "They **reversed** the curves. Use upper minus lower, which gives a positive result when $f(x)\\ge g(x)$.",
+      "hint": "Check which curve is higher.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0un8n4o",
+      "kind": "mistake",
+      "front": "A student finds $\\int_0^3(x^2-2x)\\,dx=0$ and says the area is zero. Why is this wrong?",
+      "back": "The parts above and below the axis cancel. Split at $x=0$ and $x=2$, take the positive value of each part, giving a total area of $\\frac{8}{3}\\approx2.67$ square units.",
+      "hint": "Where does the curve cross the axis?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bns3zq",
+      "kind": "example",
+      "front": "The region under $y=\\sqrt{x}$ for $0\\le x\\le4$ is rotated about the x-axis. Lengths are in cm. Find the volume.",
+      "back": "$V=8\\pi\\approx25.1\\,\\mathrm{cm^3}$. Square first: $y^2=x$, so $V=\\pi\\int_0^4 x\\,dx$.",
+      "hint": "Square $y$ before integrating.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0izlouk",
+      "kind": "formula",
+      "front": "Which volume integral applies when a region is rotated about the y-axis, with limits $c$ and $d$ in terms of $y$?",
+      "back": "$V=\\pi\\int_c^d x^2\\,dy$. Write $x^2$ in terms of $y$, because each disc has radius $x$ and thickness $dy$.",
+      "hint": "Which variable is the thickness?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0l0mxpp",
+      "kind": "mistake",
+      "front": "A student uses $x$-limits in the integral $\\pi\\int x^2\\,dy$. What is wrong?",
+      "back": "The limits must match the variable of integration. With $dy$, use the $y$-values at the ends of the solid, such as $c$ and $d$.",
+      "hint": "What does dy integrate over?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0i1ivm5",
+      "kind": "mistake",
+      "front": "For a region between two curves rotated about the x-axis, is the volume $\\pi\\int_a^b (f(x)-g(x))^2\\,dx$?",
+      "back": "No. Square each curve first, then subtract: $V=\\pi\\int_a^b\\big(f(x)^2-g(x)^2\\big)\\,dx$. This removes the hollow in the middle.",
+      "hint": "Think about the hollow in the middle.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "04fbw5r",
+      "kind": "concept",
+      "front": "What units do area and volume have, and when should you round a calculation?",
+      "back": "Area is in length squared, such as $\\mathrm{cm^2}$, and volume is in length cubed, such as $\\mathrm{cm^3}$. Keep full values during working and round only the final answer.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0l6z634",
+      "kind": "example",
+      "front": "The curve $y=x^2$ is rotated about the y-axis between $y=1$ and $y=9$. Lengths are in cm. Find the volume.",
+      "back": "$V=40\\pi\\approx126\\,\\mathrm{cm^3}$. Rewrite $x^2=y$, then $V=\\pi\\int_1^9 y\\,dy$.",
+      "hint": "Rewrite $x^2$ in terms of $y$.",
+      "sectionId": "s5"
+    }
+  ]
+}

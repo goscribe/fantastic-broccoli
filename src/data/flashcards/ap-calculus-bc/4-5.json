@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "4-5",
+  "topicCode": "4.5",
+  "topicName": "Solving related rates problems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:17.938Z",
+  "cards": [
+    {
+      "id": "11xxpgt",
+      "kind": "concept",
+      "front": "What is the core idea behind a related rates problem?",
+      "back": "**One connecting equation** links the changing quantities, and differentiating it with respect to time links their rates.",
+      "hint": "Think about what the equation does for the rates.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ozxt0b",
+      "kind": "process",
+      "front": "What are the steps for solving a related rates problem?",
+      "back": "Name the changing quantities, write a connecting equation, differentiate with respect to time, substitute instantaneous values, then isolate the requested rate and check its units and sign.",
+      "hint": "There are five steps, in order."
+    },
+    {
+      "id": "0h3v9uv",
+      "kind": "mistake",
+      "front": "What goes wrong if you put r = 3 into $A=\\pi r^2$ before differentiating?",
+      "back": "The **derivative becomes zero**, because a fixed number does not change. Differentiate first, then substitute the value at the stated instant.",
+      "hint": "Ask what the derivative of a constant is.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18jl35p",
+      "kind": "formula",
+      "front": "What is the time derivative of $A=\\pi r^2$ with respect to time?",
+      "back": "$\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}$. The **chain rule** gives the $\\frac{dr}{dt}$ factor because the radius changes with time.",
+      "hint": "Differentiate the square term using the chain rule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dtjc74",
+      "kind": "term",
+      "front": "What is a rate in related rates?",
+      "back": "A **rate** is a derivative with respect to time, such as $\\frac{dr}{dt}$, measuring how fast a quantity changes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "048teei",
+      "kind": "example",
+      "front": "A circular ripple's radius grows at 2 cm/s. How fast does its area grow when the radius is 3 cm?",
+      "back": "$12\\pi\\,\\mathrm{cm^2/s}$. Using $\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}$, substitute $r=3$ and $\\frac{dr}{dt}=2$.",
+      "hint": "Differentiate $A=\\pi r^2$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09hko4f",
+      "kind": "concept",
+      "front": "What do the sign and units of the ripple's answer tell you?",
+      "back": "The answer is **positive**, since the radius increases, and its units are square centimeters per second. It applies only at radius 3 cm.",
+      "hint": "Area is measured in square units.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11okdvq",
+      "kind": "term",
+      "front": "What is the Pythagorean relationship in the ladder problem?",
+      "back": "For legs $x$ and $y$ and hypotenuse $L$, $x^2+y^2=L^2$. The **ladder length** $L$ is fixed.",
+      "hint": "Think of the ladder, wall, and ground as a right triangle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mdn12m",
+      "kind": "formula",
+      "front": "What equation results from differentiating $x^2+y^2=L^2$ with respect to time?",
+      "back": "$2x\\frac{dx}{dt}+2y\\frac{dy}{dt}=0$, where $x$ is the base distance and $y$ is the top height.",
+      "hint": "Use the chain rule on each squared term.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bn1bbo",
+      "kind": "concept",
+      "front": "Why is there no rate term for $L$ after differentiating the ladder equation?",
+      "back": "$L$ is **constant**, so its time derivative is zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ghvkll",
+      "kind": "example",
+      "front": "A 10 ft ladder has its base 6 ft from the wall, moving away at 2 ft/s. How fast does the top move?",
+      "back": "**$\\frac{3}{2}$ ft/s downward**, so $\\frac{dy}{dt}=-\\frac{3}{2}$ ft/s. The height is 8 ft, found from $x^2+y^2=10^2$.",
+      "hint": "Find y first, then substitute into the differentiated equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ues3f1",
+      "kind": "mistake",
+      "front": "A ladder base moves away from the wall. Why is $\\frac{dy}{dt}$ negative?",
+      "back": "The top moves **downward**, the opposite direction to positive $y$. Always define the positive direction for each distance first.",
+      "hint": "Which way does the top move as the base slides out?",
+      "sectionId": "s4"
+    }
+  ]
+}

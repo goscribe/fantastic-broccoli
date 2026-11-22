@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-3",
+  "topicCode": "2.3",
+  "topicName": "Graphs of functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:14.469Z",
+  "cards": [
+    {
+      "id": "1smjvxc",
+      "kind": "concept",
+      "front": "What does a point $(x,f(x))$ on the graph of a function tell you?",
+      "back": "It pairs an **input** $x$ with its **output** $f(x)$. The output is the height of the curve above or below the $x$-axis at that input.",
+      "hint": "Think about what the y-coordinate represents.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "178vacy",
+      "kind": "process",
+      "front": "How can you solve $f(x)=k$ using a graph?",
+      "back": "Draw the horizontal line $y=k$ and read the **x-coordinates** where it meets the curve. There may be none, one or several solutions.",
+      "hint": "Which coordinates are the answers: the x-values or the heights?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a4yyap",
+      "kind": "term",
+      "front": "What is an asymptote?",
+      "back": "An **asymptote** is a line that a curve gets ever closer to without reaching, for example the axes for $y=\\frac{1}{x}$.",
+      "hint": "Picture a curve getting closer and closer to a line.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1giueki",
+      "kind": "concept",
+      "front": "Why do you plot several points before joining them to draw a curve?",
+      "back": "Each pair $(x,f(x))$ is one point, and more points give a more reliable picture. Join them with a **smooth curve**, using straight segments only for straight lines.",
+      "hint": "What happens to accuracy when you have only two or three points?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ob7c9j",
+      "kind": "example",
+      "front": "For $f(x)=x^2-2x$, what is $f(-1)$?",
+      "back": "$f(-1)=(-1)^2-2(-1)=1+2=3$, so the point is $(-1,3)$.",
+      "hint": "Be careful with the sign when you substitute $x=-1$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0do86fc",
+      "kind": "example",
+      "front": "The curve $y=f(x)$ passes through $(-1,3)$, $(0,0)$, $(1,-1)$, $(2,0)$ and $(3,3)$. For which $x$ is $f(x)=3$?",
+      "back": "$x=-1$ or $x=3$. Draw the line $y=3$ and read the $x$-coordinates where it meets the curve.",
+      "hint": "Draw the horizontal line across the graph first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h9147o",
+      "kind": "mistake",
+      "front": "Can you substitute $x=0$ into $y=\\frac{1}{x}$ to find a point?",
+      "back": "No. $\\frac{1}{x}$ needs $x\\neq0$, so there is no point at $x=0$, and the graph has two separate branches.",
+      "hint": "What happens when you divide by zero?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uz5rr8",
+      "kind": "formula",
+      "front": "What are the key features of $y=2^x$?",
+      "back": "It is a **rising curve** that is always positive, so $y>0$. The **asymptote** is the $x$-axis, $y=0$, on the left.",
+      "hint": "Think about where the curve crosses the y-axis and what it approaches on the left.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vo0ycg",
+      "kind": "mistake",
+      "front": "Is it enough to test one point when matching an equation to a graph?",
+      "back": "No. $y=x$ and $y=x^3$ both pass through $(1,1)$, so you need to test a **second point** to tell them apart.",
+      "hint": "Look for a point that the two functions do not share.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qq99cw",
+      "kind": "example",
+      "front": "A curve passes through $(-2,-8)$, $(1,1)$ and $(2,8)$. Which basic function could it be?",
+      "back": "$y=x^3$, because $(-2)^3=-8$, $1^3=1$ and $2^3=8$.",
+      "hint": "Test each point against the basic cubic.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qrpmtq",
+      "kind": "process",
+      "front": "What are the steps for sketching a graph?",
+      "back": "Draw and label the axes, mark known points such as axis intercepts, draw the correct **shape** through them, and show asymptotes as dashed lines.",
+      "hint": "Start with the axes, then add the points you know.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08lhl4h",
+      "kind": "term",
+      "front": "What is a sketch, and how does it differ from a plotted graph?",
+      "back": "A **sketch** shows the general shape and labelled key points without an accurate scale. A plotted graph uses a measured scale, so values can be read accurately from it.",
+      "hint": "Think about whether the scale needs to be accurate.",
+      "sectionId": "s5"
+    }
+  ]
+}

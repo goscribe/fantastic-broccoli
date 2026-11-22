@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-10",
+  "topicCode": "3.10",
+  "topicName": "Vector concepts",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:38.540Z",
+  "cards": [
+    {
+      "id": "0lu9dzw",
+      "kind": "concept",
+      "front": "What is the difference between a scalar and a vector?",
+      "back": "A **scalar** has size (magnitude) only, such as distance. A **vector** has both magnitude and direction, such as displacement or velocity.",
+      "hint": "Ask yourself whether the direction matters.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12wvx89",
+      "kind": "formula",
+      "front": "How do you find the magnitude of $\\mathbf{v}=\\begin{pmatrix}x\\\\y\\\\z\\end{pmatrix}$?",
+      "back": "$|\\mathbf{v}|=\\sqrt{x^2+y^2+z^2}$, where x, y and z are the components. It is the straight-line length, found by Pythagoras in three dimensions.",
+      "hint": "Extend Pythagoras' theorem to a third axis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1x41m5c",
+      "kind": "formula",
+      "front": "How do you find $\\vec{AB}$ from the position vectors $\\mathbf{a}$ and $\\mathbf{b}$?",
+      "back": "$\\vec{AB}=\\mathbf{b}-\\mathbf{a}$. Subtract matching components, end point minus start point.",
+      "hint": "Start is A, end is B.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05g2z11",
+      "kind": "example",
+      "front": "Find $\\vec{AB}$ for $A(1,2,3)$ and $B(4,0,5)$.",
+      "back": "$\\vec{AB}=\\begin{pmatrix}3\\\\-2\\\\2\\end{pmatrix}$, found by subtracting $(1,2,3)$ from $(4,0,5)$ component by component.",
+      "hint": "Subtract the start from the end, one entry at a time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jodpot",
+      "kind": "mistake",
+      "front": "A student calculates $\\mathbf{a}-\\mathbf{b}$ to find $\\vec{AB}$. What is wrong?",
+      "back": "They have subtracted in the wrong order. $\\mathbf{a}-\\mathbf{b}$ gives $\\vec{BA}$, which points the opposite way. The correct calculation is $\\mathbf{b}-\\mathbf{a}$.",
+      "hint": "Which point is the start and which is the end?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19b60uy",
+      "kind": "process",
+      "front": "How do you add two vectors $\\mathbf{a}$ and $\\mathbf{b}$ using the triangle rule?",
+      "back": "Draw $\\mathbf{b}$ starting where $\\mathbf{a}$ ends. The sum $\\mathbf{a}+\\mathbf{b}$ runs from the start of $\\mathbf{a}$ to the end of $\\mathbf{b}$. Algebraically, add matching components.",
+      "hint": "Think of walking along a then along b.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07p31vv",
+      "kind": "example",
+      "front": "Given $\\mathbf{a}=\\begin{pmatrix}2\\\\-1\\\\4\\end{pmatrix}$ and $\\mathbf{b}=\\begin{pmatrix}-3\\\\5\\\\1\\end{pmatrix}$, find $\\mathbf{a}-\\mathbf{b}$.",
+      "back": "$\\mathbf{a}-\\mathbf{b}=\\begin{pmatrix}5\\\\-6\\\\3\\end{pmatrix}$, found by subtracting matching components: $(2-(-3),\\ -1-5,\\ 4-1)$.",
+      "hint": "Subtracting a negative becomes addition.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fuz7ry",
+      "kind": "concept",
+      "front": "What does multiplying a vector by a scalar $k$ do to its length and direction?",
+      "back": "The magnitude becomes $|k|\\,|\\mathbf{a}|$. If $k>1$ it gets longer, if $0<k<1$ it gets shorter, and if $k<0$ it points the opposite way.",
+      "hint": "Consider what happens to the sign of k.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19q01xf",
+      "kind": "term",
+      "front": "When are two non-zero vectors parallel?",
+      "back": "They are **parallel** when one is a scalar multiple of the other, so $\\mathbf{u}=k\\mathbf{v}$ for some scalar $k$. They point the same way or exactly opposite ways.",
+      "hint": "Look for one constant k linking them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18elph7",
+      "kind": "process",
+      "front": "How can you test whether $\\mathbf{u}$ and $\\mathbf{v}$ are parallel?",
+      "back": "Find $k$ from one pair of components, then check that the same $k$ works for every other component. If it does, the vectors are parallel.",
+      "hint": "Use just one component first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01i3fox",
+      "kind": "term",
+      "front": "What is a unit vector, and how do you make one from $\\mathbf{v}$?",
+      "back": "A **unit vector** has magnitude 1. Divide $\\mathbf{v}$ by its magnitude $|\\mathbf{v}|$. For $\\begin{pmatrix}3\\\\4\\end{pmatrix}$ the unit vector is $\\begin{pmatrix}0.6\\\\0.8\\end{pmatrix}$.",
+      "hint": "What is the magnitude of (3, 4)?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07oc1tp",
+      "kind": "term",
+      "front": "What is a position vector?",
+      "back": "A **position vector** is the vector from the origin to a given point. For point A it is written $\\mathbf{a}$, and its entries match the coordinates of A.",
+      "hint": "Where does it start?",
+      "sectionId": "s3"
+    }
+  ]
+}

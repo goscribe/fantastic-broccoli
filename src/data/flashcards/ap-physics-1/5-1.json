@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "5-1",
+  "topicCode": "5.1",
+  "topicName": "Rotational kinematics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:36.347Z",
+  "cards": [
+    {
+      "id": "1ln4ngg",
+      "kind": "concept",
+      "front": "Why do we track a wheel's turn with an angle rather than a distance?",
+      "back": "Every point on a turning object moves in a circle about the axle, so a **fixed angle** describes the whole object's turn at once. Angular displacement $\\Delta\\theta$ is measured in radians.",
+      "hint": "Think about what a point on the rim does as the wheel turns.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14rw6io",
+      "kind": "formula",
+      "front": "How are tangential speed and angular velocity related for a point on a rotating object?",
+      "back": "$v=r\\omega$, where $r$ is the distance from the axis and $\\omega$ is angular velocity in rad/s. Points farther out move faster, because they share the same $\\omega$ but have a larger $r$.",
+      "hint": "Which symbol is the radius?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pev63m",
+      "kind": "process",
+      "front": "What steps do you follow to solve a rotation problem with constant angular acceleration?",
+      "back": "List the knowns with units, converting angles to **radians** and time to seconds. Then pick the one rotational kinematic equation that contains the unknown and no other unknown. If two unknowns remain, solve for one first.",
+      "hint": "Start with a list, not an equation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "181wj0o",
+      "kind": "term",
+      "front": "What is a radian?",
+      "back": "The SI unit of angle: the angle at the center of a circle where the **arc length** equals the radius. A full turn is $2\\pi$ rad.",
+      "hint": "Relate it to arc length and radius.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rbsm6k",
+      "kind": "formula",
+      "front": "What is the average angular velocity, and what are its symbols and unit?",
+      "back": "$\\omega_{\\mathrm{avg}}=\\frac{\\Delta\\theta}{\\Delta t}$, where $\\Delta\\theta$ is angular displacement in radians and $\\Delta t$ is time in seconds. The unit is rad/s.",
+      "hint": "Compare it with average linear velocity.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "171rl91",
+      "kind": "example",
+      "front": "A fan spins at 120 revolutions per minute. What is its angular velocity in rad/s?",
+      "back": "About **12.6 rad/s**. Convert 120 rev/min to 2.0 rev/s, then multiply by $2\\pi$ to get $4\\pi\\approx12.6$ rad/s.",
+      "hint": "Convert minutes to seconds first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0trevze",
+      "kind": "formula",
+      "front": "Which rotational kinematic equation links angular velocity, initial angular velocity, angular acceleration, and time?",
+      "back": "$\\omega=\\omega_0+\\alpha t$. It gives final angular velocity from initial angular velocity, constant angular acceleration, and elapsed time.",
+      "hint": "It leaves out the angle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "163t6pb",
+      "kind": "mistake",
+      "front": "A student substitutes an angle in degrees and time in minutes into $\\Delta\\theta=\\omega_0t+\\frac{1}{2}\\alpha t^2$. What is wrong?",
+      "back": "The equations need **radians** and **seconds**. Convert degrees to radians with $\\frac{\\pi}{180}$ and minutes to seconds before substituting, or the answer will be wrong.",
+      "hint": "Check the units of each value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01s55w7",
+      "kind": "example",
+      "front": "A wheel of radius 0.30 m turns at 10 rad/s and speeds up at 2.0 rad/s². What are the rim's tangential speed and tangential acceleration?",
+      "back": "Speed $v=3.0$ m/s and tangential acceleration $a_t=0.60$ m/s². Use $v=r\\omega$ and $a_t=r\\alpha$.",
+      "hint": "Multiply the radius by each angular value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xz5dr9",
+      "kind": "example",
+      "front": "A disk starts from rest with constant angular acceleration 4.0 rad/s² for 3.0 s. What angle does it turn through, in radians?",
+      "back": "$\\theta=18$ rad, about 2.9 revolutions. Use $\\Delta\\theta=\\frac{1}{2}\\alpha t^2=\\frac{1}{2}(4.0)(3.0)^2$.",
+      "hint": "Start from rest, so $\\omega_0=0$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0pkpriv",
+      "kind": "mistake",
+      "front": "Why is writing the speed as 'rad m/s' a mistake when using $v=r\\omega$?",
+      "back": "The radian is dimensionless, so it drops out and the unit is **m/s**. Writing rad m/s is incorrect as a final unit.",
+      "hint": "Think about what the radian cancels against.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wypl7e",
+      "kind": "concept",
+      "front": "Why do two points at different distances from the axis of a spinning disk have the same angular velocity but different tangential speeds?",
+      "back": "All points on a rigid disk turn through the **same angle** in the same time, so they share one $\\omega$. Tangential speed $v=r\\omega$ depends on $r$, so farther points move faster.",
+      "hint": "Ask what is the same for every point and what changes with distance.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ry04jx",
+      "kind": "term",
+      "front": "What is angular acceleration, and what is its unit?",
+      "back": "The rate of change of angular velocity, $\\alpha=\\frac{\\Delta\\omega}{\\Delta t}$. Its unit is **rad/s²**.",
+      "hint": "It is the rotational counterpart of linear acceleration.",
+      "sectionId": "s2"
+    }
+  ]
+}

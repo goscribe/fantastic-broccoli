@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-8-1-7",
+  "topicCode": "3.8.1.7",
+  "topicName": "Induced fission",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:31.032Z",
+  "cards": [
+    {
+      "id": "06cg8t8",
+      "kind": "concept",
+      "front": "What decides whether a chain reaction dies out, stays steady, or grows rapidly?",
+      "back": "The average number of new fissions caused per fission. Fewer than one dies out, exactly one stays steady, and more than one grows rapidly.",
+      "hint": "Think about how many neutrons from each fission go on to strike a new nucleus.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k11syn",
+      "kind": "term",
+      "front": "What is induced fission?",
+      "back": "Fission of a heavy nucleus after it has absorbed a **neutron**, splitting it into smaller nuclei and usually releasing more neutrons.",
+      "hint": "Contrast it with radioactive decay, which needs no outside push.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cuplml",
+      "kind": "concept",
+      "front": "Where does the energy released in a fission come from?",
+      "back": "The **mass** lost: the fission products have less mass than the original nucleus plus neutron, and by mass–energy equivalence this lost mass becomes energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ddszjq",
+      "kind": "term",
+      "front": "What is the critical mass of a reactor fuel?",
+      "back": "The **critical mass** is the smallest mass of fuel in which, on average, at least one neutron per fission causes another fission.",
+      "hint": "Think about neutrons escaping through the surface of a small piece.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dwn4na",
+      "kind": "formula",
+      "front": "What equation gives the number of nuclei N in a sample of mass m and molar mass M?",
+      "back": "$N = \\frac{m}{M}\\times N_\\text{A}$, where $m$ is in $\\text{kg}$, $M$ is in $\\text{kg\\,mol}^{-1}$, and $N_\\text{A} = 6.02\\times10^{23}\\,\\text{mol}^{-1}$ is the **Avogadro constant**.",
+      "hint": "You need to know how many moles the sample contains.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1c3i3nz",
+      "kind": "example",
+      "front": "About how much energy does 1.0 kg of uranium-235 release on complete fission?",
+      "back": "About $8.2\\times10^{13}\\,\\text{J}$. There are $\\frac{1.0}{0.235}\\times6.02\\times10^{23}=2.56\\times10^{24}$ nuclei, each giving $3.20\\times10^{-11}\\,\\text{J}$.",
+      "hint": "Start by counting the nuclei in 1.0 kg.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05jarnv",
+      "kind": "concept",
+      "front": "Why does a reactor need only a small mass of fuel for a large energy output?",
+      "back": "Each fission releases about $200\\,\\text{MeV}$, which is millions of times more than the few electronvolts per atom released by a chemical reaction.",
+      "hint": "Compare the energy per nucleus in fission with a chemical reaction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00wy90t",
+      "kind": "term",
+      "front": "What is the job of a moderator in a reactor?",
+      "back": "A **moderator** slows fast neutrons by collisions without absorbing many of them, so fission in uranium-235 becomes more likely.",
+      "hint": "Compare how easily fast neutrons cause fission with slow ones.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12puo1k",
+      "kind": "term",
+      "front": "What do control rods do in a reactor core?",
+      "back": "They are rods of **neutron-absorbing** material. Lowering them further into the core soaks up more neutrons, reducing the number of fissions.",
+      "hint": "Think about what happens to neutrons when they meet these rods.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lndlsp",
+      "kind": "mistake",
+      "front": "A student says control rods slow neutrons down. What is wrong with this?",
+      "back": "Control rods **absorb** neutrons. The moderator is the part that slows them by collisions, without absorbing many.",
+      "hint": "Check which part of the core does the slowing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lq3kyx",
+      "kind": "term",
+      "front": "What is the role of the coolant in a reactor?",
+      "back": "A **coolant** flows through the core and carries thermal energy away to produce steam. In some designs, water acts as both moderator and coolant.",
+      "hint": "Follow the energy from the core to the steam.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wtekvl",
+      "kind": "concept",
+      "front": "Why are fission products a long-term hazard?",
+      "back": "They have too many neutrons for their proton number, so they are unstable. They decay and emit radiation, and some stay active for many years.",
+      "hint": "Think about the neutron-to-proton balance of the fragments.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ydi8za",
+      "kind": "process",
+      "front": "What happens to spent fuel from a reactor, in order?",
+      "back": "It is first kept in **cooling ponds**, then sealed and shielded for long-term storage.",
+      "hint": "Think about what the spent fuel still gives off at first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14rtwen",
+      "kind": "term",
+      "front": "What is radioactive decay?",
+      "back": "The **spontaneous** change of an unstable nucleus, in which radiation is emitted, with no outside push needed.",
+      "hint": "Contrast it with a nucleus that must absorb a neutron before it splits.",
+      "sectionId": "s1"
+    }
+  ]
+}

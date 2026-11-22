@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-1-1",
+  "topicCode": "4.1.1",
+  "topicName": "Cell structure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:16.444Z",
+  "cards": [
+    {
+      "id": "1cp9alt",
+      "kind": "concept",
+      "front": "Which three structures do plant cells have that animal cells lack?",
+      "back": "A **cell wall** made of cellulose, **chloroplasts** that absorb light for photosynthesis, and a large permanent **vacuole** that holds cell sap and keeps the cell firm.",
+      "hint": "Compare the outer layers and contents of a plant cell with those of an animal cell.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nosuab",
+      "kind": "concept",
+      "front": "What is the main structural difference between eukaryotic and prokaryotic cells?",
+      "back": "**Eukaryotic** cells enclose their genetic material in a **nucleus**, while **prokaryotic** cells, such as bacteria, have no nucleus and their DNA sits in the cytoplasm.",
+      "hint": "Think about where the DNA is found inside each type of cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13cieuw",
+      "kind": "formula",
+      "front": "What equation links magnification with image size and actual size?",
+      "back": "**Magnification** = $\\frac{\\text{image size}}{\\text{actual size}}$, using the same units for both. Magnification has no unit.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1r9zk5e",
+      "kind": "term",
+      "front": "What is the role of the cell membrane?",
+      "back": "The **cell membrane** surrounds the cell and controls which substances enter and leave it.",
+      "hint": "Think of it as a gatekeeper at the edge of the cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hzgkw5",
+      "kind": "term",
+      "front": "What is the job of the nucleus?",
+      "back": "The **nucleus** contains the cell's genetic material and controls the cell's activities.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "011paj1",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a prokaryotic cell has no DNA because it has no nucleus?",
+      "back": "Prokaryotic cells do have DNA, but it is **not enclosed in a nucleus**. It forms a loop in the cytoplasm.",
+      "hint": "Separate the idea of having a nucleus from the idea of having DNA.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "151p71x",
+      "kind": "term",
+      "front": "What are plasmids?",
+      "back": "**Plasmids** are small rings of DNA found in some bacterial (prokaryotic) cells.",
+      "hint": "Compare them with the main loop of DNA in the cytoplasm.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04hnfcx",
+      "kind": "process",
+      "front": "What steps should you follow to focus a specimen under a light microscope?",
+      "back": "Start with the **lowest-power objective lens**, use the **coarse focus** first, then sharpen the image with the **fine focus**.",
+      "hint": "Think about which lens to start with and the order of the two focus controls.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pyi4mk",
+      "kind": "process",
+      "front": "How should you make an accurate biological drawing?",
+      "back": "Draw only structures you can see, using **clear single lines**, straight uncrossed label lines, a title and the magnification if known. Do not shade.",
+      "hint": "Think about the difference between what you observed and what you know should be there.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0e1rnun",
+      "kind": "example",
+      "front": "A cell measures 40 mm on an image and a 10 mm scale bar represents 20 µm. What is the cell's actual length?",
+      "back": "**80 µm**. Working: $40\\div10=4$, then $4\\times20\\,\\mathrm{\\mu m}=80\\,\\mathrm{\\mu m}$.",
+      "hint": "Start by comparing the cell's image length with the scale bar's image length.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1y0fcn3",
+      "kind": "term",
+      "front": "What does a scale bar show on a microscope image?",
+      "back": "A **scale bar** marks a length on the image and states the actual length that this part of the image represents.",
+      "hint": "Think about how you would turn a measured length on the picture into a real one.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bq4y2s",
+      "kind": "concept",
+      "front": "How is a sperm cell adapted to reach and enter an egg cell?",
+      "back": "It has a **tail** for swimming, many **mitochondria** to release energy, and an **acrosome** containing enzymes that help it enter the egg.",
+      "hint": "Think about movement, energy supply and what the cell must get through.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1umh8ew",
+      "kind": "concept",
+      "front": "Why does a root hair cell have a long projection?",
+      "back": "The **long projection** increases the cell's **surface area** for absorbing water and mineral ions from the soil.",
+      "hint": "Think about what the cell needs to take in and how a larger surface helps.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "14rtiv6",
+      "kind": "mistake",
+      "front": "Why do root hair cells usually lack chloroplasts?",
+      "back": "Roots receive little light, and root hair cells absorb water and ions without needing chloroplasts for photosynthesis.",
+      "hint": "Think about where the root is and how much light reaches it.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-14",
+  "topicCode": "7.14",
+  "topicName": "Medical technology and sport",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:59.352Z",
+  "cards": [
+    {
+      "id": "06vd8mz",
+      "kind": "concept",
+      "front": "Why do X-rays show fractures clearly but give little detail of ligaments and tendons?",
+      "back": "Dense **bone** absorbs more X-ray radiation than soft tissue does, so bone shows up clearly while soft tissue gives little contrast.",
+      "hint": "Compare how dense each tissue is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pnv24e",
+      "kind": "concept",
+      "front": "Which imaging technique best shows a torn ligament?",
+      "back": "**MRI**, because it gives detailed images of soft tissue such as ligaments and uses no ionising radiation.",
+      "hint": "Think about which tissues X-rays show poorly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08otajr",
+      "kind": "term",
+      "front": "What is a prosthesis?",
+      "back": "An artificial device that **replaces** a missing or damaged part of the body.",
+      "hint": "Think about what it does when a body part is gone.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10zu2cp",
+      "kind": "concept",
+      "front": "Why do doctors avoid repeated X-ray scans?",
+      "back": "X-rays use **ionising radiation**, which can damage cells, so the dose is kept as low as possible.",
+      "hint": "Think about what radiation does to living cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pbi2rg",
+      "kind": "term",
+      "front": "What is an orthosis?",
+      "back": "An **external device** worn outside the body that supports, protects or corrects a body part.",
+      "hint": "Think about a part that is still there.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gfnhhp",
+      "kind": "mistake",
+      "front": "A student says a knee brace is a prosthesis because it is worn on the knee. What is wrong with this?",
+      "back": "A brace supports a knee that is still present, so it is an **orthosis**. A prosthesis replaces a missing or damaged part.",
+      "hint": "Ask whether the knee has been replaced or only supported.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00w4747",
+      "kind": "concept",
+      "front": "What are the drawbacks of MRI scanning?",
+      "back": "Scans are **slower** and cost more, even though MRI uses no ionising radiation.",
+      "hint": "Think about time and money compared with other techniques.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dt8za5",
+      "kind": "term",
+      "front": "What is ultrasound imaging?",
+      "back": "Imaging that uses **reflections** of high-frequency sound waves from boundaries between tissues to build a moving image.",
+      "hint": "Think about what sound does when it meets a boundary.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wg56oz",
+      "kind": "concept",
+      "front": "How does a carbon-fibre running blade help an athlete with a lower-limb amputation?",
+      "back": "It replaces the missing lower limb; it bends under load and springs back, returning some of the **energy** stored in each stride.",
+      "hint": "Think about what the blade does when the foot lands.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ouzbrk",
+      "kind": "concept",
+      "front": "Why is a prosthesis made to suit the individual?",
+      "back": "A **good fit** is comfortable and avoids damaging the tissue that remains.",
+      "hint": "Think about what the body still has after an injury.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cqjwes",
+      "kind": "concept",
+      "front": "How can a shoe insert reduce stress on the knee?",
+      "back": "It corrects the way the foot lands, which **reduces stress** on the shin and knee.",
+      "hint": "Start with the moment the foot hits the ground.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08bcftv",
+      "kind": "concept",
+      "front": "How can wearable sensors help prevent injury in sport?",
+      "back": "They record **movement and heart rate**, so coaches can spot poor technique or excessive load early.",
+      "hint": "Think about what a coach needs to notice before an injury.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0m70k3m",
+      "kind": "term",
+      "front": "What is arthroscopy?",
+      "back": "**Keyhole surgery** in which a camera and instruments are passed through small cuts to examine or repair a joint.",
+      "hint": "Compare it with a large open cut.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0z26x39",
+      "kind": "concept",
+      "front": "How does technology help track and confirm recovery after an injury?",
+      "back": "Machines measure **joint movement and muscle strength** to track progress, and ultrasound or MRI checks that damaged tissue has healed.",
+      "hint": "Think about measuring progress first, then looking inside.",
+      "sectionId": "s5"
+    }
+  ]
+}

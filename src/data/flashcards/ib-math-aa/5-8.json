@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-8",
+  "topicCode": "5.8",
+  "topicName": "Maxima, minima and optimization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:59.461Z",
+  "cards": [
+    {
+      "id": "17q7fhc",
+      "kind": "concept",
+      "front": "Where do local maxima and minima sit on a curve, and what is true of $f'(x)$ at these points?",
+      "back": "They are **stationary points**, where the curve is momentarily flat, so $f'(x)=0$. Being stationary alone does not show whether the point is a maximum or a minimum.",
+      "hint": "Think of a ball at the top of its path.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10ybhkk",
+      "kind": "process",
+      "front": "How does the first derivative test classify a stationary point?",
+      "back": "Check the sign of $f'$ just left and just right of the point. Positive then negative gives a **local maximum**. Negative then positive gives a **local minimum**. The same sign on both sides gives neither.",
+      "hint": "Use one test value on each side of the point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "016ob2k",
+      "kind": "concept",
+      "front": "What does the sign of $f''(c)$ tell you at a stationary point $x=c$?",
+      "back": "A **positive** $f''(c)$ gives a local minimum, a bowl shape. A **negative** $f''(c)$ gives a local maximum, an upside-down bowl. If $f''(c)=0$, the test gives no result.",
+      "hint": "Picture a bowl and an upside-down bowl.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bfs6ow",
+      "kind": "term",
+      "front": "What is a local maximum?",
+      "back": "A **local maximum** is a function value at least as large as nearby function values. The word local means a larger value may exist elsewhere on the graph.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1l0n28k",
+      "kind": "example",
+      "front": "Find the stationary points of $f(x)=x^3-3x$.",
+      "back": "$f'(x)=3x^2-3=0$ gives $x=\\pm1$. Heights are $f(-1)=2$ and $f(1)=-2$, so the stationary points are $(-1,2)$ and $(1,-2)$.",
+      "hint": "Set the derivative to zero first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o8jkh0",
+      "kind": "mistake",
+      "front": "Is every stationary point a maximum or a minimum?",
+      "back": "No. For $y=x^3$, $f'(0)=0$, but the curve keeps rising through the origin, so the stationary point is neither a maximum nor a minimum.",
+      "hint": "Check the curve on each side of the point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02r2dd1",
+      "kind": "example",
+      "front": "Using the first derivative test, classify the stationary points of $f(x)=x^3-3x$.",
+      "back": "$f'(x)=3(x-1)(x+1)$. The sign goes from positive to negative at $x=-1$, so it is a **local maximum**. It goes from negative to positive at $x=1$, so it is a **local minimum**.",
+      "hint": "Find the zeros of $f'$ and test either side.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17snil7",
+      "kind": "example",
+      "front": "For $f(x)=x^4-4x^3$, with $f''(x)=12x^2-24x$, what is $f''(3)$ and what type of point is $x=3$?",
+      "back": "$f''(3)=108-72=36>0$, so $x=3$ is a **local minimum**, with $f(3)=-27$.",
+      "hint": "Substitute $x=3$ into $f''(x)$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1urkg2y",
+      "kind": "mistake",
+      "front": "If $f''(c)=0$ at a stationary point, what can you conclude?",
+      "back": "Nothing from the test. The point may still be a **maximum** or **minimum**, as with $y=x^4$ at $x=0$. Check the sign of $f'$ on either side instead.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s9knez",
+      "kind": "term",
+      "front": "What is a constraint in an optimisation problem?",
+      "back": "A **constraint** is a condition that links the variables and limits their values, such as a fixed length of fencing. You use it to write the quantity in one variable.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rjy6nu",
+      "kind": "process",
+      "front": "What are the main steps for solving an optimisation problem with calculus?",
+      "back": "Define variables and sketch. Write the quantity to optimise. Use the constraint to remove a variable. Differentiate and solve for zero gradient. Classify the result and check the domain. State the answer in context with units.",
+      "hint": "There are six steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1y8glym",
+      "kind": "mistake",
+      "front": "Why must you check the domain after finding a stationary value?",
+      "back": "A stationary value is not always the best feasible one. If the domain has limits, compare it with the values at the ends, and check the answer makes sense for the situation.",
+      "hint": "Think about the allowed values of the variable.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1iq3up5",
+      "kind": "example",
+      "front": "A farmer has 60 m of fencing for three sides of a rectangular pen, with a wall as the fourth side. What is the greatest possible area?",
+      "back": "With sides $x$, $x$ and $60-2x$, $A=60x-2x^2$. $\\frac{dA}{dx}=0$ gives $x=15$, and $\\frac{d^2A}{dx^2}=-4<0$, so the greatest area is $450\\,\\mathrm{m^2}$.",
+      "hint": "Use the fencing constraint to eliminate the third side.",
+      "sectionId": "s5"
+    }
+  ]
+}

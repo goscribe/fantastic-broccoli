@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-8-1-8",
+  "topicCode": "3.8.1.8",
+  "topicName": "Safety aspects",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:57.784Z",
+  "cards": [
+    {
+      "id": "1ku4ykt",
+      "kind": "concept",
+      "front": "How can ionising radiation lead to cancer in living tissue?",
+      "back": "It ionises atoms and molecules, which can **damage DNA**. A damaged cell may die, or it may divide in an uncontrolled way and form a cancer.",
+      "hint": "Think about what happens to the cell's genetic material first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0f1jkhv",
+      "kind": "formula",
+      "front": "What relationship links gamma intensity $I$ to distance $x$ from a small source?",
+      "back": "The **inverse square law**: $I$ is proportional to $\\frac{1}{x^2}$. Doubling $x$ cuts $I$ to one quarter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wqepmq",
+      "kind": "mistake",
+      "front": "Why is alpha radiation not harmless just because a sheet of paper stops it?",
+      "back": "If an alpha source is swallowed or inhaled, nothing shields the tissue, so it **ionises the tissue directly** and is very damaging.",
+      "hint": "Consider where the source is, not only how far it can travel through air.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18jaws9",
+      "kind": "term",
+      "front": "What is background radiation?",
+      "back": "The **ionising radiation always present** in the environment from natural and artificial sources, such as rocks, air and cosmic rays.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13fnn61",
+      "kind": "example",
+      "front": "A detector records 252 counts in 3.0 min with a source and 45 counts in 3.0 min without one. What is the corrected count rate?",
+      "back": "$69\\,\\mathrm{min^{-1}}$. The measured rate is $84\\,\\mathrm{min^{-1}}$ and the background is $15\\,\\mathrm{min^{-1}}$, so subtract $15$ from $84$.",
+      "hint": "Convert each total count into a rate first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0crew77",
+      "kind": "mistake",
+      "front": "What goes wrong if you do not subtract the background count rate from a source reading?",
+      "back": "The source **seems more active than it really is**, because the background radiation is wrongly counted as coming from the source.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "049q67j",
+      "kind": "example",
+      "front": "A small gamma source gives a corrected count rate of $240\\,\\mathrm{min^{-1}}$ at $0.50\\,\\mathrm{m}$. What is the corrected count rate at $2.0\\,\\mathrm{m}$?",
+      "back": "$15\\,\\mathrm{min^{-1}}$. The distance is quadrupled, so intensity falls by $4^2=16$, and $240/16=15$.",
+      "hint": "Work out the ratio of the two distances before you substitute.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oyzccb",
+      "kind": "concept",
+      "front": "Why are the inverse square law and distance precautions used for gamma rays rather than alpha or beta?",
+      "back": "Alpha and beta radiation are **absorbed by air**, so their intensity does not fall in the same way with distance. The law only applies to gamma rays.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jvvknj",
+      "kind": "term",
+      "front": "What is the half-value thickness of a material?",
+      "back": "The **thickness that halves the intensity** of the radiation passing through it. Each further thickness of the same size halves it again.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p4g97j",
+      "kind": "example",
+      "front": "A gamma source gives 320 min^-1 with no absorber, 160 min^-1 with 1.0 cm of lead and 80 min^-1 with 2.0 cm. What is the rate with 3.0 cm?",
+      "back": "$40\\,\\mathrm{min^{-1}}$. The rate halves every $1.0\\,\\mathrm{cm}$, so the half-value thickness is $1.0\\,\\mathrm{cm}$ and three halvings give $320/8$.",
+      "hint": "Find how much the rate drops over each 1.0 cm first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h9lgr9",
+      "kind": "term",
+      "front": "What is a dosimeter?",
+      "back": "A **device worn by a person** that records the radiation exposure they receive, so their exposure can be checked.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06mkfsw",
+      "kind": "process",
+      "front": "What steps reduce a worker's exposure when handling a radioactive gamma source?",
+      "back": "Handle the source with **tongs**, never bare hands. Store it in a labelled, locked, lead-lined container. Limit the time spent near it, keeping exposure as low as reasonably practicable.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0w8jhap",
+      "kind": "term",
+      "front": "What is a dose limit?",
+      "back": "The **maximum radiation exposure** a person is allowed to receive over a stated period, which keeps the extra risk very small.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13y8jf3",
+      "kind": "term",
+      "front": "What is an ion?",
+      "back": "An **atom or group of atoms with a net charge**, caused by losing or gaining electrons."
+    }
+  ]
+}

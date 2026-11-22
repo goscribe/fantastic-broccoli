@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-15",
+  "topicCode": "8.15",
+  "topicName": "Pathogens and infectious disease",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:59.401Z",
+  "cards": [
+    {
+      "id": "1fxx458",
+      "kind": "concept",
+      "front": "How does a waterborne pathogen usually get from one person into another's body?",
+      "back": "Through the **fecal–oral route**. Pathogens leave in feces, contaminate water or food, and are swallowed by a new host. Sewage and runoff carry the waste into water supplies.",
+      "hint": "Follow the waste: where does it go after it leaves the body?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yc8dih",
+      "kind": "term",
+      "front": "What is a **pathogen**?",
+      "back": "A **pathogen** is an organism or virus that causes disease. Examples include bacteria, viruses, protozoa, and parasitic worms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0866ecg",
+      "kind": "process",
+      "front": "What are the three steps for making water safe to drink, in order?",
+      "back": "1) Keep waste out of the water, using sewage treatment and septic systems placed away from wells. 2) **Filter** to remove particles and some pathogens. 3) **Disinfect** with chlorine, ozone, or ultraviolet light to kill the rest.",
+      "hint": "Start with the source, then deal with the water itself.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mdswqq",
+      "kind": "mistake",
+      "front": "Why is clear-looking water not always safe to drink?",
+      "back": "Clear water can still carry disease because **most pathogens are too small to see**. Clean appearance does not prove that water is free of pathogens.",
+      "hint": "Think about the size of the organisms involved.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fa0ze4",
+      "kind": "term",
+      "front": "Which four main groups of pathogens cause waterborne disease?",
+      "back": "**Bacteria**, **viruses**, **protozoa** (such as Giardia), and **parasitic worms** (such as those causing schistosomiasis).",
+      "hint": "Think of the causes of cholera and hepatitis A.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11r5s90",
+      "kind": "term",
+      "front": "What is an **infectious disease**?",
+      "back": "An **infectious disease** is an illness caused by a pathogen that can pass from one host to another.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0quzkvg",
+      "kind": "term",
+      "front": "What is a **disease vector**?",
+      "back": "A **disease vector** is an organism, such as a mosquito, that carries a pathogen from one host to another. Mosquitoes spread malaria this way.",
+      "hint": "Think about a carrier that spreads disease without necessarily getting sick from it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1757gug",
+      "kind": "concept",
+      "front": "Why are poverty and crowding linked to a higher risk of infection?",
+      "back": "Poverty limits access to clean water and toilets. Crowded places, such as dense cities and refugee camps, let infections pass quickly between people.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dvlj92",
+      "kind": "term",
+      "front": "What does **sanitation** mean?",
+      "back": "**Sanitation** is the safe collection, treatment, and disposal of human waste and wastewater.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0f2r9kf",
+      "kind": "process",
+      "front": "Which hygiene habits stop pathogens from reaching the mouth?",
+      "back": "Washing hands with soap after using the toilet and before handling food. Cooking food thoroughly and keeping it clean also helps.",
+      "hint": "Think about the moments when hands touch the toilet and food.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pkletm",
+      "kind": "term",
+      "front": "What is a **vaccine**?",
+      "back": "A **vaccine** is a preparation that trains the immune system to recognize a specific pathogen, so it can fight that pathogen before infection occurs. Vaccines exist for cholera, typhoid fever, and hepatitis A.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lqtw5h",
+      "kind": "concept",
+      "front": "How does draining standing water help reduce the spread of malaria?",
+      "back": "Mosquitoes, the disease vector, lay eggs in standing water. Draining it cuts mosquito numbers, so fewer people are bitten and infected.",
+      "hint": "Think about where the vector breeds.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11tb9l9",
+      "kind": "concept",
+      "front": "Why can building sanitation prevent more infections than treating only sick people?",
+      "back": "**Sanitation stops pathogens at the source**, preventing new infections. Treating patients helps only those already ill, while sanitation protects the whole community.",
+      "hint": "Compare who is protected by each approach."
+    }
+  ]
+}

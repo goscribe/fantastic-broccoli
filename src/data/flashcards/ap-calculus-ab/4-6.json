@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "4-6",
+  "topicCode": "4.6",
+  "topicName": "Local linearity and linearization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:01.348Z",
+  "cards": [
+    {
+      "id": "11s626q",
+      "kind": "concept",
+      "front": "Why can a tangent line give good estimates of a function's values near a point?",
+      "back": "Near the point, the graph is **locally linear**: it closely resembles its tangent line, whose slope is the derivative at that point. The resemblance is strongest very close to the point.",
+      "hint": "Think about zooming in on a smooth curve.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xfvete",
+      "kind": "formula",
+      "front": "What is the linearization of $f$ at a base point $a$, and what does each part mean?",
+      "back": "$L(x)=f(a)+f'(a)(x-a)$. $f(a)$ is the known function value, $f'(a)$ is the constant tangent slope at $a$, and $x$ is the nearby input. Near $a$, $f(x)\\approx L(x)$.",
+      "hint": "It is the tangent line through the point $(a,f(a))$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n1ipf1",
+      "kind": "example",
+      "front": "Use the linearization of $\\sqrt{x}$ at $a=4$ to estimate $\\sqrt{4.2}$.",
+      "back": "**2.05**. Here $f(4)=2$ and $f'(4)=\\frac{1}{4}$, so $L(4.2)=2+\\frac{1}{4}(0.2)=2.05$, giving $\\sqrt{4.2}\\approx 2.05$.",
+      "hint": "Find $f(4)$ and $f'(4)$ before substituting.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17khcv7",
+      "kind": "process",
+      "front": "What are the steps to build a linearization and use it to estimate a value?",
+      "back": "1) Find the known value $f(a)$. 2) Find the tangent slope $f'(a)$. 3) Substitute both into $L(x)=f(a)+f'(a)(x-a)$. 4) Evaluate $L$ at the nearby input.",
+      "hint": "Start by choosing a base point with easy values.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16veh3y",
+      "kind": "term",
+      "front": "What is differentiability at a point?",
+      "back": "**Differentiability** at a point means the function has a derivative there, so a single tangent slope is defined. A sharp corner is not differentiable, so this method does not apply there.",
+      "hint": "Ask whether one tangent slope exists.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09p9fi5",
+      "kind": "term",
+      "front": "What is a base point in a linearization?",
+      "back": "The **base point** $a$ is the input where both $f(a)$ and $f'(a)$ are known. The linearization is built from the tangent line at this point.",
+      "hint": "It is the chosen input $a$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17gg9hr",
+      "kind": "mistake",
+      "front": "When building a linearization, should you use $f'(x)$ as the slope of the line?",
+      "back": "No. Using $f'(x)$ is wrong because it changes with $x$. Evaluate the derivative at the base point, $f'(a)$, to get the constant slope of the tangent line.",
+      "hint": "The line has one fixed slope.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09ibkrl",
+      "kind": "term",
+      "front": "What is approximation error?",
+      "back": "**Approximation error** is the difference between an estimated value and the actual function value. It shows how far the linear estimate is from the true answer.",
+      "hint": "Compare the estimate with the true value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02iiduq",
+      "kind": "mistake",
+      "front": "Does a tangent-line estimate stay accurate as you move far from the base point?",
+      "back": "No. The graph may bend away from its tangent line, so accuracy is limited. Tangent-line estimates are most trustworthy only close to the base point.",
+      "hint": "Locally linear is a near-the-point idea.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19f5w26",
+      "kind": "concept",
+      "front": "How does concavity tell you whether a tangent-line estimate is too high or too low?",
+      "back": "Where a function is **concave up**, the tangent line lies below the graph nearby, so the estimate is too low. Where it is **concave down**, the tangent line lies above the graph, so the estimate is too high.",
+      "hint": "Concave up means slope increases.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xpu4yc",
+      "kind": "example",
+      "front": "Why is the tangent-line estimate of $\\sqrt{4.2}$ at $a=4$ an overestimate?",
+      "back": "Because $\\sqrt{x}$ is **concave down** for positive inputs, so its tangent line lies above the curve near $x=4$. The estimate $2.05$ is slightly more than the true value, about $2.04939$.",
+      "hint": "Check the sign of the second derivative for $x>0$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fmwjxm",
+      "kind": "example",
+      "front": "Use the linearization of $f(x)=x^2$ at $a=3$ to estimate $3.1^2$.",
+      "back": "**9.6**. Since $f(3)=9$ and $f'(3)=6$, $L(x)=9+6(x-3)$, so $L(3.1)=9+6(0.1)=9.6$, giving $3.1^2\\approx 9.6$.",
+      "hint": "Find $f'(x)$ first, then evaluate it at $3$."
+    }
+  ]
+}

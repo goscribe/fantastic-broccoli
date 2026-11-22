@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-3-3",
+  "topicCode": "4.3.3",
+  "topicName": "Plant disease",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:40.085Z",
+  "cards": [
+    {
+      "id": "0985uf4",
+      "kind": "concept",
+      "front": "Why can a plant's visible changes not, on their own, tell you what is causing a disease?",
+      "back": "**Symptoms** show that something is wrong but not its cause, because pathogens, insects and mineral deficiencies can produce similar changes.",
+      "hint": "Think about how many different causes could produce the same change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0in2k4k",
+      "kind": "concept",
+      "front": "Why must a grower identify the cause of a plant problem before choosing a treatment?",
+      "back": "Treatments differ: a **fungicide** may control some fungal diseases, but a mineral deficiency needs the missing mineral supplied instead.",
+      "hint": "Compare what would happen if you treated a fungus with the wrong remedy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1s6fjmw",
+      "kind": "term",
+      "front": "What is a vector in plant disease?",
+      "back": "A **vector** is an organism that carries a pathogen from one host plant to another, such as an insect feeding on plants.",
+      "hint": "Think about what moves between plants when a disease spreads.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0a6gawh",
+      "kind": "term",
+      "front": "What is a pathogen?",
+      "back": "A **pathogen** is a microorganism that causes infectious disease, such as a fungus, bacterium or virus.",
+      "hint": "Think about the groups of microorganisms named in the first section.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vh925r",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume that yellow leaves always mean infection?",
+      "back": "Yellowing can also be caused by a **mineral deficiency**, so the whole plant and its conditions must be checked first.",
+      "hint": "Consider what else in a plant's environment could change leaf colour.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ux29g3",
+      "kind": "process",
+      "front": "What are the first steps when investigating an unexplained change in a plant?",
+      "back": "First **examine** the affected plant and compare it with healthy plants, noting which parts are affected and whether neighbours show similar changes. Then use a reference guide.",
+      "hint": "Start with what you can see before any testing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0izgto3",
+      "kind": "term",
+      "front": "What is a reference guide used for in plant disease detection?",
+      "back": "A **reference guide** helps match a pattern of symptoms to possible causes; a match is useful but may not confirm the cause.",
+      "hint": "Think about the step that comes after observing the plant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18k1xpl",
+      "kind": "term",
+      "front": "What are test kits used for when detecting plant disease?",
+      "back": "**Test kits** check a plant sample for a particular cause of disease, and some diseases can be detected this way.",
+      "hint": "Think about a quicker option than sending a sample away.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1le8vkn",
+      "kind": "concept",
+      "front": "Which routes can carry plant pathogens from one plant to another?",
+      "back": "**Wind** carries some spores, **water** splashes pathogens onto nearby plants, **insects** carry them while feeding, and contaminated tools or infected cuttings transfer them.",
+      "hint": "Think about natural forces and how people handle plants.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kltkli",
+      "kind": "term",
+      "front": "What are spores?",
+      "back": "**Spores** are reproductive structures produced by many fungi, which can spread and grow under suitable conditions.",
+      "hint": "Think about which group of organisms commonly produces them.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ux29uh",
+      "kind": "concept",
+      "front": "Why does knowing how a disease spreads help people control it?",
+      "back": "It lets people choose an **effective control method**, for example cleaning tools reduces transfer between plants during pruning.",
+      "hint": "Think about matching a control measure to the way the pathogen moves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jjsrjx",
+      "kind": "term",
+      "front": "What does hygiene mean in preventing plant disease?",
+      "back": "**Hygiene** means keeping tools and growing areas clean to reduce pathogen transfer, for example by removing infected plant material.",
+      "hint": "Think about the actions a grower can take before a disease spreads.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11nv4nk",
+      "kind": "term",
+      "front": "What are resistant varieties of plants?",
+      "back": "**Resistant varieties** are plants bred to be less likely to develop particular diseases, though they may not cover every pathogen.",
+      "hint": "Think about what plant breeders aim to change.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "6-3",
+  "topicCode": "6.3",
+  "topicName": "Angular momentum and angular impulse",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:51.457Z",
+  "cards": [
+    {
+      "id": "14zavas",
+      "kind": "concept",
+      "front": "What is angular momentum, and what does it tell you about a spinning object?",
+      "back": "**Angular momentum** $L$ measures how much rotation an object has about an axis. It depends on how its mass is spread out and how fast it turns, like momentum for rotation.",
+      "hint": "Compare a heavy flywheel with a light wheel at the same speed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0clh6u3",
+      "kind": "formula",
+      "front": "What is the equation for the angular momentum of a rigid object, and what does each symbol mean?",
+      "back": "$L = I\\omega$, where $L$ is angular momentum in $\\mathrm{kg\\,m^2/s}$, $I$ is **rotational inertia** in $\\mathrm{kg\\,m^2}$, and $\\omega$ is angular velocity in rad/s.",
+      "hint": "It is the rotational partner of p = mv.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ut5ahv",
+      "kind": "concept",
+      "front": "How is angular impulse related to angular momentum?",
+      "back": "**Angular impulse** $\\tau\\Delta t$ equals the change in angular momentum: $\\tau_{\\mathrm{net}}\\Delta t = \\Delta L$. It is the rotational partner of $F\\Delta t = \\Delta p$.",
+      "hint": "Multiply net torque by the time it acts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lfhus7",
+      "kind": "term",
+      "front": "What is rotational inertia?",
+      "back": "**Rotational inertia** $I$ is an object's resistance to changes in its angular velocity. It depends on its mass and how far that mass lies from the axis.",
+      "hint": "Think of it as the rotational version of mass.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hpvu9u",
+      "kind": "formula",
+      "front": "What equation gives the angular momentum of a particle moving in a circle of radius $r$ at speed $v$?",
+      "back": "$L = mvr$. It agrees with $L = I\\omega$ because $I = mr^2$ and $\\omega = v/r$.",
+      "hint": "It uses mass, speed and radius.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g5ijfs",
+      "kind": "mistake",
+      "front": "A student says two wheels spinning at the same rate must have the same angular momentum. Is this right?",
+      "back": "**No**. Angular momentum also depends on rotational inertia, so a larger $I$ gives a larger $L$ at the same angular velocity.",
+      "hint": "What else does $L$ depend on besides $\\omega$?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i7czs6",
+      "kind": "example",
+      "front": "A wheel has $I = 0.40\\ \\mathrm{kg\\,m^2}$ and spins at 15 rad/s. What is its angular momentum?",
+      "back": "$L = (0.40)(15) = 6.0\\ \\mathrm{kg\\,m^2/s}$.",
+      "hint": "Use $L = I\\omega$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "025qtmx",
+      "kind": "process",
+      "front": "What are the steps to find the final angular speed of a wheel that starts at rest and has a constant net torque applied for a time?",
+      "back": "1) Find the angular impulse $\\tau\\Delta t$. 2) Since it starts at rest, this equals the final angular momentum. 3) Divide by $I$ to get $\\omega = L_f/I$.",
+      "hint": "Start with the angular impulse.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dib836",
+      "kind": "example",
+      "front": "A wheel with $I = 5.0\\ \\mathrm{kg\\,m^2}$ starts at rest. A net torque of 2.5 N m acts for 4.0 s. What is its final angular speed?",
+      "back": "$\\omega = 2.0\\ \\mathrm{rad/s}$, because $\\tau\\Delta t = 10\\ \\mathrm{kg\\,m^2/s}$ and $\\omega = 10/5.0$.",
+      "hint": "Find the angular impulse first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mww3qk",
+      "kind": "concept",
+      "front": "What does the slope of an angular momentum-time graph show?",
+      "back": "The **net torque**, since $\\tau_{\\mathrm{net}} = \\Delta L/\\Delta t$. A steady torque gives a straight line, and a changing torque gives a curve.",
+      "hint": "Rearrange the angular impulse equation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gv96s3",
+      "kind": "process",
+      "front": "When torque varies with time, how do you find the angular impulse from a torque-time graph?",
+      "back": "Find the **area under the torque-time graph**. Its unit is $\\mathrm{N\\,m\\,s}$, which equals $\\mathrm{kg\\,m^2/s}$.",
+      "hint": "Think about the area under the curve.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hxvmms",
+      "kind": "mistake",
+      "front": "A student says a moving particle has the same angular momentum whichever point is used. Is this right?",
+      "back": "**No**. Angular momentum depends on the chosen axis or point, so the same motion can give different values about different points. Always name the axis.",
+      "hint": "What must you name before calculating $L$?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qa41bb",
+      "kind": "concept",
+      "front": "What direction does angular momentum point in?",
+      "back": "Angular momentum is a **vector**, with direction set by the sense of rotation. In most problems, counterclockwise is taken as positive.",
+      "hint": "Think about which way the object turns.",
+      "sectionId": "s2"
+    }
+  ]
+}

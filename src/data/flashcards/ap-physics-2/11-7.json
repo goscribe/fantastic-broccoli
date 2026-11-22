@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "11-7",
+  "topicCode": "11.7",
+  "topicName": "Kirchhoff's junction rule",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:22.649Z",
+  "cards": [
+    {
+      "id": "0m2w477",
+      "kind": "formula",
+      "front": "What does Kirchhoff's junction rule state, as an equation?",
+      "back": "$\\sum I_\\mathrm{in}=\\sum I_\\mathrm{out}$: the **total current entering a junction equals the total current leaving it**. Each current is in amperes (A).",
+      "hint": "Think of the water pipe that splits and rejoins.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0p3l6cn",
+      "kind": "concept",
+      "front": "Why must the current entering a junction equal the current leaving it?",
+      "back": "Because of **conservation of charge**: charge cannot be created, destroyed or piled up at a junction in a steady circuit, so whatever arrives must leave.",
+      "hint": "Ask what would happen if charge built up at the junction.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bygh2f",
+      "kind": "process",
+      "front": "How do you find an unknown current at a junction?",
+      "back": "List every wire and mark it as entering or leaving. Add the entering currents, add the leaving currents, and set the two sums equal. A negative answer means the current flows the opposite way.",
+      "hint": "Choose directions first, then keep them consistent.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1aqqtai",
+      "kind": "term",
+      "front": "What is a junction in a circuit?",
+      "back": "A **junction** is a point where three or more wires (conductors) meet, so the current can divide or combine there.",
+      "hint": "Count the wires meeting at the point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zn2sky",
+      "kind": "term",
+      "front": "What is a branch in a circuit?",
+      "back": "A **branch** is a path between two junctions that carries a single current along its whole length.",
+      "hint": "Think about what sits between two junctions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j1lylm",
+      "kind": "mistake",
+      "front": "A student says the current gets smaller after passing through a resistor because the resistor uses up current. Why is this wrong?",
+      "back": "The **same current leaves a resistor as enters it**. A resistor transfers energy, not charge, so no current is lost.",
+      "hint": "What does a resistor actually transfer?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vgg8vw",
+      "kind": "example",
+      "front": "Two wires bring 5.0 A and 2.0 A into a junction. One wire takes 3.0 A out. What current leaves in the fourth wire?",
+      "back": "**4.0 A** leaves in the fourth wire. Entering total is 7.0 A, so 7.0 A = 3.0 A + I, giving I = 4.0 A.",
+      "hint": "Start by adding the entering currents.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16jphne",
+      "kind": "concept",
+      "front": "How many independent equations do two junctions in the same circuit give?",
+      "back": "Only **one independent equation**. The same three currents appear at both junctions, so the second junction gives the same equation as the first.",
+      "hint": "Compare the currents at junction a and junction b.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1x77qm3",
+      "kind": "process",
+      "front": "How do you solve a circuit with several unknown branch currents?",
+      "back": "Count the unknowns and write exactly that many independent equations. Use the junction rule for current relationships and the loop rule for energy relationships, then solve them together.",
+      "hint": "A loop around the outside adds no new information.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0maj15k",
+      "kind": "example",
+      "front": "A 12 V battery drives current through a 2.0 Ω resistor R1, then into branches with 3.0 Ω (R2) and 6.0 Ω (R3). What are I1, I2 and I3?",
+      "back": "**I1 = 3.0 A, I2 = 2.0 A, I3 = 1.0 A**. The junction rule gives I1 = I2 + I3, and loop equations give I2 = 2I3 and I1 = 3I3, so I3 = 1.0 A.",
+      "hint": "Use the junction rule first, then the two loops.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ap7poa",
+      "kind": "mistake",
+      "front": "A student thinks a loop with no battery cannot be used to write an equation. Is this right?",
+      "back": "No. A loop with no battery still gives a valid **loop rule** equation, which is needed to solve the circuit.",
+      "hint": "The loop rule applies to any closed loop.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0exv3ex",
+      "kind": "example",
+      "front": "A 12 V battery is in series with a 2.0 Ω resistor and two parallel 4.0 Ω resistors. What current flows in each parallel resistor?",
+      "back": "**1.5 A** in each parallel resistor. The two parallel currents are equal, so I1 = 2I2, and 12 − 2.0I1 − 4.0I2 = 0 gives I2 = 1.5 A.",
+      "hint": "Use symmetry between the two parallel branches."
+    },
+    {
+      "id": "1xfszm0",
+      "kind": "concept",
+      "front": "What happens at a junction if, briefly, more charge arrives each second than leaves?",
+      "back": "Charge **accumulates** at the junction and it becomes charged. Its electric field opposes further imbalance, so the currents quickly balance again.",
+      "hint": "Think about what the junction's electric field does.",
+      "sectionId": "s5"
+    }
+  ]
+}

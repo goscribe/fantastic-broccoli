@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-8-1-1",
+  "topicCode": "3.8.1.1",
+  "topicName": "Rutherford scattering",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:55.171Z",
+  "cards": [
+    {
+      "id": "1f2q98o",
+      "kind": "concept",
+      "front": "Why did most alpha particles pass straight through the gold foil?",
+      "back": "Most of the atom is **empty space**, so most alpha particles meet no strong force and go straight on.",
+      "hint": "Think about how much of an atom a particle would have to hit to be deflected.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02fy6m9",
+      "kind": "concept",
+      "front": "Why were a few alpha particles deflected through large angles?",
+      "back": "Like charges repel. A positive alpha particle passing close to a **concentrated positive charge** feels a strong repulsive force that bends its path sharply.",
+      "hint": "Think about the force on a positive particle near a positive charge.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dw74rn",
+      "kind": "term",
+      "front": "What is the nuclear model of the atom?",
+      "back": "**Nuclear model**: most of the atomic mass and all the positive charge sit in a tiny central nucleus, with electrons occupying the space around it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0r9lfqi",
+      "kind": "concept",
+      "front": "Why could the plum pudding model not explain the large deflections?",
+      "back": "Its positive charge is spread out, so it gives only a weak force. Every alpha particle would be deflected by a very small angle.",
+      "hint": "Compare how strong the force is when charge is spread out versus concentrated.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dztv7g",
+      "kind": "mistake",
+      "front": "A student says many alpha particles bounced straight back. What is wrong with this?",
+      "back": "Large deflections were **rare**. Only a very small fraction of particles rebounded, which is why the result was so surprising.",
+      "hint": "Compare the counts for particles that went straight through with those that rebounded.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oc0obz",
+      "kind": "term",
+      "front": "What are alpha particles?",
+      "back": "**Alpha particles** are positively charged helium nuclei, each containing two protons and two neutrons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1runne3",
+      "kind": "concept",
+      "front": "Why was the alpha scattering experiment carried out in an evacuated chamber?",
+      "back": "So that **air does not absorb or scatter** the alpha particles, which would change the results.",
+      "hint": "Think about what air particles could do to a fast-moving alpha particle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wphxft",
+      "kind": "process",
+      "front": "What are the four main parts of Rutherford's set-up, in the order the particles meet them?",
+      "back": "A narrow beam from a radioactive source, then a thin gold foil, inside an evacuated chamber, with a movable detector that counts particles at each angle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08aoa72",
+      "kind": "formula",
+      "front": "How do you calculate the percentage of alpha particles deflected through more than $90^{\\circ}$?",
+      "back": "$\\mathrm{percentage} = \\frac{\\mathrm{number\\,deflected}}{\\mathrm{total\\,counted}}\\times100$, where both counts are numbers of particles (no units).",
+      "hint": "You need the deflected count and the total count from the detector.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17pze24",
+      "kind": "example",
+      "front": "A detector counts 20 000 alpha particles and 8 are deflected through more than $90^{\\circ}$. What percentage is this?",
+      "back": "$\\frac{8}{20\\,000}\\times100=0.040\\%$, a tiny fraction that supports a very small nucleus.",
+      "hint": "Divide the deflected count by the total, then multiply by 100.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hu1lir",
+      "kind": "concept",
+      "front": "What do larger deflection angles tell us about how close an alpha particle came to a nucleus?",
+      "back": "Larger angles mean a **closer approach**. Counting at many angles therefore tests how the repulsive force changes with distance.",
+      "hint": "Think about how close a particle must get to feel a very strong repulsion.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "058299v",
+      "kind": "concept",
+      "front": "Which model's prediction for deflections above $90^{\\circ}$ agrees with the observations, and why?",
+      "back": "The **nuclear model**. It expects a very few particles to rebound, whereas the plum pudding model predicts no deflections above $90^{\\circ}$.",
+      "hint": "Look at the row for deflections above $90^{\\circ}$ when comparing the two models.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b8t6gs",
+      "kind": "concept",
+      "front": "Why does an alpha particle aimed straight at a nucleus stop and reverse?",
+      "back": "Its **kinetic energy is converted into electric potential energy** as repulsion slows it. At closest approach it is momentarily at rest, then it moves back out.",
+      "hint": "Think about the energy changes as a particle slows while moving against repulsion.",
+      "sectionId": "s5"
+    }
+  ]
+}

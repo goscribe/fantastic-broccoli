@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "9-9",
+  "topicCode": "9.9",
+  "topicName": "Cell potential and free energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:40.178Z",
+  "cards": [
+    {
+      "id": "1ogsc6m",
+      "kind": "concept",
+      "front": "What does a positive standard cell potential tell you about a redox reaction as written?",
+      "back": "It is **spontaneous** under standard conditions as written. The sign of the cell potential shows which direction runs on its own.",
+      "hint": "Think about the sign and which direction runs by itself.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l8bh46",
+      "kind": "formula",
+      "front": "How is the standard cell potential found from reduction potentials?",
+      "back": "$E^\\circ_{\\text{cell}}=E^\\circ_{\\text{cathode}}-E^\\circ_{\\text{anode}}$. Use the listed reduction potential for both electrodes, even the anode where oxidation occurs.",
+      "hint": "Decide which electrode is reduced first, then combine the two listed values.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09f7vi1",
+      "kind": "formula",
+      "front": "What links Gibbs free energy change to cell potential, and what does each symbol mean?",
+      "back": "$\\Delta G=-nFE_{\\text{cell}}$. Here $n$ is moles of electrons transferred per mole of reaction, $F$ is **Faraday's constant** ($96{,}485\\,\\mathrm{C\\,mol^{-1}}$), and $E_{\\text{cell}}$ is in volts.",
+      "hint": "Consider how many electrons move per mole, and what charge each carries.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qjwa99",
+      "kind": "term",
+      "front": "What is a standard reduction potential?",
+      "back": "A **standard reduction potential** measures a half-reaction's tendency to gain electrons under standard conditions. A more positive value means a greater tendency to be reduced.",
+      "hint": "Think about gaining electrons and which value is larger.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r2g2vc",
+      "kind": "term",
+      "front": "Which electrode is the cathode in a galvanic cell, and what happens there?",
+      "back": "The **cathode** is where **reduction** occurs. In a spontaneous galvanic cell it is the electrode with the more positive reduction potential.",
+      "hint": "Reduction happens here; compare the two potentials.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yhom7a",
+      "kind": "term",
+      "front": "Which electrode is the anode, and what happens there?",
+      "back": "The **anode** is where **oxidation** occurs, because electrons are released there.",
+      "hint": "The opposite of the cathode.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cnbgqr",
+      "kind": "process",
+      "front": "What are the steps to find the standard potential of a galvanic cell?",
+      "back": "1. Write both values as reduction potentials. 2. Identify the cathode from the more positive value. 3. Identify the anode. 4. Subtract: $E^\\circ_{\\text{cathode}}-E^\\circ_{\\text{anode}}$.",
+      "hint": "Start with the reduction values, then assign roles.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00csco1",
+      "kind": "example",
+      "front": "Find $E^\\circ_{\\text{cell}}$ for zinc–copper, given $E^\\circ(\\mathrm{Cu^{2+}/Cu})=+0.34\\,\\mathrm{V}$ and $E^\\circ(\\mathrm{Zn^{2+}/Zn})=-0.76\\,\\mathrm{V}$.",
+      "back": "$+1.10\\,\\mathrm{V}$. Copper is the cathode and zinc is the anode, so $(+0.34)-(-0.76)=+1.10\\,\\mathrm{V}$.",
+      "hint": "Copper is more positive, so it is the cathode.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xhxdqk",
+      "kind": "example",
+      "front": "Calculate $\\Delta G^\\circ$ for the zinc–copper reaction, where $n=2$ and $E^\\circ_{\\text{cell}}=+1.10\\,\\mathrm{V}$.",
+      "back": "About $-212\\,\\mathrm{kJ\\,mol^{-1}}$. $\\Delta G^\\circ=-(2)(96{,}485)(1.10)=-212{,}267\\,\\mathrm{J\\,mol^{-1}}$.",
+      "hint": "Use $\\Delta G^\\circ=-nFE^\\circ_{\\text{cell}}$ with $F=96{,}485$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xkzrgs",
+      "kind": "mistake",
+      "front": "A student multiplies a reduction potential by the balancing coefficient before subtracting. Why is this wrong?",
+      "back": "**Coefficients** do not change electrode potentials. They affect the charge transferred, which enters through $n$ in $\\Delta G$, not the voltage.",
+      "hint": "Coefficients change moles of electrons, not volts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02hmu5z",
+      "kind": "mistake",
+      "front": "A student thinks a reaction with a positive cell potential must happen quickly. What is the error?",
+      "back": "Spontaneity does not describe **reaction speed**. A favorable electron transfer may still be slow because of kinetic barriers.",
+      "hint": "Spontaneous means favorable, not fast.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dsz7zo",
+      "kind": "concept",
+      "front": "What does a cell potential of zero mean?",
+      "back": "The reaction is at **equilibrium**, so there is no net driving force in either direction.",
+      "hint": "No net direction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18uecd9",
+      "kind": "concept",
+      "front": "Why does doubling every coefficient double $\\Delta G^\\circ$ but leave $E^\\circ_{\\text{cell}}$ unchanged?",
+      "back": "Doubling doubles $n$, so $\\Delta G^\\circ$ doubles. Cell potential is energy per unit charge, so it stays the same.",
+      "hint": "Which quantity depends on moles of electrons?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wx1wvc",
+      "kind": "mistake",
+      "front": "A student thinks reversing a reaction leaves the sign of its cell potential unchanged. What is right?",
+      "back": "Reversing the reaction **reverses the sign** of its cell potential. The calculation gives the potential for the reaction as written.",
+      "hint": "Think about which direction is spontaneous.",
+      "sectionId": "s2"
+    }
+  ]
+}

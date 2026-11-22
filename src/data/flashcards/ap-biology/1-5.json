@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "1-5",
+  "topicCode": "1.5",
+  "topicName": "Lipids",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:12.575Z",
+  "cards": [
+    {
+      "id": "1sbwd8i",
+      "kind": "concept",
+      "front": "Why do phospholipids form a bilayer in water?",
+      "back": "Phospholipids are **amphipathic**, so their hydrophobic tails hide from water. Heads face the water on both sides, and tails point inward, forming a nonpolar interior.",
+      "hint": "Think about which parts of the molecule water attracts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r3n556",
+      "kind": "concept",
+      "front": "How does a cis double bond change the way fatty acids pack together?",
+      "back": "A cis double bond creates a **bend** in the chain. Bent chains cannot pack closely, so fats rich in cis unsaturated fatty acids are often liquid at room temperature.",
+      "hint": "Compare with a straight saturated chain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wbatoe",
+      "kind": "term",
+      "front": "What is a fat?",
+      "back": "A **fat** (triglyceride) is one glycerol molecule joined to three fatty acids. Each fatty acid joins to glycerol through an ester bond.",
+      "hint": "Count the parts: one backbone and how many chains?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fzyw6c",
+      "kind": "process",
+      "front": "How is a fat assembled from glycerol and fatty acids?",
+      "back": "Each of glycerol's three hydroxyl groups joins to a fatty acid's carboxyl group. Each join forms an **ester bond** and releases one water molecule.",
+      "hint": "Think about what is lost each time a bond forms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15x83zi",
+      "kind": "concept",
+      "front": "Why are fats useful as energy stores?",
+      "back": "Their many carbon–hydrogen bonds release energy when oxidized. Fats also provide insulation and cushioning.",
+      "hint": "Focus on the bonds in the hydrocarbon chains.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16jq3sv",
+      "kind": "term",
+      "front": "What is a saturated fatty acid?",
+      "back": "A **saturated fatty acid** has no carbon–carbon double bonds in its hydrocarbon chain. Its straight chain packs closely, so these fats are often solid at room temperature.",
+      "hint": "Look for double bonds in the chain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tu7t0w",
+      "kind": "term",
+      "front": "What is an unsaturated fatty acid?",
+      "back": "An **unsaturated fatty acid** has one or more carbon–carbon double bonds. Monounsaturated means one double bond; polyunsaturated means multiple.",
+      "hint": "Contrast with saturated.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04n8sp7",
+      "kind": "mistake",
+      "front": "Is every double bond in a fatty acid a bend in the chain?",
+      "back": "No. Only **cis** double bonds bend the chain. Trans double bonds leave chains straighter than cis double bonds do.",
+      "hint": "Geometry matters, not just whether a double bond is present.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fvtkls",
+      "kind": "term",
+      "front": "What is a phospholipid?",
+      "back": "A **phospholipid** has a glycerol backbone, two fatty acid tails, and a phosphate-containing head group. Its head is hydrophilic and its tails are hydrophobic.",
+      "hint": "Compare with a fat: what replaces the third fatty acid?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18xfh28",
+      "kind": "term",
+      "front": "What does amphipathic mean?",
+      "back": "**Amphipathic** means a molecule has both hydrophilic (water-attracting) and hydrophobic (water-avoiding) regions.",
+      "hint": "Think of amphi- as meaning both.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z93vwj",
+      "kind": "concept",
+      "front": "What does the nonpolar interior of a membrane bilayer do?",
+      "back": "The **nonpolar** interior slows the movement of ions and many polar molecules. Membrane proteins and other components help control what crosses.",
+      "hint": "Like dissolves like.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ljz2by",
+      "kind": "concept",
+      "front": "How does cholesterol help regulate membrane fluidity?",
+      "back": "At high temperatures, cholesterol **restrains** phospholipid movement. At low temperatures, it limits how tightly phospholipids pack.",
+      "hint": "Consider both hot and cold conditions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pxyewk",
+      "kind": "mistake",
+      "front": "Are steroids built from glycerol and fatty acids, like fats?",
+      "back": "No. A **steroid** has a framework of four fused carbon rings. It is grouped with lipids only because much of its structure is nonpolar.",
+      "hint": "Think about the shape of the structure, not its backbone.",
+      "sectionId": "s4"
+    }
+  ]
+}

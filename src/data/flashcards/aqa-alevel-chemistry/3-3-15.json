@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-15",
+  "topicCode": "3.3.15",
+  "topicName": "NMR spectroscopy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:42.950Z",
+  "cards": [
+    {
+      "id": "0btgoof",
+      "kind": "concept",
+      "front": "Why does a molecule give fewer NMR peaks than it has hydrogen atoms?",
+      "back": "Hydrogen atoms in the same **hydrogen environment** look identical to the spectrometer, so they give one peak. Peaks count environments, not individual atoms.",
+      "hint": "Compare the two CH$_3$ groups in propanone.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09gpr2t",
+      "kind": "concept",
+      "front": "What does the chemical shift, $\\delta$, of a peak tell you?",
+      "back": "It tells you the **environment** of that hydrogen, measured in ppm from TMS at $\\delta=0$. Electronegative atoms such as oxygen pull electrons away, so their nearby hydrogens appear at higher $\\delta$.",
+      "hint": "Think about what pulls electrons away from nearby hydrogen atoms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0spgcbw",
+      "kind": "concept",
+      "front": "How does the integration trace show the number of hydrogen atoms in each peak?",
+      "back": "The **area** under each peak is proportional to its hydrogen count, shown by step heights. Divide each step by the smallest, scale to whole numbers, then check the total against the molecular formula.",
+      "hint": "Think about the ratio of step heights rather than their exact sizes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ymbjsb",
+      "kind": "formula",
+      "front": "What does the $n+1$ rule predict for the number of lines in a peak?",
+      "back": "A hydrogen environment with $n$ equivalent neighbouring hydrogen atoms on an adjacent carbon gives **$n+1$** lines. For example, 2 neighbours give 3 lines, a triplet.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yqxyr4",
+      "kind": "term",
+      "front": "What is spin–spin coupling in proton NMR?",
+      "back": "The **splitting** of an NMR peak by hydrogen atoms on the adjacent carbon atom, which breaks the peak into several lines.",
+      "hint": "Think about what the neighbouring carbon's hydrogens do to a peak.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b35106",
+      "kind": "mistake",
+      "front": "Why is it wrong to read peak height as the number of hydrogen atoms?",
+      "back": "Peak height is not the count. The **area** under a peak is proportional to the number of hydrogen atoms, so a low, split peak can still have a large area.",
+      "hint": "Compare what the integration trace measures with how a peak looks.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01fukwt",
+      "kind": "mistake",
+      "front": "Why does counting hydrogen atoms give the wrong number of peaks?",
+      "back": "Peaks count **environments**, not atoms. Propane has eight hydrogen atoms but only two peaks, because its two end CH$_3$ groups are identical.",
+      "hint": "Look at the two ends of the propane molecule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0f06alt",
+      "kind": "example",
+      "front": "A compound has three peaks with integration steps 2.4 cm, 1.6 cm and 0.8 cm. How many hydrogen atoms does each peak represent?",
+      "back": "**3, 2 and 1** hydrogen atoms. The ratio 3 : 2 : 1 totals 6, which matches the six hydrogen atoms in $\\mathrm{C_2H_6O}$.",
+      "hint": "Start by dividing each step height by the smallest one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dhlvke",
+      "kind": "example",
+      "front": "Why is the CH$_3$ group in ethanol a triplet in proton NMR?",
+      "back": "It has **two** neighbouring hydrogen atoms on the CH$_2$ carbon, so $n+1=3$ lines. The relative line heights are 1 : 2 : 1.",
+      "hint": "Count the hydrogen atoms on the neighbouring carbon atom.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v6u2is",
+      "kind": "process",
+      "front": "What steps should you follow to deduce a structure from NMR data?",
+      "back": "Use the formula, mass spectrum and IR to find the groups. Count peaks for environments, use shifts to identify groups, integration for hydrogen counts and splitting for neighbours. Then check the structure fits all the data.",
+      "hint": "Start with the evidence that tells you which groups are present.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ewugdq",
+      "kind": "example",
+      "front": "An ester, $\\mathrm{C_4H_8O_2}$, has peaks at $\\delta$ 1.2 (3H, triplet), 2.0 (3H, singlet) and 4.1 (2H, quartet). What is its structure?",
+      "back": "**Ethyl ethanoate**, $\\mathrm{CH_3COOCH_2CH_3}$. The triplet and quartet show an ethyl group, the high-$\\delta$ quartet is CH$_2$ bonded to oxygen, and the singlet is CH$_3$ next to C=O.",
+      "hint": "Pair the triplet and the quartet first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dt4t0l",
+      "kind": "term",
+      "front": "Why is tetramethylsilane (TMS) used as the reference in proton NMR?",
+      "back": "All twelve of its hydrogen atoms are **equivalent**, so it gives one sharp peak, defined as $\\delta=0$. It is also inert and easy to remove afterwards.",
+      "hint": "How many different environments does its structure contain?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uxnnk1",
+      "kind": "process",
+      "front": "How can you confirm which peak is an O–H peak?",
+      "back": "Shake the sample with **D$_2$O** and record the spectrum again. The O–H peak disappears because deuterium replaces that hydrogen.",
+      "hint": "Think about what happens to hydrogen in O–H groups when a heavy isotope is present.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ewpc65",
+      "kind": "term",
+      "front": "What does carbon-13 NMR show that proton NMR does not?",
+      "back": "It gives one peak for each **carbon environment** in the molecule, offering another view of the same structure.",
+      "hint": "Compare which type of nucleus each technique detects.",
+      "sectionId": "s5"
+    }
+  ]
+}

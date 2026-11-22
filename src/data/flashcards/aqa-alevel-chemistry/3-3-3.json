@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-3",
+  "topicCode": "3.3.3",
+  "topicName": "Halogenoalkanes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:48.135Z",
+  "cards": [
+    {
+      "id": "07xfveb",
+      "kind": "concept",
+      "front": "Why do halogenoalkanes react readily when alkanes are unreactive?",
+      "back": "The halogen is more electronegative than carbon, so the **polar carbon–halogen bond** leaves the carbon with a $\\delta+$ charge that attracts nucleophiles.",
+      "hint": "Think about which atom pulls the bonding electrons harder.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12vqrgb",
+      "kind": "process",
+      "front": "Describe the one-step mechanism when hydroxide ions react with bromoethane.",
+      "back": "A lone pair on $\\mathrm{OH^-}$ forms a bond to the $\\delta+$ carbon, while the C–Br bond breaks and both its electrons go to bromine, forming $\\mathrm{Br^-}$.",
+      "hint": "Start the first curly arrow at the nucleophile's lone pair.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ukfh49",
+      "kind": "concept",
+      "front": "Which halogenoalkane hydrolyses fastest, and why?",
+      "back": "**Iodoalkanes** are fastest because the C–I bond has the lowest bond enthalpy ($228\\,\\text{kJ\\,mol}^{-1}$), so it breaks most easily. Bond enthalpy controls the rate, not polarity.",
+      "hint": "Compare the bond enthalpy values in the table.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "169lnw5",
+      "kind": "term",
+      "front": "What is a nucleophile?",
+      "back": "A **nucleophile** is a species that donates a lone pair of electrons to form a covalent bond.",
+      "hint": "Think about what the attacking species brings to the carbon.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hb5pm2",
+      "kind": "term",
+      "front": "What is a primary halogenoalkane?",
+      "back": "A **primary halogenoalkane** has its halogen on a carbon atom bonded to only one other carbon atom.",
+      "hint": "Count the carbon neighbours of the carbon that holds the halogen.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mtx2j2",
+      "kind": "formula",
+      "front": "What is the equation for bromoethane warmed with aqueous sodium hydroxide?",
+      "back": "$\\mathrm{CH_3CH_2Br(l) + NaOH(aq) \\rightarrow CH_3CH_2OH(l) + NaBr(aq)}$, giving ethanol as the **alcohol** product.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bewovi",
+      "kind": "concept",
+      "front": "How do warm aqueous and hot ethanolic sodium hydroxide differ in their products?",
+      "back": "Warm aqueous NaOH gives an **alcohol** by substitution, with hydroxide as a nucleophile. Hot ethanolic NaOH gives an **alkene** by elimination, with hydroxide as a base.",
+      "hint": "Look closely at the solvent and the temperature.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "16obvue",
+      "kind": "term",
+      "front": "What is a base in this reaction?",
+      "back": "A **base** is a species that accepts a hydrogen ion. Hydroxide acts as a base when it removes a hydrogen ion in hot ethanolic sodium hydroxide.",
+      "hint": "Think about what hydroxide does with a hydrogen ion.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0yd650d",
+      "kind": "concept",
+      "front": "Why can 2-bromobutane form more than one alkene on elimination?",
+      "back": "Hydrogen can be lost from carbons on either side of the C–Br bond, giving **but-1-ene** or **but-2-ene**, and but-2-ene also has two geometric isomers.",
+      "hint": "Count the carbons on each side of the carbon that holds the halogen.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1dxh80v",
+      "kind": "example",
+      "front": "What organic product forms when bromoethane is heated with KCN in aqueous ethanol?",
+      "back": "**Propanenitrile**, $\\mathrm{CH_3CH_2CN}$. The carbon chain is one atom longer than in bromoethane.",
+      "hint": "Compare the number of carbons in the reactant and the product.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0yxzxee",
+      "kind": "mistake",
+      "front": "Why must excess ammonia be used when making a primary amine from a halogenoalkane?",
+      "back": "The amine formed still has a lone pair and can attack another halogenoalkane. A large excess of ammonia makes this second reaction unlikely.",
+      "hint": "Consider whether the product can also act as a nucleophile.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ll8sh9",
+      "kind": "term",
+      "front": "What is a precipitate?",
+      "back": "A **precipitate** is an insoluble solid that forms when two solutions react.",
+      "hint": "Think about the cloudy solid seen in the silver nitrate test.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "142k9w5",
+      "kind": "process",
+      "front": "How is the rate of hydrolysis compared for different halogenoalkanes?",
+      "back": "Warm each halogenoalkane with aqueous silver nitrate in ethanol and time how long the precipitate takes to appear. Keep volumes, concentrations, temperature and chain length the same.",
+      "hint": "Think about what is measured and which conditions must stay fixed.",
+      "sectionId": "s5"
+    }
+  ]
+}

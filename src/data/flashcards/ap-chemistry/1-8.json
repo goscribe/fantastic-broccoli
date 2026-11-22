@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "1-8",
+  "topicCode": "1.8",
+  "topicName": "Valence electrons and ionic compounds",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:16.075Z",
+  "cards": [
+    {
+      "id": "10sejpr",
+      "kind": "term",
+      "front": "What are valence electrons?",
+      "back": "**Valence electrons** are the electrons in an atom's outer occupied energy level. For main group elements, the group number gives the count.",
+      "hint": "Think about which electrons an atom uses when it bonds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bp0xaz",
+      "kind": "concept",
+      "front": "How can an atom become an ion without changing which element it is?",
+      "back": "It **gains or loses electrons** while keeping the same number of protons. Losing electrons makes a cation; gaining electrons makes an anion.",
+      "hint": "Which particles change, and which stay fixed?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09baow3",
+      "kind": "example",
+      "front": "What formula do $\\text{Mg}^{2+}$ and $\\text{Cl}^-$ form?",
+      "back": "$\\text{MgCl}_2$. One $\\text{Mg}^{2+}$ gives $+2$, and two $\\text{Cl}^-$ give $-2$, so the total charge is $0$.",
+      "hint": "Balance the total positive and negative charge.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hd4hht",
+      "kind": "term",
+      "front": "What is a cation?",
+      "back": "A **cation** is a positively charged ion formed when an atom or group loses electrons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1u5hosg",
+      "kind": "term",
+      "front": "What is an anion?",
+      "back": "An **anion** is a negatively charged ion formed when an atom or group gains electrons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kjolyj",
+      "kind": "concept",
+      "front": "What charge do group 1 metals commonly form?",
+      "back": "**1+** ions, because they commonly lose one electron.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cvumgn",
+      "kind": "concept",
+      "front": "What charges do group 16 and group 15 nonmetals commonly form?",
+      "back": "Group 16 nonmetals commonly form **2−** ions, and group 15 nonmetals commonly form **3−** ions.",
+      "hint": "Count how many electrons each group tends to gain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zyuuj7",
+      "kind": "mistake",
+      "front": "What is wrong with saying a positive ion formed because it gained protons?",
+      "back": "**Wrong**: a positive ion has lost electrons, not gained protons. Electron transfer leaves the nucleus unchanged.",
+      "hint": "Which particles actually change during ion formation?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16b73xg",
+      "kind": "mistake",
+      "front": "Can you always use the group number to find a transition metal's valence electrons?",
+      "back": "**No**. The group rule is for main group elements. Transition metals can form ions with different charges, so the rule should not be applied unchanged.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mkmqy8",
+      "kind": "process",
+      "front": "What are the steps to write the formula of an ionic compound?",
+      "back": "1) Write the cation first, then the anion. 2) Find each ion's charge. 3) Choose the smallest whole-number ratio that makes the total charge zero. 4) Write the formula.",
+      "hint": "Check the total charge before writing the formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h5bla7",
+      "kind": "example",
+      "front": "What formula do $\\text{Al}^{3+}$ and $\\text{O}^{2-}$ form?",
+      "back": "$\\text{Al}_2\\text{O}_3$. Two $\\text{Al}^{3+}$ ions give $+6$, and three $\\text{O}^{2-}$ ions give $-6$.",
+      "hint": "Find the smallest ratio that gives a total charge of zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ux44ub",
+      "kind": "concept",
+      "front": "What structure do the ions in an ionic compound form?",
+      "back": "A **repeating, three-dimensional ionic lattice**, held together by ionic bonds, rather than separate molecules.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q7rh17",
+      "kind": "example",
+      "front": "How many valence electrons do sodium and chlorine have?",
+      "back": "Sodium has **one** (group 1). Chlorine has **seven** (group 17).",
+      "hint": "Use the group number.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c2xa3u",
+      "kind": "concept",
+      "front": "Why do some elements not have one reliable simple-ion charge?",
+      "back": "Group 14 elements have no single reliable simple-ion charge, group 18 rarely forms simple ions, and transition metals may have multiple charges.",
+      "sectionId": "s3"
+    }
+  ]
+}

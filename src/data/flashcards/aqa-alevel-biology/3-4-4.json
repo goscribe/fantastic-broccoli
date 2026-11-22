@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-4-4",
+  "topicCode": "3.4.4",
+  "topicName": "Genetic diversity and adaptation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:29.102Z",
+  "cards": [
+    {
+      "id": "0ug7i3d",
+      "kind": "concept",
+      "front": "How does natural selection make an inherited trait more common in a population over generations?",
+      "back": "Individuals with an advantageous inherited trait are more likely to survive and **reproduce**, so they pass the relevant alleles to offspring, which become more common over generations.",
+      "hint": "Think about which individuals end up passing their alleles on.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oysjz4",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that sexual reproduction creates new alleles?",
+      "back": "Sexual reproduction only **reshuffles** existing alleles into new combinations. New alleles come from **mutation**, a change in DNA, so mutation is their original source.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1e24i1c",
+      "kind": "concept",
+      "front": "Why does a population with many different alleles have a better chance of surviving environmental change?",
+      "back": "Some individuals are likely to carry alleles suited to the new challenge, so they can survive, reproduce and pass those alleles on. Diversity gives potential to adapt but does not guarantee survival.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rz7upm",
+      "kind": "term",
+      "front": "What is an adaptation?",
+      "back": "An **adaptation** is an inherited feature that increases fitness, meaning reproductive success, in a particular environment.",
+      "hint": "Compare with a feature that develops because of conditions rather than genes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0u7sh24",
+      "kind": "term",
+      "front": "What is a selection pressure?",
+      "back": "A **selection pressure** is an environmental factor that affects an individual's chances of surviving or reproducing, such as predators, disease or limited water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15qncz2",
+      "kind": "mistake",
+      "front": "Why is it wrong to say bacteria become antibiotic resistant because they need to?",
+      "back": "Selection acts on **existing variation**. Resistant bacteria already exist and survive better, then reproduce. Individuals do not develop useful inherited traits because they need them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jrq17d",
+      "kind": "term",
+      "front": "What is stabilising selection?",
+      "back": "**Stabilising selection** favours individuals with intermediate values of a trait, so extremes are less likely to survive. Human birth mass is an example.",
+      "hint": "Compare it with directional selection, which favours one end of a range.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nmi57c",
+      "kind": "concept",
+      "front": "How does directional selection change the distribution of a trait across generations?",
+      "back": "It favours individuals at one end of a range, so the population's trait distribution shifts towards that end over generations, for example bacteria becoming more resistant.",
+      "hint": "Think about which end of the range survives best.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lwzx5h",
+      "kind": "term",
+      "front": "What is a waxy cuticle and what effect does it have?",
+      "back": "A **waxy cuticle** is a water-resistant layer on a plant surface that reduces water loss, improving survival when water is scarce.",
+      "hint": "Think about where water can escape from a plant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16c2m82",
+      "kind": "concept",
+      "front": "Why can an adaptation that helps in one environment carry a cost or offer little benefit elsewhere?",
+      "back": "An adaptation only helps relative to a specific **challenge**. It may offer little benefit in another environment, and it can carry a cost, such as a thick cuticle restricting gas exchange.",
+      "hint": "Think about what else needs to pass through a leaf surface.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09dgt4a",
+      "kind": "process",
+      "front": "What three processes make sexual reproduction increase variation among offspring?",
+      "back": "Meiosis distributes chromosomes into gametes in different combinations, recombination exchanges sections between paired chromosomes, and random fertilisation combines gametes from two parents.",
+      "hint": "Think about what happens to chromosomes before gametes form.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tzh1sl",
+      "kind": "term",
+      "front": "What is a population bottleneck?",
+      "back": "A **population bottleneck** is a sharp fall in population size that can remove alleles by chance, leaving the population with less genetic diversity.",
+      "hint": "Think about what happens to alleles when only a few individuals survive.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1u2txzd",
+      "kind": "concept",
+      "front": "Why does inbreeding between close relatives increase the risk of harmful inherited conditions?",
+      "back": "Close relatives share alleles, so their offspring are more likely to inherit two copies of a harmful **recessive** allele, one from each parent.",
+      "hint": "Think about what close relatives have in common genetically.",
+      "sectionId": "s4"
+    }
+  ]
+}

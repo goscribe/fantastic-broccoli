@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-8",
+  "topicCode": "1.8",
+  "topicName": "Squeeze theorem",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:39.725Z",
+  "cards": [
+    {
+      "id": "0cd4w9j",
+      "kind": "term",
+      "front": "What does the squeeze theorem say about a function trapped between two others near a point?",
+      "back": "If $g(x)\\leq f(x)\\leq h(x)$ near $a$, and $g(x)$ and $h(x)$ both approach $L$, then **$f(x)$ also approaches $L$**. The outer functions force the middle one.",
+      "hint": "Think about what the middle function is forced to do.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0t5cvgc",
+      "kind": "concept",
+      "front": "Why does the squeeze theorem handle $x^2\\sin(1/x)$ near zero when direct substitution fails?",
+      "back": "The sine factor stays between $-1$ and $1$, while the **shrinking factor** $x^2$ goes to zero. The product is trapped between $-x^2$ and $x^2$, so it approaches $0$.",
+      "hint": "Compare the two factors separately.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18ombt2",
+      "kind": "process",
+      "front": "What are the steps for applying the squeeze theorem to find a limit?",
+      "back": "First, find an inequality that holds on both sides of the target point. Second, find the limit of each outer expression. Third, if those limits agree, state the **middle limit** as that shared value.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03n8a8f",
+      "kind": "term",
+      "front": "What are bounds in the squeeze theorem?",
+      "back": "**Bounds** are the outer functions that stay below and above the middle function near the point. Their values need not match at the point itself.",
+      "hint": "Which functions surround the middle one?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13vwtgf",
+      "kind": "mistake",
+      "front": "A student has two bounds with different limits at $a$. Can the squeeze theorem still find the middle limit?",
+      "back": "**No.** Mistake: assuming different outer limits still work. The two outer limits must agree, because the middle function can stay between bounds while approaching different values.",
+      "hint": "What must the outer limits do for the theorem to apply?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o6g8sx",
+      "kind": "formula",
+      "front": "What inequality bounds $x^2\\sin(1/x)$ for $x\\neq0$, and what limit does it show?",
+      "back": "$-x^2\\leq x^2\\sin(1/x)\\leq x^2$. Both outer bounds approach $0$ as $x\\to0$, so the **limit is $0$**.",
+      "hint": "Sine is always between -1 and 1.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1o1hupx",
+      "kind": "example",
+      "front": "Find $\\lim_{x\\to0}x^2\\cos(1/x)$ using the squeeze theorem.",
+      "back": "**0**. For $x\\neq0$, $-1\\leq\\cos(1/x)\\leq1$. Since $x^2\\geq0$, $-x^2\\leq x^2\\cos(1/x)\\leq x^2$, and both bounds approach $0$.",
+      "hint": "Start with bounds on cosine.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "063b8sn",
+      "kind": "concept",
+      "front": "What must you check before multiplying an inequality by an expression?",
+      "back": "Check its **sign**. A negative factor reverses the inequality direction, while a nonnegative factor such as $x^2$ keeps the direction unchanged.",
+      "hint": "What does a negative multiplier do to an inequality?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jvm1nx",
+      "kind": "term",
+      "front": "What is an absolute value bound?",
+      "back": "An **absolute value bound** is $|f(x)|\\leq g(x)$ near $a$. If $g(x)\\to0$, then $-g(x)\\leq f(x)\\leq g(x)$, so $f(x)\\to0$.",
+      "hint": "It limits how far $f$ is from zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1s494dy",
+      "kind": "concept",
+      "front": "Why use an absolute value bound instead of multiplying an inequality by $x$?",
+      "back": "Multiplying by $x$ is risky because $x$ **changes sign** across zero, which reverses the inequality direction. An absolute value bound avoids this problem.",
+      "hint": "What happens to $x$ when it crosses zero?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ouek55",
+      "kind": "mistake",
+      "front": "A student says $\\lim_{x\\to0}x\\sin(1/x)$ does not exist because $\\sin(1/x)$ has no limit at zero. What is wrong?",
+      "back": "**The product can still have a limit.** Since $|x\\sin(1/x)|\\leq|x|$, the product is squeezed to $0$, even though $\\sin(1/x)$ alone has no limit at zero.",
+      "hint": "Look at the product, not one factor alone.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0janrp9",
+      "kind": "term",
+      "front": "What does it mean for a function to oscillate near a point?",
+      "back": "Its values vary **repeatedly** near the point. Its oscillations may still approach one value, which is why the squeeze theorem can handle them.",
+      "hint": "Think of values swinging back and forth.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yguhb5",
+      "kind": "term",
+      "front": "What is a shrinking factor?",
+      "back": "A **shrinking factor** approaches zero. Multiplying a bounded factor by it can force the product toward zero.",
+      "hint": "Which factor goes to zero in $x^2\\sin(1/x)$?",
+      "sectionId": "s2"
+    }
+  ]
+}

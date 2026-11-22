@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "4-9",
+  "topicCode": "4.9",
+  "topicName": "Setting up a two-mean test",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:24:59.665Z",
+  "cards": [
+    {
+      "id": "1jgcnxw",
+      "kind": "concept",
+      "front": "What do the null and alternative hypotheses in a two-mean test compare?",
+      "back": "They compare the **population means** of two groups. A typical set is $H_0:\\mu_1-\\mu_2=0$ and $H_a:\\mu_1-\\mu_2>0$, because the claims are about parameters.",
+      "hint": "Think about what the gardener's question is really about.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10omnck",
+      "kind": "process",
+      "front": "What four conditions must be checked before running a two-sample t-test?",
+      "back": "**Random** sampling or assignment, **independence within groups** (each sample under 10% of its population when sampling without replacement), **independence between groups** (no pairing), and **normality** (each population approximately normal, or each sample size at least 30).",
+      "hint": "Two of these are about how the data were collected.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1erd31a",
+      "kind": "formula",
+      "front": "What is the two-sample t statistic for testing $H_0:\\mu_1-\\mu_2=0$ when the population standard deviations are unknown?",
+      "back": "$t=\\frac{(\\bar{x}_1-\\bar{x}_2)-0}{\\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}}$, where $s_1$ and $s_2$ are the sample standard deviations and $n_1$ and $n_2$ are the sample sizes.",
+      "hint": "Compare it with the one-mean statistic, which divides by a standard error.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qzj6th",
+      "kind": "term",
+      "front": "What does it mean for two samples to be independent?",
+      "back": "The **independent samples** have no pairing or matching between them, so an individual in one group is not linked to, or influencing, any individual in the other group.",
+      "hint": "Ask whether the same person could appear in both groups.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lecr04",
+      "kind": "mistake",
+      "front": "Why should hypotheses not be written with $\\bar{x}_1$ and $\\bar{x}_2$?",
+      "back": "Sample means are **data** used as evidence. Hypotheses must state claims about the **population means** $\\mu_1$ and $\\mu_2$.",
+      "hint": "Ask what the sample is used for versus what the claim is about.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zj15ih",
+      "kind": "concept",
+      "front": "How does the wording of a research question decide the alternative hypothesis?",
+      "back": "Wording that asks only whether means **differ** gives a **two-sided** alternative ($\\neq$). Wording that names a direction, such as higher or lower, gives a **one-sided** alternative ($>$ or $<$). Decide before looking at the data.",
+      "hint": "Look at the key words in the question.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bcwh0g",
+      "kind": "example",
+      "front": "If $\\mu_1$ is the true mean yield with the new fertilizer, which alternative hypothesis matches a higher yield with the new fertilizer?",
+      "back": "$H_a:\\mu_1-\\mu_2>0$. The direction must match how you defined $\\mu_1$ and $\\mu_2$.",
+      "hint": "Write the difference in the same order as your definitions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1r1rne5",
+      "kind": "process",
+      "front": "What should you do to check normality when a group has fewer than 30 observations?",
+      "back": "**Graph** the sample with a dotplot, histogram, or boxplot. Look for a roughly symmetric shape with no strong skew and no outliers, checking each group separately.",
+      "hint": "Compare this with the rule for groups of 30 or more.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pcsxv8",
+      "kind": "mistake",
+      "front": "A student says her dotplot proves the population is normal. What is wrong with this?",
+      "back": "A **graph** cannot prove a population is normal. It only shows no strong skew or outliers, so normality is **plausible**.",
+      "hint": "Think about what a sample can and cannot show.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mk01oj",
+      "kind": "example",
+      "front": "A teacher randomly assigns 40 students to flashcards and 40 to notes. Why can she skip a graph when checking normality?",
+      "back": "Each group has at least 30 students, so the sampling distribution of each sample mean is approximately **normal**, even if the population is skewed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hyxvuq",
+      "kind": "concept",
+      "front": "Why is the two-mean statistic a $t$ statistic rather than a $z$ statistic?",
+      "back": "Because the **population standard deviations** are unknown, so each is estimated by a sample standard deviation $s$.",
+      "hint": "Think about what you know and what you must estimate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19iku7r",
+      "kind": "term",
+      "front": "What do the degrees of freedom determine in a two-sample t-test?",
+      "back": "The **degrees of freedom** select the exact $t$ distribution used for the test. For two means, technology computes them from both samples.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-13",
+  "topicCode": "1.13",
+  "topicName": "Experimental design",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:08.549Z",
+  "cards": [
+    {
+      "id": "0dn5i6d",
+      "kind": "concept",
+      "front": "Why can a well-designed experiment support a cause-and-effect claim when simply observing an association cannot?",
+      "back": "**Random assignment** spreads confounding variables across the groups by chance. If the groups differ by more than chance would likely produce, the treatment is the most reasonable explanation.",
+      "hint": "Think about what chance does to the groups before treatment.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0wikzsf",
+      "kind": "term",
+      "front": "What is a confounding variable?",
+      "back": "A **confounding variable** is related to the treatment and also affects the response, so its effect cannot be separated from the effect of the treatment.",
+      "hint": "It can hide inside the comparison.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13klxfu",
+      "kind": "term",
+      "front": "What is random assignment?",
+      "back": "**Random assignment** is the use of a chance process, such as drawing names or a random number generator, to decide which treatment each experimental unit receives.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zowi1u",
+      "kind": "process",
+      "front": "What are the steps for a completely randomized design with two treatments?",
+      "back": "Number the units. Use a random device to pick half of them for the first treatment. Give the remaining units the second treatment. Measure the response for every unit.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0v2ypfa",
+      "kind": "term",
+      "front": "What is an experiment, and what is a treatment?",
+      "back": "An **experiment** assigns treatments to experimental units and then measures a response. A **treatment** is a specific condition that researchers assign to those units.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10alewi",
+      "kind": "term",
+      "front": "What do a control group and a placebo do in a study?",
+      "back": "A **control group** gives a baseline for comparison. A **placebo** is an inactive treatment that looks real, keeping expectations about improvement equal across the groups.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hnwr0s",
+      "kind": "term",
+      "front": "What is replication, and why does it help?",
+      "back": "**Replication** means using enough experimental units in each group. Chance differences between individuals then tend to average out, so a real treatment effect is easier to see.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ci3v2h",
+      "kind": "term",
+      "front": "What is blinding, and what is a double-blind study?",
+      "back": "**Blinding** keeps subjects, those measuring the response, or both unaware of which treatment each unit receives. In a **double-blind** study, neither group knows.",
+      "hint": "Think about how beliefs can change results.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07tywva",
+      "kind": "concept",
+      "front": "How does a randomized block design differ from a completely randomized design?",
+      "back": "A randomized block design first **sorts units into blocks** of similar units, then assigns treatments at random within each block. A completely randomized design assigns at random across all units.",
+      "hint": "Ask where the random assignment happens.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1a13wel",
+      "kind": "mistake",
+      "front": "A student says the blocks are the treatment groups in a randomized block design. Why is this wrong?",
+      "back": "**Blocks are not treatment groups.** Units are grouped by a characteristic expected to affect the response, and treatments are still assigned at random inside each block.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1cqvnki",
+      "kind": "mistake",
+      "front": "A student says replication makes the treatment groups identical. What is the mistake?",
+      "back": "**Replication** reduces the effect of chance variation. It does not make the groups identical. More units let a real treatment effect show more clearly.",
+      "hint": "Replication is about chance, not sameness.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lk9gsn",
+      "kind": "example",
+      "front": "A grower has 40 tomato plants, 20 on a sunny bench and 20 on a shaded bench. How should she test whether a new fertilizer raises yield?",
+      "back": "Use a **randomized block design**. Block by bench, then randomly assign 10 plants on each bench to fertilizer or no fertilizer (the control). Compare yields across treatments.",
+      "hint": "Light is expected to affect yield.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0omeegh",
+      "kind": "example",
+      "front": "A researcher has 30 subjects and two treatments in a completely randomized design. How many go to each treatment?",
+      "back": "**15 subjects** to each treatment. Number the subjects 1 to 30, use a random device to pick 15 for the first treatment, and give the remaining 15 the second.",
+      "hint": "Think about how the subjects are divided between the two treatments.",
+      "sectionId": "s3"
+    }
+  ]
+}

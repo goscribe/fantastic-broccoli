@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-8",
+  "topicCode": "6.8",
+  "topicName": "Solar energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:25.743Z",
+  "cards": [
+    {
+      "id": "1snmqac",
+      "kind": "process",
+      "front": "What steps turn sunlight into electricity inside a photovoltaic cell?",
+      "back": "**Photons** strike the cell and knock electrons loose. An electric field where the two silicon layers meet pushes them one way, and a wire carries them as direct current.",
+      "hint": "Start with what hits the cell and end at the wire.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tfi5ab",
+      "kind": "concept",
+      "front": "What is the key difference between a passive and an active solar system?",
+      "back": "An **active system** uses powered equipment such as pumps, fans or electronics. A **passive system** relies on building design alone, with no powered equipment.",
+      "hint": "Think about whether any machinery is needed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1y6el61",
+      "kind": "concept",
+      "front": "Why does solar power count as an intermittent source?",
+      "back": "Its **output** depends on light reaching the panels, so it stops at night and falls under clouds. Batteries or other storage can fill the gaps, but they add cost.",
+      "hint": "Think about when the Sun is available to the panels.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0fwb27x",
+      "kind": "term",
+      "front": "What is a photon?",
+      "back": "A **photon** is a single packet of light energy. Photons of blue light carry more energy than photons of red light.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ieyy3v",
+      "kind": "term",
+      "front": "What is thermal mass?",
+      "back": "The ability of a material, such as stone or concrete, to **absorb and store heat**, then release it slowly as the surroundings cool.",
+      "hint": "Think about why a stone wall still feels warm after a sunny day.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "030jzxm",
+      "kind": "concept",
+      "front": "Which building features let a passive solar design collect and keep heat without machinery?",
+      "back": "Large windows facing the Sun, floors and walls with high **thermal mass**, roof overhangs that shade the summer Sun, and **insulation** to keep stored heat inside.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q8769m",
+      "kind": "process",
+      "front": "What are the main parts of a rooftop solar water heater, and what does each do?",
+      "back": "A **collector** absorbs heat from the Sun. A **pump** moves the heated fluid onward. A **storage tank** holds the heated fluid until it is needed.",
+      "hint": "Follow the heat from the roof to where it is kept.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xtstlg",
+      "kind": "process",
+      "front": "How does concentrated solar power produce electricity?",
+      "back": "Mirrors focus sunlight onto a fluid, which heats up and makes **steam**. The steam spins a **turbine**.",
+      "hint": "Follow the energy from the mirrors to the turbine.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1i0yddh",
+      "kind": "term",
+      "front": "What does an inverter do in a solar installation?",
+      "back": "An **inverter** converts the direct current from the panels into the alternating current used by homes and the grid.",
+      "hint": "Think about which type of current homes and power lines use.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ndpwtq",
+      "kind": "concept",
+      "front": "Why does rooftop solar cut transmission losses?",
+      "back": "Rooftop panels make power where it is used, so less electricity has to travel long distances along power lines.",
+      "hint": "Consider how far electricity must travel to reach a home.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13toz48",
+      "kind": "mistake",
+      "front": "Why is it wrong to say solar power is completely pollution free?",
+      "back": "Only the **operating stage** is clean. Mining, manufacturing and disposal of panels all have impacts, so the whole life cycle is not pollution free.",
+      "hint": "Think about the stages that happen before and after the panels are running.",
+      "sectionId": "s6"
+    }
+  ]
+}

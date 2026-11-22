@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-5-1-3",
+  "topicCode": "3.5.1.3",
+  "topicName": "Resistivity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:32.739Z",
+  "cards": [
+    {
+      "id": "0ehbqc0",
+      "kind": "formula",
+      "front": "What does each symbol in the resistance equation $R=\\frac{\\rho L}{A}$ stand for, and what unit does each have?",
+      "back": "$R$ is resistance in $\\Omega$, $\\rho$ is **resistivity** in $\\Omega\\,\\mathrm{m}$, $L$ is length in $\\mathrm{m}$ and $A$ is cross-sectional area in $\\mathrm{m^2}$.",
+      "hint": "Start from the definition of resistivity and rearrange it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lwycw3",
+      "kind": "concept",
+      "front": "Why does the resistance of a metal wire increase when it is heated?",
+      "back": "The **metal ions** vibrate more widely, so conduction electrons collide with them more often and drift more slowly. The electron number barely changes, so resistance rises.",
+      "hint": "Think about the kinetic energy of the particles.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qsgxub",
+      "kind": "term",
+      "front": "What is the resistivity of a material?",
+      "back": "A **property of the material** equal to $\\frac{RA}{L}$ for a uniform conductor. It does not depend on the size of the sample.",
+      "hint": "Compare it with resistance, which depends on the sample's dimensions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1p52lfy",
+      "kind": "concept",
+      "front": "How does resistance change when a wire's length is doubled while its area stays the same?",
+      "back": "It **doubles**, because resistance is directly proportional to length.",
+      "hint": "Recall how resistance depends on length in the resistance equation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ok0fyn",
+      "kind": "mistake",
+      "front": "A student says resistivity and resistance are the same thing. Why is this wrong?",
+      "back": "**Resistance** depends on the sample's size, but **resistivity** is a property of the material alone. Their units are $\\Omega$ and $\\Omega\\,\\mathrm{m}$.",
+      "hint": "Think about what changes when you cut a wire in half.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w9dgz0",
+      "kind": "example",
+      "front": "A copper wire is 2.5 m long with a diameter of 0.50 mm. Its resistivity is $1.7\\times10^{-8}\\,\\Omega\\,\\mathrm{m}$. What is its resistance?",
+      "back": "About $0.22\\,\\Omega$. The area is $1.96\\times10^{-7}\\,\\mathrm{m^2}$, so $R=\\frac{\\rho L}{A}=0.217\\,\\Omega$, which rounds to $0.22\\,\\Omega$.",
+      "hint": "Find the cross-sectional area first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0t9fxb3",
+      "kind": "mistake",
+      "front": "A student uses the diameter in millimetres directly in $A=\\frac{\\pi d^2}{4}$. What goes wrong?",
+      "back": "The area comes out far too large, because $d$ must be in metres before substituting. Convert mm to m first so the area is in $\\mathrm{m^2}$.",
+      "hint": "Check the units of every quantity before substituting.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1o01vxy",
+      "kind": "process",
+      "front": "What are the steps for calculating the resistance of a wire from its diameter?",
+      "back": "1 Convert the diameter to metres. 2 Find $A=\\frac{\\pi d^2}{4}$. 3 Substitute into $R=\\frac{\\rho L}{A}$ with $L$ in metres. 4 Check the answer is in ohms.",
+      "hint": "Begin with the unit conversion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kuw11t",
+      "kind": "concept",
+      "front": "What happens to the resistance of a wire when its diameter is halved, with length and material unchanged?",
+      "back": "It **rises fourfold**, because halving the diameter makes the cross-sectional area four times smaller.",
+      "hint": "How does the area depend on the diameter?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01kzmxv",
+      "kind": "term",
+      "front": "What is a superconductor?",
+      "back": "A material whose **resistivity drops to zero** at and below its critical temperature. Current can then flow with no energy lost as heat.",
+      "hint": "Think about what happens when the material is cooled.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ty44ur",
+      "kind": "concept",
+      "front": "Why does the resistance of a thermistor fall as its temperature rises?",
+      "back": "Heating releases **more charge carriers** from the semiconductor. The extra carriers outweigh the increase in collisions, so resistance falls.",
+      "hint": "Compare the carrier numbers in a semiconductor and a metal at low temperature.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1luz40i",
+      "kind": "term",
+      "front": "What is a thermistor?",
+      "back": "A **resistor** made from a semiconductor whose resistance changes strongly with temperature. The common type falls in resistance as it warms.",
+      "hint": "Think about where temperature sensors are used.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0t4g9ok",
+      "kind": "concept",
+      "front": "Why does the resistance of an LDR fall when light shines on it?",
+      "back": "Light gives energy to charge carriers in the semiconductor layer, **releasing more carriers** that can move, so resistance falls.",
+      "hint": "Think about what light transfers to the semiconductor.",
+      "sectionId": "s6"
+    }
+  ]
+}

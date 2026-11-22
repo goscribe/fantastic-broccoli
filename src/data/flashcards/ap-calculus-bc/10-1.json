@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "10-1",
+  "topicCode": "10.1",
+  "topicName": "Convergent and divergent series",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:08.844Z",
+  "cards": [
+    {
+      "id": "05twic4",
+      "kind": "concept",
+      "front": "How can we add infinitely many numbers in a meaningful way?",
+      "back": "Use **partial sums**: add the first $N$ terms, $S_N$, and see whether these sums approach a limit as $N$ grows.",
+      "hint": "Add a few terms at a time instead of all of them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0c8gc8a",
+      "kind": "term",
+      "front": "When does an infinite series converge?",
+      "back": "When its **partial sums** $S_N$ approach a finite limit $S$ as $N\\to\\infty$. That limit $S$ is the sum of the series.",
+      "hint": "Ask what happens to $S_N$ as $N$ gets larger.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lei4bz",
+      "kind": "mistake",
+      "front": "Is an infinite sum automatically infinite?",
+      "back": "No. Adding endlessly many positive terms can give a **finite** number, such as $\\frac12+\\frac14+\\frac18+\\cdots=1$.",
+      "hint": "Think about the walk toward the wall.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ojk5gy",
+      "kind": "term",
+      "front": "What is an infinite series?",
+      "back": "The **sum** of all the terms of a sequence, written $\\sum_{n=1}^{\\infty}a_n$, where $a_n$ is the $n$th term.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nx2h1d",
+      "kind": "term",
+      "front": "What is the partial sum $S_N$?",
+      "back": "The **sum of the first $N$ terms**: $S_N=a_1+a_2+\\cdots+a_N$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0voto21",
+      "kind": "term",
+      "front": "What is a geometric series?",
+      "back": "A series where each term is the previous term times a fixed **common ratio** $r$, so the terms are $a, ar, ar^2, \\ldots$.",
+      "hint": "Look at how each term relates to the one before.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0o2xv98",
+      "kind": "formula",
+      "front": "For a geometric series $a+ar+ar^2+\\cdots$, when does it converge, and to what?",
+      "back": "It converges to $\\frac{a}{1-r}$ when **$|r|<1$**. It diverges when $|r|\\ge1$ and $a\\neq0$.",
+      "hint": "The condition is on the size of $r$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14f99qq",
+      "kind": "mistake",
+      "front": "Does a series converge just because its terms get close to 0?",
+      "back": "No. The **harmonic series** $\\sum_{n=1}^{\\infty}\\frac1n$ has terms approaching 0 but diverges, because its partial sums grow without bound.",
+      "hint": "Consider $\\sum 1/n$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tl0q62",
+      "kind": "process",
+      "front": "What are the steps to decide convergence using a formula for $S_N$?",
+      "back": "1) Write $S_N$ and **simplify** it to a formula in $N$. 2) Take the limit as $N\\to\\infty$. 3) A finite limit means convergence, and that limit is the sum.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02skdk4",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}\\frac{1}{n(n+1)}$ converge, and what is its sum?",
+      "back": "It converges to **1**. Split each term as $\\frac1n-\\frac{1}{n+1}$; the middle terms cancel, so $S_N=1-\\frac{1}{N+1}\\to1$.",
+      "hint": "Split each term into two fractions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cdktd8",
+      "kind": "example",
+      "front": "What is the partial sum $S_3$ of $\\sum_{n=1}^{\\infty}\\frac{3}{2^n}$?",
+      "back": "$S_3=\\frac{21}{8}$, from $\\frac32+\\frac34+\\frac38$.",
+      "hint": "Add the first three terms.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10udeke",
+      "kind": "concept",
+      "front": "Why does $1-1+1-1+\\cdots$ diverge?",
+      "back": "Its **partial sums** alternate $1,0,1,0,\\ldots$ and never settle on a single value, so there is no finite limit.",
+      "hint": "Write out the first few partial sums.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jlw2nj",
+      "kind": "term",
+      "front": "What is the harmonic series, and does it converge?",
+      "back": "$\\sum_{n=1}^{\\infty}\\frac1n=1+\\frac12+\\frac13+\\cdots$. It **diverges**, with partial sums growing without bound, though very slowly.",
+      "sectionId": "s5"
+    }
+  ]
+}

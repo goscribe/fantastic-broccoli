@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-10",
+  "topicCode": "1.10",
+  "topicName": "Types of discontinuities",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:39.006Z",
+  "cards": [
+    {
+      "id": "0cm7sfj",
+      "kind": "concept",
+      "front": "What must be true for a function to be continuous at a point?",
+      "back": "The **limit** at that point must exist and equal the function's value there. $\\lim_{x\\to c} f(x) = f(c)$ must hold.",
+      "hint": "Think about whether the approach and the value agree.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fphw79",
+      "kind": "concept",
+      "front": "Which type of discontinuity can be fixed by assigning one function value, and why?",
+      "back": "A **removable discontinuity**. Both sides approach the same finite value, so defining the function to equal that value makes it continuous.",
+      "hint": "Look at whether the one-sided limits agree.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0s43o5q",
+      "kind": "mistake",
+      "front": "How can you tell a jump discontinuity from a removable one just by looking at one-sided limits?",
+      "back": "In a **jump**, the finite one-sided limits are unequal. In a removable discontinuity, they are equal. Compare the two limits before naming the type.",
+      "hint": "Check whether the left and right heights match.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09tjcky",
+      "kind": "term",
+      "front": "What is a removable discontinuity?",
+      "back": "A **removable discontinuity** occurs when both sides approach the same finite value, but the function does not equal that value or is undefined there.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y5hxzf",
+      "kind": "term",
+      "front": "What is a hole on a graph?",
+      "back": "A **hole** is a missing point where nearby values approach one finite height. It often marks a removable discontinuity.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ynusf7",
+      "kind": "example",
+      "front": "For $f(x)=\\frac{x^2-1}{x-1}$ with $x\\ne1$, what value does $f(x)$ approach as $x$ approaches 1?",
+      "back": "**2**. For $x\\ne1$, the function simplifies to $x+1$, so both sides approach 2.",
+      "hint": "Try factoring the numerator.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1u2vnk4",
+      "kind": "process",
+      "front": "What steps should you follow to classify a discontinuity at a point?",
+      "back": "Find the limit from the left and from the right. Check whether the function has a value at the point. Compare these observations to identify the type.",
+      "hint": "Start with the one-sided limits.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tsvf9d",
+      "kind": "term",
+      "front": "What is a jump discontinuity?",
+      "back": "A **jump discontinuity** occurs when the left-hand and right-hand limits are finite but unequal.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wehtkz",
+      "kind": "formula",
+      "front": "Write the continuity condition at $x=c$ using a limit and function value.",
+      "back": "$\\lim_{x\\to c} f(x) = f(c)$. The **limit** as $x$ approaches $c$ must equal the value $f(c)$.",
+      "hint": "Left side is the limit, right side is the value.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0el4gbd",
+      "kind": "example",
+      "front": "For $g(x)=1$ when $x<0$ and $g(x)=3$ when $x\\ge0$, what type of discontinuity is at $x=0$?",
+      "back": "A **jump** discontinuity. The left limit is 1 and the right limit is 3, which are finite but unequal.",
+      "hint": "Compare the one-sided limits at the boundary.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hpic43",
+      "kind": "term",
+      "front": "What is an infinite discontinuity?",
+      "back": "An **infinite discontinuity** occurs when function values become unbounded from at least one side near a point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ethm58",
+      "kind": "example",
+      "front": "For $h(x)=\\frac{1}{x}$, what happens to $h(x)$ as $x$ approaches 0 from the right?",
+      "back": "It increases without **bound**, growing toward positive infinity. From the left, it decreases without bound.",
+      "hint": "Try plugging in small positive numbers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0agdvoc",
+      "kind": "mistake",
+      "front": "Must both sides of a vertical asymptote go to infinity in the same direction?",
+      "back": "**No**. One side may rise while the other falls, as with $h(x)=\\frac{1}{x}$ at $x=0$.",
+      "hint": "Compare the left and right sides separately.",
+      "sectionId": "s4"
+    }
+  ]
+}

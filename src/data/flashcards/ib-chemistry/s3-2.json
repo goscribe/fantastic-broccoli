@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "s3-2",
+  "topicCode": "S3.2",
+  "topicName": "Functional groups",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:22.374Z",
+  "cards": [
+    {
+      "id": "0v0rmmh",
+      "kind": "term",
+      "front": "What is a functional group?",
+      "back": "An **atom or group of atoms** in an organic molecule that gives it characteristic reactions. Look for it before the rest of the carbon structure.",
+      "hint": "Think of it as the reactive part of the molecule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wg4lkm",
+      "kind": "concept",
+      "front": "Why do ethanol and propan-1-ol both undergo oxidation, even though their chains differ?",
+      "back": "They share the same $\\mathrm{-OH}$ **functional group**, which controls reactivity. Their different carbon structures can still change their properties.",
+      "hint": "Compare what the two molecules have in common.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dtcn3p",
+      "kind": "concept",
+      "front": "Why can an aldehyde be oxidised to a carboxylic acid but a ketone is not oxidised under the same mild conditions?",
+      "back": "The difference is what is bonded to the **carbonyl carbon**. An aldehyde has a hydrogen there, while a ketone has two carbon groups.",
+      "hint": "Check which atoms are directly bonded to the C=O carbon.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oyd67i",
+      "kind": "term",
+      "front": "What is a homologous series?",
+      "back": "A family of compounds with the same **functional group**, a shared general formula and similar chemical reactions. Physical properties such as boiling point change as molecular size increases.",
+      "hint": "Members differ by a repeating unit, such as CH2.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nv7nc5",
+      "kind": "term",
+      "front": "What is an alkene?",
+      "back": "An organic compound containing a **carbon–carbon double bond**, $\\mathrm{C{=}C}$. Alkenes commonly undergo addition reactions across that bond.",
+      "hint": "Look for a double bond between two carbons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vtl4a3",
+      "kind": "concept",
+      "front": "How can you tell an ether from an alcohol using structure?",
+      "back": "An **alcohol** has an $\\mathrm{-OH}$ group bonded to a saturated carbon. An **ether** has an oxygen between two carbon groups, $\\mathrm{R{-}O{-}R'}$, with no oxygen–hydrogen bond.",
+      "hint": "Look for an oxygen–hydrogen bond.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ci7ut5",
+      "kind": "formula",
+      "front": "What is the general structure of an ester, and what does R represent?",
+      "back": "$\\mathrm{R{-}C(=O)O{-}R'}$, where R may be **hydrogen**. The key group is the $\\mathrm{-C(=O)O-}$ arrangement.",
+      "hint": "Find the carbonyl group and the oxygen beside it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0twbc93",
+      "kind": "process",
+      "front": "What happens when an ester is hydrolysed under acidic conditions?",
+      "back": "The ester breaks down to give a **carboxylic acid** and an **alcohol**. The products are different under alkaline conditions.",
+      "hint": "Hydrolysis splits the molecule using water.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uzfsmw",
+      "kind": "concept",
+      "front": "How does a carboxylic acid behave towards bases?",
+      "back": "A carboxylic acid can **donate a proton** and react with bases. Its group is $\\mathrm{-C(=O)OH}$.",
+      "hint": "Think about what the acidic H is doing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0at29io",
+      "kind": "mistake",
+      "front": "Why is an amide not the same as an amine?",
+      "back": "An amine has nitrogen bonded to carbon. An amide has nitrogen bonded **directly to a carbonyl carbon**, which makes it much less basic.",
+      "hint": "Check what the nitrogen is attached to.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l3yi5f",
+      "kind": "mistake",
+      "front": "A student says the C=C in an alkene is a carbonyl group. What is wrong with this?",
+      "back": "A **carbonyl group** is a carbon–oxygen double bond, $\\mathrm{C{=}O}$. The C=C in an alkene is a carbon–carbon double bond, so it is not a carbonyl group.",
+      "hint": "Which two atoms are joined by the double bond?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zzhbwe",
+      "kind": "concept",
+      "front": "Compare the characteristic reactions of an alkene and a haloalkane.",
+      "back": "An alkene commonly undergoes **addition** across its C=C bond. A haloalkane undergoes **substitution**, replacing its halogen atom with another atom or group.",
+      "hint": "One reaction adds across a bond, the other swaps an atom.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12nnpgd",
+      "kind": "formula",
+      "front": "What is the general formula of a primary amine?",
+      "back": "$\\mathrm{R{-}NH_2}$. The nitrogen is bonded to carbon, and the amine can **accept a proton**.",
+      "hint": "Count the hydrogens on the nitrogen.",
+      "sectionId": "s4"
+    }
+  ]
+}

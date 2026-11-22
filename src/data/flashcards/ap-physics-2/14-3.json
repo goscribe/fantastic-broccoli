@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "14-3",
+  "topicCode": "14.3",
+  "topicName": "Boundary behavior and polarization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:40.122Z",
+  "cards": [
+    {
+      "id": "0tvlw96",
+      "kind": "concept",
+      "front": "What happens to a wave when it meets a boundary between two media?",
+      "back": "It splits into a **reflected** part that returns into the first medium and a **transmitted** part that continues into the second. Together they carry the incident energy, apart from small losses.",
+      "hint": "Think about an echo off a distant cliff.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07x5uos",
+      "kind": "concept",
+      "front": "What is the difference between reflection at a fixed end and at a free end?",
+      "back": "At a **fixed end** the reflected pulse is inverted. At a **free end** it is upright. In both cases the reflected pulse keeps its shape and speed.",
+      "hint": "Ask whether anything pulls back on the rope.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nar14o",
+      "kind": "concept",
+      "front": "Why can only transverse waves be polarized?",
+      "back": "A **polarized wave** has all its oscillations in one plane. In a transverse wave the oscillations are perpendicular to travel, so a plane can be selected. Sound is longitudinal, so it cannot be polarized.",
+      "hint": "Compare the oscillation direction with the direction of travel.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01tnsil",
+      "kind": "formula",
+      "front": "What equation links wave speed, frequency and wavelength?",
+      "back": "$v=f\\lambda$, where $v$ is speed in m/s, $f$ is frequency in Hz and $\\lambda$ is wavelength in m. The frequency stays fixed at a boundary, so a change in speed changes the **wavelength**.",
+      "hint": "Check the units: m/s equals Hz times m.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10vw0f8",
+      "kind": "example",
+      "front": "A wave of frequency 20 Hz travels at 8.0 m/s in rope one and at 4.0 m/s in rope two. What is its wavelength in each rope?",
+      "back": "**0.40 m** in rope one and **0.20 m** in rope two, from $\\lambda=\\frac{v}{f}$ with the same frequency in both.",
+      "hint": "Divide the speed in each rope by the frequency.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1j90jjp",
+      "kind": "process",
+      "front": "How do you predict the reflected and transmitted pulses at a boundary between two ropes?",
+      "back": "Step 1: compare the speeds in the two ropes. Step 2: if the second rope is slower, the reflected pulse is **inverted**; if it is faster, the reflected pulse is upright. The transmitted pulse is upright in both cases.",
+      "hint": "Start by deciding which rope is slower.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yvis7e",
+      "kind": "mistake",
+      "front": "A student says the transmitted pulse is inverted when it enters a slower rope. What is wrong with this?",
+      "back": "The transmitted pulse is **upright**. Only the reflected pulse can flip, which happens at a fixed end or when the second medium is slower.",
+      "hint": "Separate the reflected pulse from the transmitted one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0msotyj",
+      "kind": "term",
+      "front": "What is a polarizer?",
+      "back": "A **polarizer** is a filter that passes only the part of a wave's oscillation lying along its transmission axis. The light leaving it is polarized along that axis and is dimmer than the light entering.",
+      "hint": "Think about which part of the oscillation gets through.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t8faak",
+      "kind": "concept",
+      "front": "Why is light from the sun or a bulb usually unpolarized?",
+      "back": "Its **oscillation direction** varies, so no single plane is favored. Shaking a rope in random directions gives the same kind of unpolarized wave.",
+      "hint": "Ask whether the direction of oscillation stays fixed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pz0wue",
+      "kind": "process",
+      "front": "What happens when light passes through two polarizers with parallel axes, and then with crossed axes?",
+      "back": "With parallel axes, light passes through. With crossed (perpendicular) axes, almost no light gets through. This is how crossed polarizers show that light is a transverse wave.",
+      "hint": "Compare the angle between the two axes in each case.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "095b4d4",
+      "kind": "formula",
+      "front": "What equation gives the transmitted intensity of polarized light through a polarizer?",
+      "back": "$I=I_0\\cos^2\\theta$, where $I_0$ is the incident intensity and $\\theta$ is the angle between the light's polarization and the polarizer's axis. $I$ is in the same units as $I_0$.",
+      "hint": "Check what happens when the angle is 0 degrees and when it is 90 degrees.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1r7esfp",
+      "kind": "concept",
+      "front": "Why do polarizing sunglasses reduce glare?",
+      "back": "Glare from a flat surface is partly **polarized**, so a polarizer can block much of it. The sunglasses are oriented to stop that polarized light.",
+      "hint": "Think about the kind of light that glare is made of.",
+      "sectionId": "s5"
+    }
+  ]
+}

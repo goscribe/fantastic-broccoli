@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-11",
+  "topicCode": "4.11",
+  "topicName": "Conditional probability and independence",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:45.287Z",
+  "cards": [
+    {
+      "id": "1pzior0",
+      "kind": "formula",
+      "front": "What is the formula for the conditional probability $P(A\\mid B)$, and when is it valid?",
+      "back": "$P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}$, valid when $P(B)>0$. Divide the probability of **both** events by the probability of the **given** event.",
+      "hint": "The numerator is both events; the denominator is the given event.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wc1vx6",
+      "kind": "concept",
+      "front": "How can you tell whether two events A and B are independent?",
+      "back": "Check whether $P(A\\cap B)=P(A)\\,P(B)$. If it holds, knowing one event **does not change** the probability of the other.",
+      "hint": "Compare the joint probability with the product of the two probabilities.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hri0vh",
+      "kind": "process",
+      "front": "How do you find the probability of an event from a tree diagram?",
+      "back": "**Multiply** the branch probabilities along each path, then **add** the paths that end in the event. Second-stage branches carry conditional probabilities.",
+      "hint": "Work from left to right.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0l7iuwg",
+      "kind": "concept",
+      "front": "Why does knowing that event B has occurred change the probability of A?",
+      "back": "Given B, only outcomes inside B remain possible, so **B becomes the new sample space**.",
+      "hint": "Ask which outcomes are still possible.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0p01t59",
+      "kind": "example",
+      "front": "A table shows 120 students, with 40 in the chess club. 22 of the club members are in Year 13. What is $P(\\text{Year 13}\\mid\\text{chess})$?",
+      "back": "$\\frac{22}{40}=0.55$. The given event is chess club, so the sample space is the 40 members.",
+      "hint": "Which group is the new sample space?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rltw0c",
+      "kind": "mistake",
+      "front": "Is $P(A\\mid B)$ always the same as $P(B\\mid A)$?",
+      "back": "Usually **not**. They share the numerator $P(A\\cap B)$ but have denominators $P(B)$ and $P(A)$, which are usually different.",
+      "hint": "Check the denominators.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0eb70r8",
+      "kind": "formula",
+      "front": "What is the multiplication rule for $P(A\\cap B)$ using a conditional probability?",
+      "back": "$P(A\\cap B)=P(B)\\,P(A\\mid B)$, or equally $P(A)\\,P(B\\mid A)$. It is used for events that happen in sequence.",
+      "hint": "Rearrange the conditional probability formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14z4ykp",
+      "kind": "example",
+      "front": "A bag has 5 red and 3 blue counters. Two are drawn without replacement. What is the probability that both are red?",
+      "back": "$\\frac{5}{8}\\times\\frac{4}{7}=\\frac{5}{14}\\approx0.357$. The second draw has 4 red out of 7 counters.",
+      "hint": "Update the total for the second draw.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r3uwan",
+      "kind": "mistake",
+      "front": "What is a common error when drawing counters without replacement?",
+      "back": "**Forgetting to reduce the total** for the second draw. The bag has changed, so both the numerator and the denominator must be updated.",
+      "hint": "What has changed after the first draw?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08dnr5k",
+      "kind": "mistake",
+      "front": "Are mutually exclusive events independent?",
+      "back": "No. Mutually exclusive events cannot both occur, so $P(A\\cap B)=0$. With positive probabilities, they are **dependent**.",
+      "hint": "Can zero match a product of two positive numbers?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1donncm",
+      "kind": "example",
+      "front": "Given $P(A)=0.4$, $P(B)=0.5$ and $P(A\\cup B)=0.7$, are A and B independent?",
+      "back": "Yes. $P(A\\cap B)=0.4+0.5-0.7=0.2$, and $P(A)\\,P(B)=0.4\\times0.5=0.2$, so the values match.",
+      "hint": "Find $P(A\\cap B)$ with the addition rule first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n1wxln",
+      "kind": "example",
+      "front": "On a school day $P(\\text{rain})=0.3$, $P(\\text{late}\\mid\\text{rain})=0.4$ and $P(\\text{late}\\mid\\text{no rain})=0.1$. What is $P(\\text{late})$?",
+      "back": "$0.3\\times0.4+0.7\\times0.1=0.12+0.07=0.19$. Add the two paths that end in late.",
+      "hint": "Two different paths end in late.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lyf0i8",
+      "kind": "term",
+      "front": "What is a tree diagram?",
+      "back": "A diagram whose **branches** show each stage of an experiment, with probabilities multiplied along paths and added across paths.",
+      "hint": "Think about how stages are shown.",
+      "sectionId": "s5"
+    }
+  ]
+}

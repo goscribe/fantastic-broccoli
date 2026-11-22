@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "8-2",
+  "topicCode": "8.2",
+  "topicName": "Pressure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:00.578Z",
+  "cards": [
+    {
+      "id": "0vksxks",
+      "kind": "term",
+      "front": "What is pressure, and what is its SI unit?",
+      "back": "Pressure is the **force** acting perpendicular to a surface divided by the area it acts over. Its SI unit is the **pascal** (Pa), equal to $1\\ \\mathrm{N\\,m^{-2}}$.",
+      "hint": "Think about how concentrated a push is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k9gq2e",
+      "kind": "concept",
+      "front": "Why does fluid pressure increase as you go deeper?",
+      "back": "Each layer of fluid must support the **weight** of the fluid above it. Deeper layers carry more weight per unit area, so the pressure is greater.",
+      "hint": "Consider what sits on top of a deeper layer.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13esne6",
+      "kind": "formula",
+      "front": "What is the formula for the gauge pressure at depth in a fluid at rest, and what does each symbol mean?",
+      "back": "$\\rho g h$, where $\\rho$ is the **fluid density** (kg/m$^3$), $g$ is the **gravitational field strength** (m/s$^2$), and $h$ is the **depth** (m). The result is in pascals.",
+      "hint": "Density, gravity and depth multiply together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1o31u3h",
+      "kind": "formula",
+      "front": "What is the formula for pressure, and what does each symbol mean?",
+      "back": "$P=\\frac{F}{A}$, where $P$ is the **pressure** (Pa), $F$ is the **perpendicular force** (N), and $A$ is the **area** (m$^2$) the force acts over.",
+      "hint": "Force on top, area underneath.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sl1j4t",
+      "kind": "example",
+      "front": "A crate presses straight down on a floor with a force of 600 N over a contact area of 0.0300 m$^2$. What is the pressure?",
+      "back": "$P=\\frac{600}{0.0300}=20000\\ \\mathrm{Pa}$, so the pressure is **$2.00\\times10^{4}$ Pa**.",
+      "hint": "Use $P=F/A$ with area in square meters.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04nuooo",
+      "kind": "process",
+      "front": "What are the steps to find the absolute pressure at a depth in a fluid?",
+      "back": "First find the **gauge pressure** with $\\rho g h$. Then add the **surface pressure** $P_0$ to get $P=P_0+\\rho g h$.",
+      "hint": "Two stages: depth part first, then surface part.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ba3gox",
+      "kind": "example",
+      "front": "Absolute pressure 5.0 m deep in fresh water? Use $\\rho=1000\\ \\mathrm{kg/m^3}$, $g=9.8\\ \\mathrm{m/s^2}$, $P_0=1.01\\times10^{5}\\ \\mathrm{Pa}$.",
+      "back": "Gauge pressure $=(1000)(9.8)(5.0)=49000$ Pa. Then $P=101000+49000$, so $P=1.5\\times10^{5}$ Pa.",
+      "hint": "Add the surface pressure to the depth term.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03bhm9u",
+      "kind": "concept",
+      "front": "How does a sharp knife cut better than a dull one, in terms of pressure?",
+      "back": "The same **force** acts over a much smaller **area**, so the pressure is much greater. Pressure rises as area falls for a fixed force.",
+      "hint": "Compare the same push on two different areas.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "081e77u",
+      "kind": "mistake",
+      "front": "A student says the pressure in a fluid acts in one fixed direction. What is wrong?",
+      "back": "Pressure is a **scalar** with no direction of its own. The force it produces acts **perpendicular** to the surface. In a fluid at rest, pressure at a given depth acts in every direction.",
+      "hint": "Consider what pressure is classed as in physics.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dolvy1",
+      "kind": "mistake",
+      "front": "A student uses the slanted distance along a sloping path as the depth when finding fluid pressure. What is wrong?",
+      "back": "Depth must be the **vertical** distance below the surface. Distance along a slanted path does not count.",
+      "hint": "Only the straight-down distance matters.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zvev1f",
+      "kind": "concept",
+      "front": "Do two points at the same depth in a still fluid have the same pressure?",
+      "back": "Yes. At a given depth the pressure is the **same** everywhere in a fluid at rest, in every direction. Only depth matters, not the shape or width of the container.",
+      "hint": "Think about a diver turning in a pool.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ud5jlc",
+      "kind": "mistake",
+      "front": "A student converts an area of 200 cm$^2$ to 0.0200 m$^2$ by dividing by 100. Is this right?",
+      "back": "No. There are **10,000** cm$^2$ in a square meter, so 200 cm$^2$ must be divided by **10,000** to give $0.0200\\ \\mathrm{m^2}$. Convert area to square meters before dividing.",
+      "hint": "Square the conversion factor for length.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10tiro5",
+      "kind": "term",
+      "front": "What is the difference between gauge pressure and absolute pressure?",
+      "back": "**Gauge pressure** is the pressure due to depth alone, $\\rho g h$. **Absolute pressure** is the total, equal to the surface pressure plus the gauge pressure.",
+      "hint": "One leaves out the surface pressure.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-8-1-2",
+  "topicCode": "3.8.1.2",
+  "topicName": "Alpha, beta and gamma radiation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:57.116Z",
+  "cards": [
+    {
+      "id": "0dzd2vy",
+      "kind": "concept",
+      "front": "Why is gamma radiation not deflected by a magnetic field, unlike alpha and beta-minus radiation?",
+      "back": "Gamma is **uncharged** electromagnetic radiation, so the field exerts no force on it. Alpha ($+2$) and beta-minus ($-1$) are charged and deflect in opposite directions.",
+      "hint": "Think about what a magnetic field can act on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wm7ngt",
+      "kind": "concept",
+      "front": "Why does alpha radiation have a much shorter range in matter than gamma radiation?",
+      "back": "Alpha is **strongly ionising**, so each ionisation transfers energy from it and it loses its energy quickly. Gamma ionises only rarely, so it travels many metres.",
+      "hint": "Think about the energy lost each time radiation interacts with an atom.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wcn4l0",
+      "kind": "process",
+      "front": "What are the steps by which a Geiger–Müller tube detects a particle of radiation?",
+      "back": "Radiation enters through the window and **ionises gas atoms**. The high voltage accelerates the freed electrons, which cause further ionisation. The resulting short current pulse is registered by a counter.",
+      "hint": "Start with what happens when radiation reaches the thin window.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0felzi1",
+      "kind": "term",
+      "front": "What is ionisation?",
+      "back": "**Ionisation** is the removal of an electron from an atom or molecule, leaving a positive ion and a free electron.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x4pcek",
+      "kind": "mistake",
+      "front": "A student says beta-minus particles are electrons from the atom's outer shells. What is wrong with this?",
+      "back": "Beta-minus particles are **created in the nucleus** when a neutron changes into a proton during decay. Outer-shell electrons are not involved.",
+      "hint": "Think about what happens inside an unstable nucleus.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "192e0ut",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that a radiation with a long range must be strongly ionising?",
+      "back": "Range and ionising power are not linked in that way. Gamma travels furthest but **ionises least**, while strongly ionising alpha has a short range.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cmlfq0",
+      "kind": "concept",
+      "front": "Which common absorber stops alpha radiation completely?",
+      "back": "**Thin paper** absorbs alpha. A few millimetres of aluminium absorbs beta-minus, and thick lead only reduces gamma.",
+      "hint": "Compare the ranges in air of the three types.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18jaws9",
+      "kind": "term",
+      "front": "What is background radiation?",
+      "back": "**Background radiation** is the ionising radiation always present from natural and artificial sources, not from the sample being tested.",
+      "hint": "Think about what the tube counts with no source in place.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0q2nznz",
+      "kind": "process",
+      "front": "How is a count rate corrected for background radiation?",
+      "back": "Measure the count rate with the source removed, then **subtract** it from each reading to get the corrected count rate.",
+      "hint": "Think about what the tube counts when nothing is in front of it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1094m71",
+      "kind": "term",
+      "front": "What does the inverse-square law say about intensity from a point source?",
+      "back": "Intensity is **inversely proportional to the square of the distance** from the source. Doubling the distance cuts the intensity to a quarter.",
+      "hint": "Think about the same energy spreading over a larger area.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0o7d1uj",
+      "kind": "formula",
+      "front": "What do the symbols in $I=\\frac{k}{x^{2}}$ represent?",
+      "back": "$I$ is the intensity (power arriving per unit area), $x$ is the distance from the source, and $k$ is a constant for the source.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0idelmu",
+      "kind": "example",
+      "front": "A gamma source gives a corrected count rate of $160\\,\\mathrm{s^{-1}}$ at $0.20\\,\\mathrm{m}$. What is the corrected count rate at $0.50\\,\\mathrm{m}$?",
+      "back": "$I_2=160\\,\\mathrm{s^{-1}}\\times\\left(\\frac{0.20}{0.50}\\right)^{2}=25.6\\,\\mathrm{s^{-1}}$, so about **26 $\\mathrm{s^{-1}}$**.",
+      "hint": "Use the ratio of the two distances, squared.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07u2hdh",
+      "kind": "process",
+      "front": "What is the method for using absorbers and a detector to find which radiations a source emits?",
+      "back": "Place the source at a fixed distance and record the corrected count rate. Then add **absorbers one at a time**: paper, then a few millimetres of aluminium, then thick lead.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1jabqtu",
+      "kind": "mistake",
+      "front": "Why must the tube be within a few centimetres of the source when testing for alpha?",
+      "back": "**Air absorbs alpha particles** over a short distance, so a distant tube would detect almost none of them.",
+      "hint": "Compare the range of alpha in air with the distance you would place the tube.",
+      "sectionId": "s5"
+    }
+  ]
+}

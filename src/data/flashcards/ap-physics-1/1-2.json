@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "1-2",
+  "topicCode": "1.2",
+  "topicName": "Displacement, velocity and acceleration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:24.194Z",
+  "cards": [
+    {
+      "id": "1j76lcx",
+      "kind": "concept",
+      "front": "Why can a car's odometer read 10 km after a round trip, yet the car ends where it started?",
+      "back": "Because **distance** counts the full length of the path, while **displacement** is only the change in position from start to finish. A round trip gives zero displacement but 10 km of distance.",
+      "hint": "Compare the odometer reading with the final position.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0aitbdx",
+      "kind": "formula",
+      "front": "How is average velocity calculated, and what do its symbols and unit mean?",
+      "back": "$v_{avg}=\\frac{\\Delta x}{\\Delta t}$: **average velocity** is displacement $\\Delta x$ divided by the time interval $\\Delta t$. Its unit is m/s, and its sign shows direction.",
+      "hint": "Use displacement, not path length, on top.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nhfd7p",
+      "kind": "formula",
+      "front": "How is average acceleration calculated, and what unit does it use?",
+      "back": "$a_{avg}=\\frac{v_f-v_i}{\\Delta t}$: **average acceleration** is the change in velocity divided by the time taken. Its unit is $\\mathrm{m/s^2}$, and a change in direction also counts.",
+      "hint": "Subtract the initial velocity from the final velocity.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0baz8vv",
+      "kind": "term",
+      "front": "What is a sign convention?",
+      "back": "A **sign convention** is a chosen rule that makes one direction along a line positive and the opposite direction negative, such as east positive.",
+      "hint": "Think about how you label directions on a line.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "016okge",
+      "kind": "process",
+      "front": "What are the steps to find average velocity for a trip made of two legs?",
+      "back": "1) Choose a positive direction. 2) Add the displacements with their signs to get $\\Delta x$. 3) Add the times to get $\\Delta t$. 4) Divide $\\Delta x$ by $\\Delta t$.",
+      "hint": "Signs matter at step 2.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07fu3cp",
+      "kind": "mistake",
+      "front": "A student says the displacement of an object can be larger than the distance it traveled. What is wrong with this?",
+      "back": "Wrong: the **magnitude of displacement** is never greater than distance. They match only for motion in one direction along a straight line.",
+      "hint": "Think about a path that bends back on itself.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kx5qd8",
+      "kind": "mistake",
+      "front": "A student says a negative acceleration always means the object is slowing down. Is this right?",
+      "back": "**No**. The object slows only when velocity and acceleration have opposite signs. Negative velocity with negative acceleration means it is speeding up in the negative direction.",
+      "hint": "Check the sign of the velocity as well.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v2yjud",
+      "kind": "concept",
+      "front": "When does an object speed up or slow down along a straight line?",
+      "back": "It **speeds up** when velocity and acceleration have the same sign, and **slows down** when their signs differ.",
+      "hint": "Compare the two signs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p9xf3r",
+      "kind": "example",
+      "front": "A runner goes 60 m east in 10 s, then 20 m west in 5 s. What is the average speed for the whole trip?",
+      "back": "**5.3 m/s**. Total distance is 80 m and total time is 15 s, so $\\frac{80}{15}=5.3\\ \\mathrm{m/s}$. Average speed ignores direction.",
+      "hint": "Use total distance, not displacement.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1md6yov",
+      "kind": "example",
+      "front": "A car speeds up from 5.0 m/s east to 20.0 m/s east in 6.0 s. What is its average acceleration?",
+      "back": "**2.5 m/s² east**, from $\\frac{20.0-5.0}{6.0}=2.5\\ \\mathrm{m/s^2}$.",
+      "hint": "Find the change in velocity first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p1am4t",
+      "kind": "example",
+      "front": "A cart moves at 9.0 m/s east at 3.0 s and again at 9.0 m/s east at 5.0 s. What is its acceleration between these times?",
+      "back": "**Zero**, because $\\frac{9.0-9.0}{2.0}=0$. Constant velocity gives zero acceleration.",
+      "hint": "Did the velocity change?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06529er",
+      "kind": "process",
+      "front": "How do you find the acceleration in each interval from a table of velocity readings?",
+      "back": "Work one interval at a time: subtract the earlier velocity from the later one, divide by that interval's time, and keep the sign and units.",
+      "hint": "Do not combine intervals before dividing.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1oum7kq",
+      "kind": "term",
+      "front": "What is average speed?",
+      "back": "The **total distance** traveled divided by the total time taken. It is a scalar with no direction and is never negative.",
+      "hint": "Average speed uses path length, not displacement.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qa9suh",
+      "kind": "mistake",
+      "front": "A student says a runner who returns to the start has zero average speed. What is wrong?",
+      "back": "Wrong: the runner has zero average velocity but nonzero average speed, because the distance traveled is not zero.",
+      "hint": "Average speed uses distance, which never cancels.",
+      "sectionId": "s2"
+    }
+  ]
+}

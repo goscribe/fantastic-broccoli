@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-8",
+  "topicCode": "4.8",
+  "topicName": "Plant organelles in electron micrographs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:00.963Z",
+  "cards": [
+    {
+      "id": "1achmgf",
+      "kind": "concept",
+      "front": "Why can an electron microscope reveal far more detail than a light microscope?",
+      "back": "It has a much higher **resolution**, because electrons have a much shorter wavelength than light, so they can show two close points as separate.",
+      "hint": "Compare the radiation each microscope uses and what limits its detail.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0g0nvyv",
+      "kind": "process",
+      "front": "What steps should you follow to identify an organelle in an electron micrograph?",
+      "back": "First look for the **double membrane** around it. Then check the inside: grana and starch grains suggest a chloroplast, cristae suggest a mitochondrion, and pores plus a nucleolus suggest a nucleus.",
+      "hint": "Start with the outside of the organelle, then move inwards.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ithk7n",
+      "kind": "concept",
+      "front": "What are grana in a chloroplast, and how do they look in a micrograph?",
+      "back": "**Grana** are stacks of flattened thylakoid membrane sacs inside the chloroplast. They look like dark, striped blocks because stacked membranes are dense.",
+      "hint": "Think about the membrane sacs inside the chloroplast and how they are arranged.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zwjqf8",
+      "kind": "term",
+      "front": "What is the stroma in a chloroplast?",
+      "back": "The **stroma** is the grey, fluid-filled space inside the chloroplast envelope that surrounds the grana.",
+      "hint": "Think about the space between the thylakoid stacks.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pscua1",
+      "kind": "concept",
+      "front": "Why do grana look like dark, striped blocks in an electron micrograph?",
+      "back": "Stacked membranes are **dense**, so they block more electrons than the surrounding stroma and look dark.",
+      "hint": "Recall what makes a region look dark in a micrograph.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0md30di",
+      "kind": "concept",
+      "front": "What is the function of cristae in a mitochondrion?",
+      "back": "Cristae are folds of the inner membrane, which increase its **surface area** for energy release during respiration.",
+      "hint": "Think about why cells with a high energy demand need many mitochondria.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cggqcy",
+      "kind": "mistake",
+      "front": "Why is a double membrane alone not enough to identify an organelle in a micrograph?",
+      "back": "Chloroplasts, mitochondria and the nucleus all have a **double membrane**, so you must also check the internal features such as grana, cristae or a nucleolus.",
+      "hint": "Count how many organelle types share this feature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w3gvr1",
+      "kind": "term",
+      "front": "What is the nucleolus?",
+      "back": "The **nucleolus** is a dense region inside the nucleus where ribosomes are made.",
+      "hint": "Look for the darkest region inside the nucleus.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x4r5gc",
+      "kind": "concept",
+      "front": "What kind of molecules pass through the pores in the nuclear envelope?",
+      "back": "Large molecules such as **RNA** pass through the nuclear pores, which show as breaks in the dark line of the envelope.",
+      "hint": "Think about what the nucleus makes that has to leave it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1slfdto",
+      "kind": "formula",
+      "front": "Which equation gives actual size from image size and magnification?",
+      "back": "$A=\\frac{I}{M}$, where $A$ is actual size, $I$ is image size and $M$ is magnification. Use the same unit for $I$ and $A$, such as $\\mathrm{\\mu m}$.",
+      "hint": "Decide which quantity is the unknown, then rearrange the magnification equation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ymxbt9",
+      "kind": "example",
+      "front": "A chloroplast measures 45 mm on a micrograph at a magnification of ×6000. What is its actual length in μm?",
+      "back": "$7.5\\,\\mathrm{\\mu m}$. Convert $45\\,\\mathrm{mm}$ to $45\\,000\\,\\mathrm{\\mu m}$, then divide by $6000$.",
+      "hint": "Start by converting the image length to the same unit as the answer.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1n402z9",
+      "kind": "example",
+      "front": "A mitochondrion measures 30 mm on a micrograph at a magnification of ×15 000. What is its actual length in μm?",
+      "back": "$2.0\\,\\mathrm{\\mu m}$. Convert $30\\,\\mathrm{mm}$ to $30\\,000\\,\\mathrm{\\mu m}$, then divide by $15\\,000$.",
+      "hint": "Convert mm to μm before you divide.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14x2p64",
+      "kind": "mistake",
+      "front": "Why can the same type of organelle look different in size and shape within one micrograph?",
+      "back": "A micrograph shows only a thin slice, so each organelle is cut at a different position and angle, giving different sizes and shapes.",
+      "hint": "Think about how thin the specimen is and where each organelle is cut.",
+      "sectionId": "s5"
+    }
+  ]
+}

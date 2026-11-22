@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "6-7",
+  "topicCode": "6.7",
+  "topicName": "Mutations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:49.674Z",
+  "cards": [
+    {
+      "id": "1ruddda",
+      "kind": "term",
+      "front": "What is a mutation?",
+      "back": "A **mutation** is a change in a DNA sequence. Some changes persist even after cells repair many errors and damaged sites.",
+      "hint": "Think about what changes in the DNA itself.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d2b3l6",
+      "kind": "concept",
+      "front": "What are the three possible effects of a substitution in a protein-coding sequence?",
+      "back": "It can be **silent**, leaving the amino acid unchanged; **missense**, producing a different amino acid; or **nonsense**, creating a premature stop signal.",
+      "hint": "Consider what the changed codon now specifies.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1alvlfe",
+      "kind": "concept",
+      "front": "Why can the same mutation help in one environment and harm in another?",
+      "back": "A mutation's effect depends on **context**: the gene's function, the organism's other alleles, and the environment. A beneficial change in one setting need not be beneficial in every environment.",
+      "hint": "Think about what else affects whether a trait shows up.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nlr778",
+      "kind": "concept",
+      "front": "How does a mutation in a germline cell differ from one in a body cell?",
+      "back": "A **germline** mutation can pass to offspring. A body-cell mutation affects that cell and its descendants but is generally not inherited.",
+      "hint": "Which cells produce eggs or sperm?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ojnv7a",
+      "kind": "term",
+      "front": "What is a frameshift?",
+      "back": "A **frameshift** changes how a protein-coding sequence is grouped into sets of three bases, shifting the reading frame from that point onward. It happens when an insertion or deletion length is not a multiple of three.",
+      "hint": "Compare the length of the change with three bases.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fse5pi",
+      "kind": "mistake",
+      "front": "Does every insertion or deletion in a gene cause a frameshift?",
+      "back": "No. An insertion or deletion of **three bases** does not shift the reading frame. Only changes whose length is not a multiple of three cause a frameshift.",
+      "hint": "Check the length of the change, not just its presence.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dg7bi0",
+      "kind": "process",
+      "front": "Give the steps by which a coding-region mutation can change a trait.",
+      "back": "1) The DNA sequence changes. 2) The amino acid sequence may change. 3) The protein may fold or work differently. 4) The changed protein may alter an observable trait.",
+      "hint": "Follow the information from DNA to trait.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ra0rn6",
+      "kind": "term",
+      "front": "What are mutagens?",
+      "back": "**Mutagens** are agents that increase the likelihood of DNA changes. Examples in the note include ultraviolet radiation and certain chemicals that damage DNA.",
+      "hint": "Think of things that damage DNA from outside the cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tjuaga",
+      "kind": "term",
+      "front": "What is an insertion, and how does it differ from a deletion?",
+      "back": "An **insertion** adds one or more bases to a DNA sequence. A **deletion** removes one or more bases.",
+      "hint": "Think about whether bases are added or taken away.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18u5qll",
+      "kind": "term",
+      "front": "What is a nonsense mutation?",
+      "back": "A **nonsense** mutation changes a coding sequence so that it specifies a premature stop signal. The protein produced is often shortened and cannot perform its usual function.",
+      "hint": "Think about what the cell reads as the end of the protein.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09ahll0",
+      "kind": "concept",
+      "front": "How can a regulatory-region mutation change a trait without altering the protein's amino acids?",
+      "back": "It can change **when, where, or how much** a gene is expressed. This changes the amount or distribution of the protein, which can alter a trait even though the amino acid sequence stays the same.",
+      "hint": "The protein itself may be identical, but what else changes?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1068nfz",
+      "kind": "concept",
+      "front": "Why might a harmful change in one gene copy have little visible effect?",
+      "back": "The other copy can provide **enough functional protein**. The effect of a change depends on the gene's function and the organism's other alleles.",
+      "hint": "Consider how many working copies of the gene are present.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iroj6z",
+      "kind": "term",
+      "front": "What is a phenotype?",
+      "back": "A **phenotype** is an observable trait of an organism. Its response to a mutation depends on context, not only on the DNA change itself.",
+      "hint": "Think about what you can see or measure.",
+      "sectionId": "s4"
+    }
+  ]
+}

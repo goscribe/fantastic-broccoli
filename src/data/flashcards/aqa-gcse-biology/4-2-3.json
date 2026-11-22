@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-2-3",
+  "topicCode": "4.2.3",
+  "topicName": "Plant tissues, organs and systems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:39.845Z",
+  "cards": [
+    {
+      "id": "1fxa39r",
+      "kind": "concept",
+      "front": "How does transpiration pull water up through a plant?",
+      "back": "Water evaporates from mesophyll cell surfaces into air spaces and diffuses out through open stomata. This loss draws more water up the **xylem** from the roots, forming the **transpiration stream**.",
+      "hint": "Trace the water from inside the leaf to the air outside.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "093vcz5",
+      "kind": "concept",
+      "front": "Why do open stomata cause both gas exchange and water loss?",
+      "back": "The same opening lets **carbon dioxide** diffuse in and oxygen diffuse out, while **water vapour** escapes too. Closing stomata cuts water loss but also limits carbon dioxide, which can slow photosynthesis.",
+      "hint": "Think about everything that passes through one opening in both directions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1yhha4l",
+      "kind": "mistake",
+      "front": "A student says xylem carries dissolved sugars to other parts of the plant. What is wrong?",
+      "back": "Xylem carries **water and mineral ions** upwards from the roots. **Phloem** carries dissolved sugars from the leaves to other parts of the plant.",
+      "hint": "Compare the two transport tissues by what they move.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jv5vss",
+      "kind": "term",
+      "front": "What is palisade mesophyll?",
+      "back": "Leaf tissue whose **chloroplast-rich cells** absorb light for photosynthesis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1r4jmbt",
+      "kind": "term",
+      "front": "What is the role of spongy mesophyll in a leaf?",
+      "back": "It has **air spaces** that let gases move through the leaf between cells and the stomata.",
+      "hint": "Think about what the gaps let through rather than what they absorb.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ub94kw",
+      "kind": "concept",
+      "front": "How do guard cells change the width of a stoma?",
+      "back": "When **guard cells** become turgid, the opening widens. When they lose water, the opening narrows or closes.",
+      "hint": "Think about what happens to a cell when it takes in water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "185ec1z",
+      "kind": "concept",
+      "front": "How do root hair cells take up water and mineral ions?",
+      "back": "Their long extensions increase **surface area**. Water enters by **osmosis**, while mineral ions can enter by **active transport**, even against a concentration gradient.",
+      "hint": "Think about the cell's shape and what it touches in the soil.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ykipso",
+      "kind": "term",
+      "front": "What are vascular bundles?",
+      "back": "Groups of **transport tissues** containing xylem and phloem.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vtznyg",
+      "kind": "concept",
+      "front": "Why are many stomata found on the lower surface of a leaf?",
+      "back": "The lower surface is shaded, so having many stomata there **reduces water loss** compared with an exposed upper surface.",
+      "hint": "Compare how much sunlight and air movement each surface gets.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1atapv5",
+      "kind": "formula",
+      "front": "What formula gives the average water uptake rate?",
+      "back": "$\\text{Rate}=\\frac{\\text{volume taken up}}{\\text{time taken}}$, with the **rate** in $\\text{cm}^3/\\text{min}$ when volume is in cm³ and time in minutes.",
+      "hint": "Think about which quantity you divide by which.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09n32pu",
+      "kind": "example",
+      "front": "A plant takes up 12 cm³ of water in 30 minutes. What is its average water uptake rate?",
+      "back": "$0.4\\,\\text{cm}^3/\\text{min}$, from $\\frac{12}{30}$. Water uptake estimates transpiration, though some water is used by the plant.",
+      "hint": "Use the formula with volume over time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1odwivy",
+      "kind": "concept",
+      "front": "Why does greater air movement increase transpiration?",
+      "back": "It removes **humid air** near the leaf, so the water vapour concentration difference stays large and diffusion out of the leaf speeds up.",
+      "hint": "Consider what happens to the air right next to the leaf.",
+      "sectionId": "s4"
+    }
+  ]
+}

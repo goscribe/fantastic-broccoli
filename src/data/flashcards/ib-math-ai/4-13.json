@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-13",
+  "topicCode": "4.13",
+  "topicName": "Non-linear regression",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:59.846Z",
+  "cards": [
+    {
+      "id": "0snqf94",
+      "kind": "concept",
+      "front": "How can residuals show that a straight line is the wrong model for a data set?",
+      "back": "The residuals form a pattern of **positive, then negative, then positive again**, rather than random scatter about zero. This shows the data are curved, so a curve fits better.",
+      "hint": "Look at the signs of the residuals in order.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pbrb3n",
+      "kind": "concept",
+      "front": "What rule does technology use to choose the best curve when fitting a model?",
+      "back": "**Least squares**: it picks the parameter values that make the sum of squares of residuals, $SS_\\mathrm{res}$, as small as possible. Squaring stops positive and negative residuals cancelling and gives large misses extra weight.",
+      "hint": "Think about what makes the total of the misses as small as possible.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cwh7u4",
+      "kind": "concept",
+      "front": "Why is predicting well beyond the range of the data risky?",
+      "back": "This is **extrapolation**, which is far less reliable. The model may behave unrealistically outside the data, for example a quadratic eventually turns, or an exponential keeps growing without bound.",
+      "hint": "What might the pattern do outside the data?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0gh4qsq",
+      "kind": "term",
+      "front": "What is a parameter in a regression model?",
+      "back": "A **parameter** is a constant in the model's equation, such as $a$, $b$ or $c$, whose value technology chooses to fit the data best.",
+      "hint": "Look for the letters that stay fixed in the equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1u2fxz4",
+      "kind": "formula",
+      "front": "Which model suits growth by a constant percentage, and what is its equation?",
+      "back": "The **exponential** model, $y=ab^x+c$. It multiplies by a constant factor $b$ for each unit increase in $x$.",
+      "hint": "Think about a fixed multiplier per unit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fi54gj",
+      "kind": "process",
+      "front": "What are the steps for fitting a non-linear model with technology?",
+      "back": "1) Enter the $x$ and $y$ values in two lists. 2) Draw a scatter diagram and note its shape. 3) Choose the regression type that suits the shape. 4) Read the parameters and fit statistics from the output.",
+      "hint": "Start with the data entry, then look at the picture.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l9o541",
+      "kind": "formula",
+      "front": "What does the coefficient of determination $R^2$ measure, and what value shows a close fit?",
+      "back": "$R^2$ is the **proportion of the variation in $y$** explained by the model. A value near 1 shows a close fit.",
+      "hint": "It is a number between 0 and 1.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jz1rab",
+      "kind": "example",
+      "front": "In $N=250\\times1.4^t$ (with $t$ in hours), what does 250 represent and what is the predicted count at $t=3$?",
+      "back": "250 is the starting count at $t=0$. At $t=3$, $N=250\\times1.4^3=686$ bacteria. The base 1.4 means a 40% increase each hour.",
+      "hint": "Substitute $t=0$ to find the starting value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08750nd",
+      "kind": "mistake",
+      "front": "Does a high $R^2$ prove that a model is correct and should be used for prediction?",
+      "back": "No. A **high $R^2$** only shows a close fit to the data. A model can fit well yet make no sense in context, or be unreliable outside the data range.",
+      "hint": "Think about context and extrapolation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "017rqkz",
+      "kind": "mistake",
+      "front": "A student interprets $b=1.4$ in an exponential model as just 'the value is 1.4'. What is missing?",
+      "back": "The **meaning in context and the units**. Correct: the multiplier 1.4 means the quantity grows by 40% per unit of time, for example per hour.",
+      "hint": "Parameters should be explained, not just quoted.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "002kusb",
+      "kind": "mistake",
+      "front": "A fitted quadratic predicts a negative number of people for a future year. What should you conclude?",
+      "back": "The model has been pushed too far by **extrapolation**, so the prediction is unrealistic. Check each prediction is sensible in context before using it.",
+      "hint": "Is a negative number of people sensible?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0m3x8jn",
+      "kind": "concept",
+      "front": "When should you choose a straight line over a curve, even if the curve has a higher $R^2$?",
+      "back": "When a line fits almost as well as the curve, the **simpler line** is the better choice. Prefer the simplest model that fits well and makes sense in context.",
+      "hint": "Consider how much better the curve really is.",
+      "sectionId": "s6"
+    }
+  ]
+}

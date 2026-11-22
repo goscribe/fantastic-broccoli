@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-4",
+  "topicCode": "1.4",
+  "topicName": "Financial applications",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:50.138Z",
+  "cards": [
+    {
+      "id": "1dutbec",
+      "kind": "concept",
+      "front": "Why does compound interest make a balance grow faster over time?",
+      "back": "Interest is added to the balance, so later interest is calculated on a larger amount. Each year **multiplies** the balance by the same factor, so the yearly balances form a geometric sequence.",
+      "hint": "Think about what the second year's interest is based on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09w2951",
+      "kind": "formula",
+      "front": "What is the future value formula for yearly compounding, and what does each symbol mean?",
+      "back": "$FV=PV\\times\\left(1+\\frac{r}{100}\\right)^{n}$, where $PV$ is the **present value**, $r$ is the yearly rate as a percentage and $n$ is the number of years.",
+      "hint": "Money for FV and PV, years for n.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bq8h0e",
+      "kind": "formula",
+      "front": "What is the general formula when interest is compounded $k$ times a year?",
+      "back": "$FV=PV\\times\\left(1+\\frac{r}{100k}\\right)^{kn}$. Each period earns $\\frac{r}{k}$ per cent, and there are $kn$ periods in total.",
+      "hint": "Match the rate to the period.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18f1a1n",
+      "kind": "term",
+      "front": "What is a compounding period?",
+      "back": "The fixed time interval after which **interest** is added to the balance. $k$ is the number of such periods in one year.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "100qxit",
+      "kind": "example",
+      "front": "Find the future value of £2000 at 6% a year, compounded monthly, for 4 years.",
+      "back": "£2540.98. Here $k=12$, the rate per period is 0.5%, and $FV=2000\\times1.005^{48}$.",
+      "hint": "Count the periods: 12 times 4.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1x68a9n",
+      "kind": "mistake",
+      "front": "When compounding monthly at a nominal rate of 6% a year, which rate should be used per month?",
+      "back": "**0.5%** per month, since $\\frac{6}{12}=0.5$. Using 6% for each month is wrong because a monthly period needs a monthly rate.",
+      "hint": "Divide the annual rate by the number of periods.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jhm2ks",
+      "kind": "concept",
+      "front": "Why does monthly compounding give a larger final amount than yearly compounding at the same rate?",
+      "back": "Interest is added sooner, so that interest starts earning interest sooner. The gain is real but small.",
+      "hint": "Think about when interest is added.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yh8wby",
+      "kind": "example",
+      "front": "£1000 at 6% for 10 years: how much more does monthly compounding give than yearly compounding?",
+      "back": "£28.55 more. Yearly gives £1790.85 and monthly gives £1819.40.",
+      "hint": "Work out both future values, then subtract.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "042q7zg",
+      "kind": "mistake",
+      "front": "Why must accounts be compared using the same rate, time and starting amount?",
+      "back": "Otherwise any difference may come from something other than the **compounding period**, so the comparison does not show the effect of compounding.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ej1zlz",
+      "kind": "term",
+      "front": "What is depreciation?",
+      "back": "The **decrease** in the value of an asset over time, modelled here as a fixed percentage of its current value each year.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00vw9v5",
+      "kind": "mistake",
+      "front": "A machine loses 12% of its value each year. Why is the multiplier 0.88 and not 0.12?",
+      "back": "The multiplier is the **fraction that remains**: $1-\\frac{12}{100}=0.88$. Using 0.12 would give the amount lost, not the value left.",
+      "hint": "Ask what fraction is left after the loss.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h1o23h",
+      "kind": "example",
+      "front": "A machine worth £8000 depreciates by 12% a year. What is its value after 5 years?",
+      "back": "About £4221.86, using $FV=8000\\times0.88^{5}$.",
+      "hint": "The multiplier is 1 minus the rate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tdexms",
+      "kind": "process",
+      "front": "What steps does a financial solver use to find how long an investment takes to reach a target?",
+      "back": "Enter $I\\%$, $PV$ as negative, $FV$ as positive, payment 0 and $C/Y$, then solve for $N$. Round $N$ up to a whole period, since interest is added only at the end of each period.",
+      "hint": "Money paid in and money received have opposite signs.",
+      "sectionId": "s5"
+    }
+  ]
+}

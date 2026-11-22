@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "5-6",
+  "topicCode": "5.6",
+  "topicName": "Concavity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:09.618Z",
+  "cards": [
+    {
+      "id": "14ur7t4",
+      "kind": "concept",
+      "front": "What does it mean for a curve to be concave up?",
+      "back": "Its **tangent slopes increase** as $x$ increases. Concavity is about how the slopes change, not whether the function rises or falls.",
+      "hint": "Think about what the slopes do as you move right.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04mqv3x",
+      "kind": "formula",
+      "front": "What does $f''(x)$ measure, and what do its signs tell you about concavity?",
+      "back": "$f''(x)$ gives the **rate at which tangent slopes change**. Where $f''(x)>0$, $f$ is concave up; where $f''(x)<0$, $f$ is concave down.",
+      "hint": "Second derivative of f is the derivative of f'.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "062m4a0",
+      "kind": "mistake",
+      "front": "If $f''(c)=0$, is there automatically an inflection point at $x=c$?",
+      "back": "No. You must check the **sign of $f''$** on both sides of $c$. An inflection point needs concavity to actually change.",
+      "hint": "Does the sign of f'' change, or just become zero?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ms18mh",
+      "kind": "term",
+      "front": "What is a point of inflection?",
+      "back": "A **point on the graph** of $f$ where the function changes concavity, either from up to down or from down to up.",
+      "hint": "Think about where the curve switches its bend.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mg8cfb",
+      "kind": "process",
+      "front": "What steps find the candidates for inflection points of $f$?",
+      "back": "Differentiate twice, then solve $f''(x)=0$ or find where $f''$ is **undefined**. These $x$-values are the candidates, which you then test.",
+      "hint": "Start from the second derivative.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1r0qho3",
+      "kind": "example",
+      "front": "For $f(x)=x^3-3x$, where is the inflection point?",
+      "back": "$(0,0)$. Since $f''(x)=6x$ changes sign at $x=0$, $f$ is concave down on $(-\\infty,0)$ and concave up on $(0,\\infty)$.",
+      "hint": "Find f'' first, then test one value on each side of the candidate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lk5wbg",
+      "kind": "process",
+      "front": "How do you find the intervals of concavity once you have the candidates?",
+      "back": "Split the domain at each candidate, then test the **sign of $f''$** at one value in each interval. Positive means concave up; negative means concave down.",
+      "hint": "Pick a test value between and beyond the candidates.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05sm70f",
+      "kind": "process",
+      "front": "Once you have confirmed an inflection $x$-value, how do you get the full coordinate?",
+      "back": "**Substitute** the $x$-value into the original function $f$. The point is $(x, f(x))$, which gives both coordinates.",
+      "hint": "Use f, not f''.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18pslp9",
+      "kind": "concept",
+      "front": "On a graph of $f$, how does an inflection point look?",
+      "back": "Tangent slopes **switch** from increasing to decreasing, or from decreasing to increasing. The tangent there need not be horizontal.",
+      "hint": "Watch how the slopes change as you move right.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ob5kuw",
+      "kind": "concept",
+      "front": "On a graph of $f''$, how do you spot a concavity change?",
+      "back": "Look for a **sign change**, where the graph crosses the horizontal axis. Merely touching the axis may not change concavity.",
+      "hint": "Crossing versus touching.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p8pe5m",
+      "kind": "mistake",
+      "front": "Does a decreasing function have to be concave down?",
+      "back": "No. A function can decrease while staying **concave up**, for example when its slopes change from $-4$ to $-2$.",
+      "hint": "Decreasing describes the values of f, not the slopes changing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03g67o4",
+      "kind": "term",
+      "front": "What is a candidate for inflection?",
+      "back": "An $x$-value where $f''$ equals **zero or is undefined**. It is only a candidate until concavity is tested on both sides.",
+      "hint": "Where might concavity possibly change?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14fo2cp",
+      "kind": "concept",
+      "front": "Can a graph have a concavity change where the function has a hole?",
+      "back": "No. If the function has a **hole** at that point, there is no inflection point there, since the point must be on the graph of $f$.",
+      "hint": "The inflection point must belong to the graph.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "4-2",
+  "topicCode": "4.2",
+  "topicName": "Interval for a mean or mean difference",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:24.909Z",
+  "cards": [
+    {
+      "id": "1hbkjv2",
+      "kind": "formula",
+      "front": "What is the formula for a one-sample t confidence interval for a mean?",
+      "back": "$\\bar{x}\\pm t^*\\frac{s}{\\sqrt{n}}$: the **sample mean** plus or minus the margin of error, where the margin is $t^*$ times the standard error.",
+      "hint": "Point estimate plus or minus a margin of error.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k7vhvq",
+      "kind": "concept",
+      "front": "Why do we use a t-distribution instead of the Normal model when finding a confidence interval for a mean?",
+      "back": "Because $\\sigma$ is usually unknown and we replace it with $s$. This adds **extra uncertainty**, so the curve is symmetric with heavier tails.",
+      "hint": "Think about which value we have to estimate.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w23nqr",
+      "kind": "process",
+      "front": "What three conditions must be checked before a t interval is trustworthy?",
+      "back": "**Random** sample or randomized experiment; **Independent** (when sampling without replacement, $n\\le0.10N$); **Normal** (population is Normal, $n\\ge30$, or no strong skew or outliers).",
+      "hint": "Starts with R, I, N.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10ig0lf",
+      "kind": "term",
+      "front": "What is a point estimate?",
+      "back": "A **point estimate** is a single value calculated from a sample, such as $\\bar{x}$, used to estimate a population parameter like $\\mu$.",
+      "hint": "A single number, not a range.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vd2q09",
+      "kind": "term",
+      "front": "What is the margin of error in a confidence interval?",
+      "back": "The **margin of error** is the cushion added to and subtracted from the point estimate, in the same units as the data.",
+      "hint": "The distance from the estimate to either end.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mbylcp",
+      "kind": "formula",
+      "front": "What is the standard error of the sample mean, and what do its symbols mean?",
+      "back": "$\\frac{s}{\\sqrt{n}}$: $s$ is the **sample standard deviation** and $n$ is the sample size. It estimates the spread of $\\bar{x}$ when $\\sigma$ is unknown.",
+      "hint": "Sample standard deviation divided by the square root of n.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14lbtj7",
+      "kind": "term",
+      "front": "What are the degrees of freedom for a one-sample t procedure?",
+      "back": "$df=n-1$. They set the **shape** of the t-distribution: small samples give heavy tails, and large samples look close to Normal.",
+      "hint": "One less than the sample size.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04qkdpb",
+      "kind": "term",
+      "front": "What is the critical value $t^*$?",
+      "back": "The **critical value** $t^*$ is the number of standard errors, from a t-distribution with $df=n-1$, that captures the chosen central area for the confidence level.",
+      "hint": "Read it from a t table or calculator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "044dm7v",
+      "kind": "example",
+      "front": "A random sample of 16 commuters has $\\bar{x}=24.3$ minutes and $s=4.0$ minutes. Find a 95% confidence interval for $\\mu$, using $t^*=2.131$.",
+      "back": "Standard error is $4.0/\\sqrt{16}=1.0$, so the interval is $24.3\\pm2.131(1.0)$. Answer: **(22.2, 26.4)** minutes, rounded.",
+      "hint": "Check conditions first, then find df = 15.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xaqzrb",
+      "kind": "concept",
+      "front": "What does a 95% confidence level tell us about the method used to build an interval?",
+      "back": "If we repeated random sampling many times, about **95%** of the resulting intervals would capture the true mean $\\mu$. It describes the method's long-run success rate.",
+      "hint": "Think about repeated samples, not one interval.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zerkae",
+      "kind": "mistake",
+      "front": "A student says, \"95% of commute times fall inside our interval of 22.2 to 26.4 minutes.\" What is wrong?",
+      "back": "The **confidence level** is about capturing the mean $\\mu$, not about individual data values. Intervals describe the mean, not where most commutes lie.",
+      "hint": "Interval estimates a mean, not individual observations.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11mnl8n",
+      "kind": "concept",
+      "front": "What makes a confidence interval wider or narrower?",
+      "back": "A **higher confidence level** gives a larger $t^*$ and a wider interval. A **larger sample size** $n$ shrinks the standard error and narrows the interval.",
+      "hint": "Two choices change the width.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0exr2zl",
+      "kind": "mistake",
+      "front": "Two measurements are taken on the same subjects, such as before and after scores. Why shouldn't you treat them as two independent samples?",
+      "back": "They are **not independent**. Subtract within each pair, then treat the differences as one sample, with $n$ counting pairs.",
+      "hint": "Same subjects means paired data.",
+      "sectionId": "s3"
+    }
+  ]
+}

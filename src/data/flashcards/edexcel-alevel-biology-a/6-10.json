@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-10",
+  "topicCode": "6.10",
+  "topicName": "One gene, many proteins",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:46.761Z",
+  "cards": [
+    {
+      "id": "13s18nm",
+      "kind": "concept",
+      "front": "How can one gene make several different proteins?",
+      "back": "By **alternative splicing**: exons from one primary transcript are joined in different combinations, giving different mature mRNAs. Each mRNA has different codons, so translation makes polypeptides with different amino acid sequences.",
+      "hint": "Think about which sequences in the copy are kept and which are removed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cx6c9a",
+      "kind": "term",
+      "front": "What is mRNA and what does it do?",
+      "back": "**mRNA** (messenger RNA) is a single-stranded copy of one gene, made in the nucleus. It carries the gene's instructions out through a nuclear pore to a ribosome in the cytoplasm.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d3a6p4",
+      "kind": "process",
+      "front": "What happens to a primary transcript during splicing, in order?",
+      "back": "1) Introns are cut out. 2) The remaining exons are joined end to end. The result is mature mRNA containing only exons. This editing happens before the mRNA leaves the nucleus.",
+      "hint": "Think about what the cell removes before the mRNA leaves the nucleus.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qqrppa",
+      "kind": "mistake",
+      "front": "Why is it wrong to say DNA travels from the nucleus to the ribosome?",
+      "back": "**DNA stays in the nucleus.** Only the mRNA copy of a gene leaves through a nuclear pore to reach a ribosome.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16ms0am",
+      "kind": "term",
+      "front": "What is a codon?",
+      "back": "A **codon** is a triplet of bases on mRNA. It codes for one amino acid, or acts as a stop signal.",
+      "hint": "Think about how the ribosome reads the bases on the mRNA.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1j4owp9",
+      "kind": "process",
+      "front": "What happens during translation at a ribosome?",
+      "back": "A tRNA carries an amino acid to the ribosome and its anticodon pairs with a matching mRNA codon. Neighbouring amino acids are joined by **peptide bonds**. The ribosome moves along the mRNA until it reaches a stop codon.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jl82gp",
+      "kind": "term",
+      "front": "What is the difference between an exon and an intron?",
+      "back": "An **exon** codes for part of a polypeptide and stays in mature mRNA. An **intron** does not code for amino acids and is cut out of the transcript during splicing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03zna1o",
+      "kind": "example",
+      "front": "Which named gene makes different products in different tissues, and how?",
+      "back": "The **calcitonin gene**. Its transcript is spliced to make the hormone calcitonin in the thyroid gland, and spliced differently in some nerve cells to make a different signalling peptide.",
+      "hint": "Compare how the same transcript is processed in two different cell types.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0i934rv",
+      "kind": "mistake",
+      "front": "Why is it wrong to say cells in different tissues use different genes to make different proteins?",
+      "back": "Every cell holds the **same genes**. The difference lies in how the transcript is processed, meaning which exons are joined, not in the DNA itself.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0livhir",
+      "kind": "term",
+      "front": "What is post-translational modification?",
+      "back": "**Post-translational modification** is the chemical alteration of a polypeptide after it is made, such as cutting the chain or adding groups like carbohydrate or phosphate, so it becomes a functional protein.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0qcmmvy",
+      "kind": "example",
+      "front": "Why does insulin need processing after translation before it can work?",
+      "back": "Insulin is first made as a **longer chain**, which is cut to give the active hormone. Some of this processing happens in the Golgi apparatus.",
+      "hint": "Consider what a cell must do to a polypeptide before it becomes active.",
+      "sectionId": "s6"
+    }
+  ]
+}

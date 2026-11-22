@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-13",
+  "topicCode": "5.13",
+  "topicName": "Limits and L'Hôpital's rule",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:07.698Z",
+  "cards": [
+    {
+      "id": "00kkelo",
+      "kind": "formula",
+      "front": "What does L'Hôpital's rule say about $\\lim_{x\\to a}\\frac{f(x)}{g(x)}$ when substitution gives $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$?",
+      "back": "It equals $\\lim_{x\\to a}\\frac{f'(x)}{g'(x)}$, the limit of the quotient of the **derivatives**, provided that limit exists or is infinite. Differentiate $f$ and $g$ separately.",
+      "hint": "Differentiate top and bottom separately.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0prw7x0",
+      "kind": "concept",
+      "front": "Why must you check the form after substitution before using L'Hôpital's rule?",
+      "back": "The rule applies only to **indeterminate forms** $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$. On a determinate form such as $\\frac{1}{2}$, substitution already gives the limit, and the rule would give a wrong answer.",
+      "hint": "What does substitution give here?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0nx6yt4",
+      "kind": "process",
+      "front": "What are the three steps of the routine for applying L'Hôpital's rule?",
+      "back": "1) Substitute the limiting value and confirm the form is $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$. 2) **Differentiate** the numerator and denominator separately. 3) Form the new quotient and evaluate its limit.",
+      "hint": "The first step is a check.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qpb080",
+      "kind": "term",
+      "front": "What is an indeterminate form?",
+      "back": "A result such as $\\frac{0}{0}$ from substitution that **does not settle** the limit. The answer depends on how fast the top and bottom approach zero or infinity, so more work is needed.",
+      "hint": "Think about what the result does not tell you.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qxnpa6",
+      "kind": "term",
+      "front": "What is a limit?",
+      "back": "The **limit** $\\lim_{x\\to a}f(x)=L$ means $f(x)$ gets as close as we like to $L$ as $x$ approaches $a$. The function need not be defined at $a$ itself.",
+      "hint": "Is $f(a)$ needed?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10x0f86",
+      "kind": "example",
+      "front": "Evaluate $\\lim_{x\\to0}\\frac{e^{3x}-1}{\\sin2x}$.",
+      "back": "**$\\frac{3}{2}$**. Substitution gives $\\frac{0}{0}$. Differentiating gives $\\frac{3e^{3x}}{2\\cos2x}$, and substituting $x=0$ gives $\\frac{3}{2}$.",
+      "hint": "Check the form first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qjiw0v",
+      "kind": "mistake",
+      "front": "A student differentiates $\\frac{f(x)}{g(x)}$ with the quotient rule before applying L'Hôpital's rule. What is wrong?",
+      "back": "**Wrong method**: the rule needs $f'$ and $g'$ separately, not the derivative of the whole quotient. Differentiate the numerator and denominator on their own.",
+      "hint": "What does the rule ask you to differentiate?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bfqpe4",
+      "kind": "mistake",
+      "front": "A student sees $\\frac{0}{0}$ and concludes the limit is 0. What is the error?",
+      "back": "A **$\\frac{0}{0}$** form does not mean the limit is 0, nor that it fails to exist. It means more work is needed, such as applying the rule.",
+      "hint": "What does an indeterminate form tell you?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bfegsq",
+      "kind": "mistake",
+      "front": "Why is L'Hôpital's rule wrong to use for $\\lim_{x\\to0}\\frac{x+1}{x+2}$?",
+      "back": "Substitution gives $\\frac{1}{2}$, a definite value, so the limit is $\\frac{1}{2}$. Applying the rule would wrongly give $\\frac{1}{1}=1$.",
+      "hint": "Check the form first.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1wjvnux",
+      "kind": "example",
+      "front": "Evaluate $\\lim_{x\\to0}\\frac{1-\\cos x}{x^2}$.",
+      "back": "**$\\frac{1}{2}$**. Substitution gives $\\frac{0}{0}$. The first application gives $\\frac{\\sin x}{2x}$, still $\\frac{0}{0}$. A second application gives $\\frac{\\cos x}{2}=\\frac{1}{2}$.",
+      "hint": "Recheck the form after each step.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19nz35c",
+      "kind": "concept",
+      "front": "When can you apply L'Hôpital's rule a second time?",
+      "back": "Only if the new quotient still gives an indeterminate form. **Stop** as soon as substitution gives a definite value, because another application would give a wrong answer.",
+      "hint": "Check the form at each stage.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1myij45",
+      "kind": "concept",
+      "front": "Can L'Hôpital's rule fail even when the limit exists? Give an example.",
+      "back": "Yes. For $\\lim_{x\\to\\infty}\\frac{x+\\sin x}{x}$ the derivatives give $1+\\cos x$, which has **no limit**. The original limit is still 1, because $\\sin x$ stays between $-1$ and 1 while $x$ grows.",
+      "hint": "Try rewriting the quotient as $1+\\frac{\\sin x}{x}$.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "06jh9cc",
+      "kind": "term",
+      "front": "What is a derivative?",
+      "back": "The **derivative** of a function gives its instantaneous rate of change with respect to its input. It tells you how quickly the function changes.",
+      "hint": "Think about rate of change.",
+      "sectionId": "s3"
+    }
+  ]
+}

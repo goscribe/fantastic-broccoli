@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-5",
+  "topicCode": "6.5",
+  "topicName": "Fossil fuels",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:18.689Z",
+  "cards": [
+    {
+      "id": "0hi0glx",
+      "kind": "concept",
+      "front": "Why can't fossil fuels be replaced on a human time scale?",
+      "back": "Formation takes **millions of years**. Buried remains of organisms must be changed by heat and pressure over that long period, so supply cannot be renewed quickly.",
+      "hint": "Think about how long burial and heat-and-pressure changes take.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cepeoj",
+      "kind": "concept",
+      "front": "Where did the energy in a fossil fuel originally come from?",
+      "back": "**Sunlight**, which plants and algae captured through photosynthesis and stored in chemical bonds. Burning the fuel releases that stored energy as heat.",
+      "hint": "Follow the energy back to the step that first stored it in living things.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "161ddmv",
+      "kind": "concept",
+      "front": "Why does the pump price of gasoline often leave out some of its true cost?",
+      "back": "Its **externalities**, such as air pollution and climate damage, fall on people who did not choose the activity. Market prices usually do not include them.",
+      "hint": "Think about who pays for costs the buyer never agreed to.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0p95fxa",
+      "kind": "term",
+      "front": "What is peat?",
+      "back": "**Peat** is soft, partly decayed plant material that builds up in waterlogged ground. More heat and pressure later turn it into coal.",
+      "hint": "Think about what happens when plants pile up faster than they decay.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "128hue6",
+      "kind": "term",
+      "front": "What is the main component of natural gas?",
+      "back": "**Methane**, $\\mathrm{CH_4}$: one carbon atom bonded to four hydrogen atoms. It burns readily.",
+      "hint": "Think about the simplest hydrocarbon.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ly9vay",
+      "kind": "term",
+      "front": "What is hydraulic fracturing?",
+      "back": "**Hydraulic fracturing** (fracking) pumps high-pressure fluid, mostly water with sand and chemicals, into rock to crack it and free trapped oil or gas.",
+      "hint": "Think about how shale holds fuel in tiny pores.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15c5l6h",
+      "kind": "concept",
+      "front": "Why is surface mining used for some coal but underground mines for deeper coal?",
+      "back": "**Shallow** coal is removed by surface mining, which strips away the soil and rock above it. Deeper coal needs underground shafts and tunnels.",
+      "hint": "Compare how far each deposit lies below the ground.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mclbeo",
+      "kind": "process",
+      "front": "What are the steps by which a power plant turns fuel into electricity?",
+      "back": "1) Combustion releases heat from the fuel. 2) The heat boils water into steam. 3) The steam drives equipment that generates electricity.",
+      "hint": "Start with what the fuel does first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15scus1",
+      "kind": "term",
+      "front": "What is combustion?",
+      "back": "**Combustion** is the rapid reaction of a fuel with oxygen that releases heat and light, forming products such as carbon dioxide and water.",
+      "hint": "Think about what the fuel must combine with.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dsnzgn",
+      "kind": "term",
+      "front": "What is a greenhouse gas?",
+      "back": "An atmospheric gas, such as **carbon dioxide** or methane, that absorbs infrared radiation and warms the lower atmosphere.",
+      "hint": "Think about what the gas does to heat leaving Earth.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qwdulb",
+      "kind": "concept",
+      "front": "How do sulfur dioxide and nitrogen oxides from burning harm forests and lakes?",
+      "back": "They form **acid deposition**, acidic compounds that fall onto land and water as rain, snow, fog, or dry particles.",
+      "hint": "Trace what happens to these gases after they leave the smokestack.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gsxhv0",
+      "kind": "mistake",
+      "front": "Why is it wrong to call natural gas clean just because it emits less CO2 than coal?",
+      "back": "It is **still a fossil fuel**. It emits less carbon dioxide per unit of energy, but leaked methane is a strong greenhouse gas.",
+      "hint": "Think about what happens at wells and pipelines, not just at the flame.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dzgcxt",
+      "kind": "mistake",
+      "front": "Why is it wrong to say fossil fuels mainly come from dinosaurs?",
+      "back": "**Coal** came mostly from plants, and oil and gas came mostly from tiny marine organisms. Dinosaurs were not the main source.",
+      "hint": "Think about which organisms formed each fuel.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14mpljc",
+      "kind": "term",
+      "front": "What is energy density?",
+      "back": "The amount of **energy stored per unit of mass or volume** of a fuel, such as megajoules per kilogram. High energy density means a small mass stores a lot of energy.",
+      "hint": "Think about why fuels for vehicles are easy to carry.",
+      "sectionId": "s6"
+    }
+  ]
+}

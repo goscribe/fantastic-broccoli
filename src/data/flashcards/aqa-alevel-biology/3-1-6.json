@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-1-6",
+  "topicCode": "3.1.6",
+  "topicName": "ATP",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:05.402Z",
+  "cards": [
+    {
+      "id": "1iftl5q",
+      "kind": "concept",
+      "front": "What is the main role of ATP in a cell?",
+      "back": "ATP is the **immediate energy source** for cell work. Its hydrolysis releases energy in small, usable amounts that are coupled to processes needing energy.",
+      "hint": "Compare ATP with a longer-term energy store such as fat.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tn3xyc",
+      "kind": "formula",
+      "front": "Write the equation for ATP hydrolysis, including the energy released.",
+      "back": "$\\text{ATP}+\\text{H}_2\\text{O}\\rightarrow\\text{ADP}+\\text{P}_{\\text{i}}+\\text{energy}$, where $\\text{P}_{\\text{i}}$ is inorganic phosphate. The reaction is catalysed by **ATP hydrolase**.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "127ue3o",
+      "kind": "process",
+      "front": "What are the steps by which a cell regenerates ATP from ADP?",
+      "back": "ADP and inorganic phosphate join by a **condensation reaction**, forming ATP and water. Energy from respiration or photosynthesis is needed for this step.",
+      "hint": "Think of ATP synthesis as the reverse of hydrolysis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yym231",
+      "kind": "concept",
+      "front": "Why must cells regenerate ATP continually rather than store large amounts of it?",
+      "back": "Cells keep only **small amounts** of ATP, so it works as an immediate energy source, not a long-term store. It must be remade as it is used.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kmztrf",
+      "kind": "concept",
+      "front": "How is ATP hydrolysis linked to processes that need energy?",
+      "back": "The energy released by hydrolysis is **coupled** to energy-requiring processes, such as active transport, muscle contraction, moving cell structures and building large molecules.",
+      "hint": "Consider which cell activities the note lists as ATP-powered.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08u7494",
+      "kind": "term",
+      "front": "Which three components make up the structure of ATP?",
+      "back": "**Adenine**, **ribose** and three phosphate groups attached in a chain. ATP is therefore a nucleotide with three phosphate groups.",
+      "hint": "Think about how the phosphates attach to the sugar.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0m2m560",
+      "kind": "term",
+      "front": "What is adenosine?",
+      "back": "**Adenosine** is adenine joined to ribose.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ptw57d",
+      "kind": "term",
+      "front": "What is ADP, and how does it differ from ATP?",
+      "back": "**ADP** (adenosine diphosphate) contains adenine, ribose and two phosphate groups, one fewer than ATP.",
+      "hint": "Count the phosphate groups and compare with ATP.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10gicl7",
+      "kind": "term",
+      "front": "What is phosphorylation?",
+      "back": "**Phosphorylation** is the addition of a phosphate group to a molecule. It can make the molecule more reactive or change its shape.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1oqmkx1",
+      "kind": "concept",
+      "front": "Why is ATP synthesis described as a condensation reaction?",
+      "back": "ADP and inorganic phosphate **join together**, and water is formed as a product.",
+      "hint": "Think about what is produced when two molecules link.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wlpm3q",
+      "kind": "term",
+      "front": "What does ATP synthase do?",
+      "back": "**ATP synthase** is an enzyme that catalyses the formation of ATP from ADP and inorganic phosphate during respiration or photosynthesis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qbfl59",
+      "kind": "term",
+      "front": "What is active transport?",
+      "back": "**Active transport** moves substances across a membrane against a concentration gradient, using energy from ATP hydrolysis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17n7mrs",
+      "kind": "mistake",
+      "front": "A student says ATP contains deoxyribose. What is wrong with this?",
+      "back": "ATP contains **ribose**, not deoxyribose. Its sugar is ribose.",
+      "hint": "Check the sugar named in the structure section.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0konitz",
+      "kind": "mistake",
+      "front": "A student says breaking a phosphate bond is what releases the energy. What is wrong with this?",
+      "back": "Breaking a bond does not itself release energy. The **overall hydrolysis reaction** releases energy.",
+      "hint": "Consider whether breaking a bond takes energy in or gives it out.",
+      "sectionId": "s2"
+    }
+  ]
+}

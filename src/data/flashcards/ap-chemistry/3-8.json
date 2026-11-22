@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "3-8",
+  "topicCode": "3.8",
+  "topicName": "Representations of solutions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:30.489Z",
+  "cards": [
+    {
+      "id": "13xzbw8",
+      "kind": "concept",
+      "front": "What form does a soluble ionic compound like NaCl take when it dissolves in water, as shown in a particle diagram?",
+      "back": "It separates into **ions**, not intact formula units. The positive and negative ions are dispersed among water molecules in the ratio given by the formula.",
+      "hint": "Think about what the particles are, not what the compound is called.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wtwh1g",
+      "kind": "concept",
+      "front": "When can you compare two solutions by counting solute particles alone?",
+      "back": "Only when the boxes or samples have **equal volumes**. For unequal volumes, compare solute particles per unit volume, because concentration depends on amount per volume.",
+      "hint": "Concentration is solute relative to what?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07fxs26",
+      "kind": "mistake",
+      "front": "What is a common mistake when reading a particle diagram?",
+      "back": "Counting **solvent particles** as solute. Use the legend to identify each symbol first, then count only the solute particles.",
+      "hint": "Check the legend before you count anything.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "026qrxd",
+      "kind": "example",
+      "front": "Box A has 4 Ca2+ and 8 Cl- ions. Box B has 6 Ca2+ and 12 Cl- ions. Both boxes have equal volumes. How many times greater is the solute concentration in B?",
+      "back": "**1.5 times**. Box B holds 6 CaCl2 units and Box A holds 4, so $6/4=1.5$. The ratio has no units because the volumes are equal.",
+      "hint": "Pair the ions into CaCl2 formula units first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1un2aoe",
+      "kind": "example",
+      "front": "Two equal-volume NaCl diagrams show 3 and 9 dissolved formula units. What is the concentration ratio of the second to the first?",
+      "back": "**3**. The ratio is $9/3=3$, so the second solution is three times as concentrated as the first.",
+      "hint": "Divide the second count by the first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10mt7ra",
+      "kind": "process",
+      "front": "What steps do you follow to draw two equal-volume solutions of the same ionic solute at different concentrations?",
+      "back": "1) Draw **equal-volume boxes** with a legend. 2) Draw separated ions in the correct formula ratio, spread throughout each box. 3) Put more formula units in the more concentrated box. Keep solvent symbols in both.",
+      "hint": "Start with the boxes, then the legend, then the ions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19tsrqe",
+      "kind": "concept",
+      "front": "How should dissolved calcium chloride appear in a particle diagram?",
+      "back": "As separated **calcium and chloride ions** dispersed in water, with **two chloride ions** for every calcium ion.",
+      "hint": "Use the subscript in the formula to find the ratio.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14x4huk",
+      "kind": "concept",
+      "front": "What is true about the total charge in a complete ionic solution?",
+      "back": "The solution is **electrically neutral**: the total positive charge balances the total negative charge. Check this when you draw the ion ratio.",
+      "hint": "Add up the charges of the ions in your diagram.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1oknspj",
+      "kind": "concept",
+      "front": "How do water molecules orient around dissolved ions?",
+      "back": "The **oxygen** end points toward a cation, while the **hydrogen** ends point toward an anion.",
+      "hint": "Think about which end of water faces the positive ion.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1shwhtw",
+      "kind": "term",
+      "front": "What is the difference between a solute and a solvent?",
+      "back": "The **solute** is the substance dispersed throughout the **solvent**, which is the component it is dispersed in.",
+      "hint": "One is spread out inside the other.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gw78nj",
+      "kind": "term",
+      "front": "What does concentration describe?",
+      "back": "**Concentration** describes how much solute is present in a given volume of solution.",
+      "hint": "It is an amount per volume.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ljic65",
+      "kind": "mistake",
+      "front": "What goes wrong if you count every ion in a dissolved ionic compound without checking its formula?",
+      "back": "You can get the wrong comparison. Check the **ion ratio** first, such as two chloride ions for each calcium ion in CaCl2, before comparing concentrations.",
+      "hint": "Does every ion come from the same number of formula units?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l2dudy",
+      "kind": "term",
+      "front": "What is a particle diagram?",
+      "back": "A **particle diagram** uses symbols to model a tiny sample of a solution, showing the identities and arrangement of its particles.",
+      "hint": "It is a model of a small sample, not the real size of particles.",
+      "sectionId": "s1"
+    }
+  ]
+}

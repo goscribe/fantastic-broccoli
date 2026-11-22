@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "4-2",
+  "topicCode": "4.2",
+  "topicName": "Soil formation and erosion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:41.079Z",
+  "cards": [
+    {
+      "id": "1rl7xhw",
+      "kind": "concept",
+      "front": "How does bare rock slowly turn into soil?",
+      "back": "**Weathering** breaks rock into small particles, then living things add humus, and the two together form soil. Soil builds slowly over long periods.",
+      "hint": "Think about what breaks rock apart, then what living things leave behind."
+    },
+    {
+      "id": "0xdgtrk",
+      "kind": "concept",
+      "front": "Why is erosion such a serious problem for soil?",
+      "back": "**Erosion removes topsoil faster than it forms**, because soil can take hundreds of years to build. Topsoil is also the richest layer for crops.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11umbhi",
+      "kind": "concept",
+      "front": "Which five factors shape how a soil develops?",
+      "back": "**Parent material, climate, topography, organisms, and time** act together, so soils differ from place to place.",
+      "hint": "Think about the starting rock, the local weather, and the shape of the land.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ju946k",
+      "kind": "concept",
+      "front": "What is physical weathering, and what does it change?",
+      "back": "Physical weathering breaks rock into pieces by freezing water, wind, or moving water, **without changing the rock's minerals**.",
+      "hint": "Compare it with chemical weathering.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08uh83d",
+      "kind": "concept",
+      "front": "How does chemical weathering break down rock?",
+      "back": "Acidic water reacts with minerals, **changing or dissolving them** so the rock breaks down.",
+      "hint": "Think about what happens to the minerals themselves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0l9l3oe",
+      "kind": "term",
+      "front": "What is humus, and why does it matter for soil?",
+      "back": "**Humus** is the dark, crumbly material left after decomposers break down dead plants and animals. It holds water and nutrients.",
+      "hint": "Think about what decomposers leave behind.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ajy3ln",
+      "kind": "process",
+      "front": "What is the order of soil horizons from the surface down?",
+      "back": "**O, A, B, C**, then bedrock: O is loose litter, A is topsoil, B is subsoil where clay collects, and C is partly weathered parent material.",
+      "hint": "Start from the surface litter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0f42pcl",
+      "kind": "concept",
+      "front": "How does topography affect soil depth?",
+      "back": "**Steep slopes keep soil thin**, while low, flat areas gain depth.",
+      "hint": "Think about where loose material is likely to slide and where it settles.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xlyerh",
+      "kind": "mistake",
+      "front": "Why is it wrong to treat weathering and erosion as the same process?",
+      "back": "**Weathering breaks rock down in place**, while **erosion moves the material away** by water, wind, or ice.",
+      "hint": "Ask whether the material stays where it is or travels.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0kowow7",
+      "kind": "concept",
+      "front": "Which human activities speed up soil erosion?",
+      "back": "**Deforestation, overgrazing, plowing that leaves soil bare, and construction**, each of which removes the cover that protects soil.",
+      "hint": "Think about what protects soil from rain and wind.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00bbuq5",
+      "kind": "process",
+      "front": "How did the Dust Bowl show erosion on a large scale?",
+      "back": "Plowed grassland had little root cover, so during the 1930s drought, strong winds lifted dust from the bare fields of the Great Plains.",
+      "hint": "Focus on what the land lacked before the drought hit.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0c2z41h",
+      "kind": "term",
+      "front": "What is terracing, and how does it reduce erosion?",
+      "back": "Terracing cuts **level steps into steep land**, so runoff slows down and soil stays in place.",
+      "hint": "Think about how water runs quickly down a steep slope.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0qtzf9f",
+      "kind": "concept",
+      "front": "How does a cover crop protect soil?",
+      "back": "A cover crop is planted between harvests and **holds soil with living roots**, shielding it from rain.",
+      "hint": "Think about what happens to bare soil between harvests.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0270l35",
+      "kind": "concept",
+      "front": "How do windbreaks reduce soil erosion?",
+      "back": "Rows of trees **slow the wind near the ground**, so it cannot lift dry, bare soil.",
+      "hint": "Match the practice to the main cause of erosion.",
+      "sectionId": "s6"
+    }
+  ]
+}

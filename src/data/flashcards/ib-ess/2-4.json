@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "2-4",
+  "topicCode": "2.4",
+  "topicName": "Climate and biomes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:28.172Z",
+  "cards": [
+    {
+      "id": "1w2qlvv",
+      "kind": "concept",
+      "front": "Why is the equator warm and wet while the poles are cold?",
+      "back": "Sunlight hits the **equator** almost directly, so each square metre gets more energy, and warm air rising there drops heavy rain. Near the poles the same light spreads over a larger area, so it is cold.",
+      "hint": "Think about the angle at which sunlight strikes the surface.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "143haes",
+      "kind": "concept",
+      "front": "How do temperature and rainfall together determine which biome you find in a place?",
+      "back": "**Combining** temperature and rainfall gives the biome. Hot and very wet gives tropical rainforest, while very low rainfall gives hot desert. Each biome has a distinct climate and typical vegetation.",
+      "hint": "Picture a diagram with temperature on one axis and rainfall on the other.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02l92p7",
+      "kind": "term",
+      "front": "What is a biome?",
+      "back": "A **biome** is a large region that shares a characteristic climate and a characteristic community of organisms.",
+      "hint": "Examples include tropical rainforest and tundra.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00xjevv",
+      "kind": "term",
+      "front": "What is climate?",
+      "back": "**Climate** is the typical pattern of temperature and precipitation in a region over many years, not the conditions on a single day.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1a5q7ad",
+      "kind": "concept",
+      "front": "How does a rain shadow form on the far side of a mountain?",
+      "back": "Moist air is forced up the slope, cools and drops its water as rain or snow. The air that descends on the far side is dry, creating a **rain shadow** with little precipitation.",
+      "hint": "Follow the air as it travels up and over the mountain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04u0zme",
+      "kind": "concept",
+      "front": "What is a limiting factor, and what limits growth in a desert and in tundra?",
+      "back": "A **limiting factor** is a condition in short supply that restricts growth. In hot deserts water limits growth; in tundra low temperatures and a short growing season do.",
+      "hint": "Think about which resource is scarce in each biome.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "025jx81",
+      "kind": "concept",
+      "front": "Give two examples of adaptations that help organisms survive harsh climates.",
+      "back": "Desert plants store water in thick stems, and tundra plants stay low to shelter from wind. Animals in cold biomes often have thick fur or fat for **insulation**.",
+      "hint": "Think about water, wind and cold.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06xzbpg",
+      "kind": "mistake",
+      "front": "A student says rainforest soils must be fertile because plants grow so fast. What is wrong with this?",
+      "back": "Most nutrients are held in the **living biomass**, not the soil. Plants absorb nutrients quickly and heavy rain washes the rest away, so rainforest soils are often poor.",
+      "hint": "Ask where most of the nutrients are stored.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pvpjug",
+      "kind": "mistake",
+      "front": "A student says a hot afternoon proves the local climate is hot. What is the error?",
+      "back": "That describes **weather**, not climate. Climate is the pattern of conditions recorded over many years.",
+      "hint": "Consider how long a period the claim describes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1oa3qsn",
+      "kind": "process",
+      "front": "What are the steps for reading a climate graph?",
+      "back": "1) Find the highest and lowest temperatures and subtract to get the **range**. 2) Look for wet and dry seasons in the bars. 3) Add the monthly bars for annual precipitation. 4) Match the pattern to a biome.",
+      "hint": "There are four steps, and the order matters.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0oo57cu",
+      "kind": "example",
+      "front": "A site gets 10 mm in each of 6 dry months and 130 mm in each of 6 wet months. What is its annual precipitation?",
+      "back": "**840 mm**. The dry months give 6 × 10 = 60 mm, the wet months give 6 × 130 = 780 mm, and 60 + 780 = 840 mm.",
+      "hint": "Work out each season separately, then add the two totals.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "18ff2ey",
+      "kind": "formula",
+      "front": "How is the temperature range found from a climate graph?",
+      "back": "Range = $T_{max}-T_{min}$ in degrees Celsius, the highest monthly mean temperature minus the lowest. For example, 27 − 21 = 6 °C.",
+      "hint": "Subtract the lowest value from the highest.",
+      "sectionId": "s6"
+    }
+  ]
+}

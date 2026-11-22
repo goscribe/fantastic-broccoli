@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "8-3",
+  "topicCode": "8.3",
+  "topicName": "Accumulation in applied contexts",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:42.812Z",
+  "cards": [
+    {
+      "id": "1v736hw",
+      "kind": "concept",
+      "front": "What does the definite integral of a rate $r(t)$ from time $a$ to time $b$ give?",
+      "back": "The **net change** in the quantity over that interval. It adds up the small changes, and its units are the quantity's units, not units per time.",
+      "hint": "Think about what the rate adds up to.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tdebp3",
+      "kind": "formula",
+      "front": "How is the amount at time $b$ found from the initial amount $Q(a)$ and rate $r(t)$ where $Q'(t)=r(t)$?",
+      "back": "$Q(b)=Q(a)+\\int_a^b r(t)\\,dt$. The **initial amount** $Q(a)$ is added to the net change from the integral.",
+      "hint": "What does the integral leave out of the final amount?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0siru6p",
+      "kind": "formula",
+      "front": "For input rate $I(t)$ and output rate $O(t)$, which integral gives the net change in volume from $a$ to $b$?",
+      "back": "$\\int_a^b [I(t)-O(t)]\\,dt$. The **net rate** is $I(t)-O(t)$, and integrating it gives the change in volume over the interval.",
+      "hint": "Which rate works against the volume?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "065yp4o",
+      "kind": "term",
+      "front": "What is an accumulation rate?",
+      "back": "An **accumulation rate** describes how quickly a quantity changes over time. Its units are quantity units per time unit, such as liters per minute.",
+      "hint": "Look at the units.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pps485",
+      "kind": "mistake",
+      "front": "Why is $\\int_a^b r(t)\\,dt$ wrong to call the final amount?",
+      "back": "It is only the **net change**. The final amount needs the initial amount added, unless the initial amount is zero.",
+      "hint": "What was in the tank at the start?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1f2ocg1",
+      "kind": "term",
+      "front": "What is a signed rate?",
+      "back": "A **signed rate** uses positive values for increases and negative values for decreases. For water in a tank, inflow is positive and outflow is negative.",
+      "hint": "Think about tank inflow and outflow.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09lqyaa",
+      "kind": "concept",
+      "front": "What happens to the net change when the rate is negative over part of the interval?",
+      "back": "A negative rate **reduces** the net change, because it subtracts from the total accumulated over the interval.",
+      "hint": "Consider the sign of the rate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17te5np",
+      "kind": "process",
+      "front": "What should you do first when a question gives input and output rates?",
+      "back": "**Name** the quantity, its rate, and the time interval. Then state which quantity the integral represents before evaluating it.",
+      "hint": "Start with words, not integrals.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xemcuf",
+      "kind": "concept",
+      "front": "How does total input differ from net change when there is also an output?",
+      "back": "**Total input** is $\\int_a^b I(t)\\,dt$ and counts everything that entered. Net change is $\\int_a^b [I(t)-O(t)]\\,dt$, so output is subtracted.",
+      "hint": "Does output cancel input here?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ns3c77",
+      "kind": "process",
+      "front": "What are the steps for evaluating a rate integral and interpreting it in context?",
+      "back": "Write the integral with its time limits, find an antiderivative, evaluate it at the upper limit minus the lower limit, then interpret the result with units in context.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06uty1l",
+      "kind": "example",
+      "front": "A tank starts with 30 liters and water enters at $r(t)=4+2t$ liters per minute. How much water is added in the first 3 minutes?",
+      "back": "**21 liters**. $\\int_0^3(4+2t)\\,dt=[4t+t^2]_0^3=(12+9)-0=21$.",
+      "hint": "Find an antiderivative first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12arbop",
+      "kind": "example",
+      "front": "Using the same tank (30 liters at the start, $r(t)=4+2t$ liters per minute), how much water is in the tank after 3 minutes?",
+      "back": "**51 liters**. Add the initial amount to the water added: $30+21=51$.",
+      "hint": "Remember the starting amount.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1f3wk1e",
+      "kind": "mistake",
+      "front": "Why is multiplying one rate value by the time interval wrong for an accumulation problem?",
+      "back": "The rate **changes** with time, so one rate value times the interval need not give the correct total. You must integrate the rate.",
+      "hint": "Does the rate stay constant?",
+      "sectionId": "s4"
+    }
+  ]
+}

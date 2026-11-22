@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-12",
+  "topicCode": "5.12",
+  "topicName": "Evidence for climate change",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:17.500Z",
+  "cards": [
+    {
+      "id": "0z6kows",
+      "kind": "concept",
+      "front": "Why do scientists use proxies such as ice cores and tree rings to study past climate?",
+      "back": "Direct measurements such as thermometer records only cover recent history, so a **proxy** gives indirect information about earlier times.",
+      "hint": "Compare how far back direct records reach with how far back proxies reach.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kgwk82",
+      "kind": "concept",
+      "front": "What does the air trapped in ice-core bubbles reveal about the past?",
+      "back": "It shows how much **carbon dioxide** and **methane** the atmosphere held at the time the snow fell.",
+      "hint": "Think about what was in the air when the snow first settled.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0y5moud",
+      "kind": "concept",
+      "front": "What does the width of a tree ring tell scientists about past conditions?",
+      "back": "It shows how well the tree grew that year: **wide rings** usually mean warm, wet conditions with plenty of light, while **narrow rings** suggest cold or dry years.",
+      "hint": "Each ring is one growing season, so think about what helps a tree grow.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q1bp3r",
+      "kind": "term",
+      "front": "What is an ice core?",
+      "back": "A **ice core** is a cylinder of ice drilled from an ice sheet or glacier, containing layers laid down over many years.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0claw4a",
+      "kind": "concept",
+      "front": "How can an ice core show the temperature when the snow formed?",
+      "back": "The proportion of a heavier form of **oxygen** in the ice changes with temperature, so measuring it gives the past temperature.",
+      "hint": "Look at what the ice itself contains, not the bubbles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1986eg9",
+      "kind": "concept",
+      "front": "Why is the air trapped in an ice core younger than the ice around it?",
+      "back": "Snow stays porous for many years, so air keeps moving through it until the bubbles seal at some depth, leaving the air younger than the surrounding ice.",
+      "hint": "Think about when the bubbles seal off.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gd3qkz",
+      "kind": "mistake",
+      "front": "Why is a narrow tree ring not proof that a year was cold?",
+      "back": "**Drought**, **disease** or shading by neighbouring trees can also limit growth, so a narrow ring may have a non-climate cause.",
+      "hint": "List factors other than temperature that can slow a tree's growth.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18eg7c0",
+      "kind": "concept",
+      "front": "How can matching ring patterns extend a climate record further back?",
+      "back": "Rings from living trees are matched with rings in **old timber**, so the record reaches back beyond the lifetime of any living tree.",
+      "hint": "Think about where very old wood might come from.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04uklwi",
+      "kind": "term",
+      "front": "What is pollen analysis?",
+      "back": "**Pollen analysis** is identifying and counting pollen grains in dated layers of mud or peat to show which plants grew nearby and hint at past climate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14uo36n",
+      "kind": "concept",
+      "front": "Why is agreement between independent records more convincing?",
+      "back": "Each method has different weaknesses, so it is unlikely that they all share the same error, and confidence in the conclusion is stronger.",
+      "hint": "Think about whether two different methods would make the same mistake.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16lv7uh",
+      "kind": "process",
+      "front": "What are the steps for describing a climate graph?",
+      "back": "First read the **axis labels and units**, then describe the overall trend, noting peaks, dips and fluctuations, and quote values with units from the axes.",
+      "hint": "Start with the axes before the shape of the line.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0clhq5s",
+      "kind": "mistake",
+      "front": "Why should you not judge a trend from two nearby points on a graph?",
+      "back": "**Short-term ups and downs** can hide the long-term trend, so judge the overall direction across the whole time span.",
+      "hint": "Compare how much of the time span you are looking at.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hcncyy",
+      "kind": "formula",
+      "front": "How is percentage change calculated from an initial and a final value?",
+      "back": "$\\text{percentage change} = \\frac{\\text{change}}{\\text{original value}}\\times100$, where the change is the final value minus the original value.",
+      "hint": "Which value is the starting point?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lc62bk",
+      "kind": "example",
+      "front": "Carbon dioxide rises from 320 ppm to 400 ppm. What is the percentage increase?",
+      "back": "Change = $400-320=80\\,\\text{ppm}$, so $\\frac{80}{320}\\times100=25\\%$. The increase is **25%**.",
+      "hint": "Find the change first, then divide by the original value.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "4-5",
+  "topicCode": "4.5",
+  "topicName": "Carrying out a test for a mean or mean difference",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:24:59.094Z",
+  "cards": [
+    {
+      "id": "0z9vu2n",
+      "kind": "formula",
+      "front": "What does the test statistic $t=\\frac{\\bar{x}-\\mu_0}{s/\\sqrt{n}}$ measure, and what do $\\bar{x}$, $\\mu_0$, $s$ and $n$ stand for?",
+      "back": "It counts how many **standard errors** the sample mean sits from the claimed mean. $\\bar{x}$ is the sample mean, $\\mu_0$ the null value, $s$ the sample standard deviation and $n$ the sample size.",
+      "hint": "Look at the denominator and ask how far sample means typically spread.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05wrxyy",
+      "kind": "process",
+      "front": "What are the two outcomes of comparing the p-value with the significance level $\\alpha$?",
+      "back": "If $p\\leq\\alpha$, **reject** $H_0$, which gives convincing evidence for $H_a$. If $p>\\alpha$, **fail to reject** $H_0$, which means the evidence is not convincing.",
+      "hint": "Think about when the cutoff was chosen compared with when the data arrive.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cq0s7v",
+      "kind": "concept",
+      "front": "Which three conditions must hold before a one-sample t test is trustworthy?",
+      "back": "**Random** sampling or randomized experiment; **independent** (under 10% of the population when sampling without replacement); and **normal** (population roughly normal, $n\\geq30$, or no strong skewness or outliers).",
+      "hint": "Each one is checked before any calculation begins.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pbh4ur",
+      "kind": "concept",
+      "front": "What shape does the t distribution have, and why is it different from the normal curve?",
+      "back": "It is **centered at 0** and looks like a normal curve but has **heavier tails**, allowing for the extra uncertainty of estimating the standard deviation with $s$.",
+      "hint": "Think about what changes when the standard deviation comes from the sample.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05iwvv1",
+      "kind": "term",
+      "front": "How are degrees of freedom found for a one-sample t statistic?",
+      "back": "$\\mathrm{df}=n-1$, which sets the exact shape of the **t distribution** used to find the p-value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wi2sx3",
+      "kind": "term",
+      "front": "What does a p-value measure in a significance test?",
+      "back": "The **probability**, assuming $H_0$ is true, of getting a test statistic at least as extreme as the one observed. For a two-sided alternative, double the area in one tail.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xupi2i",
+      "kind": "example",
+      "front": "A battery test gives $t=2.00$ with $\\mathrm{df}=24$ against a two-sided alternative. What is the p-value, approximately?",
+      "back": "About **0.057**. The area above $t=2.00$ is about 0.0285, and doubling it gives $2(0.0285)\\approx0.057$.",
+      "hint": "Remember the alternative is two-sided, so both tails count.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dmbg6i",
+      "kind": "process",
+      "front": "How do you run a test for a mean difference when each subject gives a before and after score?",
+      "back": "Find each **difference** first, then treat the differences as one sample. The null value is usually $\\mu_0=0$.",
+      "hint": "Start by pairing the two measurements from each subject.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dys48m",
+      "kind": "term",
+      "front": "What is the significance level $\\alpha$, and when is it chosen?",
+      "back": "It is the **probability cutoff** chosen before collecting data. Common choices are 0.10, 0.05 and 0.01.",
+      "hint": "Think about setting the rule before seeing the results.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xogi38",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that failing to reject $H_0$ proves $H_0$ is true?",
+      "back": "Failing to reject only means the **evidence was not strong enough** to show otherwise. Other values of the mean could also fit the data.",
+      "hint": "Think of a verdict of not guilty in a court case.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mnydyb",
+      "kind": "mistake",
+      "front": "What is wrong with saying the p-value is the probability that $H_0$ is true?",
+      "back": "The p-value is a probability about the **data**, calculated assuming $H_0$ is true. It is not the probability that the hypothesis itself is true or false.",
+      "hint": "Check which side of the word given the probability sits on.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1l56o50",
+      "kind": "process",
+      "front": "What three steps should a final conclusion include after finding a p-value?",
+      "back": "Compare the p-value with $\\alpha$, state the decision about $H_0$, then describe what it means for the **parameter** in context, using convincing-evidence wording.",
+      "hint": "Start with the number and end with the real situation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ge0n6t",
+      "kind": "example",
+      "front": "For $n=16$, $\\bar{x}=18.5$ and $s=4.0$, testing $H_0:\\mu=20$, what is the t statistic?",
+      "back": "$t=-1.50$. The standard error is $\\frac{4.0}{\\sqrt{16}}=1.0$, so $t=\\frac{18.5-20}{1.0}=-1.50$, with $\\mathrm{df}=15$.",
+      "hint": "Find the standard error first."
+    }
+  ]
+}

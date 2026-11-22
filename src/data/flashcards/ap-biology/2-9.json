@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "2-9",
+  "topicCode": "2.9",
+  "topicName": "Cell compartmentalization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:29.231Z",
+  "cards": [
+    {
+      "id": "0v3ywqa",
+      "kind": "concept",
+      "front": "Why does dividing a cell into compartments make it more efficient?",
+      "back": "**Compartments** keep different conditions and functions separate, so incompatible processes can run at the same time without interfering. Enzymes and substrates can also be kept close together, which increases how often they interact.",
+      "hint": "Think about separate spaces and local concentration.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0veyafi",
+      "kind": "concept",
+      "front": "What role does an organelle membrane play in maintaining a concentration gradient?",
+      "back": "The **membrane** acts as a barrier that keeps conditions different on each side. Without it, the concentration gradient would dissipate.",
+      "hint": "What would happen to the gradient with no barrier?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ys5pv6",
+      "kind": "concept",
+      "front": "How do mitochondrial inner membranes help produce ATP?",
+      "back": "The inner membrane separates two spaces, so an **electrochemical gradient** can form. Proteins in the membrane use this gradient to drive ATP production.",
+      "hint": "Which two spaces does the inner membrane separate?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15xy40p",
+      "kind": "term",
+      "front": "What is compartmentalization?",
+      "back": "**Compartmentalization** is the division of a cell into spaces with distinct conditions or functions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1eq861w",
+      "kind": "term",
+      "front": "What is local concentration?",
+      "back": "**Local concentration** is the amount of a substance per unit volume within a particular region.",
+      "hint": "Consider why enzymes placed close together might meet more often.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ukf9ly",
+      "kind": "concept",
+      "front": "Why does a lysosome keep an acidic interior?",
+      "back": "The **acidic** conditions suit its digestive enzymes, and the membrane limits their activity so they do not disrupt the rest of the cell.",
+      "hint": "Link the conditions to the enzymes it holds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cy7aqe",
+      "kind": "term",
+      "front": "What is a concentration gradient?",
+      "back": "A **concentration gradient** is a difference in a substance's concentration across a membrane or between two regions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1g3jwlh",
+      "kind": "mistake",
+      "front": "Do organelle membranes completely seal organelles off from the cytoplasm?",
+      "back": "No. Membranes do not completely seal organelles; **controlled exchange** of substances through membrane proteins is essential to their function.",
+      "hint": "Consider how materials get in and products get out.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e1ubq9",
+      "kind": "term",
+      "front": "What is the nuclear envelope?",
+      "back": "The **nuclear envelope** is a double membrane that surrounds the nucleus and contains pores that let selected materials, including messenger RNA, pass.",
+      "hint": "Focus on what it separates and how it controls exchange.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nconys",
+      "kind": "term",
+      "front": "What is the endoplasmic reticulum?",
+      "back": "The **endoplasmic reticulum** is a membrane network that provides space for protein processing or lipid synthesis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1x42pzs",
+      "kind": "process",
+      "front": "What route can some products take after leaving the endoplasmic reticulum?",
+      "back": "**Transport vesicles** carry some products to the Golgi apparatus for further modification and sorting.",
+      "hint": "Think about how the products travel between organelles.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bfq28l",
+      "kind": "term",
+      "front": "What is an electrochemical gradient?",
+      "back": "An **electrochemical gradient** combines a difference in ion concentration with a difference in electrical charge.",
+      "hint": "Two types of difference are combined.",
+      "sectionId": "s4"
+    }
+  ]
+}

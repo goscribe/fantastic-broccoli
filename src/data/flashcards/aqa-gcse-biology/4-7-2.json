@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-7-2",
+  "topicCode": "4.7.2",
+  "topicName": "Organisation of an ecosystem",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:01.612Z",
+  "cards": [
+    {
+      "id": "10y2wu8",
+      "kind": "concept",
+      "front": "How does energy move through an ecosystem differently from materials?",
+      "back": "Energy enters through **producers** and eventually leaves as heat, so it is not recycled. Decomposers **recycle** materials back into the surroundings.",
+      "hint": "Compare where energy goes with where materials go.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1r33z4m",
+      "kind": "concept",
+      "front": "How does carbon move between organisms and the atmosphere?",
+      "back": "Plants take in carbon dioxide during photosynthesis, feeding passes carbon along food chains, and respiration, decomposition and **combustion** release carbon dioxide back to the air.",
+      "hint": "Start with the process that takes carbon dioxide out of the air.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xhyzde",
+      "kind": "concept",
+      "front": "What does the direction of each arrow in a food chain show?",
+      "back": "The direction of **energy transfer**, pointing from the organism eaten to the organism that eats it. It does not show the direction an animal travels.",
+      "hint": "Think about where the energy in grass ends up.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iqq90j",
+      "kind": "term",
+      "front": "What is decomposition?",
+      "back": "The **breakdown** of dead organisms and waste by decomposers, releasing materials that can be reused.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0i3h7i7",
+      "kind": "concept",
+      "front": "Why are warm, moist conditions linked to faster decomposition?",
+      "back": "They usually **speed up decomposition**, but decomposers also need enough oxygen for aerobic respiration.",
+      "hint": "Think about what decomposers need in order to respire.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02pbalp",
+      "kind": "mistake",
+      "front": "Why is it wrong to think decomposers make dead matter disappear?",
+      "back": "Decomposers **break down** dead organisms and waste and return materials to the surroundings. The materials are not destroyed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0irkm68",
+      "kind": "term",
+      "front": "What is transpiration?",
+      "back": "The **loss of water vapour** from plant leaves.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "140pcga",
+      "kind": "process",
+      "front": "What is the order of processes that moves water around the water cycle?",
+      "back": "**Evaporation** from surface water, then transpiration from plant leaves, then **condensation** into clouds, then precipitation returning water to the ground.",
+      "hint": "Start where sunlight warms the surface water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0q7fotx",
+      "kind": "concept",
+      "front": "How do predator and prey numbers change in a stable community?",
+      "back": "They **rise and fall in cycles**, with predator numbers lagging behind prey numbers.",
+      "hint": "Think about which population is eaten by the other.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dhoptd",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a drought will certainly make fox numbers fall?",
+      "back": "Population changes are **possible effects**, not certain outcomes. Other food sources and environmental conditions also affect population sizes, so 'may' should be used.",
+      "hint": "Consider what else could feed foxes or affect rabbits.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01iw8mv",
+      "kind": "example",
+      "front": "If a drought reduces grass growth, what may happen to rabbits and then foxes?",
+      "back": "Rabbits **may decrease** because they have less food. Foxes may then decrease because they have fewer prey.",
+      "hint": "Follow the food chain one step at a time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05xedii",
+      "kind": "term",
+      "front": "What is a population?",
+      "back": "All the organisms of **one species** living in a particular area.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k9xo81",
+      "kind": "term",
+      "front": "What is a food web?",
+      "back": "Several **food chains** linked together to show the feeding relationships in an ecosystem.",
+      "hint": "Think about an animal that eats more than one type of food.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15scus1",
+      "kind": "term",
+      "front": "What is combustion?",
+      "back": "**Burning** in oxygen. Burning carbon-containing fuels such as wood and fossil fuels releases carbon dioxide.",
+      "sectionId": "s2"
+    }
+  ]
+}

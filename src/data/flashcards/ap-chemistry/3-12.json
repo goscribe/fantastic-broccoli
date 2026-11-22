@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "3-12",
+  "topicCode": "3.12",
+  "topicName": "Properties of photons",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:30.162Z",
+  "cards": [
+    {
+      "id": "1urw5cl",
+      "kind": "formula",
+      "front": "Which equation gives the energy of one photon from its frequency, and what does each symbol mean?",
+      "back": "$E=h\\nu$: **energy** E in joules equals the Planck constant $h=6.626\\times10^{-34}\\ \\mathrm{J\\,s}$ times frequency $\\nu$ in hertz. Higher frequency means more energy.",
+      "hint": "Start with the symbol for energy and the symbol for frequency.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t4nt9i",
+      "kind": "concept",
+      "front": "How are wavelength and frequency related for electromagnetic radiation in a vacuum?",
+      "back": "They are **inversely** related through $c=\\lambda\\nu$, where $c=3.00\\times10^8\\ \\mathrm{m\\,s^{-1}}$. A shorter wavelength means a higher frequency because their product stays constant.",
+      "hint": "Think about what stays fixed in the equation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14sevja",
+      "kind": "concept",
+      "front": "Why does a violet photon carry more energy than a red photon?",
+      "back": "Violet light has a **shorter** wavelength, so it has a higher frequency. Since $E=h\\nu$, the higher frequency gives the violet photon more energy.",
+      "hint": "Compare the wavelengths first, then follow the chain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fwb27x",
+      "kind": "term",
+      "front": "What is a photon?",
+      "back": "A **photon** is a packet of electromagnetic energy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1orjws0",
+      "kind": "term",
+      "front": "What is a wavelength?",
+      "back": "The **distance** between matching points on successive waves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sn7yjk",
+      "kind": "term",
+      "front": "What unit is frequency measured in, and what does frequency count?",
+      "back": "**Hertz** (Hz). Frequency is the number of wave cycles passing a point each second, and hertz equals cycles per second.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cbvp66",
+      "kind": "formula",
+      "front": "How can you find photon energy when you know the wavelength instead of the frequency?",
+      "back": "$E=\\frac{hc}{\\lambda}$, found by combining $E=h\\nu$ with $c=\\lambda\\nu$. Wavelength $\\lambda$ must be in meters, so convert first.",
+      "hint": "Substitute for frequency using the wave equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k4mtws",
+      "kind": "example",
+      "front": "What is the energy of one photon with a wavelength of 500 nm in a vacuum?",
+      "back": "**3.98×10^-19 J**. Convert to $5.00\\times10^{-7}\\ \\mathrm{m}$, find $\\nu=6.00\\times10^{14}\\ \\mathrm{Hz}$, then use $E=h\\nu$.",
+      "hint": "Convert nm to m before doing anything else.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xjdml0",
+      "kind": "term",
+      "front": "What is the electromagnetic spectrum?",
+      "back": "The **full range** of electromagnetic radiation, arranged by wavelength or frequency. From lowest to highest frequency: radio, microwave, infrared, visible, ultraviolet, X-ray, gamma ray.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "161v7iu",
+      "kind": "mistake",
+      "front": "A student says a longer wavelength means a more energetic photon. What is wrong?",
+      "back": "A **longer** wavelength means a lower frequency and lower photon energy. Photon energy rises with frequency, so it falls as wavelength gets longer.",
+      "hint": "Use the link between wavelength and frequency.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ckqoab",
+      "kind": "concept",
+      "front": "Why can an atom absorb or emit only certain photon energies?",
+      "back": "Electrons can occupy only specific **energy levels**, so a photon must match the energy difference between two levels to be absorbed or emitted.",
+      "hint": "Think about which energies an electron is allowed to have.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11n9nit",
+      "kind": "process",
+      "front": "What happens during absorption and during emission in an atom?",
+      "back": "**Absorption:** an electron gains photon energy and moves to a higher level. **Emission:** an electron drops to a lower level and releases a photon. Photon energy equals $|E_{\\text{final}}-E_{\\text{initial}}|$.",
+      "hint": "State the direction of the move and whether a photon is taken in or given out.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "152wfyr",
+      "kind": "concept",
+      "front": "How does the size of an electron's energy-level jump affect the photon involved?",
+      "back": "A **larger** jump needs a higher-frequency, shorter-wavelength photon. A smaller jump corresponds to a lower-frequency, longer-wavelength photon.",
+      "hint": "Link the energy difference to the photon's frequency.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "2-4",
+  "topicCode": "2.4",
+  "topicName": "Differentiability and continuity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:46.598Z",
+  "cards": [
+    {
+      "id": "1erld6p",
+      "kind": "concept",
+      "front": "Does differentiability at a point guarantee continuity there, and does continuity guarantee differentiability?",
+      "back": "**Differentiability** at a point guarantees continuity there, but continuity alone does not guarantee differentiability. Continuity is necessary, not sufficient.",
+      "hint": "Think about what a break does to a limiting slope.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xpw1ve",
+      "kind": "concept",
+      "front": "Why can a continuous graph still fail to have a derivative at one point?",
+      "back": "A **corner**, **cusp**, or **vertical tangent** can occur at a continuous point. The slopes from each side then differ or become unbounded, so no single finite limiting slope exists.",
+      "hint": "Continuous means no break, but a slope can still fail to settle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e29yv0",
+      "kind": "process",
+      "front": "What are the steps for deciding whether a function is differentiable at a suspected point?",
+      "back": "**First** check continuity: find $f(a)$ and both one-sided limits. If they do not match, the function is not differentiable. If continuous, compare the finite one-sided slopes; both must exist and agree.",
+      "hint": "Start with the function value and the limits.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13rskbv",
+      "kind": "term",
+      "front": "What does it mean for a function to be continuous at $x=a$?",
+      "back": "A function is **continuous** at $x=a$ when $\\lim_{x\\to a}f(x)=f(a)$, so the limit exists and equals the function's defined value there.",
+      "hint": "Compare the limit with the function value.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09tjcky",
+      "kind": "term",
+      "front": "What is a removable discontinuity?",
+      "back": "A **removable discontinuity** is where a finite limit exists, but the function value is missing or differs from that limit. Changing a single function value can fix it.",
+      "hint": "The limit exists, but the point is wrong or missing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kxs0ab",
+      "kind": "concept",
+      "front": "Why can't a jump or infinite discontinuity be fixed by redefining one function value?",
+      "back": "At a **jump** discontinuity the left and right limits differ, and at an **infinite** discontinuity values grow without bound. No single value can close either gap, so the function stays discontinuous.",
+      "hint": "Redefining one point only changes $f(a)$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qhic4k",
+      "kind": "term",
+      "front": "What is a corner on a graph?",
+      "back": "A **corner** is a continuous point where the finite one-sided slopes differ. The derivative does not exist there because the two sides disagree.",
+      "hint": "Two finite slopes that do not match.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0eclxou",
+      "kind": "term",
+      "front": "What is a cusp on a graph?",
+      "back": "A **cusp** is a continuous point where one-sided slopes become unbounded with opposite signs. The derivative does not exist there.",
+      "hint": "The slopes shoot off towards opposite infinities.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0f2czuz",
+      "kind": "mistake",
+      "front": "A student says a connected graph with no breaks must have a derivative everywhere. Why is this wrong?",
+      "back": "A connected graph can have a **sharp corner**, which is continuous but not differentiable. Continuity does not make the one-sided slopes match.",
+      "hint": "Look at the graph of $f(x)=|x|$ near zero.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ut17w9",
+      "kind": "mistake",
+      "front": "A student thinks a removable discontinuity is harmless because a limit exists there. What is the error?",
+      "back": "The function is still not continuous, because the value $f(a)$ is missing or different from the limit. Since differentiability requires continuity, the function is not differentiable there.",
+      "hint": "Check $f(a)$ as well as the limit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00hczs1",
+      "kind": "formula",
+      "front": "Write the one-sided difference quotient at $x=a$ and say what the $h<0$ and $h>0$ cases tell you.",
+      "back": "$\\frac{f(a+h)-f(a)}{h}$ gives the slope of a secant line. Taking $h<0$ approaches from the **left**; taking $h>0$ approaches from the **right**. Both limits must exist and agree.",
+      "hint": "Let $h$ approach zero from each side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vd0tzc",
+      "kind": "example",
+      "front": "Is $f(x)=|x|$ differentiable at $x=0$? Find the one-sided slopes.",
+      "back": "No. For $h<0$ the slope is $\\frac{|h|}{h}=-1$, and for $h>0$ it is $\\frac{|h|}{h}=1$. The one-sided slopes differ, so the derivative does not exist.",
+      "hint": "Use $f(0)=0$ and split into $h<0$ and $h>0$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p2379k",
+      "kind": "term",
+      "front": "What are one-sided derivatives?",
+      "back": "**One-sided derivatives** are limiting slopes found by approaching a point from only the left or only the right. For the derivative to exist, both must be finite and equal.",
+      "hint": "Approach from one direction at a time.",
+      "sectionId": "s4"
+    }
+  ]
+}

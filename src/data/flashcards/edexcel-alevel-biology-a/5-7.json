@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-7",
+  "topicCode": "5.7",
+  "topicName": "Light-dependent reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:55.843Z",
+  "cards": [
+    {
+      "id": "032rojd",
+      "kind": "concept",
+      "front": "Where do the light-dependent reactions take place, and what do they produce?",
+      "back": "They take place in the **thylakoid membranes** of the chloroplast. They produce ATP and reduced NADP, and release oxygen as a by-product.",
+      "hint": "Think about the flattened sacs inside a chloroplast.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y4lopg",
+      "kind": "concept",
+      "front": "How does a proton gradient lead to ATP being made?",
+      "back": "Protons are pumped into the thylakoid space, so they build up there. They can only flow back to the stroma through **ATP synthase**, and this flow supplies the energy to make ATP from ADP and Pi. This is **chemiosmosis**.",
+      "hint": "Consider where the protons are concentrated and the only route out of that space.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f2hhwz",
+      "kind": "concept",
+      "front": "Why does photosystem II need water, and what does water supply?",
+      "back": "Photosystem II has lost electrons, so **water** is split by photolysis to replace them. The split also supplies extra protons and releases oxygen.",
+      "hint": "Ask what photosystem II has lost after it absorbs light.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14qm5mo",
+      "kind": "term",
+      "front": "What is a photosystem?",
+      "back": "A **photosystem** is a cluster of chlorophyll and other pigments with proteins in a thylakoid membrane, which absorbs light energy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jekxxg",
+      "kind": "process",
+      "front": "What are the main steps of the light-dependent reactions, in order?",
+      "back": "1) Light excites electrons in photosystem II. 2) Electrons pass along the electron transport chain, pumping protons into the thylakoid space. 3) Water is split to replace electrons and release oxygen. 4) Protons flow through ATP synthase to make ATP. 5) Electrons reach photosystem I, are re-excited by light and passed to NADP to form reduced NADP.",
+      "hint": "Start with the photosystem that absorbs light first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0y5t4l1",
+      "kind": "formula",
+      "front": "What does the equation $2\\mathrm{H_2O}\\rightarrow4\\mathrm{H^+}+4\\mathrm{e^-}+\\mathrm{O_2}$ describe?",
+      "back": "The **photolysis** of water. Light splits two water molecules into four protons ($\\mathrm{H^+}$), four electrons ($\\mathrm{e^-}$) and one oxygen molecule ($\\mathrm{O_2}$).",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ev108a",
+      "kind": "mistake",
+      "front": "A student says light and water both provide the energy for ATP. What is wrong with this?",
+      "back": "Only **light** supplies energy, to excite electrons. Water supplies replacement electrons and protons, and oxygen is released as a waste product.",
+      "hint": "Compare what each one contributes to the reaction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ef1b6b",
+      "kind": "term",
+      "front": "What is NADP's role in the light-dependent reactions?",
+      "back": "**NADP** is a coenzyme that accepts electrons and protons to form reduced NADP, which carries hydrogen to the light-independent reaction.",
+      "hint": "Think about where electrons from photosystem I end up.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bh3ofq",
+      "kind": "concept",
+      "front": "How does cyclic photophosphorylation differ from non-cyclic in the photosystems and products it uses?",
+      "back": "Cyclic uses only **photosystem I**, returns electrons to it and makes ATP only. Non-cyclic uses both photosystems and makes ATP and reduced NADP.",
+      "hint": "Count which photosystems each route uses.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rwas4s",
+      "kind": "mistake",
+      "front": "A student says cyclic photophosphorylation releases oxygen because it makes ATP. What is wrong?",
+      "back": "Cyclic photophosphorylation does **not** split water, so no oxygen is released. Oxygen only comes from water splitting in non-cyclic photophosphorylation.",
+      "hint": "Which route splits water?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18c0wv1",
+      "kind": "concept",
+      "front": "Why would a cell use cyclic photophosphorylation?",
+      "back": "A chloroplast sometimes needs more **ATP** than reduced NADP. Cyclic photophosphorylation adjusts that balance, providing extra ATP for the light-independent reaction.",
+      "hint": "Think about what the light-independent reaction needs most.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03az90s",
+      "kind": "example",
+      "front": "A thylakoid membrane is damaged so no proton gradient can form. What happens to the light-independent reaction?",
+      "back": "Little or no ATP is made by chemiosmosis, so the light-independent reaction slows or stops, because it needs ATP.",
+      "hint": "Follow the link from the gradient to the ATP supply."
+    }
+  ]
+}

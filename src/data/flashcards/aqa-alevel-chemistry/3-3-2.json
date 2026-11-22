@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-2",
+  "topicCode": "3.3.2",
+  "topicName": "Alkanes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:20.225Z",
+  "cards": [
+    {
+      "id": "0x0ydzy",
+      "kind": "formula",
+      "front": "What general formula describes every alkane, where $n$ is the number of carbon atoms?",
+      "back": "$\\mathrm{C_nH_{2n+2}}$, where $n$ is the number of **carbon atoms** in one molecule. Every saturated alkane fits this pattern.",
+      "hint": "Try methane, ethane and propane and look for the pattern in the hydrogen count.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13d4isw",
+      "kind": "concept",
+      "front": "Why does a longer alkane chain have a higher boiling point?",
+      "back": "Longer chains have more electrons and more surface contact, so the **London forces** between molecules are stronger. More energy is needed to separate them.",
+      "hint": "Think about what holds neighbouring molecules together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mvlzzh",
+      "kind": "process",
+      "front": "How does fractional distillation separate crude oil into fractions?",
+      "back": "Crude oil is heated until most of it vaporises. The vapour enters a column that is hotter at the bottom, and each **fraction** condenses at the level where the temperature falls below its boiling point.",
+      "hint": "Start with what happens to the crude oil before it reaches the column.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16frtay",
+      "kind": "term",
+      "front": "What is cracking?",
+      "back": "**Cracking** is breaking long-chain alkanes into shorter alkanes and alkenes by breaking carbon–carbon bonds.",
+      "hint": "Compare what cracking does to molecules with what distillation does.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k23tt5",
+      "kind": "process",
+      "front": "What are the three stages of the free radical chain in the reaction of methane with chlorine?",
+      "back": "**Initiation**: UV light splits $\\mathrm{Cl_2}$ into two $\\mathrm{Cl^{\\bullet}}$ radicals. **Propagation**: radicals react and regenerate a radical, so the chain continues. **Termination**: two radicals combine and end the chain.",
+      "hint": "The first stage needs energy from light.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rvb49y",
+      "kind": "mistake",
+      "front": "A student says termination keeps the chain going by making a new radical. What is wrong with this?",
+      "back": "Termination uses up **two radicals** and makes none, so it stops the chain. Propagation is the step that regenerates a radical.",
+      "hint": "Count the radicals going into termination and coming out of it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wqejk1",
+      "kind": "term",
+      "front": "What is homolytic fission?",
+      "back": "The breaking of a covalent bond so that **each atom keeps one electron** from the shared pair, forming radicals.",
+      "hint": "Think about what happens to the shared pair of electrons.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1f1qj8n",
+      "kind": "term",
+      "front": "What is a saturated hydrocarbon?",
+      "back": "A compound of only **carbon and hydrogen** in which all bonds between carbon atoms are single bonds.",
+      "hint": "Consider what the word hydrocarbon tells you about the atoms present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00e3q0h",
+      "kind": "mistake",
+      "front": "A student says boiling an alkane breaks its covalent bonds. What is the correct idea?",
+      "back": "Boiling overcomes the **London forces** between molecules. The covalent bonds inside each molecule stay intact.",
+      "hint": "Which bonds are between molecules and which are within them?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11lxsz0",
+      "kind": "example",
+      "front": "In the cracking of $\\mathrm{C_{10}H_{22}}$ to $\\mathrm{C_8H_{18}}$, what is the other product?",
+      "back": "$\\mathrm{C_2H_4}$, an **alkene**. Check: 10 carbons and 22 hydrogens on the left, and 8 + 2 carbons and 18 + 4 hydrogens on the right.",
+      "hint": "Balance the carbon and hydrogen totals on each side.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1x3snoc",
+      "kind": "concept",
+      "front": "Why is catalytic cracking preferred over thermal cracking?",
+      "back": "It uses a **zeolite catalyst** at a lower temperature and pressure, which saves energy. Its branched and ring products also suit motor fuels.",
+      "hint": "Compare the conditions used in the two types of cracking.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m2nd2j",
+      "kind": "concept",
+      "front": "Why is carbon monoxide from incomplete combustion dangerous?",
+      "back": "It stops the **blood carrying oxygen**. Incomplete combustion happens when oxygen is limited, producing carbon monoxide or carbon particles.",
+      "hint": "Consider the conditions that produce carbon monoxide.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "14po532",
+      "kind": "example",
+      "front": "Which products form from complete combustion of propane with plenty of oxygen?",
+      "back": "$\\mathrm{3CO_2}$ and $\\mathrm{4H_2O}$, from $\\mathrm{C_3H_8+5O_2\\rightarrow3CO_2+4H_2O}$. Complete combustion releases more energy per mole than incomplete combustion.",
+      "hint": "Balance the carbon and hydrogen atoms before checking oxygen.",
+      "sectionId": "s6"
+    }
+  ]
+}

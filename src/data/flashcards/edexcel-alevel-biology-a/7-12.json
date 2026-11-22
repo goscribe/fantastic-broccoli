@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-12",
+  "topicCode": "7.12",
+  "topicName": "Homeostasis and thermoregulation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:56.212Z",
+  "cards": [
+    {
+      "id": "0tuau2f",
+      "kind": "concept",
+      "front": "Why must enzyme-controlled reactions in the body be kept at a steady temperature?",
+      "back": "Enzymes work best in a narrow temperature range. If the temperature rises too far, enzymes **denature** and reactions fail. If it falls too far, reactions slow down.",
+      "hint": "Think about the shape of an enzyme and the range it works in.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uv6ot7",
+      "kind": "concept",
+      "front": "How does negative feedback keep core temperature close to the set point?",
+      "back": "A change is detected by **thermoreceptors**, the **hypothalamus** compares it with the set point and sends nerve impulses to effectors, and the effectors produce a response that reverses the change.",
+      "hint": "Follow one change through the loop, from detection to response."
+    },
+    {
+      "id": "1dzqja2",
+      "kind": "concept",
+      "front": "Where are the two sets of thermoreceptors, and what does each one detect?",
+      "back": "Receptors in the skin detect **surface temperature** and give early warning of changes in the surroundings. Receptors in the hypothalamus detect the temperature of the **blood** passing through it.",
+      "hint": "Compare what each receptor is measuring and where it sits.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fm4x7e",
+      "kind": "process",
+      "front": "What steps increase heat loss when the blood becomes too warm?",
+      "back": "The hypothalamus triggers sweat glands to release sweat, and the water evaporates, taking heat from the skin. Skin arterioles undergo **vasodilation**, so more blood reaches the surface and more heat is lost.",
+      "hint": "Start with the effectors the hypothalamus signals first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gv9tpw",
+      "kind": "mistake",
+      "front": "Why does sweat that simply drips off the body cool you very little?",
+      "back": "Cooling comes from **evaporation** of the water in sweat, which takes heat energy from the skin. Sweat that drips off has not evaporated, so it removes little heat.",
+      "hint": "Think about what has to happen to the water for heat to be taken from the skin.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0y0v2lq",
+      "kind": "concept",
+      "front": "What is shivering, and how does it warm the blood?",
+      "back": "**Shivering** is rapid, involuntary contraction and relaxation of skeletal muscles. The muscle cells respire faster, and some of the energy released appears as heat that warms the blood.",
+      "hint": "Consider where the heat comes from during respiration.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11j7m8u",
+      "kind": "term",
+      "front": "What is vasoconstriction, and what does it do to heat loss from the skin?",
+      "back": "**Vasoconstriction** is the narrowing of arterioles. Less blood flows through the surface capillaries, so less heat is lost to the surroundings.",
+      "hint": "Compare it with the response to warm blood.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1f7mnl9",
+      "kind": "term",
+      "front": "What is thermoregulation?",
+      "back": "**Thermoregulation** is the control of body temperature within a narrow range. It is one example of homeostasis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ojaq6w",
+      "kind": "term",
+      "front": "What is the normal core temperature of humans?",
+      "back": "**Core temperature** is the temperature of the blood and organs deep inside the body. In humans it is kept close to $37\\,^{\\circ}\\text{C}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15whwi1",
+      "kind": "concept",
+      "front": "Why are raised hairs useful to furred mammals but not to humans?",
+      "back": "In humans the raised hairs have little effect. In furred mammals, raised hairs trap a thicker insulating layer of air.",
+      "hint": "Think about how much hair there is to lift.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1og406d",
+      "kind": "concept",
+      "front": "What happens to the responses once the temperature falls back towards the set point?",
+      "back": "The stimulus weakens, so the hypothalamus reduces its signals and the effectors return to their resting state. If the temperature drops too far, the cold responses start instead.",
+      "hint": "Think about what the stimulus does as the temperature approaches the set point.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1v68chs",
+      "kind": "concept",
+      "front": "Which behaviours help the body control its temperature?",
+      "back": "People add or remove clothing, move into shade or shelter, and change how active they are. These actions support the body's physiological responses.",
+      "hint": "Think about what you do, not what your body does automatically.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1b74hb2",
+      "kind": "process",
+      "front": "What should a full answer to a negative feedback loop question include, in order?",
+      "back": "State the change, the receptor that detects it, the coordinator (the hypothalamus), the effector, and the response that reverses the change.",
+      "hint": "Work through the loop from the starting change to the end result.",
+      "sectionId": "s5"
+    }
+  ]
+}

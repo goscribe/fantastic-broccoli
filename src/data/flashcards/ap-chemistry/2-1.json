@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "2-1",
+  "topicCode": "2.1",
+  "topicName": "Types of chemical bonds",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:07.374Z",
+  "cards": [
+    {
+      "id": "0wmnd1g",
+      "kind": "concept",
+      "front": "What is the main difference between ionic, covalent, and metallic bonding?",
+      "back": "**Electron behavior** differs. Ionic bonding transfers electrons between atoms. Covalent bonding shares electron pairs between particular atoms. Metallic bonding lets electrons move throughout the metal.",
+      "hint": "Think about where the electrons end up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13yvy3v",
+      "kind": "concept",
+      "front": "How does an electronegativity difference predict how electrons are shared in a bond?",
+      "back": "A small difference gives a **nonpolar covalent** bond with fairly equal sharing. A larger difference between nonmetals gives a **polar covalent** bond, with electron density closer to the more electronegative atom.",
+      "hint": "Ask which atom pulls the shared electrons harder.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ywwp0i",
+      "kind": "concept",
+      "front": "Why does solid metal conduct electricity but a solid ionic compound does not?",
+      "back": "**Delocalized electrons** can move through solid metal and carry charge. In a solid ionic compound, the ions cannot move freely, so there are no mobile charged particles.",
+      "hint": "Name the mobile charged particle in each case.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00u84nc",
+      "kind": "term",
+      "front": "What is a chemical bond?",
+      "back": "An **electrical attraction** that holds atoms or ions together.",
+      "hint": "What force holds the particles together?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "008ey7e",
+      "kind": "term",
+      "front": "What is electronegativity?",
+      "back": "How **strongly an atom attracts electrons** in a chemical bond.",
+      "hint": "Think about pulling power for electrons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0s4m1ya",
+      "kind": "term",
+      "front": "What is metallic bonding?",
+      "back": "The **attraction** between positive metal ions and delocalized electrons throughout the metal.",
+      "hint": "Which particles are attracted to which?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0le6m0b",
+      "kind": "term",
+      "front": "What are delocalized electrons?",
+      "back": "Electrons that **move throughout a metal** rather than belonging to one atom or bond.",
+      "hint": "Contrast them with electrons in a single covalent bond.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1y0swft",
+      "kind": "term",
+      "front": "What are molecules?",
+      "back": "**Discrete groups of atoms** held together by covalent bonds.",
+      "hint": "Covalent bonds hold the atoms together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zzzo9z",
+      "kind": "mistake",
+      "front": "A student says a polar covalent bond means the electrons are fully transferred to one atom. What is wrong?",
+      "back": "**Unequal sharing is not complete transfer.** A polar covalent bond still has shared electrons, with density closer to the more electronegative atom.",
+      "hint": "Compare this with ionic bonding.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1b69ke3",
+      "kind": "mistake",
+      "front": "A student says all covalent substances have low melting points and all ionic compounds always conduct. What is wrong?",
+      "back": "These are **useful patterns, not universal rules**. Some covalent substances form networks with very high melting points. Solid ionic compounds do not conduct because their ions cannot move freely.",
+      "hint": "Look for how general the claims are.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dpo83y",
+      "kind": "concept",
+      "front": "When does an ionic compound conduct electricity?",
+      "back": "When it is **molten or dissolved in water**, because mobile ions carry the charge. A solid ionic compound does not conduct because its ions are not free to move.",
+      "hint": "Which particles must be able to move?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oz35ip",
+      "kind": "concept",
+      "front": "Why are many metals malleable while ionic solids tend to fracture?",
+      "back": "In metals, **layers of ions can shift** while attraction to the mobile electrons remains. In ionic solids, shifting can bring like-charged ions together, causing repulsion and fracture.",
+      "hint": "Think about what happens when layers move.",
+      "sectionId": "s4"
+    }
+  ]
+}

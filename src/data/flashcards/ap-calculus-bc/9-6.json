@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "9-6",
+  "topicCode": "9.6",
+  "topicName": "Motion with parametric and vector functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:03.580Z",
+  "cards": [
+    {
+      "id": "0hituwu",
+      "kind": "formula",
+      "front": "What is the velocity vector of a particle with position vector $\\mathbf{r}(t)=\\langle x(t),y(t)\\rangle$?",
+      "back": "**Velocity** is $\\mathbf{v}(t)=\\mathbf{r}'(t)=\\langle x'(t),y'(t)\\rangle$, the derivative of position taken one component at a time. It gives the direction of motion.",
+      "hint": "Differentiate each component of position.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fjt5ha",
+      "kind": "concept",
+      "front": "How do speed and velocity differ?",
+      "back": "**Speed** is the length of the velocity vector, $\\sqrt{(x'(t))^2+(y'(t))^2}$, and it is always a non-negative number. Velocity is a vector, so it also carries direction.",
+      "hint": "One is a number, the other is a vector.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bzbqir",
+      "kind": "concept",
+      "front": "How can you tell when a particle changes horizontal direction?",
+      "back": "It changes horizontal direction when **$x'(t)$ changes sign**. Use a sign chart for $x'(t)$ alone, then do the same for $y'(t)$ to find vertical turns.",
+      "hint": "Check one component at a time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05tfrde",
+      "kind": "term",
+      "front": "What is a particle's position?",
+      "back": "**Position** is the particle's location relative to a chosen origin at a given time. For a planar particle it is the vector $\\langle x(t),y(t)\\rangle$.",
+      "hint": "Think of where the beetle is at time t.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1viy74v",
+      "kind": "process",
+      "front": "What are the steps for motion questions, in order?",
+      "back": "First, differentiate to get velocity and acceleration. Second, substitute the time asked about. Third, build sign charts to find direction changes. Fourth, integrate speed only if distance is asked for.",
+      "hint": "Start with differentiation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1au8rkv",
+      "kind": "example",
+      "front": "For $\\mathbf{r}(t)=\\langle t^3-3t,\\ 2t^2\\rangle$ in meters and seconds, find $\\mathbf{v}(2)$ and $\\mathbf{a}(2)$.",
+      "back": "$\\mathbf{v}(2)=\\langle9,\\ 8\\rangle\\,\\mathrm{m/s}$ and $\\mathbf{a}(2)=\\langle12,\\ 4\\rangle\\,\\mathrm{m/s^2}$. Differentiate once for $\\mathbf{v}(t)=\\langle3t^2-3,4t\\rangle$, again for $\\mathbf{a}(t)=\\langle6t,4\\rangle$, then substitute $t=2$.",
+      "hint": "Differentiate twice, then substitute.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yka5w6",
+      "kind": "example",
+      "front": "A particle has velocity $\\mathbf{v}(2)=\\langle9,\\ 8\\rangle$ m/s. What are its speed and the slope of its path at $t=2$?",
+      "back": "Speed is $\\sqrt{145}\\approx12.042$ m/s, and slope is $\\frac{8}{9}\\approx0.889$. Both components are positive, so it moves right and up.",
+      "hint": "Speed uses the vector length; slope uses $y'/x'$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fg3t7t",
+      "kind": "mistake",
+      "front": "If $x'(t)=t^2$, does the particle change horizontal direction at $t=0$?",
+      "back": "**No**. $x'(t)$ is zero at $t=0$ but never becomes negative, so its sign does not change. A zero alone is not enough; the sign must actually switch.",
+      "hint": "Does the sign actually change?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qo0i4w",
+      "kind": "term",
+      "front": "When is a particle at rest?",
+      "back": "A particle is **at rest** at time $t$ when both $x'(t)=0$ and $y'(t)=0$, so its velocity vector is $\\langle0,0\\rangle$.",
+      "hint": "Both components must be zero together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hqhyy1",
+      "kind": "mistake",
+      "front": "Is a particle at rest at $t=2$ if $\\mathbf{v}(2)=\\langle0,-3\\rangle$?",
+      "back": "**No**. Being at rest needs both velocity components to be zero. Here the vertical component is $-3$, so the particle is still moving, downward.",
+      "hint": "Check both components.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fz4ttm",
+      "kind": "formula",
+      "front": "How do you find the distance traveled from $t=a$ to $t=b$?",
+      "back": "Distance is $\\int_a^b\\sqrt{(x'(t))^2+(y'(t))^2}\\,dt$, the integral of speed. This is the length of the path, and you only use it when distance is asked for.",
+      "hint": "Integrate speed, not velocity.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0i6i24z",
+      "kind": "concept",
+      "front": "What does the acceleration vector tell you, and how is it found?",
+      "back": "**Acceleration** is $\\mathbf{a}(t)=\\mathbf{r}''(t)=\\langle x''(t),y''(t)\\rangle$, the rate of change of velocity. Differentiate position twice, component by component.",
+      "hint": "Acceleration is the derivative of velocity.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kx3zam",
+      "kind": "example",
+      "front": "For $x(t)=t^2-6t$ and $y(t)=t^3-3t^2$ on $0<t<5$, when does the particle change horizontal direction?",
+      "back": "At $t=3$. The derivative $x'(t)=2t-6$ changes sign from negative to positive there. Vertical direction changes at $t=2$, and the particle is never at rest.",
+      "hint": "Solve $x'(t)=0$ and check the sign change.",
+      "sectionId": "s4"
+    }
+  ]
+}

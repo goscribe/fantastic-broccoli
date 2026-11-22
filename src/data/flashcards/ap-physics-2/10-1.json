@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "10-1",
+  "topicCode": "10.1",
+  "topicName": "Electric charge and electric force",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:12.867Z",
+  "cards": [
+    {
+      "id": "1nzzms6",
+      "kind": "term",
+      "front": "What is electric charge, and what two kinds does it come in?",
+      "back": "**Electric charge** is a property of matter that produces electric forces. It comes in positive and negative kinds; protons carry positive charge and electrons carry negative charge.",
+      "hint": "Think about the balloon on the wall.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1a1a43y",
+      "kind": "concept",
+      "front": "What happens when two charged objects have like charges, and when they have opposite charges?",
+      "back": "Like charges **repel** and opposite charges **attract**. The two forces in an interacting pair are always equal in size and opposite in direction.",
+      "hint": "Picture the two balloons swinging apart or together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nxxg1z",
+      "kind": "formula",
+      "front": "What is Coulomb's law for the size of the electric force between two point charges?",
+      "back": "$|\\vec F_E|=k\\frac{|q_1q_2|}{r^2}$, where $k=9.0\\times10^{9}\\,\\mathrm{N\\,m^2/C^2}$, $q_1$ and $q_2$ are the charges in coulombs, and $r$ is the separation in meters. The force is **inversely proportional** to $r^2$.",
+      "hint": "Which quantities multiply, and which power of the distance appears?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02twda3",
+      "kind": "term",
+      "front": "What is the elementary charge, and what does quantized charge mean?",
+      "back": "The **elementary charge** is $e=1.60\\times10^{-19}\\,\\mathrm{C}$, the charge on a proton. Quantized means any measurable charge is a whole-number multiple of $e$.",
+      "hint": "Ask what the smallest possible charge is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uqcyma",
+      "kind": "concept",
+      "front": "If the distance between two point charges is doubled, what happens to the electric force?",
+      "back": "The force falls to **one quarter** of its original value. Because the force goes as $1/r^2$, doubling $r$ divides it by $2^2=4$.",
+      "hint": "Square the distance factor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19wko7f",
+      "kind": "mistake",
+      "front": "When using Coulomb's law, should you put the signs of the charges into the formula?",
+      "back": "No. Use the **absolute values** of the charges to get the size. The signs only tell you whether the force attracts or repels.",
+      "hint": "Magnitude cannot be negative.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0265qe5",
+      "kind": "process",
+      "front": "What steps should you follow to solve a Coulomb's law problem?",
+      "back": "**Convert** charges to coulombs and distance to meters. Substitute the absolute values into Coulomb's law to get the magnitude. Then use the signs to say whether the force is attractive or repulsive.",
+      "hint": "The signs come last.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hzlqdd",
+      "kind": "example",
+      "front": "A $+2.0\\,\\mu\\mathrm{C}$ charge and a $-3.0\\,\\mu\\mathrm{C}$ charge are 0.30 m apart. What are the force magnitude and its type?",
+      "back": "**0.60 N**, attractive. Substituting gives $|\\vec F_E|=(9.0\\times10^{9})\\frac{(2.0\\times10^{-6})(3.0\\times10^{-6})}{(0.30)^2}=0.60\\,\\mathrm{N}$, and opposite signs mean attraction.",
+      "hint": "Convert microcoulombs to coulombs first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r9jl98",
+      "kind": "example",
+      "front": "Charges of $+4.0\\,\\mu\\mathrm{C}$ and $+1.0\\,\\mu\\mathrm{C}$ are 0.20 m apart. What is the magnitude of the electric force?",
+      "back": "**0.90 N**. Substituting gives $|\\vec F_E|=(9.0\\times10^{9})\\frac{(4.0\\times10^{-6})(1.0\\times10^{-6})}{(0.20)^2}=0.90\\,\\mathrm{N}$, and both charges are positive so the force repels.",
+      "hint": "Use absolute values and square the distance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gb7h2r",
+      "kind": "concept",
+      "front": "How do you find the net electric force when several charges act on one charge?",
+      "back": "Find each pair force with Coulomb's law, then **add them as vectors**. On a straight line, treat right as positive and left as negative, then add the signed values.",
+      "hint": "Each pair obeys Coulomb's law on its own.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18u91i4",
+      "kind": "mistake",
+      "front": "A student says a bigger charge pushes harder on a smaller charge than the smaller charge pushes back. Is this right?",
+      "back": "No. The two forces in a pair are **equal in size** and opposite in direction, since $|q_1q_2|$ is the same whichever charge is considered first.",
+      "hint": "Newton's third law applies to electric forces too.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0he96r6",
+      "kind": "concept",
+      "front": "How does the electric force between a proton and an electron compare with gravity between them?",
+      "back": "The **electric force** is vastly larger than gravity. Gravity only attracts, while electric force can attract or repel, which is why gravity is ignored when describing atoms.",
+      "hint": "Both forces fall off with distance squared.",
+      "sectionId": "s5"
+    }
+  ]
+}

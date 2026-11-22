@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-4-2",
+  "topicCode": "4.4.2",
+  "topicName": "Respiration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:43.165Z",
+  "cards": [
+    {
+      "id": "13uuoy5",
+      "kind": "concept",
+      "front": "Why do every living cell need respiration?",
+      "back": "Respiration releases **energy** from glucose, and cells use that energy for their activities, such as building larger molecules and moving substances against a concentration gradient.",
+      "hint": "Think about what cells use energy for.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14khk1x",
+      "kind": "formula",
+      "front": "What is the word equation for aerobic respiration?",
+      "back": "$\\text{glucose}+\\text{oxygen}\\rightarrow\\text{carbon dioxide}+\\text{water}$. The **oxygen** is used up, and carbon dioxide and water are made.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1j1wgmi",
+      "kind": "concept",
+      "front": "Why do muscle cells respire anaerobically during vigorous exercise?",
+      "back": "Oxygen delivery cannot keep up with the muscles' energy demand, so **anaerobic respiration** releases energy without oxygen to meet the shortfall.",
+      "hint": "Compare how fast oxygen arrives with how fast muscles need energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u96nbn",
+      "kind": "mistake",
+      "front": "Why is it wrong to say respiration creates energy?",
+      "back": "Respiration does not create energy. It **transfers** energy that is stored in glucose so cells can use it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01ir52b",
+      "kind": "formula",
+      "front": "What is the word equation for anaerobic respiration in muscle cells?",
+      "back": "$\\text{glucose}\\rightarrow\\text{lactic acid}$. No oxygen is used, and the **lactic acid** is the product.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xqps7h",
+      "kind": "formula",
+      "front": "What is the word equation for fermentation in yeast?",
+      "back": "$\\text{glucose}\\rightarrow\\text{ethanol}+\\text{carbon dioxide}$. This is **anaerobic respiration** in yeast and releases less energy per glucose.",
+      "hint": "Yeast is a useful example to compare with muscles.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "170kivd",
+      "kind": "term",
+      "front": "What is oxygen debt?",
+      "back": "**Oxygen debt** is the extra oxygen the body needs after exercise to deal with the lactic acid produced in muscles.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "054zwtd",
+      "kind": "term",
+      "front": "What is lactic acid, and where is it made?",
+      "back": "**Lactic acid** is the product of anaerobic respiration in muscle cells. It builds up and is linked with muscle fatigue.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1835uam",
+      "kind": "mistake",
+      "front": "Why is it wrong to say muscle cells make ethanol during anaerobic respiration?",
+      "back": "Ethanol is the product of **fermentation** in yeast. Muscle cells make lactic acid instead.",
+      "hint": "Think about which organism produces ethanol.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fdp373",
+      "kind": "concept",
+      "front": "How does the energy released per glucose molecule compare between aerobic and anaerobic respiration?",
+      "back": "**Aerobic respiration** releases more energy per glucose molecule than anaerobic respiration, whether in muscles or yeast.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j52ups",
+      "kind": "term",
+      "front": "What is a cell's energy demand?",
+      "back": "**Energy demand** is the amount of energy a cell needs for its activities. Working muscle cells have a higher energy demand than resting muscle cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12b66nv",
+      "kind": "concept",
+      "front": "How is respiration different from breathing?",
+      "back": "**Breathing** moves air into and out of the lungs, while **respiration** takes place inside cells and releases energy from glucose.",
+      "hint": "Think about where each process happens.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0oo7ldv",
+      "kind": "concept",
+      "front": "Why is carbon dioxide from aerobic respiration breathed out?",
+      "back": "Carbon dioxide is a **waste product** carried away from cells in the blood, and it leaves the body when you breathe out.",
+      "sectionId": "s2"
+    }
+  ]
+}

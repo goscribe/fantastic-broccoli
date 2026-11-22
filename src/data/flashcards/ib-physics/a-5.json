@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "a-5",
+  "topicCode": "A.5",
+  "topicName": "Galilean and special relativity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:29:58.306Z",
+  "cards": [
+    {
+      "id": "137716x",
+      "kind": "concept",
+      "front": "Why can't Galilean velocity addition hold for light?",
+      "back": "Light in a vacuum has speed **c** for every inertial observer, whatever their motion. Galilean addition would give different light speeds in frames moving relative to each other, so it fails at high speeds.",
+      "hint": "Think about what every inertial observer measures for light.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0incns8",
+      "kind": "concept",
+      "front": "Why do observers in relative motion disagree about whether two separated events are simultaneous?",
+      "back": "Each frame assigns its own time coordinates, and light speed is **c** in both frames. Events at different positions can therefore be simultaneous in one frame but not in another.",
+      "hint": "Consider two flashes at opposite ends of a moving train.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ex4ou4",
+      "kind": "formula",
+      "front": "What is the Lorentz factor, and what do its symbols mean?",
+      "back": "$\\gamma=\\frac{1}{\\sqrt{1-v^2/c^2}}$, where **v** is the relative speed of the frames and **c** is the speed of light. It is dimensionless, at least 1, and grows as v approaches c.",
+      "hint": "It is dimensionless, so check the units of v/c.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15atlga",
+      "kind": "formula",
+      "front": "How are proper time and the time measured in another inertial frame related?",
+      "back": "$\\Delta t=\\gamma\\Delta\\tau$, where $\\Delta\\tau$ is the **proper time** measured by a clock present at both events. The other frame measures the longer interval $\\Delta t$. This is time dilation.",
+      "hint": "Which clock is at rest with respect to the events?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oknadi",
+      "kind": "formula",
+      "front": "How is the length of an object measured in a frame where it moves along its length?",
+      "back": "$L=L_0/\\gamma$, where $L_0$ is the **proper length** in the object's rest frame. Only the dimension parallel to the motion contracts.",
+      "hint": "Which frame is the object at rest in?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0klwovx",
+      "kind": "formula",
+      "front": "What are the Lorentz transformations for position and time between frames S and S'?",
+      "back": "$x'=\\gamma(x-vt)$ and $t'=\\gamma\\left(t-\\frac{vx}{c^2}\\right)$, with S' moving at speed **v** in the positive x-direction and both origins together at t=t'=0. The transformed time depends on position.",
+      "hint": "Compare the time transformation with the Galilean one.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xm0aam",
+      "kind": "process",
+      "front": "How do you transform an event's coordinates from frame S to frame S'?",
+      "back": "1) State which frame moves in the positive direction. 2) Calculate $\\gamma$. 3) Find $x'=\\gamma(x-vt)$. 4) Find $t'=\\gamma(t-vx/c^2)$. The signs depend on the direction of motion.",
+      "hint": "Start by fixing the direction of motion.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nkmf2e",
+      "kind": "mistake",
+      "front": "A student says a moving observer measures vacuum light travelling at c minus v. What is wrong?",
+      "back": "The moving observer also measures light speed as **c**. Subtracting v is the Galilean rule, which special relativity replaces for light.",
+      "hint": "Apply the speed of light principle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "008tiht",
+      "kind": "mistake",
+      "front": "A student uses the proper length as the length measured by a moving observer. What is the error?",
+      "back": "The **proper length** is measured in the object's rest frame. A moving observer measures a shorter length $L=L_0/\\gamma$ along the direction of motion.",
+      "hint": "Which frame is the object at rest in?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14ieqs9",
+      "kind": "example",
+      "front": "A clock moves at 0.60c. Its proper interval is 4.0 microseconds. What interval is measured in the other frame?",
+      "back": "**5.0 microseconds**. With $\\gamma=1.25$, $\\Delta t=\\gamma\\Delta\\tau=1.25\\times4.0=5.0\\,\\mu s$.",
+      "hint": "Find gamma first for v = 0.60c.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17zt2s5",
+      "kind": "example",
+      "front": "S' moves at 0.60c in the positive x-direction. An event is at x = 0 and t = 2.00 microseconds in S. Find x' and t' in S'.",
+      "back": "$x'=-450\\,\\mathrm{m}$ and $t'=2.50\\,\\mu s$. With $\\gamma=1.25$ and $vt=360\\,\\mathrm{m}$, $x'=1.25(0-360)=-450\\,\\mathrm{m}$, and $t'=1.25(2.00)=2.50\\,\\mu s$.",
+      "hint": "At x = 0 the vx/c² term vanishes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1w624ns",
+      "kind": "term",
+      "front": "What is an inertial frame?",
+      "back": "A **reference frame** moving at constant velocity, in which an object with no resultant force has constant velocity.",
+      "hint": "Think about constant velocity, not acceleration.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "196zvfe",
+      "kind": "term",
+      "front": "What is the principle of Galilean relativity?",
+      "back": "The **laws of mechanics** have the same form in every inertial frame, so no mechanical experiment inside a smoothly moving vehicle reveals its constant velocity.",
+      "hint": "What stays the same between inertial frames?",
+      "sectionId": "s1"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-18",
+  "topicCode": "4.18",
+  "topicName": "Hypothesis testing",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:15.846Z",
+  "cards": [
+    {
+      "id": "0akj3wu",
+      "kind": "concept",
+      "front": "What does the null hypothesis $H_0$ claim, and what must it always contain?",
+      "back": "**Null hypothesis** $H_0$ is the default claim that nothing unusual is happening, assumed true unless the sample gives strong evidence against it. It always contains an equals sign, such as $H_0: p=0.3$.",
+      "hint": "Think of it as the claim being tested.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ne4wmd",
+      "kind": "concept",
+      "front": "How do you decide whether to reject $H_0$ using the p-value?",
+      "back": "Compare the **p-value** with the significance level $\\alpha$. If the p-value is smaller than $\\alpha$, reject $H_0$; otherwise do not reject $H_0$. The p-value is the probability of a result at least as extreme as yours, assuming $H_0$ is true.",
+      "hint": "Smaller p-value means more surprising result.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cuvz2p",
+      "kind": "process",
+      "front": "What are the five steps of a hypothesis test, in order?",
+      "back": "State $H_0$ and $H_1$; choose the significance level $\\alpha$; calculate the p-value from the sample using technology; compare the p-value with $\\alpha$; conclude in the context of the question.",
+      "hint": "Start with the hypotheses and finish with the context.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tbqrj3",
+      "kind": "formula",
+      "front": "In the cereal test, what is the distribution of $X$ under $H_0$, and what p-value expression is used?",
+      "back": "$X\\sim\\mathrm{B}(20,0.3)$, where $X$ is the number of prizes. For the upper one-tailed test with 10 prizes, the p-value is $P(X\\ge10)=1-P(X\\le9)$.",
+      "hint": "Use the value of $p$ from $H_0$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0x3pqcy",
+      "kind": "example",
+      "front": "Cereal test: 10 prizes in 20 boxes, testing $H_1: p>0.3$ at the 5% level. What is the p-value and the decision?",
+      "back": "The p-value is about $0.0480$. Since $0.0480<0.05$, reject $H_0$: there is sufficient evidence at the 5% level that more than 30% of boxes contain a prize.",
+      "hint": "Calculate $1-P(X\\le9)$ with technology.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ptu6qk",
+      "kind": "term",
+      "front": "What is the significance level $\\alpha$, and when must it be chosen?",
+      "back": "The **significance level** $\\alpha$ is the threshold probability, usually 5% or 1%, set before collecting data. Choosing it after seeing the data would let you bend the result.",
+      "hint": "It is set before sampling.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yhswdh",
+      "kind": "term",
+      "front": "When is a test one-tailed and when is it two-tailed?",
+      "back": "A test is **one-tailed** if $H_1$ uses $>$ or $<$, looking for an increase or decrease. It is **two-tailed** if $H_1$ uses $\\neq$, looking for a change in either direction.",
+      "hint": "Look at the sign in $H_1$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qbva6w",
+      "kind": "mistake",
+      "front": "A student rejects $H_0$ and writes 'the claim is proved'. What is wrong?",
+      "back": "Rejecting $H_0$ only means the sample gives evidence for $H_1$; it does not prove $H_1$. Write 'reject $H_0$' and then state the conclusion in context.",
+      "hint": "Think about what a rejection actually establishes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0acfflp",
+      "kind": "mistake",
+      "front": "Why must you never write 'accept $H_0$' after a test?",
+      "back": "Not rejecting $H_0$ only means the evidence is insufficient; it does not prove $H_0$ true, because the sample may simply be too small. Write 'do not reject $H_0$' with context.",
+      "hint": "Think about what a small sample can show.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "119n3hk",
+      "kind": "mistake",
+      "front": "In a two-tailed test with a symmetric distribution, how do you find the p-value?",
+      "back": "**Double** the probability in the tail you calculated, because the p-value counts both tails.",
+      "hint": "Both tails count.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kdtj1o",
+      "kind": "term",
+      "front": "What is a Type I error?",
+      "back": "A **Type I error** is rejecting $H_0$ when $H_0$ is true. Its probability equals the significance level $\\alpha$.",
+      "hint": "The error of rejecting a true claim.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "114xrab",
+      "kind": "term",
+      "front": "What is a Type II error?",
+      "back": "A **Type II error** is failing to reject $H_0$ when $H_0$ is false.",
+      "hint": "The error of missing a false claim.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0wnuzc4",
+      "kind": "concept",
+      "front": "What happens to the chances of each error if you lower $\\alpha$, and how can you reduce Type II errors?",
+      "back": "Lowering $\\alpha$ makes a Type I error less likely but a Type II error more likely. A **larger sample** reduces the chance of a Type II error without changing $\\alpha$.",
+      "hint": "Rejecting $H_0$ becomes harder.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cpc21d",
+      "kind": "example",
+      "front": "Renewal test: $H_0: p=0.4$ against $H_1: p<0.4$, 6 renewals from 25 customers, 5% level. What is the decision?",
+      "back": "The p-value is $P(X\\le6)=0.0736$. Since $0.0736>0.05$, do not reject $H_0$: there is insufficient evidence at the 5% level that fewer than 40% of customers renew.",
+      "hint": "Compare the p-value with 0.05."
+    }
+  ]
+}

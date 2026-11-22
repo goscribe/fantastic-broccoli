@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-7-1",
+  "topicCode": "4.7.1",
+  "topicName": "Adaptations, interdependence and competition",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:54.119Z",
+  "cards": [
+    {
+      "id": "1rz7upm",
+      "kind": "term",
+      "front": "What is an adaptation?",
+      "back": "An **adaptation** is a feature that helps an organism survive and reproduce in its environment. It may be a body structure, a behaviour or an internal process.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uorya6",
+      "kind": "concept",
+      "front": "Why do organisms compete with each other?",
+      "back": "Organisms **compete** when they need the same limited resource and there is not enough for all of them. Those that get less may grow less, reproduce less or fail to survive.",
+      "hint": "Think about what happens when a shared supply runs short.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nhl7is",
+      "kind": "concept",
+      "front": "How can one species affect another species it relies on?",
+      "back": "Through **interdependence**: organisms rely on each other for resources or survival. If one species becomes scarce, others that depend on it may be affected too.",
+      "hint": "Consider a flowering plant and the insects that visit it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pyfmhe",
+      "kind": "term",
+      "front": "What is a habitat?",
+      "back": "A **habitat** is the place where an organism lives. Different habitats present different challenges, so adaptations suit particular conditions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wwr3xu",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an individual develops an adaptation because it needs one?",
+      "back": "Adaptations are **inherited** features that become common over generations. An individual cannot grow a new feature just because it needs one.",
+      "hint": "Think about how features are passed from parents to offspring.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1heryp7",
+      "kind": "term",
+      "front": "What is a structural adaptation?",
+      "back": "A **structural adaptation** is a physical feature that helps an organism survive, such as thick fur or a waxy leaf surface.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "169n6x2",
+      "kind": "term",
+      "front": "What is a behavioural adaptation?",
+      "back": "A **behavioural adaptation** is a way an organism acts that helps it survive, such as a desert animal being active at night to avoid daytime heat.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mufzfl",
+      "kind": "term",
+      "front": "What is a functional adaptation?",
+      "back": "A **functional adaptation** is an internal process that helps an organism survive, such as some desert animals producing very concentrated urine to reduce water loss.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fkoqcd",
+      "kind": "concept",
+      "front": "Why can one organism have structural, behavioural and functional adaptations at once?",
+      "back": "The three categories describe different kinds of feature, not different levels of usefulness. A thick coat, sheltering from wind and internal temperature control can all help one animal survive cold conditions.",
+      "hint": "Consider whether the categories rank features or just classify them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ka5y8y",
+      "kind": "mistake",
+      "front": "What is a common mistake about the outcome of competition?",
+      "back": "Competition does **not** mean both organisms die. Its effects depend on how much of the resource is available and each organism's ability to obtain it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wkmser",
+      "kind": "example",
+      "front": "Two groups each start with 40 seedlings. 32 survive with ample space. What is their survival rate?",
+      "back": "**80%**, from $\\frac{32}{40}\\times100=80\\%$.",
+      "hint": "Divide the survivors by the starting number, then multiply by 100.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "055l15m",
+      "kind": "example",
+      "front": "Survival is 20 of 40 seedlings when crowded, versus 32 of 40 with ample space. How many percentage points lower is the crowded survival?",
+      "back": "**30 percentage points**, from $80\\% - 50\\% = 30$, where the crowded rate is $\\frac{20}{40}\\times100=50\\%$.",
+      "hint": "Work out each survival rate first, then find the gap between them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0blpocd",
+      "kind": "concept",
+      "front": "Why compare survival rates rather than the number of survivors?",
+      "back": "Groups may start at different sizes, so a **survival rate** (the percentage of the starting group still alive) allows a fair comparison.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "024uhld",
+      "kind": "concept",
+      "front": "Why does a difference in survival not prove that competition caused it?",
+      "back": "The groups may also differ in water, light or other conditions. You must check whether these differences could explain the result.",
+      "hint": "Think about what else might have been different between the two groups.",
+      "sectionId": "s5"
+    }
+  ]
+}

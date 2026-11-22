@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-1-1",
+  "topicCode": "3.1.1",
+  "topicName": "SI units and prefixes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:49.776Z",
+  "cards": [
+    {
+      "id": "15xaesn",
+      "kind": "concept",
+      "front": "Why must every measurement be written with a unit as well as a number?",
+      "back": "A number alone is incomplete, because the **unit** says what is being measured and how big it is. Using SI units means results can be shared and compared.",
+      "hint": "Think about the recipe that says add 200.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1z04k8h",
+      "kind": "concept",
+      "front": "How is a derived unit made from base units?",
+      "back": "By **multiplying or dividing** base units. Speed is length divided by time, so its unit is $\\mathrm{m\\,s^{-1}}$.",
+      "hint": "Speed is not a base quantity, so what two base quantities make it?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ccubdt",
+      "kind": "process",
+      "front": "What is the first step when a prefixed value such as 35 cm is used in a calculation?",
+      "back": "**Replace the prefix with its power of ten** to get base units: $35\\,\\mathrm{cm}=35\\times10^{-2}\\,\\mathrm{m}=0.35\\,\\mathrm{m}$.",
+      "hint": "Look at the multiplier table to see what the prefix stands for.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1q9rk22",
+      "kind": "term",
+      "front": "What is the SI base unit for temperature, and what is its symbol?",
+      "back": "The **kelvin**, symbol K, is the SI base unit for temperature.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a4zz53",
+      "kind": "mistake",
+      "front": "Why should grams not be used as the base unit of mass in SI equations?",
+      "back": "The **kilogram**, kg, is the base unit, so convert grams to kilograms before using any SI equation. The gram is not the base unit.",
+      "hint": "Check which mass unit the table of base units lists.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oruttp",
+      "kind": "formula",
+      "front": "What unit does the newton have in base units, from $F=ma$?",
+      "back": "$\\mathrm{N}=\\mathrm{kg\\,m\\,s^{-2}}$, since force $F$ is mass $m$ in $\\mathrm{kg}$ multiplied by acceleration $a$ in $\\mathrm{m\\,s^{-2}}$.",
+      "hint": "Find the unit of acceleration first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p08cnr",
+      "kind": "concept",
+      "front": "How can comparing units show that an equation is wrong, and what can it not detect?",
+      "back": "**Both sides must have the same base units**; a mismatch always shows a mistake. Matching units do not prove an equation is right, since a missing factor such as 2 is not detected.",
+      "hint": "Compare the units on each side of $v=u+at$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0872ead",
+      "kind": "term",
+      "front": "What is a prefix in SI units?",
+      "back": "A **prefix** is a letter placed before a unit symbol that multiplies the unit by a fixed power of ten, for example k means $10^{3}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08ehgjw",
+      "kind": "concept",
+      "front": "By what factor does the multiplier change with each step along the prefix ladder?",
+      "back": "It changes by a factor of **1000**, so 1 Mm is 1000 km. The unprefixed unit counts as one step.",
+      "hint": "Count the unprefixed unit as a step on the ladder.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ce1d6z",
+      "kind": "mistake",
+      "front": "What is the common error when converting an area from cm² to m²?",
+      "back": "Squaring only the number. The prefix must be squared too, so $1\\,\\mathrm{cm^{2}}=10^{-4}\\,\\mathrm{m^{2}}$, not $10^{-2}\\,\\mathrm{m^{2}}$.",
+      "hint": "Think about what $1\\,\\mathrm{cm}\\times1\\,\\mathrm{cm}$ equals in metres.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "082kck7",
+      "kind": "example",
+      "front": "A trolley travels 35 cm in 250 ms. What is its average speed in $\\mathrm{m\\,s^{-1}}$?",
+      "back": "**1.4 m s^-1**, from $0.35\\,\\mathrm{m}\\div0.250\\,\\mathrm{s}$ after converting both quantities to base units.",
+      "hint": "Convert both the distance and the time before dividing.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1kctszp",
+      "kind": "mistake",
+      "front": "How should the mass written as 5 Kgs be corrected?",
+      "back": "Write **5 kg**: the symbol is lower case and unit symbols never take a plural s.",
+      "hint": "Check the rules on case and plurals for unit symbols.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1ig4csl",
+      "kind": "mistake",
+      "front": "How do capital M and lower-case m differ when used as prefixes?",
+      "back": "A capital **M** means mega ($10^{6}$) and a lower-case **m** means milli ($10^{-3}$), so 5 Ms is five million seconds, not five milliseconds.",
+      "hint": "Compare the symbols in the prefix table.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "12022m8",
+      "kind": "process",
+      "front": "How should a speed unit be written correctly, using negative indices and spacing?",
+      "back": "Write $\\mathrm{m\\,s^{-1}}$ with a space between unit symbols, using negative indices rather than m/s.",
+      "hint": "Compare this with the note's rules on unit symbols.",
+      "sectionId": "s6"
+    }
+  ]
+}

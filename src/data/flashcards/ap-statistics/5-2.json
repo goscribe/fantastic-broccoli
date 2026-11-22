@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "5-2",
+  "topicCode": "5.2",
+  "topicName": "Correlation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:06.661Z",
+  "cards": [
+    {
+      "id": "0pmu2yp",
+      "kind": "concept",
+      "front": "What does the correlation coefficient $r$ measure?",
+      "back": "The **direction and strength** of a linear association between two quantitative variables measured on the same individuals. Its value is always between $-1$ and $1$.",
+      "hint": "Think about what a scatterplot pattern looks like when points line up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wab4mb",
+      "kind": "process",
+      "front": "What are the two steps for reading a value of $r$, in order?",
+      "back": "First check the **sign** to get the direction, then check the **distance from 0** to judge the strength.",
+      "hint": "Start with the part that tells you whether $y$ rises or falls.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zfc4rq",
+      "kind": "concept",
+      "front": "What kind of study can support a cause-and-effect conclusion?",
+      "back": "Only a well-designed **experiment with random assignment**. Data from an observational study show association, not causation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "118zqw9",
+      "kind": "formula",
+      "front": "How is $r$ built from standardized values?",
+      "back": "$r=\\frac{1}{n-1}\\sum\\left(\\frac{x_i-\\bar{x}}{s_x}\\right)\\left(\\frac{y_i-\\bar{y}}{s_y}\\right)$, where $s_x$ and $s_y$ are sample standard deviations and $n$ is the number of pairs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zx85rp",
+      "kind": "example",
+      "front": "Interpret $r=-0.82$ between daily high temperature and gas used for heating.",
+      "back": "There is a **strong, negative, linear** association: gas use tends to decrease as the daily high temperature increases.",
+      "hint": "Work through sign, then size, then form.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ief6y7",
+      "kind": "term",
+      "front": "What is a lurking variable?",
+      "back": "A **lurking variable** is a variable not studied that is related to both variables and can make them appear linked.",
+      "hint": "Think about a hidden third factor.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0unchd0",
+      "kind": "example",
+      "front": "In the ice cream and sunburn example, what lurking variable explains the link?",
+      "back": "**Hot, sunny weather** increases both ice cream sales and sunburn cases, so neither one causes the other.",
+      "hint": "Think about what happens on the same days.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gzclh5",
+      "kind": "concept",
+      "front": "Which changes leave the value of $r$ unchanged?",
+      "back": "Switching $x$ and $y$, or adding a constant or multiplying either variable by a positive constant.",
+      "hint": "Think about what standardizing does to each variable.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16g7qou",
+      "kind": "mistake",
+      "front": "A student says multiplying one variable by a negative constant changes the size of $r$. Why is this wrong?",
+      "back": "Multiplying by a negative constant flips the **sign** of $r$, but its size stays the same.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d9nui8",
+      "kind": "term",
+      "front": "What is a resistant statistic?",
+      "back": "A **resistant statistic** changes little when extreme values appear. $r$ is not resistant, so one outlier can shift it a lot.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ljlw52",
+      "kind": "example",
+      "front": "If $r=0.80$ and every height is converted from inches to centimeters, what is the new value of $r$?",
+      "back": "$r$ stays **0.80**, because multiplying by a positive constant does not change $r$.",
+      "hint": "Think about whether the standardized values change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "017ieyn",
+      "kind": "mistake",
+      "front": "A student sees $r=0$ and says there is no association. What is wrong?",
+      "back": "$r$ measures only **linear** association. A strong curved pattern, like a U shape, can still give $r=0$.",
+      "hint": "Think about what kind of pattern $r$ is built to detect.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fpu7bq",
+      "kind": "concept",
+      "front": "Why must you look at the scatterplot even when you already know $r$?",
+      "back": "Two plots can share the same $r$ but look very different, so the value of $r$ cannot reveal the form of the pattern.",
+      "sectionId": "s2"
+    }
+  ]
+}

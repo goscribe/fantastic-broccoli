@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-1",
+  "topicCode": "6.1",
+  "topicName": "Estimating time of death",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:23.224Z",
+  "cards": [
+    {
+      "id": "1we00kk",
+      "kind": "concept",
+      "front": "Why does a dead body's core temperature fall after death?",
+      "back": "Heat production from **respiration** stops, but heat is still lost to the surroundings, so the body cools until it matches the **ambient temperature**.",
+      "hint": "Think about where a living body's heat comes from and what happens when that supply stops.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kc2cbg",
+      "kind": "concept",
+      "front": "Why do muscles stiffen after death?",
+      "back": "Respiration stops, so no new **ATP** is made. Without ATP, myosin heads cannot detach from actin, so the muscles stay locked and stiff.",
+      "hint": "Think about what happens to the energy supply once respiration stops.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fa16kt",
+      "kind": "concept",
+      "front": "Why is combining several methods more reliable than using just one to estimate time of death?",
+      "back": "No single method is precise. Where estimates from temperature, rigor mortis, decomposition and insects overlap, confidence in the time of death is higher.",
+      "hint": "Consider which method is most useful at different times after death.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sv8dcm",
+      "kind": "term",
+      "front": "What is forensic entomology?",
+      "back": "The study of **insects** and their life cycles to provide evidence in legal investigations, such as estimating time of death.",
+      "hint": "Think about what decaying bodies attract.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hj1hb2",
+      "kind": "formula",
+      "front": "Which equation gives the average rate of fall in body temperature?",
+      "back": "$\\text{rate} = \\frac{\\text{fall in temperature}}{\\text{time}}$, giving $^{\\circ}\\mathrm{C\\,h^{-1}}$ when time is in hours.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "163kq94",
+      "kind": "example",
+      "front": "A body cools from 37.0 °C to 31.0 °C in 5.0 hours. What is its average rate of fall?",
+      "back": "$1.2\\,^{\\circ}\\mathrm{C\\,h^{-1}}$, since the fall is $6.0\\,^{\\circ}\\mathrm{C}$ and $\\frac{6.0}{5.0}=1.2$.",
+      "hint": "Work out the fall in temperature first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xd8dzl",
+      "kind": "mistake",
+      "front": "A student says rigor mortis happens because the muscles dry out. Why is this wrong?",
+      "back": "Rigor mortis is caused by the loss of ATP supply, which stops myosin heads detaching from actin. Drying out is not the explanation and earns no marks.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16m7n1t",
+      "kind": "process",
+      "front": "How does rigor mortis change over time after death?",
+      "back": "Stiffening starts within a few hours, often in the face and jaw, spreads, and is generally complete after about half a day. Later the muscle proteins break down and the body becomes flexible again.",
+      "hint": "Think about the order of events and how temperature affects the speed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iqq90j",
+      "kind": "term",
+      "front": "What is decomposition?",
+      "back": "The breakdown of dead tissue by **saprobionts** and enzymes.",
+      "hint": "Consider which organisms feed on dead material.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0payb0c",
+      "kind": "concept",
+      "front": "Name three factors that change how fast a body decomposes.",
+      "back": "Temperature, oxygen and moisture. Access by insects and the body itself, such as its size, clothing and open wounds, also matter.",
+      "hint": "Think about both the environment and the body.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qm4lum",
+      "kind": "mistake",
+      "front": "Why can decay alone not give an exact time since death?",
+      "back": "Decomposition does not follow a fixed timetable. The same body decays at very different rates in warm and cold settings, so it gives only a rough estimate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0drp5pe",
+      "kind": "concept",
+      "front": "Why can blowfly life cycles be used to estimate time since death?",
+      "back": "Each stage lasts a known time, longer in cool conditions and shorter in warm ones, so the stages present on a body act as a clock.",
+      "hint": "Think about how the length of each stage changes with temperature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bfwd2g",
+      "kind": "example",
+      "front": "Eggs take 1 day, larvae 6 days, and the oldest pupae have been pupating 2 days. How long ago were the eggs laid?",
+      "back": "About $9$ days, because $1+6+2=9$, so death happened at least 9 days ago.",
+      "hint": "Add the time spent in each stage.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fbapu3",
+      "kind": "mistake",
+      "front": "Why does insect evidence give only a minimum time since death?",
+      "back": "Flies may reach the body some time after death, so the insects only show how long the eggs have been there. Death was at least that long ago.",
+      "hint": "Think about when the first flies could reach the body.",
+      "sectionId": "s5"
+    }
+  ]
+}

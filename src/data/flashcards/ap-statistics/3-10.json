@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-10",
+  "topicCode": "3.10",
+  "topicName": "Interval for a difference of proportions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:18.050Z",
+  "cards": [
+    {
+      "id": "0ox55ps",
+      "kind": "formula",
+      "front": "Which formula gives the two-proportion z-interval for $p_1-p_2$?",
+      "back": "The interval is $(\\hat{p}_1-\\hat{p}_2)\\pm z^*\\sqrt{\\frac{\\hat{p}_1(1-\\hat{p}_1)}{n_1}+\\frac{\\hat{p}_2(1-\\hat{p}_2)}{n_2}}$, where $z^*$ is the **critical value** and the square root term is the **standard error**.",
+      "hint": "It follows the pattern statistic plus or minus margin of error.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "197dx1w",
+      "kind": "concept",
+      "front": "Why must the conditions be checked before computing a two-proportion interval?",
+      "back": "A formula returns a number even when the model does not fit, so the **random**, **independent**, and **large counts** conditions must hold first.",
+      "hint": "Think about what the formula does with data that do not fit the model.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bn80ja",
+      "kind": "concept",
+      "front": "Why is a confidence interval more useful than a single sample difference?",
+      "back": "An **interval** shows both the estimate and its uncertainty, since another pair of samples would give a different difference. One number cannot show that.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14lirdg",
+      "kind": "term",
+      "front": "What is a two-proportion z-interval?",
+      "back": "A **two-proportion z-interval** is a confidence interval for $p_1-p_2$ built from two independent samples and a critical value from the standard normal distribution.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ba8cnu",
+      "kind": "term",
+      "front": "What is a standard error?",
+      "back": "The **standard error** is an estimate of a statistic's standard deviation, made by replacing the unknown population proportions with sample proportions.",
+      "hint": "Compare it with the standard deviation formula, which needs $p_1$ and $p_2$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o70txt",
+      "kind": "term",
+      "front": "What is the critical value $z^*$?",
+      "back": "The **critical value** $z^*$ is the standard normal value that captures the middle $C$% of the distribution for a $C$% confidence level.",
+      "hint": "Picture the standard normal curve and the region it keeps.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bdxult",
+      "kind": "formula",
+      "front": "Which critical value $z^*$ is used for a 95% two-proportion interval?",
+      "back": "$z^*=1.96$. A higher confidence level needs a larger $z^*$, so 99% uses $2.576$ instead.",
+      "hint": "Think about the middle 95% of the standard normal distribution.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1djwoxz",
+      "kind": "mistake",
+      "front": "Which counts must be checked for the large counts condition, and with which proportions?",
+      "back": "Check $n_1\\hat{p}_1$, $n_1(1-\\hat{p}_1)$, $n_2\\hat{p}_2$, and $n_2(1-\\hat{p}_2)$, each at least 10, using the observed sample data.",
+      "hint": "The true proportions are unknown, so use what you observed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01tfbni",
+      "kind": "process",
+      "front": "What are the four steps to build a two-proportion interval from counts?",
+      "back": "**Check** the conditions, find the statistic $\\hat{p}_1-\\hat{p}_2$, find the standard error, then find the margin of error and form statistic plus or minus margin.",
+      "hint": "Start before any arithmetic.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bi9kp4",
+      "kind": "example",
+      "front": "For 120 clicks out of 200 on design A and 90 out of 200 on design B, what is the 95% interval for $p_1-p_2$?",
+      "back": "About $(0.053,\\,0.247)$. The statistic is $0.15$, the standard error is about $0.0494$, and the margin of error is about $0.0968$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "057p5qn",
+      "kind": "mistake",
+      "front": "What goes wrong if the two groups are subtracted in the opposite order?",
+      "back": "The signs flip, giving $(-0.247,\\,-0.053)$ for design B minus design A. The order sets the signs, so you must name the order of subtraction.",
+      "hint": "Think about what the minus sign in $p_1-p_2$ tells you.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kurf3s",
+      "kind": "concept",
+      "front": "What must a good interpretation of a two-proportion interval name?",
+      "back": "The **confidence level**, the endpoints, the two populations, and the **order of subtraction**, such as design A minus design B.",
+      "hint": "Think about what a reader needs to understand the gap.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00lfp5x",
+      "kind": "mistake",
+      "front": "What does the 95% in a 95% confidence interval actually describe?",
+      "back": "The **method**, not this one interval. About 95% of intervals built this way capture the true difference, so you cannot say this interval has a 95% chance of capturing it.",
+      "hint": "Think about repeating the sampling many times.",
+      "sectionId": "s5"
+    }
+  ]
+}

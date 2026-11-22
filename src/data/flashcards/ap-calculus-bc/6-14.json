@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-14",
+  "topicCode": "6.14",
+  "topicName": "Choosing an antidifferentiation technique",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:38.487Z",
+  "cards": [
+    {
+      "id": "0mf8eqb",
+      "kind": "process",
+      "front": "What should you check first before changing an integrand?",
+      "back": "Look for a **standard antiderivative** from a familiar derivative rule. Carry constants outside and split sums when each term is straightforward.",
+      "hint": "Think about familiar derivatives.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10i02v6",
+      "kind": "concept",
+      "front": "When does substitution fit an integral?",
+      "back": "When an **inner derivative** appears as a factor, such as $\\int 2x\\cos(x^2)\\,dx$ with $u=x^2$. The reverse chain rule explains why this works.",
+      "hint": "Name the inner expression.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qdb7tv",
+      "kind": "concept",
+      "front": "Why compare methods before you commit to one?",
+      "back": "More than one method can work. Choose the one that gives a **familiar form** in the fewest steps.",
+      "hint": "Ask what the integrand turns into.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1feieqt",
+      "kind": "term",
+      "front": "What is a standard antiderivative?",
+      "back": "An antiderivative that follows directly from a **familiar derivative rule**, such as powers, exponentials, basic trigonometric functions, and $1/x$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ygveo6",
+      "kind": "term",
+      "front": "What is the reverse chain rule?",
+      "back": "It recognizes an integrand as a **composite function** multiplied by its inner derivative, which explains why substitution works.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lc3c9s",
+      "kind": "mistake",
+      "front": "What is the common error with $\\int \\frac{1}{x}\\,dx$?",
+      "back": "Applying the power rule to $1/x$ is wrong. The correct antiderivative is **$\\ln|x|+C$**.",
+      "hint": "Is $1/x$ a power of $x$ you can raise?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1x016h8",
+      "kind": "example",
+      "front": "In $\\int 2x\\cos(x^2)\\,dx$, what substitution works and what is the result?",
+      "back": "Let **$u=x^2$**, so $du=2x\\,dx$. The result is $\\sin(x^2)+C$.",
+      "hint": "Find the inner expression and its derivative.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k7ecup",
+      "kind": "mistake",
+      "front": "Why is $\\int \\cos(x^2)\\,dx$ not solved by substitution?",
+      "back": "The needed factor of $x$ is absent. Parentheses alone do not justify substitution, and this integrand has **no elementary antiderivative**.",
+      "hint": "Check for the missing derivative factor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1flu6sn",
+      "kind": "process",
+      "front": "How do you start a rational integrand?",
+      "back": "Compare the numerator's degree with the denominator's. If the numerator's degree is at least as large, use **polynomial division** first, then check for direct integration or substitution.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rkf1ib",
+      "kind": "term",
+      "front": "What does polynomial division do to an improper rational expression?",
+      "back": "It rewrites it as a **polynomial plus a proper rational expression**.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bu3cex",
+      "kind": "concept",
+      "front": "Why complete the square in a quadratic denominator?",
+      "back": "It turns $x^2+4x+5$ into $(x+2)^2+1$, a **recognizable form** that suggests an arctangent antiderivative.",
+      "hint": "Shift the variable.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hwpnrs",
+      "kind": "example",
+      "front": "Find $\\int \\frac{2x}{x^2+1}\\,dx$ and justify the method.",
+      "back": "$\\ln(x^2+1)+C$. The numerator matches the derivative of $x^2+1$, so let $u=x^2+1$; $\\int \\frac{1}{u}\\,du=\\ln|u|+C$.",
+      "hint": "Match the numerator to a derivative.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tmomxd",
+      "kind": "example",
+      "front": "Find $\\int \\frac{x^2+1}{x}\\,dx$ using the shortest route.",
+      "back": "$\\frac{x^2}{2}+\\ln|x|+C$. Divide each term by $x$ to get $x+1/x$, then integrate directly.",
+      "hint": "Try simplifying before substituting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qc1pk8",
+      "kind": "mistake",
+      "front": "Why is canceling a factor in a rational integrand risky?",
+      "back": "Canceling can hide an **excluded value**, so keep the original integrand's domain in mind.",
+      "sectionId": "s3"
+    }
+  ]
+}

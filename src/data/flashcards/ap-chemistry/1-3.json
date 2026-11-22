@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "1-3",
+  "topicCode": "1.3",
+  "topicName": "Elemental composition of pure substances",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:58.990Z",
+  "cards": [
+    {
+      "id": "0kdhz97",
+      "kind": "concept",
+      "front": "Why can percent composition alone not give a compound's exact formula?",
+      "back": "Percent composition gives only the **ratio** of atoms, so multiples of the same ratio share identical percentages. Molar mass is needed to find the actual molecule.",
+      "hint": "Think about CH2O and C6H12O6.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1g86kp1",
+      "kind": "process",
+      "front": "What are the steps to find an empirical formula from elemental mass percentages?",
+      "back": "Assume a **100 g** sample, convert each element's mass to moles, divide all mole amounts by the smallest, then multiply by a small integer if the results are not whole numbers.",
+      "hint": "Start by assuming 100 g of sample.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xg2qcj",
+      "kind": "term",
+      "front": "What is percent composition?",
+      "back": "**Percent composition** is each element's mass as a percentage of a compound's total mass: divide the element's mass by the molar mass, then multiply by 100.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0u4klth",
+      "kind": "mistake",
+      "front": "Why is it wrong to use mass percentages directly as subscripts in a formula?",
+      "back": "Formulas give **atom ratios**, not mass ratios. Convert each mass to moles first, then compare the mole amounts.",
+      "hint": "Atoms and grams are different units.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fbddkp",
+      "kind": "formula",
+      "front": "How is the molecular formula multiplier calculated from molar masses?",
+      "back": "Multiplier $= \\frac{\\text{molecular molar mass}}{\\text{empirical formula mass}}$. Multiply every subscript in the empirical formula by this **whole number**.",
+      "hint": "The result should be close to a whole number.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ntnh4p",
+      "kind": "example",
+      "front": "Find the percent by mass of carbon in CO2, using atomic masses 12.01 (C) and 16.00 (O).",
+      "back": "**27.29%**. The molar mass is 44.01 g/mol, and carbon contributes 12.01 g/mol, so $\\frac{12.01}{44.01}\\times100=27.29\\%$.",
+      "hint": "Find the molar mass first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15d5z5z",
+      "kind": "example",
+      "front": "A compound has 40.0% C, 6.7% H, and 53.3% O by mass. What is its empirical formula?",
+      "back": "**CH2O**. Moles are about 3.33 C, 6.65 H, and 3.33 O; dividing by 3.33 gives a 1:2:1 ratio.",
+      "hint": "Assume a 100 g sample.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bl99j0",
+      "kind": "example",
+      "front": "A compound has empirical formula CH2O and a molecular molar mass of about 180 g/mol. What is its molecular formula?",
+      "back": "**C6H12O6**. The empirical formula mass is 30.026 g/mol, so the multiplier is about 180/30.026 = 6.",
+      "hint": "Divide the molar masses first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nek7sp",
+      "kind": "concept",
+      "front": "What does consistent elemental composition across separate portions show about a sample?",
+      "back": "It **supports** purity, because a pure compound has the same mass ratio of elements throughout. It does not prove purity on its own.",
+      "hint": "Consider what a mixture could also show.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xpmrro",
+      "kind": "mistake",
+      "front": "Can matching percent composition prove that a sample is a single pure compound?",
+      "back": "No. A **mixture** can have the same overall percentages as a compound, and different compounds can share a formula. Other measurements are needed to confirm identity.",
+      "hint": "Think about what the data can and cannot rule out.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w67ldj",
+      "kind": "term",
+      "front": "What is an empirical formula?",
+      "back": "An **empirical formula** gives the simplest whole-number ratio of atoms of each element in a compound.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04d7z43",
+      "kind": "term",
+      "front": "What is a pure substance?",
+      "back": "A **pure substance** is one chemical substance with a consistent composition throughout a sample.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0o7oe4f",
+      "kind": "process",
+      "front": "How do you judge purity from data from separate portions of a sample?",
+      "back": "Compare the **elemental percentages** from each portion and state whether differences fall within measurement uncertainty.",
+      "hint": "Look for agreement, not exact matches.",
+      "sectionId": "s4"
+    }
+  ]
+}

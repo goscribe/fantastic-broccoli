@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-1-1",
+  "topicCode": "4.1.1",
+  "topicName": "Cell structure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:31.045Z",
+  "cards": [
+    {
+      "id": "0np8uy7",
+      "kind": "term",
+      "front": "What is a eukaryotic cell?",
+      "back": "A cell whose genetic material is enclosed in a **nucleus**. Animal and plant cells are eukaryotic.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0y20n99",
+      "kind": "concept",
+      "front": "Which structures do plant cells have that animal cells lack?",
+      "back": "A **cellulose cell wall**, **chloroplasts** and a large permanent **vacuole**. Plant and animal cells both have a nucleus, cytoplasm, cell membrane, mitochondria and ribosomes.",
+      "hint": "Compare the two cell types with a list of shared structures in mind.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1afc6d1",
+      "kind": "term",
+      "front": "What is a specialised cell?",
+      "back": "A cell with **features that help it carry out a particular job**, such as a sperm cell's tail or a nerve cell's long extension.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0i5fogc",
+      "kind": "concept",
+      "front": "Why might a cell contain many mitochondria?",
+      "back": "**Mitochondria** are the site of aerobic respiration, which releases energy, so cells doing lots of work contain more of them.",
+      "hint": "Think about what mitochondria do for the cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kg0kmc",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a plant cell wall replaces the cell membrane?",
+      "back": "Plant cells have **both**. The cell wall supports the cell, while the cell membrane controls what enters and leaves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "151p71x",
+      "kind": "term",
+      "front": "What are plasmids?",
+      "back": "**Plasmids** are small rings of DNA found in some bacterial cells.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mesf4b",
+      "kind": "process",
+      "front": "What are the steps for preparing and focusing a specimen on a light microscope?",
+      "back": "1 Place a thin specimen on a slide. 2 Add a drop of water or stain. 3 Lower a coverslip carefully. 4 Start on the lowest-power objective. 5 Use coarse focus, then fine focus. 6 Increase magnification if needed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09us4f4",
+      "kind": "formula",
+      "front": "What equation links magnification, image size and actual size?",
+      "back": "$\\text{magnification} = \\frac{\\text{image size}}{\\text{actual size}}$. Magnification has no unit, and both sizes must be in the same unit.",
+      "hint": "Think about which measurement goes on top and what happens to the units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "038vkd7",
+      "kind": "example",
+      "front": "A cell is 0.3 mm long and its drawing is 60 mm long. What is the magnification?",
+      "back": "$\\times 200$ (no unit). Working: $\\frac{60\\,\\mathrm{mm}}{0.3\\,\\mathrm{mm}} = 200$.",
+      "hint": "Divide image size by actual size, after checking both are in the same unit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wdqphn",
+      "kind": "mistake",
+      "front": "Why must both measurements be in the same unit before calculating magnification?",
+      "back": "Otherwise the division gives a wrong answer. Convert both to the same unit first, then divide.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1capven",
+      "kind": "concept",
+      "front": "How should a biological drawing of a cell be made?",
+      "back": "Use **single, unbroken lines**, draw only what you can see, and **label** the visible structures. Write the magnification beside it without a unit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1km3hcp",
+      "kind": "concept",
+      "front": "How is a root hair cell's shape suited to absorbing water and mineral ions?",
+      "back": "Its **long projection increases surface area**, so it can absorb more water and mineral ions from the soil.",
+      "hint": "Think about what a larger surface does for absorption.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14q05wl",
+      "kind": "concept",
+      "front": "How is a nerve cell's structure suited to its job of carrying signals?",
+      "back": "A **long extension** carries electrical impulses over distances, and **branched ends** connect with other cells.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07y341y",
+      "kind": "term",
+      "front": "What is the function of the cell membrane?",
+      "back": "The **cell membrane** surrounds the cytoplasm and controls what enters and leaves the cell.",
+      "sectionId": "s1"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-2-3",
+  "topicCode": "4.2.3",
+  "topicName": "Plant tissues, organs and systems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:21.867Z",
+  "cards": [
+    {
+      "id": "0r3qi0d",
+      "kind": "concept",
+      "front": "Which leaf tissue packs in many chloroplasts to absorb light for photosynthesis?",
+      "back": "**Palisade mesophyll** cells lie beneath the upper epidermis. Their many chloroplasts absorb light for photosynthesis.",
+      "hint": "Think about the layer nearest the light.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a25v73",
+      "kind": "process",
+      "front": "What route does water take from the soil to the air through a plant?",
+      "back": "Water enters root hair cells by **osmosis**, moves up the xylem, evaporates from leaf cells, then diffuses out through open stomata.",
+      "hint": "Start at the root hair cells and follow the water upwards.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0astt6s",
+      "kind": "concept",
+      "front": "Which tissue carries water and dissolved mineral ions from the roots up to the leaves?",
+      "back": "**Xylem** carries water and dissolved mineral ions upwards from roots. Its hollow tubes are strengthened with lignin.",
+      "hint": "Compare with the other transport tissue, which carries sugars.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fwzr2x",
+      "kind": "term",
+      "front": "What is translocation?",
+      "back": "**Translocation** is the movement of dissolved sugars through phloem, from leaves to growing tissues or storage organs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "057hyug",
+      "kind": "concept",
+      "front": "Why is phloem described as living tissue?",
+      "back": "Phloem contains **living cells**, unlike the cells forming xylem vessels.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1a8k36h",
+      "kind": "term",
+      "front": "What are stomata?",
+      "back": "**Stomata** are small openings in the leaf surface that let carbon dioxide in and let oxygen and water vapour out.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hx3yph",
+      "kind": "term",
+      "front": "What pair of cells controls the width of each stoma?",
+      "back": "**Guard cells** control the width of each stoma.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19x3wt2",
+      "kind": "mistake",
+      "front": "Why is the idea that stomata absorb light a mistake?",
+      "back": "Stomata do not absorb light. They allow **gases** to move between the leaf and the air.",
+      "hint": "Think about what stomata are for.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bwrfyq",
+      "kind": "concept",
+      "front": "How does higher humidity affect the rate of transpiration?",
+      "back": "Higher humidity **slows** transpiration, because the air already holds more water vapour, so diffusion out of the leaf is slower.",
+      "hint": "Consider the difference in water vapour between the leaf and the air.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1guv2xo",
+      "kind": "concept",
+      "front": "Why does higher temperature increase transpiration?",
+      "back": "Higher temperature raises the rate of **evaporation** and diffusion from the leaf, so water is lost faster.",
+      "hint": "Think about what heat does to water molecules.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l98vc0",
+      "kind": "concept",
+      "front": "What is the cost of closing stomata to reduce water loss?",
+      "back": "Closing stomata **reduces** water loss, but it limits the carbon dioxide entering the leaf, so photosynthesis slows.",
+      "hint": "Think about what stomata let into the leaf.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0irkm68",
+      "kind": "term",
+      "front": "What is transpiration?",
+      "back": "**Transpiration** is the loss of water vapour from plant leaves, mainly through open stomata.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dktbq7",
+      "kind": "term",
+      "front": "What is osmosis?",
+      "back": "**Osmosis** is the diffusion of water from a dilute solution to a more concentrated solution through a partially permeable membrane.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "111vfkr",
+      "kind": "concept",
+      "front": "What job do the air spaces in spongy mesophyll do?",
+      "back": "They let **carbon dioxide** spread through the leaf so it can reach the photosynthesising cells.",
+      "hint": "Think about how gases travel inside the leaf.",
+      "sectionId": "s1"
+    }
+  ]
+}

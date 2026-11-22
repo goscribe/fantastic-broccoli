@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "15-6",
+  "topicCode": "15.6",
+  "topicName": "Compton scattering",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:47.418Z",
+  "cards": [
+    {
+      "id": "05945he",
+      "kind": "term",
+      "front": "What is Compton scattering?",
+      "back": "The **collision** of one photon with one nearly free electron. The photon leaves in a new direction with less energy, and the electron recoils.",
+      "hint": "Think about what the photon gives away in the collision.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cbckjt",
+      "kind": "concept",
+      "front": "Why does the scattered photon have a longer wavelength than the original?",
+      "back": "The photon gives some energy to the electron, so its energy falls. Since $E=\\frac{hc}{\\lambda}$, lower energy means lower frequency and a **longer** wavelength.",
+      "hint": "Start from the photon energy formula and see what a lower energy does.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1585ste",
+      "kind": "concept",
+      "front": "Which two conservation laws decide the outcome of a Compton collision?",
+      "back": "**Energy** and **momentum** conservation, with the photon and electron treated as one isolated system. Energy gives the scattered wavelength; momentum, checked in each direction, gives the recoil direction.",
+      "hint": "Think about what stays constant when no external forces act.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cmg6ij",
+      "kind": "formula",
+      "front": "What is the momentum of a photon, and what do its symbols mean?",
+      "back": "$p=\\frac{h}{\\lambda}$, where $h$ is Planck's constant in J s and $\\lambda$ is the wavelength in m. Momentum is in kg m/s, and a shorter wavelength gives more momentum.",
+      "hint": "Photons have no mass, but they still carry this quantity.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "093jhur",
+      "kind": "formula",
+      "front": "What is the energy of a photon in terms of its wavelength?",
+      "back": "$E=\\frac{hc}{\\lambda}$, where $c$ is the speed of light and $\\lambda$ is the wavelength. With $hc=1240$ eV nm, energy comes out in eV when $\\lambda$ is in nm.",
+      "hint": "Energy is also written as $hf$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xtn0ed",
+      "kind": "formula",
+      "front": "What is the formula for the Compton wavelength shift, and what does each part mean?",
+      "back": "$\\Delta\\lambda=\\frac{h}{m_\\mathrm{e}c}(1-\\cos\\theta)$, where $\\theta$ is the scattering angle and $m_\\mathrm{e}$ is the electron mass. The factor $\\frac{h}{m_\\mathrm{e}c}$ is about $2.43\\times10^{-12}$ m.",
+      "hint": "The angle is measured from the original direction of travel.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0r8f60s",
+      "kind": "process",
+      "front": "What steps find the scattered wavelength in a Compton problem?",
+      "back": "1) Find the initial photon energy $\\frac{hc}{\\lambda}$. 2) Subtract the electron's recoil kinetic energy. 3) Convert the remaining energy to eV. 4) Use $\\lambda'=\\frac{1240\\text{ eV nm}}{E'}$.",
+      "hint": "Energy conservation is the first step.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bz9lq5",
+      "kind": "example",
+      "front": "An X-ray photon of wavelength 0.100 nm scatters from an electron at rest, which recoils with 0.50 keV. What is the scattered wavelength?",
+      "back": "About **0.104 nm**. The initial photon energy is 12.4 keV; subtracting 0.50 keV leaves 11.9 keV, so $\\lambda'=\\frac{1240}{11\\,900}$ nm, about 0.104 nm.",
+      "hint": "Work in keV first, then convert to eV for the final division.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12o42i6",
+      "kind": "example",
+      "front": "What is the momentum of a photon with wavelength 0.100 nm?",
+      "back": "About $6.63\\times10^{-24}$ kg m/s, from $p=\\frac{h}{\\lambda}$ with $\\lambda=1.00\\times10^{-10}$ m and $h=6.63\\times10^{-34}$ J s.",
+      "hint": "Convert the wavelength to metres before dividing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k2asdo",
+      "kind": "mistake",
+      "front": "Does the scattered photon slow down after Compton scattering?",
+      "back": "No. A photon always travels at **c**. Only its frequency falls and its wavelength grows.",
+      "hint": "Compare speed with frequency and wavelength.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0umqha9",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a photon carries no momentum because it has no mass?",
+      "back": "Photons have no mass but still carry momentum $p=\\frac{h}{\\lambda}$. Momentum is a **vector**, so its direction matters as well as its size.",
+      "hint": "Mass times velocity is only one way to get momentum.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nt366o",
+      "kind": "concept",
+      "front": "How does the wavelength shift depend on the scattering angle?",
+      "back": "The shift grows as the angle grows. It is zero for no deflection and largest for **backscattering** at 180°, where it is about twice $\\frac{h}{m_\\mathrm{e}c}$.",
+      "hint": "Think about how much energy the photon loses at each angle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1tnqoby",
+      "kind": "concept",
+      "front": "Why is the Compton shift hard to see with visible light?",
+      "back": "The shift is only a few thousandths of a nanometre, which is tiny next to visible wavelengths of hundreds of nanometres. For X-rays the change is measurable.",
+      "hint": "Compare the shift with the size of the wavelength itself.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09xuk0c",
+      "kind": "example",
+      "front": "A photon moving along +x scatters upward. Which way must the electron recoil, and why?",
+      "back": "**Downward**. The photon starts with no vertical momentum, so the electron's downward component must cancel the photon's upward component.",
+      "hint": "Momentum is conserved in each direction separately.",
+      "sectionId": "s4"
+    }
+  ]
+}

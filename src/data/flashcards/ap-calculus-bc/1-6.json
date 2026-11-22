@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "1-6",
+  "topicCode": "1.6",
+  "topicName": "Limits by algebraic manipulation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:55.491Z",
+  "cards": [
+    {
+      "id": "1l8cigo",
+      "kind": "concept",
+      "front": "What does getting $\\frac{0}{0}$ when you substitute the target value tell you about the limit?",
+      "back": "**Nothing definite.** It is an indeterminate form, so the expression must be rewritten before the limit can be read off.",
+      "hint": "Substitution alone is not enough in this case.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01cmgk2",
+      "kind": "process",
+      "front": "What are the steps to evaluate a polynomial fraction that gives $\\frac{0}{0}$?",
+      "back": "1) **Factor** the numerator and denominator. 2) **Cancel** the common factor, valid for inputs not equal to the target. 3) Substitute into the simplified expression.",
+      "hint": "Three steps, in this order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m04eym",
+      "kind": "formula",
+      "front": "What is the conjugate of $\\sqrt{x+4}-2$?",
+      "back": "**$\\sqrt{x+4}+2$**: keep the same two terms and flip the sign between them. Multiplying a conjugate pair gives a difference of squares.",
+      "hint": "Only the sign between the two terms changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rlto55",
+      "kind": "mistake",
+      "front": "Can you cancel the $x$ in $\\frac{x+3}{x}$?",
+      "back": "**No.** Only a common factor that multiplies the entire numerator and entire denominator can be canceled. Here $x$ is a term in the numerator, not a factor of it.",
+      "hint": "Ask what the x is actually part of.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06q6zp1",
+      "kind": "example",
+      "front": "Find $\\lim_{x\\to3}\\frac{x^2-9}{x-3}$.",
+      "back": "**6**. Factor to $\\frac{(x-3)(x+3)}{x-3}$, cancel $x-3$ for $x\\ne3$ to get $x+3$, then substitute: $3+3=6$.",
+      "hint": "Factor the numerator as a difference of squares.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o5mc2f",
+      "kind": "formula",
+      "front": "What is the difference of squares identity, and what does each symbol stand for?",
+      "back": "$(a-b)(a+b)=a^2-b^2$, where $a$ and $b$ are any expressions. This is why multiplying by a conjugate removes the radical.",
+      "hint": "Check it by expanding the left side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hdywg8",
+      "kind": "process",
+      "front": "What are the steps to evaluate a limit involving a square root difference that gives $\\frac{0}{0}$?",
+      "back": "1) **Multiply** the numerator and denominator by the conjugate. 2) Simplify the numerator using the difference of squares. 3) Cancel the common factor, then substitute.",
+      "hint": "The same idea as factoring, but with a radical.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01rr0sm",
+      "kind": "example",
+      "front": "Find $\\lim_{x\\to0}\\frac{\\sqrt{x+4}-2}{x}$.",
+      "back": "**$\\frac{1}{4}$**. Multiplying by the conjugate gives $\\frac{x}{x(\\sqrt{x+4}+2)}$, cancel $x$ for $x\\ne0$, then $\\frac{1}{\\sqrt{4}+2}=\\frac{1}{4}$.",
+      "hint": "Multiply by the conjugate of the numerator first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ubmcm4",
+      "kind": "example",
+      "front": "Find $\\lim_{x\\to0}\\frac{\\sqrt{x+9}-3}{x}$.",
+      "back": "**$\\frac{1}{6}$**. The numerator becomes $(x+9)-9=x$ after multiplying by $\\sqrt{x+9}+3$. Cancel $x$ for $x\\ne0$, then $\\frac{1}{\\sqrt{9}+3}=\\frac{1}{6}$.",
+      "hint": "Use the same conjugate method as the worked example.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qpb080",
+      "kind": "term",
+      "front": "What is an indeterminate form?",
+      "back": "A result such as $\\frac{0}{0}$ that **does not determine** a limit without further work.",
+      "hint": "Think about what a substitution result can and cannot tell you.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ml52pf",
+      "kind": "concept",
+      "front": "Why can a limit exist at a point where the expression is undefined?",
+      "back": "A limit depends on values **near** the target, not on the value at the target. A removable gap there does not change the limit.",
+      "hint": "Focus on inputs close to the target.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xt8d4w",
+      "kind": "concept",
+      "front": "Why does canceling a factor that is zero at the target still give the correct limit?",
+      "back": "The canceled factor is **nonzero for nearby inputs**, so the simplified expression matches the original at all nearby values.",
+      "hint": "Focus on inputs near the target, not the target itself.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0u2v85d",
+      "kind": "term",
+      "front": "What is a limit value?",
+      "back": "The **number approached** by an expression's outputs as its input approaches a specified number. It need not be an output of the original expression.",
+      "hint": "Nearby outputs matter, not the output at the target.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0yzejig",
+      "kind": "term",
+      "front": "What is a removable gap?",
+      "back": "A missing point at the target where nearby values approach a finite limit. It **does not change** that limit.",
+      "hint": "Picture a single hole in a graph.",
+      "sectionId": "s2"
+    }
+  ]
+}

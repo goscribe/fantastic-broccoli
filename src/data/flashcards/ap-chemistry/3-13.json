@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "3-13",
+  "topicCode": "3.13",
+  "topicName": "Beer-Lambert law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:29.034Z",
+  "cards": [
+    {
+      "id": "1gpxttb",
+      "kind": "formula",
+      "front": "What equation links absorbance to concentration, and what does each symbol mean?",
+      "back": "$A=\\varepsilon bc$, the **Beer-Lambert law**. $A$ is absorbance, $\\varepsilon$ is molar absorptivity, $b$ is path length, and $c$ is concentration. Absorbance is directly proportional to concentration when $\\varepsilon$ and $b$ stay constant.",
+      "hint": "Think of three factors multiplied together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "025kfjm",
+      "kind": "term",
+      "front": "What is **absorbance**?",
+      "back": "A measure of how much light a sample **absorbs**, defined as $A=\\log_{10}(I_0/I)$. It has no units. A darker, more concentrated sample absorbs more light and has higher absorbance.",
+      "hint": "It is about light absorbed, not light passing through.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0euhpck",
+      "kind": "concept",
+      "front": "If you triple the concentration at fixed path length and wavelength, what happens to absorbance?",
+      "back": "Absorbance **triples**. Absorbance is directly proportional to concentration when path length and molar absorptivity stay constant.",
+      "hint": "Check the direct proportion in the law.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ogq1jg",
+      "kind": "term",
+      "front": "What is **molar absorptivity**, $\\varepsilon$?",
+      "back": "The proportionality constant for a substance at a specified wavelength, showing how strongly it absorbs light. It is commonly given in $\\mathrm{L\\,mol^{-1}\\,cm^{-1}}$ and depends on the substance and wavelength.",
+      "hint": "It depends on the substance and the wavelength chosen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "005357k",
+      "kind": "concept",
+      "front": "Why does a wider container give a higher absorbance for the same solution?",
+      "back": "Light passes through more solution, so there is a longer **path length** $b$ for absorption. At fixed concentration and wavelength, doubling path length doubles absorbance.",
+      "hint": "Think about how far the light travels.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "123i18g",
+      "kind": "term",
+      "front": "What is the **path length**, $b$?",
+      "back": "The distance light travels through the sample, commonly measured in centimeters.",
+      "hint": "It is the width of the container the light crosses.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12644lh",
+      "kind": "concept",
+      "front": "What does an absorbance-versus-concentration graph look like, and what is its slope?",
+      "back": "A **straight line** through the origin when path length stays fixed. Its slope is $\\varepsilon b$.",
+      "hint": "Compare the law to the equation of a straight line.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ueaec4",
+      "kind": "formula",
+      "front": "How do you rearrange Beer-Lambert law to find an unknown concentration, and what units result?",
+      "back": "$c=\\frac{A}{\\varepsilon b}$. With $\\varepsilon$ in $\\mathrm{L\\,mol^{-1}\\,cm^{-1}}$ and $b$ in cm, the centimeter units cancel and $c$ comes out in $\\mathrm{mol\\,L^{-1}}$.",
+      "hint": "Divide both sides by $\\varepsilon b$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p6jw4d",
+      "kind": "example",
+      "front": "A sample has $A=0.600$, $\\varepsilon=150\\ \\mathrm{L\\,mol^{-1}\\,cm^{-1}}$, and $b=2.00$ cm. What is its concentration?",
+      "back": "$c=\\frac{0.600}{(150)(2.00)}=2.00\\times10^{-3}\\ \\mathrm{mol\\,L^{-1}}$. The centimeter units cancel, leaving moles per liter.",
+      "hint": "Calculate the product $\\varepsilon b$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07y82fk",
+      "kind": "example",
+      "front": "A sample has $A=0.450$, $\\varepsilon=150\\ \\mathrm{L\\,mol^{-1}\\,cm^{-1}}$, and $b=1.50$ cm. What is its concentration?",
+      "back": "$c=\\frac{0.450}{(150)(1.50)}=2.00\\times10^{-3}\\ \\mathrm{mol\\,L^{-1}}$.",
+      "hint": "Use $c=A/(\\varepsilon b)$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ncsuhj",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a darker solution transmits more light?",
+      "back": "A darker solution generally transmits **less** light and has higher absorbance, because more light is absorbed. Darkness reflects absorption, not transmission.",
+      "hint": "Ask how much light reaches the detector.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0na8b0x",
+      "kind": "mistake",
+      "front": "Why can comparing absorbances be misleading?",
+      "back": "If the wavelength, molar absorptivity, or path length differ, a change in absorbance may not reflect a change in concentration. Keep the same wavelength and path length when comparing.",
+      "hint": "Which conditions must stay matched?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0buwxx0",
+      "kind": "process",
+      "front": "What are the steps for finding an unknown concentration with a calibration curve?",
+      "back": "1) Measure known-concentration solutions at the same wavelength and path length. 2) Plot absorbance against concentration. 3) Read the unknown's concentration from the line using its absorbance.",
+      "hint": "Start with standards of known concentration.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0o3zc5a",
+      "kind": "term",
+      "front": "What is a **calibration curve**?",
+      "back": "A plot of measured responses, such as absorbance, against known concentrations. It is used to find an unknown concentration under matching conditions.",
+      "hint": "It uses standards of known concentration.",
+      "sectionId": "s5"
+    }
+  ]
+}

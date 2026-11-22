@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "a-4",
+  "topicCode": "A.4",
+  "topicName": "Rigid body mechanics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:29:58.254Z",
+  "cards": [
+    {
+      "id": "17hlikx",
+      "kind": "concept",
+      "front": "Why does a rigid body's weight act as if it were applied at one point, and where is that point?",
+      "back": "**Centre of mass**: the mass-weighted average position of the body's parts. In uniform gravity, the weight acts as if applied there.",
+      "hint": "Think about an average of where the mass sits.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ltaiyq",
+      "kind": "concept",
+      "front": "What makes a body rotate faster or slower, and what is the role of torque?",
+      "back": "**Net torque** causes angular acceleration about a fixed axis. Zero net torque means the angular velocity does not change.",
+      "hint": "Torque changes rotation, not rotation itself.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mir60u",
+      "kind": "formula",
+      "front": "What is the equation for torque, and what does each symbol mean?",
+      "back": "$\\tau=rF\\sin\\theta=Fd_{\\perp}$, where $r$ runs from the axis to the point of application, $\\theta$ is the angle between $\\mathbf r$ and $\\mathbf F$, and $d_{\\perp}$ is the **perpendicular distance** to the line of action. Unit: N m.",
+      "hint": "Which distance must be perpendicular to the force?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q93ye3",
+      "kind": "mistake",
+      "front": "A student uses the full distance from the axis to a force in the torque equation. Why is this wrong?",
+      "back": "Only the **perpendicular distance** counts. Use the full distance $r$ only when the force is perpendicular to it; otherwise use $d_{\\perp}$ or include $\\sin\\theta$.",
+      "hint": "Check the angle between the lever arm and the force.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1491tci",
+      "kind": "concept",
+      "front": "What two conditions must hold for a rigid body to be in equilibrium?",
+      "back": "**Equilibrium**: both $\\sum\\mathbf F=0$ and $\\sum\\tau=0$ about any axis. A body may still move at constant velocity or rotate at constant angular velocity.",
+      "hint": "Linear and angular accelerations are both zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07qfbcx",
+      "kind": "process",
+      "front": "What steps should you follow to solve a stationary beam equilibrium problem?",
+      "back": "Draw every force, including weight at the centre of mass. Choose a **pivot** that removes an unknown force from the torque equation. Balance clockwise and anticlockwise torques. Then use force balance to find any remaining unknown.",
+      "hint": "Start with a free-body diagram.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kah214",
+      "kind": "example",
+      "front": "A light horizontal beam pivots. A 12 N downward force acts 0.30 m left of the pivot. What downward force 0.20 m right of the pivot balances it?",
+      "back": "**18 N**. Taking torques about the pivot, $(12\\,\\mathrm{N})(0.30\\,\\mathrm{m})=F(0.20\\,\\mathrm{m})$, so $F=18\\,\\mathrm{N}$.",
+      "hint": "The support force at the pivot has zero torque.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13xjufq",
+      "kind": "formula",
+      "front": "How is moment of inertia defined for point masses, and what is its unit?",
+      "back": "$I=\\sum m_i r_i^2$, where each $r_i$ is perpendicular to the axis. Unit: kg m$^2$. Moving the same mass farther from the axis increases $I$.",
+      "hint": "Distance enters squared.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00gca63",
+      "kind": "formula",
+      "front": "What relation links net torque, moment of inertia and angular acceleration for a fixed axis?",
+      "back": "$\\sum\\tau=I\\alpha$. A larger $I$ gives a smaller $\\alpha$ for the same net torque, and both must refer to the same axis.",
+      "hint": "Compare with Newton's second law for linear motion.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wxn0gq",
+      "kind": "mistake",
+      "front": "A student says a rotating body has a larger angular acceleration because it already spins fast. What is wrong?",
+      "back": "Torque determines the change in angular velocity, namely the angular acceleration, not the angular velocity itself. Angular acceleration depends on net torque and $I$.",
+      "hint": "Separate speed from rate of change of speed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0l53ojt",
+      "kind": "formula",
+      "front": "What is the total kinetic energy of a rigid body that both translates and rotates?",
+      "back": "$E_{\\mathrm{k}}=\\tfrac12 Mv_{\\mathrm{cm}}^2+\\tfrac12 I_{\\mathrm{cm}}\\omega^2$. The rotational term uses $I_{\\mathrm{cm}}$, the moment of inertia about an axis through the centre of mass. Units: joules.",
+      "hint": "Add translational and rotational contributions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vczbvw",
+      "kind": "concept",
+      "front": "How does a body rotating about a fixed axis have kinetic energy even when its centre of mass is stationary?",
+      "back": "**Rotational kinetic energy** $\\tfrac12 I_{\\mathrm{cm}}\\omega^2$ depends on angular speed and mass distribution, so it exists even if $v_{\\mathrm{cm}}=0$.",
+      "hint": "Rotation and translation are separate contributions.",
+      "sectionId": "s5"
+    }
+  ]
+}

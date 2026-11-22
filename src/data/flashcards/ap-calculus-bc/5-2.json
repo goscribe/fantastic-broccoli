@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "5-2",
+  "topicCode": "5.2",
+  "topicName": "Extreme value theorem and critical points",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:16.718Z",
+  "cards": [
+    {
+      "id": "0rv3zr8",
+      "kind": "concept",
+      "front": "What does the Extreme Value Theorem guarantee about a function on an interval?",
+      "back": "A **continuous** function on a closed interval attains both an absolute maximum and an absolute minimum there. It guarantees they exist, but it does not say where they are.",
+      "hint": "Think about the two conditions the theorem needs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xu15dn",
+      "kind": "process",
+      "front": "How do you find the absolute extrema of a continuous function on a closed interval?",
+      "back": "Evaluate the function at both **endpoints** and at every interior critical point, then compare those values. The greatest is the absolute maximum and the least is the absolute minimum.",
+      "hint": "Which numbers are candidates for the extreme values?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dv0k71",
+      "kind": "term",
+      "front": "What is a critical point of a function on an interval?",
+      "back": "An **interior** number c in the domain where $f'(c)=0$ or $f'(c)$ does not exist. A corner can be critical even though its derivative is undefined there.",
+      "hint": "Endpoints are handled separately.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sbj2q4",
+      "kind": "formula",
+      "front": "Which condition on $f'$ marks c as a critical point of f?",
+      "back": "**$f'(c)=0$** or $f'(c)$ does not exist, with c inside the interval and $f(c)$ defined.",
+      "hint": "There are two possible conditions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bfs6ow",
+      "kind": "term",
+      "front": "What is a local maximum?",
+      "back": "A **local maximum** is a point whose function value is at least as great as all sufficiently nearby function values. It need not be the greatest value on the whole interval.",
+      "hint": "Compare only nearby values.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hlopux",
+      "kind": "mistake",
+      "front": "Is every critical point a local extremum?",
+      "back": "No. **Not every** critical point is a local extremum. For $f(x)=x^3$, $f'(0)=0$, but values keep rising through $x=0$, so it is neither a maximum nor a minimum.",
+      "hint": "Check the values on both sides of the point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hobmjb",
+      "kind": "mistake",
+      "front": "Why does the Extreme Value Theorem not guarantee a maximum for $f(x)=x$ on $(0,1)$?",
+      "back": "The interval is **open**, and the theorem needs a closed interval. The values approach $1$ but never reach it on $(0,1)$.",
+      "hint": "Check which endpoints are included.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ug0gzw",
+      "kind": "mistake",
+      "front": "Does a derivative that fails to exist always produce a critical point?",
+      "back": "No. It produces one only if the function is **defined** at that number. For $f(x)=|x|$, $x=0$ is critical, but a derivative that fails where f is undefined does not count.",
+      "hint": "Ask whether f itself has a value there.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bcz7f9",
+      "kind": "concept",
+      "front": "If f has a local extremum at an interior point where it is defined, what must be true there?",
+      "back": "That point is **critical**, meaning $f'$ is zero or does not exist there. Otherwise the point would not be a local extremum.",
+      "hint": "Relate local extrema to critical points.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jdwnmk",
+      "kind": "example",
+      "front": "Find the absolute extrema of $f(x)=x^2-2x$ on $[0,3]$.",
+      "back": "Absolute minimum $-1$ at $x=1$; absolute maximum $3$ at $x=3$. Here $f'(x)=2x-2$ gives $x=1$, and $f(0)=0$, $f(1)=-1$, $f(3)=3$ are compared.",
+      "hint": "Find f' first, then check endpoints too.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nru72q",
+      "kind": "example",
+      "front": "Find the critical points of $f(x)=|x-2|$ on $[0,4]$.",
+      "back": "The only critical point is $x=2$, because $f(2)$ exists but $f'(2)$ does not.",
+      "hint": "Look for where the graph has a corner.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sv833o",
+      "kind": "example",
+      "front": "Determine the absolute extrema of $f(x)=x^2-4x$ on $[0,5]$.",
+      "back": "Absolute minimum $-4$ at $x=2$; absolute maximum $5$ at $x=5$. Since $f'(x)=2x-4$, the critical point is $x=2$, with $f(0)=0$ and $f(5)=5$ also compared.",
+      "hint": "Solve f' equal to zero for the interior point.",
+      "sectionId": "s4"
+    }
+  ]
+}

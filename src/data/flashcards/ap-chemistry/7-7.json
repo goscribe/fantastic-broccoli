@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "7-7",
+  "topicCode": "7.7",
+  "topicName": "Calculating equilibrium concentrations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:58.370Z",
+  "cards": [
+    {
+      "id": "0ggm1r3",
+      "kind": "concept",
+      "front": "Why does one variable x describe every concentration change in an ICE table?",
+      "back": "Because the **stoichiometric coefficients** link all changes: each species changes by its coefficient times x. Reactants fall by x-multiples and products rise by their multiples, so one unknown is enough.",
+      "hint": "Think about what the balanced equation ties together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1axayt9",
+      "kind": "formula",
+      "front": "For H2(g) + I2(g) ⇌ 2HI(g), what is the equilibrium expression Kc and what does each symbol mean?",
+      "back": "$K_c=\\frac{[\\mathrm{HI}]^2}{[\\mathrm{H_2}][\\mathrm{I_2}]}$, where square brackets are **equilibrium concentrations** in mol L$^{-1}$ and the exponents come from the balanced equation. Kc is unitless in this case.",
+      "hint": "Exponents come from the coefficients, not the measured values.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mw47tr",
+      "kind": "process",
+      "front": "What are the steps to find unknown equilibrium concentrations from Kc and initial concentrations?",
+      "back": "1) Write the balanced equation. 2) Build the ICE table with changes in one variable x. 3) Write the equilibrium row. 4) Substitute the equilibrium row into the **equilibrium expression** and solve for x. 5) Find each equilibrium concentration and check none is negative.",
+      "hint": "Start with the balanced equation and finish with a sign check.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11hy7zo",
+      "kind": "term",
+      "front": "What is an ICE table?",
+      "back": "An **ICE table** organizes each species' initial concentration, change in concentration, and equilibrium concentration. Each species gets its own column, following the equation's order.",
+      "hint": "ICE stands for three rows.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0anlxmx",
+      "kind": "example",
+      "front": "For H2 + I2 ⇌ 2HI with Kc = 4.00, starting with [H2] = [I2] = 1.00 M and no HI, what is [HI] at equilibrium?",
+      "back": "[HI] = **1.00 M**. Solving $4.00=\\frac{(2x)^2}{(1.00-x)^2}$ gives $x=0.500$ M, so $[\\mathrm{HI}]=2x=1.00$ M, with [H2] and [I2] each 0.500 M.",
+      "hint": "Take the positive square root to simplify.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18ra0qr",
+      "kind": "example",
+      "front": "For A ⇌ B with initial [A] = 0.800 M, [B] = 0 M and Kc = 3.00, find the equilibrium [A] and [B].",
+      "back": "[A] = **0.200 M** and [B] = 0.600 M. Setting $3.00=\\frac{x}{0.800-x}$ gives $x=0.600$ M.",
+      "hint": "Let x be the amount of A consumed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08olt4g",
+      "kind": "example",
+      "front": "Given equilibrium concentrations [H2] = 0.400 M, [I2] = 0.400 M, and [HI] = 0.800 M for H2 + I2 ⇌ 2HI, what is Kc?",
+      "back": "**Kc = 4.00**. Substitute into $K_c=\\frac{[\\mathrm{HI}]^2}{[\\mathrm{H_2}][\\mathrm{I_2}]}$ to get $\\frac{(0.800)^2}{(0.400)(0.400)}=4.00$.",
+      "hint": "Use only equilibrium values, not initial ones.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1biqcbr",
+      "kind": "mistake",
+      "front": "Why is it wrong to give each concentration change its own variable in an ICE table?",
+      "back": "It is wrong because the balanced equation links all changes. Use one variable, usually x, and express every other change as a **stoichiometric coefficient** multiple of x.",
+      "hint": "The balanced equation constrains the changes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xibmlr",
+      "kind": "mistake",
+      "front": "Why is substituting initial concentrations into the equilibrium expression a mistake?",
+      "back": "The expression needs **equilibrium concentrations**, not initial ones. Substituting initial values gives the wrong result, so always use the equilibrium row of the ICE table.",
+      "hint": "Which row describes the system at equilibrium?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hmm47o",
+      "kind": "concept",
+      "front": "Why must you reject some algebraic values of x?",
+      "back": "Solving a **quadratic equation** can give two values of x, but only physically possible ones are valid. Any x that makes an equilibrium concentration negative must be rejected.",
+      "hint": "Check each root against the ICE table.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1j90jlg",
+      "kind": "concept",
+      "front": "Which species are left out of an equilibrium expression?",
+      "back": "**Pure solids and pure liquids** are left out because their concentrations are constant. The expression uses concentrations of aqueous species and gases only.",
+      "hint": "Think about which species have fixed concentration.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19p0k1u",
+      "kind": "mistake",
+      "front": "If your calculated Kc does not match the given value when you check your answer, what should you check?",
+      "back": "Check the **stoichiometric coefficients**, signs, and exponents. Also confirm you used the equilibrium row. Reversing the reaction would invert the value of Kc.",
+      "hint": "Three things usually cause this.",
+      "sectionId": "s4"
+    }
+  ]
+}

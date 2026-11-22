@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "6-7",
+  "topicCode": "6.7",
+  "topicName": "FTC and definite integrals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:25.856Z",
+  "cards": [
+    {
+      "id": "1nhqfhc",
+      "kind": "formula",
+      "front": "What formula evaluates a definite integral using an antiderivative $F$ of $f$?",
+      "back": "$\\int_a^b f(x)\\,dx=F(b)-F(a)$, where $F'=f$ and $f$ is **continuous** on $[a,b]$. Evaluate $F$ at the upper bound, then subtract its value at the lower bound.",
+      "hint": "Think upper bound value minus lower bound value.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xt3onz",
+      "kind": "concept",
+      "front": "Why does a region below the horizontal axis reduce the value of a definite integral?",
+      "back": "Regions below the axis count as **negative** signed area, so they subtract from the total. A negative region never adds positive area to the integral.",
+      "hint": "Signed area depends on which side of the axis the graph is on.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l4j40w",
+      "kind": "mistake",
+      "front": "If $v(t)$ is velocity, what does $\\int_a^b v(t)\\,dt$ give, and what does it not give?",
+      "back": "It gives **displacement**, the signed net change in position. It does not give total distance traveled. Total distance needs $\\int_a^b |v(t)|\\,dt$.",
+      "hint": "Does the integral keep track of direction?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k3zyk9",
+      "kind": "term",
+      "front": "What is an antiderivative of $f$?",
+      "back": "An **antiderivative** of $f$ is a function $F$ whose derivative equals $f$, so $F'(x)=f(x)$.",
+      "hint": "Reverse of differentiating.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "141k8ck",
+      "kind": "term",
+      "front": "What is net area over an interval?",
+      "back": "**Net area** is the positive area minus the magnitude of the negative area over that interval, for a continuous graph.",
+      "hint": "Add the regions above the axis, then subtract those below.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q0pw77",
+      "kind": "process",
+      "front": "What are the steps to evaluate a definite integral with the Fundamental Theorem?",
+      "back": "1) Find an antiderivative $F$. 2) Evaluate $F(b)$ and $F(a)$. 3) Subtract: $F(b)-F(a)$. Write $F(b)-F(a)$ before simplifying to keep the order clear.",
+      "hint": "Three steps: find, evaluate at both bounds, subtract.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18zf921",
+      "kind": "concept",
+      "front": "Why does the constant $C$ in an antiderivative not affect a definite integral?",
+      "back": "It **cancels**: $[F(b)+C]-[F(a)+C]=F(b)-F(a)$. So you can drop $C$ when evaluating a definite integral.",
+      "hint": "Subtract the two evaluated expressions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09z7dgz",
+      "kind": "example",
+      "front": "Calculate $\\int_1^3 2x\\,dx$ using an antiderivative.",
+      "back": "Answer: **8**. An antiderivative is $F(x)=x^2$, so $F(3)-F(1)=9-1=8$.",
+      "hint": "Start with an antiderivative of $2x$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kw490z",
+      "kind": "example",
+      "front": "A particle has velocity $v(t)=2t-4$ m/s. What is its displacement from $t=0$ to $t=5$?",
+      "back": "Answer: **5 meters** in the positive direction. $F(t)=t^2-4t$, so $F(5)-F(0)=(25-20)-0=5$.",
+      "hint": "Integrate $2t-4$, then evaluate from 0 to 5.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1w6znjq",
+      "kind": "example",
+      "front": "For $v(t)=2t-4$ m/s, what is the total distance traveled from $t=0$ to $t=5$?",
+      "back": "Answer: **13 meters**. The velocity changes sign at $t=2$. Distance is $4$ m from $t=0$ to $2$ plus $9$ m from $t=2$ to $5$.",
+      "hint": "Split the interval where velocity changes sign.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00wbqpb",
+      "kind": "concept",
+      "front": "What does a rate integral tell you, and when should you add an initial amount?",
+      "back": "It gives the **net change** in the quantity. Add the initial amount only when the question asks for a final amount.",
+      "hint": "Net change versus final amount.",
+      "sectionId": "s3"
+    }
+  ]
+}

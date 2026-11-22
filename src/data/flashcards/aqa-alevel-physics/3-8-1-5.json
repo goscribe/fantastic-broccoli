@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-8-1-5",
+  "topicCode": "3.8.1.5",
+  "topicName": "Nuclear radius",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:57.515Z",
+  "cards": [
+    {
+      "id": "1ogls3v",
+      "kind": "formula",
+      "front": "Which equation links nuclear radius $R$ to mass number $A$?",
+      "back": "$R=r_0A^{1/3}$, where $r_0$ is a constant of about $1.2\\,\\mathrm{fm}$ for all nuclei. The radius grows with the **cube root** of the mass number.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lq79wk",
+      "kind": "concept",
+      "front": "Why does closest approach of an alpha particle give only an upper limit for nuclear radius?",
+      "back": "At closest approach all the kinetic energy has become electric potential energy, but the particle is repelled before it touches the nucleus, so the true **radius** is smaller than this distance.",
+      "hint": "Think about whether the alpha particle ever reaches the surface.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "084cyvx",
+      "kind": "concept",
+      "front": "Why are fast electrons used to measure nuclear size more precisely than alpha particles?",
+      "back": "Their **de Broglie wavelength** is close to nuclear size, so they diffract. They do not feel the strong nuclear force, so the nucleus does not absorb them.",
+      "hint": "Compare the wavelength of the electrons with the size of the nucleus.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h0hjmr",
+      "kind": "term",
+      "front": "What is the **de Broglie wavelength** of a particle?",
+      "back": "$\\lambda=\\frac{h}{p}$, where $h$ is the Planck constant and $p$ is the momentum of the particle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cic2hr",
+      "kind": "formula",
+      "front": "Which equation gives the distance of closest approach $r$ for a head-on alpha particle?",
+      "back": "Kinetic energy equals electric potential energy: $E_\\mathrm{k}=\\frac{(2e)(Ze)}{4\\pi\\varepsilon_0 r}$, so $r=\\frac{2Ze^2}{4\\pi\\varepsilon_0E_\\mathrm{k}}$, where $Z$ is the proton number.",
+      "hint": "Start from energy conservation as the particle slows to a stop.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qpysi4",
+      "kind": "example",
+      "front": "What is the closest approach of a $5.0\\,\\mathrm{MeV}$ alpha particle fired head-on at a gold nucleus with $Z=79$?",
+      "back": "About $4.5\\times10^{-14}\\,\\mathrm{m}$. First convert $E_\\mathrm{k}=8.0\\times10^{-13}\\,\\mathrm{J}$, then substitute into $r=\\frac{2Ze^2}{4\\pi\\varepsilon_0E_\\mathrm{k}}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09wx0yx",
+      "kind": "formula",
+      "front": "Which equation gives the angle $\\theta$ of the first minimum in electron diffraction?",
+      "back": "$\\sin\\theta\\approx\\frac{1.22\\lambda}{d}$, where $\\lambda$ is the electron wavelength and $d$ is the diameter of the nucleus treated as a disc.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0we8td5",
+      "kind": "example",
+      "front": "Estimate the radius of a lead-208 nucleus, using $r_0=1.20\\,\\mathrm{fm}$.",
+      "back": "About $7.1\\,\\mathrm{fm}$, or $7.1\\times10^{-15}\\,\\mathrm{m}$. Use $R=r_0A^{1/3}$ with $A=208$, so $A^{1/3}\\approx5.93$.",
+      "hint": "Find the cube root of the mass number first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l87dbc",
+      "kind": "mistake",
+      "front": "A student says doubling the mass number doubles the nuclear radius. What is wrong with this?",
+      "back": "Radius is proportional to $A^{1/3}$, not $A$. Eight times the mass number gives only twice the **radius**, so doubling $A$ increases $R$ by much less than two.",
+      "hint": "Look at which power of $A$ appears in the radius equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12f7k2p",
+      "kind": "concept",
+      "front": "Why do all nuclei have almost the same **nuclear density**?",
+      "back": "Volume is proportional to $A$ and mass is also proportional to $A$, so $A$ cancels when you divide mass by volume.",
+      "hint": "Compare how the volume and the mass each scale with $A$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1aitghg",
+      "kind": "example",
+      "front": "What is the nuclear density, using $r_0=1.20\\,\\mathrm{fm}$ and $1\\,\\mathrm{u}=1.66\\times10^{-27}\\,\\mathrm{kg}$?",
+      "back": "About $2.3\\times10^{17}\\,\\mathrm{kg\\,m^{-3}}$, roughly $10^{14}$ times the density of water.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01wifra",
+      "kind": "process",
+      "front": "What are the steps to find $r_0$ from measured nuclear radii?",
+      "back": "Plot $R$ against $A^{1/3}$, draw a best-fit straight line through the origin, then find its gradient. The gradient equals $r_0$.",
+      "hint": "Think about which quantity goes on each axis.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1i5hdou",
+      "kind": "term",
+      "front": "What is the **mass number** $A$ of a nucleus?",
+      "back": "The **mass number** $A$ is the total number of protons and neutrons in the nucleus.",
+      "hint": "Think about what the nucleus is made from.",
+      "sectionId": "s3"
+    }
+  ]
+}

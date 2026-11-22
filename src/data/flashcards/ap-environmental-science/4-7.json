@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "4-7",
+  "topicCode": "4.7",
+  "topicName": "Solar radiation and seasons",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:59.581Z",
+  "cards": [
+    {
+      "id": "1g8mapm",
+      "kind": "concept",
+      "front": "What causes the seasons on Earth?",
+      "back": "Earth's **axial tilt**, which stays fixed while the orbit changes which hemisphere leans toward the Sun.",
+      "hint": "Think about what stays fixed as Earth travels around the Sun.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ytj8i6",
+      "kind": "concept",
+      "front": "Why does sunlight deliver less energy per square meter near the poles?",
+      "back": "Rays arrive at a **low angle**, spreading the same energy over a larger area, and pass through more atmosphere.",
+      "hint": "Compare a flashlight beam aimed straight at a wall with one aimed at a slant.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1chxjyg",
+      "kind": "concept",
+      "front": "Where is the Sun directly overhead on the June solstice?",
+      "back": "Over the **Tropic of Cancer**, $23.5^{\\circ}$ north, so the Northern Hemisphere has its longest day.",
+      "hint": "Think about how far the Sun's overhead position shifts from the equator over the year.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wisgg8",
+      "kind": "term",
+      "front": "What is solar radiation?",
+      "back": "The **energy Earth receives from the Sun**, carried as electromagnetic waves such as visible, infrared, and ultraviolet light.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1q3je14",
+      "kind": "term",
+      "front": "What is latitude?",
+      "back": "The **angular distance** of a place north or south of the equator, measured in degrees from 0 to 90.",
+      "hint": "Measured from the equator toward either pole.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hymzuw",
+      "kind": "term",
+      "front": "What is axial tilt?",
+      "back": "The **angle of about $23.5^{\\circ}$** between Earth's rotational axis and a line perpendicular to its orbital plane.",
+      "hint": "Think about how far Earth's spin leans away from standing straight up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ls2du9",
+      "kind": "mistake",
+      "front": "Why is Earth's distance from the Sun not the cause of the seasons?",
+      "back": "Earth is **closest to the Sun in early January**, which is Northern Hemisphere winter. Tilt, not distance, changes sun angle and day length.",
+      "hint": "Check when Earth is nearest the Sun in its orbit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o9vpiz",
+      "kind": "term",
+      "front": "What is a solstice?",
+      "back": "The day when a hemisphere is tilted **most toward or most away** from the Sun, giving its longest or shortest day.",
+      "hint": "Two of these occur each year, six months apart.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1498m9i",
+      "kind": "term",
+      "front": "What is an equinox?",
+      "back": "A day when the **Sun is directly over the equator**, making day and night nearly equal everywhere.",
+      "hint": "It falls midway between two solstices.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10x0ixj",
+      "kind": "example",
+      "front": "At 40 degrees north on December 21, what is the noon Sun angle above the horizon?",
+      "back": "**$26.5^{\\circ}$**: subtract the $63.5^{\\circ}$ gap between $40^{\\circ}$ N and the overhead Sun at $23.5^{\\circ}$ S from $90^{\\circ}$.",
+      "hint": "Start by finding where the Sun is overhead on that date.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ikkjh2",
+      "kind": "concept",
+      "front": "How do seasonal swings compare between the equator and the poles?",
+      "back": "They are **much weaker near the equator** and grow stronger toward the poles, where day length changes a lot.",
+      "hint": "Think about how high the Sun stays in the tropics.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13s1gh5",
+      "kind": "term",
+      "front": "What are the tropics?",
+      "back": "The region **between $23.5^{\\circ}$ N and $23.5^{\\circ}$ S**, where the Sun can be directly overhead.",
+      "hint": "Think about the band where the Sun can be overhead, centered on the equator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m7kwz9",
+      "kind": "term",
+      "front": "What is a growing season?",
+      "back": "The **period each year** when temperature and sunlight allow plants to grow.",
+      "hint": "Connect it to longer days and warmer months in mid-latitudes.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "s2-1",
+  "topicCode": "S2.1",
+  "topicName": "The ionic model",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:14.554Z",
+  "cards": [
+    {
+      "id": "1ubqdf8",
+      "kind": "concept",
+      "front": "Why do atoms form ions, and which particles change when they do?",
+      "back": "Atoms **lose or gain electrons** to reach a noble gas electron arrangement. Their number of protons stays the same, so the charge comes from the electron count.",
+      "hint": "Think about which particles move and which stay fixed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0e2txrw",
+      "kind": "concept",
+      "front": "What holds the ions together in an ionic lattice?",
+      "back": "**Electrostatic attraction** between oppositely charged ions. It acts in every direction across a repeating three-dimensional arrangement, so there are no separate molecules.",
+      "hint": "Think about charges, not molecules.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wghpr5",
+      "kind": "example",
+      "front": "Work out the formula formed from Al3+ and O2- ions.",
+      "back": "$\\mathrm{Al_2O_3}$. Three O2- ions give $-6$ and two Al3+ ions give $+6$, so the charges cancel.",
+      "hint": "Find the numbers of each ion whose charges add to zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hd4hht",
+      "kind": "term",
+      "front": "What is a cation?",
+      "back": "A **cation** is a positively charged ion, formed when an atom loses electrons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1u5hosg",
+      "kind": "term",
+      "front": "What is an anion?",
+      "back": "An **anion** is a negatively charged ion, formed when an atom gains electrons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07apd6p",
+      "kind": "mistake",
+      "front": "Does losing an electron make an atom negative?",
+      "back": "No. It leaves more protons than electrons, so the ion is **positive**.",
+      "hint": "Count protons and electrons after the change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lgnvip",
+      "kind": "formula",
+      "front": "What must be true of the total charges in an ionic formula unit?",
+      "back": "The ionic compound is neutral, so $\\sum(\\text{ion number} \\times \\text{ion charge}) = 0$. Total positive charge equals total negative charge.",
+      "hint": "Compound overall has no net charge.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1an731a",
+      "kind": "process",
+      "front": "What are the steps to write a formula unit from ion charges?",
+      "back": "1 Choose numbers of each ion whose charges add to zero. 2 Write the positive ion first. 3 Use subscripts for the whole-number ratio, omitting a subscript of 1.",
+      "hint": "Check the total charge at the end.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "086w7mb",
+      "kind": "concept",
+      "front": "How do ion charge and ion distance affect electrostatic attraction?",
+      "back": "Attraction gets **stronger** when ion charges increase or the distance between ions decreases. Ions with the same charge repel.",
+      "hint": "Think about what happens to the pull as charge goes up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kiwjkq",
+      "kind": "concept",
+      "front": "Why does a solid ionic compound not conduct electricity, but its melt does?",
+      "back": "In the solid, **ions are fixed** in the lattice and cannot move. When molten, the ions can move and carry charge.",
+      "hint": "What must be free to move for charge to flow?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zkxjyh",
+      "kind": "mistake",
+      "front": "Does melting an ionic compound turn its ions into atoms?",
+      "back": "No. Melting allows the **ions to move past one another**; they remain ions.",
+      "hint": "Think about what melting changes in the structure.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1axe9lz",
+      "kind": "concept",
+      "front": "Why do ionic compounds usually have high melting points?",
+      "back": "Melting needs enough energy to overcome many **strong attractions** between ions. Greater charges and smaller distances generally raise the melting point.",
+      "hint": "Think about how many attractions must be broken.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rhifkt",
+      "kind": "concept",
+      "front": "Why are ionic crystals often brittle?",
+      "back": "When lattice layers shift, **like charges** can come close together. Their repulsion can then split the crystal.",
+      "hint": "Think about what happens when layers slide.",
+      "sectionId": "s4"
+    }
+  ]
+}

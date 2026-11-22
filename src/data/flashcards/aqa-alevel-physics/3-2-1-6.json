@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-2-1-6",
+  "topicCode": "3.2.1.6",
+  "topicName": "Quarks and antiquarks",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:00.138Z",
+  "cards": [
+    {
+      "id": "05t6did",
+      "kind": "term",
+      "front": "What is a quark?",
+      "back": "A **quark** is a fundamental particle. Quarks always occur in groups inside larger particles and are never seen on their own.",
+      "hint": "Think about what protons and neutrons are built from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cli9uu",
+      "kind": "concept",
+      "front": "How do quarks combine to make baryons and mesons?",
+      "back": "A **baryon** contains three quarks, while a **meson** contains one quark and one antiquark. Both are hadrons.",
+      "hint": "Compare how many quark-type particles each group needs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1evti65",
+      "kind": "concept",
+      "front": "Why can quarks have fractional charges when all observed particles have whole-number charges?",
+      "back": "Quarks carry fractions of $e$ (up $+\\frac{2}{3}e$, down and strange $-\\frac{1}{3}e$), but these add to whole numbers inside real particles.",
+      "hint": "Add the charges of the quarks in a proton.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "187v55b",
+      "kind": "term",
+      "front": "What is an antiquark?",
+      "back": "An **antiquark** is the partner of a quark, with the same mass but opposite charge. It is written with a bar over the symbol, such as $\\bar{u}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xpi138",
+      "kind": "mistake",
+      "front": "Why is it wrong to give the anti-down quark the same charge as the down quark?",
+      "back": "Antiquarks have the **opposite charge**, so $\\bar{d}$ has $+\\frac{1}{3}e$ while $d$ has $-\\frac{1}{3}e$. Reverse the sign for every antiquark.",
+      "hint": "Think about what antiquarks share with their quark partners.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1eayfjx",
+      "kind": "term",
+      "front": "What is the baryon number of a meson?",
+      "back": "**0**, because the quark has $+\\frac{1}{3}$ and the antiquark has $-\\frac{1}{3}$, and these cancel. A baryon has $+1$.",
+      "hint": "Add the baryon numbers of one quark and one antiquark.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01dc56y",
+      "kind": "process",
+      "front": "What steps find the charge of a particle from its quark content?",
+      "back": "1) Write down the quarks and antiquarks. 2) Look up each charge, reversing the sign for antiquarks. 3) Add the charges and give the total in terms of $e$.",
+      "hint": "Start with the list of quarks inside the particle."
+    },
+    {
+      "id": "122w2gf",
+      "kind": "example",
+      "front": "What is the total charge of a proton made of $uud$?",
+      "back": "$+1e$, because $+\\frac{2}{3}e+\\frac{2}{3}e-\\frac{1}{3}e=+1e$.",
+      "hint": "Add each quark's charge using a common denominator.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1puy4l3",
+      "kind": "example",
+      "front": "What is the total charge of a neutron made of $udd$?",
+      "back": "$0$, because $+\\frac{2}{3}e-\\frac{1}{3}e-\\frac{1}{3}e=0$.",
+      "hint": "Sum the three fractions one at a time.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0pdvwq0",
+      "kind": "example",
+      "front": "What is the charge of an antiproton made of $\\bar{u}\\bar{u}\\bar{d}$?",
+      "back": "$-1e$, the opposite of the proton's charge.",
+      "hint": "Compare it with the proton's quark makeup.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0c76oy0",
+      "kind": "example",
+      "front": "What is the charge of a positive kaon made of an up quark and an anti-strange quark?",
+      "back": "$+1e$, because $+\\frac{2}{3}e+\\frac{1}{3}e=+1e$.",
+      "hint": "Add the quark's charge to the antiquark's charge.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0im50fb",
+      "kind": "concept",
+      "front": "What quarks make up pions, the lightest mesons?",
+      "back": "Only up and down quarks or antiquarks. Kaons are heavier and each contains a strange quark or antiquark.",
+      "hint": "Think about which quark types a meson can use.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1abafzc",
+      "kind": "example",
+      "front": "What type of hadron is a particle made of a strange quark and an anti-down quark?",
+      "back": "A **meson**, since it has one quark and one antiquark. Its charge is $0$, because $-\\frac{1}{3}e+\\frac{1}{3}e=0$.",
+      "hint": "Count the quarks and antiquarks.",
+      "sectionId": "s4"
+    }
+  ]
+}

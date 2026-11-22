@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "7-12",
+  "topicCode": "7.12",
+  "topicName": "Common-ion effect",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:08.976Z",
+  "cards": [
+    {
+      "id": "1e5jfhb",
+      "kind": "concept",
+      "front": "Why does adding chloride ions reduce how much silver chloride dissolves?",
+      "back": "The added chloride is a **common ion**, a product ion of AgCl dissolution. The equilibrium shifts toward solid AgCl, so less dissolves.",
+      "hint": "Check which side of the dissolution equation chloride is on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1g8gu9s",
+      "kind": "concept",
+      "front": "If an added ion is a product ion of a salt's dissolution, what happens to the salt's solubility?",
+      "back": "**Solubility decreases.** An added product ion pushes the equilibrium toward the solid, so less salt dissolves per liter.",
+      "hint": "Ask which way the equilibrium shifts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gp6y7m",
+      "kind": "concept",
+      "front": "Does adding a common ion change Ksp at a fixed temperature?",
+      "back": "No. **Ksp** stays constant. The equilibrium ion concentrations change instead.",
+      "hint": "Think about what Ksp depends on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1clg85g",
+      "kind": "formula",
+      "front": "What is the solubility product expression for silver chloride, and what do its symbols mean?",
+      "back": "$K_{sp}=[\\mathrm{Ag^+}][\\mathrm{Cl^-}]$, where the brackets are the equilibrium concentrations of silver and chloride ions in $\\mathrm{mol\\,L^{-1}}$.",
+      "hint": "Use the ions produced when AgCl(s) dissolves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00zxlmj",
+      "kind": "term",
+      "front": "What is molar solubility?",
+      "back": "**Molar solubility** is the amount of salt that dissolves per liter of solution, measured in $\\mathrm{mol\\,L^{-1}}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1u86ao1",
+      "kind": "term",
+      "front": "What is a spectator ion in a dissolution equilibrium?",
+      "back": "A **spectator ion** is present in solution but does not appear in the dissolution equation, so it does not directly cause the common-ion effect.",
+      "hint": "Check whether the ion appears in the dissolution equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pgicko",
+      "kind": "mistake",
+      "front": "Why is the sodium ion from added NaCl not the reason silver chloride becomes less soluble?",
+      "back": "Mistake: counting every ion from the added salt. Sodium is a **spectator ion**; only chloride, a product ion of AgCl, is the common ion.",
+      "hint": "Compare with the AgCl dissolution equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fz7nba",
+      "kind": "process",
+      "front": "What steps do you follow to find molar solubility in a solution that already contains a common ion?",
+      "back": "Write $K_{sp}$ using $s$ plus the initial ion concentration. Approximate if $s$ is small, solve for $s$, then check that the approximation holds.",
+      "hint": "Start from the Ksp expression.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gzkfn2",
+      "kind": "example",
+      "front": "Find the molar solubility of AgCl in 0.10 mol L^-1 NaCl, using $K_{sp}=1.8\\times10^{-10}$.",
+      "back": "$s=1.8\\times10^{-9}\\,\\mathrm{mol\\,L^{-1}}$, from $s=\\frac{1.8\\times10^{-10}}{0.10}$. The check gives $[\\mathrm{Cl^-}]\\approx0.10$, so the approximation holds.",
+      "hint": "Approximate $0.10+s$ as $0.10$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1elntzp",
+      "kind": "example",
+      "front": "Find the molar solubility of AgCl in 0.020 mol L^-1 NaCl, using $K_{sp}=1.8\\times10^{-10}$.",
+      "back": "$s=9.0\\times10^{-9}\\,\\mathrm{mol\\,L^{-1}}$. This is much smaller than 0.020, so the approximation is valid.",
+      "hint": "Set $1.8\\times10^{-10}=s(0.020+s)$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08legs3",
+      "kind": "term",
+      "front": "What are unequal ion ratios?",
+      "back": "**Unequal ion ratios** are dissolution ratios where one formula unit produces different numbers of each ion, so the ion concentrations change by different amounts.",
+      "hint": "Look at the subscripts in the formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bt9aic",
+      "kind": "formula",
+      "front": "When CaF2 dissolves in a solution that already contains fluoride, how do you write the equilibrium fluoride concentration?",
+      "back": "$[\\mathrm{F^-}]=[\\mathrm{F^-}]_{\\mathrm{initial}}+2s$, because each formula unit of CaF2 produces two fluoride ions.",
+      "hint": "Count the ions produced per formula unit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0omuwpi",
+      "kind": "mistake",
+      "front": "What mistake do students make with fluoride when CaF2 dissolves in a solution that already contains fluoride?",
+      "back": "Mistake: using only $2s$ for fluoride and ignoring the starting ion. The correct value is the initial fluoride concentration plus $2s$.",
+      "hint": "Ask whether fluoride was already present.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bem8w5",
+      "kind": "concept",
+      "front": "What happens if a mixture's ion product is above Ksp?",
+      "back": "**Precipitation** occurs: solid forms from the dissolved ions until equilibrium is reached.",
+      "hint": "Compare the ion product with Ksp.",
+      "sectionId": "s4"
+    }
+  ]
+}

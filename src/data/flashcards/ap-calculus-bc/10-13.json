@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "10-13",
+  "topicCode": "10.13",
+  "topicName": "Radius and interval of convergence",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:21.168Z",
+  "cards": [
+    {
+      "id": "0yqyxzc",
+      "kind": "concept",
+      "front": "What shape does the set of inputs where a power series converges always have?",
+      "back": "It is an **interval** centred at $a$. When $R$ is finite, its edges are at $a-R$ and $a+R$, and the interval always contains the centre.",
+      "hint": "Think about how convergence spreads out from the centre.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0am9uve",
+      "kind": "process",
+      "front": "How do you find the radius of convergence of a power series with the ratio test?",
+      "back": "Write the full $n$th term including $(x-a)^n$. Compute $L=\\lim_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_n}\\right|$, which contains $|x-a|$. Solve $L<1$ to get $|x-a|<R$.",
+      "hint": "Three steps, starting with the full nth term.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13bvncp",
+      "kind": "mistake",
+      "front": "A student finds R and stops, saying the interval of convergence is done. What is missing?",
+      "back": "The **endpoints** $x=a\\pm R$. The ratio test gives $L=1$ there, so it says nothing, and each endpoint must be tested separately.",
+      "hint": "What does the ratio test say when L equals 1?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k50qfx",
+      "kind": "term",
+      "front": "What is a power series?",
+      "back": "A **power series** is $\\sum_{n=0}^{\\infty}c_n(x-a)^n$, a sum of constant multiples of powers of $x-a$, where $a$ is the centre and each $c_n$ is a constant coefficient.",
+      "hint": "Each term is a constant times a power of $x-a$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03a8ynp",
+      "kind": "concept",
+      "front": "What are the three possible cases for the radius of convergence $R$?",
+      "back": "If $R=0$, the series converges only at $x=a$. If $R$ is finite and positive, it converges for $|x-a|<R$ and diverges for $|x-a|>R$. If $R=\\infty$, it converges for every real $x$.",
+      "hint": "Consider the extreme values 0 and infinity.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0urlpuf",
+      "kind": "example",
+      "front": "What is the radius of convergence of $\\sum_{n=1}^{\\infty}\\frac{(x-2)^n}{n\\cdot3^n}$?",
+      "back": "$R=3$. The ratio limit is $\\frac{|x-2|}{3}$, and requiring it to be less than 1 gives $|x-2|<3$.",
+      "hint": "Set the ratio limit less than 1.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rryc71",
+      "kind": "example",
+      "front": "Does $x=5$ belong to the interval of convergence of $\\sum_{n=1}^{\\infty}\\frac{(x-2)^n}{n\\cdot3^n}$?",
+      "back": "No. At $x=5$ each term is $\\frac{1}{n}$, giving the harmonic series $\\sum\\frac{1}{n}$, which **diverges**.",
+      "hint": "Substitute x=5 and simplify each term.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1s28gjy",
+      "kind": "example",
+      "front": "Does $x=-1$ belong to the interval of convergence of $\\sum_{n=1}^{\\infty}\\frac{(x-2)^n}{n\\cdot3^n}$?",
+      "back": "Yes. At $x=-1$ the series is $\\sum\\frac{(-1)^n}{n}$, an alternating series whose sizes decrease to 0, so the **alternating series test** shows it converges.",
+      "hint": "Check the signs and whether the sizes shrink to 0.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10yufav",
+      "kind": "concept",
+      "front": "How do square and round brackets show whether an endpoint is included in an interval?",
+      "back": "A **square bracket** $[$ or $]$ means the endpoint is included, since the series converges there. A **parenthesis** $($ or $)$ means it is excluded, since the series diverges there.",
+      "hint": "Each endpoint gets its own bracket.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03fxbkp",
+      "kind": "process",
+      "front": "Which three tests handle most endpoint series?",
+      "back": "The **nth-term test**: terms not approaching 0 means divergence. The **p-series test**: $\\sum\\frac{1}{n^p}$ converges when $p>1$ and diverges when $p\\le1$. The **alternating series test**: signs alternate and sizes decrease to 0.",
+      "hint": "One test for divergence, one for a family, one for alternating signs.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ezeor9",
+      "kind": "example",
+      "front": "What is the interval of convergence of $\\sum_{n=1}^{\\infty}\\frac{n\\,x^n}{2^n}$?",
+      "back": "$(-2,2)$. The radius is $R=2$, and at both $x=2$ and $x=-2$ the terms do not approach 0, so both endpoints diverge.",
+      "hint": "Find R first, then check both endpoints.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1c86qco",
+      "kind": "formula",
+      "front": "What shortcut gives the radius $R$ directly from the coefficients $c_n$?",
+      "back": "If $\\ell=\\lim_{n\\to\\infty}\\left|\\frac{c_{n+1}}{c_n}\\right|$, then $R=\\frac{1}{\\ell}$. If $\\ell=0$ then $R=\\infty$, and if $\\ell$ is infinite then $R=0$.",
+      "hint": "Use the ratio of consecutive coefficients, not the whole term.",
+      "sectionId": "s5"
+    }
+  ]
+}

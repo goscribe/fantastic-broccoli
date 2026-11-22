@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "3-6",
+  "topicCode": "3.6",
+  "topicName": "Higher-order derivatives",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:57.467Z",
+  "cards": [
+    {
+      "id": "01kxv1j",
+      "kind": "concept",
+      "front": "What do higher-order derivatives let you do with a function?",
+      "back": "They describe **successive rates of change**. You get them by differentiating repeatedly, treating each result as a new function.",
+      "hint": "Think about differentiating the derivative you just found.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1npnpf8",
+      "kind": "concept",
+      "front": "What does the sign of $f''(x)$ tell you about a graph's shape?",
+      "back": "Where $f''(x)>0$ the graph is **concave up** (slopes increase). Where $f''(x)<0$ it is **concave down** (slopes decrease).",
+      "hint": "Ask whether the slopes are getting larger or smaller as x increases.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dy88ge",
+      "kind": "formula",
+      "front": "How are acceleration $a(t)$, velocity $v(t)$ and position $x(t)$ related, and what are the units of $a(t)$?",
+      "back": "$a(t)=v'(t)=x''(t)$. Velocity is $v(t)=x'(t)$ in $\\mathrm{m/s}$, so **acceleration** is in $\\mathrm{m/s^2}$ when position is in meters and time in seconds.",
+      "hint": "Each derivative adds one order of differentiation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "031trwo",
+      "kind": "process",
+      "front": "What are the steps for finding a higher-order derivative?",
+      "back": "1) Differentiate the function to get the first derivative. 2) Treat that result as a new function and differentiate again. 3) Repeat, labeling each result by its **order**.",
+      "hint": "Label every result so you know what you differentiated.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xucpcl",
+      "kind": "example",
+      "front": "Find $f'(x)$, $f''(x)$ and $f'''(x)$ for $f(x)=2x^4-3x^2+5$.",
+      "back": "$f'(x)=8x^3-6x$, $f''(x)=24x^2-6$, and $f'''(x)=48x$. Apply the power rule to every term each time.",
+      "hint": "Differentiate the term $2x^4$ first, then $-3x^2$, then $5$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v1rcvg",
+      "kind": "mistake",
+      "front": "Is $f''(x)$ the same as $[f'(x)]^2$?",
+      "back": "No. $f''(x)$ is the **derivative of $f'(x)$**, found by differentiating again. Squaring $f'(x)$ is a different operation.",
+      "hint": "The superscript 2 describes order, not a square.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d7krdt",
+      "kind": "example",
+      "front": "For $g(x)=xe^x$, find $g''(x)$.",
+      "back": "$g''(x)=2e^x+xe^x$. The product rule gives $g'(x)=e^x+xe^x$, and applying it again gives this result.",
+      "hint": "Both factors still depend on x, so use the product rule each time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1otkzfj",
+      "kind": "example",
+      "front": "For $h(x)=\\sin(2x)$, find $h''(x)$.",
+      "back": "$h''(x)=-4\\sin(2x)$. Since $h'(x)=2\\cos(2x)$, the inner derivative factor 2 appears again.",
+      "hint": "Check for the inner function after each differentiation step.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tefifg",
+      "kind": "mistake",
+      "front": "If $f''(x)=0$ at a point, has the concavity necessarily changed there?",
+      "back": "No. A value of $f''(x)=0$ **alone does not establish** a change in concavity.",
+      "hint": "Zero is a single value, not a sign change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03kn19g",
+      "kind": "term",
+      "front": "What is concavity?",
+      "back": "**Concavity** describes whether a graph's slopes increase or decrease as its input increases.",
+      "hint": "Relate it to the sign of the second derivative.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11vo1n0",
+      "kind": "formula",
+      "front": "What are the units of the third derivative $x'''(t)$ when position is in meters and time in seconds?",
+      "back": "$\\mathrm{m/s^3}$. It measures how **acceleration** changes per second.",
+      "hint": "Each derivative with respect to time adds one factor of 1/s.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14i77hn",
+      "kind": "concept",
+      "front": "If an object's acceleration is positive, what does that mean for its velocity?",
+      "back": "Its **velocity is increasing**, even if the object is moving backward. Positive acceleration does not mean it is moving forward.",
+      "hint": "Separate the direction of motion from the change in velocity.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00nqf5i",
+      "kind": "term",
+      "front": "What is a higher-order derivative?",
+      "back": "A **higher-order derivative** is found by differentiating a function more than once, such as $f'''(x)$ for the third derivative.",
+      "hint": "Count how many times you differentiate.",
+      "sectionId": "s1"
+    }
+  ]
+}

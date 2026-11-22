@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-7-1",
+  "topicCode": "3.7.1",
+  "topicName": "Fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:42.295Z",
+  "cards": [
+    {
+      "id": "1l9c55q",
+      "kind": "concept",
+      "front": "What lets a magnet pull a paper clip across a small gap without touching it?",
+      "back": "A **field** acts on the clip, which has the right property (it responds to magnetism), so a force is exerted without any contact.",
+      "hint": "Think about what has to touch what for a force to act.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ynkvws",
+      "kind": "term",
+      "front": "What is a gravitational field?",
+      "back": "A region in which a **mass** experiences a gravitational force. Every object with mass creates one around itself.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zmts2b",
+      "kind": "concept",
+      "front": "Which of the three field types can never repel, and why?",
+      "back": "**Gravitational** fields, because they act only on mass and gravity is always attractive.",
+      "hint": "Look at the Force row of the comparison table.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1vpt1hm",
+      "kind": "formula",
+      "front": "What is the gravitational field strength near the Earth's surface, and what is its unit?",
+      "back": "About $9.8\\,\\mathrm{N\\,kg^{-1}}$. Each kilogram of mass there feels a force of about 9.8 N.",
+      "hint": "Think of force per kilogram of mass.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1e7ts7w",
+      "kind": "example",
+      "front": "What is the gravitational force on a 3 kg mass near the Earth's surface?",
+      "back": "About $29.4\\,\\text{N}$, since $3 \\times 9.8 = 29.4$ using the field strength of about $9.8\\,\\mathrm{N\\,kg^{-1}}$.",
+      "hint": "Multiply the mass by the field strength.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q0obvo",
+      "kind": "term",
+      "front": "What is an electric field?",
+      "back": "A region where a **charge** experiences an electric force. A charged object creates one around itself.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02ktilq",
+      "kind": "concept",
+      "front": "How is the direction of an electric field defined?",
+      "back": "It is the direction of the force on a **positive** charge placed in the field.",
+      "hint": "Compare with how the direction of a magnetic field is defined for a north pole.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b83pac",
+      "kind": "concept",
+      "front": "In which direction does the magnetic force on a moving charge act?",
+      "back": "At **right angles** to both its velocity and the magnetic field. A stationary charge feels no magnetic force.",
+      "hint": "Consider a charge that is not moving first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ce5k31",
+      "kind": "mistake",
+      "front": "Why is it wrong to think field lines are paths that an object must follow?",
+      "back": "Field lines show the **direction of the force** at each point. They are not routes the object has to travel along.",
+      "hint": "Think about what the arrow on a line tells you.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "066x2c0",
+      "kind": "concept",
+      "front": "Why can two field lines never cross each other?",
+      "back": "At a crossing point the field would have two directions. A field has only **one direction** at each point.",
+      "hint": "Think about a single point in the field.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cm3ozn",
+      "kind": "concept",
+      "front": "What does the spacing of field lines tell you about a field?",
+      "back": "Lines **closer together** show a stronger field; lines further apart show a weaker field.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gmxi4t",
+      "kind": "term",
+      "front": "How are field lines drawn in a uniform field?",
+      "back": "They are **parallel and equally spaced**, because the field has the same strength and direction everywhere.",
+      "hint": "Think about how the spacing looks across the whole region.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gyd04q",
+      "kind": "mistake",
+      "front": "Why is a field not a substance that fills space?",
+      "back": "A field only describes the **force** an object with the right property would feel at each point. It is not material.",
+      "hint": "Think about what the field is used to measure.",
+      "sectionId": "s1"
+    }
+  ]
+}

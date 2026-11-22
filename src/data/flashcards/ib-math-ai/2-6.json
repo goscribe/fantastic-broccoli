@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "2-6",
+  "topicCode": "2.6",
+  "topicName": "The modelling process",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:25.706Z",
+  "cards": [
+    {
+      "id": "1654qfk",
+      "kind": "term",
+      "front": "What is a mathematical model?",
+      "back": "A **mathematical model** is a simplified description of a real situation using mathematics, such as a rule, equation or graph linking quantities. The taxi fare rule is one example.",
+      "hint": "Think of the taxi fare rule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0h2ybbc",
+      "kind": "concept",
+      "front": "Why is building a model described as a cycle rather than a straight line?",
+      "back": "Later steps, such as testing, often send you back to **earlier steps** to refine the model, so the process repeats until the model is good enough.",
+      "hint": "What happens when a test goes wrong?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19wu22e",
+      "kind": "term",
+      "front": "What is a residual?",
+      "back": "A **residual** is the observed value minus the predicted value. A positive residual means the model predicted too low.",
+      "hint": "Observed minus predicted.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03sql9h",
+      "kind": "term",
+      "front": "What is an assumption in a model?",
+      "back": "An **assumption** is a simplification accepted when building a model, such as ignoring traffic. It decides where the model can be trusted.",
+      "hint": "What does the model leave out?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0oc2brs",
+      "kind": "term",
+      "front": "What is the difference between a variable and a parameter?",
+      "back": "A **variable** is a quantity that changes, such as distance. A **parameter** is a fixed number in the rule, such as the fee or the rate per kilometre.",
+      "hint": "One changes, one stays fixed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d09mty",
+      "kind": "process",
+      "front": "What are the steps for building a mathematical model, in order?",
+      "back": "Define the problem; choose variables and state assumptions; select a suitable type of function; find the parameters from data; then test, refine, use and interpret.",
+      "hint": "Five stages, and the last one is testing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ar56cl",
+      "kind": "example",
+      "front": "A model predicts a fare of €12.50, but the observed fare is €13.10. What is the residual?",
+      "back": "**+€0.60**, since $13.10-12.50=+0.60$. The positive sign means the model predicted too low.",
+      "hint": "Use observed minus predicted.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12kbc12",
+      "kind": "formula",
+      "front": "Write the formula for a residual and say what each part means.",
+      "back": "$residual=observed-predicted$. The observed value is the measurement and the predicted value comes from the model, both in the same units.",
+      "hint": "Keep the units the same.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01n1djp",
+      "kind": "concept",
+      "front": "What do residuals scattered on both sides of zero suggest, and what does a clear pattern suggest?",
+      "back": "Small scattered residuals suggest a **good fit**. A clear pattern in the residuals suggests the wrong **type of function** has been chosen.",
+      "hint": "Look at how the residuals are arranged.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j44b6x",
+      "kind": "term",
+      "front": "What is the difference between interpolation and extrapolation?",
+      "back": "**Interpolation** predicts a value inside the range of the data used to build the model. **Extrapolation** predicts outside that range, which is less reliable.",
+      "hint": "Inside or outside the data range?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1449gqd",
+      "kind": "mistake",
+      "front": "Why is a model that fits the data well not necessarily correct everywhere?",
+      "back": "Predictions outside the data range are **extrapolation**, where assumptions may fail. A line fitted to short taxi journeys may fail for very long ones, where the rate may change.",
+      "hint": "Think about very long journeys.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vweve8",
+      "kind": "process",
+      "front": "How can a model be refined when its residuals show a pattern?",
+      "back": "Adjust a **parameter**, add a **variable** or change the **type of function**, then test the model again against the data.",
+      "hint": "Three options, then retest.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ezbwz7",
+      "kind": "process",
+      "front": "What checks should you make on an answer from a model?",
+      "back": "Check the units match the problem, the value is realistic (for example not negative), the size and sign fit the situation, and compare it with a value you already know.",
+      "hint": "Units, realism, sign, comparison.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0g7zwxy",
+      "kind": "mistake",
+      "front": "Why should you state a limitation when giving a model's answer?",
+      "back": "Naming a **limitation**, such as the taxi rate not holding in heavy traffic, shows you understand the assumptions behind the model and where it may fail.",
+      "hint": "Link it back to assumptions.",
+      "sectionId": "s5"
+    }
+  ]
+}

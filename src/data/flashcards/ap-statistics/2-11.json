@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "2-11",
+  "topicCode": "2.11",
+  "topicName": "The normal distribution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:10.927Z",
+  "cards": [
+    {
+      "id": "1rxhpqa",
+      "kind": "term",
+      "front": "What is a normal distribution?",
+      "back": "A **normal distribution** is a symmetric, single-peaked bell curve, fully described by its mean $\\mu$ and standard deviation $\\sigma$, written $N(\\mu,\\sigma)$.",
+      "hint": "Think about the shape and the two numbers that set it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05h7ge5",
+      "kind": "concept",
+      "front": "What does the 68-95-99.7 rule tell you about values in a normal distribution?",
+      "back": "About **68%** of values lie within 1 standard deviation of the mean, about 95% within 2, and about 99.7% within 3. It is an approximation.",
+      "hint": "Think of bands around the mean, measured in standard deviations.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1izfmqg",
+      "kind": "formula",
+      "front": "What is the z-score formula, and what does each symbol mean?",
+      "back": "$z=\\frac{x-\\mu}{\\sigma}$, where $x$ is the value, $\\mu$ is the mean, and $\\sigma$ is the standard deviation. The **z-score** counts standard deviations from the mean and has no units.",
+      "hint": "Subtract the mean first, then divide by the spread.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1giau2b",
+      "kind": "process",
+      "front": "What steps do you follow to estimate a probability with the 68-95-99.7 rule?",
+      "back": "Sketch the curve, mark the mean and the values, and shade the region. Use the rule's bands and symmetry to find the share, then state the **proportion** in context.",
+      "hint": "Start with a sketch before any numbers.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0w0e3to",
+      "kind": "example",
+      "front": "Loaf weights are about $N(500,10)$ grams. What proportion of loaves weigh between 490 g and 510 g?",
+      "back": "About **68%**. Since 490 and 510 are $500\\pm10$, they lie within 1 standard deviation of the mean.",
+      "hint": "Which band of the rule do 490 and 510 sit at?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "085o7l1",
+      "kind": "example",
+      "front": "Loaf weights are about $N(500,10)$ grams. About what proportion of loaves weigh more than 520 g?",
+      "back": "About **2.5%**. Since 520 is 2 standard deviations above the mean, 5% lies outside the central 95%, split equally between the two tails.",
+      "hint": "Split the tail area evenly between the two sides.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18oncyv",
+      "kind": "example",
+      "front": "A test has mean 70 and standard deviation 8. What is the z-score for a score of 82?",
+      "back": "$z=1.5$. Since $\\frac{82-70}{8}=1.5$, the score is **1.5** standard deviations above the mean.",
+      "hint": "Subtract the mean first, then divide by the standard deviation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0a2uhvi",
+      "kind": "concept",
+      "front": "What does the sign of a z-score tell you?",
+      "back": "A **positive** z-score means the value is above the mean, a negative one means it is below, and $z=0$ means it equals the mean.",
+      "hint": "Look at whether the numerator is positive or negative.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mp9o0j",
+      "kind": "process",
+      "front": "How do you work backward from a z-score to find the original value?",
+      "back": "Rearrange the formula to $x=\\mu+z\\sigma$. Multiply the z-score by the standard deviation, then add the mean.",
+      "hint": "Start from the z-score formula and solve for $x$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a2683x",
+      "kind": "concept",
+      "front": "Why can z-scores compare values from different distributions when raw scores cannot?",
+      "back": "Each z-score is measured in its own **standard deviations**, so values from different tests can be placed on the same scale.",
+      "hint": "Think about what each test uses as its unit of spread.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09z0div",
+      "kind": "example",
+      "front": "Sam scored 82 on a test with mean 70 and SD 8. Pat scored 88 on a test with mean 78 and SD 10. Who did relatively better?",
+      "back": "**Sam**, with $z=1.5$, compared with $z=1.0$ for Pat.",
+      "hint": "Compare z-scores, not raw scores.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0kr9un1",
+      "kind": "mistake",
+      "front": "Is a z-score of 1.5 the same as 1.5%?",
+      "back": "No. A **z-score** counts standard deviations, not percentages or probabilities. A z of 1.5 means 1.5 standard deviations from the mean.",
+      "hint": "What unit does a z-score use?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hcd4kt",
+      "kind": "mistake",
+      "front": "Does a distribution being symmetric and bell-shaped mean it is normal?",
+      "back": "No. Not every bell-shaped or symmetric distribution is **normal**, so check the shape before using normal calculations.",
+      "hint": "Shape alone may not be enough to confirm a model.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fe81f5",
+      "kind": "concept",
+      "front": "Is a value 2.5 standard deviations above the mean unusual in a normal distribution?",
+      "back": "Yes. About 95% of values lie within 2 standard deviations, so fewer than 5% lie beyond 2, and a value at **2.5** falls in that rare outer region.",
+      "hint": "How much of the curve lies within 2 standard deviations?",
+      "sectionId": "s5"
+    }
+  ]
+}

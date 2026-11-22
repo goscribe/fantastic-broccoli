@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-2",
+  "topicCode": "5.2",
+  "topicName": "Increasing and decreasing functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:04.880Z",
+  "cards": [
+    {
+      "id": "10r68ti",
+      "kind": "concept",
+      "front": "What does the sign of the derivative tell you about a function?",
+      "back": "**Positive** $f'(x)$ means the function is increasing; **negative** $f'(x)$ means it is decreasing. Where $f'(x)=0$ it is level for an instant.",
+      "hint": "The gradient shows which way the graph heads.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mqg0el",
+      "kind": "process",
+      "front": "What are the steps to find where a function is increasing or decreasing?",
+      "back": "**Differentiate**, solve $f'(x)=0$ for the boundary values, test one value inside each stretch, then state increasing where $f'(x)>0$ and decreasing where $f'(x)<0$.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hbj9o6",
+      "kind": "concept",
+      "front": "Why must a change of direction happen at a stationary point?",
+      "back": "For smooth curves the **derivative** cannot jump from positive to negative; it must pass through zero. The stationary points split the number line into stretches, each with one sign of $f'(x)$.",
+      "hint": "Think about how the sign of the derivative can change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02fuxed",
+      "kind": "term",
+      "front": "What does it mean for a function to be increasing on an interval?",
+      "back": "**Increasing**: every larger input in the interval gives a larger output, so the graph rises as you move right.",
+      "hint": "A larger input means a point further right.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lh4r6x",
+      "kind": "term",
+      "front": "What does it mean for a function to be decreasing on an interval?",
+      "back": "**Decreasing**: every larger input in the interval gives a smaller output, so the graph falls as you move right.",
+      "hint": "Compare outputs, not inputs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cblq8f",
+      "kind": "example",
+      "front": "For $f(x)=x^3-6x^2+9x$, where is $f$ increasing?",
+      "back": "**Increasing** for $x<1$ and $x>3$. Since $f'(x)=3(x-1)(x-3)$, the derivative is positive outside the roots $x=1$ and $x=3$.",
+      "hint": "Solve $f'(x)=0$ first to find the boundaries.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d33oua",
+      "kind": "mistake",
+      "front": "A student says $f$ is decreasing because $f(x)$ is negative. What is wrong?",
+      "back": "**Mistake**: the sign of $f(x)$ does not give direction. Only the sign of $f'(x)$ does, so a function with negative outputs can still be increasing.",
+      "hint": "Which quantity shows direction: the function or its derivative?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jovymi",
+      "kind": "mistake",
+      "front": "A student tests only $x=1$ and $x=3$ to find the intervals. What goes wrong?",
+      "back": "**Boundary values** give $f'(x)=0$, which shows no direction. Test a value inside each stretch between the boundaries instead.",
+      "hint": "Where should the test values come from?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1eykhvm",
+      "kind": "mistake",
+      "front": "A student writes increasing up to 5 from a table. What is wrong?",
+      "back": "**Intervals** must use $x$-values, not $y$-values. Write increasing for $x>2$, because 5 is an output.",
+      "hint": "Which axis does an interval belong to?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1kbf6u7",
+      "kind": "concept",
+      "front": "Can a zero derivative occur without a change of direction?",
+      "back": "**Yes**: for $f(x)=x^3$, $f'(0)=0$, but $f'(x)$ is positive on both sides of $0$. So $f$ is increasing for all $x$ and the graph only flattens for an instant.",
+      "hint": "Check the sign of the derivative on each side of the zero.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07v4zny",
+      "kind": "process",
+      "front": "How do you judge increase or decrease from a table of values?",
+      "back": "**Compare** each output with the next. Growing outputs suggest an increasing function; shrinking outputs suggest a decreasing one. A table only suggests behaviour, since it lists selected inputs.",
+      "hint": "Look at the change from one row to the next.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jyii6r",
+      "kind": "example",
+      "front": "Find where $f(x)=x^3-12x$ is increasing and decreasing.",
+      "back": "**Increasing** for $x<-2$ and $x>2$; **decreasing** for $-2<x<2$. Here $f'(x)=3(x-2)(x+2)$, which is zero at $x=\\pm2$.",
+      "hint": "Factorise $f'(x)$ to find the roots.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1brxsaj",
+      "kind": "term",
+      "front": "What is a stationary point?",
+      "back": "A **stationary point** is a point on a graph where $f'(x)=0$, so the gradient is zero and the graph is level for an instant.",
+      "hint": "Think of the top of a hill.",
+      "sectionId": "s3"
+    }
+  ]
+}

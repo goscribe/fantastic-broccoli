@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "1-12",
+  "topicCode": "1.12",
+  "topicName": "Complex numbers",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:18.769Z",
+  "cards": [
+    {
+      "id": "08h18ha",
+      "kind": "term",
+      "front": "What is the imaginary unit $i$, and what is $\\sqrt{-9}$?",
+      "back": "The **imaginary unit** $i$ is defined by $i^2=-1$, so $\\sqrt{-9}=3i$. This lets negative numbers have square roots.",
+      "hint": "Square a real number: can the result ever be negative?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gw1guy",
+      "kind": "formula",
+      "front": "What is the standard form of a complex number, and what is its imaginary part?",
+      "back": "$z=x+yi$, where $x$ and $y$ are real. The **imaginary part** is $y$, not $yi$. For $3-7i$, the imaginary part is $-7$.",
+      "hint": "Which symbol is real, and which multiplies $i$?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1j8lbwj",
+      "kind": "concept",
+      "front": "Why does a negative discriminant give complex solutions to a quadratic?",
+      "back": "A negative $b^2-4ac$ has an imaginary square root, so the solutions are **complex**. When $a$, $b$ and $c$ are real, they form a conjugate pair.",
+      "hint": "Think about what $\\sqrt{\\text{negative}}$ produces.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "05oo3h5",
+      "kind": "process",
+      "front": "How do you multiply two complex numbers such as $(2+3i)(1-4i)$?",
+      "back": "**Expand** the brackets as usual, replace $i^2$ with $-1$, then collect real and imaginary parts. The result is $14-5i$.",
+      "hint": "Three steps: expand, simplify $i^2$, collect terms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1m6cmyi",
+      "kind": "mistake",
+      "front": "Why is leaving $i^2$ in a final answer wrong?",
+      "back": "$i^2$ always equals $-1$, so the answer is not in the form $x+yi$. Replace $i^2$ with $-1$, then collect terms.",
+      "hint": "What is the value of $i^2$?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gf7q1d",
+      "kind": "concept",
+      "front": "What is the complex conjugate of $z=x+yi$, and why is $zz^*$ real?",
+      "back": "$z^*=x-yi$, which changes only the sign of the imaginary part. $zz^*=x^2+y^2$, because the **imaginary parts cancel**.",
+      "hint": "Multiply $(x+yi)(x-yi)$ and look at the $i$ terms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1f3a34p",
+      "kind": "process",
+      "front": "How do you divide complex numbers, for example $\\frac{5+i}{2-i}$?",
+      "back": "**Multiply** top and bottom by the conjugate of the denominator, expand, then split into real and imaginary parts. The result is $\\frac{9}{5}+\\frac{7}{5}i$.",
+      "hint": "Which number makes the bottom real?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0d7u8cy",
+      "kind": "concept",
+      "front": "How is the complex number $x+yi$ shown on an Argand diagram?",
+      "back": "It is plotted at the point $(x,y)$, with the **real part** on the horizontal axis and the imaginary part on the vertical axis. The conjugate is a reflection in the real axis.",
+      "hint": "Compare with plotting coordinates on a grid.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0obu322",
+      "kind": "formula",
+      "front": "What is the modulus of $z=x+yi$, and what does it measure?",
+      "back": "$|z|=\\sqrt{x^2+y^2}$. It is the **distance** of $z$ from the origin on an Argand diagram, found by Pythagoras.",
+      "hint": "Treat the point as a right-angled triangle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19qk2gp",
+      "kind": "mistake",
+      "front": "Why can't you take the argument as just the inverse tangent of $\\frac{y}{x}$?",
+      "back": "Inverse tangent gives angles only between $-\\frac{\\pi}{2}$ and $\\frac{\\pi}{2}$. Sketch the point to find its **quadrant**, then adjust the angle by $\\pi$ where needed.",
+      "hint": "Which quadrant is the point in?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vyhdjh",
+      "kind": "example",
+      "front": "Find $|z|$ and $\\arg z$ for $z=-3+3i$, with $-\\pi<\\theta\\leq\\pi$.",
+      "back": "$|z|=3\\sqrt{2}\\approx4.24$. The reference angle is $\\frac{\\pi}{4}$ and the point is in the second quadrant, so $\\arg z=\\frac{3\\pi}{4}\\approx2.36$.",
+      "hint": "Plot the point first to find its quadrant.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "034qfd8",
+      "kind": "example",
+      "front": "Solve $z^2-4z+13=0$ over the complex numbers.",
+      "back": "The discriminant is $-36$, so $z=\\frac{4\\pm6i}{2}$. The solutions are $z=2+3i$ or $z=2-3i$.",
+      "hint": "Start by finding $b^2-4ac$.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "7-8",
+  "topicCode": "7.8",
+  "topicName": "Noise pollution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:38.498Z",
+  "cards": [
+    {
+      "id": "19ynt2u",
+      "kind": "term",
+      "front": "What is noise pollution?",
+      "back": "**Noise pollution** is sound that is loud or constant enough to disturb people and wildlife or harm health. Sound is unwanted when it is excessive.",
+      "hint": "Think about what makes a sound unwanted, not just how loud it is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0spcqco",
+      "kind": "concept",
+      "front": "Why does a rise of 10 dB matter so much more than it sounds?",
+      "back": "The decibel scale is **logarithmic**, so every 10 dB increase means ten times the intensity of sound.",
+      "hint": "Think about multiplying rather than adding.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04bw8cf",
+      "kind": "concept",
+      "front": "Why is hearing loss from loud noise permanent?",
+      "back": "Loud sound destroys tiny **hair cells** in the inner ear, and these cells do not regrow, so the hearing loss is permanent.",
+      "hint": "Consider which structures detect sound and whether they can repair themselves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01xqsou",
+      "kind": "example",
+      "front": "How many times more intense is a 90 dB jackhammer than a 60 dB conversation?",
+      "back": "**1,000 times** more intense. The difference is 30 dB, which is three tenfold steps: $10\\times10\\times10=10^3$.",
+      "hint": "Start by finding the difference between the two levels in dB.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pnmbdq",
+      "kind": "mistake",
+      "front": "Why is a brief extreme blast not the only hearing risk?",
+      "back": "Damage depends on both **level** and **time**. Hours of sound at about 85 dB or higher can harm hearing, not only short, very loud bursts.",
+      "hint": "Consider both loudness and how long a person is exposed over a working day.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "027y48b",
+      "kind": "concept",
+      "front": "Which sound level in the note's table can start to damage hearing over time?",
+      "back": "About **85 dB**. Louder sources such as a 110 dB concert deserve the most concern.",
+      "hint": "Look at the table of typical sound levels in the note.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12sqykt",
+      "kind": "term",
+      "front": "What is masking in animal communication?",
+      "back": "**Masking** is when louder background noise covers a wanted sound so the animal can no longer detect it.",
+      "hint": "Think about how a bird's song competes with traffic noise.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0irsq3s",
+      "kind": "concept",
+      "front": "How can animals respond when noise masks their signals?",
+      "back": "They may call louder, change where they feed, or leave noisy habitat.",
+      "hint": "Think about the choices an animal can make when it cannot hear what it needs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qjusvj",
+      "kind": "concept",
+      "front": "At which three points between a noise and a listener can control act?",
+      "back": "The **source**, the **path**, and the **receiver**. Examples are quieter machines, walls or distance, and earplugs.",
+      "hint": "Picture the journey of sound from where it starts to a person's ears.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vdec3l",
+      "kind": "mistake",
+      "front": "Why does a single thin row of trees do little to block traffic noise?",
+      "back": "It blocks very little sound. **Distance**, solid walls, and quieter engines work far better.",
+      "hint": "Compare a thin screen of leaves with a solid barrier.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sghsj6",
+      "kind": "concept",
+      "front": "Why is source control usually preferred over protecting each listener?",
+      "back": "Source control lowers noise for **everyone** nearby, including wildlife. Receiver protection helps only the person wearing it.",
+      "hint": "Count who benefits from each approach.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0eoaq87",
+      "kind": "concept",
+      "front": "What does zoning do to reduce how much noise people meet?",
+      "back": "Zoning keeps loud land uses, such as factories and airports, **away** from homes, schools, and hospitals.",
+      "hint": "Think about where noisy places sit compared with sensitive buildings.",
+      "sectionId": "s6"
+    }
+  ]
+}

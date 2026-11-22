@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "5-6",
+  "topicCode": "5.6",
+  "topicName": "Newton's second law for rotation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:46.208Z",
+  "cards": [
+    {
+      "id": "15mabbg",
+      "kind": "formula",
+      "front": "Write Newton's second law for rotation as an equation and name what each symbol means.",
+      "back": "$\\sum \\tau = I\\alpha$: **net torque** $\\sum \\tau$ (N m) equals **rotational inertia** $I$ (kg m^2) times **angular acceleration** $\\alpha$ (rad/s^2).",
+      "hint": "It has the same structure as $\\sum F = ma$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f8noi8",
+      "kind": "concept",
+      "front": "How is net torque related to angular acceleration, compared with force and acceleration?",
+      "back": "A **net torque** causes **angular acceleration**, just as a net force causes linear acceleration. Torque is the cause and $\\alpha$ is the effect.",
+      "hint": "Think of torque as the spinning version of force.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0q2y0a9",
+      "kind": "mistake",
+      "front": "Why is it wrong to use only one torque in $\\sum \\tau = I\\alpha$ when several torques act?",
+      "back": "You must **add every torque** about the axis with signs first. $\\sum \\tau$ is the net of all torques, so using one torque gives the wrong $\\alpha$.",
+      "hint": "Which torques act on the object?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ry04jx",
+      "kind": "term",
+      "front": "What is angular acceleration, and what is its unit?",
+      "back": "**Angular acceleration** $\\alpha$ is the rate at which angular velocity changes, $\\alpha = \\Delta\\omega/\\Delta t$. Its unit is rad/s^2.",
+      "hint": "It is the spinning counterpart of acceleration.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xh7wzp",
+      "kind": "process",
+      "front": "What are the steps to find angular acceleration from the torques on a rotating object?",
+      "back": "1) Find the torque from each force. 2) Add them with signs to get the **net torque**. 3) Divide by $I$ about the same axis: $\\alpha = \\sum \\tau / I$. Keep SI units.",
+      "hint": "Start with the forces, end with a division.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0puws8t",
+      "kind": "example",
+      "front": "A wheel has $I = 0.40\\ \\mathrm{kg\\,m^2}$. A rope pulls 20 N tangentially on a rim of radius 0.30 m, with no friction. Find $\\alpha$.",
+      "back": "**15 rad/s^2**. The torque is $\\tau = rF = (0.30)(20) = 6.0$ N m, so $\\alpha = 6.0/0.40 = 15$ rad/s^2.",
+      "hint": "For a tangential force, torque is radius times force.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04tzqod",
+      "kind": "example",
+      "front": "The same wheel gets 6.0 N m applied and 1.0 N m friction torque, starting from rest. Find $\\alpha$ and $\\omega$ after 2.0 s.",
+      "back": "**$\\alpha = 12.5$ rad/s^2** and **$\\omega = 25$ rad/s**. Net torque is 5.0 N m, so $\\alpha = 5.0/0.40$, then $\\omega = (12.5)(2.0)$.",
+      "hint": "Subtract the friction torque before dividing by $I$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10qrio0",
+      "kind": "concept",
+      "front": "What happens if friction torque becomes larger than the applied torque?",
+      "back": "The **net torque** reverses direction, so $\\alpha$ reverses and a spinning wheel slows down.",
+      "hint": "Only the net torque appears in the law.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13iejub",
+      "kind": "concept",
+      "front": "How does the sign of the net torque relate to whether an object speeds up or slows down?",
+      "back": "Net torque in the **direction of the spin** speeds the object up. Net torque **against the spin** slows it down. Zero net torque keeps $\\omega$ constant.",
+      "hint": "Compare the torque direction with the current spin.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ps12gw",
+      "kind": "mistake",
+      "front": "Why can mixing axes give a wrong angular acceleration?",
+      "back": "**Torque and rotational inertia must be about the same axis**. Using different axes gives a wrong value of $\\alpha = \\sum \\tau / I$.",
+      "hint": "Which point is the rotation about?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s2uu0f",
+      "kind": "example",
+      "front": "A disk has $I = 0.50\\ \\mathrm{kg\\,m^2}$ and a net torque of 12 N m. What is its angular acceleration?",
+      "back": "**24 rad/s^2**, from $\\alpha = \\sum \\tau / I = 12 / 0.50$.",
+      "hint": "Divide net torque by rotational inertia.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j6o5uv",
+      "kind": "concept",
+      "front": "Two wheels receive the same net torque, but one has a larger rotational inertia. Which has the smaller angular acceleration?",
+      "back": "The wheel with the **larger rotational inertia** has the smaller $\\alpha$, since $\\alpha = \\sum \\tau / I$.",
+      "hint": "Rotational inertia sits in the denominator.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0amau4z",
+      "kind": "concept",
+      "front": "If the rim radius doubles while the rope force stays the same, what happens to the torque?",
+      "back": "The **torque doubles**, because $\\tau = rF$. The rope's force and the radius enter the law only through the torque.",
+      "hint": "Torque is radius times force.",
+      "sectionId": "s3"
+    }
+  ]
+}

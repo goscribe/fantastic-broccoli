@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-17",
+  "topicCode": "3.17",
+  "topicName": "Vector equations of planes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:04.785Z",
+  "cards": [
+    {
+      "id": "05io9ki",
+      "kind": "concept",
+      "front": "What is the minimum information needed to fix a plane in space?",
+      "back": "A **point** on the plane and **two non-parallel** direction vectors lying in it. Moving along both directions from that point reaches every point of the plane.",
+      "hint": "Think of a sheet of card held flat in the air.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gech8x",
+      "kind": "formula",
+      "front": "What is the vector equation of a plane through a point with position vector $\\mathbf{a}$, using directions $\\mathbf{u}$ and $\\mathbf{v}$?",
+      "back": "$\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{u}+\\mu\\mathbf{v}$, where $\\lambda$ and $\\mu$ are any **real** numbers. Each pair of values gives one point of the plane.",
+      "hint": "Start at a point, then move along two directions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lcd5ro",
+      "kind": "formula",
+      "front": "What is the Cartesian equation of a plane, and where do its coefficients come from?",
+      "back": "$n_1x+n_2y+n_3z=d$, with $d=\\mathbf{a}\\cdot\\mathbf{n}$. The **coefficients** $n_1$, $n_2$, $n_3$ are the components of a normal vector $\\mathbf{n}$.",
+      "hint": "Expand the scalar product $\\mathbf{r}\\cdot\\mathbf{n}=\\mathbf{a}\\cdot\\mathbf{n}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ws0zfs",
+      "kind": "concept",
+      "front": "Why does $(\\mathbf{r}-\\mathbf{a})\\cdot\\mathbf{n}=0$ hold for every point R on a plane?",
+      "back": "The vector $\\overrightarrow{AR}=\\mathbf{r}-\\mathbf{a}$ lies in the plane, and a **normal** vector is perpendicular to every direction in the plane, so the dot product is zero.",
+      "hint": "Which vectors are perpendicular to the normal?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sh3g45",
+      "kind": "term",
+      "front": "What is a normal vector to a plane?",
+      "back": "A **non-zero** vector perpendicular to every direction in the plane. Any non-zero multiple of it is also a normal vector.",
+      "hint": "Perpendicular to what, exactly?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lt7r44",
+      "kind": "process",
+      "front": "How do you write a vector equation for the plane through three points A, B and C that do not lie on one line?",
+      "back": "Use $A$ as the fixed point. Find $\\overrightarrow{AB}=\\mathbf{b}-\\mathbf{a}$ and $\\overrightarrow{AC}=\\mathbf{c}-\\mathbf{a}$, then write $\\mathbf{r}=\\mathbf{a}+\\lambda\\overrightarrow{AB}+\\mu\\overrightarrow{AC}$.",
+      "hint": "Subtract position vectors to get two directions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wsqxn0",
+      "kind": "example",
+      "front": "Find a vector equation of the plane through $A(1,0,2)$, $B(3,1,1)$ and $C(2,4,5)$.",
+      "back": "$\\mathbf{r}=\\begin{pmatrix}1\\\\0\\\\2\\end{pmatrix}+\\lambda\\begin{pmatrix}2\\\\1\\\\-1\\end{pmatrix}+\\mu\\begin{pmatrix}1\\\\4\\\\3\\end{pmatrix}$, using $\\overrightarrow{AB}$ and $\\overrightarrow{AC}$ as the directions.",
+      "hint": "Use $A$ as the fixed point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "116ow2d",
+      "kind": "example",
+      "front": "What Cartesian equation does the plane through $(1,0,2)$ with directions $(2,1,-1)$ and $(1,4,3)$ have?",
+      "back": "$x-y+z=3$. The cross product $\\mathbf{u}\\times\\mathbf{v}=(7,-7,7)$ simplifies to the normal $(1,-1,1)$, and $d=\\mathbf{a}\\cdot\\mathbf{n}=3$.",
+      "hint": "Find a normal with the cross product, then find $d$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qad1tv",
+      "kind": "process",
+      "front": "How do you turn a Cartesian equation into vector form?",
+      "back": "**Set** two variables equal to $\\lambda$ and $\\mu$, solve for the third, then split the position vector into a fixed point plus two direction vectors.",
+      "hint": "Choose a variable with a non-zero coefficient to solve for.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rohu23",
+      "kind": "example",
+      "front": "Write the plane $x+2y-z=4$ in vector form.",
+      "back": "$\\mathbf{r}=\\begin{pmatrix}4\\\\0\\\\0\\end{pmatrix}+\\lambda\\begin{pmatrix}-2\\\\1\\\\0\\end{pmatrix}+\\mu\\begin{pmatrix}1\\\\0\\\\1\\end{pmatrix}$, with $y=\\lambda$, $z=\\mu$ and $x=4-2\\lambda+\\mu$.",
+      "hint": "Let $y$ and $z$ be the parameters.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0q967uh",
+      "kind": "mistake",
+      "front": "A student uses two parallel direction vectors for a plane. What goes wrong?",
+      "back": "Moving along either vector gives the same direction, so the points form only a **line**, not a flat surface. Three collinear points also cannot fix a plane.",
+      "hint": "What shape do the points trace out?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0q5oksp",
+      "kind": "mistake",
+      "front": "A student says a plane has only one correct vector equation. What is wrong?",
+      "back": "A plane has **many** correct vector equations, since any point on it and any two non-parallel directions in it will do. Check each direction is perpendicular to $\\mathbf{n}$.",
+      "hint": "How many choices of point and directions are there?",
+      "sectionId": "s5"
+    }
+  ]
+}

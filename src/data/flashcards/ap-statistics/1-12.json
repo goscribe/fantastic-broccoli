@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-12",
+  "topicCode": "1.12",
+  "topicName": "Problems with sampling",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:59.288Z",
+  "cards": [
+    {
+      "id": "1boeati",
+      "kind": "concept",
+      "front": "Why doesn't taking a bigger sample remove bias?",
+      "back": "**Bias** is systematic, so it pushes results the same way every time. A larger sample only reduces **sampling variability**, so a large biased sample is still wrong in the same direction.",
+      "hint": "Ask which kind of error gets smaller as n grows.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07z314u",
+      "kind": "term",
+      "front": "What is undercoverage?",
+      "back": "**Undercoverage** is bias that happens when some members of the population have no chance of being selected, usually because the list used to choose the sample leaves them out.",
+      "hint": "Think about who is missing from the sampling list.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18bl7xe",
+      "kind": "term",
+      "front": "What is nonresponse?",
+      "back": "**Nonresponse** is when a selected individual cannot be contacted or refuses to answer. If non-responders differ from responders, the results are biased, and a low response rate makes this more likely.",
+      "hint": "Who was chosen but did not take part?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cdiu72",
+      "kind": "term",
+      "front": "What is voluntary response bias?",
+      "back": "**Voluntary response bias** happens when individuals choose whether to respond. People with strong opinions are more likely to answer, so results tend to be extreme.",
+      "hint": "Who decides to take part?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kp9jxw",
+      "kind": "term",
+      "front": "What is convenience sampling, and why is it a problem?",
+      "back": "**Convenience sampling** means choosing the individuals who are easiest to reach. It leaves out people who are harder to reach, so it causes trouble similar to voluntary response bias.",
+      "hint": "Think about who gets picked first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uk02lq",
+      "kind": "example",
+      "front": "A cafeteria manager puts a comment box near the exit for food notes. What bias is present, and what is its likely effect?",
+      "back": "This is **voluntary response bias**. Students with strong feelings, very pleased or very upset, are most likely to write, so the comments probably overrepresent extreme opinions about the food.",
+      "hint": "Who chooses to write a comment?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0i8z2lm",
+      "kind": "term",
+      "front": "What is response bias?",
+      "back": "**Response bias** is a systematic pattern of inaccurate answers caused by question wording, sensitive topics, or how a question is asked.",
+      "hint": "The sample can be fine, but what goes wrong after people are chosen?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1630udj",
+      "kind": "mistake",
+      "front": "A survey asks: Don't you agree that the cafeteria food is terrible? What is wrong with this question?",
+      "back": "It is a **leading question** that invites agreement, causing response bias. Fix it by rewording neutrally, for example: How would you rate the cafeteria food?",
+      "hint": "Does the wording push people toward one answer?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0diab75",
+      "kind": "concept",
+      "front": "How do sensitive questions cause bias, and what helps?",
+      "back": "People may **understate** behaviors that others might disapprove of, which is response bias. Neutral wording, private answers, and anonymous surveys can reduce this.",
+      "hint": "Think about why someone might not answer honestly.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09ja9hr",
+      "kind": "process",
+      "front": "What steps should you follow when describing bias in a sampling problem?",
+      "back": "First, **name the type** of bias. Second, say **who is over- or underrepresented**. Third, state the **likely effect** on the result in context.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19jxi9p",
+      "kind": "concept",
+      "front": "Which problem does a larger random sample fix, and how do you fix undercoverage?",
+      "back": "A larger random sample reduces **sampling variability** only. Undercoverage is fixed by using a **sampling frame** that covers the whole population.",
+      "hint": "Check the table of problems and fixes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ew5e15",
+      "kind": "mistake",
+      "front": "A nonresponder is replaced by an easy-to-reach substitute. Does this fix nonresponse bias?",
+      "back": "No. The **substitute** may differ from the person who did not respond, so bias remains. Instead, follow up with those who did not reply.",
+      "hint": "Would the substitute be like the original person?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fs63bf",
+      "kind": "example",
+      "front": "A polling group uses a biased method and increases its sample from 500 to 5,000. Does this remove the bias?",
+      "back": "No. Bias is systematic and pushes results in the same direction. The larger sample only reduces sampling variability, so the method itself must be changed.",
+      "hint": "Which error does a larger n shrink?",
+      "sectionId": "s1"
+    }
+  ]
+}

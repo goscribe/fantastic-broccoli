@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-4",
+  "topicCode": "1.4",
+  "topicName": "One categorical variable: graphs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:45.944Z",
+  "cards": [
+    {
+      "id": "1usnvjz",
+      "kind": "concept",
+      "front": "Why should you compare relative frequencies instead of counts when two groups have different sizes?",
+      "back": "Counts grow with group size, so the bigger group looks bigger even when its shares match. **Relative frequencies** divide by each group's total, so the groups can be compared fairly.",
+      "hint": "Think about Class A with 20 students and Class B with 50 students.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17t546v",
+      "kind": "term",
+      "front": "What is the distribution of a categorical variable?",
+      "back": "The **distribution** is the list of its categories together with the frequency or relative frequency of each one.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rhajcz",
+      "kind": "formula",
+      "front": "How do you find the sector angle for a category in a pie chart?",
+      "back": "$\\mathrm{angle}=\\mathrm{relative\\,frequency}\\times360^{\\circ}$, where the **relative frequency** is the category's count divided by the total.",
+      "hint": "The sector angles must add up to a full circle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sbtff8",
+      "kind": "term",
+      "front": "What is a bar chart?",
+      "back": "A **bar chart** is a graph with one bar per category, where each bar's height shows the frequency or relative frequency.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cc326l",
+      "kind": "process",
+      "front": "What rules should you follow to draw a correct bar chart?",
+      "back": "Give every bar the **same width**, leave equal gaps, start the vertical axis at 0, use equal scale steps, and label both axes and add a title.",
+      "hint": "There are five rules that keep the bars easy to compare.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gnpg6c",
+      "kind": "example",
+      "front": "In a survey of 30 students, 12 chose dogs. What is the sector angle for dogs in a pie chart?",
+      "back": "$144^{\\circ}$, because $\\frac{12}{30}\\times360^{\\circ}=0.40\\times360^{\\circ}=144^{\\circ}$.",
+      "hint": "Find the relative frequency first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kf2g86",
+      "kind": "mistake",
+      "front": "A group's bar is taller than another group's bar, so the group must have more of that trait. Why might this be wrong?",
+      "back": "**Group size** can explain taller bars. When group sizes differ, compare shares (proportions or percentages) instead of raw heights.",
+      "hint": "Think about Class B having 50 students.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qyptbl",
+      "kind": "mistake",
+      "front": "Why is a pie chart a poor choice when the categories are similar in size?",
+      "back": "Slices of similar angle are hard to tell apart by eye. A **bar chart** puts bars on a common baseline, so their heights are easier to compare.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03mfo09",
+      "kind": "term",
+      "front": "What is a pie chart?",
+      "back": "A **pie chart** is a circle divided into **sectors**, one per category, with each sector's angle proportional to the category's relative frequency.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vwra45",
+      "kind": "example",
+      "front": "Class A has 10 dog-lovers out of 20 students, and Class B has 20 out of 50. Which class has a larger share who chose dogs?",
+      "back": "Class A, with 50% against 40% in Class B. Comparing shares, not counts, makes the comparison fair.",
+      "hint": "Divide each count by its group size.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1blhv2g",
+      "kind": "term",
+      "front": "What is a segmented bar chart?",
+      "back": "A **segmented bar chart** has one bar per group, split into segments showing each category's relative frequency. Each bar represents 100% of its group.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "106srq2",
+      "kind": "term",
+      "front": "How does a side-by-side bar chart arrange its bars?",
+      "back": "It places each group's bars **next to one another** within every category, so the groups can be compared category by category.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18vb8sa",
+      "kind": "term",
+      "front": "What is the modal category?",
+      "back": "The **modal category** is the category with the largest frequency or relative frequency.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1tg5c8o",
+      "kind": "process",
+      "front": "How should you describe a graph of a categorical distribution in words?",
+      "back": "Start with the **modal category** for each group, note where the groups differ most, and describe the largest and smallest categories using proportions in context.",
+      "hint": "Use percentages where you can.",
+      "sectionId": "s5"
+    }
+  ]
+}

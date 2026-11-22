@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "a2-1",
+  "topicCode": "A2.1",
+  "topicName": "Origins of cells",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:46.732Z",
+  "cards": [
+    {
+      "id": "0ikyc6t",
+      "kind": "term",
+      "front": "What does cell theory state?",
+      "back": "Organisms consist of one or more cells, cells are the smallest units able to carry out life processes, and **new cells** arise only from pre-existing cells through cell division. It does not explain how the first cells formed.",
+      "hint": "It has three statements.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1noaft1",
+      "kind": "concept",
+      "front": "How could engulfing a bacterium have produced a mitochondrion?",
+      "back": "An ancestral host engulfed an aerobic bacterium but did not digest it. Both partners benefited, and over many generations this **endosymbiosis** became permanent, with the bacterium becoming a mitochondrion that supplies energy by aerobic respiration.",
+      "hint": "Think about what the host did not do.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0enzdod",
+      "kind": "concept",
+      "front": "Which features suggest mitochondria and chloroplasts were once free-living bacteria?",
+      "back": "They contain their own **circular DNA** and bacterial-type ribosomes, grow and divide like bacteria, and have two surrounding membranes consistent with engulfment.",
+      "hint": "Look for features they share with bacteria.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lwwiez",
+      "kind": "concept",
+      "front": "How does a swan-neck flask support biogenesis?",
+      "back": "Boiling kills microorganisms already in the broth. Air can enter, but the curved neck traps particles carrying microorganisms, so the broth stays clear unless it reaches those particles. This supports **growth from existing microorganisms**.",
+      "hint": "Focus on what the curved neck does.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yni26w",
+      "kind": "term",
+      "front": "What is biogenesis?",
+      "back": "The production of **living cells** from pre-existing living cells.",
+      "hint": "Compare it with abiogenesis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ts3t7b",
+      "kind": "term",
+      "front": "What is abiogenesis?",
+      "back": "The proposed origin of life from **non-living matter** through natural processes.",
+      "hint": "It is the opposite of biogenesis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pyyc0g",
+      "kind": "concept",
+      "front": "What did the Miller–Urey experiment show, and what did it not show?",
+      "back": "It showed that **organic molecules**, including amino acids, can form without living cells from gases and water given an electrical discharge. It did not show how cells formed, and its gas mixture may not match early Earth.",
+      "hint": "Building blocks are not the same as cells.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1myyn03",
+      "kind": "mistake",
+      "front": "Is it valid to say that clear boiled broth rules out abiogenesis on early Earth?",
+      "back": "No. The swan-neck flask tests different conditions from early Earth, so preventing growth in boiled broth does **not rule out** abiogenesis there.",
+      "hint": "Ask which conditions the experiment actually tests.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0odw93y",
+      "kind": "term",
+      "front": "What are vesicles?",
+      "back": "Small **membrane-like compartments** that form when fatty molecules assemble in water. They are not necessarily living cells, but they offer a possible step towards cells.",
+      "hint": "Compartment, not cell.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1nr4ljo",
+      "kind": "concept",
+      "front": "Why might RNA have existed before DNA and proteins took their present roles?",
+      "back": "RNA can **store genetic information**, and some RNA molecules act as catalysts, including on RNA. This could let early systems copy information before DNA and proteins took over.",
+      "hint": "Think about two properties of RNA.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08qu1y2",
+      "kind": "term",
+      "front": "What is the last universal common ancestor (LUCA)?",
+      "back": "The **ancestral population** from which all organisms alive today descended. It was not the first living cell, and its date is uncertain, with estimates placing it billions of years ago.",
+      "hint": "An ancestor, not the first cell.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ipeipc",
+      "kind": "process",
+      "front": "What are the stages by which endosymbiosis produced mitochondria and chloroplasts?",
+      "back": "1) A host cell engulfs a bacterium without digesting it. 2) Both partners benefit and the bacterium persists inside. 3) Over many generations it becomes a permanent **organelle**: a mitochondrion first, and in some later lineages a chloroplast.",
+      "hint": "Work through three stages in order.",
+      "sectionId": "s3"
+    }
+  ]
+}

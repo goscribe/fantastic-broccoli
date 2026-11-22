@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a3-2",
+  "topicCode": "A3.2",
+  "topicName": "Database design",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:58.356Z",
+  "cards": [
+    {
+      "id": "011twad",
+      "kind": "concept",
+      "front": "Why does normalisation matter for a database table?",
+      "back": "**Normalisation** reduces repeated data so each fact is stored in one place. Without it, changing one fact means editing many rows, and rows can become inconsistent.",
+      "hint": "Think about what happens when the same fact is repeated.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ed75ea",
+      "kind": "concept",
+      "front": "How does a foreign key link two tables?",
+      "back": "A **foreign key** is a field in one table that holds the primary key of another table. Matching values join the records. In a one-to-many link it sits on the many side.",
+      "hint": "Which table's field points at the other table's key?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08zhnz7",
+      "kind": "concept",
+      "front": "How is a many-to-many relationship stored in a relational database?",
+      "back": "Using a **linking table** that sits between the two tables and holds a foreign key to each. This makes two one-to-many relationships.",
+      "hint": "A database cannot store many-to-many directly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ctm82a",
+      "kind": "term",
+      "front": "What is an entity in an ER diagram?",
+      "back": "An **entity** is a person, object or event that the database stores data about, such as a book or a member. It usually becomes a table.",
+      "hint": "Think of a book or a member.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mna573",
+      "kind": "process",
+      "front": "What are the steps for creating an ER diagram?",
+      "back": "1 List the entities from the requirements. 2 List each entity's attributes. 3 Choose a primary key for each entity. 4 Decide how the entities are related. 5 Draw each entity and show every relationship.",
+      "hint": "Start with the requirements.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tzi5zm",
+      "kind": "term",
+      "front": "What must be true for a table to be in first normal form?",
+      "back": "Every field holds **one value**, there are no repeating groups of columns, and each record is unique.",
+      "hint": "Think about single values and repeated columns.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1phjq0a",
+      "kind": "term",
+      "front": "What is a composite key and when is it needed?",
+      "back": "A **composite key** is a primary key made of two or more fields that together identify each record. It is needed when no single field is unique, such as an OrderID repeated across item rows.",
+      "hint": "Consider rows that share an order number.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18vroq5",
+      "kind": "example",
+      "front": "Convert order 7 for Dev with items 'pen, ruler' into 1NF. What rows result and what is the key?",
+      "back": "Two rows: (7, Dev, pen) and (7, Dev, ruler). The **composite key** is OrderID with Item, because OrderID alone is no longer unique.",
+      "hint": "Give each item its own row.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0n3rymz",
+      "kind": "mistake",
+      "front": "A student stores 'pen, ruler' in one field and says the table is in 1NF. Why is this wrong?",
+      "back": "A field holding two values breaks the **single value** rule of 1NF. Give each value its own row instead.",
+      "hint": "Count the values in the field.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qhywmh",
+      "kind": "term",
+      "front": "What is a partial dependency?",
+      "back": "A **partial dependency** is a non-key field that depends on only part of a composite key rather than on the whole key.",
+      "hint": "Check which key fields a field actually needs.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qlf6t7",
+      "kind": "concept",
+      "front": "What makes a table second normal form?",
+      "back": "A table is in **2NF** when it is in 1NF and has no partial dependencies. The fix is to move the offending field into its own table.",
+      "hint": "Build on the 1NF rules.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00vq6gc",
+      "kind": "example",
+      "front": "Convert OrderLine(OrderID, ProductID, ProductName, Quantity) to 2NF. Which field moves and where does it go?",
+      "back": "**ProductName** moves to a new table Product(ProductID, ProductName). OrderLine(OrderID, ProductID, Quantity) stays, with ProductID as a foreign key.",
+      "hint": "Which field depends only on ProductID?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0n4v13m",
+      "kind": "mistake",
+      "front": "A student puts the foreign key in the table on the 'one' side of a one-to-many link. Why is this wrong?",
+      "back": "The foreign key belongs on the **many** side, where each record can point to one record on the 'one' side.",
+      "hint": "Think about which side holds many records.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0rvnrwu",
+      "kind": "process",
+      "front": "What are the steps to design a relational database from requirements?",
+      "back": "List the entities, draw the ER diagram, make a table per entity with a primary key, add foreign keys on the many side, normalise each table to 2NF, then choose a data type for every field.",
+      "hint": "Work from the plan to the tables.",
+      "sectionId": "s6"
+    }
+  ]
+}

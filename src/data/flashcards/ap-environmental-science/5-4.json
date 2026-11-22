@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-4",
+  "topicCode": "5.4",
+  "topicName": "Impacts of agricultural practices",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:52.317Z",
+  "cards": [
+    {
+      "id": "0y22kq8",
+      "kind": "process",
+      "front": "What are the steps by which extra fertilizer in a lake leads to low dissolved oxygen?",
+      "back": "Nutrients from **runoff** fuel dense algal blooms. The algae die, bacteria decompose them, and the decomposition uses up dissolved oxygen, so fish can suffocate. This chain is **eutrophication**.",
+      "hint": "Start with where the nutrients come from and follow them into the water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05sy10j",
+      "kind": "concept",
+      "front": "Why do pesticide-resistant pest populations appear after repeated spraying?",
+      "back": "A few pests survive a spray because of their genes. They reproduce and pass the trait on, so over time most of the population is **resistant**.",
+      "hint": "Think about which individuals survive and what happens to their offspring.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19i88h0",
+      "kind": "concept",
+      "front": "How does tillage lead to soil erosion?",
+      "back": "Tillage loosens the soil and leaves it **bare**, with no roots or plant cover to hold it. Rain or wind then carries the loose topsoil away faster than new soil forms.",
+      "hint": "Compare tilled ground with ground covered by plants.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1x4pli7",
+      "kind": "term",
+      "front": "What is monoculture?",
+      "back": "**Monoculture** is growing a single crop species or variety over a large area. It offers little habitat for wildlife and often needs more added chemicals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mmylyt",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume a pesticide only harms the pest it targets?",
+      "back": "Many pesticides also harm **non-target** organisms such as pollinators, beneficial insects, birds, and aquatic life. The correct view is that pesticides can damage the wider ecosystem.",
+      "hint": "Think about what else lives in and around the sprayed field.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ybx0fx",
+      "kind": "term",
+      "front": "What is biomagnification?",
+      "back": "**Biomagnification** is the rise in concentration of a persistent chemical at each higher step of a food chain. Predators such as birds of prey may carry the highest amounts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xlf608",
+      "kind": "concept",
+      "front": "Why does heavy machinery reduce how much water soaks into farmland?",
+      "back": "Heavy machines press soil particles together in **compaction**. This closes pore spaces, so water soaks in more slowly, more runs off, and roots struggle to grow.",
+      "hint": "Consider what the spaces between soil particles normally do for water.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fls85r",
+      "kind": "term",
+      "front": "What is salinization?",
+      "back": "**Salinization** is the buildup of salts in soil, often when irrigation water evaporates and leaves dissolved salts behind. Over years it can make soil too salty for most crops.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0x9dhyv",
+      "kind": "concept",
+      "front": "Why does growing the same crop year after year wear out soil?",
+      "back": "It drains specific **nutrients** from the soil. Without rotation or added organic matter, fertility falls, so farmers add more fertilizer, which feeds the runoff problem.",
+      "hint": "Consider what a single crop takes from the soil each season.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zco3lk",
+      "kind": "concept",
+      "front": "How do cover crops and reduced tillage help protect nearby water?",
+      "back": "They keep the soil **covered**, which lowers erosion and many of the related risks. Protected soil also reduces the sediment and nutrients that reach streams and lakes.",
+      "hint": "Think about what happens to bare soil during heavy rain.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gkrzc5",
+      "kind": "term",
+      "front": "What is soil degradation?",
+      "back": "**Soil degradation** is the decline in soil quality, such as losses of fertility and structure, that reduces its ability to support plant growth.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kdbnke",
+      "kind": "term",
+      "front": "What is runoff?",
+      "back": "**Runoff** is water that flows over the land surface into streams and lakes instead of soaking into the ground. It can carry fertilizer nutrients with it.",
+      "sectionId": "s2"
+    }
+  ]
+}

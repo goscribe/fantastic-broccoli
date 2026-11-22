@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "8-9",
+  "topicCode": "8.9",
+  "topicName": "Henderson-Hasselbalch equation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:18.259Z",
+  "cards": [
+    {
+      "id": "1ra0os6",
+      "kind": "formula",
+      "front": "What is the Henderson–Hasselbalch equation for a buffer, and what does each symbol mean?",
+      "back": "$\\text{pH}=\\text{p}K_a+\\text{log}\\frac{[A^-]}{[HA]}$, where **pKa** is the acid's pKa and the ratio uses equilibrium concentrations of conjugate base A⁻ and weak acid HA.",
+      "hint": "Think about which species goes on top of the ratio.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0n936df",
+      "kind": "concept",
+      "front": "What pH does a buffer have when its acid and conjugate base concentrations are equal?",
+      "back": "**pH equals pKa**. The base-to-acid ratio is one, and the logarithm of one is zero.",
+      "hint": "What is the logarithm of one?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1b5t5sn",
+      "kind": "concept",
+      "front": "What does the base-to-acid ratio tell you about a buffer's pH compared with its pKa?",
+      "back": "If A⁻ exceeds HA, pH is above pKa; if HA exceeds A⁻, pH is below pKa. A **tenfold** change in the ratio changes pH by one unit.",
+      "hint": "Consider the sign of the logarithm.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xocg0h",
+      "kind": "formula",
+      "front": "How do you find the A⁻:HA composition ratio from a target pH and pKa?",
+      "back": "$\\frac{[A^-]}{[HA]}=10^{\\text{pH}-\\text{p}K_a}$. It describes the two forms present together, not either substance alone.",
+      "hint": "Rearrange the Henderson–Hasselbalch equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1thrgoq",
+      "kind": "mistake",
+      "front": "Why is it wrong to reverse the ratio inside the Henderson–Hasselbalch logarithm?",
+      "back": "**Reversing the ratio** is wrong. The conjugate base A⁻ belongs in the numerator, so the term must be log([A⁻]/[HA]).",
+      "hint": "Where does the conjugate base go?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yc03gc",
+      "kind": "term",
+      "front": "What is a buffer reaction?",
+      "back": "A **buffer reaction** consumes added strong acid or base by converting one member of a conjugate pair into the other.",
+      "hint": "Which species does strong acid consume?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1y78r64",
+      "kind": "process",
+      "front": "What are the steps to find buffer pH after adding a strong acid or base?",
+      "back": "1) Write the reaction that consumes HA or A⁻. 2) Find the **remaining moles** of HA and A⁻. 3) Substitute their ratio into the Henderson–Hasselbalch equation.",
+      "hint": "Start with the reaction, not the equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17xv7y0",
+      "kind": "example",
+      "front": "A buffer has 0.100 mol HA and 0.150 mol A⁻ with pKa 4.76. After adding 0.020 mol HCl, what is the pH?",
+      "back": "**4.79**. HCl converts 0.020 mol A⁻ to HA, leaving 0.120 mol HA and 0.130 mol A⁻, so pH = 4.76 + log(0.130/0.120).",
+      "hint": "Update both amounts before taking the ratio.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ktw5et",
+      "kind": "example",
+      "front": "A buffer has 0.080 mol HA and 0.050 mol A⁻ with pKa 4.80. After adding 0.010 mol NaOH, what is the pH?",
+      "back": "**4.73**. OH⁻ converts 0.010 mol HA to A⁻, leaving 0.070 mol HA and 0.060 mol A⁻, so pH = 4.80 + log(0.060/0.070).",
+      "hint": "Strong base consumes the weak acid.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0os70s6",
+      "kind": "concept",
+      "front": "What must be true about a conjugate pair for the buffer equation to work well?",
+      "back": "Both members must remain present at **appreciable** concentrations together. The shortcut assumes dissociation changes the concentrations very little, which is usually reasonable in that case.",
+      "hint": "What happens if one member is used up?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14duz0h",
+      "kind": "mistake",
+      "front": "Why can't you use the buffer equation when added strong base has used up all the HA?",
+      "back": "The ratio would divide by zero, and the two-component **buffer** no longer exists. You cannot take the logarithm of a zero amount.",
+      "hint": "Check the remaining amounts first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vioy0e",
+      "kind": "process",
+      "front": "What check should you make before calculating buffer pH, and what does it catch?",
+      "back": "Do a **stoichiometric check** of reacting moles. It catches impossible negative amounts. If both components remain, more A⁻ should give a higher pH than more HA.",
+      "hint": "Look for an impossible negative amount.",
+      "sectionId": "s4"
+    }
+  ]
+}

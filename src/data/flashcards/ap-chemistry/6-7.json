@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "6-7",
+  "topicCode": "6.7",
+  "topicName": "Bond enthalpies",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:53.475Z",
+  "cards": [
+    {
+      "id": "17l4ai0",
+      "kind": "term",
+      "front": "What is bond enthalpy?",
+      "back": "**Bond enthalpy** is the energy required to break one mole of a specified bond in gaseous molecules. Stronger bonds generally need more energy to break.",
+      "hint": "Think about breaking a bond, not forming one.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rcpyw9",
+      "kind": "concept",
+      "front": "Why does breaking a bond need energy while forming a bond releases energy?",
+      "back": "Breaking a bond needs an **energy input** to overcome the attraction between atoms. Forming a bond lowers potential energy, and that energy is released to the surroundings.",
+      "hint": "Consider the attraction between bonded atoms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0urh6ga",
+      "kind": "formula",
+      "front": "How do you estimate reaction enthalpy from bond enthalpies for gaseous species?",
+      "back": "$\\Delta H\\approx\\sum(\\text{bonds broken})-\\sum(\\text{bonds formed})$. Add the energies to break reactant bonds, then subtract the energies released when product bonds form.",
+      "hint": "Broken energy comes first, then subtract formed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03rf2b0",
+      "kind": "mistake",
+      "front": "Common error: breaking a bond releases energy, so the bond-breaking step is exothermic. True or false?",
+      "back": "**False**. Breaking a bond absorbs energy. Energy is released when a bond forms.",
+      "hint": "Which way does energy flow when bonded atoms separate?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19yjl2n",
+      "kind": "process",
+      "front": "What are the steps to estimate reaction enthalpy using bond enthalpies?",
+      "back": "1) Count the bonds broken in the reactants using the balanced equation. 2) Add their bond enthalpies. 3) Count the bonds formed in the products and add their values. 4) Subtract the formed total from the broken total.",
+      "hint": "Start with the balanced equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0knmkw1",
+      "kind": "concept",
+      "front": "Why does the coefficient in a balanced equation matter for bond enthalpy calculations?",
+      "back": "The **coefficient** multiplies the number of bonds. In H2 + Cl2 to 2HCl, the 2 doubles the H–Cl bonds formed, so two H–Cl bonds are counted.",
+      "hint": "Count every bond in every molecule.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vyut9g",
+      "kind": "example",
+      "front": "Estimate the enthalpy change for H2(g) + Cl2(g) to 2HCl(g), using H–H 436, Cl–Cl 243 and H–Cl 431 kJ mol⁻¹.",
+      "back": "**-183 kJ mol⁻¹**. Bonds broken: 436 + 243 = 679. Bonds formed: 2(431) = 862. Then 679 - 862 = -183.",
+      "hint": "Compare the broken total with the formed total.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rz8tse",
+      "kind": "term",
+      "front": "What is an average bond enthalpy?",
+      "back": "An **average bond enthalpy** is the mean bond-breaking enthalpy for one bond type across different gaseous molecules. It is useful for estimates but rarely exact.",
+      "hint": "Same bond type, different molecules.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bbo1sw",
+      "kind": "mistake",
+      "front": "Why is a bond enthalpy estimate usually not exact?",
+      "back": "Bond strength varies between molecules, so an **average bond enthalpy** may differ from the actual bonds in the reactants and products.",
+      "hint": "Is a C–H bond always the same strength?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yzpt29",
+      "kind": "concept",
+      "front": "What does a negative estimated reaction enthalpy tell you?",
+      "back": "**Bond formation** releases more energy than bond breaking absorbs, so the reaction is exothermic overall.",
+      "hint": "Compare energy released with energy absorbed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0aosrje",
+      "kind": "term",
+      "front": "What is reaction enthalpy?",
+      "back": "**Reaction enthalpy** is the enthalpy change for a reaction as represented by its balanced equation.",
+      "hint": "It depends on the balanced equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hjl08w",
+      "kind": "mistake",
+      "front": "Should bonds that do not change be included in the calculation?",
+      "back": "No. Unchanged bonds appear on both sides and **cancel**. Count every bond that actually changes, including repeats across multiple molecules.",
+      "hint": "Which bonds actually break or form?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1592rdf",
+      "kind": "concept",
+      "front": "Why is the bond enthalpy method applied most directly to gaseous substances?",
+      "back": "Bond enthalpies describe bonds in **gaseous** substances, so the method fits gaseous reactants and products most directly.",
+      "hint": "Think about the physical state.",
+      "sectionId": "s1"
+    }
+  ]
+}

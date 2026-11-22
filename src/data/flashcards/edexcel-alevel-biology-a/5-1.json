@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-1",
+  "topicCode": "5.1",
+  "topicName": "Ecosystems, communities and populations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:55.447Z",
+  "cards": [
+    {
+      "id": "05xedii",
+      "kind": "term",
+      "front": "What is a population?",
+      "back": "A **population** is all the individuals of one species living in the same area. Its members compete for the same resources and can breed with each other.",
+      "hint": "Consider both the species and the place.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1m6mwn8",
+      "kind": "term",
+      "front": "What is a community?",
+      "back": "A **community** is all the populations of different species living and interacting in one area. It contains only living things.",
+      "hint": "Compare how many species are involved with a population.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14yn60p",
+      "kind": "term",
+      "front": "What is an ecosystem?",
+      "back": "An **ecosystem** is all the organisms in an area together with their non-living surroundings and the interactions between them.",
+      "hint": "Start from the community and add the physical environment.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bpw39i",
+      "kind": "mistake",
+      "front": "Why is it wrong to include water, mud and light in a community?",
+      "back": "They are non-living, so they belong to the ecosystem, not the community. A community contains only living things.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0n50lsg",
+      "kind": "formula",
+      "front": "How is the change in size of a population calculated?",
+      "back": "Change in size $=(\\mathrm{births}+\\mathrm{immigration})-(\\mathrm{deaths}+\\mathrm{emigration})$. A positive result means the population grows.",
+      "hint": "Which processes add individuals and which remove them?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1532jgf",
+      "kind": "example",
+      "front": "A population of 200 voles has 30 births, 10 deaths, 5 immigrants and 15 emigrants in a year. What is the new size?",
+      "back": "**210 voles**. Change $=(30+5)-(10+15)=+10$, so $200+10=210$.",
+      "hint": "Work out the change first, then add it to the starting number.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1b1eaj4",
+      "kind": "process",
+      "front": "Which four processes change the number of individuals in a population?",
+      "back": "**Births** and **deaths** change numbers within the population. **Immigration** adds individuals that move in, and **emigration** removes individuals that move out.",
+      "hint": "Two add individuals and two remove them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07rima2",
+      "kind": "mistake",
+      "front": "Why can a population shrink even when no individuals die?",
+      "back": "**Emigration** removes individuals who move out, so numbers can fall through movement alone. Movement counts as well as births and deaths.",
+      "hint": "Think about movement, not just births and deaths.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mchqh1",
+      "kind": "term",
+      "front": "What is the carrying capacity of a population?",
+      "back": "The **carrying capacity** is the largest population size an environment can support over a long period. Population size levels off near this value.",
+      "hint": "Think about what the environment can supply over time.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0fzvzty",
+      "kind": "concept",
+      "front": "Why can births not stay higher than deaths for ever?",
+      "back": "Food, space, light and water are in limited supply. As numbers grow, competition rises, so deaths increase or births fall.",
+      "hint": "Think about which resources the environment can only provide in limited amounts.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0qehdda",
+      "kind": "concept",
+      "front": "How do inherited characteristics change a population over generations?",
+      "back": "Individuals with inherited features that suit their environment reproduce more, so **allele frequencies** change across generations. This change is evolution.",
+      "hint": "Think about which individuals leave the most offspring.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0rvsbk9",
+      "kind": "term",
+      "front": "What is a species?",
+      "back": "A **species** is a group of organisms recognised as distinct from other groups by evidence such as reproduction or shared features.",
+      "hint": "Consider how biologists tell two kinds of organism apart.",
+      "sectionId": "s2"
+    }
+  ]
+}

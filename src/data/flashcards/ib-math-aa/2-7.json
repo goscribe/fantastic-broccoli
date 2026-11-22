@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-7",
+  "topicCode": "2.7",
+  "topicName": "Quadratic equations and inequalities",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:07.359Z",
+  "cards": [
+    {
+      "id": "1rh8xj6",
+      "kind": "concept",
+      "front": "Why does factorising solve a quadratic equation?",
+      "back": "If a product is **zero**, one factor must be zero, so $(x-p)(x-q)=0$ gives $x=p$ or $x=q$. Rearrange so one side is zero first.",
+      "hint": "Think about what a zero product tells you.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06v9vv9",
+      "kind": "formula",
+      "front": "What is the quadratic formula for solving $ax^2+bx+c=0$?",
+      "back": "$x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}$. It solves **any** quadratic, even ones that do not factorise, and the $\\pm$ gives two answers.",
+      "hint": "Make sure the equation has one side equal to zero first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rd6ql8",
+      "kind": "concept",
+      "front": "What does the discriminant $\\Delta=b^2-4ac$ tell you about the roots?",
+      "back": "Its **sign** decides the roots. Positive gives two distinct real roots, zero gives one repeated root, and negative gives no real roots.",
+      "hint": "Look at the expression under the square root.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17mjw9l",
+      "kind": "term",
+      "front": "What is a root of a function?",
+      "back": "A **root** is an input $c$ for which $f(c)=0$. On a graph, it is where the curve meets the $x$-axis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ips3oa",
+      "kind": "example",
+      "front": "Solve $x^2+4x-3=0$ using the quadratic formula. Give exact answers.",
+      "back": "$x=-2\\pm\\sqrt{7}$. Here $a=1$, $b=4$, $c=-3$, and $\\sqrt{28}=2\\sqrt{7}$.",
+      "hint": "Keep the sign of $c$ when you substitute.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05mvt2g",
+      "kind": "example",
+      "front": "Find the values of $k$ for which $x^2+kx+9=0$ has one repeated root.",
+      "back": "$k=6$ or $k=-6$. Set $k^2-4(1)(9)=0$, so $k^2=36$.",
+      "hint": "A repeated root means $\\Delta=0$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fxncqn",
+      "kind": "mistake",
+      "front": "What goes wrong with the quadratic formula when $b$ is negative?",
+      "back": "Students lose the sign of $-b$. When $b$ is negative, $-b$ is **positive**, so write it carefully in the first substitution.",
+      "hint": "Check the sign of $-b$ before simplifying.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07dkpnr",
+      "kind": "formula",
+      "front": "Where is the midpoint of the two roots of $ax^2+bx+c=0$?",
+      "back": "At $x=-\\frac{b}{2a}$, the vertical line of symmetry through the turning point of the parabola.",
+      "hint": "Use the coefficients $a$ and $b$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16nov3w",
+      "kind": "term",
+      "front": "What is a quadratic inequality?",
+      "back": "A **quadratic inequality** compares a quadratic expression with zero using $<$, $>$, $\\le$ or $\\ge$. Its solution is a range of inputs.",
+      "hint": "Does the answer give single values or a range?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ijmb96",
+      "kind": "process",
+      "front": "How do you solve a quadratic inequality using the graph?",
+      "back": "1) Find the roots of the related equation. 2) Sketch the parabola, even roughly. 3) Read where the curve is above or below the $x$-axis. Strict inequalities exclude the roots.",
+      "hint": "Start with the roots.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1k20h8r",
+      "kind": "mistake",
+      "front": "Why is the solution to $x^2-x-6>0$ not written as $3<x<-2$?",
+      "back": "The region outside the roots is **not** one interval. Write $x<-2$ or $x>3$.",
+      "hint": "Which region is the curve above the axis?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "197bbpb",
+      "kind": "mistake",
+      "front": "What is the difference between $c$ in $ax^2+bx+c$ and $c$ in the definition of a root?",
+      "back": "In $ax^2+bx+c$, $c$ is the **constant term**. In the definition of a root, $c$ is an **input**. Do not mix them up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06d29wc",
+      "kind": "example",
+      "front": "Solve $x^2-x-6<0$.",
+      "back": "$-2<x<3$. Factorising gives $(x-3)(x+2)=0$. The upward parabola is below the axis between the roots, and the roots are not included.",
+      "hint": "Sketch the parabola first.",
+      "sectionId": "s5"
+    }
+  ]
+}

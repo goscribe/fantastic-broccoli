@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "2-10",
+  "topicCode": "2.10",
+  "topicName": "Binomial distribution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:09.800Z",
+  "cards": [
+    {
+      "id": "1elv9zv",
+      "kind": "concept",
+      "front": "What four conditions must a situation meet to be a binomial setting?",
+      "back": "**BINS**: Binary (two outcomes per trial), Independent trials, Number of trials fixed in advance, and Same success probability for every trial.",
+      "hint": "Each letter of the word stands for one condition.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hjfzh6",
+      "kind": "formula",
+      "front": "How do you calculate P(X = x) for a binomial random variable with n trials and success probability p?",
+      "back": "$P(X=x)=\\binom{n}{x}p^x(1-p)^{n-x}$, where $\\binom{n}{x}$ counts the **arrangements** and the powers give the probability of one arrangement.",
+      "hint": "Count the arrangements, then multiply by the success and failure factors.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kd3h41",
+      "kind": "formula",
+      "front": "What are the mean and standard deviation of a binomial random variable with n trials and success probability p?",
+      "back": "$\\mu_X=np$ and $\\sigma_X=\\sqrt{np(1-p)}$. The **mean** grows in direct proportion to n, while the standard deviation grows with the square root of n.",
+      "hint": "Both use n and p; the spread also uses 1 minus p.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k1tqxf",
+      "kind": "term",
+      "front": "What is a binomial random variable?",
+      "back": "The **count of successes** X in a binomial setting with n trials and success probability p.",
+      "hint": "Think about what gets counted, not the outcomes themselves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mupscq",
+      "kind": "mistake",
+      "front": "Why is drawing cards without replacement not a binomial setting?",
+      "back": "It breaks **independence** and the constant success probability, because each draw changes what remains in the deck. Counting trials until the first success also breaks the fixed number of trials.",
+      "hint": "Ask whether the chance of a red card changes from draw to draw.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cgo3fg",
+      "kind": "concept",
+      "front": "When can sampling without replacement still be treated as binomial?",
+      "back": "When the **sample is less than 10%** of the population, so the dependence between trials is small enough to ignore.",
+      "hint": "Compare the sample size with the population size.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bsz8bz",
+      "kind": "term",
+      "front": "What is the binomial coefficient, and what does it count?",
+      "back": "$\\binom{n}{x}=\\frac{n!}{x!(n-x)!}$ is the **number of ways** to choose which x of n trials are successes.",
+      "hint": "Think about choosing which trials are the successes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kzcd0c",
+      "kind": "example",
+      "front": "A student guesses on 5 questions, each with success probability 0.25. What is P(X = 2)?",
+      "back": "$P(X=2)=\\binom{5}{2}(0.25)^2(0.75)^3=10\\times0.0625\\times0.421875\\approx0.264$.",
+      "hint": "Count the arrangements first, then evaluate the powers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1r4ld0c",
+      "kind": "process",
+      "front": "How do you find P(X ≤ 2) for a binomial random variable?",
+      "back": "Add **P(X=0), P(X=1), and P(X=2)**, or use the calculator command binomcdf(n, p, 2), which gives P(X ≤ 2) directly.",
+      "hint": "Cumulative means at most, so include every value up to the limit.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k5aqve",
+      "kind": "example",
+      "front": "Same guessing setup: 5 questions, success probability 0.25. What is P(X ≥ 1)?",
+      "back": "Use the **complement**: $P(X\\ge1)=1-P(X=0)=1-0.2373\\approx0.763$.",
+      "hint": "Everything except zero successes counts as at least one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wn773x",
+      "kind": "example",
+      "front": "Same guessing setup: 5 questions, success probability 0.25. What are the mean and standard deviation of the number correct?",
+      "back": "$\\mu_X=1.25$ correct answers and $\\sigma_X=\\sqrt{5(0.25)(0.75)}\\approx0.968$ correct answers.",
+      "hint": "Use np for the mean and the square root formula for the spread.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0otax8j",
+      "kind": "concept",
+      "front": "How do you interpret P(X = 2) ≈ 0.264 in context?",
+      "back": "In many sets of 5 guesses, about **26.4%** would have exactly 2 correct answers. The probability describes a long-run share of sets, not one set.",
+      "hint": "Describe what happens across many repetitions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wqz07y",
+      "kind": "mistake",
+      "front": "Does a mean of 1.25 correct answers mean a student gets exactly 1.25 right on a quiz?",
+      "back": "**No**. The mean is a long-run average over many quizzes. A single quiz can only score a whole number of correct answers.",
+      "hint": "Think about what an average over many quizzes describes.",
+      "sectionId": "s5"
+    }
+  ]
+}

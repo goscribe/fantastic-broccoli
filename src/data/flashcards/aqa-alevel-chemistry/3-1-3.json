@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-1-3",
+  "topicCode": "3.1.3",
+  "topicName": "Bonding",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:55.009Z",
+  "cards": [
+    {
+      "id": "1t63zh5",
+      "kind": "term",
+      "front": "What is ionic bonding?",
+      "back": "**Ionic bonding** is the electrostatic attraction between oppositely charged ions, which packs them into a giant lattice.",
+      "hint": "Think about what happens to the electrons when sodium meets chlorine.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0m3xaq4",
+      "kind": "concept",
+      "front": "How does a covalent bond hold two atoms together?",
+      "back": "Both nuclei attract the **shared pair of electrons** between them, and this attraction holds the atoms together.",
+      "hint": "Consider what sits between the two nuclei.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1p3ajdr",
+      "kind": "concept",
+      "front": "Why do electron pairs around a central atom settle into fixed shapes?",
+      "back": "They **repel each other** and take up positions of minimum repulsion, pushing as far apart as possible.",
+      "hint": "Think about what electron pairs do to each other.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1npatoq",
+      "kind": "concept",
+      "front": "Why does magnesium melt at a higher temperature than sodium?",
+      "back": "Magnesium gives **two electrons** per atom instead of one, and its ion is smaller, so the attraction to the delocalised electrons is stronger.",
+      "hint": "Compare the number of electrons each atom gives up and the size of the ion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lxmjm4",
+      "kind": "term",
+      "front": "What does delocalised mean for electrons in a metal?",
+      "back": "**Free to move** through the whole structure, not fixed to any one atom or bond.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "008ey7e",
+      "kind": "term",
+      "front": "What is electronegativity?",
+      "back": "A measure of an atom's **ability to attract** the shared electrons in a covalent bond. It is highest for fluorine.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0t55l36",
+      "kind": "concept",
+      "front": "Which atom in a polar bond gains the partial negative charge?",
+      "back": "The **more electronegative** atom, because it pulls the shared pair closer to itself.",
+      "hint": "Think about which atom pulls harder on the shared pair.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "04n4ffg",
+      "kind": "mistake",
+      "front": "Why is carbon dioxide non-polar even though its bonds are polar?",
+      "back": "Its bond polarities **cancel out** because the molecule is linear, so the molecule as a whole is not polar.",
+      "hint": "Consider whether the bond pulls point the same way overall.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ilpwvw",
+      "kind": "example",
+      "front": "What are the shape and bond angle of a water molecule?",
+      "back": "**Bent**, with a bond angle of $104.5^{\\circ}$, from two bonding pairs and two lone pairs around oxygen.",
+      "hint": "Count the bonding pairs and lone pairs around the central oxygen first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t0w9ha",
+      "kind": "mistake",
+      "front": "Why is the bond angle in water smaller than $109.5^{\\circ}$?",
+      "back": "**Lone pairs** repel more strongly than bonding pairs, so they push the bonding pairs closer together.",
+      "hint": "Compare the repulsion from the two types of electron pair.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gj08dd",
+      "kind": "process",
+      "front": "What steps should you follow when explaining a molecular shape?",
+      "back": "First state the number of **bonding pairs** and **lone pairs**, then say the pairs **repel** to give minimum repulsion.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ysk99p",
+      "kind": "concept",
+      "front": "Why does solid sodium chloride not conduct electricity?",
+      "back": "Its **ions are fixed** in the lattice, so no charge carriers can move. Molten or dissolved, the **mobile ions** can carry charge.",
+      "hint": "Think about whether the charge carriers are free to move.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0zomr56",
+      "kind": "concept",
+      "front": "Why does methane have a low melting point?",
+      "back": "Only **weak intermolecular forces** between molecules are overcome. The covalent bonds inside each molecule stay intact.",
+      "hint": "Compare what is broken on melting with the bonds inside each molecule.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "13gie74",
+      "kind": "concept",
+      "front": "Why does diamond have a very high melting point?",
+      "back": "Melting means breaking many **strong covalent bonds** throughout the giant structure, which needs a great deal of energy.",
+      "hint": "Count how many bonds must break, not just one per molecule.",
+      "sectionId": "s6"
+    }
+  ]
+}

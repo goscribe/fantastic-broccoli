@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "15-1",
+  "topicCode": "15.1",
+  "topicName": "Quantum theory and wave-particle duality",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:41.411Z",
+  "cards": [
+    {
+      "id": "0j2i148",
+      "kind": "concept",
+      "front": "Why is light described as both a wave and a particle?",
+      "back": "Light is both: it shows **wave behavior** in interference and diffraction, and **particle behavior** when it exchanges energy with matter as photons. Which side appears depends on the experiment.",
+      "hint": "Think about which experiment makes fringes and which one ejects electrons.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dopyzu",
+      "kind": "formula",
+      "front": "What does the photon energy equation $E=hf$ mean, and what units does $E$ use?",
+      "back": "Photon energy $E$ equals **Planck's constant** $h$ times frequency $f$. With $h=6.63\\times10^{-34}$ J s and $f$ in hertz, $E$ comes out in joules.",
+      "hint": "Check the units: J s times Hz gives J.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "153rvme",
+      "kind": "mistake",
+      "front": "Does a brighter beam of light give each photon more energy?",
+      "back": "No. **Frequency** sets the energy of each photon. **Intensity** sets how many photons arrive each second.",
+      "hint": "Brightness and energy per photon are different things.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fwb27x",
+      "kind": "term",
+      "front": "What is a photon?",
+      "back": "A **photon** is a single packet of electromagnetic radiation. Its energy is $E=hf$, measured in joules.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xja6gx",
+      "kind": "term",
+      "front": "What is Planck's constant?",
+      "back": "**Planck's constant** is $h=6.63\\times10^{-34}$ J s. It links a photon's energy to its frequency.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qzao5u",
+      "kind": "formula",
+      "front": "How can photon energy be written in terms of wavelength?",
+      "back": "$E=\\frac{hc}{\\lambda}$. A **shorter wavelength** means a more energetic photon.",
+      "hint": "Substitute $f=c/\\lambda$ into $E=hf$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0317kj3",
+      "kind": "concept",
+      "front": "What does it mean that photon energy is quantized?",
+      "back": "Energy can take only certain **discrete values**. Light of frequency $f$ delivers energy only as $hf$, $2hf$, $3hf$ and so on, like steps on a staircase rather than a ramp.",
+      "hint": "Compare a ramp with a staircase.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xs3dzs",
+      "kind": "term",
+      "front": "What is the classical model of light?",
+      "back": "The classical model treats light as a **continuous electromagnetic wave**. Its energy spreads smoothly and depends on amplitude. It explains interference and diffraction well.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a5c21l",
+      "kind": "example",
+      "front": "Calculate the energy of one photon of 500 nm light in a vacuum.",
+      "back": "$E=3.98\\times10^{-19}$ J. First find $f=c/\\lambda=6.00\\times10^{14}$ Hz, then use $E=hf$.",
+      "hint": "Convert 500 nm to metres first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j5rm6k",
+      "kind": "formula",
+      "front": "What is the de Broglie wavelength formula, and what is $p$?",
+      "back": "$\\lambda=\\frac{h}{p}$, where $p=mv$ is the **momentum** of the particle. A larger momentum gives a shorter wavelength.",
+      "hint": "Momentum is mass times velocity.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ile1zj",
+      "kind": "example",
+      "front": "An electron of mass $9.11\\times10^{-31}$ kg moves at $1.00\\times10^{6}$ m/s. What is its de Broglie wavelength?",
+      "back": "$\\lambda=7.28\\times10^{-10}$ m, about 0.7 nm. First $p=mv=9.11\\times10^{-25}$ kg m/s, then $\\lambda=h/p$.",
+      "hint": "Work out the momentum before dividing h by it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "058cm9j",
+      "kind": "concept",
+      "front": "Why does a thrown baseball not show wave behavior in practice?",
+      "back": "Its de Broglie wavelength is about $10^{-34}$ m, far too small to detect, because its momentum is huge compared with $h$. Only tiny particles such as electrons show wave behavior clearly.",
+      "hint": "Compare its momentum with h.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ygfazx",
+      "kind": "concept",
+      "front": "How do the classical and photon models differ in energy delivery and what the energy depends on?",
+      "back": "Classical: energy is delivered continuously and depends on amplitude. Photon: energy arrives in packets of size $hf$, and each photon's energy depends on frequency. Intensity sets the number of photons.",
+      "hint": "Ask what each model says about energy and what it depends on.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1sfajr6",
+      "kind": "concept",
+      "front": "When should you use the wave model of light and when the photon model?",
+      "back": "Use the **wave model** for how light travels and interferes. Use the **photon model** for how light gives energy to matter.",
+      "hint": "Think about the job each model does best.",
+      "sectionId": "s5"
+    }
+  ]
+}

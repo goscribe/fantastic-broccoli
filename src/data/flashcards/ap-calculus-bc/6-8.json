@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-8",
+  "topicCode": "6.8",
+  "topicName": "Antiderivatives and indefinite integrals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:32.898Z",
+  "cards": [
+    {
+      "id": "1iord86",
+      "kind": "term",
+      "front": "What is an antiderivative of $f(x)$?",
+      "back": "A function $F(x)$ whose **derivative** is $f(x)$, so $F'(x)=f(x)$ on the interval considered.",
+      "hint": "Think of it as reversing differentiation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11l6j33",
+      "kind": "formula",
+      "front": "What is the power rule for integration, and when does it not apply?",
+      "back": "For $n\\ne-1$, $\\int x^n\\,dx=\\frac{x^{n+1}}{n+1}+C$. Add one to the **exponent**, then divide by the new exponent. It does not apply when $n=-1$.",
+      "hint": "Compare it with the derivative power rule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1iio3t7",
+      "kind": "concept",
+      "front": "Why must an indefinite integral include $+C$?",
+      "back": "The **constant of integration** $C$ stands for any constant, because the derivative of a constant is zero. So antiderivatives differ only by a constant.",
+      "hint": "What is the derivative of 7?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hhhmba",
+      "kind": "process",
+      "front": "How do you check an indefinite integral?",
+      "back": "**Differentiate** your proposed answer and compare the result with the original integrand. They must match wherever the integrand is defined.",
+      "hint": "Reverse your own work.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h9mwvh",
+      "kind": "example",
+      "front": "Find $\\int(3x^2+2\\cos x)\\,dx$.",
+      "back": "$x^3+2\\sin x+C$. Integrate each term, use one constant, then differentiate to confirm you get $3x^2+2\\cos x$.",
+      "hint": "Integrate term by term.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mjgbgo",
+      "kind": "process",
+      "front": "How do you use an initial condition such as $F(0)=4$?",
+      "back": "Substitute the input into $F(x)+C$, solve for $C$, and write the **particular** function. The condition selects one member of the family.",
+      "hint": "Substitute, then solve for C.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1o8gzxo",
+      "kind": "example",
+      "front": "If $F'(x)=2x$ and $F(1)=5$, find $F(x)$.",
+      "back": "$F(x)=x^2+4$. Integrating gives $x^2+C$, and $1+C=5$ gives $C=4$.",
+      "hint": "Integrate first, then use F(1)=5.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cqxz0m",
+      "kind": "term",
+      "front": "What is an indefinite integral?",
+      "back": "$\\int f(x)\\,dx=F(x)+C$, which names the whole **family** of antiderivatives. Unlike a definite integral, it has no bounds and gives no single number.",
+      "hint": "Compare it with a definite integral.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o1a3xn",
+      "kind": "concept",
+      "front": "How do you integrate a sum with a constant factor?",
+      "back": "Move the **constant factor** outside the integral and integrate each term. For example, $\\int(6x^2-4)\\,dx=2x^3-4x+C$.",
+      "hint": "Work term by term.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "181oy2b",
+      "kind": "mistake",
+      "front": "What is wrong with writing $\\int 2x\\,dx = x^2$?",
+      "back": "It is missing **+C**. A general answer is $x^2+C$, because any constant can be added.",
+      "hint": "What does a general answer need?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0x88ezz",
+      "kind": "formula",
+      "front": "What is $\\int \\sin x\\,dx$?",
+      "back": "$-\\cos x+C$. Keep the **negative sign**, since differentiating $-\\cos x$ gives $\\sin x$.",
+      "hint": "Check by differentiating your answer.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oigr46",
+      "kind": "concept",
+      "front": "Why does $\\int\\frac{1}{x}\\,dx=\\ln|x|+C$ use an absolute value?",
+      "back": "The **absolute value** makes the derivative $\\frac{1}{x}$ correct for both positive and negative $x$. Work on an interval that does not cross zero.",
+      "hint": "Think about negative x.",
+      "sectionId": "s3"
+    }
+  ]
+}

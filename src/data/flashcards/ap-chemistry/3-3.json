@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "3-3",
+  "topicCode": "3.3",
+  "topicName": "Solids, liquids and gases",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:26.960Z",
+  "cards": [
+    {
+      "id": "19oagxm",
+      "kind": "concept",
+      "front": "How do particle spacing and motion differ among solids, liquids, and gases?",
+      "back": "**Solids** have close particles vibrating around fixed positions. **Liquids** have close particles that move past one another. **Gases** have widely spaced particles that move throughout their container.",
+      "hint": "Think about how close the particles are and whether they can move past each other.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "019luax",
+      "kind": "concept",
+      "front": "Why does temperature stay constant while a pure substance melts or boils at constant pressure?",
+      "back": "Added energy changes the **particle arrangement** rather than average kinetic energy, so temperature stays flat until the change is complete. Temperature measures average kinetic energy.",
+      "hint": "Ask what temperature actually measures.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02j7idr",
+      "kind": "concept",
+      "front": "What determines the boiling temperature of a liquid?",
+      "back": "A liquid boils when its **vapor pressure** equals the surrounding pressure. Lower surrounding pressure lowers the boiling temperature, and higher surrounding pressure raises it.",
+      "hint": "Compare two pressures, not particle speed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18gjg0k",
+      "kind": "term",
+      "front": "What is temperature?",
+      "back": "**Temperature** reflects the average kinetic energy of a substance's particles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12ocild",
+      "kind": "term",
+      "front": "What is pressure?",
+      "back": "**Pressure** is force per unit area exerted on a surface.",
+      "hint": "Think about what changes when the same push lands on a smaller area.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fv8bhk",
+      "kind": "term",
+      "front": "What is melting?",
+      "back": "**Melting** is the change from solid to liquid as the substance absorbs energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hk4slf",
+      "kind": "term",
+      "front": "What is condensation?",
+      "back": "**Condensation** is the change from gas to liquid as the substance releases energy.",
+      "hint": "It is the reverse of vaporization.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0awbbmp",
+      "kind": "concept",
+      "front": "How does evaporation differ from vaporization?",
+      "back": "**Evaporation** is vaporization at the liquid's surface and can occur below the boiling temperature. Vaporization is the liquid-to-gas change that absorbs energy.",
+      "hint": "Consider where the change happens and the temperature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06su5if",
+      "kind": "process",
+      "front": "Which state changes absorb energy, and which release energy?",
+      "back": "**Absorb energy:** melting, vaporization, and sublimation. **Release energy:** freezing, condensation, and deposition.",
+      "hint": "Melting and boiling need energy input.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "011kq3d",
+      "kind": "process",
+      "front": "What are the direct solid-to-gas and gas-to-solid changes called?",
+      "back": "Solid to gas directly is **sublimation**, which absorbs energy. Gas to solid directly is **deposition**, which releases energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "050ymfb",
+      "kind": "mistake",
+      "front": "Why is it wrong to say particles in a solid are motionless?",
+      "back": "Solid particles still **vibrate** around relatively fixed positions. They are not motionless; they just cannot move freely past one another.",
+      "hint": "Think about the link between motion and temperature.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t20kk6",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume heating during melting always raises temperature?",
+      "back": "For a pure substance, the supplied energy changes the **state** while both states are present, so temperature stays constant during melting.",
+      "hint": "Consider what energy is doing during the change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hmdage",
+      "kind": "mistake",
+      "front": "Why is describing boiling only as particles moving faster incomplete?",
+      "back": "Boiling depends on a comparison: the **vapor pressure** must equal the surrounding pressure. Particle speed alone does not capture this condition.",
+      "hint": "Name the pressure that must be matched.",
+      "sectionId": "s3"
+    }
+  ]
+}

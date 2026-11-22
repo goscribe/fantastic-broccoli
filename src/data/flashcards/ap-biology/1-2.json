@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "1-2",
+  "topicCode": "1.2",
+  "topicName": "Elements of life",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:16.442Z",
+  "cards": [
+    {
+      "id": "0tn2dx6",
+      "kind": "term",
+      "front": "Which six elements make up most living matter?",
+      "back": "**Carbon**, hydrogen, oxygen, nitrogen, phosphorus, and sulfur (C, H, O, N, P, S). They matter because of the combinations they form, not as separate ingredients.",
+      "hint": "Think about which elements appear in water and proteins.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13ewm4e",
+      "kind": "concept",
+      "front": "Why can carbon build such a wide variety of molecules?",
+      "back": "Carbon forms four **covalent bonds**, so its atoms can link into chains, branches, and rings. Double bonds change the shape and behavior of the framework.",
+      "hint": "Focus on how many bonds each carbon atom can form.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dkqjq7",
+      "kind": "concept",
+      "front": "How do the kinds, numbers, and arrangement of atoms affect a molecule?",
+      "back": "They determine the molecule's **properties**. The arrangement of atoms affects its properties as well as its composition.",
+      "hint": "Consider what changes when atoms are added or rearranged.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ol1a01",
+      "kind": "term",
+      "front": "What is an element?",
+      "back": "A substance made of only one kind of **atom**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yipvmu",
+      "kind": "term",
+      "front": "What is a covalent bond?",
+      "back": "A chemical bond in which **atoms share electrons**.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19g8fxb",
+      "kind": "term",
+      "front": "What is a molecule?",
+      "back": "A group of atoms held together by **chemical bonds**.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vi8tu0",
+      "kind": "example",
+      "front": "How many hydrogen and oxygen atoms does one water molecule contain?",
+      "back": "**Two** hydrogen atoms and **one** oxygen atom, as shown by $\\mathrm{H_2O}$.",
+      "hint": "Read the subscripts in the formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19yzhsw",
+      "kind": "concept",
+      "front": "Where does phosphorus appear in cellular molecules?",
+      "back": "In **nucleic acids** and phospholipids, and in phosphate groups bonded to oxygen atoms.",
+      "hint": "Think about the building blocks of DNA and cell membranes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ijv1bw",
+      "kind": "term",
+      "front": "What is a phosphate group?",
+      "back": "A group containing a **phosphorus** atom bonded to oxygen atoms, which can attach to another part of a molecule.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01m9dpt",
+      "kind": "term",
+      "front": "Where does sulfur occur in cells?",
+      "back": "In some **amino acids**, which are the building blocks of proteins.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0diswec",
+      "kind": "term",
+      "front": "What is a trace element?",
+      "back": "An element needed in a very **small amount**. The small amount required does not show how important the element is.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "181na8i",
+      "kind": "example",
+      "front": "What role does iron play in many animals?",
+      "back": "Iron is part of **hemoglobin**, which carries oxygen in the blood.",
+      "hint": "Think about how oxygen travels around the body.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12zljkl",
+      "kind": "mistake",
+      "front": "Does needing only a small amount of an element mean it is optional?",
+      "back": "No. Too little of an **essential element** can disrupt cell function, even though cells need only a small amount.",
+      "hint": "Consider what happens when a needed element is missing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1slt45o",
+      "kind": "mistake",
+      "front": "Are the six main elements the only ones cells need?",
+      "back": "No. Other elements, such as iron and magnesium, are **essential** in smaller amounts.",
+      "sectionId": "s1"
+    }
+  ]
+}

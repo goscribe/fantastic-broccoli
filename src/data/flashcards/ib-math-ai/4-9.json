@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-9",
+  "topicCode": "4.9",
+  "topicName": "Normal distribution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:53.764Z",
+  "cards": [
+    {
+      "id": "0ozbpeg",
+      "kind": "term",
+      "front": "What do the two numbers in $X\\sim \\mathrm{N}(\\mu,\\sigma^2)$ tell you about a normal distribution?",
+      "back": "It is a symmetric, bell-shaped continuous model. The **mean** $\\mu$ gives the centre and the standard deviation $\\sigma$ gives the spread.",
+      "hint": "Two numbers fix the whole curve.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0l4nxl7",
+      "kind": "concept",
+      "front": "About what share of values lie within one, two and three standard deviations of the mean?",
+      "back": "About **68%** within one, 95% within two and 99.7% within three. The total area under the curve is 1, so areas give probabilities.",
+      "hint": "Think of the bell curve's symmetric shape.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1f9f29q",
+      "kind": "process",
+      "front": "How do you find $P(X>180)$ for $X\\sim \\mathrm{N}(170,7^2)$ on a calculator?",
+      "back": "Use the **normal cdf** with lower bound 180, upper bound $10^{99}$, mean 170 and standard deviation 7. The result is about 0.0766.",
+      "hint": "Use a very large number for the unbounded side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18s9zak",
+      "kind": "mistake",
+      "front": "In $\\mathrm{N}(170,7^2)$, is the standard deviation 7 or 49?",
+      "back": "The standard deviation is **7**. The second number is the variance $\\sigma^2=49$, so do not use it as the spread.",
+      "hint": "Check what the second number represents.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vra3mj",
+      "kind": "concept",
+      "front": "Why are $P(X<a)$ and $P(X\\le a)$ equal for a normal variable?",
+      "back": "A single value has **zero** probability because $X$ is continuous. Including the endpoint therefore adds no area.",
+      "hint": "Think about the area at one exact point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oohbin",
+      "kind": "process",
+      "front": "How do you find the height $k$ with $P(X<k)=0.9$ for $X\\sim \\mathrm{N}(170,7^2)$?",
+      "back": "Use an **inverse normal** with left area 0.9, mean 170 and standard deviation 7. The result is $k\\approx 178.97$, so about 179 cm.",
+      "hint": "The left area is the input.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rb6yms",
+      "kind": "mistake",
+      "front": "For $P(X>k)=0.05$, what area do you enter into the inverse normal function?",
+      "back": "Enter the **left** area $1-0.05=0.95$. Calculators always work with the area to the left of $k$.",
+      "hint": "Calculators work from the left.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17biii6",
+      "kind": "formula",
+      "front": "What is the z-score formula, and what does a negative z-score mean?",
+      "back": "$z=\\frac{x-\\mu}{\\sigma}$ counts standard deviations from the mean. A **negative** z-score means the value lies below the mean.",
+      "hint": "Subtract the mean first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1m1308o",
+      "kind": "example",
+      "front": "Test A has mean 62 and sd 8, score 74. Test B has mean 55 and sd 5, score 63. Which score is relatively better?",
+      "back": "The score of 63 on **test B**, since $z=1.6$ there compared with $z=1.5$ on test A.",
+      "hint": "Compare z-scores, not raw marks.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01gejkn",
+      "kind": "example",
+      "front": "If $P(X>180)\\approx 0.0766$ for adult heights, how many of 500 adults are expected to be taller than 180 cm?",
+      "back": "About **38** adults, since $500\\times 0.0766\\approx 38$.",
+      "hint": "Multiply the probability by the group size.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0c61j6d",
+      "kind": "mistake",
+      "front": "Why should normal model results be described as approximate?",
+      "back": "Real measurements are never exactly normal, so the model gives an **approximate** answer. Always state the units too.",
+      "hint": "Think about whether real data fits the model perfectly.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "06cjyrg",
+      "kind": "example",
+      "front": "Loaves follow $X\\sim \\mathrm{N}(800,12^2)$ in g. What is $P(X<785)$?",
+      "back": "About **0.106**, found with lower bound $-10^{99}$, upper bound 785, mean 800 and standard deviation 12.",
+      "hint": "The unbounded side uses a very small number.",
+      "sectionId": "s3"
+    }
+  ]
+}

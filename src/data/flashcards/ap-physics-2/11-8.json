@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "11-8",
+  "topicCode": "11.8",
+  "topicName": "RC circuits",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:19.686Z",
+  "cards": [
+    {
+      "id": "0zv8652",
+      "kind": "concept",
+      "front": "As an uncharged capacitor charges through a resistor, what happens to the current and to the capacitor's potential difference?",
+      "back": "The **current** starts at its maximum, $\\frac{\\varepsilon}{R}$, and falls toward zero, while the capacitor's potential difference rises from zero toward $\\varepsilon$ as the resistor's share shrinks.",
+      "hint": "Follow the loop rule as charge builds up on the plates.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0weibjf",
+      "kind": "formula",
+      "front": "What is the time constant of an RC circuit, and what is its unit?",
+      "back": "$\\tau=RC$, where R is resistance in ohms and C is capacitance in farads. The unit is the **second**, since $1\\,\\Omega\\times1\\,\\mathrm{F}=1\\,\\mathrm{s}$.",
+      "hint": "Multiply resistance by capacitance.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r11mc2",
+      "kind": "concept",
+      "front": "What fraction of its final charge does a charging capacitor reach after one time constant?",
+      "back": "About **63%**. After five time constants, charging is within 1% of finished.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kgc8pw",
+      "kind": "term",
+      "front": "What is capacitance?",
+      "back": "The **capacitance** $C$ is the charge stored per volt across the capacitor, $C=\\frac{Q}{\\Delta V}$, measured in farads.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ozcxyt",
+      "kind": "term",
+      "front": "What is an RC circuit?",
+      "back": "A **series** circuit containing a resistor and a capacitor, so charge moves onto or off the capacitor gradually.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0va01v0",
+      "kind": "formula",
+      "front": "What equation does the loop rule give for a charging RC circuit at every moment?",
+      "back": "$\\varepsilon=IR+\\frac{Q}{C}$. The battery's **emf** equals the resistor's potential difference plus the capacitor's potential difference.",
+      "hint": "The loop rule adds the potential differences around the loop.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1skqcac",
+      "kind": "example",
+      "front": "Calculate the time constant of a 2.0 kΩ resistor in series with a 50 μF capacitor.",
+      "back": "$\\tau=0.10$ s. Convert to $2.0\\times10^{3}\\,\\Omega$ and $50\\times10^{-6}\\,\\mathrm{F}$, then multiply.",
+      "hint": "Use $\\tau=RC$ with values in ohms and farads.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1motgc2",
+      "kind": "mistake",
+      "front": "A student says the time constant is the total time needed to fully charge a capacitor. Why is this wrong?",
+      "back": "The **time constant** is only the time to reach about 63% of the final charge. Full charging takes several time constants, since the charge keeps approaching its final value for much longer.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yxlcj6",
+      "kind": "mistake",
+      "front": "A student says the current in a charging capacitor stays constant until the capacitor is full. What is wrong?",
+      "back": "The current is largest at the start and falls toward zero, because the **resistor's** share of the emf shrinks as the capacitor's potential difference rises.",
+      "hint": "Think about the loop rule at the start and near the end.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lq8aj8",
+      "kind": "concept",
+      "front": "What drives the current when a charged capacitor discharges through a resistor?",
+      "back": "The **capacitor** itself acts as the source, pushing charge through the resistor until little is left. The current flows opposite to the charging current.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v355lx",
+      "kind": "formula",
+      "front": "How does the charge on a discharging capacitor depend on time?",
+      "back": "$Q(t)=Q_0e^{-t/\\tau}$, where $Q_0$ is the starting charge. After one time constant, the factor is about $e^{-1}\\approx0.37$.",
+      "hint": "This is an exponential decay with time constant $\\tau$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1c9jyii",
+      "kind": "formula",
+      "front": "What equation gives the charge on a charging capacitor at time t?",
+      "back": "$Q(t)=C\\varepsilon\\left(1-e^{-t/\\tau}\\right)$. It rises from zero toward the final value $C\\varepsilon$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0reoh9c",
+      "kind": "concept",
+      "front": "What shape should the voltage and current graphs of an RC circuit have?",
+      "back": "Each curve is **steepest** at $t=0$, flattens afterward, and approaches its final value without ever reaching it, an exponential shape.",
+      "hint": "Label both axes with units when you sketch.",
+      "sectionId": "s5"
+    }
+  ]
+}

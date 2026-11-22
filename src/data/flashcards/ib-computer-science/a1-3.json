@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a1-3",
+  "topicCode": "A1.3",
+  "topicName": "Operating and control systems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:58.562Z",
+  "cards": [
+    {
+      "id": "0fg6702",
+      "kind": "term",
+      "front": "What is an operating system, and where does it sit in a computer?",
+      "back": "An **operating system** (OS) is system software that manages the hardware and provides services to programs. It sits between users, applications and hardware, much like a school office connects students and rooms.",
+      "hint": "Think of a school office connecting students, teachers and rooms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yeqxtu",
+      "kind": "concept",
+      "front": "How can one CPU core appear to run many programs at once?",
+      "back": "The operating system **switches** between processes very rapidly, giving each a short turn. **Scheduling** decides which process runs next and for how long, so all of them appear to make progress.",
+      "hint": "A single core can only work on one process at any instant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1m0xk53",
+      "kind": "concept",
+      "front": "How do sensors, a processor and actuators work together in a control system?",
+      "back": "A **sensor** measures a physical quantity, the processor uses that data to make a decision, and an **actuator** carries out the decision as a physical action, such as turning a motor.",
+      "hint": "Name the quantity measured and the action performed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1w11qwo",
+      "kind": "process",
+      "front": "What steps does a thermostat follow to hold a room at 21 °C?",
+      "back": "1) The sensor reads the room temperature and sends it to the microcontroller. 2) If it is below 21 °C the heater switches on; at 21 °C it switches off. 3) The new temperature is measured again and passed back as feedback.",
+      "hint": "Think about what happens after the heater changes state.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1h2ztoc",
+      "kind": "term",
+      "front": "What is a process?",
+      "back": "A **process** is a program in execution, together with the resources, such as memory, that the operating system has given it.",
+      "hint": "A program becomes a process once it is being run.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gv1z28",
+      "kind": "term",
+      "front": "What is an interrupt?",
+      "back": "An **interrupt** is a signal to the CPU that an event needs immediate attention, causing it to pause its current task. The operating system handles the event, then the CPU resumes the paused task.",
+      "hint": "Think of a key being pressed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mogdag",
+      "kind": "concept",
+      "front": "Apart from CPU time, which resources does the operating system manage?",
+      "back": "Memory, files, devices, security and the user interface. For example, it gives each process some RAM and keeps one process out of another's memory.",
+      "hint": "Consider what a running program needs beyond the processor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rxhe01",
+      "kind": "term",
+      "front": "What does a device driver do?",
+      "back": "A **device driver** is software that lets the operating system communicate with and control a particular hardware device.",
+      "hint": "Each device needs its own driver.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lt34jd",
+      "kind": "mistake",
+      "front": "Is the operating system a physical part of the computer?",
+      "back": "No. The **operating system** is software, not a physical part. It runs on the CPU like any other program.",
+      "hint": "Consider what kind of thing software is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1roktdt",
+      "kind": "concept",
+      "front": "Why does feedback let a control system correct itself?",
+      "back": "The measured output is returned to the input, so the system adjusts its next action without a person. If the sensor gives false readings, however, the correction fails.",
+      "hint": "Think about what the sensor reports back.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16697b9",
+      "kind": "mistake",
+      "front": "What common mistake loses marks when describing sensors and actuators?",
+      "back": "Giving vague, general answers. Instead, name the exact quantity a sensor measures, such as temperature, and the exact action an actuator performs, such as turning a motor.",
+      "hint": "Be specific about the quantity and the action.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qs0b9r",
+      "kind": "term",
+      "front": "What is a microcontroller?",
+      "back": "A **microcontroller** is a small computer on a single chip, containing a processor, memory and input and output connections, used to control a device.",
+      "hint": "Think of a small computer built into a device.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ptayhu",
+      "kind": "term",
+      "front": "What is a real-time system?",
+      "back": "A **real-time** system must respond within a fixed time limit, because a late response could be unsafe, as in a car's braking controller.",
+      "hint": "Timing matters as well as correctness.",
+      "sectionId": "s5"
+    }
+  ]
+}

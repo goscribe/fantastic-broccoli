@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-2-2-4",
+  "topicCode": "3.2.2.4",
+  "topicName": "Wave-particle duality",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:31.877Z",
+  "cards": [
+    {
+      "id": "1awje2k",
+      "kind": "term",
+      "front": "What is wave–particle duality?",
+      "back": "**Wave–particle duality** is the property that matter and radiation can each show both wave-like and particle-like behaviour.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xfgykv",
+      "kind": "concept",
+      "front": "Why does the wave model fail to explain the photoelectric effect?",
+      "back": "The wave model predicts that dim light of any colour would eventually release electrons, but electrons leave only when the **frequency** is high enough. The particle model fits because one electron absorbs one photon.",
+      "hint": "Compare what each model predicts for dim light of different colours.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ryorb1",
+      "kind": "formula",
+      "front": "Which equation gives the de Broglie wavelength of a particle in terms of its momentum?",
+      "back": "$\\lambda=\\frac{h}{p}$, where $h$ is the **Planck constant** ($6.63\\times10^{-34}\\,\\mathrm{J\\,s}$), $p$ is momentum in $\\mathrm{kg\\,m\\,s^{-1}}$ and $\\lambda$ is in metres.",
+      "hint": "Think about what happens to the wavelength when a particle moves faster.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b5vtf5",
+      "kind": "formula",
+      "front": "Which equation gives the energy of a single photon in terms of its frequency?",
+      "back": "$E=hf$, where $E$ is the photon energy, $h$ is the Planck constant ($6.63\\times10^{-34}\\,\\mathrm{J\\,s}$) and $f$ is the frequency in hertz.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zli9d1",
+      "kind": "term",
+      "front": "What is diffraction?",
+      "back": "**Diffraction** is the spreading of waves through a gap or around an edge. It is clearest when the wavelength is similar in size to the width of the gap.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0por6ba",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that brighter light has more energetic photons?",
+      "back": "Brighter light has **more photons**, not more energetic ones. Photon energy depends only on frequency, through $E=hf$.",
+      "hint": "Think about what brightness changes in the light beam.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02goq5l",
+      "kind": "process",
+      "front": "What happens step by step in an electron diffraction tube?",
+      "back": "A fast electron beam passes through a thin layer of graphite. The regular rows of carbon atoms act like narrow gaps, and the electrons strike a fluorescent screen showing a bright central spot surrounded by rings.",
+      "hint": "Follow the path of the electrons from the tube to the screen.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oc6b5y",
+      "kind": "example",
+      "front": "What is the de Broglie wavelength of an electron of mass $9.11\\times10^{-31}\\,\\mathrm{kg}$ moving at $3.00\\times10^{6}\\,\\mathrm{m\\,s^{-1}}$?",
+      "back": "About $2.43\\times10^{-10}\\,\\mathrm{m}$. The momentum is $p=2.73\\times10^{-24}\\,\\mathrm{kg\\,m\\,s^{-1}}$, and $\\lambda=\\frac{h}{p}$ gives the answer.",
+      "hint": "Find the momentum before the wavelength.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cfio3z",
+      "kind": "example",
+      "front": "Why does a ball of mass $0.10\\,\\mathrm{kg}$ moving at $10\\,\\mathrm{m\\,s^{-1}}$ show no detectable diffraction?",
+      "back": "Its momentum is $1.0\\,\\mathrm{kg\\,m\\,s^{-1}}$, so its wavelength is only $6.63\\times10^{-34}\\,\\mathrm{m}$. This is far too small to diffract at any gap.",
+      "hint": "Work out the momentum, then use $\\lambda=\\frac{h}{p}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0x34xow",
+      "kind": "concept",
+      "front": "Why do the rings in an electron diffraction tube move closer to the centre when electron speed increases?",
+      "back": "A faster electron has greater momentum, so its de Broglie wavelength is shorter. A shorter wavelength spreads less, so the rings lie closer to the centre.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1eqd15i",
+      "kind": "concept",
+      "front": "Which model should you use to explain light forming bright and dark bands after passing through a narrow slit?",
+      "back": "The **wave model**, because diffraction is a wave effect. The particle model suits cases where energy is exchanged in single packets, such as the photoelectric effect.",
+      "hint": "Compare the slit result with the photoelectric result.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ee3ljg",
+      "kind": "example",
+      "front": "What is the de Broglie wavelength of an electron accelerated from rest through a potential difference of $100\\,\\mathrm{V}$?",
+      "back": "About $1.23\\times10^{-10}\\,\\mathrm{m}$, using $\\lambda=\\frac{h}{\\sqrt{2meV}}$, where $e=1.60\\times10^{-19}\\,\\mathrm{C}$.",
+      "hint": "Start from the kinetic energy the electron gains, $eV$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1015e99",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an electron is only a wave or only a particle?",
+      "back": "A single electron shows both behaviours. The rings show wave behaviour, while each electron arriving at one point on the detector shows particle behaviour.",
+      "hint": "Think about the two observations in the graphite experiment.",
+      "sectionId": "s3"
+    }
+  ]
+}

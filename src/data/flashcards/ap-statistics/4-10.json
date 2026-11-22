@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "4-10",
+  "topicCode": "4.10",
+  "topicName": "Carrying out a two-mean test",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:24:59.737Z",
+  "cards": [
+    {
+      "id": "0otnb6k",
+      "kind": "concept",
+      "front": "What does a p-value measure?",
+      "back": "The **probability** of getting a test statistic at least as extreme as the one observed, assuming $H_0$ is true and counting results in the direction of $H_a$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ne4wmd",
+      "kind": "process",
+      "front": "How do you decide whether to reject $H_0$ using the p-value?",
+      "back": "Compare the p-value with $\\alpha$. If the p-value is **less than or equal to** $\\alpha$, reject $H_0$. If it is greater than $\\alpha$, fail to reject $H_0$.",
+      "hint": "Which number is chosen before looking at the data?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xyeshe",
+      "kind": "formula",
+      "front": "Which formula gives the two-sample t statistic for $H_0:\\mu_1-\\mu_2=0$?",
+      "back": "$t=\\frac{(\\bar{x}_1-\\bar{x}_2)-0}{\\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}}$, where the numerator is the observed difference minus the null value and the denominator is the **standard error**.",
+      "hint": "The bottom of the fraction measures the chance variation in the difference.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hkqi60",
+      "kind": "concept",
+      "front": "Why does a large absolute value of $t$ count as evidence against $H_0$?",
+      "back": "The sample difference in means is far from 0 compared with the **chance variation** in the standard error, so it is unlikely if the population means are equal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ptu6qk",
+      "kind": "term",
+      "front": "What is the significance level $\\alpha$, and when must it be chosen?",
+      "back": "The **cutoff** for a small enough p-value; it is set before examining the data, with common choices 0.05 and 0.01.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1szicsr",
+      "kind": "mistake",
+      "front": "Why is saying 'accept $H_0$' wrong after a large p-value?",
+      "back": "A large p-value means the data are **consistent** with $H_0$, not that $H_0$ is proven true. Write 'fail to reject $H_0$' instead.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qyy18e",
+      "kind": "mistake",
+      "front": "What does a p-value of 0.04 fail to tell you about $H_0$?",
+      "back": "It is **not** the probability that $H_0$ is true. The p-value is calculated assuming $H_0$ is true, so it cannot give the chance that $H_0$ itself is true.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16nijam",
+      "kind": "process",
+      "front": "How do you find the p-value for a two-sided test from the t curve?",
+      "back": "Find the tail area beyond the observed $t$ value, then **double** it, because results as extreme in either direction count against $H_0$.",
+      "hint": "Think about how many tails the test uses.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wmcs4k",
+      "kind": "example",
+      "front": "What is the t statistic for app group ($\\bar{x}_1=78.4$, $s_1=9.6$, $n_1=40$) versus guide group ($\\bar{x}_2=74.1$, $s_2=10.2$, $n_2=38$)?",
+      "back": "$t\\approx 1.92$. The variance terms are 2.304 and about 2.738, giving a standard error of about 2.245, and $4.3/2.245\\approx 1.92$.",
+      "hint": "Work out the two variance terms first, then the standard error.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18lklu3",
+      "kind": "example",
+      "front": "For $H_a:\\mu_1-\\mu_2>0$ with p-value 0.030 and $\\alpha=0.05$, what is the conclusion in context?",
+      "back": "Because the p-value of 0.030 is less than 0.05, we **reject** $H_0$. There is convincing statistical evidence that the true mean score is higher with the app than with the printed guide.",
+      "hint": "Compare the p-value with alpha before writing the context.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cw3ydo",
+      "kind": "concept",
+      "front": "Why must a conclusion refer to context and the population means?",
+      "back": "A decision alone is incomplete. A full conclusion compares the p-value with $\\alpha$, states the decision about $H_0$, and answers about the **population means** in the real situation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13lr8jz",
+      "kind": "example",
+      "front": "In a two-sided sleep test with p-value 0.082 and $\\alpha=0.05$, what is the decision?",
+      "back": "Fail to reject $H_0$, because 0.082 is greater than 0.05. There is not convincing statistical evidence that mean sleep differs between app users and non-users.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0a4igro",
+      "kind": "concept",
+      "front": "What does random assignment allow you to conclude, compared with random sampling?",
+      "back": "Random assignment supports a **cause-and-effect** conclusion, while random sampling lets you generalize to the population that was sampled.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -107,7 +107,7 @@ function scrollToNext(ids: string[], from: string, answered: Record<string, numb
 }
 
 /** A small burst in the cat's orange and cream for a right answer (feedback; off under reduced motion). */
-function Sparkles() {
+export function Sparkles() {
   return (
     <span className="pointer-events-none absolute left-5 top-5" aria-hidden="true">
       {[0, 45, 90, 135, 180, 225, 270, 315].map((a, i) => (
@@ -336,7 +336,7 @@ const BAND_LINE: Record<ResultBand, [title: string, sub: string]> = {
 const CONFETTI_COLORS = ["#f6a53b", "#ffd166", "#34b27b", "#4f8df7", "#ef5d7a", "#ffffff"];
 
 /** Thrown from the cat, once, on a strong score. Positions are fixed, so server and client agree. */
-function Confetti({ count = 38 }: { count?: number }) {
+export function Confetti({ count = 38 }: { count?: number }) {
   return (
     <span aria-hidden="true" className="nl-confetti">
       {Array.from({ length: count }, (_, i) => {
