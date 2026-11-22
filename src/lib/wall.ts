@@ -84,6 +84,8 @@ export type WallReason =
   | "token_limit"
   | "locked_topic"
   | "upgrade_click"
+  /** Coursework grader: locked on the plan, or its daily review limit reached. */
+  | "grader"
   | "other";
 
 /** Server WALL_VARIANTS: which wall layout was shown. */
@@ -95,6 +97,7 @@ export function wallReason(message: string | null | undefined): WallReason {
   if (!m) return "other";
   if (/^not enough tokens\b/.test(m)) return "token_limit";
   if (/included with a plan or exam pass/.test(m)) return "locked_topic";
+  if (/^coursework review limit\b/.test(m)) return "grader";
   if (/free plan includes \d+ (workspace|subject)/.test(m)) return "plan_limit_workspaces";
   if (/free plan includes \d+ (study session|full study session)/.test(m)) return "plan_limit_sessions";
   if (/free plan includes \d+ flashcard test/.test(m)) return "plan_limit_tests";
@@ -174,6 +177,16 @@ export const SESSION_TOKEN_COST = 40;
 
 export interface PerkPlan extends PlanLabelInput {
   monthlyTokens: number;
+  /** Coursework reviews a day from the server (null = unlimited, 0 = not included); undefined on older servers. */
+  courseworkReviewsPerDay?: number | null;
+}
+
+/** "Coursework reviews: 2 a day" / "Unlimited coursework reviews"; null when the plan has none or the server didn't say. */
+export function courseworkPerk(perDay: number | null | undefined): string | null {
+  if (perDay === undefined) return null;
+  if (perDay === null) return "Unlimited coursework reviews";
+  if (perDay <= 0) return null;
+  return `${perDay} coursework ${perDay === 1 ? "review" : "reviews"} a day`;
 }
 
 /** "Up to 15 new study sessions a month", from the plan's monthly allowance; null when it would say nothing. */
@@ -193,6 +206,8 @@ export function sessionsPerMonth(monthlyTokens: number, cost = SESSION_TOKEN_COS
  *   by TOKEN_COSTS.GENERATION (an upload's analysis draws on the same allowance).
  * - "Our strongest AI model": InferenceInput.premium routes every activity
  *   through the strong tier for paid plans.
+ * - Coursework reviews: the plan's `courseworkReviewsPerDay` from
+ *   payment.getPlans (server COURSEWORK_DAILY_REVIEWS).
  * The last line is how the plan is paid, which is what really separates a
  * subscription from the pass.
  */
@@ -206,6 +221,8 @@ export function paidPerks(plan: PerkPlan, opts: { examLine?: string | null } = {
     "Unlimited flashcard tests",
     "Our strongest AI model on every activity",
   ];
+  const coursework = courseworkPerk(plan.courseworkReviewsPerDay);
+  if (coursework) perks.push(coursework);
   if (billing === "once") {
     if (opts.examLine) perks.push(opts.examLine);
     perks.push("One payment, nothing renews");

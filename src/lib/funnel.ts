@@ -43,7 +43,9 @@ export type FunnelEvent =
   /** Subscribe wall: shown (`reason`, `variant`), dismissed, or checkout opened from it (a trial, or the pass when `variant` is "exam_pass"). */
   | "wall.shown"
   | "wall.dismissed"
-  | "wall.trial_started";
+  | "wall.trial_started"
+  /** Coursework grader screen opened (the server records review_requested / review_completed / limit_hit itself). */
+  | "grader.opened";
 
 /** What the end screen's next step offered (the server's DEBRIEF_NEXT_KINDS). */
 export type DebriefNextKind = "session" | "quick5" | "mistakes" | "topic" | "review" | "plan" | "home" | "other";
