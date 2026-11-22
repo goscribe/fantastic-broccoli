@@ -1,0 +1,93 @@
+@layer properties, theme, base, components, utilities;
+
+/*
+ * The coursework grader. Chrome stays white; the colour is the piece's own
+ * subject family (--tile-a / --tile-b, set on .cw-scope from
+ * subject-family.ts): the header band, the band tracks, the quote rule and
+ * the marks in the document.
+ */
+@layer components {
+  .cw-scope {
+    --se-anchor: var(--tile-b, var(--hl));
+    --se-anchor-ink: var(--tile-a, var(--foreground));
+  }
+
+  /* The header band: words on the band's solid colour at the left, the cat in front of the art at the right. */
+  /* The bright end is kept to the right third, so every word sits on the solid deep colour (white on it is at least 4.5:1). */
+  .subject-band.cw-band { min-height: 168px; background: radial-gradient(70% 125% at 100% 35%, var(--tile-b) 0%, var(--tile-a) 55%); }
+  .cw-band__text { max-width: 56%; }
+  .cw-band .cw-band__art { right: -3%; bottom: -30%; height: 150%; max-height: 300px; opacity: 0.5; }
+  .cw-band__cat { position: absolute; right: 7%; bottom: 0; height: min(78%, 190px); display: flex; align-items: flex-end; z-index: 0; }
+  .cw-band[data-state="reading"] .cw-band__cat { right: 4%; height: min(62%, 150px); bottom: 6%; }
+  @media (max-width: 639px) {
+    .subject-band.cw-band { min-height: 0; }
+    .cw-band__text { max-width: 60%; }
+    .cw-band .cw-band__art { display: none; }
+    .cw-band__cat { right: 2%; height: min(64%, 124px); }
+    .cw-band[data-state="reading"] .cw-band__cat { right: -2%; height: 92px; bottom: 10%; }
+  }
+
+  /* Band tracks and anything else drawn in the subject's colour. */
+  .cw-fill { background: var(--tile-a, var(--foreground)); }
+  .cw-fill--faint { background: transparent; box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--tile-a, var(--foreground)) 55%, transparent); }
+
+  /* The numeral of a fix: the subject's colour, a size up from the title. */
+  .cw-num {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--tile-a, var(--foreground));
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  /* The student's own words, quoted back. */
+  .cw-quote { border-left: 3px solid var(--tile-a, var(--border-strong)); padding-left: 12px; }
+  .cw-quote--changed { border-left-color: var(--border-strong); color: var(--muted-foreground); text-decoration: line-through; text-decoration-color: var(--border-strong); }
+  .cw-quote-btn { cursor: pointer; }
+  @media (hover: hover) {
+    .cw-quote-btn:hover .cw-quote { background: color-mix(in srgb, var(--tile-b, var(--hl)) 16%, transparent); }
+  }
+
+  /* The card or row a tapped passage belongs to. */
+  .cw-targeted { border-color: var(--tile-a, var(--border-strong)); box-shadow: 0 0 0 1px var(--tile-a, var(--border-strong)); }
+  .cw-targeted-row { box-shadow: -3px 0 0 0 var(--tile-a, var(--border-strong)); padding-left: 12px; margin-left: -12px; }
+
+  /* The wait: one calm bar, no made-up percentage. */
+  .cw-wait-bar { position: relative; height: 6px; border-radius: 999px; background: var(--muted); overflow: hidden; }
+  .cw-wait-bar > span { position: absolute; inset-block: 0; left: 0; width: 38%; border-radius: inherit; background: var(--tile-a, var(--foreground)); animation: cw-wait 1.8s ease-in-out infinite; }
+  @keyframes cw-wait { 0% { transform: translateX(-100%); } 100% { transform: translateX(270%); } }
+  .cw-step { flex: none; width: 14px; height: 14px; border-radius: 999px; border: 2px solid var(--border-strong); }
+  .cw-step--now { border-color: var(--tile-a, var(--foreground)); box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 8px var(--tile-a, var(--foreground)); }
+  .cw-step--done { border-color: var(--tile-a, var(--foreground)); background: var(--tile-a, var(--foreground)); }
+
+  /* Picker tiles are short rows in each component's colour. */
+  .cw-pick.subject-tile--row { min-height: 64px; padding: 10px 16px; }
+  .cw-pick .subject-tile__text { max-width: 66%; }
+
+  /* The piece's title above its text: the document's biggest line, growing to fit a long title. */
+  .cw-title { field-sizing: content; font-size: 24px; min-height: 1.2em; }
+  @media (min-width: 640px) {
+    .cw-title { font-size: 30px; }
+  }
+
+  /* A piece's colour chip on its card: the subject's hue and a corner of its art. */
+  .subject-band.cw-chip { border-radius: 14px; }
+  .subject-band.cw-chip .subject-tile__art { right: -18%; bottom: -16%; height: 104%; max-height: none; opacity: 1; display: block; }
+
+  /* The guide inside the panel: the note reader's blocks at the panel's size. */
+  .cw-guide .nl-prose { font-size: var(--fs-ui); line-height: var(--lh-ui); }
+  .cw-guide .nl-prose h2 { font-size: 18px; line-height: 1.25; }
+  .cw-guide .nl-prose section { margin-top: 28px; }
+  .cw-guide .nl-prose section:first-child { margin-top: 0; }
+  .cw-guide .nl-prose .nl-lead { font-size: inherit; }
+  .cw-guide .nl-secend { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cw-wait-bar > span { animation: none; width: 100%; opacity: 0.35; }
+  }
+}

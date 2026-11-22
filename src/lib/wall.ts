@@ -221,8 +221,10 @@ export function paidPerks(plan: PerkPlan, opts: { examLine?: string | null } = {
     "Unlimited flashcard tests",
     "Our strongest AI model on every activity",
   ];
+  // Unlimited reviews are what Ultra is for, so that line leads its list; a daily number sits with the rest.
   const coursework = courseworkPerk(plan.courseworkReviewsPerDay);
-  if (coursework) perks.push(coursework);
+  if (coursework && plan.courseworkReviewsPerDay === null) perks.unshift(coursework);
+  else if (coursework) perks.push(coursework);
   if (billing === "once") {
     if (opts.examLine) perks.push(opts.examLine);
     perks.push("One payment, nothing renews");

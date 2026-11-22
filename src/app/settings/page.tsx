@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { CHECKOUT_REFRESH_DELAYS_MS, checkoutReturn } from "@/lib/checkout-return";
 import { planBilling, planDisplayName } from "@/lib/plan-display";
+import { CourseworkPlanRow } from "@/components/coursework/settings-row";
 import { Button, buttonClass } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PageHeader, PageShell } from "@/components/ui/page-header";
@@ -476,6 +477,7 @@ export default function SettingsPage() {
             onCancel={openDowngrade}
             onResume={handleResume}
           />
+          <CourseworkPlanRow />
         </section>
 
         <section className="mt-8">

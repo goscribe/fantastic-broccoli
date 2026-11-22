@@ -5,7 +5,7 @@ import Image from "next/image";
 import { NotificationBell } from "@/components/layout/notification-bell";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Calendar, House, LogOut, NotebookText, PanelLeft, PanelLeftClose, PlayCircle, RotateCcw, Search, Settings } from "lucide-react";
+import { Calendar, House, LogOut, NotebookText, PanelLeft, PanelLeftClose, PenLine, PlayCircle, RotateCcw, Search, Settings } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import { PointsPill, StreakButton } from "@/components/rewards/streak-button";
@@ -14,6 +14,8 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
 import "@/lib/i18n/mistakes";
 import "@/lib/i18n/today";
+import "@/lib/i18n/coursework";
+import { useCourseworkNav } from "@/components/coursework/use-grader";
 import { onTreeChanged } from "@/lib/tree-events";
 import { cn } from "@/lib/utils";
 import { AppTourHost, requestAppTour } from "@/components/onboarding/app-tour";
@@ -28,6 +30,12 @@ const NAV: { href: string; label: string; labelKey?: string; icon: typeof House 
   { href: "/planner", label: "Planner", labelKey: "today.planner", icon: Calendar },
   { href: "/mistakes", label: "Mistakes", labelKey: "mistakes.nav", icon: RotateCcw },
 ];
+
+/**
+ * Coursework (the grader): a fifth place, shown only to students it is for
+ * (see useCourseworkNav), so nobody else's navigation grows.
+ */
+const COURSEWORK_NAV = { href: "/coursework", label: "Coursework", labelKey: "cw.nav", icon: PenLine };
 
 const RAIL_KEY = "scribe.sidebar.rail";
 const NARROW = "(max-width: 1179px)";
@@ -74,6 +82,8 @@ export function NewShell({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const rail = useRail();
+  const coursework = useCourseworkNav(!!user);
+  const nav = coursework ? [...NAV, COURSEWORK_NAV] : NAV;
   const { data: streak } = useStreak();
   const started = !!streak && (streak.longest > 0 || streak.current > 0 || streak.todayDone);
   // Subjects live on home's tiles, not in the sidebar. The tree is only for
@@ -137,7 +147,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           </button>
         </div>
         <nav className="flex flex-col gap-1">
-          {NAV.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
+          {nav.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
             const label = labelKey ? t(labelKey) : fallbackLabel;
             return (
             <Link
@@ -271,9 +281,9 @@ export function NewShell({ children }: { children: React.ReactNode }) {
       {/* Phones: the four places you go every day, one thumb away (the drawer holds settings; subjects are on home). */}
       <nav
         aria-label="Main"
-        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-border bg-white/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+        className={cn("fixed inset-x-0 bottom-0 z-40 grid border-t border-border bg-white/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden", nav.length === 5 ? "grid-cols-5" : "grid-cols-4")}
       >
-        {NAV.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
+        {nav.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
           const label = labelKey ? t(labelKey) : fallbackLabel;
           const on = isActive(href);
           return (
