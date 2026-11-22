@@ -1072,7 +1072,7 @@ export default function SessionDetailPage() {
                 )}
                 {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
                 {planReady && activeActivity && (
-                  <VoiceScribeTrigger active={voiceOpen} onClick={tapVoice} />
+                  <VoiceScribeTrigger active={voiceOpen} onClick={tapVoice} intro={activeActivity.type === "worksheet" && bubble !== "showing"} />
                 )}
                 {planReady && !copilotOpen && (
                   <CopilotTrigger compact onClick={openCopilotByTap} />

@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import "@/lib/i18n/habits";
+import "@/lib/i18n/voice";
 import { cn } from "@/lib/utils";
 import { ItemDots, PlayPrimary, playField, playLink } from "@/components/session/play-ui";
 import { ArrowLeft, ArrowRight, Check, Loader2, PenLine, SkipForward, Undo2, X } from "lucide-react";
@@ -86,16 +87,26 @@ export function WorksheetActivity({
     restored?.skipped ?? {},
   );
   const [introOpen, setIntroOpen] = useState<Record<number, boolean>>({});
+  // Redesign: one part of a question on screen at a time (per question, so Back returns to it).
+  const [partAt, setPartAt] = useState<Record<number, number>>({});
   const [markingInFlight, setMarkingInFlight] = useState(false);
   const firstInput = useRef<HTMLTextAreaElement>(null);
 
+  const step = content.steps[stepIndex];
+  // One part per screen: the answer box on screen is the only one (and the
+  // only one the microphone writes into). The question's stem stays above it.
+  const onePart = newUi && step.parts.length > 1;
+  const partIndex = onePart ? Math.min(partAt[stepIndex] ?? 0, step.parts.length - 1) : 0;
+  const lastPart = !onePart || partIndex === step.parts.length - 1;
+  const goPart = (i: number) => setPartAt((p) => ({ ...p, [stepIndex]: i }));
+
   useReportCurrentItem(activityId, stepIndex);
-  // The player's bottom bar moves between questions here first.
+  // The player's bottom bar moves between parts, then questions, here first.
   useItemNav(activityId, {
-    canNext: () => stepIndex < content.steps.length - 1,
-    canBack: () => stepIndex > 0,
-    next: () => setStepIndex((i) => Math.min(i + 1, content.steps.length - 1)),
-    back: () => setStepIndex((i) => Math.max(i - 1, 0)),
+    canNext: () => !lastPart || stepIndex < content.steps.length - 1,
+    canBack: () => partIndex > 0 || stepIndex > 0,
+    next: () => (lastPart ? setStepIndex((i) => Math.min(i + 1, content.steps.length - 1)) : goPart(partIndex + 1)),
+    back: () => (partIndex > 0 ? goPart(partIndex - 1) : setStepIndex((i) => Math.max(i - 1, 0))),
   });
   useActivityDraft(activityId, {
     stepIndex,
@@ -106,7 +117,6 @@ export function WorksheetActivity({
     skipped,
   });
 
-  const step = content.steps[stepIndex];
   const checked = !!checkedSteps[stepIndex];
   const isLastStep = stepIndex === content.steps.length - 1;
   const key = (partIdx: number) => `${stepIndex}-${partIdx}`;
@@ -132,9 +142,9 @@ export function WorksheetActivity({
     if (checkedSteps[stepIndex]) return;
     if (typeof window === "undefined" || !window.matchMedia("(pointer: fine)").matches) return;
     firstInput.current?.focus({ preventScroll: true });
-    // Only when the question changes.
+    // Only when the question (or the part on screen) changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stepIndex]);
+  }, [stepIndex, partIndex]);
 
   const checkStep = async () => {
     setMarkingInFlight(true);
@@ -292,9 +302,47 @@ export function WorksheetActivity({
           <FigureView key={figure.id} figure={figure} />
         ))}
 
+        {/* Which part is on screen, and how each one stands: answered, marked right or wrong. */}
+        {onePart && (
+          <div className="flex flex-wrap items-center gap-1.5" role="tablist" aria-label={t("worksheet.parts")}>
+            {step.parts.map((part, i) => {
+              const m = markings[key(i)];
+              return (
+                <button
+                  key={part.label}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === partIndex}
+                  aria-label={`${t("worksheet.part")} ${part.label}`}
+                  disabled={markingInFlight}
+                  onClick={() => goPart(i)}
+                  className={cn(
+                    "grid size-9 touch-manipulation place-items-center rounded-full text-[13.5px] font-extrabold ring-inset transition-colors",
+                    i === partIndex
+                      ? "bg-accent text-white"
+                      : checked && m
+                        ? m.correct
+                          ? "bg-emerald-50 text-emerald-900 ring-2 ring-emerald-500"
+                          : "bg-rose-50 text-rose-900 ring-2 ring-rose-400"
+                        : answered(i)
+                          ? "bg-accent-soft text-accent"
+                          : "bg-muted text-foreground hover:bg-[var(--edge)]",
+                  )}
+                >
+                  {part.label}
+                </button>
+              );
+            })}
+            <span className="ml-1 text-small font-semibold text-muted-foreground">
+              {t("worksheet.partOf").replace("{n}", String(partIndex + 1)).replace("{m}", String(step.parts.length))}
+            </span>
+          </div>
+        )}
+
         {/* Sub-questions */}
         <div className={newUi ? "space-y-7" : "space-y-4"}>
           {step.parts.map((part, i) => {
+            if (onePart && i !== partIndex) return null;
             const value = answers[key(i)] ?? "";
             const marking = markings[key(i)];
             const correct = marking?.correct ?? false;
@@ -356,7 +404,7 @@ export function WorksheetActivity({
                     </div>
                   ) : (
                     <RichAnswerField
-                      textareaRef={i === 0 ? firstInput : undefined}
+                      textareaRef={i === partIndex ? firstInput : undefined}
                       value={value}
                       rows={part.type === "numeric" ? 1 : 2}
                       disabled={(checked && correct) || markingInFlight}
@@ -567,8 +615,13 @@ export function WorksheetActivity({
         {newUi ? (
           <div className="flex flex-col-reverse gap-2.5 pt-1 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center justify-center gap-4 sm:justify-start">
-              {stepIndex > 0 && (
-                <button type="button" disabled={markingInFlight} onClick={() => setStepIndex((s) => s - 1)} className={playLink}>
+              {(partIndex > 0 || stepIndex > 0) && (
+                <button
+                  type="button"
+                  disabled={markingInFlight}
+                  onClick={() => (partIndex > 0 ? goPart(partIndex - 1) : setStepIndex((s) => s - 1))}
+                  className={playLink}
+                >
                   {t("session.back")}
                 </button>
               )}
@@ -578,7 +631,13 @@ export function WorksheetActivity({
                 </p>
               )}
             </div>
-            {checked ? (
+            {!lastPart ? (
+              // Not the last part yet: on to the next one (marking waits for the whole question).
+              <PlayPrimary disabled={markingInFlight} onClick={() => goPart(partIndex + 1)}>
+                {t("worksheet.nextPart")}
+                <ArrowRight className="ml-1.5 size-4" />
+              </PlayPrimary>
+            ) : checked ? (
               <PlayPrimary onClick={isLastStep ? onComplete : () => setStepIndex((s) => s + 1)}>
                 {t(isLastStep ? "session.finishWorksheet" : "session.nextQuestion")}
                 <ArrowRight className="ml-1.5 size-4" />

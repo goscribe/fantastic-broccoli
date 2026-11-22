@@ -42,7 +42,7 @@ export default function VoicePreview() {
               <X className="size-[22px]" />
             </button>
             <span className="flex-1 text-small font-bold text-muted-foreground">Practice · 3 of 5</span>
-            <VoiceScribeTrigger active={voiceOpen} onClick={() => voice.current?.toggle()} />
+            <VoiceScribeTrigger active={voiceOpen} onClick={() => voice.current?.toggle()} intro />
             <CopilotTrigger compact onClick={() => {}} />
             <button type="button" aria-label="Session notes" className="relative -mr-3 grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground">
               <MessageSquare className="size-4" />

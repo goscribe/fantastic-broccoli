@@ -39,6 +39,7 @@ test("appendWritten: maths steps go on new lines, words carry on", () => {
   assert.equal(appendWritten("", "2 + 2 = 4", "math"), "2 + 2 = 4");
   assert.equal(appendWritten("2 + 2 = 4", "4 + 3 = 7", "math"), "2 + 2 = 4\n4 + 3 = 7");
   assert.equal(appendWritten("He has", "four.", "prose"), "He has four.");
+  assert.equal(appendWritten("$4 + 3 = 7$", "So he has 7.", "prose"), "$4 + 3 = 7$\nSo he has 7.");
   assert.equal(appendWritten("4", "+ 3", "math", true), "4 + 3");
 });
 

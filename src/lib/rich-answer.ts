@@ -1,58 +1,92 @@
 /**
- * Rich answers stay plain text in the app's own format — Markdown with LaTeX
- * between $…$ — so drafts, marking and the mistakes log read them as before,
- * and MarkdownText renders them. These helpers insert formatting at the caret.
+ * Rich answers are edited in a real editor but saved as plain text in the
+ * app's own format — Markdown with LaTeX between $…$ — so drafts, marking and
+ * the mistakes log read them as before, and MarkdownText renders them.
+ * These convert between that text and the editor's document (Tiptap JSON).
  */
 
-export type SnippetId = "bold" | "italic" | "math" | "frac" | "pow" | "sub" | "sqrt" | "pi" | "times" | "div" | "le" | "ge";
-
-interface Snippet {
-  /** `{sel}` is the selected text; `|` is where the caret lands. */
-  template: string;
-  /** LaTeX: wrapped in $…$ unless the caret is already inside maths. */
-  math: boolean;
+export interface RichMark {
+  type: "bold" | "italic";
 }
 
-export const SNIPPETS: Record<SnippetId, Snippet> = {
-  bold: { template: "**{sel}|**", math: false },
-  italic: { template: "*{sel}|*", math: false },
-  math: { template: "${sel}|$", math: false },
-  frac: { template: "\\frac{{sel}|}{}", math: true },
-  pow: { template: "{sel}^{|}", math: true },
-  sub: { template: "{sel}_{|}", math: true },
-  sqrt: { template: "\\sqrt{{sel}|}", math: true },
-  pi: { template: "{sel}\\pi |", math: true },
-  times: { template: "{sel} \\times |", math: true },
-  div: { template: "{sel} \\div |", math: true },
-  le: { template: "{sel} \\le |", math: true },
-  ge: { template: "{sel} \\ge |", math: true },
-};
+export type RichInline =
+  | { type: "text"; text: string; marks?: RichMark[] }
+  | { type: "inlineMath"; attrs: { latex: string } }
+  | { type: "hardBreak" };
 
-/** Whether `pos` sits between an opening and a closing `$` (escaped \$ doesn't count). */
-export function insideMath(value: string, pos: number): boolean {
-  let open = false;
-  for (let i = 0; i < pos && i < value.length; i++) {
-    if (value[i] === "\\") {
-      i++;
-      continue;
-    }
-    if (value[i] === "$") open = !open;
+export interface RichDoc {
+  type: "doc";
+  content: Array<{ type: "paragraph"; content?: RichInline[] }>;
+}
+
+/** `$…$` maths, `**bold**`, `*italic*`, or an escaped dollar. */
+const INLINE = /\\\$|\$([^$\n]+)\$|\*\*([^*\n]+)\*\*|\*([^*\s\n][^*\n]*)\*/g;
+
+function parseLine(line: string): RichInline[] {
+  const out: RichInline[] = [];
+  const text = (t: string, marks?: RichMark[]) => {
+    if (!t) return;
+    const last = out[out.length - 1];
+    // Plain runs join up, so an escaped $ doesn't split the text.
+    if (!marks && last?.type === "text" && !last.marks) last.text += t;
+    else out.push(marks ? { type: "text", text: t, marks } : { type: "text", text: t });
+  };
+  let at = 0;
+  for (const m of line.matchAll(INLINE)) {
+    text(line.slice(at, m.index));
+    if (m[0] === "\\$") text("$");
+    else if (m[1] !== undefined) out.push({ type: "inlineMath", attrs: { latex: m[1].trim() } });
+    else if (m[2] !== undefined) text(m[2], [{ type: "bold" }]);
+    else if (m[3] !== undefined) text(m[3], [{ type: "italic" }]);
+    at = (m.index ?? 0) + m[0].length;
   }
-  return open;
+  text(line.slice(at));
+  return out;
 }
 
-/** Insert a snippet over the selection [start, end); returns the new text and caret. */
-export function applySnippet(value: string, start: number, end: number, id: SnippetId): { value: string; caret: number } {
-  const { template, math } = SNIPPETS[id];
-  const sel = value.slice(start, end);
-  let body = template.replace("{sel}", sel);
-  if (math && !insideMath(value, start)) body = `$${body}$`;
-  const at = body.indexOf("|");
-  body = body.replace("|", "");
-  return { value: value.slice(0, start) + body + value.slice(end), caret: start + at };
+/** Saved answer text → editor document: one paragraph per line. */
+export function answerToDoc(value: string): RichDoc {
+  return {
+    type: "doc",
+    content: value.split("\n").map((line) => {
+      const content = parseLine(line);
+      return content.length ? { type: "paragraph", content } : { type: "paragraph" };
+    }),
+  };
 }
 
-/** Whether the text has anything a preview would show differently (maths, bold, italics). */
+interface DocNode {
+  type?: string;
+  text?: string;
+  attrs?: Record<string, unknown>;
+  marks?: Array<{ type: string }>;
+  content?: DocNode[];
+}
+
+function inlineToText(node: DocNode): string {
+  if (node.type === "inlineMath") return `$${String(node.attrs?.latex ?? "").trim()}$`;
+  if (node.type === "hardBreak") return "\n";
+  if (node.type !== "text") return (node.content ?? []).map(inlineToText).join("");
+  const raw = (node.text ?? "").replace(/\$/g, "\\$");
+  const marks = new Set((node.marks ?? []).map((m) => m.type));
+  // Keep the spaces outside the markers, or `** bold**` stops being bold.
+  const [, lead, core, trail] = /^(\s*)([\s\S]*?)(\s*)$/.exec(raw) ?? ["", "", raw, ""];
+  if (!core) return raw;
+  let body = core;
+  if (marks.has("italic")) body = `*${body}*`;
+  if (marks.has("bold")) body = `**${body}**`;
+  return lead + body + trail;
+}
+
+/** Editor document → saved answer text. */
+export function docToAnswer(doc: DocNode): string {
+  return (doc.content ?? [])
+    .map((block) => (block.content ?? []).map(inlineToText).join(""))
+    .join("\n")
+    .replace(/\s+$/, "");
+}
+
+/** Whether the text has anything a plain box would show differently (maths, bold, italics). */
 export function hasRichContent(value: string): boolean {
   return /\$[^$]+\$|\\\(|\\\[|\*\*[^*]+\*\*|(^|\s)\*[^*\s][^*]*\*/.test(value);
 }

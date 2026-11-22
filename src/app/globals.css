@@ -623,9 +623,36 @@ input[type="range"].param-slider:active::-moz-range-thumb {
 
 /* Voice scribe: an answer box just written into. */
 [data-voice-flash],
-[data-voice-flash] + [data-rich-rendered] {
+[data-rich-answer]:has([data-voice-flash]) .rich-answer {
   animation: voice-flash 0.9s ease;
 }
 @keyframes voice-flash {
   0% { background-color: var(--accent-soft); box-shadow: 0 0 0 3px var(--accent); }
+}
+
+/* Rich answer boxes (Tiptap): lines without paragraph gaps, the placeholder, maths chips. */
+.rich-answer p {
+  margin: 0;
+}
+.rich-answer p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--faint);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+.rich-answer [data-type="inline-math"] {
+  display: inline-block;
+  padding: 0 3px;
+  margin: 0 1px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.rich-answer [data-type="inline-math"]:hover,
+.rich-answer [data-type="inline-math"].ProseMirror-selectednode {
+  background-color: var(--accent-soft);
+}
+.rich-answer[contenteditable="false"] [data-type="inline-math"] {
+  cursor: default;
 }

@@ -87,7 +87,8 @@ export function appendWritten(existing: string, add: string, kind: ScribeReply["
   if (!text) return existing;
   if (!existing.trim()) return text;
   if (existing.endsWith("\n")) return existing + text;
-  if (kind === "math" && !singleLine) return `${existing}\n${text}`;
+  // A maths step, or words after one, starts its own line.
+  if ((kind === "math" || /\$\s*$/.test(existing)) && !singleLine) return `${existing}\n${text}`;
   return `${existing.replace(/\s+$/, "")} ${text}`;
 }
 

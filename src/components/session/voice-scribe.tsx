@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useImperativeHandle, useRef, useState, type RefObject } from "react";
-import { Check, Loader2, Mic, Square } from "lucide-react";
+import { useEffect, useImperativeHandle, useRef, useState, useSyncExternalStore, type RefObject } from "react";
+import { Check, Loader2, Mic, Square, X } from "lucide-react";
+import { Mascot } from "@/components/rewards/mascot";
 import { interpretSpeech } from "@/lib/api/voice-scribe";
 import {
   answerParts,
@@ -17,7 +18,7 @@ import {
   type AnswerPart,
   type Listener,
 } from "@/lib/voice-scribe";
-import { MathText } from "@/components/ui/markdown-text";
+import { MarkdownText, MathText } from "@/components/ui/markdown-text";
 import { playLink } from "@/components/session/play-ui";
 import { toast } from "@/lib/toast";
 import { useI18n } from "@/lib/i18n";
@@ -41,23 +42,131 @@ interface Step {
   state: "live" | "writing" | "done" | "undone" | "note";
 }
 
-/** The top-bar button: opens the overlay, and while it is open, stops and writes. */
-export function VoiceScribeTrigger({ active, onClick }: { active: boolean; onClick: () => void }) {
+const INTRO_KEY = "scribe.voiceIntroSeen";
+const introListeners = new Set<() => void>();
+
+function introSeen(): boolean {
+  try {
+    return window.localStorage.getItem(INTRO_KEY) === "1";
+  } catch {
+    return true;
+  }
+}
+
+function markIntroSeen() {
+  try {
+    window.localStorage.setItem(INTRO_KEY, "1");
+  } catch {
+    /* private mode: it shows again next visit */
+  }
+  introListeners.forEach((fn) => fn());
+}
+
+/** Whether this device has had the cat's "talk to write" intro. Server render: yes (nothing to flash). */
+function useIntroSeen(): boolean {
+  return useSyncExternalStore(
+    (fn) => {
+      introListeners.add(fn);
+      return () => introListeners.delete(fn);
+    },
+    introSeen,
+    () => true,
+  );
+}
+
+/**
+ * The top-bar button: opens the overlay, and while it is open, stops and
+ * writes. With `intro`, the first time on this device the cat points at it
+ * in a speech bubble and says what it does.
+ */
+export function VoiceScribeTrigger({ active, onClick, intro = false }: { active: boolean; onClick: () => void; intro?: boolean }) {
   const { t } = useI18n();
+  const seen = useIntroSeen();
+  const showIntro = intro && !seen && !active;
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={t(active ? "voice.stopAndWrite" : "voice.open")}
-      title={t(active ? "voice.stopAndWrite" : "voice.open")}
-      aria-pressed={active}
-      className={cn(
-        "grid size-11 shrink-0 place-items-center rounded-full hover:bg-muted hover:text-foreground",
-        active ? "bg-accent-soft text-accent" : "text-muted-foreground",
+    <span className="relative shrink-0">
+      <button
+        type="button"
+        onClick={() => {
+          if (!seen) markIntroSeen();
+          onClick();
+        }}
+        aria-label={t(active ? "voice.stopAndWrite" : "voice.open")}
+        title={t(active ? "voice.stopAndWrite" : "voice.open")}
+        aria-pressed={active}
+        className={cn(
+          "grid size-11 place-items-center rounded-full hover:bg-muted hover:text-foreground",
+          active || showIntro ? "bg-accent-soft text-accent" : "text-muted-foreground",
+        )}
+      >
+        <Mic className="size-4" />
+      </button>
+      {showIntro && (
+        // The cat, pointing up at the mic. Its right edge lines up with the top bar's.
+        <div
+          role="note"
+          className="animate-bubble-in absolute right-[-76px] top-full z-40 mt-2.5 w-[min(320px,calc(100vw-32px))] rounded-[22px] border border-border bg-card p-3.5 shadow-[0_14px_34px_-18px_rgba(0,0,0,0.35)]"
+        >
+          <span aria-hidden className="absolute -top-[7px] right-[92px] size-3 rotate-45 border-l border-t border-border bg-card" />
+          <div className="flex gap-3">
+            <Mascot pose="pencil" className="h-14 shrink-0" />
+            <div className="min-w-0 flex-1">
+              <p className="text-ui font-extrabold leading-snug text-foreground">{t("voice.introTitle")}</p>
+              <p className="mt-1 text-small leading-snug text-muted-foreground">{t("voice.introBody")}</p>
+            </div>
+            <button
+              type="button"
+              onClick={markIntroSeen}
+              aria-label={t("voice.introDismiss")}
+              className="-mr-1 -mt-1 grid size-8 shrink-0 place-items-center rounded-full text-faint hover:bg-muted hover:text-foreground"
+            >
+              <X className="size-3.5" />
+            </button>
+          </div>
+          <div className="mt-2.5 flex justify-end">
+            <button
+              type="button"
+              onClick={() => {
+                markIntroSeen();
+                onClick();
+              }}
+              className="inline-flex h-10 items-center gap-1.5 rounded-full bg-accent px-4 text-[14px] font-extrabold text-white"
+            >
+              <Mic className="size-4" />
+              {t("voice.introTry")}
+            </button>
+          </div>
+        </div>
       )}
-    >
-      <Mic className="size-4" />
-    </button>
+    </span>
+  );
+}
+
+/** Before the learner says anything: the cat explains the three steps in a speech bubble. */
+function HowItWorks() {
+  const { t } = useI18n();
+  const steps = [
+    { n: 1, body: <>{t("voice.how1")} <span className="italic text-muted-foreground">{t("voice.how1Example")}</span></> },
+    { n: 2, body: <>{t("voice.how2")} <span className="font-semibold"><MathText text="$2 + 2 = 4$" /></span></> },
+    { n: 3, body: <>{t("voice.how3")}</> },
+  ];
+  return (
+    <li className="flex items-start gap-3">
+      <Mascot pose="think" className="mt-3 h-16 shrink-0" />
+      <div className="relative min-w-0 flex-1 rounded-[22px] border border-border bg-card px-4 py-3.5 shadow-[0_8px_24px_-16px_rgba(17,17,20,.35)]">
+        <span aria-hidden className="absolute -left-[7px] top-8 size-3 rotate-45 border-b border-l border-border bg-card" />
+        <p className="text-ui font-extrabold text-foreground">{t("voice.howTitle")}</p>
+        <ol className="mt-2 space-y-2">
+          {steps.map((s) => (
+            <li key={s.n} className="flex gap-2.5 text-ui leading-snug text-foreground">
+              <span className="mt-px grid size-5 shrink-0 place-items-center rounded-full bg-accent-soft text-[11px] font-extrabold text-accent">{s.n}</span>
+              <span className="min-w-0">{s.body}</span>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-2.5 text-small text-muted-foreground">{t("voice.howUndo")}</p>
+      </div>
+    </li>
   );
 }
 
@@ -137,7 +246,9 @@ export function VoiceScribe({
   // The box the learner last typed in is the part they mean.
   useEffect(() => {
     const onFocus = (e: FocusEvent) => {
-      const el = e.target as Element | null;
+      // A rich answer box is edited in its editor; its text lives in its textarea.
+      const target = e.target as Element | null;
+      const el = target?.closest("[data-rich-answer]")?.querySelector("textarea") ?? target;
       if (isFillable(el) && scope.current?.contains(el) && !el.closest("[data-voice-ignore]")) lastFocused.current = el;
     };
     document.addEventListener("focusin", onFocus);
@@ -385,7 +496,7 @@ export function VoiceScribe({
         </p>
 
         <ol className="mt-3 min-h-0 flex-1 space-y-3 overflow-y-auto" aria-live="polite">
-          {steps.length === 0 && <li className="text-ui text-muted-foreground">{t("voice.hint")}</li>}
+          {steps.length === 0 && <HowItWorks />}
           {steps.map((s, i) => (
             <li
               key={s.id}
@@ -410,8 +521,8 @@ export function VoiceScribe({
                 s.wrote && <span className="text-small font-bold text-accent">{s.wrote}</span>
               ) : (
                 <span className="flex flex-wrap items-baseline gap-x-2">
-                  <span className={cn("text-[17px] font-semibold leading-snug text-foreground", s.state === "undone" && "line-through")}>
-                    <MathText text={s.wrote} />
+                  <span className={cn("text-[17px] leading-snug text-foreground [&_p]:m-0", s.state === "undone" && "line-through")}>
+                    <MarkdownText text={s.wrote} />
                   </span>
                   {several && <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-extrabold text-accent">→ {s.part}</span>}
                 </span>
@@ -456,7 +567,7 @@ export function VoiceScribe({
           </button>
         </div>
         <p className="mt-1.5 text-center text-small text-muted-foreground">
-          {listening ? t("voice.tip") : hasDone ? t("voice.tipPaused") : t("voice.hint")}
+          {steps.length === 0 ? "" : listening ? t("voice.tip") : hasDone ? t("voice.tipPaused") : t("voice.hint")}
         </p>
       </div>
     </div>
