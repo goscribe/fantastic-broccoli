@@ -621,10 +621,7 @@ input[type="range"].param-slider:active::-moz-range-thumb {
   outline-offset: 2px;
 }
 
-/* Voice scribe: the answer box spoken words go into. */
-[data-voice-target] {
-  box-shadow: 0 0 0 2px var(--accent) !important;
-}
+/* Voice scribe: an answer box just written into. */
 [data-voice-flash] {
   animation: voice-flash 0.9s ease;
 }

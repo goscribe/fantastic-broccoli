@@ -1100,14 +1100,11 @@ export default function SessionDetailPage() {
 
           <div
             key={!planReady ? "building" : (activeActivity?.id ?? "debrief")}
-            data-voice-scroll
             className={cn(
               // Room for the bottom bar and the phone's home indicator, so the last answer is never under them.
               "min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-4 sm:px-10 sm:pt-6",
               // Phones: the Hint / Why? half-sheet covers the bottom half; the answers under it stay reachable.
               planReady && copilotOpen && copilotAsk && "max-sm:pb-[calc(52dvh+1.5rem)]",
-              // Talk to write: room to bring the answer box up above the overlay.
-              voiceOpen && "pb-[calc(58dvh+1rem)]",
               navDirection === "back" ? "animate-slide-in-left" : "animate-slide-in-right",
             )}
           >

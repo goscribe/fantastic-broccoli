@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useImperativeHandle, useRef, useState, type RefObject } from "react";
-import { Check, ChevronDown, Loader2, Mic, Square } from "lucide-react";
+import { Check, Loader2, Mic, Square } from "lucide-react";
 import { interpretSpeech } from "@/lib/api/voice-scribe";
 import {
-  answerFields,
+  answerParts,
   appendWritten,
-  defaultAnswerField,
   isFillable,
   listen,
   questionContext,
@@ -14,8 +13,11 @@ import {
   setFieldValue,
   speechSupported,
   spokenCommand,
+  spokenSwitch,
+  type AnswerPart,
   type Listener,
 } from "@/lib/voice-scribe";
+import { MathText } from "@/components/ui/markdown-text";
 import { playLink } from "@/components/session/play-ui";
 import { toast } from "@/lib/toast";
 import { useI18n } from "@/lib/i18n";
@@ -25,15 +27,17 @@ import { cn } from "@/lib/utils";
 type Field = HTMLTextAreaElement | HTMLInputElement;
 
 /**
- * One line of the chain: what the learner said and what Scribe will write.
- * "live" is still being heard, "writing" is with the server, "undone" is
- * crossed out (kept, so the chain stays whole), "note" records a command.
+ * One line of the chain: what the learner said and what Scribe will write,
+ * and the part it goes into. "live" is still being heard, "writing" is with
+ * the server, "undone" is crossed out (kept, so the chain stays whole),
+ * "note" records a switch or a command.
  */
 interface Step {
   id: number;
   said: string;
   wrote: string;
   math: boolean;
+  part: string;
   state: "live" | "writing" | "done" | "undone" | "note";
 }
 
@@ -57,28 +61,35 @@ export function VoiceScribeTrigger({ active, onClick }: { active: boolean; onCli
   );
 }
 
-/** Which box this is, for the chip ("Answer b"): the box's part label when the activity marks one. */
-function fieldLabel(field: Field | null, scope: HTMLElement | null): string {
-  if (!field) return "";
-  const marked = field.closest("[data-dictation-label]")?.getAttribute("data-dictation-label");
-  if (marked) return marked;
-  const i = answerFields(scope).indexOf(field);
-  return i >= 0 ? String(i + 1) : "";
-}
-
 /** What the page can ask of the voice scribe. */
 export interface VoiceScribeHandle {
   /** Closed: open and start listening. Open: stop and write it in. */
   toggle: () => void;
 }
 
+/** A box just written into: grown to show every line, and flashed. */
+function showWritten(box: Field) {
+  if (box instanceof HTMLTextAreaElement && box.scrollHeight > box.clientHeight) box.style.height = `${box.scrollHeight + 2}px`;
+  box.removeAttribute("data-voice-flash");
+  void box.offsetWidth;
+  box.setAttribute("data-voice-flash", "");
+  window.setTimeout(() => box.removeAttribute("data-voice-flash"), 1000);
+}
+
+/** "a and b", for the toast after writing into several boxes. */
+function joinLabels(labels: string[], and: string): string {
+  return labels.length < 2 ? (labels[0] ?? "") : `${labels.slice(0, -1).join(", ")} ${and} ${labels[labels.length - 1]}`;
+}
+
 /**
  * Talk to write: one microphone for the whole page, not one per box. While
- * the learner talks, a see-through overlay over the bottom of the screen
- * shows the whole chain — what they said, then what Scribe will write, with
- * spoken maths turned into notation using the question's own numbers
- * ("add the oranges to the bananas" → 2 + 2 = 4). Stopping puts the lines
- * into the answer box, the way typing would.
+ * the learner talks, a see-through overlay shows the question they are
+ * answering at the top and the whole chain under it — what they said, then
+ * what Scribe will write, with spoken maths turned into notation using the
+ * question's own numbers ("add the oranges to the bananas" → 2 + 2 = 4).
+ * Scribe follows them between parts: "part b" or "next part" moves on, and a
+ * phrase that clearly answers another part moves there by itself. Stopping
+ * puts each part's lines into its own answer box, the way typing would.
  *
  * `scope` is the content the answer boxes and the question live in. The page
  * opens and stops it through `ref` and hears about it through `onOpenChange`.
@@ -96,10 +107,12 @@ export function VoiceScribe({
   const [open, setOpenState] = useState(false);
   const [steps, setSteps] = useState<Step[]>([]);
   const [listening, setListening] = useState(false);
-  const [field, setField] = useState<Field | null>(null);
+  const [parts, setParts] = useState<AnswerPart[]>([]);
+  const [current, setCurrentState] = useState("");
 
   const stepsRef = useRef<Step[]>([]);
-  const fieldRef = useRef<Field | null>(null);
+  const partsRef = useRef<AnswerPart[]>([]);
+  const currentRef = useRef("");
   const lastFocused = useRef<Field | null>(null);
   const listener = useRef<Listener | null>(null);
   const queue = useRef<Promise<void>>(Promise.resolve());
@@ -110,13 +123,18 @@ export function VoiceScribe({
     setOpenState(next);
     onOpenChange(next);
   };
-
+  const setCurrent = (label: string) => {
+    currentRef.current = label;
+    setCurrentState(label);
+  };
   const updateSteps = (fn: (s: Step[]) => Step[]) => {
     stepsRef.current = fn(stepsRef.current);
     setSteps(stepsRef.current);
   };
+  const note = (text: string, said = "") =>
+    updateSteps((list) => [...list, { id: nextId.current++, said, wrote: text, math: false, part: currentRef.current, state: "note" }]);
 
-  // The box the learner last typed in is the one they mean.
+  // The box the learner last typed in is the part they mean.
   useEffect(() => {
     const onFocus = (e: FocusEvent) => {
       const el = e.target as Element | null;
@@ -126,37 +144,20 @@ export function VoiceScribe({
     return () => document.removeEventListener("focusin", onFocus);
   }, [scope]);
 
-  /** Mark a box as the one words go into, and bring it up above the overlay. */
-  const chooseField = (next: Field | null) => {
-    fieldRef.current?.removeAttribute("data-voice-target");
-    fieldRef.current = next;
-    setField(next);
-    if (!next) return;
-    next.setAttribute("data-voice-target", "");
-    // After the page's bottom padding has grown, so there is room to scroll.
-    window.setTimeout(() => {
-      const box = next.getBoundingClientRect();
-      // Its bottom edge just above the overlay (which covers the lower 58%).
-      const goal = window.innerHeight * 0.42 - 12;
-      const holder = next.closest("[data-voice-scroll]") ?? document.scrollingElement;
-      holder?.scrollBy({ top: box.bottom - goal, behavior: "smooth" });
-    }, 220);
+  const partFor = (label: string) => partsRef.current.find((p) => p.label === label);
+
+  /** Move to a part; `why` says how, as a line in the chain. */
+  const switchTo = (label: string, why: "said" | "heard" | "tapped", said = "") => {
+    if (!partFor(label) || label === currentRef.current) return;
+    setCurrent(label);
+    if (why !== "tapped") note(t(why === "said" ? "voice.switched" : "voice.autoSwitched").replace("{part}", label), said);
   };
 
-  const currentField = (): Field | null => {
-    const kept = fieldRef.current;
-    if (kept && kept.isConnected && isFillable(kept)) return kept;
-    const focused = lastFocused.current;
-    const next = focused && focused.isConnected && isFillable(focused) ? focused : defaultAnswerField(scope.current);
-    chooseField(next);
-    return next;
-  };
-
-  const cycleField = () => {
-    const fields = answerFields(scope.current);
-    if (fields.length < 2) return;
-    const at = fieldRef.current ? fields.indexOf(fieldRef.current) : -1;
-    chooseField(fields[(at + 1) % fields.length]);
+  const step = (by: 1 | -1, said: string) => {
+    const labels = partsRef.current.map((p) => p.label);
+    const next = labels[labels.indexOf(currentRef.current) + by];
+    if (next) switchTo(next, "said", said);
+    else note(t(by === 1 ? "voice.noNext" : "voice.noPrevious"), said);
   };
 
   /** Cross out the last step still standing. */
@@ -166,58 +167,72 @@ export function VoiceScribe({
       let next = last ? list.map((s) => (s === last ? { ...s, state: "undone" as const } : s)) : list;
       if (said) {
         const n = last ? list.indexOf(last) + 1 : 0;
-        next = [...next, { id: nextId.current++, said, wrote: n ? t("voice.crossedOut").replace("{n}", String(n)) : "", math: false, state: "note" }];
+        next = [...next, { id: nextId.current++, said, wrote: n ? t("voice.crossedOut").replace("{n}", String(n)) : "", math: false, part: currentRef.current, state: "note" }];
       }
       return next;
     });
   };
 
-  /** One finished phrase: commands act at once, words go to the server in order. */
-  const handlePhrase = (phrase: string) => {
-    const command = spokenCommand(phrase);
-    updateSteps((list) => list.filter((s) => s.state !== "live"));
-    if (command === "undo") {
-      undo(phrase);
-      return;
-    }
+  /** One phrase of working: to the server, in order, so each step sees the one before. */
+  const write = (phrase: string, said = phrase) => {
     const id = nextId.current++;
-    if (command === "newline") {
-      updateSteps((list) => [...list, { id, said: phrase, wrote: "↵", math: false, state: "note" }]);
-      return;
-    }
-    updateSteps((list) => [...list, { id, said: phrase, wrote: "", math: false, state: "writing" }]);
+    const part = currentRef.current;
+    updateSteps((list) => [...list, { id, said, wrote: "", math: false, part, state: "writing" }]);
     queue.current = queue.current.then(async () => {
-      const box = currentField();
-      // What is written so far: the box, then the steps waiting to go in.
-      const pendingLines = stepsRef.current.filter((s) => s.state === "done").map((s) => s.wrote);
-      const written = [box?.value ?? "", ...pendingLines].filter(Boolean).join("\n");
+      const box = partFor(part)?.field ?? null;
+      const doneHere = stepsRef.current.filter((s) => s.state === "done" && s.part === part).map((s) => s.wrote);
       const reply = await interpretSpeech({
         transcript: phrase,
         target: "answer",
         question: questionContext(box, scope.current),
-        written,
-      }).catch(() => ({ text: phrase, kind: "prose" as const, fallback: true }));
+        written: [box?.value ?? "", ...doneHere].filter(Boolean).join("\n"),
+        parts: partsRef.current.map((p) => ({ label: p.label, prompt: p.prompt })),
+        currentPart: part,
+      }).catch(() => ({ text: phrase, kind: "prose" as const, part: "", fallback: true }));
       if (reply.fallback) toast(t("voice.asSpoken"), { id: "voice-as-spoken" });
+      // It answers another part: it goes there, and so does the learner.
+      const moved = reply.part && partFor(reply.part) ? reply.part : "";
       const text = reply.text.trim();
       updateSteps((list) =>
         list.map((s) =>
-          s.id !== id ? s : text ? { ...s, wrote: text, math: reply.kind === "math", state: "done" } : { ...s, wrote: "", state: "note" },
+          s.id !== id
+            ? s
+            : text
+              ? { ...s, wrote: text, math: reply.kind === "math", part: moved || s.part, state: "done" }
+              : { ...s, wrote: "", state: "note" },
         ),
       );
+      if (moved) switchTo(moved, "heard");
     });
+  };
+
+  /** One finished phrase: switches and commands act at once; the rest is working. */
+  const handlePhrase = (phrase: string) => {
+    updateSteps((list) => list.filter((s) => s.state !== "live"));
+    const move = spokenSwitch(phrase, partsRef.current.map((p) => p.label));
+    if (move) {
+      if ("to" in move) switchTo(move.to, "said", move.rest ? "" : phrase);
+      else step(move.step, move.rest ? "" : phrase);
+      if (move.rest) write(move.rest, phrase);
+      return;
+    }
+    const command = spokenCommand(phrase);
+    if (command === "undo") undo(phrase);
+    else if (command === "newline") note("↵", phrase);
+    else write(phrase);
   };
 
   const onInterim = (text: string) => {
     updateSteps((list) => {
       const rest = list.filter((s) => s.state !== "live");
-      return text ? [...rest, { id: -1, said: text, wrote: "", math: false, state: "live" }] : rest;
+      return text ? [...rest, { id: -1, said: text, wrote: "", math: false, part: currentRef.current, state: "live" }] : rest;
     });
   };
 
   // Recognition outlives renders; its callbacks reach the latest handlers through here.
-  const handlers = useRef({ handlePhrase, onInterim, choose: chooseField });
+  const handlers = useRef({ handlePhrase, onInterim });
   useEffect(() => {
-    handlers.current = { handlePhrase, onInterim, choose: chooseField };
+    handlers.current = { handlePhrase, onInterim };
   });
 
   const stopListening = () => {
@@ -227,20 +242,18 @@ export function VoiceScribe({
   };
 
   const startListening = () => {
-    if (!speechSupported()) {
-      toast.error(t("voice.unsupported"), { id: "voice-unsupported" });
-      return false;
-    }
-    const l = listen({
-      lang: recognitionLang(locale, typeof navigator === "undefined" ? [] : (navigator.languages ?? [])),
-      onPhrase: (text) => handlers.current.handlePhrase(text),
-      onInterim: (text) => handlers.current.onInterim(text),
-      onError: (reason) => toast.error(t(reason === "denied" ? "voice.denied" : "voice.failed"), { id: "voice-error" }),
-      onEnd: () => {
-        listener.current = null;
-        setListening(false);
-      },
-    });
+    const l = speechSupported()
+      ? listen({
+          lang: recognitionLang(locale, typeof navigator === "undefined" ? [] : (navigator.languages ?? [])),
+          onPhrase: (text) => handlers.current.handlePhrase(text),
+          onInterim: (text) => handlers.current.onInterim(text),
+          onError: (reason) => toast.error(t(reason === "denied" ? "voice.denied" : "voice.failed"), { id: "voice-error" }),
+          onEnd: () => {
+            listener.current = null;
+            setListening(false);
+          },
+        })
+      : null;
     if (!l) {
       toast.error(t("voice.unsupported"), { id: "voice-unsupported" });
       return false;
@@ -254,44 +267,43 @@ export function VoiceScribe({
     stopListening();
     stepsRef.current = [];
     setSteps([]);
-    fieldRef.current?.removeAttribute("data-voice-target");
-    fieldRef.current = null;
-    setField(null);
     setOpen(false);
   };
 
-  /** Open, pick the box, and listen: the learner tapped the mic to talk. */
+  /** Open on the part the learner is on: the box they last typed in, else the first one still empty. */
   const start = () => {
+    const found = answerParts(scope.current);
+    partsRef.current = found;
+    setParts(found);
+    const focused = found.find((p) => p.field === lastFocused.current && p.field.isConnected);
+    setCurrent((focused ?? found.find((p) => !p.field.value.trim()) ?? found[0])?.label ?? "");
     if (!startListening()) return;
     setOpen(true);
-    currentField();
   };
 
-  /** Stop: wait for the phrases still being written, then put the lines into the box. */
+  /** Stop: wait for the phrases still being written, then put each part's lines into its box. */
   const stopAndWrite = async () => {
     stopListening();
     await queue.current;
-    const lines = stepsRef.current.filter((s) => s.state === "done");
-    const box = currentField();
-    if (lines.length && box) {
+    const done = stepsRef.current.filter((s) => s.state === "done");
+    const filled: string[] = [];
+    for (const part of partsRef.current) {
+      const lines = done.filter((s) => s.part === part.label);
+      const box = part.field;
+      if (!lines.length || !box.isConnected) continue;
       let value = box.value;
       for (const s of lines) value = appendWritten(value, s.wrote, s.math ? "math" : "prose", box instanceof HTMLInputElement);
       setFieldValue(box, value);
-      // A short box grows to show every line that went in.
-      if (box instanceof HTMLTextAreaElement && box.scrollHeight > box.clientHeight) box.style.height = `${box.scrollHeight + 2}px`;
-      box.removeAttribute("data-voice-flash");
-      void box.offsetWidth;
-      box.setAttribute("data-voice-flash", "");
-      window.setTimeout(() => box.removeAttribute("data-voice-flash"), 1000);
-      window.setTimeout(() => box.scrollIntoView({ block: "center", behavior: "smooth" }), 50);
-      const label = fieldLabel(box, scope.current);
-      toast.success(
-        t(lines.length === 1 ? "voice.addedOne" : "voice.addedMany").replace("{n}", String(lines.length)).replace("{box}", label),
-        { id: "voice-added" },
-      );
-    } else if (lines.length) {
+      showWritten(box);
+      filled.push(part.label);
+    }
+    if (filled.length) {
+      const last = partFor(filled[filled.length - 1])?.field;
+      window.setTimeout(() => last?.scrollIntoView({ block: "center", behavior: "smooth" }), 50);
+      toast.success(t(filled.length > 1 ? "voice.addedMany" : "voice.added").replace("{parts}", joinLabels(filled, t("voice.and"))), { id: "voice-added" });
+    } else if (done.length) {
       // No box on this question: the working is not lost.
-      void navigator.clipboard?.writeText(lines.map((s) => s.wrote).join("\n")).catch(() => {});
+      void navigator.clipboard?.writeText(done.map((s) => s.wrote).join("\n")).catch(() => {});
       toast(t("voice.copiedNoBox"), { id: "voice-added" });
     }
     close();
@@ -300,22 +312,6 @@ export function VoiceScribe({
   useImperativeHandle(ref, () => ({
     toggle: () => (open ? void stopAndWrite() : start()),
   }));
-
-  // Phones: tapping a box picks it without opening the keyboard.
-  useEffect(() => {
-    if (!open) return;
-    const root = scope.current;
-    if (!root || !window.matchMedia("(pointer: coarse)").matches) return;
-    const pick = (e: Event) => {
-      const el = (e.target as Element | null)?.closest("textarea, input") ?? null;
-      if (!isFillable(el) || !answerFields(root).includes(el)) return;
-      e.preventDefault();
-      lastFocused.current = el;
-      handlers.current.choose(el);
-    };
-    root.addEventListener("touchend", pick, { passive: false });
-    return () => root.removeEventListener("touchend", pick);
-  }, [open, scope]);
 
   // Leaving the page stops the microphone.
   useEffect(() => () => listener.current?.stop(), []);
@@ -328,40 +324,65 @@ export function VoiceScribe({
 
   const writing = steps.some((s) => s.state === "writing");
   const hearing = steps.some((s) => s.state === "live");
-  const label = fieldLabel(field, scope.current);
-  const boxes = answerFields(scope.current).length;
+  const hasDone = steps.some((s) => s.state === "done");
+  const several = parts.length > 1;
+  const part = parts.find((p) => p.label === current);
+  // A question without marked parts: its own words, from the page.
+  const prompt = part?.prompt || questionContext(part?.field ?? null, scope.current).split("\n").find((l) => l.trim().length > 12) || "";
 
   return (
     <div
       role="dialog"
       aria-label={t("voice.title")}
       data-voice-ignore
-      className="life-rise fixed inset-x-0 bottom-0 z-50 flex h-[58dvh] flex-col px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5 backdrop-blur-[2px] [background:linear-gradient(to_bottom,transparent,color-mix(in_srgb,var(--card)_80%,transparent)_16%,color-mix(in_srgb,var(--card)_86%,transparent)_70%,color-mix(in_srgb,var(--card)_94%,transparent))]"
+      className="life-rise fixed inset-x-0 bottom-0 top-[calc(max(0.5rem,env(safe-area-inset-top))+3rem)] z-50 flex flex-col bg-[color-mix(in_srgb,var(--card)_88%,transparent)] px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur-md sm:px-10"
     >
       <div className="mx-auto flex min-h-0 w-full max-w-3xl flex-1 flex-col">
-        <div className="mt-6 flex items-center justify-between gap-2">
-          <p className="flex items-center gap-2 text-ui font-extrabold" role="status">
-            {writing ? (
-              <Loader2 className="size-4 animate-spin text-muted-foreground" aria-hidden />
-            ) : (
-              <span className={cn("size-2.5 rounded-full", listening ? "bg-rose-500 animate-pulse-dot motion-reduce:animate-none" : "bg-faint")} aria-hidden />
+        {/* The question being answered, up top; the parts to move between beside it. */}
+        <section aria-label={t("voice.answering")} className="rounded-[22px] bg-card px-4 py-3.5 shadow-[0_8px_24px_-16px_rgba(17,17,20,.35)] ring-1 ring-border">
+          <div className="flex items-center gap-2">
+            <p className="text-small font-bold text-muted-foreground">{t("voice.answering")}</p>
+            {several && (
+              <div className="ml-auto flex gap-1.5" role="radiogroup" aria-label={t("voice.parts")}>
+                {parts.map((p) => (
+                  <button
+                    key={p.label}
+                    type="button"
+                    role="radio"
+                    aria-checked={p.label === current}
+                    onClick={() => switchTo(p.label, "tapped")}
+                    className={cn(
+                      "grid size-8 place-items-center rounded-full text-[13.5px] font-extrabold transition-colors",
+                      p.label === current ? "bg-accent text-white" : "bg-muted text-foreground hover:bg-[var(--edge)]",
+                    )}
+                  >
+                    {p.label}
+                  </button>
+                ))}
+              </div>
             )}
-            {t(writing ? "voice.writing" : hearing ? "voice.hearing" : listening ? "voice.listening" : "voice.paused")}
+          </div>
+          <p key={current} className="life-rise mt-1.5 flex gap-2.5 text-[17px] font-extrabold leading-snug text-foreground">
+            {several && <span className="shrink-0 text-accent">{current}</span>}
+            <span className="min-w-0 line-clamp-4">
+              <MathText text={prompt} />
+            </span>
           </p>
-          {field ? (
-            <button
-              type="button"
-              onClick={cycleField}
-              disabled={boxes < 2}
-              className="inline-flex shrink-0 items-center gap-1 rounded-full bg-muted px-3 py-1.5 text-[12px] font-extrabold text-foreground disabled:cursor-default"
-            >
-              {t("voice.into").replace("{box}", label)}
-              {boxes > 1 && <ChevronDown className="size-3.5" aria-hidden />}
-            </button>
-          ) : (
-            <span className="text-small font-semibold text-muted-foreground">{t("voice.noAnswerBox")}</span>
+          {several && (
+            <p className="mt-2 text-small text-muted-foreground">
+              {t("voice.howToSwitch").replace("{part}", parts.find((p) => p.label !== current)?.label ?? "")}
+            </p>
           )}
-        </div>
+        </section>
+
+        <p className="mt-4 flex items-center gap-2 text-ui font-extrabold" role="status">
+          {writing ? (
+            <Loader2 className="size-4 animate-spin text-muted-foreground" aria-hidden />
+          ) : (
+            <span className={cn("size-2.5 rounded-full", listening ? "bg-rose-500 animate-pulse-dot motion-reduce:animate-none" : "bg-faint")} aria-hidden />
+          )}
+          {t(writing ? "voice.writing" : hearing ? "voice.hearing" : listening ? "voice.listening" : "voice.paused")}
+        </p>
 
         <ol className="mt-3 min-h-0 flex-1 space-y-3 overflow-y-auto" aria-live="polite">
           {steps.length === 0 && <li className="text-ui text-muted-foreground">{t("voice.hint")}</li>}
@@ -374,18 +395,23 @@ export function VoiceScribe({
               <span className="row-span-2 mt-0.5 grid size-[22px] place-items-center rounded-full bg-muted text-[11px] font-extrabold tabular-nums text-muted-foreground">
                 {i + 1}
               </span>
-              <span className="text-small italic text-muted-foreground">
-                <Mic className="mr-1 inline size-3 -translate-y-px not-italic" aria-hidden />“{s.said}”
-              </span>
+              {s.said ? (
+                <span className="text-small italic text-muted-foreground">
+                  <Mic className="mr-1 inline size-3 -translate-y-px" aria-hidden />“{s.said}”
+                </span>
+              ) : (
+                <span />
+              )}
               {s.state === "live" ? (
                 <span className="text-small text-faint">…</span>
               ) : s.state === "writing" ? (
                 <span className="text-small font-semibold text-faint">{t("voice.writing")}</span>
               ) : s.state === "note" ? (
-                s.wrote && <span className="text-small font-bold text-muted-foreground">{s.wrote}</span>
+                s.wrote && <span className="text-small font-bold text-accent">{s.wrote}</span>
               ) : (
-                <span className={cn("font-mono text-[16px] font-bold leading-snug text-foreground", s.state === "undone" && "line-through")}>
-                  {s.wrote}
+                <span className="flex flex-wrap items-baseline gap-x-2">
+                  <span className={cn("font-mono text-[16px] font-bold leading-snug text-foreground", s.state === "undone" && "line-through")}>{s.wrote}</span>
+                  {several && <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-extrabold text-accent">→ {s.part}</span>}
                 </span>
               )}
             </li>
@@ -396,7 +422,7 @@ export function VoiceScribe({
           <button type="button" onClick={close} className={cn(playLink, "justify-self-start no-underline")}>
             {t("voice.cancel")}
           </button>
-          {listening || steps.some((s) => s.state === "done") ? (
+          {listening || hasDone ? (
             <button
               type="button"
               onClick={() => void stopAndWrite()}
@@ -421,14 +447,14 @@ export function VoiceScribe({
           <button
             type="button"
             onClick={() => undo()}
-            disabled={!steps.some((s) => s.state === "done")}
+            disabled={!hasDone}
             className={cn(playLink, "justify-self-end no-underline disabled:opacity-40")}
           >
             {t("voice.undo")}
           </button>
         </div>
         <p className="mt-1.5 text-center text-small text-muted-foreground">
-          {listening ? t("voice.tip") : steps.some((s) => s.state === "done") ? t("voice.tipPaused") : t("voice.hint")}
+          {listening ? t("voice.tip") : hasDone ? t("voice.tipPaused") : t("voice.hint")}
         </p>
       </div>
     </div>

@@ -49,10 +49,8 @@ export default function VoicePreview() {
           </div>
         </div>
         <div
-          data-voice-scroll
           className={cn(
             "min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-4 sm:px-10 sm:pt-6",
-            voiceOpen && "pb-[calc(58dvh+1rem)]",
           )}
         >
           <div ref={content} className="mx-auto w-full max-w-3xl">

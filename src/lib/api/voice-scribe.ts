@@ -10,6 +10,8 @@ export function interpretSpeech(input: {
   target: VoiceTarget;
   question?: string;
   written?: string;
+  parts?: Array<{ label: string; prompt: string }>;
+  currentPart?: string;
 }): Promise<ScribeReply> {
   return rpc<ScribeReply>("voiceScribe.interpret", "mutation", input);
 }
