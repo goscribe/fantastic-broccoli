@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-6",
+  "topicCode": "3.6",
+  "topicName": "Voronoi diagrams",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:34.217Z",
+  "cards": [
+    {
+      "id": "1myvis2",
+      "kind": "concept",
+      "front": "In a Voronoi diagram, how is a point's cell decided?",
+      "back": "Each point belongs to the cell of its **nearest site**. Every point in a cell is closer to that cell's site than to any other site.",
+      "hint": "Imagine which post office a resident would walk to.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02tqtbz",
+      "kind": "concept",
+      "front": "Why does each edge of a Voronoi diagram lie on a perpendicular bisector?",
+      "back": "Points on an edge are **equally far** from the two sites it separates. Points equally far from two sites lie on their perpendicular bisector.",
+      "hint": "What is special about a point equidistant from two sites?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fv7dtx",
+      "kind": "process",
+      "front": "What are the steps to build a simple Voronoi diagram by hand?",
+      "back": "1) Mark all the sites. 2) Draw the perpendicular bisector of each neighbouring pair. 3) Keep only the parts where those two sites are nearest. 4) Stop each edge at the **vertices** where edges meet.",
+      "hint": "Start with neighbouring pairs, then trim.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00x3wd9",
+      "kind": "term",
+      "front": "What is a site in a Voronoi diagram?",
+      "back": "A **site** is one of the given points, such as a school or shop, that the diagram is built around.",
+      "hint": "It is the point at the centre of each cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jhkpiy",
+      "kind": "term",
+      "front": "What is a Voronoi diagram?",
+      "back": "A **Voronoi diagram** divides a plane into cells, where each cell contains the points nearest to one site.",
+      "hint": "Think of it as a map of nearest-site zones.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0v2kog0",
+      "kind": "term",
+      "front": "What is a vertex in a Voronoi diagram?",
+      "back": "A **vertex** is a point where three or more edges meet. It is equally far from three or more sites.",
+      "hint": "Where do the boundary lines meet?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jwnbre",
+      "kind": "mistake",
+      "front": "Is it correct to say an edge joins two sites?",
+      "back": "No. An edge **crosses** the line between two sites at its midpoint, at a right angle. It does not join the sites.",
+      "hint": "Where is the edge relative to the sites?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16dntpg",
+      "kind": "formula",
+      "front": "What formula gives the distance between points $(x_1,y_1)$ and $(x_2,y_2)$?",
+      "back": "$d=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$, where $d$ is the straight-line distance, in the same units as the coordinates.",
+      "hint": "Use Pythagoras on the horizontal and vertical differences.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j8no98",
+      "kind": "example",
+      "front": "Sites are at $A(0,0)$, $B(6,0)$ and $C(0,8)$. Where is the vertex where the three edges meet?",
+      "back": "The vertex is $(3,4)$. It is $5$ units from each site, since the edge $AB$ lies on $x=3$ and edge $AC$ lies on $y=4$.",
+      "hint": "Find the midpoints of AB and AC first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n4jvc2",
+      "kind": "example",
+      "front": "Clinics are at $A(1,1)$ and $B(5,1)$. Which clinic is nearer to a house at $P(3.5,4)$?",
+      "back": "Clinic $B$. $PA\\approx 3.91$ and $PB\\approx 3.35$, so the smaller distance is to $B$, and $P$ lies in its cell.",
+      "hint": "Calculate both distances with the distance formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iu01fn",
+      "kind": "concept",
+      "front": "What does a large cell tell you about its site?",
+      "back": "A **large cell** means its site is far from its neighbours, so some people live far from it. A small cell means sites are close together.",
+      "hint": "Think about how far the furthest locations are from the site.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11hu20u",
+      "kind": "concept",
+      "front": "What happens to the diagram when a new site is added inside an existing cell?",
+      "back": "The new site takes a region from each cell it touches, so those cells **shrink**. Cells that do not touch the new cell stay the same.",
+      "hint": "Only neighbouring cells are affected.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cp7du5",
+      "kind": "mistake",
+      "front": "What is a key limit of a Voronoi model of real locations?",
+      "back": "It uses **straight-line distance**, so it ignores roads, rivers and walls. Real travel distance can change which site is truly nearest, so state this assumption.",
+      "hint": "Does a straight line match how people actually travel?",
+      "sectionId": "s5"
+    }
+  ]
+}

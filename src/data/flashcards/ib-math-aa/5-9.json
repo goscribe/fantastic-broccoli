@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-9",
+  "topicCode": "5.9",
+  "topicName": "Kinematics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:57.868Z",
+  "cards": [
+    {
+      "id": "1un5xy9",
+      "kind": "concept",
+      "front": "What is velocity in terms of the position function $x(t)$?",
+      "back": "**Velocity** is the derivative of position, $v(t)=\\frac{dx}{dt}$. Its sign shows the direction of motion, since it is the rate of change of position.",
+      "hint": "Think about the rate of change of position.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1avm1iz",
+      "kind": "formula",
+      "front": "How is acceleration linked to position, and what are its units when $x$ is in metres and $t$ in seconds?",
+      "back": "$a=\\frac{dv}{dt}=\\frac{d^2x}{dt^2}$. Acceleration is the derivative of velocity, so the second derivative of position. Its unit is $\\mathrm{m\\,s^{-2}}$.",
+      "hint": "Differentiate position twice.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0n40d2g",
+      "kind": "concept",
+      "front": "How can you tell whether a particle is speeding up or slowing down?",
+      "back": "It is **speeding up** when $v$ and $a$ have the same sign, and **slowing down** when they have opposite signs.",
+      "hint": "Compare the signs of velocity and acceleration.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kpq9do",
+      "kind": "mistake",
+      "front": "Does negative acceleration always mean the particle is slowing down?",
+      "back": "**No.** If $v$ is also negative, the particle is speeding up in the negative direction. Slowing down needs $v$ and $a$ to have opposite signs.",
+      "hint": "Check the sign of velocity too.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05nd2rd",
+      "kind": "term",
+      "front": "What is displacement?",
+      "back": "**Displacement** is final position minus initial position, $x(t_2)-x(t_1)$, including its sign.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0325jei",
+      "kind": "example",
+      "front": "For $x(t)=t^3-6t^2+9t$ in metres, find $v$ and $a$ when $t=1$.",
+      "back": "$v=0\\,\\mathrm{m\\,s^{-1}}$ and $a=-6\\,\\mathrm{m\\,s^{-2}}$. Differentiate to get $v=3t^2-12t+9$ and $a=6t-12$, then substitute $t=1$.",
+      "hint": "Differentiate once, then again.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tztmb8",
+      "kind": "concept",
+      "front": "What does a position-time curve that bends upwards tell you about acceleration?",
+      "back": "The acceleration is **positive** there. A curve that bends downwards means negative acceleration.",
+      "hint": "Think about the curve's shape.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10zyrop",
+      "kind": "concept",
+      "front": "When does a particle turn round?",
+      "back": "It turns round when its **velocity changes sign**. Touching zero with $v$ keeping the same sign is not a turn.",
+      "hint": "Look at the sign of $v$ either side of zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "018vgl1",
+      "kind": "term",
+      "front": "What is an initial condition and why is it needed?",
+      "back": "An **initial condition** is a known value of position or velocity at a stated time. It fixes the constant of integration, because many motions share the same acceleration.",
+      "hint": "Each integration adds a constant.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xsqmbb",
+      "kind": "process",
+      "front": "In what order do you integrate acceleration to find position?",
+      "back": "Integrate $a$ to get $v$ and use the velocity condition to find its constant. Then integrate $v$ to get $x$ and use the position condition for the second constant.",
+      "hint": "Velocity first, then position.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q3ljzh",
+      "kind": "example",
+      "front": "A particle has $a=6t$ in $\\mathrm{m\\,s^{-2}}$, $v(0)=2$ and $x(0)=1$. Find $x$ when $t=2$.",
+      "back": "$x=13\\,\\mathrm{m}$. Here $v=3t^2+2$ and $x=t^3+2t+1$, so $x(2)=8+4+1$.",
+      "hint": "Integrate twice, using each condition in turn.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p6dnch",
+      "kind": "process",
+      "front": "How do you find the total distance travelled from $v(t)$ over an interval?",
+      "back": "Find the times when $v=0$ and split the interval there. Find the size of the change in position on each piece, then add these sizes. This is $\\int|v|\\,dt$.",
+      "hint": "Split at the points where the particle stops.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08q5mtf",
+      "kind": "example",
+      "front": "For $x(t)=t^3-6t^2+9t$ in metres, find the displacement and total distance for $0\\le t\\le4$.",
+      "back": "Displacement $4\\,\\mathrm{m}$ and total distance $12\\,\\mathrm{m}$. Velocity is zero at $t=1$ and $t=3$, so split the interval there.",
+      "hint": "Factorise $v$ to find where it is zero.",
+      "sectionId": "s5"
+    }
+  ]
+}

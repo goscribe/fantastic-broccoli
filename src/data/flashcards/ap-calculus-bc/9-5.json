@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "9-5",
+  "topicCode": "9.5",
+  "topicName": "Integrating vector-valued functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:05.123Z",
+  "cards": [
+    {
+      "id": "1fus0fh",
+      "kind": "concept",
+      "front": "How do you integrate a vector-valued function?",
+      "back": "Integrate **each component separately**, giving each its own constant: $\\int\\langle x(t),y(t)\\rangle\\,dt=\\langle\\int x(t)\\,dt,\\ \\int y(t)\\,dt\\rangle$. The two constants together form a constant vector $\\langle C_1,C_2\\rangle$.",
+      "hint": "Treat the two components as two separate integrals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0p58gu6",
+      "kind": "concept",
+      "front": "What does integrating a velocity vector over an interval give you?",
+      "back": "The **displacement**: $\\int_a^b\\mathbf{v}(t)\\,dt=\\mathbf{r}(b)-\\mathbf{r}(a)$. It is the net change in position, with signs kept, found by applying the Fundamental Theorem to each component.",
+      "hint": "Compare with the Fundamental Theorem of Calculus.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q0ddwn",
+      "kind": "concept",
+      "front": "Why does a problem usually give an initial condition?",
+      "back": "An **initial condition** is a known position at a given time. It fixes the constant vector, turning a family of possible position functions into one specific $\\mathbf{r}(t)$.",
+      "hint": "Without it, the constants stay unknown.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1o58hk0",
+      "kind": "formula",
+      "front": "What is the integral of $\\langle 2t,\\ \\cos t\\rangle$ with respect to $t$?",
+      "back": "$\\langle t^2+C_1,\\ \\sin t+C_2\\rangle$. Each component gets its own constant, $C_1$ for the first and $C_2$ for the second.",
+      "hint": "Integrate $2t$ and $\\cos t$ separately.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xdg5mh",
+      "kind": "mistake",
+      "front": "Is it correct to add one shared constant C to both components of an integrated vector?",
+      "back": "No. **Each component has its own constant**, so the answer is $\\langle t^2+C_1,\\ \\sin t+C_2\\rangle$, not a single shared $C$.",
+      "hint": "Count how many unknown constants you need.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ydgi7m",
+      "kind": "example",
+      "front": "Evaluate $\\int_0^1\\langle 6t,\\ e^{2t}\\rangle\\,dt$.",
+      "back": "$\\left\\langle 3,\\ \\frac{e^2-1}{2}\\right\\rangle\\approx\\langle 3,\\ 3.195\\rangle$. Each component is a definite integral; keep exact values until the final rounding.",
+      "hint": "Apply the Fundamental Theorem to each component.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "120kxp8",
+      "kind": "process",
+      "front": "What are the steps to evaluate a definite integral of a vector-valued function?",
+      "back": "1) Integrate each component over $[a,b]$ separately. 2) Evaluate each with the Fundamental Theorem. 3) Combine the two results into one vector. Round to three decimals only at the end.",
+      "hint": "No constants of integration appear here.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "041vgte",
+      "kind": "example",
+      "front": "A particle has $\\mathbf{v}(t)=\\langle 2t,\\ 3\\rangle$ m/s. Find its displacement from $t=1$ to $t=3$ and the magnitude of that displacement.",
+      "back": "$\\langle 8,\\ 6\\rangle$ m, with magnitude $10$ m. The horizontal part is $\\int_1^3 2t\\,dt=8$ and the vertical part is $\\int_1^3 3\\,dt=6$.",
+      "hint": "Integrate each component over the interval [1, 3].",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0i7f3t9",
+      "kind": "mistake",
+      "front": "Is a particle's displacement the same as the distance it traveled?",
+      "back": "No. **Displacement** is net change in position and can have negative components. **Distance traveled** is the length of the path, found by integrating speed, and it is never negative.",
+      "hint": "Think about moving forward and then coming back.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j7hgmz",
+      "kind": "formula",
+      "front": "What is the magnitude of a vector $\\langle m,\\ n\\rangle$?",
+      "back": "$\\sqrt{m^2+n^2}$. It is the **length** of the vector, found with the same rule used for the length of any vector.",
+      "hint": "It is Pythagoras applied to two components.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cznah0",
+      "kind": "process",
+      "front": "How do you find $\\mathbf{r}(t)$ from a velocity and a known position?",
+      "back": "Integrate each component with its own constant, substitute the known time, set the result equal to the known position, solve for each constant, then write $\\mathbf{r}(t)$. Check by differentiating.",
+      "hint": "Five short steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k9dh2d",
+      "kind": "example",
+      "front": "Given $\\mathbf{v}(t)=\\langle 3t^2,\\ 2t\\rangle$ and $\\mathbf{r}(1)=\\langle 4,\\ 0\\rangle$, find $\\mathbf{r}(t)$.",
+      "back": "$\\mathbf{r}(t)=\\langle t^3+3,\\ t^2-1\\rangle$. Substituting $t=1$ gives $C_1=3$ and $C_2=-1$.",
+      "hint": "Integrate first, then substitute $t=1$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1y7b896",
+      "kind": "formula",
+      "front": "Which formula gives position from a starting position and velocity, without finding constants first?",
+      "back": "$\\mathbf{r}(t)=\\mathbf{r}(a)+\\int_a^t\\mathbf{v}(u)\\,du$. It adds the **starting position** to the accumulated change, and $u$ is only a dummy variable.",
+      "hint": "Starting point plus the change so far.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1nnckub",
+      "kind": "example",
+      "front": "A particle has $\\mathbf{v}(t)=\\langle t,\\ 2\\rangle$ m/s and $\\mathbf{r}(0)=\\langle 2,\\ 1\\rangle$ m. Find its position at $t=4$ s.",
+      "back": "$\\langle 10,\\ 9\\rangle$ m. The displacement from $t=0$ to $t=4$ is $\\langle 8,\\ 8\\rangle$, which is added to the starting position $\\langle 2,\\ 1\\rangle$.",
+      "hint": "Integrate from 0 to 4 first.",
+      "sectionId": "s5"
+    }
+  ]
+}

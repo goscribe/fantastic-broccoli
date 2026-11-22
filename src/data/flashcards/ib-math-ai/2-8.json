@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "2-8",
+  "topicCode": "2.8",
+  "topicName": "Transformations of graphs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:30.939Z",
+  "cards": [
+    {
+      "id": "1kqmph2",
+      "kind": "concept",
+      "front": "What does a translation do to a graph, and what stays the same?",
+      "back": "A **translation** moves every point of the graph the same distance in the same direction. The shape and size stay the same.",
+      "hint": "Think of sliding a sticker across a window.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1e4m5yi",
+      "kind": "formula",
+      "front": "What does $y=f(x)+b$ do to the graph of $y=f(x)$, and what does $y=f(x-a)$ do?",
+      "back": "$y=f(x)+b$ moves the graph **up** by $b$ units (down if $b$ is negative). $y=f(x-a)$ moves it **right** by $a$ units (left if $a$ is negative).",
+      "hint": "Check where the point that was at x=0 ends up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0oui3fa",
+      "kind": "process",
+      "front": "In what order do you apply the steps to a combined transformation such as $y=-2f(x+1)+3$?",
+      "back": "Work in the order you would calculate a value: first the **inside the brackets** (horizontal stretch, then horizontal translation), then the vertical stretch or reflection, then the vertical translation.",
+      "hint": "Think about the order you would use to evaluate the function at a value of x.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03zfqj8",
+      "kind": "mistake",
+      "front": "A student says $y=f(x-3)$ moves the graph 3 units left. What is wrong?",
+      "back": "It moves **right** by 3 units. The sign inside the brackets is opposite to the direction of movement.",
+      "hint": "Use the point that was at x=0 to test the direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1w9kw8j",
+      "kind": "formula",
+      "front": "What are the equations for reflecting $y=f(x)$ in the x-axis and in the y-axis?",
+      "back": "In the $x$-axis: $y=-f(x)$, where every $y$ value changes sign. In the $y$-axis: $y=f(-x)$, where every $x$ value changes sign.",
+      "hint": "Ask which coordinate changes sign in each case.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q65p1q",
+      "kind": "example",
+      "front": "Where does the point $(3,5)$ on $y=f(x)$ map to under $y=-f(x)$ and under $y=f(-x)$?",
+      "back": "$(3,-5)$ under $y=-f(x)$, and $(-3,5)$ under $y=f(-x)$.",
+      "hint": "Only one coordinate changes sign in each case.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ssxtgy",
+      "kind": "formula",
+      "front": "What do $y=af(x)$ and $y=f(bx)$ do to the graph of $y=f(x)$?",
+      "back": "$y=af(x)$ is a **vertical stretch** with scale factor $a$: each $y$ value is multiplied by $a$. $y=f(bx)$ is a **horizontal stretch** with scale factor $\\frac{1}{b}$: each $x$ value is divided by $b$.",
+      "hint": "Which coordinate is multiplied, and which is divided?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p0it02",
+      "kind": "term",
+      "front": "What is the scale factor of a stretch, and what does a value between 0 and 1 give?",
+      "back": "The **scale factor** is the constant by which distances from the axis are multiplied. A value between 0 and 1 gives a **compression**.",
+      "hint": "Think about whether the graph gets bigger or smaller.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wrqr3m",
+      "kind": "example",
+      "front": "Find the image of the point $(4,6)$ on $y=f(x)$ under $y=f(2x)$.",
+      "back": "$(2,6)$. The $x$ value is divided by 2 and the $y$ value stays the same.",
+      "hint": "Only the x coordinate changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ivoqca",
+      "kind": "example",
+      "front": "Find the image of the vertex $(0,0)$ of $y=x^2$ under $y=-2(x+1)^2+3$.",
+      "back": "$(-1,3)$. Shift 1 unit left to $(-1,0)$, reflect and stretch by factor 2 (y stays 0), then shift 3 units up.",
+      "hint": "Apply the steps in the set order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r78ey6",
+      "kind": "mistake",
+      "front": "A student changes the order of the transformations in a combined graph because the result looks the same. Is this acceptable?",
+      "back": "Usually **no**. Changing the order usually changes the final graph, so keep the set sequence.",
+      "hint": "Try a point that is not on the x-axis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xxnik1",
+      "kind": "process",
+      "front": "What are the steps for sketching a transformed graph?",
+      "back": "Choose **key points** such as intercepts and turning points. Move each one using the transformation rules. Plot at least three images, then join them with the same general shape and move any asymptotes.",
+      "hint": "Start with a few well-chosen points, not the whole curve.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18jzttv",
+      "kind": "concept",
+      "front": "How does an asymptote move when a graph is transformed?",
+      "back": "It moves with the graph. For $y=2^x$, the asymptote $y=0$ becomes $y=3$ after the translation $y=2^x+3$.",
+      "hint": "Apply the same translation rule to the asymptote.",
+      "sectionId": "s5"
+    }
+  ]
+}

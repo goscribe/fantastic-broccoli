@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "2-10",
+  "topicCode": "2.10",
+  "topicName": "Derivatives of tan, cot, sec and csc",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:08.461Z",
+  "cards": [
+    {
+      "id": "0roer7e",
+      "kind": "formula",
+      "front": "What is the derivative of $\\tan x$?",
+      "back": "$\\frac{d}{dx}(\\tan x)=\\sec^2 x$. The **tangent** derivative has no leading minus sign and is a squared secant.",
+      "hint": "Think about the quotient rule applied to sin x over cos x.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09sgn40",
+      "kind": "formula",
+      "front": "What is the derivative of $\\sec x$?",
+      "back": "$\\frac{d}{dx}(\\sec x)=\\sec x\\tan x$. The **secant** derivative keeps the original function as a factor.",
+      "hint": "Rewrite sec x as 1 over cos x.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0c1acpa",
+      "kind": "concept",
+      "front": "Which of the four derivatives of tan x, cot x, sec x and csc x have a leading minus sign?",
+      "back": "Only the **cotangent** and **cosecant** derivatives, $-\\csc^2 x$ and $-\\csc x\\cot x$. The **sign pattern** is that tangent and secant derivatives have no leading minus sign.",
+      "hint": "Check the first sign in each of the four formulas.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10qm4ft",
+      "kind": "term",
+      "front": "What is the domain restriction for tan x and sec x?",
+      "back": "They are undefined where $\\cos x=0$, so their derivatives do not exist there. This is the **domain** check before differentiating.",
+      "hint": "Which factor would sit in a denominator?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05btvwz",
+      "kind": "formula",
+      "front": "What is the derivative of $\\cot x$?",
+      "back": "$\\frac{d}{dx}(\\cot x)=-\\csc^2 x$. The **cotangent** derivative has a leading minus sign and is a squared cosecant.",
+      "hint": "Compare with the tangent derivative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r5kmly",
+      "kind": "formula",
+      "front": "What is the derivative of $\\csc x$?",
+      "back": "$\\frac{d}{dx}(\\csc x)=-\\csc x\\cot x$. The **cosecant** derivative keeps the original function as a factor and has a minus sign.",
+      "hint": "Rewrite csc x as 1 over sin x.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ubttnf",
+      "kind": "mistake",
+      "front": "Is the derivative of csc x always negative because it has a leading minus sign?",
+      "back": "No. The **sign pattern** alone does not decide the sign, since $-\\csc x\\cot x$ depends on the signs of both factors. Check each factor separately.",
+      "hint": "Consider where cot x is positive and where it is negative.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pmaudd",
+      "kind": "concept",
+      "front": "What does a tangent line to a curve at x = a use to form its equation?",
+      "back": "It uses the **tangent line** formula $y=f(a)+f'(a)(x-a)$, built from the function value and the derivative at one input.",
+      "hint": "You need one point and one slope.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1398fp7",
+      "kind": "process",
+      "front": "What are the steps to find the tangent line to y = sec x at x = pi/3?",
+      "back": "Find the point $(\\frac{\\pi}{3},2)$ from $\\sec(\\frac{\\pi}{3})=2$. Differentiate to get $\\sec x\\tan x$, find the slope $2\\sqrt{3}$, then substitute into $y=f(a)+f'(a)(x-a)$.",
+      "hint": "Calculate the function value and the derivative value separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bnrw5o",
+      "kind": "example",
+      "front": "Find the tangent line to $y=\\sec x$ at $x=\\frac{\\pi}{3}$.",
+      "back": "$y=2+2\\sqrt{3}\\left(x-\\frac{\\pi}{3}\\right)$. The point is $(\\frac{\\pi}{3},2)$ and the slope is $2\\sqrt{3}$.",
+      "hint": "The slope is sec x tan x evaluated at pi/3.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x5q267",
+      "kind": "concept",
+      "front": "What does a derivative tell you when a function models a changing quantity?",
+      "back": "It gives the **instantaneous rate**, how quickly the quantity changes at one specific input. Always confirm the input lies in the domain first.",
+      "hint": "Think about what the slope means in a real situation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p0oe2y",
+      "kind": "concept",
+      "front": "Why does the derivative of tan x equal sec^2 x?",
+      "back": "Using the quotient rule gives $\\frac{\\cos^2 x+\\sin^2 x}{\\cos^2 x}$, and since $\\sin^2 x+\\cos^2 x=1$ this simplifies to $\\sec^2 x$.",
+      "hint": "Use the Pythagorean identity.",
+      "sectionId": "s1"
+    }
+  ]
+}

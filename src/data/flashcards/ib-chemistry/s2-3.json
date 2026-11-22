@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "s2-3",
+  "topicCode": "S2.3",
+  "topicName": "The metallic model",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:14.678Z",
+  "cards": [
+    {
+      "id": "1chii2y",
+      "kind": "concept",
+      "front": "What holds a metal together in the metallic model?",
+      "back": "**Electrostatic attraction** between positive metal ions in a lattice and delocalised electrons shared through the whole structure. This attraction is metallic bonding.",
+      "hint": "Think about what the outer electrons are doing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y3lhey",
+      "kind": "concept",
+      "front": "Why can a solid metal conduct electricity?",
+      "back": "Its **delocalised electrons** can move through the lattice and carry charge when a potential difference is applied. The positive ions stay near their lattice positions.",
+      "hint": "Which particles can move freely?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bg24kg",
+      "kind": "concept",
+      "front": "Why can many metals be hammered into sheets or drawn into wires?",
+      "back": "Layers of positive ions can move past one another because the **non-directional** metallic bonding keeps attracting the ions after they shift, so the structure does not split apart.",
+      "hint": "Consider what happens to the attraction when the layers shift.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09dqewl",
+      "kind": "term",
+      "front": "What is a lattice?",
+      "back": "A **lattice** is a regular, repeating arrangement of particles in a solid.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hgnari",
+      "kind": "term",
+      "front": "What are delocalised electrons?",
+      "back": "**Delocalised electrons** move throughout a structure rather than belonging to one atom or a fixed pair of atoms.",
+      "hint": "Contrast them with electrons in a single bond.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uidq2v",
+      "kind": "mistake",
+      "front": "A student says metallic bonding involves electrons travelling between fixed pairs of ions. What is wrong?",
+      "back": "This is wrong. The **electrons** are shared across the whole metallic structure and do not move between fixed pairs of ions.",
+      "hint": "Think about how far the electrons spread.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yyod19",
+      "kind": "concept",
+      "front": "How does heat pass through a metal?",
+      "back": "**Mobile electrons** transfer energy as they move and collide, and vibrations of the metal ions pass energy between neighbouring parts of the lattice.",
+      "hint": "There are two energy-transfer routes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07sg310",
+      "kind": "mistake",
+      "front": "Do the positive metal ions carry the charge when a current flows through a metal wire?",
+      "back": "No. The **delocalised electrons** carry the charge. The positive ions stay near their lattice positions and do not travel along the wire.",
+      "hint": "Which particles are described as mobile?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cqgwg1",
+      "kind": "term",
+      "front": "What is the difference between malleability and ductility?",
+      "back": "**Malleability** is being hammered or rolled into a sheet; **ductility** is being drawn into a wire. Both happen without the material breaking.",
+      "hint": "Think about the shape each one produces.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oqvgy3",
+      "kind": "mistake",
+      "front": "Because metallic bonding is non-directional, do all metals bend equally easily?",
+      "back": "No. Non-directional bonding helps explain why metals can be reshaped, but the **ease** of reshaping depends on the metal and its structure.",
+      "hint": "Consider what the model does and does not explain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k8yoym",
+      "kind": "concept",
+      "front": "How does metallic bonding differ from ionic bonding?",
+      "back": "Metallic bonding attracts **positive ions** to delocalised electrons. Ionic bonding attracts oppositely charged ions to each other.",
+      "hint": "Compare what is doing the attracting in each model.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uiub6n",
+      "kind": "concept",
+      "front": "Why does a solid ionic substance not conduct electricity?",
+      "back": "Its **ions** are fixed in place and cannot carry charge. They can conduct when molten because their ions can then move.",
+      "hint": "Focus on whether the charge carriers can move.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ghfzi6",
+      "kind": "mistake",
+      "front": "True or false: all covalent substances are electrical insulators?",
+      "back": "False. Some **covalent** structures contain mobile charge carriers, so their electrical properties depend on their structure.",
+      "hint": "Do not generalise from one type of covalent substance.",
+      "sectionId": "s4"
+    }
+  ]
+}

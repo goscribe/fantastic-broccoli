@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "6-4",
+  "topicCode": "6.4",
+  "topicName": "Translation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:43.547Z",
+  "cards": [
+    {
+      "id": "1l5unva",
+      "kind": "concept",
+      "front": "What job does a ribosome do during translation?",
+      "back": "A ribosome **reads mRNA three nucleotides at a time** and joins amino acids into a chain, in the order set by the codons. The chain then folds into a functional protein.",
+      "hint": "Think about what reads the mRNA and what it builds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0b078n3",
+      "kind": "concept",
+      "front": "How does a tRNA know which amino acid to bring to the ribosome?",
+      "back": "Its **anticodon** pairs with a complementary mRNA codon, and the genetic code says which amino acid that codon represents.",
+      "hint": "Anticodon and codon must be complementary.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00xd7of",
+      "kind": "process",
+      "front": "What happens in one cycle of elongation?",
+      "back": "1) A matching tRNA enters the **A site**. 2) A peptide bond transfers the growing chain to its amino acid. 3) The ribosome shifts one codon, and the empty tRNA leaves through the **E site**.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16ms0am",
+      "kind": "term",
+      "front": "What is a codon?",
+      "back": "A **three-nucleotide group on mRNA** that specifies an amino acid or a stop signal.",
+      "hint": "Count the nucleotides in each group.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "086seb6",
+      "kind": "term",
+      "front": "What is the start codon, and what does it specify?",
+      "back": "**AUG**, which specifies methionine and sets the reading frame for the codons read afterward.",
+      "hint": "Where does translation begin?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18ari6x",
+      "kind": "process",
+      "front": "What are the steps of initiation?",
+      "back": "The **small ribosomal subunit** binds mRNA, the initiator tRNA pairs with AUG, then the **large subunit** joins, with the initiator tRNA sitting in the P site.",
+      "hint": "Which subunit comes first?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18hwj20",
+      "kind": "term",
+      "front": "What is a reading frame?",
+      "back": "The way **nucleotides are grouped** into successive three-nucleotide codons.",
+      "hint": "Think about how the letters are split up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1leuj37",
+      "kind": "term",
+      "front": "What is the genetic code?",
+      "back": "The set of relationships between mRNA **codons** and their amino acids or stop signals. Several codons can specify the same amino acid, but each codon has only one meaning.",
+      "hint": "Codon to amino acid.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wnaj6t",
+      "kind": "term",
+      "front": "What do the P site and the A site each do?",
+      "back": "The **P site** holds the tRNA carrying the growing polypeptide. The **A site** receives the next incoming tRNA.",
+      "hint": "Which tRNA is where?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "105miue",
+      "kind": "mistake",
+      "front": "Students often mix up codons and anticodons. Where is each one found?",
+      "back": "A **codon** is on mRNA. The matching **anticodon** is on tRNA.",
+      "hint": "Check which molecule carries each one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ywqtzq",
+      "kind": "process",
+      "front": "What happens during termination?",
+      "back": "A **stop codon** enters the A site, a release factor binds instead of a tRNA, the polypeptide detaches, and the subunits separate from the mRNA.",
+      "hint": "No tRNA arrives for a stop codon.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1grohz4",
+      "kind": "mistake",
+      "front": "Why doesn't a stop codon get an amino acid from a tRNA?",
+      "back": "Stop codons **do not specify amino acids**, so no tRNA delivers one. A release factor binds instead to end translation.",
+      "hint": "What does a stop codon signal?",
+      "sectionId": "s4"
+    }
+  ]
+}

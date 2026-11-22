@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "5-10",
+  "topicCode": "5.10",
+  "topicName": "Introduction to optimization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:12.088Z",
+  "cards": [
+    {
+      "id": "1dg7yng",
+      "kind": "concept",
+      "front": "Why rewrite the objective using the constraint before differentiating?",
+      "back": "The **constraint** links the variables, so you can replace one and turn the objective into a function of one variable. Only then can you differentiate it to find candidates.",
+      "hint": "Think about how many variables the derivative can handle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19kdt18",
+      "kind": "concept",
+      "front": "Does setting the derivative to zero prove a maximum or minimum?",
+      "back": "**No.** It only locates candidate points. Check each candidate against the feasible domain and any included endpoints, then compare objective values or use a sign change in the derivative.",
+      "hint": "A zero derivative is only a starting point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1069cn8",
+      "kind": "mistake",
+      "front": "A student optimizes the fencing length instead of the enclosed area. What is wrong?",
+      "back": "The fencing length is the fixed **constraint**, so it cannot be the thing you maximize. The **objective** is the enclosed area, which changes as the shape changes.",
+      "hint": "Which quantity is fixed, and which one changes?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nocajj",
+      "kind": "term",
+      "front": "What is an optimization problem?",
+      "back": "An **optimization problem** asks for the largest or smallest possible value of a quantity, subject to the limits of the situation.",
+      "hint": "Look for words like greatest or least.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0f0opck",
+      "kind": "term",
+      "front": "What is the objective in an optimization problem?",
+      "back": "The **objective** is the quantity being maximized or minimized, such as revenue, area, or material use.",
+      "hint": "It is the quantity you are trying to make best.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mr4y2e",
+      "kind": "term",
+      "front": "What is a constraint?",
+      "back": "A **constraint** is a fixed condition that restricts the variables and connects them, such as a fixed amount of fencing.",
+      "hint": "It limits the choices you can make.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07k3cnm",
+      "kind": "term",
+      "front": "What is the feasible domain?",
+      "back": "The **feasible domain** is the set of input values allowed by the constraints and the real-world situation.",
+      "hint": "Ask which inputs make sense in the situation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ljbnnl",
+      "kind": "process",
+      "front": "What are the steps to set up an optimization problem?",
+      "back": "1) Name the changeable decision with variables and units. 2) State the objective. 3) Write the objective equation. 4) Use the **constraint** to write it as one variable. 5) Find the feasible domain.",
+      "hint": "Start with the decision, then the goal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tpt32n",
+      "kind": "formula",
+      "front": "For a rectangle with sides $x$ and $y$ meters and 40 meters of fencing, what is the area as a function of $x$?",
+      "back": "$A(x)=x(20-x)$, from $2x+2y=40$ giving $y=20-x$. Positive sides require $0<x<20$, where $x$ is measured in **meters** and $A$ in square meters.",
+      "hint": "Use the fencing equation to remove $y$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cxvkwc",
+      "kind": "example",
+      "front": "What is the greatest area of a rectangle made from 40 meters of fencing?",
+      "back": "**100 m²**, reached with sides of 10 meters each. Since $A'(x)=20-2x$, setting it to zero gives $x=10$, and the sign of $A'$ changes from positive to negative there.",
+      "hint": "Differentiate $A(x)=20x-x^2$ and set the derivative to zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sbb2sb",
+      "kind": "concept",
+      "front": "Why is $x=10$ a maximum in the fencing example?",
+      "back": "The **derivative sign** changes from positive to negative at $x=10$, so the area rises and then falls. This confirms a maximum rather than just a zero derivative.",
+      "hint": "Check what $A'(x)$ does on each side of $x=10$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19ccsy9",
+      "kind": "process",
+      "front": "What final checks should you make before answering an optimization problem?",
+      "back": "Check each candidate against the **feasible domain** and any included endpoints. Compare objective values or use derivative behavior. Then answer the original question with units and a brief interpretation.",
+      "hint": "Candidates first, then the answer in context.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mmz43n",
+      "kind": "concept",
+      "front": "If the domain excludes an endpoint, can the objective reach its value there?",
+      "back": "**No.** Do not claim the objective reaches a value at an excluded endpoint. You may still examine what happens as values approach that endpoint.",
+      "hint": "Consider whether a side length of zero is allowed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ywwdzy",
+      "kind": "concept",
+      "front": "Why is the derivative useful in optimization?",
+      "back": "The **derivative** locates interior candidates where it is zero or undefined. It does not decide the answer alone, because each candidate must still be checked.",
+      "hint": "Think about where the slope could change direction.",
+      "sectionId": "s3"
+    }
+  ]
+}

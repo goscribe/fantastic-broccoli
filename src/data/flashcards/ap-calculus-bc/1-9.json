@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "1-9",
+  "topicCode": "1.9",
+  "topicName": "Multiple representations of limits",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:46.215Z",
+  "cards": [
+    {
+      "id": "02kzamf",
+      "kind": "concept",
+      "front": "Does the limit of f(x) as x approaches 2 tell you the value of f(2)?",
+      "back": "No. A **limit** describes the outputs approached near 2. The value f(2) comes from the rule at 2 itself, so it can differ from the limit or be undefined.",
+      "hint": "Think about whether the input has to be reached.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t78pwe",
+      "kind": "concept",
+      "front": "When does a two-sided limit exist at a point?",
+      "back": "When the **left-hand limit** and **right-hand limit** approach the same height. That shared height is the limit. If the two sides disagree, the two-sided limit does not exist.",
+      "hint": "Check both directions toward the input.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ttsko4",
+      "kind": "example",
+      "front": "For g(x)=(x^2-4)/(x-2) when x is not 2, what does the limit as x approaches 2 equal, and why?",
+      "back": "The limit is **4**. For x not equal to 2, g(x) equals x+2, so nearby outputs such as 3.99 and 4.01 approach 4 as x approaches 2.",
+      "hint": "Factor the numerator and cancel the common factor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qxnpa6",
+      "kind": "term",
+      "front": "What is a limit?",
+      "back": "A **limit** is the value a function approaches as its input approaches a specified number. The input does not need to reach that number.",
+      "hint": "It describes nearby behavior.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0b2hi00",
+      "kind": "term",
+      "front": "What is a function value?",
+      "back": "A **function value** is the output assigned to a specific input in the function's domain, found from the rule or the plotted point at that input.",
+      "hint": "Compare with the limit.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1b434i1",
+      "kind": "term",
+      "front": "What is a left-hand limit?",
+      "back": "A **left-hand limit** is the output approached as inputs approach a value from below, meaning from smaller inputs.",
+      "hint": "Look at inputs on the left.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ietup2",
+      "kind": "term",
+      "front": "What is a right-hand limit?",
+      "back": "A **right-hand limit** is the output approached as inputs approach a value from above, meaning from larger inputs.",
+      "hint": "Look at inputs on the right.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ywaxha",
+      "kind": "mistake",
+      "front": "A graph has a filled point at x=2. Why is it wrong to say the filled point shows the limit at 2?",
+      "back": "The filled point shows the function value f(2), not necessarily the limit. Follow the curve toward x=2 from both sides to find the limit.",
+      "hint": "Which value does the point mark?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09fotf6",
+      "kind": "mistake",
+      "front": "Why is checking only one side of a point not enough to find a two-sided limit?",
+      "back": "A two-sided limit needs matching approaches from both sides. One side alone can suggest a height that the other side does not share, so the limit may not exist.",
+      "hint": "Consider a jump between two heights.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lyy6mc",
+      "kind": "process",
+      "front": "How do you read a limit from a table of values?",
+      "back": "Choose inputs increasingly close to the target, keeping inputs on both sides. Watch whether the outputs approach the same number from each side.",
+      "hint": "Use values like 1.9, 1.99 and 2.01, 2.1.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1awptrx",
+      "kind": "process",
+      "front": "How do you translate an equation into a graph near a point?",
+      "back": "Plot nearby outputs on each side of the input. Use an open point where the approaching height is not the function value at that input.",
+      "hint": "Compare the approached height with f at the point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0182kch",
+      "kind": "example",
+      "front": "For h(x)=x+2 when x is less than 2 and h(x)=x+3 when x is greater than 2, does the two-sided limit at 2 exist?",
+      "back": "No. Left-side outputs approach **4** and right-side outputs approach 5. The two one-sided limits differ, so the two-sided limit does not exist, regardless of h(2).",
+      "hint": "Compare the left and right heights.",
+      "sectionId": "s4"
+    }
+  ]
+}

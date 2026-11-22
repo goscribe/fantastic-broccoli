@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "d1-3",
+  "topicCode": "D1.3",
+  "topicName": "Mutation and gene editing",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:09.518Z",
+  "cards": [
+    {
+      "id": "0wtdp6z",
+      "kind": "term",
+      "front": "What is a gene mutation?",
+      "back": "A **gene mutation** is a change in the DNA base sequence of a gene. It is not automatically harmful, because its effect depends on where it occurs and what changes.",
+      "hint": "Think about the DNA bases, not the protein.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13jssiy",
+      "kind": "concept",
+      "front": "How can a mutation change how a protein works?",
+      "back": "An altered amino acid sequence can change how the protein **folds**, which can alter the shape of its active site or another functional region. The protein may then work less well, work differently, or not work at all.",
+      "hint": "Trace what happens between the DNA code and the protein's working region.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02rdf9b",
+      "kind": "process",
+      "front": "What are the main steps of CRISPR–Cas9 gene editing?",
+      "back": "A **guide RNA** directs the Cas9 enzyme to a matching DNA sequence. Cas9 cuts the DNA there. The cell's repair processes then determine the result.",
+      "hint": "Start with what directs the enzyme to its target.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gcn5sj",
+      "kind": "term",
+      "front": "What is a substitution mutation?",
+      "back": "A **substitution** replaces one DNA base with another. It may change one amino acid, introduce a stop codon, or leave the amino acid unchanged.",
+      "hint": "One base swapped for another.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1oxvlcv",
+      "kind": "concept",
+      "front": "Why does an insertion or deletion often have a bigger effect than a substitution?",
+      "back": "If the number of bases added or removed is not a multiple of three, a **frameshift** occurs. The grouping of bases into codons changes from that point on, often altering many amino acids or creating an early stop codon.",
+      "hint": "Think about how bases are read in threes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w6w3l6",
+      "kind": "term",
+      "front": "What is a stop codon?",
+      "back": "A **stop codon** signals the end of protein synthesis rather than specifying an amino acid.",
+      "hint": "What tells the ribosome to finish?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04t8s2x",
+      "kind": "mistake",
+      "front": "A student says any gene mutation will always make a protein stop working. What is wrong with this?",
+      "back": "Mutations are not necessarily harmful. The effect depends on where the mutation occurs and what changes, and some mutations have no effect on protein function.",
+      "hint": "Consider whether every change alters the protein.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1f580fd",
+      "kind": "process",
+      "front": "How can the cell's repair of a Cas9 cut lead to different outcomes?",
+      "back": "Repair without a template often adds or removes bases, disrupting a gene. Repair using a supplied **DNA template** can make a planned sequence change.",
+      "hint": "Compare repair with and without a template.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0t76lbg",
+      "kind": "mistake",
+      "front": "A student says that once Cas9 reaches the correct location, the intended edit is guaranteed. Why is this wrong?",
+      "back": "Targeting the correct location does not guarantee the intended result. Repair may be incomplete or produce an unexpected sequence.",
+      "hint": "Targeting and repair are two separate steps.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02kugxc",
+      "kind": "term",
+      "front": "What are off-target changes?",
+      "back": "**Off-target changes** are unintended edits at DNA sites other than the intended target.",
+      "hint": "Think about where the edit should not happen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "182f79g",
+      "kind": "concept",
+      "front": "What are the main benefits of gene editing?",
+      "back": "Editing cells may help treat a genetic disorder by correcting a harmful variant or changing how a gene works. Edited crops could gain useful traits, such as disease resistance, and editing helps researchers test what genes do.",
+      "hint": "Think about who might benefit from edited cells or crops.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17w39ll",
+      "kind": "concept",
+      "front": "Why is editing cells that produce gametes or early embryos a particular concern?",
+      "back": "Changes made in gametes or early embryos could be passed to future generations. This raises questions about consent and effects that may only become clear later.",
+      "hint": "Link the cell type to who inherits the change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0glzm6w",
+      "kind": "concept",
+      "front": "What makes it hard to make gene editing safe in a treatment?",
+      "back": "Risks include off-target changes and unexpected repair at the intended site. A treatment must also reach enough of the relevant cells to work.",
+      "hint": "Think about unintended effects and whether treatment works in practice.",
+      "sectionId": "s4"
+    }
+  ]
+}

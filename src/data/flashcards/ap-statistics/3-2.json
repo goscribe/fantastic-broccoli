@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-2",
+  "topicCode": "3.2",
+  "topicName": "Sample proportions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:15.790Z",
+  "cards": [
+    {
+      "id": "0m6y4u4",
+      "kind": "concept",
+      "front": "What is the mean of the sampling distribution of a sample proportion $\\hat{p}$?",
+      "back": "The mean equals the population proportion: $\\mu_{\\hat{p}}=p$. Some samples land above $p$ and some below, and **on average they balance**, so estimates do not run high or low.",
+      "hint": "Think about whether sample results balance above and below p.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tis9eb",
+      "kind": "formula",
+      "front": "What is the standard deviation of a sample proportion $\\hat{p}$, and when does the formula apply?",
+      "back": "$\\sigma_{\\hat{p}}=\\sqrt{\\frac{p(1-p)}{n}}$, where $p$ is the population proportion and $n$ the sample size. It applies when the sample is **no more than 10% of the population**.",
+      "hint": "Which quantity sits in the denominator?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08jrrpt",
+      "kind": "process",
+      "front": "Which three conditions must you check before using a normal model for $\\hat{p}$?",
+      "back": "**Random** sample, the **10% condition** ($n$ at most 10% of $N$), and the **large counts condition** ($np\\ge 10$ and $n(1-p)\\ge 10$). Check each with the numbers from the problem.",
+      "hint": "One is about how the sample was chosen.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1x58xlm",
+      "kind": "term",
+      "front": "What is a sample proportion $\\hat{p}$?",
+      "back": "The **sample proportion** $\\hat{p}$ is the number of successes in a sample divided by the sample size $n$. It changes from sample to sample.",
+      "hint": "Successes divided by something.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rnntza",
+      "kind": "term",
+      "front": "What is the population proportion $p$?",
+      "back": "The **population proportion** $p$ is the fraction of all individuals in the population with the characteristic of interest. It is fixed but usually unknown.",
+      "hint": "Compare it with the sample version.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uh04cp",
+      "kind": "concept",
+      "front": "Why does a larger sample size give a less variable sample proportion?",
+      "back": "A bigger sample **averages out chance variation**, so $\\hat{p}$ values stay closer to $p$. Quadrupling $n$ halves the standard deviation, while the center stays at $p$.",
+      "hint": "What happens to n in the formula?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ne9bxz",
+      "kind": "concept",
+      "front": "For which population proportion do sample proportions vary the most?",
+      "back": "**$p=0.5$**. The product $p(1-p)$ is largest there, so proportions near one half have the greatest spread.",
+      "hint": "Find the value of p that maximizes p(1-p).",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05nw2gd",
+      "kind": "concept",
+      "front": "Why can the sampling distribution of $\\hat{p}$ be skewed when $p$ is very small?",
+      "back": "Counting successes gives a **skewed** count when expected successes are few. With $p=0.02$ and $n=100$, most samples hold only 0 to 4 successes, and large counts are rare.",
+      "hint": "Think about how many successes you expect.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k9a3is",
+      "kind": "mistake",
+      "front": "A student says a sample of at least 30 always justifies a normal model for $\\hat{p}$. What is wrong?",
+      "back": "**The sample size of 30 is not the test.** The large counts condition uses $np$ and $n(1-p)$, so a large $n$ with a very small $p$ can still fail.",
+      "hint": "Which numbers does the large counts test check?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fmue75",
+      "kind": "mistake",
+      "front": "A student justifies a normal model by writing only that the conditions are met. What is wrong?",
+      "back": "**No credit is earned without numbers.** Write the justification in context, showing for example 150 is at most 500 and $np=60\\ge 10$.",
+      "hint": "Show the calculation that supports each condition.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0yfzq0e",
+      "kind": "example",
+      "front": "A city has 40% of households recycling. For random samples of 100 households, what is the standard deviation of $\\hat{p}$?",
+      "back": "**About 0.049.** Use $\\sqrt{\\frac{0.40(0.60)}{100}}=\\sqrt{0.0024}\\approx 0.049$.",
+      "hint": "Substitute p = 0.40 and n = 100.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0c4c1kt",
+      "kind": "example",
+      "front": "In a town of 5,000 voters with $p=0.40$, does a random sample of 150 meet the 10% condition?",
+      "back": "**Yes.** 10% of 5,000 is 500, and $150\\le 500$. The large counts condition also holds, since $np=60$ and $n(1-p)=90$ are both at least 10.",
+      "hint": "Find 10% of the population first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1swhva0",
+      "kind": "concept",
+      "front": "Why is the 10% condition needed when sampling without replacement?",
+      "back": "**Selections become slightly dependent** on earlier ones. Keeping $n$ at most 10% of $N$ makes this effect negligible, so the standard deviation formula still applies.",
+      "hint": "Think about what removing people from the population does.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "7-2",
+  "topicCode": "7.2",
+  "topicName": "Natural selection",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:48.399Z",
+  "cards": [
+    {
+      "id": "0ebwshq",
+      "kind": "concept",
+      "front": "How can natural selection make an inherited trait more common across generations?",
+      "back": "Individuals with a **heritable** trait that improves survival or reproduction leave more offspring, and those offspring can inherit the trait, so it spreads over generations.",
+      "hint": "Think about which individuals leave more offspring.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jqsg7y",
+      "kind": "term",
+      "front": "What is fitness?",
+      "back": "**Fitness** is an individual's reproductive success relative to others in a particular environment. Survival alone does not guarantee high fitness, because traits pass on only through offspring.",
+      "hint": "Survival is not enough on its own.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rz7upm",
+      "kind": "term",
+      "front": "What is an adaptation?",
+      "back": "An **adaptation** is an inherited trait that improves survival or reproduction in a particular environment. Its usefulness depends on the environment, so it may change if conditions change.",
+      "hint": "It is inherited and tied to a setting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nssbhf",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an individual evolves during its lifetime to suit its environment?",
+      "back": "**Individuals do not evolve** during their lifetimes. Natural selection changes the inherited traits common in a population across generations.",
+      "hint": "Which level changes: the individual or the population?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ssgyqa",
+      "kind": "concept",
+      "front": "Does the environment create a needed trait when individuals face a challenge?",
+      "back": "No. Selection acts only on **differences already present** among individuals, and the environment favors the existing heritable traits that help carriers reproduce.",
+      "hint": "Where do the differences come from?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "175sips",
+      "kind": "term",
+      "front": "What is a selective pressure?",
+      "back": "A **selective pressure** is an environmental factor that affects which individuals survive or reproduce, such as predators, limited food, temperature, drought, disease, or competition.",
+      "hint": "Think of conditions that act on a population.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jst6qa",
+      "kind": "example",
+      "front": "Why do antibiotic-resistant bacteria become more common after antibiotic exposure?",
+      "back": "Susceptible bacteria die while bacteria with inherited **resistance** survive and reproduce. Their descendants carry resistance, so it becomes more common in the population.",
+      "hint": "Trace which bacteria survive and reproduce.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mczou9",
+      "kind": "mistake",
+      "front": "Why is it wrong to say antibiotics cause bacteria to develop resistance because they need it?",
+      "back": "The antibiotic does not create resistance. Some bacteria already have inherited resistance, and those that survive leave more descendants, so resistance increases.",
+      "hint": "Did the antibiotic create the trait or select for it?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n5okdb",
+      "kind": "term",
+      "front": "What does relative advantage mean?",
+      "back": "**Relative advantage** means a trait's carriers tend to leave more offspring than others under the same conditions. Selection favors a trait when this holds in that environment.",
+      "hint": "Compare carriers with non-carriers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14awtj3",
+      "kind": "mistake",
+      "front": "Does living a long time alone make an individual highly fit?",
+      "back": "No. An individual that lives long but leaves no **offspring** contributes no inherited traits to future generations, so its fitness is low.",
+      "hint": "Fitness is measured by what gets passed on.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1p2guz5",
+      "kind": "concept",
+      "front": "Why can an advantageous trait lose its benefit?",
+      "back": "Environments can change, and traits can involve trade-offs. A trait that helps under one **selective pressure** may offer little benefit under another, so it may become less common.",
+      "hint": "Think about what happens when conditions shift.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ub9zfi",
+      "kind": "process",
+      "front": "What steps explain a population-level change caused by natural selection?",
+      "back": "Trace in order: the **selective pressure**, the inherited trait, the difference in reproduction among individuals, then the resulting change in how common the trait is in the population.",
+      "hint": "There are four steps, from environment to population.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "2-7",
+  "topicCode": "2.7",
+  "topicName": "Independent events and unions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:07.100Z",
+  "cards": [
+    {
+      "id": "09o9qf1",
+      "kind": "term",
+      "front": "What does it mean for two events to be independent?",
+      "back": "**Independent** events are events where knowing one occurred does not change the probability of the other, so $P(A\\mid B)=P(A)$.",
+      "hint": "Does a coin result change the chances on a die?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tp3v6j",
+      "kind": "formula",
+      "front": "What is the multiplication rule for two independent events A and B?",
+      "back": "$P(A\\cap B)=P(A)\\cdot P(B)$. The chance both occur is the **product** of their separate probabilities, and this only works when the events are independent.",
+      "hint": "Multiply the two separate probabilities.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "095jbuw",
+      "kind": "formula",
+      "front": "What is the general addition rule for the union of two events A and B?",
+      "back": "$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$. Subtract the **overlap** once, because outcomes in both events were counted twice. This holds for any two events.",
+      "hint": "Why do we subtract the last term?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n89b0w",
+      "kind": "process",
+      "front": "How can you test whether two events are independent using probabilities?",
+      "back": "Compare $P(A\\mid B)$ with $P(A)$, or check whether $P(A\\cap B)=P(A)\\cdot P(B)$. Equal values mean independent; different values mean **dependent**.",
+      "hint": "Both tests always give the same verdict.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l4ytqf",
+      "kind": "example",
+      "front": "In a survey of 100 students, 40 take Spanish, 60 play a sport, and 24 do both. Are taking Spanish and playing a sport independent?",
+      "back": "Yes. $0.40\\times0.60=0.24$, which equals $P(\\text{both})=0.24$. Also $P(\\text{sport}\\mid\\text{Spanish})=\\frac{24}{40}=0.60=P(\\text{sport})$.",
+      "hint": "Compare the product of the two probabilities with the overlap.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14y6pv9",
+      "kind": "example",
+      "front": "A player makes 80% of free throws, and shots are independent. What is the probability of making both of two shots?",
+      "back": "0.64, since $0.80\\times0.80=0.64$ by the multiplication rule for independent shots.",
+      "hint": "Shots are independent, so multiply.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13z04b0",
+      "kind": "example",
+      "front": "In the same survey of 100 students, what is the probability that a student takes Spanish or plays a sport?",
+      "back": "0.76, since $0.40+0.60-0.24=0.76$. Direct counting agrees: 16 take only Spanish, 36 play only a sport, and 24 do both, giving 76 of 100.",
+      "hint": "Subtract the overlap once.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ave9sc",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that two events which cannot occur together are independent?",
+      "back": "They are **dependent**. If one occurs, the other cannot, so $P(B\\mid A)=0$, which differs from $P(B)$ when $P(B)$ is positive.",
+      "hint": "Ask whether knowing A changes the chance of B.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0wbsor3",
+      "kind": "mistake",
+      "front": "Is it safe to assume two events that seem unrelated are independent?",
+      "back": "No. Events that seem unrelated are **not** automatically independent in a data set, so check the probabilities before claiming independence.",
+      "hint": "Check the numbers, not your intuition.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06k43s5",
+      "kind": "mistake",
+      "front": "When is multiplying two probabilities to find P(A and B) the wrong method?",
+      "back": "When the events are **not** independent. The product rule needs independence; if the shots affected each other, $P(A)\\cdot P(B)$ gives the wrong answer.",
+      "hint": "State the independence assumption when you use the rule.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "104q5g3",
+      "kind": "concept",
+      "front": "How can you find P(A or B) quickly when A and B are independent?",
+      "back": "Use $P(A\\cup B)=1-P(A^C)\\cdot P(B^C)$. The chance of getting **neither** event is the product of the complements, so subtract that from 1.",
+      "hint": "Think about the chance of getting neither event.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19i87fb",
+      "kind": "example",
+      "front": "A player makes each shot with probability 0.80, independently. What is the chance of making at least one of two shots?",
+      "back": "0.96, since missing both is $0.20\\times0.20=0.04$, so $1-0.04=0.96$.",
+      "hint": "Find the chance of missing both shots first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1b5vl4u",
+      "kind": "example",
+      "front": "Each shot succeeds with probability 0.80, independently. What is the chance of at least one success in 3 shots?",
+      "back": "0.992, since $1-0.20^3=1-0.008=0.992$. The complement shortcut avoids adding every case with at least one success.",
+      "hint": "Use the complement: all three miss.",
+      "sectionId": "s5"
+    }
+  ]
+}

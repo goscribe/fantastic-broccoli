@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-2",
+  "topicCode": "5.2",
+  "topicName": "Increasing and decreasing functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:50.770Z",
+  "cards": [
+    {
+      "id": "1cx1yus",
+      "kind": "concept",
+      "front": "How does the sign of the derivative show whether a function is increasing or decreasing?",
+      "back": "Where $f'(x)>0$ the function is **increasing**, and where $f'(x)<0$ it is decreasing. The derivative is the gradient, so its sign gives the direction of the graph.",
+      "hint": "Think about whether the graph climbs or falls.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ofbrpq",
+      "kind": "term",
+      "front": "What is a critical point?",
+      "back": "A **critical point** is a value in the domain where $f'(x)=0$ or $f'(x)$ does not exist. These are the only places where the graph can switch between rising and falling.",
+      "hint": "Where can the direction change?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zu0d8z",
+      "kind": "concept",
+      "front": "What does it mean when $f'$ changes sign at a critical point?",
+      "back": "If $f'$ changes from positive to negative, the point is a **local maximum**. If it changes from negative to positive, the point is a **local minimum**. No sign change means no turning point.",
+      "hint": "Picture the graph rising then falling, or the reverse.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1brxsaj",
+      "kind": "term",
+      "front": "What is a stationary point?",
+      "back": "A **stationary point** is a point on the graph where $f'(x)=0$, so the gradient is zero and the tangent is horizontal.",
+      "hint": "Compare with the definition of a critical point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02fuxed",
+      "kind": "term",
+      "front": "What does it mean for a function to be increasing on an interval?",
+      "back": "Every larger input in the interval gives a **larger output**, so the graph climbs as you move from left to right.",
+      "hint": "Think about inputs and outputs getting bigger together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sapt0d",
+      "kind": "example",
+      "front": "For $f(x)=x^2$, where is $f'(x)$ negative and where is it positive?",
+      "back": "$f'(x)=2x$ is **negative** for $x<0$ and **positive** for $x>0$, so the graph falls and then rises.",
+      "hint": "Differentiate first, then check the sign on each side of zero.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07mwlnr",
+      "kind": "mistake",
+      "front": "Does $f'(a)=0$ always mean the graph has a turning point at $x=a$?",
+      "back": "No. For $y=x^3$, $f'(0)=0$, but $f'$ does not change sign, so the graph keeps rising through $x=0$. A **turning point** needs a sign change.",
+      "hint": "Look at the sign of $f'$ on each side of the point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mlj1i8",
+      "kind": "mistake",
+      "front": "Is every critical point a place where $f'(x)=0$?",
+      "back": "No. A critical point also occurs where $f'(x)$ does not exist. For $f(x)=|x|$, $x=0$ is a critical point because the sharp corner means the derivative does not exist there.",
+      "hint": "Consider graphs with sharp corners.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ejwt5f",
+      "kind": "process",
+      "front": "What are the steps of a sign table for finding where $f$ is increasing and decreasing?",
+      "back": "Differentiate and factorise $f'(x)$, solve $f'(x)=0$ for the critical points, test one value of $f'$ strictly inside each interval, then state where $f'>0$ (increasing) and $f'<0$ (decreasing).",
+      "hint": "There are four steps, in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cu0en0",
+      "kind": "example",
+      "front": "For $f(x)=x^3-3x^2-9x+5$, find where $f$ is increasing and decreasing.",
+      "back": "$f'(x)=3(x+1)(x-3)$, with critical points $x=-1$ and $x=3$. $f$ is **increasing** for $x<-1$ and $x>3$, and **decreasing** for $-1<x<3$.",
+      "hint": "Factorise $f'(x)$ before testing signs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dv46fo",
+      "kind": "example",
+      "front": "For $f(x)=x^3-3x^2-9x+5$, what are the local maximum and local minimum?",
+      "back": "Local maximum at $x=-1$ with $f(-1)=10$. Local minimum at $x=3$ with $f(3)=-22$.",
+      "hint": "Check whether $f'$ goes from positive to negative, or the reverse.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11dv1dd",
+      "kind": "mistake",
+      "front": "Does a local maximum have to be the highest point on the whole graph?",
+      "back": "No. A **local maximum** only compares the point with nearby points. Another part of the graph may be higher.",
+      "hint": "The word local is the key.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17gck7j",
+      "kind": "example",
+      "front": "Find the critical points of $f(x)=x^3-12x$.",
+      "back": "$f'(x)=3x^2-12=3(x-2)(x+2)$. Setting $f'(x)=0$ gives $x=2$ and $x=-2$.",
+      "hint": "Set the derivative equal to zero and solve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0b5z8kj",
+      "kind": "process",
+      "front": "How do you sketch a graph using the first derivative?",
+      "back": "Plot the critical points using $f$ to find their heights, mark easy intercepts, then join them with a smooth curve that rises where $f'>0$ and falls where $f'<0$. Label each turning point with its coordinates.",
+      "hint": "Right shape and key values matter more than exact scale.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "1-2",
+  "topicCode": "1.2",
+  "topicName": "Arithmetic sequences and series",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:09.580Z",
+  "cards": [
+    {
+      "id": "0u9rxhz",
+      "kind": "concept",
+      "front": "What makes a sequence an arithmetic sequence?",
+      "back": "Each term is found by adding the same fixed amount to the term before. This fixed amount is the **common difference** $d$. The plant heights 12, 15, 18, 21 are an example.",
+      "hint": "Think about what stays the same as you move along the list.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03om9vy",
+      "kind": "formula",
+      "front": "What is the formula for the nth term of an arithmetic sequence?",
+      "back": "$u_n=u_1+(n-1)d$, where $u_1$ is the first term and $d$ is the **common difference**. You add $d$ exactly $n-1$ times to reach term $n$.",
+      "hint": "Count how many steps of size d lie between term 1 and term n.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d1xvkf",
+      "kind": "formula",
+      "front": "What formula gives the total of the first n terms of an arithmetic series?",
+      "back": "$S_n=\\frac{n}{2}(u_1+u_n)$, or $S_n=\\frac{n}{2}(2u_1+(n-1)d)$. Use the first form when you know the last term, and the second when you only know $d$.",
+      "hint": "Pair the terms forwards and backwards.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13f9fdw",
+      "kind": "term",
+      "front": "What is the common difference of an arithmetic sequence?",
+      "back": "The **common difference** $d$ is the constant value $u_{n+1}-u_n$ between neighbouring terms. It is the same for every pair of neighbours.",
+      "hint": "It is the value that never changes between neighbouring terms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06p2u8t",
+      "kind": "process",
+      "front": "How do you find the common difference of a sequence?",
+      "back": "Subtract any term from the one after it: $d=u_{n+1}-u_n$. Check that every neighbouring pair gives the same answer. If not, the sequence is not arithmetic.",
+      "hint": "Check more than one pair before you decide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ob3vpz",
+      "kind": "mistake",
+      "front": "A student finds the common difference of 40, 35, 30, 25 by calculating 40 minus 35. What is wrong?",
+      "back": "The **subtraction is the wrong way round**. $d$ is the later term minus the earlier term, so $35-40=-5$. Calculating $40-35$ gives $+5$, which has the wrong sign.",
+      "hint": "Which term comes first in the list?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fzzklw",
+      "kind": "example",
+      "front": "The sequence 5, 9, 13, 17, ... has $u_1=5$ and $d=4$. What is the 20th term?",
+      "back": "$u_{20}=5+(20-1)\\times4=81$. The 20th term is 81.",
+      "hint": "Substitute n = 20 into the nth term formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dfmcb1",
+      "kind": "example",
+      "front": "In the sequence 5, 9, 13, 17, ..., which term equals 101?",
+      "back": "The **25th term**. Solve $5+(n-1)\\times4=101$, so $(n-1)\\times4=96$, giving $n-1=24$ and $n=25$.",
+      "hint": "Set the formula equal to 101 and solve for n.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18ta1o0",
+      "kind": "term",
+      "front": "What is a series?",
+      "back": "A **series** is the total obtained by adding the terms of a sequence. $S_n$ denotes the total of the first $n$ terms.",
+      "hint": "Compare it with the sequence itself, which is only a list.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h2ws3s",
+      "kind": "example",
+      "front": "Calculate the total of the first 20 terms of 5, 9, 13, 17, ...",
+      "back": "$S_{20}=\\frac{20}{2}(2\\times5+19\\times4)=10\\times86=860$. The first 20 terms add up to 860.",
+      "hint": "Here $u_1=5$, $d=4$ and $n=20$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qy37kq",
+      "kind": "concept",
+      "front": "Why does the sum formula for an arithmetic series have a factor of one half?",
+      "back": "Each vertical pair of terms, written forwards and backwards, totals $u_1+u_n$. There are $n$ pairs, which count the series twice, so you halve the result.",
+      "hint": "Think about writing the series twice, once in reverse.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1terdz5",
+      "kind": "mistake",
+      "front": "A question asks for the distance on day 14, but a student uses $S_{14}$. What is the error?",
+      "back": "**$S_n$ is a total**, not a single value. A single day's value is the term $u_{14}$, so use the nth term formula instead.",
+      "hint": "Is the question asking for one term or a total?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09qybr4",
+      "kind": "concept",
+      "front": "What kinds of everyday situations suggest an arithmetic sequence?",
+      "back": "Situations with a **fixed change** each period, such as a fixed weekly increase, a fixed fee paid each period, or a straight-line graph of value against position.",
+      "hint": "Look for an amount that is added the same way every time.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1rrx3o9",
+      "kind": "example",
+      "front": "A runner trains 2.0 km on day 1 and adds 0.5 km each day. What is the total distance in the first 14 days?",
+      "back": "$S_{14}=\\frac{14}{2}(2\\times2.0+13\\times0.5)=7\\times10.5=73.5$. The total distance is 73.5 km.",
+      "hint": "Identify $u_1$, $d$ and n before substituting.",
+      "sectionId": "s5"
+    }
+  ]
+}

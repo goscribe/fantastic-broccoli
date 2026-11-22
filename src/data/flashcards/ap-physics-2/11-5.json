@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "11-5",
+  "topicCode": "11.5",
+  "topicName": "Compound DC circuits",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:20.868Z",
+  "cards": [
+    {
+      "id": "116hdc8",
+      "kind": "concept",
+      "front": "What is the key difference between series and parallel resistor connections?",
+      "back": "In a **series** connection every resistor carries the same current, and the potential differences add up to the source's. In a **parallel** connection every branch has the same potential difference, and the branch currents add up to the source current.",
+      "hint": "Ask what each resistor shares: current or potential difference."
+    },
+    {
+      "id": "1qgu7tb",
+      "kind": "formula",
+      "front": "How do you find the equivalent resistance of resistors connected in parallel?",
+      "back": "$\\\\frac{1}{R_\\\\mathrm{eq}}=\\\\frac{1}{R_1}+\\\\frac{1}{R_2}+\\\\frac{1}{R_3}$, with each resistance in ohms. The result is **smaller** than the smallest branch resistance.",
+      "hint": "Add the reciprocals, then invert the total.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08ixdwf",
+      "kind": "process",
+      "front": "What are the steps for simplifying a compound circuit?",
+      "back": "1. Find a **purely series** or **purely parallel** group. 2. Replace it with its equivalent resistance. 3. Redraw and repeat until one resistor remains. 4. Find the source current with $I=\\\\frac{\\\\Delta V}{R_\\\\mathrm{eq}}$.",
+      "hint": "Work on one small piece at a time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p8n7pw",
+      "kind": "formula",
+      "front": "What is the equivalent resistance of resistors connected in series?",
+      "back": "$R_\\\\mathrm{eq}=R_1+R_2+R_3$, in ohms. It is **larger** than any single resistor because charge must pass through all of them.",
+      "hint": "Each resistor adds to the path.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c58kgw",
+      "kind": "mistake",
+      "front": "Why is it wrong to think that adding a resistor in parallel increases the equivalent resistance?",
+      "back": "It **lowers** the equivalent resistance. The new branch gives charge another path, so the source supplies more current at the same potential difference. Since $R_\\\\mathrm{eq}=\\\\frac{\\\\Delta V}{I}$, a bigger current means a smaller $R_\\\\mathrm{eq}$.",
+      "hint": "Think about how many paths the charge can take.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pl9t91",
+      "kind": "concept",
+      "front": "What happens to the other bulbs when one bulb in a series string fails?",
+      "back": "They all go dark, because the **single current path** is broken. In parallel, the other bulbs keep working because each branch still has the full potential difference.",
+      "hint": "Count the paths the charge can take.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05102ut",
+      "kind": "term",
+      "front": "What is a compound circuit?",
+      "back": "A **compound circuit** is a circuit that combines series connections and parallel connections in the same circuit.",
+      "hint": "Compound means mixed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fkj49n",
+      "kind": "term",
+      "front": "What is the equivalent resistance of a network of resistors?",
+      "back": "The **equivalent resistance** $R_\\\\mathrm{eq}$, in ohms, is the single resistance that draws the same current from the same source as the whole network.",
+      "hint": "Replace the whole network with one resistor."
+    },
+    {
+      "id": "0lbf6fw",
+      "kind": "process",
+      "front": "After finding the source current, how do you find the current and potential difference for each resistor?",
+      "back": "Work **backward** through the simplifications. The series part carries the full source current. Find the potential difference left for the parallel pair, then divide it by each branch resistance.",
+      "hint": "Reverse the order of the reduction steps.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1584rja",
+      "kind": "example",
+      "front": "A 12 V battery drives $R_1=4.0\\\\,\\\\Omega$ in series with a parallel pair of $6.0\\\\,\\\\Omega$ and $12\\\\,\\\\Omega$. What is the source current?",
+      "back": "**1.5 A**. The pair is $4.0\\\\,\\\\Omega$, so $R_\\\\mathrm{eq}=8.0\\\\,\\\\Omega$ and $I=\\\\frac{12\\\\,\\\\mathrm{V}}{8.0\\\\,\\\\Omega}=1.5\\\\,\\\\mathrm{A}$.",
+      "hint": "Reduce the parallel pair first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y78drs",
+      "kind": "example",
+      "front": "In the same circuit, what is the potential difference across $R_1$?",
+      "back": "**6.0 V**, from $\\\\Delta V_1=IR_1=(1.5\\\\,\\\\mathrm{A})(4.0\\\\,\\\\Omega)$. The parallel pair then receives the remaining 6.0 V.",
+      "hint": "Apply Ohm's law to the series resistor.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wp942c",
+      "kind": "process",
+      "front": "What three checks can you use to confirm the answers to a compound circuit?",
+      "back": "The **branch currents** must add to the current entering the pair. The **series potential differences** must add to the source voltage. The **power** in all resistors must total the power supplied by the source.",
+      "hint": "Check current, voltage and power.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0txcv52",
+      "kind": "formula",
+      "front": "What are the two equivalent forms for the power dissipated in a resistor?",
+      "back": "$P=I\\\\,\\\\Delta V$ or $P=I^2R$, in watts. **Power** is the rate of energy transfer.",
+      "hint": "Power is energy transferred per second.",
+      "sectionId": "s5"
+    }
+  ]
+}

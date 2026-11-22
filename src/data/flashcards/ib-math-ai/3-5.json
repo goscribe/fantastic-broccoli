@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-5",
+  "topicCode": "3.5",
+  "topicName": "Perpendicular bisectors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:42.875Z",
+  "cards": [
+    {
+      "id": "1uuwme1",
+      "kind": "concept",
+      "front": "What is the perpendicular bisector of a line segment?",
+      "back": "It is the **line** through the midpoint of a segment that meets the segment at a right angle, cutting it into two equal parts. Every segment has exactly one.",
+      "hint": "Think of the crease when two marked points are folded together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ri1imq",
+      "kind": "concept",
+      "front": "Which points lie on the perpendicular bisector of segment AB?",
+      "back": "Exactly the points **equidistant** from A and B, so PA = PB. Any point equally far from both ends lies on the bisector, and no other point does.",
+      "hint": "Think about the matching triangles formed on each side.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e9r1p9",
+      "kind": "process",
+      "front": "How do you construct the perpendicular bisector of segment AB with a compass and straightedge?",
+      "back": "Open the compass to more than half of AB. Draw arcs centred on A and on B with that same opening, above and below the segment. Join the two crossing points with a straight line.",
+      "hint": "Count the steps in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0y6uj96",
+      "kind": "process",
+      "front": "What are the steps to find the equation of the perpendicular bisector of two points on a grid?",
+      "back": "Find the **midpoint** M, then the gradient m of AB, then the perpendicular gradient $-\\frac{1}{m}$. Write the line through M with that gradient, then check that M satisfies it.",
+      "hint": "Three quantities, then one line.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vmf1ji",
+      "kind": "formula",
+      "front": "What is the midpoint formula for A(x_1,y_1) and B(x_2,y_2)?",
+      "back": "$M=\\left(\\frac{x_1+x_2}{2},\\frac{y_1+y_2}{2}\\right)$. You average the x-coordinates and the y-coordinates separately.",
+      "hint": "Average each coordinate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z8cpu4",
+      "kind": "formula",
+      "front": "How is the gradient of the perpendicular bisector linked to the gradient m of AB?",
+      "back": "It is $-\\frac{1}{m}$, because perpendicular gradients have a **product** of $-1$. Here $m=\\frac{y_2-y_1}{x_2-x_1}$.",
+      "hint": "Recall what the product of two perpendicular gradients equals.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h2i9c9",
+      "kind": "example",
+      "front": "Find the perpendicular bisector of A(1,2) and B(7,6).",
+      "back": "$y=-\\frac{3}{2}x+10$. The midpoint is (4,4) and the gradient of AB is $\\frac{2}{3}$, so the perpendicular gradient is $-\\frac{3}{2}$. Then $y-4=-\\frac{3}{2}(x-4)$.",
+      "hint": "Start with the midpoint.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "014vq02",
+      "kind": "mistake",
+      "front": "Is a point close to segment AB automatically equidistant from A and B?",
+      "back": "No. Only points on the **perpendicular bisector** have equal distances to A and B. Being near the segment does not guarantee PA = PB.",
+      "hint": "Nearness is not the test.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1htxzwr",
+      "kind": "mistake",
+      "front": "Why must the compass opening be more than half of AB in a construction?",
+      "back": "If the opening is half of AB or less, the arcs centred on A and B will not meet, so there are no crossing points to join with a line.",
+      "hint": "What happens if the arcs cannot reach each other?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wsy43m",
+      "kind": "concept",
+      "front": "How can you compare two distances without using square roots?",
+      "back": "Compare their **squares**. Positive distances are equal exactly when their squares are equal, so you avoid working with square roots.",
+      "hint": "Only positive lengths are involved.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0wqpkmc",
+      "kind": "example",
+      "front": "Find the point on the x-axis equidistant from A(1,2) and B(7,6).",
+      "back": "$\\left(\\frac{20}{3},0\\right)\\approx(6.67,0)$. Equidistant points lie on $y=-\\frac{3}{2}x+10$, so set $y=0$ and solve to get $x=\\frac{20}{3}$.",
+      "hint": "Substitute y = 0 into the bisector.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mguitz",
+      "kind": "term",
+      "front": "What is the circumcentre of a triangle?",
+      "back": "The **circumcentre** is the point where the perpendicular bisectors of the three sides meet. It is equally far from all three vertices.",
+      "hint": "Three sides, one meeting point.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06qeyxn",
+      "kind": "term",
+      "front": "What is the gradient of a line?",
+      "back": "The **gradient** is the change in y divided by the change in x between any two points on the line, written $\\frac{y_2-y_1}{x_2-x_1}$.",
+      "hint": "Think rise over run.",
+      "sectionId": "s4"
+    }
+  ]
+}

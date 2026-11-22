@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "8-4",
+  "topicCode": "8.4",
+  "topicName": "Area between curves (functions of x)",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:48.920Z",
+  "cards": [
+    {
+      "id": "10f7cms",
+      "kind": "concept",
+      "front": "Why do you set the two functions equal before integrating a region between curves?",
+      "back": "Setting $f(x)=g(x)$ finds the **intersection points**, whose $x$-coordinates become the **limits of integration** for the region.",
+      "hint": "Think about where the region starts and ends.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1te2x6a",
+      "kind": "formula",
+      "front": "What is the area between $f(x)$ and $g(x)$ from $x=a$ to $x=b$, when $f$ is above $g$?",
+      "back": "$A=\\int_a^b[f(x)-g(x)]\\,dx$, where $f$ is the **upper** function and $g$ is the **lower** function. With length units, the area is in square units.",
+      "hint": "Upper minus lower.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t2hlth",
+      "kind": "concept",
+      "front": "Why is the strip height upper minus lower rather than lower minus upper?",
+      "back": "A **vertical strip** runs from the lower curve up to the upper curve, so **upper minus lower** gives a nonnegative height and a positive area.",
+      "hint": "Which curve is higher at x=1 in the line and parabola example?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1voj0n9",
+      "kind": "term",
+      "front": "What are intersection points of two curves?",
+      "back": "**Intersection points** are points where two curves have the same $x$- and $y$-coordinates.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1utr93t",
+      "kind": "term",
+      "front": "What are the limits of integration for a region between curves in $x$?",
+      "back": "The **limits of integration** are the starting and ending $x$-values of the region, usually found from the intersection points.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0p93ssl",
+      "kind": "term",
+      "front": "What is a vertical strip in this topic?",
+      "back": "A **vertical strip** is a thin part of the region whose height runs from the lower curve to the upper curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ut8awo",
+      "kind": "mistake",
+      "front": "A student writes $\\int_0^2(x^2-2x)\\,dx$ for the region between $y=2x$ and $y=x^2$. What is wrong?",
+      "back": "The subtraction order is reversed. The **upper** function $2x$ must come first, giving $\\int_0^2(2x-x^2)\\,dx$. A reversed order can give a negative value, but area is never negative.",
+      "hint": "Check which curve is on top first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04vcj9l",
+      "kind": "process",
+      "front": "What are the steps to find the area between two curves with respect to $x$?",
+      "back": "1) Sketch and find the intersections for the **limits**. 2) Identify the **upper** and **lower** functions. 3) Integrate upper minus lower. 4) Evaluate and give square units.",
+      "hint": "Four steps, in order."
+    },
+    {
+      "id": "0yt91qq",
+      "kind": "example",
+      "front": "Find the area between $y=2x$ and $y=x^2$ from $x=0$ to $x=2$, with both axes in centimeters.",
+      "back": "$\\frac{4}{3}\\,\\mathrm{cm^2}$, from $\\int_0^2(2x-x^2)\\,dx=\\left[x^2-\\frac{x^3}{3}\\right]_0^2=\\frac{4}{3}$.",
+      "hint": "Upper minus lower, then find the antiderivative.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ycpx7b",
+      "kind": "example",
+      "front": "Find the limits of integration for the region enclosed by $y=x$ and $y=x^2$.",
+      "back": "$x=0$ and $x=1$, from solving $x=x^2$, which gives $x(x-1)=0$.",
+      "hint": "Set the two functions equal and factor.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18glbuy",
+      "kind": "concept",
+      "front": "How can a reasonableness check catch an error in an area calculation?",
+      "back": "Compare the result with a simple bound. For the line and parabola, the vertical gap is at most $1$ over an interval of width $2$, so the **area** must be less than $2\\,\\mathrm{cm^2}$.",
+      "hint": "Use the largest vertical gap times the interval width.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0schrii",
+      "kind": "concept",
+      "front": "Why should the strip height $2x-x^2$ be zero at the ends of the integration interval?",
+      "back": "The endpoints are where the curves **intersect**, so upper and lower heights match there. The strip height is zero at both ends and positive between them.",
+      "hint": "What happens at an intersection point?",
+      "sectionId": "s4"
+    }
+  ]
+}

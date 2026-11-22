@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "1-15",
+  "topicCode": "1.15",
+  "topicName": "Eigenvalues and eigenvectors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:32.134Z",
+  "cards": [
+    {
+      "id": "1rncfaz",
+      "kind": "term",
+      "front": "What is an eigenvector of a square matrix $A$?",
+      "back": "A **non-zero vector** $\\mathbf{v}$ that stays on its own line through the origin when $A$ acts on it, so $A\\mathbf{v}=\\lambda\\mathbf{v}$. The matrix only scales it.",
+      "hint": "Think about which directions the matrix leaves pointing the same way.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0u2z9pz",
+      "kind": "process",
+      "front": "How do you find the eigenvalues of a $2\\times2$ matrix?",
+      "back": "Form the **characteristic equation** $\\det(A-\\lambda I)=0$, which expands to $\\lambda^2-(a+d)\\lambda+(ad-bc)=0$. Then solve it by factorising or with technology. A $2\\times2$ matrix has at most two eigenvalues.",
+      "hint": "Start by rearranging $A\\mathbf{v}=\\lambda\\mathbf{v}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11oyudn",
+      "kind": "concept",
+      "front": "What do the size and sign of an eigenvalue tell you about what the matrix does along its line?",
+      "back": "If $|\\lambda|>1$ vectors on the line are **stretched**; if $0<|\\lambda|<1$ they shrink towards the origin. If $\\lambda<0$ they reverse direction, and if $\\lambda=1$ they are unchanged.",
+      "hint": "Compare $\\lambda$ with 1, and check its sign.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10yx566",
+      "kind": "formula",
+      "front": "What is the characteristic equation, and what does each symbol mean?",
+      "back": "$\\det(A-\\lambda I)=0$. Here $A$ is the square matrix, $\\lambda$ is the unknown eigenvalue, and $I$ is the identity matrix with 1s on the leading diagonal and 0s elsewhere.",
+      "hint": "$I$ is the matrix that leaves vectors unchanged when multiplied.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09k15gy",
+      "kind": "example",
+      "front": "Find the eigenvalues of $A=\\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$.",
+      "back": "The characteristic equation is $\\lambda^2-7\\lambda+10=0$, which factorises as $(\\lambda-2)(\\lambda-5)=0$. The eigenvalues are **$\\lambda=2$ and $\\lambda=5$**.",
+      "hint": "Use $a+d$ for the sum and $ad-bc$ for the product.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0r48xe9",
+      "kind": "process",
+      "front": "How do you find an eigenvector once you know an eigenvalue $\\lambda$?",
+      "back": "Substitute $\\lambda$ into $(A-\\lambda I)\\mathbf{v}=\\mathbf{0}$ and solve for the entries of $\\mathbf{v}$. The two equations are multiples of each other, so you get one relationship between $x$ and $y$. Pick a simple whole-number solution.",
+      "hint": "Expect one equation to be a multiple of the other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0elq853",
+      "kind": "example",
+      "front": "For $A=\\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$, find an eigenvector for $\\lambda=5$ and for $\\lambda=2$.",
+      "back": "For $\\lambda=5$, $y=x$, so $\\begin{pmatrix}1\\\\1\\end{pmatrix}$ works. For $\\lambda=2$, $y=-2x$, so $\\begin{pmatrix}1\\\\-2\\end{pmatrix}$ works.",
+      "hint": "Use $A-\\lambda I$ and the first row of it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j14ann",
+      "kind": "mistake",
+      "front": "Is the zero vector an eigenvector of a matrix?",
+      "back": "No. The zero vector satisfies $A\\mathbf{0}=\\lambda\\mathbf{0}$ for every $\\lambda$, so it tells you nothing. Eigenvectors must be **non-zero**.",
+      "hint": "Ask whether it picks out a specific direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hgaj56",
+      "kind": "mistake",
+      "front": "Does each eigenvalue have only one eigenvector?",
+      "back": "No. Any non-zero multiple of an eigenvector is also an eigenvector, so each eigenvalue gives a whole **line** of eigenvectors. Choose one with simple whole-number entries.",
+      "hint": "Think about scaling a vector up or down.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dquvpw",
+      "kind": "concept",
+      "front": "What is a steady state in a repeated matrix model $\\mathbf{x}_{n+1}=A\\mathbf{x}_n$?",
+      "back": "A **steady state** is a non-zero vector $\\mathbf{x}$ with $A\\mathbf{x}=\\mathbf{x}$, which is an eigenvector with $\\lambda=1$. Repeating the matrix step leaves it unchanged.",
+      "hint": "Which eigenvalue does a steady state have?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dupio7",
+      "kind": "example",
+      "front": "For the city-suburb model with $A=\\begin{pmatrix}0.9&0.2\\\\0.1&0.8\\end{pmatrix}$, find the eigenvalues and the steady-state city to suburb ratio.",
+      "back": "The eigenvalues are **1 and 0.7**. The steady state has city to suburb populations in the ratio $2:1$, since $c=2s$. Any difference from it shrinks by a factor of 0.7 each year.",
+      "hint": "Factorise $\\lambda^2-1.7\\lambda+0.70=0$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tf9moa",
+      "kind": "concept",
+      "front": "Why do eigenvectors make repeated multiplication by $A$ easier?",
+      "back": "If $A\\mathbf{v}=\\lambda\\mathbf{v}$ then $A^n\\mathbf{v}=\\lambda^n\\mathbf{v}$, because each application only scales $\\mathbf{v}$. Writing a starting vector as a sum of eigenvectors lets you apply this to each part separately.",
+      "hint": "Each application scales the eigenvector and never turns it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vbwzec",
+      "kind": "example",
+      "front": "For $A=\\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}$ and $\\mathbf{x}_0=\\begin{pmatrix}3\\\\0\\end{pmatrix}$, find $A^3\\mathbf{x}_0$.",
+      "back": "Write $\\mathbf{x}_0=2\\begin{pmatrix}1\\\\1\\end{pmatrix}+1\\begin{pmatrix}1\\\\-2\\end{pmatrix}$, so $A^3\\mathbf{x}_0=250\\begin{pmatrix}1\\\\1\\end{pmatrix}+8\\begin{pmatrix}1\\\\-2\\end{pmatrix}=\\begin{pmatrix}258\\\\234\\end{pmatrix}$.",
+      "hint": "Solve $c_1+c_2=3$ and $c_1-2c_2=0$ first.",
+      "sectionId": "s5"
+    }
+  ]
+}

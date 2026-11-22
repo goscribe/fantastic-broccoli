@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "2-2",
+  "topicCode": "2.2",
+  "topicName": "Definition of the derivative",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:54.994Z",
+  "cards": [
+    {
+      "id": "1tff7q6",
+      "kind": "concept",
+      "front": "How does the derivative at a point relate to secant lines on a graph?",
+      "back": "The derivative is the **limit** of secant slopes. As the second point approaches the first, the secant slopes approach the slope of the tangent line at that point, if the limit is finite.",
+      "hint": "Think about what happens when the second point moves closer to the first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "046b0e3",
+      "kind": "concept",
+      "front": "What does the sign of $f'(a)$ tell you about the tangent line at $x=a$?",
+      "back": "If $f'(a)>0$, the **tangent** rises from left to right. If $f'(a)<0$, it falls. If $f'(a)=0$, it is horizontal.",
+      "hint": "Read the slope as rise over run.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1404ngn",
+      "kind": "concept",
+      "front": "What is velocity, and how does it differ from speed?",
+      "back": "**Velocity** is $v(t)=x'(t)$, the instantaneous rate of change of position. Unlike speed, it includes direction: positive means position increases, negative means it decreases.",
+      "hint": "Ask whether direction matters in the answer.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1s7r1s7",
+      "kind": "term",
+      "front": "What is a difference quotient?",
+      "back": "The **difference quotient** is $\\frac{f(a+h)-f(a)}{h}$ with $h\\ne 0$. It gives the slope between two points on a graph, or the average change in output per unit change in input.",
+      "hint": "It is a ratio of change in output to change in input.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "162t92b",
+      "kind": "formula",
+      "front": "What is the limit definition of $f'(a)$?",
+      "back": "$f'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}$. The limit must be finite and agree from both sides.",
+      "hint": "Compare the input $a+h$ with the input $a$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uenw72",
+      "kind": "mistake",
+      "front": "Why can't you substitute $h=0$ directly into the difference quotient?",
+      "back": "Setting $h=0$ gives $\\frac{0}{0}$, which is undefined. Instead, simplify for $h\\ne 0$ and find the **limit** as $h$ approaches zero.",
+      "hint": "What does division by zero produce?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ihdvnl",
+      "kind": "formula",
+      "front": "What notations can name the derivative of $y=f(x)$ at $x=a$?",
+      "back": "$f'(a)$ or $\\left.\\frac{dy}{dx}\\right|_{x=a}$. For the derivative function, write $f'(x)$, $y'$, or $\\frac{dy}{dx}$.",
+      "hint": "One form names a value, the other names a function.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dzn70u",
+      "kind": "term",
+      "front": "What is a derivative function?",
+      "back": "The **derivative function** $f'$ assigns each input the derivative of $f$ at that input, wherever the derivative exists.",
+      "hint": "It takes a whole range of inputs, not one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01gcr5p",
+      "kind": "process",
+      "front": "What are the steps to find $v(3)$ for $x(t)=t^2$ using the definition?",
+      "back": "Write $\\lim_{h\\to 0}\\frac{(3+h)^2-9}{h}$, simplify to $\\frac{6h+h^2}{h}$, cancel $h$ for $h\\ne 0$ to get $6+h$, then take the limit: $v(3)=6$ m/s.",
+      "hint": "Expand $(3+h)^2$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qg59oq",
+      "kind": "example",
+      "front": "Using the limit definition, find $f'(2)$ for $f(x)=x^2$.",
+      "back": "$f'(2)=4$. Expand $(2+h)^2-4=4h+h^2$, divide by $h$ to get $4+h$, then let $h\\to 0$.",
+      "hint": "Use the same steps as the $t^2$ example at $t=3$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gkn84w",
+      "kind": "example",
+      "front": "If $x(t)$ is position in meters and $t$ is in seconds, what does $x'(3)=-2$ mean?",
+      "back": "At 3 seconds, the instantaneous **velocity** is $-2$ m/s, so the object's position is decreasing at that instant.",
+      "hint": "Check the sign of the derivative.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10eo318",
+      "kind": "term",
+      "front": "What is an instantaneous rate of change?",
+      "back": "An **instantaneous rate of change** is the derivative of a measured quantity with respect to its input, giving the rate at a single instant.",
+      "hint": "It is the derivative applied to a measured quantity.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dqb03o",
+      "kind": "concept",
+      "front": "Can a tangent line exist at a point where the derivative does not?",
+      "back": "Yes, a tangent line can touch a graph where no derivative exists, so the **limit** remains the deciding test for the derivative.",
+      "hint": "Tangent lines and derivatives are not always the same test.",
+      "sectionId": "s3"
+    }
+  ]
+}

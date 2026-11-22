@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-3",
+  "topicCode": "6.3",
+  "topicName": "Summation and definite integral notation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:29.047Z",
+  "cards": [
+    {
+      "id": "1y285e5",
+      "kind": "formula",
+      "front": "What does a Riemann sum add up, and what do its symbols mean?",
+      "back": "$\\sum_{i=1}^{n}f(x_i^*)\\Delta x$ adds one **function value** times one width for each subinterval. $x_i^*$ is the sample point and $\\Delta x$ is the subinterval width.",
+      "hint": "Think: one value times one width, for each piece.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1abr909",
+      "kind": "term",
+      "front": "What is a definite integral $\\int_a^b f(x)\\,dx$?",
+      "back": "The **limit** of Riemann sums over $[a,b]$ as the subinterval widths approach zero. The integral is the exact value that the finite sums approach.",
+      "hint": "What happens to the widths in the limit?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jfdslq",
+      "kind": "process",
+      "front": "How do you translate a limit of sums into a definite integral?",
+      "back": "Find the width to get $b-a$, read the starting endpoint from the sample points, and use the function applied to the sample points as the integrand. Keep $n\\to\\infty$.",
+      "hint": "Width gives the interval; sample points give the function.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q7dn6w",
+      "kind": "mistake",
+      "front": "A four-term Riemann sum is equal to the matching definite integral. True or false?",
+      "back": "**False.** A finite sum only approximates the integral. Equality needs the limit as $n\\to\\infty$, because the integral is the limit of such sums.",
+      "hint": "Count how many subintervals the sum uses.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "031kaxo",
+      "kind": "term",
+      "front": "What is the index in $\\sum_{i=1}^{n} a_i$?",
+      "back": "The **index** $i$ is a placeholder that takes each integer value from $1$ through $n$, generating one term $a_i$ per value.",
+      "hint": "It is a counter, not a fixed number.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "153p2eh",
+      "kind": "mistake",
+      "front": "Does the upper limit of a sum always tell you the number of terms?",
+      "back": "**No.** The upper limit is the final index. From $i=0$ through $i=4$ there are five terms, because the sum starts at zero.",
+      "hint": "Count the values including the starting one.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1c04cop",
+      "kind": "term",
+      "front": "What is the subinterval width for $n$ equal parts of $[a,b]$?",
+      "back": "$\\Delta x=\\frac{b-a}{n}$, the **width** of one part of the partition.",
+      "hint": "Length of the whole interval divided by parts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cbexqg",
+      "kind": "concept",
+      "front": "How do the right and left endpoint sample points differ?",
+      "back": "Right endpoints use $x_i^*=a+i\\Delta x$, and left endpoints use $x_i^*=a+(i-1)\\Delta x$. Substitute the chosen expression into $f$ before writing the sum.",
+      "hint": "Compare the value of i in each formula.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hhbi1a",
+      "kind": "example",
+      "front": "Evaluate $\\sum_{i=1}^{4} i^2$.",
+      "back": "**30**, because $1^2+2^2+3^2+4^2=1+4+9+16=30$.",
+      "hint": "Square each index, then add.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rkpc85",
+      "kind": "example",
+      "front": "Find the four-term right-endpoint sum for $f(x)=x^2$ on $[0,2]$, and its matching integral.",
+      "back": "The sum is $\\sum_{i=1}^{4}\\left(\\frac{i}{2}\\right)^2\\frac{1}{2}=\\frac{15}{4}$. The matching integral is $\\int_0^2 x^2\\,dx$.",
+      "hint": "The width is $\\frac{1}{2}$, so the endpoints are $\\frac{i}{2}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ct5p5x",
+      "kind": "mistake",
+      "front": "Why must $dx$ appear in $\\int_a^b f(x)\\,dx$?",
+      "back": "Do not omit **$dx$**. It completes the notation and identifies $x$ as the variable of integration.",
+      "hint": "What variable is the integrand written in?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11ovo4r",
+      "kind": "concept",
+      "front": "Can different sample-point rules give the same definite integral?",
+      "back": "Yes. **Different sample-point rules** can lead to the same integral as $n$ increases, because the integral is the common limit of those sums.",
+      "hint": "Think about what the limit does to the choices.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0o0kimo",
+      "kind": "example",
+      "front": "Write $\\lim_{n\\to\\infty}\\sum_{i=1}^{n}\\left(2+\\frac{3i}{n}\\right)^2\\frac{3}{n}$ as a definite integral.",
+      "back": "$\\int_2^5 x^2\\,dx$. The width is $\\frac{3}{n}$, the endpoints run from $2$ to $5$, and the integrand is $x^2$.",
+      "hint": "Width $\\frac{3}{n}$ gives $b-a=3$ starting at 2.",
+      "sectionId": "s4"
+    }
+  ]
+}

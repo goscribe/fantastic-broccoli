@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-2",
+  "topicCode": "1.2",
+  "topicName": "Variables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:44.611Z",
+  "cards": [
+    {
+      "id": "1yjlahr",
+      "kind": "term",
+      "front": "What is a categorical variable?",
+      "back": "A **categorical variable** places each individual into a group or category. Its values are labels, not amounts, such as eye color or favorite subject.",
+      "hint": "Think about whether the values are labels or amounts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cfmwvo",
+      "kind": "term",
+      "front": "What is a quantitative variable?",
+      "back": "A **quantitative variable** takes numerical values, usually with units, for which arithmetic such as sums and averages makes sense. Height and number of siblings are examples.",
+      "hint": "Ask whether averaging the values would describe something real.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "141ll9m",
+      "kind": "concept",
+      "front": "What quick test tells you whether a variable is categorical or quantitative?",
+      "back": "The **averaging test**. Imagine averaging the values. If the average describes something real, the variable is quantitative. If it describes nothing, it is categorical.",
+      "hint": "Picture finding the average of the values.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13n5l9o",
+      "kind": "term",
+      "front": "What is a variable in a data study?",
+      "back": "A **variable** is a characteristic that can take different values from one individual to another. A characteristic that is the same for everyone is a constant, not a variable.",
+      "hint": "Does the value change between individuals?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0e1qlwq",
+      "kind": "mistake",
+      "front": "A student says a variable written with digits must be quantitative. What is wrong with this?",
+      "back": "**Digits do not decide the type.** Zip codes and jersey numbers only name groups, so they are categorical. Ask whether averaging the values would mean anything.",
+      "hint": "Look at what the numbers are used for.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l6jly2",
+      "kind": "example",
+      "front": "Classify these four variables: zip code, text messages sent yesterday, eye color, and height in centimeters.",
+      "back": "**Categorical:** zip code and eye color. **Quantitative:** text messages sent yesterday and height in centimeters. Averages make sense only for the quantitative ones.",
+      "hint": "Apply the averaging test to each one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13qhy4g",
+      "kind": "term",
+      "front": "What is an explanatory variable?",
+      "back": "An **explanatory variable** is used to explain or predict changes in another variable. It is the variable a study uses to explain the outcome.",
+      "hint": "It explains or predicts.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1fjvwko",
+      "kind": "term",
+      "front": "What is a response variable?",
+      "back": "A **response variable** measures the outcome of a study. It may be affected by the explanatory variable.",
+      "hint": "It is the outcome being measured.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1g5do37",
+      "kind": "concept",
+      "front": "What decides whether a variable is explanatory or response in a study?",
+      "back": "The **question being asked** decides the role. The same variable can be explanatory in one study and the response in another.",
+      "hint": "Roles describe how we use a variable, not what it is.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1d9jvv0",
+      "kind": "example",
+      "front": "A teacher asks whether extra sleep goes with higher quiz scores. Which variable is explanatory and which is the response?",
+      "back": "**Hours of sleep** is the explanatory variable, and **quiz score** is the response variable. Sleep is used to explain changes in the quiz score.",
+      "hint": "Which one is used to explain or predict the other?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1alj3mp",
+      "kind": "mistake",
+      "front": "A survey codes favorite pet as 1 for dog, 2 for cat, and 3 for other. The average code is 1.8. Is this average meaningful?",
+      "back": "**No.** Favorite pet is categorical, so the codes are only labels. An average of 1.8 names no pet and measures no amount.",
+      "hint": "What do the numbers actually represent?"
+    },
+    {
+      "id": "01wt3bj",
+      "kind": "term",
+      "front": "What is an individual in a data study?",
+      "back": "An **individual** is one object that the data describe, such as a person, animal, or thing. Each individual has one value for every variable.",
+      "hint": "In a data table, what does each row represent?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zs0gqj",
+      "kind": "concept",
+      "front": "Why is a survey variable where every student is 15 years old not a variable?",
+      "back": "Age would be a **constant**, not a variable. A variable must actually vary from one individual to another.",
+      "hint": "Does the value change between students?",
+      "sectionId": "s1"
+    }
+  ]
+}

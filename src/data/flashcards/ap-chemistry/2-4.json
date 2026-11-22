@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "2-4",
+  "topicCode": "2.4",
+  "topicName": "Structure of metals and alloys",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:13.025Z",
+  "cards": [
+    {
+      "id": "1c2kqcj",
+      "kind": "concept",
+      "front": "Why can a metal conduct electricity?",
+      "back": "Because **delocalized electrons** move freely through the metal, so an electric field can drive charge through it. The metal atoms themselves do not flow.",
+      "hint": "Think about what actually carries the charge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vh7ngb",
+      "kind": "concept",
+      "front": "Why can a metal be bent or shaped without breaking apart?",
+      "back": "Layers of atoms can **shift** without breaking all their attractions. The shared electrons keep attracting the metal cores after the shift.",
+      "hint": "Consider what the electrons do during a shift.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0exytsa",
+      "kind": "concept",
+      "front": "How do the added atoms sit in a substitutional alloy compared with an interstitial alloy?",
+      "back": "In a **substitutional** alloy, added atoms replace some metal atoms, as zinc does for copper in brass. In an **interstitial** alloy, small atoms sit in the **spaces** between metal atoms, as carbon does in steel.",
+      "hint": "Ask whether the added atom takes a metal atom's place or fits between them."
+    },
+    {
+      "id": "1r6dam7",
+      "kind": "term",
+      "front": "What is a crystal lattice?",
+      "back": "A **repeating, three-dimensional arrangement** of particles within a crystal.",
+      "hint": "Think of a pattern that repeats in every direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0s4m1ya",
+      "kind": "term",
+      "front": "What is metallic bonding?",
+      "back": "The **attraction** between positive metal cores and electrons shared throughout the metal.",
+      "hint": "Who attracts whom?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0y7uwqj",
+      "kind": "concept",
+      "front": "How many bonding partners does each atom in a metal have?",
+      "back": "**Several** nearby neighbors, not one fixed partner. The atoms are held together throughout the solid by metallic bonding.",
+      "hint": "Compare this with atoms in a simple molecule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01q50j6",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that conductivity means metal atoms flow through the solid?",
+      "back": "**Metal atoms stay in their lattice positions.** Mobile electrons carry the electric charge through the metal.",
+      "hint": "Where do the metal atoms stay?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1198gjz",
+      "kind": "mistake",
+      "front": "Is a piece of metal a set of separate molecules?",
+      "back": "**No.** A metal usually contains many small crystals called grains, and the atoms are held by metallic bonding, not as separate molecules.",
+      "hint": "Think about grains and grain boundaries.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0q9g3qc",
+      "kind": "term",
+      "front": "What is an alloy?",
+      "back": "A **solid material** containing a metal mixed with one or more other elements.",
+      "hint": "Think about mixing a metal with something else.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0le6m0b",
+      "kind": "term",
+      "front": "What are delocalized electrons?",
+      "back": "Electrons that **move throughout** a metal rather than staying between specific pairs of atoms.",
+      "hint": "Contrast them with electrons held between two atoms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ytoj9l",
+      "kind": "concept",
+      "front": "Why can steel be harder than pure iron?",
+      "back": "Small carbon atoms sit in the spaces between iron atoms and **hinder** the iron atoms from sliding past one another.",
+      "hint": "Think about what blocks layers from moving.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09nbk5s",
+      "kind": "mistake",
+      "front": "Do carbon atoms in steel replace iron atoms?",
+      "back": "**No.** Carbon atoms are much smaller and sit between the iron atoms. Replacement is the case seen with zinc in brass.",
+      "hint": "Compare the sizes of the atoms.",
+      "sectionId": "s4"
+    }
+  ]
+}

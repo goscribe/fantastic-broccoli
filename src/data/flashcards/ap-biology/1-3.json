@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "1-3",
+  "topicCode": "1.3",
+  "topicName": "Introduction to macromolecules",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:16.862Z",
+  "cards": [
+    {
+      "id": "0fz4qh7",
+      "kind": "concept",
+      "front": "How do monomers build a polymer, and what holds them together?",
+      "back": "Monomers join one after another through **covalent bonds**, so the polymer grows as more units link. Its units form a defined chemical structure, not a loose pile.",
+      "hint": "Think about what links the units.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19fhywj",
+      "kind": "process",
+      "front": "What happens during dehydration synthesis?",
+      "back": "Two units join by a new **covalent bond**, and a **water** molecule forms from a hydrogen on one unit and a hydroxyl group on the other. Repeating this extends the polymer one unit at a time.",
+      "hint": "Which atoms leave, and what do they form?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kjn0zy",
+      "kind": "process",
+      "front": "How does hydrolysis separate linked units?",
+      "back": "A **water** molecule splits and breaks the bond between units: one piece gets a hydrogen, and the other gets a hydroxyl group. It is the reverse of dehydration synthesis.",
+      "hint": "Is water used or made?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0znxicr",
+      "kind": "term",
+      "front": "What is a macromolecule?",
+      "back": "A **macromolecule** is a large molecule found in cells. Carbohydrates, proteins, nucleic acids, and lipids are examples.",
+      "hint": "Think about size.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tlkypt",
+      "kind": "term",
+      "front": "What is a polymer?",
+      "back": "A **polymer** is a molecule made from many smaller, linked units. Starch and proteins are examples.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04yoqzg",
+      "kind": "term",
+      "front": "What is a monomer?",
+      "back": "A **monomer** is a smaller unit that can join others to form a polymer. Sugars, amino acids, and nucleotides are examples.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0h7bg0j",
+      "kind": "mistake",
+      "front": "Is every large cellular molecule a polymer?",
+      "back": "No. **Lipids** are large cellular molecules but are generally not polymers. A fat contains glycerol joined to fatty acids, not a repeating chain of similar units.",
+      "hint": "Consider what a fat is built from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gux1rz",
+      "kind": "mistake",
+      "front": "Does dehydration synthesis mean the polymer dries out?",
+      "back": "No. It means two smaller molecules link into one larger one, and **water** is released as a product. The polymer does not dry out.",
+      "hint": "Focus on what is produced.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zhnkvt",
+      "kind": "example",
+      "front": "How do digestive enzymes use hydrolysis?",
+      "back": "They use **hydrolysis** to break food polymers into smaller molecules or individual monomers. Cells can then absorb and use those molecules.",
+      "hint": "What happens to food before absorption?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07j866o",
+      "kind": "term",
+      "front": "What is a covalent bond in this topic?",
+      "back": "A **covalent bond** is a chemical bond in which atoms share electrons. Joining monomers forms these bonds between units.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w7rhlm",
+      "kind": "concept",
+      "front": "Do all monomer-joining reactions use the same kind of bond?",
+      "back": "No. Sugars, amino acids, and nucleotides follow the same general pattern of joining, but the examples do not use the same kind of bond.",
+      "hint": "Compare the general pattern with the bond type.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c3qeap",
+      "kind": "process",
+      "front": "How can you tell whether a reaction is dehydration synthesis or hydrolysis?",
+      "back": "Check whether water is produced or used. If water is **produced**, a bond forms (dehydration synthesis). If water is **used**, a bond breaks (hydrolysis).",
+      "hint": "Check the water first.",
+      "sectionId": "s4"
+    }
+  ]
+}

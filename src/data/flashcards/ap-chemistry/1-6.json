@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "1-6",
+  "topicCode": "1.6",
+  "topicName": "Photoelectron spectroscopy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:15.998Z",
+  "cards": [
+    {
+      "id": "10nebq4",
+      "kind": "concept",
+      "front": "How does photoelectron spectroscopy measure how tightly an electron is held?",
+      "back": "It fires **photons** at gaseous atoms and measures the kinetic energy of each ejected electron. The photon energy minus that kinetic energy gives the binding energy.",
+      "hint": "Think about where the photon's energy goes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vtgv1v",
+      "kind": "concept",
+      "front": "Why do inner-shell electrons give peaks at higher binding energy than outer-shell electrons?",
+      "back": "They sit closer to the nucleus and experience **less shielding** from other electrons, so more energy is needed to remove them.",
+      "hint": "Consider distance from the nucleus.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pbg207",
+      "kind": "concept",
+      "front": "What does the size (area) of a PES peak tell you about the electrons?",
+      "back": "It shows the **relative number of electrons** producing that signal. A subshell with six electrons gives about three times the signal of one with two.",
+      "hint": "Peak position and peak size answer different questions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14k62zb",
+      "kind": "formula",
+      "front": "Which equation links photon energy, binding energy and kinetic energy?",
+      "back": "$E_{photon} = BE + KE$, where energies are in eV. Rearranged, $BE = E_{photon} - KE$.",
+      "hint": "Rearrange it to find the unknown quantity.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "084a1ah",
+      "kind": "term",
+      "front": "What is binding energy?",
+      "back": "The **energy required to remove an electron** from an atom.",
+      "hint": "Think about pulling an electron away from the nucleus.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yp3iu7",
+      "kind": "mistake",
+      "front": "A student says a high binding energy means the ejected electron moves faster. Why is this wrong?",
+      "back": "With fixed photon energy, a **higher binding energy** leaves less kinetic energy, so the emitted electron actually moves more slowly.",
+      "hint": "Use photon energy = binding energy + kinetic energy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mafv5s",
+      "kind": "example",
+      "front": "A photon has 100 eV of energy and an emitted electron has 92 eV of kinetic energy. What is the binding energy?",
+      "back": "**8 eV**, from 100 eV minus 92 eV.",
+      "hint": "Subtract the kinetic energy from the photon energy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wqdccu",
+      "kind": "mistake",
+      "front": "Why is peak position not a reliable way to count electrons?",
+      "back": "Peak position shows **binding energy**, not electron count. Count electrons using the relative signal (peak area) instead.",
+      "hint": "Separate where a peak sits from how big it is.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14a0dde",
+      "kind": "example",
+      "front": "Magnesium has relative signals of 2, 2, 6 and 2 for its 1s, 2s, 2p and 3s peaks. How many electrons does it have?",
+      "back": "**12 electrons**, from 2+2+6+2. The pattern $1s^2 2s^2 2p^6 3s^2$ matches magnesium.",
+      "hint": "Add all the signals together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sl3eja",
+      "kind": "process",
+      "front": "What are the steps to identify an unknown neutral element from its PES spectrum?",
+      "back": "1) Assign each peak to a subshell by its binding energy. 2) Use the relative signals to count electrons in each subshell. 3) Add them to get the atomic number. 4) Check the subshell pattern matches that element.",
+      "hint": "Work from peaks, to counts, to element.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kxtz55",
+      "kind": "concept",
+      "front": "Within one shell, which subshell generally has higher binding energy, s or p?",
+      "back": "The **s subshell** generally has higher binding energy than the p subshell in the same shell.",
+      "hint": "Compare subshells within the same shell only.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vrwhse",
+      "kind": "mistake",
+      "front": "Why must you assume a neutral atom when identifying an element from electron counts?",
+      "back": "For ions, electron count alone does **not** give the proton count. A neutral atom has equal protons and electrons, so the total electron count gives the atomic number.",
+      "hint": "What changes when an atom gains or loses electrons?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k1wxeg",
+      "kind": "example",
+      "front": "A neutral atom shows signals of 2, 2, 6 and 1 for its 1s, 2s, 2p and 3s peaks. Which element is it?",
+      "back": "**Sodium**, because 2+2+6+1 = 11 electrons, so the atomic number is 11.",
+      "hint": "Add the signals first, then check the periodic table.",
+      "sectionId": "s4"
+    }
+  ]
+}

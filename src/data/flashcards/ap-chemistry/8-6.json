@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "8-6",
+  "topicCode": "8.6",
+  "topicName": "Molecular structure of acids and bases",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:13.315Z",
+  "cards": [
+    {
+      "id": "1t1lnxx",
+      "kind": "concept",
+      "front": "What two factors decide how strong an acid is?",
+      "back": "Acid strength depends on how readily the hydrogen bond breaks and how **stable** the conjugate base is. Both must be considered together, because a polar bond alone does not settle it.",
+      "hint": "Think about what happens after the proton leaves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wo9yli",
+      "kind": "concept",
+      "front": "Why is hydroiodic acid stronger than hydrofluoric acid in water, even though fluorine is more electronegative?",
+      "back": "**Bond strength** dominates across periods. The H–F bond is much stronger than H–I, so proton loss is easier from HI. The larger iodide ion also spreads out its negative charge more effectively.",
+      "hint": "Compare how hard each hydrogen bond is to break.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16l2l3h",
+      "kind": "concept",
+      "front": "Why is a carboxylic acid much stronger than an alcohol?",
+      "back": "Its carboxylate ion shares the negative charge across two oxygens by **resonance**. An alkoxide keeps its charge largely on one oxygen, so the carboxylate is more stable and proton loss is favored.",
+      "hint": "Count how many oxygens share the negative charge.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ps4dnq",
+      "kind": "term",
+      "front": "What is a conjugate base?",
+      "back": "The species left after an acid donates a proton. For $\\mathrm{HA}$, the **conjugate base** is $\\mathrm{A^-}$.",
+      "hint": "What remains once the H⁺ is gone?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06reg6g",
+      "kind": "term",
+      "front": "What is a polar bond?",
+      "back": "A **polar bond** has an uneven sharing of bonding electrons, because the more electronegative atom draws them closer to itself.",
+      "hint": "Think about which atom pulls the electrons harder.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ile69e",
+      "kind": "term",
+      "front": "What is an oxoacid?",
+      "back": "An **oxoacid** is an acid containing oxygen whose acidic hydrogen is bonded to oxygen, so the proton leaves from an O–H bond.",
+      "hint": "Where is the acidic hydrogen attached?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0aga41p",
+      "kind": "concept",
+      "front": "Why do more attached oxygens make an oxoacid stronger when the central atom is the same?",
+      "back": "Electron-withdrawing oxygens pull electron density through bonds, making the O–H bond more **polar** and stabilizing the conjugate base. So perchloric acid is stronger than chloric acid.",
+      "hint": "Think about what the oxygens do to the O–H bond.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k7epgo",
+      "kind": "concept",
+      "front": "When two oxoacids have the same number of oxygens and similar structures, what decides which is stronger?",
+      "back": "The **central atom**. A more electronegative central atom generally gives a stronger acid.",
+      "hint": "Compare like structures before applying this trend.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18yw4p7",
+      "kind": "mistake",
+      "front": "A student says a very polar bond always means a strong acid. What is wrong with this?",
+      "back": "Polarity alone is not enough. A polar bond can favor proton loss, but you must also compare **bond strength** and conjugate-base stability.",
+      "hint": "What other factors must also be considered?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09gkjwu",
+      "kind": "mistake",
+      "front": "A student says HF must be the strongest hydrohalic acid because fluorine is the most electronegative halogen. Why is this wrong?",
+      "back": "Across periods, **bond strength** can dominate over electronegativity. The H–F bond is very strong, so HI is the stronger acid in water.",
+      "hint": "Electronegativity is not the only factor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0plxf85",
+      "kind": "process",
+      "front": "What steps should you follow when explaining an oxoacid strength trend?",
+      "back": "First, name the **structural difference** (such as number of attached oxygens or the central atom). Second, state its effect on O–H bond polarity or conjugate-base stability. Third, conclude which acid is stronger.",
+      "hint": "Start with the structure, then its effect.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k3vezg",
+      "kind": "concept",
+      "front": "Why is aniline a weaker base than ammonia in water?",
+      "back": "Aniline's nitrogen lone pair interacts with its ring through **resonance**, so it is less available to accept a proton than ammonia's lone pair.",
+      "hint": "Think about what the ring does to the lone pair.",
+      "sectionId": "s4"
+    }
+  ]
+}

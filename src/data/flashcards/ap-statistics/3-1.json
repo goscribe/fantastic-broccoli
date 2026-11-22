@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-1",
+  "topicCode": "3.1",
+  "topicName": "Estimators",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:15.569Z",
+  "cards": [
+    {
+      "id": "1gbcj5z",
+      "kind": "concept",
+      "front": "What two features make one estimator better than another?",
+      "back": "**Low bias** (its sampling distribution is centered on the parameter) and **low variability** (small spread), so estimates land close to the parameter most of the time.",
+      "hint": "Think about where the estimates sit and how far they scatter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xrzl9a",
+      "kind": "term",
+      "front": "What is an unbiased estimator?",
+      "back": "A **statistic** whose sampling distribution has a mean equal to the parameter it estimates. Its estimates are neither too high nor too low on average.",
+      "hint": "Focus on the center of all possible estimates.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xzsyhz",
+      "kind": "mistake",
+      "front": "Does a larger sample fix a biased estimator?",
+      "back": "**No.** A larger sample lowers variability, but a biased method stays biased at any sample size.",
+      "hint": "Separate spread from center.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hstalc",
+      "kind": "term",
+      "front": "What is a parameter, and how does it differ from a statistic?",
+      "back": "A **parameter** is a fixed number describing a whole population, such as $\\mu$ or $p$. A **statistic** is calculated from sample data, such as $\\bar{x}$ or $\\hat{p}$.",
+      "hint": "One describes the population; the other describes the sample.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1effc4s",
+      "kind": "term",
+      "front": "What is a sampling distribution?",
+      "back": "The **distribution** of a statistic's values over all possible random samples of the same size from the population.",
+      "hint": "Imagine calculating the statistic for every possible sample.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13z7b3i",
+      "kind": "process",
+      "front": "What steps show whether a statistic is biased?",
+      "back": "1) Picture all possible samples of one size. 2) Calculate the statistic for each. 3) Find the center of those values. 4) Compare the center with the parameter and state whether estimates run too high or too low.",
+      "hint": "Start with imagining every possible sample.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02bu35m",
+      "kind": "example",
+      "front": "Parameter = 50. A: mean 50.1, SD 2.0. B: mean 49.9, SD 5.0. C: mean 58.0, SD 1.0. Which is the best estimator?",
+      "back": "**Statistic A.** It is nearly unbiased and has the lowest spread among the unbiased options. C is biased, centered 8.0 above the parameter.",
+      "hint": "Check each center against 50 before comparing spreads.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07518ps",
+      "kind": "example",
+      "front": "Parameter = 25.0. A statistic has sampling mean 24.0 and SD 3.0. Is it an unbiased estimator?",
+      "back": "**No, it is biased.** The mean of its sampling distribution, 24.0, differs from the parameter, 25.0.",
+      "hint": "Compare the sampling mean with the parameter only.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ia1qwr",
+      "kind": "concept",
+      "front": "What happens to the standard deviation of a sample mean when the sample size is quadrupled?",
+      "back": "It is **halved**, so the variability of the sample mean drops.",
+      "hint": "Think about how spread shrinks as the sample grows.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vzk3t4",
+      "kind": "concept",
+      "front": "Why is the sample variance $s^2$ divided by $n-1$ instead of $n$?",
+      "back": "Dividing by **$n-1$** gives an unbiased estimator of the population variance. Dividing by $n$ gives values that are too small on average.",
+      "hint": "Compare which version has the correct center.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "112v8cp",
+      "kind": "concept",
+      "front": "Why is the sample maximum a biased estimator of the population maximum?",
+      "back": "It **cannot exceed** the population maximum and usually falls below it, so averages of sample maximums sit too low.",
+      "hint": "Consider whether a sample can ever be larger than the population.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16nykvo",
+      "kind": "mistake",
+      "front": "A student says, 'An unbiased estimator gives the correct answer every time.' What is wrong?",
+      "back": "**Unbiased** describes the center of all possible estimates, not any single one. Individual estimates still miss the parameter.",
+      "hint": "Think about what the center of a distribution tells you.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s63taq",
+      "kind": "mistake",
+      "front": "Why is surveying only gym members about weekly exercise a biased method?",
+      "back": "The method **favors** some members of the population, so estimates miss in one direction. Random selection gives everyone a fair chance and is the first defense against bias.",
+      "hint": "Ask whether every member had a fair chance to be chosen.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10ig0lf",
+      "kind": "term",
+      "front": "What is a point estimate?",
+      "back": "A **single value** of a statistic used as the best guess for a population parameter.",
+      "hint": "It is one number, not a range.",
+      "sectionId": "s1"
+    }
+  ]
+}

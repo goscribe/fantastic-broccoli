@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "2-8",
+  "topicCode": "2.8",
+  "topicName": "Mechanisms of transport",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:20.689Z",
+  "cards": [
+    {
+      "id": "04o3bc7",
+      "kind": "concept",
+      "front": "How does bulk transport move large particles or large amounts of material across the plasma membrane?",
+      "back": "It reshapes the membrane so the cargo travels inside a **membrane-bound vesicle**. The cargo is enclosed rather than pushed through membrane proteins, and the process needs cellular energy.",
+      "hint": "Think about what carries the cargo, not a channel or pump.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pyhws3",
+      "kind": "concept",
+      "front": "What does phagocytosis do, and how is it different from the other ways cells take in material?",
+      "back": "Phagocytosis takes in **large solid particles**, such as a bacterium, by engulfing them in a phagosome. Pinocytosis instead takes in fluid and dissolved substances.",
+      "hint": "Name the cargo: solid or fluid?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1i9tt79",
+      "kind": "process",
+      "front": "What happens to proteins made for secretion, from the endoplasmic reticulum to the outside of the cell?",
+      "back": "Vesicles carry the proteins from the **endoplasmic reticulum** to the Golgi apparatus. Other vesicles carry them to the plasma membrane, where the vesicle fuses and releases the contents by exocytosis.",
+      "hint": "Follow the vesicles in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00bruo6",
+      "kind": "term",
+      "front": "What is endocytosis?",
+      "back": "**Endocytosis** brings material into a cell. The plasma membrane encloses the material and pinches off to form an internal vesicle.",
+      "hint": "Endo means inside.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07ozpxk",
+      "kind": "term",
+      "front": "What is exocytosis?",
+      "back": "**Exocytosis** releases vesicle contents outside the cell. The vesicle fuses with the plasma membrane, and its membrane becomes part of that membrane.",
+      "hint": "Exo means outside.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kumd9s",
+      "kind": "term",
+      "front": "What is a phagosome?",
+      "back": "A **phagosome** is a membrane-bound vesicle that contains a particle engulfed by phagocytosis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0da1j20",
+      "kind": "term",
+      "front": "What is a vesicle in a cell?",
+      "back": "A **vesicle** is a small membrane-bound compartment that carries substances between locations in the cell. It can bud from one membrane and fuse with another.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nlidbe",
+      "kind": "process",
+      "front": "What are the steps of phagocytosis, from first contact to breakdown of a large solid particle?",
+      "back": "1) The cell recognizes and attaches to the particle. 2) The plasma membrane extends around it. 3) The membrane edges meet, enclosing it in a **phagosome**. 4) The phagosome fuses with a lysosome, whose enzymes break the material down.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "005df6t",
+      "kind": "process",
+      "front": "How does pinocytosis take fluid into a cell?",
+      "back": "A small area of plasma membrane folds inward around extracellular fluid and dissolved substances. The membrane then **pinches off** to form an internal vesicle.",
+      "hint": "Three steps: fold, enclose, pinch off.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p8500k",
+      "kind": "concept",
+      "front": "Why does pinocytosis not use up the plasma membrane, even though it keeps taking in material?",
+      "back": "Some fluid and membrane components return to the cell surface through **vesicle transport**. This recycling lets the cell keep taking in material without continually losing membrane.",
+      "hint": "Think about what happens to the membrane afterwards.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05qan3w",
+      "kind": "mistake",
+      "front": "A student says bulk transport pushes large cargo directly through the cell membrane. What is wrong with this?",
+      "back": "Bulk transport does not push cargo through the membrane. A **vesicle** encloses the cargo, so the cargo travels inside a membrane-bound compartment.",
+      "hint": "Where is the cargo while it moves?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12c0diw",
+      "kind": "mistake",
+      "front": "A student says a vesicle must break open to release its cargo during exocytosis. Why is this wrong?",
+      "back": "A vesicle does not break open. Its **membrane fuses** with the plasma membrane, and the contents are released outside the cell.",
+      "hint": "What happens to the vesicle membrane?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09cpr85",
+      "kind": "mistake",
+      "front": "A student confuses phagocytosis with pinocytosis. How should they tell them apart?",
+      "back": "Phagocytosis engulfs one **large solid particle**. Pinocytosis takes in extracellular fluid and dissolved substances in small vesicles. Name the cargo to tell them apart.",
+      "hint": "Solid or fluid?",
+      "sectionId": "s3"
+    }
+  ]
+}

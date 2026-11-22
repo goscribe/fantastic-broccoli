@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "5-1",
+  "topicCode": "5.1",
+  "topicName": "Meiosis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:35.283Z",
+  "cards": [
+    {
+      "id": "0shv7k9",
+      "kind": "concept",
+      "front": "What is the main job of meiosis, and why does it matter?",
+      "back": "Meiosis makes cells with **half** the starting chromosome number, such as eggs and sperm. Fusing an egg and sperm restores the full number.",
+      "hint": "Think about what happens when an egg and sperm fuse."
+    },
+    {
+      "id": "16i7lap",
+      "kind": "concept",
+      "front": "What does meiosis I separate, and how does that halve the chromosome number?",
+      "back": "Meiosis I separates **homologous chromosomes**, so each cell gets one chromosome from each pair. Each cell then has half the original number.",
+      "hint": "Which pair is pulled apart in anaphase I?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q9g8pt",
+      "kind": "concept",
+      "front": "How does the first division of meiosis differ from mitosis?",
+      "back": "Meiosis I separates **homologous chromosomes**, while mitosis separates sister chromatids. Meiosis also pairs homologs before they separate.",
+      "hint": "Compare what is pulled apart in each first division.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tlwow3",
+      "kind": "term",
+      "front": "What are germ cells, and where are they found in humans?",
+      "back": "**Germ cells** are cells in reproductive organs that give rise to eggs or sperm. In humans they are in the ovaries and testes.",
+      "hint": "Think about what the cells eventually become.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wxm9th",
+      "kind": "term",
+      "front": "What are homologous chromosomes?",
+      "back": "A **homologous pair** is two chromosomes carrying the same genes, with one inherited from each parent. Their versions of the genes may differ.",
+      "hint": "One from each parent.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ql6zq3",
+      "kind": "process",
+      "front": "What happens during meiosis I, in stage order?",
+      "back": "Prophase I: homologs pair and can exchange DNA. Metaphase I: pairs line up at the middle. Anaphase I: homologs move to opposite poles. Telophase I and cytokinesis: two cells form.",
+      "hint": "Start with the stage where homologs pair.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wzugtd",
+      "kind": "process",
+      "front": "What happens during meiosis II, and what is the usual outcome?",
+      "back": "Chromosomes line up individually, then **sister chromatids** separate in anaphase II. Cytokinesis then divides each cell, usually giving four **haploid** cells.",
+      "hint": "Compare with mitosis: no DNA copying happens first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tafx8d",
+      "kind": "mistake",
+      "front": "Common mistake: meiosis I separates sister chromatids. Is this correct?",
+      "back": "No. Meiosis I separates **homologous chromosomes**, which reduces the chromosome number. Sister chromatids separate later, in anaphase II.",
+      "hint": "Which division separates sister chromatids?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0g3vxpp",
+      "kind": "mistake",
+      "front": "Is DNA copied again between meiosis I and meiosis II?",
+      "back": "No. DNA is copied **once**, before meiosis I. There is no second round of copying before meiosis II, which is why the number is halved.",
+      "hint": "Count how many times DNA is copied.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15vwkuc",
+      "kind": "example",
+      "front": "A human body cell has 46 chromosomes. How many chromosomes does an egg or sperm have?",
+      "back": "**23** chromosomes. Meiosis produces haploid cells with one set of chromosomes, so the number is halved from 46.",
+      "hint": "Halve the body cell number.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uy68j3",
+      "kind": "term",
+      "front": "What does haploid mean?",
+      "back": "A **haploid** cell has one set of chromosomes. A diploid cell has two sets.",
+      "hint": "Haploid is the single-set state.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1min2rg",
+      "kind": "concept",
+      "front": "Why are cells from meiosis genetically different, while mitotic daughter cells are usually alike?",
+      "back": "Meiosis pairs homologs and can exchange matching DNA segments, so the cells can differ. Mitosis does not normally pair homologs, so daughter cells are usually genetically alike.",
+      "hint": "Think about pairing and DNA exchange.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tqo43p",
+      "kind": "concept",
+      "front": "What is mitosis for, and what does it usually produce?",
+      "back": "Mitosis supports **growth**, tissue repair, and cell replacement. It has one division and usually makes two cells that keep the starting chromosome number.",
+      "hint": "One division, two cells.",
+      "sectionId": "s4"
+    }
+  ]
+}

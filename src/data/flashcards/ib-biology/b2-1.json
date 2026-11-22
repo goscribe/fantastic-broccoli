@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "b2-1",
+  "topicCode": "B2.1",
+  "topicName": "Membranes and membrane transport",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:50.571Z",
+  "cards": [
+    {
+      "id": "0ana60l",
+      "kind": "concept",
+      "front": "How does the phospholipid bilayer act as a selective barrier around a cell?",
+      "back": "The **hydrophobic** tails point inwards, away from water, so small non-polar molecules such as oxygen can pass through its centre. Charged particles and most large polar molecules cannot cross it easily.",
+      "hint": "Think about which parts of the bilayer face water and which face the centre.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1e1jdkg",
+      "kind": "concept",
+      "front": "Why do cells need membrane proteins if the bilayer already forms a barrier?",
+      "back": "Membrane proteins let substances that cannot cross the bilayer easily get through, and they let cells respond to signals. **Channel** and **carrier** proteins transport substances, while **receptor** proteins bind signalling molecules outside the cell.",
+      "hint": "Consider what the bilayer blocks.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17kdf23",
+      "kind": "concept",
+      "front": "In which direction does net movement of particles occur during passive transport?",
+      "back": "**Net movement** is towards the side with a lower concentration. Particles move randomly in both directions, but more move away from the higher concentration, and a larger difference generally increases the initial rate if the membrane permits passage.",
+      "hint": "Particles move both ways, but one direction wins overall.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dktbq7",
+      "kind": "term",
+      "front": "What is osmosis?",
+      "back": "**Osmosis** is the net movement of water across a partially permeable membrane, from a less concentrated solution to a more concentrated solution. The concentration refers to dissolved substances, not water.",
+      "hint": "Water follows the dissolved substances.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bgc8j7",
+      "kind": "term",
+      "front": "What is simple diffusion?",
+      "back": "**Simple diffusion** is the net movement of particles down their concentration gradient directly through the phospholipid bilayer. It needs no transport protein and no cellular energy.",
+      "hint": "No protein is involved.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qbfl59",
+      "kind": "term",
+      "front": "What is active transport?",
+      "back": "**Active transport** moves substances against their concentration gradient, from a lower to a higher concentration, using energy and a transport protein.",
+      "hint": "Compare the direction with passive routes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06tqa15",
+      "kind": "concept",
+      "front": "How do simple diffusion, facilitated diffusion and active transport differ?",
+      "back": "Simple diffusion goes through the bilayer, and facilitated diffusion goes through a channel or carrier; both move down the gradient with no cellular energy. Active transport goes through a transport protein, moves against the gradient, and requires energy.",
+      "hint": "Compare route, direction and energy use.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mcskia",
+      "kind": "term",
+      "front": "What is a carrier protein?",
+      "back": "A **carrier protein** binds a particular substance and changes shape to move it across the membrane.",
+      "hint": "It changes shape during transport.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nn5wwg",
+      "kind": "term",
+      "front": "What is equilibrium in terms of particle movement?",
+      "back": "**Equilibrium** is the state in which particles still cross the membrane in both directions, but the movements balance, so there is no net movement.",
+      "hint": "Movement continues but does not change the overall position.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fb1wtk",
+      "kind": "mistake",
+      "front": "A student says that at equilibrium particles stop moving. Why is this wrong?",
+      "back": "Particles keep moving at equilibrium. The **movement** in opposite directions is equal, so there is no net movement.",
+      "hint": "Think about what balances.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gsi0fw",
+      "kind": "mistake",
+      "front": "A student says every membrane protein moves substances across the membrane. What is wrong with this?",
+      "back": "**Receptor** proteins bind signals without moving those signals through the membrane. Not every membrane protein is a transporter.",
+      "hint": "Consider what a receptor does.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iuwaez",
+      "kind": "example",
+      "front": "The concentration of a permeable substance outside a cell becomes higher than inside. Which way will its net movement go?",
+      "back": "Net movement will be **into** the cell, because passive movement is towards the lower concentration.",
+      "hint": "Compare the two sides before deciding which way it moves.",
+      "sectionId": "s4"
+    }
+  ]
+}

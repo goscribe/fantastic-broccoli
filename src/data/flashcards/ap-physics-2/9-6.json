@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "9-6",
+  "topicCode": "9.6",
+  "topicName": "Entropy and the second law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:04.961Z",
+  "cards": [
+    {
+      "id": "0685ag2",
+      "kind": "term",
+      "front": "What does the entropy of a system measure?",
+      "back": "**Disorder**. Entropy measures how disordered a system is. It is higher when particles and energy can be arranged in more ways.",
+      "hint": "Think about how many arrangements a system can have.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13j1fo9",
+      "kind": "concept",
+      "front": "Why do disordered states dominate over ordered ones?",
+      "back": "**Chance** favors disorder. Few arrangements are ordered and many are disordered, so spread-out states are far more probable, especially with huge numbers of particles.",
+      "hint": "Compare how many arrangements look ordered with how many look random.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y2pyy2",
+      "kind": "concept",
+      "front": "What does the second law of thermodynamics say about the total entropy of an isolated system?",
+      "back": "The **total entropy** never decreases; it stays the same or rises. Spreading energy over more particles allows more arrangements, so entropy rises.",
+      "hint": "Think about what an isolated system exchanges with its surroundings.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02a7x0g",
+      "kind": "example",
+      "front": "Four fair coins are tossed. How many of the 16 equally likely arrangements give two heads and two tails?",
+      "back": "**Six** arrangements: HHTT, HTHT, HTTH, THHT, THTH, TTHH. Probability is $\\frac{6}{16}=0.375$, six times the chance of four heads.",
+      "hint": "List the orders that contain two Hs and two Ts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16ll57h",
+      "kind": "mistake",
+      "front": "Is entropy the same as the amount of energy in a system?",
+      "back": "**No.** Entropy measures disorder, not energy. A cool system can have high entropy if its particles and energy can be arranged in many ways.",
+      "hint": "Focus on arrangements, not on how much energy there is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tag2z3",
+      "kind": "mistake",
+      "front": "Does the second law mean the entropy of every system always rises?",
+      "back": "**No.** It applies to the total entropy of an isolated system, which never decreases. One part can lose entropy if the total still rises.",
+      "hint": "Think about what the law applies to.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17hnjkm",
+      "kind": "concept",
+      "front": "Why does a refrigerator that cools its food not break the second law?",
+      "back": "The food loses entropy, but the refrigerator needs work and releases more **thermal energy** into the kitchen. The kitchen gains more entropy than the food loses, so the total rises.",
+      "hint": "Follow the energy to where it ends up.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qfzgv5",
+      "kind": "process",
+      "front": "What question should you ask to decide whether a process increases or decreases entropy?",
+      "back": "Ask whether the **particles gain or lose freedom** of arrangement. A gain means entropy rises; a loss means it falls.",
+      "hint": "Think about where particles can be and how they can be arranged.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1inbrga",
+      "kind": "concept",
+      "front": "Does the entropy of water rise or fall when it freezes, and why?",
+      "back": "It **falls**. Molecules lock into a fixed, ordered pattern with fewer possible arrangements.",
+      "hint": "Compare liquid molecules with molecules in ice.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1r25c9v",
+      "kind": "concept",
+      "front": "What happens to entropy when a sliding block stops because of friction?",
+      "back": "The entropy of the **block and floor** rises. Friction turns mechanical energy into thermal energy, spreading it among random particle motions.",
+      "hint": "Ask where the mechanical energy ends up.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0a50vsr",
+      "kind": "term",
+      "front": "What is thermal energy?",
+      "back": "**Energy** associated with the random motion of particles in a substance. Friction transfers mechanical energy into it.",
+      "hint": "Think about the motion of particles inside a substance.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uvwyt7",
+      "kind": "process",
+      "front": "What are the three steps for explaining heat flow using the second law?",
+      "back": "1) State the direction heat flows. 2) Say which object gains entropy. 3) Conclude that **total entropy increases**.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1w2vvik",
+      "kind": "term",
+      "front": "What is a system in thermodynamics?",
+      "back": "The **object or collection of objects** chosen for analysis, such as a gas in a closed box. Forces from outside it are treated as external.",
+      "hint": "Think about what you choose to study.",
+      "sectionId": "s1"
+    }
+  ]
+}

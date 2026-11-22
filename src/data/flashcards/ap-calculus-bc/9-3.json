@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "9-3",
+  "topicCode": "9.3",
+  "topicName": "Arc length of parametric curves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:05.300Z",
+  "cards": [
+    {
+      "id": "00lq4oh",
+      "kind": "formula",
+      "front": "What is the arc length formula for a parametric curve $x=x(t)$, $y=y(t)$ with $a\\le t\\le b$?",
+      "back": "$L=\\int_a^b\\sqrt{\\left(\\frac{dx}{dt}\\right)^2+\\left(\\frac{dy}{dt}\\right)^2}\\,dt$. The integrand is the **speed** of a particle moving along the curve, and $a$ and $b$ are $t$-values.",
+      "hint": "Square both derivatives, add them, then take the root.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ntigax",
+      "kind": "process",
+      "front": "What are the four steps to set up an arc-length integral for a parametric curve?",
+      "back": "1) Find $\\frac{dx}{dt}$ and $\\frac{dy}{dt}$. 2) Square both and add. 3) Take the **square root** to get the speed. 4) Integrate the speed from $t=a$ to $t=b$.",
+      "hint": "Four steps, in this order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0to94y9",
+      "kind": "concept",
+      "front": "Why does a tiny piece of a parametric curve have length $\\sqrt{(dx)^2+(dy)^2}$?",
+      "back": "Over a tiny step the point moves $dx$ across and $dy$ up, forming a **right triangle** whose hypotenuse is the piece length. The Pythagorean theorem then gives that length.",
+      "hint": "Think about the legs of a right triangle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1r9dy4k",
+      "kind": "term",
+      "front": "What is arc length?",
+      "back": "The **distance measured along a curve** between two points, in the units of the axes. It is longer than the straight-line distance between the same points.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08ssfl4",
+      "kind": "term",
+      "front": "What is a parametric curve?",
+      "back": "The set of points $(x(t),y(t))$ traced out as the **parameter $t$** runs over an interval. Often $t$ represents time.",
+      "hint": "Think of $t$ as time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a1gtgd",
+      "kind": "term",
+      "front": "What is the speed of a particle moving along a parametric curve?",
+      "back": "$\\sqrt{(dx/dt)^2+(dy/dt)^2}$, the **rate** at which it travels along its path. It is never negative.",
+      "hint": "It is the expression inside the arc-length integral.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gjutf2",
+      "kind": "mistake",
+      "front": "What is the error in taking a separate square root of each derivative before adding?",
+      "back": "**Keep both squares under one root**, so the speed is $\\sqrt{(dx/dt)^2+(dy/dt)^2}$. Separate roots are never allowed.",
+      "hint": "Look at where the plus sign sits.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j49yi5",
+      "kind": "mistake",
+      "front": "What do the limits of an arc-length integral represent?",
+      "back": "They are **values of $t$**, not values of $x$. The integral runs from $t=a$ to $t=b$.",
+      "hint": "Check which variable the integral is in.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1p99kjo",
+      "kind": "example",
+      "front": "Find the arc length of $x=5\\cos t$, $y=5\\sin t$ for $0\\le t\\le2\\pi$.",
+      "back": "$10\\pi$. The speed is the constant 5 because $\\sin^2t+\\cos^2t=1$, and this matches the circumference of a circle of radius 5.",
+      "hint": "What is the speed once the two squares are added?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16xyj5r",
+      "kind": "mistake",
+      "front": "If $t$ runs from 0 to $4\\pi$ on the same circle, what arc length do you get?",
+      "back": "$20\\pi$, because the circle is traced **twice**. The formula measures path length, not the size of the shape.",
+      "hint": "Count how many times the path is covered.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0it2tkt",
+      "kind": "example",
+      "front": "Find the arc length of $x=3t^2$, $y=2t^3$ for $0\\le t\\le1$.",
+      "back": "$4\\sqrt{2}-2\\approx3.657$. The speed is $6t\\sqrt{1+t^2}$, and the substitution $u=1+t^2$ completes the integral.",
+      "hint": "Factor $36t^2$ out of the square before rooting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uz0qj7",
+      "kind": "concept",
+      "front": "How can you check whether an arc-length answer is plausible?",
+      "back": "Compare it with the **straight chord** between the endpoints. An arc is always longer than its chord, so the example arc of about 3.657 passes, since the chord from $(0,0)$ to $(3,2)$ is $\\sqrt{13}\\approx3.606$.",
+      "hint": "Compare with the straight-line distance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mdp8dz",
+      "kind": "formula",
+      "front": "What is the arc length integral when the curve is written as $y=f(x)$ for $a\\le x\\le b$?",
+      "back": "$\\int_a^b\\sqrt{1+\\left(\\frac{dy}{dx}\\right)^2}\\,dx$. It comes from setting $x=t$, so $\\frac{dx}{dt}=1$.",
+      "hint": "Let $x=t$.",
+      "sectionId": "s5"
+    }
+  ]
+}

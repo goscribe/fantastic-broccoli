@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "5-11",
+  "topicCode": "5.11",
+  "topicName": "Solving optimization problems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:30.215Z",
+  "cards": [
+    {
+      "id": "09qw0ky",
+      "kind": "process",
+      "front": "How do you find the greatest or least value of a function on a closed feasible interval?",
+      "back": "Compare the **candidate values**: the function at every critical point and at both included endpoints. The largest is the **absolute maximum**, and the smallest is the **absolute minimum**.",
+      "hint": "Think about which points must be checked, not just one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i5mrn0",
+      "kind": "concept",
+      "front": "Why do you use the constraint before taking the derivative?",
+      "back": "Use the **constraint** to rewrite the objective in terms of one variable, giving a single-variable function you can differentiate. For the fence, $y=100-2x$ turns $A=xy$ into $A(x)=100x-2x^2$.",
+      "hint": "Count how many variables the derivative needs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13lmg8o",
+      "kind": "mistake",
+      "front": "After solving $A'(x)=0$ for the fenced rectangle, is the answer already the maximum?",
+      "back": "No. **Solving $A'(x)=0$ alone does not prove a maximum.** It only finds a candidate, so you must also compare the endpoint values and any other critical points.",
+      "hint": "What else must be checked besides the derivative result?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "150eumy",
+      "kind": "term",
+      "front": "What is an objective function?",
+      "back": "An **objective function** expresses the quantity being maximized or minimized in terms of the problem's variables.",
+      "hint": "It is the quantity the question wants optimized.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15x5qfe",
+      "kind": "term",
+      "front": "What is the feasible domain of an optimization problem?",
+      "back": "The **feasible domain** is the set of input values permitted by every condition in the problem, such as lengths that cannot be negative.",
+      "hint": "Think about which values make physical sense.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zalzpd",
+      "kind": "term",
+      "front": "What is a critical point in an applied optimization problem?",
+      "back": "An interior domain point where the **derivative is zero or undefined**, provided the function exists there. It is only a candidate for an optimum.",
+      "hint": "Where does the derivative do something special?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ezxboq",
+      "kind": "formula",
+      "front": "What constraint links the variables in the fenced-rectangle problem with 100 meters of fencing?",
+      "back": "The **fencing constraint** $2x+y=100$, where $x$ is each side perpendicular to the wall and $y$ is the side parallel to it, both in meters.",
+      "hint": "Three fenced sides in total; the wall is free.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09bby6s",
+      "kind": "formula",
+      "front": "What is the area function for the fenced rectangle, and what does each symbol mean?",
+      "back": "$A(x)=100x-2x^2$ gives the enclosed area in square meters for side $x$ in meters, with $0\\leq x\\leq 50$ because both lengths must be nonnegative.",
+      "hint": "Substitute the constraint into $A=xy$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dwqe3g",
+      "kind": "example",
+      "front": "Find $A'(x)$ and the critical point for $A(x)=100x-2x^2$.",
+      "back": "$A'(x)=100-4x$, which is zero at $x=25$. The constraint then gives $y=50$ meters.",
+      "hint": "Differentiate, then set the result equal to zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pt0jmu",
+      "kind": "example",
+      "front": "What are the areas at the endpoints and the critical point for the fenced rectangle?",
+      "back": "$A(0)=0$, $A(25)=1250$, and $A(50)=0$, all in square meters. The critical point gives the greatest area.",
+      "hint": "Think about what happens to the rectangle's sides at each end of the interval.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1goiboi",
+      "kind": "example",
+      "front": "What is the greatest possible area enclosed by 100 meters of fencing against a wall, and its dimensions?",
+      "back": "The greatest area is **1250 square meters**, using two sides of 25 meters and one side of 50 meters.",
+      "hint": "Compare all candidate values, then report with units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xj2ht1",
+      "kind": "concept",
+      "front": "Why can a boundary case with zero area still matter in an optimization problem?",
+      "back": "Endpoints are included when mathematically allowed, so they must be compared as candidates even if they are not useful designs. A zero-length side gives zero area here.",
+      "hint": "Check which values are allowed on the closed interval.",
+      "sectionId": "s1"
+    }
+  ]
+}

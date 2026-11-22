@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-9",
+  "topicCode": "5.9",
+  "topicName": "Differentiation rules and related rates",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:12.283Z",
+  "cards": [
+    {
+      "id": "0jbb4bt",
+      "kind": "concept",
+      "front": "How does the chain rule differentiate one function nested inside another?",
+      "back": "Differentiate the **outer** function, keep the inner function unchanged, then multiply by the derivative of the inner function. Each nested link multiplies its rate.",
+      "hint": "Work from the outside in.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r71jj3",
+      "kind": "formula",
+      "front": "What is the product rule for $y=uv$, where $u$ and $v$ are functions of $x$?",
+      "back": "$\\frac{dy}{dx}=u\\frac{dv}{dx}+v\\frac{du}{dx}$. Differentiate one factor at a time, keep the other unchanged, then add the two results.",
+      "hint": "Two terms, each with one factor differentiated.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vq9y0r",
+      "kind": "concept",
+      "front": "How do related rates connect two quantities that change together?",
+      "back": "**Related rates** link the time rates of quantities through an equation. Differentiate with respect to $t$ using the chain rule, substitute known values, then solve for the wanted rate.",
+      "hint": "Start by writing an equation linking the quantities.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jt3exy",
+      "kind": "formula",
+      "front": "What is the quotient rule for $y=\\frac{u}{v}$?",
+      "back": "$\\frac{dy}{dx}=\\frac{v\\frac{du}{dx}-u\\frac{dv}{dx}}{v^2}$. The derivative of the top function comes first in the numerator, because subtraction is not commutative.",
+      "hint": "Keep the order of the terms in the numerator fixed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10q9ds3",
+      "kind": "mistake",
+      "front": "A student differentiates $y=(3x^2+1)^4$ as $4(3x^2+1)^3$. What is wrong?",
+      "back": "They forgot the **inner derivative**. The chain rule requires multiplying by $6x$, giving $\\frac{dy}{dx}=24x(3x^2+1)^3$.",
+      "hint": "What happens to the bracket itself?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09hcoz1",
+      "kind": "example",
+      "front": "Differentiate $y=(4x^2-1)^3$.",
+      "back": "$\\frac{dy}{dx}=24x(4x^2-1)^2$. Differentiate the outer power to get $3(4x^2-1)^2$, then multiply by the inner derivative $8x$.",
+      "hint": "Let $u=4x^2-1$ first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0n00q2v",
+      "kind": "mistake",
+      "front": "Is the derivative of $x^2e^{3x}$ equal to $2x\\times3e^{3x}$?",
+      "back": "**No.** The derivative of a product is not the product of the derivatives. Use the product rule instead, which gives $xe^{3x}(3x+2)$ after factorising.",
+      "hint": "Count how many factors appear in the product rule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "092tijj",
+      "kind": "example",
+      "front": "Differentiate $y=x^2e^{3x}$ and factorise your answer.",
+      "back": "$\\frac{dy}{dx}=xe^{3x}(3x+2)$. Using $u=x^2$ and $v=e^{3x}$ gives $x^2\\times3e^{3x}+e^{3x}\\times2x$, which factorises to this.",
+      "hint": "Let $u=x^2$ and $v=e^{3x}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "054fymw",
+      "kind": "example",
+      "front": "Differentiate $y=\\frac{2x}{x+3}$, giving a single fraction.",
+      "back": "$\\frac{dy}{dx}=\\frac{6}{(x+3)^2}$. The numerator is $(x+3)(2)-2x(1)=6$.",
+      "hint": "Use $u=2x$ and $v=x+3$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vo6knz",
+      "kind": "term",
+      "front": "What is a rate in this topic?",
+      "back": "A **rate** is a derivative that measures how a quantity changes with respect to time, such as $\\frac{dV}{dt}$. Positive means increasing; negative means decreasing.",
+      "hint": "Think of the derivative taken with respect to time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ozxt0b",
+      "kind": "process",
+      "front": "What are the steps for solving a related rates problem?",
+      "back": "1) Write an equation linking the quantities. 2) Differentiate with respect to $t$ using the chain rule. 3) Substitute known values. 4) Solve for the wanted rate and state its units.",
+      "hint": "Four steps, in this order.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gc4vn2",
+      "kind": "mistake",
+      "front": "Why is it wrong to substitute $r=5$ before differentiating in a related rates problem?",
+      "back": "Substituting early turns the variable into a constant, so its rate is lost. Differentiate with respect to $t$ first, then substitute the known values.",
+      "hint": "What does differentiating a constant give?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dsstaa",
+      "kind": "example",
+      "front": "Air is pumped into a sphere at $100\\,\\mathrm{cm^3\\,s^{-1}}$. How fast does the radius grow when $r=5\\,\\mathrm{cm}$?",
+      "back": "$\\frac{dr}{dt}=\\frac{1}{\\pi}\\approx0.318\\,\\mathrm{cm\\,s^{-1}}$. From $100=4\\pi(5)^2\\frac{dr}{dt}$, using $V=\\frac{4}{3}\\pi r^3$.",
+      "hint": "Use $\\frac{dV}{dt}=\\frac{dV}{dr}\\times\\frac{dr}{dt}$.",
+      "sectionId": "s5"
+    }
+  ]
+}

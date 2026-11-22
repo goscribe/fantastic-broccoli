@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "1-6",
+  "topicCode": "1.6",
+  "topicName": "Nucleic acids",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:12.450Z",
+  "cards": [
+    {
+      "id": "0a6kvg6",
+      "kind": "concept",
+      "front": "How do the two DNA strands fit together, and why does that help cells copy DNA?",
+      "back": "**Complementary base pairing**: adenine pairs with thymine and guanine pairs with cytosine, so each strand's sequence determines the other's. A separated strand can act as a template for building a matching new strand.",
+      "hint": "Think about which bases face inward in the double helix.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pc9vhx",
+      "kind": "concept",
+      "front": "What links nucleotides into a strand, and why does that strand have direction?",
+      "back": "**Phosphodiester bonds** join the phosphate of one nucleotide to the sugar of the next, forming a sugar-phosphate backbone. The 5′ and 3′ ends differ, and new nucleotides attach at the 3′ end.",
+      "hint": "Name both parts that the bond connects.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y8woo3",
+      "kind": "concept",
+      "front": "How do DNA and RNA differ in their sugar, their bases, and their usual strand structure?",
+      "back": "DNA has **deoxyribose**, uses thymine, and is usually double-stranded. RNA has **ribose**, uses uracil instead of thymine, and is usually single-stranded.",
+      "hint": "Compare the sugar, the fourth base, and the number of strands.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06gn30p",
+      "kind": "term",
+      "front": "What is a nucleotide?",
+      "back": "A **nucleotide** is a nucleic acid building block made of a phosphate group, a five-carbon sugar, and a nitrogen-containing base.",
+      "hint": "Count the three components.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1a67i5k",
+      "kind": "mistake",
+      "front": "A student says a nucleotide is just its base, such as adenine. What is wrong with this?",
+      "back": "A base is only one part of a nucleotide. The **sugar and phosphate** are also required to make a full nucleotide.",
+      "hint": "What else is attached to the base?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16xuqki",
+      "kind": "term",
+      "front": "What is the difference between deoxyribose and ribose?",
+      "back": "**Deoxyribose** is the sugar in DNA and has hydrogen where ribose has a hydroxyl group. **Ribose** is the sugar in RNA and has that extra hydroxyl group.",
+      "hint": "Look at the position where the two sugars differ.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i9zp2g",
+      "kind": "term",
+      "front": "What does antiparallel mean for DNA strands?",
+      "back": "**Antiparallel** means the two DNA strands run in opposite directions: one runs 5′ to 3′ and the other runs 3′ to 5′.",
+      "hint": "Think about the direction arrows point in the helix.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03j5nm8",
+      "kind": "mistake",
+      "front": "A student says the hydrogen bonds between paired bases form the sugar-phosphate backbone. Why is this wrong?",
+      "back": "Hydrogen bonds hold paired bases together, but the **backbone** is held by covalent phosphodiester bonds. Hydrogen bonds are not the covalent backbone bonds.",
+      "hint": "Compare the type of bond and where it sits in the molecule.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n4qzwm",
+      "kind": "concept",
+      "front": "RNA is single-stranded. Can it still have a shape that matters for its function?",
+      "back": "Yes. Parts of one **single-stranded** RNA can pair with each other and create folds. For some RNAs, these folded shapes help them do their jobs.",
+      "hint": "Single-stranded does not mean the chain stays straight.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pfloai",
+      "kind": "term",
+      "front": "What is messenger RNA?",
+      "back": "**Messenger RNA** carries a copy of information from a gene to the cell's protein-making machinery.",
+      "hint": "Think about where it takes information from and where it delivers it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ds71iw",
+      "kind": "concept",
+      "front": "Why does the order of bases in a nucleic acid matter?",
+      "back": "The **base order** carries information. A change in that order can change the information the nucleic acid carries.",
+      "hint": "Think about what DNA stores in its sequence.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0znbtmg",
+      "kind": "mistake",
+      "front": "A student says RNA uses thymine and pairs adenine with thymine. What should they correct?",
+      "back": "RNA uses **uracil** instead of thymine. In RNA, adenine pairs with uracil, while guanine still pairs with cytosine.",
+      "hint": "Check which base replaces thymine in RNA.",
+      "sectionId": "s4"
+    }
+  ]
+}

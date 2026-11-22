@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "a4-2",
+  "topicCode": "A4.2",
+  "topicName": "Conservation of biodiversity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:43.313Z",
+  "cards": [
+    {
+      "id": "1ummjlw",
+      "kind": "concept",
+      "front": "Why does conserving biodiversity help ecosystems keep working when conditions change?",
+      "back": "Because **variation** within and between species means different species can perform similar roles. If one declines, another may keep the process going, such as different pollinators supporting plant reproduction.",
+      "hint": "Think about what happens if one pollinator declines.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07ls8xv",
+      "kind": "concept",
+      "front": "What are the main ways human activities reduce biodiversity?",
+      "back": "**Habitat loss** and fragmentation, **invasive species**, pollution, overharvesting and climate change. Several threats often act together, so removing just one may not secure a population.",
+      "hint": "Name at least four pressures.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dlnaid",
+      "kind": "concept",
+      "front": "How should a conservation method for an endangered species be justified?",
+      "back": "Link each method to a **named threat** and explain how it reduces that threat. For example, habitat restoration provides food and breeding sites, and controlling invasive predators reduces direct losses.",
+      "hint": "Start by asking why the population is declining.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ns45y0",
+      "kind": "term",
+      "front": "What are ecosystem services?",
+      "back": "**Ecosystem services** are benefits people receive from functioning ecosystems, such as pollination, water purification and carbon storage.",
+      "hint": "Think of what nature does for people for free.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19vzxbe",
+      "kind": "term",
+      "front": "What is habitat loss?",
+      "back": "**Habitat loss** is the removal or alteration of habitat so that native species can no longer live there. Farming, building and resource extraction can cause it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fe8qpg",
+      "kind": "mistake",
+      "front": "Is every introduced species an invasive species?",
+      "back": "No. An introduced species is only **invasive** when it spreads and causes harm to native species or ecosystems.",
+      "hint": "Ask whether it spreads and causes harm.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ltnrxs",
+      "kind": "term",
+      "front": "What is captive breeding?",
+      "back": "**Captive breeding** is the reproduction of organisms under human care to support a threatened population, with individuals possibly released later.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16hbhsz",
+      "kind": "process",
+      "front": "What are the stages of a captive breeding programme that aims to return animals to the wild?",
+      "back": "1) Maintain and increase the population under human care, keeping genetic diversity. 2) Release individuals only where suitable habitat and protection exist. 3) Monitor whether they survive and reproduce.",
+      "hint": "Think about breeding, release and checking.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15slduk",
+      "kind": "mistake",
+      "front": "Why is captive breeding alone not enough to prevent extinction in the wild?",
+      "back": "Released individuals may not survive if the **original threat** remains. Suitable habitat and protection must be in place before release.",
+      "hint": "What happens to released animals if the cause of decline is still there?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1m3h4ly",
+      "kind": "term",
+      "front": "What are protected areas?",
+      "back": "**Protected areas** are defined places where damaging activities are restricted, so that whole habitats and interactions between species can be conserved.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jkuier",
+      "kind": "concept",
+      "front": "What do wildlife corridors do for conservation?",
+      "back": "**Wildlife corridors** connect separated habitats so organisms can move between them, helping populations find resources and breed with less isolated groups.",
+      "hint": "Think about what isolation does to a population.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15xlcvw",
+      "kind": "mistake",
+      "front": "Does drawing a protected area on a map guarantee its wildlife is safe?",
+      "back": "No. Protection on a map alone does not stop **illegal harvesting**, pollution or invasive species. Adequate size, monitoring, enforcement and local community support are also needed.",
+      "hint": "What else must happen beyond setting boundaries?",
+      "sectionId": "s4"
+    }
+  ]
+}

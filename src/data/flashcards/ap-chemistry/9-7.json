@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "9-7",
+  "topicCode": "9.7",
+  "topicName": "Coupled reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:36.654Z",
+  "cards": [
+    {
+      "id": "1n81yfy",
+      "kind": "concept",
+      "front": "How can an unfavorable reaction still happen when it is linked to another reaction?",
+      "back": "**Coupling** adds the free energy changes of the linked processes. If the total is negative, the overall process is thermodynamically favorable, even though one step is not favorable on its own.",
+      "hint": "Think about what happens when two free energy changes are added together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "098wb2y",
+      "kind": "concept",
+      "front": "Why do cells so often use ATP hydrolysis to drive unfavorable reactions?",
+      "back": "ATP hydrolysis has a **negative free energy change** under typical cellular conditions. Enzymes can transfer its phosphate group to another molecule, linking that energy to an unfavorable process.",
+      "hint": "Consider both the sign of the free energy change and how the phosphate moves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0csvrre",
+      "kind": "formula",
+      "front": "How do you find the overall free energy change of two linked processes?",
+      "back": "$\\Delta G_{\\mathrm{overall}}=\\Delta G_{\\mathrm{process}}+\\Delta G_{\\mathrm{hydrolysis}}$, in $\\mathrm{kJ\\,mol^{-1}}$. A **negative** result means the linked overall process is thermodynamically favorable.",
+      "hint": "Both values must be measured or specified under the same conditions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12sxm1u",
+      "kind": "term",
+      "front": "What is a coupled reaction?",
+      "back": "**Coupled reactions** are linked processes whose free energy changes combine into one overall process. The processes must be physically linked, such as through a shared intermediate.",
+      "hint": "The key idea is the link, not just the two reactions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ivv3ry",
+      "kind": "mistake",
+      "front": "A student puts a favorable reaction and an unfavorable reaction in the same flask and says the unfavorable one will be driven. What is wrong?",
+      "back": "Being in the same **container** does not link reactions. They must share a step or intermediate, such as an enzyme-mediated phosphate transfer, before one can drive the other.",
+      "hint": "What actually connects the two processes?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0echetv",
+      "kind": "mistake",
+      "front": "If a coupled process has a negative overall free energy change, must every step be favorable?",
+      "back": "No. A **negative overall** change does not mean each step is favorable. One step can remain unfavorable on its own.",
+      "hint": "Overall and individual steps are judged separately.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1k8r3a4",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that breaking the phosphate bond in ATP releases energy?",
+      "back": "The **negative free energy change** belongs to the complete ATP hydrolysis reaction, not to breaking one bond alone.",
+      "hint": "Focus on which reaction carries the free energy value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ttzrpw",
+      "kind": "process",
+      "front": "What are the steps for testing whether a proposed coupling is favorable?",
+      "back": "Write the linked processes with matching stoichiometry, cancel shared intermediates, then add their reaction free energy changes under the same conditions. A negative total shows a favorable overall process.",
+      "hint": "There are three steps, and the last one is adding the changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05ehklw",
+      "kind": "example",
+      "front": "An unfavorable process has $\\Delta G=+20.0$ and coupled ATP hydrolysis has $\\Delta G=-30.5$ (kJ/mol). Find the overall $\\Delta G$ and whether it is favorable.",
+      "back": "$\\Delta G_{\\mathrm{overall}}=-10.5\\ \\mathrm{kJ\\,mol^{-1}}$. The result is negative, so the linked overall process is thermodynamically favorable.",
+      "hint": "Add the two values and check the sign.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14rrjvb",
+      "kind": "example",
+      "front": "How does ATP drive glucose phosphorylation?",
+      "back": "ATP transfers a phosphate group to glucose, producing **glucose-6-phosphate** and ADP. The shared phosphate-transfer step links the unfavorable phosphorylation to ATP conversion.",
+      "hint": "Name the molecule that receives the phosphate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p2kwgf",
+      "kind": "term",
+      "front": "What is chemical coupling?",
+      "back": "**Chemical coupling** links reactions through a shared chemical step or intermediate, so an energy-releasing change helps drive a process that needs energy.",
+      "hint": "Compare it with coupling that works through a membrane gradient.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xbse5q",
+      "kind": "concept",
+      "front": "How does ATP hydrolysis help move substances across cell membranes?",
+      "back": "In **active transport**, a transport protein uses a linked chemical change from ATP hydrolysis to move ions against their concentration gradient.",
+      "hint": "Think about which direction the ions move relative to the gradient.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "7-2",
+  "topicCode": "7.2",
+  "topicName": "Direction of reversible reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:07.281Z",
+  "cards": [
+    {
+      "id": "03b4xh2",
+      "kind": "term",
+      "front": "What is dynamic equilibrium in a closed system?",
+      "back": "**Dynamic equilibrium** is when the forward and reverse reaction rates are equal, so concentrations stay constant while both reactions keep occurring.",
+      "hint": "Focus on rates, not on whether the reaction has stopped.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0l340fc",
+      "kind": "concept",
+      "front": "How does comparing $Q$ with $K$ predict the net direction of a reaction?",
+      "back": "If $Q<K$, the net reaction shifts **forward**. If $Q>K$, it shifts in **reverse**. If $Q=K$, the mixture is already at equilibrium.",
+      "hint": "Q describes the current mixture; K is the value at equilibrium.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08jwv2t",
+      "kind": "concept",
+      "front": "What happens when a reactant is added to a mixture already at equilibrium?",
+      "back": "The net reaction shifts **forward**, consuming some of the added reactant. The shift partly offsets the change but need not restore the original concentrations.",
+      "hint": "Which direction uses up the substance you added?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1feoznc",
+      "kind": "term",
+      "front": "What is the reaction quotient, $Q$?",
+      "back": "**Q** is the equilibrium expression evaluated with the mixture's current composition. It uses the same expression as $K$.",
+      "hint": "Compare it with the equilibrium constant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "119o109",
+      "kind": "term",
+      "front": "What is the equilibrium constant, $K$, at a given temperature?",
+      "back": "**K** is the value of the equilibrium expression at equilibrium for a given temperature.",
+      "hint": "Remember which condition it is defined for.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "007jbzi",
+      "kind": "mistake",
+      "front": "A student says equilibrium means reactant and product amounts are equal. What is wrong?",
+      "back": "**Equilibrium** means forward and reverse rates are equal, not that amounts are equal. Concentrations are constant but need not be equal.",
+      "hint": "What exactly is equal at equilibrium?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08ml18s",
+      "kind": "process",
+      "front": "What are the steps to predict the shift after changing a substance's concentration?",
+      "back": "First, state which substance changes. Second, name the **favored direction**. Third, name the substance it consumes or replaces.",
+      "hint": "Three short steps.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "029j29j",
+      "kind": "concept",
+      "front": "What happens when a reactant is removed from an equilibrium mixture?",
+      "back": "The net reaction favors the **reverse** direction, replacing some of the removed reactant. The original concentration need not return.",
+      "hint": "Think about what the net shift must do to the substance you removed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08j61x3",
+      "kind": "concept",
+      "front": "Why does the reverse reaction still matter when the net change is forward?",
+      "back": "The **reverse reaction** stays active throughout. Forward and reverse rates are equal again only at the new equilibrium.",
+      "hint": "Both directions are always running.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q1x4ce",
+      "kind": "concept",
+      "front": "Does a concentration change alter $K$?",
+      "back": "No. When temperature stays constant, a concentration change does **not** change $K$.",
+      "hint": "K is defined for a given temperature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06ywfp7",
+      "kind": "concept",
+      "front": "Right after more reactant enters an equilibrium mixture, what happens to its concentration before readjustment?",
+      "back": "It rises **immediately**, so net product formation follows. As the mixture readjusts, it falls but not necessarily to its original value.",
+      "hint": "Consider the time sequence.",
+      "sectionId": "s4"
+    }
+  ]
+}

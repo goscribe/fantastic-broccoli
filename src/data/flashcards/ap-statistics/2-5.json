@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "2-5",
+  "topicCode": "2.5",
+  "topicName": "Mutually exclusive events",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:03.721Z",
+  "cards": [
+    {
+      "id": "05gc112",
+      "kind": "concept",
+      "front": "What does it mean for two events to be mutually exclusive?",
+      "back": "They **cannot both occur** on the same trial, so they share no outcomes and $P(A\\cap B)=0$.",
+      "hint": "Ask whether both events can happen on one trial.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1we0ve8",
+      "kind": "formula",
+      "front": "What is the addition rule for two mutually exclusive events $A$ and $B$?",
+      "back": "$P(A\\cup B)=P(A)+P(B)$, where $A\\cup B$ is the **union**, the chance that $A$ occurs, $B$ occurs, or both. It works only because the events cannot overlap.",
+      "hint": "Add, but only when nothing is counted twice.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g9440e",
+      "kind": "process",
+      "front": "What steps test whether two events are mutually exclusive?",
+      "back": "List the outcomes of each event, then look for any outcome that appears in both lists. **No shared outcome** means mutually exclusive; any shared outcome means they are not.",
+      "hint": "Two lists, then compare them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1545wrn",
+      "kind": "term",
+      "front": "What is the intersection of two events, $A\\cap B$?",
+      "back": "The **intersection** is the event that both $A$ and $B$ occur on the same trial. For mutually exclusive events, it contains no outcomes.",
+      "hint": "Think about where the two regions overlap.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14qy0gx",
+      "kind": "term",
+      "front": "What is the union of two events, $A\\cup B$?",
+      "back": "The **union** is the event that $A$ occurs, $B$ occurs, or both occur.",
+      "hint": "Either one happens, or both do.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ujkra7",
+      "kind": "mistake",
+      "front": "A student says events that rarely happen together are mutually exclusive. Why is this wrong?",
+      "back": "**Rare is not the same as impossible.** Events are mutually exclusive only if they can never occur together. If they can share an outcome, they are not mutually exclusive.",
+      "hint": "Ask whether both can happen at once, even rarely.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l5zui9",
+      "kind": "example",
+      "front": "A school has 400 students: 120 freshmen, 100 sophomores, 90 juniors, 90 seniors. Find P(junior or senior) for one random student.",
+      "back": "**0.450**. P(junior)=$\\frac{90}{400}=0.225$ and P(senior)=0.225. The events are mutually exclusive, so add: $0.225+0.225=0.450$.",
+      "hint": "Each student belongs to exactly one grade level.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fusn27",
+      "kind": "example",
+      "front": "Shoppers pay by cash 0.20, debit 0.45, credit 0.30, or other 0.05. Find P(neither debit nor credit).",
+      "back": "**0.25**. P(debit or credit)=$0.45+0.30=0.75$, so the complement gives $1-0.75=0.25$.",
+      "hint": "Use the complement of the union.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jakast",
+      "kind": "concept",
+      "front": "Why are an event $A$ and its complement $A^C$ always mutually exclusive?",
+      "back": "Nothing can be both $A$ and not $A$ at once. This is why $P(A)+P(A^C)=1$.",
+      "hint": "Either $A$ happens or it does not.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19r9wu9",
+      "kind": "mistake",
+      "front": "For one die roll, why can't you add P(even) and P(greater than 3) to get P(even or greater than 3)?",
+      "back": "The events **overlap** at 4 and 6, so those outcomes are counted twice. The sum is $1$, which is too large. The correct value is $\\frac{2}{3}$.",
+      "hint": "Look for outcomes that appear in both events.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1tdkjmx",
+      "kind": "example",
+      "front": "For one roll of a fair die, find P(even or greater than 3) correctly.",
+      "back": "**$\\frac{2}{3}\\approx 0.667$**. The union is 2, 4, 5, 6, which is 4 of the 6 equally likely outcomes.",
+      "hint": "List the union directly, counting each outcome once.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07bdagj",
+      "kind": "formula",
+      "front": "What is the general addition rule when two events can overlap?",
+      "back": "$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$. You subtract the **double-counted** part. For mutually exclusive events, $P(A\\cap B)=0$, so it reduces to simple addition.",
+      "hint": "Remove what was counted twice.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18jquzh",
+      "kind": "concept",
+      "front": "What does a sum of probabilities above 1 tell you about two events?",
+      "back": "The events **overlap**, because adding counts shared outcomes twice. A sum below 1 proves nothing, so you must still check the events themselves.",
+      "hint": "Think about double counting.",
+      "sectionId": "s5"
+    }
+  ]
+}

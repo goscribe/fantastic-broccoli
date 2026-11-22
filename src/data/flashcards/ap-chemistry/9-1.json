@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "9-1",
+  "topicCode": "9.1",
+  "topicName": "Introduction to entropy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:18.318Z",
+  "cards": [
+    {
+      "id": "1ry7v9s",
+      "kind": "concept",
+      "front": "What does entropy describe in a system?",
+      "back": "**Dispersal** of matter and energy: how widely they spread among possible arrangements. Matter is more dispersed when particles can occupy more positions.",
+      "hint": "Think about how spread out matter and energy become.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0g4hr4y",
+      "kind": "concept",
+      "front": "Why does a gas have higher entropy than the same substance as a liquid or solid?",
+      "back": "**Freedom to spread**: gas particles move throughout the available volume, so they have far more possible positions and arrangements.",
+      "hint": "Compare where the particles are allowed to move.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0h1u652",
+      "kind": "process",
+      "front": "How can you predict the entropy sign for a reaction using gas particles?",
+      "back": "Count **moles of gas** on each side. More gas moles in the products usually means entropy increases; fewer usually means it decreases. Only count substances labeled as gases.",
+      "hint": "Only substances labeled (g) count.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d3rju5",
+      "kind": "formula",
+      "front": "How is an entropy change defined?",
+      "back": "$\\Delta S = S_{\\text{final}} - S_{\\text{initial}}$. The **entropy change** is final entropy minus initial entropy, so a positive value means entropy increased.",
+      "hint": "Compare the system after a change with before.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lb4m6j",
+      "kind": "concept",
+      "front": "Which phase change increases entropy most strongly?",
+      "back": "**Vaporization**, because particles spread through a much larger volume. Melting and sublimation also increase entropy.",
+      "hint": "Think about how much volume particles gain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kweb0n",
+      "kind": "mistake",
+      "front": "Does melting decrease entropy because the solid loses its shape?",
+      "back": "**No**. Melting increases entropy because liquid particles leave fixed positions and have more freedom to move.",
+      "hint": "Focus on particle freedom, not shape.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00pxczj",
+      "kind": "concept",
+      "front": "What is the usual entropy order of phases for the same substance?",
+      "back": "**Solid**, then liquid, then gas, from lower to higher entropy.",
+      "hint": "Go from most constrained to least constrained.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12rabhi",
+      "kind": "process",
+      "front": "Which phase changes decrease entropy?",
+      "back": "**Freezing**, condensation, and deposition. They are the reverses of melting, vaporization, and sublimation, and move toward a more constrained phase.",
+      "hint": "Think of the reverse of each increasing change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1m3amgw",
+      "kind": "example",
+      "front": "Predict the sign of the entropy change for $\\mathrm{N_2(g)+3H_2(g)\\rightarrow 2NH_3(g)}$.",
+      "back": "**Negative** (likely). Four moles of gaseous reactants form two moles of gaseous product, so fewer gas particles spread through the available volume.",
+      "hint": "Count the gas moles on each side.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rdtrgx",
+      "kind": "mistake",
+      "front": "Can equal gas amounts on both sides of a reaction fix the sign of the entropy change?",
+      "back": "**No**. The gas-particle shortcut gives no clear increase or decrease, so other differences between the substances must be considered.",
+      "hint": "What does the shortcut fail to show?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18fh9z8",
+      "kind": "term",
+      "front": "What are moles of gas?",
+      "back": "**Moles of gas** measure the amount of substances in the gas phase.",
+      "hint": "Think about amount, in the gas phase only.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ijsm9f",
+      "kind": "term",
+      "front": "What is a gas in terms of particle motion?",
+      "back": "A **gas** has particles that move throughout the volume available to them.",
+      "hint": "Think about where the particles can go.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x5goya",
+      "kind": "mistake",
+      "front": "Does a positive entropy change alone prove that a process will occur?",
+      "back": "**No**. A positive entropy change does not, by itself, show that a process will occur. Predict from the overall change, not a single particle.",
+      "hint": "Entropy is one factor, not the whole story.",
+      "sectionId": "s1"
+    }
+  ]
+}

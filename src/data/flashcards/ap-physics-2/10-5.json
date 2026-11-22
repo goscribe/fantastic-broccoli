@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "10-5",
+  "topicCode": "10.5",
+  "topicName": "Electric potential",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:22.128Z",
+  "cards": [
+    {
+      "id": "1h4y30g",
+      "kind": "term",
+      "front": "What is electric potential at a point, and what is its unit?",
+      "back": "**Electric potential** at a point is the electric potential energy per unit charge there, $V=\\frac{U_E}{q}$. Its unit is the **volt**, equal to one joule per coulomb.",
+      "hint": "Think about energy and how much charge is involved.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ab47kg",
+      "kind": "concept",
+      "front": "How does the potential of a point charge change with distance from it?",
+      "back": "Potential is $V=\\frac{kQ}{r}$, so it falls as $\\frac{1}{r}$: doubling the distance **halves** the potential. A positive source gives positive potential and a negative source gives negative potential.",
+      "hint": "Compare with how the field falls off.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19dui7a",
+      "kind": "concept",
+      "front": "Why can the potential be zero at a point while the electric field there is not zero?",
+      "back": "**Potentials** add as signed numbers, so equal and opposite contributions cancel to zero. **Fields** add as vectors, and at the midpoint between opposite charges both fields point the same way, so they do not cancel.",
+      "hint": "Think about signed numbers versus arrows.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jcmwpl",
+      "kind": "formula",
+      "front": "How is the potential difference between two points related to the change in potential energy?",
+      "back": "$\\Delta V=\\frac{\\Delta U_E}{q}$, where $\\Delta V$ is final minus initial potential, in volts, and $\\Delta U_E$ is in joules.",
+      "hint": "Rearrange the definition of potential.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qj35qn",
+      "kind": "formula",
+      "front": "How do you find the change in electric potential energy of a charge moving between two points?",
+      "back": "$\\Delta U_E=q\\Delta V$. Keep the sign of $q$, with $\\Delta V$ in volts and $\\Delta U_E$ in joules.",
+      "hint": "Think about how energy scales with the charge and the potential change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ghy1a8",
+      "kind": "formula",
+      "front": "How is the field magnitude in a uniform field linked to the potential change over a distance?",
+      "back": "$E=\\frac{|\\Delta V|}{d}$, where $d$ is the distance moved along the field. Since $1\\,\\mathrm{V/m}=1\\,\\mathrm{N/C}$, the field can be given in volts per meter.",
+      "hint": "Think about how much potential changes across each meter.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14yhx14",
+      "kind": "process",
+      "front": "What steps find the potential at a given distance from a point charge?",
+      "back": "1) Multiply $k$ by $Q$, keeping its sign. 2) Divide by the distance $r$ in meters. 3) The sign of the answer matches the source, and $V=0$ at infinity.",
+      "hint": "Keep the sign of Q throughout.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fgaexc",
+      "kind": "example",
+      "front": "A $+5.0\\,\\mathrm{nC}$ point charge is the only source. What is the potential 0.30 m away?",
+      "back": "**150 V**. First $kQ=45\\,\\mathrm{V\\,m}$, then $V=\\frac{45}{0.30}=150\\,\\mathrm{V}$.",
+      "hint": "Find the product kQ first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cfqpn2",
+      "kind": "example",
+      "front": "A $+2.0\\,\\mu\\mathrm{C}$ charge moves between two points where $\\Delta V=-75\\,\\mathrm{V}$. What is $\\Delta U_E$?",
+      "back": "$\\Delta U_E=-1.5\\times10^{-4}\\,\\mathrm{J}$, so the charge **loses** potential energy.",
+      "hint": "Use $\\Delta U_E=q\\Delta V$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vall67",
+      "kind": "example",
+      "front": "What is the potential at the midpoint between $+4.0\\,\\mathrm{nC}$ and $-4.0\\,\\mathrm{nC}$ charges, each 0.20 m away?",
+      "back": "**0 V**. The contributions are $+180\\,\\mathrm{V}$ and $-180\\,\\mathrm{V}$, which sum to zero.",
+      "hint": "Add the signed contributions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iv4f7c",
+      "kind": "concept",
+      "front": "Which way does a positive charge released from rest in a field move, in terms of potential?",
+      "back": "It moves toward **lower** potential, because released charges tend to lower their potential energy. A negative charge moves toward higher potential instead.",
+      "hint": "Think about which way the energy tends to go.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kznckc",
+      "kind": "mistake",
+      "front": "A student says a larger test charge at a point makes the potential there larger. Why is this wrong?",
+      "back": "**Potential** is energy per unit charge at the point, so it does not depend on the test charge. A larger charge only has more potential energy, while the potential stays the same.",
+      "hint": "Separate energy from potential.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a1cep3",
+      "kind": "mistake",
+      "front": "A student says potential has a direction, just like the field. What is wrong with this?",
+      "back": "**Potential** has a sign but no direction. The field points from high potential to low potential, so direction belongs to the field, not the potential.",
+      "hint": "Which quantity is a vector?",
+      "sectionId": "s5"
+    }
+  ]
+}

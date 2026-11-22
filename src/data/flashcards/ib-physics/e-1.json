@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "e-1",
+  "topicCode": "E.1",
+  "topicName": "Structure of the atom",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:52.081Z",
+  "cards": [
+    {
+      "id": "09iillo",
+      "kind": "concept",
+      "front": "What did the gold foil experiment show about where an atom's mass and positive charge are located?",
+      "back": "Nearly all the mass and all the positive charge sit in a tiny **nucleus**. Most alpha particles passed through because atoms are mostly empty space, while rare sharp deflections showed the small, dense positive region.",
+      "hint": "Think about why most particles went straight through but a few bounced back.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rvl2zk",
+      "kind": "term",
+      "front": "What are isotopes?",
+      "back": "Atoms of the same element with the same **proton number** but different **neutron numbers**, so their mass numbers differ.",
+      "hint": "Same Z, different A.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10a2iev",
+      "kind": "formula",
+      "front": "How do you find the number of neutrons in a nucleus from its nuclear notation?",
+      "back": "$N=A-Z$, where $A$ is the mass number (protons plus neutrons) and $Z$ is the proton number. Neutrons are the nucleons left after removing the protons.",
+      "hint": "Mass number counts all nucleons together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xv1asz",
+      "kind": "term",
+      "front": "What is the atomic number, $Z$?",
+      "back": "The **number of protons** in an atom's nucleus. It determines which element the atom is.",
+      "hint": "Changing this count changes the element.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01vzsbr",
+      "kind": "example",
+      "front": "How many electrons are in ${}^{24}_{12}\\mathrm{Mg}^{2+}$?",
+      "back": "**10 electrons**. It has 12 protons, so the 2+ charge means two fewer electrons: $12-2=10$.",
+      "hint": "Start from the proton number, then account for the charge.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13y8jf3",
+      "kind": "term",
+      "front": "What is an ion?",
+      "back": "An atom that has gained or lost electrons, so it has a net charge. Its nucleus is unchanged.",
+      "hint": "The protons stay the same.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19d3mr6",
+      "kind": "term",
+      "front": "What is the elementary charge, $e$?",
+      "back": "The magnitude of a proton's or electron's charge, approximately $1.60\\times10^{-19}\\,\\mathrm{C}$. A proton has $+e$, an electron $-e$, and a neutron zero charge.",
+      "hint": "It is a size, so state the sign separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12pexdu",
+      "kind": "concept",
+      "front": "Why do excited atoms emit only particular colours?",
+      "back": "Electrons can occupy only certain **energy levels**. Falling between them releases photons with specific energies, which gives a **line spectrum** rather than a continuous range.",
+      "hint": "Think about which energy differences are allowed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16m6aml",
+      "kind": "process",
+      "front": "What happens step by step when an excited atom emits a photon?",
+      "back": "1) An electron falls from a higher allowed energy level to a lower one. 2) The atom emits a photon. 3) The photon's energy equals the level difference, $\\Delta E = hf$.",
+      "hint": "Start with the electron's move between levels.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0d5oop6",
+      "kind": "formula",
+      "front": "Which equation links the energy of an emitted photon to its frequency and wavelength?",
+      "back": "$\\Delta E=hf=hc/\\lambda$. $\\Delta E$ is the energy difference in J, $h$ is Planck's constant, $f$ is frequency in Hz, $c$ is light speed and $\\lambda$ is wavelength in m.",
+      "hint": "Planck's constant is in J s.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qh5rlf",
+      "kind": "example",
+      "front": "An electron falls through $4.0\\times10^{-19}\\,\\mathrm{J}$. Find the emitted photon's frequency, using $h=6.63\\times10^{-34}\\,\\mathrm{J\\,s}$.",
+      "back": "$6.0\\times10^{14}\\,\\mathrm{Hz}$. Rearranging $\\Delta E=hf$ gives $f=\\Delta E/h=4.0\\times10^{-19}/6.63\\times10^{-34}$.",
+      "hint": "Rearrange $\\Delta E=hf$ for $f$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06zlux3",
+      "kind": "mistake",
+      "front": "A student says electrons travel around the nucleus on fixed circular paths. Why is this wrong?",
+      "back": "Electrons occupy the region around the nucleus but do not follow fixed circular paths. The note's diagram of particle locations is only schematic.",
+      "hint": "Compare with what the note says about electron positions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xe39yo",
+      "kind": "mistake",
+      "front": "A student says that changing an atom's electron number makes it a different isotope. Is this correct?",
+      "back": "No. Changing the electron number makes an **ion**, not a different isotope. Isotopes differ in neutron number, while the nucleus stays the same for ions.",
+      "hint": "Which particles define an isotope?",
+      "sectionId": "s2"
+    }
+  ]
+}

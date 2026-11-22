@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "5-8",
+  "topicCode": "5.8",
+  "topicName": "Sketching functions and their derivatives",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:26.494Z",
+  "cards": [
+    {
+      "id": "1mr8whr",
+      "kind": "concept",
+      "front": "What does a positive first derivative tell you about a graph's direction?",
+      "back": "The function is **rising** as the input increases. A negative first derivative means the function is falling.",
+      "hint": "Think about the slope of the tangent.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tkv024",
+      "kind": "concept",
+      "front": "What does a positive second derivative tell you about a graph?",
+      "back": "The function is **concave up**, so its tangent slopes are increasing. The function itself can still be falling.",
+      "hint": "Concavity describes how the slopes change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15l7xdv",
+      "kind": "process",
+      "front": "In what order should you sketch a function from derivative information?",
+      "back": "First place the known points. Then use $f'$ for direction and steepness. Then use $f''$ to **bend** each interval, keeping the curve continuous where it is known to be continuous.",
+      "hint": "Start with what you know for certain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1brxsaj",
+      "kind": "term",
+      "front": "What is a stationary point?",
+      "back": "A point where the derivative exists and equals **zero**, so the tangent is horizontal.",
+      "hint": "Where is the tangent flat?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uwhwqy",
+      "kind": "term",
+      "front": "What is an inflection point?",
+      "back": "A point on the graph where the **concavity changes**.",
+      "hint": "Think about the bending direction on each side.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kh8sap",
+      "kind": "mistake",
+      "front": "Why does $f''(a)=0$ not prove that $a$ is an inflection point?",
+      "back": "An inflection point needs **concavity to change** on either side of $a$. A zero second derivative alone shows no change.",
+      "hint": "What must happen on both sides of a?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qwik25",
+      "kind": "mistake",
+      "front": "True or false: a concave-up graph must be rising.",
+      "back": "**False**. Concave up means the slopes are increasing, so the graph can still be falling if its slopes are negative.",
+      "hint": "Concavity is about changing slopes, not their sign.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "049q3sp",
+      "kind": "mistake",
+      "front": "If $f'(c)=0$, must the graph turn at $x=c$?",
+      "back": "**No**. A zero derivative gives a horizontal tangent, but you must check the sign on both sides before drawing a peak or valley.",
+      "hint": "Check the sign of $f'$ on each side of c.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0twgr3v",
+      "kind": "process",
+      "front": "How do you draw a derivative graph from a function graph?",
+      "back": "Read the **tangent slope** at several inputs and plot those values. Horizontal tangents give zeros, rising parts sit above the axis, and falling parts sit below it.",
+      "hint": "You are recording slopes, not heights.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n4754r",
+      "kind": "mistake",
+      "front": "If $f$ has a high point at $x=a$, must $f'$ be high at $x=a$?",
+      "back": "**No**. The function's height does not directly set the derivative's height. A high point of $f$ is a zero of $f'$, since the tangent is horizontal there.",
+      "hint": "Which value does the derivative record?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1m14nax",
+      "kind": "formula",
+      "front": "For $f''(x)=6x$, where is the graph concave down and where is it concave up?",
+      "back": "Concave down for $x<0$ and concave up for $x>0$, because $f''$ is negative then positive.",
+      "hint": "Find where $6x$ is negative and where it is positive.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ykih6q",
+      "kind": "example",
+      "front": "Given $f(0)=0$ and $f'(x)=3x^2-3$, what is $f(x)$, and where are its peak and valley?",
+      "back": "$f(x)=x^3-3x$, with a peak at $(-1,2)$ and a valley at $(1,-2)$. The constant is $C=0$ because $f(0)=0$.",
+      "hint": "Integrate $f'$, then use $f(0)=0$ to find C.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0utw7ds",
+      "kind": "process",
+      "front": "What three checks confirm that a graph matches a proposed derivative graph?",
+      "back": "Horizontal tangents must match derivative zeros. Rising and falling intervals must match positive and negative derivative values. Steeper parts must match derivative values farther from zero.",
+      "hint": "Check zeros, signs, then steepness.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12pk0o1",
+      "kind": "concept",
+      "front": "Can two different functions share the same derivative?",
+      "back": "**Yes**, if they differ by a constant. Their graphs then have the same shape at different heights.",
+      "hint": "Think about what a constant does to a slope.",
+      "sectionId": "s4"
+    }
+  ]
+}

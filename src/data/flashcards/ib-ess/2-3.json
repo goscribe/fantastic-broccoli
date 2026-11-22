@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "2-3",
+  "topicCode": "2.3",
+  "topicName": "Biogeochemical cycles",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:23.007Z",
+  "cards": [
+    {
+      "id": "1gh5yn0",
+      "kind": "concept",
+      "front": "Why do carbon and nitrogen cycle through an ecosystem, while energy does not?",
+      "back": "Matter is **recycled**: the same carbon and nitrogen atoms are used again and again. Energy passes through once and leaves as heat.",
+      "hint": "Compare how each one leaves the ecosystem.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10lnei4",
+      "kind": "process",
+      "front": "Outline how carbon moves between the air, organisms and soil.",
+      "back": "Producers take in carbon dioxide in **photosynthesis** to build biomass. Consumers gain carbon by eating. All organisms release carbon dioxide in **respiration**, and decomposers return it from dead matter.",
+      "hint": "Follow carbon from the air into organisms and back again.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hbtcxu",
+      "kind": "concept",
+      "front": "Why can't plants use the nitrogen gas that makes up most of the air?",
+      "back": "Plants cannot use nitrogen gas directly. **Nitrogen fixation**, mainly by bacteria, converts it into ammonia or nitrate, which plants can absorb.",
+      "hint": "Think about which forms of nitrogen plants can take in.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0asvbgf",
+      "kind": "term",
+      "front": "What is a store in a nutrient cycle?",
+      "back": "A **store** is a place where an element is held, such as the atmosphere, living organisms or rock.",
+      "hint": "Boxes in a cycle diagram show these.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0y80zp8",
+      "kind": "term",
+      "front": "What is a flow in a nutrient cycle?",
+      "back": "A **flow** is the movement of an element from one store to another. When you describe it, name the process that causes it.",
+      "hint": "Arrows in a cycle diagram show these.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1eq65xj",
+      "kind": "term",
+      "front": "What is a carbon sink?",
+      "back": "A **carbon sink** is a store that takes in more carbon than it releases over a given period. Growing forests and the oceans can both act as sinks.",
+      "hint": "Compare carbon taken in with carbon released.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16yhlzg",
+      "kind": "mistake",
+      "front": "Does burning fossil fuels create new carbon?",
+      "back": "No. It **moves carbon** from a long-term store into the atmosphere, releasing carbon dioxide within minutes from carbon stored for millions of years.",
+      "hint": "Ask where the carbon came from before it was burned.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10g35dr",
+      "kind": "process",
+      "front": "What are the three steps that recycle nitrogen in soil, in order?",
+      "back": "**Ammonification** (decomposers turn nitrogen in dead matter into ammonium), then **nitrification** (bacteria convert ammonium to nitrite, then nitrate), then **denitrification** (bacteria convert nitrate to nitrogen gas).",
+      "hint": "Start with dead matter and waste.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ocr1rq",
+      "kind": "mistake",
+      "front": "Are nitrification and denitrification the same process?",
+      "back": "No. Nitrification **converts ammonium to nitrate** and needs oxygen. Denitrification converts nitrate to nitrogen gas in oxygen-poor conditions, removing nitrogen from the soil.",
+      "hint": "Compare the starting form and the conditions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1944usm",
+      "kind": "term",
+      "front": "What is eutrophication?",
+      "back": "**Eutrophication** is the enrichment of water with nutrients, causing rapid algal growth and later oxygen depletion.",
+      "hint": "It often starts with fertiliser washing into water.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "18sr705",
+      "kind": "concept",
+      "front": "How can excess fertiliser lead to fish dying in a lake?",
+      "back": "Algae grow rapidly and block light, so plants below die. Decomposers breaking down the remains use up **oxygen**, and the fish die from lack of oxygen.",
+      "hint": "Follow the chain from algae to oxygen levels.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "03edwha",
+      "kind": "concept",
+      "front": "How do human activities unbalance the carbon cycle?",
+      "back": "Burning fossil fuels releases **stored carbon** quickly into the atmosphere, faster than natural flows can balance it. Clearing forests removes carbon absorbers as well.",
+      "hint": "Compare the speed of release with natural flows.",
+      "sectionId": "s6"
+    }
+  ]
+}

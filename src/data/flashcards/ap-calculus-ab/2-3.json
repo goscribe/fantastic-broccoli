@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "2-3",
+  "topicCode": "2.3",
+  "topicName": "Estimating derivatives at a point",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:48.878Z",
+  "cards": [
+    {
+      "id": "0duib2n",
+      "kind": "concept",
+      "front": "What does the derivative at a point tell you about a graph?",
+      "back": "It gives the **slope of the tangent line** at that point. You can estimate it from nearby values without knowing a formula for the function.",
+      "hint": "Think about the line that just touches the curve.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "028ah97",
+      "kind": "formula",
+      "front": "How is a difference quotient written, and what does each part mean?",
+      "back": "$\\frac{f(b)-f(a)}{b-a}$ is the **slope of the secant line** through two points on the graph. The numerator is the change in output and the denominator is the change in input.",
+      "hint": "Output change over input change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lvgt2e",
+      "kind": "process",
+      "front": "How do you estimate f'(c) from a formula using nearby inputs?",
+      "back": "Evaluate $\\frac{f(c+h)-f(c)}{h}$ for nonzero $h$ closer to zero, using both positive and negative values. If the estimates approach the same **number**, that number estimates $f'(c)$.",
+      "hint": "Never use h = 0 in the quotient.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "089q1ef",
+      "kind": "term",
+      "front": "What is a central difference?",
+      "back": "A **central difference** estimates slope using function values at inputs on opposite sides of the target input. It uses $\\frac{f(c+h)-f(c-h)}{2h}$ when both values are available.",
+      "hint": "One input on each side of c.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0661g4u",
+      "kind": "term",
+      "front": "What is a one-sided difference?",
+      "back": "A **one-sided difference** estimates slope using the target input and another input on only one side. It is useful when the table lacks a suitable value on the other side.",
+      "hint": "Use it when one side is missing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1398r17",
+      "kind": "concept",
+      "front": "How do smaller input gaps and table values affect a derivative estimate from a table?",
+      "back": "Smaller input gaps often help, but **rounded or noisy values** can make the estimate less reliable.",
+      "hint": "Accuracy depends on both gap size and data quality.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12zzwfo",
+      "kind": "formula",
+      "front": "Write the central-difference estimate of f'(c) using inputs c+h and c-h.",
+      "back": "$f'(c)\\approx\\frac{f(c+h)-f(c-h)}{2h}$. The denominator $2h$ is the full input gap between the two sides.",
+      "hint": "The total input gap is not just h.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1j04fl9",
+      "kind": "example",
+      "front": "Given f(2.8)=7.4 and f(3.2)=8.6, estimate f'(3) with a central difference.",
+      "back": "About $3$, since $\\frac{8.6-7.4}{3.2-2.8}=\\frac{1.2}{0.4}=3$.",
+      "hint": "Input gap is 3.2 minus 2.8.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16cpqlf",
+      "kind": "process",
+      "front": "What are the steps for estimating a derivative from a graph with a drawn tangent?",
+      "back": "Sketch a **tangent line** matching the curve's direction at the point. Choose two clear points on that line, read their coordinates from the axis scales, and divide vertical change by horizontal change.",
+      "hint": "The two points need not lie on the curve.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16sx75b",
+      "kind": "example",
+      "front": "A tangent line passes through (1,2) and (3,6). What is the estimated slope at the point of tangency?",
+      "back": "$2$, since $\\frac{6-2}{3-1}=2$. Choosing points far apart on the tangent reduces reading error.",
+      "hint": "Vertical change over horizontal change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0psldw1",
+      "kind": "mistake",
+      "front": "A student divides by the change in output instead of the change in input. What is the right way?",
+      "back": "Wrong: dividing by $f(c+h)-f(c)$. Right: divide by the **change in input**, $h$, so the slope is $\\frac{f(c+h)-f(c)}{h}$.",
+      "hint": "Slope uses input change in the denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1f33fr1",
+      "kind": "example",
+      "front": "For f(x)=x^2, estimate f'(2) using h=0.1 and h=-0.1. What do you get?",
+      "back": "Estimates are $4.1$ and $3.9$, so $f'(2)$ is about $4$. Both estimates lie close to 4.",
+      "hint": "Find f(2.1) and f(1.9) first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x7n5k8",
+      "kind": "mistake",
+      "front": "Why can't you substitute h=0 into the nearby-input quotient to find f'(c)?",
+      "back": "The **denominator** becomes zero, so the quotient is undefined. Instead, use small nonzero values of h and check whether the estimates approach the same number.",
+      "hint": "What happens when you divide by zero?",
+      "sectionId": "s4"
+    }
+  ]
+}

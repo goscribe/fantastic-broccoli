@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "5-1",
+  "topicCode": "5.1",
+  "topicName": "Reaction rates",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:40.175Z",
+  "cards": [
+    {
+      "id": "1g0mdas",
+      "kind": "concept",
+      "front": "What does a reaction rate measure, and why is a reactant's change given a minus sign?",
+      "back": "**Reaction rate** measures how quickly concentration changes per unit time. Reactant concentrations fall, so the minus sign keeps the reported rate positive.",
+      "hint": "Think about which way reactant concentration moves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19ucq0z",
+      "kind": "concept",
+      "front": "How does a concentration–time graph give the rate at one exact moment?",
+      "back": "The slope of a **tangent** at that time gives the instantaneous rate. For a reactant, negate the slope to get a positive disappearance rate.",
+      "hint": "Use a straight line that touches the curve at one point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14hs9o2",
+      "kind": "formula",
+      "front": "What is the formula for a reactant's average disappearance rate, and what do its symbols mean?",
+      "back": "$-\\frac{\\Delta[A]}{\\Delta t}$, where **Δ[A]** is final minus initial concentration in mol L⁻¹, Δt is elapsed time in seconds, and the minus sign makes the rate positive.",
+      "hint": "Units are mol L⁻¹ s⁻¹.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lxyzzq",
+      "kind": "formula",
+      "front": "What is the formula for a product's average formation rate?",
+      "back": "$\\frac{\\Delta[P]}{\\Delta t}$, where Δ[P] is final minus initial product concentration and Δt is elapsed time. No minus sign is needed because product concentration rises.",
+      "hint": "Compare it with the reactant formula.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y8mivu",
+      "kind": "example",
+      "front": "A reactant falls from 0.90 to 0.54 mol L⁻¹ in 12 seconds. What is its average disappearance rate?",
+      "back": "**0.030 mol L⁻¹ s⁻¹**. Δ[A] = 0.54 − 0.90 = −0.36 mol L⁻¹, so the rate is −(−0.36)/12 = 0.030 mol L⁻¹ s⁻¹.",
+      "hint": "Use the reactant formula, including its minus sign.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zz7cuz",
+      "kind": "mistake",
+      "front": "A student says a falling reactant curve means the reaction rate is negative. What is wrong?",
+      "back": "**Rates are reported as positive**. The reactant's disappearance rate is the negative of its curve's slope, so a falling curve gives a positive rate.",
+      "hint": "Check the sign convention for reactants.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11qiw6e",
+      "kind": "process",
+      "front": "What steps find an average rate from two concentration readings?",
+      "back": "1) Choose two times. 2) Subtract the initial concentration from the final one to get Δ[X]. 3) Divide by the elapsed time. 4) Apply a minus sign for a reactant, then state the interval and units.",
+      "hint": "There are four steps.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yhnkeb",
+      "kind": "concept",
+      "front": "What does a product curve that becomes flatter tell you about its formation rate?",
+      "back": "The **formation rate is slowing**, because the curve's slope is decreasing. A flat section shows no measurable change but does not by itself explain why.",
+      "hint": "Think about what the slope represents.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jkbdzq",
+      "kind": "concept",
+      "front": "Why does raising temperature usually increase reaction rate?",
+      "back": "Higher temperature gives particles **more energy**, so the rate usually increases. This is a common trend, not a fixed numerical rule.",
+      "hint": "Think about particle energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tw9u6d",
+      "kind": "concept",
+      "front": "Why can increasing reactant concentration or a solid's exposed surface area speed up a reaction?",
+      "back": "Higher **reactant concentration** puts more particles in the same volume. Greater **surface area** makes more of the solid available to contact other reactants. Both often increase rate.",
+      "hint": "Link each change to a physical reason.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a9t81r",
+      "kind": "term",
+      "front": "What is a catalyst, and what happens to it overall?",
+      "back": "A **catalyst** increases reaction rate by providing a different reaction pathway. It is regenerated overall rather than used up permanently.",
+      "hint": "Focus on the pathway, not the products.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15j7qyw",
+      "kind": "term",
+      "front": "What is the difference between an average rate and an instantaneous rate?",
+      "back": "An **average rate** uses two measurements over a time interval. An **instantaneous rate** describes one moment and comes from a tangent slope.",
+      "hint": "One covers an interval, the other a single moment.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pfu87e",
+      "kind": "mistake",
+      "front": "A student reports an average rate of 0.020 mol L⁻¹ s⁻¹ without naming the time interval. What is missing?",
+      "back": "The **time interval** should be stated with an average rate, for example 0 to 10 seconds. The units should also show concentration per time.",
+      "hint": "Look at the tip in the worked example.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14nct0m",
+      "kind": "process",
+      "front": "When explaining a change in reaction rate, what should you include?",
+      "back": "**Name the changed condition** and link it to a physical reason, such as particle energy or exposed surface area. Do not claim every reaction responds by the same amount.",
+      "hint": "Two parts: the condition and the reason.",
+      "sectionId": "s4"
+    }
+  ]
+}

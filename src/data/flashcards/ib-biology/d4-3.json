@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "d4-3",
+  "topicCode": "D4.3",
+  "topicName": "Climate change",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:21.098Z",
+  "cards": [
+    {
+      "id": "014tdqf",
+      "kind": "concept",
+      "front": "How does the greenhouse effect keep Earth warmer than it would otherwise be?",
+      "back": "**Greenhouse gases** absorb some outgoing infrared radiation from the surface and re-emit it in all directions, including back towards the surface. This slows heat loss to space.",
+      "hint": "Think about what happens to infrared radiation after it is absorbed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y04hzc",
+      "kind": "concept",
+      "front": "Why do human activities strengthen the greenhouse effect?",
+      "back": "They increase atmospheric **greenhouse gas** concentrations. Burning fossil fuels releases carbon dioxide, cattle and rice fields release methane, and fertilised soils release nitrous oxide. Higher concentrations absorb more infrared radiation, so warming increases.",
+      "hint": "Link each activity to a named gas.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ub8vud",
+      "kind": "concept",
+      "front": "What is a positive feedback loop, and why does it matter for warming?",
+      "back": "A **positive feedback** loop is a process where an initial change causes effects that reinforce it. In climate change, warming can trigger further warming, and continued feedback can push an ecosystem past a tipping point.",
+      "hint": "Ask what the effects do to the original change.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fefpu4",
+      "kind": "term",
+      "front": "What are greenhouse gases?",
+      "back": "**Greenhouse gases** are atmospheric gases that absorb and emit infrared radiation, reducing the rate of heat loss to space. Water vapour, carbon dioxide and methane are examples.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wqkd5j",
+      "kind": "term",
+      "front": "What is albedo?",
+      "back": "**Albedo** is the fraction of incoming solar radiation reflected by a surface, given as a value from 0 to 1. When ice melts, the lower albedo means more sunlight is absorbed.",
+      "hint": "Think about how reflective a surface is.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xa0lbs",
+      "kind": "process",
+      "front": "Describe, in order, how thawing permafrost creates a positive feedback loop.",
+      "back": "1) Warming thaws permafrost. 2) Microbes break down previously frozen organic matter. 3) They release carbon dioxide and methane. 4) These gases strengthen the greenhouse effect, causing further warming and thawing.",
+      "hint": "Start with what warming does to the ground.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18gmqkn",
+      "kind": "mistake",
+      "front": "A student says the greenhouse effect is caused by a hole in the ozone layer. Why is this wrong?",
+      "back": "The greenhouse effect involves **greenhouse gases** absorbing and emitting infrared radiation. It is not caused by ozone layer depletion.",
+      "hint": "Which gases are central to the greenhouse effect?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0furfyz",
+      "kind": "term",
+      "front": "What is deforestation, and how does it add to climate change?",
+      "back": "**Deforestation** is the removal of forest. It releases carbon dioxide when vegetation burns or decomposes, and reduces the photosynthetic uptake of carbon dioxide.",
+      "hint": "Consider both the release and the lost uptake of carbon dioxide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1612v4q",
+      "kind": "concept",
+      "front": "How can changes in seasonal timing harm species?",
+      "back": "They can separate interacting species. For example, insects may emerge before the plants they feed on are available, disrupting food supply.",
+      "hint": "Think about species that depend on each other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1982x73",
+      "kind": "term",
+      "front": "What is coral bleaching, and what can cause it?",
+      "back": "**Coral bleaching** is the loss of symbiotic algae from corals under stress, leaving them pale and with less energy. Warmer seas can cause it, and some corals die if stress persists.",
+      "hint": "Think about the partnership corals rely on for energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yy8kgk",
+      "kind": "mistake",
+      "front": "A student says a warming climate affects every ecosystem in the same way. What is wrong with this?",
+      "back": "Effects vary. Local rainfall, geography and species' tolerances also matter, so ecosystems respond differently to warming.",
+      "hint": "Think about what else shapes how an ecosystem responds.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13x356h",
+      "kind": "term",
+      "front": "What is mitigation and what is an example?",
+      "back": "**Mitigation** limits future climate change by reducing greenhouse gas emissions or increasing carbon uptake. Replacing fossil fuels with low-emission energy is an example.",
+      "hint": "Mitigation targets the causes of climate change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fwag4z",
+      "kind": "concept",
+      "front": "Why are both mitigation and adaptation needed?",
+      "back": "**Mitigation** reduces the scale of future change, while **adaptation** addresses its effects. Adaptation has limits when warming is severe or habitats disappear.",
+      "hint": "One reduces future change; the other deals with the effects.",
+      "sectionId": "s4"
+    }
+  ]
+}

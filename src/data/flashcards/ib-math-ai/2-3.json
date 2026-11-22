@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "2-3",
+  "topicCode": "2.3",
+  "topicName": "Graphs of functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:23.097Z",
+  "cards": [
+    {
+      "id": "0geo45f",
+      "kind": "concept",
+      "front": "What does the graph of a function show?",
+      "back": "A **picture** of the function's rule. Each input $x$ and its output $y$ form a point $(x,y)$, and plotting all these pairs gives the graph.",
+      "hint": "Think about what each point on the curve represents.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cbwaai",
+      "kind": "formula",
+      "front": "How do you find the y-intercept and the x-intercepts of $y=f(x)$?",
+      "back": "For the **y-intercept**, put $x=0$ and find $y$. For an **x-intercept**, put $y=0$, so solve $f(x)=0$.",
+      "hint": "Which value is set to zero in each case?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0o9a4m9",
+      "kind": "process",
+      "front": "What are the steps for drawing a curve from its equation?",
+      "back": "Make a **table of values** for several inputs, plot the points, then join them with a smooth curve. Include enough inputs to show where the curve turns.",
+      "hint": "Start with the table, not the curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03830e6",
+      "kind": "term",
+      "front": "What is a turning point?",
+      "back": "A **turning point** is where the graph changes from rising to falling, or from falling to rising. On a quadratic it is the lowest or highest point.",
+      "hint": "Where does the curve change direction?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vgw5en",
+      "kind": "term",
+      "front": "What is an intercept?",
+      "back": "An **intercept** is a point where the graph crosses or touches an axis.",
+      "hint": "Which axes can a graph meet?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10fff6l",
+      "kind": "term",
+      "front": "What must a function do with each input in its domain?",
+      "back": "It assigns exactly **one output** to each input.",
+      "hint": "Think of the rule as a machine with one answer per input.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bfzrxz",
+      "kind": "mistake",
+      "front": "Why is writing $-2^2$ wrong when evaluating $x^2$ at $x=-2$?",
+      "back": "$-2^2$ means $-4$, but $(-2)^2=4$. Put **brackets** round a negative input before squaring.",
+      "hint": "Which operation happens first, squaring or the minus sign?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "186ub9b",
+      "kind": "mistake",
+      "front": "Is a quick, rough doodle an acceptable sketch?",
+      "back": "No. A sketch must still show the **correct shape**, labelled axes and labelled key points, even though it is not drawn exactly.",
+      "hint": "What must a sketch still include?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15agzpk",
+      "kind": "example",
+      "front": "For $y=x^2-2x-3$, what is the output when $x=-2$?",
+      "back": "$y=5$. Working: $(-2)^2-2(-2)-3=4+4-3=5$, so the point is $(-2,5)$.",
+      "hint": "Use brackets around the $-2$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15rdxqt",
+      "kind": "example",
+      "front": "For $y=x^2-2x-3$, what are the y-intercept, x-intercepts and turning point?",
+      "back": "$y$-intercept $(0,-3)$, $x$-intercepts $(-1,0)$ and $(3,0)$, turning point $(1,-4)$. The turning point lies halfway between the $x$-intercepts.",
+      "hint": "Set $x=0$, then set $y=0$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1x8oklt",
+      "kind": "process",
+      "front": "How do you read an input from a curve when you know the output?",
+      "back": "Start at the **output** on the vertical axis, move across to the curve, then move down to the horizontal axis to read the input.",
+      "hint": "Reverse the route you use to find an output.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "092gh7z",
+      "kind": "mistake",
+      "front": "If a horizontal line is drawn across a quadratic curve, how many inputs can it give?",
+      "back": "**Possibly two**, not always one. For $y=-3$ on $y=x^2-2x-3$, the inputs are $x=0$ and $x=2$.",
+      "hint": "Think about a U-shaped curve.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "022yqcs",
+      "kind": "concept",
+      "front": "Why use a graphing calculator to find intercepts and turning points?",
+      "back": "It finds **accurate** values that you cannot read exactly from a drawing. Choose a window that shows every key point, and give answers to 3 significant figures unless told otherwise.",
+      "hint": "Compare with estimating from a sketch.",
+      "sectionId": "s5"
+    }
+  ]
+}

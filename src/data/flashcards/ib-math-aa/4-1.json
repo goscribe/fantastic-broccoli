@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-1",
+  "topicCode": "4.1",
+  "topicName": "Sampling concepts",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:39.184Z",
+  "cards": [
+    {
+      "id": "17dugea",
+      "kind": "concept",
+      "front": "Why must a sample be representative of its population?",
+      "back": "A **representative** sample mirrors the population, so its results can estimate facts about the population. A poorly chosen sample can mislead even when it is large.",
+      "hint": "Think about what the sample is for.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06wpn1r",
+      "kind": "concept",
+      "front": "What makes a simple random sample fair?",
+      "back": "Every member of the population has an **equal chance** of selection, and chance alone decides who is picked, not the person choosing.",
+      "hint": "Who should make the choice?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01bpxbu",
+      "kind": "mistake",
+      "front": "Does making a sample bigger remove bias?",
+      "back": "No. Bias comes from the **method of selection**. A large sample chosen by a faulty method repeats the same error many times.",
+      "hint": "Where does bias come from?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tpazu3",
+      "kind": "term",
+      "front": "What is a sampling frame?",
+      "back": "A **sampling frame** is a list of all the members of the population from which a sample can be drawn.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rq0sub",
+      "kind": "process",
+      "front": "How would you choose a simple random sample of 60 students from a list of 1200?",
+      "back": "Number the students from 1 to 1200. Generate 60 different random numbers in that range, ignoring repeats. Select the students with those numbers.",
+      "hint": "Start from the list.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t69k1u",
+      "kind": "formula",
+      "front": "In systematic sampling, what is $k$ for a population of $N$ and a sample of $n$?",
+      "back": "$k=\\frac{N}{n}$, so take every $k$th member after a **random start**.",
+      "hint": "Consider how many members lie between each pick.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vz5enu",
+      "kind": "example",
+      "front": "A stratified sample of 80 is needed from 450 Year 10, 350 Year 11 and 200 Year 12 students. How many come from Year 10?",
+      "back": "**36** students, since $\\frac{450}{1000}\\times80=36$.",
+      "hint": "Find the total number of students first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s1y4sw",
+      "kind": "term",
+      "front": "What is stratified sampling?",
+      "back": "Taking a **random** sample from each group, in proportion to the size of that group.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "046p2k3",
+      "kind": "mistake",
+      "front": "Why is quota sampling not the same as stratified sampling?",
+      "back": "In quota sampling the **interviewer** chooses who to ask, so chance plays no part and bias can enter. Stratified sampling picks members at random within each group.",
+      "hint": "Who makes the choice?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08dptc0",
+      "kind": "term",
+      "front": "What is convenience sampling, and why does it bias results?",
+      "back": "Choosing the members who are **easiest to reach**. Gym users exercise more, so a survey taken outside a gym gives results that are too high.",
+      "hint": "Think about who is easy to ask.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mn20hk",
+      "kind": "concept",
+      "front": "What does bias mean for sample results?",
+      "back": "A **systematic** error where the selection method favours some members, so results shift in one direction and are consistently wrong.",
+      "hint": "Think about which way the results move.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rxk390",
+      "kind": "term",
+      "front": "What is non-response bias?",
+      "back": "Bias caused when chosen members do not reply and **differ** from those who do.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0m2ekt1",
+      "kind": "term",
+      "front": "What is a leading question?",
+      "back": "A **question worded** so that it encourages one particular answer.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1j1bs8n",
+      "kind": "process",
+      "front": "What steps reduce bias in data collection?",
+      "back": "Use a complete **sampling frame**, select members by chance, follow up people who do not reply, and word questions neutrally.",
+      "hint": "Four steps.",
+      "sectionId": "s5"
+    }
+  ]
+}

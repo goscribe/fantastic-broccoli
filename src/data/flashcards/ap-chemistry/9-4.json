@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "9-4",
+  "topicCode": "9.4",
+  "topicName": "Thermodynamic and kinetic control",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:23.360Z",
+  "cards": [
+    {
+      "id": "1c9evjy",
+      "kind": "concept",
+      "front": "Why can a reaction with a negative free-energy change still be extremely slow?",
+      "back": "Favorability and speed answer different questions. A negative $\\Delta G$ shows the reaction is **thermodynamically favorable**, but a large **activation-energy barrier** can make it very slow.",
+      "hint": "Think about what the sign of $\\Delta G$ does and does not tell you.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "152pf7e",
+      "kind": "concept",
+      "front": "Two products can form from the same reactants. What decides which one dominates under kinetic control?",
+      "back": "The product that forms **faster** dominates. The faster pathway usually has the smaller activation barrier, and that product need not have the lowest free energy.",
+      "hint": "Compare barrier heights to discuss rate.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gks5tq",
+      "kind": "concept",
+      "front": "What must be true for a mixture to reach thermodynamic control rather than kinetic control?",
+      "back": "Products must be able to **reverse or interconvert**, and the reaction needs enough time to approach equilibrium. Without a reversible path, a fast-formed product can stay trapped.",
+      "hint": "Consider both the pathway and the time available.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jemdmg",
+      "kind": "formula",
+      "front": "What does the sign of $\\Delta G$ tell you about a reaction?",
+      "back": "A negative $\\Delta G$ means the reaction is **thermodynamically favorable** under the stated conditions. It says nothing about how fast the reaction occurs.",
+      "hint": "Favorability is a thermodynamic question, not a speed question.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1582tda",
+      "kind": "term",
+      "front": "What is activation energy?",
+      "back": "Activation energy is the **energy barrier** reactants must overcome along a reaction pathway. It is the energy needed to reach the high-energy arrangement before products form.",
+      "hint": "Think of it as the hill particles must climb.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "129aufk",
+      "kind": "term",
+      "front": "What is kinetic control?",
+      "back": "Kinetic control is when **relative formation rates** determine which competing product is the major one. The faster pathway wins.",
+      "hint": "Rates decide the outcome here.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "156yvcp",
+      "kind": "term",
+      "front": "What is thermodynamic control?",
+      "back": "Thermodynamic control is when **reversible reactions** let product proportions approach their equilibrium values, so the more stable product is favored.",
+      "hint": "Reversibility is the key requirement.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09tzevf",
+      "kind": "term",
+      "front": "What is a kinetic product?",
+      "back": "A kinetic product is the one that forms **faster** than a competing product under the given conditions.",
+      "hint": "Think about speed, not stability.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1no48zu",
+      "kind": "term",
+      "front": "What is a thermodynamic product?",
+      "back": "A thermodynamic product is the **more stable** product compared with a competing product under the given conditions.",
+      "hint": "Think about free energy, not speed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19w2qld",
+      "kind": "mistake",
+      "front": "A student says a reaction with a negative $\\Delta G$ must happen quickly. What is wrong with this?",
+      "back": "**Favorability is not rate.** A negative $\\Delta G$ only shows the reaction can lower free energy. Speed depends on the activation-energy barrier along the pathway.",
+      "hint": "What does a negative $\\Delta G$ actually measure?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mobv24",
+      "kind": "mistake",
+      "front": "A student claims raising the temperature always gives the more stable product. Is this correct?",
+      "back": "No. Higher temperature does not guarantee **thermodynamic control**. The products must be able to interconvert, and the reaction needs enough time to reach equilibrium.",
+      "hint": "Temperature alone is not the whole story.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j5alyw",
+      "kind": "example",
+      "front": "Why does a spark start a hydrogen and oxygen reaction that otherwise stays unreacted?",
+      "back": "Water formation is **thermodynamically favorable**, but the reaction needs an initial energy input. The spark lets particles overcome the **activation barrier**, showing favorability is separate from speed.",
+      "hint": "Connect the spark to the activation energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n56xfy",
+      "kind": "example",
+      "front": "Why does diamond persist at ordinary conditions even though graphite is the more stable form of carbon?",
+      "back": "Converting diamond needs **extensive bond rearrangement**, which is extremely slow. This is kinetic persistence, not a claim that diamond is more stable.",
+      "hint": "Focus on the speed of the conversion.",
+      "sectionId": "s4"
+    }
+  ]
+}

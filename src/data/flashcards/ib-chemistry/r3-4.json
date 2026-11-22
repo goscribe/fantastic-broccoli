@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "r3-4",
+  "topicCode": "R3.4",
+  "topicName": "Electron-pair sharing reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:33.480Z",
+  "cards": [
+    {
+      "id": "0ro5lfk",
+      "kind": "concept",
+      "front": "What does a nucleophile do in a reaction, and how does it differ from an electrophile?",
+      "back": "A **nucleophile** donates an electron pair to form a bond, while an **electrophile** accepts that electron pair. Lewis base and Lewis acid are broader names for the same pair sharing.",
+      "hint": "Think about which species gives the electron pair away.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yjlikm",
+      "kind": "concept",
+      "front": "How does a ligand bond to a central metal ion in a complex?",
+      "back": "The **ligand** donates a lone pair, supplying both electrons of the shared pair. The metal ion acts as a Lewis acid, and the resulting **coordination bond** is still a covalent bond.",
+      "hint": "Which species supplies both electrons?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mw95s2",
+      "kind": "concept",
+      "front": "Why is the carbon in bromoethane attacked by hydroxide ions?",
+      "back": "The **carbon–bromine bond** is polar. Bromine pulls the bonding electrons towards itself, leaving the carbon partially positive, which attracts the nucleophile.",
+      "hint": "Where do the bonding electrons sit between C and Br?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "024kdkw",
+      "kind": "term",
+      "front": "What is a Lewis base?",
+      "back": "A **Lewis base** is an electron-pair donor. Every nucleophile acts as a Lewis base when it attacks.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hxdcy8",
+      "kind": "term",
+      "front": "What is a ligand?",
+      "back": "A **ligand** is a species that donates an electron pair to a central metal atom or ion, forming a coordination bond.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1636u5o",
+      "kind": "formula",
+      "front": "Write the equation for bromoethane reacting with hydroxide ions, and name the leaving group.",
+      "back": "$\\text{CH}_3\\text{CH}_2\\text{Br}+\\text{OH}^-\\rightarrow\\text{CH}_3\\text{CH}_2\\text{OH}+\\text{Br}^-$. The **bromide ion** ($\\text{Br}^-$) is the leaving group.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oyuufb",
+      "kind": "process",
+      "front": "Describe the curly arrows for bromoethane reacting with hydroxide ions.",
+      "back": "Draw one arrow from a lone pair on the hydroxide oxygen to the carbon bonded to bromine. Draw a second arrow from the C–Br bond to bromine, giving ethanol and bromide.",
+      "hint": "Each arrow starts at an electron pair or bond.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yldah0",
+      "kind": "mistake",
+      "front": "A student says the metal ion donates the electron pair in a coordination bond. What is wrong?",
+      "back": "The **ligand** supplies both electrons in the shared pair. The metal ion only accepts the pair, so it acts as the Lewis acid.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "113lumy",
+      "kind": "example",
+      "front": "What is the charge of the complex ion formed from a copper(II) ion and six water molecules?",
+      "back": "$2+$. Water is **neutral**, so the complex keeps the copper ion's $2+$ charge: $[\\text{Cu}(\\text{H}_2\\text{O})_6]^{2+}$.",
+      "hint": "Is water charged?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13s7e2e",
+      "kind": "process",
+      "front": "What are the steps when bromine adds to an alkene?",
+      "back": "1) The C=C electrons polarise Br2 and attack the partially positive bromine. 2) A three-membered **bromonium ion** forms. 3) Bromide attacks a carbon and opens the ring.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05z0ezd",
+      "kind": "term",
+      "front": "What is electrophilic addition?",
+      "back": "**Electrophilic addition** begins when an electrophile accepts an electron pair from a multiple bond, such as a carbon–carbon double bond.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dxbazp",
+      "kind": "example",
+      "front": "What is the product when ethene reacts with bromine?",
+      "back": "$\\text{BrCH}_2\\text{CH}_2\\text{Br}$. This is an **addition** product because both bromine atoms join the alkene.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08xqvyj",
+      "kind": "mistake",
+      "front": "Why is the reaction of bromine with an alkene not a substitution?",
+      "back": "No atom is replaced. Both bromine atoms join the alkene, so the reaction is **addition**, not substitution.",
+      "hint": "Is anything removed from the molecule?",
+      "sectionId": "s4"
+    }
+  ]
+}

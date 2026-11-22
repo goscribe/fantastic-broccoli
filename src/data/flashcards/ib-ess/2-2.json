@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "2-2",
+  "topicCode": "2.2",
+  "topicName": "Energy and biomass in ecosystems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:24.989Z",
+  "cards": [
+    {
+      "id": "0ghjhpf",
+      "kind": "concept",
+      "front": "Why does so little energy reach each higher trophic level?",
+      "back": "Most energy is lost, mainly as **heat** released in **respiration**, so only about 10% typically passes on to the next level.",
+      "hint": "Think about what cells use stored energy for.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nq3glr",
+      "kind": "formula",
+      "front": "What is the equation for transfer efficiency, and what units must the two energies share?",
+      "back": "$\\mathrm{transfer\\,efficiency}=\\frac{\\mathrm{energy\\,at\\,next\\,level}}{\\mathrm{energy\\,at\\,lower\\,level}}\\times100\\%$. Both energies need the same unit, such as $\\mathrm{kJ\\,m^{-2}\\,yr^{-1}}$, and the answer is a percentage with no unit.",
+      "hint": "Which level goes on top and which goes on the bottom?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nnuhsg",
+      "kind": "concept",
+      "front": "Why can a pyramid of energy never be inverted?",
+      "back": "Energy is lost at every step, so each **trophic level** receives less energy than the level below it. The pyramid covers a whole year, so the bars always shrink upwards.",
+      "hint": "Compare what happens to energy at each step.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "04om7kl",
+      "kind": "term",
+      "front": "What is a producer?",
+      "back": "A **producer** is an organism that makes its own organic compounds from simple inorganic substances, using light or chemical energy. It occupies the first trophic level.",
+      "hint": "Think about where the energy in a food chain starts.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ktqqlo",
+      "kind": "term",
+      "front": "What is a trophic level?",
+      "back": "A **trophic level** is an organism's position in a feeding sequence, such as producer, primary consumer or secondary consumer.",
+      "hint": "Each step in a food chain is one of these.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0142ms9",
+      "kind": "concept",
+      "front": "Name three ways energy is lost from a trophic level before the next level can feed.",
+      "back": "Energy is lost through **respiration** as heat, through uneaten parts such as bones or roots, through **egestion** in faeces, and through excreted waste such as urea.",
+      "hint": "Some losses are heat, some are material left behind.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xd4rm5",
+      "kind": "mistake",
+      "front": "A student says the arrow in a food chain shows the prey pointing at its predator. What is wrong with this?",
+      "back": "The arrow points towards the **feeder**. It shows energy passing to that organism, not the predator pointing at its prey.",
+      "hint": "Follow where the energy goes, not where the animal looks.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "150kv24",
+      "kind": "mistake",
+      "front": "A student says energy lost from a food chain is destroyed. Why is this wrong?",
+      "back": "Energy is not **destroyed**. It leaves the chain as heat, which organisms cannot use to power their cells.",
+      "hint": "Energy is conserved, but where does it go?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0btnjmk",
+      "kind": "example",
+      "front": "Producers hold 12 000 and primary consumers hold 1200 kJ m^-2 yr^-1. What is the transfer efficiency between them?",
+      "back": "**10.0%**, calculated as $\\frac{1200}{12\\,000}\\times100\\%$. The percentage has no energy unit.",
+      "hint": "Divide the energy at the higher level by the energy at the lower level.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dz8y74",
+      "kind": "example",
+      "front": "A fox eats a rabbit that has eaten grass. What trophic level is the fox at?",
+      "back": "The fox is a **secondary consumer**, at the third trophic level, because it feeds on a primary consumer.",
+      "hint": "Count the levels from the grass upwards.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k7ch4y",
+      "kind": "concept",
+      "front": "Why can a pyramid of numbers be inverted?",
+      "back": "One large tree can feed thousands of insects, so the base has few organisms and the next level has many. The **pyramid of numbers** counts individuals, not energy.",
+      "hint": "Count individuals rather than energy or mass.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1a5zbqr",
+      "kind": "concept",
+      "front": "Why can a pyramid of biomass be inverted at one moment in time?",
+      "back": "In open water, tiny **producers** reproduce and are eaten very quickly, so their biomass at any moment can be less than that of the consumers feeding on them.",
+      "hint": "Think about how fast producers are eaten compared with how fast they grow.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "03ngvx9",
+      "kind": "concept",
+      "front": "How is net productivity calculated from gross productivity?",
+      "back": "**Net productivity** equals gross productivity minus the energy used in respiration. It is the energy stored in new biomass and available to consumers.",
+      "hint": "Gross is the total captured; what is taken away?",
+      "sectionId": "s4"
+    }
+  ]
+}

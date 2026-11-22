@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "1-3",
+  "topicCode": "1.3",
+  "topicName": "Geometric sequences and series",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:10.691Z",
+  "cards": [
+    {
+      "id": "0bp3y3o",
+      "kind": "concept",
+      "front": "How do you find the common ratio of a geometric sequence?",
+      "back": "Divide any term by the one before it: $r=\\frac{u_{n+1}}{u_n}$. The **answer is the same** for every pair of neighbouring terms.",
+      "hint": "Compare neighbouring terms, not the gaps between them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0b0wu7d",
+      "kind": "formula",
+      "front": "What is the formula for the nth term of a geometric sequence?",
+      "back": "$u_n=u_1r^{n-1}$, where $u_1$ is the first term and $r$ is the **common ratio**. The power is $n-1$ because reaching term $n$ takes $n-1$ multiplications.",
+      "hint": "Count how many multiplications it takes to get from term 1 to term n.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fly5t9",
+      "kind": "formula",
+      "front": "What is the formula for the sum of the first n terms of a geometric series?",
+      "back": "$S_n=\\frac{u_1(r^{n}-1)}{r-1}$, valid when $r\\neq1$. The equivalent form $\\frac{u_1(1-r^{n})}{1-r}$ gives the same total.",
+      "hint": "What must r not be equal to?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1omirg9",
+      "kind": "term",
+      "front": "What is a geometric sequence?",
+      "back": "A **geometric sequence** is a list where each term is the previous term multiplied by the same fixed number, the common ratio.",
+      "hint": "Compare this with adding a fixed amount each time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dcfwpi",
+      "kind": "concept",
+      "front": "What does a common ratio between 0 and 1 do to the terms, and what does a negative ratio do?",
+      "back": "A ratio between 0 and 1 makes the terms **shrink**. A negative ratio makes the signs **alternate** between positive and negative.",
+      "hint": "Try ratios of 0.5 and -2 on a simple starting number.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1971d8r",
+      "kind": "mistake",
+      "front": "A student finds the ratio of 2, 6, 18 by calculating $6-2=4$. What is wrong?",
+      "back": "Subtracting finds a **difference**, which belongs to arithmetic sequences. For geometric sequences divide instead: $r=\\frac{6}{2}=3$.",
+      "hint": "Which operation gives the ratio in a geometric sequence?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m7bioj",
+      "kind": "process",
+      "front": "What are the steps to find a distant term, such as the 10th term, of a geometric sequence?",
+      "back": "1) Find $u_1$ and $r$. 2) Substitute into $u_n=u_1r^{n-1}$. 3) Evaluate. For 3, 6, 12, ... this gives $u_{10}=3\\times2^{9}=1536$.",
+      "hint": "Start by identifying the first term and the ratio.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "009zitd",
+      "kind": "mistake",
+      "front": "A student uses $u_n=u_1r^{n}$ to find the 5th term. What is wrong?",
+      "back": "The power should be **$n-1$**, not $n$. Term 5 needs four multiplications from term 1, so the first term is never multiplied by $r$.",
+      "hint": "How many steps separate term 1 from term 5?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wvx2e4",
+      "kind": "example",
+      "front": "Find the total of the first 8 terms of the geometric sequence 3, 6, 12, 24, ...",
+      "back": "**765**. With $u_1=3$, $r=2$, $n=8$: $S_8=\\frac{3(2^{8}-1)}{2-1}=3\\times255=765$.",
+      "hint": "Identify $u_1$, $r$ and $n$ before substituting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sge9e4",
+      "kind": "concept",
+      "front": "Why does the sum formula for a geometric series work?",
+      "back": "Multiply the series by $r$ and subtract it from the original. Almost every term **cancels**, leaving $S_n(1-r)=u_1(1-r^{n})$, which rearranges to the formula.",
+      "hint": "Try writing $rS_n$ underneath $S_n$ and subtracting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0a6cej8",
+      "kind": "example",
+      "front": "A video has 250 views on day 1 and its views rise by 20% each day. How many views on day 6?",
+      "back": "About **622 views**. A 20% rise gives $r=1.2$, so $u_6=250\\times1.2^{5}=250\\times2.48832=622.08$.",
+      "hint": "A 20% increase is multiplying by what number?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03vf8uc",
+      "kind": "mistake",
+      "front": "A value falls by 15% each step. Which number should you multiply by each time?",
+      "back": "Multiply by **0.85**, not 0.15. The ratio is the fraction that remains after the change.",
+      "hint": "What fraction is left after losing 15%?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1eyvkna",
+      "kind": "concept",
+      "front": "How do the graphs of arithmetic and geometric sequences differ?",
+      "back": "Arithmetic sequence points lie on a **straight line**, while geometric sequence points lie on a **curve**.",
+      "hint": "Think about adding a fixed amount versus multiplying by a fixed number.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ip3ep7",
+      "kind": "mistake",
+      "front": "Can the geometric sum formula be used when the common ratio is 1?",
+      "back": "No. The formula needs $r\\neq1$. When $r=1$ every term is equal, so the total is simply **$n\\times u_1$**.",
+      "hint": "What happens to the denominator $r-1$ when r is 1?",
+      "sectionId": "s4"
+    }
+  ]
+}

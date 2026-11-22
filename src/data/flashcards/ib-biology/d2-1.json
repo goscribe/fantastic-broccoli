@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "d2-1",
+  "topicCode": "D2.1",
+  "topicName": "Cell and nuclear division",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:59.592Z",
+  "cards": [
+    {
+      "id": "0u0nu8s",
+      "kind": "concept",
+      "front": "Why does the cell cycle matter for a multicellular organism?",
+      "back": "The cell cycle lets cells **divide repeatedly** to increase cell numbers during growth and replace cells lost through normal wear or injury, supporting tissue repair.",
+      "hint": "Think about where new cells come from as an organism grows.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01aeeh7",
+      "kind": "concept",
+      "front": "How do mitosis and meiosis differ in the cells they produce from one diploid cell?",
+      "back": "Mitosis gives **two genetically identical diploid cells** for growth and repair. Meiosis gives **four genetically different haploid cells** for sexual reproduction.",
+      "hint": "Count the cells and the chromosome sets in each outcome.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12csc8u",
+      "kind": "concept",
+      "front": "How does meiosis create genetic variation?",
+      "back": "**Crossing over** exchanges sections between non-sister chromatids of homologous chromosomes, and **random orientation** of homologous pairs at the equator mixes maternal and paternal chromosomes.",
+      "hint": "Two events happen during meiosis I, one in prophase I and one at the equator.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sfud1n",
+      "kind": "term",
+      "front": "What is a checkpoint in the cell cycle?",
+      "back": "A **checkpoint** is a control point where the cycle can pause. It prevents division when conditions are unsuitable or DNA is damaged.",
+      "hint": "Think of it as a pause button for the cycle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dpyqpn",
+      "kind": "mistake",
+      "front": "A student says interphase is a resting stage. What is wrong with this?",
+      "back": "Interphase is **not** a resting stage. The cell actively grows, copies its DNA and prepares for division.",
+      "hint": "Consider what the cell is doing before it divides.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xvsx9l",
+      "kind": "process",
+      "front": "What are the main stages of mitosis, in order?",
+      "back": "**Prophase** (chromosomes condense, nuclear envelope breaks down, spindle fibres attach), **metaphase** (chromosomes line up at the equator), **anaphase** (sister chromatids separate to opposite poles), **telophase** (new nuclear envelopes form), then **cytokinesis**.",
+      "hint": "Remember the order: condense, line up, separate, re-form nuclei.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uuepv0",
+      "kind": "mistake",
+      "front": "A student says homologous chromosomes separate in anaphase of mitosis. What is wrong?",
+      "back": "Wrong: in mitosis it is **sister chromatids** that separate in anaphase. Homologous chromosomes separate in meiosis I.",
+      "hint": "Check which pairs are involved in each type of division.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wxm9th",
+      "kind": "term",
+      "front": "What are homologous chromosomes?",
+      "back": "**Homologous chromosomes** are a matching pair carrying the same genes at corresponding positions.",
+      "hint": "They are a matched pair, not copies of each other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02h3jed",
+      "kind": "concept",
+      "front": "How do meiosis I and meiosis II differ in chromosome behaviour?",
+      "back": "In **meiosis I**, homologous chromosomes separate, halving chromosome number. In **meiosis II**, sister chromatids separate, giving four cells.",
+      "hint": "Ask which pair separates in each division.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15osu82",
+      "kind": "term",
+      "front": "What is a haploid cell?",
+      "back": "A **haploid** cell contains one set of chromosomes. A diploid cell contains two sets, one from each parent.",
+      "hint": "Compare the number of chromosome sets with a diploid cell.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lxgm5l",
+      "kind": "term",
+      "front": "What is cytokinesis?",
+      "back": "**Cytokinesis** is the division of the cytoplasm to form separate daughter cells.",
+      "hint": "It usually follows nuclear division.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1adjhus",
+      "kind": "term",
+      "front": "What are spindle fibres?",
+      "back": "**Spindle fibres** are structures that attach to chromosomes and move them during nuclear division.",
+      "hint": "They form during prophase.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ohujv8",
+      "kind": "term",
+      "front": "What is crossing over?",
+      "back": "**Crossing over** is the exchange of corresponding sections between non-sister chromatids of homologous chromosomes.",
+      "hint": "It happens during prophase I of meiosis.",
+      "sectionId": "s3"
+    }
+  ]
+}

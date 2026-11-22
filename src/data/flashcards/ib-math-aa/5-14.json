@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-14",
+  "topicCode": "5.14",
+  "topicName": "Implicit differentiation and related rates",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:02.467Z",
+  "cards": [
+    {
+      "id": "1exa0x6",
+      "kind": "concept",
+      "front": "How can you find dy/dx from an equation such as x^2+y^2=25 when y cannot be isolated?",
+      "back": "Use **implicit differentiation**: differentiate every term with respect to $x$ on both sides, treating $y$ as a function of $x$, then collect the $\\frac{dy}{dx}$ terms and solve.",
+      "hint": "Think about differentiating both sides term by term.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jwsf3n",
+      "kind": "formula",
+      "front": "What is the derivative of $y^2$ with respect to $x$?",
+      "back": "$\\frac{d}{dx}(y^2)=2y\\frac{dy}{dx}$. The **chain rule** adds the factor $\\frac{dy}{dx}$ because $y$ changes as $x$ changes.",
+      "hint": "Is y a function of x here?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a16sdo",
+      "kind": "process",
+      "front": "What are the four steps for solving any related rates problem?",
+      "back": "1) Define variables and list known and wanted rates. 2) Write an equation linking the variables. 3) Differentiate both sides with respect to $t$. 4) Substitute values at the given instant and solve.",
+      "hint": "Start by naming the variables.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01fyswr",
+      "kind": "mistake",
+      "front": "Why is writing $\\frac{d}{dx}(y^2)=2y$ wrong?",
+      "back": "It is missing the factor $\\frac{dy}{dx}$. The correct result is $2y\\frac{dy}{dx}$, because $y$ depends on $x$ and changes as $x$ changes.",
+      "hint": "What happens to y as x changes?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ea171s",
+      "kind": "term",
+      "front": "What is an implicit equation?",
+      "back": "An **implicit equation** relates $x$ and $y$ without writing $y$ alone on one side, such as $x^2+y^2=25$. An explicit equation, by contrast, has the form $y=f(x)$.",
+      "hint": "Is y isolated on one side?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uycb3v",
+      "kind": "formula",
+      "front": "For the circle $x^2+y^2=25$, what is $\\frac{dy}{dx}$?",
+      "back": "$\\frac{dy}{dx}=-\\frac{x}{y}$, found from differentiating to give $2x+2y\\frac{dy}{dx}=0$ and then solving for $\\frac{dy}{dx}$.",
+      "hint": "Collect the terms containing dy/dx first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j0hblg",
+      "kind": "example",
+      "front": "Find the gradient of $x^2+xy+y^2=7$ at the point $(2,1)$.",
+      "back": "$\\frac{dy}{dx}=-\\frac{2x+y}{x+2y}$. Substituting $x=2$ and $y=1$ gives $-\\frac{5}{4}$.",
+      "hint": "Substitute both coordinates after solving for dy/dx.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "054zsq7",
+      "kind": "mistake",
+      "front": "A student says the circle $x^2+y^2=25$ has zero gradient at $(5,0)$. Why is this wrong?",
+      "back": "The curve is vertical there, so the gradient is **infinite**, not zero. The formula $-\\frac{x}{y}$ is undefined when $y=0$.",
+      "hint": "Picture the circle at its rightmost point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kgh9e1",
+      "kind": "term",
+      "front": "What is a rate in the context of related rates?",
+      "back": "A **rate** is a derivative with respect to time $t$, measuring how a quantity changes over time, such as $\\frac{dV}{dt}$ for volume.",
+      "hint": "Which variable is the derivative taken with respect to?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tis9c1",
+      "kind": "formula",
+      "front": "For $V=\\frac{4}{3}\\pi r^3$, how are $\\frac{dV}{dt}$ and $\\frac{dr}{dt}$ related?",
+      "back": "$\\frac{dV}{dt}=4\\pi r^2\\frac{dr}{dt}$, found by differentiating with respect to $t$ using the chain rule. Volume units are $\\mathrm{cm^3\\,s^{-1}}$ when $r$ is in cm.",
+      "hint": "Differentiate with respect to t, not x.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0be0n8n",
+      "kind": "concept",
+      "front": "Why can an equation linking changing quantities give a rate between them?",
+      "back": "Both quantities depend on time, so differentiating the equation with respect to $t$ links their rates. A known rate then gives an unknown rate.",
+      "hint": "Both variables depend on t.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "174bk3r",
+      "kind": "mistake",
+      "front": "Why must you not substitute values for changing quantities before differentiating in a related rates problem?",
+      "back": "Substituting turns a changing quantity into a constant. A constant has derivative zero, so the rate of that quantity would wrongly vanish.",
+      "hint": "What is the derivative of a constant?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fiuc19",
+      "kind": "example",
+      "front": "A ladder 5 m long slides with its base moving away from the wall at $0.5\\,\\mathrm{m\\,s^{-1}}$. How fast does the top move when the base is 3 m from the wall?",
+      "back": "The top moves down at $0.375\\,\\mathrm{m\\,s^{-1}}$, since $\\frac{dy}{dt}=-0.375$ using $x^2+y^2=25$ with $x=3$, $y=4$. The negative sign means the height decreases.",
+      "hint": "Use Pythagoras and differentiate with respect to t.",
+      "sectionId": "s5"
+    }
+  ]
+}

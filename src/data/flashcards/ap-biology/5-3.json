@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "5-3",
+  "topicCode": "5.3",
+  "topicName": "Mendelian genetics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:37.410Z",
+  "cards": [
+    {
+      "id": "1yhjrt6",
+      "kind": "concept",
+      "front": "How does a dominant allele affect the trait in a heterozygote?",
+      "back": "Under complete dominance, a **dominant** allele determines the trait whenever at least one copy is present. A recessive trait shows only when both alleles are recessive.",
+      "hint": "Think about how many copies of the dominant allele are needed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yas0z6",
+      "kind": "term",
+      "front": "What is the difference between genotype and phenotype?",
+      "back": "**Genotype** is an individual's allele combination for a gene; **phenotype** is the observable trait it produces. AA and Aa plants both have purple flowers.",
+      "hint": "One is the genes, the other is what you can see.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07o8q48",
+      "kind": "process",
+      "front": "What are the steps to build a Punnett square for a monohybrid cross?",
+      "back": "1) Write one parent's gamete alleles across the top. 2) Write the other parent's down the side. 3) Fill each box by combining its row and column alleles. 4) Count the genotypes and phenotypes.",
+      "hint": "Start with the gametes, not the offspring.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mv2sw7",
+      "kind": "example",
+      "front": "What is the probability of a white-flowered offspring from an Aa x Aa cross?",
+      "back": "$\\frac{1}{4}=25\\%$. Only the **aa** box is white, out of four equally likely combinations: AA, Aa, Aa, aa.",
+      "hint": "Count the boxes in the Punnett square.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0q994p1",
+      "kind": "formula",
+      "front": "What is the genotype ratio for an Aa x Aa cross?",
+      "back": "$1\\,AA:2\\,Aa:1\\,aa$. These are the expected proportions of each genotype among offspring.",
+      "hint": "Two heterozygous parents, four boxes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "000178e",
+      "kind": "example",
+      "front": "What phenotype ratio results from an Aa x Aa cross, and which genotypes are purple?",
+      "back": "$3$ purple to $1$ white. **AA** and **Aa** are purple; **aa** is white.",
+      "hint": "Group the genotypes by phenotype.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tyeaq1",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a dominant allele is more common or stronger?",
+      "back": "**Dominant** only describes which trait appears when two different alleles are present. It says nothing about how common an allele is or how strong its effect is.",
+      "hint": "Dominant is about which trait shows in a heterozygote.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mna3dh",
+      "kind": "mistake",
+      "front": "Four offspring from an Aa x Aa cross include no white plant. Does this disprove the 3:1 ratio?",
+      "back": "No. Ratios are **probabilities** for each offspring, and each fertilization is a separate event, so small groups can differ from the predicted ratio by chance.",
+      "hint": "Think about what a ratio predicts for a small group.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14ht2vv",
+      "kind": "concept",
+      "front": "Why can't you tell whether a purple-flowered plant is AA or Aa from its appearance alone?",
+      "back": "Both **AA** and **Aa** produce the same purple phenotype, so the observed trait alone cannot distinguish them.",
+      "hint": "Both genotypes have at least one A allele.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sjy0oz",
+      "kind": "term",
+      "front": "What do homozygous and heterozygous mean?",
+      "back": "**Homozygous** means two matching alleles for a gene (AA or aa). **Heterozygous** means two different alleles for a gene (Aa).",
+      "hint": "Homo means same; hetero means different.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hx62hm",
+      "kind": "term",
+      "front": "What is an allele?",
+      "back": "An **allele** is one version of a gene. An individual with a simple Mendelian trait has two alleles for that gene, one from each parent.",
+      "hint": "Alleles are versions of the same gene.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1g3s44t",
+      "kind": "process",
+      "front": "What steps should you follow when interpreting the results of a monohybrid cross?",
+      "back": "1) Identify which genotypes produce each phenotype. 2) Compare the observed offspring with the predicted pattern. 3) Allow for chance differences in small groups. State genotype and phenotype ratios separately.",
+      "hint": "Link genotypes to phenotypes first.",
+      "sectionId": "s4"
+    }
+  ]
+}

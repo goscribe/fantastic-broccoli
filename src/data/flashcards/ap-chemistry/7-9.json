@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "7-9",
+  "topicCode": "7.9",
+  "topicName": "Introduction to Le Chatelier's principle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:03.731Z",
+  "cards": [
+    {
+      "id": "08mat9y",
+      "kind": "term",
+      "front": "What does Le Chatelier's principle predict about a disturbed equilibrium?",
+      "back": "A disturbed equilibrium **shifts** in the direction that partly opposes the imposed change. The response offsets the change but does not fully cancel it.",
+      "hint": "Think about which way the system moves, not whether the change is erased.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0b55zp0",
+      "kind": "concept",
+      "front": "In $\\text{A}\\rightleftharpoons\\text{B}$, what happens when more A is added?",
+      "back": "The equilibrium shifts **right**, toward B. The added A makes the forward reaction faster until the rates match again.",
+      "hint": "Which reaction uses up the substance you added?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d7syr7",
+      "kind": "concept",
+      "front": "Why does decreasing container volume shift a gas equilibrium?",
+      "back": "It raises total pressure, so the system shifts toward the side with **fewer moles** of gas. Count only gaseous coefficients.",
+      "hint": "Compare the gas coefficients on each side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09vjr1p",
+      "kind": "term",
+      "front": "What is dynamic equilibrium?",
+      "back": "A state in which forward and reverse reactions continue at **equal rates**, so concentrations stay constant.",
+      "hint": "Both reactions are still running.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0n132ee",
+      "kind": "concept",
+      "front": "Why does raising temperature favor the endothermic direction?",
+      "back": "The endothermic direction **absorbs** some of the added heat, which partly offsets the temperature rise.",
+      "hint": "Decide whether heat is an input or output for each direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "183wc5l",
+      "kind": "formula",
+      "front": "For $\\text{N}_2(g)+3\\text{H}_2(g)\\rightleftharpoons2\\text{NH}_3(g)$, how many moles of gas are on each side?",
+      "back": "Left: **4** moles of gas per reaction. Right: **2** moles. Compression therefore favors the right side, forming more NH3.",
+      "hint": "Add the gas coefficients on each side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18mv3hp",
+      "kind": "mistake",
+      "front": "Does higher pressure always favor the products?",
+      "back": "**No**. Higher pressure favors whichever side has fewer moles of gas. If gas moles are equal on both sides, a volume change favors neither side.",
+      "hint": "Check the gas-mole totals first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0i5ll3k",
+      "kind": "mistake",
+      "front": "Does a concentration shift completely undo the change you made?",
+      "back": "**No**. The shift only partly opposes the change, so the new concentration may still differ from the original value.",
+      "hint": "Think about what the new equilibrium looks like.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q7pryf",
+      "kind": "mistake",
+      "front": "Does adding a catalyst shift the position of equilibrium?",
+      "back": "**No**. A catalyst speeds both directions equally, so equilibrium is reached sooner but its position does not change.",
+      "hint": "Consider which reactions the catalyst speeds up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nzda88",
+      "kind": "example",
+      "front": "For the exothermic forward formation of ammonia, which way does raising temperature shift the equilibrium?",
+      "back": "**Left**, toward N2 and H2. The reverse reaction absorbs heat, so less ammonia forms.",
+      "hint": "Identify the heat-absorbing direction first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1eurd3g",
+      "kind": "process",
+      "front": "What steps do you follow to predict a concentration shift?",
+      "back": "1) Name the substance added or removed. 2) Find the direction that uses up or replaces it. 3) State that this direction is **favored**.",
+      "hint": "Start with the substance that was changed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vjcv4e",
+      "kind": "term",
+      "front": "What is an endothermic direction?",
+      "back": "The reaction direction that **absorbs** heat from its surroundings. The exothermic direction, by contrast, releases heat.",
+      "hint": "Think about the direction of heat flow.",
+      "sectionId": "s4"
+    }
+  ]
+}

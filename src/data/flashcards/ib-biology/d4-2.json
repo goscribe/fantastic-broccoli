@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "d4-2",
+  "topicCode": "D4.2",
+  "topicName": "Stability and change",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:08.491Z",
+  "cards": [
+    {
+      "id": "1sliqik",
+      "kind": "concept",
+      "front": "What does biological stability mean in a living system?",
+      "back": "**Stability** means a system keeps its main features or functions over time. It allows variation, so populations can still rise and fall within limits.",
+      "hint": "Think about what persists, not what stays exactly the same.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zsgtfh",
+      "kind": "concept",
+      "front": "How does negative feedback help keep a variable stable?",
+      "back": "In **negative feedback**, the response opposes the initial change. This keeps a variable within a range rather than at one exact value.",
+      "hint": "Focus on what the response does to the original change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j8hune",
+      "kind": "concept",
+      "front": "What does resilience mean for an ecosystem after a disturbance?",
+      "back": "**Resilience** is an ecosystem's capacity to recover its functioning after a disturbance. Recovery depends on surviving organisms, available resources and species' ability to return.",
+      "hint": "Think about what happens after the disturbance, not during it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sawkv1",
+      "kind": "term",
+      "front": "What is a feedback mechanism?",
+      "back": "A **feedback mechanism** links a change in a system to a response caused by that change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1erby6x",
+      "kind": "term",
+      "front": "What is an ecosystem disturbance?",
+      "back": "An **ecosystem disturbance** is an event or pressure that changes organisms or their environment.",
+      "hint": "Drought, disease and fire are examples.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0asndfk",
+      "kind": "term",
+      "front": "What is habitat fragmentation?",
+      "back": "**Habitat fragmentation** divides a continuous habitat into smaller, separated areas.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lu0yrd",
+      "kind": "term",
+      "front": "What is pollution in an ecological context?",
+      "back": "**Pollution** is the introduction of harmful substances or energy into an environment.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09wwubg",
+      "kind": "mistake",
+      "front": "A student says negative feedback means a harmful response. What is wrong with this?",
+      "back": "**Negative** describes the response opposing the original change, not a harmful outcome.",
+      "hint": "Consider what the word negative refers to.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11ihr7w",
+      "kind": "mistake",
+      "front": "A student says a stable ecosystem never changes. Why is this wrong?",
+      "back": "Stability allows variation: populations grow and shrink and organisms enter and leave, while the main features persist.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ldgnw0",
+      "kind": "process",
+      "front": "Describe the linked responses when a prey population rises.",
+      "back": "More prey gives predators more food, so predator numbers may rise. Higher predation then lowers prey numbers, which reduces food for predators.",
+      "hint": "Work through the steps in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12lll5h",
+      "kind": "process",
+      "front": "How can a disturbance affect an ecosystem beyond the population it first hits?",
+      "back": "It reduces a population or alters resources, then affects other species through feeding relationships and competition.",
+      "hint": "Trace the effect through resources, populations and interactions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sumo16",
+      "kind": "concept",
+      "front": "What conditions must an ecosystem maintain to stay stable?",
+      "back": "A continuous energy supply, recycling of nutrients, genetic diversity, and climatic variables such as temperature and rainfall kept within organisms' tolerance limits.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11gawb8",
+      "kind": "concept",
+      "front": "Why might a severe or repeated disturbance prevent recovery?",
+      "back": "It can stop the ecosystem returning to its previous state, because survivors or resources may be insufficient. Resistance and recovery both matter for stability.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0y24336",
+      "kind": "mistake",
+      "front": "A student says any human activity has identical effects everywhere. Why is this wrong?",
+      "back": "Outcomes depend on which species and interactions are affected, so the same activity can have different effects in different places.",
+      "sectionId": "s4"
+    }
+  ]
+}

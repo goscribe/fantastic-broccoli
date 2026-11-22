@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "2-4",
+  "topicCode": "2.4",
+  "topicName": "Membrane permeability",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:22.874Z",
+  "cards": [
+    {
+      "id": "183f1r8",
+      "kind": "concept",
+      "front": "What makes a membrane selectively permeable rather than sealed?",
+      "back": "The **hydrophobic core** of the bilayer lets some substances cross more readily than others. Crossing depends on size, polarity and charge, not on whether the cell needs the substance.",
+      "hint": "Think about what the middle of the membrane is made of.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ov6ymx",
+      "kind": "concept",
+      "front": "Why do charged ions struggle to cross the lipid bilayer?",
+      "back": "Their charge interacts favorably with water but not with the **hydrophobic core**, so they cross the lipids very poorly, even when they are small.",
+      "hint": "Size alone does not decide this.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15d7crw",
+      "kind": "process",
+      "front": "What steps should you follow to predict whether a substance will cross a membrane?",
+      "back": "First check the substance's **size, polarity and charge** for direct crossing through the lipids. Then check whether the membrane has a suitable **transport protein**.",
+      "hint": "There are two stages: lipids first, then proteins.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dz0n9e",
+      "kind": "term",
+      "front": "What is a phospholipid bilayer?",
+      "back": "A **double layer of phospholipids** with water-facing surfaces and an inward-facing **hydrophobic core** made of fatty acid tails.",
+      "hint": "Two layers, with tails meeting in the middle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1n9p4mz",
+      "kind": "term",
+      "front": "What is a channel protein?",
+      "back": "A **membrane protein** that forms a selective passage through the bilayer for substances with suitable properties, such as some ions.",
+      "hint": "Think of a passage or tunnel.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mcskia",
+      "kind": "term",
+      "front": "What is a carrier protein?",
+      "back": "A **membrane protein** that binds a substance and changes shape to move it across the membrane.",
+      "hint": "The key action is a shape change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00gjj76",
+      "kind": "concept",
+      "front": "Why does oxygen cross the lipid bilayer readily while glucose crosses very poorly?",
+      "back": "Oxygen is small and **nonpolar**, so it dissolves in the hydrophobic core. Glucose is larger and polar, so it crosses the lipids very poorly.",
+      "hint": "Compare size and polarity.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "180dd5h",
+      "kind": "concept",
+      "front": "How does water cross a membrane, and what speeds it up?",
+      "back": "Water crosses the lipid bilayer **slowly**. **Aquaporins**, which are channel proteins, increase water permeability by offering a faster route.",
+      "hint": "Gases cross faster than water through the lipids.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jejouz",
+      "kind": "mistake",
+      "front": "A student says a small ion will cross the bilayer easily because it is small. What is wrong?",
+      "back": "**Small does not always mean permeable.** The ion's charge is a strong barrier, so it still crosses the lipid bilayer very poorly.",
+      "hint": "Size is not the only factor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fk6yg6",
+      "kind": "mistake",
+      "front": "A student says glucose cannot cross the membrane because it cannot cross the lipids. What is wrong?",
+      "back": "Inability to cross the **lipids** does not mean it cannot cross the membrane. A suitable **carrier protein** can move glucose across.",
+      "hint": "Check for a protein before deciding.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vlbtz9",
+      "kind": "concept",
+      "front": "Why can two membranes differ in permeability even when their phospholipids are similar?",
+      "back": "They contain different **transport proteins**. Protein selectivity depends on size, shape and charge, so the protein content changes which substances cross.",
+      "hint": "Look at what else is embedded in the membrane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hz215v",
+      "kind": "concept",
+      "front": "Why is the permeability barrier useful to a cell?",
+      "back": "It helps the cell maintain **different conditions** on either side of a membrane, with embedded proteins creating selective routes through the barrier.",
+      "hint": "Think about the inside and outside of the cell.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1niczjt",
+      "kind": "mistake",
+      "front": "A student says adding a protein makes a membrane equally permeable to every substance. Why is this wrong?",
+      "back": "A protein does not make a membrane **equally permeable** to everything. Each transport protein is **selective** for particular substances.",
+      "hint": "Think about selectivity.",
+      "sectionId": "s3"
+    }
+  ]
+}

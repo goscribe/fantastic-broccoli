@@ -24,6 +24,8 @@ import { splitInline } from "@/lib/notes-public/inline-split";
 import { topicKey } from "@/lib/notes-public/progress";
 import { readingMinutes } from "@/lib/notes-public/reading";
 import { cn } from "@/lib/utils";
+import { Flashcards } from "@/components/notes-public/flashcards";
+import type { FlashcardSet } from "@/lib/notes-public/flashcard-deck";
 
 /**
  * One topic's note page: the subject band, the note (numbered sections,
@@ -96,7 +98,20 @@ function questionCard(q: PublicQuestion, number: number, placement: "inline" | "
   );
 }
 
-export function TopicView({ course, unit, data, app }: { course: PublicCourse; unit: PublicUnit; data: PublicTopic; app?: AppReaderProps }) {
+export function TopicView({
+  course,
+  unit,
+  data,
+  app,
+  flashcards,
+}: {
+  course: PublicCourse;
+  unit: PublicUnit;
+  data: PublicTopic;
+  app?: AppReaderProps;
+  /** The topic's free flashcards, rendered on the server (public page). The in-app reader leaves it out and the deck fetches its cards. */
+  flashcards?: FlashcardSet | null;
+}) {
   const { topic, note, questions } = data;
   const paths = app?.paths ?? PUBLIC_NOTE_PATHS;
   // The two-column layout (note + "On this page" rail) needs ~1050px of content: the app shell's sidebar takes 256px of the window first.
@@ -123,6 +138,7 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
     ? [
         ...note.content.sections.map((s) => ({ anchor: `sec-${s.id}`, sectionId: s.id, kind: "section" as const, label: <RichText text={s.heading} /> })),
         ...(note.content.recall.length ? [{ anchor: "sec-recall", kind: "recall" as const, label: "Check your recall" }] : []),
+        ...(flashcards?.total ? [{ anchor: "flashcards", kind: "flashcards" as const, label: `Flashcards: ${flashcards.total} cards` }] : []),
         ...(questions.length ? [{ anchor: "practice", kind: "practice" as const, label: `Practice: ${questions.length} questions` }] : []),
       ]
     : [];
@@ -265,6 +281,17 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
                 </section>
                 {app ? app.emptyNote : <SignedInNoteFallback courseId={course.id} topicId={topic.id} />}
               </>
+            )}
+
+            {!locked && (
+              <Flashcards
+                courseId={course.id}
+                topicId={topic.id}
+                topicName={topic.name}
+                initial={app ? undefined : (flashcards ?? null)}
+                signupHref={signupHref}
+                loginHref={`/login?redirect=${encodeURIComponent(`${path}#flashcards`)}`}
+              />
             )}
 
             {questions.length > 0 && !locked && (

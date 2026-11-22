@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "a-2",
+  "topicCode": "A.2",
+  "topicName": "Forces and momentum",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:29:45.502Z",
+  "cards": [
+    {
+      "id": "04tj11s",
+      "kind": "formula",
+      "front": "Which equation links the resultant force on an object to its acceleration?",
+      "back": "$\\sum\\vec F=m\\vec a$: the **resultant force** equals mass times acceleration, and the acceleration points in the same direction as the resultant force.",
+      "hint": "This is Newton's second law.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14sq4dr",
+      "kind": "formula",
+      "front": "What is the impulse of a resultant force, and how is it linked to momentum?",
+      "back": "**Impulse** equals the change in momentum: $\\vec J=\\Delta\\vec p$. For a constant force, $\\vec J=\\vec F\\Delta t$, measured in $\\mathrm{N\\,s}$.",
+      "hint": "Think about what a force does over a period of time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s2pxn5",
+      "kind": "concept",
+      "front": "Why does total momentum stay constant in a collision in a closed system?",
+      "back": "The objects exert **equal and opposite forces** for the same time, so their impulses cancel. Any momentum lost by one object is gained by the other.",
+      "hint": "Consider third-law force pairs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17rrfm0",
+      "kind": "term",
+      "front": "What is a force pair?",
+      "back": "Two **equal and opposite forces** that two interacting objects exert on each other. They act on different objects, so they never cancel on one free-body diagram.",
+      "hint": "Newton's third law.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19ktn28",
+      "kind": "process",
+      "front": "What are the steps for drawing a free-body diagram?",
+      "back": "**Name the object first**, then draw each external force on it as an arrow labelled with its type. Include only forces acting on that object, and do not draw velocity as a force.",
+      "hint": "Start with the object, not the forces.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qa8a5l",
+      "kind": "concept",
+      "front": "When is an object in equilibrium?",
+      "back": "When its **resultant force** is zero. It may be stationary or moving at constant velocity.",
+      "hint": "Being stationary is not the only option.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0s5n1mx",
+      "kind": "mistake",
+      "front": "A student says two equal and opposite forces acting on a single object are a third-law pair. What is wrong?",
+      "back": "Third-law forces act on **different objects**, so they cannot cancel on one diagram. Forces that balance on one object are not a third-law pair.",
+      "hint": "Count how many objects are involved.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pdc3bk",
+      "kind": "mistake",
+      "front": "A student adds the magnitudes of two momenta to find the change in momentum. What should they do instead?",
+      "back": "Use $\\Delta p=p_{\\mathrm{final}}-p_{\\mathrm{initial}}$ with a chosen positive direction. Momentum is a **vector**, so the signs matter.",
+      "hint": "Momentum has a direction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14u663x",
+      "kind": "example",
+      "front": "A 2 kg object moving right at 3 m s⁻¹ hits a stationary 1 kg object and they stick together. What is their final velocity?",
+      "back": "**2 m s⁻¹** to the right. Initial momentum is 6 kg m s⁻¹, so $(2+1)v=6$.",
+      "hint": "Take right as positive and conserve momentum.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14th2gz",
+      "kind": "example",
+      "front": "A 2 kg object slows from 5 m s⁻¹ to 2 m s⁻¹ in the same direction. What is the impulse on it?",
+      "back": "$-6\\,\\mathrm{N\\,s}$, opposite to the motion, since $\\Delta p=2(2-5)=-6\\,\\mathrm{kg\\,m\\,s^{-1}}$.",
+      "hint": "Take the direction of motion as positive.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cf5gaz",
+      "kind": "term",
+      "front": "What is a perfectly inelastic collision?",
+      "back": "A collision in which the objects **stick together** and share one final velocity. Momentum is conserved, but kinetic energy decreases.",
+      "hint": "Think about what happens to the objects afterwards.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mb3pdu",
+      "kind": "concept",
+      "front": "How can you tell whether a collision is inelastic?",
+      "back": "Compare the **total kinetic energy** before and after. If it decreases, the collision is inelastic. Do not use a loss of momentum, because momentum is conserved in a closed system.",
+      "hint": "Kinetic energy is a scalar.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0l9q6vt",
+      "kind": "mistake",
+      "front": "A student says an inelastic collision means momentum is lost. What is the correct idea?",
+      "back": "**Momentum is still conserved** in a closed system. Inelastic means total kinetic energy decreases, with energy transferred into forms such as internal energy or sound.",
+      "hint": "Separate momentum from kinetic energy.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08l2re0",
+      "kind": "term",
+      "front": "What is a closed system?",
+      "back": "A system with **no net external force** acting on it during the interaction considered, so its total momentum remains constant.",
+      "hint": "Look at external forces.",
+      "sectionId": "s4"
+    }
+  ]
+}

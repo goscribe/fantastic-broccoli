@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "2-8",
+  "topicCode": "2.8",
+  "topicName": "Spring forces",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:34.237Z",
+  "cards": [
+    {
+      "id": "0hmrd10",
+      "kind": "formula",
+      "front": "What is Hooke's law, and what does each symbol in $F_s = -k\\,\\Delta x$ mean?",
+      "back": "The **spring force** is proportional to the change in length: $k$ is the spring constant, $\\Delta x$ is the change from natural length, and the minus sign means the force opposes the displacement.",
+      "hint": "Think about what changes when a spring is stretched.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kg8bw3",
+      "kind": "concept",
+      "front": "Which way does a spring force point compared with the natural length?",
+      "back": "**Toward** the natural length. A stretched spring pulls inward and a compressed spring pushes outward, so it always tries to restore the spring to its relaxed length.",
+      "hint": "Think of it as a restoring force.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wtzqat",
+      "kind": "concept",
+      "front": "What does the spring constant $k$ tell you about a spring?",
+      "back": "It measures **stiffness**: the force needed per meter of stretch, in N/m. A large $k$ means a stiff spring with little stretch per newton.",
+      "hint": "Compare a pen spring with a car spring.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jalk5j",
+      "kind": "term",
+      "front": "What is the natural length of a spring?",
+      "back": "The **relaxed length**, where the spring is neither stretched nor compressed, so the spring force is zero.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cjcouy",
+      "kind": "term",
+      "front": "What is the elastic limit of a spring?",
+      "back": "The **largest** stretch or compression from which the spring still returns to its natural length when released. Beyond it, force no longer grows in proportion to the stretch.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19r31mm",
+      "kind": "process",
+      "front": "What are the steps to find the force from a spring's stretch or compression?",
+      "back": "1) Convert the change in length to **meters**. 2) Use $F = k|\\Delta x|$ with $\\Delta x$ measured from natural length. 3) Substitute and state the direction: the force opposes the displacement.",
+      "hint": "Start with the units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jwvuff",
+      "kind": "mistake",
+      "front": "A student uses the total length of a spring as $\\Delta x$. What is wrong?",
+      "back": "**$\\Delta x$** is the change from natural length, not the total length. A spring at its natural length has $\\Delta x = 0$, so its force is zero.",
+      "hint": "Where does the spring start?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0n7sek1",
+      "kind": "mistake",
+      "front": "A student says the spring constant changes when they stretch the spring farther. Why is this wrong?",
+      "back": "The spring constant belongs to the **spring** and stays fixed. Stretching it farther changes the force, not $k$.",
+      "hint": "Is $k$ a property of the spring or of the stretch?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1x63cx9",
+      "kind": "mistake",
+      "front": "A student puts 8.0 cm straight into $F = k|\\Delta x|$ with $k$ in N/m. What goes wrong?",
+      "back": "**Units**: convert to meters first, so 8.0 cm becomes 0.080 m. Using 8.0 gives a force 100 times too large.",
+      "hint": "Check the unit of $k$ against the unit of $\\Delta x$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ds7m5i",
+      "kind": "example",
+      "front": "A spring with $k = 250\\ \\mathrm{N/m}$ is compressed by 8.0 cm from its natural length. What force does it exert?",
+      "back": "**20 N**, pushing outward. Convert first: $0.080\\ \\mathrm{m}$, then $F = (250)(0.080) = 20\\ \\mathrm{N}$.",
+      "hint": "Convert the centimeters first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xfw911",
+      "kind": "example",
+      "front": "A 0.50 kg mass hangs at rest from a vertical spring with $k = 98\\ \\mathrm{N/m}$. How far does the spring stretch?",
+      "back": "**0.050 m**, or 5.0 cm. At rest the spring force balances the weight, so $\\Delta x = mg/k = 4.9/98$.",
+      "hint": "Use $g = 9.8\\ \\mathrm{m/s^2}$ and find the weight first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tpch2a",
+      "kind": "concept",
+      "front": "Why does a hanging mass at rest satisfy $k\\,\\Delta x = mg$?",
+      "back": "The **forces balance** when the mass is at rest or moving at constant velocity, so the spring force equals the weight.",
+      "hint": "Which two forces act on the mass?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zmz9y4",
+      "kind": "formula",
+      "front": "How do you rearrange Hooke's law to find the spring constant, and what is its unit?",
+      "back": "$k = \\frac{F}{|\\Delta x|}$, with $k$ in **N/m** when $F$ is in newtons and $\\Delta x$ is in meters.",
+      "hint": "Divide the force by the stretch.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d0scng",
+      "kind": "concept",
+      "front": "Why does Hooke's law have a negative sign?",
+      "back": "It is a **restoring** force, pointing opposite the displacement from natural length, so its sign is opposite to the sign of $\\Delta x$.",
+      "hint": "Which way does the spring pull when it is stretched?",
+      "sectionId": "s2"
+    }
+  ]
+}

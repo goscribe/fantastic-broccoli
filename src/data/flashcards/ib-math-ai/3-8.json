@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-8",
+  "topicCode": "3.8",
+  "topicName": "Unit circle and identities",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:44.048Z",
+  "cards": [
+    {
+      "id": "107p8yj",
+      "kind": "concept",
+      "front": "What do the coordinates of the point at angle θ on the unit circle tell you?",
+      "back": "The **horizontal** coordinate is cos θ and the **vertical** coordinate is sin θ, so the point is (cos θ, sin θ). Both lie between -1 and 1 because the radius is 1.",
+      "hint": "Draw a line from the origin at angle θ and see where it meets the circle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07jnok4",
+      "kind": "formula",
+      "front": "What equation do sin θ and cos θ always satisfy, and why?",
+      "back": "$\\sin^2\\theta+\\cos^2\\theta=1$. The point $(\\cos\\theta,\\sin\\theta)$ lies on the **unit circle**, so it satisfies $x^2+y^2=1$. It is an identity, true for every θ.",
+      "hint": "Substitute the coordinates of the point into x² + y² = 1.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1abaen3",
+      "kind": "concept",
+      "front": "How does the quadrant of an angle decide the signs of sin θ and cos θ?",
+      "back": "The signs come from the **coordinates** of the point. In the second quadrant the x-coordinate is negative, so cos θ is negative, and the y-coordinate is positive, so sin θ is positive.",
+      "hint": "Check which sign each coordinate has in each of the four regions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "181wj0o",
+      "kind": "term",
+      "front": "What is a radian?",
+      "back": "A **radian** is the angle at the centre of a circle subtended by an arc equal in length to the radius. A full turn is 2π radians.",
+      "hint": "Compare the arc length with the radius.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i56lqz",
+      "kind": "formula",
+      "front": "How is tan θ defined in terms of sin θ and cos θ, and when is it undefined?",
+      "back": "$\\tan\\theta=\\frac{\\sin\\theta}{\\cos\\theta}$. It is **undefined** when $\\cos\\theta=0$, because the line from the origin to P is vertical and has no gradient.",
+      "hint": "Tangent is the gradient of the line from the origin to P.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xzowt5",
+      "kind": "example",
+      "front": "Given $\\sin\\theta=\\frac{3}{5}$ with θ in the second quadrant, find $\\cos\\theta$ and $\\tan\\theta$.",
+      "back": "$\\cos\\theta=-\\frac{4}{5}$ and $\\tan\\theta=-\\frac{3}{4}$. Use $\\cos^2\\theta=1-\\frac{9}{25}=\\frac{16}{25}$, then take the negative root because cosine is negative in the second quadrant.",
+      "hint": "Start with $\\sin^2\\theta+\\cos^2\\theta=1$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0w3e44z",
+      "kind": "mistake",
+      "front": "A student says cos θ < 0 means θ is a negative angle. What is wrong?",
+      "back": "A negative cosine does **not** mean a negative angle. It means the point lies to the left of the y-axis, which is a property of the quadrant.",
+      "hint": "Think about where the point is, not the sign of the angle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i7pr9z",
+      "kind": "example",
+      "front": "What are the exact values of $\\sin\\frac{\\pi}{3}$ and $\\cos\\frac{\\pi}{3}$?",
+      "back": "$\\sin\\frac{\\pi}{3}=\\frac{\\sqrt{3}}{2}$ and $\\cos\\frac{\\pi}{3}=\\frac{1}{2}$. Learn these as points on the circle, since sine and cosine swap between $\\frac{\\pi}{6}$ and $\\frac{\\pi}{3}$.",
+      "hint": "Read the coordinates of the point at 60 degrees.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nse9d0",
+      "kind": "process",
+      "front": "What steps simplify $\\frac{1-\\cos^2\\theta}{\\tan\\theta}$ to a single term?",
+      "back": "Replace $1-\\cos^2\\theta$ with $\\sin^2\\theta$, then replace $\\tan\\theta$ with $\\frac{\\sin\\theta}{\\cos\\theta}$, then cancel one factor of $\\sin\\theta$. The answer is $\\sin\\theta\\cos\\theta$.",
+      "hint": "Name the identity you use on each line.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1amomrs",
+      "kind": "mistake",
+      "front": "Is $\\sin^2\\theta$ the same as $\\sin(\\theta^2)$?",
+      "back": "No. **$\\sin^2\\theta$** means $(\\sin\\theta)^2$, the square of the sine, not the sine of a square. Write it as $(\\sin\\theta)^2$ before you simplify.",
+      "hint": "Brackets make the meaning clear.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1eqhbp1",
+      "kind": "process",
+      "front": "How can you check that a simplified trigonometric expression is correct?",
+      "back": "Substitute a specific angle, such as $\\theta=\\frac{\\pi}{6}$, into both the original and the simplified expression and compare the values. A quick numerical check catches most algebra slips.",
+      "hint": "Pick an angle whose exact values you know.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0wyjuyc",
+      "kind": "concept",
+      "front": "Why do the graphs of sine and cosine repeat?",
+      "back": "Adding $2\\pi$ turns the point once round the circle and back to where it started, so $\\sin(\\theta+2\\pi)=\\sin\\theta$ and $\\cos(\\theta+2\\pi)=\\cos\\theta$.",
+      "hint": "What does one full turn do to the point?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "12w66ol",
+      "kind": "term",
+      "front": "What is an identity in trigonometry?",
+      "back": "An **identity** is an equation that is true for every value of the variable for which both sides are defined, such as $\\sin^2\\theta+\\cos^2\\theta=1$.",
+      "hint": "Contrast it with an equation that holds only for some values.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-19",
+  "topicCode": "4.19",
+  "topicName": "Transition matrices and Markov chains",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:07.420Z",
+  "cards": [
+    {
+      "id": "1xjlqkc",
+      "kind": "term",
+      "front": "What is a Markov chain?",
+      "back": "A sequence of steps between **states** in which the next state depends only on the current state, with probabilities that stay the same from step to step.",
+      "hint": "Does yesterday's weather add anything once you know today's?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06e4vyg",
+      "kind": "concept",
+      "front": "How is a transition matrix $\\mathbf{T}$ laid out, and what must each column add to?",
+      "back": "Each **column** holds the probabilities of moving out of one state, and each row is a state moved to. Every column adds to 1.",
+      "hint": "Columns are for the state you leave.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0n2lxee",
+      "kind": "formula",
+      "front": "What gives the state vector after $n$ steps, starting from $\\mathbf{s}_0$?",
+      "back": "$\\mathbf{s}_n=\\mathbf{T}^{n}\\mathbf{s}_0$. Each single step is $\\mathbf{s}_{n+1}=\\mathbf{T}\\mathbf{s}_n$, with the **matrix first**.",
+      "hint": "Each step multiplies by the matrix.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cwefch",
+      "kind": "term",
+      "front": "What is a transition diagram?",
+      "back": "A diagram of **states** joined by arrows, each labelled with the probability of that move. The probabilities leaving any state add to 1.",
+      "hint": "It shows the same information as the matrix.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1px2l9o",
+      "kind": "process",
+      "front": "What are the steps to find the state vector after several days?",
+      "back": "1) Write $\\mathbf{s}_0$ with a 1 for the known start. 2) Use a calculator for $\\mathbf{T}^{n}$. 3) Multiply by $\\mathbf{s}_0$. Check the entries add to 1.",
+      "hint": "The starting state is a column with one entry equal to 1.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q95ng6",
+      "kind": "example",
+      "front": "Sunny after a sunny day has chance 0.8, rainy after a rainy day 0.4, and today is sunny. What is the chance of sunny after 3 days?",
+      "back": "**0.688**. The rainy chance is 0.312, found from $\\mathbf{s}_3=\\mathbf{T}^{3}\\mathbf{s}_0$.",
+      "hint": "Use $\\mathbf{s}_0=\\begin{pmatrix}1\\\\0\\end{pmatrix}$ and a calculator for $\\mathbf{T}^{3}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19nkf5k",
+      "kind": "mistake",
+      "front": "A student builds a matrix whose rows add to 1 instead of its columns. What is wrong?",
+      "back": "The matrix is the **wrong way round**. Columns must add to 1, because each column shows where the chances from one state go.",
+      "hint": "Check which direction the probabilities leave a state.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0i6mm1t",
+      "kind": "concept",
+      "front": "What is a steady state, and which equation does it satisfy?",
+      "back": "The **steady state** $\\mathbf{s}$ satisfies $\\mathbf{T}\\mathbf{s}=\\mathbf{s}$, so the probabilities no longer change from one step to the next.",
+      "hint": "Think about what happens to the vector after one more step.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bj0y9o",
+      "kind": "example",
+      "front": "Find the steady state of $\\mathbf{T}=\\begin{pmatrix}0.8&0.4\\\\0.2&0.6\\end{pmatrix}$, given its entries add to 1.",
+      "back": "$\\mathbf{s}=\\begin{pmatrix}\\frac{2}{3}\\\\\\frac{1}{3}\\end{pmatrix}\\approx\\begin{pmatrix}0.667\\\\0.333\\end{pmatrix}$, from $a=2b$ and $a+b=1$.",
+      "hint": "Write $\\mathbf{T}\\mathbf{s}=\\mathbf{s}$ and use $a+b=1$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dsp77t",
+      "kind": "term",
+      "front": "What makes a Markov chain regular?",
+      "back": "Some power of **$\\mathbf{T}$** has only positive entries. A regular chain settles to a steady state that does not depend on the starting vector.",
+      "hint": "Look for a power of T with no zero entries.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pjmqut",
+      "kind": "concept",
+      "front": "Why does a state that can never be left stop a chain being regular?",
+      "back": "It is an **absorbing state**, with probability 1 of staying. Its long-term behaviour can then depend on where the chain starts.",
+      "hint": "Consider what happens once the chain enters that state.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hxcb7i",
+      "kind": "process",
+      "front": "What are the steps to model a real process with a Markov chain?",
+      "back": "1) Define the states clearly. 2) Build $\\mathbf{T}$, stating which way the columns run. 3) Use powers or the steady state. 4) Interpret the answer in the problem's words.",
+      "hint": "Finish by describing the result in context.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06p1387",
+      "kind": "concept",
+      "front": "What is one key limitation of using a Markov chain to model real behaviour?",
+      "back": "It assumes the probabilities **never change**, so real behaviour may differ and long-term predictions can be unreliable.",
+      "hint": "Think about what might alter customers' choices, such as a price change.",
+      "sectionId": "s5"
+    }
+  ]
+}

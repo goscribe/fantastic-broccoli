@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "13-2",
+  "topicCode": "13.2",
+  "topicName": "Images formed by mirrors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:34.317Z",
+  "cards": [
+    {
+      "id": "0m8ye6l",
+      "kind": "concept",
+      "front": "Which type of mirror can form a real image, and under what condition?",
+      "back": "Only a **concave** mirror can form a real image, and only when the object is beyond the focal point. A real image is where reflected rays actually cross, so a screen can catch it.",
+      "hint": "Think about where the reflected rays truly meet.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0eymrcc",
+      "kind": "formula",
+      "front": "What is the mirror equation, and what does each symbol mean?",
+      "back": "$\\frac{1}{s_o}+\\frac{1}{s_i}=\\frac{1}{f}$, where $s_o$ is object distance, $s_i$ is image distance and $f$ is focal length.",
+      "hint": "Each term is a reciprocal of a distance.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1yon50c",
+      "kind": "process",
+      "front": "How do you locate the image of an object point using principal rays?",
+      "back": "Draw rays from the top of the object: one parallel to the axis reflects through the focal point; one through the focal point reflects parallel to the axis; one through C reflects straight back. Where the reflected rays meet is the image.",
+      "hint": "Two rays are enough; the third checks your work.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bi3qug",
+      "kind": "term",
+      "front": "What is a real image?",
+      "back": "A **real image** is formed where reflected rays actually cross, so it can be projected onto a screen.",
+      "hint": "Light really passes through this point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0il44vl",
+      "kind": "term",
+      "front": "What is a virtual image?",
+      "back": "A **virtual image** is formed where the backward extensions of reflected rays cross. No light passes through it, so a screen cannot catch it.",
+      "hint": "Look for backward extensions behind the mirror.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0axjjvx",
+      "kind": "concept",
+      "front": "What three features does a plane mirror's image have?",
+      "back": "The image is upright, the same size as the object, and as far behind the mirror as the object is in front. It also appears reversed left to right.",
+      "hint": "Think about your reflection in a bathroom mirror.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "031t7aw",
+      "kind": "formula",
+      "front": "How is the focal length of a spherical mirror related to its radius?",
+      "back": "$f=\\frac{R}{2}$, where $R$ is the radius of the sphere the mirror is part of. $f$ is the distance from the mirror to the focal point.",
+      "hint": "Think about the sphere the mirror is cut from.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "017igtj",
+      "kind": "formula",
+      "front": "How is magnification defined, and what does its sign tell you?",
+      "back": "$M=\\frac{h_i}{h_o}=-\\frac{s_i}{s_o}$. A negative $M$ means the image is inverted; a positive $M$ means it is upright.",
+      "hint": "Compare image height with object height.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0pshj1d",
+      "kind": "mistake",
+      "front": "A concave mirror always magnifies the object, so the image is always larger. True or false?",
+      "back": "**False.** With the object beyond C, a concave mirror forms a smaller image. Only some object positions give a larger image.",
+      "hint": "Check the table for each object position.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11aji7f",
+      "kind": "mistake",
+      "front": "A virtual image is imaginary and cannot be seen. Is that right?",
+      "back": "**No.** A virtual image can be seen and photographed. It just cannot be projected onto a screen, because no light actually passes through it.",
+      "hint": "Think about what you see in a mirror.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wryutn",
+      "kind": "example",
+      "front": "An object is 12 cm from a concave mirror of focal length 8.0 cm. What are the image distance and magnification?",
+      "back": "$s_i=24\\,\\mathrm{cm}$ in front of the mirror, so the image is real. $M=-2.0$, so it is inverted and twice the object's height.",
+      "hint": "Start by rearranging to 1/s_i = 1/f - 1/s_o.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0u9fkfd",
+      "kind": "example",
+      "front": "An object is 30 cm from a convex mirror of focal length $-10\\,\\mathrm{cm}$. What is the image distance, and is the image real or virtual?",
+      "back": "$s_i=-7.5\\,\\mathrm{cm}$. The negative sign means the image is **virtual**, sitting behind the mirror.",
+      "hint": "Keep the negative sign on f for a convex mirror.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0j9u3zn",
+      "kind": "concept",
+      "front": "What kind of image does a convex mirror always form?",
+      "back": "A convex mirror always forms a **virtual, upright, smaller** image. Its reflected rays spread out, so they only appear to come from a point behind the mirror.",
+      "hint": "Convex mirrors spread light out.",
+      "sectionId": "s4"
+    }
+  ]
+}

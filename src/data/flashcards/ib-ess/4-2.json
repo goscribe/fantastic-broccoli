@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "4-2",
+  "topicCode": "4.2",
+  "topicName": "Water access, use and security",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:41.542Z",
+  "cards": [
+    {
+      "id": "0pbgh63",
+      "kind": "concept",
+      "front": "What does water security mean, and why is a nearby river not enough to guarantee it?",
+      "back": "**Water security** is reliable access to enough safe water for health, food and livelihoods. A nearby river does not guarantee it, because polluted or unaffordable water is not secure.",
+      "hint": "Think about reliability, safety and cost.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04qbdtg",
+      "kind": "concept",
+      "front": "What is the difference between physical and economic water scarcity?",
+      "back": "**Physical water scarcity** means a region lacks enough water to meet demand. **Economic water scarcity** means water exists but people lack the money, pipes or institutions to use it.",
+      "hint": "Ask whether the water actually exists in the region.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hs7404",
+      "kind": "concept",
+      "front": "Why does scarcity grow when water is abstracted too quickly?",
+      "back": "**Abstraction** is removing water from a source. When it runs faster than rain refills the source, river flow shrinks and groundwater levels fall.",
+      "hint": "Compare the rate of removal with the rate of refilling.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14l75yy",
+      "kind": "term",
+      "front": "What is an aquifer?",
+      "back": "A **layer of rock** that stores groundwater, which people reach by digging wells or drilling boreholes.",
+      "hint": "Think of rock that holds water underground.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09hp84r",
+      "kind": "formula",
+      "front": "How do you calculate the mean daily water use per person?",
+      "back": "$\\text{mean use} = \\frac{\\text{total volume used}}{\\text{population}}$, giving units of $\\mathrm{dm^{3}\\,person^{-1}\\,day^{-1}}$ when the volume is in $\\mathrm{dm^{3}}$ per day.",
+      "hint": "Divide the total volume by the number of people.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l8ogic",
+      "kind": "example",
+      "front": "A town of $4.0\\times10^{4}$ people uses $6.0\\times10^{6}\\,\\mathrm{dm^{3}}$ of water in one day. What is the mean use per person?",
+      "back": "**$1.5\\times10^{2}\\,\\mathrm{dm^{3}\\,person^{-1}\\,day^{-1}}$**, from $\\frac{6.0\\times10^{6}}{4.0\\times10^{4}}$.",
+      "hint": "Divide the volume by the population, then handle the powers of ten.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cmtije",
+      "kind": "term",
+      "front": "What is virtual water?",
+      "back": "The **total water used to produce a traded good**. A country that imports water-intensive crops uses less of its own water.",
+      "hint": "Think about water hidden inside traded products.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ue31ka",
+      "kind": "mistake",
+      "front": "Does a wet climate mean a region has no economic water scarcity?",
+      "back": "**No.** Economic scarcity can occur in places with plenty of rain, because households may lack taps, pipes or the money to use the water.",
+      "hint": "Consider what households need besides rainfall.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mfvda3",
+      "kind": "concept",
+      "front": "Why does diet affect a country's water use?",
+      "back": "**Meat** needs far more water to produce than grain, so diets rich in meat raise the water needed per person.",
+      "hint": "Compare producing animal protein with growing crops.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03k943a",
+      "kind": "concept",
+      "front": "How can pumping near the coast harm a freshwater aquifer?",
+      "back": "It can cause **saltwater intrusion**, where pumping fresh groundwater out too quickly draws salt water into the aquifer.",
+      "hint": "Think about what fills the space left by pumped water near the sea.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14n9koo",
+      "kind": "concept",
+      "front": "Why is damage to groundwater often hard to reverse?",
+      "back": "Rain refills aquifers very slowly, so pumped water can take decades to be replaced. Rock can also compact and the ground sink, which cannot easily be reversed.",
+      "hint": "Consider how fast the aquifer is refilled.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l86bto",
+      "kind": "process",
+      "front": "How should a community plan to improve its water security?",
+      "back": "Combine **supply measures**, which increase the water available, with **demand measures**, which cut the amount people need. Link each measure to the local cause of scarcity.",
+      "hint": "There are two broad types of action.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ieipzl",
+      "kind": "mistake",
+      "front": "Is building new wells always a safe way to improve water security?",
+      "back": "**No.** Wells or boreholes can overdraw the aquifer, so they must be managed carefully to avoid drawing water faster than it is refilled.",
+      "hint": "Think about what the well is drawing from.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1g23hf6",
+      "kind": "concept",
+      "front": "What is a key limitation of desalination as a supply measure?",
+      "back": "It has **high energy use and cost**, so it may be unaffordable for many communities.",
+      "hint": "Think about what the process needs in order to work.",
+      "sectionId": "s5"
+    }
+  ]
+}

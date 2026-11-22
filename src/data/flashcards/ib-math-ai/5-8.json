@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-8",
+  "topicCode": "5.8",
+  "topicName": "Trapezoidal rule",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:11.894Z",
+  "cards": [
+    {
+      "id": "15ylqh7",
+      "kind": "concept",
+      "front": "How does the trapezoidal rule estimate the area under a curve?",
+      "back": "It replaces the curve on each **strip** with a straight chord, forming a **trapezium**, then adds up all the trapezium areas.",
+      "hint": "It uses straight lines instead of the curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rda8ry",
+      "kind": "formula",
+      "front": "What is the trapezoidal rule for n strips between x=a and x=b, including the strip width h?",
+      "back": "$h=\\frac{b-a}{n}$ and $\\int_a^b y\\,dx\\approx\\frac{h}{2}\\left[(y_0+y_n)+2(y_1+y_2+\\dots+y_{n-1})\\right]$, where $y_0,\\dots,y_n$ are the heights at the strip edges.",
+      "hint": "End heights count once; middle heights count twice.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t6hj5q",
+      "kind": "concept",
+      "front": "When is a trapezoidal estimate an overestimate, and when is it an underestimate?",
+      "back": "For a positive curve that bends **upwards**, the chords lie above it, so the estimate is too high. If it bends downwards, the chords lie below and the estimate is too low.",
+      "hint": "Compare where the chords sit relative to the curve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v54ntq",
+      "kind": "term",
+      "front": "What is a strip in the trapezoidal rule?",
+      "back": "A **strip** is one of n vertical slices of equal width h that divide the region between x=a and x=b.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dszw48",
+      "kind": "term",
+      "front": "What is a trapezium?",
+      "back": "A **trapezium** is a quadrilateral with one pair of parallel sides. In the rule, those sides are the left and right heights of a strip.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "026alrs",
+      "kind": "process",
+      "front": "What are the steps to estimate a definite integral with the trapezoidal rule?",
+      "back": "1) Find $h=\\frac{b-a}{n}$. 2) List the $n+1$ heights. 3) Add the two end heights and twice the middle heights. 4) Multiply the total by $\\frac{h}{2}$.",
+      "hint": "Start by counting the strips.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l0km0m",
+      "kind": "example",
+      "front": "Speeds of 0, 6, 10, 12, 12 m s⁻¹ are recorded every 2 s. Estimate the distance travelled in 8 s.",
+      "back": "About **68 m**: $h=2$, the end heights give 12, the doubled middle heights give 56, so $\\frac{2}{2}(12+56)=68$.",
+      "hint": "Five heights give how many strips?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19rokut",
+      "kind": "mistake",
+      "front": "What is wrong with using 5 strips for a table of 5 heights?",
+      "back": "It should be **4 strips**. Strips are the gaps between heights, so there is always one fewer strip than the number of heights.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04m8s8m",
+      "kind": "example",
+      "front": "Estimate $\\int_0^4 x^2\\,dx$ using 4 strips and find the percentage error, given the exact value is $\\frac{64}{3}$.",
+      "back": "Estimate **22**, with $h=1$. The error is about 0.67, so the percentage error is about **3.1%**, an overestimate.",
+      "hint": "Heights are 0, 1, 4, 9, 16.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1132o8f",
+      "kind": "term",
+      "front": "What is the percentage error of an estimate?",
+      "back": "The **percentage error** is the size of the difference between the estimate and the exact value, divided by the exact value, then multiplied by 100.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k3mffv",
+      "kind": "concept",
+      "front": "How does using more strips improve the trapezoidal estimate?",
+      "back": "Narrower strips make the chords follow the curve more closely, so the **error** falls. For a smooth curve, doubling the strips cuts the error to about one quarter.",
+      "hint": "Think about what happens to the chords.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0veivdd",
+      "kind": "term",
+      "front": "What does a definite integral represent in the speed–time example?",
+      "back": "A **definite integral** measures the accumulated change of a rate over an interval. For speed against time, the area under the graph gives the distance travelled.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nkw70x",
+      "kind": "mistake",
+      "front": "Why is it wrong to add all the heights with equal weight in the trapezoidal formula?",
+      "back": "Each **middle height** must be doubled, because it is shared by two neighbouring trapezia. The first and last heights belong to only one strip each, so they are counted once.",
+      "sectionId": "s3"
+    }
+  ]
+}

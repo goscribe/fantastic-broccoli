@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "3-2",
+  "topicCode": "3.2",
+  "topicName": "Implicit differentiation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:58.254Z",
+  "cards": [
+    {
+      "id": "1i2xfje",
+      "kind": "term",
+      "front": "What is implicit differentiation?",
+      "back": "**Implicit differentiation** finds $\\frac{dy}{dx}$ by differentiating both sides of an equation relating $x$ and $y$, without solving for $y$ first.",
+      "hint": "Think of curves like circles, where y is not isolated.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vmy5a3",
+      "kind": "concept",
+      "front": "Why does differentiating $y^2$ with respect to $x$ give $2y\\frac{dy}{dx}$?",
+      "back": "Because $y$ is a **function of x**, so differentiating $y^2$ also requires the factor $\\frac{dy}{dx}$, which comes from differentiating $y$ with respect to $x$.",
+      "hint": "What extra factor appears because y depends on x?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dycjke",
+      "kind": "formula",
+      "front": "For $x^2+y^2=25$, what is the slope formula $\\frac{dy}{dx}$?",
+      "back": "$\\frac{dy}{dx}=-\\frac{x}{y}$, valid where $y\\ne0$. It comes from differentiating to $2x+2y\\frac{dy}{dx}=0$ and solving for the derivative.",
+      "hint": "Collect the dy/dx terms before dividing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13ysna9",
+      "kind": "process",
+      "front": "What are the steps of implicit differentiation?",
+      "back": "1) Differentiate every term with respect to $x$. 2) Collect all $\\frac{dy}{dx}$ terms. 3) Factor out $\\frac{dy}{dx}$ and divide. 4) Check the point lies on the curve, then substitute it.",
+      "hint": "Four steps, in this order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0eph9ve",
+      "kind": "mistake",
+      "front": "Why is treating $y$ as a constant when differentiating wrong?",
+      "back": "**Wrong**, because $y$ depends on $x$. Its derivative with respect to $x$ is $\\frac{dy}{dx}$, not zero, so that term must keep the factor.",
+      "hint": "What is the derivative of y with respect to x?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1x3lyh2",
+      "kind": "concept",
+      "front": "How do you differentiate the product $xy$ with respect to $x$?",
+      "back": "Use the **product rule**: the result is $y+x\\frac{dy}{dx}$. Differentiate each factor in turn while leaving the other unchanged.",
+      "hint": "Two factors give two terms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "051i5w1",
+      "kind": "mistake",
+      "front": "Why can't you divide by $y$ when $y=0$ on the circle?",
+      "back": "**Division by zero** is undefined. At $y=0$ the tangent is **vertical**, so $\\frac{dy}{dx}$ does not exist there.",
+      "hint": "Check the denominator of the slope formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05x0e59",
+      "kind": "term",
+      "front": "What does it mean to treat $y$ as a function of $x$?",
+      "back": "A **function of x** is a quantity whose value depends on $x$, so its derivative with respect to $x$ can be nonzero, written $\\frac{dy}{dx}$.",
+      "hint": "This holds even when y's formula is unknown.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07lb2wu",
+      "kind": "term",
+      "front": "What is a vertical tangent?",
+      "back": "A **vertical tangent** is a tangent line with undefined slope, because its horizontal change is zero. So $\\frac{dy}{dx}$ does not exist at that point.",
+      "hint": "Think about the denominator of the slope fraction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15c5o7f",
+      "kind": "example",
+      "front": "Find $\\frac{dy}{dx}$ at $(0,2)$ on $\\frac{x^2}{9}+\\frac{y^2}{4}=1$.",
+      "back": "**0**. Using $\\frac{dy}{dx}=-\\frac{4x}{9y}$ with $(0,2)$ gives $-\\frac{4(0)}{9(2)}=0$.",
+      "hint": "Check the point is on the curve first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xgbb8e",
+      "kind": "example",
+      "front": "Find the slope of $x^2+y^2=25$ at $(3,4)$.",
+      "back": "$-\\frac{3}{4}$. Substitute $x=3$ and $y=4$ into the slope formula $\\frac{dy}{dx}=-\\frac{x}{y}$.",
+      "hint": "Use the slope formula, then substitute the point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cg7z41",
+      "kind": "example",
+      "front": "Give $\\frac{dy}{dx}$ for $xy+y^2=6$ in terms of $x$ and $y$.",
+      "back": "$-\\frac{y}{x+2y}$, when $x+2y\\ne0$. Differentiating gives $y+x\\frac{dy}{dx}+2y\\frac{dy}{dx}=0$, then factor.",
+      "hint": "Collect the dy/dx terms, then factor them out."
+    }
+  ]
+}

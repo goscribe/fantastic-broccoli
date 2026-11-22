@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "1-7",
+  "topicCode": "1.7",
+  "topicName": "Proteins",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:23.338Z",
+  "cards": [
+    {
+      "id": "0dtliji",
+      "kind": "concept",
+      "front": "How can changing just one amino acid in a protein change what the protein does?",
+      "back": "The new **R group** can disrupt the interactions that fold the chain, changing the shape of a binding or active site. The effect depends on which R groups are involved and where they sit.",
+      "hint": "Follow the chain: R group, then interaction, then shape, then function.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lm32aw",
+      "kind": "concept",
+      "front": "Why does a protein's overall 3D shape depend on its whole amino acid sequence?",
+      "back": "Many **R group interactions** act together, including nonpolar clustering, hydrogen bonds, ionic attractions, and disulfide bonds. Together they set the shape, so every part of the sequence matters.",
+      "hint": "Think about how many different bonds help hold the shape.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07bw2q9",
+      "kind": "term",
+      "front": "What is primary structure, and what does it control?",
+      "back": "The **order of amino acids** in a polypeptide. This sequence determines which R groups can interact and where they occur.",
+      "hint": "It is the first level of protein structure.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0biip21",
+      "kind": "term",
+      "front": "What is an amino acid, and what makes one amino acid different from another?",
+      "back": "A **protein building block** with an amino group, a carboxyl group, and a variable R group. The R group gives each amino acid its chemical properties.",
+      "hint": "Which part of the molecule varies?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1trjrzu",
+      "kind": "process",
+      "front": "What are the steps when two amino acids join to form a dipeptide?",
+      "back": "1) The carboxyl group of one amino acid meets the amino group of another. 2) A dehydration reaction releases a water molecule. 3) A covalent **peptide bond** forms between them.",
+      "hint": "Start with which two groups meet.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nrtdp1",
+      "kind": "concept",
+      "front": "What stabilizes secondary structure, and which parts of the chain form the bonds?",
+      "back": "**Hydrogen bonds** between groups in the polypeptide backbone stabilize alpha helices and beta sheets. The bonds form between backbone parts, not between R groups.",
+      "hint": "Think about what kind of bond holds local patterns together, and which atoms carry it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vp1s92",
+      "kind": "mistake",
+      "front": "Is secondary structure the same as the whole protein shape?",
+      "back": "No. **Secondary structure** is only local folding within one polypeptide, such as helices and sheets. The overall 3D shape is tertiary structure.",
+      "hint": "Compare local patterns with the whole shape.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rzz109",
+      "kind": "term",
+      "front": "What is tertiary structure?",
+      "back": "The **overall three-dimensional shape** of one polypeptide. R group interactions help stabilize it.",
+      "hint": "Think about the full 3D shape of a single chain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d10sb4",
+      "kind": "concept",
+      "front": "What is quaternary structure, and does every protein have it?",
+      "back": "Two or more polypeptide chains associate into one **functional protein**. Not every protein has this level; a single polypeptide can function alone.",
+      "hint": "Count how many chains are involved.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wgiifv",
+      "kind": "concept",
+      "front": "Why might replacing a buried nonpolar R group with a charged R group affect function?",
+      "back": "The charged R group can disrupt the **buried nonpolar region**. This may alter folding or a binding site, so function may change, depending on location.",
+      "hint": "Consider where water-avoiding groups usually sit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tm90ha",
+      "kind": "term",
+      "front": "What is denaturation?",
+      "back": "A **loss of normal protein shape** caused by conditions such as heat or extreme pH. It disrupts stabilizing interactions without necessarily changing the amino acid sequence.",
+      "hint": "Compare it with a change in sequence.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dsxsmw",
+      "kind": "mistake",
+      "front": "Does every amino acid substitution harm a protein?",
+      "back": "No. A **substitution** may preserve similar interactions or occur where shape is unaffected, so the effect may be harmless or unnoticeable.",
+      "hint": "Think about where the change happens.",
+      "sectionId": "s4"
+    }
+  ]
+}

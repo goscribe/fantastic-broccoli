@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "15-3",
+  "topicCode": "15.3",
+  "topicName": "Emission and absorption spectra",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:45.558Z",
+  "cards": [
+    {
+      "id": "1wx7x61",
+      "kind": "concept",
+      "front": "Why does a hot, low-density gas give bright lines instead of a smooth rainbow?",
+      "back": "Its atoms can only have **discrete energy levels**, so they emit only certain wavelengths. Each allowed wavelength shows up as a bright spectral line on a dark background.",
+      "hint": "Think about which energies an atom is allowed to have.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ungq5s",
+      "kind": "concept",
+      "front": "What happens when an atom drops from a higher energy level to a lower one?",
+      "back": "It emits one **photon** carrying away exactly the energy it lost. A bigger drop gives a higher frequency and a shorter wavelength.",
+      "hint": "Where does the lost energy go?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1orikvd",
+      "kind": "formula",
+      "front": "Write the photon energy for a drop between two levels using the level energies and the wavelength.",
+      "back": "$E_\\mathrm{photon}=E_i-E_f=\\frac{hc}{\\lambda}$. $E_i$ and $E_f$ are the **initial and final level energies**, $h$ is Planck's constant and $\\lambda$ is the wavelength. With energy in eV, use $hc=1240\\,\\mathrm{eV\\,nm}$.",
+      "hint": "Start from the energy lost by the atom.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16xs3cl",
+      "kind": "term",
+      "front": "What is an absorption spectrum?",
+      "back": "A **continuous spectrum** with dark lines at the wavelengths a cool gas absorbs. The dark lines appear at the same wavelengths as that element's emission lines.",
+      "hint": "Think of white light with some colors missing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m4xm99",
+      "kind": "concept",
+      "front": "Why does an atom absorb only some of the photons in white light?",
+      "back": "An atom absorbs a photon only if its energy **exactly matches** the gap between two of its levels. All other photons pass straight through.",
+      "hint": "Match the photon energy to the level gap.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i4lzqu",
+      "kind": "mistake",
+      "front": "A student says absorbed light is destroyed, so the beam is dark at those wavelengths. What is wrong?",
+      "back": "Absorbed photons are not lost for good. The atom **re-emits** them in all directions, so the straight beam only looks dim at those wavelengths.",
+      "hint": "Where does the re-emitted light go?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09fpugr",
+      "kind": "example",
+      "front": "An atom drops from −1.51 eV to −3.40 eV. What is the wavelength of the emitted photon?",
+      "back": "About **656 nm**, which is red light. The photon energy is 1.89 eV, and $\\lambda=\\frac{1240\\,\\mathrm{eV\\,nm}}{1.89\\,\\mathrm{eV}}$.",
+      "hint": "Find the energy gap first, then use $hc$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dy8e12",
+      "kind": "example",
+      "front": "An atom drops from −3.40 eV to −13.6 eV. What wavelength of light is emitted?",
+      "back": "About **122 nm**. The energy lost is 10.2 eV, so $\\lambda=\\frac{1240\\,\\mathrm{eV\\,nm}}{10.2\\,\\mathrm{eV}}$.",
+      "hint": "Subtract the final level from the initial level.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u0wsbf",
+      "kind": "example",
+      "front": "An atom at −5.00 eV has a higher level at −2.00 eV. Can it absorb a 2.00 eV photon?",
+      "back": "No. The **gap** between the levels is 3.00 eV, which does not match the 2.00 eV photon, so the photon passes through.",
+      "hint": "Compare the photon energy with the level gap.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wfgvgw",
+      "kind": "process",
+      "front": "What are the steps for identifying elements from a line spectrum?",
+      "back": "1) **Match** the line pattern to a known element. 2) Treat each line as one gap between two levels. 3) A shorter wavelength means a larger gap. 4) More possible gaps give more lines.",
+      "hint": "Start with the pattern, then look at the individual lines.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1707cq7",
+      "kind": "term",
+      "front": "What is an electron-volt?",
+      "back": "An energy unit equal to $1.60\\times10^{-19}\\,\\mathrm{J}$, the energy one electron gains across a potential difference of 1 V.",
+      "hint": "Think of the energy gained by an electron moving through 1 V.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1590fpr",
+      "kind": "concept",
+      "front": "How do astronomers use dark lines in starlight?",
+      "back": "Dark lines show which **elements** are present in a star's cooler outer gas, because each element absorbs its own wavelengths.",
+      "hint": "Compare starlight with the absorption spectrum idea.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0n2cqw9",
+      "kind": "term",
+      "front": "What is a continuous spectrum?",
+      "back": "Light containing **every wavelength** over a range, with no gaps or lines. A hot solid gives this kind of spectrum.",
+      "hint": "Contrast it with the sharp lines from a low-density gas.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0u3y9zm",
+      "kind": "mistake",
+      "front": "A student says a bigger energy drop gives a longer wavelength. What is wrong?",
+      "back": "A bigger drop gives a higher photon energy and frequency, so a **shorter** wavelength. Energy and wavelength are inversely related.",
+      "hint": "Use $\\lambda=\\frac{hc}{E}$.",
+      "sectionId": "s2"
+    }
+  ]
+}

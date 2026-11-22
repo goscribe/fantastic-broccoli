@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "7-6",
+  "topicCode": "7.6",
+  "topicName": "General solutions by separation of variables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:27.550Z",
+  "cards": [
+    {
+      "id": "1jeh2nb",
+      "kind": "concept",
+      "front": "Why do we separate variables in an equation of the form $\\frac{dy}{dx}=f(x)g(y)$?",
+      "back": "**Separation** puts every $y$-term beside $dy$ and every $x$-term beside $dx$, so each side can be integrated on its own.",
+      "hint": "Which variable should sit next to dx?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07bz319",
+      "kind": "concept",
+      "front": "Why does a general solution contain an arbitrary constant $C$?",
+      "back": "The **constant of integration** lets one result describe a whole family of solutions, not just a single curve.",
+      "hint": "Think about what changes from one curve in the family to another.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t5d9kw",
+      "kind": "process",
+      "front": "What are the steps to find a general solution of a separable differential equation?",
+      "back": "1) **Separate** the variables. 2) **Integrate** both sides. 3) Combine the constants into one $C$. 4) Solve for $y$ if useful.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xeynt5",
+      "kind": "term",
+      "front": "What is a separable differential equation?",
+      "back": "An equation that can be written as a **product** of a function of $x$ and a function of $y$: $\\frac{dy}{dx}=f(x)g(y)$.",
+      "hint": "Look at the right side of the equation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1j0jiwv",
+      "kind": "formula",
+      "front": "What is the separated form of $\\frac{dy}{dx}=2x(1+y^2)$?",
+      "back": "$\\frac{1}{1+y^2}\\,dy=2x\\,dx$, with all $y$-terms beside $dy$ and all $x$-terms beside $dx$.",
+      "hint": "Divide by $1+y^2$, then multiply by dx.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wdo5aa",
+      "kind": "term",
+      "front": "What is a constant of integration?",
+      "back": "The **arbitrary constant** $C$ introduced when you find an indefinite integral.",
+      "hint": "Which symbol appears after you integrate?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0aydtvf",
+      "kind": "mistake",
+      "front": "Is $\\arctan(y)=x^2$ a correct general solution of $\\frac{1}{1+y^2}\\,dy=2x\\,dx$?",
+      "back": "No. It omits $C$. The constants from both integrations **combine into one $C$**; they do not disappear.",
+      "hint": "What happens to the constants from each side?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sb1arh",
+      "kind": "example",
+      "front": "Find a general solution of $\\frac{dy}{dx}=2x(1+y^2)$.",
+      "back": "$\\arctan(y)=x^2+C$. Separate, integrate both sides, then combine the constants into one $C$.",
+      "hint": "Integrate $\\frac{1}{1+y^2}$ on the left.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "173ikuy",
+      "kind": "term",
+      "front": "What is a general solution?",
+      "back": "A **family of solutions** written with an arbitrary constant $C$, so that each value of $C$ gives one solution.",
+      "hint": "What does C take different values for?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0t7ajxc",
+      "kind": "concept",
+      "front": "Why must you check a division by a variable expression before finishing?",
+      "back": "Dividing by $y$ assumes $y\\ne0$, so $y=0$ may be lost. Check whether it satisfies the **original equation**.",
+      "hint": "What value did the division exclude?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ql6om9",
+      "kind": "example",
+      "front": "For $\\frac{dy}{dx}=2xy$, what general solution includes the case $y=0$?",
+      "back": "$y=Ce^{x^2}$. Nonzero solutions come from $\\ln|y|=x^2+C$, and $C=0$ gives the constant solution $y=0$.",
+      "hint": "Solve $\\ln|y|=x^2+C$ for $y$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0n2z1sa",
+      "kind": "term",
+      "front": "What is a constant solution?",
+      "back": "A solution with the **same $y$-value** for every $x$ in its domain.",
+      "hint": "Does y change as x changes?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cqzegu",
+      "kind": "term",
+      "front": "What is an antiderivative?",
+      "back": "A function whose **derivative** equals the given function.",
+      "hint": "It is the reverse of differentiation.",
+      "sectionId": "s2"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "b2-2",
+  "topicCode": "B2.2",
+  "topicName": "Data structures",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:13.070Z",
+  "cards": [
+    {
+      "id": "1iiprhm",
+      "kind": "term",
+      "front": "What is an array?",
+      "back": "A **fixed-size**, ordered collection of elements, usually of one data type, stored under a single name. Each element is reached by its **index**.",
+      "hint": "Think of a row of numbered lockers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cuar4x",
+      "kind": "concept",
+      "front": "Which item does a stack remove first, and why?",
+      "back": "The **most recently added** item, because a stack is last in, first out. Items are added and removed at the top.",
+      "hint": "Think of a pile of plates.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1cnwfno",
+      "kind": "concept",
+      "front": "Which item does a queue serve first?",
+      "back": "The **item that has waited longest**, because a queue is first in, first out. Items join at the back and leave from the front.",
+      "hint": "Think of people at a bus stop.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "14spnoa",
+      "kind": "mistake",
+      "front": "A five-element array called marks is created. Why is marks[5] invalid?",
+      "back": "Its indices run from 0 to 4, so index 5 does not exist. The **last index** is one less than the size.",
+      "hint": "Count from 0, not 1.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1sk1o8u",
+      "kind": "concept",
+      "front": "When is a list better than an array?",
+      "back": "A **list** suits data whose size changes while the program runs, because it can grow and shrink. An array suits data of known, fixed size.",
+      "hint": "Ask whether the number of items is known before the program runs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yydo87",
+      "kind": "concept",
+      "front": "Why is accessing an element fast but inserting into the middle of an array slow?",
+      "back": "Access is **direct** because the index shows exactly where to look. Insertion needs later elements shifted one place to make space.",
+      "hint": "Consider what must move.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ccfewg",
+      "kind": "example",
+      "front": "A list holds 4, 6, 8 at indices 0, 1 and 2. What is the list after inserting 9 at index 1?",
+      "back": "**4, 9, 6, 8**. Move 8 to index 3, then move 6 to index 2, then store 9 at index 1.",
+      "hint": "Move the last element first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iau40i",
+      "kind": "term",
+      "front": "What is a linked list?",
+      "back": "A collection of **nodes**, where each node holds a value and a **pointer** to the next node. Nodes need not sit next to each other in memory.",
+      "hint": "Think of items joined in a chain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fzxujb",
+      "kind": "concept",
+      "front": "How does a linked list insert an item without shifting other elements?",
+      "back": "It creates a new node and changes the **pointers** around it, so no other node moves.",
+      "hint": "Only pointers change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14skgfg",
+      "kind": "concept",
+      "front": "How do arrays and linked lists compare for access by position?",
+      "back": "Arrays give **direct** access using the index. A linked list must follow pointers from the start, so reaching the fifth item takes four pointer steps.",
+      "hint": "Name the operation before comparing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04i2ja4",
+      "kind": "process",
+      "front": "What do push and pop do on a stack?",
+      "back": "**Push** adds an item to the top. **Pop** removes the top item and returns it.",
+      "hint": "Both work at the same end.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0603mfz",
+      "kind": "example",
+      "front": "A stack starts empty. Perform push 4, push 9, pop, push 2, pop, pop. Which values do the pops return?",
+      "back": "**9, then 2, then 4**. The stack ends empty.",
+      "hint": "Track the top after each step.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jh7f2u",
+      "kind": "mistake",
+      "front": "Is pop the same as dequeue?",
+      "back": "No. **Pop** removes the newest item from a stack, while **dequeue** removes the oldest item from a queue.",
+      "hint": "Think about which end each one uses.",
+      "sectionId": "s6"
+    }
+  ]
+}

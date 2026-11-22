@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "7-10",
+  "topicCode": "7.10",
+  "topicName": "Reaction quotient and Le Chatelier's principle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:09.082Z",
+  "cards": [
+    {
+      "id": "116yb2h",
+      "kind": "concept",
+      "front": "How does comparing the reaction quotient Q with K predict the direction of a net reaction?",
+      "back": "If $Q<K$, the **forward** reaction proceeds. If $Q>K$, the **reverse** reaction proceeds. When $Q=K$, the system is at equilibrium.",
+      "hint": "Think about which way the reaction must go to make Q move toward K.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vczf9b",
+      "kind": "concept",
+      "front": "After adding a product at constant temperature, which changes first, Q or K?",
+      "back": "**Q** changes first. K stays the same at constant temperature, so adding product makes $Q>K$ and the net reaction runs in reverse until $Q=K$ again.",
+      "hint": "Does adding a product change the temperature?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1i4813d",
+      "kind": "concept",
+      "front": "What happens to K when a forward reaction is endothermic and the mixture is heated?",
+      "back": "Heating **increases** K for an endothermic forward reaction, favoring products. For an exothermic forward reaction, heating decreases K and favors reactants.",
+      "hint": "Heat is a reactant in an endothermic reaction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00cs0bn",
+      "kind": "term",
+      "front": "What is the reaction quotient?",
+      "back": "The **reaction quotient** is the equilibrium-expression value calculated from a mixture's current concentrations or partial pressures.",
+      "hint": "It uses current values, not equilibrium values.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17wwksf",
+      "kind": "term",
+      "front": "What is the equilibrium constant?",
+      "back": "The **equilibrium constant** is the value of the reaction quotient at equilibrium, for a specified temperature.",
+      "hint": "Compare it with Q at equilibrium.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ln2j5t",
+      "kind": "formula",
+      "front": "Write the reaction quotient Q_c for A(g) ⇌ B(g) in terms of concentrations.",
+      "back": "$Q_c = [B]/[A]$. Products go in the numerator and reactants in the denominator, with each concentration raised to its coefficient.",
+      "hint": "Products on top.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kjxx0m",
+      "kind": "formula",
+      "front": "What is the pressure reaction quotient Q_p for N_2O_4(g) ⇌ 2NO_2(g)?",
+      "back": "$Q_p = P_{NO_2}^2 / P_{N_2O_4}$. Each partial pressure is raised to its coefficient, and the units are the pressures in the expression.",
+      "hint": "The coefficient 2 becomes an exponent.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12hsyxw",
+      "kind": "example",
+      "front": "For A(g) ⇌ B(g) with $K_c=4.0$, immediately after adding B, $[A]=0.20$ and $[B]=1.20$ mol L^-1. What is $Q_c$, and which way does the net reaction go?",
+      "back": "$Q_c = 1.20/0.20 = 6.0$. Since $Q_c>K_c$, the net reaction proceeds in **reverse**, consuming B and forming A.",
+      "hint": "Divide [B] by [A], then compare with 4.0.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1its1t7",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that adding a product changes K at constant temperature?",
+      "back": "It is wrong because K does not change at constant temperature. Adding product changes **Q** first, and then Q differs from the unchanged K.",
+      "hint": "K depends on temperature.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qifer2",
+      "kind": "concept",
+      "front": "Why does halving the volume of an N_2O_4 ⇌ 2NO_2 mixture at constant temperature shift it toward N_2O_4?",
+      "back": "Both partial pressures double at once. The squared NO_2 term rises more, so $Q_p$ doubles and exceeds $K_p$. The reverse reaction forms N_2O_4, the side with fewer gas particles.",
+      "hint": "Compare the squared numerator with the denominator.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xnm4ts",
+      "kind": "concept",
+      "front": "What happens to Q_p when the volume changes and both sides of a gas equilibrium have equal total gas coefficients?",
+      "back": "**$Q_p$ stays unchanged**, so the volume change does not shift the equilibrium position.",
+      "hint": "Count the gas particles on each side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ntn0t0",
+      "kind": "process",
+      "front": "What steps should you follow to predict how a disturbance affects an equilibrium?",
+      "back": "1) Identify what changed immediately. 2) Calculate Q using values just after the change. 3) Compare Q with the correct K, using the new K if temperature changed. 4) Predict the net direction until $Q=K$.",
+      "hint": "Start by identifying the change."
+    },
+    {
+      "id": "084ec97",
+      "kind": "concept",
+      "front": "Does adding a catalyst change Q, K, or the equilibrium position?",
+      "back": "No. A **catalyst** changes the rates of both forward and reverse reactions, but it does not change Q, K, or the equilibrium position.",
+      "hint": "It speeds up both directions equally.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sczl7w",
+      "kind": "mistake",
+      "front": "Does Q vs K tell you how quickly equilibrium is reached?",
+      "back": "No. Comparing Q with K predicts only the **direction** of the net reaction, not how fast equilibrium returns.",
+      "hint": "Direction and speed are different things.",
+      "sectionId": "s1"
+    }
+  ]
+}

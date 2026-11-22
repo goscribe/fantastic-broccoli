@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "3-3",
+  "topicCode": "3.3",
+  "topicName": "Differentiating inverse functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:08.314Z",
+  "cards": [
+    {
+      "id": "0wyjekc",
+      "kind": "formula",
+      "front": "What is the inverse derivative formula at the input a, when f(b)=a and f'(b) is not zero?",
+      "back": "$(f^{-1})'(a)=\\frac{1}{f'(b)}$, where **b** is the matching input with $f(b)=a$. The derivatives are reciprocal slopes at corresponding points.",
+      "hint": "Find the input of f that produces a first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x643z1",
+      "kind": "mistake",
+      "front": "Why is f'(a) the wrong value to use when finding $(f^{-1})'(a)$?",
+      "back": "It evaluates the derivative at the wrong input. You must first find the **matching input** b with $f(b)=a$, then use $f'(b)$.",
+      "hint": "Which input of f produces the output a?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "153d1ey",
+      "kind": "example",
+      "front": "If f(2)=7 and f'(2)=4, what is $(f^{-1})'(7)$?",
+      "back": "**$\\frac{1}{4}$**. Since f(2)=7, the matching input is 2, so $(f^{-1})'(7)=\\frac{1}{f'(2)}=\\frac{1}{4}$.",
+      "hint": "Write the matching pair before substituting.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0a60sxh",
+      "kind": "term",
+      "front": "What is an inverse function?",
+      "back": "A function that **reverses** the input-output pairs of f, so if $f(b)=a$ then $f^{-1}(a)=b$, on a domain where each output has one input.",
+      "hint": "Swap the roles of input and output.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ecx5gb",
+      "kind": "concept",
+      "front": "How are the graphs of f and $f^{-1}$ related?",
+      "back": "They are **reflected** across the line $y=x$. The point (b,a) on f's graph corresponds to (a,b) on the graph of $f^{-1}$.",
+      "hint": "Think about swapping coordinates.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tidbmr",
+      "kind": "concept",
+      "front": "Why does a tangent slope m become 1/m at the reflected point?",
+      "back": "**Reflection** swaps horizontal and vertical changes, so rise and run exchange. The slope becomes $1/m$ when $m\\ne 0$.",
+      "hint": "Think about rise over run.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00315go",
+      "kind": "process",
+      "front": "What steps find $(f^{-1})'(a)$ from a table of function and derivative values?",
+      "back": "1) Find the **matching input** b with $f(b)=a$. 2) Read $f'(b)$ from the table. 3) Compute $\\frac{1}{f'(b)}$.",
+      "hint": "Start by scanning the function value row.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0a7ygxn",
+      "kind": "term",
+      "front": "What is the matching input for an inverse input a?",
+      "back": "The **matching input** is the value b that satisfies $f(b)=a$. It is where you evaluate f'.",
+      "hint": "Look for the input that gives the output a.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "094hk63",
+      "kind": "concept",
+      "front": "What happens to the inverse derivative formula when $f'(b)=0$?",
+      "back": "The formula would divide by zero, so it gives **no finite** inverse derivative. A horizontal tangent on f can correspond to a vertical tangent on $f^{-1}$.",
+      "hint": "Consider what dividing by zero means.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qgiqdn",
+      "kind": "example",
+      "front": "If f(3)=10 and f'(3)=-2, what is $(f^{-1})'(10)$?",
+      "back": "**$-\\frac{1}{2}$**. The matching input is 3, so $(f^{-1})'(10)=\\frac{1}{f'(3)}=-\\frac{1}{2}$.",
+      "hint": "Check the sign carefully.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12zvu1y",
+      "kind": "term",
+      "front": "What are reciprocal slopes?",
+      "back": "At corresponding points, the tangent slopes of f and $f^{-1}$ **multiply to 1** when both slopes are finite.",
+      "hint": "Multiply the two slopes together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07mwhgg",
+      "kind": "concept",
+      "front": "When does an inverse exist as a function?",
+      "back": "When each **output** of f comes from only one input. The domain of f may need restricting to make this true.",
+      "hint": "Think about one-to-one functions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xkkoob",
+      "kind": "mistake",
+      "front": "Does the superscript -1 in $f^{-1}$ mean a reciprocal?",
+      "back": "No. It means the **inverse function**, so $f^{-1}(a)$ is not $\\frac{1}{f(a)}$.",
+      "hint": "Compare $f^{-1}$ with $(f(a))^{-1}$.",
+      "sectionId": "s1"
+    }
+  ]
+}

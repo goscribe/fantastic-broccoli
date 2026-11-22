@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "13-1",
+  "topicCode": "13.1",
+  "topicName": "Reflection",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:30.775Z",
+  "cards": [
+    {
+      "id": "0cqi3g0",
+      "kind": "formula",
+      "front": "What equation does the law of reflection give, and what do the symbols mean?",
+      "back": "$\\theta_r=\\theta_i$: the **angle of reflection** equals the **angle of incidence**. Both are measured from the normal, the line perpendicular to the surface.",
+      "hint": "Which line are both angles measured from?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tf54pb",
+      "kind": "concept",
+      "front": "What is the difference between specular and diffuse reflection?",
+      "back": "**Specular** reflection comes from a smooth surface, so parallel rays stay parallel and form clear images. **Diffuse** reflection comes from a rough surface, so rays scatter in many directions.",
+      "hint": "Compare how the surface bumps change the normal.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0yt2aeh",
+      "kind": "mistake",
+      "front": "Why is measuring the angle from the surface a common mistake?",
+      "back": "It uses the **wrong reference line**. Angles must be measured from the normal. A ray at 30° to the surface has an angle of incidence of $60^{\\circ}$.",
+      "hint": "Sketch the normal before you measure.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ukrbdq",
+      "kind": "term",
+      "front": "What is the normal?",
+      "back": "The **normal** is the line perpendicular to a surface at the point where a ray strikes it. All reflection angles are measured from it.",
+      "hint": "It meets the surface at a right angle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ig3qho",
+      "kind": "term",
+      "front": "What is specular reflection?",
+      "back": "**Specular reflection** is reflection from a surface that is smooth compared with the wavelength of light, so parallel incident rays leave as parallel reflected rays.",
+      "hint": "Think of a still pond or a mirror.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dxurs1",
+      "kind": "term",
+      "front": "What is diffuse reflection?",
+      "back": "**Diffuse reflection** is reflection from a rough surface. The local normal changes from point to point, so reflected rays scatter in many directions.",
+      "hint": "Think of paper or a painted wall.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cxfot9",
+      "kind": "concept",
+      "front": "Why can we see most objects even though they do not give off their own light?",
+      "back": "**Diffuse reflection** sends light from each point in many directions, so people in different places can all see the object.",
+      "hint": "Compare with where a mirror sends light.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0evepel",
+      "kind": "process",
+      "front": "What are the steps for finding the angle of reflection from a ray that meets a flat mirror at a given angle?",
+      "back": "1) Sketch the ray and the normal. 2) Measure the angle of incidence from the normal. 3) Set $\\theta_r=\\theta_i$. 4) Add the two angles to find the angle between the rays.",
+      "hint": "Start with the sketch and label the normal.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10zzo2q",
+      "kind": "example",
+      "front": "A ray makes 35° with a flat mirror surface. What is the angle of reflection, and how far apart are the rays?",
+      "back": "The angle of reflection is $55^{\\circ}$, and the rays are $110^{\\circ}$ apart. The angle from the normal is $90^{\\circ}-35^{\\circ}=55^{\\circ}$.",
+      "hint": "First find the angle from the normal, not the surface.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rgjbnw",
+      "kind": "example",
+      "front": "The incident ray makes 25° with a flat mirror surface. What is the angle between the incident and reflected rays?",
+      "back": "The rays are $130^{\\circ}$ apart. The angle of incidence is $65^{\\circ}$, so the angle of reflection is also $65^{\\circ}$, and $65^{\\circ}+65^{\\circ}=130^{\\circ}$.",
+      "hint": "Convert to the angle from the normal first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "081ll0i",
+      "kind": "mistake",
+      "front": "Does diffuse reflection break the law of reflection?",
+      "back": "**No.** Each ray still reflects with $\\theta_r=\\theta_i$, measured from its own local normal. The surface just has many normals pointing different ways.",
+      "hint": "Check each ray against its own normal.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mxlcgz",
+      "kind": "example",
+      "front": "A mirror is rotated by 10° while the incident ray stays fixed. How much does the reflected ray turn?",
+      "back": "The reflected ray turns through $20^{\\circ}$. The normal turns by $\\alpha$, so the reflected ray turns by $2\\alpha$.",
+      "hint": "Think about how the normal moves when the mirror turns.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uhava2",
+      "kind": "concept",
+      "front": "Why does a rough sheet of paper not form a clear image, even though each ray obeys the law of reflection?",
+      "back": "The local normals point in many directions, so parallel rays leave in many directions. No single clear image forms.",
+      "hint": "Think about what happens to parallel rays.",
+      "sectionId": "s4"
+    }
+  ]
+}

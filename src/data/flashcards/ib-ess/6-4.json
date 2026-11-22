@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "6-4",
+  "topicCode": "6.4",
+  "topicName": "Stratospheric ozone",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:52.994Z",
+  "cards": [
+    {
+      "id": "03njjhv",
+      "kind": "concept",
+      "front": "Why does the ozone layer in the stratosphere matter to people and other living things on the ground?",
+      "back": "**Ozone** absorbs all of the most energetic UV-C and most UV-B from the Sun, so less harmful radiation reaches the surface and damages the DNA of living cells.",
+      "hint": "Think about what sunscreen does for your skin.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1el9zzh",
+      "kind": "concept",
+      "front": "Which human-made chemicals cause stratospheric ozone loss, and which element do they release?",
+      "back": "**Ozone-depleting substances**, such as CFCs, release chlorine (or bromine) in the stratosphere and break ozone down faster than natural processes can replace it.",
+      "hint": "Name both the chemical and the element.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ggdizz",
+      "kind": "concept",
+      "front": "Why can a single chlorine atom destroy so many ozone molecules?",
+      "back": "Chlorine is a **catalyst**: it takes part in the reactions but is regenerated unchanged, so one atom can repeat the cycle and destroy a very large number of ozone molecules.",
+      "hint": "Think about whether chlorine is used up.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mwa5ud",
+      "kind": "process",
+      "front": "What are the four steps of the chlorine cycle that destroys ozone?",
+      "back": "1) A chlorine atom takes an oxygen atom from an ozone molecule. 2) This forms **chlorine monoxide** and an ordinary oxygen molecule, $\\mathrm{O_2}$. 3) Chlorine monoxide reacts with a free oxygen atom. 4) The chlorine atom is released and attacks another ozone molecule.",
+      "hint": "Four steps, starting with a chlorine atom.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tkm68d",
+      "kind": "term",
+      "front": "What are chlorofluorocarbons (CFCs), and where were they once used?",
+      "back": "**CFCs** are human-made compounds of carbon, chlorine and fluorine, once common in refrigerators, aerosol sprays and foam plastics.",
+      "hint": "Think of a fridge and a spray can.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rw26ma",
+      "kind": "concept",
+      "front": "Why do CFCs reach the stratosphere even though they are released near the ground?",
+      "back": "CFCs are very **unreactive** in the lower atmosphere, so they do not break down or wash out. Winds slowly carry them up into the stratosphere, a journey that can take years.",
+      "hint": "Consider what stops them being removed lower down.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07z6pku",
+      "kind": "term",
+      "front": "What is the ozone hole?",
+      "back": "A large area of **severely thinned** stratospheric ozone over Antarctica that appears each spring.",
+      "hint": "Think about where and when it is seen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jzhm9l",
+      "kind": "concept",
+      "front": "What harmful effects follow from ozone depletion for humans, plants and marine life?",
+      "back": "More UV-B reaches the surface, raising the risk of skin cancer and cataracts in humans. Plant growth and crop yields can fall, and **phytoplankton**, which support ocean food chains, can be harmed.",
+      "hint": "Think of three groups affected.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jj5bcz",
+      "kind": "mistake",
+      "front": "A student says ozone depletion is the same thing as global warming. What is wrong with this?",
+      "back": "Depletion mainly **raises UV-B** at the surface, while warming is mainly caused by greenhouse gases that trap heat. They are separate problems with different causes.",
+      "hint": "Ask what each process mainly changes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0g331mb",
+      "kind": "mistake",
+      "front": "A student says ozone is always beneficial. What is the error?",
+      "back": "Ozone in the **stratosphere** protects life, but ozone near the ground is a harmful pollutant. The same gas has different effects depending on where it is.",
+      "hint": "Location matters.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1b44tgl",
+      "kind": "term",
+      "front": "What is the Montreal Protocol?",
+      "back": "The **1987** international agreement that commits countries to phase out the production and use of ozone-depleting substances, using binding targets with timetables.",
+      "hint": "Consider the year it was agreed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ni61de",
+      "kind": "concept",
+      "front": "What special support did developing countries receive under the Montreal Protocol?",
+      "back": "They received **longer deadlines** for phasing out ozone-depleting substances, along with financial help.",
+      "hint": "There were two kinds of support.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1h7k2sw",
+      "kind": "concept",
+      "front": "Why have replacement chemicals for CFCs brought new problems?",
+      "back": "Some contain no chlorine, so they spare ozone, but many are strong **greenhouse gases** that trap heat. CFCs also last for decades, so ozone recovers only slowly.",
+      "hint": "Consider two separate issues.",
+      "sectionId": "s5"
+    }
+  ]
+}

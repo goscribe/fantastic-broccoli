@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "5-2",
+  "topicCode": "5.2",
+  "topicName": "Agriculture and food",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:40.417Z",
+  "cards": [
+    {
+      "id": "1oi3b8s",
+      "kind": "concept",
+      "front": "What separates intensive farming from extensive farming?",
+      "back": "**Intensive** farming uses high inputs of labour, fertiliser or machinery per hectare to get high yields. **Extensive** farming uses low inputs over a large area. It is about inputs per unit area, not total size.",
+      "hint": "Think about inputs per hectare, not how big the farm is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1d978a4",
+      "kind": "concept",
+      "front": "Why do industrial farms usually give higher yields per hectare than traditional farms?",
+      "back": "They rely on machinery, fossil fuel energy and synthetic fertilisers and pesticides. This **boosts** output, but it depends on heavy inputs and often disturbs soil and habitat more.",
+      "hint": "Look at the energy and fertiliser rows of the comparison table.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k5sv0e",
+      "kind": "process",
+      "front": "What are the steps from fertiliser runoff to fish dying in a lake?",
+      "back": "1) Fertiliser washes off fields into the lake. 2) Extra nutrients cause **eutrophication**, so algae multiply. 3) The algae die. 4) Decomposers use up the dissolved oxygen. 5) Fish die from lack of oxygen.",
+      "hint": "Start with where the fertiliser goes after the rain washes it off.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12h79t8",
+      "kind": "term",
+      "front": "What is monoculture, and which type of farming usually uses it?",
+      "back": "**Monoculture** is growing a single crop species over a large area, often year after year. It is typical of industrial farming.",
+      "hint": "Think about how many crop species are grown in one field.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13qp8z2",
+      "kind": "formula",
+      "front": "How is crop yield calculated, and what unit is it usually given in?",
+      "back": "Yield is the **mass harvested divided by the area**: $\\frac{\\text{mass of crop}}{\\text{area}}$. It is often given in $\\mathrm{t\\,ha^{-1}}$, tonnes per hectare.",
+      "hint": "Yield is a rate: mass per unit area.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09rrerf",
+      "kind": "example",
+      "front": "A farm harvests 36 t of wheat from 9.0 ha. What is its yield?",
+      "back": "$4.0\\,\\mathrm{t\\,ha^{-1}}$, because $\\frac{36\\,\\mathrm{t}}{9.0\\,\\mathrm{ha}}=4.0\\,\\mathrm{t\\,ha^{-1}}$.",
+      "hint": "Divide the mass by the area.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06ucd1q",
+      "kind": "term",
+      "front": "What is soil erosion?",
+      "back": "The **removal of topsoil** by wind or water faster than it forms. Bare, ploughed soil is especially vulnerable.",
+      "hint": "Think about what happens to ground that has no plant cover.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0d62j44",
+      "kind": "mistake",
+      "front": "Does fertiliser runoff poison fish directly?",
+      "back": "No. Fish die because **decomposers use up dissolved oxygen** after the algae die, not because the fertiliser is directly toxic to them.",
+      "hint": "Follow the oxygen, not the chemical.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04b1d94",
+      "kind": "concept",
+      "front": "Why can a region produce enough food and still have hungry people?",
+      "back": "**Food security** depends on access as well as supply. Poverty and poor distribution can stop people obtaining enough safe, nutritious food, even where food is produced.",
+      "hint": "Supply is only one part of the picture.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0khvmep",
+      "kind": "concept",
+      "front": "How can a drought affect poor households' access to food?",
+      "back": "Drought **lowers yields**, so prices rise and poor households buy less food.",
+      "hint": "Trace the chain from rainfall to what households can afford.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "098engq",
+      "kind": "term",
+      "front": "What is sustainable agriculture?",
+      "back": "Farming that **meets present food needs** without reducing the ability of future generations to meet theirs.",
+      "hint": "Consider two time periods: now and later.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gjlswp",
+      "kind": "concept",
+      "front": "How does crop rotation help protect soil and limit pests, and what is its drawback?",
+      "back": "Changing the crop in a field each season **limits** pest build-up and nutrient loss. A drawback is that it may give lower short-term yields than monoculture.",
+      "hint": "Think about what a pest needs in order to build up in one field."
+    }
+  ]
+}

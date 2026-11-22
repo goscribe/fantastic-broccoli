@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "d-1",
+  "topicCode": "D.1",
+  "topicName": "Gravitational fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:37.925Z",
+  "cards": [
+    {
+      "id": "1vispct",
+      "kind": "concept",
+      "front": "Which way does a gravitational field point around a single spherical mass, and why?",
+      "back": "**Inwards**, towards the mass. Every mass produces a field, and its direction at a point is the direction of the force on a small test mass placed there.",
+      "hint": "Think about which way a test mass is pulled.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13xyfpr",
+      "kind": "formula",
+      "front": "What equation defines gravitational field strength, and what is its unit?",
+      "back": "$g = F/m$, where F is the gravitational force on a small test mass m. The **unit** is newtons per kilogram (N/kg).",
+      "hint": "Force per unit mass.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hf61wi",
+      "kind": "concept",
+      "front": "How does gravitational potential differ from gravitational field strength?",
+      "back": "**Potential** is potential energy per unit mass (a scalar, in J/kg). Field strength is force per unit mass (a vector, in N/kg). The field points towards decreasing potential.",
+      "hint": "One is energy per mass, the other is force per mass.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ynkvws",
+      "kind": "term",
+      "front": "What is a gravitational field?",
+      "back": "A **region** in which a mass experiences a gravitational force. Every mass produces one.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1r6uy11",
+      "kind": "term",
+      "front": "What do field lines show, and what do their spacing and arrows tell you?",
+      "back": "They show the **direction** of the field with arrows, and closer lines mean a stronger field. They are a representation of the field, not physical paths.",
+      "hint": "Arrows and spacing each carry a meaning.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0n4td3s",
+      "kind": "mistake",
+      "front": "Why is it wrong to draw gravitational field lines pointing away from a mass?",
+      "back": "Gravity **attracts** a test mass towards the mass, so field lines must point inwards, towards it.",
+      "hint": "Which way is a test mass pulled?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02p9j8p",
+      "kind": "formula",
+      "front": "What is the gravitational field strength outside a spherical mass M at distance r?",
+      "back": "$g = GM/r^2$, where r is measured from the **centre** of M. It applies outside the sphere, including at its surface.",
+      "hint": "Measured from where?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "052oqzm",
+      "kind": "example",
+      "front": "A planet has mass 6.0×10^24 kg and radius 6.4×10^6 m. What is its surface field strength? Use G = 6.67×10^-11 N m² kg⁻².",
+      "back": "About **9.8 N/kg** to 2 significant figures. Substituting into $g = GM/r^2$ gives $g = 9.77$ N/kg before rounding.",
+      "hint": "Use g = GM/r² with r from the centre.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tmujgy",
+      "kind": "formula",
+      "front": "What is the gravitational potential outside a spherical mass, taking zero potential at infinity?",
+      "back": "$V = -GM/r$. It is **negative** because energy must be supplied to move a mass from that position to infinity.",
+      "hint": "Think about the energy needed to escape.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0enfljt",
+      "kind": "mistake",
+      "front": "Is gravitational potential the same as gravitational potential energy?",
+      "back": "No. **Potential** is energy per unit mass and does not depend on the test mass. Potential energy also depends on the mass placed in the field.",
+      "hint": "Does it depend on the mass you place there?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fswzrq",
+      "kind": "concept",
+      "front": "How do you find the resultant gravitational field at a point due to several masses?",
+      "back": "Take the **vector sum** of the fields from all masses, combining their directions and strengths. Potential, by contrast, simply adds as numbers.",
+      "hint": "Fields are vectors.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04hxwb9",
+      "kind": "concept",
+      "front": "What is the gravitational field at the midpoint between two equal masses, and why?",
+      "back": "**Zero**. The two fields have equal strengths and opposite directions, so their vector sum is zero.",
+      "hint": "Compare the directions of the two fields.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ccwk0f",
+      "kind": "process",
+      "front": "What are the steps to sketch field lines for several masses?",
+      "back": "1) Sketch the inward field from each mass. 2) Combine directions and relative strengths at points. 3) Draw arrows along the resultant field, never crossing, with denser lines where the field is stronger.",
+      "hint": "Start with each mass on its own.",
+      "sectionId": "s4"
+    }
+  ]
+}

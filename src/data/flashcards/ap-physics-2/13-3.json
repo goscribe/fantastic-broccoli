@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "13-3",
+  "topicCode": "13.3",
+  "topicName": "Refraction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:27.872Z",
+  "cards": [
+    {
+      "id": "0p14d2l",
+      "kind": "concept",
+      "front": "Why does light change direction when it crosses from one material into another?",
+      "back": "Because its **speed** changes at the boundary. Light travels more slowly in materials with a larger index of refraction, so the ray bends.",
+      "hint": "Think about the toy cart that hits carpet at an angle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0meoe8y",
+      "kind": "formula",
+      "front": "What is Snell's law, and what do its symbols mean?",
+      "back": "$n_1\\sin\\theta_1=n_2\\sin\\theta_2$, where $n_1$ and $n_2$ are the indices of the two media and $\\theta_1$ and $\\theta_2$ are the angles from the **normal** in each medium.",
+      "hint": "The normal is perpendicular to the boundary.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jqfskb",
+      "kind": "concept",
+      "front": "When does total internal reflection happen?",
+      "back": "When light goes from a **higher** index into a **lower** index and the angle of incidence is greater than the critical angle, $\\theta_c$. Then all the light reflects back.",
+      "hint": "Two conditions must both be true.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19mum4p",
+      "kind": "term",
+      "front": "What is the index of refraction, $n$?",
+      "back": "A **unitless ratio** $n=\\frac{c}{v}$ of the speed of light in vacuum to its speed in a material. A larger $n$ means slower light.",
+      "hint": "Compare vacuum speed with material speed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01aigxt",
+      "kind": "term",
+      "front": "What is refraction?",
+      "back": "The **change in direction** of a ray as it crosses a boundary between media in which light travels at different speeds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v5449i",
+      "kind": "concept",
+      "front": "Which light quantity stays the same when light enters a new medium?",
+      "back": "The **frequency**. The source sets it, so it does not change. Speed and wavelength both shrink by the factor $n$.",
+      "hint": "Think about what sets the frequency of a wave.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dbksv7",
+      "kind": "formula",
+      "front": "What does $\\lambda=\\frac{\\lambda_0}{n}$ tell you, and what are its units?",
+      "back": "The wavelength $\\lambda$ in a material equals the vacuum wavelength $\\lambda_0$ divided by $n$. Wavelengths are in **metres** or nanometres.",
+      "hint": "Compare with the vacuum wavelength.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09x4qvx",
+      "kind": "process",
+      "front": "What are the steps to find an unknown refraction angle with Snell's law?",
+      "back": "1) Rearrange to $\\sin\\theta_2=\\frac{n_1}{n_2}\\sin\\theta_1$. 2) Substitute values and calculate. 3) Take the **inverse sine**, checking the calculator is in degree mode.",
+      "hint": "Start by isolating sin θ2.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06gee9p",
+      "kind": "example",
+      "front": "A ray in air hits glass ($n=1.50$) at $40^{\\circ}$ to the normal. What is the angle of refraction?",
+      "back": "About $25^{\\circ}$. Calculation: $\\sin\\theta_2=\\frac{1.00}{1.50}\\sin40^{\\circ}=0.429$, so $\\theta_2\\approx25^{\\circ}$.",
+      "hint": "Use n1 = 1.00 for air.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ghom3f",
+      "kind": "example",
+      "front": "Find the critical angle for light in glass ($n=1.50$) meeting a boundary with air.",
+      "back": "About $42^{\\circ}$. Calculation: $\\sin\\theta_c=\\frac{1.00}{1.50}=0.667$, so $\\theta_c\\approx42^{\\circ}$.",
+      "hint": "Use $\\sin\\theta_c=\\frac{n_2}{n_1}$.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "17n57gh",
+      "kind": "example",
+      "front": "Light with wavelength 600 nm in vacuum enters glass with $n=1.50$. What is its wavelength in the glass?",
+      "back": "**400 nm**. Calculation: $\\lambda=\\frac{600\\,\\mathrm{nm}}{1.50}=400\\,\\mathrm{nm}$.",
+      "hint": "Divide by n.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "038nnu5",
+      "kind": "mistake",
+      "front": "Can total internal reflection occur when light enters a higher-index medium?",
+      "back": "**No**. A critical angle exists only when $n_1>n_2$. Entering a higher-index medium always gives a refracted ray, because the light bends toward the normal.",
+      "hint": "Check which way the index goes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1r73e4v",
+      "kind": "concept",
+      "front": "How does an optical fiber keep light travelling along the strand?",
+      "back": "Light hits the wall at large angles and undergoes **total internal reflection**. The lower-index material outside guarantees light goes from higher to lower index at the wall.",
+      "hint": "Think about the strand's glass core and its outer surround.",
+      "sectionId": "s6"
+    }
+  ]
+}

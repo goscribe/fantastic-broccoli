@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "6-2",
+  "topicCode": "6.2",
+  "topicName": "Riemann sums",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:16.769Z",
+  "cards": [
+    {
+      "id": "1r4qgog",
+      "kind": "term",
+      "front": "What is a Riemann sum?",
+      "back": "A **Riemann sum** adds the areas of rectangles that estimate the area between a curve and the horizontal axis. Each rectangle's area is its height times its width.",
+      "hint": "Think of many rectangles fitted under a curve.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fybijr",
+      "kind": "concept",
+      "front": "For an increasing function, how do left and right sums compare with the true area?",
+      "back": "The **left sum** underestimates and the **right sum** overestimates the signed area. Left rectangles lie below the curve in each subinterval, and right rectangles lie above it.",
+      "hint": "Sketch one subinterval of a rising curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cnz1n2",
+      "kind": "concept",
+      "front": "What happens to Riemann sums as the subintervals get narrower and narrower?",
+      "back": "They approach a single **limit**, the definite integral, when that limit exists. Left, right and midpoint sums all approach the same value as the widths shrink toward zero.",
+      "hint": "Think about the largest subinterval width going to zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v19vlc",
+      "kind": "formula",
+      "front": "How do you find the width of each rectangle when [a, b] is split into n equal subintervals?",
+      "back": "$\\Delta x=\\frac{b-a}{n}$, where $\\Delta x$ is the **width** of each rectangle, $n$ is the number of subintervals, and the width is the same for every rectangle.",
+      "hint": "Subtract the endpoints, then divide by the count.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ozvkra",
+      "kind": "process",
+      "front": "What are the steps to estimate area with a Riemann sum?",
+      "back": "1) Find the common width $\\Delta x=\\frac{b-a}{n}$. 2) Pick a sample point in each subinterval. 3) Find each height from the function. 4) Add height times width for every rectangle.",
+      "hint": "Start with the common width before any heights.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0aiz993",
+      "kind": "term",
+      "front": "What height does a left sum use for each rectangle?",
+      "back": "The function value at the **left endpoint** of each subinterval.",
+      "hint": "Look at the start of each subinterval.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0peqmzr",
+      "kind": "term",
+      "front": "Which point does a midpoint sum use to set each rectangle's height?",
+      "back": "The **midpoint** of each subinterval, the point halfway between its two endpoints.",
+      "hint": "Average the two endpoints.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12on067",
+      "kind": "term",
+      "front": "What does signed area count?",
+      "back": "Regions above the horizontal axis count **positively**, and regions below the axis count negatively.",
+      "hint": "Think about what a negative function value does.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1h43g62",
+      "kind": "mistake",
+      "front": "A student says more rectangles always make every kind of sum more accurate at every step. Is this right?",
+      "back": "No. A single step does not guarantee that every kind of sum improves. The **reliable** trend is convergence as the widths approach zero.",
+      "hint": "Consider the behavior of the sums over the whole process.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b5rnep",
+      "kind": "mistake",
+      "front": "Can you tell whether a midpoint sum overestimates or underestimates just from whether the function is increasing?",
+      "back": "No. **Midpoint** rectangles can cross the curve, so increasing or decreasing behavior alone does not determine the error.",
+      "hint": "Think about where the top of a midpoint rectangle sits.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11fuz68",
+      "kind": "example",
+      "front": "Find the left sum $L_2$ for $f(x)=x^2$ on $[0,2]$ using two equal subintervals.",
+      "back": "$L_2=1$ square unit. The width is $1$, and the left heights are $0^2$ and $1^2$.",
+      "hint": "Find the width first, then use left endpoints 0 and 1.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ns48yw",
+      "kind": "example",
+      "front": "Find the left sum $L_4$ for $f(x)=x^2$ on $[0,2]$ using four equal subintervals.",
+      "back": "$L_4=1.75$ square units. The width is $0.5$, and the left endpoints are $0$, $0.5$, $1$, and $1.5$.",
+      "hint": "The width is 0.5, so list four left endpoints.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "136i5v7",
+      "kind": "example",
+      "front": "Find the right sum $R_2$ for $f(x)=x^2$ on $[0,2]$ using two equal subintervals.",
+      "back": "$R_2=5$ square units. The width is $1$, and the right heights are $1^2$ and $2^2$.",
+      "hint": "Use the right endpoints 1 and 2.",
+      "sectionId": "s2"
+    }
+  ]
+}

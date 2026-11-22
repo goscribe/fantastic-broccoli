@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "8-1",
+  "topicCode": "8.1",
+  "topicName": "Introduction to acids and bases",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:14.577Z",
+  "cards": [
+    {
+      "id": "1fou6b7",
+      "kind": "concept",
+      "front": "What is a Brønsted–Lowry acid, and what happens to its proton in water?",
+      "back": "A Brønsted–Lowry acid is a **proton donor**. In water, the proton transfers to a water molecule, forming hydronium ion, $\\mathrm{H_3O^+}$.",
+      "hint": "Think about what the acid gives away.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02nnnnf",
+      "kind": "concept",
+      "front": "What is a Brønsted–Lowry base, and how does it make a solution basic?",
+      "back": "A Brønsted–Lowry base is a **proton acceptor**. Ammonia accepts a proton from water, leaving **hydroxide ions**, $\\mathrm{OH^-}$, in the solution.",
+      "hint": "Think about what the base takes in.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mqgm1s",
+      "kind": "concept",
+      "front": "Which litmus color changes identify an acid and a base?",
+      "back": "Acids turn **blue litmus red**. Bases turn **red litmus blue**. These are useful evidence, but one test may not identify a substance completely.",
+      "hint": "Two colors, two directions of change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1owiwy2",
+      "kind": "term",
+      "front": "What is a hydronium ion?",
+      "back": "A **hydronium ion**, $\\mathrm{H_3O^+}$, forms when a water molecule accepts a proton. Acid solutions contain hydronium ions.",
+      "hint": "Consider what a water molecule does in an acid solution.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kzcu8p",
+      "kind": "term",
+      "front": "What is an aqueous solution?",
+      "back": "An **aqueous solution** is a mixture in which **water** is the solvent.",
+      "hint": "Consider which substance does the dissolving.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01881in",
+      "kind": "process",
+      "front": "What happens when hydrochloric acid reacts with water?",
+      "back": "HCl donates a proton to water, forming $\\mathrm{H_3O^+}$ and $\\mathrm{Cl^-}$: $\\mathrm{HCl + H_2O \\rightarrow H_3O^+ + Cl^-}$. The mobile ions let the solution conduct electricity.",
+      "hint": "Track the proton from HCl to water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xpl8w0",
+      "kind": "process",
+      "front": "How does ammonia produce hydroxide ions in water?",
+      "back": "Ammonia accepts a proton from water: $\\mathrm{NH_3 + H_2O \\rightleftharpoons NH_4^+ + OH^-}$. The reaction is **reversible**, and only some ammonia molecules react at a time.",
+      "hint": "Water gives up the proton this time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01jbw9b",
+      "kind": "process",
+      "front": "How does sodium hydroxide supply hydroxide ions when it dissolves?",
+      "back": "It **separates into ions** as it dissolves: $\\mathrm{NaOH(s) \\rightarrow Na^+(aq) + OH^-(aq)}$. It does not need to take a proton from water.",
+      "hint": "Compare this with how ammonia behaves.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0497xyk",
+      "kind": "mistake",
+      "front": "A solution conducts electricity, so is it acidic?",
+      "back": "No. Conductivity does not prove a solution is acidic, because **any solution with enough mobile ions** can conduct electricity, including basic ones.",
+      "hint": "What does conductivity actually show?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0p5h8ru",
+      "kind": "mistake",
+      "front": "Does a base need hydroxide in its formula?",
+      "back": "No. A base does not need to contain hydroxide in its formula. Ammonia, $\\mathrm{NH_3}$, contains no oxygen but still produces **hydroxide ions** in water.",
+      "hint": "Look at what ammonia does, not what it contains.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y3rsky",
+      "kind": "example",
+      "front": "Name one common acid and one common base, giving each formula.",
+      "back": "Hydrochloric acid, $\\mathrm{HCl}$, and acetic acid, $\\mathrm{CH_3COOH}$, are acids; acetic acid is the acid in **vinegar**. Sodium hydroxide, $\\mathrm{NaOH}$, and ammonia, $\\mathrm{NH_3}$, are bases.",
+      "hint": "Two acids and two bases appear in the note.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05sckd2",
+      "kind": "concept",
+      "front": "How does acetic acid's reaction with water differ from hydrochloric acid's?",
+      "back": "Only **some** acetic acid molecules transfer a proton at a time, and the reaction is **reversible**. The amount of hydronium ion depends on the acid and its concentration.",
+      "hint": "Compare how many molecules react at once.",
+      "sectionId": "s3"
+    }
+  ]
+}

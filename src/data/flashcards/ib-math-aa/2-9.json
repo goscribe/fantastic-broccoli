@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-9",
+  "topicCode": "2.9",
+  "topicName": "Exponential and logarithmic functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:12.442Z",
+  "cards": [
+    {
+      "id": "15r5i7a",
+      "kind": "term",
+      "front": "What is an exponential function?",
+      "back": "A function $f(x)=a^x$ with $a>0$ and $a\\neq1$, where the variable sits in the **power**. It grows if $a>1$ and decays if $0<a<1$.",
+      "hint": "Think about where the variable sits.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bbpds8",
+      "kind": "formula",
+      "front": "How do you convert between exponential and logarithmic form?",
+      "back": "$a^x=b$ is equivalent to $x=\\log_a b$, where $a>0$, $a\\neq1$ and $b>0$. The **base** stays the same and the power becomes the value of the logarithm.",
+      "hint": "Check by raising the base to your answer.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xlki0i",
+      "kind": "concept",
+      "front": "Why are the graphs of $y=a^x$ and $y=\\log_a x$ reflections of each other in $y=x$?",
+      "back": "The logarithm is the **inverse function** of the exponential, so swapping $x$ and $y$ reflects one graph into the other. Their domains and ranges swap too.",
+      "hint": "What does an inverse do to each input-output pair?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xyi2ry",
+      "kind": "concept",
+      "front": "What are the intercept and asymptote of $y=a^x$, and why does it never cross the $x$-axis?",
+      "back": "It passes through $(0,1)$ because $a^0=1$, and has the **asymptote** $y=0$. It never crosses the $x$-axis because $a^x$ is always positive.",
+      "hint": "Consider what $a^0$ equals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1phf8dx",
+      "kind": "formula",
+      "front": "In the model $y=Ae^{kx}$, what do $A$ and $k$ mean?",
+      "back": "$A$ is the value of $y$ when $x=0$. A positive $k$ gives **growth** and a negative $k$ gives **decay**.",
+      "hint": "Substitute $x=0$ to find $A$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1et87an",
+      "kind": "term",
+      "front": "What is the constant $e$, and why is $e^x$ special?",
+      "back": "The constant $e\\approx2.718$ is the base of the **natural exponential function** $e^x$. Its gradient equals its own height at every point.",
+      "hint": "Think about continuous growth.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "111hz6z",
+      "kind": "term",
+      "front": "What is the natural logarithm $\\ln x$?",
+      "back": "The **natural logarithm** is the logarithm to base $e$, so $\\ln x=\\log_e x$, defined for $x>0$.",
+      "hint": "Which base does the letter n stand for?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ioed7j",
+      "kind": "process",
+      "front": "What are the steps for solving an exponential or logarithmic equation?",
+      "back": "1) **Isolate** the exponential or logarithmic term. 2) **Convert** to the other form. 3) Solve the resulting equation. 4) Check that every logarithm's input is positive.",
+      "hint": "The last step guards against invalid answers.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1l6hyaw",
+      "kind": "example",
+      "front": "Solve $3e^{2x}=15$, giving the answer to 3 significant figures.",
+      "back": "$x\\approx0.805$. Divide by 3 to get $e^{2x}=5$, so $2x=\\ln5$ and $x=\\frac{\\ln5}{2}$.",
+      "hint": "Start by dividing both sides by 3.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gwq53m",
+      "kind": "mistake",
+      "front": "Why can you not take $\\log_a x$ when $x=0$ or $x$ is negative?",
+      "back": "It is undefined there. The domain of $\\log_a x$ is **$x>0$**, so the logarithm of zero or of a negative number does not exist.",
+      "hint": "Look at the domain of the logarithm graph.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05s9n41",
+      "kind": "example",
+      "front": "How do you solve $2^x=20$, giving the answer to 3 significant figures?",
+      "back": "Take logarithms of both sides: $x\\ln2=\\ln20$, so $x=\\frac{\\ln20}{\\ln2}\\approx4.32$. Keep the exact form until the final step.",
+      "hint": "Take a logarithm of both sides.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gzby1a",
+      "kind": "formula",
+      "front": "What are the three laws of logarithms for base $a$?",
+      "back": "$\\log_a x+\\log_a y=\\log_a(xy)$, $\\log_a x-\\log_a y=\\log_a\\frac{x}{y}$ and $\\log_a x^n=n\\log_a x$. They follow from the **laws of exponents**.",
+      "hint": "A logarithm is a power, so think of the exponent laws.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12cu0pb",
+      "kind": "example",
+      "front": "A sample has mass $m=50e^{-0.2t}$ grams, with $t$ in hours. What is the mass after 5 hours?",
+      "back": "About **18.4 g**. Substituting gives $m=50e^{-1}\\approx50\\times0.3679\\approx18.4$.",
+      "hint": "Substitute $t=5$ and evaluate $e^{-1}$.",
+      "sectionId": "s2"
+    }
+  ]
+}

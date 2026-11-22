@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-7",
+  "topicCode": "4.7",
+  "topicName": "Discrete random variables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:50.705Z",
+  "cards": [
+    {
+      "id": "1u3myqd",
+      "kind": "term",
+      "front": "What is a discrete random variable?",
+      "back": "A **discrete random variable** takes only separate, countable values, usually whole numbers, such as the number of heads when two coins are tossed.",
+      "hint": "Think of values you can count.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1elddjf",
+      "kind": "concept",
+      "front": "What two rules must every probability distribution satisfy?",
+      "back": "Each probability lies between 0 and 1, and **all the probabilities add to 1**, so $\\sum P(X=x)=1$.",
+      "hint": "Check the coin table: $\\frac14+\\frac12+\\frac14$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09hvgyk",
+      "kind": "formula",
+      "front": "How is the expected value $E(X)$ calculated?",
+      "back": "$E(X)=\\sum xP(X=x)$: multiply each value by its probability, then **add the products**. It is the long-run mean of the distribution.",
+      "hint": "The probabilities act as weights.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ebfnlr",
+      "kind": "example",
+      "front": "A spinner has $P(X=1)=0.1$, $P(X=2)=0.2$, $P(X=3)=k$ and $P(X=4)=0.3$. Find $k$.",
+      "back": "$k=0.4$, since $0.1+0.2+k+0.3=1$.",
+      "hint": "Use the sum rule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16ym6zv",
+      "kind": "example",
+      "front": "For the spinner with values 1, 2, 3, 4 and probabilities 0.1, 0.2, 0.4, 0.3, find $E(X)$.",
+      "back": "$E(X)=2.9$, from $0.1+0.4+1.2+1.2=2.9$.",
+      "hint": "Multiply each value by its probability, then add.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1o85001",
+      "kind": "mistake",
+      "front": "A student finds $E(X)$ by adding the values and dividing by how many values there are. What is wrong?",
+      "back": "**Dividing by the number of values** is wrong. The probabilities already act as weights, so you only add the products $xP(X=x)$.",
+      "hint": "The values are not equally likely.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1y4ptfe",
+      "kind": "concept",
+      "front": "Can the expected value be a number that X can never actually take?",
+      "back": "Yes. $E(X)$ is the **balance point** of the distribution, so 2.9 is not a possible spinner score, but it describes the average outcome.",
+      "hint": "Think of a long-run average.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xlcjlh",
+      "kind": "term",
+      "front": "What do variance and standard deviation measure?",
+      "back": "**Variance** measures how widely the values spread about the mean. **Standard deviation** $\\sigma$ is its positive square root, in the same units as $X$.",
+      "hint": "Variance has squared units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0967m34",
+      "kind": "formula",
+      "front": "What is the shortcut formula for $\\mathrm{Var}(X)$, and what is $E(X^2)$?",
+      "back": "$\\mathrm{Var}(X)=E(X^2)-[E(X)]^2$, where $E(X^2)=\\sum x^2P(X=x)$.",
+      "hint": "Square the values before weighting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0szznr7",
+      "kind": "process",
+      "front": "In what order should you calculate the variance?",
+      "back": "Find **$E(X)$ first**, then **$E(X^2)$**, then subtract $[E(X)]^2$.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12eecy8",
+      "kind": "example",
+      "front": "For the spinner, $E(X)=2.9$ and $E(X^2)=9.3$. Find $\\mathrm{Var}(X)$ and $\\sigma$.",
+      "back": "$\\mathrm{Var}(X)=0.89$ and $\\sigma\\approx0.943$.",
+      "hint": "Subtract $2.9^2$ from 9.3.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wvp7vk",
+      "kind": "example",
+      "front": "A game costs £3. The prize X is 0 with probability 0.5, 2 with probability 0.3 and 10 with probability 0.2. Is the game fair?",
+      "back": "No. $E(X)=2.6$, so the expected gain is $2.6-3=-0.4$, about −£0.40 per game, which favours the organiser.",
+      "hint": "Expected gain is expected prize minus cost.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11874cs",
+      "kind": "concept",
+      "front": "What makes a game fair?",
+      "back": "A **fair game** has an expected gain of zero. A negative expected gain favours the organiser, and a positive one favours the player.",
+      "hint": "Consider the long-run average.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ehjk43",
+      "kind": "mistake",
+      "front": "Does a fair game guarantee that every player breaks even?",
+      "back": "No. Fairness is a **long-run average**, and single plays can differ widely from the expected gain.",
+      "hint": "Only the average over many plays matters.",
+      "sectionId": "s5"
+    }
+  ]
+}

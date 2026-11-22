@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "1-10",
+  "topicCode": "1.10",
+  "topicName": "Rational exponents",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:24.625Z",
+  "cards": [
+    {
+      "id": "1hd5fhv",
+      "kind": "concept",
+      "front": "What does the exponent $\\frac{1}{n}$ mean?",
+      "back": "It means the **nth root**: $a^{\\frac{1}{n}}=\\sqrt[n]{a}$. Raising this to the power $n$ gives back $a$, because $\\left(a^{\\frac{1}{n}}\\right)^n=a^1$.",
+      "hint": "Use the power of a power rule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0130mnh",
+      "kind": "formula",
+      "front": "In $a^{\\frac{m}{n}}$, what do the numerator and denominator tell you?",
+      "back": "The **denominator** $n$ gives the root and the **numerator** $m$ gives the power: $a^{\\frac{m}{n}}=\\sqrt[n]{a^m}=\\left(\\sqrt[n]{a}\\right)^m$.",
+      "hint": "Think of the fraction as root first, power second.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dcvxjw",
+      "kind": "process",
+      "front": "How do you solve $x^{\\frac{3}{2}}=27$?",
+      "back": "Raise both sides to the **reciprocal** power $\\frac{2}{3}$, so $x=27^{\\frac{2}{3}}=9$. Then check the answer in the original equation. Divide by any coefficient first.",
+      "hint": "What exponent undoes $\\frac{3}{2}$?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hfh4uk",
+      "kind": "term",
+      "front": "What is a rational exponent?",
+      "back": "An exponent that can be written as a **fraction** of two integers with a non-zero denominator, such as $\\frac{1}{2}$ or $-\\frac{2}{3}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hhyyy1",
+      "kind": "term",
+      "front": "What is the nth root of $a$?",
+      "back": "The **nth root** of $a$ is the number that gives $a$ when raised to the power $n$, written $\\sqrt[n]{a}$. For even $n$, $a$ must not be negative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bo2qin",
+      "kind": "concept",
+      "front": "What does a negative exponent do?",
+      "back": "It takes the **reciprocal**: $a^{-n}=\\frac{1}{a^n}$ for $a\\neq0$. The sign only tells you to take the reciprocal; the fraction still gives the root and power.",
+      "hint": "Move the power into the denominator.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hdzzp3",
+      "kind": "mistake",
+      "front": "Is $x^{\\frac{1}{2}}$ the same as $x\\div2$?",
+      "back": "No. The exponent $\\frac{1}{2}$ means a **square root**, so $x^{\\frac{1}{2}}=\\sqrt{x}$. Dividing by 2 is a different operation.",
+      "hint": "What does the denominator 2 name?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15ksygw",
+      "kind": "mistake",
+      "front": "Is $4^{-\\frac{1}{2}}$ negative because of the minus sign?",
+      "back": "No. The minus sign gives the **reciprocal**, so $4^{-\\frac{1}{2}}=\\frac{1}{2}$. A negative exponent never makes a positive base negative.",
+      "hint": "Read the sign and the fraction in two steps.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10an73m",
+      "kind": "example",
+      "front": "Evaluate $27^{-\\frac{2}{3}}$ without a calculator.",
+      "back": "$27^{-\\frac{2}{3}}=\\frac{1}{9}$. Take the reciprocal, find the cube root of 27 to get 3, square it to get 9, then place it in the denominator.",
+      "hint": "Start with the reciprocal.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "105vuyb",
+      "kind": "concept",
+      "front": "Do the index laws still apply to fractional exponents?",
+      "back": "Yes. For $a>0$ and $b>0$, the laws $a^s\\times a^t=a^{s+t}$, $\\frac{a^s}{a^t}=a^{s-t}$, $\\left(a^s\\right)^t=a^{st}$ and $(ab)^s=a^sb^s$ hold for any rational $s$ and $t$.",
+      "hint": "Rational exponents behave like whole-number ones.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cuwakc",
+      "kind": "example",
+      "front": "Simplify $\\left(16x^4\\right)^{\\frac{3}{4}}$.",
+      "back": "$8x^3$. Apply the power to each factor: $16^{\\frac{3}{4}}=8$ and $\\left(x^4\\right)^{\\frac{3}{4}}=x^3$.",
+      "hint": "Split the power over the product first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1py3vf1",
+      "kind": "concept",
+      "front": "If $x$ can be negative, how many real solutions does $x^{\\frac{2}{3}}=4$ have?",
+      "back": "**Two**: $x=8$ and $x=-8$, because a cube root of a negative number exists. If $x$ must be positive, only $x=8$ is kept.",
+      "hint": "Check whether the question limits x to positive values.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1av3kt5",
+      "kind": "example",
+      "front": "A value grows by 8% a year. What is the growth factor for half a year?",
+      "back": "$1.08^{\\frac{1}{2}}\\approx1.0392$, an increase of about 3.92%. Two half-year factors multiply back to 1.08, which is slightly less than 4% per half year.",
+      "hint": "Half a year means $t=\\frac{1}{2}$.",
+      "sectionId": "s6"
+    }
+  ]
+}

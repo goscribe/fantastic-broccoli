@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "e-5",
+  "topicCode": "E.5",
+  "topicName": "Fusion and stars",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:51.154Z",
+  "cards": [
+    {
+      "id": "15fr2uu",
+      "kind": "concept",
+      "front": "What process powers a main-sequence star, and where does its energy come from?",
+      "back": "**Nuclear fusion** of hydrogen nuclei into helium. The products have less mass than the starting particles, and this mass defect is released as energy.",
+      "hint": "Think about what changes in mass during the reaction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cso5ta",
+      "kind": "concept",
+      "front": "What two conditions must fuel meet before fusion can happen readily, and why?",
+      "back": "High **temperature** gives nuclei enough kinetic energy to overcome their repulsion and approach closely. High **density** makes nuclear collisions frequent enough.",
+      "hint": "Positive nuclei repel each other.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vj2eh4",
+      "kind": "formula",
+      "front": "What equation links a mass defect to the energy released, and what are its units?",
+      "back": "$E=\\Delta m c^2$, where $E$ is energy in joules, $\\Delta m$ is the mass defect in kilograms, and $c$ is the speed of light in $\\mathrm{m\\,s^{-1}}$.",
+      "hint": "This is Einstein's mass-energy equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iprp3p",
+      "kind": "example",
+      "front": "A fusion reaction has a mass defect of 0.0010 kg. How much energy is released, with $c=3.00\\times10^8\\,\\mathrm{m\\,s^{-1}}$?",
+      "back": "$9.0\\times10^{13}\\,\\mathrm{J}$, from $E=(0.0010)(3.00\\times10^8)^2$.",
+      "hint": "Substitute into E = Δm c² and square the speed of light first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1egpg3h",
+      "kind": "process",
+      "front": "Outline what happens to a lower-mass star after its core hydrogen runs low.",
+      "back": "1) It expands into a **red giant** and begins core helium fusion. 2) It sheds its outer layers. 3) It is left as a **white dwarf** with no sustained fusion.",
+      "hint": "Three stages, in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xb70oq",
+      "kind": "process",
+      "front": "Outline the later stages of a sufficiently massive star.",
+      "back": "It becomes a **red supergiant** and fuses successively heavier nuclei. Its core collapses, producing a supernova and leaving a neutron star or black hole.",
+      "hint": "Start from the red supergiant stage.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j0lud8",
+      "kind": "concept",
+      "front": "Why can a massive star not keep fusing elements beyond iron to support its core?",
+      "back": "Fusion releases energy only up to the formation of **iron**. Fusion beyond iron cannot support the core against gravity.",
+      "hint": "Consider whether the reaction releases or absorbs energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1g96onf",
+      "kind": "formula",
+      "front": "What equation gives the luminosity of a star treated as a black body, and what does each symbol mean?",
+      "back": "$L=\\sigma A T^4$, where $L$ is luminosity in W, $\\sigma$ is the Stefan–Boltzmann constant ($5.67\\times10^{-8}\\,\\mathrm{W\\,m^{-2}\\,K^{-4}}$), $A=4\\pi R^2$ is surface area in $\\mathrm{m^2}$, and $T$ is surface temperature in K.",
+      "hint": "Temperature enters to the fourth power.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1fenxge",
+      "kind": "formula",
+      "front": "What equation relates apparent brightness to luminosity and distance?",
+      "back": "$b=\\frac{L}{4\\pi d^2}$, where $b$ is apparent brightness in $\\mathrm{W\\,m^{-2}}$, $L$ is luminosity in W, and $d$ is distance in m. Brightness falls with the square of distance.",
+      "hint": "Spread the power over the surface of a sphere.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "00ewv54",
+      "kind": "example",
+      "front": "A star has a parallax angle of 0.20 arcseconds. How far away is it?",
+      "back": "$5.0\\,\\mathrm{pc}$, using $d=1/p=1/0.20$.",
+      "hint": "Parallax distance is the reciprocal of the parallax angle.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1cprvw8",
+      "kind": "term",
+      "front": "What is stellar parallax?",
+      "back": "**Half** of a nearby star's apparent angular shift against distant stars, measured between observations six months apart.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0q8eatv",
+      "kind": "mistake",
+      "front": "Does a high temperature guarantee that two colliding nuclei will fuse?",
+      "back": "No. High temperature makes fusion more likely, but it does not guarantee that **every collision** causes fusion.",
+      "hint": "Consider what 'more likely' means.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ks486d",
+      "kind": "concept",
+      "front": "Why is controlled fusion on Earth so difficult to achieve?",
+      "back": "Fuel must be heated, kept dense enough and confined long enough. Plasma can lose energy or become unstable, and a useful reactor must also recover enough energy for the whole facility.",
+      "hint": "Think about heating, confinement and energy recovery.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lkv8mm",
+      "kind": "term",
+      "front": "What is hydrostatic equilibrium in a star?",
+      "back": "The **balance** between inward gravity and outward pressure within the star.",
+      "sectionId": "s2"
+    }
+  ]
+}

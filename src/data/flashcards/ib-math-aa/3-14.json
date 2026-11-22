@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-14",
+  "topicCode": "3.14",
+  "topicName": "Vector equations of lines",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:25.140Z",
+  "cards": [
+    {
+      "id": "1c365r4",
+      "kind": "concept",
+      "front": "Why does r = a + λb describe every point on a line, using only one free number?",
+      "back": "Start at the known point **a**, then move λ times the direction **b**. Each real value of λ gives one point, so one parameter covers the whole line.",
+      "hint": "Think about walking forwards and backwards along a path.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0npjn5e",
+      "kind": "formula",
+      "front": "What does each symbol mean in the vector equation r = a + λb of a line?",
+      "back": "**r** is the position vector of a general point on the line, **a** is the position vector of a known point, **b** is a direction vector, and λ is a real **parameter**.",
+      "hint": "Name each letter in turn.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ah32xl",
+      "kind": "process",
+      "front": "How do you write a vector equation of the line through two points A and B?",
+      "back": "Find $\\overrightarrow{AB}$ as the position vector of B minus that of A, then use A as the known point: r = a + λ$\\overrightarrow{AB}$.",
+      "hint": "Subtract the position vectors, then pick one point as the start.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07oc1tp",
+      "kind": "term",
+      "front": "What is a position vector?",
+      "back": "The **position vector** of a point is the vector from the origin to that point. It has the same components as the point's coordinates.",
+      "hint": "Where does it start?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i2bfa7",
+      "kind": "term",
+      "front": "What is a direction vector of a line?",
+      "back": "A **direction vector** is any non-zero vector parallel to the line. It sets the line's tilt, and a line has many of them.",
+      "hint": "Does it need a fixed starting point?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1stu04f",
+      "kind": "term",
+      "front": "What is the parameter in a line's vector equation?",
+      "back": "The **parameter** is a variable, here λ, that can take any real value. Each value selects one particular point on the line.",
+      "hint": "What does changing the number do?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xomwlg",
+      "kind": "example",
+      "front": "A line passes through A(1,-2,3) and B(4,0,-1). What is a vector equation of the line?",
+      "back": "$\\overrightarrow{AB}$ = (3, 2, -4), so r = (1, -2, 3) + λ(3, 2, -4), using A as the known point.",
+      "hint": "Subtract A from B first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vh8yly",
+      "kind": "process",
+      "front": "How do you test whether a given point lies on a line?",
+      "back": "Use one coordinate to solve for λ, then check that the other two coordinates give the same **λ**. If one disagrees, the point is not on the line.",
+      "hint": "Start with the x-coordinate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kvr3yl",
+      "kind": "mistake",
+      "front": "A student checks only the x-coordinate to decide a point lies on a line. What is wrong?",
+      "back": "Checking one coordinate is not enough. All three coordinates must give the same value of λ, so **y and z must also be checked**.",
+      "hint": "How many equations must agree?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1s3ch8r",
+      "kind": "mistake",
+      "front": "A student says two different vector equations cannot describe the same line. Why is this wrong?",
+      "back": "A line has **many** correct equations. Any point on the line can be the known point, and any non-zero multiple of the direction vector can be used.",
+      "hint": "What can you change without changing the line?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h1jbqe",
+      "kind": "concept",
+      "front": "How can the parameter in a line equation represent motion?",
+      "back": "Let the parameter be time t in seconds. Then r gives the position in metres, and **b** is the velocity. Negative t gives earlier positions.",
+      "hint": "What does b represent for a moving object?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ltte5j",
+      "kind": "example",
+      "front": "A drone has r = (2, 1, 0) + t(3, 4, 12), with r in metres and t in seconds. What is its speed?",
+      "back": "Speed is $|\\mathbf{b}|=\\sqrt{3^2+4^2+12^2}=13$, so the speed is **13 m s⁻¹**.",
+      "hint": "Speed is the length of the direction vector.",
+      "sectionId": "s5"
+    }
+  ]
+}

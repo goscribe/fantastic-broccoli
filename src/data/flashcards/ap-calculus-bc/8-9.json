@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "8-9",
+  "topicCode": "8.9",
+  "topicName": "Disc method about the x- or y-axis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:58.992Z",
+  "cards": [
+    {
+      "id": "04bxtz9",
+      "kind": "concept",
+      "front": "What shape does a thin slice sweep out when a region that reaches the rotation axis is spun around it?",
+      "back": "A **disc**: a solid circular slice with no hole, because the region touches the axis. Its area is $A=\\pi r^2$.",
+      "hint": "Think about whether the slice has a hole in its middle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00s7ibx",
+      "kind": "formula",
+      "front": "What is the disc volume formula for rotating about the x-axis, and what is the radius?",
+      "back": "$V=\\pi\\int_a^b[f(x)]^2\\,dx$, where the **radius** is $r=f(x)$ and $a$, $b$ are the limits of integration.",
+      "hint": "Vertical slices have thickness dx.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rh6pbb",
+      "kind": "concept",
+      "front": "Which slices do you use for rotation about the y-axis?",
+      "back": "**Horizontal slices**, perpendicular to the y-axis. Each disc has radius $g(y)$ and thickness $dy$.",
+      "hint": "Slices must be perpendicular to the axis of rotation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zer6vs",
+      "kind": "term",
+      "front": "What is the radius of a disc in the disc method?",
+      "back": "The **radius** is the perpendicular distance from the rotation axis to the region's outer edge.",
+      "hint": "Measure to the outer edge of the region.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k357c0",
+      "kind": "process",
+      "front": "What are the steps to find a disc volume once the radius and limits are known?",
+      "back": "1) Square the whole radius expression. 2) Integrate it. 3) Apply the limits. 4) Multiply by $\\pi$. Include **cubic units** in the answer.",
+      "hint": "Square the whole expression, not just one term.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1guyz9y",
+      "kind": "mistake",
+      "front": "Why is using vertical discs wrong when rotating about the y-axis?",
+      "back": "Discs must be **perpendicular to the axis** of rotation, so for the y-axis use horizontal slices. Vertical discs face the wrong way.",
+      "hint": "Which way do slices face relative to the y-axis?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cf2gnu",
+      "kind": "formula",
+      "front": "What is the disc volume formula for rotating about the y-axis, and what does each symbol mean?",
+      "back": "$V=\\pi\\int_c^d[g(y)]^2\\,dy$, where $g(y)$ is the radius as an x-value, and $c$, $d$ are the lowest and highest y-values.",
+      "hint": "The variable of integration is y.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cjcu3o",
+      "kind": "concept",
+      "front": "Why might you need an inverse relation when finding a y-axis radius?",
+      "back": "Each y-value must give the outer edge as an **x-value**. For $y=x^2$, the right-hand branch gives $x=\\sqrt{y}$.",
+      "hint": "Solve the curve for x.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mypujy",
+      "kind": "concept",
+      "front": "What must you check before using discs for rotation about the x-axis?",
+      "back": "That the region **reaches the x-axis**. A graph below the axis has radius $|f(x)|$, but squaring gives the same volume formula.",
+      "hint": "Look at where the region sits relative to the axis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0628evw",
+      "kind": "example",
+      "front": "Find the volume when the region under $y=x$ from $x=0$ to $x=2$ is rotated about the x-axis, with both axes in centimeters.",
+      "back": "$V=\\frac{8\\pi}{3}\\,\\mathrm{cm^3}$, from $\\pi\\int_0^2 x^2\\,dx$.",
+      "hint": "The radius is x.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08qgo41",
+      "kind": "example",
+      "front": "Rotating the region under $y=x$ from $x=0$ to $x=3$ about the x-axis, with both axes in centimeters, what volume results?",
+      "back": "$9\\pi\\,\\mathrm{cm^3}$, from $\\pi\\int_0^3 x^2\\,dx=\\pi\\left[\\frac{x^3}{3}\\right]_0^3$.",
+      "hint": "Integrate x squared, then apply the limits.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15kxial",
+      "kind": "term",
+      "front": "What are cubic units in a volume answer?",
+      "back": "**Cubic units** measure volume. Each unit is a cube one length unit on each side, such as $\\mathrm{cm^3}$.",
+      "hint": "Volume is length times width times height.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rvezzd",
+      "kind": "term",
+      "front": "What are the limits of integration for a disc volume?",
+      "back": "The **limits of integration** are the left and right ends of the region along the axis, giving the interval over which disc areas are added.",
+      "hint": "For vertical slices, these are x-values.",
+      "sectionId": "s2"
+    }
+  ]
+}

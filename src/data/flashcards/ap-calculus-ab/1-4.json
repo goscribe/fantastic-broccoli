@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-4",
+  "topicCode": "1.4",
+  "topicName": "Estimating limits from tables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:31.450Z",
+  "cards": [
+    {
+      "id": "03wit6v",
+      "kind": "term",
+      "front": "What is a limit, as estimated from a table?",
+      "back": "A **limit** is the value a function approaches as its input gets closer to a given number. Tables estimate it using inputs near that number.",
+      "hint": "Think about what happens near the input, not at it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1h85cyz",
+      "kind": "concept",
+      "front": "When does a table suggest that a two-sided limit exists?",
+      "back": "When the **left-hand** and **right-hand** estimates agree on the same value. The output at the target input does not decide this.",
+      "hint": "Check each side separately, then compare.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kah3nc",
+      "kind": "concept",
+      "front": "What does it mean when the one-sided estimates from a table disagree?",
+      "back": "The **two-sided limit** does not exist. For g(x) near x=1, the left side approaches 1 and the right side approaches 3.",
+      "hint": "Compare the two sides before deciding.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1b434i1",
+      "kind": "term",
+      "front": "What is a left-hand limit?",
+      "back": "A **left-hand limit** is what a function approaches as inputs approach the target from below, using only inputs smaller than the target.",
+      "hint": "Left means smaller inputs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ietup2",
+      "kind": "term",
+      "front": "What is a right-hand limit?",
+      "back": "A **right-hand limit** is what a function approaches as inputs approach the target from above, using only inputs larger than the target.",
+      "hint": "Right means larger inputs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h5pius",
+      "kind": "process",
+      "front": "What are the steps to estimate a limit from a table?",
+      "back": "1) Read outputs for inputs below the target that move closer. 2) Read outputs for inputs above it that move closer. 3) If both sides approach one number, that is the **estimate**.",
+      "hint": "Read toward the target on each side.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08qcnmz",
+      "kind": "example",
+      "front": "Using f(1.99)=3.99, f(1.999)=3.999, f(2.001)=4.001 and f(2.01)=4.01, what is the estimated limit of f(x) as x approaches 2?",
+      "back": "The estimated limit is **4**. Values from below and from above both approach 4, so the sides agree.",
+      "hint": "Check both sides before answering.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k3yeoo",
+      "kind": "mistake",
+      "front": "A student says the table has no row at x=2, so the limit does not exist. What is wrong with this?",
+      "back": "The **limit** depends on nearby outputs, not on a row at the target. The f(x) table approaches 4 from both sides, so the limit is 4.",
+      "hint": "What determines a limit: the target row or nearby values?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pehja5",
+      "kind": "mistake",
+      "front": "A student scans down the f(x) column to guess the limit. What habit should replace this?",
+      "back": "**Read** each side toward the target input. Scanning down the column ignores whether inputs are getting closer to the target.",
+      "hint": "Focus on inputs moving toward the target.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0syfa5e",
+      "kind": "term",
+      "front": "What does a two-sided limit require?",
+      "back": "A **two-sided limit** exists when the left-hand and right-hand limits both exist and are equal.",
+      "hint": "Two conditions must both hold.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10pbldg",
+      "kind": "concept",
+      "front": "When might a table estimate suggest that no finite limit exists?",
+      "back": "When outputs fail to settle near one number, for example when they **grow without bound** or keep changing direction.",
+      "hint": "Look at whether the outputs settle down.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qu44b1",
+      "kind": "concept",
+      "front": "Can a finite table prove that a limit exists?",
+      "back": "**No**. A table shows only selected inputs, so it supports an estimate of the trend but cannot prove the trend continues arbitrarily close to the target.",
+      "hint": "Think about how many inputs a table shows.",
+      "sectionId": "s4"
+    }
+  ]
+}

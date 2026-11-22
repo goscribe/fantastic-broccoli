@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "8-6",
+  "topicCode": "8.6",
+  "topicName": "Biodiversity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:01.425Z",
+  "cards": [
+    {
+      "id": "1xovnn2",
+      "kind": "concept",
+      "front": "What are the three levels of biodiversity, and how are they connected?",
+      "back": "**Genetic**, **species**, and **ecosystem** diversity. They are connected: losing a habitat can remove species and reduce the variation within the species that remain.",
+      "hint": "Think about variation in genes, in species, and in habitats.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19bc5gf",
+      "kind": "concept",
+      "front": "How can diversity help an ecosystem withstand change?",
+      "back": "Diverse communities may keep a **function** going when one species declines, because other species can sometimes perform a similar role. Genetic variation can also help a population persist.",
+      "hint": "Consider what happens to plant reproduction if one pollinator becomes scarce.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19zltlz",
+      "kind": "concept",
+      "front": "Which human activities reduce biodiversity, and at which levels do they act?",
+      "back": "**Habitat loss**, pollution, invasive species, overharvesting, and climate change can reduce biodiversity at every level: genes, species, and ecosystems.",
+      "hint": "List at least four threats from the note.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "191nji2",
+      "kind": "term",
+      "front": "What is genetic diversity?",
+      "back": "**Genetic diversity** is variation in inherited traits among members of a species. Individuals with different traits may respond differently to disease or changing conditions.",
+      "hint": "Think about inherited traits within one species.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1q36jwh",
+      "kind": "term",
+      "front": "What is species diversity?",
+      "back": "**Species diversity** is the variety of species in a community and how evenly individuals are distributed among them.",
+      "hint": "It includes both how many species there are and their relative abundances.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0n40ie7",
+      "kind": "term",
+      "front": "What is ecosystem stability?",
+      "back": "**Ecosystem stability** is an ecosystem's ability to resist change or recover after a disturbance.",
+      "hint": "Two parts: resisting change and recovering from it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n37p44",
+      "kind": "concept",
+      "front": "Why does the effect of biodiversity on stability depend on which species are present?",
+      "back": "Species differ in their roles, so one species may provide a **function** that others cannot replace. The effect depends on which species are present and what changes occur.",
+      "hint": "Not all species can do the same job.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1219bkt",
+      "kind": "mistake",
+      "front": "A student says that more species always makes an ecosystem stable. What is wrong with this?",
+      "back": "More species do not guarantee **stability** in every situation. Instead, explain which function could be maintained and how, based on the species present.",
+      "hint": "Stability depends on roles and changes, not just counts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jud48y",
+      "kind": "term",
+      "front": "What is habitat loss, and what does fragmentation add to it?",
+      "back": "**Habitat loss** is the destruction or conversion of places organisms need to survive and reproduce. Fragmentation divides the remaining habitat into smaller, isolated areas.",
+      "hint": "Think about places organisms live and breed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1efct8u",
+      "kind": "concept",
+      "front": "Why can isolated populations be at greater risk when conditions change?",
+      "back": "Small populations may lose **genetic variation** and face greater extinction risk. Isolation can also leave them with fewer options when conditions change.",
+      "hint": "Link small size and isolation to variation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h7ohsg",
+      "kind": "mistake",
+      "front": "A species is found outside its native range. Is it automatically an invasive species?",
+      "back": "No. A species is **invasive** only when it spreads and causes harm, such as reducing native populations through competition, predation, or disease.",
+      "hint": "Two conditions must be met, not just one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fm8hct",
+      "kind": "term",
+      "front": "What are habitat corridors, and what do they allow?",
+      "back": "**Habitat corridors** connect separated habitats and allow organisms to move between them. This movement can help maintain genetic variation and support recolonization.",
+      "hint": "Think of a link between separate patches of habitat.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0we1tvo",
+      "kind": "concept",
+      "front": "What is the most important test when choosing a conservation approach?",
+      "back": "Identify the **threat** first, then link the action to that threat and the level of biodiversity it protects. A corridor helps an isolated population but will not remove a pollutant.",
+      "hint": "Match the action to the problem it solves.",
+      "sectionId": "s4"
+    }
+  ]
+}

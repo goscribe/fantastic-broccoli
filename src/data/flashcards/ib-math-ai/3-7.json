@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-7",
+  "topicCode": "3.7",
+  "topicName": "Radian measure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:35.320Z",
+  "cards": [
+    {
+      "id": "02fan9r",
+      "kind": "term",
+      "front": "What is one radian?",
+      "back": "One **radian** is the angle at the centre of a circle when the arc between its arms has the same length as the radius. Its size does not depend on the circle's size.",
+      "hint": "Compare the arc length with the radius.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0en5fox",
+      "kind": "formula",
+      "front": "What is the link between degrees and radians, and how do you convert from degrees to radians?",
+      "back": "$360^{\\circ}=2\\pi\\,\\mathrm{rad}$, so $180^{\\circ}=\\pi\\,\\mathrm{rad}$. To convert degrees to radians, multiply by $\\frac{\\pi}{180}$.",
+      "hint": "A full turn is $2\\pi$ radians.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07suq5z",
+      "kind": "formula",
+      "front": "For a sector with angle $\\theta$ in radians, what are the arc length $l$ and area $A$ in terms of radius $r$?",
+      "back": "$l=r\\theta$ and $A=\\frac{1}{2}r^2\\theta$. Both need $\\theta$ in **radians**, so no conversion factor is needed.",
+      "hint": "Compare with the circumference $2\\pi r$ and area $\\pi r^2$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0aaw89s",
+      "kind": "process",
+      "front": "How do you convert a radian value such as $\\frac{7\\pi}{12}$ to degrees?",
+      "back": "Multiply by $\\frac{180}{\\pi}$, then simplify. For example, $\\frac{7\\pi}{12}\\times\\frac{180}{\\pi}=7\\times15=105^{\\circ}$.",
+      "hint": "Use the factor that cancels the $\\pi$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nszlvy",
+      "kind": "example",
+      "front": "Convert $135^{\\circ}$ to radians, giving an exact value.",
+      "back": "$135\\times\\frac{\\pi}{180}=\\frac{3\\pi}{4}$, so $135^{\\circ}=\\frac{3\\pi}{4}\\,\\mathrm{rad}$.",
+      "hint": "Simplify $\\frac{135}{180}$ first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12gdbu3",
+      "kind": "concept",
+      "front": "Why should you keep $\\pi$ in an answer until the final line?",
+      "back": "Leaving $\\pi$ as a symbol keeps an **exact value**. Rounding early can cause rounding errors, so round only the final answer if a decimal is needed.",
+      "hint": "Think about when rounding should happen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v55948",
+      "kind": "example",
+      "front": "A sector has radius $8.0\\,\\mathrm{cm}$ and angle $0.75\\,\\mathrm{rad}$. Find its arc length and area.",
+      "back": "Arc length $l=8.0\\times0.75=6.0\\,\\mathrm{cm}$. Area $A=\\frac{1}{2}\\times8.0^2\\times0.75=24\\,\\mathrm{cm^2}$.",
+      "hint": "Use $l=r\\theta$ and $A=\\frac{1}{2}r^2\\theta$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gz2kgi",
+      "kind": "mistake",
+      "front": "A student uses $l=r\\theta$ with $\\theta=150$ from $150^{\\circ}$. What goes wrong?",
+      "back": "The formula only works with $\\theta$ in **radians**. Convert $150^{\\circ}$ to $\\frac{5\\pi}{6}\\,\\mathrm{rad}$ first, or use the degree formulae.",
+      "hint": "Check the unit of the angle before substituting.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03gddfl",
+      "kind": "formula",
+      "front": "For $y=\\sin(bx)$ with $x$ in radians, what is the period?",
+      "back": "The period is $\\frac{2\\pi}{b}$, the length of one full cycle. For $b=2$, the graph repeats every $\\pi$ units.",
+      "hint": "A plain $\\sin x$ has period $2\\pi$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r2wzod",
+      "kind": "term",
+      "front": "What is the period of a periodic function?",
+      "back": "The **period** is the smallest positive $x$-interval after which the graph repeats.",
+      "hint": "Think of the length of one full cycle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xxxs56",
+      "kind": "concept",
+      "front": "Why are radians preferred to degrees in calculus?",
+      "back": "With $x$ in radians, $\\frac{d}{dx}(\\sin x)=\\cos x$ exactly. In degrees, a stray factor of $\\frac{\\pi}{180}$ would appear.",
+      "hint": "Think about the gradient of $y=\\sin x$ at the origin.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09r1ma5",
+      "kind": "mistake",
+      "front": "Your calculator is in radian mode. A student types $\\sin 30$ and writes 0.5. Why is this wrong?",
+      "back": "In radian mode, 30 is read as 30 radians, giving about $-0.988$. Set the mode to match the unit, or write $30^{\\circ}$ in degree mode.",
+      "hint": "The calculator reads the number in its current mode.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1k3mfta",
+      "kind": "process",
+      "front": "What are the steps to get a trig calculation right with angles in mixed units?",
+      "back": "Decide whether the angle is in degrees or radians. Set the calculator to the matching mode. Keep $\\pi$ exact until the final line. Round only the final answer.",
+      "hint": "Start by checking the unit of the angle.",
+      "sectionId": "s5"
+    }
+  ]
+}

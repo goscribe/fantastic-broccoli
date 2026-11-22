@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "c1-3",
+  "topicCode": "C1.3",
+  "topicName": "Photosynthesis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:00.115Z",
+  "cards": [
+    {
+      "id": "15fybm3",
+      "kind": "concept",
+      "front": "What are the overall inputs and outputs of photosynthesis?",
+      "back": "The inputs are **carbon dioxide**, water and light energy. Oxygen is released, and chemical energy is stored in organic molecules such as carbohydrate.",
+      "hint": "Think about what goes in and what comes out of the chloroplast.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17o6dbg",
+      "kind": "concept",
+      "front": "How does light energy become chemical energy in the light-dependent reactions?",
+      "back": "**Chlorophyll** absorbs light and its electrons become excited. They pass along an electron transport chain, and the resulting proton gradient drives ATP synthase to make ATP. Electrons and hydrogen also reduce NADP.",
+      "hint": "Follow the electrons from chlorophyll to ATP and reduced NADP.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15fgx2k",
+      "kind": "concept",
+      "front": "Why does raising one factor stop increasing the rate of photosynthesis?",
+      "back": "A **limiting factor** is the condition that currently restricts the rate. Raising it speeds up photosynthesis only while it remains limiting; then another factor becomes the limit.",
+      "hint": "Ask which factor is in short supply right now.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l4m2sy",
+      "kind": "term",
+      "front": "Where do the light-dependent reactions and the Calvin cycle occur?",
+      "back": "The light-dependent reactions occur in the **thylakoid membranes**, and the Calvin cycle occurs in the **stroma** of the chloroplast.",
+      "hint": "One stage is in the membranes, the other in the fluid around them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0m6rb0f",
+      "kind": "process",
+      "front": "Outline the main steps of the light-dependent reactions, in order.",
+      "back": "1) Chlorophyll absorbs light and electrons are excited. 2) Electrons pass along the electron transport chain, moving protons across the membrane. 3) The proton gradient drives ATP synthase to make ATP. 4) Water is split, replacing lost electrons and releasing oxygen. 5) NADP gains electrons and hydrogen to form reduced NADP.",
+      "hint": "Start with light absorption and end with reduced NADP.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ek57v9",
+      "kind": "process",
+      "front": "Outline carbon fixation in the Calvin cycle.",
+      "back": "**Rubisco** catalyses the reaction of carbon dioxide with a five-carbon compound. The unstable product splits, and ATP and reduced NADP convert it into **triose phosphate**. ATP regenerates the five-carbon compound.",
+      "hint": "Name the enzyme first, then the product.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06mflx3",
+      "kind": "term",
+      "front": "What is carbon fixation?",
+      "back": "**Carbon fixation** is the incorporation of carbon from carbon dioxide into an organic molecule.",
+      "hint": "Think about where the carbon ends up.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13h4au7",
+      "kind": "term",
+      "front": "What does ATP synthase do in photosynthesis?",
+      "back": "**ATP synthase** uses energy from proton movement across a membrane to make ATP from ADP and phosphate.",
+      "hint": "What drives the proton movement?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0butqm4",
+      "kind": "mistake",
+      "front": "A student says the oxygen released in photosynthesis comes from carbon dioxide. What is wrong?",
+      "back": "The oxygen comes from **water**, not carbon dioxide. Water is split to replace electrons lost from chlorophyll, and oxygen is released as a result.",
+      "hint": "Which reactant is split during the light-dependent reactions?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17k8b0d",
+      "kind": "mistake",
+      "front": "A student says the Calvin cycle can continue indefinitely in the dark. Is this correct?",
+      "back": "No. The **Calvin cycle** does not use light directly, but it depends on ATP and reduced NADP made using light, so it cannot continue indefinitely without them.",
+      "hint": "Which products of the light-dependent reactions does it need?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lgsne1",
+      "kind": "formula",
+      "front": "What is the formula for average rate of oxygen production?",
+      "back": "$\\text{rate}=\\frac{\\text{volume of oxygen produced}}{\\text{time taken}}$. Units are per unit time, for example cm³ per minute.",
+      "hint": "Rate is how much is produced for each unit of time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17ii9ag",
+      "kind": "example",
+      "front": "A plant releases 18 cm³ of oxygen in 3 minutes. What is its average oxygen production rate?",
+      "back": "$18\\div3=6\\,\\mathrm{cm^3\\,min^{-1}}$. The average rate is 6 cm³ per minute.",
+      "hint": "Use rate = volume produced ÷ time taken.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16vfowd",
+      "kind": "concept",
+      "front": "How can temperature and water shortage reduce the rate of photosynthesis?",
+      "back": "Low temperature slows enzyme-controlled reactions, and excessive heat can damage enzymes. Water shortage can cause stomata to close, restricting carbon dioxide entry, and water is also a reactant.",
+      "hint": "Consider enzymes and the stomata.",
+      "sectionId": "s4"
+    }
+  ]
+}

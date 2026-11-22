@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "5-5",
+  "topicCode": "5.5",
+  "topicName": "Rotational equilibrium",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:46.321Z",
+  "cards": [
+    {
+      "id": "06ucm2f",
+      "kind": "formula",
+      "front": "What two conditions must both hold for an object to be in static equilibrium?",
+      "back": "The **net force** is zero, $\\sum \\vec{F} = 0$, and the **net torque** is zero, $\\sum \\tau = 0$. Each condition is needed on its own; one alone is not enough.",
+      "hint": "There is one sum for forces and one for torques.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00rfplx",
+      "kind": "concept",
+      "front": "Why is zero net torque alone not enough for full equilibrium?",
+      "back": "Zero net torque stops rotation but not sliding, because the object can still have a **net force**. Zero net force stops sliding but not rotation, so both conditions are needed.",
+      "hint": "Think about what each condition controls.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0r4cct0",
+      "kind": "process",
+      "front": "What steps should you follow when solving an equilibrium problem with unknown forces?",
+      "back": "Sketch the object and mark every force. Pick an **axis** that removes an unknown force. Write each torque as a signed value, counterclockwise positive. Set the sum of torques to zero, then use the force equation for anything left.",
+      "hint": "Start with a sketch and end with the force equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nv2pgh",
+      "kind": "term",
+      "front": "What is net torque?",
+      "back": "The **signed sum** of all torques about the same axis, with clockwise and counterclockwise torques given opposite signs.",
+      "hint": "All torques must be measured about one chosen axis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "138ym2u",
+      "kind": "mistake",
+      "front": "Does equilibrium always mean an object is at rest?",
+      "back": "**No**. An object in equilibrium may move at constant velocity or rotate at constant angular velocity. Being at rest is only one special case.",
+      "hint": "Equilibrium is about change, not about motion.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gm3u0b",
+      "kind": "concept",
+      "front": "Why is a force acting through the chosen axis useful?",
+      "back": "Its **lever arm** is zero, so its torque is zero. That unknown force drops out of the torque equation and the algebra gets shorter.",
+      "hint": "What is the torque of a force with zero distance from the axis?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1euoj1s",
+      "kind": "formula",
+      "front": "For a balanced seesaw with only weights creating torques, how are the masses and distances related?",
+      "back": "$m_1 r_1 = m_2 r_2$. The $g$ cancels on both sides, and the heavier child sits closer to the pivot.",
+      "hint": "Each side is mass times distance from the pivot.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q4gemg",
+      "kind": "example",
+      "front": "A 20 kg child sits 1.5 m left of a pivot. What mass sitting 1.0 m right of the pivot balances the seesaw?",
+      "back": "**30 kg**. Setting $(20)(1.5) = m_2(1.0)$ gives $m_2 = 30$ kg. The $g$ cancels.",
+      "hint": "Set the two torques equal and solve for the right-hand mass.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vqchmr",
+      "kind": "example",
+      "front": "A 6.0 m uniform plank of mass 12 kg has a 60 kg person 2.0 m from its left end. Using g = 10 m/s², what force does each support push with?",
+      "back": "The **left support** pushes with 460 N and the **right support** with 260 N. Torques about the left end give $F_2 = 1560/6.0 = 260$ N, then $F_1 = 720 - 260 = 460$ N.",
+      "hint": "Pick the left end as the axis so the left support drops out.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ow29k1",
+      "kind": "formula",
+      "front": "How should each torque be written in an equilibrium problem?",
+      "back": "As force times perpendicular distance, $\\tau = Fr$, with a sign for direction. Counterclockwise is usually taken as positive.",
+      "hint": "Use the distance perpendicular to the force.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bka1t1",
+      "kind": "mistake",
+      "front": "Can two equal and opposite forces still make an object rotate?",
+      "back": "**Yes**. The forces cancel, so the net force is zero, but if they act along different lines they produce torques in the same direction about the axis.",
+      "hint": "Check where the forces act, not just their sizes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19mf6r4",
+      "kind": "example",
+      "front": "A 10 N force gives 3.0 N m clockwise torque and a 6.0 N force gives 2.4 N m counterclockwise torque about the same axis. Is the bar in rotational equilibrium?",
+      "back": "**No**. The net torque is 0.6 N m clockwise, which is not zero, so the bar's angular velocity would change.",
+      "hint": "Compare the clockwise and counterclockwise totals.",
+      "sectionId": "s1"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "10-7",
+  "topicCode": "10.7",
+  "topicName": "Conservation of electric energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:29.964Z",
+  "cards": [
+    {
+      "id": "1uocea2",
+      "kind": "concept",
+      "front": "What does conservation of energy tell you about an isolated electric system with no outside forces doing work?",
+      "back": "The **total** energy stays constant: $K_i+U_{E,i}=K_f+U_{E,f}$, so $\\Delta K+\\Delta U_E=0$. Energy lost by one part shows up in another part.",
+      "hint": "Think of a ball rolling down a hill.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wvpg5m",
+      "kind": "formula",
+      "front": "How is the change in electric potential energy for a charge q crossing a potential difference ΔV calculated?",
+      "back": "$\\Delta U_E=q\\Delta V$, with q in **coulombs** and ΔV in volts. A positive charge moving through a negative ΔV loses $U_E$.",
+      "hint": "Potential difference is energy per unit charge.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08mj88q",
+      "kind": "formula",
+      "front": "How much energy is stored in a charged capacitor, and why is it not simply Q times ΔV?",
+      "back": "$U_C=\\frac{1}{2}Q\\Delta V=\\frac{1}{2}C(\\Delta V)^2$. The potential difference starts at zero and rises as charge builds, so its average is half the final value.",
+      "hint": "Think about the average voltage while charge builds up.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "104b9og",
+      "kind": "term",
+      "front": "What is electric potential energy, $U_E$?",
+      "back": "The **energy stored** in the arrangement of a system of charges, measured in joules (J).",
+      "hint": "It depends on how the charges are arranged.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0syplow",
+      "kind": "concept",
+      "front": "How is work done by the electric force linked to electric potential energy?",
+      "back": "$W_E=-\\Delta U_E$. When the electric force does positive work, $U_E$ **drops** by the same amount. Pushing a charge against the force raises $U_E$.",
+      "hint": "Check the sign carefully.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11xsl54",
+      "kind": "formula",
+      "front": "For a constant force, what is work, and what does each symbol mean?",
+      "back": "$W=Fd\\cos\\theta$, where F is the force, d is the displacement, and θ is the angle between force and displacement. Work is measured in **joules**.",
+      "hint": "Look at the angle between the two vectors.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02192ak",
+      "kind": "term",
+      "front": "What is electric potential difference, ΔV?",
+      "back": "The **energy change per unit charge**, $\\Delta V=\\Delta U_E/q$, measured in volts. One volt equals one joule per coulomb.",
+      "hint": "Per unit of what?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1phemhd",
+      "kind": "mistake",
+      "front": "A student says a battery's potential difference is the energy it supplies. What is wrong with this?",
+      "back": "**Potential difference** is energy per unit charge, not energy. A battery transfers more energy when more charge moves, since energy transferred is $Q\\Delta V$.",
+      "hint": "Think about how much charge moves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04iq56h",
+      "kind": "example",
+      "front": "A proton ($q=1.60\\times10^{-19}\\,\\mathrm{C}$, $m=1.67\\times10^{-27}\\,\\mathrm{kg}$) starts from rest, crosses $\\Delta V=-500\\,\\mathrm{V}$. Find its speed.",
+      "back": "$K_f=8.00\\times10^{-17}\\,\\mathrm{J}$ and $v\\approx3.10\\times10^{5}\\,\\mathrm{m/s}$. The energy gained is $-q\\Delta V$, and $v=\\sqrt{2K/m}$.",
+      "hint": "Start with $\\Delta U_E=q\\Delta V$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12am25d",
+      "kind": "mistake",
+      "front": "A student uses $U=Q\\Delta V$ for a capacitor and gets double the stored energy. What is the error?",
+      "back": "The potential difference rises from zero while charging, so the average is half the final value. The correct stored energy is $\\frac{1}{2}Q\\Delta V$.",
+      "hint": "Consider how ΔV changes during charging.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p58mcm",
+      "kind": "example",
+      "front": "A $5.0\\,\\mathrm{\\mu F}$ capacitor is fully charged by a $12\\,\\mathrm{V}$ battery. What charge and energy are stored?",
+      "back": "$Q=6.0\\times10^{-5}\\,\\mathrm{C}$ and $U_C=3.6\\times10^{-4}\\,\\mathrm{J}$. Find Q using $Q=C\\Delta V$, then use $\\frac{1}{2}Q\\Delta V$.",
+      "hint": "Find the charge first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "191vfni",
+      "kind": "process",
+      "front": "Why does a battery supply twice as much energy as the capacitor stores while charging it through a resistor?",
+      "back": "The battery transfers $Q\\Delta V$, but the capacitor stores only $\\frac{1}{2}Q\\Delta V$. The other half becomes **thermal energy** in the circuit's resistance, however large that resistance is.",
+      "hint": "List every store and transfer.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "089lhhq",
+      "kind": "process",
+      "front": "What happens to a charged capacitor's energy when it discharges through a resistor?",
+      "back": "Its **electric potential energy** decreases. The resistor turns that energy into thermal energy. In a bulb, some of it also leaves as light.",
+      "hint": "Follow the energy from start to finish.",
+      "sectionId": "s5"
+    }
+  ]
+}

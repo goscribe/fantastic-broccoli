@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "r1-2",
+  "topicCode": "R1.2",
+  "topicName": "Energy cycles in reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:42.248Z",
+  "cards": [
+    {
+      "id": "0r50icy",
+      "kind": "concept",
+      "front": "Does the enthalpy change between the same start and end states depend on the route taken?",
+      "back": "**No.** Hess's law says the enthalpy change depends only on the starting and final states, so every route gives the same total.",
+      "hint": "Think about the change in height between two places.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vzcxw4",
+      "kind": "process",
+      "front": "How do you build an enthalpy cycle to find an unknown enthalpy change?",
+      "back": "Write the balanced target reaction across the top with a common set of substances below. Draw known reactions as arrows, reversing signs and scaling values as needed, then set the two route totals equal so unwanted substances cancel.",
+      "hint": "Start with the target reaction and check which substances must cancel.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14o0lsv",
+      "kind": "formula",
+      "front": "Which formula estimates a reaction's enthalpy change from mean bond enthalpies of gaseous molecules?",
+      "back": "$\\Delta H_\\mathrm r\\approx\\sum E(\\mathrm{bonds\\ broken})-\\sum E(\\mathrm{bonds\\ made})$. Each $E$ is a **mean bond enthalpy** in kJ mol$^{-1}$, and every bond in the balanced equation is counted.",
+      "hint": "Breaking bonds takes energy; making bonds releases it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0wv66ah",
+      "kind": "term",
+      "front": "What is the enthalpy change of a reaction?",
+      "back": "The **heat transferred** by a reaction at constant pressure, for the equation as written.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "018zpir",
+      "kind": "mistake",
+      "front": "What is a common error when comparing two routes in an enthalpy cycle?",
+      "back": "Comparing routes with **different final states**. Check the chemical formulas and physical states at both endpoints before comparing.",
+      "hint": "Both routes must end in identical states.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dpnwl4",
+      "kind": "mistake",
+      "front": "What happens to an arrow's enthalpy change when you reverse that reaction in a cycle?",
+      "back": "Its **sign flips**. Multiplying an equation by a number also multiplies its enthalpy change by that number.",
+      "hint": "Check each arrow against its written equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xmo7e4",
+      "kind": "term",
+      "front": "Define the standard enthalpy change of formation, $\\Delta H^\\circ_\\mathrm f$.",
+      "back": "The enthalpy change when **one mole** of a substance forms from its elements in their standard states under standard conditions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1f5enxf",
+      "kind": "formula",
+      "front": "Which formula gives a reaction's enthalpy change from standard enthalpy changes of formation?",
+      "back": "$\\Delta H^\\circ_\\mathrm r=\\sum\\Delta H^\\circ_\\mathrm f(\\mathrm{products})-\\sum\\Delta H^\\circ_\\mathrm f(\\mathrm{reactants})$. Scale each value by its coefficient; an element in its **standard state** has a value of zero.",
+      "hint": "Think about the elements as the common starting point for both sides.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19nylen",
+      "kind": "term",
+      "front": "Define the standard enthalpy change of combustion, $\\Delta H^\\circ_\\mathrm c$.",
+      "back": "The enthalpy change when **one mole** of a substance burns completely in oxygen under standard conditions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q4iz5l",
+      "kind": "formula",
+      "front": "Which formula gives a reaction's enthalpy change from standard enthalpy changes of combustion?",
+      "back": "$\\Delta H^\\circ_\\mathrm r=\\sum\\Delta H^\\circ_\\mathrm c(\\mathrm{reactants})-\\sum\\Delta H^\\circ_\\mathrm c(\\mathrm{products})$. Include coefficients in both sums; substances that cannot burn have no combustion term.",
+      "hint": "Note the order is reversed compared with formation values.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08kpha6",
+      "kind": "example",
+      "front": "Combustion values: graphite −394, CO −283 kJ mol$^{-1}$. Find $\\Delta H$ for $\\mathrm{C(graphite)+\\frac12 O_2(g)\\rightarrow CO(g)}$.",
+      "back": "**−111 kJ mol$^{-1}$**. Both routes end at CO$_2$(g), so $\\Delta H+(-283)=-394$, giving $\\Delta H=-394+283=-111$.",
+      "hint": "Set up the two routes to CO$_2$ and equate them.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x71wrp",
+      "kind": "concept",
+      "front": "Why is a reaction enthalpy change calculated from mean bond enthalpies only an estimate?",
+      "back": "Each **mean bond enthalpy** is an average over different molecules, so the bond's actual energy varies between molecular environments. Non-gaseous substances also need extra state-change enthalpies.",
+      "hint": "Think about what 'mean' means.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ukjw5j",
+      "kind": "example",
+      "front": "Estimate $\\Delta H$ for $\\mathrm{H_2(g)+Cl_2(g)\\rightarrow 2HCl(g)}$ using H–H 436, Cl–Cl 243 and H–Cl 431 kJ mol$^{-1}$.",
+      "back": "**−183 kJ mol$^{-1}$**. Bonds broken are 436 + 243 = 679; bonds made are 2(431) = 862; so $\\Delta H\\approx 679-862=-183$.",
+      "hint": "Count the bonds in the balanced equation, including both H–Cl bonds.",
+      "sectionId": "s5"
+    }
+  ]
+}

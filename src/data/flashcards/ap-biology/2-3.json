@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "2-3",
+  "topicCode": "2.3",
+  "topicName": "Plasma membrane",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:20.579Z",
+  "cards": [
+    {
+      "id": "0yzuhhz",
+      "kind": "concept",
+      "front": "Why do phospholipids in the plasma membrane form a bilayer with their heads facing outward and tails facing inward?",
+      "back": "Their **water-attracting heads** face the watery environments on both sides, while their **water-repelling tails** point inward, away from water. The nonpolar interior then limits passage of ions and many polar substances.",
+      "hint": "Think about which part of a phospholipid is attracted to water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0h137z4",
+      "kind": "term",
+      "front": "What is the fluid mosaic model?",
+      "back": "A **flexible phospholipid bilayer** containing varied proteins and other components. \"Fluid\" means lipids and many proteins move sideways; \"mosaic\" means the components are arranged within or on the bilayer.",
+      "hint": "Fluid describes movement; mosaic describes arrangement.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p1jw1r",
+      "kind": "concept",
+      "front": "What jobs do membrane proteins perform, and what helps determine each job?",
+      "back": "They provide **selective pathways**, bind specific molecules as receptors, catalyze reactions at the surface, and attach to supporting structures. Their **shapes and locations** help determine their functions.",
+      "hint": "Consider where a protein sits and what shape it has.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "008iupy",
+      "kind": "term",
+      "front": "What is the plasma membrane?",
+      "back": "The **cell boundary** that separates the cell's interior from its surrounding environment.",
+      "hint": "Think about what surrounds the whole cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0aoyvkm",
+      "kind": "term",
+      "front": "What are integral proteins?",
+      "back": "Proteins that are **embedded in the bilayer**; some cross it completely.",
+      "hint": "Think about where the protein sits relative to the bilayer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gdqmhq",
+      "kind": "term",
+      "front": "What are peripheral proteins?",
+      "back": "Proteins that **attach to a membrane surface** or to another membrane protein, without entering the bilayer's interior.",
+      "hint": "Think about how they are attached, not embedded.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ismlma",
+      "kind": "mistake",
+      "front": "A student says every membrane protein is a channel. What is wrong with this?",
+      "back": "Not all are channels. Membrane proteins also carry out **signaling, catalysis, and attachment** to supporting structures.",
+      "hint": "Channels are only one of several roles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tgbvg9",
+      "kind": "concept",
+      "front": "Why do carbohydrate chains on the membrane help cells recognize one another?",
+      "back": "Chains on the **outer surface** have varied structures that form recognizable patterns. Other cells, such as immune cells, can identify these surface markers.",
+      "hint": "Consider where the chains are located and why that matters.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jiez4u",
+      "kind": "term",
+      "front": "What is a glycoprotein?",
+      "back": "A **protein** with an attached carbohydrate chain.",
+      "hint": "The prefix glyco- refers to carbohydrate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18hlt90",
+      "kind": "term",
+      "front": "What is a glycolipid, and how does it differ from a glycoprotein?",
+      "back": "A **lipid** with an attached carbohydrate chain. A glycoprotein has its carbohydrate chain attached to a protein instead.",
+      "hint": "Compare what the carbohydrate is attached to.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rl9pe2",
+      "kind": "concept",
+      "front": "What role does cholesterol play in animal cell membranes?",
+      "back": "It sits among the phospholipids and helps **moderate membrane fluidity** as temperature changes.",
+      "hint": "Think about how membranes respond to temperature changes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1j3myo5",
+      "kind": "mistake",
+      "front": "A student says that because the membrane is fluid, it has no structure. Why is this wrong?",
+      "back": "Fluid refers mainly to the **sideways movement** of lipids and many proteins. The components remain organized as a bilayer.",
+      "hint": "Fluid describes movement, not a lack of organization.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xg9ce5",
+      "kind": "concept",
+      "front": "How does the arrangement of membrane components let a cell keep its boundary while interacting with its surroundings?",
+      "back": "The bilayer **separates environments**, proteins provide specialized functions, and exposed carbohydrates support recognition. Together they maintain a boundary that still allows interaction.",
+      "hint": "Combine the roles of lipids, proteins, and carbohydrates."
+    }
+  ]
+}

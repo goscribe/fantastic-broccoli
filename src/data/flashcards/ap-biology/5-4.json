@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "5-4",
+  "topicCode": "5.4",
+  "topicName": "Non-Mendelian genetics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:41.674Z",
+  "cards": [
+    {
+      "id": "1s2v3qc",
+      "kind": "concept",
+      "front": "How does a heterozygote look in incomplete dominance compared with codominance?",
+      "back": "In **incomplete dominance** the heterozygote is intermediate between the two homozygotes, like pink flowers from red and white alleles. In **codominance** both alleles show visibly, like both A and B markers in type AB blood.",
+      "hint": "Compare an in-between colour with a shared display.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1apwk4s",
+      "kind": "concept",
+      "front": "Why can a recessive X-linked allele affect an XY individual but usually not an XX individual?",
+      "back": "An XY individual has only one X chromosome, so a single recessive allele shows. An XX individual usually needs **two recessive copies** to show the trait.",
+      "hint": "Count the X chromosomes in each sex.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pib9o5",
+      "kind": "concept",
+      "front": "Why can polygenic traits such as height show a range of phenotypes rather than a few clear categories?",
+      "back": "Several genes each contribute alleles to one trait, and many allele combinations produce a spread of outcomes. This is why a single-gene Punnett square cannot predict the full range.",
+      "hint": "Think about how several genes add together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x55cwm",
+      "kind": "term",
+      "front": "What are multiple alleles?",
+      "back": "**Multiple alleles** are more than two versions of one gene present in a population. An individual still carries only two alleles for an autosomal gene.",
+      "hint": "Compare the population with one individual.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bj5s4p",
+      "kind": "example",
+      "front": "A parent with genotype $I^Ai$ and a parent with genotype $I^Bi$ have a child. What is the probability the child has type AB blood?",
+      "back": "$\\frac{1}{4}$, or 25%. Each parent gives $I^A$ or $I^B$ with probability $\\frac{1}{2}$, and AB needs both, so $\\frac{1}{2}\\times\\frac{1}{2}=\\frac{1}{4}$.",
+      "hint": "List each parent's possible gametes first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1v4bk40",
+      "kind": "term",
+      "front": "What is codominance?",
+      "back": "**Codominance** is when both alleles contribute visibly to a heterozygote's phenotype, so neither allele masks the other.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lkt9g5",
+      "kind": "mistake",
+      "front": "Does incomplete dominance blend the two alleles into a new allele?",
+      "back": "No. The heterozygote looks intermediate, but the alleles stay distinct, and offspring can still inherit either original allele.",
+      "hint": "Think about what gets passed on to offspring.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05lx395",
+      "kind": "term",
+      "front": "What is a sex-linked trait?",
+      "back": "A **sex-linked trait** is influenced by a gene located on a sex chromosome. Many are X-linked, such as red-green color blindness.",
+      "hint": "Which kind of chromosome is involved?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0d6oacj",
+      "kind": "mistake",
+      "front": "A father has an X-linked recessive allele. Can he pass it directly to his sons?",
+      "back": "No. He gives his Y chromosome to his sons and his X to his daughters, so he does not pass an X-linked allele directly to XY offspring.",
+      "hint": "Which chromosome does a son get from his father?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1go6gp2",
+      "kind": "mistake",
+      "front": "Is polygenic inheritance the same as having multiple alleles?",
+      "back": "No. **Polygenic inheritance** involves several different genes contributing to one trait, while multiple alleles are several versions of one gene.",
+      "hint": "Count the genes involved.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10w5pun",
+      "kind": "term",
+      "front": "What is nondisjunction?",
+      "back": "**Nondisjunction** is the failure of homologous chromosomes to separate in meiosis I, or of sister chromatids to separate in meiosis II. It can produce gametes with an extra or a missing chromosome.",
+      "hint": "Which separation fails, and in which division?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dnr449",
+      "kind": "term",
+      "front": "What is trisomy 21, and which condition is it the most common cause of?",
+      "back": "**Trisomy 21** means three copies of chromosome 21 instead of the usual two. It is the most common cause of Down syndrome.",
+      "hint": "Think about the chromosome number.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01gt582",
+      "kind": "process",
+      "front": "Describe how a gamete with an extra chromosome 21 leads to trisomy 21.",
+      "back": "Nondisjunction produces a gamete with an extra chromosome 21. This gamete joins a typical gamete, so the resulting cell has three copies of chromosome 21.",
+      "hint": "Follow the gamete into the new cell.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "6-4",
+  "topicCode": "6.4",
+  "topicName": "FTC and accumulation functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:18.504Z",
+  "cards": [
+    {
+      "id": "101d71j",
+      "kind": "concept",
+      "front": "What does the Fundamental Theorem of Calculus say about the derivative of $A(x)=\\int_a^x f(t)\\,dt$ when $f$ is continuous?",
+      "back": "$A'(x)=f(x)$. The **rate** at which the accumulated total changes equals the value being accumulated at $x$.",
+      "hint": "Compare the derivative with the integrand.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ovo27i",
+      "kind": "concept",
+      "front": "What does $A(x)=\\int_a^x f(t)\\,dt$ measure, and why can it decrease?",
+      "back": "The **signed area** between $f$ and the horizontal axis from $a$ to $x$. Area above the axis adds, and area below subtracts, so $A$ decreases where $f(x)<0$.",
+      "hint": "Which regions add and which subtract?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0f7h92e",
+      "kind": "formula",
+      "front": "How can $\\int_a^b f(x)\\,dx$ be found without measuring each region's area?",
+      "back": "$F(b)-F(a)$, where $F'(x)=f(x)$ and $f$ is continuous on $[a,b]$. The **antiderivative** $F$ gives the signed area through its endpoint difference.",
+      "hint": "Use an antiderivative and its values at the endpoints.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ckrss2",
+      "kind": "term",
+      "front": "What is an accumulation function?",
+      "back": "A function that adds the values of a rate from a **fixed** starting point to a **moving** endpoint: $A(x)=\\int_a^x f(t)\\,dt$.",
+      "hint": "Which limit stays fixed?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1h6swla",
+      "kind": "mistake",
+      "front": "Why is $A'(x)$ not equal to $A(x)$ for an accumulation function?",
+      "back": "**The derivative equals the integrand at the upper limit**, $A'(x)=f(x)$. $A(x)$ is a total, while $A'(x)$ is its rate of change.",
+      "hint": "Think about what the derivative picks out.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lpllel",
+      "kind": "concept",
+      "front": "Why does continuity make $A'(x)=f(x)$ work?",
+      "back": "Moving the endpoint by $h$ adds a short piece whose average value of $f$ approaches $f(x)$ as $h$ approaches zero, because $f$ is **continuous**.",
+      "hint": "Think about the average value over a tiny interval.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pwfwnx",
+      "kind": "process",
+      "front": "What are the steps to differentiate $B(x)=\\int_a^{g(x)} f(t)\\,dt$?",
+      "back": "1) Evaluate $f$ at $g(x)$. 2) Multiply by the **chain rule** factor $g'(x)$. So $B'(x)=f(g(x))\\,g'(x)$.",
+      "hint": "Substitute the upper limit first, then differentiate it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "013aagc",
+      "kind": "example",
+      "front": "Find the derivative of $B(x)=\\int_2^{x^3}(t^2+4)\\,dt$.",
+      "back": "$B'(x)=((x^3)^2+4)(3x^2)=(x^6+4)(3x^2)$. The fixed lower limit 2 contributes nothing.",
+      "hint": "Replace $t$ with the upper limit before multiplying.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k3zyk9",
+      "kind": "term",
+      "front": "What is an antiderivative of $f$?",
+      "back": "A function $F$ whose derivative is $f$, so $F'(x)=f(x)$. Adding a constant to $F$ still gives an antiderivative.",
+      "hint": "Think of differentiation in reverse.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z76ynz",
+      "kind": "example",
+      "front": "Let $f(t)=2t+1$ and $A(x)=\\int_1^x f(t)\\,dt$. Find $A(3)$ and $A'(3)$.",
+      "back": "$A(3)=10$ using $F(t)=t^2+t$, so $F(3)-F(1)=12-2=10$. Also $A'(3)=f(3)=7$. The total is 10 square units, and the rate is 7.",
+      "hint": "Find an antiderivative first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pqqzxm",
+      "kind": "example",
+      "front": "Calculate $\\int_1^3(2t+1)\\,dt$ using an antiderivative.",
+      "back": "Use $F(t)=t^2+t$. Then $F(3)-F(1)=12-2=10$.",
+      "hint": "Evaluate the antiderivative at 3 and at 1.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0skepk5",
+      "kind": "mistake",
+      "front": "Does the choice of antiderivative change the value of a definite integral?",
+      "back": "**No**. Any added constant appears in both $F(b)$ and $F(a)$, so it cancels in $F(b)-F(a)$.",
+      "hint": "Look at the endpoint difference.",
+      "sectionId": "s4"
+    }
+  ]
+}

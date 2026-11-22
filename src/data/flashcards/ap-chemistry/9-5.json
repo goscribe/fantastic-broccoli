@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "9-5",
+  "topicCode": "9.5",
+  "topicName": "Free energy and equilibrium",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:23.662Z",
+  "cards": [
+    {
+      "id": "0p03enq",
+      "kind": "concept",
+      "front": "What is the value of reaction free energy, $\\Delta G$, when a reaction reaches equilibrium?",
+      "back": "**Zero.** At equilibrium $\\Delta G=0$, so the reaction has no net tendency to proceed in either direction.",
+      "hint": "Think about what happens to the net tendency to react at equilibrium.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15mekte",
+      "kind": "formula",
+      "front": "How is $\\Delta G^\\circ$ linked to the equilibrium constant $K$, and what do $R$ and $T$ stand for?",
+      "back": "$\\Delta G^\\circ=-RT\\ln K$. $R=8.314\\ \\mathrm{J\\,mol^{-1}\\,K^{-1}}$ is the gas constant and $T$ is the temperature in kelvins. $\\Delta G^\\circ$ is in J mol$^{-1}$. This follows from setting $Q=K$ and $\\Delta G=0$.",
+      "hint": "Substitute the equilibrium conditions into $\\Delta G=\\Delta G^\\circ+RT\\ln Q$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d067gf",
+      "kind": "concept",
+      "front": "If the current reaction quotient $Q$ is less than $K$, which way does the reaction proceed and why?",
+      "back": "**Forward**, toward products. $Q<K$ makes $\\Delta G$ negative, so the forward reaction as written is favored.",
+      "hint": "Use $\\Delta G=RT\\ln(Q/K)$ and check the sign.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1feoznc",
+      "kind": "term",
+      "front": "What is the reaction quotient, $Q$?",
+      "back": "The **reaction quotient** is the equilibrium-expression value calculated from the mixture's current activities. It uses the same expression as $K$ but describes the current mixture, not equilibrium.",
+      "hint": "It has the same form as $K$ but uses current conditions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09scl9u",
+      "kind": "term",
+      "front": "What is the standard free energy change, $\\Delta G^\\circ$?",
+      "back": "The **standard free energy change** is the reaction free energy when the reaction quotient equals one. It need not be zero when the reaction reaches equilibrium.",
+      "hint": "Ask what value of $Q$ defines the standard condition.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08ktrli",
+      "kind": "mistake",
+      "front": "A student says $\\Delta G^\\circ$ must be zero at equilibrium. Why is this wrong?",
+      "back": "**Equilibrium sets $\\Delta G$ to zero, not $\\Delta G^\\circ$.** $\\Delta G^\\circ$ describes the standard state where $Q=1$, so it is generally nonzero at equilibrium.",
+      "hint": "Compare which quantity is defined as zero at equilibrium.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "127ykgs",
+      "kind": "formula",
+      "front": "What equation links $\\Delta G$, $\\Delta G^\\circ$, $R$, $T$ and $Q$?",
+      "back": "$\\Delta G=\\Delta G^\\circ+RT\\ln Q$. $\\Delta G$ is reaction free energy under current conditions, $\\Delta G^\\circ$ is the standard value, $T$ is in kelvins, and $R=8.314\\ \\mathrm{J\\,mol^{-1}\\,K^{-1}}$.",
+      "hint": "Start from the standard value and add a term for the current mixture.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "043cpk8",
+      "kind": "concept",
+      "front": "What does a large equilibrium constant $K$ tell you about the sign of $\\Delta G^\\circ$ and the equilibrium mixture?",
+      "back": "A **large $K$** means products are favored at equilibrium, and $\\Delta G^\\circ$ is negative. When $K<1$, $\\Delta G^\\circ$ is positive; when $K=1$, $\\Delta G^\\circ=0$. These describe composition, not speed.",
+      "hint": "Use $\\Delta G^\\circ=-RT\\ln K$ and think about the sign of the logarithm.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ahv79m",
+      "kind": "example",
+      "front": "At 298 K, a reaction has $K=100$. What is $\\Delta G^\\circ$ in kJ mol$^{-1}$?",
+      "back": "$\\Delta G^\\circ=-(8.314)(298)\\ln(100)=-11409\\ \\mathrm{J\\,mol^{-1}}$, so **$-11.4\\ \\mathrm{kJ\\,mol^{-1}}$**. Convert to kilojoules only after the calculation.",
+      "hint": "Use $\\Delta G^\\circ=-RT\\ln K$ and keep units in joules until the end.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rt26dl",
+      "kind": "process",
+      "front": "What steps predict the direction a reaction will proceed from a given mixture at fixed temperature?",
+      "back": "1) Calculate the current $Q$ for the reaction as written. 2) Compare $Q$ with $K$. 3) If $Q<K$, $\\Delta G<0$ and the reaction goes forward; if $Q>K$, $\\Delta G>0$ and it goes reverse; if equal, there is no net change.",
+      "hint": "Start with the mixture's composition, then compare with $K$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1usy3xr",
+      "kind": "formula",
+      "front": "Which equation shows both the direction and sign of $\\Delta G$ by comparing $Q$ with $K$?",
+      "back": "$\\Delta G=RT\\ln(Q/K)$. A negative $\\Delta G$ favors the forward reaction as written, and a positive $\\Delta G$ favors the reverse reaction.",
+      "hint": "Combine $\\Delta G=\\Delta G^\\circ+RT\\ln Q$ with $\\Delta G^\\circ=-RT\\ln K$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12zhe7t",
+      "kind": "mistake",
+      "front": "Why is it wrong to compare $Q$ for a reversed equation with $K$ for the original equation?",
+      "back": "**The two values refer to different reaction equations.** Compare $Q$ and $K$ for the same reaction equation, so rewrite one expression before comparing.",
+      "hint": "Check that both expressions use the same equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "112in43",
+      "kind": "concept",
+      "front": "How do reversing a reaction and multiplying its coefficients change $K$ and $\\Delta G^\\circ$?",
+      "back": "**Reversing** replaces $K$ with $1/K$ and flips the sign of $\\Delta G^\\circ$. **Multiplying** every coefficient by a factor multiplies $\\Delta G^\\circ$ by that factor and raises $K$ to the same power.",
+      "hint": "Think about how $\\Delta G^\\circ=-RT\\ln K$ responds to each change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n64a9z",
+      "kind": "example",
+      "front": "A reaction has $K=4$. What are $K$ for the reverse reaction and for the reaction doubled?",
+      "back": "Reverse: **$K=1/4$**. Doubled: **$K=4^2=16$**. Each transformation preserves $\\Delta G^\\circ=-RT\\ln K$.",
+      "hint": "Reversing inverts $K$; doubling squares it.",
+      "sectionId": "s4"
+    }
+  ]
+}

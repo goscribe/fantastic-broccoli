@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "c4-1",
+  "topicCode": "C4.1",
+  "topicName": "Populations and communities",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:03.282Z",
+  "cards": [
+    {
+      "id": "0br66av",
+      "kind": "concept",
+      "front": "How does a community differ from a population?",
+      "back": "A **population** is one species in a particular area at a particular time. A **community** includes all the populations of different species living and interacting in that area. Population size and community composition answer different questions.",
+      "hint": "Count one species or count all species?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19isr2z",
+      "kind": "concept",
+      "front": "What decides whether a population rises, falls or stays steady?",
+      "back": "The **balance** of four processes. Births and immigration add individuals, while deaths and emigration remove them. Whichever side is larger sets the direction of change.",
+      "hint": "Sort the four processes into adding and removing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gxgu2p",
+      "kind": "concept",
+      "front": "What does an S-shaped growth curve show that a J-shaped curve does not?",
+      "back": "An S-shaped curve's growth **slows** as limiting factors strengthen, and it may level off near carrying capacity. A J-shaped curve keeps rising more rapidly while resources are plentiful, but cannot continue indefinitely.",
+      "hint": "Think about what happens to the slope over time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05xedii",
+      "kind": "term",
+      "front": "What is a population?",
+      "back": "Organisms of one **species** living in a particular area at a particular time.",
+      "hint": "Three conditions: species, place and time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kpwjp7",
+      "kind": "term",
+      "front": "What is emigration?",
+      "back": "Movement **out** of the defined area, which removes individuals from a population.",
+      "hint": "Compare with immigration, which is movement in.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bsij3t",
+      "kind": "concept",
+      "front": "Why do some effects on survival become stronger as a population grows?",
+      "back": "Crowded individuals may **compete** more intensely for food, so the effect depends on density. An extreme weather event can affect a population regardless of its density.",
+      "hint": "Compare density-dependent and density-independent effects.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ngws48",
+      "kind": "example",
+      "front": "A population grows from 40 to 52 individuals in three days. What is its average change per day?",
+      "back": "An increase of **4 individuals per day**. The change is $52-40=12$ individuals, and $12 \\div 3=4$.",
+      "hint": "Find the total change first, then divide by the number of days.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0irdxzh",
+      "kind": "process",
+      "front": "What are the steps to calculate a population's average daily change?",
+      "back": "1) Find the **change**: final number minus starting number. 2) Divide that change by the number of days taken.",
+      "hint": "Start with subtraction, finish with division.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "045qf7l",
+      "kind": "term",
+      "front": "What is competition between species?",
+      "back": "An interaction in which organisms use the same **limited resource**, so both may have less access to it.",
+      "hint": "Think about what the species are sharing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01ib5n7",
+      "kind": "term",
+      "front": "What is mutualism?",
+      "back": "An interaction in which **both** species benefit. For example, an animal obtains food from flowers while transferring pollen between them.",
+      "hint": "Mutual means both sides gain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cwmzwv",
+      "kind": "mistake",
+      "front": "Does predation always make prey numbers fall?",
+      "back": "No. Prey numbers also depend on **births** and other causes of death, so predation does not always make them fall.",
+      "hint": "Predation is only one factor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e5e3yd",
+      "kind": "mistake",
+      "front": "Does a flat growth curve mean births and deaths have stopped?",
+      "back": "No. A flat curve shows little net change because **additions and losses** may balance, while births and deaths still occur.",
+      "hint": "Flat means net change, not zero activity.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1egme9f",
+      "kind": "term",
+      "front": "What is carrying capacity?",
+      "back": "The **population size** that an environment can support over time.",
+      "hint": "S-shaped curves often level off near this value.",
+      "sectionId": "s4"
+    }
+  ]
+}

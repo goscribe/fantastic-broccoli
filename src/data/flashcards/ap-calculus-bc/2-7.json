@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "2-7",
+  "topicCode": "2.7",
+  "topicName": "Derivatives of sin x, cos x, e^x and ln x",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:58.310Z",
+  "cards": [
+    {
+      "id": "04b1rd1",
+      "kind": "formula",
+      "front": "What are the derivatives of sin x and cos x when x is measured in radians?",
+      "back": "$\\frac{d}{dx}\\sin x=\\cos x$ and $\\frac{d}{dx}\\cos x=-\\sin x$. The **radian** measure is what makes these formulas hold.",
+      "hint": "Pay close attention to the sign on the cosine derivative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ivlleu",
+      "kind": "formula",
+      "front": "What are the derivatives of e^x and ln x?",
+      "back": "$\\frac{d}{dx}e^x=e^x$, so $e^x$ is its own **derivative**. $\\frac{d}{dx}\\ln x=\\frac{1}{x}$, valid for $x>0$.",
+      "hint": "Check the domain before you answer for ln x.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12kw9j5",
+      "kind": "process",
+      "front": "How do you differentiate a sum with constant multiples, such as $3\\sin x-2\\cos x+5$?",
+      "back": "Differentiate each term separately. A **constant multiple** stays in front of its term's derivative, and a constant term has derivative zero. So the result is $3\\cos x+2\\sin x$.",
+      "hint": "Work one term at a time and keep signs attached.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01m5hyl",
+      "kind": "term",
+      "front": "What is the natural logarithm?",
+      "back": "The **natural logarithm** is the function $\\ln x$, defined for $x>0$, with derivative $\\frac{1}{x}$.",
+      "hint": "Think about which inputs are allowed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dzn70u",
+      "kind": "term",
+      "front": "What is a derivative function?",
+      "back": "A **derivative function** gives the instantaneous slope of the original function at each input where the derivative exists.",
+      "hint": "It answers how steep the original graph is at each point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0uao1w4",
+      "kind": "mistake",
+      "front": "A student writes that the derivative of cos x is sin x. What is wrong?",
+      "back": "The derivative of cos x is **negative** sin x, so $\\frac{d}{dx}\\cos x=-\\sin x$. Keep the minus sign.",
+      "hint": "Compare the sign with the sine derivative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gs35o0",
+      "kind": "mistake",
+      "front": "A student differentiates ln x and gives an answer with no domain. What should they add?",
+      "back": "They should state the **domain** $x>0$, because the rule $\\frac{1}{x}$ only applies where ln x is defined.",
+      "hint": "Ask where ln x is defined.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1upng25",
+      "kind": "process",
+      "front": "What are the steps to find the slope of a curve at a specific x-value?",
+      "back": "First **differentiate** the whole function term by term. Then substitute the given input and evaluate, keeping each term's sign.",
+      "hint": "Do the differentiation before substituting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01vpybm",
+      "kind": "concept",
+      "front": "Why is the slope of sin x at x=0 equal to 1, while the slope of cos x there is 0?",
+      "back": "Because $\\frac{d}{dx}\\sin x=\\cos x$, and $\\cos 0=1$. Also $\\frac{d}{dx}\\cos x=-\\sin x$, and $-\\sin 0=0$.",
+      "hint": "Substitute x=0 into each derivative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0h6k5a4",
+      "kind": "example",
+      "front": "Find the slope of $y=2\\sin x-\\cos x+e^x$ at $x=0$, with x in radians.",
+      "back": "The slope is $3$. Differentiating gives $y'=2\\cos x+\\sin x+e^x$, and at $x=0$ this is $2(1)+0+1=3$.",
+      "hint": "Differentiate first, then substitute x=0.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19l3l2l",
+      "kind": "example",
+      "front": "Find the slope of $y=\\sin x+\\ln x$ at $x=1$.",
+      "back": "The slope is $\\cos 1+1$. Differentiating gives $y'=\\cos x+\\frac{1}{x}$, and at $x=1$ this is $\\cos 1+1$.",
+      "hint": "Use $\\frac{1}{x}$ for the ln x term.",
+      "sectionId": "s4"
+    }
+  ]
+}

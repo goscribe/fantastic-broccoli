@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "2-6",
+  "topicCode": "2.6",
+  "topicName": "Gravitational force",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:35.056Z",
+  "cards": [
+    {
+      "id": "0uk1q96",
+      "kind": "concept",
+      "front": "How do the two masses and the distance between them change the gravitational force?",
+      "back": "Force rises with **both masses** and falls with the **square of the distance** between their centers, $F_g = G\\frac{m_1 m_2}{r^2}$.",
+      "hint": "Think about what happens when you double each quantity.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bowazh",
+      "kind": "concept",
+      "front": "What happens to gravity's pull when the distance between two objects doubles?",
+      "back": "It falls to **one quarter** of its original value. Force varies as $1/r^2$, so this is an **inverse-square law**.",
+      "hint": "Square the distance factor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1duwo07",
+      "kind": "formula",
+      "front": "What is the formula for weight near Earth's surface, and what does each symbol mean?",
+      "back": "$F_g = mg$: **weight** $F_g$ in newtons, mass $m$ in kilograms, and $g$ the gravitational field strength, about 9.8 N/kg.",
+      "hint": "Weight is a force, so its unit is newtons.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10znfzh",
+      "kind": "term",
+      "front": "What is the gravitational force?",
+      "back": "The **attractive** force that any two objects with mass exert on each other, acting along the line joining their centers. The two forces are equal and opposite.",
+      "hint": "Think of a dropped pencil and Earth.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0s009kx",
+      "kind": "mistake",
+      "front": "A student says gravity only acts between planets and stars. What is wrong with this?",
+      "back": "**Any two masses** attract each other. Between everyday objects the force is just far too small to notice.",
+      "hint": "Gravity is not reserved for large objects.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qusqp2",
+      "kind": "formula",
+      "front": "What is Newton's law of gravitation, and what does each symbol mean?",
+      "back": "$F_g = G\\frac{m_1 m_2}{r^2}$: $F_g$ is force in N, $m_1$ and $m_2$ are masses in kg, $r$ is the distance between centers in m, and $G$ is a constant.",
+      "hint": "Each mass appears once; distance is squared.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y0bkyt",
+      "kind": "term",
+      "front": "What is the gravitational constant G, and why does its size matter?",
+      "back": "$G = 6.67\\times10^{-11}\\ \\mathrm{N\\,m^2/kg^2}$. Its **tiny value** is why gravity is weak between small objects.",
+      "hint": "Compare it with the masses of everyday objects.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ifvhsk",
+      "kind": "process",
+      "front": "What steps should you follow for a problem asking how a gravitational force changes?",
+      "back": "Write the new force as the old force times a **factor for each change**. Use $\\frac{1}{r^2}$ for distance, keep mass factors unsquared, combine them, and leave $G$ out.",
+      "hint": "Write each factor separately before combining.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10hedjx",
+      "kind": "example",
+      "front": "Two objects attract with 8.0 N. One mass is doubled and the distance is tripled. What is the new force?",
+      "back": "About **1.8 N**. Multiply by the factors: $8.0\\times2\\times\\frac{1}{9}=\\frac{16}{9}\\approx1.8$ N.",
+      "hint": "Each change gives its own factor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0t4blha",
+      "kind": "mistake",
+      "front": "A student says mass and weight are the same thing. What is wrong with that?",
+      "back": "**Mass** is in kilograms and stays the same everywhere. **Weight** is a force in newtons and depends on the value of $g$.",
+      "hint": "Ask which one changes on the Moon.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1w5u3ep",
+      "kind": "term",
+      "front": "What is gravitational field strength g?",
+      "back": "The **gravitational force per unit mass** at a location, in N/kg. Near Earth's surface it is about 9.8 N/kg.",
+      "hint": "Think of force divided by mass.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08zpdcr",
+      "kind": "example",
+      "front": "A backpack has a mass of 5.0 kg. What is its weight near Earth's surface?",
+      "back": "**49 N**, directed downward. Using $F_g = mg = (5.0)(9.8) = 49$ N.",
+      "hint": "Use $g = 9.8$ N/kg.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r5ce0b",
+      "kind": "concept",
+      "front": "Why does g not depend on the mass of the falling object?",
+      "back": "Setting $mg = G\\frac{Mm}{r^2}$, the **mass $m$ cancels**, leaving $g = G\\frac{M}{r^2}$, which depends only on Earth's mass and distance.",
+      "hint": "Set weight equal to the general law.",
+      "sectionId": "s5"
+    }
+  ]
+}

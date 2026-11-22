@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "7-5",
+  "topicCode": "7.5",
+  "topicName": "Hardy-Weinberg equilibrium",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:52.881Z",
+  "cards": [
+    {
+      "id": "1sxiyn2",
+      "kind": "concept",
+      "front": "What does the Hardy-Weinberg model predict about a population's allele frequencies?",
+      "back": "Allele frequencies stay **constant** across generations when the model's conditions hold. This gives a stable baseline to compare real populations against.",
+      "hint": "Think about what stays the same from one generation to the next.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16qtvn8",
+      "kind": "formula",
+      "front": "Write the two Hardy-Weinberg equations and say what $p$ and $q$ represent.",
+      "back": "$p+q=1$ and $p^2+2pq+q^2=1$. Here $p$ and $q$ are the **allele frequencies** of the two alleles.",
+      "hint": "One equation links alleles, the other links genotypes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1j4uy5l",
+      "kind": "term",
+      "front": "What are the five conditions required for Hardy-Weinberg equilibrium?",
+      "back": "**No mutation**, **no gene flow**, **no natural selection**, **random mating**, and a **very large population** that limits genetic drift.",
+      "hint": "Each one rules out a way allele frequencies could change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07k13c1",
+      "kind": "term",
+      "front": "Define allele frequency.",
+      "back": "The **proportion of all gene copies** in a population that carry a given allele.",
+      "hint": "Count gene copies, not individuals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1w7fbu8",
+      "kind": "mistake",
+      "front": "A student says random mating means every individual survives equally. What is wrong with this?",
+      "back": "Random mating concerns **which individuals pair**. Survival and reproduction are covered by the natural selection condition, so the two are different.",
+      "hint": "Mating and survival are separate conditions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06pzbmy",
+      "kind": "example",
+      "front": "In a population of 100, 16 individuals show a recessive phenotype (aa). Under equilibrium, what are $p$ and $q$?",
+      "back": "$q=0.40$ and $p=0.60$. Since $q^2=0.16$, $q=\\sqrt{0.16}=0.40$, so $p=1-0.40=0.60$.",
+      "hint": "Start from the homozygous recessive genotype.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0160eca",
+      "kind": "example",
+      "front": "Using the same population (16 of 100 show the recessive phenotype), what are the AA, Aa, and aa genotype frequencies?",
+      "back": "AA = **0.36**, Aa = **0.48**, aa = **0.16**. These come from $p^2$, $2pq$, and $q^2$ using $p=0.60$ and $q=0.40$.",
+      "hint": "Apply $p^2$, $2pq$, and $q^2$ in turn.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13iakue",
+      "kind": "example",
+      "front": "If the recessive homozygous frequency is 0.09 in an equilibrium population, what is the heterozygous frequency?",
+      "back": "**0.42**. Here $q=0.30$ and $p=0.70$, so $2pq=2(0.70)(0.30)=0.42$.",
+      "hint": "Find $q$ first, then $p$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rw3sjh",
+      "kind": "concept",
+      "front": "Why is the heterozygote frequency $2pq$ rather than $pq$?",
+      "back": "A heterozygote can receive the first allele from either parent. The two allele orders each have frequency $pq$, so they add to **$2pq$**.",
+      "hint": "Count the two ways to get one of each allele.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1n5t2yk",
+      "kind": "process",
+      "front": "What steps check whether a population's genotype frequencies match Hardy-Weinberg predictions?",
+      "back": "1) Calculate $p$ and $q$ from observed allele counts. 2) Compute expected $p^2$, $2pq$, and $q^2$. 3) Compare these with the observed genotype frequencies.",
+      "hint": "Begin with allele counts, not genotype counts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1phpuig",
+      "kind": "mistake",
+      "front": "Observed genotype frequencies differ from Hardy-Weinberg predictions. Can you say which condition failed?",
+      "back": "No. A difference may mean **at least one condition** failed, but it cannot identify which one. Chance variation in a sample can also cause a difference.",
+      "hint": "A departure is evidence, not a diagnosis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00bssy9",
+      "kind": "concept",
+      "front": "How can nonrandom mating change genotype frequencies without changing allele frequencies?",
+      "back": "Nonrandom mating alters **genotype frequencies** by itself. Allele frequencies change only through other processes, such as gene flow or natural selection.",
+      "hint": "Mating affects which genotypes combine, not the alleles themselves.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dvhx07",
+      "kind": "concept",
+      "front": "Why does a sustained change in allele frequencies across generations matter?",
+      "back": "It is **evidence that the population is evolving**. Allele frequencies are changing over time rather than staying at equilibrium.",
+      "hint": "Compare across several generations, not just one.",
+      "sectionId": "s4"
+    }
+  ]
+}

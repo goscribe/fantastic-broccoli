@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "2-7",
+  "topicCode": "2.7",
+  "topicName": "Derivatives of sin x, cos x, e^x and ln x",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:46.603Z",
+  "cards": [
+    {
+      "id": "1nhmuho",
+      "kind": "formula",
+      "front": "What are the derivatives of sin x and cos x (x in radians)?",
+      "back": "$\\frac{d}{dx}\\sin x=\\cos x$ and $\\frac{d}{dx}\\cos x=-\\sin x$. The **negative sign** belongs to the cosine derivative.",
+      "hint": "Think about which one picks up a minus sign.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ivlleu",
+      "kind": "formula",
+      "front": "What are the derivatives of e^x and ln x?",
+      "back": "$\\frac{d}{dx}e^x=e^x$, so **e^x keeps its form**. $\\frac{d}{dx}\\ln x=\\frac{1}{x}$ for **x>0**, the domain of ln x.",
+      "hint": "One of these stays the same after differentiating.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a313dd",
+      "kind": "concept",
+      "front": "Why can you differentiate a sum like 3 sin x − 2 cos x + 5 term by term?",
+      "back": "**Each term is differentiated separately**: sums and constant multiples pass through, and a constant term has derivative zero.",
+      "hint": "What happens to the constant 5?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ize729",
+      "kind": "mistake",
+      "front": "A student says the derivative of cos x is sin x. What is wrong?",
+      "back": "They dropped the **negative sign**. The correct derivative is $-\\sin x$, so keep the minus.",
+      "hint": "Check the sign carefully.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dzn70u",
+      "kind": "term",
+      "front": "What is a derivative function?",
+      "back": "A **derivative function** gives the instantaneous slope of the original function at each input where the derivative exists.",
+      "hint": "It is a function, not a single number.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l6t3qk",
+      "kind": "concept",
+      "front": "Why must you check that x is positive before using 1/x for ln x?",
+      "back": "The **domain** of ln x is x>0, so the derivative $\\frac{1}{x}$ only applies where x>0.",
+      "hint": "Where is ln x defined?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0saq7vz",
+      "kind": "process",
+      "front": "What are the steps to find the slope of a function at a given input?",
+      "back": "1) **Differentiate** each term first. 2) **Substitute** the input. 3) Evaluate, keeping each term's sign attached.",
+      "hint": "Which step comes before substituting?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1maa8iz",
+      "kind": "example",
+      "front": "Find the derivative of f(x)=3 sin x − 2 cos x + 5.",
+      "back": "$f'(x)=3\\cos x+2\\sin x$. The **constant 5** disappears, and the −2 cos x term gives +2 sin x.",
+      "hint": "Differentiate each term separately.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0o3bxw9",
+      "kind": "example",
+      "front": "Find the slope of y=2 sin x − cos x + e^x at x=0, with x in radians.",
+      "back": "**3**. Here $y'=2\\cos x+\\sin x+e^x$, so $y'(0)=2(1)+0+1=3$.",
+      "hint": "Substitute x=0 after differentiating.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1msbf8j",
+      "kind": "example",
+      "front": "What is the slope of y = sin x + ln x at x = 1?",
+      "back": "$\\cos 1+1$. Since $y'=\\cos x+\\frac{1}{x}$, substituting x=1 gives $\\cos 1+1$.",
+      "hint": "Differentiate each term first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16dr4l3",
+      "kind": "concept",
+      "front": "How does the slope of sin x at x=0 compare with the slope of cos x at x=0?",
+      "back": "sin x has slope **1** at x=0 because its graph rises there. cos x has slope **0** because its graph is flat there.",
+      "hint": "Picture both graphs at x=0.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gr785o",
+      "kind": "concept",
+      "front": "What does the derivative of e^x tell you about the slope of e^x?",
+      "back": "The slope is **positive everywhere**, and it equals the function's own value, e^x.",
+      "hint": "Compare the derivative with the original function.",
+      "sectionId": "s2"
+    }
+  ]
+}

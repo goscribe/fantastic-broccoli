@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-14",
+  "topicCode": "1.14",
+  "topicName": "Complex roots and De Moivre's theorem",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:05.770Z",
+  "cards": [
+    {
+      "id": "0ucqxs1",
+      "kind": "formula",
+      "front": "State De Moivre's theorem for $\\left[r(\\cos\\theta+i\\sin\\theta)\\right]^n$, where $n$ is an integer.",
+      "back": "$\\left[r(\\cos\\theta+i\\sin\\theta)\\right]^n=r^n(\\cos n\\theta+i\\sin n\\theta)$. The **modulus** is raised to the power $n$ and the **argument** is multiplied by $n$.",
+      "hint": "Think about what happens to the modulus and the argument each time you multiply.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kaob5c",
+      "kind": "formula",
+      "front": "What formula gives the $n$th roots of $w=R\\,\\mathrm{cis}\\,\\phi$?",
+      "back": "$z_k=R^{1/n}\\,\\mathrm{cis}\\left(\\frac{\\phi+2\\pi k}{n}\\right)$ for $k=0,1,\\dots,n-1$. Every root has the same **modulus** $R^{1/n}$, so only the argument changes.",
+      "hint": "Solve $z^n=w$ using De Moivre's theorem.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oah0xl",
+      "kind": "concept",
+      "front": "Where do the $n$ roots of a non-zero complex number sit on an Argand diagram?",
+      "back": "They lie on one **circle** centred at the origin, equally spaced, forming the corners of a regular $n$-sided polygon.",
+      "hint": "Think about their moduli and the gap between their arguments.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01r79xu",
+      "kind": "process",
+      "front": "What are the steps to find the $n$th roots of a complex number $w$?",
+      "back": "1) Write $w$ in polar form. 2) Take the **$n$th root of the modulus**. 3) Find the arguments $\\frac{\\phi+2\\pi k}{n}$ for $k=0,\\dots,n-1$. 4) Convert each root back to $a+bi$ form.",
+      "hint": "Four steps, in this order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p6f3w1",
+      "kind": "example",
+      "front": "Find the cube roots of $8i$.",
+      "back": "$z=\\sqrt3+i$, $z=-\\sqrt3+i$ or $z=-2i$. Each has **modulus** $2$, and the arguments are $\\frac{\\pi}{6}$, $\\frac{5\\pi}{6}$ and $\\frac{3\\pi}{2}$.",
+      "hint": "Start by writing $8i$ as $8\\,\\mathrm{cis}\\frac{\\pi}{2}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dzpc9s",
+      "kind": "process",
+      "front": "How can you check one of your roots of $z^3=8i$?",
+      "back": "Raise it to the power $n$ and check you get $w$ back. For example, $(-2i)^3=8i$, so the root is correct.",
+      "hint": "Use the power equation itself.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0x0d13g",
+      "kind": "example",
+      "front": "Evaluate $(1+i)^8$.",
+      "back": "$16$. The modulus is $\\sqrt2$, so $(\\sqrt2)^8=16$. The argument is $\\frac{\\pi}{4}$, so $8\\times\\frac{\\pi}{4}=2\\pi$, giving $16(\\cos2\\pi+i\\sin2\\pi)=16$.",
+      "hint": "Find the modulus and argument first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gdp8fi",
+      "kind": "mistake",
+      "front": "When raising $r\\,\\mathrm{cis}\\,\\theta$ to the power $n$, what do students often forget?",
+      "back": "They forget to raise the **modulus** $r$ to the power $n$. The correct result is $r^n\\,\\mathrm{cis}\\,n\\theta$, not $r\\,\\mathrm{cis}\\,n\\theta$.",
+      "hint": "Look at what De Moivre's theorem does to $r$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0y7z2i9",
+      "kind": "concept",
+      "front": "Why do all $n$th roots of unity lie on the unit circle?",
+      "back": "Every root has **modulus** 1, because $1=1\\,\\mathrm{cis}\\,0$ gives $R^{1/n}=1$. The roots are spaced $\\frac{2\\pi}{n}$ apart in argument.",
+      "hint": "Use the formula with $R=1$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08k2ot7",
+      "kind": "term",
+      "front": "What is an $n$th root of unity?",
+      "back": "A **complex number** $z$ with $z^n=1$. There are $n$ of them, all with modulus 1.",
+      "hint": "Think of the equation $z^n=1$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v9ayox",
+      "kind": "process",
+      "front": "How can you find all the $n$th roots once you know one root $z_0$?",
+      "back": "Multiply $z_0$ by $\\omega^k$, where $\\omega=\\mathrm{cis}\\frac{2\\pi}{n}$ and $k=0,1,\\dots,n-1$. Each product is a **rotation** of $z_0$ and gives another root.",
+      "hint": "Use the roots of unity as a template.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ngyfy2",
+      "kind": "example",
+      "front": "Solve $z^4=16$ using one root.",
+      "back": "$z=2$, $z=2i$, $z=-2$ or $z=-2i$. Since $2^4=16$, multiply $2$ by the fourth roots of unity $1$, $i$, $-1$ and $-i$.",
+      "hint": "Find one easy root first.",
+      "sectionId": "s5"
+    }
+  ]
+}

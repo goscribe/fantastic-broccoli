@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "3-10",
+  "topicCode": "3.10",
+  "topicName": "Solubility",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:27.835Z",
+  "cards": [
+    {
+      "id": "16eucjc",
+      "kind": "term",
+      "front": "What is solubility?",
+      "back": "**Solubility** is the equilibrium maximum amount of solute that dissolves in a given amount of solvent at a stated temperature. For gases, the pressure must also be stated.",
+      "hint": "Think of it as a limit, not a speed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0l2218l",
+      "kind": "concept",
+      "front": "Why do polar and ionic solutes often dissolve well in polar solvents?",
+      "back": "Dissolving forms new solute–solvent attractions, and **polarity** helps predict which attractions can form. Like-with-like is a useful trend, but not a guarantee.",
+      "hint": "Name the character of both the solute and the solvent.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14kwrum",
+      "kind": "concept",
+      "front": "How does temperature usually change how much solid and how much gas dissolve in a liquid?",
+      "back": "Solubility of most **solids** rises as temperature rises. For most **gases**, solubility falls as temperature rises, because gas particles more readily leave a warmer liquid.",
+      "hint": "Solids and gases often behave in opposite directions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "108f1pw",
+      "kind": "concept",
+      "front": "What is Henry’s law?",
+      "back": "At constant temperature, the dissolved concentration of a gas is **proportional** to its partial pressure above the liquid. Higher gas pressure means higher gas solubility.",
+      "hint": "Think about why a sealed fizzy drink fizzes when opened.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qtn6ru",
+      "kind": "term",
+      "front": "What is an unsaturated solution?",
+      "back": "An **unsaturated solution** contains less dissolved solute than its solubility limit under the same conditions, so more solute can still dissolve.",
+      "hint": "Compare with the limit at the same temperature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mcb6fd",
+      "kind": "term",
+      "front": "What is a saturated solution?",
+      "back": "A **saturated solution** contains the equilibrium maximum amount of dissolved solute under the stated conditions. Added solute stays undissolved while conditions stay the same.",
+      "hint": "This is the solution sitting exactly at the limit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0arvlwo",
+      "kind": "term",
+      "front": "What is a supersaturated solution?",
+      "back": "A **supersaturated solution** contains more dissolved solute than the equilibrium limit at its current conditions. It is unstable compared with a saturated solution.",
+      "hint": "It can form when a hot saturated solution cools.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qif25v",
+      "kind": "process",
+      "front": "What happens when a supersaturated solution starts to crystallize?",
+      "back": "1) The solution is unstable. 2) A seed crystal or a disturbance triggers crystallization. 3) The excess solute comes out of solution as crystals.",
+      "hint": "Start from the trigger, then the crystals forming.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gs6i30",
+      "kind": "concept",
+      "front": "What is happening at equilibrium in a saturated solution with excess solid present?",
+      "back": "Dissolving and crystallizing both continue, at **equal rates**, so the dissolved amount stays constant.",
+      "hint": "Both processes keep going, they just balance.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fl4ly2",
+      "kind": "term",
+      "front": "What does miscible mean?",
+      "back": "**Miscible** liquids mix with each other in all proportions under the stated conditions. Liquids with limited mutual solubility may instead separate into two layers.",
+      "hint": "Think of liquids that blend completely.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1u7uxtc",
+      "kind": "term",
+      "front": "What is hydration?",
+      "back": "**Hydration** is the surrounding of dissolved particles by water molecules. Water's partially negative oxygen ends face positive ions, and its partially positive hydrogen ends face negative ions.",
+      "hint": "Picture water molecules clustering around ions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1x63gic",
+      "kind": "mistake",
+      "front": "A solid dissolves faster after stirring, so its solubility must have increased. Is this right?",
+      "back": "No. A **faster dissolving rate** does not mean greater solubility. Stirring and crushing change the rate but not the equilibrium limit under the same conditions.",
+      "hint": "Rate and limit are different things.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1anhm6n",
+      "kind": "mistake",
+      "front": "Does strong hydration of an ionic solid guarantee it is highly soluble in water?",
+      "back": "No. Breaking the crystal can need more energy than hydration provides, and entropy also affects the outcome, so not every ionic solid is highly soluble.",
+      "hint": "Consider the energy needed to separate the ions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nhwxyu",
+      "kind": "mistake",
+      "front": "Should you apply the gas pressure trend to a solid dissolved in water?",
+      "back": "No. Pressure usually has **little effect** on the solubility of solids and liquids under ordinary conditions. The pressure trend is for gases.",
+      "hint": "Check whether the solute is a gas.",
+      "sectionId": "s3"
+    }
+  ]
+}

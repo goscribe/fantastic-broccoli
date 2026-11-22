@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "a2-3",
+  "topicCode": "A2.3",
+  "topicName": "Viruses",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:55.829Z",
+  "cards": [
+    {
+      "id": "0ftu1ak",
+      "kind": "concept",
+      "front": "What must every virus particle contain, and what protects its genetic material?",
+      "back": "Every virus has a **genome** of DNA or RNA, enclosed by a protective protein **capsid**. Capsid proteins also help give the virus its shape.",
+      "hint": "Two components: one genetic, one protein.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0x14zuk",
+      "kind": "concept",
+      "front": "Why does a virus infect some cells but not others?",
+      "back": "Its viral **attachment protein** must bind a matching **receptor** on the host cell surface. This match helps set the virus's host range.",
+      "hint": "Think lock and key.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ece22r",
+      "kind": "concept",
+      "front": "Why can a virus not reproduce without a host cell?",
+      "back": "It lacks its own **ribosomes** and metabolism, so it uses host ribosomes, energy and materials to make new genomes and proteins.",
+      "hint": "What machinery does a virus lack?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0uhxyw2",
+      "kind": "term",
+      "front": "What is an envelope in a virus?",
+      "back": "An **envelope** is a lipid membrane surrounding the capsid of some viruses. It derives from a host-cell membrane during budding or intracellular assembly.",
+      "hint": "Some viruses have it, others do not.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04a55eb",
+      "kind": "term",
+      "front": "What is an attachment protein?",
+      "back": "An **attachment protein** is a viral surface protein that binds to a host cell. It binds to a receptor on the host cell.",
+      "hint": "It is found on the virus surface.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ndo02e",
+      "kind": "process",
+      "front": "Outline the routes by which a viral genome can enter a host cell after attachment.",
+      "back": "Enveloped viruses may fuse their envelope with the cell membrane. Other viruses are taken up into a **membrane-bound compartment**. Some inject their genome while the capsid stays outside.",
+      "hint": "Three different routes, depending on the virus.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tf63eq",
+      "kind": "process",
+      "front": "Outline how a virus makes new particles inside a host cell.",
+      "back": "The viral genome directs production of viral nucleic acid and proteins, using host ribosomes and resources. New genomes and proteins **assemble** into particles, which leave by cell rupture or release from the membrane.",
+      "hint": "Three stages: make, assemble, release.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1akawsk",
+      "kind": "concept",
+      "front": "Why does a viral infection not always kill the host cell straight away?",
+      "back": "Some viral genomes **persist** inside the cell before producing new particles. In some cases viral DNA becomes part of the host genome, which delays cell destruction.",
+      "hint": "Think about timing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s6bi7q",
+      "kind": "mistake",
+      "front": "Is it enough for a virus to bind a receptor on a cell to infect it?",
+      "back": "No. A **receptor** match does not guarantee infection. The cell must also support the later stages, so the virus can use the cell to produce its components.",
+      "hint": "Attachment is only the first step.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lv8b2j",
+      "kind": "term",
+      "front": "What are ribosomes?",
+      "back": "**Ribosomes** are cellular structures that make proteins by translating genetic instructions.",
+      "hint": "Found in cells, used by viruses.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1p5gtg8",
+      "kind": "concept",
+      "front": "How do viruses and living cells compare in how they reproduce?",
+      "back": "Cells divide using their own machinery and cytoplasm. Viruses use host machinery to make components that **assemble** into new particles. Both have inheritable genetic material.",
+      "hint": "Compare division with assembly.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17lm7b1",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a virus is alive just because it has genetic material that can vary and be inherited?",
+      "back": "Cells also have inheritable genetic material, but a virus lacks independent **metabolism** and cannot grow or reproduce outside a host. Viruses are therefore usually described as non-living.",
+      "hint": "Consider what a virus cannot do alone.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1d1misr",
+      "kind": "term",
+      "front": "What is metabolism?",
+      "back": "**Metabolism** is the collection of chemical reactions that sustain a cell. Viruses lack their own metabolism.",
+      "hint": "Chemical reactions inside a cell.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "3-4",
+  "topicCode": "3.4",
+  "topicName": "Derivatives of inverse trig functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:54.405Z",
+  "cards": [
+    {
+      "id": "1sumio5",
+      "kind": "formula",
+      "front": "What is the derivative of arcsin x, and for which inputs does it apply?",
+      "back": "$\\frac{1}{\\sqrt{1-x^2}}$, for $-1<x<1$. The **positive** square root means arcsine is increasing on this interval.",
+      "hint": "Think about the sign of the square root on this interval.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mghjqs",
+      "kind": "formula",
+      "front": "What is the derivative of arctan x, and what does its denominator tell you?",
+      "back": "$\\frac{1}{1+x^2}$. The **denominator** is always positive, so arctangent increases for every real input.",
+      "hint": "Check whether the denominator can ever be zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nh7rqz",
+      "kind": "process",
+      "front": "How do you differentiate arctan(u(x)) when the input is an expression in x?",
+      "back": "Use the **chain rule**: multiply the arctangent derivative by $u'(x)$, giving $\\frac{u'}{1+u^2}$.",
+      "hint": "Identify the inner function u first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0yhjorp",
+      "kind": "concept",
+      "front": "How is the derivative of arccos x related to the derivative of arcsin x?",
+      "back": "They differ only by a **sign**: $\\frac{d}{dx}(\\arccos x)=-\\frac{1}{\\sqrt{1-x^2}}$, because arccosine decreases as x increases.",
+      "hint": "Consider the graph of arccosine.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d7ru9x",
+      "kind": "term",
+      "front": "What does the arcsine function return?",
+      "back": "The **angle** in $[-\\pi/2,\\pi/2]$ whose sine equals its input.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jkjcra",
+      "kind": "term",
+      "front": "What range of angles does arccosine return?",
+      "back": "Angles in $[0,\\pi]$ whose **cosine** equals the input.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k98itp",
+      "kind": "term",
+      "front": "What angles does arctangent return, and which inputs are allowed?",
+      "back": "Angles in $(-\\pi/2,\\pi/2)$ whose **tangent** equals the input. Every real number is a valid input.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mj2sav",
+      "kind": "mistake",
+      "front": "Is arcsin x the same as 1/sin x?",
+      "back": "No. **Arcsine** is the inverse of sine on a restricted interval, not a reciprocal. Do not replace arcsin x with 1/sin x.",
+      "hint": "Reciprocal and inverse are different ideas.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uxgi9y",
+      "kind": "concept",
+      "front": "Why is the derivative of arcsin x not defined at x = 1?",
+      "back": "The **denominator** $\\sqrt{1-x^2}$ equals zero at $x=1$, so the derivative does not exist there.",
+      "hint": "Look at the denominator at the endpoints.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1aar20c",
+      "kind": "concept",
+      "front": "Where is the arctangent derivative largest, and what happens as |x| grows?",
+      "back": "It is largest at $x=0$, where it equals **1**. As $|x|$ grows, it approaches zero, so the graph flattens.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0esh36u",
+      "kind": "mistake",
+      "front": "What common error happens when differentiating arctan(3x²)?",
+      "back": "Forgetting the **inner derivative**. The correct result is $\\frac{6x}{1+9x^4}$, not just $\\frac{1}{1+(3x^2)^2}$.",
+      "hint": "Compare the outer formula with the full chain rule result.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wj4umx",
+      "kind": "example",
+      "front": "Find the derivative of arccos(2x) and state where the formula applies.",
+      "back": "$-\\frac{2}{\\sqrt{1-4x^2}}$, valid for **$-\\frac12<x<\\frac12$**, where $|2x|<1$.",
+      "hint": "Use u = 2x and u' = 2.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0twipiz",
+      "kind": "example",
+      "front": "Find the derivative of y = arctan(x³) at x = 1.",
+      "back": "$y'=\\frac{3x^2}{1+x^6}$, so at $x=1$, $y'=\\frac{3}{2}$.",
+      "hint": "Multiply the outer formula by the derivative of x³.",
+      "sectionId": "s4"
+    }
+  ]
+}

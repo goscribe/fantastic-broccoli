@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-7",
+  "topicCode": "1.7",
+  "topicName": "Summary statistics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:55.742Z",
+  "cards": [
+    {
+      "id": "1l4nywh",
+      "kind": "concept",
+      "front": "Why can the median describe a skewed data set better than the mean?",
+      "back": "The **median** is resistant: extreme values barely move it. The mean is pulled toward the long tail because every value goes into its sum.",
+      "hint": "Think about what one very large value does to each statistic.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sxbh16",
+      "kind": "concept",
+      "front": "What does the standard deviation tell you about a data set?",
+      "back": "It measures how far values typically fall from the **mean**. Unlike the IQR, it uses every value in the data set.",
+      "hint": "Think of the typical gap between a value and the average.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sr0ie8",
+      "kind": "term",
+      "front": "What is the interquartile range (IQR), and why is it useful?",
+      "back": "The **IQR** is $Q_3-Q_1$, the spread of the middle half of the data. Extreme values barely affect it.",
+      "hint": "Quartiles mark the edges of the middle half.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1n85u3a",
+      "kind": "formula",
+      "front": "What is the formula for the sample mean, and what does each symbol mean?",
+      "back": "$\\bar{x}=\\frac{\\sum x}{n}$: $\\bar{x}$ is the **mean**, $\\sum x$ is the sum of all the values, and $n$ is the number of values. It has the same units as the data.",
+      "hint": "Add everything, then share it equally.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01djd6x",
+      "kind": "example",
+      "front": "Five friends sent 2, 4, 6, 8, and 15 text messages. What are the mean and the median?",
+      "back": "The mean is 7 messages, from $\\frac{35}{5}=7$. The median is 6 messages, the middle value of the ordered data.",
+      "hint": "Order the data first, then find the middle value.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17wqkc6",
+      "kind": "mistake",
+      "front": "A student finds the median of 9, 2, 14, 5, 7 by taking the middle value as listed. What is wrong?",
+      "back": "The data must be **ordered** first. The middle of an unordered list is not the median. Ordered, the data are 2, 5, 7, 9, 14, so the median is 7.",
+      "hint": "What must happen before you locate the middle?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cl6a05",
+      "kind": "process",
+      "front": "What are the steps to find $Q_1$ and $Q_3$ for ordered data?",
+      "back": "Split the ordered data into a lower half and an upper half. $Q_1$ is the median of the lower half and $Q_3$ is the median of the upper half. With an odd count, leave out the median.",
+      "hint": "Start by finding the middle of the whole list.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rjyego",
+      "kind": "example",
+      "front": "Ten students read 3, 5, 6, 8, 9, 11, 12, 14, 15, and 21 pages. What are the range and the IQR?",
+      "back": "The range is 18 pages, from $21-3$. The IQR is 8 pages, from $Q_3-Q_1=14-6$.",
+      "hint": "The range uses only the two extremes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b5t5rx",
+      "kind": "formula",
+      "front": "What is the formula for the sample standard deviation $s$, and what do its parts mean?",
+      "back": "$s=\\sqrt{\\frac{\\sum(x-\\bar{x})^2}{n-1}}$. Each $x-\\bar{x}$ is a deviation from the mean. Squaring removes signs, dividing by $n-1$ gives the sample version, and $s$ has the data's units.",
+      "hint": "Deviations, squared, averaged, then rooted.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0of41uo",
+      "kind": "process",
+      "front": "What are the steps to calculate a sample standard deviation by hand?",
+      "back": "Find the mean. Subtract it from each value. Square each deviation and add them. Divide the sum by $n-1$. Take the square root.",
+      "hint": "Five steps, and the last one is a square root.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07xl4tw",
+      "kind": "example",
+      "front": "A student practices for 3, 5, 7, 9, and 11 minutes on five days. What is the standard deviation?",
+      "back": "$s=\\sqrt{10}\\approx3.16$ minutes. The mean is 7 minutes, the squared deviations add to 40, and $\\frac{40}{4}=10$.",
+      "hint": "Divide by $n-1=4$, not by 5.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1f71n1w",
+      "kind": "mistake",
+      "front": "Why is saying only 'the mean is 24' not a full interpretation of a statistic?",
+      "back": "A **number alone** is not enough. The answer must say what the statistic means for the variable, with units, such as 'the average delivery takes 24 minutes.'",
+      "hint": "Who or what does the number describe?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18c37kz",
+      "kind": "concept",
+      "front": "Which pair of statistics should you use for roughly symmetric data without outliers, and which for skewed data or data with outliers?",
+      "back": "Use the **mean and standard deviation** for roughly symmetric data without outliers. Use the **median and IQR** for skewed data or data with outliers.",
+      "hint": "Match the statistics to the shape of the distribution.",
+      "sectionId": "s5"
+    }
+  ]
+}

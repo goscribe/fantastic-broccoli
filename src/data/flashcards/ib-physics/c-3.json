@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "c-3",
+  "topicCode": "C.3",
+  "topicName": "Wave phenomena",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:36.132Z",
+  "cards": [
+    {
+      "id": "1aemxzj",
+      "kind": "concept",
+      "front": "What is the resultant displacement where two overlapping waves meet?",
+      "back": "The **principle of superposition** says the resultant displacement is the sum of the individual displacements, keeping their signs. The waves then carry on travelling unchanged.",
+      "hint": "Treat upward displacement as positive and downward as negative.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1s8pzwk",
+      "kind": "formula",
+      "front": "For two in-phase sources, how do you predict whether interference is constructive or destructive?",
+      "back": "Calculate $\\frac{\\text{path difference}}{\\lambda}$. Whole numbers 0, 1, 2 give **constructive** interference; half-odd numbers 1/2, 3/2, 5/2 give **destructive** interference.",
+      "hint": "Divide the path difference by the wavelength.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1n93yw1",
+      "kind": "concept",
+      "front": "Why does a wave's wavelength change when it slows down at a boundary?",
+      "back": "Its **frequency** stays constant because the source sets it. Since $v = f\\lambda$, a lower speed means a shorter **wavelength**.",
+      "hint": "Use the wave equation $v = f\\lambda$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1871zf6",
+      "kind": "term",
+      "front": "What is the normal at a boundary?",
+      "back": "The **normal** is a line perpendicular to the boundary at the point where the wave meets it. Angles of incidence and reflection are measured from it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ya2hbp",
+      "kind": "concept",
+      "front": "What is the rule for reflection at a boundary?",
+      "back": "The **angle of reflection** equals the angle of incidence, both measured from the normal. In the same medium, the frequency and wavelength stay the same.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08ix1pr",
+      "kind": "concept",
+      "front": "When is a reflected pulse inverted?",
+      "back": "It is inverted at a **fixed end** and not inverted at a **free end**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a0tka2",
+      "kind": "concept",
+      "front": "Which way does a wave bend when it slows down at an angle to the boundary?",
+      "back": "It bends **towards the normal**. If it speeds up, it bends away from the normal.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ka2v09",
+      "kind": "mistake",
+      "front": "A student says refraction changes the frequency of a wave. What is wrong?",
+      "back": "Refraction does not change **frequency**. The source sets the frequency, which stays constant across the boundary. Refraction changes speed and wavelength.",
+      "hint": "Think about what sets the frequency.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0urqr5r",
+      "kind": "concept",
+      "front": "How does gap width affect diffraction?",
+      "back": "Spreading is most noticeable when the **gap width** is comparable to or smaller than the wavelength. A gap much wider than the wavelength gives much less spreading.",
+      "hint": "Compare the gap width with the wavelength.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1f7uxq3",
+      "kind": "concept",
+      "front": "Does diffraction create extra wave energy?",
+      "back": "No. The energy spreads over a wider region, so the **amplitude** may decrease. No energy is added.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1m3uwws",
+      "kind": "term",
+      "front": "What is destructive interference?",
+      "back": "**Destructive interference** occurs when overlapping wave displacements oppose each other, so the resultant displacement is reduced.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x9likw",
+      "kind": "mistake",
+      "front": "A student says overlapping waves cancel out and disappear. What is wrong?",
+      "back": "Cancellation is only complete at points with equal and opposite displacements. The **waves continue** travelling after they overlap.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1w44xnq",
+      "kind": "example",
+      "front": "Two in-phase sources have wavelength 0.40 m. A point is 2.40 m from one and 3.00 m from the other. What interference occurs there?",
+      "back": "Path difference is $3.00-2.40=0.60$ m. This is $0.60/0.40=1.5$ wavelengths, a half-odd number, so the interference is **destructive**.",
+      "hint": "Find the path difference first, then divide by the wavelength.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02k7a1g",
+      "kind": "term",
+      "front": "What are coherent sources?",
+      "back": "**Coherent sources** produce waves with the same frequency and a constant phase difference, which gives a stable interference pattern.",
+      "sectionId": "s5"
+    }
+  ]
+}

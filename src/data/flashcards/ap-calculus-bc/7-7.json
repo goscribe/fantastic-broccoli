@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "7-7",
+  "topicCode": "7.7",
+  "topicName": "Particular solutions with initial conditions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:45.215Z",
+  "cards": [
+    {
+      "id": "1j6mtgr",
+      "kind": "concept",
+      "front": "What does an initial condition do to a general solution?",
+      "back": "It **selects** one particular solution from the family by fixing the constant C. For $y=x^2+C$ with $y(1)=5$, the condition gives $C=4$.",
+      "hint": "Think about which member of the family passes through a given point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18xccpl",
+      "kind": "process",
+      "front": "What are the steps for finding a particular solution from an initial condition?",
+      "back": "1) Substitute $x_0$ and $y_0$ into the general solution. 2) Solve for the **integration constant** C. 3) Replace C in the general solution to get the function.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1f1lkzt",
+      "kind": "process",
+      "front": "How do you check a particular solution against its initial condition?",
+      "back": "Evaluate the final function at the given input and confirm it returns the given output. For $y=3x^2+5$, substituting $x=2$ gives $17$, which matches $y(2)=17$.",
+      "hint": "Substitute the input, not the derivative.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z97awh",
+      "kind": "term",
+      "front": "What is a particular solution?",
+      "back": "A **particular solution** satisfies the differential equation and the given initial condition. It is one member of the general solution family.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k2ifnr",
+      "kind": "formula",
+      "front": "What do the symbols in $y(x_0)=y_0$ mean?",
+      "back": "$(x_0,y_0)$ is the **initial point**: input $x_0$ gives output $y_0$. Substituting both values lets you solve for the constant.",
+      "hint": "Both coordinates are used, not just one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cp1m0z",
+      "kind": "example",
+      "front": "Given $y=3x^2+C$ and $y(2)=17$, what is the particular solution?",
+      "back": "$y=3x^2+5$. Substituting gives $17=3(2)^2+C=12+C$, so $C=5$.",
+      "hint": "Substitute $x=2$ and $y=17$ first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d5i6o9",
+      "kind": "mistake",
+      "front": "What is the common mistake when using an initial condition to find C?",
+      "back": "Substituting only $x_0$ and ignoring $y_0$. The condition supplies **both** values, and $y_0$ is needed to find the constant.",
+      "hint": "Count how many numbers the condition gives you.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qji62i",
+      "kind": "concept",
+      "front": "Why doesn't differentiating a proposed solution check its initial condition?",
+      "back": "Differentiation checks the **differential equation**. The initial condition needs the function's value at the given input, so you must evaluate the function there.",
+      "hint": "Two different checks answer two different questions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17qhjpz",
+      "kind": "term",
+      "front": "What is an implicit solution?",
+      "back": "An **implicit solution** relates x and y without necessarily isolating y, such as $y^2=x^2+C$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06ils02",
+      "kind": "mistake",
+      "front": "Why can the wrong square-root branch fail the initial condition?",
+      "back": "For $y^2=x^2+4$ with $y(0)=2$, the choice $y=-\\sqrt{x^2+4}$ gives $y(0)=-2$, which fails. Use the **sign** of $y_0$ to pick the branch.",
+      "hint": "Check the sign of the given output.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17lm17w",
+      "kind": "term",
+      "front": "What is a solution domain?",
+      "back": "A **solution domain** is an interval containing the initial input on which the function is defined and satisfies the differential equation.",
+      "hint": "It must include $x_0$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l2tt2m",
+      "kind": "example",
+      "front": "From $y^2=x^2+C$ with $y(0)=-3$, what is the explicit particular solution?",
+      "back": "$y=-\\sqrt{x^2+9}$. Substituting $(0,-3)$ gives $9=C$, and the negative sign matches $y(0)=-3$.",
+      "hint": "Find C first, then pick the sign.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "173ikuy",
+      "kind": "term",
+      "front": "What is a general solution?",
+      "back": "A **general solution** is a family of functions satisfying a differential equation, containing an arbitrary constant C because many functions fit.",
+      "hint": "Why does a constant appear?",
+      "sectionId": "s1"
+    }
+  ]
+}

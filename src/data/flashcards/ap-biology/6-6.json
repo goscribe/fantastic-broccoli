@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "6-6",
+  "topicCode": "6.6",
+  "topicName": "Gene expression and cell specialization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:51.482Z",
+  "cards": [
+    {
+      "id": "1wvkutf",
+      "kind": "concept",
+      "front": "Why can cells with identical DNA end up doing very different jobs?",
+      "back": "They inherit the same **genome**, but each cell uses **gene expression** to choose which proteins to make and how much of each. Proteins then give the cell its structure and activities.",
+      "hint": "Think about which genes are switched on, not which genes are present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "127ksn2",
+      "kind": "concept",
+      "front": "How do a pancreatic beta cell and a muscle cell differ, even though both contain the same genes?",
+      "back": "They express different sets of genes at different levels, so they make different **proteins**. Beta cells make insulin; muscle cells make large amounts of contraction proteins.",
+      "hint": "Compare the proteins each cell produces.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d7uu3k",
+      "kind": "concept",
+      "front": "What role do developmental signals play in cell differentiation?",
+      "back": "Signals activate **transcription factors**, which change the expression of particular genes. The resulting proteins help the cell build specialized features.",
+      "hint": "Follow the chain from signal to gene to protein.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02qa9ms",
+      "kind": "term",
+      "front": "What is a genome?",
+      "back": "The **genome** is the complete set of DNA in a cell or organism.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13ryfld",
+      "kind": "term",
+      "front": "What is gene expression?",
+      "back": "The use of information in a gene to produce a functional product, usually a **protein**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11nb4av",
+      "kind": "mistake",
+      "front": "Do specialized cells lose the genes they no longer need?",
+      "back": "No. Those genes stay in the **DNA** but may be expressed at low levels or not at all.",
+      "hint": "Think about where the genes are stored.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kp8vyx",
+      "kind": "term",
+      "front": "What is cell specialization?",
+      "back": "The **development** of features that allow a cell to perform particular functions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1soj672",
+      "kind": "term",
+      "front": "What are transcription factors?",
+      "back": "**Proteins** that bind DNA and influence the transcription of particular genes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ei4wjo",
+      "kind": "process",
+      "front": "What are the steps by which a developmental signal guides a cell toward a specialized identity?",
+      "back": "1) A signal from a nearby cell or the environment activates **transcription factors**. 2) They change expression of particular genes. 3) The resulting proteins build the cell's specialized features.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01dr9b7",
+      "kind": "term",
+      "front": "What is cell differentiation?",
+      "back": "The process by which a cell develops a **specialized identity** and its specialized features.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cnz99e",
+      "kind": "term",
+      "front": "What are epigenetic changes?",
+      "back": "Changes that affect how **accessible** genes are, and so their activity, without changing the underlying DNA sequence.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08a0w7r",
+      "kind": "concept",
+      "front": "How can a specialized cell keep its identity yet still respond to new conditions?",
+      "back": "**Transcription factors** and epigenetic changes maintain gene activity patterns across cell divisions, while signals adjust expression of selected genes.",
+      "hint": "Two kinds of control work together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kkh9zv",
+      "kind": "mistake",
+      "front": "Do all cells in an organism contain a nucleus and the shared genome?",
+      "back": "No. Mature mammalian **red blood cells** lack nuclei. The shared-genome principle describes most nucleated cells, not every cell.",
+      "hint": "Ask whether the rule applies to every cell type, then check the note's exceptions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tunfe7",
+      "kind": "concept",
+      "front": "What happens when an immune cell responds to a pathogen, and does it stop being an immune cell?",
+      "back": "Signals increase expression of genes for its defense response, so its activity changes, but it **remains an immune cell**. This differs from differentiation, which establishes identity.",
+      "hint": "Consider how this differs from the process that sets up a specialized identity.",
+      "sectionId": "s4"
+    }
+  ]
+}

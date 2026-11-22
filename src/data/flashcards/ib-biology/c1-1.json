@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "c1-1",
+  "topicCode": "C1.1",
+  "topicName": "Enzymes and metabolism",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:53.116Z",
+  "cards": [
+    {
+      "id": "054u4b3",
+      "kind": "concept",
+      "front": "How does an enzyme make a reaction happen faster?",
+      "back": "An enzyme provides a different reaction route with a lower **activation energy**, so more molecules can react in a given time. The enzyme is not used up.",
+      "hint": "Think about the energy barrier.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0oe5l3k",
+      "kind": "concept",
+      "front": "Why is an enzyme specific to certain substrates?",
+      "back": "The **active site** has a particular shape and chemical properties that suit certain substrates. Binding can slightly change its shape to position the substrate for reaction.",
+      "hint": "Shape and chemical properties both matter.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04uo6pc",
+      "kind": "concept",
+      "front": "Why does heating an enzyme eventually reduce its activity?",
+      "back": "Excess heat disrupts the bonds that maintain the enzyme's shape, changing the active site so substrate binds less well. This loss of functional shape is called **denaturation**.",
+      "hint": "Think about the bonds holding the protein's shape.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1582tda",
+      "kind": "term",
+      "front": "What is activation energy?",
+      "back": "The **minimum energy** reactants need to reach a state from which products can form.",
+      "hint": "It is an energy barrier.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qon8os",
+      "kind": "term",
+      "front": "What is the active site?",
+      "back": "The **region** of an enzyme where a substrate binds and the catalysed reaction takes place.",
+      "hint": "A small part of the enzyme.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fwflqy",
+      "kind": "process",
+      "front": "Outline how an enzyme catalyses a reaction using its active site.",
+      "back": "1 Substrate binds at the **active site**. 2 Binding slightly changes the active site's shape, helping position the substrate. 3 The reaction occurs and products leave. 4 The enzyme binds another substrate.",
+      "hint": "Four steps, starting with binding.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vwn4il",
+      "kind": "mistake",
+      "front": "A student says an enzyme adds energy to the reactants. What is wrong with this?",
+      "back": "An enzyme does not add energy. It **lowers the activation energy** needed to start the reaction.",
+      "hint": "Think about the energy barrier.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uowksa",
+      "kind": "concept",
+      "front": "How does warming a mixture affect enzyme activity, up to a point?",
+      "back": "Molecules move faster, so substrates collide with active sites more often and activity usually rises. The **optimum temperature** is where the measured rate is highest.",
+      "hint": "Think about collisions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jb8qem",
+      "kind": "concept",
+      "front": "Why does changing pH affect enzyme activity?",
+      "back": "Changes in acidity alter charges on parts of the enzyme. This affects bonds that maintain its shape and how the **active site** binds its substrate.",
+      "hint": "Think about charges and bonds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j88zrt",
+      "kind": "mistake",
+      "front": "A student says cooling an enzyme denatures it. What is wrong?",
+      "back": "Cooling usually only **slows** molecular movement and collisions, reducing activity without denaturing the enzyme. Denaturation is caused by excessive heat.",
+      "hint": "Compare cooling with heating.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11rwf1q",
+      "kind": "process",
+      "front": "How would you test the effect of pH on enzyme activity fairly?",
+      "back": "Keep temperature, substrate concentration and enzyme concentration constant. Measure the **initial rate** at each pH, before substrate runs low.",
+      "hint": "Which variables must stay the same?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1oiqrbd",
+      "kind": "concept",
+      "front": "What is a metabolic pathway, and why does it matter?",
+      "back": "A **metabolic pathway** is a sequence of enzyme-catalysed steps where each product becomes the substrate for the next. Changing one enzyme's activity alters the output, letting cells control production.",
+      "hint": "Think about intermediate substances.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jndzki",
+      "kind": "formula",
+      "front": "What equation gives the average initial rate of an enzyme-catalysed reaction?",
+      "back": "$\\text{rate}=\\frac{\\text{product formed}}{\\text{time taken}}$. With product in µmol and time in minutes, rate is in $\\mathrm{\\mu mol\\,min^{-1}}$.",
+      "hint": "Product formed divided by time taken.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0c02wno",
+      "kind": "example",
+      "front": "An enzyme forms 24 µmol of product in the first 3 minutes. What is its average initial rate?",
+      "back": "$8\\,\\mathrm{\\mu mol\\,min^{-1}}$, since $24\\div3=8$.",
+      "hint": "Divide the product formed by the time taken.",
+      "sectionId": "s5"
+    }
+  ]
+}

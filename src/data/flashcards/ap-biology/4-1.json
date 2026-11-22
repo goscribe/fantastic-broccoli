@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "4-1",
+  "topicCode": "4.1",
+  "topicName": "Cell communication",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:32.683Z",
+  "cards": [
+    {
+      "id": "0j3hd0r",
+      "kind": "concept",
+      "front": "How does one cell send a message that another cell can respond to?",
+      "back": "A **signaling cell** releases a chemical messenger, which binds a **receptor** on a target cell so that cell can detect the signal and may change its activity.",
+      "hint": "Think about the sender, the messenger, and what the receiver needs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0b6qjhq",
+      "kind": "concept",
+      "front": "Why do multicellular organisms need chemical signals?",
+      "back": "Cells have different jobs, so **chemical signals** coordinate their activities, such as when to take up nutrients, release stored materials, or respond to injury.",
+      "hint": "Think about cells that must work together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a73e4z",
+      "kind": "concept",
+      "front": "How do local signaling and long-distance signaling differ?",
+      "back": "**Local signaling** acts on target cells near the sender, while **long-distance signaling** carries a messenger to distant targets, often through circulating fluid such as blood.",
+      "hint": "Compare how far the messenger travels to its target.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ivb5ef",
+      "kind": "term",
+      "front": "What is paracrine signaling?",
+      "back": "**Paracrine signaling** is when a cell releases messengers that **diffuse** to nearby target cells.",
+      "hint": "Think about local signals.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hj7rt1",
+      "kind": "term",
+      "front": "What is a neurotransmitter?",
+      "back": "A **neurotransmitter** is a chemical messenger that a nerve cell releases across a small gap to a nearby target cell.",
+      "hint": "Think about nerve junctions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18xjboz",
+      "kind": "term",
+      "front": "What are hormones?",
+      "back": "**Hormones** are chemical messengers released into circulating fluid, such as blood, that travel to target cells with suitable receptors.",
+      "hint": "Think about how the messenger travels.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hf1tls",
+      "kind": "example",
+      "front": "Pancreas cells release insulin into the blood. What kind of signaling is this, and why?",
+      "back": "**Long-distance signaling**. Insulin travels in the blood to distant target cells and helps regulate blood glucose.",
+      "hint": "Ask how far the messenger travels to its targets.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0swhc6z",
+      "kind": "mistake",
+      "front": "A nerve cell is very long, so its signal must be long-distance. Is this correct?",
+      "back": "**No**. Signals are classified by how the messenger reaches its target, not by the length of the sending cell. A neurotransmitter crossing a gap is local signaling.",
+      "hint": "Look at how the messenger reaches its target.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "028fgxe",
+      "kind": "mistake",
+      "front": "A messenger is released into the blood, so every cell it reaches will respond. True or false?",
+      "back": "**False**. A messenger does not make every cell respond. A cell must have a suitable **receptor** to detect that messenger.",
+      "hint": "Think about what a cell needs in order to detect a messenger.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "090kpaa",
+      "kind": "process",
+      "front": "What are the steps by which a chemical signal passes from one cell to another?",
+      "back": "1. A **signaling cell** produces or releases a messenger. 2. The messenger reaches the target cell. 3. A **receptor** binds the messenger. 4. The target cell's activity may change, such as its growth or secretion.",
+      "hint": "Start with the cell that makes the signal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "069gmj3",
+      "kind": "concept",
+      "front": "Why can a hormone in the blood act on distant cells but still affect only some of them?",
+      "back": "Blood carries the **hormone** past many cells, but only cells with a suitable **receptor** can detect that hormone and respond.",
+      "hint": "Consider where the hormone travels and what detects it.",
+      "sectionId": "s4"
+    }
+  ]
+}

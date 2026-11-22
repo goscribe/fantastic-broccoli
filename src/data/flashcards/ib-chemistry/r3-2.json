@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "r3-2",
+  "topicCode": "R3.2",
+  "topicName": "Electron transfer reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:19.793Z",
+  "cards": [
+    {
+      "id": "0qdqdbb",
+      "kind": "concept",
+      "front": "In a redox reaction, why can oxidation never happen on its own?",
+      "back": "Oxidation is the **loss** of electrons, so those electrons must be **gained** by another species in reduction. Electron loss and gain are linked.",
+      "hint": "Think about where the lost electrons go.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08smkib",
+      "kind": "concept",
+      "front": "How do oxidation numbers show which species is oxidised and which is reduced?",
+      "back": "An **increase** in oxidation number means oxidation; a **decrease** means reduction. Comparing the numbers before and after the reaction shows which species lost or gained electrons.",
+      "hint": "Compare each species before and after the reaction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hsuqzn",
+      "kind": "term",
+      "front": "What is a reducing agent?",
+      "back": "A **reducing agent** supplies electrons, causing another species to be reduced. It is itself oxidised, so its oxidation number increases.",
+      "hint": "Think about what it does to another species.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15ezra2",
+      "kind": "term",
+      "front": "What is a redox reaction?",
+      "back": "A **redox reaction** is one in which oxidation and reduction occur together through electron transfer.",
+      "hint": "Two processes happen at once.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r5253p",
+      "kind": "term",
+      "front": "What is an oxidation number?",
+      "back": "An **oxidation number** is an assigned value used to track electron transfer. It does not always represent an actual charge.",
+      "hint": "It is a bookkeeping tool.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13hf84h",
+      "kind": "process",
+      "front": "What are the steps to assign oxidation numbers to the atoms in a species?",
+      "back": "Give an uncombined element 0; a monatomic ion its charge; oxygen usually -2; hydrogen usually +1. Then make the numbers sum to the overall charge of the species.",
+      "hint": "Start with the simplest rules, then use the total charge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0721li3",
+      "kind": "mistake",
+      "front": "A student says oxidation always involves oxygen. Why is this wrong?",
+      "back": "Oxidation is defined by **electron loss**, not by oxygen. Oxidation does not always involve oxygen, so the definition must be based on electrons.",
+      "hint": "Which definition does the note use?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01sguz2",
+      "kind": "mistake",
+      "front": "A student says an oxidising agent is oxidised. What is wrong with this?",
+      "back": "An oxidising agent is **reduced**, because it accepts electrons. Its name describes what it does to another species, not what happens to itself.",
+      "hint": "Which electron change does the oxidising agent undergo?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02fpzsf",
+      "kind": "formula",
+      "front": "Write the half-equation for magnesium forming magnesium ions, and say what each part means.",
+      "back": "$\\mathrm{Mg \\rightarrow Mg^{2+} + 2e^-}$: magnesium atoms **lose** two electrons each to form Mg2+ ions. This is oxidation.",
+      "hint": "Electrons on the product side show loss.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07gr0hn",
+      "kind": "process",
+      "front": "What must you do before adding two half-equations to get the overall equation?",
+      "back": "Multiply them so the **electrons lost equal the electrons gained**. The electrons then cancel from the overall equation.",
+      "hint": "Electron counts must match.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lsarmr",
+      "kind": "example",
+      "front": "Calculate the amount of electrons transferred when 0.050 mol of magnesium reacts completely with copper(II) ions.",
+      "back": "**0.100 mol** of electrons. Each magnesium releases two electrons, so 0.050 mol × 2 = 0.100 mol.",
+      "hint": "Use the mole ratio from the half-equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0s4kmeb",
+      "kind": "example",
+      "front": "What is the oxidation number of sulfur in SO4 2-?",
+      "back": "Sulfur is **+6**. Four oxygens at -2 give -8, and the total must equal the ion charge of -2, so sulfur is +6.",
+      "hint": "Oxygen is -2; the sum must equal -2."
+    }
+  ]
+}

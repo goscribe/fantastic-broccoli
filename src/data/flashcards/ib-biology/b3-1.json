@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "b3-1",
+  "topicCode": "B3.1",
+  "topicName": "Gas exchange",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:41.304Z",
+  "cards": [
+    {
+      "id": "1bwnp0k",
+      "kind": "concept",
+      "front": "Why do oxygen and carbon dioxide cross exchange surfaces by diffusion?",
+      "back": "Gases move from higher to lower concentration, so **oxygen** enters the organism and **carbon dioxide** leaves. No energy is needed to move either gas across the surface itself.",
+      "hint": "Think about which direction each gas travels.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ammgew",
+      "kind": "concept",
+      "front": "What makes a gas exchange surface efficient?",
+      "back": "A **large surface area** and a **short diffusion distance**, with a moist, permeable surface. A thin wall shortens the diffusion distance, which increases the rate of exchange.",
+      "hint": "Consider what helps gases cross more quickly.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17lgyqe",
+      "kind": "concept",
+      "front": "What role do ventilation and blood flow play in gas exchange?",
+      "back": "They maintain the **concentration gradient** across the surface. Ventilation refreshes air or water, and blood flow carries gases away or brings them in, keeping diffusion going.",
+      "hint": "What would happen to the gradient if these stopped?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1fraq3g",
+      "kind": "term",
+      "front": "What are alveoli?",
+      "back": "**Alveoli** are tiny air sacs in the lungs. They provide a large exchange area, with thin walls lying close to blood capillaries.",
+      "hint": "Think about where air meets blood in the lungs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rd899s",
+      "kind": "process",
+      "front": "What is the route of oxygen from an alveolus into the blood?",
+      "back": "Oxygen dissolves at the moist alveolar surface, then diffuses through the **alveolar wall** and the **capillary wall** into the blood.",
+      "hint": "Start in the air sac and end in the blood.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1trdxkz",
+      "kind": "term",
+      "front": "What is ventilation?",
+      "back": "**Ventilation** is the movement of air into and out of the lungs, or of water over the gills. It replaces used air or water near the exchange surface.",
+      "hint": "It moves the medium, not the gases themselves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q7meqj",
+      "kind": "concept",
+      "front": "How do fish gill lamellae help fish take in oxygen?",
+      "back": "**Lamellae** are thin projections on the gill filaments. They greatly increase the surface area, and blood capillaries inside them allow oxygen to diffuse from water into blood.",
+      "hint": "Think about what increases surface area on the filaments.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hnadn7",
+      "kind": "concept",
+      "front": "What is countercurrent flow and why does it help?",
+      "back": "**Countercurrent flow** is blood and water moving in opposite directions across the lamellae. Water always has more oxygen than nearby blood, so oxygen keeps diffusing into the blood along the whole lamella.",
+      "hint": "Compare this with parallel flow.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h1p64z",
+      "kind": "mistake",
+      "front": "A student writes that ventilation is the same as diffusion. What is wrong with this?",
+      "back": "**Ventilation** is not diffusion. Ventilation moves air or water across the surface, while gases cross the surface itself by diffusion.",
+      "hint": "Ask what each process actually moves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lh8k8p",
+      "kind": "term",
+      "front": "What are tracheae?",
+      "back": "**Tracheae** are branching air tubes in insects that carry air from openings on the body towards its tissues.",
+      "hint": "Insects use these instead of lungs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fw803s",
+      "kind": "concept",
+      "front": "How do insect tracheoles supply oxygen to cells?",
+      "back": "The finest branches of the **tracheae**, called tracheoles, take air very close to the cells. Oxygen therefore usually reaches the tissues without being carried by blood.",
+      "hint": "Consider how close the air gets to the cells.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a8k36h",
+      "kind": "term",
+      "front": "What are stomata?",
+      "back": "**Stomata** are pores in the leaf epidermis through which gases enter and leave. Their opening is controlled by pairs of guard cells.",
+      "hint": "Think about where gases enter a leaf.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l1v9xm",
+      "kind": "concept",
+      "front": "Why is a large surface area alone not enough for efficient gas exchange?",
+      "back": "Thick walls slow diffusion, and without ventilation and blood flow the gas concentrations become similar. Exchange then slows, so the surface must also be thin and well supplied with flow.",
+      "hint": "Think about the walls and the gradient.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ll4smr",
+      "kind": "term",
+      "front": "What is spongy mesophyll?",
+      "back": "**Spongy mesophyll** is leaf tissue with loosely arranged cells and air spaces. These spaces let gases diffuse to moist cell surfaces.",
+      "hint": "It lies beneath the palisade layer in a leaf.",
+      "sectionId": "s4"
+    }
+  ]
+}

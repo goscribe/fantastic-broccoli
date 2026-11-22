@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "8-13",
+  "topicCode": "8.13",
+  "topicName": "Arc length",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:00.936Z",
+  "cards": [
+    {
+      "id": "022fno2",
+      "kind": "concept",
+      "front": "Where does the square root in the arc length integrand come from?",
+      "back": "Each tiny piece of curve is almost a straight **hypotenuse** with legs $dx$ and $dy$. Pythagoras gives its length as $\\sqrt{(dx)^2+(dy)^2}=\\sqrt{1+\\left(\\frac{dy}{dx}\\right)^2}\\,dx$, and adding the pieces gives the integral.",
+      "hint": "Picture a tiny right triangle on the curve.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09yeh8z",
+      "kind": "formula",
+      "front": "What is the arc length formula for $y=f(x)$ on $[a,b]$?",
+      "back": "$L=\\int_a^b\\sqrt{1+\\left(f'(x)\\right)^2}\\,dx$, where $f'$ is the **derivative** and $L$ is the length in the same units as the axes.",
+      "hint": "Square the derivative, add 1, then take the root.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vfyn09",
+      "kind": "process",
+      "front": "What steps should you follow for an arc length integral that needs a calculator?",
+      "back": "**Set up** the integral first: differentiate, square the derivative, add 1, take the root, and give the limits. Then evaluate on a calculator, carrying extra digits and rounding only the final answer.",
+      "hint": "Write the integral before any numbers.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rwloa3",
+      "kind": "example",
+      "front": "Find the length of $f(x)=2x$ on $[0,3]$ using the arc length formula.",
+      "back": "$L=3\\sqrt{5}\\approx6.708$. Since $f'(x)=2$, the integrand is $\\sqrt{5}$, and this matches the distance from $(0,0)$ to $(3,6)$.",
+      "hint": "Start by finding $f'(x)$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ifv7ct",
+      "kind": "mistake",
+      "front": "What is wrong with using $\\sqrt{f'(x)}$ or $\\sqrt{1+f'(x)}$ as the integrand?",
+      "back": "**Both are wrong.** You must square the derivative and keep the 1, giving $\\sqrt{1+(f'(x))^2}$.",
+      "hint": "Check exactly what gets squared.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0u2y5ki",
+      "kind": "concept",
+      "front": "Why must $f'$ be continuous on $[a,b]$ for the arc length formula to work?",
+      "back": "A **corner or jump** in the slope would split the curve into parts, and each part would need its own integral. Each tiny piece must have a well-defined slope.",
+      "hint": "Think about a sharp corner on a curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cls2qv",
+      "kind": "example",
+      "front": "Set up the length of $y=x^2$ on $[0,2]$ and estimate it.",
+      "back": "$L=\\int_0^2\\sqrt{1+4x^2}\\,dx\\approx4.647$ units, found with a calculator. The straight line from $(0,0)$ to $(2,4)$ is shorter, about 4.472.",
+      "hint": "Differentiate first, then square $2x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qem37m",
+      "kind": "concept",
+      "front": "When should you integrate with respect to $y$ instead of $x$?",
+      "back": "When the curve is written as $x=g(y)$, integrate in $y$ using $L=\\int_c^d\\sqrt{1+\\left(g'(y)\\right)^2}\\,dy$. The **limits** are then $y$-values.",
+      "hint": "Look at how the curve is written.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pqnx87",
+      "kind": "mistake",
+      "front": "For $x=y^2$ from $(4,2)$ to $(9,3)$, what limits should the integral use?",
+      "back": "Use $y$ from 2 to 3. The limits must be $y$-values, not the $x$-values 4 to 9.",
+      "hint": "The limits follow the variable of integration.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ogvyw7",
+      "kind": "process",
+      "front": "What four quick checks should you run on an arc length answer?",
+      "back": "Check that the result is **positive**, at least the straight-line distance between the endpoints, has the right units, and uses a derivative that matches the variable of integration.",
+      "hint": "Think about sense, size, units and variable.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0du64gz",
+      "kind": "example",
+      "front": "Using the $y$-formula, find the length of $x=3$ for $0\\le y\\le4$.",
+      "back": "$\\int_0^4\\sqrt{1+0^2}\\,dy=4$. Since $dx/dy=0$, the integrand is 1, which matches the vertical segment.",
+      "hint": "Find $dx/dy$ first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0shquke",
+      "kind": "concept",
+      "front": "Why might the $x$-form be a safer choice than the $y$-form for $y=x^2$ on $[0,1]$?",
+      "back": "The $y$-form $\\int_0^1\\sqrt{1+\\frac{1}{4y}}\\,dy$ is **undefined** at $y=0$, so a calculator may struggle. Both forms give the same length.",
+      "hint": "Check the integrand at $y=0$.",
+      "sectionId": "s5"
+    }
+  ]
+}

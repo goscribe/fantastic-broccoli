@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-3",
+  "topicCode": "1.3",
+  "topicName": "One categorical variable: tables and summaries",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:52.713Z",
+  "cards": [
+    {
+      "id": "132ibcp",
+      "kind": "concept",
+      "front": "Why should groups of different sizes be compared using proportions instead of raw counts?",
+      "back": "Compare **proportions** within each group. A larger group tends to have larger counts even when its share is the same or smaller, so dividing by each group's total gives a fair comparison.",
+      "hint": "Think about a class of 25 versus a class of 50.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06s3sba",
+      "kind": "concept",
+      "front": "What question does a conditional relative frequency answer?",
+      "back": "It asks about **one group** only. You divide a cell count by the total of its own row or column, so the answer describes just that group.",
+      "hint": "Look for wording like 'of the Grade 9 students'.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0n9aps9",
+      "kind": "term",
+      "front": "What is a relative frequency?",
+      "back": "A **relative frequency** is a category's share of all individuals: its frequency divided by the total. It is a proportion between 0 and 1, which can be shown as a percent.",
+      "hint": "It is a share, not a count.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dea1ah",
+      "kind": "term",
+      "front": "What is a frequency table?",
+      "back": "A **frequency table** lists every category of a variable with its count (frequency). The frequencies must add up to the total number of individuals.",
+      "hint": "Check that the counts sum to the total.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1k2138f",
+      "kind": "term",
+      "front": "What is a two-way table?",
+      "back": "A **two-way table** shows two categorical variables together, with one variable in the rows and the other in the columns. Each cell counts individuals with that combination.",
+      "hint": "Rows for one variable, columns for the other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13w0s0u",
+      "kind": "term",
+      "front": "What is a marginal total in a two-way table?",
+      "back": "A **marginal total** is a row or column sum. It gives the frequency for one variable alone, ignoring the other variable.",
+      "hint": "It sits on the edges of the table.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wha6fr",
+      "kind": "formula",
+      "front": "What is the formula for relative frequency, and what does each part mean?",
+      "back": "$\\mathrm{relative\\,frequency}=\\frac{\\mathrm{frequency}}{\\mathrm{total}}$. The frequency is the count in one category and the total is the number of individuals. The result is a proportion between 0 and 1.",
+      "hint": "Divide the category count by the overall count.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sg77mf",
+      "kind": "example",
+      "front": "In a group of 30 students, 12 name a dog as their favorite pet. What is the relative frequency of dog?",
+      "back": "$\\frac{12}{30}=0.40$, so **40%** of students chose dog. Other pets are 9, 4 and 5 students, which give 0.30, about 0.133 and about 0.167.",
+      "hint": "Divide the dog count by 30.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0varcjl",
+      "kind": "process",
+      "front": "What are the steps to find a conditional relative frequency?",
+      "back": "1) Identify the group named in the question. 2) Use that group's row or column total as the **denominator**. 3) Use the matching cell count as the numerator. 4) Divide, then convert to a percent if asked.",
+      "hint": "The denominator is the group's total, not the overall total.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0517yl4",
+      "kind": "example",
+      "front": "In the lunch table, 30 of 50 Grade 9 students pick school lunch. What share of Grade 9 picks it, and how does Grade 10 compare?",
+      "back": "$\\frac{30}{50}=0.60$, so **60%** of Grade 9 students choose school lunch. Grade 10 is $\\frac{18}{50}=0.36$, or 36%.",
+      "hint": "Use the Grade 9 row total as the denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pk3ves",
+      "kind": "mistake",
+      "front": "A student is asked what share of Grade 9 students choose school lunch and divides 30 by 100. Why is this wrong?",
+      "back": "Dividing by **100** gives the share of all students who are in Grade 9 and choose school lunch. The question is about Grade 9 only, so divide by the Grade 9 total, 50.",
+      "hint": "Which total does the question name?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0eyq79h",
+      "kind": "term",
+      "front": "What is an association between two categorical variables?",
+      "back": "An **association** exists when the conditional relative frequencies of one variable differ clearly across the categories of the other. If they are nearly equal, there is little sign of association.",
+      "hint": "Compare conditional proportions across groups.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11whtw8",
+      "kind": "mistake",
+      "front": "Does a clear association in a two-way table prove that one variable causes the other?",
+      "back": "**No**. The table describes only the individuals in it. An association does not show that one variable causes the other.",
+      "hint": "Association is not the same as cause.",
+      "sectionId": "s5"
+    }
+  ]
+}

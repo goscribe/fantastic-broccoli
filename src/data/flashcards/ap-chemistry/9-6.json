@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "9-6",
+  "topicCode": "9.6",
+  "topicName": "Free energy of dissolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:27.547Z",
+  "cards": [
+    {
+      "id": "19e8t8u",
+      "kind": "concept",
+      "front": "What does a negative value of $\\Delta G$ tell you about dissolution?",
+      "back": "Dissolution is **spontaneous**: the solute dissolves without a continuous external energy input under those conditions. It predicts the favored direction, not the speed.",
+      "hint": "Think about direction, not rate.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07ljget",
+      "kind": "formula",
+      "front": "How do enthalpy and entropy combine to give the Gibbs free energy change?",
+      "back": "$\\Delta G=\\Delta H-T\\Delta S$, with $T$ in **kelvins**. Use kJ mol^-1 for $\\Delta H$ and $\\Delta G$, and kJ mol^-1 K^-1 for $\\Delta S$ so the units match.",
+      "hint": "Convert J to kJ before multiplying by T.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07zkvw6",
+      "kind": "concept",
+      "front": "Why can the standard value $\\Delta G^\\circ$ fail to predict dissolution in a particular solution?",
+      "back": "$\\Delta G^\\circ$ applies to **standard-state** conditions. The actual $\\Delta G$ depends on the solution's composition through $Q$, so its sign decides whether further dissolution is spontaneous.",
+      "hint": "Standard state is a specific reference condition.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k8ok1j",
+      "kind": "term",
+      "front": "What is dissolution?",
+      "back": "**Dissolution** is the process in which solute particles enter a solvent and become dispersed throughout it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yeiwku",
+      "kind": "term",
+      "front": "What does the Gibbs free energy change, $\\Delta G$, show for a dissolving process?",
+      "back": "It shows the **favored direction** of a change under specified conditions. It reflects both the energy transferred as heat and how matter and energy are dispersed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ayqin0",
+      "kind": "concept",
+      "front": "Why does dissolving have a free energy change?",
+      "back": "Separating solute particles may need energy, while attractions between solute and solvent particles may release energy. Both effects help set the overall $\\Delta G$.",
+      "hint": "Think about two opposing energy effects.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01a0tku",
+      "kind": "formula",
+      "front": "What equation links the free energy change in a mixture to $\\Delta G^\\circ$ for a dissolving solid?",
+      "back": "$\\Delta G=\\Delta G^\\circ+RT\\ln Q$. $Q$ describes the dissolved particles' **activities**, $R$ is the gas constant, and $T$ is in kelvins.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13vofxz",
+      "kind": "term",
+      "front": "What is the value of $\\Delta G$ at equilibrium, and what does it mean?",
+      "back": "$\\Delta G=0$. There is **no net tendency** to dissolve or to separate from solution.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04f6zrn",
+      "kind": "process",
+      "front": "Describe how a solution in contact with undissolved solid moves toward equilibrium.",
+      "back": "As more solute dissolves, its **activities** rise, which changes $\\Delta G$ for further dissolution. Eventually $\\Delta G=0$ and the solution is at equilibrium.",
+      "hint": "Follow what happens to activities over time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00odf01",
+      "kind": "example",
+      "front": "At 300 K, $\\Delta H=20$ kJ mol^-1 and $\\Delta S=80$ J mol^-1 K^-1. Is dissolution spontaneous?",
+      "back": "Yes. $\\Delta S=0.080$ kJ mol^-1 K^-1, so $T\\Delta S=24$ kJ mol^-1 and $\\Delta G=20-24=-4$ kJ mol^-1, which is negative.",
+      "hint": "Convert J to kJ before multiplying by T.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04x1sez",
+      "kind": "mistake",
+      "front": "Does a negative $\\Delta G$ mean dissolution happens quickly?",
+      "back": "No. A negative $\\Delta G$ predicts the **favored direction**, not a rapid **rate**. Dissolution can be spontaneous yet still slow.",
+      "hint": "Direction and speed are different ideas.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19o40tg",
+      "kind": "mistake",
+      "front": "Can an endothermic dissolution ever be spontaneous?",
+      "back": "Yes. If $T\\Delta S$ is larger than the positive $\\Delta H$, then $\\Delta G$ is negative. A positive $\\Delta H$ alone does not rule out spontaneity.",
+      "hint": "Compare the two terms in $\\Delta G=\\Delta H-T\\Delta S$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jlccvi",
+      "kind": "mistake",
+      "front": "Does every dissolution increase entropy?",
+      "back": "No. Entropy does not always increase when a solute dissolves, because interactions with the solute can restrict solvent molecules.",
+      "sectionId": "s3"
+    }
+  ]
+}

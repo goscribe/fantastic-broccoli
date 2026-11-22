@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-8",
+  "topicCode": "3.8",
+  "topicName": "Solving trigonometric equations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:26.619Z",
+  "cards": [
+    {
+      "id": "0mkxvt3",
+      "kind": "concept",
+      "front": "Why does an equation like $\\sin x=\\frac{1}{2}$ have many solutions rather than one?",
+      "back": "The **sine wave repeats**, so many angles share the same value. An interval such as $0\\le x\\le2\\pi$ keeps the list finite.",
+      "hint": "Think about how the sine graph repeats.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0isegpz",
+      "kind": "concept",
+      "front": "Your calculator gives one angle for $\\sin x=k$. How do you find the second angle in the interval?",
+      "back": "Use **symmetry**. The second angle is $\\pi-\\alpha$, where $\\alpha$ is the principal value. Sketch the unit circle to check nothing is missed.",
+      "hint": "Two points on the unit circle share the same sine.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kqscam",
+      "kind": "mistake",
+      "front": "A student solves $\\sin2x=k$ for $0\\le x\\le2\\pi$ and divides by 2 before listing solutions. What is wrong?",
+      "back": "**Divide only at the end.** Let $u=2x$, so $u$ runs from $0$ to $4\\pi$. List every value of $u$ first, then divide each by 2.",
+      "hint": "What range does $2x$ cover?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sb0xss",
+      "kind": "formula",
+      "front": "What is the general solution of $\\tan x=k$, using the principal value $\\alpha$?",
+      "back": "$x=\\alpha+n\\pi$, where $n$ is an **integer** counting whole periods of tangent and angles are in radians.",
+      "hint": "Tangent repeats every half turn.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dc4ffj",
+      "kind": "formula",
+      "front": "Write the general solution of $\\sin x=k$, using the principal value $\\alpha$.",
+      "back": "$x=\\alpha+2n\\pi$ or $x=\\pi-\\alpha+2n\\pi$, where $n$ is an **integer** and $2\\pi$ is one full turn.",
+      "hint": "There are two families, one from each symmetric angle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mkuhl0",
+      "kind": "process",
+      "front": "What are the steps for solving $\\sin2x=k$ in a given interval for $x$?",
+      "back": "1) Let $u=2x$ and find the new interval for $u$. 2) Find all values of $u$ using the principal value and symmetry, adding full turns. 3) Divide each value by 2.",
+      "hint": "Work in $u$ first, and divide last.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1g5rhb3",
+      "kind": "process",
+      "front": "How do you solve $2\\sin^2x+\\cos x-1=0$ using an identity?",
+      "back": "**Replace** $\\sin^2x$ with $1-\\cos^2x$, rearrange into a quadratic in $\\cos x$, factorise, then solve each simple equation in the interval.",
+      "hint": "Which identity links $\\sin^2x$ and $\\cos^2x$?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mta67m",
+      "kind": "mistake",
+      "front": "Why is dividing both sides of a trigonometric equation by $\\sin x$ risky?",
+      "back": "You **lose solutions** where $\\sin x=0$. Factorise instead and solve each factor separately.",
+      "hint": "What happens to the left side when $\\sin x$ is zero?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nm8zo1",
+      "kind": "mistake",
+      "front": "A student claims $\\cos x=2$ has solutions. Is this correct?",
+      "back": "No. Cosine values lie between **$-1$ and $1$**, so $\\cos x=2$ has no solutions.",
+      "hint": "Recall the range of cosine.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t5u19i",
+      "kind": "example",
+      "front": "Solve $\\tan x=-1$ for $0^{\\circ}\\le x\\le360^{\\circ}$.",
+      "back": "$x=135^{\\circ}$ and $x=315^{\\circ}$. The principal value is $-45^{\\circ}$; adding $180^{\\circ}$ and $360^{\\circ}$ brings the solutions into range.",
+      "hint": "Start from the principal value, which is negative.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kt87xz",
+      "kind": "example",
+      "front": "Solve $2\\cos x=\\sqrt{3}$ for $0\\le x\\le2\\pi$.",
+      "back": "$x=\\frac{\\pi}{6}$ and $x=\\frac{11\\pi}{6}$. The principal value is $\\frac{\\pi}{6}$, and the second angle is $2\\pi-\\frac{\\pi}{6}$.",
+      "hint": "Divide by 2 first to get $\\cos x$ alone.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "129jq88",
+      "kind": "example",
+      "front": "Solve $\\sin2x=\\frac{\\sqrt{3}}{2}$ for $0\\le x\\le2\\pi$.",
+      "back": "$x=\\frac{\\pi}{6},\\frac{\\pi}{3},\\frac{7\\pi}{6},\\frac{4\\pi}{3}$. There are four answers because $2x$ covers **two full turns**.",
+      "hint": "Find all values of $2x$ up to $4\\pi$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11ja4py",
+      "kind": "term",
+      "front": "What is a general solution of a trigonometric equation?",
+      "back": "The **complete set** of angles that satisfy the equation, written using an integer $n$ to count whole periods.",
+      "hint": "It covers every angle, not just those in an interval.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lffoos",
+      "kind": "concept",
+      "front": "How can a graph check an algebraic answer to a trigonometric equation?",
+      "back": "Plot each side as a separate curve. The **x-coordinates** where the curves meet are the solutions.",
+      "hint": "Where do the two curves cross?",
+      "sectionId": "s5"
+    }
+  ]
+}
