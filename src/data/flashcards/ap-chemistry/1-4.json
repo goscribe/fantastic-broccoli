@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "1-4",
+  "topicCode": "1.4",
+  "topicName": "Composition of mixtures",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:13.686Z",
+  "cards": [
+    {
+      "id": "065jhta",
+      "kind": "concept",
+      "front": "How does composition data tell a pure substance apart from a mixture?",
+      "back": "A **pure substance** has the same proportions in every sample, while a **mixture**'s component proportions can vary. Comparing several samples reveals whether proportions change.",
+      "hint": "Ask whether the proportions stay fixed from sample to sample.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1k080ko",
+      "kind": "formula",
+      "front": "How do you calculate the percent by mass of a component in a mixture?",
+      "back": "$\\frac{\\text{mass of component}}{\\text{mass of mixture}}\\times100\\text{\\%}$. Use the same units and include every component in the total mass.",
+      "hint": "Component mass over total mixture mass, then times 100%.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0g3i9wl",
+      "kind": "process",
+      "front": "How can you separate salt and sand so you can weigh each one?",
+      "back": "1) Add water to dissolve the **salt**. 2) Filter to collect the sand. 3) Evaporate the water to recover the salt. 4) Dry and weigh each solid.",
+      "hint": "Choose each step based on a property difference between the components.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04d7z43",
+      "kind": "term",
+      "front": "What is a pure substance?",
+      "back": "A **pure substance** has a fixed chemical composition, so every sample has the same proportions of its constituent elements.",
+      "hint": "Think about whether composition changes from sample to sample.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1in8xtr",
+      "kind": "term",
+      "front": "What is a mixture?",
+      "back": "A **mixture** contains two or more substances that are physically combined, and its components can be present in different proportions.",
+      "hint": "Ask whether the parts are chemically bonded or just combined.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "136xbev",
+      "kind": "term",
+      "front": "What is physical separation?",
+      "back": "**Physical separation** isolates mixture components using differences in their properties, without changing their chemical identities.",
+      "hint": "Which property differences would you exploit?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0egfbaf",
+      "kind": "example",
+      "front": "A 20.0 g mixture yields 12.0 g of dry salt and 8.0 g of dry sand. What is its composition by mass?",
+      "back": "60.0% salt and 40.0% sand by mass. The recovered masses total 20.0 g, so the check passes.",
+      "hint": "First confirm the recovered masses add to the original mass.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ky1vqx",
+      "kind": "example",
+      "front": "What is the percent by mass of sand in a 25.0 g mixture containing 5.0 g of sand?",
+      "back": "20% sand by mass, from $\\frac{5.0}{25.0}\\times100\\text{\\%}$.",
+      "hint": "Divide the sand mass by the total mixture mass.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qbttvf",
+      "kind": "mistake",
+      "front": "Two saltwater samples have the same salt percentage. Does that prove both are pure substances?",
+      "back": "No. A **mixture** can have matching proportions, so matching percentages alone do not prove purity. Separate evidence may be needed.",
+      "hint": "Consider whether a mixture can have identical proportions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uusoty",
+      "kind": "mistake",
+      "front": "A student reports 'the percentage is 20%' for a sand mixture. What is wrong with this answer?",
+      "back": "The **component** is not named. A percentage without a component is ambiguous, so state which substance the percentage describes.",
+      "hint": "What must every percentage answer include?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06eg47m",
+      "kind": "mistake",
+      "front": "Why does the percentages-add-to-100% check not prove that separation lost no material?",
+      "back": "The check only catches **arithmetic** errors. It cannot reveal material lost during separation, which shows up as recovered masses that are too low.",
+      "hint": "What kind of error does the 100% check actually catch?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1m5n965",
+      "kind": "concept",
+      "front": "When recovery is complete, how can you find the mass of a component you did not measure?",
+      "back": "By **subtraction**: subtract the measured component masses from the original sample mass. Then state which measurements support the calculated percentage.",
+      "hint": "Use the original sample mass as the starting point.",
+      "sectionId": "s4"
+    }
+  ]
+}

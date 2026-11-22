@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "5-10",
+  "topicCode": "5.10",
+  "topicName": "Introduction to optimization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:26.347Z",
+  "cards": [
+    {
+      "id": "1j4hsr8",
+      "kind": "concept",
+      "front": "Why does an optimization problem need a constraint?",
+      "back": "A **constraint** links the changing variables, so the objective can be rewritten as a function of one variable and differentiated. Without a limit like fencing, the area could grow without bound.",
+      "hint": "Think about what happens to the area if nothing limits the side lengths.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07md5y1",
+      "kind": "process",
+      "front": "What are the main steps for solving an optimization problem?",
+      "back": "Name the changing variables and objective, write a constraint equation, rewrite the objective as a function of one variable, find the feasible domain, differentiate, check candidates against the domain, then answer with units and an interpretation.",
+      "hint": "Start by naming the decision you can change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j9ujgz",
+      "kind": "mistake",
+      "front": "What is a common mistake when maximizing enclosed area with fixed fencing?",
+      "back": "Optimizing the **constraint** instead of the objective. The fencing length is fixed; the enclosed area changes and is what should be maximized.",
+      "hint": "Which quantity is fixed, and which one changes?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0f0opck",
+      "kind": "term",
+      "front": "What is the objective in an optimization problem?",
+      "back": "The **objective** is the quantity being maximized or minimized, such as revenue, enclosed area, or material use.",
+      "hint": "Ask what the question wants to make as large or small as possible.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mr4y2e",
+      "kind": "term",
+      "front": "What is a constraint?",
+      "back": "A **constraint** is a fixed condition that restricts the variables and connects them, such as a budget or a fixed length of fencing.",
+      "hint": "Think of a limit the problem places on the choices.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07k3cnm",
+      "kind": "term",
+      "front": "What is the feasible domain?",
+      "back": "The **feasible domain** is the set of input values allowed by the constraints and the real-world situation.",
+      "hint": "Ask which input values make sense in the context.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rpc1fm",
+      "kind": "example",
+      "front": "A rectangle has one side x meters and uses 40 meters of fencing. What is its area function and feasible domain?",
+      "back": "$A(x)=x(20-x)$, with feasible domain $0<x<20$. The constraint $2x+2y=40$ gives $y=20-x$, and positive sides need $0<x<20$.",
+      "hint": "Use the constraint to write the other side in terms of x.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cxvkwc",
+      "kind": "example",
+      "front": "What is the greatest area of a rectangle made from 40 meters of fencing?",
+      "back": "**100 m^2**, with sides of 10 meters each. Setting $A'(x)=20-2x=0$ gives $x=10$, and $A'$ changes from positive to negative there, so it is a maximum.",
+      "hint": "Differentiate $A(x)=20x-x^2$ and check the sign change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1legf4l",
+      "kind": "concept",
+      "front": "Why is a derivative of zero not enough to prove a maximum or minimum?",
+      "back": "A zero derivative only gives a **candidate**. Check it against the feasible domain and included endpoints, then compare objective values or the sign of the derivative.",
+      "hint": "What extra checks does the candidate still need?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1trxi9m",
+      "kind": "concept",
+      "front": "What should you do if the domain excludes an endpoint?",
+      "back": "Do not claim the objective reaches a value at that endpoint. You may still check what happens as values approach it.",
+      "hint": "Consider whether a side length of zero is allowed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0irtbth",
+      "kind": "process",
+      "front": "How should you finish an optimization answer?",
+      "back": "Answer the original question with **units** and a brief interpretation in context, not just the value of the derivative or the critical point.",
+      "hint": "Read the question again and match its wording.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nocajj",
+      "kind": "term",
+      "front": "What is an optimization problem?",
+      "back": "An **optimization problem** asks for the largest or smallest possible value of a quantity, subject to limits on the choices.",
+      "hint": "Look for words like greatest, least, maximum, or minimum.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0moluwp",
+      "kind": "concept",
+      "front": "Why does the fencing limit matter when maximizing enclosed area?",
+      "back": "Without the **fencing limit**, the enclosed area could grow without bound. The constraint restricts the choices so a maximum exists.",
+      "hint": "What would happen to the shape if the fence length were unlimited?",
+      "sectionId": "s1"
+    }
+  ]
+}

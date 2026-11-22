@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "b3-3",
+  "topicCode": "B3.3",
+  "topicName": "Muscle and motility",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:44.551Z",
+  "cards": [
+    {
+      "id": "1jpggrn",
+      "kind": "concept",
+      "front": "Why does a sarcomere get shorter when a muscle contracts?",
+      "back": "Because **actin slides past myosin**, pulling the Z discs closer together. The filaments keep their lengths, but their overlap increases.",
+      "hint": "Think about what changes: the filaments or how they overlap.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13mridy",
+      "kind": "concept",
+      "front": "What is the job of ATP in the cross-bridge cycle?",
+      "back": "ATP **binding** detaches myosin from actin, and ATP **hydrolysis** stores energy in the myosin head so it can pull again. Each stage needs ATP.",
+      "hint": "Binding and hydrolysis do different jobs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1knj8cc",
+      "kind": "concept",
+      "front": "Why do joints need pairs of antagonistic muscles?",
+      "back": "Because **muscles can only pull**, not push. To reverse a movement, the opposing muscle must contract and pull the bone the other way.",
+      "hint": "Think about the direction a muscle can exert force.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1i1ab4y",
+      "kind": "term",
+      "front": "What is a sarcomere?",
+      "back": "A **sarcomere** is the repeating unit of a myofibril, lying between two Z discs. It shortens during contraction.",
+      "hint": "It sits between two Z discs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "105s4bp",
+      "kind": "process",
+      "front": "What are the steps of contraction, from nerve impulse to sarcomere shortening?",
+      "back": "1) Impulse travels along the sarcolemma into the fibre. 2) Sarcoplasmic reticulum releases calcium ions. 3) Calcium binds troponin, moving tropomyosin off binding sites. 4) Myosin heads attach to actin and pull. 5) Repeated pulls shorten the sarcomere.",
+      "hint": "Start with the electrical signal.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15bq24n",
+      "kind": "term",
+      "front": "What is the role of troponin?",
+      "back": "**Troponin** binds calcium ions and moves tropomyosin away from the myosin-binding sites on actin.",
+      "hint": "It responds directly to calcium.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wt4ijx",
+      "kind": "mistake",
+      "front": "A student says the filaments shrink during contraction. What is wrong with this?",
+      "back": "The **filaments keep their lengths**. The sarcomere shortens because actin slides past myosin, which increases the overlap between them.",
+      "hint": "What actually changes during contraction?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rulgzo",
+      "kind": "term",
+      "front": "What is titin?",
+      "back": "**Titin** is an elastic protein that helps restore the sarcomere towards its resting length after stretching or contraction.",
+      "hint": "Think about what elastic means.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y4a4fl",
+      "kind": "concept",
+      "front": "How do skeletal, cardiac and smooth muscle differ in control?",
+      "back": "**Skeletal** muscle is usually voluntary. **Cardiac** and **smooth** muscle are involuntary, working without conscious control.",
+      "hint": "Which type do you choose to move?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wbqmy0",
+      "kind": "mistake",
+      "front": "A student says a relaxing triceps actively pushes the forearm straight. What is wrong?",
+      "back": "A **relaxing muscle does not push** the bone. The antagonist, the triceps, contracts to straighten the arm while the biceps relaxes.",
+      "hint": "Which muscle is actively contracting?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1s082g3",
+      "kind": "concept",
+      "front": "How does activating more motor units change the force a muscle produces?",
+      "back": "Activating **more motor units** makes more muscle fibres contract, which increases the force the muscle produces.",
+      "hint": "Count the fibres that contract.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "19wk6w8",
+      "kind": "term",
+      "front": "What is a motor unit?",
+      "back": "A **motor unit** is one motor neuron plus every muscle fibre it stimulates. All of its fibres contract together.",
+      "hint": "It is one neuron and everything it controls.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0xptlkk",
+      "kind": "concept",
+      "front": "How do the intercostal muscles change the volume of the chest?",
+      "back": "**External intercostals** contract to raise the ribs during inhalation. **Internal intercostals** pull the ribs down during forced exhalation. Their opposing pulls change chest volume.",
+      "hint": "Each set works in the opposite direction to the other.",
+      "sectionId": "s6"
+    }
+  ]
+}

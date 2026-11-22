@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-1-9",
+  "topicCode": "3.1.9",
+  "topicName": "Rate equations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:37:10.937Z",
+  "cards": [
+    {
+      "id": "1tjewjr",
+      "kind": "term",
+      "front": "What is the order of reaction with respect to a reactant?",
+      "back": "The **order** is the power to which that reactant's concentration is raised in the rate equation. It is found by experiment and is usually 0, 1 or 2.",
+      "hint": "Think about how the rate changes when only that reactant's concentration is changed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13n0afs",
+      "kind": "process",
+      "front": "How do you find the order of each reactant from experimental data?",
+      "back": "Run experiments changing only one concentration, measure each **initial rate**, then compare. A doubled rate means first order, a fourfold rate means second order, and no change means zero order.",
+      "hint": "Which experiments should you compare, and what must stay fixed?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fl3z9t",
+      "kind": "concept",
+      "front": "Why does the slowest step control the rate of a reaction with several steps?",
+      "back": "The **rate-determining step** is the slowest step, so products can only form as fast as it allows. Faster steps elsewhere do not raise the overall rate.",
+      "hint": "Think of a bottleneck on a journey.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1uqsols",
+      "kind": "formula",
+      "front": "What does the rate constant k in rate = k[A][B]^2 depend on?",
+      "back": "The **rate constant** $k$ depends only on temperature, not on concentration. Raising the temperature increases $k$.",
+      "hint": "Compare what changes between experiments with what stays fixed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k91agd",
+      "kind": "example",
+      "front": "Using experiment 1 (rate $2.0\\times10^{-3}$, [A] = 0.10, [B] = 0.10 mol dm$^{-3}$), what is k for rate = k[A][B]^2?",
+      "back": "$k=2.0\\,\\mathrm{dm^{6}\\,mol^{-2}\\,s^{-1}}$, from $k=\\frac{2.0\\times10^{-3}}{0.10\\times0.10^{2}}$. The units show the reaction is third order overall.",
+      "hint": "Rearrange the rate equation to make k the subject first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nf3zrq",
+      "kind": "mistake",
+      "front": "Why is it wrong to take the powers in a rate equation from the balanced equation?",
+      "back": "Orders are found by experiment and need not match the coefficients. A coefficient of 2 does not make a reactant second order.",
+      "hint": "Where do the powers in a rate equation come from?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jcb37a",
+      "kind": "concept",
+      "front": "Why does the tangent at time zero on a concentration–time graph give the initial rate?",
+      "back": "The **gradient** of the curve gives the rate at that moment, so the tangent at time zero gives the initial rate.",
+      "hint": "What does the steepness of a curve represent?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03bty3m",
+      "kind": "example",
+      "front": "A tangent at time zero passes through 0.50 mol dm$^{-3}$ at 0 s and 0.10 mol dm$^{-3}$ at 80 s. What is the initial rate?",
+      "back": "$5.0\\times10^{-3}\\,\\mathrm{mol\\,dm^{-3}\\,s^{-1}}$, from the gradient $\\frac{0.50-0.10}{80}$.",
+      "hint": "Work out the gradient of the tangent.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16v4cau",
+      "kind": "concept",
+      "front": "What does a straight line with constant gradient on a concentration–time graph show?",
+      "back": "The reactant is **zero order**, because the rate stays constant as concentration falls.",
+      "hint": "Compare with the shape for a first-order curve.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18i332r",
+      "kind": "concept",
+      "front": "What is special about the half-life of a first-order reaction?",
+      "back": "It is **constant**, so successive halvings of concentration take equal times and the half-life does not depend on the starting concentration.",
+      "hint": "Compare how long successive halvings take.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11bve0e",
+      "kind": "formula",
+      "front": "Which equation links the half-life of a first-order reaction to the rate constant k?",
+      "back": "$t_{1/2}=\\frac{\\ln 2}{k}$, where $t_{1/2}$ is in $\\mathrm{s}$ and $k$ is in $\\mathrm{s^{-1}}$. Since $\\ln 2\\approx0.693$, this gives the **half-life**.",
+      "hint": "This relationship only applies to first-order reactions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1u51qzt",
+      "kind": "example",
+      "front": "A first-order reaction has a half-life of 50 s. What is the rate constant k?",
+      "back": "$k\\approx0.0139\\,\\mathrm{s^{-1}}$, from $k=\\frac{\\ln 2}{50}$.",
+      "hint": "Rearrange the half-life equation to make k the subject.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1l56rm8",
+      "kind": "term",
+      "front": "How is the rate of reaction defined?",
+      "back": "The **rate of reaction** is the change in concentration of a reactant or product per unit time, in $\\mathrm{mol\\,dm^{-3}\\,s^{-1}}$.",
+      "hint": "Think about what changes as a reaction proceeds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09nb40h",
+      "kind": "example",
+      "front": "What is the overall order of the rate equation rate = k[A][B]^2?",
+      "back": "**3**, because the overall order is the sum of the individual orders: 1 in A plus 2 in B.",
+      "hint": "Add the powers of every reactant in the equation.",
+      "sectionId": "s2"
+    }
+  ]
+}

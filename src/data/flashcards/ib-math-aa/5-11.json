@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-11",
+  "topicCode": "5.11",
+  "topicName": "Definite integrals and areas",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:02.550Z",
+  "cards": [
+    {
+      "id": "1dckr0u",
+      "kind": "concept",
+      "front": "Why is a definite integral described as accumulated change?",
+      "back": "It adds up a **rate** over every moment between the limits, so it gives the total change in a quantity, such as the water gained by a filling tank.",
+      "hint": "Think of a tap filling a bath.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cbqza2",
+      "kind": "formula",
+      "front": "How is $\\int_a^b f(x)\\,dx$ evaluated when $F$ is an antiderivative of $f$?",
+      "back": "$\\int_a^b f(x)\\,dx=F(b)-F(a)$. Substitute the **upper** limit, then subtract the value at the **lower** limit. No constant is needed because it cancels.",
+      "hint": "Write the result as $[F(x)]_a^b$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0inbzbr",
+      "kind": "formula",
+      "front": "What is the area between two curves when $f(x)\\ge g(x)$ on $[a,b]$?",
+      "back": "$\\int_a^b\\big(f(x)-g(x)\\big)\\,dx$. Use the **upper** curve minus the **lower** curve. The method works even when both curves are below the $x$-axis.",
+      "hint": "Which curve is on top?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17uts11",
+      "kind": "concept",
+      "front": "Why can a definite integral be negative, while an area cannot?",
+      "back": "Where $f(x)<0$ the integrand is negative, so that part of the integral is negative. An **area** is a size and is never negative.",
+      "hint": "Consider where the curve sits relative to the x-axis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rlw6xa",
+      "kind": "term",
+      "front": "What are the limits of integration?",
+      "back": "The **start and end values** $a$ and $b$ of the range over which the change is added up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16frytv",
+      "kind": "process",
+      "front": "What are the steps to evaluate a definite integral?",
+      "back": "1) Find an antiderivative $F$. 2) Substitute the upper limit and the lower limit. 3) Subtract the lower-limit value from the upper-limit value.",
+      "hint": "Use brackets around negative values when substituting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05px5wl",
+      "kind": "concept",
+      "front": "Which three properties help when working with definite integrals?",
+      "back": "**Swapping** the limits changes the sign: $\\int_b^a f\\,dx=-\\int_a^b f\\,dx$. Equal limits give $\\int_a^a f\\,dx=0$. A range can be **split**: $\\int_a^b f\\,dx=\\int_a^c f\\,dx+\\int_c^b f\\,dx$.",
+      "hint": "Splitting is useful where a curve crosses the axis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sc0zc3",
+      "kind": "process",
+      "front": "How do you find the true area between a curve and the x-axis when the curve crosses the axis?",
+      "back": "Solve $f(x)=0$ to find the crossing point, integrate each part separately, then add the sizes ignoring signs. In symbols, the area is $\\int_a^b|f(x)|\\,dx$.",
+      "hint": "Sketch the curve first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "100km0o",
+      "kind": "mistake",
+      "front": "A student adds $\\int_0^2(x^2-4)\\,dx$ and $\\int_2^3(x^2-4)\\,dx$ directly to find the area between the curve and the axis for $0\\le x\\le3$. What is wrong?",
+      "back": "Adding them directly gives the signed total $-3$, not the area. Integrate each part, take the size of each, then add: $\\frac{16}{3}+\\frac{7}{3}=\\frac{23}{3}\\approx7.67$ square units.",
+      "hint": "Check the sign of each part.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0c9gxc0",
+      "kind": "process",
+      "front": "How do you find the limits and the upper curve for an area between two curves?",
+      "back": "Solve $f(x)=g(x)$ to find the **points of intersection**, which give the limits. Test one value between them to decide which curve is the upper one.",
+      "hint": "Sketching the curves helps.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "185rpbu",
+      "kind": "example",
+      "front": "Find the area enclosed by $y=x+2$ and $y=x^2$.",
+      "back": "$\\frac{9}{2}=4.5$ square units. The limits are $x=-1$ and $x=2$, the line is the upper curve, and $\\int_{-1}^{2}(x+2-x^2)\\,dx=\\frac{9}{2}$.",
+      "hint": "Solve $x^2=x+2$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1s3lfk4",
+      "kind": "concept",
+      "front": "What does integrating a rate over a time interval give?",
+      "back": "The **total change** in the quantity between those times. Integrating velocity gives the change in position, and a negative rate makes that part of the integral negative.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qhqfij",
+      "kind": "example",
+      "front": "A tank gains water at $r(t)=6t$ dm³ per minute. How much water is gained in the first 4 minutes?",
+      "back": "$\\int_0^4 6t\\,dt=\\left[3t^2\\right]_0^4=48$, so the tank gains $48\\ \\mathrm{dm^3}$.",
+      "hint": "Integrate the rate, then substitute the limits.",
+      "sectionId": "s5"
+    }
+  ]
+}

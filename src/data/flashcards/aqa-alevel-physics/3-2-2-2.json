@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-2-2-2",
+  "topicCode": "3.2.2.2",
+  "topicName": "Electron collisions with atoms",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:01.702Z",
+  "cards": [
+    {
+      "id": "1ftpt9w",
+      "kind": "concept",
+      "front": "Why can an electron in an atom only have certain energies, rather than any value?",
+      "back": "Electrons can only occupy allowed **energy levels**, with no allowed values in between. An electron moves to another level only by gaining or losing the exact gap energy.",
+      "hint": "Think of standing on the steps of a staircase, never between them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "116jf8g",
+      "kind": "term",
+      "front": "What is excitation when a free electron collides with an atom?",
+      "back": "**Excitation** is when a free electron transfers some of its kinetic energy to an electron in the atom, which moves to a higher level. The electron stays in the atom.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0d3wdqx",
+      "kind": "process",
+      "front": "What are the steps for finding the highest level a collision can excite an atom to?",
+      "back": "Work upwards from the ground state, one level at a time. Find each energy gap (higher minus lower). Stop at the first gap larger than the electron's kinetic energy.",
+      "hint": "Start from the ground state and compare each gap with the kinetic energy.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0uowtpd",
+      "kind": "term",
+      "front": "What is the ionisation energy of an atom?",
+      "back": "The **ionisation energy** is the minimum energy needed to remove an electron from an atom in its ground state. For hydrogen it is 13.6 eV.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dx6vkq",
+      "kind": "concept",
+      "front": "Why does an atom already in an excited level need less energy to ionise?",
+      "back": "It starts closer to zero energy, so less energy is needed to reach zero and remove the electron.",
+      "hint": "Compare where the atom starts on the energy level diagram.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gm4ycv",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a colliding electron must have exactly the gap energy to excite an atom?",
+      "back": "It needs at least the gap energy. The atom takes exactly the gap, and the electron keeps any surplus as kinetic energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vsjirz",
+      "kind": "concept",
+      "front": "What happens to a free electron with less kinetic energy than the smallest gap between levels?",
+      "back": "No excitation occurs. The electron bounces off and keeps almost all of its kinetic energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04bl0kh",
+      "kind": "formula",
+      "front": "How do you convert an energy in electronvolts into joules?",
+      "back": "Multiply the energy in eV by $1.60\\times10^{-19}$ to get the energy in $\\text{J}$. One electronvolt is the energy gained by an electron moving through a potential difference of 1 V.",
+      "hint": "Use the value given for one electronvolt in the note.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ty8o25",
+      "kind": "concept",
+      "front": "Why are the energies of bound electrons in an atom negative?",
+      "back": "Zero energy is a free electron at rest far from the atom. A bound electron has less energy than that, so its energy is negative. Higher levels are less negative.",
+      "hint": "Compare a bound electron with a free electron at rest.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pcrhm0",
+      "kind": "process",
+      "front": "What are the stages by which a fluorescent tube produces visible light?",
+      "back": "Accelerated free electrons collide and excite mercury atoms. Excited atoms fall to lower levels and emit ultraviolet photons. A coating absorbs these photons and emits visible light.",
+      "hint": "Follow the energy from the voltage to the coating.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0pwmc8i",
+      "kind": "concept",
+      "front": "What determines the energy of a photon emitted when an excited atom falls to a lower level?",
+      "back": "The photon carries energy equal to the drop between the two levels, given by $E=hf$.",
+      "hint": "Relate the photon energy to the two levels involved.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1csv84t",
+      "kind": "example",
+      "front": "Which highest level can a 12.5 eV electron excite a ground-state hydrogen atom to?",
+      "back": "Level $n=3$. The gap to $n=3$ is 12.09 eV, which is within 12.5 eV, but the gap to $n=4$ is 12.75 eV, which is too large. The electron keeps 0.41 eV.",
+      "hint": "Compare each gap from the ground state with the electron's kinetic energy.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0r5ejms",
+      "kind": "example",
+      "front": "What is the minimum kinetic energy an electron needs to excite a ground-state hydrogen atom?",
+      "back": "10.2 eV, the gap from the ground state $n=1$ to $n=2$, since $-3.40-(-13.6)=10.2\\,\\text{eV}$.",
+      "hint": "Look at the first gap above the ground state.",
+      "sectionId": "s6"
+    }
+  ]
+}

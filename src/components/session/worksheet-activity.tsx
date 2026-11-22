@@ -1,6 +1,8 @@
 "use client";
 
 import { useNewUi } from "@/lib/new-ui";
+import { McqOptions, PaperBar, SourcesPanel, wordCount } from "@/components/session/paper-parts";
+import "@/lib/i18n/practice-paper";
 import { useEffect, useRef, useState } from "react";
 import { PartMarking, WorksheetContent } from "@/types";
 import { markWorksheetAnswer } from "@/lib/api/study";
@@ -210,21 +212,28 @@ export function WorksheetActivity({
     setMarkingInFlight(false);
   };
 
+  const paper = content.paper;
+  /** Papers title their questions "Question n", already in the counter above. */
+  const stepTitle = step.title.replace(/^question\s*\d+\s*[—–:.-]?\s*/i, "") || (paper ? "" : step.title);
+
   return (
     <div>
+      {paper && <PaperBar activityId={activityId} paper={paper} section={step.section} showInstructions={stepIndex === 0} />}
       {/* Step header */}
       {newUi ? (
         <div>
           <div className="flex min-h-6 items-center justify-between gap-4">
             <p data-scroll-line className="text-small font-semibold tabular-nums text-muted-foreground" aria-live="polite">
-              {t("session.question")} {stepIndex + 1} {t("session.of")} {content.steps.length} · {totalMarks} {t("session.marks")}
-              {content.steps.length === 1 && ` · ~${summary.minutes} ${t("session.min")}`}
+              {t("session.question")} {stepIndex + 1} {t("session.of")} {content.steps.length} · {totalMarks} {t(totalMarks === 1 ? "paper.mark" : "session.marks")}
+              {content.steps.length === 1 && !paper && ` · ~${summary.minutes} ${t("session.min")}`}
             </p>
             <ItemDots current={stepIndex} states={content.steps.map((_, i) => (checkedSteps[i] ? "done" : "todo"))} />
           </div>
-          <p key={`ws-${stepIndex}`} className="life-rise mt-3 text-[20px] font-extrabold leading-[1.3] sm:text-[22px]">
-            <MathText text={step.title.replace(/^question\s*\d+\s*[—–:.-]?\s*/i, "")} />
-          </p>
+          {stepTitle && (
+            <p key={`ws-${stepIndex}`} className="life-rise mt-3 text-[20px] font-extrabold leading-[1.3] sm:text-[22px]">
+              <MathText text={stepTitle} />
+            </p>
+          )}
         </div>
       ) : (
       <div className="pb-4 border-b border-border">
@@ -242,7 +251,7 @@ export function WorksheetActivity({
           </p>
           <span className="text-caption text-muted-foreground shrink-0 tabular-nums">
             {stepIndex + 1} {t("session.of")} {content.steps.length} ·{" "}
-            {totalMarks} {t("session.marks")}
+            {totalMarks} {t(totalMarks === 1 ? "paper.mark" : "session.marks")}
           </span>
         </div>
         <div className="flex gap-1 mt-3">
@@ -301,6 +310,7 @@ export function WorksheetActivity({
         {step.figures?.map((figure) => (
           <FigureView key={figure.id} figure={figure} />
         ))}
+        {step.sources && step.sources.length > 0 && <SourcesPanel sources={step.sources} />}
 
         {/* Which part is on screen, and how each one stands: answered, marked right or wrong. */}
         {onePart && (
@@ -365,7 +375,16 @@ export function WorksheetActivity({
                         : `[${part.marks ?? 1}]`}
                     </span>
                   </div>
-                  {part.type === "true_false" ? (
+                  {part.type === "mcq" && part.options?.length ? (
+                    <McqOptions
+                      options={part.options}
+                      value={value}
+                      answer={part.answer}
+                      checked={checked}
+                      disabled={checked || markingInFlight}
+                      onPick={(letter) => setAnswers((a) => ({ ...a, [key(i)]: letter }))}
+                    />
+                  ) : part.type === "true_false" ? (
                     <div className={newUi ? "mt-3 flex gap-2.5" : "flex gap-2 mt-2"}>
                       {["True", "False"].map((opt) => (
                         <button
@@ -406,7 +425,7 @@ export function WorksheetActivity({
                     <RichAnswerField
                       textareaRef={i === partIndex ? firstInput : undefined}
                       value={value}
-                      rows={part.type === "numeric" ? 1 : 2}
+                      rows={part.type === "numeric" ? 1 : part.type === "essay" ? 12 : 2}
                       disabled={(checked && correct) || markingInFlight}
                       onChange={(v) => {
                         setAnswers((a) => ({ ...a, [key(i)]: v }));
@@ -454,6 +473,11 @@ export function WorksheetActivity({
 
                   {!checked && (
                     <div className={newUi ? "mt-1 flex flex-wrap items-center gap-x-5" : "mt-1.5 flex items-center gap-4"}>
+                      {part.type === "essay" && (
+                        <span className="min-h-10 text-[13px] font-semibold tabular-nums text-muted-foreground flex items-center">
+                          {t("paper.words").replace("{n}", String(wordCount(value)))}
+                        </span>
+                      )}
                       {part.type === "text" && !drawingOpen[key(i)] && (
                         <button
                           type="button"

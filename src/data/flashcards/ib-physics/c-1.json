@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "c-1",
+  "topicCode": "C.1",
+  "topicName": "Simple harmonic motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:35.476Z",
+  "cards": [
+    {
+      "id": "0pwmcf8",
+      "kind": "concept",
+      "front": "What two conditions must hold for an oscillation to be simple harmonic motion?",
+      "back": "The **acceleration** must be proportional to displacement from equilibrium and directed towards the stable **equilibrium position**.",
+      "hint": "Think about both how big the acceleration is and which way it points.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wuivz1",
+      "kind": "formula",
+      "front": "Which equation links acceleration and displacement in simple harmonic motion, and what does the minus sign mean?",
+      "back": "$a=-\\omega^2x$. The minus sign means acceleration points towards equilibrium when displacement points away from it. $\\omega$ is in rad s$^{-1}$, $x$ in m, $a$ in m s$^{-2}$.",
+      "hint": "Compare the direction of a with the direction of x.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "080z4o9",
+      "kind": "concept",
+      "front": "Where in an oscillation are speed and acceleration each at their greatest?",
+      "back": "Speed is greatest at **equilibrium**, where acceleration is zero. Acceleration is greatest at the **extremes**, where the object momentarily stops.",
+      "hint": "Consider where the object stops and where it passes through the middle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17dpjg9",
+      "kind": "term",
+      "front": "What is the amplitude of an oscillation?",
+      "back": "The **amplitude** $A$ is the greatest displacement from equilibrium, measured to one extreme.",
+      "hint": "It is a distance from the middle, not across the whole swing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05l0z92",
+      "kind": "mistake",
+      "front": "A student says the amplitude is the full distance between the two extremes. What is wrong?",
+      "back": "Amplitude is measured from **equilibrium** to one extreme. The full distance between extremes is $2A$.",
+      "hint": "Check where the zero point is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wst71j",
+      "kind": "formula",
+      "front": "How are period $T$ and frequency $f$ related?",
+      "back": "$f=\\frac{1}{T}$. Period is in seconds and frequency is in hertz, so they are reciprocals.",
+      "hint": "One is how long one cycle takes; the other is how many cycles per second.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d787l3",
+      "kind": "formula",
+      "front": "How is angular frequency $\\omega$ related to frequency $f$ and period $T$?",
+      "back": "$\\omega=2\\pi f=\\frac{2\\pi}{T}$, with $\\omega$ in rad s$^{-1}$.",
+      "hint": "A full cycle is 2π radians.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12gqzck",
+      "kind": "example",
+      "front": "An oscillator completes 8 oscillations in 16 s. What are its period and frequency?",
+      "back": "$T=\\frac{16}{8}=2\\,\\mathrm{s}$ and $f=0.5\\,\\mathrm{Hz}$.",
+      "hint": "Divide the total time by the number of oscillations first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hd2z4k",
+      "kind": "formula",
+      "front": "What is the angular frequency of a mass $m$ on an ideal spring with spring constant $k$?",
+      "back": "$\\omega=\\sqrt{\\frac{k}{m}}$. It follows from Hooke's law $F=-kx$ combined with $F=ma$.",
+      "hint": "Start from the restoring force and Newton's second law.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08nt31a",
+      "kind": "formula",
+      "front": "Which equation gives speed in simple harmonic motion when the time is not known?",
+      "back": "$v^2=\\omega^2(A^2-x^2)$. The sign of $v$ depends on the direction of travel.",
+      "hint": "It uses amplitude and displacement, not time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13wl761",
+      "kind": "process",
+      "front": "If the object crosses equilibrium in the positive direction at $t=0$, what are its displacement, velocity and acceleration as functions of time?",
+      "back": "$x=A\\sin(\\omega t)$, $v=A\\omega\\cos(\\omega t)$ and $a=-A\\omega^2\\sin(\\omega t)$. These come from differentiating displacement.",
+      "hint": "Differentiate $x$ with respect to time to get $v$, then again for $a$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11b6hdw",
+      "kind": "concept",
+      "front": "What happens to speed and acceleration magnitude as an object moves farther from equilibrium?",
+      "back": "Its **speed** decreases while the magnitude of its **acceleration** increases.",
+      "hint": "Think about what happens near the extremes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17b6gfm",
+      "kind": "example",
+      "front": "An oscillator has amplitude 0.20 m and angular frequency 4.0 rad s$^{-1}$. What is its maximum acceleration magnitude?",
+      "back": "$a_{\\max}=A\\omega^2=0.20(4.0)^2=3.2\\,\\mathrm{m\\,s^{-2}}$.",
+      "hint": "Use the value of acceleration at the extremes.",
+      "sectionId": "s4"
+    }
+  ]
+}

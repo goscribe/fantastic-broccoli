@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "6-2",
+  "topicCode": "6.2",
+  "topicName": "Climate change: causes and impacts",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:40.169Z",
+  "cards": [
+    {
+      "id": "18iv87m",
+      "kind": "process",
+      "front": "What are the steps by which the greenhouse effect warms Earth's surface?",
+      "back": "1) Sunlight warms the **surface**. 2) The surface emits infrared radiation. 3) Greenhouse gases absorb some of it and re-emit part of it back towards the surface, so less heat escapes to space.",
+      "hint": "Follow the energy from the Sun to the surface and then to the atmosphere.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1r3upnn",
+      "kind": "term",
+      "front": "What is the enhanced greenhouse effect?",
+      "back": "The **extra warming** caused by additional greenhouse gases released by human activities, on top of the natural greenhouse effect.",
+      "hint": "Compare it with the natural greenhouse effect.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "086omqb",
+      "kind": "concept",
+      "front": "Why does melting ice cause even more warming?",
+      "back": "Ice reflects most sunlight, while the darker ocean or land beneath absorbs more. This **positive feedback** makes the original warming larger.",
+      "hint": "Think about what is exposed when ice melts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1eq65xj",
+      "kind": "term",
+      "front": "What is a carbon sink?",
+      "back": "A **carbon sink** is a natural or artificial reservoir, such as a forest or ocean, that takes in more carbon than it releases.",
+      "hint": "Think about what forests and oceans do with carbon.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0i22wop",
+      "kind": "mistake",
+      "front": "A student says one cold winter disproves global warming. What is wrong with this?",
+      "back": "**Weather is not climate.** Climate is the average pattern over at least 30 years, so one cold winter does not disprove a long-term warming trend.",
+      "hint": "Consider the time period involved.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bixkjh",
+      "kind": "concept",
+      "front": "Name two natural causes of past climate change and how each one works.",
+      "back": "**Volcanic eruptions**: sulfur compounds reflect sunlight and cool Earth for a few years. **Orbital changes**: slow shifts in Earth's orbit and tilt alter how sunlight reaches the planet.",
+      "hint": "Think about causes that are not human activity.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05sv3om",
+      "kind": "concept",
+      "front": "Which human activities release methane and nitrous oxide?",
+      "back": "**Methane**: livestock, rice fields and landfill sites. **Nitrous oxide**: fertilised soils. Both trap more heat per molecule than carbon dioxide but are present in smaller amounts.",
+      "hint": "Think about farming and waste.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01jg2xt",
+      "kind": "term",
+      "front": "What is ocean acidification?",
+      "back": "The **fall in the pH** of sea water as it absorbs extra carbon dioxide from the atmosphere. It harms animals that build shells.",
+      "hint": "Carbon dioxide dissolves in sea water and forms an acid.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0oue8sk",
+      "kind": "term",
+      "front": "What happens during coral bleaching?",
+      "back": "Corals **expel the algae** that live in them when stressed, such as by warm water, and lose their colour.",
+      "hint": "Think about the partnership between coral and algae.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hep57e",
+      "kind": "concept",
+      "front": "How can warming change where species live?",
+      "back": "Warming shifts species ranges towards the **poles or higher ground**. Species that cannot move may decline.",
+      "hint": "Think about how temperature zones move.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "062c0ui",
+      "kind": "concept",
+      "front": "How do the main effects of climate change on dry inland regions differ from those on low-lying islands?",
+      "back": "Dry regions face **drought, water shortage and failed harvests**. Low-lying islands face **sea-level rise, flooding and salt water** entering fresh supplies.",
+      "hint": "Compare the main threat in each type of place.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gx2e16",
+      "kind": "concept",
+      "front": "Why can two communities facing the same sea-level rise suffer very different losses?",
+      "back": "Harm depends on **vulnerability**, which combines exposure and the ability to cope. Wealthier places can often afford flood defences and warning systems that reduce harm.",
+      "hint": "Think about money, infrastructure and government support.",
+      "sectionId": "s5"
+    }
+  ]
+}

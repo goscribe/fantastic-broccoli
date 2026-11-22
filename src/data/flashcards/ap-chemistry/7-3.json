@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "7-3",
+  "topicCode": "7.3",
+  "topicName": "Reaction quotient and equilibrium constant",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:02.853Z",
+  "cards": [
+    {
+      "id": "0xuvc1u",
+      "kind": "concept",
+      "front": "If Q is less than K for a mixture, which way does the net reaction proceed, and why?",
+      "back": "**Right**, forming products. The mixture has too little product relative to its equilibrium ratio, so the net reaction moves toward products.",
+      "hint": "Compare the two values and think about which side gains product.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hw3x6f",
+      "kind": "concept",
+      "front": "What does it mean when Q equals K for a reaction mixture?",
+      "back": "The mixture is at **equilibrium**. Forward and reverse reactions still occur, but their rates are equal.",
+      "hint": "Think about what happens to the net change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18zxzqm",
+      "kind": "formula",
+      "front": "What is the concentration expression for Q_c for the reaction $a\\mathrm{A}+b\\mathrm{B}\\rightleftharpoons c\\mathrm{C}$?",
+      "back": "$Q_c=\\frac{[\\mathrm{C}]^c}{[\\mathrm{A}]^a[\\mathrm{B}]^b}$. Each concentration is raised to its coefficient, with products on top and reactants below.",
+      "hint": "Coefficients become exponents.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01nea0r",
+      "kind": "process",
+      "front": "What steps do you follow to calculate Q from a balanced equation and current mixture values?",
+      "back": "1) Write the expression from the balanced equation. 2) Raise each concentration or partial pressure to its coefficient. 3) Substitute the current values and calculate.",
+      "hint": "Start with the balanced equation, not the numbers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vyyn33",
+      "kind": "example",
+      "front": "For $\\mathrm{A}+\\mathrm{B}\\rightleftharpoons\\mathrm{C}$, $[\\mathrm{A}]=0.20$, $[\\mathrm{B}]=0.50$, and $[\\mathrm{C}]=0.10\\,\\mathrm{mol\\,L^{-1}}$. What is $Q_c$?",
+      "back": "**$Q_c=1.0$**. Using $\\frac{[\\mathrm{C}]}{[\\mathrm{A}][\\mathrm{B}]}=\\frac{0.10}{(0.20)(0.50)}=1.0$.",
+      "hint": "Use the expression with [C] on top.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02kvt5e",
+      "kind": "example",
+      "front": "For the mixture in the worked example, with $K_c=4.0$ and $Q_c=1.0$, which way does the net reaction proceed?",
+      "back": "**Right**, because $Q_c=1.0<4.0$. This gives the direction only, not the final concentrations or how fast equilibrium is reached.",
+      "hint": "Compare Q_c with K_c first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01y2rrs",
+      "kind": "example",
+      "front": "Calculate $Q_c$ for $2\\mathrm{A}\\rightleftharpoons\\mathrm{B}$ when $[\\mathrm{A}]=0.50\\,\\mathrm{mol\\,L^{-1}}$ and $[\\mathrm{B}]=0.20\\,\\mathrm{mol\\,L^{-1}}$.",
+      "back": "**$Q_c=0.80$**. Using $\\frac{[\\mathrm{B}]}{[\\mathrm{A}]^2}=\\frac{0.20}{(0.50)^2}=0.80$.",
+      "hint": "The coefficient 2 on A becomes a square.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xw3kg9",
+      "kind": "example",
+      "front": "For a reaction, $Q_p=6.0$ and $K_p=2.0$. Which way does the net reaction proceed, and why?",
+      "back": "**Left**, forming reactants, because $Q_p>K_p$. The mixture has too much product relative to its equilibrium ratio.",
+      "hint": "Check which value is larger.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0edja88",
+      "kind": "mistake",
+      "front": "What is the common mistake when calculating Q for a mixture that has not yet reached equilibrium?",
+      "back": "Using **equilibrium concentrations**. Use the mixture's current concentrations or partial pressures to calculate Q, because equilibrium values describe K.",
+      "hint": "Ask which values describe the mixture right now.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1opizvk",
+      "kind": "mistake",
+      "front": "Does a large Q mean that a mixture is at equilibrium?",
+      "back": "No. A larger **Q** means more product relative to reactants, but it does not necessarily mean equilibrium. Compare Q with the matching K.",
+      "hint": "Q alone cannot show equilibrium.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1g1kj56",
+      "kind": "concept",
+      "front": "How does Q change as a mixture with Q less than K moves toward equilibrium?",
+      "back": "**Q rises** toward K. Product amounts increase and reactant amounts decrease as the net reaction proceeds right.",
+      "hint": "Follow the product and reactant amounts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00o9hhr",
+      "kind": "mistake",
+      "front": "A student reverses the equation but keeps the original K and Q values. What is wrong?",
+      "back": "The values must be **reciprocals** of the originals, since reversing swaps products and reactants in the expression. Describe direction using the equation as written.",
+      "hint": "What happens to the expression when the equation flips?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cxfe9w",
+      "kind": "concept",
+      "front": "Which substances are left out of a reaction quotient expression, and why?",
+      "back": "**Pure solids and pure liquids** are omitted, because their amounts do not appear in the quotient.",
+      "hint": "Think about substances with no concentration term.",
+      "sectionId": "s2"
+    }
+  ]
+}

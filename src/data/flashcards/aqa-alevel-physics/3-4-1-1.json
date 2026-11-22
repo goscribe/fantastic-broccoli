@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-4-1-1",
+  "topicCode": "3.4.1.1",
+  "topicName": "Scalars and vectors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:17.186Z",
+  "cards": [
+    {
+      "id": "0istwsq",
+      "kind": "term",
+      "front": "What is a vector quantity, and how does it differ from a scalar quantity?",
+      "back": "A **vector** quantity has both magnitude and direction. A **scalar** quantity has magnitude only, so a number with a unit is enough.",
+      "hint": "Compare the mass of a sugar bag with how the bag moved.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0li28cs",
+      "kind": "concept",
+      "front": "What is the displacement after one full lap of a 400 m track, and how does it compare with the distance?",
+      "back": "The **displacement** is zero because the runner ends where they started. The **distance** is 400 m, the total length of the path, and it is a scalar.",
+      "hint": "Think about where the runner ends compared with where they began.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1br7i9o",
+      "kind": "formula",
+      "front": "Which formula gives the magnitude of the resultant of two perpendicular vectors, and what does the angle formula use?",
+      "back": "$R=\\sqrt{x^2+y^2}$, where $x$ and $y$ are the two perpendicular parts. The angle satisfies $\\tan\\theta=\\frac{y}{x}$.",
+      "hint": "This only works when the two vectors meet at a right angle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12ptbxp",
+      "kind": "process",
+      "front": "What are the steps for adding two displacements head to tail?",
+      "back": "Draw the first arrow to scale. Start the second arrow at the head of the first. The **resultant** runs from the tail of the first arrow to the head of the last.",
+      "hint": "Think about where the second arrow's tail should begin.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hibhcq",
+      "kind": "example",
+      "front": "A walker goes 4.0 m east and then 3.0 m north. What is the resultant displacement?",
+      "back": "$5.0\\,\\mathrm{m}$ at $37^{\\circ}$ north of east. Use $R=\\sqrt{4.0^2+3.0^2}$ and $\\tan\\theta=\\frac{3.0}{4.0}$.",
+      "hint": "Are the two displacements perpendicular?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cdek57",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that distance is always equal to the size of the displacement?",
+      "back": "They are equal only for a straight path in one direction. A path that bends or loops is longer than the **displacement**, which depends only on the start and finish positions.",
+      "hint": "Consider a path that bends.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pc3b46",
+      "kind": "process",
+      "front": "What are the steps to subtract vector $b$ from vector $a$?",
+      "back": "Reverse the direction of $b$, keeping its magnitude, then add it to $a$. In symbols, $a-b=a+(-b)$.",
+      "hint": "Think about what the minus sign does to the direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07qoaic",
+      "kind": "example",
+      "front": "A ball moving at $5.0\\,\\mathrm{m\\,s^{-1}}$ east rebounds at $3.0\\,\\mathrm{m\\,s^{-1}}$ west. What is its change in velocity?",
+      "back": "$8.0\\,\\mathrm{m\\,s^{-1}}$ west. With east positive, change $=(-3.0)-(+5.0)=-8.0\\,\\mathrm{m\\,s^{-1}}$, and the minus sign shows direction.",
+      "hint": "Take east as positive first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "195geiz",
+      "kind": "formula",
+      "front": "What are the horizontal and vertical components of a vector $F$ acting at angle $\\theta$ above the horizontal?",
+      "back": "Horizontal component $=F\\cos\\theta$. Vertical component $=F\\sin\\theta$. Together they have the same effect as $F$.",
+      "hint": "Draw a right-angled triangle with $F$ as the hypotenuse.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0r7153s",
+      "kind": "mistake",
+      "front": "What goes wrong if the angle of a vector is measured from the vertical instead of the horizontal?",
+      "back": "Cosine and sine swap places. The horizontal component becomes $F\\sin\\theta$ and the vertical component becomes $F\\cos\\theta$.",
+      "hint": "Think about which axis the angle is referenced to.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00nu0vz",
+      "kind": "example",
+      "front": "A rope pulls a sledge with a force of $50\\,\\mathrm{N}$ at $30^{\\circ}$ above the horizontal. What are its horizontal and vertical components?",
+      "back": "Horizontal: $50\\cos30^{\\circ}=43\\,\\mathrm{N}$. Vertical: $50\\sin30^{\\circ}=25\\,\\mathrm{N}$.",
+      "hint": "Use the formulas for resolving a force at an angle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0of5piv",
+      "kind": "process",
+      "front": "What are the steps for adding several vectors that point in different directions?",
+      "back": "Choose perpendicular axes and resolve each vector onto them, keeping signs. Add the parts to get $R_x$ and $R_y$. Then $R=\\sqrt{R_x^2+R_y^2}$ and $\\tan\\theta=\\frac{R_y}{R_x}$.",
+      "hint": "Start by choosing your axes and their positive directions.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0sy7zgt",
+      "kind": "example",
+      "front": "What is the resultant of a $20\\,\\mathrm{N}$ force at $60^{\\circ}$ above east and a $10\\,\\mathrm{N}$ force acting east?",
+      "back": "$26\\,\\mathrm{N}$ at $41^{\\circ}$ above east. The east component is $R_x=20\\,\\mathrm{N}$ and the north component is $R_y=17\\,\\mathrm{N}$.",
+      "hint": "Resolve the $20\\,\\mathrm{N}$ force first.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0u9u434",
+      "kind": "mistake",
+      "front": "Why must a component pointing west or downward carry a minus sign when you add components?",
+      "back": "Components are added along axes with a chosen positive direction. A part in the opposite direction must be negative so that it cancels correctly in the sum.",
+      "hint": "Think about which way your positive axis points.",
+      "sectionId": "s6"
+    }
+  ]
+}

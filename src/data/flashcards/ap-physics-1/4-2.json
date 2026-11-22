@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "4-2",
+  "topicCode": "4.2",
+  "topicName": "Change in momentum and impulse",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:42.194Z",
+  "cards": [
+    {
+      "id": "1txvgd1",
+      "kind": "concept",
+      "front": "What does impulse equal, and why does that link force and momentum?",
+      "back": "**Impulse** equals the change in momentum, $\\vec{J}=\\Delta\\vec{p}$. Newton's second law gives $F_{net}\\Delta t=\\Delta p$, so force acting over time changes momentum.",
+      "hint": "Start from $F_{net}=\\frac{\\Delta p}{\\Delta t}$ and multiply both sides by $\\Delta t$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mphpbr",
+      "kind": "formula",
+      "front": "What is the formula for impulse, and what are its units?",
+      "back": "$\\vec{J}=\\vec{F}_{net}\\Delta t$. Impulse is measured in newton-seconds, $\\mathrm{N\\,s}$, which equals $\\mathrm{kg\\,m/s}$.",
+      "hint": "Force multiplied by time interval.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d8gobr",
+      "kind": "concept",
+      "front": "Why does a longer contact time reduce the force on an object for the same momentum change?",
+      "back": "The impulse is fixed by the momentum change. Since $F_{avg}=\\frac{J}{\\Delta t}$, a **longer** time gives a **smaller** average force. This is why airbags and padding work.",
+      "hint": "Rearrange $J=F_{avg}\\Delta t$ for $F_{avg}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1sbmxy2",
+      "kind": "term",
+      "front": "What is momentum?",
+      "back": "**Momentum** is the product of mass and velocity, $\\vec{p}=m\\vec{v}$. It is a vector in the direction of velocity, measured in $\\mathrm{kg\\,m/s}$.",
+      "hint": "Think mass times velocity.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nbdve2",
+      "kind": "process",
+      "front": "How do you find the impulse from a bounce off a wall?",
+      "back": "1) Choose a positive direction. 2) Find $p_i$ and $p_f$ with signs. 3) Compute $\\Delta p=p_f-p_i$. Signs matter because the velocity reverses.",
+      "hint": "Pick one direction and keep to it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "117luqd",
+      "kind": "mistake",
+      "front": "A ball hits a wall at 5.0 m/s and rebounds at 3.0 m/s. Is the velocity change 2.0 m/s?",
+      "back": "No. The velocity change is **8.0 m/s**, because the directions are opposite. Use signed values and subtract: $3.0-(-5.0)=8.0$ m/s.",
+      "hint": "Think about the sign of each velocity.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06wvlqx",
+      "kind": "term",
+      "front": "What does the area under a force-time graph represent?",
+      "back": "The **impulse** on the object. Each thin strip of area is a force times a small time, and the total area gives $F\\Delta t$ summed over the interval.",
+      "hint": "Area under the curve, not the height.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0s27bv1",
+      "kind": "example",
+      "front": "A 0.50 kg cart starts at rest and a constant 3.0 N net force acts for 2.0 s. What is its final speed?",
+      "back": "**12 m/s**. Impulse is $(3.0)(2.0)=6.0\\ \\mathrm{N\\,s}$, so $6.0=(0.50)v_f$ and $v_f=12\\ \\mathrm{m/s}$.",
+      "hint": "Find the impulse first, then use $J=\\Delta p$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cspjb0",
+      "kind": "example",
+      "front": "A 0.050 kg ball at rest is struck by a force that rises as a triangle to 80 N, with base 0.030 s. What is its speed?",
+      "back": "**24 m/s**. The triangle area gives $J=\\frac{1}{2}(0.030)(80)=1.2\\ \\mathrm{N\\,s}$, so $v_f=\\frac{1.2}{0.050}=24\\ \\mathrm{m/s}$.",
+      "hint": "Impulse is the area of the triangle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19fagh5",
+      "kind": "formula",
+      "front": "How is average force related to impulse and time?",
+      "back": "$F_{avg}=\\frac{J}{\\Delta t}$. The **average force** is the constant force that gives the same impulse in the same time as the actual varying force.",
+      "hint": "Rearrange $J=F_{avg}\\Delta t$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "055745v",
+      "kind": "example",
+      "front": "A 0.40 kg ball hits a wall at 5.0 m/s and rebounds at 3.0 m/s. What is the impulse from the wall, taking away from the wall as positive?",
+      "back": "**3.2 N s** directed away from the wall. $p_i=-2.0$ and $p_f=+1.2$ kg m/s, so $J=1.2-(-2.0)=3.2$ N s.",
+      "hint": "Assign negative to the incoming direction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tm72wi",
+      "kind": "mistake",
+      "front": "A student says a large force acting briefly gives less impulse than a small force acting for a long time. Is that right?",
+      "back": "No. Impulse is the **product** of force and time, $F_{net}\\Delta t$. A large force for a short time can give the same impulse as a small force for a long time.",
+      "hint": "Check the unit: newton-seconds.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x5okfj",
+      "kind": "concept",
+      "front": "Why do airbags, helmets and bent knees reduce injury?",
+      "back": "They lengthen the stopping time. The momentum change is the same, so the impulse is the same, but the **average force** on the body is smaller.",
+      "hint": "Compare stopping time with and without padding.",
+      "sectionId": "s5"
+    }
+  ]
+}

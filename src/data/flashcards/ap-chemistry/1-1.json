@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "1-1",
+  "topicCode": "1.1",
+  "topicName": "Moles and molar mass",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:15.147Z",
+  "cards": [
+    {
+      "id": "1c4hp5r",
+      "kind": "term",
+      "front": "What is a mole, and what is Avogadro's number?",
+      "back": "A **mole** is an amount of substance containing exactly $6.02214076\\times10^{23}$ specified particles. That number is **Avogadro's number**.",
+      "hint": "Think about what you are counting, such as atoms or molecules.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nco3kk",
+      "kind": "process",
+      "front": "How do you calculate the molar mass of a compound such as $\\mathrm{CO_2}$?",
+      "back": "Multiply each element's atomic mass by its subscript, then **add** the results. For $\\mathrm{CO_2}$: $12.01+2(16.00)=44.01\\,\\mathrm{g\\,mol^{-1}}$.",
+      "hint": "Watch for missing subscripts and parentheses.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06x4jc0",
+      "kind": "formula",
+      "front": "Which equation links a sample's mass to its amount in moles, and what do the symbols mean?",
+      "back": "$n=\\frac{m}{M}$ gives the **amount in moles** $n$, where $m$ is mass in grams and $M$ is molar mass in $\\mathrm{g\\,mol^{-1}}$.",
+      "hint": "Check that the units cancel to leave mol.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nkhclr",
+      "kind": "formula",
+      "front": "How do you find the number of particles from an amount in moles?",
+      "back": "Multiply: $N=nN_A$, where $n$ is moles and $N_A$ is **Avogadro's number**. State whether the particles are atoms, molecules, ions, or formula units.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kbutpt",
+      "kind": "mistake",
+      "front": "Does one mole of water molecules contain one mole of hydrogen atoms?",
+      "back": "No. Each **water** molecule has two hydrogen atoms, so one mole of water molecules contains two moles of hydrogen atoms.",
+      "hint": "Count the subscripts in the formula.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1diro5y",
+      "kind": "concept",
+      "front": "Why are formula units used for counting particles in ionic compounds?",
+      "back": "A **formula unit** is the simplest whole-number ratio of ions in an ionic compound, so it is the particle counted for substances like $\\mathrm{NaCl}$.",
+      "hint": "Think about the simplest ratio of ions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k0opdv",
+      "kind": "term",
+      "front": "What is molar mass?",
+      "back": "**Molar mass** is the mass of one mole of a substance, measured in $\\mathrm{g\\,mol^{-1}}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fgh5zs",
+      "kind": "example",
+      "front": "How many $\\mathrm{CO_2}$ molecules are in 22.0 g of $\\mathrm{CO_2}$, with $M=44.01\\,\\mathrm{g\\,mol^{-1}}$?",
+      "back": "About $3.01\\times10^{23}$ **molecules**. First $n=\\frac{22.0}{44.01}=0.500\\,\\mathrm{mol}$, then $N=(0.500)(6.022\\times10^{23})$.",
+      "hint": "Find moles first, then multiply by Avogadro's number.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vkfky6",
+      "kind": "example",
+      "front": "How many oxygen atoms are in 22.0 g of $\\mathrm{CO_2}$?",
+      "back": "About $6.02\\times10^{23}$ oxygen **atoms**. Each $\\mathrm{CO_2}$ molecule has two oxygen atoms, so double the $3.01\\times10^{23}$ molecules.",
+      "hint": "Use the subscript of oxygen in the formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16d983i",
+      "kind": "process",
+      "front": "What are the steps to convert a mass of a compound into moles of a particular atom?",
+      "back": "1) Divide the mass by molar mass to get moles of the compound. 2) Use the formula to convert to molecules or formula units. 3) Multiply by the atom's subscript to count the atoms.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wk8otm",
+      "kind": "concept",
+      "front": "Why does one mole of carbon atoms have a different mass from one mole of water molecules?",
+      "back": "Both contain the same number of particles, but the **particles** have different masses, so the total mass of each mole differs.",
+      "hint": "Consider what Avogadro's number fixes, and what it leaves unchanged.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02tz79p",
+      "kind": "example",
+      "front": "What is the mass of $3.011\\times10^{23}$ $\\mathrm{CO_2}$ molecules, with $M=44.01\\,\\mathrm{g\\,mol^{-1}}$?",
+      "back": "About **22.0 g**. Divide by Avogadro's number to get $n=0.5000\\,\\mathrm{mol}$, then $m=(0.5000)(44.01)=22.01\\,\\mathrm{g}$.",
+      "hint": "Convert particles to moles first.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "2-10",
+  "topicCode": "2.10",
+  "topicName": "Derivatives of tan, cot, sec and csc",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:48.503Z",
+  "cards": [
+    {
+      "id": "0hcxnd1",
+      "kind": "formula",
+      "front": "What is the derivative of $\\tan x$, and why does it have no minus sign?",
+      "back": "$\\frac{d}{dx}(\\tan x)=\\sec^2 x$. It has no leading minus sign because the quotient rule gives $\\frac{\\cos^2 x+\\sin^2 x}{\\cos^2 x}$, which simplifies to $\\sec^2 x$.",
+      "hint": "Start from $\\tan x=\\frac{\\sin x}{\\cos x}$ and use the quotient rule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r5kmly",
+      "kind": "formula",
+      "front": "What is the derivative of $\\csc x$?",
+      "back": "$\\frac{d}{dx}(\\csc x)=-\\csc x\\cot x$. The derivative keeps the original function $\\csc x$ and multiplies it by $\\cot x$, with a minus sign.",
+      "hint": "Write $\\csc x$ as $\\frac{1}{\\sin x}$ and differentiate.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1u2clr8",
+      "kind": "concept",
+      "front": "Where do $\\tan x$ and $\\sec x$ have no derivative, and where do $\\cot x$ and $\\csc x$ have none?",
+      "back": "$\\tan x$ and $\\sec x$ have no derivative where $\\cos x=0$. $\\cot x$ and $\\csc x$ have no derivative where $\\sin x=0$, because those inputs are outside their domains.",
+      "hint": "Think about which denominator becomes zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xjo475",
+      "kind": "term",
+      "front": "What is a tangent line to $y=f(x)$ at $x=a$?",
+      "back": "A **tangent line** passes through $(a,f(a))$ and has slope $f'(a)$. Its equation is $y=f(a)+f'(a)(x-a)$.",
+      "hint": "It needs one point and one slope.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m3uyxh",
+      "kind": "term",
+      "front": "What is the secant function?",
+      "back": "**Secant** is the reciprocal of cosine: $\\sec x=\\frac{1}{\\cos x}$, where $\\cos x\\ne0$.",
+      "hint": "Compare it with cosine.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qqz7m4",
+      "kind": "term",
+      "front": "What is the cotangent function?",
+      "back": "**Cotangent** is $\\cot x=\\frac{\\cos x}{\\sin x}$, defined where $\\sin x\\ne0$.",
+      "hint": "Cotangent is the ratio of cosine to sine.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1l6hmhn",
+      "kind": "term",
+      "front": "What is the cosecant function?",
+      "back": "**Cosecant** is the reciprocal of sine: $\\csc x=\\frac{1}{\\sin x}$, defined where $\\sin x\\ne0$.",
+      "hint": "Compare it with sine.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1762dn6",
+      "kind": "concept",
+      "front": "How do the derivatives of tan and cot compare in direction and in form?",
+      "back": "$\\tan x$ increases wherever it is defined, while $\\cot x$ decreases wherever it is defined. Both derivatives contain a squared reciprocal function, $\\sec^2 x$ and $-\\csc^2 x$.",
+      "hint": "Look at the sign of each derivative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15tz644",
+      "kind": "concept",
+      "front": "Why can the derivative of $\\sec x$ or $\\csc x$ be positive or negative?",
+      "back": "The derivatives $\\sec x\\tan x$ and $-\\csc x\\cot x$ are products of two trig factors, and those factors can have different signs. A leading minus sign alone does not decide the sign.",
+      "hint": "Check each factor separately.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n9ovy0",
+      "kind": "mistake",
+      "front": "A student says $\\frac{d}{dx}(\\csc x)=-\\csc x\\cot x$ is always negative. What is wrong?",
+      "back": "The student is wrong. The leading minus sign does not make the derivative negative everywhere, because $\\cot x$ can be negative. You must check the signs of both factors.",
+      "hint": "Is $\\cot x$ always positive?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0m5go5h",
+      "kind": "mistake",
+      "front": "When finding a tangent line, what is a common error to avoid?",
+      "back": "Do not mix up the function value and the derivative value. Find $f(a)$ and $f'(a)$ separately, then substitute both into $y=f(a)+f'(a)(x-a)$.",
+      "hint": "Two numbers are needed, not one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bnrw5o",
+      "kind": "example",
+      "front": "Find the tangent line to $y=\\sec x$ at $x=\\frac{\\pi}{3}$.",
+      "back": "$y=2+2\\sqrt{3}\\left(x-\\frac{\\pi}{3}\\right)$. The point is $\\left(\\frac{\\pi}{3},2\\right)$ and the slope is $y'=\\sec x\\tan x=2\\sqrt{3}$.",
+      "hint": "Evaluate $\\sec x$ first, then $\\sec x\\tan x$ at the same input.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lkdmal",
+      "kind": "process",
+      "front": "What are the steps to find a tangent line to $y=f(x)$ at $x=a$?",
+      "back": "First find $f(a)$ for the point. Next differentiate to get $f'(x)$ and evaluate $f'(a)$ for the slope. Then substitute into $y=f(a)+f'(a)(x-a)$.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-11-1",
+  "topicCode": "3.11.1",
+  "topicName": "Rotational dynamics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:23.075Z",
+  "cards": [
+    {
+      "id": "1jzf35h",
+      "kind": "formula",
+      "front": "What does the equation $T=I\\alpha$ say, and what are the units of each quantity?",
+      "back": "A resultant **torque** $T$ equals moment of inertia $I$ times angular acceleration $\\alpha$. Units: $T$ in $\\mathrm{N\\,m}$, $I$ in $\\mathrm{kg\\,m^2}$, $\\alpha$ in $\\mathrm{rad\\,s^{-2}}$. It is the rotational form of $F=ma$.",
+      "hint": "Compare it with the linear equation you already know.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r4iui8",
+      "kind": "term",
+      "front": "What is the moment of inertia of a body, and what does it depend on?",
+      "back": "**Moment of inertia** $I$ measures how hard a body is to change its rotation about a stated axis. It depends on mass distribution: $I=\\sum mr^2$, so mass far from the axis counts for more.",
+      "hint": "Think about a heavy door compared with a light one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xr0a2y",
+      "kind": "concept",
+      "front": "Why does a skater spin faster when she pulls her arms in?",
+      "back": "With no external torque, **angular momentum** $I\\omega$ stays constant. Pulling her arms in reduces $I$, so $\\omega$ must increase.",
+      "hint": "Which quantity stays fixed when no external torque acts?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1brlbny",
+      "kind": "term",
+      "front": "What is torque?",
+      "back": "**Torque** is a force's turning effect about a chosen axis. For a force $F$ at right angles to distance $r$ from the axis, $T=Fr$, in $\\mathrm{N\\,m}$.",
+      "hint": "Why does pushing a door near its hinge barely work?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ppdede",
+      "kind": "term",
+      "front": "What is angular acceleration?",
+      "back": "**Angular acceleration** $\\alpha$ is the rate of change of angular velocity, measured in $\\mathrm{rad\\,s^{-2}}$.",
+      "hint": "Compare it with linear acceleration.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uasb0e",
+      "kind": "formula",
+      "front": "Which equation links final angular velocity, initial angular velocity, angular acceleration and angular displacement?",
+      "back": "$\\omega_2^2=\\omega_1^2+2\\alpha\\theta$, valid for constant angular acceleration. It is the rotational form of $v^2=u^2+2as$.",
+      "hint": "Which linear equation for constant acceleration has no time in it?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bi7h2d",
+      "kind": "example",
+      "front": "What is the moment of inertia of two 0.50 kg masses, each 0.40 m from the axis on a light rod?",
+      "back": "$I=0.16\\,\\mathrm{kg\\,m^2}$, from $I=\\sum mr^2=(0.50\\times0.40^2)+(0.50\\times0.40^2)$.",
+      "hint": "Work out the contribution of each mass, then add them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q9aq5u",
+      "kind": "example",
+      "front": "A resultant torque of $0.80\\,\\mathrm{N\\,m}$ acts from rest on a body with $I=0.16\\,\\mathrm{kg\\,m^2}$. What is its angular velocity after $3.0\\,\\mathrm{s}$?",
+      "back": "$\\alpha=5.0\\,\\mathrm{rad\\,s^{-2}}$, then $\\omega_2=\\omega_1+\\alpha t=15\\,\\mathrm{rad\\,s^{-1}}$.",
+      "hint": "Find the angular acceleration before using the time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qs5um0",
+      "kind": "mistake",
+      "front": "Why is rotational kinetic energy not conserved when a skater pulls her arms in?",
+      "back": "Angular momentum is conserved, but kinetic energy is not. She does **work** pulling her arms inwards, so her rotational kinetic energy rises.",
+      "hint": "Where does the extra energy come from?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fady5g",
+      "kind": "formula",
+      "front": "What is the formula for rotational kinetic energy, and how does it change when $\\omega$ doubles?",
+      "back": "$E_k=\\frac12I\\omega^2$, in joules when $I$ is in $\\mathrm{kg\\,m^2}$ and $\\omega$ in $\\mathrm{rad\\,s^{-1}}$. Doubling $\\omega$ quadruples $E_k$.",
+      "hint": "Compare with the kinetic energy formula for linear motion.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bt2rfh",
+      "kind": "example",
+      "front": "What is the rotational kinetic energy of a 2.0 kg solid disc of radius 0.30 m turning at $40\\,\\mathrm{rad\\,s^{-1}}$?",
+      "back": "$E_k=72\\,\\mathrm{J}$. First $I=\\frac12MR^2=0.090\\,\\mathrm{kg\\,m^2}$, then $E_k=\\frac12I\\omega^2$.",
+      "hint": "Find the moment of inertia of the disc first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0km8ef0",
+      "kind": "concept",
+      "front": "Why does a flywheel designed to store energy have most of its mass near the rim?",
+      "back": "Mass far from the axis gives a large $I$. At a given $\\omega$, a large $I$ stores more energy, since $E_k=\\frac12I\\omega^2$.",
+      "hint": "Recall how the distance $r$ enters $I=\\sum mr^2$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00m8u9d",
+      "kind": "concept",
+      "front": "How is the linear speed of a point at radius $r$ linked to angular velocity?",
+      "back": "$v=\\omega r$, so points further from the axis move faster. Their tangential acceleration is $a=\\alpha r$.",
+      "hint": "Think about a point on the rim of a wheel compared with one near the centre.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0zjgqsl",
+      "kind": "concept",
+      "front": "Which rotational quantity is the partner of linear momentum, and what is its formula?",
+      "back": "**Angular momentum** $L=I\\omega$ is the rotational partner of $p=mv$. Moment of inertia takes the place of mass, and angular velocity the place of velocity.",
+      "hint": "Match each linear quantity with the rotational one that plays the same role.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "d1-2",
+  "topicCode": "D1.2",
+  "topicName": "Protein synthesis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:00.892Z",
+  "cards": [
+    {
+      "id": "1uhpowl",
+      "kind": "concept",
+      "front": "What are the two stages that turn a gene into a protein, and what does each stage produce?",
+      "back": "**Transcription** copies a gene from DNA into mRNA. **Translation** uses the mRNA codons to assemble a polypeptide from amino acids.",
+      "hint": "Think about what each stage reads and what it makes."
+    },
+    {
+      "id": "11apey4",
+      "kind": "concept",
+      "front": "Why does the order of bases in mRNA matter for the protein a cell makes?",
+      "back": "The **genetic code** links each three-base codon to an amino acid or stop signal, so the codon order sets the amino acid order in the polypeptide.",
+      "hint": "Consider what the ribosome reads, and in what groups.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "060yp91",
+      "kind": "concept",
+      "front": "How does a tRNA make sure the correct amino acid goes into the growing polypeptide?",
+      "back": "Its **anticodon** pairs with a complementary mRNA codon, so the tRNA carrying the matching amino acid is placed beside the growing chain.",
+      "hint": "Focus on base pairing between tRNA and mRNA.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "130ylyy",
+      "kind": "term",
+      "front": "What is transcription?",
+      "back": "**Transcription** is the synthesis of RNA using a DNA strand as a template.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tgw94b",
+      "kind": "process",
+      "front": "What are the main steps of transcription, in order, including eukaryotic processing?",
+      "back": "RNA polymerase binds and separates the DNA strands; it reads the template strand and builds complementary RNA 5' to 3'; the RNA separates and the DNA rejoins; introns are removed to form mature mRNA.",
+      "hint": "Start with RNA polymerase binding near the gene.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16n0y7h",
+      "kind": "mistake",
+      "front": "A student says the mRNA is an identical copy of the template strand. What is wrong with this?",
+      "back": "mRNA is **complementary** to the template strand, not identical to it. Each template base is paired with its complementary RNA base.",
+      "hint": "Compare the bases with the template, not just the letters.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mb5u01",
+      "kind": "example",
+      "front": "A DNA template strand reads 3'-TAC-5'. What mRNA sequence does transcription produce, written 5' to 3'?",
+      "back": "**5'-AUG-3'**. Each template base gets its complementary RNA base (T to A, A to U, C to G), and the RNA is built 5' to 3'.",
+      "hint": "Pair each base, then write the result in the correct direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bkz15t",
+      "kind": "process",
+      "front": "What happens, in order, as a ribosome translates an mRNA molecule?",
+      "back": "The ribosome binds mRNA and starts at a start codon; it moves one codon at a time; tRNAs deliver amino acids and peptide bonds join them; it stops at a stop codon and releases the polypeptide.",
+      "hint": "Begin at the start codon and end at a stop codon.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "161wzy5",
+      "kind": "term",
+      "front": "What is a ribosome?",
+      "back": "A **ribosome** reads mRNA codons and joins amino acids into a polypeptide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0axyd2o",
+      "kind": "term",
+      "front": "What is an anticodon?",
+      "back": "An **anticodon** is a three-base sequence on tRNA that pairs with a complementary mRNA codon.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0agjkni",
+      "kind": "concept",
+      "front": "What do stop codons do during translation, and why do they not add an amino acid?",
+      "back": "Stop codons **signal the end of translation**; they do not specify an amino acid, so the polypeptide is released.",
+      "hint": "Think about what the ribosome does when it reaches one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hvkp88",
+      "kind": "concept",
+      "front": "Why can several different codons be used to code for the same amino acid?",
+      "back": "The code is **degenerate**: several codons specify the same amino acid, but each codon has only one meaning when translated.",
+      "hint": "Consider the difference between many-to-one and one-to-many.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cnjohi",
+      "kind": "mistake",
+      "front": "A student writes that a codon contains an amino acid. What is the correct idea?",
+      "back": "A codon does **not** contain an amino acid. It specifies one through the genetic code, which is the set of codon-to-amino-acid relationships.",
+      "hint": "Is the amino acid part of the codon, or is it linked to it by a rule?",
+      "sectionId": "s4"
+    }
+  ]
+}

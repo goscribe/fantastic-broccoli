@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-10",
+  "topicCode": "5.10",
+  "topicName": "Indefinite integrals and substitution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:56.706Z",
+  "cards": [
+    {
+      "id": "0y8t6v6",
+      "kind": "formula",
+      "front": "What is the standard integral of $x^n$ when $n\\ne-1$?",
+      "back": "$\\int x^n\\,dx=\\frac{x^{n+1}}{n+1}+C$. You **raise the power by one** and divide by the new power.",
+      "hint": "Add one to the power, then divide by it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02yxm47",
+      "kind": "concept",
+      "front": "Why does an indefinite integral include a constant $C$?",
+      "back": "Many functions share one derivative because they differ only by a **constant**. The indefinite integral must include every one of these antiderivatives.",
+      "hint": "What is the derivative of a constant?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qfjleh",
+      "kind": "concept",
+      "front": "When does substitution work for an integral with a non-linear inner function?",
+      "back": "When the **derivative** of the inner function appears as a factor, so $x\\,dx$ can be replaced by a multiple of $du$.",
+      "hint": "Look for the inner function's derivative in the integrand.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k3zyk9",
+      "kind": "term",
+      "front": "What is an antiderivative of $f$?",
+      "back": "A function **$F$** whose derivative is $f$, so that $F'(x)=f(x)$.",
+      "hint": "Reverse differentiation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0g3tzwz",
+      "kind": "formula",
+      "front": "If $\\int f(x)\\,dx=F(x)+C$, what is $\\int f(ax+b)\\,dx$?",
+      "back": "$\\frac{1}{a}F(ax+b)+C$. This works only when the inner function is **linear**, and you divide by the coefficient $a$.",
+      "hint": "The chain rule multiplies by $a$, so integration divides.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0encz32",
+      "kind": "example",
+      "front": "Find $\\int \\cos(3x)\\,dx$.",
+      "back": "$\\frac{1}{3}\\sin(3x)+C$. The **coefficient** 3 of $x$ divides the standard result.",
+      "hint": "Use the standard integral of cosine, then divide by the coefficient.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b9b835",
+      "kind": "mistake",
+      "front": "Why is $\\int \\frac{1}{x}\\,dx$ not given by the power rule?",
+      "back": "The power rule fails for $n=-1$ because it **divides by zero**. The correct result is $\\ln|x|+C$.",
+      "hint": "What happens to the new power when $n=-1$?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mweoff",
+      "kind": "process",
+      "front": "What are the steps of integration by substitution?",
+      "back": "Choose $u$ as the inner function. Find $\\frac{du}{dx}$ and write $du$. Replace every $x$ term, including $dx$. Integrate in $u$. Write the answer in $x$.",
+      "hint": "Five steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01jiifk",
+      "kind": "example",
+      "front": "Find $\\int x(x^2+3)^4\\,dx$.",
+      "back": "$\\frac{(x^2+3)^5}{10}+C$. Let $u=x^2+3$, so $x\\,dx=\\frac{1}{2}du$ and the integral becomes $\\frac{1}{2}\\int u^4\\,du$.",
+      "hint": "Let $u$ be the bracket.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1szztmk",
+      "kind": "formula",
+      "front": "What is $\\int \\frac{g'(x)}{g(x)}\\,dx$?",
+      "back": "$\\ln|g(x)|+C$. This applies when the **numerator is the derivative** of the denominator.",
+      "hint": "Set $u$ equal to the denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05tmjy2",
+      "kind": "process",
+      "front": "How can you check that an indefinite integral is correct?",
+      "back": "**Differentiate** your result. It must return the original integrand exactly. This check cannot test the constant $C$.",
+      "hint": "Reverse what you did.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0f9ao6z",
+      "kind": "example",
+      "front": "A curve has $\\frac{dy}{dx}=6x^2-2$ and passes through $(1,5)$. Find its equation.",
+      "back": "$y=2x^3-2x+5$. Integrate to get $y=2x^3-2x+C$, then substitute $(1,5)$ to find $C=5$.",
+      "hint": "Use the point to find $C$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ohis52",
+      "kind": "mistake",
+      "front": "What goes wrong if you leave out the constant of integration?",
+      "back": "You **lose every other antiderivative** of the integrand. Always write $+C$ on an indefinite integral.",
+      "hint": "Think of the family of curves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12jo62f",
+      "kind": "example",
+      "front": "Find $\\int(8x^3+3\\sin x)\\,dx$.",
+      "back": "$2x^4-3\\cos x+C$. Integrate $8x^3$ to $2x^4$ and $3\\sin x$ to $-3\\cos x$.",
+      "hint": "Integrate each term separately.",
+      "sectionId": "s2"
+    }
+  ]
+}

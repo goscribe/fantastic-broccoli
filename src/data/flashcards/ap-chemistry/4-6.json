@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "4-6",
+  "topicCode": "4.6",
+  "topicName": "Introduction to titration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:37.722Z",
+  "cards": [
+    {
+      "id": "1nu6bvk",
+      "kind": "concept",
+      "front": "How can a titration find an unknown concentration?",
+      "back": "By reacting a measured sample with a **titrant** of known concentration, then using the titrant's moles and the reaction ratio to find the sample's moles.",
+      "hint": "Think about what you know and what you measure.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bbzbgd",
+      "kind": "concept",
+      "front": "What does the equivalence point of a titration mean?",
+      "back": "It is when the reactants have combined in the **mole ratio** of the balanced reaction. Equal mole amounts occur only when that ratio is one to one.",
+      "hint": "Look at the coefficients in the balanced equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ogl2kc",
+      "kind": "concept",
+      "front": "How do you locate the equivalence point on a titration curve?",
+      "back": "It is the **midpoint** of the steep pH change, where the curve changes concavity. Read the titrant volume there from the horizontal axis.",
+      "hint": "Find where pH changes fastest for a small volume added.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0r1ff21",
+      "kind": "term",
+      "front": "What is a titrant?",
+      "back": "The **titrant** is the solution of known concentration that is added in measured amounts during a titration.",
+      "hint": "It is the solution you add from a burette.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02qaajg",
+      "kind": "term",
+      "front": "How does an endpoint differ from the equivalence point?",
+      "back": "The **endpoint** is an observed signal, such as an indicator color change, used to estimate the equivalence point. The two are not identical.",
+      "hint": "One is observed, the other is a chemical condition.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qnjiyk",
+      "kind": "mistake",
+      "front": "Is the equivalence point always at pH 7?",
+      "back": "No. The **pH** at equivalence depends on the acid and base involved. The pH 7 result in the note's example applies to a strong acid and strong base.",
+      "hint": "Consider what kind of acid and base are reacting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w6rxeb",
+      "kind": "mistake",
+      "front": "Does equal moles of acid and base always mean equivalence has been reached?",
+      "back": "Not always. Equivalence follows the **mole ratio** in the balanced reaction, so equal moles indicate equivalence only when that ratio is one to one.",
+      "hint": "Check the balanced equation before deciding.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k9eugx",
+      "kind": "formula",
+      "front": "What equation gives the amount in moles of a solution, and what units must volume use?",
+      "back": "$n = M \\times V$, where n is moles, M is concentration in mol/L, and V is volume in **liters**.",
+      "hint": "Convert any mL before you multiply.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0watigh",
+      "kind": "process",
+      "front": "What are the steps to calculate an unknown concentration from titration data?",
+      "back": "1) Convert the titrant volume to liters. 2) Find titrant moles using $n = M \\times V$. 3) Apply the balanced reaction's **mole ratio** to find sample moles. 4) Divide by the sample volume in liters.",
+      "hint": "Start with the titrant and end with the sample.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18ne5hg",
+      "kind": "example",
+      "front": "A 25.0 mL HCl sample reaches equivalence after 20.0 mL of 0.100 mol/L NaOH is added. What is the HCl concentration?",
+      "back": "**0.0800 mol/L**. NaOH moles are 0.00200 mol. The one-to-one ratio gives 0.00200 mol HCl, which divided by 0.0250 L gives the answer.",
+      "hint": "Convert both volumes to liters first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k1fga9",
+      "kind": "example",
+      "front": "A 30.0 mL HCl sample needs 15.0 mL of 0.200 mol/L NaOH to reach equivalence. What is its concentration?",
+      "back": "**0.100 mol/L**. NaOH moles are 0.00300 mol. The one-to-one ratio gives 0.00300 mol HCl, which divided by 0.0300 L gives the answer.",
+      "hint": "The reaction ratio is one to one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13x9x5t",
+      "kind": "concept",
+      "front": "Why do careful volume measurements matter in a titration?",
+      "back": "The calculated concentration depends on the measured volumes, so errors in measuring the sample or titrant volume directly change the result.",
+      "hint": "Which values go into the final division?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uwupoi",
+      "kind": "concept",
+      "front": "What is the reactant situation before and after equivalence on a titration curve?",
+      "back": "Before equivalence the original reactant is in **excess**. After equivalence the added titrant is in excess.",
+      "hint": "Think about which substance is used up first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lf012d",
+      "kind": "concept",
+      "front": "Why might a pH probe be used instead of an indicator?",
+      "back": "A pH probe records pH as titrant is added, producing a **titration curve** that shows where equivalence occurs, rather than relying on a color change.",
+      "hint": "Compare a continuous record with a single color change.",
+      "sectionId": "s2"
+    }
+  ]
+}

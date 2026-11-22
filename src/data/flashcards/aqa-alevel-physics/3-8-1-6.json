@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-8-1-6",
+  "topicCode": "3.8.1.6",
+  "topicName": "Mass and energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:23.151Z",
+  "cards": [
+    {
+      "id": "0vikq8h",
+      "kind": "concept",
+      "front": "Why is a nucleus lighter than the total mass of its separate protons and neutrons?",
+      "back": "The missing mass is **released as energy** when the nucleons bind together. Mass–energy equivalence links the lost mass to that energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wikgck",
+      "kind": "term",
+      "front": "What does binding energy per nucleon measure about a nucleus?",
+      "back": "It measures **stability**. A higher value means each nucleon is held more tightly. Total binding energy is divided by mass number $A$ so nuclei of different sizes can be compared fairly.",
+      "hint": "Why might you divide by something before comparing two nuclei of different sizes?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r8ahvt",
+      "kind": "concept",
+      "front": "Which way along the binding energy per nucleon curve do fusion and fission move nuclei?",
+      "back": "Both move nuclei towards the **peak** near iron-56. Fusion moves light nuclei up from the left, and fission moves heavy nuclei up from the right.",
+      "hint": "Picture where light and heavy nuclei sit on the curve.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1i5y7ef",
+      "kind": "term",
+      "front": "What is the mass defect of a nucleus?",
+      "back": "The **mass defect** is the mass of the separate nucleons minus the mass of the nucleus. A nucleus is always lighter than its nucleons combined.",
+      "hint": "Imagine weighing the protons and neutrons apart, then together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0w8y6cl",
+      "kind": "term",
+      "front": "What is the binding energy of a nucleus?",
+      "back": "The **minimum energy** needed to separate a nucleus completely into its individual protons and neutrons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ojpbgo",
+      "kind": "formula",
+      "front": "What do the symbols in $\\Delta E=c^2\\Delta m$ represent?",
+      "back": "$\\Delta E$ is the energy change in $\\mathrm{J}$, $\\Delta m$ is the mass change in $\\mathrm{kg}$, and $c$ is the speed of light, $3.00\\times10^8\\,\\mathrm{m\\,s^{-1}}$.",
+      "hint": "Check the units of mass before you substitute into this equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oheog3",
+      "kind": "term",
+      "front": "What is one unified atomic mass unit in kilograms?",
+      "back": "**1 u** equals $1.66\\times10^{-27}\\,\\mathrm{kg}$. Nuclear masses are given in u because kilograms are far too large for them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09u0rg7",
+      "kind": "process",
+      "front": "What steps convert a mass defect in u into a binding energy in MeV?",
+      "back": "1) Convert the mass to kg using $1.66\\times10^{-27}\\,\\mathrm{kg}$ per u. 2) Calculate $\\Delta E=c^2\\Delta m$ in J. 3) Divide by $1.60\\times10^{-13}\\,\\mathrm{J}$ per MeV. Shortcut: multiply by $931.5\\,\\mathrm{MeV}$ per u.",
+      "hint": "Think about which unit the energy equation needs before you start.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1igyxry",
+      "kind": "example",
+      "front": "A nucleus has a mass defect of $0.050\\,\\mathrm{u}$. What is its binding energy in MeV?",
+      "back": "About $47\\,\\mathrm{MeV}$, which is $7.5\\times10^{-12}\\,\\mathrm{J}$. Working: $\\Delta m=8.3\\times10^{-29}\\,\\mathrm{kg}$, so $\\Delta E=7.5\\times10^{-12}\\,\\mathrm{J}$.",
+      "hint": "Start by converting the mass defect to kilograms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k7rgyn",
+      "kind": "example",
+      "front": "Helium-4 has a mass defect of $0.03039\\,\\mathrm{u}$. What is its binding energy per nucleon?",
+      "back": "About $7.08\\,\\mathrm{MeV}$. Working: $0.03039\\times931.5\\,\\mathrm{MeV}=28.3\\,\\mathrm{MeV}$, then $28.3\\div4\\approx7.08\\,\\mathrm{MeV}$.",
+      "hint": "Use the shortcut from u to MeV, then divide by $A$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ckos19",
+      "kind": "mistake",
+      "front": "Why is binding energy per nucleon not the energy a nucleus can release?",
+      "back": "It is the energy needed to **remove** each nucleon. Energy is released only when a reaction moves nuclei upwards on the curve.",
+      "hint": "Consider what happens to the nucleons when energy is put in.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y9kha6",
+      "kind": "example",
+      "front": "A nucleus with $A=236$ at $7.6\\,\\mathrm{MeV}$ per nucleon splits into two nuclei at $8.5\\,\\mathrm{MeV}$ per nucleon. How much energy is released?",
+      "back": "About $2.1\\times10^{2}\\,\\mathrm{MeV}$ (212 MeV). Working: total before is $1794\\,\\mathrm{MeV}$, total after is $2006\\,\\mathrm{MeV}$, and the difference is $212\\,\\mathrm{MeV}$.",
+      "hint": "Compare total binding energy before and after, not the value per nucleon.",
+      "sectionId": "s5"
+    }
+  ]
+}

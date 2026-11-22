@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-9",
+  "topicCode": "8.9",
+  "topicName": "Solid waste disposal",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:46.706Z",
+  "cards": [
+    {
+      "id": "1hdq0i8",
+      "kind": "concept",
+      "front": "Why can no single disposal method fully solve the waste problem?",
+      "back": "Each method shifts its impacts to air, water, or land, so **reducing the amount of waste made** is the most effective response.",
+      "hint": "Think about where each method's impact ends up.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1jarkw8",
+      "kind": "term",
+      "front": "What is a sanitary landfill?",
+      "back": "An engineered disposal site where waste is **compacted**, covered with soil each day, and separated from groundwater by a liner.",
+      "hint": "Compare it with an open dump.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11cueok",
+      "kind": "concept",
+      "front": "Why does incineration not make waste disappear?",
+      "back": "Burning greatly shrinks the volume of waste, but it leaves **ash** that can contain concentrated heavy metals and needs a specially designed landfill.",
+      "hint": "Consider what remains after the fire goes out.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pz1phh",
+      "kind": "term",
+      "front": "What is municipal solid waste?",
+      "back": "The everyday **trash** collected from homes, businesses, and institutions. It does not include industrial or agricultural waste.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kz7b0x",
+      "kind": "term",
+      "front": "What is leachate?",
+      "back": "The **liquid** that forms when water passes through waste and carries dissolved or suspended contaminants out of it. Pipes above the liner collect it for treatment.",
+      "hint": "Think about rainwater soaking through buried trash.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1otdup0",
+      "kind": "process",
+      "front": "What steps keep a sanitary landfill from polluting nearby water?",
+      "back": "1) A clay and plastic liner is laid at the bottom. 2) Workers compact the waste. 3) Soil cover is added each day. 4) Pipes collect leachate above the liner, and monitoring wells check groundwater.",
+      "hint": "Start at the bottom of the site and work upward.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15r0g09",
+      "kind": "concept",
+      "front": "Why does methane form inside a buried landfill?",
+      "back": "Microbes decompose the waste **without oxygen**, which releases methane, a greenhouse gas. Many landfills capture it and burn it for heat or electricity.",
+      "hint": "Think about the conditions inside a compacted, soil-covered pile.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ny5rme",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume buried food and paper will rot quickly in a landfill?",
+      "back": "Compaction and soil cover **limit oxygen and moisture**, so even paper and food break down very slowly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hbz29s",
+      "kind": "mistake",
+      "front": "Why is a modern incinerator still not pollution-free?",
+      "back": "Filters and scrubbers remove many pollutants, but **carbon dioxide** still enters the air, and the leftover ash must also be disposed of safely.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "026mhz2",
+      "kind": "concept",
+      "front": "Why are batteries and electronics a special problem for waste disposal?",
+      "back": "They contain **toxic metals** such as lead and mercury, which can leach into water or enter ash and air if the items are buried or burned.",
+      "hint": "Think about what these items are made of.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1knimaq",
+      "kind": "concept",
+      "front": "Why is managing solid waste getting harder over time?",
+      "back": "Waste output rises with population and consumption, existing landfills fill up, and **new sites are hard to find**.",
+      "hint": "Think about what drives the amount of waste produced.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1mvngig",
+      "kind": "concept",
+      "front": "Why must a closed landfill still be monitored?",
+      "back": "Buried waste keeps decomposing for decades, so leachate and methane keep forming, and liners can age or crack. Monitoring catches leaks early.",
+      "hint": "Think about how long buried waste keeps changing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0csgwt7",
+      "kind": "concept",
+      "front": "How does a landfill's effect on waste volume differ from an incinerator's?",
+      "back": "A landfill fills up with waste over time, while incineration **greatly reduces** the volume of waste.",
+      "hint": "Consider what happens to the pile over time.",
+      "sectionId": "s5"
+    }
+  ]
+}

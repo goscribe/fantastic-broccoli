@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-19",
+  "topicCode": "5.19",
+  "topicName": "Maclaurin series",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:06.978Z",
+  "cards": [
+    {
+      "id": "0hnpc8u",
+      "kind": "concept",
+      "front": "How can a polynomial copy a curve close to x=0?",
+      "back": "It matches the **function value** and the slopes at zero. Extra $x^2$ and $x^3$ terms match how the slope changes, so near zero the two are hard to tell apart.",
+      "hint": "Think about what the polynomial matches at the point x=0.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1eatqxw",
+      "kind": "formula",
+      "front": "What is the Maclaurin series of $f(x)$, up to and including the $x^3$ term?",
+      "back": "$f(x)=f(0)+f'(0)x+\\frac{f''(0)}{2!}x^2+\\frac{f'''(0)}{3!}x^3+\\cdots$. Each coefficient comes from a derivative at zero, divided by a **factorial**.",
+      "hint": "Each term uses the nth derivative at 0 divided by n!.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uls4go",
+      "kind": "concept",
+      "front": "What patterns do the series for $\\sin x$ and $\\cos x$ show?",
+      "back": "$\\sin x$ has only odd powers, starting with $x$. $\\cos x$ has only even powers, starting with 1. In both, the signs alternate.",
+      "hint": "Look at which powers of x appear in each series.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ufab2z",
+      "kind": "term",
+      "front": "What is a factorial, $n!$?",
+      "back": "$n!$ means $n(n-1)(n-2)\\cdots1$, so $4!=24$. Factorials cancel the extra factors made when a power of $x$ is differentiated several times.",
+      "hint": "Multiply n by every positive integer below it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fn48t5",
+      "kind": "process",
+      "front": "What are the steps for building a Maclaurin series from derivatives?",
+      "back": "Differentiate $f(x)$ several times, evaluate each derivative at $x=0$, substitute into the Maclaurin formula, then simplify the coefficients.",
+      "hint": "Start by differentiating, then evaluate at zero.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02bml6t",
+      "kind": "example",
+      "front": "Find the first three non-zero terms of the Maclaurin series of $\\ln(1+x)$.",
+      "back": "$\\ln(1+x)\\approx x-\\frac{x^2}{2}+\\frac{x^3}{3}$. The signs alternate and the coefficient of $x^n$ has magnitude $\\frac{1}{n}$.",
+      "hint": "Find f'(x), f''(x), f'''(x) and evaluate at zero.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1al1p9x",
+      "kind": "mistake",
+      "front": "Can the series for $\\ln(1+x)$ estimate $\\ln3$?",
+      "back": "No. The series is only valid for $-1<x\\le1$. At $x=2$ the terms grow, so the series gives no useful estimate.",
+      "hint": "Check the interval of validity before using a series.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14ivb2m",
+      "kind": "term",
+      "front": "What is the interval of validity of a series?",
+      "back": "The **interval of validity** is the set of $x$ values where the series equals the function. For $e^x$, $\\sin x$ and $\\cos x$ it is all real numbers.",
+      "hint": "It is the set of x values where the series works.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "112mscn",
+      "kind": "example",
+      "front": "Use the first four terms of the series for $e^x$ to estimate $e^{0.2}$.",
+      "back": "$e^{0.2}\\approx1.2213$, from $1+0.2+0.02+0.0013333=1.2213333$. A calculator gives 1.2214 to four decimal places.",
+      "hint": "Substitute x=0.2 into 1 + x + x²/2! + x³/3!.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bv5gpe",
+      "kind": "concept",
+      "front": "Why is a truncated series more accurate when $|x|$ is small?",
+      "back": "The omitted terms contain higher powers of $x$. When $|x|$ is small these powers are very small, so the omitted terms add little.",
+      "hint": "Think about what happens to x squared or x cubed when x is small.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1szihcy",
+      "kind": "mistake",
+      "front": "When estimating with a series, when should you round your answer?",
+      "back": "Only at the end. State how many terms you used, and round only the final answer to avoid losing accuracy along the way.",
+      "hint": "Consider what happens to the working if you round each term.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uiikcx",
+      "kind": "example",
+      "front": "Find the series for $e^x\\sin x$ up to the term in $x^3$.",
+      "back": "$e^x\\sin x\\approx x+x^2+\\frac{x^3}{3}$. Multiply the two series and combine the $x^3$ terms: $\\frac12-\\frac16=\\frac13$.",
+      "hint": "Only keep products whose powers of x add to 3 or less.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qs24k1",
+      "kind": "formula",
+      "front": "What is the Maclaurin series of $(1+x)^p$, and where is it valid?",
+      "back": "$1+px+\\frac{p(p-1)}{2!}x^2+\\frac{p(p-1)(p-2)}{3!}x^3+\\cdots$, valid for $|x|<1$. For a positive integer $p$ it stops after the term in $x^p$.",
+      "hint": "This is the binomial series for any real p.",
+      "sectionId": "s5"
+    }
+  ]
+}

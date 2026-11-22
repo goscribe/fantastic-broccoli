@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-4-1-4",
+  "topicCode": "3.4.1.4",
+  "topicName": "Projectile motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:15.660Z",
+  "cards": [
+    {
+      "id": "0v11gou",
+      "kind": "concept",
+      "front": "How are the horizontal and vertical motions of a projectile related when air resistance is ignored?",
+      "back": "They are **independent**. Gravity acts only downwards, so it changes the vertical velocity and leaves the horizontal velocity constant.",
+      "hint": "Think about which directions the forces act in.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gwwx3s",
+      "kind": "concept",
+      "front": "Why is the time of flight found from the vertical motion rather than the horizontal motion?",
+      "back": "Vertical motion has the acceleration, so it gives the **time of flight**. Both motions last the same time, so this time is then used in $s_x=u_xt$.",
+      "hint": "Which motion has an acceleration in it?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15xxy47",
+      "kind": "process",
+      "front": "What are the steps to find the range of a projectile launched at an angle from level ground?",
+      "back": "1) Resolve: $u_x=u\\cos\\theta$ and $u_y=u\\sin\\theta$. 2) Find the time $t=\\frac{2u\\sin\\theta}{g}$. 3) Range $=u\\cos\\theta\\times t$.",
+      "hint": "Start with the initial velocity components.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15f1dhr",
+      "kind": "formula",
+      "front": "What is the formula for the maximum height of a projectile launched from level ground, and what do the symbols mean?",
+      "back": "$h=\\frac{(u\\sin\\theta)^2}{2g}$, where $u\\sin\\theta$ is the initial vertical velocity in $\\text{m\\,s}^{-1}$, $g=9.81\\,\\text{m\\,s}^{-2}$ and $h$ is in $\\text{m}$.",
+      "hint": "What is the vertical velocity at the highest point?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1il2oix",
+      "kind": "formula",
+      "front": "Which equation gives the time to fall for a ball launched horizontally from a height, and what does each symbol mean?",
+      "back": "$s_y=\\frac{1}{2}gt^2$, so $t=\\sqrt{\\frac{2s_y}{g}}$. $s_y$ is the height in $\\text{m}$, $g=9.81\\,\\text{m\\,s}^{-2}$ and $t$ is in $\\text{s}$.",
+      "hint": "What is the starting vertical velocity in this case?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t7fjal",
+      "kind": "example",
+      "front": "A ball is thrown horizontally at $15\\,\\text{m\\,s}^{-1}$ from a cliff 19.6 m high. What is its time of flight?",
+      "back": "$2.0\\,\\text{s}$, from $t=\\sqrt{\\frac{2\\times19.6}{9.81}}$. The horizontal speed does not affect this time.",
+      "hint": "Use only the vertical motion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17wlgo1",
+      "kind": "example",
+      "front": "A ball is launched from level ground at $20\\,\\text{m\\,s}^{-1}$ and $30^{\\circ}$ above the horizontal. What is its range?",
+      "back": "About $35\\,\\text{m}$. The horizontal component is $17.3\\,\\text{m\\,s}^{-1}$ and the time of flight is $2.04\\,\\text{s}$, so $17.3\\times2.04\\approx35\\,\\text{m}$.",
+      "hint": "Find the horizontal component first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06asq70",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a projectile needs a forward force to keep moving sideways?",
+      "back": "With no horizontal force acting, the **horizontal velocity** stays constant. A projectile keeps moving sideways without any forward force.",
+      "hint": "What happens to horizontal velocity when no horizontal force acts?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fkun3v",
+      "kind": "concept",
+      "front": "Why is the speed of a projectile least at its highest point, ignoring air resistance?",
+      "back": "At the top the velocity is purely horizontal, with no vertical component, so the speed is only the horizontal part, which is the smallest value.",
+      "hint": "Consider the vertical velocity at the top.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "041lipx",
+      "kind": "concept",
+      "front": "Which launch angle gives the longest range from level ground at a fixed speed?",
+      "back": "$45^{\\circ}$ gives the longest range. The horizontal and vertical components are balanced at this angle.",
+      "hint": "Think about how the two components trade off against each other.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "064u429",
+      "kind": "concept",
+      "front": "How do ranges compare for launches at $30^{\\circ}$ and $60^{\\circ}$ with the same speed?",
+      "back": "They are **equal**. Launch angles that add up to $90^{\\circ}$ give the same range at the same speed.",
+      "hint": "Compare the two sets of components.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09rx3wb",
+      "kind": "concept",
+      "front": "Why does air resistance reduce the range of a real projectile?",
+      "back": "It acts against the velocity, reducing horizontal velocity and maximum height. The projectile covers less horizontal distance before it lands.",
+      "hint": "Which direction does air resistance act compared with the motion?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0pzf4qf",
+      "kind": "term",
+      "front": "What is the range of a projectile?",
+      "back": "The **range** is the horizontal distance from the launch point to the point where the projectile lands at the same height.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wwcien",
+      "kind": "term",
+      "front": "What is air resistance?",
+      "back": "**Air resistance** is the force exerted by the air on a moving object, acting in the direction opposite to its velocity.",
+      "sectionId": "s1"
+    }
+  ]
+}

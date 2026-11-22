@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-4",
+  "topicCode": "3.4",
+  "topicName": "Claims from a proportion interval",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:17.306Z",
+  "cards": [
+    {
+      "id": "1srydfh",
+      "kind": "concept",
+      "front": "How do you decide whether a claimed population proportion is plausible, using a confidence interval?",
+      "back": "Check whether the claimed value lies **inside** the interval. Inside means plausible and consistent with the data. Outside means the data give convincing evidence against the claim.",
+      "hint": "Compare the claimed value with the interval's endpoints.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jjkf7c",
+      "kind": "term",
+      "front": "What is a confidence interval?",
+      "back": "A **confidence interval** is a range, computed from sample data, of values that could reasonably be the population proportion at a stated confidence level.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0au97ao",
+      "kind": "process",
+      "front": "What three parts should a complete answer about a claimed proportion include?",
+      "back": "First, compare the hypothesized value with both **endpoints**. Second, decide whether it is plausible or not. Third, conclude about the population proportion, in context.",
+      "hint": "Think compare, decide, conclude.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0u3cz55",
+      "kind": "concept",
+      "front": "Why can a single sample proportion not settle a claim about the population?",
+      "back": "A sample proportion rarely equals the population value exactly, because of **sampling variation**. An interval accounts for this variation and gives a range of plausible values instead.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1u86gwt",
+      "kind": "term",
+      "front": "What does the confidence level, such as 95%, describe?",
+      "back": "The **long-run success rate** of the method: if many random samples gave intervals built the same way, about 95% of those intervals would capture the true proportion.",
+      "hint": "It describes the method, not one interval.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0svztwc",
+      "kind": "term",
+      "front": "What is a hypothesized value?",
+      "back": "A **hypothesized value** is a specific population proportion, stated in a claim, that the sample data are used to check.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15wvryc",
+      "kind": "mistake",
+      "front": "If a value is inside the interval, has the claim been proven true?",
+      "back": "No. A value inside the interval is **plausible**, not proven, because many other values in the interval are equally plausible.",
+      "hint": "Think about how many values the interval contains.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v74pfu",
+      "kind": "mistake",
+      "front": "Can you say the true proportion has a 95% chance of lying in one computed interval?",
+      "back": "No. The true proportion is fixed, and the **interval** changes from sample to sample. The 95% describes the long-run method, not one interval.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1006sl4",
+      "kind": "example",
+      "front": "A 95% interval for bus line support is (0.52, 0.62). Is a claim that exactly 50% of residents support it plausible?",
+      "back": "Not plausible. The value 0.50 is below the lower **endpoint** 0.52, so the evidence suggests the true proportion is greater than 0.50.",
+      "hint": "Compare 0.50 with each endpoint.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18yem8p",
+      "kind": "concept",
+      "front": "What does it mean when a claimed value lies above the whole confidence interval?",
+      "back": "The claimed value is **not plausible**, and the true proportion is likely less than that value. The whole interval lies below the claim.",
+      "hint": "Check which side of the claim the interval sits on.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ey84ks",
+      "kind": "concept",
+      "front": "How should you judge a claimed value that sits just inside an endpoint?",
+      "back": "It is still plausible, but only **barely**. Plausibility is a matter of degree near the edges, so avoid claiming certainty either way.",
+      "hint": "Values near the middle are best supported.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07p8n2d",
+      "kind": "concept",
+      "front": "Which conditions must hold before you trust a confidence interval for a proportion?",
+      "back": "The sample must be **random**, no more than 10% of the population, and have at least 10 successes and at least 10 failures.",
+      "hint": "One condition is about the sample size relative to the population.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fsv7xt",
+      "kind": "concept",
+      "front": "How does a 95% confidence interval relate to a two-sided test at the 5% level?",
+      "back": "They usually lead to the **same decision** about a claimed value, though they can disagree in close cases. The interval and the test use different standard errors.",
+      "hint": "Think about the standard error each one uses.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1u0n8re",
+      "kind": "mistake",
+      "front": "Is it enough to write only that the claimed value is outside the interval?",
+      "back": "No. Quote the **endpoints** in your comparison and name the population and proportion. Writing only that it is outside does not show the check.",
+      "hint": "What does the reader need to see to follow your check?",
+      "sectionId": "s3"
+    }
+  ]
+}

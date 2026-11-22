@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "9-11",
+  "topicCode": "9.11",
+  "topicName": "Electrolysis and Faraday's law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:29.972Z",
+  "cards": [
+    {
+      "id": "14k5bw5",
+      "kind": "concept",
+      "front": "What lets electrolysis happen when the reaction would not occur on its own?",
+      "back": "An **external power source** drives it. It pulls electrons from the anode and supplies them to the cathode, so oxidation occurs at the anode and reduction at the cathode.",
+      "hint": "Think about where the electrons come from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1skdwhr",
+      "kind": "formula",
+      "front": "How is the amount of product linked to the charge passed through an electrolytic cell?",
+      "back": "$n(\\text{product})=Q/(zF)$, where $Q$ is charge in coulombs, $z$ is the electron coefficient for one mole of product, and $F$ is Faraday's constant.",
+      "hint": "Divide charge by F first, then by z.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yt2u2n",
+      "kind": "process",
+      "front": "What are the steps to find the mass of product from a given charge?",
+      "back": "Divide the charge by $F$ to get moles of electrons, then divide by the electron coefficient $z$ to get moles of product. Multiply by the molar mass to get grams.",
+      "hint": "Work from charge toward the substance named in the question.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1c76j3q",
+      "kind": "term",
+      "front": "What is a half-reaction?",
+      "back": "A **half-reaction** shows only oxidation or only reduction, including the electrons transferred. Balance it before you calculate.",
+      "hint": "It shows one electrode at a time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mskc9o",
+      "kind": "term",
+      "front": "What is Faraday's constant, $F$?",
+      "back": "The **charge carried by one mole of electrons**, about $96{,}485\\ \\mathrm{C\\,mol^{-1}}$.",
+      "hint": "Think per mole of electrons.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1od9bgw",
+      "kind": "formula",
+      "front": "How do you calculate charge from a constant current?",
+      "back": "$Q=It$, where $I$ is current in amperes, $t$ is time in seconds, and $Q$ is charge in coulombs.",
+      "hint": "Convert minutes to seconds first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fgkgcd",
+      "kind": "concept",
+      "front": "Which electrode is positive in an electrolytic cell, and where do ions move?",
+      "back": "The **anode is positive** and the cathode is negative. Positive ions move toward the cathode, and negative ions move toward the anode.",
+      "hint": "Opposite charges attract.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13nn79t",
+      "kind": "mistake",
+      "front": "Is the cathode always positive in every electrochemical cell?",
+      "back": "No. **Reduction defines the cathode**, and its sign depends on the cell type. In an electrolytic cell, the cathode is negative.",
+      "hint": "The name comes from the reaction, not the sign.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wmis2o",
+      "kind": "concept",
+      "front": "How does electroplating coat an object with a metal layer?",
+      "back": "**Metal ions gain electrons** at the object being plated, which deposits a thin metal layer. A metal anode can dissolve to replace the ions used up.",
+      "hint": "Which electrode is the object?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qj0xvr",
+      "kind": "concept",
+      "front": "Why might water react instead of a dissolved ion during electrolysis?",
+      "back": "In an aqueous solution, **water may react** at an electrode instead of the dissolved ion, so the products depend on the electrolyte and electrodes.",
+      "hint": "Products are not always the ion you expect.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1itj956",
+      "kind": "example",
+      "front": "What charge deposits 0.6355 g of copper from Cu2+? Use a copper molar mass of 63.55 g/mol.",
+      "back": "About **$1.930\\times10^3\\ \\mathrm{C}$**. The copper is $0.01000$ mol, so $0.02000$ mol of electrons is needed, giving $(0.02000)(96{,}485)=1{,}929.7$ C.",
+      "hint": "Two electrons are needed per copper atom.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sah6nq",
+      "kind": "example",
+      "front": "What charge is needed to produce 0.0200 mol of aluminum from Al3+?",
+      "back": "About **$5.79\\times10^3\\ \\mathrm{C}$**. Since $\\mathrm{Al^{3+}+3e^-\\rightarrow Al}$, $0.0600$ mol of electrons is needed, and $(0.0600)(96{,}485)$ gives the charge.",
+      "hint": "Find the electron coefficient in the half-reaction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08eplac",
+      "kind": "mistake",
+      "front": "Why might the mass you collect be less than your calculated product mass?",
+      "back": "**Not all the charge** may cause the stated reaction. If another electrode reaction uses some charge, less of the desired substance forms.",
+      "hint": "Calculations assume every coulomb does one job.",
+      "sectionId": "s3"
+    }
+  ]
+}

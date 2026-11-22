@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "2-1",
+  "topicCode": "2.1",
+  "topicName": "Introduction to biodiversity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:28.541Z",
+  "cards": [
+    {
+      "id": "0pztcnr",
+      "kind": "term",
+      "front": "What does biodiversity mean?",
+      "back": "**Biodiversity** is the variety of life in a place. It covers more than a species list, including variation within species and the range of ecosystems across a region.",
+      "hint": "Compare a forest with a mowed lawn.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nybicr",
+      "kind": "concept",
+      "front": "Why do diverse ecosystems tend to recover well after a disturbance?",
+      "back": "Variety works like insurance. If one species or gene variant declines, others may fill its role, so the ecosystem shows greater **resilience**.",
+      "hint": "Think about a field with one crop versus a field with several.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oz0u3j",
+      "kind": "concept",
+      "front": "How are the genetic, species, and ecosystem levels of biodiversity connected?",
+      "back": "They are linked. More ecosystems offer more habitats, which can support more species, and genetic variation within each species helps populations cope with change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d7tn69",
+      "kind": "term",
+      "front": "What is species richness?",
+      "back": "**Species richness** is the number of different species present in a defined area, regardless of how many individuals each species has.",
+      "hint": "Think of a simple tally of kinds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v5m653",
+      "kind": "term",
+      "front": "What is species evenness?",
+      "back": "**Species evenness** is how equally individuals are spread among the species present. High evenness means no single species dominates.",
+      "hint": "Ask whether one species takes most of the individuals.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1fj8nya",
+      "kind": "formula",
+      "front": "How is the share held by one species calculated, and what do its symbols mean?",
+      "back": "Share = $\\frac{n}{N}$, where $n$ is the number of individuals of that species and $N$ is the total number of individuals in the community. Multiply by 100 for a percent.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13pmynn",
+      "kind": "example",
+      "front": "Meadow A has 25 plants of each of 4 species. Meadow B has 85, 5, 5, and 5 plants of its 4 species. Which meadow has higher evenness?",
+      "back": "**Meadow A** has higher evenness. Meadow B's most common species holds $\\frac{85}{100}=0.85$, or 85% of plants, so one species dominates it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1euylna",
+      "kind": "mistake",
+      "front": "A student says high biodiversity makes an ecosystem immune to damage. What is wrong with this idea?",
+      "back": "**Immune** is wrong. High biodiversity does not stop damage from happening. It improves the chance that the ecosystem recovers afterward.",
+      "hint": "Think about what diversity changes: the damage itself or the rebound after it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19iyjj7",
+      "kind": "mistake",
+      "front": "Why is equal species richness not enough to compare two communities?",
+      "back": "Richness ignores how many individuals each species has. Equal richness can hide very different evenness, so state richness and evenness separately.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01lywdy",
+      "kind": "process",
+      "front": "What steps do scientists take to estimate biodiversity across a large area?",
+      "back": "Count the species in several small sample plots, such as a frame-marked square of ground. Then use those counts to estimate the whole area, using the same method each time.",
+      "hint": "Think about why counting every organism is rarely practical.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ojxzt8",
+      "kind": "mistake",
+      "front": "Why is one small sample plot unreliable for estimating biodiversity in a whole forest?",
+      "back": "A single plot may miss rare species or land in an unusual patch. More plots, spread across different parts of the area, give a more reliable estimate.",
+      "hint": "Think about what one small patch can leave out.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "191nji2",
+      "kind": "term",
+      "front": "What is genetic diversity?",
+      "back": "**Genetic diversity** is the variation in genes among the individuals of one species or population.",
+      "hint": "Think about differences between individuals, not between species.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "158p3tn",
+      "kind": "term",
+      "front": "What is ecosystem diversity?",
+      "back": "**Ecosystem diversity** is the variety of different ecosystems, such as forests, wetlands, and grasslands, within a region.",
+      "hint": "Look at habitats across a whole region rather than one site.",
+      "sectionId": "s2"
+    }
+  ]
+}

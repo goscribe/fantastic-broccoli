@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-19",
+  "topicCode": "8.19",
+  "topicName": "Nature and nurture in brain development",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:35.754Z",
+  "cards": [
+    {
+      "id": "0wu8tnt",
+      "kind": "concept",
+      "front": "Why can two children raised in the same home still have brains that work differently?",
+      "back": "Because both **genes** and **environment** shape brain development. Inherited DNA gives one part of the difference, and each child's own experiences give another.",
+      "hint": "Think about what each child inherits and what each child experiences.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ix1e8x",
+      "kind": "concept",
+      "front": "How can experience change the wiring of the brain?",
+      "back": "Connections between neurones, called **synapses**, form, strengthen and are lost with use, so experience can reshape them.",
+      "hint": "Think about what happens to connections between cells over time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11calwx",
+      "kind": "concept",
+      "front": "Why do researchers compare monozygotic and dizygotic twins?",
+      "back": "**Monozygotic** twins share virtually all their genes and dizygotic twins share about half, so if monozygotic pairs resemble each other more, genes probably contribute.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yswniu",
+      "kind": "term",
+      "front": "What is an environmental influence on brain development?",
+      "back": "An effect on development that comes from factors outside the inherited genes, such as **nutrition**, learning or stress.",
+      "hint": "Think of the nurture side of the debate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kzm8db",
+      "kind": "term",
+      "front": "What is a genetic influence on brain development?",
+      "back": "An effect on development that comes from the **genes** a person inherits. This is the nature side.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0erflh3",
+      "kind": "concept",
+      "front": "Why does Huntington's disease show a genetic influence on the brain?",
+      "back": "It is caused by a **faulty version of a single gene** that is inherited, so neurones in parts of the brain stop working properly whatever the person's lifestyle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c1qzv2",
+      "kind": "example",
+      "front": "What did young animals reared in enriched cages show compared with those in bare cages?",
+      "back": "They developed a **thicker cortex** and more synapses than animals in bare cages.",
+      "hint": "Think about what the enriched cages provided.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dgeds8",
+      "kind": "example",
+      "front": "Calculate the monozygotic concordance when both twins show a feature in 24 of 30 pairs where at least one twin is affected.",
+      "back": "$\\frac{24}{30}\\times 100 = 80\\%$. Divide pairs with both twins affected by pairs with at least one affected, then multiply by 100.",
+      "hint": "Concordance only counts pairs where at least one twin shows the feature.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bsmpbm",
+      "kind": "term",
+      "front": "What is concordance in a twin study?",
+      "back": "The **percentage** of twin pairs in which both twins show a feature, counting only pairs where at least one twin shows it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1i4e8f0",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a monozygotic concordance below 100% means genes have no effect?",
+      "back": "Genes can still matter. A value below 100% shows that the **environment** also contributes to the feature.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xe9sq4",
+      "kind": "mistake",
+      "front": "Why might identical twins look more alike than their genes alone explain?",
+      "back": "They may be treated more **alike** by other people, which can exaggerate how similar they are because of genes.",
+      "hint": "Think about how other people respond to each type of twin.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ftl3ax",
+      "kind": "concept",
+      "front": "How does phenylketonuria show that genes and environment can interact?",
+      "back": "The gene is unchanged, but a build-up of a substance from food damages the developing brain. A **carefully controlled diet** from early life prevents most of this damage.",
+      "hint": "Think about what changes the outcome when the gene itself stays the same.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0p33cbm",
+      "kind": "example",
+      "front": "Name one environmental factor in early life that can limit brain growth.",
+      "back": "**Poor nutrition** in early life can limit brain growth.",
+      "sectionId": "s3"
+    }
+  ]
+}

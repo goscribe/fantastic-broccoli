@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "10-6",
+  "topicCode": "10.6",
+  "topicName": "Capacitors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:16.824Z",
+  "cards": [
+    {
+      "id": "1pd30uk",
+      "kind": "concept",
+      "front": "How does a parallel plate capacitor store charge?",
+      "back": "Two flat metal plates face each other across a small gap. Connected to a battery, one plate gains $+Q$ and the other $-Q$, and an electric field fills the gap. Charge cannot cross the gap, so it stays stored.",
+      "hint": "Think about what happens between the plates.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qp61eg",
+      "kind": "formula",
+      "front": "What is the formula for capacitance, and what does each symbol mean?",
+      "back": "$C=\\frac{Q}{\\Delta V}$: **capacitance** $C$ in farads equals charge $Q$ on either plate in coulombs divided by potential difference $\\Delta V$ in volts. The ratio stays fixed as the voltage changes.",
+      "hint": "Charge stored per volt.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dph282",
+      "kind": "formula",
+      "front": "How much energy does a charged capacitor store, and in what forms can you write it?",
+      "back": "$U_C=\\frac{1}{2}Q\\Delta V=\\frac{1}{2}C(\\Delta V)^2=\\frac{Q^2}{2C}$, with $U_C$ in joules. Pick the form that matches the data you are given.",
+      "hint": "The half comes from the voltage rising during charging.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18spzx2",
+      "kind": "formula",
+      "front": "What is the formula for a parallel plate capacitor's capacitance, and what does each symbol mean?",
+      "back": "$C=\\kappa\\varepsilon_0\\frac{A}{d}$: $A$ is plate area in m², $d$ is the gap in m, $\\varepsilon_0=8.85\\times10^{-12}\\,\\mathrm{C^2/(N\\,m^2)}$ is a constant, and **$\\kappa$** is the dielectric constant, which is 1 for vacuum.",
+      "hint": "Four quantities: area, gap, a constant and the material.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vwukdq",
+      "kind": "term",
+      "front": "What is a dielectric, and what does it do to capacitance?",
+      "back": "A **dielectric** is an insulating material placed in the gap between the plates. Its $\\kappa>1$, so it raises the capacitance above the vacuum value.",
+      "hint": "An insulator sitting in the gap.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0np1y9y",
+      "kind": "concept",
+      "front": "How do plate area and plate gap change a capacitor's capacitance?",
+      "back": "A **larger area** raises capacitance because more charge fits per volt. A **smaller gap** raises it because opposite charges on the plates sit closer together.",
+      "hint": "Two geometric factors.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vtzsrk",
+      "kind": "example",
+      "front": "A capacitor holds 6.0 μC on one plate when the potential difference is 12 V. What is its capacitance?",
+      "back": "$C=5.0\\times10^{-7}\\,\\mathrm{F}$, which is 0.50 μF. Use $C=\\frac{Q}{\\Delta V}$ with $Q=6.0\\times10^{-6}\\,\\mathrm{C}$.",
+      "hint": "Convert microcoulombs to coulombs first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w7f9ao",
+      "kind": "example",
+      "front": "A vacuum parallel plate capacitor has plate area 0.040 m² and gap 1.0×10⁻³ m. What is its capacitance?",
+      "back": "$C\\approx3.5\\times10^{-10}\\,\\mathrm{F}$. Use $C=\\kappa\\varepsilon_0\\frac{A}{d}$ with $\\kappa=1$ for vacuum.",
+      "hint": "Vacuum means kappa equals 1.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01rj2u2",
+      "kind": "example",
+      "front": "A 0.50 μF capacitor is charged to 12 V. How much energy does it store?",
+      "back": "$U_C=3.6\\times10^{-5}\\,\\mathrm{J}$, from $U_C=\\frac{1}{2}C(\\Delta V)^2$ with $C=5.0\\times10^{-7}\\,\\mathrm{F}$ and $\\Delta V=12\\,\\mathrm{V}$.",
+      "hint": "Square the voltage before multiplying.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t9uodt",
+      "kind": "mistake",
+      "front": "Why is $U_C=Q\\Delta V$ wrong for the energy stored in a capacitor?",
+      "back": "The potential difference rises during charging, so it is not constant. The correct energy is **half** of $Q\\Delta V$, that is $\\frac{1}{2}Q\\Delta V$.",
+      "hint": "Think about what changes while charge builds up.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "096lxa1",
+      "kind": "process",
+      "front": "What are the steps as a charged capacitor discharges through a circuit?",
+      "back": "1) Connect the plates through a circuit. 2) Charge flows from one plate, through the circuit, to the other. 3) The energy leaves the capacitor and goes to other parts, such as a lamp giving off light and heat.",
+      "hint": "Start with what connects the plates.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fmuzih",
+      "kind": "concept",
+      "front": "When a capacitor discharges, what happens to Q, ΔV and stored energy, and when is the flow fastest?",
+      "back": "**Q**, $\\Delta V$ and the stored energy all fall as charge leaves. The flow is fastest at the start.",
+      "hint": "Each quantity follows the charge.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "136ovd2",
+      "kind": "concept",
+      "front": "If a capacitor stays connected to a battery and a dielectric is inserted, what happens to its charge?",
+      "back": "**Charge rises.** The battery fixes $\\Delta V$, so $Q=C\\Delta V$ grows as $C$ increases, and the battery supplies the extra charge.",
+      "hint": "Which quantity does the battery hold fixed?",
+      "sectionId": "s5"
+    }
+  ]
+}

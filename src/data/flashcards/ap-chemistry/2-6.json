@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "2-6",
+  "topicCode": "2.6",
+  "topicName": "Resonance and formal charge",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:14.164Z",
+  "cards": [
+    {
+      "id": "1wh8tu3",
+      "kind": "concept",
+      "front": "Does the double-headed resonance arrow mean the nitrate ion switches between its structures?",
+      "back": "**No**. The real ion is a resonance hybrid. The arrows connect drawings, and its bonding electrons are spread equally over the three nitrogen–oxygen bonds.",
+      "hint": "Think about what the actual ion looks like, not what you draw.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "100oaj6",
+      "kind": "formula",
+      "front": "What is the formal charge formula, and what does each symbol stand for?",
+      "back": "$FC = V - N - B$, where $V$ is the atom's valence electrons, $N$ is its nonbonding electrons, and $B$ is its number of bonds. A **double bond** counts as two bonds.",
+      "hint": "Count the bonds carefully when a double bond is present.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "084wiom",
+      "kind": "term",
+      "front": "What are resonance structures?",
+      "back": "**Resonance structures** are valid Lewis structures with the same atom positions and overall charge, but different placements of electrons.",
+      "hint": "Same atoms, different electrons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uxor25",
+      "kind": "term",
+      "front": "What is a delocalized electron?",
+      "back": "An electron **spread across** more than one bond or atom, rather than confined to a single bond or atom.",
+      "hint": "Think about where the electron is, not how many there are.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1r3sjjc",
+      "kind": "concept",
+      "front": "What can you move when drawing resonance structures, and what must stay the same?",
+      "back": "You may move **lone pairs** or bonding electrons, but never atoms. The total number of valence electrons must stay unchanged.",
+      "hint": "Atoms are fixed; electrons are the only thing that moves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1paswv9",
+      "kind": "process",
+      "front": "What are the steps to calculate the formal charge on each atom in a Lewis structure?",
+      "back": "1) Assign all lone-pair electrons to their atom. 2) Split bonding electrons equally between bonded atoms. 3) Apply $FC = V - N - B$. 4) Check the charges add up to the overall charge.",
+      "hint": "Start with the lone pairs, then the bonds.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vpujy7",
+      "kind": "example",
+      "front": "In nitrate, what is the formal charge on nitrogen when it has one double bond and two single bonds?",
+      "back": "$+1$. Nitrogen has $5-0-4=+1$, with no lone pairs and four bonds counted (the double bond counts as two).",
+      "hint": "Nitrogen has no lone pairs in this structure.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nxkwjn",
+      "kind": "example",
+      "front": "What is the formal charge on a singly bonded oxygen with three lone pairs in nitrate?",
+      "back": "$-1$. The oxygen has $6-6-1=-1$, with six nonbonding electrons and one bond.",
+      "hint": "Three lone pairs means six nonbonding electrons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qs3928",
+      "kind": "mistake",
+      "front": "Why is choosing a structure just because its overall charge is correct a mistake?",
+      "back": "The overall charge can be right while individual formal charges or octets are wrong. Check each atom's formal charge and octet before choosing.",
+      "hint": "Overall charge is only one check.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rcejkd",
+      "kind": "concept",
+      "front": "Which resonance contributors are generally favored?",
+      "back": "Those with **complete octets** and fewer or smaller formal charges. If a negative charge cannot be avoided, it is more favorable on the more electronegative atom.",
+      "hint": "Check the electron count and allowed valences first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1m6o2o7",
+      "kind": "concept",
+      "front": "Why do all three nitrate contributors contribute equally to the ion's description?",
+      "back": "They have the same pattern of formal charges and differ only in which oxygen holds the double bond.",
+      "hint": "Compare the formal charges of the three structures.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j7k1jn",
+      "kind": "term",
+      "front": "What is resonance stabilization?",
+      "back": "**Resonance stabilization** is the lowering of energy from electron delocalization, because spreading electrons and charge reduces charge concentration in one place.",
+      "hint": "Think about what spreading charge does to energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lw7z70",
+      "kind": "mistake",
+      "front": "Does drawing more resonance structures automatically mean more stabilization?",
+      "back": "**No**. The number of drawings alone does not measure stabilization. The validity and relative importance of each contributor also matter.",
+      "hint": "Quantity of drawings is not the same as quality.",
+      "sectionId": "s4"
+    }
+  ]
+}

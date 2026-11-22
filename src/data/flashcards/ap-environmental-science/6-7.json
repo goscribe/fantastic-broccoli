@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-7",
+  "topicCode": "6.7",
+  "topicName": "Energy from biomass",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:25.112Z",
+  "cards": [
+    {
+      "id": "0ozncol",
+      "kind": "concept",
+      "front": "Why is biomass described as stored solar energy?",
+      "back": "Plants capture sunlight by **photosynthesis** and store that energy in chemical bonds. Burning or converting the biomass later releases it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1domxt7",
+      "kind": "concept",
+      "front": "How can burning biomass be **carbon neutral** even though it releases carbon dioxide?",
+      "back": "Growing plants absorbed carbon dioxide from the air. If new plants regrow and absorb about as much as was released, the net addition is near zero.",
+      "hint": "Compare how fast plants grow back with how fast the fuel burns.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1x44y5a",
+      "kind": "concept",
+      "front": "Which four methods convert biomass into usable energy?",
+      "back": "Direct combustion for heat or electricity, fermentation of sugars into **ethanol**, chemical processing of oils and fats into **biodiesel**, and digestion without oxygen into **biogas**."
+    },
+    {
+      "id": "0zlj8jw",
+      "kind": "term",
+      "front": "What is biomass?",
+      "back": "**Biomass** is organic material from living or recently living organisms, such as wood, manure, crop residue, or food waste.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gmiciu",
+      "kind": "term",
+      "front": "What is direct combustion?",
+      "back": "**Direct combustion** is burning solid biomass in oxygen to release its stored energy as heat, used for cooking, home heating, or power plant steam.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13qangk",
+      "kind": "process",
+      "front": "How does a biomass power plant generate electricity?",
+      "back": "The biomass is burned to heat water into steam. The steam turns a **turbine**, as in a coal plant, which drives the generator.",
+      "hint": "Think about how a coal plant makes electricity.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c35g2j",
+      "kind": "formula",
+      "front": "What is the chemical formula of ethanol, and what is it?",
+      "back": "$\\mathrm{C_2H_5OH}$ is the formula for **ethanol**, an alcohol fuel made by fermenting plant sugars and often blended with gasoline.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l2ulim",
+      "kind": "process",
+      "front": "How is biogas produced from manure or food waste?",
+      "back": "**Microbes** break down the waste in a sealed tank without oxygen. The gas produced is mainly methane and carbon dioxide, and it can be burned for heat or electricity.",
+      "hint": "Think about the conditions inside the tank.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oexzis",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume all biomass burning is automatically carbon neutral?",
+      "back": "Trees can take decades to regrow, harvesting and transport burn fossil fuels, and fuel-crop fertilizer can release **nitrous oxide**. The balance is not guaranteed.",
+      "hint": "Consider the years before new growth replaces what was burned.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uxy5gu",
+      "kind": "term",
+      "front": "What is a monoculture?",
+      "back": "A **monoculture** is a large field planted with one species, common on fuel-crop farms and often needing heavy fertilizer and pesticide use.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "197rzqg",
+      "kind": "term",
+      "front": "What pollutant in biomass smoke can cause respiratory illness?",
+      "back": "**Particulate matter**, tiny solid and liquid particles in the air that can enter the lungs.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nomo1j",
+      "kind": "concept",
+      "front": "How can using waste as fuel help the environment?",
+      "back": "Sawdust and manure used as fuel stay out of landfills. Capturing methane from decay also keeps that **methane** out of the air.",
+      "hint": "Think about where the waste would otherwise end up.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1l0o30g",
+      "kind": "concept",
+      "front": "What land cost comes from clearing forests or farmland for fuel crops?",
+      "back": "**Habitat loss**, since clearing removes the places where wildlife lives. Fuel crops also compete with food crops for land and water.",
+      "sectionId": "s5"
+    }
+  ]
+}

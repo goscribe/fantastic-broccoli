@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "3-1",
+  "topicCode": "3.1",
+  "topicName": "Generalist and specialist species",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:26.188Z",
+  "cards": [
+    {
+      "id": "0fo7caj",
+      "kind": "concept",
+      "front": "Why are specialist species at greater risk when their habitat changes?",
+      "back": "Specialists depend on one resource or a narrow range of conditions and have few alternatives. When that resource shrinks, their populations can fall sharply, raising the **risk of extinction**.",
+      "hint": "Consider what happens to the one resource a specialist relies on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fzm1m1",
+      "kind": "term",
+      "front": "What is a generalist species?",
+      "back": "A **generalist species** can use many kinds of resources and tolerate a wide range of environmental conditions. It can switch to other foods or habitats when conditions shift, such as a raccoon.",
+      "hint": "Think of a raccoon raiding a city trash can.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09x3hwu",
+      "kind": "term",
+      "front": "What is a specialist species?",
+      "back": "A **specialist species** needs specific resources or a narrow range of conditions and has few alternatives. Giant pandas, which feed almost entirely on bamboo, are an example.",
+      "hint": "Compare it with the definition of a generalist.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pj1ag9",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a specialist species is weaker than a generalist species?",
+      "back": "Specialists are not weaker. Each strategy works well under different conditions, so neither is **better overall**. A specialist does very well in its narrow niche.",
+      "hint": "Think about stable habitats versus changing ones.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0btd0jy",
+      "kind": "concept",
+      "front": "How does a stable, predictable environment change which strategy does well?",
+      "back": "Specialists can use the reliable resources efficiently and often perform well. A generalist may do less well if it competes with specialists for those resources.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1egme9f",
+      "kind": "term",
+      "front": "What is carrying capacity?",
+      "back": "The **carrying capacity** is the population size an environment can support over time under given conditions. It is not a fixed number and rises or falls as food, space, and conditions change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lpx2u5",
+      "kind": "concept",
+      "front": "Why does losing one food change a specialist's carrying capacity more than a generalist's?",
+      "back": "A specialist cannot replace the lost food, so its carrying capacity can fall **sharply**. A generalist fills the gap with other foods, so its carrying capacity changes less.",
+      "hint": "Consider what the species can eat instead.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1aycfmf",
+      "kind": "process",
+      "front": "What steps should you follow when explaining a species' response to environmental change?",
+      "back": "First, name the **resource** that changes in the environment. Then link that change to how flexible the species is, to explain whether its population is likely to rise, fall, or hold steady.",
+      "hint": "Start with the environment, then move to the species.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09ldw18",
+      "kind": "example",
+      "front": "Which strategy does a coral's narrow tolerance of water temperature illustrate?",
+      "back": "The **specialist** strategy. Corals tolerate only a narrow range of water temperature, so they depend on specific conditions in a stable habitat like a coral reef.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gcen0f",
+      "kind": "concept",
+      "front": "Why do human activities often favor generalist species over specialists?",
+      "back": "Cities and farms replace specialized habitat with open land that offers varied food. Specialists tied to the lost habitat are the ones most likely to decline.",
+      "hint": "Think about the kind of habitat people create.",
+      "sectionId": "s5"
+    }
+  ]
+}

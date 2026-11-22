@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-1-1",
+  "topicCode": "3.1.1",
+  "topicName": "Monomers and polymers",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:55.671Z",
+  "cards": [
+    {
+      "id": "0tlkypt",
+      "kind": "concept",
+      "front": "What is a polymer?",
+      "back": "A **polymer** is a large molecule made from many monomer units linked by chemical bonds.",
+      "hint": "Think about what a monomer does when it joins with others.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1glgkgj",
+      "kind": "process",
+      "front": "What happens in a condensation reaction when two monomers join?",
+      "back": "One molecule gives an $\\text{–OH}$ group and the other gives a hydrogen atom, which together form $\\text{H}_2\\text{O}$. A covalent bond forms between the monomers, and the water is **released**.",
+      "hint": "Count what leaves the reaction as well as what bond is made.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1forzpq",
+      "kind": "concept",
+      "front": "How does hydrolysis break a bond in a polymer?",
+      "back": "A water molecule splits, its hydrogen joins one product and its $\\text{–OH}$ joins the other. This **uses water** and reverses condensation.",
+      "hint": "Compare this with the reaction that builds the same bond.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04yoqzg",
+      "kind": "term",
+      "front": "What is a monomer?",
+      "back": "A **monomer** is a small molecule that can bond with other monomers to form a polymer.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17detkr",
+      "kind": "concept",
+      "front": "Why does the order of amino acids matter in a protein?",
+      "back": "The order of **amino acids** determines the protein's structure and helps determine its function.",
+      "hint": "Consider what a protein needs in order to work.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04crm8r",
+      "kind": "term",
+      "front": "What are nucleotides?",
+      "back": "**Nucleotides** are monomers that join together to form nucleic acids, including DNA. Their order carries genetic information.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s30mhc",
+      "kind": "concept",
+      "front": "What polymer can glucose monomers form?",
+      "back": "Glucose monomers can join to form **starch**, a polysaccharide.",
+      "hint": "Think about which simple sugar the note uses as its example.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15nnywl",
+      "kind": "concept",
+      "front": "Why can two polymers made from the same monomers have different properties?",
+      "back": "Changing the **sequence** of monomers can change the polymer's properties.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wzdizm",
+      "kind": "mistake",
+      "front": "Why is a large biological molecule not automatically a polymer?",
+      "back": "A polymer must contain **linked monomer units**. Lipids are large but are not chains of repeating monomers, so they are not polymers.",
+      "hint": "Think about what a polymer must be made from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kqiqla",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that hydrolysis releases water?",
+      "back": "Hydrolysis **requires** water as a reactant, because the water molecule splits to break the bond. Condensation is the reaction that releases water.",
+      "hint": "Which reaction needs a water molecule to start?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01rtzwv",
+      "kind": "concept",
+      "front": "What role do enzymes play in building biological polymers?",
+      "back": "Enzymes **catalyse** the condensation reactions that join monomers into polymers in cells.",
+      "hint": "Think about what enzymes do to the speed of a reaction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08t6bo0",
+      "kind": "concept",
+      "front": "What does a single hydrolysis reaction do to a polymer?",
+      "back": "It **shortens** the polymer without making separate monomers throughout. Repeated hydrolysis eventually releases individual monomers.",
+      "hint": "Consider what happens after many hydrolysis reactions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m45fww",
+      "kind": "term",
+      "front": "What bond forms when amino acids join together?",
+      "back": "A **peptide bond** forms when amino acids join by condensation, releasing water.",
+      "sectionId": "s3"
+    }
+  ]
+}

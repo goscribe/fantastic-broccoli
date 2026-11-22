@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "5-3",
+  "topicCode": "5.3",
+  "topicName": "Increasing and decreasing intervals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:16.507Z",
+  "cards": [
+    {
+      "id": "1ygi735",
+      "kind": "concept",
+      "front": "What does the sign of f' tell you about f on an interval?",
+      "back": "If $f'(x)>0$ throughout an interval, $f$ is **increasing** there. If $f'(x)<0$ throughout, $f$ is **decreasing**. The derivative's sign, not the function's height, sets the direction of change.",
+      "hint": "Think about whether the curve is rising or falling.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12mqyti",
+      "kind": "process",
+      "front": "What are the steps to find where a function increases and decreases using its derivative?",
+      "back": "1) Find where $f'(x)=0$ or does not exist, plus domain boundaries. 2) These values split the domain into intervals. 3) Pick a **test point** in each interval and find the sign of $f'$. 4) Positive means increasing; negative means decreasing.",
+      "hint": "Start by solving f'(x)=0.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fxwacw",
+      "kind": "mistake",
+      "front": "A student says f(x) = -5 means f is decreasing. What is wrong with this?",
+      "back": "A negative output only gives the **height** of the graph, not its direction. Behavior depends on the sign of $f'$, so check the derivative across the interval.",
+      "hint": "Height and direction are different things.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02fuxed",
+      "kind": "term",
+      "front": "What does it mean for a function to be increasing on an interval?",
+      "back": "Every larger input in that interval gives a **larger output**.",
+      "hint": "Compare two inputs in the interval.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1us2gw9",
+      "kind": "term",
+      "front": "What is a test point?",
+      "back": "An **input chosen inside an interval** to check the sign of the derivative there.",
+      "hint": "It sits between the dividing values.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xxs8a8",
+      "kind": "term",
+      "front": "What is a sign chart?",
+      "back": "A **sign chart** records the sign of the derivative on intervals separated by relevant domain values, along with the resulting behavior of the function.",
+      "hint": "Think of a table of signs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16uyqoz",
+      "kind": "formula",
+      "front": "What is the derivative of f(x)=x^3-12x in factored form?",
+      "back": "$f'(x)=3x^2-12=3(x-2)(x+2)$. The zeros $x=-2$ and $x=2$ are the **dividing values** for the sign chart.",
+      "hint": "Use the power rule on each term.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18q5elc",
+      "kind": "example",
+      "front": "For f(x)=x^3-12x, on which intervals does f increase and decrease?",
+      "back": "$f$ increases on $(-\\infty,-2)$ and $(2,\\infty)$, where $f'$ is positive. It decreases on $(-2,2)$, where $f'$ is negative. Test points $-3$, $0$, and $3$ confirm the signs.",
+      "hint": "Test x = -3, 0, and 3.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mkudow",
+      "kind": "example",
+      "front": "For g'(x)=(x+1)(x-3), on which intervals does g increase and decrease?",
+      "back": "$g$ increases on $(-\\infty,-1)$ and $(3,\\infty)$, and decreases on $(-1,3)$. The derivative is positive outside the roots and negative between them.",
+      "hint": "The dividing values are -1 and 3.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1knux17",
+      "kind": "concept",
+      "front": "How does a graph of f' show where f increases?",
+      "back": "Regions **above the horizontal axis** on the graph of $f'$ show where $f$ increases. Regions below the axis show where $f$ decreases.",
+      "hint": "Read the derivative graph, not the graph of f.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1erwdoo",
+      "kind": "mistake",
+      "front": "Why can't the height of a derivative graph be read as the height of f?",
+      "back": "The height of the derivative graph gives the **slope** of $f$, not the height of $f$. Use the sign of $f'$ to decide increase or decrease.",
+      "hint": "Slope and height are different things.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xd4hoq",
+      "kind": "concept",
+      "front": "Why are two positive derivative values not enough to show f increases between them?",
+      "back": "Two sampled values say nothing about the sign **between samples**. The derivative could turn negative inside the interval, so the claim is not established.",
+      "hint": "What happens between the listed inputs?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iw9gmk",
+      "kind": "mistake",
+      "front": "A table of function values rises across consecutive rows. Does that prove f increases throughout the interval?",
+      "back": "No. The sampled outputs increase, but $f$ could **turn between rows**. Only claim what the table establishes.",
+      "hint": "Consider what the rows cannot show.",
+      "sectionId": "s4"
+    }
+  ]
+}

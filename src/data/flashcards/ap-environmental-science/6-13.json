@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-13",
+  "topicCode": "6.13",
+  "topicName": "Energy conservation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:29.782Z",
+  "cards": [
+    {
+      "id": "0hond72",
+      "kind": "term",
+      "front": "What does conserving energy mean?",
+      "back": "**Conserving energy** means reducing the amount of energy used, either by using less or by wasting less.",
+      "hint": "Compare it with switching off a light in an empty room.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10hp3md",
+      "kind": "concept",
+      "front": "Why does energy that is saved never have to be produced?",
+      "back": "Saved energy needs no fuel, no power plant and no transmission line, so using less cuts the fuel burned and the pollution it causes.",
+      "hint": "Trace energy back to where it comes from.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ghrzx1",
+      "kind": "formula",
+      "front": "What is the formula for energy efficiency, and what does its result mean?",
+      "back": "Efficiency is $\\frac{\\text{useful output}}{\\text{total input}}\\times100\\%$, giving the percentage of input energy turned into useful work.",
+      "hint": "Compare the useful work with everything that went in.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0291owg",
+      "kind": "mistake",
+      "front": "Why does conserving energy not mean the physical law that energy is never created or destroyed?",
+      "back": "That law says energy is never created or destroyed. Conserving energy in this topic means using less of a resource, not the law itself.",
+      "hint": "The word conservation has two different meanings here.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vwwt4y",
+      "kind": "example",
+      "front": "How much energy does an LED save over 30 days if it replaces a 60 W bulb and is used 5 hours a day?",
+      "back": "**7.5 kWh** saved. Power saved is $50\\,\\text{W}$, so $50\\,\\text{W}\\times5\\,\\text{h/day}\\times30\\,\\text{days}=7{,}500\\,\\text{Wh}=7.5\\,\\text{kWh}$.",
+      "hint": "Start by finding the difference in power.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s6km1l",
+      "kind": "term",
+      "front": "What is insulation and how does it reduce home energy use?",
+      "back": "**Insulation** is material that slows heat flow through walls, roofs and floors, so heating and cooling systems run less.",
+      "hint": "Think about how heat moves in winter and in summer.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0s06tbo",
+      "kind": "term",
+      "front": "What is standby power and why does it matter over a year?",
+      "back": "**Standby power** is electricity a device draws while switched off or idle but still plugged in. Each device draws little, but the total adds up.",
+      "hint": "Think about chargers and devices left plugged in.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bvmcbr",
+      "kind": "term",
+      "front": "What is a kilowatt-hour and how is energy calculated from power?",
+      "back": "A **kilowatt-hour** ($\\text{kWh}$) is the energy used by a $1\\,\\text{kW}$ device running for $1\\,\\text{h}$, equal to $3.6\\times10^{6}\\,\\text{J}$. Energy = power × time.",
+      "hint": "Think about what the billing unit measures.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14j32km",
+      "kind": "concept",
+      "front": "How does cogeneration reduce energy waste in industry?",
+      "back": "**Cogeneration** captures heat that a power process would otherwise waste and uses it for heating or manufacturing.",
+      "hint": "Think about what happens to the heat a power process gives off.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05s761q",
+      "kind": "concept",
+      "front": "Why does recycling aluminum usually save energy compared with making it from raw ore?",
+      "back": "Recycling often takes less energy because it avoids the energy-intensive processing of raw ore.",
+      "hint": "Compare the starting material in each case.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0utfhei",
+      "kind": "formula",
+      "front": "What is the formula for payback period, and what does a shorter payback mean?",
+      "back": "Payback period $=\\frac{\\text{extra cost}}{\\text{annual savings}}$. A shorter payback makes a strategy more attractive, and if it is shorter than the device's life, the purchase saves money overall.",
+      "hint": "Think about how many years of savings it takes to cover the extra price.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0y69u51",
+      "kind": "example",
+      "front": "What is the payback period of an appliance that costs 500 dollars more and saves 100 dollars a year?",
+      "back": "**5 years**. That is shorter than the 8-year life, so total savings of 800 dollars leave a net saving of 300 dollars.",
+      "hint": "Divide the extra cost by the annual savings.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1o3k87j",
+      "kind": "mistake",
+      "front": "Why should buyers not judge an efficient appliance only by its purchase price?",
+      "back": "Efficient options often cost more upfront, but their energy savings can repay the extra cost. Compare the extra cost with annual savings.",
+      "hint": "Think about what happens after you buy it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1a4pu6a",
+      "kind": "term",
+      "front": "What does an energy audit do for a building?",
+      "back": "An **energy audit** assesses how a building uses energy, finding where it wastes energy and which fixes pay off fastest.",
+      "hint": "Think of it as a check-up before making changes.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "3-2",
+  "topicCode": "3.2",
+  "topicName": "Environmental impacts on enzyme function",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:29.682Z",
+  "cards": [
+    {
+      "id": "0f6cryq",
+      "kind": "concept",
+      "front": "Why does enzyme activity usually rise as temperature increases, and what happens above the optimum?",
+      "back": "Activity rises because molecules move faster and collide more often. Above the **optimum temperature**, heat disrupts the interactions that keep the enzyme's shape, so the active site changes and activity often falls sharply.",
+      "hint": "Think about molecule speed first, then shape.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16zp8hw",
+      "kind": "concept",
+      "front": "How can a change in pH stop an enzyme from working well?",
+      "back": "**pH** changes the charges on groups within the enzyme. This can alter the interactions that keep its shape and change how the active site binds substrate. Activity usually falls as pH moves away from the **optimum pH**.",
+      "hint": "Start with what pH does to charges.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gos5tp",
+      "kind": "concept",
+      "front": "Why does reaction rate level off as substrate concentration keeps rising?",
+      "back": "The enzymes become **saturated**: most active sites are occupied at any moment, so more substrate has little effect on the rate. Adding more enzyme could raise the maximum rate if enough substrate is available.",
+      "hint": "Consider how many active sites are free.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tm90ha",
+      "kind": "term",
+      "front": "What is denaturation?",
+      "back": "**Denaturation** is a change in an enzyme's shape that disrupts its function. Severe heating can cause it, and it may be irreversible.",
+      "hint": "Think about shape and function.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06m6bry",
+      "kind": "term",
+      "front": "What is an enzyme's optimum temperature?",
+      "back": "The **optimum temperature** is the temperature at which the enzyme has its highest measured activity under specified conditions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1egfe6e",
+      "kind": "term",
+      "front": "How is reaction rate defined?",
+      "back": "**Reaction rate** is the amount of substrate used or product formed per unit time.",
+      "hint": "There are two ways to measure it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ur4rdr",
+      "kind": "formula",
+      "front": "Which equation gives the average reaction rate, and what do its parts mean?",
+      "back": "$\\mathrm{rate}=\\frac{\\text{product formed}}{\\text{time}}$. Product formed is the amount made, and time is the interval. With micromoles and minutes, the rate is in $\\mathrm{\\mu mol\\,min^{-1}}$.",
+      "hint": "Rate is an amount divided by a time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13gk01l",
+      "kind": "example",
+      "front": "An enzyme produces 18 micromoles of product in 3 minutes. What is its average rate?",
+      "back": "$6\\,\\mathrm{\\mu mol\\,min^{-1}}$, from $18\\div 3=6$.",
+      "hint": "Divide product by time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ezs5bs",
+      "kind": "mistake",
+      "front": "A reaction is slow in the cold. Has the enzyme denatured?",
+      "back": "**No.** Cold usually slows the reaction because molecules move more slowly. The enzyme is not permanently changed, and activity can rise again when it warms.",
+      "hint": "Is the change reversible?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rbky3y",
+      "kind": "mistake",
+      "front": "A substrate concentration graph levels off. Has the enzyme stopped working?",
+      "back": "**No.** A leveling curve suggests **saturation**, where the active sites are mostly occupied, not that the enzyme has stopped working.",
+      "hint": "Compare this with what happens to free active sites.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g6dvbn",
+      "kind": "mistake",
+      "front": "Does a small pH change always denature an enzyme?",
+      "back": "**No.** A smaller pH change may only reduce activity without permanent damage. An extreme pH is more likely to denature the enzyme.",
+      "hint": "Compare small and extreme changes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gd75m6",
+      "kind": "process",
+      "front": "What steps should you follow to calculate an average reaction rate?",
+      "back": "1) Use rate = product formed ÷ time. 2) Substitute the measured values with units. 3) Divide to get the rate, such as $\\mathrm{\\mu mol\\,min^{-1}}$.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xw1lyn",
+      "kind": "concept",
+      "front": "How do you test the effect of one environmental factor on an enzyme reaction?",
+      "back": "Change only that **factor** while keeping the other conditions constant. Compare rates only when the measurement method and time interval are clear.",
+      "hint": "Think about control variables.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "5-9",
+  "topicCode": "5.9",
+  "topicName": "Connecting f, f' and f''",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:13.814Z",
+  "cards": [
+    {
+      "id": "0iqaz1k",
+      "kind": "formula",
+      "front": "What does $f'(a)$ tell you about the graph of $f$ at $x=a$?",
+      "back": "It is the **tangent slope**, the instantaneous rate of change of $f$ at $x=a$. Positive means $f$ rises nearby; negative means it falls nearby.",
+      "hint": "Think about what the first derivative measures.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yvhrfa",
+      "kind": "concept",
+      "front": "How does a sign change in $f'$ reveal a local maximum or minimum of $f$?",
+      "back": "A change from **positive to negative** in $f'$ gives a local maximum. A change from negative to positive gives a local minimum, because $f$ switches between rising and falling.",
+      "hint": "Track whether f is increasing or decreasing on each side.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rgcvfb",
+      "kind": "concept",
+      "front": "What does a positive second derivative tell you about the graph of $f$?",
+      "back": "The graph is **concave up**, meaning its tangent slopes are increasing. It does not by itself mean $f$ is increasing; that depends on the sign of $f'$.",
+      "hint": "Concavity is about slopes changing, not about height.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ou7tda",
+      "kind": "term",
+      "front": "What is a stationary point of $f$?",
+      "back": "A **stationary point** is a point where $f'(x)=0$. The graph need not turn there; it may flatten and continue in the same direction.",
+      "hint": "Check the first derivative at the point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "128g1rk",
+      "kind": "mistake",
+      "front": "Is every point where $f'(x)=0$ a maximum or minimum of $f$?",
+      "back": "**No.** The graph may flatten and keep going the same direction, so $f'(x)=0$ alone does not confirm a maximum or minimum.",
+      "hint": "Picture a flat spot on a graph that still rises.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1axf2u2",
+      "kind": "mistake",
+      "front": "If $f''(a)>0$, is $f$ increasing at $a$?",
+      "back": "**No.** A positive second derivative only shows the slopes are increasing. Check the sign of $f'(a)$ to decide whether $f$ rises or falls.",
+      "hint": "Which derivative controls rising or falling?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jqdpus",
+      "kind": "formula",
+      "front": "Write the equation of the tangent line to $f$ at $x=a$ using $f(a)$ and $f'(a)$.",
+      "back": "$y-f(a)=f'(a)(x-a)$. It describes the graph's immediate direction at $a$, not its behavior everywhere.",
+      "hint": "Use point-slope form.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ayieqw",
+      "kind": "process",
+      "front": "What are the steps to find and interpret $f'(a)$ and $f''(a)$ from a formula for $f$?",
+      "back": "1) Differentiate $f$ to get $f'$. 2) Differentiate again to get $f''$. 3) Substitute $x=a$ into each. 4) Read $f'(a)$ as the slope and $f''(a)$ as how that slope is changing.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qr1j1s",
+      "kind": "example",
+      "front": "For $f(x)=x^3-3x$, find $f'(2)$ and $f''(2)$ and interpret them.",
+      "back": "$f'(2)=9$ and $f''(2)=12$. The tangent slope at $x=2$ is 9, and that slope is increasing at a rate of 12 per unit increase in $x$.",
+      "hint": "Use $f'(x)=3x^2-3$, then $f''(x)=6x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15noxsq",
+      "kind": "example",
+      "front": "For $f(x)=x^3-3x$, find $f'(1)$ and $f''(1)$ and interpret them.",
+      "back": "$f'(1)=0$, so the tangent is horizontal at $x=1$. $f''(1)=6$, so the tangent slope is increasing there.",
+      "hint": "Substitute $x=1$ into each derivative.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07an65w",
+      "kind": "concept",
+      "front": "On a graph of $f'$, what do the heights tell you about $f$ and $f''$?",
+      "back": "Above the axis, $f$ is **increasing**; below it, $f$ is decreasing. Where $f'$ rises, $f''$ is positive; where $f'$ falls, $f''$ is negative.",
+      "hint": "Read the graph of f' as information about f.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1va28uf",
+      "kind": "mistake",
+      "front": "Does $f''(a)=0$ alone show that concavity changes at $x=a$?",
+      "back": "**No.** Concavity changes only if $f''$ changes sign across $a$. A zero by itself is not a sign change.",
+      "hint": "Look for a sign change, not just a zero.",
+      "sectionId": "s4"
+    }
+  ]
+}

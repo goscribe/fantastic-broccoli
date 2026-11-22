@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-11",
+  "topicCode": "4.11",
+  "topicName": "Sclerenchyma, xylem and phloem",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:52.095Z",
+  "cards": [
+    {
+      "id": "0wyf97b",
+      "kind": "concept",
+      "front": "How does water evaporating from leaves pull a column of water up the xylem?",
+      "back": "Evaporation lowers pressure at the top of the xylem, creating **tension**. **Cohesion** between water molecules, through hydrogen bonds, lets this pull travel down an unbroken column.",
+      "hint": "Start at the leaf, where the water escapes from the plant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11t9qnb",
+      "kind": "process",
+      "front": "What are the steps by which sucrose is moved from a source to a sink through the phloem?",
+      "back": "1) Companion cells use energy to load **sucrose** into sieve tubes at the source. 2) Water follows by **osmosis**, so pressure rises. 3) At the sink, sucrose leaves and pressure falls, so the contents flow along the tube.",
+      "hint": "Begin with what happens at the source end of the tube.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08cpfip",
+      "kind": "concept",
+      "front": "Why is a xylem vessel dead and hollow with broken end walls?",
+      "back": "Water meets no cytoplasm and flows through one continuous tube with little resistance. **Lignin** rings or spirals in the walls stop the vessel collapsing under low pressure.",
+      "hint": "Think about what would slow water down inside a living cell.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vcev0b",
+      "kind": "term",
+      "front": "What is sclerenchyma, and what is its job in a plant?",
+      "back": "**Sclerenchyma** is a supporting tissue of long, narrow fibres with thick walls. Mature fibres are dead and hollow, and they provide support rather than transport.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vhpbaa",
+      "kind": "term",
+      "front": "What is lignin, and what does it do in plant cell walls?",
+      "back": "**Lignin** is a hard, waterproof material that thickens and stiffens the cell wall.",
+      "hint": "Think about what sclerenchyma walls are thickened with.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y8j0a8",
+      "kind": "term",
+      "front": "What are pits in the walls of xylem vessels?",
+      "back": "**Pits** are gaps in the vessel wall that let water move sideways into neighbouring cells.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uf0fnk",
+      "kind": "term",
+      "front": "What is transpiration, and where does most of it happen?",
+      "back": "**Transpiration** is the loss of water vapour from a plant, mainly through the stomata of leaves.",
+      "hint": "Think about where water escapes from the plant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hv53rg",
+      "kind": "term",
+      "front": "What is adhesion in the xylem, and how does it help?",
+      "back": "**Adhesion** is the attraction between water molecules and the walls of xylem vessels. It helps hold the water column up.",
+      "hint": "Compare it with the attraction between water molecules themselves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14imnw4",
+      "kind": "term",
+      "front": "What are sieve tube elements, and why are they described as living?",
+      "back": "**Sieve tube elements** are phloem cells joined end to end, with perforated end walls called sieve plates. They are living but have little cytoplasm and no nucleus.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11vwsfc",
+      "kind": "term",
+      "front": "What do companion cells do for the sieve tube elements next to them?",
+      "back": "**Companion cells** have a nucleus and many mitochondria, so they supply the energy and support their neighbours need.",
+      "hint": "Compare what a companion cell contains with a sieve tube element.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "195n6p8",
+      "kind": "term",
+      "front": "What is the difference between a source and a sink in the phloem?",
+      "back": "A **source** releases sucrose into the phloem, such as a mature leaf. A **sink** removes sucrose to use or store, such as roots or fruits.",
+      "hint": "Think about where sugar starts its journey and where it ends.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1d2hfs8",
+      "kind": "mistake",
+      "front": "Why is it wrong to think phloem only carries sucrose downwards?",
+      "back": "Phloem moves sucrose from wherever the source is to wherever the sink is, so the flow can be upwards or downwards depending on the positions.",
+      "hint": "Consider where the sugar comes from, not just where it goes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qfklh0",
+      "kind": "concept",
+      "front": "Which driving force moves water in xylem and which moves sucrose in phloem?",
+      "back": "Evaporation pulls water up the xylem. A pressure difference, created by loading sucrose at the source, moves sucrose through the phloem.",
+      "hint": "Look at the driving force row of the xylem and phloem comparison table.",
+      "sectionId": "s6"
+    }
+  ]
+}

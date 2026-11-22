@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "11-1",
+  "topicCode": "11.1",
+  "topicName": "Electric current",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:11.070Z",
+  "cards": [
+    {
+      "id": "1q232aa",
+      "kind": "term",
+      "front": "What is electric current?",
+      "back": "**Electric current** is the rate at which charge flows past a point in a wire: $I=\\frac{\\Delta Q}{\\Delta t}$, the charge passing each second.",
+      "hint": "Think of counting charge passing a spot each second.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v1ippv",
+      "kind": "formula",
+      "front": "What do the symbols in $I=\\frac{\\Delta Q}{\\Delta t}$ stand for, and what unit does $I$ have?",
+      "back": "$I$ is current in **amperes**, $\\Delta Q$ is charge in coulombs, and $\\Delta t$ is time in seconds. One ampere is $1\\,\\mathrm{C/s}$.",
+      "hint": "Check the units on each side of the equation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o2lx3f",
+      "kind": "concept",
+      "front": "Which way does conventional current flow outside a battery?",
+      "back": "From the **positive terminal**, around the circuit, to the negative terminal. It is the direction positive charge would move.",
+      "hint": "Conventional current follows positive charge, not electrons.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cg7nvt",
+      "kind": "mistake",
+      "front": "Do electrons in a metal wire move in the same direction as conventional current?",
+      "back": "No. Electrons are negative, so they drift **opposite** to conventional current, toward the positive terminal.",
+      "hint": "Consider the sign of the electron's charge.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01bqhe5",
+      "kind": "example",
+      "front": "A bulb passes 45 C of charge in 1.5 minutes. What is the average current?",
+      "back": "**0.50 A**. Convert 1.5 min to 90 s, then $I=\\frac{45\\,\\mathrm{C}}{90\\,\\mathrm{s}}=0.50\\,\\mathrm{A}$.",
+      "hint": "Convert the time to seconds first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10rthje",
+      "kind": "process",
+      "front": "What steps do you follow to find average current from charge and time?",
+      "back": "Convert the time to seconds, divide the charge by that time using $I=\\frac{\\Delta Q}{\\Delta t}$, and give the answer in amperes.",
+      "hint": "The time must be in seconds before you divide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "070he9m",
+      "kind": "formula",
+      "front": "How do you find the charge that passes when a current is steady?",
+      "back": "Multiply the current by the time: $\\Delta Q=I\\Delta t$. For example, a steady $0.50\\,\\mathrm{A}$ for $10\\,\\mathrm{s}$ moves $5.0\\,\\mathrm{C}$.",
+      "hint": "This is the rearranged definition of current.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lbwtzr",
+      "kind": "term",
+      "front": "What is a charge carrier?",
+      "back": "A **charge carrier** is a charged particle, such as an electron or an ion, that is free to move and so carry electric current.",
+      "hint": "Think about what actually moves inside the material.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ryw8pc",
+      "kind": "concept",
+      "front": "Which charges move in a metal wire, and which move in salt water?",
+      "back": "In a metal, only the free **electrons** move, since the atoms stay in place. In salt water, both positive and negative **ions** move.",
+      "hint": "The atoms in a metal stay fixed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xr2ch2",
+      "kind": "concept",
+      "front": "Why is the current the same at every point along a single loop with no branches?",
+      "back": "Charge does not pile up or vanish inside a wire, so the same **charge** passes every point each second.",
+      "hint": "Think about conservation of charge.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bq6nht",
+      "kind": "mistake",
+      "front": "Does a bulb use up current, so less current leaves it than enters?",
+      "back": "No. The same **current** leaves a bulb as enters it. The bulb transfers energy from the moving charge.",
+      "hint": "Current is charge flow, not something that gets used up.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0js9lxm",
+      "kind": "term",
+      "front": "What is an ammeter and how is it connected in a circuit?",
+      "back": "An **ammeter** measures current. It is connected so the current passes through it, and a good one has very little effect on the current.",
+      "hint": "It must be in the path of the current.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dx9zpl",
+      "kind": "example",
+      "front": "How many electrons pass a point in 2.0 s when the current is 0.80 A?",
+      "back": "About $1.0\\times10^{19}$ electrons. First $\\Delta Q=(0.80\\,\\mathrm{A})(2.0\\,\\mathrm{s})=1.6\\,\\mathrm{C}$, then divide by $e=1.60\\times10^{-19}\\,\\mathrm{C}$.",
+      "hint": "Find the total charge first, then divide by e.",
+      "sectionId": "s2"
+    }
+  ]
+}

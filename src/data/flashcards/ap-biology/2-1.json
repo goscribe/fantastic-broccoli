@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "2-1",
+  "topicCode": "2.1",
+  "topicName": "Cell structure and function",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:28.694Z",
+  "cards": [
+    {
+      "id": "07n0bh0",
+      "kind": "concept",
+      "front": "What is the main difference between prokaryotic and eukaryotic cells?",
+      "back": "**Eukaryotic** cells enclose their DNA in a nucleus and have other membrane-bound organelles. Prokaryotes lack both, keeping their DNA in a **nucleoid**, yet they still carry out the basic activities of life.",
+      "hint": "Think about where the DNA sits and which internal membranes are present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ev7soc",
+      "kind": "process",
+      "front": "Trace how a protein meant for secretion is made and sent out of the cell.",
+      "back": "A **ribosome** on the rough ER builds the protein, which enters the rough ER and is folded and modified. A vesicle carries it to the **Golgi**, where it is processed and sorted. Another vesicle carries it to the plasma membrane.",
+      "hint": "Follow the order: build, fold, process, package, export."
+    },
+    {
+      "id": "0kw3qwo",
+      "kind": "concept",
+      "front": "Why do plant cells need both chloroplasts and mitochondria?",
+      "back": "**Chloroplasts** capture light energy to build sugars in photosynthesis. **Mitochondria** carry out major steps of cellular respiration, transferring energy from food molecules to ATP. They do different, complementary jobs.",
+      "hint": "Compare what each organelle makes or releases.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0w3gvr1",
+      "kind": "term",
+      "front": "What is the nucleolus?",
+      "back": "A **region of the nucleus** where ribosomal RNA is produced and ribosomal subunits begin to assemble. These parts leave the nucleus to help form ribosomes.",
+      "hint": "Think about how ribosomes get their parts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rc7hcp",
+      "kind": "concept",
+      "front": "Does a ribosome's location affect where its protein ends up?",
+      "back": "Yes. **Free ribosomes** make proteins that generally work in the cytoplasm. Ribosomes attached to the **rough ER** make proteins for secretion, membranes, or certain organelles.",
+      "hint": "Compare attached and free ribosomes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0s67whn",
+      "kind": "mistake",
+      "front": "Does the Golgi apparatus make proteins?",
+      "back": "No. **Ribosomes** build proteins. The Golgi modifies, sorts, and packages many of them for different destinations.",
+      "hint": "Which organelle builds the protein in the first place?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01fdy7c",
+      "kind": "term",
+      "front": "What does the smooth endoplasmic reticulum do?",
+      "back": "It lacks attached ribosomes and makes **lipids**. It also helps **detoxify** substances, and its other roles vary among cell types.",
+      "hint": "Think about what it lacks compared with the rough ER.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0emobxn",
+      "kind": "term",
+      "front": "What role do lysosomes play in the cell?",
+      "back": "Lysosomes contain **digestive enzymes** that break down large molecules and worn-out cell parts. The breakdown products can then be reused or removed.",
+      "hint": "Think about recycling and waste.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qvcmvm",
+      "kind": "term",
+      "front": "What is a vacuole, and what can it do in a plant cell?",
+      "back": "A **membrane-bound space** used for storage, such as water and dissolved substances. When a large central vacuole fills, it presses the cell contents against the cell wall.",
+      "hint": "Think about storage and cell support.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x82dy6",
+      "kind": "term",
+      "front": "What is the cytoskeleton, and how does it help organelles work together?",
+      "back": "A **network of protein fibers** throughout the cytoplasm. It helps maintain cell shape and move materials, and motor proteins carry vesicles along its fibers.",
+      "hint": "Think of it as the cell's internal scaffold and track system.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vrtyoo",
+      "kind": "mistake",
+      "front": "Does photosynthesis in plant cells replace cellular respiration?",
+      "back": "No. **Chloroplasts** build sugars by photosynthesis, while **mitochondria** still use cellular respiration to release usable energy from food molecules as ATP.",
+      "hint": "Plant cells need both processes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13e6hl8",
+      "kind": "term",
+      "front": "What is a cell wall, and which cells have one?",
+      "back": "A **supporting layer** outside the plasma membrane. Plant cells have a cellulose cell wall, while animal cells have no cell wall.",
+      "hint": "Compare plant and animal cell outsides.",
+      "sectionId": "s6"
+    }
+  ]
+}

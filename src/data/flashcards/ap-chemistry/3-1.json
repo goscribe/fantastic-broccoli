@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "3-1",
+  "topicCode": "3.1",
+  "topicName": "Intermolecular forces",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:20.933Z",
+  "cards": [
+    {
+      "id": "1atdcde",
+      "kind": "concept",
+      "front": "Which intermolecular force is present in every molecular substance, and why does it occur?",
+      "back": "**London dispersion forces** are present in every molecular substance. Electrons move constantly, so temporary uneven electron distributions induce imbalances in nearby particles, creating an attraction.",
+      "hint": "Think about electron motion, not permanent charges.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hvubyp",
+      "kind": "term",
+      "front": "What is hydrogen bonding?",
+      "back": "**Hydrogen bonding** is a strong type of dipole-dipole attraction. It occurs when H bonded to N, O, or F attracts a lone pair on a nearby N, O, or F atom.",
+      "hint": "Both atoms involved must be N, O, or F.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gslqjc",
+      "kind": "concept",
+      "front": "How do intermolecular forces affect boiling point?",
+      "back": "Stronger intermolecular attractions generally require more energy to overcome, so they give a higher **boiling point**. Boiling requires molecules to separate into a gas.",
+      "hint": "Think about the energy needed to separate molecules.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qgq2h6",
+      "kind": "term",
+      "front": "What are intermolecular forces?",
+      "back": "**Intermolecular forces** are attractions between separate particles. They are not the bonds that hold atoms together within a molecule.",
+      "hint": "Compare with bonds inside a molecule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01tc30t",
+      "kind": "term",
+      "front": "What is polarizability?",
+      "back": "**Polarizability** is how easily a particle's electron cloud can be distorted. Dispersion forces generally strengthen as electron clouds become larger and more easily distorted.",
+      "hint": "Think about how easily electrons can shift.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ua7x3i",
+      "kind": "term",
+      "front": "What makes a molecule polar?",
+      "back": "A **polar molecule** has an uneven overall charge distribution because its bond dipoles do not cancel. Its shape is what stops them cancelling.",
+      "hint": "Bond polarity is only part of the answer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mu2i0m",
+      "kind": "concept",
+      "front": "What are dipole-dipole forces, and which molecules have them?",
+      "back": "**Dipole-dipole forces** are attractions where the positive end of one polar molecule attracts the negative end of another. Polar molecules also experience dispersion forces.",
+      "hint": "Think about positive and negative ends.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12q7ssn",
+      "kind": "concept",
+      "front": "Why does carbon dioxide have no permanent dipole-dipole forces even though its bonds are polar?",
+      "back": "Carbon dioxide is **linear**, so its bond dipoles **cancel**. The molecule has no permanent dipole, so it has only dispersion forces.",
+      "hint": "Consider the shape of the molecule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hd5mjt",
+      "kind": "mistake",
+      "front": "A student says that because a molecule has polar bonds, it must be a polar molecule. What is wrong?",
+      "back": "A **polar bond** does not guarantee a **polar molecule**. Check both bond polarity and molecular shape, because a symmetric shape can cancel the bond dipoles.",
+      "hint": "What does molecular shape do to the dipoles?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iuocbb",
+      "kind": "concept",
+      "front": "How do hydrogen bonding, dipole-dipole forces, and dispersion forces usually rank in strength?",
+      "back": "For substances of comparable size, **hydrogen bonding** is often stronger than dipole-dipole attraction, which is often stronger than dispersion attraction. These are trends, not a universal ranking.",
+      "hint": "Compare substances of similar size.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16c1k8w",
+      "kind": "mistake",
+      "front": "A student says any molecule containing an H atom forms hydrogen bonds. What is wrong?",
+      "back": "An **H atom alone** does not establish hydrogen bonding. The H must be bonded to N, O, or F, and a nearby N, O, or F atom must supply a lone pair.",
+      "hint": "What must hydrogen be bonded to?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dfuabc",
+      "kind": "process",
+      "front": "How should you support a prediction that one substance has a higher boiling point?",
+      "back": "1. Compare substances of similar size. 2. Name the relevant forces. 3. Explain why one attraction is stronger. 4. Link this to the energy needed to separate the molecules.",
+      "hint": "Start with a fair comparison of molecular size.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lqipiz",
+      "kind": "concept",
+      "front": "Why are melting points harder to predict from intermolecular forces than boiling points?",
+      "back": "Melting also disrupts attractions, so stronger forces often raise the **melting point**. However, **crystal packing** also matters, so forces alone may not reliably predict which substance melts at a higher temperature.",
+      "hint": "Think about what else affects how a solid breaks apart.",
+      "sectionId": "s4"
+    }
+  ]
+}

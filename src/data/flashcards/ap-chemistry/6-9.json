@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "6-9",
+  "topicCode": "6.9",
+  "topicName": "Hess's law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:11.122Z",
+  "cards": [
+    {
+      "id": "0i1coqh",
+      "kind": "concept",
+      "front": "What does Hess's law tell you about the overall enthalpy change of a reaction?",
+      "back": "The **overall enthalpy change** depends only on the starting and ending states, not the pathway. Known step values can therefore be added to find the answer.",
+      "hint": "Think about what enthalpy depends on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05rxutu",
+      "kind": "process",
+      "front": "What are the steps for building a target equation from given reactions?",
+      "back": "**Work backward** from the target. Reverse or scale steps as needed, add the adjusted equations, cancel matching substances and intermediates, then add the adjusted $\\Delta H$ values.",
+      "hint": "Start from the target equation, not the given steps.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "136g4az",
+      "kind": "mistake",
+      "front": "When you multiply a reaction by 2, is it enough to double its coefficients?",
+      "back": "**No**. You must also double its enthalpy change. Every coefficient and the $\\Delta H$ must be scaled by the same factor.",
+      "hint": "What else in the pair must change?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07o6njn",
+      "kind": "concept",
+      "front": "What happens to the enthalpy change when you reverse a reaction?",
+      "back": "The **sign flips**. Swap reactants and products, and change $\\Delta H$ to its opposite value.",
+      "hint": "Reversing a process reverses its direction of energy flow.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07h0q3i",
+      "kind": "term",
+      "front": "What is a state function?",
+      "back": "A **state function** is a property whose change depends only on its initial and final states, not on the intermediate steps. Enthalpy is one.",
+      "hint": "Compare the start and end, not the route.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k885eo",
+      "kind": "term",
+      "front": "What is an intermediate in a Hess's law calculation?",
+      "back": "An **intermediate** is a substance formed in one step and used up in another. It appears in the combined pathway but not in the target equation, so it cancels.",
+      "hint": "Look for something on both sides when you add steps.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sqz9w1",
+      "kind": "formula",
+      "front": "How do you combine adjusted steps to find the overall enthalpy change?",
+      "back": "$\\Delta H_{\\text{overall}}=\\Delta H_1+\\Delta H_2+\\cdots$, where each $\\Delta H$ is in kJ and already adjusted for reversing or scaling.",
+      "hint": "Adjust each step first, then add.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pwpyhq",
+      "kind": "example",
+      "front": "Find $\\Delta H$ for C + ½O₂ → CO, given C + O₂ → CO₂ (−393.5 kJ) and CO + ½O₂ → CO₂ (−283.0 kJ).",
+      "back": "**$\\Delta H=-110.5\\ \\mathrm{kJ}$**. Keep the first step, reverse the second to get $+283.0\\ \\mathrm{kJ}$, cancel $\\mathrm{CO_2}$ and $\\mathrm{\\tfrac12 O_2}$, then add $-393.5+283.0$.",
+      "hint": "Which substance must be cancelled?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1i48dno",
+      "kind": "example",
+      "front": "Find $\\Delta H$ for $2X\\rightarrow 2Z$, given $X\\rightarrow Y$ ($+12$ kJ) and $Z\\rightarrow Y$ ($+30$ kJ).",
+      "back": "**$\\Delta H=-36\\ \\mathrm{kJ}$**. Reverse $\\mathrm{Z\\rightarrow Y}$ to get $-30\\ \\mathrm{kJ}$, add to give $\\mathrm{X\\rightarrow Z}$ at $-18\\ \\mathrm{kJ}$, then double it.",
+      "hint": "Reverse first, then scale.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1svjjxa",
+      "kind": "mistake",
+      "front": "Can a substance cancel when it appears on both sides but in a different physical state?",
+      "back": "**No**. A substance cancels only when its formula and physical state match on both sides. Otherwise the combined equation is not the target.",
+      "hint": "Check more than the formula.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eyfq3m",
+      "kind": "concept",
+      "front": "Why must you check the final combined equation before accepting an enthalpy result?",
+      "back": "The **combined equation must match the target exactly**, including coefficients and physical states, with all unwanted substances cancelled. Otherwise the arithmetic answers the wrong question.",
+      "hint": "Compare it line by line with the target.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bqy378",
+      "kind": "term",
+      "front": "What is the target equation?",
+      "back": "The **target equation** is the chemical equation whose enthalpy change you must find using the given steps.",
+      "hint": "It is the reaction the question asks about.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19yhq3j",
+      "kind": "concept",
+      "front": "Why is Hess's law useful for reactions that are hard to measure directly?",
+      "back": "It lets you calculate the **indirect overall enthalpy change**. If the target can be built from reactions with known values, adding those values gives the answer.",
+      "hint": "Some reactions are difficult to run in a lab.",
+      "sectionId": "s1"
+    }
+  ]
+}

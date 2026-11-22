@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-11",
+  "topicCode": "1.11",
+  "topicName": "Energy budgets and diet",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:44.627Z",
+  "cards": [
+    {
+      "id": "0my5nss",
+      "kind": "concept",
+      "front": "How does the balance between energy intake and energy used change body mass?",
+      "back": "If intake is greater than energy used, the **surplus** is stored, mostly as fat, and mass rises. If intake is lower, stored energy is used and mass falls.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ungcoh",
+      "kind": "formula",
+      "front": "Which equation gives a person's energy requirement, and what units does it give?",
+      "back": "**Energy requirement** = BMR $\\times$ PAL, giving $\\mathrm{kJ\\,day^{-1}}$, because PAL has no units.",
+      "hint": "Two quantities are multiplied together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fa2rsa",
+      "kind": "formula",
+      "front": "What is the equation for body mass index, and which units are used?",
+      "back": "$\\mathrm{BMI}=\\frac{\\mathrm{mass}}{\\mathrm{height}^2}$, with mass in $\\mathrm{kg}$ and height in $\\mathrm{m}$, giving $\\mathrm{kg\\,m^{-2}}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dv619f",
+      "kind": "term",
+      "front": "What is basal metabolic rate?",
+      "back": "The **energy** used by the body per unit time at complete rest, in warm conditions and when not digesting food.",
+      "hint": "Think of it as the body's running cost while doing nothing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1su8jkq",
+      "kind": "term",
+      "front": "What does physical activity level, PAL, tell you?",
+      "back": "A **number above 1 with no units** that rises as a person becomes more active. It is multiplied by BMR to give the total energy requirement.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "177v4k1",
+      "kind": "example",
+      "front": "A person has a BMR of $7200\\,\\mathrm{kJ\\,day^{-1}}$ and a PAL of 1.5. What is their energy requirement?",
+      "back": "$10\\,800\\,\\mathrm{kJ\\,day^{-1}}$, found by multiplying $7200\\times1.5$.",
+      "hint": "Use the energy requirement equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11uif33",
+      "kind": "example",
+      "front": "What is the BMI of a person with a mass of 72 kg and a height of 1.80 m?",
+      "back": "About $22\\,\\mathrm{kg\\,m^{-2}}$, from $72$ divided by $1.80^2=3.24$. This is in the healthy range.",
+      "hint": "Square the height before dividing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gnp8f0",
+      "kind": "concept",
+      "front": "What must a balanced diet supply, and in what amounts?",
+      "back": "Every **nutrient** the body needs, in suitable amounts. Carbohydrates, fats and proteins are needed in large amounts; vitamins and minerals in small amounts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gk97rw",
+      "kind": "concept",
+      "front": "Roughly how many times more energy per gram does fat release than carbohydrate?",
+      "back": "About **twice** as much. Fats and oils release about $37\\,\\mathrm{kJ\\,g^{-1}}$, while carbohydrate releases about $17\\,\\mathrm{kJ\\,g^{-1}}$.",
+      "hint": "Compare the energy values in the table.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "131j7qc",
+      "kind": "process",
+      "front": "How can you estimate the energy in a food?",
+      "back": "Multiply the **mass** of each nutrient by its energy value per gram, then add the results together.",
+      "hint": "Think about which two quantities you combine first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11gr0xe",
+      "kind": "mistake",
+      "front": "Why does a high BMI not prove that a person has excess body fat?",
+      "back": "BMI uses only **mass and height**, so it cannot tell muscle from fat. A muscular person can have a high BMI without carrying excess fat.",
+      "hint": "BMI is calculated from just two measurements.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1c8s4ag",
+      "kind": "mistake",
+      "front": "Which nutrients can a surplus of energy be stored as fat from?",
+      "back": "Any of them: carbohydrate, fat or protein. **Mass gain** does not come from one nutrient alone, because any surplus energy can be stored as fat.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t4ucof",
+      "kind": "concept",
+      "front": "What health risks follow from a long-term energy surplus?",
+      "back": "Stored fat builds up and can lead to **obesity**, which raises the risk of cardiovascular disease and type 2 diabetes.",
+      "hint": "Think about what happens over years, not days.",
+      "sectionId": "s5"
+    }
+  ]
+}

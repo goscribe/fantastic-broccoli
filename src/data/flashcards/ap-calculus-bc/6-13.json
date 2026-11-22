@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-13",
+  "topicCode": "6.13",
+  "topicName": "Improper integrals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:36.466Z",
+  "cards": [
+    {
+      "id": "0yiimhb",
+      "kind": "term",
+      "front": "What makes a definite integral an improper integral?",
+      "back": "An **improper integral** has an unbounded interval (an infinite limit) or an integrand that grows without bound at a point inside the interval. The usual antiderivative evaluation does not apply directly.",
+      "hint": "Think about two ways a definite integral can break its rules.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15wjva2",
+      "kind": "formula",
+      "front": "How do you rewrite $\\int_a^\\infty f(x)\\,dx$ using a limit?",
+      "back": "$\\int_a^\\infty f(x)\\,dx=\\lim_{b\\to\\infty}\\int_a^b f(x)\\,dx$. The **variable** $b$ replaces the infinite endpoint, so each step is an ordinary definite integral.",
+      "hint": "Swap the infinite endpoint for a variable.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pmy1x8",
+      "kind": "concept",
+      "front": "What do convergence and divergence mean for an improper integral?",
+      "back": "**Convergence** means the defining limit is a finite number, and that number is the value of the integral. **Divergence** means the limit is infinite or does not exist, so the integral has no value.",
+      "hint": "Look at what the limit produces.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1x0fkt9",
+      "kind": "process",
+      "front": "What are the steps to evaluate an improper integral?",
+      "back": "Write the integral as a **limit**, find an antiderivative, evaluate it at the variable endpoint, then let the variable approach its limit. Keep the variable until the final step.",
+      "hint": "Keep the variable until the end.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dtvaq6",
+      "kind": "example",
+      "front": "Evaluate $\\int_1^\\infty \\frac{1}{x^2}\\,dx$.",
+      "back": "**1**. The antiderivative gives $-\\frac{1}{b}+1$, and as $b\\to\\infty$ this approaches $1$, so the integral converges.",
+      "hint": "The antiderivative of $x^{-2}$ is $-\\frac{1}{x}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ifoong",
+      "kind": "mistake",
+      "front": "Why is substituting $\\infty$ into an antiderivative a mistake?",
+      "back": "**Infinity** is not a number, so plugging it in gives meaningless results. Keep the variable $b$, evaluate the antiderivative, then take the limit as $b\\to\\infty$.",
+      "hint": "Infinity is not a real number.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mre5vb",
+      "kind": "formula",
+      "front": "For $\\int_1^\\infty \\frac{1}{x^p}\\,dx$ with $p$ positive, when does it converge?",
+      "back": "It converges when $p>1$ and diverges when $p\\leq 1$. For $p=1$ the limit of $\\ln b$ is infinite, so the integral diverges.",
+      "hint": "Compare $p$ with 1.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17skf8w",
+      "kind": "formula",
+      "front": "How is a break at the lower endpoint $a$ written as a limit?",
+      "back": "$\\int_a^b f(x)\\,dx=\\lim_{t\\to a^+}\\int_t^b f(x)\\,dx$. The **$a^+$** means $t$ approaches $a$ from inside the interval.",
+      "hint": "The plus sign shows the side of approach.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gnf1e3",
+      "kind": "mistake",
+      "front": "Why is $\\int_{-1}^{1}\\frac{1}{x^2}\\,dx$ not equal to $-2$?",
+      "back": "The integrand is unbounded at $x=0$, inside the interval, so the antiderivative is not valid across the break. Split at $0$; the right piece diverges, so the whole integral **diverges**.",
+      "hint": "Where is the integrand unbounded?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1yio6vo",
+      "kind": "concept",
+      "front": "If one piece of a split improper integral diverges, what happens to the whole integral?",
+      "back": "The whole integral **diverges**, even if the other piece converges. The original integral converges only if both pieces converge.",
+      "hint": "Both pieces must pass.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ufm89o",
+      "kind": "concept",
+      "front": "How can you show an improper integral converges without finding an antiderivative?",
+      "back": "Use **comparison**: if $0\\leq f(x)\\leq g(x)$ on $[a,\\infty)$ and $\\int_a^\\infty g(x)\\,dx$ converges, then $\\int_a^\\infty f(x)\\,dx$ converges too.",
+      "hint": "Find a bigger function with a known result.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "055hze3",
+      "kind": "example",
+      "front": "Does $\\int_1^\\infty e^{-x^2}\\,dx$ converge?",
+      "back": "Yes. For $x\\geq1$, $e^{-x^2}\\leq e^{-x}$, and $\\int_1^\\infty e^{-x}\\,dx$ converges, so the smaller integral converges by **comparison**.",
+      "hint": "Compare with $e^{-x}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1www8wq",
+      "kind": "example",
+      "front": "Determine whether $\\int_0^4 \\frac{1}{\\sqrt{x}}\\,dx$ converges, and find its value if it does.",
+      "back": "It converges to **4**. The limit as $t\\to0^+$ of $4-2\\sqrt{t}$ is $4$.",
+      "hint": "The antiderivative of $x^{-1/2}$ is $2\\sqrt{x}$.",
+      "sectionId": "s3"
+    }
+  ]
+}

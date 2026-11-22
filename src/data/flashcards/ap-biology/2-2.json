@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "2-2",
+  "topicCode": "2.2",
+  "topicName": "Cell size",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:21.750Z",
+  "cards": [
+    {
+      "id": "0iohrs3",
+      "kind": "concept",
+      "front": "Why does a bigger cell have a harder time exchanging materials with its surroundings?",
+      "back": "Its **volume grows faster than its surface area**, so the surface-area-to-volume ratio falls. Less outer surface is available per unit of cell contents, and interior regions may be farther from the surface.",
+      "hint": "Think about what happens to volume and area when every length doubles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qsesum",
+      "kind": "formula",
+      "front": "For a cube with side length $l$, how is the surface-area-to-volume ratio written, and what do the symbols mean?",
+      "back": "Ratio $=6l^2/l^3$, which simplifies to $6/l$. Here $l$ is the side length, $6l^2$ is the surface area, and $l^3$ is the volume. Units are inverse length, such as $\\mathrm{cm^{-1}}$.",
+      "hint": "Surface area divided by volume, using the same length unit throughout.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cs6iqp",
+      "kind": "concept",
+      "front": "How can a cell's shape change its exchange ability without changing its size?",
+      "back": "**Shape** changes the surface area relative to volume and the distance materials must travel. A thin or flattened cell exposes more surface per unit volume, and folds add surface without much extra volume.",
+      "hint": "Consider a flat cell compared with a compact cell of similar volume.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "058plqe",
+      "kind": "term",
+      "front": "What is the surface-area-to-volume ratio?",
+      "back": "The **surface-area-to-volume ratio** is a cell's surface area divided by its volume. It shows how much outer surface is available for exchange per unit of cell contents.",
+      "hint": "Ratio of outer boundary to internal space.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ukf2mo",
+      "kind": "term",
+      "front": "What is exchange efficiency?",
+      "back": "**Exchange efficiency** describes how well material exchange meets a cell's needs. It depends on the ratio, the cell's demands, and how far materials must move inside the cell.",
+      "hint": "It is about meeting needs, not just having surface area.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13y457u",
+      "kind": "example",
+      "front": "Cube A has sides of 2 cm and Cube B has sides of 4 cm. Which has the higher surface-area-to-volume ratio, and what are the values?",
+      "back": "**Cube A** has the higher ratio: $3\\,\\mathrm{cm^{-1}}$ versus $1.5\\,\\mathrm{cm^{-1}}$ for Cube B. The larger cube has the lower ratio.",
+      "hint": "Calculate surface area and volume for each cube first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ferk4h",
+      "kind": "example",
+      "front": "A cube-shaped cell has sides of 3 cm. What is its surface-area-to-volume ratio?",
+      "back": "**2 cm^-1**. Surface area is $54\\,\\mathrm{cm^2}$, volume is $27\\,\\mathrm{cm^3}$, and $54/27=2$.",
+      "hint": "Use surface area equals six times side squared.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r4xuly",
+      "kind": "process",
+      "front": "What steps do you follow to calculate the surface-area-to-volume ratio of a cube-shaped cell?",
+      "back": "1. Find surface area as $6l^2$. 2. Find volume as $l^3$. 3. Divide surface area by volume. Keep one length unit throughout.",
+      "hint": "Three steps, and the division comes last.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "123avz0",
+      "kind": "mistake",
+      "front": "A student says a larger cell has less surface area, so it must exchange less. What is the error?",
+      "back": "A larger cell has **more total surface area**, but less surface area relative to its volume. The ratio is what falls as size increases.",
+      "hint": "Distinguish total surface area from area per unit volume.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hkqst0",
+      "kind": "mistake",
+      "front": "A student divides volume by surface area to find the ratio. What is wrong?",
+      "back": "The ratio must be **surface area divided by volume**. Reversing the division gives the wrong quantity and wrong units.",
+      "hint": "Check which quantity goes on top.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ne90fv",
+      "kind": "concept",
+      "front": "What is one benefit and one limitation of a long, narrow cell?",
+      "back": "Benefit: its narrow width keeps much of its contents close to the surface, and its length can connect distant regions. Limitation: materials still must travel along its length.",
+      "hint": "Consider both width and length.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fj4r97",
+      "kind": "concept",
+      "front": "Why does the best cell size depend on the cell's function?",
+      "back": "Cells with high exchange demands benefit from more surface relative to volume, while cells spanning a distance may be long but narrow. A compact shape can suit other functions despite less surface per volume.",
+      "hint": "Different jobs need different trade-offs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "099qlfp",
+      "kind": "mistake",
+      "front": "A student says the surface-area-to-volume ratio alone decides how well a cell exchanges materials. Is this correct?",
+      "back": "No. The ratio is only a **starting point**. Exchange efficiency also depends on the cell's material needs and how far materials must move internally.",
+      "hint": "Think about what the ratio does not capture.",
+      "sectionId": "s4"
+    }
+  ]
+}

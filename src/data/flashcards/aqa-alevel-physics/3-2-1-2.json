@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-2-1-2",
+  "topicCode": "3.2.1.2",
+  "topicName": "Stable and unstable nuclei",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:56.556Z",
+  "cards": [
+    {
+      "id": "1xpybei",
+      "kind": "concept",
+      "front": "Why does carbon-14 decay while carbon-12 stays unchanged, even though both nuclei have six protons?",
+      "back": "The **balance of forces** inside each nucleus differs. The unstable nucleus changes by itself and gives out radiation, while the stable one never changes.",
+      "hint": "Think about what else the nucleus contains besides protons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jgh6gp",
+      "kind": "term",
+      "front": "What is the strong nuclear force?",
+      "back": "The **strong nuclear force** is an attraction between protons and neutrons that holds a nucleus together. It does not depend on charge and beats electrostatic repulsion at nuclear distances.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0890nwu",
+      "kind": "concept",
+      "front": "How does an unstable nucleus decide when to decay?",
+      "back": "It cannot be predicted. Decay is **random**, so we can only give the chance of decay in a given time. Nothing outside the nucleus triggers it.",
+      "hint": "Think about whether anything from outside the nucleus sets off the change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bvh1gs",
+      "kind": "concept",
+      "front": "How does the strong nuclear force between two neighbouring nucleons change as their separation falls from $5\\,\\mathrm{fm}$ to below $0.5\\,\\mathrm{fm}$?",
+      "back": "It is almost zero beyond about $3\\,\\mathrm{fm}$, attractive from about $3\\,\\mathrm{fm}$ down to $0.5\\,\\mathrm{fm}$, and **repulsive** below about $0.5\\,\\mathrm{fm}$, which stops the nucleus collapsing.",
+      "hint": "Start from the distance where the force first switches on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ajxfav",
+      "kind": "concept",
+      "front": "Why do very large nuclei tend to be unstable?",
+      "back": "The **electrostatic repulsion** acts between all the protons, but the strong nuclear force only reaches close neighbours, so the repulsion can outweigh the attraction.",
+      "hint": "Compare the range of the two forces.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17cic4x",
+      "kind": "concept",
+      "front": "Why do heavier stable nuclei need more neutrons than protons?",
+      "back": "Neutrons add **strong nuclear attraction** but no electrostatic repulsion. Extra neutrons therefore help balance the repulsion between protons, but only up to a limit.",
+      "hint": "Which particles carry no charge?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ypoztr",
+      "kind": "term",
+      "front": "What is an alpha particle?",
+      "back": "An **alpha particle** is a helium nucleus made of two protons and two neutrons, emitted by some unstable nuclei. It is written as ${}^{4}_{2}\\mathrm{He}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "188bj3z",
+      "kind": "example",
+      "front": "Radium-226 (nucleon number 226, proton number 88) emits one alpha particle. What are the nucleon and proton numbers of the new nucleus?",
+      "back": "Nucleon number $226-4=222$ and proton number $88-2=86$, so the new nucleus is ${}^{222}_{86}\\mathrm{Rn}$.",
+      "hint": "Work out what the alpha particle takes away from the nucleus.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n8kewm",
+      "kind": "term",
+      "front": "What is a beta-minus particle?",
+      "back": "A **beta-minus particle** is a fast electron emitted from a nucleus when a neutron changes into a proton.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1kmrzkj",
+      "kind": "process",
+      "front": "What happens inside a nucleus during beta-minus decay?",
+      "back": "A **neutron** turns into a proton, emitting a beta-minus particle and an antineutrino. The nucleon number stays the same and the proton number rises by 1.",
+      "hint": "Think about which particle changes and what it becomes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hgos9p",
+      "kind": "term",
+      "front": "What is the activity of a radioactive source and what is its unit?",
+      "back": "**Activity** is the rate of decay, the number of decays each second. Its unit is the becquerel, Bq, where $1\\,\\mathrm{Bq}=1\\,\\mathrm{s^{-1}}$.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0jhv0cf",
+      "kind": "formula",
+      "front": "What does each symbol in $A=\\frac{\\Delta N}{\\Delta t}$ represent?",
+      "back": "$A$ is the activity in becquerels, $\\Delta N$ is the number of decays, and $\\Delta t$ is the time taken in seconds.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0gmcbia",
+      "kind": "example",
+      "front": "A radioactive sample undergoes $4.5\\times10^{4}$ decays in $30\\,\\mathrm{s}$. What is its activity?",
+      "back": "$A=\\frac{4.5\\times10^{4}}{30\\,\\mathrm{s}}=1.5\\times10^{3}\\,\\mathrm{Bq}$.",
+      "hint": "Divide the number of decays by the time taken.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0wznygw",
+      "kind": "mistake",
+      "front": "Why might a counter reading be lower than the true activity of a source?",
+      "back": "A counter may detect only some of the radiation. **Activity** counts every decay in the source, whether it is detected or not.",
+      "hint": "Think about what the detector can and cannot catch.",
+      "sectionId": "s6"
+    }
+  ]
+}

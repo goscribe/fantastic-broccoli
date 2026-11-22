@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "8-3",
+  "topicCode": "8.3",
+  "topicName": "Population ecology",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:03.080Z",
+  "cards": [
+    {
+      "id": "1io0ih1",
+      "kind": "concept",
+      "front": "Why does logistic growth slow down while exponential growth keeps rising more steeply?",
+      "back": "**Logistic growth** slows because the factor $1-\\frac{N}{K}$ shrinks as population size $N$ nears carrying capacity $K$. Exponential growth assumes a constant per capita rate, so it does not slow.",
+      "hint": "Think about what the factor $1-\\frac{N}{K}$ does as N gets close to K.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xa70g1",
+      "kind": "formula",
+      "front": "Which equation gives population change over a time interval, and what does each symbol stand for?",
+      "back": "$\\Delta N=B-D+I-E$: the change equals **births** minus deaths plus immigration minus emigration, with all four counted over the same time interval.",
+      "hint": "B, D, I and E are the four processes that change population size.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jytcop",
+      "kind": "term",
+      "front": "What is carrying capacity, and what symbol is used for it?",
+      "back": "**Carrying capacity** ($K$) is the population size an environment can support over time under given conditions.",
+      "hint": "It sets the level that logistic growth levels off near.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0oyp2i0",
+      "kind": "term",
+      "front": "How is population density calculated, and how does it differ from population size?",
+      "back": "**Population density** is the number of individuals per unit area or volume. Size only counts individuals, while density also accounts for the space they occupy.",
+      "hint": "Compare a count with a count per unit of space.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1we5yb4",
+      "kind": "example",
+      "front": "A population starts at 120 individuals. In one year, 30 are born, 12 die, 8 immigrate and 6 emigrate. What is its ending size?",
+      "back": "**140 individuals**. The change is $30-12+8-6=20$, and adding that to the start gives $120+20=140$.",
+      "hint": "Work out the change first, then add it to the starting size.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xbotx2",
+      "kind": "example",
+      "front": "A population of 200 plants lives in 50 square meters. What is its population density?",
+      "back": "**4 plants per square meter**, found by dividing 200 individuals by 50 square meters.",
+      "hint": "Density is the number of individuals divided by the area.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kvzvfa",
+      "kind": "mistake",
+      "front": "A student counts immigrants as new births. What is the error?",
+      "back": "**Immigration** is individuals entering the area, not new individuals produced. Immigration and emigration describe movement, not births or deaths.",
+      "hint": "Ask whether the individuals were born or moved in.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oj0rof",
+      "kind": "mistake",
+      "front": "Two populations have the same size and density. Must they have the same dispersion pattern?",
+      "back": "**No**. Dispersion describes how individuals are spaced within the area, so populations with equal size and density can still differ in pattern.",
+      "hint": "Size and density do not describe spacing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07l2hgx",
+      "kind": "concept",
+      "front": "Why does a constant positive per capita growth rate produce a J-shaped curve?",
+      "back": "As population size rises, more individuals can reproduce, so the number added per unit time grows. The curve gets progressively steeper.",
+      "hint": "Consider how the number of breeding individuals changes as N rises.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jv600l",
+      "kind": "formula",
+      "front": "In the exponential model $\\frac{dN}{dt}=rN$, what do $N$, $r$ and $\\frac{dN}{dt}$ represent?",
+      "back": "$N$ is population size, $r$ is the **per capita growth rate**, and $\\frac{dN}{dt}$ is the rate of change in population size. A positive $r$ gives a J-shaped curve.",
+      "hint": "Look at how r links the growth rate to the size of the population.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1g0kvsv",
+      "kind": "formula",
+      "front": "In the logistic model $\\frac{dN}{dt}=rN(1-\\frac{N}{K})$, what does the factor $1-\\frac{N}{K}$ do?",
+      "back": "It **reduces growth** as N approaches K. At $N=K$ the factor makes net growth zero.",
+      "hint": "Substitute N equal to K and see what the factor gives.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05okamr",
+      "kind": "mistake",
+      "front": "Does a logistic population always stay exactly at carrying capacity?",
+      "back": "**No**. Real populations may fluctuate around K, and changes in environmental conditions can change the carrying capacity itself.",
+      "hint": "Think about what happens in real environments over time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d54gvu",
+      "kind": "mistake",
+      "front": "Does the exponential model mean a population can grow without limit forever?",
+      "back": "**No**. It assumes resources do not limit growth only during the period considered. Births, deaths and movement still determine the actual change in size.",
+      "hint": "Consider the assumptions behind the model.",
+      "sectionId": "s3"
+    }
+  ]
+}

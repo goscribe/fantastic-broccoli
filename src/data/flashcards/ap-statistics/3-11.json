@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-11",
+  "topicCode": "3.11",
+  "topicName": "Claims from a difference interval",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:19.433Z",
+  "cards": [
+    {
+      "id": "1uqn9uk",
+      "kind": "concept",
+      "front": "Why do we check whether zero lies inside a confidence interval for $p_1-p_2$?",
+      "back": "**Zero** is the value that would mean the two population proportions are equal. Checking whether zero is a plausible value tests whether equality fits the data.",
+      "hint": "What does a difference of zero mean for the two groups?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kh9959",
+      "kind": "concept",
+      "front": "What does it mean if zero falls outside a 95% confidence interval for $p_1-p_2$?",
+      "back": "There is **convincing evidence** that the population proportions differ. Every plausible value has the same sign, which gives the direction.",
+      "hint": "Zero is not a plausible value in this case.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0c549ct",
+      "kind": "mistake",
+      "front": "A 95% interval for $p_1-p_2$ contains zero. Does this prove the two population proportions are equal?",
+      "back": "No. Zero is only one plausible value among many, so the data give **no convincing evidence** of a difference. That is not proof of equality.",
+      "hint": "Think about how many values sit inside the interval.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "062v62a",
+      "kind": "term",
+      "front": "What is a plausible value in a confidence interval?",
+      "back": "A **plausible value** is a number inside the interval that is consistent with the sample data as a possible value of the parameter."
+    },
+    {
+      "id": "0jigus0",
+      "kind": "term",
+      "front": "What is convincing evidence of a difference?",
+      "back": "**Convincing evidence** is evidence strong enough that sampling variation alone is an unlikely explanation for the observed result."
+    },
+    {
+      "id": "0k1uswk",
+      "kind": "process",
+      "front": "What three parts should a complete conclusion about a difference interval include?",
+      "back": "**Evidence** (zero inside or outside), **conclusion** (convincing evidence of a difference or not), and **context** (name the two populations and give the direction if zero is outside).",
+      "hint": "Start with where zero falls.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ucjys7",
+      "kind": "example",
+      "front": "A 95% interval for $p_A-p_B$ is $(0.053,\\,0.247)$. Is there convincing evidence of a difference, and which proportion is larger?",
+      "back": "Yes. Zero is below the lower endpoint, so **$p_A>p_B$**. Plausible differences run from about 5 to 25 percentage points.",
+      "hint": "Locate zero relative to both endpoints.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ni6cgl",
+      "kind": "concept",
+      "front": "Beyond whether zero is excluded, what do the endpoints of a difference interval tell us?",
+      "back": "They bound how large the **difference** might be. A lower endpoint close to zero means the true gap could be very small.",
+      "hint": "Think about the range of plausible differences.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00yajnq",
+      "kind": "mistake",
+      "front": "Why is it wrong to say the interval $(0.01,\\,0.31)$ for $p_A-p_B$ shows a large difference?",
+      "back": "The lower endpoint 0.01 means the **true difference** could be tiny. Zero is excluded, but the interval allows both very small and large differences.",
+      "hint": "Look closely at the lower endpoint.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1osbf05",
+      "kind": "mistake",
+      "front": "An interval for $p_1-p_2$ is $(-0.20,\\,-0.06)$. Which population proportion is larger?",
+      "back": "**$p_2$** is larger. Zero is outside and every plausible value is negative, so $p_1<p_2$.",
+      "hint": "Check the sign and the order of subtraction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1f3l2ky",
+      "kind": "concept",
+      "front": "Why must a conclusion state the confidence level used?",
+      "back": "**Higher** confidence levels give wider intervals, so zero may move inside the interval. The same data can lead to a different conclusion at a different level.",
+      "hint": "What happens to the width as confidence goes up?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ghoryv",
+      "kind": "concept",
+      "front": "How does a 95% interval that excludes zero relate to a two-sided test?",
+      "back": "It matches rejecting equal proportions at the **5%** level. The match is close, not exact, because the test pools both samples to estimate one common proportion.",
+      "hint": "Think about significance level $1-C$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01rpod2",
+      "kind": "mistake",
+      "front": "Should a conclusion say that the interval proves the proportions differ?",
+      "back": "No. Use **convincing evidence** instead. A sample cannot prove a claim about a population.",
+      "hint": "Consider what a sample can and cannot show.",
+      "sectionId": "s5"
+    }
+  ]
+}

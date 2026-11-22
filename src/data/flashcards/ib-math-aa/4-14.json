@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-14",
+  "topicCode": "4.14",
+  "topicName": "Continuous random variables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:52.671Z",
+  "cards": [
+    {
+      "id": "0ghr9v6",
+      "kind": "concept",
+      "front": "How do you find the probability that a continuous random variable lies between two values a and b?",
+      "back": "Find the **area** under the density curve between a and b: $P(a<X<b)=\\int_a^b f(x)\\,dx$. The height $f(x)$ itself is not a probability.",
+      "hint": "Think about what a probability over an interval looks like on the graph.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12q36xj",
+      "kind": "formula",
+      "front": "What is the formula for the expected value E(X) of a continuous random variable, and what does it represent?",
+      "back": "$E(X)=\\mu=\\int_{-\\infty}^{\\infty}x\\,f(x)\\,dx$. It is the **long-run average** of many observations, and it need not be a likely value.",
+      "hint": "Multiply each value of x by its density, then integrate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0uuop20",
+      "kind": "formula",
+      "front": "What is the convenient formula for the variance of a continuous random variable, and how do you find E(X squared)?",
+      "back": "$\\mathrm{Var}(X)=E(X^2)-[E(X)]^2$, where $E(X^2)=\\int x^2 f(x)\\,dx$. Variance is **never negative** because it averages squared distances.",
+      "hint": "Integrate x squared times f(x), then subtract the square of the mean.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00lfj5d",
+      "kind": "term",
+      "front": "What is a continuous random variable?",
+      "back": "A random variable that can take **any value in an interval**, not just whole numbers. An example is a bus's waiting time within a ten-minute window.",
+      "hint": "Contrast it with a variable that can only take whole-number values.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1m4law2",
+      "kind": "concept",
+      "front": "What two conditions must a function f(x) satisfy to be a probability density function?",
+      "back": "First, $f(x)\\ge0$ for all $x$, because negative heights would give negative probabilities. Second, the **total area** under the curve is 1.",
+      "hint": "One condition is about heights, the other about area.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ab65fj",
+      "kind": "concept",
+      "front": "Why is P(X = a) equal to 0 for a continuous random variable and any single value a?",
+      "back": "A single value has **no width**, so the area under the density curve above it is zero. This is why $P(X<a)=P(X\\le a)$.",
+      "hint": "Think about the area of a line with no width.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01i4fxi",
+      "kind": "mistake",
+      "front": "A student says that if f(x) = 1.5 at some point, the probability at that point is 1.5. What is wrong?",
+      "back": "$f(x)$ is a **height**, not a probability, and it can exceed 1 over a narrow interval. Only areas under the curve give probabilities.",
+      "hint": "What does the vertical axis of a density curve measure?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18ar7l8",
+      "kind": "example",
+      "front": "For $f(x)=kx$ on $0\\le x\\le4$ and zero otherwise, what is the value of k?",
+      "back": "$k=\\frac{1}{8}$. The total area must be 1, so $\\int_0^4 kx\\,dx=8k=1$.",
+      "hint": "The total area under a valid density must equal 1.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16sx87u",
+      "kind": "example",
+      "front": "For $f(x)=\\frac{x}{8}$ on $0\\le x\\le4$, what is E(X)?",
+      "back": "$E(X)=\\frac{8}{3}\\approx2.67$, from $\\int_0^4 \\frac{x^2}{8}\\,dx=\\left[\\frac{x^3}{24}\\right]_0^4$.",
+      "hint": "Integrate x times f(x) over the interval where f is not zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tystn8",
+      "kind": "mistake",
+      "front": "Why is E(X squared) not the same as [E(X)] squared?",
+      "back": "$E(X^2)$ is the **average of the squared values**, found by integrating $x^2f(x)$. $[E(X)]^2$ is the square of the mean. For $f(x)=\\frac{x}{8}$ they are 8 and about 7.11.",
+      "hint": "Which one squares before averaging, and which averages before squaring?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bhn24i",
+      "kind": "example",
+      "front": "For $f(x)=\\frac{x}{8}$ on $0\\le x\\le4$, with $E(X)=\\frac{8}{3}$, what is Var(X)?",
+      "back": "$\\mathrm{Var}(X)=\\frac{8}{9}\\approx0.889$, since $E(X^2)=8$ and $8-\\frac{64}{9}=\\frac{8}{9}$.",
+      "hint": "Find E(X squared) first, then subtract the square of the mean.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00wzp6i",
+      "kind": "term",
+      "front": "What is the mode of a continuous random variable?",
+      "back": "The **value of x** at which f(x) is greatest. Check turning points where $f'(x)=0$ and also compare the values at the ends of the interval.",
+      "hint": "It is about the height of the curve, not the area.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hdllj5",
+      "kind": "process",
+      "front": "How do you find the median m of a continuous random variable?",
+      "back": "Solve $\\int_{-\\infty}^{m}f(x)\\,dx=\\frac{1}{2}$, starting the integral where f begins, so that **half the area** lies below m.",
+      "hint": "Set the area to the left of m equal to a fraction.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vdim8r",
+      "kind": "concept",
+      "front": "For $f(x)=\\frac{x}{8}$ on $0\\le x\\le4$, how do the mean, median and mode compare, and why?",
+      "back": "Mean $\\approx2.67$ is below median $\\approx2.83$, which is below mode 4. The **long left tail** pulls the mean down; a long right tail would reverse the order.",
+      "hint": "Consider which side of the distribution has the long tail.",
+      "sectionId": "s5"
+    }
+  ]
+}

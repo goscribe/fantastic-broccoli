@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "2-4",
+  "topicCode": "2.4",
+  "topicName": "Newton's first law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:28.484Z",
+  "cards": [
+    {
+      "id": "1erli41",
+      "kind": "concept",
+      "front": "What does Newton's first law say about an object's velocity?",
+      "back": "An object keeps its **velocity** unless a nonzero net force acts on it. A resting object stays at rest, and a moving object keeps the same speed and direction.",
+      "hint": "Think of a hockey puck gliding on smooth ice.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1p564p4",
+      "kind": "term",
+      "front": "What is inertia?",
+      "back": "**Inertia** is an object's resistance to changes in its velocity. The more mass an object has, the more inertia it has.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16sxcp9",
+      "kind": "concept",
+      "front": "What determines whether an object's velocity changes?",
+      "back": "The **net force**, the vector sum of all forces on it. A zero net force keeps velocity constant. A nonzero net force changes speed, direction, or both.",
+      "hint": "Add all the forces as vectors first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1w1nrvz",
+      "kind": "term",
+      "front": "What is mass, and what unit is it measured in?",
+      "back": "**Mass** is a scalar measure of an object's inertia, in kilograms (kg). It stays the same wherever the object is.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fij5z6",
+      "kind": "term",
+      "front": "What are balanced forces?",
+      "back": "**Balanced forces** are forces whose vector sum is zero. The net force is zero, so the velocity stays constant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sjt1sd",
+      "kind": "term",
+      "front": "What are unbalanced forces?",
+      "back": "**Unbalanced forces** are forces whose vector sum is not zero. The object accelerates along the **net force**, so its velocity changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r7onbt",
+      "kind": "process",
+      "front": "What are the steps to predict an object's motion from the forces on it?",
+      "back": "1. Find the **net force**. 2. Compare it with the starting motion. Zero net force: rest stays at rest, and motion stays at constant velocity. Nonzero net force: a body at rest starts moving along the net force, and a moving body's velocity changes.",
+      "hint": "Always find the net force before anything else.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r6l64a",
+      "kind": "formula",
+      "front": "Which equation applies to an object moving at constant velocity along a line?",
+      "back": "$\\sum F = 0$, where $\\sum F$ is the net force along the line of motion, in newtons (N). The forces in each direction cancel.",
+      "hint": "Constant velocity means no change in velocity.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1utm9q5",
+      "kind": "example",
+      "front": "A car at constant velocity on a level road has a 1800 N forward engine force. What is the total resistive force?",
+      "back": "**1800 N**, directed backward. Constant velocity means the net force is zero, so the resistive forces cancel the engine force.",
+      "hint": "Take forward as positive and set the sum to zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13e9kk0",
+      "kind": "example",
+      "front": "A crate slides at constant velocity when pushed horizontally with 80 N. What is the friction force?",
+      "back": "**80 N**, directed opposite to the push. Constant velocity means the net force is zero, so friction must cancel the push.",
+      "hint": "Constant velocity means zero net force.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12y778v",
+      "kind": "mistake",
+      "front": "Does an object need a continuing force to keep moving?",
+      "back": "**No.** A net force is needed only to change velocity. With zero net force, an object keeps moving at constant velocity.",
+      "hint": "Consider the puck on ice with almost no resistance.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10340v7",
+      "kind": "concept",
+      "front": "Why does an unbelted passenger lurch forward when a car brakes suddenly?",
+      "back": "**Inertia**: the braking force slows the car, but nothing pushes the passenger forward, so they keep their earlier velocity until another force, such as the dashboard, acts.",
+      "hint": "Do not say a force carries the passenger forward.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vr0zqp",
+      "kind": "concept",
+      "front": "A puck slides on frictionless ice. What does it do, and why?",
+      "back": "It keeps moving in a straight line at constant speed. The net force on it is zero, so its velocity does not change.",
+      "hint": "Use the net force and Newton's first law.",
+      "sectionId": "s1"
+    }
+  ]
+}

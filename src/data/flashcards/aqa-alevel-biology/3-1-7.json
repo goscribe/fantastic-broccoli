@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-1-7",
+  "topicCode": "3.1.7",
+  "topicName": "Water",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:06.177Z",
+  "cards": [
+    {
+      "id": "1awxcp0",
+      "kind": "concept",
+      "front": "Why is a water molecule, $\\text{H}_2\\text{O}$, described as a polar molecule?",
+      "back": "Oxygen attracts the shared electrons more strongly than hydrogen, so the **oxygen** end is slightly negative and the hydrogens are slightly positive. This uneven charge makes water polar.",
+      "hint": "Think about the two atoms in each covalent bond and which one pulls harder.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0thchho",
+      "kind": "term",
+      "front": "What is a hydrogen bond?",
+      "back": "An attraction between a slightly positive **hydrogen** on one molecule and a slightly negative atom, usually oxygen, on a neighbouring molecule. Each is weak, but many together have a strong effect.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00d49b4",
+      "kind": "concept",
+      "front": "Why does water make such a good solvent for ions and polar substances?",
+      "back": "Its charged regions attract ions and other polar molecules. Water molecules **surround** these particles, helping them separate and stay dissolved so they can be transported or react.",
+      "hint": "Link this to the polarity you met earlier.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qnrmbo",
+      "kind": "mistake",
+      "front": "A student says covalent bonds join neighbouring water molecules together. What is wrong with this?",
+      "back": "Covalent bonds join the atoms **within** each water molecule. Hydrogen bonds are the attractions that join neighbouring water molecules.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0g160mt",
+      "kind": "concept",
+      "front": "Which reactions use water as a reactant and which produce it?",
+      "back": "Water is a **metabolite**: photosynthesis uses it as a reactant, while aerobic respiration produces it.",
+      "hint": "Think about the inputs and outputs of each process.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nhn6xy",
+      "kind": "process",
+      "front": "How does water take part in hydrolysis during digestion?",
+      "back": "Water is used to **break** a chemical bond, splitting a larger molecule into smaller ones. Condensation does the reverse, forming a bond and releasing water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fcjbyg",
+      "kind": "term",
+      "front": "What is cohesion?",
+      "back": "Attraction between molecules of the **same** substance. In water it comes from hydrogen bonds between neighbouring water molecules.",
+      "hint": "Contrast it with adhesion, which involves a different material.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t3svl8",
+      "kind": "concept",
+      "front": "How does cohesion help water move up through plant xylem?",
+      "back": "Hydrogen bonds keep water in a continuous **column**. Evaporation from leaves pulls on this column, drawing water upwards without it readily breaking.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03887c9",
+      "kind": "term",
+      "front": "What is surface tension?",
+      "back": "The resistance of a liquid surface to disruption, caused by **attraction** between its molecules pulling surface molecules towards their neighbours.",
+      "hint": "Think about what cohesion does at the surface.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0im5wca",
+      "kind": "term",
+      "front": "What is specific heat capacity?",
+      "back": "The energy needed to raise the temperature of $1\\,\\text{kg}$ of a substance by $1\\,^{\\circ}\\text{C}$. Water has a **high** value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r1dyh6",
+      "kind": "concept",
+      "front": "Why does water's high specific heat capacity help organisms resist temperature change?",
+      "back": "Much incoming energy is used to **disrupt hydrogen bonds** before water molecules move faster, so the temperature rises slowly.",
+      "hint": "Think about where incoming energy goes first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n10k6i",
+      "kind": "term",
+      "front": "What is latent heat of vaporisation?",
+      "back": "The energy needed to change a given mass of liquid into vapour **without changing its temperature**.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pj6jxs",
+      "kind": "concept",
+      "front": "Why does ice float on liquid water?",
+      "back": "Ice has an **open** structure held by hydrogen bonds, making it less dense than liquid water. It floats and insulates the water below.",
+      "hint": "Compare how the molecules are packed in ice and in liquid water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xh5x1u",
+      "kind": "concept",
+      "front": "Why is water's near incompressibility useful to organisms?",
+      "back": "Water is largely incompressible, so **fluid-filled** structures can provide support, such as the turgid contents of plant cells.",
+      "sectionId": "s4"
+    }
+  ]
+}

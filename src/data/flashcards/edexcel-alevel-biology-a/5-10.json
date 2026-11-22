@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-10",
+  "topicCode": "5.10",
+  "topicName": "Primary productivity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:14.514Z",
+  "cards": [
+    {
+      "id": "1g5917q",
+      "kind": "term",
+      "front": "What is primary productivity?",
+      "back": "**Primary productivity** is the rate at which producers make organic molecules from inorganic substances using light energy, given per unit area.",
+      "hint": "Think about who starts the food for every other organism, and how fast it happens.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lh9bhg",
+      "kind": "formula",
+      "front": "Which symbol equation links net primary productivity to gross primary productivity and respiratory loss?",
+      "back": "$\\mathrm{NPP}=\\mathrm{GPP}-R$, where $R$ is the respiratory loss, in units such as $\\mathrm{kJ\\,m^{-2}\\,year^{-1}}$. NPP is the energy left in new plant material after respiration.",
+      "hint": "Start from the energy fixed in photosynthesis, then consider what the plant spends.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pu4f45",
+      "kind": "concept",
+      "front": "Why can improving one condition fail to raise productivity?",
+      "back": "A **limiting factor** is the variable in shortest supply. It sets the rate even when other conditions are favourable, so improving anything else makes no difference until it is raised.",
+      "hint": "Think about a chain that is only as strong as its weakest link.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00fp9in",
+      "kind": "example",
+      "front": "A woodland has a GPP of $12\\,000\\,\\mathrm{kJ\\,m^{-2}\\,year^{-1}}$ and respiratory loss of $5400\\,\\mathrm{kJ\\,m^{-2}\\,year^{-1}}$. What is its NPP?",
+      "back": "$6600\\,\\mathrm{kJ\\,m^{-2}\\,year^{-1}}$, from $12\\,000-5400=6600$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11z4lgk",
+      "kind": "concept",
+      "front": "Why is dry mass, rather than fresh mass, used to estimate biomass?",
+      "back": "Plants contain varying amounts of water. **Dry mass**, the mass after drying to a constant value, removes this variation and gives a fairer measure of organic material.",
+      "hint": "Consider how much water two plants of the same species might hold.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vhtfyc",
+      "kind": "process",
+      "front": "What are the steps for finding the energy content of dry plant material?",
+      "back": "1) Burn a known dry mass in a **calorimeter**. 2) Measure the temperature rise of a known mass of water. 3) Calculate the energy released. 4) Divide by the dry mass to get energy per gram.",
+      "hint": "Start with what happens to the sample inside the apparatus.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07vz514",
+      "kind": "example",
+      "front": "Burning 2.50 g of dry plant material releases 42.5 kJ of heat. What is the energy released per gram?",
+      "back": "$17.0\\,\\mathrm{kJ\\,g^{-1}}$, from $\\frac{42.5}{2.50}=17.0$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vhexp6",
+      "kind": "term",
+      "front": "What is gross primary productivity?",
+      "back": "The **total** chemical energy fixed by producers in photosynthesis, per unit area per unit time.",
+      "hint": "Compare it with what is left after the producers respire.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gvgs49",
+      "kind": "concept",
+      "front": "Why is net primary productivity the energy available to consumers?",
+      "back": "NPP is the energy stored in new plant tissue after respiratory loss, so organisms that feed on plants can take it in.",
+      "hint": "Think about what is actually built into plant material.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fvj1d4",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that higher temperature always raises productivity?",
+      "back": "Above the best temperature, **enzymes are denatured** and productivity falls. Warmth only raises productivity up to that optimum.",
+      "hint": "Think about what happens to enzymes when they get too hot.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fquqf8",
+      "kind": "concept",
+      "front": "How does a water shortage reduce primary productivity?",
+      "back": "Leaf **pores close**, so less carbon dioxide enters the leaf. Less carbon is fixed in photosynthesis, so productivity falls.",
+      "hint": "Trace the path from the soil, through the leaf, to carbon dioxide uptake.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xrdx5o",
+      "kind": "concept",
+      "front": "Which mineral ion does a producer need to make amino acids?",
+      "back": "**Nitrate**, which supplies the nitrogen needed to build amino acids.",
+      "hint": "Think about which element all amino acids contain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1c3ptqk",
+      "kind": "concept",
+      "front": "Why is productivity high in tropical rainforests but low in polar regions?",
+      "back": "Rainforests have warmth, plentiful water and strong light for much of the year. Polar regions are cold and have a short growing season.",
+      "hint": "Compare the temperature, water and season length of the two places.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "176aa9h",
+      "kind": "concept",
+      "front": "Why does productivity in a temperate habitat usually peak in spring and summer?",
+      "back": "Days are long and leaves are present, so plants can capture more light for photosynthesis.",
+      "hint": "Compare winter with summer for light and plant cover.",
+      "sectionId": "s5"
+    }
+  ]
+}

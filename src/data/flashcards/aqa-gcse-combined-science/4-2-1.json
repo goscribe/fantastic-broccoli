@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-2-1",
+  "topicCode": "4.2.1",
+  "topicName": "Principles of organisation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:18.920Z",
+  "cards": [
+    {
+      "id": "1uc0r2o",
+      "kind": "concept",
+      "front": "What is the order of the levels of organisation in a multicellular organism, starting from the smallest unit?",
+      "back": "**Cells** form tissues, tissues form organs, organs form organ systems, and organ systems work together in the organism.",
+      "hint": "Think about how each level is built from the level below it."
+    },
+    {
+      "id": "0ywo0yu",
+      "kind": "term",
+      "front": "What is a tissue?",
+      "back": "A **tissue** is a group of cells with a similar structure and function that work together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15bkvzq",
+      "kind": "concept",
+      "front": "How does a specialised cell's structure relate to its job?",
+      "back": "Its features help it perform a particular function, so its **structure and function** are closely linked.",
+      "hint": "Think about a red blood cell or a sperm cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ujdh8u",
+      "kind": "term",
+      "front": "What is an organ?",
+      "back": "An **organ** is a group of different tissues working together to perform a function, such as the stomach digesting food.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19h2983",
+      "kind": "term",
+      "front": "What is an organ system?",
+      "back": "An **organ system** is a group of organs working together for a major function, such as the digestive system.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01dr9b7",
+      "kind": "term",
+      "front": "What is cell differentiation?",
+      "back": "The **process** by which a cell becomes specialised, developing structures suited to its role.",
+      "hint": "Think about what happens to a cell as it takes on a particular job.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qtb0u2",
+      "kind": "concept",
+      "front": "How are two features of a red blood cell suited to carrying oxygen?",
+      "back": "Its shape gives a **large surface area** for oxygen exchange, and it contains haemoglobin, which binds oxygen.",
+      "hint": "Think about the cell's outline, then about what fills its inside.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14k1dhx",
+      "kind": "concept",
+      "front": "Why does a sperm cell have many mitochondria?",
+      "back": "To **release energy** for movement, which helps its tail swim towards an egg.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0602lc8",
+      "kind": "mistake",
+      "front": "What is wrong with thinking an organ is made from just one type of tissue?",
+      "back": "An **organ** contains several different tissues working together, such as muscle tissue and tissues that line it or make digestive juices.",
+      "hint": "Think about what the stomach contains.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nill7c",
+      "kind": "concept",
+      "front": "How does the heart fit into the levels of organisation?",
+      "back": "Muscle tissue and other tissues form the **heart**, an organ that pumps blood and works with blood vessels in the circulatory system.",
+      "hint": "Start with the tissue at the bottom of the chain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1etttsk",
+      "kind": "term",
+      "front": "What is muscle tissue?",
+      "back": "A **tissue** of cells that contract together to produce movement, helping an organ move or change shape.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04q547z",
+      "kind": "mistake",
+      "front": "Why can a tissue contain more than one type of cell?",
+      "back": "Tissues can contain several cell types; what matters most is that the cells **work together** to perform a function.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bv92k2",
+      "kind": "concept",
+      "front": "Why does organisation let multicellular organisms do things a single cell cannot?",
+      "back": "Many cells can contribute to a task that one cell could not do alone, and different parts can do different jobs.",
+      "hint": "Think about what one cell can manage on its own.",
+      "sectionId": "s1"
+    }
+  ]
+}

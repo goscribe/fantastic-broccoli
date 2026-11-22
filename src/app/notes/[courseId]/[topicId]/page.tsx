@@ -16,6 +16,7 @@ import { coursePath, resolveSegment, topicPath, unitPath } from "@/lib/notes-pub
 import { crumbsFor, isTopicIndexable, topicDescription, topicTitle, unitTitleSeo } from "@/lib/notes-public/seo";
 import { isLocked, lockedCountLabel } from "@/lib/notes-public/gate";
 import { LockedCount } from "@/components/notes-public/locked-count";
+import { flashcardSet } from "@/lib/notes-public/flashcards-server";
 
 export const revalidate = 3600;
 
@@ -84,7 +85,9 @@ export default async function NotesTopicPage({ params }: Params) {
   if (match.kind === "unit") return <UnitView course={course} unit={match.unit} />;
   const data = await getTopic(course.id, match.topic.id);
   if (!data) notFound();
-  return <TopicView course={course} unit={match.unit} data={data} />;
+  // Only the free cards go into the cached HTML; the rest load after sign-in.
+  const flashcards = await flashcardSet(course.id, data.topic.id, false);
+  return <TopicView course={course} unit={match.unit} data={data} flashcards={flashcards} />;
 }
 
 /* ------------------------------- Unit ------------------------------- */

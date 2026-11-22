@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "r2-3",
+  "topicCode": "R2.3",
+  "topicName": "Extent of chemical change (equilibrium)",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:29.159Z",
+  "cards": [
+    {
+      "id": "03m47zc",
+      "kind": "concept",
+      "front": "What is dynamic equilibrium, and why can concentrations stay constant while reactions still happen?",
+      "back": "**Dynamic equilibrium** is when forward and reverse reactions run at equal rates in a closed system. Each substance forms as fast as it is used up, so its concentration stays constant.",
+      "hint": "Think about what a closed system prevents.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lf3n5h",
+      "kind": "formula",
+      "front": "Write the Kc expression for aA + bB ⇌ cC + dD, and say what the square brackets and powers mean.",
+      "back": "$K_c=\\frac{[C]^c[D]^d}{[A]^a[B]^b}$. Square brackets mean **equilibrium concentrations**, and the powers are the coefficients from the balanced equation.",
+      "hint": "Products go on the top line.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dn9tim",
+      "kind": "concept",
+      "front": "How does Le Chatelier's principle predict the response of an equilibrium to a change?",
+      "back": "The system **shifts** in the direction that opposes the imposed change. Adding a reactant favours its consumption; removing a product favours its replacement.",
+      "hint": "Ask which direction undoes the change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0swct3c",
+      "kind": "term",
+      "front": "What is a closed system in the context of equilibrium?",
+      "back": "A **closed system** allows energy transfer but does not allow reactants or products to enter or leave.",
+      "hint": "Think of a sealed container.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15su7nt",
+      "kind": "mistake",
+      "front": "A student says equal reaction rates at equilibrium mean equal amounts of reactants and products. Why is this wrong?",
+      "back": "Equal **rates** do not mean equal **amounts**. At equilibrium, concentrations stay constant, but they do not have to be equal to each other.",
+      "hint": "Rate and concentration are different things.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1twhwep",
+      "kind": "concept",
+      "front": "How does heating an equilibrium mixture affect its position when the forward reaction is exothermic?",
+      "back": "Heating favours the **endothermic** direction, so the equilibrium shifts towards the reactants.",
+      "hint": "Which direction is the endothermic one?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sbzm8y",
+      "kind": "concept",
+      "front": "At constant temperature, how does increasing pressure shift an equilibrium involving gases?",
+      "back": "It shifts towards the side with **fewer gas molecules**. If both sides have equal numbers of gas molecules, pressure has no effect on position.",
+      "hint": "Count only gaseous coefficients, not solids or liquids.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wxuyhp",
+      "kind": "concept",
+      "front": "What effect does a catalyst have on the position of an equilibrium?",
+      "back": "A catalyst speeds up both directions, so it does **not** change the **equilibrium position**. It only helps the mixture reach equilibrium sooner.",
+      "hint": "Which reactions does it speed up?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lfeiwe",
+      "kind": "term",
+      "front": "What is the exothermic direction of a reversible reaction?",
+      "back": "The **exothermic direction** is the direction that releases energy to the surroundings as heat.",
+      "hint": "Think about what happens to the surroundings.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c5v2ww",
+      "kind": "concept",
+      "front": "Are pure solids and liquids included in a Kc expression?",
+      "back": "No. **Pure solids and liquids** are omitted because their concentrations do not change appreciably during the reaction.",
+      "hint": "Can their concentration actually change?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bsbzjc",
+      "kind": "process",
+      "front": "What are the steps to find equilibrium concentrations from initial concentrations and one equilibrium value?",
+      "back": "1) Find the change in the product from its equilibrium value. 2) Use the coefficients to find each reactant's change. 3) Subtract from reactants and add to products. 4) Substitute into Kc.",
+      "hint": "Start with the product's change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0906l86",
+      "kind": "example",
+      "front": "For H2 + I2 ⇌ 2HI, [H2] = [I2] = 1.00 and [HI] = 0 mol dm^-3 initially. At equilibrium [HI] = 1.20 mol dm^-3. What is Kc?",
+      "back": "$K_c=9.00$ (no units). Each reactant falls by 0.60 to 0.40 mol dm^-3, so $K_c=\\frac{(1.20)^2}{(0.40)(0.40)}=9.00$.",
+      "hint": "Halve the rise in HI for each reactant's fall.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06a1sap",
+      "kind": "example",
+      "front": "For H2 + I2 ⇌ 2HI, both reactants start at 0.80 mol dm^-3 and [HI] reaches 1.00 mol dm^-3 at equilibrium. What are [H2] and Kc?",
+      "back": "[H2] = [I2] = 0.30 mol dm^-3 and $K_c=11.1$. Each reactant falls by 0.50, so $K_c=\\frac{(1.00)^2}{(0.30)(0.30)}=11.1$.",
+      "hint": "Each reactant is used at half the rate HI forms.",
+      "sectionId": "s4"
+    }
+  ]
+}

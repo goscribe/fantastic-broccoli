@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "6-1-1",
+  "topicCode": "6.1.1",
+  "topicName": "Cellular control",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:24.979Z",
+  "cards": [
+    {
+      "id": "08i0vwn",
+      "kind": "process",
+      "front": "Describe the two stages of gene expression, in order.",
+      "back": "**Transcription** copies a gene into mRNA using one DNA strand as a template, in the nucleus of a eukaryotic cell. **Translation** then reads the mRNA at a ribosome to build a polypeptide.",
+      "hint": "Start with the molecule the cell makes first from the gene.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0asd4l9",
+      "kind": "concept",
+      "front": "How can a single base substitution have three different effects on a polypeptide?",
+      "back": "The new codon may code for the **same amino acid** (silent), a **different amino acid** (missense), or a **stop codon** (nonsense), which ends translation early and gives a shorter polypeptide.",
+      "hint": "Think about what the new codon codes for.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12mr2s5",
+      "kind": "concept",
+      "front": "Why does deleting one base usually have a much bigger effect than swapping one base?",
+      "back": "Codons are read in **triplets**, so deleting one base shifts the reading frame and every later codon changes. A substitution changes at most one codon.",
+      "hint": "Count how many codons each change alters.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0o5tlec",
+      "kind": "term",
+      "front": "What is a gene?",
+      "back": "A **gene** is a sequence of DNA that influences a characteristic. Many genes code for a polypeptide.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16ms0am",
+      "kind": "term",
+      "front": "What is a codon?",
+      "back": "A **codon** is a triplet of bases in mRNA that specifies one amino acid or a stop signal.",
+      "hint": "Think about how many bases are read at a time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0h10fl0",
+      "kind": "concept",
+      "front": "What do tRNA molecules do during translation?",
+      "back": "tRNA carries an **amino acid** to the ribosome. Its anticodon is complementary to the mRNA codon, and peptide bonds then join the amino acids.",
+      "hint": "Think about how each amino acid is matched to the mRNA.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mv9733",
+      "kind": "mistake",
+      "front": "A student says a mutation in any body cell will be passed on to the next generation. What is wrong?",
+      "back": "Only a mutation in a **gamete** may be inherited. A mutation in a body cell is not passed on to offspring.",
+      "hint": "Think about which cells form the next generation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08z7ww1",
+      "kind": "example",
+      "front": "In sickle cell disease, what does one base substitution change in the haemoglobin polypeptide?",
+      "back": "It changes **one amino acid**, which alters the properties of the haemoglobin molecule.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dv21vh",
+      "kind": "concept",
+      "front": "What happens to the polypeptide if three bases are added or removed instead of one?",
+      "back": "The **reading frame** is kept, so only one amino acid is added or removed and the rest of the sequence stays the same.",
+      "hint": "Compare how many codons are affected with a frameshift.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1dqu0s2",
+      "kind": "term",
+      "front": "What is a transcription factor?",
+      "back": "A **transcription factor** is a protein that binds to DNA near a gene and increases or decreases its transcription.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0vellcv",
+      "kind": "concept",
+      "front": "How does lactose switch on the lac operon genes in bacteria?",
+      "back": "Lactose binds to the **repressor** and changes its shape. The repressor then releases the DNA, so the genes can be transcribed.",
+      "hint": "Think about what the repressor does when nothing else is bound to it.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ybs0ph",
+      "kind": "term",
+      "front": "What is a homeobox gene?",
+      "back": "A **regulatory gene** with a homeobox sequence of about $180\\,\\text{bp}$. Its product binds DNA and switches on other genes that control development.",
+      "hint": "Compare it with the regulatory genes you have just met.",
+      "sectionId": "s7"
+    },
+    {
+      "id": "0f5kbqk",
+      "kind": "concept",
+      "front": "How do different homeobox genes produce different structures along the head-to-tail axis?",
+      "back": "Each homeobox gene is **expressed in a particular part** of the embryo, so each part develops its own structures.",
+      "hint": "Think about where along the body each gene is switched on.",
+      "sectionId": "s7"
+    },
+    {
+      "id": "0ridndu",
+      "kind": "term",
+      "front": "What is apoptosis?",
+      "back": "**Apoptosis** is programmed cell death, in which a cell is dismantled in a controlled way. In a human embryo it separates the fingers and toes.",
+      "sectionId": "s7"
+    }
+  ]
+}

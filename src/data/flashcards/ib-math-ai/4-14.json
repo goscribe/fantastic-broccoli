@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-14",
+  "topicCode": "4.14",
+  "topicName": "Linear combinations of random variables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:03.601Z",
+  "cards": [
+    {
+      "id": "1w0kmp4",
+      "kind": "formula",
+      "front": "What is E(aX+b) for constants a and b?",
+      "back": "$E(aX+b)=aE(X)+b$. The **mean** is scaled by $a$ and shifted by $b$, and this rule always holds.",
+      "hint": "Think of a plumber's bill: rate times hours, plus a fixed fee.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1sd7e2p",
+      "kind": "formula",
+      "front": "What is Var(aX+b), and why does the constant b have no effect?",
+      "back": "$\\mathrm{Var}(aX+b)=a^2\\mathrm{Var}(X)$. Shifting by $b$ moves every value by the same amount, so the **spread** is unchanged.",
+      "hint": "Variance is the square of the standard deviation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ab23vn",
+      "kind": "concept",
+      "front": "How do the means and variances of X+Y combine?",
+      "back": "Means always add: $E(X+Y)=E(X)+E(Y)$. Variances add only when X and Y are **independent**: $\\mathrm{Var}(X+Y)=\\mathrm{Var}(X)+\\mathrm{Var}(Y)$.",
+      "hint": "Which of the two rules needs a condition?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1c3rwt0",
+      "kind": "mistake",
+      "front": "A student says Var(aX)=a Var(X). What is wrong?",
+      "back": "Variance is multiplied by $a^2$, not by $a$. Since $a^2\\geq0$, a negative $a$ never gives a negative variance.",
+      "hint": "Variance is built from squared deviations.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qtxr3r",
+      "kind": "example",
+      "front": "E(X)=12 and Var(X)=9. The cost is C=2X+5. Find E(C), Var(C) and the standard deviation of C.",
+      "back": "$E(C)=29$, $\\mathrm{Var}(C)=36$ and the standard deviation is $6$. The constant 5 changes the mean but not the variance.",
+      "hint": "Use the mean rule first, then multiply the variance by $2^2$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p0z6gg",
+      "kind": "term",
+      "front": "What does it mean for random variables X and Y to be independent?",
+      "back": "The value taken by one does not change the **probabilities** of values taken by the other.",
+      "hint": "Ask whether knowing one value changes the chances of the other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13vapsu",
+      "kind": "mistake",
+      "front": "A student writes SD(X+Y)=SD(X)+SD(Y). What is wrong?",
+      "back": "Add **variances**, not standard deviations, then take a square root. For independent X and Y, $\\mathrm{SD}(X+Y)=\\sqrt{\\mathrm{Var}(X)+\\mathrm{Var}(Y)}$.",
+      "hint": "Which quantity is the additive one?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lhgbcc",
+      "kind": "term",
+      "front": "What is a linear combination of random variables X and Y?",
+      "back": "An expression $aX+bY$ where $a$ and $b$ are **constants**. A difference $X-Y$ is the case $a=1$ and $b=-1$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rd2e6k",
+      "kind": "formula",
+      "front": "For independent X and Y, what are E(aX+bY) and Var(aX+bY)?",
+      "back": "$E(aX+bY)=aE(X)+bE(Y)$ and $\\mathrm{Var}(aX+bY)=a^2\\mathrm{Var}(X)+b^2\\mathrm{Var}(Y)$. Because $b^2>0$, subtracting a variable still **adds** variance.",
+      "hint": "Square the coefficients.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13mhga8",
+      "kind": "example",
+      "front": "Independent X and Y have E(X)=20, Var(X)=4, E(Y)=15 and Var(Y)=9. Find the mean and standard deviation of 2X-Y.",
+      "back": "Mean $25$. Variance $2^2\\times4+9=25$, so the standard deviation is $5$.",
+      "hint": "Square the coefficients before adding the variances.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0235qy3",
+      "kind": "example",
+      "front": "Runner A's time X is N(52.0, 4.0) and B's time Y is N(54.0, 2.25), independent. Find the probability that B is slower than A.",
+      "back": "Let $D=Y-X$, so $D\\sim\\mathrm{N}(2,6.25)$. Then $P(D>0)\\approx0.788$ after standardising with $z=-0.8$.",
+      "hint": "Define D = Y - X first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05uo407",
+      "kind": "process",
+      "front": "How do you find a probability involving a linear combination of independent normal variables?",
+      "back": "1) Define the combination, such as $D=Y-X$. 2) Find its mean from the means and its variance from the squared coefficients. 3) Standardise and use the normal distribution.",
+      "hint": "Combinations of independent normals are themselves normal.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sig97g",
+      "kind": "concept",
+      "front": "Why is the average of n independent copies of X steadier than a single value of X?",
+      "back": "Its mean is still $E(X)$, but its variance is $\\frac{\\mathrm{Var}(X)}{n}$, so the average is less spread out.",
+      "hint": "Divide the variance by n.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1lyiswf",
+      "kind": "mistake",
+      "front": "Two journey times share the same traffic jam. Can you simply add their variances?",
+      "back": "No. The variance rule for sums needs **independence**. Shared causes link the variables, so the simple rule fails.",
+      "hint": "Check the assumptions before using a rule.",
+      "sectionId": "s6"
+    }
+  ]
+}

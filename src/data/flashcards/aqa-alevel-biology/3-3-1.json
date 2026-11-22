@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-3-1",
+  "topicCode": "3.3.1",
+  "topicName": "Surface area to volume ratio",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:17.538Z",
+  "cards": [
+    {
+      "id": "0dxxo8s",
+      "kind": "concept",
+      "front": "Why does a small organism usually have a higher surface area to volume ratio than a large one of similar shape?",
+      "back": "**Volume** grows with the cube of length but **surface area** grows only with its square, so volume increases faster and the ratio falls as size increases.",
+      "hint": "Compare how each measure changes when every length is doubled.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14dovbh",
+      "kind": "formula",
+      "front": "How is the surface area to volume ratio of a cube with side length $l$ worked out, and what units does it have?",
+      "back": "Divide surface area $6l^2$ by volume $l^3$. The result is measured in inverse length units, such as $\\text{cm}^{-1}$.",
+      "hint": "Work out both values first, then combine them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07jkkw7",
+      "kind": "concept",
+      "front": "Why might diffusion across the outer surface fail to meet the needs of a large organism?",
+      "back": "A large organism has little exposed **surface** per unit of tissue, yet more tissue needs supplies and produces waste. Deep cells may also lie far from the outside.",
+      "hint": "Consider the exposed area compared with the amount of body it must serve.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xknmbf",
+      "kind": "example",
+      "front": "Calculate the surface area to volume ratio of a cube with sides of 3 cm.",
+      "back": "Surface area is $6\\times3^2=54\\,\\text{cm}^2$ and volume is $3^3=27\\,\\text{cm}^3$, so the ratio is $2:1$, or $2\\,\\text{cm}^{-1}$.",
+      "hint": "Find the area of one face first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17x5o6j",
+      "kind": "term",
+      "front": "What is an exchange surface?",
+      "back": "The **exchange surface** is the boundary across which substances enter or leave an organism.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19kjgi9",
+      "kind": "term",
+      "front": "What is the diffusion distance?",
+      "back": "The **diffusion distance** is the length of the path particles must travel through tissue by diffusion.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cy7aqe",
+      "kind": "term",
+      "front": "What is a concentration gradient?",
+      "back": "A **concentration gradient** is a difference in concentration across a distance. A steeper gradient increases the rate of diffusion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ua7v9f",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a large organism has a small surface area just because its ratio is low?",
+      "back": "A low ratio means surface area is small relative to volume, not that the total surface area is small. The total area can still be large.",
+      "hint": "Think about what the ratio compares.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0soy6wl",
+      "kind": "process",
+      "front": "Which three conditions make exchange by diffusion faster?",
+      "back": "A large surface area, a steep concentration gradient and a short diffusion distance.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0q4pwuo",
+      "kind": "concept",
+      "front": "How does folding a surface help exchange without greatly increasing the organism's volume?",
+      "back": "Folds and projections increase the exchange surface area within a compact space, so a lot of extra area is gained with little added volume.",
+      "hint": "Compare how much area is gained with how much space is taken up.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sf6n1j",
+      "kind": "concept",
+      "front": "What is the role of alveoli in mammalian lungs?",
+      "back": "**Alveoli** are small air spaces that provide many surfaces for gas exchange.",
+      "hint": "Think about why many small sacs can beat one large one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f6mox5",
+      "kind": "concept",
+      "front": "How do root hairs help a plant absorb water and mineral ions?",
+      "back": "Root hairs are extensions of root cells that increase the surface area available for absorbing water and mineral ions.",
+      "hint": "Think about how the root's surface area compares with a smooth root.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04lfsot",
+      "kind": "concept",
+      "front": "What does ventilation do for an exchange surface?",
+      "back": "It moves air or water past the surface, helping to maintain a concentration gradient.",
+      "hint": "Think about what keeps the medium outside the surface different from the inside.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0772wqt",
+      "kind": "concept",
+      "front": "What role does internal transport play in exchange?",
+      "back": "It moves substances between exchange surfaces and distant cells, so they reach the places where they are needed.",
+      "hint": "Think about what happens to particles absorbed at the surface.",
+      "sectionId": "s4"
+    }
+  ]
+}

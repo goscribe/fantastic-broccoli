@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "b1-1",
+  "topicCode": "B1.1",
+  "topicName": "Carbohydrates and lipids",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:41.182Z",
+  "cards": [
+    {
+      "id": "1xbl1mf",
+      "kind": "concept",
+      "front": "How can one molecule type, such as glucose-based polysaccharides, do very different jobs?",
+      "back": "The **shape** of the polysaccharide decides its job. Branched, coiled chains such as starch and glycogen store glucose, while straight, unbranched chains such as cellulose give strength.",
+      "hint": "Think about the bonds and branching in each chain."
+    },
+    {
+      "id": "1bs2zr8",
+      "kind": "concept",
+      "front": "Why do phospholipids form bilayers in water?",
+      "back": "Their **hydrophilic** phosphate heads face the water, while their **hydrophobic** fatty acid tails point inwards away from it. This arrangement forms the boundaries around cells.",
+      "hint": "Consider which part of the molecule likes water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "04yfsjv",
+      "kind": "concept",
+      "front": "Why are triglycerides a good way to store energy?",
+      "back": "Their fatty acid chains contain many **energy-rich bonds**. Their largely non-polar structure makes them insoluble, so they can be stored without drawing water into cells.",
+      "hint": "Think about bonds and about solubility in water.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03xhwqs",
+      "kind": "process",
+      "front": "How are disaccharides formed and broken down?",
+      "back": "A **condensation reaction** joins two monosaccharides with a glycosidic bond and releases water. **Hydrolysis** reverses this by using water to break the bond.",
+      "hint": "One reaction releases water; the other uses it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zq7x1u",
+      "kind": "concept",
+      "front": "Why is glycogen better than starch for a quick glucose supply?",
+      "back": "Glycogen is more **highly branched**, giving many ends where enzymes can release glucose quickly. Starch is less branched, so it has fewer ends.",
+      "hint": "Compare the number of branches and free ends.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pufpsj",
+      "kind": "term",
+      "front": "What are microfibrils, and how do they form?",
+      "back": "**Microfibrils** are strong bundles of cellulose chains. Hydrogen bonds form between neighbouring chains, and many bonded chains group together into these fibres.",
+      "hint": "Think about what holds neighbouring chains together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qomywl",
+      "kind": "mistake",
+      "front": "A student says a disaccharide is two sugar molecules held loosely together. What is wrong with this?",
+      "back": "The units are **not** loosely held. They are joined by a covalent **glycosidic bond**, which is a strong, permanent link formed by condensation.",
+      "hint": "Think about the type of bond between the units.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1sk6utm",
+      "kind": "term",
+      "front": "What is a triglyceride?",
+      "back": "A **triglyceride** is one glycerol molecule joined to three fatty acids by ester bonds, each formed by condensation.",
+      "hint": "Count the fatty acids.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zl9ak4",
+      "kind": "term",
+      "front": "What makes a fatty acid saturated?",
+      "back": "A **saturated fatty acid** has no carbon–carbon double bonds in its hydrocarbon chain. Unsaturated fatty acids have at least one double bond, which bends the chain.",
+      "hint": "Look for carbon–carbon double bonds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "078f4b4",
+      "kind": "mistake",
+      "front": "A student says a phospholipid has three fatty acid tails, like a triglyceride. What is wrong?",
+      "back": "A phospholipid has **two** fatty acid tails, not three. Its third position holds a **phosphate-containing head** instead, which makes it hydrophilic.",
+      "hint": "Compare the phospholipid with the triglyceride.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0r7mtvo",
+      "kind": "concept",
+      "front": "Why can humans not use cellulose as a food source?",
+      "back": "Humans **lack the enzyme** needed to break the glycosidic bonds in cellulose. Cellulose is therefore not digested, even though it contains glucose.",
+      "hint": "Think about enzymes and the bonds they break.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lxp6dy",
+      "kind": "concept",
+      "front": "How do carbohydrates differ from lipids in structure and function?",
+      "back": "Carbohydrates are built from repeating **sugar units** and can store glucose or give structural support. Lipids are not built from repeating sugar units and mainly store energy or form cell boundaries.",
+      "hint": "Think about what the molecules are built from."
+    }
+  ]
+}

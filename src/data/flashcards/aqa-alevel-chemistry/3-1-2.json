@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-1-2",
+  "topicCode": "3.1.2",
+  "topicName": "Amount of substance",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:42.969Z",
+  "cards": [
+    {
+      "id": "00c08j1",
+      "kind": "term",
+      "front": "What is one mole of a substance?",
+      "back": "One **mole** is the amount of substance containing $6.02\\times10^{23}$ specified particles, the Avogadro constant. Always name the particle, such as atoms or molecules.",
+      "hint": "Think about how eggs are sold by the dozen.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ejmnxu",
+      "kind": "formula",
+      "front": "How do you find the amount of substance in moles from a mass in grams?",
+      "back": "$n=\\frac{m}{M}$, where $n$ is amount in $\\mathrm{mol}$, $m$ is mass in $\\mathrm{g}$ and $M$ is **molar mass** in $\\mathrm{g\\,mol^{-1}}$. A bigger molar mass gives fewer moles from the same mass.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1g7ymoo",
+      "kind": "formula",
+      "front": "What does each symbol in the ideal gas equation stand for, and what units are used?",
+      "back": "In $pV=nRT$: $p$ is pressure in $\\mathrm{Pa}$, $V$ is volume in $\\mathrm{m^3}$, $n$ is amount in $\\mathrm{mol}$, $R=8.31\\,\\mathrm{J\\,K^{-1}\\,mol^{-1}}$ and $T$ is temperature in $\\mathrm{K}$.",
+      "hint": "Check each unit before you substitute.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1htshoc",
+      "kind": "concept",
+      "front": "Why do reacting masses need moles rather than grams when using a balanced equation?",
+      "back": "The coefficients count particles, so they give a ratio of **moles**. Different substances have different molar masses, so equal masses do not contain equal amounts.",
+      "hint": "Compare one mole of magnesium with one mole of oxygen.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ixlfxa",
+      "kind": "formula",
+      "front": "How is the concentration of a solution calculated, and what unit must the volume be in?",
+      "back": "$c=\\frac{n}{V}$, giving $c$ in $\\mathrm{mol\\,dm^{-3}}$ with $V$ in $\\mathrm{dm^3}$. Divide a volume in $\\mathrm{cm^3}$ by 1000 first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k1aei2",
+      "kind": "mistake",
+      "front": "A student puts a volume of 250 cm^3 straight into c = n/V. What goes wrong?",
+      "back": "The answer is wrong by a factor of 1000. Convert to **dm^3** first, so $250\\,\\mathrm{cm^3}$ becomes $0.250\\,\\mathrm{dm^3}$.",
+      "hint": "Look at the unit that c = n/V requires.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07zqmny",
+      "kind": "mistake",
+      "front": "A student uses the mass ratio from an equation instead of the mole ratio. Why is this wrong?",
+      "back": "Coefficients give ratios of **moles**, not grams. Convert every given mass to moles first, then apply the ratio, then convert back to mass.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02nwz0y",
+      "kind": "process",
+      "front": "What are the four steps for calculating a reacting mass?",
+      "back": "1) Write the balanced equation. 2) Convert the known mass to moles. 3) Use the mole ratio to find moles of the wanted substance. 4) Convert those moles to **mass**.",
+      "hint": "Start from the equation, not the numbers.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18bqbwb",
+      "kind": "example",
+      "front": "How many moles are in 5.30 g of sodium carbonate, Na2CO3 (M = 106.0 g mol-1)?",
+      "back": "$n=\\frac{5.30}{106.0}=0.0500\\,\\mathrm{mol}$. Divide the mass by the molar mass.",
+      "hint": "Work out the molar mass first from the formula.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "078lyy4",
+      "kind": "example",
+      "front": "What is the concentration when 4.00 g of NaOH (M = 40.0 g mol-1) is dissolved to make 250 cm3 of solution?",
+      "back": "$c=0.400\\,\\mathrm{mol\\,dm^{-3}}$. The amount is 0.100 mol and the volume is 0.250 dm3, so $c=\\frac{0.100}{0.250}$.",
+      "hint": "Find the amount first, then convert the volume.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14kji2p",
+      "kind": "example",
+      "front": "What mass of magnesium oxide forms when 2.43 g of magnesium burns completely in oxygen?",
+      "back": "**4.03 g** of MgO. The amount of Mg is 0.100 mol, the ratio Mg:MgO is 2:2, so 0.100 mol MgO forms, which is $0.100\\times40.3=4.03\\,\\mathrm{g}$.",
+      "hint": "Use the ratio from the balanced equation after converting to moles.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gz2l61",
+      "kind": "concept",
+      "front": "What assumptions does the ideal gas model make about its particles?",
+      "back": "Ideal gas particles are tiny, do not attract one another and collide without losing energy. Real gases at room conditions behave close to this model.",
+      "hint": "Think about size, forces and collisions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bo58z3",
+      "kind": "example",
+      "front": "What pressure does 0.0200 mol of gas exert in 480 cm3 at 25 C?",
+      "back": "About $1.03\\times10^{5}\\,\\mathrm{Pa}$. Convert to $V=4.80\\times10^{-4}\\,\\mathrm{m^3}$ and $T=298\\,\\mathrm{K}$, then use $p=\\frac{nRT}{V}$.",
+      "hint": "Convert the volume and temperature before substituting.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r2eqcz",
+      "kind": "term",
+      "front": "What is the percentage yield of a reaction?",
+      "back": "Percentage yield is $\\frac{\\mathrm{actual\\ mass}}{\\mathrm{theoretical\\ mass}}\\times100$, where the **theoretical mass** comes from the balanced equation.",
+      "sectionId": "s5"
+    }
+  ]
+}

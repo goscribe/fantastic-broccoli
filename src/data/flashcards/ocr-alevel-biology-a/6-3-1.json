@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "6-3-1",
+  "topicCode": "6.3.1",
+  "topicName": "Ecosystems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:47.977Z",
+  "cards": [
+    {
+      "id": "1m4by1e",
+      "kind": "concept",
+      "front": "Why does energy flow through a food chain in one direction only?",
+      "back": "Energy enters as sunlight, is captured by **producers** and passes up the chain. Heat lost at each level cannot be reused by producers, so energy never returns.",
+      "hint": "Think about where the energy comes from and where it goes next.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bhvndh",
+      "kind": "concept",
+      "front": "Why are nutrients recycled in an ecosystem while energy is not?",
+      "back": "**Decomposers** break down dead material and waste, releasing nutrients such as nitrogen and phosphorus into the soil. Plants take them up, so nutrients pass repeatedly between organisms and soil.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gmpuae",
+      "kind": "concept",
+      "front": "How do pioneer species make it possible for other species to colonise bare ground?",
+      "back": "Pioneers die and decompose, adding organic matter and forming **soil**. Deeper soil holds more water and nutrients, so larger plants can grow and replace the earlier species.",
+      "hint": "Think about what happens to a pioneer's body after it dies.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ktqqlo",
+      "kind": "term",
+      "front": "What is a trophic level?",
+      "back": "An organism's **position in a feeding sequence**. Producers form the first trophic level, followed by primary and then secondary consumers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06dflyw",
+      "kind": "term",
+      "front": "How does a food web differ from a food chain?",
+      "back": "A **food web** links many food chains together to show feeding relationships in a community. A food chain shows only one feeding route.",
+      "hint": "Consider how many different things one animal may eat.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cisoaf",
+      "kind": "mistake",
+      "front": "What is wrong with drawing food web arrows from predator to prey?",
+      "back": "Arrows should point from the organism **eaten** to the organism that eats it. They show the direction of energy flow, so reversing them gives the wrong picture.",
+      "hint": "Think about which way energy moves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gttarz",
+      "kind": "concept",
+      "front": "What happens in a community when a main prey species declines?",
+      "back": "Its predators may switch to other food or decline too, and the species the prey normally eat may **increase**.",
+      "hint": "Consider the links in a food web.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t65fu1",
+      "kind": "concept",
+      "front": "Why is only a small fraction of biomass passed to the next trophic level?",
+      "back": "Organisms lose energy as **heat** through respiration. Parts such as roots or bones are not eaten, and some food is egested undigested as faeces.",
+      "hint": "Think about what happens to energy inside an animal's body.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k5tgim",
+      "kind": "formula",
+      "front": "What equation gives the efficiency of energy transfer between two trophic levels?",
+      "back": "$\\mathrm{efficiency}\\,(\\%)=\\frac{\\mathrm{energy\\ in\\ higher\\ level}}{\\mathrm{energy\\ in\\ lower\\ level}}\\times100$, where both energies use the same units.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17a6gnl",
+      "kind": "example",
+      "front": "Producers store $20\\,000\\,\\mathrm{kJ\\,m^{-2}\\,year^{-1}}$ and primary consumers store $1800\\,\\mathrm{kJ\\,m^{-2}\\,year^{-1}}$. What is the transfer efficiency?",
+      "back": "**9.0%**. Working: $\\frac{1800}{20\\,000}\\times100=9.0\\%$.",
+      "hint": "Check which level is the higher trophic level before dividing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06f36kk",
+      "kind": "term",
+      "front": "What is extracellular digestion?",
+      "back": "Enzymes are **secreted outside** the cell onto dead matter, then the soluble products are absorbed. Decomposers digest material this way because it happens outside their cells.",
+      "hint": "Compare where digestion happens in an animal's gut with decomposers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0oc4nqo",
+      "kind": "term",
+      "front": "What is a climax community?",
+      "back": "A **stable community** in balance with local conditions, in which the species composition changes little over time.",
+      "hint": "Think about what happens to succession once it finishes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tk8wqh",
+      "kind": "example",
+      "front": "What is the rate of change in species number between 10 and 50 years, given 3 species at 10 years and 12 at 50 years?",
+      "back": "**0.225 species per year**. Working: $\\frac{12-3}{50-10}=\\frac{9}{40}=0.225\\,\\mathrm{species\\,year^{-1}}$.",
+      "hint": "Subtract the earlier count from the later count, then divide by the time gap.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "14l1y5u",
+      "kind": "concept",
+      "front": "Why does succession after a fire proceed faster than primary succession on bare rock?",
+      "back": "Soil remains after a fire, so **secondary succession** starts with nutrients and water already present.",
+      "hint": "Compare what is already present at the start in each case.",
+      "sectionId": "s6"
+    }
+  ]
+}

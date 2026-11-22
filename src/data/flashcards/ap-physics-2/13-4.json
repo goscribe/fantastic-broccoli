@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "13-4",
+  "topicCode": "13.4",
+  "topicName": "Images formed by lenses",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:28.187Z",
+  "cards": [
+    {
+      "id": "1t3prro",
+      "kind": "concept",
+      "front": "How do you locate the image of an object's tip using ray diagrams for a converging lens?",
+      "back": "Follow two of three special rays: one parallel to the axis refracts through the **far focal point**, one through the center goes straight, and one through the near focal point leaves parallel to the axis. The image is where the refracted rays cross.",
+      "hint": "Think about which rays pass through focal points.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sbleib",
+      "kind": "formula",
+      "front": "What is the lens equation, and what does each symbol mean?",
+      "back": "$\\frac{1}{s_o}+\\frac{1}{s_i}=\\frac{1}{f}$, where $s_o$ is object distance, $s_i$ is image distance, and $f$ is **focal length**, all measured from the lens in meters or centimeters.",
+      "hint": "Three distances, all measured from the lens.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14lkauk",
+      "kind": "concept",
+      "front": "What is the difference between a real image and a virtual image?",
+      "back": "A **real image** forms where refracted rays actually meet, so a screen can show it. A **virtual image** forms where rays only appear to meet when traced backward, so a screen cannot show it.",
+      "hint": "Ask whether light actually reaches the image point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ernqad",
+      "kind": "term",
+      "front": "What is a converging lens?",
+      "back": "A **converging lens** is thicker at the center and bends parallel rays toward one focal point on its far side.",
+      "hint": "Thick in the middle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08par0i",
+      "kind": "term",
+      "front": "What is a focal length, and what sign does it have for each lens type?",
+      "back": "The **focal length** $f$ is the distance from a thin lens to its focal point. It is positive for a converging lens and negative for a diverging lens.",
+      "hint": "Distance to focal point, with a sign.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rmhjkf",
+      "kind": "formula",
+      "front": "How is magnification defined, and what does a negative value tell you?",
+      "back": "$M=\\frac{h_i}{h_o}=-\\frac{s_i}{s_o}$ is the **magnification**, the ratio of image height to object height. A negative $M$ means the image is **inverted**; a positive $M$ means upright.",
+      "hint": "Compare heights and use the distances.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "040a70t",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that a lens has only one focal point?",
+      "back": "A lens has **two focal points**, one on each side, at equal distances from the lens. Using only one leads to wrong image positions.",
+      "hint": "Count the sides of the lens.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0q591v6",
+      "kind": "process",
+      "front": "What are the steps to find an image distance from the lens equation?",
+      "back": "First, rearrange to $\\frac{1}{s_i}=\\frac{1}{f}-\\frac{1}{s_o}$. Second, substitute values and subtract. Third, take the **reciprocal** of the result to get $s_i$.",
+      "hint": "Solve for the image term first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1iwt9v5",
+      "kind": "example",
+      "front": "An object 4.0 cm tall sits 30 cm from a converging lens with f = 10 cm. Find the image distance, magnification, and image height.",
+      "back": "$s_i=15\\,\\mathrm{cm}$, $M=-0.50$, and $h_i=-2.0\\,\\mathrm{cm}$. The image is **inverted**, 15 cm on the far side, and 2.0 cm tall.",
+      "hint": "Start with the lens equation for $s_i$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pwsdlq",
+      "kind": "mistake",
+      "front": "A student inverts each term separately when using the lens equation. What is the error?",
+      "back": "Inverting each term separately is **wrong**. Add or subtract the reciprocals first, then take the reciprocal of the final result to get the distance.",
+      "hint": "Work with 1/s terms, not s terms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10owg9g",
+      "kind": "concept",
+      "front": "How does object position change the image from a converging lens?",
+      "back": "Beyond $2f$, the image is real, inverted, and smaller. Between $2f$ and $f$, it is real, inverted, and larger. Inside $f$, it is virtual, upright, and larger, which is how a magnifying glass works.",
+      "hint": "Move the object closer and track the image.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nvg3z3",
+      "kind": "example",
+      "front": "An object 12 cm from a diverging lens with f = -12 cm. What are the image distance and magnification?",
+      "back": "$s_i=-6.0\\,\\mathrm{cm}$ and $M=+0.50$. The image is **virtual** and upright, on the same side as the object.",
+      "hint": "A negative $s_i$ means a virtual image.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1i20zqr",
+      "kind": "mistake",
+      "front": "A student thinks a virtual image is imaginary and cannot be seen. What is the correct idea?",
+      "back": "A **virtual image** is not imaginary. Your eye can see it because light entering your eye appears to come from that spot. Light simply does not converge there, so a screen shows nothing.",
+      "hint": "Your eye can see it, but a screen cannot.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rrxzgx",
+      "kind": "concept",
+      "front": "Why does an object placed exactly at the focal length of a converging lens form no image?",
+      "back": "At exactly $f$, the refracted rays leave the lens **parallel**, so they never meet or appear to meet, and no image forms.",
+      "hint": "Think about where the refracted rays go.",
+      "sectionId": "s5"
+    }
+  ]
+}

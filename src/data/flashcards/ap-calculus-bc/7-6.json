@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "7-6",
+  "topicCode": "7.6",
+  "topicName": "General solutions by separation of variables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:43.996Z",
+  "cards": [
+    {
+      "id": "14dg0sy",
+      "kind": "concept",
+      "front": "Why does separating variables let you solve a separable differential equation?",
+      "back": "**Separating** puts every $y$-term with $dy$ and every $x$-term with $dx$, so each side can be integrated on its own.",
+      "hint": "Think about what integration needs on each side.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ljwc5k",
+      "kind": "concept",
+      "front": "What does the constant $C$ in a general solution tell you?",
+      "back": "It gives a **family of solutions**: each value of $C$ gives one curve, so one result describes many solutions at once.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sjpw33",
+      "kind": "process",
+      "front": "What are the steps to find a general solution by separation of variables?",
+      "back": "1) **Separate** the variables so $y$-terms sit with $dy$ and $x$-terms with $dx$. 2) **Integrate** both sides. 3) Combine the constants into one $C$ and simplify.",
+      "hint": "Check which variable sits on each side before integrating.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xeynt5",
+      "kind": "term",
+      "front": "What is a separable differential equation?",
+      "back": "One that can be written as $\\frac{dy}{dx}=f(x)g(y)$, a **product** of a function of $x$ and a function of $y$.",
+      "hint": "Look for the right side to factor into an x-part and a y-part.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pxjgg8",
+      "kind": "formula",
+      "front": "What is the separated form of $\\frac{dy}{dx}=3x(1+y^2)$?",
+      "back": "$\\frac{1}{1+y^2}\\,dy=3x\\,dx$, with all the **$y$-terms** on the $dy$ side.",
+      "hint": "Divide by $1+y^2$, then multiply by $dx$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sb1arh",
+      "kind": "example",
+      "front": "Find a general solution of $\\frac{dy}{dx}=2x(1+y^2)$.",
+      "back": "$\\arctan(y)=x^2+C$. Separate to $\\frac{1}{1+y^2}\\,dy=2x\\,dx$, then **integrate** both sides.",
+      "hint": "Integrate each side separately.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15xq6id",
+      "kind": "mistake",
+      "front": "A student writes $\\arctan(y)=x^2$ after integrating $\\frac{1}{1+y^2}\\,dy=2x\\,dx$. What is wrong?",
+      "back": "The **constant $C$** is missing. Integrating both sides gives constants that combine into one arbitrary $C$; they do not disappear.",
+      "hint": "Count the integration constants.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0n2z1sa",
+      "kind": "term",
+      "front": "What is a constant solution?",
+      "back": "A **solution** whose $y$-value is the same for every $x$ in its domain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12f25rf",
+      "kind": "mistake",
+      "front": "Why is dividing $\\frac{dy}{dx}=2xy$ by $y$ risky?",
+      "back": "It assumes $y\\ne0$, so it can **remove** the solution $y=0$. Check $y=0$ in the original equation.",
+      "hint": "Which value of $y$ did you exclude?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dyam08",
+      "kind": "example",
+      "front": "Find the general solution of $\\frac{dy}{dx}=2xy$, including all solutions.",
+      "back": "$y=Ce^{x^2}$. Separating gives $\\frac{1}{y}\\,dy=2x\\,dx$, so $\\ln|y|=x^2+C$; the **constant solution** $y=0$ is included when $C=0$.",
+      "hint": "Rewrite the result as $y$ in terms of $C$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jp43rd",
+      "kind": "term",
+      "front": "What is a general solution of a differential equation?",
+      "back": "A **family of solutions** written with an arbitrary constant, such as $C$, that can take different values.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wdo5aa",
+      "kind": "term",
+      "front": "What is a constant of integration?",
+      "back": "The **arbitrary constant** added when finding an indefinite integral, which lets the result describe a family of curves.",
+      "sectionId": "s2"
+    }
+  ]
+}

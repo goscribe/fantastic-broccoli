@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-10",
+  "topicCode": "5.10",
+  "topicName": "Second derivatives",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:10.227Z",
+  "cards": [
+    {
+      "id": "1wd9lgy",
+      "kind": "term",
+      "front": "What is the second derivative of a function?",
+      "back": "The **second derivative** is the derivative of the first derivative, written $f''(x)$ or $\\frac{d^2y}{dx^2}$. It shows how the slope itself is changing.",
+      "hint": "Differentiate once, then differentiate the result again.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zdpzk2",
+      "kind": "concept",
+      "front": "What does the sign of $f''(x)$ tell you about the shape of a graph?",
+      "back": "**Concave up** when $f''(x)>0$, so slopes increase. **Concave down** when $f''(x)<0$, so slopes decrease.",
+      "hint": "Ask whether the slope is growing or shrinking.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jpn85i",
+      "kind": "process",
+      "front": "How do you use $f''(a)$ to classify a stationary point at $x=a$?",
+      "back": "If $f''(a)<0$, it is a **local maximum**. If $f''(a)>0$, it is a **local minimum**. If $f''(a)=0$, the test is inconclusive, so check the sign of $f'$ either side.",
+      "hint": "Think about whether the graph curves up or down at the turning point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1s83dsg",
+      "kind": "example",
+      "front": "Find $f''(x)$ for $f(x)=2x^4-x^3+5x$.",
+      "back": "$f''(x)=24x^2-6x$. First $f'(x)=8x^3-3x^2+5$, then differentiate again.",
+      "hint": "Each differentiation lowers the power of $x$ by one.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0inbr7k",
+      "kind": "formula",
+      "front": "If $y$ is in metres and $x$ is in seconds, what are the units of $\\frac{d^2y}{dx^2}$?",
+      "back": "$\\mathrm{m\\,s^{-2}}$. The units are those of $y$ divided by the units of $x$ squared.",
+      "hint": "Divide the units of $y$ by the units of $x$, then square the units of $x$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ms18mh",
+      "kind": "term",
+      "front": "What is a point of inflection?",
+      "back": "A **point of inflection** is a point where the graph's concavity changes, so $f''$ changes sign there and $f''=0$ at that point.",
+      "hint": "Think about a bowl changing into an arch.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fh5u99",
+      "kind": "process",
+      "front": "What are the steps to find a point of inflection?",
+      "back": "Solve $f''(x)=0$ to get candidates. Check that $f''$ has opposite signs either side. Substitute the $x$-value into $f$ to find the $y$-coordinate.",
+      "hint": "A candidate is not confirmed until the sign changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hbvpdc",
+      "kind": "mistake",
+      "front": "Does $f''(a)=0$ alone prove that there is a point of inflection at $x=a$?",
+      "back": "**No**. $f''$ must change sign there. For $f(x)=x^4$, $f''(0)=0$ but $f''$ is positive on both sides, so there is no point of inflection.",
+      "hint": "Check what happens on each side of the point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "151ynlw",
+      "kind": "mistake",
+      "front": "A graph is concave up. Does that mean it is increasing?",
+      "back": "**No**. Concave up describes the shape, not the direction. A graph can fall while concave up, if its slope rises towards zero.",
+      "hint": "Separate the shape of the curve from whether it goes up or down.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0u4exut",
+      "kind": "example",
+      "front": "For $f(x)=x^3-6x^2+9x+1$, what are the local maximum and local minimum?",
+      "back": "Local maximum $(1,5)$, since $f''(1)=-6<0$. Local minimum $(3,1)$, since $f''(3)=6>0$. Stationary points come from $f'(x)=0$.",
+      "hint": "Factorise $f'(x)$ to find the stationary points.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cgk7q9",
+      "kind": "example",
+      "front": "For $f(x)=x^3-6x^2+9x+1$, where is the point of inflection?",
+      "back": "$(2,3)$. $f''(x)=6x-12$ is zero at $x=2$, and its sign changes from negative to positive there.",
+      "hint": "Solve $f''(x)=0$ and check the sign change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mpgwix",
+      "kind": "concept",
+      "front": "For a population $P(t)$, what does $P'(t)>0$ with $P''(t)<0$ mean?",
+      "back": "The population is still **growing**, but the growth is **slowing** down.",
+      "hint": "$P'$ is the rate of growth and $P''$ shows how that rate changes.",
+      "sectionId": "s5"
+    }
+  ]
+}

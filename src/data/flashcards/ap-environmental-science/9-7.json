@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "9-7",
+  "topicCode": "9.7",
+  "topicName": "Ocean acidification",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:07.900Z",
+  "cards": [
+    {
+      "id": "1l9xnxr",
+      "kind": "concept",
+      "front": "Why does the surface ocean act as a carbon sink for the carbon dioxide people release?",
+      "back": "Much of the added carbon dioxide dissolves into the surface ocean, so the ocean acts as a **carbon sink**. This slows the rise of carbon dioxide in the air.",
+      "hint": "Think about where the gas goes after it leaves the air.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01jg2xt",
+      "kind": "term",
+      "front": "What is ocean acidification?",
+      "back": "**Ocean acidification** is the decrease in seawater pH caused mainly by the ocean absorbing carbon dioxide from the atmosphere.",
+      "hint": "Think about which direction the pH value moves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wxlyke",
+      "kind": "process",
+      "front": "What steps turn dissolved carbon dioxide into extra hydrogen ions in seawater?",
+      "back": "$\\mathrm{CO_2}$ reacts with water to form **carbonic acid** ($\\mathrm{H_2CO_3}$), which then releases hydrogen ions ($\\mathrm{H^+}$) and bicarbonate ($\\mathrm{HCO_3^-}$).",
+      "hint": "Start with the gas and its first reaction partner.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "030k3hy",
+      "kind": "formula",
+      "front": "How is pH calculated from the hydrogen ion concentration?",
+      "back": "$\\mathrm{pH=-\\log[H^+]}$, where $[\\mathrm{H^+}]$ is the **hydrogen ion concentration**. Lower pH means more hydrogen ions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jq9ohw",
+      "kind": "example",
+      "front": "A seawater tank drops from pH 8.1 to pH 7.1. By what factor does the hydrogen ion concentration change?",
+      "back": "A **tenfold** increase. The pH falls by 1.0 unit, so $10^{1.0}=10$ times more hydrogen ions are present.",
+      "hint": "Ask what size of change one whole pH unit represents.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1b2z095",
+      "kind": "mistake",
+      "front": "Why is it wrong to say today's surface seawater is already acidic?",
+      "back": "Surface seawater is still **basic**, with pH near 8.1, which is above 7. The pH is falling, so the ocean is becoming less basic and more acidic.",
+      "hint": "Compare the current pH value with the neutral point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14e0mrt",
+      "kind": "concept",
+      "front": "Why do extra hydrogen ions make it harder for shell builders to grow shells?",
+      "back": "Hydrogen ions remove **carbonate ions** from seawater by forming bicarbonate. With less carbonate, shells are harder to build and existing shells can dissolve.",
+      "hint": "Consider what shell builders need to combine with calcium.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iygxua",
+      "kind": "term",
+      "front": "What material do many marine animals use to build shells and skeletons?",
+      "back": "**Calcium carbonate** ($\\mathrm{CaCO_3}$), formed when calcium ions combine with carbonate ions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15gixhu",
+      "kind": "concept",
+      "front": "Why are young shell builders often the most vulnerable to acidification?",
+      "back": "Their **shells are thin** and still forming, so reduced carbonate supply affects them most.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10ar518",
+      "kind": "concept",
+      "front": "What is the likely effect of acidification on coral skeleton growth?",
+      "back": "**Slower skeleton growth**, which leads to weaker reefs.",
+      "hint": "Compare with the first link in the chain, less carbonate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "194glxh",
+      "kind": "concept",
+      "front": "How can weaker reefs lower local biodiversity?",
+      "back": "Reefs shelter many species. When reefs weaken, fewer species can live there, which lowers local **biodiversity**.",
+      "hint": "Think about what a reef provides to the animals living on it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ok1yfu",
+      "kind": "concept",
+      "front": "How could losing shelled plankton affect larger animals in a food web?",
+      "back": "Shelled plankton are food for larger animals. If weaker shells cause fewer plankton to survive, predators that depend on them may decline.",
+      "hint": "Follow the food chain upward from the plankton.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "182c8zw",
+      "kind": "process",
+      "front": "Which human activities add the carbon dioxide that the ocean later absorbs?",
+      "back": "**Burning fossil fuels**, **clearing forests**, and **making cement** release carbon dioxide that enters the air first and then dissolves at the ocean surface.",
+      "hint": "Think about the main sources the note lists.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xvc9of",
+      "kind": "concept",
+      "front": "Why might a warming ocean take up less carbon dioxide?",
+      "back": "Cold water dissolves more gas than warm water. As the ocean warms it absorbs less carbon dioxide, so more stays in the air.",
+      "hint": "Think about how temperature changes how much gas water can hold.",
+      "sectionId": "s5"
+    }
+  ]
+}

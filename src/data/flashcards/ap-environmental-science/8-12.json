@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-12",
+  "topicCode": "8.12",
+  "topicName": "LD50",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:54.207Z",
+  "cards": [
+    {
+      "id": "09cyscn",
+      "kind": "term",
+      "front": "What does LD50 mean?",
+      "back": "The **LD50** is the dose of a substance that kills half of a test population within a stated time.",
+      "hint": "Think about what the letters LD stand for.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0n8g1kh",
+      "kind": "concept",
+      "front": "How does the size of an LD50 value relate to a substance's toxicity?",
+      "back": "A **lower** LD50 means higher toxicity, because a smaller dose is enough to kill half the test group.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "163jmjo",
+      "kind": "concept",
+      "front": "What is the main limitation of using LD50 to judge how harmful a substance is?",
+      "back": "LD50 measures only **acute toxicity**, the harm from a brief exposure. It does not show long-term harm such as cancer or birth defects, or illness that does not cause death.",
+      "hint": "Think about the time scale of the exposure being measured.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0kvytn5",
+      "kind": "formula",
+      "front": "How do you work out the dose an animal receives at its LD50, and in what units?",
+      "back": "$\\text{dose} = \\mathrm{LD50} \\times m$, where the LD50 is in $\\mathrm{mg/kg}$ and body mass $m$ is in $\\mathrm{kg}$, so the dose is in $\\mathrm{mg}$.",
+      "hint": "Look at which units cancel to leave a mass.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00x65by",
+      "kind": "example",
+      "front": "A rat with body mass 0.25 kg has an LD50 of 200 mg/kg. What dose in mg equals the LD50 for this rat?",
+      "back": "**50 mg**: $200\\,\\mathrm{mg/kg}\\times0.25\\,\\mathrm{kg}=50\\,\\mathrm{mg}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02a5ytv",
+      "kind": "process",
+      "front": "What are the main steps in finding an LD50 in a laboratory experiment?",
+      "back": "1) Split animals into similar groups. 2) Give each group a different measured dose. 3) Keep conditions the same. 4) Record deaths within a set time. 5) Plot percent dead against dose and read the dose at 50 percent.",
+      "hint": "Think about what must match between groups before any dose is given.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12z0htk",
+      "kind": "term",
+      "front": "What is a control group in an LD50 test, and what does it show?",
+      "back": "A **control group** is treated the same as the test groups but gets none of the substance. It shows how many animals die from other causes.",
+      "hint": "Compare it with the groups that receive a dose.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fy9sls",
+      "kind": "concept",
+      "front": "Why is LD50 set at 50 percent rather than at the extremes of the dose range?",
+      "back": "The **midpoint** can be estimated more precisely, because a few unusually sensitive or resistant animals make the extremes hard to pin down.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dniuy6",
+      "kind": "mistake",
+      "front": "A student says the LD50 is a safe dose. Why is this wrong?",
+      "back": "The LD50 is **not** safe: half the animals die at that dose, and some animals die at lower doses.",
+      "hint": "Think about what happens to the test group at this dose.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k8kcj1",
+      "kind": "mistake",
+      "front": "A student compares the LD50 of a substance in mice with the LD50 of another substance in rats. What is wrong?",
+      "back": "Values are only fairly comparable when the **species, route of exposure, and test conditions** match, because different species can respond differently to the same dose.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jr3x1l",
+      "kind": "term",
+      "front": "What is the route of exposure in a toxicity test?",
+      "back": "The **route of exposure** is the pathway by which a substance enters the body, such as swallowing, breathing, or absorption through skin.",
+      "hint": "Think about how a substance could get inside an animal.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "040eng8",
+      "kind": "concept",
+      "front": "Which factors can change an LD50 value even when the same substance is tested?",
+      "back": "**Species**, route of exposure, age, sex, health, and observation time can all change the result. Young, old, or ill animals are often more sensitive.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pvfko3",
+      "kind": "term",
+      "front": "What is LC50, and when is it used instead of LD50?",
+      "back": "LC50 is the **concentration** of a substance that kills half a test population. It is used for poisons in air or water rather than a dose per body mass.",
+      "hint": "Think about how a poison reaches an organism that lives in air or water.",
+      "sectionId": "s5"
+    }
+  ]
+}

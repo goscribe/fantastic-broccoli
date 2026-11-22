@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-3-1-3",
+  "topicCode": "3.3.1.3",
+  "topicName": "Superposition and stationary waves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:11.680Z",
+  "cards": [
+    {
+      "id": "0w875tq",
+      "kind": "concept",
+      "front": "What happens to the displacement at a point where two waves overlap?",
+      "back": "The **principle of superposition** applies: the resultant displacement is the sum of the separate displacements, keeping their signs. Waves pass through each other and emerge unchanged.",
+      "hint": "Think about ripples from two stones in a pond after they cross.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1d7nl2p",
+      "kind": "concept",
+      "front": "How is a stationary wave formed on a rope tied to a wall?",
+      "back": "A wave travels along the rope, reflects at the fixed end and travels back. The incident and reflected waves have the same frequency and almost equal amplitude, so they superpose into a **stationary wave** that stays in place.",
+      "hint": "Follow one wave from your hand to the wall and back.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18mtm4r",
+      "kind": "concept",
+      "front": "What is the difference between a node and an antinode?",
+      "back": "A **node** is where the two waves always arrive in antiphase, so the displacement is always zero. An **antinode** is where they arrive in phase, so the displacement is greatest.",
+      "hint": "Consider what happens when crests meet crests and when crests meet troughs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1x89ahg",
+      "kind": "mistake",
+      "front": "Why is the distance between two neighbouring nodes not a whole wavelength?",
+      "back": "Neighbouring nodes are **half a wavelength** apart, because one loop between them is half a wavelength long. A full wavelength spans two loops.",
+      "hint": "Count the loops between two adjacent nodes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ztr684",
+      "kind": "term",
+      "front": "What is the fundamental frequency of a stationary wave on a string?",
+      "back": "The **fundamental frequency**, $f_1$, is the lowest frequency at which a stationary wave forms on a string fixed at both ends. It gives a pattern with one loop.",
+      "hint": "Think about the pattern that fits between the ends with the fewest loops.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b2bqa3",
+      "kind": "formula",
+      "front": "In $f_1=\\frac{v}{2L}$, what is $v$ and what unit is it measured in?",
+      "back": "$v$ is the speed of waves on the string, in $\\mathrm{m\\,s^{-1}}$. $L$ is the string length in $\\mathrm{m}$, and $f_1$ is in $\\mathrm{Hz}$.",
+      "hint": "Think about how many half-wavelengths fit along the string.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xx45b3",
+      "kind": "term",
+      "front": "What is a harmonic of a string?",
+      "back": "A **harmonic** is a stationary wave pattern whose frequency is a whole-number multiple of $f_1$. The second harmonic is $2f_1$ and has two loops; the third is $3f_1$.",
+      "hint": "Compare the number of loops with the fundamental pattern.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1u6c9tt",
+      "kind": "formula",
+      "front": "How do tension $T$ and mass per unit length $\\mu$ affect $f_1$ in $f_1=\\frac{1}{2L}\\sqrt{\\frac{T}{\\mu}}$?",
+      "back": "Frequency rises with tension $T$ in $\\mathrm{N}$ and falls with $\\mu$ in $\\mathrm{kg\\,m^{-1}}$. Doubling $T$ multiplies $f_1$ by $\\sqrt{2}$, and doubling $L$ halves it.",
+      "hint": "Look at where $T$ and $\\mu$ sit in the expression.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gycrm8",
+      "kind": "example",
+      "front": "A string of length $0.65\\,\\mathrm{m}$ carries waves at $130\\,\\mathrm{m\\,s^{-1}}$. What is its fundamental frequency?",
+      "back": "$f_1=\\frac{130}{2\\times0.65}=100\\,\\mathrm{Hz}$. The second harmonic is then $200\\,\\mathrm{Hz}$.",
+      "hint": "Start from the fundamental frequency equation for a string fixed at both ends.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07lymgr",
+      "kind": "term",
+      "front": "What is a progressive wave?",
+      "back": "A **progressive wave** moves through a medium and transfers energy along the wave, as each point oscillates in turn.",
+      "hint": "Contrast it with a wave pattern that stays in place.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "02b4z6h",
+      "kind": "concept",
+      "front": "Why does a stationary wave transfer no net energy along the string?",
+      "back": "The two travelling waves carry equal energy in opposite directions, so the **net energy transfer** is zero. Energy stays in the oscillating string.",
+      "hint": "Consider the energy carried by each travelling wave separately.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ifqil9",
+      "kind": "concept",
+      "front": "How does the amplitude of a stationary wave differ from that of a progressive wave?",
+      "back": "A progressive wave has the same amplitude at every point. A stationary wave has **zero amplitude at nodes** and maximum amplitude at antinodes.",
+      "hint": "Think about which points on the string never move.",
+      "sectionId": "s6"
+    }
+  ]
+}

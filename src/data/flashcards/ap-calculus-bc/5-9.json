@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "5-9",
+  "topicCode": "5.9",
+  "topicName": "Connecting f, f' and f''",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:25.926Z",
+  "cards": [
+    {
+      "id": "1y3k85x",
+      "kind": "concept",
+      "front": "What does the sign of $f'(x)$ tell you about the graph of $f$ near $x$?",
+      "back": "A **positive** $f'(x)$ means $f$ rises as $x$ increases nearby. A negative value means $f$ falls, and zero means the tangent line is horizontal.",
+      "hint": "Think about the slope of the tangent line.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0df18u0",
+      "kind": "concept",
+      "front": "What does $f''(x)>0$ tell you about the graph of $f$ on an interval?",
+      "back": "The graph is **concave up** there, because the slopes of $f$ are increasing. It does not mean $f$ itself is increasing.",
+      "hint": "Concavity is about changing slope, not height.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1r1bcrn",
+      "kind": "concept",
+      "front": "How does a sign change in $f'$ reveal a local maximum or minimum?",
+      "back": "A sign change from **positive to negative** gives a local maximum. A change from negative to positive gives a local minimum.",
+      "hint": "Watch where $f'$ crosses the horizontal axis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ou7tda",
+      "kind": "term",
+      "front": "What is a stationary point of $f$?",
+      "back": "A **stationary point** is a point where $f'(x)=0$. The graph need not turn there; it may flatten and keep going in the same direction.",
+      "hint": "Check what the derivative equals at that point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "128g1rk",
+      "kind": "mistake",
+      "front": "Is every point where $f'(x)=0$ a maximum or minimum of $f$?",
+      "back": "**No.** The graph may just flatten and continue in the same direction. You must check whether $f'$ changes sign there.",
+      "hint": "A zero alone is not enough.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1djk07w",
+      "kind": "formula",
+      "front": "Write the equation of the tangent line to $f$ at $x=a$.",
+      "back": "$y-f(a)=f'(a)(x-a)$. Here $f(a)$ is the height of the graph and $f'(a)$ is the tangent slope at $x=a$.",
+      "hint": "Use point-slope form.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07lelmb",
+      "kind": "example",
+      "front": "For $f(x)=x^3-3x$, find $f'(2)$ and $f''(2)$ and interpret both values.",
+      "back": "$f'(2)=9$ and $f''(2)=12$. The tangent slope at $x=2$ is 9, and that slope is increasing at a rate of 12 per unit increase in $x$.",
+      "hint": "Differentiate twice, then substitute $x=2$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gb3577",
+      "kind": "concept",
+      "front": "What does the height of a point on the graph of $f'$ represent?",
+      "back": "It represents a **slope** of $f$ at that $x$-value. It is not a height of $f$.",
+      "hint": "Name the graph before reading its height.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07684yz",
+      "kind": "mistake",
+      "front": "If $f''(x)>0$, must $f$ be increasing?",
+      "back": "**No.** $f''>0$ means the slopes of $f$ are increasing. To know whether $f$ rises or falls, check the sign of $f'$.",
+      "hint": "Second derivative and first derivative answer different questions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zli61v",
+      "kind": "concept",
+      "front": "When does a sign change in $f''$ indicate a change in concavity?",
+      "back": "When $f$ is continuous at that point and $f''$ switches between positive and negative there. A zero of $f''$ alone does not establish this.",
+      "hint": "Look for a switch in sign, not just a zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05ggpsz",
+      "kind": "example",
+      "front": "For $f(x)=x^3-3x$, what are $f'(1)$ and $f''(1)$, and what do they say about the graph?",
+      "back": "$f'(1)=0$ and $f''(1)=6$. The tangent is horizontal at $x=1$, and the tangent slope is increasing there.",
+      "hint": "Use $f'(x)=3x^2-3$ and $f''(x)=6x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16pvm4h",
+      "kind": "concept",
+      "front": "What is the second derivative $f''(x)$?",
+      "back": "It is the **derivative of $f'(x)$**. It measures how the slope of $f$ changes as $x$ increases.",
+      "hint": "Differentiate the first derivative.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w51jjo",
+      "kind": "term",
+      "front": "What does it mean for a graph to be concave up on an interval?",
+      "back": "Its tangent slopes **increase** across that interval. This means $f''$ is positive there.",
+      "hint": "Think about slope, not height.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l378b6",
+      "kind": "example",
+      "front": "If $f'(a)=2$ and $f''(a)<0$, what is happening to the graph of $f$ at $x=a$?",
+      "back": "The graph **rises** at $a$ because $f'(a)>0$, but its slope is decreasing because $f''(a)<0$.",
+      "hint": "Read each sign separately, with its own meaning.",
+      "sectionId": "s3"
+    }
+  ]
+}

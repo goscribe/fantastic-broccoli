@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-3-2-1",
+  "topicCode": "3.3.2.1",
+  "topicName": "Interference",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:20.361Z",
+  "cards": [
+    {
+      "id": "1cq1htw",
+      "kind": "concept",
+      "front": "Why must two sources be coherent to produce a steady interference pattern?",
+      "back": "Coherent sources keep the same frequency and a constant phase difference, so the **reinforcing** and **cancelling** places stay fixed. Non-coherent sources have phases that drift randomly, so no steady pattern forms.",
+      "hint": "Think about whether the phase between the two waves changes over time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1p0v6vu",
+      "kind": "concept",
+      "front": "What phase difference between two overlapping waves gives constructive interference?",
+      "back": "A phase difference of $0^{\\circ}$ or $360^{\\circ}$, so the waves are **in phase** and their displacements add to give the sum of the amplitudes.",
+      "hint": "Picture the peaks of the two waves lining up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ymt70r",
+      "kind": "formula",
+      "front": "What path difference condition gives constructive interference for two sources in phase?",
+      "back": "$n\\lambda$, where $n$ is a whole number (0, 1, 2 and so on) and $\\lambda$ is the wavelength of the waves.",
+      "hint": "Think about how many full cycles of extra travel fit into the path difference.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12ep3yf",
+      "kind": "formula",
+      "front": "What path difference gives destructive interference for two sources in phase?",
+      "back": "$\\left(n+\\frac{1}{2}\\right)\\lambda$, an odd number of half wavelengths, where $n$ is a whole number.",
+      "hint": "Think about the path difference that leaves the waves in antiphase.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ms0cr6",
+      "kind": "term",
+      "front": "What is meant by path difference?",
+      "back": "**Path difference** is the difference between the distances the waves travel from the two sources to a point.",
+      "hint": "Think about how the two routes to the point compare.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m3uwws",
+      "kind": "term",
+      "front": "What is destructive interference?",
+      "back": "**Destructive interference** is when overlapping waves arrive in antiphase, so their displacements oppose each other and cancel, giving a quiet or dark place.",
+      "hint": "Contrast this with the case where peaks meet peaks.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b48oxg",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that destructive interference destroys energy?",
+      "back": "Energy is conserved. Destructive interference only **redistributes** energy, which goes to places where constructive interference occurs.",
+      "hint": "Think about where the energy goes when the wave cancels at one point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vqa4fs",
+      "kind": "mistake",
+      "front": "Why do two separate lamps not give a steady interference pattern?",
+      "back": "They are **not coherent**: their phases drift randomly, so the phase difference keeps changing and no fixed pattern forms.",
+      "hint": "Think about whether the waves keep a fixed relationship over time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18pn7gd",
+      "kind": "process",
+      "front": "What are the steps to decide the type of interference at a point?",
+      "back": "1) Subtract the smaller distance from the larger to get the **path difference**. 2) Divide by the wavelength. 3) A whole number means constructive; an answer ending in a half means destructive.",
+      "hint": "Start with the two distances measured from the sources.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0u768zi",
+      "kind": "example",
+      "front": "Two in-phase loudspeakers emit wavelength $0.40\\,\\mathrm{m}$. A point is $5.30\\,\\mathrm{m}$ and $4.50\\,\\mathrm{m}$ from them. Which interference occurs?",
+      "back": "Path difference is $0.80\\,\\mathrm{m}$, which is $2\\lambda$, a whole number, so the interference is **constructive** and the sound is loud.",
+      "hint": "Subtract the two distances first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zzbdnm",
+      "kind": "example",
+      "front": "In-phase sources of wavelength $0.30\\,\\mathrm{m}$ are $6.75\\,\\mathrm{m}$ and $6.30\\,\\mathrm{m}$ from a point. What interference occurs there?",
+      "back": "Path difference is $0.45\\,\\mathrm{m}$, which is $1.5\\lambda$, ending in a half, so the interference is **destructive**.",
+      "hint": "Divide the path difference by the wavelength before deciding.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03f2bq3",
+      "kind": "mistake",
+      "front": "Why is a distance alone not enough to justify the type of interference?",
+      "back": "You must give the path difference in **wavelengths** by dividing by $\\lambda$, so the reader can see whether it is a whole number or ends in a half.",
+      "hint": "Think about what the wavelength tells you about the cycles.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0oal55i",
+      "kind": "formula",
+      "front": "What fringe spacing formula applies in a double-slit set-up?",
+      "back": "$w=\\frac{\\lambda D}{s}$, where $\\lambda$ is wavelength, $D$ is screen distance and $s$ is slit separation. It holds when $D$ is much larger than $s$.",
+      "hint": "Consider which quantity sits on top and which on the bottom.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0oh28kc",
+      "kind": "formula",
+      "front": "How is the phase difference in degrees linked to the path difference?",
+      "back": "Phase difference $=360^{\\circ}\\times\\frac{\\text{path difference}}{\\lambda}$, so a half-wavelength path difference gives $180^{\\circ}$.",
+      "hint": "Think about how much phase one extra wavelength of path adds.",
+      "sectionId": "s5"
+    }
+  ]
+}

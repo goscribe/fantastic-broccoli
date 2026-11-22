@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "s3",
+  "topicCode": "S3",
+  "topicName": "Probability",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:44.694Z",
+  "cards": [
+    {
+      "id": "0ne3972",
+      "kind": "formula",
+      "front": "What is the addition rule for $P(A\\cup B)$ for any two events $A$ and $B$?",
+      "back": "$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$. The **overlap** $P(A\\cap B)$ is subtracted because it was counted twice in the sum.",
+      "hint": "Think about what is counted twice when two circles overlap.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09o9qf1",
+      "kind": "concept",
+      "front": "What does it mean for two events to be independent?",
+      "back": "One event does not change the probability of the other, so $P(A\\cap B)=P(A)\\times P(B)$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l6zy7k",
+      "kind": "formula",
+      "front": "How is the conditional probability $P(A\\mid B)$ calculated from $P(A\\cap B)$ and $P(B)$?",
+      "back": "$P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}$. Knowing $B$ has happened **shrinks the sample space** to the circle for $B$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "148lmir",
+      "kind": "term",
+      "front": "What is the sample space of a random experiment?",
+      "back": "The **sample space** is the set of all possible outcomes of the experiment.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0atv719",
+      "kind": "formula",
+      "front": "How is $P(A')$ found from $P(A)$?",
+      "back": "Subtract from 1: $P(A')=1-P(A)$, since **$A'$** is the event that $A$ does not happen.",
+      "hint": "Consider how the complement and $A$ together cover the whole sample space.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cszzj9",
+      "kind": "example",
+      "front": "In a Venn diagram, $P(A\\text{ only})=0.3$, $P(A\\cap B)=0.2$, $P(B\\text{ only})=0.4$ and $P(\\text{neither})=0.1$. What is $P(A\\cup B)$?",
+      "back": "$P(A\\cup B)=0.9$. Add the three regions inside the circles: $0.3+0.2+0.4=0.9$.",
+      "hint": "Which regions lie inside at least one circle?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0aga6gz",
+      "kind": "mistake",
+      "front": "A student finds $P(A\\cup B)$ as $P(A)+P(B)$ even though the events overlap. What is the error?",
+      "back": "They **double-count** the overlap $A\\cap B$. Subtract it once: $P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$.",
+      "hint": "Look at the region inside both circles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05gc112",
+      "kind": "term",
+      "front": "What does it mean for two events to be mutually exclusive?",
+      "back": "They **cannot both happen** at the same time, so $P(A\\cap B)=0$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ueqo14",
+      "kind": "mistake",
+      "front": "Why can two mutually exclusive events with non-zero probabilities never be independent?",
+      "back": "Mutually exclusive means $P(A\\cap B)=0$, but independence needs $P(A\\cap B)=P(A)P(B)>0$. The two conditions contradict each other.",
+      "hint": "Compare the value of $P(A\\cap B)$ each condition demands.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14ip2l3",
+      "kind": "example",
+      "front": "Which comparison shows whether A and B are independent when $P(A)=0.5$, $P(B)=0.6$ and $P(A\\cap B)=0.2$?",
+      "back": "Compare $P(A\\cap B)$ with $P(A)\\times P(B)=0.3$. Since 0.2 is not 0.3, **A and B are not independent**.",
+      "hint": "Recall what independence says about $P(A\\cap B)$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lrpzq1",
+      "kind": "process",
+      "front": "How do you find the probability of one combined outcome from a tree diagram?",
+      "back": "**Multiply** the probabilities along each path that gives the outcome, then **add** the results from all such paths.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "04p9r30",
+      "kind": "example",
+      "front": "A bag holds 5 red and 3 blue counters. Two are taken without replacement. What is the probability of one counter of each colour?",
+      "back": "$\\frac{15}{28}\\approx0.536$. Add the paths red-then-blue $\\frac{15}{56}$ and blue-then-red $\\frac{15}{56}$.",
+      "hint": "Consider both orders of colours.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0atcgaj",
+      "kind": "mistake",
+      "front": "When two items are taken without replacement, what should change on the second stage of a tree diagram?",
+      "back": "Reduce the **denominator** by 1, because one item has been removed, so the later branch probabilities change.",
+      "hint": "Think about what is left in the bag.",
+      "sectionId": "s5"
+    }
+  ]
+}

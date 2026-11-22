@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "5-4",
+  "topicCode": "5.4",
+  "topicName": "First derivative test",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:18.935Z",
+  "cards": [
+    {
+      "id": "1me893j",
+      "kind": "concept",
+      "front": "How does the sign of a derivative tell you what its function is doing?",
+      "back": "A **positive** derivative means the function increases, and a **negative** derivative means it decreases. The sign reads the direction of movement.",
+      "hint": "Think about whether the graph is going up or down as x increases.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ezmj5d",
+      "kind": "concept",
+      "front": "Which change in derivative sign at a critical point gives a local maximum, and which gives a local minimum?",
+      "back": "A **positive-to-negative** change gives a local maximum, because the function rises then falls. A **negative-to-positive** change gives a local minimum, because it falls then rises.",
+      "hint": "Read the signs from left to right around the point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "131gh7z",
+      "kind": "mistake",
+      "front": "If f'(c)=0, is x=c automatically a local maximum or minimum?",
+      "back": "**No.** A zero derivative alone does not classify the point. Check the signs on both sides. For x^3, f'(0)=0, yet f' is positive on both sides, so there is no extremum.",
+      "hint": "Check what happens to the sign on each side of the point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xxs8a8",
+      "kind": "term",
+      "front": "What is a sign chart?",
+      "back": "A **sign chart** records the sign of a derivative on the intervals separated by points where its sign might change, such as critical points.",
+      "hint": "It is a table of signs over intervals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "017luzl",
+      "kind": "process",
+      "front": "What are the steps of the first derivative test for a function?",
+      "back": "Find the points where the derivative is zero, then split the domain into **test intervals** at those points. Test one value in each interval for its sign, read the sign change at each point, and evaluate the function to give the coordinates.",
+      "hint": "Start by solving f'(x)=0.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00l0xoj",
+      "kind": "formula",
+      "front": "For f(x)=x^3-3x, what is f'(x) in factored form?",
+      "back": "$f'(x)=3(x+1)(x-1)$, which expands to $3x^2-3$. Its zeros at $x=-1$ and $x=1$ split the test intervals.",
+      "hint": "Differentiate first, then factor out the common 3.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10lqi7r",
+      "kind": "example",
+      "front": "For f(x)=x^3-3x, what are the signs of f' at x=-2, x=0 and x=2?",
+      "back": "**Positive, negative, positive**: f'(-2)=9, f'(0)=-3, and f'(2)=9. The signs change at x=-1 and x=1.",
+      "hint": "Substitute each value into 3x^2-3.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1odq09s",
+      "kind": "example",
+      "front": "What are the local extrema of f(x)=x^3-3x?",
+      "back": "A **local maximum** at (-1,2) and a **local minimum** at (1,-2). The derivative goes from positive to negative at x=-1 and from negative to positive at x=1.",
+      "hint": "Evaluate f at the two zeros of f'.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1991fgw",
+      "kind": "concept",
+      "front": "Can a point where the derivative does not exist still be a local minimum?",
+      "back": "**Yes**, if the function is continuous there. For g(x)=|x|, the derivative is negative left of zero and positive right of zero, so (0,0) is a local minimum.",
+      "hint": "Check continuity at the point before using the sign test.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ix4uli",
+      "kind": "mistake",
+      "front": "Can the two-sided sign test classify an endpoint or a discontinuity?",
+      "back": "**No.** An endpoint has values on only one side, and at a discontinuity opposite sign changes need not produce an extremum.",
+      "hint": "The test needs values on both sides of the point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bfs6ow",
+      "kind": "term",
+      "front": "What is a local maximum?",
+      "back": "A **local maximum** is a function value that is at least as large as nearby function values.",
+      "hint": "Compare the value with the values just next to it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18oacja",
+      "kind": "term",
+      "front": "What are test intervals?",
+      "back": "**Test intervals** are the intervals between points that may separate regions with different derivative signs. You test one value in each to find its sign.",
+      "hint": "They sit between the points on a sign chart.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10uavte",
+      "kind": "term",
+      "front": "What is a local minimum?",
+      "back": "A **local minimum** is a function value that is at most as large as nearby function values.",
+      "hint": "It is the opposite of a local maximum.",
+      "sectionId": "s2"
+    }
+  ]
+}

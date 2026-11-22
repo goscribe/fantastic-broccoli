@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-11",
+  "topicCode": "5.11",
+  "topicName": "Efficiency of energy transfer",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:12.326Z",
+  "cards": [
+    {
+      "id": "0w1g6kd",
+      "kind": "concept",
+      "front": "Why do food chains rarely have more than four or five trophic levels?",
+      "back": "**Energy losses** at every transfer add up, so very little energy is left by the fourth or fifth level to support more organisms.",
+      "hint": "Think about how much energy passes on at each step.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fxc7px",
+      "kind": "formula",
+      "front": "Which equation gives the efficiency of energy transfer between two trophic levels?",
+      "back": "$\\mathrm{efficiency}=\\frac{\\mathrm{energy\\ in\\ next\\ level}}{\\mathrm{energy\\ in\\ previous\\ level}}\\times100$, giving a **percentage**, with no unit beyond %.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pazx5e",
+      "kind": "concept",
+      "front": "What are the main ways energy is lost between trophic levels?",
+      "back": "Parts of organisms are **not eaten**, undigested material leaves as faeces (**egestion**), energy is released in **respiration** (much as heat), and waste such as urine carries energy away (**excretion**).",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ktqqlo",
+      "kind": "term",
+      "front": "What is a trophic level?",
+      "back": "An organism's **position** in a feeding sequence.",
+      "hint": "Think of each step in a food chain.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0myo9io",
+      "kind": "term",
+      "front": "What is a food chain?",
+      "back": "A **sequence** showing which organisms eat others along one feeding route.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kx5nez",
+      "kind": "term",
+      "front": "What is a consumer?",
+      "back": "An **organism** that obtains energy by feeding on other organisms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i7oame",
+      "kind": "term",
+      "front": "What is egestion?",
+      "back": "The **removal** of undigested material from the body as faeces.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cxrn9d",
+      "kind": "example",
+      "front": "Producers contain $20\\,000\\,\\mathrm{kJ}$ and primary consumers contain $2400\\,\\mathrm{kJ}$. What is the efficiency of this transfer?",
+      "back": "**12%**: $\\frac{2400}{20\\,000}\\times100=0.12\\times100=12\\%$.",
+      "hint": "Which level's energy goes on the bottom of the fraction?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vapmi6",
+      "kind": "mistake",
+      "front": "Why is dividing by the next level's energy wrong when calculating efficiency?",
+      "back": "You must divide by the **previous** level, the energy the transfer started from. Dividing the other way gives the wrong ratio.",
+      "hint": "Think about where the energy comes from.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d99ju8",
+      "kind": "mistake",
+      "front": "Where does the energy go when it is lost from a food chain?",
+      "back": "It is **not destroyed**. It passes to the surroundings as heat or to other organisms, so it is no longer available to the next level.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0u81udq",
+      "kind": "concept",
+      "front": "Why is the energy in an animal's faeces not available to its predator?",
+      "back": "Faeces contain **undigested** material that never became part of the animal's biomass. The predator eats the animal, not its faeces.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02r348u",
+      "kind": "concept",
+      "front": "Why do animals that keep their bodies warm need more food for each unit of growth?",
+      "back": "They lose more energy as **heat**, so less of the food energy is stored as biomass.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "020i90f",
+      "kind": "process",
+      "front": "How can a farmer increase the share of food energy that becomes animal growth?",
+      "back": "**Keep** animals in warm housing to cut heat loss, and **limit** their movement to cut energy used in respiration. More energy is then stored as biomass.",
+      "hint": "Consider which losses from the previous section are controllable.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xhp42m",
+      "kind": "concept",
+      "front": "Why can a given area of land support more people if they eat crops directly?",
+      "back": "Eating crops **removes one transfer step**, so less energy is lost before the food reaches people.",
+      "hint": "Count the trophic levels between the crop and the person.",
+      "sectionId": "s5"
+    }
+  ]
+}

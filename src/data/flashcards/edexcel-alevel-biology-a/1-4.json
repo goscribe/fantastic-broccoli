@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-4",
+  "topicCode": "1.4",
+  "topicName": "The cardiac cycle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:35.529Z",
+  "cards": [
+    {
+      "id": "0vxb5h6",
+      "kind": "concept",
+      "front": "What decides whether a valve in the heart is open or closed?",
+      "back": "A valve opens when the pressure behind it is higher than the pressure in front, and closes when the pressure in front is higher. Valves have no muscle of their own, so pressure differences alone control them.",
+      "hint": "Think about what makes a valve move, not what it is made of.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06w17qb",
+      "kind": "process",
+      "front": "What are the stages of one cardiac cycle, in order?",
+      "back": "**Diastole**: chambers relax and fill from the veins. **Atrial systole**: atria contract and push blood into the ventricles. **Ventricular systole**: ventricles contract, AV valves shut, semilunar valves open and blood leaves. Then the ventricles relax, the semilunar valves shut, and diastole begins again.",
+      "hint": "Start with the chambers relaxing and filling, then the upper chambers contract.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12zkdwn",
+      "kind": "concept",
+      "front": "Why does ventricular pressure rise steeply at the start of ventricular systole?",
+      "back": "Both sets of valves are closed, so the blood has nowhere to go. The volume stays constant while the muscle contracts, so the pressure climbs steeply.",
+      "hint": "Ask what the blood can do while both sets of valves are shut.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bbjf5z",
+      "kind": "term",
+      "front": "What is systole?",
+      "back": "**Systole** is the phase of the cardiac cycle in which a chamber's muscle contracts and its internal pressure rises.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00ibm0j",
+      "kind": "term",
+      "front": "What is diastole?",
+      "back": "**Diastole** is the phase of the cardiac cycle in which a chamber's muscle relaxes and the chamber refills with blood.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06j9ih2",
+      "kind": "term",
+      "front": "What is the cardiac cycle?",
+      "back": "The **cardiac cycle** is one complete sequence of heart contraction and relaxation, during which pressure changes open and close the valves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wtiel4",
+      "kind": "concept",
+      "front": "Why is the heart divided by a muscular wall into two sides?",
+      "back": "The right side pumps blood to the lungs and the left side pumps blood to the rest of the body. The **wall** stops the two sides' blood from mixing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0p2idp1",
+      "kind": "term",
+      "front": "Where are the semilunar valves found, and what do they prevent?",
+      "back": "The **semilunar valves** lie at the exits of the ventricles, in the arteries leaving the heart. They prevent blood flowing back into the ventricles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14ynxrb",
+      "kind": "mistake",
+      "front": "What is wrong with thinking that valves push blood through the heart?",
+      "back": "Valves do not push blood. Contracting chambers create the pressure, and the valves only decide which way the blood can move.",
+      "hint": "Consider where the force that moves blood actually comes from.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rvbj9r",
+      "kind": "concept",
+      "front": "Why does aortic pressure fall only slowly after the semilunar valve closes?",
+      "back": "The **elastic recoil** of the artery wall keeps blood moving forward, so the pressure falls gradually rather than dropping quickly.",
+      "hint": "Think about the artery wall, not the heart chamber.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xu1vni",
+      "kind": "example",
+      "front": "A cardiac cycle lasts 0.80 s. What is the heart rate in beats per minute?",
+      "back": "$75\\,\\text{beats\\,min}^{-1}$, from heart rate = $\\frac{60\\,\\text{s\\,min}^{-1}}{0.80\\,\\text{s}}$ = 75.",
+      "hint": "Each cycle is one heartbeat, and there are 60 s in a minute.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1452pt3",
+      "kind": "mistake",
+      "front": "Why must the cycle time be in seconds before using 60 ÷ cycle time?",
+      "back": "The 60 is seconds in one minute, so the cycle time must also be in seconds. Dividing with minutes gives the wrong unit.",
+      "hint": "Check the units on the 60 before you divide.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0eq35yu",
+      "kind": "concept",
+      "front": "How does a faster heart rate change diastole?",
+      "back": "Diastole shortens the most, so the chambers have less time to fill with blood. At rest, diastole is the longest part of the cycle.",
+      "hint": "Think about which part of the cycle is longest when the heart is at rest.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "12-3",
+  "topicCode": "12.3",
+  "topicName": "Magnetic fields of current-carrying wires",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:25.593Z",
+  "cards": [
+    {
+      "id": "1oo5om9",
+      "kind": "concept",
+      "front": "What shape are the magnetic field lines around a long straight current-carrying wire?",
+      "back": "They are **circles** centered on the wire, lying in planes perpendicular to it. The field does not point along the wire or straight toward or away from it.",
+      "hint": "Think about what a compass does when moved around the wire.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bvheaj",
+      "kind": "formula",
+      "front": "What equation gives the field near a long straight wire, and what do its symbols mean?",
+      "back": "$B=\\frac{\\mu_0 I}{2\\pi r}$, where $I$ is the current in amperes and $r$ is the perpendicular distance in meters. Doubling the current doubles $B$; doubling the distance halves it.",
+      "hint": "Check which quantity sits on top and which sits underneath.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0na20ld",
+      "kind": "process",
+      "front": "How do you find the direction of the field around a current-carrying wire?",
+      "back": "Use the **right-hand grip rule**: point your thumb along the current. Your curled fingers show the way the field circles.",
+      "hint": "Which hand, and which direction does the thumb point?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12o9b5g",
+      "kind": "example",
+      "front": "A long straight wire carries 5.0 A. What is the field strength 0.020 m from the wire?",
+      "back": "$B=5.0\\times10^{-5}\\,\\mathrm{T}$. Substitute into $B=\\frac{\\mu_0 I}{2\\pi r}$ with $\\mu_0=4\\pi\\times10^{-7}\\,\\mathrm{T\\,m/A}$; the $\\pi$ terms cancel.",
+      "hint": "Keep the distance in meters before you substitute.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cwd35e",
+      "kind": "mistake",
+      "front": "A student uses a distance of 20 cm directly in $B=\\frac{\\mu_0 I}{2\\pi r}$ without converting. What is wrong?",
+      "back": "The distance must be in **meters**. Convert 20 cm to 0.20 m first, or the calculated field will be wrong.",
+      "hint": "Check the units of every quantity in the equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19f4qic",
+      "kind": "term",
+      "front": "What is the permeability of free space, $\\mu_0$?",
+      "back": "The constant $\\mu_0 = 4\\pi\\times10^{-7}\\,\\mathrm{T\\,m/A}$, which relates current to the field it produces in a vacuum.",
+      "hint": "It is a fixed constant that appears in field equations.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gsyazt",
+      "kind": "process",
+      "front": "How do you find the field direction at the center of a circular loop?",
+      "back": "Curl your fingers along the current. Your **thumb** points along the field at the center, which is roughly perpendicular to the plane of the loop.",
+      "hint": "Use the same grip rule as for a straight wire, but curl along the loop.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rp25r5",
+      "kind": "concept",
+      "front": "Why does a single current loop behave like a short bar magnet?",
+      "back": "Field lines pass through the loop in one direction and return around the outside. One face acts as a **north pole** and the other as a south pole, and far away the pattern matches a bar magnet.",
+      "hint": "Think about where field lines leave and enter the loop.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l838ou",
+      "kind": "term",
+      "front": "What is a solenoid?",
+      "back": "A **solenoid** is a long coil of wire with many closely spaced turns that produces a strong, nearly uniform field inside when it carries current.",
+      "hint": "It is a coil, not a single loop.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0c1t3if",
+      "kind": "concept",
+      "front": "Describe the magnetic field inside and outside a solenoid.",
+      "back": "Inside, the field is strong, nearly **uniform**, and parallel to the axis. Outside, it is much weaker and looks like a bar magnet's field, with one end a north pole and the other a south pole.",
+      "hint": "Compare the strength and the shape of the field in the two regions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x00uuj",
+      "kind": "formula",
+      "front": "What is the field inside a long solenoid, and what do its symbols mean?",
+      "back": "$B=\\mu_0 nI$, where $n$ is turns per meter of length and $I$ is the current. Doubling either $n$ or $I$ doubles $B$. Length and radius do not matter if the coil is long compared with its width.",
+      "hint": "Think about how many turns each meter of coil contains.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10wvq5b",
+      "kind": "mistake",
+      "front": "A student says the field inside a solenoid is zero because the field is enclosed. Is this right?",
+      "back": "No. The field inside is **strongest and most uniform**, while the field outside is weak. A solenoid concentrates the field inside its coil.",
+      "hint": "Compare the field inside the coil with the field outside it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rkhs5s",
+      "kind": "concept",
+      "front": "Why do electromagnets use coils rather than a straight wire?",
+      "back": "A solenoid **concentrates** the field inside its coil. A straight wire's field spreads out in every direction and weakens quickly with distance.",
+      "hint": "Compare where the field is strongest for each shape.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bxooc1",
+      "kind": "example",
+      "front": "If the distance from a long straight wire triples and the current stays constant, what happens to the field strength?",
+      "back": "It becomes **one third** as strong, because $B$ is inversely proportional to the distance $r$.",
+      "hint": "Use the proportionality in the field equation.",
+      "sectionId": "s2"
+    }
+  ]
+}

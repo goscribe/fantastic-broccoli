@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "12-1",
+  "topicCode": "12.1",
+  "topicName": "Magnetic fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:25.369Z",
+  "cards": [
+    {
+      "id": "0vae43t",
+      "kind": "term",
+      "front": "What is a magnetic field?",
+      "back": "The field is the region around a magnet or moving charge where magnetic forces act. It is a **vector** quantity, so it has both size and direction, and its strength $B$ is measured in teslas.",
+      "hint": "Think about the space around a bar magnet.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1j24mak",
+      "kind": "concept",
+      "front": "What produces a magnetic field?",
+      "back": "**Moving charge** produces a magnetic field. In a permanent magnet this is the motion and spin of electrons, and an electric current is also moving charge. A charge at rest produces no magnetic field.",
+      "hint": "Magnets and currents are the two sources in the note.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0htfos4",
+      "kind": "concept",
+      "front": "Which way do field lines run around a bar magnet?",
+      "back": "Outside the magnet they run from the **north pole** to the **south pole**. Inside, they continue from south to north, so each line forms a closed loop.",
+      "hint": "Picture the lines leaving one end and returning at the other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0msq38b",
+      "kind": "concept",
+      "front": "Why can magnetic field lines never cross?",
+      "back": "The field has only **one direction** at each point. A crossing would mean two directions at one point, which is impossible.",
+      "hint": "Each line shows the direction of the field at a point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tp072y",
+      "kind": "mistake",
+      "front": "If you cut a bar magnet in half, can you isolate a single north pole?",
+      "back": "No. Each piece becomes a **smaller magnet** with its own north and south pole. Magnetic poles cannot be separated.",
+      "hint": "Count the poles after the cut.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xrvwo9",
+      "kind": "term",
+      "front": "What is a magnetic domain?",
+      "back": "A **magnetic domain** is a tiny region inside a ferromagnetic material in which the atoms' magnetic effects all point the same way.",
+      "hint": "Domains are microscopic and sit inside iron or steel.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hxoo8l",
+      "kind": "process",
+      "front": "How does a magnet attract an unmagnetized iron nail?",
+      "back": "1) The nail's domains point randomly, so their effects cancel. 2) The magnet's field aligns the domains. 3) The nail gets a net field. 4) Its nearer end becomes the opposite pole, so the two attract.",
+      "hint": "Start with what the domains are doing before the magnet arrives.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ayci09",
+      "kind": "formula",
+      "front": "What is the SI unit of magnetic field strength $B$?",
+      "back": "The **tesla** (T), where $1\\,\\mathrm{T} = 1\\,\\mathrm{N/(A\\,m)}$.",
+      "hint": "Its symbol is a single capital letter.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dfjcr2",
+      "kind": "concept",
+      "front": "Why is soft iron used for temporary magnets but steel for permanent ones?",
+      "back": "Soft iron magnetizes easily but **loses** most of its magnetism once the field is removed. Steel resists this, so it **keeps** much of its magnetism.",
+      "hint": "Compare how the domains behave after the field is removed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05w53mh",
+      "kind": "mistake",
+      "front": "Does heating or dropping a magnet make it stronger?",
+      "back": "No. Heating or dropping can shake the domains out of alignment, so the magnet **weakens**.",
+      "hint": "What happens to aligned domains when they are shaken?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0wj53gz",
+      "kind": "term",
+      "front": "What is a permanent magnet?",
+      "back": "A **permanent magnet** keeps its own magnetic field without needing an external current or magnetizing field. Its field comes from aligned electron motion and spin inside the atoms.",
+      "hint": "Contrast it with a magnet that needs a current to work.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1852nll",
+      "kind": "example",
+      "front": "A compass sits beside a wire. What does it show when the current flows, and what happens when the current stops?",
+      "back": "The compass **turns** while the current flows, which shows the current produces a field. When the current stops, it returns to its old direction.",
+      "hint": "Think about what the compass needle responds to.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-12",
+  "topicCode": "3.12",
+  "topicName": "Introduction to vectors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:28.862Z",
+  "cards": [
+    {
+      "id": "04vkpxi",
+      "kind": "term",
+      "front": "What is a vector?",
+      "back": "A **vector** is a quantity with both magnitude and direction. It is drawn as an arrow, where the length shows the size and the head shows the direction.",
+      "hint": "Compare it with a scalar, which has size only.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d0741q",
+      "kind": "formula",
+      "front": "What is the formula for the magnitude of $\\mathbf{v}=\\begin{pmatrix}v_1\\\\ v_2\\\\ v_3\\end{pmatrix}$?",
+      "back": "$|\\mathbf{v}|=\\sqrt{v_1^2+v_2^2+v_3^2}$, where $|\\mathbf{v}|$ is the **length** of the vector. It does not depend on where the arrow starts.",
+      "hint": "Square each component, add, then take the square root.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0i7zroe",
+      "kind": "concept",
+      "front": "How do you find the vector $\\overrightarrow{AB}$ from the position vectors of A and B?",
+      "back": "Subtract the start from the end: $\\overrightarrow{AB}=\\mathbf{b}-\\mathbf{a}$. Each component is the end coordinate minus the start coordinate.",
+      "hint": "Always subtract the start point from the end point.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09yhtds",
+      "kind": "process",
+      "front": "How do you add two vectors given in component form?",
+      "back": "Add each matching pair of components. For example $\\begin{pmatrix}1\\\\ 2\\end{pmatrix}+\\begin{pmatrix}3\\\\ -1\\end{pmatrix}=\\begin{pmatrix}4\\\\ 1\\end{pmatrix}$. Only vectors with the same number of components can be added.",
+      "hint": "Work component by component.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qt8xsf",
+      "kind": "concept",
+      "front": "What does multiplying a vector by a negative scalar do?",
+      "back": "It **reverses the direction** of the vector. The magnitude is scaled by $|k|$, so it is never negative.",
+      "hint": "Think about walking the opposite way.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xpmpva",
+      "kind": "formula",
+      "front": "What is the unit vector in the direction of $\\mathbf{v}$?",
+      "back": "$\\frac{\\mathbf{v}}{|\\mathbf{v}|}$. Divide each component of $\\mathbf{v}$ by its **magnitude** so the result has length 1.",
+      "hint": "You need the magnitude of $\\mathbf{v}$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mjiiur",
+      "kind": "example",
+      "front": "Find the unit vector in the direction of $\\begin{pmatrix}3\\\\ 0\\\\ 4\\end{pmatrix}$.",
+      "back": "The magnitude is $\\sqrt{9+0+16}=5$, so the unit vector is $\\begin{pmatrix}\\frac{3}{5}\\\\ 0\\\\ \\frac{4}{5}\\end{pmatrix}$.",
+      "hint": "Find the magnitude, then divide each component by it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r6qlpl",
+      "kind": "mistake",
+      "front": "A student says $-\\mathbf{v}$ has magnitude $-|\\mathbf{v}|$. What is wrong?",
+      "back": "Magnitude is a **length**, so it is never negative. $-\\mathbf{v}$ has the same magnitude as $\\mathbf{v}$; only its direction changes.",
+      "hint": "Think about what a length can be.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gen2n1",
+      "kind": "example",
+      "front": "Find the midpoint of A(1,2,3) and B(4,0,5).",
+      "back": "Add the position vectors to get $\\begin{pmatrix}5\\\\ 2\\\\ 8\\end{pmatrix}$, then halve it. The midpoint is $(2.5,\\,1,\\,4)$.",
+      "hint": "Use $\\frac{\\mathbf{a}+\\mathbf{b}}{2}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0roai91",
+      "kind": "concept",
+      "front": "When are two vectors parallel?",
+      "back": "When **one is a scalar multiple** of the other, so $\\mathbf{u}=k\\mathbf{v}$ for some non-zero $k$. A negative $k$ gives vectors pointing in opposite directions.",
+      "hint": "Check whether every component is multiplied by the same number.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08l4ucq",
+      "kind": "term",
+      "front": "What does it mean for points to be collinear?",
+      "back": "Points are **collinear** if they all lie on a single straight line.",
+      "hint": "Picture the points on one line.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "10bsa5r",
+      "kind": "process",
+      "front": "What steps show that three points P, Q and R are collinear?",
+      "back": "1) Find two vectors such as $\\overrightarrow{PQ}$ and $\\overrightarrow{QR}$. 2) Show one is a scalar multiple of the other. 3) Note they share the point Q, so the points lie on one line.",
+      "hint": "The shared point is the final step.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0dqovpe",
+      "kind": "mistake",
+      "front": "Are two parallel vectors enough to show that three points are collinear?",
+      "back": "**No**. The vectors must also share a common point, such as Q. Parallel vectors alone do not prove that the points lie on one line.",
+      "hint": "Think about where the vectors start.",
+      "sectionId": "s6"
+    }
+  ]
+}

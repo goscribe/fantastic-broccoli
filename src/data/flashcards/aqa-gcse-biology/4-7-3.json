@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-7-3",
+  "topicCode": "4.7.3",
+  "topicName": "Biodiversity and human impact",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:58.824Z",
+  "cards": [
+    {
+      "id": "10uhlv6",
+      "kind": "concept",
+      "front": "Why does high biodiversity help an ecosystem stay stable when conditions change?",
+      "back": "If one **species** declines, other species may still provide food or other resources, so the ecosystem can cope with the change.",
+      "hint": "Think about what happens to the other species when one population falls.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rhtjnd",
+      "kind": "process",
+      "front": "What are the steps by which excess fertiliser entering a lake leads to fish dying?",
+      "back": "Nutrients cause rapid **algal** growth. The algae die and microorganisms break them down, using up dissolved oxygen. Oxygen runs out and the fish die. This whole process is **eutrophication**.",
+      "hint": "Start with what the fertiliser adds to the water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tg9mll",
+      "kind": "concept",
+      "front": "Why does conservation often combine several measures rather than just one?",
+      "back": "**Different threats need different solutions**, so a single measure may not tackle every cause of habitat loss or pollution.",
+      "hint": "Consider the separate threats a species might face at the same time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rvsbk9",
+      "kind": "term",
+      "front": "What is a species?",
+      "back": "A **species** is a group of organisms that can breed together to produce fertile offspring.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v8cgp3",
+      "kind": "term",
+      "front": "What is biodiversity?",
+      "back": "**Biodiversity** is the variety of different species in an area or across Earth.",
+      "hint": "Think about variety rather than how many individuals there are.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0l8bxeg",
+      "kind": "mistake",
+      "front": "Why is it wrong to say biodiversity means the number of organisms in an area?",
+      "back": "**Biodiversity** concerns the variety of species, not the total number of organisms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rapvpa",
+      "kind": "term",
+      "front": "Which environmental problem does sulfur dioxide, released when sulfur-containing fuels burn, cause?",
+      "back": "**Acid rain**, which damages plants and aquatic habitats. Sulfur dioxide is $\\text{SO}_2$.",
+      "hint": "Think about which gas is released when fuels containing sulfur burn.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lb01au",
+      "kind": "mistake",
+      "front": "A student says sulfur dioxide causes global warming. What is the mistake?",
+      "back": "Carbon dioxide ($\\text{CO}_2$) contributes to **global warming**. Sulfur dioxide ($\\text{SO}_2$) leads to acid rain instead.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oxm2b4",
+      "kind": "concept",
+      "front": "Why does destroying peat bogs add to global warming?",
+      "back": "Peat stores carbon. When exposed peat decomposes or burns, the stored carbon is released into the air as $\\text{CO}_2$.",
+      "hint": "Think about what peat contains before it is disturbed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18pxq0r",
+      "kind": "term",
+      "front": "What is deforestation?",
+      "back": "**Deforestation** is the clearing of forests, often to make land available for farming, building or fuel.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nqp1tn",
+      "kind": "concept",
+      "front": "How can litter and toxic chemicals harm habitats on land?",
+      "back": "Litter can damage habitats or harm animals that swallow it. Toxic chemicals can contaminate the **soil**.",
+      "hint": "Consider two different ways waste can reach an animal or the ground.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cpecvr",
+      "kind": "term",
+      "front": "What is conservation?",
+      "back": "**Conservation** is the protection and management of species and habitats.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1512xo3",
+      "kind": "term",
+      "front": "What is a breeding programme?",
+      "back": "A **breeding programme** raises the numbers of threatened species by managing their reproduction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04no67m",
+      "kind": "concept",
+      "front": "Why is a breeding programme alone not enough to save a threatened species?",
+      "back": "Bred animals still need **suitable habitats** to survive in the wild, so the habitats must also be protected or restored.",
+      "hint": "Think about where the animals go after they have been bred.",
+      "sectionId": "s4"
+    }
+  ]
+}

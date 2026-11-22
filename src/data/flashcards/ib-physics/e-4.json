@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "e-4",
+  "topicCode": "E.4",
+  "topicName": "Fission",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:47.062Z",
+  "cards": [
+    {
+      "id": "1bddjtb",
+      "kind": "concept",
+      "front": "How does an incoming neutron lead to nuclear fission?",
+      "back": "A heavy nucleus **absorbs** the neutron and becomes unstable enough to split into smaller nuclei. The split releases energy and usually two or three neutrons.",
+      "hint": "Focus on what the nucleus does after it absorbs the neutron.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0v0jut4",
+      "kind": "concept",
+      "front": "When does a fission chain reaction stay steady?",
+      "back": "When each fission leads, on **average**, to exactly one further fission. If the average is lower the reaction dies away, and if it is higher the rate increases.",
+      "hint": "Think about the average number of neutrons causing new fissions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q0eizn",
+      "kind": "example",
+      "front": "A fission releases 200 MeV and a chemical reaction releases 4 eV per molecule. How many times more energy per event is fission?",
+      "back": "About $5.0\\times10^7$ times more. Convert $200\\,\\mathrm{MeV}=200\\times10^6\\,\\mathrm{eV}$, then divide by 4 eV. The ratio has no units.",
+      "hint": "Convert MeV to eV first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ejvxk0",
+      "kind": "term",
+      "front": "What are fission fragments?",
+      "back": "The **smaller nuclei** formed when a heavy nucleus undergoes fission. The pair produced is not always the same.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1a0oluq",
+      "kind": "term",
+      "front": "What is a moderator in a reactor?",
+      "back": "A material that **slows neutrons**, making them more likely to cause fission in uranium-235.",
+      "hint": "Think about speed, not removal.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06pm3dr",
+      "kind": "term",
+      "front": "What are control rods?",
+      "back": "Movable components that **absorb neutrons**. Moving them changes how many neutrons remain available to cause further fissions.",
+      "hint": "What does a control rod do to neutrons?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gxie9p",
+      "kind": "process",
+      "front": "What steps keep a reactor's fission reaction steady while extracting heat?",
+      "back": "Neutrons from fission cause further fissions. A **moderator** slows them to raise fission chances. **Control rods** absorb some neutrons to regulate the rate. Coolant carries heat away to generate electricity.",
+      "hint": "Four parts work together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1v2v196",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a neutron knocks pieces off a nucleus during fission?",
+      "back": "The neutron is **absorbed**, and this makes the whole nucleus unstable enough to split. Knocking off pieces is not the mechanism.",
+      "hint": "Think about what absorption does to the nucleus.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19w08tk",
+      "kind": "mistake",
+      "front": "A student says a moderator removes neutrons from the reaction. What is wrong?",
+      "back": "A moderator only **slows** neutrons, making them more likely to cause fission in uranium-235. Slowing them does not remove them from the reaction.",
+      "hint": "Compare slowing with absorbing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0z1rdzd",
+      "kind": "concept",
+      "front": "Why does a relatively small mass of nuclear fuel yield a large amount of energy?",
+      "back": "Each fission releases about **200 MeV**, tens of millions of times more than a chemical reaction's few electronvolts per molecule.",
+      "hint": "Compare energy per event.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18d09r7",
+      "kind": "mistake",
+      "front": "Why is stopping the chain reaction not enough to make a reactor safe?",
+      "back": "Radioactive products keep releasing **decay heat** after the chain reaction stops, so cooling must continue to prevent overheating.",
+      "hint": "Heat can still be produced after the reaction stops.",
+      "sectionId": "s4"
+    }
+  ]
+}

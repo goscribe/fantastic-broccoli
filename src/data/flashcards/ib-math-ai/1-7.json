@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "1-7",
+  "topicCode": "1.7",
+  "topicName": "Amortization and annuities",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:17.897Z",
+  "cards": [
+    {
+      "id": "12ui7g3",
+      "kind": "term",
+      "front": "What is an annuity?",
+      "back": "An **annuity** is a series of equal payments made at regular intervals over a fixed time, such as 200 dollars saved at the end of each month.",
+      "hint": "Think of one fixed payment repeated on a schedule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vaa1qx",
+      "kind": "concept",
+      "front": "Why is the present value of a series of payments smaller than the total of the payments?",
+      "back": "Because later payments have had less time to earn interest, so each one is worth less today than its face value.",
+      "hint": "Compare a payment received now with one received in three years.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v0a5gx",
+      "kind": "process",
+      "front": "How is each payment in an amortized loan used?",
+      "back": "Each fixed payment first covers that month's interest. Whatever is left reduces the **principal** still owed.",
+      "hint": "Interest comes first, every month.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "091oj1u",
+      "kind": "formula",
+      "front": "Which formula gives the future value of an annuity, and what does each symbol mean?",
+      "back": "$\\mathrm{FV}=\\mathrm{PMT}\\times\\frac{(1+i)^n-1}{i}$, where PMT is the payment, $i$ is the interest rate per period and $n$ is the number of payments.",
+      "hint": "Use the rate for one payment period, not the annual rate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17enklx",
+      "kind": "formula",
+      "front": "Which formula gives the present value of a series of equal payments?",
+      "back": "$\\mathrm{PV}=\\mathrm{PMT}\\times\\frac{1-(1+i)^{-n}}{i}$, using the same $i$ and $n$ as the future value formula.",
+      "hint": "Only the moment you measure the value differs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f5x1d1",
+      "kind": "formula",
+      "front": "How do you rearrange the present value formula to find a loan's regular payment?",
+      "back": "$\\mathrm{PMT}=\\frac{\\mathrm{PV}\\times i}{1-(1+i)^{-n}}$, where PV is the **principal** borrowed.",
+      "hint": "The loan amount equals the present value of all the payments.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fz3lg9",
+      "kind": "mistake",
+      "front": "What goes wrong if you use the annual rate of 6% for monthly loan payments?",
+      "back": "You overstate the interest by a factor of 12. Use the period rate $i=\\frac{0.06}{12}=0.005$ instead.",
+      "hint": "Which rate matches a monthly payment?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04gj3ei",
+      "kind": "example",
+      "front": "Find the future value of 200 dollars saved at the end of each month for 3 years at 6% nominal, compounded monthly.",
+      "back": "About 7870 dollars, to 3 significant figures. Use $i=0.005$ and $n=36$, so $200\\times\\frac{1.005^{36}-1}{0.005}=200\\times39.336$.",
+      "hint": "Find $n$ first: 12 payments a year for 3 years.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ryw6f3",
+      "kind": "example",
+      "front": "Find the present value of 500 dollars received at the end of each year for 4 years at 5% per year.",
+      "back": "About 1770 dollars, to 3 significant figures, from $500\\times\\frac{1-1.05^{-4}}{0.05}=500\\times3.546$.",
+      "hint": "Here $i=0.05$ and $n=4$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09ue9qr",
+      "kind": "example",
+      "front": "Find the monthly payment on a 10000 dollar loan repaid over 2 years at 6% nominal, compounded monthly.",
+      "back": "About 443 dollars, to 3 significant figures, from $\\frac{10000\\times0.005}{1-1.005^{-24}}=443.21$.",
+      "hint": "Use $i=0.005$ and $n=24$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rzeroz",
+      "kind": "process",
+      "front": "How do you work out one row of an amortization schedule?",
+      "back": "Interest is the balance times the period rate. Repaid is the payment minus interest. New balance is the old balance minus repaid. For the 10000 dollar loan, month 1 interest is 50.00 dollars.",
+      "hint": "Always start from the balance at the start of the month.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sxc8oy",
+      "kind": "process",
+      "front": "How do you use a TVM solver to find the regular deposit needed to reach a target future value?",
+      "back": "Enter N, I%, P/Y and C/Y, set PV to 0 and FV to the target, leave PMT blank and solve, using the sign convention so money paid out is negative.",
+      "hint": "Money you pay out is negative.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "185l26x",
+      "kind": "term",
+      "front": "What is the principal of a loan?",
+      "back": "The **principal** is the original amount borrowed, before any interest is added. It equals the present value of all the repayments.",
+      "hint": "It is the starting balance of the loan.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16lqtg5",
+      "kind": "concept",
+      "front": "Why does the interest part of each loan payment fall over the life of the loan?",
+      "back": "Interest is charged on the balance still owed. Each payment reduces that balance, so next month's interest is smaller.",
+      "hint": "Follow the balance from one month to the next.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-2",
+  "topicCode": "2.2",
+  "topicName": "Cell membranes and the fluid mosaic model",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:16.018Z",
+  "cards": [
+    {
+      "id": "0l0knrj",
+      "kind": "concept",
+      "front": "Why does a cell surface membrane need to be partially permeable?",
+      "back": "It lets some substances cross while blocking others, so the cell keeps an internal environment that differs from its surroundings.",
+      "hint": "Think about what would happen to enzymes and molecules without any control.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wgk62y",
+      "kind": "concept",
+      "front": "Why can ions not easily pass through the middle of a phospholipid bilayer?",
+      "back": "The middle is **hydrophobic**, so water-soluble ions mix poorly with it and struggle to cross. Small uncharged molecules such as oxygen pass through more easily by diffusion.",
+      "hint": "Think about how water-soluble substances mix with the inner part of the membrane.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nxkmqq",
+      "kind": "term",
+      "front": "What does the fluid mosaic model describe?",
+      "back": "A **flexible** phospholipid bilayer in which phospholipids move sideways and proteins are scattered among them like tiles. Fluid refers to movement and mosaic to the pattern.",
+      "hint": "Consider what each word in the model's name describes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fvtkls",
+      "kind": "term",
+      "front": "What is a phospholipid?",
+      "back": "A lipid with a **hydrophilic head** that attracts water and two **hydrophobic tails** that repel water.",
+      "hint": "Think about how many parts it has and how each part behaves in water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0734r74",
+      "kind": "process",
+      "front": "What steps form a phospholipid bilayer when phospholipids are placed in water?",
+      "back": "1) The phospholipids arrange so their heads face the watery surroundings on both sides. 2) Their tails face each other, hidden in the middle of the layer.",
+      "hint": "Start with which end of the molecule meets the water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n9p4mz",
+      "kind": "term",
+      "front": "What is a channel protein?",
+      "back": "A membrane protein with a **water-filled pore** through which specific ions can diffuse across the bilayer.",
+      "hint": "Think about how ions get past the blocked middle of the bilayer.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pwols2",
+      "kind": "term",
+      "front": "How does a carrier protein move a substance across the membrane?",
+      "back": "It **binds** a specific molecule and changes shape to carry it across. Some carriers use energy to move substances from low to high concentration.",
+      "hint": "Think about what the protein does after the molecule attaches to it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bdpm6z",
+      "kind": "concept",
+      "front": "Why can a cell control exactly which substances cross its membrane?",
+      "back": "Proteins only move substances they recognise, because only molecules that fit a protein's pore or **binding site** can cross.",
+      "hint": "Think about how the shape of a protein matters.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xbbz15",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that cholesterol makes a membrane rigid?",
+      "back": "Cholesterol **limits** the movement of phospholipid tails, making the membrane more stable and less leaky, but the membrane stays flexible.",
+      "hint": "Focus on what cholesterol restricts, not on what it stops completely.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1httclw",
+      "kind": "concept",
+      "front": "What role does a glycoprotein's carbohydrate chain play?",
+      "back": "The chain sticks out of the cell as a **marker** that other cells and signalling molecules can recognise, identifying cells that belong to the same body.",
+      "hint": "Think about which side of the membrane the chain sits on.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wlseb5",
+      "kind": "mistake",
+      "front": "Why is it wrong to think the arrangement of molecules in a membrane is fixed?",
+      "back": "The molecules keep moving and the arrangement keeps changing. Proteins move too, though usually more slowly than phospholipids, so the pattern is **dynamic**.",
+      "hint": "Think about whether the molecules in the membrane stay still.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ye2azt",
+      "kind": "concept",
+      "front": "Why is the flexibility of the membrane important to the cell?",
+      "back": "Flexibility lets cells **change shape** and lets membranes join or break apart, which the fluid mosaic model explains.",
+      "hint": "Think about what a cell needs to do when it moves or divides.",
+      "sectionId": "s5"
+    }
+  ]
+}

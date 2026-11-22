@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "4-4",
+  "topicCode": "4.4",
+  "topicName": "Elastic and inelastic collisions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:41.448Z",
+  "cards": [
+    {
+      "id": "01l5esx",
+      "kind": "concept",
+      "front": "In an elastic collision, what happens to the total kinetic energy?",
+      "back": "It is **conserved**: the total kinetic energy is the same before and after the collision. A steel ball bouncing off a hard floor is an example.",
+      "hint": "Compare the steel ball with the lump of clay.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05y7qsv",
+      "kind": "mistake",
+      "front": "Does an inelastic collision mean momentum is lost?",
+      "back": "**No**. Total momentum is conserved in every isolated collision. Only kinetic energy changes, becoming thermal energy, sound, or deformation.",
+      "hint": "Think about what the word inelastic refers to.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jv5dfe",
+      "kind": "concept",
+      "front": "Why does a perfectly inelastic collision lose the most kinetic energy?",
+      "back": "Objects that **stick together** share one final velocity. This is the largest kinetic energy loss that momentum conservation allows.",
+      "hint": "Think about clay hitting the floor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "080jxaw",
+      "kind": "process",
+      "front": "How do you classify a collision using kinetic energy?",
+      "back": "1) Find the total kinetic energy before. 2) Find the total kinetic energy after. 3) If they match, the collision is **elastic**. If the after value is smaller, it is **inelastic**. A larger after value needs an energy source.",
+      "hint": "Momentum always matches, so use energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ig7rdb",
+      "kind": "formula",
+      "front": "What is the formula for kinetic energy, and what do its symbols mean?",
+      "back": "$K=\\frac{1}{2}mv^2$, where $m$ is **mass** in kg, $v$ is **speed** in m/s, and $K$ is kinetic energy in J.",
+      "hint": "Check the units: kg, m/s, J.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17arrci",
+      "kind": "formula",
+      "front": "For an elastic collision where the second object starts at rest, what are the final velocities?",
+      "back": "$v_{1f}=\\frac{m_1-m_2}{m_1+m_2}v_{1i}$ and $v_{2f}=\\frac{2m_1}{m_1+m_2}v_{1i}$. Both are in **m/s**, where $v_{1i}$ is the initial speed of object 1.",
+      "hint": "These shortcuts apply only to elastic collisions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ico1zb",
+      "kind": "concept",
+      "front": "How many conservation equations does an elastic collision in one dimension give you?",
+      "back": "**Two**: momentum and kinetic energy. Together they determine both final velocities. Objects also separate at the same relative speed at which they approached.",
+      "hint": "Count the quantities that are conserved.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f7p07f",
+      "kind": "example",
+      "front": "A 1.5 kg cart at 4.0 m/s hits a 0.50 kg cart at rest, and they stick together. How much kinetic energy is lost?",
+      "back": "**3.0 J**. The shared final speed is 3.0 m/s, and kinetic energy falls from 12 J to 9.0 J.",
+      "hint": "Find the shared velocity with momentum first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bb3fsc",
+      "kind": "example",
+      "front": "A 2.0 kg cart at 3.0 m/s hits an elastic 1.0 kg cart at rest. What are the final velocities?",
+      "back": "The 2.0 kg cart moves at **1.0 m/s** and the 1.0 kg cart at **4.0 m/s**, both forward. Momentum (6.0) and kinetic energy (9.0 J) both check out.",
+      "hint": "Use the elastic formulas with the 2.0 kg cart as object 1.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00m8xwy",
+      "kind": "mistake",
+      "front": "A student uses $v_f=\\frac{m_1v_1}{m_1+m_2}$ for every collision. What is wrong?",
+      "back": "That form fits only objects that **stick together**. Elastic and other inelastic collisions need different equations or a given final velocity.",
+      "hint": "Which collision gives one shared final velocity?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00fw3el",
+      "kind": "mistake",
+      "front": "Why can a negative final velocity be a correct answer?",
+      "back": "A negative sign means motion in the **negative direction**, opposite to the positive direction you chose. Set the positive direction before you start.",
+      "hint": "Think about the sign convention you chose.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cf5gaz",
+      "kind": "term",
+      "front": "What is a perfectly inelastic collision?",
+      "back": "A collision in which the objects **stick together** and move off with one common final velocity.",
+      "hint": "Clay hitting a floor is the classic case.",
+      "sectionId": "s2"
+    }
+  ]
+}

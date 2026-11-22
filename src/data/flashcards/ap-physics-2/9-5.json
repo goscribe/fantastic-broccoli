@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "9-5",
+  "topicCode": "9.5",
+  "topicName": "Specific heat and thermal conductivity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:06.512Z",
+  "cards": [
+    {
+      "id": "03i4gvq",
+      "kind": "concept",
+      "front": "Why does a lake warm and cool so slowly compared with a metal spoon in soup?",
+      "back": "Water has a large **specific heat**, so it takes a lot of energy to change its temperature. A large specific heat means the material resists temperature change.",
+      "hint": "Think about what specific heat measures.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c5bqn3",
+      "kind": "formula",
+      "front": "What equation links energy transferred thermally to mass, specific heat, and temperature change?",
+      "back": "$Q=mc\\Delta T$, where $Q$ is energy in J, $m$ is mass in kg, $c$ is specific heat in $\\mathrm{J/(kg\\,K)}$, and $\\Delta T$ is the temperature change in K.",
+      "hint": "Three quantities multiply together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15xwgcr",
+      "kind": "concept",
+      "front": "What is the rate of energy transfer by conduction through a flat slab, and what does each symbol mean?",
+      "back": "$\\frac{Q}{\\Delta t}=\\frac{kA\\Delta T}{L}$, where $k$ is thermal conductivity, $A$ is face area, $\\Delta T$ is the temperature difference, and $L$ is thickness. The rate is measured in **watts**.",
+      "hint": "Which quantity sits in the denominator?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1092zme",
+      "kind": "term",
+      "front": "What is conduction?",
+      "back": "**Conduction** is the transfer of energy through a material by interactions between neighboring particles, without the material moving as a whole.",
+      "hint": "Think about what happens between particles, not the whole object.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1frh7j8",
+      "kind": "term",
+      "front": "What does thermal conductivity $k$ measure?",
+      "back": "**Thermal conductivity** measures how readily a material conducts energy. Metals have large values, while wood, foam, and air have small ones.",
+      "hint": "Compare copper with wood.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cvla57",
+      "kind": "process",
+      "front": "What are the steps to calculate the energy transferred to a sample when it warms?",
+      "back": "1) Find $\\Delta T$ as final minus initial temperature. 2) Write $Q=mc\\Delta T$. 3) Substitute values with units. 4) Evaluate; a positive $Q$ means the sample gains energy.",
+      "hint": "Start with the temperature change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w3bswl",
+      "kind": "example",
+      "front": "A 2.0 kg water sample warms from 20 °C to 35 °C. How much energy does it gain? Take $c=4{,}186\\,\\mathrm{J/(kg\\,K)}$.",
+      "back": "$Q=125{,}580\\,\\mathrm{J}\\approx1.3\\times10^{5}\\,\\mathrm{J}$. The water gains energy, so $Q$ is positive.",
+      "hint": "First find $\\Delta T$ in kelvin.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "019isfe",
+      "kind": "example",
+      "front": "A glass window: area 1.5 m², thickness 5.0 mm, $k=0.80\\,\\mathrm{W/(m\\,K)}$, temperature difference 10 K. What is the rate of energy transfer?",
+      "back": "About $2.4\\times10^{3}\\,\\mathrm{W}$. Convert 5.0 mm to 0.0050 m first, then use $\\frac{kA\\Delta T}{L}$.",
+      "hint": "Check the units of thickness before substituting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01y4fvd",
+      "kind": "mistake",
+      "front": "A student says a thick wool coat stops energy transfer and keeps cold in. What is wrong with this?",
+      "back": "Insulation does not stop energy transfer. It only **lowers the rate** at which energy moves from hot to cold, by using low conductivity and added thickness.",
+      "hint": "Think about what the rate equation tells you.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0djlhc0",
+      "kind": "mistake",
+      "front": "A student thinks a bigger block of metal has a larger specific heat. Why is this wrong?",
+      "back": "Specific heat is a property of the **material**, not the sample. A bigger block needs more energy for the same temperature change, but its specific heat stays the same.",
+      "hint": "Separate the material from the sample.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05jg67a",
+      "kind": "concept",
+      "front": "Why does trapped air make a good insulator?",
+      "back": "Still air has a very low thermal conductivity, and trapped air cannot easily circulate and carry energy with it, so energy transfer slows.",
+      "hint": "Consider both conduction and circulation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1cwa9nm",
+      "kind": "concept",
+      "front": "Why does a metal conduct energy so much better than wood?",
+      "back": "In a metal, some electrons are free to move through the solid and carry energy quickly from hot regions to cold ones, adding to the energy passed by vibrating atoms.",
+      "hint": "Think about free electrons.",
+      "sectionId": "s3"
+    }
+  ]
+}

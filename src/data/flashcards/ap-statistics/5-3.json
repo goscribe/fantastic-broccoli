@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "5-3",
+  "topicCode": "5.3",
+  "topicName": "Linear regression models",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:07.967Z",
+  "cards": [
+    {
+      "id": "154djvh",
+      "kind": "concept",
+      "front": "What does the slope 4.5 in $\\hat{y}=55+4.5x$ mean, in context?",
+      "back": "For each additional hour studied per week, the **predicted** quiz score increases by 4.5 points. The slope is a predicted change, so it is not exact for every student.",
+      "hint": "Name both variables and their units in your answer.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0m13px7",
+      "kind": "concept",
+      "front": "Why are predictions made beyond the range of the data unreliable?",
+      "back": "The pattern may change outside the observed data, and the data give no evidence about what happens there. This is **extrapolation**.",
+      "hint": "Think about what the data actually show.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0m81650",
+      "kind": "formula",
+      "front": "What is the general form of a linear regression model's equation, and what do its symbols stand for?",
+      "back": "$\\hat{y}=a+bx$, where $a$ is the **y-intercept**, $b$ is the **slope**, $x$ is the explanatory value, and $\\hat{y}$ is a predicted response, not an observed one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x5s7sv",
+      "kind": "term",
+      "front": "What is the **response variable** in a linear regression model?",
+      "back": "The variable whose value the model predicts, written $y$ and plotted on the vertical axis.",
+      "hint": "Think about which value is the target of the model.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vrpojl",
+      "kind": "term",
+      "front": "What is the **explanatory variable** in a linear regression model?",
+      "back": "The variable used to make the prediction, written $x$ and plotted on the horizontal axis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02qnrfv",
+      "kind": "mistake",
+      "front": "Why do swapped explanatory and response variables give wrong predictions?",
+      "back": "Swapping $x$ and $y$ produces a different line, so the predictions answer the wrong question. Choose the **response variable** first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1e3ybj2",
+      "kind": "concept",
+      "front": "Why can the intercept 55 in $\\hat{y}=55+4.5x$ be a poor prediction for the quiz model?",
+      "back": "Zero hours lies outside the data, which run from 1 to 8 hours, so 55 is more a **starting point** for the line than a real prediction.",
+      "hint": "Check the range of x values the model was built from.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bs8ngo",
+      "kind": "mistake",
+      "front": "Why is it wrong to say each extra hour adds exactly 4.5 points to a student's score?",
+      "back": "The slope describes a **predicted** change for the line, not an exact change for every student, because observed scores scatter around the line.",
+      "hint": "Think about how observed scores sit relative to the line.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tnolmf",
+      "kind": "process",
+      "front": "What are the steps to predict a response from a given $x$ value?",
+      "back": "Substitute the $x$ value into the equation, multiply the slope by $x$, then add the intercept to get $\\hat{y}$.",
+      "hint": "Start with the model and the x value you are given.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0amqxx9",
+      "kind": "example",
+      "front": "Using $\\hat{y}=55+4.5x$, what is the predicted quiz score for a student who studies 6 hours per week?",
+      "back": "**82** points, since $55+4.5(6)=55+27=82$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jrsrvr",
+      "kind": "mistake",
+      "front": "What is wrong with reporting only the number 82 as the answer to a prediction question?",
+      "back": "A bare number lacks units and context. Say the student is **predicted** to score 82 points, so the value is not mistaken for a certainty.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "033c9cs",
+      "kind": "term",
+      "front": "What is **interpolation** in regression?",
+      "back": "Predicting the response for an $x$ value that lies within the range of the observed data.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "009sg0s",
+      "kind": "example",
+      "front": "Why is the model's prediction for 20 hours of study unreasonable?",
+      "back": "$55+4.5(20)=145$ points, which is impossible on a quiz out of 100. Also, 20 hours lies outside the 1 to 8 hour data, so it is extrapolation.",
+      "hint": "Compare the result with the highest possible score.",
+      "sectionId": "s5"
+    }
+  ]
+}

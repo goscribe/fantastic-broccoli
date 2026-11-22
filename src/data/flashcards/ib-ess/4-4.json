@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "4-4",
+  "topicCode": "4.4",
+  "topicName": "Water pollution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:41.344Z",
+  "cards": [
+    {
+      "id": "1rdgrnk",
+      "kind": "term",
+      "front": "What is a point source of water pollution?",
+      "back": "A **point source** releases pollutants at one identifiable place, such as a factory pipe or chimney.",
+      "hint": "Think of a single pipe you could point to.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15pnb7t",
+      "kind": "process",
+      "front": "What sequence of events takes a lake from nutrient enrichment to fish deaths?",
+      "back": "Nutrients cause rapid **algal growth**, and algae block light so plants below die. Decomposers break down the dead material and use up dissolved oxygen, until fish cannot breathe.",
+      "hint": "Follow the oxygen, not just the algae.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wre83d",
+      "kind": "concept",
+      "front": "Why do top predators usually carry the highest levels of a persistent toxin?",
+      "back": "Through **biomagnification**, the substance becomes more concentrated at each step up a food chain, because predators eat many contaminated prey.",
+      "hint": "Consider what happens at each feeding step.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1c39u6e",
+      "kind": "term",
+      "front": "What is a non-point source of water pollution?",
+      "back": "A **non-point source** spreads pollutants over a wide area, so no single release point can be identified, such as fertiliser washed off many fields.",
+      "hint": "Contrast it with a single pipe.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kbuoi5",
+      "kind": "term",
+      "front": "What is biochemical oxygen demand (BOD)?",
+      "back": "The **dissolved oxygen** used by microorganisms to break down organic matter in a sample over a set time, measured in $\\mathrm{mg\\,dm^{-3}}$.",
+      "hint": "Which organisms use the oxygen?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xcxtbr",
+      "kind": "formula",
+      "front": "What equation gives BOD, and what do its symbols mean?",
+      "back": "$\\mathrm{BOD}=\\mathrm{DO}_{\\mathrm{initial}}-\\mathrm{DO}_{\\mathrm{final}}$, where DO is **dissolved oxygen** in $\\mathrm{mg\\,dm^{-3}}$. A higher BOD means more organic matter.",
+      "hint": "Think about how much oxygen the sample loses over five days.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nvpwjz",
+      "kind": "example",
+      "front": "A sample's dissolved oxygen falls from 9.0 to 6.5 $\\mathrm{mg\\,dm^{-3}}$ over five days. What is its BOD?",
+      "back": "$2.5\\,\\mathrm{mg\\,dm^{-3}}$, because $9.0-6.5=2.5$.",
+      "hint": "Use the BOD equation from the previous card.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h14ax0",
+      "kind": "mistake",
+      "front": "A student says the concentration of a persistent toxin falls as you go up a food chain. What is wrong?",
+      "back": "It **rises**, not falls. Biomagnification concentrates the substance at each step, so top predators usually carry the highest levels.",
+      "hint": "Think about what predators eat.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03ic01d",
+      "kind": "term",
+      "front": "What is bioaccumulation?",
+      "back": "The **build-up** of a substance in an organism's tissues when it is taken in faster than it is lost.",
+      "hint": "Focus on the organism, not the food chain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cfnqfp",
+      "kind": "concept",
+      "front": "Why use both chemical tests and indicator species to assess a river?",
+      "back": "Chemical tests give a **snapshot** of one moment, while indicator species reflect conditions over a longer time.",
+      "hint": "Compare a single reading with a long-term record.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fc9cdw",
+      "kind": "term",
+      "front": "What is an indicator species?",
+      "back": "A **species** whose presence, absence or abundance reflects the environmental conditions of its habitat, such as mayfly nymphs needing clean, well-oxygenated water.",
+      "hint": "Think about what the species needs to survive.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qy2wub",
+      "kind": "process",
+      "front": "What is the order of priority for dealing with pollution?",
+      "back": "First **prevent** pollution, then control what is released, and finally clean up the damage.",
+      "hint": "Prevention comes before cleaning up.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12sdh0f",
+      "kind": "mistake",
+      "front": "A student suggests sewage treatment to solve farmland runoff. What is wrong?",
+      "back": "Strategies must match their source. Farmland runoff needs **less fertiliser** and vegetation strips beside streams, not sewage treatment.",
+      "hint": "Match each strategy to its source.",
+      "sectionId": "s5"
+    }
+  ]
+}

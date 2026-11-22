@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-13",
+  "topicCode": "8.13",
+  "topicName": "Habituation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:17.148Z",
+  "cards": [
+    {
+      "id": "084x0ls",
+      "kind": "term",
+      "front": "What is habituation?",
+      "back": "**Habituation** is a declining response to a repeated stimulus that brings no reward or harm. The response weakens with repetition, so the animal ignores the harmless stimulus.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gyj94l",
+      "kind": "concept",
+      "front": "Why does habituation help an animal survive?",
+      "back": "Ignoring harmless stimuli saves **energy and time**, so the animal can feed or rest. Its attention stays free to notice new stimuli that may signal danger.",
+      "hint": "Think about what each response costs the animal.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01ht4o9",
+      "kind": "concept",
+      "front": "What is the key change at the synapse that weakens the response during habituation?",
+      "back": "**Less calcium entry** into the presynaptic neurone, because calcium channels open less. This reduces the release of neurotransmitter, so the postsynaptic neurone is stimulated less.",
+      "hint": "Trace the signal from the presynaptic membrane across the synapse gap.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0q2toh3",
+      "kind": "process",
+      "front": "What is the order of events at the synapse when habituation occurs?",
+      "back": "1 Calcium channels open less. 2 Fewer calcium ions enter the presynaptic neurone. 3 Fewer vesicles fuse with the membrane. 4 Less neurotransmitter crosses the synapse. 5 The postsynaptic neurone is stimulated less.",
+      "hint": "Start at the presynaptic membrane, where the chain begins.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1yx3amx",
+      "kind": "term",
+      "front": "What is a presynaptic neurone?",
+      "back": "The **presynaptic neurone** is the neurone whose terminal releases neurotransmitter across a synapse when an impulse arrives.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bjftpk",
+      "kind": "term",
+      "front": "What is a postsynaptic neurone?",
+      "back": "The **postsynaptic neurone** is the neurone on the receiving side of a synapse. It responds to the neurotransmitter released across the synapse.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04185w3",
+      "kind": "term",
+      "front": "What is a stimulus?",
+      "back": "A **stimulus** is a detectable change inside or outside an organism, such as a sound or a touch.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sracgq",
+      "kind": "formula",
+      "front": "How do you calculate the percentage decrease in a response?",
+      "back": "$\\frac{\\mathrm{first}-\\mathrm{last}}{\\mathrm{first}}\\times100$, where first and last are the responses to the first and last stimulus, in the same units. The result is the **percentage decrease**.",
+      "hint": "Find the change in response before dividing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nlfroq",
+      "kind": "example",
+      "front": "A sea slug's gill withdrawal falls from $12\\,\\mathrm{mm}$ to $3\\,\\mathrm{mm}$. What is the percentage decrease?",
+      "back": "**75%**, since $\\frac{12-3}{12}\\times100=75$.",
+      "hint": "Work out the change first, then divide by the starting response.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wkvf65",
+      "kind": "concept",
+      "front": "What shape does a habituation response curve have when plotted against repeated stimuli?",
+      "back": "It is **steep at first, then flatter**. Most of the decline happens in the first few touches, and the response then levels off.",
+      "hint": "Think about where the biggest change happens across repeated touches.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16q9h79",
+      "kind": "concept",
+      "front": "Why do people who live beside a railway line often stop noticing the trains?",
+      "back": "The train is a **repeated, harmless stimulus**, so the nervous system gives it less attention and the response fades.",
+      "hint": "Consider what the repeated sound means for the person.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mlpfbj",
+      "kind": "mistake",
+      "front": "Why is it wrong to think habituation stops an animal detecting the stimulus?",
+      "back": "The animal can still detect the stimulus. Only the **response** weakens, because the nervous system gives the stimulus less attention.",
+      "hint": "Ask what the animal can still do after habituation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hv9gbw",
+      "kind": "mistake",
+      "front": "Why is a weaker response to a repeated stimulus not the same as tiredness?",
+      "back": "Habituation is **specific to the stimulus**. A different stimulus can still produce a full response straight away, which tiredness would not explain.",
+      "hint": "Think about what happens when a new stimulus is given.",
+      "sectionId": "s1"
+    }
+  ]
+}

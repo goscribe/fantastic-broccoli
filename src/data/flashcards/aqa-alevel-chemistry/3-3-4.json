@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-4",
+  "topicCode": "3.3.4",
+  "topicName": "Alkenes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:23.864Z",
+  "cards": [
+    {
+      "id": "0d6ee6o",
+      "kind": "concept",
+      "front": "Which part of a C=C double bond makes alkenes so reactive?",
+      "back": "The **pi bond**. Its electron density sits above and below the bond axis, where it is exposed and held less tightly than sigma electrons, so it attracts electrophiles.",
+      "hint": "Compare where the electrons sit in each bond of the double bond.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1a2n75x",
+      "kind": "term",
+      "front": "What is an electrophile?",
+      "back": "A **species** that accepts a pair of electrons to form a covalent bond. Positive ions and atoms with a partial positive charge often act this way.",
+      "hint": "Think about what the electron-rich pi bond attracts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1r4fzgt",
+      "kind": "concept",
+      "front": "How does bromine water show whether a compound contains a C=C double bond?",
+      "back": "Shake it with orange bromine water. An alkene decolourises it to colourless by **addition**, while an alkane leaves it orange. A negative result does not identify which alkene is present.",
+      "hint": "Think about what alkenes can do that alkanes cannot.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0inj1nj",
+      "kind": "formula",
+      "front": "What is the general formula of the alkene family?",
+      "back": "$\\mathrm{C_nH_{2n}}$, where $n$ is the number of carbon atoms. Ethene is $\\mathrm{C_2H_4}$ and propene is $\\mathrm{C_3H_6}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17n255h",
+      "kind": "process",
+      "front": "What are the two steps in the mechanism of bromine adding to ethene?",
+      "back": "Step 1: the pi electrons bond to the $\\delta+$ bromine, and the Br–Br bond breaks **heterolytically**, forming a carbocation and a bromide ion. Step 2: the bromide ion donates a lone pair to the carbocation, giving 1,2-dibromoethane.",
+      "hint": "Start from what the pi electrons do first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0scezbq",
+      "kind": "term",
+      "front": "What is a carbocation?",
+      "back": "An **ion** in which a carbon atom with only three bonds carries a positive charge.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0m1npxx",
+      "kind": "concept",
+      "front": "What happens to the bonding electrons in heterolytic fission?",
+      "back": "**Both** bonding electrons go to one atom, forming two ions. This uneven split is what produces a carbocation and a bromide ion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xbgnmw",
+      "kind": "concept",
+      "front": "Why does propene react with HBr to give mainly 2-bromopropane?",
+      "back": "The **secondary** carbocation is more stable, because two alkyl groups push electron density towards its positive carbon. It forms faster, so 2-bromopropane is the major product.",
+      "hint": "Compare the number of alkyl groups on each positive carbon.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0uczvhv",
+      "kind": "mistake",
+      "front": "Why is it wrong to describe the C=C double bond as two identical bonds?",
+      "back": "The **pi bond** is weaker and more exposed than the sigma bond, so the two bonds are different. The sigma bond forms by head-on overlap, the pi bond by sideways overlap.",
+      "hint": "Think about how each bond forms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07qqs3f",
+      "kind": "mistake",
+      "front": "What is the correct way to describe the colour change when an alkene reacts with bromine water?",
+      "back": "Write that the mixture turns from **orange** to colourless. Do not write that it turns clear.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1fakr2r",
+      "kind": "formula",
+      "front": "What equation shows ethene being hydrated to ethanol?",
+      "back": "$\\mathrm{C_2H_4(g) + H_2O(g) \\rightleftharpoons C_2H_5OH(g)}$. It needs a **phosphoric acid** catalyst at high temperature and pressure.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1rep5u4",
+      "kind": "example",
+      "front": "Which alkane forms when ethene reacts with hydrogen over a heated nickel catalyst?",
+      "back": "**Ethane**, $\\mathrm{C_2H_6}$. Hydrogen adds across the double bond, turning the alkene into a saturated alkane.",
+      "hint": "Think about what addition does to the double bond.",
+      "sectionId": "s6"
+    }
+  ]
+}

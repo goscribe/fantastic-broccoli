@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "10-3",
+  "topicCode": "10.3",
+  "topicName": "Electric fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:08.416Z",
+  "cards": [
+    {
+      "id": "13crzyw",
+      "kind": "concept",
+      "front": "What is the electric field at a point?",
+      "back": "The **electric field** is the electric force per unit charge on a small positive test charge placed at that point: $\\vec{E}=\\frac{\\vec{F}_E}{q}$, measured in $\\mathrm{N/C}$. It is a vector pointing the way a positive charge would be pushed.",
+      "hint": "Think force divided by charge.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17m0wev",
+      "kind": "formula",
+      "front": "What gives the field magnitude of a point charge, and what does each symbol mean?",
+      "back": "$E=\\frac{kQ}{r^2}$, where $Q$ is the source charge in C, $r$ is the distance in m, and $k=9.0\\times10^9\\,\\mathrm{N\\,m^2/C^2}$. The field is directed away from a positive charge and toward a negative one.",
+      "hint": "Check which symbol is squared.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jwyy4p",
+      "kind": "concept",
+      "front": "Why does a known electric field give a force on any charge placed in it?",
+      "back": "Rearranging the field definition gives $\\vec{F}_E=q\\vec{E}$, so the force is the charge times the field. A **positive** charge is pushed along the field, and a **negative** charge is pushed opposite to it.",
+      "hint": "Rearrange the definition of E.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16jegwp",
+      "kind": "term",
+      "front": "What is a field line?",
+      "back": "A **field line** is a curve drawn so that its tangent at each point gives the direction of the electric field there. Lines are closer together where the field is stronger.",
+      "hint": "It is a curve that follows the field.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0o9e35l",
+      "kind": "process",
+      "front": "How do you find the net electric field from several charges?",
+      "back": "Use **superposition**: find each charge's field at the point as if the others were absent, draw each as a vector arrow, then add the arrows with their signs to get the net field.",
+      "hint": "Work through one charge at a time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16teotl",
+      "kind": "concept",
+      "front": "What happens to a point charge's field if you double the distance from it?",
+      "back": "It falls to **one quarter** of its original value. The field follows an inverse-square law, so it is proportional to $\\frac{1}{r^2}$.",
+      "hint": "Square the distance before dividing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13wi6fu",
+      "kind": "mistake",
+      "front": "Does the electric field at a point depend on the test charge used to measure it?",
+      "back": "**No**. A larger test charge feels a larger force, but the ratio $F_E/q$ stays the same. The field is set by the source charges, not by the test charge.",
+      "hint": "Look at the ratio, not the force alone.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0evwpl5",
+      "kind": "mistake",
+      "front": "Why is adding the magnitudes of two fields wrong when finding a net field?",
+      "back": "Fields are **vectors**, so direction matters. Adding sizes alone ignores direction and can wrongly combine fields that point in opposite ways. Add the arrows with their signs instead.",
+      "hint": "Remember that a field has a direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07uoosn",
+      "kind": "mistake",
+      "front": "A negative charge is placed in an electric field. Which way does it accelerate?",
+      "back": "**Opposite** to the field. The force is $F_E=qE$, and because $q$ is negative, the force reverses the field's direction.",
+      "hint": "Check the sign of the charge.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pf1rwp",
+      "kind": "example",
+      "front": "What is the magnitude and direction of the field 0.50 m from a point charge of +4.0 μC?",
+      "back": "$E=\\frac{kQ}{r^2}=1.4\\times10^{5}\\,\\mathrm{N/C}$, directed **away** from the positive charge.",
+      "hint": "Convert μC to C first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gshs66",
+      "kind": "example",
+      "front": "What is the force on an electron in a uniform field of $2.0\\times10^{3}\\,\\mathrm{N/C}$?",
+      "back": "$F_E=|q|E=(1.60\\times10^{-19}\\,\\mathrm{C})(2.0\\times10^{3}\\,\\mathrm{N/C})=3.2\\times10^{-16}\\,\\mathrm{N}$, directed **opposite** to the field because the electron is negative.",
+      "hint": "Use the size of the charge in the magnitude.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06b0c06",
+      "kind": "concept",
+      "front": "What is the net field at the midpoint between two equal positive charges?",
+      "back": "**Zero**. Each charge makes a field of equal size there, pointing in opposite directions, so the two fields cancel.",
+      "hint": "Compare the directions of the two fields.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0so3l4u",
+      "kind": "concept",
+      "front": "What do the field lines look like in a uniform field, such as between two parallel plates?",
+      "back": "They are **straight, parallel and evenly spaced**, so the field has the same size and direction everywhere in that region.",
+      "hint": "Think of the plates' shape.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-9",
+  "topicCode": "4.9",
+  "topicName": "Starch and cellulose",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:55.989Z",
+  "cards": [
+    {
+      "id": "1cwsvgn",
+      "kind": "concept",
+      "front": "Why do cellulose chains stay straight and unbranched, while starch chains coil or branch?",
+      "back": "Cellulose uses **beta-glucose**, and every second unit is turned upside down so the bonds line up. This gives straight chains that can lie side by side.",
+      "hint": "Compare how the two glucose forms join with their neighbours.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ggz9pv",
+      "kind": "concept",
+      "front": "How do straight cellulose chains give a plant cell wall its strength?",
+      "back": "Chains lie side by side and many **hydrogen bonds** form between neighbouring chains. Bundled together as microfibrils, they resist pulling forces.",
+      "hint": "Think about how the chains sit relative to each other.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jyh2qe",
+      "kind": "concept",
+      "front": "Why is starch well suited to storing glucose?",
+      "back": "It is compact, so much glucose fits in a small space. It is insoluble, so it does not draw water in by osmosis. Its many branch ends let enzymes release glucose quickly.",
+      "hint": "Think about size, solubility and where enzymes can act.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dqzq10",
+      "kind": "term",
+      "front": "What is a polysaccharide?",
+      "back": "A **polysaccharide** is a polymer made of many sugar units joined by glycosidic bonds.",
+      "hint": "Think about what the prefix poly- means.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19fkjzc",
+      "kind": "term",
+      "front": "What is a glycosidic bond?",
+      "back": "A **glycosidic bond** is the covalent bond formed between two sugar units in a condensation reaction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pbqben",
+      "kind": "concept",
+      "front": "What is the only difference between alpha-glucose and beta-glucose?",
+      "back": "The position of the $\\text{OH}$ group on carbon 1: it points down in alpha-glucose and up in beta-glucose.",
+      "hint": "Compare a diagram of the two forms side by side.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16tnyop",
+      "kind": "process",
+      "front": "What happens, step by step, when two glucose units join?",
+      "back": "1) Two sugar units come together. 2) A condensation reaction removes a molecule of $\\text{H}_2\\text{O}$. 3) A glycosidic bond forms between them.",
+      "hint": "Look at which molecule leaves the sugars.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hrvzw6",
+      "kind": "term",
+      "front": "What is amylose?",
+      "back": "An **unbranched** chain of alpha-glucose units joined by 1,4 glycosidic bonds, which coils into a helix.",
+      "hint": "Contrast it with the branched form in starch.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hqaiaf",
+      "kind": "term",
+      "front": "What is amylopectin?",
+      "back": "A **branched** polymer of alpha-glucose with 1,4 bonds in its chains and 1,6 bonds at the branch points.",
+      "hint": "Think about which starch component has side branches.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hfqfto",
+      "kind": "term",
+      "front": "What is cellulose?",
+      "back": "An **unbranched** beta-glucose polysaccharide that provides strength in plant cell walls.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bm90ee",
+      "kind": "term",
+      "front": "What are hydrogen bonds?",
+      "back": "**Weak attractions** between a slightly positive hydrogen atom and a slightly negative atom, such as oxygen.",
+      "hint": "Think about charge on atoms in neighbouring OH groups.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mxk7by",
+      "kind": "concept",
+      "front": "Why is cellulose better suited to a permanent wall than starch is to storage?",
+      "back": "Cellulose is rigid and hard for most enzymes to break down, so it stays in place. Starch is easy to hydrolyse, so its glucose can be released when needed.",
+      "hint": "Think about how easily each polymer is broken down.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0govb02",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that one hydrogen bond makes cellulose very strong?",
+      "back": "Each hydrogen bond is **weak** on its own. Strength comes from thousands of them acting together between neighbouring chains.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06qs4kz",
+      "kind": "term",
+      "front": "What are microfibrils?",
+      "back": "**Strong bundles** of cellulose chains held together by hydrogen bonds.",
+      "sectionId": "s5"
+    }
+  ]
+}

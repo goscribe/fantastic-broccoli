@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-9",
+  "topicCode": "4.9",
+  "topicName": "Normal distribution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:44.707Z",
+  "cards": [
+    {
+      "id": "0i8x19e",
+      "kind": "concept",
+      "front": "What shape does a normal distribution curve have, and where is its centre?",
+      "back": "It is a **symmetric bell shape** centred on the mean $\\mu$. The mean, median and mode are all equal to $\\mu$.",
+      "hint": "Think about where the curve is highest.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1oq8glq",
+      "kind": "concept",
+      "front": "What does the area under a normal curve between two values represent?",
+      "back": "The **probability** that $X$ lies between those two values. The total area under the whole curve is 1.",
+      "hint": "It is an area, not the height of the curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t08dhi",
+      "kind": "concept",
+      "front": "Roughly what percentage of values lie within two standard deviations of the mean?",
+      "back": "About **95%**. Within one standard deviation it is about 68%, and within three about 99.7%.",
+      "hint": "Use the 68-95-99.7 rule for quick checks.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gc6gow",
+      "kind": "formula",
+      "front": "What does $X\\sim\\mathrm{N}(\\mu,\\sigma^2)$ tell you about $X$?",
+      "back": "$X$ is **normally distributed** with mean $\\mu$ and variance $\\sigma^2$. The standard deviation $\\sigma$ has the same units as $X$.",
+      "hint": "Look at what the squared term stands for.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00lfj5d",
+      "kind": "term",
+      "front": "What is a continuous random variable?",
+      "back": "A **random variable** that can take any value in an interval, usually from a measurement such as height.",
+      "hint": "Compare with a variable that only takes whole-number values.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hwb3zr",
+      "kind": "mistake",
+      "front": "Why is the height of the normal curve at a point not a probability?",
+      "back": "Only an **area** under the curve is a probability. The height is a probability per unit of $X$, so it can even exceed 1.",
+      "hint": "Ask what the total area under the curve must equal.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c3hp8q",
+      "kind": "concept",
+      "front": "Why is $P(X=a)=0$ for a continuous normal variable?",
+      "back": "A single value has no width, so the **area** above it is zero. That is why $P(X<a)=P(X\\le a)$.",
+      "hint": "Think about the area of a line segment.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "165a7ka",
+      "kind": "process",
+      "front": "What are the steps to find a normal probability between two bounds using technology?",
+      "back": "**Enter** the mean, standard deviation, lower bound and upper bound into the normal distribution function, then read the probability. State the distribution in your working.",
+      "hint": "Sketch and shade the region before you calculate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00r4t3c",
+      "kind": "example",
+      "front": "For $X\\sim\\mathrm{N}(170,8^2)$ in cm, find $P(X>180)$ to three significant figures.",
+      "back": "$P(X>180)\\approx0.106$. Use an upper bound of $10^{99}$ when there is no upper limit.",
+      "hint": "Lower bound 180, upper bound very large.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09e3n7v",
+      "kind": "example",
+      "front": "For $X\\sim\\mathrm{N}(170,8^2)$ in cm, which interval contains almost everyone?",
+      "back": "From 146 cm to 194 cm, that is $\\mu\\pm3\\sigma$. It holds about **99.7%** of values.",
+      "hint": "Count three standard deviations either side of the mean.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0riv3wn",
+      "kind": "term",
+      "front": "What is an inverse normal calculation?",
+      "back": "A calculation that finds the **boundary value** $k$ for which $P(X<k)$ equals a given probability.",
+      "hint": "You are given the area and need the value.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0s6c3bc",
+      "kind": "example",
+      "front": "For $X\\sim\\mathrm{N}(170,8^2)$ in cm, find $k$ such that $P(X<k)=0.95$, and say what it means.",
+      "back": "$k\\approx183$ cm. So **95%** of these people are shorter than 183 cm.",
+      "hint": "Use the inverse normal function on the given area.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ef1j2l",
+      "kind": "mistake",
+      "front": "Why is confusing the boundary $k$ with the probability 0.95 an error?",
+      "back": "$k=183$ is a **height** in cm, while 0.95 is a probability. Keep the value and the area separate in your answer.",
+      "hint": "Check the units of each number.",
+      "sectionId": "s5"
+    }
+  ]
+}

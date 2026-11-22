@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "6-1",
+  "topicCode": "6.1",
+  "topicName": "Accumulation of change",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:23.045Z",
+  "cards": [
+    {
+      "id": "01g6i94",
+      "kind": "concept",
+      "front": "What does integrating a rate over an interval give you?",
+      "back": "**Accumulated change**: the total change in the quantity over that interval. Integration combines a varying rate across the interval to find it.",
+      "hint": "Think about a water flow rate over time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vz8ghl",
+      "kind": "formula",
+      "front": "How does the area under a rate graph relate to the change it produces?",
+      "back": "A thin strip has area about $r(t)\\,\\Delta t$, which is rate times time. Adding the strips gives the **definite integral** $\\int_a^b r(t)\\,dt$, which equals the accumulated change. Units multiply, such as liters per minute times minutes gives liters.",
+      "hint": "Each strip is rate times a small time step.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ay9jj9",
+      "kind": "formula",
+      "front": "How do you find a final amount from a rate, starting from an initial value?",
+      "back": "Add the accumulated change to the **initial value**: final amount $=$ initial value $+$ net change. The integral gives the change, not the final value by itself.",
+      "hint": "The integral alone is only a change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15edr3z",
+      "kind": "term",
+      "front": "What is net change?",
+      "back": "**Net change** is the total of positive and negative changes, keeping their signs. Gains and losses cancel, so it can be smaller than the positive contribution.",
+      "hint": "Gains add and losses subtract.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00aiwr3",
+      "kind": "term",
+      "front": "What is total change in magnitude?",
+      "back": "**Total change in magnitude** is the sum of the sizes of all changes, with no cancellation. Losses are counted as positive amounts moved.",
+      "hint": "Ignore the signs and add the sizes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u7vwjx",
+      "kind": "example",
+      "front": "Water enters a tank at $r(t)=2t$ liters per minute from $t=0$ to $t=4$. How much water is added?",
+      "back": "**16 liters**. The region is a triangle with base 4 minutes and height $r(4)=8$ liters per minute, so the area is $\\frac{1}{2}(4)(8)=16$.",
+      "hint": "Sketch the graph. The region is a triangle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mo593b",
+      "kind": "mistake",
+      "front": "A rate graph dips below the time axis. Should that area count as a gain?",
+      "back": "**No**. Area below the axis is negative accumulated change, so it reduces the net change. Counting it as a gain gives the wrong answer.",
+      "hint": "Think about what a negative rate means.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fglxxo",
+      "kind": "example",
+      "front": "A tank gains 10 liters, then loses 4 liters. What are the net change and the total change in magnitude?",
+      "back": "Net change is **6 liters** ($10-4$). Total change in magnitude is **14 liters** ($10+4$). Net change decides the final level, while magnitude measures total movement.",
+      "hint": "Use signs for net change and sizes for magnitude.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03b6i1i",
+      "kind": "process",
+      "front": "What steps should you follow when interpreting an integral of a rate in context?",
+      "back": "First identify the quantity, its rate, and the interval. Then interpret the integral using the quantity's units. State whether your answer is a change or a final value, and include the units.",
+      "hint": "Start with what the quantity is.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05nd2rd",
+      "kind": "term",
+      "front": "What is displacement?",
+      "back": "**Displacement** is the net change in position. Its sign shows direction, so integrating velocity over time gives displacement.",
+      "hint": "Direction matters here.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11ffyui",
+      "kind": "mistake",
+      "front": "Why can't you decide the sign of total displacement from one stretch of negative velocity?",
+      "back": "A **negative-velocity stretch** only adds negative displacement. The total depends on all parts of the trip combined, including stretches with positive velocity.",
+      "hint": "Consider all the parts of the trip.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d7jxq4",
+      "kind": "example",
+      "front": "A tank starts with 30 liters, and the net change is $-6$ liters. What is the final amount?",
+      "back": "**24 liters**. Add the net change to the initial value: $30+(-6)=24$.",
+      "hint": "Add the net change to the starting amount.",
+      "sectionId": "s4"
+    }
+  ]
+}

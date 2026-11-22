@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-16",
+  "topicCode": "8.16",
+  "topicName": "Genome sequencing and personalised medicine",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:30.335Z",
+  "cards": [
+    {
+      "id": "19sn70b",
+      "kind": "concept",
+      "front": "How does comparing two genome sequences reveal genetic differences between people?",
+      "back": "Computers line up the sequences and find positions where the **bases do not match**. These mismatches show differences such as SNPs or different alleles.",
+      "hint": "Think about lining up two copies of the same text and spotting letters that differ.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07u4sz2",
+      "kind": "mistake",
+      "front": "Why is it wrong to think that carrying a risk allele means a person will definitely get the disease?",
+      "back": "A risk allele only changes the **probability** of disease. It does not guarantee illness, because diet, lifestyle and other genes also matter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0064d0b",
+      "kind": "term",
+      "front": "What is personalised medicine?",
+      "back": "Using an individual's **genetic information** to choose treatments, doses or preventive measures suited to that person.",
+      "hint": "Think about what a doctor starts from when planning care for one person.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hx62hm",
+      "kind": "term",
+      "front": "What is an allele?",
+      "back": "One of two or more alternative versions of the same **gene**.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mmg916",
+      "kind": "term",
+      "front": "What is a single nucleotide polymorphism (SNP)?",
+      "back": "A position in the genome where a **single base** differs between individuals.",
+      "hint": "Ask how many bases differ at that position.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "166mqhd",
+      "kind": "concept",
+      "front": "How can different alleles lead to two people clearing the same drug at different speeds?",
+      "back": "Alleles can alter the **molecules that break the drug down**, so one person clears it quickly and another clears it slowly.",
+      "hint": "Think about what alleles code for and what the body does to a drug first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0m4mp6t",
+      "kind": "example",
+      "front": "How is the warfarin dose tailored to a patient?",
+      "back": "It is adjusted to the person's **alleles** that affect how the drug is broken down.",
+      "hint": "Compare this with giving every patient the same fixed dose.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cyls32",
+      "kind": "example",
+      "front": "Why is trastuzumab given to some breast cancer patients but not others?",
+      "back": "It is given only if the tumour tests positive, because tumour cells make large amounts of the **HER2 receptor**.",
+      "hint": "Think about which test the tumour must pass before treatment starts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cq7wmk",
+      "kind": "concept",
+      "front": "Why does tailoring treatment to genes improve care?",
+      "back": "It can make a treatment work better and spares people who would gain no benefit or would suffer **harm** from the drug.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hcmxls",
+      "kind": "term",
+      "front": "What is genetic discrimination?",
+      "back": "The **unfair treatment** of a person because of their genetic information, for example by insurers or employers.",
+      "hint": "Think about who might see a person's genetic results.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1o297hn",
+      "kind": "concept",
+      "front": "Why might access to personalised medicine be unequal?",
+      "back": "Sequencing and tailored drugs can be **expensive**, so some patients may be left out.",
+      "hint": "Think about who has to pay for the testing and the drugs.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ull5rn",
+      "kind": "concept",
+      "front": "Why do most differences in genome sequences have no effect on health?",
+      "back": "Much of the genome does not code for protein, and many base changes inside genes do not alter the protein, so researchers must find which differences **matter**.",
+      "hint": "Think about which parts of DNA actually make proteins.",
+      "sectionId": "s5"
+    }
+  ]
+}

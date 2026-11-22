@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-13",
+  "topicCode": "3.3.13",
+  "topicName": "Amino acids, proteins and DNA",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:38.759Z",
+  "cards": [
+    {
+      "id": "1dg8f7w",
+      "kind": "concept",
+      "front": "Which two groups are bonded to the same central carbon in every amino acid?",
+      "back": "An **amine group**, $\\mathrm{-NH_2}$, and a **carboxyl group**, $\\mathrm{-COOH}$, with a side chain R on that carbon. The general formula is $\\mathrm{RCH(NH_2)COOH}$.",
+      "hint": "Read the general formula from left to right.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0roa2ak",
+      "kind": "process",
+      "front": "How does a peptide bond form between two amino acids?",
+      "back": "The **carboxyl group** of one amino acid reacts with the **amine group** of the other, losing water. This condensation reaction forms a $\\mathrm{-CONH-}$ peptide bond.",
+      "hint": "Consider what small molecule leaves when two molecules join.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1af0inz",
+      "kind": "concept",
+      "front": "Why does one DNA strand's base sequence fix the sequence of the other strand?",
+      "back": "**Complementary base pairing**: adenine pairs only with thymine, and cytosine pairs only with guanine. Each base therefore has one fixed partner on the opposite strand.",
+      "hint": "Think about how specific the hydrogen bonds between bases are.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0zytpoc",
+      "kind": "term",
+      "front": "What is a zwitterion?",
+      "back": "A molecule with a **positive** and a **negative** charge that cancel, so it has no overall charge. It forms when the carboxyl group gives a proton to the amine group in the same molecule.",
+      "hint": "Think about how the acidic and basic groups of one amino acid interact.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t62mg0",
+      "kind": "concept",
+      "front": "What overall charge does glycine carry in strongly acidic conditions?",
+      "back": "**Positive**, as $\\mathrm{{}^+H_3N{-}CH_2{-}COOH}$. The amine group is protonated and the carboxyl group is not ionised.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ereiba",
+      "kind": "process",
+      "front": "What happens to the peptide bonds when a protein is boiled with hydrochloric acid?",
+      "back": "**Hydrolysis** breaks every peptide bond. Boiling with $6\\,\\mathrm{mol\\,dm^{-3}}$ hydrochloric acid is the method used.",
+      "hint": "Think of the reverse of condensation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p2p1hd",
+      "kind": "process",
+      "front": "How do you identify the amino acids present in a peptide?",
+      "back": "Break each peptide bond between the C=O and N–H groups. Add OH to the carbonyl carbon and H to the nitrogen to get the separate amino acids.",
+      "hint": "Start by locating the peptide bonds in the chain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0uy0t1j",
+      "kind": "term",
+      "front": "What is the primary structure of a protein?",
+      "back": "The **sequence of amino acids** in its polypeptide chain. Peptide bonds hold the chain together, and a different sequence gives a different protein.",
+      "hint": "Think about the first level of protein shape.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1u09skl",
+      "kind": "concept",
+      "front": "What holds the secondary structure of a protein in shape?",
+      "back": "**Hydrogen bonds** between N–H and C=O groups on the backbone. These form coils such as the alpha-helix and folds such as the beta-pleated sheet.",
+      "hint": "Consider which groups on the backbone can attract each other.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m9qbb9",
+      "kind": "concept",
+      "front": "Which four types of interaction between R groups hold a protein's tertiary structure?",
+      "back": "**Hydrogen bonds** between polar R groups, **ionic attractions** between $\\mathrm{-NH_3^+}$ and $\\mathrm{-COO^-}$, **disulfide bridges** between cysteine side chains, and **van der Waals forces** between non-polar R groups.",
+      "hint": "Compare polar and non-polar side chains.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06gn30p",
+      "kind": "term",
+      "front": "What is a nucleotide?",
+      "back": "The **monomer** of DNA. It is made of a phosphate group, a deoxyribose sugar and an organic base.",
+      "hint": "Think of the building block that DNA strands are made from.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pie9ht",
+      "kind": "process",
+      "front": "How do nucleotides join to form a DNA strand?",
+      "back": "By **condensation**. The phosphate group of one nucleotide bonds to the sugar of the next, forming a sugar–phosphate backbone with one base on each sugar.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0uuo0dv",
+      "kind": "concept",
+      "front": "Why do the two backbones of a DNA double helix stay the same distance apart?",
+      "back": "Each base pair contains **one larger and one smaller base**, so the gap between the backbones stays constant.",
+      "hint": "Think about the sizes of the four bases.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0jyjc5t",
+      "kind": "example",
+      "front": "A DNA strand reads ATGC. What is the sequence of the strand that pairs with it?",
+      "back": "**TACG**, because A pairs with T and G pairs with C. The two strands run in opposite directions.",
+      "hint": "Pair each base on the given strand with its partner.",
+      "sectionId": "s6"
+    }
+  ]
+}

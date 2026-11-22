@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "7-7",
+  "topicCode": "7.7",
+  "topicName": "Particular solutions with initial conditions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:33.234Z",
+  "cards": [
+    {
+      "id": "066auzj",
+      "kind": "concept",
+      "front": "Why does a general solution contain an arbitrary constant, and what does an initial condition do about it?",
+      "back": "Many functions satisfy the same differential equation, so one **constant** labels the whole family. An initial condition fixes that constant and selects one member of the family.",
+      "hint": "Think about how many curves could fit the equation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vi8qlr",
+      "kind": "process",
+      "front": "What are the steps to find a particular solution from an initial condition?",
+      "back": "1) Substitute $x_0$ and $y_0$ into the general solution. 2) Solve for the **integration constant**. 3) Replace that constant to get the final function.",
+      "hint": "Three steps, in this order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jz88gf",
+      "kind": "mistake",
+      "front": "Why is substituting only $x_0$ into the general solution wrong when finding the constant?",
+      "back": "The condition also supplies $y_0$, which is needed to find C. Substitute both: for $y=3x^2+C$ and $y(2)=17$, use $17=3(2)^2+C$, giving $C=5$.",
+      "hint": "What does the condition give you besides the input?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08cw771",
+      "kind": "example",
+      "front": "Find the particular solution of $y=3x^2+C$ given $y(2)=17$.",
+      "back": "$y=3x^2+5$, since $17=3(2)^2+C$ gives $C=5$.",
+      "hint": "Substitute x = 2 and y = 17 first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04go8ra",
+      "kind": "concept",
+      "front": "What does differentiation check, and what does substitution at the given input check?",
+      "back": "Differentiation checks the **differential equation**. Substituting the given input checks the **initial condition**. Both are needed.",
+      "hint": "They answer different questions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mnku8l",
+      "kind": "example",
+      "front": "Check that $y=3x^2+5$ satisfies the initial condition $y(2)=17$.",
+      "back": "$y(2)=3(2)^2+5=17$, which matches the given **initial condition**.",
+      "hint": "Evaluate the function at x = 2.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z97awh",
+      "kind": "term",
+      "front": "What is a particular solution?",
+      "back": "A **particular solution** satisfies the differential equation and the specified initial condition, so its constant has been fixed.",
+      "hint": "It is one member of the general solution family.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fitw1w",
+      "kind": "concept",
+      "front": "In the family $y=x^2+C$ with $y(1)=5$, what does the condition identify on the graph?",
+      "back": "The **point** $(1,5)$ on the solution's graph. Substituting gives $C=4$, so $y=x^2+4$.",
+      "hint": "Read the condition as a point (x, y).",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0s6n41c",
+      "kind": "term",
+      "front": "What is the initial point written as when $y(x_0)=y_0$?",
+      "back": "$(x_0,y_0)$, the **input and output** recorded by the initial condition.",
+      "hint": "Input first, then output.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05ch0ks",
+      "kind": "concept",
+      "front": "Why should the final answer be stated as a function rather than just a value of C?",
+      "back": "The answer must be the **function**, such as $y=3x^2+5$. Stating only $C=5$ does not give the particular solution.",
+      "hint": "What does the question ask you to find?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "101ubgw",
+      "kind": "term",
+      "front": "What is an implicit solution, such as $y^2=x^2+C$?",
+      "back": "A **relation** between input and output that does not necessarily express $y$ alone.",
+      "hint": "The output may not be isolated.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iwx5ab",
+      "kind": "mistake",
+      "front": "With $y^2=x^2+C$ and $y(0)=2$, what goes wrong if you take the negative square root?",
+      "back": "The negative branch gives $y(0)=-2$, which fails the condition. Use the **positive branch**: $y=\\sqrt{x^2+4}$.",
+      "hint": "Check the value at x = 0 for each branch.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1phgijl",
+      "kind": "concept",
+      "front": "What must a solution domain contain, and what must it satisfy?",
+      "back": "An **interval** containing the initial input, on which the function is defined and satisfies the differential equation.",
+      "hint": "Think about where the initial input must sit.",
+      "sectionId": "s4"
+    }
+  ]
+}

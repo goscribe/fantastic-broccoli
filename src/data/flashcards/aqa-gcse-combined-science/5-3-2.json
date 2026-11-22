@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-3-2",
+  "topicCode": "5.3.2",
+  "topicName": "Amount of substance",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:44.895Z",
+  "cards": [
+    {
+      "id": "1h6qwvp",
+      "kind": "concept",
+      "front": "Why does adding more hydrogen not increase the amount of water formed from hydrogen and oxygen?",
+      "back": "Oxygen is the **limiting reactant**: it runs out first, so its amount sets the maximum amount of product. Extra hydrogen is the excess reactant and is left over.",
+      "hint": "Compare the moles each reactant needs with the moles supplied.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gjhsvv",
+      "kind": "formula",
+      "front": "Which equation links mass, moles and molar mass, and what are the units?",
+      "back": "$m=nM$, where $m$ is mass in $\\text{g}$, $n$ is amount in $\\text{mol}$ and $M$ is **molar mass** in $\\text{g/mol}$.",
+      "hint": "Think about what one mole of a compound weighs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1g1ucbi",
+      "kind": "term",
+      "front": "What is a mole?",
+      "back": "The **amount of substance** containing $6.02\\times10^{23}$ specified particles. For a compound, its mass in grams is numerically equal to its $M_r$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0r6h5xk",
+      "kind": "term",
+      "front": "What is relative formula mass, $M_r$?",
+      "back": "The **sum of the relative atomic masses** of all atoms shown in a formula. Every atom is counted, including those inside brackets.",
+      "hint": "Count every atom in the formula, including ones inside brackets.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uisrm3",
+      "kind": "mistake",
+      "front": "A student works out $M_r$ of $\\mathrm{Ca(OH)_2}$ as $40+2+16+1$. What is wrong?",
+      "back": "The subscript 2 multiplies every atom inside the bracket, not just the nearest one. The correct working is $40+2(16+1)=74$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nigxql",
+      "kind": "example",
+      "front": "How many moles are in 9 g of water? Use $A_r(\\mathrm H)=1$ and $A_r(\\mathrm O)=16$.",
+      "back": "**0.5 mol**. $M_r(\\mathrm{H_2O})=18$, so $n=\\frac{9\\,\\text{g}}{18\\,\\text{g/mol}}=0.5\\,\\text{mol}$.",
+      "hint": "Start by finding the relative formula mass of water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1libs0t",
+      "kind": "example",
+      "front": "How many water molecules are in 0.5 mol of water?",
+      "back": "$0.5\\times6.02\\times10^{23}=3.01\\times10^{23}$ water molecules.",
+      "hint": "Multiply the moles by the number of particles in one mole.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "186jiip",
+      "kind": "mistake",
+      "front": "A student says 1 mol of water contains 1 mol of hydrogen atoms. What is wrong?",
+      "back": "Each water molecule has two hydrogen atoms, so 1 mol of water contains **2 mol of hydrogen atoms**. A mole of molecules is not a mole of atoms.",
+      "hint": "Count the hydrogen atoms in one molecule.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "101a4g2",
+      "kind": "concept",
+      "front": "In $2\\mathrm{H_2}+\\mathrm{O_2}\\rightarrow2\\mathrm{H_2O}$, how many moles of water form from 1 mol of oxygen?",
+      "back": "**2 mol** of water. The coefficients give the **mole ratio**: 1 mol $\\mathrm{O_2}$ forms 2 mol $\\mathrm{H_2O}$.",
+      "hint": "Compare the coefficients of oxygen and water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xf24q9",
+      "kind": "mistake",
+      "front": "Why must masses be converted to moles before using the coefficients of a balanced equation?",
+      "back": "Coefficients give a **mole ratio**, not a mass ratio. Substances with different $M_r$ do not react in the same mass ratio as their coefficients.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0edolj8",
+      "kind": "process",
+      "front": "What steps find the limiting reactant from the amounts supplied?",
+      "back": "1) Convert any masses to moles. 2) Use the balanced equation to work out how much of each reactant is needed. 3) The reactant that runs out first is the **limiting reactant**.",
+      "hint": "Start with what the balanced equation tells you.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1314vmg",
+      "kind": "example",
+      "front": "How many moles of water form from 3 mol of hydrogen and 1 mol of oxygen?",
+      "back": "**2 mol** of water. Oxygen limits the reaction: 1 mol $\\mathrm{O_2}$ needs 2 mol $\\mathrm{H_2}$, leaving 1 mol $\\mathrm{H_2}$ in excess.",
+      "hint": "Work out how much hydrogen 1 mol of oxygen needs.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1drwt3o",
+      "kind": "term",
+      "front": "What units does relative formula mass have?",
+      "back": "**None**. It is a ratio, comparing the mass of a formula with one-twelfth of a carbon-12 atom.",
+      "hint": "Think about what the relative atomic masses are compared against.",
+      "sectionId": "s1"
+    }
+  ]
+}

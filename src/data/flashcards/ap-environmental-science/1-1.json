@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "1-1",
+  "topicCode": "1.1",
+  "topicName": "Introduction to ecosystems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:04.933Z",
+  "cards": [
+    {
+      "id": "14yn60p",
+      "kind": "term",
+      "front": "What is an ecosystem?",
+      "back": "An **ecosystem** is all the living things in an area together with the nonliving surroundings they interact with. Size does not decide what counts, so a log, a meadow, or an ocean can each be one.",
+      "hint": "Think about what a pond contains besides fish.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1c1ize0",
+      "kind": "concept",
+      "front": "What is the difference between a biotic factor and an abiotic factor?",
+      "back": "A **biotic factor** is a living part of an ecosystem, such as algae or bacteria. An **abiotic factor** is a nonliving part, such as sunlight, temperature, or water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ghdsl2",
+      "kind": "concept",
+      "front": "How can abiotic factors limit which living things can survive in a place?",
+      "back": "Temperature, water, and sunlight decide which **plants** can grow in a place. Those plants then decide which **animals** can live there.",
+      "hint": "Think about what must exist before animals have food and shelter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ssr50u",
+      "kind": "mistake",
+      "front": "Why is it wrong to think abiotic factors are a fixed backdrop that living things never change?",
+      "back": "Living things **do change** abiotic factors. Trees shade the ground and lower its temperature, roots hold soil in place, and decaying leaves add nutrients to it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "110i53z",
+      "kind": "concept",
+      "front": "How do biotic factors affect one another?",
+      "back": "**Predators** reduce the numbers of their prey, and **plants compete** for light and water.",
+      "hint": "Consider how one species' feeding affects the species it eats.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05xedii",
+      "kind": "term",
+      "front": "What is a population?",
+      "back": "A **population** is all the individuals of one species living in the same area, such as the frogs in a pond.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m6mwn8",
+      "kind": "term",
+      "front": "What is a community?",
+      "back": "A **community** is all the populations of different species living together in an area and interacting by feeding on one another, competing, and sharing space.",
+      "hint": "Compare it with a population, which covers only one species.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cw1ol3",
+      "kind": "mistake",
+      "front": "What does a community leave out that an ecosystem includes?",
+      "back": "A community includes only **living things**. An ecosystem adds the **abiotic factors** that interact with them, such as sunlight and water.",
+      "hint": "Check which parts of the pond the community description covers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x5xve6",
+      "kind": "concept",
+      "front": "Why do scientists draw ecosystem boundaries where they do?",
+      "back": "Ecosystem boundaries are **blurry** and ecosystems are **not sealed**, so scientists draw the line where it suits their study.",
+      "hint": "Think about how a forest meets a meadow.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nj5ah8",
+      "kind": "example",
+      "front": "How should a fallen branch on a forest floor be classified, and why?",
+      "back": "It is a **biotic factor**, because it came from a living organism and bacteria and fungi feed on it.",
+      "hint": "Ask whether the branch came from something alive.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06btiz3",
+      "kind": "example",
+      "front": "Predict what happens to the algae in a pond if sunlight is blocked for a long time, and why.",
+      "back": "The **algae population will decrease**, because algae need sunlight to grow.",
+      "hint": "Think about which abiotic factor algae depend on for growth.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m2hf8t",
+      "kind": "example",
+      "front": "What three things should a complete description of an ecosystem name?",
+      "back": "**One biotic factor**, **one abiotic factor**, and **one way they interact**, such as light allowing algae to grow.",
+      "sectionId": "s5"
+    }
+  ]
+}

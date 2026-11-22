@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-6-2",
+  "topicCode": "4.6.2",
+  "topicName": "Variation and evolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:57.232Z",
+  "cards": [
+    {
+      "id": "1h9p9in",
+      "kind": "term",
+      "front": "What is natural selection?",
+      "back": "**Natural selection** is when individuals with inherited characteristics better suited to their environment are more likely to survive, reproduce and pass on those genes.",
+      "hint": "Think about which individuals survive and have offspring.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ruddda",
+      "kind": "term",
+      "front": "What is a mutation?",
+      "back": "A **mutation** is a change in genetic material that can create a new version of a gene, adding inherited variation to a population.",
+      "hint": "Think about what kind of material is being changed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0le025i",
+      "kind": "concept",
+      "front": "How does selective breeding differ from natural selection?",
+      "back": "In **selective breeding** people choose which individuals breed, whereas in natural selection the environment determines which individuals survive and reproduce.",
+      "hint": "Think about who decides which individuals breed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1x1eggv",
+      "kind": "term",
+      "front": "What does variation mean?",
+      "back": "**Variation** means differences in characteristics between individuals of the same species.",
+      "hint": "Think about how two members of one species can differ.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15pmgtd",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a person's height is caused only by diet?",
+      "back": "Height has both **inherited factors** and environmental factors. Genes affect potential height, while nutrition affects how fully someone grows.",
+      "hint": "Consider what sets potential and what sets how fully it is reached.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bb4mc5",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a mutation happens because an organism needs a useful characteristic?",
+      "back": "Mutations occur by **chance**; they are not caused by need. Their effects may then influence survival.",
+      "hint": "Think about what causes a mutation, not what it later does.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03k3wde",
+      "kind": "concept",
+      "front": "Which mutations can be passed on to offspring?",
+      "back": "Only mutations in **reproductive cells** can be passed to offspring; mutations in other body cells are not inherited.",
+      "hint": "Think about which cells are involved in making the next generation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kfg5t0",
+      "kind": "mistake",
+      "front": "Why is it wrong to say natural selection gives individuals the characteristics they need?",
+      "back": "Natural selection acts on **existing variation**; it does not create characteristics because individuals need them.",
+      "hint": "Think about where the differences come from before selection acts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17euzbs",
+      "kind": "process",
+      "front": "What steps make antibiotic resistance more common in a bacterial population?",
+      "back": "Some bacteria already have **inherited resistance**. The antibiotic kills non-resistant bacteria, resistant ones survive and reproduce, and resistance becomes more common over generations.",
+      "hint": "Start with the bacteria present before treatment begins.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xbn3x1",
+      "kind": "example",
+      "front": "A crop has very little genetic diversity. What risk does a new disease pose to it?",
+      "back": "Few plants may have a version that resists the disease, so the crop is more **vulnerable** to it.",
+      "hint": "Think about how many plants might carry a version that resists it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18bf4t0",
+      "kind": "mistake",
+      "front": "What disadvantage can come from repeatedly breeding close relatives in selective breeding?",
+      "back": "It reduces **genetic diversity**, so harmful inherited conditions become more likely.",
+      "hint": "Think about what happens to gene variety when parents are closely related.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0c2mmq1",
+      "kind": "term",
+      "front": "What is evolution?",
+      "back": "**Evolution** is the gradual change in the inherited characteristics of a population over many generations.",
+      "hint": "Think about change across generations, not within one life.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "191nji2",
+      "kind": "term",
+      "front": "What is genetic diversity?",
+      "back": "**Genetic diversity** is the variety of inherited genetic differences within a population.",
+      "hint": "Think about how varied the genes are across a population.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vdoaxm",
+      "kind": "process",
+      "front": "What are the main steps in selective breeding?",
+      "back": "Select parents with the desired inherited characteristic, breed them, choose offspring showing it most strongly, and repeat over generations.",
+      "hint": "Start with how the parents are picked.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-14",
+  "topicCode": "8.14",
+  "topicName": "Pollution and human health",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:06.733Z",
+  "cards": [
+    {
+      "id": "1qcwavp",
+      "kind": "concept",
+      "front": "What, besides the pollutant itself, decides how much harm it causes?",
+      "back": "**Exposure** decides harm. It covers the route of contact, how much of the pollutant is taken in, and how long the contact lasts.",
+      "hint": "Think about contact with the pollutant, not just what the pollutant is.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c5pgj5",
+      "kind": "concept",
+      "front": "Which body parts do air pollutants mostly affect?",
+      "back": "Air pollutants mostly affect the **lungs and heart**. Water and soil pollutants usually enter the body through food or drink instead.",
+      "hint": "Think about where inhaled air travels first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ha1y80",
+      "kind": "mistake",
+      "front": "Why is a low pollutant concentration not automatically safe?",
+      "back": "Repeated low-level exposure can **add up** to harm over time. Lead can damage a child's developing brain even at low levels.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k9fi7v",
+      "kind": "term",
+      "front": "What is particulate matter?",
+      "back": "**Particulate matter** is a mixture of tiny solid and liquid particles suspended in air. It can lodge deep in the lungs and enter the bloodstream.",
+      "hint": "Think of soot from exhaust and fine dust.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0arkd31",
+      "kind": "term",
+      "front": "What is chronic exposure?",
+      "back": "**Chronic exposure** is repeated or continuous contact with a pollutant over a long period, often months or years. It can cause disease even at low levels.",
+      "hint": "Compare it with a short, intense exposure.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1r42ee9",
+      "kind": "concept",
+      "front": "How does carbon monoxide reduce oxygen delivery in the body?",
+      "back": "Carbon monoxide binds to **hemoglobin** in red blood cells, so less oxygen is carried to body tissues.",
+      "hint": "Consider what red blood cells normally carry around the body.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06vt9ro",
+      "kind": "term",
+      "front": "What is a carcinogen?",
+      "back": "A **carcinogen** is a substance that can cause cancer, usually by damaging DNA or disrupting normal cell division.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11u6lcy",
+      "kind": "concept",
+      "front": "Why can illness from a pollutant appear years after exposure?",
+      "back": "Some pollutants **build up** in body tissue over time, so the harm shows up long after the first contact.",
+      "hint": "Think about what happens to a substance that is not removed quickly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g2u28y",
+      "kind": "term",
+      "front": "What is a vulnerable population?",
+      "back": "A **vulnerable population** is a group at higher risk from a given exposure because of age, health, or circumstances.",
+      "hint": "Two people breathing the same air may be affected differently.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05eswqh",
+      "kind": "concept",
+      "front": "Why are children more at risk from air pollution than healthy adults?",
+      "back": "Children breathe more air for their body mass, so they get a larger dose. Their developing lungs and brains can suffer lasting damage.",
+      "hint": "Compare breathing volume with body size.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m7r1nd",
+      "kind": "term",
+      "front": "What is environmental justice?",
+      "back": "**Environmental justice** is the fair treatment and meaningful involvement of all people in environmental laws and decisions, regardless of race, income, or origin.",
+      "hint": "Think about who usually carries the burden of pollution.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10p3r4q",
+      "kind": "concept",
+      "front": "Why do low-income communities often face more pollution?",
+      "back": "Highways, factories, and waste sites are often located there. Residents may also have less access to health care.",
+      "hint": "Think about where polluting facilities tend to be built.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03bhs0b",
+      "kind": "example",
+      "front": "How can a city protect vulnerable people from ground-level ozone on a smog day?",
+      "back": "Issue **air quality alerts** so that vulnerable people, such as those with asthma, limit outdoor activity. Cutting vehicle exhaust at the source also reduces ozone.",
+      "hint": "Think about who is most affected on smog days and how they would learn about it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fe662t",
+      "kind": "concept",
+      "front": "Why does a link between a pollutant and illness not prove it caused the harm?",
+      "back": "Researchers must adjust for other factors, such as smoking and income, that may also differ between exposed and unexposed groups.",
+      "hint": "Think about what else might differ between the two groups being compared.",
+      "sectionId": "s5"
+    }
+  ]
+}

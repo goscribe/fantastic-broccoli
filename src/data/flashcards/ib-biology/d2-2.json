@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "d2-2",
+  "topicCode": "D2.2",
+  "topicName": "Gene expression",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:10.784Z",
+  "cards": [
+    {
+      "id": "1ctpcol",
+      "kind": "concept",
+      "front": "How can cells change which genes they express if the DNA sequence stays the same?",
+      "back": "By **transcriptional regulation**: controlling whether transcription begins and how often it occurs, which changes how much RNA is made from a gene.",
+      "hint": "Think about what changes and what does not.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12kyrdn",
+      "kind": "concept",
+      "front": "Why does a gene's output depend on more than one switch?",
+      "back": "Output depends on the **combined effects** of regulatory proteins. Activators increase transcription, repressors reduce it, and the net result determines expression.",
+      "hint": "Consider how many proteins can act on one gene.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q0ehqu",
+      "kind": "concept",
+      "front": "How can epigenetic changes alter gene expression without mutation?",
+      "back": "**Epigenetic changes** alter how accessible DNA is to transcription machinery without changing the base sequence. DNA methylation near a promoter often reduces transcription, and histone modification changes how easily DNA can be read.",
+      "hint": "Consider what can change how easily a gene is read.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1soj672",
+      "kind": "term",
+      "front": "What are transcription factors?",
+      "back": "**Proteins** that bind particular DNA sequences and help regulate transcription. They act as activators or repressors.",
+      "hint": "Think about what they bind to.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vawked",
+      "kind": "term",
+      "front": "What is a promoter?",
+      "back": "A **DNA region** near the start of a gene where transcription machinery assembles to begin transcription.",
+      "hint": "Think about where transcription starts.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1omd75d",
+      "kind": "term",
+      "front": "What is an enhancer?",
+      "back": "A **regulatory DNA sequence** that increases transcription when suitable activators bind to it. It may lie near a promoter or farther away.",
+      "hint": "Think about what binds to it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ahg5cm",
+      "kind": "process",
+      "front": "Outline how a distant enhancer can increase transcription of a gene.",
+      "back": "An **activator** binds the enhancer. The DNA **loops** to bring the bound activator close to the promoter, where it helps recruit or stimulate transcription machinery.",
+      "hint": "Start with what binds, then how distance is overcome.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xolf2r",
+      "kind": "concept",
+      "front": "How can environmental signals change which genes are expressed?",
+      "back": "A signal changes the **abundance, location or activity** of a transcription factor, which alters transcription of its target genes. The response depends on the cell and the signal.",
+      "hint": "Think about what happens to the transcription factor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vu9nkb",
+      "kind": "term",
+      "front": "What is a steroid hormone?",
+      "back": "A **lipid-soluble signalling molecule** that can enter cells and bind an intracellular receptor.",
+      "hint": "Think about how it crosses the membrane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00yfly2",
+      "kind": "process",
+      "front": "Describe how a steroid hormone changes gene expression in a target cell.",
+      "back": "The hormone enters the cell and binds its **receptor**. The hormone–receptor complex then binds DNA and regulates transcription of target genes. Only cells with the receptor respond.",
+      "hint": "Follow the hormone from entry to DNA.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gflra0",
+      "kind": "mistake",
+      "front": "A student says a change in gene expression always means the DNA sequence has changed. Why is this wrong?",
+      "back": "A change in gene expression does **not necessarily** mean the DNA sequence has changed. Regulation and epigenetic changes alter transcription without altering the base sequence.",
+      "hint": "Consider what regulation actually changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0y2dac5",
+      "kind": "term",
+      "front": "What is DNA methylation?",
+      "back": "The **addition of methyl groups** to DNA, which can affect transcription. Near a promoter it often reduces transcription.",
+      "hint": "Think about what is added and where.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0oxbcku",
+      "kind": "mistake",
+      "front": "A student says an epigenetic change that persists in an organism will certainly pass to its offspring. Why is this wrong?",
+      "back": "**Persistence within an organism** does not mean the change passes to offspring. Some changes persist after the signal is gone, while others are reversible.",
+      "hint": "Separate what lasts in one body from what is passed on.",
+      "sectionId": "s4"
+    }
+  ]
+}

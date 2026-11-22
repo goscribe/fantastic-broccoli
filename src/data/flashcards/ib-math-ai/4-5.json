@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-5",
+  "topicCode": "4.5",
+  "topicName": "Probability concepts",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:45.688Z",
+  "cards": [
+    {
+      "id": "1awczaa",
+      "kind": "concept",
+      "front": "What does a probability value tell you about an event?",
+      "back": "A probability from 0 to 1 measures how likely an **event** is. $P(A)=0$ means impossible, $P(A)=1$ means certain, and $0\\le P(A)\\le1$ always holds.",
+      "hint": "Think about the two ends of the scale.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12j4x3z",
+      "kind": "formula",
+      "front": "How do you find a probability when every outcome is equally likely?",
+      "back": "$P(A)=\\frac{n(A)}{n(U)}$, where $n(A)$ is the number of outcomes in $A$ and $n(U)$ is the number of outcomes in the **sample space**. This is **theoretical probability**.",
+      "hint": "Count the favourable outcomes and divide by all outcomes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jixpp2",
+      "kind": "concept",
+      "front": "How do mutually exclusive events differ from independent events?",
+      "back": "**Mutually exclusive** events cannot occur together, so $P(A\\cap B)=0$. **Independent** events can occur together, and one does not change the probability of the other.",
+      "hint": "Ask whether both events can happen on the same trial."
+    },
+    {
+      "id": "11ltaav",
+      "kind": "term",
+      "front": "What is the sample space?",
+      "back": "The **sample space**, $U$, is the set of all possible outcomes of a trial.",
+      "hint": "Every outcome you could get, listed together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ogzpnu",
+      "kind": "term",
+      "front": "What is relative frequency?",
+      "back": "The **relative frequency** of an event is the number of times it occurs divided by the number of trials. It estimates the probability, and the estimate usually improves with more trials.",
+      "hint": "It comes from experiment, not reasoning.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m7dznc",
+      "kind": "formula",
+      "front": "How is the probability of the complement of event $A$ found?",
+      "back": "$P(A')=1-P(A)$, where $A'$ is the **complementary event** that $A$ does not occur. This helps with 'at least one' problems.",
+      "hint": "Together, $A$ and $A'$ fill the sample space.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g2p2ob",
+      "kind": "formula",
+      "front": "In $n$ trials, what is the expected number of occurrences of event $A$?",
+      "back": "$n\\times P(A)$. This is the **expected number of occurrences**, and it need not be a whole number.",
+      "hint": "Multiply the number of trials by the probability.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18hazdd",
+      "kind": "example",
+      "front": "A bus is late with probability 0.15. How many late days are expected over 40 days?",
+      "back": "**6** late days, from $40\\times0.15=6$.",
+      "hint": "Use the expected number formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1a421sd",
+      "kind": "example",
+      "front": "A spinner lands on red with probability 0.3 and blue with probability 0.45. What is the probability it lands on red or blue?",
+      "back": "$P(R\\cup B)=0.3+0.45=0.75$. The events are **mutually exclusive**, so the probabilities simply add.",
+      "hint": "Can the spinner land on both colours at once?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fklvvi",
+      "kind": "mistake",
+      "front": "A die has $P(\\text{six})=\\frac16$. Does this mean exactly one six appears in six rolls?",
+      "back": "No. $\\frac16$ describes the **long-run** proportion of sixes, not a guaranteed count in six rolls.",
+      "hint": "Probability is about the long run, not a short set of trials.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0z0pt60",
+      "kind": "mistake",
+      "front": "When can you add $P(A)+P(B)$ to find $P(A\\cup B)$?",
+      "back": "Only when $A$ and $B$ are **mutually exclusive**. If they can overlap, adding counts the overlap twice.",
+      "hint": "Check whether the events can occur together first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fbd6p3",
+      "kind": "process",
+      "front": "What are the steps to test whether events $A$ and $B$ are independent?",
+      "back": "1) Multiply $P(A)\\times P(B)$. 2) Compare the product with $P(A\\cap B)$. 3) If they are equal, the events are **independent**; if not, they are not.",
+      "hint": "You need a product and a comparison.",
+      "sectionId": "s5"
+    }
+  ]
+}

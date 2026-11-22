@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "s1-3",
+  "topicCode": "S1.3",
+  "topicName": "Electron configurations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:20.518Z",
+  "cards": [
+    {
+      "id": "0a0ilw2",
+      "kind": "concept",
+      "front": "How do you write the electron configuration of a neutral atom?",
+      "back": "Add electrons in **filling order** until the superscripts total the atomic number. Never exceed a subshell's capacity.",
+      "hint": "A neutral atom has as many electrons as its atomic number.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11yjdzx",
+      "kind": "process",
+      "front": "List the subshell filling order for atoms up to atomic number 36.",
+      "back": "**1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p.** Electrons enter the lowest-energy orbitals first, so 4s fills before 3d.",
+      "hint": "Filling follows orbital energy, not just shell number.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10sejpr",
+      "kind": "term",
+      "front": "What are valence electrons?",
+      "back": "The electrons in an atom's **outermost occupied shell**. They are found by adding the superscripts for subshells with the highest shell number.",
+      "hint": "Look for the highest shell number in the configuration.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "090bkje",
+      "kind": "term",
+      "front": "What is an orbital?",
+      "back": "A **region** where an electron is likely to be found. It holds at most two electrons.",
+      "hint": "Orbitals sit inside shells and subshells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1x7hnsk",
+      "kind": "concept",
+      "front": "How many electrons can an s, a p and a d subshell hold?",
+      "back": "**2, 6 and 10** electrons. These subshells have one, three and five orbitals, each holding two electrons.",
+      "hint": "Multiply the number of orbitals by two.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jr7qhc",
+      "kind": "formula",
+      "front": "In the configuration $2p^4$, what does each part mean?",
+      "back": "The **2** is the shell, p is the subshell, and the superscript 4 is the number of electrons: four electrons in the p subshell of shell 2.",
+      "hint": "Read it from left to right: shell, subshell, count.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1b1ujkr",
+      "kind": "concept",
+      "front": "How do electrons arrange themselves within a subshell before pairing?",
+      "back": "They occupy **separate orbitals** first. Only then do they pair up, and paired electrons have opposite spins.",
+      "hint": "Think of seats on a bus before doubling up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01y5zsf",
+      "kind": "mistake",
+      "front": "What mistake should you avoid when writing configurations for neutral atoms like calcium?",
+      "back": "Filling **3d before 4s**. In this sequence 4s fills first, so 3d comes after it.",
+      "hint": "Check the filling order list.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kofmhq",
+      "kind": "example",
+      "front": "Write the ground-state configurations of chromium and copper in noble-gas shorthand.",
+      "back": "Chromium: $[\\text{Ar}]4s^1 3d^5$. Copper: $[\\text{Ar}]4s^1 3d^{10}$. Both are **exceptions** to the straightforward filling sequence.",
+      "hint": "Both have one electron in 4s.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ogf5lv",
+      "kind": "term",
+      "front": "What is noble-gas shorthand?",
+      "back": "A way of writing a configuration by replacing **completed inner subshells** with the bracketed symbol of the preceding noble gas. The arrangement stays the same.",
+      "hint": "Use a bracketed noble-gas symbol.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wf4gvi",
+      "kind": "example",
+      "front": "Write calcium's electron configuration in noble-gas shorthand.",
+      "back": "$[\\text{Ar}]4s^2$. Its full configuration has superscripts totalling 20.",
+      "hint": "Calcium has atomic number 20.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1007vvu",
+      "kind": "example",
+      "front": "What is the full electron configuration of a neutral bromine atom?",
+      "back": "$1s^2 2s^2 2p^6 3s^2 3p^6 4s^2 3d^{10} 4p^5$. The superscripts total 35 electrons.",
+      "hint": "Fill through 4s and 3d first, then place the rest in 4p.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mg9d0n",
+      "kind": "example",
+      "front": "How many valence electrons does iron have, given it is $[\\text{Ar}]4s^2 3d^6$?",
+      "back": "**Two**, from its outermost shell $4s^2$. Its $3d$ electrons can still take part in bonding.",
+      "hint": "Use the highest shell number only.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kiqzfj",
+      "kind": "mistake",
+      "front": "A student counts iron's valence electrons from the last subshell written, $3d^6$. What is wrong?",
+      "back": "**Wrong shell**. Use the highest shell number instead, which gives $4s^2$ and so two valence electrons.",
+      "hint": "Which subshell is in the outermost shell?",
+      "sectionId": "s4"
+    }
+  ]
+}

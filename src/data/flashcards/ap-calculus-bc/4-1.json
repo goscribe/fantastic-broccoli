@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "4-1",
+  "topicCode": "4.1",
+  "topicName": "Derivatives in context",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:04.911Z",
+  "cards": [
+    {
+      "id": "1rczofn",
+      "kind": "concept",
+      "front": "What does the derivative V'(t) tell you about a tank's water volume V(t)?",
+      "back": "It gives the **instantaneous rate of change** of volume at time t, in liters per minute. It is not the total amount of water in the tank.",
+      "hint": "Think about how fast, not how much.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04xmjxd",
+      "kind": "concept",
+      "front": "If V'(2)=8, what does that say about the tank at 2 minutes?",
+      "back": "The volume is **increasing** at 8 liters per minute at t=2. It does not mean the tank holds 8 liters.",
+      "hint": "Name the quantity, the time, and the direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cy1z6z",
+      "kind": "mistake",
+      "front": "A student sees V'(t)<0 and says the tank has negative water. Why is this wrong?",
+      "back": "A **negative derivative** means the volume is decreasing at that time, not that the volume is negative. A tank can hold water while its volume falls.",
+      "hint": "Separate the sign of the rate from the sign of the amount.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17jv565",
+      "kind": "concept",
+      "front": "What does a positive or negative derivative tell you about a function's output?",
+      "back": "A **positive derivative** means the output is increasing at that input. A **negative derivative** means it is decreasing there.",
+      "hint": "Look at the direction of change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11krnhn",
+      "kind": "concept",
+      "front": "Does V'(t)=0 at some time tell you whether the volume rises or falls afterward?",
+      "back": "No. A zero derivative means a **horizontal tangent** at that input, but it does not show whether the function increases or decreases afterward.",
+      "hint": "A flat tangent is only one moment.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rhh4bj",
+      "kind": "formula",
+      "front": "How is a difference quotient used to estimate a derivative from table values?",
+      "back": "$\\frac{\\Delta V}{\\Delta t}=\\frac{V(b)-V(a)}{b-a}$, the **difference quotient**. It gives the average rate over an interval, which approximates V'(t) when the interval is small and surrounds the target time.",
+      "hint": "Output change divided by input change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13lyiw9",
+      "kind": "process",
+      "front": "What steps estimate V'(2) from a table with values at 1, 2, and 3 minutes?",
+      "back": "Choose times on both sides of 2 minutes (1 and 3). Subtract the volumes to get $127-111=16$ liters. Divide by the time change $3-1=2$ minutes to get about 8 liters per minute.",
+      "hint": "Pick points on both sides of the target input.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oyzqye",
+      "kind": "example",
+      "front": "Estimate V'(2) using volumes of 111 liters at 1 minute and 127 liters at 3 minutes.",
+      "back": "$V'(2)\\approx\\frac{127-111}{3-1}=8$ liters per minute. The estimate uses an **average rate of change** across the interval from 1 to 3 minutes.",
+      "hint": "Divide the volume change by the time change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kihz7o",
+      "kind": "process",
+      "front": "How do you estimate a derivative at a marked point on a graph?",
+      "back": "Draw a **tangent line** at the point. Read two convenient points on that line, then divide the vertical change by the horizontal change, using the axis scales.",
+      "hint": "Use the tangent line, not the curve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mf6tbd",
+      "kind": "mistake",
+      "front": "Why is reading two points on the curve, not the tangent line, a mistake for a derivative estimate?",
+      "back": "Points elsewhere on the curve give an **average rate of change**, not the instantaneous rate at the point. Use points on the tangent line.",
+      "hint": "Which slope is the instantaneous one?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bxpicc",
+      "kind": "concept",
+      "front": "What are the units of V'(t) when V is in liters and t is in minutes?",
+      "back": "**Liters per minute**, because the derivative's units are output units divided by input units. Always say what those units mean in the situation.",
+      "hint": "Output over input.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pu1n0k",
+      "kind": "term",
+      "front": "What is the slope of the tangent line in a derivative interpretation?",
+      "back": "The **slope of the tangent line** equals the derivative at its point of contact.",
+      "hint": "Connect the graph to the rate.",
+      "sectionId": "s4"
+    }
+  ]
+}

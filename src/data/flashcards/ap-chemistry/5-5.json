@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "5-5",
+  "topicCode": "5.5",
+  "topicName": "Collision model",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:51.315Z",
+  "cards": [
+    {
+      "id": "17grdsi",
+      "kind": "concept",
+      "front": "What must happen before reactant particles can rearrange their bonds?",
+      "back": "Reactant particles must **collide**. A collision brings them close enough for their atoms to interact, and during a successful one, bonds can break and new bonds can form.",
+      "hint": "Consider what happens to the particles before any bonds change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0b4tafj",
+      "kind": "concept",
+      "front": "What two requirements must a collision meet to be successful?",
+      "back": "It needs **enough energy** to reach the activation energy barrier and a **suitable orientation** so the atoms that must interact meet correctly. Meeting one requirement does not guarantee the other.",
+      "hint": "There are two separate requirements, not one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n76jne",
+      "kind": "concept",
+      "front": "In the collision model, what does a faster reaction mean?",
+      "back": "A faster reaction has more **successful collisions** per unit time. It does not necessarily mean each collision makes more products.",
+      "hint": "Focus on the number of successful collisions, not the products from each one.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1582tda",
+      "kind": "term",
+      "front": "What is activation energy?",
+      "back": "Activation energy is the **minimum energy** colliding reactants need to reach the barrier to reaction.",
+      "hint": "Think about the energy needed to get over a barrier.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ootv4g",
+      "kind": "term",
+      "front": "What is the collision model?",
+      "back": "The **collision model** explains reaction rate through how often encounters occur that have sufficient energy and suitable orientation.",
+      "hint": "It links particle encounters to reaction rate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1k3tq0a",
+      "kind": "term",
+      "front": "What is orientation in a collision?",
+      "back": "Orientation is the **arrangement** of reactant particles as they approach one another during a collision.",
+      "hint": "Think about how particles are positioned when they meet.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a7qo0o",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that every collision between reactant particles produces products?",
+      "back": "Not every collision causes a reaction. A collision must have both **enough energy** and a **suitable orientation** to succeed.",
+      "hint": "Count both requirements before deciding a collision succeeds.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jkbdzq",
+      "kind": "concept",
+      "front": "Why does raising temperature usually increase reaction rate?",
+      "back": "A **larger fraction** of collisions have enough energy to overcome the activation energy barrier, so successful collisions per unit time rise. Particles also move faster and collide more often.",
+      "hint": "Consider the fraction of collisions, not just how often they happen.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0c5pbc0",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that higher temperature lowers the activation energy barrier?",
+      "back": "Higher temperature does **not** lower the barrier. It increases how many particles have enough energy to reach it.",
+      "hint": "Think about what changes: the barrier or the particles.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02ytbo9",
+      "kind": "term",
+      "front": "What is concentration?",
+      "back": "Concentration is the **amount of a substance** present in a given volume.",
+      "hint": "Think about how much substance fits into a volume.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14tet75",
+      "kind": "concept",
+      "front": "How does increasing a reactant's concentration increase reaction rate?",
+      "back": "More reactant particles in the same volume means more frequent **encounters**, so more successful collisions occur per unit time. It does not add energy to each collision or improve its orientation.",
+      "hint": "Focus on how often particles meet.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0s3aea9",
+      "kind": "mistake",
+      "front": "Why is it wrong to think higher concentration gives each collision more energy?",
+      "back": "Concentration mainly changes how often particles **collide**. It does not, by itself, change the energy or orientation of each collision.",
+      "hint": "Separate how often collisions happen from how each one goes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h5i0qw",
+      "kind": "concept",
+      "front": "How do temperature and concentration differ in their effects on collisions?",
+      "back": "Both can raise **collision frequency**. Only temperature increases the **fraction** of collisions with enough energy to overcome the activation energy barrier.",
+      "hint": "Compare what each change does to the energy of collisions."
+    }
+  ]
+}

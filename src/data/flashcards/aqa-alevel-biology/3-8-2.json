@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-8-2",
+  "topicCode": "3.8.2",
+  "topicName": "Regulation of gene expression",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:45.398Z",
+  "cards": [
+    {
+      "id": "0xnt5s2",
+      "kind": "concept",
+      "front": "Why do specialised cells look and behave differently when they contain the same genes?",
+      "back": "They use **differential gene expression**: they keep the same genes but activate different ones, so they make different proteins.",
+      "hint": "Think about which genes are switched on, not which genes are present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nlidb9",
+      "kind": "concept",
+      "front": "What does a transcription factor do to the transcription of a gene?",
+      "back": "It is a protein that binds a specific DNA sequence and influences **transcription**. Some help RNA polymerase begin transcription; others prevent it.",
+      "hint": "Think about the two possible effects on RNA polymerase.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qac2wt",
+      "kind": "concept",
+      "front": "Why does cancer usually need several changes to growth controls rather than a single change?",
+      "back": "Cancer develops when cells accumulate changes that disrupt several growth controls. One change to one gene does not usually cause cancer on its own.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bgx1hl",
+      "kind": "term",
+      "front": "Which type of stem cell can form the placenta, and which type cannot?",
+      "back": "**Totipotent** stem cells can form every cell type, including the placenta. **Pluripotent** stem cells can form the body's many cell types but not the placenta.",
+      "hint": "Think about extra-embryonic tissues.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0e8eddl",
+      "kind": "process",
+      "front": "What are the steps by which oestrogen increases transcription of a target gene?",
+      "back": "Oestrogen passes through the cell-surface membrane and binds an intracellular receptor, changing its shape. The **hormone–receptor complex** binds DNA as a transcription factor and promotes transcription.",
+      "hint": "Start where the hormone goes once it enters the cell.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y99sk5",
+      "kind": "process",
+      "front": "What are the steps by which siRNA prevents a gene's protein from being made?",
+      "back": "An siRNA strand joins a protein complex and guides it to complementary mRNA. The complex cuts the **mRNA**, which is degraded, so ribosomes cannot translate it.",
+      "hint": "Consider what the siRNA strand attaches to first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wwjqmb",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that siRNA removes a gene from the DNA?",
+      "back": "siRNA does not usually remove the gene. It prevents translation by targeting the gene's **mRNA**, so the gene may still be transcribed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00jgno8",
+      "kind": "concept",
+      "front": "At which stage of gene expression does RNA interference act?",
+      "back": "It acts **after transcription**. The gene may have been transcribed, but its mRNA is destroyed, so it does not produce a protein.",
+      "hint": "Compare the timing with the point where mRNA is made.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hxtqzm",
+      "kind": "term",
+      "front": "What does epigenetics describe?",
+      "back": "**Epigenetics** concerns changes in gene expression that do not change the DNA base sequence. These changes can sometimes be passed to daughter cells during cell division.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19p2dmb",
+      "kind": "concept",
+      "front": "What does DNA methylation near a gene's promoter usually do to transcription?",
+      "back": "It adds **methyl groups** to DNA and commonly reduces transcription, by stopping transcription factors binding or by keeping chromatin tightly packed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wzc4hv",
+      "kind": "concept",
+      "front": "Why does histone acetylation usually make a gene more accessible for transcription?",
+      "back": "It adds **acetyl groups** to histones, which usually loosens their association with DNA, so the gene is easier to transcribe.",
+      "hint": "Think about how tightly the DNA is held by histones.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h9xmod",
+      "kind": "mistake",
+      "front": "Why is a proto-oncogene not the same as an oncogene?",
+      "back": "A **proto-oncogene** is a normal gene that helps control growth and division. An **oncogene** is an altered or overactive version that can promote excessive cell division.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1j7g9ua",
+      "kind": "concept",
+      "front": "What happens when tumour suppressor genes lose their function?",
+      "back": "Cells lose a **safeguard** against uncontrolled growth, because these genes no longer restrain division, repair DNA or trigger cell death when damage is severe.",
+      "hint": "Think about what these genes normally do for the cell.",
+      "sectionId": "s5"
+    }
+  ]
+}

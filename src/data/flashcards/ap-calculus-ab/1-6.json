@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-6",
+  "topicCode": "1.6",
+  "topicName": "Limits by algebraic manipulation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:32.240Z",
+  "cards": [
+    {
+      "id": "16b9tyf",
+      "kind": "concept",
+      "front": "If substituting the target gives $\\frac{0}{0}$, what does that tell you about the limit?",
+      "back": "It is an **indeterminate form**, so it does not determine the limit. The expression needs rewriting, often because a shared factor becomes zero.",
+      "hint": "Think about what the limit can still be.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1s3qo9h",
+      "kind": "concept",
+      "front": "Does a limit depend on the expression's value exactly at the target point?",
+      "back": "**No**. A limit is the number that nearby outputs approach. A removable gap at the target does not change it.",
+      "hint": "Focus on values near the target, not at it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iyc69v",
+      "kind": "process",
+      "front": "What are the steps to evaluate a polynomial fraction that gives $\\frac{0}{0}$ at the target?",
+      "back": "Factor the numerator and denominator, cancel the **common factor** for inputs not equal to the target, then substitute into the simplified expression.",
+      "hint": "Start by checking whether both parts share a factor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qpb080",
+      "kind": "term",
+      "front": "What is an indeterminate form?",
+      "back": "A result such as $\\frac{0}{0}$ that does not determine a limit without further work.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10e5791",
+      "kind": "term",
+      "front": "What is a conjugate?",
+      "back": "The expression with the same two terms but the **opposite sign** between them. For $\\sqrt{x+4}-2$, the conjugate is $\\sqrt{x+4}+2$.",
+      "hint": "Only the sign between the two terms changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ei6l2b",
+      "kind": "formula",
+      "front": "What does the product $(\\sqrt{x+4}-2)(\\sqrt{x+4}+2)$ simplify to?",
+      "back": "$x$. This uses the **difference of squares**: $(a-b)(a+b)=a^2-b^2$, where $a^2-b^2$ removes the radicals.",
+      "hint": "Apply $(a-b)(a+b)$ with $a=\\sqrt{x+4}$ and $b=2$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n7s7tw",
+      "kind": "example",
+      "front": "Find $\\lim_{x\\to2}\\frac{x^2-4}{x-2}$.",
+      "back": "$4$. Factor $x^2-4=(x-2)(x+2)$, cancel $x-2$ for $x\\ne2$, then substitute to get $x+2=4$.",
+      "hint": "Factor the numerator as a difference of squares.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01rr0sm",
+      "kind": "example",
+      "front": "Find $\\lim_{x\\to0}\\frac{\\sqrt{x+4}-2}{x}$.",
+      "back": "$\\frac{1}{4}$. Multiply by the conjugate, simplify the numerator to $x$, cancel $x$ for $x\\ne0$, then substitute to get $\\frac{1}{\\sqrt{4}+2}$.",
+      "hint": "Multiply top and bottom by $\\sqrt{x+4}+2$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rlto55",
+      "kind": "mistake",
+      "front": "Can you cancel the $x$ in $\\frac{x+3}{x}$?",
+      "back": "**No**. You can cancel only common factors of the whole numerator and whole denominator, not separate terms.",
+      "hint": "Is $x$ a factor of the entire numerator?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09418gm",
+      "kind": "mistake",
+      "front": "If substitution gives $\\frac{0}{0}$, is the limit automatically $0$ or undefined?",
+      "back": "**No**. $\\frac{0}{0}$ is indeterminate, so it does not decide the limit. Rewrite the expression and check again.",
+      "hint": "Compare with what an indeterminate form means.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yzejig",
+      "kind": "term",
+      "front": "What is a removable gap?",
+      "back": "A missing point at which nearby values approach a finite limit, even though the expression is not defined there.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q4mrye",
+      "kind": "process",
+      "front": "What are the steps when a difference involving a square root gives $\\frac{0}{0}$?",
+      "back": "Multiply the numerator and denominator by the **conjugate**, simplify the numerator using the difference of squares, cancel the common factor, then substitute.",
+      "hint": "Keep the same fraction by multiplying top and bottom.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kwe0sa",
+      "kind": "term",
+      "front": "What is an equivalent expression near a point?",
+      "back": "An expression with the same values as the original for nearby inputs, though the two may differ at the point itself.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01jcg1w",
+      "kind": "concept",
+      "front": "What does algebraic simplification preserve?",
+      "back": "The expression's values **wherever the original is defined**. It does not give a value where the original was undefined.",
+      "hint": "Think about the original domain.",
+      "sectionId": "s1"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "2-9",
+  "topicCode": "2.9",
+  "topicName": "Quotient rule",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:55.902Z",
+  "cards": [
+    {
+      "id": "1ti937v",
+      "kind": "formula",
+      "front": "What is the quotient rule for the derivative of $\\frac{u}{v}$?",
+      "back": "$\\left(\\frac{u}{v}\\right)'=\\frac{vu'-uv'}{v^2}$, where $v\\ne0$. Differentiate **u** and **v** separately first, then combine them.",
+      "hint": "Two products go on top, and the bottom is the denominator squared.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04mn2yo",
+      "kind": "mistake",
+      "front": "Is the derivative of $\\frac{u}{v}$ equal to $\\frac{u'}{v'}$?",
+      "back": "**No**. Differentiating each part and dividing does not work. Combine the parts with the quotient rule: $\\frac{vu'-uv'}{v^2}$.",
+      "hint": "Think about what the quotient rule does with the two products.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05n205g",
+      "kind": "concept",
+      "front": "Does canceling a common factor change where the original function is defined?",
+      "back": "**No**. Canceling does not restore a point where the original denominator was zero. Keep the restrictions from the original function.",
+      "hint": "Simplifying changes the expression, not the function itself.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f1mbwr",
+      "kind": "term",
+      "front": "What is a variable denominator?",
+      "back": "A **variable denominator** contains the input variable and may change as the input changes. It is a useful clue, but it does not always mean you must use the quotient rule.",
+      "hint": "Ask whether the bottom changes when x changes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cp9295",
+      "kind": "process",
+      "front": "What are the steps for differentiating a quotient $\\frac{u}{v}$?",
+      "back": "1) Identify $u$ and $v$. 2) Find $u'$ and $v'$ separately. 3) Form $vu'-uv'$. 4) Divide by $v^2$. 5) Simplify and state restrictions.",
+      "hint": "Start with a check for simpler forms, such as cancellation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dk61r9",
+      "kind": "example",
+      "front": "For $f(x)=\\frac{x^2+1}{x-1}$ with $x\\ne1$, what is $f'(2)$?",
+      "back": "**$f'(2)=-1$**. The simplified derivative is $f'(x)=\\frac{x^2-2x-1}{(x-1)^2}$. At $x=2$ the numerator is $4-4-1=-1$ and the denominator is $1$. The negative value means $f$ is decreasing there.",
+      "hint": "Find $f'(x)$ first, then substitute $x=2$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e4nt57",
+      "kind": "formula",
+      "front": "In $\\frac{vu'-uv'}{v^2}$, what does the numerator $vu'-uv'$ mean?",
+      "back": "It is the **derivative numerator**: the unchanged denominator times the numerator's derivative, minus the unchanged numerator times the denominator's derivative.",
+      "hint": "Match each product to which function stays unchanged.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12s4ah9",
+      "kind": "example",
+      "front": "For $g(x)=\\frac{x^2-1}{x-1}$, what is $g'(x)$, and for which $x$ is it valid?",
+      "back": "**$g'(x)=1$ for $x\\ne1$**. Since $x^2-1=(x-1)(x+1)$, $g(x)=x+1$ for $x\\ne1$. The original function is undefined at $x=1$.",
+      "hint": "Factor the numerator first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pl2m4i",
+      "kind": "term",
+      "front": "What is the original domain of a function?",
+      "back": "The **original domain** is the set of inputs where the function is defined before any algebraic simplification.",
+      "hint": "Look at the function before you simplify it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qcijwp",
+      "kind": "term",
+      "front": "What is a common factor in a fraction?",
+      "back": "A **common factor** divides both the numerator and the denominator. If it cancels from a derivative, you must still keep the restrictions of the original function.",
+      "hint": "It appears on both the top and the bottom.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1i78mzn",
+      "kind": "process",
+      "front": "What should you do after applying the quotient rule?",
+      "back": "**Simplify**: expand the derivative numerator only if it helps, combine like terms, check for factors shared with the denominator, and state the restrictions from the original function.",
+      "hint": "Simplification must still respect the original function's restrictions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06tszt7",
+      "kind": "concept",
+      "front": "Why should you use parentheses when applying the quotient rule?",
+      "back": "**Parentheses** keep the subtraction clear when $u$ or $v$ has several terms, so you subtract the entire product $uv'$.",
+      "hint": "Think about the minus sign in front of $uv'$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fvsmb8",
+      "kind": "example",
+      "front": "What is the fastest way to differentiate $h(x)=\\frac{x^2+3}{5}$?",
+      "back": "**Rewrite** it as $\\frac15(x^2+3)$ and use constant multiplication, not the quotient rule. This gives $h'(x)=\\frac25x$.",
+      "hint": "Look at what the denominator is before reaching for a rule.",
+      "sectionId": "s1"
+    }
+  ]
+}

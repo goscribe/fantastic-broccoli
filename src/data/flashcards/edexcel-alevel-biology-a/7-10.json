@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-10",
+  "topicCode": "7.10",
+  "topicName": "Fast and slow twitch muscle fibres",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:53.872Z",
+  "cards": [
+    {
+      "id": "1p2339n",
+      "kind": "concept",
+      "front": "What is the main difference between slow twitch and fast twitch muscle fibres?",
+      "back": "**Slow twitch** fibres contract slowly and resist fatigue, whereas **fast twitch** fibres contract quickly and powerfully but tire sooner.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1skuz98",
+      "kind": "concept",
+      "front": "Why can slow twitch fibres keep working for hours without tiring?",
+      "back": "They make most of their ATP by **aerobic respiration**, using many mitochondria, myoglobin and capillaries, so lactate builds up slowly.",
+      "hint": "Think about which respiration type needs a steady oxygen supply.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fxm0xy",
+      "kind": "concept",
+      "front": "Why do fast twitch fibres suit short, explosive movements such as sprinting?",
+      "back": "They release ATP very quickly by **anaerobic respiration** using glycogen and phosphocreatine, which is faster than aerobic respiration.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0r5lz2e",
+      "kind": "term",
+      "front": "What is a muscle fibre?",
+      "back": "A **muscle fibre** is a muscle cell that contracts to produce force.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1slvg2f",
+      "kind": "term",
+      "front": "What is myoglobin, and what role does it play in slow twitch fibres?",
+      "back": "**Myoglobin** is a protein that binds oxygen more tightly than haemoglobin does, storing oxygen inside the fibre as a reserve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1flqv2q",
+      "kind": "term",
+      "front": "What is glycogen?",
+      "back": "**Glycogen** is a branched polymer of glucose, stored in animal cells, especially in liver and muscle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07dzfu9",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a muscle is made of only one type of fibre?",
+      "back": "Most muscles contain a **mixture** of slow and fast twitch fibres, and the proportions vary between muscles and between people.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05blcr0",
+      "kind": "mistake",
+      "front": "Why is it a mistake to think training turns slow twitch fibres into fast twitch fibres?",
+      "back": "Fibre proportions are largely set by **genes**, so training cannot easily convert one type into the other; it changes how well existing fibres work.",
+      "hint": "Think about what is fixed before training begins.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0np32fl",
+      "kind": "process",
+      "front": "What changes happen in muscle fibres after endurance training?",
+      "back": "The fibres gain more **mitochondria** and capillaries, and myoglobin content rises, so aerobic ATP production improves and fatigue sets in later.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1v3pgtm",
+      "kind": "process",
+      "front": "What changes happen in muscle fibres after sprint and strength training?",
+      "back": "Each fibre becomes thicker as it gains **contractile protein**, and glycogen stores and anaerobic enzymes increase, so the muscle becomes stronger.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qtbbzo",
+      "kind": "concept",
+      "front": "Which fibre type suits long-distance running and standing posture, and why?",
+      "back": "**Slow twitch** fibres, because fatigue resistance matters more than speed when the effort must last for hours.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cehgab",
+      "kind": "concept",
+      "front": "Why does a muscle use slow twitch fibres first during gentle effort?",
+      "back": "Gentle effort needs only small force for long periods, so **slow twitch** fibres are used first, and **fast twitch** fibres are added when more force is needed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tqaysx",
+      "kind": "concept",
+      "front": "Why does lactate build up quickly in fast twitch fibres?",
+      "back": "Fast twitch fibres depend on **anaerobic respiration**, which produces lactate quickly, and the resulting fall in pH leads to fatigue.",
+      "hint": "Compare the ATP source with slow twitch fibres.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10qe8ny",
+      "kind": "mistake",
+      "front": "Why do fast twitch fibres look paler than slow twitch fibres?",
+      "back": "They have fewer **mitochondria**, less myoglobin and fewer capillaries, so they contain less of the red pigment that gives slow twitch fibres their dark colour.",
+      "sectionId": "s3"
+    }
+  ]
+}

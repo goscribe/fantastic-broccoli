@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-6-2",
+  "topicCode": "4.6.2",
+  "topicName": "Variation and evolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:28.533Z",
+  "cards": [
+    {
+      "id": "10sm6yl",
+      "kind": "concept",
+      "front": "How does natural selection lead to evolution in a population?",
+      "back": "Individuals with **inherited** characteristics that help them survive are more likely to reproduce and pass on those genes. Over many generations these genes become more common, which is evolution.",
+      "hint": "Start with which individuals differ, then follow their offspring over time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03w5e5o",
+      "kind": "process",
+      "front": "What steps does a farmer follow in selective breeding?",
+      "back": "Choose parents with the **desired characteristic**, breed them and examine the offspring, breed the offspring that show the characteristic most strongly, then repeat over many generations.",
+      "hint": "Think about who makes the choice at each generation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wvniqs",
+      "kind": "concept",
+      "front": "Why can selective breeding reduce a population's chances against disease?",
+      "back": "Repeatedly breeding from a small group reduces **genetic diversity**. With less variety, the population is more vulnerable to disease, and offspring are more likely to inherit harmful versions of genes from both parents.",
+      "hint": "Think about the range of inherited differences left in the group.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1x9s7ac",
+      "kind": "term",
+      "front": "What does the term variation mean?",
+      "back": "**Variation** means differences in characteristics between individuals of the same species, such as height, colouring or disease resistance.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0v3gzcg",
+      "kind": "term",
+      "front": "What is the difference between continuous and discontinuous variation?",
+      "back": "**Continuous** variation gives a range of values, such as height. **Discontinuous** variation gives distinct categories, such as blood group.",
+      "hint": "Think about whether values can fall anywhere along a scale.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wd3ysy",
+      "kind": "concept",
+      "front": "Why might some differences between individuals go unnoticed?",
+      "back": "Some differences, such as blood group, are not visible. You cannot tell them apart just by looking at people, unlike differences in height or colouring.",
+      "hint": "Compare a visible characteristic with one you would need a test to find.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dcwta7",
+      "kind": "term",
+      "front": "What are genetic factors?",
+      "back": "**Genetic factors** are inherited differences in genetic material that can affect characteristics, such as natural eye colour or blood group.",
+      "hint": "Think about what parents pass on to their offspring.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lfhuzm",
+      "kind": "term",
+      "front": "What are environmental factors?",
+      "back": "**Environmental factors** are conditions or experiences, such as diet or sunlight, that affect an organism's characteristics.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sxdx57",
+      "kind": "concept",
+      "front": "Why can a person's height depend on both genes and surroundings?",
+      "back": "Inherited genes affect a person's **potential height**, but nutrition affects how much growth is actually reached. Both contribute to the final height.",
+      "hint": "Think about the difference between potential and what actually happens during growth.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vwdjlx",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that a suntan is an inherited characteristic?",
+      "back": "A suntan comes from **environmental exposure** to sunlight, so it is not inherited. Genes can affect how skin responds, but the tan itself is not passed to offspring.",
+      "hint": "Consider what caused the tan to appear.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0c2mmq1",
+      "kind": "term",
+      "front": "What is evolution?",
+      "back": "**Evolution** is the change in the inherited characteristics of a population over many generations.",
+      "hint": "Think about a whole population, not one individual.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "148aqb8",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that an insecticide causes insects to become resistant?",
+      "back": "The insecticide does not create resistance. Some insects already have **inherited resistance**, so they survive spraying and reproduce, making resistance more common over generations.",
+      "hint": "Think about which insects were already different before spraying began.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xasj30",
+      "kind": "term",
+      "front": "What is selective breeding?",
+      "back": "**Selective breeding** is the deliberate breeding of organisms with desired inherited characteristics. Unlike natural selection, humans choose which organisms reproduce.",
+      "sectionId": "s4"
+    }
+  ]
+}

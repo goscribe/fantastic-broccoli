@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "2-1",
+  "topicCode": "2.1",
+  "topicName": "Systems and center of mass",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:24.149Z",
+  "cards": [
+    {
+      "id": "0a55to8",
+      "kind": "term",
+      "front": "What is the center of mass of a system?",
+      "back": "The **mass-weighted average position** of all the parts of the system. A system's mass can be treated as if it were concentrated at this point when describing its overall motion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h9nnle",
+      "kind": "concept",
+      "front": "Which forces change the overall motion of a system?",
+      "back": "Only the **net external force**. Internal forces come in equal and opposite pairs, so they cancel when you add the forces on the whole system.",
+      "hint": "Think about where each force comes from relative to your chosen system.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18s4x60",
+      "kind": "formula",
+      "front": "How does the center of mass of a system accelerate?",
+      "back": "$a_{\\mathrm{cm}}=\\frac{F_{\\mathrm{net,ext}}}{M}$, where $M$ is the **total mass** of the system and $F_{\\mathrm{net,ext}}$ is the net external force. Internal forces play no part.",
+      "hint": "Only forces from outside the system appear in the numerator.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0p9n50c",
+      "kind": "term",
+      "front": "What is a system in physics?",
+      "back": "The **object or group of objects** you choose to analyze. Everything else is the surroundings.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nyx2j3",
+      "kind": "term",
+      "front": "What is an internal force?",
+      "back": "A **force between parts of the same system**. Internal forces cancel when you add the forces on the whole system.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hkb51g",
+      "kind": "term",
+      "front": "What is an external force on a system?",
+      "back": "A **force exerted on the system by an object outside it**, such as gravity from Earth. The net external force sets how the center of mass accelerates.",
+      "hint": "Ask whether the object pushing or pulling is inside your chosen system.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iq5370",
+      "kind": "concept",
+      "front": "Where is the center of mass of a uniform, symmetric object such as a ring?",
+      "back": "At its **geometric center**, found by symmetry. For a uniform ring this point lies in the empty middle, outside the material.",
+      "hint": "Locate it by symmetry before doing any calculation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pn3j4l",
+      "kind": "formula",
+      "front": "What is the formula for the center of mass of separate masses on a line?",
+      "back": "$x_{\\mathrm{cm}}=\\frac{m_1x_1+m_2x_2+\\cdots}{m_1+m_2+\\cdots}$, a **weighted average** where each position is weighted by its mass. Heavier masses pull the center toward themselves.",
+      "hint": "Choose an origin first and measure every position from it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qmjo0w",
+      "kind": "process",
+      "front": "What steps find the center of mass of two masses on a line?",
+      "back": "1) Choose an origin. 2) Write $x_{\\mathrm{cm}}=\\frac{m_1x_1+m_2x_2}{m_1+m_2}$. 3) Substitute the masses and positions. 4) Work out the numerator and denominator, then divide.",
+      "hint": "Check the answer lies between the masses and closer to the heavier one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ra3fzq",
+      "kind": "example",
+      "front": "Where is the center of mass of a 2.0 kg cart at $x=0$ and a 6.0 kg cart at $x=4.0\\ \\mathrm{m}$?",
+      "back": "$x_{\\mathrm{cm}}=3.0\\ \\mathrm{m}$. The working is $\\frac{(2.0)(0)+(6.0)(4.0)}{2.0+6.0}=\\frac{24}{8.0}$, which sits closer to the heavier cart.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m0iliz",
+      "kind": "mistake",
+      "front": "Your center of mass for two masses on a line comes out outside the range between them. What went wrong?",
+      "back": "An **arithmetic slip**. For two masses on a line, the center of mass must lie between them and closer to the larger mass.",
+      "hint": "Recheck your numerator and denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fd5p2w",
+      "kind": "mistake",
+      "front": "A student says moving parts mean the center of mass must move. Is this right?",
+      "back": "No. Parts can move in opposite directions while the **center of mass stays put**. It moves only when a net external force acts.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1g0lt58",
+      "kind": "example",
+      "front": "Two skaters start at rest on frictionless ice and push apart. What happens to their center of mass?",
+      "back": "It stays at **rest**. Their pushes are internal forces, and no net external horizontal force acts on the pair, so the center of mass cannot accelerate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1dnulj7",
+      "kind": "concept",
+      "front": "What happens to the center of mass if the net external force on a system is zero?",
+      "back": "It keeps a **constant velocity**, so it does not accelerate. Internal forces play no part in this.",
+      "sectionId": "s5"
+    }
+  ]
+}

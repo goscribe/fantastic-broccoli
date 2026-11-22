@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "14-1",
+  "topicCode": "14.1",
+  "topicName": "Wave pulses and waves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:29.995Z",
+  "cards": [
+    {
+      "id": "1nhm43e",
+      "kind": "concept",
+      "front": "Why does a wave carry energy from place to place without carrying the medium along with it?",
+      "back": "Each particle **oscillates** about its equilibrium position and passes energy to its neighbor. The energy moves on, but the particles stay near where they started.",
+      "hint": "Think about a stadium wave.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17meweb",
+      "kind": "term",
+      "front": "What is a transverse wave?",
+      "back": "A **transverse wave** is one where particles oscillate perpendicular to the direction the wave travels, like a wave on a rope shaken up and down.",
+      "hint": "Compare particle motion with the travel direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lbqcfv",
+      "kind": "concept",
+      "front": "How does a continuous wave differ from a single wave pulse?",
+      "back": "A **pulse** is one disturbance that passes and is then over. A **continuous wave** is a repeating train of pulses made by a source that keeps vibrating.",
+      "hint": "Ask what keeps the disturbance going.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rbw8ci",
+      "kind": "term",
+      "front": "What is the medium of a mechanical wave?",
+      "back": "The **medium** is the material that carries the disturbance, such as rope, water, or air.",
+      "hint": "Think about what the wave travels through.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dhnwdg",
+      "kind": "term",
+      "front": "What is a longitudinal wave?",
+      "back": "A **longitudinal wave** is one where particles oscillate parallel to the direction the wave travels. Sound in air is an example.",
+      "hint": "Think of a stretched spring pushed along its length.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09zpbc7",
+      "kind": "term",
+      "front": "What is the equilibrium position of a particle in a medium?",
+      "back": "The **equilibrium position** is the place a particle rests when no wave is present. It oscillates about this point as a wave passes.",
+      "hint": "Where does the particle sit when things are still?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0r61453",
+      "kind": "mistake",
+      "front": "Does a cork floating on water travel toward the shore as a wave passes?",
+      "back": "No. The cork bobs **up and down** about its equilibrium position. The wave's energy moves on, but the cork stays close to the same place.",
+      "hint": "Focus on what the cork does, not the wave.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19n0vau",
+      "kind": "term",
+      "front": "What is a compression in a longitudinal wave?",
+      "back": "A **compression** is a region where the particles of the medium are closest together.",
+      "hint": "Picture coils bunching up on a spring.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gn5da8",
+      "kind": "term",
+      "front": "What is a rarefaction in a longitudinal wave?",
+      "back": "A **rarefaction** is a region where the particles of the medium are farthest apart.",
+      "hint": "It is the opposite of a compression.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ity7nm",
+      "kind": "concept",
+      "front": "Does a larger disturbance make a wave travel faster?",
+      "back": "No. A larger disturbance carries **more energy**, but the wave's speed is set by the **medium**, not the size of the disturbance.",
+      "hint": "Separate energy from speed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xjuu3z",
+      "kind": "process",
+      "front": "What steps classify a wave as transverse or longitudinal?",
+      "back": "1. Identify the direction the wave travels. 2. Identify the direction the particles oscillate. 3. If perpendicular, it is **transverse**; if parallel, it is **longitudinal**.",
+      "hint": "Compare two directions."
+    },
+    {
+      "id": "0x7f4ez",
+      "kind": "example",
+      "front": "Is sound in air transverse or longitudinal, and why?",
+      "back": "**Longitudinal**. A vibrating speaker pushes air molecules together and lets them spread out along the direction the sound travels.",
+      "hint": "Look at how air molecules move compared with the travel direction.",
+      "sectionId": "s5"
+    }
+  ]
+}

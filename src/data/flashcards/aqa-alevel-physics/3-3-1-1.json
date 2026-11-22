@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-3-1-1",
+  "topicCode": "3.3.1.1",
+  "topicName": "Progressive waves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:13.238Z",
+  "cards": [
+    {
+      "id": "0mezzhx",
+      "kind": "concept",
+      "front": "What does a progressive wave transfer from one place to another, and what does it not transfer?",
+      "back": "A progressive wave transfers **energy**, not matter. Each particle only oscillates about its rest position and passes energy on to its neighbours.",
+      "hint": "Think about the leaf floating on the pond when ripples pass it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wxmfsb",
+      "kind": "formula",
+      "front": "What is the wave equation for a progressive wave, and what are the units of its quantities?",
+      "back": "$v=f\\lambda$, where wave speed $v$ is in $\\mathrm{m\\,s^{-1}}$, frequency $f$ is in Hz and wavelength $\\lambda$ is in m. The **source** sets the frequency and the **medium** sets the speed.",
+      "hint": "Consider how far the wave travels in one period.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hm2lvt",
+      "kind": "concept",
+      "front": "How can the phase difference between two points be found from their separation?",
+      "back": "Phase difference $=\\frac{d}{\\lambda}\\times360^{\\circ}$, where $d$ is the separation of the points and $\\lambda$ is the wavelength. This gives how far through a cycle they are out of step.",
+      "hint": "Compare the separation with one full wavelength.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "108ep51",
+      "kind": "term",
+      "front": "What is the displacement of a point on a wave?",
+      "back": "**Displacement** is the vector change in position of a point from its rest position. It has a direction: above rest is positive and below rest is negative.",
+      "hint": "Think about the leaf bobbing up and down.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "142gw79",
+      "kind": "term",
+      "front": "What is the amplitude of a wave?",
+      "back": "The **amplitude** is the maximum displacement of an oscillation from its rest position. It is always positive and is measured in metres.",
+      "hint": "Measure from the centre line, not from peak to trough.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a9hwmo",
+      "kind": "mistake",
+      "front": "Why is the trough-to-peak height of a wave not its amplitude?",
+      "back": "The amplitude is measured from the **rest position** to a peak. The trough-to-peak height is therefore twice the amplitude.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kseid9",
+      "kind": "term",
+      "front": "What is the wavelength of a wave?",
+      "back": "The **wavelength**, $\\lambda$, is the distance between neighbouring points at the same stage of a cycle, such as peak to peak. It is measured in metres.",
+      "hint": "Think about the repeat of the wave's shape in space.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0apu7hz",
+      "kind": "formula",
+      "front": "What is the relationship between frequency $f$ and period $T$?",
+      "back": "$f=\\frac{1}{T}$, where $f$ is in **hertz** (Hz) and $T$ is in **seconds** (s). A period of 0.50 s gives a frequency of 2.0 Hz.",
+      "hint": "Think about how many cycles fit into one second.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1f6qqhs",
+      "kind": "example",
+      "front": "A ripple tank wave has a period of 0.25 s and a wavelength of 0.030 m. What is its speed?",
+      "back": "$v=0.12\\,\\mathrm{m\\,s^{-1}}$, found from $f=\\frac{1}{0.25}=4.0\\,\\mathrm{Hz}$ and then $v=f\\lambda=4.0\\times0.030$.",
+      "hint": "Find the frequency from the period first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0u4zf7r",
+      "kind": "process",
+      "front": "What steps should you follow to sketch and label a displacement–distance graph of a wave?",
+      "back": "Draw a smooth repeating curve, label both axes with units, mark the amplitude from the centre line to a peak, and mark the wavelength between matching points such as two peaks.",
+      "hint": "Think about what the graph shows: a snapshot at one instant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08osf02",
+      "kind": "mistake",
+      "front": "Why is a phase difference of $360^{\\circ}$ not a sign that two points are out of step?",
+      "back": "A phase difference of $360^{\\circ}$ means the points are **in phase**, because one full cycle brings them back to matching positions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1on9ju6",
+      "kind": "term",
+      "front": "What does it mean for two points on a wave to be in antiphase?",
+      "back": "Two points are in **antiphase** when their phase difference is an odd multiple of $180^{\\circ}$, so they move in opposite directions.",
+      "hint": "Think about points half a wavelength apart.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uan72j",
+      "kind": "example",
+      "front": "Two points 0.10 m apart on a wave of wavelength 0.40 m: what is their phase difference?",
+      "back": "$90^{\\circ}$, since $\\frac{0.10}{0.40}\\times360^{\\circ}=90^{\\circ}$.",
+      "hint": "Divide the separation by the wavelength first.",
+      "sectionId": "s5"
+    }
+  ]
+}

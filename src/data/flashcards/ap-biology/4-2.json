@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "4-2",
+  "topicCode": "4.2",
+  "topicName": "Introduction to signal transduction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:31.308Z",
+  "cards": [
+    {
+      "id": "17ymhw1",
+      "kind": "process",
+      "front": "What are the three broad stages a cell uses to respond to a signal?",
+      "back": "**Reception**, transduction, then cellular response. A receptor detects the signal, the pathway relays information inside the cell, and the cell changes what it does.",
+      "hint": "Think: detect, relay, act.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jy6sew",
+      "kind": "concept",
+      "front": "How does a receptor detect a signal?",
+      "back": "A **ligand** binds the receptor's binding site, and the receptor changes shape or activity. That change starts the next step of the pathway.",
+      "hint": "Binding depends on the ligand's chemical properties.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "165qkpn",
+      "kind": "concept",
+      "front": "How can a signal outside the cell change what happens inside it?",
+      "back": "The ligand binds a membrane receptor outside the cell. The activated receptor starts an internal **relay** of protein changes that ends in a response.",
+      "hint": "The ligand can stay outside the cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wxcgh2",
+      "kind": "term",
+      "front": "What is a second messenger?",
+      "back": "A **second messenger** is a small molecule or ion that carries the signal within the cell. Calcium ions are one example.",
+      "hint": "Think of messengers working inside the cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hxdcy8",
+      "kind": "term",
+      "front": "What is a ligand?",
+      "back": "A **ligand** is a molecule that binds to a receptor. It is the signaling molecule the receptor recognizes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gjdewp",
+      "kind": "term",
+      "front": "What is a signaling pathway?",
+      "back": "A **signaling pathway** is a sequence of molecular changes connecting receptor activation to a response.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0aigg1g",
+      "kind": "concept",
+      "front": "Why can one activated receptor change many molecules inside a cell?",
+      "back": "A relay can involve several steps that **amplify** the signal, so one activated receptor leads to changes in many internal molecules.",
+      "hint": "Count the steps in the relay.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mqpv4l",
+      "kind": "concept",
+      "front": "What are the two main ways an internal pathway can change cell activity?",
+      "back": "It can change **enzyme activity**, altering a process already underway, or change **gene expression**, affecting which proteins the cell makes.",
+      "hint": "One changes a process, the other changes which proteins are made.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i4pmaz",
+      "kind": "concept",
+      "front": "Why might two cells respond differently to the same signal?",
+      "back": "They may have different **receptors**, internal relays, or available targets, so the same signal can produce different responses.",
+      "hint": "Think about what each cell has to detect and respond.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0n1l0fc",
+      "kind": "mistake",
+      "front": "A student says a signal affects every nearby cell. What is wrong with this?",
+      "back": "**Wrong**: a signal only affects cells with a suitable receptor. A cell needs a matching receptor to detect the signal.",
+      "hint": "What detects the ligand?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0y1834u",
+      "kind": "mistake",
+      "front": "A student says a ligand must always enter the cell to cause a response. What is wrong?",
+      "back": "**Not always**: many membrane receptors detect ligands outside the cell and pass information inward. Only some receptors are inside the cell.",
+      "hint": "Where are membrane receptors located?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "028whsu",
+      "kind": "process",
+      "front": "What are the steps when a membrane receptor starts a pathway?",
+      "back": "1) A **ligand** binds the receptor outside the cell. 2) The receptor changes shape or activity. 3) Internal proteins relay the signal. 4) A target changes, producing a cellular response.",
+      "hint": "Start outside the cell and end inside it."
+    },
+    {
+      "id": "0d1yd3q",
+      "kind": "term",
+      "front": "What is transduction in a signal pathway?",
+      "back": "**Transduction** is the relay of information from an activated receptor toward a cellular response.",
+      "hint": "It sits between reception and response.",
+      "sectionId": "s1"
+    }
+  ]
+}

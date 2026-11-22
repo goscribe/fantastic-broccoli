@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-1",
+  "topicCode": "3.3.1",
+  "topicName": "Introduction to organic chemistry",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:14.228Z",
+  "cards": [
+    {
+      "id": "1y1ixkt",
+      "kind": "concept",
+      "front": "Why do compounds that share the same functional group react in similar ways?",
+      "back": "Reactions usually happen at the **functional group**, so compounds with the same one react in similar ways, even when their chains differ.",
+      "hint": "Think about where in a molecule reactions usually take place.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1sqffgl",
+      "kind": "term",
+      "front": "What are structural isomers?",
+      "back": "**Structural isomers** are compounds with the same molecular formula but different structural formulae, so their atoms are joined in a different order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12zgtdr",
+      "kind": "process",
+      "front": "What are the five steps for building the name of an organic compound?",
+      "back": "1) Find the longest carbon chain containing the main functional group. 2) Choose the stem. 3) Add the suffix. 4) Number so the functional group has the lowest number. 5) Name branches and halogens as alphabetical prefixes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oyd67i",
+      "kind": "term",
+      "front": "What is a homologous series?",
+      "back": "A **homologous series** is a family of compounds with the same functional group, a shared general formula and similar chemical reactions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0et886z",
+      "kind": "example",
+      "front": "What is the molecular formula of butene, a four-carbon alkene, using the alkene general formula $\\mathrm{C_nH_{2n}}$?",
+      "back": "$\\mathrm{C_4H_8}$, because $n=4$ gives $2n=8$ hydrogens.",
+      "hint": "Substitute the number of carbons into the alkene formula.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wccfxj",
+      "kind": "example",
+      "front": "What is the name of $\\mathrm{CH_3CH(CH_3)CH_2CH_2OH}$?",
+      "back": "**3-methylbutan-1-ol**. The four-carbon chain gives but, the OH gives -ol at carbon 1, and the methyl branch is on carbon 3.",
+      "hint": "Start by finding the longest chain that holds the OH group.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q5hezg",
+      "kind": "concept",
+      "front": "What does a skeletal formula leave out, and what does it still show?",
+      "back": "It omits hydrogens on carbon atoms and shows the carbon skeleton as lines, with each line end and corner being a carbon. Functional group atoms are written in.",
+      "hint": "Think about what each corner of a line represents.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17eoovn",
+      "kind": "concept",
+      "front": "Why do chain isomers and position isomers react in similar ways, but functional group isomers react very differently?",
+      "back": "Chain and position isomers keep the same functional group, so they react similarly. Functional group isomers contain different groups, so their reactions differ greatly.",
+      "hint": "Compare whether the functional group stays the same.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b0zu1y",
+      "kind": "mistake",
+      "front": "Why does bending a drawn carbon chain not create a new isomer?",
+      "back": "A bent drawing of butane is still butane, because the atoms are joined in the same order. Count the longest continuous chain to decide the structure.",
+      "hint": "Check whether the bonds between atoms have changed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n2ak19",
+      "kind": "mistake",
+      "front": "Why are physical properties not identical across a homologous series?",
+      "back": "Members share similar chemical reactions, but physical properties such as boiling point change gradually along the series.",
+      "hint": "Think about how boiling point changes as chains get longer.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nush4r",
+      "kind": "concept",
+      "front": "Why does propanal not need a number in its name, but pentan-2-one does?",
+      "back": "The carbonyl carbon of an aldehyde is always carbon 1, so no number is needed. Ketones need a number from pentanone onwards to show the carbonyl position.",
+      "hint": "Consider where the carbonyl group can sit in the chain.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0po80da",
+      "kind": "concept",
+      "front": "How can you tell whether a carbonyl compound is an aldehyde or a ketone?",
+      "back": "Check whether the carbonyl carbon is bonded to at least one hydrogen. If yes, it is an **aldehyde**. If it is bonded to two carbon groups, it is a **ketone**.",
+      "hint": "Look at the carbon double-bonded to oxygen and what else it is attached to.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11su6cu",
+      "kind": "example",
+      "front": "What type of structural isomerism do 1-bromopropane and 2-bromopropane show?",
+      "back": "**Position isomerism**. Both have the same functional group, but the bromine sits on a different carbon.",
+      "hint": "Compare which carbon atom holds the bromine.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "6-3",
+  "topicCode": "6.3",
+  "topicName": "Heat transfer and thermal equilibrium",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:50.021Z",
+  "cards": [
+    {
+      "id": "05838xw",
+      "kind": "concept",
+      "front": "Which way does heat flow between two objects in contact, and what decides the direction?",
+      "back": "**Heat** flows spontaneously from the hotter object to the cooler one, and it continues while a temperature difference remains.",
+      "hint": "Look at which object has the higher temperature.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0excet3",
+      "kind": "term",
+      "front": "What is thermal equilibrium, and why is there no net heat transfer once it is reached?",
+      "back": "**Thermal equilibrium** is when objects in thermal contact reach the same temperature. Particles still exchange energy, but the exchanges no longer produce an overall flow.",
+      "hint": "Particles keep colliding even when nothing changes overall.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05ztf3o",
+      "kind": "formula",
+      "front": "In an insulated system with two substances, which equation sets the heat changes so they balance to find $T_f$?",
+      "back": "$m_1c_1(T_f-T_1)+m_2c_2(T_f-T_2)=0$, where $m$ is mass, $c$ is specific heat capacity, and $T_f$ is the shared final temperature. Heat lost by one equals heat gained by the other.",
+      "hint": "Signed heat changes should add to zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0620zip",
+      "kind": "formula",
+      "front": "What equation gives the heat change $q$ for a substance that stays in one phase, and what are its units?",
+      "back": "$q=mc\\Delta T$, where $m$ is mass, $c$ is specific heat capacity, and $\\Delta T=T_{\\mathrm{final}}-T_{\\mathrm{initial}}$. With $m$ in grams and $c$ in $\\mathrm{J\\,g^{-1}\\,^{\\circ}C^{-1}}$, $q$ is in joules.",
+      "hint": "Check the units of $m$ and $c$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0akjmkm",
+      "kind": "process",
+      "front": "What are the steps to find the shared final temperature of two substances in an insulated system?",
+      "back": "1) Write a heat change for each substance using the same $T_f$. 2) Set the signed heat changes to sum to zero. 3) Solve for $T_f$. 4) Check that $T_f$ lies between the starting temperatures.",
+      "hint": "Four steps, ending with a check.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "172nnq1",
+      "kind": "example",
+      "front": "An insulated container holds 100 g of water at 80 °C. You add 200 g of water at 20 °C. What is the final temperature?",
+      "back": "**40 °C**. Solving $100(T_f-80)+200(T_f-20)=0$ gives $300T_f=12000$, so $T_f=40$ °C.",
+      "hint": "Both portions use the same final temperature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pomlrb",
+      "kind": "mistake",
+      "front": "A student averages the two starting temperatures to get the final temperature. When is this wrong?",
+      "back": "It is **wrong** unless both portions have equal heat capacities, $mc$. Each portion's mass and specific heat capacity affect how much its temperature changes.",
+      "hint": "Think about what the two portions have in common.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0s5m7l7",
+      "kind": "mistake",
+      "front": "A student says heat flows toward the object with more mass. What is wrong with this idea?",
+      "back": "Heat direction depends on **temperature**, not mass. Heat flows from the hotter object to the cooler one, whatever their masses.",
+      "hint": "What does the note say decides the direction?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hcvndy",
+      "kind": "concept",
+      "front": "Why can a large amount of warm water contain more thermal energy than a small amount of hotter water?",
+      "back": "**Temperature** does not measure total thermal energy. Total thermal energy also depends on how much substance is present.",
+      "hint": "Compare the amount of substance in each sample.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wiebeb",
+      "kind": "term",
+      "front": "What is an insulated system?",
+      "back": "A system in which **negligible energy** enters or leaves the objects being studied. Energy conservation then means heat lost by hotter objects equals heat gained by cooler ones.",
+      "hint": "Think about what is allowed to cross the boundary.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04l1p91",
+      "kind": "mistake",
+      "front": "Two objects reach the same final temperature. Did each particle receive the same amount of energy?",
+      "back": "No. Equal final temperatures do **not** mean equal amounts of energy were transferred to each particle.",
+      "hint": "Temperature is a shared value, not a per-particle total.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kcsq88",
+      "kind": "concept",
+      "front": "What sign does $q$ have for a substance that is cooling, and why?",
+      "back": "**Negative**. Its $\\Delta T=T_{\\mathrm{final}}-T_{\\mathrm{initial}}$ is negative when it cools, so $q=mc\\Delta T$ is negative.",
+      "hint": "Check the sign of $T_{\\mathrm{final}}-T_{\\mathrm{initial}}$.",
+      "sectionId": "s3"
+    }
+  ]
+}

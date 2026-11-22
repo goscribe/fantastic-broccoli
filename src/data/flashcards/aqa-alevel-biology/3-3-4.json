@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-3-4",
+  "topicCode": "3.3.4",
+  "topicName": "Mass transport",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:29.172Z",
+  "cards": [
+    {
+      "id": "1fqetzx",
+      "kind": "concept",
+      "front": "Why does mammalian double circulation need two separate pumping sides in the heart?",
+      "back": "The **septum** keeps the two blood supplies apart. The right side pumps blood to the lungs, while the left side pumps oxygenated blood to the body at higher pressure.",
+      "hint": "Think about which side receives blood returning from the body.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tbh6b5",
+      "kind": "concept",
+      "front": "How does haemoglobin help oxygen reach respiring tissues?",
+      "back": "Haemoglobin binds oxygen **reversibly**: it loads oxygen where partial pressure is high, as in the lungs, and releases it where partial pressure is lower. Carbon dioxide from active tissues lowers its affinity, so oxygen is unloaded where demand is greatest.",
+      "hint": "Compare conditions in the lungs with those in an active muscle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qmo9we",
+      "kind": "process",
+      "front": "Describe how transpiration pulls water up the xylem.",
+      "back": "Water evaporates from mesophyll cell surfaces, so more water moves towards them. This creates **tension** that pulls water up the xylem. **Cohesion** between water molecules keeps the transpiration stream continuous.",
+      "hint": "Start with what happens at the leaf surface.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14d9rfd",
+      "kind": "term",
+      "front": "What is a source in phloem transport?",
+      "back": "A **source** is a plant region, such as a photosynthesising leaf, that supplies sugars for transport in the phloem.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mkv62o",
+      "kind": "concept",
+      "front": "What structural feature lets sap pass from one phloem cell to the next?",
+      "back": "**Sieve plates** are perforated end walls that let sap pass between the living sieve tube elements, which are joined end to end.",
+      "hint": "Think about where the cells meet end to end.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zu2htj",
+      "kind": "process",
+      "front": "How does sucrose loading at a source create a pressure difference in phloem?",
+      "back": "Active loading of sucrose lowers the water potential in sieve tubes. Water enters from the xylem by osmosis, raising pressure. At a sink, sucrose is removed and water leaves, so the pressure difference drives **mass flow**.",
+      "hint": "Trace how the water potential changes at each end.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12zfcsu",
+      "kind": "concept",
+      "front": "What forces water and small dissolved substances out of capillaries at the arterial end?",
+      "back": "**Blood pressure** pushes water and small solutes through the capillary walls to form tissue fluid. Red blood cells and most plasma proteins stay in the blood.",
+      "hint": "Compare this with the end of the capillary where pressure has fallen.",
+      "sectionId": "s7"
+    },
+    {
+      "id": "13ttwq6",
+      "kind": "mistake",
+      "front": "Why is it wrong to say all tissue fluid returns directly to the capillaries?",
+      "back": "Some tissue fluid returns by osmosis at the far end of the capillary. The excess is collected by **lymph vessels**, which eventually return it to the blood.",
+      "sectionId": "s7"
+    },
+    {
+      "id": "03gh3zf",
+      "kind": "mistake",
+      "front": "Why is it wrong to say most carbon dioxide travels bound to haemoglobin?",
+      "back": "Most carbon dioxide travels as **hydrogencarbonate ions** in plasma. Only some binds directly to haemoglobin, and a little dissolves in the plasma.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j73a50",
+      "kind": "process",
+      "front": "How does $\\text{CO}_2$ become hydrogencarbonate ions inside red blood cells?",
+      "back": "$\\text{CO}_2$ reacts with water, sped up by **carbonic anhydrase**, forming carbonic acid. This dissociates into $\\text{H}^+$ and hydrogencarbonate ions. Hydrogencarbonate ions leave the cell as chloride ions enter.",
+      "hint": "Think about the first reactant and what it combines with.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06scna2",
+      "kind": "term",
+      "front": "What is cooperative binding in haemoglobin?",
+      "back": "**Cooperative binding** means each oxygen molecule that binds makes the next one easier to bind. This produces an S-shaped oxygen dissociation curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1p4gwaz",
+      "kind": "concept",
+      "front": "Why are capillary walls only one cell thick?",
+      "back": "A **thin wall** gives a short diffusion distance, allowing efficient exchange between the blood and surrounding tissues.",
+      "hint": "Think about how far substances must diffuse.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1p68dbz",
+      "kind": "concept",
+      "front": "What differs between the driving forces for blood flow and for xylem water movement?",
+      "back": "Blood is pushed along by **heart-generated pressure**. Xylem water is pulled upwards, mainly by **transpiration** from the leaves.",
+      "hint": "Consider where the force starts in each system.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0yg43j7",
+      "kind": "concept",
+      "front": "Why can xylem vessels carry a continuous column of water?",
+      "back": "They are hollow tubes of dead cells with no end walls, giving a clear path for water. **Lignin** strengthens their walls so they resist collapse under tension.",
+      "hint": "Consider what the cells are like when the vessels mature.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-2-4",
+  "topicCode": "3.2.4",
+  "topicName": "Cell recognition and the immune system",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:10.467Z",
+  "cards": [
+    {
+      "id": "07k962h",
+      "kind": "concept",
+      "front": "Why can the immune system tell a pathogen apart from the body's own cells?",
+      "back": "Body cells carry familiar **surface antigens** that the immune system normally recognises as its own. A pathogen may carry unfamiliar antigens, which immune cells recognise as foreign and respond to.",
+      "hint": "Think about which molecules sit on the outside of cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0s9tcjz",
+      "kind": "process",
+      "front": "What steps lead a B lymphocyte to produce antibodies?",
+      "back": "It recognises its matching **antigen** and receives signals from helper T cells. It then divides; some daughter cells become **plasma cells** that secrete antibodies, and others become memory B cells.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zeudfo",
+      "kind": "concept",
+      "front": "Why does a second exposure to the same pathogen usually cause a faster response?",
+      "back": "**Memory lymphocytes** from the first exposure respond quickly, producing antibodies faster and in greater amounts. This is the **secondary immune response**.",
+      "hint": "Think about what cells were left behind after the first infection or vaccination.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ndmsuj",
+      "kind": "term",
+      "front": "What is an antigen?",
+      "back": "An **antigen** is a molecule, often a protein on a cell or pathogen surface, that can trigger a specific immune response.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rpo44v",
+      "kind": "term",
+      "front": "What is a phagocyte and how does it deal with a pathogen?",
+      "back": "A **phagocyte** is a white blood cell that engulfs a pathogen by phagocytosis, takes it into a vesicle, and digests it with enzymes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1450gs1",
+      "kind": "term",
+      "front": "What is an antigen-presenting cell?",
+      "back": "An **antigen-presenting cell** is a phagocyte that displays fragments of a digested pathogen on its surface, so a matching lymphocyte can recognise them.",
+      "hint": "Think about what a phagocyte does after digesting a pathogen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vxvnak",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that phagocytes produce antibodies?",
+      "back": "Phagocytes do not produce antibodies. **B lymphocytes** produce antibodies after they are activated, while phagocytes engulf and digest pathogens and can display their antigens.",
+      "hint": "Compare the phagocyte with the B lymphocyte.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e53hzh",
+      "kind": "term",
+      "front": "What is the role of helper T cells?",
+      "back": "**Helper T cells** release chemical signals that stimulate and coordinate other immune cells, including B lymphocytes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00mgknj",
+      "kind": "term",
+      "front": "What do cytotoxic T cells do?",
+      "back": "**Cytotoxic T cells** kill infected body cells that display the antigen they recognise, which can stop a pathogen inside them reproducing.",
+      "hint": "Think about what happens to the infected cell itself.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0f0fmww",
+      "kind": "concept",
+      "front": "What is the cellular response?",
+      "back": "The **cellular response** is carried out by T lymphocytes acting through cells, such as cytotoxic T cells killing infected cells, rather than through antibodies in body fluids.",
+      "hint": "Compare it with the humoral response.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06kflgt",
+      "kind": "term",
+      "front": "What are plasma cells?",
+      "back": "**Plasma cells** are activated B lymphocytes that secrete large quantities of antibodies.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t5k342",
+      "kind": "concept",
+      "front": "How can antibodies help defend the body against a pathogen?",
+      "back": "Antibodies bind specifically to their target antigen, which can **block** a pathogen or toxin from attaching to cells, cause pathogens to **clump together**, or **mark** them for phagocytosis.",
+      "hint": "Think about what the antibody's binding site fits.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ob7d74",
+      "kind": "mistake",
+      "front": "Why does a vaccine not give a person permanent, ready-made antibodies?",
+      "back": "A vaccine stimulates the person's own immune system to make antibodies and **memory cells**. Protection depends on that response, and it can weaken over time, so boosters may be needed.",
+      "hint": "Think about who makes the antibodies after vaccination.",
+      "sectionId": "s5"
+    }
+  ]
+}

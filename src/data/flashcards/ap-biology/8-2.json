@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "8-2",
+  "topicCode": "8.2",
+  "topicName": "Energy flow through ecosystems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:03.289Z",
+  "cards": [
+    {
+      "id": "1m64jnt",
+      "kind": "concept",
+      "front": "Why can only a fraction of energy pass from one trophic level to the next?",
+      "back": "**Energy is lost at each transfer.** Cellular work and respiration release energy as heat, some biomass is never eaten, and some eaten material leaves as undigested waste, so less is stored for the next level.",
+      "hint": "Think about where the energy goes at each step.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07uces8",
+      "kind": "concept",
+      "front": "How does energy enter a food web, and what do the arrows show?",
+      "back": "**Producers** capture energy, usually from sunlight, and store some in organic molecules. Consumers gain that energy by eating. Arrows point from the organism eaten toward the organism that eats it, showing the direction of energy transfer.",
+      "hint": "Start with the organisms that make their own food.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1osvw5b",
+      "kind": "formula",
+      "front": "What is the formula for transfer efficiency, and what does each part mean?",
+      "back": "Transfer efficiency = $\\frac{\\text{energy at receiving level}}{\\text{energy at level below}} \\times 100\\%$. Both energies are measured over the same area and time, in units such as $\\mathrm{kJ\\,m^{-2}\\,year^{-1}}$, and the result is a percentage.",
+      "hint": "Divide the higher level's energy by the lower level's energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ktqqlo",
+      "kind": "term",
+      "front": "What is a trophic level?",
+      "back": "A **trophic level** is an organism's feeding position within a pathway of energy transfer. Producers form the first level, primary consumers the second, and secondary consumers the third.",
+      "hint": "Think of it as a rung on a feeding ladder.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k9xo81",
+      "kind": "term",
+      "front": "What is a food web?",
+      "back": "A **food web** is a set of connected feeding pathways among organisms in an ecosystem. It shows several routes energy can take, all starting from producers.",
+      "hint": "It is many food chains linked together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "054m5tl",
+      "kind": "term",
+      "front": "What is an energy pyramid?",
+      "back": "An **energy pyramid** compares the energy available at successive trophic levels. Its base is the producers, and each higher tier shows consumers feeding on the level below. It is measured over a stated area and time.",
+      "hint": "Check the scale and units before comparing tiers.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0muz9jg",
+      "kind": "concept",
+      "front": "Why are energy pyramids usually upright, with narrower tiers higher up?",
+      "back": "Each transfer leaves less energy available to the next level, so **higher tiers store less energy** and are narrower. The base is widest because producers capture the most energy.",
+      "hint": "Link the shape to losses at each transfer.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "038z4d3",
+      "kind": "mistake",
+      "front": "A student says a narrow top tier means each organism at the top holds very little energy. Is this right?",
+      "back": "No. The pyramid compares **whole trophic levels**, not individual organisms. A narrow tier shows less total energy stored at that level over the measured area and time.",
+      "hint": "Does the diagram show one organism or a whole level?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14wrt7w",
+      "kind": "mistake",
+      "front": "A student draws food web arrows pointing toward the food an organism eats. What is wrong?",
+      "back": "Arrows point **toward the organism receiving energy**, not toward its food. They show the direction energy moves, from the organism eaten to the organism that eats it.",
+      "hint": "Follow the direction energy travels.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cxqre3",
+      "kind": "process",
+      "front": "What are the steps to calculate transfer efficiency between two trophic levels?",
+      "back": "1) Identify the **receiving level** and its energy. 2) Divide that energy by the energy at the level below. 3) Multiply by $100\\%$ to get a percentage.",
+      "hint": "Three steps: identify, divide, convert.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cmv908",
+      "kind": "example",
+      "front": "Producers store $8{,}000\\ \\mathrm{kJ\\,m^{-2}\\,year^{-1}}$ and primary consumers store $800\\ \\mathrm{kJ\\,m^{-2}\\,year^{-1}}$. What is the transfer efficiency?",
+      "back": "**10%**. Calculation: $\\frac{800}{8{,}000}=0.10$, then $0.10\\times100\\%=10\\%$. The remaining 90% was not stored as primary-consumer biomass.",
+      "hint": "Use primary consumer energy divided by producer energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bov1bj",
+      "kind": "mistake",
+      "front": "A student assumes every energy transfer in an ecosystem is 10% efficient. Why is this wrong?",
+      "back": "Transfer efficiency is **not a fixed percentage**. A calculated value describes only that particular transfer, between the levels and time measured.",
+      "hint": "Think about what a single calculation can tell you.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00b2fmo",
+      "kind": "concept",
+      "front": "Why can a bird occupy different trophic levels in the same food web?",
+      "back": "A trophic level depends on **what the organism eats**. A bird eating seeds acts as a primary consumer, but when it eats grasshoppers that ate plants, it acts as a secondary consumer.",
+      "hint": "Trophic level depends on the food, not the species alone.",
+      "sectionId": "s1"
+    }
+  ]
+}

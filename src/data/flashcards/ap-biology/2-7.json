@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "2-7",
+  "topicCode": "2.7",
+  "topicName": "Tonicity and osmoregulation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:25.440Z",
+  "cards": [
+    {
+      "id": "1w15ips",
+      "kind": "concept",
+      "front": "What decides whether a surrounding solution makes a cell gain or lose water?",
+      "back": "The **nonpenetrating solutes** on each side, relative to the cell. Water moves by osmosis toward the side with more of them, because these solutes cannot readily cross the membrane.",
+      "hint": "Think about which solutes can and cannot cross the membrane.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tza5a1",
+      "kind": "term",
+      "front": "What is a hypotonic solution, compared with the cell?",
+      "back": "A **hypotonic** solution has fewer nonpenetrating solutes than the cell. Water enters the cell overall, so an animal cell may swell and burst.",
+      "hint": "Hypo means less.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ennkwz",
+      "kind": "mistake",
+      "front": "Why is it wrong to judge tonicity by counting every dissolved particle?",
+      "back": "Tonicity is not a count of all particles. A solute that crosses the membrane readily does not sustain a difference in water movement, so only **nonpenetrating solutes** matter.",
+      "hint": "Consider what can pass through the membrane.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uu279w",
+      "kind": "process",
+      "front": "What steps should you follow to predict how a cell responds to a surrounding solution?",
+      "back": "1) Compare the **effective solute concentrations** on both sides. 2) Predict the net direction of water movement. 3) Predict the resulting change in cell volume.",
+      "hint": "Start with the comparison, then the water, then the volume.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0td71ul",
+      "kind": "term",
+      "front": "What is a hypertonic solution, compared with the cell?",
+      "back": "A **hypertonic** solution has more nonpenetrating solutes than the cell. Water leaves the cell overall, so the cell shrinks.",
+      "hint": "Hyper means more.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iu4rvz",
+      "kind": "concept",
+      "front": "What happens to cell volume in an isotonic solution?",
+      "back": "Volume stays about the same. An **isotonic** solution has the same effective concentration of nonpenetrating solutes as the cell, so water still moves both ways but there is no net gain or loss.",
+      "hint": "Net movement is the key idea.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0z954qz",
+      "kind": "concept",
+      "front": "Why does a plant cell in a hypotonic solution become firm rather than bursting?",
+      "back": "Water enters and the central vacuole expands, pressing the membrane against the **cell wall**. The wall resists expansion, creating turgor pressure, which keeps the cell firm.",
+      "hint": "Focus on what the cell wall does.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06hf4me",
+      "kind": "term",
+      "front": "What is turgor pressure?",
+      "back": "**Turgor pressure** is the outward pressure of a plant cell's contents against its cell wall. It helps keep the plant cell firm.",
+      "hint": "Think of the cell wall pushing back.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1csw3qu",
+      "kind": "term",
+      "front": "What is plasmolysis?",
+      "back": "**Plasmolysis** is when a plant cell loses water, usually in a hypertonic solution, and its membrane pulls away from the cell wall. Loss of turgor makes the tissue less firm.",
+      "hint": "Think about the membrane and the wall.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01coje6",
+      "kind": "mistake",
+      "front": "Why is it a mistake to assume the same water movement has the same visible effect in plant and animal cells?",
+      "back": "The **cell wall** changes the outcome. Water gain in a plant cell creates turgor and firmness, while the wall limits swelling. The same water direction can look different in the two cell types.",
+      "hint": "Compare how each cell type handles swelling.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p6jub2",
+      "kind": "term",
+      "front": "What is osmoregulation?",
+      "back": "**Osmoregulation** is the maintenance of suitable water and solute levels despite changes outside the organism. It protects cells from excessive swelling or shrinking.",
+      "hint": "Osmo refers to water movement.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m5pb6n",
+      "kind": "concept",
+      "front": "How does a freshwater single-celled organism keep its water balance?",
+      "back": "Water tends to enter because its surroundings have fewer dissolved solutes. A **contractile vacuole** collects the excess water and expels it, which requires energy.",
+      "hint": "Think about the organism's surroundings and its vacuole.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11glx9w",
+      "kind": "concept",
+      "front": "How do animals and land plants regulate water balance?",
+      "back": "Animals adjust water intake and excretion, with kidneys changing how much water and solute leave in urine. Land plants use a **waxy surface** and leaf openings to limit water loss, and roots take up water to replace losses.",
+      "hint": "Consider both body systems and plant structures.",
+      "sectionId": "s4"
+    }
+  ]
+}

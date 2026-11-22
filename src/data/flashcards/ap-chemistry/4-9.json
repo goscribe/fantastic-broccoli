@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "4-9",
+  "topicCode": "4.9",
+  "topicName": "Oxidation-reduction (redox) reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:42.607Z",
+  "cards": [
+    {
+      "id": "0rtxqk1",
+      "kind": "concept",
+      "front": "What is a redox reaction, and how can you tell one is happening?",
+      "back": "A **redox** reaction transfers electrons, so some element's oxidation number changes. Oxidation (increase) and reduction (decrease) always occur together.",
+      "hint": "Compare each element's oxidation number before and after.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0r5253p",
+      "kind": "term",
+      "front": "What is an oxidation number?",
+      "back": "An **oxidation number** is an assigned charge that tracks electrons gained or lost by an atom. Uncombined elements are 0, and a monatomic ion equals its charge.",
+      "hint": "It is a bookkeeping charge, not always a real one.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gbv2h3",
+      "kind": "term",
+      "front": "What is an oxidizing agent?",
+      "back": "An **oxidizing agent** causes another species to lose electrons. It gains those electrons and is itself reduced.",
+      "hint": "Think about which species' oxidation number falls.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j93coe",
+      "kind": "process",
+      "front": "How do you find an unknown oxidation number in a compound or ion?",
+      "back": "Assign the known values first. Let the unknown be $x$. Set the sum equal to $0$ for a neutral compound or to the ion's charge for a polyatomic ion, then solve for $x$.",
+      "hint": "Start with oxygen, fluorine, and the group metals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nfx1gf",
+      "kind": "formula",
+      "front": "How do oxidation numbers add up in a compound or polyatomic ion?",
+      "back": "In a neutral compound, the sum is $0$. In a polyatomic ion, the sum equals the ion's charge. For example, $2x+3(-2)=0$ for $\\mathrm{Fe_2O_3}$, where $x$ is iron's oxidation number.",
+      "hint": "Each term is (number of atoms) times (oxidation number).",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1k2n7al",
+      "kind": "example",
+      "front": "What is the oxidation number of iron in $\\mathrm{Fe_2O_3}$?",
+      "back": "**+3**. Each oxygen is $-2$, so $2x+3(-2)=0$, which gives $x=+3$.",
+      "hint": "Solve for x after writing the neutral-compound sum.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bgousf",
+      "kind": "example",
+      "front": "What is the oxidation number of sulfur in $\\mathrm{SO_4^{2-}}$?",
+      "back": "**+6**. Each oxygen is $-2$, and the ion has charge $-2$, so $x+4(-2)=-2$, giving $x=+6$.",
+      "hint": "The sum must equal the ion's charge, not zero.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d8ey4u",
+      "kind": "mistake",
+      "front": "Is checking only the overall charge of the ions enough to spot a redox reaction?",
+      "back": "**No.** An ion's overall charge change is not the only test. Compare oxidation numbers of individual elements, especially within compounds.",
+      "hint": "Look at each element, not just the whole species.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1no6vta",
+      "kind": "process",
+      "front": "What are the steps to balance a redox equation with half-reactions?",
+      "back": "Balance each half-reaction for atoms, then balance charge with electrons. Multiply until electron counts match, add the half-reactions, and cancel electrons and species appearing on both sides.",
+      "hint": "The electrons must cancel completely in the final sum.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "063s925",
+      "kind": "mistake",
+      "front": "Why is balancing only the atoms in a redox equation not enough?",
+      "back": "The **total charge** must also match on both sides. Balancing atoms alone can leave a charge mismatch, so you must balance charge with electrons too.",
+      "hint": "Count the charge on each side after balancing atoms.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1npdobl",
+      "kind": "example",
+      "front": "What is the balanced equation for $\\mathrm{Al+Ag^+\\rightarrow Al^{3+}+Ag}$?",
+      "back": "$\\mathrm{Al+3Ag^+\\rightarrow Al^{3+}+3Ag}$. Aluminum loses $3e^-$, and each silver ion gains one electron, so the reduction is multiplied by three.",
+      "hint": "Match the electron counts from the two half-reactions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18n33t9",
+      "kind": "concept",
+      "front": "In $\\mathrm{Zn+Cu^{2+}\\rightarrow Zn^{2+}+Cu}$, which species is the reducing agent, and what does it do?",
+      "back": "**Zinc** is the reducing agent. It loses two electrons as its oxidation number rises from $0$ to $+2$, so it is oxidized.",
+      "hint": "A reducing agent is itself oxidized.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1c76j3q",
+      "kind": "term",
+      "front": "What is a half-reaction?",
+      "back": "A **half-reaction** shows only the electron-loss part or the electron-gain part of a redox reaction.",
+      "hint": "A redox reaction is split into two of these.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jim26z",
+      "kind": "mistake",
+      "front": "Why should you not identify a redox agent from its name alone?",
+      "back": "**Agents** are identified from oxidation number changes. Check which species' oxidation number falls, since that species is the oxidizing agent.",
+      "hint": "Track the element whose oxidation number changes.",
+      "sectionId": "s3"
+    }
+  ]
+}

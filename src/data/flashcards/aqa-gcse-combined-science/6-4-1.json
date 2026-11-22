@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-4-1",
+  "topicCode": "6.4.1",
+  "topicName": "Atoms and isotopes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:21.453Z",
+  "cards": [
+    {
+      "id": "1n8nnpy",
+      "kind": "concept",
+      "front": "Where is nearly all of an atom's mass located?",
+      "back": "In the **nucleus**, which holds the protons and neutrons. Electrons occupy the space around it, so most of the atom is empty space.",
+      "hint": "Compare how small the nucleus is with the whole atom.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rvl2zk",
+      "kind": "term",
+      "front": "What are isotopes?",
+      "back": "**Isotopes** are atoms of the same element with different numbers of neutrons. They have the same proton number, so they are the same element.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0otrxex",
+      "kind": "formula",
+      "front": "How do you work out the neutron number of an atom from its numbers?",
+      "back": "$\\text{neutron number} = \\text{mass number} - \\text{atomic number}$. Subtract the **atomic number** from the mass number to get the neutrons.",
+      "hint": "Use the two numbers shown in the element symbol.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v8puky",
+      "kind": "term",
+      "front": "What is the atomic number of an atom?",
+      "back": "The **number of protons** in the atom's nucleus. Every atom of one element has the same atomic number.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14eofh9",
+      "kind": "term",
+      "front": "What is the mass number of an atom?",
+      "back": "The **total number of protons and neutrons** in the nucleus. Electrons are not included in the mass number.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fyzynp",
+      "kind": "concept",
+      "front": "Why is a neutral atom overall uncharged?",
+      "back": "It has equal numbers of **protons** and electrons, so their positive and negative charges cancel. Neutrons have no charge.",
+      "hint": "Think about the charge each particle carries.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1q1rwhq",
+      "kind": "example",
+      "front": "A neutral atom has atomic number 11 and mass number 23. How many electrons does it have?",
+      "back": "**11** electrons. A neutral atom has equal numbers of protons and electrons, and it has 11 protons.",
+      "hint": "Think about what a neutral atom needs to balance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19imaqz",
+      "kind": "example",
+      "front": "Calculate the protons, neutrons and electrons in a neutral atom with atomic number 17 and mass number 35.",
+      "back": "**17** protons, **18** neutrons and **17** electrons. Neutrons are $35-17=18$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0g31xsn",
+      "kind": "process",
+      "front": "What are the steps to find the particle numbers of a neutral atom from its symbol?",
+      "back": "1) Protons = atomic number. 2) Neutrons = mass number minus atomic number. 3) Electrons = protons. 4) Check protons plus neutrons equals the mass number.",
+      "hint": "Start with the number that defines the element.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19imib2",
+      "kind": "concept",
+      "front": "When comparing carbon-12 and carbon-14 atoms, which particle numbers stay the same and which change?",
+      "back": "Protons (6) and electrons (6, when neutral) stay the same. The **neutrons** change, from 6 in carbon-12 to 8 in carbon-14.",
+      "hint": "Use the tip about stating which particle number stays the same.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01nsps3",
+      "kind": "mistake",
+      "front": "Why is it wrong to say isotopes are different elements because they have different mass numbers?",
+      "back": "Isotopes have the same **proton number**, which defines the element. Different mass numbers come only from different neutron numbers.",
+      "hint": "Ask which particle decides what element an atom is.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0y076y0",
+      "kind": "mistake",
+      "front": "What goes wrong if you assume electrons equal protons without checking the question?",
+      "back": "The equal-numbers rule only applies to **neutral** atoms. Always check the question describes the atom as neutral first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tr7v23",
+      "kind": "concept",
+      "front": "In an element symbol, where is the mass number written and where is the atomic number?",
+      "back": "The **mass number** is written above the element symbol and the **atomic number** is written below it, as in $^{12}_{6}\\text{C}$.",
+      "sectionId": "s2"
+    }
+  ]
+}

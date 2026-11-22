@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "9-3",
+  "topicCode": "9.3",
+  "topicName": "Gibbs free energy and thermodynamic favorability",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:21.460Z",
+  "cards": [
+    {
+      "id": "0udyb0r",
+      "kind": "concept",
+      "front": "What does a negative Gibbs free energy change tell you about a process?",
+      "back": "It is **thermodynamically favorable** in the stated direction under the stated conditions, so it can proceed without a continuous external energy input. It says nothing about how fast it happens.",
+      "hint": "Think about direction and conditions, not speed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11osmb4",
+      "kind": "formula",
+      "front": "What equation links Gibbs free energy change to enthalpy change, entropy change, and temperature?",
+      "back": "$\\Delta G=\\Delta H-T\\Delta S$, where $\\Delta H$ is the **enthalpy change**, $\\Delta S$ is the entropy change, and $T$ is temperature in kelvin.",
+      "hint": "Temperature must be in kelvin, not Celsius.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17jel9p",
+      "kind": "concept",
+      "front": "How can raising the temperature change whether a process is favorable?",
+      "back": "When $\\Delta H$ and $\\Delta S$ are both positive, higher **temperature** makes $T\\Delta S$ larger, which can make $\\Delta G$ negative so the process becomes favorable.",
+      "hint": "Look at how $T\\Delta S$ is subtracted from $\\Delta H$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0467icf",
+      "kind": "term",
+      "front": "What is Gibbs free energy?",
+      "back": "**Gibbs free energy** is a thermodynamic quantity whose change predicts whether a process is favorable at constant temperature and pressure.",
+      "hint": "It combines enthalpy and entropy into one prediction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cohw3w",
+      "kind": "term",
+      "front": "What does it mean for a process to be thermodynamically favorable?",
+      "back": "It has a **negative** free energy change in the stated direction under the stated conditions, so it can proceed without continuous external energy input.",
+      "hint": "Focus on the sign of $\\Delta G$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v2co87",
+      "kind": "term",
+      "front": "What is equilibrium in terms of free energy?",
+      "back": "**Equilibrium** is the condition where $\\Delta G=0$ under the stated conditions, so there is no net tendency to change in either direction.",
+      "hint": "What value of $\\Delta G$ means no net tendency?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ty1liu",
+      "kind": "process",
+      "front": "What are the steps to calculate $\\Delta G$ from $\\Delta H$, $\\Delta S$, and $T$?",
+      "back": "1) Convert temperature to kelvin. 2) Convert entropy to $\\mathrm{kJ\\,mol^{-1}\\,K^{-1}}$ so units match. 3) Multiply $\\Delta S$ by $T$. 4) Subtract that term from $\\Delta H$, keeping all signs.",
+      "hint": "Units must match before you substitute.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0btjgrr",
+      "kind": "example",
+      "front": "At 298 K, a process has $\\Delta H=-40.0\\ \\mathrm{kJ\\,mol^{-1}}$ and $\\Delta S=-50.0\\ \\mathrm{J\\,mol^{-1}\\,K^{-1}}$. What is $\\Delta G$?",
+      "back": "$\\Delta G=-25.1\\ \\mathrm{kJ\\,mol^{-1}}$. Convert $\\Delta S$ to $-0.0500$ kJ/(mol K), so $T\\Delta S=-14.9$ kJ/mol, then $-40.0-(-14.9)=-25.1$.",
+      "hint": "Convert the entropy units first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1phw6uj",
+      "kind": "mistake",
+      "front": "A student says a reaction with negative $\\Delta G$ must be fast. What is wrong with this?",
+      "back": "**Favorability** is not **reaction rate**. Negative $\\Delta G$ predicts the process is favorable, but a large activation-energy barrier can make it very slow.",
+      "hint": "Favorable and fast are different ideas.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0icgt51",
+      "kind": "mistake",
+      "front": "What error occurs if $\\Delta S$ in J/(mol K) is subtracted directly from $\\Delta H$ in kJ/mol?",
+      "back": "**Unit mismatch**: the entropy term is wrong by a factor of 1000. Convert $\\Delta S$ to kJ/(mol K) so both energy terms use the same units.",
+      "hint": "Check the units on each term.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "048v5iq",
+      "kind": "concept",
+      "front": "What does a positive $\\Delta G$ tell you about a process as written?",
+      "back": "The **forward** process is unfavorable under the stated conditions, and the **reverse** process is favorable. A positive value does not mean no reaction can occur.",
+      "hint": "Think about which direction the sign favors.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1btl5ez",
+      "kind": "concept",
+      "front": "When $\\Delta H<0$ and $\\Delta S>0$, what happens to $\\Delta G$ at any positive temperature?",
+      "back": "$\\Delta G$ is **negative** at any positive temperature, because both terms push it down. The process is favorable at all temperatures under these assumptions.",
+      "hint": "Check the sign of each term in $\\Delta G=\\Delta H-T\\Delta S$.",
+      "sectionId": "s4"
+    }
+  ]
+}

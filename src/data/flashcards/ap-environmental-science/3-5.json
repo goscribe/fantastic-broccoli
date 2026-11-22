@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "3-5",
+  "topicCode": "3.5",
+  "topicName": "Population growth and resources",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:45.600Z",
+  "cards": [
+    {
+      "id": "0e3ebkg",
+      "kind": "formula",
+      "front": "What formula gives a population's growth rate, and what does each part mean?",
+      "back": "$\\text{growth rate}\\ (\\%)=\\frac{\\text{births}-\\text{deaths}}{\\text{population size}}\\times100$. Births and deaths are counted over the same time interval, so the **growth rate** is a percent per year.",
+      "hint": "Start with the net change, then compare it with the starting size.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0g495l5",
+      "kind": "concept",
+      "front": "Why does population growth slow as numbers approach carrying capacity?",
+      "back": "Resources such as food and breeding space become scarce, so births fall and deaths rise. Some animals also leave to search elsewhere, which slows growth.",
+      "hint": "Think about what a crowded group has to share.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ehc4xe",
+      "kind": "concept",
+      "front": "How does a density-dependent factor differ from a density-independent factor?",
+      "back": "A **density-dependent factor** gets stronger as crowding increases, such as disease. A **density-independent factor** affects the population the same whatever its crowding, such as a flood.",
+      "hint": "Compare how each factor changes as the population becomes more crowded.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lvsenm",
+      "kind": "term",
+      "front": "What is population size?",
+      "back": "**Population size** is the number of individuals of one species in a defined area.",
+      "hint": "Think about what is counted and where.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0f4z9pz",
+      "kind": "example",
+      "front": "A population of 5,000 deer has 600 births and 350 deaths in one year. What is its growth rate?",
+      "back": "**+5.0%** per year. Net change is 600 − 350 = 250, so $\\frac{250}{5{,}000}\\times100=+5.0\\%$, and the population grows to 5,250 deer.",
+      "hint": "Find the net change first, then divide by the starting size.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1egme9f",
+      "kind": "term",
+      "front": "What is carrying capacity?",
+      "back": "**Carrying capacity** is the population size an environment can support over time under given conditions.",
+      "hint": "Think about the ceiling a habitat sets on numbers in the long run.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15jswq7",
+      "kind": "term",
+      "front": "What is a limiting factor?",
+      "back": "A **limiting factor** is a resource or condition that keeps a population from growing larger. Food, water, space, predators and disease are examples.",
+      "hint": "Think about what puts a brake on numbers in nature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ci3xas",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume a larger population always grows faster?",
+      "back": "A larger population does not automatically have a higher **growth rate**. The rate depends on births and deaths relative to the population size, not on size alone.",
+      "hint": "Think about what the growth rate is divided by.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00n98id",
+      "kind": "process",
+      "front": "What steps link a limiting factor to a change in population size?",
+      "back": "1) The factor lowers births or raises deaths. 2) Compare births with deaths. 3) Births greater means growth, equal means a stable size, and fewer births means decline.",
+      "hint": "Start with the factor and follow its effect on individuals.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01cbu41",
+      "kind": "example",
+      "front": "Why does a drought cause a fall in a herbivore population?",
+      "back": "Drought reduces plant growth, so there is less food. Herbivores then have fewer births and more deaths until their numbers match the smaller food supply.",
+      "hint": "Follow the effect from plants to the animals that eat them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "145k0lv",
+      "kind": "formula",
+      "front": "How can you estimate a population's doubling time from its growth rate?",
+      "back": "Doubling time (years) is about $\\frac{70}{\\text{growth rate (\\% per year)}}$. A 2.0% growth rate gives about 35 years. The rule works best for small, steady rates.",
+      "hint": "Think of a shortcut that works best for small, steady growth.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0z1uspl",
+      "kind": "mistake",
+      "front": "Why does births equalling deaths not always mean a population stays the same size?",
+      "back": "Individuals can also move into or out of the area. This movement can add to or offset the changes caused by births and deaths.",
+      "hint": "Consider what the simple birth-and-death model leaves out.",
+      "sectionId": "s5"
+    }
+  ]
+}

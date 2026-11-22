@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "6-1",
+  "topicCode": "6.1",
+  "topicName": "The atmosphere",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:39.369Z",
+  "cards": [
+    {
+      "id": "07iwg4u",
+      "kind": "concept",
+      "front": "What is the greenhouse effect, and why does Earth need it?",
+      "back": "The **greenhouse effect** is natural warming. Greenhouse gases absorb infrared radiation from the surface and send part of it back down. Without it, the average surface would be about −18 °C instead of about 15 °C.",
+      "hint": "Think about where the infrared radiation comes from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19jat2b",
+      "kind": "concept",
+      "front": "Why does temperature fall with height in the troposphere but rise with height in the stratosphere?",
+      "back": "In the troposphere, warm ground heats the air from below, so temperature falls with height. In the stratosphere, **ozone** absorbs ultraviolet radiation, which warms the air, so temperature rises with height.",
+      "hint": "Compare where the heating comes from in each layer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fqedri",
+      "kind": "concept",
+      "front": "Why are human changes to the atmosphere a concern, even though most are small?",
+      "back": "Human activities now alter the mix of gases much faster than natural change. Small shifts in a few gases, such as **carbon dioxide** and methane, can still alter climate or the ozone layer.",
+      "hint": "Think about the size of the change compared with the whole atmosphere.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dsdqvs",
+      "kind": "term",
+      "front": "What is atmospheric pressure?",
+      "back": "**Atmospheric pressure** is the force per unit area exerted by the air on a surface. It falls as you climb, because less air lies above you.",
+      "hint": "Force divided by area.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lugxe2",
+      "kind": "term",
+      "front": "What is the troposphere?",
+      "back": "The **troposphere** is the lowest atmospheric layer. It holds most of the air and nearly all weather, and temperature falls with height in it.",
+      "hint": "It is the layer you live in.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "024ndkm",
+      "kind": "term",
+      "front": "What are trace gases?",
+      "back": "**Trace gases** are gases present in the air in very small amounts. Carbon dioxide, at about 0.04%, is one example.",
+      "hint": "Look at the proportions in the table.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bu7psv",
+      "kind": "formula",
+      "front": "How do you calculate the volume of one gas in a sample of dry air?",
+      "back": "Volume of gas = $\\frac{\\text{percentage by volume}}{100}\\times\\text{sample volume}$. The sample volume is in dm³, and the percentage is the gas's share of the air.",
+      "hint": "Turn the percentage into a fraction first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nl1e28",
+      "kind": "example",
+      "front": "What volume of nitrogen is in a 500 dm³ sample of dry air?",
+      "back": "$390\\,\\mathrm{dm^3}$. Nitrogen is about 78% of dry air, so $\\frac{78}{100}\\times500=390$.",
+      "hint": "Nitrogen is about 78% of dry air by volume.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "169ypii",
+      "kind": "mistake",
+      "front": "A student says gravity stops acting high in the atmosphere, so the air becomes thin. What is wrong?",
+      "back": "Gravity still acts high up. The air is thinner because **fewer gas molecules** lie above that height.",
+      "hint": "Ask what is actually above a point high in the air.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1arraow",
+      "kind": "mistake",
+      "front": "Is the greenhouse effect harmful in itself?",
+      "back": "No. The **greenhouse effect** is natural and essential for life. The concern is the extra warming caused by added greenhouse gases.",
+      "hint": "Separate the natural effect from the human addition.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12z1a3g",
+      "kind": "process",
+      "front": "What three things should you name when describing a human impact on the air?",
+      "back": "Name the **activity**, the **substance** it affects, and the **effect**. For example, burning coal adds carbon dioxide, which strengthens the greenhouse effect.",
+      "hint": "Think of a sentence that links cause, substance and result.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10871vy",
+      "kind": "term",
+      "front": "What are air pollutants?",
+      "back": "**Air pollutants** are substances in the air at concentrations high enough to harm living things, materials or ecosystems.",
+      "hint": "The key word is harm.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08wqi8e",
+      "kind": "concept",
+      "front": "How does the ozone in the stratosphere help living things?",
+      "back": "**Ozone** absorbs most of the harmful ultraviolet radiation from the Sun, which protects living things from its damage.",
+      "hint": "Think about which type of radiation ozone blocks.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fefpu4",
+      "kind": "term",
+      "front": "What are greenhouse gases?",
+      "back": "**Greenhouse gases** are atmospheric gases, such as carbon dioxide, methane and water vapour, that absorb and emit infrared radiation, reducing heat loss to space.",
+      "hint": "Name two examples from the note.",
+      "sectionId": "s4"
+    }
+  ]
+}

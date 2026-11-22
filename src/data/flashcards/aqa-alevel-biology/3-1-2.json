@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-1-2",
+  "topicCode": "3.1.2",
+  "topicName": "Carbohydrates",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:02.965Z",
+  "cards": [
+    {
+      "id": "13vh91d",
+      "kind": "concept",
+      "front": "How does a condensation reaction join two monosaccharides?",
+      "back": "It forms a **glycosidic bond** between the two sugars and releases one water molecule.",
+      "hint": "Think about what is lost from the sugars when the bond forms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18rk5ab",
+      "kind": "concept",
+      "front": "Why does cellulose give plant cell walls strength, while starch does not?",
+      "back": "Cellulose is made of $\\beta$-glucose joined into straight chains, and hydrogen bonds link neighbouring chains into strong **microfibrils**. Starch's $\\alpha$-glucose chains coil and are not built into structural fibres.",
+      "hint": "Compare the shape of the chains, which depends on the form of glucose used.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qgmo6e",
+      "kind": "term",
+      "front": "What colour change shows a reducing sugar is present in Benedict's test?",
+      "back": "Blue Benedict's reagent changes to green, yellow, orange or **brick-red** when heated with it. A brick-red precipitate gives a clear positive result.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0q45z1w",
+      "kind": "term",
+      "front": "How do $\\alpha$-glucose and $\\beta$-glucose differ?",
+      "back": "Only the position of the hydroxyl group on carbon 1: it points **below** the ring in $\\alpha$-glucose and above the ring in $\\beta$-glucose.",
+      "hint": "Look at the one group that changes between the two forms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1oitcsq",
+      "kind": "term",
+      "front": "What are isomers?",
+      "back": "Molecules with the same molecular formula but a different arrangement of atoms. Fructose and galactose are **isomers** of glucose.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wx5i89",
+      "kind": "term",
+      "front": "Which two monosaccharides join to form sucrose?",
+      "back": "**Glucose** and fructose. Sucrose is a disaccharide and is a non-reducing sugar.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wx44n6",
+      "kind": "concept",
+      "front": "How does amylopectin differ from amylose?",
+      "back": "Amylopectin also has $\\alpha$-1,6 bonds, which form **branches**. Its branch ends give several sites where enzymes can release glucose, while amylose is unbranched and coiled.",
+      "hint": "Consider which bond type is extra in amylopectin.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xw9qel",
+      "kind": "concept",
+      "front": "Why does glycogen release glucose faster than starch?",
+      "back": "Glycogen is more highly branched than amylopectin, so it has **more ends** where enzymes can release glucose quickly.",
+      "hint": "Think about how the number of ends relates to the amount of branching.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xl2pm8",
+      "kind": "process",
+      "front": "What steps should you follow to test for a non-reducing sugar after a negative Benedict's test?",
+      "back": "Heat a fresh sample with dilute hydrochloric acid to **hydrolyse** it. Cool, neutralise with sodium hydrogen carbonate, add fresh Benedict's reagent and heat in a hot water bath. A brick-red result shows a non-reducing sugar was present.",
+      "hint": "Think about what must happen to the sugar before you retest it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "037jmnj",
+      "kind": "mistake",
+      "front": "A student says glycosidic bonds hold neighbouring cellulose chains together. What is wrong?",
+      "back": "Glycosidic bonds run along each chain. **Hydrogen bonds** join neighbouring chains together.",
+      "hint": "Think about where each type of bond is located in the structure.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y8ct03",
+      "kind": "mistake",
+      "front": "Why must the sample be neutralised before the second Benedict's test?",
+      "back": "Benedict's test needs **alkaline** conditions. Leftover acid could hide a positive result.",
+      "hint": "Think about the pH the reagent needs to work.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hqrdfp",
+      "kind": "concept",
+      "front": "Why can humans digest starch but not cellulose?",
+      "back": "Humans lack the enzyme needed to **hydrolyse** the $\\beta$-1,4 bonds in cellulose, but they can break down the bonds in starch and glycogen.",
+      "hint": "Think about which enzymes the body has for which bonds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0to7mf1",
+      "kind": "term",
+      "front": "What is starch?",
+      "back": "A plant **storage** polysaccharide made of amylose and amylopectin, both built from $\\alpha$-glucose.",
+      "sectionId": "s3"
+    }
+  ]
+}

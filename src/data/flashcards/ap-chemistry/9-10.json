@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "9-10",
+  "topicCode": "9.10",
+  "topicName": "Cell potential under nonstandard conditions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:48.827Z",
+  "cards": [
+    {
+      "id": "1t8k6hg",
+      "kind": "concept",
+      "front": "What does the Nernst equation let you calculate for a cell?",
+      "back": "The **cell potential** at nonstandard conditions, using $E_{\\mathrm{cell}}=E^\\circ_{\\mathrm{cell}}-\\frac{RT}{nF}\\ln Q$. It corrects the standard voltage for the actual concentrations.",
+      "hint": "Think about what changes when concentrations are not standard.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1efjtb6",
+      "kind": "concept",
+      "front": "Why does a galvanic cell's potential fall toward zero as it runs?",
+      "back": "As the reaction runs, $Q$ rises toward $K$. At **equilibrium**, $Q=K$ and $E_{\\mathrm{cell}}=0$, so there is no net driving force for electron flow through the external circuit.",
+      "hint": "Follow what happens to Q as products build up.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1evqmc1",
+      "kind": "concept",
+      "front": "How can you predict the sign of the cell potential by comparing Q with K?",
+      "back": "If $Q<K$, the forward reaction is favored and $E_{\\mathrm{cell}}>0$. If $Q>K$, the reverse reaction is favored and $E_{\\mathrm{cell}}<0$ for the reaction as written.",
+      "hint": "Compare the two values before doing any calculation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1feoznc",
+      "kind": "term",
+      "front": "What is the reaction quotient, $Q$?",
+      "back": "The **reaction quotient** describes the current mixture of products and reactants. Each dissolved species' concentration is raised to its reaction coefficient, and pure solids are left out.",
+      "hint": "It is a ratio built from the current concentrations.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15ko9n5",
+      "kind": "formula",
+      "front": "What does the symbol $n$ mean in the Nernst equation?",
+      "back": "$n$ is the **number of electrons transferred** in the balanced cell reaction. You find it from the balanced equation before you calculate.",
+      "hint": "Look at the balanced cell reaction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vyispc",
+      "kind": "formula",
+      "front": "Write the Nernst equation at 25 °C in terms of $\\log Q$.",
+      "back": "$E_{\\mathrm{cell}}=E^\\circ_{\\mathrm{cell}}-\\frac{0.0592\\ \\mathrm{V}}{n}\\log Q$. Use the balanced reaction to find $n$ and write $Q$ first.",
+      "hint": "The constant 0.0592 V applies only at 25 °C.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ax37hq",
+      "kind": "mistake",
+      "front": "Should solid zinc or solid copper appear in Q for the zinc–copper cell?",
+      "back": "No. **Pure solids** are left out of $Q$. Changing the amount of solid zinc or copper does not directly change the cell voltage.",
+      "hint": "Only dissolved species go into Q.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bcvw15",
+      "kind": "mistake",
+      "front": "Does reaching equilibrium mean the standard cell potential becomes zero?",
+      "back": "No. The **actual** cell potential is zero at equilibrium, but $E^\\circ_{\\mathrm{cell}}$ remains a property of the reaction under standard conditions.",
+      "hint": "Separate the actual potential from the standard potential.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n4q7xv",
+      "kind": "example",
+      "front": "Zinc–copper cell, 25 °C: $E^\\circ=1.10$ V, $n=2$, $[\\mathrm{Zn^{2+}}]=0.10$ M, $[\\mathrm{Cu^{2+}}]=1.0$ M. Find $E_{\\mathrm{cell}}$.",
+      "back": "$E_{\\mathrm{cell}}=1.13\\ \\mathrm{V}$. $Q=0.10$, and $\\log(0.10)=-1$, so the correction adds $+0.0296\\ \\mathrm{V}$ to $1.10\\ \\mathrm{V}$.",
+      "hint": "Q is 0.10 divided by 1.0.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06x50tl",
+      "kind": "example",
+      "front": "Find $E_{\\mathrm{cell}}$ at 25 °C when $E^\\circ_{\\mathrm{cell}}=0.80\\ \\mathrm{V}$, $n=2$, and $Q=10$.",
+      "back": "$E_{\\mathrm{cell}}\\approx 0.77\\ \\mathrm{V}$. Since $\\log 10=1$, subtract $\\frac{0.0592}{2}\\ \\mathrm{V}$ from $0.80\\ \\mathrm{V}$ to get $0.7704\\ \\mathrm{V}$.",
+      "hint": "What is log of 10?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zeg4qu",
+      "kind": "process",
+      "front": "What are the steps to find a nonstandard cell potential with the Nernst equation?",
+      "back": "1) Balance the cell reaction and find $n$. 2) Write $Q$ using dissolved species only. 3) Find $\\log Q$. 4) Subtract $\\frac{0.0592\\ \\mathrm{V}}{n}\\log Q$ from $E^\\circ_{\\mathrm{cell}}$. 5) Check that the answer moves the right way.",
+      "hint": "Start with the balanced equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1b3k0io",
+      "kind": "concept",
+      "front": "What does a negative cell potential mean for the reaction as written?",
+      "back": "The reaction as written is **not spontaneous** under those conditions, so the reverse reaction is favored. Reversing the reaction flips the sign of the potential.",
+      "hint": "Think about when Q is larger than K.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0eu1ttu",
+      "kind": "term",
+      "front": "What is the equilibrium constant, $K$?",
+      "back": "The **equilibrium constant** is the value of the reaction quotient $Q$ when the reaction is at equilibrium.",
+      "hint": "Compare it with Q at equilibrium.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cmlt5u",
+      "kind": "concept",
+      "front": "What happens to Q and the cell potential when $[\\mathrm{Cu^{2+}}]$ increases in the zinc–copper cell?",
+      "back": "$Q$ decreases, because a reactant is in the denominator. The cell potential **increases**.",
+      "hint": "Cu2+ is a reactant in this cell.",
+      "sectionId": "s1"
+    }
+  ]
+}

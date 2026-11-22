@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a4-2",
+  "topicCode": "A4.2",
+  "topicName": "Data preprocessing",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:59.639Z",
+  "cards": [
+    {
+      "id": "1ml7ten",
+      "kind": "concept",
+      "front": "Why must raw data be preprocessed before a model is trained on it?",
+      "back": "A model learns only from the data it is given, so errors and gaps lead to poor results. This is the idea of **garbage in, garbage out**. Preprocessing makes the input usable.",
+      "hint": "Think about what happens when a model is given blank or typed-wrong entries.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pk0fr0",
+      "kind": "term",
+      "front": "What are the two broad parts of data preprocessing?",
+      "back": "**Cleaning** fixes problems in the data, such as gaps, duplicates and errors. **Transforming** changes the form of the data so that a model can use it.",
+      "hint": "One part fixes the data; the other reshapes it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pxy4wv",
+      "kind": "concept",
+      "front": "Why does a feature's scale matter when a model compares distances?",
+      "back": "Features with large numbers, such as floor area, dominate the comparison over small ones, such as number of rooms. **Normalisation** rescales each feature to a common range, usually 0 to 1.",
+      "hint": "Compare floor area in m² with number of rooms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qz1wn4",
+      "kind": "term",
+      "front": "What is a missing value, and name one way to handle it.",
+      "back": "A **missing value** is an entry in a dataset for which no data was recorded. You can delete the affected records, or fill the gap with an estimate such as the mean of that feature.",
+      "hint": "Think about blank entries in a survey.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "009zp2j",
+      "kind": "mistake",
+      "front": "A student deletes every outlier automatically. What is wrong with this?",
+      "back": "Not every outlier is an error. A genuine rare case, such as a fraudulent payment, may be exactly what the model needs to learn. Check each outlier before removing it.",
+      "hint": "Some outliers are errors; others are rare true cases.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07seq1g",
+      "kind": "formula",
+      "front": "What is the min–max normalisation formula, and what does each symbol mean?",
+      "back": "$x' = \\frac{x - x_\\mathrm{min}}{x_\\mathrm{max} - x_\\mathrm{min}}$, where $x$ is the original value, $x'$ is the scaled value, and $x_\\mathrm{min}$ and $x_\\mathrm{max}$ are the smallest and largest values of the feature. The scaled value has no unit.",
+      "hint": "The smallest value maps to 0 and the largest maps to 1.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1k6nvli",
+      "kind": "example",
+      "front": "A feature ranges from 50 m² (smallest) to 250 m² (largest). What is 150 m² after min–max scaling?",
+      "back": "**0.5**. Substitute: $\\frac{150 - 50}{250 - 50} = \\frac{100}{200} = 0.5$. The units cancel, so the answer has no unit.",
+      "hint": "Subtract the smallest value, then divide by the range.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xawb0i",
+      "kind": "term",
+      "front": "What is encoding, and why is it needed?",
+      "back": "**Encoding** converts categorical data, such as colour or country, into numeric values. Most algorithms need numbers and cannot average categories such as 'red' and 'blue'.",
+      "hint": "Categories are words, not numbers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r5epz5",
+      "kind": "process",
+      "front": "How does one-hot encoding represent a categorical feature?",
+      "back": "Give each category its own column. Place a **1** in the column for the category that applies, and **0** in all the other columns.",
+      "hint": "Each row has exactly one 1.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ljlbs0",
+      "kind": "example",
+      "front": "Using one-hot encoding with columns Red, Green and Blue, how is the colour Green written?",
+      "back": "**0, 1, 0**. The Green column has the 1 and the Red and Blue columns have 0.",
+      "hint": "Find the column for the colour that applies.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fke92k",
+      "kind": "concept",
+      "front": "What is feature selection, and why can fewer features help a model?",
+      "back": "**Feature selection** keeps the most useful features and drops irrelevant ones, such as a customer ID. Fewer features can shorten training and reduce overfitting, where a model learns quirks of its examples.",
+      "hint": "A customer ID number tells the model little about the outcome.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qi8bbn",
+      "kind": "term",
+      "front": "What is data quality?",
+      "back": "**Data quality** is the extent to which a dataset is accurate, complete, consistent and relevant for its intended purpose.",
+      "hint": "Four qualities are named in the definition.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0brllsb",
+      "kind": "process",
+      "front": "What must happen to new data once a model is deployed?",
+      "back": "The same preprocessing steps must be applied to the new data. Otherwise the model receives input in a form it never learned from, and its predictions become unreliable.",
+      "hint": "Consider consistency between training and use.",
+      "sectionId": "s5"
+    }
+  ]
+}

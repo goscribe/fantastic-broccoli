@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "9-8",
+  "topicCode": "9.8",
+  "topicName": "Area of a polar region",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:06.782Z",
+  "cards": [
+    {
+      "id": "1iow1tz",
+      "kind": "formula",
+      "front": "What integral gives the area enclosed by $r=f(\\theta)$ as $\\theta$ runs from $\\alpha$ to $\\beta$?",
+      "back": "$A=\\frac12\\int_{\\alpha}^{\\beta}[f(\\theta)]^2\\,d\\theta$. The **½** and the square on $r$ come from adding thin sectors, each with area about $\\frac12r^2\\,d\\theta$.",
+      "hint": "Think of the region as many thin pizza slices.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bmmrxy",
+      "kind": "concept",
+      "front": "Why must the limits $\\alpha$ and $\\beta$ sweep the region exactly once when setting up a polar area integral?",
+      "back": "If the sweep passes over the same points twice, the integral counts that area twice. The **limits** must trace each part of the region once, with $\\alpha<\\beta$.",
+      "hint": "What happens to a rose curve if you integrate over too large an interval?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nufpem",
+      "kind": "mistake",
+      "front": "A student squares $r$ but drops the $\\frac12$, or integrates $r$ alone. What is wrong with this?",
+      "back": "Both are wrong. Area needs the **½** and $r^2$, because each thin sector has area $\\frac12r^2\\,d\\theta$. Integrating $r$ alone measures no area.",
+      "hint": "Recall where the factor comes from: a sector is a fraction of a circle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0inuq99",
+      "kind": "term",
+      "front": "What is a sector in polar coordinates?",
+      "back": "A **sector** is the region between two rays from the pole and the arc of a circle joining them. Its area is $\\frac12r^2\\theta$ when $\\theta$ is in radians.",
+      "hint": "It looks like a slice of pizza.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1n6ma42",
+      "kind": "formula",
+      "front": "What is the area of a sector with radius $r$ and central angle $\\theta$ in radians?",
+      "back": "$A=\\frac12r^2\\theta$. Here $r$ is the **radius** and $\\theta$ is the **central angle**, so the sector is $\\frac{\\theta}{2\\pi}$ of a circle of area $\\pi r^2$.",
+      "hint": "Start from the area of a full circle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12m4lpd",
+      "kind": "process",
+      "front": "What steps find the limits of integration for the area enclosed by a polar curve?",
+      "back": "Sketch the curve and shade the region. Find the angles where the boundary rays or the pole occur. Check the curve is traced once between them. Use symmetry if it helps, and state the limits before integrating.",
+      "hint": "Sketch first, then look at the angles.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tx345o",
+      "kind": "example",
+      "front": "Find the area enclosed by the cardioid $r=1+\\cos\\theta$.",
+      "back": "$\\frac{3\\pi}{2}\\approx4.712$ square units. Use $A=\\frac12\\int_0^{2\\pi}(1+\\cos\\theta)^2\\,d\\theta$, expand, then apply the cos² identity.",
+      "hint": "Expand the square before integrating.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pb1dye",
+      "kind": "concept",
+      "front": "Which identity do you use to integrate $\\cos^2\\theta$ in a polar area integral, and what is its sine partner?",
+      "back": "$\\cos^2\\theta=\\frac{1+\\cos2\\theta}{2}$. The sine version is $\\sin^2\\theta=\\frac{1-\\cos2\\theta}{2}$. Squaring $r$ often creates these terms.",
+      "hint": "Write the identity down before using it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ftxj8j",
+      "kind": "term",
+      "front": "What is a rose curve, and what is a petal?",
+      "back": "A **rose curve** is a polar curve such as $r=a\\cos n\\theta$ that forms loops around the pole. Each loop is a **petal**.",
+      "hint": "Think of the shape of a flower.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ic2bde",
+      "kind": "concept",
+      "front": "How many petals does a rose $r=a\\cos n\\theta$ have when $n$ is odd, and when $n$ is even?",
+      "back": "When $n$ is **odd**, it has $n$ petals. When $n$ is **even**, it has $2n$ petals. For one full trace, use $0\\le\\theta\\le\\pi$ for odd $n$ and $0\\le\\theta\\le2\\pi$ for even $n$.",
+      "hint": "Check the parity of $n$ first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ownca1",
+      "kind": "process",
+      "front": "How do you find the limits for one petal of a rose curve?",
+      "back": "Solve $r=0$ for the two angles that bound the petal. A petal starts when $r=0$ and ends at the next time $r=0$. Those two angles are the limits.",
+      "hint": "A petal starts and ends at the pole.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1xim8rt",
+      "kind": "example",
+      "front": "Find the area of one petal of $r=\\cos2\\theta$ centered on the positive $x$-axis.",
+      "back": "$\\frac{\\pi}{8}$ square units. The petal runs from $-\\frac{\\pi}{4}$ to $\\frac{\\pi}{4}$, and the four petals total $\\frac{\\pi}{2}$.",
+      "hint": "Solve $\\cos2\\theta=0$ for the limits.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1j06ql1",
+      "kind": "mistake",
+      "front": "Why is integrating $r=\\cos3\\theta$ from $0$ to $2\\pi$ the wrong way to find its total area?",
+      "back": "The sweep traces all three petals **twice**, so the area is doubled. The correct interval for one full trace is $0$ to $\\pi$.",
+      "hint": "How many times does the curve repeat over $0$ to $2\\pi$?",
+      "sectionId": "s5"
+    }
+  ]
+}

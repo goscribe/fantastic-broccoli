@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-7",
+  "topicCode": "6.7",
+  "topicName": "Non-specific responses to infection",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:40.340Z",
+  "cards": [
+    {
+      "id": "1tyn26c",
+      "kind": "term",
+      "front": "What is a non-specific response?",
+      "back": "A **non-specific response** is a defence that acts in the same way against any pathogen, and starts quickly. It is not aimed at one particular pathogen.",
+      "hint": "Compare it with a response that recognises one particular pathogen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qkzwkx",
+      "kind": "process",
+      "front": "What are the four stages of phagocytosis, in order?",
+      "back": "1) Receptors on the phagocyte bind the pathogen. 2) The membrane engulfs it into a **vesicle**. 3) A **lysosome** fuses with the vesicle and releases digestive enzymes. 4) The enzymes break the pathogen down, and useful products pass into the cytoplasm.",
+      "hint": "Start with what the phagocyte does first when it meets the pathogen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1oop3kg",
+      "kind": "concept",
+      "front": "What is the difference between physical and chemical barriers?",
+      "back": "**Physical barriers** block pathogens directly, such as skin and mucus with cilia. **Chemical barriers** kill or weaken pathogens that reach the surface, such as stomach acid and lysozyme.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15ejdwn",
+      "kind": "term",
+      "front": "What does the enzyme lysozyme break down?",
+      "back": "**Lysozyme** breaks down bacterial cell walls. It is found in tears, saliva and mucus.",
+      "hint": "Think about which type of cell lysozyme acts on, not which body fluid it is found in.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13lv85l",
+      "kind": "concept",
+      "front": "What is the main benefit of inflammation?",
+      "back": "It brings defensive cells and fluid to the exact place they are needed. The response starts soon after the damage.",
+      "hint": "Think about where the response is directed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k1e3v5",
+      "kind": "term",
+      "front": "Which cells release histamine after tissue damage?",
+      "back": "**Damaged cells** and **mast cells** release **histamine**. It is a chemical signal that starts the changes causing redness, warmth and swelling.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e0h1nl",
+      "kind": "concept",
+      "front": "What causes the redness and warmth around an infected cut?",
+      "back": "Histamine widens the small blood vessels nearby, so more blood flows to the area. The wider vessels explain the redness and warmth.",
+      "hint": "Consider what happens to the width of the blood vessels.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gd20e2",
+      "kind": "concept",
+      "front": "What causes the swelling in inflamed tissue?",
+      "back": "The vessel walls become more **permeable**, so plasma leaks out and forms **tissue fluid**. This fluid builds up and makes the area swell.",
+      "hint": "Think about what the vessel walls allow through.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18u91ch",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a non-specific response is ineffective?",
+      "back": "Non-specific does not mean ineffective. It means the response is not tailored to one particular pathogen, but it still works against any pathogen.",
+      "hint": "Look at what the word 'specific' refers to.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1sddl00",
+      "kind": "concept",
+      "front": "How does phagocytosis help start the specific immune response?",
+      "back": "A macrophage displays **antigens** from the digested pathogen on its surface membrane. A helper T cell with a matching receptor can bind to it, which helps activate that T cell.",
+      "hint": "Think about what happens after the pathogen is digested.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1450gs1",
+      "kind": "term",
+      "front": "What is an antigen-presenting cell?",
+      "back": "An **antigen-presenting cell** is a cell that displays **antigens** from a pathogen on its surface membrane, to activate T cells.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tkvet1",
+      "kind": "concept",
+      "front": "How do neutrophils and macrophages differ in phagocytosis?",
+      "back": "**Neutrophils** arrive first in large numbers. **Macrophages** are larger and can engulf more material.",
+      "hint": "Think about timing and size.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sdygqk",
+      "kind": "term",
+      "front": "What is a lysosome?",
+      "back": "A **lysosome** is a membrane-bound organelle containing digestive enzymes. It fuses with a vesicle to break down the pathogen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1twl9qr",
+      "kind": "concept",
+      "front": "What else does phagocytosis remove besides pathogens?",
+      "back": "Phagocytosis also removes **dead cells** and **debris**.",
+      "hint": "Think about what is left behind once an infection is cleared.",
+      "sectionId": "s4"
+    }
+  ]
+}

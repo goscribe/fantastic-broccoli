@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "b2-1",
+  "topicCode": "B2.1",
+  "topicName": "Programming fundamentals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:08.772Z",
+  "cards": [
+    {
+      "id": "1impqpw",
+      "kind": "term",
+      "front": "What is a variable, and why does a program need one?",
+      "back": "A **variable** is a named storage location whose value can change while the program runs. A scoreboard value changes during play, so the program needs a named place to hold it.",
+      "hint": "Think of a scoreboard.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05izyex",
+      "kind": "concept",
+      "front": "How does a constant differ from a variable?",
+      "back": "A **constant** is set once, usually at the start, and cannot change while the program runs. A variable can be reassigned at any point. Constants also make code easier to read and change in one place.",
+      "hint": "Think about MAXPLAYERS.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0g9mhni",
+      "kind": "process",
+      "front": "How do you trace a program by hand?",
+      "back": "Start with every variable empty. Run each line in order and write a new trace-table row after it. Change only the variable named on that line, and copy unchanged values down.",
+      "hint": "Write one row per line.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0qc945h",
+      "kind": "concept",
+      "front": "Why does the data type of a variable matter?",
+      "back": "A **data type** defines what kind of value a variable holds and which operations are allowed on it. It is chosen when the variable is first created.",
+      "hint": "What operations can you do on text?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bjlozi",
+      "kind": "term",
+      "front": "When should you use an integer rather than a real?",
+      "back": "Use an **integer** for whole numbers, such as counting items. Use a **real** for measurements that may have a fractional part, such as a height of 1.62 m.",
+      "hint": "Are you counting or measuring?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19sckzy",
+      "kind": "mistake",
+      "front": "A student stores a phone number as an integer. What is wrong?",
+      "back": "A phone number should be a **string**. You never add phone numbers, and an integer would lose a leading zero.",
+      "hint": "Could you add two phone numbers meaningfully?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ht81b9",
+      "kind": "mistake",
+      "front": "Is = in a program the same as = in maths?",
+      "back": "No. In a program = is an **assignment** instruction that stores a value in a variable. To compare two values, use ==.",
+      "hint": "Think about what the statement does, not what it says.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "154du61",
+      "kind": "formula",
+      "front": "How are mod and div related when you divide a by b?",
+      "back": "For a divided by b, **mod** gives the remainder r and **div** gives the whole-number quotient q, so $a = b \\times q + r$ where q is a div b and r is a mod b.",
+      "hint": "Try 17 = 3 × 5 + 2.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0k72ebe",
+      "kind": "example",
+      "front": "Evaluate (17 mod 5) + (17 div 5) * 2.",
+      "back": "**8**. 17 mod 5 is 2 and 17 div 5 is 3. Multiply first to get 3 × 2 = 6, then add 2 + 6 = 8.",
+      "hint": "Brackets first, then multiply.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xorabv",
+      "kind": "example",
+      "front": "A program runs total = 0; count = 3; total = total + count * 2; count = count - 1; output total, count. What is the output?",
+      "back": "**6 and 2**. total becomes 0 + 3 × 2 = 6, then count becomes 3 − 1 = 2, so the output is 6 and 2.",
+      "hint": "Track each variable line by line.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "19cxjbb",
+      "kind": "concept",
+      "front": "What do AND, OR and NOT return?",
+      "back": "**AND** is true only when both sides are true. **OR** is true when at least one side is true. **NOT** reverses a Boolean value.",
+      "hint": "Think of a login check and an age check.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1mllii5",
+      "kind": "term",
+      "front": "What does concatenation do to strings?",
+      "back": "**Concatenation** joins strings end to end. So 'Hi ' + 'Ada' gives 'Hi Ada'.",
+      "hint": "Think of putting text together.",
+      "sectionId": "s4"
+    }
+  ]
+}

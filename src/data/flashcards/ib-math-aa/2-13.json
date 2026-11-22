@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-13",
+  "topicCode": "2.13",
+  "topicName": "Rational functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:19.991Z",
+  "cards": [
+    {
+      "id": "1bz6huy",
+      "kind": "concept",
+      "front": "Where does a vertical asymptote of a rational function occur, and what does the graph do near it?",
+      "back": "At $x=a$ where the **denominator** is zero and the factor does not cancel. Outputs grow without bound as the graph approaches that line without touching it.",
+      "hint": "Think about dividing by a very small number.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01rqj5m",
+      "kind": "concept",
+      "front": "Why does comparing the degrees of the numerator and denominator tell you the horizontal asymptote?",
+      "back": "For very large $|x|$ the constants matter less, so the function behaves like the ratio of its highest-power terms. The **degree** of each expression decides which case applies.",
+      "hint": "What happens to $x+5$ when $x$ is huge?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15op8ji",
+      "kind": "concept",
+      "front": "What is a hole on the graph of a rational function, and how does it arise?",
+      "back": "A **hole** is a missing point caused by a factor $(x-a)$ that cancels from top and bottom. Nearby outputs approach one finite height, found by substituting $x=a$ into the cancelled expression.",
+      "hint": "Ask which factor disappears when you simplify.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ktbdw8",
+      "kind": "process",
+      "front": "How do you find the oblique asymptote when the numerator's degree is exactly one more than the denominator's?",
+      "back": "Use polynomial long division and ignore the **remainder**. The quotient gives the equation of the asymptote, $y=mx+c$, because the remainder term tends to zero for large $|x|$.",
+      "hint": "The remainder shrinks as $|x|$ grows.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yh30hf",
+      "kind": "example",
+      "front": "Find the oblique asymptote of $f(x)=\\frac{x^2+1}{x-1}$.",
+      "back": "$y=x+1$. Dividing gives $f(x)=x+1+\\frac{2}{x-1}$, and the fraction tends to zero for large $|x|$.",
+      "hint": "Use polynomial long division.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d2tojy",
+      "kind": "mistake",
+      "front": "A student says a graph can never cross its horizontal asymptote. What is wrong with this?",
+      "back": "The graph may cross the **horizontal asymptote** at some finite $x$. The asymptote describes behaviour only for very large $|x|$.",
+      "hint": "Asymptotes describe the far ends of the graph.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qxgt8r",
+      "kind": "mistake",
+      "front": "A student cancels $(x-2)$ and says nothing happens at $x=2$. What do they miss?",
+      "back": "Cancelling leaves a **hole** at $x=2$. The graph is missing one point there, at the height given by substituting $x=2$ into the simplified expression.",
+      "hint": "The domain still excludes the cancelled value.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vhgtmd",
+      "kind": "example",
+      "front": "Find the coordinates of the hole in $f(x)=\\frac{x^2-9}{x-3}$.",
+      "back": "$(3,6)$. Factorising gives $\\frac{(x-3)(x+3)}{x-3}$, and cancelling leaves $x+3$, which equals 6 when $x=3$.",
+      "hint": "Factorise the numerator first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ohhzp0",
+      "kind": "formula",
+      "front": "When the numerator and denominator have equal degree, what is the horizontal asymptote in terms of the leading coefficients $a$ and $b$?",
+      "back": "$y=\\frac{a}{b}$, where $a$ and $b$ are the coefficients of the highest powers of $x$ on top and bottom.",
+      "hint": "Look only at the highest-power terms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1m2rggq",
+      "kind": "term",
+      "front": "What is the range of a function?",
+      "back": "The **range** is the set of all output values the function takes.",
+      "hint": "Range is about outputs, not inputs.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0tw6qvk",
+      "kind": "example",
+      "front": "Find the domain and range of $f(x)=\\frac{3x}{x+2}$.",
+      "back": "Domain: all real $x$ except $-2$. Range: all real $y$ except $3$, because $3x=3(x+2)$ gives $0=6$, which is impossible.",
+      "hint": "Use the horizontal asymptote and test whether it is reached.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "07ih2cf",
+      "kind": "term",
+      "front": "What is a horizontal asymptote?",
+      "back": "A **horizontal asymptote** is a line $y=b$ that the graph approaches as $x$ becomes very large positive or very negative.",
+      "hint": "It is a horizontal line the graph approaches.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jtms4z",
+      "kind": "process",
+      "front": "What is the order of steps for sketching a rational function?",
+      "back": "First look for **holes**. Then draw the asymptotes as dashed lines. Find the $y$-intercept by setting $x=0$, and the $x$-intercept by setting the numerator to zero.",
+      "hint": "Holes come before asymptotes.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0855zol",
+      "kind": "mistake",
+      "front": "A student says the range of $\\frac{x}{x^2+1}$ is all reals except 0, because $y=0$ is its asymptote. Why is this wrong?",
+      "back": "The graph crosses its **horizontal asymptote** at the origin. Its outputs lie between $-\\frac{1}{2}$ and $\\frac{1}{2}$, which a graph or turning-point calculation finds.",
+      "hint": "Does the graph ever reach the asymptote?",
+      "sectionId": "s6"
+    }
+  ]
+}

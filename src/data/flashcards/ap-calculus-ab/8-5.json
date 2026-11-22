@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "8-5",
+  "topicCode": "8.5",
+  "topicName": "Area between curves (functions of y)",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:34.826Z",
+  "cards": [
+    {
+      "id": "0gwl05y",
+      "kind": "formula",
+      "front": "What is the area formula for a region between two curves written as x = f(y)?",
+      "back": "$A=\\int_a^b[x_{\\mathrm{right}}(y)-x_{\\mathrm{left}}(y)]\\,dy$, where **a** and **b** are the bottom and top y-values. Subtract right minus left so each slice length is nonnegative.",
+      "hint": "Think about the length of one horizontal slice.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rs7zn0",
+      "kind": "process",
+      "front": "How do you find the limits of integration for a region enclosed by two curves x = f(y)?",
+      "back": "Set the two x-expressions equal and solve for **y**. The solutions are the lower and upper limits, because they are the bottom and top heights of the region.",
+      "hint": "Limits are y-values, not x-values.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06vlb84",
+      "kind": "mistake",
+      "front": "A student uses the x-values where the curves meet as the limits in $\\int \\ldots \\,dy$. What is wrong?",
+      "back": "**Wrong variable.** With $dy$, the limits must be y-values. The x-values of the intersection points cannot be used as limits.",
+      "hint": "Check which variable the integral is written in.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a8raar",
+      "kind": "term",
+      "front": "What are horizontal slices?",
+      "back": "**Horizontal slices** are thin strips with vertical thickness, whose lengths are measured between x-values at fixed y-values.",
+      "hint": "Each slice is thin in the y direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10an33x",
+      "kind": "term",
+      "front": "What is the right boundary in a horizontal slice?",
+      "back": "The **right boundary** is the curve giving the larger x-value at a given y-value.",
+      "hint": "Compare the two x-values at one height.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cg4o1l",
+      "kind": "process",
+      "front": "What are the steps to find the area enclosed by two curves x = f(y)?",
+      "back": "1) Solve for the intersection heights to get the limits. 2) Find the right and left boundaries with a test value. 3) Write $A=\\int$ of right minus left $\\,dy$. 4) Integrate, evaluate, and give square units.",
+      "hint": "Four steps, in this order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lxeogi",
+      "kind": "example",
+      "front": "Find the area enclosed by x = y^2 and x = y + 2, with both coordinates in centimeters.",
+      "back": "**$\\frac{9}{2}\\,\\mathrm{cm^2}$**. The limits are $y=-1$ to $y=2$, and the integrand is $(y+2)-y^2$.",
+      "hint": "Find the intersection heights first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19nann4",
+      "kind": "example",
+      "front": "At what y-values do the curves x = y^2 and x = y + 2 intersect?",
+      "back": "**$y=-1$ and $y=2$**. Setting $y^2=y+2$ gives $(y-2)(y+1)=0$.",
+      "hint": "Set the two x-expressions equal and factor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01s5nly",
+      "kind": "mistake",
+      "front": "A student subtracts left minus right and gets a negative area. What went wrong?",
+      "back": "They **reversed the subtraction**. Use right minus left on each slice so the length, and therefore the area, is nonnegative.",
+      "hint": "Which x-value should come first in the subtraction?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1iqoupp",
+      "kind": "concept",
+      "front": "How can a test value show which curve is on the right?",
+      "back": "Substitute a **y-value inside the interval** into both functions and compare the x-values. For $y=0$, $x=y+2$ gives 2 and $x=y^2$ gives 0, so $x=y+2$ is on the right.",
+      "hint": "Pick a y-value between the intersection heights.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t0p19s",
+      "kind": "concept",
+      "front": "What should you do if the curves swap left and right positions inside your interval?",
+      "back": "**Split the integral** at the point where they cross. Use right minus left on each part so every part of the area stays positive.",
+      "hint": "Find where the two x-values are equal.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "017vxyn",
+      "kind": "term",
+      "front": "What is the integrand in an area integral with dy?",
+      "back": "The **integrand** is the expression being integrated, here right x-value minus left x-value, which represents the length of a horizontal slice.",
+      "hint": "It is the expression between the integral sign and dy.",
+      "sectionId": "s4"
+    }
+  ]
+}

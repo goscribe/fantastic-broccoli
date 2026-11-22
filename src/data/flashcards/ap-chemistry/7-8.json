@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "7-8",
+  "topicCode": "7.8",
+  "topicName": "Representations of equilibrium",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:06.136Z",
+  "cards": [
+    {
+      "id": "0yt9ims",
+      "kind": "term",
+      "front": "What is chemical equilibrium?",
+      "back": "**Equilibrium** is the state in which forward and reverse reaction rates are equal, so concentrations stay constant. The reaction has not stopped.",
+      "hint": "Think about what stays the same and what keeps happening.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19khp55",
+      "kind": "concept",
+      "front": "Why can particle counts stay constant while the reaction is still running?",
+      "back": "Forward and reverse reactions continue at **equal rates**, so average counts stay the same even though individual particles keep changing identity.",
+      "hint": "Individual particles and average counts are different things.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hn6vjv",
+      "kind": "concept",
+      "front": "What do opposing arrows in an equation like $\\text{A}\\rightleftharpoons\\text{B}$ tell you?",
+      "back": "The reaction can proceed in **both directions**. The arrows alone do not prove that a particular mixture is at equilibrium.",
+      "hint": "Opposing arrows show possibility, not a specific mixture.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0285ouw",
+      "kind": "term",
+      "front": "What are stoichiometric coefficients?",
+      "back": "The **relative numbers** of particles consumed and produced in one reaction event.",
+      "hint": "Look at the numbers in front of each formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nzea45",
+      "kind": "example",
+      "front": "A⇌B data: at 4 min A=0.50 and B=0.50; at 6 min A=0.40 and B=0.60; at 8 min A=0.40 and B=0.60 mol/L. Earliest time supported as equilibrium?",
+      "back": "**6 minutes**. Both concentrations stay unchanged from 6 to 8 minutes, but both changed between 4 and 6 minutes.",
+      "hint": "Find the first time after which nothing changes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04ksrxw",
+      "kind": "mistake",
+      "front": "Does equal forward and reverse rate mean reactant and product concentrations must be equal?",
+      "back": "No. Equal rates mean **no net change**, not equal amounts. Final concentrations can differ at equilibrium.",
+      "hint": "Rates and concentrations are separate ideas.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02mk2l8",
+      "kind": "mistake",
+      "front": "Do opposing arrows mean the forward and reverse rates are always equal?",
+      "back": "No. Opposing arrows mean **both reactions are possible**. Rates are equal only once the system is at equilibrium.",
+      "hint": "Possible is not the same as balanced.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15m2ni9",
+      "kind": "concept",
+      "front": "What does a horizontal concentration–time curve show?",
+      "back": "That the species' **concentration is constant**. The curves can level off at different values for reactants and products.",
+      "hint": "Horizontal means no change over that interval.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0oduxqg",
+      "kind": "mistake",
+      "front": "Does one particle snapshot prove that a reaction has reached equilibrium?",
+      "back": "No. The same counts can occur **briefly** while concentrations are still changing. Compare several snapshots taken under the same conditions.",
+      "hint": "One picture is a single moment.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1b98m27",
+      "kind": "process",
+      "front": "How should you explain a particle diagram of a system at equilibrium?",
+      "back": "State what stays **constant** (average counts of each species) and what continues to change (particles reacting and changing identity).",
+      "hint": "Say both parts: what is steady and what is still moving.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1e8lm1r",
+      "kind": "process",
+      "front": "What steps support a claim that equilibrium persists?",
+      "back": "Use **repeated observations** across several times, not one point. Look for concentrations unchanged over a later interval. If conditions change, the constant composition may start changing again.",
+      "hint": "Evidence should cover more than one moment.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e9p4fi",
+      "kind": "concept",
+      "front": "How are a concentration graph and a particle diagram related?",
+      "back": "They describe the same **macroscopic composition** in different ways. Stable concentrations match stable average particle counts in a fixed volume, and neither shows every reaction event.",
+      "hint": "Compare what each representation shows.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "10-2",
+  "topicCode": "10.2",
+  "topicName": "Geometric series",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:15.951Z",
+  "cards": [
+    {
+      "id": "1juzf1l",
+      "kind": "term",
+      "front": "What is the common ratio of a geometric series?",
+      "back": "The **common ratio** $r$ is the fixed number each term is multiplied by to get the next term. Divide any term by the term before it.",
+      "hint": "It stays the same from term to term.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jpnpob",
+      "kind": "concept",
+      "front": "When does a geometric series converge?",
+      "back": "Only when the **size** of the ratio is below one, $|r|<1$. Then the terms shrink toward 0. If $|r|\\ge1$, the series diverges.",
+      "hint": "Look at the size of r, ignoring its sign.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nzvrf3",
+      "kind": "formula",
+      "front": "What is the sum formula for a convergent geometric series, and what does each symbol mean?",
+      "back": "$S=\\frac{a}{1-r}$, where $a$ is the **first term** and $r$ is the common ratio. It applies only when $|r|<1$.",
+      "hint": "Remember the condition that must hold before you use it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0voto21",
+      "kind": "term",
+      "front": "What is a geometric series?",
+      "back": "A **geometric series** is a series in which each term is a fixed multiple of the term before it, written $\\sum_{n=0}^{\\infty}ar^n$.",
+      "hint": "Each step multiplies by the same number.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o84k8s",
+      "kind": "process",
+      "front": "What are the three steps for finding the sum of a geometric series?",
+      "back": "1) Find the first term $a$ and the ratio $r$. 2) Check that $|r|<1$. 3) Substitute into $S=\\frac{a}{1-r}$.",
+      "hint": "Start by naming a and r.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rgukuz",
+      "kind": "mistake",
+      "front": "A series starts at $n=1$ with terms $ar^n$. What mistake is common when picking the first term?",
+      "back": "Taking the first term as $a$. The first term is $ar$, the value at $n=1$. Write out the first two terms to check.",
+      "hint": "Substitute n=1 into the general term.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t6fjlw",
+      "kind": "mistake",
+      "front": "Does a negative ratio always make a geometric series diverge?",
+      "back": "No. The **sign** of $r$ does not decide convergence. With $r=-\\frac{1}{2}$ the series converges because $|r|=\\frac{1}{2}<1$.",
+      "hint": "Compare the size of r, not its sign.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "171s0k8",
+      "kind": "example",
+      "front": "Find the sum of $\\sum_{n=1}^{\\infty}5\\left(\\frac{1}{3}\\right)^n$.",
+      "back": "$\\frac{5}{2}$. The first term is $a=\\frac{5}{3}$ and $r=\\frac{1}{3}$, so $S=\\frac{5/3}{2/3}=\\frac{5}{2}$.",
+      "hint": "Find a from the value at n=1 first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tjnjwi",
+      "kind": "example",
+      "front": "Write $0.272727\\ldots$ as a fraction in lowest terms.",
+      "back": "$\\frac{3}{11}$. Use $a=\\frac{27}{100}$ and $r=\\frac{1}{100}$, so $S=\\frac{27/100}{99/100}=\\frac{27}{99}=\\frac{3}{11}$.",
+      "hint": "Write the decimal as a series first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0o1mgrb",
+      "kind": "concept",
+      "front": "Why does the partial sum approach $\\frac{a}{1-r}$ when the series converges?",
+      "back": "The partial sum is $S_N=\\frac{a(1-r^N)}{1-r}$. When $|r|<1$, $r^N$ approaches **0**, leaving $\\frac{a}{1-r}$.",
+      "hint": "What happens to r^N as N grows?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00jot64",
+      "kind": "example",
+      "front": "For $\\sum_{n=0}^{\\infty}\\left(\\frac{x}{4}\\right)^n$, for which $x$ does the series converge, and what is its sum there?",
+      "back": "It converges for $|x|<4$, with sum $\\frac{4}{4-x}$. Outside that interval it diverges.",
+      "hint": "Set the size of the ratio below 1.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1g6ksfq",
+      "kind": "mistake",
+      "front": "Someone applies $S=\\frac{a}{1-r}$ to $\\sum_{n=0}^{\\infty}4\\left(-\\frac{3}{2}\\right)^n$. What is wrong?",
+      "back": "The ratio is $r=-\\frac{3}{2}$, so $|r|\\ge1$. The series diverges, so the sum formula does not apply.",
+      "hint": "Check |r| before you substitute.",
+      "sectionId": "s3"
+    }
+  ]
+}

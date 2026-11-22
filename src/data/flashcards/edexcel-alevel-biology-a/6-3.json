@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-3",
+  "topicCode": "6.3",
+  "topicName": "DNA profiling",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:00.922Z",
+  "cards": [
+    {
+      "id": "1mm4293",
+      "kind": "term",
+      "front": "What is a DNA profile?",
+      "back": "A **DNA profile** is the set of repeat lengths at several chosen regions of a person's DNA. Apart from identical twins, no two people share the same profile.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1q39t0g",
+      "kind": "process",
+      "front": "What are the four steps in producing a DNA profile from a sample?",
+      "back": "1) Extract DNA from the cells in the sample. 2) Amplify the chosen repeat regions by PCR. 3) Separate the copies by size using gel electrophoresis. 4) Make the fragments visible and compare the pattern with other profiles.",
+      "hint": "Start with what happens to the sample first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w43can",
+      "kind": "concept",
+      "front": "How can a child's profile show who their father could be?",
+      "back": "A child inherits half of their repeat lengths from each parent, so every **band** in the child's profile must also appear in the mother's or the father's profile.",
+      "hint": "Think about where each half of the child's DNA comes from.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mcgvg7",
+      "kind": "term",
+      "front": "What is a short tandem repeat?",
+      "back": "A **short tandem repeat** is a short base sequence repeated one after another. The number of repeats varies between people, and most of these regions lie in non-coding DNA.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "095ldru",
+      "kind": "term",
+      "front": "What is the polymerase chain reaction?",
+      "back": "The **polymerase chain reaction** (PCR) is a technique that makes many copies of a chosen DNA sequence, using heat-stable DNA polymerase and repeated temperature cycles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17yioct",
+      "kind": "term",
+      "front": "What is gel electrophoresis?",
+      "back": "**Gel electrophoresis** is a technique that uses an electric field to separate charged molecules, such as DNA fragments, by size in a gel. Each fragment size shows as a band.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0w5cu53",
+      "kind": "concept",
+      "front": "Why do shorter DNA fragments travel further than longer ones in gel electrophoresis?",
+      "back": "**DNA** is negatively charged, so all fragments move towards the positive electrode. The gel acts like a mesh that slows longer fragments more than short ones.",
+      "hint": "Consider what pulls the fragments and what slows them down.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vv2qr1",
+      "kind": "mistake",
+      "front": "A student says DNA moves towards the negative electrode in gel electrophoresis. What is wrong?",
+      "back": "DNA moves towards the **positive** electrode, away from the wells. DNA is negatively charged, so the current pulls it to the positive side.",
+      "hint": "Think about which way the current pulls the fragments.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ukic5g",
+      "kind": "concept",
+      "front": "Why are the profiles of two samples run side by side on one gel?",
+      "back": "Two profiles match when every band lines up at the same distance from the wells. Running the samples together lets the bands be compared directly by position.",
+      "hint": "Consider how the bands from each sample are placed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kecnjx",
+      "kind": "mistake",
+      "front": "A suspect shares only one band with the scene sample. Why does this not count as a match?",
+      "back": "A single shared band is not enough. Every band must line up for a match, and one band with no partner rules a person out.",
+      "hint": "Think about what a single unmatched band means.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mbj14t",
+      "kind": "concept",
+      "front": "Why does a matching profile not prove that a person is the source of the DNA?",
+      "back": "A match shows only that a person could be the source. A chance match is possible, but comparing more repeat regions makes a chance match much less likely.",
+      "hint": "Consider what extra information would make a coincidence less likely.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ar45j0",
+      "kind": "example",
+      "front": "Mother 120 and 200, child 120 and 175, Man X 175 and 230, Man Y 150 and 230 ($\\,\\text{bp}$). Which man could be the father?",
+      "back": "**Man X** could be the father. The child's 120 band came from the mother, so the 175 band must come from the father, and Man X has it. Man Y has no 175 band, so he is excluded.",
+      "hint": "Work out which band the mother could have given first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0z4gc4z",
+      "kind": "concept",
+      "front": "Why do close relatives share more bands than an unrelated person?",
+      "back": "Relatives inherit some of the same DNA, so they have more repeat lengths in common. Many regions are compared before a conclusion is drawn.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "011c9ma",
+      "kind": "concept",
+      "front": "How did the older profiling method use restriction enzymes to produce bands?",
+      "back": "Restriction enzymes cut at specific base sequences on either side of a repeat region, so fragment length depends on repeat number. Labelled probes then bound the repeats so only those fragments showed as bands.",
+      "hint": "Think about what the enzymes cut and what the probes attach to.",
+      "sectionId": "s5"
+    }
+  ]
+}

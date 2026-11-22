@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "8-3",
+  "topicCode": "8.3",
+  "topicName": "Weak acid and base equilibria",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:07.700Z",
+  "cards": [
+    {
+      "id": "1s3i0g5",
+      "kind": "concept",
+      "front": "Why does a weak acid only partly ionize in water?",
+      "back": "Only some acid molecules transfer protons to water. At **equilibrium** the forward and reverse rates are equal, so un-ionized acid and its ions stay in solution together.",
+      "hint": "Think about what happens when the forward and reverse rates match.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06wz7lc",
+      "kind": "formula",
+      "front": "What is the acid ionization constant expression for a weak acid HA?",
+      "back": "$K_a=\\frac{[\\mathrm{H_3O^+}][\\mathrm{A^-}]}{[\\mathrm{HA}]}$, using **equilibrium** concentrations. Water is left out because its concentration stays effectively constant.",
+      "hint": "Products over reactants, with water omitted.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1csam1u",
+      "kind": "concept",
+      "front": "How do you decide which of two weak acids is stronger?",
+      "back": "The acid with the **larger $K_a$** ionizes more, so it is the stronger acid. A larger $K_a$ describes greater extent of ionization, not a more concentrated solution.",
+      "hint": "Compare the constants, not the amounts dissolved.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07a48gw",
+      "kind": "term",
+      "front": "What is a weak base?",
+      "back": "A **weak base** accepts protons from water only partially at equilibrium, so unreacted base remains alongside its products.",
+      "hint": "Partial, not complete, proton acceptance.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hibnrh",
+      "kind": "formula",
+      "front": "For a base B starting at concentration C with no added products, what are the equilibrium concentrations of B, BH+ and OH-?",
+      "back": "$C-x$ for B, and $x$ for both BH+ and OH-, where $x$ is the amount that ionizes. Then $K_b=\\frac{x^2}{C-x}$.",
+      "hint": "Subtract what ionizes from the starting base.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1j4x105",
+      "kind": "mistake",
+      "front": "What is a common mistake when setting up a weak base equilibrium?",
+      "back": "Putting the **starting base concentration** directly into the $K_b$ denominator. First subtract the amount that ionizes, so the denominator uses $C-x$.",
+      "hint": "Which concentration belongs in the denominator?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hrpcrb",
+      "kind": "process",
+      "front": "What are the steps of an ICE setup for a weak acid equilibrium?",
+      "back": "1) Write initial concentrations. 2) Write the change, using $-x$ for reactant and $+x$ for products. 3) Write equilibrium concentrations, then substitute them into $K_a$.",
+      "hint": "Initial, Change, Equilibrium, in that order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rwwv4h",
+      "kind": "example",
+      "front": "A 0.100 mol L^-1 solution of weak acid HA has Ka = 1.8 × 10^-5. What are [H3O+] and [A-] at equilibrium?",
+      "back": "About $0.00134\\,\\mathrm{mol\\,L^{-1}}$ each. Because $x/C$ is 1.34%, below 5%, approximating $C-x\\approx C$ is valid.",
+      "hint": "Let x be the ionized amount and approximate C-x as C.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b23z4j",
+      "kind": "concept",
+      "front": "When can you approximate C minus x as just C in a weak acid or base calculation?",
+      "back": "When $x$ is small relative to $C$. Check afterward that $x/C$ is below 5%; if not, you must solve the **quadratic equation** instead.",
+      "hint": "Check the percentage after you finish.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12smwm5",
+      "kind": "formula",
+      "front": "What links Ka of a weak acid to Kb of its conjugate base at 25 °C?",
+      "back": "$K_aK_b=K_w=1.0\\times10^{-14}$. Here $K_a$ belongs to the acid and $K_b$ to its conjugate base.",
+      "hint": "The product is a fixed constant for a conjugate pair.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nzfaf6",
+      "kind": "concept",
+      "front": "How do the strengths of a conjugate acid–base pair compare?",
+      "back": "A **stronger acid** has a **weaker conjugate base**. Acid strength and conjugate base strength move in opposite directions.",
+      "hint": "Use the Ka times Kb relationship.",
+      "sectionId": "s4"
+    }
+  ]
+}

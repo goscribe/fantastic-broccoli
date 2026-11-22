@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "6-5",
+  "topicCode": "6.5",
+  "topicName": "Rolling",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:55.655Z",
+  "cards": [
+    {
+      "id": "014n2ya",
+      "kind": "concept",
+      "front": "What two motions does a rolling wheel have at the same time?",
+      "back": "Its center moves forward in **translational motion**, and the whole wheel turns about that center in **rotational motion**. Both are real parts of the total motion.",
+      "hint": "Think of a wheel rolling along a road.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1b9wii1",
+      "kind": "concept",
+      "front": "What happens at the contact point of a wheel rolling without slipping, and does friction do work there?",
+      "back": "The contact point is **momentarily at rest** relative to the ground, so the wheel does not skid. Static friction acts there but does no work.",
+      "hint": "Think of a tire on dry pavement.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ytyzky",
+      "kind": "formula",
+      "front": "What links the center's speed to the wheel's angular speed for rolling without slipping?",
+      "back": "$v_{cm} = \\omega R$, where $v_{cm}$ is in m/s, $\\omega$ is in rad/s, and $R$ is the radius in m. Each turn lays down one circumference of ground.",
+      "hint": "The distance per turn is 2πR.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15rpog4",
+      "kind": "term",
+      "front": "What is translational motion?",
+      "back": "**Motion** in which every part of an object has the same velocity. For a rolling object, it describes the center of mass moving forward.",
+      "hint": "Think of the center moving along the road.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0taoqxb",
+      "kind": "term",
+      "front": "What is rolling without slipping?",
+      "back": "Rolling in which the **contact point has zero velocity** relative to the surface, so that $v_{cm} = \\omega R$.",
+      "hint": "Think of a tire that does not skid.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01sdcpl",
+      "kind": "formula",
+      "front": "What links the center's acceleration to the angular acceleration for rolling without slipping?",
+      "back": "$a_{cm} = \\alpha R$, where $a_{cm}$ is in m/s^2, $\\alpha$ is the angular acceleration in rad/s^2, and $R$ is the radius in m. It holds only without slipping.",
+      "hint": "It follows the same pattern as the speed relation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00iuct6",
+      "kind": "mistake",
+      "front": "A wheel is skidding across the road. Can you use $v_{cm} = \\omega R$ for it?",
+      "back": "No. The **relation holds only without slipping**. If the wheel skids, the center and the rim no longer match.",
+      "hint": "Ask whether the contact point is at rest.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dcb7z9",
+      "kind": "example",
+      "front": "A bicycle wheel of radius 0.35 m rolls without slipping at 7.0 m/s. What is its angular speed?",
+      "back": "**20 rad/s**. Rearranging $v_{cm} = \\omega R$ gives $\\omega = v_{cm}/R = 7.0/0.35$.",
+      "hint": "Rearrange the speed relation for omega.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1o6cqbm",
+      "kind": "formula",
+      "front": "Write the total kinetic energy of a rolling object in terms of its mass, center speed, and spin.",
+      "back": "$K_{\\mathrm{total}} = \\frac{1}{2}Mv_{cm}^2 + \\frac{1}{2}I_{cm}\\omega^2$. $M$ is in kg, $v_{cm}$ in m/s, $I_{cm}$ in kg m^2, $\\omega$ in rad/s, and energy in J.",
+      "hint": "The first term is translational, the second rotational.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bkvd78",
+      "kind": "concept",
+      "front": "How does the mass distribution of a rolling object change how its energy is split?",
+      "back": "The more mass far from the center, the larger the **rotational share** of the energy. A hoop, with all its mass at the rim, has half its energy in rotation.",
+      "hint": "Compare the hoop and the solid cylinder in the table.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14fhn4w",
+      "kind": "process",
+      "front": "What steps should you follow to find the total kinetic energy of a rolling object?",
+      "back": "1) Find $\\omega = v_{cm}/R$. 2) Find the translational energy $\\frac{1}{2}Mv_{cm}^2$. 3) Find $I_{cm}$ and the rotational energy $\\frac{1}{2}I_{cm}\\omega^2$. 4) Add the two, then check against the shape shortcut.",
+      "hint": "Use meters, kilograms and seconds so the answer is in J.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16y50gr",
+      "kind": "example",
+      "front": "A hoop of mass 1.5 kg and radius 0.20 m rolls without slipping at 4.0 m/s. What is its total kinetic energy?",
+      "back": "**24 J**. Translational energy is 12 J and rotational energy is 12 J, using $\\omega = 20$ rad/s and $I = MR^2 = 0.060$ kg m^2.",
+      "hint": "Find omega first, then both energies.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qd5byt",
+      "kind": "mistake",
+      "front": "A student finds a rolling hoop's energy using only $\\frac{1}{2}Mv^2$. What is wrong?",
+      "back": "The **rotational energy is missing**. A rolling object also spins, so add $\\frac{1}{2}I_{cm}\\omega^2$. Using only the translational term underestimates the energy.",
+      "hint": "Does a rolling object also spin?",
+      "sectionId": "s5"
+    }
+  ]
+}

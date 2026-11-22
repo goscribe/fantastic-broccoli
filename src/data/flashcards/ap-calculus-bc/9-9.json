@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "9-9",
+  "topicCode": "9.9",
+  "topicName": "Area between two polar curves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:06.034Z",
+  "cards": [
+    {
+      "id": "04c38bj",
+      "kind": "concept",
+      "front": "How do you find the area between two polar curves?",
+      "back": "Subtract the **inner** area from the **outer** area. On each ray from the pole, the outer curve is the one farther out, so the region is the outer area minus the inner area.",
+      "hint": "Think of a flat ring: a big disk minus a hole.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "139gjfy",
+      "kind": "formula",
+      "front": "What is the formula for the area between an outer and inner polar curve from θ=α to θ=β?",
+      "back": "$A=\\frac{1}{2}\\int_{\\alpha}^{\\beta}\\left([r_\\mathrm{outer}]^2-[r_\\mathrm{inner}]^2\\right)d\\theta$, where $r_\\mathrm{outer}\\ge r_\\mathrm{inner}$ on that interval. Each radius is squared before subtracting.",
+      "hint": "Square each radius first, then subtract.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0egk88m",
+      "kind": "process",
+      "front": "How do you find the limits of integration for the area between two polar curves?",
+      "back": "Set $r_1(\\theta)=r_2(\\theta)$ and solve for $\\theta$ in the interval of interest. These **intersection points** bound the region.",
+      "hint": "Sketch the curves to decide which solutions bound the region.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19ssi4a",
+      "kind": "mistake",
+      "front": "Why is $(r_\\mathrm{outer}-r_\\mathrm{inner})^2$ the wrong expression for the area integrand?",
+      "back": "It is a different expression. You must **square each radius** separately, then subtract: $[r_\\mathrm{outer}]^2-[r_\\mathrm{inner}]^2$.",
+      "hint": "Square first, subtract second.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1oqwlto",
+      "kind": "mistake",
+      "front": "Why can solving $r_1=r_2$ miss an intersection point?",
+      "back": "The **pole** has $r=0$ at every angle. Two curves can both reach the pole at different angles, so no single θ makes the r-values equal there.",
+      "hint": "Check the pole separately.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14cw1qq",
+      "kind": "process",
+      "front": "How do you decide which curve is outer on an interval?",
+      "back": "Pick a **test angle** inside the interval and compare the two r-values. The larger value belongs to the outer curve, provided the curves do not cross inside that interval.",
+      "hint": "Write the test angle and both r-values in your solution.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dulwbb",
+      "kind": "process",
+      "front": "What do you do if the outer curve switches partway through the region?",
+      "back": "**Split the integral** at the intersection angle where the switch happens. Each piece uses its own outer and inner curve, and you add the results.",
+      "hint": "Mark the switch angle on your sketch.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03o9jf7",
+      "kind": "concept",
+      "front": "For the region inside both curves, which radius sets the boundary at each angle?",
+      "back": "The **smaller** r. The region runs from the pole out to whichever curve has the smaller radius at that angle.",
+      "hint": "The overlap is bounded by the closer curve.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06hkcz9",
+      "kind": "example",
+      "front": "Find the area inside $r=3\\sin\\theta$ and outside $r=1+\\sin\\theta$.",
+      "back": "**$\\pi$** square units (about 3.142). The curves meet at $\\frac{\\pi}{6}$ and $\\frac{5\\pi}{6}$, and the circle is outer between them.",
+      "hint": "Start by setting $3\\sin\\theta=1+\\sin\\theta$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02fpbgv",
+      "kind": "example",
+      "front": "Find the area inside both $r=2\\cos\\theta$ and $r=2\\sin\\theta$.",
+      "back": "**$\\frac{\\pi}{2}-1$** square units (about 0.571). The inner curve changes at $\\theta=\\frac{\\pi}{4}$, and symmetry halves the work.",
+      "hint": "Find where $2\\cos\\theta=2\\sin\\theta$ first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17vrvym",
+      "kind": "example",
+      "front": "Find the area inside $r=2+2\\cos\\theta$ and outside $r=2$ for $-\\frac{\\pi}{2}\\le\\theta\\le\\frac{\\pi}{2}$.",
+      "back": "**$8+\\pi$** square units. Expand $(2+2\\cos\\theta)^2$, subtract 4, then integrate $\\frac{1}{2}\\int(8\\cos\\theta+4\\cos^2\\theta)\\,d\\theta$ over that interval.",
+      "hint": "Expand $(2+2\\cos\\theta)^2$ first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yrh7vf",
+      "kind": "term",
+      "front": "What is the outer curve?",
+      "back": "The **outer curve** is the boundary curve farther from the pole along each ray in an interval. It is the one with the larger r.",
+      "hint": "Farther from the pole means larger r.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1voj0n9",
+      "kind": "term",
+      "front": "What are intersection points of two curves?",
+      "back": "Points where the two curves have the same **x- and y-coordinates**. They are often where a region starts and stops.",
+      "hint": "Same location in the plane.",
+      "sectionId": "s2"
+    }
+  ]
+}

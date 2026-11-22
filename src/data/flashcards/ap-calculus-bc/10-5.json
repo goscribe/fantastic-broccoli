@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "10-5",
+  "topicCode": "10.5",
+  "topicName": "Harmonic series and p-series",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:02.132Z",
+  "cards": [
+    {
+      "id": "1hen62j",
+      "kind": "concept",
+      "front": "Why does the harmonic series $\\sum_{n=1}^{\\infty}\\frac{1}{n}$ diverge even though its terms approach 0?",
+      "back": "Its terms shrink, but **too slowly**. Grouping terms shows each group adds more than $\\frac{1}{2}$, so the partial sums pass every number.",
+      "hint": "Think about how fast the terms shrink, not just whether they shrink.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0y5y6a1",
+      "kind": "formula",
+      "front": "For which values of $p$ does the p-series $\\sum_{n=1}^{\\infty}\\frac{1}{n^p}$ converge?",
+      "back": "It converges when $p>1$ and diverges when $0<p\\le1$. The exponent **$p$ is compared with 1**, which is the borderline.",
+      "hint": "The harmonic series is the case $p=1$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wooq2d",
+      "kind": "term",
+      "front": "What is a p-series?",
+      "back": "A **p-series** is $\\sum_{n=1}^{\\infty}\\frac{1}{n^p}$, where $p$ is a positive constant. The harmonic series is the case $p=1$.",
+      "hint": "Look at the exponent in the denominator.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uxo4zf",
+      "kind": "term",
+      "front": "What is the harmonic series?",
+      "back": "The **harmonic series** is $\\sum_{n=1}^{\\infty}\\frac{1}{n}$, the sum of the reciprocals of the counting numbers. It diverges.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14ct9eb",
+      "kind": "concept",
+      "front": "Why is the dividing line for p-series at $p=1$?",
+      "back": "The integral test links the series to $\\int_1^{\\infty}x^{-p}\\,dx$. This converges for $p>1$ and diverges for $p\\le1$, so the **integral test** sets the cutoff at one.",
+      "hint": "Think about the area under $x^{-p}$ from 1 onward.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07ygzbd",
+      "kind": "formula",
+      "front": "For $p\\ne1$, what is $\\int_1^{b}x^{-p}\\,dx$?",
+      "back": "It equals $\\frac{b^{1-p}-1}{1-p}$. As $b\\to\\infty$ it tends to $\\frac{1}{p-1}$ when $p>1$, so the integral **converges**.",
+      "hint": "Check what $b^{1-p}$ does when $p>1$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x934g5",
+      "kind": "process",
+      "front": "How do you classify a series like $\\sum\\frac{c}{n^p}$ or one with roots in the denominator?",
+      "back": "Remove the constant $c$ and rewrite roots as fractional powers, such as $\\sqrt[3]{n^2}=n^{2/3}$. Then compare the exponent $p$ with **1**.",
+      "hint": "Constant multiples do not change behavior.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1s5uiw9",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}\\frac{7}{n^{1.5}}$ converge?",
+      "back": "Yes, it **converges**. It is 7 times a p-series with $p=1.5$, and $1.5>1$.",
+      "hint": "Name the exponent $p$ first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00workm",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}\\frac{1}{\\sqrt[3]{n^2}}$ converge?",
+      "back": "No, it **diverges**. Writing $\\sqrt[3]{n^2}=n^{2/3}$ gives $p=\\frac{2}{3}$, and $\\frac{2}{3}\\le1$.",
+      "hint": "Rewrite the root as a fractional exponent.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vji5ai",
+      "kind": "mistake",
+      "front": "A student says a series converges because its terms approach 0. What is wrong?",
+      "back": "Terms approaching 0 does **not** guarantee convergence. The harmonic series is the counterexample: its terms go to 0 but it diverges.",
+      "hint": "Which series shows this?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0632tex",
+      "kind": "mistake",
+      "front": "Does changing where a p-series starts, such as $\\sum_{n=5}^{\\infty}\\frac{1}{n^2}$, change whether it converges?",
+      "back": "No. Dropping a finite number of terms does **not** change behavior. Only the exponent $p$ decides convergence.",
+      "hint": "Does removing four terms change a total with no upper limit?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01j29we",
+      "kind": "concept",
+      "front": "Why does a larger exponent $p$ make a p-series converge more easily?",
+      "back": "A larger $p$ makes each term smaller, so the terms shrink fast enough to total a finite number. Even $p=1.01$ converges, though slowly.",
+      "hint": "Compare $p=2$ with $p=\\frac{1}{2}$.",
+      "sectionId": "s3"
+    }
+  ]
+}

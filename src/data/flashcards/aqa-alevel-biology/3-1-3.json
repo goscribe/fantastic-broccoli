@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-1-3",
+  "topicCode": "3.1.3",
+  "topicName": "Lipids",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:56.654Z",
+  "cards": [
+    {
+      "id": "0ceibrm",
+      "kind": "concept",
+      "front": "How is a triglyceride built from its parts?",
+      "back": "One **glycerol** molecule is joined to **three fatty acids** by ester bonds. Each fatty acid bonds to glycerol, so there are three ester bonds in total.",
+      "hint": "Count the backbone molecule and how many chains attach to it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1md7zpf",
+      "kind": "concept",
+      "front": "Why do phospholipids form a bilayer when placed in water?",
+      "back": "The **hydrophilic** heads face the water on both sides, while the **hydrophobic** fatty acid tails point inward away from water. This forms the basic structure of cell membranes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dvwi0q",
+      "kind": "concept",
+      "front": "Why are triglycerides good at storing energy?",
+      "back": "Their many carbon–hydrogen bonds release energy when oxidised during respiration. They provide much more energy per unit mass than carbohydrates.",
+      "hint": "Think about which bonds are broken during oxidation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xxb4kr",
+      "kind": "process",
+      "front": "What happens in a condensation reaction between a fatty acid and glycerol?",
+      "back": "The carboxyl group of the fatty acid joins to a hydroxyl group of glycerol, forming an **ester bond**. A **water molecule** is released in the process.",
+      "hint": "Look at which two groups react with each other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ynpj92",
+      "kind": "term",
+      "front": "What is hydrolysis?",
+      "back": "**Hydrolysis** is the reverse of condensation: it uses water to break ester bonds, splitting a triglyceride back into glycerol and fatty acids.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1azdc5v",
+      "kind": "concept",
+      "front": "How does a C=C double bond in a fatty acid affect the lipid's properties?",
+      "back": "The double bond bends the hydrocarbon chain, so chains cannot pack closely. This can make the lipid liquid rather than solid at room temperature.",
+      "hint": "Think about how straight chains stack together compared with bent ones.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1k4660u",
+      "kind": "mistake",
+      "front": "Why is it wrong to say ester bonds join fatty acid chains to each other?",
+      "back": "Ester bonds form between a fatty acid's carboxyl group and a glycerol hydroxyl group. Each fatty acid bonds to glycerol, not to another fatty acid.",
+      "hint": "Check which molecule carries the hydroxyl group in the reaction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qdkdxd",
+      "kind": "term",
+      "front": "What does hydrophobic mean?",
+      "back": "**Hydrophobic** describes a part of a molecule that does not interact favourably with water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gah9u3",
+      "kind": "concept",
+      "front": "What does the hydrophobic interior of a phospholipid bilayer do to molecules?",
+      "back": "It restricts the passage of **ions** and many **polar molecules** across the membrane, because they cannot easily pass through the water-avoiding centre.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19aoj3c",
+      "kind": "concept",
+      "front": "Why do stored triglyceride droplets have little effect on a cell's water potential?",
+      "back": "Triglycerides are **insoluble** in water, so they do not dissolve and change the number of dissolved particles in the cell.",
+      "hint": "Think about what happens to a substance that does not dissolve.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pa02zm",
+      "kind": "process",
+      "front": "What are the steps of the emulsion test for lipids?",
+      "back": "First shake the sample with **ethanol** so lipids dissolve. Then add the ethanol mixture to water and shake gently. A cloudy white emulsion shows lipid is present.",
+      "hint": "Which liquid should be added to the sample first?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1oiexhj",
+      "kind": "mistake",
+      "front": "Why is a clear result in the emulsion test not proof that no lipid is present?",
+      "back": "Very small amounts of lipid may be too little to form a visible emulsion. A clear result only shows that no detectable lipid is present.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12asexg",
+      "kind": "concept",
+      "front": "What can the emulsion test tell you about a sample, and what can it not tell you?",
+      "back": "It shows whether **detectable lipid** is present. It does not identify which lipid the sample contains.",
+      "sectionId": "s4"
+    }
+  ]
+}

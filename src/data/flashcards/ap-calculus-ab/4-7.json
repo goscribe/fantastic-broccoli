@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "4-7",
+  "topicCode": "4.7",
+  "topicName": "L'Hospital's rule",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:07.826Z",
+  "cards": [
+    {
+      "id": "1nqofu0",
+      "kind": "concept",
+      "front": "When can you use L'Hospital's rule directly on a quotient?",
+      "back": "Only when the quotient is in the **$\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$ form**. Find the separate limits of the numerator and denominator first to see which form you have.",
+      "hint": "Check the numerator and denominator limits separately.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09xctar",
+      "kind": "formula",
+      "front": "Write L'Hospital's rule for a limit of $\\frac{f(x)}{g(x)}$ as $x$ approaches $a$.",
+      "back": "$\\lim_{x\\to a}\\frac{f(x)}{g(x)}=\\lim_{x\\to a}\\frac{f'(x)}{g'(x)}$, where $f'$ and $g'$ are the **separate** derivatives of the numerator and denominator.",
+      "hint": "The derivative quotient replaces the original quotient.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mig5vg",
+      "kind": "process",
+      "front": "What are the steps for evaluating a limit with L'Hospital's rule?",
+      "back": "1. Substitute to confirm a $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$ form. 2. Check the conditions. 3. Differentiate the **numerator and denominator separately**. 4. Evaluate the new limit, repeating if it is still indeterminate.",
+      "hint": "Four steps, in this order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ul8eb4",
+      "kind": "concept",
+      "front": "Which conditions must hold before you differentiate top and bottom?",
+      "back": "Both functions must be **differentiable** near the limit point, $g'(x)$ must be **nonzero** near that point, and the derivative quotient must have a limit or approach an infinity.",
+      "hint": "Three conditions to check.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0surudx",
+      "kind": "term",
+      "front": "What is a zero-times-infinity form, and how do you handle it?",
+      "back": "One factor approaches **zero** while another grows without bound. Rewrite the product as a quotient, such as moving one factor into the denominator, then check the conditions.",
+      "hint": "Think about moving one factor.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bc4shb",
+      "kind": "term",
+      "front": "What is an infinity-minus-infinity form?",
+      "back": "Two terms that both grow without bound are **subtracted**. Combine the fractions into a single quotient before you try L'Hospital's rule.",
+      "hint": "Algebra often comes first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mlm0x8",
+      "kind": "mistake",
+      "front": "Can you use the quotient rule on the whole fraction when applying L'Hospital's rule?",
+      "back": "No. That is the wrong method. L'Hospital's rule uses the **separate** derivatives of the numerator and denominator, not the quotient rule.",
+      "hint": "Think about what the rule actually differentiates.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0czshuz",
+      "kind": "mistake",
+      "front": "A quotient approaches $\\frac{5}{0}$. Can you apply L'Hospital's rule directly?",
+      "back": "No. A **nonzero** numerator over a zero denominator is not a $\\frac{0}{0}$ form, so the rule does not apply directly.",
+      "hint": "Check the numerator's limit.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hyf8p1",
+      "kind": "mistake",
+      "front": "Can you differentiate the two terms of a product separately and call it L'Hospital's rule?",
+      "back": "No. First rewrite the expression as an **eligible quotient**, then differentiate its numerator and denominator separately.",
+      "hint": "Rewrite first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gzixkn",
+      "kind": "example",
+      "front": "Evaluate $\\lim_{x\\to 0}\\frac{\\sin x}{x}$ using L'Hospital's rule.",
+      "back": "**1**. Substitution gives $\\frac{0}{0}$. Differentiating gives $\\lim_{x\\to 0}\\frac{\\cos x}{1}=\\cos 0=1$.",
+      "hint": "Differentiate top and bottom separately.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z821lo",
+      "kind": "example",
+      "front": "Evaluate $\\lim_{x\\to 0}\\frac{e^x-1}{x}$ using L'Hospital's rule.",
+      "back": "**1**. Substitution gives $\\frac{0}{0}$. The derivative quotient is $\\frac{e^x}{1}$, which approaches $1$ as $x$ approaches $0$.",
+      "hint": "Recall the derivative of $e^x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ly3h30",
+      "kind": "example",
+      "front": "Rewrite $\\lim_{x\\to 0^+}x\\ln x$ so that L'Hospital's rule can apply.",
+      "back": "Rewrite it as $\\frac{\\ln x}{1/x}$. This gives an **infinity over infinity** form, so check the conditions before differentiating.",
+      "hint": "Move one factor into the denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ihd3qw",
+      "kind": "process",
+      "front": "What do you do if the derivative quotient is still a $\\frac{0}{0}$ form?",
+      "back": "Check the conditions for the new quotient. If they hold, apply L'Hospital's rule **again**, differentiating its numerator and denominator separately.",
+      "hint": "Repeat the same checks.",
+      "sectionId": "s3"
+    }
+  ]
+}

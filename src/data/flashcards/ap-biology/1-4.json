@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "1-4",
+  "topicCode": "1.4",
+  "topicName": "Carbohydrates",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:27.740Z",
+  "cards": [
+    {
+      "id": "18cc6sl",
+      "kind": "concept",
+      "front": "How are sugar units joined to build a carbohydrate, and how is the reverse process done?",
+      "back": "A **dehydration reaction** joins sugar units by removing water and forming a glycosidic bond. **Hydrolysis** reverses this by adding water to break the bond.",
+      "hint": "Think about whether water is removed or added in each direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "100cwt0",
+      "kind": "concept",
+      "front": "Why are starch and glycogen good at storing glucose?",
+      "back": "Each is a large polymer holding many glucose units in one molecule. Branching gives many chain ends where enzymes can release glucose when the cell needs it.",
+      "hint": "Consider how many glucose units are packed together and where enzymes can cut."
+    },
+    {
+      "id": "0n30zkt",
+      "kind": "concept",
+      "front": "How does cellulose's structure let it support plant cells?",
+      "back": "**Beta-1,4 linkages** make long, straight chains. Adjacent chains form many hydrogen bonds, creating strong fibers in cell walls that keep cells shaped and resist stretching.",
+      "hint": "Compare straight chains with branched chains.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dwto07",
+      "kind": "term",
+      "front": "What is a monosaccharide?",
+      "back": "A **monosaccharide** is a single sugar unit that can join other sugar units to form larger carbohydrates.",
+      "hint": "Mono means one.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10nfqzf",
+      "kind": "term",
+      "front": "What are alpha-1,6 branch points?",
+      "back": "**Alpha-1,6 branch points** connect side chains to the main chains of starch or glycogen.",
+      "hint": "They sit where a chain sprouts a side branch.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0to7mf1",
+      "kind": "term",
+      "front": "What is starch?",
+      "back": "**Starch** is a plant storage polysaccharide made of alpha-glucose units.",
+      "hint": "Plants store glucose in this form.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lzofe8",
+      "kind": "term",
+      "front": "What is glycogen and where do animals keep it?",
+      "back": "**Glycogen** is a highly branched animal storage polysaccharide of alpha-glucose. Animals store it mainly in liver and muscle cells.",
+      "hint": "It is the animal version of starch.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bnja5w",
+      "kind": "mistake",
+      "front": "A student says dehydration breaks carbohydrates apart by removing water. What is wrong?",
+      "back": "**Dehydration** builds carbohydrates by removing water. Breaking them apart is **hydrolysis**, which adds water.",
+      "hint": "Check which process removes water and which adds it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gwkez5",
+      "kind": "concept",
+      "front": "Why can't humans use cellulose as a source of glucose?",
+      "back": "Humans lack the enzyme that breaks beta-1,4 links, so cellulose passes through as **dietary fiber** rather than providing glucose.",
+      "hint": "Think about which enzyme is needed to cut the bonds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lu0u20",
+      "kind": "term",
+      "front": "What do beta-1,4 linkages join together in cellulose?",
+      "back": "**Beta-1,4 linkages** join beta-glucose units along cellulose chains, forming long, straight chains.",
+      "hint": "Recall which sugar unit cellulose is made from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hhlqxr",
+      "kind": "process",
+      "front": "What happens step by step when a cell breaks a disaccharide into single sugars?",
+      "back": "Water is added to the disaccharide, the glycosidic bond between the sugar units breaks, and the cell releases individual monosaccharides.",
+      "hint": "This is the reverse of the bond-forming reaction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0foz7pf",
+      "kind": "concept",
+      "front": "How does starch's branching help plants use their stored glucose?",
+      "back": "Branching creates more chain ends, so enzymes can release glucose from several places and plants can break starch down when they need glucose.",
+      "hint": "Count the ends where enzymes can attack.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jgbv5d",
+      "kind": "concept",
+      "front": "Why is glycogen more highly branched than starch, and what does that do for animals?",
+      "back": "Glycogen has more branches, giving many chain ends where enzymes can release glucose from several places when animal cells need it.",
+      "hint": "Link branch number to how many enzyme attack sites exist.",
+      "sectionId": "s3"
+    }
+  ]
+}

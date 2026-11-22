@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-5",
+  "topicCode": "8.5",
+  "topicName": "Eutrophication",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:51.232Z",
+  "cards": [
+    {
+      "id": "1944usm",
+      "kind": "term",
+      "front": "What is eutrophication?",
+      "back": "**Eutrophication** is the enrichment of a water body with nutrients, which increases the growth of plants and algae. Extra food lets algae multiply beyond what a healthy lake can normally hold.",
+      "hint": "Think about what scarce nutrients normally do to algae growth in a healthy lake.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xi425f",
+      "kind": "process",
+      "front": "What is the sequence of events from nutrient enrichment to fish deaths in a lake?",
+      "back": "Nutrients feed algae, which form a dense **algal bloom** at the surface. The bloom blocks sunlight, so submerged plants die. Bacteria decompose the dead algae and use up oxygen, causing hypoxia that makes fish flee or suffocate.",
+      "hint": "Start with what extra nutrients do to algae first."
+    },
+    {
+      "id": "0f0ltk2",
+      "kind": "concept",
+      "front": "Why does adding more of the limiting nutrient cause algae to grow so quickly?",
+      "back": "The **limiting nutrient** is the one in shortest supply relative to need. Extra supply removes the main brake on growth, so algae can multiply rapidly.",
+      "hint": "Consider which nutrient the algae run out of first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p4ficq",
+      "kind": "concept",
+      "front": "How does cultural eutrophication differ from natural eutrophication in speed?",
+      "back": "Natural eutrophication takes centuries, but human activity can speed it up within years, so **cultural eutrophication** is a faster change. Aquatic ecosystems rarely adjust fast enough to such a sudden rise in nutrients.",
+      "hint": "Compare the timescales over which each process happens.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wv4ik5",
+      "kind": "term",
+      "front": "What is dissolved oxygen?",
+      "back": "**Dissolved oxygen** is the oxygen gas present in water, usually measured in $\\text{mg/L}$. Its level falls as decomposition rises.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "180f52v",
+      "kind": "term",
+      "front": "How do scientists measure biological oxygen demand in a water sample?",
+      "back": "**Biological oxygen demand** is the oxygen microbes use while decomposing organic matter. Scientists compare dissolved oxygen before and after several days; a high value signals heavy decomposition.",
+      "hint": "Think about checking the oxygen level at two points in time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q1y644",
+      "kind": "mistake",
+      "front": "Why does a dense algal bloom eventually lower dissolved oxygen, even though algae release oxygen?",
+      "back": "The large oxygen loss comes later, when bacteria decompose dead algae. Oxygen released by photosynthesis does not cause the drop, so the common idea that algae keep oxygen high is wrong.",
+      "hint": "Think about what happens to the algae after they die.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ad82ym",
+      "kind": "term",
+      "front": "What is hypoxia?",
+      "back": "**Hypoxia** is a condition in which dissolved oxygen is too low to support most aquatic animals. Fish may flee or suffocate.",
+      "hint": "Think about what fish need to breathe in water.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14u0dyn",
+      "kind": "term",
+      "front": "What is a dead zone?",
+      "back": "A **dead zone** is an area of water where hypoxia is so severe and persistent that most animal life cannot survive.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0srphmh",
+      "kind": "concept",
+      "front": "Why do bottom-dwelling animals such as clams die first in hypoxic water?",
+      "back": "They cannot escape quickly. Mobile animals such as fish can flee low-oxygen areas, but slow bottom dwellers are trapped.",
+      "hint": "Compare how fast clams move with how fast fish can swim away.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1782unr",
+      "kind": "concept",
+      "front": "How does hypoxia reduce biodiversity in a lake?",
+      "back": "Lost underwater plants remove food and shelter, and **tolerant species** can replace sensitive ones. Sensitive species decline while only a few hardy species remain.",
+      "hint": "Think about what happens to species that cannot cope with low oxygen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ywmqpb",
+      "kind": "concept",
+      "front": "Why is cutting nutrient inputs at their source the most effective fix for eutrophication?",
+      "back": "Treating a bloom after it forms only addresses the symptom. Cutting **nutrient inputs** at the source prevents blooms from forming in the first place.",
+      "hint": "Compare treating a bloom with stopping it from forming.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1v0wx0y",
+      "kind": "example",
+      "front": "Why would upgrading a sewage plant to remove phosphorus reduce eutrophication in a freshwater lake?",
+      "back": "Phosphorus is often the limiting nutrient in fresh water, so removing it cuts the supply algae need. Fewer blooms form, so less decomposition occurs and dissolved oxygen is preserved.",
+      "hint": "Link the nutrient removed to which nutrient controls algae growth in fresh water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ewc91r",
+      "kind": "concept",
+      "front": "How does fertilizer from farms reach lakes and coasts?",
+      "back": "Rain carries **runoff** across the land into streams. Rivers then deliver the nitrogen and phosphorus to lakes and coasts.",
+      "hint": "Trace the path of rainwater from a farm field downhill.",
+      "sectionId": "s2"
+    }
+  ]
+}

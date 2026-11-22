@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-16",
+  "topicCode": "7.16",
+  "topicName": "Transcription factors and hormones",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:57.857Z",
+  "cards": [
+    {
+      "id": "1b45psl",
+      "kind": "concept",
+      "front": "What is the job of a transcription factor in a cell?",
+      "back": "A transcription factor recognises a specific **DNA sequence**, usually near a gene's start, and binds to it to control how easily RNA polymerase starts transcription.",
+      "hint": "Think about where on the DNA it attaches.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ayx3j6",
+      "kind": "concept",
+      "front": "Why does a hormone affect only some cells, even though it travels to every tissue?",
+      "back": "Only **target cells** have a receptor protein whose shape fits the hormone. Cells without a matching receptor ignore it.",
+      "hint": "Compare the cells that respond with the ones that do not.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ei4xjk",
+      "kind": "process",
+      "front": "What are the steps by which oestrogen changes transcription in a target cell?",
+      "back": "1) Oestrogen passes through the cell-surface membrane. 2) It binds its receptor, forming a **hormone-receptor complex**. 3) The complex changes shape and acts as a transcription factor. 4) It enters the nucleus and binds a specific DNA sequence near the gene. 5) RNA polymerase transcribes the gene.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13ryfld",
+      "kind": "term",
+      "front": "What is gene expression?",
+      "back": "Gene expression is the use of the information in a **gene** to make a functional product, such as a protein.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "130ylyy",
+      "kind": "term",
+      "front": "What is transcription?",
+      "back": "**Transcription** is the synthesis of RNA using a DNA strand as a template.",
+      "hint": "Think about the first step of gene expression.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lb5vv1",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that a cell which does not use a gene has lost it?",
+      "back": "The gene is still present in the DNA. It is simply not being **transcribed**, so no RNA or protein is made from it.",
+      "hint": "Think about what is being copied, not whether the DNA exists.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bp2mjc",
+      "kind": "term",
+      "front": "What is RNA polymerase?",
+      "back": "**RNA polymerase** is the enzyme that joins RNA nucleotides to build an RNA strand during transcription.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pduy0c",
+      "kind": "concept",
+      "front": "What is the difference between an activating and a repressing transcription factor?",
+      "back": "An **activating** factor helps RNA polymerase bind, so transcription increases. A **repressing** factor blocks RNA polymerase, so transcription decreases.",
+      "hint": "Consider what each factor does to RNA polymerase.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18xjboz",
+      "kind": "term",
+      "front": "What are hormones?",
+      "back": "**Hormones** are chemical messengers that travel in the blood and affect only cells with a suitable receptor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vu9nkb",
+      "kind": "term",
+      "front": "What is a steroid hormone?",
+      "back": "A **steroid hormone** is a lipid-soluble hormone that crosses the cell-surface membrane and binds to a receptor protein inside the cell.",
+      "hint": "Think about what kind of molecule can pass through a membrane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cra9te",
+      "kind": "concept",
+      "front": "Why can a water-soluble hormone such as insulin not act on a receptor inside the cell?",
+      "back": "It cannot cross the **cell-surface membrane** because it is not lipid-soluble. It binds to receptors on the outer surface, and a signal passes inside by another route.",
+      "hint": "Think about what the membrane lets through.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jlj2w3",
+      "kind": "concept",
+      "front": "In some cells, what keeps a steroid hormone receptor inactive until the hormone arrives?",
+      "back": "An **inhibitor protein** bound to the receptor in the cytoplasm. Hormone binding releases the inhibitor, so the complex can enter the nucleus.",
+      "hint": "Think about where the receptor sits before the hormone arrives.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zy1az0",
+      "kind": "concept",
+      "front": "Why do effects of steroid hormones that work through transcription often take longer to appear?",
+      "back": "**New RNA and protein** must be made before the effect shows, which takes time.",
+      "hint": "Count the steps between hormone binding and a new protein being present.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zd5kho",
+      "kind": "concept",
+      "front": "What effect does the testosterone-receptor complex have on muscle cells?",
+      "back": "It **switches on genes** for muscle proteins, so muscle mass can increase.",
+      "sectionId": "s5"
+    }
+  ]
+}

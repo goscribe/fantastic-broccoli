@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-6-2",
+  "topicCode": "5.6.2",
+  "topicName": "Reversible reactions and equilibrium",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:54.846Z",
+  "cards": [
+    {
+      "id": "10afsdd",
+      "kind": "concept",
+      "front": "What is happening at dynamic equilibrium in a closed system?",
+      "back": "The **forward and reverse reactions** continue at equal rates, so the amounts of reactants and products stay constant. The reaction has not stopped.",
+      "hint": "Think about what a sealed container prevents.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hvu61y",
+      "kind": "concept",
+      "front": "What does the double arrow $\\\\rightleftharpoons$ in a reversible reaction equation show?",
+      "back": "The reaction can proceed in **both directions**, so products can react to form the original reactants.",
+      "hint": "Try reading the equation left to right, then right to left.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14ewhp3",
+      "kind": "example",
+      "front": "For the ammonia equilibrium, where the forward reaction is exothermic, which way does equilibrium shift when temperature rises?",
+      "back": "It shifts towards **nitrogen and hydrogen**, the endothermic direction. Increasing temperature favours the endothermic direction.",
+      "hint": "Work out which direction absorbs energy first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cittko",
+      "kind": "example",
+      "front": "In the ammonia equilibrium $\\\\text{nitrogen}+3\\\\text{hydrogen}\\\\rightleftharpoons 2\\\\text{ammonia}$, which side does increasing pressure favour?",
+      "back": "The **ammonia** side. The left has four gas molecules and the right has two, so higher pressure favours the side with fewer gas molecules.",
+      "hint": "Count the gas molecules on each side.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mjuzr6",
+      "kind": "concept",
+      "front": "What happens to the position of equilibrium when the concentration of a product is increased?",
+      "back": "It shifts towards the **reverse reaction**, which uses up the added product and makes more reactants.",
+      "hint": "Consider which direction would use up the extra product.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14is6l9",
+      "kind": "mistake",
+      "front": "Why is a double arrow not the same as saying both directions have equal rates throughout the reaction?",
+      "back": "Equal rates happen only at **equilibrium**. The double arrow shows that both directions are possible, not that they run at the same rate all the time.",
+      "hint": "Think about when the system has reached equilibrium.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i57vms",
+      "kind": "term",
+      "front": "What is a closed system in a reversible reaction?",
+      "back": "A **closed system** is one where no substances can enter or leave. This keeps reactants and products available to react again.",
+      "hint": "Think about what would happen if a gas could escape.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kbd570",
+      "kind": "example",
+      "front": "Which energy change occurs when ammonia and hydrogen chloride react to form ammonium chloride?",
+      "back": "The reaction is **exothermic** and releases the same amount of energy that heating ammonium chloride takes in.",
+      "hint": "Compare this with the direction that needs heating.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04l0x69",
+      "kind": "mistake",
+      "front": "Why can't the equation alone tell you whether a reversible reaction is exothermic?",
+      "back": "The equation does not show energy changes. You need **information about the energy change** to decide which direction is exothermic.",
+      "hint": "Think about what a chemical equation does and does not include.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15t8oig",
+      "kind": "process",
+      "front": "What steps should you follow to predict how a temperature change affects a reversible reaction?",
+      "back": "First identify the **endothermic direction**. Then decide whether the change favours that direction or the exothermic one.",
+      "hint": "Start with which direction takes in energy.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1tnf0do",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume that every temperature increase favours the products?",
+      "back": "Increasing temperature favours the **endothermic direction**, which may be the reactants if the forward reaction is exothermic.",
+      "hint": "Consider the ammonia reaction's forward energy change.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xcnwjr",
+      "kind": "concept",
+      "front": "What does a catalyst do to a reversible reaction when it is added?",
+      "back": "It speeds up **both directions**, so equilibrium is reached sooner. It does not change the position of equilibrium.",
+      "hint": "Consider whether a catalyst changes how much product is present at equilibrium.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xm6rjz",
+      "kind": "term",
+      "front": "What is the position of equilibrium?",
+      "back": "The **position of equilibrium** describes the relative amounts of reactants and products present at equilibrium.",
+      "hint": "Think about how much of each substance is there at equilibrium.",
+      "sectionId": "s4"
+    }
+  ]
+}

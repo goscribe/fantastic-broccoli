@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "d-3",
+  "topicCode": "D.3",
+  "topicName": "Motion in electromagnetic fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:44.976Z",
+  "cards": [
+    {
+      "id": "1vamy9z",
+      "kind": "concept",
+      "front": "Why does a magnetic field change a moving charge's direction but not its speed?",
+      "back": "The magnetic force is always **perpendicular** to velocity, so it does no work and cannot change the speed.",
+      "hint": "Think about the direction of the force compared with the velocity.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a9h2de",
+      "kind": "formula",
+      "front": "What radius does a charge follow when it moves perpendicular to a uniform magnetic field?",
+      "back": "$r=mv/(|q|B)$, where $m$ is mass, $v$ is speed, $|q|$ is charge magnitude and $B$ is magnetic flux density. This comes from setting the magnetic force equal to centripetal force.",
+      "hint": "Equate the magnetic force $|q|vB$ with $mv^2/r$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0u6yt2l",
+      "kind": "concept",
+      "front": "How do two long parallel wires carrying currents interact?",
+      "back": "**Parallel** currents in the same direction attract; currents in opposite directions repel. Each wire's field exerts a force on the current in the other.",
+      "hint": "Consider the field one wire produces at the position of the other.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dmg3po",
+      "kind": "concept",
+      "front": "What path does a charge follow when it enters a uniform electric field perpendicular to the field?",
+      "back": "A **parabolic path**. Its velocity perpendicular to the field stays unchanged, while constant acceleration acts along the field.",
+      "hint": "Split the motion into components along and across the field.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "139h37c",
+      "kind": "formula",
+      "front": "What is the acceleration of a charge in a uniform electric field?",
+      "back": "$a=qE/m$, where $q$ is charge, $E$ is field strength and $m$ is mass. It comes from $F=qE$.",
+      "hint": "Start from the force on the charge.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15b0sce",
+      "kind": "formula",
+      "front": "What does the angle $\\theta$ mean in $F=|q|vB\\sin\\theta$, and when is the force zero?",
+      "back": "$\\theta$ is the angle between velocity and field. The force is **zero** for parallel motion and greatest for perpendicular motion.",
+      "hint": "Check what $\\sin\\theta$ equals at 0 degrees.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0daqrf4",
+      "kind": "process",
+      "front": "How do you find the direction of the magnetic force on a moving charge?",
+      "back": "Use the direction of velocity for a positive charge, then **reverse** it for a negative charge. The force is perpendicular to both velocity and field.",
+      "hint": "Charge sign matters.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mru4j0",
+      "kind": "mistake",
+      "front": "A student says a negative charge always curves along the field lines in an electric field. What is wrong?",
+      "back": "The field does not always bend a particle along field lines. A **negative** charge accelerates opposite to the field direction.",
+      "hint": "Compare the force direction for positive and negative charges.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0soywte",
+      "kind": "example",
+      "front": "Two parallel wires carry 2.0 A and 3.0 A in the same direction, 0.050 m apart, in vacuum. What is the force on a 0.40 m length?",
+      "back": "$9.6\\times10^{-6}\\,\\mathrm{N}$, and the wires attract. The force per unit length is $2.4\\times10^{-5}\\,\\mathrm{N\\,m^{-1}}$.",
+      "hint": "Find force per unit length first, then multiply by the length.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03hs9hm",
+      "kind": "formula",
+      "front": "What is the force per unit length between long parallel wires in vacuum?",
+      "back": "$F/L=\\mu_0 I_1I_2/(2\\pi d)$, where $I_1$ and $I_2$ are the currents and $d$ is separation. Here $\\mu_0=4\\pi\\times10^{-7}\\,\\mathrm{N\\,A^{-2}}$.",
+      "hint": "Multiply by the wire length to get the total force.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kw7p9s",
+      "kind": "term",
+      "front": "What is centripetal force?",
+      "back": "The **resultant force** directed towards the centre of a circular path. For a charge in a magnetic field, the magnetic force supplies it.",
+      "hint": "Think about which way the force points.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yc3u41",
+      "kind": "mistake",
+      "front": "A student says a faster particle curves more tightly in a magnetic field. What is wrong?",
+      "back": "**Faster** particles follow wider circles, since $r=mv/(|q|B)$ increases with $v$. A larger charge magnitude or stronger field gives a smaller radius instead.",
+      "hint": "Look at how $v$ appears in the radius equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ly7892",
+      "kind": "term",
+      "front": "What is a uniform electric field?",
+      "back": "A field with the **same strength and direction** at every point in the region considered.",
+      "hint": "Think about what stays constant across the region.",
+      "sectionId": "s1"
+    }
+  ]
+}

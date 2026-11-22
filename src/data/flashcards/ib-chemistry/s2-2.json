@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "s2-2",
+  "topicCode": "S2.2",
+  "topicName": "The covalent model",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:16.525Z",
+  "cards": [
+    {
+      "id": "0m3xaq4",
+      "kind": "concept",
+      "front": "How does a covalent bond hold two atoms together?",
+      "back": "The atoms **share** a pair of electrons. Both nuclei attract that shared pair, which holds the atoms together.",
+      "hint": "Think about what both nuclei are doing to the shared pair.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11n7s8o",
+      "kind": "concept",
+      "front": "What determines the three-dimensional shape of a molecule?",
+      "back": "**Electron pairs** around the central atom repel each other and spread apart. This includes lone pairs, which take up more space and push bonds closer together.",
+      "hint": "Count bonding regions and lone pairs around the central atom.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19v76a5",
+      "kind": "concept",
+      "front": "Why is water polar but carbon dioxide non-polar, even though both have polar bonds?",
+      "back": "**Shape** decides it. The bond effects cancel in linear carbon dioxide but not in bent water, so only water is a polar molecule.",
+      "hint": "Ask whether the bond effects point in opposite directions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1td5ufb",
+      "kind": "term",
+      "front": "What is a lone pair?",
+      "back": "A **lone pair** is an unshared pair of outer-shell electrons on one atom. It occupies more space around the central atom than a bonding pair.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ctposc",
+      "kind": "term",
+      "front": "What is a Lewis structure?",
+      "back": "A **Lewis structure** shows bonding pairs as lines and lone pairs as dots around the element symbols.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m4dkp7",
+      "kind": "process",
+      "front": "What are the steps for drawing a Lewis structure?",
+      "back": "1) **Count** all valence electrons, adding one per negative charge and subtracting one per positive charge. 2) Connect the atoms with single bonds. 3) Place the remaining electrons as lone pairs. 4) Check each atom has the correct number of outer electrons.",
+      "hint": "Start with the electron count before drawing anything.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fhk895",
+      "kind": "example",
+      "front": "How many valence electrons do you count for NH4+ before drawing its Lewis structure?",
+      "back": "**Eight**. Nitrogen contributes five, four hydrogens contribute four, and the positive charge removes one: 5 + 4 - 1 = 8.",
+      "hint": "Remember to subtract one for the positive charge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05l2oek",
+      "kind": "concept",
+      "front": "How does increasing bond order affect bonds between the same two elements?",
+      "back": "It usually makes the bond **shorter and stronger**, so more energy is needed to break it. Single bonds are longest and weakest; triple bonds are shortest and strongest.",
+      "hint": "Compare the number of shared pairs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03046u9",
+      "kind": "mistake",
+      "front": "A student says the more electronegative atom takes the shared electrons completely in a covalent bond. What is wrong?",
+      "back": "**Sharing** is not transfer. The pair is still shared; the more electronegative atom just attracts it more strongly, giving the bond partial charges.",
+      "hint": "Think about what the word covalent means.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ci03q7",
+      "kind": "mistake",
+      "front": "A student says any triple bond is stronger than any double bond. What is the error?",
+      "back": "Bond order comparisons hold for the **same two elements** only. Bond order alone cannot reliably compare bonds between different elements, so name the atoms being bonded.",
+      "hint": "Check whether both bonds involve the same pair of elements.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t2r1kg",
+      "kind": "concept",
+      "front": "Why do simple molecular substances usually have low melting points, while giant covalent structures melt at high temperatures?",
+      "back": "Simple molecular substances **separate molecules** fairly easily. Giant covalent structures need many strong covalent bonds across the network to be broken.",
+      "hint": "Think about what is actually broken on melting.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18szqr5",
+      "kind": "mistake",
+      "front": "A student says a molecule with polar bonds must be a polar molecule. What is the error?",
+      "back": "A **polar bond** does not always make a polar molecule. The bond effects must fail to cancel, which depends on shape, as in linear carbon dioxide where they cancel.",
+      "hint": "Check whether the shape lets the bond effects cancel.",
+      "sectionId": "s5"
+    }
+  ]
+}

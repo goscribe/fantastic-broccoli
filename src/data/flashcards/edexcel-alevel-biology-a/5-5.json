@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-5",
+  "topicCode": "5.5",
+  "topicName": "Overview of photosynthesis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:59.046Z",
+  "cards": [
+    {
+      "id": "0n2nim2",
+      "kind": "term",
+      "front": "What is photosynthesis?",
+      "back": "**Photosynthesis** is the process by which light energy is used to make organic molecules, such as glucose, from carbon dioxide and water.",
+      "hint": "Think about what the plant gets from light.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12or2iy",
+      "kind": "formula",
+      "front": "What is the overall equation for photosynthesis, including state symbols?",
+      "back": "$6\\mathrm{CO_2(g)}+6\\mathrm{H_2O(l)}\\xrightarrow{\\mathrm{light}}\\mathrm{C_6H_{12}O_6(aq)}+6\\mathrm{O_2(g)}$. Six carbon dioxide and six water make one glucose and six oxygen, with light as the energy source.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w9ekqa",
+      "kind": "concept",
+      "front": "Where does nearly all the chemical energy in a food chain originally come from?",
+      "back": "It comes from **light** captured by photosynthesis in producers. Consumers get their energy by eating producers, so without photosynthesis the chain would have no energy source.",
+      "hint": "Trace the energy back to the first organism in the chain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18ws5xk",
+      "kind": "concept",
+      "front": "Where does the energy from light end up in photosynthesis?",
+      "back": "It is stored in the **chemical bonds** of organic molecules such as glucose. Light is an energy source, not a material built into glucose.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fy68fa",
+      "kind": "term",
+      "front": "What is chlorophyll and what does it do?",
+      "back": "**Chlorophyll** is a green pigment in chloroplasts that absorbs light, mainly red and blue wavelengths, so the cell can capture the energy it needs.",
+      "hint": "Think about why leaves look green.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "032rojd",
+      "kind": "process",
+      "front": "Where do the light-dependent reactions take place, and what do they produce?",
+      "back": "They take place in the **thylakoid membranes** of the chloroplast. They split water, release oxygen and make ATP and reduced NADP.",
+      "hint": "Think about the membranes inside the chloroplast.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tayyh9",
+      "kind": "process",
+      "front": "What does the light-independent reaction use, and where does it take place?",
+      "back": "It uses **ATP** and reduced NADP to incorporate carbon dioxide into organic molecules. It takes place in the stroma, the fluid around the thylakoids.",
+      "hint": "Compare its inputs with the outputs of the first stage.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "070luuv",
+      "kind": "mistake",
+      "front": "Where does the oxygen released in photosynthesis come from?",
+      "back": "It comes from **water**, not carbon dioxide. Water is split in the light-dependent reactions, releasing oxygen.",
+      "hint": "Think about which raw material is split in the light-dependent reactions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tbq6rp",
+      "kind": "mistake",
+      "front": "Why is it wrong to say plants only respire at night?",
+      "back": "Plants respire **all the time**. In bright light photosynthesis is usually faster, so there is a net release of oxygen.",
+      "hint": "Compare the rates of the two processes in bright light.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1omhkl5",
+      "kind": "example",
+      "front": "Why can a plant kept in the dark not make glucose, even with carbon dioxide and water available?",
+      "back": "Light is needed for the light-dependent reactions. Without light, no ATP or reduced NADP is made, so the light-independent reaction cannot incorporate carbon dioxide into glucose.",
+      "hint": "Follow what the light-independent reaction needs before it can start.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1egyqmb",
+      "kind": "term",
+      "front": "How does carbon dioxide enter a leaf?",
+      "back": "It **diffuses** in through pores in the leaf surface called stomata.",
+      "hint": "Think about openings in the leaf surface.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18a1q46",
+      "kind": "concept",
+      "front": "How does photosynthesis lower the carbon dioxide level in the atmosphere?",
+      "back": "It locks carbon from carbon dioxide into **organic molecules**. The carbon returns to the air when organisms respire, decay or are burned.",
+      "hint": "Think about where the carbon goes after it is fixed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "04om7kl",
+      "kind": "term",
+      "front": "What is a producer?",
+      "back": "A **producer** is an organism that makes its own organic molecules from inorganic substances, usually using light energy, such as plants, algae and photosynthetic bacteria.",
+      "sectionId": "s4"
+    }
+  ]
+}

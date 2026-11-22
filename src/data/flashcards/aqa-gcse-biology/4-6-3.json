@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-6-3",
+  "topicCode": "4.6.3",
+  "topicName": "Understanding genetics and evolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:53.546Z",
+  "cards": [
+    {
+      "id": "1h9p9in",
+      "kind": "term",
+      "front": "What is natural selection?",
+      "back": "**Natural selection** is the process in which individuals with characteristics better suited to their environment are more likely to survive, breed and pass on their genes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "102iw8v",
+      "kind": "process",
+      "front": "What are the steps by which antibiotic resistance spreads through a bacterial population?",
+      "back": "1) A random **mutation** gives a bacterium resistance. 2) The antibiotic kills susceptible bacteria. 3) Resistant bacteria survive and reproduce, passing the resistance trait to their descendants.",
+      "hint": "Start with where the resistance trait first comes from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04cjf06",
+      "kind": "process",
+      "front": "How can one population gradually become two separate species?",
+      "back": "1) A **barrier**, such as a mountain or stretch of water, splits the population. 2) Mutations create inherited differences in each group. 3) Natural selection in different environments changes each group differently. 4) Over many generations the groups can no longer produce fertile offspring together.",
+      "hint": "Start with what stops the groups from meeting.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0n6zml7",
+      "kind": "concept",
+      "front": "What evidence did Darwin and Wallace use to support natural selection?",
+      "back": "They observed **variation** within species, differences between related organisms in different places, and how organisms were suited to their environments. Fossils also showed that organisms had changed over time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gp74p9",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an individual changes its inherited traits because it needs to survive?",
+      "back": "Individuals do not change their inherited traits to suit their needs. Natural selection works on existing variation: individuals with useful inherited differences survive and reproduce more, so the trait becomes more common.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12f24fu",
+      "kind": "concept",
+      "front": "Why does antibiotic resistance become common so quickly in bacteria?",
+      "back": "Bacteria **reproduce rapidly**, so the proportion of resistant bacteria can rise quickly across generations.",
+      "hint": "Think about how often bacteria produce new generations.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06wg0al",
+      "kind": "concept",
+      "front": "How can an inherited trait disappear in one generation and then return?",
+      "back": "One inherited **unit** can **mask** another, hiding its visible effect without removing it. The hidden unit can still be passed on and appear again in later offspring.",
+      "hint": "Think about how each offspring gets one unit from each parent.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pumurl",
+      "kind": "term",
+      "front": "What are fossils?",
+      "back": "**Fossils** are preserved remains or traces of organisms that lived in the past.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02rf87k",
+      "kind": "concept",
+      "front": "What do fossils from different ages show about organisms?",
+      "back": "Fossils from different ages show that organisms have **changed** over time, and that some organisms once existed but are now **extinct**. This supports evolution over long periods.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zzsab0",
+      "kind": "mistake",
+      "front": "Why does a gap in the fossil record not prove that an organism never existed?",
+      "back": "Gaps are expected because soft body parts often decay before fossilising, geological processes destroy many fossils, and others remain buried and undiscovered.",
+      "hint": "Consider how unusual fossilisation is.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ikdj8s",
+      "kind": "term",
+      "front": "What does isolation mean in this topic?",
+      "back": "**Isolation** prevents groups within a population from breeding with each other, for example when a barrier separates them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07joifz",
+      "kind": "concept",
+      "front": "Why can two groups that meet again no longer be one species?",
+      "back": "They have built up enough inherited differences that they can no longer produce **fertile** offspring through **interbreeding**, so they have become separate species.",
+      "hint": "Think about what happens to the differences over many generations.",
+      "sectionId": "s5"
+    }
+  ]
+}

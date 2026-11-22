@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "4-3",
+  "topicCode": "4.3",
+  "topicName": "Soil composition and properties",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:50.837Z",
+  "cards": [
+    {
+      "id": "13ldt8c",
+      "kind": "concept",
+      "front": "Why does sand drain faster than clay?",
+      "back": "Sand's large particles leave large pores that let water move quickly, while clay's tiny pores slow it. This sets the **permeability** of each soil.",
+      "hint": "Compare the size of the gaps left between particles of each type.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ujbvye",
+      "kind": "concept",
+      "front": "Why must a soil balance water, air, and nutrients for plant roots?",
+      "back": "Roots need all three together. Sand drains and loses nutrients, while clay waterlogs and starves roots of air, so **loam** balances them for healthy growth.",
+      "hint": "Consider what goes wrong at each extreme.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ecsd0o",
+      "kind": "term",
+      "front": "What is soil texture?",
+      "back": "**Soil texture** is the relative proportion of sand, silt, and clay particles in a soil, given as percentages.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1b0qysw",
+      "kind": "term",
+      "front": "What is pore space in soil?",
+      "back": "**Pore space** is the volume between soil particles that is filled with air, water, or both. A healthy soil is roughly half pore space.",
+      "hint": "Think about what sits between the solid particles.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1npdaf5",
+      "kind": "term",
+      "front": "Which four components make up soil?",
+      "back": "Minerals, organic matter, water, and air.",
+      "hint": "Two are solid materials and two fill the gaps between particles.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lqgmgy",
+      "kind": "example",
+      "front": "What clay percentage does a soil with 45% sand and 35% silt contain?",
+      "back": "$100-45-35=20$, so clay is **20%**. With this mix the sample has a **loam** texture.",
+      "hint": "The three percentages must add up to 100.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lw4c79",
+      "kind": "formula",
+      "front": "How is porosity calculated?",
+      "back": "$\\text{Porosity} = \\frac{\\text{pore volume}}{\\text{total volume}}$, which is the **fraction** of a soil's volume that is pore space.",
+      "hint": "Compare the empty space with the whole sample.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ukapkj",
+      "kind": "mistake",
+      "front": "Why does clay with high porosity still drain slowly?",
+      "back": "High porosity means a lot of pore space, but clay's pores are tiny, so its **permeability** is low and water moves slowly.",
+      "hint": "Separate how much gap there is from how easily water flows through it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16qshzv",
+      "kind": "concept",
+      "front": "Why does clay hold much more water than sand?",
+      "back": "Its small pores grip water tightly, giving clay a **high water-holding capacity**, while sand holds little.",
+      "hint": "Think about how tightly tiny gaps grip water against gravity.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x0br35",
+      "kind": "concept",
+      "front": "Why does strongly acidic or basic soil reduce crop growth?",
+      "back": "Extreme **soil pH** makes some nutrients harder for roots to absorb, so plants get fewer nutrients. Most crops grow best at roughly pH 6 to 7.",
+      "hint": "Think about what roots must take up from the soil water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0210dkm",
+      "kind": "term",
+      "front": "What is a nutrient?",
+      "back": "A **nutrient** is a chemical element or compound that organisms need to grow, such as nitrogen, phosphorus, or potassium.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05uhf88",
+      "kind": "concept",
+      "front": "How do clay and humus help soil keep nutrients?",
+      "back": "They hold nutrients on their surfaces, so rain washes the nutrients away more slowly.",
+      "hint": "Think about where the nutrients sit on each particle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0k4ekhm",
+      "kind": "mistake",
+      "front": "Why can't you judge soil texture from its color?",
+      "back": "**Texture** depends only on the proportions of sand, silt, and clay. A dark soil can still be mostly sand or mostly clay.",
+      "hint": "Think about which particles texture is actually based on.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17lhq7e",
+      "kind": "process",
+      "front": "What steps turn sand, silt, and clay percentages into a texture name?",
+      "back": "Check that the three add to 100%, find any missing percentage, plot the point on the triangle, then read the named region.",
+      "hint": "Start with the check you make before plotting.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-6",
+  "topicCode": "7.6",
+  "topicName": "Oxidative phosphorylation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:12.265Z",
+  "cards": [
+    {
+      "id": "15jhepw",
+      "kind": "concept",
+      "front": "How does electron transfer along the chain build a proton gradient?",
+      "back": "Electrons pass from carrier to carrier, losing a little energy at each step. The released energy pumps $\\mathrm{H^+}$ protons from the matrix into the intermembrane space, creating a **proton gradient** that stores energy.",
+      "hint": "Think about what happens to the energy released at each carrier.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "113l5g3",
+      "kind": "concept",
+      "front": "How does a proton gradient make ATP?",
+      "back": "Protons flow back into the matrix only through **ATP synthase**, which joins ADP and inorganic phosphate to make ATP. This process is called **chemiosmosis**.",
+      "hint": "Think of the gradient as stored energy, like water held behind a dam.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0uvdvtv",
+      "kind": "concept",
+      "front": "Why does the electron transport chain stop when oxygen is absent?",
+      "back": "**Oxygen** is the final electron acceptor. Without it, electrons cannot leave the last carrier, so the chain fills up, proton pumping stops and very little ATP is made.",
+      "hint": "Think about what the last carrier needs in order to keep accepting electrons.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00lj85u",
+      "kind": "term",
+      "front": "What is oxidative phosphorylation?",
+      "back": "**Oxidative phosphorylation** is the final stage of aerobic respiration. It uses a proton gradient, built by electron transfer to oxygen, to make most of the ATP in aerobic respiration.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dhceqd",
+      "kind": "term",
+      "front": "What is the electron transport chain?",
+      "back": "The **electron transport chain** is a series of protein carriers in the inner mitochondrial membrane. Electrons pass along it, and the energy released pumps protons.",
+      "hint": "Think about where the carriers sit in the mitochondrion.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wo2s3y",
+      "kind": "formula",
+      "front": "What is the overall equation for oxygen accepting electrons at the end of the chain?",
+      "back": "$\\mathrm{O_2 + 4H^+ + 4e^- \\rightarrow 2H_2O}$. Here $\\mathrm{O_2}$ is oxygen, $\\mathrm{H^+}$ is protons, $\\mathrm{e^-}$ is electrons and $\\mathrm{H_2O}$ is water.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03asy24",
+      "kind": "mistake",
+      "front": "Why is it wrong to say oxygen makes ATP directly?",
+      "back": "Oxygen does not make ATP. It accepts electrons at the end of the chain, which keeps the chain running so the proton gradient can build.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19cyxmq",
+      "kind": "mistake",
+      "front": "Why is it wrong to say electrons flow through ATP synthase?",
+      "back": "**Protons**, not electrons, pass through ATP synthase. Electrons stay within the electron transport chain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g3rnjm",
+      "kind": "concept",
+      "front": "Why is the inner mitochondrial membrane folded into cristae?",
+      "back": "The folds increase the membrane's surface area, so more electron transport chains and ATP synthase molecules fit in. This supports a steeper proton gradient and more ATP.",
+      "hint": "Compare a folded membrane with a flat one of the same size.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1sqntva",
+      "kind": "process",
+      "front": "What is the correct order of events in oxidative phosphorylation?",
+      "back": "1) Reduced carriers give electrons to the chain. 2) Electron transfer pumps protons into the intermembrane space. 3) Protons flow back through ATP synthase, making ATP. 4) Oxygen accepts electrons and protons, forming water.",
+      "hint": "Start with where the electrons come from.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tp3vrh",
+      "kind": "concept",
+      "front": "Why does ATP production fall if the inner membrane lets protons leak across freely?",
+      "back": "Protons return to the matrix without passing through ATP synthase, so the proton gradient falls. Less energy is available to drive ATP synthesis.",
+      "hint": "Think about which route the protons should take back.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1yak2wt",
+      "kind": "concept",
+      "front": "Why does the Krebs cycle slow when oxygen is absent?",
+      "back": "Reduced NAD and reduced FAD stop giving up hydrogen, because the chain cannot regenerate them. Without these carriers being reused, the Krebs cycle slows.",
+      "hint": "Think about what NAD and FAD must do to be reused.",
+      "sectionId": "s4"
+    }
+  ]
+}

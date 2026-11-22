@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "p9",
+  "topicCode": "P9",
+  "topicName": "Numerical methods",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:43.275Z",
+  "cards": [
+    {
+      "id": "0x3aunh",
+      "kind": "concept",
+      "front": "Why does a change of sign of a continuous function $f$ between $x=a$ and $x=b$ show that a root lies there?",
+      "back": "A continuous graph cannot switch from one side of the $x$-axis to the other without crossing it, so there is a **root** of $f(x)=0$ between $a$ and $b$.",
+      "hint": "What must a continuous graph do when it moves from positive to negative?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08t82kg",
+      "kind": "formula",
+      "front": "What is the **Newton–Raphson** formula for $x_{n+1}$ in terms of $x_n$?",
+      "back": "$x_{n+1}=x_n-\\frac{f(x_n)}{f'(x_n)}$, where $f'(x_n)$ is the gradient of the curve at $x_n$ and $x_{n+1}$ is where the tangent meets the $x$-axis.",
+      "hint": "Picture the tangent at $x_n$ and where it crosses the horizontal axis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1licjw3",
+      "kind": "formula",
+      "front": "What is the **trapezium rule** for $\\int_a^b y\\,dx$ with $n$ strips, and what is $h$?",
+      "back": "$\\int_a^b y\\,dx\\approx\\frac{h}{2}\\left[y_0+y_n+2(y_1+y_2+\\dots+y_{n-1})\\right]$, where $h=\\frac{b-a}{n}$ is the **strip width**.",
+      "hint": "Count how many trapezia each middle $y$-value belongs to.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1rwgivu",
+      "kind": "term",
+      "front": "What is a **numerical method**?",
+      "back": "A **numerical method** finds an approximate solution, usually by repeating a process that improves an estimate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1k343bo",
+      "kind": "mistake",
+      "front": "Why can a sign change in $f(x)$ mislead you about a root?",
+      "back": "A break in the graph, such as $y=\\frac{1}{x}$ at $x=0$, can change sign with no root, and two roots in one interval can give no sign change.",
+      "hint": "Consider whether the graph is continuous over the whole interval.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0becesm",
+      "kind": "term",
+      "front": "What does it mean for a sequence of estimates to **converge**?",
+      "back": "The values get closer and closer to one fixed number.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lry2ju",
+      "kind": "concept",
+      "front": "Why can two rearrangements of the same equation give different results when iterated?",
+      "back": "Some rearrangements make the values settle towards a root, but another can make them move away, so convergence is not guaranteed.",
+      "hint": "Think about how the choice of $g(x)$ affects the repeated values.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08ugoox",
+      "kind": "example",
+      "front": "For $x^3-x-1=0$ written as $x=\\sqrt[3]{x+1}$, what is $x_1$ when $x_0=1.5$?",
+      "back": "$x_1=\\sqrt[3]{2.5}\\approx1.3572$, and the later values settle near 1.325.",
+      "hint": "Substitute $x_0$ into the iterative formula first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1510flf",
+      "kind": "process",
+      "front": "What are the steps for applying Newton–Raphson to $f(x)=0$ from a starting value?",
+      "back": "Differentiate to find $f'(x)$, substitute $x_0$ into the formula to get $x_1$, then use $x_1$ as the new start and repeat.",
+      "hint": "Start with the one thing you need before using the formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03coqx1",
+      "kind": "example",
+      "front": "Using Newton–Raphson on $f(x)=x^3-x-1$ with $x_0=1.5$, what is $x_2$?",
+      "back": "$x_2\\approx1.3252$, found from $x_1\\approx1.3478$.",
+      "hint": "Each new value becomes the starting point for the next step.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06tjr23",
+      "kind": "mistake",
+      "front": "What goes wrong with Newton–Raphson if $f'(x_n)=0$ at an estimate?",
+      "back": "The tangent is horizontal and never meets the $x$-axis, so the formula cannot give the next value.",
+      "hint": "Think about what the gradient is doing in the denominator of the formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vv7r1g",
+      "kind": "process",
+      "front": "How can you prove a root is correct to 2 decimal places?",
+      "back": "Show a sign change of $f(x)$ between the two rounding bounds, for example $f(1.315)<0$ and $f(1.325)>0$ for $x^3-x-1$. Agreement between iterates is not enough.",
+      "hint": "Compare the function values at the two edges of the rounding interval.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0trll77",
+      "kind": "example",
+      "front": "Estimate $\\int_1^3\\frac{1}{x}\\,dx$ using 4 strips with the trapezium rule.",
+      "back": "$\\frac{67}{60}\\approx1.12$ to 3 significant figures, using $h=0.5$.",
+      "hint": "Find the strip width first, then list the $y$-values at each strip boundary.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "083026j",
+      "kind": "concept",
+      "front": "On a curve that bends downwards, where do the chords lie and does the trapezium rule over- or underestimate?",
+      "back": "The chords lie below the curve, so the rule gives a **too small** estimate, an underestimate.",
+      "hint": "Compare this with what happens when the curve bends upwards.",
+      "sectionId": "s6"
+    }
+  ]
+}

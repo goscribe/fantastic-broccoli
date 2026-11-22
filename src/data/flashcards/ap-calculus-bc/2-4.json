@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "2-4",
+  "topicCode": "2.4",
+  "topicName": "Differentiability and continuity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:00.083Z",
+  "cards": [
+    {
+      "id": "0mzafrz",
+      "kind": "concept",
+      "front": "Does differentiability at a point guarantee continuity at that point?",
+      "back": "**Yes**. A derivative existing at a point means the function is continuous there. The converse is false: continuity alone does not guarantee a derivative.",
+      "hint": "Think about whether a limiting slope can exist at a break.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ydvsoi",
+      "kind": "concept",
+      "front": "Why does a jump discontinuity prevent differentiability?",
+      "back": "At a **jump discontinuity** the left and right limits differ, so the function is not continuous there. Since differentiability requires continuity, no derivative exists.",
+      "hint": "Ask what continuity requires about the limits from each side.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1an02ta",
+      "kind": "concept",
+      "front": "Can a function be continuous at a point and still not be differentiable there?",
+      "back": "**Yes**. Corners, cusps, and vertical tangents can occur at continuous points. For example, $f(x)=|x|$ is continuous at $x=0$ but has no derivative there.",
+      "hint": "Picture a sharp point on a graph with no break.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09tjcky",
+      "kind": "term",
+      "front": "What is a removable discontinuity?",
+      "back": "A **removable discontinuity** is a point where a finite limit exists, but the function value is missing or differs from that limit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tsvf9d",
+      "kind": "term",
+      "front": "What is a jump discontinuity?",
+      "back": "A **jump discontinuity** is a point where the finite left and right limits exist but are **unequal**.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qhic4k",
+      "kind": "term",
+      "front": "What is a corner on a graph?",
+      "back": "A **corner** is a continuous point where the finite one-sided slopes differ.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0eclxou",
+      "kind": "term",
+      "front": "What is a cusp on a graph?",
+      "back": "A **cusp** is a continuous point where one-sided slopes become unbounded with opposite signs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ned6x4",
+      "kind": "term",
+      "front": "What are one-sided derivatives, and when does the derivative exist at a continuous point?",
+      "back": "**One-sided derivatives** are limiting slopes approaching from only the left or only the right. The derivative exists only if both are finite and agree.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1c9su15",
+      "kind": "process",
+      "front": "What are the steps to test differentiability at a suspected point?",
+      "back": "1. Locate breaks, corners, cusps, and vertical tangents. 2. Check continuity: find $f(a)$ and both one-sided limits. 3. If continuous, compare the one-sided slopes.",
+      "hint": "Start with continuity before any slopes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vd0tzc",
+      "kind": "example",
+      "front": "Is $f(x)=|x|$ differentiable at $x=0$? Find the one-sided slopes.",
+      "back": "**No**. For $h<0$ the slope is $\\frac{|h|}{h}=-1$; for $h>0$ it is $1$. The one-sided slopes differ, so $f'(0)$ does not exist.",
+      "hint": "Compute the difference quotient separately for negative and positive $h$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08a3xta",
+      "kind": "mistake",
+      "front": "A student says a connected graph always has a derivative everywhere. What is wrong with this?",
+      "back": "**Wrong**: a connected graph can still have a sharp corner. Corners are continuous but not differentiable, so connectedness is not enough.",
+      "hint": "Consider a corner such as the graph of $|x|$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1plyo2s",
+      "kind": "mistake",
+      "front": "A student says changing one function value fixes any discontinuity. What is wrong with this?",
+      "back": "**Wrong**: changing one value can fix only a removable discontinuity. It cannot fix a jump or an infinite discontinuity.",
+      "hint": "Which type has a limit that already matches a single value?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "107qx4u",
+      "kind": "concept",
+      "front": "Why does an infinite discontinuity prevent differentiability?",
+      "back": "Near an **infinite discontinuity**, function values grow without bound on at least one side. The function is not continuous there, so no finite derivative exists.",
+      "hint": "Think about what happens to function values near the point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14zol3y",
+      "kind": "concept",
+      "front": "What happens to the slopes at a vertical tangent?",
+      "back": "The slopes become **unbounded**, so the derivative is not a finite number and does not exist.",
+      "sectionId": "s3"
+    }
+  ]
+}

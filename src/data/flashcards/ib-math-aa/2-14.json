@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-14",
+  "topicCode": "2.14",
+  "topicName": "Odd, even and self-inverse functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:14.639Z",
+  "cards": [
+    {
+      "id": "0vanms7",
+      "kind": "term",
+      "front": "What is an even function, and what symmetry does its graph have?",
+      "back": "An **even function** has $f(-x)=f(x)$ for every allowed $x$. Its graph is a mirror image in the $y$-axis, so each point $(x,y)$ has a partner $(-x,y)$.",
+      "hint": "Think of folding a sheet of paper along a vertical line.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1roucz5",
+      "kind": "concept",
+      "front": "What symmetry does the graph of an odd function have?",
+      "back": "**Half-turn** symmetry about the origin, through 180°. Because $f(-x)=-f(x)$, each point $(x,y)$ has a partner $(-x,-y)$.",
+      "hint": "Compare the sign of the input with the sign of the output.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0uaow6e",
+      "kind": "process",
+      "front": "What are the steps to test algebraically whether a function $f$ is odd, even or neither?",
+      "back": "1) Write $f(-x)$ by replacing every $x$ with $(-x)$. 2) Simplify carefully. 3) If the result equals $f(x)$, it is even. If it equals $-f(x)$, it is odd. Otherwise it is neither.",
+      "hint": "The algebra proves what the graph only suggests.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "043d07o",
+      "kind": "term",
+      "front": "What is a self-inverse function?",
+      "back": "A **self-inverse** function is its own inverse, so $f^{-1}(x)=f(x)$. This means $f(f(x))=x$ for every $x$ in its domain.",
+      "hint": "Applying the function twice gives back the original input.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0br1187",
+      "kind": "formula",
+      "front": "What condition must hold for every allowed $x$ for $f$ to be odd?",
+      "back": "$f(-x)=-f(x)$. Here $x$ is any input in the domain, and $f(-x)$ is the output for the negated input, which has the opposite sign to $f(x)$.",
+      "hint": "Write out $f(-2)$ and $-f(2)$ for $f(x)=x^3$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1v43zol",
+      "kind": "formula",
+      "front": "What does the self-inverse condition $f(f(x))=x$ tell you about the domain?",
+      "back": "It must hold for all $x$ in the domain. Checking only one matching value does not prove a function is self-inverse.",
+      "hint": "Ask how many values you must check.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "15h2n3y",
+      "kind": "mistake",
+      "front": "Is $f^{-1}(x)$ the same as $\\frac{1}{f(x)}$?",
+      "back": "No. **$f^{-1}$** means the inverse function, which reverses the input-output pairs. $\\frac{1}{f(x)}$ is the reciprocal, a different function.",
+      "hint": "The superscript $-1$ does not mean a reciprocal here.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wicw0g",
+      "kind": "mistake",
+      "front": "Is $g(x)=x^2+x$ an odd function?",
+      "back": "No. A **mix** of odd and even powers usually gives a function that is neither. Here $g(-x)=x^2-x$, which is neither $g(x)$ nor $-g(x)$.",
+      "hint": "Only all-even or all-odd powers give symmetry.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q43b6k",
+      "kind": "example",
+      "front": "Is $f(x)=\\frac{x^3}{x^2+1}$ odd, even or neither?",
+      "back": "**Odd**. $f(-x)=\\frac{-x^3}{x^2+1}=-f(x)$, so $f$ has half-turn symmetry about the origin.",
+      "hint": "Replace $x$ with $-x$ and watch the signs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fdhs9n",
+      "kind": "example",
+      "front": "Is $f(x)=\\frac{x+3}{x-1}$ self-inverse?",
+      "back": "**Yes**. Substituting gives $f(f(x))=\\frac{4x}{x-1}\\div\\frac{4}{x-1}=x$, so $f$ is its own inverse.",
+      "hint": "Combine the top and bottom of the fraction separately first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m54twr",
+      "kind": "concept",
+      "front": "Why is the graph of a self-inverse function symmetric about the line $y=x$?",
+      "back": "The graph of an inverse is the **reflection** of the original in $y=x$. For a self-inverse function the two graphs are the same, so reflecting it changes nothing.",
+      "hint": "A point $(a,b)$ on the graph means $(b,a)$ is also on it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0n9is6r",
+      "kind": "concept",
+      "front": "Why must the domain be symmetric about zero for a function to be even or odd?",
+      "back": "Because $f(-x)$ must be defined whenever $x$ is. If $x$ is an allowed input but $-x$ is not, the function cannot be odd or even.",
+      "hint": "Check the domain before you do any algebra.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0v0caub",
+      "kind": "example",
+      "front": "Is $f(x)=x^4-5x^2$ even, odd or neither?",
+      "back": "**Even**. $f(-x)=(-x)^4-5(-x)^2=x^4-5x^2=f(x)$.",
+      "hint": "Even powers of $-x$ give the same value as $x$.",
+      "sectionId": "s3"
+    }
+  ]
+}

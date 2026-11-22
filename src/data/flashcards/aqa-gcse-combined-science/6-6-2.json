@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-6-2",
+  "topicCode": "6.6.2",
+  "topicName": "Electromagnetic waves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:32.519Z",
+  "cards": [
+    {
+      "id": "0fge5he",
+      "kind": "concept",
+      "front": "What is the order of the electromagnetic spectrum from longest to shortest wavelength?",
+      "back": "**Radio waves**, microwaves, infrared, visible light, ultraviolet, X-rays and gamma rays. The groups do not have sharp boundaries.",
+      "hint": "Start with the group used for broadcasting and work towards the most energetic group.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09ubh6y",
+      "kind": "concept",
+      "front": "How do electromagnetic waves compare with sound when travelling through a vacuum?",
+      "back": "**Electromagnetic waves** can travel through a vacuum, whereas sound cannot. All electromagnetic groups travel at the same speed in a vacuum.",
+      "hint": "Think about what the wave needs in order to travel.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0felzi1",
+      "kind": "term",
+      "front": "What is ionisation?",
+      "back": "**Ionisation** happens when an atom or molecule gains or loses electrons and becomes charged. It can damage cells and DNA.",
+      "hint": "Think about what happens to the electrons in an atom.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kseid9",
+      "kind": "term",
+      "front": "What is the wavelength of a wave?",
+      "back": "The **wavelength** is the distance between corresponding points on successive waves.",
+      "hint": "Think about which two points on the wave you would measure between.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0y5f8nz",
+      "kind": "term",
+      "front": "What is frequency in a wave?",
+      "back": "**Frequency** is the number of complete waves passing a point each second.",
+      "hint": "Think about what you would count and over what period.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "094k8iu",
+      "kind": "concept",
+      "front": "How does frequency change as wavelength decreases across the spectrum?",
+      "back": "**Frequency** increases as wavelength decreases.",
+      "hint": "Think about the reverse relationship along the spectrum.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1iz3hn1",
+      "kind": "term",
+      "front": "What does it mean for a wave to be transverse?",
+      "back": "**Transverse waves** have oscillations perpendicular to their direction of travel.",
+      "hint": "Compare the direction of the oscillations with the direction the wave moves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "151niyh",
+      "kind": "mistake",
+      "front": "A student says a shorter wavelength means a greater speed in a vacuum. Why is this wrong?",
+      "back": "All electromagnetic groups travel at the **same speed** in a vacuum, so wavelength does not change speed there.",
+      "hint": "Think about what all groups have in common in a vacuum.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "133t6wo",
+      "kind": "concept",
+      "front": "Why does clear glass let visible light through but absorb most ultraviolet?",
+      "back": "Different groups of electromagnetic waves **interact differently** with the same material. Visible light is transmitted by clear glass, while most ultraviolet is absorbed.",
+      "hint": "Consider how the wave and the material interact.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l2fz71",
+      "kind": "process",
+      "front": "What three things can happen when an electromagnetic wave meets a material?",
+      "back": "The wave can be **reflected**, absorbed or transmitted. Which one happens depends on both the wave and the material.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17us75u",
+      "kind": "concept",
+      "front": "How is information carried by an electromagnetic wave in communication?",
+      "back": "Information changes the transmitted wave in a **controlled way**. A receiver detects the changes and recovers the information.",
+      "hint": "Think about what the sender does to the wave.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fspy0w",
+      "kind": "example",
+      "front": "Which group of electromagnetic waves is used to heat food in a microwave oven?",
+      "back": "**Microwaves**. They also carry signals between mobile phones and nearby masts, and to and from satellites.",
+      "hint": "Think about how a kitchen appliance heats food differently from a hot surface.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vj8wqk",
+      "kind": "concept",
+      "front": "What harm can strong microwaves or infrared cause to body tissue?",
+      "back": "They cause **heating** of body tissue. Strong infrared can burn skin.",
+      "hint": "Think about the energy the wave transfers to the body.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ogv9uw",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that every electromagnetic wave causes ionisation?",
+      "back": "Microwaves and infrared mainly pose a **heating risk** at high intensities. Ultraviolet, X-rays and gamma rays are the groups that can cause ionisation.",
+      "hint": "Compare the main risk from microwaves with the main risk from X-rays.",
+      "sectionId": "s4"
+    }
+  ]
+}

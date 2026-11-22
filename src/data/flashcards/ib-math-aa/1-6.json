@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-6",
+  "topicCode": "1.6",
+  "topicName": "Simple deductive proof",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:51.976Z",
+  "cards": [
+    {
+      "id": "0hp8ipk",
+      "kind": "concept",
+      "front": "Why can testing many values never prove a statement holds for all integers?",
+      "back": "Testing only covers the values checked. An untested value could be a **counterexample**, so only a deductive proof that covers every case establishes the result.",
+      "hint": "Think about the values you did not test.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0n8s5lx",
+      "kind": "term",
+      "front": "What is a counterexample?",
+      "back": "A **counterexample** is a single case that meets a statement's conditions but contradicts its conclusion, which disproves the statement.",
+      "hint": "One case is enough to settle it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wyglk4",
+      "kind": "formula",
+      "front": "What are the standard algebraic forms for an even integer and an odd integer?",
+      "back": "An even integer is $2n$ and an odd integer is $2n+1$, where $n$ is an integer. Choose the form that matches the statement you are proving.",
+      "hint": "Each is built from an integer $n$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06wou2u",
+      "kind": "process",
+      "front": "How do you prove that the sum of two odd integers is even?",
+      "back": "Let the integers be $2a+1$ and $2b+1$. Add to get $2a+2b+2$, factorise to $2(a+b+1)$, then state that $a+b+1$ is an integer, so the sum is even.",
+      "hint": "Write both odd numbers in the $2n+1$ form.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hev7u2",
+      "kind": "term",
+      "front": "What does the symbol $p\\Leftrightarrow q$ mean?",
+      "back": "It is an **equivalence**, read as \"if and only if\", meaning both $p\\Rightarrow q$ and $q\\Rightarrow p$ hold, so $p$ and $q$ are true together.",
+      "hint": "Compare with a one-way implication.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "043wezl",
+      "kind": "process",
+      "front": "What is the method for proving an identity such as $(a+b)^2-(a-b)^2=4ab$?",
+      "back": "**Work on the left-hand side** until it matches the right-hand side, expanding brackets and collecting terms. Do not start from the result you want to prove.",
+      "hint": "Expand each bracket first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1iv3xnr",
+      "kind": "example",
+      "front": "Prove that three consecutive integers have a sum that is a multiple of 3.",
+      "back": "Write the integers as $n$, $n+1$, $n+2$. Their sum is $3n+3=3(n+1)$, and since $n+1$ is an integer, the sum is a multiple of 3.",
+      "hint": "Call the first integer $n$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0c6ezkk",
+      "kind": "term",
+      "front": "What is an assumption in a proof?",
+      "back": "An **assumption** is a statement taken to be true at the start of an argument, on which later steps depend. Some are stated and others are hidden.",
+      "hint": "Look for what a step quietly requires.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nt2avl",
+      "kind": "mistake",
+      "front": "A student solves $x^2=5x$ by dividing both sides by $x$ to get $x=5$. What is wrong?",
+      "back": "The step assumes $x\\neq0$, so the **solution $x=0$ is lost**. Before dividing by an expression, check whether it could be zero and treat that case separately.",
+      "hint": "What value makes the divisor zero?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1q2a980",
+      "kind": "example",
+      "front": "Find a counterexample to the claim that $n^2+n+41$ is prime for every integer $n\\ge0$.",
+      "back": "Take $n=40$: $40^2+40+41=1681=41^2$, which is not prime. One failing case disproves the statement.",
+      "hint": "Substitute whole numbers into the expression and check each result.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bnlkuf",
+      "kind": "mistake",
+      "front": "Why does a claim that $n^2+n+41$ is prime for $n=0$ to $39$ count as proved?",
+      "back": "It does not. Checking many values only raises confidence. A proof must cover every case, and $n=40$ breaks the pattern.",
+      "hint": "Evidence is not proof.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09nsner",
+      "kind": "mistake",
+      "front": "Why is writing two odd numbers as $2n+1$ and $2n+1$ wrong in a proof?",
+      "back": "It forces the two numbers to be equal. Use a different letter for each unrelated integer, such as $2a+1$ and $2b+1$.",
+      "hint": "Do the two odd numbers have to be the same?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ngtbap",
+      "kind": "concept",
+      "front": "What must a proof end with?",
+      "back": "A short concluding sentence stating in words what has been shown, so the reader knows the aim was reached.",
+      "hint": "Say what you have shown in words.",
+      "sectionId": "s4"
+    }
+  ]
+}

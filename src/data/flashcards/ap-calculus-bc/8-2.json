@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "8-2",
+  "topicCode": "8.2",
+  "topicName": "Position, velocity and acceleration with integrals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:50.306Z",
+  "cards": [
+    {
+      "id": "0augtv4",
+      "kind": "concept",
+      "front": "What is the difference between displacement and total distance traveled?",
+      "back": "**Displacement** is the net change in position, found with signed area. **Total distance** adds the lengths of every movement, so it is never negative and ignores direction.",
+      "hint": "Think about what happens when the object turns around.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "064wdjv",
+      "kind": "formula",
+      "front": "How do you find displacement and total distance from a velocity function $v(t)$ on $a\\le t\\le b$?",
+      "back": "Displacement is $\\int_a^b v(t)\\,dt$. Total distance is $\\int_a^b |v(t)|\\,dt$, split at each time $v$ changes sign.",
+      "hint": "Distance uses absolute value, so split the integral where velocity changes sign.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1q1swt9",
+      "kind": "formula",
+      "front": "How do you find position $x(t)$ from velocity when the position $x(t_0)$ is known?",
+      "back": "$x(t)=x(t_0)+\\int_{t_0}^{t} v(u)\\,du$. The **initial position** fixes the constant that integration introduces.",
+      "hint": "Integration alone leaves an unknown constant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yhjoip",
+      "kind": "process",
+      "front": "What are the steps to find position from acceleration, given $v(t_0)$ and $x(t_0)$?",
+      "back": "1) Integrate $a(t)$ to get $v(t)$, using $v(t_0)$ to fix the constant. 2) Integrate $v(t)$ to get $x(t)$, using $x(t_0)$ to fix the second constant.",
+      "hint": "Two integrations means two constants.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pdjnfx",
+      "kind": "term",
+      "front": "What is velocity?",
+      "back": "**Velocity** is the rate of change of position with respect to time, and it includes direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0l6i1el",
+      "kind": "concept",
+      "front": "What does the sign of velocity tell you about position?",
+      "back": "Positive velocity means **position is increasing**; negative velocity means **position is decreasing**.",
+      "hint": "Think about which way the object moves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tl08tv",
+      "kind": "mistake",
+      "front": "A student finds total distance by taking the absolute value of the final displacement. What is wrong?",
+      "back": "Opposite movements **cancel** in displacement, hiding distance. Instead, add the absolute values of each separate signed piece.",
+      "hint": "Reversals add distance but can cancel in displacement.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fgsjho",
+      "kind": "concept",
+      "front": "What is a turning time, and how do you confirm one?",
+      "back": "A **turning time** is where velocity is zero and changes sign. Velocity being zero alone is not enough; check the sign on both sides.",
+      "hint": "Check both sides of the zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14ylcpz",
+      "kind": "example",
+      "front": "For $v(t)=t-2$ meters per second on $0\\le t\\le4$, find displacement and total distance.",
+      "back": "Displacement is **0** meters. Total distance is 4 meters, since velocity changes sign at $t=2$ and each piece contributes 2 meters.",
+      "hint": "Split the integral at t = 2.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12xz2yf",
+      "kind": "example",
+      "front": "For $v(t)=t-1$ meters per second on $0\\le t\\le3$, find displacement and total distance.",
+      "back": "Displacement is $\\frac{3}{2}$ meters. Total distance is $\\frac{5}{2}$ meters, since the pieces are $-\\frac{1}{2}$ meter and 2 meters in size.",
+      "hint": "Split the integral at t = 1.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w4qck7",
+      "kind": "example",
+      "front": "If $a(t)=2t$ m/s², $v(0)=1$ m/s and $x(0)=3$ m, find $x(t)$.",
+      "back": "$x(t)=\\frac{t^3}{3}+t+3$ meters. Integrating gives $v(t)=t^2+1$, then integrate again and use $x(0)=3$.",
+      "hint": "Integrate twice and fix each constant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17n5qk2",
+      "kind": "formula",
+      "front": "How do you find velocity $v(t)$ from acceleration when $v(t_0)$ is known?",
+      "back": "$v(t)=v(t_0)+\\int_{t_0}^{t} a(u)\\,du$. The **initial velocity** fixes the constant in this step.",
+      "hint": "This is the same pattern one level up from position.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1amhvn7",
+      "kind": "mistake",
+      "front": "Why do you need initial conditions before finding a unique position from acceleration?",
+      "back": "Each integration adds a constant, so acceleration alone gives many position functions. The **initial velocity** and **initial position** pick out one.",
+      "hint": "Count the constants from two integrations.",
+      "sectionId": "s3"
+    }
+  ]
+}

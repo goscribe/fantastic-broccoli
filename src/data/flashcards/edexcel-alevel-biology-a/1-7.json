@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-7",
+  "topicCode": "1.7",
+  "topicName": "Risk factors for cardiovascular disease",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:41.767Z",
+  "cards": [
+    {
+      "id": "11673e5",
+      "kind": "term",
+      "front": "What is a risk factor for cardiovascular disease?",
+      "back": "A **risk factor** is a characteristic or behaviour linked to a higher chance of developing a disease. It shows probability, not proven cause.",
+      "hint": "Think about probability rather than certainty.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uxviac",
+      "kind": "concept",
+      "front": "Why does having several risk factors raise risk more than one factor alone?",
+      "back": "Different factors act by different routes, such as **damaging the endothelium**, raising cholesterol and raising blood pressure, so their effects combine.",
+      "hint": "Consider how each factor harms the arteries in a different way.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01lh2pb",
+      "kind": "concept",
+      "front": "How does carbon monoxide from smoke reduce the oxygen carried in the blood?",
+      "back": "It **binds to haemoglobin** more strongly than oxygen does, so the blood carries less oxygen.",
+      "hint": "Compare how strongly the pigment binds this gas with how strongly it binds oxygen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16x5myz",
+      "kind": "term",
+      "front": "What is cardiovascular disease?",
+      "back": "**Cardiovascular disease** is any disease of the heart or blood vessels, including coronary heart disease and stroke.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0g8kr0n",
+      "kind": "concept",
+      "front": "How does nicotine in smoke raise blood pressure?",
+      "back": "It **raises heart rate** and **narrows small arteries**, so blood exerts more force on the artery walls.",
+      "hint": "Think about what makes the heart work harder and what narrower pipes do to flow.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s6mb5c",
+      "kind": "concept",
+      "front": "How do other chemicals in smoke affect the artery lining?",
+      "back": "They **damage the endothelium**, the lining of the arteries, which encourages **atheromas** to form.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "041lmpp",
+      "kind": "concept",
+      "front": "Why does smoking make blood clots more likely?",
+      "back": "Smoking makes **platelets stickier**, so clots form more easily.",
+      "hint": "Think about what platelets normally do when a blood vessel is damaged.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d7ci97",
+      "kind": "concept",
+      "front": "How does a diet rich in saturated fat increase cardiovascular risk?",
+      "back": "It **raises blood cholesterol**, so more cholesterol is available to build atheromas in artery walls.",
+      "hint": "Follow the nutrient into the blood, then think about where cholesterol ends up.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08on2b8",
+      "kind": "concept",
+      "front": "How does a high-salt diet affect the arteries?",
+      "back": "It **raises blood pressure**, which can damage the endothelium.",
+      "hint": "Think about what sustained high pressure does to a delicate lining.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pmpsh6",
+      "kind": "formula",
+      "front": "Which formula gives body mass index, and what units does each variable use?",
+      "back": "$\\text{BMI} = \\frac{m}{h^2}$, where mass $m$ is in $\\text{kg}$ and height $h$ is in $\\text{m}$, giving units of $\\mathrm{kg\\,m^{-2}}$.",
+      "hint": "Look carefully at which variable is squared.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "043u6cf",
+      "kind": "term",
+      "front": "What BMI value is classed as obesity?",
+      "back": "**Obesity** is a BMI of 30 or above, a level of body fat that harms health.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09qy90k",
+      "kind": "concept",
+      "front": "How does regular physical activity lower cardiovascular risk?",
+      "back": "It **strengthens the heart muscle**, helps control body mass and can lower blood pressure.",
+      "hint": "Think about the heart itself, body weight and blood pressure.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mow1pc",
+      "kind": "term",
+      "front": "What is a genetic predisposition?",
+      "back": "A **genetic predisposition** is an inherited tendency to develop a disease, whose effect depends partly on lifestyle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "15twhea",
+      "kind": "mistake",
+      "front": "Why is having a risk factor not a guarantee that someone will develop disease?",
+      "back": "Risk describes probability, not certainty. A risk factor does not guarantee disease, and having none gives no complete protection.",
+      "sectionId": "s5"
+    }
+  ]
+}

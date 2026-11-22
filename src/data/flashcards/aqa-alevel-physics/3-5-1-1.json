@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-5-1-1",
+  "topicCode": "3.5.1.1",
+  "topicName": "Basics of electricity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:24.274Z",
+  "cards": [
+    {
+      "id": "0a8aegi",
+      "kind": "term",
+      "front": "How is electric current defined in terms of charge and time?",
+      "back": "**Current** is the rate of flow of charge: $I=\\frac{\\Delta Q}{\\Delta t}$, measured in amperes ($\\mathrm{A}$). One ampere means one coulomb passes a point each second.",
+      "hint": "Think about how much charge moves past a point in each second.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1le0eo3",
+      "kind": "term",
+      "front": "What is potential difference between two points in a circuit?",
+      "back": "**Potential difference** is the energy transferred per unit charge between two points, $V=\\frac{W}{Q}$, measured in volts ($\\mathrm{V}$). One volt is one joule per coulomb.",
+      "hint": "Compare it with a pump pushing water round a pipe.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fk23e1",
+      "kind": "formula",
+      "front": "How is resistance calculated from potential difference and current, and what is its unit?",
+      "back": "$R=\\frac{V}{I}$, with $V$ in volts and $I$ in amperes. Resistance is measured in **ohms** ($\\Omega$), where $1\\,\\Omega=1\\,\\mathrm{V\\,A^{-1}}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kic6yd",
+      "kind": "concept",
+      "front": "Why can current flow through a metal wire?",
+      "back": "Metals contain **free electrons** that are not bound to single atoms. When a potential difference is applied, they drift through the lattice of positive ions.",
+      "hint": "Think about where the charge carriers sit in the metal.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a1hveq",
+      "kind": "formula",
+      "front": "What equation links current to drift velocity in a metal?",
+      "back": "$I=nAvq$, where $n$ is free electrons per unit volume ($\\mathrm{m^{-3}}$), $A$ is cross-sectional area ($\\mathrm{m^{2}}$), $v$ is drift velocity ($\\mathrm{m\\,s^{-1}}$), and $q$ is the electron charge ($1.60\\times10^{-19}\\,\\mathrm{C}$).",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ddl32n",
+      "kind": "example",
+      "front": "A wire has $8.0\\times10^{28}$ free electrons per cubic metre, area $2.0\\times10^{-6}\\,\\mathrm{m^{2}}$ and carries 4.0 A. What is the drift velocity?",
+      "back": "$v=\\frac{I}{nAq}\\approx1.6\\times10^{-4}\\,\\mathrm{m\\,s^{-1}}$. Here $nAq=2.56\\times10^{4}$, so $v=\\frac{4.0}{2.56\\times10^{4}}$.",
+      "hint": "Rearrange the current equation before substituting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vuhdkc",
+      "kind": "mistake",
+      "front": "Why does the current direction in a circuit appear opposite to the direction electrons move?",
+      "back": "Electrons are negative, so they drift towards the positive terminal. **Conventional current** is drawn the opposite way, from positive to negative.",
+      "hint": "Think about the sign of the charge carriers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ym5i2g",
+      "kind": "concept",
+      "front": "Why must an ammeter be connected in series in a circuit?",
+      "back": "An **ammeter** sits in series so all the current passes through it. Its ideal resistance is zero, so it does not reduce the current being measured.",
+      "hint": "Consider what path the current takes through the meter.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1iw5qdr",
+      "kind": "mistake",
+      "front": "What goes wrong if a voltmeter is connected in series instead of in parallel?",
+      "back": "Almost no current flows in the circuit, because a voltmeter has very **high resistance**. It must be connected in parallel across the component being tested.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ovl1o2",
+      "kind": "example",
+      "front": "A $6.0\\,\\Omega$ resistor is connected across a $9.0\\,\\mathrm{V}$ cell for 30 s. What charge passes through it?",
+      "back": "$Q=45\\,\\mathrm{C}$. First find $I=\\frac{V}{R}=1.5\\,\\mathrm{A}$, then use $Q=It=1.5\\times30$.",
+      "hint": "Find the current before working out the charge.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ow8n0z",
+      "kind": "mistake",
+      "front": "Why is $V=IR$ not the same thing as Ohm’s law for every component?",
+      "back": "$V=IR$ is a rearrangement of the resistance definition and works for every component. **Ohm’s law** is the special case where $R$ stays constant, such as a metal at fixed temperature.",
+      "hint": "Consider what the resistance definition tells you about any component.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1a6ozpg",
+      "kind": "term",
+      "front": "What does Ohm’s law state about current and potential difference?",
+      "back": "For a conductor under constant physical conditions, the **current** through it is proportional to the potential difference across it.",
+      "hint": "Think about what must stay fixed in the conductor.",
+      "sectionId": "s5"
+    }
+  ]
+}

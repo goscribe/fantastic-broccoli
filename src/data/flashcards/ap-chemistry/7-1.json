@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "7-1",
+  "topicCode": "7.1",
+  "topicName": "Introduction to equilibrium",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:56.429Z",
+  "cards": [
+    {
+      "id": "0a5xz1j",
+      "kind": "term",
+      "front": "What is dynamic equilibrium in a reversible reaction?",
+      "back": "**Dynamic equilibrium** is the state in which the forward and reverse reactions have equal rates, so the mixture shows no net change. Both reactions keep running.",
+      "hint": "Think about what is equal, and which two reactions are involved.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hfiunr",
+      "kind": "concept",
+      "front": "Why is equilibrium described as dynamic rather than static?",
+      "back": "Because **both reactions continue** at equilibrium. Their rates are equal, so the ongoing changes cancel out and produce no overall change in composition.",
+      "hint": "Ask whether any reaction stops at equilibrium.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15oastl",
+      "kind": "concept",
+      "front": "What happens to reactant and product concentrations at equilibrium?",
+      "back": "They stay **constant over time**, because each substance is formed and used at balancing rates. The concentrations do not have to be equal, and constant does not mean zero.",
+      "hint": "Constant is not the same as equal or zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ylpqxl",
+      "kind": "term",
+      "front": "What is a reversible reaction?",
+      "back": "A **reversible reaction** can convert reactants into products and products back into reactants. A double arrow in an equation shows that both directions are possible.",
+      "hint": "Look for the two directions in the definition.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08l2re0",
+      "kind": "term",
+      "front": "What is a closed system?",
+      "back": "A **closed system** is one where substances cannot enter or leave. This helps keep the conditions needed for the mixture to remain at equilibrium.",
+      "hint": "Think about what is blocked from moving in or out.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01abha0",
+      "kind": "process",
+      "front": "How does a mixture of reactants move toward equilibrium?",
+      "back": "First, reactants form products through the **forward reaction**. Then products begin taking part in the reverse reaction, and equilibrium is reached once the forward and reverse rates are equal.",
+      "hint": "Start with only reactants present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05feb32",
+      "kind": "mistake",
+      "front": "A student says that equal reaction rates mean equal reactant and product concentrations. Is this correct?",
+      "back": "**No.** Rates describe how quickly substances change, while concentrations describe how much is present. Equal rates mean equal amounts change in opposite directions, and the mixture may contain much more of one substance.",
+      "hint": "Rates and concentrations measure different things.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yy3a13",
+      "kind": "mistake",
+      "front": "A student says that constant concentrations mean the reactions have stopped. Why is this wrong?",
+      "back": "Constant concentrations show **no net change**, not no reaction. Both reactions continue at equilibrium, and particles keep reacting while the overall composition stays the same.",
+      "hint": "Compare what stays the same with what keeps happening.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15edr3z",
+      "kind": "term",
+      "front": "What is net change?",
+      "back": "**Net change** is the overall change that remains after opposing changes are accounted for. At equilibrium, the net change in composition is zero.",
+      "hint": "Think about changes that cancel each other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vr4tx6",
+      "kind": "term",
+      "front": "What is a static state?",
+      "back": "A **static state** is one with no ongoing change, meaning no reaction occurs. Equilibrium is not a static state, because its reactions continue.",
+      "hint": "Contrast it with dynamic equilibrium.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ayivl2",
+      "kind": "concept",
+      "front": "What does the double arrow in $\\mathrm{A}\\rightleftharpoons\\mathrm{B}$ show?",
+      "back": "It shows that **both directions are possible**: A can form B, and B can form A. The arrow describes chemical changes, not substances moving between containers.",
+      "hint": "Think about the two arrowheads.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yhwb5t",
+      "kind": "term",
+      "front": "What is an equilibrium mixture?",
+      "back": "An **equilibrium mixture** contains the substances in a reversible reaction while its forward and reverse rates are equal. It usually contains both reactants and products.",
+      "hint": "Focus on the condition that rates are equal.",
+      "sectionId": "s4"
+    }
+  ]
+}

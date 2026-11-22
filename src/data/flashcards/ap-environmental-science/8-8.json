@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-8",
+  "topicCode": "8.8",
+  "topicName": "Bioaccumulation and biomagnification",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:44.222Z",
+  "cards": [
+    {
+      "id": "0ybx0fx",
+      "kind": "concept",
+      "front": "What is biomagnification?",
+      "back": "**Biomagnification** is the rise in concentration of a persistent, fat-soluble toxin at each higher trophic level. Top predators hold the most because they eat many prey, each carrying stored toxin.",
+      "hint": "Think about what happens to the toxin as it moves up a food chain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03ic01d",
+      "kind": "term",
+      "front": "What is bioaccumulation?",
+      "back": "**Bioaccumulation** is the buildup of a substance inside one organism over its lifetime, when intake is faster than breakdown and excretion. Older animals usually carry more.",
+      "hint": "Think about one animal over months and years.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bwad91",
+      "kind": "concept",
+      "front": "Which two traits make a toxin likely to biomagnify?",
+      "back": "It must be **persistent**, meaning slow to break down, and **fat-soluble**, meaning it dissolves in fat so the body stores it instead of excreting it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1decx8q",
+      "kind": "mistake",
+      "front": "What is the common mistake when using the term bioaccumulation?",
+      "back": "Students think it means a rise in concentration along a food chain. Bioaccumulation happens inside one organism over its lifetime; the rise along a food chain is biomagnification.",
+      "hint": "Compare where the buildup happens: one body or many levels.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0q4balg",
+      "kind": "concept",
+      "front": "How does energy loss between trophic levels help a toxin become more concentrated?",
+      "back": "Only about **10 percent** of energy passes to the next level, so predators must eat many prey. The toxin is not burned for energy, so the predator keeps most of it.",
+      "hint": "Compare what happens to energy with what happens to the toxin.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pf0ho3",
+      "kind": "formula",
+      "front": "Which formula gives the fold increase in toxin concentration between two trophic levels?",
+      "back": "Fold increase = $\\frac{\\text{concentration at higher level}}{\\text{concentration at lower level}}$. Both values are in $\\text{ppm}$, so the unit cancels.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b9rp1y",
+      "kind": "example",
+      "front": "In a lake, a toxin measures $0.04\\,\\text{ppm}$ in plankton and $20\\,\\text{ppm}$ in a heron. What is the fold increase from plankton to heron?",
+      "back": "**500 times**, because $\\frac{20}{0.04}=500$. The heron's concentration is 500 times that in plankton.",
+      "hint": "Divide the higher value by the lower value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v8bvid",
+      "kind": "mistake",
+      "front": "Where does a top predator's extra toxin come from?",
+      "back": "It is passed on from its prey and concentrated, not created at higher levels. Students who think toxin is made at higher levels misunderstand biomagnification.",
+      "hint": "Think about what the predator eats.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ee12xm",
+      "kind": "process",
+      "front": "What are the steps by which a persistent toxin biomagnifies up a food chain?",
+      "back": "1) The toxin enters organisms at the base. 2) Each predator eats many prey and keeps their stored toxin. 3) Concentration rises at each trophic level, so top predators carry the most.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yqpj8h",
+      "kind": "concept",
+      "front": "Why are top predators most at risk from biomagnified toxins?",
+      "back": "They have the highest concentrations, so they face the greatest harm, such as reduced breeding success, weakened immune systems, and damage to organs and the nervous system.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0y5a5ga",
+      "kind": "example",
+      "front": "What effect did DDT have on birds of prey?",
+      "back": "DDT caused **thin eggshells** that cracked, so fewer chicks hatched and populations declined.",
+      "hint": "Think about what happens to eggs before chicks can hatch.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12sn06m",
+      "kind": "concept",
+      "front": "Why do top predator populations recover slowly after a decline?",
+      "back": "They are often few in number and reproduce slowly, so losing them can also disrupt the whole food web.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ktqqlo",
+      "kind": "term",
+      "front": "What is a trophic level?",
+      "back": "A **trophic level** is an organism's position in a food chain, based on what it eats and what eats it.",
+      "hint": "Start at the base of the chain and count the feeding steps.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d7w4xe",
+      "kind": "concept",
+      "front": "Why do health advisories limit how much large predatory fish people eat?",
+      "back": "**Mercury** builds up in large predatory fish through biomagnification, so people who eat a lot of them can be harmed.",
+      "sectionId": "s5"
+    }
+  ]
+}

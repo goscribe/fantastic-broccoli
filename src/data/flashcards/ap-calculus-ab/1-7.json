@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-7",
+  "topicCode": "1.7",
+  "topicName": "Choosing a limit procedure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:32.403Z",
+  "cards": [
+    {
+      "id": "0nudr2r",
+      "kind": "concept",
+      "front": "What should decide your first method for finding a limit?",
+      "back": "The **available information** decides it. A graph or table usually gives an estimate, while a formula can give an exact answer when substitution or algebra works.",
+      "hint": "Think about what evidence you are given.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yvhcvr",
+      "kind": "process",
+      "front": "When a limit is given as a formula, what do you try first?",
+      "back": "Try **direct substitution**. If it gives a defined value, that value is the limit for a function continuous at that input.",
+      "hint": "Start with the simplest check.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1f4n820",
+      "kind": "mistake",
+      "front": "If substituting gives $\\frac{0}{0}$, is the limit 0?",
+      "back": "No. $\\frac{0}{0}$ is an **indeterminate form**. It means substitution cannot determine the limit, so you must switch to another method.",
+      "hint": "What does the result tell you about the method?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07vrxb5",
+      "kind": "process",
+      "front": "What steps do you follow after substitution gives $\\frac{0}{0}$ for a rational expression?",
+      "back": "**Factor** the numerator and denominator, cancel the common factor for inputs not equal to the target, then substitute into the simplified expression.",
+      "hint": "Look for a common factor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sk7pc6",
+      "kind": "example",
+      "front": "Find $\\lim_{x\\to 2}\\frac{x^2-4}{x-2}$.",
+      "back": "The limit is **4**. Factor $x^2-4=(x-2)(x+2)$, cancel to get $x+2$ for $x\\ne 2$, then substitute to get $2+2=4$.",
+      "hint": "Substitution first gives $\\frac{0}{0}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1b434i1",
+      "kind": "term",
+      "front": "What is a left-hand limit?",
+      "back": "The **left-hand limit** is the value a function approaches as inputs come from below the target.",
+      "hint": "Think of inputs approaching from the smaller side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ietup2",
+      "kind": "term",
+      "front": "What is a right-hand limit?",
+      "back": "The **right-hand limit** is the value a function approaches as inputs come from above the target.",
+      "hint": "Think of inputs approaching from the larger side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11lnajb",
+      "kind": "concept",
+      "front": "When does the two-sided limit fail to exist, based on one-sided limits?",
+      "back": "It fails when the **left-hand** and **right-hand** limits disagree. The two-sided limit exists only if both sides approach the same value.",
+      "hint": "Compare the two sides.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qow8pl",
+      "kind": "mistake",
+      "front": "If a table uses only inputs below the target and values settle down, is the limit confirmed?",
+      "back": "No. The table shows only **left-side** behavior. Check the right side too, for example with a graph or inputs above the target.",
+      "hint": "Which side is missing?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1o89s15",
+      "kind": "concept",
+      "front": "Can a graph or table prove an exact limit?",
+      "back": "Usually not. They **support an estimate**. Algebra can establish an exact finite limit when its steps are valid near the input.",
+      "hint": "Compare estimates with exact results.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qhjzqf",
+      "kind": "term",
+      "front": "What is a numerical method for limits?",
+      "back": "A **numerical method** uses function values at inputs approaching the target to estimate the limit. Values from both sides give stronger evidence.",
+      "hint": "Think about tables of nearby inputs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08z6a72",
+      "kind": "term",
+      "front": "What is a method justification?",
+      "back": "A **method justification** explains why the available information makes a chosen approach useful for a particular limit.",
+      "hint": "Explain the fit between method and limit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pv5pkv",
+      "kind": "mistake",
+      "front": "Is saying that algebra is easier a good reason for choosing it?",
+      "back": "No. Name the **useful feature** of the particular limit, such as a factorable numerator, instead of a general claim about ease.",
+      "hint": "Be specific about the limit.",
+      "sectionId": "s4"
+    }
+  ]
+}

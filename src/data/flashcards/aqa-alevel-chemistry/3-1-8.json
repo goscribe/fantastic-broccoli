@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-1-8",
+  "topicCode": "3.1.8",
+  "topicName": "Thermodynamics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:29.506Z",
+  "cards": [
+    {
+      "id": "12lh9q5",
+      "kind": "term",
+      "front": "What is lattice enthalpy?",
+      "back": "**Lattice enthalpy** is the enthalpy change when one mole of an ionic solid forms from its gaseous ions. It is exothermic, so the value is negative.",
+      "hint": "Think about which state the ions start in.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ujt898",
+      "kind": "process",
+      "front": "What are the steps of a Born–Haber cycle, and how does Hess’s law link them to the enthalpy of formation?",
+      "back": "Atomise the metal and non-metal, ionise the metal, add electrons to the non-metal, then form the lattice. The sum of these steps equals the enthalpy of formation, because both routes start from the elements and end at the solid.",
+      "hint": "Compare the direct route from the elements with the stepwise route.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tt6frv",
+      "kind": "formula",
+      "front": "Which equation links free energy change, $\\Delta G$, to enthalpy change, entropy change and temperature?",
+      "back": "$\\Delta G=\\Delta H-T\\Delta S$. Here $T$ is the temperature in kelvin. A reaction is feasible when $\\Delta G$ is zero or negative.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0eng1vd",
+      "kind": "formula",
+      "front": "Which equation gives the enthalpy of solution from lattice enthalpy and the two hydration enthalpies?",
+      "back": "$\\Delta H_\\mathrm{solution}=-\\Delta H_\\mathrm{latt}+\\Delta H_\\mathrm{hyd}(\\mathrm{cation})+\\Delta H_\\mathrm{hyd}(\\mathrm{anion})$. The lattice enthalpy sign is reversed because dissolving starts by breaking the lattice apart.",
+      "hint": "Consider what happens to the lattice first when a solid dissolves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vw4nqc",
+      "kind": "example",
+      "front": "For MX with lattice enthalpy $-800$ and hydration enthalpies $-400$ and $-350$ kJ mol$^{-1}$, what is the enthalpy of solution?",
+      "back": "$+50\\,\\mathrm{kJ\\,mol^{-1}}$. Substituting gives $-(-800)+(-400)+(-350)=+50$, so dissolving is endothermic overall.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cbqt70",
+      "kind": "example",
+      "front": "Given $\\Delta H_\\mathrm{f}(\\mathrm{NaCl})=-411\\,\\mathrm{kJ\\,mol^{-1}}$, what is the lattice enthalpy of sodium chloride using the table values?",
+      "back": "$-787\\,\\mathrm{kJ\\,mol^{-1}}$. The steps sum to $+376$, so $\\Delta H_\\mathrm{latt}=-411-376=-787$.",
+      "hint": "Add the atomisation, ionisation and electron affinity steps first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p4z0wz",
+      "kind": "term",
+      "front": "What is the enthalpy of hydration?",
+      "back": "The **enthalpy of hydration** is the enthalpy change when one mole of gaseous ions dissolves in water to form aqueous ions. It is exothermic because water molecules attract the ions strongly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wlhnzl",
+      "kind": "term",
+      "front": "What is entropy?",
+      "back": "**Entropy** measures how widely energy can be distributed among possible arrangements of a system. It is often described as the disorder of a system.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0b897t2",
+      "kind": "concept",
+      "front": "Why can an endothermic process such as ice melting at room temperature still happen?",
+      "back": "The entropy of the system increases, which can outweigh the heat absorbed. Free energy change, $\\Delta G$, combines enthalpy and entropy to decide whether the process is feasible.",
+      "hint": "Think about how spread out the energy is in liquid water compared with ice.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "009zvuf",
+      "kind": "example",
+      "front": "For a reaction with $\\Delta H=+178\\,\\mathrm{kJ\\,mol^{-1}}$ and $\\Delta S=+161\\,\\mathrm{J\\,K^{-1}\\,mol^{-1}}$, what is $\\Delta G$ at 298 K?",
+      "back": "$+130\\,\\mathrm{kJ\\,mol^{-1}}$. The reaction is not feasible at 298 K. It becomes feasible above about $1.11\\times10^{3}\\,\\mathrm{K}$.",
+      "hint": "Convert the entropy change to kJ before using $\\Delta G=\\Delta H-T\\Delta S$.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0hm4y5m",
+      "kind": "mistake",
+      "front": "A student uses $\\Delta S$ in J K−1 mol−1 directly with $\\Delta H$ in kJ mol−1 in $\\Delta G=\\Delta H-T\\Delta S$. What is wrong?",
+      "back": "The units do not match. Convert $\\Delta S$ to kJ K−1 mol−1 first, or the $T\\Delta S$ term is 1000 times too large.",
+      "hint": "Check the units of each quantity before substituting.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "05w3tcq",
+      "kind": "mistake",
+      "front": "A student works out the enthalpy of solution but keeps the lattice enthalpy sign unchanged. Why is this wrong?",
+      "back": "The lattice enthalpy must be reversed, giving $-\\Delta H_\\mathrm{latt}$. Dissolving begins by breaking the lattice apart, which needs energy.",
+      "hint": "Consider the direction of the first step in dissolving.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nvo1cw",
+      "kind": "concept",
+      "front": "Why can a Born–Haber lattice enthalpy be more exothermic than the value calculated from a purely ionic model?",
+      "back": "The bonding has some **covalent character**. A small, highly charged cation distorts the electron cloud of a large anion, adding extra attraction.",
+      "hint": "The calculated value assumes perfectly spherical ions.",
+      "sectionId": "s4"
+    }
+  ]
+}

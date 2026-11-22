@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-2-1",
+  "topicCode": "6.2.1",
+  "topicName": "Current, potential difference and resistance",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:18.484Z",
+  "cards": [
+    {
+      "id": "1c8dkun",
+      "kind": "term",
+      "front": "What does electric current measure?",
+      "back": "**Electric current** is the rate at which electric charge flows past a point. Its unit is the ampere (A).",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0umwhzr",
+      "kind": "concept",
+      "front": "What job does the potential difference from a cell do in a circuit?",
+      "back": "It gives charge a **driving push**, so charge can flow round a complete circuit. Potential difference is the energy transferred per unit of charge.",
+      "hint": "Think about what the charges need in order to move round.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "043016w",
+      "kind": "formula",
+      "front": "Which equation links potential difference, current and resistance?",
+      "back": "$V=IR$, where $V$ is potential difference in volts (V), $I$ is current in amperes (A) and $R$ is resistance in ohms ($\\Omega$).",
+      "sectionId": "s4"
+    },
+    {
+      "id": "007jzv1",
+      "kind": "concept",
+      "front": "What happens to the current when resistance increases but potential difference stays the same?",
+      "back": "The **current decreases**, because greater resistance opposes the flow of charge more strongly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18nv0qy",
+      "kind": "concept",
+      "front": "In which direction does conventional current flow in a circuit?",
+      "back": "**Conventional current** flows from the positive terminal to the negative terminal. Electrons actually move the opposite way, but circuit calculations are unchanged.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dqc573",
+      "kind": "mistake",
+      "front": "Why is it wrong to think current is the speed of individual electrons?",
+      "back": "Current measures how much charge passes a point each second, not how fast each electron moves.",
+      "hint": "Compare what current counts with what speed measures.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cvxcmx",
+      "kind": "mistake",
+      "front": "What is wrong with the idea that resistance uses up current?",
+      "back": "Resistance does **not** use up current. Greater resistance only reduces the current that a given potential difference produces.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zezqtu",
+      "kind": "term",
+      "front": "How is resistance defined?",
+      "back": "**Resistance** describes how strongly a component opposes the current through it. Its unit is the ohm ($\\Omega$).",
+      "hint": "Think about how a component responds to current passing through it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04nkdbs",
+      "kind": "concept",
+      "front": "Why does the resistance of a metal wire usually increase when it gets hotter?",
+      "back": "Moving electrons **collide with metal ions** more often, which makes it harder for charge to flow.",
+      "hint": "Think about what moving electrons meet inside the metal.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1aeaoae",
+      "kind": "example",
+      "front": "A 4 $\\Omega$ component has 12 V across it. What current flows through it?",
+      "back": "$I=\\frac{V}{R}=\\frac{12}{4}=3\\,\\text{A}$, so the current is **3 A**.",
+      "hint": "Start by rearranging the equation to find current.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "138w249",
+      "kind": "example",
+      "front": "What is the resistance of a component with 6 V across it and a current of 0.5 A?",
+      "back": "$R=\\frac{V}{I}=\\frac{6}{0.5}=12\\,\\Omega$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "198kh1p",
+      "kind": "example",
+      "front": "What potential difference is across a 5 $\\Omega$ component carrying a current of 2 A?",
+      "back": "$V=IR=2\\times5=10\\,\\text{V}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hs7tsd",
+      "kind": "mistake",
+      "front": "What goes wrong if you put a current in milliamps straight into $V=IR$?",
+      "back": "The answer will be wrong. Convert the current to **amperes** first, so every value is in volts, amperes and ohms.",
+      "hint": "Check the unit each value is given in before substituting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xvfx6s",
+      "kind": "process",
+      "front": "How should an ammeter and a voltmeter be connected in a circuit?",
+      "back": "An **ammeter** is connected in the path of the current. A **voltmeter** is connected across the component being measured."
+    }
+  ]
+}

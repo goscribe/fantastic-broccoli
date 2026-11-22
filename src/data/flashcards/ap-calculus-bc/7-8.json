@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "7-8",
+  "topicCode": "7.8",
+  "topicName": "Exponential models",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:47.244Z",
+  "cards": [
+    {
+      "id": "163pano",
+      "kind": "concept",
+      "front": "What makes change exponential rather than linear?",
+      "back": "The rate is **proportional** to the current amount, so $\\frac{dy}{dt}=ky$ with constant $k$. The bigger the amount, the faster it changes.",
+      "hint": "Compare the rate of change with the amount present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gskzxk",
+      "kind": "formula",
+      "front": "What is the solution of $\\frac{dy}{dt}=ky$ with $y(0)=y_0$?",
+      "back": "$y(t)=y_0e^{kt}$. The **initial value** $y_0$ is the starting amount, and $k$ is the rate constant measured in inverse time.",
+      "hint": "Separate the variables, then integrate both sides.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kgwq12",
+      "kind": "concept",
+      "front": "What do the sign and size of k tell you in $y=y_0e^{kt}$?",
+      "back": "The **sign** of $k$ gives the direction: positive means growth, negative means decay. The **size** of $k$ gives the speed: a larger magnitude means faster change per unit of current amount.",
+      "hint": "Think about what happens to y as t increases.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17q3q9g",
+      "kind": "mistake",
+      "front": "Why is adding 6 units each year not exponential change?",
+      "back": "The amount changes by a **fixed number** each year, so the change is linear. Exponential change needs a rate proportional to the current amount.",
+      "hint": "Ask whether the change depends on the amount present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zhyvau",
+      "kind": "term",
+      "front": "What is the initial value of an exponential model?",
+      "back": "The **initial value** is $y_0=y(0)$, the starting amount. It sets the constant multiplying $e^{kt}$, so $A=y_0$.",
+      "hint": "Set t equal to zero.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dpfuua",
+      "kind": "concept",
+      "front": "Does $y(t)=y_0e^{kt}$ cover the case where the amount is zero?",
+      "back": "Yes. With $y_0=0$ it gives the **zero solution**. In applications involving an amount, $y_0$ is usually positive.",
+      "hint": "Substitute $y_0=0$ into the formula.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fpuy58",
+      "kind": "process",
+      "front": "How do you find the rate constant k from two measured amounts?",
+      "back": "**Step 1**: write $y(t)=y_0e^{kt}$. **Step 2**: substitute the later amount and divide by the earlier one. **Step 3**: take the natural logarithm and divide by the elapsed time.",
+      "hint": "Start by writing the general model.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1w5o2tg",
+      "kind": "example",
+      "front": "A sample starts at 80 grams and has 40 grams after 5 days. What is its rate constant?",
+      "back": "$k=\\frac{\\ln(1/2)}{5}\\approx-0.1386$ per day. The **negative** sign confirms decay, so the model is $y(t)=80e^{(\\ln(1/2)/5)t}$.",
+      "hint": "Substitute $40=80e^{5k}$ and solve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03kag3j",
+      "kind": "concept",
+      "front": "After one unit of time, does an exponential amount increase by k?",
+      "back": "No. The amount is **multiplied** by $e^k$ after one unit of time, not increased by $k$ units.",
+      "hint": "Compare the amount at t = 1 with the amount at t = 0.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10ebp20",
+      "kind": "formula",
+      "front": "What is the half-life of an exponential decay model with rate constant k?",
+      "back": "$T=\\frac{\\ln(1/2)}{k}$ is the **half-life**. Both numerator and denominator are negative, so $T$ is positive.",
+      "hint": "Set $e^{kT}$ equal to one half.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08z74d8",
+      "kind": "formula",
+      "front": "What is the doubling time for exponential growth with rate constant k?",
+      "back": "$T=\\frac{\\ln 2}{k}$ is the **doubling time**. This interval stays the same as the amount changes.",
+      "hint": "Set $e^{kT}$ equal to 2.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1a49665",
+      "kind": "example",
+      "front": "For $y(t)=10e^{0.1t}$ with t in hours, what is the doubling time?",
+      "back": "$T=\\frac{\\ln 2}{0.1}\\approx6.93$ hours. The doubling time is fixed for this model.",
+      "hint": "Set $e^{0.1T}$ equal to 2.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0676l7b",
+      "kind": "concept",
+      "front": "Can a positive exponential decay model reach zero at a finite time?",
+      "back": "No. It **approaches zero** but never reaches it at a finite time. Real situations may stop following the model when resources become limited.",
+      "hint": "Think about the curve as t keeps growing.",
+      "sectionId": "s5"
+    }
+  ]
+}

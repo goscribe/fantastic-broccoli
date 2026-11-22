@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-4-1",
+  "topicCode": "4.4.1",
+  "topicName": "Photosynthesis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:52.514Z",
+  "cards": [
+    {
+      "id": "0n2nim2",
+      "kind": "term",
+      "front": "What is photosynthesis?",
+      "back": "**Photosynthesis** is the process in which plants use light energy to make glucose, mainly in leaf cells.",
+      "hint": "Think about what a plant uses as its energy source.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lqv0sg",
+      "kind": "concept",
+      "front": "Which substances does a plant take in and release during photosynthesis?",
+      "back": "A plant takes in **carbon dioxide** and water, then releases **oxygen** while making **glucose**, using light energy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xfahpk",
+      "kind": "concept",
+      "front": "Why does increasing light or carbon dioxide eventually stop raising the rate of photosynthesis?",
+      "back": "Another factor becomes **limiting**, so the rate levels off (plateaus) because more of the first factor no longer helps.",
+      "hint": "Think about what the rate needs to keep rising.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yw6psn",
+      "kind": "concept",
+      "front": "Where in a plant cell does photosynthesis take place?",
+      "back": "In **chloroplasts**, which contain **chlorophyll** that absorbs light energy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mp0q06",
+      "kind": "mistake",
+      "front": "What is wrong with treating light as a substance in the photosynthesis word equation?",
+      "back": "Light is not a substance made or used up. It supplies the **energy** needed for the reaction, so it is not written as a reactant or product.",
+      "hint": "Compare light with carbon dioxide and water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1n9oscd",
+      "kind": "process",
+      "front": "How does rising temperature change the rate of photosynthesis?",
+      "back": "The rate rises as enzyme-controlled reactions speed up, until the **optimum** is reached. Above it, enzymes lose their shape and the rate falls.",
+      "hint": "Think about what enzymes do as temperature increases.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vc92yx",
+      "kind": "term",
+      "front": "What is respiration in a plant?",
+      "back": "**Respiration** is a process in cells that releases energy from glucose, which the plant uses for its cells.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zf7hq7",
+      "kind": "term",
+      "front": "Why do plants convert glucose into starch?",
+      "back": "**Starch** is an insoluble form of glucose used for storage, so it does not dissolve in cell fluids.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kobktk",
+      "kind": "term",
+      "front": "What role does cellulose play in a plant?",
+      "back": "**Cellulose** is made from glucose and forms cell walls, helping to support the plant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wwdtza",
+      "kind": "concept",
+      "front": "Which building blocks for proteins does a plant make from glucose, using mineral ions from the soil?",
+      "back": "**Amino acids**, which join together to form proteins. The plant needs mineral ions from the soil to make them.",
+      "hint": "Think about the smaller units that proteins are built from.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09lr30p",
+      "kind": "example",
+      "front": "An aquatic plant makes 12 bubbles in 2 minutes, then 18 bubbles in 2 minutes at higher light. How much does the rate increase?",
+      "back": "The rates are $12 \\div 2 = 6$ and $18 \\div 2 = 9$ bubbles per minute, so the rate increases by **3 bubbles per minute**.",
+      "hint": "Work out each rate first, then find the difference.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qhepp0",
+      "kind": "mistake",
+      "front": "Why is counting oxygen bubbles not an exact measure of photosynthesis rate?",
+      "back": "Bubbles can differ in **size**, so a count does not measure the exact volume of oxygen. Collecting and measuring the gas volume is more reliable.",
+      "hint": "Think about what a bubble count does and does not tell you.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kjhrox",
+      "kind": "concept",
+      "front": "Why must other conditions be kept the same when testing the effect of light intensity?",
+      "back": "So that any change in the bubble count or rate can be linked to **light intensity** alone, not to temperature, carbon dioxide or plant size.",
+      "hint": "Think about what makes a fair comparison.",
+      "sectionId": "s4"
+    }
+  ]
+}

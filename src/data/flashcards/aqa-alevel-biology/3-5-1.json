@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-5-1",
+  "topicCode": "3.5.1",
+  "topicName": "Photosynthesis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:45.545Z",
+  "cards": [
+    {
+      "id": "19gzl26",
+      "kind": "concept",
+      "front": "How do the two stages of photosynthesis work together to store light energy in organic molecules?",
+      "back": "The **light-dependent reaction** on thylakoid membranes makes ATP and reduced NADP and releases oxygen. The **light-independent reaction** in the stroma uses them to turn carbon dioxide into sugars.",
+      "hint": "Think about what the first stage hands over to the second.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05r6804",
+      "kind": "concept",
+      "front": "How do excited electrons in the thylakoid membrane drive ATP production?",
+      "back": "Excited electrons pass along carriers, and their energy moves **hydrogen ions** into the thylakoid space. The ions flow back out through **ATP synthase**, which makes ATP.",
+      "hint": "Think about what builds up on one side of the membrane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0d6fk2c",
+      "kind": "concept",
+      "front": "Why does a graph of photosynthesis rate against light intensity level off?",
+      "back": "Another **limiting factor**, such as carbon dioxide or temperature, is now in shortest supply, so more light no longer raises the rate.",
+      "hint": "Think about what else the plant needs to make sugar.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zwjqf8",
+      "kind": "term",
+      "front": "What is the stroma in a chloroplast?",
+      "back": "The **stroma** is the fluid-filled region surrounding the thylakoids. It contains enzymes for carbon fixation and the later reactions that form organic molecules.",
+      "hint": "Think about where the thylakoid stacks sit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bh6q0y",
+      "kind": "concept",
+      "front": "Why does separating the thylakoid space from the stroma help ATP synthesis?",
+      "back": "The membrane lets **hydrogen ions** build up inside the thylakoid. Their movement back into the stroma drives ATP synthesis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00e0wuz",
+      "kind": "process",
+      "front": "What are the main steps of the Calvin cycle, in order?",
+      "back": "Carbon dioxide combines with **RuBP** via RuBisCO, forming two **GP**. ATP and reduced NADP reduce GP to **TP**. Some TP leaves to make sugars, and most TP regenerates RuBP using ATP.",
+      "hint": "Start with the molecule that carbon dioxide joins.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l5rdps",
+      "kind": "mistake",
+      "front": "Why is it wrong to say GP turns directly into glucose in the Calvin cycle?",
+      "back": "GP is first reduced to **TP** using ATP and reduced NADP. TP can then contribute to sugar production.",
+      "hint": "What must happen to GP before sugars form?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ctyths",
+      "kind": "term",
+      "front": "What is photolysis?",
+      "back": "**Photolysis** is the splitting of water using light. It replaces electrons lost from chlorophyll, provides hydrogen ions, and releases oxygen as a by-product.",
+      "hint": "Think about what the light-dependent reaction takes in and gives out.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1a74n76",
+      "kind": "concept",
+      "front": "Which pathway produces reduced NADP and releases oxygen, cyclic or non-cyclic photophosphorylation?",
+      "back": "**Non-cyclic** photophosphorylation. Cyclic photophosphorylation only makes ATP, because excited electrons return to the same photosystem.",
+      "hint": "Consider which pathway involves water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1h2qhzw",
+      "kind": "formula",
+      "front": "How do you calculate the mean rate of oxygen production?",
+      "back": "$\\text{mean rate} = \\frac{\\text{oxygen volume}}{\\text{time}}$, with volume in $\\text{cm}^3$ and time in minutes, giving a rate in $\\text{cm}^3\\,\\text{min}^{-1}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1d81ifn",
+      "kind": "example",
+      "front": "A plant produces $18\\,\\text{cm}^3$ of oxygen in 6 minutes. What is its mean oxygen production rate?",
+      "back": "$18\\div6=3$, so the mean rate is $3\\,\\text{cm}^3$ per minute.",
+      "hint": "Divide the volume by the time.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1c9lf4l",
+      "kind": "concept",
+      "front": "How does a temperature above the optimum reduce the rate of photosynthesis?",
+      "back": "Enzymes in the Calvin cycle may lose their functional shape. Stomata may also close, reducing carbon dioxide uptake.",
+      "hint": "Think about what happens to enzymes when they get too hot.",
+      "sectionId": "s5"
+    }
+  ]
+}

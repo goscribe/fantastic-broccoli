@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-4-2",
+  "topicCode": "4.4.2",
+  "topicName": "Respiration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:38.077Z",
+  "cards": [
+    {
+      "id": "05cqs4k",
+      "kind": "term",
+      "front": "What is respiration?",
+      "back": "**Respiration** is a chemical process that releases energy from glucose. It happens continuously in living cells, including plant cells.",
+      "hint": "Think about where the energy in food comes from and where it is released.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05dergf",
+      "kind": "concept",
+      "front": "What are the reactants and waste products of aerobic respiration?",
+      "back": "Aerobic respiration uses **glucose and oxygen**, and gives off **carbon dioxide and water**. It releases more energy per glucose molecule than anaerobic respiration.",
+      "hint": "Start from the word equation: what goes in on the left and comes out on the right?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zqplyt",
+      "kind": "concept",
+      "front": "Why do muscles switch to anaerobic respiration during vigorous exercise?",
+      "back": "Muscles may need energy faster than the oxygen supply allows. They then use **anaerobic respiration** alongside aerobic respiration.",
+      "hint": "Think about what limits how fast aerobic respiration can run.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0d44r2q",
+      "kind": "concept",
+      "front": "Why do living cells need the energy released by respiration?",
+      "back": "Cells use the energy for processes that keep organisms alive, such as **muscle contraction**, **active transport** and building larger molecules from smaller ones.",
+      "hint": "Think of a muscle cell and a cell moving substances across its membrane.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rr2l4s",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that respiration creates energy?",
+      "back": "Respiration does not create energy. It **releases** chemical energy already stored in glucose so that cells can use it.",
+      "hint": "Consider where the energy comes from before it is released.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16qqtzk",
+      "kind": "mistake",
+      "front": "Why is breathing not the same as respiration?",
+      "back": "**Breathing** moves air into and out of the lungs. **Respiration** is the chemical process in cells that releases energy from glucose.",
+      "hint": "One happens in the lungs and one happens inside cells. Which is which?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18ilh8p",
+      "kind": "term",
+      "front": "What is lactic acid?",
+      "back": "**Lactic acid** is the product of anaerobic respiration in human muscle cells. It releases less energy from each glucose molecule than aerobic respiration.",
+      "hint": "Think about what glucose is broken down into in muscles, not in yeast.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "170kivd",
+      "kind": "term",
+      "front": "What is oxygen debt?",
+      "back": "**Oxygen debt** is the extra oxygen the body needs after exercise to deal with the lactic acid produced in muscles.",
+      "hint": "Think about what happens to the body after the exercise has stopped.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05p9f2r",
+      "kind": "concept",
+      "front": "What products does anaerobic respiration give in yeast?",
+      "back": "In yeast, anaerobic respiration produces **ethanol and carbon dioxide** rather than lactic acid.",
+      "hint": "Compare this with the muscle answer. Which organism is it?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07ggmva",
+      "kind": "term",
+      "front": "What does respiration rate describe?",
+      "back": "**Respiration rate** describes how quickly respiration occurs. It can be estimated from the **oxygen used or carbon dioxide produced per unit time**.",
+      "hint": "Think about how you would measure how fast something happens.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ibx5q9",
+      "kind": "example",
+      "front": "Seeds use 12 cm³ of oxygen in 6 minutes at 20 °C and 18 cm³ in 6 minutes at 30 °C. What is the difference in rate?",
+      "back": "The rate is $2\\,\\text{cm}^3$ per minute at 20 °C and $3\\,\\text{cm}^3$ per minute at 30 °C, so it is **$1\\,\\text{cm}^3$ per minute higher** at 30 °C.",
+      "hint": "Divide each volume by its time first, then subtract.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rk7slc",
+      "kind": "concept",
+      "front": "Which conditions must stay the same when comparing respiration rates fairly?",
+      "back": "The **measurement method**, the **time interval** and the **amount of living material** must all be the same.",
+      "hint": "Think about what else could change the result besides temperature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0h37j9z",
+      "kind": "mistake",
+      "front": "Why can oxygen-use rate not measure anaerobic respiration directly?",
+      "back": "Anaerobic respiration does not use oxygen, so a higher oxygen-use rate only shows **faster aerobic respiration**.",
+      "hint": "Compare what aerobic respiration needs with what anaerobic respiration needs.",
+      "sectionId": "s4"
+    }
+  ]
+}

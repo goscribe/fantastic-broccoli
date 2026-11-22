@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-5-3",
+  "topicCode": "4.5.3",
+  "topicName": "Hormonal coordination",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:45.177Z",
+  "cards": [
+    {
+      "id": "0qr5ztw",
+      "kind": "concept",
+      "front": "How does a hormone affect only certain cells in the body?",
+      "back": "Only cells with matching **receptors** respond to a given hormone; these cells form its **target tissue**.",
+      "hint": "Think about what the responding cells need in order to recognise the message.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kkwgkg",
+      "kind": "process",
+      "front": "What happens step by step when blood glucose rises after a meal?",
+      "back": "The **pancreas** detects the rise and releases **insulin**. Insulin increases glucose uptake by body cells and makes the liver and muscles store glucose as **glycogen**, so blood glucose falls.",
+      "hint": "Start with the organ that detects the change in blood glucose.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cf1s24",
+      "kind": "concept",
+      "front": "How do nerve signals differ from hormonal signals in speed and duration?",
+      "back": "Nerve impulses are usually **faster** and shorter-lived, travelling along nerve cells. Hormones travel in the blood, and their effects often last longer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1osjefc",
+      "kind": "term",
+      "front": "What is an endocrine gland?",
+      "back": "A gland that releases **hormones** directly into the blood.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wtrdo8",
+      "kind": "process",
+      "front": "In what order do FSH, oestrogen, LH and progesterone act during the menstrual cycle?",
+      "back": "**FSH** matures an egg and stimulates oestrogen release. Oestrogen rebuilds the uterus lining and triggers LH release. **LH** triggers ovulation. **Progesterone** then maintains the thickened lining.",
+      "hint": "Start with the hormone that acts on the ovary first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0uua92t",
+      "kind": "term",
+      "front": "What is ovulation?",
+      "back": "The **release of an egg** from an ovary, which happens around the middle of a typical menstrual cycle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rx4g28",
+      "kind": "concept",
+      "front": "What does glucagon do when blood glucose falls?",
+      "back": "It causes the liver to break down **glycogen** and release glucose into the blood, raising blood glucose again.",
+      "hint": "Compare its target organ and effect with insulin's.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l8toqa",
+      "kind": "mistake",
+      "front": "Why is it wrong to say insulin turns glucose directly into energy?",
+      "back": "Insulin does not release energy from glucose. It increases glucose uptake by cells and promotes its **storage as glycogen**.",
+      "hint": "Think about what insulin actually changes in the blood and in cells.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qajkt0",
+      "kind": "term",
+      "front": "What is the menstrual cycle?",
+      "back": "The **repeated sequence of changes** in the ovaries and uterus that prepares the body for possible pregnancy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w1f7fy",
+      "kind": "concept",
+      "front": "How does a combined contraceptive pill stop ovulation?",
+      "back": "It contains oestrogen and a form of progesterone, which **prevent the release of FSH and LH**, so no egg matures and ovulation does not occur.",
+      "hint": "Think about which hormones an egg needs in order to mature.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1c8d951",
+      "kind": "concept",
+      "front": "How do progestogen-only methods make pregnancy less likely?",
+      "back": "They **thicken cervical mucus**, making it harder for sperm to reach an egg. Some also prevent ovulation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xr3xwj",
+      "kind": "term",
+      "front": "What is hormonal contraception?",
+      "back": "Using **hormones** to reduce the chance of pregnancy. Hormones can be delivered by pills, patches, implants or injections.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0h4eop9",
+      "kind": "mistake",
+      "front": "Why should a student not rely on hormonal contraception to prevent sexually transmitted infections?",
+      "back": "Hormonal contraception does not protect against STIs. **Condoms** can provide protection against these infections.",
+      "hint": "Consider which method also guards against infections.",
+      "sectionId": "s5"
+    }
+  ]
+}

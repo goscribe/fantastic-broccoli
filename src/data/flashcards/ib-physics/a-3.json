@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "a-3",
+  "topicCode": "A.3",
+  "topicName": "Work, energy and power",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:29:55.755Z",
+  "cards": [
+    {
+      "id": "1t11gge",
+      "kind": "formula",
+      "front": "What equation gives the work done by a force at an angle θ to the displacement, and what is its unit?",
+      "back": "$W=Fs\\cos\\theta$, where F is the force and s is the displacement. Work is measured in **joules** (J), where 1 J = 1 N m.",
+      "hint": "Only the component of force along the displacement does work.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bixnlg",
+      "kind": "concept",
+      "front": "Why can you find a falling object's speed from its height change, without knowing how it fell?",
+      "back": "**Conservation of energy**: with negligible air resistance, the gravitational potential energy lost equals the kinetic energy gained, so mechanical energy stays constant.",
+      "hint": "Think about which energy stores change and which stay the same.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "117vpgc",
+      "kind": "formula",
+      "front": "What is the formula for kinetic energy, and what happens to it if the speed doubles?",
+      "back": "$E_k=\\frac{1}{2}mv^2$, where m is mass in kg and v is speed in m s⁻¹. Doubling the speed makes kinetic energy **four times** larger, because v is squared.",
+      "hint": "Look at how speed appears in the formula.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gk5tmx",
+      "kind": "term",
+      "front": "What is mechanical energy?",
+      "back": "**Mechanical energy** is the total of a system's kinetic and potential energy. It stays constant when no energy transfers to other stores.",
+      "hint": "Add up the two stores named in the definition.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vx3so0",
+      "kind": "formula",
+      "front": "How is the change in gravitational potential energy near Earth's surface calculated, and what does each symbol mean?",
+      "back": "$\\Delta E_p=mg\\Delta h$, where m is mass (kg), g is gravitational field strength and Δh is the change in height (m). The result is in joules.",
+      "hint": "Only a change in height matters here.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lgz990",
+      "kind": "concept",
+      "front": "Why must you choose a reference height before giving gravitational potential energy a value?",
+      "back": "The reference height sets the zero point. Only **changes** in potential energy matter in energy calculations, so you work with $\\Delta E_p$.",
+      "hint": "Ask what actually gets measured in energy transfers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eqv2eb",
+      "kind": "formula",
+      "front": "What is the elastic potential energy stored in a spring obeying Hooke's law, and what does each symbol mean?",
+      "back": "$E_e=\\frac{1}{2}kx^2$, where k is the spring constant and x is the extension of the spring.",
+      "hint": "The extension is squared, like speed in kinetic energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qmaqhj",
+      "kind": "formula",
+      "front": "What is average power, and what is its unit?",
+      "back": "$P=\\frac{W}{t}=\\frac{\\Delta E}{t}$, where t is the time taken in seconds. The unit is the **watt** (W), where 1 W = 1 J s⁻¹.",
+      "hint": "Power is a rate, so it involves time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08uq9w2",
+      "kind": "formula",
+      "front": "What is instantaneous power for a force acting along the direction of motion?",
+      "back": "$P=Fv$, where F is the force and v is the speed. If force and velocity differ in direction, use the component of force along the velocity.",
+      "hint": "Consider which two quantities combine to give power when the force acts along the motion.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dvros7",
+      "kind": "mistake",
+      "front": "A student works out work by multiplying force by distance, without checking direction. What is wrong?",
+      "back": "**Direction matters**: work needs the force component along the displacement, $W=Fs\\cos\\theta$. A perpendicular force does no work because $\\cos 90^\\circ=0$.",
+      "hint": "Check the angle between the force and the displacement.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gyy81e",
+      "kind": "mistake",
+      "front": "A student says a device that transfers more energy always has greater power. Why is this wrong?",
+      "back": "**Power** is energy divided by time. A device that transfers less energy but completes its transfer in less time can have greater power.",
+      "hint": "Power depends on how quickly energy moves.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06yri5i",
+      "kind": "process",
+      "front": "What are the steps for finding an object's speed after it falls a height, ignoring air resistance?",
+      "back": "1) Find the loss of gravitational potential energy, $mg\\Delta h$. 2) Set it equal to the gain in kinetic energy, $\\frac{1}{2}mv^2$. 3) Solve for $v$ and take the square root.",
+      "hint": "Start with an energy store and end with a speed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1yjk2ow",
+      "kind": "example",
+      "front": "A 2.0 kg object falls 5.0 m from rest. Ignore air resistance and use g = 9.8 m s⁻². What is its speed?",
+      "back": "**9.9 m s⁻¹**. The energy lost is $2.0\\times9.8\\times5.0=98$ J, so $\\frac{1}{2}(2.0)v^2=98$ and $v=\\sqrt{98}$.",
+      "hint": "Equate potential energy lost with kinetic energy gained.",
+      "sectionId": "s3"
+    }
+  ]
+}

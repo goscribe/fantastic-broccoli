@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-6",
+  "topicCode": "4.6",
+  "topicName": "Combined events and diagrams",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:51.259Z",
+  "cards": [
+    {
+      "id": "0cv7lhd",
+      "kind": "formula",
+      "front": "What is the addition rule for $P(A\\cup B)$, and what does each part mean?",
+      "back": "$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$. $A\\cup B$ means A or B or both. You subtract the **overlap** $P(A\\cap B)$ once, because it was counted in both $P(A)$ and $P(B)$.",
+      "hint": "Think about what gets counted twice when the events overlap.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11d0lle",
+      "kind": "process",
+      "front": "How do you find the probability of a two-stage outcome using a tree diagram?",
+      "back": "**Multiply** the branch probabilities along the path for that outcome. If several paths fit the event, **add** their products. Branches leaving any one point must sum to 1.",
+      "hint": "Count the steps in the path, then the paths that fit the event.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ncs1dk",
+      "kind": "formula",
+      "front": "What is the formula for conditional probability $P(A\\mid B)$, and why is it written that way?",
+      "back": "$P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}$. The **given** event B becomes the new sample space, so it goes in the denominator.",
+      "hint": "Which event is the condition, and what does it shrink the sample space to?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ktpxkb",
+      "kind": "term",
+      "front": "What is a Venn diagram?",
+      "back": "A **Venn diagram** shows events as overlapping circles inside a rectangle that represents the whole sample space.",
+      "hint": "Think about the rectangle and the circles.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bqewo9",
+      "kind": "term",
+      "front": "What is the difference between $F\\cap B$ and $F\\cup B$?",
+      "back": "$F\\cap B$ is the **intersection**, the overlap where both events occur. $F\\cup B$ is the **union**, covering both circles, so at least one event occurs.",
+      "hint": "One is the overlap, the other is everything covered.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0na5r73",
+      "kind": "example",
+      "front": "In a survey of 40 students, 22 play football, 15 play basketball and 8 play both. Find $P(F\\cup B)$ and the probability of neither sport.",
+      "back": "$P(F\\cup B)=\\frac{22}{40}+\\frac{15}{40}-\\frac{8}{40}=\\frac{29}{40}=0.725$. Neither sport is $1-0.725=0.275$.",
+      "hint": "Use the addition rule, then take the complement.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17dat8g",
+      "kind": "mistake",
+      "front": "A student finds $P(A\\cup B)$ for overlapping events by adding $P(A)$ and $P(B)$. What is wrong?",
+      "back": "The overlap is counted twice, which can push the answer above 1. **Subtract** $P(A\\cap B)$ once to correct it.",
+      "hint": "Check what happens to the overlap region.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0octilv",
+      "kind": "example",
+      "front": "Given $P(A\\cap B)=0.18$ and $P(B)=0.45$, find $P(A\\mid B)$.",
+      "back": "$P(A\\mid B)=\\frac{0.18}{0.45}=0.4$.",
+      "hint": "Divide the overlap by the probability of the given event.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1h32js7",
+      "kind": "concept",
+      "front": "When are events A and B independent?",
+      "back": "They are **independent** when $P(A\\mid B)=P(A)$, so knowing B changes nothing. Equivalently, $P(A\\cap B)=P(A)\\times P(B)$.",
+      "hint": "Compare the conditional probability with the ordinary one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jw2eeg",
+      "kind": "mistake",
+      "front": "Are $P(A\\mid B)$ and $P(B\\mid A)$ always equal?",
+      "back": "**No**, they are usually different. Check which event is given, because that event forms the denominator.",
+      "hint": "Look at which event sits after the vertical bar.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18igvoj",
+      "kind": "concept",
+      "front": "Why do the second-stage probabilities change when counters are drawn without replacement?",
+      "back": "After one counter is removed, the **sample space shrinks** and so may the number of that colour. With replacement, the probabilities stay the same.",
+      "hint": "What is left in the bag after the first draw?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qjjf2g",
+      "kind": "formula",
+      "front": "What is the multiplication rule for $P(A\\cap B)$?",
+      "back": "$P(A\\cap B)=P(A)\\times P(B\\mid A)$. Multiply the first probability by the second given the first. If A and B are independent, $P(B\\mid A)=P(B)$.",
+      "hint": "Read it along a tree diagram path, first stage then second.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1tybywb",
+      "kind": "example",
+      "front": "A bag has 3 red and 2 blue counters. Two are drawn without replacement. Find the probability that both counters are red.",
+      "back": "$\\frac{3}{5}\\times\\frac{2}{4}=\\frac{3}{10}=0.3$.",
+      "hint": "The second draw comes from only 4 counters.",
+      "sectionId": "s5"
+    }
+  ]
+}

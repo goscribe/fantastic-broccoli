@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "7-10",
+  "topicCode": "7.10",
+  "topicName": "Speciation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:52.564Z",
+  "cards": [
+    {
+      "id": "0c6xrqs",
+      "kind": "term",
+      "front": "What is speciation, and what must happen for it to be complete?",
+      "back": "Speciation is the formation of new species from an existing species. It happens when populations diverge and become **reproductively isolated**, so they can no longer exchange genes through successful reproduction.",
+      "hint": "Think about what stops genes moving between groups.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11atcew",
+      "kind": "mistake",
+      "front": "Two populations live in different places. Are they automatically different species?",
+      "back": "No. Living in different places does not make populations different species. The key distinction is **reproductive isolation**, meaning they cannot successfully reproduce with each other under natural conditions.",
+      "hint": "Separation is not the same as isolation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xisqpt",
+      "kind": "concept",
+      "front": "In allopatric speciation, why can geographic separation alone fail to create a lasting new species?",
+      "back": "Geographic separation starts the process, but **reproductive isolation** makes the split persist. If the barrier disappears and the populations can still not reproduce successfully together, they remain separate species.",
+      "hint": "What happens after the barrier is gone?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g5vef7",
+      "kind": "concept",
+      "front": "How do prezygotic and postzygotic barriers differ?",
+      "back": "**Prezygotic** barriers act before fertilization and prevent it, such as different breeding times or courtship signals. **Postzygotic** barriers act after fertilization, such as an embryo failing to develop or a sterile hybrid.",
+      "hint": "Compare when each barrier acts relative to fertilization.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p799su",
+      "kind": "process",
+      "front": "What are the steps of allopatric speciation, in order?",
+      "back": "1) A geographic barrier separates the population. 2) Gene flow stops or drops. 3) Differences build up through mutation, natural selection, and genetic drift. 4) Reproductive barriers develop. 5) The populations stay separate species even if the barrier disappears.",
+      "hint": "Start with the barrier and end with lasting isolation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tj2owx",
+      "kind": "concept",
+      "front": "How can sympatric speciation happen without any physical barrier?",
+      "back": "Reproductive isolation develops among organisms in the same area. For example, groups using different habitats meet less often, and if they mainly mate within their own groups, **gene flow** declines.",
+      "hint": "No river or mountain is needed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nd4n5d",
+      "kind": "process",
+      "front": "How can polyploidy lead to a new plant species in the same area?",
+      "back": "An error during cell division produces offspring with extra sets of chromosomes. These plants can reproduce with others of the same chromosome number but not successfully with the parent population, creating **reproductive isolation**.",
+      "hint": "Start with a mistake during cell division.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wntt67",
+      "kind": "term",
+      "front": "What is polyploidy?",
+      "back": "**Polyploidy** is the presence of more than two complete sets of chromosomes. It is especially important in plants and can drive sympatric speciation.",
+      "hint": "Count the chromosome sets.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jaw8rr",
+      "kind": "term",
+      "front": "What is gene flow?",
+      "back": "**Gene flow** is the transfer of alleles between populations through reproduction. Reduced gene flow lets genetic differences accumulate between populations.",
+      "hint": "Think about alleles moving between groups.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wp1fjt",
+      "kind": "term",
+      "front": "What is extinction?",
+      "back": "**Extinction** is the permanent loss of a species, which occurs when the last member of the species dies.",
+      "hint": "It is about the whole species, not one group.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02o5j4y",
+      "kind": "mistake",
+      "front": "A local population of a species disappears. Has the species gone extinct?",
+      "back": "Not necessarily. Extinction only happens when no members of the species remain. Members elsewhere may still survive, so you must check whether the species survives in other places.",
+      "hint": "Check for survivors elsewhere.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mu03pv",
+      "kind": "concept",
+      "front": "What kinds of environmental change can drive a species toward extinction?",
+      "back": "Loss of food or suitable habitat, and new competitors, predators, or diseases that reduce survival and reproduction. A species becomes extinct when its populations cannot survive and reproduce under the changed conditions, such as when they cannot adapt or move.",
+      "hint": "Think about food, habitat, and threats.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bj2h9c",
+      "kind": "concept",
+      "front": "Why do reproductive barriers often build up over time instead of appearing all at once?",
+      "back": "As populations diverge, several barriers can develop and reinforce their separation. Barriers need not appear together, so isolation can strengthen gradually.",
+      "hint": "Think about divergence over many generations.",
+      "sectionId": "s2"
+    }
+  ]
+}

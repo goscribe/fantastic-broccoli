@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-3",
+  "topicCode": "5.3",
+  "topicName": "Niche, distribution and abundance",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:09.101Z",
+  "cards": [
+    {
+      "id": "1ayd59u",
+      "kind": "term",
+      "front": "What is an ecological niche?",
+      "back": "The **ecological niche** of a species is the conditions, resources and interactions that describe how it lives in its environment, including its food, when it is active, and its predators and competitors.",
+      "hint": "Think about how a species uses its habitat, not just where it lives.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19c8f92",
+      "kind": "concept",
+      "front": "What happens when two species with very similar niches need the same resource in the same place?",
+      "back": "One species usually does better and the other declines or disappears from that area, which is **competitive exclusion**. It is less likely when niches differ, even slightly.",
+      "hint": "Consider how strongly they compete when their niches overlap.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hfgl8h",
+      "kind": "concept",
+      "front": "Why is a species found only in some parts of an area?",
+      "back": "A species lives only where its **niche requirements** are met: suitable abiotic conditions, enough food, low predator and disease pressure, and limited competition from other species.",
+      "hint": "Think about what a species needs in order to survive and breed in a spot.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mhejoe",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a frog's niche is the pond?",
+      "back": "A niche is not a place. The pond is the **habitat**, and the niche is the way the frog uses it, such as what it eats and when it is active.",
+      "hint": "Compare the place with the way of life within it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i8r1ud",
+      "kind": "concept",
+      "front": "Why can species with overlapping niches still live together?",
+      "back": "Each species has some resources the other cannot use, so competition reduces their numbers but does not remove either species.",
+      "hint": "Think about what competition does to numbers compared with whether a species survives.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tm09ty",
+      "kind": "concept",
+      "front": "Why do seaweeds and animals form bands from the high shore to the low shore on a rocky shore?",
+      "back": "Each band differs in how long it is covered by water, so each species' conditions are met only in its own band.",
+      "hint": "Think about how long each height on the shore is underwater.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0x9wem4",
+      "kind": "term",
+      "front": "What is the difference between distribution and abundance?",
+      "back": "**Distribution** describes where a species is found within an area. **Abundance** describes how many individuals of the species there are in an area or sample.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qyjq1h",
+      "kind": "term",
+      "front": "What is a quadrat used for when estimating abundance?",
+      "back": "A **quadrat** is a frame of known area used to count the organisms in a sample, which is then scaled up to estimate the number in a larger area.",
+      "hint": "Think about sampling a field without counting every plant in it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k0ab1i",
+      "kind": "formula",
+      "front": "Which equation scales a quadrat mean up to estimate the total number of individuals in an area?",
+      "back": "$\\mathrm{estimated\\ number}=\\frac{\\mathrm{mean\\ per\\ quadrat}}{\\mathrm{area\\ of\\ one\\ quadrat}}\\times\\mathrm{total\\ area}$, where the mean is the count per quadrat and the areas are in $\\mathrm{m^{2}}$.",
+      "hint": "Think about converting a sample into a number per unit area first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jmj0wi",
+      "kind": "process",
+      "front": "What are the steps for estimating a population from quadrat counts?",
+      "back": "1) Place quadrats at random. 2) Count the individuals in each and find the mean per quadrat. 3) Divide by the area of one quadrat. 4) Multiply by the total area of the field.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1o6vlgp",
+      "kind": "example",
+      "front": "Ten $0.25\\,\\mathrm{m^{2}}$ quadrats placed at random in a $200\\,\\mathrm{m^{2}}$ field count 30 plants. Estimate the total number.",
+      "back": "About **2400** plants. The mean is $3$ per quadrat, the density is $12\\,\\mathrm{m^{-2}}$, and $12\\times200=2400$.",
+      "hint": "Work out the mean first, then the density, then scale up.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v6evig",
+      "kind": "mistake",
+      "front": "Why must quadrats be placed at random rather than where the species looks dense?",
+      "back": "Choosing spots introduces **bias**, so the estimate may be unreliable. Random placement gives a fairer sample and a more reliable mean.",
+      "hint": "Think about what happens to the sample if you choose where to look.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t28ppb",
+      "kind": "concept",
+      "front": "Why is a species' abundance usually highest where conditions suit its niche most closely?",
+      "back": "Enough resources, low deaths and tolerable abiotic conditions let more individuals survive and breed, so numbers are highest there.",
+      "hint": "Link the conditions in the niche to births and deaths.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0f53nd0",
+      "kind": "concept",
+      "front": "How does movement of individuals change a population's abundance?",
+      "back": "**Immigration** adds individuals to an area and **emigration** removes them, so abundance changes even without any births or deaths.",
+      "hint": "Think about what happens to numbers when individuals arrive or leave.",
+      "sectionId": "s5"
+    }
+  ]
+}

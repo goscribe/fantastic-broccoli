@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-17",
+  "topicCode": "5.17",
+  "topicName": "Evolution through natural selection",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:16.744Z",
+  "cards": [
+    {
+      "id": "0gjgo37",
+      "kind": "concept",
+      "front": "How does natural selection make an advantageous allele more common in a population?",
+      "back": "Individuals with the advantageous allele are more likely to **survive and reproduce**, so they pass it to more offspring, and its frequency rises over generations.",
+      "hint": "Start with what differs between individuals before any selection happens.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tuwlns",
+      "kind": "concept",
+      "front": "Why can only some variation drive natural selection?",
+      "back": "Only **inherited** variation, caused by genes, passes to offspring. Differences caused by the environment, such as height from rich soil, are not inherited.",
+      "hint": "Think about what a parent actually passes on in its gametes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0628irl",
+      "kind": "term",
+      "front": "What is evolution in terms of allele frequency?",
+      "back": "**Evolution** is a change in allele frequency in a population from one generation to the next.",
+      "hint": "Focus on the population, not on a single individual.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ruddda",
+      "kind": "term",
+      "front": "What is a mutation?",
+      "back": "A **mutation** is a random change in the base sequence of DNA, which may create a new allele.",
+      "hint": "Compare it with what meiosis does to alleles already present.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kokloc",
+      "kind": "concept",
+      "front": "How does sexual reproduction create variation from alleles that already exist?",
+      "back": "**Meiosis** makes gametes with different allele combinations, and fertilisation joins them at random, so offspring differ from their parents and from each other.",
+      "hint": "Consider what happens to the alleles the parents already carry.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fyd7qi",
+      "kind": "term",
+      "front": "What is meant by a selection pressure?",
+      "back": "A **selection pressure** is an environmental factor, such as predation, disease, competition or harsh conditions, that affects survival or reproduction and so drives natural selection.",
+      "hint": "Think about what stops individuals from surviving or reproducing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k4ferd",
+      "kind": "mistake",
+      "front": "Why is it wrong to say organisms change on purpose to meet a need?",
+      "back": "**Mutations are random**. The environment selects among the individuals already present, so no organism changes in response to what it needs.",
+      "hint": "Think about where new variation actually comes from.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oykd2r",
+      "kind": "mistake",
+      "front": "Why is a scar from an injury not passed on to offspring?",
+      "back": "A scar is a characteristic gained during life, not caused by the **genes** an individual carries, so it is not inherited and natural selection cannot act on it.",
+      "hint": "Ask whether the parent's genes were changed by the injury.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qmfowm",
+      "kind": "example",
+      "front": "A sample of 50 diploid individuals has 30 copies of allele B. What is the frequency of B?",
+      "back": "Total copies $=50\\times2=100$, so the frequency is $\\frac{30}{100}=0.30$.",
+      "hint": "Remember how many copies of a gene each diploid individual carries.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0l4ucym",
+      "kind": "process",
+      "front": "What are the steps by which an antibiotic-resistance allele spreads in bacteria?",
+      "back": "The antibiotic kills most bacteria. A rare mutation makes a few resistant. These survivors divide, so the **resistance allele** becomes common in the population.",
+      "hint": "Work through the events in time order, starting with the antibiotic.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rz7upm",
+      "kind": "term",
+      "front": "What is an adaptation?",
+      "back": "An **adaptation** is an inherited characteristic that improves survival or reproduction in a particular environment. It builds up over many generations.",
+      "hint": "Compare it with a change an individual makes during its own life.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0kysndm",
+      "kind": "concept",
+      "front": "What are the three types of adaptation?",
+      "back": "**Anatomical** (body structure, such as thick fur), **physiological** (body process, such as concentrated urine) and **behavioural** (action, such as hibernating).",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0u8izn4",
+      "kind": "example",
+      "front": "Why did the dark peppered moth form become more common where soot darkened the trees?",
+      "back": "Birds could see and eat the pale moths on dark bark. Dark moths were more likely to survive and reproduce, so the dark allele was passed to more offspring.",
+      "hint": "Think about which moths were camouflaged in each environment.",
+      "sectionId": "s5"
+    }
+  ]
+}

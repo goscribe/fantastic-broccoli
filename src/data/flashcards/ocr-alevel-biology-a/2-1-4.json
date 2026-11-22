@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "2-1-4",
+  "topicCode": "2.1.4",
+  "topicName": "Enzymes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:57.367Z",
+  "cards": [
+    {
+      "id": "06czlue",
+      "kind": "concept",
+      "front": "How does an enzyme speed up a reaction?",
+      "back": "It lowers the **activation energy** needed for the reaction. Binding strains bonds in the substrate or holds reacting molecules close together, so less energy is needed.",
+      "hint": "Think about the push a reaction needs before it can start.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1g5e9wv",
+      "kind": "concept",
+      "front": "Why does each enzyme act on only one substrate or a few closely related ones?",
+      "back": "Its **active site** has a specific shape, so only substrates with a matching shape can bind to it.",
+      "hint": "Compare the shape of the substrate with the shape of the region it binds to.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12x4a5f",
+      "kind": "concept",
+      "front": "Why does an enzyme stop working above its optimum temperature?",
+      "back": "High heat breaks the bonds holding the **tertiary structure**, so the active site changes shape. This is **denaturation**, and it is usually irreversible.",
+      "hint": "Think about what keeps the protein folded in its three-dimensional shape.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hx5mc9",
+      "kind": "concept",
+      "front": "How does the induced fit model differ from the lock-and-key model?",
+      "back": "In **induced fit** the active site changes shape slightly as the substrate binds, giving a tighter fit. Lock-and-key assumed the active site had a fixed shape.",
+      "hint": "Compare what happens to the active site before and after the substrate binds.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gcowsi",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that enzymes add energy to a reaction?",
+      "back": "Enzymes do not add energy and are not used up. They only **lower the activation energy**.",
+      "hint": "Think about what an enzyme is left with at the end of a reaction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0i8nfce",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that a hot enzyme has been killed?",
+      "back": "An enzyme is not alive, so it cannot be killed. Say it is **denatured**.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t7ra34",
+      "kind": "formula",
+      "front": "Which symbol equation gives the initial rate of a reaction that produces gas?",
+      "back": "Rate $=\\frac{V}{t}$, where $V$ is the volume of gas collected in $\\mathrm{cm^3}$ and $t$ is the time taken in $\\mathrm{min}$.",
+      "hint": "Think about what you measure over the first few minutes of the reaction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wowebx",
+      "kind": "example",
+      "front": "An enzyme releases 25 cm³ of gas in the first 5 minutes. What is its initial rate?",
+      "back": "**5.0 cm³ min⁻¹**. Use rate $=\\frac{25\\,\\mathrm{cm^3}}{5\\,\\mathrm{min}}=5.0\\,\\mathrm{cm^3\\,min^{-1}}$.",
+      "hint": "Divide the volume of gas by the time taken.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0afl173",
+      "kind": "concept",
+      "front": "Why does the rate stop rising at high substrate concentration?",
+      "back": "All the **active sites** are occupied, so the enzymes are saturated. Enzyme concentration is then the **limiting factor**.",
+      "hint": "Think about how many enzymes are available to bind the substrate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mgmft5",
+      "kind": "term",
+      "front": "How does a competitive inhibitor slow an enzyme?",
+      "back": "A **competitive inhibitor** has a shape similar to the substrate. It binds to the active site and blocks the substrate, and extra substrate can reduce its effect.",
+      "hint": "Compare its shape with the shape of the substrate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1obebm0",
+      "kind": "concept",
+      "front": "Why can extra substrate not overcome a non-competitive inhibitor?",
+      "back": "It binds away from the active site and changes the site's shape, so the substrate cannot bind properly. The **maximum rate** is lowered.",
+      "hint": "Think about where this inhibitor binds compared with the substrate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0y2d7w4",
+      "kind": "term",
+      "front": "What is a cofactor?",
+      "back": "A **cofactor** is a non-protein substance, such as an inorganic ion, that an enzyme needs in order to work. An organic cofactor is called a coenzyme.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xdacw3",
+      "kind": "process",
+      "front": "How should you control variables when testing how temperature affects an enzyme?",
+      "back": "Change only the temperature and keep other variables constant. Use a **water bath** to hold the temperature steady.",
+      "hint": "Think about what keeps the temperature steady during the reaction.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0dzy08z",
+      "kind": "concept",
+      "front": "Why does a pH away from the optimum reduce enzyme activity?",
+      "back": "Extra hydrogen or hydroxide ions disrupt the ionic and hydrogen bonds, so the active site changes shape.",
+      "hint": "Think about what extra charged particles do to the protein's bonds.",
+      "sectionId": "s3"
+    }
+  ]
+}

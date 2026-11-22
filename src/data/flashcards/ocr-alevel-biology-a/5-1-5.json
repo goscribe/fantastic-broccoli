@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "5-1-5",
+  "topicCode": "5.1.5",
+  "topicName": "Plant and animal responses",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:28.446Z",
+  "cards": [
+    {
+      "id": "1y5m7pn",
+      "kind": "term",
+      "front": "What is a tropism?",
+      "back": "A **tropism** is a growth response in which the direction of growth depends on the direction of a stimulus.",
+      "hint": "Think about how plants react differently from animals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1w632bo",
+      "kind": "concept",
+      "front": "Why does a shoot bend towards light rather than away from it?",
+      "back": "**Auxin** moves to the shaded side of the shoot, so cells there elongate more than cells on the lit side.",
+      "hint": "Focus on where the hormone travels, not on what attracts it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nzdrw1",
+      "kind": "concept",
+      "front": "What kind of signal does nervous control use to reach its target?",
+      "back": "**Electrical impulses** travel along neurons to a precise target. Hormonal control, by contrast, sends hormones in the blood.",
+      "hint": "Think about the route the signal takes to reach its target.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0odpwyj",
+      "kind": "process",
+      "front": "What is the sequence of events in seed germination involving gibberellins?",
+      "back": "The seed absorbs water, the embryo releases **gibberellins**, these switch on the gene for amylase, and amylase breaks down stored starch into sugars for the embryo.",
+      "hint": "Start with what the seed does first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rbanfz",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that auxin is attracted to light?",
+      "back": "Auxin is not attracted to light. Light changes where auxin moves, so more of it reaches the shaded side.",
+      "hint": "Think about what light actually changes in the shoot.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09vwyjl",
+      "kind": "concept",
+      "front": "What does a high auxin concentration do in roots?",
+      "back": "It **inhibits** elongation, so the lower side of a horizontal root grows less and the root turns downwards.",
+      "hint": "Compare this with what happens in shoots.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hk6ucy",
+      "kind": "term",
+      "front": "Which hormone closes stomata during water shortage?",
+      "back": "**Abscisic acid** closes stomata during water shortage and also helps keep seeds dormant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yb6936",
+      "kind": "term",
+      "front": "Which plant hormone is a gas that promotes fruit ripening and leaf fall?",
+      "back": "**Ethene** is a gaseous plant hormone that promotes fruit ripening and the fall of leaves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zxbnic",
+      "kind": "term",
+      "front": "What is apical dominance?",
+      "back": "**Apical dominance** is the inhibition of lateral bud growth by auxin produced in the bud at the shoot tip.",
+      "hint": "Think about what happens to side shoots when the top of a shrub is cut off.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "117w6mz",
+      "kind": "concept",
+      "front": "What do cytokinins do to lateral buds?",
+      "back": "**Cytokinins** promote lateral bud growth by stimulating cell division, which opposes the effect of auxin.",
+      "hint": "Consider which hormone they work against.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t2nk3w",
+      "kind": "term",
+      "front": "What is a taxis?",
+      "back": "A **taxis** is a directional movement of a whole organism towards or away from a stimulus.",
+      "hint": "Think about whether the direction of movement matters.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ypj02u",
+      "kind": "term",
+      "front": "How does a kinesis differ from a taxis?",
+      "back": "In a **kinesis** the movement is not directed; the speed or rate of turning changes with stimulus intensity, whereas a taxis is set by the stimulus direction.",
+      "hint": "Consider what the movement depends on.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xl0685",
+      "kind": "example",
+      "front": "Why do woodlice end up gathering in damp places?",
+      "back": "Woodlice move faster and turn more in dry air, so they spend longer in damp places. This is a kinesis, not a directed movement.",
+      "hint": "Think about how their movement changes with the surroundings.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xk9dyx",
+      "kind": "concept",
+      "front": "What is a reflex?",
+      "back": "A **reflex** is a rapid, automatic response that follows a fixed pathway from a sensory cell to a muscle or gland, needing no conscious decision.",
+      "hint": "Compare this with a response that involves thinking first.",
+      "sectionId": "s5"
+    }
+  ]
+}

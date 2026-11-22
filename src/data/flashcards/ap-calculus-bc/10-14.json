@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "10-14",
+  "topicCode": "10.14",
+  "topicName": "Taylor and Maclaurin series",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:22.061Z",
+  "cards": [
+    {
+      "id": "0s8uzaw",
+      "kind": "formula",
+      "front": "What is the Taylor series for a function f centered at x = c, in summation notation?",
+      "back": "$\\sum_{n=0}^{\\infty}\\frac{f^{(n)}(c)}{n!}(x-c)^n$, built from every **derivative** of f evaluated at the center c. The n = 0 term is f(c) because 0! = 1.",
+      "hint": "Think about which value the n = 0 term must equal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wevjee",
+      "kind": "process",
+      "front": "What are the four steps for turning derivatives of f into a Taylor series?",
+      "back": "**Differentiate** f until a pattern appears, evaluate each derivative at c, divide each value by n!, then multiply by (x-c)^n and add the terms.",
+      "hint": "Pick the center first, since it sets every value you compute.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08hzx4s",
+      "kind": "term",
+      "front": "What is a Maclaurin series?",
+      "back": "The **Taylor series** centered at x = 0, namely $\\sum_{n=0}^{\\infty}\\frac{f^{(n)}(0)}{n!}x^n$. Every power of x - c becomes a plain power of x.",
+      "hint": "Set c = 0 in the Taylor formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18kod06",
+      "kind": "formula",
+      "front": "What is the Maclaurin series for e^x, and for which x values does it hold?",
+      "back": "$\\sum_{n=0}^{\\infty}\\frac{x^n}{n!}=1+x+\\frac{x^2}{2!}+\\cdots$, valid for all real **x**. Every derivative of e^x is e^x, and e^0 = 1.",
+      "hint": "Every derivative of e^x is the same function.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0q7z9bh",
+      "kind": "formula",
+      "front": "What is the Maclaurin series for sin x, and why does it contain only odd powers?",
+      "back": "$\\sum_{n=0}^{\\infty}\\frac{(-1)^n x^{2n+1}}{(2n+1)!}=x-\\frac{x^3}{3!}+\\cdots$. Sine is an **odd** function, so only odd powers appear.",
+      "hint": "Look at the derivative cycle: sin, cos, -sin, -cos.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02bba7u",
+      "kind": "mistake",
+      "front": "A student writes the Taylor coefficient as f^{(n)}(c) and skips the division. What is wrong?",
+      "back": "The coefficient is **f^{(n)}(c)/n!**, not f^{(n)}(c). Dropping n! changes every term after the first two.",
+      "hint": "Check what the formula divides by.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cc8b43",
+      "kind": "example",
+      "front": "Find the first two nonzero terms of the Taylor series for ln x centered at x = 1.",
+      "back": "$(x-1)-\\frac{(x-1)^2}{2}$. The derivatives at 1 are 0, 1, and -1, so the coefficients are 1 and -1/2.",
+      "hint": "Evaluate each derivative at x = 1 first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0horpnu",
+      "kind": "formula",
+      "front": "Write the Maclaurin series for ln(1+x) and state the interval where it holds.",
+      "back": "$\\sum_{n=1}^{\\infty}\\frac{(-1)^{n+1}x^n}{n}=x-\\frac{x^2}{2}+\\cdots$, valid for $-1<x\\le1$.",
+      "hint": "Compare the signs and the denominators with the pattern n.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0oymrmf",
+      "kind": "concept",
+      "front": "Why does a series centered close to the input of interest give a better approximation?",
+      "back": "Near the center the polynomial stays close to the function, while farther away the polynomials break from it. Staying near the center keeps the error small.",
+      "hint": "Compare the sine curve with its polynomials near x = 0 and far from it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0se4i7f",
+      "kind": "term",
+      "front": "What is the interval of convergence of a series?",
+      "back": "The **region** of x where the series converges. A series equals its function only inside this region.",
+      "hint": "Ask where the series adds up to a number.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1tqh1zm",
+      "kind": "example",
+      "front": "For which x does the sum of x^n from n = 0 equal 1/(1-x), and why can we not use x = 2?",
+      "back": "It equals 1/(1-x) only for **-1 < x < 1**. At x = 2 the series diverges, even though the function equals -1.",
+      "hint": "Check the interval given in the table.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gvddxc",
+      "kind": "example",
+      "front": "What is the exact sum of 1 - 1/2! + 1/4! - 1/6! + ...?",
+      "back": "$\\cos 1\\approx 0.540$. The signs alternate and the factorials are even, so the series is the cosine series evaluated at x = 1.",
+      "hint": "Match the signs and factorials to a standard series.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1kmhkbg",
+      "kind": "concept",
+      "front": "Can a Maclaurin series converge yet fail to equal its function? Give an example.",
+      "back": "Yes. For f(x) = e^{-1/x^2} with f(0) = 0, every derivative at 0 is 0, so the series is zero, but f is not zero away from the origin.",
+      "hint": "Consider what all the derivatives at zero equal.",
+      "sectionId": "s6"
+    }
+  ]
+}

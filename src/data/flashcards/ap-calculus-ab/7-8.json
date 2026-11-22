@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "7-8",
+  "topicCode": "7.8",
+  "topicName": "Exponential models",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:33.458Z",
+  "cards": [
+    {
+      "id": "17l51lt",
+      "kind": "concept",
+      "front": "What makes a change exponential rather than linear?",
+      "back": "Change is **exponential** when the rate is proportional to the current amount, so $\\frac{dy}{dt}=ky$. Adding a fixed number each year is linear instead.",
+      "hint": "Compare the rate with the amount present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0131ded",
+      "kind": "formula",
+      "front": "What is the solution to $\\frac{dy}{dt}=ky$ with initial value $y(0)=y_0$?",
+      "back": "$y(t)=y_0e^{kt}$, where $y_0$ is the **initial value** (starting amount) and $k$ is the rate constant in inverse time units.",
+      "hint": "Separate the variables and integrate both sides.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bam21j",
+      "kind": "term",
+      "front": "In $y(t)=y_0e^{kt}$, what does the **rate constant** $k$ measure?",
+      "back": "The **rate constant** $k$ is the instantaneous rate of change per unit of current amount, $k=\\frac{1}{y}\\frac{dy}{dt}$. Positive $k$ means growth; negative $k$ means decay.",
+      "hint": "Think of the rate divided by the amount.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03m1ogm",
+      "kind": "process",
+      "front": "How do you find the rate constant $k$ from two measured amounts?",
+      "back": "Divide the later amount by the earlier amount to get the growth or decay factor, then take the **natural logarithm** to solve for $k$.",
+      "hint": "Substitute both amounts into the model first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "191jki5",
+      "kind": "example",
+      "front": "A sample starts at 80 grams and has 40 grams after 5 days. Find its model, with $t$ in days.",
+      "back": "$y(t)=80e^{(\\ln(1/2)/5)t}$ grams, since $k=\\frac{\\ln(1/2)}{5}\\approx-0.1386$ per day.",
+      "hint": "Solve $40=80e^{5k}$ for $k$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0a4zbqp",
+      "kind": "term",
+      "front": "What is the **half-life** of an exponential decay model?",
+      "back": "The **half-life** is the fixed time for a positive amount to fall by half, $T=\\frac{\\ln(1/2)}{k}$, which is positive because both parts are negative.",
+      "hint": "Set $e^{kT}$ equal to a fraction.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13jpxcp",
+      "kind": "term",
+      "front": "What is the **doubling time** of an exponential growth model?",
+      "back": "The **doubling time** is the fixed time for a positive amount to double, $T=\\frac{\\ln 2}{k}$.",
+      "hint": "Set the growth factor equal to 2.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11kyy7k",
+      "kind": "example",
+      "front": "Find the doubling time for $y(t)=10e^{0.1t}$, where $t$ is in hours.",
+      "back": "$T=\\frac{\\ln 2}{0.1}\\approx6.93$ hours.",
+      "hint": "Solve $e^{0.1T}=2$ for $T$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hy1sh7",
+      "kind": "mistake",
+      "front": "A student says that after one unit of time the amount increases by $k$ units. What is wrong with this?",
+      "back": "Wrong: after one unit of time the amount is **multiplied** by $e^k$, not increased by $k$ units.",
+      "hint": "Look at what the exponential does to the amount.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01spheo",
+      "kind": "mistake",
+      "front": "A student says a positive amount in a decay model reaches zero at a finite time. Is this correct?",
+      "back": "No: the amount approaches zero but never reaches zero at a finite time, so the model never gives exactly zero.",
+      "hint": "Think about the shape of $e^{kt}$ for negative $k$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1nl4f4p",
+      "kind": "example",
+      "front": "Interpret $y(t)=50e^{-0.2t}$, where $t$ is in days. What do 50 and $-0.2$ mean?",
+      "back": "50 is the **initial amount**. $-0.2$ is the rate constant per day, so the amount decays and its rate is $-0.2$ times the current amount per day.",
+      "hint": "Match each number to a parameter from the model.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17it26x",
+      "kind": "process",
+      "front": "What should you write first when answering an applied exponential problem?",
+      "back": "State the **differential equation** $\\frac{dy}{dt}=ky$ and the initial condition $y(0)=y_0$ before giving the model $y(t)=y_0e^{kt}$.",
+      "hint": "The note gives a tip about the order of steps.",
+      "sectionId": "s2"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "c3-1",
+  "topicCode": "C3.1",
+  "topicName": "Integration of body systems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:56.003Z",
+  "cards": [
+    {
+      "id": "1au9k0z",
+      "kind": "term",
+      "front": "What is homeostasis?",
+      "back": "**Homeostasis** is keeping internal conditions within ranges that support cell function. It does not hold every condition at one fixed value.",
+      "hint": "Think about ranges, not single numbers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09qlkfn",
+      "kind": "process",
+      "front": "What are the steps of a negative feedback response to a rise in body temperature?",
+      "back": "1) Temperature receptors detect the rise. 2) The hypothalamus, the coordinating centre, processes the signal. 3) Effectors such as sweat glands and skin blood vessels respond, increasing heat loss. 4) As temperature falls back towards normal, the response decreases.",
+      "hint": "Name the receptor, centre, effector and response in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "125kb6x",
+      "kind": "concept",
+      "front": "How do the nervous and endocrine systems differ in the way they coordinate responses?",
+      "back": "The **nervous system** sends signals along neurons, giving rapid, directed responses. The **endocrine system** releases hormones into the blood, giving slower responses that often last longer.",
+      "hint": "Compare speed, route and duration.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "009ycbf",
+      "kind": "term",
+      "front": "What is the internal environment?",
+      "back": "The **internal environment** is the fluid surrounding body cells. Cells take in oxygen, nutrients and other substances from it and release wastes into it.",
+      "hint": "It is the fluid around cells, not the inside of the cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0y2jmvp",
+      "kind": "concept",
+      "front": "Why does no single body system keep internal conditions stable on its own?",
+      "back": "Body systems depend on each other. For example, the respiratory system brings in oxygen, the circulatory system carries it to tissues, and the urinary system removes wastes and helps regulate water and salt.",
+      "hint": "Think about oxygen travelling from the lungs to cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19w1u8x",
+      "kind": "term",
+      "front": "What is an effector?",
+      "back": "An **effector** is a muscle or gland that carries out a response directed by a coordinating centre.",
+      "hint": "It is the last part of a feedback loop.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xo357c",
+      "kind": "term",
+      "front": "What is negative feedback?",
+      "back": "**Negative feedback** is a response triggered by a change that reduces that original change, so conditions move back towards the normal range.",
+      "hint": "Negative means the response opposes the change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11r7llz",
+      "kind": "mistake",
+      "front": "A student says hormones only reach the cells that need them, so every cell they reach will respond. Why is this wrong?",
+      "back": "Hormones circulate widely, but only cells with the **correct receptor** respond. Reaching a cell is not enough; the cell must have a suitable receptor.",
+      "hint": "Hormones travel in the blood to many tissues.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bus434",
+      "kind": "term",
+      "front": "What is positive feedback?",
+      "back": "**Positive feedback** is a response that strengthens the change that triggered it, rather than reducing it.",
+      "hint": "Contrast it with negative feedback.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y94bxl",
+      "kind": "example",
+      "front": "How does positive feedback operate during childbirth?",
+      "back": "Stretching of the cervix causes oxytocin release. Oxytocin strengthens uterine contractions, which causes further stretching. This cycle continues until birth removes the stimulus.",
+      "hint": "Follow the cycle from stretching back to stretching.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05xunv5",
+      "kind": "mistake",
+      "front": "A student claims positive feedback keeps body conditions within a stable range. What is the correct idea?",
+      "back": "Positive feedback does not usually maintain a condition in a stable range. It drives a process to completion, such as childbirth, while negative feedback maintains stability.",
+      "hint": "Which type of feedback keeps conditions steady?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01cn4yw",
+      "kind": "example",
+      "front": "How do the body's systems respond to increased demand during exercise?",
+      "back": "Working muscles need more oxygen and produce more carbon dioxide. Nervous signals increase breathing and heart rate, so the respiratory and circulatory systems work together to increase gas exchange and transport.",
+      "hint": "Link muscle demand to breathing and heart rate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00xwnvw",
+      "kind": "concept",
+      "front": "How does the hypothalamus link the nervous and endocrine systems?",
+      "back": "The hypothalamus receives nervous information and influences hormone release through the pituitary gland. This lets fast nervous signals and slower hormonal changes work together.",
+      "hint": "Think about where the nervous and hormonal responses meet.",
+      "sectionId": "s2"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "2-5",
+  "topicCode": "2.5",
+  "topicName": "Modelling with functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:27.810Z",
+  "cards": [
+    {
+      "id": "0oh03ao",
+      "kind": "concept",
+      "front": "What is a model in this topic, and why must its assumptions be stated?",
+      "back": "A **model** is a function chosen to represent a real situation. It simplifies the situation by ignoring some details, so its assumptions must be stated. It is useful when its predictions are close to real values, but it is never perfect.",
+      "hint": "Think about what details a model leaves out.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13r5uwa",
+      "kind": "concept",
+      "front": "How can you tell whether data suggests a linear or an exponential model?",
+      "back": "Find the changes in output for equal steps in input. **Equal differences** suggest a linear model. **Equal ratios** suggest an exponential model.",
+      "hint": "Compare what changes between equally spaced inputs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kikfjq",
+      "kind": "concept",
+      "front": "In a linear model f(x)=mx+c, what do the parameters m and c tell you?",
+      "back": "**m** is the rate of change, so it shows how much the output changes per unit of input. **c** is the value of the output when x=0. Both need units in context.",
+      "hint": "One is a slope and one is a starting value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wgkkk8",
+      "kind": "formula",
+      "front": "What is the general form of an exponential model, and what does a>1 mean?",
+      "back": "$f(x)=ka^x$. When $a>1$ the model shows **growth**. When $0<a<1$ it shows **decay**. The parameter $k$ is the starting value.",
+      "hint": "Check whether the multiplying factor is bigger or smaller than 1.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "027fi1m",
+      "kind": "formula",
+      "front": "Write the general quadratic model and say what the letter a controls.",
+      "back": "$f(x)=ax^2+bx+c$. The letter **a** sets the width and direction of the curve.",
+      "hint": "Look at the x squared term.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vcbm48",
+      "kind": "example",
+      "front": "A taxi fare is C(d)=3.50+1.20d, with C in euros and d in km. What is the fare for 8 km?",
+      "back": "**13.10 euros**. Substitute d=8 to get $C(8)=3.50+1.20(8)=3.50+9.60=13.10$.",
+      "hint": "Substitute d = 8 into the equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19rt017",
+      "kind": "mistake",
+      "front": "Why is writing just 1.20 as the taxi rate an incomplete answer?",
+      "back": "A rate needs a unit that shows output per input, so write **1.20 euros per km**. A bare number hides what the rate measures.",
+      "hint": "What does the rate measure per kilometre?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18h3uaz",
+      "kind": "process",
+      "front": "What are the steps to find the input that gives a target output from a model?",
+      "back": "**Set** the function equal to the target output. Then **solve** the equation. A graphing calculator can find the answer when the equation is hard to rearrange.",
+      "hint": "Work backwards from the output you know.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ephmt6",
+      "kind": "example",
+      "front": "A car's value in euros is V(t)=18000×0.85^t after t years. What is V(5)?",
+      "back": "**About 7990 euros**. Since $0.85^5 \\approx 0.4437$, $V(5)\\approx 18000\\times 0.4437\\approx 7990$.",
+      "hint": "Substitute t = 5 and use a calculator for the power.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ngirsa",
+      "kind": "concept",
+      "front": "Why does the car's value fall quickly at first and then more slowly?",
+      "back": "Each year the value loses 15% of its current value. A smaller value loses a smaller amount, so the fall slows down.",
+      "hint": "Compare 15% of a large value with 15% of a small value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1j44b6x",
+      "kind": "term",
+      "front": "What is the difference between interpolation and extrapolation?",
+      "back": "**Interpolation** estimates an output for an input inside the range of the data. **Extrapolation** estimates an output for an input outside that range, and is usually less reliable.",
+      "hint": "Is the input inside or outside the data?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0epkm2c",
+      "kind": "concept",
+      "front": "Why must predictions stay inside the domain of a model?",
+      "back": "Context limits the **domain**. For example, time cannot be negative and a count of people must be whole. Inputs outside the allowed domain give meaningless predictions.",
+      "hint": "Think about which inputs make sense in the real situation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1en1895",
+      "kind": "mistake",
+      "front": "A student says a prediction far beyond the data must be accurate because the model fits the data well. What is wrong?",
+      "back": "The pattern that fitted the data may not continue beyond it, and the model's assumptions may stop being true. So a far prediction, which is an **extrapolation**, is less reliable.",
+      "hint": "Does the pattern you saw still hold outside the data?",
+      "sectionId": "s5"
+    }
+  ]
+}

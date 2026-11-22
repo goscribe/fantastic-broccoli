@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-8",
+  "topicCode": "5.8",
+  "topicName": "Light-independent reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:15.586Z",
+  "cards": [
+    {
+      "id": "0ro1evq",
+      "kind": "concept",
+      "front": "What happens to carbon dioxide in the first step of the Calvin cycle, and which enzyme catalyses it?",
+      "back": "Carbon dioxide combines with **RuBP**, a five-carbon compound, in a reaction catalysed by **rubisco**. This fixes carbon, because inorganic carbon becomes part of an organic molecule.",
+      "hint": "Think about which molecule carbon dioxide first joins, and what the product splits into.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0s2eo2k",
+      "kind": "concept",
+      "front": "What are the roles of ATP and reduced NADP when GP is converted to TP?",
+      "back": "**Reduced NADP** supplies hydrogen, so GP is reduced to TP. **ATP** supplies the energy for the conversion. The reduced NADP is oxidised to NADP.",
+      "hint": "Compare the job of each molecule: one gives hydrogen, the other gives energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1etn6mc",
+      "kind": "concept",
+      "front": "Why must most triose phosphate be used to regenerate RuBP?",
+      "back": "**RuBP** is the molecule that accepts carbon dioxide. Without regenerated RuBP no more carbon dioxide could be fixed, so the cycle would stop.",
+      "hint": "Ask what would happen to the first step if the starting molecule ran out.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0l6apzl",
+      "kind": "term",
+      "front": "Where in a chloroplast do the light-independent reactions take place?",
+      "back": "The **stroma**, the fluid surrounding the thylakoids. It contains the enzymes the stage needs, and ATP and reduced NADP are released into it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tpml02",
+      "kind": "mistake",
+      "front": "Why is it misleading to think light-independent reactions carry on in the dark?",
+      "back": "They stop in the dark once the supply of ATP and reduced NADP from the light-dependent reactions runs out. The name means they do not need light directly, not that they run without it.",
+      "hint": "Think about where the cycle gets its ATP and reduced NADP from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19q3q7z",
+      "kind": "term",
+      "front": "What is glycerate 3-phosphate, and how many carbon atoms does it contain?",
+      "back": "**Glycerate 3-phosphate**, or GP, is a three-carbon compound. It forms when the unstable six-carbon product of carbon dioxide and RuBP splits into two molecules.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mw7gxk",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that GP is oxidised when it becomes TP?",
+      "back": "GP gains hydrogen, so it is **reduced**. The molecule that is oxidised is reduced NADP, because it loses hydrogen.",
+      "hint": "Think about which direction the hydrogen moves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10gicl7",
+      "kind": "term",
+      "front": "What is phosphorylation?",
+      "back": "**Phosphorylation** is the addition of a phosphate group to a molecule. In the Calvin cycle, ATP provides the phosphate group when RuBP is regenerated.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00e0wuz",
+      "kind": "process",
+      "front": "What are the main steps of the Calvin cycle, in order?",
+      "back": "1) Carbon dioxide combines with RuBP, catalysed by rubisco, giving an unstable six-carbon compound. 2) This splits into two GP. 3) GP is reduced to TP using reduced NADP and ATP. 4) Most TP uses ATP to regenerate RuBP. 5) One TP in six leaves the cycle."
+    },
+    {
+      "id": "00urdek",
+      "kind": "example",
+      "front": "How many ATP and reduced NADP are needed to make one six-carbon sugar?",
+      "back": "**18 ATP** and **12 reduced NADP**. Each carbon dioxide fixed needs 3 ATP and 2 reduced NADP, and six carbon dioxide molecules are fixed.",
+      "hint": "Work out the cost for one carbon dioxide molecule first, then multiply.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1ogd2p8",
+      "kind": "concept",
+      "front": "What happens to the triose phosphate that leaves the Calvin cycle?",
+      "back": "Two TP molecules join to make a six-carbon sugar, which plants store as starch or use to build cellulose. TP is also used to make amino acids and lipids.",
+      "hint": "Think about what plants build from sugars.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0op7ghm",
+      "kind": "concept",
+      "front": "Why does the Calvin cycle slow down when light is low?",
+      "back": "Less ATP and reduced NADP reach the stroma, so GP is converted to TP more slowly and less RuBP is regenerated, even though the cycle's own steps need no light.",
+      "hint": "Trace what the cycle takes in from the light-dependent stage.",
+      "sectionId": "s6"
+    }
+  ]
+}

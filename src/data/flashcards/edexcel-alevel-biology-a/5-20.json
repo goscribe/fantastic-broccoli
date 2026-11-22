@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-20",
+  "topicCode": "5.20",
+  "topicName": "Controversial science and decision making",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:13.650Z",
+  "cards": [
+    {
+      "id": "1qf69q4",
+      "kind": "concept",
+      "front": "What does it mean for a scientific issue to be controversial?",
+      "back": "Informed people hold strongly **opposing** views on it, often because the evidence is incomplete or their values and interests differ.",
+      "hint": "Think about who is disagreeing, not who is right.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qs9jqa",
+      "kind": "concept",
+      "front": "Why can scientific data alone not decide whether something should be done?",
+      "back": "Evidence shows what is **possible**, but not whether it is right. **Ethics** decides what should be done.",
+      "hint": "Compare what evidence can show with what it cannot.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1muebt0",
+      "kind": "process",
+      "front": "How should a decision maker act when a new technology might cause serious harm but the evidence is incomplete?",
+      "back": "Apply the **precautionary principle**: act early to prevent the possible serious harm, without waiting for full scientific proof.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pfenl0",
+      "kind": "term",
+      "front": "What is uncertainty in a scientific conclusion?",
+      "back": "The **degree of doubt** about a measurement or conclusion, arising from limited data, variation or measurement error.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19443ww",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that uncertainty means scientists know nothing?",
+      "back": "Uncertainty means a conclusion carries a **stated level of doubt**, which new evidence may reduce. Scientists still know a great deal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1txng39",
+      "kind": "term",
+      "front": "What is a stakeholder in a decision?",
+      "back": "A **stakeholder** is any person or group affected by a decision, or with an interest in its outcome.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tpg094",
+      "kind": "concept",
+      "front": "Why do groups sometimes disagree even when they accept the same data?",
+      "back": "Their **values and interests** shape which findings seem most important, so one group may stress benefits while another stresses risks.",
+      "hint": "Think about what each group is trying to protect or gain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lda85x",
+      "kind": "mistake",
+      "front": "Why does a correlation between two variables not prove causation?",
+      "back": "A correlation only shows the variables change together. A **third factor** may affect both, so one does not necessarily cause the other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vv6r2w",
+      "kind": "process",
+      "front": "What steps do governments and regulators usually follow to reach a decision?",
+      "back": "Gather and assess evidence, consult stakeholders and the public, weigh risks, benefits, costs and ethics, then make a decision and **review** it as new evidence appears.",
+      "hint": "Start with the evidence, then think about who is affected.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1mx1anm",
+      "kind": "term",
+      "front": "How is risk defined in decision making?",
+      "back": "The **probability** that a hazard will cause harm, considered together with how **serious** that harm would be.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07f50fm",
+      "kind": "term",
+      "front": "What is ethics in the context of scientific debate?",
+      "back": "The **study of what is morally right and wrong**. Ethical judgements may look at consequences or at principles such as the right to be informed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1rqy4ip",
+      "kind": "concept",
+      "front": "Which features make evidence reliable enough to guide a decision?",
+      "back": "A **suitably large sample**, controlled variables, and results that others can repeat, checked by independent experts through peer review.",
+      "hint": "Think about how the investigation was run and who checked it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1k7kefn",
+      "kind": "mistake",
+      "front": "Why is ethical disagreement not the same as scientific error?",
+      "back": "People can accept **identical data** and still disagree because their values differ. The disagreement is about what is right, not about the evidence.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hj7nc6",
+      "kind": "concept",
+      "front": "How can media reports make a scientific issue harder to judge?",
+      "back": "A headline may present a **possible risk as a certain one**, or leave out the size of the sample, which distorts how the evidence looks.",
+      "sectionId": "s2"
+    }
+  ]
+}

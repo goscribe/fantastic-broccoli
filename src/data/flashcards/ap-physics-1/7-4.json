@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "7-4",
+  "topicCode": "7.4",
+  "topicName": "Energy of simple harmonic oscillators",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:54.034Z",
+  "cards": [
+    {
+      "id": "076f7dq",
+      "kind": "concept",
+      "front": "What happens to the total mechanical energy of an ideal spring oscillator as the mass moves back and forth?",
+      "back": "It stays **constant**. Kinetic and potential energy swap, so $E=K+U_s$ does not change when friction and air resistance are ignored.",
+      "hint": "Think about what friction would do to the total.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hcgt1e",
+      "kind": "concept",
+      "front": "Where is a mass on a spring moving fastest, and where is it momentarily at rest?",
+      "back": "It moves fastest at **equilibrium**, where all the energy is kinetic. At the ends of its path it is momentarily at rest, and all the energy is stored as **elastic potential energy**.",
+      "hint": "Think about the position where the spring is unstretched.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1iqbxte",
+      "kind": "formula",
+      "front": "What is the total energy of a spring oscillator in terms of its amplitude $A$ and spring constant $k$?",
+      "back": "$E=\\frac{1}{2}kA^2$, where $A$ is the **amplitude** in meters, $k$ is in N/m, and $E$ is in joules. Energy depends on the **square** of the amplitude.",
+      "hint": "Evaluate the spring energy at the turning point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iaws1n",
+      "kind": "mistake",
+      "front": "A student says the total energy of an oscillator is zero at equilibrium. What is wrong with this?",
+      "back": "Spring potential energy is zero there, but all the energy is **kinetic**, so $E$ is not zero. The mass is moving at its greatest speed at equilibrium.",
+      "hint": "What is the speed at equilibrium?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05iet91",
+      "kind": "example",
+      "front": "A 0.50 kg mass on a spring with k=200 N/m has amplitude 0.10 m. What is its maximum speed?",
+      "back": "**2.0 m/s**. First $E=\\frac{1}{2}(200)(0.10)^2=1.0$ J, then $v_{max}=\\sqrt{\\frac{2(1.0)}{0.50}}=2.0$ m/s.",
+      "hint": "All the energy is kinetic at the center.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wyqf56",
+      "kind": "formula",
+      "front": "How can energy conservation give the speed of an oscillator at any displacement $x$?",
+      "back": "Use $\\frac{1}{2}kA^2=\\frac{1}{2}mv^2+\\frac{1}{2}kx^2$ and solve for $v$. The **total** equals kinetic plus spring potential energy.",
+      "hint": "Set the total energy equal to the sum of the two forms.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ehenbo",
+      "kind": "example",
+      "front": "Using m=0.50 kg, k=200 N/m and E=1.0 J, what is the speed at x=0.060 m?",
+      "back": "**1.6 m/s**. $U_s=0.36$ J, so $K=0.64$ J and $v=\\sqrt{\\frac{2(0.64)}{0.50}}=1.6$ m/s.",
+      "hint": "Find the spring energy first, then subtract it from E.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0md81u8",
+      "kind": "process",
+      "front": "What are the steps to find the speed of an oscillator at a given displacement $x$?",
+      "back": "1) Find $U_s=\\frac{1}{2}kx^2$. 2) Find $K=E-U_s$. 3) Solve $v=\\sqrt{\\frac{2K}{m}}$. Each step relies on **energy conservation**.",
+      "hint": "Start with the spring potential energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17dpjg9",
+      "kind": "term",
+      "front": "What is the amplitude of an oscillation?",
+      "back": "The **maximum displacement** from the equilibrium position, measured in meters, written as $A$.",
+      "hint": "It is the distance to a turning point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sqbq8r",
+      "kind": "concept",
+      "front": "At $x=\\pm\\frac{A}{2}$, what fraction of the total energy is kinetic?",
+      "back": "**Three quarters**, written $\\frac{3}{4}E$. The spring potential energy there is $\\frac{1}{4}E$.",
+      "hint": "Spring energy depends on $x^2$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0s45axr",
+      "kind": "concept",
+      "front": "Why does damping reduce energy by a larger fraction than it reduces the amplitude?",
+      "back": "**Damping** drains energy through friction or air resistance. Because $E$ depends on $A^2$, a small drop in amplitude gives a larger fractional drop in energy.",
+      "hint": "Think about the squared relationship.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12nh5pu",
+      "kind": "formula",
+      "front": "What is the speed at the lowest point of a pendulum released from height $h$ above it?",
+      "back": "$v=\\sqrt{2gh}$, where $g$ is gravitational field strength. Gravitational potential energy becomes kinetic energy, and the **mass cancels**.",
+      "hint": "Equate $mgh$ with the kinetic energy.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "030j5vl",
+      "kind": "process",
+      "front": "Describe the energy changes as a spring-mass oscillator moves from maximum displacement to equilibrium.",
+      "back": "**Potential energy** falls while kinetic energy rises by the same amount. At equilibrium $U_s=0$ and $K$ is greatest.",
+      "hint": "Track the spring energy as the mass moves inward.",
+      "sectionId": "s1"
+    }
+  ]
+}

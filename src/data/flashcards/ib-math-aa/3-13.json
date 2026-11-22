@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-13",
+  "topicCode": "3.13",
+  "topicName": "Scalar product",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:33.680Z",
+  "cards": [
+    {
+      "id": "0phnwud",
+      "kind": "concept",
+      "front": "What single number does the scalar product of two vectors give, and how is it defined with the angle between them?",
+      "back": "A **scalar**: $\\mathbf{a}\\cdot\\mathbf{b}=|\\mathbf{a}||\\mathbf{b}|\\cos\\theta$, where $\\theta$ is the angle between the vectors when they start at the same point. Only the part of one vector that points along the other contributes.",
+      "hint": "Think of the sledge being pushed along flat ground.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16n0171",
+      "kind": "formula",
+      "front": "How do you calculate the scalar product of two vectors from their components?",
+      "back": "Multiply matching components and add: $\\mathbf{a}\\cdot\\mathbf{b}=a_1b_1+a_2b_2+a_3b_3$. For 2D vectors, drop the third component. The result has no direction.",
+      "hint": "Multiply each matching pair before adding.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0891wph",
+      "kind": "formula",
+      "front": "How do you find the angle between two vectors when you know their components?",
+      "back": "Use $\\cos\\theta=\\frac{\\mathbf{a}\\cdot\\mathbf{b}}{|\\mathbf{a}||\\mathbf{b}|}$, then take the inverse cosine. The **angle** always lies between $0^{\\circ}$ and $180^{\\circ}$.",
+      "hint": "You need the scalar product and both lengths.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08zje2x",
+      "kind": "concept",
+      "front": "What does a negative scalar product tell you about the angle between two vectors?",
+      "back": "The angle is **obtuse**, between $90^{\\circ}$ and $180^{\\circ}$. An acute angle gives a positive result.",
+      "hint": "Compare with the sign of cosine.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bpk70c",
+      "kind": "concept",
+      "front": "What does a zero scalar product tell you about two non-zero vectors?",
+      "back": "They are **perpendicular**, because $\\cos\\theta=0$ means $\\theta=90^{\\circ}$. The reverse also holds.",
+      "hint": "Set $\\cos\\theta$ equal to zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bdkoh9",
+      "kind": "mistake",
+      "front": "If the scalar product of two vectors is zero, must one of them be the zero vector?",
+      "back": "No. A zero scalar product means either one vector is the **zero vector** or the two non-zero vectors are perpendicular.",
+      "hint": "There are two ways the product can vanish.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0q8bidm",
+      "kind": "example",
+      "front": "Calculate the scalar product of (2, -1, 3) and (4, 5, -2).",
+      "back": "$-3$, from $8-5-6$. The negative value means the angle between the vectors is obtuse.",
+      "hint": "Multiply matching components one pair at a time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nuht6m",
+      "kind": "example",
+      "front": "Find the angle between (1, 2, 2) and (2, -1, 2), to 1 decimal place.",
+      "back": "$\\theta\\approx63.6^{\\circ}$. The scalar product is 4 and both lengths are 3, so $\\cos\\theta=\\frac{4}{9}$.",
+      "hint": "Find the scalar product and both lengths first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "087wmf0",
+      "kind": "formula",
+      "front": "How do you find the length of a vector from its components, and how does this link to the scalar product?",
+      "back": "$|\\mathbf{a}|=\\sqrt{a_1^2+a_2^2+a_3^2}$. Also $\\mathbf{a}\\cdot\\mathbf{a}=|\\mathbf{a}|^2$.",
+      "hint": "Square each component and add.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n8n0aj",
+      "kind": "process",
+      "front": "How do you find an angle in a triangle using the scalar product?",
+      "back": "Form two vectors that both leave the vertex, each as end point minus start point. Then find the scalar product and both lengths, and use the angle formula.",
+      "hint": "Check both vectors start at the vertex.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0oxrsd1",
+      "kind": "mistake",
+      "front": "Why can you get the supplementary angle when finding an angle in a triangle?",
+      "back": "If one vector arrives at the vertex and the other leaves, the result is the **supplementary** angle. Make both vectors leave the vertex.",
+      "hint": "Check the direction of each vector.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12vq4hp",
+      "kind": "process",
+      "front": "How can you use the scalar product to check whether the angle at vertex P of a triangle is a right angle?",
+      "back": "Form the two vectors from P, find their scalar product, and check whether it is zero. A zero result means the angle is $90^{\\circ}$.",
+      "hint": "Use the condition for perpendicular vectors.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sc8g68",
+      "kind": "concept",
+      "front": "Which algebraic rules does the scalar product obey?",
+      "back": "It is **commutative**, so $\\mathbf{a}\\cdot\\mathbf{b}=\\mathbf{b}\\cdot\\mathbf{a}$. It distributes over addition, and $(k\\mathbf{a})\\cdot\\mathbf{b}=k(\\mathbf{a}\\cdot\\mathbf{b})$ for any real $k$.",
+      "hint": "Think about how ordinary multiplication behaves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dhqlcz",
+      "kind": "term",
+      "front": "What is a scalar?",
+      "back": "A **scalar** is a quantity with magnitude only and no direction, such as a length or a real number.",
+      "hint": "Contrast it with a vector.",
+      "sectionId": "s2"
+    }
+  ]
+}

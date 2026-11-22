@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "2-6",
+  "topicCode": "2.6",
+  "topicName": "Facilitated diffusion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:21.766Z",
+  "cards": [
+    {
+      "id": "0zfm58z",
+      "kind": "term",
+      "front": "What is facilitated diffusion, and does it use cellular energy?",
+      "back": "**Facilitated diffusion** is passive movement across a membrane through a transport protein, down a concentration or electrochemical gradient. It uses no cellular energy.",
+      "hint": "Think about what the protein does and which way the substance moves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05r6n3e",
+      "kind": "concept",
+      "front": "How does a channel protein differ from a carrier protein?",
+      "back": "A **channel protein** forms an open, selective passage that suitable substances pass through. A **carrier protein** binds its substance, changes shape, and releases it on the other side.",
+      "hint": "Compare an open tunnel with a binding site that changes shape."
+    },
+    {
+      "id": "13mo584",
+      "kind": "concept",
+      "front": "Why does facilitated diffusion only move substances in one direction?",
+      "back": "Substances move down a favorable gradient, from higher to lower concentration (or electrochemical gradient). The protein provides a route but cannot push a substance against that gradient.",
+      "hint": "Which way does a gradient point?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yjv52u",
+      "kind": "mistake",
+      "front": "A student says any membrane protein means active transport. Why is this wrong?",
+      "back": "Facilitated diffusion also uses a transport protein but is **passive**: it moves substances down their gradient without cellular energy. A protein alone does not make transport active.",
+      "hint": "Check whether cellular energy is needed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dygvnu",
+      "kind": "concept",
+      "front": "Why do charged particles and many polar molecules need a protein to cross a membrane?",
+      "back": "Small, nonpolar molecules such as oxygen can cross directly by simple diffusion. Charged particles and many polar molecules need a transport protein pathway instead.",
+      "hint": "Compare oxygen with an ion.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xr2w59",
+      "kind": "process",
+      "front": "Describe the steps by which a carrier protein moves glucose across a membrane.",
+      "back": "1. Glucose binds a suitable carrier on one side. 2. The carrier changes shape. 3. Glucose is released on the other side, moving down its concentration gradient.",
+      "hint": "Follow binding, shape change, then release.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17q56s5",
+      "kind": "term",
+      "front": "What are aquaporins?",
+      "back": "**Aquaporins** are channel proteins that provide pathways for water across membranes. Water can cross without them, but they greatly increase its movement.",
+      "hint": "Think about which substance they carry.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0eduyj7",
+      "kind": "term",
+      "front": "What is selectivity in a transport protein?",
+      "back": "**Selectivity** is a protein's ability to let some substances pass more readily than others. It depends on features such as size, charge, or binding-site shape.",
+      "hint": "Consider why a protein lets some things through and not others.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v02esw",
+      "kind": "concept",
+      "front": "What happens to ion movement through an open ion channel?",
+      "back": "Suitable ions move down their **electrochemical gradient**, a combination of concentration difference and electrical difference. The channel provides the route and does not push ions against the gradient.",
+      "hint": "Ions respond to both concentration and charge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ql2qxa",
+      "kind": "mistake",
+      "front": "Would adding more glucose transporters let glucose move against its concentration gradient?",
+      "back": "No. More suitable transporters can increase movement down a favorable gradient, but facilitated diffusion cannot produce net movement against it.",
+      "hint": "Separate the rate of movement from its direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jchp3r",
+      "kind": "example",
+      "front": "Name one substance that crosses through aquaporins and one that crosses through suitable ion channels.",
+      "back": "Water crosses through aquaporins. Potassium ions cross through suitable ion channels, both by facilitated diffusion down a favorable gradient.",
+      "hint": "Match each pathway to its substance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00h8mar",
+      "kind": "concept",
+      "front": "Why is selectivity important for a membrane's transport proteins?",
+      "back": "It determines which substances cross by facilitated diffusion. Each substance needs an appropriate pathway and a gradient favoring movement.",
+      "hint": "Think about which substances need which pathway.",
+      "sectionId": "s4"
+    }
+  ]
+}

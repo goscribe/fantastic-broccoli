@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-2",
+  "topicCode": "3.2",
+  "topicName": "Eukaryotic cell ultrastructure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:35.216Z",
+  "cards": [
+    {
+      "id": "15s3uj7",
+      "kind": "concept",
+      "front": "Why does a eukaryotic cell use membranes to form separate organelles?",
+      "back": "Membranes **separate** different chemical reactions, so many reactions can run at the same time without interfering with each other.",
+      "hint": "Think about a factory with a separate room for each job.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1agojde",
+      "kind": "concept",
+      "front": "How is the cell's DNA arranged inside the nucleus?",
+      "back": "The DNA is combined with proteins to form **chromatin**, and the nucleus is surrounded by a double-membrane nuclear envelope.",
+      "hint": "Think about where the cell's genetic instructions are kept.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18z968d",
+      "kind": "process",
+      "front": "Trace the route of a protein made for secretion, from the ribosome to outside the cell.",
+      "back": "Made by ribosomes on the **rough ER**, folded, and passed into vesicles. Vesicles carry it to the **Golgi apparatus**, where it is modified and packaged. New vesicles fuse with the cell surface membrane and release it.",
+      "hint": "Start with the membrane network that has ribosomes attached to it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "066q36p",
+      "kind": "term",
+      "front": "What is ultrastructure?",
+      "back": "The **fine detail** of a cell's internal structure, which can be seen only with an electron microscope.",
+      "hint": "Compare with what a light microscope can show.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qb5grh",
+      "kind": "term",
+      "front": "Where does aerobic respiration take place in a eukaryotic cell, releasing energy for the cell?",
+      "back": "In the **mitochondria**, which release energy for the cell's activities.",
+      "hint": "Think about the cell's energy-releasing reactions and which compartment they happen in.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02s25nl",
+      "kind": "concept",
+      "front": "Why is the inner membrane of a mitochondrion folded?",
+      "back": "The folds, called **cristae**, increase the surface area for the reactions of aerobic respiration, so more reactions can happen.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cs4v7s",
+      "kind": "process",
+      "front": "How do ribosomes build a protein from messenger RNA?",
+      "back": "They **join amino acids** in the order set by the messenger RNA. Ribosomes are made of RNA and protein and have no membrane.",
+      "hint": "Think about which molecule supplies the order of the amino acids.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l2ft2g",
+      "kind": "concept",
+      "front": "Why must large molecules pass through nuclear pores?",
+      "back": "**Messenger RNA** leaves the nucleus through the pores to reach ribosomes, and proteins needed in the nucleus enter through them.",
+      "hint": "Consider which direction different molecules travel.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ptanmb",
+      "kind": "concept",
+      "front": "What does the nucleolus do?",
+      "back": "It makes the **RNA** that forms part of ribosomes and helps to assemble the ribosomes.",
+      "hint": "Think about where ribosomes begin to be built.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sdygqk",
+      "kind": "term",
+      "front": "What is a lysosome?",
+      "back": "A **vesicle** containing digestive enzymes, used to break down worn-out organelles and material taken into the cell.",
+      "hint": "Think about what a cell does with parts it no longer needs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a42wsa",
+      "kind": "concept",
+      "front": "Which structures are found in most animal cells but absent from plant cells?",
+      "back": "**Centrioles**. Animal cells also lack a large permanent vacuole and usually have a variable, often rounded shape.",
+      "hint": "Think about what plant cells have that gives them a fixed, regular shape.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pupk6u",
+      "kind": "term",
+      "front": "What is the rigid layer outside a plant cell's surface membrane made of?",
+      "back": "**Cellulose**. The cell wall supports the cell.",
+      "hint": "Think about what gives plant cells their fixed shape.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0kc737u",
+      "kind": "term",
+      "front": "What is a chloroplast?",
+      "back": "A **double-membrane** organelle containing chlorophyll, where photosynthesis takes place.",
+      "hint": "Think about where light energy is used to make sugars in a cell.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1m3g6mt",
+      "kind": "mistake",
+      "front": "A student says plant cells have no mitochondria because they have chloroplasts. What is wrong with this?",
+      "back": "Plant cells **do** have mitochondria, which release energy by respiration. Chloroplasts make sugars by photosynthesis using light, a different job.",
+      "hint": "Think about what each organelle does, not just what it contains.",
+      "sectionId": "s5"
+    }
+  ]
+}

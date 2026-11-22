@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-3-1",
+  "topicCode": "6.3.1",
+  "topicName": "Changes of state and density",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:16.748Z",
+  "cards": [
+    {
+      "id": "1xz7t3g",
+      "kind": "concept",
+      "front": "How are the particles arranged and moving in a solid, a liquid and a gas?",
+      "back": "In a **solid**, particles are close together in fixed positions and vibrate. In a **liquid**, they stay close but move past one another, so it flows. In a **gas**, particles are far apart and move rapidly in all directions.",
+      "hint": "Think about whether the particles are locked in place or free to move around.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "031fhc3",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that melting turns particles into liquid particles?",
+      "back": "Melting does not change the **particles**. The same particles remain, but their arrangement and movement change, so the substance is still the same.",
+      "hint": "Ask what changes during melting: the particles themselves or how they are arranged.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kanvj5",
+      "kind": "formula",
+      "front": "Which equation links density, mass and volume, and what does each symbol mean?",
+      "back": "$\\rho=\\frac{m}{V}$: **density** $\\rho$ in $\\mathrm{kg/m^3}$ or $\\mathrm{g/cm^3}$; mass $m$ in $\\mathrm{kg}$ or $\\mathrm{g}$; volume $V$ in $\\mathrm{m^3}$ or $\\mathrm{cm^3}$.",
+      "hint": "Think about how much matter fits into a given amount of space.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ibwtt6",
+      "kind": "concept",
+      "front": "Why is a gas much easier to compress than a solid or a liquid?",
+      "back": "A gas has large spaces between its **particles**, so they can be pushed closer together. Solids and liquids have much smaller gaps, so they resist compression.",
+      "hint": "Compare the gaps between particles in each state.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qce6b9",
+      "kind": "term",
+      "front": "What is the name for a solid changing into a liquid when it is heated?",
+      "back": "**Melting** is the change of state from solid to liquid.",
+      "hint": "Think of ice left in a warm room.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07zv2wh",
+      "kind": "concept",
+      "front": "Where does evaporation happen, compared with boiling?",
+      "back": "**Evaporation** happens only at the surface of the liquid. **Boiling** happens throughout the liquid. Both turn a liquid into a gas, with particles moving further apart.",
+      "hint": "Think about where the bubbles form inside the liquid.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10ys6ym",
+      "kind": "process",
+      "front": "What are the steps to find the density of a regular block?",
+      "back": "1) Measure the mass with a balance. 2) Multiply length, width and height to find the volume. 3) Divide mass by volume using matching units, and give the units in your answer.",
+      "hint": "Decide what you need to measure before you calculate anything.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xsiifr",
+      "kind": "example",
+      "front": "A block has a mass of 120 g and dimensions 5 cm, 3 cm and 2 cm. What is its density?",
+      "back": "$V=5\\times3\\times2=30\\,\\mathrm{cm^3}$, so $\\rho=\\frac{120\\,\\mathrm{g}}{30\\,\\mathrm{cm^3}}=4\\,\\mathrm{g/cm^3}$.",
+      "hint": "Work out the space the block takes up first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17dv8e3",
+      "kind": "process",
+      "front": "How can you find the volume of an irregular object?",
+      "back": "Measure the **water displaced** by the object. Its volume equals the rise in the water reading.",
+      "hint": "Think about what happens to the water level when you lower the object into it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v6xe28",
+      "kind": "mistake",
+      "front": "What goes wrong if you divide a mass in kg by a volume in cm³ to find density?",
+      "back": "The units do not match, so the answer is wrong. Use matching units first, such as g and cm³, or kg and m³, before dividing.",
+      "hint": "Check the units of each quantity before you divide.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17jfthf",
+      "kind": "concept",
+      "front": "What is the key difference between a physical change and a chemical change?",
+      "back": "A **physical change** changes the substance's form without making a new substance. A **chemical change** produces one or more **new substances**. Being reversible does not by itself define a physical change.",
+      "hint": "Consider what substances you have at the end of the change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v2kftd",
+      "kind": "example",
+      "front": "Give two reversible changes of state involving water.",
+      "back": "Water freezes into ice, and the ice melts back into liquid water. Water vapour condenses into liquid water, which can then evaporate again.",
+      "hint": "Think about changes of state that can run in both directions.",
+      "sectionId": "s4"
+    }
+  ]
+}

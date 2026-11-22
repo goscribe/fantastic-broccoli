@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-11",
+  "topicCode": "8.11",
+  "topicName": "Sewage treatment",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:49.309Z",
+  "cards": [
+    {
+      "id": "08fig82",
+      "kind": "concept",
+      "front": "Why must sewage be treated before its water returns to a river, lake, or ocean?",
+      "back": "Untreated sewage makes decomposers use up **dissolved oxygen**, its nitrogen and phosphorus can fuel algal blooms, and its microbes can make people sick.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1khvoey",
+      "kind": "concept",
+      "front": "Why does a treatment plant use several stages instead of just one?",
+      "back": "Each stage removes a different kind of pollutant: solids first, then dissolved organic matter, then nutrients, then disease-causing microbes.",
+      "hint": "Think about which pollutants each stage targets.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0br1qf9",
+      "kind": "concept",
+      "front": "How does secondary treatment lower biochemical oxygen demand?",
+      "back": "Aerated tanks let oxygen-using bacteria consume dissolved organic matter, so less organic matter is left for microbes in the released water to decompose.",
+      "hint": "Consider what the aerated tanks add to the mixture.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0csx7ek",
+      "kind": "term",
+      "front": "What is primary treatment?",
+      "back": "**Primary treatment** is the physical removal of floating and settleable solids from wastewater, with little removal of dissolved material.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "166wfgt",
+      "kind": "process",
+      "front": "What are the physical steps of primary treatment, in order?",
+      "back": "Screens catch large objects, a grit chamber sinks out sand and gravel, and a settling tank lets heavy solids sink as **sludge** while oil and grease are skimmed off as scum.",
+      "hint": "Start with the largest objects in the flow.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h3yvjf",
+      "kind": "mistake",
+      "front": "Why is it wrong to think primary treatment makes sewage safe to release?",
+      "back": "Primary treatment only removes material that settles or floats. It does not remove most dissolved pollutants or kill microbes.",
+      "hint": "Think about what settling can and cannot catch.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wip2et",
+      "kind": "process",
+      "front": "What happens to wastewater during secondary treatment, in order?",
+      "back": "It flows into aerated tanks where bacteria consume dissolved organic matter, then into a second settling tank where the bacteria clump together and sink as more sludge.",
+      "hint": "Two tanks are involved.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kbuoi5",
+      "kind": "term",
+      "front": "What is biochemical oxygen demand (BOD)?",
+      "back": "**Biochemical oxygen demand** is the amount of dissolved oxygen, usually in $\\text{mg/L}$, that microbes use while decomposing organic matter in a water sample.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11ptbqz",
+      "kind": "example",
+      "front": "Wastewater enters secondary treatment with a BOD of $250\\,\\text{mg/L}$ and leaves with $25\\,\\text{mg/L}$. What is the percent reduction in BOD?",
+      "back": "**90 percent**. Using $\\frac{250-25}{250}\\times100=90$, the BOD fell by 90 percent.",
+      "hint": "Find the decrease first, then divide by the starting value.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0w55nbe",
+      "kind": "term",
+      "front": "What is tertiary treatment?",
+      "back": "**Tertiary treatment** is an extra stage after secondary treatment that removes specific pollutants, mainly nitrogen and phosphorus.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13gngjb",
+      "kind": "concept",
+      "front": "Why is disinfection placed after the other stages rather than first?",
+      "back": "Suspended solids can shield microbes from chlorine and light, so solids must be removed before disinfection works well.",
+      "hint": "Think about what could block the disinfectant from reaching microbes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z6gxd2",
+      "kind": "mistake",
+      "front": "Why is chlorine often removed from water after disinfection?",
+      "back": "**Chlorine** can harm aquatic life, so plants take it out before the treated water is released.",
+      "hint": "Think about who lives in the river downstream.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bxv2qw",
+      "kind": "process",
+      "front": "How is sludge treated, and what useful product can result?",
+      "back": "Microbes break down sludge without oxygen, releasing **methane** that a plant can burn for energy. The remaining solids may go to land or a landfill.",
+      "hint": "Think about a breakdown process that needs no oxygen.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wz6k4m",
+      "kind": "concept",
+      "front": "Why can heavy rain cause water quality to drop after a storm?",
+      "back": "In combined sewers, stormwater and sewage share pipes. When flow exceeds what the plant can treat, some mixture may be released without full treatment.",
+      "sectionId": "s5"
+    }
+  ]
+}

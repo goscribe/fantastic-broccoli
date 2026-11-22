@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "9-4",
+  "topicCode": "9.4",
+  "topicName": "First law of thermodynamics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:10.402Z",
+  "cards": [
+    {
+      "id": "01va119",
+      "kind": "formula",
+      "front": "What equation is the first law of thermodynamics, and what does each symbol mean?",
+      "back": "$\\Delta U=Q+W$: the change in internal energy equals the **heat** added plus the **work** done on the system, all measured in joules.",
+      "hint": "Think about energy conservation for the gas.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ccbwmi",
+      "kind": "concept",
+      "front": "Why can a system's internal energy change only through heat or work?",
+      "back": "Energy is **conserved**, so the system's energy changes only by what crosses its boundary. Heat and work are the two ways that energy crosses it.",
+      "hint": "Consider which quantities can cross the system's boundary.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1klulua",
+      "kind": "formula",
+      "front": "How do you calculate the work done on a gas at constant pressure, and what does the minus sign mean?",
+      "back": "$W=-P\\Delta V$, where $\\Delta V$ is final volume minus initial volume. An expanding gas does **negative** work on the system because it does work on its surroundings.",
+      "hint": "Check whether the volume increased or decreased.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ux6y1z",
+      "kind": "term",
+      "front": "What is internal energy?",
+      "back": "The **total** kinetic and potential energy of a system's particles, measured in joules. For an ideal gas, it depends only on temperature.",
+      "hint": "Think about particle motion and interactions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jgchz0",
+      "kind": "term",
+      "front": "What is heat in the first law of thermodynamics?",
+      "back": "Energy transferred because of a **temperature difference**. Heat is positive when it enters the system and negative when it leaves.",
+      "hint": "What drives the transfer?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mwha4l",
+      "kind": "concept",
+      "front": "What happens to the internal energy of an ideal gas during an isothermal process?",
+      "back": "It stays **constant**, because internal energy depends only on temperature. So $\\Delta U=0$ and $Q=-W$.",
+      "hint": "Which quantity is fixed in this process?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16gi2ym",
+      "kind": "mistake",
+      "front": "A student says an adiabatic process must keep the temperature constant. Why is this wrong?",
+      "back": "Adiabatic means **no heat transfer** ($Q=0$), not constant temperature. Work still changes the internal energy, so the temperature changes.",
+      "hint": "What does adiabatic actually fix?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01gqlox",
+      "kind": "mistake",
+      "front": "A student drops the minus sign in $W=-P\\Delta V$ for an expanding gas. What error results?",
+      "back": "The gas would appear to **gain** energy from its surroundings. With the sign included, expansion gives negative $W$.",
+      "hint": "Which sign should expansion give?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t9diwx",
+      "kind": "example",
+      "front": "A gas at 200 kPa expands from 2.0 L to 5.0 L while absorbing 800 J of heat. What is its change in internal energy?",
+      "back": "$\\Delta U=+2.0\\times10^{2}$ J. The work is $W=-6.0\\times10^{2}$ J, and $Q=+800$ J.",
+      "hint": "Convert litres to cubic metres before using $W=-P\\Delta V$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0uqu42n",
+      "kind": "example",
+      "front": "A gas absorbs 300 J of heat while doing 120 J of work on its surroundings. What is its change in internal energy?",
+      "back": "$\\Delta U=+180$ J. Work done by the gas is negative, so $W=-120$ J and $\\Delta U=300-120$.",
+      "hint": "Decide the sign of work before adding.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hxcp0q",
+      "kind": "process",
+      "front": "What are the steps for solving a first-law problem involving a gas?",
+      "back": "1) Write your sign convention. 2) Find $Q$, and find $W$ using $W=-P\\Delta V$ if pressure is constant. 3) Substitute into $\\Delta U=Q+W$. 4) Convert units to SI.",
+      "hint": "Start with the sign convention.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xhwsqn",
+      "kind": "formula",
+      "front": "For a monatomic ideal gas, what is the change in internal energy in terms of temperature?",
+      "back": "$\\Delta U=\\frac{3}{2}Nk_\\mathrm{B}\\Delta T$, where $N$ is the number of particles and $k_\\mathrm{B}$ is Boltzmann's constant.",
+      "hint": "This applies only to gases made of single atoms.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1b70smb",
+      "kind": "term",
+      "front": "What is an isochoric process, and what does it mean for work?",
+      "back": "A process at constant **volume**. No work is done, so $W=0$ and $\\Delta U=Q$.",
+      "hint": "The gas cannot expand or be compressed.",
+      "sectionId": "s5"
+    }
+  ]
+}

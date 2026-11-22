@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-3",
+  "topicCode": "8.3",
+  "topicName": "Endocrine disruptors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:59.934Z",
+  "cards": [
+    {
+      "id": "0gkhgc8",
+      "kind": "term",
+      "front": "What is an endocrine disruptor?",
+      "back": "A **chemical** that interferes with how hormones normally work, by disturbing their production, transport, binding, or breakdown.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lewoug",
+      "kind": "concept",
+      "front": "What are the three main ways an endocrine disruptor can disturb a hormone signal?",
+      "back": "It can **mimic** the hormone and trigger a response, **block** the receptor so the real hormone cannot bind, or **alter levels** of hormone the body makes, moves, or breaks down.",
+      "hint": "Split it into what happens at the cell and what happens to the hormone supply.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03ennul",
+      "kind": "concept",
+      "front": "Why does a hormone need a receptor to have any effect?",
+      "back": "A hormone does **nothing** until it binds a **receptor protein** on a target cell. The receptor's shape fits that one hormone, and binding changes what the cell does.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cmht63",
+      "kind": "term",
+      "front": "What is a hormone?",
+      "back": "A **chemical messenger** released by an endocrine gland that travels in the blood and alters the activity of specific target cells.",
+      "hint": "Think about how signals move from one part of the body to another.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1c9y9vn",
+      "kind": "mistake",
+      "front": "Why is a large dose not needed for a chemical to disrupt hormone signaling?",
+      "back": "Hormones act at **very low concentrations**, so small exposures at a sensitive stage can matter. Believing a large dose is required is a common mistake.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ghg1vg",
+      "kind": "mistake",
+      "front": "A student says only hormones or strong poisons can be endocrine disruptors. What is wrong with this?",
+      "back": "A chemical does **not** need to be a hormone or a strong poison. It only needs to **disturb** a hormone signal.",
+      "hint": "Think about what the definition actually requires.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fszapb",
+      "kind": "term",
+      "front": "Which synthetic chemical, used in some plastics and resins, can mimic the hormone estrogen?",
+      "back": "**Bisphenol A**, which may be found in some plastics, resins, and food packaging.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gpmajw",
+      "kind": "concept",
+      "front": "How do pesticides and landfill water reach the wider environment?",
+      "back": "**Rain** washes pesticides off fields and into streams. Water moving through **landfills** can carry chemicals into groundwater.",
+      "hint": "Think about where water goes after it falls on a field or passes through waste.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05vswrs",
+      "kind": "example",
+      "front": "Why could a synthetic hormone in treated wastewater affect fish even at a low concentration?",
+      "back": "The hormone can bind receptor proteins and mimic the natural hormone, and hormones act at **very low concentrations**, so small amounts matter. Treated wastewater may carry it into streams where fish live.",
+      "hint": "Think about where the wastewater goes after it leaves the treatment plant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0opn6y3",
+      "kind": "concept",
+      "front": "Why are exposures before birth or in early childhood a special concern?",
+      "back": "Hormones guide fetal growth, and **organs and signaling systems are still forming**, so a disturbed signal can change development in lasting ways.",
+      "hint": "Think about how the timing of exposure relates to the stage of development the body is in.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1aecz7b",
+      "kind": "concept",
+      "front": "Which possible health effects have research linked to endocrine disruptors?",
+      "back": "**Reduced fertility**, altered growth and puberty timing, **thyroid problems**, higher risk of some hormone-sensitive cancers, and changes in fat storage and sugar handling. Scientists remain cautious about these links.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0on5dzj",
+      "kind": "concept",
+      "front": "Why is preventing the release of disruptors more effective than cleaning them up later?",
+      "back": "Many disruptors **last a long time**, staying in soil and water and building up in organisms, so stopping their release works better than cleanup.",
+      "hint": "Think about what happens to a chemical that stays around once it is released.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ijw8ho",
+      "kind": "concept",
+      "front": "Which action keeps unused medicines from adding disruptors to wastewater?",
+      "back": "**Returning unused medicines** to take-back programs instead of flushing them keeps them out of wastewater.",
+      "hint": "Think about where flushed medicine ends up.",
+      "sectionId": "s5"
+    }
+  ]
+}

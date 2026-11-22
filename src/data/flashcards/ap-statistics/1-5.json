@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-5",
+  "topicCode": "1.5",
+  "topicName": "One quantitative variable: graphs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:50.546Z",
+  "cards": [
+    {
+      "id": "0yrfoqp",
+      "kind": "concept",
+      "front": "What does a dotplot show that a plain list of numbers hides?",
+      "back": "A **pattern**. Each observation is one dot on a labeled number line, so stacks show where values pile up and which values are common.",
+      "hint": "Think about where the values cluster.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1q794xl",
+      "kind": "concept",
+      "front": "What makes a distribution skewed rather than symmetric?",
+      "back": "One **tail** is clearly longer than the other. The skew is named for the long tail, so a tail toward larger values is skewed right.",
+      "hint": "Ask which side the long tail points to.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gepsvk",
+      "kind": "concept",
+      "front": "Why must every bin in a histogram have the same width?",
+      "back": "**Equal widths** let bar heights be compared directly. Unequal widths make some bars look bigger only because they are wider.",
+      "hint": "What does a bar's height need to be comparable to?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n5uqsp",
+      "kind": "term",
+      "front": "What is a stemplot?",
+      "back": "A **stemplot** splits each value into a stem and a leaf. It keeps every digit and still shows the shape of the data.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08kfsej",
+      "kind": "term",
+      "front": "In a stemplot, what is a leaf?",
+      "back": "The **leaf** is the final digit of a value, written beside its stem. The stem is the leading digit or digits shared by the row.",
+      "hint": "Which digit is the last one?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ta59v2",
+      "kind": "process",
+      "front": "What are the steps to build a stemplot?",
+      "back": "1) Use the leading digits as stems. 2) Write each last digit as a leaf beside its stem. 3) Order the leaves increasing. 4) Add a key such as 6 | 2 = 62 points.",
+      "hint": "Start with the stems before adding any leaves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1aw4prl",
+      "kind": "mistake",
+      "front": "Why should a stemplot always include a key?",
+      "back": "Without a key, a reader cannot tell whether a leaf means 62, 6.2, or 620. Always add a key like 6 | 2 = 62 points.",
+      "hint": "Think about what the units of the stem might be.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "181ampn",
+      "kind": "example",
+      "front": "Commute histogram: bins 0–10 through 50–60 have counts 5, 12, 9, 6, 3, 1 for 36 students. What percent commute under 30 minutes?",
+      "back": "About **72%**. Add the first three bins: $5+12+9=26$ students, then $\\frac{26}{36}\\approx 0.722$.",
+      "hint": "Only count the bins below 30 minutes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06m5y6u",
+      "kind": "mistake",
+      "front": "A histogram has a very tall bar. Does that mean the values in that bin are large?",
+      "back": "No. A **tall bar** means many observations fall in that bin. It says nothing about how large the values themselves are.",
+      "hint": "Height counts observations, not values.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gvk9cq",
+      "kind": "example",
+      "front": "A stemplot has key 4 | 1 = 41 pounds. What values does the row 4 | 1 5 5 8 show?",
+      "back": "**41, 45, 45, and 48 pounds.** The stem 4 is the tens digit, so each leaf is added to 40.",
+      "hint": "Each leaf is a ones digit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w4isnn",
+      "kind": "mistake",
+      "front": "A distribution is skewed right, so most of its values sit on the right. Is that correct?",
+      "back": "No. The **peak** is usually on the left, and only the long tail points right.",
+      "hint": "Where is the tallest part of the graph?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0s1z6z3",
+      "kind": "term",
+      "front": "What is a bimodal distribution?",
+      "back": "A **bimodal** distribution has two clear peaks. This often suggests two different groups are mixed together.",
+      "hint": "Compare with unimodal, which has one peak.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0da0psd",
+      "kind": "term",
+      "front": "What is a gap in a distribution?",
+      "back": "A **gap** is an interval within the range of the data in which no observations fall.",
+      "sectionId": "s5"
+    }
+  ]
+}

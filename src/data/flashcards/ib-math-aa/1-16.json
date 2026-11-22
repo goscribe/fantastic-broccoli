@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-16",
+  "topicCode": "1.16",
+  "topicName": "Systems of linear equations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:05.784Z",
+  "cards": [
+    {
+      "id": "0oeul99",
+      "kind": "concept",
+      "front": "What are the three possible outcomes for a system of three linear equations in three unknowns?",
+      "back": "A **unique solution**, **no solution** (inconsistent), or **infinitely many solutions**. Elimination shows which one applies: a single value for each unknown, a false statement, or $0=0$ with a free unknown.",
+      "hint": "Think about where the three planes meet.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "060bhsa",
+      "kind": "process",
+      "front": "What are the steps for solving three equations in three unknowns by elimination?",
+      "back": "1) Eliminate one unknown from two different pairs of equations. 2) Solve the two new equations for the remaining unknowns. 3) **Back-substitute** to find the last unknown. 4) Check in all three original equations.",
+      "hint": "Count how many unknowns remain after each step.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "005y4vm",
+      "kind": "mistake",
+      "front": "Does getting $0=0$ during elimination mean the same as getting $0=5$?",
+      "back": "No. **$0=0$** means one equation is redundant, so there may be infinitely many solutions. **$0=5$** is false, so there is no solution.",
+      "hint": "Ask whether the statement is true or false.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03xvxwr",
+      "kind": "term",
+      "front": "What is a system of linear equations?",
+      "back": "A **system of linear equations** is a set of linear equations in the same unknowns that must all hold together. Each unknown appears only to the power 1.",
+      "hint": "A solution must fit every equation at once.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z6kjme",
+      "kind": "concept",
+      "front": "What geometric object does each linear equation in three unknowns describe?",
+      "back": "A **plane**. A solution lies on all the planes together, so a unique solution is the single point where the three planes meet.",
+      "hint": "With two unknowns, each equation is a line instead.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ic0z70",
+      "kind": "formula",
+      "front": "What is the general form of the equation of a plane in $x$, $y$ and $z$?",
+      "back": "$ax+by+cz=d$, where $a$, $b$, $c$ and $d$ are constants. Each plane is described by one such linear equation.",
+      "hint": "It has one term for each unknown and a constant on the right.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0b80sgq",
+      "kind": "example",
+      "front": "Solve $x+y+z=6$, $2x-y+z=3$ and $x+2y-z=2$.",
+      "back": "$x=1$, $y=2$, $z=3$. Adding the first and third equations removes $z$, giving $2x+3y=8$. Subtracting the second from the first gives $-x+2y=3$.",
+      "hint": "Eliminate $z$ from two different pairs of equations.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qwlfuj",
+      "kind": "term",
+      "front": "What is back-substitution?",
+      "back": "**Back-substitution** uses a value already found in an earlier equation to calculate the remaining unknown.",
+      "hint": "You use it after solving for two of the unknowns.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dmnh1i",
+      "kind": "mistake",
+      "front": "Why is it wrong to eliminate a different unknown from each pair of equations?",
+      "back": "You end with three unknowns again. Eliminate the **same unknown** from both pairs so that two equations in two unknowns remain.",
+      "hint": "Check which unknown is left in your two new equations.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pl90ot",
+      "kind": "term",
+      "front": "What is a parameter in an infinite solution set?",
+      "back": "A **parameter** is an extra letter, such as $\\lambda$, that stands for any real value and labels each member of the solution set.",
+      "hint": "It is used when one unknown is free.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "043dnm5",
+      "kind": "example",
+      "front": "Solve $x+y+z=3$, $x-y+2z=1$ and $2x+3z=4$, giving the solution in terms of a parameter.",
+      "back": "$x=2-3\\lambda$, $y=1+\\lambda$, $z=2\\lambda$, for any real $\\lambda$. Adding the first two equations and subtracting the third gives $0=0$, so there are infinitely many solutions.",
+      "hint": "Let $z=2\\lambda$ to avoid fractions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "009t48y",
+      "kind": "example",
+      "front": "Does $x+y+z=2$, $2x+2y+2z=5$ and $x-y=0$ have a solution?",
+      "back": "**No**. Taking the second equation minus twice the first gives $0=1$, which is false. The system is inconsistent.",
+      "hint": "Compare the left-hand sides of the first two equations.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01b6fbo",
+      "kind": "term",
+      "front": "What does it mean for a system to be consistent?",
+      "back": "A **consistent** system has at least one solution. An **inconsistent** system has no solution.",
+      "hint": "Think about whether the equations can hold together.",
+      "sectionId": "s3"
+    }
+  ]
+}

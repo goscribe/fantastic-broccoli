@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "6-3",
+  "topicCode": "6.3",
+  "topicName": "Summation and definite integral notation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:21.150Z",
+  "cards": [
+    {
+      "id": "1ukk5oe",
+      "kind": "concept",
+      "front": "What does a definite integral $\\int_a^b f(x)\\,dx$ represent?",
+      "back": "The **limit** of Riemann sums as the subinterval widths approach zero. A finite Riemann sum only approximates it.",
+      "hint": "Think about what happens as the widths shrink.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04nfkpt",
+      "kind": "formula",
+      "front": "What is the Riemann sum formula, and what does each part mean?",
+      "back": "$\\sum_{i=1}^{n}f(x_i^*)\\Delta x$ adds one **function value** times one **width** for each subinterval. $x_i^*$ is the sample point in subinterval $i$.",
+      "hint": "Think height times width, summed over all parts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y1p0ik",
+      "kind": "concept",
+      "front": "How do you read a limit of sums as a definite integral?",
+      "back": "The **width** reveals $b-a$, the sample-point expression reveals the starting endpoint, and the function applied to each sample point becomes the **integrand**.",
+      "hint": "Width gives the length; sample points give the endpoints.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "031kaxo",
+      "kind": "term",
+      "front": "What is the index in $\\sum_{i=1}^{n} a_i$?",
+      "back": "The **index** $i$ is a placeholder that takes each integer value from $1$ through $n$, generating the terms to add.",
+      "hint": "It changes value one step at a time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gcxyll",
+      "kind": "mistake",
+      "front": "Does the upper limit of a sum always equal the number of terms?",
+      "back": "No. The upper limit is the **final index**. From $i=0$ through $i=4$ there are five terms, not four.",
+      "hint": "Count the starting value too.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hhbi1a",
+      "kind": "example",
+      "front": "Evaluate $\\sum_{i=1}^{4} i^2$.",
+      "back": "$30$, since $1^2+2^2+3^2+4^2=30$.",
+      "hint": "Square each index value, then add.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16uqjln",
+      "kind": "formula",
+      "front": "What is the subinterval width $\\Delta x$ when $[a,b]$ is split into $n$ equal parts?",
+      "back": "$\\Delta x=\\frac{b-a}{n}$, the **length** of each equal part.",
+      "hint": "Total length divided by the number of parts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sijw1k",
+      "kind": "formula",
+      "front": "What is the left-endpoint sample point $x_i^*$ in terms of $a$, $i$, and $\\Delta x$?",
+      "back": "$x_i^*=a+(i-1)\\Delta x$, the **left endpoint** of subinterval $i$.",
+      "hint": "Compare with the right-endpoint rule, which uses $i$ instead of $i-1$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pq9rw0",
+      "kind": "process",
+      "front": "What steps set up a right-endpoint Riemann sum?",
+      "back": "1) Find $\\Delta x=\\frac{b-a}{n}$. 2) Write $x_i=a+i\\Delta x$. 3) Substitute into $f$, multiply by $\\Delta x$, and sum from $i=1$ to $n$.",
+      "hint": "State the limits, sample point, and width.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15f0ivn",
+      "kind": "example",
+      "front": "For $f(x)=x^2$ on $[0,2]$, what is the four-term right-endpoint sum, and what is its value?",
+      "back": "$\\sum_{i=1}^{4}\\left(\\frac{i}{2}\\right)^2\\frac12=\\frac{15}{4}$. The matching integral is $\\int_0^2 x^2\\,dx$.",
+      "hint": "The width is one half, so the endpoints are $i/2$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jj9o5x",
+      "kind": "mistake",
+      "front": "Why is writing $\\int_a^b f(x)$ without $dx$ an error?",
+      "back": "**dx** completes the notation and identifies $x$ as the variable of integration, so omitting it leaves the integral incomplete.",
+      "hint": "Which variable is being integrated?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1avk2mz",
+      "kind": "concept",
+      "front": "Does an integrand have to be positive for its integral to have a value?",
+      "back": "No. The **integral** has a value even when the integrand takes negative values.",
+      "hint": "Think about whether a value needs to be positive to exist.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hs65nh",
+      "kind": "mistake",
+      "front": "Is a four-term Riemann sum equal to its matching definite integral?",
+      "back": "Not generally. A finite sum only **approximates** the integral; equality requires the limit as $n\\to\\infty$.",
+      "hint": "Which part of the definition needs $n$ to grow?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cw88rb",
+      "kind": "formula",
+      "front": "How is $\\int_a^b f(x)\\,dx$ written as a limit of equal-width sums?",
+      "back": "$\\int_a^b f(x)\\,dx=\\lim_{n\\to\\infty}\\sum_{i=1}^{n}f(x_i^*)\\frac{b-a}{n}$, with $x_i^*$ chosen in subinterval $i$.",
+      "hint": "Use the equal width $\\frac{b-a}{n}$.",
+      "sectionId": "s3"
+    }
+  ]
+}

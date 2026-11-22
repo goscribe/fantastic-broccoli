@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-3-2-2",
+  "topicCode": "3.3.2.2",
+  "topicName": "Diffraction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:13.286Z",
+  "cards": [
+    {
+      "id": "0zli9d1",
+      "kind": "term",
+      "front": "What is diffraction?",
+      "back": "**Diffraction** is the spreading of waves as they pass through a gap or round the edge of an obstacle. It happens to all waves, including water, sound and light.",
+      "hint": "Picture sea waves entering an opening in a harbour wall.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0un0kyj",
+      "kind": "concept",
+      "front": "How does the size of a gap compared with the wavelength decide how much a wave spreads?",
+      "back": "Spreading is greatest when the **gap** is about equal to the **wavelength**. A gap much wider than the wavelength lets the waves pass almost straight.",
+      "hint": "Compare two lengths and ask which comparison gives the biggest change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ay3sm2",
+      "kind": "concept",
+      "front": "Why can long-wavelength radio signals reach a house behind a hill while light from the same transmitter cannot?",
+      "back": "Radio waves have a **long wavelength** compared with the hill, so they diffract noticeably round it. Light's tiny wavelength means it diffracts very little round the same hill.",
+      "hint": "Compare each signal's size against the size of the hill.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bwvskr",
+      "kind": "term",
+      "front": "What is a wavefront?",
+      "back": "A **wavefront** is a line joining points of a wave that are at the same stage of oscillation, so they move in step.",
+      "hint": "Picture the crests of ripples in a ripple tank.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kseid9",
+      "kind": "term",
+      "front": "What is the wavelength of a wave?",
+      "back": "The **wavelength** is the distance between neighbouring points that are at the same stage of a wave cycle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ytt1yn",
+      "kind": "mistake",
+      "front": "Why might a student think diffraction only happens at certain gaps?",
+      "back": "Diffraction happens at every gap. It is only **easy to see** when the gap is close to the wavelength, so the spreading is obvious there.",
+      "hint": "Think about how noticeable the spreading is at very wide gaps.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v9qiec",
+      "kind": "concept",
+      "front": "Which colour of light spreads more through the same narrow slit?",
+      "back": "**Red** light spreads more, because it has a longer wavelength than blue light. Longer wavelengths diffract more through the same gap.",
+      "hint": "Compare the wavelengths of the two colours.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17xjp82",
+      "kind": "concept",
+      "front": "What does the single-slit pattern look like on a screen when laser light passes through a very narrow slit?",
+      "back": "A **central maximum** that is the widest and brightest band, with dark minima on either side. Weaker bands lie beyond, each about half as wide, and fall quickly in brightness.",
+      "hint": "Think about bright and dark bands rather than a single thin line.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h39u7a",
+      "kind": "term",
+      "front": "What is a fringe?",
+      "back": "A **fringe** is a bright or dark band on a screen where overlapping waves have interfered constructively or destructively.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "053or5r",
+      "kind": "concept",
+      "front": "What causes the many evenly spaced bright bands in a double-slit pattern?",
+      "back": "**Interference** between waves from the two slits, on top of the diffraction happening at each slit.",
+      "hint": "Consider how the two spreading beams combine on the screen.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xlufzr",
+      "kind": "mistake",
+      "front": "A student says the central bright band of a double-slit pattern is twice as wide as its neighbours, like a single slit. What is wrong?",
+      "back": "The double-slit central fringe has the **same width** as its neighbours. Only the single-slit pattern has a central maximum about twice as wide as the other bands.",
+      "hint": "Compare with the single-slit pattern.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1es7ddw",
+      "kind": "concept",
+      "front": "How does the brightness of double-slit fringes change across the screen?",
+      "back": "Fringes near the centre are brightest and become dimmer further out, because the **single-slit pattern** sets their overall brightness.",
+      "hint": "Think about what controls the overall brightness envelope.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1cgt8sp",
+      "kind": "formula",
+      "front": "What do the symbols in $\\sin\\theta=\\frac{\\lambda}{a}$ represent?",
+      "back": "$\\theta$ is the angle of the first minimum from the centre, $\\lambda$ is the wavelength and $a$ is the slit width. A narrower slit or longer wavelength gives a larger angle.",
+      "hint": "Think about where the slit width sits in the fraction.",
+      "sectionId": "s5"
+    }
+  ]
+}

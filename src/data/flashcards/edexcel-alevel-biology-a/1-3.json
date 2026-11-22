@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-3",
+  "topicCode": "1.3",
+  "topicName": "Blood vessel structure and function",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:30.506Z",
+  "cards": [
+    {
+      "id": "0abj20o",
+      "kind": "concept",
+      "front": "How does the pressure along the blood route shape the wall of each vessel type?",
+      "back": "Pressure falls from artery to vein, so **arteries** need thick, elastic walls to cope with surges, while **veins** can have thinner walls because little pressure remains.",
+      "hint": "Think about where blood is strongest on its journey and where it is weakest."
+    },
+    {
+      "id": "1p4gwaz",
+      "kind": "concept",
+      "front": "Why are capillary walls only one cell thick?",
+      "back": "Substances cross only one cell layer between the blood and the tissue, which gives a **short diffusion distance** for fast exchange.",
+      "hint": "Think about how far a substance must travel to reach a cell.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t4gaur",
+      "kind": "concept",
+      "front": "How do elastic fibres in artery walls keep blood moving?",
+      "back": "They stretch to take each surge of blood from the heartbeat, then **recoil**, which keeps the blood moving and smooths the flow.",
+      "hint": "Think about what happens to the artery at every heartbeat.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rtp1pf",
+      "kind": "term",
+      "front": "What is the endothelium?",
+      "back": "The **endothelium** is a single layer of flat cells lining the inside of blood vessels, giving blood a smooth surface.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1q0ht7s",
+      "kind": "term",
+      "front": "What is the lumen of a blood vessel?",
+      "back": "The **lumen** is the central space inside a blood vessel through which blood flows.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02axd97",
+      "kind": "term",
+      "front": "What are valves in a vein?",
+      "back": "**Valves** are flaps of tissue that open to let blood pass in one direction and close to stop it flowing backwards.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0s06qyw",
+      "kind": "process",
+      "front": "What route does blood take from the heart and back again?",
+      "back": "Heart, then **arteries**, then smaller vessels, then **capillaries** among the tissue cells, then **veins**, then back to the heart.",
+      "hint": "Start at the heart and follow the direction blood leaves it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "107rpbz",
+      "kind": "concept",
+      "front": "How can smooth muscle in small arteries change blood flow to a tissue?",
+      "back": "It contracts without conscious control and narrows the **lumen**, so less blood reaches that tissue.",
+      "hint": "Think about what happens to the space inside a tube when its wall muscle tightens.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t6xt63",
+      "kind": "concept",
+      "front": "Why can low pressure alone not return blood from the legs to the heart?",
+      "back": "The remaining pressure is too low to push blood back up. Contracting skeletal muscles squeeze the veins to move blood onward, and valves stop it flowing backwards.",
+      "hint": "Think about what muscles do next to the veins in your legs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mf7l53",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that veins pump blood back to the heart?",
+      "back": "Veins do not pump. Blood moves on because of muscle squeezing, the **remaining pressure** and valves that prevent backflow.",
+      "hint": "Compare what the heart does with what veins themselves do.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wwfx4j",
+      "kind": "mistake",
+      "front": "Why do capillaries slow blood flow, rather than just because each one is tiny?",
+      "back": "Blood slows because the **combined cross-sectional area** of all capillaries is much greater than that of the artery supplying them.",
+      "hint": "Think about adding up all the capillaries at once, not looking at one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wnt00l",
+      "kind": "concept",
+      "front": "Why do veins have a wide lumen?",
+      "back": "A wide lumen **reduces resistance** to flow, which helps the low-pressure blood move back towards the heart.",
+      "hint": "Compare how easily fluid moves through a wide tube and a narrow one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dlvf63",
+      "kind": "concept",
+      "front": "What happens to red blood cells as they pass through capillaries?",
+      "back": "They pass in **single file** because the capillaries are very narrow, and blood moves slowly, giving more time for exchange.",
+      "hint": "Think about how wide a capillary is compared with a red blood cell.",
+      "sectionId": "s4"
+    }
+  ]
+}

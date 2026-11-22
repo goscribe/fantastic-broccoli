@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "8-2",
+  "topicCode": "8.2",
+  "topicName": "Urban systems and planning",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:49.996Z",
+  "cards": [
+    {
+      "id": "09ligsn",
+      "kind": "concept",
+      "front": "Why is a city described as an open system?",
+      "back": "Because **matter and energy** cross its boundary in both directions. It takes in food, water, energy and materials, and releases waste, wastewater, heat and goods. Cities import far more than they produce, so their effects reach well beyond the built-up area.",
+      "hint": "Think about what enters and leaves the city.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05mr2x7",
+      "kind": "term",
+      "front": "What is urbanisation?",
+      "back": "**Urbanisation** is a rise in the share of a country's people who live in towns and cities over time.",
+      "hint": "It is about the whole population, not one city.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1io0fx2",
+      "kind": "concept",
+      "front": "How does a compact city make a city more sustainable?",
+      "back": "Homes, work, shops and services sit **close together**, so short journeys can be made on foot, by bike or by public transport. High density also uses less land.",
+      "hint": "Think about distance and how people travel.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1cjqrk2",
+      "kind": "term",
+      "front": "What is land use?",
+      "back": "**Land use** is what an area of land is used for, such as housing, shops, industry or parks.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xt9d47",
+      "kind": "concept",
+      "front": "Why are buildings tall and packed closely near a city centre?",
+      "back": "Land near the centre is **costly**, so buildings are built tall and close together, giving high population density.",
+      "hint": "Think about land value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16jt37v",
+      "kind": "concept",
+      "front": "Why do hard surfaces such as roads and roofs increase flood risk?",
+      "back": "They stop water soaking in, so **rain runs off quickly** and flooding becomes more likely.",
+      "hint": "Consider what the ground normally does with rain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d709py",
+      "kind": "term",
+      "front": "What is the difference between a push factor and a pull factor?",
+      "back": "A **push factor** makes people want to leave a place. A **pull factor** attracts them to another place.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xgo8km",
+      "kind": "mistake",
+      "front": "Does urbanisation mean one city is getting bigger?",
+      "back": "No. It means a **rising share of the whole population** lives in urban areas, which is different from one city growing.",
+      "hint": "Look at the whole country, not one place.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11sjvag",
+      "kind": "term",
+      "front": "What is an informal settlement?",
+      "back": "Housing built without **legal land rights or planning approval**, often lacking basic services such as clean water and sanitation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05ues93",
+      "kind": "term",
+      "front": "What is urban sprawl?",
+      "back": "The **unplanned outward spread** of low-density development from a city into surrounding rural land.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nk280y",
+      "kind": "example",
+      "front": "Give one challenge for lower-income cities and one for higher-income cities, joined with 'whereas'.",
+      "back": "For example: lower-income cities often have **informal settlements**, whereas higher-income cities more often face **costly housing** and ageing infrastructure.",
+      "hint": "Compare housing or services in each type of country.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g0vr6f",
+      "kind": "concept",
+      "front": "What is a green belt, and what is its main trade-off?",
+      "back": "A **green belt** is protected open land around a city that limits sprawl and protects farmland and wildlife. However, it can raise housing prices and push building to towns beyond the ring.",
+      "hint": "Consider both benefits and costs.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0c8p8r7",
+      "kind": "mistake",
+      "front": "Can a single measure, such as a new bus route, make a city sustainable?",
+      "back": "No. One measure alone does not make a city sustainable. **Transport, energy, waste, housing and green space** all need attention.",
+      "hint": "Think about how many systems a city depends on.",
+      "sectionId": "s6"
+    }
+  ]
+}

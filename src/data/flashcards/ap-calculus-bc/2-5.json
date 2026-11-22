@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "2-5",
+  "topicCode": "2.5",
+  "topicName": "Power rule",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:00.545Z",
+  "cards": [
+    {
+      "id": "16xgmqw",
+      "kind": "concept",
+      "front": "What does the power rule say about differentiating $f(x)=x^n$?",
+      "back": "Where the derivative exists, $f'(x)=nx^{n-1}$: **multiply** by the old exponent, then **subtract one** from the exponent.",
+      "hint": "Think about what happens to the exponent and the coefficient.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18s99xt",
+      "kind": "concept",
+      "front": "Why can you differentiate a polynomial one term at a time?",
+      "back": "The **term-by-term rule** says the derivative of a sum or difference is the sum or difference of the derivatives, so each term is handled separately.",
+      "hint": "Think about how a sum of terms behaves under differentiation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1j0xt3s",
+      "kind": "process",
+      "front": "What are the steps to differentiate a polynomial such as $3x^4-5x^2+6x-8$?",
+      "back": "Differentiate each term separately, keeping its coefficient: $3x^4$ gives $12x^3$, $-5x^2$ gives $-10x$, $6x$ gives $6$, and the constant $-8$ gives $0$. Combine to get $f'(x)=12x^3-10x+6$.",
+      "hint": "Handle each term on its own, then add the results.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y095t1",
+      "kind": "term",
+      "front": "What is a negative exponent?",
+      "back": "For positive $m$ and $x\\ne0$, $x^{-m}$ equals $\\frac{1}{x^m}$, a **reciprocal**. The power rule applies to it unchanged.",
+      "hint": "Think about what a negative exponent does to a power.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wk0w54",
+      "kind": "example",
+      "front": "What is $\\frac{d}{dx}x^{-3}$?",
+      "back": "$-3x^{-4}$, which can also be written as $-\\frac{3}{x^4}$. Both forms are the same derivative.",
+      "hint": "Apply the power rule with $n=-3$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nbz7z4",
+      "kind": "mistake",
+      "front": "A student writes the derivative of $5x^3$ as $4x^3$ by subtracting one from the coefficient. What is wrong?",
+      "back": "Only the **exponent** decreases; the exponent multiplies the coefficient. The correct derivative is $15x^2$, not $4x^3$.",
+      "hint": "Which number is multiplied, and which one drops by one?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1r0hrnh",
+      "kind": "concept",
+      "front": "Why must you state $x\\ne0$ for $g(x)=2x^{-2}+3x^{-1}$?",
+      "back": "Negative powers make the function **undefined at $x=0$**, so its derivative $g'(x)=-4x^{-3}-3x^{-2}$ is also undefined there.",
+      "hint": "Ask where the original function is defined.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tj6j1w",
+      "kind": "formula",
+      "front": "What is the derivative of $x^{1/2}$ for $x>0$?",
+      "back": "$\\frac{1}{2}x^{-1/2}=\\frac{1}{2\\sqrt{x}}$. The fractional exponent is handled by the same power rule.",
+      "hint": "Use $n=\\frac{1}{2}$ in the power rule.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0svehs3",
+      "kind": "mistake",
+      "front": "Is it true that a function defined at a point always has a derivative there?",
+      "back": "No. A function being **defined** at a point does not guarantee its derivative exists there. For example, $\\sqrt{x}$ is defined at zero but its derivative is not.",
+      "hint": "Compare the domain of the function with the domain of its derivative.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1j40qrv",
+      "kind": "concept",
+      "front": "Why does $\\sqrt{x}$ have no derivative at $x=0$?",
+      "back": "$f(0)=0$ exists, but $f'(x)=\\frac{1}{2\\sqrt{x}}$ grows without bound as $x$ approaches zero from the right, so no finite derivative exists there.",
+      "hint": "Look at what happens to the derivative as $x$ gets close to zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bemimc",
+      "kind": "example",
+      "front": "What is the derivative of $h(x)=x^{3/2}$ for $x>0$?",
+      "back": "$h'(x)=\\frac{3}{2}x^{1/2}$ for $x>0$. Multiply by $\\frac{3}{2}$ and subtract one from the exponent.",
+      "hint": "Multiply by the exponent first, then reduce the exponent.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0in0lxk",
+      "kind": "term",
+      "front": "What is the term-by-term rule?",
+      "back": "The **derivative of a sum or difference** equals the sum or difference of the derivatives of each term.",
+      "hint": "Think about how you handled each term in a polynomial.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pqrzj3",
+      "kind": "example",
+      "front": "What is the derivative of $f(x)=5x^4-3x^2+2x-9$?",
+      "back": "$f'(x)=20x^3-6x+2$. The constant term $-9$ contributes zero.",
+      "hint": "Differentiate each term and remember constants vanish.",
+      "sectionId": "s2"
+    }
+  ]
+}

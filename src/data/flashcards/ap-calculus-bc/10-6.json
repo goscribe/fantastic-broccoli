@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "10-6",
+  "topicCode": "10.6",
+  "topicName": "Comparison tests",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:15.460Z",
+  "cards": [
+    {
+      "id": "0ukssky",
+      "kind": "formula",
+      "front": "State the direct comparison test: what inequality is needed, and what does it tell you about each series?",
+      "back": "If $0\\le a_n\\le b_n$ for large $n$, then convergence of $\\sum b_n$ forces **convergence** of $\\sum a_n$, and divergence of $\\sum a_n$ forces **divergence** of $\\sum b_n$.",
+      "hint": "Which series controls which?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17g1s3y",
+      "kind": "concept",
+      "front": "What does the limit comparison test say when $\\lim\\frac{a_n}{b_n}=L$ for positive terms?",
+      "back": "If $0<L<\\infty$, the two series **both converge or both diverge**. Far out, each $a_n$ is about $L$ times $b_n$, so they share the same fate.",
+      "hint": "Think about the ratio of terms for large $n$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ic99tt",
+      "kind": "process",
+      "front": "How do you choose a comparison series $b_n$ for a series of positive terms?",
+      "back": "Keep the **highest power** of $n$ in the numerator and denominator, simplify the quotient, drop constant factors, then match the result to a p-series or geometric series.",
+      "hint": "Only the dominant terms matter as $n$ grows.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vwl8kk",
+      "kind": "formula",
+      "front": "When does a p-series $\\sum\\frac{1}{n^p}$ converge, and when does a geometric series $\\sum r^n$ converge?",
+      "back": "A p-series converges when $p>1$ and diverges when $p\\le 1$. A geometric series $\\sum r^n$ converges when $|r|<1$.",
+      "hint": "Compare the exponent with 1.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rd6ch5",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}\\frac{1}{n^2+1}$ converge? Name the comparison series you use.",
+      "back": "Yes. Since $n^2+1>n^2$, each term is less than $\\frac{1}{n^2}$, a p-series with $p=2>1$ that converges. So the series converges by direct comparison.",
+      "hint": "Compare the denominator with $n^2$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k8xez5",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}\\frac{n+5}{n^2+3}$ converge? Use limit comparison.",
+      "back": "It **diverges**. Take $b_n=\\frac{1}{n}$. The limit of $\\frac{a_n}{b_n}$ is $1$, which is finite and positive, and $\\sum\\frac{1}{n}$ diverges.",
+      "hint": "Keep only the dominant terms to pick $b_n$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xzypir",
+      "kind": "mistake",
+      "front": "A positive series is larger term by term than a convergent series, so it must diverge. Is this right?",
+      "back": "No. Being **larger** than a convergent series proves nothing; the larger series may still converge or diverge. Only a series smaller than a convergent one is forced to converge.",
+      "hint": "Which direction of the inequality forces which conclusion?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0eec3op",
+      "kind": "mistake",
+      "front": "In the limit comparison test, what happens if $\\lim\\frac{a_n}{b_n}$ equals $0$ or $\\infty$?",
+      "back": "The test gives **no conclusion** as stated. It needs $0<L<\\infty$, so check that $L$ is finite and positive before concluding.",
+      "hint": "Which values of $L$ does the test allow?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11j7wsh",
+      "kind": "concept",
+      "front": "Why does the limit comparison test work for terms that only look alike, such as $\\frac{1}{n^2-3}$?",
+      "back": "Far out, each term $a_n$ is about $L$ times the matching term $b_n$. Since the ratio has a finite positive limit, the series behave alike and share convergence or divergence.",
+      "hint": "Use the idea of a limit of ratios.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dn1iu4",
+      "kind": "concept",
+      "front": "Why can a series of positive terms only converge or diverge to infinity, never oscillate?",
+      "back": "Its **partial sums** only grow. They either level off, so the series converges, or grow without bound, so it diverges.",
+      "hint": "Think about what running totals do when every term is positive.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09g5r31",
+      "kind": "term",
+      "front": "What is a comparison series?",
+      "back": "A **comparison series** is a series with known behavior, such as a p-series or geometric series, chosen to test another series.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l6clpi",
+      "kind": "concept",
+      "front": "When should you use the direct comparison test rather than the limit comparison test?",
+      "back": "Use the **direct test** when a clean inequality $0\\le a_n\\le b_n$ is easy to show. Use the **limit test** when the terms only look alike and the inequality is hard to prove.",
+      "hint": "Pick the test that needs the least algebra.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0x5lsjh",
+      "kind": "process",
+      "front": "What should you write when answering a comparison test question?",
+      "back": "Name the comparison series, show the inequality or limit, then state the conclusion. Each step earns credit.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0thxzj6",
+      "kind": "example",
+      "front": "For $a_n=\\frac{4n+1}{n^2+n}$ and $b_n=\\frac{1}{n}$, find $L=\\lim\\frac{a_n}{b_n}$ and say what it shows.",
+      "back": "$L=4$, since $\\frac{a_n}{b_n}=\\frac{4n^2+n}{n^2+n}\\to 4$. As $0<4<\\infty$ and $\\sum\\frac{1}{n}$ diverges, $\\sum a_n$ diverges.",
+      "hint": "Multiply $a_n$ by $n$ and simplify.",
+      "sectionId": "s5"
+    }
+  ]
+}

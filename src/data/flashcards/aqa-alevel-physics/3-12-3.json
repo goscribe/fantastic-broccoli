@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-12-3",
+  "topicCode": "3.12.3",
+  "topicName": "Special relativity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:23.695Z",
+  "cards": [
+    {
+      "id": "16kn9d0",
+      "kind": "concept",
+      "front": "What are the two postulates of special relativity?",
+      "back": "The laws of physics are the same in every **inertial frame**. The speed of light in free space is the same for all observers, whatever the motion of the source.",
+      "hint": "Think about what stays the same for every observer, including one chasing a light beam.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uy0bls",
+      "kind": "formula",
+      "front": "Which equation links the time $t$ measured by a moving observer to the **proper time** $t_0$?",
+      "back": "$t = \\gamma t_0$, where $\\gamma = \\frac{1}{\\sqrt{1-v^2/c^2}}$ is the **Lorentz factor**. The moving observer always measures the longer interval.",
+      "hint": "Compare a clock that is present at both events with one that is moving past them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0713by3",
+      "kind": "concept",
+      "front": "Why can no particle with rest mass reach the speed of light?",
+      "back": "As $v$ approaches $c$, $\\gamma$ grows without limit, so the total energy $E = \\gamma m_0c^2$ would need to be infinite, which cannot be supplied.",
+      "hint": "Look at how the Lorentz factor behaves as $v$ gets close to $c$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1p9dgxq",
+      "kind": "term",
+      "front": "What is the proper time of two events?",
+      "back": "The **proper time** $t_0$ is the interval between the two events, measured by a clock present at both events.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ozlud9",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a moving clock must be faulty because of time dilation?",
+      "back": "Each observer finds their own clock running normally. Time dilation is about which frame the time is measured from, not a fault in the clock.",
+      "hint": "Ask what each observer sees on their own clock.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00q0bkc",
+      "kind": "example",
+      "front": "A spacecraft passes Earth at $0.80c$. Its clock records a proper time of $6.0\\,\\mathrm{s}$. What time does an Earth observer measure?",
+      "back": "About $10\\,\\mathrm{s}$. The Lorentz factor is $\\gamma \\approx 1.67$, and $t = \\gamma t_0 = 1.67 \\times 6.0\\,\\mathrm{s}$.",
+      "hint": "Find the Lorentz factor for $0.80c$ first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "025tte4",
+      "kind": "formula",
+      "front": "What is the equation for length contraction of a moving object, and what does $l_0$ represent?",
+      "back": "$l = \\frac{l_0}{\\gamma}$, where $l_0$ is the **proper length**, measured in the frame where the object is at rest. The moving observer measures the shorter length $l$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g210pw",
+      "kind": "concept",
+      "front": "Which lengths of a moving object are affected by length contraction?",
+      "back": "Only the length along the **direction of motion** contracts. Lengths at right angles to the motion stay the same.",
+      "hint": "Think about the direction the object travels in.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pk60zz",
+      "kind": "example",
+      "front": "A 50 m rod moves at $0.80c$ along its length. What length does a stationary observer measure?",
+      "back": "$30\\,\\mathrm{m}$. With $\\gamma = \\frac{5}{3}$, $l = \\frac{l_0}{\\gamma} = \\frac{50}{5/3} = 30\\,\\mathrm{m}$.",
+      "hint": "Work out $\\gamma$ before dividing the proper length.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fqao8u",
+      "kind": "concept",
+      "front": "Why do many cosmic-ray **muons** reach the ground when a muon at rest would only travel about 660 m?",
+      "back": "In the Earth frame, time dilation stretches the muon's lifetime by $\\gamma$, so it travels much further. In the muon's own frame, the atmosphere is length-contracted instead.",
+      "hint": "Compare which frame you use when measuring the muon's lifetime.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tb5a93",
+      "kind": "concept",
+      "front": "What did the Michelson-Morley experiment find about Earth's motion through a supposed medium for light?",
+      "back": "It found **no** effect of Earth's motion through a medium for light. This agrees with the constant speed of light for all observers.",
+      "hint": "Think about what the interference pattern did as the apparatus turned.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1649znt",
+      "kind": "formula",
+      "front": "How is the **rest energy** $E_0$ of a particle calculated, and what does $m_0$ represent?",
+      "back": "$E_0 = m_0c^2$, where $m_0$ is the **rest mass** in kg, measured in the particle's own rest frame. The result is in joules.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qm36ta",
+      "kind": "example",
+      "front": "What is the kinetic energy of an electron moving at $0.60c$, given $m_0 = 9.11\\times10^{-31}\\,\\mathrm{kg}$?",
+      "back": "About $2.05\\times10^{-14}\\,\\mathrm{J}$. With $\\gamma = 1.25$ and $E_0 \\approx 8.20\\times10^{-14}\\,\\mathrm{J}$, $E_k = (\\gamma - 1)E_0$.",
+      "hint": "Find the Lorentz factor and the rest energy before the kinetic energy.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1eu1smm",
+      "kind": "term",
+      "front": "What is an inertial frame of reference?",
+      "back": "An **inertial frame** is a frame of reference that moves at constant velocity, in which Newton's first law holds. A smoothly moving train is one example.",
+      "sectionId": "s1"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "2-7",
+  "topicCode": "2.7",
+  "topicName": "Ecological succession",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:33.246Z",
+  "cards": [
+    {
+      "id": "06bhjsy",
+      "kind": "concept",
+      "front": "Why does succession happen in stages rather than all at once?",
+      "back": "**Early species** change conditions, such as adding organic matter and soil, which lets new species move in. Each stage prepares the conditions for the next.",
+      "hint": "Think about what early plants do to the ground around them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16t7xjo",
+      "kind": "concept",
+      "front": "What single question decides whether succession is primary or secondary?",
+      "back": "**Is soil present at the start?** If there is no soil, it is primary succession. If soil remains, it is secondary succession.",
+      "hint": "Compare a new lava flow with a burned forest.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07hyrlm",
+      "kind": "term",
+      "front": "What is a disturbance in ecology?",
+      "back": "A **disturbance** is an event that damages or removes organisms in a community and opens space for new species. Examples include wildfire, floods, logging, and volcanic eruptions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0trmvhu",
+      "kind": "term",
+      "front": "What are pioneer species?",
+      "back": "**Pioneer species** are the first species to colonize a barren area, such as lichens and mosses. They begin changing its conditions.",
+      "hint": "Think about who arrives first on bare rock.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gj24da",
+      "kind": "process",
+      "front": "What steps does primary succession follow on bare rock?",
+      "back": "1) **Pioneer species** such as lichens and mosses arrive. 2) They slowly break down the rock. 3) Their remains add organic matter. 4) A thin layer of soil builds up. 5) Grasses and other small plants take root.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0r6birj",
+      "kind": "term",
+      "front": "What is secondary succession?",
+      "back": "**Secondary succession** is recovery that begins after a disturbance in an area where soil remains. It is much faster than primary succession, and fast-growing plants often appear within a few seasons.",
+      "hint": "Think about what a burned forest still has underground.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hsbpjf",
+      "kind": "concept",
+      "front": "Why is secondary succession usually faster than primary succession?",
+      "back": "**Soil is already present**, and it still holds seeds, roots, and nutrients. Plants can regrow quickly without waiting for pioneers to build soil.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0myjwpg",
+      "kind": "concept",
+      "front": "How does the species mix change as succession moves into the middle stages?",
+      "back": "Larger, slower-growing species replace early plants. Shrubs and young trees follow grasses, and shade from taller plants can cause sun-loving species to decline.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0oc4nqo",
+      "kind": "term",
+      "front": "What is a climax community?",
+      "back": "A **climax community** is a relatively stable late-stage community whose species composition changes only slowly unless a new disturbance occurs.",
+      "hint": "Compare it with the early stages of succession.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ww14w2",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume every disturbance starts primary succession?",
+      "back": "A disturbance does not always start primary succession. If **soil survives**, as it does after most fires, secondary succession follows instead.",
+      "hint": "Think about what a wildfire usually leaves behind.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1izbioh",
+      "kind": "concept",
+      "front": "How do the size and severity of a disturbance affect recovery?",
+      "back": "A small gap in a forest may close quickly. A large, severe disturbance can take **decades or longer** to recover.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rrtum8",
+      "kind": "concept",
+      "front": "How does logging start succession in a forest?",
+      "back": "People **remove the natural vegetation**, which clears the land and opens space for new species to colonize.",
+      "hint": "Think about what is taken away from the land.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qaa7ni",
+      "kind": "example",
+      "front": "What happens to sun-loving plants as taller shrubs and young trees grow in an abandoned field?",
+      "back": "They **decline**, because shade from the taller plants makes conditions too dark for them to survive well.",
+      "hint": "Think about what taller plants block from reaching the ground.",
+      "sectionId": "s4"
+    }
+  ]
+}

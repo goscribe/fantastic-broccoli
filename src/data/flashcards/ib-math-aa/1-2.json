@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-2",
+  "topicCode": "1.2",
+  "topicName": "Arithmetic sequences and series",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:49.492Z",
+  "cards": [
+    {
+      "id": "1lbuv7v",
+      "kind": "formula",
+      "front": "Which formula gives the nth term of an arithmetic sequence?",
+      "back": "$u_n=u_1+(n-1)d$, where $u_1$ is the first term, $d$ is the **common difference** and $n$ is a positive integer. You add $d$ exactly $n-1$ times to reach $u_n$ from $u_1$.",
+      "hint": "Count how many times d is added to get from position 1 to position n.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13f9fdw",
+      "kind": "term",
+      "front": "What is the common difference of an arithmetic sequence?",
+      "back": "The **common difference** $d$ is the constant amount added to each term to get the next one. Find it with $d=u_{n+1}-u_n$, which gives the same value for every $n$.",
+      "hint": "Subtract a term from the term after it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ljus0u",
+      "kind": "formula",
+      "front": "How do you find the sum of the first n terms of an arithmetic series when you know the first and last terms?",
+      "back": "$S_n=\\frac{n}{2}(u_1+u_n)$. This comes from pairing the terms at each end of the series, and each pair has the same total.",
+      "hint": "Think about pairing the first term with the last term.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e5rd1g",
+      "kind": "process",
+      "front": "How do you find $u_1$ and $d$ when two terms of an arithmetic sequence are given?",
+      "back": "Write $u_n=u_1+(n-1)d$ for each given term. **Subtract** the two equations to remove $u_1$, solve for $d$, then substitute to find $u_1$.",
+      "hint": "Use the two equations you get from the given terms.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06y7fqo",
+      "kind": "concept",
+      "front": "What does $\\sum_{k=1}^{n}u_k$ mean?",
+      "back": "It means add the values of $u_k$ for $k=1$ up to $k=n$. The **lower limit** is the first value of $k$ and the **upper limit** is the last value.",
+      "hint": "Read the symbol as 'add up'.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16m6u74",
+      "kind": "concept",
+      "front": "If the rule after the sigma is linear in k, what kind of sequence do the terms form?",
+      "back": "They form an **arithmetic sequence**, so the arithmetic sum formulae can be used on the series.",
+      "hint": "Check whether the terms rise or fall by the same amount each time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dwi2j3",
+      "kind": "mistake",
+      "front": "A student says $\\sum_{k=5}^{12}$ has 7 terms. What is wrong?",
+      "back": "It has **8** terms, since $12-5+1=8$. Both the lower and upper values of $k$ are included, so you must add 1 to the difference of the limits.",
+      "hint": "Check whether both end values are counted.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13tifa6",
+      "kind": "concept",
+      "front": "Why does the nth term formula use $n-1$ rather than $n$?",
+      "back": "The first term needs no additions, so reaching $u_n$ from $u_1$ takes only $n-1$ steps of size $d$.",
+      "hint": "How many steps separate position 1 from position n?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ualx5y",
+      "kind": "example",
+      "front": "In the sequence 7, 11, 15, …, what is $u_{40}$?",
+      "back": "$u_{40}=163$. With $u_1=7$ and $d=4$, $u_{40}=7+39\\times4=163$.",
+      "hint": "Use $u_1=7$ and $d=4$ in the nth term formula.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xf94l5",
+      "kind": "example",
+      "front": "Calculate the sum of the first 30 terms of an arithmetic sequence with $u_1=6$ and $d=5$.",
+      "back": "$S_{30}=2355$. First $u_{30}=6+29\\times5=151$, so $S_{30}=\\frac{30}{2}(6+151)=15\\times157=2355$.",
+      "hint": "Find $u_{30}$ first, then use the sum formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sg70hg",
+      "kind": "example",
+      "front": "Calculate $\\sum_{k=1}^{20}(3k+2)$.",
+      "back": "The sum is **670**. The first term is 5 and the twentieth term is 62, so $S_{20}=\\frac{20}{2}(5+62)=670$.",
+      "hint": "Substitute k=1 and k=20 into the rule to find the first and last terms.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0a4t6ib",
+      "kind": "term",
+      "front": "What is the difference between a sequence and a series?",
+      "back": "A **sequence** is an ordered list of terms, while a **series** is the sum of those terms. $S_n$ denotes the sum of the first $n$ terms.",
+      "hint": "One is a list, the other is a total.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xof9iy",
+      "kind": "mistake",
+      "front": "Why is a patterned list not always an arithmetic sequence?",
+      "back": "Because in an arithmetic sequence the differences between consecutive terms must **all be equal**. A pattern with changing differences does not qualify.",
+      "hint": "Check the differences between neighbouring terms.",
+      "sectionId": "s1"
+    }
+  ]
+}

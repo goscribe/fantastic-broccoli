@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "2-8",
+  "topicCode": "2.8",
+  "topicName": "Random variables and distributions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:10.185Z",
+  "cards": [
+    {
+      "id": "0imepne",
+      "kind": "concept",
+      "front": "What is a random variable, in one sentence?",
+      "back": "A **random variable** is a variable whose numerical value is set by the outcome of a chance process, usually written as a capital letter such as $X$.",
+      "hint": "Think about the number of heads in three coin flips.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ao3j61",
+      "kind": "concept",
+      "front": "How can you tell a discrete random variable from a continuous one?",
+      "back": "A **discrete** variable takes countable, separate values, usually found by counting. A **continuous** variable can take any value in an interval, usually found by measuring.",
+      "hint": "Ask whether you could list all the possible values.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pcrusb",
+      "kind": "concept",
+      "front": "What two rules must a probability distribution satisfy?",
+      "back": "Each probability must be between **0 and 1** inclusive, and the probabilities of all possible values must add to **exactly 1**.",
+      "hint": "One rule is about each value, one is about the total.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ulola6",
+      "kind": "term",
+      "front": "What is a probability distribution?",
+      "back": "The **complete list** of a random variable's possible values together with their probabilities, which must add to 1.",
+      "hint": "It answers: which values, and how likely is each?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12aio6q",
+      "kind": "term",
+      "front": "What is a density curve?",
+      "back": "A **density curve** is a smooth curve on or above the horizontal axis with total area 1. The area under it over an interval gives that interval's probability.",
+      "hint": "It is the distribution of a continuous random variable.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10il8cz",
+      "kind": "formula",
+      "front": "How do you find a missing probability in a distribution?",
+      "back": "Subtract the known probabilities from 1: $P(X=4)=1-[P(1)+P(2)+P(3)]$, because all probabilities must total 1.",
+      "hint": "The unknown value is the only one left over.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wt51ss",
+      "kind": "example",
+      "front": "A store's $X$ has $P(1)=0.35$, $P(2)=0.30$, $P(3)=0.20$, and $P(4)=0.15$. What is $P(X\\ge 3)$?",
+      "back": "$P(X\\ge 3)=0.20+0.15=0.35$. For a discrete variable, add the probabilities of the values in the event.",
+      "hint": "Which values count as 3 or more?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dubsou",
+      "kind": "example",
+      "front": "$Z$ takes the values 1, 2, 3, and 4 with probabilities 0.1, 0.4, 0.3, and 0.2. What is $P(Z\\ge 3)$?",
+      "back": "$P(Z\\ge 3)=0.3+0.2=0.5$. Add the probabilities of the values 3 and 4.",
+      "hint": "Add only the values in the event.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0p9sqsa",
+      "kind": "example",
+      "front": "Is the number of text messages a student receives in one day discrete or continuous?",
+      "back": "**Discrete**, because the number is counted and takes separate whole-number values.",
+      "hint": "Can you count it, or do you measure it?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "099rvs5",
+      "kind": "mistake",
+      "front": "Probabilities of 0.4, 0.5, and 0.3 are given for three values. A student says this is a valid distribution. What is wrong?",
+      "back": "They add to **1.2**, not 1. All probabilities of possible values must total exactly 1, so this is not a valid distribution.",
+      "hint": "Add all three numbers first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1msg0s3",
+      "kind": "mistake",
+      "front": "A student says P(X = 5) = 0 means a continuous value of 5 is impossible and nearby values are too. What is wrong?",
+      "back": "A single exact value has zero width, so its probability is 0. Intervals around it still have **positive probability**, so nearby values are possible.",
+      "hint": "Think about the area over an interval.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qgzobv",
+      "kind": "concept",
+      "front": "Why does the area under a density curve give probability?",
+      "back": "The probability of an interval is the **area under the curve** over that interval. The total area is 1, and a single exact value has no width, so its area is 0.",
+      "hint": "Link width to area.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "142uepa",
+      "kind": "formula",
+      "front": "What does $P(X=x)$ mean?",
+      "back": "The **probability** that the random variable $X$ takes the particular value $x$.",
+      "hint": "Capital X is the variable, lowercase x is one value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zurpwa",
+      "kind": "process",
+      "front": "What are the steps to find the probability of an event for a discrete random variable?",
+      "back": "List the values that belong to the event, then **add** their probabilities from the distribution.",
+      "hint": "Start by identifying which values are in the event.",
+      "sectionId": "s5"
+    }
+  ]
+}

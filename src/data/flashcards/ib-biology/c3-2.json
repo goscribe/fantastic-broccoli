@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "c3-2",
+  "topicCode": "C3.2",
+  "topicName": "Defence against disease",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:59.859Z",
+  "cards": [
+    {
+      "id": "1a2qeuz",
+      "kind": "concept",
+      "front": "Why do physical and chemical barriers matter before the immune system is needed?",
+      "back": "They act first and stop many pathogens entering or surviving, so the immune system does not need to recognise each one. Intact **skin** blocks entry, mucus traps microbes, and stomach acid kills many swallowed pathogens.",
+      "hint": "Think about what happens before any immune cell gets involved.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uppgqs",
+      "kind": "concept",
+      "front": "How does a lymphocyte pick out one particular pathogen?",
+      "back": "Each lymphocyte has receptors with a particular binding shape. A matching **antigen** binds that receptor and can help activate the lymphocyte.",
+      "hint": "Think lock and key.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pbk6vt",
+      "kind": "concept",
+      "front": "How do innate and adaptive responses differ?",
+      "back": "Innate responses recognise broad **pathogen features** and act rapidly, with no antigen-specific memory. Adaptive responses use lymphocytes matching a specific antigen, develop more slowly in a first infection, and form memory cells.",
+      "hint": "Compare recognition, speed and memory.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ndmsuj",
+      "kind": "term",
+      "front": "What is an antigen?",
+      "back": "A **molecule** recognised by a specific lymphocyte receptor or antibody. Different pathogens can carry different antigens.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06750zx",
+      "kind": "mistake",
+      "front": "A student says an antigen is always a whole pathogen. What is wrong?",
+      "back": "An antigen is a **molecule**, or part of one, that can be recognised. It does not have to be a whole pathogen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rztq24",
+      "kind": "process",
+      "front": "Outline how an innate response deals with a pathogen that has crossed a barrier.",
+      "back": "1 Damaged tissue and immune cells release signals that start **inflammation**. 2 Nearby blood vessels widen and become more permeable, letting defensive cells and proteins into the tissue. 3 Phagocytes move to the infection and engulf pathogens by **phagocytosis**, enclosing them in vesicles to be broken down.",
+      "hint": "Three steps: signal, vessels, engulf.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q6ympt",
+      "kind": "term",
+      "front": "What is inflammation?",
+      "back": "A **tissue response** that increases blood flow and vessel permeability near injury or infection, bringing defensive cells and proteins in. Redness, warmth and swelling can result.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mld42l",
+      "kind": "term",
+      "front": "What are phagocytes?",
+      "back": "Immune cells that **engulf** particles, including pathogens, and break them down.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1j3deyr",
+      "kind": "concept",
+      "front": "How do B lymphocytes help defeat a pathogen?",
+      "back": "Activated B lymphocytes develop into **plasma cells** that release antibodies matching the antigen. Antibodies bind pathogens or their toxins, blocking their action or making them easier to remove.",
+      "hint": "Follow the chain from B cell to antibody.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15czw78",
+      "kind": "mistake",
+      "front": "A student claims antibodies enter infected body cells and destroy them. Why is this wrong?",
+      "back": "Antibodies do not enter infected cells. **Cytotoxic T lymphocytes** recognise infected body cells displaying a matching antigen and destroy them.",
+      "hint": "Which cell type does the destroying?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tm2m77",
+      "kind": "concept",
+      "front": "Why is a second infection by the same pathogen often dealt with faster?",
+      "back": "Some activated **B and T lymphocytes** become memory cells that remain after the infection. They enable a faster response to the same antigen later.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01rd0uu",
+      "kind": "term",
+      "front": "What is non-specific defence?",
+      "back": "Protection against broad groups of pathogens, responding to **common features** without selecting a uniquely matching lymphocyte. Barriers and innate responses are examples.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1u95bqm",
+      "kind": "concept",
+      "front": "How do innate and adaptive responses work together?",
+      "back": "Innate cells can **present antigens** to T lymphocytes, and antibodies from the adaptive response can help phagocytes engulf pathogens.",
+      "hint": "Name one way each direction helps.",
+      "sectionId": "s5"
+    }
+  ]
+}

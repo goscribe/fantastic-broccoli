@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-9",
+  "topicCode": "2.9",
+  "topicName": "Amino acids and protein structure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:04.161Z",
+  "cards": [
+    {
+      "id": "02nf9nx",
+      "kind": "concept",
+      "front": "Which part of an amino acid varies, giving twenty different amino acids?",
+      "back": "The **R group** is the variable side group on the central carbon. Its differences change how the protein folds and what it can do.",
+      "hint": "Think about the four groups attached to the central carbon.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0roa2ak",
+      "kind": "process",
+      "front": "How does a peptide bond form between two amino acids?",
+      "back": "The **carboxyl group** of one amino acid reacts with the amino group of the other, releasing a molecule of water. This is a condensation reaction.",
+      "hint": "Start by identifying which two groups react.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vpfz72",
+      "kind": "concept",
+      "front": "Why can changing one amino acid in a chain change a protein's final shape?",
+      "back": "The primary structure sets which R groups sit at which positions. Those R groups control how the chain folds, so the sequence decides every higher level.",
+      "hint": "Consider what decides which R groups interact with each other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1esnnoj",
+      "kind": "term",
+      "front": "Which bonds hold the secondary structure together, and what shapes does it form?",
+      "back": "**Hydrogen bonds** between oxygen in one peptide link and hydrogen in a nearby link form the alpha-helix and beta-pleated sheet. Each bond is weak, but many together are stable.",
+      "hint": "Only the repeating part of the chain takes part here.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19rmr9z",
+      "kind": "term",
+      "front": "What is the tertiary structure of a protein?",
+      "back": "The **tertiary structure** is the overall three-dimensional shape of one polypeptide, held by interactions between R groups.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0e7aiav",
+      "kind": "term",
+      "front": "What is a disulfide bond?",
+      "back": "A **disulfide bond** is a covalent bond between the sulfur atoms of two cysteine R groups. It is stronger than a hydrogen bond.",
+      "hint": "Think about which amino acid contains sulfur.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ug82id",
+      "kind": "concept",
+      "front": "Why do non-polar R groups cluster inside a folded protein?",
+      "back": "They pack away from water inside the protein, forming a hydrophobic interaction that helps hold the tertiary structure in place.",
+      "hint": "Think about how oily molecules behave in water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1a6j919",
+      "kind": "term",
+      "front": "What is the quaternary structure of a protein?",
+      "back": "The **quaternary structure** is the arrangement of two or more polypeptides in one protein. Haemoglobin has four, joined mainly by the same kinds of bond as in tertiary structure.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1j40hfo",
+      "kind": "mistake",
+      "front": "A student says hydrolysis releases water. Why is this wrong?",
+      "back": "Hydrolysis uses water to break a peptide bond. Condensation is the reaction that releases water when a bond forms.",
+      "hint": "Compare what happens to water in each reaction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w749au",
+      "kind": "mistake",
+      "front": "A student says a protein made of one polypeptide has a quaternary structure. Why is this wrong?",
+      "back": "Quaternary structure needs two or more polypeptides in one protein. A protein with a single polypeptide has no quaternary structure.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1sg5lcu",
+      "kind": "concept",
+      "front": "Which bonds hold the primary structure together?",
+      "back": "Only **peptide bonds** hold the primary structure together. The gene fixes the order of amino acids, so each protein has its own sequence.",
+      "hint": "Think about what joins amino acids in the first place.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vhj3g1",
+      "kind": "concept",
+      "front": "How do globular proteins differ in shape from fibrous proteins such as collagen?",
+      "back": "Globular proteins fold into compact shapes with hydrophobic R groups inside. Fibrous proteins like collagen are long and strong, with three polypeptides wound together.",
+      "hint": "Compare how compact each shape is.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0gtfr8l",
+      "kind": "mistake",
+      "front": "A student says the amino group is the acidic part of an amino acid. What is wrong?",
+      "back": "The **carboxyl group** is the acidic part. The amino group contains nitrogen and is not the acidic group.",
+      "hint": "Check which group the note describes as acidic.",
+      "sectionId": "s1"
+    }
+  ]
+}

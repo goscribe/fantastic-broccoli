@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "6-1-3",
+  "topicCode": "6.1.3",
+  "topicName": "Manipulating genomes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:40.132Z",
+  "cards": [
+    {
+      "id": "1rw242l",
+      "kind": "term",
+      "front": "What does a restriction enzyme do to DNA?",
+      "back": "It **cuts** DNA at or near a short base sequence it recognises. Each enzyme cuts only where its own recognition sequence occurs.",
+      "hint": "Think about what decides where an enzyme acts on a DNA molecule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00oxgmv",
+      "kind": "process",
+      "front": "How is a gene inserted into a plasmid to make recombinant DNA?",
+      "back": "1) Cut the gene and the plasmid with the same restriction enzyme to give matching **sticky ends**. 2) The sticky ends pair by complementary base pairing. 3) **DNA ligase** seals the sugar–phosphate backbones.",
+      "hint": "Start with what the same enzyme does to both pieces of DNA.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1t1e96v",
+      "kind": "process",
+      "front": "What happens in one cycle of PCR, and at what temperatures?",
+      "back": "**Denaturation** at about $95\\,^{\\circ}\\text{C}$ separates the two strands. **Annealing** at $50$–$65\\,^{\\circ}\\text{C}$ lets primers bind. **Extension** at about $72\\,^{\\circ}\\text{C}$ lets DNA polymerase build new strands.",
+      "hint": "There are three stages, each at a different temperature.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "196mbok",
+      "kind": "formula",
+      "front": "Which formula gives the number of PCR copies after a number of cycles?",
+      "back": "Number of copies $=$ starting copies $\\times\\,2^{n}$, where $n$ is the number of **cycles**. Each cycle doubles the copies, and copies have no unit.",
+      "hint": "Think about what happens to the copies each time the cycle repeats.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uk8jdo",
+      "kind": "example",
+      "front": "A PCR reaction starts with 50 copies of the target region. How many copies are there after 8 cycles?",
+      "back": "$12\\,800$ copies. Working: $50\\times2^{8}=50\\times256=12\\,800$.",
+      "hint": "Work out $2^{8}$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17yioct",
+      "kind": "term",
+      "front": "What is gel electrophoresis?",
+      "back": "A technique that **separates DNA fragments by size** as they move through a gel in an electric field. A stain or fluorescent label is then needed to make the fragments visible.",
+      "hint": "Think about how the gel behaves towards fragments of different lengths.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "176ot5j",
+      "kind": "concept",
+      "front": "Why do DNA fragments move towards the positive electrode in electrophoresis?",
+      "back": "DNA is **negatively charged** because of its phosphate groups, so it is attracted to the positive electrode.",
+      "hint": "Look at which part of each nucleotide carries the charge.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qdkq9q",
+      "kind": "mistake",
+      "front": "Which DNA fragments travel further through an electrophoresis gel?",
+      "back": "**Short** fragments move faster and travel further. Long fragments stay nearer the wells, so saying larger fragments travel further reverses the result.",
+      "hint": "Think about how easily the gel mesh slows each size of fragment.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "006oi8i",
+      "kind": "process",
+      "front": "What are the main steps in the fluorescent method of DNA sequencing?",
+      "back": "1) Copy the template strand with a few labelled **chain-terminating nucleotides** present. 2) Fragments end at each base, each with its own fluorescent label. 3) Separate the fragments by size, shortest first. 4) Read the labels; the order from shortest to longest gives the base order.",
+      "hint": "Consider what the copied fragments look like before they are separated by size.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uhdmrj",
+      "kind": "concept",
+      "front": "Why do people disagree about growing genetically modified crops?",
+      "back": "Benefits include higher yields and fewer pesticide sprays. Concerns include genes spreading to wild relatives and uncertain effects on non-target organisms. Weighing these is a matter of **judgement**.",
+      "hint": "Think about who gains from a crop and who might bear the risks.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "10gnuln",
+      "kind": "concept",
+      "front": "Why are short tandem repeats useful for DNA profiling?",
+      "back": "People differ in how many times each repeat occurs, so the pattern of fragments is **almost unique** to an individual.",
+      "hint": "Consider what varies between people at these repeated sequences.",
+      "sectionId": "s7"
+    },
+    {
+      "id": "198yucp",
+      "kind": "mistake",
+      "front": "What does a DNA match on its own prove at a crime scene?",
+      "back": "It shows the samples are **consistent with one source**, but does not prove guilt. A match alone is not proof that a suspect committed the crime.",
+      "hint": "Think about what other evidence a court would need alongside the profile.",
+      "sectionId": "s7"
+    }
+  ]
+}

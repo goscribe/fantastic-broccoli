@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "4-4",
+  "topicCode": "4.4",
+  "topicName": "Physical and chemical changes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:32.503Z",
+  "cards": [
+    {
+      "id": "0rlade5",
+      "kind": "concept",
+      "front": "What separates a physical change from a chemical change?",
+      "back": "A **chemical change** produces substances with different chemical identities, while a **physical change** keeps the same identity. Ask whether the particles became different substances, not how dramatic the change looks.",
+      "hint": "Think about identity, not appearance.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03ca69h",
+      "kind": "concept",
+      "front": "How can you tell that a chemical change has happened?",
+      "back": "The **products** differ from the **reactants**, so new substances formed. Clues such as gas, a new solid, or a color change suggest this, but each clue needs context.",
+      "hint": "Name the substances before and after.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rrpbtt",
+      "kind": "concept",
+      "front": "What happens to chemical bonds during a chemical reaction?",
+      "back": "Bonds in the reactants **break**, and new bonds **form** to make different substances. Atoms are conserved; only their connections change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "173oq2y",
+      "kind": "term",
+      "front": "What is a physical change?",
+      "back": "A change that alters a substance's **form or state** without changing its chemical identity, such as melting ice.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0szvuez",
+      "kind": "term",
+      "front": "What is a chemical change?",
+      "back": "A change that produces substances with **chemical identities** different from those of the starting substances.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jt0ss4",
+      "kind": "term",
+      "front": "What is a phase change?",
+      "back": "A **phase change** moves a substance between solid, liquid, and gas without changing its chemical identity. Melting, freezing, and boiling are examples.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05apyes",
+      "kind": "term",
+      "front": "What are reactants and products?",
+      "back": "**Reactants** are the starting substances consumed in a reaction. **Products** are the substances formed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "110our1",
+      "kind": "mistake",
+      "front": "Boiling water looks dramatic, so it must be a chemical change. Is that right?",
+      "back": "**No.** Boiling water produces vapor, but the molecules remain $\\mathrm{H_2O}$. A visible change is not always chemical.",
+      "hint": "Check whether the molecules change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kv80s4",
+      "kind": "mistake",
+      "front": "Does seeing bubbles always prove that a chemical reaction happened?",
+      "back": "**No.** Bubbles can come from boiling, which makes vapor without creating a new substance. Check whether the products differ.",
+      "hint": "Bubbles are only one clue.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "175kg7a",
+      "kind": "mistake",
+      "front": "A change that is hard to reverse must be chemical. True or false?",
+      "back": "**False.** Some physical changes are difficult to reverse. Decide by comparing the substances before and after the change.",
+      "hint": "Reversibility is not the test.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0stibf2",
+      "kind": "process",
+      "front": "What steps do you follow to classify a change as physical or chemical?",
+      "back": "1) Name the substances before the change. 2) Name the substances after it. 3) Decide whether their chemical identities differ. Different identities mean a **chemical change**.",
+      "hint": "Compare before and after.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05k2zp9",
+      "kind": "formula",
+      "front": "In $\\mathrm{H_2 + Cl_2 \\rightarrow 2HCl}$, what does the 2 in front of HCl mean?",
+      "back": "It means **two molecules** of hydrogen chloride form. Each side then has two H and two Cl atoms, so the atoms are conserved.",
+      "hint": "Count the atoms on each side.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "105tk3u",
+      "kind": "example",
+      "front": "Is melting ice a physical or a chemical change, and why?",
+      "back": "**Physical.** The water changes from solid to liquid, but its molecules stay $\\mathrm{H_2O}$, so no new substance forms.",
+      "hint": "Ask what the molecules are after melting.",
+      "sectionId": "s2"
+    }
+  ]
+}

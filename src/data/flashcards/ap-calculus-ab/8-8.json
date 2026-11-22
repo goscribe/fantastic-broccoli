@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "8-8",
+  "topicCode": "8.8",
+  "topicName": "Volumes: triangle and semicircle cross sections",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:39.301Z",
+  "cards": [
+    {
+      "id": "1xp4zbi",
+      "kind": "formula",
+      "front": "What integral gives the volume of a solid whose cross-sectional area at position x is A(x), from x=a to x=b?",
+      "back": "$V=\\int_a^b A(x)\\,dx$. Each thin slice adds about its **area** times its thickness, and the integral adds all the slices.",
+      "hint": "Think of stacking very thin slices.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14cvfbl",
+      "kind": "concept",
+      "front": "What sets the size of each triangular or semicircular cross section?",
+      "back": "A **segment** across the base region. For vertical slices, its length is $f(x)-g(x)$, the upper boundary minus the lower boundary. Use it as the triangle's side or the semicircle's diameter.",
+      "hint": "Find the length before using any shape formula.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12etk3y",
+      "kind": "formula",
+      "front": "What is the area of a semicircle whose diameter is $w$?",
+      "back": "$A=\\frac{\\pi}{8}w^2$. The **radius** is $w/2$, and half of the circle's area $\\pi(w/2)^2$ gives this.",
+      "hint": "Start from a full circle and halve it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eeolzb",
+      "kind": "formula",
+      "front": "What is the area of an equilateral triangle with side length $s$?",
+      "back": "$A=\\frac{\\sqrt3}{4}s^2$, where $s$ is the **side** length of the triangle.",
+      "hint": "All three sides are equal.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "089vh2q",
+      "kind": "term",
+      "front": "What is a base region?",
+      "back": "The **two-dimensional** region whose segments determine the dimensions of a solid's cross sections.",
+      "hint": "It is the flat shape the solid sits on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09eao8m",
+      "kind": "term",
+      "front": "What is a cross section?",
+      "back": "The **shape** formed when a solid is sliced by a plane. Each cross section lies perpendicular to the chosen axis.",
+      "hint": "Imagine cutting the solid with a knife.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0brev9e",
+      "kind": "formula",
+      "front": "What is the area of a triangle with base width $w$ and perpendicular height $t$?",
+      "back": "$A=\\frac12 wt$. Use the **perpendicular** height. If the height is $q$ times the base width, use $t=qw$.",
+      "hint": "Height must be perpendicular to the base.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13zt14w",
+      "kind": "mistake",
+      "front": "A student uses the diameter $w$ directly as the radius in the semicircle area formula. What goes wrong?",
+      "back": "**Wrong radius**: the radius is $w/2$. Using $w$ makes the area four times too large. Divide the diameter by two first.",
+      "hint": "Check what the radius is before substituting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "178o66u",
+      "kind": "example",
+      "front": "The region under $y=x$ on $0\\leq x\\leq2$ has equilateral triangle cross sections perpendicular to the $x$-axis, with lengths in cm. What is the volume?",
+      "back": "$V=\\frac{2\\sqrt3}{3}\\,\\mathrm{cm^3}$. The side is $x$, so $A(x)=\\frac{\\sqrt3}{4}x^2$, and $\\int_0^2$ of this gives the answer.",
+      "hint": "The side length is the segment from y=0 to y=x.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n45hh7",
+      "kind": "example",
+      "front": "Same region as before, but the cross sections are semicircles with diameter $x$ and lengths in cm. What is the volume?",
+      "back": "$V=\\frac{\\pi}{3}\\,\\mathrm{cm^3}$. Here $A(x)=\\frac{\\pi}{8}x^2$, and $\\int_0^2 \\frac{\\pi}{8}x^2\\,dx=\\frac{\\pi}{3}$.",
+      "hint": "Use the semicircle area formula with $w=x$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wly0hl",
+      "kind": "mistake",
+      "front": "With lengths in cm, a student says the volume of a solid is in square cm. Why is this wrong?",
+      "back": "The volume is in **cubic** centimeters. Area is in square cm, and integrating an area over a length adds one more length unit.",
+      "hint": "Count the units in each step.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hcf61k",
+      "kind": "process",
+      "front": "What are the steps to set up a volume integral for slices perpendicular to the $y$-axis?",
+      "back": "1. Find each **horizontal** segment's length as a function of $y$. 2. Write the cross-sectional area $A(y)$. 3. Integrate: $V=\\int_c^d A(y)\\,dy$ between the lowest and highest $y$.",
+      "hint": "Use horizontal segments, not vertical ones.",
+      "sectionId": "s3"
+    }
+  ]
+}

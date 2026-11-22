@@ -425,12 +425,121 @@
   .nl-meter { height: 8px; overflow: hidden; border-radius: 999px; background: var(--muted); }
   .nl-meter > span { display: block; height: 100%; width: 100%; border-radius: 999px; background: var(--accent); transform-origin: left center; transform: scaleX(var(--v, 0)); transition: transform 0.9s var(--ease-out) 0.1s; }
 
+  /* ---------- Flashcards: a stack that flips with a bounce and flies off when decided ---------- */
+  .nl-fc-stage { position: relative; display: grid; padding-bottom: 22px; touch-action: pan-y; }
+  .nl-fc-stage > * { grid-area: 1 / 1; }
+  .nl-fc-peek {
+    z-index: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--r-panel);
+    background: var(--card);
+    box-shadow: 0 4px 0 0 var(--edge);
+    transform: translateY(calc(var(--depth) * 11px)) scale(calc(1 - var(--depth) * 0.045));
+    transform-origin: 50% 100%;
+    opacity: calc(1 - var(--depth) * 0.25);
+    transition: transform 0.45s var(--ease-spring);
+  }
+  .nl-fc-card {
+    position: relative;
+    z-index: 2;
+    perspective: 1400px;
+    transform: translateX(var(--dx, 0px)) rotate(var(--rot, 0deg));
+    transition: transform 0.5s var(--ease-spring);
+    animation: nl-fc-in 0.6s var(--ease-spring) backwards;
+    user-select: none;
+  }
+  .nl-fc-card.nl-fc-dragging { transition: none; cursor: grabbing; }
+  @keyframes nl-fc-in { 0% { opacity: 0; transform: translateY(26px) scale(0.92); } 60% { opacity: 1; transform: translateY(-4px) scale(1.02); } 100% { transform: none; } }
+  @keyframes nl-fc-out-right { to { opacity: 0; transform: translateX(135%) translateY(30px) rotate(24deg); } }
+  @keyframes nl-fc-out-left { to { opacity: 0; transform: translateX(-135%) translateY(30px) rotate(-24deg); } }
+  .nl-fc-out-right { animation: nl-fc-out-right 0.38s cubic-bezier(0.5, 0, 0.75, 0) forwards; }
+  .nl-fc-out-left { animation: nl-fc-out-left 0.38s cubic-bezier(0.5, 0, 0.75, 0) forwards; }
+  /* The first card wiggles once, to say it can be turned over. */
+  @keyframes nl-fc-nudge { 0%, 100% { rotate: 0deg; } 20% { rotate: -2.5deg; } 40% { rotate: 2deg; } 60% { rotate: -1deg; } 80% { rotate: 0.5deg; } }
+  .nl-fc-nudge > .nl-fc-inner { animation: nl-fc-nudge 0.8s ease-in-out 1.8s 1; }
+  .nl-fc-inner {
+    display: grid;
+    width: 100%;
+    min-height: 290px;
+    text-align: left;
+    transform-style: preserve-3d;
+    transition: transform 0.75s var(--ease-spring);
+    cursor: pointer;
+    border-radius: var(--r-panel);
+  }
+  .nl-fc-inner[data-flipped="true"] { transform: rotateY(180deg); }
+  .nl-fc-inner:focus-visible { outline: 3px solid var(--ring); outline-offset: 4px; }
+  .nl-fc-face {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    min-height: 290px;
+    padding: 20px 22px 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-panel);
+    background: var(--card);
+    box-shadow: 0 6px 0 0 var(--edge), var(--card-shadow);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .nl-fc-back { transform: rotateY(180deg); box-shadow: inset 0 0 0 2px var(--accent), 0 6px 0 0 var(--accent-edge), var(--card-shadow); }
+  .nl-fc-text { display: grid; flex: 1; place-items: center; text-align: center; text-wrap: balance; }
+  .nl-fc-back .nl-fc-text { text-wrap: pretty; }
+  @media (min-width: 640px) {
+    .nl-fc-inner, .nl-fc-face { min-height: 320px; }
+    .nl-fc-face { padding: 24px 32px 20px; }
+  }
+  /* Kind of card: a quiet chip with a coloured dot (formula's blue is the confetti blue in practice.tsx). */
+  .nl-fc-kind { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; background: var(--muted); padding: 4px 11px 4px 9px; color: var(--foreground); }
+  .nl-fc-kind::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--accent); }
+  .nl-fc-kind[data-kind="term"]::before { background: var(--hl); box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12); }
+  .nl-fc-kind[data-kind="formula"]::before { background: #4f8df7; }
+  .nl-fc-kind[data-kind="process"]::before { background: var(--ok); }
+  .nl-fc-kind[data-kind="mistake"]::before { background: var(--no); }
+  .nl-fc-kind[data-kind="example"]::before { background: var(--flame); }
+  /* While swiping: a stamp says which way it will go. */
+  .nl-fc-stamp {
+    position: absolute;
+    top: 22px;
+    z-index: 3;
+    border: 3px solid currentColor;
+    border-radius: var(--r-control);
+    padding: 2px 10px;
+    font-size: var(--fs-read);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    pointer-events: none;
+    background: var(--card);
+  }
+  .nl-fc-stamp[data-dir="got"] { left: 20px; color: var(--ok); rotate: -12deg; }
+  .nl-fc-stamp[data-dir="again"] { right: 20px; color: var(--no); rotate: 12deg; }
+  /* "Got it" is an answer, so it takes the answer green (green and rose only after an answer). */
+  .nl-fc-choice[data-dir="got"] { background: var(--ok); box-shadow: 0 4px 0 0 var(--ok-ink); }
+  .nl-fc-choice[data-dir="got"]:hover { background: var(--ok-ink); }
+  .nl-fc-choice[data-dir="got"]:active { box-shadow: 0 1px 0 0 var(--ok-ink); }
+  /* One segment per card: known, still learning, the one in hand, and the locked ones. */
+  .nl-fc-meter { display: flex; gap: 4px; }
+  .nl-fc-meter > li { height: 8px; flex: 1; border-radius: 999px; background: var(--muted); transition: background-color 0.3s ease; }
+  .nl-fc-meter > li[data-s="got"] { background: var(--ok); animation: nl-tick 0.4s var(--ease-spring); }
+  .nl-fc-meter > li[data-s="again"] { background: var(--no); animation: nl-tick 0.4s var(--ease-spring); }
+  .nl-fc-meter > li[data-s="now"] { background: var(--accent); }
+  .nl-fc-meter > li[data-s="locked"] { background: repeating-linear-gradient(-45deg, var(--muted) 0 4px, var(--edge) 4px 8px); }
+  .nl-fc-gate .nl-fc-face, .nl-fc-done .nl-fc-face { justify-content: center; }
+  .nl-fc-gate .nl-fc-face { background: radial-gradient(120% 90% at 50% 0%, var(--hl) -60%, var(--card) 60%); }
+  @keyframes nl-fc-lock { 0%, 100% { transform: none; } 30% { transform: translateY(-8px) rotate(-10deg); } 55% { transform: translateY(0) rotate(8deg); } 75% { transform: rotate(-4deg); } }
+  .nl-fc-lock { animation: nl-fc-lock 0.9s var(--ease-spring) 0.5s 1 both; }
+
   @media (prefers-reduced-motion: reduce) {
     .nl-rise, .nl-cat-in, .nl-bob, .nl-pop, .nl-shake, .nl-up, .nl-dot, [data-nl-reveal="in"], [data-nl-reveal="in"] strong { animation: none !important; }
     [data-nl-reveal="wait"] { opacity: 1; transform: none; }
     [data-nl-reveal="wait"] strong { background-size: 100% 0.5em; }
     .nl-sparkle, .nl-confetti { display: none; }
     .nl-score, .nl-findot, .nl-stagger { animation: none !important; }
+    .nl-fc-card, .nl-fc-nudge > .nl-fc-inner, .nl-fc-meter > li, .nl-fc-lock { animation: none !important; }
+    .nl-fc-card, .nl-fc-inner, .nl-fc-peek { transition: none !important; }
     .nl-btn, .nl-btn-ghost, .nl-opt, .nl-lift, .nl-terms label, .nl-defs > *, .nl-veil, .nl-secnum svg, .nl-secend i svg, .nl-secend b, .nl-node, .nl-meter > span, .nl-topbar > span, .nl-details::details-content {
       transition: none !important;
     }

@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-10-5",
+  "topicCode": "3.10.5",
+  "topicName": "X-ray imaging",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:16.756Z",
+  "cards": [
+    {
+      "id": "0a6jp3p",
+      "kind": "concept",
+      "front": "How are X-rays produced in an X-ray tube?",
+      "back": "Electrons released by **thermionic emission** from a heated filament are accelerated by a high potential difference and stop in a metal target. Some of their kinetic energy becomes X-ray photons, and most becomes heat.",
+      "hint": "Follow an electron from the filament to the target.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hvir42",
+      "kind": "formula",
+      "front": "Which equation links the transmitted intensity of an X-ray beam to the thickness of material it crosses?",
+      "back": "$I=I_0e^{-\\mu x}$, where $I_0$ is the incident intensity, $I$ the transmitted intensity, $x$ the thickness and $\\mu$ the **linear attenuation coefficient** in $\\mathrm{m^{-1}}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jqmzya",
+      "kind": "term",
+      "front": "What is attenuation?",
+      "back": "The **reduction in intensity** of an X-ray beam as it passes through matter, caused by absorption and scattering of photons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nm0l65",
+      "kind": "concept",
+      "front": "Why does bone show up clearly on an X-ray image?",
+      "back": "Bone has a higher atomic number and is denser than soft tissue, so it **attenuates** more X-rays and casts a stronger shadow on the image.",
+      "hint": "Compare bone with soft tissue.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n3e5kt",
+      "kind": "mistake",
+      "front": "Why is it wrong to describe attenuation as absorption only?",
+      "back": "Attenuation also includes **scattering**, where a photon changes direction after giving energy to an electron. Attenuation is absorption plus scattering.",
+      "hint": "Consider what happens to a photon that is not absorbed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zs5z7j",
+      "kind": "process",
+      "front": "What happens to a photon in the photoelectric effect?",
+      "back": "It is **absorbed** by an atom, and its energy ejects an electron. This effect is strong in materials of high atomic number.",
+      "hint": "Contrast this with Compton scattering.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "024p50u",
+      "kind": "process",
+      "front": "What happens to a photon in Compton scattering?",
+      "back": "It transfers some of its energy to an electron and moves off in a new direction, so it is **scattered** with lower energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08yww1v",
+      "kind": "concept",
+      "front": "Why do soft X-rays add to a patient's dose without helping the image?",
+      "back": "Soft X-rays have low energy and long wavelength, so the body **absorbs** them in the first tissues. They rarely reach the detector, so they add dose but form no image.",
+      "hint": "Think about where these photons end up in the body.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v7ikwc",
+      "kind": "concept",
+      "front": "How does raising the tube voltage change the X-ray beam?",
+      "back": "It makes the beam **harder**. The shortest wavelength, $\\lambda_\\mathrm{min}=\\frac{hc}{eV}$, becomes shorter, so the photons have more energy and penetrate further.",
+      "hint": "Relate the most energetic photon to the accelerating voltage.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10ofdnn",
+      "kind": "concept",
+      "front": "What is the purpose of a thin aluminium filter in the X-ray beam?",
+      "back": "It **removes most soft X-rays**, which would only add dose. The patient receives less dose while the image-forming hard X-rays still pass through.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jvvknj",
+      "kind": "term",
+      "front": "What is the half-value thickness of a material?",
+      "back": "The **thickness** that reduces the X-ray intensity to half its initial value. It is related to $\\mu$ by $x_{1/2}=\\frac{\\ln 2}{\\mu}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k0yzjc",
+      "kind": "example",
+      "front": "What percentage of an X-ray beam is transmitted through 4.0 cm of material with $\\mu=0.35\\,\\mathrm{cm^{-1}}$?",
+      "back": "About **25%**. The exponent is $\\mu x=1.4$, so $e^{-1.4}=0.247$, which is about 25%.",
+      "hint": "Start by multiplying $\\mu$ and $x$, using matching units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1psagqb",
+      "kind": "concept",
+      "front": "Why is a barium meal used to make the stomach visible on an X-ray?",
+      "back": "Soft tissues attenuate X-rays by similar amounts, so the stomach shows little contrast. Barium sulfate has a high atomic number, absorbs strongly, and makes the filled stomach stand out.",
+      "hint": "Think about why soft tissues look alike on an image.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0binxfr",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that a contrast medium emits X-rays?",
+      "back": "A contrast medium does not emit X-rays. It shows up because its high atomic number makes it **absorb** more of the beam than the surrounding tissue.",
+      "sectionId": "s5"
+    }
+  ]
+}

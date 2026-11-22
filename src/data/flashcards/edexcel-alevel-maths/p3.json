@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "p3",
+  "topicCode": "P3",
+  "topicName": "Coordinate geometry",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:31.337Z",
+  "cards": [
+    {
+      "id": "10505kp",
+      "kind": "formula",
+      "front": "What is the formula for the gradient $m$ of a line through two points $(x_1,y_1)$ and $(x_2,y_2)$?",
+      "back": "$m=\\frac{y_2-y_1}{x_2-x_1}$, the change in $y$ divided by the change in $x$. With two points, always find the **gradient** first.",
+      "hint": "Think of the slope of a road that rises steadily.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xoc5ky",
+      "kind": "formula",
+      "front": "What is the standard equation of a **circle** with centre $(a,b)$ and radius $r$?",
+      "back": "$(x-a)^2+(y-b)^2=r^2$. The signs inside the brackets are opposite to the centre's coordinates, and the right-hand side is $r^2$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1b7e6bi",
+      "kind": "formula",
+      "front": "What formula gives the distance $d$ between two points $(x_1,y_1)$ and $(x_2,y_2)$?",
+      "back": "$d=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$. It comes from Pythagoras' theorem applied to a right-angled triangle with sides along the axes.",
+      "hint": "Start with the horizontal and vertical sides of the triangle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ne94kg",
+      "kind": "concept",
+      "front": "What is true of the gradients of two parallel lines?",
+      "back": "They are **parallel** when their gradients are equal. They keep the same distance apart and never meet.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0afsy8a",
+      "kind": "process",
+      "front": "What are the steps to find the equation of a line through two given points?",
+      "back": "Find the gradient $m$ first. Then use $y-y_1=m(x-x_1)$ with one of the points, expand, and rearrange to $y=mx+c$.",
+      "hint": "Find what you need before using the point-gradient form.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ypf37i",
+      "kind": "example",
+      "front": "Find the equation of the line through $(2,5)$ and $(6,13)$.",
+      "back": "$y=2x+1$. The gradient is $\\frac{8}{4}=2$, so $y-5=2(x-2)$ expands to $y=2x+1$.",
+      "hint": "Work out the gradient first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02ydu8f",
+      "kind": "mistake",
+      "front": "Why is $-2$ wrong as the perpendicular gradient to a line with gradient 2?",
+      "back": "The perpendicular gradient is the **negative reciprocal**, so you must flip the fraction and change the sign, giving $-\\frac{1}{2}$.",
+      "hint": "Count both steps the note asks for.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sebkz8",
+      "kind": "example",
+      "front": "Find the line through $(3,1)$ perpendicular to $y=2x+5$, in the form $ax+by+c=0$.",
+      "back": "$x+2y-5=0$. The perpendicular gradient is $-\\frac{1}{2}$, so $y-1=-\\frac{1}{2}(x-3)$, which rearranges to this.",
+      "hint": "Find the perpendicular gradient before using a point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tsf9yz",
+      "kind": "mistake",
+      "front": "Why is it wrong to add the differences before squaring when finding a distance?",
+      "back": "Square each difference first, add the squares, then take the root last. Adding first gives a wrong length, since $(6+8)^2$ is not $6^2+8^2$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09ivud5",
+      "kind": "example",
+      "front": "What is the length of the segment joining $A(1,2)$ and $B(7,10)$?",
+      "back": "$AB=10$ units. The differences are 6 and 8, so $AB=\\sqrt{6^2+8^2}=\\sqrt{100}=10$.",
+      "hint": "Find the horizontal and vertical changes first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uu0mki",
+      "kind": "formula",
+      "front": "What are the coordinates of the **midpoint** of $(x_1,y_1)$ and $(x_2,y_2)$?",
+      "back": "$\\left(\\frac{x_1+x_2}{2},\\frac{y_1+y_2}{2}\\right)$. Each coordinate is found separately, as the mean of the two endpoint values.",
+      "hint": "Consider each coordinate separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1z09mq5",
+      "kind": "term",
+      "front": "What is a **perpendicular bisector** of a line segment?",
+      "back": "The line that passes through the midpoint of the segment at right angles to it. It combines the midpoint with a perpendicular gradient.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zqu6r0",
+      "kind": "process",
+      "front": "How do you find a missing endpoint when you know the midpoint and one endpoint?",
+      "back": "Double each coordinate of the midpoint, then subtract the matching coordinate of the known endpoint.",
+      "hint": "Use the midpoint formula in reverse.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t5womj",
+      "kind": "mistake",
+      "front": "Why is the radius of $(x-2)^2+(y+1)^2=9$ not 9?",
+      "back": "The right-hand side is $r^2$, not $r$. Here $r^2=9$, so the **radius** is $\\sqrt{9}=3$.",
+      "hint": "What does the right-hand side of the circle equation represent?",
+      "sectionId": "s5"
+    }
+  ]
+}

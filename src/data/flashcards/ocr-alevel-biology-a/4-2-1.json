@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "4-2-1",
+  "topicCode": "4.2.1",
+  "topicName": "Biodiversity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:19.346Z",
+  "cards": [
+    {
+      "id": "0662j6a",
+      "kind": "term",
+      "front": "What is biodiversity, and at which three levels does it exist?",
+      "back": "**Biodiversity** is the variety of living things. It exists as genetic diversity within species, species diversity between species, and ecosystem diversity among habitats.",
+      "hint": "Think about the scales at which variety can be measured, from smallest to largest.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pqbt65",
+      "kind": "concept",
+      "front": "Why is a diverse ecosystem usually more stable than a less diverse one?",
+      "back": "Other species can fill a role if one species declines, so the ecosystem keeps functioning.",
+      "hint": "Consider what happens to a food web when one species becomes scarce.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lqkemh",
+      "kind": "formula",
+      "front": "What is the formula for Simpson's index of diversity, and what do n and N stand for?",
+      "back": "$D=1-\\sum\\left(\\frac{n}{N}\\right)^2$, where $n$ is the number of individuals of one species and $N$ is the total number of individuals. $D$ has no unit and lies between 0 and 1.",
+      "hint": "Compare it with a simple count that leaves out how many individuals each species has.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xlxig2",
+      "kind": "concept",
+      "front": "Why can two habitats with the same species richness have different levels of diversity?",
+      "back": "Richness ignores **abundance**, the number of individuals of each species, so one dominant species can give the same richness as an even mix.",
+      "hint": "Think about what a simple species count does not record.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oc0sco",
+      "kind": "term",
+      "front": "What is an ecosystem service?",
+      "back": "A **benefit** that people obtain from natural ecosystems, such as pollination, water purification or soil formation.",
+      "hint": "Think about what people gain from healthy natural areas without paying for them directly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yfuzil",
+      "kind": "process",
+      "front": "What steps should you follow to sample two habitats with quadrats and compare their diversity?",
+      "back": "Place **quadrats** at random positions, count every species, and use the same method, area and sampling effort at each site. Repeat the sampling, calculate $D$ for every sample, then compare the values.",
+      "hint": "Consider how you avoid bias and make the comparison fair.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sft60l",
+      "kind": "example",
+      "front": "A sample contains four species with 20, 10, 5 and 5 individuals. What is Simpson's index of diversity?",
+      "back": "$D\\approx0.66$. $N=40$, the proportions are 0.5, 0.25, 0.125 and 0.125, the squares sum to 0.34375, so $D=1-0.34375=0.65625$.",
+      "hint": "Start by finding the total number of individuals in the sample.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0etnijq",
+      "kind": "mistake",
+      "front": "Why does a sample with many species not always give a high Simpson's index?",
+      "back": "**Very uneven numbers** lower the value. If one species dominates, the sum rises and $D$ falls, even when many species are present.",
+      "hint": "Consider how the abundance of each species affects the sum in the formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "188xq06",
+      "kind": "concept",
+      "front": "Why does a small, isolated population lose genetic diversity?",
+      "back": "It loses **alleles** by chance, so its genetic diversity falls and it becomes more vulnerable.",
+      "hint": "Think about how many different alleles a small group can hold compared with a large one.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0feppfo",
+      "kind": "mistake",
+      "front": "Why is it wrong to think biodiversity only falls when a species becomes extinct?",
+      "back": "A population that loses **alleles** has lower genetic diversity even if every species survives, so biodiversity can fall without any extinction.",
+      "hint": "Think about which of the three levels of biodiversity can change on its own.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0du2tbf",
+      "kind": "concept",
+      "front": "How does monoculture reduce biodiversity?",
+      "back": "Growing one crop variety lowers **genetic diversity** within the crop, and fewer species can find food or shelter on the farmland.",
+      "hint": "Compare the variety of a single-crop field with a mixed habitat.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16fydjp",
+      "kind": "term",
+      "front": "What is in situ conservation?",
+      "back": "The protection of a species within its **natural habitat**, such as in a nature reserve.",
+      "hint": "Think about where the species normally lives.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "09l7aql",
+      "kind": "concept",
+      "front": "Why can in situ conservation keep something that ex situ conservation cannot?",
+      "back": "In situ conservation keeps the **habitat** and the interactions between species, whereas ex situ conservation cannot keep whole ecosystems.",
+      "hint": "Consider what a zoo or seed bank can and cannot hold.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0y2xfgl",
+      "kind": "term",
+      "front": "What are wildlife corridors, and which conservation aim do they serve?",
+      "back": "**Wildlife corridors** link fragments of habitat, helping species move between them and supporting conservation on land split into pieces.",
+      "hint": "Think about what happens to a species when its habitat is broken into isolated patches.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-2-1-5",
+  "topicCode": "3.2.1.5",
+  "topicName": "Classification of particles",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:54.426Z",
+  "cards": [
+    {
+      "id": "0mmix3k",
+      "kind": "concept",
+      "front": "How does the strong interaction divide particles into hadrons and leptons?",
+      "back": "Hadrons experience the **strong interaction** and leptons do not, so this is the first sorting test. Both groups still feel the weak interaction.",
+      "hint": "Compare which forces each group feels.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yt8cr1",
+      "kind": "concept",
+      "front": "How does baryon number separate baryons from mesons?",
+      "back": "**Baryons** have baryon number $+1$ (antibaryons $-1$), while **mesons** have $0$. Baryon number is conserved in every interaction.",
+      "hint": "Look at the number assigned to each group.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tbqag6",
+      "kind": "process",
+      "front": "What are the steps to classify an unknown particle?",
+      "back": "First test whether it feels the **strong interaction**: if not, it is a lepton. If it does, it is a hadron. Baryon number $\\pm 1$ gives a baryon or antibaryon, and $0$ gives a **meson**.",
+      "hint": "Start with the first test, then move to the second.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hwkyvr",
+      "kind": "concept",
+      "front": "How does a muon compare with an electron?",
+      "back": "A **muon** is a lepton with the same charge as the electron but about 200 times its mass. It is unstable and decays into an electron and neutrinos.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1t38ouy",
+      "kind": "concept",
+      "front": "What kind of particle is a neutrino?",
+      "back": "A **neutrino** is a neutral lepton with almost no mass. It feels only the weak interaction and gravity.",
+      "hint": "Compare its charge and interactions with the electron's.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dy19gz",
+      "kind": "example",
+      "front": "What is the total baryon number before and after the decay $\\mathrm{n}\\rightarrow\\mathrm{p}+\\mathrm{e^-}+\\bar{\\nu}_\\mathrm{e}$?",
+      "back": "**+1** before and after. The neutron and proton are baryons, while the electron and antineutrino are leptons with baryon number $0$, so it is conserved.",
+      "hint": "Add up the baryon number of each particle on each side.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gq85o7",
+      "kind": "example",
+      "front": "What is the total baryon number before and after the decay $\\pi^+\\rightarrow\\mu^++\\nu_\\mu$?",
+      "back": "**0** before and after. The pion is a meson with baryon number $0$, and the muon and neutrino are leptons, also $0$, so it is conserved.",
+      "hint": "Check the group each particle belongs to first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yzz7am",
+      "kind": "mistake",
+      "front": "A student says all neutrons decay. What is wrong with this?",
+      "back": "A **free neutron** decays, but neutrons inside many stable nuclei do not. Whether a neutron decays depends on whether it is free.",
+      "hint": "Where else can a neutron be found?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1avjwhs",
+      "kind": "concept",
+      "front": "Why is the proton the only stable baryon?",
+      "back": "Other baryons decay down to a proton. Baryon number is conserved, so a proton cannot become a lighter baryon, since none exists.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rbx4ew",
+      "kind": "concept",
+      "front": "What are baryons and mesons made of?",
+      "back": "Hadrons are built from **quarks**. A **baryon** contains three quarks, and a **meson** contains one quark and one antiquark.",
+      "hint": "Count the constituent particles in each group.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nznnr3",
+      "kind": "term",
+      "front": "Which particles are baryons and which are mesons?",
+      "back": "Protons and neutrons are **baryons**, while pions and kaons are **mesons**.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fc8agf",
+      "kind": "term",
+      "front": "Which two types of neutrino are met in this course?",
+      "back": "The **electron neutrino** and the **muon neutrino**. Each type has its own antineutrino.",
+      "hint": "Link each neutrino to a lepton you already know.",
+      "sectionId": "s2"
+    }
+  ]
+}

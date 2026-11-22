@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "7-9",
+  "topicCode": "7.9",
+  "topicName": "Phylogeny",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:58.539Z",
+  "cards": [
+    {
+      "id": "0dn7job",
+      "kind": "concept",
+      "front": "Why is a phylogenetic tree best understood as a hypothesis rather than a settled fact?",
+      "back": "A tree is a **hypothesis** about evolutionary relationships. Scientists revise it when new evidence changes which relationships are best supported.",
+      "hint": "Think about what happens when new evidence arrives.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1h7v795",
+      "kind": "concept",
+      "front": "How do you work out which two groups on a tree are more closely related?",
+      "back": "Trace each lineage back to the **node** where the branches meet. Groups sharing a more recent common ancestor are more closely related. The order of tips alone does not show this.",
+      "hint": "Look at where the branches meet, not where the tips sit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08swk1h",
+      "kind": "concept",
+      "front": "Why do scientists look for shared derived characters when building a tree?",
+      "back": "A **shared derived character** is a trait that arose in a common ancestor and appears in its descendants. Groups sharing it are placed together on a branch.",
+      "hint": "Which group inherited the trait?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tulz9q",
+      "kind": "term",
+      "front": "What is a node in a phylogenetic tree?",
+      "back": "A **node** is a branch point representing the most recent common ancestor of the lineages branching from it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13oqxd0",
+      "kind": "term",
+      "front": "What is a clade?",
+      "back": "A **clade** is a common ancestor plus all of its descendants shown on the tree.",
+      "hint": "Think of everything that comes off one ancestral branch.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13h4chf",
+      "kind": "term",
+      "front": "What is an out-group?",
+      "back": "A related group **outside** the groups being studied. It helps show which traits are ancestral and which are derived.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ljt0ny",
+      "kind": "term",
+      "front": "What are sister groups?",
+      "back": "**Sister groups** are lineages that branch from the same immediate node.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nyawwj",
+      "kind": "term",
+      "front": "What does the root of a rooted tree represent?",
+      "back": "The **common ancestor** of all the groups shown on the tree.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cq1qw8",
+      "kind": "process",
+      "front": "What steps do scientists follow to use DNA sequences to help build a tree?",
+      "back": "1) Gather **homologous DNA sequences**. 2) Align them so corresponding positions line up. 3) Compare shared changes across many positions, often in several genes. 4) Use the patterns to evaluate possible trees.",
+      "hint": "Start with which sequences to compare.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1n0205s",
+      "kind": "mistake",
+      "front": "A student says the tip on the far left must be the most primitive species. What is wrong with this?",
+      "back": "**Position on the page** does not show how evolved a group is. Every living tip has its own evolutionary history, and rotating branches changes tip order without changing relationships.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1aiinpx",
+      "kind": "mistake",
+      "front": "A student says a longer branch always means more time has passed. Why is this not always true?",
+      "back": "**Branch length** may represent elapsed time, the amount of evolutionary change, or nothing at all. Check the tree's scale or labels before deciding.",
+      "hint": "Look for a scale.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dcxvkz",
+      "kind": "mistake",
+      "front": "A student says two living tips are drawn so one must have evolved from the other. What is the error?",
+      "back": "Both living tips descend from earlier **ancestors**. A tree with living tips does not show that one living group came from another living group.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rjbloc",
+      "kind": "mistake",
+      "front": "A student says that because two DNA sequences match at some positions, the groups must be closely related. Why is this not decisive?",
+      "back": "A match count is **not decisive** because a position can change more than once. Scientists look for patterns across many positions and genes.",
+      "hint": "What else could produce a matching position besides shared ancestry?",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-10",
+  "topicCode": "3.10",
+  "topicName": "Compound angle identities",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:28.096Z",
+  "cards": [
+    {
+      "id": "0ts8ug4",
+      "kind": "concept",
+      "front": "Why can't $\\sin(A+B)$ be simplified to $\\sin A+\\sin B$?",
+      "back": "**Sine does not split over addition.** Test $A=B=90^{\\circ}$: $\\sin180^{\\circ}=0$, but $\\sin A+\\sin B=2$. The same warning applies to cosine and tangent.",
+      "hint": "Try a quick numerical counterexample.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ohrsxz",
+      "kind": "formula",
+      "front": "Write the expansion of $\\sin(A+B)$ and say what $A$ and $B$ stand for.",
+      "back": "$\\sin(A+B)=\\sin A\\cos B+\\cos A\\sin B$, where $A$ and $B$ are any two angles, in degrees or radians.",
+      "hint": "Each product pairs a sine with a cosine.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18a8t68",
+      "kind": "concept",
+      "front": "How does the sign pattern in the cosine rules differ from the sine rules?",
+      "back": "**Cosine reverses the sign**: $\\cos(A+B)$ has a minus between the products, and $\\cos(A-B)$ has a plus. Sine keeps the sign inside the bracket.",
+      "hint": "Compare $\\sin(A-B)$ with $\\cos(A-B)$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mxnbbx",
+      "kind": "formula",
+      "front": "State the tangent formula for $\\tan(A+B)$ and explain its denominator.",
+      "back": "$\\tan(A+B)=\\frac{\\tan A+\\tan B}{1-\\tan A\\tan B}$. The **denominator sign is opposite** to the sign in the bracket.",
+      "hint": "The difference formula is its matched pair.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vhd2ww",
+      "kind": "process",
+      "front": "How do you find the exact value of $\\tan75^{\\circ}$ using compound angles?",
+      "back": "Write $75^{\\circ}=45^{\\circ}+30^{\\circ}$, apply the tangent sum formula, substitute exact values, then **rationalise the denominator** to simplify.",
+      "hint": "Start by splitting 75 into two known angles.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0poimic",
+      "kind": "example",
+      "front": "Find the exact value of $\\tan75^{\\circ}$.",
+      "back": "$2+\\sqrt{3}$ (about 3.73). It comes from $\\tan(45^{\\circ}+30^{\\circ})$, with $\\tan45^{\\circ}=1$ and $\\tan30^{\\circ}=\\frac{1}{\\sqrt{3}}$.",
+      "hint": "Use $75=45+30$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "034d9br",
+      "kind": "formula",
+      "front": "What is the double angle formula for $\\sin2A$?",
+      "back": "$\\sin2A=2\\sin A\\cos A$. It writes a function of $2A$ using functions of $A$, and it can be read backwards too.",
+      "hint": "Set $B=A$ in the sine sum formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hb8w4s",
+      "kind": "formula",
+      "front": "Give three equivalent forms of $\\cos2A$.",
+      "back": "$\\cos^2A-\\sin^2A$, $2\\cos^2A-1$ and $1-2\\sin^2A$. The last two come from $\\sin^2A+\\cos^2A=1$.",
+      "hint": "Choose the form that matches the terms in the problem.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1i861xc",
+      "kind": "example",
+      "front": "Given $\\sin A=\\frac{3}{5}$ and $\\cos B=\\frac{5}{13}$, with $A$ and $B$ acute, find $\\sin(A+B)$.",
+      "back": "$\\frac{63}{65}$. Find $\\cos A=\\frac{4}{5}$ and $\\sin B=\\frac{12}{13}$ from triangles, then use the sine sum formula.",
+      "hint": "Sides 3, 4, 5 and 5, 12, 13 help.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0erch4o",
+      "kind": "process",
+      "front": "What are the steps to evaluate a compound angle from given ratios?",
+      "back": "Find the missing ratios using a right-angled triangle or $\\sin^2A+\\cos^2A=1$, substitute into the correct formula, then check the result lies between $-1$ and $1$.",
+      "hint": "Acute angles give positive ratios.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1cs1bz3",
+      "kind": "mistake",
+      "front": "A student solves $\\sin2x=\\sin x$ by dividing both sides by $\\sin x$. What goes wrong?",
+      "back": "**Solutions are lost.** Dividing by $\\sin x$ removes every solution where $\\sin x=0$. Replace $\\sin2x$ with $2\\sin x\\cos x$ and factorise instead.",
+      "hint": "What happens when $\\sin x=0$?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0oxjb7p",
+      "kind": "example",
+      "front": "Solve $\\sin2x=\\sin x$ for $0\\le x\\le2\\pi$.",
+      "back": "$x=0,\\ \\frac{\\pi}{3},\\ \\pi,\\ \\frac{5\\pi}{3},\\ 2\\pi$. Use $2\\sin x\\cos x=\\sin x$, then factorise to $\\sin x(2\\cos x-1)=0$.",
+      "hint": "Rewrite $\\sin2x$ using a double angle identity first.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "01nif95",
+      "kind": "concept",
+      "front": "How can $a\\sin x+b\\cos x$ be written as a single sine term?",
+      "back": "As **$R\\sin(x+\\alpha)$**, with $R=\\sqrt{a^2+b^2}$, $R\\cos\\alpha=a$ and $R\\sin\\alpha=b$. This shows the maximum value of the expression directly.",
+      "hint": "Compare with the expansion of $\\sin(x+\\alpha)$.",
+      "sectionId": "s6"
+    }
+  ]
+}

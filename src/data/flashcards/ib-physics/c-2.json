@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "c-2",
+  "topicCode": "C.2",
+  "topicName": "Wave model",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:33.435Z",
+  "cards": [
+    {
+      "id": "1syjtoa",
+      "kind": "concept",
+      "front": "Does a wave carry matter along with it as it travels through a medium?",
+      "back": "**No**. Particles oscillate around their usual positions and pass energy to neighbouring particles. The disturbance travels, but the particles stay near their positions.",
+      "hint": "Think about a floating object on water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lusy8y",
+      "kind": "concept",
+      "front": "How do the oscillations in a transverse wave differ from those in a longitudinal wave?",
+      "back": "In a **transverse wave**, oscillations are perpendicular to the direction of energy transfer, as in a rope wave. In a **longitudinal wave**, oscillations are parallel to it, as in sound in air.",
+      "hint": "Compare the direction of the particle motion with the direction the energy travels.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ymj0im",
+      "kind": "formula",
+      "front": "What is the wave equation, and what does each symbol mean with its unit?",
+      "back": "$v=f\\lambda$, where $v$ is the **wave speed** in $\\mathrm{m\\,s^{-1}}$, $f$ is the frequency in $\\mathrm{Hz}$, and $\\lambda$ is the wavelength in $\\mathrm{m}$.",
+      "hint": "Lambda is the symbol for wavelength.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hxb4fx",
+      "kind": "term",
+      "front": "What is amplitude?",
+      "back": "**Amplitude** is the maximum displacement of an oscillation from its undisturbed position. A larger amplitude means more energy is carried by otherwise identical waves.",
+      "hint": "Think about how far a point moves from its rest position.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "014cy9z",
+      "kind": "term",
+      "front": "What is frequency, and what is its unit?",
+      "back": "**Frequency** is the number of complete wave cycles passing a fixed point each second. Its unit is the **hertz** (Hz), equal to cycles per second.",
+      "hint": "Count the cycles passing one point in one second.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03uv6bj",
+      "kind": "term",
+      "front": "What is wavelength?",
+      "back": "**Wavelength** is the distance between neighbouring points at the same stage of a wave cycle, such as crest to crest or compression to compression.",
+      "hint": "Measure between two matching points on the wave.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19n0vau",
+      "kind": "term",
+      "front": "What is a compression in a longitudinal wave?",
+      "back": "A **compression** is a region where particles are closer together than usual. Alternating compressions and rarefactions travel through the medium.",
+      "hint": "Think about sound travelling through air.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pxdigr",
+      "kind": "concept",
+      "front": "If wave speed stays constant, what happens to wavelength when frequency increases?",
+      "back": "The **wavelength decreases**. Because $v=f\\lambda$ and $v$ is constant, a higher frequency must be balanced by a shorter wavelength.",
+      "hint": "Use the wave equation and keep v fixed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uta8sd",
+      "kind": "process",
+      "front": "What are the steps to calculate wave speed from frequency and wavelength?",
+      "back": "1) Write $v=f\\lambda$. 2) Substitute the values, converting wavelength to metres first. 3) Calculate. 4) Include the unit, $\\mathrm{m\\,s^{-1}}$.",
+      "hint": "Start with the equation you must write down first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vbu7so",
+      "kind": "example",
+      "front": "A wave has a frequency of 8 Hz and a wavelength of 0.75 m. What is its speed?",
+      "back": "**6.0 m s⁻¹**. Using $v=f\\lambda=8\\times0.75=6.0\\,\\mathrm{m\\,s^{-1}}$.",
+      "hint": "Substitute into v = f times lambda.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0frk29f",
+      "kind": "example",
+      "front": "A wave travels at 12 m/s with a wavelength of 0.50 m. What is its frequency?",
+      "back": "**24 Hz**. Rearranging gives $f=v/\\lambda=12/0.50=24\\,\\mathrm{Hz}$.",
+      "hint": "Rearrange the wave equation to make f the subject.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09ewa04",
+      "kind": "mistake",
+      "front": "A student says a wave moving forwards means each particle moves forwards with it. Is this right?",
+      "back": "**No**. The wave's motion is the travelling disturbance. Particles only oscillate around their usual positions, so they do not travel along with the wave.",
+      "hint": "Look at how a floating object moves as a water wave passes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vc6pet",
+      "kind": "mistake",
+      "front": "A student uses a wavelength of 75 cm directly in $v=f\\lambda$ to get speed in m/s. What is wrong?",
+      "back": "**The wavelength must be in metres**. Convert 75 cm to 0.75 m before calculating, otherwise the speed will not be in metres per second.",
+      "hint": "Check the units of every value before substituting.",
+      "sectionId": "s4"
+    }
+  ]
+}

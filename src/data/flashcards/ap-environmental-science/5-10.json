@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-10",
+  "topicCode": "5.10",
+  "topicName": "Urbanization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:02.811Z",
+  "cards": [
+    {
+      "id": "00xsx53",
+      "kind": "concept",
+      "front": "How do impervious surfaces change the way rain moves through a city?",
+      "back": "**Impervious surfaces** block water from soaking in, so rain runs off quickly, carrying oil, dirt, and trash into streams. Groundwater refills more slowly and flooding becomes more likely after storms.",
+      "hint": "Trace where the rain goes on a parking lot versus a meadow.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tro6b4",
+      "kind": "concept",
+      "front": "Why is a city center often warmer than nearby countryside, especially at night?",
+      "back": "Dark pavement and roofs absorb sunlight and release it slowly, creating an **urban heat island**. Few plants mean less shade and less evaporative cooling, and vehicles and air conditioners add waste heat.",
+      "hint": "Compare what surfaces absorb sunlight in town versus in a field.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ly95kx",
+      "kind": "concept",
+      "front": "What is the main goal of smart growth in city planning?",
+      "back": "**Smart growth** concentrates homes, shops, and jobs in compact, walkable neighborhoods served by public transit while protecting open space. People drive less, so fuel use and air pollution fall.",
+      "hint": "Think about how far people must travel to reach daily needs.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1h30rqe",
+      "kind": "term",
+      "front": "Which term describes the rising share of a population living in cities and towns rather than rural areas?",
+      "back": "**Urbanization** is the increase in the percentage of a population living in cities and towns. It often happens as people move for jobs, schools, and services.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ngsc0n",
+      "kind": "term",
+      "front": "Which term describes low-density development that spreads outward from a city center?",
+      "back": "**Urban sprawl** converts surrounding land and uses more land per person. It also increases people's dependence on cars.",
+      "hint": "Think about how spread out the development is compared with compact growth.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zjtrvn",
+      "kind": "term",
+      "front": "Which term describes a large, continuous habitat being divided into small, isolated patches?",
+      "back": "**Habitat fragmentation** makes it harder for animals to find food and mates. Roads add danger when animals try to cross them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ijvhwv",
+      "kind": "mistake",
+      "front": "Why is it incomplete to say that urban growth only replaces farmland?",
+      "back": "Urban growth also converts forests, wetlands, and grasslands as cities expand. Farmland is only one of the natural lands that cities take over.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tufy6d",
+      "kind": "term",
+      "front": "Which term refers to the everyday trash discarded by households, businesses, and institutions?",
+      "back": "**Municipal solid waste** is mostly buried in landfills, which take up land and can leak. Growing cities produce more of it, so disposal becomes a bigger problem.",
+      "hint": "Think about what city garbage trucks collect.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1au06oy",
+      "kind": "concept",
+      "front": "Why does rapid population growth strain a city's water, waste, and energy systems?",
+      "back": "Larger populations demand more water, more sewage treatment, more energy, and more waste disposal. Rapid growth can outpace housing and sanitation, leaving some residents without safe water or sewage service.",
+      "hint": "Consider what each new resident needs from the city every day.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lnslbx",
+      "kind": "term",
+      "front": "What name is given to parks, street trees, green roofs, and permeable pavement that manage water and cool the city?",
+      "back": "**Green infrastructure** absorbs rain, cools the air, and gives wildlife some habitat. It is a network of plants, soils, and permeable surfaces.",
+      "hint": "Think of natural features that a city builds on purpose.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rww7b3",
+      "kind": "concept",
+      "front": "How can a city planner limit outward expansion, and what is the tool called?",
+      "back": "An **urban growth boundary** limits how far a city can expand outward. Planners also redevelop unused city sites before clearing new land.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bzixb8",
+      "kind": "mistake",
+      "front": "What is the mistake in assuming that dense cities always have a bigger environmental impact?",
+      "back": "Dense does not mean worse. Per person, **compact cities** use less land and fuel than sprawling ones, so they often have a smaller environmental footprint.",
+      "hint": "Compare land used per person, not total area.",
+      "sectionId": "s5"
+    }
+  ]
+}

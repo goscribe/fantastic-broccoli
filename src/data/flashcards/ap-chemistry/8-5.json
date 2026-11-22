@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "8-5",
+  "topicCode": "8.5",
+  "topicName": "Acid-base titrations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:15.167Z",
+  "cards": [
+    {
+      "id": "1lrwik5",
+      "kind": "concept",
+      "front": "Where is the equivalence point on a titration curve?",
+      "back": "It is the **inflection point** in the steep region, where the acid and base have reacted in their stoichiometric ratio. Read its volume from the horizontal axis.",
+      "hint": "Look for where the curve is steepest, not for pH 7.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xlzqbp",
+      "kind": "concept",
+      "front": "How does adding titrant change the pH direction on a titration curve?",
+      "back": "Adding **base** raises pH, while adding **acid** lowers it. Near the required mole ratio, a small addition causes a large pH change, so the curve is steep there.",
+      "hint": "Check the axis labels and the type of titrant.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mbc3lw",
+      "kind": "concept",
+      "front": "Why is equivalence pH 7 for a strong acid–strong base titration but not for a weak acid–strong base titration?",
+      "back": "Neither ion reacts with water in a strong acid–strong base titration, so the pH is **7** at 25 °C. In a weak acid–strong base titration, the conjugate base reacts with water to form hydroxide, so the solution is **basic**.",
+      "hint": "Ask whether the leftover ion reacts with water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pwa8i0",
+      "kind": "term",
+      "front": "What is an endpoint, and how does it differ from the equivalence point?",
+      "back": "An **endpoint** is an observed signal, such as an indicator color change, used to stop a titration. It should be close to equivalence but is not identical to it.",
+      "hint": "Which one is set by the reaction and which by observation?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xey3d5",
+      "kind": "term",
+      "front": "What is the titrant?",
+      "back": "The **titrant** is the solution of known concentration that is added in measured amounts to the sample during a titration.",
+      "hint": "It is the solution with the known concentration.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k8i8xw",
+      "kind": "term",
+      "front": "What happens at the half-equivalence point of a weak acid titration?",
+      "back": "Half the initial acid has reacted, so the weak acid and its conjugate base are present in equal concentrations. This gives $\\mathit{pH}=\\mathit{p}K_a$ at that point.",
+      "hint": "Find half the equivalence volume on the horizontal axis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wl1fgh",
+      "kind": "concept",
+      "front": "What does the buffer region look like before equivalence for a weak acid titrated with strong base?",
+      "back": "A **buffer region** forms, containing both the weak acid and its conjugate base. This limits pH changes, unlike the steep change in a strong acid–strong base curve.",
+      "hint": "Compare the shape with the strong acid curve.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wyxeev",
+      "kind": "mistake",
+      "front": "At half-equivalence for a weak base titrated with strong acid, which quantity equals $\\mathit{p}K_b$?",
+      "back": "**pOH** equals $\\mathit{p}K_b$ there, not pH. Using $\\mathit{pH}=\\mathit{p}K_b$ is a common error.",
+      "hint": "Check which scale the base equilibrium uses.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kcet2y",
+      "kind": "mistake",
+      "front": "Why is looking for pH 7 a poor way to find the equivalence point?",
+      "back": "Equivalence does not necessarily occur at **pH 7**. Locate the curve's inflection point first, then consider which acid and base reacted.",
+      "hint": "What does the note recommend as the first step?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19lf8y1",
+      "kind": "formula",
+      "front": "What equation links moles, molarity and volume?",
+      "back": "$n=CV$, where $n$ is moles in $\\mathrm{mol}$, $C$ is **molarity** in $\\mathrm{mol\\,L^{-1}}$, and $V$ is volume in **liters**.",
+      "hint": "Convert mL to L before using it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g0pd2i",
+      "kind": "process",
+      "front": "What are the steps to find an unknown concentration from titration data?",
+      "back": "1) Convert the titrant volume to liters. 2) Find titrant moles with $n=CV$. 3) Apply the mole ratio from the balanced equation. 4) Divide sample moles by sample volume in liters.",
+      "hint": "Start with the volume at equivalence.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1w1vata",
+      "kind": "example",
+      "front": "A 25.0 mL HCl sample reaches equivalence after 20.0 mL of 0.100 M NaOH. What is the HCl concentration?",
+      "back": "$0.0800\\mathrm{\\,mol\\,L^{-1}}$. Base moles are $0.00200\\mathrm{\\,mol}$, the one-to-one reaction gives the same acid moles, and dividing by $0.0250\\mathrm{\\,L}$ gives the result.",
+      "hint": "Check that the reaction is one-to-one first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1aoag4u",
+      "kind": "example",
+      "front": "What is the concentration of a 30.0 mL HCl sample that reaches equivalence after 24.0 mL of 0.150 M NaOH?",
+      "back": "$0.120\\mathrm{\\,mol\\,L^{-1}}$. Base moles are $0.00360\\mathrm{\\,mol}$, and the one-to-one reaction makes acid moles equal, so divide by $0.0300\\mathrm{\\,L}$.",
+      "hint": "Divide by the sample volume in liters.",
+      "sectionId": "s4"
+    }
+  ]
+}

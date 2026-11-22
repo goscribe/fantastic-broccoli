@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "15-8",
+  "topicCode": "15.8",
+  "topicName": "Types of radioactive decay",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:50.524Z",
+  "cards": [
+    {
+      "id": "00zl98o",
+      "kind": "concept",
+      "front": "What does half-life measure in a radioactive sample?",
+      "back": "The **half-life** is the time for half of the undecayed nuclei in a sample to decay. Each individual decay is random, but this fraction stays steady across a large sample.",
+      "hint": "Think about a fraction of the sample, not one nucleus.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0uf1al6",
+      "kind": "formula",
+      "front": "What equation gives the number N of undecayed nuclei after time t, and what do N_0 and t_{1/2} mean?",
+      "back": "$N=N_0\\left(\\frac{1}{2}\\right)^n$, where $N_0$ is the starting number and $n=\\frac{t}{t_{1/2}}$ is the number of half-lives. Use the same time unit for $t$ and $t_{1/2}$.",
+      "hint": "Count the half-lives first, then apply the power.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gtrbi7",
+      "kind": "concept",
+      "front": "How do the mass number and atomic number change in alpha decay?",
+      "back": "The mass number falls by **4** and the atomic number falls by **2**, because an alpha particle is a helium-4 nucleus.",
+      "hint": "An alpha particle has two protons and two neutrons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ypoztr",
+      "kind": "term",
+      "front": "What is an alpha particle?",
+      "back": "A **helium-4 nucleus**, made of two protons and two neutrons, emitted by an unstable nucleus. It has positive charge.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lmvlpj",
+      "kind": "term",
+      "front": "What is a beta particle, and where does it come from?",
+      "back": "A **fast electron** emitted from inside the nucleus when a neutron changes into a proton. It has negative charge.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05l3y8o",
+      "kind": "term",
+      "front": "What is a gamma ray?",
+      "back": "A **photon of very high energy** released when a nucleus drops to a lower energy state. It has no charge and no mass number.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12p0m6g",
+      "kind": "mistake",
+      "front": "Is a beta particle just an electron that orbits the atom?",
+      "back": "**No.** Beta particles are created inside the nucleus when a neutron changes into a proton, then emitted.",
+      "hint": "Ask where the particle is made.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dsckwj",
+      "kind": "mistake",
+      "front": "After one half-life, has the whole sample decayed?",
+      "back": "**No.** Half-life is not the time for the whole sample to decay. After one half-life, half of the nuclei are still undecayed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ms88eu",
+      "kind": "process",
+      "front": "What are the steps to find how much of a sample remains after a time t?",
+      "back": "1) Find $n=\\frac{t}{t_{1/2}}$ using the same time unit. 2) Multiply the starting amount by $\\left(\\frac{1}{2}\\right)^n$, which is the same as halving it $n$ times.",
+      "hint": "Count half-lives before you halve anything.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xr2k04",
+      "kind": "example",
+      "front": "A 40.0 g sample has a half-life of 6.0 h. How much remains undecayed after 24 h?",
+      "back": "**2.5 g** remains. There are $n=\\frac{24}{6.0}=4$ half-lives, so $40.0\\,\\mathrm{g}\\times\\left(\\frac{1}{2}\\right)^4=2.5\\,\\mathrm{g}$.",
+      "hint": "Find the number of half-lives first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w9g0y7",
+      "kind": "example",
+      "front": "What is the daughter nucleus when $^{228}_{88}\\mathrm{Ra}$ undergoes beta decay?",
+      "back": "$^{228}_{89}\\mathrm{Ac}$, which is actinium. The mass number stays 228 and the atomic number rises by 1 to 89.",
+      "hint": "A beta particle is $^{0}_{-1}e$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q2iygx",
+      "kind": "concept",
+      "front": "Does a larger sample have a longer half-life?",
+      "back": "**No.** Half-life does not depend on sample size. A larger sample has more nuclei, but each half-life still halves whatever remains.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0178r23",
+      "kind": "concept",
+      "front": "How can scientists use a known half-life to estimate the age of a sample?",
+      "back": "They measure how much of the radioactive substance is left, then count how many **half-lives** have passed. That number gives the age.",
+      "hint": "Think of the half-life as a clock.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0poyf83",
+      "kind": "concept",
+      "front": "Does gamma emission change the element of a nucleus?",
+      "back": "**No.** Gamma emission changes neither the mass number nor the atomic number, because the photon carries away only energy.",
+      "hint": "Compare with alpha and beta decay.",
+      "sectionId": "s2"
+    }
+  ]
+}

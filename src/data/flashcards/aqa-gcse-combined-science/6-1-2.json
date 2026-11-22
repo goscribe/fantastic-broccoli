@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-1-2",
+  "topicCode": "6.1.2",
+  "topicName": "Conservation and dissipation of energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:59.205Z",
+  "cards": [
+    {
+      "id": "0djy0sh",
+      "kind": "concept",
+      "front": "What does the conservation of energy law state about energy in any device or transfer?",
+      "back": "**Energy** cannot be created or destroyed. It can only move between stores or objects, and the total stays constant when all stores and surroundings are included.",
+      "hint": "Consider where the energy goes when a device stops moving.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1979ngb",
+      "kind": "concept",
+      "front": "Why is energy transferred by friction described as dissipated rather than lost?",
+      "back": "It has **spread** into the thermal stores of many nearby objects. It still exists, but it is less useful and hard to recover for the original purpose.",
+      "hint": "Think about where the friction energy ends up, not whether it still exists.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0su2vfy",
+      "kind": "concept",
+      "front": "How does lubrication reduce unwanted energy transfers in a machine?",
+      "back": "It **reduces friction** between moving surfaces, so less energy is transferred to their thermal stores. It does not remove every unwanted transfer, since parts may still warm up or make sound.",
+      "hint": "Think about what happens where two surfaces rub together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10chzlp",
+      "kind": "term",
+      "front": "What are the surroundings in an energy transfer?",
+      "back": "The **objects and environment** outside the part of a system being considered.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16e3a23",
+      "kind": "concept",
+      "front": "Why can the same energy transfer be useful in one device but wasted in another?",
+      "back": "**Usefulness** depends on what the device is meant to do. A transfer that gives the intended effect is useful, and any other transfer is wasted.",
+      "hint": "Compare a lamp with a heater.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yh18f5",
+      "kind": "term",
+      "front": "What is thermal insulation?",
+      "back": "A material or method that **slows energy transfer** from a warmer place to a cooler place. It does not stop transfer completely.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sm5000",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a device's energy vanishes when the device stops moving?",
+      "back": "Energy is never destroyed. It has been **transferred** to other stores, including the thermal and sound stores of its surroundings.",
+      "hint": "Where could that energy have moved to?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gjetbg",
+      "kind": "mistake",
+      "front": "What is wrong with simply saying that insulation or lubrication saves energy?",
+      "back": "You should **name the unwanted transfer** and explain how the method reduces it, for example how loft insulation slows energy transfer through a roof.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lpwii7",
+      "kind": "term",
+      "front": "What is an energy transfer diagram?",
+      "back": "A diagram that uses **arrows** to show the pathways energy takes from an input to its outputs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gwjprm",
+      "kind": "process",
+      "front": "What are the steps for drawing an energy transfer diagram?",
+      "back": "1) Start at the **input** energy. 2) Follow each arrow to an output. 3) Label the useful output for the device's purpose. 4) Label other outputs as wasted, often to the surroundings.",
+      "hint": "Think about where energy enters the device first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g549x9",
+      "kind": "concept",
+      "front": "In a fan diagram, why do the useful and wasted output arrows together account for the input energy?",
+      "back": "Energy is **transferred, not destroyed**, so all the output pathways add up to the input. A wider arrow represents more energy.",
+      "sectionId": "s4"
+    }
+  ]
+}

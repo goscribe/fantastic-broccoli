@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-2-2",
+  "topicCode": "3.2.2",
+  "topicName": "Group 2",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:05.349Z",
+  "cards": [
+    {
+      "id": "13orw8z",
+      "kind": "concept",
+      "front": "How does the reactivity of Group 2 metals with water change down the group?",
+      "back": "**Reactivity increases** down the group. Magnesium reacts very slowly with cold water, while calcium, strontium and barium react with cold water, with the fizzing more vigorous from calcium to barium.",
+      "hint": "Compare how the fizzing changes as you move from magnesium to barium.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o4azgz",
+      "kind": "concept",
+      "front": "Why do Group 2 metals become more reactive down the group?",
+      "back": "Atoms get larger and have more shielding, so the outer electrons are held less tightly. The **ionisation energies** fall, so less energy is needed to form the 2+ ion.",
+      "hint": "Think about the pull of the nucleus on the outer electrons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v4jksa",
+      "kind": "concept",
+      "front": "Why does the thermal stability of Group 2 carbonates increase down the group?",
+      "back": "Larger 2+ ions have a lower **charge density**, so they polarise the carbonate ion less. The carbonate ion is distorted less and needs more heat to decompose.",
+      "hint": "Consider how small, highly charged ions affect nearby negative ions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gsejr7",
+      "kind": "mistake",
+      "front": "A student says magnesium reacts quickly with cold water to form magnesium hydroxide. What is wrong?",
+      "back": "Magnesium reacts only slowly with cold water. It reacts quickly with steam, forming **magnesium oxide**, not magnesium hydroxide.",
+      "hint": "Check which reactant the vigorous reaction needs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y9rb7x",
+      "kind": "concept",
+      "front": "How does the solubility of Group 2 sulfates change down the group?",
+      "back": "Sulfates become **less soluble** down the group. Magnesium sulfate is soluble, while barium sulfate is insoluble.",
+      "hint": "Compare this with the trend for hydroxides.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0f7jr11",
+      "kind": "term",
+      "front": "What is a **precipitate**?",
+      "back": "A **precipitate** is an insoluble solid formed when two solutions react.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07nak7s",
+      "kind": "process",
+      "front": "What are the steps of the test for sulfate ions in solution?",
+      "back": "Add dilute hydrochloric acid first, then barium chloride solution. A white precipitate of barium sulfate shows that sulfate ions are present.",
+      "hint": "Think about which other ion could also give a white precipitate with barium.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rmismt",
+      "kind": "formula",
+      "front": "What is the ionic equation for the white precipitate formed in the test for sulfate ions?",
+      "back": "$\\mathrm{Ba^{2+}(aq)+SO_4^{2-}(aq)\\rightarrow BaSO_4(s)}$, where the **precipitate** is barium sulfate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1stgjw8",
+      "kind": "concept",
+      "front": "Why does barium hydroxide solution have a higher pH than magnesium hydroxide solution?",
+      "back": "Barium hydroxide is much more soluble, so its solution contains more **hydroxide ions**. This makes the solution more alkaline.",
+      "hint": "Think about how much of each hydroxide dissolves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0v9n9zs",
+      "kind": "term",
+      "front": "What is a **base**?",
+      "back": "A **base** is a substance that accepts protons from an acid.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q86qy3",
+      "kind": "example",
+      "front": "What volume of $0.500\\,\\mathrm{mol\\,dm^{-3}}$ hydrochloric acid neutralises $0.0100\\,\\mathrm{mol}$ of magnesium hydroxide?",
+      "back": "$0.0400\\,\\mathrm{dm^3}$, which is $40.0\\,\\mathrm{cm^3}$. The mole ratio is 1 : 2, so $0.0200\\,\\mathrm{mol}$ of HCl is needed.",
+      "hint": "Start with the mole ratio from the balanced equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ijye8l",
+      "kind": "mistake",
+      "front": "Why is it a mistake to assume that more reactive Group 2 metals form less stable carbonates?",
+      "back": "Reactivity and thermal stability follow opposite trends. The metals become more **reactive** down the group, yet their carbonates become more **thermally stable**.",
+      "sectionId": "s5"
+    }
+  ]
+}

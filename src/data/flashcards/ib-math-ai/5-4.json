@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-4",
+  "topicCode": "5.4",
+  "topicName": "Tangents and normals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:05.646Z",
+  "cards": [
+    {
+      "id": "16yqm97",
+      "kind": "concept",
+      "front": "What is the gradient of the tangent line to $y=f(x)$ at $x=a$?",
+      "back": "$f'(a)$. The **tangent line** touches the curve at that point with the same gradient, and the curve's gradient is its derivative.",
+      "hint": "Think about what the derivative measures.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "098diij",
+      "kind": "process",
+      "front": "What are the four steps to find the equation of a tangent line at $x=a$?",
+      "back": "Differentiate to get $f'(x)$; find $m=f'(a)$; find $y_1=f(a)$; substitute into $y-y_1=m(x-x_1)$ and simplify.",
+      "hint": "Start with the derivative.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qhob1o",
+      "kind": "formula",
+      "front": "If the tangent line has gradient $m$ (with $m\\neq0$), what is the gradient of the normal?",
+      "back": "$-\\frac{1}{m}$, the **negative reciprocal**: flip the fraction and change the sign. The normal is perpendicular to the tangent.",
+      "hint": "Perpendicular lines have gradients that multiply to give -1.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1b81i5b",
+      "kind": "example",
+      "front": "Find the equation of the tangent line to $f(x)=x^2-4x+5$ at $x=3$.",
+      "back": "$y=2x-4$. The gradient is $f'(3)=2$ and the point is $(3,2)$, so $y-2=2(x-3)$.",
+      "hint": "Differentiate first, then find $f(3)$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wix174",
+      "kind": "mistake",
+      "front": "A student says the normal gradient is $\\frac{1}{2}$ when the tangent gradient is 2. What is wrong?",
+      "back": "The student used only the reciprocal and forgot the sign change. The normal gradient is $-\\frac{1}{2}$, so both steps are needed.",
+      "hint": "Check both the flip and the sign.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hvxl4h",
+      "kind": "example",
+      "front": "Find the equation of the normal to $f(x)=x^2-4x+5$ at $x=3$.",
+      "back": "$y=-\\frac{1}{2}x+\\frac{7}{2}$. Use the point $(3,2)$ and gradient $-\\frac{1}{2}$ in $y-2=-\\frac{1}{2}(x-3)$.",
+      "hint": "Start from the tangent gradient of 2.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0uuml4s",
+      "kind": "concept",
+      "front": "Why can a tangent line be used to estimate values of $f(x)$ near its point of contact?",
+      "back": "A smooth curve looks almost straight when zoomed in, so the **tangent line** stays very close to it near the point. The estimate worsens further away.",
+      "hint": "Think about zooming in on a curve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "046kg6e",
+      "kind": "example",
+      "front": "For $f(x)=x^2-4x+5$ with tangent $y=2x-4$ at $x=3$, compare the tangent and the curve at $x=3.1$.",
+      "back": "The tangent gives 2.2 and the curve gives $f(3.1)=2.21$. The estimate is close because 3.1 is near the point of contact.",
+      "hint": "Substitute $x=3.1$ into both expressions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17m1emp",
+      "kind": "term",
+      "front": "What is a tangent line to a curve at a point?",
+      "back": "The **tangent line** is the straight line that touches the curve at that point and has the same gradient as the curve there.",
+      "hint": "It touches the curve at one spot.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00uc05r",
+      "kind": "term",
+      "front": "What is the normal to a curve at a point?",
+      "back": "The **normal** is the straight line through the point of contact that is perpendicular to the tangent line.",
+      "hint": "Think of a right-angle cross with the tangent.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ed1kv4",
+      "kind": "process",
+      "front": "How do you find the point on a curve $y=f(x)$ where the tangent has a given gradient $k$?",
+      "back": "Solve $f'(x)=k$ for $x$, then find $y$ by substituting that $x$ into $y=f(x)$.",
+      "hint": "Two steps: solve, then substitute.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12d8dce",
+      "kind": "example",
+      "front": "Find the point on $y=x^2-4x+5$ where the tangent line has gradient 4.",
+      "back": "$(4,5)$. Solving $2x-4=4$ gives $x=4$, and then $y=16-16+5=5$.",
+      "hint": "Differentiate, then set the derivative equal to 4.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10uhza2",
+      "kind": "concept",
+      "front": "Where is the tangent line horizontal, and what is the normal there?",
+      "back": "Where $f'(a)=0$. The **normal** is vertical, with equation $x=a$, because it is perpendicular to a horizontal line.",
+      "hint": "A horizontal line has gradient 0.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "171xj2t",
+      "kind": "concept",
+      "front": "Why should the point $(a,f(a))$ satisfy your tangent line equation?",
+      "back": "A **tangent line must pass through the point of contact**, so substituting $x=a$ into the equation should give $y=f(a)$. This is a useful check.",
+      "hint": "Use the answer to the tangent example as a test.",
+      "sectionId": "s2"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-15",
+  "topicCode": "5.15",
+  "topicName": "Effects of climate change on organisms",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:15.248Z",
+  "cards": [
+    {
+      "id": "1dcloq0",
+      "kind": "concept",
+      "front": "How does warming change where a species can live?",
+      "back": "Areas that warm beyond a species' tolerance become unsuitable, so its **populations** decline there, while cooler nearby areas may be **colonised**.",
+      "hint": "Think about the range of temperatures each species can tolerate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wl6ju4",
+      "kind": "concept",
+      "front": "Why does a rise in temperature affect the reactions inside an organism's cells?",
+      "back": "Warming speeds up **enzyme**-controlled reactions, but above the optimum temperature enzymes lose their shape and activity falls sharply.",
+      "hint": "Think about what temperature does to molecule movement, and then to enzyme shape.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bl1bxf",
+      "kind": "concept",
+      "front": "Why can warming cause a timing mismatch between a plant and an insect that feeds on it?",
+      "back": "Species shift at different rates: the plant may flower earlier while the insect keeps its old schedule, so food is short at a critical time.",
+      "hint": "Compare how quickly each species responds to temperature cues.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tdt8cv",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an individual organism shifts its range by adapting to warmer temperatures?",
+      "back": "Individuals do not change range by adapting; the **range** shifts because populations survive in new areas and die out in old ones.",
+      "hint": "Think about whether the range belongs to one organism or to a population.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06m6bry",
+      "kind": "term",
+      "front": "What is an enzyme's optimum temperature?",
+      "back": "The **optimum temperature** is the temperature at which the enzyme's activity is greatest under given conditions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02pkn0d",
+      "kind": "term",
+      "front": "What does phenology study?",
+      "back": "**Phenology** is the timing of seasonal events in the life cycles of organisms, such as flowering, migration and breeding.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ksztim",
+      "kind": "concept",
+      "front": "Why is a predator feeding its young on a short-lived food peak especially vulnerable to earlier spring warming?",
+      "back": "If its chicks hatch after the food peak has passed, less food is available to them, so fewer survive.",
+      "hint": "Consider when the food peak occurs compared with when the chicks hatch.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v8cgp3",
+      "kind": "term",
+      "front": "What is biodiversity?",
+      "back": "**Biodiversity** is variation within species, between species, and among ecosystems.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t70i4p",
+      "kind": "concept",
+      "front": "Why might species living on mountain tops be especially at risk from warming?",
+      "back": "The suitable zone moves uphill as temperatures rise, and with no higher ground left, the species has nowhere cooler to go.",
+      "hint": "Think about what happens to the land available above the species' current zone.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vxaqx5",
+      "kind": "mistake",
+      "front": "Why does a new species arriving in an area not always mean biodiversity rises?",
+      "back": "An incoming species can change the **community** and add pressure on native species, for example pests or disease-carrying insects, so biodiversity may fall.",
+      "hint": "Think about what the newcomer does to the species already living there.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v0u5sn",
+      "kind": "process",
+      "front": "What are the steps by which natural selection could help a population cope with warming?",
+      "back": "Individuals vary in temperature tolerance; the variation is inherited; those that cope better leave more offspring, so the tolerant trait becomes more common.",
+      "hint": "Start with where the variation between individuals comes from.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1iohdrp",
+      "kind": "concept",
+      "front": "Why might long-lived species with few offspring struggle to keep pace with climate change?",
+      "back": "Climate may change faster than these species can adapt, so they may face local **extinction**.",
+      "hint": "Consider how quickly new generations appear in such species.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1iu9q6j",
+      "kind": "concept",
+      "front": "What helps some species survive warming in the place where they already live?",
+      "back": "They already tolerate a wide range of conditions, so they can persist, while warm-adapted species may expand their ranges.",
+      "hint": "Compare species with a narrow tolerance to those with a broad one.",
+      "sectionId": "s5"
+    }
+  ]
+}

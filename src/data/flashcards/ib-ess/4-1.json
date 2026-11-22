@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "4-1",
+  "topicCode": "4.1",
+  "topicName": "Water systems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:34.324Z",
+  "cards": [
+    {
+      "id": "067wfda",
+      "kind": "term",
+      "front": "What is the hydrological cycle?",
+      "back": "The **hydrological cycle** is the continuous movement of water around the planet, as water moves between stores along flows.",
+      "hint": "Think about water never being used up, only moved.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hvqfdx",
+      "kind": "concept",
+      "front": "What two forces keep water moving through the hydrological cycle?",
+      "back": "The **sun** supplies the energy that lifts water into the air as vapour, and **gravity** brings it back down as precipitation and runoff.",
+      "hint": "One force lifts water up, the other pulls it down.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1aphllr",
+      "kind": "concept",
+      "front": "How does an open system differ from a closed system?",
+      "back": "An **open system** exchanges both matter and energy with its surroundings. A **closed system** exchanges energy but not matter.",
+      "hint": "Ask whether water can cross the boundary.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06gpsjh",
+      "kind": "term",
+      "front": "What is a store in the water cycle?",
+      "back": "A **store** is a place where water is held for a period of time, such as an ocean, glacier or aquifer.",
+      "hint": "Think of a place where water sits for a while.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1e4bzfv",
+      "kind": "process",
+      "front": "Outline how the sun drives the hydrological cycle.",
+      "back": "Solar energy causes **evaporation** from oceans and land and **transpiration** from plants. Its heating creates winds that carry vapour. The vapour **condenses** and returns as precipitation.",
+      "hint": "Start with the energy source and follow the water upwards.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0irkm68",
+      "kind": "term",
+      "front": "What is transpiration?",
+      "back": "The **loss of water vapour** from plant leaves through small pores into the atmosphere.",
+      "hint": "Think about where plants release water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ccc7ka",
+      "kind": "term",
+      "front": "What is the water balance?",
+      "back": "The **comparison of a system's water inputs and outputs**, which gives its change in storage.",
+      "hint": "Compare what comes in with what goes out.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bihzo2",
+      "kind": "formula",
+      "front": "What is the water balance equation for a drainage basin, and what does each symbol mean?",
+      "back": "Change in storage = $P - E - Q$, where $P$ is precipitation, $E$ is evapotranspiration and $Q$ is discharge. All are in $\\mathrm{mm\\,yr^{-1}}$.",
+      "hint": "Inputs come first, then the two outputs are subtracted.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lw77s9",
+      "kind": "example",
+      "front": "A basin has $P=800$, $E=500$ and $Q=250$, all in $\\mathrm{mm\\,yr^{-1}}$. Calculate its change in storage.",
+      "back": "**+50 $\\mathrm{mm\\,yr^{-1}}$**, so the basin gains water. Working: $800-500-250=50$.",
+      "hint": "Subtract evapotranspiration and discharge from precipitation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1n8kef1",
+      "kind": "mistake",
+      "front": "A student says pumping groundwater destroys water. What is wrong with this?",
+      "back": "Pumping does not destroy water. It **moves water** to other stores, although local supplies may fall.",
+      "hint": "Where does the pumped water end up?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ahmhak",
+      "kind": "concept",
+      "front": "Why does building on land increase surface runoff?",
+      "back": "Buildings replace soil with an **impermeable surface**, so less water infiltrates and more runs off to rivers.",
+      "hint": "Think about whether water can soak through concrete.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06jfekk",
+      "kind": "concept",
+      "front": "Why is a drainage basin treated as an open system?",
+      "back": "Water **enters as precipitation** and leaves as river flow and evaporation, so matter crosses its boundary.",
+      "hint": "Follow the water in and out of the basin.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dmgv5s",
+      "kind": "concept",
+      "front": "Why is the global water cycle treated as a closed system?",
+      "back": "Earth gains and loses almost no **water**, so no matter crosses its boundary. Energy still crosses it, as solar energy arrives and heat is radiated.",
+      "hint": "Compare how much water enters and leaves Earth.",
+      "sectionId": "s3"
+    }
+  ]
+}

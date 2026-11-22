@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "8-7",
+  "topicCode": "8.7",
+  "topicName": "Disruptions to ecosystems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:04.617Z",
+  "cards": [
+    {
+      "id": "11uagqi",
+      "kind": "term",
+      "front": "What is an invasive species, and what two conditions must it meet?",
+      "back": "An **invasive species** is a nonnative species that spreads and causes harm in a new ecosystem. Being nonnative alone does not make a species invasive.",
+      "hint": "Think about both spreading and causing harm.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bh2etz",
+      "kind": "concept",
+      "front": "Why does habitat fragmentation make a population more likely to die out locally?",
+      "back": "Roads and development split habitat into **isolated patches**, which limits movement, access to mates, and gene flow. Small, cut-off populations are more vulnerable to local extinction.",
+      "hint": "Think about what happens to animals that cannot move between patches.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d521ev",
+      "kind": "concept",
+      "front": "How can climate change disrupt a flower and pollinator interaction?",
+      "back": "Species respond at different rates, so a **timing mismatch** can occur: flowers bloom earlier but pollinators do not shift to match. Pollination and food availability can then decline.",
+      "hint": "Compare how fast each partner responds.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19vzxbe",
+      "kind": "term",
+      "front": "What is habitat loss?",
+      "back": "The **removal or degradation** of places that give organisms resources and conditions to survive and reproduce, such as land cleared for farms or buildings.",
+      "hint": "Think about what is removed or damaged.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jouz80",
+      "kind": "mistake",
+      "front": "A student says that any nonnative species is always invasive. What is wrong with this?",
+      "back": "**Nonnative does not mean invasive.** Invasive describes a species that spreads and causes harm. Many introduced species do not do this.",
+      "hint": "Check the definition of invasive.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15kvfdd",
+      "kind": "mistake",
+      "front": "A student thinks habitat loss and habitat fragmentation are the same thing. What is the difference?",
+      "back": "**Habitat loss** removes or degrades habitat, while **fragmentation** divides remaining habitat into separated patches. Fragmentation can happen even when a lot of habitat is still present.",
+      "hint": "One reduces the area, the other splits it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mnkr7o",
+      "kind": "concept",
+      "front": "How can warming seas harm coral?",
+      "back": "Warming seas cause corals to lose the **algae** that supply much of their food. If stressful conditions continue, the corals may die.",
+      "hint": "Think about where the coral gets its food.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1boi81o",
+      "kind": "process",
+      "front": "Describe how fertilizer runoff can harm an aquatic ecosystem, step by step.",
+      "back": "Runoff adds **nutrients** to water, which fuels algal growth. When the algae decompose, **dissolved oxygen** falls, so fish and other aquatic organisms may die or leave.",
+      "hint": "Follow the nutrients from water to oxygen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15jbiai",
+      "kind": "concept",
+      "front": "Name two ways human activities disrupt ecosystems.",
+      "back": "**Land-use change** can remove or divide habitat, and transport and trade can move species beyond their native ranges. Burning fossil fuels also releases greenhouse gases that contribute to climate change.",
+      "hint": "Think about land, travel, and energy use.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vo8dl2",
+      "kind": "concept",
+      "front": "Why do human pressures on ecosystems often interact?",
+      "back": "Pressures can combine. For example, a fragmented population may have fewer places to move as temperatures rise, so it faces both threats at once.",
+      "hint": "Consider what happens when two pressures affect the same population.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wma3lc",
+      "kind": "term",
+      "front": "What is El Niño?",
+      "back": "A periodic warming of **surface waters** in the central and eastern tropical Pacific. It changes rainfall patterns and reduces the rise of nutrient-rich deep water, lowering food for marine organisms.",
+      "hint": "Think about the Pacific Ocean and its food supply.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xua0w1",
+      "kind": "concept",
+      "front": "How do continental drift and a meteor impact differ in how they change ecosystems?",
+      "back": "**Continental drift** slowly changes climate, habitats, and which species can reach each other. A **meteor impact** can rapidly destroy habitats, and its dust can reduce sunlight and plant growth.",
+      "hint": "Compare the speed of each event.",
+      "sectionId": "s5"
+    }
+  ]
+}

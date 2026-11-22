@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-9",
+  "topicCode": "3.9",
+  "topicName": "Meiosis and genetic variation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:29.888Z",
+  "cards": [
+    {
+      "id": "0bo5k0n",
+      "kind": "term",
+      "front": "What does meiosis do to a diploid cell, and what does it produce?",
+      "back": "**Meiosis** is division that halves the chromosome number: one diploid cell with two sets of chromosomes makes four genetically different haploid cells with one set each.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "135yxur",
+      "kind": "concept",
+      "front": "Which two processes in meiosis create genetic variation, and at which stages do they happen?",
+      "back": "**Crossing over** (prophase I) and **independent assortment** (metaphase I and anaphase I) mix alleles and chromosomes into new combinations in the gametes.",
+      "hint": "Think about where homologous chromosomes pair up and face the equator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t4ygk7",
+      "kind": "process",
+      "front": "What are the main events of meiosis I, in order?",
+      "back": "Prophase I: homologous chromosomes pair as bivalents. Metaphase I: bivalents line up at the equator. Anaphase I: whole chromosomes are pulled to opposite poles. Telophase I: two haploid cells form.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y3a3im",
+      "kind": "process",
+      "front": "How does meiosis II differ from meiosis I?",
+      "back": "**Meiosis II** separates chromatids with no further DNA replication. In anaphase II the centromeres divide and chromatids move to opposite poles, giving four haploid cells.",
+      "hint": "Compare what is pulled apart in each division.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wxm9th",
+      "kind": "term",
+      "front": "What are homologous chromosomes?",
+      "back": "**Homologous chromosomes** are a pair of chromosomes, one from each parent, that carry the same genes at the same loci.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11ec6ng",
+      "kind": "term",
+      "front": "What is a chromatid, and what joins the two chromatids of one chromosome?",
+      "back": "A **chromatid** is one of two identical copies of a replicated chromosome, held together at the centromere.",
+      "hint": "Think about the DNA copying that happens before meiosis starts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rzhgqf",
+      "kind": "term",
+      "front": "What is crossing over, and in which stage does it occur?",
+      "back": "**Crossing over** is the exchange of matching sections between non-sister chromatids of homologous chromosomes. It occurs in prophase I.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1u2qbf8",
+      "kind": "concept",
+      "front": "Why does independent assortment produce different gametes?",
+      "back": "In metaphase I each bivalent faces either pole at random, so maternal and paternal chromosomes from different pairs combine randomly in the gametes.",
+      "hint": "Think about which side of the equator each pair faces.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07jnksm",
+      "kind": "formula",
+      "front": "What does $2^n$ calculate in meiosis, and what does n stand for?",
+      "back": "$2^n$ gives the number of possible chromosome combinations in gametes, ignoring crossing over, where **n** is the number of pairs of chromosomes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0x9wbut",
+      "kind": "example",
+      "front": "How many different chromosome combinations can one human produce in gametes, ignoring crossing over?",
+      "back": "$2^{23}=8\\,388\\,608\\approx8.4\\times10^{6}$, so about 8.4 million different combinations are possible.",
+      "hint": "Count the pairs of chromosomes, not the individual chromosomes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1mhx0ll",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that meiosis II halves the chromosome number again?",
+      "back": "The halving happens in meiosis I, when homologous chromosomes separate. Meiosis II separates chromatids, so the chromosome number does not change again.",
+      "hint": "Ask what is separated in each division.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02s2ufb",
+      "kind": "concept",
+      "front": "Which process creates genuinely new alleles rather than reshuffling existing ones?",
+      "back": "**Mutation**, a random change in DNA, creates new alleles. Meiosis and fertilisation only shuffle existing alleles, and mutation is rare.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1s4du3p",
+      "kind": "example",
+      "front": "Roughly how many different zygotes can two parents with 23 pairs of chromosomes produce, before crossing over is counted?",
+      "back": "About $7.0\\times10^{13}$. Each parent makes about $8.4\\times10^{6}$ combinations, and these multiply together when random fertilisation combines them.",
+      "hint": "Consider what happens when each parent's gametes combine.",
+      "sectionId": "s6"
+    }
+  ]
+}

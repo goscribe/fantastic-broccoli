@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-4-5",
+  "topicCode": "3.4.5",
+  "topicName": "Species and taxonomy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:22.434Z",
+  "cards": [
+    {
+      "id": "0rvsbk9",
+      "kind": "term",
+      "front": "What is a species?",
+      "back": "A **species** is a group of organisms that can breed together and produce fertile offspring, which can themselves reproduce.",
+      "hint": "Think about what the offspring must be able to do, not just how the parents look.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1matedj",
+      "kind": "concept",
+      "front": "What should a classification aim to reflect?",
+      "back": "**Evolutionary relationships**. Scientists compare characteristics and genetic evidence, and classifications can change when new evidence clarifies those relationships.",
+      "hint": "Consider what the evidence is used to work out.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ttpe5j",
+      "kind": "concept",
+      "front": "What does a node on a phylogenetic tree represent?",
+      "back": "The **most recent common ancestor** of the branches arising from that branching point.",
+      "hint": "Think about where two branches meet.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n9opim",
+      "kind": "concept",
+      "front": "Why is the breeding definition of a species hard to apply to fossils?",
+      "back": "Fossils cannot be bred to test whether the organisms could produce fertile offspring, so scientists use physical characteristics and genetic similarities instead.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1erop0y",
+      "kind": "mistake",
+      "front": "Why is similar appearance not proof that two organisms belong to one species?",
+      "back": "Members of one species can look quite different, and similar-looking groups may be unable to breed. The **ability to produce fertile offspring** is the key test.",
+      "hint": "Think about variation within a single species.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1adraca",
+      "kind": "term",
+      "front": "What is reproductive isolation?",
+      "back": "**Reproductive isolation** prevents members of different groups from breeding successfully, for example by breeding at different times or producing infertile offspring.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ztnfl1",
+      "kind": "process",
+      "front": "What is the order of taxonomic ranks from broadest to narrowest?",
+      "back": "**Domain**, kingdom, phylum, class, order, family, genus, species.",
+      "hint": "Start with the largest group.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1otoax3",
+      "kind": "term",
+      "front": "What is a taxon?",
+      "back": "A **taxon** is a named group of organisms at any classification rank. Its plural is taxa.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0el868r",
+      "kind": "term",
+      "front": "What is binomial naming?",
+      "back": "A system giving each species a two-part scientific name: its **genus** first, followed by a second, species-specific name.",
+      "hint": "Compare this with a common name, which can vary between languages.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fa3r8i",
+      "kind": "process",
+      "front": "How should a scientific name be written in typed text?",
+      "back": "The **genus** has an initial capital letter, the second part is in lower case, and both parts are italicised. By hand, underline them separately.",
+      "hint": "Think about how $\\mathit{Homo\\ sapiens}$ is written.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ika1w2",
+      "kind": "concept",
+      "front": "Why does sharing a genus indicate a closer classification than sharing only a family?",
+      "back": "A **genus** is a narrower rank than a family, so organisms in the same genus are placed in a more closely related group.",
+      "hint": "Look at where genus sits in the rank order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uvr2i7",
+      "kind": "mistake",
+      "front": "Why is judging relatedness by which tips sit closest on the page wrong?",
+      "back": "Page position can be rotated without changing relationships. You must trace each branch back to the **most recent shared node** to judge relatedness.",
+      "hint": "Follow the branches backwards rather than looking at the drawing's layout.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m4jz22",
+      "kind": "example",
+      "front": "On a tree where A and B meet at a node that C's branch later joins, what does this show about A and B?",
+      "back": "A and B share a **more recent common ancestor** than either shares with C, so they are more closely related to each other than to C.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rzpmbn",
+      "kind": "concept",
+      "front": "What does branch length show on a phylogenetic tree?",
+      "back": "Unless a scale is provided, branch length does **not** show elapsed time or the amount of evolutionary change.",
+      "hint": "Consider what the drawing does and does not encode.",
+      "sectionId": "s4"
+    }
+  ]
+}

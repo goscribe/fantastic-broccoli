@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "7-6",
+  "topicCode": "7.6",
+  "topicName": "Properties of the equilibrium constant",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:03.529Z",
+  "cards": [
+    {
+      "id": "0dg3f2m",
+      "kind": "concept",
+      "front": "Which substances go into an equilibrium expression, and which are left out?",
+      "back": "Include **gaseous and aqueous** species. Omit **pure solids and pure liquids**. Products go in the numerator and reactants in the denominator.",
+      "hint": "Check each state label before deciding.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0woqfav",
+      "kind": "concept",
+      "front": "If every coefficient in a balanced equation is multiplied by n, how does the equilibrium constant change?",
+      "back": "The new constant is $K^n$, because every exponent in the expression is multiplied by $n$. Dividing every coefficient by $n$ gives $K^{1/n}$.",
+      "hint": "Think about what happens to each exponent.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yqyngm",
+      "kind": "concept",
+      "front": "How is the equilibrium constant of a reversed reaction related to the original?",
+      "back": "The new constant is the **reciprocal**, $1/K$. Reversing swaps products and reactants, so the expression flips upside down.",
+      "hint": "Where do the products sit in the expression?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uzxtuw",
+      "kind": "formula",
+      "front": "What is $K_c$ for $\\mathrm{N_2(g)+3H_2(g)\\rightleftharpoons 2NH_3(g)}$?",
+      "back": "$K_c=\\frac{[\\mathrm{NH_3}]^2}{[\\mathrm{N_2}][\\mathrm{H_2}]^3}$. Each exponent is the **stoichiometric coefficient** of that species.",
+      "hint": "Products on top, reactants on the bottom.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vrnl7p",
+      "kind": "concept",
+      "front": "Why does a pure solid or pure liquid not appear explicitly in an equilibrium expression?",
+      "back": "Its **activity** is fixed at one in its standard state. Changing the amount of a pure solid or liquid, while some remains, does not change its activity.",
+      "hint": "Consider what its activity is defined as.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16ih7p4",
+      "kind": "example",
+      "front": "For $\\mathrm{CaCO_3(s)\\rightleftharpoons CaO(s)+CO_2(g)}$, what is $K_p$?",
+      "back": "$K_p=P_{\\mathrm{CO_2}}$. Only the **gas** appears, because both solids are pure and have activity one.",
+      "hint": "Which species are gases?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1u9rrya",
+      "kind": "mistake",
+      "front": "Is it correct to leave a substance out of an equilibrium expression just because it is a liquid?",
+      "back": "**No**. Omit a pure liquid, but include an aqueous solute. A substance's state label decides whether it belongs in the expression.",
+      "hint": "Compare a pure liquid with a dissolved substance.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14or2jh",
+      "kind": "example",
+      "front": "For $\\mathrm{A(g)\\rightleftharpoons B(g)}$, $K_c=4.0$. What is $K_c$ for $\\mathrm{2A(g)\\rightleftharpoons 2B(g)}$?",
+      "back": "**16**, dimensionless. Both coefficients double, so square the original constant: $(4.0)^2=16$.",
+      "hint": "What is the factor applied to the coefficients?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12uuecb",
+      "kind": "process",
+      "front": "What steps do you follow to find the constant for a changed equation?",
+      "back": "First write the new balanced equation. Then identify the factor applied to every coefficient, reversal, or both. Finally raise $K$ to the power $n$, $1/n$, or invert it, as needed.",
+      "hint": "Write the new equation before changing K.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gw5mzu",
+      "kind": "example",
+      "front": "A reaction has $K_p=4.0$. What is $K_p$ when the reaction is reversed and then doubled?",
+      "back": "**0.0625**, dimensionless. Reversing gives $1/4.0$, and doubling then gives $(1/4.0)^2=0.0625$.",
+      "hint": "Reverse first, then apply the factor of two.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cb295e",
+      "kind": "term",
+      "front": "What is an aqueous species in an equilibrium expression?",
+      "back": "An **aqueous species** is a dissolved substance whose concentration can appear in the equilibrium expression.",
+      "hint": "Think of substances dissolved in water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0t58wmm",
+      "kind": "term",
+      "front": "What is the activity of a substance?",
+      "back": "**Activity** measures a substance's effective amount relative to its standard state. A pure solid or pure liquid has an activity of one.",
+      "hint": "Compare it with the standard state.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "109aji0",
+      "kind": "term",
+      "front": "What is a stoichiometric coefficient?",
+      "back": "A **stoichiometric coefficient** is the number placed before a substance in a balanced equation. It becomes the exponent of that species in the equilibrium expression.",
+      "hint": "Look at the number in front of each formula.",
+      "sectionId": "s1"
+    }
+  ]
+}

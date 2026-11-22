@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-3",
+  "topicCode": "5.3",
+  "topicName": "Derivatives of powers",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:51.016Z",
+  "cards": [
+    {
+      "id": "18dnuz8",
+      "kind": "formula",
+      "front": "What is the power rule for differentiating $x^n$, where $n$ is any real number?",
+      "back": "**Power rule**: $\\frac{d}{dx}(x^n)=nx^{n-1}$. Bring the index down as a multiplier, then reduce the index by one.",
+      "hint": "Look at the pattern in $x^2$, $x^3$, $x^4$ and $x^5$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y7i22j",
+      "kind": "concept",
+      "front": "Why must roots and reciprocals be rewritten before you differentiate them?",
+      "back": "The **power rule** only works when the variable is raised to an index, so $\\sqrt{x}=x^{1/2}$ and $\\frac{1}{x^n}=x^{-n}$ must be done first.",
+      "hint": "Which form does the power rule need?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ys587n",
+      "kind": "concept",
+      "front": "How do you differentiate a sum of terms that include constant factors and constant terms?",
+      "back": "**Term by term**: a constant factor stays in place, the sum rule gives $f'(x)+g'(x)$, and a constant term has derivative zero.",
+      "hint": "Handle each term on its own.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cgzxc9",
+      "kind": "formula",
+      "front": "State the constant multiple rule.",
+      "back": "$\\frac{d}{dx}\\big(kf(x)\\big)=kf'(x)$ for a constant $k$. For example, $\\frac{d}{dx}(5x^3)=15x^2$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1thd2f6",
+      "kind": "term",
+      "front": "What is a power function?",
+      "back": "A **power function** is $f(x)=x^n$ with a constant real index $n$, in which the variable is the base.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1e1883c",
+      "kind": "mistake",
+      "front": "Is the derivative of a product equal to the product of the derivatives?",
+      "back": "**No**. Expand the product first, or use a product rule when one is available.",
+      "hint": "Try expanding $(x+2)^2$ first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "15a8p9w",
+      "kind": "mistake",
+      "front": "What goes wrong when differentiating $-6x^{-2}$?",
+      "back": "The minus sign is often lost. The correct result is $(-6)(-2)x^{-3}=+12x^{-3}$, so multiply the coefficient by the index and keep the sign.",
+      "hint": "Track the signs carefully.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07e9xbs",
+      "kind": "mistake",
+      "front": "Why is the power rule wrong for $2^x$?",
+      "back": "The power rule needs the **variable as the base** and a constant index. In $2^x$ the variable is the index, so it does not apply.",
+      "hint": "Which part is the variable?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k3qkwn",
+      "kind": "process",
+      "front": "What steps should you follow to differentiate a mixed function?",
+      "back": "1) Rewrite each term as a power. 2) Differentiate each term, keeping its sign. 3) Constant terms give zero. 4) Substitute the value if asked. Show the rewriting step for method marks.",
+      "hint": "Rewrite before you differentiate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ln641i",
+      "kind": "example",
+      "front": "Differentiate $f(x)=4x^3-\\frac{6}{x^2}+5\\sqrt{x}-7$ and find $f'(1)$.",
+      "back": "$f'(x)=12x^2+12x^{-3}+\\frac{5}{2}x^{-1/2}$, so $f'(1)=26.5$.",
+      "hint": "Rewrite each term as a power first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1f3qqj9",
+      "kind": "example",
+      "front": "Find the gradient of $y=\\frac{8}{x^2}+x$ at $x=2$.",
+      "back": "$-1$. Rewrite as $y=8x^{-2}+x$, so $\\frac{dy}{dx}=-16x^{-3}+1$, and at $x=2$ this gives $-2+1=-1$.",
+      "hint": "Rewrite the reciprocal first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vmuxnj",
+      "kind": "concept",
+      "front": "When can you split a fraction before differentiating it?",
+      "back": "Only when there is **one term** below the fraction line. Divide each term by it, e.g. $\\frac{x^3+2x}{x}=x^2+2$, so the derivative is $2x$.",
+      "hint": "Count the terms under the line.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vyquv0",
+      "kind": "example",
+      "front": "Find the point on $y=x^2-6x+4$ where the gradient is zero.",
+      "back": "$(3,-5)$. Solve $\\frac{dy}{dx}=2x-6=0$ to get $x=3$, then $y=9-18+4=-5$.",
+      "hint": "Differentiate, then set the derivative to zero."
+    }
+  ]
+}

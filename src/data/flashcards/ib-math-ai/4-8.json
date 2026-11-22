@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-8",
+  "topicCode": "4.8",
+  "topicName": "Binomial distribution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:57.999Z",
+  "cards": [
+    {
+      "id": "0ha9pdb",
+      "kind": "concept",
+      "front": "What four conditions must hold before a count of successes can be modelled by a binomial distribution?",
+      "back": "There is a **fixed number** of trials $n$, each trial has two outcomes, the probability of success $p$ is the same every time, and the trials are independent of each other.",
+      "hint": "Think about how many trials there are and whether one trial affects the next.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0aree9b",
+      "kind": "formula",
+      "front": "What is the formula for $P(X=r)$ when $X\\sim \\mathrm{B}(n,p)$?",
+      "back": "$P(X=r)=\\binom{n}{r}p^{r}(1-p)^{n-r}$, where $\\binom{n}{r}$ counts the orders of successes and failures, $p$ is the success probability and $n$ is the number of trials.",
+      "hint": "First part counts the orders; second part is the probability of one specific order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a609hx",
+      "kind": "formula",
+      "front": "For $X\\sim \\mathrm{B}(n,p)$, what are the mean and variance of $X$?",
+      "back": "Mean $E(X)=np$ and variance $\\mathrm{Var}(X)=np(1-p)$. The **standard deviation** is the square root of the variance.",
+      "hint": "Both depend only on n and p.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r8guhq",
+      "kind": "term",
+      "front": "What is a binomial coefficient $\\binom{n}{r}$?",
+      "back": "The **number of ways** to choose $r$ successes from $n$ trials, equal to $\\frac{n!}{r!\\,(n-r)!}$.",
+      "hint": "It counts orders, not probabilities.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bd67td",
+      "kind": "example",
+      "front": "A customer buys with probability 0.3, independently. Eight customers enter. Find $P(X=3)$ where $X\\sim \\mathrm{B}(8,0.3)$.",
+      "back": "$P(X=3)=\\binom{8}{3}(0.3)^3(0.7)^5\\approx 0.254$. Write the model first, then substitute into the formula.",
+      "hint": "Use n = 8, r = 3, p = 0.3.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cr5su8",
+      "kind": "example",
+      "front": "Forty seeds are sown, each germinating independently with probability 0.25. Find the mean, variance and standard deviation of the number that germinate.",
+      "back": "Mean 10 seeds, variance 7.5, and standard deviation about 2.74 seeds, using $X\\sim \\mathrm{B}(40,0.25)$.",
+      "hint": "Use np and np(1-p), then take the square root.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ia8att",
+      "kind": "process",
+      "front": "How do you find $P(X\\ge 3)$ for a binomial variable using a calculator?",
+      "back": "Convert the wording to $X\\ge 3$, then use $P(X\\ge 3)=1-P(X\\le 2)$, since the probabilities total 1. Calculate $P(X\\le 2)$ and subtract it from 1.",
+      "hint": "Calculators usually give cumulative probabilities of the form P(X ≤ r).",
+      "sectionId": "s5"
+    },
+    {
+      "id": "056hj1f",
+      "kind": "term",
+      "front": "What is a cumulative probability $P(X\\le r)$?",
+      "back": "The probability that the **random variable** takes the value $r$ or any smaller value. Calculators give it directly.",
+      "hint": "It adds several outcomes together.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14zkicg",
+      "kind": "mistake",
+      "front": "A student finds $P(X\\ge 3)$ by calculating $1-P(X\\le 3)$. What is wrong?",
+      "back": "That removes the case $X=3$, which should stay in. The correct method is $1-P(X\\le 2)$.",
+      "hint": "Check which values are excluded by your subtraction.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "15vr89i",
+      "kind": "process",
+      "front": "How do you find $P(a\\le X\\le b)$ for a binomial variable?",
+      "back": "Use $P(X\\le b)-P(X\\le a-1)$. Take care with the lower end, because $a-1$ is the value you subtract up to.",
+      "hint": "Subtract the cumulative probability just below the lower limit.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mz6rqw",
+      "kind": "mistake",
+      "front": "Why is a binomial model a poor fit when items are picked from a small group without replacement?",
+      "back": "The probability of success changes after each pick, so the trials are **not independent**. The model needs a constant p and independent trials.",
+      "hint": "Think about what happens to the group after each item is removed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kqx6qe",
+      "kind": "concept",
+      "front": "When is the variance of a binomial distribution largest, and why?",
+      "back": "When $p=0.5$, because success and failure are equally likely. The variance is small when p is near 0 or 1, since the result is easier to predict.",
+      "hint": "Compare the uncertainty when p is near 0 or 1 with when it is in the middle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t2ep4t",
+      "kind": "concept",
+      "front": "If $P(X\\ge 3)\\approx 0.448$ for groups of eight customers, how should this be interpreted?",
+      "back": "About 45% of groups of eight such customers would include at least three buyers. The mean $np=2.4$ is a long-run average, not an expected count for one group.",
+      "hint": "Answer in a full sentence that names the situation.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ayl552",
+      "kind": "concept",
+      "front": "Why might seven buyers out of eight make us doubt the model with p = 0.3?",
+      "back": "$P(X\\ge 7)\\approx 0.0013$ is very rare when $p=0.3$, so the true probability of buying may be higher than 0.3.",
+      "hint": "Compare the observed result with how rare it is under the model.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "5-4",
+  "topicCode": "5.4",
+  "topicName": "Elementary reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:40.941Z",
+  "cards": [
+    {
+      "id": "1dam95m",
+      "kind": "term",
+      "front": "What is an elementary reaction?",
+      "back": "An **elementary reaction** is a single step in which reactant particles change directly into products in one molecular event.",
+      "hint": "Think about one step, not a whole sequence.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06atqsb",
+      "kind": "formula",
+      "front": "What is the rate law for the elementary step $\\mathrm{A+B\\rightarrow products}$?",
+      "back": "$\\text{rate}=k[\\mathrm{A}][\\mathrm{B}]$, where **$k$** is the rate constant at a given temperature. Each exponent equals its reactant coefficient.",
+      "hint": "Each reactant's coefficient becomes its exponent.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "044kk92",
+      "kind": "mistake",
+      "front": "Can you assume an overall reaction is elementary because its equation looks simple?",
+      "back": "No. An **overall equation** can be the net result of several steps, so a simple look does not show it is elementary.",
+      "hint": "Several steps can sum to one simple equation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wmsjzy",
+      "kind": "term",
+      "front": "What is molecularity?",
+      "back": "**Molecularity** is the number of reactant particles involved in one elementary event.",
+      "hint": "Count particles, not products.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0z5xixl",
+      "kind": "term",
+      "front": "What is a reaction mechanism?",
+      "back": "A **reaction mechanism** is a sequence of elementary steps whose sum gives the overall reaction.",
+      "hint": "It is a series of steps.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lv6pds",
+      "kind": "process",
+      "front": "How do you find the molecularity of an elementary step?",
+      "back": "**Count** the reactant particles on the left side of that step. One is unimolecular, two is bimolecular, and three is termolecular.",
+      "hint": "Look only at the left side.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ei7q0f",
+      "kind": "concept",
+      "front": "For elementary $\\mathrm{A+B\\rightarrow products}$, what happens to the rate if $[\\mathrm{A}]$ doubles while $[\\mathrm{B}]$ stays constant?",
+      "back": "The rate **doubles**, because the rate law has $[\\mathrm{A}]$ to the first power.",
+      "hint": "Check the exponent on [A].",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t1z3s7",
+      "kind": "concept",
+      "front": "For elementary $\\mathrm{A+B\\rightarrow products}$, what happens to the rate if both concentrations double?",
+      "back": "The rate becomes **four times** as large, since both reactant terms each double.",
+      "hint": "Multiply the two effects together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0stau0j",
+      "kind": "example",
+      "front": "For elementary $\\mathrm{A+B\\rightarrow products}$, $k=0.20$, $[\\mathrm{A}]=0.30$, and $[\\mathrm{B}]=0.50$ in $\\mathrm{mol\\,L^{-1}}$ units. What is the rate?",
+      "back": "**0.030 $\\mathrm{mol\\,L^{-1}\\,s^{-1}}$**, from $\\text{rate}=(0.20)(0.30)(0.50)$.",
+      "hint": "Use rate = k[A][B].",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mihupj",
+      "kind": "example",
+      "front": "Write the rate law for the elementary step $\\mathrm{2A+B\\rightarrow products}$.",
+      "back": "$\\text{rate}=k[\\mathrm{A}]^2[\\mathrm{B}]$, because the **coefficient 2** on A becomes an exponent of 2.",
+      "hint": "The step is termolecular.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cl6os4",
+      "kind": "concept",
+      "front": "Do product concentrations appear in the rate law for the forward step?",
+      "back": "No. **Product** concentrations do not appear in the forward-step rate law.",
+      "hint": "Only reactants matter for the forward rate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0erjje8",
+      "kind": "term",
+      "front": "What is the rate constant, $k$?",
+      "back": "The **rate constant** is the proportionality constant in a rate law at a given temperature.",
+      "hint": "It depends on temperature.",
+      "sectionId": "s3"
+    }
+  ]
+}

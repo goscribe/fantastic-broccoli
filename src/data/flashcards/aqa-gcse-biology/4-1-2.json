@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-1-2",
+  "topicCode": "4.1.2",
+  "topicName": "Cell division",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:26.654Z",
+  "cards": [
+    {
+      "id": "1ekim72",
+      "kind": "term",
+      "front": "What is mitosis?",
+      "back": "**Mitosis** is the division of the nucleus into two nuclei with identical sets of chromosomes. The cytoplasm then divides to give two genetically identical cells.",
+      "hint": "Think about what happens to the nucleus before the cell splits.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xvsx9l",
+      "kind": "process",
+      "front": "What are the main stages of mitosis, in order?",
+      "back": "**Chromosomes** become visible and line up near the middle. The copies separate and move to opposite ends. New **nuclei** form around each set, then the cytoplasm divides.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ddxoqn",
+      "kind": "concept",
+      "front": "What is differentiation, and why does it matter?",
+      "back": "**Differentiation** is the process by which a cell becomes specialised, developing structures that help it perform a particular job, such as a muscle cell contracting to produce movement.",
+      "hint": "Think about why a muscle cell looks different from a skin cell.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16hsq81",
+      "kind": "term",
+      "front": "What is the cell cycle?",
+      "back": "The **cell cycle** is the sequence in which a cell grows, copies its DNA and divides to produce new cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wztwxb",
+      "kind": "term",
+      "front": "What is a chromosome?",
+      "back": "A **chromosome** is a long molecule of DNA found in the nucleus. It carries many genes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0o5tlec",
+      "kind": "term",
+      "front": "What is a gene?",
+      "back": "A **gene** is a small section of DNA on a chromosome. It codes for a particular sequence of amino acids to make a specific protein.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06v7pn8",
+      "kind": "concept",
+      "front": "How can you tell from a diagram whether a cell is at an earlier or later stage of mitosis?",
+      "back": "Joined chromosome copies at the middle show an **earlier stage**. Separate copies moving towards opposite ends show a **later stage**.",
+      "hint": "Think about where the chromosomes are positioned in the cell.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uny9vn",
+      "kind": "term",
+      "front": "What is a daughter cell?",
+      "back": "A **daughter cell** is a new cell formed when an existing cell divides. It receives one copy of each chromosome from the original cell.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j5t7ud",
+      "kind": "concept",
+      "front": "Why does mitosis happen in the skin and near a wound?",
+      "back": "**Mitosis** replaces cells lost through normal wear and damaged cells during repair. It increases cell number without changing the chromosome number.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05fa1es",
+      "kind": "term",
+      "front": "What are stem cells?",
+      "back": "**Stem cells** can divide and produce new cells that may later differentiate into specialised types.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16qc2ar",
+      "kind": "term",
+      "front": "What are meristems?",
+      "back": "**Meristems** are growing regions in plants, such as root and shoot tips, containing cells that divide and can differentiate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11ruxsy",
+      "kind": "concept",
+      "front": "How does the timing of differentiation differ between animals and plants?",
+      "back": "In **animals**, most differentiation happens early in development. In **plants**, many cells keep the ability to differentiate throughout life.",
+      "hint": "Think about the stage of life when specialisation mostly occurs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1izx8u2",
+      "kind": "mistake",
+      "front": "A student says copying DNA is the same as mitosis. What is wrong with this?",
+      "back": "**DNA copying** happens before the nucleus divides. **Mitosis** is the division of the nucleus that follows it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hbefb0",
+      "kind": "mistake",
+      "front": "A student says mitosis and differentiation are the same thing. Why is this wrong?",
+      "back": "**Mitosis** makes new cells, while **differentiation** makes cells specialised. The two processes can happen at different times.",
+      "sectionId": "s4"
+    }
+  ]
+}

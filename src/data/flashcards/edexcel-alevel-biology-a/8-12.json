@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-12",
+  "topicCode": "8.12",
+  "topicName": "Ethics of animal research",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:16.435Z",
+  "cards": [
+    {
+      "id": "09lnkhe",
+      "kind": "term",
+      "front": "What are the **3Rs** that guide researchers before they begin animal work?",
+      "back": "**Replacement**, reduction and refinement: replace animals where possible, reduce numbers to the fewest that give reliable results, and refine procedures to cut pain and distress.",
+      "hint": "Three actions a researcher considers before starting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fybsjk",
+      "kind": "concept",
+      "front": "How do regulations stop animal experiments going ahead without good justification?",
+      "back": "Licences are needed for the **researcher**, the **project** and the **premises**. Each project gets a harm–benefit analysis and is refused unless justified. Inspectors can visit labs to check standards.",
+      "hint": "Think about who and what is checked before work starts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e1uiuo",
+      "kind": "concept",
+      "front": "Why does concern about animal research grow most for some species?",
+      "back": "**Sentient** animals can feel pain, fear and distress, so their welfare matters. They also cannot give consent to take part in research.",
+      "hint": "Consider what the animal is able to experience.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0v742hg",
+      "kind": "term",
+      "front": "What does **welfare** mean for an animal in research?",
+      "back": "Welfare is the animal's physical and mental condition, including whether it suffers pain, fear or distress.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1k1jcm3",
+      "kind": "term",
+      "front": "What is a **harm–benefit analysis** for a research project?",
+      "back": "An assessment that weighs the likely suffering of animals against the expected value of the project. It is used to decide whether the project is justified.",
+      "hint": "Compare the two sides of the project.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xe3q58",
+      "kind": "mistake",
+      "front": "Why is it wrong to think **reduction** means using as few animals as possible?",
+      "back": "Too few animals give unreliable results, so the animals used are wasted. Reduction means using the fewest animals that still give reliable results.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "074utex",
+      "kind": "concept",
+      "front": "How can a researcher refine an experiment on mice to reduce suffering?",
+      "back": "Give pain relief during procedures, improve housing such as larger cages with nesting material, or handle the mice gently. Each change improves welfare without stopping the research.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fcbw3v",
+      "kind": "mistake",
+      "front": "Why does ethical concern about animal research not mean opposing all of it?",
+      "back": "Many people accept animal research under strict limits. Concern shapes how research is done rather than ruling out all research.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1098sfi",
+      "kind": "concept",
+      "front": "What main benefits do supporters of animal research point to?",
+      "back": "Treatments and knowledge that help people, whole animals showing how organs and systems interact, safety tests that protect human volunteers, and benefits to veterinary medicine.",
+      "hint": "Think about health and whole living systems.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05thjpc",
+      "kind": "concept",
+      "front": "Why do critics of animal research say suffering is certain but benefits are not?",
+      "back": "The harm to animals happens for certain during the study, while the medical benefit may never appear.",
+      "hint": "Compare when each outcome happens.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pop4jz",
+      "kind": "mistake",
+      "front": "Why might a drug that appears safe in animal tests still harm people?",
+      "back": "Species differ, so results from animals may not apply to humans. Animal tests give useful evidence but cannot guarantee human safety.",
+      "hint": "Think about how animals and humans differ biologically.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pvaa9e",
+      "kind": "concept",
+      "front": "Which methods can answer some research questions without using animals?",
+      "back": "**Cell cultures**, computer models, human volunteers and brain imaging. Critics argue more effort should go into developing these alternatives.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lbrnz6",
+      "kind": "process",
+      "front": "What steps should a discuss answer on animal research follow?",
+      "back": "First give points for and against research, setting the arguments side by side. Then weigh the evidence on each side. Finish with a reasoned conclusion that uses that evidence.",
+      "hint": "Start with the arguments, then move to judgement.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "02jd5f9",
+      "kind": "concept",
+      "front": "Why is research into a serious disease easier to defend than research with small benefits?",
+      "back": "A serious disease with no alternative gives a large benefit that can justify the harm. Small benefits with severe suffering are much harder to justify.",
+      "hint": "Compare the size of the benefit with the severity of suffering.",
+      "sectionId": "s6"
+    }
+  ]
+}

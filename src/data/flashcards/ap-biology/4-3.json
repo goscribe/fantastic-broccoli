@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "4-3",
+  "topicCode": "4.3",
+  "topicName": "Signal transduction pathways",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:35.129Z",
+  "cards": [
+    {
+      "id": "05j84bn",
+      "kind": "concept",
+      "front": "How can a signal received at the cell surface change activity deep inside the cell?",
+      "back": "Through a **signal transduction pathway**, where each activated component changes the activity of the next. The message is relayed without the original signaling molecule moving through the cell.",
+      "hint": "Think of a chain of relay runners passing a message.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1b476tp",
+      "kind": "concept",
+      "front": "Why can a small signal produce a very large cellular response?",
+      "back": "**Amplification**: one activated component can make many second messenger molecules, or one active enzyme can modify many targets. Each step multiplies the effect of the original signal.",
+      "hint": "Consider what one active molecule can do at each step.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wkazmb",
+      "kind": "concept",
+      "front": "How can a mutation in a signaling protein contribute to cancer?",
+      "back": "A mutation can keep the **signaling protein** active without its usual signal. Its downstream targets then keep receiving the signal, and if they promote cell division, this persistent signaling may contribute to cancer.",
+      "hint": "Think about what happens when the signal should have stopped.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wxcgh2",
+      "kind": "term",
+      "front": "What is a second messenger?",
+      "back": "A **second messenger** is a small molecule or ion that relays a received signal to targets inside the cell.",
+      "hint": "It works inside the cell, after the signal arrives.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0drncgv",
+      "kind": "term",
+      "front": "What is cAMP and what does it do?",
+      "back": "**Cyclic AMP** is a second messenger made from ATP by an enzyme activated in some pathways. It activates proteins in certain signaling pathways, such as a protein kinase.",
+      "hint": "It is made from ATP.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "031y3km",
+      "kind": "concept",
+      "front": "How do calcium ions act as second messengers?",
+      "back": "A signal opens channels that release **calcium ions** from internal stores into the cytoplasm. The calcium then binds proteins and changes their activity.",
+      "hint": "Where is the calcium stored before the signal?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kkqb1v",
+      "kind": "term",
+      "front": "What is a protein kinase?",
+      "back": "A **protein kinase** transfers a phosphate group from ATP to a protein. This changes the protein's activity, possibly activating or inhibiting it.",
+      "hint": "Kinases add phosphate groups.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1d0ujwq",
+      "kind": "term",
+      "front": "What is a receptor, and how can changing it alter a cell's response?",
+      "back": "A **receptor** is a protein that detects a signal and starts a cellular response. Changing its amount or activity changes how strongly the cell responds to the same external signal.",
+      "hint": "Consider a change at the very start of the pathway.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fw3tw0",
+      "kind": "concept",
+      "front": "If an enzyme that breaks down cAMP becomes less active, what happens to a cAMP-dependent response?",
+      "back": "cAMP stays available for longer, so the **downstream response lasts longer**. A change farther along the pathway can alter the response even when the receptor works normally.",
+      "hint": "Trace the effect from the enzyme to the response.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jdixqx",
+      "kind": "mistake",
+      "front": "Are second messengers the original signals that arrive from outside the cell?",
+      "back": "No. **Second messengers** carry information inside the cell after a signal is received; the original signal is outside the cell.",
+      "hint": "Ask where the message starts and where it travels.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00wfz08",
+      "kind": "mistake",
+      "front": "Must a disease-causing pathway mutation affect the receptor?",
+      "back": "No. A disease-causing mutation can affect a **relay protein** or another component downstream of the receptor.",
+      "hint": "Signals pass through many components, not just one.",
+      "sectionId": "s4"
+    }
+  ]
+}

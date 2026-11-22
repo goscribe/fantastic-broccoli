@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-5",
+  "topicCode": "3.5",
+  "topicName": "Setting up a test for a proportion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:23.251Z",
+  "cards": [
+    {
+      "id": "1ky5k5k",
+      "kind": "concept",
+      "front": "What question does a significance test answer about a gap seen in a sample?",
+      "back": "It asks whether the gap is bigger than **random sampling alone** would usually produce. Hypotheses must be set up correctly before any calculation.",
+      "hint": "Think about chance variation in random samples.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rlpc95",
+      "kind": "concept",
+      "front": "Why must hypotheses be written about the population proportion p, never the sample proportion p-hat?",
+      "back": "A test judges a claim about the **whole population**. The sample proportion is only evidence collected, so it is not part of the claim.",
+      "hint": "Ask what the claim is about: the sample or the population?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1aici9t",
+      "kind": "process",
+      "front": "What three conditions must hold before a normal model is used for a proportion test?",
+      "back": "The sample is **random** (or from a randomized experiment), the **10% condition** holds, and the **large counts condition** holds, using the claimed value p0.",
+      "hint": "Think: randomness, sample size versus population, and expected counts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wctmbs",
+      "kind": "term",
+      "front": "What is the null hypothesis, H0?",
+      "back": "The **null hypothesis** is the claim being tested. It states that the population proportion equals a specific value, p0, called the null value.",
+      "hint": "It is the claim the test tries to judge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ciejlf",
+      "kind": "term",
+      "front": "What is the alternative hypothesis, Ha?",
+      "back": "The **alternative hypothesis** says the population proportion differs from the null value. The data are used to support it.",
+      "hint": "It is the competing statement to H0.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "041f9od",
+      "kind": "formula",
+      "front": "In the hypotheses H0: p = p0 and Ha: p < p0 (or p > p0, or p ≠ p0), what does each symbol mean?",
+      "back": "**p** is the population proportion, and **p0** is the claimed null value. The alternative is one-sided (less than or greater than) or two-sided (not equal).",
+      "hint": "Which symbol is the population and which is the claimed value?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lwa7z1",
+      "kind": "concept",
+      "front": "What decides whether the alternative hypothesis is one-sided or two-sided?",
+      "back": "The **researcher's suspicion**, read from the question before looking at data. A suspected lower or greater value gives one-sided; no direction gives two-sided.",
+      "hint": "Look for words like lower, higher, or differs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pag3nk",
+      "kind": "example",
+      "front": "A coffee shop claims 60% of customers order a drink with milk. The manager thinks the true proportion is lower. Write H0 and Ha.",
+      "back": "$H_0: p = 0.60$ and $H_a: p < 0.60$, where $p$ is the proportion of all customers who order a drink with milk. The claim sets H0; the suspicion sets the one-sided Ha.",
+      "hint": "The null value comes from the claim; the direction from the suspicion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0apkkjz",
+      "kind": "mistake",
+      "front": "Is it acceptable to pick the one-sided direction after seeing the sample results?",
+      "back": "No. Choosing the direction after seeing the data would **bias** the test. The direction must come from the suspicion before any data are examined.",
+      "hint": "Ask when the researcher's suspicion should be formed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rlmxen",
+      "kind": "formula",
+      "front": "What are the large counts conditions for a test of H0: p = p0 with sample size n?",
+      "back": "$np_0 \\geq 10$ and $n(1-p_0) \\geq 10$. Here **n** is the sample size, and both checks use the claimed value $p_0$.",
+      "hint": "Use the claim, not the sample result, in both expressions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04y8sh2",
+      "kind": "example",
+      "front": "A random sample of 150 is taken from 5,000 customers to test H0: p = 0.30. Are the conditions met?",
+      "back": "Yes. **10% condition:** 10% of 5,000 is 500, and 150 is less than 500. **Large counts:** $150(0.30)=45$ and $150(0.70)=105$, both at least 10. All conditions are met.",
+      "hint": "Compare the sample size with 10% of the population first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ci5w7p",
+      "kind": "mistake",
+      "front": "Which proportion should you use to check the large counts condition in a significance test?",
+      "back": "The **claimed value p0**, not the sample proportion p-hat. The test is built on the claim, so the check uses $np_0$ and $n(1-p_0)$.",
+      "hint": "Which value does the null hypothesis state?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bqjzqz",
+      "kind": "process",
+      "front": "How do you choose the correct procedure for a proportion scenario?",
+      "back": "Look for three clues: one **categorical variable**, one **sample**, and a **claimed value**. Together they point to a one-sample z-test for a proportion; no claim to test points to a confidence interval.",
+      "hint": "Check the variable type, the number of samples, and whether a claim is being tested.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0p7q5fn",
+      "kind": "term",
+      "front": "What is a one-sample z-test for a proportion?",
+      "back": "A **significance test** of a claimed population proportion using one random sample. Its z statistic counts how many standard deviations the sample proportion lies from the claimed value.",
+      "hint": "Think about one sample, two outcomes, and a claim.",
+      "sectionId": "s5"
+    }
+  ]
+}

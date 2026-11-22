@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "s1",
+  "topicCode": "S1",
+  "topicName": "Statistical sampling",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:36.259Z",
+  "cards": [
+    {
+      "id": "1bzmzzr",
+      "kind": "term",
+      "front": "What is **bias** in sampling?",
+      "back": "**Bias** is a systematic error in selecting or measuring a sample that makes it unrepresentative of the population. The sample differs from the population in a consistent direction.",
+      "hint": "Think about whether some members are more likely to be chosen than others.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0r4px5z",
+      "kind": "term",
+      "front": "What is an **estimate** in sampling?",
+      "back": "An **estimate** is a value calculated from sample data to approximate an unknown population value, such as a sample mean approximating a population mean.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "14uobq8",
+      "kind": "term",
+      "front": "What is a **simple random sample** of size $n$?",
+      "back": "A **simple random sample** is one where every possible sample of size $n$ is equally likely, so every member has the same chance of selection.",
+      "hint": "Think about what the selection process guarantees, not how the sample looks.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06jc9yl",
+      "kind": "mistake",
+      "front": "Why is a sample that looks mixed not necessarily random?",
+      "back": "Randomness comes from the **selection process**, not from how the result looks. A mixed-looking sample may still have been chosen by personal choice.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qi6205",
+      "kind": "process",
+      "front": "How do you take a systematic sample of $n$ from an ordered population of $N$?",
+      "back": "Work out the interval $\\frac{N}{n}$, choose a random starting member from within the first interval, then take every interval-th member from the list until $n$ are chosen.",
+      "hint": "Start by working out the gap between chosen members.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a2p0wp",
+      "kind": "formula",
+      "front": "What is the interval used in systematic sampling, and what do its symbols mean?",
+      "back": "The interval is $\\frac{N}{n}$, where $N$ is the population size and $n$ is the sample size. It gives the gap between selected members in the ordered list.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gdytne",
+      "kind": "example",
+      "front": "A club has 600 ordered members. What is the interval for a systematic sample of 40?",
+      "back": "$\\frac{600}{40}=15$, so every 15th member is selected, starting from a random member within the first 15.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0u0dvgo",
+      "kind": "process",
+      "front": "How do you find how many to sample from each group in a stratified sample?",
+      "back": "Use $\\frac{\\text{group size}}{\\text{population size}}\\times\\text{sample size}$ for each group, round to whole numbers, check the total equals the sample size, then take a simple random sample from each group.",
+      "hint": "Think about keeping each group's share matched to its size.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1o71t9h",
+      "kind": "example",
+      "front": "A college has 800 students, 320 in Year 12. In a stratified sample of 40, how many Year 12 students are chosen?",
+      "back": "$\\frac{320}{800}\\times40=16$, so 16 Year 12 students are sampled.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1toh0nk",
+      "kind": "concept",
+      "front": "How does quota sampling differ from opportunity sampling?",
+      "back": "In **quota sampling** the interviewer fills fixed numbers from each group and chooses who to ask. In **opportunity sampling** you take whoever is available and willing.",
+      "hint": "Consider who makes the final choice of respondent in each method.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0g3w42h",
+      "kind": "concept",
+      "front": "Why might quota and opportunity sampling give unrepresentative results?",
+      "back": "Not every member has a known chance of selection, so the results may not represent the population. These methods are quick and need no frame, but are non-random.",
+      "hint": "Think about whether each member's chance of selection is known.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i41sjd",
+      "kind": "example",
+      "front": "Why would interviewing people outside a gym overestimate how active a town is?",
+      "back": "Gym users are far more likely to be selected than other residents, so the sample favours active people and is biased.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1930ai8",
+      "kind": "example",
+      "front": "In a random sample of 80 from 1500 students, 24 walk. How many students are estimated to walk?",
+      "back": "$\\frac{24}{80}=0.3$, then $0.3\\times1500=450$, so about 450 students walk.",
+      "hint": "Find the sample proportion first, then scale it up.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0vz35pt",
+      "kind": "concept",
+      "front": "When is a census impractical or impossible?",
+      "back": "A census is impractical when it takes too much time or cost. It is impossible when testing destroys each item, such as testing how long fuses last before they fail.",
+      "hint": "Think about what happens to each item once it is tested.",
+      "sectionId": "s1"
+    }
+  ]
+}
