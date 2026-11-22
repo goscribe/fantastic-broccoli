@@ -109,7 +109,6 @@ export default function PricingPage() {
   const [loading, setLoading] = useState(true);
   const [switching, setSwitching] = useState(false);
   const [pitch, setPitch] = useState<ExamPitch | null>(null);
-
   useEffect(() => {
     Promise.all([
       fetchAccountSummary(),
@@ -137,8 +136,10 @@ export default function PricingPage() {
       .finally(() => setLoading(false));
   }, []);
   const freeCaps = caps?.caps ?? DEFAULT_FREE_CAPS;
+  // The one primary: the cheapest subscription for someone without a plan; for someone on one, the next plan up (never a downgrade).
+  const activePrice = plans.find((p) => p.isActive && p.priceDollars > 0)?.priceDollars ?? 0;
   const featuredId = [...plans]
-    .filter((p) => p.priceDollars > 0 && planBilling(p) !== "once" && !p.isActive)
+    .filter((p) => p.priceDollars > activePrice && planBilling(p) !== "once" && !p.isActive)
     .sort((a, b) => a.priceDollars - b.priceDollars)[0]?.id;
 
   const trialDays = caps?.trialDays ?? 0;
@@ -227,7 +228,7 @@ export default function PricingPage() {
         )}
       </section>
 
-      <section className={cn("mt-6 grid gap-4", plans.length >= 3 ? "md:grid-cols-3" : plans.length === 2 ? "sm:grid-cols-2" : "max-w-md")}>
+      <section className={cn("mt-6 grid gap-4", plans.length >= 4 ? "sm:grid-cols-2 xl:grid-cols-4" : plans.length === 3 ? "md:grid-cols-3" : plans.length === 2 ? "sm:grid-cols-2" : "max-w-md")}>
         {loading
           ? Array.from({ length: 2 }, (_, i) => (
               <div key={i} className="life-card space-y-3 p-5">

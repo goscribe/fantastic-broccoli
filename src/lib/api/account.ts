@@ -148,13 +148,15 @@ export interface PlanOption {
   kind?: string | null;
   /** When a pass's access ends, when the server sends it. Labels only. */
   accessUntil?: string | Date | null;
+  /** Coursework reviews a day (null = unlimited, 0 = not included); undefined on servers without the grader. Labels only. */
+  courseworkReviewsPerDay?: number | null;
 }
 
 export async function fetchPlanOptions(): Promise<PlanOption[]> {
   const plans = await api.payment.getPlans.query();
   return plans.map((plan) => {
     // Display-only fields; `kind` / `accessUntil` are newer than the published @goscribe/server types.
-    const extra = plan as unknown as { interval?: string | null; kind?: string | null; accessUntil?: string | Date | null };
+    const extra = plan as unknown as { interval?: string | null; kind?: string | null; accessUntil?: string | Date | null; courseworkReviewsPerDay?: number | null };
     return {
       id: plan.id,
       name: plan.name,
@@ -168,6 +170,7 @@ export async function fetchPlanOptions(): Promise<PlanOption[]> {
       interval: extra.interval,
       kind: extra.kind,
       accessUntil: extra.accessUntil,
+      courseworkReviewsPerDay: extra.courseworkReviewsPerDay,
     };
   });
 }

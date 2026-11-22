@@ -12,6 +12,10 @@ import { BOARD_LABEL, BOARD_ORDER } from "@/lib/courses";
 import { libraryCourseHref } from "@/lib/notes";
 import { onTreeChanged } from "@/lib/tree-events";
 import { loadNoteCourses, useLoaded, useNotesEntitled } from "./data";
+import { GuideTile } from "@/components/coursework/hub";
+import { loadRubrics } from "@/components/coursework/use-grader";
+import type { RubricSummary } from "@/lib/api/coursework";
+import { componentTitle } from "@/lib/coursework";
 import "@/app/notes/notes-look.css";
 
 /**
@@ -24,6 +28,17 @@ export function NotesLibrary() {
   const entitled = useNotesEntitled();
   const [mine, setMine] = useState<CourseSubject[]>([]);
   const [query, setQuery] = useState("");
+  /** Coursework guides (how each IA, the EE and TOK are marked); none on a server without the grader. */
+  const [guides, setGuides] = useState<RubricSummary[]>([]);
+  useEffect(() => {
+    let cancelled = false;
+    loadRubrics()
+      .then((r) => !cancelled && setGuides(r))
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     const load = () =>
@@ -54,6 +69,11 @@ export function NotesLibrary() {
     });
   }, [mine, byId]);
   const groups = BOARD_ORDER.map((board) => ({ board, courses: all.filter((c) => c.board === board && match(c)) })).filter((g) => g.courses.length);
+  // The student's own components first, then the core, then the rest A–Z.
+  const guideRank = (r: RubricSummary) => (r.suggested ? 0 : r.componentKind === "internal_assessment" ? 2 : 1);
+  const shownGuides = guides
+    .filter((r) => !q || `${componentTitle(r)} ${r.subject} ${r.component} coursework internal assessment`.toLowerCase().includes(q))
+    .sort((a, b) => guideRank(a) - guideRank(b) || componentTitle(a).localeCompare(componentTitle(b)));
   const notes = all.reduce((a, c) => a + c.noteCount, 0);
   const questions = all.reduce((a, c) => a + c.questionCount, 0);
   // Nothing imported yet: say what there is (topic outlines) instead of promising notes.
@@ -139,7 +159,24 @@ export function NotesLibrary() {
                   </ul>
                 </div>
               ))}
-              {groups.length === 0 && (
+              {shownGuides.length > 0 && (
+                <div id="lib-coursework" className="mt-5 scroll-mt-4">
+                  <h3 className="flex items-baseline gap-2 text-[15px] font-extrabold text-foreground">
+                    Coursework
+                    <span className="text-small font-semibold text-faint">
+                      {shownGuides.length} {shownGuides.length === 1 ? "guide" : "guides"}
+                    </span>
+                  </h3>
+                  <ul className="mt-2.5 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+                    {shownGuides.map((r) => (
+                      <li key={r.id}>
+                        <GuideTile rubric={r} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {groups.length === 0 && shownGuides.length === 0 && (
                 <div className="mt-6 flex flex-col items-center rounded-[var(--r-card)] border-2 border-dashed border-border px-5 py-9 text-center">
                   <Image src="/design/cat3-think.webp" alt="" width={383} height={400} unoptimized className="h-[72px] w-auto" />
                   <p className="mt-3 text-[16px] font-extrabold">No course matches “{query.trim()}”</p>
