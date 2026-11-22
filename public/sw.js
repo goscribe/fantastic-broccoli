@@ -37,8 +37,8 @@ self.addEventListener("push", (event) => {
   event.waitUntil(
     self.registration.showNotification(title, {
       body: data.body || "",
-      icon: "/icons/cat-192.png",
-      badge: "/icons/cat-badge-96.png",
+      icon: "/icons/hp-192.png",
+      badge: "/icons/hp-badge-96.png",
       tag: data.tag || "scribe",
       data: { url: safeUrl(data.url) },
     }),

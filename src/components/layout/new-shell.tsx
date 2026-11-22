@@ -123,7 +123,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
       >
         <div className={cn("mb-6 flex items-center justify-between gap-2 pl-2", rail && "md:flex-col md:gap-3 md:pl-0")}>
           <Link href="/" className="flex items-center gap-2.5" onClick={() => setMobileOpen(false)}>
-            <Image src="/brand/scribe-mark.svg" alt="Scribe" width={28} height={28} />
+            <Image src="/brand/scribe-hp-head.svg" alt="Scribe" width={28} height={28} />
             <span className={cn("text-[17px] font-bold tracking-tight", rail && "md:hidden")}>Scribe</span>
           </Link>
           <button
@@ -231,7 +231,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           )}
         >
           <button type="button" onClick={() => setMobileOpen(true)} className="grid size-10 place-items-center rounded-xl hover:bg-muted md:hidden" aria-label="Open sidebar">
-            <Image src="/brand/scribe-mark.svg" alt="" width={24} height={24} />
+            <Image src="/brand/scribe-hp-head.svg" alt="" width={24} height={24} />
           </button>
           <button
             type="button"
