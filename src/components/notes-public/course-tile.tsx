@@ -17,12 +17,15 @@ export function CourseTile({ course: c, href, sub, stored }: { course: PublicCou
       href={href}
       data-nl-course={c.id}
       data-total={c.topicCount}
-      className="subject-tile h-full min-h-[184px] p-[18px] sm:p-5"
+      className="subject-tile course-tile h-full min-h-[184px] p-[18px] sm:p-5"
       style={familyVars(family) as React.CSSProperties}
     >
       <SubjectArt family={family} />
       <span className="subject-tile__text block">
-        <span className="block text-[20px] font-extrabold leading-[1.15]">{c.title}</span>
+        {/* Long names ("IB Mathematics: Applications and Interpretation") step down a size and stop at three lines. */}
+        <span className={`subject-tile__title course-tile__title font-extrabold leading-[1.15] ${c.title.length > 26 ? "text-[18px]" : "text-[20px]"}`} title={c.title}>
+          {c.title}
+        </span>
         <span className="subject-tile__sub mt-1 block text-[13.5px] font-semibold leading-snug">
           {sub ?? (
             <>
