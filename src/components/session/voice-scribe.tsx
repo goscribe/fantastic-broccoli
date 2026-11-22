@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
-import { Loader2, Mic, Square, X } from "lucide-react";
+import { useEffect, useImperativeHandle, useRef, useState, type RefObject } from "react";
+import { Check, ChevronDown, Loader2, Mic, Square } from "lucide-react";
 import { interpretSpeech } from "@/lib/api/voice-scribe";
 import {
   answerFields,
@@ -15,9 +15,8 @@ import {
   speechSupported,
   spokenCommand,
   type Listener,
-  type VoiceTarget,
 } from "@/lib/voice-scribe";
-import { PlayPrimary, playField, playLink } from "@/components/session/play-ui";
+import { playLink } from "@/components/session/play-ui";
 import { toast } from "@/lib/toast";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/voice";
@@ -25,28 +24,28 @@ import { cn } from "@/lib/utils";
 
 type Field = HTMLTextAreaElement | HTMLInputElement;
 
-/** One write, so "scratch that" can put back what was there before it. */
-type Step = { target: "notepad"; before: string } | { target: "answer"; field: Field; before: string };
-
-const notepadKey = (id: string) => `scribe.voiceNotepad.${id}`;
-
-function readNotepad(id: string): string {
-  try {
-    return window.localStorage.getItem(notepadKey(id)) ?? "";
-  } catch {
-    return "";
-  }
+/**
+ * One line of the chain: what the learner said and what Scribe will write.
+ * "live" is still being heard, "writing" is with the server, "undone" is
+ * crossed out (kept, so the chain stays whole), "note" records a command.
+ */
+interface Step {
+  id: number;
+  said: string;
+  wrote: string;
+  math: boolean;
+  state: "live" | "writing" | "done" | "undone" | "note";
 }
 
-/** The top-bar button that opens the voice scribe: the same round icon button as the bar's others. */
+/** The top-bar button: opens the overlay, and while it is open, stops and writes. */
 export function VoiceScribeTrigger({ active, onClick }: { active: boolean; onClick: () => void }) {
   const { t } = useI18n();
   return (
     <button
       type="button"
       onClick={onClick}
-      aria-label={t("voice.open")}
-      title={t("voice.open")}
+      aria-label={t(active ? "voice.stopAndWrite" : "voice.open")}
+      title={t(active ? "voice.stopAndWrite" : "voice.open")}
       aria-pressed={active}
       className={cn(
         "grid size-11 shrink-0 place-items-center rounded-full hover:bg-muted hover:text-foreground",
@@ -58,68 +57,66 @@ export function VoiceScribeTrigger({ active, onClick }: { active: boolean; onCli
   );
 }
 
+/** Which box this is, for the chip ("Answer b"): the box's part label when the activity marks one. */
+function fieldLabel(field: Field | null, scope: HTMLElement | null): string {
+  if (!field) return "";
+  const marked = field.closest("[data-dictation-label]")?.getAttribute("data-dictation-label");
+  if (marked) return marked;
+  const i = answerFields(scope).indexOf(field);
+  return i >= 0 ? String(i + 1) : "";
+}
+
+/** What the page can ask of the voice scribe. */
+export interface VoiceScribeHandle {
+  /** Closed: open and start listening. Open: stop and write it in. */
+  toggle: () => void;
+}
+
 /**
- * Talk to write: one microphone for the whole page, not one per box. What
- * the learner says is written — as working in the notepad, or straight into
- * an answer box — with spoken maths turned into notation using the
- * question's own numbers ("add the oranges to the bananas" → 2 + 2 = 4).
+ * Talk to write: one microphone for the whole page, not one per box. While
+ * the learner talks, a see-through overlay over the bottom of the screen
+ * shows the whole chain — what they said, then what Scribe will write, with
+ * spoken maths turned into notation using the question's own numbers
+ * ("add the oranges to the bananas" → 2 + 2 = 4). Stopping puts the lines
+ * into the answer box, the way typing would.
  *
- * `scope` is the content the answer boxes and the question live in; the
- * notepad is kept per `storageId` on this device.
+ * `scope` is the content the answer boxes and the question live in. The page
+ * opens and stops it through `ref` and hears about it through `onOpenChange`.
  */
 export function VoiceScribe({
-  open,
-  onClose,
+  ref,
   scope,
-  storageId,
+  onOpenChange,
 }: {
-  open: boolean;
-  onClose: () => void;
+  ref: RefObject<VoiceScribeHandle | null>;
   scope: RefObject<HTMLElement | null>;
-  storageId: string;
+  onOpenChange: (open: boolean) => void;
 }) {
   const { t, locale } = useI18n();
-  const [target, setTarget] = useState<VoiceTarget>("notepad");
-  const [notepad, setNotepadState] = useState("");
+  const [open, setOpenState] = useState(false);
+  const [steps, setSteps] = useState<Step[]>([]);
   const [listening, setListening] = useState(false);
-  const [interim, setInterim] = useState("");
-  const [pending, setPending] = useState(0);
-  const [answerField, setAnswerField] = useState<Field | null>(null);
-  // Re-render when the chosen box's text changes (it is shown in the sheet).
-  const [, setAnswerTick] = useState(0);
-  const [history, setHistory] = useState<Step[]>([]);
+  const [field, setField] = useState<Field | null>(null);
 
-  const notepadRef = useRef(notepad);
-  const targetRef = useRef(target);
-  const answerRef = useRef<Field | null>(null);
+  const stepsRef = useRef<Step[]>([]);
+  const fieldRef = useRef<Field | null>(null);
   const lastFocused = useRef<Field | null>(null);
   const listener = useRef<Listener | null>(null);
   const queue = useRef<Promise<void>>(Promise.resolve());
-  useEffect(() => {
-    targetRef.current = target;
-  }, [target]);
+  const nextId = useRef(1);
+  const chainEnd = useRef<HTMLLIElement>(null);
 
-  // The notepad is per session, kept on this device.
-  useEffect(() => {
-    const saved = readNotepad(storageId);
-    notepadRef.current = saved;
-    setNotepadState(saved);
-  }, [storageId]);
-  const setNotepad = useCallback(
-    (value: string) => {
-      notepadRef.current = value;
-      setNotepadState(value);
-      try {
-        if (value) window.localStorage.setItem(notepadKey(storageId), value);
-        else window.localStorage.removeItem(notepadKey(storageId));
-      } catch {
-        /* private mode: the notepad lives for this visit only */
-      }
-    },
-    [storageId],
-  );
+  const setOpen = (next: boolean) => {
+    setOpenState(next);
+    onOpenChange(next);
+  };
 
-  // The box the learner last typed in is the one they mean, even with the sheet closed.
+  const updateSteps = (fn: (s: Step[]) => Step[]) => {
+    stepsRef.current = fn(stepsRef.current);
+    setSteps(stepsRef.current);
+  };
+
+  // The box the learner last typed in is the one they mean.
   useEffect(() => {
     const onFocus = (e: FocusEvent) => {
       const el = e.target as Element | null;
@@ -129,298 +126,310 @@ export function VoiceScribe({
     return () => document.removeEventListener("focusin", onFocus);
   }, [scope]);
 
-  const chooseAnswerField = useCallback((field: Field | null) => {
-    answerRef.current?.removeAttribute("data-voice-target");
-    answerRef.current = field;
-    setAnswerField(field);
-    if (field && targetRef.current === "answer") {
-      field.setAttribute("data-voice-target", "");
-      field.scrollIntoView({ block: "nearest", behavior: "smooth" });
-    }
-  }, []);
+  /** Mark a box as the one words go into, and bring it up above the overlay. */
+  const chooseField = (next: Field | null) => {
+    fieldRef.current?.removeAttribute("data-voice-target");
+    fieldRef.current = next;
+    setField(next);
+    if (!next) return;
+    next.setAttribute("data-voice-target", "");
+    // After the page's bottom padding has grown, so there is room to scroll.
+    window.setTimeout(() => {
+      const box = next.getBoundingClientRect();
+      // Its bottom edge just above the overlay (which covers the lower 58%).
+      const goal = window.innerHeight * 0.42 - 12;
+      const holder = next.closest("[data-voice-scroll]") ?? document.scrollingElement;
+      holder?.scrollBy({ top: box.bottom - goal, behavior: "smooth" });
+    }, 220);
+  };
 
-  /** The chosen box, or a fresh pick when it left the page (the learner moved to the next question). */
-  const currentAnswerField = useCallback((): Field | null => {
-    const kept = answerRef.current;
+  const currentField = (): Field | null => {
+    const kept = fieldRef.current;
     if (kept && kept.isConnected && isFillable(kept)) return kept;
     const focused = lastFocused.current;
     const next = focused && focused.isConnected && isFillable(focused) ? focused : defaultAnswerField(scope.current);
-    chooseAnswerField(next);
+    chooseField(next);
     return next;
-  }, [chooseAnswerField, scope]);
+  };
 
-  // Opening, switching target, or the question changing under the sheet re-picks the box.
-  useEffect(() => {
-    if (!open) {
-      answerRef.current?.removeAttribute("data-voice-target");
-      return;
-    }
-    if (target !== "answer") {
-      answerRef.current?.removeAttribute("data-voice-target");
-      return;
-    }
-    const pick = () => {
-      const field = currentAnswerField();
-      if (field && !field.hasAttribute("data-voice-target")) field.setAttribute("data-voice-target", "");
-    };
-    pick();
-    const root = scope.current;
-    if (!root) return;
-    const observer = new MutationObserver(() => {
-      if (answerRef.current && !answerRef.current.isConnected) pick();
-    });
-    observer.observe(root, { childList: true, subtree: true });
-    return () => observer.disconnect();
-  }, [open, target, currentAnswerField, scope]);
+  const cycleField = () => {
+    const fields = answerFields(scope.current);
+    if (fields.length < 2) return;
+    const at = fieldRef.current ? fields.indexOf(fieldRef.current) : -1;
+    chooseField(fields[(at + 1) % fields.length]);
+  };
 
-  // The chosen box's text, kept in view when the learner types into it too.
-  useEffect(() => {
-    if (!answerField) return;
-    const bump = () => setAnswerTick((n) => n + 1);
-    answerField.addEventListener("input", bump);
-    return () => answerField.removeEventListener("input", bump);
-  }, [answerField]);
-
-  // Phones: while writing into a box, tapping another box picks it without opening the keyboard.
-  useEffect(() => {
-    if (!open || target !== "answer") return;
-    const root = scope.current;
-    if (!root || !window.matchMedia("(pointer: coarse)").matches) return;
-    const pick = (e: Event) => {
-      const el = (e.target as Element | null)?.closest("textarea, input") ?? null;
-      if (!isFillable(el) || el.closest("[data-voice-ignore]") || !answerFields(root).includes(el)) return;
-      e.preventDefault();
-      lastFocused.current = el;
-      chooseAnswerField(el);
-    };
-    root.addEventListener("touchend", pick, { passive: false });
-    return () => root.removeEventListener("touchend", pick);
-  }, [open, target, scope, chooseAnswerField]);
-
-  /** Write one phrase where it is going. Phrases run one after another so each sees the one before. */
-  const handlePhrase = useCallback(
-    (phrase: string) => {
-      queue.current = queue.current.then(async () => {
-        const into = targetRef.current;
-        const field = into === "answer" ? currentAnswerField() : null;
-        const writingTo = into === "answer" && field ? "answer" : "notepad";
-        const before = writingTo === "answer" && field ? field.value : notepadRef.current;
-        const write = (value: string) => {
-          if (writingTo === "answer" && field) {
-            setFieldValue(field, value);
-            setHistory((h) => [...h, { target: "answer", field, before }]);
-          } else {
-            setNotepad(value);
-            setHistory((h) => [...h, { target: "notepad", before }]);
-          }
-        };
-
-        const command = spokenCommand(phrase);
-        if (command === "undo") {
-          undoRef.current();
-          return;
-        }
-        if (command === "newline") {
-          if (before && !before.endsWith("\n")) write(`${before}\n`);
-          return;
-        }
-
-        setPending((n) => n + 1);
-        try {
-          const reply = await interpretSpeech({
-            transcript: phrase,
-            target: writingTo,
-            question: questionContext(field ?? lastFocused.current ?? defaultAnswerField(scope.current), scope.current),
-            written: writingTo === "answer" ? before : notepadRef.current,
-          }).catch(() => ({ text: phrase, kind: "prose" as const, fallback: true }));
-          if (reply.fallback) toast(t("voice.asSpoken"), { id: "voice-as-spoken" });
-          // Re-read: the learner may have typed while the phrase was on its way.
-          const now = writingTo === "answer" && field ? field.value : notepadRef.current;
-          const singleLine = field instanceof HTMLInputElement;
-          const next = appendWritten(now, reply.text, reply.kind, singleLine);
-          if (next !== now) write(next);
-        } finally {
-          setPending((n) => n - 1);
-        }
-      });
-    },
-    [currentAnswerField, scope, setNotepad, t],
-  );
-
-  const undo = useCallback(() => {
-    setHistory((h) => {
-      const last = h[h.length - 1];
-      if (!last) return h;
-      if (last.target === "answer") {
-        if (last.field.isConnected) setFieldValue(last.field, last.before);
-      } else {
-        setNotepad(last.before);
+  /** Cross out the last step still standing. */
+  const undo = (said?: string) => {
+    updateSteps((list) => {
+      const last = [...list].reverse().find((s) => s.state === "done");
+      let next = last ? list.map((s) => (s === last ? { ...s, state: "undone" as const } : s)) : list;
+      if (said) {
+        const n = last ? list.indexOf(last) + 1 : 0;
+        next = [...next, { id: nextId.current++, said, wrote: n ? t("voice.crossedOut").replace("{n}", String(n)) : "", math: false, state: "note" }];
       }
-      return h.slice(0, -1);
+      return next;
     });
-  }, [setNotepad]);
-  const undoRef = useRef(undo);
-  useEffect(() => {
-    undoRef.current = undo;
-  }, [undo]);
+  };
 
-  const stop = useCallback(() => {
+  /** One finished phrase: commands act at once, words go to the server in order. */
+  const handlePhrase = (phrase: string) => {
+    const command = spokenCommand(phrase);
+    updateSteps((list) => list.filter((s) => s.state !== "live"));
+    if (command === "undo") {
+      undo(phrase);
+      return;
+    }
+    const id = nextId.current++;
+    if (command === "newline") {
+      updateSteps((list) => [...list, { id, said: phrase, wrote: "↵", math: false, state: "note" }]);
+      return;
+    }
+    updateSteps((list) => [...list, { id, said: phrase, wrote: "", math: false, state: "writing" }]);
+    queue.current = queue.current.then(async () => {
+      const box = currentField();
+      // What is written so far: the box, then the steps waiting to go in.
+      const pendingLines = stepsRef.current.filter((s) => s.state === "done").map((s) => s.wrote);
+      const written = [box?.value ?? "", ...pendingLines].filter(Boolean).join("\n");
+      const reply = await interpretSpeech({
+        transcript: phrase,
+        target: "answer",
+        question: questionContext(box, scope.current),
+        written,
+      }).catch(() => ({ text: phrase, kind: "prose" as const, fallback: true }));
+      if (reply.fallback) toast(t("voice.asSpoken"), { id: "voice-as-spoken" });
+      const text = reply.text.trim();
+      updateSteps((list) =>
+        list.map((s) =>
+          s.id !== id ? s : text ? { ...s, wrote: text, math: reply.kind === "math", state: "done" } : { ...s, wrote: "", state: "note" },
+        ),
+      );
+    });
+  };
+
+  const onInterim = (text: string) => {
+    updateSteps((list) => {
+      const rest = list.filter((s) => s.state !== "live");
+      return text ? [...rest, { id: -1, said: text, wrote: "", math: false, state: "live" }] : rest;
+    });
+  };
+
+  // Recognition outlives renders; its callbacks reach the latest handlers through here.
+  const handlers = useRef({ handlePhrase, onInterim, choose: chooseField });
+  useEffect(() => {
+    handlers.current = { handlePhrase, onInterim, choose: chooseField };
+  });
+
+  const stopListening = () => {
     listener.current?.stop();
     listener.current = null;
     setListening(false);
-    setInterim("");
-  }, []);
+  };
 
-  const start = () => {
+  const startListening = () => {
     if (!speechSupported()) {
       toast.error(t("voice.unsupported"), { id: "voice-unsupported" });
-      return;
+      return false;
     }
     const l = listen({
-      lang: recognitionLang(locale, typeof navigator === "undefined" ? [] : navigator.languages ?? []),
-      onPhrase: handlePhrase,
-      onInterim: setInterim,
+      lang: recognitionLang(locale, typeof navigator === "undefined" ? [] : (navigator.languages ?? [])),
+      onPhrase: (text) => handlers.current.handlePhrase(text),
+      onInterim: (text) => handlers.current.onInterim(text),
       onError: (reason) => toast.error(t(reason === "denied" ? "voice.denied" : "voice.failed"), { id: "voice-error" }),
       onEnd: () => {
         listener.current = null;
         setListening(false);
-        setInterim("");
       },
     });
     if (!l) {
       toast.error(t("voice.unsupported"), { id: "voice-unsupported" });
-      return;
+      return false;
     }
     listener.current = l;
     setListening(true);
+    return true;
   };
 
-  // Closing the sheet or leaving the page stops the microphone.
+  const close = () => {
+    stopListening();
+    stepsRef.current = [];
+    setSteps([]);
+    fieldRef.current?.removeAttribute("data-voice-target");
+    fieldRef.current = null;
+    setField(null);
+    setOpen(false);
+  };
+
+  /** Open, pick the box, and listen: the learner tapped the mic to talk. */
+  const start = () => {
+    if (!startListening()) return;
+    setOpen(true);
+    currentField();
+  };
+
+  /** Stop: wait for the phrases still being written, then put the lines into the box. */
+  const stopAndWrite = async () => {
+    stopListening();
+    await queue.current;
+    const lines = stepsRef.current.filter((s) => s.state === "done");
+    const box = currentField();
+    if (lines.length && box) {
+      let value = box.value;
+      for (const s of lines) value = appendWritten(value, s.wrote, s.math ? "math" : "prose", box instanceof HTMLInputElement);
+      setFieldValue(box, value);
+      // A short box grows to show every line that went in.
+      if (box instanceof HTMLTextAreaElement && box.scrollHeight > box.clientHeight) box.style.height = `${box.scrollHeight + 2}px`;
+      box.removeAttribute("data-voice-flash");
+      void box.offsetWidth;
+      box.setAttribute("data-voice-flash", "");
+      window.setTimeout(() => box.removeAttribute("data-voice-flash"), 1000);
+      window.setTimeout(() => box.scrollIntoView({ block: "center", behavior: "smooth" }), 50);
+      const label = fieldLabel(box, scope.current);
+      toast.success(
+        t(lines.length === 1 ? "voice.addedOne" : "voice.addedMany").replace("{n}", String(lines.length)).replace("{box}", label),
+        { id: "voice-added" },
+      );
+    } else if (lines.length) {
+      // No box on this question: the working is not lost.
+      void navigator.clipboard?.writeText(lines.map((s) => s.wrote).join("\n")).catch(() => {});
+      toast(t("voice.copiedNoBox"), { id: "voice-added" });
+    }
+    close();
+  };
+
+  useImperativeHandle(ref, () => ({
+    toggle: () => (open ? void stopAndWrite() : start()),
+  }));
+
+  // Phones: tapping a box picks it without opening the keyboard.
   useEffect(() => {
-    if (!open) stop();
-  }, [open, stop]);
+    if (!open) return;
+    const root = scope.current;
+    if (!root || !window.matchMedia("(pointer: coarse)").matches) return;
+    const pick = (e: Event) => {
+      const el = (e.target as Element | null)?.closest("textarea, input") ?? null;
+      if (!isFillable(el) || !answerFields(root).includes(el)) return;
+      e.preventDefault();
+      lastFocused.current = el;
+      handlers.current.choose(el);
+    };
+    root.addEventListener("touchend", pick, { passive: false });
+    return () => root.removeEventListener("touchend", pick);
+  }, [open, scope]);
+
+  // Leaving the page stops the microphone.
   useEffect(() => () => listener.current?.stop(), []);
 
-  const putInAnswerBox = () => {
-    const field = currentAnswerField();
-    const text = notepadRef.current.trim();
-    if (!field || !text) return;
-    const before = field.value;
-    setFieldValue(field, before.trim() ? `${before.replace(/\s+$/, "")}\n${text}` : text);
-    setHistory((h) => [...h, { target: "answer", field, before }]);
-    toast.success(t("voice.copied"), { id: "voice-copied" });
-  };
+  useEffect(() => {
+    chainEnd.current?.scrollIntoView({ block: "nearest" });
+  }, [steps]);
 
   if (!open) return null;
 
-  const hasAnswerBox = answerFields(scope.current).length > 0;
-  const writingToAnswer = target === "answer" && hasAnswerBox;
+  const writing = steps.some((s) => s.state === "writing");
+  const hearing = steps.some((s) => s.state === "live");
+  const label = fieldLabel(field, scope.current);
+  const boxes = answerFields(scope.current).length;
 
   return (
     <div
       role="dialog"
       aria-label={t("voice.title")}
       data-voice-ignore
-      className="life-rise fixed inset-x-0 bottom-0 z-50 flex max-h-[60dvh] flex-col rounded-t-[22px] border-t border-border bg-card pb-[env(safe-area-inset-bottom)] shadow-[0_-18px_40px_-20px_rgba(0,0,0,0.35)] sm:inset-x-auto sm:bottom-6 sm:right-6 sm:w-[400px] sm:rounded-[22px] sm:border"
+      className="life-rise fixed inset-x-0 bottom-0 z-50 flex h-[58dvh] flex-col px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5 backdrop-blur-[2px] [background:linear-gradient(to_bottom,transparent,color-mix(in_srgb,var(--card)_80%,transparent)_16%,color-mix(in_srgb,var(--card)_86%,transparent)_70%,color-mix(in_srgb,var(--card)_94%,transparent))]"
     >
-      <div className="flex h-12 shrink-0 items-center gap-2 border-b border-border px-3">
-        <p className="shrink-0 text-sm font-semibold">{t("voice.title")}</p>
-        <div className="ml-1 flex flex-1 items-center gap-1" role="radiogroup">
-          {(["notepad", "answer"] as const).map((id) => (
-            <button
-              key={id}
-              type="button"
-              role="radio"
-              aria-checked={target === id}
-              onClick={() => setTarget(id)}
-              className={cn(
-                "shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold",
-                target === id ? "bg-foreground text-background" : "bg-muted text-muted-foreground hover:text-foreground",
-              )}
-            >
-              {t(id === "notepad" ? "voice.toNotepad" : "voice.toAnswer")}
-            </button>
-          ))}
-        </div>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label={t("voice.close")}
-          className="shrink-0 rounded-full p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
-        >
-          <X className="h-4 w-4" />
-        </button>
-      </div>
-
-      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-4">
-        {target === "answer" && !hasAnswerBox && <p className="text-ui text-muted-foreground">{t("voice.noAnswerBox")}</p>}
-
-        {writingToAnswer ? (
-          <>
-            <p className="text-small font-semibold text-muted-foreground">{t("voice.answerHint")}</p>
-            <p className="whitespace-pre-wrap rounded-[20px] bg-muted px-4 py-3.5 text-[16px] leading-relaxed text-foreground" aria-live="polite">
-              {answerField?.value.trim() ? answerField.value : <span className="text-faint">{t("voice.answerEmpty")}</span>}
-            </p>
-          </>
-        ) : (
-          <label className="block">
-            <span className="sr-only">{t("voice.notepadLabel")}</span>
-            <textarea
-              value={notepad}
-              rows={5}
-              onChange={(e) => setNotepad(e.target.value)}
-              placeholder={t("voice.notepadPlaceholder")}
-              className={cn(playField, "font-mono text-[15.5px]")}
-            />
-          </label>
-        )}
-
-        {listening || pending > 0 ? (
-          <p className="flex min-h-6 items-center gap-2 text-ui font-semibold" role="status">
-            {pending > 0 ? (
+      <div className="mx-auto flex min-h-0 w-full max-w-3xl flex-1 flex-col">
+        <div className="mt-6 flex items-center justify-between gap-2">
+          <p className="flex items-center gap-2 text-ui font-extrabold" role="status">
+            {writing ? (
               <Loader2 className="size-4 animate-spin text-muted-foreground" aria-hidden />
             ) : (
-              <span className="size-2.5 rounded-full bg-rose-500 animate-pulse-dot motion-reduce:animate-none" aria-hidden />
+              <span className={cn("size-2.5 rounded-full", listening ? "bg-rose-500 animate-pulse-dot motion-reduce:animate-none" : "bg-faint")} aria-hidden />
             )}
-            <span className="min-w-0 flex-1 truncate">
-              {interim ? <span className="italic text-muted-foreground">{interim}</span> : t(pending > 0 ? "voice.writing" : "voice.listening")}
-            </span>
+            {t(writing ? "voice.writing" : hearing ? "voice.hearing" : listening ? "voice.listening" : "voice.paused")}
           </p>
-        ) : (
-          <div className="space-y-1">
-            <p className="text-ui text-muted-foreground">{t("voice.hint")}</p>
-            <p className="text-small text-faint">{t("voice.commands")}</p>
-          </div>
-        )}
-      </div>
-
-      <div className="flex shrink-0 flex-wrap items-center gap-x-4 gap-y-2 border-t border-border px-4 py-3">
-        {listening ? (
-          <PlayPrimary onClick={stop} className="sm:min-w-0">
-            <Square className="mr-1.5 size-3.5 fill-current" />
-            {t("voice.stop")}
-          </PlayPrimary>
-        ) : (
-          <PlayPrimary onClick={start} className="sm:min-w-0">
-            <Mic className="mr-1.5 size-4" />
-            {t("voice.start")}
-          </PlayPrimary>
-        )}
-        <div className="flex flex-wrap items-center gap-x-4">
-          <button type="button" onClick={undo} disabled={history.length === 0} className={cn(playLink, "disabled:opacity-40")}>
-            {t("voice.undo")}
-          </button>
-          {!writingToAnswer && (
-            <button type="button" onClick={() => setNotepad("")} disabled={!notepad} className={cn(playLink, "disabled:opacity-40")}>
-              {t("voice.clear")}
+          {field ? (
+            <button
+              type="button"
+              onClick={cycleField}
+              disabled={boxes < 2}
+              className="inline-flex shrink-0 items-center gap-1 rounded-full bg-muted px-3 py-1.5 text-[12px] font-extrabold text-foreground disabled:cursor-default"
+            >
+              {t("voice.into").replace("{box}", label)}
+              {boxes > 1 && <ChevronDown className="size-3.5" aria-hidden />}
             </button>
-          )}
-          {!writingToAnswer && hasAnswerBox && (
-            <button type="button" onClick={putInAnswerBox} disabled={!notepad.trim()} className={cn(playLink, "disabled:opacity-40")}>
-              {t("voice.toAnswerBox")}
-            </button>
+          ) : (
+            <span className="text-small font-semibold text-muted-foreground">{t("voice.noAnswerBox")}</span>
           )}
         </div>
+
+        <ol className="mt-3 min-h-0 flex-1 space-y-3 overflow-y-auto" aria-live="polite">
+          {steps.length === 0 && <li className="text-ui text-muted-foreground">{t("voice.hint")}</li>}
+          {steps.map((s, i) => (
+            <li
+              key={s.id}
+              ref={i === steps.length - 1 ? chainEnd : undefined}
+              className={cn("grid grid-cols-[22px_1fr] gap-x-2.5", s.state === "undone" && "opacity-45")}
+            >
+              <span className="row-span-2 mt-0.5 grid size-[22px] place-items-center rounded-full bg-muted text-[11px] font-extrabold tabular-nums text-muted-foreground">
+                {i + 1}
+              </span>
+              <span className="text-small italic text-muted-foreground">
+                <Mic className="mr-1 inline size-3 -translate-y-px not-italic" aria-hidden />“{s.said}”
+              </span>
+              {s.state === "live" ? (
+                <span className="text-small text-faint">…</span>
+              ) : s.state === "writing" ? (
+                <span className="text-small font-semibold text-faint">{t("voice.writing")}</span>
+              ) : s.state === "note" ? (
+                s.wrote && <span className="text-small font-bold text-muted-foreground">{s.wrote}</span>
+              ) : (
+                <span className={cn("font-mono text-[16px] font-bold leading-snug text-foreground", s.state === "undone" && "line-through")}>
+                  {s.wrote}
+                </span>
+              )}
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-2 grid grid-cols-[1fr_auto_1fr] items-center">
+          <button type="button" onClick={close} className={cn(playLink, "justify-self-start no-underline")}>
+            {t("voice.cancel")}
+          </button>
+          {listening || steps.some((s) => s.state === "done") ? (
+            <button
+              type="button"
+              onClick={() => void stopAndWrite()}
+              aria-label={t("voice.stopAndWrite")}
+              className={cn(
+                "grid size-[68px] place-items-center rounded-full text-white transition-transform active:translate-y-0.5 motion-reduce:transition-none",
+                listening ? "bg-rose-500 shadow-[0_3px_0_#be123c]" : "bg-accent shadow-[0_3px_0_var(--accent-dim)]",
+              )}
+            >
+              {listening ? <Square className="size-5 fill-current" /> : <Check className="size-7" strokeWidth={3} />}
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => startListening()}
+              aria-label={t("voice.resume")}
+              className="grid size-[68px] place-items-center rounded-full bg-accent text-white shadow-[0_3px_0_var(--accent-dim)]"
+            >
+              <Mic className="size-6" />
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => undo()}
+            disabled={!steps.some((s) => s.state === "done")}
+            className={cn(playLink, "justify-self-end no-underline disabled:opacity-40")}
+          >
+            {t("voice.undo")}
+          </button>
+        </div>
+        <p className="mt-1.5 text-center text-small text-muted-foreground">
+          {listening ? t("voice.tip") : steps.some((s) => s.state === "done") ? t("voice.tipPaused") : t("voice.hint")}
+        </p>
       </div>
     </div>
   );

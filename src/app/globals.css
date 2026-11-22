@@ -625,3 +625,9 @@ input[type="range"].param-slider:active::-moz-range-thumb {
 [data-voice-target] {
   box-shadow: 0 0 0 2px var(--accent) !important;
 }
+[data-voice-flash] {
+  animation: voice-flash 0.9s ease;
+}
+@keyframes voice-flash {
+  0% { background-color: var(--accent-soft); box-shadow: 0 0 0 3px var(--accent); }
+}

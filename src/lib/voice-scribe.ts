@@ -49,7 +49,19 @@ const MAX_CONTEXT_CHARS = 4000;
 export function questionContext(field: Element | null, scope: HTMLElement | null): string {
   const holder = (field?.closest("[data-dictation-context]") as HTMLElement | null) ?? scope;
   if (!holder) return "";
-  return (holder.innerText || holder.textContent || "").replace(/[ \t]+/g, " ").replace(/\n{3,}/g, "\n\n").trim().slice(0, MAX_CONTEXT_CHARS);
+  // The question's words, not the page's buttons ("Add a drawing", "Skip this part").
+  const controls = new Set(Array.from(holder.querySelectorAll("button")).map((b) => b.innerText.trim()).filter(Boolean));
+  const text = (holder.innerText || holder.textContent || "")
+    .split("\n")
+    .filter((line) => !controls.has(line.trim()))
+    .join("\n")
+    .replace(/[ \t]+/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+  // Which part of a several-part question the box answers ("b").
+  const part = field?.closest("[data-dictation-label]")?.getAttribute("data-dictation-label");
+  const note = part ? `\n\n(The student is answering part ${part}.)` : "";
+  return text.slice(0, MAX_CONTEXT_CHARS - note.length) + note;
 }
 
 /**

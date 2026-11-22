@@ -77,6 +77,7 @@ import { Mascot } from "@/components/rewards/mascot";
 import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
+import { VoiceScribe, VoiceScribeTrigger, type VoiceScribeHandle } from "@/components/session/voice-scribe";
 import { SessionPrecheck } from "@/components/session/precheck";
 import { proficiencyApi } from "@/lib/api/proficiency";
 import Image from "next/image";
@@ -365,6 +366,10 @@ export default function SessionDetailPage() {
     setCopilotOpen(true);
   };
   const contentColumn = useRef<HTMLDivElement>(null);
+  // Talk to write: one microphone for the whole player; tapping it again stops and writes.
+  const voice = useRef<VoiceScribeHandle>(null);
+  const [voiceOpen, setVoiceOpen] = useState(false);
+  const tapVoice = () => voice.current?.toggle();
   const secondsOn = (activityId: string) => {
     const start = openedAt.current.get(activityId);
     if (!start) return undefined;
@@ -1066,6 +1071,9 @@ export default function SessionDetailPage() {
                   <span className="flex-1" />
                 )}
                 {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
+                {planReady && activeActivity && (
+                  <VoiceScribeTrigger active={voiceOpen} onClick={tapVoice} />
+                )}
                 {planReady && !copilotOpen && (
                   <CopilotTrigger compact onClick={openCopilotByTap} />
                 )}
@@ -1092,11 +1100,14 @@ export default function SessionDetailPage() {
 
           <div
             key={!planReady ? "building" : (activeActivity?.id ?? "debrief")}
+            data-voice-scroll
             className={cn(
               // Room for the bottom bar and the phone's home indicator, so the last answer is never under them.
               "min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-4 sm:px-10 sm:pt-6",
               // Phones: the Hint / Why? half-sheet covers the bottom half; the answers under it stay reachable.
               planReady && copilotOpen && copilotAsk && "max-sm:pb-[calc(52dvh+1.5rem)]",
+              // Talk to write: room to bring the answer box up above the overlay.
+              voiceOpen && "pb-[calc(58dvh+1rem)]",
               navDirection === "back" ? "animate-slide-in-left" : "animate-slide-in-right",
             )}
           >
@@ -1247,6 +1258,7 @@ export default function SessionDetailPage() {
         </div>
         {copilotPane}
         {commentsPanel}
+        <VoiceScribe ref={voice} scope={contentColumn} onOpenChange={setVoiceOpen} />
         {planReady && !copilotOpen && (
           <CopilotTrigger
             onClick={openCopilotByTap}

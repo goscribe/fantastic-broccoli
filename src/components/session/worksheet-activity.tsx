@@ -301,7 +301,7 @@ export function WorksheetActivity({
               !!marking && !marking.correct && marking.achievedPoints > 0;
             const isSkipped = !!skipped[key(i)] && !value.trim() && !drawings[key(i)];
             return (
-              <div key={part.label} className="flex gap-3">
+              <div key={part.label} className="flex gap-3" data-dictation-label={part.label}>
                 <span className={cn("shrink-0 flex items-center justify-center font-bold", newUi ? "size-8 rounded-full bg-muted text-[13.5px] font-extrabold text-foreground" : "mt-1.5 h-6 w-6 rounded-full bg-muted text-[11px]")}>
                   {part.label}
                 </span>
