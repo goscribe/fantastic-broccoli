@@ -77,6 +77,7 @@ import { Mascot } from "@/components/rewards/mascot";
 import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
+import { VoiceScribe, VoiceScribeTrigger, type VoiceScribeHandle } from "@/components/session/voice-scribe";
 import { SessionPrecheck } from "@/components/session/precheck";
 import { proficiencyApi } from "@/lib/api/proficiency";
 import Image from "next/image";
@@ -365,6 +366,10 @@ export default function SessionDetailPage() {
     setCopilotOpen(true);
   };
   const contentColumn = useRef<HTMLDivElement>(null);
+  // Talk to write: one microphone for the whole player; tapping it again stops and writes.
+  const voice = useRef<VoiceScribeHandle>(null);
+  const [voiceOpen, setVoiceOpen] = useState(false);
+  const tapVoice = () => voice.current?.toggle();
   const secondsOn = (activityId: string) => {
     const start = openedAt.current.get(activityId);
     if (!start) return undefined;
@@ -1066,6 +1071,9 @@ export default function SessionDetailPage() {
                   <span className="flex-1" />
                 )}
                 {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
+                {planReady && activeActivity && (
+                  <VoiceScribeTrigger active={voiceOpen} onClick={tapVoice} intro={activeActivity.type === "worksheet" && bubble !== "showing"} />
+                )}
                 {planReady && !copilotOpen && (
                   <CopilotTrigger compact onClick={openCopilotByTap} />
                 )}
@@ -1247,6 +1255,7 @@ export default function SessionDetailPage() {
         </div>
         {copilotPane}
         {commentsPanel}
+        <VoiceScribe ref={voice} scope={contentColumn} onOpenChange={setVoiceOpen} />
         {planReady && !copilotOpen && (
           <CopilotTrigger
             onClick={openCopilotByTap}
