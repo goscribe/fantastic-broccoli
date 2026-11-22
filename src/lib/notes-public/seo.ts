@@ -29,13 +29,13 @@ export interface IndexInput {
   note: "reviewed" | "draft" | null;
   /** Checked practice questions on the page. */
   questionCount: number;
-  /** Index notes that are still "draft, not yet reviewed" (NOTES_INDEX_DRAFTS). */
+  /** Index notes that are still "draft, not yet reviewed" (on unless NOTES_INDEX_DRAFTS=0). */
   indexDrafts: boolean;
 }
 
 /**
- * A topic page is indexable when it has a note (reviewed, or a draft while
- * NOTES_INDEX_DRAFTS is on) AND at least {@link MIN_INDEXABLE_QUESTIONS}
+ * A topic page is indexable when it has a note (reviewed, or a draft unless
+ * NOTES_INDEX_DRAFTS=0) AND at least {@link MIN_INDEXABLE_QUESTIONS}
  * checked questions. Anything thinner is served (visitors can still practise)
  * but `noindex, follow` and left out of the sitemap.
  */
@@ -45,8 +45,12 @@ export function isTopicIndexable({ note, questionCount, indexDrafts }: IndexInpu
   return questionCount >= MIN_INDEXABLE_QUESTIONS;
 }
 
-/** NOTES_INDEX_DRAFTS=1 (server env of the app) indexes draft notes; off by default. */
-export const indexDraftsFromEnv = (v = process.env.NOTES_INDEX_DRAFTS) => v === "1" || v === "true";
+/**
+ * Draft notes are indexed by default (every generated note starts as a draft,
+ * and keeping them all out left the notes sitemap empty). NOTES_INDEX_DRAFTS=0
+ * (server env of the app) turns that off so only reviewed notes are indexed.
+ */
+export const indexDraftsFromEnv = (v = process.env.NOTES_INDEX_DRAFTS) => !(v === "0" || v === "false");
 
 /** Shown in titles: "IB Biology", "AP Chemistry", "AQA A-level Biology". */
 const courseName = (c: { title: string }) => c.title;
