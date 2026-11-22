@@ -20,6 +20,7 @@ import {
   type MarkedCriterion,
   type FeedbackCriterion,
 } from "./grader";
+import { rpc } from "./study-session";
 
 export type {
   CitationsResult,
@@ -35,7 +36,11 @@ export type {
   ReviewStatus,
 } from "./grader";
 
-export type GraderStatus = Status;
+/**
+ * `chat` is not in the server's status yet: when the server adds
+ * `coursework.ask` it should send `chat: true` here, and the Chat tab appears.
+ */
+export type GraderStatus = Status & { chat?: boolean };
 export type GraderPlanTier = Status["tier"];
 /** The allowance part of the status (server limits.ts ReviewAllowance). */
 export type ReviewAllowance = Pick<Status, "tier" | "allowed" | "limit" | "usedToday" | "remainingToday" | "reason" | "resetsAt">;
@@ -76,9 +81,46 @@ export function isConflict(err: unknown): boolean {
   return err instanceof GraderError && (err.code === "CONFLICT" || err.status === 409);
 }
 
+/** A criterion with its band descriptors, as the rubric is stored (server CourseworkCriterion). */
+export interface RubricDetailCriterion {
+  letter: string;
+  name: string;
+  maxMarks: number;
+  /** Low to high. */
+  bands: Array<{ minMarks: number; maxMarks: number; descriptor: string }>;
+  /** What examiners look for (paraphrased). */
+  lookFor: string[];
+}
+
+export interface RubricDetail {
+  rubricId: string;
+  criteria: RubricDetailCriterion[];
+}
+
+export interface ChatTurn {
+  role: "user" | "assistant";
+  text: string;
+}
+
+/**
+ * Two procedures the server does NOT have yet (the UI is built against mocks
+ * of them and degrades without them):
+ * - `coursework.rubric({ rubricId })` → RubricDetail. `rubrics` only sends
+ *   letter / name / maxMarks; the Rubric tab wants each criterion's bands
+ *   and lookFor from CourseworkCriterion. Without it the tab lists the
+ *   criteria and their marks.
+ * - `coursework.ask({ documentId, reviewId?, message, history })` → `{ answer }`:
+ *   the copilot with this document's text and this review as its context,
+ *   under the hints-only guard (explain and advise; never write or rewrite the
+ *   student's text). `copilot.ask` cannot be used as it is: its context needs a
+ *   workspaceId, and a coursework document may belong to no subject.
+ */
 export const courseworkApi = {
   ...graderApi,
+  status: () => graderApi.status() as Promise<GraderStatus>,
   review: (reviewId: string) => graderApi.review(reviewId) as Promise<Review>,
+  rubricDetail: (rubricId: string) => rpc<RubricDetail>("coursework.rubric", "query", { rubricId }),
+  ask: (input: { documentId: string; reviewId?: string; message: string; history: ChatTurn[] }) => rpc<{ answer: string }>("coursework.ask", "mutation", input),
 };
 
 /** Files up to 25 MB can be imported (server MAX_UPLOAD_BYTES). */

@@ -18,6 +18,22 @@ export interface FeedbackHost {
   open?: { kind: "criterion"; letter: string } | { kind: "citation"; id: string } | null;
   /** Opens the guide at a criterion's part. */
   onGuide?: (letter: string) => void;
+  /** Where each quoted passage is in the document, by anchor id ("Method", "Conclusion"): shown as a chip that jumps there. */
+  places?: Map<string, string>;
+}
+
+/** Where a passage is, as a small chip that jumps to it. */
+function Place({ label: section, onClick }: { label: string; onClick?: () => void }) {
+  const { t } = useCw();
+  const label = t("cw.place", { section });
+  const cls = "cw-place inline-flex min-h-7 items-center rounded-full px-2.5 text-caption font-extrabold";
+  return onClick ? (
+    <button type="button" onClick={onClick} className={cls} title={label}>
+      {label}
+    </button>
+  ) : (
+    <span className={cls}>{label}</span>
+  );
 }
 
 /** A quotation from the student's own text: their words, set apart, in the subject's colour. */
@@ -45,7 +61,7 @@ function Quote({ quote, changed, onShow, small }: { quote: string; changed: bool
 
 /* ---------- The three fixes: the page's main content, not a card ---------- */
 
-export function TopFixes({ result, onOpenCriterion }: { result: GradeResult; onOpenCriterion?: (letter: string) => void }) {
+export function TopFixes({ result, onOpenCriterion, host }: { result: GradeResult; onOpenCriterion?: (letter: string) => void; host?: FeedbackHost }) {
   const { t } = useCw();
   return (
     <section aria-labelledby="cw-fixes">
@@ -56,6 +72,8 @@ export function TopFixes({ result, onOpenCriterion }: { result: GradeResult; onO
         {result.topFixes.slice(0, 3).map((fix, i) => {
           const c = criterionFor(result, fix.criterion);
           const where = c ? t("cw.fixes.criterion", { a: c.letter, name: c.name }) : null;
+          // The places this fix is about: where its criterion's quoted passages are (each place once).
+          const places = c && host?.places ? c.evidence.map((_, k) => ({ id: `${c.letter}-${k}`, label: host.places!.get(`${c.letter}-${k}`) })).filter((x, k, all) => x.label && all.findIndex((y) => y.label === x.label) === k) : [];
           return (
             <li key={i} className="life-rise flex gap-3.5" style={{ ["--i" as string]: i + 1 }}>
               <span className="cw-num mt-[1px] shrink-0" aria-hidden>
@@ -64,14 +82,19 @@ export function TopFixes({ result, onOpenCriterion }: { result: GradeResult; onO
               <div className="min-w-0">
                 <h3 className="text-read font-extrabold leading-snug text-foreground">{fix.title}</h3>
                 <p className="mt-1 text-ui text-foreground/80">{fix.detail}</p>
-                {where &&
-                  (onOpenCriterion ? (
-                    <button type="button" onClick={() => onOpenCriterion(c!.letter)} className="-mb-2 inline-flex min-h-11 items-center text-small font-bold text-muted-foreground underline decoration-border-strong decoration-2 underline-offset-4 hover:text-foreground">
-                      {where}
-                    </button>
-                  ) : (
-                    <p className="mt-1.5 text-small font-bold text-muted-foreground">{where}</p>
+                <div className="mt-1.5 flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
+                  {where &&
+                    (onOpenCriterion ? (
+                      <button type="button" onClick={() => onOpenCriterion(c!.letter)} className="-my-2 inline-flex min-h-11 items-center text-small font-bold text-muted-foreground underline decoration-border-strong decoration-2 underline-offset-4 hover:text-foreground">
+                        {where}
+                      </button>
+                    ) : (
+                      <span className="text-small font-bold text-muted-foreground">{where}</span>
+                    ))}
+                  {places.map((pl) => (
+                    <Place key={pl.id} label={pl.label!} onClick={host?.onShowQuote ? () => host.onShowQuote!(pl.id) : undefined} />
                   ))}
+                </div>
               </div>
             </li>
           );
@@ -122,14 +145,14 @@ export function CriterionCard({
   const id = `cw-crit-${c.letter}`;
 
   return (
-    <article ref={ref} id={id} className={cn("life-card scroll-mt-24 p-5", targeted && "cw-targeted")} aria-labelledby={`${id}-h`}>
+    <article ref={ref} id={id} className={cn("life-card scroll-mt-24 px-4 py-4 sm:px-5", targeted && "cw-targeted")} aria-labelledby={`${id}-h`}>
       <div className="flex items-baseline justify-between gap-3">
         <h3 id={`${id}-h`} className="min-w-0 text-ui font-extrabold leading-snug text-foreground">
           <span className="text-muted-foreground">{c.letter}</span> {c.name}
         </h3>
         {band && <BandNumber low={band.low} high={band.high} max={c.maxMarks} className="text-ui" />}
       </div>
-      {band && <BandTrack low={band.low} high={band.high} max={c.maxMarks} className="mt-2.5" />}
+      {band && <BandTrack low={band.low} high={band.high} max={c.maxMarks} scale className="mt-2" />}
       {anyChanged && <p className="mt-2.5 text-small font-bold text-muted-foreground">{t("cw.changed")}</p>}
       <p className={cn("mt-3 text-ui text-foreground/80", !shown && "line-clamp-2")}>{criterionComment(c)}</p>
 
@@ -142,7 +165,15 @@ export function CriterionCard({
                 {c.evidence.map((e, i) => (
                   <li key={i}>
                     <Quote quote={e.quote} changed={changed[i] ?? false} onShow={host.onShowQuote ? () => host.onShowQuote!(`${c.letter}-${i}`) : undefined} />
-                    <p className="mt-1 pl-[15px] text-small text-muted-foreground">{e.comment}</p>
+                    <p className="mt-1 pl-[15px] text-small text-muted-foreground">
+                      {e.comment}
+                      {!changed[i] && host.places?.get(`${c.letter}-${i}`) && (
+                        <>
+                          {" "}
+                          <Place label={host.places.get(`${c.letter}-${i}`)!} onClick={host.onShowQuote ? () => host.onShowQuote!(`${c.letter}-${i}`) : undefined} />
+                        </>
+                      )}
+                    </p>
                   </li>
                 ))}
               </ul>
@@ -267,7 +298,13 @@ export function Feedback({
   host,
   phone,
   footer,
+  summary,
+  onNextSteps,
 }: {
+  /** The compact overall result that opens the feedback. */
+  summary?: React.ReactNode;
+  /** Opens the Next steps tab. */
+  onNextSteps?: () => void;
   result: GradeResult;
   citations: CitationsResult | null;
   /** The student chose not to see marks on a marked review. */
@@ -283,9 +320,16 @@ export function Feedback({
   // A fix's "Criterion C" link opens that card, as a tapped passage does.
   const merged: FeedbackHost = openLetter && !host.open ? { ...host, open: { kind: "criterion", letter: openLetter.letter } } : host;
   return (
-    <div className="flex flex-col gap-8">
-      {result.overall.summary && <p className="-mb-2 text-read text-foreground">{result.overall.summary}</p>}
-      <TopFixes result={result} onOpenCriterion={(letter) => setOpenLetter((p) => ({ letter, n: (p?.n ?? 0) + 1 }))} />
+    <div className="flex flex-col gap-7">
+      {summary}
+      {result.overall.summary && <p className="-mt-2 text-ui text-foreground">{result.overall.summary}</p>}
+      {onNextSteps && (
+        <button type="button" onClick={onNextSteps} className="-mt-2 flex min-h-12 w-full items-center justify-between gap-3 rounded-[var(--r-control)] bg-muted px-4 text-left text-ui font-extrabold text-foreground hover:bg-border">
+          {t(marked ? "cw.next.cta" : "cw.next.ctaFeedback")}
+          <ChevronDown className="size-4 shrink-0 -rotate-90" aria-hidden />
+        </button>
+      )}
+      <TopFixes result={result} host={host} onOpenCriterion={(letter) => setOpenLetter((p) => ({ letter, n: (p?.n ?? 0) + 1 }))} />
       <section aria-labelledby="cw-criteria">
         <h2 id="cw-criteria" className="page-h2">
           {t("cw.criteria")}

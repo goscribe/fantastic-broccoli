@@ -17,6 +17,8 @@
     color: var(--foreground);
     outline: none;
     overflow-wrap: anywhere;
+    /* The host may scale the text (a zoom control): --se-zoom. */
+    zoom: var(--se-zoom, 1);
   }
   .se-doc > * + * { margin-top: 0.85em; }
   .se-doc h1 { font-size: 26px; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; margin-top: 1.5em; }

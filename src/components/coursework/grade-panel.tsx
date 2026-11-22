@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Search } from "lucide-react";
@@ -13,6 +12,8 @@ import { allowanceCopy, componentTitle, familyText, groupRubrics, rubricLine, wo
 import { track } from "@/lib/funnel";
 import { cn } from "@/lib/utils";
 import { Feedback, type FeedbackHost } from "./feedback";
+import { ChatView, NextSteps, RubricView, type ChatState } from "./panel-views";
+import { ResultSummary } from "./summary";
 import { useCw } from "./use-cw";
 import { useOnline, type Grader } from "./use-grader";
 import "@/app/notes/notes-look.css";
@@ -196,7 +197,6 @@ export function GradingWait({ stage, titled }: { stage?: (typeof STAGES)[number]
     <div role="status" aria-live="polite">
       {titled ? (
         <>
-          <Image src="/design/cat3-read.webp" alt="" width={608} height={400} unoptimized className="cat-bob mb-4 h-[104px] w-auto" />
           <h2 className="page-h2">{t("cw.wait.title")}</h2>
           <p className="mb-4 mt-1 text-ui text-foreground/80">{t("cw.wait.sub")}</p>
         </>
@@ -289,7 +289,7 @@ export function GuideView({ rubric, focus, fullHref }: { rubric: RubricSummary; 
 
 /* ---------- The panel ---------- */
 
-export type PanelView = "feedback" | "guide";
+export type PanelView = "feedback" | "next" | "rubric" | "guide" | "chat";
 
 export interface GradePanelProps {
   grader: Grader;
@@ -297,27 +297,31 @@ export interface GradePanelProps {
   text: string;
   words: number;
   view: PanelView;
+  onView: (view: PanelView) => void;
   /** Shows a quoted passage in the document. */
   onShowQuote: (anchorId: string) => void;
+  /** Where each quoted passage is ("Method"), by anchor id. */
+  places: Map<string, string>;
   /** The feedback item a tapped passage belongs to. */
   open: FeedbackHost["open"];
   onGuide: (letter: string) => void;
   guideFocus: { letter: string; n: number } | null;
-  onCompare: () => void;
+  /** The conversation about this piece; absent where the server has no chat. */
+  chat: (ChatState & { ask: (message: string) => void }) | null;
   phone: boolean;
-  /** Extra actions at the very end (delete the piece). */
-  extraActions?: ReactNode;
 }
 
 const same = (a: string, b: string) => a.replace(/\s+/g, " ").trim() === b.replace(/\s+/g, " ").trim();
 
 /**
- * The Grade panel: pick the component, ask for a review, wait, read the
- * feedback. It only needs a document's text and a way to show a passage, so
- * it is the same panel on the coursework page and beside any editor that
- * opens it (a student's notes: "Grade" in the toolbar).
+ * The Grade panel: pick the component, ask for a review, wait, then read it
+ * as Feedback (the result, three fixes, a card per criterion, citations),
+ * Next steps (a checklist), the Rubric, the Guide, or Chat. It only needs a
+ * document's text and a way to show a passage, so it is the same panel on the
+ * coursework page and beside any editor that opens it (a student's notes:
+ * "Grade" in the toolbar).
  */
-export function GradePanel({ grader, text, words, view, onShowQuote, open, onGuide, guideFocus, onCompare, phone, extraActions }: GradePanelProps) {
+export function GradePanel({ grader, text, words, view, onView, onShowQuote, places, open, onGuide, guideFocus, chat, phone }: GradePanelProps) {
   const { t } = useCw();
   const { review, rubric } = grader;
 
@@ -334,9 +338,31 @@ export function GradePanel({ grader, text, words, view, onShowQuote, open, onGui
     );
   }
 
+  const result = review?.status === "completed" ? review.result : null;
+
   if (view === "guide") {
     if (!rubric) return <p className="text-ui text-muted-foreground">{t("cw.review.pickSub")}</p>;
     return <GuideView rubric={rubric} focus={guideFocus} fullHref={`/library/coursework/${encodeURIComponent(rubric.key)}`} />;
+  }
+  if (view === "rubric") {
+    if (!rubric) return <p className="text-ui text-muted-foreground">{t("cw.rubric.none")}</p>;
+    return <RubricView rubric={rubric} result={result} hideMarks={grader.hideMarks} />;
+  }
+  if (view === "chat" && chat) return <ChatView chat={chat} result={result} hideMarks={grader.hideMarks} />;
+  if (view === "next") {
+    if (!review || !result) return <p className="text-ui text-muted-foreground">{t("cw.next.none")}</p>;
+    return (
+      <NextSteps
+        reviewId={review.id}
+        result={result}
+        hideMarks={grader.hideMarks}
+        onOpenCriterion={(letter) => {
+          onView("feedback");
+          // The card opens once the feedback is on screen.
+          requestAnimationFrame(() => document.getElementById(`cw-crit-${letter}`)?.scrollIntoView({ block: "start" }));
+        }}
+      />
+    );
   }
 
   // No component yet: that is the first question.
@@ -359,9 +385,10 @@ export function GradePanel({ grader, text, words, view, onShowQuote, open, onGui
 
   if (grader.running) {
     return (
-      <div>
+      <div className="flex flex-col gap-6">
+        <ResultSummary result={null} hideMarks={false} fresh={false} reading />
         <GradingWait stage={review?.stage} />
-        <p className="mt-2 text-ui text-foreground/80">{t("cw.wait.keep")}</p>
+        <p className="-mt-2 text-ui text-foreground/80">{t("cw.wait.keep")}</p>
       </div>
     );
   }
@@ -388,57 +415,24 @@ export function GradePanel({ grader, text, words, view, onShowQuote, open, onGui
   const action = <ReviewAction grader={grader} words={words} wide={phone} />;
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-7">
       {/* Edited since the review: the next review is the next step, so it comes first. */}
       {edited && isLatest && action}
-      {grader.rows.length > 1 && (
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-          <select value={review.id} onChange={(e) => grader.select(e.target.value)} aria-label={t("cw.viewing")} className="h-11 rounded-[10px] border border-border bg-white px-2.5 text-small font-extrabold text-foreground">
-            {grader.rows.map((r) => (
-              <option key={r.id} value={r.id}>
-                {t("cw.draftN", { n: r.draftNumber })}
-                {r.marksLow !== null && r.marksHigh !== null && !grader.hideMarks ? ` · ${r.marksLow}–${r.marksHigh}` : ""}
-              </option>
-            ))}
-          </select>
-          {grader.previous && marked && !grader.hideMarks && (
-            <button type="button" onClick={onCompare} className="min-h-11 text-small font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4">
-              {t("cw.act.compare", { n: grader.previous.draftNumber })}
-            </button>
-          )}
-        </div>
-      )}
       <Feedback
         result={review.result}
         citations={review.citations}
         hideMarks={grader.hideMarks}
         phone={phone}
-        host={{ text, onShowQuote, open, onGuide }}
+        host={{ text, onShowQuote, open, onGuide, places }}
+        summary={<ResultSummary result={review.result} hideMarks={grader.hideMarks} fresh={grader.fresh} />}
+        onNextSteps={() => onView("next")}
         footer={
-          <footer className="flex flex-col gap-3 border-t border-border pt-5">
+          <footer className="flex flex-col gap-2 border-t border-border pt-5">
             <p className="text-small text-muted-foreground">{review.result.disclaimer}</p>
             <p className="text-small text-muted-foreground">
-              {t(review.rubric.status === "draft" ? "cw.foot.rubricDraft" : "cw.foot.rubric", { line: rubricLine(review.rubric) })}
+              {t(review.rubric.status === "draft" ? "cw.foot.rubricDraft" : "cw.foot.rubric", { line: rubricLine(review.rubric) })}. {t("cw.foot.never")}
             </p>
-            <p className="text-small text-muted-foreground">{t("cw.foot.never")}</p>
             {!marked && <p className="text-small text-muted-foreground">{t("cw.act.needMarks")}</p>}
-            <div className="mt-1 flex flex-wrap items-center gap-x-5 gap-y-1">
-              {marked && (
-                <button type="button" onClick={() => grader.setHideMarks(!grader.hideMarks)} aria-pressed={grader.hideMarks} className="min-h-11 text-small font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4">
-                  {grader.hideMarks ? t("cw.act.showMarks") : t("cw.act.hideMarks")}
-                </button>
-              )}
-              <button
-                type="button"
-                onClick={() => {
-                  if (window.confirm(t("cw.act.deleteConfirm"))) void grader.remove(review.id);
-                }}
-                className="min-h-11 text-small font-extrabold text-muted-foreground hover:text-rose-600"
-              >
-                {t("cw.act.delete")}
-              </button>
-              {extraActions}
-            </div>
           </footer>
         }
       />

@@ -395,6 +395,8 @@ export function citationHeadline(count: number): string {
   return `${count} ${count === 1 ? "issue" : "issues"} to fix`;
 }
 
+import { findQuote } from "./quote-match";
+
 export { findQuote, quoteChanged, type TextRange } from "./quote-match";
 
 /* ---------- Feedback anchors ---------- */
@@ -429,4 +431,70 @@ export function criterionFor(result: GradeResult, letter: string): ResultCriteri
 /** "Draft 2". */
 export function draftLabel(n: number): string {
   return `Draft ${n}`;
+}
+
+/* ---------- Where a passage is: its section, for the location chips ---------- */
+
+interface DocNode {
+  type?: string;
+  text?: string;
+  content?: DocNode[];
+}
+
+function nodeText(n: DocNode): string {
+  if (typeof n.text === "string") return n.text;
+  return (n.content ?? []).map(nodeText).join(n.type === "paragraph" || n.type === "heading" ? "" : " ");
+}
+
+/**
+ * The section each quoted passage sits in: the nearest heading above it in
+ * the document ("Method", "Conclusion"), or "Paragraph 3" in a document with
+ * no headings. A passage that is no longer in the text has no entry. There
+ * are no fixed pages in an editor, so a section is the honest place name.
+ */
+export function locateAnchors(doc: unknown, anchors: Array<{ id: string; quote: string }>): Map<string, string> {
+  const out = new Map<string, string>();
+  const blocks = ((doc as DocNode | null)?.content ?? []) as DocNode[];
+  let heading: string | null = null;
+  let paragraph = 0;
+  for (const block of blocks) {
+    const text = nodeText(block).trim();
+    if (block.type === "heading") {
+      if (text) heading = text;
+      continue;
+    }
+    if (!text) continue;
+    paragraph += 1;
+    for (const a of anchors) {
+      if (out.has(a.id)) continue;
+      if (findQuote(text, a.quote).length > 0) out.set(a.id, heading ? (heading.length > 28 ? `${heading.slice(0, 27).trimEnd()}…` : heading) : `Paragraph ${paragraph}`);
+    }
+  }
+  return out;
+}
+
+/* ---------- The ring: one arc per criterion ---------- */
+
+export interface RingSegment {
+  letter: string;
+  /** Where the arc starts and ends, as fractions of the circle (0–1), with a gap between arcs. */
+  start: number;
+  end: number;
+  /** How far along the arc the band's low and high marks reach (0–1). */
+  low: number;
+  high: number;
+}
+
+/** Each criterion gets a share of the circle in proportion to its marks; its band is drawn along its arc. */
+export function ringSegments(criteria: Array<{ letter: string; maxMarks: number; bandLow: number; bandHigh: number }>, gap = 0.018): RingSegment[] {
+  const total = criteria.reduce((n, c) => n + Math.max(0, c.maxMarks), 0);
+  if (total <= 0) return [];
+  let at = 0;
+  const g = criteria.length > 1 ? gap : 0;
+  return criteria.map((c) => {
+    const share = c.maxMarks / total;
+    const seg = { letter: c.letter, start: at + g / 2, end: at + share - g / 2, low: c.maxMarks > 0 ? c.bandLow / c.maxMarks : 0, high: c.maxMarks > 0 ? c.bandHigh / c.maxMarks : 0 };
+    at += share;
+    return seg;
+  });
 }

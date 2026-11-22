@@ -18,6 +18,8 @@ import {
   gradeRange,
   groupRubrics,
   hasMarks,
+  locateAnchors,
+  ringSegments,
   resultMood,
   rubricLine,
   timeUntil,
@@ -187,4 +189,25 @@ test("every quoted passage becomes an anchor that points at its feedback", () =>
   assert.deepEqual(anchors[0], { id: "A-0", quote: SAMPLE_RESULT.criteria[0].evidence[0].quote, target: { kind: "criterion", letter: "A" } });
   // Citation anchors: only what sits in the body text (claims, in-text citations), not bibliography entries.
   assert.deepEqual(anchors.filter((a) => a.target.kind === "citation").map((a) => a.id), ["cite-cnl-0", "cite-claim-0", "cite-claim-1"]);
+});
+
+
+test("a quoted passage is placed by the heading above it, or its paragraph number", () => {
+  const h = (text: string) => ({ type: "heading", content: [{ type: "text", text }] });
+  const p = (text: string) => ({ type: "paragraph", content: [{ type: "text", text }] });
+  const doc = { type: "doc", content: [p("An opening line with no heading above it."), h("Method"), p("Potato cylinders were cut to roughly the same size."), h("Conclusion"), p("This proves that 35 °C is the optimum.")] };
+  const places = locateAnchors(doc, [
+    { id: "C-0", quote: "This proves that 35 °C is the optimum" },
+    { id: "A-1", quote: "cut to roughly the same size" },
+    { id: "X-0", quote: "an opening line" },
+    { id: "gone", quote: "words that were edited away" },
+  ]);
+  assert.deepEqual([...places.entries()], [["X-0", "Paragraph 1"], ["A-1", "Method"], ["C-0", "Conclusion"]]);
+  assert.equal(locateAnchors(null, [{ id: "a", quote: "anything at all" }]).size, 0);
+});
+
+test("the ring gives each criterion its share and draws its band along it", () => {
+  const segs = ringSegments([{ letter: "A", maxMarks: 6, bandLow: 3, bandHigh: 6 }, { letter: "B", maxMarks: 18, bandLow: 9, bandHigh: 9 }], 0.02);
+  assert.deepEqual(segs.map((s) => [s.letter, +s.start.toFixed(2), +s.end.toFixed(2), s.low, s.high]), [["A", 0.01, 0.24, 0.5, 1], ["B", 0.26, 0.99, 0.5, 0.5]]);
+  assert.deepEqual(ringSegments([]), []);
 });

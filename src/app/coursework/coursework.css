@@ -12,20 +12,29 @@
     --se-anchor-ink: var(--tile-a, var(--foreground));
   }
 
-  /* The header band: words on the band's solid colour at the left, the cat in front of the art at the right. */
-  /* The bright end is kept to the right third, so every word sits on the solid deep colour (white on it is at least 4.5:1). */
-  .subject-band.cw-band { min-height: 168px; background: radial-gradient(70% 125% at 100% 35%, var(--tile-b) 0%, var(--tile-a) 55%); }
-  .cw-band__text { max-width: 56%; }
-  .cw-band .cw-band__art { right: -3%; bottom: -30%; height: 150%; max-height: 300px; opacity: 0.5; }
-  .cw-band__cat { position: absolute; right: 7%; bottom: 0; height: min(78%, 190px); display: flex; align-items: flex-end; z-index: 0; }
-  .cw-band[data-state="reading"] .cw-band__cat { right: 4%; height: min(62%, 150px); bottom: 6%; }
-  @media (max-width: 639px) {
-    .subject-band.cw-band { min-height: 0; }
-    .cw-band__text { max-width: 60%; }
-    .cw-band .cw-band__art { display: none; }
-    .cw-band__cat { right: 2%; height: min(64%, 124px); }
-    .cw-band[data-state="reading"] .cw-band__cat { right: -2%; height: 92px; bottom: 10%; }
-  }
+  /* The ring of the overall result: solid to each band's low mark, lighter up to its high one. */
+  .cw-ring { stroke: var(--tile-a, var(--foreground)); }
+  .cw-ring-soft { stroke: color-mix(in srgb, var(--tile-a, var(--foreground)) 38%, #fff); }
+
+  /* Tabs: plain words with a line under the open one, in the subject's colour. */
+  .cw-tabs::-webkit-scrollbar { display: none; }
+  .cw-tab--on::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0; background: var(--tile-a, var(--foreground)); }
+  .cw-tab--on:first-child::after { left: 0; }
+
+  /* Where a passage is: a small chip that jumps to it. */
+  .cw-place { background: color-mix(in srgb, var(--tile-b, var(--hl)) 22%, #fff); color: var(--foreground); vertical-align: 1px; }
+  button.cw-place:hover { background: color-mix(in srgb, var(--tile-b, var(--hl)) 38%, #fff); }
+
+  /* A step's tick box. */
+  .cw-check { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; border: 2px solid var(--border-strong); color: #fff; }
+  .cw-check--on { background: var(--tile-a, var(--foreground)); border-color: var(--tile-a, var(--foreground)); }
+
+  /* A band descriptor in the rubric; the student's own band carries the subject's rule. */
+  .cw-band-row { border-left: 3px solid var(--border); padding-left: 12px; }
+  .cw-band-row--yours { border-left-color: var(--tile-a, var(--foreground)); }
+
+  /* Focus mode: the document alone, full screen. */
+  .cw-focus { position: fixed; inset: 0; z-index: 55; overflow-y: auto; background: #fff; padding: 0 max(16px, calc((100vw - 760px) / 2)) 48px; }
 
   /* Band tracks and anything else drawn in the subject's colour. */
   .cw-fill { background: var(--tile-a, var(--foreground)); }

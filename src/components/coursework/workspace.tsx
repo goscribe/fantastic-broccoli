@@ -3,21 +3,24 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { MoreHorizontal } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize2, Minimize2, Minus, MoreHorizontal, Plus } from "lucide-react";
 import { ScribeEditor, type EditorDoc, type ScribeEditorHandle } from "@/components/editor/scribe-editor";
 import { courseworkApi, importFile, isConflict, UPLOAD_ACCEPT, type CourseworkDocument, type ImportFailure } from "@/lib/api/coursework";
-import { componentTitle, countWords, familyText, feedbackAnchors, wordStatus } from "@/lib/coursework";
+import { SubjectArt } from "@/components/learn/subject-tile";
+import { componentTitle, countWords, familyText, feedbackAnchors, locateAnchors, wordStatus } from "@/lib/coursework";
 import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 import { CompareSheet } from "./compare";
 import { GradePanel, type PanelView } from "./grade-panel";
-import { ResultBand, type BandState } from "./result-band";
+import { AskInput, useChat } from "./panel-views";
 import { useCw } from "./use-cw";
 import { useGrader, useOnline, useWide } from "./use-grader";
 import "@/app/coursework/coursework.css";
 
-type Tab = "feedback" | "doc" | "guide";
+type Tab = PanelView | "doc";
+
+const ZOOMS = [0.85, 1, 1.15, 1.3, 1.5];
 type SaveState = "saved" | "saving" | "local" | "conflict";
 
 const backupKey = (id: string) => `scribe.coursework.doc.${id}`;
@@ -62,6 +65,11 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   const [loadState, setLoadState] = useState<"loading" | "missing" | "error" | "ready">("loading");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  /** The document as it is now (tiptap JSON), for finding where each quoted passage sits. */
+  const [json, setJson] = useState<unknown>(null);
+  const [zoom, setZoom] = useState(1);
+  const [focus, setFocus] = useState(false);
+  const [mark, setMark] = useState(-1);
   const [save, setSave] = useState<SaveState>("saved");
   const [tab, setTab] = useState<Tab>("doc");
   const [open, setOpen] = useState<{ kind: "criterion"; letter: string } | { kind: "citation"; id: string } | null>(null);
@@ -106,6 +114,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
           /* no backup */
         }
         setDoc({ ...d, content });
+        setJson(content);
         setTitle(d.title);
         setText(plain);
         setLoadState("ready");
@@ -245,6 +254,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
       sync.current.pending = null;
       editor.current?.setContent(fresh.content);
       setText(fresh.text);
+      setJson(fresh.content);
     } catch (err) {
       setImportError(t(importErrorKey(err)));
     } finally {
@@ -253,7 +263,6 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   };
 
   const pickFile = () => fileInput.current?.click();
-  const menuItem = "flex min-h-11 w-full items-center rounded-[10px] px-3 text-left text-ui font-bold text-foreground hover:bg-muted";
   const copyAll = async () => {
     const html = editor.current?.getHTML() ?? "";
     const plain = editor.current?.getDoc()?.text ?? "";
@@ -279,10 +288,24 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
     setTimeout(() => URL.revokeObjectURL(url), 2000);
   };
 
+  // Where each quoted passage is, in document order: the location chips, the highlight count and next / previous.
+  const places = useMemo(() => locateAnchors(json, anchors), [json, anchors]);
+  const marks = useMemo(() => [...places.keys()], [places]);
+  const chat = useChat(documentId, review?.id);
+  const chatOn = grader.status?.chat === true;
+
+  // Esc leaves focus mode.
+  useEffect(() => {
+    if (!focus) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setFocus(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [focus]);
+
   if (loadState === "loading") {
     return (
       <main className="mx-auto w-full max-w-[1180px] px-4 pb-12 pt-5 sm:px-6 sm:pt-6" aria-busy="true">
-        <div className="h-[168px] animate-pulse rounded-[var(--r-panel)] bg-muted" />
+        <div className="h-11 w-64 animate-pulse rounded-[var(--r-control)] bg-muted" />
         <div className="mt-8 h-5 w-2/3 animate-pulse rounded bg-muted" />
         <div className="mt-3 h-5 w-1/2 animate-pulse rounded bg-muted" />
       </main>
@@ -301,93 +324,191 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
 
   const family = resolveSubjectFamily(null, rubric ? familyText(rubric) : title);
   const result = review?.status === "completed" ? review.result : null;
-  const band: BandState = grader.running
-    ? { kind: "reading" }
-    : result?.mode === "marked"
-      ? grader.hideMarks
-        ? { kind: "hidden" }
-        : { kind: "marked", overall: result.overall }
-      : result
-        ? { kind: "feedback" }
-        : { kind: "new" };
-  const panelView: PanelView = tab === "guide" ? "guide" : "feedback";
-  const tabs: Tab[] = wide ? ["feedback", "guide"] : ["feedback", "doc", "guide"];
+  const panelView: PanelView = tab === "doc" ? "feedback" : tab;
+  const panelTabs: PanelView[] = ["feedback", "next", "rubric", "guide", ...(chatOn ? (["chat"] as const) : [])];
+  const tabs: Tab[] = wide ? panelTabs : ["feedback", "doc", ...panelTabs.slice(1)];
+  const isOn = (id: Tab) => (wide ? panelView === id : tab === id);
+
+  const step = (dir: 1 | -1) => {
+    if (marks.length === 0) return;
+    const next = (mark + dir + marks.length) % marks.length;
+    setMark(next);
+    setActiveAnchor(marks[next]);
+    requestAnimationFrame(() => editor.current?.showAnchor(marks[next]));
+  };
+  const zoomBy = (dir: 1 | -1) => setZoom((z) => ZOOMS[Math.min(ZOOMS.length - 1, Math.max(0, ZOOMS.indexOf(z) + dir))] ?? 1);
+  const deletePiece = () => {
+    if (!window.confirm(t("cw.act.deleteDocConfirm"))) return;
+    void courseworkApi.deleteDocument(documentId).then(() => {
+      try {
+        localStorage.removeItem(backupKey(documentId));
+      } catch {
+        /* nothing to clear */
+      }
+      router.push("/coursework");
+    });
+  };
+
   const saveLabel = save === "saving" ? t("cw.doc.saving") : save === "local" ? t("cw.doc.local") : save === "conflict" ? t("cw.err.conflict") : t("cw.doc.saved");
 
   const tabList = (
-    <div role="tablist" aria-label={t("cw.tabs")} className="grid auto-cols-fr grid-flow-col rounded-[14px] bg-muted p-1">
-      {tabs.map((id) => {
-        const on = wide ? (id === "guide" ? tab === "guide" : tab !== "guide") : tab === id;
-        return (
-          <button
-            key={id}
-            type="button"
-            role="tab"
-            id={`cw-tab-${id}`}
-            aria-selected={on}
-            aria-controls={id === "doc" ? "cw-pane-doc" : "cw-pane-panel"}
-            onClick={() => setTab(id)}
-            className={cn("min-h-11 rounded-[10px] px-3 text-ui font-extrabold transition-colors", on ? "bg-white text-foreground shadow-[0_1px_2px_rgba(22,22,26,0.12)]" : "text-muted-foreground hover:text-foreground")}
-          >
-            {t(`cw.tab.${id}`)}
-          </button>
-        );
-      })}
+    <div role="tablist" aria-label={t("cw.tabs")} className="cw-tabs flex gap-1 overflow-x-auto border-b border-border [scrollbar-width:none]">
+      {tabs.map((id) => (
+        <button
+          key={id}
+          type="button"
+          role="tab"
+          id={`cw-tab-${id}`}
+          aria-selected={isOn(id)}
+          aria-controls={id === "doc" ? "cw-pane-doc" : "cw-pane-panel"}
+          onClick={() => setTab(id)}
+          className={cn("cw-tab relative min-h-11 shrink-0 whitespace-nowrap px-3 text-ui font-extrabold transition-colors first:pl-0", isOn(id) ? "cw-tab--on text-foreground" : "text-muted-foreground hover:text-foreground")}
+        >
+          {t(`cw.tab.${id}`)}
+        </button>
+      ))}
     </div>
   );
 
-  const panel = (
-    <GradePanel
-      grader={grader}
-      text={text}
-      words={words}
-      view={panelView}
-      onShowQuote={showQuote}
-      open={open}
-      onGuide={onGuide}
-      guideFocus={guideFocus}
-      onCompare={() => setComparing(true)}
-      phone={!wide}
-      extraActions={
-        <button
-          type="button"
-          onClick={() => {
-            if (!window.confirm(t("cw.act.deleteDocConfirm"))) return;
-            void courseworkApi.deleteDocument(documentId).then(() => {
-              try {
-                localStorage.removeItem(backupKey(documentId));
-              } catch {
-                /* nothing to clear */
-              }
-              router.push("/coursework");
-            });
-          }}
-          className="min-h-11 text-small font-extrabold text-muted-foreground hover:text-rose-600"
-        >
-          {t("cw.act.deleteDoc")}
-        </button>
-      }
-    />
+  const item = (label: string, run: () => void, danger?: boolean) => (
+    <button
+      type="button"
+      role="menuitem"
+      onClick={() => {
+        setMenuOpen(false);
+        run();
+      }}
+      className={cn("flex min-h-11 w-full items-center rounded-[10px] px-3 text-left text-ui font-bold hover:bg-muted", danger ? "text-rose-700" : "text-foreground")}
+    >
+      {label}
+    </button>
   );
 
+  const toolBtn = "grid size-11 shrink-0 place-items-center rounded-[10px] text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-35";
+
   return (
-    <main className="cw-scope mx-auto w-full max-w-[1180px] px-4 pb-12 pt-5 sm:px-6 sm:pt-6" style={familyVars(family) as CSSProperties}>
-      <Link href="/coursework" className="text-caption font-semibold text-faint hover:text-accent">
-        ← {t("cw.back")}
-      </Link>
-      <ResultBand
-        className="mt-2"
-        familyText={rubric ? familyText(rubric) : title}
-        eyebrow={review ? t("cw.draftN", { n: review.draftNumber }) : rubric ? `${rubric.board} · ${rubric.sessionLabel}` : t("cw.title")}
-        title={rubric ? componentTitle(rubric) : title || t("cw.doc.untitled")}
-        state={band}
-        fresh={grader.fresh}
-      />
+    <main className="cw-scope mx-auto w-full max-w-[1320px] px-4 pb-12 pt-3 sm:px-6 sm:pt-4" style={familyVars(family) as CSSProperties}>
+      {/* One thin row: back, what this is, which draft, and the rest behind "More". The subject's colour is only the small chip. */}
+      <div className="flex min-h-12 items-center gap-2 sm:gap-3">
+        <Link href="/coursework" aria-label={t("cw.back")} title={t("cw.back")} className="-ml-2 grid size-11 shrink-0 place-items-center rounded-[12px] text-muted-foreground hover:bg-muted hover:text-foreground">
+          <ChevronLeft className="size-5" strokeWidth={2.4} />
+        </Link>
+        <span className="subject-band cw-chip relative size-9 shrink-0 !rounded-[10px]" aria-hidden>
+          <SubjectArt family={family} />
+        </span>
+        <h1 className="min-w-0 flex-1 truncate text-[17px] font-extrabold leading-tight text-foreground sm:text-[19px]" title={rubric ? componentTitle(rubric) : title}>
+          {rubric ? componentTitle(rubric) : title || t("cw.doc.untitled")}
+        </h1>
+        {grader.rows.length > 0 && review && (
+          <select value={review.id} onChange={(e) => grader.select(e.target.value)} aria-label={t("cw.viewing")} className="h-11 shrink-0 rounded-[12px] border border-border bg-white px-2.5 text-small font-extrabold text-foreground">
+            {grader.rows.map((r) => (
+              <option key={r.id} value={r.id}>
+                {t("cw.draftN", { n: r.draftNumber })}
+              </option>
+            ))}
+          </select>
+        )}
+        {grader.previous && result?.mode === "marked" && !grader.hideMarks && (
+          <button type="button" onClick={() => setComparing(true)} className="hidden min-h-11 shrink-0 text-small font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4 sm:block">
+            {t("cw.act.compare", { n: grader.previous.draftNumber })}
+          </button>
+        )}
+        <div className="relative shrink-0">
+          <button type="button" aria-label={t("cw.top.more")} title={t("cw.top.more")} aria-haspopup="menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((v) => !v)} className="grid size-11 place-items-center rounded-[12px] text-muted-foreground hover:bg-muted hover:text-foreground">
+            <MoreHorizontal className="size-5" />
+          </button>
+          {menuOpen && (
+            <>
+              <button type="button" aria-hidden tabIndex={-1} className="fixed inset-0 z-30 cursor-default" onClick={() => setMenuOpen(false)} />
+              <div role="menu" className="se-menu absolute right-0 top-12 z-40 w-[240px]">
+                {grader.previous && result?.mode === "marked" && !grader.hideMarks && <div className="sm:hidden">{item(t("cw.act.compare", { n: grader.previous.draftNumber }), () => setComparing(true))}</div>}
+                {result?.mode === "marked" && item(grader.hideMarks ? t("cw.act.showMarks") : t("cw.act.hideMarks"), () => grader.setHideMarks(!grader.hideMarks))}
+                {item(t("cw.doc.import"), pickFile)}
+                {item(t("cw.doc.copy"), () => void copyAll())}
+                {item(t("cw.doc.word"), downloadWord)}
+                {review &&
+                  result &&
+                  item(
+                    t("cw.act.delete"),
+                    () => {
+                      if (window.confirm(t("cw.act.deleteConfirm"))) void grader.remove(review.id);
+                    },
+                    true,
+                  )}
+                {item(t("cw.act.deleteDoc"), deletePiece, true)}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
 
-      {!wide && <div className="sticky top-[var(--app-top)] z-20 -mx-4 mt-4 bg-white px-4 py-2 sm:-mx-6 sm:px-6">{tabList}</div>}
+      {!wide && <div className="sticky top-[var(--app-top)] z-20 -mx-4 bg-white px-4 sm:-mx-6 sm:px-6">{tabList}</div>}
 
-      <div className="mt-2 lg:mt-6 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(380px,440px)] lg:gap-10">
-        <section id="cw-pane-doc" role={wide ? undefined : "tabpanel"} aria-labelledby={wide ? undefined : "cw-tab-doc"} className={cn("min-w-0", !wide && tab !== "doc" && "hidden")} style={{ ["--se-toolbar-top" as string]: wide ? "var(--app-top)" : "calc(var(--app-top) + 60px)" }}>
+      <div className="mt-3 lg:mt-2 lg:grid lg:grid-cols-[minmax(400px,480px)_minmax(0,1fr)] lg:gap-10">
+        <aside
+          id="cw-pane-panel"
+          role={wide ? undefined : "tabpanel"}
+          aria-labelledby={wide ? undefined : `cw-tab-${panelView}`}
+          aria-label={wide ? t("cw.doc.grade") : undefined}
+          className={cn("min-w-0 pt-3 lg:pt-0", !wide && tab === "doc" && "hidden", "lg:sticky lg:top-[calc(var(--app-top)+4px)] lg:max-h-[calc(100dvh-var(--app-top)-16px)] lg:self-start lg:overflow-y-auto lg:pr-2")}
+        >
+          {wide && <div className="sticky top-0 z-10 mb-5 bg-white">{tabList}</div>}
+          <GradePanel
+            grader={grader}
+            text={text}
+            words={words}
+            view={panelView}
+            onView={setTab}
+            onShowQuote={showQuote}
+            places={places}
+            open={open}
+            onGuide={onGuide}
+            guideFocus={guideFocus}
+            chat={chatOn ? chat : null}
+            phone={!wide}
+          />
+        </aside>
+
+        <section
+          id="cw-pane-doc"
+          role={wide ? undefined : "tabpanel"}
+          aria-labelledby={wide ? undefined : "cw-tab-doc"}
+          className={cn("min-w-0", !wide && tab !== "doc" && !focus && "hidden", focus && "cw-focus")}
+          style={{ ["--se-toolbar-top" as string]: focus ? "44px" : wide ? "calc(var(--app-top) + 44px)" : "calc(var(--app-top) + 89px)", ["--se-zoom" as string]: zoom }}
+        >
+          {/* The document's own row: how many passages are marked, stepping through them, zoom, and a focus mode. */}
+          <div className={cn("cw-doctools sticky z-20 flex h-11 items-center gap-1 bg-white", focus ? "top-0" : wide ? "top-[var(--app-top)]" : "top-[calc(var(--app-top)+45px)]")}>
+            {marks.length > 0 ? (
+              <>
+                <span className="mr-1 whitespace-nowrap text-small font-extrabold text-foreground" role="status">
+                  {marks.length === 1 ? t("cw.doc.highlightsOne") : t("cw.doc.highlights", { n: marks.length })}
+                </span>
+                <button type="button" className={toolBtn} aria-label={t("cw.doc.prev")} title={t("cw.doc.prev")} onClick={() => step(-1)}>
+                  <ChevronLeft className="size-5" />
+                </button>
+                <button type="button" className={toolBtn} aria-label={t("cw.doc.next")} title={t("cw.doc.next")} onClick={() => step(1)}>
+                  <ChevronRight className="size-5" />
+                </button>
+              </>
+            ) : (
+              <span className="whitespace-nowrap text-small font-bold tabular-nums text-muted-foreground">{ws.count}</span>
+            )}
+            <span className="ml-auto flex items-center">
+              <button type="button" className={toolBtn} aria-label={t("cw.doc.zoomOut")} title={t("cw.doc.zoomOut")} disabled={zoom <= ZOOMS[0]} onClick={() => zoomBy(-1)}>
+                <Minus className="size-[18px]" />
+              </button>
+              <span className="w-11 text-center text-small font-bold tabular-nums text-muted-foreground" aria-live="polite">
+                {Math.round(zoom * 100)}%
+              </span>
+              <button type="button" className={toolBtn} aria-label={t("cw.doc.zoomIn")} title={t("cw.doc.zoomIn")} disabled={zoom >= ZOOMS[ZOOMS.length - 1]} onClick={() => zoomBy(1)}>
+                <Plus className="size-[18px]" />
+              </button>
+              <button type="button" onClick={() => setFocus((v) => !v)} aria-pressed={focus} className="ml-1 inline-flex h-11 shrink-0 items-center gap-1.5 rounded-[10px] px-2.5 text-small font-extrabold text-foreground hover:bg-muted">
+                {focus ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
+                <span className="max-sm:sr-only">{focus ? t("cw.doc.exitFocus") : t("cw.doc.focus")}</span>
+              </button>
+            </span>
+          </div>
           <ScribeEditor
             handleRef={editor}
             content={doc.content}
@@ -399,33 +520,15 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
             uploadImage={inlineImage}
             onChange={(d) => {
               setText(d.text);
+              setJson(d.json);
               schedule(d);
             }}
             toolbarEnd={
-              <div className="relative flex items-center gap-1">
+              marks.length > 0 ? (
                 <span className={cn("whitespace-nowrap text-small font-bold tabular-nums", ws.state === "over" ? "text-foreground" : "text-muted-foreground")} title={saveLabel}>
                   {ws.count}
                 </span>
-                <button type="button" aria-label={t("cw.doc.more")} aria-haspopup="menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((v) => !v)} className="grid size-11 place-items-center rounded-[10px] text-muted-foreground hover:bg-muted hover:text-foreground">
-                  <MoreHorizontal className="size-5" />
-                </button>
-                {menuOpen && (
-                  <>
-                    <button type="button" aria-hidden tabIndex={-1} className="fixed inset-0 z-30 cursor-default" onClick={() => setMenuOpen(false)} />
-                    <div role="menu" className="se-menu absolute right-0 top-11 z-40 w-[220px]">
-                      <button type="button" role="menuitem" onClick={() => { setMenuOpen(false); pickFile(); }} className={menuItem}>
-                        {t("cw.doc.import")}
-                      </button>
-                      <button type="button" role="menuitem" onClick={() => { setMenuOpen(false); void copyAll(); }} className={menuItem}>
-                        {t("cw.doc.copy")}
-                      </button>
-                      <button type="button" role="menuitem" onClick={() => { setMenuOpen(false); downloadWord(); }} className={menuItem}>
-                        {t("cw.doc.word")}
-                      </button>
-                    </div>
-                  </>
-                )}
-              </div>
+              ) : undefined
             }
             header={
               <div className="pt-5">
@@ -470,18 +573,20 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
             void onImport(e.target.files?.[0]);
             e.target.value = "";
           }} />
+          {/* Ask about the piece from the document too: the answer opens in Chat. */}
+          {chatOn && wide && !focus && panelView !== "chat" && (
+            <div className="sticky bottom-3 z-10 mx-auto max-w-[560px]">
+              <AskInput
+                busy={chat.busy}
+                onAsk={(m) => {
+                  chat.ask(m);
+                  setTab("chat");
+                }}
+                className="shadow-[0_10px_30px_-18px_rgba(22,22,26,0.45)]"
+              />
+            </div>
+          )}
         </section>
-
-        <aside
-          id="cw-pane-panel"
-          role={wide ? undefined : "tabpanel"}
-          aria-labelledby={wide ? undefined : `cw-tab-${tab === "guide" ? "guide" : "feedback"}`}
-          aria-label={wide ? t("cw.doc.grade") : undefined}
-          className={cn("min-w-0 pt-4 lg:pt-0", !wide && tab === "doc" && "hidden", "lg:sticky lg:top-[calc(var(--app-top)+8px)] lg:max-h-[calc(100dvh-var(--app-top)-24px)] lg:self-start lg:overflow-y-auto lg:pr-1")}
-        >
-          {wide && <div className="sticky top-0 z-10 mb-6 bg-white pb-2">{tabList}</div>}
-          {panel}
-        </aside>
       </div>
 
       {comparing && review && grader.previous && <CompareSheet current={review} previousId={grader.previous.id} onClose={() => setComparing(false)} />}

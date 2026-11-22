@@ -16,7 +16,7 @@ import { cn, formatRelativeDate } from "@/lib/utils";
 import { BandTrack } from "./band-track";
 import { CitationsCard, CriterionCard, TopFixes } from "./feedback";
 import { AllowanceGate } from "./grade-panel";
-import { ResultBand } from "./result-band";
+import { ResultSummary } from "./summary";
 import { useCw } from "./use-cw";
 import { loadRubrics, ultraOffer } from "./use-grader";
 import "@/app/coursework/coursework.css";
@@ -118,7 +118,9 @@ function Locked({ ultra }: { ultra: boolean }) {
           <h2 id="cw-example" className="sr-only">
             {t("cw.locked.exampleTitle")}
           </h2>
-          <ResultBand familyText="Biology" eyebrow={t("cw.draftN", { n: 2 })} title={componentTitle(SAMPLE_RUBRIC)} state={{ kind: "marked", overall: SAMPLE_RESULT.overall }} fresh={false} example={t("cw.locked.example")} />
+          <p className="mb-3 text-small font-extrabold text-muted-foreground">{componentTitle(SAMPLE_RUBRIC)} · {t("cw.draftN", { n: 2 })}</p>
+          <ResultSummary result={SAMPLE_RESULT} hideMarks={false} fresh={false} example={t("cw.locked.example")} />
+          <p className="mt-4 text-ui text-foreground">{SAMPLE_RESULT.overall.summary}</p>
           <div className="mt-8 flex flex-col gap-8">
             <TopFixes result={SAMPLE_RESULT} />
             <div className="grid items-start gap-3 xl:grid-cols-2">
