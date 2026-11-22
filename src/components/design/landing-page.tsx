@@ -207,7 +207,7 @@ export function LandingBody() {
   );
 }
 
-/** The closing banner: the hero's scene again, the cat on top of the books, the same one button. */
+/** The closing banner: the hero's scene again in full, the cat on top of the books, the words on a solid card, the same one button. */
 export function LandingCta({
   title,
   sub,
@@ -238,13 +238,16 @@ export function LandingCta({
             <Cat pose={pose} className="cat-bob relative h-full" />
           </div>
         </div>
-        <Heading className={cn("relative text-balance font-extrabold", big ? "text-[34px] leading-[1.05] tracking-[-0.025em] sm:max-w-[60%] sm:text-[46px] lg:text-[56px]" : "text-[28px] leading-[1.1] sm:max-w-[56%] sm:text-[38px]")}>{title}</Heading>
-        {sub && <p className="relative mt-3 text-read text-foreground/75 sm:max-w-[48%]">{sub}</p>}
-        <div className={cn("relative flex flex-col gap-x-6 gap-y-1.5 sm:flex-row sm:items-center", big ? "mt-8" : "mt-6")}>
-          <Link href="/signup" className={landingPrimary}>{cta}</Link>
-          {secondary && <Link href={secondary.href} className={cn(landingTextLink, "justify-center sm:justify-start")}>{secondary.label}</Link>}
+        {/* The words on one solid card over the scene from sm up (landing.css), never on a wash. */}
+        <div className={cn("landing-cta-copy relative", big ? "sm:max-w-[64%] lg:max-w-[68%]" : "sm:max-w-[60%] lg:max-w-[56%]")}>
+          <Heading className={cn("text-balance font-extrabold", big ? "text-[34px] leading-[1.05] tracking-[-0.025em] sm:text-[46px] lg:text-[56px]" : "text-[28px] leading-[1.1] sm:text-[38px]")}>{title}</Heading>
+          {sub && <p className="mt-3 text-read text-foreground/75">{sub}</p>}
+          <div className={cn("flex flex-col gap-x-6 gap-y-1.5 sm:flex-row sm:items-center", big ? "mt-8" : "mt-6")}>
+            <Link href="/signup" className={landingPrimary}>{cta}</Link>
+            {secondary && <Link href={secondary.href} className={cn(landingTextLink, "justify-center sm:justify-start")}>{secondary.label}</Link>}
+          </div>
+          {note && <p className="mt-4 text-center text-ui font-bold text-foreground/80 sm:text-left">{note}</p>}
         </div>
-        {note && <p className="relative mt-4 text-center text-ui font-bold text-foreground/80 sm:max-w-[56%] sm:text-left">{note}</p>}
       </div>
     </section>
   );
