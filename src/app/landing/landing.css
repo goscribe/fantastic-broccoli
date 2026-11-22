@@ -60,15 +60,25 @@
 .landing-root main { overflow-wrap: anywhere; }
 
 /*
- * Tablet widths: the banner is narrow, so its words reach further across the
- * scene. Hold the card colour under them for longer (text stays >= 4.5:1 at
- * every time of day, measured), then let the scene through behind the cat.
+ * The closing banner: the whole scene, no wash over it. From sm up the words
+ * sit on one solid card over the sky (white by day, the night sky lifted a
+ * step after dark, as the home banner's cards do), so their contrast never
+ * depends on the picture. On phones the scene is a band above the words.
  */
-@media (min-width: 640px) and (max-width: 1023px) {
-  .landing-banner .hero-field {
-    --wash: linear-gradient(90deg, var(--hero-wash) 0%, color-mix(in srgb, var(--hero-wash) 96%, transparent) 46%, color-mix(in srgb, var(--hero-wash) 80%, transparent) 62%, transparent 84%);
+.landing-banner { --hero-surface: #ffffff; }
+.landing-banner .hero-field { --wash: none; }
+html[data-daypart="night"] .landing-banner,
+html[data-daypart="late"] .landing-banner { --hero-surface: color-mix(in srgb, var(--hero-wash) 86%, #ffffff); }
+@media (min-width: 640px) {
+  .landing-cta-copy {
+    background: var(--hero-surface);
+    border: 1px solid color-mix(in srgb, var(--foreground) 9%, transparent);
+    border-radius: 28px;
+    padding: 28px 32px 30px;
+    box-shadow: 0 1px 0 rgb(22 22 26 / 0.05), 0 18px 34px -18px rgb(22 22 26 / 0.45);
   }
 }
+@media (min-width: 1024px) { .landing-cta-copy { padding: 36px 44px 38px; } }
 
 /* The home picture on a phone: two narrow tiles a row. The title sits above the art there, so it can use the tile's full width (no mid-word break in "Economics"). */
 @media (max-width: 639px) {
