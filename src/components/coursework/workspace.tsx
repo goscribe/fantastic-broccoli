@@ -1,22 +1,27 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { ChevronLeft, ChevronRight, Maximize2, Minimize2, Minus, MoreHorizontal, Plus } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, Maximize2, Minimize2, Minus, MoreHorizontal, Plus } from "lucide-react";
 import { ScribeEditor, type EditorDoc, type ScribeEditorHandle } from "@/components/editor/scribe-editor";
-import { courseworkApi, importFile, isConflict, UPLOAD_ACCEPT, type CourseworkDocument, type ImportFailure } from "@/lib/api/coursework";
+import { courseworkApi, importFile, isConflict, UPLOAD_ACCEPT, type CourseworkDocument, type DraftDetail, type DraftSummary, type ImportFailure } from "@/lib/api/coursework";
 import { SubjectArt } from "@/components/learn/subject-tile";
-import { componentTitle, countWords, familyText, feedbackAnchors, locateAnchors, wordStatus } from "@/lib/coursework";
+import { componentTitle, countWords, draftEntries, familyText, feedbackAnchors, locateAnchors, wordStatus } from "@/lib/coursework";
 import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 import { CompareSheet } from "./compare";
 import { GradePanel, type PanelView } from "./grade-panel";
 import { AskInput, useChat } from "./panel-views";
+import type { PdfViewHandle } from "./pdf-view";
 import { useCw } from "./use-cw";
 import { useGrader, useOnline, useWide } from "./use-grader";
 import "@/app/coursework/coursework.css";
+
+/** pdf.js is only fetched when a PDF draft is on screen. */
+const PdfView = dynamic(() => import("./pdf-view"), { ssr: false, loading: () => <div className="mx-auto mt-4 aspect-[1/1.414] w-full max-w-[860px] animate-pulse bg-white" aria-busy="true" /> });
 
 type Tab = PanelView | "doc";
 
@@ -24,6 +29,12 @@ const ZOOMS = [0.85, 1, 1.15, 1.3, 1.5];
 type SaveState = "saved" | "saving" | "local" | "conflict";
 
 const backupKey = (id: string) => `scribe.coursework.doc.${id}`;
+
+/** A server without drafts (contract v1): the document itself is its one text draft. */
+const V1_DRAFT = "v1";
+function v1Draft(d: CourseworkDocument): DraftDetail {
+  return { id: V1_DRAFT, documentId: d.id, kind: "text", number: 1, title: d.title, wordCount: d.wordCount, createdAt: d.createdAt, updatedAt: d.updatedAt, reviewCount: 0, content: d.content, contentHtml: null, text: d.text, version: d.version };
+}
 
 /** A picture kept inside the document: scaled down so the document stays small enough to save. */
 async function inlineImage(file: File): Promise<string> {
@@ -61,7 +72,16 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   const online = useOnline();
   const editor = useRef<ScribeEditorHandle>(null);
   const fileInput = useRef<HTMLInputElement>(null);
+  const pdf = useRef<PdfViewHandle>(null);
+  /** Which page each quote of a PDF draft is on, as the viewer found them. */
+  const [pdfPages, setPdfPages] = useState<Map<string, number>>(new Map());
+  const [draftsOpen, setDraftsOpen] = useState(false);
+  const [converting, setConverting] = useState(false);
+  const [convertFailed, setConvertFailed] = useState(false);
   const [doc, setDoc] = useState<CourseworkDocument | null>(null);
+  /** The draft on the document side: a text draft in the editor, or a file draft shown as itself. */
+  const [draft, setDraft] = useState<DraftDetail | null>(null);
+  const [fileUrl, setFileUrl] = useState<{ draftId: string; url: string } | null>(null);
   const [loadState, setLoadState] = useState<"loading" | "missing" | "error" | "ready">("loading");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -81,8 +101,10 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   const [importError, setImportError] = useState<string | null>(null);
 
   // What the server holds, and what is waiting to be saved.
-  const sync = useRef<{ version: number; pending: EditorDoc | null; title: string; rubricId: string | null; timer: ReturnType<typeof setTimeout> | null; saving: Promise<void> | null }>({
+  const sync = useRef<{ version: number; draftId: string; currentDraftId: string | null; pending: EditorDoc | null; title: string; rubricId: string | null; timer: ReturnType<typeof setTimeout> | null; saving: Promise<void> | null }>({
     version: 0,
+    draftId: V1_DRAFT,
+    currentDraftId: null,
     pending: null,
     title: "",
     rubricId: null,
@@ -90,40 +112,67 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
     saving: null,
   });
 
+  const firstSave = useRef<string | null>(null);
+  /** Puts a draft on the document side (what was being typed in the one before is saved first). */
+  const showDraft = useCallback((d: DraftDetail) => {
+    const s = sync.current;
+    s.draftId = d.id;
+    s.version = d.kind === "text" ? d.version : 0;
+    s.pending = null;
+    let content: unknown = d.kind === "text" ? (d.content ?? d.contentHtml ?? null) : null;
+    let plain = d.text;
+    // Writing that never reached the server (offline, a closed tab) comes back from this device.
+    if (d.kind === "text") {
+      try {
+        const raw = localStorage.getItem(backupKey(d.id === V1_DRAFT ? d.documentId : d.id));
+        const backup = raw ? (JSON.parse(raw) as { version: number; json: unknown; text: string }) : null;
+        if (backup && backup.version === d.version && backup.text !== d.text) {
+          content = backup.json;
+          plain = backup.text;
+          s.pending = { json: backup.json, text: backup.text };
+        }
+      } catch {
+        /* no backup */
+      }
+    }
+    // A text draft that arrived as HTML (made from a Word file) is saved as editor content once it is open.
+    firstSave.current = d.kind === "text" && !d.content && !!d.contentHtml ? d.id : null;
+    setDraft(d.kind === "text" ? { ...d, content, contentHtml: null } : d);
+    setJson(content);
+    setText(plain);
+    setPdfPages(new Map());
+    setMark(-1);
+    setActiveAnchor(null);
+    if (d.kind === "file") {
+      courseworkApi
+        .fileUrl(d.id)
+        .then((out) => setFileUrl({ draftId: d.id, url: out.url }))
+        .catch(() => setFileUrl(null));
+    }
+  }, []);
+
   useEffect(() => {
     let cancelled = false;
     courseworkApi
       .document(documentId)
-      .then((d) => {
-        if (cancelled) return;
-        sync.current.version = d.version;
+      .then(async (d) => {
         sync.current.title = d.title;
         sync.current.rubricId = d.rubricId;
-        let content = d.content;
-        let plain = d.text;
-        // Writing that never reached the server (offline, a closed tab) comes back from this device.
-        try {
-          const raw = localStorage.getItem(backupKey(documentId));
-          const backup = raw ? (JSON.parse(raw) as { version: number; json: unknown; text: string }) : null;
-          if (backup && backup.version === d.version && backup.text !== d.text) {
-            content = backup.json;
-            plain = backup.text;
-            sync.current.pending = { json: backup.json, text: backup.text };
-          }
-        } catch {
-          /* no backup */
-        }
-        setDoc({ ...d, content });
-        setJson(content);
+        sync.current.currentDraftId = d.currentDraftId ?? null;
+        // The newest draft opens first: the text version when there is one, else the file as uploaded.
+        const newest = [...(d.drafts ?? [])].sort((x, y) => y.number - x.number)[0];
+        const first = newest ? await courseworkApi.draft(newest.id) : v1Draft(d);
+        if (cancelled) return;
+        setDoc(d);
         setTitle(d.title);
-        setText(plain);
+        showDraft(first);
         setLoadState("ready");
       })
       .catch((err) => !cancelled && setLoadState(err instanceof Error && /not found/i.test(err.message) ? "missing" : "error"));
     return () => {
       cancelled = true;
     };
-  }, [documentId]);
+  }, [documentId, showDraft]);
 
   const push = useCallback(async (): Promise<void> => {
     const s = sync.current;
@@ -137,12 +186,18 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
       s.pending = null;
       setSave("saving");
       let stop = false;
-      s.saving = courseworkApi
-        .saveDocument({ documentId, baseVersion: s.version, title: s.title, rubricId: s.rubricId, content: pending.json })
+      const draftId = s.draftId;
+      // The document's own save covers its current text draft (and its title and component); any other text draft saves by itself and becomes the current one.
+      const viaDocument = draftId === V1_DRAFT || draftId === s.currentDraftId;
+      const request = viaDocument
+        ? courseworkApi.saveDocument({ documentId, baseVersion: s.version, title: s.title, rubricId: s.rubricId, content: pending.json })
+        : courseworkApi.saveDraft({ draftId, baseVersion: s.version, content: pending.json });
+      s.saving = request
         .then((out) => {
-          s.version = out.version;
+          if (s.draftId === draftId) s.version = out.version;
+          if (!viaDocument) s.currentDraftId = draftId;
           try {
-            localStorage.removeItem(backupKey(documentId));
+            localStorage.removeItem(backupKey(draftId === V1_DRAFT ? documentId : draftId));
           } catch {
             /* nothing to clear */
           }
@@ -169,7 +224,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
       else s.pending ??= editor.current?.getDoc() ?? null;
       if (s.pending) {
         try {
-          localStorage.setItem(backupKey(documentId), JSON.stringify({ version: s.version, json: s.pending.json, text: s.pending.text }));
+          localStorage.setItem(backupKey(s.draftId === V1_DRAFT ? documentId : s.draftId), JSON.stringify({ version: s.version, json: s.pending.json, text: s.pending.text }));
         } catch {
           /* storage full: the server save still runs */
         }
@@ -186,6 +241,21 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
     await push();
   }, [push]);
 
+  const openId = draft?.id;
+  useEffect(() => {
+    if (!openId || firstSave.current !== openId) return;
+    const id = setTimeout(() => {
+      if (firstSave.current !== openId) return;
+      firstSave.current = null;
+      const now = editor.current?.getDoc();
+      if (now) {
+        setJson(now.json);
+        schedule(now);
+      }
+    }, 600);
+    return () => clearTimeout(id);
+  }, [openId, schedule]);
+
   // Back online: send what was kept here.
   useEffect(() => {
     if (online && sync.current.pending) void push();
@@ -195,6 +265,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   const grader = useGrader({
     documentId: loadState === "ready" ? documentId : null,
     rubricId: doc?.rubricId ?? null,
+    draftId: draft && draft.id !== V1_DRAFT ? draft.id : null,
     onRubric: (id) => {
       sync.current.rubricId = id;
       setDoc((d) => (d ? { ...d, rubricId: id } : d));
@@ -215,16 +286,18 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   if (!opened && grader.phase === "ready") {
     setOpened(true);
     if (grader.rows.length > 0) setTab("feedback");
+    // The newest draft is on screen; if no review has read it yet (a text version made from a reviewed file), no review is shown with it.
+    if (draft && draft.id !== V1_DRAFT && !grader.rows.some((r) => r.draftId === draft.id)) grader.select(null);
   }
 
-  const anchors = useMemo(() => (review?.status === "completed" ? feedbackAnchors(review.result, review.citations).map((a) => ({ id: a.id, quote: a.quote })) : []), [review]);
+  const anchors = useMemo(() => (review?.status === "completed" ? feedbackAnchors(review.result, review.citations).map((a) => ({ id: a.id, quote: a.quote, page: a.page })) : []), [review]);
   const targets = useMemo(() => new Map((review?.status === "completed" ? feedbackAnchors(review.result, review.citations) : []).map((a) => [a.id, a.target])), [review]);
 
   const showQuote = (anchorId: string) => {
     setActiveAnchor(anchorId);
     setTab("doc");
     // On a phone the document has to be on screen before it can scroll.
-    requestAnimationFrame(() => requestAnimationFrame(() => editor.current?.showAnchor(anchorId)));
+    requestAnimationFrame(() => requestAnimationFrame(() => (pdf.current ?? editor.current)?.showAnchor(anchorId)));
   };
   const onAnchorClick = (anchorId: string) => {
     const target = targets.get(anchorId);
@@ -241,20 +314,31 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   const words = useMemo(() => countWords(text), [text]);
   const ws = wordStatus(words, rubric?.wordLimit ?? null);
 
+  /** Opens a draft by id (saving the one on screen first). */
+  const openDraft = async (draftId: string) => {
+    if (!doc || draftId === draft?.id) return;
+    await flush();
+    showDraft(await courseworkApi.draft(draftId));
+  };
+
+  /** A file added to this piece is a new draft beside the others: nothing already here is replaced. */
   const onImport = async (file: File | undefined) => {
     if (!file) return;
-    if (words > 0 && !window.confirm(t("cw.doc.importConfirm"))) return;
     setImportError(null);
     setImporting(file.name);
     try {
       await flush();
       await importFile(file, { documentId });
       const fresh = await courseworkApi.document(documentId);
-      sync.current.version = fresh.version;
-      sync.current.pending = null;
-      editor.current?.setContent(fresh.content);
-      setText(fresh.text);
-      setJson(fresh.content);
+      sync.current.currentDraftId = fresh.currentDraftId ?? null;
+      setDoc(fresh);
+      const newest = [...(fresh.drafts ?? [])].sort((x, y) => y.number - x.number)[0];
+      if (newest) {
+        showDraft(await courseworkApi.draft(newest.id));
+        grader.select(null);
+      } else {
+        showDraft(v1Draft(fresh));
+      }
     } catch (err) {
       setImportError(t(importErrorKey(err)));
     } finally {
@@ -289,9 +373,24 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   };
 
   // Where each quoted passage is, in document order: the location chips, the highlight count and next / previous.
-  const places = useMemo(() => locateAnchors(json, anchors), [json, anchors]);
+  const format = draft?.kind ?? "text";
+  const drafts: DraftSummary[] = useMemo(() => doc?.drafts ?? [], [doc]);
+  const fileFormat = draft?.kind === "file" ? (draft.format ?? "other") : null;
+  const file = draft?.kind === "file" ? { name: draft.fileName ?? draft.title, format: fileFormat, url: fileUrl?.draftId === draft.id ? fileUrl.url : null } : null;
+  // The document side always shows the draft that is open: a file as itself, or text in the editor.
+  const source = format;
+  const showPdf = source === "file" && fileFormat === "pdf";
+  const places = useMemo(() => {
+    if (source === "file") return new Map([...pdfPages.entries()].map(([id, n]) => [id, t("cw.place.page", { n })]));
+    return new Map([...locateAnchors(json, anchors).entries()].map(([id, section]) => [id, /^Paragraph \d+$/.test(section) ? section : t("cw.place", { section })]));
+  }, [source, pdfPages, json, anchors, t]);
   const marks = useMemo(() => [...places.keys()], [places]);
-  const chat = useChat(documentId, review?.id);
+  const entries = useMemo(() => draftEntries(grader.rows, drafts), [grader.rows, drafts]);
+  const shownDraft = (review ? entries.find((d) => d.reviewId === review.id) : entries.find((d) => d.reviewId === null && d.draftId === draft?.id)) ?? entries[entries.length - 1];
+  const positionOf = (reviewId: string | undefined) => entries.find((d) => d.reviewId === reviewId)?.position ?? 0;
+  /** The original to download: the file on screen, or the file this piece came from. */
+  const original = draft?.kind === "file" ? draft : (drafts.find((d) => d.kind === "file") ?? null);
+  const chat = useChat(documentId, draft && draft.id !== V1_DRAFT ? draft.id : undefined, review?.id);
   const chatOn = grader.status?.chat === true;
 
   // Esc leaves focus mode.
@@ -311,7 +410,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
       </main>
     );
   }
-  if (loadState !== "ready" || !doc) {
+  if (loadState !== "ready" || !doc || !draft) {
     return (
       <main className="mx-auto w-full max-w-[640px] px-4 pb-12 pt-10 sm:px-6">
         <p className="text-read font-extrabold">{loadState === "missing" ? t("cw.missing") : t("cw.loadFailed")}</p>
@@ -334,7 +433,41 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
     const next = (mark + dir + marks.length) % marks.length;
     setMark(next);
     setActiveAnchor(marks[next]);
-    requestAnimationFrame(() => editor.current?.showAnchor(marks[next]));
+    requestAnimationFrame(() => (pdf.current ?? editor.current)?.showAnchor(marks[next]));
+  };
+  const fileWord = t(fileFormat === "pdf" ? "cw.file.pdf" : fileFormat === "docx" || fileFormat === "doc" ? "cw.file.word" : "cw.file.other");
+  /** "Edit as text": a new text draft made from this file's text. The file stays as its own draft. */
+  const editAsText = async () => {
+    if (converting || !draft) return;
+    setConverting(true);
+    setConvertFailed(false);
+    try {
+      const made = await courseworkApi.createTextDraft({ documentId, fromDraftId: draft.id });
+      const fresh = await courseworkApi.document(documentId);
+      sync.current.currentDraftId = fresh.currentDraftId ?? made.draftId;
+      setDoc(fresh);
+      showDraft(await courseworkApi.draft(made.draftId));
+      // Nothing has reviewed the text version yet.
+      grader.select(null);
+    } catch {
+      setConvertFailed(true);
+    } finally {
+      setConverting(false);
+    }
+  };
+  const downloadOriginal = async () => {
+    if (!original) return;
+    try {
+      const out = await courseworkApi.fileUrl(original.id);
+      const a = document.createElement("a");
+      a.href = out.url;
+      a.download = original.fileName ?? original.title;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.click();
+    } catch {
+      /* the link could not be made: nothing to open */
+    }
   };
   const zoomBy = (dir: 1 | -1) => setZoom((z) => ZOOMS[Math.min(ZOOMS.length - 1, Math.max(0, ZOOMS.indexOf(z) + dir))] ?? 1);
   const deletePiece = () => {
@@ -399,18 +532,49 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
         <h1 className="min-w-0 flex-1 truncate text-[17px] font-extrabold leading-tight text-foreground sm:text-[19px]" title={rubric ? componentTitle(rubric) : title}>
           {rubric ? componentTitle(rubric) : title || t("cw.doc.untitled")}
         </h1>
-        {grader.rows.length > 0 && review && (
-          <select value={review.id} onChange={(e) => grader.select(e.target.value)} aria-label={t("cw.viewing")} className="h-11 shrink-0 rounded-[12px] border border-border bg-white px-2.5 text-small font-extrabold text-foreground">
-            {grader.rows.map((r) => (
-              <option key={r.id} value={r.id}>
-                {t("cw.draftN", { n: r.draftNumber })}
-              </option>
-            ))}
-          </select>
+        {entries.length > 1 ? (
+          <div className="relative shrink-0">
+            <button type="button" aria-haspopup="menu" aria-expanded={draftsOpen} aria-label={`${t("cw.viewing")}: ${shownDraft?.label ?? ""}`} onClick={() => setDraftsOpen((v) => !v)} className="inline-flex h-11 items-center gap-1.5 rounded-[12px] border border-border bg-white pl-3 pr-2 text-small font-extrabold text-foreground hover:border-border-strong">
+              {shownDraft?.label}
+              <ChevronDown className="size-4 text-muted-foreground" aria-hidden />
+            </button>
+            {draftsOpen && (
+              <>
+                <button type="button" aria-hidden tabIndex={-1} className="fixed inset-0 z-30 cursor-default" onClick={() => setDraftsOpen(false)} />
+                <div role="menu" aria-label={t("cw.viewing")} className="se-menu absolute right-0 top-12 z-40 w-[280px] max-w-[calc(100vw-32px)]">
+                  {entries.map((d) => {
+                    const row = d.reviewId ? grader.rows.find((r) => r.id === d.reviewId) : null;
+                    const on = d === shownDraft;
+                    return (
+                      <button
+                        key={d.reviewId ?? "new"}
+                        type="button"
+                        role="menuitemradio"
+                        aria-checked={on}
+                        onClick={() => {
+                          setDraftsOpen(false);
+                          grader.select(d.reviewId);
+                          if (d.draftId && drafts.some((x) => x.id === d.draftId)) void openDraft(d.draftId);
+                        }}
+                        className={cn("flex min-h-11 w-full items-center justify-between gap-3 whitespace-nowrap rounded-[10px] px-3 text-left text-ui font-bold text-foreground hover:bg-muted", on && "bg-muted")}
+                      >
+                        {d.label}
+                        <span className="text-small font-bold tabular-nums text-muted-foreground">
+                          {row && row.marksLow !== null && row.marksHigh !== null && !grader.hideMarks ? `${row.marksLow}–${row.marksHigh}` : !d.reviewId ? t("cw.notReviewed") : ""}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+          </div>
+        ) : (
+          drafts.some((d) => d.kind === "file") && entries[0] && <span className="shrink-0 whitespace-nowrap text-small font-extrabold text-muted-foreground">{entries[0].label}</span>
         )}
         {grader.previous && result?.mode === "marked" && !grader.hideMarks && (
           <button type="button" onClick={() => setComparing(true)} className="hidden min-h-11 shrink-0 text-small font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4 sm:block">
-            {t("cw.act.compare", { n: grader.previous.draftNumber })}
+            {t("cw.act.compare", { n: positionOf(grader.previous.id) })}
           </button>
         )}
         <div className="relative shrink-0">
@@ -421,11 +585,12 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
             <>
               <button type="button" aria-hidden tabIndex={-1} className="fixed inset-0 z-30 cursor-default" onClick={() => setMenuOpen(false)} />
               <div role="menu" className="se-menu absolute right-0 top-12 z-40 w-[240px]">
-                {grader.previous && result?.mode === "marked" && !grader.hideMarks && <div className="sm:hidden">{item(t("cw.act.compare", { n: grader.previous.draftNumber }), () => setComparing(true))}</div>}
+                {grader.previous && result?.mode === "marked" && !grader.hideMarks && <div className="sm:hidden">{item(t("cw.act.compare", { n: positionOf(grader.previous.id) }), () => setComparing(true))}</div>}
                 {result?.mode === "marked" && item(grader.hideMarks ? t("cw.act.showMarks") : t("cw.act.hideMarks"), () => grader.setHideMarks(!grader.hideMarks))}
+                {original && item(t("cw.file.download"), () => void downloadOriginal())}
                 {item(t("cw.doc.import"), pickFile)}
-                {item(t("cw.doc.copy"), () => void copyAll())}
-                {item(t("cw.doc.word"), downloadWord)}
+                {source === "text" && item(t("cw.doc.copy"), () => void copyAll())}
+                {source === "text" && item(t("cw.doc.word"), downloadWord)}
                 {review &&
                   result &&
                   item(
@@ -494,6 +659,11 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
               <span className="whitespace-nowrap text-small font-bold tabular-nums text-muted-foreground">{ws.count}</span>
             )}
             <span className="ml-auto flex items-center">
+              {source === "file" && (
+                <button type="button" onClick={() => void editAsText()} disabled={converting} title={t("cw.file.editSub", { kind: fileWord })} className="mr-1 inline-flex h-10 shrink-0 items-center rounded-[12px] border border-border bg-white px-3 text-small font-extrabold text-foreground hover:border-border-strong hover:bg-muted disabled:opacity-50">
+                  {converting ? t("cw.file.editing") : t("cw.file.edit")}
+                </button>
+              )}
               <button type="button" className={toolBtn} aria-label={t("cw.doc.zoomOut")} title={t("cw.doc.zoomOut")} disabled={zoom <= ZOOMS[0]} onClick={() => zoomBy(-1)}>
                 <Minus className="size-[18px]" />
               </button>
@@ -509,9 +679,36 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
               </button>
             </span>
           </div>
+          {convertFailed && <p className="pt-3 text-small font-semibold text-rose-700" role="alert">{t("cw.file.editFailed")}</p>}
+          {source === "file" && file && (
+            <div className="cw-pdf-stage -mx-4 px-4 sm:mx-0 sm:rounded-[var(--r-card)] sm:px-5">
+              {showPdf && !file.url ? (
+                <div className="mx-auto my-4 aspect-[1/1.414] w-full max-w-[860px] animate-pulse bg-white" aria-busy="true" />
+              ) : showPdf && file.url ? (
+                <PdfView
+                  key={draft!.id}
+                  handleRef={pdf}
+                  url={file.url}
+                  anchors={anchors}
+                  activeAnchor={activeAnchor}
+                  onAnchorClick={onAnchorClick}
+                  onLocated={setPdfPages}
+                  zoom={zoom}
+                  failed={<OriginalText name={file.name} onDownload={() => void downloadOriginal()} text={text} />}
+                />
+              ) : (
+                <div className="py-4">
+                  <OriginalText name={file.name} onDownload={() => void downloadOriginal()} text={text} />
+                </div>
+              )}
+            </div>
+          )}
+          {draft?.kind === "text" && (
+          <div>
           <ScribeEditor
+            key={draft.id}
             handleRef={editor}
-            content={doc.content}
+            content={draft.content}
             label={t("cw.doc.label")}
             placeholder={t("cw.doc.placeholder")}
             anchors={anchors}
@@ -569,6 +766,8 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
               </div>
             }
           />
+          </div>
+          )}
           <input ref={fileInput} type="file" accept={UPLOAD_ACCEPT} className="hidden" onChange={(e) => {
             void onImport(e.target.files?.[0]);
             e.target.value = "";
@@ -589,7 +788,29 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
         </section>
       </div>
 
-      {comparing && review && grader.previous && <CompareSheet current={review} previousId={grader.previous.id} onClose={() => setComparing(false)} />}
+      {comparing && review && grader.previous && <CompareSheet current={review} previousId={grader.previous.id} fromDraft={positionOf(grader.previous.id)} toDraft={positionOf(review.id)} onClose={() => setComparing(false)} />}
     </main>
+  );
+}
+
+/** A file that cannot be drawn here (an old .doc, a PDF that would not open): what it is, a way to get it, and the text found in it. */
+function OriginalText({ name, onDownload, text }: { name: string; onDownload: () => void; text: string }) {
+  const { t } = useCw();
+  return (
+    <div className="mx-auto max-w-[760px] bg-white px-5 py-6 sm:px-8">
+      <p className="text-read font-extrabold text-foreground">{t("cw.file.cantShow")}</p>
+      <p className="mt-1 text-ui text-foreground/80">{t("cw.file.cantShowSub")}</p>
+      <button type="button" onClick={onDownload} className="mt-2 inline-flex min-h-11 items-center text-left text-ui font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4 [overflow-wrap:anywhere]">
+        {t("cw.file.download")}: {name}
+      </button>
+      <div className="mt-4 flex flex-col gap-3 border-t border-border pt-4 text-ui text-foreground/85">
+        {text
+          .split(/\n{2,}/)
+          .slice(0, 60)
+          .map((para, i) => (
+            <p key={i}>{para}</p>
+          ))}
+      </div>
+    </div>
   );
 }

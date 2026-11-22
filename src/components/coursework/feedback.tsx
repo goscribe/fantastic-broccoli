@@ -18,14 +18,12 @@ export interface FeedbackHost {
   open?: { kind: "criterion"; letter: string } | { kind: "citation"; id: string } | null;
   /** Opens the guide at a criterion's part. */
   onGuide?: (letter: string) => void;
-  /** Where each quoted passage is in the document, by anchor id ("Method", "Conclusion"): shown as a chip that jumps there. */
+  /** Where each quoted passage is, by anchor id, as it should read ("In Method" for text, "p. 4" for a PDF): a chip that jumps there. */
   places?: Map<string, string>;
 }
 
 /** Where a passage is, as a small chip that jumps to it. */
-function Place({ label: section, onClick }: { label: string; onClick?: () => void }) {
-  const { t } = useCw();
-  const label = t("cw.place", { section });
+function Place({ label, onClick }: { label: string; onClick?: () => void }) {
   const cls = "cw-place inline-flex min-h-7 items-center rounded-full px-2.5 text-caption font-extrabold";
   return onClick ? (
     <button type="button" onClick={onClick} className={cls} title={label}>

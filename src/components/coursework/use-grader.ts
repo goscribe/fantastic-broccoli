@@ -101,7 +101,8 @@ export interface Grader {
   rows: ReviewRow[];
   /** The review being shown (the newest unless the student picked an older draft). */
   review: Review | null;
-  select: (reviewId: string) => void;
+  /** Shows a review, or (null) the draft no review has read yet. */
+  select: (reviewId: string | null) => void;
   /** A review is queued or being read. */
   running: boolean;
   /** The review on screen finished while the student was here: play the reveal once. */
@@ -128,8 +129,9 @@ const isRunning = (s: string | undefined) => s === "queued" || s === "grading";
  * while it runs). `flush` saves the document first, so a review always reads
  * what the student sees.
  */
-export function useGrader(input: { documentId: string | null; rubricId: string | null; onRubric: (id: string) => void; flush: () => Promise<void> }): Grader {
+export function useGrader(input: { documentId: string | null; rubricId: string | null; /** The draft on screen: the one a review is asked for (absent on a server without drafts). */ draftId?: string | null; onRubric: (id: string) => void; flush: () => Promise<void> }): Grader {
   const { documentId, rubricId, onRubric, flush } = input;
+  const draftId = input.draftId ?? null;
   const [phase, setPhase] = useState<GraderPhase>("loading");
   const [status, setStatus] = useState<GraderStatus | null>(null);
   const [rubrics, setRubrics] = useState<RubricSummary[]>([]);
@@ -156,7 +158,7 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
         if (cancelled) return;
         setStatus(s);
         setRubrics(r);
-        const oldestFirst = [...list].sort((a, b) => a.draftNumber - b.draftNumber);
+        const oldestFirst = [...list].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
         setRows(oldestFirst);
         setSelectedId((cur) => cur ?? oldestFirst[oldestFirst.length - 1]?.id ?? null);
         setPhase("ready");
@@ -210,7 +212,7 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
     setRequestError(null);
     try {
       await live.current.flush();
-      const out = await courseworkApi.requestReview({ documentId, rubricId: rubricId ?? undefined, mode });
+      const out = await courseworkApi.requestReview({ documentId, ...(draftId ? { draftId } : {}), rubricId: rubricId ?? undefined, mode });
       setFresh(false);
       setHideMarks(false);
       setStatus((s) => (s ? { ...s, usedToday: s.usedToday + 1, remainingToday: out.remainingToday, allowed: out.remainingToday === null || out.remainingToday > 0, reason: out.remainingToday === 0 ? "daily_limit" : s.reason } : s));
@@ -220,6 +222,7 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
         {
           id: out.reviewId,
           documentId,
+          draftId,
           draftNumber: out.draftNumber,
           mode,
           status: "queued",
@@ -243,7 +246,7 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
     } finally {
       setRequesting(false);
     }
-  }, [documentId, requesting, rubricId, mode, rubrics]);
+  }, [documentId, draftId, requesting, rubricId, mode, rubrics]);
 
   const remove = useCallback(
     async (reviewId: string) => {
@@ -261,7 +264,8 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
 
   const previous = useMemo(() => {
     if (!shown) return null;
-    const earlier = rows.filter((r) => r.draftNumber < shown.draftNumber && r.status === "completed" && r.mode === "marked");
+    const at = new Date(shown.createdAt).getTime();
+    const earlier = rows.filter((r) => r.id !== shown.id && new Date(r.createdAt).getTime() < at && r.status === "completed" && r.mode === "marked");
     return earlier[earlier.length - 1] ?? null;
   }, [rows, shown]);
 
@@ -276,6 +280,7 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
     review: shown,
     select: (id) => {
       setFresh(false);
+      if (id === null) setReview(null);
       setSelectedId(id);
     },
     running,

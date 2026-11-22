@@ -33,6 +33,20 @@
   .cw-band-row { border-left: 3px solid var(--border); padding-left: 12px; }
   .cw-band-row--yours { border-left-color: var(--tile-a, var(--foreground)); }
 
+  /* A PDF draft: its real pages on a quiet desk, the quoted passages marked on them. */
+  .cw-pdf-stage { background: var(--muted); }
+  .cw-pdf-page { box-shadow: 0 1px 2px rgb(22 22 26 / 0.08), 0 0 0 1px var(--border); }
+  .cw-pdf-mark {
+    background: color-mix(in srgb, var(--tile-b, var(--hl)) 38%, transparent);
+    border-bottom: 2px dotted color-mix(in srgb, var(--tile-a, var(--foreground)) 75%, transparent);
+    mix-blend-mode: multiply;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .cw-pdf-mark:hover { background: color-mix(in srgb, var(--tile-b, var(--hl)) 55%, transparent); }
+  .cw-pdf-mark--active { background: color-mix(in srgb, var(--tile-b, var(--hl)) 70%, transparent); border-bottom-style: solid; }
+  .cw-pdf-mark:focus-visible { outline: 2px solid var(--tile-a, var(--foreground)); outline-offset: 1px; }
+
   /* Focus mode: the document alone, full screen. */
   .cw-focus { position: fixed; inset: 0; z-index: 55; overflow-y: auto; background: #fff; padding: 0 max(16px, calc((100vw - 760px) / 2)) 48px; }
 

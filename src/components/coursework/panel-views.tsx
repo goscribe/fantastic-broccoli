@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { ArrowUp, Check } from "lucide-react";
-import { courseworkApi, type ChatTurn, type GradeResult, type RubricDetail, type RubricSummary } from "@/lib/api/coursework";
+import { COURSEWORK_CHAT_LIMIT_PREFIX, courseworkApi, type ChatTurn, type GradeResult, type RubricDetail, type RubricSummary } from "@/lib/api/coursework";
 import { criterionFor, criterionNext, hasMarks, rubricLine } from "@/lib/coursework";
 import { cn } from "@/lib/utils";
 import { BandNumber, BandTrack } from "./band-track";
@@ -180,6 +180,16 @@ export function RubricView({ rubric, result, hideMarks }: { rubric: RubricSummar
                   })}
                 </ul>
               )}
+              {d && (d.pitfalls?.length ?? 0) > 0 && (
+                <div className="mt-3">
+                  <p className="text-small font-extrabold text-foreground">{t("cw.rubric.pitfalls")}</p>
+                  <ul className="mt-1 list-disc pl-5 text-ui text-foreground/80">
+                    {d.pitfalls!.map((l, i) => (
+                      <li key={i}>{l}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {d && d.lookFor.length > 0 && (
                 <div className="mt-3">
                   <p className="text-small font-extrabold text-foreground">{t("cw.rubric.look")}</p>
@@ -203,26 +213,30 @@ export function RubricView({ rubric, result, hideMarks }: { rubric: RubricSummar
 export interface ChatState {
   turns: ChatTurn[];
   busy: boolean;
-  failed: boolean;
+  /** Why the last message got no answer: today's messages are used up (the server's words), or it did not send. */
+  failed: string | null;
 }
 
 /** The conversation about one document, kept by the host so it survives a change of tab. */
-export function useChat(documentId: string, reviewId: string | undefined): ChatState & { ask: (message: string) => void } {
-  const [state, setState] = useState<ChatState>({ turns: [], busy: false, failed: false });
+export function useChat(documentId: string, draftId: string | undefined, reviewId: string | undefined): ChatState & { ask: (message: string) => void } {
+  const [state, setState] = useState<ChatState>({ turns: [], busy: false, failed: null });
   const turns = useRef<ChatTurn[]>([]);
   const ask = (message: string) => {
-    const text = message.trim();
-    if (!text || state.busy) return;
-    const history = turns.current;
-    turns.current = [...history, { role: "user", text }];
-    setState({ turns: turns.current, busy: true, failed: false });
+    const content = message.trim().slice(0, 2000);
+    if (!content || state.busy) return;
+    const history = turns.current.slice(-12);
+    turns.current = [...turns.current, { role: "user", content }];
+    setState({ turns: turns.current, busy: true, failed: null });
     courseworkApi
-      .ask({ documentId, reviewId, message: text, history })
+      .ask({ documentId, ...(draftId ? { draftId } : {}), ...(reviewId ? { reviewId } : {}), message: content, history })
       .then((out) => {
-        turns.current = [...turns.current, { role: "assistant", text: out.answer }];
-        setState({ turns: turns.current, busy: false, failed: false });
+        turns.current = [...turns.current, { role: "assistant", content: out.reply }];
+        setState({ turns: turns.current, busy: false, failed: null });
       })
-      .catch(() => setState({ turns: turns.current, busy: false, failed: true }));
+      .catch((err) => {
+        const limit = err instanceof Error && err.message.startsWith(COURSEWORK_CHAT_LIMIT_PREFIX);
+        setState({ turns: turns.current, busy: false, failed: limit ? err.message.slice(COURSEWORK_CHAT_LIMIT_PREFIX.length).replace(/^[:\s]+/, "") : "" });
+      });
   };
   return { ...state, ask };
 }
@@ -295,7 +309,7 @@ export function ChatView({ chat, result, hideMarks }: { chat: ChatState & { ask:
           {chat.turns.map((turn, i) => (
             <li key={i} className={turn.role === "user" ? "self-end rounded-[18px] rounded-br-[6px] bg-muted px-4 py-2.5 text-ui text-foreground max-w-[88%]" : "text-ui text-foreground"}>
               <span className="sr-only">{turn.role === "user" ? t("cw.chat.you") : t("cw.chat.scribe")}: </span>
-              {turn.text.split(/\n{2,}/).map((para, k) => (
+              {turn.content.split(/\n{2,}/).map((para, k) => (
                 <p key={k} className={k > 0 ? "mt-2" : undefined}>
                   {para}
                 </p>
@@ -303,9 +317,9 @@ export function ChatView({ chat, result, hideMarks }: { chat: ChatState & { ask:
             </li>
           ))}
           {chat.busy && <li className="text-ui text-muted-foreground">{t("cw.chat.thinking")}</li>}
-          {chat.failed && (
-            <li className="text-ui font-semibold text-rose-700" role="alert">
-              {t("cw.chat.failed")}
+          {chat.failed !== null && (
+            <li className="text-ui font-semibold text-foreground" role="alert">
+              {chat.failed || t("cw.chat.failed")}
             </li>
           )}
         </ol>

@@ -17,6 +17,8 @@ import {
   formatBand,
   gradeRange,
   groupRubrics,
+  draftEntries,
+  draftKindLabel,
   hasMarks,
   locateAnchors,
   ringSegments,
@@ -210,4 +212,24 @@ test("the ring gives each criterion its share and draws its band along it", () =
   const segs = ringSegments([{ letter: "A", maxMarks: 6, bandLow: 3, bandHigh: 6 }, { letter: "B", maxMarks: 18, bandLow: 9, bandHigh: 9 }], 0.02);
   assert.deepEqual(segs.map((s) => [s.letter, +s.start.toFixed(2), +s.end.toFixed(2), s.low, s.high]), [["A", 0.01, 0.24, 0.5, 1], ["B", 0.26, 0.99, 0.5, 0.5]]);
   assert.deepEqual(ringSegments([]), []);
+});
+
+test("the draft switcher lists reviews in order, then drafts nothing has read, labelled by kind", () => {
+  const pdf = { id: "f1", kind: "file" as const, number: 1, format: "pdf" };
+  const text = { id: "t2", kind: "text" as const, number: 2 };
+  const label = (e: ReturnType<typeof draftEntries>) => e.map((d) => [d.reviewId, d.draftId, d.label]);
+  // A PDF just uploaded.
+  assert.deepEqual(label(draftEntries([], [pdf])), [[null, "f1", "Draft 1 · PDF"]]);
+  // Reviewed as a PDF, then "Edit as text": the text version is the next draft, not reviewed yet.
+  const r1 = { id: "r1", draftId: "f1", draftKind: "file" as const, createdAt: "2026-11-20T10:00:00Z" };
+  assert.deepEqual(label(draftEntries([r1], [text, pdf])), [["r1", "f1", "Draft 1 · PDF"], [null, "t2", "Draft 2 · Text"]]);
+  // The text version reviewed twice (edited in between): each review is a draft the student sent.
+  const r2 = { id: "r2", draftId: "t2", draftKind: "text" as const, createdAt: "2026-11-21T10:00:00Z" };
+  const r3 = { id: "r3", draftId: "t2", draftKind: "text" as const, createdAt: "2026-11-22T10:00:00Z" };
+  assert.deepEqual(label(draftEntries([r3, r1, r2], [text, pdf])), [["r1", "f1", "Draft 1 · PDF"], ["r2", "t2", "Draft 2 · Text"], ["r3", "t2", "Draft 3 · Text"]]);
+  // A Word file: the original and the text version the server made from it.
+  assert.deepEqual(label(draftEntries([], [{ id: "w1", kind: "file", number: 1, format: "docx" }, text])), [[null, "w1", "Draft 1 · Word"], [null, "t2", "Draft 2 · Text"]]);
+  assert.equal(draftKindLabel("file", "doc"), "Word");
+  assert.equal(draftKindLabel("file", "image"), "File");
+  assert.equal(draftKindLabel(null), "Text");
 });

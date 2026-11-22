@@ -84,9 +84,8 @@ export function CourseworkStart() {
     setUpload({ name: file.name, state: "reading" });
     try {
       const prior = upload?.state === "ready" ? upload.documentId : undefined;
-      const documentId = await importFile(file, { documentId: prior, rubricId: rubric?.id });
-      const doc = await courseworkApi.document(documentId);
-      setUpload({ name: file.name, state: "ready", documentId, words: doc.wordCount });
+      const out = await importFile(file, { documentId: prior, rubricId: rubric?.id });
+      setUpload({ name: file.name, state: "ready", documentId: out.documentId, words: out.wordCount });
       setPasted("");
     } catch (err) {
       setUpload({ name: file.name, state: "failed", message: t(importErrorKey(err)) });

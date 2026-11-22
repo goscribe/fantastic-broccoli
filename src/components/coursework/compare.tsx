@@ -67,7 +67,7 @@ export function DraftComparisonView({ before, after, fromDraft, toDraft }: { bef
   );
 }
 
-export function CompareSheet({ current, previousId, onClose }: { current: Review; previousId: string; onClose: () => void }) {
+export function CompareSheet({ current, previousId, fromDraft, toDraft, onClose }: { current: Review; previousId: string; /** The two drafts' places in the student's history ("Draft 1 → Draft 2"). */ fromDraft: number; toDraft: number; onClose: () => void }) {
   const { t } = useCw();
   const [prev, setPrev] = useState<Review | null>(null);
   const [failed, setFailed] = useState(false);
@@ -82,14 +82,14 @@ export function CompareSheet({ current, previousId, onClose }: { current: Review
     };
   }, [previousId]);
   return (
-    <Sheet title={prev ? t("cw.cmp.title", { a: prev.draftNumber, b: current.draftNumber }) : t("cw.act.compare", { n: "" }).trim()} onClose={onClose} labelId="cw-compare-title">
+    <Sheet title={t("cw.cmp.title", { a: fromDraft, b: toDraft })} onClose={onClose} labelId="cw-compare-title">
       <div className="cw-scope">
         {failed ? (
           <p className="text-ui text-muted-foreground" role="alert">{t("cw.loadFailed")}</p>
         ) : !prev || !prev.result || !current.result ? (
           <p className="text-ui text-muted-foreground" aria-busy="true">{t("cw.cmp.loading")}</p>
         ) : (
-          <DraftComparisonView before={prev.result} after={current.result} fromDraft={prev.draftNumber} toDraft={current.draftNumber} />
+          <DraftComparisonView before={prev.result} after={current.result} fromDraft={fromDraft} toDraft={toDraft} />
         )}
       </div>
     </Sheet>

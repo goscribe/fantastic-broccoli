@@ -405,6 +405,8 @@ export interface FeedbackAnchor {
   /** Stable id: "A-0" (criterion A's first quote), "cite-claim-1". */
   id: string;
   quote: string;
+  /** For a file draft: the 1-based page the server found the quote on, when it said. */
+  page?: number;
   /** The feedback item it opens: a criterion letter or a citation item id. */
   target: { kind: "criterion"; letter: string } | { kind: "citation"; id: string };
 }
@@ -413,7 +415,10 @@ export interface FeedbackAnchor {
 export function feedbackAnchors(result: GradeResult | null | undefined, citations: CitationsResult | null | undefined): FeedbackAnchor[] {
   const anchors: FeedbackAnchor[] = [];
   for (const c of result?.criteria ?? []) {
-    c.evidence.forEach((e, i) => anchors.push({ id: `${c.letter}-${i}`, quote: e.quote, target: { kind: "criterion", letter: c.letter } }));
+    c.evidence.forEach((e, i) => {
+      const page = (e as { page?: unknown }).page;
+      anchors.push({ id: `${c.letter}-${i}`, quote: e.quote, ...(typeof page === "number" && page >= 1 ? { page } : {}), target: { kind: "criterion", letter: c.letter } });
+    });
   }
   for (const item of citationItems(citations)) {
     if (item.quote && (item.kind === "uncited" || item.kind === "cited_not_listed")) {
@@ -497,4 +502,55 @@ export function ringSegments(criteria: Array<{ letter: string; maxMarks: number;
     at += share;
     return seg;
   });
+}
+
+/* ---------- Draft kinds ---------- */
+
+/** "PDF", "Word", "File", or "Text": what a draft is, for the draft switcher ("Draft 1 · PDF"). */
+export function draftKindLabel(kind: "file" | "text" | null | undefined, format?: string | null): string {
+  if (kind !== "file") return "Text";
+  if (format === "pdf") return "PDF";
+  if (format === "docx" || format === "doc") return "Word";
+  return "File";
+}
+
+export interface DraftEntry {
+  /** The review this entry shows, or null for a draft no review has read yet. */
+  reviewId: string | null;
+  /** The draft on the document side. */
+  draftId: string | null;
+  kind: "file" | "text";
+  /** Its place in the student's history, 1-based: every review is a draft they sent, in order. */
+  position: number;
+  /** "Draft 1 · PDF". */
+  label: string;
+}
+
+/**
+ * The draft switcher: every review in the order it was asked for (labelled by
+ * what it read: the PDF as uploaded, or text), then each draft that no review
+ * has read yet (a file just uploaded, the text version made from it). The
+ * numbering is the student's own history ("Draft 1 · PDF", "Draft 2 · Text"),
+ * so a text draft reviewed again after edits is the next draft.
+ */
+export function draftEntries(
+  reviews: Array<{ id: string; draftId?: string | null; draftKind?: "file" | "text" | null; createdAt: Date | string }>,
+  drafts: Array<{ id: string; kind: "file" | "text"; number: number; format?: string | null }>,
+): DraftEntry[] {
+  const byId = new Map(drafts.map((d) => [d.id, d]));
+  const out: DraftEntry[] = [];
+  const add = (reviewId: string | null, draftId: string | null, kind: "file" | "text", format?: string | null) => {
+    const position = out.length + 1;
+    out.push({ reviewId, draftId, kind, position, label: `Draft ${position} · ${draftKindLabel(kind, format)}` });
+  };
+  const reviewed = new Set<string>();
+  for (const r of [...reviews].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())) {
+    const d = r.draftId ? byId.get(r.draftId) : undefined;
+    if (r.draftId) reviewed.add(r.draftId);
+    add(r.id, r.draftId ?? null, r.draftKind ?? d?.kind ?? "text", d?.format);
+  }
+  for (const d of [...drafts].sort((a, b) => a.number - b.number)) {
+    if (!reviewed.has(d.id)) add(null, d.id, d.kind, d.format);
+  }
+  return out;
 }
