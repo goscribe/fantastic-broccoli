@@ -620,3 +620,8 @@ input[type="range"].param-slider:active::-moz-range-thumb {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
+
+/* Voice scribe: the answer box spoken words go into. */
+[data-voice-target] {
+  box-shadow: 0 0 0 2px var(--accent) !important;
+}
