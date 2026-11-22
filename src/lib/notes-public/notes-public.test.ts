@@ -79,7 +79,7 @@ describe("slug / URL logic", () => {
 });
 
 describe("indexability rule", () => {
-  test("needs a note and enough checked questions; drafts only with the flag", () => {
+  test("needs a note and enough checked questions; drafts unless the flag turns them off", () => {
     const n = MIN_INDEXABLE_QUESTIONS;
     assert.equal(n, 6);
     assert.equal(isTopicIndexable({ note: "reviewed", questionCount: n, indexDrafts: false }), true);
@@ -89,10 +89,11 @@ describe("indexability rule", () => {
     assert.equal(isTopicIndexable({ note: "draft", questionCount: 10, indexDrafts: true }), true);
   });
   test("NOTES_INDEX_DRAFTS parsing", () => {
-    assert.equal(indexDraftsFromEnv(undefined), false);
+    assert.equal(indexDraftsFromEnv(undefined), true);
     assert.equal(indexDraftsFromEnv("1"), true);
     assert.equal(indexDraftsFromEnv("true"), true);
     assert.equal(indexDraftsFromEnv("0"), false);
+    assert.equal(indexDraftsFromEnv("false"), false);
   });
   test("sitemap lists only indexable topics and the hubs that lead to them", () => {
     const rows = [

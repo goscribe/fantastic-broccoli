@@ -60,6 +60,7 @@ import "@/lib/i18n/workspace";
 import "@/lib/i18n/misc";
 import { toast, toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
+import { chooseStudyLength } from "@/lib/study-length-client";
 
 interface ChatMessage {
   role: "user" | "bot";
@@ -244,14 +245,16 @@ function WorkspaceChatPage() {
       query.state.data?.some((s) => s.generating) ? 4000 : false,
   });
   const startQuick5 = useMutation({
-    mutationFn: () =>
-      createStudySession({
-        workspaceId,
-        title: workspace?.title ?? "Quick 5",
-        depth: "light",
-        durationMinutes: 5,
-        quickStart: true,
-      }),
+    mutationFn: async () =>
+      createStudySession(
+        await chooseStudyLength({
+          workspaceId,
+          title: workspace?.title ?? "Quick 5",
+          depth: "light" as const,
+          durationMinutes: 5,
+          quickStart: true,
+        }),
+      ),
     onSuccess: (created) => {
       queryClient.invalidateQueries({
         queryKey: ["study-sessions", workspaceId],
