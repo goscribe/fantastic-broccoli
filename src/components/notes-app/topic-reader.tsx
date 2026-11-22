@@ -9,6 +9,7 @@ import { StartQuick5 } from "@/components/notes-public/practice";
 import { TopicView, type NotePaths } from "@/components/notes-public/topic-view";
 import { attachedNotesApi, notesApi } from "@/lib/api/notes";
 import type { PublicTopic } from "@/lib/api/public-notes";
+import type { FlashcardSet } from "@/lib/notes-public/flashcard-deck";
 import { isLocked } from "@/lib/notes-public/gate";
 import { resolveSegment, topicSlug } from "@/lib/notes-public/slug";
 import { LIBRARY_PATH, libraryCourseHref, noteHref } from "@/lib/notes";
@@ -95,6 +96,20 @@ function Reader({ data }: { data: PublicTopic }) {
   const [addingNow, setAddingNow] = useState(false);
   const [missed, setMissed] = useState<{ logged: number; unlogged: number }>({ logged: 0, unlogged: 0 });
   const level = topic.hlOnly ? ("HL" as const) : undefined;
+  /** The topic's deck (free cards and the total), so the contents rail lists "Flashcards" as the public page does; the deck itself loads its cards. */
+  const [flashcards, setFlashcards] = useState<FlashcardSet | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`/api/notes-flashcards/${encodeURIComponent(course.id)}/${encodeURIComponent(topic.id)}`)
+      .then((r) => (r.ok ? (r.json() as Promise<FlashcardSet>) : null))
+      .then((set) => {
+        if (!cancelled) setFlashcards(set);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [course.id, topic.id]);
 
   useEffect(() => {
     track("notes.opened_in_app", { from: fromSubject ? "subject" : "library", courseId: course.id }, fromSubject ?? undefined);
@@ -164,6 +179,7 @@ function Reader({ data }: { data: PublicTopic }) {
         course={course}
         unit={unit}
         data={data}
+        flashcards={flashcards}
         app={{
           paths: APP_PATHS,
           onAnswer,
