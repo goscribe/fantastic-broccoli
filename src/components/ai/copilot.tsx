@@ -310,8 +310,7 @@ export function Copilot({
         streamedRef = () => streamed;
         let toolStatus = "";
         const paintStream = () => {
-          const textSoFar =
-            streamed + (toolStatus ? `\n\n*${toolStatus}…*` : "");
+          const textSoFar = streamed;
           setMessages((prev) =>
             prev.map((m) =>
               m.id === assistantId
@@ -323,6 +322,7 @@ export function Copilot({
                         id: streamPartId,
                         text: textSoFar,
                         done: false,
+                        status: toolStatus || undefined,
                       },
                     ],
                   }
@@ -549,11 +549,7 @@ export function Copilot({
         </button>
       </div>
 
-      {ask?.pinned && (
-        <p className="shrink-0 border-b border-border px-4 py-2 text-[12.5px] leading-snug text-muted-foreground line-clamp-2" data-pinned>
-          {ask.pinned}
-        </p>
-      )}
+      {ask?.pinned && <PinnedQuestion text={ask.pinned} />}
 
       {/* Messages */}
       <div ref={scrollRef} className={cn("flex-1 overflow-y-auto px-4 py-4 space-y-4", variant === "page" && "px-0 py-6")}>
@@ -645,9 +641,18 @@ export function Copilot({
                   )
                 ) : (
                   <div key={part.id} className="text-sm leading-relaxed px-1 py-1">
-                    <MarkdownText text={part.text} />
-                    {!part.done && (
-                      <span className="inline-block w-1.5 h-3.5 ml-0.5 bg-accent align-middle animate-pulse-dot" />
+                    {part.text && (
+                      // While streaming, the caret sits at the end of the last line (chat-caret, globals.css).
+                      <MarkdownText text={part.text} className={cn("block space-y-2.5", !part.done && !part.status && "chat-caret")} />
+                    )}
+                    {!part.done && part.status && (
+                      <p className={cn("flex items-center gap-2 text-[13px] font-semibold text-muted-foreground", part.text && "mt-2")} role="status">
+                        <span className="size-1.5 shrink-0 rounded-full bg-accent animate-pulse-dot" aria-hidden />
+                        <span className="animate-shimmer">{part.status}…</span>
+                      </p>
+                    )}
+                    {!part.done && !part.text && !part.status && (
+                      <span className="inline-block h-3.5 w-1.5 animate-pulse-dot rounded-[1px] bg-accent align-middle" aria-hidden />
                     )}
                   </div>
                 ),
@@ -835,5 +840,37 @@ function CopilotBubble({
         className="absolute -right-[6px] top-1/2 size-3 -translate-y-1/2 rotate-45 border-r border-t border-border bg-card"
       />
     </div>
+  );
+}
+
+/**
+ * The question a Hint / Why? is about, pinned above the chat. The clamp is on
+ * the inner text (padding on an element with line-clamp shows a sliver of
+ * the next line); tapping it shows the whole question.
+ */
+function PinnedQuestion({ text }: { text: string }) {
+  const [open, setOpen] = useState(false);
+  // "Question 3 · A parcel classifier…": the label in bold, the question after it.
+  const m = text.match(/^(Question\s+\S+)\s*[·:]\s*([\s\S]*)$/);
+  return (
+    <button
+      type="button"
+      onClick={() => setOpen((o) => !o)}
+      aria-expanded={open}
+      className="shrink-0 border-b border-border bg-muted/40 px-4 py-2.5 text-left transition-colors hover:bg-muted/70"
+      data-pinned
+    >
+      <span className={cn("block text-[12.5px] leading-[1.45] text-muted-foreground", !open && "line-clamp-2")}>
+        {m ? (
+          <>
+            <span className="font-bold text-foreground">{m[1]}</span>
+            <span className="mx-1.5" aria-hidden>·</span>
+            {m[2]}
+          </>
+        ) : (
+          text
+        )}
+      </span>
+    </button>
   );
 }

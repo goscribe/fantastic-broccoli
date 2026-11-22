@@ -248,6 +248,20 @@ input[type="range"].param-slider:active::-moz-range-thumb {
   animation: pulse-dot 1.2s ease-in-out infinite;
 }
 
+/* Streaming chat text: a blinking caret at the end of the last line, not on a line of its own. */
+.chat-caret > :last-child:not(ul, ol, table, pre, div)::after,
+.chat-caret > :is(ul, ol):last-child > li:last-child::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 0.95em;
+  margin-left: 2px;
+  border-radius: 1px;
+  vertical-align: -0.1em;
+  background: var(--accent);
+  animation: pulse-dot 1.2s ease-in-out infinite;
+}
+
 @keyframes shimmer {
   from { background-position: 200% 0; }
   to { background-position: -200% 0; }
