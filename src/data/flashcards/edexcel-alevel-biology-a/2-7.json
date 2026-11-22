@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-7",
+  "topicCode": "2.7",
+  "topicName": "The genetic code",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:06.978Z",
+  "cards": [
+    {
+      "id": "1leuj37",
+      "kind": "term",
+      "front": "What is the genetic code?",
+      "back": "The **genetic code** is the set of rules linking mRNA codons to amino acids or stop signals, so the base order of a gene sets the amino acid order of a polypeptide.",
+      "hint": "Think about what the base order of a gene is used to build.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16ms0am",
+      "kind": "term",
+      "front": "What is a codon?",
+      "back": "A **codon** is a three-base sequence in mRNA that specifies one amino acid or a stop signal.",
+      "hint": "Compare it with the three-base unit read from DNA.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rc5qkc",
+      "kind": "formula",
+      "front": "What does the calculation $4^3=64$ show about codon length?",
+      "back": "$4$ is the number of bases and $3$ is the codon length. Three bases give $64$ possible codons, enough for the 20 amino acids. One or two bases give too few, since $4^2=16$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1oux6po",
+      "kind": "concept",
+      "front": "Why is the genetic code described as degenerate?",
+      "back": "There are 64 codons but only 20 amino acids, so most amino acids are specified by **more than one codon**.",
+      "hint": "Compare the number of codons with the number of amino acids.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ksxxoy",
+      "kind": "concept",
+      "front": "What does it mean that the genetic code is non-overlapping?",
+      "back": "Each base belongs to **one codon only**, so codons follow one another along the mRNA.",
+      "hint": "Think about whether a single base can be shared by two codons.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16y01ma",
+      "kind": "concept",
+      "front": "Why can bacteria make a human polypeptide when given the human gene?",
+      "back": "The genetic code is **universal**: nearly all organisms use the same codon for the same amino acid, so the same polypeptide is built.",
+      "hint": "Think about what stays the same across living cells.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ww0vl2",
+      "kind": "concept",
+      "front": "How does degeneracy give some protection against mutation?",
+      "back": "A change in the **third base** of a codon often still specifies the same amino acid, so the polypeptide is unchanged.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09agcqa",
+      "kind": "term",
+      "front": "What is the start codon and where does reading begin?",
+      "back": "The **start codon** is AUG. A ribosome begins reading the mRNA there, and AUG specifies methionine.",
+      "hint": "Consider which amino acid this codon specifies.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "090mjxd",
+      "kind": "term",
+      "front": "Which three codons are stop codons?",
+      "back": "**UAA**, **UAG** and **UGA** are stop codons. None specifies an amino acid, and they end polypeptide synthesis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1089i91",
+      "kind": "concept",
+      "front": "Why must a ribosome start reading at exactly the right base?",
+      "back": "Codons do not overlap, so starting one base along gives a completely different set of codons and therefore different amino acids.",
+      "hint": "Think about how codons are grouped along the mRNA.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18qsrb8",
+      "kind": "process",
+      "front": "What are the steps to find amino acids from a DNA template strand?",
+      "back": "1) Pair each template base with its mRNA partner (A with U, T with A, C with G, G with C). 2) Read the mRNA in codons. 3) Look up each codon in the code table.",
+      "hint": "Start with the base pairing rule.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hnzevr",
+      "kind": "mistake",
+      "front": "A student looks up the DNA triplet TAC directly in the code table. What is wrong?",
+      "back": "Code tables list **mRNA codons**, so the DNA triplet must first be converted to mRNA by base pairing. TAC pairs to give AUG, which specifies methionine.",
+      "hint": "Check which molecule the code table is written for.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sbyvtj",
+      "kind": "example",
+      "front": "Which amino acids does the template strand 3′ TAC CCG AAA ATT 5′ specify?",
+      "back": "Methionine, glycine and phenylalanine, then synthesis stops at UAA. The mRNA is 5′ AUG GGC UUU UAA 3′.",
+      "hint": "Pair each template base first, then read the codons.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1x7f2pl",
+      "kind": "example",
+      "front": "Which amino acids does the mRNA 5′ AUG UUU CUA GAG UGA 3′ specify?",
+      "back": "Methionine, phenylalanine, leucine and glutamic acid. UGA is a stop codon, so reading ends there.",
+      "hint": "Read the mRNA in groups of three and check each in the table.",
+      "sectionId": "s5"
+    }
+  ]
+}

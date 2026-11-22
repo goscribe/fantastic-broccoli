@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-5",
+  "topicCode": "3.5",
+  "topicName": "Organelles in electron micrographs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:27.070Z",
+  "cards": [
+    {
+      "id": "1mrl4mx",
+      "kind": "concept",
+      "front": "Why can an electron microscope show finer detail than a light microscope?",
+      "back": "Electrons have a much shorter wavelength than light, so the **resolution** is higher and two close points can be seen as separate.",
+      "hint": "Think about what limits how close two points can be and still be seen apart.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yd1xtz",
+      "kind": "formula",
+      "front": "Which equation links actual size, image size and magnification, and what does each symbol mean?",
+      "back": "$A=\\frac{I}{M}$, where $A$ is actual size, $I$ is image size and $M$ is **magnification**. Magnification has no units.",
+      "hint": "Start from the word equation: which quantity is divided by which?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lzksza",
+      "kind": "concept",
+      "front": "Which features tell a nucleus, a mitochondrion and a chloroplast apart in an electron micrograph?",
+      "back": "The **nucleus** is about 10 µm with a double envelope, pores, chromatin and a nucleolus. A **mitochondrion** is about 1 µm with cristae in a grey matrix. A **chloroplast** is several µm long with grana.",
+      "hint": "Compare their sizes first, then look for the internal feature that is unique to each.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "00c4ggf",
+      "kind": "concept",
+      "front": "How does a transmission electron microscope form its image?",
+      "back": "A beam of **electrons** passes through a very thin slice of specimen. Dense parts absorb more electrons and look darker, giving a flat black-and-white image of the inside of the cell.",
+      "hint": "Think about what the specimen must be like for the beam to pass through it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lmm3pe",
+      "kind": "concept",
+      "front": "How does a scanning electron microscope build its image?",
+      "back": "It scans electrons across the **surface** of a specimen, giving a three-dimensional view of the outside of a structure.",
+      "hint": "Compare where the electrons go here with the transmission type.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wf9nbh",
+      "kind": "example",
+      "front": "A mitochondrion is 30 mm long in a micrograph at ×10 000. What is its actual length in µm?",
+      "back": "$3.0\\,\\mathrm{\\mu m}$. Convert first: $30\\,\\mathrm{mm}=30\\,000\\,\\mathrm{\\mu m}$, then $A=\\frac{30\\,000}{10\\,000}=3.0$.",
+      "hint": "Check the units of the image size before you divide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rnu1yn",
+      "kind": "mistake",
+      "front": "What is the common error when working out actual size from a micrograph?",
+      "back": "**Dividing before converting units.** Convert the image size to the unit you want first, otherwise the answer stays in the wrong unit, such as mm instead of µm.",
+      "hint": "Look at the units of the image size you start with.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mg4gcp",
+      "kind": "term",
+      "front": "What is chromatin and why does it look dark in a micrograph?",
+      "back": "**Chromatin** is DNA bound to protein. It stains darkly, so it shows as dark patches inside the nucleus.",
+      "hint": "Think about what the nucleus is made of.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xncqdb",
+      "kind": "term",
+      "front": "What is the nucleolus and what happens there?",
+      "back": "The **nucleolus** is a dense region inside the nucleus where ribosomal RNA is made and ribosomes begin to be assembled.",
+      "hint": "Think about where ribosomes start to form.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1e8sa9c",
+      "kind": "concept",
+      "front": "Why is the inner membrane of a mitochondrion folded into cristae?",
+      "back": "The folds increase the **surface area** for aerobic respiration, giving more space for the processes involved.",
+      "hint": "Think about what folding a membrane does to its total area.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rgxn8k",
+      "kind": "mistake",
+      "front": "Why might a mitochondrion cut across look circular with no cristae visible?",
+      "back": "A thin slice can cut the organelle at an angle that misses the **cristae**. Judge from the whole image, not from one shape.",
+      "hint": "Think about how a thin slice through a three-dimensional object can look.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1di8kgl",
+      "kind": "term",
+      "front": "What is a granum and what is it made of?",
+      "back": "A **granum** is a stack of flattened thylakoid sacs inside a chloroplast.",
+      "hint": "Think about how the thylakoids are arranged inside the chloroplast.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0afqbjw",
+      "kind": "concept",
+      "front": "What does finding a chloroplast in a micrograph suggest about the cell?",
+      "back": "It is a **plant cell** that photosynthesises, because animal cells have no chloroplasts.",
+      "hint": "Consider which cell types carry out photosynthesis.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "119b48x",
+      "kind": "concept",
+      "front": "Why do muscle cells contain many mitochondria?",
+      "back": "Muscle cells use a lot of energy, so they have many **mitochondria**, where aerobic respiration releases energy.",
+      "hint": "Think about which cell activities need the most energy.",
+      "sectionId": "s4"
+    }
+  ]
+}

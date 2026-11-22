@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-10",
+  "topicCode": "4.10",
+  "topicName": "Cellulose microfibrils and plant cell walls",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:52.693Z",
+  "cards": [
+    {
+      "id": "0odecet",
+      "kind": "concept",
+      "front": "How do many weak hydrogen bonds give a cellulose microfibril its strength?",
+      "back": "Hydroxyl groups on neighbouring chains form **hydrogen bonds**. Thousands acting together hold the chains firmly, forming a **microfibril**. Each bond alone is weak, so the number of bonds matters.",
+      "hint": "Think about where the OH groups on each chain point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1mdq5d2",
+      "kind": "process",
+      "front": "What are the steps by which a plant cell resists bursting when water enters it?",
+      "back": "1 Water enters by **osmosis** and the cell swells. 2 The cell contents push outward on the wall. 3 Strong microfibrils stop the wall stretching much. 4 The push builds **turgor pressure**, so the cell stays firm and does not burst.",
+      "hint": "Start with what the cell is sitting in.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tjiaaq",
+      "kind": "concept",
+      "front": "Why are microfibril layers laid down at different angles?",
+      "back": "The crossed layers let the wall resist **stretching in every direction**, not just one.",
+      "hint": "Compare a single strand pulled from one end with a crossed mesh.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12f2v2n",
+      "kind": "term",
+      "front": "What is tensile strength?",
+      "back": "The ability of a material to resist being **pulled apart** without breaking. Microfibrils have high tensile strength.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0va45xi",
+      "kind": "term",
+      "front": "What is the cell wall in a plant cell?",
+      "back": "A **supporting layer** that sits outside the cell-surface membrane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05c03s2",
+      "kind": "mistake",
+      "front": "A student writes that a single hydrogen bond gives the wall its strength. What is wrong?",
+      "back": "Each **hydrogen bond** is weak. Strength comes from many bonds acting together.",
+      "hint": "Compare one bond with thousands.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sfncd7",
+      "kind": "concept",
+      "front": "What happens to a plant when its cells lose water?",
+      "back": "**Turgor pressure** falls, the cells go soft, and the plant **wilts**.",
+      "hint": "Think about what the cell contents push against.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14al6sc",
+      "kind": "mistake",
+      "front": "A student says the cell wall controls what enters the cell. What is wrong?",
+      "back": "The wall is **fully permeable**, with wide gaps between microfibrils. The cell-surface membrane is the part that controls entry.",
+      "hint": "Compare the gaps in the wall with the membrane's job.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10drcul",
+      "kind": "term",
+      "front": "What are plasmodesmata?",
+      "back": "**Narrow channels** through cell walls that link the cytoplasm of neighbouring plant cells.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t6qqnw",
+      "kind": "term",
+      "front": "What is the middle lamella?",
+      "back": "A **thin layer** between neighbouring cell walls that cements the cells together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g992qa",
+      "kind": "concept",
+      "front": "Why does the structure of the wall matter to the whole plant?",
+      "back": "Strength stops the cell bursting, support holds the plant upright, and permeability lets **water and ions** reach the membrane.",
+      "hint": "Think about the three features: microfibrils, layers and gaps.",
+      "sectionId": "s5"
+    }
+  ]
+}

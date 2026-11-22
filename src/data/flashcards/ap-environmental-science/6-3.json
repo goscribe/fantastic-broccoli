@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-3",
+  "topicCode": "6.3",
+  "topicName": "Fuel types and uses",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:19.563Z",
+  "cards": [
+    {
+      "id": "03vzttg",
+      "kind": "concept",
+      "front": "What happens chemically when a fuel undergoes combustion?",
+      "back": "The fuel reacts rapidly with **oxygen** to form products such as carbon dioxide and water, releasing its stored chemical energy as heat.",
+      "hint": "Think about what the campfire wood is turning into.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14mpljc",
+      "kind": "term",
+      "front": "What is energy density?",
+      "back": "**Energy density** is the amount of energy a fuel stores per unit of mass or volume, such as megajoules per kilogram.",
+      "hint": "Think about how far a car can travel on one small tank.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tnqydm",
+      "kind": "concept",
+      "front": "Why is there no single best fuel for every job?",
+      "back": "Each use has different needs, so the **fuel must match the task**. Planners weigh portability, supply, cost, infrastructure, and environmental effects.",
+      "hint": "Start with what the job needs before choosing the fuel.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "020prfn",
+      "kind": "formula",
+      "front": "What does the balanced equation for methane combustion show?",
+      "back": "$\\mathrm{CH_4(g)+2O_2(g)\\rightarrow CO_2(g)+2H_2O(g)}$: one **methane** molecule reacts with two oxygen molecules to give one carbon dioxide and two water molecules.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1b5omvz",
+      "kind": "term",
+      "front": "What is petroleum?",
+      "back": "**Petroleum**, also called crude oil, is a liquid mixture of hydrocarbons that refineries separate into gasoline, diesel, and jet fuel.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0uqk9iv",
+      "kind": "term",
+      "front": "What is coal made of, mostly?",
+      "back": "**Coal** is a solid fossil fuel formed from compressed plant matter and made up mostly of carbon.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01s2z6m",
+      "kind": "concept",
+      "front": "Why are fossil fuels classed as nonrenewable?",
+      "back": "They form over millions of years from buried remains of ancient organisms, so new supplies form far too slowly to replace what people use.",
+      "hint": "Consider how long the formation process takes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ddce1t",
+      "kind": "term",
+      "front": "What is a biofuel?",
+      "back": "A **biofuel** is a liquid or gas made from recently living organic material, such as ethanol made from corn or sugarcane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07ehuhd",
+      "kind": "mistake",
+      "front": "Why is it wrong to call nuclear power a combustion process?",
+      "back": "Nuclear fuel is not burned. Its **atoms split** by fission, and no reaction with oxygen takes place.",
+      "hint": "Compare what happens to the fuel atoms with what happens in a campfire.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d03yfu",
+      "kind": "process",
+      "front": "What are the steps by which nuclear fuel produces electricity?",
+      "back": "1) Uranium atoms split by fission. 2) The heat released boils water. 3) The steam generates electricity.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06d2vwt",
+      "kind": "concept",
+      "front": "What is the environmental drawback of natural gas leaks?",
+      "back": "Leaks release **methane**, a greenhouse gas, even though natural gas burns cleaner than coal.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xkwptx",
+      "kind": "concept",
+      "front": "Why is nuclear fuel a lower-carbon choice for electricity than coal?",
+      "back": "It releases no **carbon dioxide** during operation because atoms split rather than burn. A drawback is radioactive waste that needs long-term storage.",
+      "hint": "Compare the emissions from fission with those from coal combustion.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dsnzgn",
+      "kind": "term",
+      "front": "What is a greenhouse gas?",
+      "back": "A **greenhouse gas**, such as carbon dioxide or methane, absorbs heat radiated from Earth and warms the lower atmosphere.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-2-1-3",
+  "topicCode": "3.2.1.3",
+  "topicName": "Particles, antiparticles and photons",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:54.058Z",
+  "cards": [
+    {
+      "id": "1tpenlf",
+      "kind": "term",
+      "front": "What is an antiparticle?",
+      "back": "An **antiparticle** is the partner of a particle. It has the same mass but opposite charge and other opposite properties.",
+      "hint": "Compare the electron with its partner.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fwb27x",
+      "kind": "term",
+      "front": "What is a photon?",
+      "back": "A **photon** is a packet of electromagnetic energy. It has no charge and zero rest mass, but it carries energy and momentum.",
+      "hint": "Think about how electromagnetic radiation is emitted and absorbed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02y6c8q",
+      "kind": "formula",
+      "front": "Which equation links a photon's energy to its frequency, and what does each symbol mean?",
+      "back": "$E=hf$, where $E$ is the photon energy in $\\text{J}$, $h$ is the **Planck constant** $6.63\\times10^{-34}\\,\\text{J s}$, and $f$ is the frequency in $\\text{Hz}$.",
+      "hint": "Think about how energy changes when frequency doubles.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "090d2oz",
+      "kind": "concept",
+      "front": "Why does a photon of blue light carry more energy than a photon of red light?",
+      "back": "Blue light has a higher **frequency**, and photon energy is directly proportional to frequency. A higher frequency also means a shorter wavelength.",
+      "hint": "Compare the wavelengths of blue and red light.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08rqhl4",
+      "kind": "mistake",
+      "front": "Why is it wrong to picture a photon as a tiny ball of matter?",
+      "back": "A photon has zero rest mass and no charge. It is a packet of energy that carries energy and momentum, not matter.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0suahom",
+      "kind": "example",
+      "front": "Calculate the energy in joules of a photon with a wavelength of 500 nm.",
+      "back": "$E=3.98\\times10^{-19}\\,\\text{J}$. Convert to $5.00\\times10^{-7}\\,\\text{m}$, find $f=6.00\\times10^{14}\\,\\text{Hz}$, then use $E=hf$.",
+      "hint": "Convert the wavelength to metres first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "151p7e6",
+      "kind": "mistake",
+      "front": "A student puts a wavelength of 500 in nanometres straight into $E=\\frac{hc}{\\lambda}$. What goes wrong?",
+      "back": "The answer is wrong by a factor of $10^{9}$. Convert nm to m first using $1\\,\\text{nm}=10^{-9}\\,\\text{m}$, so $\\lambda=5.00\\times10^{-7}\\,\\text{m}$.",
+      "hint": "Check the unit of wavelength the equation needs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14v45wk",
+      "kind": "term",
+      "front": "What is annihilation?",
+      "back": "**Annihilation** is when a particle and its antiparticle meet and vanish. Their total energy is carried away by photons.",
+      "hint": "Think about what happens to a particle when it meets its partner.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0n3gpl9",
+      "kind": "concept",
+      "front": "Why are two photons, not one, produced when an electron and a positron at rest annihilate?",
+      "back": "The total momentum before the collision is zero. A single photon would carry momentum away, so two photons leave in opposite directions and their momenta cancel.",
+      "hint": "Think about the motion of the pair just before they meet.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ho1q71",
+      "kind": "mistake",
+      "front": "What is wrong with the idea that annihilation destroys energy?",
+      "back": "Energy is not destroyed. The rest energy of the pair is carried away by the photons, so mass is converted into photon energy.",
+      "hint": "Think about where the rest energy goes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1693p00",
+      "kind": "formula",
+      "front": "What does the rest energy equation $E=mc^{2}$ tell you, and what do its symbols mean?",
+      "back": "The **rest energy** $E$ is the energy equivalent of a particle's mass $m$, where $c$ is the speed of light. Use $m$ in $\\text{kg}$ to get $E$ in $\\text{J}$.",
+      "hint": "Check your idea against the electron's value of 0.511 MeV.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03gv7hb",
+      "kind": "term",
+      "front": "What is pair production?",
+      "back": "**Pair production** is the conversion of a photon into a particle and its antiparticle. The photon needs at least their total rest energy.",
+      "hint": "It is the reverse of annihilation.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "00krlho",
+      "kind": "example",
+      "front": "What is the minimum photon energy, in MeV, needed to create an electron–positron pair?",
+      "back": "**1.02 MeV**, since $2\\times0.511\\,\\text{MeV}=1.02\\,\\text{MeV}$. Any extra energy becomes kinetic energy of the pair.",
+      "hint": "Think about the rest energy of each particle in the pair.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0e4ejq0",
+      "kind": "concept",
+      "front": "Why is an antineutron not identical to a neutron, even though both are neutral?",
+      "back": "Neutral particles still differ from their partners in properties other than charge. So an antineutron is not the same as a neutron.",
+      "hint": "Consider what antiparticles share with their partners.",
+      "sectionId": "s1"
+    }
+  ]
+}

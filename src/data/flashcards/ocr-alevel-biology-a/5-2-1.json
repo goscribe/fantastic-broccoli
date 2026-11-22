@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "5-2-1",
+  "topicCode": "5.2.1",
+  "topicName": "Photosynthesis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:46.717Z",
+  "cards": [
+    {
+      "id": "0n2nim2",
+      "kind": "term",
+      "front": "What is photosynthesis?",
+      "back": "**Photosynthesis** is the process in which light energy is used to make organic molecules, such as glucose, from carbon dioxide and water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xlch8m",
+      "kind": "concept",
+      "front": "Why is photosynthesis split into two linked stages?",
+      "back": "The first stage, which needs light, captures energy into energy-carrying molecules. The second stage uses those molecules to build sugar from carbon dioxide.",
+      "hint": "Ask what the second stage could not do without the first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0n82gjs",
+      "kind": "formula",
+      "front": "What is the overall equation for photosynthesis, with states and the condition?",
+      "back": "$6\\mathrm{CO_2(g)}+6\\mathrm{H_2O(l)}\\xrightarrow{\\mathrm{light}}\\mathrm{C_6H_{12}O_6(aq)}+6\\mathrm{O_2(g)}$. The **light** drives the reaction; the sugar formed is glucose.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cvzzxh",
+      "kind": "concept",
+      "front": "How does the stacking of thylakoids suit their role in photosynthesis?",
+      "back": "Many thylakoid membranes give a **large surface area** for pigments and for the carriers of the light-dependent reactions.",
+      "hint": "Compare them with a single flat membrane.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0aj2d22",
+      "kind": "process",
+      "front": "How is ATP made in the light-dependent reactions?",
+      "back": "Light excites electrons that leave the photosystem and pass along carriers, releasing energy that pumps protons into the thylakoid space. Protons flow back through ATP synthase, making ATP from ADP and phosphate; this is **chemiosmosis**.",
+      "hint": "Start with what light does to the electrons in chlorophyll.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zu14bu",
+      "kind": "process",
+      "front": "What happens during photolysis?",
+      "back": "Light splits water into **protons**, electrons and oxygen. The electrons replace those lost from the photosystem, and the oxygen leaves the chloroplast as a waste gas.",
+      "hint": "Think about what is replaced and what is wasted.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wntc3x",
+      "kind": "term",
+      "front": "What is reduced NADP and what does it do?",
+      "back": "Reduced NADP is a carrier that holds hydrogen as electrons and protons, and supplies it to the Calvin cycle, where it helps convert GP into TP.",
+      "hint": "Compare its role with that of ATP in the same cycle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ysqlez",
+      "kind": "mistake",
+      "front": "Which molecule is the source of the oxygen released during photosynthesis?",
+      "back": "**Water**, not carbon dioxide. Light splits water in photolysis, and the oxygen is released as a gas.",
+      "hint": "Think about the reaction that replaces electrons lost from the photosystem.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qa1ogg",
+      "kind": "process",
+      "front": "What are the steps of the Calvin cycle, in order?",
+      "back": "Carbon dioxide combines with RuBP, catalysed by rubisco, forming an unstable six-carbon compound that splits into two GP. ATP and reduced NADP turn GP into TP. Most TP regenerates RuBP; the rest leaves to make glucose.",
+      "hint": "Begin with the first molecule that joins the cycle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hbwoqo",
+      "kind": "term",
+      "front": "What is the role of rubisco in the Calvin cycle?",
+      "back": "**Rubisco** is the enzyme that catalyses the combination of carbon dioxide with ribulose bisphosphate (RuBP), the first step of the cycle.",
+      "hint": "Think about the first step and what helps it happen.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1g9xcde",
+      "kind": "example",
+      "front": "Why does only one of the six TP from three turns of the Calvin cycle leave the cycle?",
+      "back": "Five of the six TP, holding 15 carbon atoms, regenerate three RuBP molecules. The sixth TP is the **net gain** and can be used to make glucose.",
+      "hint": "Count the carbon atoms in the TP and in the RuBP.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01mrgbs",
+      "kind": "mistake",
+      "front": "What does a plateau on a graph of photosynthesis rate mean?",
+      "back": "It does not mean photosynthesis has stopped. It means a different factor has become **limiting**.",
+      "hint": "Think about what happens when one factor is raised further.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "15jswq7",
+      "kind": "term",
+      "front": "What is a limiting factor?",
+      "back": "A **limiting factor** is a variable whose low value restricts the rate of a process below its potential maximum.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0kjdtji",
+      "kind": "concept",
+      "front": "Why does the rate of photosynthesis fall at very high temperatures?",
+      "back": "High temperatures change the shape of enzymes such as rubisco, so substrates bind less well and the Calvin cycle slows.",
+      "hint": "Consider what the enzymes of the cycle depend on to work.",
+      "sectionId": "s6"
+    }
+  ]
+}

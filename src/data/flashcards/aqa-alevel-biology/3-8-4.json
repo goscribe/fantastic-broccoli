@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-8-4",
+  "topicCode": "3.8.4",
+  "topicName": "Gene technologies",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:51.644Z",
+  "cards": [
+    {
+      "id": "0pk7hle",
+      "kind": "concept",
+      "front": "How does a DNA probe find a target sequence in a DNA sample?",
+      "back": "A **labelled single-stranded probe** binds to its complementary sequence (hybridisation). Unbound probe is washed away, so the label shows where the target is present.",
+      "hint": "Consider which bases the probe must match in the sample.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1efssj7",
+      "kind": "concept",
+      "front": "Why do repeated temperature changes in PCR produce many copies of a chosen DNA region?",
+      "back": "Each cycle heats to separate strands, cools so primers bind, then polymerase extends them. New strands also act as **templates**, so the target copies build up rapidly.",
+      "hint": "Think about what the newly made strands can be used for in the next cycle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06houhn",
+      "kind": "concept",
+      "front": "Why does a restriction enzyme cut DNA only at particular places?",
+      "back": "It recognises a **specific recognition sequence**, so each enzyme cuts only where its sequence occurs. Different enzymes recognise different sequences.",
+      "hint": "Compare how different enzymes choose their cutting sites.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oyillv",
+      "kind": "term",
+      "front": "What is hybridisation?",
+      "back": "The **binding** of complementary single strands of nucleic acid through base pairing.",
+      "hint": "Think about what happens when a probe meets its target strand.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pqlg73",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that DNA ligase cuts DNA?",
+      "back": "**Restriction enzymes** cut DNA. DNA ligase joins fragments by forming bonds in the sugar–phosphate backbone.",
+      "hint": "Consider which enzyme makes the cut and which one seals it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mxnnc5",
+      "kind": "process",
+      "front": "What are the main steps in making recombinant DNA with restriction enzymes?",
+      "back": "Cut the desired fragment and vector with the same enzyme, pair the compatible sticky ends, seal the join with DNA ligase, then introduce the recombinant DNA into a host cell.",
+      "hint": "Start from the DNA source and finish where the DNA is placed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0f8u53n",
+      "kind": "mistake",
+      "front": "Why does cutting the fragment and vector with one enzyme not guarantee the right recombinant cells?",
+      "back": "Compatible ends allow joining, but not every vector takes up the desired fragment. The **cells carrying the intended recombinant DNA** must be identified.",
+      "hint": "Think about what matching ends cannot promise.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bx9lbj",
+      "kind": "concept",
+      "front": "Why do DNA fragments move towards the positive electrode in gel electrophoresis?",
+      "back": "Their **phosphate groups** carry negative charge, so they are pulled towards the positive electrode. Smaller fragments usually travel further than larger ones.",
+      "hint": "Think about the charge carried by the DNA backbone.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tttdb3",
+      "kind": "example",
+      "front": "A 5 kb uncut DNA sample gives bands at 3 kb and 2 kb after digestion. What does this suggest?",
+      "back": "One cut in a **5 kb linear molecule**: $3+2=5\\,\\mathrm{kb}$, matching the uncut length. The results are consistent with a single cut.",
+      "hint": "Compare the total of the fragment sizes with the uncut band.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ta1kpe",
+      "kind": "term",
+      "front": "What is a DNA ladder used for in gel electrophoresis?",
+      "back": "A **mixture of fragments of known lengths**. Comparing sample bands with its bands gives an estimate of the sample fragment sizes.",
+      "hint": "Think about what the sample bands are compared against.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yed3h9",
+      "kind": "concept",
+      "front": "Why does a positive DNA test not always mean that someone has a disease?",
+      "back": "**Detecting a sequence** does not always establish disease. A probe signal also does not show whether the gene works normally.",
+      "hint": "Think about what a probe signal actually tells you.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1c7h7rv",
+      "kind": "concept",
+      "front": "How does gene therapy aim to treat disease?",
+      "back": "By **adding, replacing or altering** genetic material in a patient's cells. Success depends on delivery to suitable cells and control of the resulting gene activity.",
+      "hint": "Think about which cells the genetic material must reach.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19udkrf",
+      "kind": "example",
+      "front": "How can recombinant DNA technology be used to treat a disease?",
+      "back": "A **human gene** is placed into suitable cells, which produce a useful protein. The protein is then purified for treatment.",
+      "hint": "Think about where the protein is made before it is purified.",
+      "sectionId": "s5"
+    }
+  ]
+}

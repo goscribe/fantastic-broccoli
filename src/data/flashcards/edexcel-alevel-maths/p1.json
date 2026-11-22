@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "p1",
+  "topicCode": "P1",
+  "topicName": "Proof",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:35.178Z",
+  "cards": [
+    {
+      "id": "1x2drej",
+      "kind": "term",
+      "front": "What is a proof by deduction?",
+      "back": "A **proof by deduction** starts from known facts and uses valid steps to show a result holds for every case.",
+      "hint": "Compare it with checking examples one at a time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t3agno",
+      "kind": "concept",
+      "front": "Why does one counter-example disprove a statement, when many true examples cannot prove it?",
+      "back": "A **counter-example** is one case that meets the statement's conditions but breaks its claim, so one false case is enough to disprove it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iga4z0",
+      "kind": "process",
+      "front": "What are the four steps of an algebraic proof?",
+      "back": "Define the objects with letters, expand and simplify, factorise to show the required form, then finish with a conclusion in words.",
+      "hint": "Start with what the claim is about, before any algebra.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1akcwdx",
+      "kind": "formula",
+      "front": "How can an even number and an odd number be written using letters?",
+      "back": "An even number is $2n$ and an odd number is $2n+1$, where $n$ is an **integer**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ojwvky",
+      "kind": "mistake",
+      "front": "Why is checking a hundred examples not a proof?",
+      "back": "Examples cover only some cases, and a pattern that works for a hundred cases can still fail on the next one.",
+      "hint": "Think about which cases you have not checked.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rgcfuz",
+      "kind": "example",
+      "front": "What is $n+(n+1)+(n+2)$ once simplified and factorised, when proving three consecutive integers have a multiple of 3 as their sum?",
+      "back": "$3n+3=3(n+1)$, which is 3 times the integer $n+1$, so the sum is a multiple of 3.",
+      "hint": "Add the three expressions and collect like terms first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "124oh6c",
+      "kind": "term",
+      "front": "What is a proof by exhaustion?",
+      "back": "A **proof by exhaustion** splits a statement into a finite set of cases and checks each one, with the cases together covering every possibility.",
+      "hint": "Think about how all integers can be split into two groups.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0spi2m5",
+      "kind": "example",
+      "front": "For $n=2k$, what is $n^2+n$ in factorised form?",
+      "back": "$n^2+n=4k^2+2k=2(2k^2+k)$, which is 2 times an integer, so it is even.",
+      "hint": "Substitute first, then look for a common factor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nqah2h",
+      "kind": "example",
+      "front": "Which value of $n$ does the note use to disprove '$n^2+n+11$ is prime for every positive integer $n$', and what does it give?",
+      "back": "$n=10$ gives $121=11\\times11$, which is not prime, so the statement is false.",
+      "hint": "Small values such as 1, 2 and 3 all give primes, so look further.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vn6kqu",
+      "kind": "mistake",
+      "front": "What must a counter-example satisfy before you use it?",
+      "back": "It must meet the conditions of the statement and break its claim. Check both before you finish.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1if4a35",
+      "kind": "term",
+      "front": "What is a proof by contradiction?",
+      "back": "A **proof by contradiction** assumes the statement is false and shows this leads to something impossible, so the statement must be true.",
+      "hint": "Consider what you assume at the very start.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0evgr33",
+      "kind": "example",
+      "front": "How does the proof that $\\sqrt{2}$ is irrational reach a contradiction?",
+      "back": "Assuming $\\sqrt{2}=\\frac{a}{b}$ with no common factor forces $a$ and $b$ both to be even, so they share the factor 2. This contradicts the assumption.",
+      "hint": "Square both sides and track whether $a$ and $b$ are odd or even.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13x86d0",
+      "kind": "concept",
+      "front": "Which method fits a claim where only a few cases exist and can be listed?",
+      "back": "**Proof by exhaustion**, where you show the statement is true in each listed case.",
+      "hint": "Think about how many cases there are to check.",
+      "sectionId": "s6"
+    }
+  ]
+}

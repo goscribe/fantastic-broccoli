@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-3-1",
+  "topicCode": "5.3.1",
+  "topicName": "Conservation of mass and equations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:38.348Z",
+  "cards": [
+    {
+      "id": "0x399g2",
+      "kind": "concept",
+      "front": "What does the law of conservation of mass tell you about the mass of a chemical reaction?",
+      "back": "The **total mass** of the products equals the total mass of the reactants. Atoms are rearranged, never created or destroyed.",
+      "hint": "Think about what happens to the atoms themselves during a reaction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rmy6ts",
+      "kind": "concept",
+      "front": "Why can a reaction that releases gas appear to lose mass in an open container?",
+      "back": "The **gas escapes** into the surroundings, so the measured materials weigh less. Total mass is still conserved once the escaped gas is included.",
+      "hint": "Consider whether the reaction container lets substances leave.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p0ecul",
+      "kind": "process",
+      "front": "What are the steps for balancing a chemical equation?",
+      "back": "1) Write the correct formulae. 2) Count each type of atom on both sides. 3) Add **coefficients** in front of formulae until the counts match.",
+      "hint": "Think about what you do before touching any numbers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13plkpp",
+      "kind": "term",
+      "front": "What are reactants?",
+      "back": "The **starting substances** that react in a chemical reaction. In an equation they appear before the arrow.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tdur94",
+      "kind": "term",
+      "front": "What are products?",
+      "back": "The **new substances** formed in a chemical reaction. In an equation they appear after the arrow.",
+      "hint": "Compare them with what you started with.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dtshwo",
+      "kind": "term",
+      "front": "What is a coefficient in a chemical equation?",
+      "back": "A **number** placed before a formula that multiplies every atom in that formula. It is the number you change when balancing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yic59i",
+      "kind": "term",
+      "front": "What is a subscript in a chemical formula?",
+      "back": "A small **number** within a formula showing how many atoms of an element it contains. It must never be changed to balance an equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mvh4n3",
+      "kind": "mistake",
+      "front": "Why is changing $\\mathrm{MgO}$ to $\\mathrm{MgO_2}$ wrong when balancing $\\mathrm{Mg + O_2 \\rightarrow MgO}$?",
+      "back": "It changes the **substance** itself, so it is a different compound. Balance by adding coefficients instead, giving $\\mathrm{2Mg + O_2 \\rightarrow 2MgO}$.",
+      "hint": "Which part of a formula can you change without changing the substance?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dpl819",
+      "kind": "example",
+      "front": "In a closed system, 12 g of carbon reacts completely with 32 g of oxygen. What mass of carbon dioxide forms?",
+      "back": "**44 g**, because $12+32=44\\,\\text{g}$ and the product has the same total mass as the reactants.",
+      "hint": "Add up the masses of everything that goes into the reaction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17e4xqk",
+      "kind": "mistake",
+      "front": "A student burns a solid in air, finds it gains mass, and concludes mass is not conserved. What is wrong with this?",
+      "back": "The extra mass came from **oxygen in the air**, which was outside the measured materials. Total mass is still conserved.",
+      "hint": "Where could the extra material have come from?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z0gdgt",
+      "kind": "concept",
+      "front": "What do state symbols such as $\\mathrm{(g)}$ and $\\mathrm{(aq)}$ show in an equation?",
+      "back": "The **physical state** of each substance: solid (s), liquid (l), gas (g) or dissolved in water (aq). They do not change the atom counts.",
+      "hint": "Look at where these symbols sit in the equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bbnm1x",
+      "kind": "example",
+      "front": "Balance $\\mathrm{H_2 + O_2 \\rightarrow H_2O}$ using coefficients only.",
+      "back": "$\\mathrm{2H_2 + O_2 \\rightarrow 2H_2O}$, which gives four hydrogen and two oxygen atoms on each side.",
+      "hint": "Count the hydrogen atoms on each side first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d6a6sl",
+      "kind": "mistake",
+      "front": "Why is writing $\\mathrm{O}$ instead of $\\mathrm{O_2}$ wrong when showing oxygen gas in an equation?",
+      "back": "$\\mathrm{O}$ is not the correct formula for oxygen gas, which is **$\\mathrm{O_2}$**. Changing the formula changes the substance, so balance with coefficients instead.",
+      "hint": "Think about how oxygen molecules exist as a gas.",
+      "sectionId": "s3"
+    }
+  ]
+}

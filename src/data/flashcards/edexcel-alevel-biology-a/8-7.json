@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-7",
+  "topicCode": "8.7",
+  "topicName": "Nervous and hormonal coordination",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:14.903Z",
+  "cards": [
+    {
+      "id": "1e1tof2",
+      "kind": "concept",
+      "front": "How do the speed and duration of nervous and hormonal coordination compare?",
+      "back": "**Nervous** coordination is very fast but short-lived. **Hormonal** coordination is slower but lasts longer, because hormones must travel in the blood.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oee6p7",
+      "kind": "concept",
+      "front": "Why does a hormone carried to the whole body affect only some cells?",
+      "back": "Only **target cells** have a **receptor protein** whose binding site fits that hormone. Other cells lack the matching receptor, so they ignore it.",
+      "hint": "Think about what a cell needs in order to bind a hormone.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0h6putz",
+      "kind": "concept",
+      "front": "How do the nervous and hormonal systems share the work in a sudden threat?",
+      "back": "The **nervous system** supplies speed, speeding the heart within seconds. The **hormonal system**, through adrenaline, supplies duration and a wider effect.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19w1u8x",
+      "kind": "term",
+      "front": "What is an effector?",
+      "back": "A **tissue or organ**, usually a muscle or gland, that produces a response to a stimulus.",
+      "hint": "Think about what carries out the response once receptors detect a change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0eqmnrh",
+      "kind": "term",
+      "front": "What is a neurone?",
+      "back": "A specialised animal cell that carries **electrical impulses** along its length.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1osjefc",
+      "kind": "term",
+      "front": "What is an endocrine gland?",
+      "back": "A gland that releases its **hormones straight into the blood**.",
+      "hint": "Contrast it with glands that release their products through a tube.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ktch06",
+      "kind": "process",
+      "front": "What are the steps by which a hormone reaches and acts on its target cell?",
+      "back": "1) An endocrine gland releases the hormone into the blood. 2) The blood carries it around the body. 3) It binds to receptor proteins on target cells. 4) The target cells respond.",
+      "hint": "Start from where the hormone is made.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "168odkn",
+      "kind": "mistake",
+      "front": "A student says a hormonal response is slow because the hormone signal is weak. What is wrong?",
+      "back": "The response is slow because the hormone must **travel in the blood**. The signal is not weak.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nzlye5",
+      "kind": "mistake",
+      "front": "A student says hormones travel only to their target cells. What is wrong with this?",
+      "back": "Hormones reach **most tissues** in the blood. Only cells with the matching **receptor** respond to them.",
+      "hint": "Consider where the hormone actually goes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g0ifmn",
+      "kind": "concept",
+      "front": "How do protein hormones and steroid hormones differ in how they produce their effect?",
+      "back": "**Protein hormones** bind to receptors on the outer surface of the membrane. **Steroid hormones** are lipid-soluble, cross the membrane and bind receptors inside the cell, often changing which genes are switched on.",
+      "hint": "Think about which molecules can pass through the cell-surface membrane.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0od07ra",
+      "kind": "example",
+      "front": "Roughly how fast can a nerve impulse travel in some neurones?",
+      "back": "Up to about $100\\,\\mathrm{m\\,s^{-1}}$, so a response can begin within a fraction of a second.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m0x4w4",
+      "kind": "concept",
+      "front": "Why does a nerve impulse's effect stop quickly once the impulses stop?",
+      "back": "The **effector** responds only while impulses keep arriving. When they stop, the response stops, so the system can adjust responses moment to moment.",
+      "hint": "Think about what keeps the effector responding.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pu96xl",
+      "kind": "term",
+      "front": "What is adrenaline?",
+      "back": "A **hormone** released into the blood by the **adrenal glands**, which raises heart rate and prepares the body for rapid activity.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0po297u",
+      "kind": "example",
+      "front": "In a sudden threat, what does adrenaline do to liver cells?",
+      "back": "It acts on them so they release **glucose** into the blood.",
+      "sectionId": "s5"
+    }
+  ]
+}

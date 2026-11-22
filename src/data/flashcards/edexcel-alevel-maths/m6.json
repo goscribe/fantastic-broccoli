@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "m6",
+  "topicCode": "M6",
+  "topicName": "Quantities and units in mechanics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:47.033Z",
+  "cards": [
+    {
+      "id": "0a0en4d",
+      "kind": "term",
+      "front": "Which three quantities are the base quantities in mechanics?",
+      "back": "**Length, mass and time**. Each is defined on its own, not through other quantities.",
+      "hint": "Think about which quantities are not built from other quantities.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02jbjfi",
+      "kind": "concept",
+      "front": "Why is speed not treated as a base quantity?",
+      "back": "Speed depends on both length and time, so it is a **derived quantity** built by dividing base quantities.",
+      "hint": "Compare speed with the list in the first section.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fi11pp",
+      "kind": "formula",
+      "front": "Why is weight measured in newtons rather than kilograms?",
+      "back": "Weight is a force, given by $W=mg$, so its unit is the **newton** ($\\mathrm{N}$). Kilograms measure mass only.",
+      "hint": "Think about what kind of quantity weight is.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ulwfv2",
+      "kind": "term",
+      "front": "What is one newton in terms of base units?",
+      "back": "$1\\,\\mathrm{N}=1\\,\\mathrm{kg\\,m\\,s^{-2}}$, the force that gives a 1 kg mass an acceleration of $1\\,\\mathrm{m\\,s^{-2}}$.",
+      "hint": "Start from $F=ma$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pxg653",
+      "kind": "concept",
+      "front": "What does a conversion factor such as $\\frac{1000\\,\\mathrm{m}}{1\\,\\mathrm{km}}$ do to a quantity?",
+      "back": "It changes the **unit** but not the size of the quantity, because the factor equals 1.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mormhj",
+      "kind": "example",
+      "front": "Convert 2.4 km to metres.",
+      "back": "$2.4\\times1000=2400\\,\\mathrm{m}$",
+      "hint": "Which length conversion from the table applies?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v92420",
+      "kind": "concept",
+      "front": "Why does converting to a smaller unit give a larger number?",
+      "back": "A smaller unit fits more times into the same quantity, so you need more of them to measure it.",
+      "hint": "Think how many 1 cm lengths fit into 1 m.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0eh7zx2",
+      "kind": "process",
+      "front": "How do you convert a speed from km h⁻¹ to m s⁻¹?",
+      "back": "Convert the top and bottom separately: multiply the distance by 1000 for km to m, and divide by 3600 for h to s. This is the same as dividing by **3.6**.",
+      "hint": "Think about which of the two units is larger.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11zfawj",
+      "kind": "mistake",
+      "front": "Why is multiplying 72 km h⁻¹ by 3.6 to get m s⁻¹ wrong?",
+      "back": "Metres per second is the larger unit, so the number must get smaller. Divide by 3.6 instead, giving $20\\,\\mathrm{m\\,s^{-1}}$.",
+      "hint": "Compare the sizes of the two units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g0qor8",
+      "kind": "example",
+      "front": "Convert 90 km h⁻¹ to m s⁻¹.",
+      "back": "$\\frac{90\\times1000}{3600}=25\\,\\mathrm{m\\,s^{-1}}$",
+      "hint": "Convert the distance and the time separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q5m3a0",
+      "kind": "mistake",
+      "front": "Why does using 1.2 for a mass in tonnes, instead of 1200 kg, give a wrong force?",
+      "back": "The mass is not in kilograms, so the force is wrong by a factor of **1000**. Convert to SI units before substituting.",
+      "hint": "Check which unit $F=ma$ needs for mass.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0oqger8",
+      "kind": "example",
+      "front": "What force acts on a car of mass 1.2 tonnes with acceleration $2.5\\,\\mathrm{m\\,s^{-2}}$?",
+      "back": "Convert first: $1.2\\times1000=1200\\,\\mathrm{kg}$. Then $F=ma=1200\\times2.5=3000\\,\\mathrm{N}$, which is $3.0\\times10^{3}\\,\\mathrm{N}$.",
+      "hint": "Start with the mass conversion.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1y9ht9y",
+      "kind": "formula",
+      "front": "In $F=ma$, what units must $m$ and $a$ have for $F$ to come out in newtons?",
+      "back": "$m$ in **kilograms** and $a$ in $\\mathrm{m\\,s^{-2}}$, which gives $F$ in $\\mathrm{N}$.",
+      "hint": "Recall the derived unit of force.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qz9cnq",
+      "kind": "process",
+      "front": "What should you do before substituting values into a formula?",
+      "back": "**Convert every quantity to SI units** first, so the answer also comes out in SI units. Then check the unit of your answer.",
+      "hint": "Think about the earliest step in any calculation.",
+      "sectionId": "s5"
+    }
+  ]
+}

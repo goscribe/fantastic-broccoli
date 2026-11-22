@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-5",
+  "topicCode": "8.5",
+  "topicName": "Detecting light: rods and the eye",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:04.839Z",
+  "cards": [
+    {
+      "id": "0y88601",
+      "kind": "concept",
+      "front": "Why does absorbing light make a rod hyperpolarise rather than fire an action potential?",
+      "back": "Light causes rhodopsin to bleach, which closes sodium channels, so less sodium enters. The rod becomes more negative and releases **less neurotransmitter**.",
+      "hint": "Think about what the rod's membrane is doing in the dark.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fupr9l",
+      "kind": "concept",
+      "front": "Why are rods more sensitive in dim light than cones, but give poorer detail?",
+      "back": "Many rods share one bipolar neurone (**retinal convergence**), so their signals add together and reach threshold in dim light. This convergence gives poor **visual acuity**.",
+      "hint": "Consider how many photoreceptors feed into one neurone.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00cm5zk",
+      "kind": "process",
+      "front": "What is the chain of steps from light reaching a rod to action potentials on the optic nerve?",
+      "back": "Light is absorbed and rhodopsin bleaches. Sodium channels close and the rod hyperpolarises. It releases less neurotransmitter, so the bipolar neurone depolarises. The ganglion neurone fires along the optic nerve.",
+      "hint": "Start with what happens to the pigment when light arrives.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lmmyim",
+      "kind": "term",
+      "front": "What is the retina?",
+      "back": "The **retina** is the light-sensitive layer at the back of the eye. It contains the photoreceptors and the neurones that process their signals.",
+      "hint": "Consider where the lens focuses the image.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01mk2rw",
+      "kind": "term",
+      "front": "What is rhodopsin made of?",
+      "back": "**Rhodopsin** is the protein opsin combined with the light-absorbing molecule retinal. It is found in the membrane discs of a rod's outer segment.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sgobsp",
+      "kind": "mistake",
+      "front": "Why is it wrong to confuse retinal with the retina?",
+      "back": "**Retinal** is a light-absorbing molecule inside rhodopsin. The **retina** is a layer of tissue at the back of the eye.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sxenyq",
+      "kind": "mistake",
+      "front": "What is wrong with saying a rod fires an action potential when light arrives?",
+      "back": "A rod does not fire an action potential. Light **hyperpolarises** it, so it releases less neurotransmitter.",
+      "hint": "Compare what the rod does in the dark with what it does in light.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "015bf14",
+      "kind": "term",
+      "front": "What is a bipolar neurone?",
+      "back": "A **bipolar neurone** is a retinal neurone that receives signals from photoreceptors and passes them on to a ganglion neurone.",
+      "hint": "Consider where it sits between the rods and the optic nerve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02qzel2",
+      "kind": "term",
+      "front": "What is retinal convergence?",
+      "back": "**Retinal convergence** is the connection of many rods to one bipolar neurone, so their signals are added together.",
+      "hint": "Think about how many photoreceptors share one neurone.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1kmreu5",
+      "kind": "term",
+      "front": "Where in the retina is visual acuity highest?",
+      "back": "The **fovea**, a small central area where cones are most densely packed.",
+      "hint": "Think about which cells give sharp vision and colour.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vl23np",
+      "kind": "concept",
+      "front": "Why can cones detect colour but rods cannot?",
+      "back": "Rods contain one pigment, rhodopsin, so they cannot compare wavelengths. Cones have three types that absorb different wavelengths, and the brain compares their signals to judge **colour**.",
+      "hint": "Count the number of pigment types in each cell.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14tmvz1",
+      "kind": "term",
+      "front": "What is visual acuity?",
+      "back": "**Visual acuity** is the ability to distinguish two points close together as separate.",
+      "hint": "Think about seeing fine detail.",
+      "sectionId": "s5"
+    }
+  ]
+}

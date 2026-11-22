@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-5-1",
+  "topicCode": "6.5.1",
+  "topicName": "Forces and their interactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:25.353Z",
+  "cards": [
+    {
+      "id": "16o4w3q",
+      "kind": "term",
+      "front": "What is a force?",
+      "back": "A **force** is a push or pull caused by an interaction between objects. Forces can change an object's motion or shape.",
+      "hint": "Think about what happens when you push a door or when the Earth pulls a ball.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fmkgxj",
+      "kind": "concept",
+      "front": "Which three features do the two forces in an interaction pair share?",
+      "back": "They have **equal size**, **opposite direction** and are the same **type** of force, such as both gravitational or both contact.",
+      "hint": "Think about what happens when you push a wall.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0y4l60u",
+      "kind": "process",
+      "front": "What are the steps for drawing a force diagram?",
+      "back": "First choose the **object** the diagram represents. Then draw a labelled arrow from it for each force acting on it, in that force's direction.",
+      "hint": "Start with a decision before drawing anything.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0s5epuj",
+      "kind": "concept",
+      "front": "Why must you state both size and direction when describing a force?",
+      "back": "A force has both **size** and **direction**. A value like 10 N alone does not fully describe it, because you also need to know which way it acts.",
+      "hint": "Think about what a single number cannot tell you.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gqipsz",
+      "kind": "term",
+      "front": "What is the unit of force?",
+      "back": "The **newton**, symbol $N$.",
+      "hint": "Look at the sentence in the first section that says how force is measured.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sbn4qj",
+      "kind": "process",
+      "front": "In what order should you name the objects when describing a force?",
+      "back": "First name the **object receiving** the force, then identify the **object causing** it.",
+      "hint": "Use the example of the Earth pulling a ball.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19jtzb6",
+      "kind": "term",
+      "front": "What is a contact force?",
+      "back": "A **contact force** acts between objects that are touching, such as friction between surfaces or air resistance on a moving object.",
+      "hint": "Contrast this with a magnet pulling a paper clip from a distance.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06c13oc",
+      "kind": "term",
+      "front": "What is a non-contact force?",
+      "back": "A **non-contact force** acts between objects without them touching. Examples are gravity, magnetic forces and electrostatic forces.",
+      "hint": "Consider what pulls objects across empty space.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "040i0cq",
+      "kind": "mistake",
+      "front": "Why is air resistance classed as a contact force even though air is hard to see?",
+      "back": "**Air particles** collide with the moving object, so it is a contact force. Classify forces by how the objects affect each other, not by whether the cause is visible.",
+      "hint": "Think about what air particles actually do to a moving object.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lhbh4d",
+      "kind": "process",
+      "front": "How can you check whether two forces form an interaction pair?",
+      "back": "State **both objects** in each force description, then check that the objects swap places between the two forces.",
+      "hint": "Write each force as 'X on Y' and compare.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mkte4m",
+      "kind": "mistake",
+      "front": "Why are the weight and upward support force on a resting box not an interaction pair?",
+      "back": "Both forces act on the **same object**, the box. Each force in a pair must act on a different object, because each belongs to a separate interaction.",
+      "hint": "Ask which objects each force acts on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xzzee9",
+      "kind": "example",
+      "front": "Which four forces should a force diagram of a box pushed right across a floor show, and in which directions?",
+      "back": "**Push** to the right, **friction** to the left, **weight** downwards and the floor's **support force** upwards.",
+      "hint": "Consider which surface the box rests on.",
+      "sectionId": "s4"
+    }
+  ]
+}

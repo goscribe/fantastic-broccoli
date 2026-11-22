@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-5-3",
+  "topicCode": "3.5.3",
+  "topicName": "Energy and ecosystems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:31.962Z",
+  "cards": [
+    {
+      "id": "1ll64zq",
+      "kind": "concept",
+      "front": "Why must energy keep entering an ecosystem, when matter can be recycled?",
+      "back": "Energy is not recycled. At each transfer some energy leaves the food chain, mainly as **heat**, so producers must keep capturing energy from sunlight.",
+      "hint": "Compare how matter and energy move through a food chain.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0q8qmp1",
+      "kind": "term",
+      "front": "What is net primary productivity?",
+      "back": "The rate at which producers store energy after subtracting the energy they use in **respiration**. This is the energy left for growth, reproduction and consumers.",
+      "hint": "Start from gross primary productivity and think about what producers use up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gen2qe",
+      "kind": "term",
+      "front": "What is transfer efficiency?",
+      "back": "The proportion of energy available at one trophic level that is stored as new **biomass** at the next trophic level. It is usually low.",
+      "hint": "Compare the energy at two neighbouring feeding levels.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kz94o7",
+      "kind": "term",
+      "front": "What is a primary producer?",
+      "back": "An organism that makes organic molecules using an external energy source, usually **sunlight**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1d66n7w",
+      "kind": "mistake",
+      "front": "Why is GPP not the energy available to organisms that eat producers?",
+      "back": "Producers use some of their stored energy in **respiration**, so only the NPP remains available to consumers.",
+      "hint": "Think about what producers do with the energy they store.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02o8aud",
+      "kind": "formula",
+      "front": "How is net primary productivity calculated from gross primary productivity?",
+      "back": "$\\mathrm{NPP=GPP-R}$, where $R$ is energy transferred by producers in **respiration**. Units must match, such as $\\mathrm{kJ\\,m^{-2}\\,year^{-1}}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16mu7up",
+      "kind": "example",
+      "front": "A grassland has GPP $24\\,000\\ \\mathrm{kJ\\,m^{-2}\\,year^{-1}}$ and producer respiration $14\\,000\\ \\mathrm{kJ\\,m^{-2}\\,year^{-1}}$. What is its NPP?",
+      "back": "$10\\,000\\ \\mathrm{kJ\\,m^{-2}\\,year^{-1}}$, from $24\\,000-14\\,000$.",
+      "hint": "Use the NPP equation and check that the units match.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1o8fsiv",
+      "kind": "process",
+      "front": "What are the steps to measure the dry biomass of a sample?",
+      "back": "Collect a representative sample and record its fresh mass. Dry it and weigh it, then repeat drying and weighing until the **mass is constant**.",
+      "hint": "Start with how the sample is chosen and what is weighed first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1okb7rp",
+      "kind": "example",
+      "front": "A 30 g dry-mass sample comes from 2 m². What is its biomass per unit area?",
+      "back": "$15\\,\\text{g}\\,\\text{m}^{-2}$, found by dividing 30 g by 2 m².",
+      "hint": "Divide the sample's mass by the area it came from.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lf27tt",
+      "kind": "mistake",
+      "front": "Why is fresh mass unreliable for comparing biomass between samples?",
+      "back": "Water content varies, so two samples with the same **living material** can have different fresh masses. Use dry mass instead.",
+      "hint": "Think about what can differ between samples besides living material.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t9heqd",
+      "kind": "concept",
+      "front": "Why does dry mass not directly give the energy content of biomass?",
+      "back": "Dry mass estimates the **stored organic material**, but it does not measure the energy in that material directly.",
+      "hint": "Consider what dry mass measures compared with what energy measures.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gecmz3",
+      "kind": "concept",
+      "front": "What are the main reasons energy is lost between trophic levels?",
+      "back": "Some organisms or parts are not eaten, some food is undigested and leaves as faeces, and respiration releases energy as **heat**. Excretion removes further material.",
+      "hint": "Follow food from being eaten to being used.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ja4xer",
+      "kind": "concept",
+      "front": "Why might transfer efficiency be lower in a herbivore chain feeding on woody plants?",
+      "back": "Woody parts are hard to eat or **digest**, so more energy is lost uneaten or undigested. Differences in activity also change respiratory losses.",
+      "hint": "Compare how easily different plant parts can be eaten and digested.",
+      "sectionId": "s4"
+    }
+  ]
+}

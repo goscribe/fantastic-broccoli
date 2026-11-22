@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-9",
+  "topicCode": "6.9",
+  "topicName": "Hydroelectric power",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:23.940Z",
+  "cards": [
+    {
+      "id": "10jm4mf",
+      "kind": "concept",
+      "front": "How does falling water end up producing electricity in a hydroelectric plant?",
+      "back": "Water's stored energy from its height becomes **energy of motion**, which spins a turbine. The turbine turns a generator, which makes electricity.",
+      "hint": "Follow the energy from the water's position to the final output.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gb844h",
+      "kind": "concept",
+      "front": "Why does a dam make hydroelectric power more useful than an ordinary river?",
+      "back": "A dam forms a **reservoir** that stores water, so operators can release it when electricity is needed. The stored water also creates a large **head**, adding energy.",
+      "hint": "Think about what a barrier does to the water level and to the timing of flow.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tzl6r3",
+      "kind": "process",
+      "front": "What path does the water take through a typical hydroelectric plant, from the reservoir to the river?",
+      "back": "Reservoir, then intake, then down the **penstock**, then past the turbine blades, then the generator, then back to the river downstream.",
+      "hint": "Start at the reservoir behind the dam and follow the pipe.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00pt4b7",
+      "kind": "term",
+      "front": "What is the head of a hydroelectric plant?",
+      "back": "The **head** is the vertical distance water falls from the reservoir surface to the turbine. A greater head gives each liter of water more energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d391j7",
+      "kind": "term",
+      "front": "What is peak demand on an electricity grid?",
+      "back": "**Peak demand** is the period when electricity use across a grid reaches its highest level. Hydropower can ramp up quickly to meet it.",
+      "hint": "Think about times of day when many people switch appliances on at once.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d3oyuu",
+      "kind": "concept",
+      "front": "Why is hydropower considered a renewable source of electricity?",
+      "back": "The **water cycle** keeps refilling rivers, so the water that drives the turbines is continually replaced. Its fuel supply does not run out.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xpysnt",
+      "kind": "concept",
+      "front": "What environmental harm does filling a reservoir cause on land?",
+      "back": "Filling a reservoir **floods land**, drowning forests, farms and habitat. People living there may have to move.",
+      "hint": "Think about what the land was being used for before the water arrived.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0o1qi77",
+      "kind": "term",
+      "front": "What is sediment in a river?",
+      "back": "**Sediment** is solid particles, such as sand, silt and clay, that flowing water carries and then deposits.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0kd29og",
+      "kind": "concept",
+      "front": "What happens downstream when a dam traps sediment behind it?",
+      "back": "Less new sediment reaches downstream, so channels and river **deltas** can erode, and floodplain soils receive fewer nutrients.",
+      "hint": "Think about what the river normally delivers to the land and coast below the dam.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0iov3fl",
+      "kind": "concept",
+      "front": "Why can water released from deep in a reservoir harm river life?",
+      "back": "It is often colder than the natural river and holds less **dissolved oxygen**, which aquatic organisms need to breathe.",
+      "hint": "Think about where in the reservoir the water has been sitting.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0s6yk0h",
+      "kind": "concept",
+      "front": "How do flooded plants in a reservoir add to greenhouse gas emissions?",
+      "back": "Drowned plants decay, releasing **methane** and carbon dioxide. The amount depends on climate and how much vegetation was flooded.",
+      "hint": "Think about what happens to plant matter when it rots without much oxygen.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ypp1ck",
+      "kind": "mistake",
+      "front": "Why is it wrong to say hydropower is completely emission free?",
+      "back": "Reservoirs can release **methane** from decaying plants, and building a dam uses energy and materials. Operation itself burns no fuel, so emissions are low, not zero.",
+      "hint": "Consider the whole life of the plant, not only how it runs day to day.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1r52aww",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a run-of-river plant gives steady output all year?",
+      "back": "Run-of-river plants store little water, so their **output follows the river's natural flow**, which changes with the seasons.",
+      "hint": "Compare how much water these plants store with a dam's reservoir.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1msd6m3",
+      "kind": "concept",
+      "front": "How does a pumped storage plant act like a large battery?",
+      "back": "It uses spare electricity to pump water uphill to a high reservoir, then releases it through turbines when **demand** rises.",
+      "hint": "Think about when the spare electricity is available and when it is needed.",
+      "sectionId": "s3"
+    }
+  ]
+}

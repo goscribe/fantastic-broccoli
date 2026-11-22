@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-9",
+  "topicCode": "5.9",
+  "topicName": "Mining",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:59.957Z",
+  "cards": [
+    {
+      "id": "15q4opm",
+      "kind": "concept",
+      "front": "Why does the depth of an ore deposit decide whether miners use surface or subsurface mining?",
+      "back": "Shallow ore is reached cheaply by removing the **overburden** above it, which recovers most of the ore. Deep ore would need too much overburden removed, so miners dig **shafts and tunnels** instead.",
+      "hint": "Compare the cost of removing rock above the ore with the cost of tunneling down to it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09bfl3s",
+      "kind": "process",
+      "front": "How does acid mine drainage form after mining exposes rock?",
+      "back": "Exposed **sulfide minerals** such as pyrite react with air and water to produce sulfuric acid, and bacteria can speed this up. The acid dissolves metals from nearby rock and carries them into streams, lowering pH.",
+      "hint": "Start with what the exposed rock reacts with.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11kpsw8",
+      "kind": "mistake",
+      "front": "A company claims that replanting a mined site fully restores it. Why is this wrong?",
+      "back": "Reclamation does not fully undo mining. A replanted site **rarely matches the original ecosystem**, and the removed ore is gone for good.",
+      "hint": "Think about what the site can never get back.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0drpapf",
+      "kind": "term",
+      "front": "What is surface mining?",
+      "back": "Surface mining extracts ore lying close to the ground by **removing the soil, vegetation, and rock** above it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06bfw4m",
+      "kind": "term",
+      "front": "What is overburden?",
+      "back": "**Overburden** is the layer of soil and rock lying above an ore deposit that must be removed to reach the ore in surface mining.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fq7zo2",
+      "kind": "term",
+      "front": "What is strip mining?",
+      "back": "Strip mining removes **long parallel strips of overburden** in turn to expose shallow, flat layers of ore such as coal.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0df4j0k",
+      "kind": "concept",
+      "front": "What happens to waste rock in mountaintop removal?",
+      "back": "Waste rock from blasting off a summit to reach coal often **fills nearby valleys**.",
+      "hint": "Think about where the waste ends up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kn5pe7",
+      "kind": "term",
+      "front": "What is subsurface mining?",
+      "back": "Subsurface mining reaches **deep ore by digging shafts and tunnels** instead of removing all the overburden above it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10jxbid",
+      "kind": "term",
+      "front": "What are tailings?",
+      "back": "**Tailings** are the finely ground waste left after valuable minerals are separated from ore. They are often stored in ponds and can hold toxic substances.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tji8p5",
+      "kind": "term",
+      "front": "What is reclamation?",
+      "back": "**Reclamation** is cleanup after mining that returns the site toward a stable, vegetated condition by regrading land, replacing topsoil, and replanting native vegetation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1m0il3z",
+      "kind": "example",
+      "front": "Why is subsurface mining preferred over surface mining for deep ore beneath a forest?",
+      "back": "Surface mining would need very deep overburden removed, clearing a large forest area. Tunnels **disturb far less habitat** and cause less erosion.",
+      "hint": "Think about how much land each method clears.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dhfv6n",
+      "kind": "mistake",
+      "front": "Why is it a mistake to think subsurface mining is cheaper because it clears less land?",
+      "back": "Less land is cleared, but underground mining is **more expensive per ton of ore**, and workers face cave-ins, gas explosions, and dust.",
+      "hint": "Compare cost per ton, not land area.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1260p5i",
+      "kind": "concept",
+      "front": "How does recycling metals reduce the harm caused by mining?",
+      "back": "Recycled metal replaces some new ore, so **less new ore must be mined**. This means less overburden is removed and fewer tailings are produced.",
+      "hint": "Think about what the mine would otherwise have to supply.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ra1f12",
+      "kind": "formula",
+      "front": "What does the chemical formula $\\mathrm{FeS_2}$ tell you about pyrite?",
+      "back": "Pyrite is an **iron sulfide**: each unit contains one iron atom (Fe) bonded to two sulfur atoms (S).",
+      "hint": "Read the subscript as the number of atoms of each element.",
+      "sectionId": "s4"
+    }
+  ]
+}

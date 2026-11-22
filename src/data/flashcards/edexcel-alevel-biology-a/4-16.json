@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-16",
+  "topicCode": "4.16",
+  "topicName": "Zoos and seed banks",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:07.373Z",
+  "cards": [
+    {
+      "id": "0klt08r",
+      "kind": "term",
+      "front": "What is **ex situ conservation**?",
+      "back": "**Ex situ conservation** is protecting a species outside its natural habitat, for example by keeping animals in a zoo or storing seeds in a seed bank.",
+      "hint": "Think about where the species is kept compared with where it naturally lives.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ug10nb",
+      "kind": "concept",
+      "front": "Why can ex situ methods not replace protecting a species' habitat?",
+      "back": "Released animals and planted seedlings need a suitable place to live, so **in situ conservation** of the natural habitat is still essential. Ex situ methods work best as a back-up.",
+      "hint": "Consider what a released animal or seedling needs once it leaves the zoo or seed bank.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0iyv7tz",
+      "kind": "concept",
+      "front": "How does a seed bank keep seeds alive for many years?",
+      "back": "Seeds are dried and kept at very low temperatures, which keeps them **dormant**, alive but with very slow metabolism.",
+      "hint": "Think about the conditions the seeds are placed in, and how active they stay there.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ofbzf7",
+      "kind": "process",
+      "front": "What steps does a zoo follow in a captive breeding programme to limit inbreeding?",
+      "back": "The zoo records the **ancestry** of every animal, then pairs animals that are not closely related. This keeps genetic diversity high and limits inbreeding.",
+      "hint": "Start with what the keepers record before they decide which animals to pair.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gn2obz",
+      "kind": "term",
+      "front": "What is **reintroduction** in conservation?",
+      "back": "**Reintroduction** is releasing captive-bred or stored organisms into a suitable area of their natural range, once the original threat has been reduced.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0b7n2p2",
+      "kind": "concept",
+      "front": "Apart from breeding, how else can a zoo help conserve threatened species?",
+      "back": "A zoo can educate visitors about threats, use entry fees and donations to fund field projects, and carry out research on diet, breeding and disease.",
+      "hint": "Think about the zoo's visitors, its money and its scientists.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tgliq3",
+      "kind": "mistake",
+      "front": "A student says ex situ conservation only happens in zoos. Why is this wrong?",
+      "back": "Ex situ conservation covers any protection outside the natural habitat, so **seed banks** also count. Zoos are only one example.",
+      "hint": "Think about whether the note mentions any other places besides zoos.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gxcsjk",
+      "kind": "mistake",
+      "front": "A student says stored seeds in a seed bank are dead. What is the correct view?",
+      "back": "Stored seeds are **dormant**, not dead. Most will germinate when given water and warmth.",
+      "hint": "Think about what the seeds need to begin growing again.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1eg34t4",
+      "kind": "process",
+      "front": "How does a seed bank check that stored seeds are still viable?",
+      "back": "Samples are tested from time to time for germination. If germination falls, the seeds are grown to produce fresh **seed**, which is then stored again.",
+      "hint": "Consider what happens to the stored seeds at each check.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ju2v0a",
+      "kind": "concept",
+      "front": "Why does a seed bank hold more diversity for less money than a zoo?",
+      "back": "A seed bank holds many species in a small, cheap store, and seeds can be sampled from many individuals. A zoo needs large areas and has high running costs.",
+      "hint": "Compare the space each method needs and how many individuals each can hold.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14ayyh8",
+      "kind": "concept",
+      "front": "Why does a small captive group carry a risk to genetic diversity?",
+      "back": "A small founding group holds only part of the wild population's **genetic diversity**, and small groups risk inbreeding.",
+      "hint": "Compare the size of the captive group with the wild population.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tt0bxd",
+      "kind": "term",
+      "front": "What is **in situ conservation**?",
+      "back": "**In situ conservation** is protecting a species within its natural habitat, including protecting that habitat itself.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1p0u6pf",
+      "kind": "concept",
+      "front": "Which organisms can a seed bank conserve, and which can a zoo conserve?",
+      "back": "Zoos mainly hold animals, often larger species. Seed banks hold only plants whose seeds survive drying and low temperatures, so animals cannot be stored there.",
+      "hint": "Compare the groups of organisms each method is suited to.",
+      "sectionId": "s4"
+    }
+  ]
+}

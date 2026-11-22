@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-18",
+  "topicCode": "1.18",
+  "topicName": "Treatments for cardiovascular disease",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:53.804Z",
+  "cards": [
+    {
+      "id": "0jj2ht0",
+      "kind": "concept",
+      "front": "Why are lifestyle changes usually the first treatment for cardiovascular disease?",
+      "back": "They **tackle the causes**, such as smoking, too much saturated fat and salt, and inactivity. They cost little and carry few risks, but their benefits can take months to appear.",
+      "hint": "Think about what damages the arteries in the first place.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1u3gdnj",
+      "kind": "process",
+      "front": "What is the sequence by which a statin slows the growth of atheromas?",
+      "back": "A statin blocks an **enzyme in liver cells** that makes cholesterol. Blood cholesterol then falls, so atheromas grow more slowly.",
+      "hint": "Start with where the drug acts in the body.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0uy4gjh",
+      "kind": "concept",
+      "front": "How should a doctor choose between treatments for a patient with cardiovascular disease?",
+      "back": "By comparing each treatment's **benefit** with its **risk and cost**, then considering disease severity, age and other health problems. Treatments are often combined.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16x5myz",
+      "kind": "term",
+      "front": "What is cardiovascular disease?",
+      "back": "Any **disease of the heart or blood vessels**, such as coronary heart disease.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0edg7d0",
+      "kind": "term",
+      "front": "What is an atheroma?",
+      "back": "A **fatty deposit** containing cholesterol that builds up in an artery wall and narrows the artery.",
+      "hint": "Think about what sits inside the artery wall.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ylpwwu",
+      "kind": "term",
+      "front": "What does an anticoagulant, such as warfarin, do?",
+      "back": "It **slows blood clotting**, lowering the chance that a clot blocks an artery.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ub5ijr",
+      "kind": "term",
+      "front": "What does an antiplatelet drug, such as aspirin, do?",
+      "back": "It makes **platelets less likely to stick together**, which reduces clot formation.",
+      "hint": "Platelets are the cell fragments that start clots.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1imcjv6",
+      "kind": "mistake",
+      "front": "What is the common mistake students make about how anticoagulants affect clots?",
+      "back": "Thinking they **dissolve clots that already exist**. In fact they only reduce the formation of new clots.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14j0ffq",
+      "kind": "concept",
+      "front": "What main risk do anticoagulants and antiplatelet drugs share?",
+      "back": "**Bleeding**. After a cut or a fall, a patient may lose more blood than normal, because clotting is reduced.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cyduhr",
+      "kind": "process",
+      "front": "What steps are used in angioplasty with a stent to treat a narrowed coronary artery?",
+      "back": "A thin tube with a **balloon** is threaded into the narrowed artery. The balloon is inflated to widen it, then a **stent** is left in place to hold it open.",
+      "hint": "Think about the order: reach the artery, widen it, then keep it open.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fppf5m",
+      "kind": "term",
+      "front": "What is a coronary bypass?",
+      "back": "An operation in which a **healthy vessel** from elsewhere in the body is joined above and below a blockage, so blood flows around it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1aosos4",
+      "kind": "concept",
+      "front": "Why does a coronary bypass suit some patients better than angioplasty?",
+      "back": "It can treat **several narrowed arteries**, but it is major surgery with a longer recovery, so it suits patients who have more extensive blockages.",
+      "hint": "Compare how many blockages each option can handle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1so4m8p",
+      "kind": "mistake",
+      "front": "Why are angioplasty and bypass surgery not a complete cure for coronary disease?",
+      "back": "They treat the **existing blockage** but not its cause, so lifestyle changes and drugs are still needed.",
+      "sectionId": "s4"
+    }
+  ]
+}

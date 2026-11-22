@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-2-1",
+  "topicCode": "5.2.1",
+  "topicName": "Ionic, covalent and metallic bonding",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:35.205Z",
+  "cards": [
+    {
+      "id": "06wdl3r",
+      "kind": "concept",
+      "front": "How does an atom become a positive ion or a negative ion?",
+      "back": "An atom becomes a **positive ion** by losing electrons, and a **negative ion** by gaining electrons. The number of protons never changes.",
+      "hint": "Start from the fact that a neutral atom has equal protons and electrons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ngeukg",
+      "kind": "term",
+      "front": "What is an ionic bond?",
+      "back": "An **ionic bond** is the strong electrostatic attraction between oppositely charged ions. It usually forms when a metal reacts with a non-metal.",
+      "hint": "Think about which kinds of elements transfer electrons to each other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19xh74o",
+      "kind": "concept",
+      "front": "Why do covalent bonds form between non-metal atoms?",
+      "back": "Atoms share a pair of electrons so that each atom fills its **outer shell**. Both nuclei attract the shared pair, holding the atoms together.",
+      "hint": "Consider what the atoms gain by sharing rather than transferring electrons.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0srz932",
+      "kind": "concept",
+      "front": "What holds the positive ions of a metal together?",
+      "back": "A **metallic bond**, the strong electrostatic attraction between positive metal ions and the **delocalised electrons** that move through the structure.",
+      "hint": "Think about what the outer-shell electrons do when a metal solidifies.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q4udtx",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an atom gains protons when it becomes an ion?",
+      "back": "Atoms never gain or lose protons when forming ions. The charge changes because **electrons** move, so only the electron count changes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "049g98m",
+      "kind": "process",
+      "front": "What are the steps when sodium and chlorine form an ionic bond?",
+      "back": "1. Sodium transfers one electron to chlorine. 2. This forms a positive $\\text{Na}^+$ ion and a negative $\\text{Cl}^-$ ion. 3. The opposite charges attract strongly.",
+      "hint": "Start with which atom loses an electron.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d8k7q8",
+      "kind": "term",
+      "front": "What is a giant ionic lattice?",
+      "back": "A **giant ionic lattice** is a regular, repeating arrangement of oppositely charged ions. Ionic bonds act in all directions between neighbouring ions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pzzn2h",
+      "kind": "example",
+      "front": "In a hydrogen molecule, how many electrons does each atom have in its outer shell?",
+      "back": "Each hydrogen atom has **two electrons** in its outer shell. Each contributes one electron to a single shared pair.",
+      "hint": "Count the electrons each atom contributes to the shared pair.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l791l9",
+      "kind": "term",
+      "front": "What is a double bond?",
+      "back": "A **double bond** is two pairs of electrons shared between the same two atoms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ogf37a",
+      "kind": "mistake",
+      "front": "Why is it wrong to say electrons are transferred in a covalent bond?",
+      "back": "In covalent bonding, atoms **share** pairs of electrons. Transferring electrons is what happens in ionic bonding, so the wording mixes up the two bond types.",
+      "hint": "Compare with how sodium and chlorine bond.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hgnari",
+      "kind": "term",
+      "front": "What are delocalised electrons?",
+      "back": "**Delocalised electrons** are outer-shell electrons that are not attached to any one atom and can move throughout a metal.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vymgum",
+      "kind": "concept",
+      "front": "Why can solid metals conduct electricity?",
+      "back": "Their **delocalised electrons** can move through the solid and carry charge. Those electrons are free, unlike electrons held in fixed bonds.",
+      "hint": "Think about what carries charge in a wire.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k8yoym",
+      "kind": "concept",
+      "front": "How does metallic bonding differ from ionic bonding?",
+      "back": "Metallic bonding involves **no negative ions**. Its electrons are delocalised rather than shared between specific pairs of atoms.",
+      "hint": "Compare what particles are present in each structure.",
+      "sectionId": "s4"
+    }
+  ]
+}

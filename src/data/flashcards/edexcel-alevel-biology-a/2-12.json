@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-12",
+  "topicCode": "2.12",
+  "topicName": "Mutations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:13.393Z",
+  "cards": [
+    {
+      "id": "0o42wtt",
+      "kind": "term",
+      "front": "What is a frameshift mutation?",
+      "back": "A **frameshift mutation** is an insertion or deletion of a number of bases that is not a multiple of three. Every later codon is shifted and changed.",
+      "hint": "Think about how bases are grouped into codons when the sequence is read.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06nvdg6",
+      "kind": "concept",
+      "front": "How can changing one amino acid stop an enzyme from working?",
+      "back": "The amino acid order sets how the polypeptide folds, so the **tertiary structure** changes. The active site changes shape, so the substrate can no longer bind.",
+      "hint": "Follow the chain from amino acid order to folding to the active site.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "18u5qll",
+      "kind": "term",
+      "front": "What is a nonsense mutation?",
+      "back": "A **nonsense mutation** is a substitution that changes an amino acid codon into a stop codon. Translation ends early.",
+      "hint": "Compare the new codon with the old one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wtdp6z",
+      "kind": "term",
+      "front": "What is a gene mutation?",
+      "back": "A **gene mutation** is a change in the DNA base sequence of a gene.",
+      "hint": "Think of a single wrong letter in a recipe.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1m6ovdk",
+      "kind": "term",
+      "front": "What is a mutagen?",
+      "back": "A **mutagen** is an agent, such as ionising radiation or certain chemicals, that increases the rate at which mutations occur.",
+      "hint": "Think about factors that make mutations more likely, not the mutations themselves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xyhs7y",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume every gene mutation harms the organism?",
+      "back": "**Many** mutations have no effect on the protein, and a few may even be useful. Only some change the protein enough to cause harm.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zbp2cd",
+      "kind": "term",
+      "front": "What is a deletion?",
+      "back": "A **deletion** is a gene mutation in which one or more bases are removed from the sequence.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16ms0am",
+      "kind": "term",
+      "front": "What is a codon?",
+      "back": "A **codon** is a group of three adjacent bases in mRNA that specifies one amino acid or a stop signal.",
+      "hint": "Think about how mRNA is read in groups.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xa6sm1",
+      "kind": "term",
+      "front": "What does it mean for the genetic code to be degenerate?",
+      "back": "The genetic code is **degenerate** when most amino acids are specified by more than one codon.",
+      "hint": "Compare how many codons a single amino acid can have.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hg49tz",
+      "kind": "term",
+      "front": "What is a silent mutation?",
+      "back": "A **silent mutation** is a gene mutation that does not change the amino acid sequence. The new codon still codes for the same amino acid, which relies on the degenerate code.",
+      "hint": "Consider what happens when a new codon is compared with the old one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gpep0p",
+      "kind": "term",
+      "front": "What is a missense mutation?",
+      "back": "A **missense mutation** is a substitution that changes one codon so that it specifies a different amino acid.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "077eehb",
+      "kind": "concept",
+      "front": "Why can a substitution change at most one amino acid?",
+      "back": "A substitution alters only the codon that contains the changed base. Neighbouring codons stay the same, because codons are read one after another without overlaps.",
+      "hint": "Think about how codons are read along the mRNA.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0edut2n",
+      "kind": "example",
+      "front": "Which is more likely to shift every later codon: deleting 1 base or deleting 3 bases?",
+      "back": "Deleting **1 base** causes a frameshift, so every later codon changes. Deleting 3 bases keeps the reading frame, so only one codon and one amino acid are lost.",
+      "hint": "Think about how many codons would be regrouped in each case.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01a40sm",
+      "kind": "concept",
+      "front": "Why do gene mutations arise?",
+      "back": "Gene mutations arise **at random**, often when DNA is copied during replication. A few errors are not corrected by the cell.",
+      "sectionId": "s1"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-13",
+  "topicCode": "1.13",
+  "topicName": "Condensation and hydrolysis of sugars",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:48.449Z",
+  "cards": [
+    {
+      "id": "1c7urr9",
+      "kind": "concept",
+      "front": "How does condensation join two monosaccharides together?",
+      "back": "An -OH group on one sugar reacts with an -OH group on the other, releasing a **water** molecule and forming a **glycosidic bond** between the sugars.",
+      "hint": "Think about which groups on each sugar meet.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gnmqo3",
+      "kind": "concept",
+      "front": "How does hydrolysis split a glycosidic bond?",
+      "back": "A **water** molecule is added across the bond, so the bond **breaks** and the sugar units separate. In the gut, enzymes such as amylase catalyse this.",
+      "hint": "Consider which way the chain changes compared with condensation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dqzq10",
+      "kind": "term",
+      "front": "What is a polysaccharide?",
+      "back": "A **polysaccharide** is a carbohydrate containing many monosaccharides joined by glycosidic bonds, such as starch, glycogen or cellulose.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dwto07",
+      "kind": "term",
+      "front": "What is a monosaccharide?",
+      "back": "A **monosaccharide** is a single sugar unit, such as glucose, fructose or galactose, that cannot be split into smaller sugars by hydrolysis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uxzk1u",
+      "kind": "formula",
+      "front": "In the formula $n-1$ for water molecules released, what does $n$ stand for?",
+      "back": "$n$ is the number of **sugar units** in the chain. $n-1$ gives the number of water molecules released, which equals the number of glycosidic bonds.",
+      "hint": "Each new link in the chain is one condensation reaction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1a3en4y",
+      "kind": "example",
+      "front": "How many water molecules are released when an unbranched chain of 50 glucose units forms?",
+      "back": "**49** water molecules, because $50-1=49$.",
+      "hint": "Apply the counting rule from the formula card.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0s93ujf",
+      "kind": "term",
+      "front": "What is a disaccharide?",
+      "back": "A **disaccharide** is two monosaccharides joined by one **glycosidic bond**, made by a single condensation reaction, such as maltose from two glucose units.",
+      "hint": "Count the sugar units it contains.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08iof96",
+      "kind": "process",
+      "front": "What word equation shows sucrose forming by condensation?",
+      "back": "glucose + fructose → sucrose + **water**. Water is a product because the glycosidic bond is forming.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08cpmpu",
+      "kind": "mistake",
+      "front": "What is a common mistake about the water released in condensation?",
+      "back": "Thinking it is water vapour condensing into liquid. Condensation is a **chemical reaction** in which the water is made from atoms of the two sugars.",
+      "hint": "Think about what the word condensation means in chemistry.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19oscr0",
+      "kind": "mistake",
+      "front": "Where should water go in a word equation for hydrolysis?",
+      "back": "On the left as a **reactant**. Water is a product in condensation but a reactant in hydrolysis, because hydrolysis breaks bonds.",
+      "hint": "Think about whether a bond is being made or broken.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lhbr1n",
+      "kind": "concept",
+      "front": "Why must large polysaccharides be hydrolysed before they are absorbed?",
+      "back": "They are too large to cross the gut wall, so digestion must reduce them to **monosaccharides** first.",
+      "hint": "Consider the size of the molecules that can pass through the gut wall.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0084ycv",
+      "kind": "example",
+      "front": "Write the word equation for the hydrolysis of lactose.",
+      "back": "lactose + water → glucose + galactose",
+      "hint": "Start with the reactants and add water on the left.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uqh2sx",
+      "kind": "process",
+      "front": "What check should you make when writing a word equation for these sugar reactions?",
+      "back": "Check that every **sugar unit** on the left appears on the right, so no units are lost or gained.",
+      "sectionId": "s5"
+    }
+  ]
+}

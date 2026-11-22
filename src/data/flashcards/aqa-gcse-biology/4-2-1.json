@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-2-1",
+  "topicCode": "4.2.1",
+  "topicName": "Principles of organisation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:39.010Z",
+  "cards": [
+    {
+      "id": "0azgwb0",
+      "kind": "process",
+      "front": "What are the levels of organisation in a multicellular organism, from smallest to largest?",
+      "back": "**Cells** form **tissues**, which form **organs**, which form **organ systems**, which together make up the whole organism.",
+      "hint": "Start with the smallest unit and add one level at a time."
+    },
+    {
+      "id": "0ean12j",
+      "kind": "concept",
+      "front": "Why can't cells deep inside a large organism exchange substances directly with their surroundings?",
+      "back": "They are too far from the outside, so the organism needs **transport systems** to move materials to them and coordinate their work.",
+      "hint": "Think about how far a substance would have to travel to reach a cell in the middle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t2i1ac",
+      "kind": "concept",
+      "front": "How does specialisation help a multicellular organism?",
+      "back": "Specialised cells have features suited to particular functions, so **different jobs can happen at the same time**.",
+      "hint": "Consider what would happen if every cell tried to do every job.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ywo0yu",
+      "kind": "term",
+      "front": "What is a tissue?",
+      "back": "A **tissue** is a group of cells with a similar structure and function that work together to carry out a larger task.",
+      "hint": "Compare it with a single cell and with an organ.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ofmymd",
+      "kind": "mistake",
+      "front": "A student says a tissue is one cell that does a job. What is wrong with this?",
+      "back": "A **tissue** is a group of cells working together, not a single cell; one cell alone cannot carry out the larger task.",
+      "hint": "Think about how many cells a tissue needs to be.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14u620d",
+      "kind": "term",
+      "front": "What is the function of xylem tissue in a plant?",
+      "back": "**Xylem tissue** transports water and mineral ions through the plant.",
+      "hint": "Think about where a plant's supply of materials begins.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iibat8",
+      "kind": "term",
+      "front": "What role does epidermal tissue play in a plant?",
+      "back": "**Epidermal tissue** forms a protective outer layer that covers the surfaces of the plant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ujdh8u",
+      "kind": "term",
+      "front": "What is an organ?",
+      "back": "An **organ** is a group of different tissues working together for a particular function.",
+      "hint": "Contrast it with a tissue, which is made of one type of cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qoql95",
+      "kind": "concept",
+      "front": "Why does the stomach contain more than one type of tissue?",
+      "back": "Digestion needs several tasks: **muscle tissue** contracts to mix food, while **glandular tissue** releases digestive substances.",
+      "hint": "Think about the different jobs that digestion needs done.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wsu5lg",
+      "kind": "term",
+      "front": "Which plant organ carries out photosynthesis to make sugars?",
+      "back": "A **leaf**, which contains tissues that make sugars and other tissues that transport substances or cover its surface.",
+      "hint": "Think about where in a plant photosynthesis takes place.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19h2983",
+      "kind": "term",
+      "front": "What is an organ system?",
+      "back": "An **organ system** is a group of organs working together for a major function, such as the circulatory system moving substances around the body.",
+      "hint": "Compare it with an organ, which is made of tissues.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p4u46w",
+      "kind": "term",
+      "front": "Which organs make up a plant's transport system?",
+      "back": "**Roots**, **stems** and **leaves** work together to move water, mineral ions and sugars around the plant.",
+      "hint": "Think about where water enters the plant.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0drxlfk",
+      "kind": "concept",
+      "front": "Why does a multicellular organism need organ systems rather than just separate organs?",
+      "back": "Organ systems combine organs for a major function, so they can **supply cells and coordinate functions across the whole organism**.",
+      "hint": "Think about what a single organ can achieve on its own compared with a whole body.",
+      "sectionId": "s4"
+    }
+  ]
+}

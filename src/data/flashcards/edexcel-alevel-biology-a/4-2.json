@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-2",
+  "topicCode": "4.2",
+  "topicName": "Biodiversity and endemism",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:38.917Z",
+  "cards": [
+    {
+      "id": "1v8cgp3",
+      "kind": "term",
+      "front": "What is biodiversity?",
+      "back": "**Biodiversity** is the variety of life in an area, seen at three levels: genetic, species and ecosystem diversity.",
+      "hint": "Think about how a wildflower meadow differs from a mown lawn.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qz8n0y",
+      "kind": "term",
+      "front": "What is an endemic species?",
+      "back": "An **endemic species** lives naturally in only one defined geographical area and nowhere else in the world, such as the giant tortoises of the Galápagos Islands.",
+      "hint": "Think about where lemurs live.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "004igu1",
+      "kind": "concept",
+      "front": "Why is species richness alone not enough to compare two habitats?",
+      "back": "Two habitats can have the same richness but differ in how evenly individuals are shared, so **abundance** is needed to show whether one species dominates.",
+      "hint": "Consider what a count of species misses.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1guiakk",
+      "kind": "concept",
+      "front": "How does geographical isolation lead to a species becoming endemic?",
+      "back": "**Geographical isolation** is separation by a barrier such as an island, mountain range or lake, so populations stop interbreeding and evolve separately, possibly into new species found only there.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d7tn69",
+      "kind": "term",
+      "front": "What is species richness?",
+      "back": "**Species richness** is the number of different species in a defined area or sample.",
+      "hint": "It counts kinds, not individuals.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11yio6b",
+      "kind": "term",
+      "front": "What is abundance?",
+      "back": "**Abundance** is the number of individuals of each species in a defined area or sample.",
+      "hint": "Compare this with what richness counts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06xhn1h",
+      "kind": "term",
+      "front": "What is a quadrat?",
+      "back": "A **quadrat** is a square frame of known area used to sample plants or slow-moving animals.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q6iqe5",
+      "kind": "term",
+      "front": "When would a biologist use a transect instead of random quadrats?",
+      "back": "A **transect** is a line across a habitat with samples taken at set intervals, used where conditions change gradually so the change can be shown.",
+      "hint": "Think of a habitat where soil or moisture shifts from one end to the other.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1njulll",
+      "kind": "process",
+      "front": "What are the steps for sampling a habitat with quadrats?",
+      "back": "1 Choose sampling points at random, using random numbers as coordinates. 2 Place the quadrat, identify each species and count the individuals. 3 Repeat many times. 4 Record each quadrat's results so totals can be calculated later.",
+      "hint": "Start with how you decide where the quadrat goes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mgrz6e",
+      "kind": "concept",
+      "front": "Why must quadrat positions be chosen at random?",
+      "back": "Random positions avoid **bias**, so the sample is not shaped by the sampler's choice of spots, and repeating the sampling gives a more representative result.",
+      "hint": "Think about what happens if you pick the patch that looks prettiest.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pvjm24",
+      "kind": "formula",
+      "front": "Which formula gives the index of diversity, $d$?",
+      "back": "$d=\\frac{N(N-1)}{\\sum n(n-1)}$, where $N$ is the total number of individuals of all species, $n$ is the number of individuals of one species, and $\\sum$ means add over every species. $d$ has no unit.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ouq0st",
+      "kind": "example",
+      "front": "A meadow sample has 6 daisies, 3 buttercups and 1 clover. What is its index of diversity?",
+      "back": "$d=2.5$, with no unit. Working: $N=10$, $N(N-1)=90$, $\\sum n(n-1)=30+6+0=36$, so $d=\\frac{90}{36}=2.5$.",
+      "hint": "Start by finding the total number of individuals.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1clbapc",
+      "kind": "mistake",
+      "front": "A student says an endemic species is a rare species. What is wrong with this?",
+      "back": "Endemic describes **range**, not numbers: a species can be common in its one home region and still be endemic.",
+      "hint": "Think about what the word is describing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04ol3eh",
+      "kind": "mistake",
+      "front": "A student says biodiversity is just the number of species. What is wrong with this?",
+      "back": "Biodiversity also includes **genetic variation** within species and the variety of ecosystems, not only the count of species.",
+      "hint": "Check the three levels listed in the first section.",
+      "sectionId": "s1"
+    }
+  ]
+}

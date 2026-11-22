@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-12",
+  "topicCode": "6.12",
+  "topicName": "Types of immunity and vaccination",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:38.199Z",
+  "cards": [
+    {
+      "id": "1gcuuka",
+      "kind": "concept",
+      "front": "Why do most people who recover from measles not catch it again?",
+      "back": "Some activated lymphocytes become long-lived **memory cells** that stay in the body. If the same antigen returns, they respond quickly.",
+      "hint": "Think about what happens to some lymphocytes after the infection has been cleared.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yos1q3",
+      "kind": "concept",
+      "front": "How can a vaccine give protection without causing the disease?",
+      "back": "It contains antigens in a form that cannot cause the disease. Lymphocytes respond by making antibodies and memory cells, which gives **active immunity** safely.",
+      "hint": "Compare this with the risk of catching the disease itself.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03adomh",
+      "kind": "term",
+      "front": "What is **herd immunity**?",
+      "back": "Protection of a population from a pathogen when enough individuals are immune to prevent its spread.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uwrgx7",
+      "kind": "term",
+      "front": "What is an **antigen**?",
+      "back": "A molecule that the immune system can recognise. When a matching lymphocyte meets it, an immune response begins and antibodies are made.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hm3edg",
+      "kind": "concept",
+      "front": "Why does passive immunity not give long-term memory?",
+      "back": "The person's own lymphocytes are not activated, so no **memory cells** form. The supplied antibodies are also gradually broken down.",
+      "hint": "Think about which cells do the work in active immunity.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l9aedg",
+      "kind": "mistake",
+      "front": "What does the word \"passive\" mean in passive immunity?",
+      "back": "It means the person did not make the antibodies themselves. It does not mean their immune system is switched off.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nz3mxk",
+      "kind": "concept",
+      "front": "Which type of immunity gives immediate protection?",
+      "back": "**Passive immunity**, because ready-made antibodies come from another source. Active immunity is slow on first exposure.",
+      "hint": "Think about where the antibodies come from in each type.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eembdn",
+      "kind": "term",
+      "front": "What is a **booster**?",
+      "back": "A later dose of a vaccine that increases the immune response and the number of memory cells.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t97wck",
+      "kind": "formula",
+      "front": "What formula gives the percentage of people who are immune?",
+      "back": "$\\text{Percentage immune}=\\frac{\\text{immune people}}{\\text{total people}}\\times100$, where the answer is a percentage ($\\%$).",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1w30edq",
+      "kind": "example",
+      "front": "A town has 2500 people and 2000 are immune. A disease needs $90\\%$ immune to stop spread. How many more people must become immune?",
+      "back": "**250** more people. $90\\%$ of 2500 is 2250, and $2250-2000=250$.",
+      "hint": "Work out the number needed for the target before subtracting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z1jgmv",
+      "kind": "mistake",
+      "front": "Why is it wrong to say herd immunity makes unvaccinated people immune?",
+      "back": "Herd immunity does not give them immunity. It only lowers their chance of meeting the pathogen, because transmission is reduced.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17u1g4c",
+      "kind": "concept",
+      "front": "Why does an easily spread disease need a higher proportion of the population to be immune?",
+      "back": "Each infected host can pass it to more people, so a larger share must be immune to break the chains of **transmission**.",
+      "hint": "Think about how many people one infected host can pass the pathogen to.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0md3c5b",
+      "kind": "concept",
+      "front": "Why might a vaccine become less effective against a pathogen over time?",
+      "back": "The pathogen may change its antigens, so the antibodies and memory cells from the vaccine may no longer match it well.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0owf05c",
+      "kind": "concept",
+      "front": "What is one reason vaccine uptake may be too low to reach herd immunity?",
+      "back": "Poor access to vaccination or loss of public confidence means fewer people are vaccinated, so the immune proportion stays too low.",
+      "hint": "Think about who gets vaccinated and why some people do not.",
+      "sectionId": "s5"
+    }
+  ]
+}

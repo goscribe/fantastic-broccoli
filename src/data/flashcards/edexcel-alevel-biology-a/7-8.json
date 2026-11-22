@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-8",
+  "topicCode": "7.8",
+  "topicName": "Control of heart rate and ECGs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:57.235Z",
+  "cards": [
+    {
+      "id": "1q88z5c",
+      "kind": "concept",
+      "front": "Why does a transplanted heart keep beating even after its nerves have been cut?",
+      "back": "Heart muscle is **myogenic**, so it starts its own contractions. The sinoatrial node generates the excitation, so no nerve impulse is needed to begin each beat.",
+      "hint": "Think about where the rhythm starts, not where it is adjusted.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19c4twt",
+      "kind": "term",
+      "front": "What is the sinoatrial node?",
+      "back": "A small patch of cells in the wall of the right atrium that acts as the **pacemaker**, generating a wave of excitation again and again at a steady rate.",
+      "hint": "Think about which chamber the wave spreads from first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1g9jj1y",
+      "kind": "concept",
+      "front": "How does the nervous system change heart rate from minute to minute?",
+      "back": "The **cardiac centre** in the brain stem sends impulses along the accelerator nerve to speed the heart up, or along the vagus nerve to slow it down, adjusting the basic rhythm.",
+      "hint": "Consider where the commands come from and which two nerves carry them.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03wsp0a",
+      "kind": "process",
+      "front": "What is the order of excitation through the heart in each beat?",
+      "back": "**Sinoatrial node**, then the atria contract, then the **atrioventricular node** delays the wave, then **Purkyne fibres** carry it down the septum, then the ventricles contract from the apex upwards.",
+      "hint": "Start at the pacemaker and follow the electrical wave.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0grjau5",
+      "kind": "concept",
+      "front": "Why does the wave of excitation pause before it reaches the ventricles?",
+      "back": "The **atrioventricular node** delays the signal by a fraction of a second, giving the atria time to finish emptying into the ventricles before those contract.",
+      "hint": "Think about what tissue sits between the atria and ventricles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15xkdu1",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that nerves start each heartbeat?",
+      "back": "Nerves do not start the heartbeat; the **sinoatrial node** does. Nerves only speed up or slow down the rate that the node has already set.",
+      "hint": "Compare what starts a beat with what changes it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sl7v7g",
+      "kind": "concept",
+      "front": "How do chemoreceptors help raise heart rate during exercise?",
+      "back": "They detect the rise in carbon dioxide and fall in **pH** in the blood and send impulses to the cardiac centre, which sends more impulses along the accelerator nerve. Heart rate rises and removes carbon dioxide sooner.",
+      "hint": "Trace the response from the sensor to the cardiac centre to the node.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1o8vnyc",
+      "kind": "concept",
+      "front": "How do baroreceptors respond when blood pressure is high?",
+      "back": "They send more impulses along the **vagus nerve**, which slows the heart. Low pressure has the opposite effect and speeds the heart up.",
+      "hint": "Consider which of the two nerves carries slowing impulses.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05d2fmg",
+      "kind": "formula",
+      "front": "Which equation gives heart rate from an ECG trace?",
+      "back": "$HR=\\frac{60}{t}$, where $HR$ is heart rate in $\\text{beats min}^{-1}$ and $t$ is the R–R interval in $\\text{s}$.",
+      "hint": "Think about converting seconds into minutes.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1uob506",
+      "kind": "example",
+      "front": "An ECG has R peaks 0.80 s apart. What is the heart rate?",
+      "back": "$HR=\\frac{60}{0.80}=75\\,\\text{beats min}^{-1}$.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0em2zhu",
+      "kind": "term",
+      "front": "What is an electrocardiogram?",
+      "back": "A recording of **voltage** against time, made by electrodes on the chest and limbs as excitation passes through the heart. It shows electrical activity, not blood movement.",
+      "hint": "Consider where the electrodes are placed on the body.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1acddd7",
+      "kind": "concept",
+      "front": "Which ECG wave shows excitation spreading through the ventricles?",
+      "back": "The **QRS complex**. The P wave shows excitation across the atria, and the T wave shows the ventricles recovering for the next beat.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1txmhk7",
+      "kind": "term",
+      "front": "What is tachycardia?",
+      "back": "A **resting** heart rate above $100\\,\\text{beats min}^{-1}$. Its opposite, bradycardia, is a resting rate below $60\\,\\text{beats min}^{-1}$.",
+      "hint": "Think about what counts as too high for a heart at rest.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "01obe3x",
+      "kind": "concept",
+      "front": "What does an irregular rhythm look like on an ECG trace?",
+      "back": "**Unevenly spaced** R peaks. An ectopic beat is an extra beat that comes early, and in fibrillation the trace shows no regular pattern.",
+      "hint": "Look at the gaps between successive R peaks.",
+      "sectionId": "s6"
+    }
+  ]
+}

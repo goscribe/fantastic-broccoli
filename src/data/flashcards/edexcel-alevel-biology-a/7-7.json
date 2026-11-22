@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-7",
+  "topicCode": "7.7",
+  "topicName": "Anaerobic respiration and lactate",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:17.009Z",
+  "cards": [
+    {
+      "id": "07fax5i",
+      "kind": "concept",
+      "front": "Why do sprinting muscles switch to anaerobic respiration?",
+      "back": "Cells use **anaerobic respiration** because ATP is used faster than the blood can deliver oxygen. It releases energy without oxygen, but the ATP yield per glucose is much smaller.",
+      "hint": "Compare how fast ATP is used with how fast oxygen is delivered.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1k1gt1s",
+      "kind": "concept",
+      "front": "Why does glycolysis stop without oxygen unless NAD is regenerated?",
+      "back": "Without oxygen, reduced NAD cannot hand its hydrogen on, so NAD runs out. Glycolysis then stops, and ATP production stops with it.",
+      "hint": "Think about what reduced NAD does with its hydrogen when oxygen is present.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x2b3qk",
+      "kind": "concept",
+      "front": "How does lactate build-up lead to muscle fatigue?",
+      "back": "Lactate and hydrogen ions accumulate and lower the pH. This changes enzyme shape and reduces enzyme activity, including enzymes that release energy for contraction, so the muscle produces less force.",
+      "hint": "Follow the chain from the first build-up to the final loss of output.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04wf25c",
+      "kind": "term",
+      "front": "What is anaerobic respiration?",
+      "back": "**Anaerobic respiration** is energy release that does not use oxygen. It depends on regenerating NAD so that glycolysis can continue.",
+      "hint": "Compare it with the route that needs oxygen at its final stage.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uj7f9n",
+      "kind": "term",
+      "front": "What is aerobic respiration?",
+      "back": "**Aerobic respiration** breaks down organic molecules using oxygen as the final electron acceptor. It releases far more energy from each glucose molecule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1n216yq",
+      "kind": "process",
+      "front": "What happens, in order, when pyruvate is converted to lactate in a muscle cell?",
+      "back": "1) Reduced NAD carries hydrogen. 2) Pyruvate accepts the hydrogen, catalysed by **lactate dehydrogenase**. 3) Lactate forms and NAD is regenerated. 4) NAD returns to glycolysis, and lactate leaves the cell into the blood.",
+      "hint": "Start with what carries the hydrogen after glycolysis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cjgi8u",
+      "kind": "formula",
+      "front": "Which equation summarises pyruvate being converted to lactate in muscle?",
+      "back": "$\\text{pyruvate} + \\text{reduced NAD} \\rightarrow \\text{lactate} + \\text{NAD}$. Reduced NAD gives up its hydrogen, and the regenerated NAD returns to glycolysis.",
+      "hint": "Balance what goes in against what comes out.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1yggrxi",
+      "kind": "mistake",
+      "front": "What is the real job of converting pyruvate to lactate, given it makes no ATP?",
+      "back": "It regenerates **NAD** so that glycolysis can continue. The ATP comes from glycolysis itself, not from the lactate conversion.",
+      "hint": "Think about what glycolysis needs in order to keep running.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nyh46r",
+      "kind": "example",
+      "front": "How many net ATP does glycolysis gain from one glucose molecule?",
+      "back": "$4 - 2 = 2$, so a **net gain of 2 ATP**. Two ATP are used at the start and four are made.",
+      "hint": "Count the ATP used first, then the ATP made.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ywdvd9",
+      "kind": "process",
+      "front": "What happens to lactate after exercise stops?",
+      "back": "1) Lactate travels in the blood to the liver. 2) The liver converts it back to pyruvate. 3) The pyruvate is oxidised in aerobic respiration or converted to glycogen.",
+      "hint": "Follow where the blood carries lactate after it leaves the muscle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "170kivd",
+      "kind": "term",
+      "front": "What is oxygen debt?",
+      "back": "**Oxygen debt** is the extra oxygen taken in after exercise to remove lactate and restore the body to its resting state.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0t44k3b",
+      "kind": "mistake",
+      "front": "Why is lactate not a useless waste product?",
+      "back": "The body converts it back to pyruvate, which can be respired for energy or stored as **glycogen**. Lactate is recycled, not simply discarded.",
+      "hint": "Consider where lactate travels after it leaves the muscle.",
+      "sectionId": "s5"
+    }
+  ]
+}

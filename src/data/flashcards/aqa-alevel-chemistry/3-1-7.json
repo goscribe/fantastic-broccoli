@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-1-7",
+  "topicCode": "3.1.7",
+  "topicName": "Redox",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:59.569Z",
+  "cards": [
+    {
+      "id": "11or5sy",
+      "kind": "concept",
+      "front": "What is a redox reaction, in terms of electrons?",
+      "back": "A **redox reaction** is one where electrons are transferred from one species to another. Oxidation and reduction always happen together, because electrons lost by one species must be gained by another.",
+      "hint": "Think about where the electrons lost when magnesium burns end up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vff9le",
+      "kind": "concept",
+      "front": "Why do chemists assign oxidation numbers to atoms?",
+      "back": "An **oxidation number** shows the electrons an atom has gained or lost, or appears to have. It lets you track electron transfer in covalent compounds, where electron loss is not obvious.",
+      "hint": "Compare ionic compounds with covalent ones.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "198xh40",
+      "kind": "process",
+      "front": "What are the steps for balancing a half-equation in acidic solution?",
+      "back": "**Balance** atoms other than O and H first, then O using $\\mathrm{H_2O}$, then H using $\\mathrm{H^+}$, then charge using electrons.",
+      "hint": "Think about which atoms are balanced last and how charge is fixed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "194wxx9",
+      "kind": "term",
+      "front": "What is oxidation, in terms of electrons?",
+      "back": "**Oxidation** is the loss of electrons by a species. The gain of electrons is reduction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nuz259",
+      "kind": "example",
+      "front": "What is the oxidation number of manganese in $\\mathrm{MnO_4^-}$?",
+      "back": "**+7**. Let manganese be $x$, then $x+4(-2)=-1$, so $x=+7$.",
+      "hint": "Start by setting manganese as x and using oxygen's value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16e8swu",
+      "kind": "mistake",
+      "front": "Why is 'oxidation always means reacting with oxygen' a mistake?",
+      "back": "**Oxidation** means loss of electrons, not reaction with oxygen. Magnesium is oxidised when it reacts with chlorine, which involves no oxygen.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0su2shp",
+      "kind": "concept",
+      "front": "How do changes in oxidation number show whether a reaction is redox?",
+      "back": "An increase in oxidation number is **oxidation**, and a decrease is **reduction**. If one element rises and another falls, the reaction is redox.",
+      "hint": "Compare the numbers before and after the reaction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1p8nhzb",
+      "kind": "example",
+      "front": "In $\\mathrm{Mg(s)+2HCl(aq)\\rightarrow MgCl_2(aq)+H_2(g)}$, which species is the reducing agent?",
+      "back": "**Magnesium** is the reducing agent, because it rises from 0 to +2 and gives electrons away. The $\\mathrm{H^+}$ ions are the oxidising agent.",
+      "hint": "Which species gives electrons away?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rn2udx",
+      "kind": "concept",
+      "front": "What is a disproportionation reaction?",
+      "back": "A reaction in which one element is **oxidised and reduced** at the same time. Chlorine reacting with cold dilute alkali is an example, forming chloride and chlorate(I) ions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09l0ztv",
+      "kind": "example",
+      "front": "Write the half-equation for $\\mathrm{MnO_4^-}$ being reduced to $\\mathrm{Mn^{2+}}$ in acidic solution.",
+      "back": "$\\mathrm{MnO_4^-(aq)+8H^+(aq)+5e^-\\rightarrow Mn^{2+}(aq)+4H_2O(l)}$. Electrons go on the left because this is reduction.",
+      "hint": "Work out the oxygen count first, then the charge.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hsuqzn",
+      "kind": "term",
+      "front": "What is a reducing agent?",
+      "back": "A **reducing agent** is a species that donates electrons and is itself oxidised.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wptis4",
+      "kind": "example",
+      "front": "Why does five $\\mathrm{Fe^{2+}}$ ions react with one $\\mathrm{MnO_4^-}$ ion in acidic solution?",
+      "back": "Manganese falls by 5, from +7 to +2, while each iron rises by 1. So five iron ions are needed to balance one manganese ion.",
+      "hint": "Compare the change in oxidation number of each species.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1r8cdco",
+      "kind": "mistake",
+      "front": "Why must electrons not be left in the final overall equation?",
+      "back": "A correct overall equation has **no electrons**, because they are only transferred between half-equations. They must cancel completely when the half-equations are added.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ja2srp",
+      "kind": "term",
+      "front": "What is a half-equation?",
+      "back": "A **half-equation** shows either oxidation or reduction alone, with electrons included and charge balanced.",
+      "sectionId": "s4"
+    }
+  ]
+}

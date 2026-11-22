@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-5",
+  "topicCode": "2.5",
+  "topicName": "Nucleotides and DNA structure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:04.267Z",
+  "cards": [
+    {
+      "id": "1g2a180",
+      "kind": "concept",
+      "front": "How do the bases on the two DNA strands pair up, and why?",
+      "back": "**Complementary base pairing**: adenine pairs with thymine using two hydrogen bonds, and cytosine pairs with guanine using three. Each pair joins one purine to one pyrimidine.",
+      "hint": "Count the hydrogen bonds in each pair.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g1fhl8",
+      "kind": "term",
+      "front": "What are the three parts of a DNA nucleotide?",
+      "back": "A **nucleotide** has a phosphate group, a five-carbon sugar and a nitrogen-containing base. The phosphate and the base both attach to the sugar.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z7c1ex",
+      "kind": "concept",
+      "front": "Why is the DNA double helix stable, yet still able to be opened?",
+      "back": "Strong covalent bonds make up each backbone, and many hydrogen bonds add up to a strong attraction. Each hydrogen bond is weak alone, so the strands can be **pulled apart** when a gene is copied or read.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sw7e0o",
+      "kind": "process",
+      "front": "What type of reaction joins two nucleotides, and what is released?",
+      "back": "A **condensation reaction** forms a covalent bond between the two nucleotides and releases a molecule of water.",
+      "hint": "Think about what is lost when two molecules link together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pybih0",
+      "kind": "term",
+      "front": "Which carbon atoms does a phosphodiester bond link?",
+      "back": "A **phosphodiester bond** joins the phosphate group on the $5'$ carbon of one sugar to the $3'$ carbon of the next nucleotide's sugar.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pz9yrv",
+      "kind": "example",
+      "front": "How many phosphodiester bonds are in a strand of 10 nucleotides?",
+      "back": "**9 phosphodiester bonds**. Each join between neighbouring nucleotides needs one bond, so there is one fewer bond than there are nucleotides.",
+      "hint": "Count the joins between neighbouring nucleotides.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00bw1nh",
+      "kind": "mistake",
+      "front": "Why is it wrong to say phosphodiester bonds hold the two DNA strands together?",
+      "back": "Phosphodiester bonds join nucleotides within one strand. **Hydrogen bonds** between paired bases hold the two strands together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08vhlgr",
+      "kind": "example",
+      "front": "A double-stranded DNA sample contains $28\\%$ adenine. What percentage is cytosine?",
+      "back": "**$22\\%$ cytosine**. Thymine is also $28\\%$, so A and T make $56\\%$. The rest is $44\\%$, shared equally by C and G.",
+      "hint": "Start with the base that pairs with adenine.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q4bdi4",
+      "kind": "term",
+      "front": "What is a purine, and which bases in DNA are purines?",
+      "back": "A **purine** is a nitrogen-containing base with a double-ring structure. Adenine and guanine are the purines in DNA.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vitad4",
+      "kind": "concept",
+      "front": "Why does pairing one purine with one pyrimidine keep the width of DNA constant?",
+      "back": "Each pair contains one double-ring purine and one single-ring pyrimidine, so the pairs always take up the same space across the helix.",
+      "hint": "Compare the number of rings in each pair.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1i4gy8r",
+      "kind": "term",
+      "front": "What is the base sequence of DNA, and why does it matter?",
+      "back": "The **base sequence** is the order of bases along a DNA strand. It stores genetic information, and different genes have different base sequences.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1r12y71",
+      "kind": "term",
+      "front": "What does it mean for the two strands of DNA to be antiparallel?",
+      "back": "**Antiparallel** means the strands run side by side in opposite directions: one runs $5'$ to $3'$ and its partner runs $3'$ to $5'$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05mbgy7",
+      "kind": "term",
+      "front": "What shape do the two paired polynucleotide strands of DNA form?",
+      "back": "A **double helix**. The sugar–phosphate backbones lie on the outside, and the base pairs lie in the centre.",
+      "hint": "Think about how the two strands wind around each other.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ghosqz",
+      "kind": "term",
+      "front": "Which five-carbon sugar forms the centre of a DNA nucleotide?",
+      "back": "**Deoxyribose** is the five-carbon sugar in DNA nucleotides. The phosphate group and the base are both attached to it.",
+      "sectionId": "s1"
+    }
+  ]
+}

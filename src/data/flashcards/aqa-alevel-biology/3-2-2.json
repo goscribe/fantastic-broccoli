@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-2-2",
+  "topicCode": "3.2.2",
+  "topicName": "Cell division",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:04.415Z",
+  "cards": [
+    {
+      "id": "16hsq81",
+      "kind": "term",
+      "front": "What is the cell cycle?",
+      "back": "The **cell cycle** is the sequence of interphase, mitosis and cytokinesis that a dividing cell passes through.",
+      "hint": "Think about the order of the three named stages.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06fp6fy",
+      "kind": "concept",
+      "front": "Why are the daughter nuclei from mitosis genetically identical to the parent nucleus?",
+      "back": "DNA is **copied before mitosis**, then the sister chromatids separate, so each daughter nucleus gets the same genetic information, provided no mutation occurs.",
+      "hint": "Consider what happens to the DNA before mitosis starts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hv4rq1",
+      "kind": "concept",
+      "front": "How can mutations in genes lead to a tumour?",
+      "back": "Mutations in genes that control division disrupt its regulation, so cells keep dividing when they should stop, forming a growing mass of abnormal cells called a **tumour**.",
+      "hint": "Think about what normal division control is supposed to do.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19qygh8",
+      "kind": "process",
+      "front": "What are the three phases of interphase, in order?",
+      "back": "G1: the cell grows. S: the cell **replicates its DNA**. G2: the cell grows further and prepares to divide.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fbykof",
+      "kind": "process",
+      "front": "What happens during mitosis, in order from prophase to telophase?",
+      "back": "Prophase: chromosomes condense and the nuclear envelope breaks down. Metaphase: chromosomes line up at the equator. Anaphase: centromeres divide and chromatids move apart. Telophase: chromosomes uncoil at the poles and nuclear envelopes form.",
+      "hint": "Start with the first visible change in the chromosomes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04kbz2l",
+      "kind": "concept",
+      "front": "What is the role of spindle fibres in mitosis?",
+      "back": "Spindle fibres attach to the centromeres and pull the **sister chromatids** towards opposite poles during anaphase.",
+      "hint": "Think about what the fibres attach to and where they pull.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n75vw3",
+      "kind": "concept",
+      "front": "How can you tell anaphase apart from telophase under a microscope?",
+      "back": "In anaphase, the chromatids are still **moving apart** towards the poles. In telophase, the chromosomes have reached the poles and nuclear envelopes are forming around them.",
+      "hint": "Look at whether the chromosome groups are still moving or have already arrived.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sywps0",
+      "kind": "mistake",
+      "front": "Why is DNA replication not part of mitosis?",
+      "back": "DNA is replicated in the **S phase of interphase**, so chromosomes already have two sister chromatids before mitosis begins.",
+      "hint": "Compare when DNA is copied with when the chromosomes separate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12mwi62",
+      "kind": "mistake",
+      "front": "A student says mitosis halves the chromosome number. What is the correct answer?",
+      "back": "Mitosis **maintains** the chromosome number. Each daughter nucleus has the same number of chromosomes as the original nucleus.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02okpwo",
+      "kind": "term",
+      "front": "What role does mitosis play in tissue repair?",
+      "back": "Mitosis produces **new cells** that replace damaged or lost cells, and these cells keep the chromosome number needed for that tissue.",
+      "hint": "Think about where replacement cells come from after tissue is damaged.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p45xi0",
+      "kind": "concept",
+      "front": "Why is repair limited in some tissues?",
+      "back": "Some **specialised cells** divide rarely or not at all, so they cannot easily replace damaged or lost cells.",
+      "hint": "Consider how often the cells in that tissue divide.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11zvtlh",
+      "kind": "term",
+      "front": "What is the difference between a benign and a malignant tumour?",
+      "back": "A **benign** tumour stays in one place. A **malignant** tumour can invade nearby tissues and spread to other parts of the body.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0at6afy",
+      "kind": "term",
+      "front": "What is metastasis?",
+      "back": "**Metastasis** is the spread of malignant cells to other parts of the body, where they form further tumours.",
+      "sectionId": "s5"
+    }
+  ]
+}

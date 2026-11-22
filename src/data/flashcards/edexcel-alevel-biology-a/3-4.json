@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-4",
+  "topicCode": "3.4",
+  "topicName": "Prokaryotic cell ultrastructure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:41.379Z",
+  "cards": [
+    {
+      "id": "0nehmbc",
+      "kind": "concept",
+      "front": "What is the main structural difference between a prokaryotic cell and a eukaryotic cell?",
+      "back": "A **prokaryotic cell** has no nucleus and no membrane-bound organelles, so its DNA lies free in the cytoplasm. A eukaryotic cell has both a nucleus and membrane-bound organelles such as mitochondria.",
+      "hint": "Think about what a typical animal cell contains that a bacterium does not.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a4cpu8",
+      "kind": "concept",
+      "front": "How is prokaryotic DNA arranged compared with eukaryotic DNA?",
+      "back": "Prokaryotic DNA is a single **circular** loop, not wound around histones, and lies in the nucleoid. Eukaryotic DNA is **linear** and wound around histones in chromosomes inside a nucleus.",
+      "hint": "Think about the shape of the DNA molecule first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01yskkw",
+      "kind": "concept",
+      "front": "How can a plasmid help a bacterial population survive an antibiotic?",
+      "back": "A plasmid may carry an **antibiotic resistance** gene, so bacteria with it survive. Plasmids can be passed to other bacteria, so the resistance spreads through the population.",
+      "hint": "Think about what a plasmid carries and how it can move between cells.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dmjhoz",
+      "kind": "concept",
+      "front": "Why does a bacterial cell need its cell wall?",
+      "back": "The cell wall **supports** the cell and stops it bursting when water enters it.",
+      "hint": "Think about what keeps a cell from swelling when water flows in.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w63erq",
+      "kind": "term",
+      "front": "What is the nucleoid?",
+      "back": "The **nucleoid** is the region of cytoplasm in a prokaryotic cell that holds its main circular DNA molecule, with no membrane around it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0knedn3",
+      "kind": "term",
+      "front": "What is peptidoglycan?",
+      "back": "**Peptidoglycan** is a polymer of sugar chains cross-linked by short amino acid chains, forming the cell wall of bacteria.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cgm9iz",
+      "kind": "term",
+      "front": "What are histones?",
+      "back": "**Histones** are proteins around which eukaryotic DNA is wound to form chromosomes. Prokaryotic DNA is not wound around them.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07omhk2",
+      "kind": "term",
+      "front": "What is a capsule in a bacterium?",
+      "back": "A **capsule** is a slimy, protective layer outside the cell wall of some bacteria. It helps the cell stick to surfaces.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mfr8ey",
+      "kind": "term",
+      "front": "What is a flagellum?",
+      "back": "A **flagellum** is a long protein filament that rotates to move a bacterium through liquid.",
+      "hint": "Think about how a bacterium swims.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fp9q1i",
+      "kind": "concept",
+      "front": "What does the S in 70S ribosome measure?",
+      "back": "The **S** is a sedimentation unit, based on how fast particles settle in a centrifuge. Prokaryotic ribosomes are $70S$, smaller than the $80S$ ribosomes of eukaryotes.",
+      "hint": "Think about how particles behave when spun very fast.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tqck3i",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that a plant cell wall is made of peptidoglycan?",
+      "back": "Plant walls are made of **cellulose** and fungal walls are made of chitin. Peptidoglycan is found only in bacterial cell walls.",
+      "hint": "Think about which kingdom the wall belongs to.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n8arzx",
+      "kind": "mistake",
+      "front": "Why is 'prokaryotes have circular DNA' not a full comparison answer?",
+      "back": "It names only one cell type. You must also state that **eukaryotes have linear DNA**, so both sides of the feature are compared.",
+      "hint": "Think about what a examiner needs to see for a comparison mark.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fi8b8u",
+      "kind": "concept",
+      "front": "How can cell size help you tell prokaryotic from eukaryotic cells in a micrograph?",
+      "back": "Bacteria are about $1$ to $5\\,\\mu\\text{m}$ long, while many eukaryotic cells are $10$ to $100\\,\\mu\\text{m}$. A cell far smaller than $10\\,\\mu\\text{m}$ is more likely prokaryotic.",
+      "hint": "Compare the typical sizes of the two cell types.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0a6v2dt",
+      "kind": "concept",
+      "front": "Why do mitochondria and chloroplasts have features that resemble bacteria?",
+      "back": "They contain their own small **circular DNA** and $70S$ ribosomes. One explanation is that they descended from prokaryotic cells taken in long ago by a larger cell.",
+      "hint": "Think about where these organelles may have come from.",
+      "sectionId": "s5"
+    }
+  ]
+}

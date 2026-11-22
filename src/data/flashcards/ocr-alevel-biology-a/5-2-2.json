@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "5-2-2",
+  "topicCode": "5.2.2",
+  "topicName": "Respiration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:44.767Z",
+  "cards": [
+    {
+      "id": "1mr2mht",
+      "kind": "concept",
+      "front": "What does respiration actually do to the energy stored in glucose?",
+      "back": "It transfers the energy from organic molecules to **ATP**, which carries usable energy to processes such as active transport and muscle contraction. Cells do not make energy themselves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xu38wf",
+      "kind": "process",
+      "front": "What are the four stages of aerobic respiration, in order?",
+      "back": "**Glycolysis** (cytoplasm), then the **link reaction**, the **Krebs cycle** and **oxidative phosphorylation**. The last three take place in the mitochondrion.",
+      "hint": "Each stage passes its products to the next one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0n19au5",
+      "kind": "concept",
+      "front": "How does the electron transport chain lead to ATP production?",
+      "back": "Electrons lose energy as they pass along the chain, pumping protons into the space between the two membranes. Protons flow back through ATP synthase, making ATP by **chemiosmosis**, and oxygen is the final electron acceptor.",
+      "hint": "Think about what the energy released by the electrons is used for.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x2joh2",
+      "kind": "term",
+      "front": "What is a respiratory substrate?",
+      "back": "An organic molecule, such as **glucose**, that is broken down in respiration to release energy for making ATP.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kncmxk",
+      "kind": "term",
+      "front": "What is glycolysis?",
+      "back": "The splitting of one **glucose** molecule into two **pyruvate** molecules in the cytoplasm. It does not need oxygen and gives a net gain of 2 ATP.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y0iegg",
+      "kind": "mistake",
+      "front": "Where does the carbon dioxide released in respiration come from?",
+      "back": "It is released in the **link reaction** and the **Krebs cycle**. It does not come from oxygen joining glucose.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ibxbw8",
+      "kind": "concept",
+      "front": "Why does glycolysis stop without oxygen unless anaerobic respiration occurs?",
+      "back": "Without oxygen the electron transport chain stops, so **reduced NAD** cannot be oxidised back to NAD. Anaerobic respiration regenerates NAD so glycolysis can continue.",
+      "hint": "Think about what glycolysis needs in order to keep running.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pggfv2",
+      "kind": "process",
+      "front": "Which products does anaerobic respiration make in plants and yeast?",
+      "back": "Pyruvate is converted to **ethanal**, which accepts hydrogen to form **ethanol**, and **carbon dioxide** is released. Animals instead make lactate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0f80qf2",
+      "kind": "mistake",
+      "front": "Why is it wrong to say anaerobic respiration makes as much ATP as aerobic respiration?",
+      "back": "Anaerobic respiration gives only **2 ATP** net from glycolysis. Aerobic respiration gives a large yield because hydrogen passes along the electron transport chain, which anaerobic respiration does not do.",
+      "hint": "Think about which stage makes most of the ATP in aerobic respiration.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14bv6ks",
+      "kind": "formula",
+      "front": "How is the respiratory quotient calculated?",
+      "back": "$\\mathrm{RQ}=\\frac{V_{\\mathrm{CO_2}}}{V_{\\mathrm{O_2}}}$, where $V$ is the gas volume. The **units cancel**, so RQ has no unit.",
+      "hint": "Compare the gas produced with the gas used up.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "01effr5",
+      "kind": "example",
+      "front": "What is the respiratory quotient of a germinating seed that produces 70 $\\mathrm{cm^3}$ of CO$_2$ and consumes 100 $\\mathrm{cm^3}$ of O$_2$?",
+      "back": "$\\mathrm{RQ}=\\frac{70}{100}=0.70$. This suggests that **lipid** is the main respiratory substrate.",
+      "hint": "Divide the carbon dioxide volume by the oxygen volume.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0c9ovlq",
+      "kind": "concept",
+      "front": "Why do fatty acids release more energy per gram than carbohydrate?",
+      "back": "Fatty acids contain many **hydrogen** atoms, so they give more **reduced NAD** per gram. This supplies more electrons to oxidative phosphorylation.",
+      "hint": "Think about the hydrogen content of the molecule.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0xkypae",
+      "kind": "term",
+      "front": "Which RQ value points to carbohydrate as the main substrate?",
+      "back": "A value of **1.0**. A value near **0.7** points to lipid.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1mo7nw7",
+      "kind": "concept",
+      "front": "When are proteins used as a respiratory substrate?",
+      "back": "Mainly when other substrates run short. The amino group is removed from each amino acid, and the remaining **carbon skeleton** enters respiration.",
+      "hint": "Think about the order in which the body prefers its fuels.",
+      "sectionId": "s6"
+    }
+  ]
+}

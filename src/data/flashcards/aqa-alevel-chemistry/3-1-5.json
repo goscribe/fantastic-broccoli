@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-1-5",
+  "topicCode": "3.1.5",
+  "topicName": "Kinetics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:54.734Z",
+  "cards": [
+    {
+      "id": "0q3z1l9",
+      "kind": "concept",
+      "front": "What two conditions must a collision meet before it can lead to reaction?",
+      "back": "The particles must carry at least the **activation energy**, and they must meet in a suitable orientation. Collisions that fail either condition simply bounce apart.",
+      "hint": "Think about what a particle needs before it can change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04svpat",
+      "kind": "concept",
+      "front": "Why does raising the temperature increase the rate of a reaction more than raising the concentration does?",
+      "back": "A greater **proportion of particles** then have at least the activation energy, so more collisions succeed. Higher concentration only adds more collisions, not more energetic ones.",
+      "hint": "Think about the Boltzmann distribution.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12dt1jr",
+      "kind": "concept",
+      "front": "How does a catalyst increase the rate of a reaction?",
+      "back": "It provides a different route with a lower **activation energy**, so a larger proportion of collisions have enough energy to react. It is not used up overall.",
+      "hint": "Picture the peak on a reaction profile.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0k4xh5m",
+      "kind": "term",
+      "front": "What is the reaction rate?",
+      "back": "The **reaction rate** is the change in the amount of a reactant or product per unit time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19djqgb",
+      "kind": "formula",
+      "front": "How is the average rate of reaction calculated from concentration data?",
+      "back": "**Average rate** $=\\frac{\\Delta c}{t}$, where $\\Delta c$ is the change in concentration in $\\mathrm{mol\\,dm^{-3}}$ and $t$ is the time in $\\mathrm{s}$. Quote the rate as a positive number.",
+      "hint": "Compare the size of the change with the time it took.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uia72a",
+      "kind": "example",
+      "front": "What is the average rate when reactant concentration falls from 0.80 to 0.50 mol dm^-3 in 60 s?",
+      "back": "**$5.0\\times10^{-3}\\,\\mathrm{mol\\,dm^{-3}\\,s^{-1}}$**, since $\\frac{0.30}{60}=0.0050$.",
+      "hint": "Find the change in concentration first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1n3bfd9",
+      "kind": "concept",
+      "front": "How is the rate at one moment found from a concentration–time curve?",
+      "back": "It is the **gradient** of the tangent to the curve at that time. Use its size, because a falling reactant curve gives a negative gradient.",
+      "hint": "Think about a straight line that just touches the curve.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04wasfb",
+      "kind": "term",
+      "front": "What is the activation energy?",
+      "back": "The **activation energy**, $E_\\mathrm{a}$, is the minimum energy needed for a collision to lead to reaction. It is usually given in $\\mathrm{kJ\\,mol^{-1}}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1liuycx",
+      "kind": "term",
+      "front": "What is a reaction profile?",
+      "back": "A **reaction profile** is a diagram of energy against progress of reaction. It shows the activation energy and the enthalpy change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q8y05y",
+      "kind": "mistake",
+      "front": "Why is it wrong to read the activation energy from the axis or from the products level on a reaction profile?",
+      "back": "$E_\\mathrm{a}$ is the height from the **reactants** level up to the peak. Measuring from the axis or products gives a different value, which is not the activation energy.",
+      "hint": "Which level does the curve start from?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qqisew",
+      "kind": "concept",
+      "front": "How does a reaction profile show that a reaction is exothermic?",
+      "back": "The **products** lie lower than the reactants, so $\\Delta H$ is negative and heat is released to the surroundings.",
+      "hint": "Compare the product line with the reactant line.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0w7mvw7",
+      "kind": "concept",
+      "front": "How does raising the concentration or the pressure of a gas increase the rate?",
+      "back": "More particles fit into each unit of volume, so collisions become more **frequent**. The proportion of particles with enough energy does not change.",
+      "hint": "Think about how crowded the particles are.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ekf2ax",
+      "kind": "mistake",
+      "front": "Why is saying that particles move faster an incomplete reason for a higher temperature speeding up a reaction?",
+      "back": "The main reason is that a **greater proportion of particles** have at least the activation energy, so more collisions succeed. Faster movement alone adds only some extra collisions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02gks9l",
+      "kind": "concept",
+      "front": "What happens to the enthalpy change when a catalyst is added to a reaction?",
+      "back": "It is **unchanged**, because the reactant and product levels stay the same. Only the peak of the reaction profile moves down.",
+      "hint": "Think about where the start and end points sit.",
+      "sectionId": "s5"
+    }
+  ]
+}

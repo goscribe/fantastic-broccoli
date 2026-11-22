@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-6-4",
+  "topicCode": "3.6.4",
+  "topicName": "Homeostasis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:30.772Z",
+  "cards": [
+    {
+      "id": "1au9k0z",
+      "kind": "term",
+      "front": "What is homeostasis?",
+      "back": "**Homeostasis** is the maintenance of internal conditions, such as blood glucose, water and ion concentrations, within limits suitable for cells to function.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bwuw25",
+      "kind": "concept",
+      "front": "How does negative feedback bring a changed condition back towards its normal level?",
+      "back": "A **receptor** detects the change, a coordination centre triggers an effector, and the response opposes the change. As the level returns to normal, the stimulus for the response falls.",
+      "hint": "Trace the stages from detection to the point where the response weakens.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mbtvgw",
+      "kind": "process",
+      "front": "What steps lower blood glucose after a meal?",
+      "back": "Pancreatic **beta cells** detect the rise and release **insulin**. Insulin binds to target cells, increasing glucose uptake by muscle cells and glycogen storage, and reducing glucose production by the liver.",
+      "hint": "Start with the detection step in the pancreas.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l531qd",
+      "kind": "process",
+      "front": "How does falling blood glucose lead to the liver releasing glucose into the blood?",
+      "back": "Pancreatic alpha cells release **glucagon**, which stimulates breakdown of stored **glycogen** and glucose production from non-carbohydrate substances. The liver then releases glucose into the blood.",
+      "hint": "Compare these steps with the ones used when glucose rises.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "199yg73",
+      "kind": "concept",
+      "front": "Why do insulin and glucagon not switch each other off?",
+      "back": "Their secretion changes with blood glucose concentration, so insulin responds to rises and glucagon responds to falls.",
+      "hint": "Think about what controls how much of each hormone is released.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wxegn0",
+      "kind": "concept",
+      "front": "How does ADH change urine when blood water potential falls?",
+      "back": "**Osmoreceptors** in the hypothalamus detect the fall, the posterior pituitary releases more ADH, and collecting ducts become more permeable to water. More water returns to the blood, so urine is more concentrated.",
+      "hint": "Start with where the change is detected.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1tkjgog",
+      "kind": "term",
+      "front": "What is the role of the loop of Henle in the kidney?",
+      "back": "It establishes a **low water potential** in the kidney tissue around the collecting ducts, allowing water to leave the filtrate by osmosis.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qtjkhc",
+      "kind": "term",
+      "front": "What is glycogen, and where is it stored?",
+      "back": "**Glycogen** is a storage carbohydrate made from glucose, found in liver and muscle cells.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dktbq7",
+      "kind": "term",
+      "front": "What is osmosis?",
+      "back": "The net movement of **water** across a partially permeable membrane from higher to lower water potential.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1u3g6b5",
+      "kind": "concept",
+      "front": "Why must temperature and pH stay within suitable ranges for enzymes?",
+      "back": "Enzymes are biological catalysts whose activity depends on conditions. Large changes in temperature or pH reduce their **activity** and disrupt metabolic reactions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fllupe",
+      "kind": "mistake",
+      "front": "A student says negative feedback means a condition never changes. What is wrong with this?",
+      "back": "Negative feedback does not stop change. It means the **response opposes** the change so the condition moves back towards normal.",
+      "hint": "Consider what the response is doing to the change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11v4dta",
+      "kind": "mistake",
+      "front": "Why is it wrong to say insulin directly removes glucose from the blood?",
+      "back": "Insulin acts through **target cells**, increasing glucose uptake and glycogen storage. It does not remove glucose from the blood directly.",
+      "hint": "Think about where insulin binds first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17hm2ln",
+      "kind": "concept",
+      "front": "What does aldosterone do in the kidneys?",
+      "back": "It increases **sodium ion** reabsorption by the kidneys, while excess ions can leave in urine.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mkgxp6",
+      "kind": "mistake",
+      "front": "What is the error in thinking homeostasis holds every condition at one exact value?",
+      "back": "Homeostasis **limits changes** within ranges so cells can keep functioning. It does not keep every condition at one fixed value.",
+      "hint": "Think about the word used in the definition.",
+      "sectionId": "s1"
+    }
+  ]
+}

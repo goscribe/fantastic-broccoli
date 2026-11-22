@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-16",
+  "topicCode": "2.16",
+  "topicName": "Ethics of genetic screening",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:15.977Z",
+  "cards": [
+    {
+      "id": "1fd6p0a",
+      "kind": "concept",
+      "front": "What is the main benefit of genetic screening for individuals?",
+      "back": "Early detection allows treatment that **prevents or reduces harm**, and gives time to plan. In phenylketonuria, a controlled diet protects the baby's developing brain.",
+      "hint": "Think about what happens when a disorder is found before it causes damage.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1b8jhwi",
+      "kind": "term",
+      "front": "What is informed consent?",
+      "back": "**Informed consent** is a person agreeing to a test after understanding its benefits, risks and possible results.",
+      "hint": "Look at both the agreement and the understanding behind it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ldy2m3",
+      "kind": "mistake",
+      "front": "Why is a positive genetic test result not a certain prediction that disease will develop?",
+      "back": "Many results only show an **increased risk**, not that the disease will definitely develop. Treat a positive result as a risk, not a diagnosis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zkklrp",
+      "kind": "term",
+      "front": "What does autonomy mean in the context of genetic testing?",
+      "back": "**Autonomy** is a person's right to decide for themselves, which depends on a free choice about whether to be tested.",
+      "hint": "Think about who should make the decision about being tested.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ezsbuv",
+      "kind": "concept",
+      "front": "What risk do invasive prenatal tests carry for the pregnancy?",
+      "back": "They carry a small risk of **miscarriage**, so the test itself can harm the pregnancy.",
+      "hint": "Think about a procedure that goes directly into the pregnancy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qea4ap",
+      "kind": "term",
+      "front": "What is moral status?",
+      "back": "**Moral status** is how far the interests of a being must be taken into account when deciding what is right.",
+      "hint": "Think about whose interests count, and how much they count.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d77956",
+      "kind": "term",
+      "front": "What is a designer baby?",
+      "back": "A **designer baby** is an embryo selected, or genetically altered, so the child has chosen traits unrelated to preventing disease, such as appearance.",
+      "hint": "Contrast this with choosing embryos to avoid serious disease.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05ex5pm",
+      "kind": "concept",
+      "front": "How does pre-implantation genetic diagnosis work?",
+      "back": "Embryos made by in vitro fertilisation are tested **before one is placed in the womb**. Regulators in the UK license which conditions may be tested.",
+      "hint": "Think about when the testing happens relative to pregnancy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1grudog",
+      "kind": "concept",
+      "front": "What is the 'right not to know' in predictive testing?",
+      "back": "It is the right to decline a test, such as for Huntington's disease, because you do not want the knowledge. It is part of **autonomy**.",
+      "hint": "Consider why someone might avoid learning a diagnosis that has no cure.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13uo1yy",
+      "kind": "concept",
+      "front": "Why can one person's screening result affect their relatives?",
+      "back": "A person's **genotype is partly shared** with relatives, so the result may reveal a risk to a sister, brother or child who did not ask to be tested.",
+      "hint": "Think about what passes from parents to children.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0536ckc",
+      "kind": "term",
+      "front": "What is confidentiality?",
+      "back": "**Confidentiality** is the duty to keep a person's genetic information private unless they agree to share it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hcmxls",
+      "kind": "term",
+      "front": "What is genetic discrimination?",
+      "back": "**Genetic discrimination** is the unfair treatment of a person because of their genotype or their risk of inherited disease, for example by insurers or employers.",
+      "hint": "Think about who might treat someone differently because of a test result.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1051ane",
+      "kind": "process",
+      "front": "What steps make up a strong answer to an ethical question about genetic screening?",
+      "back": "First **state the issue**, then give arguments on each side, then reach a reasoned judgement supported by evidence. A bare opinion earns little credit.",
+      "hint": "Think about the order you would plan an essay in.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1co5ru1",
+      "kind": "concept",
+      "front": "Under what conditions do many people support genetic screening?",
+      "back": "When it is **voluntary, informed and backed by genetic counselling**, which explains results and choices. Opponents object when it pressures people or treats disability as a problem.",
+      "hint": "Think about what protects the person being tested.",
+      "sectionId": "s5"
+    }
+  ]
+}

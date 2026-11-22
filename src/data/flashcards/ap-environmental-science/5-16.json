@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-16",
+  "topicCode": "5.16",
+  "topicName": "Aquaculture",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:16.001Z",
+  "cards": [
+    {
+      "id": "19dtwag",
+      "kind": "term",
+      "front": "What is aquaculture?",
+      "back": "**Aquaculture** is the farming of aquatic organisms such as fish, shellfish, and seaweed under human control, in fresh water or the ocean. Farmers choose the species, stock it, and harvest at market size.",
+      "hint": "Compare it with catching animals from natural populations.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16sflf0",
+      "kind": "term",
+      "front": "What does eutrophication mean?",
+      "back": "**Eutrophication** is the enrichment of water with nutrients, such as nitrogen and phosphorus, which drives rapid algal growth.",
+      "hint": "Think about where fish waste and uneaten feed end up.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nejlhl",
+      "kind": "process",
+      "front": "In order, how does fish-farm waste lower oxygen in nearby water?",
+      "back": "Waste and uneaten feed add nutrients. Algae bloom, then die. Decomposers break down the dead algae, which uses up **dissolved oxygen** and lowers the oxygen level.",
+      "hint": "Start with what the waste adds to the water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1y474uj",
+      "kind": "term",
+      "front": "What is a net pen?",
+      "back": "A **net pen** is a floating mesh enclosure in coastal waters or lakes where fish are raised. Water flows through the mesh.",
+      "hint": "Think about where it floats and how water moves through it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0llpzms",
+      "kind": "term",
+      "front": "What is a recirculating aquaculture system?",
+      "back": "A **recirculating aquaculture system** is a set of land-based tanks that filters and reuses its water to raise fish.",
+      "hint": "Compare it with open net pens in the sea.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nlk2nt",
+      "kind": "mistake",
+      "front": "Why is aquaculture not the same as catching fish with a net?",
+      "back": "Aquaculture raises animals in enclosures under human control. Farmed animals are not caught from natural populations, so it is not a form of fishing.",
+      "hint": "Focus on where the animals come from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15xljjz",
+      "kind": "concept",
+      "front": "How can fish farms harm wild fish populations?",
+      "back": "Crowded stock spread disease and parasites that can pass to nearby wild fish. Escaped farmed fish may compete with wild fish or breed with them.",
+      "hint": "Think about what happens when animals are packed together and pens fail.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pkqkxj",
+      "kind": "term",
+      "front": "What is fishmeal?",
+      "back": "**Fishmeal** is a protein-rich powder made from ground wild-caught fish, used as feed for farmed carnivorous fish, so farming can still draw on wild stocks.",
+      "hint": "Think about what carnivorous farmed fish eat.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ojf0yv",
+      "kind": "concept",
+      "front": "Why do some shrimp farms harm coastal habitat?",
+      "back": "Some shrimp farms replace **coastal wetlands**, such as mangrove forests, which destroys habitat for many species.",
+      "hint": "Think about what kind of land lies along the coast.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0scfiyf",
+      "kind": "example",
+      "front": "Why does raising mussels usually cause less pollution than raising salmon in net pens?",
+      "back": "Mussels are filter feeders that need no added feed, so no uneaten feed or fishmeal is added to the water or drawn from wild stocks.",
+      "hint": "Compare how each animal gets its food.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18g13q5",
+      "kind": "concept",
+      "front": "How does the supply of farmed fish compare with wild-caught fish?",
+      "back": "Farming gives a **steady, controllable** supply that can ease pressure on overfished wild stocks. Wild fishing depends on the size of natural stocks.",
+      "hint": "Think about what limits each supply.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t7aqry",
+      "kind": "term",
+      "front": "What is bycatch?",
+      "back": "**Bycatch** is the unintended capture of non-target species during fishing. Bottom trawls can cause it and also damage the seafloor.",
+      "hint": "Think about what the net catches besides the intended fish.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1im7w0v",
+      "kind": "example",
+      "front": "Which farm practice reduces the need for fishmeal in feed?",
+      "back": "**Plant-based feeds** reduce the need for fishmeal, so fewer wild fish are caught to make feed.",
+      "hint": "Think about what could replace the wild-fish ingredient.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13a09lh",
+      "kind": "concept",
+      "front": "Why do farms need to balance profit and protection?",
+      "back": "Each environmental fix has a cost, so farms weigh profit against protection. Regulation and monitoring help make sure the practices are used.",
+      "sectionId": "s5"
+    }
+  ]
+}

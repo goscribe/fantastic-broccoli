@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "7-6",
+  "topicCode": "7.6",
+  "topicName": "Reducing air pollutants",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:47.434Z",
+  "cards": [
+    {
+      "id": "1gth29o",
+      "kind": "term",
+      "front": "What does the catalyst in a catalytic converter do to exhaust gases?",
+      "back": "It turns carbon monoxide, nitrogen oxides, and unburned fuel into less harmful gases such as nitrogen and water vapor. A **catalytic converter** is the exhaust device that holds this catalyst.",
+      "hint": "Think about where the exhaust goes after leaving the engine.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0w0zgh5",
+      "kind": "concept",
+      "front": "Why is pollution prevention generally better than capturing pollutants after they form?",
+      "back": "**Pollution prevention** stops pollutants forming at the source, so it avoids waste such as sludge and does not depend on capture equipment working perfectly.",
+      "hint": "Consider which option has to deal with waste that already exists.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1u98owk",
+      "kind": "concept",
+      "front": "How does emissions trading reduce total pollution?",
+      "back": "The government sets a **cap** on total emissions and issues permits. Companies that cut cheaply sell spare permits, and lowering the cap over time lowers total emissions.",
+      "hint": "Think about who gains money from cutting emissions cheaply.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tdrry1",
+      "kind": "process",
+      "front": "What three parts make up how regulation works, according to the note?",
+      "back": "A **legal limit**, monitoring, and penalties or incentives.",
+      "hint": "Think about how a rule is set, checked, and enforced.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ewdk34",
+      "kind": "term",
+      "front": "What is the Clean Air Act?",
+      "back": "The **Clean Air Act** is a US law, first passed in 1963 and greatly strengthened in 1970, that directs the EPA to set and enforce limits on common air pollutants.",
+      "hint": "Think about which government agency carries out the law.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0x32lt9",
+      "kind": "term",
+      "front": "What does an electrostatic precipitator do to particles in exhaust gas?",
+      "back": "It gives particles an electric **charge**, then the charged particles stick to oppositely charged plates and are collected.",
+      "hint": "Think about what opposite charges do to each other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1saqcqi",
+      "kind": "term",
+      "front": "Which exhaust gas does a scrubber remove?",
+      "back": "**Sulfur dioxide**. A scrubber sprays a liquid, often water with limestone, through the exhaust so the gas dissolves or reacts, leaving a wet sludge to dispose of.",
+      "hint": "Think about what the exhaust passes through inside the device.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1op86r3",
+      "kind": "concept",
+      "front": "Why does burning natural gas instead of coal reduce the load on industrial controls?",
+      "back": "Cleaner fuel creates less pollution to begin with, so the **scrubber** and precipitator have less to capture before exhaust leaves the stack.",
+      "hint": "Consider what happens inside the boiler before the exhaust reaches any device.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0c0r8hu",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a catalytic converter removes carbon dioxide?",
+      "back": "It does not remove **carbon dioxide**. It actually produces some while it cleans up other pollutants.",
+      "hint": "Think about which chemical changes the catalyst drives.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d99ux7",
+      "kind": "term",
+      "front": "What does energy conservation mean?",
+      "back": "Using less **energy** to do the same task, which lowers the fuel burned to supply it.",
+      "hint": "Think about getting the same result from a smaller input.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lmvtvr",
+      "kind": "concept",
+      "front": "Why do individual choices matter even though each one cuts only a little pollution?",
+      "back": "Each small action cuts emissions a bit, and millions of people acting together make a real difference.",
+      "hint": "Consider how one household's effect compares with the whole country's.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "008vvnf",
+      "kind": "concept",
+      "front": "What is a key limitation of scrubbers as a control method?",
+      "back": "They are **costly** and leave behind sludge waste that must be disposed of.",
+      "hint": "Consider the drawbacks of the scrubber listed in the table.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lqxf4d",
+      "kind": "concept",
+      "front": "Why is personal action considered limited as a control method?",
+      "back": "It is cheap and immediate, but small alone and relies on **voluntary** choice rather than a legal requirement.",
+      "hint": "Consider who has to act for the method to work at scale.",
+      "sectionId": "s5"
+    }
+  ]
+}

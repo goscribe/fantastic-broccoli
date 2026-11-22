@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-10-4",
+  "topicCode": "3.10.4",
+  "topicName": "Non-ionising imaging",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:14.068Z",
+  "cards": [
+    {
+      "id": "0k5kh3g",
+      "kind": "concept",
+      "front": "How does ultrasound imaging find the position of a tissue boundary?",
+      "back": "Part of each pulse is **reflected** at a boundary between tissues. The time the **echo** takes to return shows how far away the boundary is.",
+      "hint": "Think about shouting across a valley and hearing a return sound.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0e1qhsf",
+      "kind": "concept",
+      "front": "How can one piezoelectric transducer both send and receive ultrasound?",
+      "back": "An alternating potential difference makes the **piezoelectric crystal** vibrate and emit a pulse. A returning echo makes it vibrate again, producing a small potential difference that is detected.",
+      "hint": "Consider what a crystal does when it is deformed or driven electrically.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "020odv0",
+      "kind": "formula",
+      "front": "Which equation gives the depth $d$ of a boundary from the echo time $t$ and the speed $c$?",
+      "back": "$d=\\frac{ct}{2}$, where $d$ is depth in $\\text{m}$, $c$ is speed of ultrasound in $\\text{m\\,s}^{-1}$, and $t$ is echo time in $\\text{s}$.",
+      "hint": "Check the units of your answer at the end.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qrtg5e",
+      "kind": "example",
+      "front": "Calculate the depth of a boundary when an echo returns $52\\,\\mathrm{\\mu s}$ after the pulse, with $c=1.5\\times10^{3}\\,\\mathrm{m\\,s^{-1}}$.",
+      "back": "$d=\\frac{1.5\\times10^{3}\\times52\\times10^{-6}}{2}=3.9\\times10^{-2}\\,\\text{m}$, or 3.9 cm.",
+      "hint": "Convert microseconds to seconds before you multiply.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1jajf05",
+      "kind": "mistake",
+      "front": "Why is it wrong to use the full echo time directly in $d=\\frac{ct}{2}$?",
+      "back": "It gives **twice** the true depth. The recorded time covers the pulse travelling to the boundary and back, so the depth is half the distance covered.",
+      "hint": "Count how many journeys the pulse makes before it returns.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gwjo4q",
+      "kind": "term",
+      "front": "What is acoustic impedance, and what is its unit?",
+      "back": "**Acoustic impedance** $Z$ is the product of density and the speed of ultrasound, $Z=\\rho c$, with unit $\\text{kg\\,m}^{-2}\\,\\text{s}^{-1}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1evt0bn",
+      "kind": "concept",
+      "front": "What makes almost all ultrasound reflect at the skin when no gel is used?",
+      "back": "Air and soft tissue have very different acoustic impedances. The large impedance difference means almost all the ultrasound is reflected.",
+      "hint": "Compare the impedance of air with the impedance of tissue.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sz4nfz",
+      "kind": "term",
+      "front": "What job does coupling gel do between the transducer and the skin?",
+      "back": "It removes the layer of **air** and has an impedance close to that of skin, so more ultrasound enters the body.",
+      "hint": "Think about what the gel replaces and what it matches.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11m10tg",
+      "kind": "term",
+      "front": "What does an A-scan show?",
+      "back": "An **A-scan** plots echo amplitude against time for one fixed line through the body. Each peak is a boundary, and later peaks come from deeper boundaries.",
+      "hint": "Think about a transducer that stays in one position.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rfb3db",
+      "kind": "term",
+      "front": "How is a B-scan built, and how is echo strength shown?",
+      "back": "A **B-scan** combines many A-scans from different positions or directions into a 2D image. Echo strength is shown as the **brightness** of spots.",
+      "hint": "Compare it with the single line used in an A-scan.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wv4ixv",
+      "kind": "process",
+      "front": "What is the order of events in one pulse-echo cycle?",
+      "back": "The transducer sends a very short pulse, then listens while echoes return from boundaries. It waits through a long gap before sending the next pulse.",
+      "hint": "Think about why the gap between pulses must be long enough.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10cjs0y",
+      "kind": "concept",
+      "front": "Why must an operator choose the ultrasound frequency to suit the depth of the structure?",
+      "back": "Higher frequency gives shorter wavelength and finer detail, but is absorbed more strongly. Lower frequency penetrates further, so it suits deep structures.",
+      "hint": "Think about the trade-off between sharpness and how far the wave reaches.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "05k0hjn",
+      "kind": "concept",
+      "front": "Why are structures behind bone or air hard to see with ultrasound?",
+      "back": "Bone and air reflect ultrasound strongly, so little passes through to reach the structures behind them.",
+      "hint": "Compare how much ultrasound reflects at these materials with soft tissue.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1mobbvk",
+      "kind": "term",
+      "front": "What does non-ionising mean for an ultrasound wave?",
+      "back": "It cannot remove electrons from atoms to form **ions**, so it is regarded as safe at imaging intensities.",
+      "hint": "Think about what ionising radiation does to atoms.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-8-1",
+  "topicCode": "3.8.1",
+  "topicName": "Mutations and protein function",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:41.836Z",
+  "cards": [
+    {
+      "id": "0wtdp6z",
+      "kind": "term",
+      "front": "What is a gene mutation?",
+      "back": "A **gene mutation** is a change in the DNA base sequence within a gene. It can arise when DNA is copied or after exposure to mutagens such as ultraviolet radiation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r4kc8l",
+      "kind": "concept",
+      "front": "Why can changing one DNA base alter the amino acid sequence of a protein?",
+      "back": "Each **codon** of three bases specifies one amino acid or a stop signal. Changing one base can turn a codon into one for a different amino acid, or into a stop codon.",
+      "hint": "Think about how bases are read in groups during translation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0owjv36",
+      "kind": "process",
+      "front": "How does the sickle cell mutation lead to symptoms, from DNA to the body?",
+      "back": "A base substitution changes the haemoglobin beta-chain gene, replacing glutamic acid with valine. Sickle haemoglobin forms fibres at low oxygen, distorting red cells that can break down or block small vessels, reducing oxygen delivery.",
+      "hint": "Work through the levels: DNA, amino acid, protein behaviour, then cells.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gcn5sj",
+      "kind": "term",
+      "front": "What is a substitution mutation?",
+      "back": "A **substitution** is a mutation in which one DNA base is replaced by another.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ma9yu9",
+      "kind": "term",
+      "front": "What is the difference between an addition and a deletion?",
+      "back": "An **addition** (insertion) adds bases to the DNA sequence, while a **deletion** removes bases from it.",
+      "hint": "Consider what happens to the number of bases in the sequence.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ai8slt",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume every gene mutation changes the protein a cell makes?",
+      "back": "A mutation's effect depends on where the change occurs and how it alters the sequence, so some mutations leave the protein unchanged.",
+      "hint": "Think about where the change lands in the gene.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ugk5a9",
+      "kind": "concept",
+      "front": "Why does inserting or deleting one base often change many amino acids?",
+      "back": "It causes a **frameshift**. Bases after the change are grouped into different codons, so the ribosome reads different amino acids or reaches an early stop codon.",
+      "hint": "Consider how codons are counted from the start of the sequence.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17omhts",
+      "kind": "concept",
+      "front": "Why might a substitution leave a protein's amino acid unchanged?",
+      "back": "Several codons specify the same amino acid, so a changed base can produce a different codon that still codes for the original amino acid.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kueya3",
+      "kind": "concept",
+      "front": "Why can a change in primary structure reduce an enzyme's activity?",
+      "back": "It can alter the protein's folding and active site shape, so the substrate binds less effectively. A shortened protein may not function at all.",
+      "hint": "Think about what determines the three-dimensional shape of a protein.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u40h9b",
+      "kind": "concept",
+      "front": "Why does the position of an amino acid change matter?",
+      "back": "A change away from a functional region may leave activity largely unchanged, while a change to an amino acid involved in binding or maintaining shape may have a substantial effect.",
+      "hint": "Compare residues close to the active site with those far away from it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jhzmck",
+      "kind": "term",
+      "front": "What is an enzyme's active site?",
+      "back": "The **active site** is the region where the enzyme's substrate binds and the reaction is catalysed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1htwl02",
+      "kind": "term",
+      "front": "What is sickle haemoglobin?",
+      "back": "**Sickle haemoglobin** is a variant whose beta chain contains valine instead of glutamic acid at one position.",
+      "hint": "Compare the beta chain of this variant with normal haemoglobin.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ra0rn6",
+      "kind": "term",
+      "front": "What are mutagens?",
+      "back": "**Mutagens** are agents that increase the rate at which mutations occur, such as ultraviolet radiation.",
+      "sectionId": "s1"
+    }
+  ]
+}

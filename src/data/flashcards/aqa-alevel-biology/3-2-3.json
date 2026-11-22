@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-2-3",
+  "topicCode": "3.2.3",
+  "topicName": "Transport across membranes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:37.691Z",
+  "cards": [
+    {
+      "id": "08y43c2",
+      "kind": "term",
+      "front": "What is the net movement of particles from higher to lower concentration called?",
+      "back": "**Diffusion**. Particles move randomly in both directions, but more leave the concentrated region, so there is a net movement until concentrations are equal.",
+      "hint": "Think about which region particles leave from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1sfk7as",
+      "kind": "concept",
+      "front": "What value is given to pure water's water potential, and what does adding a solute do to it?",
+      "back": "Pure water has the **highest** water potential, defined as zero. Dissolved solutes lower it, making the value more negative.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "152s2yj",
+      "kind": "concept",
+      "front": "Why does active transport need a continuing energy supply, unlike diffusion?",
+      "back": "Active transport moves substances from lower to higher concentration, against the gradient, so **ATP** must supply energy. Stopping ATP production reduces uptake.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05wjyx1",
+      "kind": "concept",
+      "front": "How do channel proteins and carrier proteins differ in facilitated diffusion?",
+      "back": "**Channel proteins** form pores for particular ions or suitable particles. Carrier proteins bind a specific substance and change shape to move it across. Neither uses metabolic energy.",
+      "hint": "Compare an open pore with a binding site that changes shape.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17q56s5",
+      "kind": "term",
+      "front": "What are aquaporins?",
+      "back": "**Aquaporins** are channel proteins that allow water to cross cell membranes.",
+      "hint": "Think about other routes water can take besides the bilayer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "125nsna",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume every use of a membrane protein means active transport?",
+      "back": "Facilitated diffusion also uses proteins, but it follows the concentration gradient and needs no energy. Active transport moves substances against the gradient using ATP.",
+      "hint": "Compare the direction of movement with the gradient.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09waue2",
+      "kind": "mistake",
+      "front": "Why is it wrong to say water moves towards a higher water potential in osmosis?",
+      "back": "Water moves towards a **lower**, more negative water potential. Dissolved solutes make the value more negative, so water moves towards that side.",
+      "hint": "Compare the two sides by how many solute particles they contain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0efqs7g",
+      "kind": "concept",
+      "front": "What happens to an animal cell placed in a solution with higher water potential than its cytoplasm?",
+      "back": "The cell gains water by osmosis and may **burst** if it takes in too much water.",
+      "hint": "Compare water potential inside the cell with outside.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tow9uj",
+      "kind": "term",
+      "front": "What is plasmolysis in a plant cell?",
+      "back": "**Plasmolysis** is when the cell surface membrane pulls away from the cell wall after further water loss from the cell.",
+      "hint": "Think about what happens to the cell's contents as water leaves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06hf4me",
+      "kind": "term",
+      "front": "What is turgor pressure?",
+      "back": "**Turgor pressure** is the pressure produced when the contents of a plant cell push against its cell wall as water enters.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fnp324",
+      "kind": "concept",
+      "front": "How does the sodium-glucose co-transporter bring glucose into an intestinal epithelial cell?",
+      "back": "Sodium ions move down their concentration gradient through the same **carrier**, pulling glucose in against its own gradient.",
+      "hint": "Think about which substance's gradient supplies the energy.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vwbz8p",
+      "kind": "process",
+      "front": "In what order do the sodium-potassium pump and co-transporter move glucose into an epithelial cell?",
+      "back": "1. The pump uses ATP to move sodium out, keeping a sodium gradient. 2. The co-transporter carries sodium and glucose in together. 3. Glucose leaves through a facilitated diffusion carrier.",
+      "hint": "Think about the sequence in the note's co-transport section.",
+      "sectionId": "s5"
+    }
+  ]
+}

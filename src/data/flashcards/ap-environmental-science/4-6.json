@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "4-6",
+  "topicCode": "4.6",
+  "topicName": "Watersheds",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:52.705Z",
+  "cards": [
+    {
+      "id": "184c7n0",
+      "kind": "term",
+      "front": "What is a watershed?",
+      "back": "A **watershed** is the land area whose surface water and groundwater drain to one shared outlet, such as a river, lake, or bay.",
+      "hint": "Think about where rain falling on a hillside ends up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1l6m4a9",
+      "kind": "concept",
+      "front": "Why does paving a forest raise flood risk?",
+      "back": "Pavement is an **impervious surface**, so little water infiltrates. Nearly all rain becomes runoff that reaches streams quickly, so stream levels rise sharply.",
+      "hint": "Compare a forest floor with a parking lot after the same storm.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11yifon",
+      "kind": "process",
+      "front": "What path does a raindrop follow from where it lands to the watershed outlet?",
+      "back": "It either runs off over the land or infiltrates as groundwater. Both flow downhill into tributaries, which merge into a river that carries water to the outlet.",
+      "hint": "Start at the moment the drop lands on the ground.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hkw9xy",
+      "kind": "mistake",
+      "front": "Why is it wrong to think water underground is not part of the watershed?",
+      "back": "Groundwater is still part of the watershed. It seeps into streams and often keeps them flowing between rainstorms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06y875g",
+      "kind": "term",
+      "front": "What is a divide?",
+      "back": "A **divide** is the elevated line of land, such as a ridge crest, that separates two neighboring watersheds.",
+      "hint": "Think about which way rain flows on each side of a ridge.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y8g1yp",
+      "kind": "term",
+      "front": "What is a tributary?",
+      "back": "A **tributary** is a smaller stream or river that flows into a larger stream or river.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19sej4y",
+      "kind": "concept",
+      "front": "How does deforestation change a watershed?",
+      "back": "It reduces infiltration and lets more soil wash into streams, where the sediment clouds the water and can smother life on the stream bed.",
+      "hint": "Think about what roots and leaf litter do for water.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hss5x3",
+      "kind": "term",
+      "front": "What is point source pollution?",
+      "back": "**Point source pollution** is pollution released from a single, identifiable location, such as a factory discharge pipe or sewage outfall.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "196ze18",
+      "kind": "term",
+      "front": "What is nonpoint source pollution?",
+      "back": "**Nonpoint source pollution** reaches water from many diffuse places, such as farm fields, lawns, and roads. It is harder to control than point source pollution.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e4tavs",
+      "kind": "concept",
+      "front": "Why can an action upstream affect people downstream?",
+      "back": "All water in a watershed drains toward one outlet, so pollutants and changes in runoff travel downstream with the water.",
+      "hint": "Follow the path of water leaving a town.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xem532",
+      "kind": "concept",
+      "front": "What can cities do to reduce storm runoff?",
+      "back": "They can use **permeable pavement** and basins that hold storm runoff for a time, so less water rushes straight into streams.",
+      "hint": "Think about surfaces that let water pass through them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xnlj9k",
+      "kind": "example",
+      "front": "How would draining a wetland change storm runoff reaching a stream?",
+      "back": "Runoff would reach the stream faster, because the wetland no longer stores floodwater or slows it down.",
+      "hint": "What does a wetland do to floodwater?",
+      "sectionId": "s3"
+    }
+  ]
+}

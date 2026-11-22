@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-3",
+  "topicCode": "7.3",
+  "topicName": "Overview of aerobic respiration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:42.660Z",
+  "cards": [
+    {
+      "id": "0g4nsja",
+      "kind": "concept",
+      "front": "Why does aerobic respiration need oxygen?",
+      "back": "**Oxygen** is the final electron acceptor at the end of the electron transport chain. Without it the chain stops, NAD and FAD are not regenerated, and most ATP production stops.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xu38wf",
+      "kind": "process",
+      "front": "What are the four stages of aerobic respiration, in order?",
+      "back": "**Glycolysis**, then the **link reaction**, then the **Krebs cycle**, then the final stage, oxidative phosphorylation. Each stage passes its products on to the next.",
+      "hint": "Start with the stage that happens in the cytoplasm.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vx00bn",
+      "kind": "concept",
+      "front": "Why does the cell break glucose down in many small steps rather than all at once?",
+      "back": "Small steps let the cell capture energy in **ATP** instead of losing it all as heat.",
+      "hint": "Compare with releasing all the energy of a fuel in one burst.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uj7f9n",
+      "kind": "term",
+      "front": "What is aerobic respiration?",
+      "back": "The **breakdown** of organic molecules such as glucose, using oxygen, to release energy that is used to make ATP.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05bkgwc",
+      "kind": "mistake",
+      "front": "Why is it wrong to call breathing the same as respiration?",
+      "back": "Breathing only moves air into and out of the lungs. **Respiration** releases energy inside cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i1kstn",
+      "kind": "term",
+      "front": "What does glycolysis split glucose into?",
+      "back": "Two molecules of **pyruvate**, each with three carbon atoms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ufxcwg",
+      "kind": "concept",
+      "front": "What happens to the carbon from glucose during the link reaction and the Krebs cycle?",
+      "back": "All of it is released as **carbon dioxide**, which leaves the cell and is removed from the body.",
+      "hint": "Trace the carbon atoms from the glucose molecule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0op8ykn",
+      "kind": "term",
+      "front": "Where in the cell is glycolysis carried out?",
+      "back": "In the **cytoplasm**, outside the mitochondria.",
+      "hint": "Think about where the mitochondria are not.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qar95m",
+      "kind": "concept",
+      "front": "Which two stages take place in the mitochondrial matrix?",
+      "back": "The **link reaction** and the **Krebs cycle**. The matrix is the fluid-filled space inside the inner membrane.",
+      "hint": "Think about the space enclosed by the inner membrane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g3rnjm",
+      "kind": "concept",
+      "front": "Why is the inner mitochondrial membrane folded into cristae?",
+      "back": "Folding increases the **surface area** of the inner membrane, giving room for many enzymes and carrier proteins.",
+      "hint": "Think about what a larger surface can hold.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03ly1v2",
+      "kind": "concept",
+      "front": "What role does reduced NAD play in aerobic respiration?",
+      "back": "**Reduced NAD** is NAD that has accepted hydrogen in the earlier stages. It carries the hydrogen to the electron transport chain, where it gives up the hydrogen and NAD is regenerated.",
+      "hint": "Consider which stages produce the carriers that are passed on.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dhceqd",
+      "kind": "term",
+      "front": "What is the electron transport chain?",
+      "back": "A series of **proteins** in the inner mitochondrial membrane that pass electrons along. Energy released along the chain is used to make ATP.",
+      "hint": "Think of it as a relay of carriers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0a3o0z6",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that oxygen is used in glycolysis, the link reaction or the Krebs cycle?",
+      "back": "Oxygen is not used in those stages. It is used **only** at the end of the electron transport chain.",
+      "hint": "Check where the electron transport chain ends.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00lj85u",
+      "kind": "term",
+      "front": "What is oxidative phosphorylation?",
+      "back": "The **final stage** of aerobic respiration, on the inner mitochondrial membrane, where most of the ATP is made.",
+      "hint": "Think about which stage depends on oxygen.",
+      "sectionId": "s3"
+    }
+  ]
+}

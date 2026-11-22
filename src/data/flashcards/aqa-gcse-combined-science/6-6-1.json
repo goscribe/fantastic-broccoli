@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-6-1",
+  "topicCode": "6.6.1",
+  "topicName": "Waves in air, fluids and solids",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:38.243Z",
+  "cards": [
+    {
+      "id": "1w8l2k9",
+      "kind": "concept",
+      "front": "What does a wave transfer through a medium?",
+      "back": "A wave transfers **energy**, not matter. Particles vibrate around their usual positions and do not travel with the wave, so a floating object just bobs as a water wave passes.",
+      "hint": "Think about what a floating object does as a wave passes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kogbz3",
+      "kind": "concept",
+      "front": "How do vibration directions differ between transverse and longitudinal waves?",
+      "back": "In a **transverse** wave, vibrations are perpendicular to the direction of travel, as on a rope. In a **longitudinal** wave, vibrations are parallel to the direction of travel, as in sound.",
+      "hint": "Compare which way the particles move with the way the wave travels.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d55co2",
+      "kind": "formula",
+      "front": "Which equation links wave speed, frequency and wavelength?",
+      "back": "$v=f\\lambda$, where $v$ is the **wave speed** in $\\mathrm{m/s}$, $f$ is **frequency** in $\\mathrm{Hz}$ and $\\lambda$ is **wavelength** in $\\mathrm{m}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gyp8dr",
+      "kind": "term",
+      "front": "What is a medium in wave terms?",
+      "back": "The **material** through which a wave travels, such as water, air, a rope or a wall.",
+      "hint": "Think about what the wave passes through.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19n0vau",
+      "kind": "term",
+      "front": "What is a compression in a longitudinal wave?",
+      "back": "A region where **particles are closer together** than usual. Regions where particles are further apart are rarefactions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "142gw79",
+      "kind": "term",
+      "front": "What is the amplitude of a wave?",
+      "back": "The **greatest displacement** from the resting position, measured from the resting line to a crest or trough. A larger amplitude means the wave carries more energy.",
+      "hint": "Think about how far the wave moves away from rest.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kseid9",
+      "kind": "term",
+      "front": "What is the wavelength of a wave?",
+      "back": "The **distance** between matching points on successive waves, such as crest to crest or between neighbouring compressions.",
+      "hint": "Think about spacing along the wave, not its height.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0y5f8nz",
+      "kind": "term",
+      "front": "What is frequency in a wave?",
+      "back": "The **number of complete waves** passing a point each second. It is measured in $\\mathrm{Hz}$, where 1 Hz means one wave per second.",
+      "hint": "Think about counting waves over a fixed time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wjxq0j",
+      "kind": "example",
+      "front": "What is the speed of a wave with frequency 50 Hz and wavelength 4 m?",
+      "back": "Using $v=f\\lambda$: $v=50\\times4=200$, so the speed is **200 $\\mathrm{m/s}$**.",
+      "hint": "Start by writing the equation you need.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hrwqgs",
+      "kind": "mistake",
+      "front": "A student uses a wavelength of 50 cm directly in $v=f\\lambda$. What is wrong?",
+      "back": "The wavelength must be in **metres** first. Convert 50 cm to 0.5 m before multiplying, so the answer comes out in $\\mathrm{m/s}$.",
+      "hint": "Check the units of every value before you calculate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fyi4df",
+      "kind": "process",
+      "front": "How does a vibrating object make sound travel through air?",
+      "back": "It pushes nearby air particles together. Each particle passes compressions and rarefactions on to its neighbours, while the particles vibrate back and forth parallel to the direction of travel.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "04bb8za",
+      "kind": "mistake",
+      "front": "Why is it wrong to say sound can travel through a vacuum?",
+      "back": "Sound needs a **material medium** to pass its vibrations between particles. A vacuum has no particles, so sound cannot travel through it.",
+      "hint": "Think about what the vibrations are passed along.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00nfv2y",
+      "kind": "concept",
+      "front": "Why can you hear sound through a closed door?",
+      "back": "Vibrations pass through the **particles** of the solid door, which pass them on to the air beyond. The door's particles vibrate but do not move across the room.",
+      "hint": "Follow the vibration from one side of the door to the other.",
+      "sectionId": "s5"
+    }
+  ]
+}

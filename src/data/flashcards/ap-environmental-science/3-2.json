@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "3-2",
+  "topicCode": "3.2",
+  "topicName": "K- and r-selected species",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:33.648Z",
+  "cards": [
+    {
+      "id": "0npdyuj",
+      "kind": "concept",
+      "front": "What two factors decide where a species sits on the reproductive strategy spectrum?",
+      "back": "The **number of offspring** it makes and how much **care** each one receives. Most species fall between the two extremes rather than at one.",
+      "hint": "Compare the dandelion with the elephant in the opening example.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1q9irrr",
+      "kind": "term",
+      "front": "What is an r-selected species?",
+      "back": "A species that reproduces **early and often**, producing many offspring with little or no parental care and a short life span.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04z3f76",
+      "kind": "term",
+      "front": "What is a K-selected species?",
+      "back": "A species that has **few offspring** with extensive parental care, a long life span, and keeps its population near carrying capacity.",
+      "hint": "Think of elephants and humans.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oq3689",
+      "kind": "term",
+      "front": "What does carrying capacity mean?",
+      "back": "The **population size** an environment can support over time under given conditions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16bfvwp",
+      "kind": "concept",
+      "front": "Why do r-selected species suit environments where conditions change often?",
+      "back": "They can **reproduce quickly** and colonize cleared areas before competitors arrive. Fast production lets them refill space after storms, fires, or floods.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ztug99",
+      "kind": "concept",
+      "front": "Why do K-selected species do well in stable, crowded habitats?",
+      "back": "Heavy investment in **few offspring** raises each one's chance of survival, which matters because competition for resources is strong.",
+      "hint": "Think about how many other individuals each young one must compete with.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1o0rne0",
+      "kind": "concept",
+      "front": "What happens to an r-selected population when resources are plentiful?",
+      "back": "It can grow very fast and may **overshoot** carrying capacity. Resources then run short and the population falls sharply.",
+      "hint": "Think about what happens when growth outpaces what the environment can support.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "183y46g",
+      "kind": "concept",
+      "front": "How does the size of a K-selected population change over time?",
+      "back": "It grows **slowly**, levels off near carrying capacity, and changes little from year to year.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08ttqo4",
+      "kind": "concept",
+      "front": "Which population would recover faster after losing most of its individuals, r-selected or K-selected?",
+      "back": "The **r-selected** population. Early reproduction and many offspring let it grow quickly, while K-selected species recover slowly because of few offspring and late maturity.",
+      "hint": "Link age at first reproduction and number of offspring to growth speed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0brsnaw",
+      "kind": "mistake",
+      "front": "Why is body size alone a poor way to classify a species' strategy?",
+      "back": "**Size alone does not decide** the strategy. Judge the whole set of traits, such as offspring number, parental care, and life span.",
+      "hint": "Consider which traits the comparison table includes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12hug6o",
+      "kind": "mistake",
+      "front": "What is a weak way to compare r-selected and K-selected species in an answer?",
+      "back": "Only **listing traits**. Link each trait to its effect on growth or stability instead."
+    },
+    {
+      "id": "0c3nte9",
+      "kind": "term",
+      "front": "Name examples of r-selected species from the note.",
+      "back": "**Insects, bacteria, mice**, and weedy plants such as dandelions. Elephants, whales, and humans are K-selected examples."
+    }
+  ]
+}

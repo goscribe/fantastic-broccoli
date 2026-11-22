@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "1-6",
+  "topicCode": "1.6",
+  "topicName": "The phosphorus cycle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:02.442Z",
+  "cards": [
+    {
+      "id": "1bchh2t",
+      "kind": "concept",
+      "front": "Why does the phosphorus cycle run differently from the nitrogen cycle?",
+      "back": "Phosphorus has no significant **gas form**, so it rarely enters the air. It moves through rock, soil, water, and organisms instead.",
+      "hint": "Think about whether this cycle has an atmospheric stage.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0t2xoux",
+      "kind": "concept",
+      "front": "Why does adding a little phosphate often cause a large rise in algal growth in lakes?",
+      "back": "Phosphorus is the **limiting nutrient** in many lakes, so it is in shortest supply. Extra phosphate removes this restriction, and other nutrients are already available, so algae grow rapidly.",
+      "hint": "Think about which nutrient runs out first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07z4zij",
+      "kind": "process",
+      "front": "What chain of events links extra phosphate in a lake to fish dying?",
+      "back": "Phosphate enrichment causes **eutrophication**: algae grow rapidly, then die. Decomposers use up oxygen while breaking them down, and fish and other animals may die.",
+      "hint": "Follow the order: the nutrient, then the algae, then the oxygen.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0pdl2xt",
+      "kind": "term",
+      "front": "What is phosphate, and why does it matter to plants?",
+      "back": "The ion $\\mathrm{PO_4^{3-}}$, the main form of phosphorus that **plants and algae** absorb from water.",
+      "hint": "Think about the form phosphorus takes once it dissolves in water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1w1xhwj",
+      "kind": "term",
+      "front": "What is weathering in the phosphorus cycle?",
+      "back": "The slow breakdown of **rock** by rain, wind, ice, and living things, which releases phosphate into soil and water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01aldha",
+      "kind": "process",
+      "front": "How does phosphorus get from dead organisms back into the soil?",
+      "back": "**Decomposers** such as bacteria and fungi break down the remains and return phosphate to the soil.",
+      "hint": "Think about which organisms feed on dead material.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0euhgr9",
+      "kind": "concept",
+      "front": "Why can phosphorus stay out of circulation for millions of years?",
+      "back": "Phosphate settles from water as **sediment**, which can become rock. Only geological uplift and weathering free it again, and that takes millions of years.",
+      "hint": "Follow phosphate from the water down to the bottom of a lake.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oqe7dm",
+      "kind": "term",
+      "front": "What is geological uplift?",
+      "back": "The raising of Earth's crust by forces inside Earth, lifting rock formed on the **sea floor** to higher ground.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14ulcyl",
+      "kind": "term",
+      "front": "What is sediment?",
+      "back": "Solid material, such as mineral particles and organic debris, that settles out of water and builds up on the bottom.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lio5oy",
+      "kind": "mistake",
+      "front": "What is missing from an answer that only says phosphorus is the limiting nutrient?",
+      "back": "It must state which **organisms** it limits and that their growth rises when more of the nutrient is supplied.",
+      "hint": "Think about what the nutrient is restricting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iiczzw",
+      "kind": "concept",
+      "front": "Why are natural phosphorus inputs described as slow compared with human inputs?",
+      "back": "Rock weathering and decomposition release only **small amounts** each year, while human activities can add far more in some places.",
+      "hint": "Compare natural releases with human ones.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vq2725",
+      "kind": "example",
+      "front": "What would reducing sewage and fertilizer runoff do to algae in a lake where phosphorus is limiting?",
+      "back": "Less phosphate would reach the lake, so algal growth would fall and **eutrophication** would become less likely.",
+      "sectionId": "s5"
+    }
+  ]
+}

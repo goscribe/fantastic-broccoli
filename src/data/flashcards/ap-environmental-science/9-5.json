@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "9-5",
+  "topicCode": "9.5",
+  "topicName": "Global climate change",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:17.934Z",
+  "cards": [
+    {
+      "id": "0di5pgb",
+      "kind": "term",
+      "front": "What is climate change?",
+      "back": "A **lasting shift** in climate patterns, such as temperature and precipitation. Climate is judged over decades, while weather describes hours or days.",
+      "hint": "Consider the time span a pattern covers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hrdyrb",
+      "kind": "concept",
+      "front": "Why do several independent records, rather than one measurement, make the case that Earth is warming?",
+      "back": "Thermometers, glaciers, Arctic sea ice, and sea level come from **different instruments and methods**, so their agreement strengthens the evidence.",
+      "hint": "Think about whether one kind of measurement could be wrong on its own.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kc58uy",
+      "kind": "concept",
+      "front": "Why are proxy data needed to study past climate?",
+      "back": "Thermometers only cover recent centuries, so **natural archives** such as ice cores and tree rings indirectly preserve older climate information.",
+      "hint": "Consider how far back direct measurements reach.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1q1bp3r",
+      "kind": "term",
+      "front": "What is an ice core?",
+      "back": "A **long cylinder of ice** drilled from a glacier or ice sheet, with yearly layers and trapped air bubbles that record past climate.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05qkuic",
+      "kind": "concept",
+      "front": "Which proxy record shows yearly growing conditions, and what feature of it is measured?",
+      "back": "**Tree rings**: the width of each ring reflects the growing conditions of that year.",
+      "hint": "Consider what a tree trunk accumulates over time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17szk28",
+      "kind": "term",
+      "front": "What is thermal expansion?",
+      "back": "The **increase in a substance's volume** as its temperature rises. Warming seawater expands this way, which raises sea level.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mah5ke",
+      "kind": "process",
+      "front": "What are the two steps by which warming raises average sea level?",
+      "back": "1. **Melting land ice** adds water to the ocean. 2. Warming seawater **expands** in volume, so the ocean takes up more space.",
+      "hint": "Think about two separate physical processes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yhn3xx",
+      "kind": "mistake",
+      "front": "Why is it wrong to think melting floating sea ice raises sea level by much?",
+      "back": "Floating ice is already in the ocean, so melting adds **almost no extra water**. Ice resting on land adds water that was not already there.",
+      "hint": "Consider what floating ice displaces when it melts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lnhxms",
+      "kind": "term",
+      "front": "What is a range shift?",
+      "back": "A **relocation** of a species' population toward cooler areas, such as the poles or higher ground, in response to changing conditions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0y80ckz",
+      "kind": "concept",
+      "front": "How can warming let a disease spread to people who have little earlier exposure?",
+      "back": "Warmer conditions let a **disease vector**, such as a mosquito, live in new regions, carrying a pathogen to people there.",
+      "hint": "Consider what a carrier organism needs to survive somewhere new.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ybagq3",
+      "kind": "concept",
+      "front": "Why do low-lying coasts and island communities face especially high risk from climate change?",
+      "back": "They face **flooding** and **salt water entering freshwater supplies**, so impacts fall unevenly across societies.",
+      "hint": "Think about how close the land is to the sea.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0yujmh9",
+      "kind": "term",
+      "front": "What is mitigation?",
+      "back": "Action that **reduces greenhouse gas emissions** or removes greenhouse gases from the atmosphere, tackling the cause of climate change.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13ljdzs",
+      "kind": "term",
+      "front": "What is climate adaptation?",
+      "back": "An **adjustment of human systems** that reduces harm from changes already under way, such as seawalls or drought-tolerant crops.",
+      "hint": "Compare it with the response that targets the cause.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "112ilrm",
+      "kind": "concept",
+      "front": "Why are mitigation and climate adaptation usually needed together?",
+      "back": "**Adaptation cannot remove the cause** of climate change, so cutting emissions through mitigation is also necessary.",
+      "hint": "Look at which problem each response is aimed at.",
+      "sectionId": "s5"
+    }
+  ]
+}

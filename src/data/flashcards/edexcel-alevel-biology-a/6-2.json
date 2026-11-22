@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-2",
+  "topicCode": "6.2",
+  "topicName": "Decomposition and the carbon cycle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:23.933Z",
+  "cards": [
+    {
+      "id": "14ulzuc",
+      "kind": "process",
+      "front": "How do decomposers digest dead material?",
+      "back": "They secrete **extracellular enzymes** onto the dead material first. The enzymes break large molecules into small soluble ones, and the decomposers then absorb those molecules.",
+      "hint": "Think about whether the enzymes act inside or outside the decomposer's cells.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bmyuq5",
+      "kind": "concept",
+      "front": "How does carbon from a dead body return to the air?",
+      "back": "Decomposers **respire** some of the carbon compounds in dead material and waste, which releases carbon dioxide into the air. Plants do the opposite when they take in carbon dioxide for photosynthesis.",
+      "hint": "Compare this with what plants do with carbon dioxide during photosynthesis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12ei8z3",
+      "kind": "concept",
+      "front": "Which conditions control how fast microorganisms decompose material?",
+      "back": "**Warmth** (up to a limit), **moisture**, **oxygen** for aerobic respiration, and a pH that is not extreme. Each one affects enzyme action or microbial growth.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00p0wj9",
+      "kind": "term",
+      "front": "What is autolysis?",
+      "back": "**Autolysis** is the breakdown of a dead body's cells by their own digestive enzymes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o97tok",
+      "kind": "term",
+      "front": "What is putrefaction?",
+      "back": "**Putrefaction** is the breakdown of dead tissue by bacteria, which releases gases and foul-smelling compounds. The gut bacteria are the first to spread through the body.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ivf1rz",
+      "kind": "process",
+      "front": "What is the order of the main stages of decomposition for a body?",
+      "back": "**Fresh**, then **bloat**, then **active decay**, then **advanced decay**, and finally **dry remains**. Gas makes the body swell at bloat, and most mass is lost during active decay.",
+      "hint": "Start from the moment the heart stops.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lxmm8e",
+      "kind": "concept",
+      "front": "Why do a dead body's cells start to digest themselves?",
+      "back": "Without oxygen the cells stop working properly and their membranes fail. Digestive enzymes then leak out of the lysosomes and digest the cell contents from the inside.",
+      "hint": "Think about what happens to cells once their supply of oxygen stops.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nsx5zx",
+      "kind": "term",
+      "front": "What is an extracellular enzyme?",
+      "back": "An **extracellular enzyme** is an enzyme that a cell secretes and that catalyses a reaction outside the cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gla7ii",
+      "kind": "term",
+      "front": "What is the carbon cycle?",
+      "back": "The **carbon cycle** is the movement of carbon between the atmosphere, living organisms, dead material and fossil fuels.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k3vnlh",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that decomposers use up the carbon in dead material?",
+      "back": "Decomposers do not destroy carbon. It passes into **carbon dioxide**, into their own cells, or into their waste.",
+      "hint": "Think about where carbon could go after a decomposer absorbs it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13lc3rg",
+      "kind": "mistake",
+      "front": "Why should you not give fixed times for each stage of decomposition?",
+      "back": "Temperature, moisture, oxygen supply and burial all change how quickly a body decomposes, so the same stage can take very different lengths of time.",
+      "hint": "Think about which factors change the rate of decomposition.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wg4y6i",
+      "kind": "example",
+      "front": "Why does a body in cold, waterlogged soil decompose more slowly than one left on the surface in warm weather?",
+      "back": "Cold slows enzyme action and microbial growth. Waterlogged soil has little oxygen, so aerobic respiration is limited. Flies also cannot easily reach the body to lay eggs.",
+      "hint": "Work through each condition from the note: temperature, oxygen and access for insects.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hhx13g",
+      "kind": "concept",
+      "front": "What do some microorganisms release in anaerobic conditions instead of carbon dioxide?",
+      "back": "They release **methane**. Decomposition is slow in these conditions, so dead plant material can build up as peat.",
+      "hint": "Think about what waterlogged soil is like for decomposers.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0k6taq6",
+      "kind": "concept",
+      "front": "Why does burning fossil fuels add carbon dioxide to the air faster than natural processes remove it?",
+      "back": "Fossil fuels formed from dead organisms buried where decomposers could not break them down fully, so their carbon was locked away for millions of years. Burning releases it quickly.",
+      "hint": "Think about the conditions in which the dead organisms were buried.",
+      "sectionId": "s5"
+    }
+  ]
+}

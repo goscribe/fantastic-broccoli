@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "5-1",
+  "topicCode": "5.1",
+  "topicName": "Scatterplots",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:11.345Z",
+  "cards": [
+    {
+      "id": "151pa8u",
+      "kind": "concept",
+      "front": "Why do we draw a scatterplot of two quantitative variables?",
+      "back": "To see any **association** between them, since the pattern of the dots shows whether the values tend to go together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uv0z0f",
+      "kind": "term",
+      "front": "What is the explanatory variable in a scatterplot?",
+      "back": "The variable used to **explain or predict** the other one. It goes on the horizontal axis.",
+      "hint": "Think about which variable you would use to make a prediction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r1eyza",
+      "kind": "concept",
+      "front": "What three features should you describe to summarize the pattern in a scatterplot?",
+      "back": "The **direction**, the **form**, and the **strength** of the association, plus any outliers.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ukgiai",
+      "kind": "term",
+      "front": "What does a negative direction mean in a scatterplot?",
+      "back": "As $x$ increases, $y$ tends to **decrease**.",
+      "hint": "Think about which way the cloud of points slants from left to right.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vxr1b4",
+      "kind": "term",
+      "front": "What is the form of a scatterplot?",
+      "back": "The overall **shape** of the pattern, such as linear, curved, or clustered.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "041hr5e",
+      "kind": "concept",
+      "front": "How do you judge the strength of an association?",
+      "back": "By how closely the points follow the **form**. Tightly packed points show a strong association; widely scattered points show a weak one.",
+      "hint": "Think about how closely the dots stick to the shape.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vg52bj",
+      "kind": "process",
+      "front": "What are the four steps to construct a scatterplot, in order?",
+      "back": "1) Decide which variable is explanatory and which is the response. 2) Label each axis with its name and units. 3) Choose evenly spaced scales that cover the data. 4) Plot each pair as one point, with no lines joining them.",
+      "hint": "Start with the roles the two variables play.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uj8i6i",
+      "kind": "concept",
+      "front": "Why does a scatterplot scale not have to start at zero?",
+      "back": "Start each scale where the points spread across the plot, so the **pattern** shows more clearly.",
+      "hint": "Think about the empty space a zero start can leave.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1axx6ax",
+      "kind": "example",
+      "front": "How should the five quiz dots for (1, 55), (2, 62), (3, 70), (5, 78), (6, 85) look on a scatterplot?",
+      "back": "They rise from the **lower left to the upper right**, with hours on a horizontal scale of $0$ to $7$ and scores on a vertical scale of $50$ to $90$ points.",
+      "hint": "Check the sign of the change in score as hours increase.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07ra3o2",
+      "kind": "term",
+      "front": "What is an outlier in a scatterplot?",
+      "back": "A point that falls **well outside** the overall pattern of the other points, far away horizontally, vertically, or both.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1et68h7",
+      "kind": "mistake",
+      "front": "Why is it wrong to delete an outlier just because it spoils the pattern?",
+      "back": "It hides real data. Remove a point only when it is a **known error**; a genuine outlier stays in and is mentioned in your description.",
+      "hint": "Think about when a point is wrong versus just unusual.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j69zc4",
+      "kind": "mistake",
+      "front": "Why should a scatterplot description avoid saying one variable causes the other?",
+      "back": "A scatterplot shows only an **association**. Use that word, because a pattern alone does not prove that one variable causes the other.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vtkrsm",
+      "kind": "mistake",
+      "front": "A classmate says a positive direction means the association is strong. What is wrong with that?",
+      "back": "Direction and strength are separate features. A **positive** direction can still be weak if the points are widely scattered around the form.",
+      "hint": "Ask what each feature is measuring on its own.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1edsok2",
+      "kind": "process",
+      "front": "How do you write a complete description of a scatterplot's pattern?",
+      "back": "Name the **direction**, **form**, and **strength** in context, using both variable names, then mention any outliers. For example: a moderately strong, positive, linear association between hours studied and quiz score.",
+      "hint": "Combine the three features first, then add anything unusual.",
+      "sectionId": "s5"
+    }
+  ]
+}

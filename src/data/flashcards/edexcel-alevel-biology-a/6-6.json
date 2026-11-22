@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-6",
+  "topicCode": "6.6",
+  "topicName": "TB and HIV infection",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:35.110Z",
+  "cards": [
+    {
+      "id": "0m9kfx9",
+      "kind": "concept",
+      "front": "Why does losing helper T cells leave a person open to infections such as TB?",
+      "back": "**Helper T cells** coordinate the immune response, so fewer of them means a weaker response that cannot control opportunistic infections.",
+      "hint": "Think about the job helper T cells do in the immune response.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0jfruaq",
+      "kind": "process",
+      "front": "What are the steps by which HIV enters a helper T cell and makes new viruses?",
+      "back": "Attachment proteins bind to CD4 receptors. The envelope fuses with the membrane and the capsid enters. The capsid releases RNA and **reverse transcriptase**. The enzyme makes DNA from the RNA template, the DNA is inserted into host DNA, and the cell makes new viruses.",
+      "hint": "Start with what the viral attachment proteins do first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19l966f",
+      "kind": "concept",
+      "front": "What happens to TB bacteria after phagocytes engulf them?",
+      "back": "The bacteria are hard to destroy, so some **survive and multiply** inside the phagocyte. Immune cells then gather around the infected cells.",
+      "hint": "Consider why an engulfed pathogen is not always destroyed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1urofir",
+      "kind": "term",
+      "front": "What is droplet infection?",
+      "back": "**Droplet infection** is the spread of pathogens in tiny droplets released from the airways when an infected person coughs, sneezes or talks.",
+      "hint": "Think about how a cough sends material into the air.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11oage7",
+      "kind": "mistake",
+      "front": "Why is touching surfaces not a usual way for TB to spread?",
+      "back": "TB spreads mainly when people **inhale droplets** from an infected person. Touching surfaces or shaking hands is not the usual route.",
+      "hint": "Think about the route the bacteria take into the body.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "198yujq",
+      "kind": "term",
+      "front": "What is a latent infection?",
+      "back": "A **latent infection** is one where the pathogen is present but inactive and causes no symptoms. In TB, the bacteria can become active if immunity weakens.",
+      "hint": "Think about the state of the bacteria inside tubercles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h3bkmh",
+      "kind": "term",
+      "front": "What is a tubercle and what does it do?",
+      "back": "A **tubercle** is a small lump of immune cells that gathers around TB bacteria. It walls off the bacteria but damages lung tissue at its centre.",
+      "hint": "Think about where in the lung the immune cells gather.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vgchbw",
+      "kind": "concept",
+      "front": "Which symptom is the main sign of active TB?",
+      "back": "A **cough lasting weeks**, sometimes bringing up mucus streaked with blood. General signs such as fever, night sweats, weight loss and tiredness also appear.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0c2nsik",
+      "kind": "term",
+      "front": "What is a retrovirus?",
+      "back": "A **retrovirus** is a virus whose genetic material is RNA and which carries the enzyme reverse transcriptase.",
+      "hint": "Consider which molecule carries the genetic information.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rnxmbq",
+      "kind": "mistake",
+      "front": "How do HIV and AIDS differ?",
+      "back": "HIV is the **virus**. AIDS is a later stage when the immune system is severely weakened, and not everyone with HIV develops it.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "16806zd",
+      "kind": "concept",
+      "front": "What does the CD4 receptor do in HIV infection?",
+      "back": "**Attachment proteins** on HIV bind to CD4 receptors on helper T cells, which is how the virus targets these cells.",
+      "hint": "Think about where the virus first makes contact with the cell.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1udq35x",
+      "kind": "term",
+      "front": "What is an opportunistic infection?",
+      "back": "An **opportunistic infection** is caused by a pathogen that rarely harms people with a healthy immune system but takes hold when immunity is weak. TB is one example.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "061fdyt",
+      "kind": "concept",
+      "front": "Why might someone with HIV feel well for years?",
+      "back": "The inserted viral DNA can stay **inactive** in a cell for years, so the active viruses destroy helper T cells only gradually.",
+      "hint": "Think about what happens to the viral DNA once it is in the host DNA.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1v45w17",
+      "kind": "concept",
+      "front": "Which body fluids carry HIV between people?",
+      "back": "HIV passes in **body fluids** such as blood, semen and vaginal fluids, through unprotected sex, contaminated needles, or from mother to child.",
+      "sectionId": "s4"
+    }
+  ]
+}

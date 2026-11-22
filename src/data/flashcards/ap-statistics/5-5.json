@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "5-5",
+  "topicCode": "5.5",
+  "topicName": "Least-squares regression",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:06.340Z",
+  "cards": [
+    {
+      "id": "09av349",
+      "kind": "concept",
+      "front": "How is the least-squares regression line chosen from all possible straight lines?",
+      "back": "It is the line with the smallest **sum of squared residuals**, $\\sum(y-\\hat{y})^2$, found by squaring each residual and adding the squares.",
+      "hint": "Think about what each residual measures.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1083u7q",
+      "kind": "formula",
+      "front": "What formula gives the slope $b$ of the least-squares line?",
+      "back": "$b=r\\frac{s_y}{s_x}$, where $r$ is the **correlation** and $s_x$, $s_y$ are the sample standard deviations of $x$ and $y$. Slope is in $y$ units per $x$ unit.",
+      "hint": "Think about how the spread of each variable scales the link between them.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0whpemh",
+      "kind": "concept",
+      "front": "Which point is always on the least-squares regression line?",
+      "back": "The **point of means** $(\\bar{x},\\bar{y})$. The intercept formula forces the line through this point.",
+      "hint": "Think about what the intercept is built from.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0a61oqh",
+      "kind": "mistake",
+      "front": "Why is adding the raw residuals a poor way to judge a line?",
+      "back": "Positive and negative residuals **cancel**, so a poor line, such as a flat line at $\\bar{y}$, can have residuals that sum to zero. Squaring fixes this.",
+      "hint": "Think about the signs of the residuals.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c1n8xh",
+      "kind": "example",
+      "front": "Which line fits the study-time data better by sum of squared residuals: $\\hat{y}=2.2+0.60x$ or $\\hat{y}=2.0+0.70x$?",
+      "back": "$\\hat{y}=2.2+0.60x$, with a total of $2.40\\,\\text{points}^2$ against $2.55\\,\\text{points}^2$ for the other line.",
+      "hint": "Square each residual, then add them for each line.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1td4k8m",
+      "kind": "example",
+      "front": "For $\\bar{x}=3$, $\\bar{y}=4$, $s_x=1.58$, $s_y=1.22$ and $r=0.775$, what is the least-squares slope $b$?",
+      "back": "$b\\approx0.60$ points per hour, from $0.775\\times\\frac{1.22}{1.58}\\approx0.598$.",
+      "hint": "Start with the slope formula and keep extra digits until the end.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15a9wyb",
+      "kind": "example",
+      "front": "Using $b\\approx0.60$, $\\bar{x}=3$ and $\\bar{y}=4$, what is the intercept $a$?",
+      "back": "$a=2.2$, from $a=\\bar{y}-b\\bar{x}=4-0.60(3)$, giving $\\hat{y}=2.2+0.60x$.",
+      "hint": "Use the intercept formula with the two means.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03vhkx4",
+      "kind": "process",
+      "front": "What are the steps to find a least-squares line with a graphing calculator?",
+      "back": "Enter the $x$ values in one list and the $y$ values in another, run **LinReg(a+bx)**, then read $a$ and $b$ and write $\\hat{y}=a+bx$.",
+      "hint": "Start with where each variable's data goes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lvejeg",
+      "kind": "mistake",
+      "front": "In computer output, which row gives the slope?",
+      "back": "The row named for the **explanatory variable**. The Constant row gives the intercept $a$, so the two coefficients must not be swapped.",
+      "hint": "Think about which term is the constant and which multiplies $x$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g2wr78",
+      "kind": "concept",
+      "front": "How does squaring residuals change the effect of an unusual point?",
+      "back": "Squaring **magnifies** large residuals, so a far-off point can pull the line toward itself. Check unusual points before trusting the equation.",
+      "hint": "Compare one big miss with several small misses.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uvaw6h",
+      "kind": "concept",
+      "front": "What is the sum of the residuals for the least-squares regression line?",
+      "back": "**Zero**. On this line, positive and negative residuals balance exactly.",
+      "hint": "Think about why the signs might balance on this particular line.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07q2mk2",
+      "kind": "concept",
+      "front": "Given only $\\bar{x}$, $\\bar{y}$ and $b$, which form of the line can you write?",
+      "back": "$\\hat{y}-\\bar{y}=b(x-\\bar{x})$, a handy form when you know only the means and the slope.",
+      "hint": "Rearrange the intercept formula.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lyb2og",
+      "kind": "example",
+      "front": "With $r=0.60$, $s_x=2.0$, $s_y=5.0$, $\\bar{x}=10$ and $\\bar{y}=30$, what is the least-squares line?",
+      "back": "$\\hat{y}=15+1.5x$, since $b=0.60\\times\\frac{5.0}{2.0}=1.5$ and $a=30-1.5(10)=15$.",
+      "hint": "Find the slope first, then the intercept."
+    },
+    {
+      "id": "1b7leb1",
+      "kind": "mistake",
+      "front": "Why does line A having a smaller sum of squared residuals than line B not prove line A is the least-squares line?",
+      "back": "Line A only beats line B. Another line may give an even smaller total, because the least-squares line is the minimum over all lines.",
+      "hint": "Compare the chosen line with every possible line, not just two.",
+      "sectionId": "s2"
+    }
+  ]
+}

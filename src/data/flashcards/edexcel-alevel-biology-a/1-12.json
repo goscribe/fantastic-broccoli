@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-12",
+  "topicCode": "1.12",
+  "topicName": "Mono-, di- and polysaccharides",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:50.444Z",
+  "cards": [
+    {
+      "id": "1fiia92",
+      "kind": "concept",
+      "front": "Why do cells store glucose as large polysaccharides rather than as free glucose molecules?",
+      "back": "Polysaccharides are large and mostly **insoluble**, so they do not affect the movement of water by osmosis. They are also compact, so a lot of glucose fits in a small space.",
+      "hint": "Think about what many free sugar molecules would do to the water inside a cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16f159p",
+      "kind": "concept",
+      "front": "Why is cellulose strong enough to support plant cell walls?",
+      "back": "Cellulose is made of **β-glucose** units, so its chains are straight. Hydrogen bonds form between neighbouring chains, and bundles of chains form **microfibrils**.",
+      "hint": "Compare how the chain shape of cellulose differs from that of starch.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ubnu0u",
+      "kind": "concept",
+      "front": "Why does glycogen allow glucose to be released faster than starch?",
+      "back": "Glycogen is more highly **branched**, so it has many chain ends. Enzymes can hydrolyse glucose from many ends at the same time.",
+      "hint": "Count how many places an enzyme could act at once on each molecule.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dwto07",
+      "kind": "term",
+      "front": "What is a monosaccharide?",
+      "back": "A **monosaccharide** is a carbohydrate made of one sugar unit, the simplest group. Glucose, fructose and galactose are common examples.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19fkjzc",
+      "kind": "term",
+      "front": "What is a glycosidic bond?",
+      "back": "A **glycosidic bond** is a covalent bond between two sugar units. It forms by a condensation reaction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w18751",
+      "kind": "process",
+      "front": "How is a disaccharide such as maltose formed from two monosaccharides?",
+      "back": "Two glucose molecules join in a **condensation** reaction. A glycosidic bond forms between them and one water molecule is released.",
+      "hint": "Think about what is lost from the molecules when the new bond forms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1auqfx9",
+      "kind": "formula",
+      "front": "What equation shows the formation of maltose from two glucose molecules?",
+      "back": "$\\mathrm{C_6H_{12}O_6(aq)+C_6H_{12}O_6(aq)\\rightarrow C_{12}H_{22}O_{11}(aq)+H_2O(l)}$. Each glucose is $\\mathrm{C_6H_{12}O_6}$, maltose is $\\mathrm{C_{12}H_{22}O_{11}}$, and the water released is $\\mathrm{H_2O}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1i0twx6",
+      "kind": "concept",
+      "front": "Why must a disaccharide such as sucrose be split before the body can use it?",
+      "back": "Most disaccharides are too large to cross cell membranes. They must be hydrolysed into **monosaccharides** first.",
+      "hint": "Think about what size of molecule can pass through a membrane.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ynpj92",
+      "kind": "term",
+      "front": "What is hydrolysis?",
+      "back": "**Hydrolysis** is the reverse of condensation. A water molecule is used to break a glycosidic bond, and each break uses one water molecule.",
+      "hint": "Think about which reaction adds water rather than releasing it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18nhdon",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that starch and cellulose are made of the same form of glucose?",
+      "back": "Starch is made of **α-glucose**, while cellulose is made of **β-glucose**. This small difference in shape changes the structure and function of each polysaccharide.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bdni3w",
+      "kind": "term",
+      "front": "What two parts make up starch?",
+      "back": "Starch is a mixture of coiled, unbranched **amylose** and branched **amylopectin**. Both are made of α-glucose units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0audkrz",
+      "kind": "term",
+      "front": "What is a microfibril?",
+      "back": "A **microfibril** is a bundle of cellulose chains held together by hydrogen bonds. Microfibrils make plant cell walls strong.",
+      "hint": "Think about how many weak bonds it takes to build a strong structure.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0angr5u",
+      "kind": "concept",
+      "front": "Why does cellulose pass through the human gut as fibre rather than being digested?",
+      "back": "Humans lack an **enzyme** that hydrolyses the bonds between β-glucose units, so cellulose is not broken down.",
+      "hint": "Consider which enzymes the body makes to break down sugars.",
+      "sectionId": "s5"
+    }
+  ]
+}

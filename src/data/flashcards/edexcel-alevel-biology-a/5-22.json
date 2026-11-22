@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-22",
+  "topicCode": "5.22",
+  "topicName": "Reforestation and sustainable resources",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:15.963Z",
+  "cards": [
+    {
+      "id": "0fzjl4k",
+      "kind": "term",
+      "front": "What is meant by sustainable use of a resource?",
+      "back": "**Sustainable use** means harvesting a resource at a rate that lets it be replaced or recover, so present needs are met without exhausting it for future generations.",
+      "hint": "Compare the rate of harvesting with the rate of regrowth.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0exobn9",
+      "kind": "concept",
+      "front": "Why can a growing forest help reduce the amount of carbon dioxide in the air?",
+      "back": "Trees take in $\\text{CO}_2$ by photosynthesis and store **carbon** in wood, roots and soil. A growing forest can take in more carbon than it releases.",
+      "hint": "Think about where the carbon from photosynthesis ends up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y8cmqj",
+      "kind": "concept",
+      "front": "Why does sustainable management protect biodiversity?",
+      "back": "It keeps **habitats** intact, so more species keep their food and shelter. It also maintains larger breeding populations, which hold more genetic variation.",
+      "hint": "Consider what happens to species when their habitat is damaged.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1r6i9o9",
+      "kind": "term",
+      "front": "What is reforestation?",
+      "back": "**Reforestation** is the planned replanting of trees on land that was forested before, such as land that has been cleared or degraded.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14e72dw",
+      "kind": "concept",
+      "front": "How do trees reduce soil erosion?",
+      "back": "Tree **roots** hold the soil together. Leaf cover softens the force of falling rain, and leaf litter adds organic matter that improves the soil.",
+      "hint": "Think about what happens to bare soil when heavy rain falls on it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19q3f0g",
+      "kind": "mistake",
+      "front": "Why is a plantation of one tree species not the same as a restored forest?",
+      "back": "A single-species plantation offers fewer **habitats** and food sources, so fewer species can live there. A restored forest has layers of vegetation and a varied community.",
+      "hint": "Compare the range of habitats in each.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "169so9y",
+      "kind": "process",
+      "front": "What are the steps of coppicing to give a sustainable supply of wood?",
+      "back": "Cut the tree close to ground level. New shoots regrow from the **stump**. Repeat the cutting, so wood is harvested again without replanting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vefsal",
+      "kind": "term",
+      "front": "What is a fishing quota?",
+      "back": "A **quota** is a legal limit on the mass of fish that may be landed. It lets fish grow and breed, so stocks can recover.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0h7l5d7",
+      "kind": "concept",
+      "front": "Why does a larger net mesh help fish stocks recover?",
+      "back": "Young fish can escape through the larger holes, so they survive to grow and breed. A small mesh catches young fish before they have bred.",
+      "hint": "Think about the age at which fish are caught in each type of net.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mf4rb6",
+      "kind": "process",
+      "front": "How does regular monitoring help to manage a fish stock or forest over time?",
+      "back": "Monitor the resource to check whether populations are recovering. Then adjust quotas or replanting targets using the new evidence.",
+      "hint": "What kind of information is needed before a limit is changed?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1v8cgp3",
+      "kind": "term",
+      "front": "What is biodiversity?",
+      "back": "**Biodiversity** is variation within species, between species, and among ecosystems.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0z6twq4",
+      "kind": "concept",
+      "front": "Why is it hard to put sustainable methods into practice?",
+      "back": "Sustainable methods can reduce short-term profit, and local people may depend on the forest or fishery for income. Management must balance ecological, economic and social needs.",
+      "hint": "Think about who gains and who loses in the short term.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0qsn6vh",
+      "kind": "concept",
+      "front": "What is the purpose of management in the sustainable use of a resource?",
+      "back": "**Management** uses planned actions, such as limits on harvesting, replanting and monitoring, so that harvesting does not outpace recovery and the resource does not decline.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-13",
+  "topicCode": "2.13",
+  "topicName": "Genetic terms and monohybrid crosses",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:45.342Z",
+  "cards": [
+    {
+      "id": "0psotb8",
+      "kind": "concept",
+      "front": "What is the difference between a genotype and a phenotype?",
+      "back": "A **genotype** is the alleles an individual has for a gene. A **phenotype** is the observable feature that results from them.",
+      "hint": "Think about what you could see by looking at a plant versus what its genes are.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00vjapq",
+      "kind": "term",
+      "front": "What does a dominant allele do in the phenotype?",
+      "back": "A **dominant allele** shows its effect even when only one copy is present, so it can hide a recessive allele.",
+      "hint": "Compare with what a dwarf plant needs before its feature shows.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1whkbrl",
+      "kind": "concept",
+      "front": "Why does a cross between two $Aa$ plants give a $3:1$ tall to dwarf phenotype ratio?",
+      "back": "Three of the four equally likely boxes ($AA$, $Aa$, $Aa$) contain a dominant $A$, so they are tall. Only $aa$ is dwarf.",
+      "hint": "Ask which genotypes contain a capital letter.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1v1kmmt",
+      "kind": "concept",
+      "front": "How does a homozygous genotype differ from a heterozygous genotype?",
+      "back": "**Homozygous** means two identical alleles, such as $AA$ or $aa$. **Heterozygous** means two different alleles, such as $Aa$.",
+      "hint": "Look at whether the two letters match.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0o9wgvv",
+      "kind": "concept",
+      "front": "Why can't you tell a tall plant's genotype just by looking at it?",
+      "back": "$AA$ and $Aa$ both give tall plants, so a tall plant could have either. Only a dwarf plant, which must be $aa$, has a certain genotype.",
+      "hint": "Consider which genotypes produce the same phenotype.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ywepa7",
+      "kind": "process",
+      "front": "What are the steps for building a Punnett square?",
+      "back": "Write each parent's genotype, list each parent's gametes, put one parent's gametes across the top and the other's down the side, fill each box with the two alleles that meet, then read off genotypes and phenotypes.",
+      "hint": "Start with the parents, then work out what each can pass on.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cq6ehb",
+      "kind": "term",
+      "front": "What is a gamete, and how many alleles does it carry?",
+      "back": "A **gamete** is a sex cell carrying one allele of each gene. An $Aa$ parent makes $A$ and $a$ gametes in equal numbers.",
+      "hint": "Compare with the two copies of a gene in a body cell.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04x2gcc",
+      "kind": "concept",
+      "front": "What genotype ratio do two heterozygous $Aa$ parents produce?",
+      "back": "**$1:2:1$** for $AA:Aa:aa$. The four boxes give one $AA$, two $Aa$ and one $aa$.",
+      "hint": "Count the boxes in the Punnett square for each genotype.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "198j4ic",
+      "kind": "example",
+      "front": "Two heterozygous tall plants produce 160 offspring. How many dwarf and how many tall offspring are expected?",
+      "back": "About **40** dwarf and **120** tall. Dwarf is $\\frac{1}{4}\\times160=40$, so tall is $160-40=120$.",
+      "hint": "Start with the probability of the dwarf genotype.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18w2mjj",
+      "kind": "term",
+      "front": "What is a test cross?",
+      "back": "A **test cross** is a cross between an individual showing the dominant phenotype and a homozygous recessive individual, used to reveal its unknown genotype.",
+      "hint": "Think about which partner in the cross is known for certain.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1fq4ha2",
+      "kind": "concept",
+      "front": "What does a $1:1$ ratio in a test cross show about the unknown parent?",
+      "back": "The unknown parent is **$Aa$**, because it passes on $A$ and $a$ equally. Only tall offspring would suggest $AA$.",
+      "hint": "Think about how many different alleles the unknown parent passes on.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1h2nl5r",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a plant's phenotype is decided by its genotype alone?",
+      "back": "The **environment** can also change an observable feature, such as plant height. Phenotype results from genotype plus environmental influences.",
+      "hint": "Think about what a plant needs in order to grow.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ewlhnd",
+      "kind": "mistake",
+      "front": "Why might real offspring not match an expected ratio exactly?",
+      "back": "**Fertilisation is random**, so a ratio gives probabilities, not guarantees.",
+      "hint": "Think about what a ratio predicts and what it cannot promise.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "06wzvag",
+      "kind": "mistake",
+      "front": "Why is it a mistake to choose different letters for the dominant and recessive alleles?",
+      "back": "Use one letter for both alleles of a gene: a capital for dominant and the same lower-case letter for recessive, such as $A$ and $a$.",
+      "hint": "Think about which alleles belong to the same gene.",
+      "sectionId": "s2"
+    }
+  ]
+}

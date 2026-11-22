@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-3",
+  "topicCode": "3.3",
+  "topicName": "Protein transport through the cell",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:17.610Z",
+  "cards": [
+    {
+      "id": "1wrajc2",
+      "kind": "process",
+      "front": "What is the route a secreted protein takes from synthesis to release from the cell?",
+      "back": "A **ribosome** on the rough ER makes the polypeptide, which enters the lumen and folds. A vesicle carries it to the Golgi apparatus, where it is modified and packaged into a new vesicle. That vesicle fuses with the cell surface membrane, releasing the protein by **exocytosis**.",
+      "hint": "Follow the protein in order, starting where it is first made.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wbxyww",
+      "kind": "concept",
+      "front": "Why is the Golgi apparatus essential for a protein to be secreted?",
+      "back": "The Golgi **modifies, sorts and packages** proteins into vesicles for their destinations. Without it, proteins would not be finished or sent to the cell surface, so they could build up inside the cell.",
+      "hint": "Think about what a protein still needs after folding in the rough ER.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b3z9lm",
+      "kind": "concept",
+      "front": "Why does the position of a ribosome decide where its protein ends up?",
+      "back": "Ribosomes attached to the **rough ER** make proteins that start the route to the outside. **Free ribosomes** in the cytoplasm make proteins that stay inside the cell.",
+      "hint": "Compare ribosomes on the outside of the rough ER with those floating in the cytoplasm.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0y6otv0",
+      "kind": "concept",
+      "front": "What happens to a polypeptide as it passes into the lumen of the rough ER?",
+      "back": "It folds into its **three-dimensional shape**, and short sugar chains may be added to it.",
+      "hint": "Think about the shape a protein needs before it can work.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0htuwdo",
+      "kind": "term",
+      "front": "What is secretion?",
+      "back": "**Secretion** is the controlled release of a useful product, such as an enzyme or hormone, from a cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00b4ghb",
+      "kind": "term",
+      "front": "What is the lumen of an organelle such as the rough ER?",
+      "back": "The **lumen** is the fluid-filled space enclosed by the membrane of the organelle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "012ziuo",
+      "kind": "term",
+      "front": "What is a vesicle?",
+      "back": "A **vesicle** is a tiny sphere of membrane with cargo inside. It moves substances within the cell or to its surface.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jiez4u",
+      "kind": "term",
+      "front": "What is a glycoprotein?",
+      "back": "A **glycoprotein** is a protein with carbohydrate chains attached to it. The Golgi adds these chains.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07ozpxk",
+      "kind": "term",
+      "front": "What is exocytosis?",
+      "back": "**Exocytosis** is the release of a vesicle's contents from the cell when the vesicle membrane fuses with the cell surface membrane.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gmhl7b",
+      "kind": "concept",
+      "front": "Why do cells that secrete a lot of protein usually contain many mitochondria?",
+      "back": "Moving vesicles needs energy. **Mitochondria** supply this energy as ATP, so secreting cells need many of them.",
+      "hint": "Think about what powers the vesicle's journey through the cytoplasm.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gzo9zo",
+      "kind": "process",
+      "front": "How does a vesicle carry a protein from the rough ER to the Golgi apparatus?",
+      "back": "A section of rough ER pinches off, trapping the protein in a **vesicle**. The vesicle travels through the cytoplasm, and its membrane fuses with the Golgi membrane, so the protein enters.",
+      "hint": "Start with how the vesicle is formed from the rough ER.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0by73of",
+      "kind": "mistake",
+      "front": "Why is it wrong to say the Golgi apparatus makes proteins?",
+      "back": "The Golgi **modifies and packages** proteins. Polypeptides are made on ribosomes, so the Golgi should only be described as modifying and packaging them.",
+      "hint": "Think about where polypeptide chains are first joined together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19o1z4k",
+      "kind": "mistake",
+      "front": "Why is it wrong to think all protein synthesis happens on the rough ER?",
+      "back": "Not all ribosomes are on the rough ER. **Free ribosomes** in the cytoplasm make proteins that stay there.",
+      "hint": "Consider which ribosomes are not attached to any membrane.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h8426a",
+      "kind": "concept",
+      "front": "Which organelles decide which protein is made?",
+      "back": "The **nucleus**, which holds the gene, and **ribosomes**, which read the messenger RNA and join amino acids into a polypeptide.",
+      "hint": "Start with the organelle that stores the genetic information.",
+      "sectionId": "s6"
+    }
+  ]
+}

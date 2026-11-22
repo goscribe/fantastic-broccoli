@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-4-2",
+  "topicCode": "6.4.2",
+  "topicName": "Atoms and nuclear radiation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:22.269Z",
+  "cards": [
+    {
+      "id": "01cf9h5",
+      "kind": "concept",
+      "front": "Why can't scientists predict when one particular unstable nucleus will decay?",
+      "back": "Each decay happens at a **random** time, so one nucleus's decay time cannot be predicted. A large group still changes in a predictable way over time.",
+      "hint": "Compare one nucleus with a large group of nuclei.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05vdg64",
+      "kind": "term",
+      "front": "What is the **half-life** of a radioactive sample?",
+      "back": "The **half-life** is the time taken for the number of undecayed nuclei in a sample to halve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lmf598",
+      "kind": "concept",
+      "front": "Which type of radiation ionises most strongly?",
+      "back": "**Alpha** radiation ionises most strongly but travels only a short distance through air, and paper or skin can stop it.",
+      "hint": "Compare the three types in the ionisation and penetration table.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18buahs",
+      "kind": "term",
+      "front": "What does an **alpha particle** contain?",
+      "back": "An **alpha particle** contains two protons and two neutrons, so alpha emission lowers the proton number by two.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wchdrq",
+      "kind": "process",
+      "front": "What happens to a neutron during beta-minus decay?",
+      "back": "The neutron changes into a **proton** and the nucleus emits an electron. The proton number rises by one while the total of protons and neutrons stays the same.",
+      "hint": "Think about what changes in the nucleus and what is emitted.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07jers7",
+      "kind": "concept",
+      "front": "Why does gamma emission not change the element?",
+      "back": "Gamma is **electromagnetic radiation** released as a nucleus loses energy. It does not change the numbers of protons or neutrons, so the element stays the same.",
+      "hint": "Compare with what alpha and beta emission do to the nucleus.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0s7qt7s",
+      "kind": "mistake",
+      "front": "What is wrong with saying that random decay means a large sample has no predictable pattern?",
+      "back": "**Randomness** applies to individual nuclei. A large sample still shows a predictable pattern, such as its half-life.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vcaaii",
+      "kind": "mistake",
+      "front": "Which amount should you halve at each stage when finding how much radioactive material remains?",
+      "back": "Halve the **amount still undecayed**, not the amount that has already decayed.",
+      "hint": "Think about what the sample still contains at each stage.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lrwbe2",
+      "kind": "concept",
+      "front": "Which radiation penetrates furthest through material?",
+      "back": "**Gamma** penetrates further than alpha or beta and ionises least strongly. Thick lead or concrete reduces it but does not necessarily stop all of it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "113hwth",
+      "kind": "term",
+      "front": "What is **ionisation**?",
+      "back": "**Ionisation** is when radiation removes an electron from an atom.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cis89m",
+      "kind": "formula",
+      "front": "How do you work out the number of half-lives that have passed?",
+      "back": "$\\frac{\\text{elapsed time}}{\\text{half-life}}$. Use the same time unit for both values.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sw8ate",
+      "kind": "example",
+      "front": "A sample of $80\\,\\text{mg}$ has a half-life of $5\\,\\text{days}$. How much remains undecayed after $15\\,\\text{days}$?",
+      "back": "**$10\\,\\text{mg}$** remains. There are $15\\div5=3$ half-lives, so $80\\to40\\to20\\to10\\,\\text{mg}$.",
+      "hint": "Start by working out how many half-lives fit into the elapsed time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09gpmja",
+      "kind": "concept",
+      "front": "How does the activity of a radioactive sample change over one half-life?",
+      "back": "The **activity** halves in each half-life. Activity counts decays per second and is measured in becquerels ($\\text{Bq}$).",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wqtfyn",
+      "kind": "concept",
+      "front": "What stops most beta radiation?",
+      "back": "A **thin sheet of aluminium** stops most beta radiation, because beta ionises less strongly than alpha and passes further through air.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-4-1",
+  "topicCode": "4.4.1",
+  "topicName": "Photosynthesis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:21.600Z",
+  "cards": [
+    {
+      "id": "1fyambv",
+      "kind": "term",
+      "front": "What process lets plants use light energy to make glucose?",
+      "back": "**Photosynthesis** uses light energy to turn carbon dioxide and water into glucose, releasing oxygen as a product.",
+      "hint": "Think about why plants need leaves and what they make from the air and roots.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06w4zue",
+      "kind": "term",
+      "front": "What is a limiting factor in photosynthesis?",
+      "back": "A **limiting factor** is the condition that currently stops the rate from rising further. Increasing a different factor is needed to speed it up.",
+      "hint": "Consider what happens to the rate when light is increased but the rate no longer changes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1795lf0",
+      "kind": "concept",
+      "front": "What is the word equation for photosynthesis?",
+      "back": "Carbon dioxide + water → glucose + oxygen. Carbon dioxide enters from the air, and water arrives from the roots.",
+      "hint": "Work out which substances are reactants and which are products.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yw6psn",
+      "kind": "term",
+      "front": "Where in a plant cell does photosynthesis take place?",
+      "back": "In **chloroplasts**, which contain chlorophyll that absorbs the light needed for the process.",
+      "hint": "Think about the organelle that holds the green pigment.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07b57ee",
+      "kind": "concept",
+      "front": "Why do leaves have a broad, thin shape?",
+      "back": "Broad leaves have a large **surface area** to absorb light. Thin leaves mean carbon dioxide travels only a short distance to photosynthesising cells.",
+      "hint": "Consider two needs: catching light and moving gases.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16av36t",
+      "kind": "term",
+      "front": "What is the palisade layer in a leaf?",
+      "back": "The **palisade layer** is closely packed cells with many chloroplasts, found near the upper surface where light enters.",
+      "hint": "Think about where the light enters the leaf and which cells capture it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wl7zsg",
+      "kind": "term",
+      "front": "What are stomata and what do they allow in and out of a leaf?",
+      "back": "**Stomata** are small openings that let carbon dioxide enter, and oxygen can leave through them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09b0ctx",
+      "kind": "concept",
+      "front": "Why does the rate of photosynthesis fall above the optimum temperature?",
+      "back": "The **enzymes** lose their shape above the optimum, so the reactions slow down and the rate falls.",
+      "hint": "Think about how enzymes respond to heat compared with cold.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0x0f5rk",
+      "kind": "mistake",
+      "front": "Why might adding more light fail to speed up photosynthesis?",
+      "back": "More light does not always increase the rate. Once another factor, such as carbon dioxide or temperature, is limiting, extra light has little effect.",
+      "hint": "Consider what else the plant needs besides light.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ytyhqd",
+      "kind": "process",
+      "front": "What steps make a fair test of light intensity using oxygen bubbles?",
+      "back": "Change the lamp's distance, keep temperature and carbon dioxide steady, count bubbles over a fixed time, repeat, and calculate a mean.",
+      "hint": "Think about which variable you change and which you must keep the same.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uzndch",
+      "kind": "example",
+      "front": "A water plant produces 18 bubbles in 30 seconds. What is its bubble count rate per minute?",
+      "back": "36 bubbles per minute, using $60\\div30=2$ and $18\\times2=36$.",
+      "hint": "How many 30-second periods fit into one minute?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kferdo",
+      "kind": "mistake",
+      "front": "Why are bubble counts only estimates of the rate of photosynthesis?",
+      "back": "Bubbles may differ in size, so counts can mislead. Measuring the volume of oxygen collected gives a better comparison.",
+      "hint": "Think about what a bubble count fails to measure.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ooovc7",
+      "kind": "concept",
+      "front": "How does increasing carbon dioxide concentration affect the rate of photosynthesis?",
+      "back": "It raises the rate by supplying more reactant. The rate levels off once another factor becomes limiting.",
+      "hint": "Consider what the plant needs as a reactant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1x4evzt",
+      "kind": "concept",
+      "front": "What does a plant do with the glucose it makes?",
+      "back": "It releases energy, makes cellulose for cell walls, stores it as starch, and makes other substances needed for growth.",
+      "sectionId": "s1"
+    }
+  ]
+}

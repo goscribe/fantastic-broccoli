@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-3",
+  "topicCode": "5.3",
+  "topicName": "The Green Revolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:49.395Z",
+  "cards": [
+    {
+      "id": "0q19mfx",
+      "kind": "term",
+      "front": "What is the Green Revolution?",
+      "back": "The mid-1900s push to raise crop yields using new crops and farming methods, so more food came from each unit of land. Wheat and **rice** were the main focus because they feed so many people.",
+      "hint": "Think about why countries needed more food by the mid-1900s.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1j81w7r",
+      "kind": "concept",
+      "front": "Why couldn't a single change, such as a new seed, produce the Green Revolution's gains?",
+      "back": "The gains came from a **package** of methods (seeds, fertilizer, irrigation, pesticides, machines) that worked together, and each part depended on the others.",
+      "hint": "Look at how the note lists the parts of the approach.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17fl0hj",
+      "kind": "concept",
+      "front": "Why is the Green Revolution judged by both its benefits and its costs?",
+      "back": "Its large gains in food supply came with real costs to **soil, water, and wildlife**, so a fair judgment weighs both sides of the trade-off.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tb26an",
+      "kind": "term",
+      "front": "What is a high-yield variety?",
+      "back": "A **high-yield variety** is a crop strain bred to produce more grain per plant than older types, and it responds strongly to extra fertilizer and water.",
+      "hint": "Compare it with the older crop types farmers used before.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1x4pli7",
+      "kind": "term",
+      "front": "What is monoculture?",
+      "back": "**Monoculture** is growing a single crop species or variety over a large area.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fls85r",
+      "kind": "term",
+      "front": "What is salinization?",
+      "back": "**Salinization** is the buildup of salts in soil, often caused by irrigation water evaporating, which reduces plant growth.",
+      "hint": "Think about what happens to irrigation water left on the soil surface.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g3hzwk",
+      "kind": "formula",
+      "front": "What equation gives the percent change in yield, and what does each symbol mean?",
+      "back": "$\\frac{\\mathrm{new}-\\mathrm{old}}{\\mathrm{old}}\\times 100$, where new and old are yields in $\\text{metric tons}/\\text{hectare}$. A positive result means an increase.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18lxvbm",
+      "kind": "example",
+      "front": "A wheat field rises from 2.0 to 5.0 metric tons/hectare after adopting a high-yield variety. What is the percent change?",
+      "back": "$\\frac{5.0-2.0}{2.0}\\times 100 = +150\\%$. The yield rose by 150%.",
+      "hint": "Start with the old yield as the baseline.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1h2anri",
+      "kind": "mistake",
+      "front": "What is wrong with dividing the yield change by the new yield when finding percent change?",
+      "back": "The starting value must be the **old yield**. Dividing by the new yield gives a wrong answer, so always use the old yield as the baseline.",
+      "hint": "Which yield is the starting point of the change?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19smgb7",
+      "kind": "mistake",
+      "front": "Why is it a mistake to assume high-yield varieties always give more grain?",
+      "back": "High-yield varieties only give more grain when enough **water and nutrients** are supplied. Without them, their advantage shrinks.",
+      "hint": "Think about what conditions the varieties were bred to respond to.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oneko1",
+      "kind": "concept",
+      "front": "Why does growing one variety over large areas make crops easier to wipe out?",
+      "back": "A single pest or disease can spread quickly through plants that are genetically similar, so one threat can damage a whole field.",
+      "hint": "Compare planting one variety with planting several.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vpu6s5",
+      "kind": "concept",
+      "front": "What environmental harms can fertilizer and pesticides cause after they are applied?",
+      "back": "They wash into waterways, causing **water pollution** and harming wildlife, including species the pesticides were not aimed at.",
+      "hint": "Think about where applied chemicals end up after rain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13k8be5",
+      "kind": "concept",
+      "front": "Why did small farmers often gain less from the Green Revolution?",
+      "back": "Seeds, fertilizer, and irrigation cost money, so small farmers who could not pay often gained less, which widened the gap between rich and poor farmers.",
+      "hint": "Think about what the package of inputs required from farmers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hyn11p",
+      "kind": "concept",
+      "front": "Why were many high-yield wheat and rice varieties bred to be shorter?",
+      "back": "Tall plants given heavy fertilizer grow top-heavy and fall over. Shorter plants put more energy into **grain** rather than stalk, so they can take extra fertilizer and still produce more grain.",
+      "hint": "Think about what happens to tall plants that receive lots of fertilizer.",
+      "sectionId": "s5"
+    }
+  ]
+}

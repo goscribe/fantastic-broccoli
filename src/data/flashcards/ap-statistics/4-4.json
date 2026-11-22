@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "4-4",
+  "topicCode": "4.4",
+  "topicName": "Setting up a test for a mean or mean difference",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:04.066Z",
+  "cards": [
+    {
+      "id": "01roar6",
+      "kind": "process",
+      "front": "What are the four parts of a complete test setup, in order?",
+      "back": "**Parameter** (define $\\mu$ in words and context), then **hypotheses** in symbols, then **conditions** checked with the numbers, then the **statistic** with its degrees of freedom.",
+      "hint": "Start with what the symbol stands for before writing any claims.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18v39s9",
+      "kind": "concept",
+      "front": "Why does a test statistic convert the raw difference into standard errors?",
+      "back": "A raw gap such as 1.8 hours is hard to judge alone. Counting **standard errors** from the claimed mean shows how far the sample sits from the claim, relative to normal sampling variation.",
+      "hint": "Compare the gap with how much sample means usually vary.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wok8jf",
+      "kind": "concept",
+      "front": "How does the wording of the research question set the form of $H_a$?",
+      "back": "A **greater than** question gives $H_a:\\mu>\\mu_0$, a **less than** question gives $H_a:\\mu<\\mu_0$, and a **different from** question gives the **two-sided** $H_a:\\mu\\ne\\mu_0$.",
+      "hint": "Look for the direction words in the question itself.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hmvdwf",
+      "kind": "term",
+      "front": "What is the null hypothesis $H_0$ in a test for one mean?",
+      "back": "The **claim assumed true** at the start of the test, written $\\mu=\\mu_0$, where $\\mu_0$ is the claimed value.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14djcf1",
+      "kind": "mistake",
+      "front": "Why is writing $H_0:\\bar{x}=5$ wrong?",
+      "back": "Hypotheses describe the **population mean** $\\mu$. The sample mean $\\bar{x}$ is already known from the data, so it is never claimed or tested.",
+      "hint": "Ask which mean the claim is about: the sample or the population.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06vgtwj",
+      "kind": "formula",
+      "front": "Which formula gives the t statistic for one mean when $\\sigma$ is unknown?",
+      "back": "$t=\\frac{\\bar{x}-\\mu_0}{s/\\sqrt{n}}$, where $\\bar{x}$ is the **sample mean**, $\\mu_0$ the claimed mean, $s$ the sample standard deviation, and $s/\\sqrt{n}$ the **standard error**.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b3ukuk",
+      "kind": "concept",
+      "front": "What shape feature makes the t-distribution different from the Normal model?",
+      "back": "The t-distribution is bell-shaped but has **heavier tails**, so extreme values are more likely. Its exact shape depends on the degrees of freedom.",
+      "hint": "Think about how the tails of the two curves compare.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14cqo29",
+      "kind": "process",
+      "front": "What three conditions must be checked before a t test for one mean?",
+      "back": "**Random** sampling or randomized experiment, **independent** sampling (sample at most 10% of the population), and **normal** (population Normal, $n\\ge30$, or no strong skew or outliers).",
+      "hint": "These are the same checks you use for a confidence interval.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gcnrc2",
+      "kind": "mistake",
+      "front": "Why is it wrong to pick the direction of $H_a$ after seeing the sample mean?",
+      "back": "The **research question** should decide the direction, chosen before looking at the data. Letting the data pick the direction biases the test.",
+      "hint": "Think about what the data are supposed to do in a test.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uezc84",
+      "kind": "term",
+      "front": "What is the significance level $\\alpha$?",
+      "back": "The **cutoff** for how unlikely a result must be under $H_0$ before you reject it. It is chosen before seeing any data, commonly $\\alpha=0.05$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0k4gjqc",
+      "kind": "example",
+      "front": "Battery life: $\\bar{x}=38.2$, $s=3.4$, $n=25$, and $H_0:\\mu=40$. What is $t$?",
+      "back": "$t=\\frac{38.2-40}{3.4/\\sqrt{25}}=\\frac{-1.8}{0.68}\\approx-2.65$. The negative sign shows the sample mean sits below the claim.",
+      "hint": "Start with the gap between the sample mean and the claimed mean.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01kszfs",
+      "kind": "process",
+      "front": "How do you set up a test for paired data?",
+      "back": "Find **one difference per pair**, then test the mean of the differences, usually with $H_0:\\mu_{\\mathrm{diff}}=0$.",
+      "hint": "Reduce each pair to a single number first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e5wju0",
+      "kind": "concept",
+      "front": "When is a z statistic used instead of a t statistic for one mean?",
+      "back": "Only in the rare case where $\\sigma$ is **known**. Since $\\sigma$ is almost always unknown, the t statistic is the usual choice.",
+      "hint": "Think about which standard deviation you actually have.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14lbtj7",
+      "kind": "term",
+      "front": "What are the degrees of freedom for a one-sample t procedure?",
+      "back": "$df=n-1$. These **degrees of freedom** set the shape of the t-distribution used to judge the statistic.",
+      "hint": "Think about how many values are free once the mean is estimated.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-1-1",
+  "topicCode": "6.1.1",
+  "topicName": "Energy changes in a system",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:59.139Z",
+  "cards": [
+    {
+      "id": "0ioy92j",
+      "kind": "concept",
+      "front": "How should you describe an energy change between stores in a system?",
+      "back": "Name the **starting store**, the **transfer pathway**, and the **receiving store**. For example, a torch battery's chemical store transfers energy electrically to the lamp.",
+      "hint": "Think of a three-part sentence, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q2v64w",
+      "kind": "formula",
+      "front": "Which equation gives the kinetic energy of a moving object, and what does each symbol mean?",
+      "back": "$E_k=\\frac{1}{2}mv^2$, where $E_k$ is kinetic energy in $\\text{J}$, $m$ is mass in $\\text{kg}$, and $v$ is speed in $\\text{m/s}$.",
+      "hint": "Consider what happens to energy when speed doubles.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18g6q6t",
+      "kind": "formula",
+      "front": "Which equation links the energy gained by a substance to its mass, temperature change and specific heat capacity?",
+      "back": "$\\Delta E=mc\\Delta\\theta$, where $\\Delta E$ is energy in $\\text{J}$, $m$ is mass in $\\text{kg}$, $c$ is specific heat capacity in $\\text{J/kg}\\,^{\\circ}\\text{C}^{-1}$, and $\\Delta\\theta$ is temperature change in $^{\\circ}\\text{C}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1yqpc6l",
+      "kind": "term",
+      "front": "What is a kinetic store?",
+      "back": "A **kinetic store** holds the energy of an object because it is moving.",
+      "hint": "Think of the moving bicycle example.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01z51iu",
+      "kind": "term",
+      "front": "Which energy store holds energy associated with the temperature of an object or system?",
+      "back": "The **thermal store**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0q48skz",
+      "kind": "concept",
+      "front": "Why does a force do no work on an object that does not move?",
+      "back": "**Work done** is energy transferred by a force moving an object, so with no movement the distance is zero and no energy is transferred.",
+      "hint": "Check what the distance term in $W=Fs$ equals.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1f2fx74",
+      "kind": "mistake",
+      "front": "What is a common mistake when calculating kinetic energy?",
+      "back": "Students often square the **mass** or forget to square the **speed**. Only the speed is squared, before multiplying by the mass and a half.",
+      "hint": "Look closely at which symbol the square applies to.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rfih4p",
+      "kind": "mistake",
+      "front": "Why is electricity wrong to list as an energy store?",
+      "back": "Electricity is not a **store**. An electric current **transfers** energy between stores, such as from a battery's chemical store to a lamp.",
+      "hint": "Ask what a circuit carries rather than holds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0emomoh",
+      "kind": "example",
+      "front": "A 2 kg object travels at 3 m/s. What is its kinetic energy?",
+      "back": "$E_k=\\frac{1}{2}\\times2\\times3^2=9\\ \\text{J}$, so the object has **9 J** of kinetic energy.",
+      "hint": "Start by writing down the kinetic energy formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10hjqay",
+      "kind": "example",
+      "front": "How much energy does 0.50 kg of water gain when it warms from 20 °C to 30 °C, with $c=4200\\ \\text{J/kg}\\,^{\\circ}\\text{C}^{-1}$?",
+      "back": "$\\Delta\\theta=10\\ ^{\\circ}\\text{C}$, so $\\Delta E=0.50\\times4200\\times10=21000\\ \\text{J}$. The water gains **21,000 J**.",
+      "hint": "Find the temperature change first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uj7zin",
+      "kind": "example",
+      "front": "A constant 20 N force pushes a box 3 m along the force. How much work is done?",
+      "back": "$W=Fs=20\\times3=60\\ \\text{J}$, so the force transfers **60 J** of energy to the box.",
+      "hint": "Which equation links force and distance moved?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ucm43q",
+      "kind": "process",
+      "front": "What are the steps of energy transfer from a torch battery to its surroundings?",
+      "back": "1) Energy leaves the battery's **chemical store**. 2) Moving charges transfer it electrically to the lamp. 3) Light waves carry some energy away, and heating raises thermal stores.",
+      "hint": "Start where the energy is first stored.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "149sjhl",
+      "kind": "concept",
+      "front": "Why does heating transfer energy from one object to another?",
+      "back": "**Heating** transfers energy because of a **temperature difference** between objects, so energy flows from hotter to cooler.",
+      "hint": "Think about which direction energy moves between a hot and a cold object.",
+      "sectionId": "s2"
+    }
+  ]
+}

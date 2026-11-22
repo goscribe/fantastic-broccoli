@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-10",
+  "topicCode": "6.10",
+  "topicName": "Geothermal energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:22.298Z",
+  "cards": [
+    {
+      "id": "0fugnxz",
+      "kind": "concept",
+      "front": "Why is geothermal energy considered renewable?",
+      "back": "The Earth's heat flow is **continuous** on human time scales, so it is replaced as fast as we use it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1aew0jn",
+      "kind": "process",
+      "front": "What are the steps by which underground heat becomes electricity in a geothermal plant?",
+      "back": "1) A production well brings hot water or steam to the surface. 2) The steam spins a **turbine**. 3) The turbine drives a **generator**. 4) Cooled water is pumped back down an injection well.",
+      "hint": "Start from the well that reaches the hot zone.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bdrsix",
+      "kind": "concept",
+      "front": "Why are strong geothermal resources found near plate boundaries and hot spots?",
+      "back": "Magma rises close to the surface there, heating the rock and groundwater above it, which gives the very hot rock power plants need.",
+      "hint": "Think about what lies closer to the surface at plate edges.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cqvsu7",
+      "kind": "term",
+      "front": "What is the geothermal gradient?",
+      "back": "The **geothermal gradient** is the rate at which temperature rises with depth below Earth's surface.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nv1h8z",
+      "kind": "term",
+      "front": "What is direct use of geothermal energy?",
+      "back": "**Direct use** pipes hot water or steam straight to buildings, greenhouses or fish farms to supply heat, without first making electricity.",
+      "hint": "Compare it with the turbine route.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0v15lgf",
+      "kind": "concept",
+      "front": "How can a geothermal heat pump heat a building in winter where there are no hot springs?",
+      "back": "It uses buried pipes to move heat between the building and the ground a few meters down, which stays near a steady temperature all year.",
+      "hint": "Compare shallow ground with deep volcanic rock.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vtxmp0",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a geothermal heat pump taps deep volcanic heat?",
+      "back": "It uses the **steady temperature of shallow ground**, not deep rock heat, so it works almost anywhere.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1reulm4",
+      "kind": "term",
+      "front": "What is a hot spot?",
+      "back": "A **hot spot** is a location where unusually hot rock rises from deep within Earth and heats the crust above it, away from plate edges.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r4a5w8",
+      "kind": "term",
+      "front": "What is baseload power?",
+      "back": "**Baseload** power is electricity supplied at a steady rate that meets the minimum demand on a grid around the clock.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0523kav",
+      "kind": "concept",
+      "front": "What limits where geothermal power plants can be built?",
+      "back": "They need very hot rock close to the surface, which occurs only in certain regions, and drilling is costly, with some wells finding too little heat.",
+      "hint": "Think about what a power plant needs underground.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "060ep3c",
+      "kind": "term",
+      "front": "What is hydrogen sulfide and why is it a concern at geothermal sites?",
+      "back": "$\\mathrm{H_2S}$ is a gas with a rotten-egg smell that underground fluids can release, and it is harmful at high concentrations.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0wt7f2u",
+      "kind": "concept",
+      "front": "What can injecting cooled water back underground trigger?",
+      "back": "**Small earthquakes**, because adding fluid to the rock can change the pressure within it.",
+      "hint": "Think about how fluid affects pressure in rock.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1ny3uhz",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a single geothermal site can supply heat forever?",
+      "back": "A field can lose heat if it is managed poorly, for example by pumping out water faster than rain and groundwater replace it, so it is not unlimited at one site.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1fzw222",
+      "kind": "concept",
+      "front": "How do greenhouse gas emissions from geothermal plants compare with fossil fuel plants?",
+      "back": "Geothermal plants release **few greenhouse gases** because they do not burn fossil fuels.",
+      "sectionId": "s5"
+    }
+  ]
+}

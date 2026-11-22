@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "m7",
+  "topicCode": "M7",
+  "topicName": "Kinematics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:09.079Z",
+  "cards": [
+    {
+      "id": "05nd2rd",
+      "kind": "term",
+      "front": "What is displacement?",
+      "back": "**Displacement** is the change in position, found as final position minus initial position, including its direction.",
+      "hint": "Contrast it with the total distance walked.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fl89fv",
+      "kind": "concept",
+      "front": "What does the gradient of a velocity-time graph tell you?",
+      "back": "The **acceleration**, given by $a=\\frac{\\mathrm{d}v}{\\mathrm{d}t}$ and measured in $\\mathrm{m\\,s^{-2}}$. A steeper line means a larger acceleration.",
+      "hint": "Check the units: velocity divided by time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w05e1b",
+      "kind": "formula",
+      "front": "Which equation of motion for constant acceleration leaves out the time $t$?",
+      "back": "$v^2=u^2+2as$, where $s$ is displacement, $u$ is initial velocity, $v$ is final velocity and $a$ is acceleration. Each equation leaves out one variable.",
+      "hint": "Check which of the five variables is missing from each equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tmb6rg",
+      "kind": "mistake",
+      "front": "Why is average speed not the size of average velocity?",
+      "back": "**Average speed** uses total distance over total time, while average velocity uses displacement. They differ whenever the direction changes.",
+      "hint": "Think about what happens to distance when the direction reverses.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0g0g1l0",
+      "kind": "example",
+      "front": "A runner goes 80 m east in 20 s, then 20 m west in 5 s. What is the average speed for the whole run?",
+      "back": "$4.0\\,\\mathrm{m\\,s^{-1}}$, since the total distance is 100 m and the total time is 25 s.",
+      "hint": "Start with the total distance and the total time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rqofim",
+      "kind": "concept",
+      "front": "What does the area between a velocity-time graph and the time axis give?",
+      "back": "The **change in displacement**. Area above the axis counts as positive and area below the axis counts as negative.",
+      "hint": "Multiply the units on the two axes together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wlnrir",
+      "kind": "example",
+      "front": "A car speeds up from rest to $8\\,\\mathrm{m\\,s^{-1}}$ in 4 s, cruises for 6 s, then stops in 4 s. What total distance does it travel?",
+      "back": "**80 m**, found as the trapezium area $\\frac{1}{2}(14+6)\\times8$.",
+      "hint": "Split the graph into shapes whose areas you know.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "151606y",
+      "kind": "term",
+      "front": "What is constant acceleration?",
+      "back": "Acceleration whose value does not change with time, so the velocity-time graph is a straight line.",
+      "hint": "Think about what the velocity-time graph looks like.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v8e5l2",
+      "kind": "mistake",
+      "front": "Why can't you use the five equations when acceleration is changing?",
+      "back": "They hold only while the **acceleration stays constant**. If it changes, split the motion into stages.",
+      "hint": "Recall the condition the equations depend on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vho0w7",
+      "kind": "process",
+      "front": "What are the steps for choosing which equation of motion to use?",
+      "back": "Sketch and mark a positive direction, list the known $s$, $u$, $v$, $a$ and $t$, pick the equation with only your unknown, then substitute with signs and solve.",
+      "hint": "What should you do before any algebra?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11ez2oh",
+      "kind": "example",
+      "front": "A ball is thrown straight up at $14\\,\\mathrm{m\\,s^{-1}}$ with $g=9.8\\,\\mathrm{m\\,s^{-2}}$. What is its greatest height, ignoring air resistance?",
+      "back": "**10 m**, found from $0=14^2+2(-9.8)s$ with up taken as positive.",
+      "hint": "Which velocity is zero at the highest point?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b0vmop",
+      "kind": "formula",
+      "front": "What acceleration should you use for a freely falling object near Earth's surface, and what sign does it take if up is positive?",
+      "back": "**$9.8\\,\\mathrm{m\\,s^{-2}}$ downwards**, so $a=-9.8$ when up is positive, ignoring air resistance.",
+      "hint": "Which way does gravity pull?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hr819g",
+      "kind": "mistake",
+      "front": "Why is a negative acceleration not always a sign that an object is slowing down?",
+      "back": "The sign only gives the **direction** relative to your positive direction. An object slows down only when velocity and acceleration have opposite signs.",
+      "hint": "Compare the signs of the velocity and the acceleration.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1eepe52",
+      "kind": "example",
+      "front": "For $s=t^3-6t^2$ in metres, what is the velocity at $t=4\\,\\mathrm{s}$?",
+      "back": "**Zero**, since $v=3t^2-12t=48-48=0$, so the object is momentarily at rest.",
+      "hint": "Differentiate the displacement with respect to time first.",
+      "sectionId": "s5"
+    }
+  ]
+}

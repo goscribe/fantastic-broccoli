@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "3-8",
+  "topicCode": "3.8",
+  "topicName": "Human population dynamics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:39.738Z",
+  "cards": [
+    {
+      "id": "1opoeqd",
+      "kind": "formula",
+      "front": "Which four processes change the size of a human population, and how do they combine?",
+      "back": "**Births** and **immigration** add people, while **deaths** and **emigration** remove them: $(\\mathrm{births}+\\mathrm{immigration})-(\\mathrm{deaths}+\\mathrm{emigration})$. A positive result means growth.",
+      "hint": "Think about what enters and leaves a population's boundary.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a3qyi7",
+      "kind": "concept",
+      "front": "Why did the human population grow so fast in recent centuries?",
+      "back": "**Death rates** fell as food, medicine and sanitation improved, while **birth rates** fell more slowly, so births outpaced deaths.",
+      "hint": "Compare how quickly each rate changed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sa9408",
+      "kind": "concept",
+      "front": "Why does a population with a higher growth rate double in less time?",
+      "back": "Growth builds on itself, so each year's growth adds to a larger base. A higher percent growth gives a shorter **doubling time**.",
+      "hint": "Think about growth that compounds on a growing base.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1x7ntw0",
+      "kind": "formula",
+      "front": "What formula gives a population's growth rate, ignoring migration?",
+      "back": "$\\frac{\\mathrm{birth\\,rate}-\\mathrm{death\\,rate}}{10}$, giving a percent change per year. Rates are per 1,000, so dividing by 10 converts them to a percent.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lvsenm",
+      "kind": "term",
+      "front": "What is population size?",
+      "back": "The **number of individuals of one species** in a defined area, such as a town, a country or the whole planet.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wd5q9w",
+      "kind": "term",
+      "front": "What is the difference between immigration and emigration?",
+      "back": "**Immigration** is movement into a population from elsewhere. **Emigration** is movement out of a population to another area.",
+      "hint": "Consider the direction of movement across the boundary.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sgd2mu",
+      "kind": "mistake",
+      "front": "Why does migration not change the total human population of Earth?",
+      "back": "Migrants only move between populations, so each one leaves a place and arrives in another. Only **births and deaths** change the global total.",
+      "hint": "Count where each migrant ends up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bt1f08",
+      "kind": "example",
+      "front": "A town of 50,000 has 600 births, 450 deaths, 300 immigrants and 150 emigrants in a year. What is its new size?",
+      "back": "**50,300 people**. Gains of $600+300=900$ minus losses of $450+150=600$ give $+300$, which is added to 50,000.",
+      "hint": "Work out the gains and losses separately first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ynt1zm",
+      "kind": "example",
+      "front": "A country has a birth rate of 24 and a death rate of 8 per 1,000 people. What is its growth rate, ignoring migration?",
+      "back": "**+1.6% per year**. $24-8=+16$ per 1,000, and $\\frac{16}{10}=+1.6$.",
+      "hint": "Start by finding the difference between the two rates.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jqfty8",
+      "kind": "example",
+      "front": "A country grows at 2.0% per year. About how long will its population take to double?",
+      "back": "**About 35 years**, using doubling time $\\approx\\frac{70}{2.0}=35$.",
+      "hint": "Use the rule of 70 with the percent growth rate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1egme9f",
+      "kind": "term",
+      "front": "What is carrying capacity?",
+      "back": "The **population size an environment can support over time** under given conditions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0605jql",
+      "kind": "concept",
+      "front": "Why does technology such as irrigation not remove the limit set by carrying capacity?",
+      "back": "Technology lets more people live in an area, but each extra person still uses resources, so the limit is **stretched, not removed**.",
+      "hint": "Think about what each new person consumes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "132ybq2",
+      "kind": "mistake",
+      "front": "Why is population size alone not enough to judge a population's environmental impact?",
+      "back": "Impact also depends on **resource use per person**. One person in a high-consumption country can use far more than one elsewhere.",
+      "hint": "Compare two people from different countries.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "117h4fr",
+      "kind": "concept",
+      "front": "Which problems follow when a population grows faster than its resources?",
+      "back": "**Food and fresh water** become harder to supply, **habitat** is lost as land is cleared, and pollution, emissions and crowding all increase.",
+      "hint": "Think about what more people need and produce.",
+      "sectionId": "s6"
+    }
+  ]
+}

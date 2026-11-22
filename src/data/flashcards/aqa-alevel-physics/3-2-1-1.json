@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-2-1-1",
+  "topicCode": "3.2.1.1",
+  "topicName": "Constituents of the atom",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:51.021Z",
+  "cards": [
+    {
+      "id": "0nbxeq3",
+      "kind": "concept",
+      "front": "Why does almost all of an atom's mass sit in its nucleus?",
+      "back": "Protons and neutrons are each about 1840 times more massive than an electron, so the nucleus holds nearly all the mass even though it is much smaller than the atom.",
+      "hint": "Compare the particles in the nucleus with the particles around it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sayhwe",
+      "kind": "term",
+      "front": "What are the relative charges of the proton, neutron and electron?",
+      "back": "A **proton** has relative charge +1, a **neutron** has relative charge 0, and an **electron** has relative charge −1.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1isqfpd",
+      "kind": "concept",
+      "front": "What decides which element an atom belongs to?",
+      "back": "The **proton number**, $Z$, which is the count of protons in the nucleus. A nucleus with 6 protons is always carbon.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e8oczb",
+      "kind": "formula",
+      "front": "How is the number of neutrons in a nucleus found from its mass number and proton number?",
+      "back": "$N = A - Z$, where $N$ is the number of neutrons, $A$ is the mass number and $Z$ is the proton number. The answer has no unit.",
+      "hint": "Think about what the mass number counts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t07bow",
+      "kind": "term",
+      "front": "What does the mass number, $A$, of a nucleus count?",
+      "back": "The **mass number**, $A$, is the total number of nucleons, meaning protons plus neutrons, in the nucleus.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ph8n5x",
+      "kind": "example",
+      "front": "How many protons, neutrons and electrons does a neutral atom of $^{23}_{11}\\mathrm{Na}$ contain?",
+      "back": "It has 11 protons, 12 neutrons and 11 electrons. The neutrons come from $23-11=12$, and a neutral atom has as many electrons as protons.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02cqirk",
+      "kind": "mistake",
+      "front": "Why is it wrong to read the mass number of an atom as its mass?",
+      "back": "The mass number is only a count of nucleons, so it has no unit and is not the mass of the atom. The actual mass is found from the nucleon count, not read from $A$ directly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rvl2zk",
+      "kind": "term",
+      "front": "What are isotopes?",
+      "back": "**Isotopes** are atoms of the same element with the same proton number but different neutron numbers, so they have different mass numbers.",
+      "hint": "Compare which of the two numbers stays the same.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ijuxjc",
+      "kind": "example",
+      "front": "How many neutrons are in the hydrogen isotope with mass number 3?",
+      "back": "It has 2 neutrons. Its mass number is 3 and its proton number is 1, so $3-1=2$.",
+      "hint": "Use the proton number of hydrogen, which is 1.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08d8d1m",
+      "kind": "mistake",
+      "front": "Why can't two isotopes of the same element have different numbers of protons?",
+      "back": "A change in proton number changes the element itself, so isotopes must share the same proton number and differ only in neutron number.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vl7si9",
+      "kind": "concept",
+      "front": "Why do isotopes of the same element behave almost identically in chemical reactions?",
+      "back": "Each neutral isotope has the same number of electrons, and neutrons carry no charge, so the chemistry is almost identical.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nhrvxf",
+      "kind": "term",
+      "front": "What is the specific charge of a particle?",
+      "back": "The **specific charge** is the charge $Q$ divided by the mass $m$ of the particle, measured in $\\mathrm{C\\,kg^{-1}}$. A large value means a lot of charge for little mass.",
+      "hint": "Think of it as a ratio, like a charge per kilogram.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0j8zkdu",
+      "kind": "formula",
+      "front": "Which equation gives the specific charge of a particle?",
+      "back": "$\\frac{Q}{m}$, where $Q$ is the charge in coulombs and $m$ is the mass in kilograms, giving a unit of $\\mathrm{C\\,kg^{-1}}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gwtkio",
+      "kind": "example",
+      "front": "What is the specific charge of a $^{23}_{11}\\mathrm{Na}^{+}$ ion, using $e=1.60\\times10^{-19}\\,\\mathrm{C}$ and nucleon mass $1.67\\times10^{-27}\\,\\mathrm{kg}$?",
+      "back": "About $+4.17\\times10^{6}\\,\\mathrm{C\\,kg^{-1}}$. The charge is $+e$ and the mass is $23\\times1.67\\times10^{-27}\\,\\mathrm{kg}=3.84\\times10^{-26}\\,\\mathrm{kg}$.",
+      "hint": "Find the net charge first, then the mass from the nucleons.",
+      "sectionId": "s5"
+    }
+  ]
+}

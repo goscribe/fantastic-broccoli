@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "5-4",
+  "topicCode": "5.4",
+  "topicName": "Residuals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:08.035Z",
+  "cards": [
+    {
+      "id": "19wu22e",
+      "kind": "term",
+      "front": "What is a residual?",
+      "back": "A **residual** is the observed value minus the predicted value, $y-\\hat{y}$, measured in the units of the response variable. It shows how far a point sits from the model's prediction.",
+      "hint": "Think about what the regression line predicts for a given x.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "138p7pz",
+      "kind": "concept",
+      "front": "What does a residual plot look like when a linear model fits well?",
+      "back": "The residuals scatter **randomly** around zero, with no clear pattern and a roughly even spread from left to right. The line captures the trend.",
+      "hint": "Compare the scatter with a horizontal line at zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k2cv9i",
+      "kind": "process",
+      "front": "What are the four steps for judging whether a linear model fits the data?",
+      "back": "1) Calculate each residual as $y-\\hat{y}$. 2) Plot the residuals against $x$ with a line at zero. 3) Look for a curve, a fan shape, or any other pattern. 4) Conclude whether a linear model is appropriate, and say why.",
+      "hint": "Start with the arithmetic, then move to the picture.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tv6got",
+      "kind": "example",
+      "front": "A student studied 7 hours and scored 82 points. Using $\\hat{y}=55+4.5x$, what is the residual and what does it mean?",
+      "back": "The predicted score is $86.5$, so the residual is $-4.5$ points. The student scored 4.5 points below the model's prediction.",
+      "hint": "Find the predicted score first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03b6anj",
+      "kind": "mistake",
+      "front": "What goes wrong if you subtract in the wrong order when finding a residual?",
+      "back": "Reversing to $\\hat{y}-y$ flips the sign and reverses the meaning. A point above the line would look like it sits below it. Always use observed minus predicted.",
+      "hint": "Check which value should come first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jnew2t",
+      "kind": "concept",
+      "front": "What does the sign of a residual tell you about a point's position relative to the line?",
+      "back": "A **positive** residual means the point lies above the line, and a **negative** one means it lies below. A residual of zero means the point sits exactly on the line.",
+      "hint": "Think about vertical distance on a scatterplot.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hmlu03",
+      "kind": "concept",
+      "front": "What does a U-shaped pattern in a residual plot tell you about the linear model?",
+      "back": "The relationship is **curved**, not linear, so a linear model is not appropriate. The line sits below the points at the ends and above them in the middle.",
+      "hint": "Compare the curve of the residuals with the zero line.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p1ts4l",
+      "kind": "concept",
+      "front": "What does a fan shape in a residual plot mean?",
+      "back": "The **spread** of the residuals changes with $x$, so predictions get less precise for larger $x$. Use the linear model with caution.",
+      "hint": "Look at how far the points spread out as you move right.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w5qcad",
+      "kind": "term",
+      "front": "What is a residual plot?",
+      "back": "A **residual plot** is a scatterplot of the residuals on the vertical axis against the explanatory variable (or predicted values). It is used to judge whether a linear model is appropriate.",
+      "hint": "Compare it with a regular scatterplot of the original data.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nen5x3",
+      "kind": "mistake",
+      "front": "Why can't you judge a residual's size by its number alone?",
+      "back": "Size must be judged against the units and scale of $y$. A residual of 3.5 points is small on a 100-point quiz but large on a 10-point quiz.",
+      "hint": "Think about the scale of the scores.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1to1bu9",
+      "kind": "concept",
+      "front": "What should you do when one point has a much larger residual than the rest?",
+      "back": "Give it a **second look**. It may be an unusual observation rather than proof that the whole linear model is wrong.",
+      "hint": "Consider whether one point or the overall pattern is the problem.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qhqgpp",
+      "kind": "example",
+      "front": "A 2-year-old laptop sold for 540 dollars. The model is $\\hat{y}=800-150x$, with $x$ in years. What is the residual in context?",
+      "back": "The predicted price is 500 dollars, so the residual is $+40$ dollars. The laptop sold for 40 dollars more than the model predicted for a 2-year-old laptop.",
+      "hint": "Find the predicted price for an age of 2 first."
+    }
+  ]
+}

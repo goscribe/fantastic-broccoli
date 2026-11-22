@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-4",
+  "topicCode": "4.4",
+  "topicName": "Natural selection and evolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:36.035Z",
+  "cards": [
+    {
+      "id": "1xx8p5r",
+      "kind": "process",
+      "front": "What are the steps of natural selection, in order?",
+      "back": "Individuals differ in inherited characteristics. More offspring are born than can survive. Those with helpful alleles survive and breed more, passing those **alleles** on, so they become more common in the next generation.",
+      "hint": "Start with what must already exist in a population before selection can act.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0c2mmq1",
+      "kind": "term",
+      "front": "What is evolution?",
+      "back": "**Evolution** is a change in allele frequency in a population across generations.",
+      "hint": "Think about what is counted in a whole population, not in one individual.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0je24ci",
+      "kind": "concept",
+      "front": "Why can a river dividing one population eventually produce two separate species?",
+      "back": "The river stops **interbreeding**, so alleles are no longer shared. Mutations and different selection pressures then change allele frequencies until the groups can no longer produce fertile offspring.",
+      "hint": "Consider what happens to gene exchange once the two groups are split.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q0lhv9",
+      "kind": "concept",
+      "front": "Why do differences caused by diet or injury not drive natural selection?",
+      "back": "They are not **genetic**, so they are not passed to offspring and cannot spread through the population.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ruddda",
+      "kind": "term",
+      "front": "What is a mutation?",
+      "back": "A **mutation** is a change in the base sequence of DNA that can create a new allele.",
+      "hint": "Think about where new versions of genes come from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1grf9z3",
+      "kind": "example",
+      "front": "In antibiotic resistance, why does the resistance allele become far more frequent after treatment?",
+      "back": "The antibiotic kills most non-resistant bacteria, so the few with the **resistance allele** survive, divide and pass it on, raising its frequency in the population.",
+      "hint": "Think about which bacteria survive the antibiotic and which do not.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rz7upm",
+      "kind": "term",
+      "front": "What is an adaptation?",
+      "back": "An **adaptation** is an inherited characteristic that suits an organism to its environment, built up by selection over many generations.",
+      "hint": "Compare with a feature that is only learned or caused by injury.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vkktwd",
+      "kind": "term",
+      "front": "What is allele frequency?",
+      "back": "The **proportion** of all copies of a gene in a population that are one particular allele.",
+      "hint": "Count every copy of the gene in the population, not just the individuals.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16qzhtg",
+      "kind": "mistake",
+      "front": "Why is it wrong to say individuals evolve to suit their surroundings?",
+      "back": "An individual's own alleles do not change to fit the environment. The **population** changes across generations as helpful alleles become more common.",
+      "hint": "Consider what is changing, and over what timescale.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xaihdk",
+      "kind": "mistake",
+      "front": "Why does similar DNA between two species not show that one evolved from the other?",
+      "back": "It shows only that they share a **common ancestor**, not that one species evolved directly from the other.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "034fm1i",
+      "kind": "term",
+      "front": "What is a homologous structure?",
+      "back": "A **homologous structure** is a body part with the same underlying structure in different species, inherited from a common ancestor, such as the limbs of humans, bats and whales.",
+      "hint": "Think about the bones and their arrangement, not what the limb is used for.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tp7h9b",
+      "kind": "concept",
+      "front": "Why is the fossil record an incomplete picture of evolution?",
+      "back": "Few organisms become **fossils**, and many fossils have never been found, so many past species left no trace.",
+      "hint": "Think about what usually happens to most organisms after they die.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1afwtcv",
+      "kind": "process",
+      "front": "In what order do the steps of speciation occur after a population is split by a barrier?",
+      "back": "1) Isolation by the barrier, 2) different selection pressures in each group, 3) allele frequencies diverge, 4) interbreeding is lost, giving **reproductive isolation**.",
+      "hint": "Start with what the barrier does first.",
+      "sectionId": "s4"
+    }
+  ]
+}

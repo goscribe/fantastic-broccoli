@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-4-1-6",
+  "topicCode": "3.4.1.6",
+  "topicName": "Momentum",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:21.231Z",
+  "cards": [
+    {
+      "id": "1q8vbc9",
+      "kind": "formula",
+      "front": "Which equation gives the momentum of a moving object?",
+      "back": "$p=mv$, where $p$ is **momentum** in $\\mathrm{kg\\,m\\,s^{-1}}$, $m$ is mass in $\\mathrm{kg}$ and $v$ is velocity in $\\mathrm{m\\,s^{-1}}$. Momentum is a vector, so it has direction too.",
+      "hint": "Think about which two quantities momentum combines.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02lx4ld",
+      "kind": "concept",
+      "front": "What does the principle of conservation of momentum say about a closed system?",
+      "back": "The **total momentum** of a closed system stays constant, so total momentum before a collision equals total momentum after it. No external force acts on the system.",
+      "hint": "Think about what one object gains when it collides with another.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q64eng",
+      "kind": "concept",
+      "front": "What is the difference between an elastic and an inelastic collision?",
+      "back": "In an **elastic collision**, total kinetic energy is conserved as well as total momentum. In an **inelastic collision**, some kinetic energy is transferred to other forms, such as thermal energy and sound.",
+      "hint": "Momentum is conserved in both, so look at what else could differ.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dlpsyd",
+      "kind": "formula",
+      "front": "How is the kinetic energy of a moving object calculated?",
+      "back": "$E_k=\\frac{1}{2}mv^2$, where $E_k$ is the **kinetic energy** in $\\mathrm{J}$, $m$ is mass in $\\mathrm{kg}$ and $v$ is speed in $\\mathrm{m\\,s^{-1}}$. It is the energy an object has because of its motion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1n9vser",
+      "kind": "term",
+      "front": "What is impulse?",
+      "back": "The **impulse** of a force is the product $F\\Delta t$. It equals the change in momentum and is measured in $\\mathrm{N\\,s}$.",
+      "hint": "Think about the area under a force against time graph.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0msw1jv",
+      "kind": "formula",
+      "front": "Which equation links resultant force to the rate of change of momentum?",
+      "back": "$F=\\frac{\\Delta p}{\\Delta t}$, where $F$ is the resultant force in $\\mathrm{N}$, $\\Delta p$ is the change in momentum in $\\mathrm{kg\\,m\\,s^{-1}}$ and $\\Delta t$ is the time taken in $\\mathrm{s}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0s0fqtl",
+      "kind": "concept",
+      "front": "Why does an airbag reduce the force on a driver in a crash?",
+      "back": "It makes the driver's change in momentum take longer. For the same change in momentum, a **longer time** gives a **smaller average force**.",
+      "hint": "Look at the rearranged form of the force equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v9hp1f",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that momentum is lost in an inelastic collision?",
+      "back": "Kinetic energy leaves the moving objects, but **total momentum** is still conserved in a closed system. Momentum does not become thermal energy.",
+      "hint": "Compare what is conserved in each type of collision.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "177ysqp",
+      "kind": "example",
+      "front": "A 2.0 kg trolley moving at 3.0 m/s hits a stationary 1.0 kg trolley and they stick together. What is their common velocity?",
+      "back": "$v=2.0\\,\\mathrm{m\\,s^{-1}}$ in the original direction. Momentum before is $2.0\\times3.0=6.0$, which equals $3.0v$ after, so $v=\\frac{6.0}{3.0}$.",
+      "hint": "Start by writing the total momentum before and after the collision.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11az8wq",
+      "kind": "example",
+      "front": "How much kinetic energy is lost when a 2.0 kg trolley at 3.0 m/s sticks to a stationary 1.0 kg trolley?",
+      "back": "$3.0\\,\\mathrm{J}$. Kinetic energy is $9.0\\,\\mathrm{J}$ before and $6.0\\,\\mathrm{J}$ after, so the collision is **inelastic**.",
+      "hint": "Work out the kinetic energy before and after separately.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "026ihuh",
+      "kind": "example",
+      "front": "What average force does a glove exert to stop a 0.16 kg ball moving at 20 m/s in 0.040 s?",
+      "back": "$F=80\\,\\mathrm{N}$, opposite to the ball's motion. The change in momentum is $0.16\\times20=3.2\\,\\mathrm{kg\\,m\\,s^{-1}}$, so $F=\\frac{3.2}{0.040}$.",
+      "hint": "Find the change in momentum first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "160ly1q",
+      "kind": "example",
+      "front": "Two trolleys at rest are pushed apart by a spring. The 4.0 kg trolley moves right at 1.5 m/s. What is the velocity of the 2.0 kg trolley?",
+      "back": "$v=-3.0\\,\\mathrm{m\\,s^{-1}}$, so it moves left at $3.0\\,\\mathrm{m\\,s^{-1}}$. Total momentum is zero before and after, so $4.0\\times1.5+2.0v=0$.",
+      "hint": "What is the total momentum before the trolleys are released?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ap1x57",
+      "kind": "process",
+      "front": "What are the steps for solving a one-dimensional momentum problem?",
+      "back": "Choose a positive direction. Write the total momentum before, write the total momentum after, set them equal and solve. A negative answer means motion in the opposite direction.",
+      "hint": "Think about what to decide before you substitute any numbers."
+    },
+    {
+      "id": "1ujvwxh",
+      "kind": "term",
+      "front": "What is a closed system in momentum problems?",
+      "back": "A set of interacting objects on which **no external force** acts. External forces, such as friction from the floor, would change the total momentum.",
+      "sectionId": "s2"
+    }
+  ]
+}

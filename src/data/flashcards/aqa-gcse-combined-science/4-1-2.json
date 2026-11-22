@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-1-2",
+  "topicCode": "4.1.2",
+  "topicName": "Cell division",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:08.995Z",
+  "cards": [
+    {
+      "id": "0z2f58i",
+      "kind": "process",
+      "front": "What are the main stages of the cell cycle, in order?",
+      "back": "The cell **grows** and increases its contents, then copies its DNA, then mitosis separates the copied chromosomes into two nuclei, then the cytoplasm and cell membrane divide, giving two daughter cells.",
+      "hint": "Think about what the cell must do before it can split into two.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1du4nal",
+      "kind": "concept",
+      "front": "Why does mitosis matter for growth and repair in multicellular organisms?",
+      "back": "Mitosis produces more **cells** for growth and replaces cells that wear out or are damaged. The daughter cells are genetically identical, so genetic information stays consistent.",
+      "hint": "Think about what a growing or injured body needs more of.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05fa1es",
+      "kind": "term",
+      "front": "What are stem cells?",
+      "back": "**Stem cells** are unspecialised cells that can divide. Their descendants can differentiate, becoming specialised for particular jobs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ekim72",
+      "kind": "term",
+      "front": "What is mitosis?",
+      "back": "**Mitosis** is the division of the nucleus into two nuclei with identical sets of chromosomes. The cytoplasm then divides to give two genetically identical cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wztwxb",
+      "kind": "term",
+      "front": "What is a chromosome?",
+      "back": "A **chromosome** is a long molecule of DNA found in the nucleus. It carries many genes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tt2teb",
+      "kind": "process",
+      "front": "What are the main events of mitosis, in order?",
+      "back": "Chromosomes become visible, then line up across the middle of the cell (**metaphase**), then the identical parts separate and move to opposite ends (**anaphase**). A new nucleus forms around each set, then the cytoplasm divides.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lgbe4o",
+      "kind": "concept",
+      "front": "How can you tell metaphase from anaphase in a diagram?",
+      "back": "In **metaphase** the chromosomes are lined up across the middle of the cell. In **anaphase** the identical parts have separated and are moving towards opposite ends.",
+      "hint": "Look at where the chromosomes are and whether they are still together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12coxr4",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that mitosis is the same as the whole cell cycle?",
+      "back": "Mitosis is only the division of the **nucleus**. The cell cycle also includes growth, DNA copying and division of the cytoplasm.",
+      "hint": "Count how many separate steps the cell cycle includes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dkmam5",
+      "kind": "term",
+      "front": "What does it mean for cells to be genetically identical?",
+      "back": "**Genetically identical** cells have the same genetic information. They receive matching sets of chromosomes during mitosis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1quoew5",
+      "kind": "term",
+      "front": "What is differentiation?",
+      "back": "**Differentiation** is the process by which a cell develops structures suited to a particular function.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16qc2ar",
+      "kind": "term",
+      "front": "What are meristems?",
+      "back": "**Meristems** are growing regions in plants. They contain cells that divide and can differentiate, producing specialised cells throughout the plant's life.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17owj8y",
+      "kind": "concept",
+      "front": "How do embryonic stem cells differ from adult stem cells in the cell types they can form?",
+      "back": "Stem cells from early animal embryos can form **many** cell types. Adult stem cells form fewer types, for example bone marrow stem cells produce blood cells.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jkjwjo",
+      "kind": "concept",
+      "front": "How does therapeutic cloning help reduce the risk of rejection?",
+      "back": "An **embryo** is made with the patient's genetic information, so its stem cells are less likely to be rejected by the immune system. Using embryos raises ethical concerns.",
+      "hint": "Think about whose genetic information the embryo carries.",
+      "sectionId": "s4"
+    }
+  ]
+}

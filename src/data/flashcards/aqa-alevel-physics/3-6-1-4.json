@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-6-1-4",
+  "topicCode": "3.6.1.4",
+  "topicName": "Forced vibrations and resonance",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:37.066Z",
+  "cards": [
+    {
+      "id": "0tpdt26",
+      "kind": "term",
+      "front": "What is resonance?",
+      "back": "Resonance is the large response, a very big amplitude, that occurs when the **driving frequency** equals the natural frequency of the system.",
+      "hint": "Think about what happens to the amplitude as the driving frequency changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0saq4tw",
+      "kind": "concept",
+      "front": "How does a forced vibration differ from a free vibration in the frequency it vibrates at?",
+      "back": "A forced vibration vibrates at the **driving frequency**, set by the external force. A free vibration vibrates at its **natural frequency**, set by the system itself.",
+      "hint": "Compare what keeps pushing the system with what does not.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bc0ajt",
+      "kind": "concept",
+      "front": "What does lighter damping do to the shape of a resonance peak?",
+      "back": "Lighter damping makes the peak **taller and narrower**, because energy is lost more slowly so the amplitude can build up further.",
+      "hint": "Think about how quickly the energy drains away.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g27ndf",
+      "kind": "term",
+      "front": "What is the natural frequency of a system?",
+      "back": "The **natural frequency** is the frequency at which the system oscillates when it is disturbed and then left to vibrate freely.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hzfip2",
+      "kind": "concept",
+      "front": "Why is the amplitude large when the driving frequency equals the natural frequency?",
+      "back": "The driver transfers energy most effectively at this frequency. Energy is added in every cycle, so the amplitude grows until the energy lost matches the energy supplied.",
+      "hint": "Think about how the driver's energy reaches the system each cycle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fo374c",
+      "kind": "mistake",
+      "front": "Why does the amplitude at resonance not keep growing without limit?",
+      "back": "Wrong idea: resonance makes the amplitude grow forever. Right: **energy losses** to the surroundings rise with amplitude and limit the size of the peak.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wkv7q7",
+      "kind": "process",
+      "front": "What are the steps to produce an amplitude against driving frequency graph?",
+      "back": "1. Keep the driving force constant. 2. Vary the driving frequency. 3. Measure the amplitude at each frequency. 4. Plot amplitude against driving frequency.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15c8rno",
+      "kind": "concept",
+      "front": "What is the amplitude like at very low and very high driving frequencies?",
+      "back": "The amplitude is **small at both extremes**. It rises to a peak at $f_0$ and falls on both sides of that peak.",
+      "hint": "Picture the two ends of the resonance curve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wi2llx",
+      "kind": "concept",
+      "front": "What does critical damping do to a displaced system?",
+      "back": "It returns the system to equilibrium in the **shortest time without oscillating**, so it does not keep bouncing.",
+      "hint": "Compare this with a system that keeps swinging back and forth.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "143nfck",
+      "kind": "term",
+      "front": "What is damping?",
+      "back": "**Damping** is the loss of energy from an oscillating system to its surroundings, which reduces the amplitude. Friction, air resistance and internal forces in materials all cause it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1txsih6",
+      "kind": "concept",
+      "front": "Name a situation where resonance is useful.",
+      "back": "Tuning a **radio circuit** to the frequency of one station, or pushing a swing in time with its natural motion.",
+      "hint": "Think of devices that pick out one frequency from many.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uz53q4",
+      "kind": "concept",
+      "front": "Where is the peak of a heavily damped resonance curve centred, compared with $f_0$?",
+      "back": "It is centred **slightly below** $f_0$, and the peak is lower and broader than for light damping.",
+      "hint": "Compare this with the position of the lightly damped peak.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pgybvx",
+      "kind": "concept",
+      "front": "Why does the amplitude of a free vibration gradually fall?",
+      "back": "Energy is lost to the surroundings, through **damping**, so the vibration dies away over time.",
+      "sectionId": "s1"
+    }
+  ]
+}

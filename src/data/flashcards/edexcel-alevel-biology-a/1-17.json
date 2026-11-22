@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-17",
+  "topicCode": "1.17",
+  "topicName": "Ethics of using invertebrates in research",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:52.889Z",
+  "cards": [
+    {
+      "id": "0ov0y8i",
+      "kind": "concept",
+      "front": "What is the key ethical question when deciding whether an animal may be used in research?",
+      "back": "Whether the animals can **suffer**. Usefulness alone does not make an experiment acceptable.",
+      "hint": "Usefulness is not enough on its own. What would make the harm matter to the animal?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gyduwj",
+      "kind": "process",
+      "front": "What are the three principles scientists use to limit harm to research animals?",
+      "back": "**Replacement** (avoid animals or use those less able to suffer), **reduction** (use the fewest animals for reliable results) and **refinement** (adjust procedures to cause less pain or stress).",
+      "hint": "Each principle name starts with the same letter.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02euz6f",
+      "kind": "concept",
+      "front": "What must a balanced judgement about an experiment compare?",
+      "back": "The **likely benefit**, such as a possible new treatment, against the **harm**, including likely suffering and the number of animals used.",
+      "hint": "Think about what sits on each side of the decision.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ac1eqy",
+      "kind": "term",
+      "front": "What is an **invertebrate**?",
+      "back": "An **animal with no backbone**, such as insects, worms and molluscs.",
+      "hint": "Compare it with vertebrates.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0n2f8t6",
+      "kind": "concept",
+      "front": "Give three practical reasons why invertebrates suit research.",
+      "back": "They have **short life cycles**, large numbers can be kept cheaply in small spaces, and their simple nervous systems make suffering less likely.",
+      "hint": "Think about time, space, cost and the nervous system.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uzjsiy",
+      "kind": "term",
+      "front": "What is a **model organism**?",
+      "back": "A species studied because it is **easy to keep and breed**, whose results can suggest how processes work in other animals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1quvu20",
+      "kind": "term",
+      "front": "What is **sentience**?",
+      "back": "The **capacity of an animal to experience feelings**, such as pain or distress.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gnpf0w",
+      "kind": "concept",
+      "front": "Why does an insect moving away from a harmful stimulus not prove that it feels pain?",
+      "back": "It shows the insect **detects damage**, but detecting harm does not prove that the insect experiences pain.",
+      "hint": "Think about what the movement can and cannot tell scientists.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09w5v8k",
+      "kind": "mistake",
+      "front": "Why is it wrong to write that invertebrates cannot feel pain?",
+      "back": "The evidence is **uncertain**, so it is not known that they cannot suffer. A careful answer says they may not suffer in the same way.",
+      "hint": "Ask what the evidence actually shows.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pcfurd",
+      "kind": "concept",
+      "front": "How do supporters and critics respond differently to uncertainty about invertebrate suffering?",
+      "back": "Supporters say invertebrates can replace vertebrates in some work. Critics say the uncertainty is a reason for **caution**.",
+      "hint": "Both groups use the same uncertain facts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mmhzql",
+      "kind": "concept",
+      "front": "Why does a small harm to each invertebrate still matter in one experiment?",
+      "back": "One experiment may use **thousands of animals**, so small harms to each one **add up** to a large total.",
+      "hint": "Multiply the harm by the number of animals.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wwl96o",
+      "kind": "concept",
+      "front": "Why might people treat each invertebrate as unimportant, and what helps guard against this?",
+      "back": "Invertebrates are so **numerous and cheap** that individuals may be undervalued. Clear standards of care help to guard against this.",
+      "hint": "Think about how cost and numbers affect attitudes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tt3lnc",
+      "kind": "concept",
+      "front": "How can one experiment apply replacement, reduction and refinement together?",
+      "back": "A team could test first on **cell cultures** (replacement), use only a few flies (reduction) and handle them gently (refinement).",
+      "hint": "Think of one example that uses each principle in turn.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kndwey",
+      "kind": "term",
+      "front": "What is an **ethics committee** and what does it ask?",
+      "back": "A group that **reviews each proposal**. It asks whether the aim is important, whether alternatives exist and whether the animals will be treated well.",
+      "sectionId": "s5"
+    }
+  ]
+}

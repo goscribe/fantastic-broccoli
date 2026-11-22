@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-10-2",
+  "topicCode": "5.10.2",
+  "topicName": "Life cycle assessment and recycling",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:59.486Z",
+  "cards": [
+    {
+      "id": "1y1sdgx",
+      "kind": "term",
+      "front": "What is a life cycle assessment?",
+      "back": "An evaluation of a product's **environmental effects** from obtaining raw materials through to its final disposal or recovery. It helps compare products and find stages where damage could be reduced.",
+      "hint": "Think about how far back and how far forward the product is followed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i31h9j",
+      "kind": "concept",
+      "front": "Why must a life cycle assessment cover the whole life of a product rather than just one stage?",
+      "back": "A product causes different effects at each stage, such as using resources, releasing **greenhouse gases** and producing waste. Looking only at manufacture gives a misleading picture.",
+      "hint": "Consider what happens before and after the factory gate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18h5r94",
+      "kind": "concept",
+      "front": "Why is recycling not automatically good for the environment?",
+      "back": "Collecting, transporting, sorting, cleaning and processing waste use **fuel and energy** and can create emissions. The benefit depends on the material, the process and the transport involved.",
+      "hint": "Think about the steps needed before a material can be remade.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05mueiy",
+      "kind": "term",
+      "front": "What is raw material extraction?",
+      "back": "Obtaining **natural resources** that will be processed to make a product, such as metal ores or crude oil.",
+      "hint": "Think about where the first stage of a product's life begins.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zd3zk8",
+      "kind": "process",
+      "front": "What are the stages a life cycle assessment considers, in order?",
+      "back": "**Raw material extraction**, then processing and manufacture, packaging and transport, the use stage, and finally disposal, reuse or recycling.",
+      "hint": "Start from where the materials first come from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12oir1r",
+      "kind": "concept",
+      "front": "Why can two life cycle assessments reach different conclusions?",
+      "back": "Some effects are hard to measure and data may be missing. People also give different **importance** to each environmental impact, so the preferred choice depends partly on judgement.",
+      "hint": "Consider what information might be uncertain and who weighs the results.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hv7w8x",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a life cycle assessment only measures carbon emissions?",
+      "back": "It considers several **environmental effects** across the product's life, including resource use, energy consumption, emissions and waste.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "113218d",
+      "kind": "term",
+      "front": "How does reuse differ from recycling?",
+      "back": "**Reuse** means using an item again without first processing it into a new material. Recycling processes used material into materials for new products.",
+      "hint": "Ask whether the item must be broken down before it is used again.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03rkesu",
+      "kind": "concept",
+      "front": "Why does recycling metal usually use less energy than extracting metal from ore?",
+      "back": "Recycling avoids the energy needed to extract metal from **ore**, though collecting and remelting metal still use energy.",
+      "hint": "Compare the starting material for each route.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a73jxl",
+      "kind": "concept",
+      "front": "What are the trade-offs of recycling glass?",
+      "back": "It reduces demand for **new raw materials**, but glass is heavy to transport and remelting it needs heat. Glass containers can sometimes be washed and reused instead.",
+      "hint": "Think about weight and heat during collection and processing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sgfeh6",
+      "kind": "concept",
+      "front": "Why can contamination make plastic recycling difficult?",
+      "back": "Contamination makes processing harder, and different **plastics** may need separating first. Recycling still reduces demand for crude oil.",
+      "hint": "Think about what happens when mixed waste reaches the processing plant.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14o2v5u",
+      "kind": "concept",
+      "front": "Why might paper eventually need new fibres even though it is recycled?",
+      "back": "Its **fibres** become shorter each time the paper is processed, so new wood fibres may eventually be needed.",
+      "hint": "Think about what happens to the material each time it goes through processing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16kqb5g",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume one material is always the best choice for recycling?",
+      "back": "Each material has different properties and trade-offs. Compare the **environmental effects** across the whole life cycle rather than assuming one material is always best.",
+      "sectionId": "s4"
+    }
+  ]
+}

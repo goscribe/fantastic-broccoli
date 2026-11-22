@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-6-3",
+  "topicCode": "4.6.3",
+  "topicName": "Understanding genetics and evolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:29.313Z",
+  "cards": [
+    {
+      "id": "1h9p9in",
+      "kind": "term",
+      "front": "What is natural selection?",
+      "back": "**Natural selection** is the process in which individuals with characteristics better suited to their environment are more likely to survive, breed and pass on their genes.",
+      "hint": "Consider which organisms get to reproduce when resources are limited.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11jtxld",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an individual evolves because it needs to change?",
+      "back": "Individuals do not evolve by changing to meet a need. **Natural selection** changes the frequency of inherited characteristics across generations.",
+      "hint": "Think about which individuals leave offspring, not which individuals change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pl1x3v",
+      "kind": "concept",
+      "front": "How does an antibiotic lead to a larger share of resistant bacteria?",
+      "back": "A random mutation gives some bacteria **resistance**. The antibiotic kills or stops susceptible bacteria, so resistant ones survive, reproduce and pass resistance to their offspring.",
+      "hint": "Start with where the resistance first comes from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1iend81",
+      "kind": "concept",
+      "front": "Why does using antibiotics when they are not needed increase resistance?",
+      "back": "It gives more chances for **resistant bacteria** to be selected, because susceptible bacteria are removed while resistant ones survive.",
+      "hint": "Think about what the antibiotic removes from the population.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1isgv4h",
+      "kind": "term",
+      "front": "What is variation?",
+      "back": "**Variation** is the differences in characteristics between individuals of the same species.",
+      "hint": "Think about how individuals in one population differ from each other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1duqfov",
+      "kind": "concept",
+      "front": "Which two observations helped Darwin and Wallace develop natural selection?",
+      "back": "They saw **variation** within populations, and noticed that more offspring are produced than can survive, so organisms compete for limited resources.",
+      "hint": "Think about what happens when more young are born than the environment can support.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1p0kowm",
+      "kind": "concept",
+      "front": "What did Mendel conclude about how parents pass on traits?",
+      "back": "Parents pass on separate **inherited units** rather than blending their traits together. We now call these units genes.",
+      "hint": "Compare this with mixing two colours of paint.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0o5tlec",
+      "kind": "term",
+      "front": "What is a gene?",
+      "back": "A **gene** is a small section of DNA on a chromosome that codes for a particular sequence of amino acids to make a specific protein.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c2mmq1",
+      "kind": "term",
+      "front": "What is evolution?",
+      "back": "**Evolution** is the change in inherited characteristics of a population over generations.",
+      "hint": "Compare this with what happens to one organism during its lifetime.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wmuiz4",
+      "kind": "concept",
+      "front": "Why does the fossil record have gaps?",
+      "back": "Fossil formation is uncommon: many organisms decay before burial, soft-bodied organisms rarely leave fossils, and geological processes can destroy them.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rvsbk9",
+      "kind": "term",
+      "front": "What is a species?",
+      "back": "A **species** is a group of organisms that can breed together to produce fertile offspring.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14ujec8",
+      "kind": "process",
+      "front": "What steps lead from an isolated population to a new species?",
+      "back": "A barrier separates the groups. Different mutations and selection build up inherited differences. Eventually they cannot produce fertile offspring together, so they are separate **species**.",
+      "hint": "Think about what happens to the groups over many generations.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0n2mho8",
+      "kind": "mistake",
+      "front": "Why doesn't isolation alone create a new species?",
+      "back": "A barrier only stops the groups breeding. New **species** need inherited differences to build up over time until fertile offspring can no longer be produced together.",
+      "hint": "Consider what the barrier actually changes in each group.",
+      "sectionId": "s5"
+    }
+  ]
+}

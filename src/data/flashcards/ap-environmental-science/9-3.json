@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "9-3",
+  "topicCode": "9.3",
+  "topicName": "The greenhouse effect",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:08.139Z",
+  "cards": [
+    {
+      "id": "1y86z2z",
+      "kind": "concept",
+      "front": "Why does Earth's surface stay at a steady temperature?",
+      "back": "Because the energy leaving Earth for space balances the energy arriving from sunlight absorbed at the surface.",
+      "hint": "Consider what must happen for the temperature to stop changing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jylu90",
+      "kind": "concept",
+      "front": "How do greenhouse gases keep the surface warmer?",
+      "back": "They absorb **infrared radiation** from the surface and re-emit it in all directions. Part returns toward the ground, which slows the loss of heat to space.",
+      "hint": "Follow the infrared after it leaves the ground.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gz6jg0",
+      "kind": "concept",
+      "front": "What would Earth's average surface temperature be without the natural greenhouse effect?",
+      "back": "About $-18\\,^\\circ\\mathrm{C}$, far below freezing. With the natural effect it is about $15\\,^\\circ\\mathrm{C}$, so surface water can stay liquid.",
+      "hint": "Compare it with the present average.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hxq6yy",
+      "kind": "term",
+      "front": "What is infrared radiation?",
+      "back": "**Infrared radiation** is electromagnetic radiation with wavelengths longer than visible light, given off by warm objects.",
+      "hint": "Think about how warm pavement gives off energy you cannot see.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "085krkx",
+      "kind": "term",
+      "front": "What is the greenhouse effect?",
+      "back": "The **greenhouse effect** is the warming of Earth's surface and lower atmosphere because greenhouse gases absorb and re-emit infrared radiation. It is a natural process.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0owhu2b",
+      "kind": "term",
+      "front": "What does global warming potential measure?",
+      "back": "**Global warming potential** compares the heat a gas traps with the heat trapped by the same mass of a reference gas over a stated time, often 100 years.",
+      "hint": "Think about what the comparison is measured against.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1sn00f2",
+      "kind": "mistake",
+      "front": "Why is the greenhouse effect not the same as ozone depletion?",
+      "back": "Ozone depletion lets more ultraviolet light reach the ground. Greenhouse gases slow the escape of infrared, so they are a different process.",
+      "hint": "Compare which type of radiation each one changes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dgne94",
+      "kind": "concept",
+      "front": "Why does the amount of water vapor in the air differ from other greenhouse gases?",
+      "back": "Its amount depends mainly on temperature, not on direct human release.",
+      "hint": "Think about what controls how much water the air can hold.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15rey5m",
+      "kind": "formula",
+      "front": "How do you convert a mass of a gas into the equivalent mass of carbon dioxide?",
+      "back": "$\\text{mass of CO}_2 = \\text{mass of gas} \\times \\text{GWP}$, using tonnes for mass. The result is the carbon dioxide mass in tonnes.",
+      "hint": "Think about what a potential of 25 means for each unit of mass.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1mj7tm1",
+      "kind": "example",
+      "front": "A factory releases 5.0 t of a gas with a global warming potential of 30. What mass of carbon dioxide traps the same heat?",
+      "back": "$1.5 \\times 10^{2}\\,\\mathrm{t}$ of carbon dioxide, since $5.0 \\times 30 = 150$.",
+      "hint": "Apply the conversion from the previous card.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "186hbqk",
+      "kind": "concept",
+      "front": "Which greenhouse gases have no natural source at all?",
+      "back": "**CFCs and HFCs** are human-made. They are used in coolants, foams, and aerosols.",
+      "hint": "Look at the origin column of the sources table.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hjy858",
+      "kind": "concept",
+      "front": "Why do nitrogen and oxygen not trap much heat, even though they make up most of the air?",
+      "back": "They absorb almost no infrared, so they do not act as greenhouse gases.",
+      "hint": "Compare how much infrared they absorb with water vapor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16z7j2e",
+      "kind": "concept",
+      "front": "Why do small methane leaks matter more than their mass suggests?",
+      "back": "Methane has a higher global warming potential than carbon dioxide, so each unit of mass traps more heat, even though it leaves the air sooner.",
+      "hint": "Compare methane's potential with carbon dioxide's.",
+      "sectionId": "s5"
+    }
+  ]
+}

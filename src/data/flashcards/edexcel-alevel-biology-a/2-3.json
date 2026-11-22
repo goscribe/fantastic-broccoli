@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-3",
+  "topicCode": "2.3",
+  "topicName": "Osmosis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:15.940Z",
+  "cards": [
+    {
+      "id": "1wv02lt",
+      "kind": "term",
+      "front": "What is water potential?",
+      "back": "**Water potential** ($\\Psi$) is the tendency of water molecules to move, measured in $\\mathrm{kPa}$. Pure water has the highest value, $0\\,\\mathrm{kPa}$, and solutes lower it.",
+      "hint": "Compare pure water with a sugar solution: which one has the higher value?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dktbq7",
+      "kind": "term",
+      "front": "What is osmosis?",
+      "back": "**Osmosis** is the net movement of water through a partially permeable membrane from higher to lower water potential. Water crosses in both directions, but only the net movement is described.",
+      "hint": "Think about which particles the membrane lets through.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x8y73d",
+      "kind": "concept",
+      "front": "Why does a plant cell become firm rather than burst when it is placed in pure water?",
+      "back": "Water enters by osmosis and the contents swell, but the strong cellulose **cell wall** pushes back. The cell becomes **turgid** instead of bursting.",
+      "hint": "Compare what an animal cell lacks with what a plant cell has.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "063dw74",
+      "kind": "mistake",
+      "front": "Why is a solution at $-500\\,\\mathrm{kPa}$ lower in water potential than one at $-100\\,\\mathrm{kPa}$?",
+      "back": "Because **more negative means lower**. Students often think the smaller number is higher, but $-500\\,\\mathrm{kPa}$ is further below pure water's $0\\,\\mathrm{kPa}$.",
+      "hint": "Picture both values on a number line below zero.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lccien",
+      "kind": "example",
+      "front": "A plant cell at $-450\\,\\mathrm{kPa}$ is placed in a sugar solution at $-200\\,\\mathrm{kPa}$. Which way does net water movement go?",
+      "back": "**Into the cell**. The solution is higher at $-200\\,\\mathrm{kPa}$ than the cell at $-450\\,\\mathrm{kPa}$, so water moves from the solution to the cell by osmosis.",
+      "hint": "Write down both values and say which one is higher first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03npjjs",
+      "kind": "concept",
+      "front": "What happens to an animal cell placed in a concentrated salt solution, and why?",
+      "back": "It **shrinks and shrivels**. The solution has the lower water potential, so water leaves the cell by osmosis.",
+      "hint": "Compare the water potential of the solution with that of the cytoplasm.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mg2asa",
+      "kind": "term",
+      "front": "What is lysis?",
+      "back": "**Lysis** is the bursting of an animal cell when its membrane breaks after too much water enters by osmosis. It has no cell wall to stop the swelling.",
+      "hint": "Think about what happens to an animal cell in pure water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mwb7am",
+      "kind": "process",
+      "front": "What happens, in order, when a plant cell is placed in a concentrated sugar solution?",
+      "back": "1) Water leaves the cell by osmosis. 2) The cell goes **flaccid**. 3) With more water loss, the membrane pulls away from the cell wall, which is **plasmolysis**.",
+      "hint": "Start with which way water moves and what that does to the cell's firmness.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06hf4me",
+      "kind": "term",
+      "front": "What is turgor pressure?",
+      "back": "**Turgor pressure** is the pressure of the cell contents pushing against the cell wall. It keeps plant cells firm, which holds leaves flat and soft stems upright.",
+      "hint": "Think about what pushes outwards on the wall in a turgid cell.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sbv8rp",
+      "kind": "concept",
+      "front": "What happens to an animal cell placed in a solution with the same water potential as its cytoplasm?",
+      "back": "There is **no net movement** of water, so the cell's size stays the same. Water still crosses in both directions, but the amounts balance.",
+      "hint": "Think about what a net movement of zero means for water crossing the membrane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lzc8lf",
+      "kind": "formula",
+      "front": "What is the symbol equation for percentage change in mass?",
+      "back": "$\\frac{m_\\mathrm{final}-m_\\mathrm{initial}}{m_\\mathrm{initial}}\\times100$, where $m$ is the mass in $\\mathrm{g}$. A negative answer means the cylinder lost water.",
+      "hint": "Start with the difference, then compare it with the starting value.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16kebze",
+      "kind": "example",
+      "front": "A potato cylinder goes from $2.50\\,\\mathrm{g}$ to $2.20\\,\\mathrm{g}$. What is its percentage change in mass, including the sign?",
+      "back": "**$-12\\%$**. Calculated as $\\frac{2.20-2.50}{2.50}\\times100=-12$. The cylinder lost water, so the solution had a lower water potential than the tissue.",
+      "hint": "Work out the change in mass first, then divide by the starting mass.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1g2tci5",
+      "kind": "mistake",
+      "front": "Why should a student use percentage change rather than the raw change in mass when comparing potato cylinders?",
+      "back": "The cylinders do not start with the same mass, so raw changes cannot be compared fairly. **Percentage change** lets each cylinder be compared on the same scale.",
+      "hint": "Think about whether all the cylinders start at the same mass.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0q7xd2u",
+      "kind": "formula",
+      "front": "What does each symbol in $\\Psi=\\Psi_\\mathrm{s}+\\Psi_\\mathrm{p}$ represent?",
+      "back": "$\\Psi$ is the total water potential. $\\Psi_\\mathrm{s}$ is the solute potential, zero or negative because solutes lower it. $\\Psi_\\mathrm{p}$ is the pressure potential, positive when a cell wall pushes against the contents. All are in $\\mathrm{kPa}$.",
+      "hint": "Think about what lowers water potential and what raises it in a turgid cell.",
+      "sectionId": "s4"
+    }
+  ]
+}

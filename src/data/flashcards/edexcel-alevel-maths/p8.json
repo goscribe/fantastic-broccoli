@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "p8",
+  "topicCode": "P8",
+  "topicName": "Integration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:58.099Z",
+  "cards": [
+    {
+      "id": "0l0jj7g",
+      "kind": "concept",
+      "front": "Why must an indefinite integral include a constant of integration $c$?",
+      "back": "**Constants** differentiate to zero, so many different functions share the same derivative. The $+c$ stands for the unknown constant term.",
+      "hint": "Think about what differentiation does to a plain number.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z9ixwo",
+      "kind": "formula",
+      "front": "What is the power rule for integrating $x^n$ when $n\\ne-1$?",
+      "back": "$\\int x^n\\,dx=\\frac{x^{n+1}}{n+1}+c$. Add 1 to the **power**, then divide by the new power.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0h97f61",
+      "kind": "process",
+      "front": "How do you evaluate a definite integral $\\int_a^b f(x)\\,dx$ using an indefinite integral $F(x)$?",
+      "back": "Work out **$F(b)-F(a)$**, the value at the upper limit minus the value at the lower limit. The constant $c$ cancels, so you can leave it out.",
+      "hint": "What happens to the constant when you subtract?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wzvnll",
+      "kind": "concept",
+      "front": "How do you integrate a polynomial with several terms?",
+      "back": "Integrate **each term separately** with the power rule. Constant multiples carry through, and roots or reciprocals are rewritten as powers first.",
+      "hint": "Compare with how you differentiate a sum.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16n1bkd",
+      "kind": "example",
+      "front": "A curve has $\\frac{dy}{dx}=6x^2-4$ and passes through $(1,3)$. What is its equation?",
+      "back": "$y=2x^3-4x+5$. Integrate to $y=2x^3-4x+c$, then substitute $(1,3)$ to get $c=5$.",
+      "hint": "Use the point to find the leftover constant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "116dm36",
+      "kind": "mistake",
+      "front": "Why is $\\int x^2\\,dx=\\frac{x^3}{2}+c$ wrong?",
+      "back": "It divides by the **old** power. The correct answer is $\\frac{x^3}{3}+c$, dividing by the new power 3.",
+      "hint": "Check which power you divide by.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mzp8zh",
+      "kind": "mistake",
+      "front": "What goes wrong if you swap the limits of a definite integral?",
+      "back": "Reversing the limits **changes the sign** of the answer. Always write the lower limit $a$ at the bottom and the upper limit $b$ at the top.",
+      "hint": "Think about the order in $F(b)-F(a)$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uumog1",
+      "kind": "example",
+      "front": "Find the area under $y=x^2+1$ from $x=1$ to $x=3$.",
+      "back": "$\\frac{32}{3}$ square units. Integrate to $\\frac{x^3}{3}+x$, then $12-\\frac{4}{3}=\\frac{32}{3}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t07gh7",
+      "kind": "concept",
+      "front": "Why can a definite integral be negative even though an area is never negative?",
+      "back": "A curve **below the $x$-axis** gives a negative integral. Take the size of the result to get the area.",
+      "hint": "Consider where the curve sits relative to the axis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0skvn0q",
+      "kind": "process",
+      "front": "What steps find the area enclosed by a curve that crosses the $x$-axis between two limits?",
+      "back": "Find where the curve crosses the axis, integrate each part separately, then add the **sizes** of the parts. A sketch shows which parts lie below the axis.",
+      "hint": "Start by finding where the curve meets the axis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ud48np",
+      "kind": "concept",
+      "front": "What does $\\int_{t_1}^{t_2} r(t)\\,dt$ represent when $r(t)$ is a rate?",
+      "back": "The **accumulated change** in the quantity from $t_1$ to $t_2$. Integrating velocity gives displacement, and integrating a flow rate gives volume.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0l83wtf",
+      "kind": "example",
+      "front": "Water flows into a tank at $r=4t+2$ dm³/min, with $t$ in minutes. What volume is added from $t=0$ to $t=5$?",
+      "back": "$60\\,\\mathrm{dm^3}$. Integrating gives $[2t^2+2t]_0^5=(50+10)-0=60$.",
+      "hint": "Set up the integral of the rate over the time interval.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05uyt9i",
+      "kind": "process",
+      "front": "How do you find the area between two curves $y=f(x)$ and $y=g(x)$, where $f$ is above $g$?",
+      "back": "Find the limits by solving $f(x)=g(x)$, then integrate **$f(x)-g(x)$** between them. Write the integrand as upper minus lower before expanding.",
+      "hint": "Where do the two curves meet?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0pwyw1q",
+      "kind": "example",
+      "front": "Find the area between $y=x+2$ and $y=x^2$.",
+      "back": "$\\frac{9}{2}$ square units. The curves meet at $x=-1$ and $x=2$, and $\\int_{-1}^{2}(x+2-x^2)\\,dx=\\frac{9}{2}$.",
+      "sectionId": "s6"
+    }
+  ]
+}

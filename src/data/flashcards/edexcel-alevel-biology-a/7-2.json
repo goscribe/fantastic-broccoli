@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-2",
+  "topicCode": "7.2",
+  "topicName": "Sliding filament theory",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:37.920Z",
+  "cards": [
+    {
+      "id": "040t5q8",
+      "kind": "concept",
+      "front": "How does a sarcomere become shorter when a muscle contracts?",
+      "back": "Actin filaments **slide** inwards between the myosin filaments, bringing the Z lines closer. The filaments themselves keep the same length.",
+      "hint": "Think about how the two filament types move relative to each other.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "033ybk9",
+      "kind": "concept",
+      "front": "What does $\\text{Ca}^{2+}$ binding to troponin achieve?",
+      "back": "It changes troponin's shape, pulling **tropomyosin** aside. This exposes the binding sites on actin so myosin heads can attach.",
+      "hint": "Consider what tropomyosin does in resting muscle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1agv0pl",
+      "kind": "process",
+      "front": "What happens, in order, after a nerve impulse reaches a muscle fibre?",
+      "back": "Calcium ions are released and bind troponin, moving tropomyosin aside. Myosin heads bind actin and form cross-bridges, then tilt in the power stroke. ATP detaches the heads, and the cycle repeats while calcium remains.",
+      "hint": "Start with where the calcium comes from.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1i1ab4y",
+      "kind": "term",
+      "front": "What is a sarcomere?",
+      "back": "The **repeating contractile unit** of a muscle fibre, lying between two adjacent Z lines.",
+      "hint": "Look at the striped pattern of skeletal muscle under a microscope.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k9ujwh",
+      "kind": "term",
+      "front": "What is a cross-bridge?",
+      "back": "A **temporary link** formed when a myosin head binds to a binding site on actin.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ijo9h7",
+      "kind": "concept",
+      "front": "What does the power stroke do to the actin filament?",
+      "back": "The attached myosin head changes angle, **pulling actin** towards the centre of the sarcomere. ADP and phosphate are released as the head tilts.",
+      "hint": "Think about what the head does after it binds.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1a37hxx",
+      "kind": "concept",
+      "front": "Why does a muscle stay stiff if ATP cannot bind to the myosin head?",
+      "back": "ATP binding is what **breaks the cross-bridge**. Without it the head stays attached to actin, so the muscle cannot relax.",
+      "hint": "Consider what happens to the head after the power stroke.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q3ghpt",
+      "kind": "concept",
+      "front": "What does ATPase do, and what does the energy released do?",
+      "back": "**ATPase** hydrolyses ATP to ADP and phosphate. The energy released returns the myosin head to its original angle, ready to bind again.",
+      "hint": "Think about where the enzyme is located.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k9obtp",
+      "kind": "concept",
+      "front": "What is ATP used for during relaxation?",
+      "back": "Pumps in the membrane use ATP to move $\\text{Ca}^{2+}$ back into the sarcoplasmic reticulum. Tropomyosin then covers the binding sites again.",
+      "hint": "Think about what must happen once the nerve impulse stops.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10gp3ny",
+      "kind": "term",
+      "front": "What is the sarcoplasmic reticulum?",
+      "back": "A **network of membrane-bound sacs** around the filaments that stores and releases calcium ions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03ibpai",
+      "kind": "term",
+      "front": "Which part of a sarcomere contains only actin filaments?",
+      "back": "The **I band**.",
+      "hint": "Compare it with the A band, which contains myosin.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1hb3y2l",
+      "kind": "term",
+      "front": "What is the H zone?",
+      "back": "The **central part of the A band** that contains only myosin filaments.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1fr2gp1",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that the filaments shorten during contraction?",
+      "back": "Contraction comes from **sliding**, not shortening, so the filaments keep their length. The A band stays the same width, while the I band and H zone narrow.",
+      "hint": "Think about which band in the sarcomere is the same width in both states.",
+      "sectionId": "s6"
+    }
+  ]
+}

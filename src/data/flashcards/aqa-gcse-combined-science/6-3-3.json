@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-3-3",
+  "topicCode": "6.3.3",
+  "topicName": "Particle model and gas pressure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:15.597Z",
+  "cards": [
+    {
+      "id": "0qo9skh",
+      "kind": "concept",
+      "front": "Why does a gas exert pressure on the walls of its container?",
+      "back": "Gas particles constantly strike the walls, and each **collision** exerts a force on the wall. The combined force per unit area is the **pressure**.",
+      "hint": "Think about what the particles are doing when they meet the wall.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1er3jnl",
+      "kind": "concept",
+      "front": "What does the temperature of a gas tell you about its particles?",
+      "back": "**Temperature** is linked to the average kinetic energy of the particles. A higher temperature means the particles move faster on average.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hj7n74",
+      "kind": "concept",
+      "front": "Why does heating a gas in a sealed rigid container raise its pressure?",
+      "back": "Its particles move faster on average, so they strike the walls more often and exert greater force in each impact. This raises the force per unit area, so the **pressure** rises.",
+      "hint": "Start with what heating does to particle speed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vz2oto",
+      "kind": "term",
+      "front": "What is meant by random motion of gas particles?",
+      "back": "**Random motion** is movement in constantly changing directions, with no single direction followed by all the particles.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05ge96c",
+      "kind": "term",
+      "front": "What does the average speed of gas particles describe?",
+      "back": "The **average speed** describes the motion of the particles as a group. It does not mean every particle travels at that speed.",
+      "hint": "Think about whether all particles move at the same speed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1spsmx2",
+      "kind": "concept",
+      "front": "Why do gas particles reach every part of their container?",
+      "back": "Their **random motion** and collisions carry them through all the available space. Gas particles are far apart, so they have room to move throughout.",
+      "hint": "Compare how far apart gas particles are with particles in solids.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jxnjir",
+      "kind": "term",
+      "front": "What is pressure in terms of force?",
+      "back": "**Pressure** is the force exerted per unit area of a surface.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0icxtha",
+      "kind": "concept",
+      "front": "Where does gas pressure act inside a container?",
+      "back": "Pressure acts on every inside surface of the container, not just the bottom.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15xqyqm",
+      "kind": "mistake",
+      "front": "Why is it wrong to say temperature gives the speed of one particular particle?",
+      "back": "Temperature describes the gas as a whole, linked to the **average** kinetic energy. Individual particles still have different speeds.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1md3qzj",
+      "kind": "term",
+      "front": "What is a sealed rigid container?",
+      "back": "A **sealed rigid container** stops gas escaping and keeps its volume fixed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09hse8m",
+      "kind": "concept",
+      "front": "Why might heating a gas in a flexible container not raise its pressure in the same way?",
+      "back": "The container can expand, increasing the gas volume. This can reduce how often particles strike each area of wall, so the **pressure** may not rise as it does in a rigid container.",
+      "hint": "Compare what can happen to the volume in each type of container.",
+      "sectionId": "s4"
+    }
+  ]
+}

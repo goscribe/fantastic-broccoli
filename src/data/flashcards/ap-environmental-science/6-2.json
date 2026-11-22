@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-2",
+  "topicCode": "6.2",
+  "topicName": "Global energy consumption",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:11.673Z",
+  "cards": [
+    {
+      "id": "1fc8zay",
+      "kind": "concept",
+      "front": "Which fuels supply most of the world's energy?",
+      "back": "**Fossil fuels** (oil, coal, and natural gas) supply most of the world's energy. Smaller shares come from hydroelectric, nuclear, biomass, wind, and solar energy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0052aco",
+      "kind": "concept",
+      "front": "What are the two main drivers behind the rise in global energy consumption?",
+      "back": "**Population growth** adds more people who need energy. **Industrialization**, the shift toward factory-based economies, raises how much energy each person uses.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fjgs9r",
+      "kind": "concept",
+      "front": "Why is per capita energy consumption a fairer comparison between countries than total consumption?",
+      "back": "**Per capita** values divide total use by population, so countries of different sizes are compared on equal terms.",
+      "hint": "Think about how the number of people affects a country's total.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jjuj9x",
+      "kind": "term",
+      "front": "What is energy consumption?",
+      "back": "**Energy consumption** is the total energy used by a person, a country, or the world. It can be measured for any of these.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k3wcu5",
+      "kind": "term",
+      "front": "What is a country's energy mix?",
+      "back": "The **energy mix** is the share of a country's energy supplied by each source. Mixes differ widely between countries.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07xy3e6",
+      "kind": "concept",
+      "front": "Why do wind and solar energy still supply a small share of world energy?",
+      "back": "They have grown quickly in recent decades, but they still supply a smaller share than fossil fuels.",
+      "hint": "Compare how fast they are growing with how big they are now.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l8kfjk",
+      "kind": "formula",
+      "front": "How do you calculate per capita energy consumption, and what units does the answer have?",
+      "back": "$\\text{Per capita} = \\frac{\\text{total consumption}}{\\text{population}}$. Total energy is in $\\mathrm{GJ}$ and population is in people, so the answer is in $\\mathrm{GJ/person}$.",
+      "hint": "Think about what is being shared out among the people.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rb93b0",
+      "kind": "example",
+      "front": "A country uses $4.5\\times10^{10}\\,\\mathrm{GJ}$ in a year and has $1.50\\times10^{8}$ people. What is its per capita energy consumption?",
+      "back": "$3.0\\times10^{2}\\,\\mathrm{GJ/person}$, or 300 GJ/person. Divide 4.5 by 1.50, then subtract the exponents: $10^{10}\\div10^{8}=10^{2}$.",
+      "hint": "Divide the coefficients and the powers of ten separately.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17yzcyv",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume the country with the largest total energy use also uses the most energy per person?",
+      "back": "**Totals** reflect population size as well as habits. A large country can have a big total but a low per capita value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d88bgk",
+      "kind": "concept",
+      "front": "Which factors influence a country's energy use besides its population?",
+      "back": "**Income and industry, climate, transportation, resources and prices, and policy and technology** all shape national energy use.",
+      "hint": "Think about the economy, the weather, and how people travel.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0o6p7i9",
+      "kind": "term",
+      "front": "What is energy efficiency?",
+      "back": "**Energy efficiency** is the fraction of energy input that becomes useful output. More efficient appliances and vehicles deliver the same service with less energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ikwdsj",
+      "kind": "process",
+      "front": "How does a country's energy use typically change as it develops?",
+      "back": "Households shift from wood, charcoal, or dung toward electricity and natural gas as incomes rise. Total demand usually grows, then efficiency and policy can slow growth per person.",
+      "hint": "Start with what low-income households cook with.",
+      "sectionId": "s5"
+    }
+  ]
+}

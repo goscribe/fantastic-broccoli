@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-2-3",
+  "topicCode": "3.2.3",
+  "topicName": "Group 7, the halogens",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:27.319Z",
+  "cards": [
+    {
+      "id": "150h7om",
+      "kind": "concept",
+      "front": "Why does the oxidising power of the halogens fall as you go down Group 7?",
+      "back": "Fluorine is the strongest **oxidising agent** and iodine the weakest. Atoms get larger and have more shielding lower down, so the incoming electron is attracted less strongly.",
+      "hint": "Compare the nuclear pull on the incoming electron in a small atom versus a large one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16mcy2b",
+      "kind": "formula",
+      "front": "What is the ionic equation for chlorine displacing bromide ions from aqueous solution?",
+      "back": "$\\mathrm{Cl_2(aq)+2Br^-(aq)\\rightarrow 2Cl^-(aq)+Br_2(aq)}$. Chlorine is the oxidising agent, and the bromide ions lose electrons.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "174cy84",
+      "kind": "process",
+      "front": "What is the correct order of reagents when testing a solution for halide ions with silver nitrate?",
+      "back": "First add dilute **nitric acid**, then add silver nitrate solution. The acid removes carbonate ions, which would also give a precipitate.",
+      "hint": "Think about what else in the solution could give a precipitate with silver ions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jkvf22",
+      "kind": "concept",
+      "front": "Why do the boiling points of the halogens rise as you go down Group 7?",
+      "back": "Larger molecules with more electrons have stronger **London forces** between them. More energy is needed to separate the molecules, so the boiling point is higher.",
+      "hint": "Compare the electron count in a chlorine molecule with that in an iodine molecule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1njlnsy",
+      "kind": "mistake",
+      "front": "What is wrong with saying that boiling iodine breaks the bond inside its molecules?",
+      "back": "Boiling only overcomes the **London forces** between molecules. The covalent bond inside each $\\mathrm{I_2}$ molecule stays intact.",
+      "hint": "Distinguish the forces inside a molecule from the forces between molecules.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hsuqzn",
+      "kind": "term",
+      "front": "What is a reducing agent?",
+      "back": "A **reducing agent** is a species that donates electrons to another species and is itself oxidised.",
+      "hint": "It is the opposite of an oxidising agent.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f9ptpz",
+      "kind": "concept",
+      "front": "Why are iodide ions the strongest reducing agents among the halide ions?",
+      "back": "Iodide is the largest halide ion, so its outer electron is furthest from the nucleus and most shielded. It is lost most easily.",
+      "hint": "Compare the outer electron of a large ion with that of a small ion.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fk39kr",
+      "kind": "mistake",
+      "front": "Why must you not acidify the halide test with hydrochloric acid?",
+      "back": "Hydrochloric acid adds chloride ions, which give a false white precipitate. Use dilute **nitric acid** instead.",
+      "hint": "Think about which ions the acid itself brings into the solution.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jvpj7p",
+      "kind": "concept",
+      "front": "Which silver halide precipitate dissolves in dilute ammonia?",
+      "back": "**Silver chloride** (white) dissolves in dilute ammonia. Silver bromide (cream) needs concentrated ammonia, and silver iodide (yellow) does not dissolve.",
+      "hint": "Compare how easily each silver halide precipitate dissolves in ammonia.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "058dos5",
+      "kind": "term",
+      "front": "What is disproportionation?",
+      "back": "**Disproportionation** is a reaction in which the same element is both oxidised and reduced. Chlorine does this when it reacts with water to form HCl and HClO.",
+      "hint": "Track what happens to chlorine's oxidation state before and after it reacts with water.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0dborqo",
+      "kind": "concept",
+      "front": "Why is chlorine added to drinking water?",
+      "back": "The $\\mathrm{HClO}$ formed from chlorine and water kills bacteria, which prevents waterborne disease. Only a small amount is added, because chlorine is a toxic gas.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0brouxq",
+      "kind": "example",
+      "front": "What is observed when bromine water is added to potassium chloride solution?",
+      "back": "No change occurs. Bromine is a weaker oxidising agent than chlorine, so it cannot displace chloride ions.",
+      "hint": "Compare the oxidising power of bromine with that of chlorine.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tvceoi",
+      "kind": "example",
+      "front": "What gas forms when solid sodium chloride reacts with concentrated sulfuric acid?",
+      "back": "**Hydrogen chloride**, seen as steamy fumes. Chloride ions are too weak as reducing agents to reduce the sulfuric acid.",
+      "hint": "Consider how strong a reducing agent chloride is compared with bromide or iodide.",
+      "sectionId": "s4"
+    }
+  ]
+}

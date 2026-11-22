@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-10-1",
+  "topicCode": "5.10.1",
+  "topicName": "Earth's resources and potable water",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:01.933Z",
+  "cards": [
+    {
+      "id": "0dcw9mw",
+      "kind": "concept",
+      "front": "Why is potable water not necessarily pure water?",
+      "back": "**Potable** water is safe to drink but may still contain small amounts of dissolved substances. Pure water contains only water molecules.",
+      "hint": "Compare what 'safe' means with what a pure substance contains.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14iamqf",
+      "kind": "process",
+      "front": "What are the two main steps for treating fresh water to make it potable, in order?",
+      "back": "First, **filtration** removes suspended solids such as mud. Then **sterilisation** kills harmful microorganisms, using chlorine, ozone or ultraviolet light.",
+      "hint": "Consider what must be removed before the germs are dealt with.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cuelcx",
+      "kind": "concept",
+      "front": "Why must seawater be desalinated, not just filtered and sterilised?",
+      "back": "**Dissolved salts** pass through filters and are not removed by sterilisation, so distillation or reverse osmosis is needed, and both use substantial energy.",
+      "hint": "Think about how small dissolved salts are compared with suspended particles.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1i9t0ya",
+      "kind": "term",
+      "front": "What are natural resources?",
+      "back": "**Materials and substances** found in the environment that humans use, such as fresh water, rocks, trees and fossil fuels.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01074ji",
+      "kind": "term",
+      "front": "What are finite resources?",
+      "back": "Resources, such as **metal ores** and fossil fuels, that form so slowly that their supplies are limited, as they are used faster than natural processes replace them.",
+      "hint": "Compare with trees, which can be replaced as they are used.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1j858er",
+      "kind": "concept",
+      "front": "What decides whether a natural resource is used?",
+      "back": "Its **availability** and the **treatment** needed before it can be used.",
+      "hint": "Think about what a resource must be like before people can use it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07blqk2",
+      "kind": "term",
+      "front": "What does potable water mean?",
+      "back": "Water that is **safe to drink**, with low levels of dissolved salts and harmful microorganisms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ujgc8u",
+      "kind": "mistake",
+      "front": "Why is clear-looking water not automatically safe to drink?",
+      "back": "Water can look clear yet still contain **microorganisms** or dissolved substances, so its appearance cannot show that it is safe.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "050aosh",
+      "kind": "term",
+      "front": "What is desalination?",
+      "back": "The process of removing **dissolved salts** from salty water, such as seawater.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "017nks0",
+      "kind": "process",
+      "front": "What are the steps of distillation for removing salts from seawater?",
+      "back": "1. Heat the seawater until the water **evaporates**. 2. Cool the vapour so it **condenses** back to liquid, leaving most salts behind.",
+      "hint": "Think about how water changes state during the process.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v8ao21",
+      "kind": "term",
+      "front": "What is reverse osmosis?",
+      "back": "A desalination method that forces water through a **membrane** that lets water molecules pass but blocks most dissolved salts.",
+      "hint": "Compare the energy it needs with the energy needed for distillation.",
+      "sectionId": "s4"
+    }
+  ]
+}

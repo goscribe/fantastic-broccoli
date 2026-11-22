@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-2-1-4",
+  "topicCode": "3.2.1.4",
+  "topicName": "Particle interactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:49.705Z",
+  "cards": [
+    {
+      "id": "1btrp3g",
+      "kind": "concept",
+      "front": "What are the four fundamental interactions that explain every force between particles?",
+      "back": "**Gravity**, the electromagnetic interaction, the weak interaction and the strong interaction. Each acts between particles in its own way.",
+      "hint": "Think about which of them you meet in everyday life and which only inside nuclei.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14ocbda",
+      "kind": "concept",
+      "front": "How does an exchange particle produce a force between two particles?",
+      "back": "One particle emits an **exchange particle** and another absorbs it. The exchange particle carries momentum between them, and this transfer of momentum is the force.",
+      "hint": "Picture two skaters on smooth ice, one throwing a ball to the other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cvks35",
+      "kind": "concept",
+      "front": "Which two fundamental interactions have unlimited range, and which two act only over very short distances?",
+      "back": "**Gravity** and the electromagnetic interaction have unlimited range. The strong and weak interactions act only over very short distances.",
+      "hint": "Compare which interactions act on particles with mass or charge.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mnceri",
+      "kind": "term",
+      "front": "What is a virtual photon?",
+      "back": "The **virtual photon** is the short-lived exchange particle of the electromagnetic interaction. It exists only for a very short time and cannot be detected directly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nbepgz",
+      "kind": "mistake",
+      "front": "Why is the skater picture an incomplete model of forces between particles?",
+      "back": "It explains only **repulsion**, where the skaters move apart. It does not show how an exchange can produce attraction.",
+      "hint": "Think about which direction the skaters move after the throw.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ojjl1m",
+      "kind": "concept",
+      "front": "Why can the weak interaction change one particle into another, while a virtual photon cannot?",
+      "back": "The **W boson** carries charge, so the particle that emits it changes charge and therefore type. A virtual photon has no charge, so the emitter stays the same.",
+      "hint": "Compare the charge of the exchange particle in each case.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11qswu5",
+      "kind": "example",
+      "front": "In p + e⁻ → n + νₑ, what charge must the exchanged W boson have, and why?",
+      "back": "**+1**. The proton's charge of +1 becomes the neutron's 0, so the proton emits a W⁺. The electron then absorbs it, giving −1 + 1 = 0, the neutrino's charge.",
+      "hint": "Compare the total charge before and after the proton changes into a neutron.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17bb5rv",
+      "kind": "process",
+      "front": "Describe, in order, how the exchange particle appears in beta-minus decay.",
+      "back": "A neutron emits a **W⁻** boson and becomes a proton. The W⁻ then changes into an electron and an antineutrino.",
+      "hint": "Follow the charges at each step of the decay.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03c5gls",
+      "kind": "concept",
+      "front": "What are the main conventions used when reading or drawing a Feynman diagram?",
+      "back": "**Time runs up the page**. A solid line with an upward arrow is a particle, a downward arrow marks an antiparticle, a dashed line is the exchange particle, and charge is conserved at each vertex.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07ctaam",
+      "kind": "term",
+      "front": "What is a Feynman diagram?",
+      "back": "A **Feynman diagram** is a drawing in which lines represent particles. An exchange particle joins them at points called vertices, where lines meet.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "153g940",
+      "kind": "example",
+      "front": "What is the approximate range of the strong interaction, and how does it compare with the electromagnetic interaction?",
+      "back": "The strong interaction has a range of about **3 fm**, which is very short. The electromagnetic interaction has an unlimited range.",
+      "hint": "Look at the range column for each interaction in the table.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0s049eb",
+      "kind": "concept",
+      "front": "Which exchange particle carries the strong interaction between protons and neutrons?",
+      "back": "The **pion**. Deeper inside these particles, the gluon carries the strong interaction between their smaller constituents.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oflxha",
+      "kind": "process",
+      "front": "What is the routine for identifying which interaction is at work in a reaction?",
+      "back": "Check which particles take part and whether any change type. A neutrino or a change of type means **weak**; charged particles keeping their identity means electromagnetic; strong acts at about 3 fm or less; gravity involves only mass.",
+      "hint": "Start by looking at what changes between the start and end of the reaction.",
+      "sectionId": "s5"
+    }
+  ]
+}

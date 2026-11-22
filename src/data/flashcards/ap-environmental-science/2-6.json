@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "2-6",
+  "topicCode": "2.6",
+  "topicName": "Adaptations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:26.120Z",
+  "cards": [
+    {
+      "id": "1rz7upm",
+      "kind": "term",
+      "front": "What is an adaptation?",
+      "back": "An **adaptation** is an inherited trait that helps an organism survive or reproduce in the environment where it lives. Parents pass it to offspring through genes.",
+      "hint": "Think about a polar bear's thick fur and where the bear lives.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0m9uakl",
+      "kind": "process",
+      "front": "What are the steps by which natural selection makes a helpful trait more common?",
+      "back": "1) Individuals in a population vary in inherited traits. 2) Those with a helpful trait survive longer or produce more offspring. 3) They pass the trait on, so it becomes more common over many **generations**.",
+      "hint": "Start with how individuals in one population compare to each other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fddptp",
+      "kind": "concept",
+      "front": "Why would thick polar bear fur harm an animal living in a hot desert?",
+      "back": "It causes dangerous **overheating** in hot conditions. A trait helps only in the conditions where it works.",
+      "hint": "Think about the heat level in each place.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1d8r30a",
+      "kind": "mistake",
+      "front": "Why is it wrong to think that exercising during one lifetime creates an adaptation?",
+      "back": "Traits gained during one lifetime are not **inherited**. Only inherited traits, passed through genes, can be adaptations.",
+      "hint": "Ask what a parent can pass on to its offspring.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c2mmq1",
+      "kind": "term",
+      "front": "What is evolution?",
+      "back": "**Evolution** is a change in inherited traits within a population across many generations.",
+      "hint": "Focus on the whole group, not a single animal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1go1dxx",
+      "kind": "term",
+      "front": "What is a physical adaptation?",
+      "back": "An inherited feature of **body** structure or function that improves survival or reproduction. Example: thick fur or blubber reduces heat loss in cold climates.",
+      "hint": "Think about things you can see or measure on an animal's body.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "086bvm3",
+      "kind": "term",
+      "front": "What is a behavioral adaptation?",
+      "back": "An inherited pattern of **action** that improves survival or reproduction. Many are instinctive, so the animal does not need to learn them.",
+      "hint": "Think about what an organism does rather than what it looks like.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0a888zk",
+      "kind": "example",
+      "front": "Which type of adaptation is seasonal migration, and why?",
+      "back": "Behavioral. It is an inherited pattern of **action**, not a body feature.",
+      "hint": "Is migration something the body is, or something the animal does?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09iw1nw",
+      "kind": "concept",
+      "front": "What are the main ways adaptations help organisms survive and reproduce?",
+      "back": "They help organisms obtain **food**, avoid **predators**, cope with limits on temperature and water, and find mates. Each benefit raises the chance of surviving long enough to reproduce.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05np7ff",
+      "kind": "concept",
+      "front": "Why can a sudden environmental change threaten a population even if its traits were once well suited?",
+      "back": "Natural selection works over many **generations**, so the population may not adapt in time. A population with wide **variation** is more likely to include individuals that suit new conditions.",
+      "hint": "Think about how long natural selection takes.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0p02g11",
+      "kind": "example",
+      "front": "A wet forest population's habitat quickly becomes much drier. What is likely to happen to the population?",
+      "back": "The population is likely to **decline**. Its traits suit wet conditions, and natural selection takes too many generations to adjust quickly.",
+      "hint": "Compare how fast the habitat changed with how fast populations adapt.",
+      "sectionId": "s6"
+    }
+  ]
+}

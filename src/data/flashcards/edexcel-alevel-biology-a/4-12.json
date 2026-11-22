@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-12",
+  "topicCode": "4.12",
+  "topicName": "Water and inorganic ions in plants",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:58.853Z",
+  "cards": [
+    {
+      "id": "0fumh1n",
+      "kind": "term",
+      "front": "What is turgor pressure in a plant cell?",
+      "back": "**Turgor pressure** is the pressure the cell contents exert on the cell wall when the vacuole is full of water. The wall resists stretching, so it pushes back and keeps the cell firm.",
+      "hint": "Think about what happens to the vacuole when water enters by osmosis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12ly5h6",
+      "kind": "concept",
+      "front": "Why does a non-woody plant like lettuce stay upright?",
+      "back": "Many **turgid** cells press against their walls, so soft stems stay supported and leaves are held out to catch light.",
+      "hint": "Think about what turgid cells do together, not on their own.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l3emqw",
+      "kind": "concept",
+      "front": "What does each of the three main inorganic ions help a plant to make?",
+      "back": "**Nitrate** supplies nitrogen for amino acids, proteins and nucleotides. **Magnesium** forms part of every chlorophyll molecule. **Calcium** forms calcium pectate, which joins neighbouring cell walls.",
+      "hint": "Name the ion first, then the molecule it helps to build.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0irkm68",
+      "kind": "term",
+      "front": "What is transpiration?",
+      "back": "**Transpiration** is the loss of water vapour from the aerial parts of a plant, mainly through the stomata of the leaves. It also pulls more water and dissolved ions up from the roots through the xylem.",
+      "hint": "Think about where most water leaves a plant.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1csw3qu",
+      "kind": "term",
+      "front": "What is plasmolysis?",
+      "back": "**Plasmolysis** is the shrinking of the cytoplasm and membrane away from the cell wall after water is lost by osmosis, usually in a strongly concentrated solution.",
+      "hint": "Compare it with what happens to turgor pressure when water is lost.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "043zx2g",
+      "kind": "concept",
+      "front": "Why does a plant wilt when the soil dries out?",
+      "back": "Water leaves the cells by osmosis, so the vacuole shrinks and turgor pressure falls. The cell becomes **flaccid**, and the whole plant wilts.",
+      "hint": "Follow the vacuole as the soil loses its water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0suwamw",
+      "kind": "mistake",
+      "front": "What happens to a plant cell placed in pure water, and why?",
+      "back": "It becomes turgid rather than bursting, because the cell wall resists stretching. Bursting would only happen if the wall could not hold the pressure.",
+      "hint": "Think about how strong the cell wall is compared with a balloon.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0uwxvro",
+      "kind": "term",
+      "front": "What is chlorosis?",
+      "back": "**Chlorosis** is the yellowing of normally green plant tissue, caused by too little chlorophyll.",
+      "hint": "Think about what chlorophyll gives leaves their colour.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1oy5a4o",
+      "kind": "mistake",
+      "front": "Why does chlorosis alone not tell you which ion is missing?",
+      "back": "Nitrate and magnesium shortages can both cause yellowing. You need the pattern of symptoms, such as which leaves are affected, to identify the ion.",
+      "hint": "Consider which other ions could cause the same colour change.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "022j2sh",
+      "kind": "concept",
+      "front": "Why do older leaves show nitrate or magnesium shortage first?",
+      "back": "Both ions can be moved out of old leaves through the phloem to growing tips. Calcium moves poorly, so young tissues suffer first when it runs short.",
+      "hint": "Think about how the plant moves useful ions around its body.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jwh25u",
+      "kind": "process",
+      "front": "What are the steps of a culture solution experiment to find which ion a plant needs?",
+      "back": "Make a complete control solution and others each lacking one ion. Grow identical seedlings in each, keep light, temperature and volume the same, aerate the roots, then measure growth over several weeks.",
+      "hint": "Start with the control, then think about what you change.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "13gub60",
+      "kind": "concept",
+      "front": "Why is dry mass the most reliable growth measure in a culture solution experiment?",
+      "back": "Water content varies between plants, so it can mislead. Dry mass removes this variation, and you should use several plants per solution and calculate means.",
+      "hint": "Think about how much water a plant can hold.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "16owxzk",
+      "kind": "concept",
+      "front": "What are water's roles as a reactant in plants?",
+      "back": "Water is split in photosynthesis and used in hydrolysis, so it is a **reactant** as well as a solvent and coolant.",
+      "hint": "Think about which processes in the plant break molecules apart.",
+      "sectionId": "s4"
+    }
+  ]
+}

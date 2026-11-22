@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-6",
+  "topicCode": "6.6",
+  "topicName": "Nuclear power",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:21.399Z",
+  "cards": [
+    {
+      "id": "14yq36u",
+      "kind": "concept",
+      "front": "How does one fission event lead to a self-sustaining chain reaction?",
+      "back": "Each split releases extra neutrons that strike other heavy nuclei and cause more splits. This repeating process is a **chain reaction**.",
+      "hint": "Think about what the split itself gives off.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zrtahc",
+      "kind": "process",
+      "front": "What is the order of energy changes that turns fission heat into electricity?",
+      "back": "Fission heats the coolant, which boils water into high-pressure steam. The steam spins a **turbine**, which drives a **generator** to make electricity. A condenser turns the used steam back into water.",
+      "hint": "Start where the heat is made and follow the energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gyo2fu",
+      "kind": "concept",
+      "front": "Why must spent fuel be isolated for thousands of years?",
+      "back": "Spent fuel is still hot and highly radioactive. Some of its materials have long **half-lives**, so they stay hazardous as long as their nuclei keep decaying.",
+      "hint": "Consider what keeps the hazard going over time.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08863jl",
+      "kind": "term",
+      "front": "What is nuclear fission?",
+      "back": "The splitting of a heavy nucleus, such as **uranium-235**, into smaller nuclei, releasing energy and extra neutrons.",
+      "hint": "Compare it with the burning that a coal plant does.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07u163r",
+      "kind": "mistake",
+      "front": "Why is it wrong to call fission a type of combustion?",
+      "back": "Fission needs no oxygen, so the reaction itself releases no carbon dioxide. Combustion is burning fuel with oxygen, which is a different process.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1khos48",
+      "kind": "concept",
+      "front": "How do control rods change the rate of fission in a reactor core?",
+      "back": "They **absorb neutrons**. Lowering them into the core slows fission, and raising them lets more fission happen.",
+      "hint": "Think about what the rods do to the neutrons passing by.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "022jjj8",
+      "kind": "term",
+      "front": "What is enrichment of nuclear fuel?",
+      "back": "Raising the share of uranium-235 in uranium fuel above its natural level so that fission can be sustained.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "120uocr",
+      "kind": "concept",
+      "front": "What job does the coolant, usually water, do in a reactor core?",
+      "back": "It flows through the core and carries away the heat produced by fission.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16imfqv",
+      "kind": "term",
+      "front": "What is the difference between a turbine and a generator?",
+      "back": "A **turbine** is a bladed machine spun by moving steam. A **generator** converts that rotational energy into electrical energy.",
+      "hint": "Follow the steam first, then the spinning shaft.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sqimr9",
+      "kind": "concept",
+      "front": "What happens during a meltdown in a reactor?",
+      "back": "Cooling fails, the core overheats until the fuel melts, and this can release **radioactive material**.",
+      "hint": "Think about what goes wrong first when cooling fails.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "171pouu",
+      "kind": "mistake",
+      "front": "Why is nuclear power not impact free?",
+      "back": "Mining uranium, building plants, and storing waste all carry environmental costs, even though the reaction itself releases no carbon dioxide.",
+      "hint": "Think about the stages before and after the reactor runs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14a4wh0",
+      "kind": "concept",
+      "front": "Why does nuclear power avoid the air pollution that a coal plant causes?",
+      "back": "Fission releases no carbon dioxide or sulfur dioxide, and the fuel gives off no soot. A small amount of fuel also produces a large amount of electricity.",
+      "hint": "Compare what each plant has to burn.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xby6u6",
+      "kind": "process",
+      "front": "What are the stages for storing spent fuel, from first to last?",
+      "back": "Spent fuel first cools for years in deep water pools, then may move to dry casks of steel and concrete. Permanent disposal would use a deep underground repository, but finding a stable site is difficult.",
+      "hint": "Think about the order of cooling, then storage, then disposal.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0kp3wws",
+      "kind": "term",
+      "front": "How is a half-life defined?",
+      "back": "The time required for half the radioactive nuclei in a sample to decay.",
+      "hint": "Think about a sample losing its nuclei over time.",
+      "sectionId": "s5"
+    }
+  ]
+}

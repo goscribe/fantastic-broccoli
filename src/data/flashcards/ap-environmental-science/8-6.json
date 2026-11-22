@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-6",
+  "topicCode": "8.6",
+  "topicName": "Thermal pollution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:45.410Z",
+  "cards": [
+    {
+      "id": "0uc4x25",
+      "kind": "concept",
+      "front": "What is thermal pollution?",
+      "back": "**Thermal pollution** is a human-caused change in the temperature of a natural water body that harms the organisms living in it. Natural seasonal changes do not count.",
+      "hint": "Think about what people add beyond normal seasonal swings in water temperature.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wzm8u5",
+      "kind": "concept",
+      "front": "Why does warmer water hold less dissolved oxygen?",
+      "back": "Gases dissolve less well in warm liquid, so **warmer water** holds less dissolved oxygen, just as a warm soda goes flat faster.",
+      "hint": "Think about what happens to a fizzy drink left in the sun.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qwdsxw",
+      "kind": "concept",
+      "front": "Which human activities are major sources of thermal pollution?",
+      "back": "**Power plants** and factories returning heated cooling water, **stormwater** heated on hot pavement and roofs, and removal of streamside trees that lets sunlight warm the water.",
+      "hint": "Think about where cooling water goes and what surfaces rain flows over.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05hen2l",
+      "kind": "formula",
+      "front": "How is percent change in dissolved oxygen calculated?",
+      "back": "Percent change = $\\frac{\\mathrm{final}-\\mathrm{initial}}{\\mathrm{initial}}\\times100$. A decrease gives a **negative** value.",
+      "hint": "Start from the size of the change, then compare it with the starting value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u3hjok",
+      "kind": "example",
+      "front": "A stream drops from 9.0 $\\mathrm{mg/L}$ to 7.2 $\\mathrm{mg/L}$ of dissolved oxygen. What is the percent change?",
+      "back": "**$-20\\%$**, a decrease of one fifth. Calculated as $\\frac{7.2-9.0}{9.0}\\times100=-20\\%$.",
+      "hint": "Divide the change by the starting value, then multiply by 100.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bzly18",
+      "kind": "process",
+      "front": "How does stormwater become a source of thermal pollution?",
+      "back": "Rain flows over **hot pavement and roofs**, heats up, then runs into streams that were not heated before. Rain gardens and permeable pavement can cool it in the soil.",
+      "hint": "Follow the water from the rain to the stream.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ad6vri",
+      "kind": "concept",
+      "front": "Why do cold-water fish decline first when water warms?",
+      "back": "They have **narrow temperature ranges**, so they tolerate little warming. Warm-tolerant species may then replace them.",
+      "hint": "Consider how much temperature change each species can handle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tl1xi7",
+      "kind": "concept",
+      "front": "Why does warm water make an oxygen shortage worse for aquatic animals?",
+      "back": "Warm water raises the **metabolic rate**, so animals need more oxygen just when less dissolved oxygen is available.",
+      "hint": "Think about how fast body chemistry runs when it gets warmer.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l9eo09",
+      "kind": "term",
+      "front": "What is thermal shock?",
+      "back": "**Thermal shock** is a rapid change in water temperature that stresses or kills organisms adapted to stable conditions, such as when a power plant shuts down suddenly.",
+      "hint": "Focus on how fast the temperature changes, not how much.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ixnp52",
+      "kind": "mistake",
+      "front": "Why is it wrong to think thermal pollution must be lethal to cause harm?",
+      "back": "It is wrong because **small, lasting temperature rises** can reduce growth and reproduction without killing organisms outright.",
+      "hint": "Think about effects that build up over time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zfma2h",
+      "kind": "term",
+      "front": "What is a cooling tower?",
+      "back": "A **cooling tower** moves heat from used cooling water into the air, often by evaporation, so the water returns closer to its original temperature before reuse.",
+      "hint": "Think about where the heat from the water ends up.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vqacet",
+      "kind": "term",
+      "front": "What is a riparian buffer?",
+      "back": "A **riparian buffer** is a strip of trees, shrubs, or other vegetation along a stream bank that shades the water and filters runoff.",
+      "hint": "Think about what grows beside a stream to block sunlight.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hx7x4y",
+      "kind": "concept",
+      "front": "How do cooling structures and streamside shade reduce thermal pollution together?",
+      "back": "**Cooling structures** treat industrial heat at its source, while shade and stormwater controls stop streams from heating up from the surroundings.",
+      "hint": "Consider where the heat comes from and where it reaches the water.",
+      "sectionId": "s5"
+    }
+  ]
+}

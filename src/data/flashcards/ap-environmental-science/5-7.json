@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-7",
+  "topicCode": "5.7",
+  "topicName": "Meat production methods",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:57.383Z",
+  "cards": [
+    {
+      "id": "1xnlkzq",
+      "kind": "concept",
+      "front": "What is the main trade-off between feedlots and pasture-raised meat production?",
+      "back": "Feedlots make meat fast and cheaply on little land, but they concentrate manure and disease. Pasture systems spread manure out and reduce crowding, but they need much more land and the meat costs more.",
+      "hint": "Compare how many animals share a small space in each system."
+    },
+    {
+      "id": "0czgdvn",
+      "kind": "concept",
+      "front": "Why does meat need far more plant material than the same calories eaten directly from plants?",
+      "back": "Animals use most of the energy they eat to move, keep warm, and grow. Only about 10 percent passes to the next feeding level, so many plant calories are needed for each calorie of meat.",
+      "hint": "Follow where the energy goes after an animal eats.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0196hbv",
+      "kind": "concept",
+      "front": "Why do feedlot animals often receive antibiotics?",
+      "back": "Crowding spreads disease, so antibiotics are given to prevent illness and sometimes to speed growth. Repeated exposure can cause **antibiotic resistance** to evolve in bacteria.",
+      "hint": "Think about what crowding does to disease.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j2rfxy",
+      "kind": "term",
+      "front": "What is a feedlot?",
+      "back": "A **feedlot** is a facility that confines many animals in a small space and fattens them on grain-based feed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xkw9d9",
+      "kind": "term",
+      "front": "What does free-range mean in meat production?",
+      "back": "**Free-range** means animals have access to the outdoors rather than being kept indoors all the time. They may still get most of their food from feed, and the amount of outdoor access varies.",
+      "hint": "Compare this with the indoor confinement of a feedlot.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0h5z00y",
+      "kind": "term",
+      "front": "How do pasture-raised animals spend most of their lives?",
+      "back": "**Pasture-raised** animals graze on grass fields for most of their lives.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vysxpe",
+      "kind": "term",
+      "front": "What is overgrazing?",
+      "back": "**Overgrazing** is feeding on plants faster than they can regrow. This leaves bare soil open to erosion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1944usm",
+      "kind": "term",
+      "front": "What is eutrophication?",
+      "back": "**Eutrophication** is the enrichment of water with nutrients, which causes algal growth and oxygen depletion. Manure runoff can cause it.",
+      "hint": "Think about what extra nutrients do to algae.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gcdhzi",
+      "kind": "mistake",
+      "front": "Which organisms evolve antibiotic resistance on a farm?",
+      "back": "**Bacteria** evolve antibiotic resistance. The animals, and the people who eat the meat, do not become resistant themselves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09qiyy6",
+      "kind": "mistake",
+      "front": "Where does most of the methane from cattle come from?",
+      "back": "Most methane comes from **digestion**, as cattle break down food. It is not mainly from manure.",
+      "hint": "Think about what happens inside the animal's gut.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ktqqlo",
+      "kind": "term",
+      "front": "What is a trophic level?",
+      "back": "A **trophic level** is an organism's feeding position in a food chain, such as producer or primary consumer.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1rt0lnu",
+      "kind": "formula",
+      "front": "What does the formula for energy stored in an animal's tissue say?",
+      "back": "$E_{\\text{stored}} = E_{\\text{feed}} \\times 0.10$, where $E_{\\text{stored}}$ is the energy stored in tissue and $E_{\\text{feed}}$ is the energy in feed, both in $\\mathrm{kcal}$. The 0.10 is the fraction transferred.",
+      "hint": "Ask what fraction of energy usually passes to the next level.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0yc6suo",
+      "kind": "example",
+      "front": "A steer eats grain containing 30,000 kcal. About how much energy is stored as tissue?",
+      "back": "$3{,}000\\,\\mathrm{kcal}$, because $30{,}000\\,\\mathrm{kcal}\\times0.10=3{,}000\\,\\mathrm{kcal}$.",
+      "hint": "Multiply the feed energy by the fraction that passes on.",
+      "sectionId": "s5"
+    }
+  ]
+}

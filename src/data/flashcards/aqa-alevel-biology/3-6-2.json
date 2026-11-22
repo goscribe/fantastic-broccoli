@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-6-2",
+  "topicCode": "3.6.2",
+  "topicName": "Nervous coordination",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:37.139Z",
+  "cards": [
+    {
+      "id": "0hmbd46",
+      "kind": "process",
+      "front": "What are the main steps of an action potential in an axon, in order?",
+      "back": "When the membrane reaches **threshold**, voltage-gated sodium channels open and sodium ions enter, depolarising the membrane. The sodium channels then close or become inactivated, voltage-gated potassium channels open, and potassium ions leave, repolarising the membrane.",
+      "hint": "Start from the moment the membrane reaches threshold.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dw20cl",
+      "kind": "process",
+      "front": "What happens at a synapse when an action potential reaches the presynaptic terminal?",
+      "back": "Voltage-gated calcium channels open and calcium ions enter, causing vesicles to release **neurotransmitter** by exocytosis. It diffuses across the cleft and binds to postsynaptic receptors. It is then removed by breakdown or reuptake, which stops continuous stimulation.",
+      "hint": "Follow the signal from the terminal across the gap.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1om3521",
+      "kind": "concept",
+      "front": "Why does a single synaptic input often fail to make a neurone fire?",
+      "back": "It is usually too small to bring the membrane to threshold alone. Through **summation**, postsynaptic potentials from inputs close in time or from different synapses combine, and an action potential begins only if the total reaches threshold. Excitatory inputs push towards threshold and inhibitory inputs push away.",
+      "hint": "Think about what happens when several inputs arrive together.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "172bdfo",
+      "kind": "term",
+      "front": "What is the resting potential of an axon membrane?",
+      "back": "The **potential difference** across an unstimulated membrane, with the inside negative relative to the outside. The sodium-potassium pump and potassium leak channels help maintain it.",
+      "hint": "Compare it with what happens when the membrane is stimulated.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p44avt",
+      "kind": "term",
+      "front": "What is threshold in an axon?",
+      "back": "The **membrane potential** at which enough voltage-gated sodium channels open to start an action potential.",
+      "hint": "Compare it with the resting potential.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0830ram",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a stronger stimulus makes each action potential larger?",
+      "back": "Each action potential is not made larger by a stronger stimulus. Above threshold, a stronger stimulus instead increases the **frequency** of action potentials.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rcptm1",
+      "kind": "term",
+      "front": "What is the refractory period?",
+      "back": "The period after an action potential when **sodium channels** are inactivated, so another action potential cannot immediately form in that region. This helps ensure impulses travel forwards.",
+      "hint": "Think about what happens to the sodium channels behind the impulse.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1i6zpfm",
+      "kind": "concept",
+      "front": "How do local currents carry an impulse forwards along an unmyelinated axon?",
+      "back": "A depolarised section causes local currents that depolarise the neighbouring membrane. If that membrane reaches threshold, it generates a new action potential, and this repeats along the axon. The refractory period behind it prevents backward transmission.",
+      "hint": "Think about what the depolarised region does to the membrane next to it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ubab6x",
+      "kind": "term",
+      "front": "What is saltatory conduction?",
+      "back": "Conduction in a myelinated axon where action potentials are **regenerated** at successive nodes of Ranvier. Current spreads beneath the myelin between nodes, so the impulse is faster than along an otherwise similar unmyelinated axon.",
+      "hint": "Compare it with conduction along an unmyelinated axon.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tlvq9s",
+      "kind": "term",
+      "front": "What are the nodes of Ranvier?",
+      "back": "Gaps between sections of **myelin** where the axon membrane is exposed, and where action potentials can be generated.",
+      "hint": "Think about breaks in an insulating layer.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17gaj4y",
+      "kind": "term",
+      "front": "What is a motor neurone?",
+      "back": "A **neurone** that carries impulses from the central nervous system towards an effector.",
+      "hint": "Think about the direction of travel relative to the central nervous system.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hj7rt1",
+      "kind": "term",
+      "front": "What is a neurotransmitter?",
+      "back": "A **chemical** released by a presynaptic cell that binds to specific receptors on a postsynaptic cell.",
+      "hint": "Think about how the signal crosses the gap.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b0s6sj",
+      "kind": "concept",
+      "front": "Why is transmission across a chemical synapse one-way?",
+      "back": "Neurotransmitter is released from the presynaptic terminal, but the relevant **receptors** are on the postsynaptic membrane, so the signal can only pass in one direction.",
+      "hint": "Compare where the vesicles are with where the receptors are.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kxe7ei",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that inhibition stops all impulses?",
+      "back": "Inhibition does not necessarily stop all impulses. It only **reduces the chance** that the postsynaptic membrane reaches threshold.",
+      "sectionId": "s5"
+    }
+  ]
+}

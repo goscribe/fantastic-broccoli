@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-12",
+  "topicCode": "5.12",
+  "topicName": "Introduction to sustainability",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:02.943Z",
+  "cards": [
+    {
+      "id": "0q6yr0x",
+      "kind": "term",
+      "front": "What does sustainability mean for how people use resources?",
+      "back": "**Sustainability** means meeting today's needs without removing the ability of future generations to meet theirs. Resources are used at rates that can continue indefinitely.",
+      "hint": "Compare a family living on interest with one spending the savings itself.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1scswh9",
+      "kind": "concept",
+      "front": "Why must a practice support all three pillars to count as sustainable?",
+      "back": "A practice must meet the environmental, social, and economic goals together, because **removing any one pillar weakens the whole system**. A project that earns money but harms a river still fails.",
+      "hint": "Think about a project that makes money but damages a nearby river.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ifyy4h",
+      "kind": "mistake",
+      "front": "A student says a renewable resource is always used sustainably. What is wrong with that?",
+      "back": "**Renewable does not mean sustainable.** A renewable resource harvested faster than it is replaced is being used unsustainably, and its supply declines.",
+      "hint": "Think about what happens when harvest rate is higher than regrowth rate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1w9mw7y",
+      "kind": "term",
+      "front": "What is a renewable resource?",
+      "back": "A **renewable resource** is one that natural processes replace on a human time scale. Timber, fresh water, and fish are examples.",
+      "hint": "Contrast it with fossil fuels, which form very slowly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11lpnmn",
+      "kind": "term",
+      "front": "What is a nonrenewable resource?",
+      "back": "A **nonrenewable resource** forms so slowly that its supply is effectively not replaced on a human time scale. Fossil fuels and metal ores are examples.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l0ap00",
+      "kind": "term",
+      "front": "What is the sustainable yield of a renewable resource?",
+      "back": "The **sustainable yield** is the highest rate at which a renewable resource can be harvested indefinitely without reducing its total supply over time.",
+      "hint": "Think about the maximum harvest that still keeps the supply steady.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03h4k9r",
+      "kind": "process",
+      "front": "What three conditions suggest a practice is likely sustainable?",
+      "back": "Resource use stays within the rate of replacement, ecosystems are protected from lasting damage, and the practice stays fair to people and affordable over time.",
+      "hint": "Check each condition against one of the three pillars.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e9qjc1",
+      "kind": "mistake",
+      "front": "Why can an unsustainable practice look successful for many years?",
+      "back": "Its damage appears slowly, as a supply shrinks or land degrades, so the first year seems fine. **Check the long-term trend** rather than one year.",
+      "hint": "Think about the delay between a practice starting and its harm showing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xu007e",
+      "kind": "concept",
+      "front": "Why is pumping groundwater faster than it refills unsustainable?",
+      "back": "Water is removed faster than natural processes replace it, so the **supply shrinks over time**. Future generations would then have less water to meet their needs.",
+      "hint": "Compare the pumping rate with the refill rate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mukl5o",
+      "kind": "concept",
+      "front": "What happens to a fish stock harvested above its sustainable yield?",
+      "back": "The **stock declines**, because fish are removed faster than the stock can replace them. Harvests will eventually fall.",
+      "hint": "Consider what a harvest above the yield means for replacement.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1iq3sys",
+      "kind": "concept",
+      "front": "Why can one household's recycling still matter for sustainability?",
+      "back": "**Choices add up.** One household's effect is small, but millions of households together make a large difference.",
+      "hint": "Think about scale, from a single home to a whole country.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0t3vwq5",
+      "kind": "concept",
+      "front": "How can governments encourage sustainable practice?",
+      "back": "They can set limits on harvests and pollution, protect land, and fund renewable energy. Laws and incentives make sustainable choices easier and unsustainable ones costlier.",
+      "hint": "Think about rules and money that change what things cost.",
+      "sectionId": "s5"
+    }
+  ]
+}

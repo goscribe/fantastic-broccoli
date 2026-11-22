@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-6",
+  "topicCode": "1.6",
+  "topicName": "Blood clotting",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:38.283Z",
+  "cards": [
+    {
+      "id": "0rnu6x3",
+      "kind": "process",
+      "front": "What are the main stages of blood clotting, in order, after a blood vessel is damaged?",
+      "back": "**Platelets** stick and form a plug, clotting factors activate in a chain to make thrombin, thrombin converts fibrinogen to fibrin, and the fibrin mesh traps cells to form a solid clot.",
+      "hint": "Start with the first thing that happens at the damaged site, then follow the chain."
+    },
+    {
+      "id": "0oc5u66",
+      "kind": "concept",
+      "front": "Why does a small signal at a damaged site produce a large clotting response?",
+      "back": "Each **clotting factor** activates the next one in the chain, so the signal is amplified at every step.",
+      "hint": "Think about what each step does to the step after it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jyr6nh",
+      "kind": "term",
+      "front": "What is the product when the enzyme thrombin acts on fibrinogen?",
+      "back": "**Fibrin**, an insoluble protein that forms long threads. Thrombin converts soluble fibrinogen into insoluble fibrin.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x46uyg",
+      "kind": "term",
+      "front": "What are platelets?",
+      "back": "Small, nucleus-free **cell fragments** made in the bone marrow that circulate in plasma and help seal damaged blood vessels.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0s9f4sj",
+      "kind": "concept",
+      "front": "What does a damaged vessel expose that platelets stick to?",
+      "back": "**Collagen**, a tough protein in the vessel wall that is normally not in contact with blood.",
+      "hint": "Think about what lies beneath the lining of the vessel.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tagtms",
+      "kind": "concept",
+      "front": "Why does a platelet plug alone not stop bleeding for long?",
+      "back": "It is weak and can be washed away by blood flow, so the **clotting factor** chain is needed to strengthen it.",
+      "hint": "Consider how the plug would cope with the force of flowing blood.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rp8ol8",
+      "kind": "term",
+      "front": "What are clotting factors?",
+      "back": "**Plasma proteins**, mostly made in the liver, that stay inactive until damage occurs and then activate one another in sequence.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dnc778",
+      "kind": "process",
+      "front": "Which inactive plasma protein is converted into the enzyme thrombin at the end of the factor chain?",
+      "back": "**Prothrombin**. The chain ends when it is converted to thrombin.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cf19tn",
+      "kind": "mistake",
+      "front": "What is wrong with treating platelets and clotting factors as the same thing?",
+      "back": "**Platelets** are cell fragments, while **clotting factors** are proteins dissolved in plasma. They are different components with different roles.",
+      "hint": "Compare what each one is made of.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11re5rx",
+      "kind": "term",
+      "front": "How does fibrin hold a blood clot together?",
+      "back": "**Fibrin** forms threads that tangle into a mesh, trapping red blood cells and platelets to make a solid clot.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kwuzl5",
+      "kind": "term",
+      "front": "What causes haemophilia?",
+      "back": "An **inherited** fault or missing clotting factor, so blood clots slowly and even minor injuries may bleed for a long time.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1v17ll2",
+      "kind": "term",
+      "front": "What is thrombosis?",
+      "back": "The formation of a **blood clot inside a blood vessel**, which can block blood flow.",
+      "hint": "Think about where the clot forms compared with a wound.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05tmvf0",
+      "kind": "concept",
+      "front": "Why can thrombosis lead to a heart attack or a stroke?",
+      "back": "A clot can break loose and block a smaller vessel. A clot in a coronary artery causes a heart attack, and one in an artery to the brain causes a stroke.",
+      "hint": "Think about where the clot travels after it breaks loose.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1h3v1x4",
+      "kind": "concept",
+      "front": "Why is blood clotting both protective and harmful?",
+      "back": "Clotting stops blood loss, keeps microorganisms out and allows repair. But a clot forming inside a vessel can block blood flow.",
+      "sectionId": "s5"
+    }
+  ]
+}

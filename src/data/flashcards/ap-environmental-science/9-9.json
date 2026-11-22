@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "9-9",
+  "topicCode": "9.9",
+  "topicName": "Endangered species",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:07.041Z",
+  "cards": [
+    {
+      "id": "0vkunik",
+      "kind": "mistake",
+      "front": "Why is an endangered species not the same as an extinct one?",
+      "back": "An **endangered** species still has living populations that can recover. An **extinct** species has lost its last individual, and extinction is permanent.",
+      "hint": "Think about whether any individuals of the species are still alive.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nd2v9o",
+      "kind": "concept",
+      "front": "Which traits make a species most vulnerable to extinction?",
+      "back": "A **small population**, a **narrow range**, **specialization**, and **slow reproduction** each raise the risk. Species with several of these traits are especially vulnerable.",
+      "hint": "Think about what one disaster or one habitat change could do to the species.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vlafz4",
+      "kind": "concept",
+      "front": "What role do human activities play in endangerment?",
+      "back": "They are the **main cause**. Vulnerable traits only raise the risk, and human pressures such as **habitat loss** and **overexploitation** push species toward extinction.",
+      "hint": "Think about what gives a vulnerable species its final push.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ujarqz",
+      "kind": "term",
+      "front": "What is a threatened species?",
+      "back": "A **threatened species** is one likely to become endangered in the foreseeable future.",
+      "hint": "Place it on the path that leads to endangered.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t4u5cj",
+      "kind": "term",
+      "front": "What does genetic diversity mean within a population?",
+      "back": "The **variety of gene versions**, called alleles, within a population. With less variety, a population adapts less well to disease or change.",
+      "hint": "Think about how many individuals a small group has to share variety.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11n4pwa",
+      "kind": "term",
+      "front": "What is overexploitation?",
+      "back": "Harvesting individuals of a species **faster than the population can replace them**, including overhunting, overfishing, and illegal wildlife trade.",
+      "hint": "Think about the speed of harvest compared with the speed of reproduction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hydr85",
+      "kind": "mistake",
+      "front": "Why is it wrong to blame endangerment on hunting alone?",
+      "back": "Endangerment is rarely caused by hunting alone. Several pressures, such as habitat loss, pollution, invasive species, and climate change, usually act on a species at the same time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10hncy8",
+      "kind": "process",
+      "front": "What steps do managers take in captive breeding?",
+      "back": "They raise endangered animals under human care, then release their offspring into the wild.",
+      "hint": "Think about where the young animals go at the end.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02napbw",
+      "kind": "term",
+      "front": "What does the Endangered Species Act do?",
+      "back": "It is a **United States law** that lists endangered and threatened species and bans harming them or destroying their **critical habitat**.",
+      "hint": "Think about which country the law belongs to and what it restricts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1en5n1e",
+      "kind": "term",
+      "front": "What does CITES regulate?",
+      "back": "CITES is an **international agreement** that restricts trade in listed wildlife and plants.",
+      "hint": "Compare its reach with a single country's law.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yitp9f",
+      "kind": "term",
+      "front": "What is a wildlife corridor?",
+      "back": "A **strip of habitat** that links separate habitat areas so animals can move between them, countering the isolation caused by habitat loss.",
+      "hint": "Think about what cut-off patches stop animals from doing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m5exva",
+      "kind": "concept",
+      "front": "Why must endangered species laws and reserves be enforced?",
+      "back": "Laws work only when they are enforced, and reserves work only when they are protected in practice. Otherwise harmful actions continue.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gl6ikw",
+      "kind": "concept",
+      "front": "Why are direct management actions needed for a very small population?",
+      "back": "Laws alone may not be enough once a population is very small, so managers add direct action such as captive breeding, seed banks, and reintroduction.",
+      "hint": "Think about what a law can do for animals already close to disappearing.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ntuvml",
+      "kind": "concept",
+      "front": "Why does protecting habitat go alongside captive breeding?",
+      "back": "Released animals need safe places to live, and protected habitat helps many species at once.",
+      "hint": "Think about where bred offspring end up after release.",
+      "sectionId": "s5"
+    }
+  ]
+}

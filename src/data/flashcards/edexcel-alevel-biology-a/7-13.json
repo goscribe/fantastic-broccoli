@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-13",
+  "topicCode": "7.13",
+  "topicName": "Exercise and health data",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:57.502Z",
+  "cards": [
+    {
+      "id": "19gbyyy",
+      "kind": "term",
+      "front": "What is a correlation in a health study?",
+      "back": "A **correlation** is a pattern in which two variables change together. On its own it does not show that one variable causes the other.",
+      "hint": "Compare what researchers can measure with what they can actually prove.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qr9xgw",
+      "kind": "concept",
+      "front": "How does the health benefit of physical activity change as activity increases?",
+      "back": "The largest gain comes from moving from no activity to a moderate amount. Further increases add less, and very intense training can raise the risk of injury.",
+      "hint": "Think about the first step compared with the later steps.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wm3lo2",
+      "kind": "concept",
+      "front": "Why might active people have lower heart disease risk even if exercise itself did nothing?",
+      "back": "A **confounding variable**, such as diet or smoking, may differ between the groups. It affects health and is linked to activity, so it distorts the apparent effect.",
+      "hint": "Consider what other habits might differ between the two groups.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y96igl",
+      "kind": "term",
+      "front": "What is a risk factor?",
+      "back": "A **risk factor** is a characteristic or behaviour linked to a greater chance of developing a disease. Physical inactivity is one for coronary heart disease, type 2 diabetes and obesity.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0h74amq",
+      "kind": "formula",
+      "front": "What is the formula for the percentage of a group affected by a disease?",
+      "back": "Percentage affected equals $\\frac{\\text{cases}}{\\text{group size}}\\times100$, where cases is the number affected and group size is the total in the group. The unit is %.",
+      "hint": "Think about the proportion of the whole group that is affected.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1c1wfpt",
+      "kind": "example",
+      "front": "In a made-up study, 8.0% of inactive adults and 5.0% of active adults developed coronary heart disease. What is the relative reduction for the active group?",
+      "back": "**37.5%** lower. Working: $\\frac{8.0-5.0}{8.0}\\times100=37.5\\%$.",
+      "hint": "Work out the drop first, then divide it by the inactive rate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03k7vol",
+      "kind": "mistake",
+      "front": "A group's rate falls from 8.0% to 5.0%. Why is saying it fell by 3.0% wrong?",
+      "back": "The fall is **3.0 percentage points**, not 3.0%. The relative reduction is 37.5%, because the drop is measured against the starting 8.0%.",
+      "hint": "Consider what the 3.0 is being compared with.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dn3ljk",
+      "kind": "mistake",
+      "front": "Which wording is correct: 'exercise causes lower heart disease risk' or 'the data show an association'?",
+      "back": "The second. From a correlation alone you should describe an **association**, because a confounding variable or reversed cause may explain the pattern.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ekn77n",
+      "kind": "concept",
+      "front": "How can illness distort the link between exercise and health?",
+      "back": "People who are already unwell may exercise less. The cause may run the other way: poor health reduces activity, rather than activity improving health.",
+      "hint": "Consider which way the cause might point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0yyn41z",
+      "kind": "term",
+      "front": "What is reliability in a health study?",
+      "back": "**Reliability** is the extent to which repeated use of a method produces similar results.",
+      "hint": "Think about what happens if you repeat the study.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1u8w0bg",
+      "kind": "concept",
+      "front": "Why is a large, representative sample more trustworthy than a small one?",
+      "back": "A large sample reduces the effect of **chance**. A representative sample matches the wider population in age, sex and background, so the results apply more widely.",
+      "hint": "Think about how random variation shrinks as numbers grow.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "15ywbmy",
+      "kind": "concept",
+      "front": "Why is measuring activity with a step counter better than asking people to report it?",
+      "back": "Self-reports can be forgotten or overstated. A device such as a step counter gives more **consistent** data.",
+      "hint": "Think about who is recording the activity.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ogh5u7",
+      "kind": "term",
+      "front": "What does statistical significance mean in a study?",
+      "back": "A result is **statistically significant** when it is unlikely to be due to chance alone. Researchers usually use a threshold of $p<0.05$.",
+      "sectionId": "s5"
+    }
+  ]
+}

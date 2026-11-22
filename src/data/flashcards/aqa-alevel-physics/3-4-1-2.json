@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-4-1-2",
+  "topicCode": "3.4.1.2",
+  "topicName": "Moments",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:00.204Z",
+  "cards": [
+    {
+      "id": "1g90b3l",
+      "kind": "concept",
+      "front": "What does a force's moment measure, and what makes it bigger or smaller?",
+      "back": "The **moment** is the turning effect of a force about a pivot. It depends on the force and on how far its line of action is from the pivot.",
+      "hint": "Think about pushing a door near the handle versus near the hinge.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11bu43l",
+      "kind": "formula",
+      "front": "How is the moment of a force calculated, and what units does it use?",
+      "back": "Moment $=Fd$, where $F$ is the force in $\\mathrm{N}$ and $d$ is the **perpendicular** distance from the pivot to the line of action in $\\mathrm{m}$. The unit is $\\mathrm{N\\,m}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17jly0l",
+      "kind": "concept",
+      "front": "What are the two conditions for an object to be in equilibrium?",
+      "back": "The **resultant force** is zero, so it does not accelerate, and the **resultant moment** about any point is zero, so it does not start to turn.",
+      "hint": "Each condition stops a different kind of motion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "154xub9",
+      "kind": "concept",
+      "front": "What does the principle of moments say about an object in equilibrium?",
+      "back": "The **total clockwise moment** equals the **total anticlockwise moment** about any point. For two forces either side of a pivot, $F_1d_1=F_2d_2$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ljawrr",
+      "kind": "term",
+      "front": "What is a couple?",
+      "back": "A **couple** is a pair of equal and opposite parallel forces whose lines of action are separated, giving a turning effect with no resultant force.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0uqyj95",
+      "kind": "formula",
+      "front": "How do you calculate the moment of a couple?",
+      "back": "Moment of a couple $=Fd$, where $F$ is one of the forces in $\\mathrm{N}$ and $d$ is the **perpendicular distance** between their lines of action in $\\mathrm{m}$.",
+      "hint": "Only one force is needed in the calculation, not both.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1f4r2ju",
+      "kind": "example",
+      "front": "A 40 N force acts on a 0.50 m spanner at 30° to the spanner. What is its moment about the nut?",
+      "back": "Perpendicular component is $40\\sin30^{\\circ}=20\\,\\mathrm{N}$, so moment $=20\\,\\mathrm{N}\\times0.50\\,\\mathrm{m}=\\mathbf{10\\,N\\,m}$.",
+      "hint": "Resolve the force before using moment $=Fd$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hjrens",
+      "kind": "example",
+      "front": "A 300 N child sits 1.5 m from a seesaw pivot. The other child sits 3.0 m away on the opposite side. What is the second child's weight?",
+      "back": "Balanced, so $300\\,\\mathrm{N}\\times1.5\\,\\mathrm{m}=W\\times3.0\\,\\mathrm{m}$, giving $W=\\mathbf{150\\,N}$.",
+      "hint": "Set clockwise moment equal to anticlockwise moment.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19vlyfp",
+      "kind": "concept",
+      "front": "Where does the weight of a uniform beam act, and why does this simplify problems?",
+      "back": "Its weight acts at the **centre of mass**, which is the midpoint of a uniform beam. All the weight can then be treated as one force at that point.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "022mglf",
+      "kind": "process",
+      "front": "How do you find an unknown support force on a plank when you take moments?",
+      "back": "Take moments about one support so its unknown force has zero moment and drops out. Solve for the other support, then use $A+B=$ total downward load.",
+      "hint": "Pick the point where one unknown force acts.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "125qf6i",
+      "kind": "mistake",
+      "front": "Why is a zero resultant force not enough to guarantee equilibrium?",
+      "back": "Two equal and opposite forces with **separated lines of action** still give a resultant moment, so the object can turn. The moment must also be zero.",
+      "hint": "Think about a couple.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08tuznv",
+      "kind": "example",
+      "front": "Two 12 N forces form a couple with lines of action 0.25 m apart. What is the moment of the couple?",
+      "back": "$Fd=12\\,\\mathrm{N}\\times0.25\\,\\mathrm{m}=\\mathbf{3.0\\,N\\,m}$.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0uxys9i",
+      "kind": "mistake",
+      "front": "Which distance must you use when calculating a moment, and why?",
+      "back": "Use the **perpendicular** distance from the pivot to the line of action. Only the component of the force at right angles to that line turns the object.",
+      "hint": "Compare the distance along the lever with the distance at right angles.",
+      "sectionId": "s2"
+    }
+  ]
+}

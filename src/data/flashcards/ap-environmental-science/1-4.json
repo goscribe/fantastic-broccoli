@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "1-4",
+  "topicCode": "1.4",
+  "topicName": "The carbon cycle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:04.265Z",
+  "cards": [
+    {
+      "id": "1uy0wty",
+      "kind": "concept",
+      "front": "Why does the carbon cycle recycle carbon rather than using it up?",
+      "back": "Carbon is never made or destroyed; it only moves between **reservoirs** such as the air, oceans, living things, and rock, so the same carbon can be reused.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0or0nme",
+      "kind": "concept",
+      "front": "In which direction does carbon move during photosynthesis compared with cellular respiration?",
+      "back": "**Photosynthesis** moves carbon from the air into living tissue as sugar, while **cellular respiration** moves it from living tissue back to the air as $\\text{CO}_2$.",
+      "hint": "Compare the starting materials and products in the table.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bgn9jd",
+      "kind": "concept",
+      "front": "Why does burning fossil fuels add more carbon dioxide to the air than natural processes can remove?",
+      "back": "Fossil fuels hold carbon stored for millions of years. **Combustion**, the reaction of fuel with oxygen, releases that carbon as $\\text{CO}_2$ in a short time, faster than natural processes can take it back.",
+      "hint": "Think about how long the carbon was stored before it was burned.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nt4g0b",
+      "kind": "term",
+      "front": "What is a carbon reservoir?",
+      "back": "A **reservoir** is any place that holds carbon for a period of time, such as the atmosphere, oceans, living things, soils, fossil fuels, or sedimentary rock.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nsj026",
+      "kind": "concept",
+      "front": "Why do carbon atoms spend very different lengths of time in different reservoirs?",
+      "back": "Each reservoir holds carbon for a different time: a leaf may hold it for months, while **sedimentary rock** may hold it for millions of years.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1twfnhn",
+      "kind": "term",
+      "front": "What process uses light energy to turn carbon dioxide and water into sugar and oxygen?",
+      "back": "**Photosynthesis**, carried out by plants, algae, and some bacteria, uses light energy to convert carbon dioxide and water into glucose and oxygen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f7t3ra",
+      "kind": "process",
+      "front": "Describe in order how carbon moves from the air into a dead organism and then back out or into fuel.",
+      "back": "Plants take in $\\text{CO}_2$ by photosynthesis. When they die, **decomposition** by bacteria and fungi returns carbon to the air and soil. Buried remains can become a **fossil fuel** over millions of years.",
+      "hint": "Start with the first step, when carbon enters the organism.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bsq236",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that plants only take in carbon dioxide?",
+      "back": "Plants also carry out **cellular respiration** all the time, so they release $\\text{CO}_2$ as well as taking it in.",
+      "hint": "Think about what every living cell needs in order to release energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0aihpey",
+      "kind": "mistake",
+      "front": "Why is it wrong to think the carbon in fossil fuels came from the ground itself?",
+      "back": "It came from ancient organisms that took carbon from the air. Heat and pressure changed their buried remains into coal, oil, or natural gas.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0o9fka4",
+      "kind": "concept",
+      "front": "How does deforestation increase atmospheric carbon dioxide?",
+      "back": "Cleared trees that burn or decay release their stored carbon, and fewer trees remain to take up $\\text{CO}_2$ by photosynthesis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "085krkx",
+      "kind": "term",
+      "front": "What is the greenhouse effect?",
+      "back": "The **greenhouse effect** is the warming of Earth's lower atmosphere when gases such as $\\text{CO}_2$ absorb and re-emit heat radiated from the surface.",
+      "hint": "Think about where the heat in the atmosphere comes from.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xwvg5h",
+      "kind": "concept",
+      "front": "How does extra carbon dioxide in the air lower ocean pH?",
+      "back": "Seawater absorbs it, and the dissolved $\\text{CO}_2$ forms a weak acid. This change is **ocean acidification**, which makes shell building harder for some marine organisms.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0i6b0dw",
+      "kind": "concept",
+      "front": "Which two natural sinks together take up a large share of human carbon dioxide emissions?",
+      "back": "**Land plants** and the **ocean** together take up a large share of human emissions, but not all of it.",
+      "hint": "Think about the reservoirs you already listed.",
+      "sectionId": "s5"
+    }
+  ]
+}

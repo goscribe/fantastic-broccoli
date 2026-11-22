@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "1-7",
+  "topicCode": "1.7",
+  "topicName": "The water cycle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:05.971Z",
+  "cards": [
+    {
+      "id": "1qs1t5c",
+      "kind": "concept",
+      "front": "What two forces drive the water cycle, and what does each one do?",
+      "back": "**Solar energy** powers the upward movement of water by driving evaporation, and **gravity** pulls water downward as precipitation, runoff, and groundwater flow.",
+      "hint": "Think about what lifts water into the air and what brings it back down.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r00z6n",
+      "kind": "process",
+      "front": "What are the main steps a water molecule follows through the water cycle, in order?",
+      "back": "Evaporation, then condensation into clouds, then precipitation, then runoff or infiltration, and finally a return to the ocean, where evaporation begins again.",
+      "hint": "Start where liquid water turns into a gas."
+    },
+    {
+      "id": "1l66a4k",
+      "kind": "concept",
+      "front": "Why does the water cycle matter for ecosystems?",
+      "back": "It supplies fresh water that plants need for photosynthesis and animals need to drink. Precipitation patterns also help decide whether a region becomes a rainforest or a desert.",
+      "hint": "Think about what living things need from water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zrya5f",
+      "kind": "term",
+      "front": "What is evaporation in the water cycle?",
+      "back": "**Evaporation** is the change of liquid water to water vapor at temperatures below boiling, driven by energy from the sun. Oceans supply most of the vapor.",
+      "hint": "Think about the energy source that powers it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gua4xg",
+      "kind": "concept",
+      "front": "Why does water vapor turn into droplets high in the air?",
+      "back": "Rising air cools, and cool air holds less vapor, so **condensation** changes vapor into tiny liquid droplets that gather to form clouds.",
+      "hint": "Think about what happens to air as it rises.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0u4tfqy",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that clouds are made of water vapor?",
+      "back": "Vapor is an invisible **gas**. Clouds are made of liquid droplets or ice crystals that form when vapor condenses.",
+      "hint": "Compare the state of matter of vapor with what you can actually see.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0r5b0ff",
+      "kind": "term",
+      "front": "What is precipitation?",
+      "back": "**Precipitation** is liquid or solid water that falls from the atmosphere to Earth's surface, including rain, snow, sleet, and hail.",
+      "hint": "Think about the forms water takes when it leaves a cloud.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xhjrer",
+      "kind": "example",
+      "front": "How can ocean water fall as rain far inland?",
+      "back": "Solar energy evaporates ocean water, winds carry the moist air over land, and as the air cools the vapor condenses and falls as precipitation.",
+      "hint": "Follow the water in order, from the sea to the land.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qmlwa4",
+      "kind": "concept",
+      "front": "What increases runoff when rain reaches the land?",
+      "back": "**Runoff** increases on steep slopes and when the ground is already full of water, so more water flows over the surface instead of soaking in.",
+      "hint": "Think about the pull of gravity and how full the soil is.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qokj2z",
+      "kind": "term",
+      "front": "What is infiltration?",
+      "back": "**Infiltration** is the movement of water from the land surface into soil, where it can move deeper, be taken up by roots, or become groundwater.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07no9js",
+      "kind": "term",
+      "front": "What is groundwater?",
+      "back": "**Groundwater** is water stored in the pores and cracks of soil and rock below the surface. It moves slowly and can stay underground for a very long time.",
+      "hint": "Think about the spaces inside soil and rock.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0irkm68",
+      "kind": "term",
+      "front": "What is transpiration?",
+      "back": "**Transpiration** is the release of water vapor from plants to the air, mainly through tiny pores in their leaves.",
+      "hint": "Compare it with evaporation from the soil.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jatgwc",
+      "kind": "example",
+      "front": "If a forest is cleared, how does the amount of water vapor returned to the air change?",
+      "back": "It decreases. Trees release vapor by transpiration, so removing them reduces transpiration and less vapor returns to the atmosphere.",
+      "hint": "Think about how plants move water back into the air.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qgrcz7",
+      "kind": "example",
+      "front": "How does paving land affect groundwater supplies?",
+      "back": "Paving increases **runoff** and reduces infiltration, which can lower groundwater supplies because less water soaks into the ground.",
+      "hint": "Think about what pavement allows water to do.",
+      "sectionId": "s5"
+    }
+  ]
+}

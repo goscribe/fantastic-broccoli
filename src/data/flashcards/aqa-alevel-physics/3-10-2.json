@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-10-2",
+  "topicCode": "3.10.2",
+  "topicName": "Physics of the ear",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:12.257Z",
+  "cards": [
+    {
+      "id": "1p3hc3o",
+      "kind": "process",
+      "front": "What route does a sound wave take from the outer ear to nerve signals?",
+      "back": "The **pinna** directs the wave into the ear canal, the **eardrum** vibrates, the **ossicles** carry the vibrations to the oval window, and the oval window pushes fluid in the **cochlea**. This moves the basilar membrane, bends hair cells, and triggers impulses in the auditory nerve.",
+      "hint": "Follow the wave from the outside of the head inwards."
+    },
+    {
+      "id": "123qnvs",
+      "kind": "concept",
+      "front": "How does the middle ear increase the pressure reaching the cochlea?",
+      "back": "It concentrates the force collected by the large **eardrum** onto the smaller **oval window**. The ossicles act as a lever that raises the force slightly. Pressure is force divided by area.",
+      "hint": "Compare the sizes of the two membranes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1j0j9f2",
+      "kind": "formula",
+      "front": "Which equation gives the intensity level of a sound in decibels?",
+      "back": "$\\mathrm{IL}=10\\log\\frac{I}{I_0}$, where $I$ is the **intensity** of the sound in $\\mathrm{W\\,m^{-2}}$ and $I_0=1.0\\times10^{-12}\\,\\mathrm{W\\,m^{-2}}$ is the threshold intensity. The logarithm is to base 10.",
+      "hint": "Think about what the sound's intensity is being compared against.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0y0rnjt",
+      "kind": "concept",
+      "front": "How does the basilar membrane separate different frequencies?",
+      "back": "Each place on the **basilar membrane** responds most strongly to one frequency. High frequencies peak near the oval window and low frequencies peak near the far end.",
+      "hint": "Picture the cochlea as a coiled tube with two ends.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ceuyqr",
+      "kind": "example",
+      "front": "A sound has an intensity of $3.2\\times10^{-6}\\,\\mathrm{W\\,m^{-2}}$. What is its intensity level?",
+      "back": "About **65 dB**: $\\mathrm{IL}=10\\log\\left(3.2\\times10^{6}\\right)=10\\times6.505\\approx65\\,\\mathrm{dB}$, using $I_0=1.0\\times10^{-12}\\,\\mathrm{W\\,m^{-2}}$.",
+      "hint": "Divide the intensity by the threshold value first, then take the logarithm.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "107gg8v",
+      "kind": "concept",
+      "front": "What does a 10 dB rise in intensity level mean for the sound's intensity?",
+      "back": "The intensity is **ten times** greater. A 20 dB rise means 100 times, and a 3 dB rise means about twice the intensity.",
+      "hint": "Think about what the logarithm of ten equals.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ozwkec",
+      "kind": "example",
+      "front": "Sound X has a level of 90 dB and sound Y has a level of 72 dB. How many times more intense is X than Y?",
+      "back": "About **63 times**. The difference is 18 dB, so $\\log\\frac{I_X}{I_Y}=1.8$ and $\\frac{I_X}{I_Y}=10^{1.8}\\approx63$.",
+      "hint": "Start by subtracting one level from the other.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "03fhv8h",
+      "kind": "mistake",
+      "front": "Why is it wrong to say the middle ear makes the sound carry more energy?",
+      "back": "The middle ear adds no energy. It raises the **pressure** by concentrating the same force onto a smaller area.",
+      "hint": "Think about what the force is spread over.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0emma4u",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume equal steps in decibels mean equal extra intensity?",
+      "back": "The scale is **logarithmic**, so equal decibel steps are equal ratios of intensity, not equal differences. A 10 dB rise always means ten times the intensity.",
+      "hint": "Compare what happens when you add a fixed amount with what happens when you multiply.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "17pjgf3",
+      "kind": "term",
+      "front": "What is the threshold of hearing?",
+      "back": "The **lowest** sound intensity at a given frequency that a normal ear can detect. At 1 kHz it is $1.0\\times10^{-12}\\,\\mathrm{W\\,m^{-2}}$.",
+      "hint": "It is a limit set by the ear, not by the sound source.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d4kozj",
+      "kind": "concept",
+      "front": "Why does a 100 Hz sound need more intensity than a 3 kHz sound to be just audible?",
+      "back": "The ear is most sensitive to frequencies of about **2 kHz to 5 kHz**, so its threshold is higher at low frequencies such as 100 Hz. The resonance of the ear canal contributes to this.",
+      "hint": "Think about where the threshold curve is lowest.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01kzr3p",
+      "kind": "term",
+      "front": "What is the intensity of a sound?",
+      "back": "The **power** passing through unit area at right angles to the wave, measured in $\\mathrm{W\\,m^{-2}}$.",
+      "hint": "Think about how much energy arrives each second on a given patch.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bly3jq",
+      "kind": "formula",
+      "front": "Which equation defines pressure, and what does each symbol mean?",
+      "back": "$p=\\frac{F}{A}$, where $p$ is the **pressure** in $\\mathrm{N\\,m^{-2}}$, $F$ is the **force** in $\\mathrm{N}$, and $A$ is the **area** in $\\mathrm{m^{2}}$. The same force on a smaller area gives a larger pressure.",
+      "hint": "Consider how spreading a force over a smaller area changes the result.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jc5sv4",
+      "kind": "concept",
+      "front": "Why do noise meters often give a dBA reading rather than an unweighted reading?",
+      "back": "A **weighted** scale reduces the contribution of frequencies the ear is less sensitive to. So a dBA reading follows the perceived loudness more closely.",
+      "hint": "Think about which frequencies the ear hears best.",
+      "sectionId": "s4"
+    }
+  ]
+}

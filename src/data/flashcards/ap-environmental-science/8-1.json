@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-1",
+  "topicCode": "8.1",
+  "topicName": "Sources of pollution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:40.602Z",
+  "cards": [
+    {
+      "id": "10u9xzk",
+      "kind": "concept",
+      "front": "What makes a substance a pollutant?",
+      "back": "A **pollutant** is a substance that harms organisms or ecosystems once it reaches a high enough amount. The amount matters as much as the substance itself.",
+      "hint": "Think about what separates a harmless presence from real damage.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0au0ph1",
+      "kind": "concept",
+      "front": "What separates a point source from a nonpoint source?",
+      "back": "A **point source** releases pollutants at one identifiable location, such as a pipe. A **nonpoint source** releases them from many scattered places with no single entry point.",
+      "hint": "Ask whether you could point to one place where the pollutant enters."
+    },
+    {
+      "id": "1pbwvj9",
+      "kind": "concept",
+      "front": "Which human activities are the major sources of pollution in ecosystems today?",
+      "back": "**Agriculture**, **industry and mining**, and **cities and homes**, with **energy production**. Each tends to release its own typical pollutants, such as fertilizers, metals, sewage, and oil spills.",
+      "hint": "Group the sources by the type of activity that produces them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10d868r",
+      "kind": "term",
+      "front": "What is sediment as a pollutant?",
+      "back": "**Sediment** is soil and rock particles carried by water or wind and deposited elsewhere. In streams it clouds the water and smothers habitat.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0aq0bw3",
+      "kind": "concept",
+      "front": "Why are point sources easier to regulate than nonpoint sources?",
+      "back": "Because the release location is known, operators can be required to hold permits and treat discharge before it leaves the site. Problems are also easy to trace back to the source.",
+      "hint": "Think about what a regulator needs to find and measure.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l0g0hq",
+      "kind": "process",
+      "front": "How can nonpoint pollution be controlled?",
+      "back": "Change land-use practices. Plant **vegetation strips** between fields and streams to slow runoff, and use better farming and lawn practices that reduce how much pollutant is applied.",
+      "hint": "Think about where the pollution starts, not at a pipe.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19as04g",
+      "kind": "mistake",
+      "front": "Why is a huge factory with one discharge pipe still a point source?",
+      "back": "Size does not decide the category. The key is one identifiable release location, so a large factory with a single pipe is still a **point source**, not a nonpoint source.",
+      "hint": "Check what the classification is based on, not how big the site is.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "133yeaa",
+      "kind": "mistake",
+      "front": "Why is it a mistake to think pollutants must always be unnatural?",
+      "back": "Natural substances can pollute too. Nitrogen and phosphorus are **natural nutrients**, but in excess they pollute water.",
+      "hint": "Think about how much of a substance is present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dcwy7z",
+      "kind": "concept",
+      "front": "How does leaching differ from runoff as a pathway?",
+      "back": "**Runoff** flows over the land surface into streams and lakes. **Leaching** drains down through soil, carrying dissolved pollutants toward groundwater.",
+      "hint": "Compare the direction the water travels.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uyjk0a",
+      "kind": "term",
+      "front": "Which pathway carries pollutants from the air down onto land and water?",
+      "back": "**Air deposition**: pollutants from the air settle onto land and water.",
+      "hint": "Think about pollutants that begin in the atmosphere.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0h1p9q2",
+      "kind": "concept",
+      "front": "Why does replacing a meadow with pavement increase pollutant delivery to a nearby stream?",
+      "back": "Water cannot soak into pavement, so **runoff** increases. It moves quickly across the surface and carries oil, salt, and sediment into the stream faster.",
+      "hint": "Consider what happens to rain falling on each surface.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1yfnjhn",
+      "kind": "concept",
+      "front": "Which land-based activities release pollutants into land systems?",
+      "back": "**Landfills**, **mining**, **pesticides**, and **settling air pollutants** all deliver pollutants to land systems.",
+      "hint": "Think about waste, extraction, and what falls out of the air.",
+      "sectionId": "s2"
+    }
+  ]
+}

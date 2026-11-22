@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "7-7",
+  "topicCode": "7.7",
+  "topicName": "Acid rain",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:40.015Z",
+  "cards": [
+    {
+      "id": "0ky0e9w",
+      "kind": "concept",
+      "front": "What makes rain acid rain?",
+      "back": "Rain with a **lower pH** than clean rain. Clean rain is already slightly acidic, at about pH 5.6, because dissolved carbon dioxide forms a weak acid.",
+      "hint": "Think about the pH of normal rain and what it already contains.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18s5go3",
+      "kind": "concept",
+      "front": "How do $\\mathrm{SO_2}$ and $\\mathrm{NO_x}$ become acid rain after they leave a smokestack or tailpipe?",
+      "back": "They react with oxygen and water in the air to form **sulfuric acid** ($\\mathrm{H_2SO_4}$) and **nitric acid** ($\\mathrm{HNO_3}$). Both are strong, so small amounts lower rain's pH noticeably.",
+      "hint": "Follow the gases through the air, not just out of the stack.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1o1zkjb",
+      "kind": "term",
+      "front": "What is acid deposition?",
+      "back": "The arrival of acids at Earth's surface. It is **wet** when it falls in rain and snow, or **dry** when it arrives as particles and gases.",
+      "hint": "Acids can travel a long way before they land.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kig2r7",
+      "kind": "example",
+      "front": "Rain at pH 4.6 falls where normal rain is pH 5.6. How many times more hydrogen ions does it have?",
+      "back": "**10 times** more. The pH difference is $5.6-4.6=1.0$, and $10^{1.0}=10$.",
+      "hint": "Each pH unit is a fixed multiplying factor.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11dqej4",
+      "kind": "concept",
+      "front": "Which human activities are the main sources of sulfur dioxide and nitrogen oxides?",
+      "back": "Mostly **burning fossil fuels**. Coal power plants and smelters release sulfur dioxide, while vehicle engines, power plants, and boilers release nitrogen oxides.",
+      "hint": "Think about energy use and transport.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0u71nwx",
+      "kind": "concept",
+      "front": "How does acid deposition harm lakes and soils?",
+      "back": "Low pH kills fish eggs and amphibians in lakes. In soil, acid washes out calcium and magnesium and frees toxic **aluminum**.",
+      "hint": "Consider who lives in the water and what the soil normally holds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vnlyri",
+      "kind": "term",
+      "front": "What is buffering in soil or water?",
+      "back": "The ability to resist pH change. **Limestone-rich** soils buffer acid well, while thin soils over granite do little buffering.",
+      "hint": "Consider the bedrock beneath the soil.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t5fk5x",
+      "kind": "concept",
+      "front": "Why is a lake on thin granite soil hurt more by acid rain than one on limestone-rich soil?",
+      "back": "Thin granite soil has little **buffering**, so the lake's pH falls. Limestone-rich soil neutralizes the acid and keeps pH nearly steady.",
+      "hint": "Compare how well each soil resists pH change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fqph7r",
+      "kind": "mistake",
+      "front": "Why is it wrong to think acid rain will burn your skin?",
+      "back": "Acid rain is **too weak** to burn skin. Its harm to people is mostly indirect, through damaged ecosystems and polluted air.",
+      "hint": "Compare its strength with strong acids you may know.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1iev7ms",
+      "kind": "term",
+      "front": "What is a scrubber, and where is it installed?",
+      "back": "A device on each smokestack that removes **sulfur dioxide** and other pollutants from exhaust gases before they leave.",
+      "hint": "It treats the exhaust, not the fuel.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1a0j7fb",
+      "kind": "process",
+      "front": "How does liming treat an acidified lake?",
+      "back": "Crushed **limestone** or lime is added to raise the pH. It treats the symptoms only, costs a lot, and must be repeated.",
+      "hint": "Think about a base that neutralizes acid.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0af3tok",
+      "kind": "concept",
+      "front": "Why is cutting emissions a better long-term response to acid rain than liming?",
+      "back": "Cutting emissions removes the **cause**, protecting soil, forests, and buildings too. Liming only raises a lake's pH temporarily.",
+      "hint": "Ask whether each option targets the source or the damage.",
+      "sectionId": "s5"
+    }
+  ]
+}

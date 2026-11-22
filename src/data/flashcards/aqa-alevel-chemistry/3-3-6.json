@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-6",
+  "topicCode": "3.3.6",
+  "topicName": "Organic analysis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:50.558Z",
+  "cards": [
+    {
+      "id": "1hmqyyk",
+      "kind": "concept",
+      "front": "Why does a positive test-tube result point to a particular structure in an unknown organic liquid?",
+      "back": "Each test reacts only with a particular **functional group**, so a positive result shows that group is present.",
+      "hint": "Think about why each reagent reacts with only certain structures.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tunkqg",
+      "kind": "concept",
+      "front": "How does the molecular ion peak give the relative molecular mass of a compound?",
+      "back": "The molecular ion is the peak with the highest $m/z$, ignoring the tiny carbon-13 peak one unit higher. With a 1+ charge, its $m/z$ equals the **relative molecular mass**, $M_\\mathrm{r}$.",
+      "hint": "Think about the charge on the ion.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1crk9o5",
+      "kind": "concept",
+      "front": "What does an infrared spectrum show about the bonds in a molecule?",
+      "back": "Each bond absorbs particular infrared frequencies, shown as dips against **wavenumber**. Matching strong peaks to a table of absorption ranges names the bonds present.",
+      "hint": "Compare each strong peak with a table of absorption ranges.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b363qc",
+      "kind": "example",
+      "front": "What happens when an alkene is shaken with orange bromine water, and why?",
+      "back": "The mixture turns **colourless**, because bromine adds across the carbon–carbon double bond.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0e7fkd6",
+      "kind": "process",
+      "front": "What steps show that a halogenoalkane contains bromine?",
+      "back": "Warm it with aqueous silver nitrate in ethanol. Hydrolysis releases bromide ions, which form a **cream** precipitate with silver ions.",
+      "hint": "Start with what must happen to the molecule before silver ions can react.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bvhfmv",
+      "kind": "process",
+      "front": "Which warmed reagent turns orange to green, and which alcohols give that result?",
+      "back": "Warmed acidified **potassium dichromate(VI)** turns orange to green with primary or secondary alcohols. A tertiary alcohol stays orange.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k9q6sp",
+      "kind": "concept",
+      "front": "Which warmed reagent gives a silver mirror with an aldehyde, and what does a ketone give?",
+      "back": "**Tollens’ reagent** gives a silver mirror with an aldehyde. A ketone gives no silver mirror, and neither does an alcohol.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dlyf8v",
+      "kind": "process",
+      "front": "How does sodium carbonate solution show that a carboxylic acid is present?",
+      "back": "Add the sample to sodium carbonate solution. Bubbles of **carbon dioxide** appear, which turns limewater cloudy.",
+      "hint": "Think about what the acid does to the carbonate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ts8xy5",
+      "kind": "mistake",
+      "front": "Why is a single C=O peak not enough to identify a compound?",
+      "back": "A C=O peak shows a **carbonyl** group, but not whether it belongs to an aldehyde, a ketone or an acid. Other tests or peaks are needed to decide.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19ay3r8",
+      "kind": "example",
+      "front": "What is the relative molecular mass of pentan-2-one, $\\mathrm{C_5H_{10}O}$, and the $m/z$ of its molecular ion?",
+      "back": "$M_\\mathrm{r}=5\\times12.0+10\\times1.0+16.0=86.0$, so the molecular ion peak is at $m/z=86$.",
+      "hint": "Add up the relative atomic masses for each atom in the formula.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gtl3w3",
+      "kind": "example",
+      "front": "Which compound is Q in the worked example, if it has $M_\\mathrm{r}=74$ and stays orange with acidified dichromate(VI)?",
+      "back": "Q is the tertiary alcohol **2-methylpropan-2-ol**, because a tertiary alcohol resists oxidation and stays orange.",
+      "hint": "Think about which type of alcohol stays orange.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1cg63ay",
+      "kind": "process",
+      "front": "What is the best order for using evidence to identify an unknown compound?",
+      "back": "Start with the **molecular ion** to get $M_\\mathrm{r}$, then use test-tube results and infrared peaks. Finally, check that the fragment peaks match the proposed structure.",
+      "sectionId": "s6"
+    }
+  ]
+}

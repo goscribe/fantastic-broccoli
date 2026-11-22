@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-5-1",
+  "topicCode": "4.5.1",
+  "topicName": "Homeostasis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:40.598Z",
+  "cards": [
+    {
+      "id": "1au9k0z",
+      "kind": "term",
+      "front": "What is homeostasis?",
+      "back": "**Homeostasis** is the regulation of internal conditions to keep them within suitable limits, even when conditions outside the body change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xo357c",
+      "kind": "term",
+      "front": "What is negative feedback?",
+      "back": "**Negative feedback** is a control process in which a response reduces the change that triggered it.",
+      "hint": "Think about what the response does to the change that set it off.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j1l990",
+      "kind": "process",
+      "front": "What happens, in order, when the body detects a change in an internal condition?",
+      "back": "A **receptor** detects the change, a **coordination centre** receives the information and organises a response, then an **effector** (muscle or gland) carries out the response.",
+      "hint": "Follow the information from detection to action.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zas008",
+      "kind": "concept",
+      "front": "How does negative feedback keep conditions stable without holding them at one fixed value?",
+      "back": "As the condition moves back towards its usual level, the response becomes less necessary, so conditions stay within suitable limits while still varying slightly.",
+      "hint": "Think about what happens to the response once the condition is nearly back to normal.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "009ycbf",
+      "kind": "term",
+      "front": "What is the internal environment?",
+      "back": "The **internal environment** is the set of conditions surrounding the body's cells, which cells depend on for their normal activities.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ykm9fo",
+      "kind": "concept",
+      "front": "Why must body temperature stay within suitable limits?",
+      "back": "Enzymes control the chemical reactions cells need, and they work less effectively if body temperature changes too much.",
+      "hint": "Think about what controls the reactions inside cells.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04gwsos",
+      "kind": "concept",
+      "front": "Why does the body need a reliable supply of glucose, even though glucose enters the blood only after meals?",
+      "back": "Cells use glucose for respiration to release energy, so the body must regulate blood glucose to keep a steady supply between meals as well as after them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0i6bmvh",
+      "kind": "term",
+      "front": "What is blood glucose concentration?",
+      "back": "**Blood glucose concentration** is the amount of glucose in a given volume of blood.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pyc8bt",
+      "kind": "concept",
+      "front": "Why does the body regulate its water content?",
+      "back": "Too little or too much water changes the balance between cells and their surroundings, which can affect how cells function.",
+      "hint": "Think about what water movement does to cells.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1g2i793",
+      "kind": "mistake",
+      "front": "Why is it wrong to think homeostasis means a condition stays at one exact value?",
+      "back": "Conditions can vary. Homeostasis means they stay within suitable limits, and the body only responds when they move too far from their usual levels.",
+      "hint": "Think about what your body does when you move from a cool room to a warm one.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "038gq6n",
+      "kind": "concept",
+      "front": "How can signals travel between the receptor, coordination centre and effector?",
+      "back": "Signals may travel along **nerves** or through the blood as **hormones**.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qj8kx5",
+      "kind": "concept",
+      "front": "Why must the body detect a change before it becomes too large?",
+      "back": "Detection lets the body respond early, so the response can act before the condition moves too far from its suitable limits.",
+      "sectionId": "s3"
+    }
+  ]
+}

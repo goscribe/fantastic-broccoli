@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-1",
+  "topicCode": "7.1",
+  "topicName": "Muscles, tendons, ligaments and joints",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:33.668Z",
+  "cards": [
+    {
+      "id": "0lnoh7b",
+      "kind": "concept",
+      "front": "Why do muscles work in antagonistic pairs to move a joint?",
+      "back": "A muscle can only **contract** and pull, never push. A second muscle on the opposite side of the joint is needed to move the joint back.",
+      "hint": "Think about the only thing a single muscle is able to do.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ksz9kt",
+      "kind": "concept",
+      "front": "What is the main difference between a tendon and a ligament?",
+      "back": "A **tendon** joins muscle to bone and transmits the pulling force. A **ligament** joins bone to bone and stabilises the joint.",
+      "hint": "Think about what each structure connects.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02o6e0c",
+      "kind": "concept",
+      "front": "Why does a synovial joint move smoothly rather than grinding?",
+      "back": "**Cartilage** covers the bone ends to reduce friction and absorb shock, and **synovial fluid** lubricates the surfaces so they glide past each other.",
+      "hint": "Consider what the bone ends would do without any covering.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zyio96",
+      "kind": "term",
+      "front": "What are muscle fibres?",
+      "back": "**Muscle fibres** are long cells that contract to produce force. Each skeletal muscle is made of many of them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pvx0qf",
+      "kind": "term",
+      "front": "What is collagen, and why is it found in tendons?",
+      "back": "**Collagen** is a strong fibrous protein that forms rope-like fibres, giving tendons great tensile strength so they resist stretching.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w1kp3n",
+      "kind": "concept",
+      "front": "Why must a tendon be inelastic?",
+      "back": "An inelastic tendon does not absorb part of the pull by stretching, so nearly all the force and shortening of the muscle reaches the bone.",
+      "hint": "Imagine what would happen if the tendon stretched like a rubber band.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0afa4n2",
+      "kind": "term",
+      "front": "What is elastin?",
+      "back": "**Elastin** is a stretchy fibrous protein that lets tissue stretch and then return to its original shape. Ligaments contain more of it than tendons do.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1goatwt",
+      "kind": "process",
+      "front": "What happens to the biceps and triceps when the forearm is lifted?",
+      "back": "1. The **biceps** (flexor) contracts and bends the elbow, raising the forearm. 2. The triceps relaxes and is stretched. To lower the forearm, the roles swap.",
+      "hint": "Start by identifying which muscle is the flexor.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07swo1n",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that a relaxed muscle pushes the bone back into place?",
+      "back": "A relaxed muscle does not push. Its contracting partner stretches it, and the partner's contraction is what moves the bone back.",
+      "hint": "Think about the only thing a muscle is able to do.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fgw2vp",
+      "kind": "term",
+      "front": "What is an extensor?",
+      "back": "An **extensor** is a muscle whose contraction straightens a joint, increasing the angle between two bones. At the elbow, the triceps is the extensor.",
+      "hint": "Compare it with the muscle that does the opposite job.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14wpgpi",
+      "kind": "term",
+      "front": "What is cartilage, and what does it do at a joint?",
+      "back": "**Cartilage** is a smooth, firm and flexible connective tissue covering bone ends. It reduces friction and absorbs shock.",
+      "hint": "Think about where it sits in a joint.",
+      "sectionId": "s4"
+    }
+  ]
+}

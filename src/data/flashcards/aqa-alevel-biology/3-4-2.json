@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-4-2",
+  "topicCode": "3.4.2",
+  "topicName": "Protein synthesis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:45.351Z",
+  "cards": [
+    {
+      "id": "0oupq9q",
+      "kind": "concept",
+      "front": "Why does the order of codons in mRNA matter for a protein?",
+      "back": "Each **codon** specifies one amino acid, so the codon order sets the order of amino acids in the polypeptide.",
+      "hint": "Consider how the ribosome reads mRNA as it moves along it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1m3f5gg",
+      "kind": "process",
+      "front": "What are the repeated steps of translation at the ribosome?",
+      "back": "A **ribosome** binds mRNA, a tRNA anticodon pairs with the matching codon, and a peptide bond forms. The ribosome then moves to the next codon. This repeats until a stop codon releases the polypeptide.",
+      "hint": "Think about what happens each time the ribosome reaches a new codon.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z83mtl",
+      "kind": "process",
+      "front": "What happens during transcription to make an RNA transcript?",
+      "back": "**RNA polymerase** binds near the gene, separates the DNA strands and joins complementary RNA nucleotides, building the transcript in the $5'\\rightarrow3'$ direction.",
+      "hint": "Start with where the enzyme first attaches.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pu8o91",
+      "kind": "process",
+      "front": "How is a eukaryotic transcript turned into mature mRNA?",
+      "back": "**Introns** are removed and **exons** are joined. The mature mRNA then leaves the nucleus through a nuclear pore to a ribosome in the cytoplasm.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rd9cgr",
+      "kind": "mistake",
+      "front": "A student says RNA polymerase reads both DNA strands. What is wrong with this?",
+      "back": "It reads only the **template strand**. The mRNA is complementary to that template, not to both strands.",
+      "hint": "Consider which strand the note says RNA polymerase follows.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nuc6e8",
+      "kind": "term",
+      "front": "What does mRNA do in the cell?",
+      "back": "**mRNA** carries a gene's coded instructions from DNA to a ribosome in the cytoplasm.",
+      "hint": "Think about where the instructions must travel.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pdvu5t",
+      "kind": "term",
+      "front": "What does it mean that the genetic code is degenerate?",
+      "back": "**Degenerate** means several codons can specify the same amino acid, but each codon still has only one meaning.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18rhbcw",
+      "kind": "term",
+      "front": "What does the start codon $\\mathrm{AUG}$ do?",
+      "back": "It specifies **methionine** and sets the reading frame, so the ribosome reads consecutive, non-overlapping codons from it.",
+      "hint": "Think about where translation begins on the mRNA.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15a8n5b",
+      "kind": "mistake",
+      "front": "Why is a stop codon not counted as an amino acid?",
+      "back": "**Stop codons** signal the end of translation and specify no amino acid, so $\\mathrm{UAA}$ adds nothing to the chain.",
+      "hint": "Think about what happens to the polypeptide at the end.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kzu1lr",
+      "kind": "mistake",
+      "front": "A student says tRNA anticodons pair with DNA during translation. What is wrong?",
+      "back": "They pair with **mRNA codons** at the ribosome, not with DNA.",
+      "hint": "Think about which molecule the ribosome is reading.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0unij90",
+      "kind": "example",
+      "front": "Which amino acids does the DNA template $3'\\text{-TAC CCG AAA ATT-}5'$ code for?",
+      "back": "**Methionine**–glycine–phenylalanine. The mRNA is $5'\\text{-AUG GGC UUU UAA-}3'$, and the final $\\mathrm{UAA}$ stop codon adds no amino acid.",
+      "hint": "Start by pairing each template base with its complementary RNA base.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jkpv83",
+      "kind": "process",
+      "front": "What are the steps to predict an amino acid sequence from a DNA template?",
+      "back": "Identify the template strand, pair complementary RNA bases (uracil replacing thymine), check strand direction, split the mRNA into codons from the start codon, and translate until the first stop codon.",
+      "hint": "Think about what must be checked before dividing into codons.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vobq7x",
+      "kind": "term",
+      "front": "Which base replaces thymine in RNA?",
+      "back": "**Uracil**, which pairs with adenine on the template strand.",
+      "hint": "Compare the bases found in DNA and RNA.",
+      "sectionId": "s1"
+    }
+  ]
+}

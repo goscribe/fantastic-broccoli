@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-5-1-2",
+  "topicCode": "3.5.1.2",
+  "topicName": "Current–voltage characteristics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:40.711Z",
+  "cards": [
+    {
+      "id": "0ej3m57",
+      "kind": "concept",
+      "front": "Why does an ohmic conductor give a straight line through the origin on an I–V graph?",
+      "back": "Its **resistance is constant**, so current is proportional to potential difference. Doubling $V$ doubles $I$, which gives a straight line through the origin.",
+      "hint": "Think about what $R=\\frac{V}{I}$ says about $I$ when $R$ is fixed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uwk2sv",
+      "kind": "concept",
+      "front": "Why does the resistance of a filament lamp increase as the current through it rises?",
+      "back": "A larger current **heats** the filament. The ions vibrate with greater amplitude, so free electrons collide with them more often, and the resistance rises.",
+      "hint": "Think about what the ions in the filament do as it gets hotter.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c5tsqx",
+      "kind": "concept",
+      "front": "Why does a diode conduct in only one direction?",
+      "back": "It contains a **junction barrier** between two semiconductors. Forward potential difference above threshold overcomes the barrier, while reverse potential difference strengthens it so almost no carriers cross.",
+      "hint": "Consider what the junction does to charge carriers in each direction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0us7p88",
+      "kind": "term",
+      "front": "What is an I–V characteristic?",
+      "back": "A **graph of current against potential difference** for a component, with $V$ on the horizontal axis and $I$ on the vertical axis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02ca1is",
+      "kind": "formula",
+      "front": "Which equation links resistance, potential difference and current?",
+      "back": "$R=\\frac{V}{I}$, where $V$ is potential difference in $\\text{V}$, $I$ is current in $\\text{A}$ and $R$ is resistance in $\\Omega$.",
+      "hint": "Think about the ratio of two values you read from a graph.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09pqd39",
+      "kind": "example",
+      "front": "A lamp passes 0.30 A at 3.0 V and 0.60 A at 12 V. What is its resistance at 12 V?",
+      "back": "$R=\\frac{12\\,\\text{V}}{0.60\\,\\text{A}}=20\\,\\Omega$. The resistance has risen from $10\\,\\Omega$ at 3.0 V.",
+      "hint": "Use $R=\\frac{V}{I}$ at this one point only.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17v9rwc",
+      "kind": "mistake",
+      "front": "Why is resistance at a point not found from the gradient of the I–V curve?",
+      "back": "Resistance at a point is $\\frac{V}{I}$ at that point. It is **not** the gradient of the curve or the reciprocal of the tangent's gradient.",
+      "hint": "Compare which two values you need for $R=\\frac{V}{I}$ with what a slope measures.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nc0ypo",
+      "kind": "process",
+      "front": "What should you do when sketching an I–V graph?",
+      "back": "**Label both axes with units**, mark the origin, and show the diode flat on the reverse side.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0273ob1",
+      "kind": "term",
+      "front": "What is the threshold voltage of a diode?",
+      "back": "The **forward potential difference** above which the diode conducts a significant current. It is about $0.6\\,\\text{V}$ for a typical silicon diode.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19on8s8",
+      "kind": "mistake",
+      "front": "What is wrong with saying a diode in reverse has infinite resistance?",
+      "back": "Its resistance is **very high, not infinite**. The reverse current is tiny rather than exactly zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wd5rcz",
+      "kind": "concept",
+      "front": "What forms the barrier at the junction inside a diode?",
+      "back": "Electrons and holes combine near the junction, leaving a **thin layer with no free charge carriers** and a built-in potential difference.",
+      "hint": "Think about what happens at the boundary between the two semiconductor types.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m14pgb",
+      "kind": "concept",
+      "front": "What must stay fixed for a resistor to behave as an ohmic conductor?",
+      "back": "Its **temperature**. If the resistor heats up a lot, its resistance changes and its I–V line curves.",
+      "hint": "Compare with the filament lamp: which physical condition does the ohmic definition assume?",
+      "sectionId": "s5"
+    }
+  ]
+}

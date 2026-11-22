@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-7",
+  "topicCode": "3.7",
+  "topicName": "Fertilisation in mammals and plants",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:29.454Z",
+  "cards": [
+    {
+      "id": "0ngx3zp",
+      "kind": "concept",
+      "front": "Why is the zygote diploid when the sperm and egg that form it are haploid?",
+      "back": "Each gamete has one set of chromosomes. Fusing two gametes gives the zygote **two sets**, which restores the full chromosome number.",
+      "hint": "Count the chromosome sets in each gamete before they fuse.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1s9rxla",
+      "kind": "process",
+      "front": "What happens, in order, when a sperm reaches the zona pellucida of an egg?",
+      "back": "The acrosome releases **digestive enzymes** by exocytosis. The enzymes digest a channel through the zona pellucida. The sperm head reaches the egg membrane, which fuses with it.",
+      "hint": "Start with what the sperm touches first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09ugbmw",
+      "kind": "concept",
+      "front": "How does the cortical reaction stop a second sperm from entering the egg?",
+      "back": "After fusion, **cortical granules** release their contents by exocytosis. These thicken and harden the zona pellucida, so other sperm cannot bind to it or digest through it.",
+      "hint": "Think about what happens to the egg's outer coat right after one sperm fuses.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hairg7",
+      "kind": "term",
+      "front": "What is fertilisation?",
+      "back": "The **fusion** of a sperm and an egg to form a zygote.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13c4zhi",
+      "kind": "term",
+      "front": "What is the zona pellucida?",
+      "back": "A **thick protective coat** surrounding the egg cell surface membrane, which a sperm must cross.",
+      "hint": "It lies beneath the follicle cells.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hus467",
+      "kind": "process",
+      "front": "What steps take the male nuclei from the stigma to the embryo sac in a flowering plant?",
+      "back": "The pollen grain lands on the stigma. It grows a **pollen tube** down the style. The generative nucleus divides to give two male nuclei. The tube reaches the embryo sac and releases them.",
+      "hint": "Follow the pollen grain from landing to the ovary.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rwkmfz",
+      "kind": "term",
+      "front": "Through which structure does the pollen tube enter the ovule?",
+      "back": "The **micropyle**, a small gap in the ovule through which the pollen tube grows.",
+      "hint": "Think about the openings of the ovule.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1j3gtti",
+      "kind": "mistake",
+      "front": "Why is it wrong to think that plant male gametes are swimming sperm cells with tails?",
+      "back": "Plant male gametes are **two male nuclei** carried inside the pollen tube. They are not cells with tails and do not swim.",
+      "hint": "Compare where the male gametes are carried in plants and mammals.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1u6pmn9",
+      "kind": "mistake",
+      "front": "A student says the cortical reaction digests the zona pellucida. What is wrong with this?",
+      "back": "Digestion is done by the **acrosome reaction**. The cortical reaction thickens and hardens the zona pellucida to block other sperm.",
+      "hint": "Compare which reaction releases enzymes and which releases granule contents.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11hdfmi",
+      "kind": "term",
+      "front": "What is double fertilisation?",
+      "back": "In flowering plants, **one male nucleus** fuses with the egg nucleus, and the other fuses with the polar nuclei.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "191dcnw",
+      "kind": "term",
+      "front": "What tissue forms when a male nucleus fuses with the polar nuclei?",
+      "back": "The **endosperm**, a triploid tissue that stores food for the embryo.",
+      "hint": "Consider what the developing seed needs for its embryo.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "114bvhv",
+      "kind": "concept",
+      "front": "How do mammalian sperm and plant pollen tubes differ in how the male gamete reaches the egg?",
+      "back": "Sperm **swim** along the oviduct and use enzymes to cross the zona pellucida. Plant male nuclei travel down a pollen tube and enter the ovule through the micropyle.",
+      "hint": "Compare the way the male gamete travels and the point where it enters.",
+      "sectionId": "s6"
+    }
+  ]
+}
