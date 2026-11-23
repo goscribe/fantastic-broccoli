@@ -41,7 +41,8 @@
 @keyframes design-wiggle { 0%,100% { transform: rotate(-4deg) } 50% { transform: rotate(4deg) } }
 @keyframes design-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-4px) } }
 @keyframes design-float { 0%,100% { transform: translateY(0) rotate(-2deg) } 50% { transform: translateY(-6px) rotate(2deg) } }
-@keyframes design-peek { 0% { transform: translateY(18px) rotate(6deg); opacity: 0 } 100% { transform: translateY(0) rotate(0); opacity: 1 } }
+/* Transform only: the cat is on screen from the first frame (it stands in the scenes), it just settles into place. */
+@keyframes design-peek { 0% { transform: translateY(18px) rotate(6deg) } 100% { transform: translateY(0) rotate(0) } }
 @keyframes design-cheer { 0% { transform: translateY(0) scale(.6); opacity: 0 } 50% { transform: translateY(-14px) scale(1.08); opacity: 1 } 70% { transform: translateY(0) scale(.98) } 85% { transform: translateY(-6px) scale(1.02) } 100% { transform: translateY(0) scale(1) } }
 .cat-wiggle { animation: design-wiggle 1.6s ease-in-out infinite; transform-origin: 50% 90%; }
 .cat-bob { animation: design-bob 3s ease-in-out infinite; }
@@ -164,9 +165,6 @@ html.new-ui h1, html.new-ui h2 { letter-spacing: -0.025em; }
 }
 .finish-confetti { position: absolute; left: 50%; top: 46%; pointer-events: none; }
 .finish-confetti > span { position: absolute; left: 0; top: 0; opacity: 0; animation: finish-confetti 1.25s cubic-bezier(0.2, 0.7, 0.3, 1) both; animation-delay: calc(var(--i, 0) * 9ms + 180ms); }
-/* The result hero draws its own side wash (container-driven), so the viewport-driven one in tokens.css is switched off. */
-.finish-hero .hero-field { --wash: none; }
-.finish-hero__wash { background: linear-gradient(90deg, var(--hero-wash) 0%, color-mix(in srgb, var(--hero-wash) 94%, transparent) 38%, color-mix(in srgb, var(--hero-wash) 62%, transparent) 56%, transparent 76%); }
 /* The big score lands with a small overshoot. */
 @keyframes finish-score { 0% { transform: scale(0.7); opacity: 0; } 60% { transform: scale(1.06); opacity: 1; } 100% { transform: scale(1); } }
 .finish-score { transform-origin: left bottom; animation: finish-score 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both; }
@@ -239,14 +237,11 @@ html.new-ui .skeleton {
 .rail-cards > .rail-box { background: var(--card); border-radius: var(--r-card); box-shadow: var(--card-shadow); }
 
 /*
- * Sign-in and sign-up: the home banner's landscape in a tall panel. The card
- * colour washes down from the top, where the words sit, instead of in from
- * the left; the scene keeps the bottom of the panel.
+ * Sign-in and sign-up: the home banner's landscape in a tall panel, whole and
+ * unwashed. The words sit on one solid card at the top (.hero-copy); the cat
+ * and the hills keep the rest.
  */
-.auth-scene .hero-field {
-  --wash: linear-gradient(180deg, var(--hero-wash) 0%, var(--hero-wash) 30%, color-mix(in srgb, var(--hero-wash) 70%, transparent) 44%, transparent 62%);
-  background-position: 72% 100%;
-}
+.auth-scene .hero-field { background-position: 72% 100%; }
 
 /*
  * Toasts (sonner): a white card with a hairline in the app's tokens, whatever
@@ -287,16 +282,11 @@ html.new-ui .skeleton {
 .design-root:not(.app-brand) .ui-btn--outline { background: var(--card); border-color: var(--border-strong); font-weight: 500; }
 
 /*
- * Home banner's week: the landscape runs edge to edge with no wash, and every
- * word sits on a solid card over it (the scene's own light: white by day,
- * the night sky after dark), so the contrast never depends on the picture.
+ * Home banner's week: the landscape runs edge to edge, and every word sits on
+ * a solid card over it (--hero-surface, tokens.css: white by day, the night
+ * sky lifted a step after dark), so the contrast never depends on the picture.
  * Today's card is always white and lifts above the row.
  */
-.home-hero { --hero-surface: #ffffff; }
-.home-hero .hero-field { --wash: none; }
-/* After dark the cards are the night sky lifted a step, so they read as cards against it. */
-html[data-daypart="night"] .home-hero,
-html[data-daypart="late"] .home-hero { --hero-surface: color-mix(in srgb, var(--hero-wash) 86%, #ffffff); }
 .hero-cell {
   background: var(--hero-surface, #fff);
   border: 1px solid color-mix(in srgb, var(--foreground) 9%, transparent);

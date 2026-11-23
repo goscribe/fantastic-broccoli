@@ -42,36 +42,27 @@ const POSE: Record<Exclude<HomeAction["kind"], "upload">, MascotPose> = {
 };
 
 /**
- * The banner: the colour of its scene's light (white by day, dark after
- * dark), a hairline, the scene inside it. A container, so the week strip
+ * The banner: the scene inside a hairline. A container, so the week strip
  * lays itself out from the banner's own width (it shares the row with the
- * rail on desktop).
+ * rail on desktop). It is painted in full from the first frame: no fade-in.
  */
-const shell = "hero-card life-rise @container relative isolate overflow-hidden rounded-[var(--r-panel)] border border-border";
+const shell = "hero-card home-hero @container relative isolate overflow-hidden rounded-[var(--r-panel)] border border-border";
+
+/** The solid card the words sit on when the banner has no week (first upload, load error). */
+const copyCard = "hero-copy mx-2.5 mb-2.5 p-3.5 @2xl:mx-5 @2xl:mb-5 @2xl:max-w-[540px] @2xl:px-5";
 
 /**
  * The banner's backdrop: the illustrated landscape lit for the student's own
- * time of day (tokens.css picks the file from <html data-daypart>), with the
- * cat on the knoll at the right in whatever outfit is equipped and the
- * "Dress up" pill (the shop's outfits) at its feet. `clear` (the week
- * banner): the scene fills the whole banner, unwashed, and the words sit on
- * solid cards over it. Otherwise (first upload, load error, whose words sit
- * on the scene itself): a band behind the greeting when narrow, the whole
- * banner washed out on the left when wide.
+ * time of day (tokens.css picks the file from <html data-daypart>), filling
+ * the whole banner with nothing faded over it, with the cat on the knoll at
+ * the right in whatever outfit is equipped and the "Dress up" pill (the
+ * shop's outfits) at its feet. Words sit on solid cards over it.
  */
-function HeroScene({ pose, motion, clear = false }: { pose: MascotPose; motion: string; clear?: boolean }) {
+function HeroScene({ pose, motion }: { pose: MascotPose; motion: string }) {
   const { t } = useI18n();
   return (
     <>
-      <div aria-hidden className={cn("hero-field pointer-events-none absolute -z-10 overflow-hidden", clear ? "inset-0" : "inset-x-0 top-0 h-[112px] @2xl:inset-0 @2xl:h-auto")} />
-      {/* Phones: the scene's own wash starts at sm, so the greeting on the band gets one here. */}
-      {!clear && (
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[112px] sm:hidden"
-          style={{ background: "linear-gradient(90deg, var(--hero-wash) 0%, color-mix(in srgb, var(--hero-wash) 85%, transparent) 40%, transparent 68%)" }}
-        />
-      )}
+      <div aria-hidden className="hero-field pointer-events-none absolute inset-0 -z-10 overflow-hidden" />
       <div className="pointer-events-none absolute right-[5%] top-[18px] -z-10 h-[86px] @2xl:right-[4%] @2xl:top-[12px] @2xl:h-[108px]">
         <span className="hero-field__ground" />
         <Mascot pose={pose} className={cn(motion, "h-full")} priority />
@@ -91,7 +82,7 @@ function HeroScene({ pose, motion, clear = false }: { pose: MascotPose; motion: 
 /** The greeting: on the band (narrow) or at the banner's top left (wide). It is the page's h1. */
 function Greeting({ greeting }: { greeting: string }) {
   return (
-    <div className="flex min-h-[112px] items-end px-4 pb-3 @2xl:block @2xl:min-h-0 @2xl:px-6 @2xl:pb-0 @2xl:pt-5">
+    <div className="flex min-h-[var(--banner-band)] items-end px-4 pb-3 @2xl:block @2xl:min-h-0 @2xl:px-6 @2xl:pb-0 @2xl:pt-5">
       <h1 className="max-w-[58%] text-balance text-[25px] font-extrabold leading-[1.1] @2xl:max-w-[62%] @2xl:text-[28px]">{greeting}</h1>
     </div>
   );
@@ -104,12 +95,12 @@ export function HomeBannerError({ greeting, onRetry, retrying }: { greeting: str
     <section className={shell} role="alert" aria-labelledby="today-title">
       <HeroScene pose="think" motion="cat-bob" />
       <Greeting greeting={greeting} />
-      <div className="px-4 pb-5 @2xl:px-6 @2xl:pb-6 @2xl:pt-3">
-        <h2 id="today-title" className="text-[21px] font-extrabold leading-[1.2] @2xl:max-w-[440px] @2xl:text-[24px]">
+      <div className={cn(copyCard, "@2xl:mt-3")}>
+        <h2 id="today-title" className="text-[20px] font-extrabold leading-[1.2] @2xl:max-w-[440px]">
           {t("today.loadError")}
         </h2>
-        <p className="mt-1.5 text-ui text-foreground/75 @2xl:max-w-[420px]">{t("today.loadErrorBody")}</p>
-        <button type="button" disabled={retrying} onClick={onRetry} className={cn(primaryBtn, "mt-4 h-[52px] text-[16px] @2xl:w-auto @2xl:min-w-[220px]")}>
+        <p className="mt-1 text-ui text-foreground/75 @2xl:max-w-[420px]">{t("today.loadErrorBody")}</p>
+        <button type="button" disabled={retrying} onClick={onRetry} className={cn(primaryBtn, "mt-3 h-12 text-[16px] @2xl:h-11 @2xl:w-auto @2xl:min-w-[220px] @2xl:text-[15px]")}>
           {retrying && <Loader2 className="size-5 animate-spin" />}
           {t("today.retry")}
         </button>
@@ -147,14 +138,14 @@ export function HomeBanner({
       <section className={shell} aria-labelledby="today-title">
         <HeroScene pose="wave" motion="cat-wiggle" />
         <Greeting greeting={greeting} />
-        <div className="px-4 pb-4 @2xl:px-6 @2xl:pb-6 @2xl:pt-3">
+        <div className={cn(copyCard, "@2xl:mt-3")}>
           <div className="@2xl:max-w-[460px]">
-            <h2 id="today-title" className="text-balance text-[22px] font-extrabold leading-[1.15] @2xl:text-[26px]">
+            <h2 id="today-title" className="text-balance text-[20px] font-extrabold leading-[1.2]">
               {t("today.uploadTitle")}
             </h2>
-            <p className="mt-2 text-ui text-foreground/75">{t("today.uploadSub")}</p>
+            <p className="mt-1 text-ui text-foreground/75">{t("today.uploadSub")}</p>
           </div>
-          <div className="mt-4 flex flex-col gap-1 @2xl:flex-row @2xl:items-center @2xl:gap-4">
+          <div className="mt-3 flex flex-col gap-1 @2xl:flex-row @2xl:items-center @2xl:gap-4">
             <button
               type="button"
               disabled={uploading}
@@ -162,7 +153,7 @@ export function HomeBanner({
                 tapped();
                 onUpload();
               }}
-              className={cn(primaryBtn, "h-[52px] text-[16px] @2xl:w-auto @2xl:min-w-[240px]")}
+              className={cn(primaryBtn, "h-12 text-[16px] @2xl:h-11 @2xl:w-auto @2xl:min-w-[220px] @2xl:text-[15px]")}
             >
               {uploading && <Loader2 className="size-5 animate-spin" />}
               {uploading ? t("today.uploading") : t("today.uploadCta")}
@@ -182,8 +173,8 @@ export function HomeBanner({
   // In the small hours the cat is asleep on its feet.
   const pose = daypart === "late" ? "sleep" : POSE[action.kind];
   return (
-    <section className={cn(shell, "home-hero")} aria-labelledby="today-title">
-      <HeroScene pose={pose} motion="cat-peek" clear />
+    <section className={shell} aria-labelledby="today-title">
+      <HeroScene pose={pose} motion="cat-peek" />
       <Greeting greeting={greeting} />
       <WeekPlan action={action} subjects={summary.subjects} />
     </section>

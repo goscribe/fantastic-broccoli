@@ -81,16 +81,16 @@ function Outline({ course, subject }: { course: PublicCourse; subject: CourseSub
   const family = resolveSubjectFamily(subject?.subjectFamily, `${course.subject} ${course.title}`);
   return (
     <>
-      <header className="subject-band nl-band mt-2 px-5 pb-6 pt-5 sm:px-9 sm:pb-8 sm:pt-7 sm:pr-[250px]" style={familyVars(family) as React.CSSProperties} data-nl-course={course.id} data-total={topics.length}>
+      <header className="subject-band nl-band mt-2 px-[var(--band-pad-x)] py-[var(--band-pad-y)] sm:pr-[220px]" style={familyVars(family) as React.CSSProperties} data-nl-course={course.id} data-total={topics.length}>
         <SubjectArt family={family} eager />
-        <p className="flex min-h-[84px] items-center pr-[96px] text-ui font-bold text-white/90 sm:min-h-0 sm:pr-0">
+        <p className="flex min-h-[56px] items-center pr-[76px] text-ui font-bold text-white/90 sm:min-h-0 sm:pr-0">
           <span>
             <span className="font-extrabold text-white">{course.boardName}</span> · {course.qualification}
             {subject?.level ? ` · ${subject.level}` : course.levels?.length ? ` · ${course.levels.join(" and ")}` : ""}
           </span>
         </p>
-        <h1 className="mt-2 text-[30px] font-black leading-[1.05] sm:text-[40px]">{course.title}</h1>
-        <p className="mt-2.5 max-w-[560px] text-read font-semibold text-white/90">
+        <h1 className="mt-1.5 text-[28px] font-black leading-[1.06] sm:text-[36px]">{course.title}</h1>
+        <p className="mt-2 max-w-[560px] text-ui font-semibold text-white/90 sm:text-read">
           {empty
             ? `${topics.length} topics in ${course.units.length} units. Scribe's notes for this course are on their way; for now, see what each topic covers.`
             : [`${topics.length} topics`, notes ? `${notes.toLocaleString("en-GB")} notes` : null, questions ? `${questions.toLocaleString("en-GB")} practice questions` : null].filter(Boolean).join(" · ")}

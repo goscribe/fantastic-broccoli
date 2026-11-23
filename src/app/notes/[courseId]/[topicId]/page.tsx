@@ -105,15 +105,15 @@ function UnitView({ course, unit }: { course: PublicCourse; unit: PublicUnit }) 
     <div className="mx-auto w-full max-w-[900px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
       <Breadcrumbs crumbs={crumbsFor.unit(course, unit)} />
       <header
-        className="subject-band nl-band mt-4 px-5 pb-6 pt-5 sm:px-9 sm:pb-8 sm:pt-8 sm:pr-[230px]"
+        className="subject-band nl-band mt-4 px-[var(--band-pad-x)] py-[var(--band-pad-y)] sm:pr-[220px]"
         style={familyVars(familyFor(`${course.subject} ${course.title}`)) as React.CSSProperties}
       >
         <SubjectArt family={familyFor(`${course.subject} ${course.title}`)} eager />
-        <p className="nl-rise pr-[92px] text-ui font-extrabold sm:pr-0">{course.title}</p>
-        <h1 className="nl-rise mt-2 text-balance pr-[92px] text-[30px] font-black leading-[1.06] sm:pr-0 sm:text-[42px]" style={stagger(1)}>
+        <p className="nl-rise pr-[76px] text-ui font-extrabold sm:pr-0">{course.title}</p>
+        <h1 className="nl-rise mt-2 text-balance pr-[76px] text-[28px] font-black leading-[1.06] sm:pr-0 sm:text-[36px]" style={stagger(1)}>
           {unitTitle(course, unit)}
         </h1>
-        <p className="nl-rise mt-3 text-read font-semibold text-white/90" style={stagger(2)}>
+        <p className="nl-rise mt-2 text-ui font-semibold text-white/90 sm:text-read" style={stagger(2)}>
           {empty ? "Scribe's notes and practice questions for this unit are on their way. For now, see what each topic covers." : "Notes and exam-style practice questions with worked answers"}
         </p>
         <ul className="nl-meta nl-rise mt-3" style={stagger(3)}>

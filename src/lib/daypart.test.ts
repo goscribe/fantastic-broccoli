@@ -30,3 +30,33 @@ test("the head script agrees with daypartForHour for all 24 hours", () => {
     delete g.document;
   }
 });
+
+test("the head script preloads the scene file tokens.css will pick for that hour and width", () => {
+  const g = globalThis as { Date: unknown; document?: unknown; window?: unknown; matchMedia?: unknown };
+  const RealDate = g.Date;
+  try {
+    for (const [hour, wide, href] of [
+      [9, false, "/design/hero/morning-800.webp"],
+      [14, true, "/design/hero/afternoon-1600.webp"],
+      [22, true, "/design/hero/night-1600.webp"],
+      [3, false, "/design/hero/late-800.webp"],
+    ] as const) {
+      const added: Record<string, string>[] = [];
+      g.Date = class {
+        getHours() {
+          return hour;
+        }
+      };
+      g.matchMedia = () => ({ matches: wide });
+      g.window = { matchMedia: g.matchMedia };
+      g.document = { documentElement: { setAttribute: () => {} }, createElement: () => ({}), head: { appendChild: (l: Record<string, string>) => added.push(l) } };
+      new Function(daypartInitScript)();
+      assert.deepEqual(added, [{ rel: "preload", as: "image", href }]);
+    }
+  } finally {
+    g.Date = RealDate;
+    delete g.document;
+    delete g.window;
+    delete g.matchMedia;
+  }
+});
