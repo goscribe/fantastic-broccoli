@@ -123,7 +123,8 @@ export interface GraderDocumentSummary {
   importStatus: ImportStatus;
   updatedAt: Date;
   reviewCount: number;
-  lastReview: null | { id: string; status: ReviewStatus; mode: ReviewMode; draftNumber: number; createdAt: Date; marksLow: number | null; marksHigh: number | null };
+  /** `marksEstimate` is the predicted total and `marksLow`..`marksHigh` its narrow likely range (servers before the estimate sent the band sums and no estimate). */
+  lastReview: null | { id: string; status: ReviewStatus; mode: ReviewMode; draftNumber: number; createdAt: Date; marksEstimate?: number | null; marksLow: number | null; marksHigh: number | null };
 }
 
 export interface GraderDocument {
@@ -163,8 +164,11 @@ interface CriterionBase {
 }
 
 export interface MarkedCriterion extends CriterionBase {
+  /** The descriptor band the work fits. */
   bandLow: number;
   bandHigh: number;
+  /** The best-estimate mark inside the band; absent from servers before it existed (lib/coursework criterionMark falls back). */
+  mark?: number;
   justification: string;
   toMoveUp: string;
 }
@@ -190,7 +194,8 @@ interface ResultBase {
 export interface MarkedResult extends ResultBase {
   mode: "marked";
   criteria: MarkedCriterion[];
-  overall: { marksLow: number; marksHigh: number; totalMarks: number; gradeLow: string | null; gradeHigh: string | null; summary: string };
+  /** `marksEstimate` is the predicted total; `marksLow`..`marksHigh` the narrow likely range around it (the band sums on servers before the estimate, which send no `marksEstimate`). */
+  overall: { marksEstimate?: number; marksLow: number; marksHigh: number; totalMarks: number; gradeEstimate?: string | null; gradeLow: string | null; gradeHigh: string | null; summary: string };
 }
 
 export interface FeedbackResult extends ResultBase {
@@ -250,6 +255,7 @@ export interface GraderReviewSummary {
   wordCount: number | null;
   createdAt: Date;
   rubric: { id: string; component: string; componentKind: ComponentKind; subject: string; totalMarks: number };
+  marksEstimate?: number | null;
   marksLow: number | null;
   marksHigh: number | null;
 }

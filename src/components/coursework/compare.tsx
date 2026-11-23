@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowDown, ArrowRight, ArrowUp, Minus } from "lucide-react";
 import { Sheet } from "@/components/notes-app/sheet";
 import { courseworkApi, type GradeResult, type Review } from "@/lib/api/coursework";
-import { compareDrafts, comparisonHeadline, formatBand, type Movement } from "@/lib/coursework";
+import { compareDrafts, comparisonHeadline, formatBand, predictionSpoken, type Movement } from "@/lib/coursework";
 import { cn } from "@/lib/utils";
 import { BandNumber, BandTrack } from "./band-track";
 import { useCw } from "./use-cw";
@@ -31,10 +31,13 @@ export function DraftComparisonView({ before, after, fromDraft, toDraft }: { bef
     <div>
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
         <p className="flex items-baseline gap-2.5 text-[34px] font-extrabold leading-none tracking-tight tabular-nums text-foreground">
-          <span className="text-muted-foreground">{formatBand(o.from.marksLow, o.from.marksHigh)}</span>
+          <span className="text-muted-foreground">{o.from.estimate}</span>
           <ArrowRight className="size-6 shrink-0 self-center text-muted-foreground" strokeWidth={2.6} aria-label="to" />
-          <span>{formatBand(o.to.marksLow, o.to.marksHigh)}</span>
-          <span className="text-ui font-bold tracking-normal text-muted-foreground">{t("cw.ofMarks", { n: o.to.totalMarks })}</span>
+          <span>{o.to.estimate}</span>
+          <span className="text-ui font-bold tracking-normal text-muted-foreground">{t("cw.ofMarks", { n: o.to.max })}</span>
+          <span className="sr-only">
+            {predictionSpoken(o.from)}; now {predictionSpoken(o.to)}
+          </span>
         </p>
         <Move move={o.move} />
       </div>
@@ -52,13 +55,13 @@ export function DraftComparisonView({ before, after, fromDraft, toDraft }: { bef
               {r.from && (
                 <>
                   <span className="text-small font-bold text-muted-foreground">{t("cw.cmp.was", { n: fromDraft })}</span>
-                  <BandTrack low={r.from.low} high={r.from.high} max={r.maxMarks} faint />
-                  <span className="text-right text-small font-bold tabular-nums text-muted-foreground">{formatBand(r.from.low, r.from.high)}</span>
+                  <BandTrack low={r.from.low} high={r.from.high} mark={r.from.mark} max={r.maxMarks} faint />
+                  <span className="text-right text-small font-bold tabular-nums text-muted-foreground">{r.from.mark ?? formatBand(r.from.low, r.from.high)}</span>
                 </>
               )}
               <span className="text-small font-extrabold text-foreground">{t("cw.cmp.was", { n: toDraft })}</span>
-              <BandTrack low={r.to.low} high={r.to.high} max={r.maxMarks} />
-              <BandNumber low={r.to.low} high={r.to.high} max={r.maxMarks} className="text-right text-small" />
+              <BandTrack low={r.to.low} high={r.to.high} mark={r.to.mark} max={r.maxMarks} />
+              <BandNumber low={r.to.low} high={r.to.high} mark={r.to.mark} max={r.maxMarks} className="text-right text-small" />
             </div>
           </li>
         ))}

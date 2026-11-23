@@ -30,9 +30,11 @@ export const SAMPLE_RESULT: MarkedResult = {
   disclaimer:
     "This is an estimate from Scribe, not an official mark. Only your teacher and the exam board's examiners award marks, and the rubric used here is Scribe's paraphrase of the published criteria.",
   overall: {
-    marksLow: 15,
-    marksHigh: 19,
+    marksEstimate: 17,
+    marksLow: 16,
+    marksHigh: 18,
     totalMarks: 24,
+    gradeEstimate: "6",
     gradeLow: "5",
     gradeHigh: "6",
     summary: "A carefully run investigation with clear data processing. The conclusion claims more than five temperatures ten degrees apart can show, and the evaluation stays general.",
@@ -62,6 +64,7 @@ export const SAMPLE_RESULT: MarkedResult = {
       maxMarks: 6,
       bandLow: 4,
       bandHigh: 5,
+      mark: 5,
       justification:
         "The research question is focused and names both variables with units. The method could be repeated, and the independent variable is controlled precisely. One controlled variable is described too loosely to be sure it was held constant.",
       evidence: [
@@ -88,6 +91,7 @@ export const SAMPLE_RESULT: MarkedResult = {
       maxMarks: 6,
       bandLow: 5,
       bandHigh: 6,
+      mark: 5,
       justification:
         "Raw and processed data are recorded clearly with units and uncertainties. Means and standard deviations are calculated correctly, and the graph is appropriate with error bars explained.",
       evidence: [
@@ -114,6 +118,7 @@ export const SAMPLE_RESULT: MarkedResult = {
       maxMarks: 6,
       bandLow: 3,
       bandHigh: 4,
+      mark: 3,
       justification:
         "The conclusion answers the research question and follows the trend in the data. It overstates what the data shows about the optimum and refers to published values without giving one.",
       evidence: [
@@ -140,6 +145,7 @@ export const SAMPLE_RESULT: MarkedResult = {
       maxMarks: 6,
       bandLow: 3,
       bandHigh: 4,
+      mark: 4,
       justification:
         "Weaknesses are identified, but in general terms, and their effect on the results is not discussed. One improvement is relevant and would work, but it is not explained.",
       evidence: [

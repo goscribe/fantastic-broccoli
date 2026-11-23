@@ -4,7 +4,7 @@ import Image from "next/image";
 import { SparkleBurst } from "@/components/graphics/sparkle-burst";
 import { Mascot, type MascotPose } from "@/components/rewards/mascot";
 import type { GradeResult, MarkedResult } from "@/lib/api/coursework";
-import { gradeRange, hasMarks, resultMood, ringSegments, type ResultMood } from "@/lib/coursework";
+import { gradeRange, hasMarks, likelyLabel, prediction, predictionSpoken, resultMood, ringSegments, type ResultMood } from "@/lib/coursework";
 import { useCountUp } from "@/lib/use-count-up";
 import { cn } from "@/lib/utils";
 import { useCw } from "./use-cw";
@@ -22,28 +22,19 @@ function Arc({ from, to, className, width }: { from: number; to: number; classNa
   return <circle cx={50} cy={50} r={R} fill="none" strokeWidth={width} strokeLinecap="butt" className={className} strokeDasharray={`${len} ${C - len}`} strokeDashoffset={-from * C} transform="rotate(-90 50 50)" />;
 }
 
-function Range({ low, high, animate }: { low: number; high: number; animate: boolean }) {
-  const a = useCountUp(low, 900);
-  const b = useCountUp(high, 900);
-  const from = animate ? a : low;
-  const to = animate ? b : high;
-  return (
-    <>
-      {from}
-      {low !== high && <>–{to}</>}
-    </>
-  );
+function Count({ value, animate }: { value: number; animate: boolean }) {
+  const a = useCountUp(value, 900);
+  return <>{animate ? a : value}</>;
 }
 
 /**
- * The predicted range in a small ring: one arc per criterion (sized by its
- * marks), each filled as far as its band reaches, solid to the band's low
- * mark and lighter up to its high one. The range itself is written in the
- * middle, so the ring never has to be read to know the result.
+ * The predicted total in a small ring: one arc per criterion (sized by its
+ * marks), each filled to its best-estimate mark. The total itself is written
+ * in the middle, so the ring never has to be read to know the result.
  */
 export function ScoreRing({ result, fresh, className }: { result: MarkedResult; fresh: boolean; className?: string }) {
   const segments = ringSegments(result.criteria);
-  const o = result.overall;
+  const p = prediction(result.overall, result.overall.totalMarks);
   return (
     <span className={cn("relative block size-[104px] shrink-0", className)} aria-hidden>
       <svg viewBox="0 0 100 100" className="size-full">
@@ -52,17 +43,16 @@ export function ScoreRing({ result, fresh, className }: { result: MarkedResult; 
           return (
             <g key={s.letter}>
               <Arc from={s.start} to={s.end} width={9} className="stroke-[var(--muted)]" />
-              <Arc from={s.start} to={s.start + span * s.high} width={9} className="cw-ring-soft" />
-              <Arc from={s.start} to={s.start + span * s.low} width={9} className="cw-ring" />
+              <Arc from={s.start} to={s.start + span * s.mark} width={9} className="cw-ring" />
             </g>
           );
         })}
       </svg>
       <span className="absolute inset-0 flex flex-col items-center justify-center text-foreground">
         <span className={cn("text-[21px] font-extrabold leading-none tracking-tight tabular-nums", fresh && "finish-score !origin-center")}>
-          <Range low={o.marksLow} high={o.marksHigh} animate={fresh} />
+          <Count value={p.estimate} animate={fresh} />
         </span>
-        <span className="mt-1 text-caption font-bold text-muted-foreground">of {o.totalMarks}</span>
+        <span className="mt-1 text-caption font-bold text-muted-foreground">of {p.max}</span>
       </span>
     </span>
   );
@@ -78,7 +68,9 @@ export function ResultSummary({ result, hideMarks, fresh, reading, example }: { 
   const { t } = useCw();
   const marked = hasMarks(result) && !hideMarks ? result : null;
   const mood = marked ? resultMood(marked.overall) : null;
-  const grade = marked ? gradeRange(marked.overall) : null;
+  const p = marked ? prediction(marked.overall, marked.overall.totalMarks) : null;
+  const likely = p ? likelyLabel(p) : null;
+  const grade = marked ? (marked.overall.gradeEstimate ?? gradeRange(marked.overall)) : null;
   const pose: MascotPose = mood ? MOOD_POSE[mood] : "pencil";
   const celebrate = fresh && mood === "strong";
   return (
@@ -89,8 +81,11 @@ export function ResultSummary({ result, hideMarks, fresh, reading, example }: { 
         {marked ? (
           <>
             <p className="text-small font-bold text-muted-foreground">
-              {t("cw.band.predicted")}
-              <span className="sr-only">: {t("cw.band.spoken", { a: marked.overall.marksLow, b: marked.overall.marksHigh, n: marked.overall.totalMarks })}</span>
+              <span aria-hidden>
+                {t("cw.band.predicted")}
+                {likely && <> · <span className="whitespace-nowrap">{likely}</span></>}
+              </span>
+              <span className="sr-only">{predictionSpoken(p!)}</span>
             </p>
             <p className="text-read font-extrabold leading-snug text-foreground">{t(`cw.band.${mood}`)}</p>
             {grade && <p className="text-small font-bold text-muted-foreground">{t("cw.band.grade", { g: grade })}</p>}

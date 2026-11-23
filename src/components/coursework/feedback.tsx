@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import type { CitationsResult, GradeResult, ResultCriterion } from "@/lib/api/coursework";
-import { citationHeadline, citationItems, criterionComment, criterionFor, criterionNext, hasMarks, quoteChanged, type CitationItem } from "@/lib/coursework";
+import { citationHeadline, citationItems, criterionComment, criterionFor, criterionMark, criterionNext, hasMarks, quoteChanged, type CitationItem } from "@/lib/coursework";
 import { cn } from "@/lib/utils";
 import { BandNumber, BandTrack } from "./band-track";
 import { useCw } from "./use-cw";
@@ -135,7 +135,7 @@ export function CriterionCard({
     ref.current?.scrollIntoView({ block: "nearest", behavior: calm ? "auto" : "smooth" });
   }, [targeted, host.open]);
 
-  const band = marked && "bandLow" in c ? { low: c.bandLow, high: c.bandHigh } : null;
+  const band = marked && "bandLow" in c ? { low: c.bandLow, high: c.bandHigh, mark: criterionMark(c) } : null;
   const changed = host.text === null ? [] : c.evidence.map((e) => quoteChanged(host.text!, e.quote));
   const anyChanged = changed.some(Boolean);
   const atTop = band ? band.high >= c.maxMarks : false;
@@ -148,9 +148,9 @@ export function CriterionCard({
         <h3 id={`${id}-h`} className="min-w-0 text-ui font-extrabold leading-snug text-foreground">
           <span className="text-muted-foreground">{c.letter}</span> {c.name}
         </h3>
-        {band && <BandNumber low={band.low} high={band.high} max={c.maxMarks} className="text-ui" />}
+        {band && <BandNumber low={band.low} high={band.high} mark={band.mark} max={c.maxMarks} className="text-ui" />}
       </div>
-      {band && <BandTrack low={band.low} high={band.high} max={c.maxMarks} scale className="mt-2" />}
+      {band && <BandTrack low={band.low} high={band.high} mark={band.mark} max={c.maxMarks} scale className="mt-2" />}
       {anyChanged && <p className="mt-2.5 text-small font-bold text-muted-foreground">{t("cw.changed")}</p>}
       <p className={cn("mt-3 text-ui text-foreground/80", !shown && "line-clamp-2")}>{criterionComment(c)}</p>
 

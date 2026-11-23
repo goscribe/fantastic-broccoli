@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { ArrowUp, Check } from "lucide-react";
 import { COURSEWORK_CHAT_LIMIT_PREFIX, courseworkApi, type ChatTurn, type GradeResult, type RubricDetail, type RubricSummary } from "@/lib/api/coursework";
-import { criterionFor, criterionNext, hasMarks, rubricLine } from "@/lib/coursework";
+import { criterionFor, criterionMark, criterionNext, criterionPoint, hasMarks, rubricLine } from "@/lib/coursework";
 import { cn } from "@/lib/utils";
 import { BandNumber, BandTrack } from "./band-track";
 import { useCw } from "./use-cw";
@@ -104,7 +104,7 @@ export function NextSteps({ reviewId, result, hideMarks, onOpenCriterion }: { re
                 <button type="button" onClick={() => onOpenCriterion(c.letter)} className="-my-2 min-h-11 min-w-0 text-left text-ui font-extrabold text-foreground hover:underline">
                   <span className="text-muted-foreground">{c.letter}</span> {c.name}
                 </button>
-                {marked && "bandLow" in c && <BandNumber low={c.bandLow} high={c.bandHigh} max={c.maxMarks} className="text-small" />}
+                {marked && "bandLow" in c && <BandNumber low={c.bandLow} high={c.bandHigh} mark={criterionMark(c)} max={c.maxMarks} className="text-small" />}
               </div>
               <p className="mt-1 text-ui text-foreground/80">{criterionNext(c)}</p>
             </li>
@@ -161,9 +161,9 @@ export function RubricView({ rubric, result, hideMarks }: { rubric: RubricSummar
                 <h3 id={`cw-rub-${c.letter}`} className="min-w-0 text-ui font-extrabold text-foreground">
                   <span className="text-muted-foreground">{c.letter}</span> {c.name}
                 </h3>
-                {mine ? <BandNumber low={mine.bandLow} high={mine.bandHigh} max={c.maxMarks} className="text-ui" /> : <span className="whitespace-nowrap text-small font-bold text-muted-foreground">{t("cw.rubric.max", { n: c.maxMarks })}</span>}
+                {mine ? <BandNumber low={mine.bandLow} high={mine.bandHigh} mark={criterionMark(mine)} max={c.maxMarks} className="text-ui" /> : <span className="whitespace-nowrap text-small font-bold text-muted-foreground">{t("cw.rubric.max", { n: c.maxMarks })}</span>}
               </div>
-              {mine && <BandTrack low={mine.bandLow} high={mine.bandHigh} max={c.maxMarks} scale className="mt-2" />}
+              {mine && <BandTrack low={mine.bandLow} high={mine.bandHigh} mark={criterionMark(mine)} max={c.maxMarks} scale className="mt-2" />}
               {d && d.bands.length > 0 && (
                 <ul className="mt-3 flex flex-col gap-2.5">
                   {[...d.bands].reverse().map((b) => {
@@ -286,7 +286,7 @@ export function ChatView({ chat, result, hideMarks }: { chat: ChatState & { ask:
   }, [count, chat.busy]);
   const marked = hasMarks(result) && !hideMarks;
   // The weakest criterion is the obvious thing to ask about.
-  const weakest = result ? [...result.criteria].sort((a, b) => ("bandHigh" in a && "bandHigh" in b ? a.bandHigh / a.maxMarks - b.bandHigh / b.maxMarks : 0))[0] : null;
+  const weakest = result ? [...result.criteria].sort((a, b) => ("bandHigh" in a && "bandHigh" in b ? criterionPoint(a) / a.maxMarks - criterionPoint(b) / b.maxMarks : 0))[0] : null;
   const starters = [t("cw.chat.s1"), ...(weakest ? [t(marked ? "cw.chat.s2" : "cw.chat.s2Feedback", { name: weakest.name })] : []), t("cw.chat.s3")];
   return (
     <div className="flex flex-col gap-4">
