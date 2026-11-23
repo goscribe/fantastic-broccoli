@@ -129,7 +129,7 @@ const isRunning = (s: string | undefined) => s === "queued" || s === "grading";
  * while it runs). `flush` saves the document first, so a review always reads
  * what the student sees.
  */
-export function useGrader(input: { documentId: string | null; rubricId: string | null; /** The draft on screen: the one a review is asked for (absent on a server without drafts). */ draftId?: string | null; onRubric: (id: string) => void; flush: () => Promise<void> }): Grader {
+export function useGrader(input: { documentId: string | null; rubricId: string | null; /** The draft on screen: the one a review is asked for (absent on a server without drafts). */ draftId?: string | null; /** The student's own word count, when they gave one: the review checks the limit with it. */ declaredWords?: number | null; onRubric: (id: string) => void; flush: () => Promise<void> }): Grader {
   const { documentId, rubricId, onRubric, flush } = input;
   const draftId = input.draftId ?? null;
   const [phase, setPhase] = useState<GraderPhase>("loading");
@@ -144,9 +144,10 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
   const [hideMarks, setHideMarks] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const [mode, setMode] = usePreferredMode();
-  const live = useRef({ flush, onRubric });
+  const declaredWords = input.declaredWords ?? null;
+  const live = useRef({ flush, onRubric, declaredWords });
   useEffect(() => {
-    live.current = { flush, onRubric };
+    live.current = { flush, onRubric, declaredWords };
   });
 
   useEffect(() => {
@@ -212,7 +213,7 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
     setRequestError(null);
     try {
       await live.current.flush();
-      const out = await courseworkApi.requestReview({ documentId, ...(draftId ? { draftId } : {}), rubricId: rubricId ?? undefined, mode });
+      const out = await courseworkApi.requestReview({ documentId, ...(draftId ? { draftId } : {}), rubricId: rubricId ?? undefined, mode, ...(live.current.declaredWords ? { declaredWords: live.current.declaredWords } : {}) });
       setFresh(false);
       setHideMarks(false);
       setStatus((s) => (s ? { ...s, usedToday: s.usedToday + 1, remainingToday: out.remainingToday, allowed: out.remainingToday === null || out.remainingToday > 0, reason: out.remainingToday === 0 ? "daily_limit" : s.reason } : s));

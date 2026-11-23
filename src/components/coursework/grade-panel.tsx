@@ -142,12 +142,12 @@ export function AllowanceGate({ status, ultra, wide, limitHit, children }: { sta
   return <>{children(copy.line)}</>;
 }
 
-export function ReviewAction({ grader, words, wide, onRequested }: { grader: Grader; /** Words in the document now. */ words: number; /** The button fills the row (phones, the rail). */ wide?: boolean; onRequested?: () => void }) {
+export function ReviewAction({ grader, words, wordInfo, wide, onRequested }: { grader: Grader; /** Words in the document now (all of them: the minimum for a review). */ words: number; /** The count against the limit, by the component's rules, with "What's counted?" (replaces the plain note). */ wordInfo?: React.ReactNode; /** The button fills the row (phones, the rail). */ wide?: boolean; onRequested?: () => void }) {
   const { t } = useCw();
   const online = useOnline();
   const { status, rubric, rows } = grader;
   if (!status) return null;
-  const ws = wordStatus(words, rubric?.wordLimit ?? null);
+  const ws = wordStatus(words, wordInfo ? null : (rubric?.wordLimit ?? null));
   const next = rows.length + 1;
   const blocked = ws.state === "empty" || ws.state === "short" || !online || !rubric;
   return (
@@ -169,7 +169,8 @@ export function ReviewAction({ grader, words, wide, onRequested }: { grader: Gra
             <p className={cn("text-small font-bold text-muted-foreground", wide && "text-center")}>{line}</p>
           </div>
           {!online && <p className="mt-2 text-small font-semibold text-foreground" role="status">{t("cw.err.offline")}</p>}
-          {online && ws.note && <p className="mt-2 text-small font-semibold text-foreground" role="status">{ws.note}</p>}
+          {online && ws.note && !(wordInfo && ws.state !== "short") && <p className="mt-2 text-small font-semibold text-foreground" role="status">{ws.note}</p>}
+          {wordInfo && ws.state !== "empty" && <div className="mt-2">{wordInfo}</div>}
           {grader.requestError !== null && grader.requestError !== "limit" && (
             <p className="mt-2 text-small font-semibold text-rose-700" role="alert">
               {grader.requestError || t("cw.err.request")}
@@ -296,6 +297,8 @@ export interface GradePanelProps {
   /** The document as it is now (for word counts and "edited since this review"). */
   text: string;
   words: number;
+  /** The count against the limit with "What's counted?", shown with the review button. */
+  wordInfo?: React.ReactNode;
   view: PanelView;
   onView: (view: PanelView) => void;
   /** Shows a quoted passage in the document. */
@@ -321,7 +324,7 @@ const same = (a: string, b: string) => a.replace(/\s+/g, " ").trim() === b.repla
  * coursework page and beside any editor that opens it (a student's notes:
  * "Grade" in the toolbar).
  */
-export function GradePanel({ grader, text, words, view, onView, onShowQuote, places, open, onGuide, guideFocus, chat, phone }: GradePanelProps) {
+export function GradePanel({ grader, text, words, wordInfo, view, onView, onShowQuote, places, open, onGuide, guideFocus, chat, phone }: GradePanelProps) {
   const { t } = useCw();
   const { review, rubric } = grader;
 
@@ -402,7 +405,7 @@ export function GradePanel({ grader, text, words, view, onView, onShowQuote, pla
             <p className="mt-1 text-ui text-foreground/80">{review.error && !/did not count/i.test(review.error) ? `${review.error} ` : ""}{t("cw.err.failed")}</p>
           </div>
         )}
-        <ReviewAction grader={grader} words={words} wide={phone} />
+        <ReviewAction grader={grader} words={words} wordInfo={wordInfo} wide={phone} />
         {rubricNote}
         <p className="text-small text-muted-foreground">{t("cw.start.promise")}</p>
       </div>
@@ -412,7 +415,7 @@ export function GradePanel({ grader, text, words, view, onView, onShowQuote, pla
   const edited = review.snapshotText !== null && !same(review.snapshotText, text);
   const isLatest = grader.rows[grader.rows.length - 1]?.id === review.id;
   const marked = review.result.mode === "marked";
-  const action = <ReviewAction grader={grader} words={words} wide={phone} />;
+  const action = <ReviewAction grader={grader} words={words} wordInfo={wordInfo} wide={phone} />;
 
   return (
     <div className="flex flex-col gap-7">

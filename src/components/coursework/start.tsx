@@ -3,21 +3,30 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { ChevronRight, FileText } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { SubjectTile } from "@/components/learn/subject-tile";
 import { Button } from "@/components/ui/button";
 import { PageHeader, PageShell } from "@/components/ui/page-header";
-import { UPLOAD_ACCEPT, courseworkApi, importFile, isCourseworkLimit, isMissingEndpoint, type GraderStatus, type RubricSummary } from "@/lib/api/coursework";
-import { componentTitle, countWords, familyText, rubricLine, wordStatus } from "@/lib/coursework";
+import { UPLOAD_ACCEPT, courseworkApi, importFile, isCourseworkLimit, isMissingEndpoint, type DraftDetail, type GraderStatus, type RubricSummary } from "@/lib/api/coursework";
+import { componentTitle, countWords, familyText, rubricLine } from "@/lib/coursework";
+import { countWork, type WordBreakdown } from "@/lib/coursework-word-count";
 import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
 import { cn } from "@/lib/utils";
+import { DraftPreview, pagesLabel } from "./draft-preview";
 import { AllowanceGate, ComponentPicker, ModeChoice, loadGuide, rubricSub } from "./grade-panel";
 import { useCw } from "./use-cw";
 import { loadRubrics, ultraOffer, useOnline, usePreferredMode } from "./use-grader";
+import { WordInfo, draftBreakdown, lineFor, rulesOf, saveDeclaredWords } from "./word-count";
 import { importErrorKey } from "./workspace";
 import "@/app/coursework/coursework.css";
 
-type Upload = { name: string; state: "reading" } | { name: string; state: "ready"; documentId: string; words: number } | { name: string; state: "failed"; message: string };
+type Upload =
+  | { name: string; state: "reading" }
+  | { name: string; state: "ready"; documentId: string; words: number; /** The file as the server read it (text, pages, a Word file's HTML): what the count and the preview are made from. */ detail: DraftDetail | null; /** A signed link to the original, for the preview. */ url: string | null }
+  | { name: string; state: "failed"; message: string };
+
+/** Every word counts (a server that only gave a total). */
+const plainCount = (words: number): WordBreakdown => ({ total: words, counted: words, notCounted: 0, excluded: {}, method: "text", estimate: true });
 
 /**
  * Starting a review of finished (or nearly finished) work: what it is, how to
@@ -41,6 +50,8 @@ export function CourseworkStart() {
   const [error, setError] = useState<string | null>(null);
   const [limitHit, setLimitHit] = useState(false);
   const [guideMinutes, setGuideMinutes] = useState<{ id: string; minutes: number } | null>(null);
+  /** "My word count is ___": used for the limit instead of Scribe's count. */
+  const [declared, setDeclared] = useState<number | null>(null);
   const [attempt, setAttempt] = useState(0);
   const wanted = params.get("rubric");
 
@@ -85,15 +96,30 @@ export function CourseworkStart() {
     try {
       const prior = upload?.state === "ready" ? upload.documentId : undefined;
       const out = await importFile(file, { documentId: prior, rubricId: rubric?.id });
-      setUpload({ name: file.name, state: "ready", documentId: out.documentId, words: out.wordCount });
+      // The file as read (for the count by the component's rules, and the preview); the review does not wait for these.
+      const detail = out.draftId ? await courseworkApi.draft(out.draftId).catch(() => null) : null;
+      setUpload({ name: file.name, state: "ready", documentId: out.documentId, words: out.wordCount, detail, url: null });
       setPasted("");
+      setDeclared(null);
+      if (out.draftId && detail?.kind === "file" && (detail.format === "pdf" || detail.format === "docx")) {
+        courseworkApi
+          .fileUrl(out.draftId)
+          .then((link) => setUpload((u) => (u?.state === "ready" && u.documentId === out.documentId ? { ...u, url: link.url } : u)))
+          .catch(() => {});
+      }
     } catch (err) {
       setUpload({ name: file.name, state: "failed", message: t(importErrorKey(err)) });
     }
   };
 
-  const words = upload?.state === "ready" ? upload.words : countWords(pasted);
-  const ws = wordStatus(words, rubric?.wordLimit ?? null);
+  // Counted the way the board counts for this component: a separate pass over the work, nothing is removed from it.
+  const rules = useMemo(() => rulesOf(rubric), [rubric]);
+  const breakdown = useMemo<WordBreakdown>(() => {
+    if (upload?.state === "ready") return upload.detail ? draftBreakdown(upload.detail, rules) : plainCount(upload.words);
+    return { ...countWork({ text: pasted }, rules), estimate: false };
+  }, [upload, pasted, rules]);
+  const words = breakdown.total;
+  const ws = lineFor(breakdown, rules, declared);
   const ready = !!rubric && (ws.state === "ok" || ws.state === "over") && upload?.state !== "reading" && online;
 
   const submit = async (review: boolean) => {
@@ -106,7 +132,9 @@ export function CourseworkStart() {
         const title = pasted.trim().split(/\n/)[0]?.trim().slice(0, 80) || componentTitle(rubric);
         documentId = (await courseworkApi.createDocument({ title: review ? title : componentTitle(rubric), rubricId: rubric.id, text: pasted })).documentId;
       }
-      if (review) await courseworkApi.requestReview({ documentId, rubricId: rubric.id, mode });
+      const mine = rules.kind === "words" && declared ? declared : null;
+      saveDeclaredWords(documentId, mine);
+      if (review) await courseworkApi.requestReview({ documentId, rubricId: rubric.id, mode, ...(mine ? { declaredWords: mine } : {}) });
       router.push(`/coursework/${encodeURIComponent(documentId)}`);
     } catch (err) {
       if (isCourseworkLimit(err)) setLimitHit(true);
@@ -197,18 +225,38 @@ export function CourseworkStart() {
                 <h2 id="cw-work" className="page-h2">
                   {t("cw.start.work")}
                 </h2>
-                {words > 0 && <span className="text-small font-bold tabular-nums text-muted-foreground">{ws.count}</span>}
+                {words > 0 && !upload && <span className="text-small font-bold tabular-nums text-muted-foreground">{ws.count}</span>}
               </div>
 
               {upload && upload.state !== "failed" ? (
-                <div className="mt-3 flex min-h-[72px] items-center gap-3 rounded-[var(--r-card)] border border-border px-4 py-3" role="status">
-                  <FileText className="size-6 shrink-0 text-muted-foreground" aria-hidden />
+                <div className="mt-3 flex min-h-[96px] items-center gap-3.5 rounded-[var(--r-card)] border border-border px-4 py-3" role="status">
+                  {upload.state === "ready" ? (
+                    <DraftPreview
+                      key={upload.documentId}
+                      name={upload.name}
+                      format={upload.detail?.kind === "file" ? (upload.detail.format === "pdf" ? "pdf" : upload.detail.format === "docx" ? "docx" : upload.detail.format === "txt" ? "text" : "other") : "other"}
+                      url={upload.url}
+                      html={upload.detail?.kind === "file" ? upload.detail.contentHtml : null}
+                      text={upload.detail?.text}
+                      width={52}
+                      onOpen={() => router.push(`/coursework/${encodeURIComponent(upload.documentId)}`)}
+                    />
+                  ) : (
+                    <span className="cw-thumb block h-[74px] w-[52px] shrink-0 animate-pulse rounded-[6px] bg-muted" aria-hidden />
+                  )}
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-ui font-extrabold text-foreground">{upload.name}</p>
-                    <p className="text-small text-muted-foreground">{upload.state === "reading" ? t("cw.start.reading", { name: "" }).replace(/\s+…/, "…") : ws.count}</p>
+                    {upload.state === "reading" ? (
+                      <p className="text-small text-muted-foreground">{t("cw.start.reading", { name: "" }).replace(/\s+…/, "…")}</p>
+                    ) : (
+                      <>
+                        <p className="text-small font-bold tabular-nums text-foreground">{ws.count}</p>
+                        {(ws.detail || upload.detail?.pageCount) && <p className="text-small text-muted-foreground">{[pagesLabel(t, upload.detail?.pageCount), ws.detail].filter(Boolean).join(" · ")}</p>}
+                      </>
+                    )}
                   </div>
                   {upload.state === "ready" && (
-                    <button type="button" onClick={() => setUpload(null)} className="min-h-11 shrink-0 px-1 text-small font-extrabold text-muted-foreground hover:text-foreground">
+                    <button type="button" onClick={() => { setUpload(null); setDeclared(null); }} className="min-h-11 shrink-0 self-start px-1 text-small font-extrabold text-muted-foreground hover:text-foreground">
                       {t("cw.start.remove")}
                     </button>
                   )}
@@ -244,10 +292,8 @@ export function CourseworkStart() {
                   <span className="font-extrabold">{upload.name}:</span> {upload.message}
                 </p>
               )}
-              {ws.note && (
-                <p className="mt-2 text-small font-semibold text-foreground" role="status">
-                  {ws.note}
-                </p>
+              {words > 0 && upload?.state !== "reading" && (
+                <WordInfo className="mt-2" status={ws} breakdown={breakdown} rules={rules} declared={declared} onDeclared={setDeclared} uncertain={rubric.status === "draft" || rules.fallback} showCount={false} showDetail={!upload} />
               )}
             </section>
 

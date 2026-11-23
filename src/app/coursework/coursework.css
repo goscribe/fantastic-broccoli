@@ -47,6 +47,38 @@
   .cw-pdf-mark--active { background: color-mix(in srgb, var(--tile-b, var(--hl)) 70%, transparent); border-bottom-style: solid; }
   .cw-pdf-mark:focus-visible { outline: 2px solid var(--tile-a, var(--foreground)); outline-offset: 1px; }
 
+  /* A Word draft: the pages docx-preview lays out, on the same quiet desk, with the quoted passages marked in the text. */
+  .cw-docx-host .cw-docx-wrapper { background: transparent !important; padding: 0 !important; display: flex; flex-flow: column; align-items: center; gap: 16px; }
+  .cw-docx-host .cw-docx-wrapper > section.cw-docx { background: #fff; box-shadow: 0 1px 2px rgb(22 22 26 / 0.08), 0 0 0 1px var(--border) !important; margin: 0 !important; max-width: none; color: #16161a; }
+  /* The server's HTML of the file, when the original cannot be drawn: one page-shaped column. */
+  .cw-docx-plain { width: 794px; padding: 72px 80px; font: 15px/1.6 Georgia, "Times New Roman", serif; color: #16161a; overflow-wrap: anywhere; }
+  .cw-docx-plain h1 { font-size: 24px; font-weight: 700; margin: 22px 0 10px; }
+  .cw-docx-plain h2 { font-size: 19px; font-weight: 700; margin: 18px 0 8px; }
+  .cw-docx-plain h3, .cw-docx-plain h4 { font-size: 16px; font-weight: 700; margin: 14px 0 6px; }
+  .cw-docx-plain p { margin: 0 0 10px; }
+  .cw-docx-plain ul, .cw-docx-plain ol { margin: 0 0 10px; padding-left: 26px; list-style: revert; }
+  .cw-docx-plain table { border-collapse: collapse; margin: 0 0 14px; width: 100%; font-size: 13px; }
+  .cw-docx-plain td, .cw-docx-plain th { border: 1px solid #b9b9c0; padding: 4px 6px; vertical-align: top; }
+  .cw-docx-plain img { max-width: 100%; height: auto; }
+  .cw-docx-plain a { color: inherit; text-decoration: underline; }
+  mark.cw-docx-mark {
+    background: color-mix(in srgb, var(--tile-b, var(--hl)) 38%, transparent);
+    border-bottom: 2px dotted color-mix(in srgb, var(--tile-a, var(--foreground)) 75%, transparent);
+    color: inherit;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  mark.cw-docx-mark:hover { background: color-mix(in srgb, var(--tile-b, var(--hl)) 55%, transparent); }
+  mark.cw-docx-mark--active { background: color-mix(in srgb, var(--tile-b, var(--hl)) 70%, transparent); border-bottom-style: solid; }
+  mark.cw-docx-mark:focus-visible { outline: 2px solid var(--tile-a, var(--foreground)); outline-offset: 1px; }
+
+  /* The page-shaped thumbnail of a piece of work (the start screen's "Your work" card). */
+  .cw-thumb { box-shadow: 0 1px 2px rgb(22 22 26 / 0.10), 0 0 0 1px var(--border); }
+  button.cw-thumb:hover { box-shadow: 0 2px 6px rgb(22 22 26 / 0.16), 0 0 0 1px var(--border-strong); }
+  button.cw-thumb:focus-visible { outline: 2px solid var(--foreground); outline-offset: 2px; }
+  .cw-thumb-page > section { margin: 0 !important; box-shadow: none !important; background: #fff; }
+  .cw-thumb-page .cw-docx-plain { padding: 72px 80px; }
+
   /* Focus mode: the document alone, full screen. */
   .cw-focus { position: fixed; inset: 0; z-index: 55; overflow-y: auto; background: #fff; padding: 0 max(16px, calc((100vw - 760px) / 2)) 48px; }
 

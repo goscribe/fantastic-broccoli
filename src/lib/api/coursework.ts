@@ -24,6 +24,7 @@ import { rpc } from "./study-session";
 
 export type {
   CitationsResult,
+  WordCountRules,
   ComponentKind,
   Evidence as ResultEvidence,
   FeedbackCriterion,
@@ -89,8 +90,10 @@ export type FileDraft = DraftSummary & {
   kind: "file";
   /** The text found in the file. */
   text: string;
-  /** Character ranges of each PDF page inside `text`; null when not a PDF or the text came from OCR. */
-  pages: Array<{ page: number; start: number; end: number }> | null;
+  /** Character ranges of each PDF page inside `text` (and the ranges its layout shows to be table rows); null when not a PDF or the text came from OCR. */
+  pages: Array<{ page: number; start: number; end: number; tables?: Array<[number, number]> }> | null;
+  /** A Word file's HTML as the server converted it: structure for the word count, and the fallback preview. */
+  contentHtml?: string | null;
 };
 export type DraftDetail = TextDraft | FileDraft;
 
@@ -173,7 +176,7 @@ export const courseworkApi = {
   document: (documentId: string) => graderApi.document(documentId) as Promise<CourseworkDocument>,
   review: (reviewId: string) => graderApi.review(reviewId) as Promise<Review>,
   reviews: (input: { documentId?: string; rubricId?: string } = {}) => graderApi.reviews(input) as Promise<ReviewRow[]>,
-  requestReview: (input: { documentId: string; draftId?: string; rubricId?: string; mode: ReviewMode }) => graderApi.requestReview(input as Parameters<typeof graderApi.requestReview>[0]),
+  requestReview: (input: { documentId: string; draftId?: string; rubricId?: string; mode: ReviewMode; declaredWords?: number }) => graderApi.requestReview(input as Parameters<typeof graderApi.requestReview>[0]),
   draft: (draftId: string) => rpc<DraftDetail>("coursework.draft", "query", { draftId }),
   /** A short-lived (10 min) signed URL of the original file: for the PDF viewer and "Download the original". */
   fileUrl: (draftId: string) => rpc<{ url: string; expiresAt: Date | string }>("coursework.fileUrl", "query", { draftId }),
