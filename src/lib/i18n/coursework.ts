@@ -7,6 +7,8 @@ import { registerTranslations } from "@/lib/i18n";
 
 const english = {
   "cw.nav": "Coursework",
+  "cw.nav.lockedSr": "(upgrade to use)",
+  "cw.nav.lockedHint": "Coursework reviews come with a plan",
   "cw.title": "Coursework",
   "cw.subtitle": "Feedback on your IA, EE and TOK work against the criteria. Scribe never writes it for you.",
   "cw.back": "Coursework",

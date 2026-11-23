@@ -9,6 +9,7 @@ import { PublicNoteBody } from "@/components/notes-public/public-note-body";
 import { courseworkApi, type CourseworkGuide, type GradeResult, type GraderStatus, type GuideResponse, type ReviewMode, type RubricSummary } from "@/lib/api/coursework";
 import type { TopicNoteContent } from "@/lib/api/notes";
 import { allowanceCopy, componentTitle, familyText, groupRubrics, guideYear, headingList, newestVersions, rubricLine, versionName, wordStatus, type UltraOffer } from "@/lib/coursework";
+import { COURSEWORK_UPGRADE_HREF } from "@/lib/coursework-access";
 import { track } from "@/lib/funnel";
 import { cn } from "@/lib/utils";
 import { Feedback, type FeedbackHost } from "./feedback";
@@ -228,7 +229,7 @@ export function AllowanceGate({ status, ultra, wide, limitHit, children }: { sta
     return (
       <div>
         <p className="text-ui text-foreground/80">{t("cw.locked.panel")}</p>
-        <Link href="/pricing" onClick={() => track("wall.shown", { reason: "grader", variant: "locked" })} className={buttonClass({ size: "md", className: cn("mt-3", wide && "w-full") })}>
+        <Link href={COURSEWORK_UPGRADE_HREF} onClick={() => track("wall.shown", { reason: "grader", variant: "locked" })} className={buttonClass({ size: "md", className: cn("mt-3", wide && "w-full") })}>
           {t("cw.locked.cta")}
         </Link>
       </div>
@@ -241,7 +242,7 @@ export function AllowanceGate({ status, ultra, wide, limitHit, children }: { sta
         <p className="mt-1 text-ui text-foreground/80">{copy.resets ?? t("cw.limit.tomorrow")}</p>
         {copy.upsell && (
           <div className={cn("mt-4 flex flex-wrap items-center gap-x-4 gap-y-2", wide && "flex-col items-stretch")}>
-            <Link href="/pricing" onClick={() => track("wall.shown", { reason: "grader", variant: "limit" })} className={buttonClass({ size: "lg", className: wide ? "w-full" : undefined })}>
+            <Link href={COURSEWORK_UPGRADE_HREF} onClick={() => track("wall.shown", { reason: "grader", variant: "limit" })} className={buttonClass({ size: "lg", className: wide ? "w-full" : undefined })}>
               {t("cw.limit.seeUltra")}
             </Link>
             <p className={cn("text-small font-bold text-muted-foreground", wide && "text-center")}>{copy.upsell}</p>
