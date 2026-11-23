@@ -193,12 +193,22 @@ function markScheme(raw: unknown): MarkScheme | undefined {
     })
     .filter((p) => p.requirements);
   if (points.length === 0) return undefined;
+  const levels = arr(scheme.levels)
+    .map((l) => obj(l))
+    .filter((l) => str(l.descriptor))
+    .map((l) => ({
+      level: typeof l.level === "number" ? l.level : 0,
+      minMarks: typeof l.minMarks === "number" ? l.minMarks : 0,
+      maxMarks: typeof l.maxMarks === "number" ? l.maxMarks : 0,
+      descriptor: str(l.descriptor),
+    }));
   return {
     points,
     totalPoints:
       typeof scheme.totalPoints === "number"
         ? scheme.totalPoints
         : points.reduce((s, p) => s + p.point, 0),
+    ...(levels.length ? { levels } : {}),
   };
 }
 
@@ -207,7 +217,8 @@ function worksheetPart(raw: Raw): WorksheetPart {
   return {
     label: str(raw.label),
     prompt: str(raw.prompt ?? raw.question),
-    type: type === "numeric" || type === "true_false" ? type : "text",
+    type: type === "numeric" || type === "true_false" || type === "essay" ? type : "text",
+    ...(str(raw.commandTerm) ? { commandTerm: str(raw.commandTerm) } : {}),
     answer: typeof raw.answer === "string" ? raw.answer : undefined,
     userAnswer: typeof raw.userAnswer === "string" ? raw.userAnswer : undefined,
     marks: typeof raw.marks === "number" ? raw.marks : undefined,
@@ -231,6 +242,7 @@ function normalizeWorksheet(raw: Raw): WorksheetContent {
   });
   return {
     type: "worksheet",
+    ...(raw.format === "long_answer" ? { format: "long_answer" as const } : {}),
     source: raw.source as WorksheetContent["source"],
     steps,
   };
