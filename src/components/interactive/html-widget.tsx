@@ -9,6 +9,7 @@ import { MathText } from "@/components/ui/markdown-text";
 import { BrokenBlock } from "@/components/content/content-repair";
 import katex from "katex";
 import { prerenderFigureMath, type RenderTex } from "@/lib/figure-math";
+import { figureDarkVars } from "@/lib/figure-tokens";
 
 // Maths in the markup is typeset here, before the iframe exists, so it never
 // waits on (or depends on) the in-frame KaTeX script.
@@ -247,30 +248,6 @@ window.addEventListener("load",function(){
   );
 }
 
-// Figure style system: the palette study-note figures are drawn in. Figures
-// carry the light values as fallbacks (fill="var(--fig-blue-fill,#D9E8FF)"),
-// so only the dark theme has to override them here. Mirror of FIGURE_TOKENS
-// in the server's src/lib/notes/figure-style.ts; change both together.
-const FIGURE_DARK_TOKENS: Record<string, string> = {
-  ink: "#F2F1F5",
-  muted: "#AAA6B8",
-  line: "#C9C5D6",
-  guide: "#55516A",
-  paper: "#18171E",
-  "blue-fill": "#1C3256",
-  blue: "#74A7F7",
-  "red-fill": "#4A2420",
-  red: "#F27F73",
-  "green-fill": "#173D2B",
-  green: "#4FC88E",
-  "amber-fill": "#44330F",
-  amber: "#E3A93C",
-  "violet-fill": "#2C2552",
-  violet: "#A394EC",
-  "neutral-fill": "#2A2836",
-  neutral: "#9A95A8",
-};
-
 // Figures are typeset in the app's font. The frame is sandboxed (opaque
 // origin), so it cannot reuse the page's self-hosted font files and loads
 // the same family from Google Fonts instead, like its other CDN assets.
@@ -284,9 +261,7 @@ function themeStyle(): string {
     (t) => `--${t}:${root.getPropertyValue(`--${t}`).trim()};`,
   ).join("");
   const figureVars = document.documentElement.classList.contains("dark")
-    ? Object.entries(FIGURE_DARK_TOKENS)
-        .map(([name, value]) => `--fig-${name}:${value};`)
-        .join("")
+    ? figureDarkVars()
     : "";
   return `${FIGURE_FONT_LINK}<style>:root{${vars}${figureVars}}
 body{margin:0;padding:14px 16px;font-family:ui-sans-serif,system-ui,sans-serif;color:var(--foreground);background:var(--card);}

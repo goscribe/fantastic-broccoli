@@ -15,42 +15,4 @@
   }
   .own-note-paper-head { position: absolute; left: 0; right: 0; top: 0; height: 36px; background: var(--muted, #f4f4f6); border-bottom: 1px solid var(--border, #e8e8ec); }
   a.own-note-paper:hover { box-shadow: inset 0 0 0 1px var(--border-strong, #d5d5dc); }
-
-  /*
-   * A /diagram sketch (sketch-figure.tsx): neutral ink, and one hue per curve
-   * with a pale fill of the same hue for a shaded region (the figure style's
-   * five hues plus neutral).
-   */
-  .sk {
-    --sk-line: #45415a;
-    --sk-guide: #b4afc6;
-    --sk-blue: #2f6fde;
-    --sk-blue-fill: #d9e8ff;
-    --sk-red: #d4483b;
-    --sk-red-fill: #ffddd8;
-    --sk-green: #178a55;
-    --sk-green-fill: #d5f2e0;
-    --sk-amber: #b26e00;
-    --sk-amber-fill: #ffebc2;
-    --sk-violet: #6952e0;
-    --sk-violet-fill: #e7e1fb;
-    --sk-neutral: #6b6780;
-    --sk-neutral-fill: #eeecf4;
-  }
-  .dark .sk {
-    --sk-line: #c9c5d6;
-    --sk-guide: #55516a;
-    --sk-blue: #74a7f7;
-    --sk-blue-fill: #1c3256;
-    --sk-red: #f27f73;
-    --sk-red-fill: #4a2420;
-    --sk-green: #4fc88e;
-    --sk-green-fill: #173d2b;
-    --sk-amber: #e3a93c;
-    --sk-amber-fill: #44330f;
-    --sk-violet: #a394ec;
-    --sk-violet-fill: #2c2552;
-    --sk-neutral: #9a95a8;
-    --sk-neutral-fill: #2a2836;
-  }
 }

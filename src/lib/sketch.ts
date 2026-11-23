@@ -129,22 +129,59 @@ export class LabelPlacer {
     this.boxes.push(b);
   }
 
-  place(candidates: Box[]): Box {
+  private score(c: Box) {
+    const out =
+      Math.max(0, this.frame.x - c.x) + Math.max(0, c.x + c.w - (this.frame.x + this.frame.w)) + Math.max(0, this.frame.y - c.y) + Math.max(0, c.y + c.h - (this.frame.y + this.frame.h));
+    const covered = this.boxes.reduce((n, b) => n + overlap(c, b), 0);
+    const crossed = this.ink.reduce((n, [x, y]) => n + (x > c.x + 1 && x < c.x + c.w - 1 && y > c.y + 1 && y < c.y + c.h - 1 ? 1 : 0), 0);
+    // A line through a label is the worst outcome short of leaving the frame.
+    return { score: out * 400 + covered * 20 + crossed * 1000, clear: out === 0 && covered === 0 && crossed === 0 };
+  }
+
+  /**
+   * The best of the candidates. When every one of them has a line through it
+   * (a crowded corner), the nearest clear spot around `anchor` instead, and
+   * `far` says so (the caller draws a leader back to the anchor).
+   */
+  place(candidates: Box[], anchor?: Pt): Box & { far: boolean } {
     let best = candidates[0];
     let bestScore = Infinity;
+    let bestClear = false;
     candidates.forEach((c, i) => {
-      const out =
-        Math.max(0, this.frame.x - c.x) + Math.max(0, c.x + c.w - (this.frame.x + this.frame.w)) + Math.max(0, this.frame.y - c.y) + Math.max(0, c.y + c.h - (this.frame.y + this.frame.h));
-      const covered = this.boxes.reduce((n, b) => n + overlap(c, b), 0);
-      const crossed = this.ink.reduce((n, [x, y]) => n + (x > c.x + 1 && x < c.x + c.w - 1 && y > c.y + 1 && y < c.y + c.h - 1 ? 1 : 0), 0);
-      const score = out * 400 + covered * 20 + crossed * 40 + i * 3;
-      if (score < bestScore) {
-        bestScore = score;
+      const { score, clear } = this.score(c);
+      if (score + i * 3 < bestScore) {
+        bestScore = score + i * 3;
         best = c;
+        bestClear = clear;
       }
     });
+    let far = false;
+    if (!bestClear && anchor) {
+      const { w, h } = best;
+      const spots: Box[] = [];
+      for (let dy = -160; dy <= 160; dy += 6) for (let dx = -240; dx <= 240; dx += 6) spots.push({ x: anchor[0] + dx - w / 2, y: anchor[1] + dy - h / 2, w, h });
+      spots.sort((a, b) => Math.hypot(a.x + w / 2 - anchor[0], a.y + h / 2 - anchor[1]) - Math.hypot(b.x + w / 2 - anchor[0], b.y + h / 2 - anchor[1]));
+      // Clear, and its leader back to the anchor passes through no other label.
+      const leaderClear = (c: Box) => {
+        const cx = c.x + c.w / 2;
+        const cy = c.y + c.h / 2;
+        for (let t = 0; t <= 1; t += 0.05) {
+          const x = anchor[0] + (cx - anchor[0]) * t;
+          const y = anchor[1] + (cy - anchor[1]) * t;
+          const inside = (b: Box, px: number, py: number) => px > b.x && px < b.x + b.w && py > b.y && py < b.y + b.h;
+          // (The dot the label names is not in the way of its own leader.)
+          if (this.boxes.some((b) => inside(b, x, y) && !inside(b, anchor[0], anchor[1]))) return false;
+        }
+        return true;
+      };
+      const clear = spots.find((c) => this.score(c).clear && leaderClear(c));
+      if (clear) {
+        best = clear;
+        far = true;
+      }
+    }
     this.boxes.push(best);
-    return best;
+    return { ...best, far };
   }
 }
 

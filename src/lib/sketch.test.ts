@@ -1,5 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { crossedLabels, sketchLayout } from "./sketch-layout";
+import { SKETCH_FIXTURES } from "./sketch-fixtures";
 import { LabelPlacer, around, regionBetween, sketchDrawable, sketchSamples, sketchYAt, spread, textWidth } from "./sketch";
 
 test("a sketch curve is sampled as the server samples it", () => {
@@ -37,4 +39,12 @@ test("axis marks are spread so none overlaps the next", () => {
   const [a, b] = spread([{ at: 100, size: 20 }, { at: 104, size: 20 }], 0, 400);
   assert.ok(b - a >= 24);
   assert.ok(sketchDrawable({ xLabel: "", yLabel: "", axes: false, bounds: { left: 0, right: 10, bottom: 0, top: 10 }, curves: [], points: [], marks: [], arrows: [{ from: { x: 1, y: 1 }, to: { x: 2, y: 2 }, label: null, double: false }], regions: [], texts: [] }));
+});
+
+test("no drawn line runs through a label in real sketches", () => {
+  for (const { name, sketch } of SKETCH_FIXTURES) {
+    const d = sketchLayout(sketch);
+    assert.deepEqual(crossedLabels(d), [], name);
+    assert.ok(d.labels.length >= 5, name);
+  }
 });
