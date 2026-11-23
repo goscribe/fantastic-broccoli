@@ -2,6 +2,7 @@
 
 import { Mascot, type MascotPose } from "@/components/rewards/mascot";
 import { cn } from "@/lib/utils";
+import { useStartCheckRequest } from "@/lib/start-check-client";
 import "@/app/design/design.css";
 
 export interface WaitStep {
@@ -49,10 +50,12 @@ export function WaitScreen({
   /** Inside a dialog or a list: a smaller cat and less air. */
   compact?: boolean;
 }) {
+  // A start question (the confidence sheet) is open over this: the sheet comes first, the wait after it.
+  const asking = useStartCheckRequest() !== null;
   const known = typeof pct === "number";
   const shown = known ? Math.max(0.04, Math.min(1, pct)) : 0;
   return (
-    <section className={cn("mx-auto flex w-full max-w-[440px] flex-col items-center text-center", compact ? "py-6" : "py-10 sm:py-14", className)} role="status" aria-live="polite">
+    <section className={cn("mx-auto flex w-full max-w-[440px] flex-col items-center text-center", compact ? "py-6" : "py-10 sm:py-14", asking && "invisible", className)} role="status" aria-live="polite">
       <Mascot key={pose} pose={pose} className={cn("cat-float", compact ? "h-[72px]" : "h-[96px] sm:h-[112px]")} />
       <h2 className={cn("text-balance font-extrabold leading-tight [overflow-wrap:anywhere]", compact ? "mt-4 text-[18px]" : "mt-5 text-[22px] sm:text-[24px]")}>{title}</h2>
       {status && <p className="mt-1.5 line-clamp-2 text-ui font-semibold text-muted-foreground">{status}</p>}

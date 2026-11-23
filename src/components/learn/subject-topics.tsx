@@ -243,7 +243,8 @@ export function SubjectTopics({
     startingRef.current = true;
     setStartingPicked(true);
     try {
-      const started = await startPickedTopics({ courseId: ready.course.id, topicIds: pickedIds, level: ready.level });
+      const topicNames = Object.fromEntries(units.flatMap((u) => u.topics.map((x) => [x.id, x.name])));
+      const started = await startPickedTopics({ courseId: ready.course.id, topicIds: pickedIds, level: ready.level, topicNames });
       clearPicked();
       emitTreeChanged();
       router.push(`/workspace/${started.workspaceId}/session/${started.sessionId}`);

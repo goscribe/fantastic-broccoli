@@ -79,6 +79,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
 import { VoiceScribe, VoiceScribeTrigger, type VoiceScribeHandle } from "@/components/session/voice-scribe";
 import { SessionPrecheck } from "@/components/session/precheck";
+import { FirstReadingLead, SessionPrimer, useSessionPrimer } from "@/components/session/session-primer";
 import { proficiencyApi } from "@/lib/api/proficiency";
 import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
@@ -213,6 +214,8 @@ export default function SessionDetailPage() {
   });
   // No study features until the plan actually exists.
   const planReady = !!session && !generating && !planFailed;
+  // Rated their confidence low or middling at the start: the notes (or a recap) come before the questions.
+  const primer = useSessionPrimer(planFailed ? undefined : session);
 
   // Deep links (e.g. reminder emails) can point at a specific activity.
   const searchParams = useSearchParams();
@@ -768,6 +771,9 @@ export default function SessionDetailPage() {
           <ReadingActivity
             content={activity.content as ReadingContent}
             activityId={activity.id}
+            // The first screen of a session is never bullet points only: its figure and explanation lead.
+            visualFirst={activity.id === activities[0]?.id}
+            lead={activity.id === activities[0]?.id ? <FirstReadingLead session={session} content={activity.content as ReadingContent} /> : undefined}
             initialHighlights={activity.highlights}
             onComplete={() => goToNext()}
             onHighlightsChange={(hs) =>
@@ -1151,6 +1157,9 @@ export default function SessionDetailPage() {
                     {t("session.backToWorkspace")}
                   </button>
                 </div>
+              ) : primer.state === "open" ? (
+                // Shown while the questions are still being written too: the wait is spent on the notes.
+                <SessionPrimer plan={primer.plan} notes={primer.notes} material={primer.material} confidence={primer.confidence} title={session.title} generating={generating} onStart={primer.dismiss} />
               ) : generating ? (
                 <GeneratingPlanCard
                   title={session.title}
@@ -1159,6 +1168,12 @@ export default function SessionDetailPage() {
                   initial={session.generationProgress}
                   quickStart={session.quickStart}
                 />
+              ) : primer.state === "loading" ? (
+                // Deciding whether the notes come first: hold the first question back for a moment rather than flash it.
+                <div className="mx-auto w-full max-w-[720px]" aria-busy="true">
+                  <div className="h-7 w-2/3 animate-pulse rounded-full bg-muted" />
+                  <div className="mt-6 h-[220px] animate-pulse rounded-[var(--r-card,20px)] bg-muted" />
+                </div>
               ) : activeActivity ? (
                 <>
                   {/* One label: the activity's title (steps are in the bar above). A one-activity session's card says "Question 1 of 5" itself. */}
@@ -1185,12 +1200,12 @@ export default function SessionDetailPage() {
               ) : !finished ? (
                 <SessionUnfinished activities={activities} onResume={(id) => goToIndex(activities.findIndex((a) => a.id === id))} onLeave={() => router.push(`/workspace/${workspaceId}`)} />
               ) : (
-                <SessionDebrief activities={activities} sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
+                <SessionDebrief activities={activities} confidenceBefore={session.confidenceBefore} sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
               )}
             </div>
           </div>
 
-          {activeActivity && footerVisible && (
+          {activeActivity && footerVisible && primer.state === "closed" && (
             <div className="absolute inset-x-0 bottom-0 z-20 border-t border-border bg-card/95 px-4 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur sm:px-10 sm:py-2.5">
             {/* Quiet text buttons, in the content's own column. Back and Next move question by question; skipping a whole activity is in the menu. */}
             <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-2 sm:gap-3">

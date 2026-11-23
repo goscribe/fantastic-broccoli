@@ -12,7 +12,7 @@ import {
   uploadFiles,
   type AnalysisProgress,
 } from "@/lib/api/materials";
-import { createStudySession } from "@/lib/api/study";
+import { createStudySessionQuietly } from "@/lib/api/study";
 import { refreshSession, resendVerification, useAuthUser } from "@/lib/api/auth";
 import {
   fetchPlanOptions,
@@ -253,7 +253,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
     creatingSessionRef.current = true;
     setStepIndex(3);
     writePendingBuild(null);
-    createStudySession({
+    createStudySessionQuietly({
       workspaceId,
       title,
       depth: "moderate",
@@ -296,7 +296,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
         if (!workspaceId) throw new Error("Could not create a workspace");
         workspaceIdRef.current = workspaceId;
         setWarmupWorkspaceId(workspaceId);
-        const session = await createStudySession({
+        const session = await createStudySessionQuietly({
           workspaceId,
           title:
             units.length > 0
