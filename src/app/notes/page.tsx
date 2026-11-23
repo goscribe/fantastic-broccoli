@@ -29,28 +29,30 @@ export default async function NotesIndexPage() {
     <div className="mx-auto w-full max-w-[1120px] px-4 pb-8 pt-2 sm:px-6 sm:pt-4">
       <Breadcrumbs crumbs={crumbsFor.index()} />
       {/* The landscape behind the headline is lit for the visitor's own time of day (tokens.css reads <html data-daypart>, set by a head script; the markup is the same for everyone, so the page stays static). */}
-      <header className="nl-hero hero-card relative mt-4 overflow-hidden px-5 pb-6 pt-[170px] sm:px-10 sm:py-11 sm:pr-[300px] lg:pr-[400px]">
+      {/* Nothing is faded over the scene: a band above the words on phones; from sm up the words sit on one solid card over it. */}
+      <header className="nl-hero hero-card relative mt-4 overflow-hidden pt-[var(--banner-band)] sm:flex sm:min-h-[var(--banner-min)] sm:items-center sm:p-4">
         <div aria-hidden="true" className="hero-field nl-hero__field">
-          <div className="absolute bottom-[22px] right-[13%] h-[104px] sm:bottom-[15%] sm:right-[7%] sm:h-[150px] lg:right-[9%] lg:h-[190px]">
+          <div className="absolute bottom-[10px] right-[13%] h-[92px] sm:bottom-[10%] sm:right-[6%] sm:h-[66%] sm:max-h-[170px] lg:right-[9%] lg:h-[74%] lg:max-h-[190px]">
             <span className="hero-field__ground" />
             <Image src="/design/cat3-book.webp" alt="" width={363} height={400} priority unoptimized className="nl-cat-in relative h-full w-auto" />
           </div>
         </div>
-        <h1 className="nl-rise text-[34px] font-black leading-[1.04] text-foreground sm:text-[48px]" style={{ "--i": 1 } as React.CSSProperties}>
+        <div className="hero-copy relative px-5 pb-5 pt-4 max-sm:rounded-none max-sm:border-0 max-sm:bg-transparent max-sm:shadow-none sm:w-[62%] sm:max-w-[640px] sm:px-7 sm:py-6">
+        <h1 className="text-[28px] font-black leading-[1.06] text-foreground sm:text-[36px]">
           Free notes and practice questions
         </h1>
-        <p className="nl-rise mt-3.5 max-w-[600px] text-[17px] font-semibold leading-snug text-foreground/75 sm:text-[19px]" style={{ "--i": 2 } as React.CSSProperties}>
+        <p className="mt-2 text-ui font-semibold text-foreground/75 sm:text-read sm:leading-snug">
           {empty
             ? "Pick your course to see what each topic covers. Scribe's notes and exam-style practice questions are being added course by course."
             : "Pick your course, read Scribe's note for a topic, then answer exam-style questions with worked explanations. No sign-up needed."}
         </p>
-        <ul className="nl-meta nl-rise mt-4" style={{ "--i": 3 } as React.CSSProperties}>
+        <ul className="nl-meta mt-3">
           <li>{courses.length} courses</li>
           {notes > 0 && <li>{notes.toLocaleString("en-GB")} topic notes</li>}
           {questions > 0 && <li>{questions.toLocaleString("en-GB")} questions</li>}
         </ul>
         {groups.length > 1 && (
-          <nav aria-label="Exam boards" className="nl-rise mt-5 flex flex-wrap gap-2.5" style={{ "--i": 4 } as React.CSSProperties}>
+          <nav aria-label="Exam boards" className="mt-4 flex flex-wrap gap-2">
             {groups.map((g) => (
               <a key={g.board} href={`#b-${g.board}`} className="nl-btn-ghost nl-btn-sm">
                 {BOARD_LABEL[g.board]}
@@ -58,6 +60,7 @@ export default async function NotesIndexPage() {
             ))}
           </nav>
         )}
+        </div>
       </header>
       {groups.map((g) => (
         <section key={g.board} className="mt-11 scroll-mt-6" aria-labelledby={`b-${g.board}`}>

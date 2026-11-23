@@ -599,26 +599,27 @@ export function SessionDebrief({
           ~330px on a 768px screen, where the side-by-side layout put the cat over the score.
         */}
         <section
-          className="hero-card finish-hero life-rise relative isolate w-full overflow-hidden rounded-[var(--r-panel)] border border-border px-5 pb-5 pt-[176px] @[520px]:min-h-[292px] @[520px]:px-9 @[520px]:pb-8 @[520px]:pt-8"
+          className="hero-card finish-hero relative isolate w-full overflow-hidden rounded-[var(--r-panel)] border border-border pt-[var(--banner-band)] @[520px]:flex @[520px]:min-h-[var(--banner-min)] @[520px]:items-center @[520px]:p-4"
           aria-labelledby="finish-title"
         >
-          <div aria-hidden className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[160px] @[520px]:inset-0 @[520px]:h-auto">
-            {/* The side wash the words sit on, only in the side-by-side layout (tokens.css ties its own wash to the viewport). */}
-            <span className="finish-hero__wash absolute inset-0 hidden @[520px]:block" />
-            <div className="absolute bottom-[20px] left-1/2 h-[118px] -translate-x-1/2 @[520px]:bottom-[7%] @[520px]:left-auto @[520px]:right-[9%] @[520px]:h-[196px] @[520px]:translate-x-0">
+          {/* The scene, whole: a band above the words when narrow, the whole banner when wide. Nothing is faded over it. */}
+          <div aria-hidden className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[var(--banner-band)] @[520px]:inset-0 @[520px]:h-auto">
+            <div className="absolute bottom-[10px] left-1/2 h-[92px] -translate-x-1/2 @[520px]:bottom-[7%] @[520px]:left-auto @[520px]:right-[8%] @[520px]:h-[78%] @[520px]:max-h-[190px] @[520px]:translate-x-0">
               <span className="hero-field__ground" />
               {celebrate && <FinishConfetti />}
               {stats && band === "okay" && <SparkleBurst burst={1} count={10} distance={64} />}
               <Mascot pose={stats ? pose : "book"} key={stats ? pose : "wait"} className={cn("relative h-full", celebrate ? "cat-cheer" : "cat-peek")} priority />
             </div>
           </div>
-          <p className="hero-eyebrow relative line-clamp-2 break-words text-small font-extrabold @[520px]:max-w-[58%]">
+          {/* The words: under the band when narrow; on one solid card over the scene when wide. */}
+          <div className="hero-copy relative px-5 pb-5 pt-4 @max-[520px]:rounded-none @max-[520px]:border-0 @max-[520px]:bg-transparent @max-[520px]:shadow-none @[520px]:w-[58%] @[520px]:px-6 @[520px]:py-5">
+          <p className="hero-eyebrow line-clamp-2 break-words text-small font-extrabold">
             {[subjectTitle, t(quickStart ? "debrief.quick5Complete" : "debrief.complete")].filter(Boolean).join(" · ")}
           </p>
-          <h2 id="finish-title" className="relative mt-1.5 text-balance text-[30px] font-extrabold leading-[1.08] tracking-tight @[520px]:max-w-[58%] @[520px]:text-[38px]">
+          <h2 id="finish-title" className="mt-1 text-balance text-[28px] font-extrabold leading-[1.08] tracking-tight @[520px]:text-[32px]">
             {stats ? t(band === "done" ? (quickStart ? "debrief.quick5Complete" : "debrief.complete") : `finish.${band}`) : statsError ? t(quickStart ? "debrief.quick5Complete" : "debrief.complete") : <span className="skeleton inline-block h-9 w-52 rounded-full align-middle" />}
           </h2>
-          <div className="relative mt-1.5 min-h-[22px] text-ui font-semibold text-foreground/75 line-clamp-2 @[520px]:max-w-[52%]">
+          <div className="mt-1 min-h-[22px] text-ui font-semibold text-foreground/75 line-clamp-2">
             {verdict ? (
               <MathText text={verdict} />
             ) : debriefLoading ? (
@@ -628,8 +629,8 @@ export function SessionDebrief({
             ) : null}
           </div>
           {stats ? (
-            <p className="relative mt-4 flex items-baseline gap-3 @[520px]:mt-6" role="status">
-              <span className="finish-score text-[60px] font-extrabold leading-[0.9] tracking-tight tabular-nums @[520px]:text-[76px]">
+            <p className="mt-3 flex items-baseline gap-3 @[520px]:mt-4" role="status">
+              <span className="finish-score text-[52px] font-extrabold leading-[0.9] tracking-tight tabular-nums @[520px]:text-[60px]">
                 {pct !== null ? (
                   <>
                     <CountUp value={pct} />
@@ -646,10 +647,11 @@ export function SessionDebrief({
               </span>
             </p>
           ) : statsError ? null : (
-            <div className="relative mt-4 @[520px]:mt-6" role="status">
-              <span className="skeleton block h-[60px] w-40 rounded-2xl @[520px]:h-[72px]" />
+            <div className="mt-3 @[520px]:mt-4" role="status">
+              <span className="skeleton block h-[47px] w-40 rounded-2xl @[520px]:h-[54px]" />
             </div>
           )}
+          </div>
         </section>
 
         {/* What was earned: numbers on the page, ticking up; no tiles. */}

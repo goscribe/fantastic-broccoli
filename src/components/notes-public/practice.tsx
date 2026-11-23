@@ -389,26 +389,29 @@ export function PracticeDone({ nextTopic, quick5 }: { nextTopic: ReactNode; quic
       {!lastAnswered && <SignupNudge className="mb-4" />}
       {done && (
         <div data-practice-done data-band={band}>
-          <section className="hero-card nl-up relative isolate overflow-hidden rounded-[var(--r-panel)] border border-border px-5 pb-5 pt-[176px] sm:min-h-[280px] sm:px-9 sm:pb-8 sm:pt-8" aria-labelledby="practice-done-title">
-            <div aria-hidden="true" className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[160px] sm:inset-0 sm:h-auto">
-              <div className="absolute bottom-[20px] left-1/2 h-[118px] -translate-x-1/2 sm:bottom-[7%] sm:left-auto sm:right-[9%] sm:h-[190px] sm:translate-x-0">
+          {/* The same result banner as the app's session debrief: the scene whole (a band when narrow), the words on a solid card when wide, painted from the first frame. */}
+          <section className="hero-card relative isolate overflow-hidden rounded-[var(--r-panel)] border border-border pt-[var(--banner-band)] sm:flex sm:min-h-[var(--banner-min)] sm:items-center sm:p-4" aria-labelledby="practice-done-title">
+            <div aria-hidden="true" className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[var(--banner-band)] sm:inset-0 sm:h-auto">
+              <div className="absolute bottom-[10px] left-1/2 h-[92px] -translate-x-1/2 sm:bottom-[7%] sm:left-auto sm:right-[8%] sm:h-[78%] sm:max-h-[190px] sm:translate-x-0">
                 <span className="hero-field__ground" />
                 {bandCelebrates(band) && <Confetti />}
                 <Image src={cat} alt="" width={catW} height={catH} unoptimized className="nl-cat-in relative h-full w-auto" />
               </div>
             </div>
-            <p className="hero-eyebrow relative text-small font-extrabold">Practice complete</p>
-            <h3 id="practice-done-title" className="relative mt-1.5 text-[30px] font-black leading-[1.08] tracking-[-0.02em] sm:max-w-[58%] sm:text-[38px]">
-              {title}
-            </h3>
-            <p className="relative mt-1.5 text-ui font-semibold text-foreground/75 sm:max-w-[52%]">{sub}</p>
-            <p className="relative mt-4 flex items-baseline gap-3 sm:mt-6" role="status">
-              <span className="nl-score text-[60px] font-black leading-[0.9] tracking-[-0.03em] tabular-nums sm:text-[76px]">
-                <CountUp value={s.correct} />
-                <span className="text-[0.5em] text-muted-foreground"> / {s.total}</span>
-              </span>
-              <span className="text-ui font-bold leading-tight text-foreground/75">right</span>
-            </p>
+            <div className="hero-copy relative px-5 pb-5 pt-4 max-sm:rounded-none max-sm:border-0 max-sm:bg-transparent max-sm:shadow-none sm:w-[58%] sm:px-6 sm:py-5">
+              <p className="hero-eyebrow text-small font-extrabold">Practice complete</p>
+              <h3 id="practice-done-title" className="mt-1 text-[28px] font-black leading-[1.08] tracking-[-0.02em] sm:text-[32px]">
+                {title}
+              </h3>
+              <p className="mt-1 text-ui font-semibold text-foreground/75">{sub}</p>
+              <p className="mt-3 flex items-baseline gap-3 sm:mt-4" role="status">
+                <span className="nl-score text-[52px] font-black leading-[0.9] tracking-[-0.03em] tabular-nums sm:text-[60px]">
+                  <CountUp value={s.correct} />
+                  <span className="text-[0.5em] text-muted-foreground"> / {s.total}</span>
+                </span>
+                <span className="text-ui font-bold leading-tight text-foreground/75">right</span>
+              </p>
+            </div>
           </section>
 
           <div className="nl-stagger mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 px-1" style={{ "--i": 2 } as React.CSSProperties}>

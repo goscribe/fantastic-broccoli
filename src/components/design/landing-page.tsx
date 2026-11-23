@@ -231,18 +231,18 @@ export function LandingCta({
   const stack = pose === "stack";
   return (
     <section className={cn(landingWrap, "pb-14 pt-6 sm:pb-20 sm:pt-10")}>
-      <div className={cn("landing-banner hero-card relative isolate overflow-hidden rounded-[28px] border border-border px-5 pb-7 sm:rounded-[40px] sm:px-10 lg:px-14", stack ? "pt-[236px] sm:py-16 lg:py-20" : "pt-[172px] sm:py-12 lg:py-16")}>
-        <div aria-hidden className={cn("landing-cta-field hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 overflow-hidden sm:inset-0 sm:h-auto", stack ? "h-[216px]" : "h-[152px]")}>
-          <div className={cn("absolute", stack ? "bottom-[10px] right-[14%] h-[200px] sm:bottom-[6%] sm:right-[6%] sm:h-[300px] lg:right-[9%] lg:h-[360px]" : "bottom-[20px] right-[13%] h-[110px] sm:bottom-[13%] sm:right-[7%] sm:h-[180px] lg:right-[10%] lg:h-[220px]")}>
+      <div className={cn("landing-banner hero-card relative isolate overflow-hidden rounded-[28px] border border-border px-5 pb-7 sm:rounded-[40px] sm:px-10 lg:px-14", "pt-[calc(var(--banner-band)+20px)]", stack ? "sm:py-10 lg:py-12" : "sm:py-8 lg:py-10")}>
+        <div aria-hidden className={cn("landing-cta-field hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 overflow-hidden sm:inset-0 sm:h-auto", "h-[var(--banner-band)]")}>
+          <div className={cn("absolute", stack ? "bottom-[6px] right-[12%] h-[100px] sm:bottom-[6%] sm:right-[6%] sm:h-[80%] sm:max-h-[300px] lg:right-[9%]" : "bottom-[10px] right-[13%] h-[92px] sm:bottom-[10%] sm:right-[7%] sm:h-[66%] sm:max-h-[200px] lg:right-[10%]")}>
             <span className="hero-field__ground" />
             <Cat pose={pose} className="cat-bob relative h-full" />
           </div>
         </div>
         {/* The words on one solid card over the scene from sm up (landing.css), never on a wash. */}
         <div className={cn("landing-cta-copy relative", big ? "sm:max-w-[64%] lg:max-w-[68%]" : "sm:max-w-[60%] lg:max-w-[56%]")}>
-          <Heading className={cn("text-balance font-extrabold", big ? "text-[34px] leading-[1.05] tracking-[-0.025em] sm:text-[46px] lg:text-[56px]" : "text-[28px] leading-[1.1] sm:text-[38px]")}>{title}</Heading>
+          <Heading className={cn("text-balance font-extrabold", big ? "text-[30px] leading-[1.06] tracking-[-0.025em] sm:text-[40px] lg:text-[48px]" : "text-[28px] leading-[1.1] sm:text-[38px]")}>{title}</Heading>
           {sub && <p className="mt-3 text-read text-foreground/75">{sub}</p>}
-          <div className={cn("flex flex-col gap-x-6 gap-y-1.5 sm:flex-row sm:items-center", big ? "mt-8" : "mt-6")}>
+          <div className={cn("flex flex-col gap-x-6 gap-y-1.5 sm:flex-row sm:items-center", big ? "mt-6" : "mt-5")}>
             <Link href="/signup" className={landingPrimary}>{cta}</Link>
             {secondary && <Link href={secondary.href} className={cn(landingTextLink, "justify-center sm:justify-start")}>{secondary.label}</Link>}
           </div>

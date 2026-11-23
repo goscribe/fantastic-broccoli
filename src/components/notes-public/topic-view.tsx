@@ -199,21 +199,21 @@ export function TopicView({
         {app ? app.top : <Breadcrumbs crumbs={crumbsFor.topic(course, unit, topic)} />}
         {/* The note's header band: the subject's colour and illustration. The reading body under it stays white and calm. */}
         <header
-          className="subject-band nl-band mt-4 px-5 pb-6 pt-5 sm:px-10 sm:pb-9 sm:pt-8 sm:pr-[220px] lg:pr-[340px]"
+          className="subject-band nl-band mt-4 px-[var(--band-pad-x)] py-[var(--band-pad-y)] sm:pr-[220px] lg:pr-[280px]"
           style={familyVars(familyFor(`${course.subject} ${course.title}`)) as React.CSSProperties}
         >
           <SubjectArt family={familyFor(`${course.subject} ${course.title}`)} eager />
           {/* Top line, like a paper's: the course and where this sits in it. */}
-          <p className="nl-rise flex min-h-[84px] items-center pr-[96px] text-ui font-bold text-white/90 sm:min-h-0 sm:pr-0">
+          <p className="nl-rise flex min-h-[56px] items-center pr-[76px] text-ui font-bold text-white/90 sm:min-h-0 sm:pr-0">
             <span>
               <span className="font-extrabold text-white">{course.title}</span> · {unitTitle(course, unit)}
             </span>
           </p>
           {/* A topic without a note yet balances its title, so a short last word ("Period 1") is not left alone; titles with a note keep the approved breaks. */}
-          <h1 className={cn("nl-rise mt-2 text-[34px] font-black leading-[1.04] sm:mt-3 sm:text-[50px] lg:text-[56px]", !note && "text-balance")} style={stagger(1)}>
+          <h1 className={cn("nl-rise mt-1.5 text-[28px] font-black leading-[1.06] sm:mt-2 sm:text-[36px] lg:text-[40px]", !note && "text-balance")} style={stagger(1)}>
             <span className="text-white/75">{topic.code}</span> {topic.name}
           </h1>
-          <p className="nl-rise mt-3 text-read font-semibold text-white/95" style={stagger(2)}>
+          <p className="nl-rise mt-2 text-ui font-semibold text-white/95 sm:text-read" style={stagger(2)}>
             {note ? <RichText text={note.content.objectiveLine} /> : "Scribe's note for this topic is on its way. Here is what it covers."}
           </p>
           <ul className="nl-meta nl-rise mt-3.5" style={stagger(3)}>
@@ -234,7 +234,7 @@ export function TopicView({
             {topic.bcOnly && <li>BC only</li>}
             {topic.higherTierOnly && <li>Higher tier</li>}
           </ul>
-          <div className="nl-rise mt-5 flex flex-col gap-1.5 sm:flex-row sm:flex-wrap sm:gap-3" style={stagger(4)}>
+          <div className="nl-rise mt-4 flex flex-col gap-1.5 sm:flex-row sm:flex-wrap sm:gap-3" style={stagger(4)}>
             {app?.headerActions ?? <StartQuick5 courseId={course.id} topicId={topic.id} level={level} placement="header" />}
             {questions.length > 0 && !locked && (
               <a href="#practice" className="nl-btn-ghost max-sm:!min-h-11 max-sm:!border-0 max-sm:!bg-transparent max-sm:!shadow-none max-sm:underline max-sm:decoration-white/50 max-sm:decoration-2 max-sm:underline-offset-4">
