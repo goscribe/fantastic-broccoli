@@ -367,6 +367,11 @@ export interface Workspace {
    * model, the course or the learner). Absent: the app's own name rules.
    */
   subjectFamily?: SubjectFamily;
+  /**
+   * The catalog course the subject follows; null when it follows none.
+   * Absent: an older server that does not say (ask `course.progress`).
+   */
+  courseId?: string | null;
   course?: string;
   folderId?: string;
   sessions: StudySession[];
